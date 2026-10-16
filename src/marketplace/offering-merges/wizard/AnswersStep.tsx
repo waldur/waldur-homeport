@@ -64,7 +64,7 @@ export const AnswersStep: FC<AnswersStepProps> = ({
   }
 
   return (
-    <div className="d-flex flex-column gap-4">
+    <div className="flex flex-col gap-4">
       <p className="text-quaternary mb-0">
         {translate(
           "These answer keys are on the sources' order forms but not on the target's. Rename each to a target key, or leave it as is: the answers are kept, but the target's form does not show them.",

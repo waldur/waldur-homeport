@@ -51,7 +51,7 @@ export const AwardOfferingCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
     planName &&
     requestedPlan.name !== planName;
   return (
-    <div className="d-flex flex-column gap-1 align-items-start">
+    <div className="flex flex-col gap-1 items-start">
       <span
         className={
           row.change === 'removed'
@@ -62,7 +62,7 @@ export const AwardOfferingCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
         {offering.offering_name}
       </span>
       {planName && (
-        <span className="text-quaternary fs-7">
+        <span className="text-quaternary text-xs">
           {planChanged
             ? translate('Plan: {plan} (requested {requested})', {
                 plan: planName,
@@ -72,7 +72,7 @@ export const AwardOfferingCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
         </span>
       )}
       {row.change === 'moved' && (
-        <span className="text-quaternary fs-7">
+        <span className="text-quaternary text-xs">
           {translate('Requested on {offering}', {
             offering: row.requested.requested_offering.offering_name,
           })}
@@ -112,7 +112,7 @@ export const AwardAmountsCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
 
   if (!awarded) {
     return (
-      <div className="d-flex flex-column gap-1 text-quaternary">
+      <div className="flex flex-col gap-1 text-quaternary">
         {components.map((component) => (
           <span key={component.type}>
             {component.name}:{' '}
@@ -127,7 +127,7 @@ export const AwardAmountsCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
   }
 
   return (
-    <div className="d-flex flex-column gap-1">
+    <div className="flex flex-col gap-1">
       {components.map((component) => {
         const value = awardedLimits[component.type];
         const asked = requestedLimits[component.type];
@@ -142,7 +142,7 @@ export const AwardAmountsCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
             {differs && (
               // Its own line, so a narrow column wraps between the figures
               // rather than inside one.
-              <span className="d-block text-quaternary fs-7">
+              <span className="block text-quaternary text-xs">
                 {translate('requested {amount}', {
                   amount: formatAmount(asked, component.measured_unit),
                 })}
@@ -152,7 +152,7 @@ export const AwardAmountsCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
         );
       })}
       {requested && !sameOffering && (
-        <span className="text-quaternary fs-7">
+        <span className="text-quaternary text-xs">
           {translate('Requested:')}{' '}
           {getRequestableComponents(requested.requested_offering).map(
             (component, index) => (
@@ -169,7 +169,7 @@ export const AwardAmountsCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
         </span>
       )}
       {!hasRequestedAmount(awarded) && (
-        <span className="text-danger fs-7">
+        <span className="text-danger text-xs">
           {translate('No amount awarded yet.')}
         </span>
       )}

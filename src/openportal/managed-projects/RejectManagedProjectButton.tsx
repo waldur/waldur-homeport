@@ -42,7 +42,7 @@ export const RejectManagedProjectButton = ({ row, as, className, refetch }) => {
       ) : (
         <ActionItem
           as={as}
-          className={classNames(className, 'w-100')}
+          className={classNames(className, 'w-full')}
           title={translate('Reject')}
           action={() => rejectMutation.mutate()}
           disabled={rejectMutation.isPending}

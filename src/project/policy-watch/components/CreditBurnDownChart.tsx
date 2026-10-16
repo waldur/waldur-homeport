@@ -296,7 +296,7 @@ const ChartBlock: FC<{
   options: any;
 }> = ({ title, hint, options }) => (
   <>
-    <div className="d-flex align-items-center gap-2 mb-2">
+    <div className="flex items-center gap-2 mb-2">
       <h5 className="mb-0">{title}</h5>
       {hint && <HelpIcon label={hint} />}
     </div>

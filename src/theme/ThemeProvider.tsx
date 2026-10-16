@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react';
 
 import * as ThemeStorage from './ThemeStorage';
 import { ThemeContext, ThemeName } from './types';
-import { getInitialTheme, loadTheme } from './utils';
+import { applyTheme, getInitialTheme } from './utils';
 
 /** ThemeProvider is a wrapper component that provides theme context to its children  */
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
@@ -12,7 +12,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const switchTheme = (name: ThemeName) => {
     setTheme(name);
     ThemeStorage.setTheme(name);
-    loadTheme(name);
+    applyTheme(name);
   };
 
   useEffect(() => {

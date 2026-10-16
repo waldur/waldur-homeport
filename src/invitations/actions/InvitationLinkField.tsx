@@ -10,7 +10,7 @@ export const InvitationLinkField = ({ invitation }) => {
   return (
     <Form.Group>
       <Form.Label>{translate('Invitation link')}</Form.Label>
-      <div className="d-flex gap-2">
+      <div className="flex gap-2">
         <Form.Control
           value={link}
           placeholder={translate('e.g. https://')}

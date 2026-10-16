@@ -79,13 +79,12 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
             })}
           >
             <div
-              className="position-absolute font-bold"
+              className="position-absolute font-bold text-xs"
               style={{
                 top: '-20px',
                 left: '-30px',
                 width: '60px',
                 textAlign: 'center',
-                fontSize: '10px',
               }}
             >
               {translate('Current')}
@@ -93,7 +92,7 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
           </div>
         )}
       </div>
-      <div className="d-flex justify-content-between mt-2 small text-quaternary">
+      <div className="flex justify-between mt-2 small text-quaternary">
         <span>0</span>
         <span>
           {notificationThreshold.toLocaleString()} (80%)
@@ -226,12 +225,12 @@ const CarryoverInfo: FC<CarryoverInfoProps> = ({
         {translate('Carryover Calculation')}
       </h6>
       <div className="border rounded p-3">
-        <div className="d-flex align-items-center mb-2">
+        <div className="flex items-center mb-2">
           <span className="me-2">{translate('Base Allocation')}</span>
           <span className="font-medium">{baseAllocation.toLocaleString()}</span>
         </div>
         {unusedCarryover > 0 && (
-          <div className="d-flex align-items-center mb-2">
+          <div className="flex items-center mb-2">
             <span className="me-2">+ {translate('Unused Carryover')}</span>
             <span className="font-medium text-success">
               +{unusedCarryover.toLocaleString()}
@@ -239,9 +238,9 @@ const CarryoverInfo: FC<CarryoverInfoProps> = ({
           </div>
         )}
         <hr />
-        <div className="d-flex align-items-center">
+        <div className="flex items-center">
           <span className="me-2">{translate('Total Allocation')}</span>
-          <span className="font-medium fs-5">
+          <span className="font-medium text-base">
             {totalAllocation.toLocaleString()}
           </span>
         </div>

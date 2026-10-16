@@ -99,7 +99,7 @@ export const TablePagination = ({
         </div>
         <div className="flex shrink-0 items-center gap-[2px]">
           {hasRows && (
-            <div className="mr-[22px] whitespace-nowrap text-[12px] text-[var(--pagination-text)]">
+            <div className="mr-[22px] whitespace-nowrap text-xs text-[var(--pagination-text)]">
               {translate('{from}-{to} of {all} items', {
                 from,
                 to,
@@ -141,7 +141,7 @@ export const TablePagination = ({
           variant="tertiary"
         />
         {hasRows && (
-          <div className="mx-[6px] whitespace-nowrap text-[14px] font-medium text-[var(--pagination-text-current)]">
+          <div className="mx-[6px] whitespace-nowrap text-sm font-medium text-[var(--pagination-text-current)]">
             {translate('Page {page} of {total}', {
               page: currentPage,
               total: totalPages,

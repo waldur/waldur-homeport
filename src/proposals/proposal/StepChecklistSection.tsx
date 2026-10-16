@@ -254,7 +254,7 @@ export const StepChecklistSection: FC<StepChecklistSectionProps> = ({
                 );
               })}
             {canEdit && (
-              <div className="d-flex justify-content-end mt-4">
+              <div className="flex justify-end mt-4">
                 <SubmitButton
                   submitting={submitAnswers.isPending}
                   label={translate('Submit answers')}

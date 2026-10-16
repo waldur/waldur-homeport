@@ -134,7 +134,7 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
         )}
 
         {selectedOffering && isLoading && (
-          <div className="d-flex justify-content-center align-items-center py-5">
+          <div className="flex justify-center items-center py-5">
             <LoadingSpinner />
           </div>
         )}
@@ -150,7 +150,7 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
             value={selectedView}
             onValueChange={(value) => setSelectedView(value as ViewType)}
           >
-            <div className="d-flex justify-content-between align-items-center mb-4">
+            <div className="flex justify-between items-center mb-4">
               <TabsList>
                 {viewOptions.map((option) => (
                   <TabsTrigger key={option.value} value={option.value}>

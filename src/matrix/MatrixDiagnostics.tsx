@@ -25,7 +25,7 @@ export const MatrixDiagnosticsDialog: FC = () => {
     <ModalDialog
       title={translate('Matrix diagnostics')}
       footer={
-        <div className="d-flex justify-content-between w-100">
+        <div className="flex justify-between w-full">
           <CloseDialogButton />
           <SubmitButton
             submitting={isFetching}

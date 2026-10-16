@@ -87,7 +87,7 @@ export const ViewYAMLDialog: FC<ViewYAMLDialogProps> = ({ resolve }) => {
             )}
 
             {value && !loading && (
-              <div className="d-flex align-items-center gap-2 mt-4">
+              <div className="flex items-center gap-2 mt-4">
                 <CopyToClipboard value={value as string} textButton />
                 <BaseButton
                   onClick={toggleShowDiff}

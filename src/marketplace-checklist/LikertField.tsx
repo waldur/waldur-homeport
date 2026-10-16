@@ -71,7 +71,7 @@ export const LikertField: FC<LikertFieldProps> = ({
 
   return (
     <div
-      className={inline ? 'd-flex flex-wrap gap-4' : 'd-flex flex-column gap-2'}
+      className={inline ? 'flex flex-wrap gap-4' : 'flex flex-col gap-2'}
       style={disabled ? { pointerEvents: 'none' } : undefined}
       aria-disabled={disabled || undefined}
     >

@@ -29,6 +29,10 @@ export const RETIRED_UTILITY_PATTERNS = [
   [/^align-content-\w+$/, 'content-* (content-center, content-between, …)'],
   [/^(?:mx|my)-n\d+$/, 'a negative Tailwind margin (-mx-2, -my-2)'],
   [/^ls-n?\d+$/, 'tracking-* (tracking-tight, tracking-wide, …)'],
+  [
+    /^lh-(?:0|1|sm|base|lg|xl|xxl)$/,
+    'leading-* (leading-none, leading-tight, leading-normal, …)',
+  ],
   // Breakpoint variants of utilities only ever used at the base size.
   [
     new RegExp(`^(?:h|mh|min-w|min-h|fs|mx|px|py|pt|pe|pb)-${BP}-[\\w.-]+$`),

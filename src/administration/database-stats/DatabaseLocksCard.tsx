@@ -71,7 +71,7 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
         </tbody>
       </Table>
       {hasExclusiveLocks && (
-        <small className="text-warning mt-3 d-block">
+        <small className="text-warning mt-3 block">
           {translate(
             'Access exclusive locks block all other access. This may indicate DDL operations or maintenance in progress.',
           )}

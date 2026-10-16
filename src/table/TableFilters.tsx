@@ -40,21 +40,19 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
   const clearLabel = isMd ? translate('Clear') : translate('Clear filters');
 
   return props.filterPosition === 'menu' || props.filtersStorage.length > 0 ? (
-    <div className="w-100 d-flex flex-wrap gap-4">
-      <div
-        className={isMd ? 'd-flex flex-grow-1 scroll-x' : 'd-flex flex-grow-1'}
-      >
+    <div className="w-full flex flex-wrap gap-4">
+      <div className={isMd ? 'flex grow scroll-x' : 'flex grow'}>
         <div
           className={
             isMd
-              ? 'd-flex align-items-stretch text-nowrap gap-4 w-100'
-              : 'd-flex flex-wrap gap-4 w-100'
+              ? 'flex items-stretch text-nowrap gap-4 w-full'
+              : 'flex flex-wrap gap-4 w-full'
           }
         >
           {props.filtersStorage.map((item) => (
             <div
               key={item.name}
-              className="d-flex align-items-center flex-nowrap font-semibold text-primary fs-7 gap-2"
+              className="flex items-center flex-nowrap font-semibold text-primary text-xs gap-2"
             >
               {item.label}
               {item.component && <item.component />}
@@ -75,7 +73,7 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
         </div>
       </div>
       {!props.hideClearFilters && props.filtersStorage.length > 0 && (
-        <div className="align-self-start text-end">
+        <div className="self-start text-end">
           <BaseButton
             variant="text-secondary"
             className="btn-no-focus"

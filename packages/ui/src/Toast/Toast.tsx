@@ -107,7 +107,7 @@ export const Toast = ({
       )}
     >
       <AlertItem
-        className="items-start gap-4 rounded-[12px] bg-[var(--card-bg)] shadow-[var(--overlay-shadow)]"
+        className="items-start gap-4 rounded-xl bg-[var(--card-bg)] shadow-[var(--overlay-shadow)]"
         iconSize="md"
         iconClassName="-m-[9px]"
         type="floating"

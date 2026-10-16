@@ -227,7 +227,7 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
       actions={
         // On the title row rather than in a toolbar of its own: the step is one
         // card, and a second bar under the divider only pushed the table down.
-        <div className="d-flex align-items-center gap-4">
+        <div className="flex items-center gap-4">
           {readOnlyMode ? (
             onAddCommentClick ? (
               <AddCommentButton

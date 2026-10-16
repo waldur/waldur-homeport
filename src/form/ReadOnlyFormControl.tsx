@@ -64,7 +64,7 @@ export const ReadOnlyFormControl: FunctionComponent<
     disabled,
   };
   const labelNode = tooltip ? (
-    <div className="d-flex justify-content-between flex-grow-1">
+    <div className="flex justify-between grow">
       <Form.Label className={inline ? 'mb-0' : undefined}>{label}</Form.Label>
       <HelpIcon label={tooltip} side="left" size={20} />
     </div>
@@ -78,8 +78,8 @@ export const ReadOnlyFormControl: FunctionComponent<
         !spaceless && 'mb-7',
         className,
         addon && 'form-addon',
-        Boolean(actions) && 'flex-grow-1',
-        inline && 'd-flex align-items-center',
+        Boolean(actions) && 'grow',
+        inline && 'flex items-center',
       )}
     >
       {labelNode}
@@ -110,7 +110,7 @@ export const ReadOnlyFormControl: FunctionComponent<
 
   if (actions) {
     return (
-      <div className="d-flex align-items-start gap-2">
+      <div className="flex items-start gap-2">
         {main}
         {actions}
       </div>

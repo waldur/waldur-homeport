@@ -50,7 +50,7 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
   const labelClassName = classNames(className, !children && 'ellipsis');
 
   return (
-    <div className="d-flex align-items-center gap-1">
+    <div className="flex items-center gap-1">
       {canAccess ? (
         <Link
           state="project.dashboard"
@@ -91,7 +91,7 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
           </span>
         )}
       {row.is_removed && (
-        <Badge variant="danger" shape="pill" tone="outline" className="fs-8">
+        <Badge variant="danger" shape="pill" tone="outline" className="text-xs">
           {translate('Removed')}
         </Badge>
       )}

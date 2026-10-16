@@ -60,7 +60,7 @@ export const OfferingMetadataDisplay: FunctionComponent<
 
   return (
     <Card className="mt-3">
-      <Card.Header className="d-flex align-items-center">
+      <Card.Header className="flex items-center">
         <CheckIcon size={16} className="text-success me-2" weight="bold" />
         <strong>{translate('Valid offering export file')}</strong>
       </Card.Header>
@@ -113,7 +113,7 @@ export const OfferingMetadataDisplay: FunctionComponent<
 
         <div className="mt-3">
           <h6>{translate('Included Components')}</h6>
-          <div className="d-flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
             {metadata.exported_components.map((component) => (
               <Badge key={component} variant="primary" shape="pill">
                 {componentLabels[component] || component}

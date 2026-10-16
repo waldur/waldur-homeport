@@ -120,7 +120,7 @@ export const UpdateInternalIpsDialog: FC<UpdateInternalIpsDialogProps> = ({
           >
             {subnets ? (
               <BootstrapForm.Group>
-                <div className="d-flex justify-content-between mb-5">
+                <div className="flex justify-between mb-5">
                   <BootstrapForm.Label className="mb-0">
                     {translate('Connected subnets')}
                   </BootstrapForm.Label>
@@ -128,7 +128,7 @@ export const UpdateInternalIpsDialog: FC<UpdateInternalIpsDialogProps> = ({
                     checked={hasCustomIp}
                     onCheckedChange={toggleCustomIp}
                     size="sm"
-                    className="align-self-center"
+                    className="self-center"
                     label={translate('Custom IP configuration')}
                   />
                 </div>

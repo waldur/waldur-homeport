@@ -47,7 +47,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
           />
         }
       >
-        <Row className="fs-6">
+        <Row className="text-sm">
           <Col sm={6}>
             <Field
               label={translate('Offering')}
@@ -73,7 +73,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
           </Col>
         </Row>
 
-        <Row className="align-items-end">
+        <Row className="items-end">
           <Col sm={6}>
             <CustomerField
               organizationGroups={props.offering.organization_groups}
@@ -99,7 +99,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
         <DetailsOverviewButton offering={props.offering} className="ms-auto" />
       }
     >
-      <Row className="fs-6">
+      <Row className="text-sm">
         <Col sm={6}>
           <Field
             label={translate('Organization')}

@@ -18,9 +18,9 @@ export const ActionDialogHeader = ({
     {/* A heading, with the h4 look of Modal.Title's default div. */}
     <Modal.Title as="h2" className="font-medium h4">
       {marketplaceResource ? (
-        <div className="d-flex flex-column-auto align-items-stretch gap-3 flex-grow-1">
+        <div className="flex flex-column-auto items-stretch gap-3 grow">
           <Tooltip label={marketplaceResource.category_title}>
-            <span className="d-inline-flex">
+            <span className="inline-flex">
               <Image
                 src={getMarketplaceResourceLogo(marketplaceResource)}
                 size={24}

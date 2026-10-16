@@ -56,7 +56,7 @@
 
 .layout-weather-indicator {
   color: white;
-  font-size: 1.5rem;
+  font-size: var(--text-2xl);
   padding: 0.5rem;
 }
 
@@ -72,7 +72,7 @@
 
 .layout-weather-card {
   background: var(--bg-primary);
-  border-radius: 16px;
+  border-radius: var(--radius-2xl);
   padding: 2.5rem;
   width: 100%;
   max-width: 420px;

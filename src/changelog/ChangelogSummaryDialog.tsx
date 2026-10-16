@@ -51,7 +51,7 @@ export const ChangelogSummaryDialog: FunctionComponent<
       }
     >
       <div className="mb-4">
-        <p className="fs-5 mb-1">
+        <p className="text-base mb-1">
           {currentVersion} &rarr; <strong>{latestVersion}</strong>
         </p>
         <p className="text-quaternary">
@@ -76,7 +76,7 @@ export const ChangelogSummaryDialog: FunctionComponent<
       )}
 
       {summary.has_breaking_changes && (
-        <div className="d-flex align-items-center gap-2">
+        <div className="flex items-center gap-2">
           <Badge
             variant={ENTRY_TYPE_CONFIG.breaking.variant}
             shape="pill"

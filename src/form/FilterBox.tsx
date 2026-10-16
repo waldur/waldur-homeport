@@ -117,7 +117,7 @@ export const FilterBox = forwardRef<HTMLInputElement, FilterBoxProps>(
           onKeyDown={handleKeyDown}
         />
         {(rightAction || showClear) && (
-          <div className="input-group-icon input-group-icon-right d-flex align-items-center gap-2">
+          <div className="input-group-icon input-group-icon-right flex items-center gap-2">
             {showClear && (
               <BaseButton
                 size="sm"

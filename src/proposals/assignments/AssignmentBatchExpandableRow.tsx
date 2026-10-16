@@ -90,7 +90,7 @@ export const AssignmentBatchExpandableRow: FC<
           {
             title: translate('Status'),
             render: ({ row: item }) => (
-              <div className="d-flex align-items-center gap-2">
+              <div className="flex items-center gap-2">
                 <AssignmentStatusBadge
                   status={item.status}
                   statusDisplay={item.status_display}

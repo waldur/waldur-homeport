@@ -12,7 +12,7 @@ import { buildPaginationItems } from './buildPaginationItems';
  * in both.
  */
 export const PAGINATION_ITEM_CLASSNAME =
-  'inline-flex items-center justify-center rounded-[8px] bg-transparent text-[14px] font-medium transition-[color,background-color] duration-200';
+  'inline-flex items-center justify-center rounded-lg bg-transparent text-sm font-medium transition-[color,background-color] duration-200';
 
 const PAGE_CLASSNAME = cn(
   PAGINATION_ITEM_CLASSNAME,

@@ -30,14 +30,14 @@ export function LanguageMenu({
       <Menu.SubTrigger>
         {translate('Language')}
         {/* gray-100, 11px, 3px x 10px, gap 6.5px, as the main app's pill. */}
-        <span className="ms-auto flex items-center gap-[6.5px] rounded-lg bg-[var(--menu-item-light-bg)] px-[9.75px] py-[3.25px] text-[11.05px]">
+        <span className="ms-auto flex items-center gap-[6.5px] rounded-lg bg-[var(--menu-item-light-bg)] px-[9.75px] py-[3.25px] text-xs">
           {currentLanguage.label}
           <span aria-hidden="true">
             {getLanguageFlag(currentLanguage.code)}
           </span>
         </span>
       </Menu.SubTrigger>
-      <Menu.SubContent className="py-[12px] text-[14px] font-medium w-[175px]">
+      <Menu.SubContent className="py-[12px] text-sm font-medium w-[175px]">
         <Menu.RadioGroup
           value={currentLanguage.code}
           onValueChange={(code) => {

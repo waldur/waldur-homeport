@@ -42,7 +42,7 @@ export const MaintenanceReportingExpandableRow: FC<{
           label={
             <>
               {translate('Internal notes')}:
-              <span className="text-quaternary d-block">
+              <span className="text-quaternary block">
                 {translate('Providers/staff visible only')}
               </span>
             </>

@@ -100,7 +100,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     <Form.Group
       className={classNames(
         {
-          'flex-grow-1': Boolean(actions),
+          grow: Boolean(actions),
         },
         !actions && (containerClassName || className),
         !spaceless && `mb-${space}`,
@@ -108,7 +108,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
       controlId={controlId}
     >
       {quickAction || (tooltip && tooltipEnd) ? (
-        <div className="d-flex align-items-end">
+        <div className="flex items-end">
           {labelNode && <span className="me-auto">{labelNode}</span>}
           {quickAction}
           {tooltip && tooltipEnd && (
@@ -138,7 +138,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     return (
       <div
         className={classNames(
-          'd-flex align-items-start gap-4',
+          'flex items-start gap-4',
           containerClassName || className,
         )}
       >

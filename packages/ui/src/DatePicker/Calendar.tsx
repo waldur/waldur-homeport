@@ -64,7 +64,7 @@ export function Calendar({
       showOutsideDays={showOutsideDays}
       fixedWeeks={fixedWeeks}
       className={cn(
-        'px-[24px] py-[20px] text-[14px] [--cell-size:40px]',
+        'px-[24px] py-[20px] text-sm [--cell-size:40px]',
         // The band is the faint brand step in both themes (50 / 900), so the
         // day text on it stays the body colour, and only the edges are vivid.
         '[--calendar-band:var(--bg-brand-subtle)]',
@@ -97,14 +97,14 @@ export function Calendar({
           defaults.dropdowns,
         ),
         caption_label: cn(
-          'text-[16px] font-medium select-none',
+          'text-base font-medium select-none',
           defaults.caption_label,
         ),
         month_grid: cn('border-collapse', defaults.month_grid),
         weekdays: cn('flex h-[40px] items-center', defaults.weekdays),
         weekday: cn(
           // Clipped as a last resort; weekdayFormat keeps names short.
-          'w-(--cell-size) overflow-hidden text-center text-[13px] font-medium text-ellipsis whitespace-nowrap select-none',
+          'w-(--cell-size) overflow-hidden text-center text-xs font-medium text-ellipsis whitespace-nowrap select-none',
           defaults.weekday,
         ),
         week: cn('mt-[4px] flex', defaults.week),
@@ -365,8 +365,8 @@ function CalendarDropdown({
         disabled={disabled}
         onClick={() => setOpen((wasOpen) => !wasOpen)}
         className={cn(
-          'inline-flex h-[32px] items-center gap-[4px] rounded-[6px] ps-[8px] pe-[6px]',
-          'text-[16px] font-medium whitespace-nowrap text-primary select-none',
+          'inline-flex h-[32px] items-center gap-[4px] rounded-md ps-[8px] pe-[6px]',
+          'text-base font-medium whitespace-nowrap text-primary select-none',
           'hover:bg-tertiary',
           'aria-expanded:bg-tertiary',
           'focus-visible:[outline:2px_solid_var(--focus-ring-color)]',

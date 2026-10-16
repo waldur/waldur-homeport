@@ -95,10 +95,7 @@ export const PubSubDeadLetterQueueCard: FC = () => {
                   {data.dlq_queues.map((queue, index) => (
                     <tr key={index}>
                       <td className="text-quaternary">{queue.vhost}</td>
-                      <td
-                        className="text-truncate"
-                        style={{ maxWidth: '250px' }}
-                      >
+                      <td className="truncate" style={{ maxWidth: '250px' }}>
                         {queue.queue_name}
                       </td>
                       <td className="text-end text-warning">
@@ -112,10 +109,10 @@ export const PubSubDeadLetterQueueCard: FC = () => {
             </>
           )}
           {data.note && (
-            <small className="text-quaternary mt-3 d-block">{data.note}</small>
+            <small className="text-quaternary mt-3 block">{data.note}</small>
           )}
           {hasMessages && (
-            <small className="text-warning mt-3 d-block">
+            <small className="text-warning mt-3 block">
               {translate(
                 'Messages in the dead letter queue indicate failed publishing attempts that need investigation.',
               )}

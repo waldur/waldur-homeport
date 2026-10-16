@@ -87,7 +87,7 @@ const SortableItem: FC<SortableItemProps> = ({
       </button>
       <label
         htmlFor={checkboxId}
-        className="d-flex align-items-center flex-grow-1 cursor-pointer m-0"
+        className="flex items-center grow cursor-pointer m-0"
       >
         <Checkbox
           id={checkboxId}
@@ -253,12 +253,12 @@ const ColumnsPopover = ({
                   className={menuItem({ look: 'actions' })}
                 >
                   <span
-                    className="d-inline-block size-[20px] shrink-0 me-[12px] opacity-0"
+                    className="inline-block size-[20px] shrink-0 me-[12px] opacity-0"
                     aria-hidden="true"
                   />
                   <label
                     htmlFor={actionsCheckboxId}
-                    className="d-flex align-items-center flex-grow-1 cursor-pointer m-0"
+                    className="flex items-center grow cursor-pointer m-0"
                   >
                     <Checkbox
                       id={actionsCheckboxId}
@@ -282,7 +282,7 @@ const ColumnsPopover = ({
         </DndContext>
 
         {matches.length === 0 && (
-          <div className="text-quaternary text-center py-4 fs-7">
+          <div className="text-quaternary text-center py-4 text-xs">
             {translate('No columns found')}
           </div>
         )}

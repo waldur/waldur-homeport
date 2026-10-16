@@ -66,7 +66,7 @@ export const UserTosManagementSection: FC = () => {
       {
         title: translate('Offering'),
         render: ({ row }) => (
-          <div className="d-flex align-items-center">
+          <div className="flex items-center">
             {row.thumbnail && (
               <img
                 src={row.thumbnail}

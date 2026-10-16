@@ -51,7 +51,7 @@ const PendingChangeValue: FC<{
   newValue: any;
 }> = ({ option, oldValue, newValue }) => {
   return (
-    <span className="d-inline-flex align-items-center gap-2 flex-wrap">
+    <span className="inline-flex items-center gap-2 flex-wrap">
       <span className="text-quaternary">
         <OptionValue option={option} value={oldValue} />
       </span>
@@ -91,7 +91,7 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
 
   if (!resourceOptions?.order?.length) {
     return (
-      <div className="justify-content-center row">
+      <div className="justify-center row">
         <div className="col-sm-4">
           <p className="text-center">
             {translate("Resource doesn't have options.")}
@@ -105,7 +105,7 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
     <div>
       {translate('Options')}
       {pendingChangesCount > 0 && (
-        <div className="fs-7 font-normal text-success mt-1">
+        <div className="text-xs font-normal text-success mt-1">
           {translate('{count} pending changes', { count: pendingChangesCount })}
         </div>
       )}

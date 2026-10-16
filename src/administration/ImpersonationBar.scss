@@ -4,7 +4,7 @@
 
   .icon {
     background: #ff8e00 !important;
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     padding: 10px;
   }
 
@@ -16,7 +16,7 @@
     padding-right: 1rem !important;
 
     @media (max-width: 991px) {
-      font-size: 12px !important;
+      font-size: var(--text-xs) !important;
     }
   }
 }

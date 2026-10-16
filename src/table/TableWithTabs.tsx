@@ -43,13 +43,13 @@ export const TableWithTabs: FC<
   return (
     <Card className={classNames('card-table card-bordered', className)}>
       <Card.Header className={headerClassName}>
-        <Row className="card-toolbar g-0 gap-4 w-100">
+        <Row className="card-toolbar g-0 gap-4 w-full">
           <Col xs>
             <Card.Title ref={setTitleNode}>
               <div className="me-2">
                 <h3>{title}</h3>
                 {Boolean(subtitle) && (
-                  <small className="fs-6 font-normal d-block mt-2">
+                  <small className="text-sm font-normal block mt-2">
                     {subtitle}
                   </small>
                 )}
@@ -59,12 +59,12 @@ export const TableWithTabs: FC<
           </Col>
           <Col
             sm="auto"
-            className="ms-auto mw-100 d-flex gap-4 flex-wrap flex-sm-nowrap text-nowrap"
+            className="ms-auto max-w-full flex gap-4 flex-wrap sm:flex-nowrap text-nowrap"
           >
             {headerActions}
             <div
               ref={setToolbarNode}
-              className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-4"
+              className="flex sm:justify-end flex-wrap sm:flex-nowrap text-nowrap gap-4"
             >
               {/* Portal destination */}
             </div>
@@ -78,8 +78,8 @@ export const TableWithTabs: FC<
           mount="active"
           className="min-h-175px"
         >
-          <div className="d-flex justify-content-between">
-            <TabsList scrollable scrollClassName="flex-grow-1">
+          <div className="flex justify-between">
+            <TabsList scrollable scrollClassName="grow">
               {tabs.map((tab) => (
                 <TabsTrigger key={tab.key} value={tab.key}>
                   {tab.title}
@@ -88,7 +88,7 @@ export const TableWithTabs: FC<
             </TabsList>
             {actions ? (
               Array.isArray(actions) && actions.length ? (
-                <div className="d-flex align-items-center border-b-[1px] border-b-secondary gap-2">
+                <div className="flex items-center border-b-[1px] border-b-secondary gap-2">
                   {actions.map((action, index) => (
                     <Fragment key={index}>
                       {action.activeKeys.includes(activeKey)

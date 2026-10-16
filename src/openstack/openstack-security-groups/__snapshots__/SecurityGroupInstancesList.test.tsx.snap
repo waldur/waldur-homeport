@@ -31,7 +31,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
           data-testid="table-container"
         >
           <table
-            class="table align-middle table-row-bordered fs-6 gy-0 gx-8px no-footer"
+            class="table align-middle table-row-bordered text-sm gy-0 gx-8px no-footer"
           >
             <colgroup>
               <col
@@ -49,7 +49,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
             </colgroup>
             <thead>
               <tr
-                class="text-start text-quaternary font-semibold fs-7 gs-0 align-middle"
+                class="text-start text-quaternary font-semibold text-xs gs-0 align-middle"
               >
                 <th
                   data-pin-key="column-0"
@@ -180,7 +180,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                   class="ellipsis"
                 >
                   <div
-                    class="with-copy d-flex align-items-center gap-1"
+                    class="with-copy flex items-center gap-1"
                   >
                     <div
                       class="td-data"
@@ -219,7 +219,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                     >
                       192.168.42.14
                       <div
-                        class="my-1 mx-2 hover:text-brand cursor-pointer d-inline z-index-1 position-relative"
+                        class="my-1 mx-2 hover:text-brand cursor-pointer inline z-index-1 position-relative"
                       >
                         <button
                           aria-label="Copy to clipboard"
@@ -251,7 +251,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                   >
                     10.10.10.5
                     <div
-                      class="my-1 mx-2 hover:text-brand cursor-pointer d-inline z-index-1 position-relative"
+                      class="my-1 mx-2 hover:text-brand cursor-pointer inline z-index-1 position-relative"
                     >
                       <button
                         aria-label="Copy to clipboard"
@@ -273,7 +273,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                   class="ellipsis"
                 >
                   <span
-                    class="badge inline-flex items-center justify-center border-[1px] text-[1.075rem] leading-[20px] font-medium transition-colors rounded-full py-[1px] px-[9px] bg-brand-subtle border-brand-200 text-brand-700 dark:border-brand-700 dark:text-brand-200"
+                    class="badge inline-flex items-center justify-center border-[1px] text-sm leading-[20px] font-medium transition-colors rounded-full py-[1px] px-[9px] bg-brand-subtle border-brand-200 text-brand-700 dark:border-brand-700 dark:text-brand-200"
                     data-state="closed"
                     data-testid="default-state-indicator"
                     data-tone="outline"

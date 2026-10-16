@@ -25,7 +25,7 @@ export const AccountSettingValue: FC<AccountSettingValueProps> = ({
   onReset,
   resetLabel,
 }) => (
-  <div className="d-flex flex-column align-items-start">
+  <div className="flex flex-col items-start">
     <span>{label ?? setting.value}</span>
     {setting.source === 'provider' ? (
       <small className="text-quaternary">

@@ -238,7 +238,7 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                           return (
                             <div
                               key={name}
-                              className="d-flex align-items-start gap-2 mb-2"
+                              className="flex items-start gap-2 mb-2"
                             >
                               <div style={{ flex: '0 0 220px' }}>
                                 <Field name={`${name}.type`}>
@@ -257,7 +257,7 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                                   )}
                                 </Field>
                               </div>
-                              <div className="flex-grow-1">
+                              <div className="grow">
                                 <Field name={`${name}.entity`}>
                                   {({ input }) => (
                                     <EntityScopePicker

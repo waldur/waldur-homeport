@@ -58,16 +58,16 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
 
   if (!currentVersion) {
     return (
-      <div className="d-flex justify-content-center align-items-center h-100 text-quaternary fs-6">
+      <div className="flex justify-center items-center h-full text-quaternary text-sm">
         {translate('Select a version to view details')}
       </div>
     );
   }
 
   return (
-    <div className="d-flex flex-column h-100">
-      <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 px-5 py-4 border-b-[1px] border-b-secondary">
-        <div className="d-flex align-items-center text-nowrap">
+    <div className="flex flex-col h-full">
+      <div className="flex flex-wrap justify-between items-center gap-3 px-5 py-4 border-b-[1px] border-b-secondary">
+        <div className="flex items-center text-nowrap">
           <span className="font-medium me-2">{translate('Changes')}:</span>
           <StateIndicator
             label={`${changedCount} ${translate('field(s) changed')}`}
@@ -84,7 +84,7 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
         />
       </div>
 
-      <div className="flex-grow-1 overflow-auto">
+      <div className="grow overflow-auto">
         <div style={{ display: viewMode === 'table' ? undefined : 'none' }}>
           <TableDiffView diffs={diffs} />
         </div>
@@ -102,7 +102,7 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
           </div>
         ) : (
           viewMode === 'json' && (
-            <div className="d-flex justify-content-center align-items-center h-100">
+            <div className="flex justify-center items-center h-full">
               <LoadingSpinner />
             </div>
           )
@@ -117,7 +117,7 @@ const TableDiffView: FunctionComponent<{
 }> = ({ diffs }) => {
   if (diffs.length === 0) {
     return (
-      <div className="text-center text-quaternary py-10 fs-6">
+      <div className="text-center text-quaternary py-10 text-sm">
         {translate('No fields to display')}
       </div>
     );
@@ -128,7 +128,7 @@ const TableDiffView: FunctionComponent<{
     // share the width, and long values (emails, UUIDs) break instead.
     <Table responsive className="table-row-bordered align-middle mb-0">
       <thead>
-        <tr className="font-medium fs-7 text-uppercase text-quaternary">
+        <tr className="font-medium text-xs text-uppercase text-quaternary">
           <th className="ps-5 md:min-w-[150px]">{translate('Field')}</th>
           <th className="md:min-w-[200px]">{translate('Previous')}</th>
           <th className="md:min-w-[200px]">{translate('Current')}</th>
@@ -142,12 +142,12 @@ const TableDiffView: FunctionComponent<{
           >
             <td className="ps-5">{diff.label}</td>
             <td>
-              <pre className="mb-0 fs-7 text-quaternary text-wrap text-break bg-transparent">
+              <pre className="mb-0 text-xs text-quaternary text-wrap text-break bg-transparent">
                 {formatFieldValue(diff.oldValue)}
               </pre>
             </td>
             <td>
-              <pre className="mb-0 fs-7 text-wrap text-break bg-transparent">
+              <pre className="mb-0 text-xs text-wrap text-break bg-transparent">
                 {formatFieldValue(diff.newValue)}
               </pre>
             </td>

@@ -48,7 +48,7 @@ export const PurchaseOrderFields: FC<PurchaseOrderFieldsProps> = ({
   return (
     <div className="mt-4">
       <div className="font-medium">{translate('Purchase order')}</div>
-      <div className="text-quaternary fs-7 mb-4">
+      <div className="text-quaternary text-xs mb-4">
         {isRequired
           ? usesCallVocabulary()
             ? translate(
@@ -81,12 +81,12 @@ export const PurchaseOrderFields: FC<PurchaseOrderFieldsProps> = ({
               href={existingAttachment}
               target="_blank"
               rel="noopener noreferrer"
-              className="d-inline-flex align-items-center gap-1"
+              className="inline-flex items-center gap-1"
             >
               <DownloadSimpleIcon weight="bold" />
               {translate('Currently attached document')}
             </a>
-            <div className="text-quaternary fs-7">
+            <div className="text-quaternary text-xs">
               {translate('Attaching a new file replaces it.')}
             </div>
           </div>

@@ -33,12 +33,12 @@ export const FileAttachmentsDialog: FC<FileAttachmentsDialogProps> = ({
     title={translate('File attachments')}
     footer={<CloseDialogButton className="min-w-125px" />}
   >
-    <div className="d-flex flex-column gap-3">
+    <div className="flex flex-col gap-3">
       {resolve.files.map((file) => (
         <BaseButton
           key={file.stored_file_id}
           variant="text-primary"
-          className="text-start align-self-start"
+          className="text-start self-start"
           onClick={() => downloadMediaFile(file.stored_file_id, file.name)}
           label={file.name}
         />

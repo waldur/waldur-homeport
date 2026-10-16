@@ -175,7 +175,7 @@ export const UpdateAffiliationDialog: FunctionComponent<
         />
       ) : (
         <>
-          <div className="d-flex justify-content-between align-items-center mb-3">
+          <div className="flex justify-between items-center mb-3">
             <span className="text-quaternary">
               {isStaff
                 ? translate(

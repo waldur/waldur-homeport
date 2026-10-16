@@ -33,7 +33,7 @@ const Metric: FC<{
 }> = ({ value, caption, tone }) => (
   <>
     <span className={tone ? TONE_CLASSES[tone] : undefined}>{value}</span>
-    <span className="d-block fs-6 font-normal text-quaternary mt-1">
+    <span className="block text-sm font-normal text-quaternary mt-1">
       {caption}
     </span>
   </>
@@ -174,7 +174,7 @@ const CreditMetrics: FC<{ data: PolicyWatchData }> = ({ data }) => {
           value={
             <>
               {defaultCurrency(runway.burnPerDay.toFixed(2))}
-              <span className="fs-4">{translate('/d')}</span>
+              <span className="text-base">{translate('/d')}</span>
             </>
           }
           caption={

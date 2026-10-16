@@ -25,7 +25,7 @@ const LabelsCell: FC<{ labels: unknown }> = ({ labels }) => {
   const items = toStringList(labels);
   if (!items.length) return <>{renderFieldOrDash(null)}</>;
   return (
-    <span className="d-inline-flex flex-wrap gap-1">
+    <span className="inline-flex flex-wrap gap-1">
       {items.map((label) => (
         <Badge key={label} variant="neutral" size="sm" tone="outline">
           {label}

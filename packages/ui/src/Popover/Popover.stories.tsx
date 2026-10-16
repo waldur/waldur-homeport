@@ -101,10 +101,7 @@ export const BaseButtonAsTrigger: Story = {
         <Menu.Trigger asChild>
           <BaseButton size="lg" variant="secondary" label="Actions" />
         </Menu.Trigger>
-        <Menu.Content
-          className="py-[12px] text-[14px] font-medium"
-          align="start"
-        >
+        <Menu.Content className="py-[12px] text-sm font-medium" align="start">
           <Menu.Item>Edit</Menu.Item>
           <Menu.Item>Duplicate</Menu.Item>
           <Menu.Item className="text-danger menu-row-active:text-danger">

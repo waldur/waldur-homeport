@@ -14,7 +14,7 @@ import { translate } from '@/i18n';
 import { MergeDraft } from '../utils';
 
 const Mismatch: FC<{ children: ReactNode }> = ({ children }) => (
-  <div className="text-danger fs-7 mt-1 d-flex align-items-center gap-1">
+  <div className="text-danger text-xs mt-1 flex items-center gap-1">
     <WarningCircleIcon weight="bold" />
     {children}
   </div>
@@ -82,8 +82,8 @@ export const MappingStep: FC<MappingStepProps> = ({
   };
 
   return (
-    <div className="d-flex flex-column gap-5">
-      <div className="d-flex flex-wrap justify-content-between align-items-center gap-3">
+    <div className="flex flex-col gap-5">
+      <div className="flex flex-wrap justify-between items-center gap-3">
         <p className="text-quaternary mb-0">
           {translate(
             'Map every source plan and component that resources, orders or usage refer to. Unused ones may stay unmapped: they remain on the archived source.',

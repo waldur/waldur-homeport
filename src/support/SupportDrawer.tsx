@@ -63,19 +63,16 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
       mount="all"
       // The tabs root is a wrapper div of its own: it must pass the drawer's
       // height on, or the chat timeline grows with its messages and can't scroll.
-      className="h-100 d-flex flex-column"
+      className="h-full flex flex-col"
       value={activeTab}
       onValueChange={(key) => key && setSupportTab(key as SupportDrawerTab)}
     >
-      <div className="support-drawer h-100 d-flex flex-column">
+      <div className="support-drawer h-full flex flex-col">
         {(showChat || showHelpdesk) && (
-          <div className="support-drawer-tabs flex-shrink-0">
+          <div className="support-drawer-tabs shrink-0">
             <TabsList>
               {showChat && (
-                <TabsTrigger
-                  value="chat"
-                  className="d-flex align-items-center gap-2"
-                >
+                <TabsTrigger value="chat" className="flex items-center gap-2">
                   <ChatsCircleIcon size={16} weight="bold" />
                   {translate('Team chat')}
                   {matrixUnread > 0 && (
@@ -88,7 +85,7 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
               {showHelpdesk && (
                 <TabsTrigger
                   value="helpdesk"
-                  className="d-flex align-items-center gap-2"
+                  className="flex items-center gap-2"
                 >
                   <LifebuoyIcon size={16} weight="bold" />
                   {translate('Helpdesk')}
@@ -101,10 +98,10 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
         {/* Panes stay mounted across tab switches (the old Bootstrap default) so the
             Team chat keeps its Matrix connection and any active call alive
             while the user is on the Helpdesk tab. */}
-        <div className="flex-grow-1 overflow-hidden">
+        <div className="grow overflow-hidden">
           {showChat && (
-            <TabsContent value="chat" className="h-100">
-              <div className="h-100 w-100 d-flex flex-column">
+            <TabsContent value="chat" className="h-full">
+              <div className="h-full w-full flex flex-col">
                 <MatrixChatPanel
                   defaultRoomUuid={defaultRoomUuid}
                   defaultRoomAlias={matrixRoomAlias}
@@ -113,13 +110,13 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
             </TabsContent>
           )}
           {showHelpdesk && (
-            <TabsContent value="helpdesk" className="h-100">
+            <TabsContent value="helpdesk" className="h-full">
               {drawerExpanded ? (
-                <div className="support-drawer-helpdesk support-drawer-helpdesk--expanded h-100 w-100">
+                <div className="support-drawer-helpdesk support-drawer-helpdesk--expanded h-full w-full">
                   <HelpdeskExpanded />
                 </div>
               ) : (
-                <div className="support-drawer-helpdesk h-100 w-100 overflow-auto">
+                <div className="support-drawer-helpdesk h-full w-full overflow-auto">
                   <QuickIssueContainer />
                 </div>
               )}

@@ -10,10 +10,10 @@ exports[`InternalIpsList > renders list 1`] = `
       data-testid="table-toolbar"
     >
       <div
-        class="card-toolbar d-flex flex-wrap align-items-center gap-4 w-100"
+        class="card-toolbar flex flex-wrap items-center gap-4 w-full"
       >
         <div
-          class="flex-grow-1 order-0"
+          class="grow order-0"
           data-testid="table-toolbar-title-container"
         >
           <div
@@ -52,10 +52,10 @@ exports[`InternalIpsList > renders list 1`] = `
           </div>
         </div>
         <div
-          class="flex-grow-1 order-2 order-sm-2 d-flex align-items-center flex-wrap flex-sm-nowrap text-nowrap gap-4 ms-auto justify-content-end"
+          class="grow order-2 order-sm-2 flex items-center flex-wrap sm:flex-nowrap text-nowrap gap-4 ms-auto justify-end"
         >
           <div
-            class="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-4"
+            class="flex sm:justify-end flex-wrap sm:flex-nowrap text-nowrap gap-4"
           >
             <button
               class="inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] bg-[var(--btn-tertiary-bg)] text-[var(--btn-tertiary-text)] hover:bg-[var(--btn-tertiary-bg-hover)] focus-visible:bg-[var(--btn-tertiary-bg-hover)] focus-visible:shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] focus-visible:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-[var(--btn-tertiary-bg-pressed)] active:shadow-none disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)] data-disabled:shadow-[inset_0_0_0_1px_transparent] data-disabled:bg-[var(--btn-disabled-bg)] data-disabled:text-[var(--btn-disabled-text)] rounded-lg px-[16px] py-[10px] text-base leading-6"
@@ -101,7 +101,7 @@ exports[`InternalIpsList > renders list 1`] = `
           data-testid="table-container"
         >
           <table
-            class="table align-middle table-row-bordered fs-6 gy-0 gx-8px no-footer"
+            class="table align-middle table-row-bordered text-sm gy-0 gx-8px no-footer"
           >
             <colgroup>
               <col
@@ -119,7 +119,7 @@ exports[`InternalIpsList > renders list 1`] = `
             </colgroup>
             <thead>
               <tr
-                class="text-start text-quaternary font-semibold fs-7 gs-0 align-middle"
+                class="text-start text-quaternary font-semibold text-xs gs-0 align-middle"
               >
                 <th
                   data-pin-key="column-0"

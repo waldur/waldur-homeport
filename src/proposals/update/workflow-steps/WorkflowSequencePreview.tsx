@@ -64,7 +64,7 @@ export const WorkflowSequencePreview: FC<WorkflowSequencePreviewProps> = ({
       className="card-bordered"
       refetch={onReset}
     >
-      <p className="text-quaternary fs-7 mb-5">
+      <p className="text-quaternary text-xs mb-5">
         {translate(
           'Shows the workflow as configured in the steps above. Appears once at least one optional step is enabled.',
         )}
@@ -84,11 +84,11 @@ export const WorkflowSequencePreview: FC<WorkflowSequencePreviewProps> = ({
               <CircleIcon
                 weight="fill"
                 size={10}
-                className="text-quaternary d-block"
+                className="text-quaternary block"
               />
             </span>
             <div className="mt-3 small text-secondary">{definition.name}</div>
-            <div className="text-quaternary fs-8 mt-1">
+            <div className="text-quaternary text-xs mt-1">
               {configured?.duration_in_days
                 ? translate('{count}d', {
                     count: configured.duration_in_days,
@@ -96,13 +96,13 @@ export const WorkflowSequencePreview: FC<WorkflowSequencePreviewProps> = ({
                 : translate('No deadline')}
             </div>
             {configured?.responsible_role ? (
-              <div className="text-quaternary fs-8">
+              <div className="text-quaternary text-xs">
                 {responsibleRoleLabel(
                   configured.responsible_role as ResponsibleRoleEnum | null,
                 )}
               </div>
             ) : null}
-            <div className="text-quaternary fs-8">
+            <div className="text-quaternary text-xs">
               {transitionModeLabel(
                 (configured?.transition_mode ||
                   'automatic_on_completion') as TransitionModeEnum,

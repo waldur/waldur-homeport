@@ -78,7 +78,7 @@ const FieldsListGroup = ({
                 simpleValue
                 validate={required}
                 label={translate('Answer')}
-                className="flex-grow-1"
+                className="grow"
               />
 
               <BaseButton

@@ -62,7 +62,7 @@ export const PendingActionAlertItem: FC<{
     <AlertItem
       variant={getAlertVariant(row.urgency || 'low')}
       title={
-        <div className="d-flex align-items-center gap-2">
+        <div className="flex items-center gap-2">
           {displayTitle}
           {row.is_effectively_silenced && (
             <Tooltip
@@ -108,7 +108,7 @@ export const PendingActionAlertItem: FC<{
         </div>
       }
       actions={
-        <div className="d-flex align-items-center gap-2">
+        <div className="flex items-center gap-2">
           {primaryAction && <PrimaryActionButton action={primaryAction} />}
           {remainingActions.length > 0 && (
             <ActionsDropdown

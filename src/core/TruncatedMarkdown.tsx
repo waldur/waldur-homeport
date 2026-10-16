@@ -121,9 +121,8 @@ export const TruncatedMarkdown: FC<TruncatedMarkdownProps> = ({
       {isTruncated && (
         <button
           type="button"
-          className="text-anchor mt-2"
+          className="text-anchor mt-2 text-sm"
           onClick={handleShowMore}
-          style={{ fontSize: '0.875rem' }}
         >
           {translate('Show more')}
         </button>

@@ -17,7 +17,7 @@ export const HiddenActionsMessage: FunctionComponent<
   HiddenActionsMessageProps
 > = ({ toggleColumn, close }) => {
   return (
-    <div className="d-flex gap-5 my-5 w-100">
+    <div className="flex gap-5 my-5 w-full">
       <FeaturedIcon
         icon={<WarningCircleIcon weight="bold" />}
         variant="warning"

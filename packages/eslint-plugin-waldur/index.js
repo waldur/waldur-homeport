@@ -17,6 +17,7 @@ import noBootstrapButtonMarkup from './rules/no-bootstrap-button-markup.js';
 import noBootstrapColorUtility from './rules/no-bootstrap-color-utility.js';
 import noBootstrapCssVars from './rules/no-bootstrap-css-vars.js';
 import noBootstrapFormCheck from './rules/no-bootstrap-form-check.js';
+import noBootstrapLayoutUtility from './rules/no-bootstrap-layout-utility.js';
 import noBootstrapProgress from './rules/no-bootstrap-progress.js';
 import noBootstrapTabs from './rules/no-bootstrap-tabs.js';
 import noDirectClientUsage from './rules/no-direct-client-usage.js';
@@ -36,6 +37,7 @@ import noUndefinedInMutationBody from './rules/no-undefined-in-mutation-body.js'
 import preferClassnamesUtility from './rules/prefer-classnames-utility.js';
 import preferMutateOverMutateAsync from './rules/prefer-mutate-over-mutateAsync.js';
 import requireDarkPair from './rules/require-dark-pair.js';
+import requireFontSizeScale from './rules/require-font-size-scale.js';
 import requireWeightScale from './rules/require-weight-scale.js';
 
 export default {
@@ -55,12 +57,14 @@ export default {
     'dynamic-tab-params': dynamicTabParams,
     'no-bootstrap-css-vars': noBootstrapCssVars,
     'no-bootstrap-form-check': noBootstrapFormCheck,
+    'no-bootstrap-layout-utility': noBootstrapLayoutUtility,
     'no-bootstrap-progress': noBootstrapProgress,
     'no-bootstrap-border-with-tailwind-color':
       noBootstrapBorderWithTailwindColor,
     'no-raw-status-ramp': noRawStatusRamp,
     'no-retired-bootstrap-utility': noRetiredBootstrapUtility,
     'require-dark-pair': requireDarkPair,
+    'require-font-size-scale': requireFontSizeScale,
     'require-weight-scale': requireWeightScale,
     'no-bootstrap-color-utility': noBootstrapColorUtility,
     'no-bootstrap-tabs': noBootstrapTabs,

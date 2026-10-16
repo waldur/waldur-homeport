@@ -43,7 +43,7 @@ export const CustomerBillingSummaryDialog: FC<
           loadData={refetch}
         />
       ) : data ? (
-        <div className="d-flex flex-column gap-6">
+        <div className="flex flex-col gap-6">
           {/* Error message if any (only show for unexpected errors) */}
           {data.error && !data.error.includes('billing') && (
             <AlertItem
@@ -156,7 +156,7 @@ export const CustomerBillingSummaryDialog: FC<
 
           {/* Billing Data from Arrow */}
           <Card>
-            <Card.Header className="d-flex justify-content-between align-items-center">
+            <Card.Header className="flex justify-between items-center">
               <Card.Title>
                 <h5 className="mb-0">
                   {translate('Billing export ({period})', {
@@ -240,7 +240,7 @@ export const CustomerBillingSummaryDialog: FC<
 
           {/* Consumption Data */}
           <Card>
-            <Card.Header className="d-flex justify-content-between align-items-center">
+            <Card.Header className="flex justify-between items-center">
               <Card.Title>
                 <h5 className="mb-0">
                   {translate('Consumption ({period})', { period: data.period })}

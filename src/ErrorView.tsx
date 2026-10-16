@@ -32,14 +32,14 @@ export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
   return (
     <div className="search-error">
       <RadialBg className="background" />
-      <div className="text-center d-flex flex-column align-items-center pb-10 position-relative z-index-1">
+      <div className="text-center flex flex-col items-center pb-10 position-relative z-index-1">
         <div className="icon-square icon-lg error-icon">
           <WarningCircleIcon weight="bold" size={24} />
         </div>
 
         <div>
           <h4>{translate('Something went wrong')}</h4>
-          <div className="d-flex flex-column align-items-center text-quaternary fs-6">
+          <div className="flex flex-col items-center text-quaternary text-sm">
             <p className="mb-0 mx-300px">
               {translate('An error occurred.')}
               <br />
@@ -47,7 +47,7 @@ export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
             </p>
           </div>
         </div>
-        <div className="actions d-flex gap-4 mt-2">
+        <div className="actions flex gap-4 mt-2">
           <BaseButton
             variant="tertiary"
             onClick={openErrorTraceDialog}

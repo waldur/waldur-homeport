@@ -18,11 +18,11 @@ export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
   providerUuid,
 }) => {
   return (
-    <div className="d-flex align-items-center gap-1 flex-wrap">
+    <div className="flex items-center gap-1 flex-wrap">
       <PublicResourceLink row={row} providerUuid={providerUuid} />
       <CopyToClipboardButton
         value={row.name}
-        className="hover:text-brand cursor-pointer d-inline-block"
+        className="hover:text-brand cursor-pointer inline-block"
       />
       <ResourceFlags resource={row} />
       <PublicMaintenanceBadge offeringUuid={row.offering_uuid} />

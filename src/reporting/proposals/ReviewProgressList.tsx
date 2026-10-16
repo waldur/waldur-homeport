@@ -75,9 +75,9 @@ const columns: Column<ReviewProgressStat>[] = [
   {
     title: translate('Reviewer'),
     render: ({ row }) => (
-      <div className="d-flex flex-column">
+      <div className="flex flex-col">
         <span>{row.reviewer_name}</span>
-        <span className="text-quaternary fs-8">{row.reviewer_email}</span>
+        <span className="text-quaternary text-xs">{row.reviewer_email}</span>
       </div>
     ),
   },

@@ -11,12 +11,12 @@ export const FloatingButton: FC<PropsWithChildren> = (props) => {
 
   return (
     <>
-      <div ref={mainButtonRef} className="d-flex justify-content-between mt-5">
+      <div ref={mainButtonRef} className="flex justify-between mt-5">
         {props.children}
       </div>
       <div
         className={classNames(
-          'floating-button d-xl-none',
+          'floating-button xl:hidden',
           !isOnScreen && 'active',
         )}
       >

@@ -43,6 +43,16 @@ export const ALLOWLIST = {
     'Tailwind implicit line-height modifier for text-sm',
   '--text-base--line-height':
     'Tailwind implicit line-height modifier for text-base',
+  '--text-lg--line-height':
+    'Tailwind implicit line-height modifier for text-lg',
+  '--text-xl--line-height':
+    'Tailwind implicit line-height modifier for text-xl',
+  '--text-2xl--line-height':
+    'Tailwind implicit line-height modifier for text-2xl',
+  '--text-3xl--line-height':
+    'Tailwind implicit line-height modifier for text-3xl',
+  '--text-4xl--line-height':
+    'Tailwind implicit line-height modifier for text-4xl',
 };
 
 /**

@@ -20,7 +20,7 @@ export const IsdBadges: FC<IsdBadgesProps> = ({ isds, size }) => {
     return <>{DASH_ESCAPE_CODE}</>;
   }
   return (
-    <span className="d-inline-flex flex-wrap gap-1">
+    <span className="inline-flex flex-wrap gap-1">
       {isds.map((isd) => (
         <Badge
           key={isd}

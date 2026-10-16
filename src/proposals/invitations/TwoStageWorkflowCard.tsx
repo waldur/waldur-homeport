@@ -13,21 +13,21 @@ interface StepBoxProps {
 }
 
 const StepBox: FC<StepBoxProps> = ({ step, title, description, items }) => (
-  <div className="flex-fill border rounded p-4">
-    <div className="d-flex align-items-center gap-2 mb-2">
+  <div className="flex-1 border rounded p-4">
+    <div className="flex items-center gap-2 mb-2">
       <h5 className="mb-0">{title}</h5>
       <Badge variant="success" shape="pill" tone="outline">
         {translate('Step {n}', { n: String(step) })}
       </Badge>
     </div>
     <p className="text-quaternary mb-3">{description}</p>
-    <ul className="list-unstyled d-flex flex-column gap-2 mb-0">
+    <ul className="list-unstyled flex flex-col gap-2 mb-0">
       {items.map((item) => (
-        <li key={item} className="d-flex align-items-start gap-2">
+        <li key={item} className="flex items-start gap-2">
           <CheckCircleIcon
             size={18}
             weight="bold"
-            className="text-success flex-shrink-0"
+            className="text-success shrink-0"
           />
           <span>{item}</span>
         </li>
@@ -45,7 +45,7 @@ export const TwoStageWorkflowCard: FC = () => (
     defaultOpen
     className="mb-6"
   >
-    <div className="d-flex flex-column flex-md-row align-items-stretch gap-4">
+    <div className="flex flex-col md:flex-row items-stretch gap-4">
       <StepBox
         step={1}
         title={translate('Join the pool')}
@@ -58,7 +58,7 @@ export const TwoStageWorkflowCard: FC = () => (
           translate('Your expertise will be matched to suitable proposals'),
         ]}
       />
-      <div className="d-flex align-items-center justify-content-center">
+      <div className="flex items-center justify-center">
         <ArrowRightIcon
           size={20}
           weight="bold"

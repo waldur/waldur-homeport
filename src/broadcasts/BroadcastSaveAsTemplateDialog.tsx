@@ -45,7 +45,7 @@ export const BroadcastSaveAsTemplateDialog: FC<
           <ModalDialog
             title={translate('Create a broadcast template')}
             footer={
-              <div className="d-flex justify-content-end gap-2">
+              <div className="flex justify-end gap-2">
                 <CloseDialogButton />
                 <SubmitButton
                   submitting={submitting}

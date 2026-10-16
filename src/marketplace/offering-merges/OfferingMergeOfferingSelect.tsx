@@ -27,9 +27,9 @@ const OFFERING_FIELDS = [
 const OfferingOptionLabel: FC<{ option: MergeOfferingOption }> = ({
   option,
 }) => (
-  <div className="d-flex flex-column">
+  <div className="flex flex-col">
     <span>{option.name}</span>
-    <span className="text-quaternary fs-7">
+    <span className="text-quaternary text-xs">
       {[getLabel(option.type), option.state, option.customer_name]
         .filter(Boolean)
         .join(' · ')}

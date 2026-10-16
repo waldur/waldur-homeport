@@ -68,11 +68,11 @@ const renderUsageCell = (percentage: number | null) => {
     return <span className="text-quaternary">{DASH_ESCAPE_CODE}</span>;
   }
   return (
-    <div className="d-flex align-items-center gap-2">
+    <div className="flex items-center gap-2">
       <QuotaProgressBar
         percent={percentage}
         size="sm"
-        className="flex-grow-1"
+        className="grow"
         label={translate('Usage')}
       />
       <span className="text-nowrap" style={{ minWidth: '40px' }}>

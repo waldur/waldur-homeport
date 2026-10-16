@@ -89,7 +89,7 @@ export const CloneRoleDialog: FC<{ resolve: CloneRoleDialogResolve }> = ({
                 description={translate('Copied from the template role.')}
               >
                 {values.template.permissions?.length ? (
-                  <div className="d-flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-1">
                     {values.template.permissions.map((permission) => (
                       <Badge
                         key={permission}

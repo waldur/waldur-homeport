@@ -27,7 +27,7 @@ import { getWorkloadLimitMessage } from './workloadLimit';
 const TruncatedMultiValue = (props: any) => (
   <Tag onClear={props.removeProps.onClick}>
     <span
-      className="text-truncate d-inline-block align-bottom"
+      className="truncate inline-block align-bottom"
       style={{ maxWidth: 260 }}
     >
       {props.children}
@@ -245,7 +245,7 @@ export const CreateManualAssignmentDialog: FC<
   const formatReviewerLabel = useCallback(
     (option: ReviewerOption, meta: { context: 'menu' | 'value' }) => {
       if (meta.context === 'value') {
-        return <span className="text-truncate">{option.label}</span>;
+        return <span className="truncate">{option.label}</span>;
       }
       return (
         <div>

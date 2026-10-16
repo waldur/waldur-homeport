@@ -77,7 +77,7 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
               'Connect your Arrow (ArrowSphere) account to synchronize billing data with Waldur.',
             )}
           </p>
-          <div className="d-flex gap-2 justify-content-center">
+          <div className="flex gap-2 justify-center">
             <ArrowSetupButton />
             <ArrowHowItWorksButton />
           </div>
@@ -87,13 +87,13 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
   }
 
   return (
-    <div className="d-flex flex-column gap-6">
+    <div className="flex flex-col gap-6">
       <Card>
-        <Card.Header className="d-flex justify-content-between align-items-center">
+        <Card.Header className="flex justify-between items-center">
           <Card.Title>
             <h4 className="mb-0">{translate('Connection Settings')}</h4>
           </Card.Title>
-          <div className="d-flex gap-2 align-items-center">
+          <div className="flex gap-2 items-center">
             <ArrowHowItWorksButton />
             <ArrowSettingsActions settings={currentSettings} />
           </div>
@@ -122,7 +122,7 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                 </td>
                 <td>
                   {currentSettings.partner_reference ? (
-                    <span className="d-flex align-items-center gap-2">
+                    <span className="flex items-center gap-2">
                       {currentSettings.partner_reference}
                       <CopyToClipboardButton
                         value={currentSettings.partner_reference}
@@ -140,7 +140,7 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                 </td>
                 <td>
                   {currentSettings.export_type_reference ? (
-                    <span className="d-flex align-items-center gap-2">
+                    <span className="flex items-center gap-2">
                       {currentSettings.export_type_reference}
                       <CopyToClipboardButton
                         value={currentSettings.export_type_reference}

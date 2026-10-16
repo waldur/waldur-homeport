@@ -21,7 +21,7 @@ export const ConnectionStatusIndicator = ({ status }) => {
   };
 
   return (
-    <FormGroup as={Row} className="col-auto align-items-center">
+    <FormGroup as={Row} className="col-auto items-center">
       <FormLabel column xs="auto">
         {translate('Status')}
       </FormLabel>

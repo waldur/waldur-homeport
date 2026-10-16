@@ -217,7 +217,7 @@ export const ReviewerExpandableRow: FC<ReviewerExpandableRowProps> = ({
                         href={`https://orcid.org/${profile.orcid_id}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="d-inline-flex align-items-center gap-1"
+                        className="inline-flex items-center gap-1"
                       >
                         <OrcidLogo size={16} />
                         https://orcid.org/{profile.orcid_id}

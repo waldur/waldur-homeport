@@ -23,7 +23,7 @@ export const TermsOfServiceCheckbox: FunctionComponent<
   const labelId = 'tos-agreement-label';
 
   return (
-    <div className="d-flex align-items-center">
+    <div className="flex items-center">
       {/* A bare box and its own <label>, not Checkbox's `label`: once agreed
           the box locks, and a disabled Checkbox greys its label, but the
           acceptance text has to stay fully legible. */}
@@ -40,7 +40,7 @@ export const TermsOfServiceCheckbox: FunctionComponent<
       <label
         id={labelId}
         htmlFor={inputId}
-        className="ms-[8px] mb-0 text-[14px] leading-[20px] text-[var(--check-label)]"
+        className="ms-[8px] mb-0 text-sm leading-5 text-[var(--check-label)]"
       >
         {!isAgreed
           ? translate(

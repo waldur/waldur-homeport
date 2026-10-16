@@ -114,7 +114,7 @@ export const FormSchedulingStep = (props: FormStepProps) => {
             cardBordered={false}
             minHeight="auto"
             headerClassName="mx-0"
-            titleClassName="fs-6 text-secondary"
+            titleClassName="text-sm text-secondary"
           />
         </AccordionCard>
       </span>

@@ -21,7 +21,7 @@ export const TableFilterButton = ({
     // the button only while there is a count changed the tree shape at this
     // position, so React remounted the button (losing focus and tooltip state)
     // whenever the count crossed zero.
-    <div className="d-inline-flex position-relative">
+    <div className="inline-flex position-relative">
       <BaseButton
         variant="tertiary"
         size="lg"
@@ -36,7 +36,7 @@ export const TableFilterButton = ({
           size="sm"
           shape="pill"
           tone="outline"
-          className="position-absolute top-0 start-100 translate-middle fs-7"
+          className="position-absolute top-0 start-100 translate-middle text-xs"
         >
           {count > 9 ? '9+' : count}
         </Badge>

@@ -28,7 +28,7 @@ export const CallsForProposals: FunctionComponent = () => {
         context="calls"
         backgroundImage={`url(${backendImage}), url(${defaultImage})`}
       >
-        <div className="d-flex justify-content-center gap-5">
+        <div className="flex justify-center gap-5">
           <Link
             state="calls-for-proposals-all-available-offerings"
             buttonVariant="tertiary"

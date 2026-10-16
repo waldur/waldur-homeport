@@ -29,7 +29,7 @@ const exportTypeLabel = (type: string) => {
 // distinct from the JSON message log (export_file_url). Surface its download
 // next to the count so the archive is reachable from the table at all.
 const ExportMediaFilesCell: FC<{ row: MatrixHistoryExport }> = ({ row }) => (
-  <div className="d-flex align-items-center gap-2">
+  <div className="flex items-center gap-2">
     <span>{row.media_count}</span>
     {row.media_file_url && (
       <FileDownloader

@@ -45,7 +45,7 @@ export const CustomerProfile = ({
         <Stack
           direction="horizontal"
           gap={5}
-          className="flex-wrap text-quaternary lh-1"
+          className="flex-wrap text-quaternary leading-none"
         >
           {customer.organization_groups?.length > 0 && (
             <span className="text-nowrap">

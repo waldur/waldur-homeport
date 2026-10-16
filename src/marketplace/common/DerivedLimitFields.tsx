@@ -32,7 +32,7 @@ const DerivedQuantities = ({
   }
   const components = getComponentsByType(offering?.components);
   return (
-    <div className="d-flex flex-column gap-1 form-text text-quaternary mt-2 mb-0">
+    <div className="flex flex-col gap-1 form-text text-quaternary mt-2 mb-0">
       {types.map((type) => {
         const component = components[type];
         const name = component?.name || type;

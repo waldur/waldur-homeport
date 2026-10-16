@@ -77,7 +77,7 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
         id: 'items',
         title: translate('Items'),
         render: ({ row }: { row: AssignmentBatchList }) => (
-          <div className="d-flex gap-1">
+          <div className="flex gap-1">
             <Tooltip
               label={translate('Pending: {count}', {
                 count: row.items_pending_count,

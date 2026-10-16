@@ -81,19 +81,19 @@
 }
 
 .layout-diagonal-hero h1 {
-  font-size: 2.5rem;
+  font-size: var(--text-4xl);
   font-weight: var(--font-weight-bold);
   margin-bottom: 1rem;
 }
 
 .layout-diagonal-hero p {
-  font-size: 1.1rem;
+  font-size: var(--text-lg);
   opacity: 0.9;
 }
 
 .layout-diagonal-card {
   background: var(--bg-primary);
-  border-radius: 16px;
+  border-radius: var(--radius-2xl);
   padding: 2rem;
   width: 100%;
   max-width: 400px;

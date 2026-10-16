@@ -125,7 +125,7 @@ export const SidebarMenuItemContent = ({
   return (
     <>
       {icon ? (
-        <span className="flex size-5 shrink-0 items-center justify-center text-[20px] text-[var(--nav-item-icon)] [&_svg]:size-5">
+        <span className="flex size-5 shrink-0 items-center justify-center text-xl text-[var(--nav-item-icon)] [&_svg]:size-5">
           {icon}
         </span>
       ) : isChild ? (

@@ -104,13 +104,13 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
   const verdictClass = result.would_provision ? 'text-success' : 'text-danger';
   return (
     <div className="mt-4">
-      <div className="d-flex align-items-center gap-2 mb-3">
+      <div className="flex items-center gap-2 mb-3">
         {result.would_provision ? (
           <CheckCircleIcon size={24} weight="bold" className={verdictClass} />
         ) : (
           <XCircleIcon size={24} weight="bold" className={verdictClass} />
         )}
-        <span className={`fs-5 font-medium ${verdictClass}`}>
+        <span className={`text-base font-medium ${verdictClass}`}>
           {result.would_provision
             ? translate('Would provision')
             : translate('Blocked')}

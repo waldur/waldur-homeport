@@ -69,12 +69,12 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
     if (profile.orcid_id) {
       const orcidUrl = `https://orcid.org/${profile.orcid_id}`;
       return (
-        <div className="d-flex flex-column">
+        <div className="flex flex-col">
           <a
             href={orcidUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="d-inline-flex align-items-center gap-1"
+            className="inline-flex items-center gap-1"
             aria-label={`View ORCID record - ${profile.orcid_id}`}
           >
             <OrcidLogo size={16} />
@@ -97,7 +97,7 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
 
   const renderOrcidActions = () => {
     return (
-      <div className="d-flex gap-2">
+      <div className="flex gap-2">
         {profile.orcid_id ? (
           <>
             <SyncOrcidAction profile={profile} refetch={refetch} />

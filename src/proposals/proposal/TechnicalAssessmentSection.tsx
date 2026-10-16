@@ -70,7 +70,7 @@ export const TechnicalAssessmentSection: FC<
           : translate('Feasibility decisions from the service provider.')
       }
     >
-      <div className="d-flex flex-column gap-4">
+      <div className="flex flex-col gap-4">
         {groups.map((group) => {
           const decision = group.answers.find(
             (answer) => answer.question_type === 'single_select',

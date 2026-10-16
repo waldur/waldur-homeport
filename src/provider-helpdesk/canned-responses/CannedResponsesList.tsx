@@ -53,7 +53,7 @@ const CannedTable: FC<{ helpdeskUuid?: string }> = ({ helpdeskUuid }) => {
         title: translate('Preview'),
         render: ({ row }) => (
           <span
-            className="text-quaternary text-truncate d-inline-block"
+            className="text-quaternary truncate inline-block"
             style={{ maxWidth: 320 }}
           >
             {row.text}

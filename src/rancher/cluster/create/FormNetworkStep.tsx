@@ -42,7 +42,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
       disabledTooltip={props.disabledTooltip}
       actions={
         showExperimentalUiComponents ? (
-          <div className="d-flex justify-content-end flex-grow-1">
+          <div className="flex justify-end grow">
             <BaseButton
               variant="tertiary"
               className="text-nowrap"

@@ -32,11 +32,11 @@ const ProviderOverviewContent: FC<{ providerUuid: string }> = ({
   if (!data) return null;
 
   const renderValueWithChange = (value: number, change?: number) => (
-    <div className="d-flex align-items-baseline gap-2">
-      <span style={{ fontSize: '32px' }}>{value}</span>
+    <div className="flex items-baseline gap-2">
+      <span className="text-3xl font-bold">{value}</span>
       {change !== undefined && (
         <span
-          className={`fs-7 font-normal ${change >= 0 ? 'text-success' : 'text-danger'}`}
+          className={`text-xs font-normal ${change >= 0 ? 'text-success' : 'text-danger'}`}
         >
           {change >= 0 ? '+' : ''}
           {change}

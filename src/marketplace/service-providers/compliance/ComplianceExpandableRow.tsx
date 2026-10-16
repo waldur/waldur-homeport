@@ -45,7 +45,7 @@ export const ComplianceExpandableRow: FC<{
             render: ({ row }) => (
               <Stack>
                 <Progress value={row.overall_score} className="mt-1" />
-                <small className="d-block text-end text-secondary">
+                <small className="block text-end text-secondary">
                   {row.overall_score}%
                 </small>
               </Stack>

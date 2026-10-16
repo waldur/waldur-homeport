@@ -23,7 +23,7 @@ const UsageCell: FC<{ used: number; total: number; unit?: string }> = ({
 }) => (
   <Stack style={{ minWidth: 120 }}>
     <Progress value={used} max={total} variant="indigo" />
-    <span className="text-end fs-7 text-secondary mt-1">
+    <span className="text-end text-xs text-secondary mt-1">
       {used}/{total}
       {unit ? ` ${unit}` : ''}
     </span>

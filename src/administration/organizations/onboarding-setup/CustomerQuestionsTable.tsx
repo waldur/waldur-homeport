@@ -14,7 +14,9 @@ export const CustomerQuestionsTable: FC<TableWithPortal> = ({ portal }) => {
     if (row.maps_to_customer_field) {
       return (
         <div>
-          <span className="text-tertiary fs-7">{translate('Customer')}: </span>
+          <span className="text-tertiary text-xs">
+            {translate('Customer')}:{' '}
+          </span>
           <code className="text-brand">{row.maps_to_customer_field}</code>
         </div>
       );

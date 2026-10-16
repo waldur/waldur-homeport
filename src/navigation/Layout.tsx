@@ -158,11 +158,11 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
       <InvitationCheck />
       <PermissionDataProvider>
         <ProfileCompletenessProvider>
-          <div className="d-flex flex-column flex-root print-content-only">
+          <div className="flex flex-col flex-root print-content-only">
             {PageBar && <OutstandingBar>{PageBar}</OutstandingBar>}
-            <div className="page d-flex flex-row flex-column-fluid">
+            <div className="page flex flex-row flex-column-fluid">
               <UnifiedSidebar />
-              <div className="wrapper d-flex flex-column flex-row-fluid">
+              <div className="wrapper flex flex-col flex-row-fluid">
                 <CookiesConsent />
                 {!state?.data?.hideHeader && (
                   <AppHeader hasBreadcrumbs={Boolean(breadcrumbs.length)} />
@@ -174,21 +174,18 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
                 <RemovedProjectWarningBar />
                 <GracePeriodWarningBar />
                 <div
-                  className={classNames(
-                    'content d-flex flex-column flex-grow-1',
-                    { 'full-page': fullPage },
-                  )}
+                  className={classNames('content flex flex-col grow', {
+                    'full-page': fullPage,
+                  })}
                 >
                   {PageHero && (
-                    <div className="hero w-100 d-flex flex-column">
-                      {PageHero}
-                    </div>
+                    <div className="hero w-full flex flex-col">{PageHero}</div>
                   )}
                   {showToolbar && <Toolbar actions={actions} />}
                   {ExtraToolbar && (
                     <div className="extra-toolbar">{ExtraToolbar}</div>
                   )}
-                  <div className="post w-100 d-flex flex-column-fluid">
+                  <div className="post w-full flex flex-column-fluid">
                     {state?.data?.auth && !currentUser ? (
                       <LoadingSpinner />
                     ) : (

@@ -148,7 +148,7 @@ export const OfferingMetricDialog: FC<{
                 />
               )}
               {chosen && (
-                <p className="text-quaternary fs-7">
+                <p className="text-quaternary text-xs">
                   {getKindLabel(chosen.kind)}
                   {'description' in chosen && chosen.description
                     ? ` · ${chosen.description}`

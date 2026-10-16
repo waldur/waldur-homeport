@@ -190,7 +190,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
           )}
 
           {allClaims.length > 0 ? (
-            <div className="d-flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-2 mb-4">
               {allClaims.map((claim) => (
                 <Badge
                   key={claim}
@@ -203,8 +203,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                   {values.manualClaims?.includes(claim) && (
                     <button
                       type="button"
-                      className="btn-close ms-2"
-                      style={{ fontSize: '0.5em' }}
+                      className="btn-close ms-2 scale-50"
                       onClick={() => handleRemoveManualClaim(claim)}
                       aria-label={translate('Remove')}
                     />
@@ -218,8 +217,8 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
             </p>
           )}
 
-          <div className="d-flex gap-2 align-items-start">
-            <div className="flex-grow-1">
+          <div className="flex gap-2 items-start">
+            <div className="grow">
               <input
                 type="text"
                 className="form-control"
@@ -253,7 +252,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                   'These scopes are recommended based on the discovered claim mappings.',
                 )}
               </p>
-              <div className="d-flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2">
                 {discoveryResult.suggested_scopes.map((scope) => (
                   <Badge key={scope} variant="primary" tone="outline">
                     {scope}

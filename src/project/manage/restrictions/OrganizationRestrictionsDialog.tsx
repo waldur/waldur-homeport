@@ -31,7 +31,7 @@ const RestrictionsDisplay: FC<{
   return (
     <div className="mb-4">
       <strong>{title}:</strong>
-      <div className="d-flex flex-wrap gap-2 mt-2">
+      <div className="flex flex-wrap gap-2 mt-2">
         {values.map((value) => (
           <Badge key={value} variant="neutral" tone="light">
             {value}

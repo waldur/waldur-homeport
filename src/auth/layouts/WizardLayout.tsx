@@ -51,7 +51,7 @@ export const WizardLayout = () => {
             <BaseButton
               variant="primary"
               size="lg"
-              className="w-100 mt-4"
+              className="w-full mt-4"
               onClick={() => setStep(hasSso && hasLocal ? 'method' : 'login')}
               label={translate('Get Started')}
             />

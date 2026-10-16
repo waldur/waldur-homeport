@@ -9,7 +9,7 @@ import { useFullPage } from '@/navigation/context';
 import './SidebarLayout.scss';
 
 const Container: FC<PropsWithChildren> = (props) => (
-  <div className="v-stepper-form container-xxl d-flex flex-column flex-xl-row gap-5 pb-10">
+  <div className="v-stepper-form container-xxl flex flex-col xl:flex-row gap-5 pb-10">
     {props.children}
   </div>
 );
@@ -17,7 +17,7 @@ const Container: FC<PropsWithChildren> = (props) => (
 const Body: FC<PropsWithChildren<{ className? }>> = (props) => (
   <div
     className={classNames(
-      'd-flex flex-column flex-lg-row-fluid gap-5',
+      'flex flex-col flex-lg-row-fluid gap-5',
       props.className,
     )}
   >
@@ -61,11 +61,11 @@ const Sidebar: FC<
         'v-stepper-form-sidebar',
         cardClassName,
         isVMode
-          ? props.hideOnVertical && 'd-none'
+          ? props.hideOnVertical && 'hidden'
           : 'drawer drawer-end drawer-on',
       )}
     >
-      <Card className="card-bordered w-100">
+      <Card className="card-bordered w-full">
         {props.title ? (
           <Card.Header>
             <div className="me-2">
@@ -82,11 +82,11 @@ const Sidebar: FC<
         'v-stepper-form-sidebar transparent',
         transparentClassName,
         isVMode
-          ? props.hideOnVertical && 'd-none'
+          ? props.hideOnVertical && 'hidden'
           : 'drawer drawer-end drawer-on',
       )}
     >
-      <div className="w-100">
+      <div className="w-full">
         {props.title ? <h4>{props.title}</h4> : null}
         {props.children}
       </div>

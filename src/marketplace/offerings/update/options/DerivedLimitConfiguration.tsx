@@ -47,11 +47,11 @@ export const ComponentFormulaConfiguration = ({
       >
         <FieldArray name={name} validate={requiredArray}>
           {({ fields }) => (
-            <div className="d-flex flex-column gap-3">
+            <div className="flex flex-col gap-3">
               {fields.map((field, index) => (
                 // A fixed grid, so that the columns line up whatever each
                 // row's selected component is called.
-                <div key={field} className="row g-2 align-items-start">
+                <div key={field} className="row g-2 items-start">
                   <div className="col-6">
                     <SelectGroup
                       name={`${field}.component_type`}
@@ -86,7 +86,7 @@ export const ComponentFormulaConfiguration = ({
               <BaseButton
                 variant="secondary"
                 size="sm"
-                className="align-self-start"
+                className="self-start"
                 onClick={() =>
                   fields.push({ component_type: null, formula: 'input' })
                 }

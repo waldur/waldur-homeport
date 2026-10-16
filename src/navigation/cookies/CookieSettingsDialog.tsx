@@ -28,16 +28,16 @@ const CookieCategory: FC<CookieCategoryProps> = ({
   disabled,
 }) => (
   <div className="cookie-settings-category border-b-[1px] border-b-secondary py-4">
-    <div className="d-flex align-items-start justify-content-between gap-3">
+    <div className="flex items-start justify-between gap-3">
       <div>
         <div className="font-medium">{title}</div>
-        <div className="text-quaternary fs-7">{description}</div>
+        <div className="text-quaternary text-xs">{description}</div>
       </div>
       <Switch
         aria-label={title}
         checked={value}
         disabled={disabled}
-        className="mb-0 flex-shrink-0"
+        className="mb-0 shrink-0"
       />
     </div>
   </div>
@@ -53,14 +53,14 @@ export const CookieSettingsDialog: FC<CookieSettingsDialogProps> = ({
     className="cookie-settings-dialog"
     bodyClassName="pt-0 pb-2"
     footer={
-      <div className="d-flex align-items-center justify-content-between w-100 gap-3">
+      <div className="flex items-center justify-between w-full gap-3">
         <Link
           state="about.privacy"
           label={translate('View Privacy Policy')}
           className="text-brand"
           onClick={close}
         />
-        <div className="d-flex gap-3">
+        <div className="flex gap-3">
           <CloseDialogButton className="min-w-100px" onClick={close} />
           <CloseDialogButton
             className="min-w-100px"

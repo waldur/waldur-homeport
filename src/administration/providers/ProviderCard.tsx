@@ -179,8 +179,8 @@ export const ProviderCard: FC<ProviderCardProps> = ({
   return (
     <Card className="bg-tertiary dark:bg-quaternary min-h-150px border-[1px] border-transparent hover:border-secondary cursor-pointer">
       <Card.Body className="pe-5">
-        <div className="d-flex align-items-center h-100">
-          <div className="d-flex flex-row justify-content-between h-100 flex-grow-1">
+        <div className="flex items-center h-full">
+          <div className="flex flex-row justify-between h-full grow">
             <div
               style={{
                 width: 50,
@@ -189,9 +189,9 @@ export const ProviderCard: FC<ProviderCardProps> = ({
             >
               <IdentityProviderLogo name={type} maxHeight={40} />
             </div>
-            <div className="flex-grow-1">
-              <h1 className="fs-2 text-nowrap font-bold">{title}</h1>
-              <p className="fs-6 text-primary">{description}</p>
+            <div className="grow">
+              <h1 className="text-xl text-nowrap font-bold">{title}</h1>
+              <p className="text-sm text-primary">{description}</p>
               <ProviderStatusMenu
                 provider={provider}
                 canEdit={canEdit}

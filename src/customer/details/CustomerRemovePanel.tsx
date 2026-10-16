@@ -57,7 +57,7 @@ export const CustomerRemovePanel: FunctionComponent = () => {
           <h3 className="text-danger">{translate('Remove organization')}</h3>
         </Card.Title>
       </Card.Header>
-      <Card.Body className="d-flex justify-content-between">
+      <Card.Body className="flex justify-between">
         <ul>
           <li>
             {translate(

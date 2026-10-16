@@ -89,7 +89,7 @@ const QuotaBadges = ({
 }) => {
   const [showAll, setShowAll] = useState(false);
   return (
-    <div className="d-flex flex-wrap">
+    <div className="flex flex-wrap">
       {(showAll ? quotas : quotas.slice(0, max)).map((quota) => (
         <QuotaBadge
           key={quota.name}

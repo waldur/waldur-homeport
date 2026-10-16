@@ -36,9 +36,5 @@ export const MatrixSyncStatus: FC<MatrixSyncStatusProps> = ({
 
   const { bg, text } = config[state] || config.connecting;
 
-  return (
-    <div className={`${bg} text-center py-1`} style={{ fontSize: '0.75rem' }}>
-      {text}
-    </div>
-  );
+  return <div className={`${bg} text-center py-1 text-xs`}>{text}</div>;
 };

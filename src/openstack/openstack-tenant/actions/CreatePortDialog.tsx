@@ -88,13 +88,13 @@ export const FixedIPsField: FC<{
 
   return (
     <Form.Group>
-      <div className="d-flex justify-content-between mb-5">
+      <div className="flex justify-between mb-5">
         <Form.Label className="mb-0">{translate('Fixed IPs')}</Form.Label>
         <Switch
           checked={customIpEnabled}
           onCheckedChange={toggleCustomIp}
           size="sm"
-          className="align-self-center"
+          className="self-center"
           label={translate('Custom IP configuration')}
         />
       </div>

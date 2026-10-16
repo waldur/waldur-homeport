@@ -71,7 +71,7 @@ const ReviewVerdict: FunctionComponent<{
           outputTokens={feedback.llm_judge_output_tokens}
         />
         <div className="message-body">
-          <div className="d-flex align-items-center flex-wrap gap-2 mb-1">
+          <div className="flex items-center flex-wrap gap-2 mb-1">
             {score != null && (
               <Badge
                 variant={getResolutionBadgeVariant(score)}
@@ -156,7 +156,7 @@ const InteractionTurns: FunctionComponent<{
         />
         <div className="message-body">
           {interaction.is_flagged && (
-            <div className="d-flex align-items-center gap-2 mb-1">
+            <div className="flex items-center gap-2 mb-1">
               <Tooltip
                 label={formatDetectionCategories(
                   interaction.injection_categories,
@@ -285,8 +285,8 @@ export const AnonymousChatTranscriptRow: FunctionComponent<{
   return (
     <ExpandableContainer>
       <OfflineBlockContext.Provider value={true}>
-        <div className="d-flex flex-column">
-          <div className="d-flex align-items-center gap-2 pb-2 border-b-[1px] border-b-secondary">
+        <div className="flex flex-col">
+          <div className="flex items-center gap-2 pb-2 border-b-[1px] border-b-secondary">
             <strong>{row.user_slug || row.session_id}</strong>
           </div>
           {verdict?.llm_reviewed_at && (

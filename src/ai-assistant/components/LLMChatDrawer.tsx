@@ -127,7 +127,7 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
       {/* Desktop: expand/collapse (authenticated only — the anon panel has no
           full-screen layout) */}
       {!isAnonymous && (
-        <span className="d-none d-lg-inline-flex position-relative">
+        <span className="hidden lg:inline-flex position-relative">
           <BaseButton
             iconNode={
               expanded ? (
@@ -154,7 +154,7 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
       {showHistoryToggle && (
         <>
           {/* Tablet: compact history toggle */}
-          <span className="d-none d-md-inline-flex d-lg-none">
+          <span className="hidden md:inline-flex lg:hidden">
             <BaseButton
               iconNode={<ListIcon weight="bold" />}
               tooltip={translate('History')}
@@ -165,7 +165,7 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
             />
           </span>
           {/* Mobile: large history toggle */}
-          <span className="d-inline-flex d-md-none">
+          <span className="inline-flex md:hidden">
             <BaseButton
               iconNode={<ListIcon weight="bold" />}
               tooltip={translate('History')}
@@ -234,7 +234,7 @@ export const LLMChatDrawer: React.FC<LLMChatDrawerProps> = ({ close }) => {
     <ThreadRuntimeProvider>
       <div className="aui-chat-drawer">
         <ChatHistorySidebar />
-        <div className="flex-grow-1 d-flex flex-column overflow-hidden">
+        <div className="grow flex flex-col overflow-hidden">
           <LLMErrorBoundary onClose={close}>
             <Thread />
           </LLMErrorBoundary>

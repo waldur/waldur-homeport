@@ -31,7 +31,12 @@ const NameCell: FC<{ row: ResourceProject }> = ({ row }) =>
   row.is_removed ? (
     <span className="text-quaternary">
       <s>{row.name}</s>{' '}
-      <Badge variant="danger" shape="pill" tone="outline" className="fs-8 ms-1">
+      <Badge
+        variant="danger"
+        shape="pill"
+        tone="outline"
+        className="text-xs ms-1"
+      >
         {translate('Removed')}
       </Badge>
     </span>

@@ -119,10 +119,10 @@ export const CustomerDashboard: FunctionComponent = () => {
           {showTerminatedSwitch && (
             <Col
               xs={12}
-              className="d-flex flex-wrap align-items-center justify-content-end gap-3 mb-5"
+              className="flex flex-wrap items-center justify-end gap-3 mb-5"
             >
               {includeTerminated && (
-                <span className="text-quaternary fs-7">
+                <span className="text-quaternary text-xs">
                   {translate(
                     "Terminated resources' usage is shown separately and does not count against limits: for the current month in the usage widgets, and for each offering's limit period in the per-offering views.",
                   )}

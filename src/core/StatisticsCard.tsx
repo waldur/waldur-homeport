@@ -16,7 +16,7 @@ export const StatisticsCard: React.FC<StatisticsCardProps> = ({
   to,
 }) => (
   <Card className="card-bordered mb-5">
-    <Card.Body className="d-flex d-md-block justify-content-between align-items-center">
+    <Card.Body className="flex md:block justify-between items-center">
       {to && (
         <div className="buttons text-end order-2">
           <Link state={to.state} params={to.params} buttonVariant="tertiary">
@@ -25,8 +25,8 @@ export const StatisticsCard: React.FC<StatisticsCardProps> = ({
         </div>
       )}
       <div className="mb-4 order-1">
-        <strong className="d-block display-4 text-success">{value}</strong>
-        <strong className="d-block mb-2">{title}</strong>
+        <strong className="block display-4 text-success">{value}</strong>
+        <strong className="block mb-2">{title}</strong>
       </div>
     </Card.Body>
   </Card>

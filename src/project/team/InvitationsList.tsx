@@ -60,7 +60,7 @@ const InvitationsListComponent: FunctionComponent = () => {
         {
           title: translate('Email'),
           render: ({ row }) => (
-            <div className="d-flex align-items-center gap-1">
+            <div className="flex items-center gap-1">
               <Avatar name={row?.email} size={32} circle />
               {row.email}
               <CopyToClipboardButton value={row.email} />

@@ -79,7 +79,7 @@ export const TableSidebarFilterValues = ({
               )
             }
             tone="outline"
-            className="fs-7"
+            className="text-xs"
           >
             {badgeValue(value)}
           </Badge>
@@ -101,7 +101,7 @@ export const TableSidebarFilterValues = ({
               )
             }
             tone="outline"
-            className="filter-value fs-7"
+            className="filter-value text-xs"
             style={!ellipsis ? { maxWidth: 'unset' } : undefined}
           >
             {getValueLabel(v)}
@@ -121,7 +121,7 @@ export const TableSidebarFilterValues = ({
           )
         }
         tone="outline"
-        className="filter-value fs-7"
+        className="filter-value text-xs"
         style={!ellipsis ? { maxWidth: 'unset' } : undefined}
       >
         {getValueLabel(value)}
@@ -459,16 +459,16 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
           <>
             <div className="separator" />
             <div className="filter-footer px-[12px] pt-[8px]">
-              <div className="d-flex gap-4">
+              <div className="flex gap-4">
                 <BaseButton
                   variant="tertiary"
-                  className="flex-grow-1 w-50"
+                  className="grow w-50"
                   onClick={closeMenu}
                   label={translate('Cancel')}
                   size="lg"
                 />
                 <BaseButton
-                  className="flex-grow-1 w-50"
+                  className="grow w-50"
                   onClick={() => onApply()}
                   label={translate('Apply')}
                   variant="primary"
@@ -527,16 +527,16 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
               <div>
                 {open && (
                   <div className="filter-footer px-[12px] pt-[8px]">
-                    <div className="d-flex gap-4">
+                    <div className="flex gap-4">
                       <BaseButton
                         variant="tertiary"
-                        className="flex-grow-1 w-50"
+                        className="grow w-50"
                         onClick={() => setOpen(false)}
                         label={translate('Cancel')}
                         size="lg"
                       />
                       <BaseButton
-                        className="flex-grow-1 w-50"
+                        className="grow w-50"
                         onClick={() => onApply()}
                         label={translate('Apply')}
                         variant="primary"

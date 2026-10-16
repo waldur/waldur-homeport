@@ -258,7 +258,7 @@ const AllocationOutcome: FC<{
       }
       defaultOpen
     >
-      <Row className="fs-6 mb-4">
+      <Row className="text-sm mb-4">
         <Col sm={project ? 6 : 12}>
           <Field
             label={translate('Project')}
@@ -308,7 +308,7 @@ const AllocationOutcome: FC<{
                 {
                   title: translate('Awarded'),
                   render: ({ row }: { row: OutcomeRow }) => (
-                    <div className="d-flex flex-wrap gap-2 align-items-center">
+                    <div className="flex flex-wrap gap-2 items-center">
                       {row.awardedName && <span>{row.awardedName}</span>}
                       {row.change && row.change !== 'unchanged' && (
                         <AwardChangeBadge change={row.change} />

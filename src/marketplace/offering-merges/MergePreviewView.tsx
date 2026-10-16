@@ -33,7 +33,7 @@ const getPriceDifferences = (warnings: OfferingMergeIssue[]) =>
     );
 
 const IssueCode: FC<{ code: string }> = ({ code }) => (
-  <code className="fs-8 ms-2">{code}</code>
+  <code className="text-xs ms-2">{code}</code>
 );
 
 interface MergePreviewViewProps {
@@ -64,7 +64,7 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
   const prices = getPriceDifferences(warnings);
 
   return (
-    <div className="d-flex flex-column gap-5">
+    <div className="flex flex-col gap-5">
       <section>
         <SectionHeading
           title={translate('Blockers')}
@@ -79,7 +79,7 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
             title={translate('Nothing blocks this merge.')}
           />
         ) : (
-          <div className="d-flex flex-column gap-2">
+          <div className="flex flex-col gap-2">
             {blockers.map((blocker, index) => (
               <AlertItem
                 key={`${blocker.code}-${index}`}
@@ -107,7 +107,7 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
         {warnings.length === 0 ? (
           <p className="text-quaternary mb-0">{translate('No warnings.')}</p>
         ) : (
-          <div className="d-flex flex-column gap-2">
+          <div className="flex flex-col gap-2">
             {warnings.map((warning, index) => (
               <AlertItem
                 key={`${warning.code}-${index}`}

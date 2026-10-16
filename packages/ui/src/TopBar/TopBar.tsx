@@ -99,7 +99,7 @@ export const OrgSwitcher = ({
     {children && (
       <Menu.Content
         align="start"
-        className="py-[12px] text-[14px] font-medium min-w-[200px]"
+        className="py-[12px] text-sm font-medium min-w-[200px]"
       >
         {children}
       </Menu.Content>

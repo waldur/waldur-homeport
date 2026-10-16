@@ -35,14 +35,14 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
       })}
       disabled={!isAllowed}
     >
-      <Card className="card-bordered h-100 overflow-hidden cursor-pointer border-hover-brand">
+      <Card className="card-bordered h-full overflow-hidden cursor-pointer border-hover-brand">
         {/* Image header */}
         <div className="image-card-header">
           {image ? (
             <img
               alt={offering.name}
               src={image}
-              className="w-100 h-100"
+              className="w-full h-full"
               style={{
                 objectFit: offering.image ? 'cover' : 'contain',
                 padding: offering.image ? 0 : '10px',
@@ -56,7 +56,7 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
         </div>
 
         {/* Content: avatar + title */}
-        <Card.Body className="p-4 d-flex align-items-center gap-3">
+        <Card.Body className="p-4 flex items-center gap-3">
           {offering.thumbnail ? (
             <Image src={offering.thumbnail} size={48} isContain circle />
           ) : (
@@ -65,17 +65,15 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
             </ImagePlaceholder>
           )}
           <div className="overflow-hidden">
-            <div className="ellipsis" style={{ fontSize: 16 }}>
-              {offering.name}
-            </div>
-            <div className="text-quaternary ellipsis" style={{ fontSize: 14 }}>
+            <div className="ellipsis text-base">{offering.name}</div>
+            <div className="text-quaternary ellipsis text-sm">
               {offering.customer_name}
             </div>
           </div>
         </Card.Body>
 
         {/* Footer */}
-        <Card.Footer className="py-4 px-5 d-flex justify-content-end gap-4">
+        <Card.Footer className="py-4 px-5 flex justify-end gap-4">
           <CardRequestAccessButton
             offering={offering}
             orderDisabledReason={isDisabled ? disabledButtonTooltip : undefined}

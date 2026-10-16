@@ -32,7 +32,7 @@ export const Panel: React.FC<PropsWithChildren<PanelProps>> = ({
   >
     {title && (
       <Card.Header>
-        <div className="d-flex flex-column">
+        <div className="flex flex-col">
           <Card.Title className="mb-0">
             <h3 className={titleClassName}>{title}</h3>
           </Card.Title>
@@ -40,7 +40,7 @@ export const Panel: React.FC<PropsWithChildren<PanelProps>> = ({
             <Card.Subtitle
               className={classNames('text-quaternary mt-1', subtitleClassName)}
             >
-              <p className="fs-6 mb-0">{subtitle}</p>
+              <p className="text-sm mb-0">{subtitle}</p>
             </Card.Subtitle>
           )}
         </div>

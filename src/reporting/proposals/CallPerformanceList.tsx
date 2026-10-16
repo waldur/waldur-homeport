@@ -53,12 +53,12 @@ const ReviewProgressColumn: FC<{ row: CallPerformanceStat }> = ({ row }) => {
       : 0;
 
   return (
-    <div className="d-flex flex-column gap-1">
-      <div className="d-flex align-items-center gap-2">
+    <div className="flex flex-col gap-1">
+      <div className="flex items-center gap-2">
         <span>
           {row.reviews_completed}/{row.total_reviews}
         </span>
-        <span className="text-quaternary fs-8">({progress}%)</span>
+        <span className="text-quaternary text-xs">({progress}%)</span>
       </div>
     </div>
   );
@@ -68,9 +68,9 @@ const columns: Column<CallPerformanceStat>[] = [
   {
     title: translate('Call'),
     render: ({ row }) => (
-      <div className="d-flex flex-column">
+      <div className="flex flex-col">
         <span>{row.call_name}</span>
-        <span className="text-quaternary fs-8">
+        <span className="text-quaternary text-xs">
           {row.managing_organization_name}
         </span>
       </div>

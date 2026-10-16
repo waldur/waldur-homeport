@@ -183,7 +183,7 @@ const BulkActions: FC<BulkActionsProps> = ({ rows, refetch }) => {
   }
 
   return (
-    <div className="d-flex gap-2 align-items-center">
+    <div className="flex gap-2 items-center">
       <span className="text-quaternary me-2">
         {translate('{count} selected', { count: rows.length })}
       </span>
@@ -266,7 +266,7 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
         title: translate('Reviewer'),
         render: ({ row }: { row: ReviewerSuggestion }) => (
           <div>
-            <div className="d-flex align-items-center gap-2">
+            <div className="flex items-center gap-2">
               <span className="font-medium">{row.reviewer_name}</span>
               <BaseButton
                 variant="secondary"
@@ -334,7 +334,7 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
           }
 
           return (
-            <div className="d-flex flex-column gap-1">
+            <div className="flex flex-col gap-1">
               {matchedKeywords.length > 0 && (
                 <div>
                   <small className="text-quaternary">

@@ -311,7 +311,7 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
   ) : null;
 
   const labelCell = (
-    <span className="d-inline-flex align-items-center">
+    <span className="inline-flex items-center">
       {labelContent}
       {marketplaceIcon}
     </span>
@@ -465,7 +465,7 @@ export const SetQuotasDialog: FC<SetQuotasDialogProps> = ({
                             <tr className="table-active">
                               <td
                                 colSpan={5}
-                                className="font-medium text-quaternary fs-7"
+                                className="font-medium text-quaternary text-xs"
                               >
                                 {categoryLabel}
                               </td>

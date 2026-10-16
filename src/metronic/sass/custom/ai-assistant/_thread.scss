@@ -250,7 +250,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
     color: $text-muted;
   }
 }
@@ -357,7 +357,7 @@
 
 .aui-message-error-message {
   color: var(--status-danger-fg);
-  font-size: 1rem;
+  font-size: var(--text-sm);
   flex: 1;
 }
 
@@ -570,7 +570,7 @@
 
 .aui-error-title {
   margin-bottom: 1rem;
-  font-size: 1.1rem;
+  font-size: var(--text-lg);
   font-weight: var(--font-weight-semibold);
   text-align: center;
 }
@@ -578,9 +578,9 @@
 .aui-error-details {
   background-color: var(--bg-tertiary);
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-lg);
   margin-bottom: 1rem;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
 }
 
 .aui-error-summary {
@@ -589,7 +589,7 @@
 }
 
 .aui-error-stack {
-  font-size: 0.75rem;
+  font-size: var(--text-xs);
   overflow: auto;
   margin-top: 0.5rem;
   color: var(--text-secondary);
@@ -597,7 +597,7 @@
 
 .aui-error-message {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
   margin-bottom: 1rem;
   text-align: center;
 }
@@ -611,9 +611,9 @@
 .aui-error-btn {
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-lg);
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
 
   &--primary {
     background-color: var(--bg-brand-solid);
@@ -638,7 +638,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  font-size: 1rem;
+  font-size: var(--text-sm);
   color: var(--text-secondary);
 }
 

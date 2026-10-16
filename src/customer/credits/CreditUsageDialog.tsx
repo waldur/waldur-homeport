@@ -101,7 +101,7 @@ export const CreditUsageDialog: FC<CreditUsageDialogProps> = (props) => {
   }, [filter]);
 
   const footer = (
-    <div className="d-flex justify-content-end">
+    <div className="flex justify-end">
       <strong>
         {translate('Total price')}: {defaultCurrency(totalPrice)}
       </strong>

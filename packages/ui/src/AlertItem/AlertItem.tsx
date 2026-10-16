@@ -99,13 +99,13 @@ export const AlertItem = forwardRef<HTMLDivElement, AlertItemProps>(
         />
         <div className="grow">
           <div className="flex items-center flex-wrap gap-[0.616rem] mb-[0.308rem]">
-            <h6 className="m-0 text-[1.077rem] font-medium leading-[1.43] text-primary">
+            <h6 className="m-0 text-sm font-medium leading-5 text-primary">
               {title}
             </h6>
             {titleAfter}
           </div>
           {Boolean(body) && (
-            <div className="text-[1.077rem] font-normal leading-[1.43] text-quaternary">
+            <div className="text-sm font-normal leading-5 text-quaternary">
               {body}
             </div>
           )}

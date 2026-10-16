@@ -12,8 +12,8 @@ export const StepHeaderContent: FC<StepHeaderContentProps> = ({
   metadata,
   isRequired = true,
 }) => (
-  <div className="d-flex align-items-center gap-2">
-    {metadata && <span className="text-quaternary fs-7">{metadata}</span>}
+  <div className="flex items-center gap-2">
+    {metadata && <span className="text-quaternary text-xs">{metadata}</span>}
     {isCompleted ? (
       <CheckCircleIcon weight="bold" className="text-success" size={20} />
     ) : isRequired ? (

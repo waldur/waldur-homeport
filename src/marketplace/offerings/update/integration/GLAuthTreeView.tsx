@@ -291,7 +291,7 @@ const NodeRow: FC<NodeRendererProps<TreeNodeData>> = ({
     <div
       ref={dragHandle}
       style={positionStyle}
-      className={`ldap-tree-row d-flex align-items-stretch ${
+      className={`ldap-tree-row flex items-stretch ${
         node.isSelected ? 'bg-brand-subtle' : ''
       }`}
       onClick={handleToggle}
@@ -306,7 +306,7 @@ const NodeRow: FC<NodeRendererProps<TreeNodeData>> = ({
         <span
           key={i}
           aria-hidden="true"
-          className="ldap-tree-guide flex-shrink-0 border-[color:var(--color-gray-300)] dark:border-[color:var(--color-gray-dark-600)]"
+          className="ldap-tree-guide shrink-0 border-[color:var(--color-gray-300)] dark:border-[color:var(--color-gray-dark-600)]"
           style={{
             width: INDENT_PX,
             borderLeftWidth: 1,
@@ -315,9 +315,9 @@ const NodeRow: FC<NodeRendererProps<TreeNodeData>> = ({
           }}
         />
       ))}
-      <div className="d-flex align-items-center px-2 py-1 flex-grow-1 min-w-0">
+      <div className="flex items-center px-2 py-1 grow min-w-0">
         <span
-          className="me-1 text-quaternary d-inline-flex"
+          className="me-1 text-quaternary inline-flex"
           style={{ width: 14 }}
         >
           {hasChildren ? (
@@ -329,7 +329,7 @@ const NodeRow: FC<NodeRendererProps<TreeNodeData>> = ({
           ) : null}
         </span>
         <span
-          className={`me-2 d-inline-flex ${
+          className={`me-2 inline-flex ${
             isWaldur ? 'text-info' : 'text-tertiary'
           }`}
         >
@@ -338,10 +338,10 @@ const NodeRow: FC<NodeRendererProps<TreeNodeData>> = ({
         <span
           className={
             isAttr || isWaldur
-              ? `small text-truncate font-monospace ${
+              ? `small truncate font-monospace ${
                   isWaldur ? 'fst-italic text-info' : 'text-secondary'
                 }`
-              : 'text-brand text-truncate font-monospace'
+              : 'text-brand truncate font-monospace'
           }
           title={
             isWaldur
@@ -357,7 +357,7 @@ const NodeRow: FC<NodeRendererProps<TreeNodeData>> = ({
           <Badge
             variant={data.badge.variant}
             tone={data.badge.tone}
-            className="ms-2 flex-shrink-0"
+            className="ms-2 shrink-0"
           >
             {data.badge.text}
           </Badge>

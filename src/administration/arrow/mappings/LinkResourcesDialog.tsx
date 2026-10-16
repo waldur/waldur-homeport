@@ -42,7 +42,7 @@ export const LinkResourcesDialog: FC<LinkResourcesDialogProps> = ({
           loadData={refetch}
         />
       ) : data ? (
-        <div className="d-flex flex-column gap-6">
+        <div className="flex flex-col gap-6">
           {/* Explanation */}
           <AlertItem
             type="floating"
@@ -79,7 +79,7 @@ export const LinkResourcesDialog: FC<LinkResourcesDialogProps> = ({
             )}
 
           {/* Close button */}
-          <div className="d-flex justify-content-end">
+          <div className="flex justify-end">
             <BaseButton
               onClick={closeDialog}
               variant="secondary"

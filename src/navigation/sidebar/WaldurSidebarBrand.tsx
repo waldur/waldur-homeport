@@ -112,7 +112,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
           className="max-h-7 max-w-[190px] group-data-[collapsible=icon]/panel:sr-only"
         />
       ) : (
-        <h3 className="m-0 truncate text-[18px] font-semibold text-[var(--nav-item-text)] group-data-[collapsible=icon]/panel:sr-only">
+        <h3 className="m-0 truncate text-lg font-semibold text-[var(--nav-item-text)] group-data-[collapsible=icon]/panel:sr-only">
           {ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
         </h3>
       )}
@@ -146,7 +146,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
           <Menu.Item
             key={shortcut.uuid}
             asChild
-            className="d-flex align-items-center py-5 ps-6 pe-2 position-relative"
+            className="flex items-center py-5 ps-6 pe-2 position-relative"
           >
             <a href={shortcut.link} target="_blank" rel="noopener noreferrer">
               {/* Show separator line only if there are multiple items and not the last item */}
@@ -164,7 +164,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
                   size={42}
                 />
               </div>
-              <div className="flex-grow-1 fs-4">
+              <div className="grow text-base">
                 <div className="font-semibold">{shortcut.name}</div>
                 {shortcut.description && (
                   <div className="font-normal text-quaternary mt-3">

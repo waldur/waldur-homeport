@@ -39,6 +39,7 @@ export const ImagePlaceholder: FC<PropsWithChildren<ImagePlaceholderProps>> = ({
         minWidth,
         height,
         backgroundColor,
+        // eslint-disable-next-line waldur-custom/require-font-size-scale -- Dynamic font-size calculated proportionally to placeholder width
         fontSize: getPlaceholderFontSize(width) + 'px',
       }}
     >

@@ -57,11 +57,11 @@ export const OfferingTosTable: FC<OfferingTosTableProps> = memo(
             <div>
               <button
                 type="button"
-                className="text-anchor d-block text-start"
+                className="text-anchor block text-start"
                 onClick={() => openViewDialog(row)}
               >
                 {row.version || 'v1.0'}
-                <span className="text-anchor small d-block mt-2">
+                <span className="text-anchor small block mt-2">
                   {formatDate(row.created)}
                 </span>
               </button>

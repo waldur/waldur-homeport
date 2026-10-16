@@ -19,7 +19,7 @@ export const OrganizationGroupDetailsDialog: FunctionComponent<
         orgName: props.resolve.organizationGroup.name,
       })}
       footer={
-        <div className="flex-grow-1 d-flex justify-content-between">
+        <div className="grow flex justify-between">
           <CloseDialogButton label={translate('Done')} />
         </div>
       }

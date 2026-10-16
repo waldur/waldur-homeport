@@ -71,7 +71,7 @@ export const SlurmPolicyEvaluateDialog: FC<SlurmPolicyEvaluateDialogProps> = ({
     <ModalDialog
       title={translate('Policy evaluation (staff)')}
       footer={
-        <div className="d-flex gap-2">
+        <div className="flex gap-2">
           <CloseDialogButton />
           <BaseButton
             variant="secondary"

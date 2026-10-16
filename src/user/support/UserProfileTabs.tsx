@@ -541,7 +541,7 @@ const buildGeographicFields = ({
             nationalitiesProps.renderValue ||
             ((value) =>
               Array.isArray(value) && value.length > 0 ? (
-                <span className="d-flex flex-wrap gap-2">
+                <span className="flex flex-wrap gap-2">
                   {(value as string[]).map((code) => (
                     <Badge key={code} variant="neutral" tone="light">
                       <CountryFlag countryCode={code} fontSize={14} /> {code}
@@ -818,7 +818,7 @@ const buildSystemFields = ({
         <FormTable.Item
           label={translate('Assurance levels')}
           value={
-            <span className="d-flex flex-wrap gap-2">
+            <span className="flex flex-wrap gap-2">
               {(Array.isArray(user.eduperson_assurance)
                 ? user.eduperson_assurance
                 : []
@@ -948,7 +948,7 @@ const buildStaffFields = ({
         <FormTable.Item
           label={translate('Identity provider claims')}
           value={
-            <div className="d-flex flex-column gap-1">
+            <div className="flex flex-col gap-1">
               {claims.map(([claim, value]) => (
                 <div key={claim}>
                   <span className="me-2">{claim}</span>

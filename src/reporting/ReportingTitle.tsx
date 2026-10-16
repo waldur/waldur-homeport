@@ -52,11 +52,11 @@ export const ReportingTitle: FC<ReportingTitleProps> = ({
   return (
     <div
       className={classNames(
-        'table-standalone-header d-flex justify-content-between align-items-center gap-4 mb-5',
+        'table-standalone-header flex justify-between items-center gap-4 mb-5',
         showControlsOnMobile && 'flex-wrap',
       )}
     >
-      <div className="d-flex align-items-center gap-4">
+      <div className="flex items-center gap-4">
         {backState && (
           <Link
             state={backState}
@@ -70,9 +70,9 @@ export const ReportingTitle: FC<ReportingTitleProps> = ({
           </Link>
         )}
         <div>
-          <h1 className="mb-0 fs-1x">{report.title}</h1>
+          <h1 className="mb-0 text-2xl">{report.title}</h1>
           {description && (
-            <p className="text-quaternary fs-7 mb-0 mt-1">{description}</p>
+            <p className="text-quaternary text-xs mb-0 mt-1">{description}</p>
           )}
         </div>
       </div>
@@ -80,7 +80,7 @@ export const ReportingTitle: FC<ReportingTitleProps> = ({
         <div
           className={classNames(
             'gap-4',
-            showControlsOnMobile ? 'd-flex' : 'd-none d-sm-flex',
+            showControlsOnMobile ? 'flex' : 'hidden sm:flex',
           )}
         >
           {children}

@@ -79,7 +79,7 @@ const ArrayBadges: FC<{ values: unknown }> = ({ values }) => {
   if (!values || !Array.isArray(values) || values.length === 0)
     return <span>—</span>;
   return (
-    <div className="d-flex flex-wrap gap-1">
+    <div className="flex flex-wrap gap-1">
       {values.map((item, index) => (
         <Badge key={index} variant="primary" size="sm" tone="outline">
           {String(item)}
@@ -229,8 +229,8 @@ export const OrganizationResourcesTable: FC<
             <Link state="project.dashboard" params={{ uuid: row.project_uuid }}>
               {renderFieldOrDash(row.project_name)}
             </Link>
-            <div className="d-flex align-items-center text-quaternary fs-8 mt-1">
-              <span className="text-truncate" style={{ maxWidth: '150px' }}>
+            <div className="flex items-center text-quaternary text-xs mt-1">
+              <span className="truncate" style={{ maxWidth: '150px' }}>
                 {formatUuidNoDashes(row.project_uuid)}
               </span>
               {row.project_uuid && (
@@ -255,8 +255,8 @@ export const OrganizationResourcesTable: FC<
             >
               {renderFieldOrDash(row.name || row.offering_name)}
             </Link>
-            <div className="d-flex align-items-center text-quaternary fs-8 mt-1">
-              <span className="text-truncate" style={{ maxWidth: '150px' }}>
+            <div className="flex items-center text-quaternary text-xs mt-1">
+              <span className="truncate" style={{ maxWidth: '150px' }}>
                 {formatUuidNoDashes(row.uuid)}
               </span>
               {row.uuid && (

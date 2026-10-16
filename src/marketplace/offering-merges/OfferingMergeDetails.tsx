@@ -72,10 +72,10 @@ export const OfferingMergeDetails: FC = () => {
   }
 
   return (
-    <div className="d-flex flex-column gap-5">
+    <div className="flex flex-col gap-5">
       <Card>
-        <Card.Body className="d-flex flex-column gap-4">
-          <div className="d-flex flex-wrap justify-content-between align-items-start gap-3">
+        <Card.Body className="flex flex-col gap-4">
+          <div className="flex flex-wrap justify-between items-start gap-3">
             <div>
               <h2 className="mb-1">
                 {translate('Merge into {target}', {
@@ -84,7 +84,7 @@ export const OfferingMergeDetails: FC = () => {
               </h2>
               <OfferingMergeStateBadge state={merge.state} />
             </div>
-            <div className="d-flex gap-3">
+            <div className="flex gap-3">
               {canManage && isEditable(merge.state) && (
                 <BaseButton
                   label={translate('Continue in wizard')}
@@ -104,7 +104,7 @@ export const OfferingMergeDetails: FC = () => {
             <FormTable.Item
               label={translate('Sources')}
               value={
-                <div className="d-flex flex-column">
+                <div className="flex flex-col">
                   {merge.source_offerings.map((offering) => (
                     <Link
                       key={offering.uuid}
@@ -149,7 +149,7 @@ export const OfferingMergeDetails: FC = () => {
 
       <Card>
         <Card.Header>
-          <Card.Title className="d-flex align-items-center gap-2">
+          <Card.Title className="flex items-center gap-2">
             {translate('Mappings')}
             <HelpTip label={getMappingsHelp()} />
           </Card.Title>
@@ -161,7 +161,7 @@ export const OfferingMergeDetails: FC = () => {
 
       <Card>
         <Card.Header>
-          <Card.Title className="d-flex align-items-center gap-2">
+          <Card.Title className="flex items-center gap-2">
             {translate('Preview')}
             <HelpTip label={getChangesHelp()} />
           </Card.Title>

@@ -94,7 +94,7 @@ export const ManagedProjectDetail = () => {
     <>
       <Card className="mb-4">
         <Card.Body>
-          <div className="d-flex justify-content-between align-items-start mb-3">
+          <div className="flex justify-between items-start mb-3">
             <h3 className="mb-0">
               {details?.name || row.identifier || translate('Unnamed project')}
             </h3>
@@ -197,7 +197,7 @@ export const ManagedProjectDetail = () => {
         </Card.Header>
         <Card.Body>
           {details?.members && Object.keys(details.members).length > 0 ? (
-            <div className="d-flex flex-column gap-1">
+            <div className="flex flex-col gap-1">
               {Object.entries(details.members).map(([email, role]) => (
                 <Field key={email} label={email} value={role} />
               ))}
@@ -258,7 +258,7 @@ export const ManagedProjectDetail = () => {
         </Card.Header>
         <Card.Body>
           {details?.notes && details.notes.length > 0 ? (
-            <div className="d-flex flex-column gap-2">
+            <div className="flex flex-col gap-2">
               {details.notes.map((note, index) => (
                 <div
                   key={index}

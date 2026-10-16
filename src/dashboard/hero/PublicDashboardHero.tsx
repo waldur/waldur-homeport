@@ -42,11 +42,11 @@ export const PublicDashboardHero: FC<
         <Col
           md={props.hideQuickSection ? undefined : 6}
           sm={props.hideQuickSection ? undefined : 12}
-          className="d-flex"
+          className="flex"
         >
           <Card
             className={classNames(
-              'w-100 mb-md-0 mb-4',
+              'w-full mb-md-0 mb-4',
               props.cardBordered && 'card-bordered',
             )}
           >
@@ -57,7 +57,7 @@ export const PublicDashboardHero: FC<
                 style={{ height: 160, objectFit: 'cover' }}
               />
             )}
-            <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch flex-grow-1">
+            <Card.Body className="flex flex-col sm:flex-row items-stretch grow">
               {props.logo || props.logoAlt ? (
                 <Tooltip label={props.logoTooltip}>
                   <span>
@@ -72,18 +72,16 @@ export const PublicDashboardHero: FC<
               ) : null}
               {/* min-w-0: a flex item won't shrink below its longest word, so an
                   unbroken name would push the details out of the card */}
-              <div className="d-flex flex-column flex-grow-1 gap-2 min-w-0">
-                <div className="d-flex flex-sm-row flex-column-reverse align-items-sm-center gap-3">
+              <div className="flex flex-col grow gap-2 min-w-0">
+                <div className="flex sm:flex-row flex-col-reverse sm:items-center gap-3">
                   {/* Title */}
-                  <div className="flex-grow-1 min-w-0">{props.title}</div>
+                  <div className="grow min-w-0">{props.title}</div>
                   {/* Actions */}
                   {props.actions && (
                     <div
                       className={classNames(
-                        props.mobileBottomActions
-                          ? 'd-none d-sm-flex'
-                          : 'd-flex',
-                        'flex-shrink-0 flex-wrap align-self-stretch align-self-sm-start justify-content-sm-end gap-3',
+                        props.mobileBottomActions ? 'hidden sm:flex' : 'flex',
+                        'shrink-0 flex-wrap self-stretch sm:self-start sm:justify-end gap-3',
                       )}
                     >
                       {props.actions}
@@ -98,7 +96,7 @@ export const PublicDashboardHero: FC<
                 )}
                 {/* Actions - at the end */}
                 {props.actions && props.mobileBottomActions && (
-                  <div className="d-sm-none d-flex flex-wrap align-self-stretch align-self-sm-start justify-content-sm-end gap-3">
+                  <div className="sm:hidden flex flex-wrap self-stretch sm:self-start sm:justify-end gap-3">
                     {props.actions}
                   </div>
                 )}
@@ -108,14 +106,14 @@ export const PublicDashboardHero: FC<
         </Col>
 
         {!props.hideQuickSection && (
-          <Col md={6} sm={12} className="d-flex">
+          <Col md={6} sm={12} className="flex">
             <Card
               className={classNames(
-                'flex-grow-1',
+                'grow',
                 props.cardBordered && 'card-bordered',
               )}
             >
-              <Card.Body className="d-flex flex-column">
+              <Card.Body className="flex flex-col">
                 <Row>
                   <Col xs>{props.quickBody}</Col>
                   {/* Quick actions */}
@@ -126,7 +124,7 @@ export const PublicDashboardHero: FC<
                 {props.quickFooter && (
                   <div
                     className={classNames(
-                      'flex-grow-1 d-flex align-items-end',
+                      'grow flex items-end',
                       props.quickFooterClassName,
                       'mt-5',
                     )}

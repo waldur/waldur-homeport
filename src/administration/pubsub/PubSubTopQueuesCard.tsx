@@ -55,7 +55,7 @@ export const PubSubTopQueuesCard: FC = () => {
             {data.top_queues_by_messages.map((queue, index) => (
               <tr key={index}>
                 <td className="text-quaternary">{queue.vhost}</td>
-                <td className="text-truncate" style={{ maxWidth: '250px' }}>
+                <td className="truncate" style={{ maxWidth: '250px' }}>
                   {queue.name}
                 </td>
                 <td

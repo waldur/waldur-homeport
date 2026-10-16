@@ -47,7 +47,7 @@ export const LdapAgentEnvPreview: FC<LdapAgentEnvPreviewProps> = ({
     <ModalDialog
       title={translate('LDAP Agent Environment')}
       footer={
-        <div className="d-flex justify-content-between w-100">
+        <div className="flex justify-between w-full">
           <BaseButton
             variant="tertiary"
             onClick={onBack}
@@ -55,7 +55,7 @@ export const LdapAgentEnvPreview: FC<LdapAgentEnvPreviewProps> = ({
             label={translate('Back')}
             size="lg"
           />
-          <div className="d-flex gap-2">
+          <div className="flex gap-2">
             <BaseButton
               variant="tertiary"
               onClick={handleCopy}

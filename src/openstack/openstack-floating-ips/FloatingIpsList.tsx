@@ -104,7 +104,7 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
       title={translate('Floating IPs')}
       showPageSizeSelector
       tableActions={
-        <div className="d-flex gap-2">
+        <div className="flex gap-2">
           <PullFloatingIpsAction resource={resourceScope} />
           <CreateFloatingIpAction
             resource={resourceScope}

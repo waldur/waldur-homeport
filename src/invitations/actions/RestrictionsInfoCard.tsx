@@ -164,13 +164,13 @@ export const RestrictionsInfoCard: FC<RestrictionsInfoCardProps> = ({
   return (
     <AccordionCard
       title={
-        <span className="d-flex align-items-center gap-2 text-warning">
+        <span className="flex items-center gap-2 text-warning">
           <WarningCircleIcon weight="bold" size={20} />
           {translate('Membership restrictions apply')}
         </span>
       }
       className={classNames('bg-warning-subtle', className || 'mb-5')}
-      titleClassName="fs-6"
+      titleClassName="text-sm"
       size="sm"
     >
       <p className="text-quaternary mb-4">

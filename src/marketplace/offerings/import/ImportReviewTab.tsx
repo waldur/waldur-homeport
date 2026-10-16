@@ -29,7 +29,7 @@ export const ImportReviewTab = () => {
   if (!formData?.customer) return null;
 
   return (
-    <div className="d-flex flex-column gap-1">
+    <div className="flex flex-col gap-1">
       <Field
         label={translate('Organization')}
         value={renderFieldOrDash(formData.customer.name)}
@@ -50,13 +50,13 @@ export const ImportReviewTab = () => {
         </label>
         <table className="table align-middle table-row-bordered mb-3">
           <thead>
-            <tr className="text-quaternary fs-7 font-medium">
+            <tr className="text-quaternary text-xs font-medium">
               <td>{translate('Remote category')}</td>
               <td>{translate('Offerings')}</td>
               <td>{translate('Local category')}</td>
             </tr>
           </thead>
-          <tbody className="fs-6">
+          <tbody className="text-sm">
             {tableData.map((data) => (
               <tr key={data.uuid}>
                 <td className="text-primary">{data.remote_category}</td>

@@ -60,13 +60,13 @@ export const CustomerDashboardChart: FunctionComponent<
               cardTitle={
                 <>
                   {costChart.chart.title}
-                  <small className="text-quaternary fs-7 ms-4 font-normal">
+                  <small className="text-quaternary text-xs ms-4 font-normal">
                     ({translate('Current month’s cost')}:{' '}
                     {costChart.chart.current})
                   </small>
                 </>
               }
-              className="h-100"
+              className="h-full"
             >
               <EChart options={costChart.options} />
             </WidgetCard>
@@ -91,7 +91,7 @@ export const CustomerDashboardChart: FunctionComponent<
               onAddClick={callback}
               showAdd={canInvite}
               loadingAdd={loadingProjects}
-              className="h-100"
+              className="h-full"
             />
           </Col>
         )}

@@ -76,7 +76,7 @@ export const DatabaseReplicationCard: FC<DatabaseReplicationCardProps> = ({
         </tbody>
       </Table>
       {hasReplicationLag && (
-        <small className="text-warning mt-3 d-block">
+        <small className="text-warning mt-3 block">
           {translate(
             'Replica is behind primary. Check network connectivity and primary load.',
           )}

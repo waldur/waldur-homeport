@@ -32,7 +32,7 @@ export const BackendIdField = ({
     <Field
       label={label}
       value={
-        <span className="d-flex align-items-center gap-2">
+        <span className="flex items-center gap-2">
           <span>{highlightedId}</span>
           <CopyToClipboardButton value={highlightedId} onlyButton />
         </span>

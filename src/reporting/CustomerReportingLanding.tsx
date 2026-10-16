@@ -15,21 +15,21 @@ import {
 const ReportCard: FC<{ report: ReportDefinition }> = ({ report }) => {
   const Glyph = report.icon;
   return (
-    <Card className="card-bordered h-100">
-      <Card.Body className="d-flex flex-column gap-4 p-4">
-        <div className="d-flex align-items-center gap-3">
+    <Card className="card-bordered h-full">
+      <Card.Body className="flex flex-col gap-4 p-4">
+        <div className="flex items-center gap-3">
           {Glyph && (
-            <div className="icon-square flex-shrink-0">
+            <div className="icon-square shrink-0">
               <Glyph size={24} weight="bold" />
             </div>
           )}
-          <span className="text-primary fs-5">{report.title}</span>
+          <span className="text-primary text-base">{report.title}</span>
         </div>
         <p className="text-quaternary mb-0">
           {report.scopedDescription || report.description}
         </p>
       </Card.Body>
-      <Card.Footer className="d-flex justify-content-end py-3 px-4">
+      <Card.Footer className="flex justify-end py-3 px-4">
         <Link state={report.state}>{translate('View details')}</Link>
       </Card.Footer>
     </Card>

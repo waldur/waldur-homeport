@@ -47,7 +47,7 @@ export const ComponentPrepaidFieldGroup: FC<{
       />
       {isPrepaid ? (
         <>
-          <Row className="g-5 mb-5 align-items-end">
+          <Row className="g-5 mb-5 items-end">
             <Col xs>
               <NumberGroup
                 name="min_prepaid_duration"
@@ -70,7 +70,7 @@ export const ComponentPrepaidFieldGroup: FC<{
               />
             </Col>
           </Row>
-          <Row className="g-5 mb-5 align-items-end">
+          <Row className="g-5 mb-5 items-end">
             <Col xs>
               <NumberGroup
                 name="min_renewal_duration"

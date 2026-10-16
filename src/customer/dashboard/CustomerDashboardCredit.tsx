@@ -65,7 +65,7 @@ export const CustomerDashboardCredit = ({
         cardTitle={
           <>
             {chart.title}
-            <small className="text-quaternary fs-7 ms-4 font-normal">
+            <small className="text-quaternary text-xs ms-4 font-normal">
               (
               {translate('{date} balance', {
                 date: formatDate(DateTime.now().startOf('month')),
@@ -88,7 +88,7 @@ export const CustomerDashboardCredit = ({
             callback: viewDetails,
           },
         ]}
-        className="h-100"
+        className="h-full"
       >
         <EChart options={options} height="130px" />
       </WidgetCard>

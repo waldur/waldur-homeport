@@ -95,7 +95,7 @@ const ResourceHealthDetails: FC<{ row: ResourceHealth }> = ({ row }) => {
                 {policyTypeLabel}
                 {attribution.scope_name && <> — {attribution.scope_name}</>}
                 {attribution.timestamp && (
-                  <span className="d-block text-quaternary">
+                  <span className="block text-quaternary">
                     {formatMediumDateTime(attribution.timestamp)}
                   </span>
                 )}

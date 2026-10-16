@@ -82,7 +82,7 @@ export const HelpdeskOverviewPage: FC = () => {
 
   return (
     <Card className="card-bordered">
-      <Card.Header className="d-flex justify-content-between align-items-center">
+      <Card.Header className="flex justify-between items-center">
         <Card.Title>{translate('Helpdesk overview')}</Card.Title>
         <BaseButton
           label={translate('Validate')}
@@ -100,7 +100,7 @@ export const HelpdeskOverviewPage: FC = () => {
             value={value}
             isStuck
             labelClass="min-w-150px"
-            className="fs-6"
+            className="text-sm"
           />
         ))}
       </Card.Body>

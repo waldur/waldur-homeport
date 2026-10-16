@@ -38,7 +38,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
     <tr key={i} className={props.className} data-testid={props['data-testid']}>
       {i === 0 && props.description ? (
         <th className={row ? 'col-md-4' : 'col-md-auto'} rowSpan={titleRowSpan}>
-          <div className="d-flex align-items-center">
+          <div className="flex items-center">
             <label htmlFor={props.htmlFor} className="title mb-0">
               {props.label}
               {props.required && <span className="text-danger ms-1">*</span>}
@@ -79,7 +79,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
         </th>
       ) : i === 0 && props.label ? (
         <th className="title col-md-3" rowSpan={titleRowSpan}>
-          <div className="d-flex align-items-center">
+          <div className="flex items-center">
             <label htmlFor={props.htmlFor} className="mb-0">
               {props.label}
               {props.required && <span className="text-danger ms-1">*</span>}
@@ -143,7 +143,7 @@ const FormTableCard: FormTableCardProps = (props) => {
             )}
           </Card.Title>
           {props.actions && (
-            <div className="card-toolbar flex-grow-1 justify-content-end gap-3">
+            <div className="card-toolbar grow justify-end gap-3">
               {props.actions}
             </div>
           )}

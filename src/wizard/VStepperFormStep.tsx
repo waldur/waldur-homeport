@@ -86,11 +86,11 @@ export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
       {props.disabled && <div className="step-blocker" />}
       <fieldset className="step-fieldset" disabled={props.disabled}>
         <Card.Header className="gap-2">
-          <div className="d-flex align-items-center me-2">
+          <div className="flex items-center me-2">
             <div>
               <h4 className="mb-0">{props.title}</h4>
               {props.subtitle && (
-                <small className="fs-6 font-normal d-block mt-2">
+                <small className="text-sm font-normal block mt-2">
                   {props.subtitle}
                 </small>
               )}
@@ -104,9 +104,7 @@ export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
               </div>
             )}
           </div>
-          {props.actions && (
-            <div className="d-flex ms-auto">{props.actions}</div>
-          )}
+          {props.actions && <div className="flex ms-auto">{props.actions}</div>}
         </Card.Header>
         <Card.Body>
           <StepDisabledNotice

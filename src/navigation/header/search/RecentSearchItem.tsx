@@ -21,7 +21,7 @@ export const RecentSearchItem = ({ item }) => {
 
   return (
     <Link
-      className="d-flex text-brand align-items-center py-2 px-5 hover:bg-[var(--bg-brand-primary-alt)]"
+      className="flex text-brand items-center py-2 px-5 hover:bg-[var(--bg-brand-primary-alt)]"
       state={item.to}
       params={item.params}
       onClick={() => {
@@ -50,7 +50,7 @@ export const RecentSearchItem = ({ item }) => {
           className="text-secondary me-4"
         />
       )}
-      <span className="fs-6 flex-grow-1">{item.title}</span>
+      <span className="text-sm grow">{item.title}</span>
       <ArrowClockwiseIcon size={20} className="text-primary" weight="bold" />
     </Link>
   );

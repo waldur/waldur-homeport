@@ -92,11 +92,11 @@ export const DrawerRoot: FunctionComponent = () => {
           }
         }}
       >
-        <div className="card shadow-none rounded-0 w-100">
+        <div className="card shadow-none rounded-none w-full">
           <div className="card-header" id="kt_drawer_header">
             <div>
               <Dialog.Title asChild>
-                <h3 className="card-title font-semibold text-primary fs-3">
+                <h3 className="card-title font-semibold text-primary text-lg">
                   {drawerProps.title}
                 </h3>
               </Dialog.Title>

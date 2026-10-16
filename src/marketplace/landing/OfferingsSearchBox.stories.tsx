@@ -60,7 +60,7 @@ const StoryRouter = ({ children }: { children: ReactNode }) => {
 const CurrentPage = () => {
   const { state, params } = useCurrentStateAndParams();
   return (
-    <p className="mt-4 text-[13px] text-quaternary">
+    <p className="mt-4 text-xs text-quaternary">
       Current page:{' '}
       <span data-testid="current-page">
         {state?.name === DETAILS_STATE

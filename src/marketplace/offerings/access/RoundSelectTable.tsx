@@ -64,9 +64,9 @@ export const RoundSelectTable: FC<RoundSelectTableProps> = ({
               id: 'call',
               title: translate('Call'),
               render: ({ row }: { row: SubmittableRound }) => (
-                <span className="d-flex flex-column">
+                <span className="flex flex-col">
                   <span className="font-medium">{row.call.name}</span>
-                  <span className="text-quaternary fs-7">
+                  <span className="text-quaternary text-xs">
                     {row.call.customer_name}
                   </span>
                 </span>
@@ -77,7 +77,7 @@ export const RoundSelectTable: FC<RoundSelectTableProps> = ({
           id: 'cutoff',
           title: translate('Submission closes'),
           render: ({ row }: { row: SubmittableRound }) => (
-            <span className="d-flex flex-column">
+            <span className="flex flex-col">
               <span>{formatDate(row.round.cutoff_time)}</span>
               {/* Without the column, two rows from different calls would be
                   told apart only by date — and two calls can share one. This
@@ -86,7 +86,7 @@ export const RoundSelectTable: FC<RoundSelectTableProps> = ({
                   organisation instead: the same disambiguation without the
                   word the rest of this flow has dropped. */}
               {!showCallColumn && spansSeveralCalls && spansSeveralOrgs ? (
-                <span className="text-quaternary fs-7">
+                <span className="text-quaternary text-xs">
                   {row.call.customer_name}
                 </span>
               ) : null}

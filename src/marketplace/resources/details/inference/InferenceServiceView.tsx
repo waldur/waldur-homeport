@@ -31,7 +31,7 @@ const CredentialRow: FC<{ label: string; children: ReactNode }> = ({
   children,
 }) => (
   <div className="mb-5">
-    <div className="text-tertiary fs-7 mb-1">{label}</div>
+    <div className="text-tertiary text-xs mb-1">{label}</div>
     <div className="font-medium">{children}</div>
   </div>
 );
@@ -45,7 +45,7 @@ const EndpointCard: FC<{ endpoint: string }> = ({ endpoint }) => (
     </Card.Header>
     <Card.Body>
       <CredentialRow label={translate('Endpoint')}>
-        <div className="d-flex align-items-center gap-1">
+        <div className="flex items-center gap-1">
           <span className="text-break">{endpoint}</span>
           <CopyToClipboardButton value={endpoint} />
         </div>
@@ -74,11 +74,11 @@ const PlaygroundCard: FC<{
   };
   return (
     <Card className="card-bordered">
-      <Card.Header className="d-flex justify-content-between align-items-center">
+      <Card.Header className="flex justify-between items-center">
         <Card.Title>
           <h3>{translate('Playground')}</h3>
         </Card.Title>
-        <div className="d-flex align-items-center gap-2">
+        <div className="flex items-center gap-2">
           {open && (
             <ModelSelect
               models={modelState.models}

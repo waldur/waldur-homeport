@@ -20,9 +20,7 @@ export const COIConfirmationBody: FC<COIConfirmationBodyProps> = ({
   <div>
     <p>{intro}</p>
     <div className="mb-3">
-      <strong className="d-block mb-2">
-        {translate('What happens next:')}
-      </strong>
+      <strong className="block mb-2">{translate('What happens next:')}</strong>
       <ul className="coi-consequences-list mb-0">
         {consequences.map((consequence, index) => (
           <li key={index}>{consequence}</li>

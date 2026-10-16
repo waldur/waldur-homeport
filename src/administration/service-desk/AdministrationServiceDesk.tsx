@@ -67,7 +67,7 @@ const isProviderConfigured = (provider: string, settings) =>
 const AtlassianSummary = ({ settings }) => {
   const apiUrl = getConfiguredValue(settings, 'ATLASSIAN_API_URL') as string;
   return (
-    <p className="fs-6 text-primary">
+    <p className="text-sm text-primary">
       {settings.ATLASSIAN_PROJECT_ID
         ? translate('{site}, service desk {project}', {
             site: getAtlassianSiteName(apiUrl),
@@ -118,10 +118,10 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
   return (
     // Cards in a row share its height; the menu sits at the bottom so the
     // buttons line up however long the description is.
-    <Card className="bg-tertiary dark:bg-quaternary min-h-150px h-100 border-[1px] border-transparent hover:border-secondary cursor-pointer">
-      <Card.Body className="pe-5 d-flex">
-        <div className="d-flex flex-grow-1">
-          <div className="d-flex flex-row justify-content-between flex-grow-1">
+    <Card className="bg-tertiary dark:bg-quaternary min-h-150px h-full border-[1px] border-transparent hover:border-secondary cursor-pointer">
+      <Card.Body className="pe-5 flex">
+        <div className="flex grow">
+          <div className="flex flex-row justify-between grow">
             <div
               style={{
                 width: 50,
@@ -130,14 +130,14 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
             >
               <ServiceDeskProviderLogo name={serviceDeskProvider} />
             </div>
-            <div className="flex-grow-1 d-flex flex-column">
-              <h1 className="fs-2 text-nowrap font-bold">
+            <div className="grow flex flex-col">
+              <h1 className="text-xl text-nowrap font-bold">
                 {capitalize(serviceDeskProvider)}
               </h1>
               {isAtlassian && isConfigured ? (
                 <AtlassianSummary settings={initialValues} />
               ) : (
-                <p className="fs-6 text-primary">
+                <p className="text-sm text-primary">
                   {translate(
                     '{supportServiceProvider} service desk.',
                     {

@@ -59,7 +59,7 @@ const CommentAvatar = ({ comment }) => {
         name={comment.author_name}
         size={32}
         circle
-        labelClassName={`fs-5 font-medium ${AVATAR_COLOR_CLASSES[color] || AVATAR_COLOR_CLASSES.primary}`}
+        labelClassName={`text-base font-medium ${AVATAR_COLOR_CLASSES[color] || AVATAR_COLOR_CLASSES.primary}`}
       />
     </div>
   );
@@ -82,13 +82,13 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
       <div className="timeline-line w-30px" />
       <CommentAvatar comment={comment} />
       <div className="timeline-content">
-        <div className="d-flex justify-content-between gap-5 gap-md-20">
+        <div className="flex justify-between gap-5 gap-md-20">
           <div>
-            <div className="fs-7 text-quaternary">
+            <div className="text-xs text-quaternary">
               <button
                 onClick={openUserDialog}
                 type="button"
-                className="text-btn text-secondary font-medium hover:text-brand fs-6 me-3"
+                className="text-btn text-secondary font-medium hover:text-brand text-sm me-3"
               >
                 {comment.author_name}
               </button>
@@ -102,7 +102,7 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
                 </span>
               )}
             </div>
-            <div className="fs-6 text-quaternary">
+            <div className="text-sm text-quaternary">
               {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE ===
               'atlassian' ? (
                 <FormattedJira text={comment.description} />

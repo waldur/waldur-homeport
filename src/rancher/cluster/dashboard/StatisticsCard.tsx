@@ -9,8 +9,8 @@ interface StatisticsCardProps {
 export const StatisticsCard: FC<StatisticsCardProps> = ({ title, value }) => (
   <Card className="card-bordered mb-5">
     <Card.Body>
-      <span className="d-block text-quaternary mb-3">{title}</span>
-      <h1 className="d-block fs-1x mb-0 text-primary">{value}</h1>
+      <span className="block text-quaternary mb-3">{title}</span>
+      <h1 className="block text-2xl mb-0 text-primary">{value}</h1>
     </Card.Body>
   </Card>
 );

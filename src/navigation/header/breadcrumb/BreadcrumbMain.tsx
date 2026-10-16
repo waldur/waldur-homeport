@@ -17,7 +17,7 @@ export const BreadcrumbMain = ({ mobile = false }: { mobile?: boolean }) => {
     return (
       <div
         className={classNames(
-          'breadcrumb-container d-flex align-items-center flex-grow-1',
+          'breadcrumb-container flex items-center grow',
           mobile && 'breadcrumb-mobile container-fluid',
         )}
       >

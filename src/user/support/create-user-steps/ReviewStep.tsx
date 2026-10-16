@@ -47,7 +47,7 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
           <tr>
             <td
               colSpan={2}
-              className="font-semibold text-uppercase text-quaternary fs-7 pb-2 pt-0"
+              className="font-semibold text-uppercase text-quaternary text-xs pb-2 pt-0"
             >
               {translate('Account')}
             </td>
@@ -88,7 +88,7 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
           <tr>
             <td
               colSpan={2}
-              className="font-semibold text-uppercase text-quaternary fs-7 pb-2 pt-6"
+              className="font-semibold text-uppercase text-quaternary text-xs pb-2 pt-6"
             >
               {translate('Personal information')}
             </td>
@@ -137,7 +137,7 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
               <tr>
                 <td
                   colSpan={2}
-                  className="font-semibold text-uppercase text-quaternary fs-7 pb-2 pt-6"
+                  className="font-semibold text-uppercase text-quaternary text-xs pb-2 pt-6"
                 >
                   {translate('Identity & Profile')}
                 </td>

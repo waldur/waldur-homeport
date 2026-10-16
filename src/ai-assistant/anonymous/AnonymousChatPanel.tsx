@@ -21,7 +21,7 @@ export const AnonymousChatPanel: FC<AnonymousChatPanelProps> = ({ close }) => {
 
   return (
     <AnonymousThreadRuntimeProvider>
-      <div className="h-100 w-100 d-flex flex-column">
+      <div className="h-full w-full flex flex-col">
         <LLMErrorBoundary onClose={close}>
           <AnonymousThread />
         </LLMErrorBoundary>

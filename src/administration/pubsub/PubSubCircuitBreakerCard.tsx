@@ -150,7 +150,7 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                         </Badge>
                       </td>
                       <td
-                        className="text-quaternary text-truncate"
+                        className="text-quaternary truncate"
                         title={transition.reason}
                       >
                         {transition.reason}

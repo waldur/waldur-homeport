@@ -17,7 +17,7 @@ export const PublicResourcesLimits = ({
   return (
     <div className="text-nowrap">
       {keyValues.map((keyValue, index) => (
-        <span key={index} className="d-block">
+        <span key={index} className="block">
           {keyValue}
         </span>
       ))}

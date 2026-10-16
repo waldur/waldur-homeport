@@ -30,7 +30,7 @@ export default meta;
 type Story = StoryObj;
 
 const Row = ({ children }) => (
-  <div className="d-flex flex-wrap gap-4 mb-6">{children}</div>
+  <div className="flex flex-wrap gap-4 mb-6">{children}</div>
 );
 
 /** Every status, in the plain title-only form most of the app uses today. */

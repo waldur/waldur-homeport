@@ -137,7 +137,7 @@ export const UserPosixIdentitiesDialog: FC<{
         <CloseDialogButton label={translate('Close')} className="w-150px" />
       }
     >
-      <p className="text-secondary fs-7 mb-2">
+      <p className="text-secondary text-xs mb-2">
         {translate(
           'All POSIX identifiers across the offering accounts. A UID is allocated once per pool, so the accounts on every offering of a provider that has no override pool share one row.',
         )}

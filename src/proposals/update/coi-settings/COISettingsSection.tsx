@@ -161,7 +161,7 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
   return (
     <TabbedSection
       title={
-        <span className="d-flex align-items-center gap-2">
+        <span className="flex items-center gap-2">
           {translate('COI configuration')}
           <Tooltip
             label={translate('Conflict of Interest')}

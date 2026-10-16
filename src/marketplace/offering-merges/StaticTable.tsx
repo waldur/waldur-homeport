@@ -70,7 +70,7 @@ export function StaticTable<RowType>({
     return content;
   }
   return (
-    <div className="d-flex flex-column gap-3">
+    <div className="flex flex-col gap-3">
       <SectionHeading title={title} help={help} className="mb-0" />
       {content}
     </div>

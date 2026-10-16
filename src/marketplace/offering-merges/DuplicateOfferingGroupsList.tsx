@@ -77,14 +77,14 @@ const DuplicateOfferingsExpandableRow: FC<{ row: DuplicateOfferingGroup }> = ({
   return (
     <ExpandableContainer>
       {issues.length > 0 && (
-        <div className="d-flex flex-column gap-2 mb-4">
+        <div className="flex flex-col gap-2 mb-4">
           {issues.map(({ issue, variant }, index) => (
             <AlertItem
               key={`${issue.code}-${index}`}
               variant={variant}
               title={
                 <>
-                  {issue.message} <code className="fs-8">{issue.code}</code>
+                  {issue.message} <code className="text-xs">{issue.code}</code>
                 </>
               }
             />

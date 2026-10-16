@@ -28,7 +28,7 @@ export const CarouselOfferingGrid: FC<CarouselOfferingGridProps> = ({
 }) => {
   if (tableProps.loading) {
     return centeredSpinner ? (
-      <div className="d-flex justify-content-center py-4 w-100">
+      <div className="flex justify-center py-4 w-full">
         <LoadingSpinner />
       </div>
     ) : (

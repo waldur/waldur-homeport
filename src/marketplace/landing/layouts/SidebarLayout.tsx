@@ -54,8 +54,8 @@ export const SidebarLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
   return (
     <div className="sidebar-layout">
       <div className="container-fluid py-6">
-        <div className="d-flex justify-content-between align-items-center mb-6">
-          <h1 className="mb-0 fs-1x">{title}</h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="mb-0 text-2xl">{title}</h1>
           <FilterBox
             type="search"
             placeholder={translate('Search offerings...')}

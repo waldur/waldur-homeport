@@ -103,16 +103,14 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
             </Card.Title>
           )}
           {actions && (
-            <div className="card-toolbar flex-grow-1 justify-content-end gap-3">
-              {actions}
-            </div>
+            <div className="card-toolbar grow justify-end gap-3">{actions}</div>
           )}
         </Card.Header>
       )}
       <Card.Body>
         <Tabs value={activeKey} onValueChange={handleSelect} mount="active">
           {enableSearch && (
-            <div className="d-flex justify-content-end mb-3">
+            <div className="flex justify-end mb-3">
               <TableQuery query={query} setQuery={setQuery} />
             </div>
           )}

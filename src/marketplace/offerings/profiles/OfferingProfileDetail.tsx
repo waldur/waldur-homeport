@@ -59,7 +59,7 @@ export const OfferingProfileDetail: FC = () => {
       </Card>
 
       <Card>
-        <Card.Header className="d-flex align-items-center justify-content-between">
+        <Card.Header className="flex items-center justify-between">
           <h5 className="mb-0">{translate('Role catalog')}</h5>
           {isStaff && (
             <BaseButton
@@ -184,7 +184,7 @@ const AddRoleToProfileDialog: FC<{
 
   return (
     <div
-      className="modal show d-block"
+      className="modal show block"
       style={{ background: 'rgba(0,0,0,0.4)' }}
       tabIndex={-1}
     >
@@ -202,7 +202,7 @@ const AddRoleToProfileDialog: FC<{
                 {roles.map((r: any) => (
                   <li
                     key={r.uuid}
-                    className="list-group-item d-flex justify-content-between align-items-center"
+                    className="list-group-item flex justify-between items-center"
                   >
                     <span>
                       {r.name}

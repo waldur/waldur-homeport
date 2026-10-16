@@ -7,9 +7,9 @@ import { ExtendedUserAction } from './types';
 
 export const ActionContext: FC<{ row: ExtendedUserAction }> = ({ row }) => {
   return (
-    <div className="d-flex align-items-center gap-3 flex-wrap mt-2">
+    <div className="flex items-center gap-3 flex-wrap mt-2">
       {row.organization_name && row.organization_uuid && (
-        <div className="d-flex align-items-center gap-1">
+        <div className="flex items-center gap-1">
           <span className="text-quaternary small">
             {translate('Organization')}:
           </span>
@@ -22,7 +22,7 @@ export const ActionContext: FC<{ row: ExtendedUserAction }> = ({ row }) => {
         </div>
       )}
       {row.project_name && row.project_uuid && (
-        <div className="d-flex align-items-center gap-1">
+        <div className="flex items-center gap-1">
           <span className="text-quaternary small">{translate('Project')}:</span>
           <Link
             state="project.dashboard"
@@ -33,7 +33,7 @@ export const ActionContext: FC<{ row: ExtendedUserAction }> = ({ row }) => {
         </div>
       )}
       {row.offering_name && (
-        <div className="d-flex align-items-center gap-1">
+        <div className="flex items-center gap-1">
           <span className="text-quaternary small">
             {translate('Offering')}:
           </span>

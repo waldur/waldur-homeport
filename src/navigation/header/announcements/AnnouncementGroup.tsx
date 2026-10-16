@@ -26,17 +26,17 @@ export const AnnouncementGroup: FC<AnnouncementGroupProps> = ({
         onClick={() => setExpanded((value) => !value)}
         aria-expanded={expanded}
       >
-        <div className="container-fluid d-flex align-items-center gap-3">
+        <div className="container-fluid flex items-center gap-3">
           <div className="icon-square">
             <InfoIcon weight="bold" />
           </div>
-          <div className="flex-grow-1 text-start">
-            <strong className="font-medium d-block fs-6">
+          <div className="grow text-start">
+            <strong className="font-medium block text-sm">
               {translate('{count} announcements', {
                 count: announcements.length,
               })}
             </strong>
-            <span className="text-quaternary fs-6">
+            <span className="text-quaternary text-sm">
               {translate('Planned maintenance windows and service updates')}
             </span>
           </div>

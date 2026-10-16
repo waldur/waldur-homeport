@@ -160,7 +160,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
             <td colSpan={2} className="text-end font-medium">
               {translate('Total')}
             </td>
-            <td className="text-end text-nowrap font-medium fs-5">
+            <td className="text-end text-nowrap font-medium text-base">
               {defaultCurrency(data.total)}
             </td>
           </tr>

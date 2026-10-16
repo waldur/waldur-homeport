@@ -136,7 +136,7 @@ export const SubmitReviewDialog: FC<SubmitReviewDialogProps> = ({
                     <label className="form-label" htmlFor={ratingId}>
                       {translate('Rate')}
                     </label>
-                    <div className="d-flex align-items-center gap-4">
+                    <div className="flex items-center gap-4">
                       <div id={ratingId}>
                         <RateStars
                           count={5}

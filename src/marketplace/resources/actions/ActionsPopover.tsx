@@ -11,7 +11,7 @@ import { loadData } from './loadData';
 import { ModalActionsDialog } from './ModalActionsDialog';
 
 const ModalMessage: FC<PropsWithChildren> = ({ children }) => (
-  <div className="justify-content-center mx-5 my-5">
+  <div className="justify-center mx-5 my-5">
     <div className="mx-auto">{children}</div>
   </div>
 );

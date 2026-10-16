@@ -101,7 +101,7 @@ export const TenantTopologyTab: FC<Props> = ({ resource, resourceScope }) => {
 
   return (
     <Card>
-      <Card.Header className="d-flex justify-content-between align-items-center">
+      <Card.Header className="flex justify-between items-center">
         <Card.Title className="mb-0">{translate('Topology')}</Card.Title>
         <TopologyExport
           getSvg={getSvg}

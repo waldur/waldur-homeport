@@ -106,7 +106,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
             onClick={props.saveAsDraft}
             label={translate('Save as draft')}
             variant="secondary"
-            className="w-100 mt-2"
+            className="w-full mt-2"
             disabled={props.submitting || !props.hasUnsavedChanges}
             disabledReason={
               props.submitting
@@ -117,7 +117,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
             size="lg"
           />
           {props.hasUnsavedChanges && !props.isSaving && (
-            <p className="d-flex align-items-center justify-content-center gap-1 text-warning fs-6 mt-2 mb-0">
+            <p className="flex items-center justify-center gap-1 text-warning text-sm mt-2 mb-0">
               <WarningCircleIcon size={16} weight="bold" />
               {translate('You have unsaved changes')}
             </p>

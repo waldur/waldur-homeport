@@ -314,7 +314,7 @@ export const SystemUsageTab: FC = () => {
   return (
     <Container fluid className="py-4">
       {/* ── Toolbar ────────────────────────────────────────────────────── */}
-      <div className="d-flex align-items-center gap-3 mb-4 flex-wrap">
+      <div className="flex items-center gap-3 mb-4 flex-wrap">
         <h4 className="mb-0">{translate('System Usage Report')}</h4>
 
         {allResources.length > 1 && (
@@ -351,7 +351,7 @@ export const SystemUsageTab: FC = () => {
           </Form.Select>
         )}
 
-        <div className="ms-auto d-flex align-items-center gap-2">
+        <div className="ms-auto flex items-center gap-2">
           <BaseButton
             variant="secondary"
             size="sm"

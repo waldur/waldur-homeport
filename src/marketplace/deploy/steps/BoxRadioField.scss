@@ -47,8 +47,8 @@
         display: block;
         overflow: hidden;
         cursor: pointer;
-        border-top-left-radius: 0.35rem;
-        border-top-right-radius: 0.35rem;
+        border-top-left-radius: var(--radius-md);
+        border-top-right-radius: var(--radius-md);
 
         .box-radio-media {
           overflow: hidden;
@@ -59,7 +59,7 @@
           justify-content: center;
           height: 60px;
           font-weight: var(--font-weight-bold);
-          font-size: 2rem;
+          font-size: var(--text-2xl);
         }
 
         img,

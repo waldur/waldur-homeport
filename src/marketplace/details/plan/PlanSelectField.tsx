@@ -36,7 +36,7 @@ export const PlanSelectField: FunctionComponent<PlanSelectFieldProps> = (
   const formatOptionLabel =
     distinctModes.size > 1
       ? (plan: BasePublicPlan) => (
-          <span className="d-inline-flex align-items-center gap-2">
+          <span className="inline-flex items-center gap-2">
             {plan.name}
             <PlanBillingModeBadge
               mode={getPlanBillingMode(props.offering, plan)}

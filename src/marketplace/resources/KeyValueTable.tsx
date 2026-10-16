@@ -6,7 +6,7 @@ import { translate } from '@/i18n';
 export const KeyValueTable: FunctionComponent<any> = (props) => (
   <Table
     bordered={true}
-    className="table align-middle table-row-bordered fs-6 gy-4 no-footer"
+    className="table align-middle table-row-bordered text-sm gy-4 no-footer"
   >
     <thead>
       <tr className="align-middle">

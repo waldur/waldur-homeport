@@ -11,7 +11,7 @@ import { renderFieldOrDash } from '@/table/utils';
 
 const UserInputs = ({ callOffering, optionsValues }) => (
   <section>
-    <table className="table-details w-100">
+    <table className="table-details w-full">
       <tbody>
         {callOffering.options?.order?.map((key) => (
           <tr key={key}>
@@ -64,7 +64,7 @@ export const ResourceRequestExpandableRow = ({
           what a reviewer is actually here for — behind a sideways scroll.
           Laid out with the same Field the details overview above uses, so the
           two blocks on one page read as the same kind of thing. */}
-      <Row className="fs-6 mb-4">
+      <Row className="text-sm mb-4">
         <Col sm={6}>
           <Field
             label={translate('Provider')}

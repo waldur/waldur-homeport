@@ -13,11 +13,11 @@ export const AdminAccessInfoCard: FC<AdminAccessInfoCardProps> = ({
 }) => (
   <Card className="card-bordered mb-4">
     <Card.Body>
-      <div className="d-flex align-items-center gap-3">
+      <div className="flex items-center gap-3">
         <ShieldCheckIcon size={32} weight="duotone" className="text-brand" />
         <div>
           <h5 className="mb-1">{translate('Administrative staff')}</h5>
-          <p className="text-quaternary mb-0 fs-7">{description}</p>
+          <p className="text-quaternary mb-0 text-xs">{description}</p>
         </div>
       </div>
     </Card.Body>

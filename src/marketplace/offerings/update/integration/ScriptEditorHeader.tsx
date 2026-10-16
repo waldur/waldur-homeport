@@ -119,7 +119,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
 
   return (
     <>
-      <div className="d-flex gap-4">
+      <div className="flex gap-4">
         <Select
           options={SCRIPT_ROWS.slice(1)}
           value={script}
@@ -201,7 +201,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
             return (
               <Menu.Item
                 key={option.type + option.value}
-                className="d-flex justify-content-between"
+                className="flex justify-between"
                 asChild={option.type === 'link'}
               >
                 {option.type === 'link' ? (

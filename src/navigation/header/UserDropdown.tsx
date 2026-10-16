@@ -36,24 +36,24 @@ const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
     <button
       ref={ref}
       type="button"
-      className="cursor-pointer border-0 bg-transparent d-flex align-items-center gap-4 py-2 px-2"
+      className="cursor-pointer border-0 bg-transparent flex items-center gap-4 py-2 px-2"
       aria-label={translate('User menu')}
       {...props}
     >
-      <div className="cursor-pointer symbol symbol-30px symbol-md-40px justify-content-center">
+      <div className="cursor-pointer symbol symbol-30px symbol-md-40px justify-center">
         {!user ? (
           <ImagePlaceholder width="40px" height="40px" circle />
         ) : (
           <Avatar src={user.image} name={user.full_name} size={40} circle />
         )}
       </div>
-      <div className="d-none d-md-flex flex-column align-items-start justify-content-center">
+      <div className="hidden md:flex flex-col items-start justify-center">
         {!user?.is_staff && (
-          <span className="text-quaternary fs-7 lh-1 mb-2">
+          <span className="text-quaternary text-xs leading-none mb-2">
             {translate('Hello')}
           </span>
         )}
-        <span className="text-primary fs-base font-medium lh-1">
+        <span className="text-primary text-base font-medium leading-none">
           {user ? user.first_name : translate('Guest')}
         </span>
         {user?.is_staff && (
@@ -62,7 +62,7 @@ const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
             size="sm"
             shape="pill"
             tone="outline"
-            className="align-items-end mt-1"
+            className="items-end mt-1"
           >
             {translate('Staff')}
           </Badge>
@@ -83,18 +83,18 @@ const UserMenuHeader = ({ user }: { user: ReturnType<typeof useUser> }) => (
         <Avatar src={user.image} name={user.full_name} size={40} circle />
       )}
     </div>
-    <div className="d-flex flex-column">
-      <div className="font-semibold d-flex align-items-center fs-5">
+    <div className="flex flex-col">
+      <div className="font-semibold flex items-center text-base">
         {user ? user.full_name : translate('Guest')}
       </div>
       {user ? (
         // The classes the email had as a Link (Link's text-anchor, which
         // replaced text-muted): the brand link colour.
-        <span className="font-medium hover:text-brand fs-7 text-anchor">
+        <span className="font-medium hover:text-brand text-xs text-anchor">
           {user.email}
         </span>
       ) : (
-        <span className="font-medium text-quaternary fs-7">
+        <span className="font-medium text-quaternary text-xs">
           {translate('Not signed in')}
         </span>
       )}
@@ -109,7 +109,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
       <Menu.Trigger asChild>
         <UserMenuToggle />
       </Menu.Trigger>
-      <Menu.Content align="end" className="font-medium py-4 fs-6 w-275px">
+      <Menu.Content align="end" className="font-medium py-4 text-sm w-275px">
         {/* The header: a row that links to the profile, so the keyboard
             reaches it like any other row. */}
         {user ? (

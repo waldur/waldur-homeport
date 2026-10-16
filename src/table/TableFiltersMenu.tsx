@@ -451,7 +451,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
               // w-375px: matches TableFilterItem.tsx's own single-filter
               // flyout (same kind of content — one filter's field), wide
               // enough for an AsyncSelect's search box and option list.
-              className="table-filters-menu font-medium fs-6 w-375px"
+              className="table-filters-menu font-medium text-sm w-375px"
             >
               {props.filters}
             </MenuPopover.Content>
@@ -491,7 +491,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
               // above then returns focus to the "+" trigger.
               onKeyDown={(e) => closeFlyoutOnTabOut(e, () => setOpen(false))}
               align="start"
-              className="table-filters-menu font-medium py-1 fs-6 w-250px"
+              className="table-filters-menu font-medium py-1 text-sm w-250px"
             >
               <SaveFilterItems
                 table={props.table}

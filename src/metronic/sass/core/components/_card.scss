@@ -33,7 +33,8 @@
       font-size: $h3-font-size;
       font-weight: $font-weight-bolder;
 
-      &.flex-column {
+      &.flex-column,
+      &.flex-col {
         align-items: flex-start;
         justify-content: center;
       }

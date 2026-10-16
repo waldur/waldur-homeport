@@ -133,10 +133,10 @@ export const ReviewerProfilePanel = ({
     <Tabs value={activeTab} onValueChange={(key) => onTabChange(key as TabKey)}>
       <Card className="card-bordered">
         <Card.Header className="border-b-0 pt-4">
-          <div className="d-flex flex-column flex-lg-row w-100 gap-4">
+          <div className="flex flex-col lg:flex-row w-full gap-4">
             {/* Left side: Title, refresh, and status badges */}
-            <div className="d-flex flex-column">
-              <div className="d-flex align-items-center gap-2 mb-2">
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2 mb-2">
                 <h3 className="mb-0">{translate('Reviewer profile')}</h3>
                 {profile.is_published ? (
                   <Badge variant="success" tone="outline">
@@ -163,7 +163,7 @@ export const ReviewerProfilePanel = ({
                 />
               </div>
               {profile.is_published && profile.published_at && (
-                <span className="text-quaternary font-normal fs-7">
+                <span className="text-quaternary font-normal text-xs">
                   {translate('Published {date}', {
                     date: formatDateTime(profile.published_at),
                   })}
@@ -172,7 +172,7 @@ export const ReviewerProfilePanel = ({
             </div>
 
             {/* Right side: Controls */}
-            <div className="d-flex flex-wrap align-items-center gap-3 ms-lg-auto">
+            <div className="flex flex-wrap items-center gap-3 ms-lg-auto">
               <ReviewerProfileAddDropdown profile={profile} />
               {profile.is_published ? (
                 <BaseButton
@@ -195,12 +195,8 @@ export const ReviewerProfilePanel = ({
           </div>
         </Card.Header>
         {/* Tabs navigation */}
-        <Card.Header className="border-b-[1px] border-b-secondary align-items-stretch py-0 min-h-auto">
-          <TabsList
-            scrollable
-            scrollClassName="flex-grow-1 pt-4"
-            bordered={false}
-          >
+        <Card.Header className="border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto">
+          <TabsList scrollable scrollClassName="grow pt-4" bordered={false}>
             {tabs.map((tab) => (
               <TabsTrigger key={tab.key} value={tab.key}>
                 {tab.title}

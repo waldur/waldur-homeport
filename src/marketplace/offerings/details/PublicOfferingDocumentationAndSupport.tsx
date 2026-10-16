@@ -21,7 +21,7 @@ export const PublicOfferingDocumentationAndSupport: FunctionComponent<
       <PublicOfferingCardTitle>
         {translate('Documentation & support')}
       </PublicOfferingCardTitle>
-      <div className="d-flex flex-column gap-4">
+      <div className="flex flex-col gap-4">
         {offering.documentation_url && (
           <div>
             <p className="font-medium mb-1">

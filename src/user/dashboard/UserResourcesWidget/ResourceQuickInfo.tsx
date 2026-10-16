@@ -91,8 +91,8 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
     <Card className="card-bordered mb-3">
       <Card.Body className="py-4">
         {/* Header */}
-        <div className="d-flex justify-content-between align-items-start mb-2">
-          <div className="flex-grow-1">
+        <div className="flex justify-between items-start mb-2">
+          <div className="grow">
             <h5 className="mb-1">{resource.name}</h5>
             <small className="text-quaternary">
               {resource.offering_name} ({resource.category_title})
@@ -108,20 +108,20 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
 
         {/* Offering description */}
         {offering?.description && (
-          <p className="text-quaternary fs-7 mb-3">{offering.description}</p>
+          <p className="text-quaternary text-xs mb-3">{offering.description}</p>
         )}
 
         {/* Components section */}
         {isLoadingOffering ? (
-          <div className="d-flex align-items-center text-quaternary mb-3">
+          <div className="flex items-center text-quaternary mb-3">
             {}
             <LoadingSpinnerSimple className="me-2" />
-            <span className="fs-7">{translate('Loading details...')}</span>
+            <span className="text-xs">{translate('Loading details...')}</span>
           </div>
         ) : (
           components.length > 0 && (
             <div className="mb-3">
-              <div className="text-quaternary fs-7 font-medium mb-2">
+              <div className="text-quaternary text-xs font-medium mb-2">
                 {translate('Components')}
               </div>
               <Row className="g-2">
@@ -135,7 +135,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                             ? `${component.usage}/${component.limit}`
                             : component.usage}
                         </div>
-                        <div className="text-quaternary fs-8">
+                        <div className="text-quaternary text-xs">
                           {component.title}
                         </div>
                       </div>
@@ -143,7 +143,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                   ))}
               </Row>
               {components.length > MAX_COMPONENTS_DISPLAY && (
-                <div className="text-quaternary fs-8 mt-1">
+                <div className="text-quaternary text-xs mt-1">
                   {translate('+{count} more', {
                     count: components.length - MAX_COMPONENTS_DISPLAY,
                   })}
@@ -156,27 +156,27 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
         {/* Access endpoints */}
         {endpoints.length > 0 && (
           <div className="mb-3">
-            <div className="text-quaternary fs-7 font-medium mb-2">
+            <div className="text-quaternary text-xs font-medium mb-2">
               {translate('Access resource')}
             </div>
-            <div className="d-flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2">
               {endpoints.map((endpoint, index) => (
                 <div
                   key={index}
-                  className="d-flex align-items-center border rounded px-2 py-1"
+                  className="flex items-center border rounded px-2 py-1"
                 >
                   <a
                     href={endpoint.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-brand text-decoration-none d-flex align-items-center me-2"
+                    className="text-brand text-decoration-none flex items-center me-2"
                   >
                     <ArrowSquareOutIcon
                       size={14}
                       weight="bold"
                       className="me-1"
                     />
-                    <span className="fs-7">{endpoint.name}</span>
+                    <span className="text-xs">{endpoint.name}</span>
                   </a>
                   <BaseButton
                     variant="text-secondary"
@@ -195,7 +195,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
         )}
 
         {/* Actions */}
-        <div className="d-flex justify-content-between align-items-center">
+        <div className="flex justify-between items-center">
           <div>
             {hasGettingStarted && (
               <Link

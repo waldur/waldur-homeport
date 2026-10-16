@@ -102,10 +102,10 @@ export const CeleryTaskStats = ({ total }: CeleryTaskStatsProps) => {
               const needsTruncation = row.name.length > 50;
               return needsTruncation ? (
                 <Tooltip label={row.name}>
-                  <code className="fs-7">{truncateTaskType(row.name)}</code>
+                  <code className="text-xs">{truncateTaskType(row.name)}</code>
                 </Tooltip>
               ) : (
-                <code className="fs-7">{row.name}</code>
+                <code className="text-xs">{row.name}</code>
               );
             },
           },
@@ -121,7 +121,7 @@ export const CeleryTaskStats = ({ total }: CeleryTaskStatsProps) => {
             render: ({ row }) => {
               const percentage = ((row.count / totalCount) * 100).toFixed(1);
               return (
-                <div className="d-flex align-items-center justify-content-end">
+                <div className="flex items-center justify-end">
                   <span className="text-quaternary me-2">{percentage}%</span>
                   <div style={{ width: '50px' }}>
                     <Progress size="sm" value={Number(percentage)} />

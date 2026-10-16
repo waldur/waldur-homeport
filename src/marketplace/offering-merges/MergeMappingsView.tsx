@@ -101,7 +101,7 @@ export const MergeMappingsView: FC<{
   ];
 
   return (
-    <div className="d-flex flex-column gap-5">
+    <div className="flex flex-col gap-5">
       <StaticTable<MappingRow>
         table={`OfferingMergePlans-${merge.uuid}`}
         title={translate('Plan mapping')}

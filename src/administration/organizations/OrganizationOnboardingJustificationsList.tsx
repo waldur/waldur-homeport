@@ -70,7 +70,7 @@ export const OrganizationOnboardingJustificationsList: FC = () => {
         {
           title: translate('Staff notes'),
           render: ({ row }) => (
-            <div className="text-truncate" style={{ maxWidth: '200px' }}>
+            <div className="truncate" style={{ maxWidth: '200px' }}>
               {renderFieldOrDash(row.staff_notes)}
             </div>
           ),

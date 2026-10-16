@@ -34,7 +34,7 @@ export const ResourcePlanChangeInfo = ({
       <OrderDetailsQuickBody order={order} space={2} />
       <Field
         label={translate('Plan change')}
-        valueClass="d-flex align-items-center gap-2"
+        valueClass="flex items-center gap-2"
         value={
           <>
             <Badge variant="blue" shape="pill" tone="outline">

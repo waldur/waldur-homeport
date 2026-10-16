@@ -85,7 +85,7 @@ export const DatabaseMaintenanceCard: FC<DatabaseMaintenanceCardProps> = ({
               </tr>
               <tr>
                 <td className="text-quaternary">
-                  <div className="d-flex align-items-center">
+                  <div className="flex items-center">
                     {translate('Oldest transaction age')}
                     {hasTransactionAgeWarning && (
                       <WarningCircleIcon
@@ -107,7 +107,7 @@ export const DatabaseMaintenanceCard: FC<DatabaseMaintenanceCardProps> = ({
             </tbody>
           </Table>
           {hasTransactionAgeWarning && (
-            <small className="text-danger mt-2 d-block">
+            <small className="text-danger mt-2 block">
               {translate(
                 'Transaction ID wraparound risk! Run vacuum on large tables.',
               )}

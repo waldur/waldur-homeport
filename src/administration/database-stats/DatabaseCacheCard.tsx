@@ -38,7 +38,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
             {translate('Hit ratios')}
           </h6>
           <div className="mb-4">
-            <div className="d-flex justify-content-between mb-1">
+            <div className="flex justify-between mb-1">
               <span>{translate('Buffer cache')}</span>
               <span>{formatPercent(data.buffer_cache_hit_ratio)}</span>
             </div>
@@ -49,7 +49,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
             />
           </div>
           <div>
-            <div className="d-flex justify-content-between mb-1">
+            <div className="flex justify-between mb-1">
               <span>{translate('Index cache')}</span>
               <span>{formatPercent(data.index_hit_ratio)}</span>
             </div>
@@ -84,7 +84,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
               </tr>
             </tbody>
           </Table>
-          <small className="text-quaternary mt-3 d-block">
+          <small className="text-quaternary mt-3 block">
             {translate('Values are in 8KB pages')}
           </small>
         </Col>

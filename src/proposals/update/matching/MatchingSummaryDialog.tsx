@@ -189,7 +189,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
       title={translate('How Reviewer-Proposal Matching works')}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="d-flex flex-column gap-8">
+      <div className="flex flex-col gap-8">
         {/* Important Note */}
         <section>
           <AlertItem
@@ -238,9 +238,9 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
         <section>
           <h4 className="mb-4">{translate('Scoring methods')}</h4>
           <div className="table-responsive">
-            <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
+            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
                   <th>{translate('Method')}</th>
                   <th>{translate('Description')}</th>
                   <th>{translate('Formula')}</th>
@@ -313,32 +313,32 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
         {/* Score Interpretation */}
         <section>
           <h4 className="mb-4">{translate('Score interpretation')}</h4>
-          <div className="d-flex flex-wrap gap-3">
-            <div className="d-flex align-items-center gap-2">
+          <div className="flex flex-wrap gap-3">
+            <div className="flex items-center gap-2">
               <Badge variant="success" tone="outline">
                 80-100%
               </Badge>
               <span>{translate('Excellent match')}</span>
             </div>
-            <div className="d-flex align-items-center gap-2">
+            <div className="flex items-center gap-2">
               <Badge variant="primary" tone="outline">
                 60-79%
               </Badge>
               <span>{translate('Good match')}</span>
             </div>
-            <div className="d-flex align-items-center gap-2">
+            <div className="flex items-center gap-2">
               <Badge variant="warning" tone="outline">
                 40-59%
               </Badge>
               <span>{translate('Moderate match')}</span>
             </div>
-            <div className="d-flex align-items-center gap-2">
+            <div className="flex items-center gap-2">
               <Badge variant="danger" tone="outline">
                 20-39%
               </Badge>
               <span>{translate('Weak match')}</span>
             </div>
-            <div className="d-flex align-items-center gap-2">
+            <div className="flex items-center gap-2">
               <Badge variant="secondary" tone="outline">
                 0-19%
               </Badge>

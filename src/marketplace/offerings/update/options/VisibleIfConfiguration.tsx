@@ -135,7 +135,7 @@ export const VisibleIfConfiguration: FC<VisibleIfConfigurationProps> = ({
         // Grid, not flex-grow: the value picker only renders once an option is
         // chosen, and free-space distribution made the first select resize
         // when it appeared.
-        <div className="row g-2 align-items-start">
+        <div className="row g-2 items-start">
           <div className="col">
             <Field
               name="visible_if.field"

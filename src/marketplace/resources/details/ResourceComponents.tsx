@@ -44,7 +44,7 @@ export const ResourceComponents = ({
         ))}
       </Row>
       {components?.length > 4 && (
-        <div className="flex-grow-1 d-flex align-items-end mt-5">
+        <div className="grow flex items-end mt-5">
           <ResourceShowMoreComponents
             resource={resource}
             components={components}

@@ -107,7 +107,7 @@ export const AdminCategoriesPage: FunctionComponent<
           orderField: 'title',
           render: ({ row }) => (
             <>
-              <div className="d-inline-block align-middle me-2">
+              <div className="inline-block align-middle me-2">
                 <Avatar name={row.title} src={row.icon} circle />
               </div>
               <CategoryLink item={row}>{row.title}</CategoryLink>

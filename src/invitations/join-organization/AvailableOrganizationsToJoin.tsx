@@ -103,7 +103,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
             standalone
             standaloneActionsInTable
             tableActions={
-              <div className="anonymous-join-organization-action d-flex align-items-center w-100">
+              <div className="anonymous-join-organization-action flex items-center w-full">
                 {values?.invitation?.uuid ? (
                   <>
                     <BaseButton
@@ -113,7 +113,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
                       className="btn-no-focus me-2"
                       size="sm"
                     />
-                    <div className="d-flex flex-wrap fs-6 ellipsis">
+                    <div className="flex flex-wrap text-sm ellipsis">
                       <span className="font-normal me-1">
                         {translate('Selected organization')}:
                       </span>

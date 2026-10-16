@@ -271,7 +271,7 @@ export const MetricCard: FC<{
 
   return (
     <WidgetCard
-      className="h-100"
+      className="h-full"
       cardTitle={
         <>
           {metric.name}{' '}
@@ -329,7 +329,7 @@ export const MetricCard: FC<{
       }
       right={
         hasChange ? (
-          <Col xs="auto" className="align-self-center">
+          <Col xs="auto" className="self-center">
             <Tooltip label={getChangeLabel(item.period)}>
               <span>
                 <ChangesAmountBadge
@@ -401,7 +401,7 @@ export const MetricCard: FC<{
       ) : (
         // Same height as a chart, so cards in a row line up.
         <div
-          className="d-flex align-items-center justify-content-center text-quaternary fs-7"
+          className="flex items-center justify-center text-quaternary text-xs"
           style={{ height: CHART_HEIGHT }}
         >
           {translate('No data reported yet.')}

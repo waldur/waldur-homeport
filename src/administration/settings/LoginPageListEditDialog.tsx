@@ -110,7 +110,7 @@ const CarouselSlidesEditor: FC<{
       {items.map((item, index) => (
         <div key={index} className="mb-3">
           <Form.Group className="mb-2">
-            <Form.Label className="fs-8 text-quaternary mb-1">
+            <Form.Label className="text-xs text-quaternary mb-1">
               {translate('Title')}
             </Form.Label>
             <InputGroup>
@@ -127,7 +127,7 @@ const CarouselSlidesEditor: FC<{
             </InputGroup>
           </Form.Group>
           <Form.Group>
-            <Form.Label className="fs-8 text-quaternary mb-1">
+            <Form.Label className="text-xs text-quaternary mb-1">
               {translate('Subtitle')}
             </Form.Label>
             <Form.Control
@@ -174,7 +174,7 @@ const NewsItemsEditor: FC<{
       {items.map((item, index) => (
         <div key={index} className="mb-3">
           <Form.Group className="mb-2">
-            <Form.Label className="fs-8 text-quaternary mb-1">
+            <Form.Label className="text-xs text-quaternary mb-1">
               {translate('Title')}
             </Form.Label>
             <InputGroup>
@@ -190,9 +190,9 @@ const NewsItemsEditor: FC<{
               />
             </InputGroup>
           </Form.Group>
-          <div className="d-flex gap-2 mb-2">
+          <div className="flex gap-2 mb-2">
             <Form.Group style={{ width: '120px' }}>
-              <Form.Label className="fs-8 text-quaternary mb-1">
+              <Form.Label className="text-xs text-quaternary mb-1">
                 {translate('Date')}
               </Form.Label>
               <Form.Control
@@ -203,7 +203,7 @@ const NewsItemsEditor: FC<{
               />
             </Form.Group>
             <Form.Group style={{ width: '140px' }}>
-              <Form.Label className="fs-8 text-quaternary mb-1">
+              <Form.Label className="text-xs text-quaternary mb-1">
                 {translate('Tag')}
               </Form.Label>
               <Form.Select
@@ -220,7 +220,7 @@ const NewsItemsEditor: FC<{
             </Form.Group>
           </div>
           <Form.Group>
-            <Form.Label className="fs-8 text-quaternary mb-1">
+            <Form.Label className="text-xs text-quaternary mb-1">
               {translate('Description')}
             </Form.Label>
             <Form.Control

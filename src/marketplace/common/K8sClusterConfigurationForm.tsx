@@ -197,7 +197,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
           label={
             <>
               {translate('Controller nodes (Mandatory)')}:
-              <span className="text-quaternary font-normal d-block">
+              <span className="text-quaternary font-normal block">
                 {translate(
                   'Kubernetes control plane components (API server, etcd, scheduler)',
                 )}
@@ -206,11 +206,11 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
           }
           value={
             <>
-              <span className="d-block">
+              <span className="block">
                 {controllerNodes}{' '}
                 {controllerNodes === 1 ? 'controller' : 'controllers'}
               </span>
-              <span className="d-block">
+              <span className="block">
                 {controllerNodes *
                   (defaultConfigs?.default_controller_vcpus || 2)}{' '}
                 vCPU,{' '}
@@ -218,7 +218,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
                   (defaultConfigs?.default_controller_ram_gb || 4)}
                 GB RAM
               </span>
-              <span className="d-block">
+              <span className="block">
                 {controllerNodes *
                   (defaultConfigs?.default_controller_system_disk_gb || 20)}
                 GB system +{' '}
@@ -244,7 +244,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
                 ? translate('Load balancer nodes (Mandatory)')
                 : translate('Load balancer nodes')}
               :
-              <span className="text-quaternary font-normal d-block">
+              <span className="text-quaternary font-normal block">
                 {translate(
                   'External load balancers for ingress and service exposure',
                 )}
@@ -253,17 +253,17 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
           }
           value={
             <>
-              <span className="d-block">
+              <span className="block">
                 {loadBalancerNodes} load{' '}
                 {loadBalancerNodes === 1 ? 'balancer' : 'balancers'}
               </span>
-              <span className="d-block">
+              <span className="block">
                 {loadBalancerNodes * (defaultConfigs?.default_lb_vcpus || 2)}{' '}
                 vCPU,{' '}
                 {loadBalancerNodes * (defaultConfigs?.default_lb_ram_gb || 8)}GB
                 RAM
               </span>
-              <span className="d-block">
+              <span className="block">
                 {loadBalancerNodes *
                   (defaultConfigs?.default_lb_system_disk_gb || 20)}
                 GB system +{' '}
@@ -300,7 +300,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
             labelClass="col"
             valueClass="offset-sm-1 col-auto"
             space={5}
-            className="gy-2 align-items-center"
+            className="gy-2 items-center"
           />
 
           {datacenter.node_groups.length === 0 && (

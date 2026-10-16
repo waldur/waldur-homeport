@@ -138,7 +138,7 @@ describe('MatrixChatPanel — responsive dock layout', () => {
 
     render(<MatrixChatPanel defaultRoomUuid="room-1" />);
     // eslint-disable-next-line testing-library/no-node-access
-    expect(screen.getByTestId('room-list').parentElement).toHaveClass('d-none');
+    expect(screen.getByTestId('room-list').parentElement).toHaveClass('hidden');
   });
 
   it('docks sidebar on desktop when drawer is expanded', async () => {
@@ -153,7 +153,7 @@ describe('MatrixChatPanel — responsive dock layout', () => {
     render(<MatrixChatPanel defaultRoomUuid="room-1" />);
     // eslint-disable-next-line testing-library/no-node-access
     expect(screen.getByTestId('room-list').parentElement).not.toHaveClass(
-      'd-none',
+      'hidden',
     );
   });
 });

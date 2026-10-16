@@ -117,7 +117,7 @@ Consequently, any selector in a component SCSS file will override styles inside 
 
 #### Production Layer Optimization
 
-In production bundles, Vite's CSS minifier removes the explicit `@layer theme, base, bootstrap, utilities;` statement because `dist/assets/index-*.css` already emits the layers in that physical order. Because Metronic's theme stylesheet is injected at runtime as an external `<link>` tag _after_ initial document parse, the layer order established by `index-*.css` remains authoritative.
+In production bundles, Vite's CSS minifier removes the explicit `@layer theme, base, bootstrap, utilities;` statement because `dist/assets/index-*.css` already emits the layers in that physical order. Metronic's stylesheet is imported right after `tailwind.css` in `src/index.tsx`, so it lands later in the same bundle and the layer order established by Tailwind's blocks remains authoritative.
 
 ---
 
@@ -155,6 +155,11 @@ At Metronic's forced root font size of `13px` (and `12px` on mobile):
    (`border border-brand`, `border border-transparent hover:border-secondary`) never paints.
    Give every state an explicit colour: `border-[1px] border-secondary`, then `border-brand`
    when selected. Enforced (with autofix) by `no-bootstrap-border-with-tailwind-color`.
+3. **Layout & Display Utilities**: Legacy Bootstrap layout classes are retired in favor of native Tailwind equivalents:
+   - Display: `d-flex` → `flex`, `d-block` → `block`, `d-none` → `hidden`, `d-inline` → `inline`, `d-inline-block` → `inline-block`, `d-inline-flex` → `inline-flex`, `d-grid` → `grid`, and responsive breakpoints (`d-md-none` → `md:hidden`, `d-lg-block` → `lg:block`, `d-sm-flex` → `sm:flex`).
+   - Flexbox: `flex-column` → `flex-col`, `align-items-*` → `items-*`, `align-self-*` → `self-*`, `justify-content-*` → `justify-*`, `flex-grow-1` → `grow`, `flex-shrink-0` → `shrink-0`.
+   - Sizing & Text: `w-100` → `w-full`, `h-100` → `h-full`, `mw-100` → `max-w-full`, `mh-100` → `max-h-full`, `text-truncate` → `truncate`.
+   - Enforced (with automated autofix) by `waldur-custom/no-bootstrap-layout-utility`.
 
 ---
 
@@ -283,7 +288,7 @@ These CSS variables are initialized at runtime by `afterBootstrap.tsx` (`initCss
 
 Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
-1. `loadTheme()` in `src/theme/utils.ts` sets the `data-theme="dark"` attribute on `<html>`.
+1. `applyTheme()` in `src/theme/utils.ts` sets the `data-theme="dark"` attribute on `<html>`.
 2. The Metronic stylesheet is one file for both themes: its colours read the design tokens, and
    its dark-only rules use the same attribute (the `dark-theme` mixin).
 3. Tailwind dark mode is configured via an explicit variant:
@@ -570,14 +575,16 @@ Implemented in `packages/eslint-plugin-waldur` and enabled as `waldur-custom/*` 
 | `enforce-badge-right-icon-pattern`        | `error`  | Standardizes right-side action icon styling in badges.                                                                                                                                                                                                                                          |
 | `enforce-featured-icon`                   | `error`  | Requires `FeaturedIcon` (with `tone`/`size`) for highlighted icon emblems.                                                                                                                                                                                                                      |
 | `enforce-phosphor-icon-weight`            | `error`  | Consistent `weight` prop on Phosphor icons.                                                                                                                                                                                                                                                     |
-| `enforce-border-radius-tokens`            | `error`  | Design-token radius classes instead of hard-coded values.                                                                                                                                                                                                                                       |
+| `enforce-border-radius-tokens`            | `error`  | Enforces pinned Tailwind border radius tokens (`rounded-none` … `rounded-modal`, `rounded-full`). Autofixes retired Bootstrap `rounded-0`, `rounded-pill`, `rounded-circle`, arbitrary matching pixel classes (`rounded-[6px]` -> `rounded-md`), and flags inline `style={{ borderRadius }}`. |
 | `no-bootstrap-tabs`                       | `error`  | `Tabs` / `TabNav` from `waldur-ui`; no react-bootstrap `Tab`/`Tabs`/`Nav` or `nav-*` classes.                                                                                                                                                                                                   |
 | `enforce-breadcrumb-colors`               | `error`  | Breadcrumb links use the `$text-brand-secondary` token.                                                                                                                                                                                                                                         |
 | `no-bootstrap-form-check`                 | `error`  | `Checkbox` / `Radio` / `Switch` from `waldur-ui`; no `FormCheck`, `Form.Check` or `form-check*` / `form-switch*` classes.                                                                                                                                                                       |
 | `no-bootstrap-progress`                   | `error`  | `Progress` from `waldur-ui`; no react-bootstrap `ProgressBar` or `progress` / `progress-bar*` classes.                                                                                                                                                                                          |
 | `no-bootstrap-border-with-tailwind-color` | `error`  | No Bootstrap `border` / `border-top` / … next to a Tailwind border colour (Bootstrap's `!important` colour wins). Autofixes to `border-[1px]` when the same string sets a base colour.                                                                                                          |
+| `no-bootstrap-layout-utility`             | `error`  | Retires Bootstrap layout, display, flexbox, sizing and text-truncate utilities (`d-block`, `d-flex`, `d-none`, `flex-column`, `w-100`, `mw-100`, `text-truncate`, responsive variants) in favor of Tailwind standard classes (`block`, `flex`, `hidden`, `flex-col`, `w-full`, `max-w-full`, `truncate`). Autofixes across the codebase. |
 | `no-raw-status-ramp`                      | `error`  | State colours come from `--status-*`, not raw `success-N` / `warning-N` / `error-N` utilities. Deliberate exceptions carry an `eslint-disable` with the reason.                                                                                                                                 |
 | `no-retired-bootstrap-utility`            | `error`  | Bootstrap utilities the Metronic build no longer generates (never used: `vh-100`, `align-content-*`, `mx-n*`, `ls-*`; or used only at the base size, so their breakpoint variants `px-lg-3`, `min-h-md-100px`, `svg-icon-lg-3` are dropped) compile to nothing; names the Tailwind replacement. |
+| `require-font-size-scale`                 | `error`  | Font size follows the pinned scale (`text-xs` … `text-4xl`). Autofixes retired Bootstrap `fs-*` classes (`fs-6` -> `text-sm`, `fs-7`/`8` -> `text-xs`, etc.) and arbitrary `text-[14px]`. Flags inline `style={{ fontSize }}`.                                                                 |
 | `require-weight-scale`                    | `error`  | Font weight is `font-light` … `font-bold`. Reports Bootstrap `fw-*` (autofixed to the same weight: `fw-bold` was 500, so `font-medium`), off-scale steps, `font-[N]` and inline `fontWeight`.                                                                                                   |
 | `require-dark-pair`                       | `error`  | A physical colour (ramp step, white/black, hex, raw `var(--brand-N)`) needs a `dark:` counterpart in its class list, or a semantic utility. Solid fills and white text on them pass.                                                                                                            |
 | `no-bootstrap-css-vars`                   | `error`  | No `--bs-*` reads in TS/TSX; use the design token (table in [design-tokens.md](design-tokens.md)).                                                                                                                                                                                              |

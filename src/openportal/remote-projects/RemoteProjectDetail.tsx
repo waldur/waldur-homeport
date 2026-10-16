@@ -94,7 +94,7 @@ export const RemoteProjectDetail = () => {
     <>
       <Card className="mb-4">
         <Card.Body>
-          <div className="d-flex justify-content-between align-items-start mb-3">
+          <div className="flex justify-between items-start mb-3">
             <h3 className="mb-0">
               {row.current_project_name || translate('Unnamed project')}
             </h3>
@@ -248,7 +248,7 @@ export const RemoteProjectDetail = () => {
         </Card.Header>
         <Card.Body>
           {row.notes && row.notes.length > 0 ? (
-            <div className="d-flex flex-column gap-2">
+            <div className="flex flex-col gap-2">
               {row.notes.map((note, index) => (
                 <div
                   key={index}

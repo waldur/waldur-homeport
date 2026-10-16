@@ -55,8 +55,8 @@ export const OnboardingJustificationDetails: FC<
       initialValues={{ staff_notes: justification?.staff_notes || '' }}
       render={({ handleSubmit, values }) => (
         <form onSubmit={handleSubmit}>
-          <div className="d-flex align-items-center justify-content-between mb-4">
-            <div className="d-flex align-items-center gap-3">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
               <h1 className="mb-0 ml-2">
                 {justification
                   ? `${justification.legal_name} (${justification.legal_person_identifier})`
@@ -66,7 +66,7 @@ export const OnboardingJustificationDetails: FC<
               </h1>
             </div>
             {showActions && (
-              <div className="d-flex gap-2">
+              <div className="flex gap-2">
                 <BaseButton
                   pending={actionLoading}
                   variant="danger"

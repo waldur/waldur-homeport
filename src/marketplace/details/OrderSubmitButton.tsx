@@ -108,7 +108,7 @@ export const OrderSubmitButton = () => {
       submitting={formState.submitting}
       disabled={isDisabled}
       type="submit"
-      className="w-100"
+      className="w-full"
       label={translate('Create')}
       iconNode={<ShoppingCartIcon weight="bold" />}
       iconOnLeft
@@ -131,7 +131,7 @@ export const OrderSubmitButton = () => {
           }
           autoWidth
         >
-          <span className="w-100">{Btn}</span>
+          <span className="w-full">{Btn}</span>
         </Tooltip>
       ) : (
         Btn

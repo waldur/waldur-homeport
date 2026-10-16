@@ -66,9 +66,11 @@ const MethodChoice: FC<{ method: AccessMethod }> = ({ method }) => (
           id={`access-method-${method.key}`}
           align="start"
           label={
-            <span className="d-flex flex-column">
+            <span className="flex flex-col">
               <span className="font-medium">{method.label}</span>
-              <span className="text-quaternary fs-7">{method.description}</span>
+              <span className="text-quaternary text-xs">
+                {method.description}
+              </span>
             </span>
           }
         />
@@ -166,7 +168,7 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
               </>
             }
           >
-            <div className="d-flex flex-column gap-4">
+            <div className="flex flex-col gap-4">
               {methods.length > 1
                 ? methods.map((method) => (
                     <MethodChoice key={method.key} method={method} />
@@ -183,12 +185,12 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
                   <div>
                     {methods.length > 1 ? <hr className="mt-0" /> : null}
                     <div className="font-medium">{translate('Project')}</div>
-                    <div className="text-quaternary fs-7 mb-4">
+                    <div className="text-quaternary text-xs mb-4">
                       {translate(
                         'The resource is created in the project you pick.',
                       )}
                     </div>
-                    <Row className="align-items-end">
+                    <Row className="items-end">
                       <Col sm={6}>
                         <CustomerField
                           organizationGroups={offering.organization_groups}
@@ -215,7 +217,7 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
                         ? translate('Round')
                         : translate('Submission deadline')}
                     </div>
-                    <div className="text-quaternary fs-7 mb-4">
+                    <div className="text-quaternary text-xs mb-4">
                       {usesCallVocabulary()
                         ? translate(
                             'Your proposal is reviewed under the call and round you pick.',

@@ -72,7 +72,7 @@ export const menuRowDataAttributes = ({
 // action-row-active: / action-row-disabled: are defined in
 // waldur-design-tokens/variants.css.
 const ACTIONS_MENU_ITEM_CLASSNAME = [
-  'flex items-center w-full whitespace-nowrap px-[16px] py-[10px] text-start text-[14px] leading-none font-medium',
+  'flex items-center w-full whitespace-nowrap px-[16px] py-[10px] text-start text-sm leading-none font-medium',
   'text-[var(--menu-item-strong-text)] no-underline',
   'action-row-active:bg-[var(--menu-item-hover-bg)] action-row-active:text-[var(--menu-item-hover-text)]',
   'action-row-disabled:pointer-events-none action-row-disabled:text-[var(--menu-item-muted-text)]',

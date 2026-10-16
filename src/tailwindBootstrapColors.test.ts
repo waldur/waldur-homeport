@@ -218,6 +218,11 @@ describe('Retired Bootstrap utilities', () => {
       still.sort(),
       'Retired in no-retired-bootstrap-utility but still generated',
     ).toEqual([]);
+
+    const fsClasses = [...emitted].filter((name) =>
+      /^fs-(?:[1-9]|10|base|fluid|[1-5][qht]?x)$/.test(name),
+    );
+    expect(fsClasses, 'Metronic generates no .fs-* utilities').toEqual([]);
   });
 
   it('retires no name Tailwind defines', async () => {
@@ -239,6 +244,9 @@ describe('Retired Bootstrap utilities', () => {
       'flex-lg-shrink-0',
       'svg-icon-lg-3',
       'svg-icon-md-2x',
+      'lh-1',
+      'lh-sm',
+      'lh-base',
     ];
     for (const name of samples) {
       expect(

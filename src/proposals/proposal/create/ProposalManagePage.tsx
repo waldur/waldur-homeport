@@ -191,7 +191,7 @@ export const ProposalManagePage = () => {
   return (
     <>
       <SidebarLayout.Header className="pb-5">
-        <div className="w-100">
+        <div className="w-full">
           {isCallManagerView ? (
             <CallManagerBreadcrumbs call={call} proposal={proposal} />
           ) : (

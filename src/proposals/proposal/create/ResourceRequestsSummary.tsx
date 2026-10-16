@@ -53,11 +53,11 @@ const offeringWithAwardColumn = (
   render: ({ row }) => {
     const match = awardRows.find((award) => award.requested?.uuid === row.uuid);
     return (
-      <div className="d-flex flex-column gap-1 align-items-start">
+      <div className="flex flex-col gap-1 items-start">
         <span>{row.requested_offering.offering_name}</span>
         {match && <AwardChangeBadge change={match.change} />}
         {match?.change === 'moved' && (
-          <span className="text-quaternary fs-7">
+          <span className="text-quaternary text-xs">
             {translate('To {offering}', {
               offering: match.awarded.requested_offering.offering_name,
             })}
@@ -120,7 +120,7 @@ export const ResourceRequestsSummary = ({
       title={translate('Resource requests')}
       actions={
         chosen ? (
-          <span className="text-quaternary fs-7">{chosen}</span>
+          <span className="text-quaternary text-xs">{chosen}</span>
         ) : undefined
       }
       subtitle={

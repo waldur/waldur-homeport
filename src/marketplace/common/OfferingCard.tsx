@@ -24,7 +24,7 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = ({
   return (
     <Suspense
       fallback={
-        <div className="d-flex justify-content-center align-items-center h-100">
+        <div className="flex justify-center items-center h-full">
           <LoadingSpinnerSimple />
         </div>
       }

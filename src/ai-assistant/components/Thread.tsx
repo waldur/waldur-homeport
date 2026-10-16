@@ -78,7 +78,7 @@ export const Thread: FC = () => {
   if (isLoadingThread) {
     return (
       <div className="aui-root aui-thread-root">
-        <div className="d-flex align-items-center justify-content-center flex-grow-1">
+        <div className="flex items-center justify-center grow">
           <LoadingSpinner />
         </div>
       </div>
@@ -294,7 +294,7 @@ const TokenSummary = ({ quota }) => {
             <QuotaProgressBar
               percent={percent ?? 0}
               size="xs"
-              className="flex-grow-1"
+              className="grow"
               label={typeof p.label === 'string' ? p.label : undefined}
             />
             <span className="token-value">

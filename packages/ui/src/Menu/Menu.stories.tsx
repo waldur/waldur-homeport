@@ -69,7 +69,7 @@ export const Looks: Story = {
           {...STAY_OPEN}
           look="nav"
           align="start"
-          className="w-[275px] py-[12px] text-[14px] font-medium"
+          className="w-[275px] py-[12px] text-sm font-medium"
         >
           <Menu.Label>Profile</Menu.Label>
           <Menu.Item>User dashboard</Menu.Item>

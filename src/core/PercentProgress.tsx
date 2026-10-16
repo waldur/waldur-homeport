@@ -27,12 +27,12 @@ export const PercentProgress: FC<PercentProgressProps> = ({
 }) => {
   const percent = progressPercent(value, max);
   return (
-    <div className="d-flex flex-column">
+    <div className="flex flex-col">
       <Progress value={value} max={max} variant={variant} label={label} />
       <span
         className={classNames(
-          'd-block text-end text-secondary',
-          compact ? 'fs-7' : 'fs-6 mt-2',
+          'block text-end text-secondary',
+          compact ? 'text-xs' : 'text-sm mt-2',
         )}
       >
         {Number.isInteger(percent) ? percent : percent.toFixed(1)}

@@ -73,7 +73,7 @@ export const ChecklistUsageAnalyticsTable = () => {
       tabs={tabs}
       title={translate('Checklist usage analytics')}
       headerClassName="min-h-60px"
-      className="h-100"
+      className="h-full"
     />
   );
 };

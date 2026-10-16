@@ -73,7 +73,7 @@ export const MyCallsPage: FC = () => {
             return <span className="text-quaternary">-</span>;
           }
           return (
-            <div className="d-flex gap-1">
+            <div className="flex gap-1">
               {inProgress > 0 && (
                 <Tooltip label={translate('In progress')}>
                   <Badge variant="warning" shape="pill" tone="outline">
@@ -114,7 +114,7 @@ export const MyCallsPage: FC = () => {
           }
           const bySeverity = row.coi_by_severity || {};
           return (
-            <div className="d-flex gap-1">
+            <div className="flex gap-1">
               {bySeverity.real > 0 && (
                 <Tooltip label={translate('Real')}>
                   <Badge variant="danger" shape="pill" tone="outline">
@@ -155,7 +155,7 @@ export const MyCallsPage: FC = () => {
   );
 
   return (
-    <div className="d-flex flex-column" style={{ gap: 16 }}>
+    <div className="flex flex-col" style={{ gap: 16 }}>
       {/* Reviewer profile summary */}
       <ReviewerProfileSummaryCard />
 

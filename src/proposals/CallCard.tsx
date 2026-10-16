@@ -35,7 +35,7 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
         body={call.description}
         clickable
         footer={
-          <div className="d-flex justify-content-between align-items-center">
+          <div className="flex justify-between items-center">
             <Stack direction="horizontal" gap={1}>
               {!nextRound ? (
                 <div className="text-quaternary">{translate('No rounds')}</div>

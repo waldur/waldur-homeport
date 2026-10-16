@@ -79,13 +79,6 @@ export const Spacing: Story = {
 // --- Radius ------------------------------------------------------------------
 
 const radius = parseTokenFile(radiusCss);
-/** Tailwind's own steps this package does not override, shown for reference. */
-const TAILWIND_RADIUS = [
-  ['--radius-xs', 'rounded-xs'],
-  ['--radius-sm', 'rounded-sm'],
-  ['--radius-xl', 'rounded-xl'],
-  ['--radius-2xl', 'rounded-2xl'],
-];
 
 function RadiusTile({
   name,
@@ -134,6 +127,7 @@ function RadiusTile({
       <div
         ref={ref}
         className={`size-16 border-[1px] border-[var(--border-brand-solid)] bg-brand-subtle ${className ?? ''}`}
+        // eslint-disable-next-line waldur-custom/enforce-border-radius-tokens
         style={source ? { borderRadius: `var(${name}, ${source})` } : undefined}
       />
       <Mono className="text-[11px] text-primary">
@@ -143,7 +137,7 @@ function RadiusTile({
         {full ? 'pill / circle' : measured}
       </span>
       <span className="text-[10px] text-quinary">
-        {source ? `pinned: ${source}` : 'Tailwind default (rem)'}
+        {source ? `pinned: ${source}` : 'Tailwind default'}
       </span>
       {note && (
         <span className="max-w-[10rem] text-[10px] text-quinary">
@@ -155,10 +149,9 @@ function RadiusTile({
 }
 
 /**
- * The corner radii this package pins (`radius.css`), next to Tailwind's own
- * steps for reference, each with the radius it renders at. Tailwind's are in
- * rem, so this app's 13px root shrinks them (`rounded-sm` is 3.25px): that is
- * why md and lg are pinned in px.
+ * The corner radii this package pins (`radius.css`). All scale steps are pinned
+ * in physical pixels to prevent fractional rem compression under Metronic's forced
+ * 13px root font size.
  */
 export const Radius: Story = {
   render: () => (
@@ -172,11 +165,6 @@ export const Radius: Story = {
               source={value(t)}
               note={t.note}
             />
-          ))}
-          {TAILWIND_RADIUS.filter(
-            ([name]) => !radius.tokens.some((t) => t.name === name),
-          ).map(([name, className]) => (
-            <RadiusTile key={name} name={name} className={className} />
           ))}
           <RadiusTile name="--radius-full" className="rounded-full" />
         </div>

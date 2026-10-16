@@ -43,7 +43,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
       <Col md={6} lg={3}>
         <Card className="card-bordered mb-5">
           <Card.Body>
-            <div className="d-flex align-items-center">
+            <div className="flex items-center">
               <strong className={`display-4 ${getTextClass(healthLevel)}`}>
                 {getStatusLabel(data.health_status)}
               </strong>
@@ -55,7 +55,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
                 />
               )}
             </div>
-            <strong className="d-block">{translate('Health status')}</strong>
+            <strong className="block">{translate('Health status')}</strong>
           </Card.Body>
         </Card>
       </Col>
@@ -63,7 +63,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
       <Col md={6} lg={3}>
         <Card className="card-bordered mb-5">
           <Card.Body>
-            <div className="d-flex align-items-center">
+            <div className="flex items-center">
               <strong
                 className={`display-4 ${getTextClass(circuitBreakerLevel)}`}
               >
@@ -77,7 +77,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
                 />
               )}
             </div>
-            <strong className="d-block">
+            <strong className="block">
               {translate('Circuit breaker state')}
             </strong>
           </Card.Body>
@@ -87,8 +87,8 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
       <Col md={6} lg={3}>
         <Card className="card-bordered mb-5">
           <Card.Body>
-            <div className="d-flex align-items-center justify-content-between">
-              <div className="d-flex align-items-center">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
                 <strong
                   className={`display-4 ${getTextClass(failureRateLevel)}`}
                 >
@@ -106,7 +106,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
                 {formatNumber(data.metrics.messages_sent)} {translate('sent')}
               </span>
             </div>
-            <strong className="d-block">{translate('Failure rate')}</strong>
+            <strong className="block">{translate('Failure rate')}</strong>
           </Card.Body>
         </Card>
       </Col>
@@ -114,7 +114,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
       <Col md={6} lg={3}>
         <Card className="card-bordered mb-5">
           <Card.Body>
-            <div className="d-flex align-items-center justify-content-between">
+            <div className="flex items-center justify-between">
               <strong className="display-4 text-info">
                 {formatNumber(data.metrics.messages_failed)}
               </strong>
@@ -122,7 +122,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
                 {translate('avg {ms}ms', { ms: data.metrics.avg_latency_ms })}
               </span>
             </div>
-            <strong className="d-block">{translate('Messages failed')}</strong>
+            <strong className="block">{translate('Messages failed')}</strong>
           </Card.Body>
         </Card>
       </Col>

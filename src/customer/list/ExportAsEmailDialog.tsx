@@ -106,7 +106,7 @@ export const ExportAsEmailDialog: FC = () => {
             }
           >
             <Row>
-              <Col md={12} lg={8} className="d-flex flex-column">
+              <Col md={12} lg={8} className="flex flex-col">
                 <div>
                   <Form.Label>{translate('Emails')}</Form.Label>
                   <FieldArray name="emails" component={renderEmails} />

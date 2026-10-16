@@ -76,14 +76,14 @@ const ParamInput: FC<{
     const percentage = ((numValue - min) / (max - min)) * 100;
 
     return (
-      <div className="d-flex align-items-center gap-3">
+      <div className="flex items-center gap-3">
         <Form.Range
           value={numValue}
           min={min}
           max={max}
           step={step}
           onChange={(e) => handleChange(parseFloat(e.target.value))}
-          className="flex-grow-1 custom-filled-range"
+          className="grow custom-filled-range"
           // @ts-ignore
           style={{ '--range-progress': `${percentage}%` }}
         />
@@ -150,7 +150,7 @@ const ResultRow: FC<{ result: SimulationResult }> = ({ result }) => {
   const isNegative = result.change < 0;
 
   return (
-    <div className="row align-items-center py-3">
+    <div className="row items-center py-3">
       {/* Column 1: Label */}
       <div className="col-4">
         <span>{result.label}</span>
@@ -160,7 +160,7 @@ const ResultRow: FC<{ result: SimulationResult }> = ({ result }) => {
       </div>
 
       {/* Column 2: Values */}
-      <div className="col-5 d-flex align-items-center gap-2 text-quaternary">
+      <div className="col-5 flex items-center gap-2 text-quaternary">
         <span>{result.originalValue.toLocaleString()}</span>
         <span>&rarr;</span>
         <span className="text-primary">
@@ -205,7 +205,7 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
   return (
     <div className="what-if-simulator">
       {/* Data source indicator */}
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="flex justify-between items-center mb-4">
         <h6 className="mb-0">
           {translate('Scenario parameters')}
           {hasChanges && (
@@ -226,7 +226,7 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
           {/* Parameter inputs */}
           {params.map((param) => (
             <div key={param.id} className="mb-3">
-              <div className="d-flex align-items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-2">
                 <Form.Label className="mb-0">{param.label}</Form.Label>
                 {param.description && <HelpIcon label={param.description} />}
               </div>

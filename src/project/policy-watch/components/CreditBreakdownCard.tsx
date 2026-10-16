@@ -67,7 +67,7 @@ export const CreditBreakdownCard: FC<Props> = ({ breakdown }) => {
 
   return (
     <>
-      <div className="d-flex justify-content-between align-items-baseline mb-2 gap-3">
+      <div className="flex justify-between items-baseline mb-2 gap-3">
         <span className="text-quaternary">
           {translate('Allocated {amount}', {
             amount: defaultCurrency(granted),
@@ -80,10 +80,7 @@ export const CreditBreakdownCard: FC<Props> = ({ breakdown }) => {
       {/* Three segments rather than one progress value: "Lost" is the only
           figure that tells a project it is forfeiting credit, and a single
           consumed bar hides it inside the same band as real usage. */}
-      <div
-        className="d-flex rounded overflow-hidden mb-3"
-        style={{ height: 16 }}
-      >
+      <div className="flex rounded overflow-hidden mb-3" style={{ height: 16 }}>
         {segments.map((s) =>
           s.value > 0 ? (
             <div
@@ -94,7 +91,7 @@ export const CreditBreakdownCard: FC<Props> = ({ breakdown }) => {
           ) : null,
         )}
       </div>
-      <div className="d-flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2">
         {segments.map((s) => (
           <Badge
             key={s.key}

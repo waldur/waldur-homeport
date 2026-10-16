@@ -212,7 +212,7 @@ const PresetSelector: FC = () => {
 
   return (
     <div className="mb-6">
-      <div className="d-flex align-items-center gap-2 mb-3">
+      <div className="flex items-center gap-2 mb-3">
         <LightningIcon weight="bold" className="text-brand" />
         <span>{translate('Quick Configuration')}</span>
       </div>
@@ -220,7 +220,7 @@ const PresetSelector: FC = () => {
         {policyPresets.map((preset) => (
           <div key={preset.key} className="col-md-6 col-lg-3">
             <Card
-              className={`h-100 cursor-pointer border-2 ${
+              className={`h-full cursor-pointer border-2 ${
                 selectedPreset === preset.key
                   ? 'border-brand bg-brand-subtle'
                   : 'border-light-dark'
@@ -229,10 +229,10 @@ const PresetSelector: FC = () => {
               style={{ cursor: 'pointer' }}
             >
               <Card.Body className="p-3">
-                <Card.Title className="fs-7 font-medium mb-2">
+                <Card.Title className="text-xs font-medium mb-2">
                   {preset.label}
                 </Card.Title>
-                <Card.Text className="fs-8 text-tertiary mb-0">
+                <Card.Text className="text-xs text-tertiary mb-0">
                   {preset.description}
                 </Card.Text>
               </Card.Body>
@@ -644,7 +644,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
           titleClassName="font-normal"
           cardBordered
           actions={
-            <div className="d-flex gap-3">
+            <div className="flex gap-3">
               <PolicyInfoDropdown
                 offering={offering}
                 policyUuid={existingPolicy?.uuid}

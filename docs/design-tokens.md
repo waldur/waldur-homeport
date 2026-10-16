@@ -313,6 +313,32 @@ green, whatever the tenant configured. So:
   selects, `.btn-close`), the active list-group row and the range thumb. `.svg-icon-primary`
   is `var(--brand-color)`, so it follows the brand too.
 
+## Font size
+
+One scale, pinned in physical pixels in `primitives/typography.css` (`@theme static`) to
+prevent distortion under Waldur's forced 13px root font size (`html, body { font-size: 13px !important; }`):
+
+| Token        | Size | Line Height | Tailwind Class | Former Bootstrap Utility |
+| ------------ | ---- | ----------- | -------------- | ------------------------ |
+| `--text-xs`  | 12px | 18px        | `text-xs`      | `fs-7`, `fs-8`           |
+| `--text-sm`  | 14px | 20px        | `text-sm`      | `fs-6`                   |
+| `--text-base`| 16px | 24px        | `text-base`    | `fs-4`, `fs-5`           |
+| `--text-lg`  | 18px | 28px        | `text-lg`      | `fs-3`                   |
+| `--text-xl`  | 20px | 28px        | `text-xl`      | `fs-2`                   |
+| `--text-2xl` | 24px | 32px        | `text-2xl`     | `fs-1`, `fs-1x`          |
+| `--text-3xl` | 30px | 36px        | `text-3xl`     | —                        |
+| `--text-4xl` | 36px | 44px        | `text-4xl`     | —                        |
+
+- **No Bootstrap `fs-*`.** Bootstrap's `fs-1` through `fs-8` classes are retired and replaced
+  by standard Tailwind `text-*` classes via the `waldur-custom/require-font-size-scale` ESLint rule.
+- **Why pinned in pixels?** Default Tailwind uses relative `rem` units (e.g. `text-lg` is 1.125rem).
+  With an unpinned root, 1.125rem at 13px resolves to 14.625px instead of the intended 18px. Pinned
+  declarations ensure consistent typography across both desktop (13px root) and mobile (12px root).
+- **No arbitrary `text-[14px]`.** Named scale tokens (`text-sm`) must be used instead.
+- **No inline `fontSize`** on JSX elements: static font sizes must use standard utility classes. Dynamic
+  scaling (such as proportional avatar placeholder text or country flag emojis) requires an explicit
+  `eslint-disable` with rationale.
+
 ## Font weight
 
 One scale, the five weights `fonts.css` loads (Inter 300–700), declared in
@@ -345,6 +371,37 @@ One scale, the five weights `fonts.css` loads (Inter 300–700), declared in
   element, drop the weight from the rule, or, if the rule is right for everything else it
   matches, use the important modifier on that element (`font-normal!`) with a comment.
 
+## Corner radius
+
+All corner radius steps are pinned to physical pixels in `primitives/radius.css` (`@theme static`)
+to prevent fractional `rem` compression under Waldur's forced 13px root font size
+(`html, body { font-size: 13px !important; }`):
+
+| Token            | Size | Tailwind Class   | Former Class / SCSS Variable | Use                                                 |
+| ---------------- | ---- | ---------------- | ---------------------------- | --------------------------------------------------- |
+| `--radius-none`  | 0px  | `rounded-none`   | `rounded-0`                  | Square corners, flush card attachments              |
+| `--radius-xs`    | 2px  | `rounded-xs`     | —                            | Subtle inner corners, tiny tags                     |
+| `--radius-sm`    | 4px  | `rounded-sm`     | `$border-radius-xs` (4px)    | Compact inputs, checkboxes, small indicators        |
+| `--radius-md`    | 6px  | `rounded-md`     | `$border-radius-sm` (6px)    | Standard buttons, form controls, dropdown items     |
+| `--radius-lg`    | 8px  | `rounded-lg`     | `$border-radius` / `-lg` (8px)| Cards, panels, dialog headers, table containers     |
+| `--radius-xl`    | 12px | `rounded-xl`     | `$border-radius-xl` (12px)   | Prominent cards, thread bubbles, chat panels        |
+| `--radius-2xl`   | 16px | `rounded-2xl`    | `$border-radius-2xl` (16px)  | Large feature cards, hero containers                |
+| `--radius-modal` | 20px | `rounded-modal`  | —                            | Dialog content and Sidebar mode-switcher card       |
+| `--radius-full`  | 9999px| `rounded-full`  | `rounded-pill`, `rounded-circle` | Avatars, pills, circular badges, status dots    |
+
+- **No Bootstrap `rounded-0`, `rounded-pill`, `rounded-circle`.** Bootstrap radius utilities are
+  retired and replaced by Tailwind `rounded-none` and `rounded-full` via `waldur-custom/enforce-border-radius-tokens`.
+- **Why pinned in pixels?** Default Tailwind radii use relative `rem` units (e.g. `rounded-sm` is 0.25rem,
+  `rounded-xl` is 0.75rem). Under Waldur's forced 13px root font size, unpinned `rem` tokens shrink
+  unintentionally (`rounded-sm` becomes 3.25px, `rounded-xl` becomes 9.75px). Pinning the scale preserves
+  crisp, consistent corner geometry.
+- **SCSS variables** (`src/metronic/sass/_variables.custom.scss`) mirror the design tokens:
+  `$border-radius-xs` is 4px (`--radius-sm`), `$border-radius-sm` is 6px (`--radius-md`),
+  `$border-radius` and `$border-radius-lg` are 8px (`--radius-lg`), `$border-radius-xl` is 12px (`--radius-xl`),
+  and `$border-radius-2xl` is 16px (`--radius-2xl`).
+- **No inline `borderRadius`** in JSX elements. Use standard utility classes (`rounded-sm`, `rounded-md`,
+  `rounded-lg`, etc.).
+
 ## Guards
 
 | What                                                    | Enforced by                                                          |
@@ -359,7 +416,9 @@ One scale, the five weights `fonts.css` loads (Inter 300–700), declared in
 | Every semantic utility waldur-ui/shell use is declared  | `tailwindTheme.test.ts`                                              |
 | No Tailwind border colour next to Bootstrap's `.border` | `waldur-custom/no-bootstrap-border-with-tailwind-color` (autofix)    |
 | State colours from the status matrix, not raw ramps     | `waldur-custom/no-raw-status-ramp`                                   |
+| Font size on the scale; no `fs-*` or inline size        | `waldur-custom/require-font-size-scale` (autofixes `fs-*`), stylelint|
 | Font weight on the scale; no `fw-*` or inline weight    | `waldur-custom/require-weight-scale` (autofixes `fw-*`), stylelint   |
+| Corner radius on the scale; no retired or inline radius | `waldur-custom/enforce-border-radius-tokens` (autofix), stylelint    |
 | Bootstrap emits no `fw-*`; Tailwind exactly the scale   | `src/tailwindBootstrapColors.test.ts`                                |
 | Every physical colour has a `dark:` counterpart         | `waldur-custom/require-dark-pair`                                    |
 | No `--bs-*` reads                                       | `waldur-custom/no-bootstrap-css-vars`, stylelint                     |

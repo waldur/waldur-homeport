@@ -124,7 +124,7 @@ export const DataLoader = ({
   return (
     <div
       className={classNames(
-        'd-flex flex-column flex-lg-row h-100',
+        'flex flex-col lg:flex-row h-full',
         selectedCategory && 'category-selected',
       )}
     >

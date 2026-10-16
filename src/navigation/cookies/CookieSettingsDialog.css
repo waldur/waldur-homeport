@@ -1,5 +1,5 @@
 .cookie-settings-dialog .modal-title {
-  font-size: 1.385rem;
+  font-size: var(--text-lg);
 }
 
 .cookie-settings-category:last-child {

@@ -111,11 +111,7 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
         Anchor only gives Content something to position against.
       */}
       <PopoverAnchor asChild>
-        <div
-          className="d-flex align-items-center"
-          id="searchContainer"
-          ref={anchorRef}
-        >
+        <div className="flex items-center" id="searchContainer" ref={anchorRef}>
           {compact ? (
             <Tooltip label={translate('Search')} side="bottom">
               <button
@@ -136,7 +132,7 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
                 query={query}
                 setQuery={setQuery}
                 show={show}
-                className="d-none d-lg-block"
+                className="hidden lg:block"
                 showShortcut={!show}
                 onOpen={() => setShow(true)}
               />
@@ -145,7 +141,7 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
                   type="button"
                   onClick={() => setShow(true)}
                   aria-label={translate('Search')}
-                  className="btn-nav-item d-lg-none"
+                  className="btn-nav-item lg:hidden"
                 >
                   <span className="svg-icon svg-icon-2">
                     <MagnifyingGlassIcon weight="bold" />

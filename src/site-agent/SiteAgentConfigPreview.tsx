@@ -53,7 +53,7 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
     <ModalDialog
       title={translate('Site Agent Configuration')}
       footer={
-        <div className="d-flex justify-content-between w-100">
+        <div className="flex justify-between w-full">
           <BaseButton
             variant="tertiary"
             onClick={onBack}
@@ -61,7 +61,7 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
             label={translate('Back')}
             size="lg"
           />
-          <div className="d-flex gap-2">
+          <div className="flex gap-2">
             <BaseButton
               variant="tertiary"
               onClick={handleCopy}

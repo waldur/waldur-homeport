@@ -27,7 +27,7 @@ export const MultiSelectField: FunctionComponent<{ input; options }> = ({
             })
           }
           label={
-            <span className="d-flex justify-content-between gap-2">
+            <span className="flex justify-between gap-2">
               {option.title}
               {option.help_text && (
                 <Tooltip label={option.help_text} autoWidth={true}>

@@ -83,7 +83,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
         <Menu.Item
           key={index}
           asChild
-          className="d-flex justify-content-between px-5 py-3"
+          className="flex justify-between px-5 py-3"
         >
           <a
             href={endpoint.url}
@@ -94,7 +94,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
             // as two colours and drops `text-anchor`; Slot only joins them.
             className="text-anchor text-brand"
           >
-            <span className="d-flex flex-center me-6">
+            <span className="flex flex-center me-6">
               <span className="svg-icon svg-icon-2 svg-icon-primary me-[12px]">
                 <ArrowSquareOutIcon weight="bold" />
               </span>

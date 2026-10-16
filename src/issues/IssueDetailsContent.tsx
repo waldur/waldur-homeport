@@ -55,7 +55,7 @@ export const IssueDetailsContent: FunctionComponent<
         cardBordered
         hideQuickSection
         title={
-          <div className="d-flex flex-wrap align-items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <h3 className="mb-0">
               {issue.key ? `${issue.key}: ${issue.summary}` : issue.summary}
             </h3>
@@ -98,7 +98,7 @@ export const IssueDetailsContent: FunctionComponent<
             value={issue.caller_full_name}
             isStuck
             labelClass="min-w-100px"
-            className="fs-6"
+            className="text-sm"
           />
           <Field
             label={translate('Created')}
@@ -108,14 +108,14 @@ export const IssueDetailsContent: FunctionComponent<
             })}
             isStuck
             labelClass="min-w-100px"
-            className="fs-6"
+            className="text-sm"
           />
           <Field
             label={translate('Request type')}
             value={issue.type}
             isStuck
             labelClass="min-w-100px"
-            className="fs-6"
+            className="text-sm"
           />
           {issue.link && staffOrSupport && (
             <Field
@@ -130,7 +130,7 @@ export const IssueDetailsContent: FunctionComponent<
               }
               isStuck
               labelClass="min-w-100px"
-              className="fs-6"
+              className="text-sm"
             />
           )}
           {issue.order_uuid && (
@@ -147,7 +147,7 @@ export const IssueDetailsContent: FunctionComponent<
               }
               isStuck
               labelClass="min-w-100px"
-              className="fs-6"
+              className="text-sm"
             />
           )}
         </div>

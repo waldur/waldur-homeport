@@ -547,9 +547,9 @@ const FieldMappingTable: FC<FieldMappingTableProps> = ({
   targetLabel,
 }) => (
   <div className="table-responsive">
-    <table className="table align-middle table-row-bordered fs-7 gy-3 gx-4 mb-0">
+    <table className="table align-middle table-row-bordered text-xs gy-3 gx-4 mb-0">
       <thead>
-        <tr className="text-start text-quaternary font-medium fs-8 text-uppercase gs-0">
+        <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
           <th>{sourceLabel}</th>
           <th>{targetLabel || translate('Waldur Model.Field')}</th>
           <th>{translate('Description')}</th>
@@ -594,7 +594,7 @@ export const ArrowHowItWorksDialog: FC = () => {
       title={translate('How Arrow Integration works')}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="d-flex flex-column gap-8">
+      <div className="flex flex-col gap-8">
         {/* Overview */}
         <section>
           <AlertItem
@@ -803,9 +803,9 @@ export const ArrowHowItWorksDialog: FC = () => {
             )}
           </p>
           <div className="table-responsive">
-            <table className="table align-middle table-row-bordered fs-7 gy-4 gx-4">
+            <table className="table align-middle table-row-bordered text-xs gy-4 gx-4">
               <thead>
-                <tr className="text-start text-quaternary font-medium fs-8 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
                   <th style={{ width: '15%' }}>{translate('Type')}</th>
                   <th style={{ width: '25%' }}>{translate('Trigger')}</th>
                   <th style={{ width: '25%' }}>{translate('Name format')}</th>
@@ -819,7 +819,7 @@ export const ArrowHowItWorksDialog: FC = () => {
                 {invoiceItemTypes.map((item) => (
                   <tr key={item.source}>
                     <td className="font-medium">
-                      <span className="d-block">{item.type}</span>
+                      <span className="block">{item.type}</span>
                       <span className="text-quaternary small">
                         {item.source}
                       </span>
@@ -950,9 +950,9 @@ export const ArrowHowItWorksDialog: FC = () => {
         <section>
           <h4 className="mb-4">{translate('Sync states')}</h4>
           <div className="table-responsive">
-            <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
+            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
                   <th style={{ width: '20%' }}>{translate('State')}</th>
                   <th>{translate('Description')}</th>
                 </tr>

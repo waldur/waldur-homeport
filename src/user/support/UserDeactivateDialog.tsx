@@ -70,7 +70,7 @@ export const UserDeactivateDialog: FunctionComponent<
           </>
         }
       >
-        <p className="text-quaternary fs-6">
+        <p className="text-quaternary text-sm">
           {translate(
             'The account will be deactivated and will not be reactivated automatically by the system, even if the user regains roles. A staff member can reactivate it manually.',
           )}

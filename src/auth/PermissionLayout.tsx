@@ -87,7 +87,7 @@ const RestrictedView = () => {
   return (
     <Card className="card-bordered">
       <Card.Body>
-        <div className="d-flex flex-column align-items-center justify-content-center my-10 my-xl-20 min-h-150px">
+        <div className="flex flex-col items-center justify-center my-10 my-xl-20 min-h-150px">
           <span className="svg-icon mb-6 svg-icon-5x text-danger">
             <ShieldWarningIcon weight="bold" />
           </span>

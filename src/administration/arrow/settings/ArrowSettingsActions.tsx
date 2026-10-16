@@ -17,7 +17,7 @@ export const ArrowSettingsActions = ({
   const { refetch } = useArrowSettings();
 
   return (
-    <div className="d-flex gap-2">
+    <div className="flex gap-2">
       {settings.sync_enabled ? (
         <ArrowSettingsPauseSyncAction refetch={refetch} />
       ) : (

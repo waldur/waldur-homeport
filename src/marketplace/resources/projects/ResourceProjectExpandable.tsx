@@ -81,11 +81,11 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
       <EmbeddedTabs
         defaultValue="active"
         header={
-          <div className="d-flex align-items-center justify-content-between gap-4 px-4 py-3 border-b-[1px] border-b-secondary">
-            <span className="fs-5 font-medium text-primary">
+          <div className="flex items-center justify-between gap-4 px-4 py-3 border-b-[1px] border-b-secondary">
+            <span className="text-base font-medium text-primary">
               {translate('Team')}
             </span>
-            <div className="d-flex align-items-center gap-2">
+            <div className="flex items-center gap-2">
               <ActionsMenu
                 toggle="labeled"
                 size="sm"

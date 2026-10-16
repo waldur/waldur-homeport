@@ -88,7 +88,7 @@ export const MatrixCallDockSlot: FC<MatrixCallDockSlotProps> = ({ roomId }) => {
     return (
       <div
         data-testid="dock-slot-pip-placeholder"
-        className="overflow-hidden d-flex flex-column align-items-center justify-content-center gap-2 h-100 w-100 bg-brand-subtle"
+        className="overflow-hidden flex flex-col items-center justify-center gap-2 h-full w-full bg-brand-subtle"
       >
         <PictureInPictureIcon
           size={32}
@@ -114,7 +114,7 @@ export const MatrixCallDockSlot: FC<MatrixCallDockSlotProps> = ({ roomId }) => {
     <div
       ref={slotRef}
       data-testid="dock-slot"
-      className="overflow-hidden d-flex h-100 w-100"
+      className="overflow-hidden flex h-full w-full"
     />
   );
 };

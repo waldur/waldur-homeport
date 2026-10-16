@@ -59,7 +59,7 @@ export const AccordionCard: FC<AccordionCardProps> = (props) => {
         className={cn(
           // min-w-0: as Bootstrap's .card, so a card in a flex/grid row can
           // shrink and let wide content scroll instead of widening it.
-          'flex min-w-0 flex-col rounded-[8px] border-[1px] border-solid border-secondary bg-primary',
+          'flex min-w-0 flex-col rounded-lg border-[1px] border-solid border-secondary bg-primary',
           props.solid && 'overflow-hidden',
           props.secondary && 'pb-[4px]',
           props.size === 'sm' && 'py-[0.307rem]',

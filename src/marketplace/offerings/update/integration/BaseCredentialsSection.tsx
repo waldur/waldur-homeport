@@ -26,7 +26,7 @@ export const BaseCredentialsSection: FC<BaseCredentialsSectionProps> = (
     <FormTable.Card
       title={translate('Credentials')}
       actions={
-        <div className="d-flex gap-2 align-items-center">
+        <div className="flex gap-2 items-center">
           {props.actions}
           <SyncButton offering={props.offering} refetch={props.refetch} />
         </div>

@@ -1,7 +1,7 @@
 .capacity-bar {
   .quota-info {
     margin-bottom: 1px !important;
-    font-size: 12px;
+    font-size: var(--text-xs);
     font-weight: var(--font-weight-medium);
     text-align: center;
     white-space: nowrap;

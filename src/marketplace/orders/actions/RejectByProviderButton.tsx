@@ -72,7 +72,7 @@ export const RejectByProviderButton: FunctionComponent<
   return (
     <ActionItem
       as={props.as}
-      className={props.as === BaseButton ? 'w-100' : 'text-danger'}
+      className={props.as === BaseButton ? 'w-full' : 'text-danger'}
       title={translate('Decline')}
       action={mutate}
       disabled={isLoading}

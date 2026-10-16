@@ -84,9 +84,9 @@ const columns: Column<ResourceDemandStat>[] = [
   {
     title: translate('Offering'),
     render: ({ row }) => (
-      <div className="d-flex flex-column">
+      <div className="flex flex-col">
         <span>{row.offering_name}</span>
-        <span className="text-quaternary fs-8">{row.provider_name}</span>
+        <span className="text-quaternary text-xs">{row.provider_name}</span>
       </div>
     ),
   },

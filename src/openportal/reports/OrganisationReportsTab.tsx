@@ -157,7 +157,7 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
             />
           </Col>
         </Row>
-        <div className="d-flex align-items-center gap-4 mb-3 flex-wrap">
+        <div className="flex items-center gap-4 mb-3 flex-wrap">
           <Checkbox
             id="dlg-showFinished"
             checked={showFinished}
@@ -179,7 +179,7 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
           />
         </div>
 
-        <div className="d-flex align-items-center gap-2 mb-2">
+        <div className="flex items-center gap-2 mb-2">
           <Checkbox
             id="select-all-visible"
             checked={allVisibleSelected && visible.length > 0}
@@ -208,14 +208,14 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
             </p>
           )}
           {visible.map((p) => (
-            <div key={p.uuid} className="d-flex align-items-start gap-2 py-1">
+            <div key={p.uuid} className="flex items-start gap-2 py-1">
               <Checkbox
                 id={`proj-${p.uuid}`}
                 checked={draft.has(p.uuid)}
                 onChange={() => toggle(p.uuid)}
                 className="mt-1"
                 label={
-                  <span className="flex-grow-1" style={{ cursor: 'pointer' }}>
+                  <span className="grow" style={{ cursor: 'pointer' }}>
                     <span>{p.name}</span>
                     {(p.start_date || p.end_date) && (
                       <span className="text-quaternary small ms-2">
@@ -226,9 +226,9 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
                     {p.is_in_grace_period && (
                       <Badge
                         variant="warning"
+                        size="sm"
                         tone="outline"
                         className="ms-2"
-                        style={{ fontSize: '0.7em' }}
                       >
                         {translate('In grace')}
                       </Badge>
@@ -236,9 +236,9 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
                     {p.is_expired && !p.is_in_grace_period && (
                       <Badge
                         variant="neutral"
+                        size="sm"
                         tone="outline"
                         className="ms-2"
-                        style={{ fontSize: '0.7em' }}
                       >
                         {translate('Finished')}
                       </Badge>
@@ -762,11 +762,11 @@ export const OrganisationReportsTab: FC = () => {
   return (
     <Container fluid className="py-4">
       {/* ── Toolbar ──────────────────────────────────────────────────── */}
-      <div className="d-flex align-items-center gap-3 mb-4 flex-wrap">
+      <div className="flex items-center gap-3 mb-4 flex-wrap">
         <h4 className="mb-0">{translate('Usage Report')}</h4>
 
         {projects && projects.length > 0 && (
-          <div className="d-flex align-items-center gap-2">
+          <div className="flex items-center gap-2">
             <span className="text-quaternary small">
               {translate('{count} of {total} {project} selected', {
                 count: effectiveSelected.size,
@@ -824,7 +824,7 @@ export const OrganisationReportsTab: FC = () => {
         )}
 
         {loadTriggered && (
-          <div className="ms-auto d-flex align-items-center gap-2">
+          <div className="ms-auto flex items-center gap-2">
             {projectsCacheAge && (
               <span className="text-quaternary small">
                 {translate('Cached {age}', {
@@ -902,7 +902,7 @@ export const OrganisationReportsTab: FC = () => {
             </Row>
 
             {/* Project status checkboxes */}
-            <div className="d-flex align-items-center gap-4 mb-3 flex-wrap">
+            <div className="flex items-center gap-4 mb-3 flex-wrap">
               <Checkbox
                 id="includeFinished"
                 checked={includeFinished}

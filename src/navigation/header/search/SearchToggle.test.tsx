@@ -44,7 +44,7 @@ const expectClosed = () => waitFor(() => expect(getPopup()).toBeNull());
 const renderHeader = (props: { compact?: boolean } = {}) =>
   renderWithProviders(
     <>
-      <style>{'.d-lg-none { display: none; }'}</style>
+      <style>{'.d-lg-none, .lg\\:hidden { display: none; }'}</style>
       <button type="button">Before</button>
       <SearchToggle {...props} />
       <button type="button">After</button>

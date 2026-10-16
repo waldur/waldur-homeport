@@ -128,9 +128,9 @@ export const AppFooter: FunctionComponent = () => {
     : translate('Update available');
 
   return (
-    <div className="footer d-flex flex-column">
-      <div className="py-4 d-flex flex-lg-column">
-        <div className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between fs-6">
+    <div className="footer flex flex-col">
+      <div className="py-4 flex lg:flex-col">
+        <div className="container-fluid flex flex-col md:flex-row items-center justify-between text-sm">
           <div className="text-primary font-medium order-2 order-md-1 icon-align">
             {user && (
               <>
@@ -144,7 +144,7 @@ export const AppFooter: FunctionComponent = () => {
                   size={20}
                   weight="bold"
                   onClick={openUpgradeDialog}
-                  className={`ms-8px d-inline-block cursor-pointer ${badgeColorClass}`}
+                  className={`ms-8px inline-block cursor-pointer ${badgeColorClass}`}
                 />
               </Tooltip>
             )}

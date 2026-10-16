@@ -160,7 +160,7 @@ export const AggregateLimitWidget = ({
   return (
     <WidgetCard
       cardTitle={<TitleWithTip />}
-      className="h-100"
+      className="h-full"
       actions={actions}
       cardAction={cardAction()}
     >

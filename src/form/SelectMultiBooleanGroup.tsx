@@ -8,9 +8,7 @@ export const SelectMultiBooleanGroup: FunctionComponent<any> = (props) => {
   return (
     // A checkbox list is one group, so its items sit close together; switches
     // are separate settings and keep their room.
-    <div
-      className={`d-flex flex-column ${props.checkboxes ? 'gap-8px' : 'gap-6'}`}
-    >
+    <div className={`flex flex-col ${props.checkboxes ? 'gap-8px' : 'gap-6'}`}>
       {props.options.map((value, index) => (
         <Control
           label={value}

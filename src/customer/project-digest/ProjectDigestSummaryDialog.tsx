@@ -12,7 +12,7 @@ export const ProjectDigestSummaryDialog: FC = () => {
       title={translate('How project digest works')}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="d-flex flex-column gap-8">
+      <div className="flex flex-col gap-8">
         <section>
           <h4 className="mb-4">{translate('Overview')}</h4>
           <p className="text-quaternary mb-0">
@@ -61,9 +61,9 @@ export const ProjectDigestSummaryDialog: FC = () => {
             )}
           </p>
           <div className="table-responsive">
-            <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
+            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
                   <th>{translate('Section')}</th>
                   <th>{translate('Description')}</th>
                 </tr>
@@ -107,9 +107,9 @@ export const ProjectDigestSummaryDialog: FC = () => {
         <section>
           <h4 className="mb-4">{translate('Frequency options')}</h4>
           <div className="table-responsive">
-            <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
+            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
                   <th>{translate('Frequency')}</th>
                   <th>{translate('Description')}</th>
                 </tr>

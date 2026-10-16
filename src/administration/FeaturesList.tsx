@@ -253,12 +253,12 @@ export const FeaturesList = () => {
         <form onSubmit={handleSubmit}>
           <Card className="card-bordered">
             <Card.Header>
-              <div className="d-flex flex-column">
+              <div className="flex flex-col">
                 <Card.Title className="mb-0">
                   <h3>{translate('Features')}</h3>
                 </Card.Title>
               </div>
-              <div className="card-toolbar d-flex align-items-center gap-4 flex-nowrap">
+              <div className="card-toolbar flex items-center gap-4 flex-nowrap">
                 <TableQuery
                   query={query}
                   setQuery={setQuery}
@@ -277,14 +277,14 @@ export const FeaturesList = () => {
             <Card.Body style={{ paddingTop: 8 }}>
               <Tabs mount="all" value={activeKey} onValueChange={handleSelect}>
                 <div
-                  className="d-flex align-items-end gap-1"
+                  className="flex items-end gap-1"
                   style={{
                     borderBottom: '1px solid var(--border-secondary)',
                   }}
                 >
                   <div
                     ref={scrollRef}
-                    className="flex-grow-1"
+                    className="grow"
                     style={{
                       overflowX: 'auto',
                       scrollbarWidth: 'none',
@@ -333,7 +333,7 @@ export const FeaturesList = () => {
                         <BaseButton
                           variant="text-secondary"
                           size="md"
-                          className="flex-shrink-0"
+                          className="shrink-0"
                           style={{ marginBottom: 2 }}
                           tooltip={translate('More tabs')}
                           iconNode={
@@ -355,7 +355,7 @@ export const FeaturesList = () => {
                               key={tab.key}
                               disabled={!hasMatches && !!query}
                               className={classNames(
-                                'd-flex justify-content-between align-items-center',
+                                'flex justify-between items-center',
                                 { active: tab.key === activeKey },
                               )}
                               onClick={() => {
@@ -382,8 +382,8 @@ export const FeaturesList = () => {
                   )}
                 </div>
                 {query && tabsWithMatches.length > 0 && (
-                  <div className="d-flex align-items-center gap-2 pt-3 pb-4 flex-wrap border-b-[1px] border-b-secondary">
-                    <span className="text-quaternary fs-7">
+                  <div className="flex items-center gap-2 pt-3 pb-4 flex-wrap border-b-[1px] border-b-secondary">
+                    <span className="text-quaternary text-xs">
                       {translate('{count} results found in:', {
                         count: totalResults,
                       })}

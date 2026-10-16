@@ -47,7 +47,7 @@ const TITLE = (
 /** The consumers a field feeds, so the cost of switching it off is visible here
  * rather than only in the backend it silently affects. */
 const UsageList: FC<{ usage: ProposalFieldUsage[] }> = ({ usage }) => (
-  <div className="d-flex flex-wrap gap-2">
+  <div className="flex flex-wrap gap-2">
     {usage.map((item) => {
       const tooltip = getUsageTooltip(item);
       const badge = (

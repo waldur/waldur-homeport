@@ -146,7 +146,7 @@ export const SubnetValueContainer = (props) => {
 
   return (
     <components.ValueContainer {...props} className="pe-0">
-      <div className="d-flex align-items-center justify-content-between ellipsis">
+      <div className="flex items-center justify-between ellipsis">
         {props.children}
         <Tooltip
           autoWidth
@@ -376,7 +376,7 @@ const renderNetworkRows = ({
                     spaceless
                   />
                 </Col>
-                <Col xs="auto" className="align-self-end">
+                <Col xs="auto" className="self-end">
                   <BaseButton
                     onClick={() => fields.remove(index)}
                     iconNode={<TrashIcon weight="bold" />}
@@ -558,20 +558,20 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
           cardBordered={false}
           minHeight="auto"
           headerClassName="mx-0"
-          titleClassName="fs-6 text-secondary"
+          titleClassName="text-sm text-secondary"
         />
       </div>
 
       <Form.Group className="mb-2 border-b-[1px] border-b-secondary">
-        <div className="d-flex justify-content-between mb-5">
-          <Form.Label className="fs-6 font-semibold mb-0">
+        <div className="flex justify-between mb-5">
+          <Form.Label className="text-sm font-semibold mb-0">
             {translate('Network')}
           </Form.Label>
           <Switch
             checked={customIpEnabled}
             onCheckedChange={setCustomIpEnabled}
             size="sm"
-            className="align-self-center"
+            className="self-center"
             label={translate('Custom IP configuration')}
           />
         </div>
@@ -589,7 +589,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
           cardBordered={false}
           minHeight="auto"
           headerClassName="mx-0"
-          titleClassName="fs-6 text-secondary"
+          titleClassName="text-sm text-secondary"
           tableActions={
             <div
               style={
@@ -605,7 +605,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
                   setPortSecurityEnabled(!portSecurityEnabled);
                 }}
                 size="sm"
-                className="align-self-center font-normal"
+                className="self-center font-normal"
                 label={translate('Disable port security')}
               />
             </div>

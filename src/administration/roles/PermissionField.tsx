@@ -141,7 +141,7 @@ const PermissionGroupTab: FC<PermissionGroupTabProps> = ({
         size="sm"
         shape="pill"
         tone="outline"
-        className="min-w-[62px] justify-center flex-shrink-0"
+        className="min-w-[62px] justify-center shrink-0"
       >
         {coverage.label}
       </Badge>

@@ -58,12 +58,12 @@
       align-items: center;
       justify-content: center;
       border: 1px solid var(--border-secondary);
-      border-radius: 8px;
+      border-radius: var(--radius-lg);
       margin-bottom: 0.75rem;
     }
 
     .category-title {
-      font-size: 0.875rem;
+      font-size: var(--text-sm);
       font-weight: var(--font-weight-semibold);
       text-align: center;
       white-space: nowrap;

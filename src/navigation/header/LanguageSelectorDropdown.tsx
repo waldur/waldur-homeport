@@ -45,7 +45,7 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
       <Menu.SubTrigger>
         <span className="relative flex grow items-center">
           {translate('Language')}
-          <span className="d-flex flex-center gap-2 fs-8 rounded bg-tertiary dark:bg-quaternary px-3 py-1 position-absolute translate-middle-y top-50 end-0">
+          <span className="flex flex-center gap-2 text-xs rounded bg-tertiary dark:bg-quaternary px-3 py-1 position-absolute translate-middle-y top-50 end-0">
             {currentLanguage.label}{' '}
             <CountryFlagIcon
               countryCode={LanguageCountry[currentLanguage.code]}

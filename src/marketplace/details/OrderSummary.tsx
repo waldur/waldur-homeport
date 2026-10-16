@@ -18,7 +18,7 @@ import { OrderSummaryProps } from './types';
 export const SummaryTable: FC<OrderSummaryProps> = (props) => {
   const formData = useOrderFormData();
   return (
-    <div className={props.onlyDetails ? 'fs-6' : 'mb-8 fs-6'}>
+    <div className={props.onlyDetails ? 'text-sm' : 'mb-8 text-sm'}>
       {props.extraComponent ? createElement(props.extraComponent, props) : null}
       {formData && formData.plan && (
         <OrderSummaryPlanRows

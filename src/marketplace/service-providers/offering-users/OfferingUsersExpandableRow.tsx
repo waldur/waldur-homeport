@@ -61,7 +61,7 @@ export const PosixGroupsTable = ({
           title: translate('Group'),
           render: ({ row }) =>
             row.kind === 'provider_project_group' ? (
-              <span className="d-inline-flex align-items-center gap-2">
+              <span className="inline-flex items-center gap-2">
                 {row.group_name ? <code>{row.group_name}</code> : null}
                 <Badge variant="primary" tone="light">
                   {translate('Service provider group')}

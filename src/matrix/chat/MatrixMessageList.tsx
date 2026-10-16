@@ -270,7 +270,7 @@ const MatrixMessageListInner: FC<MatrixMessageListProps> = ({
 
   if (loading) {
     return (
-      <div className="d-flex justify-content-center align-items-center h-100">
+      <div className="flex justify-center items-center h-full">
         <LoadingSpinner />
       </div>
     );
@@ -284,14 +284,18 @@ const MatrixMessageListInner: FC<MatrixMessageListProps> = ({
   const showEmptyState = messages.length === 0 && !loadingOlder;
 
   return (
-    <div ref={containerRef} className="tc-stream h-100" onScroll={handleScroll}>
+    <div
+      ref={containerRef}
+      className="tc-stream h-full"
+      onScroll={handleScroll}
+    >
       {loadingOlder && (
         <div className="text-center">
           <LoadingSpinner />
         </div>
       )}
       {showEmptyState ? (
-        <div className="d-flex justify-content-center align-items-center flex-grow-1 text-quaternary">
+        <div className="flex justify-center items-center grow text-quaternary">
           {translate('No messages yet. Start the conversation!')}
         </div>
       ) : (

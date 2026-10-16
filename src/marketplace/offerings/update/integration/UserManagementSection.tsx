@@ -64,7 +64,7 @@ const renderIdSource = (value: string) =>
   value ? (
     getOptionLabel(POSIX_ID_SOURCE_OPTIONS, value)
   ) : (
-    <div className="d-flex flex-column align-items-start">
+    <div className="flex flex-col items-start">
       <span>{translate('POSIX ID pool')}</span>
       <small className="text-quaternary">{translate('Default')}</small>
     </div>

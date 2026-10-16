@@ -30,8 +30,8 @@ export const ComponentOptionLabel: FC<Props> = ({ option, compact }) => {
       : translate('Usage-based');
   if (compact) {
     return (
-      <span className="d-inline-flex align-items-center gap-2">
-        <span className="text-truncate">
+      <span className="inline-flex items-center gap-2">
+        <span className="truncate">
           {option.offering_name} · {option.component_name}
         </span>
         <LimitPeriodChip
@@ -43,11 +43,11 @@ export const ComponentOptionLabel: FC<Props> = ({ option, compact }) => {
     );
   }
   return (
-    <div className="lh-sm">
-      <div className="text-truncate">
+    <div className="leading-tight">
+      <div className="truncate">
         {option.offering_name} · {option.component_name}
       </div>
-      <div className="d-flex align-items-center gap-2 mt-1">
+      <div className="flex items-center gap-2 mt-1">
         <small className="text-quaternary">{billingLabel}</small>
         <LimitPeriodChip
           billingType={option.billing_type}

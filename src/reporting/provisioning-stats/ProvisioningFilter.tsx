@@ -21,8 +21,8 @@ export const ProvisioningFilter: FC<ProvisioningFilterProps> = ({
   onDaysChange,
 }) => {
   return (
-    <div className="d-flex align-items-center gap-4">
-      <label className="text-quaternary fs-7">
+    <div className="flex items-center gap-4">
+      <label className="text-quaternary text-xs">
         {translate('Time period')}:
       </label>
       <div style={{ minWidth: 200 }}>

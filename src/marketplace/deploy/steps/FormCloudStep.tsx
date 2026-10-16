@@ -165,11 +165,11 @@ export const FormCloudStep = (props: FormStepProps) => {
       disabledTooltip={props.disabledTooltip}
       actions={
         showExperimentalUiComponents ? (
-          <div className="d-flex justify-content-between flex-grow-1 align-items-center">
+          <div className="flex justify-between grow items-center">
             <div>
               <StepCardTabs tabs={tabs} tab={tab} setTab={setTab} />
             </div>
-            <div className="d-flex gap-10 justify-content-end">
+            <div className="flex gap-10 justify-end">
               <BaseButton
                 variant="tertiary"
                 className="text-nowrap"

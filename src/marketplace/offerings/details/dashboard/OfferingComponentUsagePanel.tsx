@@ -76,10 +76,10 @@ export const OfferingComponentUsagePanel: FC<
                       label={row.component_name}
                       value={
                         <div
-                          className="d-flex flex-column gap-1"
+                          className="flex flex-col gap-1"
                           style={{ minWidth: 150 }}
                         >
-                          <div className="d-flex justify-content-between fs-7 text-quaternary">
+                          <div className="flex justify-between text-xs text-quaternary">
                             <span>
                               {formatUsageValue(row.total_consumed, true)} /{' '}
                               {formatUsageValue(row.total_allocated, true)}{' '}

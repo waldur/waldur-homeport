@@ -123,7 +123,7 @@ const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
     as={Link}
     state={item.to.state}
     params={item.to.params}
-    className="card-bordered flex-grow-1 min-h-225px hover:border-[var(--border-brand)]"
+    className="card-bordered grow min-h-225px hover:border-[var(--border-brand)]"
   >
     <Card.Body className="py-10 px-6">
       {item.icon && (
@@ -147,7 +147,7 @@ const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
         </span>
       )}
       <h1 className="display-6 text-nowrap mb-0 mt-2">{item.value}</h1>
-      <p className="fs-7 font-semibold mb-5 h-40px text-primary">
+      <p className="text-xs font-semibold mb-5 h-40px text-primary">
         {item.title}
       </p>
       <ChangesAmountBadge changes={item.changes} />

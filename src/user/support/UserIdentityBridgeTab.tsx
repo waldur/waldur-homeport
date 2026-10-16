@@ -40,7 +40,7 @@ const FreshnessDot: FC<{ ageDays: number }> = ({ ageDays }) => {
     label = translate('Stale');
   }
   return (
-    <span className="d-inline-flex align-items-center gap-2">
+    <span className="inline-flex items-center gap-2">
       <span
         className={`rounded-full ${color}`}
         style={{ width: 8, height: 8, display: 'inline-block' }}
@@ -228,7 +228,7 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
   const attributeEntries = Object.entries(attributeSources);
 
   return (
-    <div className="d-flex flex-column gap-6">
+    <div className="flex flex-col gap-6">
       {/* Section: Identity Manager Settings */}
       <div>
         <h5 className="mb-4">{translate('Identity manager settings')}</h5>
@@ -321,7 +321,7 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
           <p className="text-quaternary mb-3">
             {translate('These fields can be synced via the Identity Bridge.')}
           </p>
-          <div className="d-flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
             {status.effective_bridge_fields.map((field) => (
               <Badge
                 key={field}

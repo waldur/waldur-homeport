@@ -155,7 +155,7 @@ const RowFeedback = ({ name }: { name: string }) => {
   }
   if (!message) return null;
   return (
-    <tr className="fs-6">
+    <tr className="text-sm">
       <td colSpan={getFeedbackColSpan()} className="border-0 pt-0 pb-2">
         {message}
       </td>
@@ -254,7 +254,7 @@ export const EmailsListGroup = ({
           <Form.Group>
             <table className="table h-auto table-fixed align-top px-0 gy-2 mb-0">
               <thead>
-                <tr className="fs-6 font-medium">
+                <tr className="text-sm font-medium">
                   {/* Fixed-layout table: one column without a width takes
                       the free space, so Email does when Civil number is
                       hidden. */}
@@ -292,7 +292,7 @@ export const EmailsListGroup = ({
                   const rowEmail = fields.value?.[i]?.email;
                   return (
                     <Fragment key={user}>
-                      <tr className="fs-6">
+                      <tr className="text-sm">
                         <td>
                           <Field
                             name={`${user}.email`}

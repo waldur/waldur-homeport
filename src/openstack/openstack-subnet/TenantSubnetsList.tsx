@@ -91,7 +91,7 @@ export const TenantSubnetsList: FunctionComponent<{ resourceScope }> = ({
           // than missing data, so it is shown too, as the summary shows it.
           render: ({ row }) =>
             row.ip_version === 6 ? (
-              <span className="d-inline-flex align-items-center gap-2">
+              <span className="inline-flex items-center gap-2">
                 {row.cidr}
                 <Badge
                   variant="secondary"

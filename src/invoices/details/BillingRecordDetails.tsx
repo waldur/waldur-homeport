@@ -28,7 +28,7 @@ export const BillingRecordDetails: FC<BillingRecordDetailsProps> = ({
       footer={
         <table className="table bg-secondary border-t-[1px] border-t-secondary border-b-[1px] border-b-secondary align-middle">
           <tbody>
-            <tr className="fs-6 font-medium">
+            <tr className="text-sm font-medium">
               {totalFiltered !== null && (
                 <td className="text-primary">
                   <span>{translate('Total filtered')}</span>{' '}

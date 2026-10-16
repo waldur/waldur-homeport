@@ -83,7 +83,7 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
           )}
           <div className="attachment-item__body">
             <h6 className="font-medium text-secondary">{fileName}</h6>
-            <p className="fs-6 text-quaternary">
+            <p className="text-sm text-quaternary">
               {[
                 attachment.file_size
                   ? formatFilesize(attachment.file_size, 'B')
@@ -104,7 +104,7 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
               weight="bold"
             />
           </div>
-          <div className="attachment-item__body align-self-center">
+          <div className="attachment-item__body self-center">
             <h6 className="font-medium text-secondary">
               {translate('Attachment is broken.')}
             </h6>

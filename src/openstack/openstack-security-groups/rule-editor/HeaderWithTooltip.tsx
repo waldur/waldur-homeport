@@ -14,7 +14,7 @@ export const HeaderWithTooltip: FC<HeaderWithTooltipProps> = ({
   className,
 }) => (
   <th className={className}>
-    <div className="d-flex align-items-center">
+    <div className="flex items-center">
       <span className="me-2">{label}</span>
       <HelpIcon label={tooltip} />
     </div>

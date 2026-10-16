@@ -80,7 +80,7 @@ export const ReviewDetails: FC<{ review: ProposalReview }> = ({ review }) => {
         label={translate('Score')}
         value={
           review.summary_score ? (
-            <div className="d-flex align-items-center gap-2">
+            <div className="flex items-center gap-2">
               <RateStars value={review.summary_score} size={18} />
               <span className="text-quaternary">
                 ({review.summary_score}/5)

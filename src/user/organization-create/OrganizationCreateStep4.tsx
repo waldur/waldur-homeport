@@ -67,7 +67,7 @@ export const OrganizationCreateStep4: FunctionComponent<
   }, [checklistFetched]);
 
   return (
-    <div className="d-flex flex-column gap-5">
+    <div className="flex flex-col gap-5">
       <Card className="border-0 shadow-sm">
         <Card.Body className="p-8">
           <h5 className="mb-4 font-semibold">{translate('Your Intent')}</h5>
@@ -80,7 +80,7 @@ export const OrganizationCreateStep4: FunctionComponent<
           {loading ? (
             <LoadingSpinner />
           ) : (
-            <div className="d-flex flex-column gap-4">
+            <div className="flex flex-col gap-4">
               {checklistQuestions.map((question) => (
                 <ChecklistQuestionField
                   key={question.uuid}

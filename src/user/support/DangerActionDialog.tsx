@@ -80,7 +80,7 @@ export const DangerActionDialog: FunctionComponent<DangerActionPanelProps> = (
       title={props.dialogTitle}
       iconNode={<TrashIcon weight="bold" />}
       iconColor="danger"
-      bodyClassName="text-quaternary fs-6"
+      bodyClassName="text-quaternary text-sm"
       footer={<CloseDialogButton label={translate('OK')} />}
     >
       {props.fallbackMessage}

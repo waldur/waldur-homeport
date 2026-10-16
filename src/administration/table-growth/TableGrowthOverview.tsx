@@ -18,13 +18,13 @@ const StatCard: FC<{
   valueClass?: string;
   extra?: ReactNode;
 }> = ({ value, label, valueClass = '', extra }) => (
-  <Card className="card-bordered mb-5 h-100">
+  <Card className="card-bordered mb-5 h-full">
     <Card.Body>
-      <div className="d-flex align-items-center">
-        <strong className={`fs-1 ${valueClass}`}>{value}</strong>
+      <div className="flex items-center">
+        <strong className={`text-2xl ${valueClass}`}>{value}</strong>
         {extra}
       </div>
-      <strong className="d-block text-quaternary">{label}</strong>
+      <strong className="block text-quaternary">{label}</strong>
     </Card.Body>
   </Card>
 );

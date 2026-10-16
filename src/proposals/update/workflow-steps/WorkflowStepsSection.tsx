@@ -75,7 +75,7 @@ const StepNameCell = ({ row }: { row: CallWorkflowStep }) => {
   // be noise on a table whose rows are mostly enabled.
   const disabled = !row.is_enabled && !def?.mandatory;
   return (
-    <div className="d-flex align-items-center gap-2">
+    <div className="flex items-center gap-2">
       {def?.mandatory && (
         <Tooltip label={translate('Mandatory step. Cannot be removed.')}>
           <LockSimpleIcon size={14} weight="bold" className="text-quaternary" />

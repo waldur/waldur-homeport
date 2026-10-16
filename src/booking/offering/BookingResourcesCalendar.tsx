@@ -80,11 +80,11 @@ export const BookingResourcesCalendar: FunctionComponent<
         />
       </Col>
       {dates && dates[0] ? (
-        <Col className="p-4 d-flex flex-column">
+        <Col className="p-4 flex flex-col">
           <h2 className="font-medium">
             {parseDate(dates[0]).toFormat('dd LLLL yyyy')}
           </h2>
-          <div className="timeline-list d-flex flex-grow-1 scroll-y mh-225px">
+          <div className="timeline-list flex grow scroll-y mh-225px">
             <ul className="timeline-list-times">
               {getTimeOptions(60, true).map((time, i) => (
                 <li key={i}>
@@ -97,7 +97,7 @@ export const BookingResourcesCalendar: FunctionComponent<
                 <hr key={i} />
               ))}
             </ul>
-            <div className="timeline-list-items flex-grow-1">
+            <div className="timeline-list-items grow">
               {itemsOfSelectedDate.map((item) => (
                 <BookingResourceListItem
                   key={item.uuid}
@@ -115,7 +115,7 @@ export const BookingResourcesCalendar: FunctionComponent<
             <CalendarIcon className="display-5" weight="bold" />
           </div>
           <div className="pb-15 font-medium">
-            <h3 className="text-tertiary fs-5 mb-2">
+            <h3 className="text-tertiary text-base mb-2">
               {translate('Select a date')}
             </h3>
           </div>

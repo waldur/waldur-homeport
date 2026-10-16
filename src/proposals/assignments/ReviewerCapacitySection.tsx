@@ -79,9 +79,9 @@ export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
             ? Math.round((row.current_assignments / row.max_assignments) * 100)
             : 0;
           return (
-            <div className="d-flex align-items-center gap-2">
+            <div className="flex items-center gap-2">
               <Progress
-                className="flex-grow-1 min-w-[60px]"
+                className="grow min-w-[60px]"
                 value={percentage}
                 variant={
                   percentage >= 100

@@ -75,7 +75,7 @@ export const ServiceAccountsTableComponent: FC<
         {
           title: translate('Notification email'),
           render: ({ row }) => (
-            <div className="d-flex align-items-center gap-1">
+            <div className="flex items-center gap-1">
               {row.email}
               <CopyToClipboardButton value={row.email} />
             </div>

@@ -58,7 +58,7 @@ const navSurface = cva(
 // 1100, and no entrance motion, as Bootstrap's. Scrolling is left to the
 // panel (Menu.Content adds it; ActionsMenu's popover adds its own).
 const ACTIONS_SURFACE_CLASSNAME =
-  'z-dropdown-menu m-[0px] block min-w-[130px] list-none rounded-lg bg-[var(--menu-bg)] py-[6.5px] text-start text-[13px] shadow-[var(--dropdown-shadow)]';
+  'z-dropdown-menu m-[0px] block min-w-[130px] list-none rounded-lg bg-[var(--menu-bg)] py-[6.5px] text-start text-sm shadow-[var(--dropdown-shadow)]';
 
 /** A menu or popover panel in the given look. `container` only shapes the
  * nav look. */

@@ -71,7 +71,7 @@ export const ServiceProviderAccessSection: FC<
         >
           <div className="mb-3">
             <div className="mb-2">{translate('Exposed fields')}</div>
-            <div className="d-flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-1">
               {provider.exposed_fields.map((field) => (
                 <Badge
                   key={field}
@@ -86,7 +86,7 @@ export const ServiceProviderAccessSection: FC<
           </div>
 
           {(provider.consent_date || provider.consent_version) && (
-            <div className="d-flex gap-4 text-quaternary small">
+            <div className="flex gap-4 text-quaternary small">
               {provider.consent_date && (
                 <span>
                   {translate('Consent given')}:{' '}

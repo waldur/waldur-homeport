@@ -3,7 +3,7 @@
   margin-bottom: 8px;
   padding: 8px 14px;
   width: 100%;
-  font-size: 1.077rem;
+  font-size: var(--text-sm);
 }
 
 .login-input:focus,
@@ -17,7 +17,7 @@
    that hierarchy. */
 .login-with-local-account-button {
   font-weight: var(--font-weight-medium);
-  font-size: 12px;
+  font-size: var(--text-xs);
   line-height: 15px;
   text-decoration: underline;
   color: var(--brand-color);

@@ -67,7 +67,7 @@ export const OfferingSearchResult = ({
       className={classNames(
         // The hover background, also on the highlighted row, so the keyboard
         // highlight looks like the pointer's; the brand bar marks it besides.
-        'd-flex align-items-center pe-4 hover:bg-[var(--bg-brand-primary-alt)] [&.active]:bg-[var(--bg-brand-primary-alt)]',
+        'flex items-center pe-4 hover:bg-[var(--bg-brand-primary-alt)] [&.active]:bg-[var(--bg-brand-primary-alt)]',
         highlighted && 'active shadow-[inset_3px_0_0_var(--brand-color)]',
       )}
     >
@@ -78,10 +78,10 @@ export const OfferingSearchResult = ({
         // Focus stays in the search box; the option is highlighted through
         // aria-activedescendant, not focused.
         tabIndex={-1}
-        className="d-flex flex-grow-1 min-w-0 align-items-center text-brand ps-4 pe-2 py-2"
+        className="flex grow min-w-0 items-center text-brand ps-4 pe-2 py-2"
       >
         {/* Decorative: the name follows. */}
-        <span aria-hidden="true" className="flex-shrink-0 me-4">
+        <span aria-hidden="true" className="shrink-0 me-4">
           {item.thumbnail ? (
             <Image src={item.thumbnail} size={24} circle />
           ) : (
@@ -89,7 +89,7 @@ export const OfferingSearchResult = ({
               width="24px"
               height="24px"
               circle
-              className="fs-8"
+              className="text-xs"
             >
               {abbreviation}
             </ImagePlaceholder>
@@ -97,10 +97,10 @@ export const OfferingSearchResult = ({
         </span>
         {/* Blocks, not spans, so the option's name has a break between
             them. */}
-        <div className="d-flex flex-column min-w-0">
-          <div className="fs-4 ellipsis">{item.name}</div>
+        <div className="flex flex-col min-w-0">
+          <div className="text-base ellipsis">{item.name}</div>
           {Boolean(item.description) && (
-            <div className="fs-7 text-quaternary ellipsis">
+            <div className="text-xs text-quaternary ellipsis">
               <TextWithoutFormatting html={truncate(item.description, 60)} />
             </div>
           )}
@@ -108,7 +108,7 @@ export const OfferingSearchResult = ({
       </Link>
       {!isFeatureVisible(MarketplaceFeatures.catalogue_only) && (
         <Tooltip label={translate('Add resource')}>
-          <span aria-hidden="true" className="flex-shrink-0">
+          <span aria-hidden="true" className="shrink-0">
             <Link
               state="marketplace-offering-public"
               params={{ offering_uuid: item.params.uuid }}

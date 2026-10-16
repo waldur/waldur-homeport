@@ -130,7 +130,7 @@ export const ResourceUsersListExpandableRow: FunctionComponent<{
           {
             title: translate('Role'),
             render: ({ row: grant }) => (
-              <span className="d-inline-flex align-items-center gap-1">
+              <span className="inline-flex items-center gap-1">
                 <RoleField row={grant} />
                 <MemberSyncStateIndicator grant={grant} />
               </span>

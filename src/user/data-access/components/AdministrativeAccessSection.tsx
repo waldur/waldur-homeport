@@ -25,7 +25,7 @@ export const AdministrativeAccessSection: FC<
   >
     {/* Counts are only available for staff/support viewers */}
     {data.staff_count !== undefined && data.support_count !== undefined && (
-      <div className="d-flex gap-6 mb-4">
+      <div className="flex gap-6 mb-4">
         <div>
           <span className="text-quaternary">{translate('Staff')}: </span>
           <strong>{data.staff_count}</strong>

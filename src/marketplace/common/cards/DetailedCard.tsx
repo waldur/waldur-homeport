@@ -47,14 +47,14 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
       })}
       disabled={!isAllowed}
     >
-      <Card className="card-bordered h-100 overflow-hidden cursor-pointer border-hover-brand">
+      <Card className="card-bordered h-full overflow-hidden cursor-pointer border-hover-brand">
         {/* Image section */}
-        <div className="h-120px d-flex flex-center border-b-[1px] border-b-secondary bg-brand-subtle">
+        <div className="h-120px flex flex-center border-b-[1px] border-b-secondary bg-brand-subtle">
           {image ? (
             <img
               alt={offering.name}
               src={image}
-              className="w-100 h-100"
+              className="w-full h-full"
               style={{
                 objectFit: offering.image ? 'cover' : 'contain',
                 padding: offering.image ? 0 : '10px',
@@ -67,9 +67,9 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
           )}
         </div>
 
-        <Card.Body className="p-5 d-flex flex-column">
+        <Card.Body className="p-5 flex flex-col">
           {/* Header with logo and title */}
-          <div className="d-flex align-items-center gap-4 mb-4">
+          <div className="flex items-center gap-4 mb-4">
             {offering.thumbnail ? (
               <Image src={offering.thumbnail} size={48} isContain circle />
             ) : (
@@ -78,7 +78,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
               </ImagePlaceholder>
             )}
             <div className="overflow-hidden">
-              <div className="fs-4 font-medium ellipsis-lines-2">
+              <div className="text-base font-medium ellipsis-lines-2">
                 {offering.name}
               </div>
               <div className="text-quaternary small ellipsis">
@@ -93,15 +93,15 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
 
           {/* Description */}
           {offering.description ? (
-            <p className="text-quaternary small ellipsis-lines-3 mb-4 flex-grow-1">
+            <p className="text-quaternary small ellipsis-lines-3 mb-4 grow">
               {offering.description}
             </p>
           ) : (
-            <div className="flex-grow-1" />
+            <div className="grow" />
           )}
 
           {/* Badges */}
-          <div className="d-flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-4">
             {offering.category_title && (
               <Badge variant="neutral" tone="outline" className="font-normal">
                 {offering.category_title}
@@ -158,7 +158,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
         </Card.Body>
 
         {/* Footer */}
-        <Card.Footer className="py-4 px-5 d-flex justify-content-end gap-2">
+        <Card.Footer className="py-4 px-5 flex justify-end gap-2">
           <CardRequestAccessButton
             offering={offering}
             orderDisabledReason={isDisabled ? disabledButtonTooltip : undefined}

@@ -147,7 +147,7 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                               <BooleanGroup
                                 groupName={`${node}.roles`}
                                 options={RANCHER_NODE_ROLES}
-                                groupClassName="d-flex justify-content-around node-roles"
+                                groupClassName="flex justify-around node-roles"
                                 input={fieldProps.input}
                               />
                             )}

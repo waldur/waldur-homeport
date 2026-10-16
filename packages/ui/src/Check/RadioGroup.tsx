@@ -80,7 +80,7 @@ export function RadioGroup<T extends RadioValue = string>({
       {(label || tooltip) && (
         <legend
           className={cn(
-            'mb-[10px] p-0 text-[14px] font-medium leading-[20px] text-[var(--check-label)]',
+            'mb-[10px] p-0 text-sm font-medium leading-5 text-[var(--check-label)]',
             disabled && 'opacity-50',
           )}
         >
@@ -98,7 +98,7 @@ export function RadioGroup<T extends RadioValue = string>({
         </legend>
       )}
       {description && (
-        <p className="-mt-[6px] mb-[10px] text-[14px] leading-[20px] text-[var(--check-description)]">
+        <p className="-mt-[6px] mb-[10px] text-sm leading-5 text-[var(--check-description)]">
           {description}
         </p>
       )}

@@ -16,7 +16,7 @@ export const LimitsDisplay: FC<{
   const byType = new Map<string, ComponentLike>();
   (components ?? []).forEach((c) => byType.set(c.type, c));
   return (
-    <span className="d-inline-flex flex-wrap gap-1">
+    <span className="inline-flex flex-wrap gap-1">
       {Object.entries(limits).map(([key, value]) => {
         const c = byType.get(key);
         const label = c?.name ?? key;

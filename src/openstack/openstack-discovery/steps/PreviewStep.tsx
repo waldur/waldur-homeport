@@ -465,7 +465,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                             <code>{key}</code>
                           </td>
                           <td>
-                            <div className="d-flex align-items-center gap-1">
+                            <div className="flex items-center gap-1">
                               <code>{formatValue(value)}</code>
                               <CopyToClipboardButton
                                 value={formatValue(value)}

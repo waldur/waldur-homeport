@@ -25,7 +25,7 @@ export const MatrixMembersList: FC = () => {
       <div className="mb-2">
         {translate('Members')} ({members.length})
       </div>
-      <div className="d-flex flex-column gap-1">
+      <div className="flex flex-col gap-1">
         {members.map((m) => {
           const roleBadge = getRoleBadge(m.powerLevel);
           const invited = m.membership === 'invite';
@@ -33,7 +33,7 @@ export const MatrixMembersList: FC = () => {
             <div
               key={m.userId}
               className={classNames(
-                'd-flex align-items-center gap-2 py-1',
+                'flex items-center gap-2 py-1',
                 invited && 'opacity-50',
               )}
             >
@@ -42,10 +42,10 @@ export const MatrixMembersList: FC = () => {
                 src={m.image}
                 size={24}
                 circle
-                className="flex-shrink-0"
+                className="shrink-0"
                 labelClassName={getChatAvatarClass(m.userId)}
               />
-              <span className="text-truncate flex-grow-1">{m.name}</span>
+              <span className="truncate grow">{m.name}</span>
               {roleBadge && (
                 <Badge
                   variant={roleBadge.variant}

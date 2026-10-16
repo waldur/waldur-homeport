@@ -29,7 +29,7 @@ const ListCell: FC<{ value: unknown; emptyLabel: string }> = ({
     return <span className="text-quaternary">{emptyLabel}</span>;
   }
   return (
-    <span className="d-inline-flex flex-wrap gap-1">
+    <span className="inline-flex flex-wrap gap-1">
       {items.map((item) => (
         <Badge key={item} variant="neutral" size="sm" tone="outline">
           {item}

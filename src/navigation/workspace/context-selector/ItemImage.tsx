@@ -20,7 +20,7 @@ export const ItemImage = ({ item, circle = false, className = '' }) =>
         width="40px"
         height="40px"
         circle={circle}
-        className="fs-7"
+        className="text-xs"
       >
         {getItemAbbreviation(item)}
       </ImagePlaceholder>

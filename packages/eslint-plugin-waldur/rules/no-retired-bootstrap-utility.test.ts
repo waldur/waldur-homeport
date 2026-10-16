@@ -46,8 +46,10 @@ describe('no-retired-bootstrap-utility', () => {
         ],
       },
       {
-        code: "const c = cn('mx-n2', 'mt-lg-n1', 'flex-md-fill', 'align-content-center', 'ls-2');",
+        code: "const c = cn('mx-n2', 'mt-lg-n1', 'flex-md-fill', 'align-content-center', 'ls-2', 'lh-1', 'lh-sm');",
         errors: [
+          { messageId: 'retired' },
+          { messageId: 'retired' },
           { messageId: 'retired' },
           { messageId: 'retired' },
           { messageId: 'retired' },

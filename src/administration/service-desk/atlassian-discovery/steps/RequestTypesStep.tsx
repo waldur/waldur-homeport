@@ -194,7 +194,7 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
         </tbody>
       </Table>
 
-      <div className="d-flex justify-content-between">
+      <div className="flex justify-between">
         <span className="text-quaternary">
           {translate('{count} request type(s) selected', {
             count: selectedCount,

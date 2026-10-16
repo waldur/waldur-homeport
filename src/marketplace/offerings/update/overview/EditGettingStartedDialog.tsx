@@ -45,8 +45,8 @@ export const EditGettingStartedDialog: FC<{
             footer={<FormFooter submitLabel={translate('Update')} />}
           >
             <Row>
-              <Col md={12} lg={8} className="d-flex flex-column">
-                <div className="flex-grow-1 min-h-225px">
+              <Col md={12} lg={8} className="flex flex-col">
+                <div className="grow min-h-225px">
                   <div className="size-sm">
                     <TextGroup
                       name="template"

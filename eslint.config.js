@@ -221,12 +221,18 @@ export default tseslint
         // Font weight is one scale (font-light … font-bold); Bootstrap's fw-*
         // are retired, and their "bold" was 500. Autofixes fw-* classes.
         'waldur-custom/require-weight-scale': 'error',
+        // Font size is one pinned scale (text-xs … text-4xl); Bootstrap's fs-*
+        // are retired. Autofixes fs-* to Tailwind.
+        'waldur-custom/require-font-size-scale': 'error',
         // Bootstrap emits no colour utility any more: its old class names
         // (text-danger, bg-light, border-bottom, …) paint nothing.
         'waldur-custom/no-bootstrap-color-utility': 'error',
         // Bootstrap utilities _utilities.scss no longer generates (unused, or
         // only ever used at the base size) compile to nothing.
         'waldur-custom/no-retired-bootstrap-utility': 'error',
+        // Bootstrap layout utilities (d-*, flex-column, items-*, justify-*, w-100, etc.)
+        // have direct Tailwind equivalents. Autofixes to Tailwind.
+        'waldur-custom/no-bootstrap-layout-utility': 'error',
         // Zero instances remain: every --bs-* read in TS/TSX is a design token.
         'waldur-custom/no-bootstrap-css-vars': 'error',
         'waldur-custom/no-interactive-in-tab-trigger': 'error',
@@ -413,7 +419,9 @@ export default tseslint
       rules: {
         'waldur-custom/require-dark-pair': 'off',
         'waldur-custom/require-weight-scale': 'off',
+        'waldur-custom/require-font-size-scale': 'off',
         'waldur-custom/no-retired-bootstrap-utility': 'off',
+        'waldur-custom/no-bootstrap-layout-utility': 'off',
       },
     },
     {
@@ -429,14 +437,23 @@ export default tseslint
         'packages/eslint-plugin-waldur/rules/no-bootstrap-border-with-tailwind-color.test.ts',
         'packages/eslint-plugin-waldur/rules/no-raw-status-ramp.test.ts',
         'packages/eslint-plugin-waldur/rules/no-bootstrap-color-utility.test.ts',
+        'packages/eslint-plugin-waldur/rules/no-bootstrap-layout-utility.test.ts',
+        'packages/eslint-plugin-waldur/rules/require-font-size-scale.test.ts',
+        'packages/eslint-plugin-waldur/rules/enforce-border-radius-tokens.test.ts',
         // The rules themselves (class lists, built names), and the test that
         // checks the list against Bootstrap.
         'packages/eslint-plugin-waldur/rules/no-bootstrap-color-utility.js',
+        'packages/eslint-plugin-waldur/rules/no-bootstrap-layout-utility.js',
+        'packages/eslint-plugin-waldur/rules/require-font-size-scale.js',
+        'packages/eslint-plugin-waldur/rules/enforce-border-radius-tokens.js',
         'packages/eslint-plugin-waldur/rules/no-raw-status-ramp.js',
         'src/tailwindBootstrapColors.test.ts',
       ],
       rules: {
         'waldur-custom/no-bootstrap-color-utility': 'off',
+        'waldur-custom/no-bootstrap-layout-utility': 'off',
+        'waldur-custom/require-font-size-scale': 'off',
+        'waldur-custom/enforce-border-radius-tokens': 'off',
         'waldur-custom/no-bootstrap-border-with-tailwind-color': 'off',
         'waldur-custom/no-raw-status-ramp': 'off',
       },

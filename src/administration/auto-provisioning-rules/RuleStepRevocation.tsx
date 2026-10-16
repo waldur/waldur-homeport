@@ -89,7 +89,7 @@ export const RuleStepRevocation: FC<WizardFormStepProps> = (props) => {
           'Keeps roles in step with the identity provider, the way SCIM group membership does.',
         )}
         align="center"
-        className="w-100"
+        className="w-full"
       />
       {values.revoke_when_unmatched && (
         <AlertItem

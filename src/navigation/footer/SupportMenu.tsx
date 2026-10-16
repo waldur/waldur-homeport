@@ -23,7 +23,7 @@ const SupportSubMenuItem = ({ title, onCopied }) =>
         onCopied={onCopied}
         className="overflow-hidden"
       >
-        <span className="grow text-truncate">{title}</span>
+        <span className="grow truncate">{title}</span>
         <span className="ms-2 shrink-0" aria-hidden="true">
           <CopyIcon weight="bold" />
         </span>

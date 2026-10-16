@@ -47,7 +47,7 @@ const PlaygroundText: TextMessagePartComponent = ({ text }) => {
   return (
     <>
       {reasoning ? (
-        <details className="text-quaternary fs-8 mb-2" open={reasoningOpen}>
+        <details className="text-quaternary text-xs mb-2" open={reasoningOpen}>
           <summary className="cursor-pointer">{translate('Reasoning')}</summary>
           <div style={{ whiteSpace: 'pre-wrap' }}>{reasoning}</div>
         </details>
@@ -210,7 +210,7 @@ export const PlaygroundThread: FC<{
   error?: string | null;
   disabled?: boolean;
 }> = ({ error, disabled }) => (
-  <ThreadPrimitive.Root className="aui-root playground-thread d-flex flex-column h-100 w-100 overflow-hidden">
+  <ThreadPrimitive.Root className="aui-root playground-thread flex flex-col h-full w-full overflow-hidden">
     <ThreadPrimitive.Viewport className="aui-thread-viewport">
       <AuiIf condition={(s) => s.thread.messages.length === 0}>
         <PlaygroundWelcome />

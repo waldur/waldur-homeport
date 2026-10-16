@@ -22,10 +22,10 @@ const formatEntryTimestamp = (date: Date): string => {
 };
 
 const StructuredEntry = ({ entry }: { entry: ParsedInternalNote }) => (
-  <div className="d-flex align-items-start gap-2 py-2 border-b-[1px] border-divider-medium border-dashed">
+  <div className="flex items-start gap-2 py-2 border-b-[1px] border-divider-medium border-dashed">
     {entry.timestamp && (
       <div
-        className="text-quaternary small flex-shrink-0"
+        className="text-quaternary small shrink-0"
         title={entry.timestamp.toISOString()}
         style={{ minWidth: '10ch' }}
       >
@@ -33,11 +33,11 @@ const StructuredEntry = ({ entry }: { entry: ParsedInternalNote }) => (
       </div>
     )}
     {entry.action && (
-      <Badge variant="neutral" tone="outline" className="flex-shrink-0">
+      <Badge variant="neutral" tone="outline" className="shrink-0">
         {entry.action}
       </Badge>
     )}
-    {entry.body && <div className="flex-grow-1 small">{entry.body}</div>}
+    {entry.body && <div className="grow small">{entry.body}</div>}
   </div>
 );
 
@@ -90,7 +90,7 @@ export const InternalNotes = ({ maintenance, space = undefined }) => {
       label={
         <>
           {translate('Internal notes')}:
-          <span className="text-quaternary d-block">
+          <span className="text-quaternary block">
             {translate('Providers/staff visible only')}
           </span>
         </>

@@ -12,7 +12,7 @@ export const ClusterSummary: FC<{
   refetch: any;
 }> = ({ resourceScope }) => {
   return (
-    <Row className="fs-6">
+    <Row className="text-sm">
       <Col xl={6} xxl={4}>
         <Field
           className="mb-2"

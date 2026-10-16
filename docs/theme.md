@@ -51,7 +51,8 @@ function of its colour (`_svg-icons.scss`) with a dark override in `_dark-icons.
    - localStorage for saved preference
    - OS `prefers-color-scheme` setting
    - Falls back to 'light'
-3. `loadTheme()` injects the Metronic stylesheet (once) and sets `data-theme` on `<html>`,
+3. `applyTheme()` sets `data-theme` on `<html>` (the Metronic stylesheet is a static import
+   in `src/index.tsx`),
    which switches the CSS custom properties, Tailwind's `dark:` variant and the Metronic
    `dark-theme` rules
 4. User toggles update localStorage and `data-theme`; nothing is reloaded

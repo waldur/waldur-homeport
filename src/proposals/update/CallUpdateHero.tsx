@@ -44,8 +44,8 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
       hideQuickSection={isArchived}
       title={
         <>
-          <div className="d-flex flex-wrap gap-2 align-items-center">
-            <h3 className="mb-0 lh-1">{call.name}</h3>
+          <div className="flex flex-wrap gap-2 items-center">
+            <h3 className="mb-0 leading-none">{call.name}</h3>
             <StateIndicator
               variant={status.color}
               label={status.label}
@@ -53,13 +53,15 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
               shape="pill"
             />
           </div>
-          <div className="d-flex align-items-center gap-2">
-            <span className="fs-7 text-tertiary">{translate('Part of:')}</span>
-            <span className="fs-7 text-brand">{call.customer_name}</span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-tertiary">
+              {translate('Part of:')}
+            </span>
+            <span className="text-xs text-brand">{call.customer_name}</span>
           </div>
-          <div className="d-flex flex-wrap gap-3 mt-1">
+          <div className="flex flex-wrap gap-3 mt-1">
             {call.start_date && (
-              <span className="fs-7">
+              <span className="text-xs">
                 <span className="font-medium">{translate('Start date:')}</span>{' '}
                 <span className="text-tertiary">
                   {formatDate(call.start_date)}
@@ -67,7 +69,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
               </span>
             )}
             {call.end_date && (
-              <span className="fs-7">
+              <span className="text-xs">
                 <span className="font-medium">{translate('End date:')}</span>{' '}
                 <span className="text-tertiary">
                   {formatDate(call.end_date)}
@@ -75,7 +77,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
               </span>
             )}
             {typeof proposalsCount === 'number' && (
-              <span className="fs-7">
+              <span className="text-xs">
                 <span className="font-medium">{translate('Proposals:')}</span>{' '}
                 <span className="text-tertiary">{proposalsCount}</span>
               </span>
@@ -84,14 +86,14 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
         </>
       }
       quickActions={
-        <div className="d-flex flex-column flex-wrap gap-2">
+        <div className="flex flex-col flex-wrap gap-2">
           <CallActions call={call} refetch={refetch} />
         </div>
       }
       quickBody={
         call.rounds.length > 0 && <CallDetailsHeaderBody call={call} />
       }
-      quickFooterClassName="justify-content-center"
+      quickFooterClassName="justify-center"
     />
   );
 };

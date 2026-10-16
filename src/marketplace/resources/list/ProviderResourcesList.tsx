@@ -71,7 +71,7 @@ const ResourceField = ({ row }) => {
     });
   };
   return (
-    <div className="d-flex align-items-center gap-1">
+    <div className="flex items-center gap-1">
       <BaseButton
         variant="tertiary-ghost"
         className="text-anchor font-normal"

@@ -18,7 +18,7 @@ export const ReviewerCoi: FC<ReviewerCoiProps> = ({ row }) => {
   const bySeverity = row.coi_by_severity || {};
 
   return (
-    <div className="d-flex gap-1">
+    <div className="flex gap-1">
       {bySeverity.real > 0 && (
         <Badge variant="danger" shape="pill" tone="outline">
           {bySeverity.real}

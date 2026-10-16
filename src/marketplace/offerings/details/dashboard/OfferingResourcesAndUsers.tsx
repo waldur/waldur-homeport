@@ -89,7 +89,7 @@ const InfoRow = ({
                 'neutral',
             }))}
           />
-          <div className="d-flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
             {statistics.map((stat) => {
               const state = infoState.find((c) =>
                 c.states.includes(stat.state),

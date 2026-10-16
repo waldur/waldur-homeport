@@ -41,13 +41,13 @@ export const HelpdeskSetupCard: FC = () => {
 
   return (
     <Card className="mb-6">
-      <Card.Body className="d-flex flex-wrap align-items-center gap-4">
+      <Card.Body className="flex flex-wrap items-center gap-4">
         <div className="icon-square icon-lg bg-brand-subtle text-brand">
           <LifebuoyIcon weight="bold" size={24} />
         </div>
-        <div className="flex-grow-1 min-w-200px">
+        <div className="grow min-w-200px">
           <h4 className="mb-1">{translate('Set up provider helpdesk')}</h4>
-          <p className="text-quaternary fs-6 mb-0">
+          <p className="text-quaternary text-sm mb-0">
             {translate(
               'Route support tickets for this provider to your own helpdesk. Configure a backend to get started.',
             )}

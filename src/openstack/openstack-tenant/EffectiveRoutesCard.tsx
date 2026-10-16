@@ -167,7 +167,7 @@ export const EffectiveRoutesCard: FC<Props> = ({ routerUuid }) => {
 
   return (
     <Card className="mt-4">
-      <Card.Header className="d-flex justify-content-between align-items-center">
+      <Card.Header className="flex justify-between items-center">
         <Card.Title className="mb-0">
           {translate('Effective routes')}
         </Card.Title>

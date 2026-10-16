@@ -20,6 +20,7 @@ export const CountryFlag: FunctionComponent<CountryFlagProps> = ({
   fontSize = 24,
   className,
 }) => (
+  // eslint-disable-next-line waldur-custom/require-font-size-scale -- Dynamic font-size for flag emoji sizing
   <span style={{ fontSize: fontSize + 'px' }} className={className}>
     {isoCountryCodeToFlagEmoji(countryCode)}
   </span>

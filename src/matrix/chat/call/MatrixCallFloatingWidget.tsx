@@ -115,27 +115,20 @@ export const MatrixCallFloatingWidget = forwardRef<
 
   return (
     <div
-      className="matrix-call-widget shadow"
+      className="matrix-call-widget shadow rounded-lg flex flex-col bg-primary border-[1px] border-secondary fixed z-[1080]"
       style={{
-        position: 'fixed',
         right: effectivePos.x,
         bottom: effectivePos.y,
         width: WIDGET_WIDTH,
         height: WIDGET_HEIGHT,
-        background: 'var(--bg-primary)',
-        border: '1px solid var(--border-secondary)',
-        borderRadius: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        zIndex: 1080,
       }}
     >
       <div
-        className="d-flex align-items-center gap-2 px-2 py-1 border-b-[1px] border-b-secondary"
+        className="flex items-center gap-2 px-2 py-1 border-b-[1px] border-b-secondary"
         style={{ cursor: 'grab', userSelect: 'none', touchAction: 'none' }}
         onPointerDown={onPointerDown}
       >
-        <span className="flex-grow-1 text-truncate">{roomName}</span>
+        <span className="grow truncate">{roomName}</span>
         <BaseButton
           variant="tertiary"
           size="sm"
@@ -147,7 +140,7 @@ export const MatrixCallFloatingWidget = forwardRef<
       <div
         ref={portalTargetRef}
         data-testid="call-widget-portal-target"
-        className="flex-grow-1 overflow-hidden"
+        className="grow overflow-hidden"
       />
     </div>
   );

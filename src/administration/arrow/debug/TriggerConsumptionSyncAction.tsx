@@ -31,7 +31,7 @@ export const TriggerConsumptionSyncAction = () => {
     useTriggerConsumptionSync();
 
   return (
-    <Card className="h-100">
+    <Card className="h-full">
       <Card.Body>
         <h6>{translate('Trigger Consumption Sync')}</h6>
         <p className="text-quaternary small mb-3">

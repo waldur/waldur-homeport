@@ -469,89 +469,54 @@ export const LimitHorizonView: FC<Props> = ({
     <>
       {banner}
       {/* Inline legend matches the Figma spec */}
-      <div className="d-flex flex-wrap align-items-center gap-3 small mb-2">
-        <span className="d-inline-flex align-items-center gap-1">
+      <div className="flex flex-wrap items-center gap-3 small mb-2">
+        <span className="inline-flex items-center gap-1">
           <span
-            style={{
-              display: 'inline-block',
-              width: 10,
-              height: 10,
-              borderRadius: 2,
-              background: tc.brand500,
-            }}
+            className="inline-block size-[10px] rounded-xs"
+            style={{ background: tc.brand500 }}
           />
           {translate('Usage <70%')}
         </span>
-        <span className="d-inline-flex align-items-center gap-1">
+        <span className="inline-flex items-center gap-1">
           <span
-            style={{
-              display: 'inline-block',
-              width: 10,
-              height: 10,
-              borderRadius: 2,
-              background: '#fdb022',
-            }}
+            className="inline-block size-[10px] rounded-xs"
+            style={{ background: '#fdb022' }}
           />
           {translate('70–90%')}
         </span>
-        <span className="d-inline-flex align-items-center gap-1">
+        <span className="inline-flex items-center gap-1">
           <span
-            style={{
-              display: 'inline-block',
-              width: 10,
-              height: 10,
-              borderRadius: 2,
-              background: '#dc6803',
-            }}
+            className="inline-block size-[10px] rounded-xs"
+            style={{ background: '#dc6803' }}
           />
           {translate('90–100%')}
         </span>
-        <span className="d-inline-flex align-items-center gap-1">
+        <span className="inline-flex items-center gap-1">
           <span
-            style={{
-              display: 'inline-block',
-              width: 10,
-              height: 10,
-              borderRadius: 2,
-              background: '#d92d20',
-            }}
+            className="inline-block size-[10px] rounded-xs"
+            style={{ background: '#d92d20' }}
           />
           {translate('Over cap')}
         </span>
-        <span className="d-inline-flex align-items-center gap-1">
+        <span className="inline-flex items-center gap-1">
           <span
-            style={{
-              display: 'inline-block',
-              width: 2,
-              height: 14,
-              background: tc.brand500,
-            }}
+            className="inline-block w-[2px] h-[14px]"
+            style={{ background: tc.brand500 }}
           />
           {translate('Today')}
         </span>
-        <span className="d-inline-flex align-items-center gap-1">
+        <span className="inline-flex items-center gap-1">
           <span
-            style={{
-              display: 'inline-block',
-              width: 8,
-              height: 8,
-              borderRadius: '50%',
-              background: '#6938ef',
-            }}
+            className="inline-block size-2 rounded-full"
+            style={{ background: '#6938ef' }}
           />
           {translate('Next reset')}
         </span>
         {hasTerminated && (
-          <span className="d-inline-flex align-items-center gap-1">
+          <span className="inline-flex items-center gap-1">
             <span
-              style={{
-                display: 'inline-block',
-                width: 10,
-                height: 10,
-                borderRadius: 2,
-                background: tc.muted,
-                opacity: 0.6,
-              }}
+              className="inline-block size-[10px] rounded-xs opacity-60"
+              style={{ background: tc.muted }}
             />
             {TERMINATED_SERIES_NAME()}
           </span>
@@ -566,7 +531,7 @@ export const LimitHorizonView: FC<Props> = ({
       </div>
       <EChart options={options} height={`${chartHeight}px`} width="100%" />
       {skipped > 0 && (
-        <small className="d-block text-quaternary mt-2">
+        <small className="block text-quaternary mt-2">
           {translate('Skipped')}: {skipped}{' '}
           {translate('limit row(s) without configured caps or period bounds.')}
         </small>

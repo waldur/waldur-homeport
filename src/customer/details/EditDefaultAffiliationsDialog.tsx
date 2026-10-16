@@ -154,7 +154,7 @@ export const EditDefaultAffiliationsDialog: FunctionComponent<
         </>
       }
     >
-      <div className="d-flex justify-content-between align-items-center mb-3">
+      <div className="flex justify-between items-center mb-3">
         <span className="text-quaternary">
           {selectedUuids.size === 0
             ? translate('No affiliations enabled')
@@ -164,7 +164,7 @@ export const EditDefaultAffiliationsDialog: FunctionComponent<
                   count: selectedUuids.size,
                 })}
         </span>
-        <div className="d-flex gap-2">
+        <div className="flex gap-2">
           <BaseButton
             size="sm"
             variant="secondary"

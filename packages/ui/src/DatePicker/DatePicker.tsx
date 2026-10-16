@@ -149,7 +149,7 @@ export const DatePicker: FC<DatePickerProps> = ({
     return (
       <div
         id={id}
-        className="inline-block rounded-[8px] border-[1px] border-solid border-secondary"
+        className="inline-block rounded-lg border-[1px] border-solid border-secondary"
         style={style}
       >
         {body}

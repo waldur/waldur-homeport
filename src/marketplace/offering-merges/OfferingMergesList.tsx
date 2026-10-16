@@ -44,7 +44,7 @@ const MergeSummary: FC<{ row: OfferingMerge }> = ({ row }) => {
     return <>{renderFieldOrDash(null)}</>;
   }
   return (
-    <div className="d-flex flex-wrap align-items-center gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       {resources !== undefined && (
         <span>{translate('{count} resource(s)', { count: resources })}</span>
       )}
@@ -122,7 +122,7 @@ export const OfferingMergesList: FC<Partial<TableWithPortal>> = ({
         {
           title: translate('Sources'),
           render: ({ row }) => (
-            <div className="d-flex flex-column">
+            <div className="flex flex-col">
               {row.source_offerings.map((offering) => (
                 <OfferingLink
                   key={offering.uuid}

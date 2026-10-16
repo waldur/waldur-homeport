@@ -132,7 +132,7 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
         {values.projects.map((project) => (
           <div key={project.id} className="col-md-6">
             <Card
-              className={`cursor-pointer h-100 ${
+              className={`cursor-pointer h-full ${
                 values.selectedProjectId === project.id
                   ? 'border-brand border-2'
                   : 'border-secondary'
@@ -140,7 +140,7 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
               onClick={() => form.change('selectedProjectId', project.id)}
             >
               <Card.Body>
-                <div className="d-flex align-items-start">
+                <div className="flex items-start">
                   <Radio
                     className="me-3"
                     aria-label={project.name}

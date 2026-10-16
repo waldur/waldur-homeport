@@ -88,7 +88,7 @@ const OfferingListItem: FunctionComponent<{
               <div className="symbol">
                 <ImagePlaceholder width="40px" height="40px">
                   {abbreviation && (
-                    <div className="symbol-label fs-6 font-medium">
+                    <div className="symbol-label text-sm font-medium">
                       {abbreviation}
                     </div>
                   )}
@@ -97,7 +97,7 @@ const OfferingListItem: FunctionComponent<{
             )}
             <div>
               <h5 className="title ellipsis mb-1">{truncate(item.name, 40)}</h5>
-              <p className="description ellipsis fs-7 mb-0">
+              <p className="description ellipsis text-xs mb-0">
                 <TextWithoutFormatting html={truncate(item.description, 120)} />
               </p>
             </div>

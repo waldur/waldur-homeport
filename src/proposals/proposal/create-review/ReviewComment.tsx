@@ -21,7 +21,7 @@ export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
   return (
     <div
       className={classNames(
-        'review-comment d-flex p-5 gap-4',
+        'review-comment flex p-5 gap-4',
         'bg-brand-subtle',
         props.className,
       )}

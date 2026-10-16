@@ -194,7 +194,7 @@ export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
               }
             },
             autoFocus: true,
-            className: 'w-100 flex-grow-1',
+            className: 'w-full grow',
             preventEnterSubmit: false,
           })}
         />
@@ -217,7 +217,7 @@ export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
             ? translate('Actions found: {count}', { count: items.length })
             : ''}
         </div>
-        <div className={noMatch ? 'd-none' : undefined}>
+        <div className={noMatch ? 'hidden' : undefined}>
           <ActionList query={query}>{children}</ActionList>
         </div>
         {noMatch && (

@@ -52,7 +52,7 @@ export const BreadcrumbSearchItem = ({
         // highlighted row, so the keyboard highlight looks like the pointer's. The brand bar
         // marks it besides: it is a keyboard user's only focus indicator. The current row is
         // not tinted: aria-current marks it instead.
-        'search-result-item d-flex align-items-center pe-5 hover:bg-[var(--bg-brand-primary-alt)] [&.active]:bg-[var(--bg-brand-primary-alt)] cursor-pointer',
+        'search-result-item flex items-center pe-5 hover:bg-[var(--bg-brand-primary-alt)] [&.active]:bg-[var(--bg-brand-primary-alt)] cursor-pointer',
         highlighted && 'active shadow-[inset_3px_0_0_var(--brand-color)]',
       )}
     >
@@ -66,11 +66,11 @@ export const BreadcrumbSearchItem = ({
         aria-current={item.isCurrent ? 'page' : undefined}
         // pe-4 keeps a long title off the favourite star, which always holds
         // its place beside the link; as padding it stays part of the link.
-        className="d-flex flex-grow-1 min-w-0 text-brand align-items-center py-2 ps-5 pe-4"
+        className="flex grow min-w-0 text-brand items-center py-2 ps-5 pe-4"
       >
         {/* Decorative: the title follows, so the option isn't named by
             the avatar's initials too. */}
-        <span aria-hidden="true" className="d-flex flex-shrink-0">
+        <span aria-hidden="true" className="flex shrink-0">
           <ItemImage
             item={{ image: item.image, name: item.title }}
             className="me-4"
@@ -79,10 +79,10 @@ export const BreadcrumbSearchItem = ({
         </span>
         {/* Blocks, not spans, so the option's name has a break between
             them ("Project Organization", not "ProjectOrganization"). */}
-        <div className="d-flex flex-column justify-content-start">
-          <div className="fs-6">{item.title}</div>
+        <div className="flex flex-col justify-start">
+          <div className="text-sm">{item.title}</div>
           {Boolean(item.subtitle) && (
-            <div className="fs-7 text-quaternary">{item.subtitle}</div>
+            <div className="text-xs text-quaternary">{item.subtitle}</div>
           )}
         </div>
       </Link>

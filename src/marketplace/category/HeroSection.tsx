@@ -6,12 +6,12 @@ import './HeroSection.scss';
 
 export const HeroSection = ({ item }: { item: Category | CategoryGroup }) => (
   <div className="category-hero">
-    <div className="container-fluid d-flex align-items-center gap-4">
+    <div className="container-fluid flex items-center gap-4">
       {item.icon && (
         <img src={item.icon} alt="" className="category-hero-icon" />
       )}
       <div>
-        <h1 className="fs-1 font-medium mb-0 category-hero-title">
+        <h1 className="text-2xl font-medium mb-0 category-hero-title">
           {item.title}
         </h1>
         {item.description && (
@@ -20,7 +20,7 @@ export const HeroSection = ({ item }: { item: Category | CategoryGroup }) => (
           </p>
         )}
         {(item as CategoryGroup).categories?.length > 0 && (
-          <div className="d-flex flex-wrap gap-2 mt-2">
+          <div className="flex flex-wrap gap-2 mt-2">
             {(item as CategoryGroup).categories.map((category) => (
               <Link
                 state="public.marketplace-category"
