@@ -1284,7 +1284,14 @@ overrides:
   event_consumers:
     filters:
       - is_global
+      - delivery
       - user_uuid
+    delivery:
+      label: Delivery
+      placeholder: Any delivery
+      enumOverrides:
+        rmq: RabbitMQ queue
+        webhook: HTTP webhook
     is_global:
       label: Scope
       placeholder: Any scope

@@ -1,13 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { EventConsumer, eventConsumersList } from 'waldur-js-client';
 
-import { AccordionCard, Tooltip } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { AccordionCard, Badge, Tooltip } from 'waldur-ui';
 
-import { FAST_STALE_TIME } from '@/core/constants';
-import { formatDateTime } from '@/core/dateUtils';
+import { CreateModalButton } from '@/core/buttons';
+import { lazyComponent } from '@/core/lazyComponent';
 import { Link } from '@/core/Link';
+import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import {
@@ -18,78 +18,89 @@ import {
 import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
-import { renderFieldOrDash } from '@/table/utils';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
-import { getRabbitMQStats } from '../rabbitmq/api';
 import { getConsumerQueueName } from '../rabbitmq/utils';
 
+import { EventConsumerExpandableRow } from './EventConsumerExpandableRow';
 import { EventConsumerRowActions } from './EventConsumerRowActions';
+import {
+  getConsumerStatus,
+  getWebhookHost,
+  QueueStats,
+  summarizeObjectTypes,
+} from './eventConsumers';
+import { useConsumerQueueStats } from './useConsumerQueueStats';
 
-interface QueueStats {
-  messages: number;
-  consumers: number;
-}
+const EventConsumerWebhookDialog = lazyComponent(() =>
+  import('./EventConsumerWebhookDialog').then((module) => ({
+    default: module.EventConsumerWebhookDialog,
+  })),
+);
 
-const useConsumerQueueStats = (enabled: boolean) => {
-  const { data, isError } = useQuery({
-    queryKey: ['RabbitMQStats'],
-    queryFn: getRabbitMQStats,
-    staleTime: FAST_STALE_TIME,
-    retry: false,
-    enabled,
-  });
-  const byQueue = useMemo(() => {
-    const byQueue = new Map<string, QueueStats>();
-    for (const vhost of data?.vhosts ?? []) {
-      for (const queue of vhost.queues) {
-        byQueue.set(queue.name, {
-          messages: queue.messages,
-          consumers: queue.consumers,
-        });
-      }
-    }
-    return byQueue;
-  }, [data]);
-  return { byQueue, statsUnavailable: isError };
-};
-
-const ObjectTypesCell: FC<{ row: EventConsumer }> = ({ row }) => {
-  const types = row.object_types;
-  if (types.length === 0) {
-    return (
-      <Badge variant="secondary" shape="pill" tone="outline">
-        {translate('All types')}
-      </Badge>
-    );
-  }
-  // Compact comma list; the cell ellipsis + hover title expose the full set.
-  return <span className="fs-8">{types.join(', ')}</span>;
-};
-
-const ScopesCell: FC<{ row: EventConsumer }> = ({ row }) => {
-  if (row.is_global) {
-    return (
-      <Tooltip
-        label={translate(
-          'Bound to no scope: receives every event in the system, including events about all users.',
-        )}
-      >
-        <Badge variant="danger" shape="pill" tone="outline">
-          {translate('Global')}
-        </Badge>
-      </Tooltip>
-    );
-  }
-  return (
-    <div className="d-flex flex-wrap gap-1">
-      {row.scopes.map((scope, index) => (
-        <code key={index} className="fs-8">
-          {scope.type}:{scope.uuid?.substring(0, 8)}
-        </code>
-      ))}
+// Where the events go, how and what they are: what tells consumers apart at a
+// glance. Everything else is in the expandable row.
+const ConsumerCell: FC<{ row: EventConsumer }> = ({ row }) => (
+  <div>
+    <div className="font-medium text-primary">
+      {row.delivery === 'webhook'
+        ? getWebhookHost(row.webhook_destination)
+        : getConsumerQueueName(row.uuid).substring(0, 17)}
     </div>
+    <div className="text-quaternary">
+      {row.delivery === 'webhook'
+        ? translate('Webhook')
+        : translate('RabbitMQ queue')}
+      {' · '}
+      {summarizeObjectTypes(row.object_types)}
+    </div>
+  </div>
+);
+
+const ScopeCell: FC<{ row: EventConsumer }> = ({ row }) =>
+  row.is_global ? (
+    <Tooltip
+      label={translate(
+        'Bound to no scope: receives every event in the system, including events about all users.',
+      )}
+    >
+      <Badge variant="danger" shape="pill" tone="outline">
+        {translate('Global')}
+      </Badge>
+    </Tooltip>
+  ) : (
+    <span>
+      {row.scopes.length === 1
+        ? row.scopes[0].type
+        : translate('{count} scopes', { count: row.scopes.length })}
+    </span>
+  );
+
+const StatusCell: FC<{ row: EventConsumer; stats?: QueueStats }> = ({
+  row,
+  stats,
+}) => {
+  const status = getConsumerStatus(row, stats);
+  return (
+    <StateIndicator
+      label={status.label}
+      variant={status.variant}
+      tooltip={status.tooltip}
+      shape="pill"
+      tone="outline"
+      hasBullet
+    />
   );
 };
+
+const AddWebhookButton: FC<{ refetch: () => void }> = ({ refetch }) => (
+  <CreateModalButton
+    dialog={EventConsumerWebhookDialog}
+    resolve={{ refetch }}
+    title={translate('Add webhook')}
+    size="lg"
+  />
+);
 
 const EventConsumersTable: FC = () => {
   const filterValues = useFilterValues(EventConsumersFilterFormId);
@@ -103,87 +114,32 @@ const EventConsumersTable: FC = () => {
     filter,
   });
   const { byQueue: queueStats, statsUnavailable } = useConsumerQueueStats(true);
+  const isStaff = useSelector(isStaffSelector);
 
   const columns = useMemo(
     () => [
       {
         title: translate('Consumer'),
-        render: ({ row }: { row: EventConsumer }) => (
-          <code className="fs-8">{row.uuid.substring(0, 8)}...</code>
-        ),
+        render: ConsumerCell,
         copyField: (row: EventConsumer) => row.uuid,
       },
       {
         title: translate('Owner'),
+        render: ({ row }: { row: EventConsumer }) =>
+          row.user_full_name || row.user_username,
+      },
+      {
+        title: translate('Scope'),
+        render: ScopeCell,
+      },
+      {
+        title: translate('Status'),
         render: ({ row }: { row: EventConsumer }) => (
-          <span className="font-medium">
-            {row.user_full_name || row.user_username}
-          </span>
+          <StatusCell
+            row={row}
+            stats={queueStats.get(getConsumerQueueName(row.uuid))}
+          />
         ),
-        copyField: (row: EventConsumer) => row.user_username,
-      },
-      {
-        title: translate('Object types'),
-        render: ObjectTypesCell,
-      },
-      {
-        title: translate('Scopes'),
-        render: ScopesCell,
-      },
-      {
-        title: translate('Queue'),
-        render: ({ row }: { row: EventConsumer }) =>
-          row.queue_created ? (
-            <Badge variant="success" shape="pill" tone="outline">
-              {translate('Queue created')}
-            </Badge>
-          ) : (
-            <Badge variant="warning" shape="pill" tone="outline">
-              {translate('Queue pending')}
-            </Badge>
-          ),
-      },
-      {
-        title: translate('RMQ username'),
-        render: ({ row }: { row: EventConsumer }) =>
-          row.rmq_username ? (
-            <code className="fs-8">{row.rmq_username}</code>
-          ) : (
-            renderFieldOrDash(row.rmq_username)
-          ),
-        copyField: (row: EventConsumer) => row.rmq_username || '',
-      },
-      {
-        title: translate('Messages'),
-        render: ({ row }: { row: EventConsumer }) => {
-          const stats = queueStats.get(getConsumerQueueName(row.uuid));
-          return stats
-            ? renderFieldOrDash(
-                <span className="font-medium">
-                  {stats.messages.toLocaleString()}
-                </span>,
-              )
-            : renderFieldOrDash(null);
-        },
-      },
-      {
-        title: translate('Consumers connected'),
-        render: ({ row }: { row: EventConsumer }) => {
-          const stats = queueStats.get(getConsumerQueueName(row.uuid));
-          if (!stats) return renderFieldOrDash(null);
-          return (
-            <span
-              className={stats.consumers > 0 ? 'text-success' : 'text-danger'}
-            >
-              {stats.consumers}
-            </span>
-          );
-        },
-      },
-      {
-        title: translate('Created'),
-        render: ({ row }: { row: EventConsumer }) =>
-          formatDateTime(row.created),
       },
     ],
     [queueStats],
@@ -192,9 +148,9 @@ const EventConsumersTable: FC = () => {
   return (
     <>
       {statsUnavailable && (
-        <p className="text-warning fs-7 mb-3">
+        <p className="text-warning mb-3">
           {translate(
-            'RabbitMQ statistics are unavailable; message and consumer counts are not shown.',
+            'RabbitMQ statistics are unavailable; queue status and message counts are not shown.',
           )}
         </p>
       )}
@@ -208,6 +164,10 @@ const EventConsumersTable: FC = () => {
         hoverShadow={false}
         initialPageSize={10}
         minHeight="auto"
+        expandableRow={EventConsumerExpandableRow}
+        tableActions={
+          isStaff ? <AddWebhookButton refetch={tableProps.fetch} /> : null
+        }
         rowActions={({ row }) => (
           <EventConsumerRowActions row={row} refetch={tableProps.fetch} />
         )}
@@ -225,7 +185,7 @@ export const EventConsumersCard: FC = () => {
       id="event-consumers"
       title={translate('Event consumers')}
       subtitle={translate(
-        'Unified pub/sub consumers registered through /api/event-consumers/. Site-agent consumers are managed on the Site agents page.',
+        'Consumers registered through /api/event-consumers/, delivering over RabbitMQ queues or HTTP webhooks. Site-agent consumers are managed on the Site agents page.',
       )}
       actions={
         <Link

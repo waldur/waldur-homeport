@@ -731,6 +731,11 @@
       "feature_area": "metrics"
     }
   },
+  "A global consumer receives every event in the system, including events about all users.": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "A human-readable name for this identity provider.": {
     "context": {
       "feature_area": "steps"
@@ -2564,6 +2569,16 @@
       "feature_area": "integration"
     }
   },
+  "Add webhook": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
+  "Add webhook consumer": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "Add your comment here": {
     "context": {
       "feature_area": "create-review"
@@ -3429,6 +3444,11 @@
   "All entries": {
     "context": {
       "feature_area": "generated"
+    }
+  },
+  "All event types": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "All file types accepted": {},
@@ -4338,6 +4358,11 @@
       "feature_area": "questions"
     }
   },
+  "Any delivery": {
+    "context": {
+      "feature_area": "generated"
+    }
+  },
   "Any existing review or scores from this reviewer will be discarded.": {
     "context": {
       "feature_area": "coi-review"
@@ -4353,9 +4378,19 @@
       "feature_area": "credits"
     }
   },
+  "Any role": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "Any scope": {
     "context": {
       "feature_area": "generated"
+    }
+  },
+  "Any scope type": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "Any status": {
@@ -8329,6 +8364,7 @@
   },
   "Blocked": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "auto-provisioning-rules"
     }
   },
@@ -10581,6 +10617,11 @@
     }
   },
   "Client secret for HTTP Basic authentication when calling the token introspection endpoint. Required together with OIDC_CLIENT_ID and OIDC_INTROSPECTION_URL.": {},
+  "Clients connected": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "Clinical medicine": {
     "context": {
       "primary_ui_type": "label"
@@ -12049,7 +12090,8 @@
   },
   "Connected": {
     "context": {
-      "feature_area": "openstack-tenant"
+      "primary_ui_type": "label",
+      "feature_area": "pubsub"
     }
   },
   "Connected ISDs": {
@@ -12276,6 +12318,11 @@
   "Consumers connected": {
     "context": {
       "primary_ui_type": "title",
+      "feature_area": "site-agents"
+    }
+  },
+  "Consumers registered through /api/event-consumers/, delivering over RabbitMQ queues or HTTP webhooks. Site-agent consumers are managed on the Site agents page.": {
+    "context": {
       "feature_area": "pubsub"
     }
   },
@@ -16183,6 +16230,27 @@
       "feature_area": "rabbitmq"
     }
   },
+  "Deliver only messages whose role is one of these. Messages that carry no role, such as profile changes, are then not delivered.": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
+  "Deliver only role changes on these kinds of scope, e.g. organizations.": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
+  "Delivering": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "pubsub"
+    }
+  },
+  "Delivery": {
+    "context": {
+      "feature_area": "generated"
+    }
+  },
   "Demand growth": {
     "context": {
       "primary_ui_type": "label"
@@ -16409,7 +16477,7 @@
   "Destination": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "remote-projects"
+      "feature_area": "pubsub"
     }
   },
   "Destination (CIDR)": {
@@ -16869,8 +16937,8 @@
   },
   "Disconnected": {
     "context": {
-      "primary_ui_type": "text_content",
-      "feature_area": "chat"
+      "primary_ui_type": "label",
+      "feature_area": "pubsub"
     }
   },
   "Discount": {
@@ -18315,6 +18383,11 @@
   "Edit vendor offering mapping": {
     "context": {
       "feature_area": "vendorOfferings"
+    }
+  },
+  "Edit webhook consumer": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "Edit {name}": {
@@ -20101,6 +20174,21 @@
       "feature_area": "events"
     }
   },
+  "Events are POSTed as JSON to an external HTTP listener, such as an ITSM or CRM system.": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
+  "Events will no longer be sent to this webhook. Continue?": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
+  "Every active role grant matching this consumer’s filters is sent to it again as a role_snapshot message, so the receiver can rebuild its state. Continue?": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "Every call ends in an allocation decision.": {
     "context": {
       "feature_area": "actions"
@@ -21471,6 +21559,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "coi-review"
+    }
+  },
+  "Failing": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "pubsub"
     }
   },
   "Fails format validation. e.g., '80' or '80-100'": {},
@@ -23131,6 +23225,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Global consumer": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "Global definitions can be adopted by every offering.": {
     "context": {
       "feature_area": "metrics"
@@ -23661,6 +23760,11 @@
   },
   "HTML message": {},
   "HTML text": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "HTTP webhook": {
     "context": {
       "primary_ui_type": "label"
     }
@@ -25233,6 +25337,7 @@
       "feature_area": "create"
     }
   },
+  "Importable resources": {},
   "Important: If you lose the SSH private key selected here, you will permanently lose access to your virtual machine (VM). It cannot be recovered without the key.": {
     "context": {
       "feature_area": "deploy"
@@ -27403,6 +27508,26 @@
       "feature_area": "remote-projects"
     }
   },
+  "Last delivered": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
+  "Last delivered {date}.": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "pubsub"
+    }
+  },
+  "Last error": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "Last evaluation": {
     "context": {
       "feature_area": "policies"
@@ -27653,6 +27778,16 @@
       "feature_area": "openstack"
     }
   },
+  "Leave empty to keep the current URL ({destination}).": {
+    "context": {
+      "variables": {
+        "destination": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "pubsub"
+    }
+  },
   "Leave empty to keep the current password unchanged.": {
     "context": {
       "feature_area": "create-user-steps"
@@ -27661,6 +27796,11 @@
   "Leave empty to name the project after the username.": {
     "context": {
       "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Leave empty to receive every type.": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "Leave empty to sync all resources. Select a resource to sync only its billing lines.": {
@@ -30825,6 +30965,11 @@
       "feature_area": "rabbitmq"
     }
   },
+  "Messages waiting": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "Metadata": {
     "context": {
       "primary_ui_type": "title",
@@ -33065,6 +33210,11 @@
       "feature_area": "project-classification"
     }
   },
+  "No client is reading the queue.": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "No columns found": {
     "context": {
       "feature_area": "table"
@@ -33338,6 +33488,11 @@
   "No evaluations recorded yet.": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "No event has been delivered yet.": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "No event queue for this agent was found in RabbitMQ. Either the agent has not registered one, or the broker statistics could not be read.": {
@@ -34773,6 +34928,11 @@
       "feature_area": "site-agents"
     }
   },
+  "Not delivering": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "Not encrypted": {
     "context": {
       "feature_area": "livekit"
@@ -35487,7 +35647,6 @@
   },
   "Object types": {
     "context": {
-      "primary_ui_type": "title",
       "feature_area": "pubsub"
     }
   },
@@ -35864,6 +36023,7 @@
       "feature_area": "offerings"
     }
   },
+  "Offering resources sync": {},
   "Offering resources synchronization has been scheduled.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -36504,6 +36664,16 @@
   "Only the default-language name is changed; edit other languages with \"Edit name translations\".": {
     "context": {
       "feature_area": "roles"
+    }
+  },
+  "Only these roles": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
+  "Only these scope types": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "Only users matching the following criteria can accept this invitation. Users must satisfy at least one criterion from each configured restriction type.": {
@@ -38699,6 +38869,11 @@
   "Pay": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Payload filters": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "Payment failed.": {
@@ -43271,6 +43446,11 @@
       "feature_area": "matrix"
     }
   },
+  "Public https address. A credential in the query string is fine: the URL is stored as a secret and never shown again. user:password@ is not accepted.": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "Public information": {
     "context": {
       "primary_ui_type": "title"
@@ -43834,11 +44014,6 @@
       "feature_area": "rabbitmq"
     }
   },
-  "Queue created": {
-    "context": {
-      "feature_area": "pubsub"
-    }
-  },
   "Queue deleted successfully": {
     "context": {
       "primary_ui_type": "success_message",
@@ -43860,11 +44035,6 @@
   "Queue name": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "pubsub"
-    }
-  },
-  "Queue pending": {
-    "context": {
       "feature_area": "pubsub"
     }
   },
@@ -44008,12 +44178,6 @@
   },
   "REFEDS assurance level": {},
   "RFC 7662 Token Introspection endpoint URL. Used to validate API bearer tokens. When a client sends Authorization: Bearer <token>, Waldur calls this endpoint to verify the token is active.": {},
-  "RMQ username": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "pubsub"
-    }
-  },
   "ROR, GRID, or other external identifier (optional)": {
     "context": {
       "feature_area": "reviewer"
@@ -44029,12 +44193,23 @@
       "feature_area": "rabbitmq"
     }
   },
+  "RabbitMQ queue": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "pubsub"
+    }
+  },
   "RabbitMQ service unavailable": {
     "context": {
       "feature_area": "rabbitmq"
     }
   },
-  "RabbitMQ statistics are unavailable; message and consumer counts are not shown.": {
+  "RabbitMQ statistics are unavailable; queue status and message counts are not shown.": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
+  "RabbitMQ username": {
     "context": {
       "feature_area": "pubsub"
     }
@@ -44236,7 +44411,7 @@
   "Ready": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "rabbitmq"
+      "feature_area": "pubsub"
     }
   },
   "Real": {
@@ -44330,6 +44505,11 @@
   "Receive invoices instead of the owners when set": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Receives": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "Recent": {
@@ -44676,6 +44856,11 @@
   "Registered at:": {
     "context": {
       "feature_area": "service-providers"
+    }
+  },
+  "Registered with": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "Registering the managing organisation": {
@@ -46730,6 +46915,7 @@
       "feature_area": "billing"
     }
   },
+  "Resource API key rotation": {},
   "Resource Demand Analysis": {
     "context": {
       "primary_ui_type": "title",
@@ -46905,6 +47091,7 @@
       "feature_area": "details"
     }
   },
+  "Resource end date change requests": {},
   "Resource events": {
     "context": {
       "primary_ui_type": "title"
@@ -47097,6 +47284,7 @@
     }
   },
   "Resource paused: usage limit reached": {},
+  "Resource periodic limits": {},
   "Resource plan change request has been submitted.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -47833,6 +48021,23 @@
   "Resuming": {
     "context": {
       "feature_area": "api-keys"
+    }
+  },
+  "Resync": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
+  "Resync event consumer": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "pubsub"
+    }
+  },
+  "Resync started. The current state is being sent to the consumer.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "pubsub"
     }
   },
   "Retention policies": {
@@ -48581,6 +48786,7 @@
       "feature_area": "profiles"
     }
   },
+  "Role changes": {},
   "Role definition": {
     "context": {
       "feature_area": "events"
@@ -49870,6 +50076,11 @@
       "feature_area": "qos"
     }
   },
+  "Scheme and host only. The full URL is a credential and is never shown.": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "Science domain": {
     "context": {
       "primary_ui_type": "title",
@@ -49941,12 +50152,6 @@
     }
   },
   "Scoped affiliation": {},
-  "Scopes": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "pubsub"
-    }
-  },
   "Score": {
     "context": {
       "primary_ui_type": "title",
@@ -52028,6 +52233,7 @@
       "feature_area": "data-access"
     }
   },
+  "Service provider accounts": {},
   "Service provider can charge for usage of the following components": {
     "context": {
       "feature_area": "plan"
@@ -52086,6 +52292,7 @@
       "feature_area": "details"
     }
   },
+  "Service provider project groups": {},
   "Service provider verifies technical feasibility of the proposal.": {},
   "Service provider — unique across all of this provider’s offerings": {
     "context": {
@@ -56305,6 +56512,11 @@
       "feature_area": "rabbitmq"
     }
   },
+  "The RabbitMQ queue has not been created yet.": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "The Resources tab shows all Waldur resources that can be linked to Arrow. Use \"Set backend ID\" to manually link a resource to an Arrow license, or use the Import button to create new resources from Arrow licenses.": {
     "context": {
       "feature_area": "settings"
@@ -57465,6 +57677,11 @@
     }
   },
   "The quantity is the limit the customer requests multiplied by the length of the subscription in months, not the plan amount.": {},
+  "The queue exists; RabbitMQ statistics are not available.": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "The registration that makes Waldur an appservice on the homeserver: tokens, bot user ID, webhook URL, and namespace declarations. Synapse reads it from a file; Tuwunel takes it through the admin room.": {},
   "The relay accepted the message": {
     "context": {
@@ -58442,6 +58659,11 @@
   "This configuration contains placeholder values (e.g., <YOUR_API_TOKEN_HERE>) that need to be replaced with actual values before use.": {
     "context": {
       "feature_area": "site-agent"
+    }
+  },
+  "This consumer receives events about every user in the system, including names and email addresses. Narrow it down with object types and filters, and only point it at a system you trust.": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "This course project enables creation of short-lived course accounts.": {
@@ -61720,6 +61942,12 @@
       "feature_area": "actions"
     }
   },
+  "Unable to create webhook consumer.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "pubsub"
+    }
+  },
   "Unable to deactivate request type.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -64163,6 +64391,12 @@
       "feature_area": "passkeys"
     }
   },
+  "Unable to start resync.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "pubsub"
+    }
+  },
   "Unable to start the decision stage.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -65310,6 +65544,12 @@
       "feature_area": "vendorOfferings"
     }
   },
+  "Unable to update webhook consumer.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "pubsub"
+    }
+  },
   "Unable to update workflow step configuration.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -65545,11 +65785,6 @@
   "Unified consumer": {
     "context": {
       "feature_area": "site-agents"
-    }
-  },
-  "Unified pub/sub consumers registered through /api/event-consumers/. Site-agent consumers are managed on the Site agents page.": {
-    "context": {
-      "feature_area": "pubsub"
     }
   },
   "Unified pub/sub queue: receives every enabled event type": {},
@@ -67110,12 +67345,14 @@
     }
   },
   "User Revision History": {},
+  "User SSH keys": {},
   "User UUID": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "event-subscriptions"
     }
   },
+  "User account lifecycle": {},
   "User actions": {
     "context": {
       "feature_area": "administration"
@@ -67478,6 +67715,7 @@
       "feature_area": "user"
     }
   },
+  "User profile changes": {},
   "User profile settings": {},
   "User roles will need to be manually reassigned": {
     "context": {
@@ -69182,6 +69420,7 @@
   },
   "Waiting": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "database-stats"
     }
   },
@@ -69465,17 +69704,29 @@
   "Webhook": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "hooks"
+      "feature_area": "pubsub"
     }
   },
   "Webhook URL": {
     "context": {
-      "feature_area": "matrix"
+      "feature_area": "pubsub"
     }
   },
   "Webhook and Matrix bot": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "Webhook consumer has been created.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "pubsub"
+    }
+  },
+  "Webhook consumer has been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "pubsub"
     }
   },
   "Webhook path": {
@@ -71603,6 +71854,16 @@
   "attachments": {
     "context": {
       "feature_area": "support-users"
+    }
+  },
+  "authorized as {role}": {
+    "context": {
+      "variables": {
+        "role": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "pubsub"
     }
   },
   "automatic": {
@@ -73863,6 +74124,16 @@
       "feature_area": "ai-assistant"
     }
   },
+  "{count} client(s) connected.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "pubsub"
+    }
+  },
   "{count} countries selected": {
     "context": {
       "variables": {
@@ -73993,6 +74264,15 @@
       },
       "feature_area": "details",
       "action_type": "read"
+    }
+  },
+  "{count} event types": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   },
   "{count} existing account(s) keep their home directory and login shell; the change applies to accounts created later.": {
@@ -74774,6 +75054,16 @@
       "feature_area": "review"
     }
   },
+  "{count} scopes": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "pubsub"
+    }
+  },
   "{count} seconds": {
     "context": {
       "variables": {
@@ -75177,6 +75467,19 @@
         }
       },
       "feature_area": "email"
+    }
+  },
+  "{error} Since {date}.": {
+    "context": {
+      "variables": {
+        "error": {
+          "type": "unknown"
+        },
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "pubsub"
     }
   },
   "{field}, {match}": {
