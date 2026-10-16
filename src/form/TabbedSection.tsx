@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useEffect, useMemo, useState } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Badge, Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
@@ -124,19 +124,10 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
                   key={tab.id}
                   value={tab.id}
                   disabled={disabled}
+                  count={enableSearch && hasQuery ? tab.count : undefined}
                   className={disabled ? 'text-quaternary' : undefined}
                 >
                   {tab.title}
-                  {enableSearch && hasQuery && (
-                    <Badge
-                      variant="secondary"
-                      size="sm"
-                      tone="light"
-                      className="ms-2"
-                    >
-                      {tab.count}
-                    </Badge>
-                  )}
                 </TabsTrigger>
               );
             })}

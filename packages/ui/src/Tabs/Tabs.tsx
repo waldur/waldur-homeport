@@ -13,9 +13,7 @@ import {
   useState,
 } from 'react';
 
-import { Badge } from '../Badge';
 import { cn } from '../cn';
-import { LoadingSpinner } from '../LoadingSpinner';
 import {
   segmentedItemClassName,
   segmentedListClassName,
@@ -23,6 +21,7 @@ import {
 import { Tooltip } from '../Tooltip';
 
 import { resolveTabValue } from './resolveTabValue';
+import { TabCount } from './TabCount';
 import {
   tabListVariants,
   tabScrollClassName,
@@ -320,6 +319,7 @@ export const TabsTrigger = forwardRef<
     ref,
   ) => {
     const { variant, fullWidth } = useContext(TabsListContext);
+    const { activeValue } = useContext(TabsContext);
     const triggerClasses = cn(
       variant === 'segmented'
         ? segmentedItemClassName({ fullWidth, className })
@@ -343,11 +343,11 @@ export const TabsTrigger = forwardRef<
             className="ms-2 shrink-0 text-quinary"
           />
         ) : null}
-        {countLoading || count !== undefined ? (
-          <Badge variant="neutral" shape="pill" tone="outline" className="ms-2">
-            {countLoading ? <LoadingSpinner size={12} /> : count}
-          </Badge>
-        ) : null}
+        <TabCount
+          count={count}
+          loading={countLoading}
+          active={activeValue === props.value}
+        />
       </TabsPrimitive.Trigger>
     );
 

@@ -651,6 +651,33 @@ describe('TabsTrigger extras', () => {
     expect(screen.getByRole('tab', { name: 'C' })).toHaveTextContent(/^C$/);
   });
 
+  it('colours the active tab count primary and the rest neutral', async () => {
+    const user = userEvent.setup();
+    render(
+      <Tabs defaultValue="a">
+        <TabsList>
+          <TabsTrigger value="a" count={1}>
+            A
+          </TabsTrigger>
+          <TabsTrigger value="b" count={2}>
+            B
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>,
+    );
+
+    const variantOf = (count: string) =>
+      screen.getByText(count).getAttribute('data-variant');
+
+    expect(variantOf('1')).toBe('primary');
+    expect(variantOf('2')).toBe('neutral');
+
+    await user.click(screen.getByRole('tab', { name: /B/ }));
+
+    expect(variantOf('1')).toBe('neutral');
+    expect(variantOf('2')).toBe('primary');
+  });
+
   it('shows a count of zero', () => {
     render(
       <Tabs defaultValue="a">

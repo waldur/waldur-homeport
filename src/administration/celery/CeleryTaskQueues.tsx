@@ -7,7 +7,6 @@ import {
 
 import {
   AccordionCard,
-  Badge,
   Tabs,
   TabsList,
   TabsTrigger,
@@ -56,19 +55,16 @@ export const CeleryTaskQueues = ({
       key: 'active',
       title: translate('Active'),
       count: activeTasks.length,
-      variant: 'success' as const,
     },
     {
       key: 'reserved',
       title: translate('Reserved'),
       count: reservedTasks.length,
-      variant: 'warning' as const,
     },
     {
       key: 'scheduled',
       title: translate('Scheduled'),
       count: scheduledTasks.length,
-      variant: 'info' as const,
     },
   ];
 
@@ -85,16 +81,13 @@ export const CeleryTaskQueues = ({
       >
         <TabsList bordered={false} className="mb-4">
           {tabs.map((tab) => (
-            <TabsTrigger key={tab.key} value={tab.key} className="py-4">
+            <TabsTrigger
+              key={tab.key}
+              value={tab.key}
+              count={tab.count}
+              className="py-4"
+            >
               {tab.title}
-              <Badge
-                variant={tab.variant}
-                size="sm"
-                tone="light"
-                className="ms-2"
-              >
-                {tab.count}
-              </Badge>
             </TabsTrigger>
           ))}
         </TabsList>

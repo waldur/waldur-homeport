@@ -150,6 +150,8 @@ export type TableWithPortal<T = {}> = {
 export interface TableTab {
   key: string;
   title: ReactNode;
+  /** A count badge after the title. `undefined` shows no badge. */
+  count?: number;
   state?: string;
   params?: Record<string, any>;
   component?: ComponentType<any>;

@@ -11,6 +11,7 @@ import { translate } from 'waldur-i18n-runtime';
 import { cn } from '../cn';
 import { Tooltip } from '../Tooltip';
 
+import { TabCount } from './TabCount';
 import {
   tabListVariants,
   tabScrollClassName,
@@ -22,6 +23,8 @@ import { useScrollActiveTabIntoView } from './useScrollActiveTabIntoView';
 export interface TabNavItemDef {
   key: string;
   title: ReactNode;
+  /** A count badge after the title. `undefined` shows no badge. */
+  count?: number;
   /**
    * The element the tab renders as, usually a router link
    * (`<Link state="…" params={…} />`): the tab stays a real anchor, so
@@ -161,8 +164,23 @@ const TabNavItem = ({
   current: boolean;
   onSelect?: (key: string) => void;
 }) => {
-  const { key, title, link, onClick, disabled, tooltip, className, testId } =
-    item;
+  const {
+    key,
+    title,
+    count,
+    link,
+    onClick,
+    disabled,
+    tooltip,
+    className,
+    testId,
+  } = item;
+  const label = (
+    <>
+      {title}
+      <TabCount count={count} active={current} />
+    </>
+  );
   const isLink = Boolean(link);
 
   const triggerClasses = cn(
@@ -197,7 +215,7 @@ const TabNavItem = ({
       {cloneElement(
         link,
         undefined,
-        <span className="inline-flex items-center">{title}</span>,
+        <span className="inline-flex items-center">{label}</span>,
       )}
     </Slot>
   ) : (
@@ -211,7 +229,7 @@ const TabNavItem = ({
       }}
       {...shared}
     >
-      {title}
+      {label}
     </button>
   );
 

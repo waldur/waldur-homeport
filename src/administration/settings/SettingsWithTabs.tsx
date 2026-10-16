@@ -5,7 +5,7 @@ import { FC, ReactNode, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
-import { Badge, Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -127,19 +127,10 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
                 <TabsTrigger
                   key={tab.key}
                   value={tab.key}
+                  count={query ? filteredCount : undefined}
                   className={!hasMatches && query ? 'text-quaternary' : ''}
                 >
                   {tab.title}
-                  {query && (
-                    <Badge
-                      variant={hasMatches ? 'primary' : 'neutral'}
-                      shape="pill"
-                      tone="light"
-                      className="ms-2"
-                    >
-                      {filteredCount}
-                    </Badge>
-                  )}
                 </TabsTrigger>
               );
             })}

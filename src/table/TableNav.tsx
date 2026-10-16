@@ -47,11 +47,13 @@ export const TableNav = ({ tabs }: { tabs: TableTab[] }) => {
           ? {
               key: tab.key,
               title: tab.title,
+              count: tab.count,
               onClick: () => tab.onSelect(tab.key),
             }
           : {
               key: tab.key,
               title: tab.title,
+              count: tab.count,
               link: (
                 <Link state={tab.state ?? state.name} params={tab.params} />
               ),
