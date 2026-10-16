@@ -56,6 +56,9 @@ export const ProjectAutocomplete: React.FC<ProjectAutocompleteProps> = (
         isClearable={true}
         isDisabled={isDisabled}
         inputId="project-selector-input"
+        // These selects sit in dialogs and filters with no label of their own,
+        // so the placeholder is all a screen reader (or a test) would get.
+        aria-label={translate('Project')}
         {...reactSelectProps}
       />
     ),

@@ -63,6 +63,9 @@ export const OrganizationAutocomplete: FunctionComponent<
         noOptionsMessage={() => noOptionsMessage}
         isClearable={true}
         inputId="organization-selector-input"
+        // These selects sit in dialogs and filters with no label of their own,
+        // so the placeholder is all a screen reader (or a test) would get.
+        aria-label={translate('Organization')}
         {...reactSelectProps}
       />
     ),
