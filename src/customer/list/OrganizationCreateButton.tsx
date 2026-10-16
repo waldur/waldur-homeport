@@ -1,4 +1,4 @@
-import { PlusCircleIcon } from '@phosphor-icons/react';
+import { PlusCircleIcon, RocketLaunchIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 
@@ -37,10 +37,12 @@ export const OrganizationCreateButton: FunctionComponent = () => {
               resolve: { role: 'CUSTOMER' },
             })
           }
+          iconNode={<PlusCircleIcon weight="bold" />}
         />
         <ActionItem
           title={translate('Onboard organisation')}
           action={() => router.stateService.go('organizations-create')}
+          iconNode={<RocketLaunchIcon weight="bold" />}
         />
       </ActionsMenu>
     );
