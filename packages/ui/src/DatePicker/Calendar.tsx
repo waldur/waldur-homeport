@@ -143,6 +143,8 @@ export function Calendar({
       formatters={{
         formatWeekdayName: (date, options, dateLib) =>
           dateLib.format(date, weekdayFormat(dateLib, options), options),
+        // "Jan", as in MonthPicker: full names don't fit the month grid.
+        formatMonthDropdown: (month, dateLib) => dateLib.format(month, 'LLL'),
         ...formatters,
       }}
       components={{
