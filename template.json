@@ -59219,6 +59219,16 @@
       "feature_area": "actions"
     }
   },
+  "This subnet is not connected to a router, so no floating IP can be attached. The instance uses its own address on this network.": {
+    "context": {
+      "feature_area": "deploy"
+    }
+  },
+  "This subnet is not connected to a router.": {
+    "context": {
+      "feature_area": "deploy"
+    }
+  },
   "This subnet is shared by your cloud provider. Only the provider can change it.": {},
   "This subnet is shared with you by {tenant}. Only its owner can change it.": {
     "context": {

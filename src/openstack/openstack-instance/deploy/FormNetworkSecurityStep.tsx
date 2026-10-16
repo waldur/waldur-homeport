@@ -1,9 +1,4 @@
-import {
-  PlusCircleIcon,
-  QuestionIcon,
-  TrashIcon,
-  WarningCircleIcon,
-} from '@phosphor-icons/react';
+import { PlusCircleIcon, QuestionIcon, TrashIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import {
   Fragment,
@@ -24,7 +19,7 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, Switch, Tooltip } from 'waldur-ui';
+import { AlertItem, BaseButton, Switch, Tooltip, WarningTip } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -182,6 +177,33 @@ export const SubnetValueContainer = (props) => {
   );
 };
 
+// Why no floating IP, new or existing, can go on a subnet; undefined when one
+// can. Both cases are refused by the API.
+const getFloatingIpRestriction = (subnet) => {
+  // A floating IP is mapped onto a fixed IPv4 address of the port, so an IPv6
+  // subnet has nothing to map it to.
+  if (subnet?.cidr?.includes(':')) {
+    return {
+      optionReason: translate(
+        'Floating IPs are IPv4 only; this subnet is IPv6.',
+      ),
+      labelWarning: translate(
+        'Floating IPs are IPv4 only, so none can be attached to an IPv6 subnet. The instance is reachable on its own IPv6 address instead.',
+      ),
+    };
+  }
+  // A floating IP is NAT on the subnet's router.
+  if (subnet?.is_connected === false) {
+    return {
+      optionReason: translate('This subnet is not connected to a router.'),
+      labelWarning: translate(
+        'This subnet is not connected to a router, so no floating IP can be attached. The instance uses its own address on this network.',
+      ),
+    };
+  }
+  return undefined;
+};
+
 const renderNetworkRows = ({
   fields,
   subnets,
@@ -194,8 +216,11 @@ const renderNetworkRows = ({
     (itemType) => (item) => {
       let res = true;
       if (fields.length > 0 && fields.value) {
+        // Matched by URL: floating IPs are fetched with url and address only,
+        // and the skip and auto-assign choices carry no uuid either, so a
+        // uuid comparison would match every fetched one and hide them all.
         fields.value.forEach((net) => {
-          if (net && net[itemType] && net[itemType].uuid === item.uuid) {
+          if (net && net[itemType] && net[itemType].url === item.url) {
             res = false;
           }
         });
@@ -258,30 +283,53 @@ const renderNetworkRows = ({
     }
   }, [hasCustomIp, fields]);
 
+  // A choice made on one subnet can become unavailable when the row's subnet
+  // changes, and a disabled option that is already selected stays selected.
+  // Fall back to skipping so the order is not refused.
+  useEffect(() => {
+    fields.value?.forEach((val, index) => {
+      const floatingIp = val?.floatingIp;
+      if (!floatingIp?.url || floatingIp.url === 'false') return;
+      if (
+        getFloatingIpRestriction(val.subnet) ||
+        (floatingIp.url === 'true' && fipQuotaExhausted)
+      ) {
+        fields.update(index, {
+          ...val,
+          floatingIp: getDefaultFloatingIps()[0],
+        });
+      }
+    });
+  }, [fields, fipQuotaExhausted]);
+
   return (
     <div className="mb-5">
       <div className="border-rows mb-4">
         {fields.map((network, index) => {
-          // A floating IP is mapped onto a fixed IPv4 address of the port, so
-          // an IPv6 subnet has nothing to map it to and the API refuses the
-          // order. Decided per row: a tenant can hold subnets of both
-          // families, and an IPv4 row must keep auto-assign.
-          const rowSubnetIsIpv6 = Boolean(
-            fields.value?.[index]?.subnet?.cidr?.includes(':'),
+          // Decided per row: a tenant can hold subnets of both families, and
+          // with and without a router, and a row that can take a floating IP
+          // must keep auto-assign.
+          const rowRestriction = getFloatingIpRestriction(
+            fields.value?.[index]?.subnet,
           );
-          const rowFloatingIps = rowSubnetIsIpv6
+          const rowFloatingIps = rowRestriction
             ? freeFloatingIps.map((option) =>
-                option.url === 'true'
-                  ? {
+                option.url === 'false'
+                  ? option
+                  : {
                       ...option,
                       isDisabled: true,
-                      disabledReason: translate(
-                        'Floating IPs are IPv4 only; this subnet is IPv6.',
-                      ),
-                    }
-                  : option,
+                      disabledReason: rowRestriction.optionReason,
+                    },
               )
             : freeFloatingIps;
+          const labelWarning =
+            rowRestriction?.labelWarning ||
+            (fipQuotaExhausted
+              ? translate(
+                  'Floating IP quota is exhausted; auto-assign is unavailable. Ask the administrator to raise the limit.',
+                )
+              : undefined);
           return (
             <Fragment key={index}>
               <Row className="g-4">
@@ -304,26 +352,14 @@ const renderNetworkRows = ({
                   <SelectGroup
                     name={`${network}.floatingIp`}
                     label={
-                      fipQuotaExhausted || rowSubnetIsIpv6 ? (
+                      labelWarning ? (
                         <>
                           {translate('Floating IP')}{' '}
-                          <Tooltip
-                            label={
-                              rowSubnetIsIpv6
-                                ? translate(
-                                    'Floating IPs are IPv4 only, so none can be attached to an IPv6 subnet. The instance is reachable on its own IPv6 address instead.',
-                                  )
-                                : translate(
-                                    'Floating IP quota is exhausted; auto-assign is unavailable. Ask the administrator to raise the limit.',
-                                  )
-                            }
-                          >
-                            <WarningCircleIcon
-                              weight="bold"
-                              size={14}
-                              className="text-warning align-text-bottom ms-1"
-                            />
-                          </Tooltip>
+                          <WarningTip
+                            label={labelWarning}
+                            size={14}
+                            className="align-text-bottom ms-1"
+                          />
                         </>
                       ) : (
                         translate('Floating IP')
