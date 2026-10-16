@@ -46,10 +46,29 @@ const SUBNET_V6 = {
   cidr: 'fd00:a:1::/64',
 };
 
+const SUBNET_UNROUTED = {
+  url: 'https://example.com/api/openstack-subnets/unrouted/',
+  uuid: 'unrouted',
+  name: 'subnet-unrouted',
+  cidr: '10.0.2.0/24',
+  is_connected: false,
+};
+
 // What getDefaultFloatingIps() returns for the "no floating IP" choice; the
 // select labels options by `address`, so seeding a row without one renders an
 // empty control.
 const SKIP_FIP = { url: 'false', address: 'Skip floating IP assignment' };
+const AUTO_FIP = { url: 'true', address: 'Auto-assign floating IP' };
+
+// The step requests floating IPs with `field: ['url', 'address']`, so a free
+// floating IP arrives without a uuid.
+const FREE_FIP = {
+  url: 'https://example.com/api/openstack-floating-ips/f1/',
+  address: '193.40.1.1',
+};
+
+const findOption = (label: RegExp) =>
+  screen.getAllByRole('option').find((o) => label.test(o.textContent || ''));
 
 const offering = { scope_uuid: 'tenant-1', quotas: [] } as any;
 
@@ -138,9 +157,12 @@ describe('FormNetworkSecurityStep — auto-seed first network row', () => {
   // A floating IP is mapped onto a fixed IPv4 address of the port, so an IPv6
   // subnet has nothing to map it to and the API refuses the order. The form
   // has to say so rather than let the order be placed and fail.
-  it('disables auto-assign on a row whose subnet is IPv6', async () => {
+  it('disables every floating IP on a row whose subnet is IPv6', async () => {
     vi.mocked(openstackSubnetsList).mockResolvedValue(
       mockListResponse([SUBNET_V6]),
+    );
+    vi.mocked(openstackFloatingIpsList).mockResolvedValue(
+      mockListResponse([FREE_FIP]),
     );
     const user = userEvent.setup();
     renderStep({
@@ -153,13 +175,17 @@ describe('FormNetworkSecurityStep — auto-seed first network row', () => {
     // the row itself rather than for the request to have been made.
     await screen.findByText(SUBNET_V6.name);
 
-    await user.click(screen.getByLabelText(/Floating IP/));
+    await user.click(screen.getByRole('combobox', { name: /Floating IP/ }));
 
     await waitFor(() => {
-      const autoAssign = screen
-        .getAllByRole('option')
-        .find((o) => /Auto-assign floating IP/.test(o.textContent || ''));
-      expect(autoAssign).toHaveAttribute('aria-disabled', 'true');
+      expect(findOption(/Auto-assign floating IP/)).toHaveAttribute(
+        'aria-disabled',
+        'true',
+      );
+      expect(findOption(/193\.40\.1\.1/)).toHaveAttribute(
+        'aria-disabled',
+        'true',
+      );
     });
   });
 
@@ -179,13 +205,101 @@ describe('FormNetworkSecurityStep — auto-seed first network row', () => {
     // Same as above: wait for the row, not for the request.
     await screen.findByText(SUBNET.name);
 
-    await user.click(screen.getByLabelText(/Floating IP/));
+    await user.click(screen.getByRole('combobox', { name: /Floating IP/ }));
 
     await waitFor(() => {
       const autoAssign = screen
         .getAllByRole('option')
         .find((o) => /Auto-assign floating IP/.test(o.textContent || ''));
       expect(autoAssign).toHaveAttribute('aria-disabled', 'false');
+    });
+  });
+
+  // The API refuses any floating IP on a subnet without a router, so only
+  // skipping may stay selectable.
+  it('allows only skipping the floating IP on a subnet without a router', async () => {
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([SUBNET_UNROUTED]),
+    );
+    vi.mocked(openstackFloatingIpsList).mockResolvedValue(
+      mockListResponse([FREE_FIP]),
+    );
+    const user = userEvent.setup();
+    renderStep({
+      attributes: {
+        networks: [{ subnet: SUBNET_UNROUTED, floatingIp: SKIP_FIP }],
+      },
+    });
+
+    // Same as above: wait for the row, not for the request.
+    await screen.findByText(SUBNET_UNROUTED.name);
+
+    await user.click(screen.getByRole('combobox', { name: /Floating IP/ }));
+
+    await waitFor(() => {
+      expect(findOption(/Skip floating IP/)).toHaveAttribute(
+        'aria-disabled',
+        'false',
+      );
+      expect(findOption(/Auto-assign floating IP/)).toHaveAttribute(
+        'aria-disabled',
+        'true',
+      );
+      expect(findOption(/193\.40\.1\.1/)).toHaveAttribute(
+        'aria-disabled',
+        'true',
+      );
+    });
+  });
+
+  it('offers the free floating IPs of the tenant on a routed subnet', async () => {
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([SUBNET]),
+    );
+    vi.mocked(openstackFloatingIpsList).mockResolvedValue(
+      mockListResponse([FREE_FIP]),
+    );
+    const user = userEvent.setup();
+    renderStep({
+      attributes: {
+        networks: [{ subnet: SUBNET, floatingIp: SKIP_FIP }],
+      },
+    });
+
+    await screen.findByText(SUBNET.name);
+
+    await user.click(screen.getByRole('combobox', { name: /Floating IP/ }));
+
+    await waitFor(() => {
+      expect(findOption(/193\.40\.1\.1/)).toHaveAttribute(
+        'aria-disabled',
+        'false',
+      );
+    });
+  });
+
+  // A disabled option that is already selected stays selected, and the API
+  // then refuses the order.
+  it('falls back to skipping when the row moves to a subnet without a router', async () => {
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([SUBNET, SUBNET_UNROUTED]),
+    );
+    const user = userEvent.setup();
+    const { getValues } = renderStep({
+      attributes: {
+        networks: [{ subnet: SUBNET, floatingIp: AUTO_FIP }],
+      },
+    });
+
+    await screen.findByText(SUBNET.name);
+
+    await user.click(screen.getByRole('combobox', { name: /Subnet/ }));
+    await user.click(await screen.findByText(SUBNET_UNROUTED.name));
+
+    await waitFor(() => {
+      const [row] = getValues().attributes.networks;
+      expect(row.subnet.uuid).toBe(SUBNET_UNROUTED.uuid);
+      expect(row.floatingIp.url).toBe('false');
     });
   });
 

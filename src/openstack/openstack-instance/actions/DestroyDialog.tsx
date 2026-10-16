@@ -44,7 +44,7 @@ export const DestroyDialog: FC<ActionDialogProps> = ({
     refetch: refetch,
   });
 
-  const { formFields, initialValues } = getDeleteField();
+  const { formFields, initialValues } = getDeleteField(resource);
 
   return (
     <ResourceActionDialog

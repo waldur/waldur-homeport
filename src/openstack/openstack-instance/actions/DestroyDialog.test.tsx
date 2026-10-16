@@ -14,9 +14,11 @@ const resource = {
   marketplace_resource_uuid: 'marketplace-uuid',
 };
 
-const renderDialog = (refetch = vi.fn()) =>
+const renderDialog = (refetch = vi.fn(), overrides = {}) =>
   renderWithProviders(
-    <DestroyDialog resolve={{ resource: resource as any, refetch }} />,
+    <DestroyDialog
+      resolve={{ resource: { ...resource, ...overrides } as any, refetch }}
+    />,
   );
 
 describe('DestroyDialog', () => {
@@ -46,6 +48,17 @@ describe('DestroyDialog', () => {
     expect(
       screen.getByRole('checkbox', { name: 'Release floating IPs' }),
     ).toBeChecked();
+  });
+
+  it('hides release floating IPs when the instance has none', () => {
+    renderDialog(vi.fn(), { floating_ips: [] });
+
+    expect(
+      screen.getByRole('checkbox', { name: 'Delete volumes' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole('checkbox', { name: 'Release floating IPs' }),
+    ).not.toBeInTheDocument();
   });
 
   it('terminates the marketplace resource without force_destroy', async () => {
