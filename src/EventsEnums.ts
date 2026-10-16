@@ -10,12 +10,26 @@ export const Access_subnetsEnum = {
   offering_access_subnet_update_succeeded: 'offering_access_subnet_update_succeeded',
 };
 
+export const AdminEnum = {
+  admin_object_created: 'admin_object_created',
+  admin_object_deleted: 'admin_object_deleted',
+  admin_object_updated: 'admin_object_updated',
+};
+
 export const AuthEnum = {
+  auth_logged_in_to_admin_site: 'auth_logged_in_to_admin_site',
   auth_logged_in_with_oauth: 'auth_logged_in_with_oauth',
   auth_logged_in_with_username: 'auth_logged_in_with_username',
+  auth_logged_in_with_valimo: 'auth_logged_in_with_valimo',
   auth_logged_out: 'auth_logged_out',
+  auth_login_failed_to_admin_site: 'auth_login_failed_to_admin_site',
+  auth_login_failed_with_oauth: 'auth_login_failed_with_oauth',
+  auth_login_failed_with_saml2: 'auth_login_failed_with_saml2',
   auth_login_failed_with_username: 'auth_login_failed_with_username',
+  auth_login_failed_with_valimo: 'auth_login_failed_with_valimo',
   event_consumer_registered_with_broad_credential: 'event_consumer_registered_with_broad_credential',
+  event_consumer_resync_requested: 'event_consumer_resync_requested',
+  event_consumer_webhook_updated: 'event_consumer_webhook_updated',
   passkey_authentication_failed: 'passkey_authentication_failed',
   passkey_authentication_succeeded: 'passkey_authentication_succeeded',
   passkey_registered: 'passkey_registered',
@@ -32,6 +46,7 @@ export const AuthEnum = {
   pat_used_from_new_ip: 'pat_used_from_new_ip',
   token_created: 'token_created',
   token_lifetime_updated: 'token_lifetime_updated',
+  token_viewed: 'token_viewed',
   user_blocked: 'user_blocked',
 };
 
@@ -295,6 +310,12 @@ export const PermissionsEnum = {
   role_updated: 'role_updated',
 };
 
+export const PoliciesEnum = {
+  policy_created: 'policy_created',
+  policy_deleted: 'policy_deleted',
+  policy_updated: 'policy_updated',
+};
+
 export const ProjectsEnum = {
   project_creation_succeeded: 'project_creation_succeeded',
   project_deletion_succeeded: 'project_deletion_succeeded',
@@ -331,6 +352,7 @@ export const ProvidersEnum = {
   maintenance_announcement_started: 'maintenance_announcement_started',
   maintenance_announcement_unscheduled: 'maintenance_announcement_unscheduled',
   maintenance_announcement_updated: 'maintenance_announcement_updated',
+  marketplace_offering_deleted: 'marketplace_offering_deleted',
   marketplace_provider_project_group_gid_updated: 'marketplace_provider_project_group_gid_updated',
   marketplace_resource_create_canceled: 'marketplace_resource_create_canceled',
   marketplace_resource_create_failed: 'marketplace_resource_create_failed',
@@ -508,13 +530,21 @@ export const Terms_of_serviceEnum = {
 };
 
 export const UsersEnum = {
+  auth_logged_in_to_admin_site: 'auth_logged_in_to_admin_site',
   auth_logged_in_with_oauth: 'auth_logged_in_with_oauth',
   auth_logged_in_with_saml2: 'auth_logged_in_with_saml2',
   auth_logged_in_with_username: 'auth_logged_in_with_username',
+  auth_logged_in_with_valimo: 'auth_logged_in_with_valimo',
   auth_logged_out: 'auth_logged_out',
   auth_logged_out_with_saml2: 'auth_logged_out_with_saml2',
+  auth_login_failed_to_admin_site: 'auth_login_failed_to_admin_site',
+  auth_login_failed_with_oauth: 'auth_login_failed_with_oauth',
+  auth_login_failed_with_saml2: 'auth_login_failed_with_saml2',
   auth_login_failed_with_username: 'auth_login_failed_with_username',
+  auth_login_failed_with_valimo: 'auth_login_failed_with_valimo',
   event_consumer_registered_with_broad_credential: 'event_consumer_registered_with_broad_credential',
+  event_consumer_resync_requested: 'event_consumer_resync_requested',
+  event_consumer_webhook_updated: 'event_consumer_webhook_updated',
   freeipa_profile_created: 'freeipa_profile_created',
   freeipa_profile_deleted: 'freeipa_profile_deleted',
   freeipa_profile_disabled: 'freeipa_profile_disabled',
@@ -544,6 +574,7 @@ export const UsersEnum = {
   ssh_key_deletion_succeeded: 'ssh_key_deletion_succeeded',
   token_created: 'token_created',
   token_lifetime_updated: 'token_lifetime_updated',
+  token_viewed: 'token_viewed',
   user_activated: 'user_activated',
   user_blocked: 'user_blocked',
   user_creation_succeeded: 'user_creation_succeeded',

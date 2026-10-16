@@ -259,6 +259,10 @@ export const PermissionOptions = [
         value: 'OFFERING.UPDATE_DESCRIPTION',
       },
       {
+        label: translate('Update endpoint'),
+        value: 'OFFERING.UPDATE_ENDPOINT',
+      },
+      {
         label: translate('Update integration'),
         value: 'OFFERING.UPDATE_INTEGRATION',
       },
