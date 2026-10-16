@@ -50,7 +50,7 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
       }
       quickActions={
         <div className="d-flex flex-column flex-wrap gap-2">
-          <PublicCallApplyButton call={call} />
+          <PublicCallApplyButton call={call} size="lg" />
           <CallProposalsButton call={call} />
         </div>
       }
