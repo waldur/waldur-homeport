@@ -129,48 +129,54 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
     },
   ];
 
+  const reviewsTable = (
+    <Table
+      {...tableProps}
+      columns={columns}
+      minHeight="auto"
+      hideRefresh
+      verboseName={translate('Reviews')}
+      equalColWidth
+      hasActionBar={false}
+      rowActions={ProposalReviewsRowActions}
+      showPageSizeSelector
+      initialPageSize={5}
+    />
+  );
+
   return (
     <ExpandableContainer>
       {row.project_summary && (
         <Field
           label={translate('Project summary')}
           value={row.project_summary}
-          className="col-md-12 mb-5"
+          className="col-md-12 mb-3"
         />
       )}
 
-      <EmbeddedTabs
-        defaultValue="reviews"
-        listClassName="mb-4"
-        tabs={[
-          {
-            key: 'reviews',
-            title: translate('Reviews'),
-            count: reviewsCount,
-            content: (
-              <Table
-                {...tableProps}
-                columns={columns}
-                minHeight="auto"
-                hideRefresh
-                verboseName={translate('Reviews')}
-                equalColWidth
-                hasActionBar={false}
-                rowActions={ProposalReviewsRowActions}
-                showPageSizeSelector
-                initialPageSize={5}
-              />
-            ),
-          },
-          {
-            key: 'compliance',
-            title: translate('Compliance'),
-            count: questionsCount,
-            hidden: !checklistData,
-            content: <ComplianceContent data={checklistData} />,
-          },
-        ]}
-      />
+      {reviewsCount === 0 && !checklistData ? (
+        reviewsTable
+      ) : (
+        <EmbeddedTabs
+          defaultValue="reviews"
+          listClassName="mb-4"
+          tabs={[
+            {
+              key: 'reviews',
+              title: translate('Reviews'),
+              count: reviewsCount,
+              content: reviewsTable,
+            },
+            {
+              key: 'compliance',
+              title: translate('Compliance'),
+              count: questionsCount,
+              hidden: !checklistData,
+              content: <ComplianceContent data={checklistData} />,
+            },
+          ]}
+        />
+      )}
     </ExpandableContainer>
   );
 };
