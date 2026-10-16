@@ -10,7 +10,7 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
 import { useCustomer, useSetCustomer, useUser } from '@/workspace/hooks';
 
-import { serializeNotificationEmails } from './utils';
+import { serializeEmailList } from './utils';
 
 const CustomerErrorDialog = lazyComponent(() =>
   import('./CustomerErrorDialog').then((module) => ({
@@ -43,7 +43,7 @@ export const CustomerManage: FunctionComponent<OwnProps> = ({ tabSpec }) => {
             body: {
               ...formData,
               ...('notification_emails' in formData && {
-                notification_emails: serializeNotificationEmails(
+                notification_emails: serializeEmailList(
                   formData.notification_emails,
                 ),
               }),

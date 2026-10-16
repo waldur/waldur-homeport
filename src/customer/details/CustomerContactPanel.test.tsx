@@ -1,8 +1,9 @@
 import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { customersContact } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { EditFieldDialog } from '@/form/EditFieldDialog';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
@@ -35,11 +36,18 @@ const renderPanel = (customer = mockCustomer) =>
   );
 
 describe('CustomerContactPanel', () => {
+  const originalInvoicesConfig = ENV.plugins.WALDUR_INVOICES;
+
+  afterEach(() => {
+    ENV.plugins.WALDUR_INVOICES = originalInvoicesConfig;
+  });
+
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(useUser).mockReturnValue({ uuid: 'user-1' } as any);
     vi.mocked(useSetCustomer).mockReturnValue(vi.fn());
     vi.mocked(hasPermission).mockReturnValue(true);
+    ENV.plugins.WALDUR_INVOICES = { SEND_CUSTOMER_INVOICES: false };
   });
 
   it('renders all contact field labels', () => {
@@ -50,6 +58,37 @@ describe('CustomerContactPanel', () => {
     expect(screen.getByText('Contact details')).toBeInTheDocument();
     expect(screen.getByText('Homepage')).toBeInTheDocument();
     expect(screen.getByText('Notification emails')).toBeInTheDocument();
+  });
+
+  describe('invoice emails', () => {
+    it('is shown when the deployment sends invoices by email', () => {
+      ENV.plugins.WALDUR_INVOICES = { SEND_CUSTOMER_INVOICES: true };
+      renderPanel();
+
+      expect(screen.getByText('Invoice emails')).toBeInTheDocument();
+    });
+
+    it('is hidden when invoices are not sent by email', () => {
+      renderPanel();
+
+      expect(screen.queryByText('Invoice emails')).not.toBeInTheDocument();
+    });
+
+    it('stays visible while a list is set, even when invoices are not sent by email', () => {
+      renderPanel({ ...mockCustomer, invoice_emails: 'billing@example.com' });
+
+      expect(screen.getByText('Invoice emails')).toBeInTheDocument();
+    });
+
+    it('is shown to staff even when invoices are not sent by email', () => {
+      vi.mocked(useUser).mockReturnValue({
+        uuid: 'user-1',
+        is_staff: true,
+      } as any);
+      renderPanel();
+
+      expect(screen.getByText('Invoice emails')).toBeInTheDocument();
+    });
   });
 
   describe('permissions', () => {
