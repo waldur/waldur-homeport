@@ -1,6 +1,14 @@
 import classNames from 'classnames';
 import { uniqueId } from 'lodash-es';
-import { FC, PropsWithChildren, ReactNode, useMemo } from 'react';
+import {
+  createContext,
+  FC,
+  PropsWithChildren,
+  ReactNode,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 import { Form } from 'react-bootstrap';
 import { FieldMetaState } from 'react-final-form';
 
@@ -41,6 +49,29 @@ export interface FormGroupProps {
   controlId?: string;
 }
 
+/**
+ * Ids of what a FormGroup renders around its control — label, description,
+ * error — for controls that wire ARIA themselves (`aria-labelledby`,
+ * `aria-describedby`, `aria-invalid`), e.g. the date pickers. Each id is
+ * set only while that element is on screen.
+ */
+interface FormGroupA11y {
+  labelId?: string;
+  descriptionId?: string;
+  errorId?: string;
+  /**
+   * For a control that reports its own error (a date picker refusing a
+   * typed entry): while set, the group holds back the form's error, which
+   * would only restate it — refusing the entry empties the value, so a
+   * `required` check fails too.
+   */
+  setControlError?(hasError: boolean): void;
+}
+
+const FormGroupA11yContext = createContext<FormGroupA11y>({});
+
+export const useFormGroupA11y = () => useContext(FormGroupA11yContext);
+
 export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
   const {
     input,
@@ -77,6 +108,27 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
   // The help icon is a button, so it sits beside the <label>, not inside it:
   // inside, it would be one of the control's labels and be announced as part
   // of its name.
+  const shownError =
+    !hideError &&
+    meta &&
+    meta.touched &&
+    // A refusal from the server applies to the value it was given; once
+    // the field is edited it is stale until the next submit.
+    (meta.error || (!meta.dirtySinceLastSubmit && meta.submitError));
+  const hasLabel = !hideLabel && !!label;
+  const hasDescription = !!description;
+  const [controlError, setControlError] = useState(false);
+  const hasError = !!shownError && !controlError;
+  const a11y = useMemo<FormGroupA11y>(
+    () => ({
+      labelId: hasLabel ? `${controlId}-label` : undefined,
+      descriptionId: hasDescription ? `${controlId}-description` : undefined,
+      errorId: hasError ? `${controlId}-error` : undefined,
+      setControlError,
+    }),
+    [controlId, hasLabel, hasDescription, hasError],
+  );
+
   const labelNode = !hideLabel && (label || tooltip) && (
     <>
       {tooltip && !tooltipEnd && (
@@ -89,7 +141,10 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
         </>
       )}
       {label && (
-        <Form.Label className={classNames({ required, 'me-auto': true })}>
+        <Form.Label
+          id={a11y.labelId}
+          className={classNames({ required, 'me-auto': true })}
+        >
           {label}
         </Form.Label>
       )}
@@ -122,15 +177,13 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
       ) : (
         labelNode
       )}
-      <div>{children}</div>
-      {description && <Form.Text>{description}</Form.Text>}
-      {!hideError && meta && meta.touched && (
-        // A refusal from the server applies to the value it was given; once
-        // the field is edited it is stale until the next submit.
-        <FieldError
-          error={meta.error || (!meta.dirtySinceLastSubmit && meta.submitError)}
-        />
+      <FormGroupA11yContext.Provider value={a11y}>
+        <div>{children}</div>
+      </FormGroupA11yContext.Provider>
+      {description && (
+        <Form.Text id={a11y.descriptionId}>{description}</Form.Text>
       )}
+      {hasError && <FieldError id={a11y.errorId} error={shownError} />}
     </Form.Group>
   );
 

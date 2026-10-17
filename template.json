@@ -1627,6 +1627,11 @@
       "feature_area": "UserPendingActionsList"
     }
   },
+  "Action groups": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "Action has been applied.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -8158,7 +8163,7 @@
   },
   "Billing actions": {
     "context": {
-      "feature_area": "openstack-instance"
+      "feature_area": "openstack-tenant"
     }
   },
   "Billing changes with this plan": {
@@ -10319,6 +10324,21 @@
     }
   },
   "Choose an organization role, a project role, or both.": {},
+  "Choose date": {
+    "context": {
+      "feature_area": "DatePicker"
+    }
+  },
+  "Choose date and time": {
+    "context": {
+      "feature_area": "DatePicker"
+    }
+  },
+  "Choose date range": {
+    "context": {
+      "feature_area": "DatePicker"
+    }
+  },
   "Choose how to request this offering": {
     "context": {
       "feature_area": "access"
@@ -10327,6 +10347,11 @@
   "Choose how you would like to verify your organization. Automatic verification provides instant results if your company is registered in the selected business register.": {
     "context": {
       "feature_area": "organization-create"
+    }
+  },
+  "Choose month": {
+    "context": {
+      "feature_area": "DatePicker"
     }
   },
   "Choose offerings": {
@@ -15094,6 +15119,11 @@
       "feature_area": "requests"
     }
   },
+  "Date range": {
+    "context": {
+      "feature_area": "DatePicker"
+    }
+  },
   "Date when invitations are sent and resource orders processed.": {
     "context": {
       "feature_area": "manage"
@@ -19116,6 +19146,11 @@
       "feature_area": "project"
     }
   },
+  "End date and time": {
+    "context": {
+      "feature_area": "DatePicker"
+    }
+  },
   "End date change request has been approved and the end date has been updated.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -19375,6 +19410,44 @@
       "feature_area": "comments"
     }
   },
+  "Enter a date as {format}, optionally with a time.": {
+    "context": {
+      "variables": {
+        "format": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "Enter a date as {format}.": {
+    "context": {
+      "variables": {
+        "format": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "Enter a date on or after {date}.": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "DatePicker"
+    }
+  },
+  "Enter a date on or before {date}.": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "DatePicker"
+    }
+  },
   "Enter a description": {
     "context": {
       "feature_area": "quick-shortcuts"
@@ -19413,6 +19486,35 @@
   "Enter a message...": {
     "context": {
       "feature_area": "invitations"
+    }
+  },
+  "Enter a month as {format}.": {
+    "context": {
+      "variables": {
+        "format": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "Enter a month on or after {month}.": {
+    "context": {
+      "variables": {
+        "month": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "DatePicker"
+    }
+  },
+  "Enter a month on or before {month}.": {
+    "context": {
+      "variables": {
+        "month": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "DatePicker"
     }
   },
   "Enter a name for the selected template": {
@@ -22659,6 +22761,15 @@
   "Format: 0000-0000-0000-0000": {
     "context": {
       "feature_area": "reviewer"
+    }
+  },
+  "Format: {format}": {
+    "context": {
+      "variables": {
+        "format": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Former institution": {
@@ -43635,11 +43746,6 @@
       "feature_area": "reviewer"
     }
   },
-  "Pull": {
-    "context": {
-      "feature_area": "actions"
-    }
-  },
   "Pull offering details": {
     "context": {
       "feature_area": "integration"
@@ -47381,12 +47487,6 @@
   "Resource statistics by state and offering": {
     "context": {
       "feature_area": "reporting"
-    }
-  },
-  "Resource sync has been scheduled.": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "actions"
     }
   },
   "Resource synchronization has been requested.": {
@@ -53238,6 +53338,16 @@
     }
   },
   "Show the About us page and its link in the footer.": {},
+  "Show the Managed projects and Project templates pages of a portal that receives projects from other portals over OpenPortal. Needs the OpenPortal plugin to be enabled.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
+  "Show the Remote Projects pages of a portal that sends projects to other portals over OpenPortal. Needs the OpenPortal plugin to be enabled.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
   "Show the Reporting menu with organisation-scoped reports to organisation owners.": {
     "context": {
       "feature_area": "features"
@@ -54257,9 +54367,19 @@
       "feature_area": "affiliates"
     }
   },
+  "Start date and time": {
+    "context": {
+      "feature_area": "DatePicker"
+    }
+  },
   "Start date is required.": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Start date selected, choose end date": {
+    "context": {
+      "feature_area": "DatePicker"
     }
   },
   "Start date — after": {
@@ -56883,6 +57003,11 @@
       "feature_area": "course-accounts"
     }
   },
+  "The end date must not be before the start date.": {
+    "context": {
+      "feature_area": "DatePicker"
+    }
+  },
   "The end must be after the start.": {
     "context": {
       "feature_area": "changelog"
@@ -57944,6 +58069,11 @@
       "feature_area": "wizard"
     }
   },
+  "The start date must not be after the end date.": {
+    "context": {
+      "feature_area": "DatePicker"
+    }
+  },
   "The starting price covers what the plan fixes. Components you size yourself and metered usage are charged on top, at the rates above.": {
     "context": {
       "feature_area": "details"
@@ -58685,6 +58815,11 @@
   "This creates a maintenance announcement visible to all users, informing them about the scheduled upgrade window.": {
     "context": {
       "feature_area": "changelog"
+    }
+  },
+  "This date is not available.": {
+    "context": {
+      "feature_area": "DatePicker"
     }
   },
   "This decision will be logged for audit purposes.": {
@@ -64562,12 +64697,6 @@
       "feature_area": "matrix"
     }
   },
-  "Unable to sync resource.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "actions"
-    }
-  },
   "Unable to synchronise project members.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -66245,6 +66374,12 @@
     }
   },
   "Update description": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
+    }
+  },
+  "Update endpoint": {
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
@@ -77447,7 +77582,7 @@
       "feature_area": "service-desk"
     }
   },
-  "{start} to {end}": {
+  "{start} to {end} selected": {
     "context": {
       "variables": {
         "start": {

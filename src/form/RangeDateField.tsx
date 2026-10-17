@@ -7,6 +7,8 @@ import { DateTimeRangeField } from './DateTimeRangeField';
 
 interface RangeDateFieldProps {
   input: any;
+  meta?: any;
+  id?: string;
   placeholder?: string;
   /** Open the calendar on mount — set by DateRangeFilter. */
   autoOpen?: boolean;
@@ -30,6 +32,8 @@ export const RangeDateField: FunctionComponent<RangeDateFieldProps> = ({
   input,
   placeholder,
   autoOpen,
+  meta,
+  id,
 }) => {
   const { onChange, value: inputValue } = input;
 
@@ -80,6 +84,8 @@ export const RangeDateField: FunctionComponent<RangeDateFieldProps> = ({
       minDate={null}
       placeholder={placeholder || translate('Select date range')}
       autoOpen={autoOpen}
+      meta={meta}
+      id={id}
     />
   );
 };

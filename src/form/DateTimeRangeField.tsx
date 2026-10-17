@@ -6,6 +6,7 @@ import { DateRangePicker, DateRangePickerHandle } from 'waldur-ui';
 import { translate } from '@/i18n';
 
 import { FormField } from './types';
+import { useDateFieldA11y } from './useDateFieldA11y';
 
 export type DateTimeRangeHandle = DateRangePickerHandle;
 
@@ -65,9 +66,17 @@ export const DateTimeRangeField = forwardRef<
     disabled,
     placeholder,
     autoOpen,
+    id,
+    meta,
+    isInvalid,
   },
   ref,
 ) {
+  const { labelId, ariaProps, onEntryErrorChange } = useDateFieldA11y(
+    meta,
+    isInvalid,
+    input.name,
+  );
   const increment = minuteIncrement ?? 15;
   const defaultFloor = useMemo(() => nextSlotAfterNow(increment), [increment]);
 
@@ -87,6 +96,10 @@ export const DateTimeRangeField = forwardRef<
       }
       disabled={disabled}
       autoOpen={autoOpen}
+      id={id}
+      aria-labelledby={labelId}
+      onEntryErrorChange={onEntryErrorChange}
+      {...ariaProps}
     />
   );
 });

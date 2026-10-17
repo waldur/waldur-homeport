@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DateTime } from 'luxon';
 import { useState } from 'react';
+import { Form } from 'react-final-form';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 
 import { DateField } from './DateField';
@@ -11,18 +12,24 @@ import {
   daysFromToday,
   displayValue,
   fieldContainer,
+  getInputs,
   hasTimeInput,
   isDayDisabled,
   openPicker,
   pickDay,
-  placeholderText,
+  rangeGroupName,
   readFormValue,
   readTouched,
   setTime,
+  typeDate,
 } from './datePickerStoryHarness';
 import { DateTimeField } from './DateTimeField';
 import { DateTimeRangeField } from './DateTimeRangeField';
 import { RangeDateField } from './RangeDateField';
+import { withFormGroup } from './withFormGroup';
+
+const DateGroup = withFormGroup(DateField);
+const DateTimeRangeGroup = withFormGroup(DateTimeRangeField);
 
 /**
  * The react-final-form adapters over waldur-ui's DatePicker and
@@ -170,7 +177,7 @@ export const DateTimeRangeFieldFloorsAtNow: Story = {
   render: () => <MaintenanceRangeHarness />,
   play: async ({ canvasElement }) => {
     const field = fieldContainer(canvasElement);
-    await expect(placeholderText(field)).toBe(
+    await expect(rangeGroupName(field)).toBe(
       'Pick a start and end date/time...',
     );
     await openPicker(field);
@@ -222,7 +229,7 @@ export const RangeDateFieldDateOnlyNoFloor: Story = {
   render: () => <DateFieldHarness component={RangeDateField} />,
   play: async ({ canvasElement }) => {
     const field = fieldContainer(canvasElement);
-    await expect(placeholderText(field)).toBe('Select date range');
+    await expect(rangeGroupName(field)).toBe('Select date range');
     await openPicker(field);
     await expect(hasTimeInput()).toBe(false);
     await expect(await isDayDisabled(daysFromToday(-400))).toBe(false);
@@ -249,5 +256,85 @@ export const RangeDateFieldStoresMinMax: Story = {
         max: '2026-07-31',
       }),
     );
+  },
+};
+
+// ── Typing, and the FormGroup's label, description and error ─
+
+/** A typed date is stored the same way as a picked one. */
+export const DateFieldTyped: Story = {
+  name: 'DateField · typing stores an ISO date',
+  render: () => <DateFieldHarness component={DateField} />,
+  play: async ({ canvasElement }) => {
+    await typeDate(fieldContainer(canvasElement), '20260620');
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toBe('2026-06-20'),
+    );
+  },
+};
+
+const required = (value: unknown) => (value ? undefined : 'Required');
+
+/**
+ * Inside a FormGroup (`DateGroup`), the label names the input, and the
+ * group's description and — once touched — its error describe it, with
+ * `aria-invalid` set, after the picker's own format hint.
+ */
+export const DateGroupWiresAria: Story = {
+  name: 'DateGroup · label, description and error reach the input',
+  render: () => (
+    <Form
+      onSubmit={() => undefined}
+      render={() => (
+        <div data-testid="field" style={{ width: 320 }}>
+          <DateGroup
+            name="end_date"
+            label="End date"
+            description="The resource is terminated on this day."
+            validate={required}
+          />
+        </div>
+      )}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    const [input] = getInputs(field);
+    await expect(input).toHaveAccessibleName('End date');
+    await expect(input).toHaveAccessibleDescription(
+      'Format: YYYY-MM-DD The resource is terminated on this day.',
+    );
+    await expect(input).not.toHaveAttribute('aria-invalid');
+    await userEvent.click(input);
+    await userEvent.tab();
+    await userEvent.tab();
+    await waitFor(() => expect(input).toHaveAttribute('aria-invalid', 'true'));
+    await expect(input).toHaveAccessibleDescription(
+      'Format: YYYY-MM-DD The resource is terminated on this day. Required',
+    );
+  },
+};
+
+/** A range in a FormGroup: the label names the group of both inputs. */
+export const DateTimeRangeGroupLabelled: Story = {
+  name: 'DateTimeRangeField · the label names the group',
+  render: () => (
+    <Form
+      onSubmit={() => undefined}
+      render={() => (
+        <div data-testid="field" style={{ width: 400 }}>
+          <DateTimeRangeGroup name="window" label="Maintenance window" />
+        </div>
+      )}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    await expect(
+      within(field).getByRole('group', { name: 'Maintenance window' }),
+    ).toBeInTheDocument();
+    const [start, end] = getInputs(field);
+    await expect(start).toHaveAccessibleName('Start date and time');
+    await expect(end).toHaveAccessibleName('End date and time');
   },
 };

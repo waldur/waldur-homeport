@@ -8,7 +8,9 @@ import {
   Field,
   ValueReadout,
   displayValue,
+  entryErrors,
   fieldContainer,
+  formatHintText,
   isCalendarOpen,
   isMonthDisabled,
   isYearNavDisabled,
@@ -18,6 +20,7 @@ import {
   readFormValue,
   selectedMonth,
   shownYear,
+  typeDate,
 } from './testing';
 
 /**
@@ -124,5 +127,27 @@ export const Clear: Story = {
     await userEvent.click(within(field).getByRole('button', { name: 'Clear' }));
     await waitFor(() => expect(readFormValue(canvasElement)).toBeNull());
     await expect(displayValue(field)).toBe('');
+  },
+};
+
+// ── Typing ──────────────────────────────────────────────
+
+/** A month is typed as `yyyy-MM`; out-of-range months are reported. */
+export const TypeAMonth: Story = {
+  render: () => <Harness minDate="2026-03-15" />,
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    await expect(formatHintText(field)).toBe('Format: YYYY-MM');
+    await typeDate(field, '202606');
+    await expect(displayValue(field)).toBe('2026-06');
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toBe('2026-06-01T00:00'),
+    );
+    await expect(isCalendarOpen()).toBe(false);
+    await typeDate(field, '202602');
+    await expect(entryErrors(field)).toEqual([
+      'Enter a month on or after 2026-03.',
+    ]);
+    await waitFor(() => expect(readFormValue(canvasElement)).toBeNull());
   },
 };
