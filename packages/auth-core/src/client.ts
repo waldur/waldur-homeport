@@ -135,6 +135,11 @@ client.interceptors.request.use(attachAuthHeader);
 //   * `status` / `statusText` / `url` are lifted to the top level so a caller
 //     can classify an error without reaching into `response`. `response` itself
 //     is kept because much of the app reads `error.response.status`.
+//   * Lifting them overwrites any body field of the same name: a DRF error on
+//     a field called `url` or `status` was replaced by the request URL or the
+//     status code, and the toast lost the message. The body is therefore also
+//     kept whole under `data`, which `getErrorBody` and the error formatter read
+//     before the spread keys.
 export const attachResponseDetails = (error: unknown, response?: Response) => {
   if (!response) {
     return error;
@@ -146,7 +151,7 @@ export const attachResponseDetails = (error: unknown, response?: Response) => {
     url: response.url,
   };
   return error !== null && typeof error === 'object'
-    ? { ...error, ...details }
+    ? { ...error, data: error, ...details }
     : { body: error, ...details };
 };
 

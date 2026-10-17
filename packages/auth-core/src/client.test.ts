@@ -218,4 +218,18 @@ describe('attachResponseDetails — error normalisation', () => {
     expect(result[0]).toBeUndefined();
     expect(result.status).toBe(404);
   });
+
+  // A DRF validation error on a field named like a lifted key: the spread
+  // field was overwritten by the request URL, losing the message.
+  it('keeps a body field named `url` under `data`', () => {
+    const body = { url: ['Enter a valid URL.'] };
+
+    const result: any = attachResponseDetails(
+      body,
+      makeResponse(400, 'Bad Request'),
+    );
+
+    expect(result.url).toBe('http://localhost:8080/api/configuration/');
+    expect(result.data).toEqual({ url: ['Enter a valid URL.'] });
+  });
 });

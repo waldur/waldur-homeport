@@ -47,4 +47,17 @@ describe('ErrorMessageFormatter', () => {
       '400: BAD REQUEST. username: Invalid username, password: Invalid password',
     );
   });
+
+  // The shape the auth-core interceptor produces for {url: [...]}: the lifted
+  // request URL has replaced the field, and only `data` still holds it.
+  it('renders a field error named like an envelope key', () => {
+    const message = format({
+      status: 400,
+      statusText: 'Bad Request',
+      url: 'https://example.com/api/offerings/1/update_endpoint/',
+      response: {},
+      data: { url: ['Enter a valid URL.'] },
+    });
+    expect(message).toBe('400: Bad Request. url: Enter a valid URL.');
+  });
 });
