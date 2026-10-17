@@ -1,8 +1,6 @@
-//
 // Dark versions of the icons Bootstrap draws as data URIs (_svg-icons.scss):
 // a var() cannot reach inside one, so the dark-theme mixin swaps the image.
 // The colours are the dark values of the light ones in _variables.custom.scss.
-//
 
 $_select-indicator-dark: svg-select-indicator(css-color(gray-dark, 300));
 $_feedback-icons-dark: (

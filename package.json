@@ -262,12 +262,10 @@
   },
   "stylelint": {
     "extends": "stylelint-config-recommended-scss",
-    "ignoreFiles": [
-      "./src/metronic/**/*.scss"
-    ],
     "rules": {
       "no-descending-specificity": null,
       "scss/load-no-partial-leading-underscore": null,
+      "scss/operator-no-newline-after": null,
       "declaration-property-value-allowed-list": [
         {
           "font-weight": [

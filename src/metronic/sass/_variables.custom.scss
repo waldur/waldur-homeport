@@ -1,11 +1,9 @@
-//
 // To make future updates easier consider overriding the global variables from _variables.bootstrap.scss and _variables.custom.scss for current demo in this file.
 // Note that this file is included first and variables defined in _variables.bootstrap.scss and _variables.custom.scss
 // are not accessible in this file but you can override any global variable as shown below:
-//
 
 // Neutral roles
-//
+
 // Bootstrap's and Metronic's neutral colours read the design tokens, so one
 // stylesheet serves both themes. Each is the token with the same value in
 // both themes as the theme-inverted SCSS gray it replaces, except the
@@ -67,7 +65,7 @@ $form-file-button-hover-bg: color-mix(
 ) !default;
 
 // Links
-//
+
 // Style anchor elements.
 $link-color: var(--text-brand-secondary) !default;
 $link-hover-color: var(--text-brand-secondary) !default;
@@ -94,7 +92,6 @@ $card-py: 1.23rem !default;
 $card-px: 1.85rem !default;
 
 // Buttons + Forms
-//
 
 // The brand is the tenant's runtime --brand-* ramp, not the static $primary
 // Bootstrap compiles with. These are the Bootstrap outputs that would

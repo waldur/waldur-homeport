@@ -1,9 +1,10 @@
-//
 // SVG Bg Icons
-//
+
+@use 'sass:meta';
+@use 'sass:string';
 
 @function is-css-var($val) {
-  @return str-index(inspect($val), 'var(') != null;
+  @return string.index(meta.inspect($val), 'var(') != null;
 }
 
 @mixin svg-bg-icon($type, $color, $update: false) {

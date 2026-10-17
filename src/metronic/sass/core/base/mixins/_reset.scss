@@ -1,10 +1,7 @@
-//
 // Reset
-//
 
 @mixin button-reset() {
   appearance: none;
-  box-shadow: none;
   border-radius: 0;
   border: none;
   cursor: pointer;

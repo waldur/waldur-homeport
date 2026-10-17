@@ -1,12 +1,12 @@
 // Overrides of @livekit/components-styles for the call view.
-//
+
 // LiveKit's stylesheet is unlayered, and unlayered rules beat every cascade
 // layer whatever their specificity. The theme wraps all Waldur styles in
 // `@layer bootstrap` (see style.scss), so these overrides would lose to
 // LiveKit there. They are imported outside that layer instead, from
 // style.scss, and win on specificity: every selector here
 // is scoped under the call view's root class, one class above LiveKit's own.
-//
+
 // Keep this file to rules that override LiveKit; the rest of the call UI
 // lives in _call.scss, inside the layer like everything else.
 
@@ -124,6 +124,7 @@
   @include dark-theme {
     color-scheme: dark;
   }
+  // stylelint-disable property-disallowed-list -- LiveKit's own theme variables
   --lk-bg: var(--bg-tertiary);
   --lk-bg2: var(--bg-primary);
   --lk-bg3: var(--bg-secondary);
@@ -133,6 +134,7 @@
   --lk-fg2: var(--text-secondary);
   --lk-fg3: var(--text-tertiary);
   --lk-border-color: var(--border-primary);
+  // stylelint-enable property-disallowed-list
   @include mirrored-ramp-color(--lk-accent-bg, success, 500);
   @include mirrored-ramp-color(--lk-danger, error, 500);
 }

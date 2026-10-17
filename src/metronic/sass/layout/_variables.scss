@@ -1,6 +1,6 @@
-//
 // Layout Config
-//
+
+@use 'sass:color';
 
 // Root font Sizes
 $root-font-size: 13px; // Root font size for desktop mode
@@ -81,7 +81,7 @@ $aside-config: (
   logo-bg-color-dark: $gray-950,
   border-right: 1px solid $border-color,
   scrollbar-color: #3b3b64,
-  scrollbar-hover-color: lighten(#3b3b64, 3%),
+  scrollbar-hover-color: color.adjust(#3b3b64, $lightness: 3%),
   font-size: 14px,
   icon-size: 20px,
   // Aside width for desktop mode
