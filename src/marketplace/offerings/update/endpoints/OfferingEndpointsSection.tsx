@@ -3,14 +3,29 @@ import { Card, Table } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 
 import { RefreshButton } from '../components/RefreshButton';
 import { OfferingSectionProps } from '../types';
 
 import { AddEndpointButton } from './AddEndpointButton';
 import { DeleteEndpointButton } from './DeleteEndpointButton';
+import { EditEndpointButton } from './EditEndpointButton';
 
 export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
+  const user = useUser();
+  const can = (permission: string) =>
+    hasPermission(user, {
+      permission,
+      customerId: props.offering.customer_uuid,
+      offeringId: props.offering.uuid,
+    });
+  const canAdd = can(PermissionEnum.ADD_OFFERING_ENDPOINT);
+  const canUpdate = can(PermissionEnum.UPDATE_OFFERING_ENDPOINT);
+  const canDelete = can(PermissionEnum.DELETE_OFFERING_ENDPOINT);
+
   return (
     <Card className="card-bordered">
       <Card.Header>
@@ -18,9 +33,11 @@ export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
           <span className="me-2">{translate('Endpoints')}</span>
           <RefreshButton refetch={props.refetch} loading={props.loading} />
         </Card.Title>
-        <div className="card-toolbar">
-          <AddEndpointButton {...props} />
-        </div>
+        {canAdd && (
+          <div className="card-toolbar">
+            <AddEndpointButton {...props} />
+          </div>
+        )}
       </Card.Header>
       <Card.Body>
         {props.offering.endpoints.length === 0 ? (
@@ -38,15 +55,26 @@ export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
                 <tr key={endpoint.uuid}>
                   <td className="col-md-3">{endpoint.name}</td>
                   <td className="col-md-9">{endpoint.url}</td>
-                  <td className="row-actions">
-                    <div>
-                      <DeleteEndpointButton
-                        offering={props.offering}
-                        endpoint={endpoint}
-                        refetch={props.refetch}
-                      />
-                    </div>
-                  </td>
+                  {(canUpdate || canDelete) && (
+                    <td className="row-actions">
+                      <div className="flex gap-2">
+                        {canUpdate && (
+                          <EditEndpointButton
+                            offering={props.offering}
+                            endpoint={endpoint}
+                            refetch={props.refetch}
+                          />
+                        )}
+                        {canDelete && (
+                          <DeleteEndpointButton
+                            offering={props.offering}
+                            endpoint={endpoint}
+                            refetch={props.refetch}
+                          />
+                        )}
+                      </div>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>
