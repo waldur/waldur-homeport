@@ -1,7 +1,8 @@
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { StateDeclaration } from '@/core/types';
-import { CustomerFeatures } from '@/FeaturesEnums';
+import { isFeatureVisible } from '@/features/connect';
+import { CustomerFeatures, MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import {
   isStaffOrSupport,
@@ -17,6 +18,14 @@ const isOrganisationMemberOrStaffOrSupport = (state) =>
 const canViewRemoteProjects = (state) =>
   isOrganisationMemberOrStaffOrSupport(state) || isOwnerOrStaffOrReader(state);
 
+// Usage reports, the allocation summary and the access check serve a portal
+// that sends projects as well as one that receives them, so they show while
+// the portal plays either side. With both sides off it plays neither.
+const isOpenPortalInUse = () =>
+  Boolean(ENV.plugins.WALDUR_OPENPORTAL?.ENABLED) &&
+  (isFeatureVisible(CustomerFeatures.show_openportal_remote_projects) ||
+    isFeatureVisible(MarketplaceFeatures.show_managed_projects));
+
 export const states: StateDeclaration[] = [
   {
     name: 'project.openportal-reports',
@@ -29,10 +38,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Usage report'),
       priority: 105,
-      permissions: [
-        isOrganisationMemberOrStaffOrSupport,
-        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
-      ],
+      permissions: [isOrganisationMemberOrStaffOrSupport, isOpenPortalInUse],
     },
   },
   {
@@ -47,10 +53,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Usage report'),
       priority: 105,
-      permissions: [
-        isOrganisationMemberOrStaffOrSupport,
-        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
-      ],
+      permissions: [isOrganisationMemberOrStaffOrSupport, isOpenPortalInUse],
     },
   },
   {
@@ -65,10 +68,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Usage report'),
       priority: 101,
-      permissions: [
-        isStaffOrSupport,
-        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
-      ],
+      permissions: [isStaffOrSupport, isOpenPortalInUse],
     },
   },
   {
@@ -83,10 +83,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Allocation summary'),
       priority: 106,
-      permissions: [
-        isOrganisationMemberOrStaffOrSupport,
-        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
-      ],
+      permissions: [isOrganisationMemberOrStaffOrSupport, isOpenPortalInUse],
     },
   },
 
@@ -101,7 +98,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Check user access'),
       priority: 102,
-      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED],
+      permissions: [isOpenPortalInUse],
     },
   },
   {
