@@ -2314,6 +2314,18 @@ export const SettingsDescription = [
         type: 'integer',
       },
       {
+        key: 'MATRIX_TICKET_CONTEXT_MESSAGES',
+        description: translate('How many messages the !ticket bot command reads as its context: the latest of its thread, or the replied-to message and those before it.'),
+        default: 20,
+        type: 'integer',
+      },
+      {
+        key: 'MATRIX_TICKET_DRAFT_TTL_MINUTES',
+        description: translate('Minutes a support ticket draft made by the !ticket bot command can be sent before it expires; its content is then erased.'),
+        default: 15,
+        type: 'integer',
+      },
+      {
         key: 'MATRIX_USER_REGISTRATION_SECRET',
         description: translate('Registration token the homeserver requires for sign-up (its registration_token). With zero-touch setup it is also the homeserver\'s registration_shared_secret, which can create homeserver admins. Protect it like the appservice tokens.'),
         default: '',
