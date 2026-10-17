@@ -18,6 +18,7 @@ import {
   REDACTED_MESSAGE_TYPE,
   stripReplyFallback,
 } from './messageRelations';
+import { ASSISTANT_BLOCKS_KEY } from './ticketDraft/constants';
 import { MatrixChatMessage, ReactionAggregate } from './types';
 
 /** Message type of the row standing in for an event that can't be decrypted. */
@@ -193,6 +194,7 @@ export function mapEventToMessage(
       undefined,
     replyToEventId,
     edited: edit ? true : undefined,
+    assistantBlocks: content[ASSISTANT_BLOCKS_KEY],
   };
 }
 

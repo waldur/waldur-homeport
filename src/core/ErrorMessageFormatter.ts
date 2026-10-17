@@ -1,7 +1,7 @@
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 
-const formatErrorObject = (error) =>
+export const formatErrorObject = (error) =>
   Object.keys(error)
     .map((key) =>
       isNaN(Number(key))

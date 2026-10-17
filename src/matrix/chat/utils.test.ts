@@ -53,6 +53,18 @@ describe('mapEventToMessage', () => {
     expect(mapEventToMessage(spoof)?.type).toBe('m.text');
   });
 
+  it('keeps the assistant blocks a notice carries', () => {
+    const blocks = [{ key: 'support_ticket_draft' }];
+    const message = mapEventToMessage(
+      makeEvent({
+        msgtype: 'm.notice',
+        body: 'draft',
+        'com.waldur.assistant.blocks': blocks,
+      }),
+    );
+    expect(message?.assistantBlocks).toBe(blocks);
+  });
+
   it('does not let a sender claim the deleted-message style', () => {
     const spoof = makeEvent({ msgtype: REDACTED_MESSAGE_TYPE, body: 'x' });
     const message = mapEventToMessage(spoof);

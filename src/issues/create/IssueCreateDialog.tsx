@@ -54,7 +54,7 @@ export const constructIssuePayload = (
   return payload;
 };
 
-const uploadAttachments = async (issueUrl: string, files?: FileList) => {
+export const uploadAttachments = async (issueUrl: string, files?: FileList) => {
   if (!files || files.length === 0) return;
   await Promise.all(
     Array.from(files).map((file) =>

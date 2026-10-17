@@ -14,6 +14,11 @@ import { MatrixMessageEditor } from './MatrixMessageEditor';
 import { MatrixReplyQuote } from './MatrixReplyQuote';
 import { MessageReactionChips } from './MessageReactionChips';
 import { MessageReactionToolbar } from './MessageReactionToolbar';
+import {
+  parseTicketDraft,
+  TicketDraftOutcome,
+} from './ticketDraft/parseTicketDraft';
+import { TicketDraftCard } from './ticketDraft/TicketDraftCard';
 import { MatrixChatMessage } from './types';
 import {
   MEDIA_UNAVAILABLE,
@@ -161,17 +166,49 @@ interface MatrixMessageItemProps {
   currentUserId?: string | null;
   /** The message this one replies to, when it is in the loaded timeline. */
   replyParent?: MatrixChatMessage;
+  /** What became of the ticket drafts in the loaded timeline, by draft uuid. */
+  ticketDraftOutcomes?: Map<string, TicketDraftOutcome>;
+  /** The room's bot, the only sender whose typed blocks are rendered. */
+  roomBotUserId?: string | null;
 }
 
 const MediaContent: FC<{
   message: MatrixChatMessage;
   memberNames?: Map<string, string>;
   currentUserId?: string | null;
-}> = ({ message, memberNames, currentUserId }) => {
+  ticketDraftOutcomes?: Map<string, TicketDraftOutcome>;
+  roomBotUserId?: string | null;
+}> = ({
+  message,
+  memberNames,
+  currentUserId,
+  ticketDraftOutcomes,
+  roomBotUserId,
+}) => {
   const httpUrl = useAuthenticatedMediaUrl(message);
+  const ticketDraft = useMemo(
+    () =>
+      parseTicketDraft(
+        message.sender,
+        message.type,
+        message.assistantBlocks,
+        roomBotUserId,
+      ),
+    [message.sender, message.type, message.assistantBlocks, roomBotUserId],
+  );
 
   if (message.type === UNDECRYPTABLE_MESSAGE_TYPE) {
     return <em className="text-quaternary">{message.body}</em>;
+  }
+
+  if (ticketDraft) {
+    return (
+      <TicketDraftCard
+        draft={ticketDraft}
+        isRequester={!!currentUserId && ticketDraft.requester === currentUserId}
+        outcome={ticketDraftOutcomes?.get(ticketDraft.draftUuid)}
+      />
+    );
   }
 
   if (!hasMedia(message)) {
@@ -292,6 +329,8 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
   memberNames,
   currentUserId,
   replyParent,
+  ticketDraftOutcomes,
+  roomBotUserId,
 }) => {
   const { editingEventId } = useMatrixMessageActions();
   const editing = editingEventId === message.eventId && !message.redacted;
@@ -365,6 +404,8 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
               message={message}
               memberNames={memberNames}
               currentUserId={currentUserId}
+              ticketDraftOutcomes={ticketDraftOutcomes}
+              roomBotUserId={roomBotUserId}
             />
           )}
           {message.edited && !editing && (

@@ -15,7 +15,13 @@ import { translate } from '@/i18n';
 import { isCallTransitionType } from './call/callTimeline';
 import { CallTimelineRow } from './call/CallTimelineRow';
 import { MatrixMessageItem } from './MatrixMessageItem';
+import {
+  parseTicketDraftOutcome,
+  TicketDraftOutcome,
+} from './ticketDraft/parseTicketDraft';
+import { useRefreshCommandsOnTicketNotice } from './ticketDraft/useRefreshCommandsOnTicketNotice';
 import { MatrixChatMessage } from './types';
+import { useRoomBotUserId } from './useRoomBotUserId';
 import { formatDateSeparator, getSenderName } from './utils';
 
 interface MatrixMessageListProps {
@@ -74,6 +80,30 @@ const MatrixMessageListInner: FC<MatrixMessageListProps> = ({
   const messagesById = useMemo(
     () => new Map(messages.map((m) => [m.eventId, m])),
     [messages],
+  );
+
+  // Typed blocks are trusted only from the room's own bot.
+  const roomBotUserId = useRoomBotUserId();
+  useRefreshCommandsOnTicketNotice(messages, roomBotUserId, loading);
+
+  // Ticket draft cards show what became of them from the bot's follow-ups.
+  const ticketDraftOutcomes = useMemo(
+    () =>
+      new Map(
+        messages
+          .map((m) =>
+            parseTicketDraftOutcome(
+              m.sender,
+              m.type,
+              m.assistantBlocks,
+              roomBotUserId,
+            ),
+          )
+          .filter((entry): entry is [string, TicketDraftOutcome] =>
+            Boolean(entry),
+          ),
+      ),
+    [messages, roomBotUserId],
   );
   const containerRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -323,6 +353,8 @@ const MatrixMessageListInner: FC<MatrixMessageListProps> = ({
                   continuation={isContinuation(messages, i)}
                   memberNames={memberNames}
                   currentUserId={userId}
+                  ticketDraftOutcomes={ticketDraftOutcomes}
+                  roomBotUserId={roomBotUserId}
                   replyParent={
                     msg.replyToEventId
                       ? messagesById.get(msg.replyToEventId)

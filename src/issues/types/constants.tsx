@@ -66,7 +66,7 @@ export interface IssueTypeChoice {
 }
 
 // Convert RequestType from API to IssueTypeChoice for UI
-const mapRequestTypeToChoice = (rt: RequestType): IssueTypeChoice => ({
+export const mapRequestTypeToChoice = (rt: RequestType): IssueTypeChoice => ({
   id: rt.name,
   label: rt.name,
   iconNode: getIconForType(rt.name),

@@ -5,6 +5,7 @@ import {
   ChatsCircleIcon,
   PhoneDisconnectIcon,
   PhoneIcon,
+  TerminalWindowIcon,
 } from '@phosphor-icons/react';
 import { FC, useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -28,9 +29,14 @@ import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 import { useNotify } from '@/store/notify';
 import { ActionsMenu } from '@/table/ActionsDropdown';
 
+import { useCallAvailability } from './call/useCallAvailability';
 import { useMatrixCall } from './call/useMatrixCall';
 import { getChatAvatarClass } from './chatColors';
+import { ComposerCommand } from './commands/composerCommands';
+import { MatrixCommandsDialog } from './commands/MatrixCommandsDialog';
+import { useComposerCommands } from './commands/useComposerCommands';
 import { MatrixMembersList } from './MatrixMembersList';
+import { useMatrixMessageActions } from './MatrixMessageActionsContext';
 import { isRoomMuted, setRoomMuted } from './mute';
 import { useMatrixClient } from './useMatrixClient';
 import { useMatrixTotalUnread } from './useMatrixTotalUnread';
@@ -58,12 +64,18 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   onBack,
 }) => {
   const members = useRoomMembers();
-  const { rtcAvailable, callState, callRoomUuid, startCall, endCall } =
-    useMatrixCall();
+  const { startCall, endCall } = useMatrixCall();
+  const call = useCallAvailability(roomUuid);
   const { client, activeRoomId, activeRoomUuid, connectionState } =
     useMatrixClient();
   const { showSuccess, showError } = useNotify();
   const { openDialog } = useModal();
+  const { commands } = useComposerCommands();
+  const { pickCommand } = useMatrixMessageActions();
+  const hasAvailableCommand = commands.some((c) => c.available);
+  // One reason for all, such as the bot not running, says more than "none".
+  const reasons = new Set(commands.map((c) => c.reason));
+  const sharedReason = reasons.size === 1 ? [...reasons][0] : undefined;
 
   // Compact view hides the room list behind the back button, so flag when any
   // other room has unread the user can't currently see.
@@ -92,12 +104,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
     );
   }, [roomUuid]);
 
-  const inCall = callState === 'connecting' || callState === 'connected';
-  const isThisRoomsCall = inCall && callRoomUuid === roomUuid;
-  // A call exists, but in a different room — start-call is blocked until the
-  // user hangs up the active one.
-  const blockedByOtherCall = inCall && !isThisRoomsCall;
-  const busy = callState === 'discovering' || callState === 'connecting';
+  const isThisRoomsCall = call.inThisRoomsCall;
   // Mute reads push rules, which only exist once the initial sync completes;
   // gate on 'connected' so a pre-sync client (e.g. mid-impersonation reconnect)
   // can't trigger the SDK's "SyncApi.sync() must be done" throw. The
@@ -124,9 +131,9 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   }, [muteReady, client, activeRoomId]);
 
   const handleCall = () => {
-    if (busy || blockedByOtherCall) return;
+    if (call.busy) return;
     if (isThisRoomsCall) endCall();
-    else startCall();
+    else if (call.canStart) startCall();
   };
 
   // Waldur provisioned the user's Matrix account, so show how to sign in to it
@@ -134,6 +141,14 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   const handleOpenExternal = () =>
     openDialog(MatrixCredentialsDialog, { resolve: { roomAlias }, size: 'lg' });
   const showExternal = Boolean(roomAlias) && canOpenInExternalClient();
+
+  const handleCommands = () =>
+    openDialog(MatrixCommandsDialog, {
+      resolve: {
+        onPick: (command: ComposerCommand) => pickCommand(command.name),
+      },
+      size: 'lg',
+    });
 
   const handleMute = async () => {
     if (!muteReady || !client || !activeRoomId) return;
@@ -157,15 +172,33 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
       >
         {muted ? translate('Unmute') : translate('Mute')}
       </Menu.Item>
-      {(rtcAvailable || showExternal) && <Menu.Separator />}
-      {rtcAvailable &&
-        (blockedByOtherCall ? (
+      {commands.length > 0 &&
+        (hasAvailableCommand ? (
+          <Menu.Item
+            icon={<TerminalWindowIcon weight="bold" />}
+            onSelect={handleCommands}
+          >
+            {translate('Chat commands')}
+          </Menu.Item>
+        ) : (
           <Tooltip
-            label={translate(
-              'Disconnect from the current call before starting a new one.',
-            )}
+            label={
+              sharedReason ??
+              translate('No commands are available in this room.')
+            }
             side="left"
           >
+            <span>
+              <Menu.Item disabled icon={<TerminalWindowIcon weight="bold" />}>
+                {translate('Chat commands')}
+              </Menu.Item>
+            </span>
+          </Tooltip>
+        ))}
+      {(call.offered || showExternal) && <Menu.Separator />}
+      {call.offered &&
+        (!isThisRoomsCall && !call.canStart ? (
+          <Tooltip label={call.reason} side="left">
             <span>
               <Menu.Item disabled icon={<PhoneIcon weight="bold" />}>
                 {translate('Start call')}
@@ -182,7 +215,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
               )
             }
             onSelect={handleCall}
-            disabled={busy}
+            disabled={call.busy}
             className={isThisRoomsCall ? 'text-danger' : undefined}
           >
             {isThisRoomsCall ? translate('End call') : translate('Start call')}

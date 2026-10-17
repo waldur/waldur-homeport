@@ -423,6 +423,29 @@
     }
   },
   "/year": {},
+  "/{command} isn't available here.": {
+    "context": {
+      "variables": {
+        "command": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "chat"
+    }
+  },
+  "/{command} isn't available here: {reason}": {
+    "context": {
+      "variables": {
+        "command": {
+          "type": "unknown"
+        },
+        "reason": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "chat"
+    }
+  },
   "0 B": {},
   "0.0.0.0/0": {
     "context": {
@@ -858,6 +881,26 @@
     }
   },
   "A snapshot of all messages in a room, saved as a JSON file. Optionally includes media files in a ZIP archive. Can be triggered manually, on a schedule, or automatically before project deletion.": {},
+  "A summary of the conversation goes to the helpdesk, and only you can confirm it.": {
+    "context": {
+      "feature_area": "commands"
+    }
+  },
+  "A summary of this conversation will be sent to the helpdesk.": {
+    "context": {
+      "feature_area": "ticketDraft"
+    }
+  },
+  "A summary of this conversation will be sent to {helpdesk}.": {
+    "context": {
+      "variables": {
+        "helpdesk": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "ticketDraft"
+    }
+  },
   "A virtual L3 router that connects internal subnets to each other and to the external network.": {},
   "A virtual machine running in this tenant.": {},
   "AI Assistant Not Enabled": {
@@ -9281,6 +9324,11 @@
       "feature_area": "details"
     }
   },
+  "Calls are not available on this server.": {
+    "context": {
+      "action_type": "read"
+    }
+  },
   "Calls closing soon": {
     "context": {
       "feature_area": "call-management"
@@ -9351,6 +9399,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "assignments"
+    }
+  },
+  "Cancel draft": {
+    "context": {
+      "feature_area": "ticketDraft"
     }
   },
   "Cancel invitation": {
@@ -9993,6 +10046,11 @@
   "Chat Temporarily Unavailable": {
     "context": {
       "feature_area": "ai-assistant"
+    }
+  },
+  "Chat commands": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Chat history can be exported as JSON files with optional media attachments. Exports can be triggered manually, run on a daily schedule, or happen automatically when a room is disabled or a project is deleted.": {
@@ -11058,6 +11116,11 @@
   "Command history": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "Commands": {
+    "context": {
+      "feature_area": "commands"
     }
   },
   "Comment": {
@@ -12980,6 +13043,11 @@
       "feature_area": "chat"
     }
   },
+  "Couldn't load this draft.": {
+    "context": {
+      "feature_area": "ticketDraft"
+    }
+  },
   "Count": {
     "context": {
       "primary_ui_type": "title",
@@ -13664,6 +13732,11 @@
         }
       },
       "feature_area": "overview"
+    }
+  },
+  "Create ticket": {
+    "context": {
+      "feature_area": "ticketDraft"
     }
   },
   "Create token": {
@@ -16957,7 +17030,7 @@
   },
   "Disconnect from the current call before starting a new one.": {
     "context": {
-      "feature_area": "chat"
+      "action_type": "read"
     }
   },
   "Disconnect subnet": {
@@ -20664,6 +20737,16 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "administration"
+    }
+  },
+  "Expires at {time}": {
+    "context": {
+      "variables": {
+        "time": {
+          "type": "date"
+        }
+      },
+      "feature_area": "ticketDraft"
     }
   },
   "Expires in {count} days": {
@@ -27194,6 +27277,11 @@
       "feature_area": "matrix"
     }
   },
+  "Join the call in progress": {
+    "context": {
+      "feature_area": "commands"
+    }
+  },
   "Join the pool": {
     "context": {
       "feature_area": "invitations"
@@ -33357,6 +33445,11 @@
       "feature_area": "policies"
     }
   },
+  "No commands are available in this room.": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "No comment provided.": {
     "context": {
       "feature_area": "managed-projects"
@@ -35025,6 +35118,16 @@
   "Not attached to a local project": {
     "context": {
       "feature_area": "managed-projects"
+    }
+  },
+  "Not available here ({count})": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "commands"
     }
   },
   "Not available when a global scope is selected.": {
@@ -36786,6 +36889,11 @@
   "Only the default-language name is changed; edit other languages with \"Edit name translations\".": {
     "context": {
       "feature_area": "roles"
+    }
+  },
+  "Only the member who asked for this draft can send it.": {
+    "context": {
+      "feature_area": "ticketDraft"
     }
   },
   "Only these roles": {
@@ -39878,6 +39986,11 @@
   "Physical sciences": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Pick a command to put it in the message box.": {
+    "context": {
+      "feature_area": "commands"
     }
   },
   "Pick a new end date and time": {
@@ -54346,6 +54459,11 @@
       "feature_area": "openstack-network"
     }
   },
+  "Start a call in this room": {
+    "context": {
+      "feature_area": "commands"
+    }
+  },
   "Start a conversation with a user. They see the request in their support list and can reply to it.": {
     "context": {
       "feature_area": "staff-request"
@@ -55230,6 +55348,21 @@
       "feature_area": "steps"
     }
   },
+  "Suggested priority": {
+    "context": {
+      "feature_area": "ticketDraft"
+    }
+  },
+  "Suggested priority: {priority} is added to the description for the helpdesk.": {
+    "context": {
+      "variables": {
+        "priority": {
+          "type": "unknown"
+        }
+      },
+      "action_type": "update"
+    }
+  },
   "Suggested:": {
     "context": {
       "feature_area": "steps"
@@ -55306,6 +55439,17 @@
   "Support requests": {
     "context": {
       "feature_area": "list"
+    }
+  },
+  "Support ticket created.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "ticketDraft"
+    }
+  },
+  "Support ticket draft": {
+    "context": {
+      "feature_area": "ticketDraft"
     }
   },
   "Support user": {
@@ -56804,6 +56948,12 @@
       "feature_area": "call-management"
     }
   },
+  "The call is connecting.": {
+    "context": {
+      "feature_area": "call",
+      "action_type": "read"
+    }
+  },
   "The call was disconnected.": {
     "context": {
       "feature_area": "call"
@@ -56991,6 +57141,11 @@
   "The digest can include the following sections, depending on which plugins are installed:": {
     "context": {
       "feature_area": "project-digest"
+    }
+  },
+  "The draft is being cancelled.": {
+    "context": {
+      "feature_area": "ticketDraft"
     }
   },
   "The earliest time this award may be approved on the receiving portal. Leave empty to allow approval at any time.": {
@@ -58151,6 +58306,11 @@
       "feature_area": "policy-watch"
     }
   },
+  "The ticket is being created.": {
+    "context": {
+      "feature_area": "ticketDraft"
+    }
+  },
   "The time period over which usage is accumulated and limits are applied.": {
     "context": {
       "feature_area": "policies"
@@ -58723,7 +58883,8 @@
   "This browser can't take part in encrypted calls.": {
     "context": {
       "primary_ui_type": "error_message",
-      "feature_area": "call"
+      "feature_area": "call",
+      "action_type": "read"
     }
   },
   "This browser does not support passkeys. Try a recent version of Chrome, Safari, Edge or Firefox.": {
@@ -58843,6 +59004,21 @@
     }
   },
   "This device": {},
+  "This draft can no longer be sent from here.": {
+    "context": {
+      "feature_area": "ticketDraft"
+    }
+  },
+  "This draft has expired.": {
+    "context": {
+      "feature_area": "ticketDraft"
+    }
+  },
+  "This draft was cancelled.": {
+    "context": {
+      "feature_area": "ticketDraft"
+    }
+  },
   "This email already has a pending invitation.": {
     "context": {
       "feature_area": "create"
@@ -59650,6 +59826,11 @@
       "primary_ui_type": "success_message"
     }
   },
+  "Ticket created.": {
+    "context": {
+      "feature_area": "ticketDraft"
+    }
+  },
   "Ticket escalated to the operator.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -59671,6 +59852,27 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "issues"
+    }
+  },
+  "Ticket {key} created, but attachments could not be uploaded.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "key": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "ticketDraft"
+    }
+  },
+  "Ticket {key} created.": {
+    "context": {
+      "variables": {
+        "key": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "ticketDraft"
     }
   },
   "Tickets": {
@@ -60830,6 +61032,11 @@
       "feature_area": "rabbitmq"
     }
   },
+  "Type / or ! in the message box to pick a command. In other Matrix apps, type the ! form.": {
+    "context": {
+      "feature_area": "commands"
+    }
+  },
   "Type a message...": {
     "context": {
       "feature_area": "chat"
@@ -61501,6 +61708,12 @@
       "feature_area": "project"
     }
   },
+  "Unable to cancel the ticket draft.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "ticketDraft"
+    }
+  },
   "Unable to cancel this request.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -62072,6 +62285,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "project-templates"
+    }
+  },
+  "Unable to create the support ticket.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "ticketDraft"
     }
   },
   "Unable to create token.": {
@@ -66021,6 +66240,16 @@
     }
   },
   "Unknown Type": {},
+  "Unknown command /{command}. Type / for the list, or start with // to send it as text.": {
+    "context": {
+      "variables": {
+        "command": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "chat"
+    }
+  },
   "Unknown device": {
     "context": {
       "primary_ui_type": "label",
@@ -69729,6 +69958,11 @@
       "feature_area": "vendorOfferings"
     }
   },
+  "Waldur only": {
+    "context": {
+      "feature_area": "commands"
+    }
+  },
   "Waldur projection of GLAuth entries. The actual base DN ({base}) and DN format ({nameformat}) are configured on the GLAuth server. Italic rows marked ※ are Waldur context — useful for debugging, but NOT returned by an ldapsearch.": {
     "context": {
       "variables": {
@@ -71015,6 +71249,12 @@
         }
       },
       "feature_area": "service-accounts"
+    }
+  },
+  "You are already in this call.": {
+    "context": {
+      "feature_area": "call",
+      "action_type": "read"
     }
   },
   "You are deleting another member’s message. It is deleted for everyone in this conversation. This cannot be undone.": {

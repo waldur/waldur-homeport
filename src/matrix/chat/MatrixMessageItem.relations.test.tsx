@@ -56,6 +56,9 @@ const actions = (
   deleteMessage: vi.fn(() => Promise.resolve()),
   canEdit: vi.fn(() => true),
   canDelete: vi.fn(() => true),
+  pickedCommand: null,
+  pickCommand: vi.fn(),
+  clearPickedCommand: vi.fn(),
   ...overrides,
 });
 

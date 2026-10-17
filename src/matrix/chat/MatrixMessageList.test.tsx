@@ -1,7 +1,17 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { FC, useState } from 'react';
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  vi,
+} from 'vitest';
+
+import { createTestQueryClient, renderWithProviders } from '@/test/harness';
 
 import {
   CALL_ENDED_MESSAGE_TYPE,
@@ -10,10 +20,12 @@ import {
 import { MatrixMessageItem } from './MatrixMessageItem';
 import { MatrixMessageList } from './MatrixMessageList';
 import { MatrixChatMessage } from './types';
+import { useRoomBotUserId } from './useRoomBotUserId';
 
 // The list renders MatrixMessageItem, which reaches into the Matrix client
 // context for media — irrelevant here, so stub it to a plain node. A spy so
 // tests can assert how often the rows actually re-render.
+vi.mock('./useRoomBotUserId', () => ({ useRoomBotUserId: vi.fn(() => null) }));
 vi.mock('./MatrixMessageItem', () => ({
   MatrixMessageItem: vi.fn(() => <div data-testid="msg" />),
 }));
@@ -40,7 +52,7 @@ const message = (eventId: string, timestamp: number): MatrixChatMessage => ({
 });
 
 const renderList = (props: Record<string, unknown> = {}) =>
-  render(
+  renderWithProviders(
     <MatrixMessageList
       messages={[message('evt-1', 1000), message('evt-2', 2000)]}
       userId="@me:server"
@@ -102,7 +114,7 @@ describe('MatrixMessageList memoization', () => {
         </>
       );
     };
-    render(<Parent />);
+    renderWithProviders(<Parent />);
     itemMock.mockClear();
 
     await user.click(screen.getByText('bump'));
@@ -258,7 +270,7 @@ describe('MatrixMessageList scroll preservation', () => {
       onLoadOlder: vi.fn(),
       onReadLatest: vi.fn(),
     };
-    const { container, rerender } = render(
+    const { container, rerender } = renderWithProviders(
       <MatrixMessageList {...baseProps} loading={true} />,
     );
     // While loading there is no stream to bind to.
@@ -352,5 +364,109 @@ describe('MatrixMessageList scroll preservation', () => {
     );
 
     expect(scrollIntoView).not.toHaveBeenCalled();
+  });
+});
+
+describe('MatrixMessageList ticket drafts', () => {
+  const BOT = '@waldur-bot:server';
+  const DRAFT = 'a'.repeat(32);
+
+  const botNotice = (
+    eventId: string,
+    timestamp: number,
+    block: Record<string, unknown>,
+  ): MatrixChatMessage => ({
+    eventId,
+    sender: BOT,
+    senderDisplayName: 'Waldur',
+    body: 'notice',
+    timestamp,
+    type: 'm.notice',
+    assistantBlocks: [{ draft_uuid: DRAFT, ...block }],
+  });
+
+  const draftNotice = botNotice('evt-draft', 3000, {
+    key: 'support_ticket_draft',
+    requester: '@me:server',
+    title: 'VM does not boot',
+    description: 'It hangs.',
+  });
+  const cancelledNotice = botNotice('evt-cancelled', 4000, {
+    key: 'support_ticket_cancelled',
+    reason: 'replaced',
+  });
+  const history = [message('evt-1', 1000), message('evt-2', 2000)];
+
+  beforeAll(() => {
+    vi.mocked(useRoomBotUserId).mockReturnValue(BOT);
+  });
+  afterAll(() => {
+    vi.mocked(useRoomBotUserId).mockReturnValue(null);
+  });
+  afterEach(() => {
+    vi.mocked(MatrixMessageItem).mockClear();
+  });
+
+  const commandsRefreshed = (spy: ReturnType<typeof vi.spyOn>) =>
+    spy.mock.calls.some(
+      ([filters]: any) => filters?.queryKey?.[0] === 'MatrixRoomCommands',
+    );
+
+  it('hands the bot’s follow-up to the draft’s card', () => {
+    renderList({ messages: [...history, draftNotice, cancelledNotice] });
+    const props = vi.mocked(MatrixMessageItem).mock.calls.at(-1)![0];
+    expect(props.ticketDraftOutcomes?.get(DRAFT)).toEqual({
+      state: 'cancelled',
+    });
+    expect(props.roomBotUserId).toBe(BOT);
+  });
+
+  it('refreshes the composer’s commands when the bot posts a ticket notice', () => {
+    const { rerender, queryClient } = renderList({ messages: history });
+    const spy = vi.spyOn(queryClient, 'invalidateQueries');
+    rerender(
+      <MatrixMessageList
+        messages={[...history, draftNotice]}
+        userId="@me:server"
+        memberNames={new Map()}
+        loading={false}
+        loadingOlder={false}
+        hasOlderMessages={false}
+        onLoadOlder={vi.fn()}
+      />,
+    );
+    expect(spy).toHaveBeenCalledWith({ queryKey: ['MatrixRoomCommands'] });
+  });
+
+  it('does not refresh them for the notices a room opens with', () => {
+    const queryClient = createTestQueryClient();
+    const spy = vi.spyOn(queryClient, 'invalidateQueries');
+    const props = {
+      userId: '@me:server',
+      memberNames: new Map<string, string>(),
+      loadingOlder: false,
+      hasOlderMessages: false,
+      onLoadOlder: vi.fn(),
+    };
+    const { rerender } = renderWithProviders(
+      <MatrixMessageList {...props} messages={[]} loading={true} />,
+      { queryClient },
+    );
+    rerender(
+      <MatrixMessageList
+        {...props}
+        messages={[...history, draftNotice]}
+        loading={false}
+      />,
+    );
+    expect(commandsRefreshed(spy)).toBe(false);
+    rerender(
+      <MatrixMessageList
+        {...props}
+        messages={[...history, draftNotice, message('evt-3', 5000)]}
+        loading={false}
+      />,
+    );
+    expect(commandsRefreshed(spy)).toBe(false);
   });
 });

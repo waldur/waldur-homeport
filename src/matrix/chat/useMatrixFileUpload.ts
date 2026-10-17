@@ -7,6 +7,7 @@ import { encryptAttachment } from './attachmentCrypto';
 import { useMatrixComposerDraft } from './MatrixComposerDraftContext';
 import { AUDIO_TYPES, IMAGE_TYPES, VIDEO_TYPES } from './mediaTypes';
 import { parseMxcUrl } from './mxc';
+import { isRoomEncrypted } from './roomEncryption';
 import { withFreshAccessToken } from './session';
 import { UploadedMedia } from './types';
 import { useMatrixClient } from './useMatrixClient';
@@ -59,17 +60,6 @@ const upload = async (
     throw new Error('Invalid content_uri in upload response');
   return mxcUrl;
 };
-
-// Mirrors how matrix-js-sdk decides to encrypt the event itself: the state
-// event, or the crypto store's memory of it, which a homeserver that drops or
-// resets the state event cannot erase.
-const isRoomEncrypted = async (
-  client: any,
-  room: any,
-  roomId: string,
-): Promise<boolean> =>
-  Boolean(room.hasEncryptionStateEvent?.()) ||
-  Boolean(await client.getCrypto?.()?.isEncryptionEnabledInRoom(roomId));
 
 // In an encrypted room the homeserver gets only ciphertext, with no name and
 // no type; both travel inside the encrypted event instead.

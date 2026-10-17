@@ -21,6 +21,21 @@ const h = vi.hoisted(() => ({
   matrixClient: {} as any,
   isRoomMuted: vi.fn(),
   setRoomMuted: vi.fn(),
+  commands: [] as any[],
+  pickCommand: vi.fn(),
+}));
+
+vi.mock('./commands/useComposerCommands', () => ({
+  useComposerCommands: () => ({ commands: h.commands }),
+}));
+
+vi.mock('./MatrixMessageActionsContext', () => ({
+  useMatrixMessageActions: () => ({ pickCommand: h.pickCommand }),
+}));
+
+const encryptSupport = vi.hoisted(() => ({ supported: true }));
+vi.mock('./call/callEncryption', () => ({
+  canEncryptCallMedia: () => encryptSupport.supported,
 }));
 
 vi.mock('./useRoomMembers', () => ({
@@ -73,6 +88,8 @@ beforeEach(() => {
   vi.mocked(useNotify().showError).mockClear();
   vi.mocked(useModal().openDialog).mockClear();
   h.members = MEMBERS;
+  h.commands = [];
+  encryptSupport.supported = true;
   h.call = {
     callState: 'idle',
     rtcAvailable: false,
@@ -177,6 +194,91 @@ describe('MatrixChatHeader', () => {
       'aria-disabled',
       'true',
     );
+  });
+
+  it('disables "Start call" with the reason when the browser cannot encrypt the room’s call', async () => {
+    const user = userEvent.setup();
+    encryptSupport.supported = false;
+    h.call.rtcAvailable = true;
+    h.matrixClient = {
+      client: {
+        getRoom: () => ({ hasEncryptionStateEvent: () => true }),
+        on: vi.fn(),
+        removeListener: vi.fn(),
+      },
+      activeRoomId: '!r:s',
+      activeRoomUuid: 'room-1',
+    };
+    const { container } = renderHeader();
+    await user.click(actionsToggle(container));
+    const item = await screen.findByText('Start call');
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(item.closest('[role="menuitem"]')).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
+    await user.hover(item);
+    expect(
+      await screen.findByRole('tooltip', {
+        name: "This browser can't take part in encrypted calls.",
+      }),
+    ).toBeInTheDocument();
+  });
+
+  it('hides "Chat commands" when the room offers no commands', async () => {
+    const user = userEvent.setup();
+    const { container } = renderHeader();
+    await user.click(actionsToggle(container));
+    expect(await screen.findByText('Mute')).toBeTruthy();
+    expect(screen.queryByText('Chat commands')).toBeNull();
+  });
+
+  it('disables "Chat commands" when none is available', async () => {
+    const user = userEvent.setup();
+    h.commands = [
+      { name: 'ticket', source: 'bot', available: false, reason: 'No.' },
+      { name: 'call', source: 'client', available: false, reason: 'Busy.' },
+    ];
+    const { container } = renderHeader();
+    await user.click(actionsToggle(container));
+    const item = await screen.findByText('Chat commands');
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(item.closest('[role="menuitem"]')).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
+    await user.hover(item);
+    expect(
+      await screen.findByRole('tooltip', {
+        name: 'No commands are available in this room.',
+      }),
+    ).toBeInTheDocument();
+  });
+
+  it('gives the reason when every command is unavailable for the same one', async () => {
+    const user = userEvent.setup();
+    const reason = 'The chat bot is not running.';
+    h.commands = [
+      { name: 'help', source: 'bot', available: false, reason },
+      { name: 'ticket', source: 'bot', available: false, reason },
+    ];
+    const { container } = renderHeader();
+    await user.click(actionsToggle(container));
+    await user.hover(await screen.findByText('Chat commands'));
+    expect(
+      await screen.findByRole('tooltip', { name: reason }),
+    ).toBeInTheDocument();
+  });
+
+  it('opens the commands dialog, which puts a picked command in the composer', async () => {
+    const user = userEvent.setup();
+    h.commands = [{ name: 'status', source: 'bot', available: true }];
+    const { container } = renderHeader();
+    await user.click(actionsToggle(container));
+    await user.click(await screen.findByText('Chat commands'));
+    const [, options] = vi.mocked(useModal().openDialog).mock.calls[0];
+    options.resolve.onPick(h.commands[0]);
+    expect(h.pickCommand).toHaveBeenCalledWith('status');
   });
 
   it('renders the room name as a link to the project when projectUuid is set', () => {

@@ -11,6 +11,7 @@ import {
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
+import { isRoomEncrypted } from '../roomEncryption';
 import { useMatrixClient } from '../useMatrixClient';
 
 import { canEncryptCallMedia } from './callEncryption';
@@ -150,12 +151,9 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
     // Element Call encrypts every call in an encrypted room; a member
     // joining in clear could neither see nor hear it. Crypto also remembers
     // a room it has seen encrypted, should its state no longer say so.
-    const encrypt =
-      !!room.hasEncryptionStateEvent?.() ||
-      !!(await client
-        .getCrypto?.()
-        ?.isEncryptionEnabledInRoom(targetRoomId)
-        .catch(() => false));
+    const encrypt = await isRoomEncrypted(client, room, targetRoomId).catch(
+      () => false,
+    );
     if (callGenerationRef.current !== generation) return;
     if (encrypt && !canEncryptCallMedia()) {
       fail(translate("This browser can't take part in encrypted calls."));

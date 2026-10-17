@@ -24,6 +24,10 @@ vi.mock('./useMatrixClient', () => ({
 vi.mock('./useRoomMemberNames', () => ({
   useRoomMemberNames: () => new Map<string, string>(),
 }));
+// The command menu has its own tests (MatrixMessageInput.commands.test.tsx).
+vi.mock('./commands/useComposerCommands', () => ({
+  useComposerCommands: () => ({ commands: [], runClientCommand: vi.fn() }),
+}));
 
 import { MatrixComposerDraftProvider } from './MatrixComposerDraftContext';
 import {
@@ -65,7 +69,7 @@ describe('MatrixMessageInput partial upload failure', () => {
       { wrapper },
     );
 
-    const textarea = screen.getByRole('textbox');
+    const textarea = screen.getByRole('textbox', { name: 'Message' });
     await user.type(textarea, 'caption');
     await user.click(screen.getByRole('button', { name: 'Send' }));
 
@@ -95,7 +99,7 @@ describe('MatrixMessageInput partial upload failure', () => {
       />,
       { wrapper },
     );
-    const textarea = screen.getByRole('textbox');
+    const textarea = screen.getByRole('textbox', { name: 'Message' });
     await user.type(textarea, 'hi');
     await user.click(screen.getByRole('button', { name: 'Send' }));
 
@@ -168,6 +172,9 @@ describe('MatrixMessageInput replies', () => {
     deleteMessage: vi.fn(),
     canEdit: () => true,
     canDelete: () => true,
+    pickedCommand: null,
+    pickCommand: vi.fn(),
+    clearPickedCommand: vi.fn(),
     ...overrides,
   });
   const renderInput = (
@@ -196,7 +203,7 @@ describe('MatrixMessageInput replies', () => {
 
     expect(screen.getByText('Replying to Alice')).toBeInTheDocument();
     expect(screen.getByText('the question')).toBeInTheDocument();
-    const textarea = screen.getByRole('textbox');
+    const textarea = screen.getByRole('textbox', { name: 'Message' });
     expect(textarea).toHaveFocus();
     await user.type(textarea, 'the answer{Enter}');
 
@@ -241,7 +248,10 @@ describe('MatrixMessageInput replies', () => {
     const user = userEvent.setup();
     const value = actions();
     renderInput(value);
-    await user.type(screen.getByRole('textbox'), '{Escape}');
+    await user.type(
+      screen.getByRole('textbox', { name: 'Message' }),
+      '{Escape}',
+    );
     expect(value.cancelReply).toHaveBeenCalled();
   });
 
@@ -249,11 +259,43 @@ describe('MatrixMessageInput replies', () => {
     const user = userEvent.setup();
     const value = actions({ replyTo: null });
     renderInput(value);
-    const textarea = screen.getByRole('textbox');
+    const textarea = screen.getByRole('textbox', { name: 'Message' });
     await user.type(textarea, 'x{ArrowUp}');
     expect(value.editLastOwnMessage).not.toHaveBeenCalled();
     await user.clear(textarea);
     await user.type(textarea, '{ArrowUp}');
     expect(value.editLastOwnMessage).toHaveBeenCalled();
+  });
+});
+
+describe('MatrixMessageInput mention list', () => {
+  it('scrolls the active member into view as the arrows move', async () => {
+    const scrollIntoView = vi.fn();
+    // jsdom lays nothing out, so it has no scrollIntoView.
+    Element.prototype.scrollIntoView = scrollIntoView;
+    h.client.getRoom.mockReturnValue({
+      getJoinedMembers: () =>
+        ['alice', 'bob', 'carol'].map((name) => ({
+          userId: `@${name}:s`,
+          name,
+        })),
+    });
+    const user = userEvent.setup();
+    render(
+      <MatrixMessageInput
+        uploadFile={vi.fn()}
+        uploading={false}
+        pendingFiles={[]}
+        addFiles={vi.fn()}
+        removePending={vi.fn()}
+        setPending={vi.fn()}
+        clearPending={vi.fn()}
+      />,
+      { wrapper },
+    );
+    await user.type(screen.getByRole('textbox', { name: 'Message' }), '@');
+    await user.keyboard('{ArrowDown}{ArrowDown}');
+    expect(scrollIntoView).toHaveBeenLastCalledWith({ block: 'nearest' });
+    expect(scrollIntoView.mock.contexts.at(-1)).toHaveTextContent('carol');
   });
 });

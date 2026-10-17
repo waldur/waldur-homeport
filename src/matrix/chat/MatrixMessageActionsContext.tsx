@@ -48,6 +48,14 @@ export interface MatrixMessageActions {
    * own, unless redactions are blocked, or anyone's with the power to.
    */
   canDelete: (message: MatrixChatMessage) => boolean;
+  /**
+   * A command picked outside the composer (the commands dialog), for the
+   * composer to insert the way it inserts one picked from its own menu.
+   */
+  pickedCommand: string | null;
+  pickCommand: (name: string) => void;
+  /** The composer took the picked command. */
+  clearPickedCommand: () => void;
 }
 
 const noop = () => {};
@@ -65,6 +73,9 @@ const MatrixMessageActionsContext = createContext<MatrixMessageActions>({
   deleteMessage: () => Promise.resolve(),
   canEdit: () => false,
   canDelete: () => false,
+  pickedCommand: null,
+  pickCommand: noop,
+  clearPickedCommand: noop,
 });
 
 export const MatrixMessageActionsProvider =
@@ -85,11 +96,15 @@ export function useMatrixMessageActionsValue(
   const { showError } = useNotify();
   const [replyTo, setReplyTo] = useState<MatrixChatMessage | null>(null);
   const [editingEventId, setEditingEventId] = useState<string | null>(null);
+  const [pickedCommand, setPickedCommand] = useState<string | null>(null);
+  const pickCommand = useCallback((name: string) => setPickedCommand(name), []);
+  const clearPickedCommand = useCallback(() => setPickedCommand(null), []);
 
   // Neither a reply nor an edit carries over to another room.
   useEffect(() => {
     setReplyTo(null);
     setEditingEventId(null);
+    setPickedCommand(null);
   }, [activeRoomId]);
 
   // A reply target or an edited message deleted meanwhile is let go of.
@@ -257,8 +272,14 @@ export function useMatrixMessageActionsValue(
       deleteMessage,
       canEdit,
       canDelete,
+      pickedCommand,
+      pickCommand,
+      clearPickedCommand,
     }),
     [
+      pickedCommand,
+      pickCommand,
+      clearPickedCommand,
       replyTo,
       startReply,
       cancelReply,

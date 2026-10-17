@@ -546,6 +546,81 @@
     gap: 0.462rem;
   }
 
+  .tc-ticket-draft {
+    display: flex;
+    flex-direction: column;
+    gap: 0.923rem;
+    min-width: 240px;
+
+    svg {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  // The label and the title read as one heading, closer than the parts.
+  .tc-ticket-draft__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.308rem;
+  }
+
+  .tc-ticket-draft__header,
+  .tc-ticket-draft__expiry {
+    display: flex;
+    align-items: center;
+    gap: 0.462rem;
+    font-size: $font-size-sm;
+    color: var(--text-secondary);
+  }
+
+  .tc-ticket-draft__header {
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .tc-ticket-draft__title {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .tc-ticket-draft__facts {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.308rem 0.769rem;
+    margin: 0;
+    font-size: $font-size-sm;
+
+    dt {
+      font-weight: var(--font-weight-medium);
+      color: var(--text-secondary);
+    }
+
+    dd {
+      margin: 0;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  .tc-ticket-draft__description {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-height: 16rem;
+    overflow-y: auto;
+  }
+
+  .tc-ticket-draft__actions {
+    display: flex;
+    gap: 0.462rem;
+  }
+
+  .tc-ticket-draft__outcome,
+  .tc-ticket-draft__readonly {
+    font-size: $font-size-sm;
+  }
+
   .tc-file-card {
     display: flex;
     align-items: center;
@@ -1094,6 +1169,39 @@
     }
   }
 
+  .tc-command-item {
+    flex-wrap: wrap;
+    gap: 0.154rem 0.769rem;
+
+    .tc-command-item__args {
+      color: var(--text-secondary);
+      font-family: $font-family-monospace;
+      font-size: $font-size-sm;
+    }
+
+    .tc-command-item__description {
+      flex-basis: 100%;
+      color: var(--text-secondary);
+      font-size: $font-size-sm;
+    }
+
+    .tc-command-item__source {
+      margin-inline-start: auto;
+    }
+
+    &.is-active {
+      .tc-command-item__args,
+      .tc-command-item__description {
+        color: var(--text-primary-on-brand);
+      }
+    }
+  }
+
+  .tc-composer-hint {
+    padding: 0 1.077rem 0.462rem;
+    font-size: $font-size-sm;
+  }
+
   // Mentions read as bold inline text (no colored pill) for everyone; a
   // self-mention is signalled by the whole-bubble tint (.tc-msg.mentions-me),
   // so the inline tag stays neutral.
@@ -1333,5 +1441,85 @@
   30% {
     opacity: 1;
     transform: translateY(-2px);
+  }
+}
+
+// Chat commands dialog: rendered in a modal, outside the chat panel.
+.tc-commands-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.308rem;
+}
+
+.tc-commands-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.154rem;
+  width: 100%;
+  padding: 0.615rem 0.769rem;
+  border: 0;
+  border-radius: $border-radius;
+  background: transparent;
+  color: var(--text-primary);
+  text-align: start;
+
+  &:is(button) {
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      background: var(--bg-secondary);
+    }
+  }
+
+  .tc-commands-row__forms {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.308rem;
+  }
+
+  .tc-commands-row__args {
+    color: var(--text-secondary);
+    font-family: $font-family-monospace;
+    font-size: $font-size-sm;
+  }
+
+  .tc-commands-row__description {
+    font-size: $font-size-sm;
+  }
+
+  .tc-commands-row__note {
+    color: var(--text-secondary);
+    font-size: $font-size-sm;
+  }
+}
+
+.tc-commands-unavailable {
+  margin-top: 1rem;
+
+  .tc-commands-unavailable__toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.308rem;
+    margin-bottom: 0.308rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+
+    svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    &[data-state='open'] svg {
+      transform: rotate(90deg);
+    }
   }
 }
