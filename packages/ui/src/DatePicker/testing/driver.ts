@@ -8,8 +8,8 @@ import { userEvent, waitFor } from 'storybook/test';
  * The date-picker stories describe behaviour — what gets emitted, what is
  * shown, which days are selectable — and never touch picker DOM directly.
  * Everything that depends on the markup of `waldur-ui`'s `Calendar`
- * (react-day-picker, root marked `data-slot="calendar"`) and of the popup
- * trigger lives here, so a markup change is fixed in one place.
+ * (react-day-picker, root marked `data-slot="calendar"`) and of the field
+ * (its text inputs and calendar button) lives here, so a markup change is fixed in one place.
  *
  * Popup calendars are portalled to <body>, so lookups are document-wide
  * rather than scoped to the story canvas. Stories render one control at a
@@ -316,7 +316,7 @@ export const firstWeekday = (calendar = getCalendar()) => {
 
 const TRIGGER = '[data-slot="date-picker-trigger"]';
 
-/** The buttons that open popup pickers, in document order. */
+/** The calendar buttons of popup pickers, in document order. */
 export const getTriggers = (container: HTMLElement): HTMLElement[] =>
   Array.from(container.querySelectorAll<HTMLElement>(TRIGGER));
 
@@ -326,23 +326,143 @@ export const getTrigger = (container: HTMLElement): HTMLElement => {
   return trigger;
 };
 
-/** The formatted value the trigger shows, `''` when empty. */
+/** The whole picker (inputs, buttons, hint, messages) a trigger belongs to. */
+const pickerOf = (trigger: HTMLElement): HTMLElement => {
+  const root = trigger.closest<HTMLElement>('[data-slot="date-picker"]');
+  if (!root) throw new Error('Trigger is not inside a date picker');
+  return root;
+};
+
+/**
+ * The picker's text inputs: one, or start and end for a range.
+ */
+export const getInputs = (
+  container: HTMLElement,
+  trigger = getTrigger(container),
+): HTMLInputElement[] =>
+  Array.from(
+    pickerOf(trigger).querySelectorAll<HTMLInputElement>(
+      '[data-slot="date-picker-input"]',
+    ),
+  );
+
+const getInput = (
+  container: HTMLElement,
+  which?: 'start' | 'end',
+  trigger = getTrigger(container),
+) => getInputs(container, trigger)[which === 'end' ? 1 : 0];
+
+/**
+ * What the inputs show, `''` when empty; a range reads `start to end`.
+ */
 export const displayValue = (
   container: HTMLElement,
   trigger = getTrigger(container),
 ) =>
-  trigger.querySelector('[data-slot="date-picker-value"]')?.textContent ?? '';
+  getInputs(container, trigger)
+    .map((input) => input.value)
+    .filter(Boolean)
+    .join(' to ');
 
-/** Placeholder the empty trigger shows. */
+/** Placeholder of the (first) empty input. */
 export const placeholderText = (
   container: HTMLElement,
   trigger = getTrigger(container),
-) =>
-  trigger.querySelector('[data-slot="date-picker-placeholder"]')?.textContent ??
-  '';
+) => getInputs(container, trigger)[0]?.placeholder ?? '';
+
+/**
+ * Accessible name of a range picker's group of inputs: its `aria-label`, or
+ * the text of what `aria-labelledby` points to.
+ */
+export const rangeGroupName = (
+  container: HTMLElement,
+  trigger = getTrigger(container),
+) => {
+  const group = pickerOf(trigger).querySelector<HTMLElement>('[role="group"]');
+  if (!group) throw new Error('The picker has no group of inputs');
+  const labelledBy = group.getAttribute('aria-labelledby');
+  return labelledBy
+    ? labelledBy
+        .split(' ')
+        .map((id) => document.getElementById(id)?.textContent ?? '')
+        .join(' ')
+    : (group.getAttribute('aria-label') ?? '');
+};
+
+/** What the range picker's live region currently announces. */
+export const liveAnnouncement = () =>
+  document.querySelector<HTMLElement>(
+    '[data-radix-popper-content-wrapper] [aria-live]',
+  )?.textContent ?? '';
 
 export const isTriggerDisabled = (container: HTMLElement) =>
   (getTrigger(container) as HTMLButtonElement).disabled;
+
+/**
+ * Types `text` into the picker's input (`which` for a range) the way a
+ * keyboard user would — select what is there, type over it — and commits it
+ * with Enter, or with Tab when `commit: 'tab'`.
+ */
+export const typeDate = async (
+  container: HTMLElement,
+  text: string,
+  {
+    which,
+    commit = 'enter',
+  }: { which?: 'start' | 'end'; commit?: 'enter' | 'tab' } = {},
+) => {
+  const input = getInput(container, which);
+  await userEvent.clear(input);
+  if (text) await userEvent.type(input, text);
+  if (commit === 'tab') {
+    await userEvent.tab();
+  } else {
+    await userEvent.click(input);
+    await userEvent.keyboard('{Enter}');
+  }
+};
+
+/** Pastes `text` into the picker's input (`which` for a range), uncommitted. */
+export const pasteDate = async (
+  container: HTMLElement,
+  text: string,
+  { which }: { which?: 'start' | 'end' } = {},
+) => {
+  const input = getInput(container, which);
+  await userEvent.clear(input);
+  await userEvent.click(input);
+  await userEvent.paste(text);
+};
+
+/** Whether the format hint takes up room on screen. */
+export const isFormatHintVisible = (
+  container: HTMLElement,
+  trigger = getTrigger(container),
+) => {
+  const hint = pickerOf(trigger).querySelector<HTMLElement>(
+    '[data-slot="date-picker-hint"]',
+  );
+  return !!hint && hint.getBoundingClientRect().width > 1;
+};
+
+/** Messages shown for refused entries, in order. */
+export const entryErrors = (
+  container: HTMLElement,
+  trigger = getTrigger(container),
+) =>
+  Array.from(
+    pickerOf(trigger).querySelectorAll<HTMLElement>(
+      '[data-slot="date-picker-error"]',
+    ),
+  ).map((el) => el.textContent);
+
+/** The format hint read out with the inputs (hidden on screen). */
+export const formatHintText = (
+  container: HTMLElement,
+  trigger = getTrigger(container),
+) =>
+  pickerOf(trigger).querySelector('[data-slot="date-picker-hint"]')
+    ?.textContent ?? '';
 
 export const openPicker = async (
   container: HTMLElement,

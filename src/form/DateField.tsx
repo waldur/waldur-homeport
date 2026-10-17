@@ -9,6 +9,7 @@ import {
 } from 'waldur-ui';
 
 import { FormField } from './types';
+import { useDateFieldA11y } from './useDateFieldA11y';
 
 interface DateFieldProps extends FormField {
   minDate?: DateBound;
@@ -38,22 +39,33 @@ export const DateField: FunctionComponent<DateFieldProps> = ({
   disabled,
   autoOpen,
   id,
-}) => (
-  <DatePicker
-    value={parseDateValue(input.value)}
-    onChange={(date) =>
-      input.onChange(date ? DateTime.fromJSDate(date).toISODate() : null)
-    }
-    onClose={() => input.onBlur?.()}
-    minDate={minDate}
-    maxDate={maxDate}
-    enable={enable}
-    inline={inline}
-    captionLayout={captionLayout}
-    placeholder={placeholder}
-    solid={solid}
-    disabled={disabled}
-    autoOpen={autoOpen}
-    id={id}
-  />
-);
+  meta,
+  isInvalid,
+}) => {
+  const { ariaProps, onEntryErrorChange } = useDateFieldA11y(
+    meta,
+    isInvalid,
+    input.name,
+  );
+  return (
+    <DatePicker
+      value={parseDateValue(input.value)}
+      onChange={(date) =>
+        input.onChange(date ? DateTime.fromJSDate(date).toISODate() : null)
+      }
+      onClose={() => input.onBlur?.()}
+      minDate={minDate}
+      maxDate={maxDate}
+      enable={enable}
+      inline={inline}
+      captionLayout={captionLayout}
+      placeholder={placeholder}
+      solid={solid}
+      disabled={disabled}
+      autoOpen={autoOpen}
+      id={id}
+      onEntryErrorChange={onEntryErrorChange}
+      {...ariaProps}
+    />
+  );
+};

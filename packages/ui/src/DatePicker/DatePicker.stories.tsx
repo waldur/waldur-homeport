@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DateTime } from 'luxon';
 import { ComponentProps, useState } from 'react';
-import { expect, userEvent, waitFor, within } from 'storybook/test';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 
 import { Dialog, DialogContent, DialogTitle } from '../Dialog';
 
@@ -14,8 +14,12 @@ import {
   displayValue,
   dropdownOptions,
   ensureOpen,
+  entryErrors,
   fieldContainer,
   firstWeekday,
+  formatHintText,
+  isFormatHintVisible,
+  getInputs,
   getTrigger,
   hasTimeInput,
   isCalendarOpen,
@@ -24,12 +28,14 @@ import {
   isTriggerDisabled,
   openPicker,
   pageMonth,
+  pasteDate,
   pickDay,
   pickMonthAndYear,
   placeholderText,
   readFormValue,
   selectedDays,
   setTime,
+  typeDate,
   visibleMonths,
 } from './testing';
 
@@ -461,5 +467,215 @@ export const InAModalDialog: Story = {
       expect(readFormValue(document.body)).toBe('2026-06-16T00:00'),
     );
     await waitFor(() => expect(getTrigger(field)).toHaveFocus());
+  },
+};
+
+// ── Typing ──────────────────────────────────────────────
+
+/**
+ * The input is the primary control: digits typed are laid out as
+ * `yyyy-MM-dd` and committed on Enter, without the calendar ever opening.
+ * Without a `placeholder` the empty input shows the format; screen readers
+ * get it as the input's description either way.
+ */
+export const TypeADate: Story = {
+  render: () => <Harness />,
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    const [input] = getInputs(field);
+    await expect(input).toHaveAttribute('inputmode', 'numeric');
+    // The format is the empty input's placeholder on screen, and is read
+    // out with the input from a hint that is not shown.
+    await expect(placeholderText(field)).toBe('YYYY-MM-DD');
+    await expect(formatHintText(field)).toBe('Format: YYYY-MM-DD');
+    await expect(isFormatHintVisible(field)).toBe(false);
+    await expect(input).toHaveAccessibleDescription('Format: YYYY-MM-DD');
+    await userEvent.type(input, '20260615');
+    await expect(input).toHaveValue('2026-06-15');
+    await expect(isCalendarOpen()).toBe(false);
+    await userEvent.keyboard('{Enter}');
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toBe('2026-06-15T00:00'),
+    );
+    await expect(isCalendarOpen()).toBe(false);
+  },
+};
+
+/**
+ * Leaving the input commits it too. Moving on to the field's own buttons is
+ * not leaving the field; tabbing past them reports onClose (the blur).
+ */
+export const TypeAndTabAway: Story = {
+  render: () => <Harness initial={june15} />,
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    await typeDate(field, '2026-07-01', { commit: 'tab' });
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toBe('2026-07-01T00:00'),
+    );
+    await expect(readFormValue(canvasElement, 'closed-count')).toBe(0);
+    await expect(getTrigger(field)).not.toHaveFocus();
+    await userEvent.tab();
+    await expect(getTrigger(field)).toHaveFocus();
+    await userEvent.tab();
+    await waitFor(() =>
+      expect(readFormValue(canvasElement, 'closed-count')).toBe(1),
+    );
+  },
+};
+
+/** A pasted ISO datetime is reformatted to the field's format. */
+export const PasteAnIsoDate: Story = {
+  render: () => <Harness />,
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    await pasteDate(field, '2026-06-15T08:30:00.000+03:00');
+    await expect(displayValue(field)).toBe('2026-06-15');
+    await userEvent.keyboard('{Enter}');
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toBe('2026-06-15T00:00'),
+    );
+  },
+};
+
+/**
+ * Something that is not a date stays in the input, marked invalid and
+ * described by a message; the value is emptied rather than left stale.
+ * A valid entry clears the message.
+ */
+export const InvalidEntryIsReported: Story = {
+  render: () => <Harness initial={june15} />,
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    const [input] = getInputs(field);
+    await typeDate(field, '20261340');
+    await expect(input).toHaveValue('2026-13-40');
+    await expect(input).toHaveAttribute('aria-invalid', 'true');
+    await expect(entryErrors(field)).toEqual(['Enter a date as YYYY-MM-DD.']);
+    await expect(input).toHaveAccessibleDescription(
+      'Enter a date as YYYY-MM-DD. Format: YYYY-MM-DD',
+    );
+    await waitFor(() => expect(readFormValue(canvasElement)).toBeNull());
+    await typeDate(field, '20260616');
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toBe('2026-06-16T00:00'),
+    );
+    await expect(input).not.toHaveAttribute('aria-invalid');
+    await expect(entryErrors(field)).toEqual([]);
+  },
+};
+
+/** Typed days follow the calendar's rules: bounds and `enable`, unclamped. */
+export const OutOfRangeEntryIsReported: Story = {
+  render: () => (
+    <Harness
+      minDate="2026-06-05"
+      maxDate="2026-06-25"
+      enable={[(date) => date.getDay() !== 0]}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    await typeDate(field, '20260601');
+    await expect(displayValue(field)).toBe('2026-06-01');
+    await expect(entryErrors(field)).toEqual([
+      'Enter a date on or after 2026-06-05.',
+    ]);
+    await typeDate(field, '20260630');
+    await expect(entryErrors(field)).toEqual([
+      'Enter a date on or before 2026-06-25.',
+    ]);
+    // 2026-06-14 is a Sunday.
+    await typeDate(field, '20260614');
+    await expect(entryErrors(field)).toEqual(['This date is not available.']);
+    await expect(readFormValue(canvasElement)).toBeNull();
+    await typeDate(field, '20260615');
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toBe('2026-06-15T00:00'),
+    );
+  },
+};
+
+/** Emptying the input and committing clears the value. */
+export const TypeToClear: Story = {
+  render: () => <Harness initial={june15} />,
+  play: async ({ canvasElement }) => {
+    await typeDate(fieldContainer(canvasElement), '');
+    await waitFor(() => expect(readFormValue(canvasElement)).toBeNull());
+  },
+};
+
+/**
+ * With `enableTime` the input takes `yyyy-MM-dd HH:mm`; a bare date gets
+ * the time a calendar pick would, and a typed time before a datetime
+ * `minDate` is reported, not moved.
+ */
+export const TypeADateWithTime: Story = {
+  render: () => <Harness enableTime minDate={new Date(2026, 5, 15, 14, 0)} />,
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    await expect(formatHintText(field)).toBe('Format: YYYY-MM-DD HH:MM');
+    await typeDate(field, '202606201830');
+    await expect(displayValue(field)).toBe('2026-06-20 18:30');
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toBe('2026-06-20T18:30'),
+    );
+    await typeDate(field, '20260621');
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toBe('2026-06-21T18:30'),
+    );
+    await expect(displayValue(field)).toBe('2026-06-21 18:30');
+    await typeDate(field, '202606151300');
+    await expect(entryErrors(field)).toEqual([
+      'Enter a date on or after 2026-06-15 14:00.',
+    ]);
+    await expect(displayValue(field)).toBe('2026-06-15 13:00');
+  },
+};
+
+/**
+ * Keyboard only, in a modal dialog: Tab to the input, type, Enter commits
+ * without closing anything; Tab to the calendar button, Enter opens the
+ * calendar on the typed day, and Escape closes just the calendar, giving
+ * focus back to its button.
+ */
+export const KeyboardOnlyInAModalDialog: Story = {
+  render: () => (
+    <Dialog defaultOpen>
+      <DialogContent>
+        <DialogTitle>Set termination date</DialogTitle>
+        <label htmlFor="termination-date">Termination date</label>
+        <Harness id="termination-date" />
+      </DialogContent>
+    </Dialog>
+  ),
+  play: async () => {
+    const field = fieldContainer(document.body);
+    const [input] = getInputs(field);
+    await expect(input).toHaveAccessibleName('Termination date');
+    input.focus();
+    await userEvent.keyboard('20260615{Enter}');
+    await waitFor(() =>
+      expect(readFormValue(document.body)).toBe('2026-06-15T00:00'),
+    );
+    await userEvent.tab();
+    await userEvent.tab();
+    await expect(getTrigger(field)).toHaveFocus();
+    await expect(getTrigger(field)).toHaveAccessibleName('Choose date');
+    await expect(getTrigger(field)).toHaveAttribute('aria-haspopup', 'dialog');
+    await userEvent.keyboard('{Enter}');
+    await waitFor(() => expect(isCalendarOpen()).toBe(true));
+    await expect(getTrigger(field)).toHaveAttribute('aria-expanded', 'true');
+    await expect(
+      document.querySelector('[role="dialog"][aria-label="Choose date"]'),
+    ).not.toBeNull();
+    await waitFor(() =>
+      expect(document.activeElement).toHaveAccessibleName(/June 15th, 2026/),
+    );
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => expect(isCalendarOpen()).toBe(false));
+    await waitFor(() => expect(getTrigger(field)).toHaveFocus());
+    // The modal is still open.
+    await expect(screen.getByRole('dialog')).toBeInTheDocument();
   },
 };

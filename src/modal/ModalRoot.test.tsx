@@ -518,7 +518,7 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
 
     // Open DatePicker popover
     const pickerTrigger = screen.getByRole('button', {
-      name: '2026-10-15',
+      name: 'Choose date',
     });
     await user.click(pickerTrigger);
 

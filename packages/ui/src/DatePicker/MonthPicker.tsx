@@ -1,13 +1,24 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { format } from 'date-fns';
 import { DateTime } from 'luxon';
-import { CSSProperties, FC, useState } from 'react';
+import { CSSProperties, FC, useId, useState } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
 import { cn } from '../cn';
 
 import { DateBound, parseBound } from './dateBounds';
-import { DatePickerPopover, usePickerOpenState } from './DatePickerPopover';
+import { validateEntry } from './dateEntry';
+import {
+  DateEntryInput,
+  DatePickerPopover,
+  commitSingleEntry,
+  formatHint,
+  formatPlaceholder,
+  joinIds,
+  useEntryText,
+  usePickerOpenState,
+  useReportEntryError,
+} from './DatePickerPopover';
 import { useCalendarLocale } from './useCalendarLocale';
 
 export interface MonthPickerProps {
@@ -24,20 +35,28 @@ export interface MonthPickerProps {
   size?: 'sm';
   /** Offer a remove button while there is a value. Defaults to true. */
   clearable?: boolean;
-  /** Called when the popup closes — the field's blur. */
+  /** The field's blur: the popup closed, or focus left the input. */
   onClose?(): void;
   /** Open the popup as soon as the picker mounts. */
   autoOpen?: boolean;
+  /** On the text input, so a `<label for>` names it. */
   id?: string;
+  /** The form's error state; a refused entry sets it by itself. */
+  'aria-invalid'?: boolean;
+  /** Called with the message of a refused entry, or `null` once there is none. */
+  onEntryErrorChange?(message: string | null): void;
+  /** More descriptions (the form's description and error) for the input. */
+  'aria-describedby'?: string;
   style?: CSSProperties;
 }
 
 export const MONTH_FORMAT = 'yyyy-MM';
 
 /**
- * A month (billing periods, usage ranges) in a popup: the year with
- * prev/next arrows over a grid of the twelve months, in the same trigger,
- * popover and colours as DatePicker. Replaces `<input type="month">`, which
+ * A month (billing periods, usage ranges): typed as `yyyy-MM` into a masked
+ * text input, or picked in a popup of the year with prev/next arrows over a
+ * grid of the twelve months — the same input, popover and colours as
+ * DatePicker, with the same handling of refused entries. Replaces `<input type="month">`, which
  * can't be styled, renders differently per browser, and isn't supported by
  * desktop Firefox at all (it degrades to a plain text box).
  */
@@ -54,12 +73,20 @@ export const MonthPicker: FC<MonthPickerProps> = ({
   onClose,
   autoOpen,
   id,
+  'aria-invalid': ariaInvalid,
+  'aria-describedby': ariaDescribedBy,
+  onEntryErrorChange,
   style,
 }) => {
   const [open, setOpen] = usePickerOpenState(autoOpen);
   const current = value ? DateTime.fromJSDate(value).startOf('month') : null;
   const [year, setYear] = useState(() => (current ?? DateTime.now()).year);
   const locale = useCalendarLocale();
+  const entry = useEntryText(current?.toFormat(MONTH_FORMAT) ?? '');
+  const baseId = useId();
+  const hintId = `${baseId}-hint`;
+  const errorId = `${baseId}-error`;
+  useReportEntryError(entry.error, onEntryErrorChange);
 
   const min = parseBound(minDate)?.startOf('month');
   const max = parseBound(maxDate)?.startOf('month');
@@ -78,6 +105,17 @@ export const MonthPicker: FC<MonthPickerProps> = ({
     handleOpenChange(false);
   };
 
+  const commitEntry = () =>
+    commitSingleEntry({
+      entry,
+      result: validateEntry(entry.text, 'month', { minDate, maxDate }),
+      // Compared as the month it stands for: any day in it is the same value.
+      value: current?.toJSDate(),
+      onChange,
+      format: MONTH_FORMAT,
+      resolve: ({ value: typed }) => typed.startOf('month'),
+    });
+
   const thisMonth = DateTime.now().startOf('month');
   const months = Array.from({ length: 12 }, (_, i) =>
     DateTime.local(year, i + 1, 1),
@@ -87,13 +125,44 @@ export const MonthPicker: FC<MonthPickerProps> = ({
     <DatePickerPopover
       open={open}
       onOpenChange={handleOpenChange}
-      displayValue={current?.toFormat(MONTH_FORMAT)}
-      placeholder={placeholder}
+      inputs={
+        <DateEntryInput
+          id={id}
+          mask="month"
+          value={entry.text}
+          onValueChange={entry.type}
+          dirty={entry.dirty}
+          onCommit={commitEntry}
+          onOpenCalendar={() => handleOpenChange(true)}
+          placeholder={placeholder ?? formatPlaceholder('month')}
+          disabled={disabled}
+          aria-invalid={!!entry.error || !!ariaInvalid || undefined}
+          aria-describedby={joinIds(
+            entry.error && errorId,
+            hintId,
+            ariaDescribedBy,
+          )}
+        />
+      }
+      hint={formatHint('month')}
+      hintId={hintId}
+      errors={entry.error ? [{ id: errorId, message: entry.error }] : []}
+      invalid={!!entry.error || !!ariaInvalid}
       disabled={disabled}
       solid={solid}
       size={size}
-      onClear={clearable ? () => onChange(null) : undefined}
-      id={id}
+      showClear={!!entry.text}
+      onClear={
+        clearable
+          ? () => {
+              entry.accept('');
+              if (value) onChange(null);
+            }
+          : undefined
+      }
+      triggerLabel={translate('Choose month') as string}
+      dialogLabel={translate('Choose month') as string}
+      onBlur={onClose}
       style={style}
     >
       <div

@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { ComponentProps, CSSProperties, FC } from 'react';
+import { ComponentProps, CSSProperties, FC, useId } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
 import { Calendar } from './Calendar';
@@ -13,7 +13,18 @@ import {
   clampToBounds,
   withTime,
 } from './dateBounds';
-import { DatePickerPopover, usePickerOpenState } from './DatePickerPopover';
+import { validateEntry } from './dateEntry';
+import {
+  DateEntryInput,
+  DatePickerPopover,
+  commitSingleEntry,
+  formatHint,
+  formatPlaceholder,
+  joinIds,
+  useEntryText,
+  usePickerOpenState,
+  useReportEntryError,
+} from './DatePickerPopover';
 import { TimeInput } from './TimeInput';
 import { useCalendarLocale } from './useCalendarLocale';
 
@@ -45,18 +56,35 @@ export interface DatePickerProps {
   size?: 'sm';
   /** Offer a remove button while there is a value. Defaults to true. */
   clearable?: boolean;
-  /** Called when the popup closes — the field's blur. */
+  /** The field's blur: the popup closed, or focus left the input. */
   onClose?(): void;
   /** Open the popup as soon as the picker mounts (table filters). */
   autoOpen?: boolean;
+  /** On the text input, so a `<label for>` names it. */
   id?: string;
+  /** The form's error state; a refused entry sets it by itself. */
+  'aria-invalid'?: boolean;
+  /** Called with the message of a refused entry, or `null` once there is none. */
+  onEntryErrorChange?(message: string | null): void;
+  /** More descriptions (the form's description and error) for the input. */
+  'aria-describedby'?: string;
   style?: CSSProperties;
 }
 
 /**
- * Single date (optionally with time) in a popup calendar. Plain value in,
- * plain value out — the app's react-final-form adapters are DateField and
- * DateTimeField (src/form).
+ * Single date (optionally with time): typed into a masked text input
+ * (`yyyy-MM-dd`, or `yyyy-MM-dd HH:mm`), or picked in a popup calendar
+ * behind the button beside it. A date typed or pasted in the browser
+ * locale's own order (`15.06.2026` in Estonia, `6/15/2026` in the US) is
+ * accepted too and shown in ISO. Plain value in, plain value out — the app's
+ * react-final-form adapters are DateField and DateTimeField (src/form).
+ *
+ * A typed entry is committed on Enter or blur, against the same rules as
+ * the calendar (bounds, `enable`). One that is not a date, or not an
+ * allowed one, stays in the input and is reported (`aria-invalid` and a
+ * message) and the value is emptied — never adjusted to something the user
+ * did not type. A bare date typed with `enableTime` gets the time a
+ * calendar pick would.
  */
 export const DatePicker: FC<DatePickerProps> = ({
   value,
@@ -75,11 +103,20 @@ export const DatePicker: FC<DatePickerProps> = ({
   onClose,
   autoOpen,
   id,
+  'aria-invalid': ariaInvalid,
+  'aria-describedby': ariaDescribedBy,
+  onEntryErrorChange,
   style,
 }) => {
   const [open, setOpen] = usePickerOpenState(autoOpen);
   const locale = useCalendarLocale();
   const current = value ? DateTime.fromJSDate(value) : undefined;
+  const format = enableTime ? DATE_TIME_FORMAT : DATE_FORMAT;
+  const entry = useEntryText(current?.toFormat(format) ?? '');
+  const baseId = useId();
+  const hintId = `${baseId}-hint`;
+  const errorId = `${baseId}-error`;
+  useReportEntryError(entry.error, onEntryErrorChange);
 
   const handleOpenChange = (next: boolean) => {
     setOpen(next);
@@ -106,6 +143,34 @@ export const DatePicker: FC<DatePickerProps> = ({
       handleOpenChange(false);
     }
   };
+
+  const commitEntry = () =>
+    commitSingleEntry({
+      entry,
+      result: validateEntry(entry.text, enableTime ? 'datetime' : 'date', {
+        minDate,
+        maxDate,
+        enable,
+      }),
+      value,
+      onChange,
+      format,
+      resolve: ({ value: typed, hasTime }) =>
+        !enableTime
+          ? typed.startOf('day')
+          : clampToBounds(
+              hasTime
+                ? typed
+                : withTime(
+                    typed.toJSDate(),
+                    current
+                      ? { hour: current.hour, minute: current.minute }
+                      : DEFAULT_TIME,
+                  ),
+              minDate,
+              maxDate,
+            ),
+    });
 
   const handleTimeChange = (time: { hour: number; minute: number }) => {
     if (!value) return;
@@ -161,15 +226,50 @@ export const DatePicker: FC<DatePickerProps> = ({
     <DatePickerPopover
       open={open}
       onOpenChange={handleOpenChange}
-      displayValue={current?.toFormat(
-        enableTime ? DATE_TIME_FORMAT : DATE_FORMAT,
-      )}
-      placeholder={placeholder}
+      inputs={
+        <DateEntryInput
+          id={id}
+          mask={enableTime ? 'datetime' : 'date'}
+          value={entry.text}
+          onValueChange={entry.type}
+          dirty={entry.dirty}
+          onCommit={commitEntry}
+          onOpenCalendar={() => handleOpenChange(true)}
+          placeholder={
+            placeholder ?? formatPlaceholder(enableTime ? 'datetime' : 'date')
+          }
+          disabled={disabled}
+          aria-invalid={!!entry.error || !!ariaInvalid || undefined}
+          aria-describedby={joinIds(
+            entry.error && errorId,
+            hintId,
+            ariaDescribedBy,
+          )}
+        />
+      }
+      hint={formatHint(enableTime ? 'datetime' : 'date')}
+      hintId={hintId}
+      errors={entry.error ? [{ id: errorId, message: entry.error }] : []}
+      invalid={!!entry.error || !!ariaInvalid}
       disabled={disabled}
       solid={solid}
       size={size}
-      onClear={clearable ? () => onChange(null) : undefined}
-      id={id}
+      showClear={!!entry.text}
+      onClear={
+        clearable
+          ? () => {
+              entry.accept('');
+              if (value) onChange(null);
+            }
+          : undefined
+      }
+      triggerLabel={translate('Choose date')}
+      dialogLabel={
+        (enableTime
+          ? translate('Choose date and time')
+          : translate('Choose date')) as string
+      }
+      onBlur={onClose}
       style={style}
     >
       {body}

@@ -4,6 +4,7 @@ import { FunctionComponent } from 'react';
 import { DateBound, DatePicker, parseDateValue } from 'waldur-ui';
 
 import { FormField } from './types';
+import { useDateFieldA11y } from './useDateFieldA11y';
 
 interface DateTimeFieldProps extends FormField {
   minDate?: DateBound;
@@ -27,20 +28,31 @@ export const DateTimeField: FunctionComponent<DateTimeFieldProps> = ({
   disabled,
   autoOpen,
   id,
-}) => (
-  <DatePicker
-    enableTime
-    value={parseDateValue(input.value)}
-    onChange={(date) =>
-      input.onChange(date ? DateTime.fromJSDate(date).toISO() : null)
-    }
-    onClose={() => input.onBlur?.()}
-    minDate={minDate}
-    maxDate={maxDate}
-    placeholder={placeholder}
-    solid={solid}
-    disabled={disabled}
-    autoOpen={autoOpen}
-    id={id}
-  />
-);
+  meta,
+  isInvalid,
+}) => {
+  const { ariaProps, onEntryErrorChange } = useDateFieldA11y(
+    meta,
+    isInvalid,
+    input.name,
+  );
+  return (
+    <DatePicker
+      enableTime
+      value={parseDateValue(input.value)}
+      onChange={(date) =>
+        input.onChange(date ? DateTime.fromJSDate(date).toISO() : null)
+      }
+      onClose={() => input.onBlur?.()}
+      minDate={minDate}
+      maxDate={maxDate}
+      placeholder={placeholder}
+      solid={solid}
+      disabled={disabled}
+      autoOpen={autoOpen}
+      id={id}
+      onEntryErrorChange={onEntryErrorChange}
+      {...ariaProps}
+    />
+  );
+};

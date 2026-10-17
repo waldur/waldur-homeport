@@ -22,9 +22,7 @@ const renderField = (props: any = {}) => {
 };
 
 const open = () =>
-  userEvent.click(
-    screen.getByRole('button', { name: 'Pick a start and end date/time...' }),
-  );
+  userEvent.click(screen.getByRole('button', { name: 'Choose date range' }));
 
 // Only the "not before now" floor's exact rounding lives here: it needs a
 // frozen clock. Everything else about the field is in its stories
@@ -58,6 +56,32 @@ describe('DateTimeRangeField', () => {
 
     expect(onPartialStartChange).toHaveBeenCalledWith(
       new Date(2026, 8, 2, 16, 0),
+    );
+  });
+
+  it('refuses a typed start before the floor instead of clamping it', async () => {
+    const { onPartialStartChange } = renderField();
+    const start = screen.getByRole('textbox', { name: 'Start date and time' });
+
+    await userEvent.type(start, '202609021500{Enter}');
+
+    expect(start).toHaveValue('2026-09-02 15:00');
+    expect(start).toHaveAttribute('aria-invalid', 'true');
+    expect(start).toHaveAccessibleDescription(
+      /Enter a date on or after 2026-09-02 15:45/,
+    );
+    expect(onPartialStartChange).not.toHaveBeenCalled();
+  });
+
+  it('takes a typed start as the partial start', async () => {
+    const { onPartialStartChange } = renderField();
+    const start = screen.getByRole('textbox', { name: 'Start date and time' });
+
+    await userEvent.type(start, '202609031000{Enter}');
+
+    expect(start).not.toHaveAttribute('aria-invalid');
+    expect(onPartialStartChange).toHaveBeenCalledWith(
+      new Date(2026, 8, 3, 10, 0),
     );
   });
 });

@@ -95,3 +95,22 @@ export const DEFAULT_TIME = { hour: 12, minute: 0 };
 
 export const DATE_FORMAT = 'yyyy-MM-dd';
 export const DATE_TIME_FORMAT = 'yyyy-MM-dd HH:mm';
+
+/**
+ * Whether a typed value lies outside the bounds, compared at `unit`
+ * granularity (what the calendar disables: whole days or months; with a
+ * typed time, the minute). Typed entries are reported, never clamped.
+ */
+export const checkBounds = (
+  value: DateTime,
+  minDate: DateBound,
+  maxDate: DateBound,
+  unit: 'day' | 'month' | 'minute',
+): { side: 'min' | 'max'; bound: DateTime } | undefined => {
+  const min = parseBound(minDate);
+  const max = parseBound(maxDate);
+  const at = value.startOf(unit);
+  if (min && at < min.startOf(unit)) return { side: 'min', bound: min };
+  if (max && at > max.startOf(unit)) return { side: 'max', bound: max };
+  return undefined;
+};

@@ -15,18 +15,22 @@ import {
   closePicker,
   daysFromToday,
   displayValue,
+  entryErrors,
   fieldContainer,
+  getInputs,
   hasTimeInput,
   isCalendarOpen,
   isDayDisabled,
   isTimeDisabled,
   isTriggerDisabled,
+  liveAnnouncement,
   openPicker,
   pickDay,
-  placeholderText,
+  rangeGroupName,
   readFormValue,
   selectedDays,
   setTime,
+  typeDate,
 } from './testing';
 
 /**
@@ -102,7 +106,7 @@ export const PickRange: Story = {
   play: async ({ canvasElement }) => {
     const field = fieldContainer(canvasElement);
     await expect(displayValue(field)).toBe('');
-    await expect(placeholderText(field)).toBe('Select date range');
+    await expect(rangeGroupName(field)).toBe('Select date range');
     await openPicker(field);
     await expect(hasTimeInput()).toBe(false);
     await expect(await isDayDisabled(daysFromToday(-400))).toBe(false);
@@ -381,6 +385,103 @@ export const SameDayTimeOrderEnforced: Story = {
         '2026-06-15T10:00',
         '2026-06-15T10:00',
       ]),
+    );
+  },
+};
+
+// ── Typing ──────────────────────────────────────────────
+
+/**
+ * Two inputs, start and end, in one group named by the field (here its
+ * placeholder). A typed start alone is a partial start, like a first click;
+ * typing the end commits the range — no calendar involved.
+ */
+export const TypeRange: Story = {
+  render: () => <Harness />,
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    const [start, end] = getInputs(field);
+    await expect(start).toHaveAccessibleName('Start date');
+    await expect(end).toHaveAccessibleName('End date');
+    await expect(start).toHaveAttribute('placeholder', 'YYYY-MM-DD');
+    await expect(end).toHaveAttribute('placeholder', 'YYYY-MM-DD');
+    await expect(rangeGroupName(field)).toBe('Select date range');
+    await typeDate(field, '20260610', { which: 'start' });
+    await waitFor(() =>
+      expect(partialOf(canvasElement)).toBe('2026-06-10T00:00'),
+    );
+    await expect(readFormValue(canvasElement)).toBeNull();
+    await typeDate(field, '20260612', { which: 'end' });
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toEqual([
+        '2026-06-10T00:00',
+        '2026-06-12T00:00',
+      ]),
+    );
+    await expect(partialOf(canvasElement)).toBeNull();
+    await expect(isCalendarOpen()).toBe(false);
+  },
+};
+
+/** Either end can be retyped on its own; the other is kept. */
+export const RetypeOneEnd: Story = {
+  render: () => <Harness initial={[june(10), june(12)]} />,
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    await typeDate(field, '20260620', { which: 'end' });
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toEqual([
+        '2026-06-10T00:00',
+        '2026-06-20T00:00',
+      ]),
+    );
+  },
+};
+
+/**
+ * An end before the start is reported on the end input, not swapped;
+ * an end outside the bounds likewise. The value empties meanwhile.
+ */
+export const RefusedEndIsReported: Story = {
+  render: () => <Harness initial={[june(10), june(12)]} maxDate="2026-06-25" />,
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    const [start, end] = getInputs(field);
+    await typeDate(field, '20260605', { which: 'end' });
+    await expect(end).toHaveValue('2026-06-05');
+    await expect(end).toHaveAttribute('aria-invalid', 'true');
+    await expect(start).not.toHaveAttribute('aria-invalid');
+    await expect(entryErrors(field)).toEqual([
+      'The end date must not be before the start date.',
+    ]);
+    await waitFor(() => expect(readFormValue(canvasElement)).toBeNull());
+    await expect(start).toHaveValue('2026-06-10');
+    await typeDate(field, '20260630', { which: 'end' });
+    await expect(entryErrors(field)).toEqual([
+      'Enter a date on or before 2026-06-25.',
+    ]);
+    await typeDate(field, '20260614', { which: 'end' });
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toEqual([
+        '2026-06-10T00:00',
+        '2026-06-14T00:00',
+      ]),
+    );
+    await expect(entryErrors(field)).toEqual([]);
+  },
+};
+
+/** A calendar pick is narrated through a polite live region. */
+export const AnnouncesTheFirstPick: Story = {
+  render: () => <Harness />,
+  play: async ({ canvasElement }) => {
+    await openPicker(fieldContainer(canvasElement));
+    await expect(
+      document.querySelector('[role="dialog"][aria-label="Choose date range"]'),
+    ).not.toBeNull();
+    await pickDay('2026-06-10');
+    await waitFor(() =>
+      expect(liveAnnouncement()).toBe('Start date selected, choose end date'),
     );
   },
 };

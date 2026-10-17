@@ -27,7 +27,7 @@ const Harness = () => (
 );
 
 const pickerTrigger = () =>
-  screen.getByRole('button', { name: 'Pick a start and end date/time...' });
+  screen.getByRole('button', { name: 'Choose date range' });
 
 // Day buttons are labelled like "Wednesday, September 2nd, 2026".
 const day = (label: string) =>
