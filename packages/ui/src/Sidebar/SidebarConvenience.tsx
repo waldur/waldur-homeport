@@ -357,7 +357,7 @@ export const SidebarModeCard = ({
     type="button"
     onClick={onClick}
     aria-label={subtitle ? `${title}: ${subtitle}` : title}
-    className="flex w-full items-center gap-3 rounded-modal bg-[var(--card-bg)] p-3 text-left group-data-[collapsible=icon]/panel:size-9 group-data-[collapsible=icon]/panel:justify-center group-data-[collapsible=icon]/panel:rounded-lg group-data-[collapsible=icon]/panel:p-0"
+    className="flex w-full items-center gap-3 rounded-modal bg-[var(--card-bg)] p-[9.75px] text-left group-data-[collapsible=icon]/panel:size-9 group-data-[collapsible=icon]/panel:justify-center group-data-[collapsible=icon]/panel:rounded-lg group-data-[collapsible=icon]/panel:p-0"
   >
     {icon && (
       <span className="flex size-10 shrink-0 items-center justify-center rounded-xl border-[1px] border-solid border-secondary text-primary group-data-[collapsible=icon]/panel:size-full group-data-[collapsible=icon]/panel:rounded-lg group-data-[collapsible=icon]/panel:border-0">

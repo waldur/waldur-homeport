@@ -81,7 +81,7 @@ export const PublicDashboardHero: FC<
                     <div
                       className={classNames(
                         props.mobileBottomActions ? 'hidden sm:flex' : 'flex',
-                        'shrink-0 flex-wrap self-stretch sm:self-start sm:justify-end gap-3',
+                        'public-dashboard-hero-actions shrink-0 flex-wrap self-stretch sm:self-start sm:justify-end gap-3',
                       )}
                     >
                       {props.actions}

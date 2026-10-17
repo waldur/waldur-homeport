@@ -59,12 +59,12 @@ export const TableWithTabs: FC<
           </Col>
           <Col
             sm="auto"
-            className="ms-auto max-w-full flex gap-4 flex-wrap sm:flex-nowrap text-nowrap"
+            className="ms-auto max-w-full flex gap-4 max-sm:flex-wrap text-nowrap"
           >
             {headerActions}
             <div
               ref={setToolbarNode}
-              className="flex sm:justify-end flex-wrap sm:flex-nowrap text-nowrap gap-4"
+              className="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-4"
             >
               {/* Portal destination */}
             </div>

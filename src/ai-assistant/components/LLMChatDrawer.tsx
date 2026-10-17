@@ -234,7 +234,7 @@ export const LLMChatDrawer: React.FC<LLMChatDrawerProps> = ({ close }) => {
     <ThreadRuntimeProvider>
       <div className="aui-chat-drawer">
         <ChatHistorySidebar />
-        <div className="grow flex flex-col overflow-hidden">
+        <div className="aui-chat-main grow flex flex-col overflow-hidden">
           <LLMErrorBoundary onClose={close}>
             <Thread />
           </LLMErrorBoundary>
