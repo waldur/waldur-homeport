@@ -17969,6 +17969,11 @@
       "feature_area": "plans"
     }
   },
+  "Edit endpoint": {
+    "context": {
+      "feature_area": "endpoints"
+    }
+  },
   "Edit environment variables": {
     "context": {
       "feature_area": "integration"
@@ -19272,6 +19277,12 @@
     }
   },
   "Endpoint has been removed.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "endpoints"
+    }
+  },
+  "Endpoint has been updated successfully.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "endpoints"
@@ -64955,6 +64966,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "actions"
+    }
+  },
+  "Unable to update endpoint.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "endpoints"
     }
   },
   "Unable to update environment variables.": {
