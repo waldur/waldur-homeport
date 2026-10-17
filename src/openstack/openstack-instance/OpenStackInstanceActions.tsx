@@ -8,9 +8,6 @@ import { ActionGroup } from '@/marketplace/resources/actions/ActionGroup';
 import { MoveResourceAction } from '@/marketplace/resources/actions/MoveResourceAction';
 import { ProviderActionsGroup } from '@/marketplace/resources/actions/ProviderActionsGroup';
 import { PullMarketplaceResourceAction } from '@/marketplace/resources/actions/PullMarketplaceResourceAction';
-import { ChangeLimitsAction } from '@/marketplace/resources/change-limits/ChangeLimitsAction';
-import { ChangePlanAction } from '@/marketplace/resources/change-plan/ChangePlanAction';
-import { ShowUsageAction } from '@/marketplace/resources/list/ShowUsageAction';
 import { SetResourceErredAction } from '@/resource/actions/SetResourceErredAction';
 import { SetResourceOkAction } from '@/resource/actions/SetResourceOkAction';
 import { UnlinkActionItem } from '@/resource/actions/UnlinkActionItem';
@@ -20,7 +17,6 @@ import { ConsoleAction } from './actions/ConsoleAction';
 import { ConsoleLogAction } from './actions/ConsoleLogAction';
 import { DestroyAction } from './actions/DestroyAction';
 import { EditAction } from './actions/EditAction';
-import { PullInstanceAction } from './actions/PullInstanceAction';
 import { RescueAction } from './actions/RescueAction';
 import { RestartAction } from './actions/RestartAction';
 import { StartAction } from './actions/StartAction';
@@ -44,14 +40,7 @@ export const OpenStackInstanceActions = (props) => (
       <UpdateFloatingIpsAction {...props} />
       <ConsoleLogAction {...props} />
       <ConsoleAction {...props} />
-      <PullInstanceAction {...props} />
       <PullMarketplaceResourceAction {...props} />
-    </ActionGroup>
-
-    <ActionGroup title={translate('Billing actions')}>
-      <ChangePlanAction {...props} />
-      <ChangeLimitsAction {...props} />
-      <ShowUsageAction {...props} />
     </ActionGroup>
 
     <ProviderActionsGroup {...props} />

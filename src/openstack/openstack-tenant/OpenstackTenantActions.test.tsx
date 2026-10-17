@@ -29,6 +29,8 @@ const mockResource = {
   customer_uuid: 'customer-uuid',
   provider_uuid: 'offering-uuid',
   name: 'Test Resource',
+  offering_type: 'OpenStack.Tenant',
+  backend_id: 'tenant-backend-id',
   quotas: [],
 };
 

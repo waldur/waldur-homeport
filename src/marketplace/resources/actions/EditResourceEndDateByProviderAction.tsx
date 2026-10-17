@@ -15,6 +15,7 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
 
+import { ResourceAction } from './constants';
 import { getMarketplaceResourceUuid } from './utils';
 
 const EditResourceEndDateDialog = lazyComponent(() =>
@@ -66,11 +67,13 @@ export const EditResourceEndDateByProviderAction = ({
       },
     });
 
-  const hasPermissionToSet =
-    hasPermission(user, {
-      permission: PermissionEnum.SET_RESOURCE_END_DATE,
-      customerId: resource.provider_uuid,
-    }) || user.is_support;
+  // No support bypass: set_end_date on the provider endpoint takes the
+  // permission and nothing else. Only the deprecated set_end_date_by_provider
+  // let support through, so offering the entry to support produced a 403.
+  const hasPermissionToSet = hasPermission(user, {
+    permission: PermissionEnum.SET_RESOURCE_END_DATE,
+    customerId: resource.provider_uuid,
+  });
 
   if (!hasPermissionToSet) {
     return null;
@@ -86,6 +89,10 @@ export const EditResourceEndDateByProviderAction = ({
       title={translate('Set termination date')}
       action={callback}
       iconNode={<CalendarBlankIcon weight="bold" />}
+      // The same capability as EditResourceEndDateAction, so an offering that
+      // switches it off through disabled_resource_actions hides this one too.
+      actionId={ResourceAction.EDIT_TERMINATION_DATE}
+      resource={resource}
     />
   );
 };

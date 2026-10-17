@@ -1,4 +1,10 @@
 .resource-actions-modal {
+  // Room for a tab per action group: an OpenStack instance has five, and at
+  // the default 500px they wrap onto a second row.
+  .modal-dialog {
+    max-width: 720px;
+  }
+
   .action-group-label,
   [role='menuitem'],
   [role='option'],

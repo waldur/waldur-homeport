@@ -13,6 +13,8 @@ import {
 import { Modal } from 'react-bootstrap';
 import BootstrapModalContext from 'react-bootstrap/ModalContext';
 
+import { Tabs, TabsList, TabsTrigger } from 'waldur-ui';
+
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 import { ModalService } from '@/modal/actions';
@@ -23,10 +25,16 @@ import {
   ActionComboboxContext,
   ComboboxActionItem,
 } from './ActionComboboxContext';
+import { ActionGroupTabsContext } from './ActionGroup';
 import { ActionList } from './ActionList';
+
+// The All tab's value. Not a group title, so it cannot collide with one.
+const ALL_GROUPS = '__all__';
 
 export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
   const [query, setQuery] = useState('');
+  const [groups, setGroups] = useState<string[]>([]);
+  const [activeGroup, setActiveGroup] = useState(ALL_GROUPS);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const itemsMapRef = useRef<Map<string, ComboboxActionItem>>(new Map());
   const [items, setItems] = useState<ComboboxActionItem[]>([]);
@@ -165,6 +173,25 @@ export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
     [registerItem, highlightedIndex, items, getItemProps],
   );
 
+  const registerGroup = useCallback((title: string) => {
+    setGroups((prev) => (prev.includes(title) ? prev : [...prev, title]));
+  }, []);
+
+  // The dialog opens on All: it is reached through "Show all", and opening
+  // it on one group would hide most of what the user asked to see. A search
+  // spans every group, so while there is one the bar shows All rather than
+  // highlight a tab that is not being applied; clearing the search brings
+  // the picked tab back.
+  const effectiveGroup = query ? ALL_GROUPS : activeGroup;
+
+  const tabsValue = useMemo(
+    () => ({
+      activeGroup: effectiveGroup === ALL_GROUPS ? undefined : effectiveGroup,
+      registerGroup,
+    }),
+    [effectiveGroup, registerGroup],
+  );
+
   const noMatch = Boolean(query) && items.length === 0;
   const clearSearch = () => {
     setQuery('');
@@ -174,7 +201,7 @@ export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <ActionComboboxContext.Provider value={contextValue}>
-      <Modal.Header className="without-border pb-4">
+      <Modal.Header className="without-border pb-4 flex-wrap">
         <FilterBox
           {...getInputProps({
             ref: inputRef,
@@ -203,6 +230,24 @@ export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
             'Use arrow keys to navigate matching actions and press Enter to select.',
           )}
         </span>
+        {groups.length > 1 && (
+          <Tabs
+            value={effectiveGroup}
+            onValueChange={setActiveGroup}
+            className="w-full mt-4"
+          >
+            {/* Wraps rather than scrolls: a clipped last tab reads as a broken
+                label, and nothing tells the user the strip scrolls. */}
+            <TabsList aria-label={translate('Action groups')}>
+              <TabsTrigger value={ALL_GROUPS}>{translate('All')}</TabsTrigger>
+              {groups.map((group) => (
+                <TabsTrigger key={group} value={group}>
+                  {group}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+        )}
       </Modal.Header>
       <Modal.Body
         {...getMenuProps({
@@ -218,7 +263,9 @@ export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
             : ''}
         </div>
         <div className={noMatch ? 'hidden' : undefined}>
-          <ActionList query={query}>{children}</ActionList>
+          <ActionGroupTabsContext.Provider value={tabsValue}>
+            <ActionList query={query}>{children}</ActionList>
+          </ActionGroupTabsContext.Provider>
         </div>
         {noMatch && (
           <NoResult

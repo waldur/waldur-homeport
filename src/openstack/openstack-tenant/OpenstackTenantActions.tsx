@@ -21,7 +21,6 @@ import { ProviderActionsGroup } from '../../marketplace/resources/actions/Provid
 
 import { EditAction } from './actions/EditAction';
 import { MigrateTenantAction } from './actions/MigrateTenantAction';
-import { PullTenantAction } from './actions/PullTenantAction';
 import { SetQuotasAction } from './actions/SetQuotasAction';
 
 export const OpenstackTenantActions = (props) => (
@@ -29,7 +28,6 @@ export const OpenstackTenantActions = (props) => (
     <ActionGroup title={translate('Resource actions')}>
       <EditAction {...props} />
       <MigrateTenantAction {...props} />
-      <PullTenantAction {...props} />
       <PullMarketplaceResourceAction {...props} />
     </ActionGroup>
 

@@ -2,10 +2,22 @@ import { FunctionComponent } from 'react';
 
 import { translate } from '@/i18n';
 import { ActionGroup } from '@/marketplace/resources/actions/ActionGroup';
+import { EditResourceEndDateAction } from '@/marketplace/resources/actions/EditResourceEndDateAction';
+import { EditResourceEndDateByProviderAction } from '@/marketplace/resources/actions/EditResourceEndDateByProviderAction';
 import { ProviderActionContext } from '@/marketplace/resources/actions/ProviderActionContext';
 import { useUser } from '@/workspace/hooks';
 
 import { ActionItemType } from './types';
+
+// Provider actions that are a consumer action under another name. Both
+// "Set termination date" entries call the same set_end_date code with the same
+// validation and notification; they differ only in whether the permission is
+// held on the offering side or the project side. Someone holding it on both
+// would see the one capability twice. Applied only where the consumer group
+// renders too: the provider console lists provider actions alone.
+const SUPERSEDED_BY_CONSUMER_ACTION = new Map<ActionItemType, ActionItemType>([
+  [EditResourceEndDateByProviderAction, EditResourceEndDateAction],
+]);
 
 export interface ResourceActionsListProps {
   customerResourceActions?: ActionItemType[];
@@ -41,8 +53,12 @@ export const ResourceActionsList: FunctionComponent<
 
   // An action may be listed for both audiences - Pull, for example. Render it
   // once, in the group the user sees first, so a combined menu has no doubles.
+  // The same goes for a provider action that is the consumer one reached
+  // through the other side's permission (see SUPERSEDED_BY_CONSUMER_ACTION).
   const providerActions = (props.providerResourceActions || []).filter(
-    (action) => !customerActions.includes(action),
+    (action) =>
+      !customerActions.includes(action) &&
+      !customerActions.includes(SUPERSEDED_BY_CONSUMER_ACTION.get(action)),
   );
 
   return (

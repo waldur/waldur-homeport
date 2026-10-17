@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useEffect, useState } from 'react';
 import BootstrapModalContext from 'react-bootstrap/ModalContext';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -203,5 +204,118 @@ describe('ModalActionsDialog', () => {
     await user.keyboard('{ArrowDown}');
     expect(highlighted(input)).toHaveTextContent('Stop');
     expect(Element.prototype.scrollIntoView).toHaveBeenCalled();
+  });
+
+  describe('group tabs', () => {
+    const tab = (name: string) => screen.getByRole('tab', { name });
+
+    it('opens on All, with every group shown', async () => {
+      renderDialog();
+      await waitFor(() => expect(tab('All')).toBeInTheDocument());
+      expect(tab('All')).toHaveAttribute('aria-selected', 'true');
+      expect(tab('Resource actions')).toBeInTheDocument();
+      expect(tab('Billing actions')).toBeInTheDocument();
+      expect(screen.getByText('Start')).toBeInTheDocument();
+      expect(screen.getByText('Change plan')).toBeInTheDocument();
+    });
+
+    it('narrows the list and the keyboard navigation to one group', async () => {
+      const user = userEvent.setup();
+      renderDialog();
+      await waitFor(() => expect(tab('Billing actions')).toBeInTheDocument());
+
+      await user.click(tab('Billing actions'));
+      await waitFor(() =>
+        expect(screen.getAllByRole('option')).toHaveLength(1),
+      );
+      expect(screen.getByText('Change plan')).toBeInTheDocument();
+      expect(screen.queryByText('Start')).not.toBeInTheDocument();
+
+      await user.click(tab('All'));
+      await waitFor(() =>
+        expect(screen.getAllByRole('option')).toHaveLength(4),
+      );
+    });
+
+    it('searches every group, and restores the picked tab afterwards', async () => {
+      const user = userEvent.setup();
+      renderDialog();
+      await waitFor(() => expect(tab('Resource actions')).toBeInTheDocument());
+      await user.click(tab('Resource actions'));
+      expect(tab('Resource actions')).toHaveAttribute('aria-selected', 'true');
+
+      await user.type(screen.getByRole('combobox'), 'plan');
+      await waitFor(() =>
+        expect(screen.getByText('Change plan')).toBeInTheDocument(),
+      );
+      expect(tab('All')).toHaveAttribute('aria-selected', 'true');
+
+      await user.clear(screen.getByRole('combobox'));
+      expect(tab('Resource actions')).toHaveAttribute('aria-selected', 'true');
+      expect(screen.queryByText('Change plan')).not.toBeInTheDocument();
+    });
+
+    it('offers a tab for a group whose actions render only once loaded', async () => {
+      // Provider actions wait for the offering before they render anything.
+      const LateAction = () => {
+        const [loaded, setLoaded] = useState(false);
+        useEffect(() => {
+          setTimeout(() => setLoaded(true), 0);
+        }, []);
+        return loaded ? (
+          <ActionItem title="Report usage" action={vi.fn()} />
+        ) : null;
+      };
+      render(
+        <BootstrapModalContext.Provider value={{ onHide }}>
+          <ModalActionsDialog
+            name="Production Web"
+            refetch={vi.fn()}
+            ActionsList={() => (
+              <>
+                <ActionGroup title="Resource actions">
+                  <ActionItem title="Start" action={startAction} />
+                </ActionGroup>
+                <ActionGroup title="Provider actions">
+                  <LateAction />
+                </ActionGroup>
+              </>
+            )}
+            resource={{ uuid: 'res-1' }}
+            marketplaceResource={{ uuid: 'res-1', state: 'OK' }}
+          />
+        </BootstrapModalContext.Provider>,
+      );
+      expect(
+        await screen.findByRole('tab', { name: 'Provider actions' }),
+      ).toBeInTheDocument();
+    });
+
+    it('offers no tab for a group whose actions all rendered nothing', async () => {
+      const Empty = () => null;
+      render(
+        <BootstrapModalContext.Provider value={{ onHide }}>
+          <ModalActionsDialog
+            name="Production Web"
+            refetch={vi.fn()}
+            ActionsList={() => (
+              <>
+                <ActionGroup title="Resource actions">
+                  <ActionItem title="Start" action={startAction} />
+                </ActionGroup>
+                <ActionGroup title="Staff actions">
+                  <Empty />
+                </ActionGroup>
+              </>
+            )}
+            resource={{ uuid: 'res-1' }}
+            marketplaceResource={{ uuid: 'res-1', state: 'OK' }}
+          />
+        </BootstrapModalContext.Provider>,
+      );
+      await screen.findByText('Start');
+      // One group left is no choice to make, so there is no bar at all.
+      expect(screen.queryByRole('tablist')).not.toBeInTheDocument();
+    });
   });
 });
