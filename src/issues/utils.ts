@@ -94,8 +94,18 @@ export const useIssueBreadcrumbItems = (issue: Issue): IBreadcrumbItem[] => {
   );
 };
 
+const HTML_TAG = /<\/?[a-z][^>]*>/i;
+
+/**
+ * Waldur's own helpdesk keeps a description as the issue form's textarea had
+ * it: plain text, whose lines HTML would join. Text that is HTML already
+ * (SMAX, a Zammad agent's reply) keeps its own markup.
+ */
+export const withLineBreaks = (text = '') =>
+  HTML_TAG.test(text) ? text : text.replace(/\r?\n/g, '<br/>');
+
 export const linkify = (s) =>
   s.replace(
-    /\[(.+?)\|(.+)\]/g,
+    /\[(.+?)\|([^\]]+)\]/g,
     (_, name, href) => `<a href="${href}">${name}</a>`,
   );

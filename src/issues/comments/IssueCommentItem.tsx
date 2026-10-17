@@ -7,6 +7,7 @@ import { FormattedHtml } from '@/core/FormattedHtml';
 import { FormattedJira } from '@/core/FormattedJira';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
+import { withLineBreaks } from '@/issues/utils';
 import { useModal } from '@/modal/actions';
 
 const UserPopover = lazyComponent(() =>
@@ -107,7 +108,7 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
               'atlassian' ? (
                 <FormattedJira text={comment.description} />
               ) : (
-                <FormattedHtml html={comment.description} />
+                <FormattedHtml html={withLineBreaks(comment.description)} />
               )}
             </div>
           </div>
