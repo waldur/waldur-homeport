@@ -8,9 +8,6 @@ import { ActionGroup } from '@/marketplace/resources/actions/ActionGroup';
 import { MoveResourceAction } from '@/marketplace/resources/actions/MoveResourceAction';
 import { ProviderActionsGroup } from '@/marketplace/resources/actions/ProviderActionsGroup';
 import { PullMarketplaceResourceAction } from '@/marketplace/resources/actions/PullMarketplaceResourceAction';
-import { ChangeLimitsAction } from '@/marketplace/resources/change-limits/ChangeLimitsAction';
-import { ChangePlanAction } from '@/marketplace/resources/change-plan/ChangePlanAction';
-import { ShowUsageAction } from '@/marketplace/resources/list/ShowUsageAction';
 import { TerminateAction } from '@/marketplace/resources/terminate/TerminateAction';
 import { SetResourceErredAction } from '@/resource/actions/SetResourceErredAction';
 import { SetResourceOkAction } from '@/resource/actions/SetResourceOkAction';
@@ -20,7 +17,6 @@ import { AttachAction } from './actions/AttachAction';
 import { DetachAction } from './actions/DetachAction';
 import { EditAction } from './actions/EditAction';
 import { ExtendAction } from './actions/ExtendAction';
-import { PullAction } from './actions/PullAction';
 import { RetypeAction } from './actions/RetypeAction';
 
 export const OpenstackVolumeActions = (props) => (
@@ -31,14 +27,7 @@ export const OpenstackVolumeActions = (props) => (
       <DetachAction {...props} />
       <ExtendAction {...props} />
       <RetypeAction {...props} />
-      <PullAction {...props} />
       <PullMarketplaceResourceAction {...props} />
-    </ActionGroup>
-
-    <ActionGroup title={translate('Billing actions')}>
-      <ChangePlanAction {...props} />
-      <ChangeLimitsAction {...props} />
-      <ShowUsageAction {...props} />
     </ActionGroup>
 
     <ProviderActionsGroup {...props} />

@@ -1,12 +1,26 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
+import { EditResourceEndDateAction } from '@/marketplace/resources/actions/EditResourceEndDateAction';
+import { EditResourceEndDateByProviderAction } from '@/marketplace/resources/actions/EditResourceEndDateByProviderAction';
 import { renderWithProviders } from '@/test/harness';
 
 import { ResourceActionComponent } from './ResourceActionComponent';
 import { ResourceActionsList } from './ResourceActionsList';
 import { ActionItemType } from './types';
+
+vi.mock('@/marketplace/resources/actions/EditResourceEndDateAction', () => ({
+  EditResourceEndDateAction: () => <span>Set termination date</span>,
+}));
+vi.mock(
+  '@/marketplace/resources/actions/EditResourceEndDateByProviderAction',
+  () => ({
+    EditResourceEndDateByProviderAction: () => (
+      <span>Set termination date</span>
+    ),
+  }),
+);
 
 const makeAction = (title: string): ActionItemType => {
   const Action = () => <span>{title}</span>;
@@ -65,6 +79,25 @@ describe('ResourceActionComponent', () => {
 
     expect(screen.getAllByText('Pull')).toHaveLength(1);
     expect(screen.getByText('Show usage')).toBeInTheDocument();
+  });
+
+  it('renders the provider twin of a consumer action only once', () => {
+    renderList({
+      customerResourceActions: [EditResourceEndDateAction],
+      providerResourceActions: [EditResourceEndDateByProviderAction],
+    });
+
+    expect(screen.getAllByText('Set termination date')).toHaveLength(1);
+  });
+
+  it('keeps the provider entry where the consumer group is absent', () => {
+    // The provider console lists provider actions alone; dropping the entry
+    // there would leave no way to set the date at all.
+    renderList({
+      providerResourceActions: [EditResourceEndDateByProviderAction],
+    });
+
+    expect(screen.getByText('Set termination date')).toBeInTheDocument();
   });
 
   it('offers the rest of the actions behind Show all', async () => {
