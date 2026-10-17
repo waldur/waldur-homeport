@@ -5,7 +5,7 @@ import { formatDate } from '@/core/dateUtils';
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { FormattedJira } from '@/core/FormattedJira';
 import { translate } from '@/i18n';
-import { linkify } from '@/issues/utils';
+import { linkify, withLineBreaks } from '@/issues/utils';
 import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { renderFieldOrDash } from '@/table/utils';
@@ -96,7 +96,7 @@ export const IssuesListExpandableRow: FunctionComponent<{
           {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'atlassian' ? (
             <FormattedJira text={linkify(row.description)} />
           ) : (
-            <FormattedHtml html={linkify(row.description)} />
+            <FormattedHtml html={linkify(withLineBreaks(row.description))} />
           )}
         </div>
       </Field>

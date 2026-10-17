@@ -10,7 +10,7 @@ import { FormattedJira } from '@/core/FormattedJira';
 import { Link } from '@/core/Link';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { translate } from '@/i18n';
-import { linkify } from '@/issues/utils';
+import { linkify, withLineBreaks } from '@/issues/utils';
 import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 import { Field } from '@/resource/summary';
 import { useUser } from '@/workspace/hooks';
@@ -165,7 +165,7 @@ export const IssueDetailsContent: FunctionComponent<
           {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'atlassian' ? (
             <FormattedJira text={linkify(issue?.description)} />
           ) : (
-            <FormattedHtml html={linkify(issue?.description)} />
+            <FormattedHtml html={linkify(withLineBreaks(issue?.description))} />
           )}
         </Card.Body>
       </Card>
