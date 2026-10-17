@@ -30,9 +30,7 @@
       background-color: transparent;
     }
 
-    .font-medium,
-    .fs-4,
-    .fs-5 {
+    .font-medium {
       // Was var(--bs-secondary-color), which is never defined: the text has
       // always inherited, overriding any text-* class.
       color: inherit !important;

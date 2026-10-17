@@ -31,6 +31,39 @@ describe('no-bootstrap-layout-utility', () => {
     ],
     invalid: [
       {
+        // Bootstrap's !important .flex-wrap beats sm:flex-nowrap: no autofix.
+        code: 'const A = () => <div className="d-flex flex-wrap flex-sm-nowrap" />;',
+        output:
+          'const A = () => <div className="flex flex-wrap flex-sm-nowrap" />;',
+        errors: [
+          { messageId: 'layoutUtility' },
+          {
+            messageId: 'wrapConflict',
+            data: {
+              token: 'flex-sm-nowrap',
+              base: 'flex-wrap',
+              fix: 'sm:flex-nowrap',
+              alternative: 'max-sm:flex-wrap',
+            },
+          },
+        ],
+      },
+      {
+        code: 'const A = () => <div className="flex-nowrap flex-md-wrap" />;',
+        output: null,
+        errors: [
+          {
+            messageId: 'wrapConflict',
+            data: {
+              token: 'flex-md-wrap',
+              base: 'flex-nowrap',
+              fix: 'md:flex-wrap',
+              alternative: 'max-md:flex-nowrap',
+            },
+          },
+        ],
+      },
+      {
         code: 'const A = () => <div className="d-flex" />;',
         output: 'const A = () => <div className="flex" />;',
         errors: [

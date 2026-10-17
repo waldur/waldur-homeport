@@ -22,6 +22,12 @@
  *   text-truncate          → truncate
  *
  * This rule reports all such classes and autofixes them to their Tailwind counterparts.
+ *
+ * One exception: Bootstrap emits `.flex-wrap` and `.flex-nowrap` with
+ * `!important`, under the same names Tailwind uses, so `flex-wrap sm:flex-nowrap`
+ * never stops wrapping. When the class list keeps such a base, a responsive
+ * `flex-sm-nowrap` / `flex-sm-wrap` is reported without a fix: write
+ * `max-sm:flex-wrap` (or `max-sm:flex-nowrap`) in place of both classes.
  */
 
 import { notAClassList } from './class-name-tokens.js';
@@ -104,7 +110,7 @@ const STATIC_LAYOUT_MAP = {
   'text-truncate': 'truncate',
 };
 
-const getLayoutReplacement = (name) => {
+export const getLayoutReplacement = (name) => {
   if (STATIC_LAYOUT_MAP[name]) return STATIC_LAYOUT_MAP[name];
 
   let m =
@@ -180,6 +186,8 @@ export default {
     messages: {
       layoutUtility:
         '"{{ token }}" is a Bootstrap layout utility. Use "{{ fix }}" instead.',
+      wrapConflict:
+        '"{{ token }}" next to "{{ base }}": Bootstrap\'s !important .{{ base }} would beat "{{ fix }}". Replace both with "{{ alternative }}".',
     },
   },
 
@@ -189,13 +197,28 @@ export default {
     const check = (node, text) => {
       const sourceText = sourceCode.getText(node);
       let searchOffset = 0;
+      const tokens = text.split(/\s+/).filter(Boolean);
 
-      for (const token of text.split(/\s+/).filter(Boolean)) {
+      for (const token of tokens) {
         const parts = split(token);
         if (!parts) continue;
         const { prefix, name, suffix } = parts;
         const replacement = getLayoutReplacement(name);
-        if (replacement) {
+        const wrap = /^flex-(sm|md|lg|xl|xxl)-(wrap|nowrap)$/.exec(name);
+        const base =
+          wrap && (wrap[2] === 'nowrap' ? 'flex-wrap' : 'flex-nowrap');
+        if (replacement && !prefix && base && tokens.includes(base)) {
+          context.report({
+            node,
+            messageId: 'wrapConflict',
+            data: {
+              token,
+              base,
+              fix: replacement,
+              alternative: `max-${BP_MAP[wrap[1]]}:${base}`,
+            },
+          });
+        } else if (replacement) {
           const fix = prefix + replacement + suffix;
           // Find token location within node text safely using word boundary
           const regex = new RegExp(

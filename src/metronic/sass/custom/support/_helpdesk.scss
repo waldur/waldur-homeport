@@ -140,7 +140,7 @@
   // In this half-width pane the title row squeezes the Sync/Show log actions
   // until they wrap and overflow; keep them on one line and let the title wrap
   // to take the slack instead.
-  .public-dashboard-hero .card-body .justify-content-sm-end {
+  .public-dashboard-hero .public-dashboard-hero-actions {
     flex-wrap: nowrap !important;
     flex-shrink: 0;
   }

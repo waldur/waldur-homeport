@@ -77,7 +77,7 @@ const inJsxStyle = (property) => {
   return node?.type === 'JSXAttribute' && node.name.name === 'style';
 };
 
-const getReplacement = (name) => {
+export const getFontSizeReplacement = (name) => {
   if (RETIRED_FONT_SIZES[name]) return RETIRED_FONT_SIZES[name];
   const m = /^fs-(sm|md|lg|xl|xxl)-([0-9][a-z0-9]*)$/.exec(name);
   if (m) {
@@ -123,7 +123,7 @@ export default {
         if (!parts) continue;
         const { prefix, name, suffix } = parts;
 
-        const replacement = getReplacement(name);
+        const replacement = getFontSizeReplacement(name);
         if (replacement) {
           const fix = prefix + replacement + suffix;
           const regex = new RegExp(

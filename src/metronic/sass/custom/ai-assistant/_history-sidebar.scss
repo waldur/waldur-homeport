@@ -40,7 +40,7 @@
   }
 
   // Hide chat when history is open on mobile
-  #kt_drawer[data-history-open='true'] .aui-chat-drawer > .flex-grow-1 {
+  #kt_drawer[data-history-open='true'] .aui-chat-drawer > .aui-chat-main {
     display: none !important;
   }
 

@@ -52,10 +52,10 @@ exports[`InternalIpsList > renders list 1`] = `
           </div>
         </div>
         <div
-          class="grow order-2 order-sm-2 flex items-center flex-wrap sm:flex-nowrap text-nowrap gap-4 ms-auto justify-end"
+          class="grow order-2 order-sm-2 flex items-center max-sm:flex-wrap text-nowrap gap-4 ms-auto justify-end"
         >
           <div
-            class="flex sm:justify-end flex-wrap sm:flex-nowrap text-nowrap gap-4"
+            class="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-4"
           >
             <button
               class="inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] bg-[var(--btn-tertiary-bg)] text-[var(--btn-tertiary-text)] hover:bg-[var(--btn-tertiary-bg-hover)] focus-visible:bg-[var(--btn-tertiary-bg-hover)] focus-visible:shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] focus-visible:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-[var(--btn-tertiary-bg-pressed)] active:shadow-none disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)] data-disabled:shadow-[inset_0_0_0_1px_transparent] data-disabled:bg-[var(--btn-disabled-bg)] data-disabled:text-[var(--btn-disabled-text)] rounded-lg px-[16px] py-[10px] text-base leading-6"
