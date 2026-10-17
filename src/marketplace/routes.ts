@@ -869,6 +869,8 @@ export const states: StateDeclaration[] = [
       ],
       feature: MarketplaceFeatures.show_managed_projects,
       breadcrumb: () => translate('Managed project'),
+      // A detail page needs a managed project, so it is never a tab.
+      skipBreadcrumb: true,
     },
   },
 
