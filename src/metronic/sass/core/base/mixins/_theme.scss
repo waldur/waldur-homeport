@@ -1,6 +1,7 @@
-//
 // Theme
-//
+
+@use 'sass:map';
+@use 'sass:math';
 
 // Styles for the dark theme, from the one stylesheet that serves both: the
 // app sets data-theme on <html>. :where() keeps the selector's specificity, so
@@ -46,13 +47,13 @@ $_ramp-mirror: (
   @if $alpha == 1 {
     @return $color;
   }
-  @return color-mix(in srgb, #{$color} percentage($alpha), transparent);
+  @return color-mix(in srgb, #{$color} math.percentage($alpha), transparent);
 }
 
 @mixin mirrored-ramp-color($property, $ramp, $step, $alpha: 1) {
   #{$property}: _ramp-color($ramp, $step, $alpha);
 
   @include dark-theme {
-    #{$property}: _ramp-color($ramp, map-get($_ramp-mirror, $step), $alpha);
+    #{$property}: _ramp-color($ramp, map.get($_ramp-mirror, $step), $alpha);
   }
 }

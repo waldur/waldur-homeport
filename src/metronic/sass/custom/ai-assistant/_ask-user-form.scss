@@ -1,6 +1,8 @@
 .aui-ask-user-block {
+  // stylelint-disable property-disallowed-list -- component-local sizes
   --aui-ask-user-radius: 8px;
   --aui-ask-user-pad: 1rem;
+  // stylelint-enable property-disallowed-list
 
   width: 100%;
   max-width: 680px;

@@ -1,6 +1,6 @@
-//
 // Card
-//
+
+@use 'sass:map';
 
 // Base
 .card {
@@ -31,7 +31,7 @@
       margin: $card-header-py;
       margin-left: 0;
       font-size: $h3-font-size;
-      font-weight: $font-weight-bolder;
+      font-weight: var(--font-weight-semibold);
 
       &.flex-column,
       &.flex-col {
@@ -179,36 +179,11 @@
   }
 }
 
-// Responsive stretch heights
+// Responsive header stretch
 .card {
-  @each $breakpoint in map-keys($grid-breakpoints) {
+  @each $breakpoint in map.keys($grid-breakpoints) {
     @include media-breakpoint-up($breakpoint) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-
-      // Stretch
-      &.card#{$infix}-stretch {
-        height: calc(100% - var(--bs-gutter-y));
-      }
-
-      // Stretch 75
-      &.card#{$infix}-stretch-75 {
-        height: calc(75% - var(--bs-gutter-y));
-      }
-
-      // Stretch 50
-      &.card#{$infix}-stretch-50 {
-        height: calc(50% - var(--bs-gutter-y));
-      }
-
-      // Stretch 33
-      &.card#{$infix}-stretch-33 {
-        height: calc(33.333% - var(--bs-gutter-y));
-      }
-
-      // Stretch 25
-      &.card#{$infix}-stretch-25 {
-        height: calc(25% - var(--bs-gutter-y));
-      }
 
       // Header stretch
       .card-header#{$infix}-stretch {

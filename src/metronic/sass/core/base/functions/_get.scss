@@ -1,31 +1,33 @@
-//
 // Get
-//
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
 
 @function get($map, $keys...) {
-  @if length($keys) == 1 {
-    $keys: nth($keys, 1);
+  @if list.length($keys) == 1 {
+    $keys: list.nth($keys, 1);
   }
 
-  @if type-of($map) != 'map' or $map == null {
+  @if meta.type-of($map) != 'map' {
     //@return false;
   }
 
-  $warn: '#{nth($keys, 1)}';
-  $length: length($keys);
-  $get: map-get($map, nth($keys, 1));
+  $warn: '#{list.nth($keys, 1)}';
+  $length: list.length($keys);
+  $get: map.get($map, list.nth($keys, 1));
 
   @if $length > 1 {
     @for $i from 2 through $length {
-      @if $get != null and type-of($get) == 'map' {
-        $warn: $warn + '->#{nth($keys, $i)}';
-        $get: map-get($get, nth($keys, $i));
+      @if meta.type-of($get) == 'map' {
+        $warn: $warn + '->#{list.nth($keys, $i)}';
+        $get: map.get($get, list.nth($keys, $i));
 
-        @if $get == null {
+        @if meta.type-of($get) == 'null' {
           @return null;
         }
       } @else {
-        @return get-warning($warn, $get, nth($keys, $i));
+        @return get-warning($warn, $get, list.nth($keys, $i));
       }
     }
   }
@@ -34,32 +36,32 @@
 }
 
 @function get-def($map, $key, $default: null) {
-  @if map-has-key($map, $key) {
-    @return map-get($map, $key);
+  @if map.has-key($map, $key) {
+    @return map.get($map, $key);
   }
   @return $default;
 }
 
 @function has($map, $keys...) {
-  @if length($keys) == 1 {
-    $keys: nth($keys, 1);
+  @if list.length($keys) == 1 {
+    $keys: list.nth($keys, 1);
   }
 
-  @if type-of($map) != 'map' or $map == null {
+  @if meta.type-of($map) != 'map' {
     //@return false;
   }
 
-  $warn: '#{nth($keys, 1)}';
-  $length: length($keys);
-  $get: map-get($map, nth($keys, 1));
+  $warn: '#{list.nth($keys, 1)}';
+  $length: list.length($keys);
+  $get: map.get($map, list.nth($keys, 1));
 
   @if $length > 1 {
     @for $i from 2 through $length {
-      @if $get != null and type-of($get) == 'map' {
-        $warn: $warn + '->#{nth($keys, $i)}';
-        $get: map-get($get, nth($keys, $i));
+      @if meta.type-of($get) == 'map' {
+        $warn: $warn + '->#{list.nth($keys, $i)}';
+        $get: map.get($get, list.nth($keys, $i));
 
-        @if $get == null {
+        @if meta.type-of($get) == 'null' {
           @return false;
         }
       } @else {
@@ -68,7 +70,7 @@
     }
   }
 
-  @if $get != null {
+  @if meta.type-of($get) != 'null' {
     @return true;
   } @else {
     @return false;
@@ -76,9 +78,9 @@
 }
 
 @function get-warning($warn, $get, $key) {
-  @if $get == null {
+  @if meta.type-of($get) == 'null' {
     @warn "Map has no value for key search `#{$warn}`";
-  } @else if type-of($get) != 'map' {
+  } @else if meta.type-of($get) != 'map' {
     @warn "Non-map value found for key search `#{$warn}`, cannot search for key `#{$key}`";
   }
   @return null;

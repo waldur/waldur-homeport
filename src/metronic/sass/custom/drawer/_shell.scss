@@ -72,6 +72,7 @@
     );
     border-radius: 0;
     box-shadow: none;
+    // stylelint-disable-next-line property-disallowed-list -- per-breakpoint slide offset
     --drawer-closed-x: 100%;
 
     .outstanding-bar-enabled & {
@@ -100,6 +101,7 @@
     );
     border-radius: 20px;
     box-shadow: $box-shadow-xl;
+    // stylelint-disable-next-line property-disallowed-list -- per-breakpoint slide offset
     --drawer-closed-x: calc(100% + 4px);
 
     .outstanding-bar-enabled & {

@@ -1,6 +1,6 @@
-//
 // SVG Icon
-//
+
+@use 'sass:map';
 
 // The colour modifiers in use, read from the design tokens so one stylesheet
 // serves both themes. The gray steps are the theme-inverted SCSS grays, which
@@ -33,7 +33,7 @@ $svg-icon-sizes: (
 .svg-icon {
   line-height: 1;
 
-  @include svg-icon-size(map-get($svg-icon-sizes, 5));
+  @include svg-icon-size(map.get($svg-icon-sizes, 5));
   @include svg-icon-color(var(--text-quaternary));
 
   @each $name, $color in $svg-icon-colors {

@@ -1,6 +1,4 @@
-//
 // Table
-//
 
 // Table
 .table {
@@ -167,7 +165,7 @@
   }
   // Light text on the dark --bg-primary-solid pill, in both themes.
   color: var(--color-gray-dark-200);
-  font-weight: $font-weight-bold;
+  font-weight: var(--font-weight-medium);
   margin: 0 !important;
   width: auto;
   padding: 1rem 2rem !important;
@@ -228,6 +226,7 @@
 // Bootstrap's maths, in color-mix(): striped, active and hover move the row
 // background 5%, 10% and 7.5% towards the text colour.
 @mixin waldur-table-variant($bg, $color) {
+  // stylelint-disable property-disallowed-list -- Bootstrap's .table reads these hooks
   --bs-table-bg: #{$bg};
   --bs-table-striped-bg: color-mix(in srgb, #{$bg} 95%, #{$color});
   --bs-table-striped-color: #{$color};
@@ -235,6 +234,7 @@
   --bs-table-active-color: #{$color};
   --bs-table-hover-bg: color-mix(in srgb, #{$bg} 92.5%, #{$color});
   --bs-table-hover-color: #{$color};
+  // stylelint-enable property-disallowed-list
   color: #{$color};
   border-color: color-mix(in srgb, #{$bg} 90%, #{$color});
 }

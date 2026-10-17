@@ -18,9 +18,8 @@
 
 .aui-md h1 {
   font-size: $h1-font-size;
-  font-weight: var(
-    --font-weight-bold
-  ); // was 800: Inter is loaded up to 700, which 800 rendered as
+  // Was 800: Inter is loaded up to 700, so 800 rendered as 700 anyway.
+  font-weight: var(--font-weight-bold);
   margin-top: 2rem;
 }
 

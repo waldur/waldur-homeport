@@ -8,9 +8,11 @@
 // where both are loaded — matches src/tailwind.css's `@layer bootstrap`
 // order. See docs/tailwind-shadcn-migration-notes.md for why.
 @layer bootstrap {
+  // stylelint-disable-next-line no-invalid-position-at-import-rule -- layered on purpose
   @import 'init-styles';
 }
 
 // Unlayered on purpose: these override @livekit/components-styles, which is
 // itself unlayered and would beat anything inside a layer.
+// stylelint-disable-next-line no-invalid-position-at-import-rule
 @import 'custom/matrix/call-livekit';

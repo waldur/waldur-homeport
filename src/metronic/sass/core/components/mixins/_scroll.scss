@@ -1,6 +1,4 @@
-//
 // Scroll mixins
-//
 
 @mixin scrollbar-color($color, $hover-color: null) {
   // Firefox
@@ -11,7 +9,7 @@
     background-color: $color;
   }
 
-  @if ($hover-color != null) {
+  @if $hover-color {
     // Hover state
     &:hover {
       // Firefox

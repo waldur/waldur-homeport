@@ -1,10 +1,8 @@
-//
 // SVG icons drawn as data URIs (backgrounds, ::before content). A var() cannot
 // reach inside one, so each icon is a function of its colour: the variables
 // pass the light colour, and core/components/_dark-icons.scss swaps in the
 // dark one. Colours come from css-color() (_color-ramps.scss), which is the
 // same in both compiles.
-//
 
 @function svg-select-indicator($color) {
   @return url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");

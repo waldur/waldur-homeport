@@ -1,6 +1,5 @@
-//
 // Config-only init: functions, mixins and variables. Emits no CSS.
-//
+
 // This MUST be imported at the top level of an entry point, never from inside
 // a block (see style.scss). Sass scopes a `$var: value` declaration to the
 // block it appears in, and an assignment in a nested block updates the nearest
@@ -9,7 +8,6 @@
 // `.btn.btn-outline.btn-outline-dashed { $border-color: null; }` in the former
 // buttons theme partial — so if these variables were block-local
 // the null would leak into every partial imported afterwards.
-//
 
 // Custom functions & mixins
 @import './core/base/functions';

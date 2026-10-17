@@ -1,4 +1,4 @@
-@import '@/metronic/sass/core/components/_variables.scss';
+@import '@/metronic/sass/core/components/_variables';
 
 // 5px vertical gradient strip marking the edge of a floating (pinned) column.
 @mixin pinned-shadow-strip($gradient) {
@@ -169,7 +169,6 @@
       .inline-filter-anchor {
         position: absolute;
         right: 0.75rem;
-        transition: $transition-fade;
         opacity: 0;
         top: 50%;
         transform: translateY(-50%);
@@ -458,6 +457,7 @@
 
       > * {
         border: unset;
+        // stylelint-disable-next-line property-disallowed-list -- Bootstrap's .table hook
         --bs-table-accent-bg: var(--bg-secondary);
       }
     }
@@ -585,7 +585,6 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
   flex: 1 1 260px;
   min-width: 0;
   overflow-wrap: anywhere;
-  word-break: break-word;
 
   &.is-clickable {
     cursor: pointer;
