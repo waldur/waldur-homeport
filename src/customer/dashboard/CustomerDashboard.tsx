@@ -19,21 +19,20 @@ import { ProjectsList } from '@/project/ProjectsList';
 import { useUser, useCustomer } from '@/workspace/hooks';
 import {
   checkCanViewAccounting,
-  checkIsServiceManager,
+  checkIsServiceManagerOnly,
 } from '@/workspace/selectors';
 
 import { CustomerDashboardChart } from './CustomerDashboardChart';
 import { CustomerDashboardCredit } from './CustomerDashboardCredit';
-import { CustomerProfile } from './CustomerProfile';
 import { filterComponentsWithUsage } from './utils';
 
 export const CustomerDashboard: FunctionComponent = () => {
   const user = useUser();
   const customer = useCustomer();
-  const isServiceManager = useMemo(
-    () => checkIsServiceManager(customer, user),
-    [customer, user],
-  );
+  // The page hero above already shows the organization's profile. A user who
+  // reaches the organization only through its service provider gets nothing
+  // more; staff and members who also manage the provider get the full view.
+  const isServiceManagerOnly = checkIsServiceManagerOnly(customer);
   const canSeeCharts = useMemo(
     () => checkCanViewAccounting(customer, user),
     [customer, user],
@@ -105,78 +104,72 @@ export const CustomerDashboard: FunctionComponent = () => {
       shouldShowCurrentMonthWidget ||
       hasVisibleUsageViews());
 
-  if (!customer) return null;
+  if (!customer || isServiceManagerOnly) return null;
 
   return (
-    <>
-      {isServiceManager ? (
-        <CustomerProfile customer={customer} />
-      ) : (
-        <Row>
-          {canSeeCharts && (
-            <CustomerDashboardChart customer={customer} user={user} />
-          )}
-          {showTerminatedSwitch && (
-            <Col
-              xs={12}
-              className="flex flex-wrap items-center justify-end gap-3 mb-5"
-            >
-              {includeTerminated && (
-                <span className="text-quaternary text-xs">
-                  {translate(
-                    "Terminated resources' usage is shown separately and does not count against limits: for the current month in the usage widgets, and for each offering's limit period in the per-offering views.",
-                  )}
-                </span>
-              )}
-              <Switch
-                checked={includeTerminated}
-                onCheckedChange={setIncludeTerminated}
-                size="sm"
-                label={translate('Include terminated resources')}
-              />
-            </Col>
-          )}
-          {shouldShowCurrentMonthWidget && (
-            <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
-              <AggregateLimitWidget
-                customer={customer}
-                data={currentMonthFilteredData}
-                isLoading={isAggregateLimitLoadingForCurrentMonth}
-                error={aggregateLimitErrorForCurrentMonth}
-                refetch={aggregateLimitRefetchForCurrentMonth}
-                type="monthly"
-                includeTerminated={includeTerminated}
-              />
-            </Col>
-          )}
-          {shouldShowAggregateLimitWidget && (
-            <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
-              <AggregateLimitWidget
-                customer={customer}
-                data={aggregateLimitData}
-                isLoading={isAggregateLimitLoading}
-                error={aggregateLimitError}
-                refetch={aggregateLimitRefetch}
-                includeTerminated={includeTerminated}
-              />
-            </Col>
-          )}
-          {Boolean(customer.credit) && (
-            <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
-              <CustomerDashboardCredit customer={customer} />
-            </Col>
-          )}
-          <Col xs={12}>
-            <UsageViewsSection
-              customer={customer}
-              includeTerminated={includeTerminated}
-            />
-          </Col>
-          <Col xs={12}>
-            <ProjectsList customer={customer} />
-          </Col>
-        </Row>
+    <Row>
+      {canSeeCharts && (
+        <CustomerDashboardChart customer={customer} user={user} />
       )}
-    </>
+      {showTerminatedSwitch && (
+        <Col
+          xs={12}
+          className="flex flex-wrap items-center justify-end gap-3 mb-5"
+        >
+          {includeTerminated && (
+            <span className="text-quaternary text-xs">
+              {translate(
+                "Terminated resources' usage is shown separately and does not count against limits: for the current month in the usage widgets, and for each offering's limit period in the per-offering views.",
+              )}
+            </span>
+          )}
+          <Switch
+            checked={includeTerminated}
+            onCheckedChange={setIncludeTerminated}
+            size="sm"
+            label={translate('Include terminated resources')}
+          />
+        </Col>
+      )}
+      {shouldShowCurrentMonthWidget && (
+        <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+          <AggregateLimitWidget
+            customer={customer}
+            data={currentMonthFilteredData}
+            isLoading={isAggregateLimitLoadingForCurrentMonth}
+            error={aggregateLimitErrorForCurrentMonth}
+            refetch={aggregateLimitRefetchForCurrentMonth}
+            type="monthly"
+            includeTerminated={includeTerminated}
+          />
+        </Col>
+      )}
+      {shouldShowAggregateLimitWidget && (
+        <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+          <AggregateLimitWidget
+            customer={customer}
+            data={aggregateLimitData}
+            isLoading={isAggregateLimitLoading}
+            error={aggregateLimitError}
+            refetch={aggregateLimitRefetch}
+            includeTerminated={includeTerminated}
+          />
+        </Col>
+      )}
+      {Boolean(customer.credit) && (
+        <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+          <CustomerDashboardCredit customer={customer} />
+        </Col>
+      )}
+      <Col xs={12}>
+        <UsageViewsSection
+          customer={customer}
+          includeTerminated={includeTerminated}
+        />
+      </Col>
+      <Col xs={12}>
+        <ProjectsList customer={customer} />
+      </Col>
+    </Row>
   );
 };

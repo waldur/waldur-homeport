@@ -132,6 +132,8 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Remote project'),
+      // A detail page needs a remote project, so it is never a tab.
+      skipBreadcrumb: true,
       priority: 107,
       permissions: [
         canViewRemoteProjects,
