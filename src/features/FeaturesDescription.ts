@@ -25,6 +25,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Enable onboarding functionality.'),
       },
       {
+        key: 'show_openportal_remote_projects',
+        description: translate('Show the Remote Projects pages of a portal that sends projects to other portals over OpenPortal. Needs the OpenPortal plugin to be enabled.'),
+      },
+      {
         key: 'show_organisation_reporting',
         description: translate('Show the Reporting menu with organisation-scoped reports to organisation owners.'),
       },
@@ -187,6 +191,10 @@ export const FeaturesDescription: FeatureSection[] = [
       {
         key: 'show_experimental_ui_components',
         description: translate('Enabled display of experimental or mocked components in marketplace.'),
+      },
+      {
+        key: 'show_managed_projects',
+        description: translate('Show the Managed projects and Project templates pages of a portal that receives projects from other portals over OpenPortal. Needs the OpenPortal plugin to be enabled.'),
       },
       {
         key: 'show_openstack_duplicate_offerings',

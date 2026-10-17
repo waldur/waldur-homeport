@@ -1,6 +1,7 @@
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { StateDeclaration } from '@/core/types';
+import { CustomerFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import {
   isStaffOrSupport,
@@ -113,6 +114,7 @@ export const states: StateDeclaration[] = [
       })),
     ),
     data: {
+      feature: CustomerFeatures.show_openportal_remote_projects,
       breadcrumb: () => translate('Remote Projects'),
       priority: 107,
       permissions: [
@@ -131,6 +133,7 @@ export const states: StateDeclaration[] = [
       })),
     ),
     data: {
+      feature: CustomerFeatures.show_openportal_remote_projects,
       breadcrumb: () => translate('Remote project'),
       // A detail page needs a remote project, so it is never a tab.
       skipBreadcrumb: true,
@@ -151,6 +154,7 @@ export const states: StateDeclaration[] = [
       })),
     ),
     data: {
+      feature: CustomerFeatures.show_openportal_remote_projects,
       breadcrumb: () => translate('Audit Log'),
       skipBreadcrumb: true,
       priority: 107,
@@ -170,6 +174,7 @@ export const states: StateDeclaration[] = [
       })),
     ),
     data: {
+      feature: CustomerFeatures.show_openportal_remote_projects,
       breadcrumb: () => translate('Remote Projects Audit Log'),
       priority: 107,
       permissions: [
