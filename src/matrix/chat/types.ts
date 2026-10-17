@@ -64,6 +64,11 @@ export interface MatrixChatMessage {
   redacted?: boolean;
   /** On the row where the room's call started: who has been on it. */
   callParticipants?: Array<{ userId: string; displayName: string }>;
+  /**
+   * Typed blocks the bot attaches to a notice (`com.waldur.assistant.blocks`),
+   * unvalidated: the renderer checks their shape before using them.
+   */
+  assistantBlocks?: unknown;
 }
 
 export type MatrixConnectionState =

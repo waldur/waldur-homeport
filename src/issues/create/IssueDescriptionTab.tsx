@@ -10,12 +10,17 @@ import { required } from '@/core/validators';
 import { SelectGroup, StringGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 
+import { IssueCreateButtonProps } from '../list/IssueCreateButton';
 import { TEMPLATE_TYPE_TO_NAME } from '../types/constants';
 
 import { AttachmentsGroup } from './AttachmentsGroup';
 import { AttachmentsList } from './AttachmentsList';
 
-export const IssueDescriptionTab = () => {
+export const IssueDescriptionTab = ({
+  context,
+}: {
+  context?: IssueCreateButtonProps;
+}) => {
   const form = useForm();
   const { values, submitting } = useFormState();
   const issueType = values.type;
@@ -89,6 +94,7 @@ export const IssueDescriptionTab = () => {
         label={translate('Request description')}
         rows={3}
         disabled={submitting}
+        description={context?.descriptionNote}
       />
       {templateFiles.length > 0 && (
         <Form.Group className="mb-5">

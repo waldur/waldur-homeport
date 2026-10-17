@@ -1,5 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 
 import { BaseButton } from 'waldur-ui';
 
@@ -21,6 +21,8 @@ export interface IssueCreateButtonProps {
   issue?: any;
   options?: any;
   hideProjectAndResourceFields?: boolean;
+  /** Shown under the description field. */
+  descriptionNote?: ReactNode;
 }
 
 export const IssueCreateButton: FunctionComponent<IssueCreateButtonProps> = (

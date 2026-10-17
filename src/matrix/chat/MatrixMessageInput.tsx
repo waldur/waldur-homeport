@@ -22,6 +22,22 @@ import { BaseButton, Tag } from 'waldur-ui';
 import { Image } from '@/core/Image';
 import { translate } from '@/i18n';
 
+import {
+  CommandPopup,
+  commandOptionId,
+  COMMAND_POPUP_ID,
+} from './commands/CommandPopup';
+import {
+  ComposerCommand,
+  filterCommands,
+  getCommandQuery,
+  resolveOutgoingText,
+} from './commands/composerCommands';
+import { useComposerCommands } from './commands/useComposerCommands';
+import {
+  handleComposerPopupKey,
+  useComposerPopupList,
+} from './composerPopupKeys';
 import { useMatrixComposerDraft } from './MatrixComposerDraftContext';
 import { useMatrixMessageActions } from './MatrixMessageActionsContext';
 import { MatrixComposerReplyBar } from './MatrixReplyQuote';
@@ -183,6 +199,12 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
     start: number;
   } | null>(null);
   const [mentionIndex, setMentionIndex] = useState(0);
+  const mentionList = useComposerPopupList(mentionIndex, setMentionIndex);
+  const [commandIndex, setCommandIndex] = useState(0);
+  // Esc closes the command menu until the text changes.
+  const [commandsDismissed, setCommandsDismissed] = useState(false);
+  // Why a `/` command was kept from being sent.
+  const [commandHint, setCommandHint] = useState<string | null>(null);
   const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isTypingRef = useRef(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -190,8 +212,13 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
 
   // Get room members for mention autocomplete
   const members = useMentionCandidates();
-  const { replyTo, cancelReply, editLastOwnMessage } =
-    useMatrixMessageActions();
+  const {
+    replyTo,
+    cancelReply,
+    editLastOwnMessage,
+    pickedCommand,
+    clearPickedCommand,
+  } = useMatrixMessageActions();
 
   // Starting a reply puts the cursor in the composer to write it.
   useEffect(() => {
@@ -209,6 +236,30 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
       )
       .slice(0, 6);
   }, [members, mentionQuery]);
+
+  const {
+    commands: composerCommands,
+    botCommandsLoaded,
+    runClientCommand,
+  } = useComposerCommands();
+  const commandQuery = getCommandQuery(message);
+  const filteredCommands = useMemo(
+    () =>
+      commandQuery && !commandsDismissed
+        ? filterCommands(
+            composerCommands,
+            commandQuery.query,
+            commandQuery.prefix,
+          )
+        : [],
+    [
+      composerCommands,
+      commandQuery?.prefix,
+      commandQuery?.query,
+      commandsDismissed,
+    ],
+  );
+  const showCommands = filteredCommands.length > 0;
 
   const sendTypingIndicator = useCallback(
     (isTyping: boolean) => {
@@ -232,6 +283,13 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
     };
   }, [activeRoomId]);
 
+  // The menu's state and a hint are about the text in the room left behind.
+  useEffect(() => {
+    setCommandIndex(0);
+    setCommandsDismissed(false);
+    setCommandHint(null);
+  }, [activeRoomId]);
+
   const updateMentionState = useCallback((value: string, cursorPos: number) => {
     const mq = getMentionQuery(value, cursorPos);
     setMentionQuery(mq);
@@ -243,6 +301,9 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
   const handleInput = useCallback(
     (value: string) => {
       setMessage(value);
+      setCommandIndex(0);
+      setCommandsDismissed(false);
+      setCommandHint(null);
       // Update mention state based on cursor position
       const cursorPos = textareaRef.current?.selectionStart ?? value.length;
       updateMentionState(value, cursorPos);
@@ -293,10 +354,85 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
     [message, mentionQuery, setMessage],
   );
 
+  // Picking a command, from the menu or the commands dialog, puts it in the
+  // composer with a space and keeps the menu closed until the text changes,
+  // so the next Enter sends rather than picking a subcommand. The cursor
+  // goes after the command, before any `rest` kept from the text typed.
+  const insertCommand = useCallback(
+    (command: string, rest = '') => {
+      setMessage(command + rest);
+      setCommandIndex(0);
+      setCommandsDismissed(true);
+      setCommandHint(null);
+      requestAnimationFrame(() => {
+        const ta = textareaRef.current;
+        if (ta) {
+          ta.focus();
+          ta.setSelectionRange(command.length, command.length);
+        }
+      });
+    },
+    [setMessage],
+  );
+
+  const acceptCommand = useCallback(
+    (command: ComposerCommand) => {
+      if (!commandQuery) return;
+      insertCommand(`${commandQuery.prefix}${command.name} `);
+    },
+    [commandQuery, insertCommand],
+  );
+
+  // Read when a command is picked, not a reason to insert it again.
+  const messageRef = useRef(message);
+  messageRef.current = message;
+  useEffect(() => {
+    if (!pickedCommand) return;
+    // What is typed already becomes what the command is about
+    // (`/ticket VM is down`), unless it is a command itself.
+    const typed = messageRef.current.trimStart();
+    insertCommand(`/${pickedCommand} `, /^[!/]/.test(typed) ? '' : typed);
+    clearPickedCommand();
+  }, [pickedCommand, insertCommand, clearPickedCommand]);
+
   const sendMessage = useCallback(
     async (e?: FormEvent) => {
       e?.preventDefault();
-      const text = message.trim();
+      const outgoing = resolveOutgoingText(
+        message.trim(),
+        composerCommands,
+        botCommandsLoaded,
+      );
+      if (outgoing.kind === 'unknown-command') {
+        setCommandHint(
+          translate(
+            'Unknown command /{command}. Type / for the list, or start with // to send it as text.',
+            { command: outgoing.command },
+          ),
+        );
+        return;
+      }
+      if (outgoing.kind === 'unavailable-command') {
+        setCommandHint(
+          outgoing.reason
+            ? translate("/{command} isn't available here: {reason}", {
+                command: outgoing.command,
+                reason: outgoing.reason,
+              })
+            : translate("/{command} isn't available here.", {
+                command: outgoing.command,
+              }),
+        );
+        return;
+      }
+      if (outgoing.kind === 'client-command') {
+        if (sending || uploading) return;
+        // Runs in Waldur; nothing goes to the room.
+        runClientCommand(outgoing.command);
+        handleInput('');
+        return;
+      }
+      const text = outgoing.text;
       const files = pendingFiles;
       if (
         (!text && files.length === 0) ||
@@ -367,6 +503,10 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
     },
     [
       message,
+      composerCommands,
+      botCommandsLoaded,
+      runClientCommand,
+      handleInput,
       pendingFiles,
       client,
       activeRoomId,
@@ -407,30 +547,39 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLTextAreaElement>) => {
-      // When mention popup is visible, handle navigation keys
-      if (mentionQuery && filteredMentions.length > 0) {
-        if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          setMentionIndex((i) => (i + 1) % filteredMentions.length);
-          return;
-        }
-        if (e.key === 'ArrowUp') {
-          e.preventDefault();
-          setMentionIndex(
-            (i) => (i - 1 + filteredMentions.length) % filteredMentions.length,
-          );
-          return;
-        }
-        if (e.key === 'Enter' || e.key === 'Tab') {
-          e.preventDefault();
-          acceptMention(filteredMentions[mentionIndex]);
-          return;
-        }
-        if (e.key === 'Escape') {
-          e.preventDefault();
-          setMentionQuery(null);
-          return;
-        }
+      // An input method editor's keys are its own: its Enter confirms the
+      // composed text. Safari reports that Enter after compositionend, so
+      // only keyCode 229 tells.
+      if (e.nativeEvent.isComposing || e.keyCode === 229) return;
+      // A command typed out in full that takes nothing more is sent on Enter,
+      // as before the menu (`!status`); one with arguments is inserted first.
+      const activeCommand =
+        filteredCommands[Math.min(commandIndex, filteredCommands.length - 1)];
+      const sendsAsTyped =
+        e.key === 'Enter' &&
+        !!activeCommand &&
+        !activeCommand.args &&
+        commandQuery?.query === activeCommand.name.toLowerCase();
+      // While a popup is open, keys move in it and pick from it; Enter sends
+      // only once it is closed.
+      if (
+        !sendsAsTyped &&
+        (handleComposerPopupKey(e, {
+          items: filteredCommands,
+          activeIndex: commandIndex,
+          setActiveIndex: setCommandIndex,
+          onPick: acceptCommand,
+          onClose: () => setCommandsDismissed(true),
+        }) ||
+          handleComposerPopupKey(e, {
+            items: filteredMentions,
+            activeIndex: mentionIndex,
+            setActiveIndex: setMentionIndex,
+            onPick: acceptMention,
+            onClose: () => setMentionQuery(null),
+          }))
+      ) {
+        return;
       }
 
       if (e.key === 'Enter' && !e.shiftKey) {
@@ -455,8 +604,11 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
       }
     },
     [
+      filteredCommands,
+      commandIndex,
+      commandQuery?.query,
+      acceptCommand,
       sendMessage,
-      mentionQuery,
       filteredMentions,
       mentionIndex,
       acceptMention,
@@ -482,9 +634,23 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
 
   return (
     <div className="position-relative">
+      {showCommands && commandQuery && (
+        <CommandPopup
+          commands={filteredCommands}
+          prefix={commandQuery.prefix}
+          activeIndex={Math.min(commandIndex, filteredCommands.length - 1)}
+          onSelect={acceptCommand}
+          onActivate={setCommandIndex}
+        />
+      )}
+      {commandHint && (
+        <div className="tc-composer-hint text-danger" role="alert">
+          {commandHint}
+        </div>
+      )}
       {/* Mention autocomplete popup */}
       {mentionQuery && filteredMentions.length > 0 && (
-        <div className="tc-mention-popup">
+        <div ref={mentionList.listRef} className="tc-mention-popup">
           {filteredMentions.map((m, i) => (
             <button
               key={m.userId}
@@ -500,7 +666,7 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
                 e.preventDefault(); // prevent textarea blur
                 acceptMention(m);
               }}
-              onMouseEnter={() => setMentionIndex(i)}
+              onMouseMove={mentionList.pointAt(i)}
             >
               <div className="tc-mention-item__avatar">
                 {m.displayName.charAt(0).toUpperCase()}
@@ -558,6 +724,19 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
                 onKeyDown={handleKeyDown}
                 onPaste={handlePaste}
                 onSelect={handleSelect}
+                // Focus stays here while the command menu points at its
+                // active option.
+                aria-label={translate('Message')}
+                aria-haspopup="listbox"
+                aria-autocomplete={showCommands ? 'list' : undefined}
+                aria-controls={showCommands ? COMMAND_POPUP_ID : undefined}
+                aria-activedescendant={
+                  showCommands
+                    ? commandOptionId(
+                        Math.min(commandIndex, filteredCommands.length - 1),
+                      )
+                    : undefined
+                }
                 placeholder={
                   disabled
                     ? translate('Connecting...')
