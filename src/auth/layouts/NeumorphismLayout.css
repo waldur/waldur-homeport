@@ -71,3 +71,15 @@
 [data-theme='dark'] .layout-neumorphism-footer {
   border-top-color: rgba(255, 255, 255, 0.1);
 }
+
+/* The brand colour is configurable and is often too dark to read on the dark
+   neumorphic surface, so fall back to the neutral text scale. */
+[data-theme='dark'] .layout-neumorphism-card .login-with-local-account-button {
+  color: var(--text-secondary);
+}
+
+[data-theme='dark']
+  .layout-neumorphism-card
+  .login-with-local-account-button:hover {
+  color: var(--text-primary);
+}
