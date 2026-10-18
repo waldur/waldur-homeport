@@ -11,6 +11,38 @@ const options = [
 ];
 
 describe('Select component', () => {
+  it('names each multi-select value remove button after its option', () => {
+    render(
+      <Select
+        isMulti
+        options={options}
+        value={[options[0], options[2]]}
+        onChange={() => {}}
+      />,
+    );
+
+    expect(
+      screen.getByRole('button', { name: 'Remove A' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Remove C' }),
+    ).toBeInTheDocument();
+  });
+
+  it('falls back to "Remove" when an option label is an element', () => {
+    render(
+      <Select
+        isMulti
+        options={options}
+        value={[options[0]]}
+        getOptionLabel={((option) => <b>{option.label}</b>) as any}
+        onChange={() => {}}
+      />,
+    );
+
+    expect(screen.getByRole('button', { name: 'Remove' })).toBeInTheDocument();
+  });
+
   it('renders options with selected value at top when menu opens', async () => {
     render(
       <Select

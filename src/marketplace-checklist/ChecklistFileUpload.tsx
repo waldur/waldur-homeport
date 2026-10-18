@@ -334,6 +334,7 @@ export const ChecklistFileUpload: FC<ChecklistFileUploadProps> = ({
                 </div>
                 <div>
                   <BaseButton
+                    tooltip={translate('Remove')}
                     onClick={() => handleRemove(file.name)}
                     iconNode={<TrashIcon weight="bold" />}
                     variant="tertiary-ghost"

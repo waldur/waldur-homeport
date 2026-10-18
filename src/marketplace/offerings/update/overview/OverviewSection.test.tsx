@@ -161,11 +161,11 @@ describe('OverviewSection', () => {
     };
     renderComponent(remoteOffering);
 
-    // Verify Name edit button is disabled and has correct tooltip aria-label
+    // The Name edit button is disabled, named after its field, and says why
     const nameEditButton = screen.getByTestId('edit-name');
     expect(nameEditButton).toBeDisabled();
-    expect(nameEditButton).toHaveAttribute(
-      'aria-label',
+    expect(nameEditButton).toHaveAccessibleName('Edit Name');
+    expect(nameEditButton).toHaveAccessibleDescription(
       'Field is synchronised from the remote offering',
     );
 
@@ -176,8 +176,7 @@ describe('OverviewSection', () => {
     // Privacy policy link is the first field in the Links tab
     const linkEditButton = screen.getByTestId('edit-privacy_policy_link');
     expect(linkEditButton).toBeDisabled();
-    expect(linkEditButton).toHaveAttribute(
-      'aria-label',
+    expect(linkEditButton).toHaveAccessibleDescription(
       'Field is synchronised from the remote offering',
     );
   });

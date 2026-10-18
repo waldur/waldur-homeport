@@ -82,6 +82,7 @@ const FieldsListGroup = ({
               />
 
               <BaseButton
+                tooltip={translate('Remove')}
                 onClick={() => removeRow(i)}
                 iconNode={<TrashIcon weight="bold" />}
                 variant="text-danger"

@@ -107,6 +107,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
                 {values?.invitation?.uuid ? (
                   <>
                     <BaseButton
+                      tooltip={translate('Clear selection')}
                       onClick={() => form.change('invitation', null)}
                       iconNode={<XIcon weight="bold" />}
                       variant="secondary"

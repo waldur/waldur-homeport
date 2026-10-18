@@ -148,6 +148,7 @@ export const ReviewerProfilePanel = ({
                   </Badge>
                 )}
                 <BaseButton
+                  tooltip={translate('Refresh')}
                   variant="text-secondary"
                   size="sm"
                   onClick={handleRefresh}

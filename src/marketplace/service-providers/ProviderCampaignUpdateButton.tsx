@@ -21,5 +21,5 @@ export const ProviderCampaignUpdateButton: FunctionComponent<{
       size: 'lg',
     });
   };
-  return <CompactEditButton onClick={callback} />;
+  return <CompactEditButton onClick={callback} fieldName={campaign.name} />;
 };

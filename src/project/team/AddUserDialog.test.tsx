@@ -243,14 +243,17 @@ describe('AddUserDialog', () => {
 
       await fillForm(user);
 
-      expect(
-        await screen.findByText(
-          'User already has this role in this scope. Update their existing role instead.',
-        ),
-      ).toBeInTheDocument();
+      const reason =
+        'User already has this role in this scope. Update their existing role instead.';
+      // Shown in the alert, and the disabled button carries it as its
+      // accessible description.
+      expect(await screen.findAllByText(reason)).not.toHaveLength(0);
       await waitFor(() =>
         expect(screen.getByRole('button', { name: 'Add role' })).toBeDisabled(),
       );
+      expect(
+        screen.getByRole('button', { name: 'Add role' }),
+      ).toHaveAccessibleDescription(reason);
     });
 
     it('warns without blocking when the user has a different role', async () => {
@@ -280,14 +283,17 @@ describe('AddUserDialog', () => {
 
       await fillForm(user);
 
-      expect(
-        await screen.findByText(
-          'User already has the "Project administrator" role in this scope. Only one role per scope is allowed.',
-        ),
-      ).toBeInTheDocument();
+      const reason =
+        'User already has the "Project administrator" role in this scope. Only one role per scope is allowed.';
+      // Shown in the alert, and the disabled button carries it as its
+      // accessible description.
+      expect(await screen.findAllByText(reason)).not.toHaveLength(0);
       await waitFor(() =>
         expect(screen.getByRole('button', { name: 'Add role' })).toBeDisabled(),
       );
+      expect(
+        screen.getByRole('button', { name: 'Add role' }),
+      ).toHaveAccessibleDescription(reason);
     });
   });
 });

@@ -113,6 +113,7 @@ export const BulkUpload: FC<OwnProps> = (props) => {
         </Col>
         <Col xs="auto">
           <BaseButton
+            tooltip={translate('Remove')}
             variant="text-danger"
             onClick={removeFile}
             iconNode={<TrashIcon weight="bold" />}

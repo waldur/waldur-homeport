@@ -108,7 +108,11 @@ export const ProjectCredit: React.FC<ProjectCreditProps> = ({ project }) => {
                 )
               }
               actions={
-                <CreditFieldEditButton credit={creditData} name={row.key} />
+                <CreditFieldEditButton
+                  credit={creditData}
+                  name={row.key}
+                  label={row.label}
+                />
               }
             />
           ))}

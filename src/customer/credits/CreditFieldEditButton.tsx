@@ -11,11 +11,17 @@ const EditCreditFieldDialog = lazyComponent(() =>
 );
 
 export const CreditFieldEditButton = (
-  props: EditCustomerCreditProps & { disabled? },
+  props: EditCustomerCreditProps & { disabled?; label: string },
 ) => {
   const { openDialog } = useModal();
   const callback = () => {
     openDialog(EditCreditFieldDialog, { resolve: props });
   };
-  return <CompactEditButton onClick={callback} disabled={props.disabled} />;
+  return (
+    <CompactEditButton
+      onClick={callback}
+      disabled={props.disabled}
+      fieldName={props.label}
+    />
+  );
 };

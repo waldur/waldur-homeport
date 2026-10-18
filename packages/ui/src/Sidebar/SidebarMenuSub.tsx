@@ -115,6 +115,11 @@ export function SidebarMenuSubButton({
 
 /**
  * Full-bleed list separator for dividing groups within a menu or submenu list.
+ *
+ * Decorative: a `<ul>` may only hold list items, and `role="separator"` on
+ * the `<li>` took it out of that role (axe `list`). The groups it divides
+ * are already announced as one list, so the line is hidden from assistive
+ * technology instead.
  */
 export function SidebarMenuSeparator({
   className,
@@ -122,7 +127,7 @@ export function SidebarMenuSeparator({
 }: ComponentProps<'li'>) {
   return (
     <li
-      role="separator"
+      aria-hidden="true"
       className={cn('my-2 h-px bg-[var(--nav-separator)]', className)}
       {...props}
     />
@@ -139,8 +144,16 @@ export interface SidebarMenuAccordionProps {
   icon?: ReactNode;
   /** Header title text or element. */
   title: ReactNode;
-  /** Trailing badge or interactive widget rendered before the accordion caret. */
+  /** Trailing badge rendered before the accordion caret, inside the trigger. Not interactive. */
   badge?: ReactNode;
+  /**
+   * An interactive control shown in the header row, before the caret (a
+   * filter button, say). It is laid over the trigger rather than put inside
+   * it, because a button inside a button is invalid and screen readers
+   * flatten it into the trigger's name (axe `nested-interactive`). It
+   * should fit in a 24px square.
+   */
+  action?: ReactNode;
   /** Whether the accordion header is disabled. */
   disabled?: boolean;
   /** Explanatory tooltip shown when `disabled` is true. */
@@ -162,6 +175,7 @@ export function SidebarMenuAccordion({
   icon,
   title,
   badge,
+  action,
   disabled = false,
   disabledTooltip,
   open,
@@ -212,6 +226,15 @@ export function SidebarMenuAccordion({
         <span className="group-data-[collapsible=icon]/panel:hidden">
           {badge}
         </span>
+      )}
+      {action != null && !disabled && (
+        // Keeps the action's place in the row; the action itself is laid
+        // over it, outside the trigger. A disabled header renders no action,
+        // so it keeps no gap for one either.
+        <span
+          aria-hidden="true"
+          className="size-6 shrink-0 group-data-[collapsible=icon]/panel:hidden"
+        />
       )}
       {!disabled && (
         <CaretDownIcon
@@ -279,19 +302,31 @@ export function SidebarMenuAccordion({
             : 'data-[state=open]:overflow-hidden data-[state=open]:rounded-lg',
         )}
       >
-        <Collapsible.Trigger
-          aria-label={typeof title === 'string' ? title : undefined}
-          className={cn(
-            sidebarMenuButtonVariants({ active: false }),
-            'group',
-            isSub && 'rounded-none',
+        {/* The header row: the trigger, plus the action laid over it. Hover
+            is taken from this wrapper so the row stays highlighted while
+            the pointer is on the action, which is not inside the trigger. */}
+        <div className="group/header relative">
+          <Collapsible.Trigger
+            aria-label={typeof title === 'string' ? title : undefined}
+            className={cn(
+              sidebarMenuButtonVariants({ active: false }),
+              'group group-hover/header:bg-[var(--nav-item-hover-bg)]',
+              isSub && 'rounded-none',
+            )}
+            style={
+              extraIndentPx ? { paddingLeft: 12 + extraIndentPx } : undefined
+            }
+          >
+            {headerContent}
+          </Collapsible.Trigger>
+          {action != null && (
+            // Sits over the placeholder kept in the trigger: the trigger's
+            // right padding (12px), the caret (17px) and the row's gap-3.
+            <div className="absolute top-0 right-[calc(12px+17px+0.75rem)] flex h-10 w-6 items-center justify-center group-data-[collapsible=icon]/panel:hidden">
+              {action}
+            </div>
           )}
-          style={
-            extraIndentPx ? { paddingLeft: 12 + extraIndentPx } : undefined
-          }
-        >
-          {headerContent}
-        </Collapsible.Trigger>
+        </div>
         <Collapsible.Content
           ref={contentRef}
           data-waldur-animated=""

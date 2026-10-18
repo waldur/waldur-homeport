@@ -57,7 +57,9 @@ describe('MatrixAdminSettingsTab', () => {
     ).toBeInTheDocument();
     DEPLOYMENT_KEYS.forEach((key) => {
       expect(editButton(key)).toBeDisabled();
-      expect(editButton(key)).toHaveAccessibleName(REASON);
+      // Still named for what it edits; the reason is its description.
+      expect(editButton(key)).toHaveAccessibleName(`Edit ${getKeyTitle(key)}`);
+      expect(editButton(key)).toHaveAccessibleDescription(REASON);
     });
   });
 

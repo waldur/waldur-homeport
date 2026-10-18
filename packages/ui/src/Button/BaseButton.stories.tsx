@@ -77,6 +77,8 @@ const meta: Meta<typeof BaseButton> = {
   title: 'Actions/BaseButton',
   component: BaseButton,
   parameters: {
+    // Fails the storybook test run on any axe violation.
+    a11y: { test: 'error' },
     docs: {
       description: {
         component:
@@ -168,7 +170,9 @@ const StateGrid = ({
     <table className="border-collapse">
       <thead>
         <tr>
-          <th className="w-28" />
+          <th className="w-28">
+            <span className="sr-only">State</span>
+          </th>
           {variants.map((variant) => (
             <th
               key={variant}
@@ -320,7 +324,9 @@ const IconOnlyGrid = ({ size }: { size: ButtonSize }) => (
     <table className="border-collapse">
       <thead>
         <tr>
-          <th className="w-28" />
+          <th className="w-28">
+            <span className="sr-only">State</span>
+          </th>
           {ICON_ONLY_STATES.map((state) => (
             <th
               key={state}
@@ -418,7 +424,9 @@ const SizeGrid = () => (
     <table className="border-collapse">
       <thead>
         <tr>
-          <th className="w-32" />
+          <th className="w-32">
+            <span className="sr-only">Content</span>
+          </th>
           {SIZES.map((size) => (
             <th
               key={size}

@@ -189,7 +189,12 @@ const IdentityManagerSettings: FC<{ user: User }> = ({ user }) => {
         <FormTable.Item
           label={translate('Managed ISDs')}
           value={<IsdBadges isds={managedIsds} />}
-          actions={<CompactEditButton onClick={openEditIsdsDialog} />}
+          actions={
+            <CompactEditButton
+              onClick={openEditIsdsDialog}
+              fieldName={translate('Managed ISDs')}
+            />
+          }
         />
       )}
     </FormTable>

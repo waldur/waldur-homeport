@@ -251,6 +251,7 @@ export default tseslint
         'waldur-custom/no-bootstrap-css-vars': 'error',
         'waldur-custom/no-interactive-in-tab-trigger': 'error',
         'waldur-custom/check-needs-accessible-name': 'error',
+        'waldur-custom/icon-button-needs-accessible-name': 'error',
         // Existing call sites are migrated to HelpIcon incrementally; promote to
         // 'error' once the count is zero.
         'waldur-custom/no-tooltip-on-bare-icon': 'warn',

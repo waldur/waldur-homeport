@@ -61,6 +61,7 @@ const SortableField = ({ name, index, onRemove, disabled }) => {
       </td>
       <td width={60}>
         <BaseButton
+          tooltip={translate('Remove')}
           onClick={onRemove}
           iconNode={<TrashIcon weight="bold" />}
           variant="text-danger"

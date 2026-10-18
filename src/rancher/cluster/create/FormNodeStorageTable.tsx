@@ -136,6 +136,7 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
       {props.onDeleteRow && (
         <td className="w-60px">
           <BaseButton
+            tooltip={translate('Remove')}
             variant="text-danger"
             onClick={props.onDeleteRow}
             iconNode={<XIcon weight="bold" />}

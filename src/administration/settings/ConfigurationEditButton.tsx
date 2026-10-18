@@ -13,10 +13,12 @@ const ConfigurationEditDialog = lazyComponent(() =>
 export const ConfigurationEditButton = ({
   item,
   value,
+  tooltip,
   disabledReason,
 }: {
   item: any;
   value: any;
+  tooltip: string;
   disabledReason?: string;
 }) => {
   const { openDialog } = useModal();
@@ -35,6 +37,7 @@ export const ConfigurationEditButton = ({
   return (
     <CompactEditButton
       onClick={openFormDialog}
+      tooltip={tooltip}
       disabled={Boolean(disabledReason)}
       disabledReason={disabledReason}
     />

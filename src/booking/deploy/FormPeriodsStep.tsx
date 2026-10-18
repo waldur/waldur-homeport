@@ -75,6 +75,7 @@ const renderScheduleRows = ({
               )}
             </label>
             <BaseButton
+              tooltip={translate('Remove period')}
               variant="text-danger"
               onClick={() => fields.remove(index)}
               iconNode={<XIcon weight="bold" />}

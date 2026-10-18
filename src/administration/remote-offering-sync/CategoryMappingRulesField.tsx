@@ -110,6 +110,7 @@ const FieldsListGroup = ({
                     </td>
                     <td>
                       <BaseButton
+                        tooltip={translate('Remove')}
                         variant="text-danger"
                         onClick={() => removeRow(i)}
                         disabled={fields.length < 2}

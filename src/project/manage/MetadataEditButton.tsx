@@ -35,5 +35,11 @@ export const MetadataEditButton = ({
     });
   }, [project, question]);
 
-  return <CompactEditButton onClick={callback} variant="secondary" />;
+  return (
+    <CompactEditButton
+      onClick={callback}
+      variant="secondary"
+      fieldName={question.description}
+    />
+  );
 };

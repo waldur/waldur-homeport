@@ -728,7 +728,7 @@ check control, a select option). The lint rule
 Use tooltips for:
 
 - **Disabled buttons**: Explain why disabled (required)
-- **Icon-only buttons**: Always provide tooltip describing the action (required)
+- **Icon-only buttons**: Always provide tooltip describing the action (required). `BaseButton` turns a string `tooltip` into the button's `aria-label`; where a visible tooltip is wrong (a menu trigger, say), pass `aria-label` instead. The lint rule `waldur-custom/icon-button-needs-accessible-name` reports an icon-only `BaseButton` or a `CompactEditButton` with neither
 - **Truncated text**: Show full text
 - **Icons without labels**: Describe the element's purpose
 - **Complex terms**: Provide definitions

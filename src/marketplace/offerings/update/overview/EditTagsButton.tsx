@@ -2,6 +2,7 @@ import { ProviderOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
+import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
 const EditTagsDialog = lazyComponent(() =>
@@ -23,5 +24,11 @@ export const EditTagsButton = ({ offering, refetch }: EditTagsButtonProps) => {
       size: 'lg',
     });
   };
-  return <CompactEditButton onClick={callback} variant="secondary" />;
+  return (
+    <CompactEditButton
+      onClick={callback}
+      variant="secondary"
+      fieldName={translate('Tags')}
+    />
+  );
 };

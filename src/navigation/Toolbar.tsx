@@ -2,6 +2,7 @@ import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { debounce } from 'lodash-es';
 import {
   FunctionComponent,
+  MutableRefObject,
   useCallback,
   useLayoutEffect,
   useRef,
@@ -18,22 +19,44 @@ interface OwnProps {
   actions?: React.ReactNode;
 }
 
-const TabsScrollArrows: FunctionComponent = () => (
-  <>
-    <BaseButton
-      variant="tertiary-ghost"
-      size="sm"
-      className="px-2 top-0 start-0 position-absolute h-full"
-      iconNode={<CaretLeftIcon weight="bold" />}
-    />
-    <BaseButton
-      variant="tertiary-ghost"
-      size="sm"
-      className="px-2 top-0 end-0 position-absolute h-full"
-      iconNode={<CaretRightIcon weight="bold" />}
-    />
-  </>
-);
+/**
+ * Scrolls the tab row by most of its visible width. The arrows are named
+ * buttons so a pointer, a keyboard or a screen reader can use them; a
+ * keyboard user can also just Tab through the links, which the browser
+ * scrolls into view.
+ */
+const TabsScrollArrows: FunctionComponent<{
+  scrollRef: MutableRefObject<HTMLDivElement>;
+}> = ({ scrollRef }) => {
+  const scrollBy = (direction: -1 | 1) => {
+    const node = scrollRef.current;
+    if (!node) return;
+    node.scrollBy({
+      left: direction * Math.max(node.clientWidth * 0.8, 100),
+      behavior: 'smooth',
+    });
+  };
+  return (
+    <>
+      <BaseButton
+        variant="tertiary-ghost"
+        size="sm"
+        className="px-2 top-0 start-0 position-absolute h-full"
+        iconNode={<CaretLeftIcon weight="bold" />}
+        aria-label={translate('Scroll tabs left')}
+        onClick={() => scrollBy(-1)}
+      />
+      <BaseButton
+        variant="tertiary-ghost"
+        size="sm"
+        className="px-2 top-0 end-0 position-absolute h-full"
+        iconNode={<CaretRightIcon weight="bold" />}
+        aria-label={translate('Scroll tabs right')}
+        onClick={() => scrollBy(1)}
+      />
+    </>
+  );
+};
 
 export const Toolbar: FunctionComponent<OwnProps> = ({ actions }) => {
   const tabsScrollRef = useRef<HTMLDivElement>();
@@ -64,7 +87,7 @@ export const Toolbar: FunctionComponent<OwnProps> = ({ actions }) => {
   return (
     <div className="toolbar">
       <div className="container-fluid flex flex-stack">
-        {showScrollArrows && <TabsScrollArrows />}
+        {showScrollArrows && <TabsScrollArrows scrollRef={tabsScrollRef} />}
         <div ref={tabsScrollRef} className="flex items-stretch overflow-auto">
           <nav ref={tabsWrapperRef} aria-label={translate('Page tabs')}>
             <ul className="m-0 flex w-full list-none items-stretch gap-[8px] p-0 text-sm font-semibold my-5 my-lg-0">

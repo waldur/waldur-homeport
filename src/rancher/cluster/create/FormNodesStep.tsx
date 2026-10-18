@@ -156,6 +156,7 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                         </td>
                         <td>
                           <BaseButton
+                            tooltip={translate('Remove')}
                             variant="text-danger"
                             onClick={() => fields.remove(index)}
                             iconNode={<XIcon weight="bold" />}

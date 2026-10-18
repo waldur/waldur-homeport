@@ -87,6 +87,74 @@ describe('TableBody', () => {
     expect(expandedCell).toHaveAttribute('colspan', String(COLUMNS.length));
   });
 
+  describe('expander', () => {
+    const StatefulTable = (props) => {
+      const [toggled, setToggled] = useState({});
+      return (
+        <table>
+          <TableBody
+            columns={COLUMNS}
+            rows={ROWS}
+            expandableRow={expandableRow}
+            toggled={toggled}
+            toggleRow={(id) =>
+              setToggled((prev) => ({ ...prev, [id]: !prev[id] }))
+            }
+            {...props}
+          />
+        </table>
+      );
+    };
+
+    it('is a button named after the row that reports its state', () => {
+      renderWrapper({ expandableRow, toggled: {} });
+      const button = screen.getByRole('button', {
+        name: 'Expand OpenStack Instance',
+      });
+      expect(button).toBe(screen.getByTestId('row-expander'));
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+      expect(button).not.toHaveAttribute('aria-controls');
+    });
+
+    it('opens and closes the row from the keyboard', async () => {
+      const user = userEvent.setup();
+      render(<StatefulTable />);
+
+      await user.tab();
+      const button = screen.getByRole('button', {
+        name: 'Expand OpenStack Instance',
+      });
+      expect(button).toHaveFocus();
+
+      await user.keyboard('{Enter}');
+      expect(screen.getByText('Detailed info')).toBeInTheDocument();
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+      expect(button).toHaveAccessibleName('Collapse OpenStack Instance');
+      expect(button).toHaveAttribute(
+        'aria-controls',
+        screen.getByTestId('expanded-row-cell').id,
+      );
+
+      await user.keyboard(' ');
+      expect(screen.queryByText('Detailed info')).not.toBeInTheDocument();
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    it('still toggles when the row itself is clicked', async () => {
+      const user = userEvent.setup();
+      render(<StatefulTable />);
+
+      await user.click(screen.getByText('Web server'));
+      expect(screen.getByText('Detailed info')).toBeInTheDocument();
+
+      // A click on the button toggles once, not twice (row + button).
+      await user.click(
+        screen.getByRole('button', { name: 'Collapse OpenStack Instance' }),
+      );
+      expect(screen.queryByText('Detailed info')).not.toBeInTheDocument();
+    });
+  });
+
   it('should show expander when first column is hidden', () => {
     const columnsWithHiddenFirst = [
       {

@@ -79,6 +79,7 @@ export const OfferingBookingResourcesCalendarContainer: FunctionComponent<
             <LoadingSpinner />
           ) : (
             <BaseButton
+              tooltip={translate('Refresh')}
               variant="text-secondary"
               onClick={() => refetch()}
               iconNode={<ArrowsClockwiseIcon weight="bold" />}

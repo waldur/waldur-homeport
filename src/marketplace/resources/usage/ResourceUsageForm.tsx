@@ -382,6 +382,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                     <div className="position-relative inline-flex">
                       <Menu.Trigger asChild>
                         <BaseButton
+                          aria-label={translate('More actions')}
                           variant="text-secondary"
                           size="md"
                           iconNode={<DotsThreeIcon size={22} weight="bold" />}

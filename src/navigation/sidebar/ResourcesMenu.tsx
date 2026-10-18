@@ -211,7 +211,7 @@ export const ResourcesMenu = ({
       id="resources-menu"
       title={translate('Resources')}
       icon={<SquaresFourIcon weight="bold" />}
-      badge={<ResourcesMenuFilterButton />}
+      action={<ResourcesMenuFilterButton />}
       disabled={disabled}
       disabledTooltip={disabledTooltip}
       open={open}
