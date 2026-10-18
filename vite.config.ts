@@ -35,6 +35,11 @@ export default defineConfig({
     },
   },
   server: {
+    watch: {
+      // Agent worktrees are full checkouts (node_modules, .yarn cache);
+      // watching them exhausts the inotify limit (ENOSPC).
+      ignored: ['**/.claude/worktrees/**'],
+    },
     proxy: {
       '/api': {
         target:
