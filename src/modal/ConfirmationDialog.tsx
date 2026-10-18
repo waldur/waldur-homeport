@@ -1,10 +1,10 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, { ReactNode, useState } from 'react';
-import { Form } from 'react-bootstrap';
 
-import { ButtonVariant, BaseButton } from 'waldur-ui';
+import { BaseButton, ButtonVariant, FormField, FormLabel } from 'waldur-ui';
 
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -125,19 +125,16 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       <div>
         {body}
         {showInput && (
-          <div className="mt-3">
-            <Form.Label>
-              {inputLabel}
-              {inputRequired && <span className="text-danger"> *</span>}
-            </Form.Label>
-            <Form.Control
+          <FormField className="mt-3">
+            <FormLabel required={inputRequired}>{inputLabel}</FormLabel>
+            <BaseInputField
               type="text"
               placeholder={inputPlaceholder}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               required={inputRequired}
             />
-          </div>
+          </FormField>
         )}
         {showRouterSelect && (
           <RouterSelector

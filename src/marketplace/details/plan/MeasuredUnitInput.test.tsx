@@ -40,14 +40,17 @@ const renderInput = (props = {}) =>
 describe('MeasuredUnitInput', () => {
   it('does not show an error before the value is changed', () => {
     renderInput();
-    expect(screen.getByRole('spinbutton')).not.toHaveClass('is-invalid');
+    expect(screen.getByRole('spinbutton')).not.toHaveAttribute(
+      'aria-invalid',
+      'true',
+    );
   });
 
   it('shows the limit error once an out-of-range value is entered', async () => {
     renderInput();
     const input = screen.getByRole('spinbutton');
     await userEvent.type(input, '10');
-    expect(input).toHaveClass('is-invalid');
+    expect(input).toHaveAttribute('aria-invalid', 'true');
     expect(screen.getByText(/1000/)).toBeInTheDocument();
   });
 
@@ -56,7 +59,7 @@ describe('MeasuredUnitInput', () => {
     const input = screen.getByRole('spinbutton');
     await userEvent.type(input, '10');
     await userEvent.type(input, '00');
-    expect(input).not.toHaveClass('is-invalid');
+    expect(input).not.toHaveAttribute('aria-invalid', 'true');
   });
 
   it('describes the input with the unit only while it is valid', () => {

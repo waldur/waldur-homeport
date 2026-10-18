@@ -17,7 +17,6 @@ export const CreatableSelectField: FunctionComponent<
       {...rest}
       {...input}
       id={undefined}
-      inputId={input.name}
       value={
         (simpleValue || typeof input.value !== 'object') && options
           ? props.isMulti

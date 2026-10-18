@@ -1,12 +1,11 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import {
   EligibleProject,
   matrixRoomsCreate,
   matrixRoomsEligibleProjectsList,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, FormField, FormLabel } from 'waldur-ui';
 
 import { SubmitButton } from '@/form';
 import { AsyncSelect } from '@/form/select';
@@ -126,8 +125,8 @@ export const AdminCreateMatrixRoomDialog: FC<
         )}
       </p>
       {error && <AlertItem type="floating" variant="error" title={error} />}
-      <Form.Group className="mb-4">
-        <Form.Label>{translate('Organization')}</Form.Label>
+      <FormField className="mb-4">
+        <FormLabel>{translate('Organization')}</FormLabel>
         <AsyncSelect
           placeholder={translate('Select organization...')}
           noOptionsMessage={() => translate('No organizations found')}
@@ -138,9 +137,9 @@ export const AdminCreateMatrixRoomDialog: FC<
           getOptionLabel={(option) => option.name}
           isClearable
         />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>{translate('Project')}</Form.Label>
+      </FormField>
+      <FormField>
+        <FormLabel>{translate('Project')}</FormLabel>
         <AsyncSelect
           key={customer?.uuid}
           placeholder={
@@ -159,7 +158,7 @@ export const AdminCreateMatrixRoomDialog: FC<
           isDisabled={!customer}
           isClearable
         />
-      </Form.Group>
+      </FormField>
     </ModalDialog>
   );
 };

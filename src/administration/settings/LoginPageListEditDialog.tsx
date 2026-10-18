@@ -1,10 +1,11 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
 import { overrideSettings } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField, FormLabel, NativeSelect } from 'waldur-ui';
 
+import { BaseInputField } from '@/form/InputField';
+import { BaseTextField } from '@/form/TextField';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -56,15 +57,17 @@ const StatsEditor: FC<{
     <div>
       {items.map((item, index) => (
         <div key={index} className="mb-3">
-          <InputGroup>
-            <Form.Control
-              className="form-control"
+          <div className="flex gap-2">
+            <BaseInputField
+              containerClassName="flex-1"
+
               value={item.value}
               onChange={(e) => updateItem(index, 'value', e.target.value)}
               placeholder={translate('Value (e.g., 10K+)')}
             />
-            <Form.Control
-              className="form-control"
+            <BaseInputField
+              containerClassName="flex-1"
+
               value={item.label}
               onChange={(e) => updateItem(index, 'label', e.target.value)}
               placeholder={translate('Label (e.g., Active Users)')}
@@ -73,7 +76,7 @@ const StatsEditor: FC<{
               action={() => removeItem(index)}
               tooltip={translate('Remove')}
             />
-          </InputGroup>
+          </div>
         </div>
       ))}
       <BaseButton
@@ -109,13 +112,14 @@ const CarouselSlidesEditor: FC<{
     <div>
       {items.map((item, index) => (
         <div key={index} className="mb-3">
-          <Form.Group className="mb-2">
-            <Form.Label className="text-xs text-quaternary mb-1">
+          <FormField className="mb-2">
+            <FormLabel className="text-xs text-quaternary mb-1">
               {translate('Title')}
-            </Form.Label>
-            <InputGroup>
-              <Form.Control
-                className="form-control"
+            </FormLabel>
+            <div className="flex gap-2">
+              <BaseInputField
+                containerClassName="flex-1"
+
                 value={item.title}
                 onChange={(e) => updateItem(index, 'title', e.target.value)}
                 placeholder={translate('e.g., Welcome to Our Platform')}
@@ -124,19 +128,20 @@ const CarouselSlidesEditor: FC<{
                 action={() => removeItem(index)}
                 tooltip={translate('Remove')}
               />
-            </InputGroup>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label className="text-xs text-quaternary mb-1">
+            </div>
+          </FormField>
+          <FormField>
+            <FormLabel className="text-xs text-quaternary mb-1">
               {translate('Subtitle')}
-            </Form.Label>
-            <Form.Control
-              className="form-control"
+            </FormLabel>
+            <BaseInputField
+              containerClassName="flex-1"
+
               value={item.subtitle}
               onChange={(e) => updateItem(index, 'subtitle', e.target.value)}
               placeholder={translate('e.g., Get started with cloud resources')}
             />
-          </Form.Group>
+          </FormField>
           {index < items.length - 1 && <hr className="my-4" />}
         </div>
       ))}
@@ -173,13 +178,14 @@ const NewsItemsEditor: FC<{
     <div>
       {items.map((item, index) => (
         <div key={index} className="mb-3">
-          <Form.Group className="mb-2">
-            <Form.Label className="text-xs text-quaternary mb-1">
+          <FormField className="mb-2">
+            <FormLabel className="text-xs text-quaternary mb-1">
               {translate('Title')}
-            </Form.Label>
-            <InputGroup>
-              <Form.Control
-                className="form-control"
+            </FormLabel>
+            <div className="flex gap-2">
+              <BaseInputField
+                containerClassName="flex-1"
+
                 value={item.title}
                 onChange={(e) => updateItem(index, 'title', e.target.value)}
                 placeholder={translate('e.g., New Feature Released')}
@@ -188,26 +194,26 @@ const NewsItemsEditor: FC<{
                 action={() => removeItem(index)}
                 tooltip={translate('Remove')}
               />
-            </InputGroup>
-          </Form.Group>
+            </div>
+          </FormField>
           <div className="flex gap-2 mb-2">
-            <Form.Group style={{ width: '120px' }}>
-              <Form.Label className="text-xs text-quaternary mb-1">
+            <FormField style={{ width: '120px' }}>
+              <FormLabel className="text-xs text-quaternary mb-1">
                 {translate('Date')}
-              </Form.Label>
-              <Form.Control
-                className="form-control"
+              </FormLabel>
+              <BaseInputField
+                containerClassName="flex-1"
+
                 value={item.date}
                 onChange={(e) => updateItem(index, 'date', e.target.value)}
                 placeholder={translate('e.g., Jan 2025')}
               />
-            </Form.Group>
-            <Form.Group style={{ width: '140px' }}>
-              <Form.Label className="text-xs text-quaternary mb-1">
+            </FormField>
+            <FormField style={{ width: '140px' }}>
+              <FormLabel className="text-xs text-quaternary mb-1">
                 {translate('Tag')}
-              </Form.Label>
-              <Form.Select
-                className="form-select"
+              </FormLabel>
+              <NativeSelect
                 value={item.tag}
                 onChange={(e) => updateItem(index, 'tag', e.target.value)}
               >
@@ -216,22 +222,21 @@ const NewsItemsEditor: FC<{
                     {tag}
                   </option>
                 ))}
-              </Form.Select>
-            </Form.Group>
+              </NativeSelect>
+            </FormField>
           </div>
-          <Form.Group>
-            <Form.Label className="text-xs text-quaternary mb-1">
+          <FormField>
+            <FormLabel className="text-xs text-quaternary mb-1">
               {translate('Description')}
-            </Form.Label>
-            <Form.Control
-              as="textarea"
+            </FormLabel>
+            <BaseTextField
               rows={2}
-              className="form-control"
+
               value={item.description}
               onChange={(e) => updateItem(index, 'description', e.target.value)}
               placeholder={translate('Brief description of the news item...')}
             />
-          </Form.Group>
+          </FormField>
           {index < items.length - 1 && <hr className="my-4" />}
         </div>
       ))}

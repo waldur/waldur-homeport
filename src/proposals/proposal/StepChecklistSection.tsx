@@ -6,7 +6,7 @@ import {
   proposalProposalsSubmitStepChecklistAnswers,
 } from 'waldur-js-client';
 
-import { AccordionCard } from 'waldur-ui';
+import { AccordionCard, FormText } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -246,9 +246,9 @@ export const StepChecklistSection: FC<StepChecklistSectionProps> = ({
                       />
                     )}
                     {question.user_guidance && (
-                      <div className="form-text text-quaternary">
+                      <FormText as="div" variant="muted">
                         {question.user_guidance}
-                      </div>
+                      </FormText>
                     )}
                   </FormGroup>
                 );

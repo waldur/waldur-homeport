@@ -312,55 +312,53 @@ export const RuleTestMatchDialog: FC<RuleTestMatchDialogProps> = ({
               </>
             }
           >
-            <div>
-              <label className="form-label">{translate('Target user')}</label>
-              <AsyncSelectGroup
-                name="user"
-                validate={required}
-                onChange={() => {
-                  mutation.reset();
-                }}
-                loadOptions={userAutocomplete}
-                defaultOptions
-                placeholder={translate('Search by name, email or username...')}
-                isClearable
-                getOptionLabel={(opt) =>
-                  (opt as UserOption).full_name ||
-                  (opt as UserOption).email ||
-                  (opt as UserOption).username ||
-                  ''
-                }
-                getOptionValue={(opt) => (opt as UserOption).uuid}
-              />
+            <AsyncSelectGroup
+              label={translate('Target user')}
+              name="user"
+              validate={required}
+              onChange={() => {
+                mutation.reset();
+              }}
+              loadOptions={userAutocomplete}
+              defaultOptions
+              placeholder={translate('Search by name, email or username...')}
+              isClearable
+              getOptionLabel={(opt) =>
+                (opt as UserOption).full_name ||
+                (opt as UserOption).email ||
+                (opt as UserOption).username ||
+                ''
+              }
+              getOptionValue={(opt) => (opt as UserOption).uuid}
+            />
 
-              {resolve.rule.use_user_organization_as_customer_name &&
-                protectedMethods.length === 0 && (
-                  <AlertItem
-                    variant="warning"
-                    type="floating"
-                    title={translate('Warning')}
-                    body={translate(
-                      'This rule resolves the organization from the user IdP claim, but no protected registration methods are configured. No user will currently pass the protection check.',
-                    )}
-                    className="mt-3"
-                  />
-                )}
-
-              {mutation.error && (
+            {resolve.rule.use_user_organization_as_customer_name &&
+              protectedMethods.length === 0 && (
                 <AlertItem
-                  variant="error"
+                  variant="warning"
                   type="floating"
-                  title={translate('Test failed: {error}', {
-                    error:
-                      (mutation.error as Error).message ||
-                      translate('Unknown error'),
-                  })}
+                  title={translate('Warning')}
+                  body={translate(
+                    'This rule resolves the organization from the user IdP claim, but no protected registration methods are configured. No user will currently pass the protection check.',
+                  )}
                   className="mt-3"
                 />
               )}
 
-              {mutation.data && <ResultPanel result={mutation.data} />}
-            </div>
+            {mutation.error && (
+              <AlertItem
+                variant="error"
+                type="floating"
+                title={translate('Test failed: {error}', {
+                  error:
+                    (mutation.error as Error).message ||
+                    translate('Unknown error'),
+                })}
+                className="mt-3"
+              />
+            )}
+
+            {mutation.data && <ResultPanel result={mutation.data} />}
           </ModalDialog>
         </form>
       )}

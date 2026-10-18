@@ -7,17 +7,24 @@ import {
 } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useCallback } from 'react';
-import { Col, Form, InputGroup, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
-import { BaseButton, HelpIcon, Tooltip } from 'waldur-ui';
+import {
+  BaseButton,
+  FormField,
+  FormLabel,
+  HelpIcon,
+  NativeSelect,
+  RangeInput,
+  Tooltip,
+} from 'waldur-ui';
 
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { SimulationParam, SimulationResult } from './types';
 import { formatSimulationChange, useSimulation } from './useSimulation';
-
-import './range.css';
 
 interface WhatIfSimulatorProps {
   /** Configuration of adjustable parameters */
@@ -56,8 +63,8 @@ const ParamInput: FC<{
 
   if (param.type === 'select' && param.options) {
     return (
-      <Form.Select
-        className="w-50"
+      <NativeSelect
+        containerClassName="w-50"
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >
@@ -66,26 +73,23 @@ const ParamInput: FC<{
             {opt.label}
           </option>
         ))}
-      </Form.Select>
+      </NativeSelect>
     );
   }
 
   if (param.type === 'slider') {
     const min = param.min ?? 0;
     const max = param.max ?? 100;
-    const percentage = ((numValue - min) / (max - min)) * 100;
 
     return (
       <div className="flex items-center gap-3">
-        <Form.Range
+        <RangeInput
           value={numValue}
           min={min}
           max={max}
           step={step}
           onChange={(e) => handleChange(parseFloat(e.target.value))}
-          className="grow custom-filled-range"
-          // @ts-ignore
-          style={{ '--range-progress': `${percentage}%` }}
+          className="flex-1"
         />
         <span className="text-nowrap" style={{ minWidth: '60px' }}>
           {numValue}
@@ -102,7 +106,7 @@ const ParamInput: FC<{
   const isAtMax = param.max !== undefined && numValue >= param.max;
 
   return (
-    <InputGroup size="sm">
+    <div className="flex items-center gap-1">
       <BaseButton
         size="sm"
         variant="tertiary"
@@ -115,15 +119,16 @@ const ParamInput: FC<{
         }
         iconNode={<CaretDownIcon weight="bold" />}
       />
-      <Form.Control
+      <BaseInputField
         type="number"
+        size="sm"
         value={numValue}
         min={param.min}
         max={param.max}
         step={step}
         onChange={(e) => handleChange(parseFloat(e.target.value) || 0)}
         className="text-center"
-        style={{ maxWidth: '100px' }}
+        containerClassName="max-w-[100px]"
       />
       <BaseButton
         size="sm"
@@ -137,8 +142,8 @@ const ParamInput: FC<{
         }
         iconNode={<CaretUpIcon weight="bold" />}
       />
-      {param.unit && <InputGroup.Text>{param.unit}</InputGroup.Text>}
-    </InputGroup>
+      {param.unit && <span className="text-quaternary">{param.unit}</span>}
+    </div>
   );
 };
 
@@ -225,9 +230,9 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
         <Col>
           {/* Parameter inputs */}
           {params.map((param) => (
-            <div key={param.id} className="mb-3">
+            <FormField key={param.id} className="mb-3">
               <div className="flex items-center gap-2 mb-2">
-                <Form.Label className="mb-0">{param.label}</Form.Label>
+                <FormLabel className="mb-0">{param.label}</FormLabel>
                 {param.description && <HelpIcon label={param.description} />}
               </div>
               <ParamInput
@@ -235,7 +240,7 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
                 value={paramValues[param.id]}
                 onChange={(value) => setParam(param.id, value)}
               />
-            </div>
+            </FormField>
           ))}
         </Col>
         <Col>

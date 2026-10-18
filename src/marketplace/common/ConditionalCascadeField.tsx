@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
+import { FormText } from 'waldur-ui';
+
 import { FormGroup } from '@/form';
 import { Select } from '@/form/select';
 import { FormField } from '@/form/types';
@@ -93,7 +95,9 @@ export const ConditionalCascadeField = ({
   return (
     <div className="conditional-cascade">
       {tooltip && (
-        <div className="form-text text-quaternary mb-3">{tooltip}</div>
+        <FormText as="div" variant="muted" className="mb-3">
+          {tooltip}
+        </FormText>
       )}
       {steps.map((step) => {
         const isEnabled = isStepEnabled(step);

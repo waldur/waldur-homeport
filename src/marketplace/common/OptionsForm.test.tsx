@@ -616,7 +616,7 @@ describe('OptionsForm Integration', () => {
       });
 
       const label = screen.getByText('Mandatory String');
-      expect(label).toHaveClass('required');
+      expect(label).toHaveClass("after:content-['*']");
 
       const input = screen.getByRole('textbox');
       // Touch and leave the field to trigger react-final-form validation

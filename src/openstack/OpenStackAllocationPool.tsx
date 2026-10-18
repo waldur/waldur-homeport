@@ -6,7 +6,7 @@ export const OpenStackAllocationPool = () => {
   const subnetCidr = formData?.attributes?.subnet_cidr || '';
   const { start, end } = getDefaultAllocationPool(subnetCidr);
   return (
-    <div className="form-control-static">
+    <div className="py-[10px] text-secondary">
       {start && end ? `${start} - ${end}` : '-'}
     </div>
   );

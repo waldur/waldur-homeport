@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import { FunctionComponent, ReactNode } from 'react';
-import { Form } from 'react-bootstrap';
 
-import { HelpIcon } from 'waldur-ui';
+import { FormField, FormLabel, FormText, HelpIcon } from 'waldur-ui';
+
+import { BaseInputField } from './InputField';
 
 export interface ReadOnlyChildProps {
   input: {
@@ -65,19 +66,18 @@ export const ReadOnlyFormControl: FunctionComponent<
   };
   const labelNode = tooltip ? (
     <div className="flex justify-between grow">
-      <Form.Label className={inline ? 'mb-0' : undefined}>{label}</Form.Label>
+      <FormLabel className={inline ? 'mb-0' : undefined}>{label}</FormLabel>
       <HelpIcon label={tooltip} side="left" size={20} />
     </div>
   ) : (
-    <Form.Label className={inline ? 'mb-0' : undefined}>{label}</Form.Label>
+    <FormLabel className={inline ? 'mb-0' : undefined}>{label}</FormLabel>
   );
 
   const main = (
-    <div
+    <FormField
       className={classNames(
         !spaceless && 'mb-7',
         className,
-        addon && 'form-addon',
         Boolean(actions) && 'grow',
         inline && 'flex items-center',
       )}
@@ -93,19 +93,21 @@ export const ReadOnlyFormControl: FunctionComponent<
         // Controlled, not `defaultValue`: a read-only field whose value is
         // derived (a project duration, a computed total) must follow the
         // prop when it resolves, not keep whatever the first render held.
-        <Form.Control
+        <BaseInputField
           readOnly
           plaintext={plaintext}
-          className={classNames(!plaintext && 'form-control-solid')}
+          solid={!plaintext}
           value={value ?? ''}
           disabled={disabled}
+          end={addon}
         />
       )}
       {description && (
-        <Form.Text className="mb-0 text-quaternary">{description}</Form.Text>
+        <FormText variant="muted" className="mb-0">
+          {description}
+        </FormText>
       )}
-      {addon && <span className="form-control-addon">{addon}</span>}
-    </div>
+    </FormField>
   );
 
   if (actions) {

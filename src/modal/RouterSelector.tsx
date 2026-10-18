@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
-import { Form } from 'react-bootstrap';
 import { openstackRoutersList } from 'waldur-js-client';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { createLoadOptions, AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
@@ -24,11 +25,11 @@ export const RouterSelector = ({ routerValue, setRouterValue, tenantUuid }) => {
   );
 
   return (
-    <div className="mt-3">
-      <Form.Label>
+    <FormField className="mt-3">
+      <FormLabel>
         {translate('Router')}{' '}
         <span className="text-quaternary">({translate('Optional')})</span>
-      </Form.Label>
+      </FormLabel>
       <AsyncSelect
         key={tenantUuid}
         value={routerValue}
@@ -40,6 +41,6 @@ export const RouterSelector = ({ routerValue, setRouterValue, tenantUuid }) => {
         getOptionLabel={(option) => option.name}
         getOptionValue={(option) => option.url}
       />
-    </div>
+    </FormField>
   );
 };

@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import {
   Resource,
   marketplaceResourcesList,
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
+
+import { FormField, FormLabel, FormText } from 'waldur-ui';
 
 import { SelectField } from '@/form';
 import { translate } from '@/i18n';
@@ -60,8 +61,8 @@ export const SlurmPolicyPreviewDialog: FC<SlurmPolicyPreviewDialogProps> = ({
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       {resourceOptions.length > 0 && (
-        <div className="mb-4">
-          <Form.Label>{translate('Select Resource')}</Form.Label>
+        <FormField className="mb-4">
+          <FormLabel>{translate('Select Resource')}</FormLabel>
           <SelectField
             input={{
               value: selectedResource
@@ -79,12 +80,12 @@ export const SlurmPolicyPreviewDialog: FC<SlurmPolicyPreviewDialogProps> = ({
             placeholder={translate('Use example values (no resource selected)')}
             isLoading={resourcesLoading}
           />
-          <div className="form-text">
+          <FormText as="div">
             {translate(
               'Select a resource to use its actual limits and usage for the preview.',
             )}
-          </div>
-        </div>
+          </FormText>
+        </FormField>
       )}
       <SlurmPolicyPreview
         formValues={resolve.formValues}

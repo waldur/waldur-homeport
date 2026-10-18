@@ -3,7 +3,7 @@ import { FC, useCallback, useMemo } from 'react';
 import { Field } from 'react-final-form';
 import { proposalProposalsChecklistRetrieve } from 'waldur-js-client';
 
-import { AccordionCard } from 'waldur-ui';
+import { AccordionCard, FormText } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -282,9 +282,9 @@ export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
               <Field name={fieldName} component={Component} {...fieldProps} />
             )}
             {question.user_guidance && (
-              <div className="form-text text-quaternary">
+              <FormText as="div" variant="muted">
                 {question.user_guidance}
-              </div>
+              </FormText>
             )}
           </FormGroup>
         );

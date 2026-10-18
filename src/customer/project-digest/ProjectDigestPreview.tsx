@@ -1,7 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import { ProjectDigestPreviewResponse } from 'waldur-js-client';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -58,10 +59,10 @@ export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
 
   return (
     <>
-      <div className="mb-5">
-        <Form.Label>
+      <FormField className="mb-5">
+        <FormLabel>
           {translate('Select a project to preview the digest')}
-        </Form.Label>
+        </FormLabel>
         <Select
           options={projects}
           getOptionLabel={(option) => option.name}
@@ -71,7 +72,7 @@ export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
           isClearable
           placeholder={translate('Select project...')}
         />
-      </div>
+      </FormField>
 
       {isPending && <LoadingSpinner />}
 

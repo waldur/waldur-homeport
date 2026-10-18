@@ -1,9 +1,9 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Form, Stack } from 'react-bootstrap';
+import { Stack } from 'react-bootstrap';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton, FormField } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { SelectGroup, TextGroup } from '@/form';
@@ -61,7 +61,7 @@ const FieldsListGroup = ({
 
   return (
     <>
-      <Form.Group>
+      <FormField>
         {fields.map((name, i) => (
           <div
             key={name + i}
@@ -100,7 +100,7 @@ const FieldsListGroup = ({
             />
           </div>
         ))}
-      </Form.Group>
+      </FormField>
       <div className="mt-3">
         <BaseButton
           onClick={addRow}

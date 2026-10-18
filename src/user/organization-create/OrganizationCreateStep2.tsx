@@ -1,10 +1,10 @@
 import { CheckCircleIcon, InfoIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { Form as BootstrapForm, Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField, FormLabel } from 'waldur-ui';
 
 import { ACCEPTED_FILE_TYPES } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -367,10 +367,10 @@ export const OrganizationCreateStep2: FunctionComponent<
 
               {/* Documentation Upload Section */}
               <div className="mt-8">
-                <BootstrapForm.Group>
-                  <BootstrapForm.Label className="text-sm mb-2">
+                <FormField>
+                  <FormLabel className="mb-2">
                     {translate('Optional information and supporting documents')}
-                  </BootstrapForm.Label>
+                  </FormLabel>
                   <UploadContainer
                     onDrop={handleFileDrop}
                     message={translate('JPG, PNG, PDF or .asice (max {size})', {
@@ -395,7 +395,7 @@ export const OrganizationCreateStep2: FunctionComponent<
                       'To speed up the review process, provide as much data as possible',
                     )}
                   </p>
-                </BootstrapForm.Group>
+                </FormField>
               </div>
             </div>
           )}

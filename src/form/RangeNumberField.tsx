@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
+
+import { BaseInputField } from './InputField';
 
 interface RangeNumberFieldProps {
   input: any;
@@ -27,22 +28,24 @@ export const RangeNumberField: FunctionComponent<RangeNumberFieldProps> = ({
   };
 
   return (
-    <InputGroup>
-      <Form.Control
+    <div className="flex items-center gap-2">
+      <BaseInputField
+        containerClassName="flex-1"
         type="number"
         min={min}
         placeholder={placeholder || translate('Min')}
         value={value.min ?? ''}
         onChange={(e) => handleChange('min', e.target.value)}
       />
-      <InputGroup.Text>–</InputGroup.Text>
-      <Form.Control
+      <span className="text-quaternary">–</span>
+      <BaseInputField
+        containerClassName="flex-1"
         type="number"
         min={min}
         placeholder={placeholder || translate('Max')}
         value={value.max ?? ''}
         onChange={(e) => handleChange('max', e.target.value)}
       />
-    </InputGroup>
+    </div>
   );
 };

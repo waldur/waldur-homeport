@@ -51,10 +51,6 @@
       padding-left: 1rem;
       text-align: start;
       width: 70px;
-
-      &.form-control.is-invalid {
-        background-position: right 2rem center;
-      }
     }
     // The mixin centres one button on each side of the box; here the two are
     // stacked in the right-hand margin instead, so its centring has to be

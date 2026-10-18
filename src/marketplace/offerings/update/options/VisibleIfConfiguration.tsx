@@ -115,6 +115,7 @@ export const VisibleIfConfiguration: FC<VisibleIfConfigurationProps> = ({
 
   return (
     <FormGroup
+      group
       label={translate('Show only when')}
       description={
         rule ? (
@@ -153,6 +154,7 @@ export const VisibleIfConfiguration: FC<VisibleIfConfigurationProps> = ({
                     });
                   }}
                   options={fieldChoices}
+                  aria-label={translate('Option')}
                   placeholder={translate('Select option...')}
                   isClearable={false}
                 />

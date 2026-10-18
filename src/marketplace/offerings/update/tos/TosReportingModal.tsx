@@ -1,7 +1,7 @@
 import { ChartBarIcon, TableIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
-import { Form, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import {
   marketplaceProviderOfferingsList,
   marketplaceProviderOfferingsTosStatsRetrieve,
@@ -10,6 +10,8 @@ import {
 import {
   AlertItem,
   BaseButton,
+  FormField,
+  FormLabel,
   Tabs,
   TabsContent,
   TabsList,
@@ -101,8 +103,8 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
       </Modal.Header>
       <Modal.Body>
         {providerUuid && (
-          <div className="mb-4">
-            <Form.Label>{translate('Select offering')}</Form.Label>
+          <FormField className="mb-4">
+            <FormLabel>{translate('Select offering')}</FormLabel>
             {isLoadingOfferings ? (
               <LoadingSpinner />
             ) : offeringsError ? (
@@ -122,7 +124,7 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
                 placeholder={translate('Select offering')}
               />
             )}
-          </div>
+          </FormField>
         )}
 
         {!selectedOffering && (

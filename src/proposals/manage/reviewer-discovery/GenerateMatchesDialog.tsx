@@ -9,6 +9,8 @@ import {
   proposalProtectedCallsGenerateSuggestions,
 } from 'waldur-js-client';
 
+import { RangeInput } from 'waldur-ui';
+
 import { FormGroup, StringGroup, SubmitButton, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -332,15 +334,22 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
                 </summary>
                 <div className="mt-3">
                   <FormGroup label={translate('Minimum match score (%)')}>
-                    <Field
-                      name="min_threshold"
-                      component="input"
-                      type="range"
-                      min={0}
-                      max={100}
-                      step={5}
-                      className="form-range"
-                    />
+                    <Field name="min_threshold">
+                      {({
+                        input: { name, value, onChange, onBlur, onFocus },
+                      }) => (
+                        <RangeInput
+                          name={name}
+                          value={value}
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          onFocus={onFocus}
+                          min={0}
+                          max={100}
+                          step={5}
+                        />
+                      )}
+                    </Field>
                     <div className="flex justify-between">
                       <small className="text-quaternary">0%</small>
                       <strong>{values.min_threshold || 0}%</strong>

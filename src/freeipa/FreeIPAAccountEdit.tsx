@@ -1,6 +1,8 @@
 import React from 'react';
-import { Form } from 'react-bootstrap';
 
+import { FormField, FormLabel } from 'waldur-ui';
+
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 
 interface FreeIPAAccountEditOwnProps {
@@ -8,14 +10,10 @@ interface FreeIPAAccountEditOwnProps {
 }
 
 const UsernameGroup = ({ profile }) => (
-  <div className=" mb-7">
-    <Form.Label>{translate('Username')}</Form.Label>
-    <Form.Control
-      readOnly
-      defaultValue={profile.username}
-      className="form-control-solid"
-    />
-  </div>
+  <FormField className=" mb-7">
+    <FormLabel>{translate('Username')}</FormLabel>
+    <BaseInputField readOnly defaultValue={profile.username} solid />
+  </FormField>
 );
 
 export const FreeIPAAccountEdit: React.FC<FreeIPAAccountEditOwnProps> = ({
@@ -24,13 +22,13 @@ export const FreeIPAAccountEdit: React.FC<FreeIPAAccountEditOwnProps> = ({
   return (
     <div>
       <UsernameGroup profile={profile} />
-      <Form.Group>
+      <FormField>
         <div className="pull-right">
           {profile.is_active
             ? translate('Profile is enabled.')
             : translate('Profile is disabled.')}
         </div>
-      </Form.Group>
+      </FormField>
     </div>
   );
 };

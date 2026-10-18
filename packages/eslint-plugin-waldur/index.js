@@ -17,6 +17,8 @@ import noBootstrapButtonMarkup from './rules/no-bootstrap-button-markup.js';
 import noBootstrapColorUtility from './rules/no-bootstrap-color-utility.js';
 import noBootstrapCssVars from './rules/no-bootstrap-css-vars.js';
 import noBootstrapFormCheck from './rules/no-bootstrap-form-check.js';
+import noBootstrapFormControl from './rules/no-bootstrap-form-control.js';
+import noBootstrapFormSelect from './rules/no-bootstrap-form-select.js';
 import noBootstrapLayoutUtility from './rules/no-bootstrap-layout-utility.js';
 import noBootstrapProgress from './rules/no-bootstrap-progress.js';
 import noBootstrapTabs from './rules/no-bootstrap-tabs.js';
@@ -28,6 +30,7 @@ import noHandRolledTable from './rules/no-hand-rolled-table.js';
 import noInteractiveInTabTrigger from './rules/no-interactive-in-tab-trigger.js';
 import noManualIconColorsInBadges from './rules/no-manual-icon-colors-in-badges.js';
 import noNativeDateInput from './rules/no-native-date-input.js';
+import noOrphanFormLabel from './rules/no-orphan-form-label.js';
 import noRawStatusRamp from './rules/no-raw-status-ramp.js';
 import noRedundantViMock from './rules/no-redundant-vi-mock.js';
 import noRetiredBootstrapUtility from './rules/no-retired-bootstrap-utility.js';
@@ -36,6 +39,7 @@ import noTooltipOnBareIcon from './rules/no-tooltip-on-bare-icon.js';
 import noUndefinedInMutationBody from './rules/no-undefined-in-mutation-body.js';
 import preferClassnamesUtility from './rules/prefer-classnames-utility.js';
 import preferMutateOverMutateAsync from './rules/prefer-mutate-over-mutateAsync.js';
+import preferTokenUtility from './rules/prefer-token-utility.js';
 import requireDarkPair from './rules/require-dark-pair.js';
 import requireFontSizeScale from './rules/require-font-size-scale.js';
 import requireWeightScale from './rules/require-weight-scale.js';
@@ -62,12 +66,16 @@ export default {
     'no-bootstrap-border-with-tailwind-color':
       noBootstrapBorderWithTailwindColor,
     'no-raw-status-ramp': noRawStatusRamp,
+    'prefer-token-utility': preferTokenUtility,
     'no-retired-bootstrap-utility': noRetiredBootstrapUtility,
     'require-dark-pair': requireDarkPair,
     'require-font-size-scale': requireFontSizeScale,
     'require-weight-scale': requireWeightScale,
     'no-bootstrap-color-utility': noBootstrapColorUtility,
+    'no-bootstrap-form-control': noBootstrapFormControl,
+    'no-bootstrap-form-select': noBootstrapFormSelect,
     'no-bootstrap-tabs': noBootstrapTabs,
+    'no-orphan-form-label': noOrphanFormLabel,
     'no-interactive-in-tab-trigger': noInteractiveInTabTrigger,
     'no-tooltip-on-bare-icon': noTooltipOnBareIcon,
     'check-needs-accessible-name': checkNeedsAccessibleName,

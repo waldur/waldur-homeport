@@ -87,7 +87,6 @@ export const SelectStep: FC<SelectStepProps> = ({
         required
       >
         <OfferingMergeOfferingSelect
-          id="merge-sources"
           isMulti
           value={selection.sources}
           onChange={(value) =>
@@ -109,7 +108,6 @@ export const SelectStep: FC<SelectStepProps> = ({
         required
       >
         <OfferingMergeOfferingSelect
-          id="merge-target"
           value={selection.target}
           onChange={(value) =>
             onChange({

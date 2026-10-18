@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Col, Form, FormLabel, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { components } from 'react-select';
@@ -19,7 +19,16 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, Switch, Tooltip, WarningTip } from 'waldur-ui';
+import {
+  AlertItem,
+  BaseButton,
+  FormField,
+  FormLabel,
+  FormText,
+  Switch,
+  Tooltip,
+  WarningTip,
+} from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -97,7 +106,7 @@ const CustomIpField = ({
       }}
     >
       {({ input, meta }) => (
-        <div>
+        <FormField>
           <FormLabel>{translate('Custom IP')}</FormLabel>
           <Select
             placeholder={translate('e.g. 192.168.42.16')}
@@ -111,11 +120,12 @@ const CustomIpField = ({
           />
 
           <BaseStringField
+            aria-label={translate('Custom IP address')}
             placeholder={translate('Enter custom IP')}
             value={input?.value}
             onChange={input.onChange}
             hidden={selected?.value !== 'other'}
-            className="mt-4"
+            containerClassName={selected?.value === 'other' ? 'mt-4' : 'hidden'}
             autoFocus={autoFocus}
           />
 
@@ -123,11 +133,11 @@ const CustomIpField = ({
             (meta.error ? (
               <FieldError error={meta.error} />
             ) : isOutsideAllocationPool(input.value) ? (
-              <Form.Text className="text-warning" as="div">
+              <FormText variant="warning" as="div">
                 {isOutsideAllocationPool(input.value)}
-              </Form.Text>
+              </FormText>
             ) : null)}
-        </div>
+        </FormField>
       )}
     </Field>
   );
@@ -562,11 +572,11 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
         />
       </div>
 
-      <Form.Group className="mb-2 border-b-[1px] border-b-secondary">
+      <FormField className="mb-2 border-b-[1px] border-b-secondary">
         <div className="flex justify-between mb-5">
-          <Form.Label className="text-sm font-semibold mb-0">
+          <FormLabel className="font-semibold mb-0">
             {translate('Network')}
-          </Form.Label>
+          </FormLabel>
           <Switch
             checked={customIpEnabled}
             onCheckedChange={setCustomIpEnabled}
@@ -582,7 +592,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
           fipQuotaExhausted={fipQuotaExhausted}
           {...data}
         />
-      </Form.Group>
+      </FormField>
       <div className={!portSecurityEnabled ? 'opacity-50 pe-none' : ''}>
         <FormSecurityGroupsField
           offering={props.offering}
@@ -613,11 +623,11 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
         />
       </div>
       {!portSecurityEnabled && (
-        <Form.Text className="text-quaternary">
+        <FormText variant="muted">
           {translate(
             'Port security is disabled. Security groups will not be applied. Use this for VM-based routers that manage their own firewall.',
           )}
-        </Form.Text>
+        </FormText>
       )}
     </VStepperFormStepCard>
   );

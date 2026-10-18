@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { FormControl } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { FieldError } from '@/form';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 
 import { Namespace } from '../types';
@@ -40,7 +40,7 @@ export const NamespaceField: React.FC<NamespaceFieldProps> = ({ options }) => {
     (fieldProps) =>
       useNew ? (
         <>
-          <FormControl
+          <BaseInputField
             id={fieldProps.id}
             {...fieldProps.input}
             placeholder={translate('e.g. MyApp')}

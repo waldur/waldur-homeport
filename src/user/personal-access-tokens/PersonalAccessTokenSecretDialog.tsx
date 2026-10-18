@@ -1,8 +1,7 @@
 import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback, useMemo, useState } from 'react';
-import { Form } from 'react-bootstrap';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, FormHeading } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -56,16 +55,12 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
       />
 
       <div className="mb-3">
-        <Form.Label className="font-medium">
-          {translate('Token name')}
-        </Form.Label>
+        <FormHeading as="p">{translate('Token name')}</FormHeading>
         <div>{tokenName}</div>
       </div>
 
       <div className="mb-3">
-        <Form.Label className="font-medium">
-          {translate('Your token')}
-        </Form.Label>
+        <FormHeading as="p">{translate('Your token')}</FormHeading>
         <div className="flex items-center gap-2 p-3 bg-tertiary dark:bg-quaternary rounded">
           <button
             className="text-btn shrink-0"
@@ -86,9 +81,7 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
       </div>
 
       <div>
-        <Form.Label className="font-medium">
-          {translate('Example usage')}
-        </Form.Label>
+        <FormHeading as="p">{translate('Example usage')}</FormHeading>
         <div className="flex items-start gap-2 p-3 bg-tertiary dark:bg-quaternary rounded">
           <code className="grow text-break">
             {showSecret ? curlExample : maskedCurlExample}

@@ -83,7 +83,6 @@ export const ComponentRow2: React.FC<PropsWithChildren<ComponentRowProps>> = (
 
   return (
     <FormTable.Item
-      htmlFor={`limit-${props.offeringComponent.type}`}
       data-testid={`row-${props.offeringComponent.type}`}
       label={props.offeringComponent.name}
       description={

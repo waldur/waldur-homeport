@@ -1,11 +1,11 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField, FormLabel, FormText } from 'waldur-ui';
 
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
 
@@ -116,13 +116,13 @@ const AllocationPoolsList: FunctionComponent<
       )}
       {fields.map((name, index) => (
         <div key={index} className="mb-3">
-          <InputGroup>
+          <div className="flex items-center gap-2">
             <Field name={`${name}.start`} type="text">
               {({ input }) => (
-                <input
+                <BaseInputField
                   {...input}
+                  containerClassName="flex-1"
                   placeholder={translate('Start IP')}
-                  className="form-control"
                   onChange={(e) => {
                     input.onChange(e);
                     validateField(e.target.value, index, 'start');
@@ -131,13 +131,13 @@ const AllocationPoolsList: FunctionComponent<
               )}
             </Field>
 
-            <InputGroup.Text>-</InputGroup.Text>
+            <span className="text-quaternary">-</span>
             <Field name={`${name}.end`} type="text">
               {({ input }) => (
-                <input
+                <BaseInputField
                   {...input}
+                  containerClassName="flex-1"
                   placeholder={translate('End IP')}
-                  className="form-control"
                   onChange={(e) => {
                     input.onChange(e);
                     validateField(e.target.value, index, 'end');
@@ -158,7 +158,7 @@ const AllocationPoolsList: FunctionComponent<
               }}
               tooltip={translate('Remove')}
             />
-          </InputGroup>
+          </div>
           {validationErrors[`${index}-start`] && (
             <div className="text-danger small mt-1">
               {validationErrors[`${index}-start`]}
@@ -188,13 +188,13 @@ const AllocationPoolsList: FunctionComponent<
 };
 
 export const InternalNetworkAllocationPool: FunctionComponent = () => (
-  <Form.Group>
-    <Form.Label>{translate('Internal network allocation pool')}</Form.Label>
+  <FormField>
+    <FormLabel>{translate('Internal network allocation pool')}</FormLabel>
     <FieldArray name="allocation_pools" component={AllocationPoolsList} />
-    <Form.Text className="text-quaternary">
+    <FormText variant="muted">
       {translate(
         'Define IP range that will be used for automatic assignment to instances.',
       )}
-    </Form.Text>
-  </Form.Group>
+    </FormText>
+  </FormField>
 );

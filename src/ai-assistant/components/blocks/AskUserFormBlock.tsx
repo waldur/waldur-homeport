@@ -10,6 +10,7 @@ import { FC, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { BaseButton } from 'waldur-ui';
 
+import { BaseInputField } from '@/form/InputField';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 
@@ -100,10 +101,11 @@ const OtherAnswerInput: FC<{
       className="aui-ask-user-input-row"
       data-has-value={value.trim() ? '1' : '0'}
     >
-      <input
+      <BaseInputField
         ref={ref}
         type="text"
-        className="form-control form-control-sm aui-ask-user-text"
+        size="sm"
+        className="aui-ask-user-text"
         placeholder={translate('Type your own answer…')}
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -314,9 +316,10 @@ const FreeformQuestion: FC<{
     className="aui-ask-user-input-row"
     data-has-value={answer.text.trim() ? '1' : '0'}
   >
-    <input
+    <BaseInputField
       type="text"
-      className="form-control form-control-sm aui-ask-user-text"
+      size="sm"
+      className="aui-ask-user-text"
       placeholder={translate('Type your answer…')}
       value={answer.text}
       onChange={(e) => onChange({ text: e.target.value })}

@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 
+import { useControlId } from '../Form/controlId';
+
 import { FilterSelectControl } from './components';
 import {
   composeComponents,
@@ -54,6 +56,7 @@ export const useSelect = <
 >(
   props: T,
 ) => {
+  const controlId = useControlId(props.inputId || props.id);
   const isTableFilter = props.variant === 'tableFilter';
 
   const composedComponents = composeComponents(
@@ -156,7 +159,7 @@ export const useSelect = <
     unstyled: true,
     classNames: classNamesConfig,
     isDisabled,
-    inputId: props.inputId || props.id,
+    inputId: controlId,
     id: undefined,
     value,
     options,
@@ -170,6 +173,7 @@ export const useAsyncSelect = <
 >(
   props: T,
 ) => {
+  const controlId = useControlId(props.inputId || props.id);
   const isTableFilter = props.variant === 'tableFilter';
 
   const composedComponents = composeComponents(
@@ -280,7 +284,7 @@ export const useAsyncSelect = <
     unstyled: true,
     classNames: classNamesConfig,
     isDisabled,
-    inputId: props.inputId || props.id,
+    inputId: controlId,
     id: undefined,
     value,
     onChange,

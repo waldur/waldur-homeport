@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
+
+import { FormText } from 'waldur-ui';
 
 import { FieldErrorMessage } from './FieldError';
 
@@ -17,8 +18,9 @@ export const FieldWarning: FunctionComponent<FieldWarningProps> = ({
   center,
 }) => {
   return error ? (
-    <Form.Text className="text-warning" as="div">
+    // A caution is not an interruption: announced politely, when it appears.
+    <FormText variant="warning" as="div" role="status">
       <FieldErrorMessage error={error} center={center} />
-    </Form.Text>
+    </FormText>
   ) : null;
 };

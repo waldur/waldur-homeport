@@ -168,6 +168,7 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
 
               {availableSections.length > 0 && (
                 <FormGroup
+                  group
                   label={translate('Sections to include')}
                   description={translate(
                     'Select which sections to include in the digest. Leave all unchecked to include all sections.',

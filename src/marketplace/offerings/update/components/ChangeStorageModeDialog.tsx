@@ -6,6 +6,8 @@ import {
   StorageModeEnum,
 } from 'waldur-js-client';
 
+import { NativeSelect } from 'waldur-ui';
+
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
@@ -65,13 +67,13 @@ export const ChangeStorageModeDialog: FC<ChangeStorageModeDialogProps> = (
           >
             <Field name="storage_mode">
               {({ input }) => (
-                <select {...input} className="form-control">
+                <NativeSelect {...input}>
                   {props.resolve.modes.map((mode) => (
                     <option key={mode.value} value={mode.value}>
                       {mode.label}
                     </option>
                   ))}
-                </select>
+                </NativeSelect>
               )}
             </Field>
           </ModalDialog>

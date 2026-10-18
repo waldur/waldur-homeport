@@ -1,7 +1,8 @@
 import { FC } from 'react';
-import { Form } from 'react-bootstrap';
 import { FormRenderProps } from 'react-final-form';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
+
+import { FormField } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -97,9 +98,9 @@ export const PolicyCreateForm: FC<PolicyCreateFormProps> = (props) => {
         />
       )}
       {props.submitError && (
-        <Form.Group>
+        <FormField>
           <div className="text-danger">{props.submitError}</div>
-        </Form.Group>
+        </FormField>
       )}
     </div>
   );

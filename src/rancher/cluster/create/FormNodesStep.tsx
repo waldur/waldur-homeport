@@ -1,12 +1,11 @@
 import { PlusIcon, XIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { Fragment, useCallback } from 'react';
-import { Form } from 'react-bootstrap';
 import { Field, useForm } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { rancherClusterTemplatesList } from 'waldur-js-client';
 
-import { BaseButton, Checkbox } from 'waldur-ui';
+import { BaseButton, Checkbox, FormField } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -40,7 +39,7 @@ const filterFlavor = (node, flavor) => {
 };
 
 const BooleanGroup = ({ groupName, options, input, groupClassName }) => (
-  <Form.Group controlId={groupName} className={groupClassName}>
+  <FormField controlId={groupName} className={groupClassName}>
     {options.map((option, index) => (
       <Checkbox
         name={`${input.name}[${index}]`}
@@ -64,7 +63,7 @@ const BooleanGroup = ({ groupName, options, input, groupClassName }) => (
         label={option.label}
       />
     ))}
-  </Form.Group>
+  </FormField>
 );
 
 const renderNodeRows = ({ fields, flavors }: any) => {
@@ -79,7 +78,7 @@ const renderNodeRows = ({ fields, flavors }: any) => {
   return (
     <>
       {fields.length > 0 && (
-        <Form.Group id="nodes-list-group">
+        <FormField id="nodes-list-group">
           <div>
             <table className="table align-middle">
               <thead>
@@ -104,6 +103,7 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                               <StringField
                                 input={input}
                                 meta={meta}
+                                aria-label={`${translate('Node name')} ${index + 1}`}
                                 placeholder={translate('Node name')}
                                 required={true}
                               />
@@ -121,6 +121,7 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                               <BoxNumberField
                                 input={input}
                                 meta={meta}
+                                aria-label={`${translate('Units')} ${index + 1}`}
                                 min={1}
                                 max={100}
                                 required={true}
@@ -168,7 +169,7 @@ const renderNodeRows = ({ fields, flavors }: any) => {
               </tbody>
             </table>
           </div>
-        </Form.Group>
+        </FormField>
       )}
       <BaseButton
         variant="tertiary"

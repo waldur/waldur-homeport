@@ -1,11 +1,12 @@
 import { DateTime } from 'luxon';
 import { useMemo, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import {
   Resource,
   adminArrowBillingSyncsTriggerReconciliation,
   adminArrowBillingSyncsTriggerSync,
 } from 'waldur-js-client';
+
+import { FormField, FormLabel, FormText } from 'waldur-ui';
 
 import { SubmitButton } from '@/form';
 import { AsyncSelect, Select } from '@/form/select';
@@ -127,8 +128,8 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
         </>
       }
     >
-      <Form.Group className="mb-3">
-        <Form.Label>{translate('Period')}</Form.Label>
+      <FormField className="mb-3">
+        <FormLabel>{translate('Period')}</FormLabel>
         <Select
           placeholder={translate('Select billing period')}
           value={selectedPeriod}
@@ -137,13 +138,13 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
           isClearable={false}
           isDisabled={isPending}
         />
-        <Form.Text className="text-quaternary">
+        <FormText variant="muted">
           {translate('Select the billing period to sync')}
-        </Form.Text>
-      </Form.Group>
+        </FormText>
+      </FormField>
 
-      <Form.Group className="mb-3">
-        <Form.Label>{translate('Resource (optional)')}</Form.Label>
+      <FormField className="mb-3">
+        <FormLabel>{translate('Resource (optional)')}</FormLabel>
         <AsyncSelect
           placeholder={translate('All resources')}
           loadOptions={loadResources}
@@ -157,12 +158,12 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
           isClearable
           isDisabled={isPending}
         />
-        <Form.Text className="text-quaternary">
+        <FormText variant="muted">
           {translate(
             'Leave empty to sync all resources. Select a resource to sync only its billing lines.',
           )}
-        </Form.Text>
-      </Form.Group>
+        </FormText>
+      </FormField>
     </ModalDialog>
   );
 };

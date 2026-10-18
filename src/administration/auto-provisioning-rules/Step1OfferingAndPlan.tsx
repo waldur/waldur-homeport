@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Col, FormLabel, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { STALE_TIME, UI_STALE_TIME } from '@/core/constants';
 import { format } from '@/core/ErrorMessageFormatter';
@@ -140,26 +142,28 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
           />
         ) : null}
         <Col>
-          <FormLabel>{translate('Plan')}</FormLabel>
-          <div className="flex gap-6 pb-6 border-b-[1px] border-b-secondary mb-7">
-            <div className="grow">
-              <PlanSelectField
-                plans={plans}
-                offering={offeringQuery.data}
-                isLoading={offeringQuery.isLoading}
-                isDisabled={!offering}
-              />
+          <FormField>
+            <FormLabel>{translate('Plan')}</FormLabel>
+            <div className="flex gap-6 pb-6 border-b-[1px] border-b-secondary mb-7">
+              <div className="grow">
+                <PlanSelectField
+                  plans={plans}
+                  offering={offeringQuery.data}
+                  isLoading={offeringQuery.isLoading}
+                  isDisabled={!offering}
+                />
+              </div>
+              <PlanDescriptionButton />
             </div>
-            <PlanDescriptionButton />
-          </div>
-          {offeringQuery.data && selectedPlan && (
-            <TabbedPlanComponents
-              offering={offeringQuery.data}
-              plan={selectedPlan}
-              limits={limits}
-              customer={{ url: rule.customer }}
-            />
-          )}
+            {offeringQuery.data && selectedPlan && (
+              <TabbedPlanComponents
+                offering={offeringQuery.data}
+                plan={selectedPlan}
+                limits={limits}
+                customer={{ url: rule.customer }}
+              />
+            )}
+          </FormField>
         </Col>
       </Row>
     </WizardForm>

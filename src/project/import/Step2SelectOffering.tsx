@@ -1,7 +1,9 @@
 import { FC, useMemo } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { Customer } from 'waldur-js-client';
+
+import { FormField, FormLabel, FormText } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { FieldError } from '@/form';
@@ -43,8 +45,8 @@ export const Step2SelectOffering: FC<Step2Props> = ({
 
   return (
     <div className="size-lg">
-      <Form.Group className="mb-7">
-        <Form.Label>{translate('Select offering')}</Form.Label>
+      <FormField className="mb-7">
+        <FormLabel>{translate('Select offering')}</FormLabel>
         <Field
           name="offering"
           validate={
@@ -63,16 +65,16 @@ export const Step2SelectOffering: FC<Step2Props> = ({
                   }
                 }}
               />
-              <Form.Text className="text-quaternary">
+              <FormText variant="muted">
                 {translate(
                   'Select an offering type to generate the appropriate template with resource fields.',
                 )}
-              </Form.Text>
+              </FormText>
               {meta.touched && meta.error && <FieldError error={meta.error} />}
             </>
           )}
         />
-      </Form.Group>
+      </FormField>
       {offering && (
         <Card className="card-bordered text-quaternary bg-secondary offering-components">
           <Card.Body className="p-5">

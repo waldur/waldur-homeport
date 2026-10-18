@@ -83,6 +83,6 @@ describe('PhoneNumberField', () => {
     );
 
     const inputElement = screen.getByRole('textbox');
-    expect(inputElement).toHaveClass('form-control-solid');
+    expect(inputElement).toHaveClass('bg-[var(--input-solid-bg)]');
   });
 });

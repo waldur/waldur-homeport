@@ -101,7 +101,7 @@ const RoleAndProjectSelectFieldHarness: React.FC<HarnessProps> = ({
  * `screen`.
  */
 const meta: Meta<typeof RoleAndProjectSelectFieldHarness> = {
-  title: 'Forms/RoleAndProjectSelectField',
+  title: 'Forms/Selection/RoleAndProjectSelectField',
   component: RoleAndProjectSelectFieldHarness,
   parameters: {
     layout: 'padded',

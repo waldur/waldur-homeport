@@ -19,7 +19,7 @@ import { FileXlsIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
-import { Card, Col, Container, Form, Modal, Row } from 'react-bootstrap';
+import { Card, Col, Container, Modal, Row } from 'react-bootstrap';
 import type { ProjectAccountingSummary } from 'waldur-js-client';
 import {
   openportalAccountingSummaryList,
@@ -33,20 +33,23 @@ import {
   Checkbox,
   DatePicker,
   DateRangePicker,
-  parseDateValue,
+  FormField,
+  FormLabel,
   SegmentedControl,
-  toIsoDate,
-  Tooltip,
   Tabs,
+  TabsContent,
   TabsList,
   TabsTrigger,
-  TabsContent,
+  Tooltip,
+  parseDateValue,
+  toIsoDate,
 } from 'waldur-ui';
 
 import { getNextPageUrl } from '@/core/api';
 import { ENV } from '@/core/config';
 import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
+import { BaseInputField } from '@/form/InputField';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useCustomer } from '@/workspace/hooks';
 
@@ -478,38 +481,44 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
       <Modal.Body>
         <Row className="g-2 mb-3">
           <Col xs={12} md={4}>
-            <Form.Label className="small mb-1">
-              {translate('Search')}
-            </Form.Label>
-            <Form.Control
-              size="sm"
-              type="text"
-              placeholder={translate('Filter by name…')}
-              value={nameFilter}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setNameFilter(e.target.value)
-              }
-            />
+            <FormField>
+              <FormLabel className="small mb-1">
+                {translate('Search')}
+              </FormLabel>
+              <BaseInputField
+                size="sm"
+                type="text"
+                placeholder={translate('Filter by name…')}
+                value={nameFilter}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setNameFilter(e.target.value)
+                }
+              />
+            </FormField>
           </Col>
           <Col xs={6} md={4}>
-            <Form.Label className="small mb-1">
-              {translate('Start date — after')}
-            </Form.Label>
-            <DatePicker
-              size="sm"
-              value={parseDateValue(startAfter)}
-              onChange={(date) => setStartAfter(toIsoDate(date))}
-            />
+            <FormField>
+              <FormLabel className="small mb-1">
+                {translate('Start date — after')}
+              </FormLabel>
+              <DatePicker
+                size="sm"
+                value={parseDateValue(startAfter)}
+                onChange={(date) => setStartAfter(toIsoDate(date))}
+              />
+            </FormField>
           </Col>
           <Col xs={6} md={4}>
-            <Form.Label className="small mb-1">
-              {translate('End date — before')}
-            </Form.Label>
-            <DatePicker
-              size="sm"
-              value={parseDateValue(endBefore)}
-              onChange={(date) => setEndBefore(toIsoDate(date))}
-            />
+            <FormField>
+              <FormLabel className="small mb-1">
+                {translate('End date — before')}
+              </FormLabel>
+              <DatePicker
+                size="sm"
+                value={parseDateValue(endBefore)}
+                onChange={(date) => setEndBefore(toIsoDate(date))}
+              />
+            </FormField>
           </Col>
         </Row>
 
@@ -1129,37 +1138,43 @@ export const OrganisationAllocationTab: FC = () => {
             {/* Project pre-filters */}
             <Row className="g-2 mb-3">
               <Col xs={12} md={4}>
-                <Form.Label className="small mb-1">
-                  {translate('Project search')}
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder={translate('Name search (applied at load time)…')}
-                  value={projectSearch}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setProjectSearch(e.target.value)
-                  }
-                />
+                <FormField>
+                  <FormLabel className="small mb-1">
+                    {translate('Project search')}
+                  </FormLabel>
+                  <BaseInputField
+                    type="text"
+                    placeholder={translate(
+                      'Name search (applied at load time)…',
+                    )}
+                    value={projectSearch}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      setProjectSearch(e.target.value)
+                    }
+                  />
+                </FormField>
               </Col>
               <Col xs={12} md={4}>
-                <Form.Label className="small mb-1">
-                  {translate('Project period')}
-                </Form.Label>
-                <DateRangePicker
-                  value={
-                    projectStartAfter && projectEndBefore
-                      ? [
-                          parseDateValue(projectStartAfter)!,
-                          parseDateValue(projectEndBefore)!,
-                        ]
-                      : undefined
-                  }
-                  onChange={(range) => {
-                    setProjectStartAfter(range ? toIsoDate(range[0]) : '');
-                    setProjectEndBefore(range ? toIsoDate(range[1]) : '');
-                  }}
-                  clearable
-                />
+                <FormField>
+                  <FormLabel className="small mb-1">
+                    {translate('Project period')}
+                  </FormLabel>
+                  <DateRangePicker
+                    value={
+                      projectStartAfter && projectEndBefore
+                        ? [
+                            parseDateValue(projectStartAfter)!,
+                            parseDateValue(projectEndBefore)!,
+                          ]
+                        : undefined
+                    }
+                    onChange={(range) => {
+                      setProjectStartAfter(range ? toIsoDate(range[0]) : '');
+                      setProjectEndBefore(range ? toIsoDate(range[1]) : '');
+                    }}
+                    clearable
+                  />
+                </FormField>
               </Col>
             </Row>
 
@@ -1495,10 +1510,10 @@ export const OrganisationAllocationTab: FC = () => {
                       'started ≥ {input1} months ago with < {input2} % of allocation spent',
                       {
                         input1: (
-                          <Form.Control
+                          <BaseInputField
                             type="number"
                             size="sm"
-                            style={{ width: 60 }}
+                            containerClassName="w-[60px] shrink-0"
                             value={thresholds.slowStartMonths}
                             onChange={(e: ChangeEvent<HTMLInputElement>) =>
                               setThreshold('slowStartMonths', e.target.value)
@@ -1506,10 +1521,10 @@ export const OrganisationAllocationTab: FC = () => {
                           />
                         ),
                         input2: (
-                          <Form.Control
+                          <BaseInputField
                             type="number"
                             size="sm"
-                            style={{ width: 60 }}
+                            containerClassName="w-[60px] shrink-0"
                             value={thresholds.slowStartPercent}
                             onChange={(e: ChangeEvent<HTMLInputElement>) =>
                               setThreshold('slowStartPercent', e.target.value)
@@ -1528,10 +1543,10 @@ export const OrganisationAllocationTab: FC = () => {
                       'started ≥ {input1} months ago, after the {input2} th of the month, no spend this month, > {input3} % remaining',
                       {
                         input1: (
-                          <Form.Control
+                          <BaseInputField
                             type="number"
                             size="sm"
-                            style={{ width: 60 }}
+                            containerClassName="w-[60px] shrink-0"
                             value={thresholds.inactiveMonths}
                             onChange={(e: ChangeEvent<HTMLInputElement>) =>
                               setThreshold('inactiveMonths', e.target.value)
@@ -1539,10 +1554,10 @@ export const OrganisationAllocationTab: FC = () => {
                           />
                         ),
                         input2: (
-                          <Form.Control
+                          <BaseInputField
                             type="number"
                             size="sm"
-                            style={{ width: 60 }}
+                            containerClassName="w-[60px] shrink-0"
                             value={thresholds.inactiveDayOfMonth}
                             onChange={(e: ChangeEvent<HTMLInputElement>) =>
                               setThreshold('inactiveDayOfMonth', e.target.value)
@@ -1550,10 +1565,10 @@ export const OrganisationAllocationTab: FC = () => {
                           />
                         ),
                         input3: (
-                          <Form.Control
+                          <BaseInputField
                             type="number"
                             size="sm"
-                            style={{ width: 60 }}
+                            containerClassName="w-[60px] shrink-0"
                             value={thresholds.inactiveRemainingPercent}
                             onChange={(e: ChangeEvent<HTMLInputElement>) =>
                               setThreshold(
@@ -1575,10 +1590,10 @@ export const OrganisationAllocationTab: FC = () => {
                       '≥ {input1} % spent with ≥ {input2} days still remaining',
                       {
                         input1: (
-                          <Form.Control
+                          <BaseInputField
                             type="number"
                             size="sm"
-                            style={{ width: 60 }}
+                            containerClassName="w-[60px] shrink-0"
                             value={thresholds.depletedSpentPercent}
                             onChange={(e: ChangeEvent<HTMLInputElement>) =>
                               setThreshold(
@@ -1589,10 +1604,10 @@ export const OrganisationAllocationTab: FC = () => {
                           />
                         ),
                         input2: (
-                          <Form.Control
+                          <BaseInputField
                             type="number"
                             size="sm"
-                            style={{ width: 70 }}
+                            containerClassName="w-[70px] shrink-0"
                             value={thresholds.depletedDaysRemaining}
                             onChange={(e: ChangeEvent<HTMLInputElement>) =>
                               setThreshold(
@@ -1614,10 +1629,10 @@ export const OrganisationAllocationTab: FC = () => {
                       'after the {input1} th of the month, actual daily avg differs from predicted by > {input2} %',
                       {
                         input1: (
-                          <Form.Control
+                          <BaseInputField
                             type="number"
                             size="sm"
-                            style={{ width: 60 }}
+                            containerClassName="w-[60px] shrink-0"
                             value={thresholds.offTrackDayOfMonth}
                             onChange={(e: ChangeEvent<HTMLInputElement>) =>
                               setThreshold('offTrackDayOfMonth', e.target.value)
@@ -1625,10 +1640,10 @@ export const OrganisationAllocationTab: FC = () => {
                           />
                         ),
                         input2: (
-                          <Form.Control
+                          <BaseInputField
                             type="number"
                             size="sm"
-                            style={{ width: 60 }}
+                            containerClassName="w-[60px] shrink-0"
                             value={thresholds.offTrackPercent}
                             onChange={(e: ChangeEvent<HTMLInputElement>) =>
                               setThreshold('offTrackPercent', e.target.value)

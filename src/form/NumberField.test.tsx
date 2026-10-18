@@ -25,7 +25,7 @@ describe('BaseNumberField range handling', () => {
     (value) => {
       const { input, onChange, onBlur } = renderField(value);
 
-      expect(input).not.toHaveClass('is-invalid');
+      expect(input).not.toHaveAttribute('aria-invalid');
       fireEvent.blur(input);
       expect(onChange).not.toHaveBeenCalled();
       expect(onBlur).toHaveBeenCalled();
@@ -35,7 +35,7 @@ describe('BaseNumberField range handling', () => {
   it('still clamps a value below the minimum on blur', () => {
     const { input, onChange } = renderField(0);
 
-    expect(input).toHaveClass('is-invalid');
+    expect(input).toHaveAttribute('aria-invalid', 'true');
     fireEvent.blur(input);
     expect(onChange).toHaveBeenCalledWith(1);
   });
@@ -43,7 +43,7 @@ describe('BaseNumberField range handling', () => {
   it('still clamps a value above the maximum on blur', () => {
     const { input, onChange } = renderField(50);
 
-    expect(input).toHaveClass('is-invalid');
+    expect(input).toHaveAttribute('aria-invalid', 'true');
     fireEvent.blur(input);
     expect(onChange).toHaveBeenCalledWith(20);
   });
@@ -51,7 +51,7 @@ describe('BaseNumberField range handling', () => {
   it('keeps a value in range as it is', () => {
     const { input, onChange } = renderField(5);
 
-    expect(input).not.toHaveClass('is-invalid');
+    expect(input).not.toHaveAttribute('aria-invalid');
     fireEvent.blur(input);
     expect(onChange).not.toHaveBeenCalled();
   });

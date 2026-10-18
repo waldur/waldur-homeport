@@ -6,6 +6,7 @@ import { OfferingComponent } from 'waldur-js-client';
 import { BaseButton } from 'waldur-ui';
 
 import { SelectGroup } from '@/form';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { BillingTypeBadge } from '@/marketplace/common/billingTypes';
 
@@ -107,18 +108,16 @@ export const ComponentDiscountEditor: FunctionComponent<
               <span className="text-quaternary">
                 {translate('when usage ≥')}
               </span>
-              <input
+              <BaseInputField
                 type="number"
-                className="form-control"
-                style={{ width: 120 }}
+                containerClassName="w-[120px]"
                 value={tier.threshold}
                 onChange={(e) => updateTier(index, 'threshold', e.target.value)}
               />
               <span className="mx-1">→</span>
-              <input
+              <BaseInputField
                 type="number"
-                className="form-control"
-                style={{ width: 90 }}
+                containerClassName="w-[90px]"
                 value={tier.percent}
                 onChange={(e) => updateTier(index, 'percent', e.target.value)}
               />
@@ -156,10 +155,10 @@ export const ComponentDiscountEditor: FunctionComponent<
           {tiers.length > 0 && (
             <div className="flex items-center gap-2 mt-4 text-quaternary">
               {translate('Preview: at usage')}
-              <input
+              <BaseInputField
                 type="number"
-                className="form-control form-control-sm"
-                style={{ width: 100 }}
+                size="sm"
+                containerClassName="w-[100px]"
                 value={sampleUsage}
                 placeholder="100"
                 onChange={(e) => setSampleUsage(e.target.value)}
@@ -172,9 +171,8 @@ export const ComponentDiscountEditor: FunctionComponent<
         <>
           <Field name={`${base}.discount_formula`}>
             {({ input }) => (
-              <input
+              <BaseInputField
                 type="text"
-                className="form-control"
                 {...input}
                 placeholder={translate('e.g. MIN(20, usage / 100)')}
               />

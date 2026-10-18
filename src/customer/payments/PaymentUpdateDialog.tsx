@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
 import { Form as FinalForm } from 'react-final-form';
 import { paymentsPartialUpdate } from 'waldur-js-client';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { formDataOptions, fileSerializer } from '@/core/api';
 import { formatISODate } from '@/core/dateUtils';
@@ -105,10 +106,10 @@ export const PaymentUpdateDialog: FunctionComponent<
               ) : null}
 
               {props.resolve.invoice_uuid && props.resolve.invoice_period ? (
-                <Form.Group>
-                  <Form.Label className="col-sm-2">
+                <FormField>
+                  <FormLabel className="col-sm-2">
                     {translate('Invoice')}
-                  </Form.Label>
+                  </FormLabel>
                   <div className="col-sm-8" style={{ marginTop: '8px' }}>
                     <Link
                       state="billingDetails"
@@ -121,7 +122,7 @@ export const PaymentUpdateDialog: FunctionComponent<
                       {props.resolve.invoice_period}
                     </Link>
                   </div>
-                </Form.Group>
+                </FormField>
               ) : null}
             </div>
           </ModalDialog>

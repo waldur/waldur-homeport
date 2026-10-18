@@ -1,14 +1,14 @@
 import { XIcon } from '@phosphor-icons/react';
 import { FC, PropsWithChildren, useEffect } from 'react';
-import { Form } from 'react-bootstrap';
 import { Field, useForm } from 'react-final-form';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { composeValidators } from '@/core/validators';
 import { SelectField, StringField } from '@/form';
 import { BoxNumberField } from '@/form/BoxNumberField';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 
@@ -35,7 +35,7 @@ export const FormNodeStorageTable: FC<
   PropsWithChildren<FormNodeStorageTableProps>
 > = (props) => {
   return (
-    <Form.Group>
+    <FormField>
       <div>
         <table className="table align-middle">
           <thead>
@@ -50,7 +50,7 @@ export const FormNodeStorageTable: FC<
           <tbody>{props.children}</tbody>
         </table>
       </div>
-    </Form.Group>
+    </FormField>
   );
 };
 
@@ -83,12 +83,7 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
     <tr>
       <td>
         {props.altRowName ? (
-          <Form.Control
-            className="form-control-solid"
-            value={props.altRowName}
-            type="text"
-            readOnly
-          />
+          <BaseInputField solid value={props.altRowName} type="text" readOnly />
         ) : (
           <Field name={`${props.parentName}.name`}>
             {({ input, meta }) => (

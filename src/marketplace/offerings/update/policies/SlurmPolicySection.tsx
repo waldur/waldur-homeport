@@ -21,7 +21,7 @@ import {
   SlurmPeriodicUsagePolicy,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, Menu, Switch } from 'waldur-ui';
+import { AlertItem, BaseButton, FormText, Menu, Switch } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -240,11 +240,11 @@ const PresetSelector: FC = () => {
           </div>
         ))}
       </div>
-      <div className="form-text mt-2">
+      <FormText as="div" className="mt-2">
         {translate(
           'Select a preset to quickly configure common policy patterns. You can customize individual settings after applying a preset.',
         )}
-      </div>
+      </FormText>
     </div>
   );
 };

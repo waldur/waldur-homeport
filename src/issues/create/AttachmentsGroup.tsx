@@ -1,5 +1,6 @@
-import { Form } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
 import { AttachmentsList } from '@/form/upload/AttachmentsList';
@@ -10,8 +11,8 @@ export const AttachmentsGroup = () => {
   const { submitting } = useFormState();
 
   return (
-    <Form.Group className="mb-5">
-      <Form.Label>{translate('Attachments')}</Form.Label>
+    <FormField className="mb-5">
+      <FormLabel>{translate('Attachments')}</FormLabel>
       <Field
         name="files"
         component={({ input: { value, onChange } }) => {
@@ -61,6 +62,6 @@ export const AttachmentsGroup = () => {
           );
         }}
       />
-    </Form.Group>
+    </FormField>
   );
 };

@@ -19,7 +19,7 @@
 import { FileArrowDownIcon, FileXlsIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Badge, SegmentedControl, Tooltip } from 'waldur-ui';
+import { Badge, NativeSelect, SegmentedControl, Tooltip } from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { translate } from '@/i18n';
@@ -359,9 +359,9 @@ export const UsageReportVis: FC<Props> = ({
         {metric === 'usage' &&
           groupMode === 'user' &&
           components.length > 1 && (
-            <select
-              className="form-select form-select-sm"
-              style={{ width: 'auto' }}
+            <NativeSelect
+              size="sm"
+              fit
               value={component}
               onChange={(e) => setComponent(e.target.value as UsageComponent)}
             >
@@ -372,7 +372,7 @@ export const UsageReportVis: FC<Props> = ({
                     : c.charAt(0).toUpperCase() + c.slice(1)}
                 </option>
               ))}
-            </select>
+            </NativeSelect>
           )}
       </div>
 

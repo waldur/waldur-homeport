@@ -2,6 +2,8 @@ import { DateTime } from 'luxon';
 import { ComponentProps, CSSProperties, FC, useId } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
+import { useControlId, useDescribedBy } from '../Form/controlId';
+
 import { Calendar } from './Calendar';
 import {
   DATE_FORMAT,
@@ -102,12 +104,15 @@ export const DatePicker: FC<DatePickerProps> = ({
   clearable = true,
   onClose,
   autoOpen,
-  id,
+  id: idProp,
   'aria-invalid': ariaInvalid,
   'aria-describedby': ariaDescribedBy,
   onEntryErrorChange,
   style,
 }) => {
+  const id = useControlId(idProp);
+  // The field's help and error text, besides any given by hand.
+  const describedBy = useDescribedBy(ariaDescribedBy);
   const [open, setOpen] = usePickerOpenState(autoOpen);
   const locale = useCalendarLocale();
   const current = value ? DateTime.fromJSDate(value) : undefined;
@@ -243,7 +248,7 @@ export const DatePicker: FC<DatePickerProps> = ({
           aria-describedby={joinIds(
             entry.error && errorId,
             hintId,
-            ariaDescribedBy,
+            describedBy,
           )}
         />
       }

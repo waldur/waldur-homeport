@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
+
+import { FormField } from 'waldur-ui';
 
 import { Select } from '@/form/select';
 import { SwitchField } from '@/form/SwitchField';
@@ -24,7 +25,7 @@ export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
           )}
         </Field>
 
-        <Form.Group>
+        <FormField>
           <Field name="service_provider">
             {({ input }) => (
               <Select
@@ -42,7 +43,7 @@ export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
               />
             )}
           </Field>
-        </Form.Group>
+        </FormField>
       </form>
     </div>
   </div>

@@ -4,14 +4,14 @@ import { OpenStackSecurityGroup } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 
-import { FormField } from './FormField';
+import { FormSelectField } from './FormField';
 
 export const RemoteGroupField: FC<{
   name: string;
   choices: Pick<OpenStackSecurityGroup, 'name' | 'url'>[];
   component?: any;
-}> = ({ name, choices, component = FormField }) => (
-  <Field name={name} component={component} as="select">
+}> = ({ name, choices, component = FormSelectField }) => (
+  <Field name={name} component={component}>
     <option value="">{translate('None')}</option>
     {choices.map((sg) => (
       <option key={sg.url} value={sg.url}>

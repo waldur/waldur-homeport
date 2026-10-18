@@ -1,8 +1,9 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { FormGroup } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { freeipaProfilesCreate } from 'waldur-js-client';
+
+import { FormField } from 'waldur-ui';
 
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
@@ -62,7 +63,7 @@ export const FreeIPAAccountCreate: React.FC<FreeIPAAccountCreateOwnProps> = ({
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <UsernameGroup />
-          <FormGroup>
+          <FormField>
             <div className="pull-right">
               <SubmitButton
                 submitting={submitting}
@@ -75,7 +76,7 @@ export const FreeIPAAccountCreate: React.FC<FreeIPAAccountCreateOwnProps> = ({
                 {translate('Create')}
               </SubmitButton>
             </div>
-          </FormGroup>
+          </FormField>
         </form>
       )}
     />

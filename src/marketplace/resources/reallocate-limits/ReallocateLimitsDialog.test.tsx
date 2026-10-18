@@ -239,6 +239,52 @@ describe('ReallocateLimitsDialog', () => {
     expect(getNextButtonStep1().disabled).toBe(true);
   });
 
+  it('keeps the allocation input focused while typing past the freed pool', async () => {
+    renderDialog({
+      resource: { marketplace_resource_uuid: 'source-resource-uuid' },
+    });
+    const user = userEvent.setup();
+
+    // Free 2 units, so a value of 12 is over the pool.
+    await screen.findByText('Current limit');
+    const cpuInput = await screen.findByTestId('row-cpu-input');
+    await user.clear(cpuInput);
+    await user.type(cpuInput, '8');
+    await user.click(getNextButtonStep0());
+
+    vi.mocked(marketplaceResourcesList).mockResolvedValue(
+      mockListResponse([
+        {
+          uuid: 'target-resource-uuid',
+          name: 'Target Resource',
+          offering_name: 'Offering A',
+          limits: { cpu: 5 },
+        },
+      ]),
+    );
+    await screen.findByText(/Find target resource/i);
+    await typeAndSelectOption(
+      user,
+      'Find target resource(s)',
+      'Target',
+      /^Target Resource/,
+    );
+
+    const allocationInput = await screen.findByTestId(
+      'allocation-target-resource-uuid',
+    );
+    await user.clear(allocationInput);
+    await user.type(allocationInput, '12');
+
+    // Crossing the pool puts a tooltip around the input; it must not remount
+    // it, or the last keystroke goes to the dialog and the field keeps "1".
+    expect(screen.getByTestId('allocation-target-resource-uuid')).toBe(
+      allocationInput,
+    );
+    expect(allocationInput).toHaveFocus();
+    expect(allocationInput).toHaveValue(12);
+  });
+
   it('shows error notification when submission fails', async () => {
     vi.mocked(marketplaceResourcesReallocateLimits).mockRejectedValue(
       new Error('Submission failed'),

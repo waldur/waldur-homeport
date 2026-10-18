@@ -1,11 +1,7 @@
-import classNames from 'classnames';
-import { clamp } from 'lodash-es';
 import { CSSProperties, FC } from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
 import { FieldRenderProps } from 'react-final-form';
 
-import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
-import { translate } from '@/i18n';
+import { NumberInput } from 'waldur-ui';
 
 // ── Base (Pure UI) ──────────────────────────────────────
 
@@ -34,95 +30,18 @@ interface BaseNumberFieldProps {
 }
 
 export const BaseNumberField: FC<BaseNumberFieldProps> = ({
-  value,
   onChange,
-  onBlur,
-  name,
-  unit,
-  placeholder = '  ',
-  solid,
-  min,
-  max,
-  step,
-  id,
   isInvalid,
-  showSteppers = true,
+  solid,
   ...rest
-}) => {
-  const minNum = Number(min ?? -Infinity);
-  const maxNum = Number(max ?? Infinity);
-
-  // The carets move by the input's own step, not always by 1: on a field with
-  // step 0.1 a caret that jumps by a whole unit is not the same control the
-  // keyboard and the spinner offer. Rounded to the step's precision because
-  // repeated float addition drifts -- 0.1 + 0.2 is 0.30000000000000004, and
-  // that would land in the form as the value the user picked.
-  const stepNum = Number(step) > 0 ? Number(step) : 1;
-  const stepDecimals = (String(stepNum).split('.')[1] || '').length;
-  const changeBy = (by: number) =>
-    onChange?.(
-      Number(
-        clamp(Number(value || 0) + by, minNum, maxNum).toFixed(stepDecimals),
-      ),
-    );
-
-  const isOutOfRange = (v) => {
-    // Number('') is 0, so an empty field used to clamp to `min` -- it rendered
-    // invalid before anything was typed, and blurring it silently filled in
-    // the minimum.
-    if (v === null || v === undefined || String(v).trim() === '') {
-      return false;
-    }
-    const num = Number(v);
-    if (!isNaN(num)) {
-      const clamped = clamp(num, minNum, maxNum);
-      return clamped !== num ? clamped : false;
-    }
-    return false;
-  };
-
-  return (
-    <InputGroup className="input-group-number">
-      <Form.Control
-        name={name}
-        value={value}
-        onChange={(e) => onChange?.(e.target.value)}
-        className={classNames(
-          solid && 'form-control-solid',
-          unit && 'has-unit',
-        )}
-        type="number"
-        placeholder={placeholder}
-        min={min}
-        max={max}
-        step={step}
-        id={id}
-        onBlur={() => {
-          const v = isOutOfRange(value);
-          if (v !== false) {
-            onChange?.(v);
-          }
-          onBlur?.();
-        }}
-        isInvalid={isInvalid || isOutOfRange(value) !== false}
-        {...rest}
-      />
-      <div className="input-group-addons">
-        {showSteppers && (
-          <CaretUpDownButtons
-            onClickUp={() => changeBy(stepNum)}
-            onClickDown={() => changeBy(-stepNum)}
-            upLabel={translate('Increase value')}
-            downLabel={translate('Decrease value')}
-          />
-        )}
-        {unit && (
-          <InputGroup.Text className="border-0 unit">{unit}</InputGroup.Text>
-        )}
-      </div>
-    </InputGroup>
-  );
-};
+}) => (
+  <NumberInput
+    onValueChange={onChange}
+    invalid={isInvalid}
+    solid={solid}
+    {...rest}
+  />
+);
 
 // ── Field Adapter ───────────────────────────────────────
 
@@ -136,7 +55,7 @@ export interface NumberFieldProps extends Omit<
 
 export const NumberField: FC<NumberFieldProps> = ({ input, meta, ...rest }) => (
   <BaseNumberField
-    isInvalid={meta.touched && meta.error}
+    isInvalid={meta.touched && !!meta.error}
     {...rest}
     {...input}
   />

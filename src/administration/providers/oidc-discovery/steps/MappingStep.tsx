@@ -1,9 +1,10 @@
 import { FC, useEffect, useMemo } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
-import { Badge } from 'waldur-ui';
+import { Badge, FormField, FormLabel, NativeSelect } from 'waldur-ui';
 
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import {
   isProfileAttributeEnabled,
@@ -73,16 +74,16 @@ const FieldMappingRow: FC<FieldMappingRowProps> = ({
   const availableSet = new Set(field.available_claims);
 
   return (
-    <div className="row mb-4 items-start">
+    <FormField className="row mb-4 items-start">
       <div className="col-md-4">
-        <Form.Label>{field.field}</Form.Label>
+        <FormLabel>{field.field}</FormLabel>
         <small className="block text-quaternary">{field.description}</small>
       </div>
       <div className="col-md-8">
-        <Form.Select
+        <NativeSelect
           value={selectedValue}
           onChange={(e) => handleSelectChange(e.target.value)}
-          className="mb-2"
+          containerClassName="mb-2"
         >
           <option value={NOT_MAPPED}>-- {translate('Not mapped')} --</option>
 
@@ -112,13 +113,14 @@ const FieldMappingRow: FC<FieldMappingRowProps> = ({
           <option value={CUSTOM_CLAIM}>
             -- {translate('Custom claim')} --
           </option>
-        </Form.Select>
+        </NativeSelect>
 
         {mapping?.isCustom && (
-          <Form.Control
+          <BaseInputField
             type="text"
             value={mapping.customClaim || ''}
             onChange={(e) => handleCustomClaimChange(e.target.value)}
+            aria-label={translate('Custom claim name')}
             placeholder={translate('Enter custom claim name')}
           />
         )}
@@ -147,7 +149,7 @@ const FieldMappingRow: FC<FieldMappingRowProps> = ({
           </div>
         )}
       </div>
-    </div>
+    </FormField>
   );
 };
 

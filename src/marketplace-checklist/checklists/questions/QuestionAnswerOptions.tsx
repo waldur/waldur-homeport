@@ -16,11 +16,11 @@ import {
   PlusIcon,
   TrashIcon,
 } from '@phosphor-icons/react';
-import { Card, Form } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField } from 'waldur-ui';
 
 import { required, requiredArray } from '@/core/validators';
 import { StringField } from '@/form';
@@ -105,7 +105,7 @@ const DraggableFieldsListGroup = ({
       id="question-answer-options"
       className="card-bordered bg-secondary py-3"
     >
-      <Form.Group>
+      <FormField>
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -146,7 +146,7 @@ const DraggableFieldsListGroup = ({
             </tbody>
           </table>
         </DndContext>
-      </Form.Group>
+      </FormField>
     </Card>
   );
 };

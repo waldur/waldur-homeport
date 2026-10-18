@@ -2,40 +2,6 @@
 // a var() cannot reach inside one, so the dark-theme mixin swaps the image.
 // The colours are the dark values of the light ones in _variables.custom.scss.
 
-$_select-indicator-dark: svg-select-indicator(css-color(gray-dark, 300));
-$_feedback-icons-dark: (
-  'valid': svg-feedback-valid(css-color(success, 500)),
-  'invalid': svg-feedback-invalid(css-color(error, 400)),
-);
-
-.form-select {
-  @include dark-theme {
-    background-image: escape-svg($_select-indicator-dark);
-  }
-}
-
-@each $state, $icon in $_feedback-icons-dark {
-  .form-control {
-    @include form-validation-state-selector($state) {
-      @include dark-theme {
-        background-image: escape-svg($icon);
-      }
-    }
-  }
-
-  .form-select {
-    @include form-validation-state-selector($state) {
-      &:not([multiple]):not([size]),
-      &:not([multiple])[size='1'] {
-        @include dark-theme {
-          background-image:
-            escape-svg($_select-indicator-dark), escape-svg($icon);
-        }
-      }
-    }
-  }
-}
-
 .breadcrumb-item + .breadcrumb-item::before {
   @include dark-theme {
     content: escape-svg(svg-breadcrumb-divider(css-color(gray-dark, 500)));

@@ -1,10 +1,11 @@
 import { TrashIcon } from '@phosphor-icons/react';
-import { Col, Form, Row, Stack } from 'react-bootstrap';
+import { Col, Row, Stack } from 'react-bootstrap';
 
 import { Badge, BaseButton } from 'waldur-ui';
 
 import { SelectField } from '@/form';
 import { FormGroup } from '@/form';
+import { BaseInputField } from '@/form/InputField';
 import { BaseNumberField } from '@/form/NumberField';
 import { translate } from '@/i18n';
 
@@ -183,7 +184,7 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
             helpEnd
             space={5}
           >
-            <Form.Control
+            <BaseInputField
               type="number"
               value={nodeGroup.disk_config.system_disk_size_gb}
               disabled

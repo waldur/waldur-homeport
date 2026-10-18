@@ -159,7 +159,7 @@ describe('SecurityGroupEditorDialog', () => {
     await user.tab();
 
     await waitFor(() => {
-      expect(cidrInput).toHaveClass('is-invalid');
+      expect(cidrInput).toHaveAttribute('aria-invalid', 'true');
     });
     expect(cidrInput).toHaveAttribute(
       'title',
@@ -181,7 +181,7 @@ describe('SecurityGroupEditorDialog', () => {
     await user.tab();
 
     await waitFor(() => {
-      expect(cidrInput).toHaveClass('is-invalid');
+      expect(cidrInput).toHaveAttribute('aria-invalid', 'true');
     });
     expect(cidrInput).toHaveAttribute(
       'title',
@@ -191,7 +191,7 @@ describe('SecurityGroupEditorDialog', () => {
     await user.clear(cidrInput);
     await user.type(cidrInput, '2002::1234:abcd:ffff:c0a8:101/64');
     await waitFor(() => {
-      expect(cidrInput).not.toHaveClass('is-invalid');
+      expect(cidrInput).not.toHaveAttribute('aria-invalid', 'true');
     });
   });
 
@@ -209,7 +209,7 @@ describe('SecurityGroupEditorDialog', () => {
     await user.tab();
 
     await waitFor(() => {
-      expect(portInput).toHaveClass('is-invalid');
+      expect(portInput).toHaveAttribute('aria-invalid', 'true');
     });
     expect(portInput).toHaveAttribute(
       'title',
@@ -228,7 +228,7 @@ describe('SecurityGroupEditorDialog', () => {
     await user.tab();
 
     await waitFor(() => {
-      expect(portInput).toHaveClass('is-invalid');
+      expect(portInput).toHaveAttribute('aria-invalid', 'true');
     });
     expect(portInput).toHaveAttribute(
       'title',

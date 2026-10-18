@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
-import { FormLabel } from 'react-bootstrap';
+
+import { FormHeading } from 'waldur-ui';
 
 import Avatar from '@/core/Avatar';
 import { translate } from '@/i18n';
@@ -35,14 +36,14 @@ export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
       />
 
       <div>
-        <FormLabel className="mb-0">
+        <FormHeading className="mb-0">
           {props.title}
           {Boolean(props.time) && (
             <small className="text-quaternary ms-2 font-normal">
               {props.time}
             </small>
           )}
-        </FormLabel>
+        </FormHeading>
         {props.children ? (
           <p
             className="text-quaternary mb-0"

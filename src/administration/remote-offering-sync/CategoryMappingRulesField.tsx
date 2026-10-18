@@ -1,10 +1,9 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment, useMemo } from 'react';
-import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton, TablePagination } from 'waldur-ui';
+import { BaseButton, FormField, TablePagination } from 'waldur-ui';
 
 import { usePagination } from '@/core/usePagination';
 import { required, requiredArray } from '@/core/validators';
@@ -57,7 +56,7 @@ const FieldsListGroup = ({
 
   return (
     <div id="category-mapping-rules">
-      <Form.Group>
+      <FormField>
         <table className="table table-row-bordered border-b-[1px] border-b-secondary mb-3">
           <thead>
             <tr>
@@ -80,6 +79,7 @@ const FieldsListGroup = ({
                           <SelectField
                             input={input}
                             meta={meta}
+                            aria-label={`${translate('Remote category')} ${i + 1}`}
                             options={remoteCategories}
                             getOptionValue={(option) => option.uuid}
                             getOptionLabel={(option) => option.title}
@@ -94,7 +94,7 @@ const FieldsListGroup = ({
                       >
                         {(fieldProps) => (
                           <AsyncSelect
-                            inputId={fieldProps.input.name}
+                            aria-label={`${translate('Local category')} ${i + 1}`}
                             loadOptions={loadCategories}
                             defaultOptions
                             getOptionValue={(option) => option.url}
@@ -126,7 +126,7 @@ const FieldsListGroup = ({
             )}
           </tbody>
         </table>
-      </Form.Group>
+      </FormField>
       <div>
         <BaseButton
           variant="text-primary"

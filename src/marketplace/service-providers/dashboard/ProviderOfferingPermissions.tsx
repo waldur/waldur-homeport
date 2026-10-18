@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { marketplaceOfferingPermissionsList } from 'waldur-js-client';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -35,10 +37,10 @@ export const ProviderOfferingPermissions = ({
   ) : (
     offeringPermissions &&
     offeringPermissions.length > 0 && (
-      <Form.Group as={Row}>
-        <Form.Label column xs="auto">
+      <FormField as={Row}>
+        <FormLabel className="col-auto mb-0 py-[10px]">
           {translate('Offering managers:')}
-        </Form.Label>
+        </FormLabel>
         <Col>
           <SymbolsGroup
             items={offeringPermissions}
@@ -47,7 +49,7 @@ export const ProviderOfferingPermissions = ({
             emailKey="user_email"
           />
         </Col>
-      </Form.Group>
+      </FormField>
     )
   );
 };

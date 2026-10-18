@@ -4,7 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { FormHeading, Tooltip } from 'waldur-ui';
 
 import { CodePreview } from '@/core/CodePreview';
 import { FormFooter, TextGroup } from '@/form';
@@ -78,7 +78,7 @@ export const EditGettingStartedDialog: FC<{
               />
 
               <Col className="pb-20">
-                <div className="form-label">{translate('Preview')}</div>
+                <FormHeading as="p">{translate('Preview')}</FormHeading>
                 <CodePreview
                   template={values.template}
                   context={{

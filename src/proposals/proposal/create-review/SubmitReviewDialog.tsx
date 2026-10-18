@@ -5,7 +5,7 @@ import {
   proposalReviewsSubmit,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormHeading } from 'waldur-ui';
 
 import { SubmitButton, TextGroup } from '@/form';
 import { SwitchField } from '@/form/SwitchField';
@@ -132,12 +132,16 @@ export const SubmitReviewDialog: FC<SubmitReviewDialogProps> = ({
                 const starValue = Number(fieldProps.input.value) || 0;
                 const ratingId = `rating-${fieldProps.input.name}`;
                 return (
-                  <div className="form-group mb-7">
-                    <label className="form-label" htmlFor={ratingId}>
+                  <div className="mb-7">
+                    <FormHeading id={`${ratingId}-label`}>
                       {translate('Rate')}
-                    </label>
+                    </FormHeading>
                     <div className="flex items-center gap-4">
-                      <div id={ratingId}>
+                      <div
+                        id={ratingId}
+                        role="group"
+                        aria-labelledby={`${ratingId}-label`}
+                      >
                         <RateStars
                           count={5}
                           size={20}

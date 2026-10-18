@@ -1,7 +1,7 @@
 import { CircleIcon } from '@phosphor-icons/react';
-import { Col, FormGroup, FormLabel, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { FormField, FormLabel, Tooltip } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -21,8 +21,8 @@ export const ConnectionStatusIndicator = ({ status }) => {
   };
 
   return (
-    <FormGroup as={Row} className="col-auto items-center">
-      <FormLabel column xs="auto">
+    <FormField as={Row} className="col-auto items-center">
+      <FormLabel className="col-auto mb-0 py-[10px]">
         {translate('Status')}
       </FormLabel>
       <Col>
@@ -42,6 +42,6 @@ export const ConnectionStatusIndicator = ({ status }) => {
           </Tooltip>
         ))}
       </Col>
-    </FormGroup>
+    </FormField>
   );
 };

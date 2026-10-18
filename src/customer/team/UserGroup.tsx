@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
+
+import { FormField } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -7,7 +8,7 @@ import { DASH_ESCAPE_CODE } from '@/table/constants';
 export const UserGroup: FunctionComponent<{ permission }> = ({
   permission,
 }) => (
-  <Form.Group>
+  <FormField>
     <p>
       <strong>{translate('User')}</strong>:{' '}
       {permission.full_name || DASH_ESCAPE_CODE}
@@ -20,5 +21,5 @@ export const UserGroup: FunctionComponent<{ permission }> = ({
     <p>
       <strong>{translate('Username')}</strong>: {permission.username}
     </p>
-  </Form.Group>
+  </FormField>
 );

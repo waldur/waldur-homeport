@@ -1,7 +1,11 @@
 import { ReactNode, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
+import { FormField, FormLabel } from 'waldur-ui';
+
 import { SubmitButton } from '@/form';
+import { FieldError } from '@/form/FieldError';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -165,9 +169,9 @@ export const AccessSubnetFormDialog = ({
           onChange: (name, value) =>
             setFormData((current) => ({ ...current, [name]: value })),
         })}
-        <Form.Group>
-          <Form.Label>{translate('CIDR')}</Form.Label>
-          <Form.Control
+        <FormField>
+          <FormLabel>{translate('CIDR')}</FormLabel>
+          <BaseInputField
             type="text"
             name="inet"
             value={formData.inet}
@@ -175,21 +179,17 @@ export const AccessSubnetFormDialog = ({
             placeholder={config.placeholder}
             isInvalid={!!error}
           />
-          {error && (
-            <Form.Control.Feedback type="invalid">
-              {error}
-            </Form.Control.Feedback>
-          )}
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>{translate('Description')}</Form.Label>
-          <Form.Control
+          <FieldError error={error} />
+        </FormField>
+        <FormField>
+          <FormLabel>{translate('Description')}</FormLabel>
+          <BaseInputField
             type="text"
             name="description"
             value={formData.description}
             onChange={handleInputChange}
           />
-        </Form.Group>
+        </FormField>
       </ModalDialog>
     </Form>
   );

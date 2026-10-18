@@ -1,7 +1,8 @@
 import { useMemo, useState, useCallback } from 'react';
-import { Form as BootstrapForm, FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { OpenStackSubNetAllocationPool } from 'waldur-js-client';
+
+import { FormField, FormLabel, FormText } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { BaseStringField, FieldError } from '@/form';
@@ -74,12 +75,9 @@ export const CustomIpFieldFinal = ({
       }}
     >
       {({ input, meta }) => (
-        <div>
-          <FormLabel htmlFor={`${parentName}.fixed_ip`}>
-            {translate('Custom IP')}
-          </FormLabel>
+        <FormField>
+          <FormLabel>{translate('Custom IP')}</FormLabel>
           <Select
-            inputId={`${parentName}.fixed_ip`}
             placeholder={translate('e.g. 192.168.42.16')}
             options={options}
             value={options.find((opt) => opt.value === selected?.value)}
@@ -91,11 +89,12 @@ export const CustomIpFieldFinal = ({
           />
 
           <BaseStringField
+            aria-label={translate('Custom IP address')}
             placeholder={translate('Enter custom IP')}
             value={input?.value}
             onChange={input.onChange}
             hidden={selected?.value !== 'other'}
-            className="mt-4"
+            containerClassName={selected?.value === 'other' ? 'mt-4' : 'hidden'}
             autoFocus={autoFocus}
           />
 
@@ -103,11 +102,11 @@ export const CustomIpFieldFinal = ({
             (meta.error ? (
               <FieldError error={meta.error} />
             ) : isOutsideAllocationPool(input.value) ? (
-              <BootstrapForm.Text className="text-warning" as="div">
+              <FormText variant="warning" as="div">
                 {isOutsideAllocationPool(input.value)}
-              </BootstrapForm.Text>
+              </FormText>
             ) : null)}
-        </div>
+        </FormField>
       )}
     </Field>
   );

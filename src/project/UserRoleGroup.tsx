@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { SymbolsGroup } from '@/customer/dashboard/SymbolsGroup';
 import { GenericPermission, Role } from '@/permissions/types';
@@ -45,13 +47,13 @@ export const UserRoleGroup = ({
   }
 
   return (
-    <Form.Group as={Row} className={className}>
-      <Form.Label column xs="auto">
+    <FormField as={Row} className={className}>
+      <FormLabel className="col-auto mb-0 py-[10px]">
         {altLabel || role?.description || role?.name}:
-      </Form.Label>
+      </FormLabel>
       <Col xs={12} sm>
         <SymbolsGroup items={items} max={max || 6} onClick={onClick} />
       </Col>
-    </Form.Group>
+    </FormField>
   );
 };

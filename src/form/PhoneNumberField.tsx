@@ -1,33 +1,25 @@
 import { PhoneIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
-import { Form, FormControlProps, InputGroup } from 'react-bootstrap';
 import { FieldRenderProps } from 'react-final-form';
 
 import { formatPhoneNumber } from '@/core/utils';
 
+import { BaseInputField, BaseInputFieldProps } from './InputField';
+
 // ── Base (Pure UI) ──────────────────────────────────────
 
-interface BasePhoneNumberFieldProps extends Omit<FormControlProps, 'type'> {
-  solid?: boolean;
-}
+type BasePhoneNumberFieldProps = Omit<BaseInputFieldProps, 'type' | 'start'>;
 
-const BasePhoneNumberField: FC<BasePhoneNumberFieldProps> = ({
-  solid = false,
-  placeholder = ' ',
-  className,
-  ...rest
-}) => (
-  <InputGroup className="has-icon">
-    <div className="input-group-icon">
-      <PhoneIcon weight="bold" />
-    </div>
-    <Form.Control
-      type="tel"
-      className={solid ? 'form-control-solid' : className}
-      placeholder={placeholder}
-      {...rest}
-    />
-  </InputGroup>
+const BasePhoneNumberField: FC<BasePhoneNumberFieldProps> = (props) => (
+  <BaseInputField
+    type="tel"
+    start={
+      <span className="[&>svg]:size-[20px]">
+        <PhoneIcon weight="bold" />
+      </span>
+    }
+    {...props}
+  />
 );
 
 // ── Field Adapter ───────────────────────────────────────
@@ -58,7 +50,7 @@ export const PhoneNumberField: FC<PhoneNumberFieldProps> = ({
 
   return (
     <BasePhoneNumberField
-      isInvalid={meta.touched && meta.error}
+      isInvalid={meta.touched && !!meta.error}
       {...rest}
       {...input}
       onBlur={handleBlur}

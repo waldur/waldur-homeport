@@ -16,12 +16,6 @@ $text-muted: var(--text-quaternary);
 $page-bg: var(--bg-secondary) !default;
 $card-bg: var(--bg-primary) !default;
 $modal-content-bg: var(--bg-primary) !default;
-$form-label-color: var(--text-primary) !default;
-$form-text-color: var(--text-quaternary) !default;
-$input-plaintext-color: var(--text-secondary) !default;
-$input-group-addon-bg: var(--bg-tertiary) !default;
-$input-group-addon-color: var(--text-primary) !default;
-$btn-link-disabled-color: var(--text-tertiary) !default;
 $list-group-color: var(--text-primary) !default;
 $list-group-hover-bg: var(--bg-tertiary) !default;
 $list-group-disabled-color: var(--text-tertiary) !default;
@@ -29,9 +23,6 @@ $list-group-action-color: var(--text-secondary) !default;
 $list-group-action-active-bg: var(--bg-quaternary) !default;
 $blockquote-footer-color: var(--text-tertiary) !default;
 $figure-caption-color: var(--text-tertiary) !default;
-$form-select-disabled-bg: var(--bg-quaternary) !default;
-$form-range-track-bg: var(--border-divider-medium) !default;
-$form-range-thumb-disabled-bg: var(--text-quaternary) !default;
 $thumbnail-border-color: var(--border-primary) !default;
 $border-dashed-color: var(--border-divider-medium) !default; // Custom variable
 // White text on a dark key in both themes (in dark mode the inverted $gray-900
@@ -56,13 +47,6 @@ $utilities-bg: () !default;
 // $body-bg in Sass. The two the app uses are written with the tokens in
 // core/components/_tables.scss.
 $table-variants: () !default;
-// Bootstrap's shade-color() and tint-color() need a Sass colour; color-mix()
-// is the same mix, done by the browser.
-$form-file-button-hover-bg: color-mix(
-  in srgb,
-  var(--bg-tertiary) 95%,
-  #000
-) !default;
 
 // Links
 
@@ -95,10 +79,9 @@ $card-px: 1.85rem !default;
 
 // The brand is the tenant's runtime --brand-* ramp, not the static $primary
 // Bootstrap compiles with. These are the Bootstrap outputs that would
-// otherwise paint the compile-time default green: the shared focus glow
-// (inputs, selects, .btn-close), the active list-group row and the range
-// thumb. None of them goes through a Sass colour function, so a CSS
-// variable is safe here.
+// otherwise paint the compile-time default green: the .btn-close focus glow
+// and the active list-group row. Neither goes through a Sass colour
+// function, so a CSS variable is safe here.
 $input-btn-focus-color: color-mix(
   in srgb,
   var(--focus-ring-color) 25%,
@@ -106,48 +89,15 @@ $input-btn-focus-color: color-mix(
 ) !default;
 $list-group-active-bg: var(--bg-brand-solid) !default;
 $list-group-active-border-color: var(--bg-brand-solid) !default;
-$form-range-thumb-bg: var(--bg-brand-solid) !default;
-$form-range-thumb-active-bg: var(--bg-brand-tertiary) !default;
 
-$input-btn-padding-y: 0.538rem !default;
-$input-btn-padding-y-sm: 0.39rem !default;
+// Sets $input-height-lg (the AI assistant history search).
 $input-btn-padding-y-lg: 0.692rem !default;
 
-$btn-padding-y: $input-btn-padding-y !default;
-$btn-padding-x: 0.846rem !default;
-$btn-padding-y-sm: 0.23rem !default;
-$btn-padding-x-sm: 0.54rem !default;
-$btn-padding-y-lg: $input-btn-padding-y-lg !default;
-$btn-padding-x-lg: 1.153rem !default;
-
-$btn-border-radius-sm: $border-radius-sm !default;
-
-$btn-disabled-opacity: 1 !default;
-
-// Form inputs
-$input-padding-y: 0.692rem !default;
-$input-padding-x: 0.925rem !default;
-$input-font-size: 1.08rem !default;
-$input-font-weight: var(--font-weight-normal) !default;
 // Bootstrap's own default is a raw 300.
 $lead-font-weight: var(--font-weight-light) !default;
 
-$input-color: var(--text-primary) !default;
-$input-placeholder-color: var(--text-quaternary) !default;
-$input-bg: var(--bg-primary) !default;
-$input-border-color: var(--border-primary) !default;
-$input-box-shadow: unset !default;
 $input-disabled-bg: var(--bg-secondary) !default;
 $input-disabled-color: var(--text-disabled) !default; // Custom variable
-$input-readonly-bg: var(--bg-primary) !default; // Custom variable
-// Filled inputs (.form-control-solid): a tertiary surface, quaternary when
-// focused. In dark mode that is a dark fill with light text, where the
-// inverted grays gave a mid-gray (#61646c) one with dim (#94969c) text.
-$input-solid-bg: var(--bg-tertiary) !default; // Custom variable
-$input-solid-bg-focus: var(--bg-quaternary) !default; // Custom variable
-$input-solid-color: var(--text-secondary) !default; // Custom variable
-$input-focus-border-color: var(--border-brand) !default;
-$input-focus-box-shadow: 0 0 0 1px var(--border-brand) !default;
 
 // Form validation. The state colours are the status tokens with the values
 // the theme-inverted ramps gave: invalid is --status-danger-border
@@ -156,44 +106,16 @@ $input-focus-box-shadow: 0 0 0 1px var(--border-brand) !default;
 // (#6ce9a6 before).
 $form-feedback-valid-color: var(--status-success-solid);
 $form-feedback-invalid-color: var(--status-danger-border);
-$form-focus-feedback-invalid-color: var(
-  --status-danger-solid
-); // Custom variable
-
-// The icons are data URIs: light colours here, dark ones in
-// core/components/_dark-icons.scss.
-$form-feedback-icon-valid: svg-feedback-valid(css-color(success, 600));
-$form-feedback-icon-invalid: svg-feedback-invalid(css-color(error, 500));
-$form-select-indicator-color: css-color(gray, 600) !default;
-
-// Bootstrap passes each state's entries to form-validation-state() as named
-// arguments. Its defaults for the tooltip and the focus ring run Sass colour
-// functions on the colour, so they are given here, the same mixes in
-// color-mix(); the (unused) tooltips keep their black text.
+// Bootstrap's own default for this map runs Sass colour functions on the
+// colours, which cannot take a CSS variable. Nothing reads it now that the
+// validation styles are gone (a waldur-ui input draws its own error state),
+// so it only has to exist.
 $form-validation-states: (
   'valid': (
     'color': $form-feedback-valid-color,
-    'icon': $form-feedback-icon-valid,
-    'tooltip-color': #000,
-    'tooltip-bg-color': color-mix(
-        in srgb,
-        $form-feedback-valid-color 90%,
-        transparent
-      ),
-    'focus-box-shadow': 0 0 0 0.25rem
-      color-mix(in srgb, $form-feedback-valid-color 25%, transparent),
   ),
   'invalid': (
     'color': $form-feedback-invalid-color,
-    'icon': $form-feedback-icon-invalid,
-    'tooltip-color': #000,
-    'tooltip-bg-color': color-mix(
-        in srgb,
-        $form-feedback-invalid-color 90%,
-        transparent
-      ),
-    'focus-box-shadow': 0 0 0 0.25rem
-      color-mix(in srgb, $form-feedback-invalid-color 25%, transparent),
   ),
 );
 

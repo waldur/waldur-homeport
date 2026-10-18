@@ -1,7 +1,10 @@
 import { ChangeEvent, FC, useState } from 'react';
-import { Form as BootstrapForm } from 'react-bootstrap';
 import { useField } from 'react-final-form';
 
+import { FormField, NativeSelect } from 'waldur-ui';
+
+import { FieldError } from '@/form/FieldError';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 
 const CUSTOM_MODE = 'custom';
@@ -50,9 +53,10 @@ export const ProtocolField: FC<{ name: string }> = ({ name }) => {
   };
 
   return (
-    <BootstrapForm.Group as="td">
+    <FormField as="td">
       <div className="flex gap-1">
-        <BootstrapForm.Select
+        <NativeSelect
+          aria-label={translate('Protocol')}
           value={mode}
           onChange={handleModeChange}
           onBlur={input.onBlur}
@@ -62,9 +66,9 @@ export const ProtocolField: FC<{ name: string }> = ({ name }) => {
           <option value="icmp">ICMP</option>
           <option value="any">{translate('Any')}</option>
           <option value={CUSTOM_MODE}>{translate('Custom')}</option>
-        </BootstrapForm.Select>
+        </NativeSelect>
         {isCustom && (
-          <BootstrapForm.Control
+          <BaseInputField
             type="number"
             min={0}
             max={255}
@@ -72,13 +76,14 @@ export const ProtocolField: FC<{ name: string }> = ({ name }) => {
             value={value}
             onChange={handleNumberChange}
             onBlur={input.onBlur}
+            aria-label={translate('Protocol number')}
             placeholder="0-255"
             isInvalid={invalid}
-            style={{ minWidth: '90px' }}
+            containerClassName="min-w-[90px]"
           />
         )}
       </div>
-      {invalid && <div className="invalid-feedback block">{meta.error}</div>}
-    </BootstrapForm.Group>
+      {invalid && <FieldError error={meta.error} />}
+    </FormField>
   );
 };

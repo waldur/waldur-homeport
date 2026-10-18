@@ -159,7 +159,6 @@ export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
             <OfferingResourcesTable offering={offering} />
             <TextGroup
               name="reason"
-              as="textarea"
               placeholder={
                 offering.state === 'Unavailable'
                   ? translate('Optional reason (displayed in logs)')

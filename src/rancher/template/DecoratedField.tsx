@@ -1,6 +1,8 @@
 import React from 'react';
-import { Col, Form } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { Field, FieldRenderProps } from 'react-final-form';
+
+import { FormField, FormLabel, FormText } from 'waldur-ui';
 
 import { composeValidators, required } from '@/core/validators';
 
@@ -16,17 +18,16 @@ interface OwnProps extends FieldProps {
 
 export const DecoratedField: React.FC<OwnProps> = (props) => (
   <Col sm={6}>
-    <Form.Group>
+    <FormField controlId={props.variable}>
       {props.action ? (
         <div className="pull-right">
           <small>{props.action}</small>
         </div>
       ) : null}
-      <Form.Label htmlFor={props.variable}>
+      <FormLabel>
         <DecoratedLabel label={props.label} required={props.required} />
-      </Form.Label>
+      </FormLabel>
       <Field
-        id={props.variable}
         name={props.variable}
         component={props.component}
         validate={
@@ -40,7 +41,7 @@ export const DecoratedField: React.FC<OwnProps> = (props) => (
         }
       />
 
-      <Form.Text className="text-quaternary">{props.description}</Form.Text>
-    </Form.Group>
+      <FormText variant="muted">{props.description}</FormText>
+    </FormField>
   </Col>
 );

@@ -7,6 +7,8 @@ import {
   proposalPublicCallsRetrieve,
 } from 'waldur-js-client';
 
+import { FormField, FormLabel } from 'waldur-ui';
+
 import { SHORT_STALE_TIME, UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -131,13 +133,8 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
             // the one the call offers; the request always takes the call's.
             <Field<any> name="plan">
               {({ input, meta }) => (
-                <div className="mb-5">
-                  <label
-                    className="form-label font-medium"
-                    htmlFor={input.name}
-                  >
-                    {translate('Plan')}
-                  </label>
+                <FormField className="mb-5">
+                  <FormLabel>{translate('Plan')}</FormLabel>
                   <SelectField
                     input={input}
                     meta={meta}
@@ -147,7 +144,7 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
                     placeholder={translate('Select plan...')}
                     noUpdateOnBlur
                   />
-                </div>
+                </FormField>
               )}
             </Field>
           )}

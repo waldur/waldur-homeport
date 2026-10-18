@@ -134,7 +134,6 @@ export const ProposalFieldsSection: FC<ProposalFieldsSectionProps> = ({
           const locked = Boolean(row.locked_reason);
           const select = (
             <Select
-              inputId={`proposal-field-${row.field}`}
               options={options}
               value={{ value: row.state, label: getStateLabel(row.state) }}
               onChange={(option: { value: ProposalFieldState }) =>
@@ -150,7 +149,6 @@ export const ProposalFieldsSection: FC<ProposalFieldsSectionProps> = ({
             <FormTable.Item
               key={row.field}
               label={getFieldLabel(row.field)}
-              htmlFor={`proposal-field-${row.field}`}
               description={<UsageList usage={row.usage} />}
               warnTooltip={
                 isReadOnly

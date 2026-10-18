@@ -38,7 +38,6 @@ const OfferingOptionLabel: FC<{ option: MergeOfferingOption }> = ({
 );
 
 interface OfferingMergeOfferingSelectProps {
-  id: string;
   value: MergeOfferingOption | MergeOfferingOption[] | null;
   onChange(value: MergeOfferingOption | MergeOfferingOption[] | null): void;
   isMulti?: boolean;
@@ -54,7 +53,6 @@ interface OfferingMergeOfferingSelectProps {
 export const OfferingMergeOfferingSelect: FC<
   OfferingMergeOfferingSelectProps
 > = ({
-  id,
   value,
   onChange,
   isMulti,
@@ -81,7 +79,6 @@ export const OfferingMergeOfferingSelect: FC<
   const excluded = excludeUuids.join(',');
   return (
     <AsyncSelect
-      inputId={id}
       value={value}
       onChange={(newValue: any) => onChange(newValue ?? null)}
       isMulti={isMulti}

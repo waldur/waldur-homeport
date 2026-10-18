@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC, useEffect, useMemo } from 'react';
-import { Form as BootstrapForm } from 'react-bootstrap';
 import { Form, useForm, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
@@ -11,6 +10,8 @@ import {
   openstackSubnetsList,
   openstackVolumeTypesList,
 } from 'waldur-js-client';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -229,26 +230,22 @@ const MigrateTenantFields = ({ offering, resource }) => {
         <LoadingSpinner />
       ) : queryResult.data ? (
         <>
-          <BootstrapForm.Group className="mb-7">
-            <BootstrapForm.Label className="form-label">
-              {translate('Volume types')}
-            </BootstrapForm.Label>
+          <FormField className="mb-7">
+            <FormLabel>{translate('Volume types')}</FormLabel>
             <FieldArray name="volumeTypes">
               {({ fields }) => (
                 <VolumeTypesTable fields={fields} options={queryResult.data} />
               )}
             </FieldArray>
-          </BootstrapForm.Group>
+          </FormField>
           <SelectGroup
             name="networks"
             label={translate('Networks')}
             options={queryResult.data.networks}
             isMulti
           />
-          <BootstrapForm.Group className="mb-7">
-            <BootstrapForm.Label className="form-label">
-              {translate('Subnets')}
-            </BootstrapForm.Label>
+          <FormField className="mb-7">
+            <FormLabel>{translate('Subnets')}</FormLabel>
             <FieldArray name="subnets">
               {({ fields }) => (
                 <SubnetsTable
@@ -257,7 +254,7 @@ const MigrateTenantFields = ({ offering, resource }) => {
                 />
               )}
             </FieldArray>
-          </BootstrapForm.Group>
+          </FormField>
         </>
       ) : null}
       <BooleanGroup

@@ -1,39 +1,32 @@
-import classNames from 'classnames';
-import { FC, useCallback } from 'react';
-import { Form, FormControlProps } from 'react-bootstrap';
+import { FC, forwardRef } from 'react';
 import { FieldRenderProps } from 'react-final-form';
+
+import { InputGroup, Textarea, TextareaProps } from 'waldur-ui';
 
 // ── Base (Pure UI) ──────────────────────────────────────
 
-interface BaseTextFieldProps extends FormControlProps {
-  rows?: number;
-  solid?: boolean;
+interface BaseTextFieldProps extends Omit<TextareaProps, 'invalid'> {
+  isInvalid?: boolean;
+  /** Classes for the wrapper: widths and margins that place the field in its
+   * row. `className` goes on the `<textarea>`. */
+  containerClassName?: string;
 }
 
-export const BaseTextField: FC<BaseTextFieldProps> = ({
-  rows = 5,
-  solid,
-  className,
-  isInvalid,
-  ...rest
-}) => {
-  const storeScroll = useCallback((e) => {
-    const target = (e.target || e.currentTarget) as HTMLTextAreaElement;
-    target.dataset.scroll = String(target.scrollTop);
-  }, []);
-
-  return (
-    <Form.Control
-      isInvalid={isInvalid}
-      as="textarea"
-      className={classNames(solid && 'form-control-solid', className)}
-      placeholder="  "
-      onScroll={storeScroll}
+export const BaseTextField = forwardRef<
+  HTMLTextAreaElement,
+  BaseTextFieldProps
+>(({ rows = 5, isInvalid, className, containerClassName, ...rest }, ref) => (
+  <InputGroup invalid={isInvalid} align="top" className={containerClassName}>
+    <Textarea
+      ref={ref}
+      invalid={isInvalid}
       rows={rows}
+      className={className}
       {...rest}
     />
-  );
-};
+  </InputGroup>
+));
+BaseTextField.displayName = 'BaseTextField';
 
 // ── Field Adapter ───────────────────────────────────────
 
@@ -46,5 +39,9 @@ export interface TextFieldProps extends Omit<
 }
 
 export const TextField: FC<TextFieldProps> = ({ input, meta, ...rest }) => (
-  <BaseTextField isInvalid={meta.touched && meta.error} {...rest} {...input} />
+  <BaseTextField
+    isInvalid={meta.touched && !!meta.error}
+    {...rest}
+    {...input}
+  />
 );

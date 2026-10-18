@@ -3,6 +3,8 @@ import { FC, useCallback, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
+import { NativeSelect } from 'waldur-ui';
+
 import { formatDate, parseDate } from '@/core/dateUtils';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -13,8 +15,7 @@ import { RenewalCostBreakdown } from './RenewalCostBreakdown';
 import { RenewAllocationFormData } from './types';
 
 const SelectFieldInline = ({ input, options }) => (
-  <select
-    className="form-select"
+  <NativeSelect
     value={input.value}
     onChange={(e) => input.onChange(Number(e.target.value))}
   >
@@ -23,7 +24,7 @@ const SelectFieldInline = ({ input, options }) => (
         {opt.label}
       </option>
     ))}
-  </select>
+  </NativeSelect>
 );
 
 export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {

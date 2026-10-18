@@ -1,10 +1,9 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { Form, FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import { OfferingComponent } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField, FormFieldset, FormLegend } from 'waldur-ui';
 
 import { composeValidators, required } from '@/core/validators';
 import { NumberField, SelectField } from '@/form';
@@ -31,7 +30,7 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
   return (
     <>
       {fields.length > 0 && (
-        <Form.Group id="component-limits-set">
+        <FormField id="component-limits-set">
           <div>
             <table className="table px-0 mb-0">
               <thead>
@@ -59,6 +58,7 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                             <SelectField
                               input={input}
                               meta={meta}
+                              aria-label={`${translate('Component')} ${i + 1}`}
                               placeholder={translate('Select component...')}
                               options={getAvailableOptions(details)}
                               getOptionValue={(option) => option.uuid}
@@ -83,6 +83,7 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                             <NumberField
                               input={input}
                               meta={meta}
+                              aria-label={`${translate('Limit')} ${i + 1}`}
                               placeholder="0"
                               unit={details?.measured_unit}
                               min={0}
@@ -118,7 +119,7 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
               </tbody>
             </table>
           </div>
-        </Form.Group>
+        </FormField>
       )}
       <div>
         <BaseButton
@@ -133,12 +134,12 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
 };
 
 export const ComponentLimitsField = ({ components }) => (
-  <div className="mb-7">
-    <FormLabel className="required">
+  <FormFieldset className="mb-7">
+    <FormLegend required>
       {translate('When component limits reaches')}
-    </FormLabel>
+    </FormLegend>
     <FieldArray name="component_limits_set" validate={required}>
       {(props) => <FieldsListGroup {...props} components={components} />}
     </FieldArray>
-  </div>
+  </FormFieldset>
 );

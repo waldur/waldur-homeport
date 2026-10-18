@@ -5,7 +5,7 @@
 /* eslint-disable no-console */
 import { useQuery } from '@tanstack/react-query';
 import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
-import { Card, Col, Container, Form, Modal, Row } from 'react-bootstrap';
+import { Card, Col, Container, Modal, Row } from 'react-bootstrap';
 import { projectsList } from 'waldur-js-client';
 
 import {
@@ -15,12 +15,16 @@ import {
   Checkbox,
   DatePicker,
   DateRangePicker,
+  FormField,
+  FormLabel,
+  NativeSelect,
   parseDateValue,
   toIsoDate,
 } from 'waldur-ui';
 
 import { getNextPageUrl } from '@/core/api';
 import { LoadingErred } from '@/core/LoadingErred';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { useCustomer } from '@/workspace/hooks';
 
@@ -122,39 +126,42 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
       <Modal.Body>
         <Row className="g-2 mb-3">
           <Col xs={12} md={4}>
-            <Form.Label className="small mb-1" htmlFor="dlg-nameFilter">
-              {translate('Search')}
-            </Form.Label>
-            <Form.Control
-              id="dlg-nameFilter"
-              type="text"
-              size="sm"
-              placeholder={translate('Filter by name…')}
-              value={nameFilter}
-              onChange={(e) => setNameFilter(e.target.value)}
-            />
+            <FormField>
+              <FormLabel className="small mb-1">
+                {translate('Search')}
+              </FormLabel>
+              <BaseInputField
+                type="text"
+                size="sm"
+                placeholder={translate('Filter by name…')}
+                value={nameFilter}
+                onChange={(e) => setNameFilter(e.target.value)}
+              />
+            </FormField>
           </Col>
           <Col xs={6} md={4}>
-            <Form.Label className="small mb-1" htmlFor="dlg-startAfter">
-              {translate('Start date — after')}
-            </Form.Label>
-            <DatePicker
-              id="dlg-startAfter"
-              size="sm"
-              value={parseDateValue(startAfter)}
-              onChange={(date) => setStartAfter(toIsoDate(date))}
-            />
+            <FormField>
+              <FormLabel className="small mb-1">
+                {translate('Start date — after')}
+              </FormLabel>
+              <DatePicker
+                size="sm"
+                value={parseDateValue(startAfter)}
+                onChange={(date) => setStartAfter(toIsoDate(date))}
+              />
+            </FormField>
           </Col>
           <Col xs={6} md={4}>
-            <Form.Label className="small mb-1" htmlFor="dlg-endBefore">
-              {translate('End date — before')}
-            </Form.Label>
-            <DatePicker
-              id="dlg-endBefore"
-              size="sm"
-              value={parseDateValue(endBefore)}
-              onChange={(date) => setEndBefore(toIsoDate(date))}
-            />
+            <FormField>
+              <FormLabel className="small mb-1">
+                {translate('End date — before')}
+              </FormLabel>
+              <DatePicker
+                size="sm"
+                value={parseDateValue(endBefore)}
+                onChange={(date) => setEndBefore(toIsoDate(date))}
+              />
+            </FormField>
           </Col>
         </Row>
         <div className="flex items-center gap-4 mb-3 flex-wrap">
@@ -787,9 +794,9 @@ export const OrganisationReportsTab: FC = () => {
         )}
 
         {allResources.length > 1 && (
-          <Form.Select
+          <NativeSelect
             size="sm"
-            style={{ width: 'auto' }}
+            fit
             value={activeResource}
             onChange={(e) => {
               setSelectedResource(e.target.value);
@@ -801,13 +808,13 @@ export const OrganisationReportsTab: FC = () => {
                 {nameMaps?.offering?.[r] ?? r}
               </option>
             ))}
-          </Form.Select>
+          </NativeSelect>
         )}
 
         {allMonths.length > 0 && (
-          <Form.Select
+          <NativeSelect
             size="sm"
-            style={{ width: 'auto' }}
+            fit
             value={selectedMonth}
             onChange={(e) => setSelectedMonth(e.target.value)}
           >
@@ -820,7 +827,7 @@ export const OrganisationReportsTab: FC = () => {
                 </option>
               );
             })}
-          </Form.Select>
+          </NativeSelect>
         )}
 
         {loadTriggered && (
@@ -864,40 +871,41 @@ export const OrganisationReportsTab: FC = () => {
             {/* Project pre-filters */}
             <Row className="g-2 mb-3">
               <Col xs={12} md={4}>
-                <Form.Label className="small mb-1" htmlFor="projectSearch">
-                  {translate('Project search')}
-                </Form.Label>
-                <Form.Control
-                  id="projectSearch"
-                  type="text"
-                  placeholder={translate('Name search (applied at load time)…')}
-                  value={projectSearch}
-                  onChange={(e) => setProjectSearch(e.target.value)}
-                />
+                <FormField>
+                  <FormLabel className="small mb-1">
+                    {translate('Project search')}
+                  </FormLabel>
+                  <BaseInputField
+                    type="text"
+                    placeholder={translate(
+                      'Name search (applied at load time)…',
+                    )}
+                    value={projectSearch}
+                    onChange={(e) => setProjectSearch(e.target.value)}
+                  />
+                </FormField>
               </Col>
               <Col xs={12} md={4}>
-                <Form.Label
-                  className="small mb-1"
-                  htmlFor="reportProjectPeriod"
-                >
-                  {translate('Project period')}
-                </Form.Label>
-                <DateRangePicker
-                  id="reportProjectPeriod"
-                  value={
-                    projectStartAfter && projectEndBefore
-                      ? [
-                          parseDateValue(projectStartAfter)!,
-                          parseDateValue(projectEndBefore)!,
-                        ]
-                      : undefined
-                  }
-                  onChange={(range) => {
-                    setProjectStartAfter(range ? toIsoDate(range[0]) : '');
-                    setProjectEndBefore(range ? toIsoDate(range[1]) : '');
-                  }}
-                  clearable
-                />
+                <FormField>
+                  <FormLabel className="small mb-1">
+                    {translate('Project period')}
+                  </FormLabel>
+                  <DateRangePicker
+                    value={
+                      projectStartAfter && projectEndBefore
+                        ? [
+                            parseDateValue(projectStartAfter)!,
+                            parseDateValue(projectEndBefore)!,
+                          ]
+                        : undefined
+                    }
+                    onChange={(range) => {
+                      setProjectStartAfter(range ? toIsoDate(range[0]) : '');
+                      setProjectEndBefore(range ? toIsoDate(range[1]) : '');
+                    }}
+                    clearable
+                  />
+                </FormField>
               </Col>
             </Row>
 

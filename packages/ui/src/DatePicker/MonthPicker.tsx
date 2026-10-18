@@ -5,6 +5,7 @@ import { CSSProperties, FC, useId, useState } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
 import { cn } from '../cn';
+import { useControlId, useDescribedBy } from '../Form/controlId';
 
 import { DateBound, parseBound } from './dateBounds';
 import { validateEntry } from './dateEntry';
@@ -72,12 +73,15 @@ export const MonthPicker: FC<MonthPickerProps> = ({
   clearable = true,
   onClose,
   autoOpen,
-  id,
+  id: idProp,
   'aria-invalid': ariaInvalid,
   'aria-describedby': ariaDescribedBy,
   onEntryErrorChange,
   style,
 }) => {
+  const id = useControlId(idProp);
+  // The field's help and error text, besides any given by hand.
+  const describedBy = useDescribedBy(ariaDescribedBy);
   const [open, setOpen] = usePickerOpenState(autoOpen);
   const current = value ? DateTime.fromJSDate(value).startOf('month') : null;
   const [year, setYear] = useState(() => (current ?? DateTime.now()).year);
@@ -140,7 +144,7 @@ export const MonthPicker: FC<MonthPickerProps> = ({
           aria-describedby={joinIds(
             entry.error && errorId,
             hintId,
-            ariaDescribedBy,
+            describedBy,
           )}
         />
       }

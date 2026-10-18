@@ -1,10 +1,10 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import React, { useState } from 'react';
-import { Card, Col, Form, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { FormField, FormText, Tooltip } from 'waldur-ui';
 
 import { SubmitButton } from '@/form';
 import { FormGroup } from '@/form';
@@ -95,16 +95,16 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
           />
         </FormGroup>
         {tokenLifetime?.value === null ? (
-          <Form.Group>
-            <Form.Text className="text-danger">
+          <FormField>
+            <FormText variant="danger" role="status">
               {translate(
                 'By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed.',
               )}
               {translate(
                 'Please make sure you know what you are doing and set to 10 minutes if unsure.',
               )}
-            </Form.Text>
-          </Form.Group>
+            </FormText>
+          </FormField>
         ) : null}
       </Card.Body>
     </Card>

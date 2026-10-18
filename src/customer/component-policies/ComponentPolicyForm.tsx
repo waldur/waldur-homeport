@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { lowerCase, upperFirst } from 'lodash-es';
 import { FC, useMemo } from 'react';
-import { Form } from 'react-bootstrap';
 import {
   Customer,
   marketplaceCustomerComponentUsagePoliciesActionsRetrieve,
   marketplaceProviderOfferingsList,
 } from 'waldur-js-client';
+
+import { FormField } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
@@ -119,9 +120,9 @@ export const ComponentPolicyForm: FC<ComponentPolicyFormProps> = ({
         />
       )}
       {!!errors && (
-        <Form.Group>
+        <FormField>
           <FieldError error={errors} />
-        </Form.Group>
+        </FormField>
       )}
     </>
   );

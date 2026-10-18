@@ -1,8 +1,8 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
-import { Form, Stack } from 'react-bootstrap';
+import { Stack } from 'react-bootstrap';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField, FormLabel, FormText } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
@@ -75,8 +75,8 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
         ) : undefined
       }
     >
-      <Form.Group className="mb-2">
-        <Form.Label>{translate('Key')}</Form.Label>
+      <FormField className="mb-2">
+        <FormLabel>{translate('Key')}</FormLabel>
         {ready ? (
           <Stack gap={2} direction="horizontal">
             {/* readOnly, not disabled: a disabled input renders its text muted
@@ -99,12 +99,12 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
             <LoadingSpinnerSimple /> {translate('Revealing…')}
           </div>
         )}
-        <Form.Text className="text-quaternary">
+        <FormText variant="muted">
           {translate(
             'Keep this key secret. You can reveal it again anytime, or rotate it if it is ever exposed.',
           )}
-        </Form.Text>
-      </Form.Group>
+        </FormText>
+      </FormField>
     </ModalDialog>
   );
 };

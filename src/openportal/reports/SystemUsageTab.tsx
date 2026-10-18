@@ -5,9 +5,9 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Card, Container, Form } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton, NativeSelect } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { translate } from '@/i18n';
@@ -318,9 +318,9 @@ export const SystemUsageTab: FC = () => {
         <h4 className="mb-0">{translate('System Usage Report')}</h4>
 
         {allResources.length > 1 && (
-          <Form.Select
+          <NativeSelect
             size="sm"
-            style={{ width: 'auto' }}
+            fit
             value={activeResource}
             onChange={(e) => {
               setSelectedResource(e.target.value);
@@ -332,13 +332,13 @@ export const SystemUsageTab: FC = () => {
                 {nameMaps?.offering?.[r] ?? r}
               </option>
             ))}
-          </Form.Select>
+          </NativeSelect>
         )}
 
         {allMonths.length > 0 && (
-          <Form.Select
+          <NativeSelect
             size="sm"
-            style={{ width: 'auto' }}
+            fit
             value={selectedMonth}
             onChange={(e) => setSelectedMonth(e.target.value)}
           >
@@ -348,7 +348,7 @@ export const SystemUsageTab: FC = () => {
                 {m}
               </option>
             ))}
-          </Form.Select>
+          </NativeSelect>
         )}
 
         <div className="ms-auto flex items-center gap-2">

@@ -17,7 +17,7 @@
 import { FileArrowDownIcon, FileXlsIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Badge, SegmentedControl, Tooltip } from 'waldur-ui';
+import { Badge, NativeSelect, SegmentedControl, Tooltip } from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { translate } from '@/i18n';
@@ -288,9 +288,9 @@ export const StorageReportVis: FC<Props> = ({
 
         {/* Volume filter — only relevant for bar view, user mode */}
         {view === 'bar' && groupMode === 'user' && volumes.length > 1 && (
-          <select
-            className="form-select form-select-sm"
-            style={{ width: 'auto' }}
+          <NativeSelect
+            size="sm"
+            fit
             value={volumeFilter}
             onChange={(e) => setVolumeFilter(e.target.value)}
           >
@@ -300,7 +300,7 @@ export const StorageReportVis: FC<Props> = ({
                 {v}
               </option>
             ))}
-          </select>
+          </NativeSelect>
         )}
       </div>
 

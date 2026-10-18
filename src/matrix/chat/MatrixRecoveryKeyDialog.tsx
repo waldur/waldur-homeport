@@ -2,7 +2,7 @@ import { EyeIcon, EyeSlashIcon, KeyIcon } from '@phosphor-icons/react';
 import { FC, FormEvent, useState } from 'react';
 import { Form, Stack } from 'react-bootstrap';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField, FormLabel, FormText } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
@@ -105,8 +105,8 @@ export const MatrixRecoveryKeyDialog: FC<MatrixRecoveryKeyDialogProps> = ({
       }
     >
       <Form id={FORM_ID} onSubmit={submit} noValidate>
-        <Form.Group controlId="matrix-recovery-key">
-          <Form.Label>{translate('Recovery key')}</Form.Label>
+        <FormField>
+          <FormLabel>{translate('Recovery key')}</FormLabel>
           <Stack gap={2} direction="horizontal">
             <MaskedKeyInput
               value={recoveryKey}
@@ -141,16 +141,16 @@ export const MatrixRecoveryKeyDialog: FC<MatrixRecoveryKeyDialogProps> = ({
             />
           </Stack>
           {failure && (
-            <Form.Text className="text-danger block" role="alert">
+            <FormText variant="danger" role="alert">
               {failure}
-            </Form.Text>
+            </FormText>
           )}
-          <Form.Text id="matrix-recovery-key-help" className="text-quaternary">
+          <FormText id="matrix-recovery-key-help" variant="muted">
             {translate(
               'Waldur keeps it for you, so you are asked for it only once.',
             )}
-          </Form.Text>
-        </Form.Group>
+          </FormText>
+        </FormField>
       </Form>
     </ModalDialog>
   );

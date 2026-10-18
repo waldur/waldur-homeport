@@ -1,55 +1,30 @@
-import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import { FC } from 'react';
-import { Form, FormControlProps } from 'react-bootstrap';
 import { FieldRenderProps } from 'react-final-form';
-import { useToggle } from 'react-use';
 
-import { translate } from '@/i18n';
+import { SecretInput } from 'waldur-ui';
 
-import './SecretField.scss';
+import { BaseInputFieldProps } from './InputField';
 
 // ── Base (Pure UI) ──────────────────────────────────────
 
 export interface BaseSecretFieldProps extends Omit<
-  FormControlProps,
-  'type' | 'autoComplete'
+  BaseInputFieldProps,
+  'type' | 'autoComplete' | 'plaintext' | 'containerClassName'
 > {
-  solid?: boolean;
+  /** Classes for the `<input>`; `className` goes on the wrapper. */
+  inputClassName?: string;
 }
 
 export const BaseSecretField: FC<BaseSecretFieldProps> = ({
-  solid,
   className,
+  inputClassName,
+  isInvalid,
   ...rest
-}) => {
-  const [showSecret, onToggle] = useToggle(false);
-
-  return (
-    <div className={classNames('has-password', className)}>
-      <Form.Control
-        type={showSecret ? 'text' : 'password'}
-        autoComplete="new-password"
-        className={solid ? 'form-control-solid' : undefined}
-        {...rest}
-      />
-
-      <button
-        className="password-icon text-btn"
-        type="button"
-        title={showSecret ? translate('Hide') : translate('Show')}
-        onClick={onToggle}
-      >
-        {showSecret ? (
-          <EyeSlashIcon size={18} weight="bold" />
-        ) : (
-          <EyeIcon size={18} weight="bold" />
-        )}
-        &nbsp;
-      </button>
-    </div>
-  );
-};
+}) => (
+  <div className={className}>
+    <SecretInput invalid={isInvalid} className={inputClassName} {...rest} />
+  </div>
+);
 
 // ── Field Adapter ───────────────────────────────────────
 
@@ -63,7 +38,7 @@ export interface SecretFieldProps extends Omit<
 
 export const SecretField: FC<SecretFieldProps> = ({ input, meta, ...rest }) => (
   <BaseSecretField
-    isInvalid={meta?.touched && meta?.error}
+    isInvalid={meta?.touched && !!meta?.error}
     {...rest}
     {...input}
   />

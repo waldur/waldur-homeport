@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { OptionField } from 'waldur-js-client';
 
+import { FormText } from 'waldur-ui';
+
+import { BaseInputField } from '@/form/InputField';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 
@@ -120,12 +123,13 @@ export const ComponentMultiplierField = ({
   return (
     <div className="component-multiplier-field">
       {tooltip && (
-        <div className="form-text text-quaternary mb-3">{tooltip}</div>
+        <FormText as="div" variant="muted" className="mb-3">
+          {tooltip}
+        </FormText>
       )}
-      <div className="form-group">
-        <input
+      <div>
+        <BaseInputField
           type="number"
-          className="form-control"
           value={localValue}
           onChange={(e) => handleChange(e.target.value)}
           onFocus={handleFocus}
@@ -135,7 +139,9 @@ export const ComponentMultiplierField = ({
           max={config?.max_limit}
         />
         {config && (
-          <div className="form-text text-quaternary mt-1">{getHelpText()}</div>
+          <FormText as="div" variant="muted" className="mt-1">
+            {getHelpText()}
+          </FormText>
         )}
       </div>
     </div>

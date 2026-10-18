@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useMemo } from 'react';
-import { Card, Col, Form, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { OptionField, StorageFolderConfig } from 'waldur-js-client';
 
-import { HelpIcon } from 'waldur-ui';
+import { FormField, FormLabel, FormText, HelpIcon } from 'waldur-ui';
 
+import { FieldError } from '@/form/FieldError';
+import { BaseInputField } from '@/form/InputField';
 import { Select } from '@/form/select';
-import { FormField } from '@/form/types';
+import { FormField as FormFieldType } from '@/form/types';
 import { translate } from '@/i18n';
 import { STORAGE_FOLDER_PERMISSIONS } from '@/marketplace/offerings/update/options/constants';
 
@@ -14,7 +16,7 @@ import { useOrderFormData } from '../deploy/selectors';
 import { DeployFormData } from './types';
 
 // Types
-interface StorageFolderManagerFieldProps extends FormField {
+interface StorageFolderManagerFieldProps extends FormFieldType {
   field: OptionField;
   customer?: any;
   offering?: any;
@@ -218,7 +220,9 @@ export const StorageFolderManagerField = ({
   return (
     <div className="storage-folder-manager">
       {field.help_text && (
-        <div className="form-text text-quaternary mb-3">{field.help_text}</div>
+        <FormText as="div" variant="muted" className="mb-3">
+          {field.help_text}
+        </FormText>
       )}
 
       <StorageTypeAndPermissions
@@ -253,10 +257,9 @@ const StorageTypeAndPermissions = ({
 }: StorageTypeAndPermissionsProps) => (
   <Row>
     <Col md={6}>
-      <Form.Group controlId="storage_data_type">
-        <Form.Label>{translate('Storage Data Type')}</Form.Label>
+      <FormField>
+        <FormLabel>{translate('Storage Data Type')}</FormLabel>
         <Select
-          inputId="storage_data_type"
           value={
             config.storage_data_types?.find(
               (type) => type.key === currentValue.storage_data_type,
@@ -272,13 +275,12 @@ const StorageTypeAndPermissions = ({
           placeholder={translate('Select storage data type')}
           required
         />
-      </Form.Group>
+      </FormField>
     </Col>
     <Col md={6}>
-      <Form.Group controlId="storage_permissions">
-        <Form.Label>{translate('Permissions')}</Form.Label>
+      <FormField>
+        <FormLabel>{translate('Permissions')}</FormLabel>
         <Select
-          inputId="storage_permissions"
           value={
             STORAGE_FOLDER_PERMISSIONS.find(
               (perm) => perm.value === currentValue.permissions,
@@ -294,7 +296,7 @@ const StorageTypeAndPermissions = ({
           placeholder={translate('Select permissions')}
           required
         />
-      </Form.Group>
+      </FormField>
     </Col>
   </Row>
 );
@@ -314,9 +316,9 @@ const HardQuotaOverride = ({
 }: HardQuotaOverrideProps) => (
   <Row className="mt-3">
     <Col md={6}>
-      <Form.Group controlId="hard_quota_space">
-        <Form.Label>{translate('Hard Quota Override (TB)')}</Form.Label>
-        <Form.Control
+      <FormField>
+        <FormLabel>{translate('Hard Quota Override (TB)')}</FormLabel>
+        <BaseInputField
           type="number"
           value={currentValue.hard_quota_space || ''}
           onChange={(e) => onFieldChange('hard_quota_space', e.target.value)}
@@ -325,15 +327,11 @@ const HardQuotaOverride = ({
           placeholder={translate('Optional override')}
           isInvalid={!!hardQuotaError}
         />
-        <Form.Text className="text-quaternary">
+        <FormText variant="muted">
           {translate('Leave empty to use default multiplier.')}
-        </Form.Text>
-        {hardQuotaError && (
-          <Form.Control.Feedback type="invalid">
-            {hardQuotaError}
-          </Form.Control.Feedback>
-        )}
-      </Form.Group>
+        </FormText>
+        <FieldError error={hardQuotaError} />
+      </FormField>
     </Col>
   </Row>
 );

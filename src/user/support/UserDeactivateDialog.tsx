@@ -1,9 +1,11 @@
 import { ProhibitIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import { User, usersPartialUpdate } from 'waldur-js-client';
 
+import { FormField, FormLabel } from 'waldur-ui';
+
 import { SubmitButton } from '@/form';
+import { BaseTextField } from '@/form/TextField';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -75,17 +77,16 @@ export const UserDeactivateDialog: FunctionComponent<
             'The account will be deactivated and will not be reactivated automatically by the system, even if the user regains roles. A staff member can reactivate it manually.',
           )}
         </p>
-        <Form.Group>
-          <Form.Label className="required">{translate('Reason')}</Form.Label>
-          <Form.Control
-            as="textarea"
+        <FormField>
+          <FormLabel required>{translate('Reason')}</FormLabel>
+          <BaseTextField
             rows={3}
             value={reason}
             onChange={(event) => setReason(event.target.value)}
             placeholder={translate('Why is this user being deactivated?')}
             autoFocus
           />
-        </Form.Group>
+        </FormField>
       </ModalDialog>
     </form>
   );

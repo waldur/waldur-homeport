@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
 import { FieldArray } from 'react-final-form-arrays';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { IpAddressList } from '@/openstack/openstack-tenant/IpAddressList';
@@ -11,17 +12,17 @@ import {
 } from '@/resource/actions/base';
 
 const HostRoutesField: FunctionComponent = () => (
-  <Form.Group>
-    <Form.Label>{translate('Host routes')}</Form.Label>
+  <FormField>
+    <FormLabel>{translate('Host routes')}</FormLabel>
     <FieldArray name="host_routes" component={StaticRoutesTable} />
-  </Form.Group>
+  </FormField>
 );
 
 const NameserversField: FunctionComponent = () => (
-  <Form.Group>
-    <Form.Label>{translate('DNS name servers')}</Form.Label>
+  <FormField>
+    <FormLabel>{translate('DNS name servers')}</FormLabel>
     <FieldArray name="dns_nameservers" component={IpAddressList} />
-  </Form.Group>
+  </FormField>
 );
 
 export const getFields = () => [

@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { FormControl } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { overrideSettings } from 'waldur-js-client';
 
@@ -12,6 +11,7 @@ import { ENV } from '@/core/config';
 import { SelectField, SubmitButton, TextField } from '@/form';
 import { FormGroup } from '@/form';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import { BaseInputField } from '@/form/InputField';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { MonacoField } from '@/form/MonacoField';
 import { StringField } from '@/form/StringField';
@@ -57,7 +57,7 @@ const ColorField = (props) => (
         <div className="symbol-label" style={{ backgroundColor: color }} />
       </div>
     ))}
-    <FormControl value={props.input.value} onChange={props.input.onChange} />
+    <BaseInputField value={props.input.value} onChange={props.input.onChange} />
   </div>
 );
 

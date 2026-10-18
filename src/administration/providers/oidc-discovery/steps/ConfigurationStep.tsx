@@ -5,6 +5,7 @@ import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { required, validateRedirectURLs, redirectURI } from '@/core/validators';
 import { BooleanGroup, FormGroup, StringGroup } from '@/form';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
@@ -64,10 +65,11 @@ const AllowedRedirectsField: FC = () => {
 
               return (
                 <div key={index}>
-                  <div className={`input-group mb-${hasError ? '1' : '3'}`}>
-                    <input
+                  <div className={`flex gap-2 mb-${hasError ? '1' : '3'}`}>
+                    <BaseInputField
                       type="text"
-                      className={`form-control ${hasError ? 'is-invalid' : ''}`}
+                      containerClassName="flex-1"
+                      isInvalid={Boolean(hasError)}
                       placeholder="https://example.com"
                       value={url}
                       onChange={(e) => updateUrl(index, e.target.value)}
