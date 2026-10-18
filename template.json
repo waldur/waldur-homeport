@@ -2592,7 +2592,7 @@
       "feature_area": "template"
     }
   },
-  "Add to favourites": {
+  "Add to favorites": {
     "context": {
       "feature_area": "search"
     }
@@ -2717,7 +2717,7 @@
       "feature_area": "access"
     }
   },
-  "Added to favourites": {
+  "Added to favorites": {
     "context": {
       "feature_area": "breadcrumb"
     }
@@ -2762,7 +2762,7 @@
       "feature_area": "configuration"
     }
   },
-  "Additional instructions injected into the AI Assistant system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. Overridden by the active SystemPrompt record when set.": {
+  "Additional instructions injected into the AI Assistant system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. Overridden by the active SystemPrompt record when set.": {
     "context": {
       "variables": {
         "assistant_name": {
@@ -2919,7 +2919,7 @@
       "feature_area": "metrics"
     }
   },
-  "Adopt metrics from the catalogue before a service reports any.": {
+  "Adopt metrics from the catalog before a service reports any.": {
     "context": {
       "feature_area": "metrics"
     }
@@ -4054,7 +4054,7 @@
       "feature_area": "features"
     }
   },
-  "Allows to show permission reviews tab and popups for organisations.": {
+  "Allows to show permission reviews tab and popups for organizations.": {
     "context": {
       "feature_area": "features"
     }
@@ -6136,7 +6136,7 @@
       "feature_area": "create"
     }
   },
-  "Are you sure you want to synchronise {count} resources?": {
+  "Are you sure you want to synchronize {count} resources?": {
     "context": {
       "variables": {
         "count": {
@@ -6762,7 +6762,7 @@
       "feature_area": "matching"
     }
   },
-  "Assignment batch cancelled.": {
+  "Assignment batch canceled.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "assignments"
@@ -6808,7 +6808,7 @@
       "primary_ui_type": "label"
     }
   },
-  "Assistant message was cancelled": {
+  "Assistant message was canceled": {
     "context": {
       "feature_area": "streaming"
     }
@@ -8467,7 +8467,7 @@
       "feature_area": "booking"
     }
   },
-  "Booking has been cancelled.": {
+  "Booking has been canceled.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "booking"
@@ -9471,24 +9471,18 @@
   "Canceled": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "resource-pending",
+      "feature_area": "maintenance",
       "action_type": "read"
+    }
+  },
+  "Canceling will halt the maintenance and notify affected consumers. Please provide a reason that will be recorded in internal notes.": {
+    "context": {
+      "feature_area": "actions"
     }
   },
   "Canceling...": {
     "context": {
       "feature_area": "request-end-date-change"
-    }
-  },
-  "Cancelled": {
-    "context": {
-      "primary_ui_type": "label",
-      "feature_area": "maintenance"
-    }
-  },
-  "Cancelling will halt the maintenance and notify affected consumers. Please provide a reason that will be recorded in internal notes.": {
-    "context": {
-      "feature_area": "actions"
     }
   },
   "Canned response": {
@@ -9690,23 +9684,18 @@
       "feature_area": "marketplace"
     }
   },
+  "Catalog structure": {
+    "context": {
+      "feature_area": "marketplace"
+    }
+  },
   "Catalog update started.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "marketplace"
     }
   },
-  "Catalogue": {
-    "context": {
-      "primary_ui_type": "title"
-    }
-  },
-  "Catalogue structure": {
-    "context": {
-      "feature_area": "marketplace"
-    }
-  },
-  "Catalogues": {
+  "Catalogs": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "cluster"
@@ -11094,7 +11083,7 @@
     }
   },
   "Comma-separated list of file extensions not allowed for attachment.": {},
-  "Comma-separated list of regular expressions matched against the user email, e.g. '.*@example.com'. Only has an effect when OIDC_BLOCK_CREATION_OF_UNINVITED_USERS is enabled. When non-empty, a user whose email matches any of the patterns may sign up without an invitation, and existing users must keep matching in order to log in - except staff and support users, users holding at least one unexpired role, users with a pending invitation and users matching an autoprovisioning rule, which are always allowed. Only interactive logins are gated; background identity synchronisation is not. Patterns must match the whole email and are case-insensitive. Note: values are split on commas, so a pattern cannot contain a comma - '{n,m}' quantifiers are not supported, repeat the expression instead.": {
+  "Comma-separated list of regular expressions matched against the user email, e.g. '.*@example.com'. Only has an effect when OIDC_BLOCK_CREATION_OF_UNINVITED_USERS is enabled. When non-empty, a user whose email matches any of the patterns may sign up without an invitation, and existing users must keep matching in order to log in - except staff and support users, users holding at least one unexpired role, users with a pending invitation and users matching an autoprovisioning rule, which are always allowed. Only interactive logins are gated; background identity synchronization is not. Patterns must match the whole email and are case-insensitive. Note: values are split on commas, so a pattern cannot contain a comma - '{n,m}' quantifiers are not supported, repeat the expression instead.": {
     "context": {
       "variables": {
         "n,m": {
@@ -13550,14 +13539,9 @@
       "feature_area": "integration"
     }
   },
-  "Create organisation": {
-    "context": {
-      "feature_area": "list"
-    }
-  },
   "Create organization": {
     "context": {
-      "feature_area": "dashboard"
+      "feature_area": "list"
     }
   },
   "Create organization group": {
@@ -14591,7 +14575,7 @@
       "feature_area": "steps"
     }
   },
-  "Custom field for storing the organisation name": {
+  "Custom field for storing the organization name": {
     "context": {
       "feature_area": "steps"
     }
@@ -16508,7 +16492,7 @@
       "feature_area": "profiles"
     }
   },
-  "Describe your purpose and finalise the registration": {
+  "Describe your purpose and finalize the registration": {
     "context": {
       "feature_area": "organization-create"
     }
@@ -18649,7 +18633,7 @@
       "feature_area": "integration"
     }
   },
-  "Email change request has been cancelled.": {
+  "Email change request has been canceled.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "support"
@@ -18771,7 +18755,7 @@
       "feature_area": "offering-merges"
     }
   },
-  "Empty shows the catalogue's name.": {
+  "Empty shows the catalog's name.": {
     "context": {
       "feature_area": "metrics"
     }
@@ -19120,7 +19104,7 @@
       "feature_area": "features"
     }
   },
-  "Enabled catalogues": {
+  "Enabled catalogs": {
     "context": {
       "primary_ui_type": "title"
     }
@@ -20430,7 +20414,7 @@
       "action_type": "read"
     }
   },
-  "Every order this call places is attributed to this person — a shared mailbox, for example. They must hold a role on this call or on the organisation managing it.": {
+  "Every order this call places is attributed to this person — a shared mailbox, for example. They must hold a role on this call or on the organization managing it.": {
     "context": {
       "feature_area": "configuration"
     }
@@ -21835,7 +21819,7 @@
       "primary_ui_type": "label"
     }
   },
-  "Favourites": {
+  "Favorites": {
     "context": {
       "feature_area": "search"
     }
@@ -21964,7 +21948,7 @@
       "feature_area": "reports"
     }
   },
-  "Fetches reports for each project in parallel — this may take 15–30 seconds for large organisations. Tip: selecting a year or month limits projects to those active during that period, which is usually the fastest way to narrow the load for large organisations.": {
+  "Fetches reports for each project in parallel — this may take 15–30 seconds for large organizations. Tip: selecting a year or month limits projects to those active during that period, which is usually the fastest way to narrow the load for large organizations.": {
     "context": {
       "feature_area": "reports"
     }
@@ -22021,7 +22005,7 @@
       "feature_area": "review"
     }
   },
-  "Field is synchronised from the remote offering": {
+  "Field is synchronized from the remote offering": {
     "context": {
       "feature_area": "overview"
     }
@@ -23429,7 +23413,7 @@
       "feature_area": "accounts"
     }
   },
-  "Give this passkey a name you will recognise later, then follow your device prompt. Nothing secret leaves your device.": {
+  "Give this passkey a name you will recognize later, then follow your device prompt. Nothing secret leaves your device.": {
     "context": {
       "feature_area": "passkeys"
     }
@@ -23821,7 +23805,7 @@
       "feature_area": "actions"
     }
   },
-  "Group invitation has been cancelled.": {
+  "Group invitation has been canceled.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "invitations"
@@ -24718,7 +24702,7 @@
       "feature_area": "metrics"
     }
   },
-  "How the marketplace catalogue is organised.": {
+  "How the marketplace catalog is organized.": {
     "context": {
       "feature_area": "marketplace"
     }
@@ -25600,7 +25584,7 @@
       "primary_ui_type": "label"
     }
   },
-  "In Atlassian Administration, open Directory, then Service accounts, and create an OAuth 2.0 credential for the service account with the scopes read:servicedesk-request, write:servicedesk-request, manage:servicedesk-customer, read:jira-work, write:jira-work and read:jira-user. The service account needs a Jira Service Management agent licence and the Service Desk Team role on the project.": {
+  "In Atlassian Administration, open Directory, then Service accounts, and create an OAuth 2.0 credential for the service account with the scopes read:servicedesk-request, write:servicedesk-request, manage:servicedesk-customer, read:jira-work, write:jira-work and read:jira-user. The service account needs a Jira Service Management agent license and the Service Desk Team role on the project.": {
     "context": {
       "feature_area": "steps"
     }
@@ -26704,7 +26688,7 @@
       "feature_area": "customer"
     }
   },
-  "Invitations have been cancelled.": {
+  "Invitations have been canceled.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "invitations"
@@ -29002,7 +28986,7 @@
     }
   },
   "Loading assets": {},
-  "Loading computes summaries for every project in this organisation and may take 10–15 seconds. You can optionally filter to a subset of projects first to speed things up.": {
+  "Loading computes summaries for every project in this organization and may take 10–15 seconds. You can optionally filter to a subset of projects first to speed things up.": {
     "context": {
       "feature_area": "reports"
     }
@@ -29469,7 +29453,7 @@
       "feature_area": "issues"
     }
   },
-  "Maintenance cancelled": {
+  "Maintenance canceled": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "actions"
@@ -31239,7 +31223,7 @@
       "feature_area": "metrics"
     }
   },
-  "Metric catalogue": {
+  "Metric catalog": {
     "context": {
       "feature_area": "metrics"
     }
@@ -31255,7 +31239,7 @@
       "feature_area": "metrics"
     }
   },
-  "Metric from the catalogue": {
+  "Metric from the catalog": {
     "context": {
       "feature_area": "metrics"
     }
@@ -33382,7 +33366,7 @@
       "feature_area": "reallocate-limits"
     }
   },
-  "No catalogue metric left to adopt.": {
+  "No catalog metric left to adopt.": {
     "context": {
       "feature_area": "metrics"
     }
@@ -34132,7 +34116,7 @@
       "feature_area": "resource-requests-step"
     }
   },
-  "No offerings match your search. To find organisations, projects or resources, use the search in the top bar.": {
+  "No offerings match your search. To find organizations, projects or resources, use the search in the top bar.": {
     "context": {
       "feature_area": "landing"
     }
@@ -34160,11 +34144,6 @@
   "No order statistics found for the selected provider and period.": {
     "context": {
       "feature_area": "provider"
-    }
-  },
-  "No organisations found": {
-    "context": {
-      "feature_area": "project-templates"
     }
   },
   "No organization groups": {
@@ -36605,7 +36584,7 @@
       "feature_area": "maintenance"
     }
   },
-  "Onboard organisation": {
+  "Onboard organization": {
     "context": {
       "feature_area": "list"
     }
@@ -37537,7 +37516,7 @@
       "feature_area": "actions"
     }
   },
-  "Optional. Attach a purchase order if your organisation needs one to authorise this spend.": {
+  "Optional. Attach a purchase order if your organization needs one to authorize this spend.": {
     "context": {
       "feature_area": "proposals"
     }
@@ -37817,29 +37796,6 @@
       "feature_area": "policy-watch"
     }
   },
-  "Organisation": {
-    "context": {
-      "feature_area": "proposal"
-    }
-  },
-  "Organisation Field": {
-    "context": {
-      "feature_area": "steps"
-    }
-  },
-  "Organisation field name": {},
-  "Organisation field name.": {},
-  "Organisation into which to deploy projects": {
-    "context": {
-      "feature_area": "project-templates"
-    }
-  },
-  "Organisations": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "organizations"
-    }
-  },
   "Organization": {
     "context": {
       "primary_ui_type": "title",
@@ -37865,6 +37821,11 @@
   "Organization / Project": {
     "context": {
       "feature_area": "renew-allocation"
+    }
+  },
+  "Organization Field": {
+    "context": {
+      "feature_area": "steps"
     }
   },
   "Organization Groups": {
@@ -37992,6 +37953,8 @@
       "primary_ui_type": "label"
     }
   },
+  "Organization field name": {},
+  "Organization field name.": {},
   "Organization group": {
     "context": {
       "feature_area": "resources-geography"
@@ -38032,6 +37995,11 @@
   "Organization info": {
     "context": {
       "feature_area": "organizations"
+    }
+  },
+  "Organization into which to deploy projects": {
+    "context": {
+      "feature_area": "project-templates"
     }
   },
   "Organization invoice history": {
@@ -38913,7 +38881,7 @@
     }
   },
   "Passkey": {},
-  "Passkey enrolment failed": {
+  "Passkey enrollment failed": {
     "context": {
       "feature_area": "passkeys"
     }
@@ -41422,7 +41390,7 @@
       "feature_area": "roles"
     }
   },
-  "Press {shortcut} to add the highlighted item to favourites or remove it.": {
+  "Press {shortcut} to add the highlighted item to favorites or remove it.": {
     "context": {
       "variables": {
         "shortcut": {
@@ -42603,7 +42571,7 @@
     }
   },
   "Project members": {},
-  "Project members have been synchronised successfully.": {
+  "Project members have been synchronized successfully.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "team"
@@ -45135,7 +45103,7 @@
       "feature_area": "pubsub"
     }
   },
-  "Registering the managing organisation": {
+  "Registering the managing organization": {
     "context": {
       "feature_area": "actions"
     }
@@ -45694,7 +45662,7 @@
     }
   },
   "Remove filter value": {},
-  "Remove from favourites": {
+  "Remove from favorites": {
     "context": {
       "feature_area": "search"
     }
@@ -45956,7 +45924,7 @@
       "feature_area": "roles"
     }
   },
-  "Removed from favourites": {
+  "Removed from favorites": {
     "context": {
       "feature_area": "breadcrumb"
     }
@@ -46203,7 +46171,7 @@
       "feature_area": "table"
     }
   },
-  "Reordering was cancelled. Column {title} returned to its original position.": {
+  "Reordering was canceled. Column {title} returned to its original position.": {
     "context": {
       "variables": {
         "title": {
@@ -47841,7 +47809,7 @@
       "feature_area": "policy-watch"
     }
   },
-  "Resources are synchronised.": {
+  "Resources are synchronized.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "mass-actions"
@@ -48934,7 +48902,7 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
-  "Revoking it leaves the user with none. If passkeys are required for their account they will be held at the enrolment page until they add another, so make sure they can reach a device first.": {
+  "Revoking it leaves the user with none. If passkeys are required for their account they will be held at the enrollment page until they add another, so make sure they can reach a device first.": {
     "context": {
       "feature_area": "passkeys"
     }
@@ -49704,7 +49672,7 @@
       "action_type": "create"
     }
   },
-  "Run the marketplace as a catalogue: offerings can be browsed but not ordered, order lists and pricing are hidden, and anonymous visitors land on the marketplace instead of the login page.": {
+  "Run the marketplace as a catalog: offerings can be browsed but not ordered, order lists and pricing are hidden, and anonymous visitors land on the marketplace instead of the login page.": {
     "context": {
       "feature_area": "features"
     }
@@ -50704,7 +50672,7 @@
       "feature_area": "common"
     }
   },
-  "Security group \"{name}\" rules synchronised from backend: {summary}.": {
+  "Security group \"{name}\" rules synchronized from backend: {summary}.": {
     "context": {
       "variables": {
         "name": {
@@ -51461,14 +51429,10 @@
       "feature_area": "vendorOfferings"
     }
   },
-  "Select organisation": {
-    "context": {
-      "feature_area": "project-templates"
-    }
-  },
   "Select organization": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "project-templates"
     }
   },
   "Select organization first": {
@@ -53176,9 +53140,9 @@
       "feature_area": "database-stats"
     }
   },
-  "Shared secret expected in the X-Webhook-Secret header of inbound JIRA webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behaviour). Configure your JIRA automation/webhook to send the same value to enable authentication.": {},
-  "Shared secret expected in the X-Webhook-Secret header of inbound SMAX webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behaviour).": {},
-  "Shared secret expected in the X-Webhook-Secret header of inbound Zammad webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behaviour).": {},
+  "Shared secret expected in the X-Webhook-Secret header of inbound JIRA webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behavior). Configure your JIRA automation/webhook to send the same value to enable authentication.": {},
+  "Shared secret expected in the X-Webhook-Secret header of inbound SMAX webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behavior).": {},
+  "Shared secret expected in the X-Webhook-Secret header of inbound Zammad webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behavior).": {},
   "Shared user password": {
     "context": {
       "feature_area": "integration"
@@ -53524,7 +53488,7 @@
       "feature_area": "features"
     }
   },
-  "Show the Reporting menu with organisation-scoped reports to organisation owners.": {
+  "Show the Reporting menu with organization-scoped reports to organization owners.": {
     "context": {
       "feature_area": "features"
     }
@@ -53695,12 +53659,12 @@
       "feature_area": "details"
     }
   },
-  "Shows state of synchronisation with accounting.": {
+  "Shows state of synchronization with accounting.": {
     "context": {
       "feature_area": "details"
     }
   },
-  "Shows state of synchronisation with backend system.": {
+  "Shows state of synchronization with backend system.": {
     "context": {
       "feature_area": "details"
     }
@@ -54084,7 +54048,7 @@
       "feature_area": "offerings"
     }
   },
-  "Software catalogues and their EESSI and Spack sources.": {
+  "Software catalogs and their EESSI and Spack sources.": {
     "context": {
       "feature_area": "marketplace"
     }
@@ -55792,28 +55756,16 @@
       "action_type": "refresh"
     }
   },
-  "Synchronisation has been scheduled.": {
+  "Synchronization has been scheduled.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "actions"
     }
   },
-  "Synchronisation has been successful.": {
+  "Synchronization has been successful.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "remote-offering-sync"
-    }
-  },
-  "Synchronise": {
-    "context": {
-      "primary_ui_type": "label",
-      "feature_area": "remote-offering-sync"
-    }
-  },
-  "Synchronise members": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "team"
     }
   },
   "Synchronization is in progress": {
@@ -55823,7 +55775,14 @@
   },
   "Synchronize": {
     "context": {
-      "feature_area": "integration"
+      "primary_ui_type": "label",
+      "feature_area": "remote-offering-sync"
+    }
+  },
+  "Synchronize members": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "team"
     }
   },
   "Synchronize resources": {
@@ -56294,12 +56253,12 @@
       "feature_area": "proposal"
     }
   },
-  "Team members can be synchronised only for an active resource.": {
+  "Team members can be synchronized only for an active resource.": {
     "context": {
       "feature_area": "actions"
     }
   },
-  "Team members have been synchronised.": {
+  "Team members have been synchronized.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "actions"
@@ -57206,7 +57165,7 @@
       "feature_area": "project-digest"
     }
   },
-  "The draft is being cancelled.": {
+  "The draft is being canceled.": {
     "context": {
       "feature_area": "ticketDraft"
     }
@@ -57561,7 +57520,7 @@
       "feature_area": "actions"
     }
   },
-  "The maintenance window {name} has been cancelled.": {
+  "The maintenance window {name} has been canceled.": {
     "context": {
       "variables": {
         "name": {
@@ -58859,7 +58818,7 @@
       "feature_area": "credits"
     }
   },
-  "They will not be able to use this passkey again. If it was their only one and passkeys are required for their account, they will be asked to enrol a new one before they can continue.": {
+  "They will not be able to use this passkey again. If it was their only one and passkeys are required for their account, they will be asked to enroll a new one before they can continue.": {
     "context": {
       "feature_area": "passkeys"
     }
@@ -58913,7 +58872,7 @@
       "feature_area": "support"
     }
   },
-  "This action will send an event requesting to synchronise membership information to all Waldur site agents connected with resources in this project.": {
+  "This action will send an event requesting to synchronize membership information to all Waldur site agents connected with resources in this project.": {
     "context": {
       "feature_area": "team"
     }
@@ -59077,7 +59036,7 @@
       "feature_area": "ticketDraft"
     }
   },
-  "This draft was cancelled.": {
+  "This draft was canceled.": {
     "context": {
       "feature_area": "ticketDraft"
     }
@@ -64823,7 +64782,7 @@
       "feature_area": "UserPendingActionsList"
     }
   },
-  "Unable to start passkey enrolment.": {
+  "Unable to start passkey enrollment.": {
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "passkeys"
@@ -64979,36 +64938,6 @@
       "feature_area": "matrix"
     }
   },
-  "Unable to synchronise project members.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "team"
-    }
-  },
-  "Unable to synchronise resource.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "actions"
-    }
-  },
-  "Unable to synchronise resources.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "mass-actions"
-    }
-  },
-  "Unable to synchronise team members.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "actions"
-    }
-  },
-  "Unable to synchronise.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "remote-offering-sync"
-    }
-  },
   "Unable to synchronize offering details.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -65051,10 +64980,40 @@
       "feature_area": "integration"
     }
   },
+  "Unable to synchronize project members.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "team"
+    }
+  },
+  "Unable to synchronize resource.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "actions"
+    }
+  },
+  "Unable to synchronize resources.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "mass-actions"
+    }
+  },
   "Unable to synchronize robot accounts.": {
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "integration"
+    }
+  },
+  "Unable to synchronize team members.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "actions"
+    }
+  },
+  "Unable to synchronize.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "remote-offering-sync"
     }
   },
   "Unable to terminate resources.": {
@@ -66522,12 +66481,12 @@
       "feature_area": "team"
     }
   },
-  "Unsubmitted drafts are cancelled.": {
+  "Unsubmitted drafts are canceled.": {
     "context": {
       "feature_area": "rounds"
     }
   },
-  "Unsubmitted drafts move to the call's next round; if there is none, they are cancelled.": {
+  "Unsubmitted drafts move to the call's next round; if there is none, they are canceled.": {
     "context": {
       "feature_area": "rounds"
     }
@@ -70438,7 +70397,7 @@
       "feature_area": "workflow-steps"
     }
   },
-  "When a round closes, move unsubmitted drafts to the next round instead of cancelling them. Applicants keep their content and are notified by email. Drafts are cancelled as before when the call has no later round.": {
+  "When a round closes, move unsubmitted drafts to the next round instead of canceling them. Applicants keep their content and are notified by email. Drafts are canceled as before when the call has no later round.": {
     "context": {
       "feature_area": "configuration"
     }
@@ -70767,7 +70726,7 @@
     }
   },
   "Widget": {},
-  "Widget field allows to customise table cell rendering": {
+  "Widget field allows to customize table cell rendering": {
     "context": {
       "feature_area": "admin"
     }
@@ -71205,7 +71164,7 @@
       "feature_area": "request-types"
     }
   },
-  "You are about to delete {connection} synchronisation. This action cannot be undone.": {
+  "You are about to delete {connection} synchronization. This action cannot be undone.": {
     "context": {
       "variables": {
         "connection": {
@@ -71895,7 +71854,7 @@
       "action_type": "read"
     }
   },
-  "Your browser reports no built-in authenticator (Touch ID, Windows Hello). You can still enrol using a phone or a security key from the next prompt.": {
+  "Your browser reports no built-in authenticator (Touch ID, Windows Hello). You can still enroll using a phone or a security key from the next prompt.": {
     "context": {
       "feature_area": "passkeys"
     }
@@ -72411,7 +72370,7 @@
       "feature_area": "service-providers"
     }
   },
-  "catalogues": {
+  "catalogs": {
     "context": {
       "feature_area": "catalog"
     }
@@ -72828,7 +72787,7 @@
       "feature_area": "policies"
     }
   },
-  "e.g., Done, Completed, Cancelled": {
+  "e.g., Done, Completed, Canceled": {
     "context": {
       "feature_area": "issue-statuses"
     }
@@ -73072,7 +73031,7 @@
       "feature_area": "api-keys"
     }
   },
-  "inner-fill width = usage / limit; colour: <70% green, <90% amber, <100% orange, ≥100% red": {
+  "inner-fill width = usage / limit; color: <70% green, <90% amber, <100% orange, ≥100% red": {
     "context": {
       "feature_area": "views"
     }
@@ -76762,7 +76721,7 @@
       "feature_area": "common"
     }
   },
-  "{n} invitations could not be cancelled.": {
+  "{n} invitations could not be canceled.": {
     "context": {
       "variables": {
         "n": {
@@ -76792,7 +76751,7 @@
       "feature_area": "invitations"
     }
   },
-  "{n} invitations have been cancelled.": {
+  "{n} invitations have been canceled.": {
     "context": {
       "variables": {
         "n": {

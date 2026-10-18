@@ -377,7 +377,7 @@ describe('TicketDraftCard', () => {
       path: { uuid: 'd1' },
     });
     expect(
-      await screen.findByText('This draft was cancelled.'),
+      await screen.findByText('This draft was canceled.'),
     ).toBeInTheDocument();
     expect(invalidate).toHaveBeenCalledWith({
       queryKey: ['MatrixRoomCommands'],
@@ -552,7 +552,7 @@ describe('TicketDraftCard', () => {
   });
 
   it.each([
-    [{ state: 'cancelled' }, 'This draft was cancelled.'],
+    [{ state: 'cancelled' }, 'This draft was canceled.'],
     [{ state: 'expired' }, 'This draft has expired.'],
     [{ state: 'created', issueKey: 'SD-7' }, 'Ticket SD-7 created.'],
   ] as Array<[TicketDraftOutcome, string]>)(

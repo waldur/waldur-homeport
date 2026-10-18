@@ -14,7 +14,7 @@ export const PullSecurityGroupsAction: FC<TenantActionProps> = ({
   resource,
 }) => (
   <AsyncActionButton
-    title={translate('Synchronise')}
+    title={translate('Synchronize')}
     iconNode={<ArrowsClockwiseIcon weight="bold" />}
     resource={resource}
     validators={validators}

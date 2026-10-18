@@ -104,7 +104,7 @@ export const IssueStatusForm: FC<IssueStatusFormProps> = ({ resolve }) => {
               required
               name="name"
               validate={required}
-              placeholder={translate('e.g., Done, Completed, Cancelled')}
+              placeholder={translate('e.g., Done, Completed, Canceled')}
               description={translate(
                 'The exact status name as it appears in your service desk (Jira, SMAX, Zammad).',
               )}

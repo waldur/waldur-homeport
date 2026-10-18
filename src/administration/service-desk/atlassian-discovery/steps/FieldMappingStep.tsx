@@ -180,9 +180,9 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
             name="fieldMappings.organisation_field"
             options={fieldOptions}
             simpleValue
-            label={translate('Organisation Field')}
+            label={translate('Organization Field')}
             description={translate(
-              'Custom field for storing the organisation name',
+              'Custom field for storing the organization name',
             )}
           />
         </div>

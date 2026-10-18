@@ -192,7 +192,7 @@ export const OrganizationCreatePage: FC = () => {
         key: 'intent',
         label: translate('Intent'),
         description: translate(
-          'Describe your purpose and finalise the registration',
+          'Describe your purpose and finalize the registration',
         ),
         completed: false,
       },

@@ -34,7 +34,7 @@ export const GroupInvitationCancelButton: FunctionComponent<
         iconNode: <XCircleIcon weight="bold" />,
       },
     },
-    successMessage: translate('Group invitation has been cancelled.'),
+    successMessage: translate('Group invitation has been canceled.'),
     errorMessage: translate('Unable to cancel group invitation.'),
     refetch,
   });

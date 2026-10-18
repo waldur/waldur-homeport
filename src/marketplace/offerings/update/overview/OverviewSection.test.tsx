@@ -166,7 +166,7 @@ describe('OverviewSection', () => {
     expect(nameEditButton).toBeDisabled();
     expect(nameEditButton).toHaveAccessibleName('Edit Name');
     expect(nameEditButton).toHaveAccessibleDescription(
-      'Field is synchronised from the remote offering',
+      'Field is synchronized from the remote offering',
     );
 
     // Switch to Links tab and check Privacy policy link edit button
@@ -177,7 +177,7 @@ describe('OverviewSection', () => {
     const linkEditButton = screen.getByTestId('edit-privacy_policy_link');
     expect(linkEditButton).toBeDisabled();
     expect(linkEditButton).toHaveAccessibleDescription(
-      'Field is synchronised from the remote offering',
+      'Field is synchronized from the remote offering',
     );
   });
 

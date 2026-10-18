@@ -58,7 +58,7 @@ export const PurchaseOrderFields: FC<PurchaseOrderFieldsProps> = ({
                 'This offering requires a purchase order. Give its reference, attach the document, or both. You can save the request now and add it before submitting the access request.',
               )
           : translate(
-              'Optional. Attach a purchase order if your organisation needs one to authorise this spend.',
+              'Optional. Attach a purchase order if your organization needs one to authorize this spend.',
             )}
       </div>
       <StringGroup

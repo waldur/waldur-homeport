@@ -187,7 +187,7 @@ const ColumnsPopover = ({
       onDragCancel({ active }) {
         const title = columnMap[active.id]?.title ?? active.id;
         return translate(
-          'Reordering was cancelled. Column {title} returned to its original position.',
+          'Reordering was canceled. Column {title} returned to its original position.',
           { title },
         );
       },

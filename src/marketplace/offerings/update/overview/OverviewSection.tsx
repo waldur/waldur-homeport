@@ -38,7 +38,7 @@ import { pickOverview } from './utils';
 export const OverviewSection: FC<OfferingSectionProps> = (props) => {
   const isRemote = props.offering.type === REMOTE_OFFERING_TYPE;
   const remoteTooltip = isRemote
-    ? translate('Field is synchronised from the remote offering')
+    ? translate('Field is synchronized from the remote offering')
     : undefined;
 
   const { mutateAsync: update } = useManagedMutation({

@@ -68,7 +68,7 @@ export const MetricCatalogPage: FC = () => {
     <>
       <Table<MetricDefinition>
         {...definitions}
-        title={translate('Metric catalogue')}
+        title={translate('Metric catalog')}
         subtitle={translate(
           'Metrics offerings can adopt. Providers may add private ones for their own offerings.',
         )}

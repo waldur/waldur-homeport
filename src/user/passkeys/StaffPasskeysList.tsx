@@ -76,7 +76,7 @@ export const StaffPasskeysList: FunctionComponent<{ user? }> = ({ user }) => {
           variant="warning"
           title={translate('This is their only passkey')}
           body={translate(
-            'Revoking it leaves the user with none. If passkeys are required for their account they will be held at the enrolment page until they add another, so make sure they can reach a device first.',
+            'Revoking it leaves the user with none. If passkeys are required for their account they will be held at the enrollment page until they add another, so make sure they can reach a device first.',
           )}
           className="mb-4"
         />

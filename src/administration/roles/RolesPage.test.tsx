@@ -32,7 +32,7 @@ describe('RolesPage', () => {
     renderPage({ is_staff: true });
 
     expect(screen.getByText('Roles')).toBeInTheDocument();
-    expect(screen.getByText('Catalogue')).toBeInTheDocument();
+    expect(screen.getByText('Catalog')).toBeInTheDocument();
     expect(screen.getByText('Availability')).toBeInTheDocument();
     expect(screen.getByText('Hygiene')).toBeInTheDocument();
     expect(screen.getByText('Service profiles')).toBeInTheDocument();
@@ -44,7 +44,7 @@ describe('RolesPage', () => {
   it('shows a support user the catalogue and service profiles only', () => {
     renderPage({ is_staff: false, is_support: true });
 
-    expect(screen.getByText('Catalogue')).toBeInTheDocument();
+    expect(screen.getByText('Catalog')).toBeInTheDocument();
     // The profile API is read-open; only its mutations are staff-only.
     expect(screen.getByText('Service profiles')).toBeInTheDocument();
     expect(screen.queryByText('Availability')).not.toBeInTheDocument();

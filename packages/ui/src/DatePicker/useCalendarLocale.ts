@@ -1,6 +1,6 @@
 import type { Locale } from 'date-fns';
 import { useEffect, useState } from 'react';
-import { LanguageUtilsService } from 'waldur-i18n-runtime';
+import { LanguageUtilsService, toCanonicalLocale } from 'waldur-i18n-runtime';
 
 /**
  * date-fns locales for the languages in /locales, loaded on demand so only
@@ -16,6 +16,7 @@ const loaders: Record<string, () => Promise<Locale>> = {
   da: () => import('date-fns/locale/da').then((m) => m.da),
   de: () => import('date-fns/locale/de').then((m) => m.de),
   el: () => import('date-fns/locale/el').then((m) => m.el),
+  'en-GB': () => import('date-fns/locale/en-GB').then((m) => m.enGB),
   es: () => import('date-fns/locale/es').then((m) => m.es),
   et: () => import('date-fns/locale/et').then((m) => m.et),
   fa: () => import('date-fns/locale/fa-IR').then((m) => m.faIR),
@@ -47,7 +48,9 @@ const cache: Record<string, Locale> = {};
  * the app shell where no language is set.
  */
 export const useCalendarLocale = (): Locale | undefined => {
-  const code = LanguageUtilsService.getCurrentLanguage()?.code;
+  const language = LanguageUtilsService.getCurrentLanguage()?.code;
+  // Loader keys use canonical case (en-GB); the backend sends en-gb.
+  const code = language ? toCanonicalLocale(language) : undefined;
   const [locale, setLocale] = useState<Locale | undefined>(
     code ? cache[code] : undefined,
   );

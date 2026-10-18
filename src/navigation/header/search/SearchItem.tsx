@@ -87,8 +87,8 @@ export const SearchItem = (props: SearchItemProps) => {
             type="button"
             aria-label={
               isFav
-                ? translate('Remove from favourites')
-                : translate('Add to favourites')
+                ? translate('Remove from favorites')
+                : translate('Add to favorites')
             }
             className={classNames('btn-fav', isFav && 'show')}
             onClick={(e) =>

@@ -134,9 +134,7 @@ export const AdministrationLanguages: FunctionComponent = () => {
                   label={
                     <div className="flex items-center">
                       <CountryFlagIcon
-                        countryCode={
-                          LanguageCountry[language.code] || language.code
-                        }
+                        countryCode={LanguageCountry[language.code]}
                         className="me-2"
                       />
                       {language.label}
@@ -147,9 +145,7 @@ export const AdministrationLanguages: FunctionComponent = () => {
                 <div className="flex justify-between items-center">
                   <div className="flex items-center">
                     <CountryFlagIcon
-                      countryCode={
-                        LanguageCountry[language.code] || language.code
-                      }
+                      countryCode={LanguageCountry[language.code]}
                       className="me-2"
                     />
                     {language.label}

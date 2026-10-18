@@ -3,6 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const { isGeneratedLocale } = require('./generatedLocales.cjs');
+
 /**
  * Remove deprecated translations from locale files.
  * A translation is considered deprecated if it exists in a locale file
@@ -87,7 +89,12 @@ function main() {
   // Find all locale files
   const localeFiles = fs
     .readdirSync(LOCALES_DIR)
-    .filter((file) => file.endsWith('.json') && file !== 'template.json')
+    .filter(
+      (file) =>
+        file.endsWith('.json') &&
+        file !== 'template.json' &&
+        !isGeneratedLocale(file.replace('.json', '')),
+    )
     .sort();
 
   if (localeFiles.length === 0) {

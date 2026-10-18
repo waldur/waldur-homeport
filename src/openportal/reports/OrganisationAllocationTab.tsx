@@ -1131,7 +1131,7 @@ export const OrganisationAllocationTab: FC = () => {
             </p>
             <p className="mb-3 text-quaternary small">
               {translate(
-                'Loading computes summaries for every project in this organisation and may take 10–15 seconds. You can optionally filter to a subset of projects first to speed things up.',
+                'Loading computes summaries for every project in this organization and may take 10–15 seconds. You can optionally filter to a subset of projects first to speed things up.',
               )}
             </p>
 

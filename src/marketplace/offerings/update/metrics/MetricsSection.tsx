@@ -95,7 +95,7 @@ export const MetricsSection: FC<OfferingSectionProps> = (props) => {
             callback={tableProps.fetch}
             title={translate('No metrics adopted')}
             message={translate(
-              'Adopt metrics from the catalogue before a service reports any.',
+              'Adopt metrics from the catalog before a service reports any.',
             )}
             buttonTitle={translate('Search again')}
             className="mt-n5"

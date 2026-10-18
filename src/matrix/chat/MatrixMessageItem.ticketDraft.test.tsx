@@ -130,7 +130,7 @@ describe('MatrixMessageItem ticket draft', () => {
       new Map([['a'.repeat(32), { state: 'cancelled' }]]),
     );
     expect(
-      await screen.findByText('This draft was cancelled.'),
+      await screen.findByText('This draft was canceled.'),
     ).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Create ticket' })).toBeNull();
   });

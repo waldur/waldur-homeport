@@ -177,7 +177,7 @@ const settingsTab = (groupName: string) => {
 const TABS = [
   {
     key: 'catalogs',
-    title: translate('Enabled catalogues'),
+    title: translate('Enabled catalogs'),
     component: CatalogsTab,
   },
   {
@@ -200,9 +200,7 @@ const TABS = [
 export const AdministrationSoftwareCatalog = () => (
   <TableWithTabs
     title={translate('Software catalog')}
-    subtitle={translate(
-      'Software catalogues and their EESSI and Spack sources.',
-    )}
+    subtitle={translate('Software catalogs and their EESSI and Spack sources.')}
     tabs={TABS}
     syncWithUrlKey="tab"
   />

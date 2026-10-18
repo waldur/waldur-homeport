@@ -38,7 +38,7 @@ export const OrganizationGroupsList: FunctionComponent<
           render: ({ row }) => row.parent_name || DASH_ESCAPE_CODE,
         },
         {
-          title: translate('Organisations'),
+          title: translate('Organizations'),
           render: ({ row }) => <>{row.customers_count}</>,
           orderField: 'customers_count',
         },

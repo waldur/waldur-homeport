@@ -466,7 +466,7 @@ export const Favourites: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(combobox(canvasElement)).toHaveAccessibleDescription(
-      /to add the highlighted item to favourites or remove it/,
+      /to add the highlighted item to favorites or remove it/,
     );
     await waitForRows(canvasElement);
     await waitFor(() =>
@@ -475,11 +475,11 @@ export const Favourites: Story = {
 
     await userEvent.keyboard('{Control>}d{/Control}');
     await expect(canvas.getByRole('status')).toHaveTextContent(
-      'Added to favourites',
+      'Added to favorites',
     );
     await userEvent.keyboard('{ArrowDown}{Control>}d{/Control}');
     await expect(canvas.getByRole('status')).toHaveTextContent(
-      'Removed from favourites',
+      'Removed from favorites',
     );
   },
 };

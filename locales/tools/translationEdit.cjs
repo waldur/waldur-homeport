@@ -3,6 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const { refuseGeneratedLocale } = require('./generatedLocales.cjs');
+
 /**
  * TranslationEdit Tool
  *
@@ -12,6 +14,7 @@ const path = require('path');
 
 class TranslationEdit {
   constructor(language = 'ru') {
+    refuseGeneratedLocale(language);
     this.language = language;
     this.localeFile = path.join(__dirname, `../${language}.json`);
     this.templateFile = path.join(__dirname, '../../template.json');

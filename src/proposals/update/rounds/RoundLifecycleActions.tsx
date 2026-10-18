@@ -91,9 +91,9 @@ export const RoundLifecycleActions: FC<RoundLifecycleActionsProps> = ({
         ),
         call.carry_over_drafts
           ? translate(
-              "Unsubmitted drafts move to the call's next round; if there is none, they are cancelled.",
+              "Unsubmitted drafts move to the call's next round; if there is none, they are canceled.",
             )
-          : translate('Unsubmitted drafts are cancelled.'),
+          : translate('Unsubmitted drafts are canceled.'),
         translate('Evaluation of the submitted proposals starts.'),
       ].join(' '),
     },

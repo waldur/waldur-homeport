@@ -82,7 +82,7 @@ describe('ResourceDetailsHero in the provider workspace', () => {
     renderHero(baseResource);
     await openActions(user);
 
-    await user.click(await screen.findByText('Synchronise'));
+    await user.click(await screen.findByText('Synchronize'));
 
     await waitFor(() =>
       expect(sdk.marketplaceProviderResourcesPull).toHaveBeenCalledWith({
@@ -131,7 +131,7 @@ describe('ResourceDetailsHero in the provider workspace', () => {
     renderHero(baseResource);
     await openActions(user);
 
-    await screen.findByText('Synchronise');
+    await screen.findByText('Synchronize');
     expect(screen.queryByText('View details')).toBeNull();
   });
 });

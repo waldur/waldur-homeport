@@ -17,8 +17,22 @@
  * every consumer gets a correct path for free, with zero config of its
  * own. Matches LanguageUtilsConfig['loadLocale']'s exact signature.
  */
+/**
+ * A language code in canonical BCP 47 case: the backend sends Django's
+ * lowercase codes (en-gb), locale files and loaders use en-GB. A code that
+ * is not a valid tag comes back unchanged instead of throwing, so it fails
+ * like any other unknown language: its file or loader is simply not found.
+ */
+export function toCanonicalLocale(code: string): string {
+  try {
+    return Intl.getCanonicalLocales(code)[0] ?? code;
+  } catch {
+    return code;
+  }
+}
+
 export function loadSharedLocale(
   locale: string,
 ): Promise<{ default: Record<string, string> }> {
-  return import(`../../../locales/${locale}.json`);
+  return import(`../../../locales/${toCanonicalLocale(locale)}.json`);
 }

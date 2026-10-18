@@ -188,13 +188,13 @@ export const getResourceSummaryFields = ({
       name: 'state',
       label: translate('Sync state'),
       value: resource.state,
-      tooltip: translate('Shows state of synchronisation with accounting.'),
+      tooltip: translate('Shows state of synchronization with accounting.'),
     },
     {
       name: 'backend_metadata.state',
       label: translate('Backend sync'),
       value: resource.backend_metadata?.state,
-      tooltip: translate('Shows state of synchronisation with backend system.'),
+      tooltip: translate('Shows state of synchronization with backend system.'),
     },
     {
       name: 'backend_metadata.runtime_state',

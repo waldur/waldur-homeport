@@ -59,7 +59,7 @@ export const StaffPasskeyRevokeDialog: FunctionComponent<
               variant="warning"
               title={translate('This signs the user out of that credential')}
               body={translate(
-                'They will not be able to use this passkey again. If it was their only one and passkeys are required for their account, they will be asked to enrol a new one before they can continue.',
+                'They will not be able to use this passkey again. If it was their only one and passkeys are required for their account, they will be asked to enroll a new one before they can continue.',
               )}
               className="mb-4"
             />

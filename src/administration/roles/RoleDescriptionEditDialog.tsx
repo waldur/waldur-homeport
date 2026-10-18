@@ -7,7 +7,7 @@ import { ENV } from '@/core/config';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StringGroup, SubmitButton } from '@/form';
-import { translate } from '@/i18n';
+import { getLocalizedFieldName, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -52,8 +52,8 @@ export const RoleDescriptionEditDialog = ({ resolve: { row, refetch } }) => {
     () =>
       Object.fromEntries(
         ENV.languageChoices.map(({ code }) => [
-          `description_${code}`,
-          role?.[`description_${code}`],
+          getLocalizedFieldName('description', code),
+          role?.[getLocalizedFieldName('description', code)],
         ]),
       ),
     [ENV.languageChoices, role],
@@ -111,7 +111,7 @@ export const RoleDescriptionEditDialog = ({ resolve: { row, refetch } }) => {
             {ENV.languageChoices.map(({ code, label }) => (
               <StringGroup
                 key={code}
-                name={`description_${code}`}
+                name={getLocalizedFieldName('description', code)}
                 label={label}
                 disabled={submitting}
               />

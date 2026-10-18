@@ -46,13 +46,13 @@ export const MultiPullAction = ({
     rows: validResources,
     mutationFn: (resource) =>
       apiMethods[resource.resource_type](resource.resource_uuid),
-    successMessage: translate('Resources are synchronised.'),
-    errorMessage: translate('Unable to synchronise resources.'),
+    successMessage: translate('Resources are synchronized.'),
+    errorMessage: translate('Unable to synchronize resources.'),
     refetch,
     confirmation: {
       title: translate('Perform mass action'),
       body: translate(
-        'Are you sure you want to synchronise {count} resources?',
+        'Are you sure you want to synchronize {count} resources?',
         {
           count: validResources.length,
         },
@@ -65,7 +65,7 @@ export const MultiPullAction = ({
   }
   return (
     <ActionItem
-      title={translate('Synchronise')}
+      title={translate('Synchronize')}
       action={() => pullMutation.mutate()}
       disabled={validResources.length !== rows.length || pullMutation.isPending}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}

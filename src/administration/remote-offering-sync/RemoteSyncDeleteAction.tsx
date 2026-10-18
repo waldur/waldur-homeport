@@ -18,7 +18,7 @@ export const RemoteSyncDeleteAction = (props: RemoteSyncActionProps) => {
     confirmation: {
       title: translate('Delete remote synchronization'),
       body: translate(
-        'You are about to delete {connection} synchronisation. This action cannot be undone.',
+        'You are about to delete {connection} synchronization. This action cannot be undone.',
         { connection: <strong>{props.row.api_url}</strong> },
         formatJsxTemplate,
       ),

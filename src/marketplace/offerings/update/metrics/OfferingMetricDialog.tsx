@@ -134,13 +134,13 @@ export const OfferingMetricDialog: FC<{
               {!isEdit && (
                 <SelectGroup
                   name="definition"
-                  label={translate('Metric from the catalogue')}
+                  label={translate('Metric from the catalog')}
                   options={options}
                   getOptionValue={(option: MetricDefinition) => option.uuid}
                   getOptionLabel={definitionLabel}
                   isLoading={isLoading}
                   noOptionsMessage={() =>
-                    translate('No catalogue metric left to adopt.')
+                    translate('No catalog metric left to adopt.')
                   }
                   validate={required}
                   simpleValue
@@ -158,7 +158,7 @@ export const OfferingMetricDialog: FC<{
               <StringGroup
                 name="display_name"
                 label={translate('Display name')}
-                description={translate("Empty shows the catalogue's name.")}
+                description={translate("Empty shows the catalog's name.")}
               />
               <SelectGroup
                 name="project_aggregation"

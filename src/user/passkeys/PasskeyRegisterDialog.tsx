@@ -59,7 +59,10 @@ export const PasskeyRegisterDialog: FunctionComponent<
       })
       .catch((e) => {
         if (!cancelled) {
-          showErrorResponse(e, translate('Unable to start passkey enrolment.'));
+          showErrorResponse(
+            e,
+            translate('Unable to start passkey enrollment.'),
+          );
           closeDialog();
         }
       });
@@ -133,7 +136,7 @@ export const PasskeyRegisterDialog: FunctionComponent<
           >
             <p className="text-quaternary">
               {translate(
-                'Give this passkey a name you will recognise later, then follow your device prompt. Nothing secret leaves your device.',
+                'Give this passkey a name you will recognize later, then follow your device prompt. Nothing secret leaves your device.',
               )}
             </p>
             <StringGroup
@@ -149,7 +152,7 @@ export const PasskeyRegisterDialog: FunctionComponent<
                 variant="info"
                 title={translate('No built-in authenticator on this device')}
                 body={translate(
-                  'Your browser reports no built-in authenticator (Touch ID, Windows Hello). You can still enrol using a phone or a security key from the next prompt.',
+                  'Your browser reports no built-in authenticator (Touch ID, Windows Hello). You can still enroll using a phone or a security key from the next prompt.',
                 )}
                 className="mt-3"
               />
@@ -158,7 +161,7 @@ export const PasskeyRegisterDialog: FunctionComponent<
             {error && (
               <AlertItem
                 variant="error"
-                title={translate('Passkey enrolment failed')}
+                title={translate('Passkey enrollment failed')}
                 body={error}
                 className="mt-3"
               />

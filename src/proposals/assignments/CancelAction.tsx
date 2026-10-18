@@ -18,7 +18,7 @@ export const CancelAction: FC<CancelActionProps> = ({ row, refetch }) => {
     void
   >({
     mutationFn: () => assignmentBatchesCancel({ path: { uuid: row.uuid } }),
-    successMessage: translate('Assignment batch cancelled.'),
+    successMessage: translate('Assignment batch canceled.'),
     errorMessage: translate('Failed to cancel assignment batch.'),
     refetch,
     confirmation: {

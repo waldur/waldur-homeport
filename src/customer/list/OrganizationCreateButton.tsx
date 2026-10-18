@@ -31,7 +31,7 @@ export const OrganizationCreateButton: FunctionComponent = () => {
     return (
       <ActionsMenu side="bottom" toggle="add" size="lg" align="start">
         <ActionItem
-          title={translate('Create organisation')}
+          title={translate('Create organization')}
           action={() =>
             openDialog(CustomerCreateDialog, {
               resolve: { role: 'CUSTOMER' },
@@ -40,7 +40,7 @@ export const OrganizationCreateButton: FunctionComponent = () => {
           iconNode={<PlusCircleIcon weight="bold" />}
         />
         <ActionItem
-          title={translate('Onboard organisation')}
+          title={translate('Onboard organization')}
           action={() => router.stateService.go('organizations-create')}
           iconNode={<RocketLaunchIcon weight="bold" />}
         />

@@ -64,7 +64,7 @@ describe('OpenstackTenantActions', () => {
     ).toEqual([
       'Edit',
       'Replicate',
-      'Synchronise',
+      'Synchronize',
       'Change limits',
       'Show usage',
       'Report usage',

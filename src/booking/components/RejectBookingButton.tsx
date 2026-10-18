@@ -20,7 +20,7 @@ export const RejectBookingButton: FC<RejectBookingButtonProps> = ({
 }) => {
   const rejectMutation = useManagedMutation<any, any, void>({
     mutationFn: () => bookingResourcesReject({ path: { uuid: resourceUuid } }),
-    successMessage: translate('Booking has been cancelled.'),
+    successMessage: translate('Booking has been canceled.'),
     errorMessage: translate('Unable to cancel booking.'),
     refetch,
   });

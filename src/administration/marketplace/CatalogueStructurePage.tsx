@@ -34,8 +34,8 @@ const TABS = [
 
 export const CatalogueStructurePage = () => (
   <TableWithTabs
-    title={translate('Catalogue structure')}
-    subtitle={translate('How the marketplace catalogue is organised.')}
+    title={translate('Catalog structure')}
+    subtitle={translate('How the marketplace catalog is organized.')}
     tabs={TABS}
     syncWithUrlKey="tab"
   />

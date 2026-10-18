@@ -282,7 +282,7 @@ const AllocationOutcome: FC<{
         {project && (
           <Col sm={6}>
             <Field
-              label={translate('Organisation')}
+              label={translate('Organization')}
               labelCol={5}
               valueCol={7}
               value={renderFieldOrDash(project.customer_name)}

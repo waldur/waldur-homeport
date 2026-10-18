@@ -766,7 +766,7 @@ export const states: StateDeclaration[] = [
       })),
     ),
     data: {
-      breadcrumb: () => translate('Catalogue structure'),
+      breadcrumb: () => translate('Catalog structure'),
       priority: 40,
     },
   },

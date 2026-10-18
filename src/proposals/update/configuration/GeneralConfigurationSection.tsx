@@ -237,7 +237,7 @@ export const GeneralConfigurationSection: FC<
             name="carry_over_drafts"
             label={translate('Carry unsubmitted drafts over to the next round')}
             description={translate(
-              'When a round closes, move unsubmitted drafts to the next round instead of cancelling them. Applicants keep their content and are notified by email. Drafts are cancelled as before when the call has no later round.',
+              'When a round closes, move unsubmitted drafts to the next round instead of canceling them. Applicants keep their content and are notified by email. Drafts are canceled as before when the call has no later round.',
             )}
             disabled={props.isReadOnly}
             renderValue={(value) =>
@@ -288,7 +288,7 @@ export const GeneralConfigurationSection: FC<
               name="order_author_user"
               label={translate('Named contact')}
               description={translate(
-                'Every order this call places is attributed to this person — a shared mailbox, for example. They must hold a role on this call or on the organisation managing it.',
+                'Every order this call places is attributed to this person — a shared mailbox, for example. They must hold a role on this call or on the organization managing it.',
               )}
               loadOptions={userAutocomplete}
               getOptionValue={(option) => option.uuid}

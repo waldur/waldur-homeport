@@ -17,7 +17,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { FormGroup, SelectGroup, StringGroup } from '@/form';
-import { translate } from '@/i18n';
+import { getLocalizedFieldName, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -83,7 +83,8 @@ const getPresets = (scope: string): Preset[] => PRESETS[scope] ?? [];
 const getPreset = (scope: string, value: string) =>
   getPresets(scope).find((preset) => preset.value === value);
 
-const getNameField = () => `description_${ENV.defaultLanguage || 'en'}`;
+const getNameField = () =>
+  getLocalizedFieldName('description', ENV.defaultLanguage || 'en');
 
 interface WizardData {
   roles: RoleDetails[];

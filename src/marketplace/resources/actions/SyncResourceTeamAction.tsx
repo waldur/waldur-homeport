@@ -28,8 +28,8 @@ export const SyncResourceTeamAction = ({ resource, ...rest }) => {
       remoteWaldurApiSyncResourceProjectPermissions({
         path: { uuid: resource.uuid },
       }),
-    successMessage: translate('Team members have been synchronised.'),
-    errorMessage: translate('Unable to synchronise team members.'),
+    successMessage: translate('Team members have been synchronized.'),
+    errorMessage: translate('Unable to synchronize team members.'),
   });
 
   if (resource.offering_type !== REMOTE_OFFERING_TYPE) {
@@ -43,7 +43,7 @@ export const SyncResourceTeamAction = ({ resource, ...rest }) => {
     );
   } else if (NON_SYNCABLE_STATES.includes(resource.state)) {
     tooltip = translate(
-      'Team members can be synchronised only for an active resource.',
+      'Team members can be synchronized only for an active resource.',
     );
   }
 

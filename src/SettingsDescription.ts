@@ -779,7 +779,7 @@ export const SettingsDescription = [
       },
       {
         key: 'ATLASSIAN_ORGANISATION_FIELD',
-        description: translate('Organisation field name'),
+        description: translate('Organization field name'),
         default: '',
         type: 'string',
       },
@@ -875,7 +875,7 @@ export const SettingsDescription = [
       },
       {
         key: 'JIRA_WEBHOOK_SHARED_SECRET',
-        description: translate('Shared secret expected in the X-Webhook-Secret header of inbound JIRA webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behaviour). Configure your JIRA automation/webhook to send the same value to enable authentication.'),
+        description: translate('Shared secret expected in the X-Webhook-Secret header of inbound JIRA webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behavior). Configure your JIRA automation/webhook to send the same value to enable authentication.'),
         default: '',
         type: 'secret_field',
       },
@@ -929,7 +929,7 @@ export const SettingsDescription = [
       },
       {
         key: 'ZAMMAD_WEBHOOK_SHARED_SECRET',
-        description: translate('Shared secret expected in the X-Webhook-Secret header of inbound Zammad webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behaviour).'),
+        description: translate('Shared secret expected in the X-Webhook-Secret header of inbound Zammad webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behavior).'),
         default: '',
         type: 'secret_field',
       },
@@ -964,7 +964,7 @@ export const SettingsDescription = [
       },
       {
         key: 'SMAX_ORGANISATION_FIELD',
-        description: translate('Organisation field name.'),
+        description: translate('Organization field name.'),
         default: '',
         type: 'string',
       },
@@ -1018,7 +1018,7 @@ export const SettingsDescription = [
       },
       {
         key: 'SMAX_WEBHOOK_SHARED_SECRET',
-        description: translate('Shared secret expected in the X-Webhook-Secret header of inbound SMAX webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behaviour).'),
+        description: translate('Shared secret expected in the X-Webhook-Secret header of inbound SMAX webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behavior).'),
         default: '',
         type: 'secret_field',
       },
@@ -1213,7 +1213,7 @@ export const SettingsDescription = [
       },
       {
         key: 'OIDC_ALLOWED_USER_EMAIL_PATTERNS',
-        description: translate('Comma-separated list of regular expressions matched against the user email, e.g. \'.*@example\.com\'. Only has an effect when OIDC_BLOCK_CREATION_OF_UNINVITED_USERS is enabled. When non-empty, a user whose email matches any of the patterns may sign up without an invitation, and existing users must keep matching in order to log in - except staff and support users, users holding at least one unexpired role, users with a pending invitation and users matching an autoprovisioning rule, which are always allowed. Only interactive logins are gated; background identity synchronisation is not. Patterns must match the whole email and are case-insensitive. Note: values are split on commas, so a pattern cannot contain a comma - \'{n,m}\' quantifiers are not supported, repeat the expression instead.'),
+        description: translate('Comma-separated list of regular expressions matched against the user email, e.g. \'.*@example\.com\'. Only has an effect when OIDC_BLOCK_CREATION_OF_UNINVITED_USERS is enabled. When non-empty, a user whose email matches any of the patterns may sign up without an invitation, and existing users must keep matching in order to log in - except staff and support users, users holding at least one unexpired role, users with a pending invitation and users matching an autoprovisioning rule, which are always allowed. Only interactive logins are gated; background identity synchronization is not. Patterns must match the whole email and are case-insensitive. Note: values are split on commas, so a pattern cannot contain a comma - \'{n,m}\' quantifiers are not supported, repeat the expression instead.'),
         default: [],
         type: 'list_field',
       },
@@ -1717,7 +1717,7 @@ export const SettingsDescription = [
       },
       {
         key: 'AI_ASSISTANT_SYSTEM_PROMPT_CUSTOM_INSTRUCTIONS',
-        description: translate('Additional instructions injected into the AI Assistant system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. Overridden by the active SystemPrompt record when set.'),
+        description: translate('Additional instructions injected into the AI Assistant system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. Overridden by the active SystemPrompt record when set.'),
         default: '',
         type: 'text_field',
       },

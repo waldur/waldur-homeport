@@ -24,17 +24,17 @@ export const SyncMembersButton = ({
         path: { uuid: project.uuid },
       }),
     successMessage: translate(
-      'Project members have been synchronised successfully.',
+      'Project members have been synchronized successfully.',
     ),
-    errorMessage: translate('Unable to synchronise project members.'),
+    errorMessage: translate('Unable to synchronize project members.'),
     refetch,
     confirmation: {
-      title: translate('Synchronise members'),
+      title: translate('Synchronize members'),
       body: translate(
-        'This action will send an event requesting to synchronise membership information to all Waldur site agents connected with resources in this project.',
+        'This action will send an event requesting to synchronize membership information to all Waldur site agents connected with resources in this project.',
       ),
       options: {
-        positiveButton: translate('Synchronise'),
+        positiveButton: translate('Synchronize'),
         positiveButtonVariant: 'primary',
       },
     },
