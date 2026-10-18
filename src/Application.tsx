@@ -21,6 +21,7 @@ import { ErrorMessage } from './ErrorMessage';
 import { LoadingScreen } from './LoadingScreen';
 import { LayoutProvider } from './metronic/layout/core';
 import { ConfirmModalRoot } from './modal/ConfirmModalRoot';
+import { RouteLoadingBar } from './navigation/RouteLoadingBar';
 import { NotificationContainer } from './NotificationContainer';
 import { router } from './router';
 import { states } from './states';
@@ -50,6 +51,7 @@ const ApplicationInner: FunctionComponent = () => {
                     <ThreadProvider>
                       <ThreadRuntimeProvider>
                         <AnonymousThreadProvider>
+                          <RouteLoadingBar />
                           <RealtimeRoot />
                           <NotificationContainer />
                           <ModalRoot />

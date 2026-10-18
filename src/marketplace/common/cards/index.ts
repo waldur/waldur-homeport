@@ -1,4 +1,6 @@
-import { ComponentType, lazy } from 'react';
+import { ComponentType } from 'react';
+
+import { trackedLazy } from '@/navigation/pageLoading';
 
 import type { CardStyleType, OfferingCardVariantProps } from './types';
 
@@ -8,16 +10,16 @@ export const CARD_STYLES: Record<
   CardStyleType,
   ComponentType<OfferingCardVariantProps>
 > = {
-  compact: lazy(() =>
+  compact: trackedLazy(() =>
     import('./CompactCard').then((m) => ({ default: m.CompactCard })),
   ),
-  detailed: lazy(() =>
+  detailed: trackedLazy(() =>
     import('./DetailedCard').then((m) => ({ default: m.DetailedCard })),
   ),
-  list: lazy(() =>
+  list: trackedLazy(() =>
     import('./ListItemCard').then((m) => ({ default: m.ListItemCard })),
   ),
-  minimal: lazy(() =>
+  minimal: trackedLazy(() =>
     import('./ImageCard').then((m) => ({ default: m.ImageCard })),
   ),
 };

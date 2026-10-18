@@ -1,0 +1,38 @@
+// Fixed to the top edge and click-through, so the page stays usable while it loads.
+.route-loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2000;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    background-color: var(--bg-brand-solid);
+    animation: route-loading-bar-slide 1.2s ease-in-out infinite;
+  }
+}
+
+@keyframes route-loading-bar-slide {
+  from {
+    left: -40%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-loading-bar::before {
+    left: 0;
+    width: 100%;
+    animation: none;
+  }
+}
