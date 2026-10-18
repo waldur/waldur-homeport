@@ -18,7 +18,7 @@ import { OfferViaCallFormData, selectableSteps } from './offerViaCallForm';
 const chainStepLabel = (step: OfferViaCallStep): string => {
   switch (step) {
     case 'organisation':
-      return translate('Registering the managing organisation');
+      return translate('Registering the managing organization');
     case 'call':
       return translate('Creating the call');
     case 'workflow':

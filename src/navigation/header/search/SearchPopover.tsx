@@ -94,7 +94,7 @@ const AllResultsTabContent = ({
           </div>
         )}
         <div className="mb-3">
-          <SectionTitle title={translate('Favourites')} />
+          <SectionTitle title={translate('Favorites')} />
           {favPages.length > 0 ? (
             favPages.map((page) => (
               <SearchItem

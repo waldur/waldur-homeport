@@ -303,7 +303,8 @@ const getDescriptionLabel = (field: string) =>
   field === 'description'
     ? translate('Description')
     : translate('Description ({language})', {
-        language: field.replace('description_', ''),
+        // description_en_gb names the language en-gb.
+        language: field.replace('description_', '').replace(/_/g, '-'),
       });
 
 const getDescriptionChanges = (

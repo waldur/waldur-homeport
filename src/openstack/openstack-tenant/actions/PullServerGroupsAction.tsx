@@ -15,7 +15,7 @@ export const PullServerGroupsAction: FC<TenantActionProps> = ({
   refetch,
 }) => (
   <AsyncActionButton
-    title={translate('Synchronise')}
+    title={translate('Synchronize')}
     iconNode={<ArrowsClockwiseIcon weight="bold" />}
     resource={resource}
     validators={validators}

@@ -165,6 +165,17 @@ Run style and dependency checks:
     - yarn style:check
     - yarn deps:unused
     - yarn deps:circular
+    # Source strings are US English; en-GB.json is generated from them.
+    # Extract first so the check sees the strings as they are in src/, and
+    # fail when the committed en-GB.json does not match what they generate.
+    # (template.json freshness stays advisory in its own job below.)
+    - yarn i18n:extract
+    - yarn i18n:spelling
+    - |
+      if ! git diff --exit-code --stat locales/en-GB.json; then
+        echo "locales/en-GB.json is out of date. Run 'yarn i18n:extract' and commit the result."
+        exit 1
+      fi
 
 # template.json is generated from src/ but nothing regenerated it, so it drifted
 # for weeks at a time and i18n:validate started reporting a negative unused

@@ -71,16 +71,16 @@ export const ProjectTemplateFormFields = () => (
 
     <AsyncSelectGroup
       name="customer"
-      label={translate('Organisation into which to deploy projects')}
+      label={translate('Organization into which to deploy projects')}
       required
-      placeholder={translate('Select organisation')}
+      placeholder={translate('Select organization')}
       validate={required}
       loadOptions={loadOrganizations}
       debounceTimeout={1000}
       defaultOptions
       getOptionValue={(option) => option.uuid}
       getOptionLabel={(option) => option.name}
-      noOptionsMessage={() => translate('No organisations found')}
+      noOptionsMessage={() => translate('No organizations found')}
       isClearable={true}
     />
 

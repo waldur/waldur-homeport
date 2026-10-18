@@ -83,6 +83,34 @@ describe('RoleDescriptionEditDialog', () => {
     expect(mockRefetch).toHaveBeenCalled();
   });
 
+  it('edits a regional language through its underscored field', async () => {
+    const user = userEvent.setup();
+    const updateRoleDescriptionsSpy = vi
+      .mocked(rolesUpdateDescriptionsUpdate)
+      .mockResolvedValue(undefined);
+    vi.mocked(getRoles).mockResolvedValue([]);
+    ENV.languageChoices = [{ code: 'en-gb', label: 'English (UK)' }];
+    vi.mocked(rolesRetrieve).mockResolvedValue({
+      data: { uuid: 'test-uuid', description_en_gb: 'Organisation owner' },
+    } as any);
+
+    renderWithProviders(
+      <RoleDescriptionEditDialog
+        resolve={{ row: mockRow, refetch: mockRefetch }}
+      />,
+    );
+
+    const input = await screen.findByDisplayValue('Organisation owner');
+    await user.clear(input);
+    await user.type(input, 'Organisation manager');
+    await user.click(screen.getByText('Save'));
+
+    expect(updateRoleDescriptionsSpy).toHaveBeenCalledWith({
+      path: { uuid: 'test-uuid' },
+      body: { description_en_gb: 'Organisation manager' },
+    });
+  });
+
   it('shows an error state instead of the form when the role fails to load', async () => {
     vi.mocked(rolesRetrieve).mockRejectedValue({ response: { status: 404 } });
     renderWithProviders(

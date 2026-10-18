@@ -27,6 +27,22 @@ describe('AdministrationLanguages', () => {
     });
   });
 
+  it('flags each English variant and leaves an unmapped language without a flag', () => {
+    ENV.languageChoices = [
+      { code: 'en', label: 'English' },
+      { code: 'en-gb', label: 'English (UK)' },
+      { code: 'xx', label: 'Unmapped' },
+    ];
+    render(<AdministrationLanguages />);
+
+    // In render order: English, English (UK); the unmapped language has none.
+    // A language code is not a country code, so no bogus flag-xx sprite.
+    const flags = screen.getAllByTestId('country-flag');
+    expect(flags).toHaveLength(2);
+    expect(flags[0]).toHaveClass('flag-us');
+    expect(flags[1]).toHaveClass('flag-gb');
+  });
+
   it('prevents unselecting current language', async () => {
     render(<AdministrationLanguages />);
     const currentLangCheckbox = screen.getByTestId('language_en');

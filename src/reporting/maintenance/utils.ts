@@ -57,7 +57,7 @@ export const STATE_LABELS: Record<string, string> = {
   Scheduled: translate('Scheduled'),
   'In progress': translate('In progress'),
   Completed: translate('Completed'),
-  Cancelled: translate('Cancelled'),
+  Cancelled: translate('Canceled'),
 };
 
 export const TIMING_LABELS: Record<TimingBucket, string> = {

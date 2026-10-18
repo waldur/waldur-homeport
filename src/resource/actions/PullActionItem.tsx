@@ -34,8 +34,8 @@ export const PullActionItem = <
 ): ReactElement => {
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => props.apiMethod(props.resource.uuid),
-    successMessage: translate('Synchronisation has been scheduled.'),
-    errorMessage: translate('Unable to synchronise resource.'),
+    successMessage: translate('Synchronization has been scheduled.'),
+    errorMessage: translate('Unable to synchronize resource.'),
     refetch: props.refetch,
   });
 
@@ -50,7 +50,7 @@ export const PullActionItem = <
 
   return (
     <ActionItem
-      title={translate('Synchronise')}
+      title={translate('Synchronize')}
       action={mutate}
       disabled={disabled || isPending}
       tooltip={tooltip}

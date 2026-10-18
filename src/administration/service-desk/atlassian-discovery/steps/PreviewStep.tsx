@@ -224,7 +224,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
               </tr>
               <tr>
                 <td className="text-quaternary">
-                  {translate('Organisation Field')}
+                  {translate('Organization Field')}
                 </td>
                 <td>
                   {values.fieldMappings?.organisation_field ? (

@@ -67,12 +67,12 @@ export const MultiCancelAction = ({ rows, refetch }) => {
     rows,
     refetch,
     mutationFn: (row) => userInvitationsCancel({ path: { uuid: row.uuid } }),
-    successMessage: translate('Invitations have been cancelled.'),
+    successMessage: translate('Invitations have been canceled.'),
     renderPartialSuccessMessage: (n) =>
-      translate('{n} invitations have been cancelled.', { n }),
+      translate('{n} invitations have been canceled.', { n }),
     errorMessage: translate('Unable to cancel invitations.'),
     renderErrorMessage: (n) =>
-      translate('{n} invitations could not be cancelled.', { n }),
+      translate('{n} invitations could not be canceled.', { n }),
     confirmation: {
       title: translate('Cancel invitations'),
       body: translate('Are you sure you want to cancel {count} invitations?', {

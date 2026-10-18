@@ -92,7 +92,7 @@ export async function runBlockStream({
     const aborted = signal.aborted;
     if (!aborted) onError?.(error);
     const message = aborted
-      ? translate('Assistant message was cancelled')
+      ? translate('Assistant message was canceled')
       : mapError(error);
     setMessages((prev) =>
       prev.map((m) =>
@@ -135,7 +135,7 @@ export async function runBlockStream({
             status: {
               type: 'incomplete',
               reason: 'cancelled',
-              error: translate('Assistant message was cancelled'),
+              error: translate('Assistant message was canceled'),
             },
           };
         }

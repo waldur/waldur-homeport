@@ -63,7 +63,7 @@ export const PullMarketplaceResourceAction = ({
 
   return (
     <ActionItem
-      title={translate('Synchronise')}
+      title={translate('Synchronize')}
       action={mutate}
       disabled={isPending || validationState.disabled}
       tooltip={validationState.tooltip}

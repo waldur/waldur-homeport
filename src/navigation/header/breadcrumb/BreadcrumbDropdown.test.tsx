@@ -165,7 +165,7 @@ describe('BreadcrumbDropdown', () => {
       expect.objectContaining({ title: 'Alpha' }),
       undefined,
     );
-    expect(screen.getByRole('status')).toHaveTextContent('Added to favourites');
+    expect(screen.getByRole('status')).toHaveTextContent('Added to favorites');
   });
 
   it('announces how many rows a search found', async () => {

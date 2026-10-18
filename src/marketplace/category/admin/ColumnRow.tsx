@@ -75,7 +75,7 @@ export const ColumnRow = ({ column, fields, index, name }) => {
               input={input}
               meta={meta}
               placeholder={translate(
-                'Widget field allows to customise table cell rendering',
+                'Widget field allows to customize table cell rendering',
               )}
               options={[
                 { value: '', label: translate('None') },

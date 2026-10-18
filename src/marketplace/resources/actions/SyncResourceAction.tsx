@@ -22,12 +22,12 @@ export const SyncResourceAction = ({ resource, ...rest }) => {
     onSuccess: (response) => {
       showSuccess(response.data['detail']);
     },
-    errorMessage: translate('Unable to synchronise.'),
+    errorMessage: translate('Unable to synchronize.'),
   });
 
   return resource.offering_type === OFFERING_TYPE_CUSTOM_SCRIPTS ? (
     <ActionItem
-      title={translate('Synchronise')}
+      title={translate('Synchronize')}
       action={mutate}
       disabled={isPending}
       {...rest}

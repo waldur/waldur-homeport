@@ -30,11 +30,11 @@ export const FeaturesDescription: FeatureSection[] = [
       },
       {
         key: 'show_organisation_reporting',
-        description: translate('Show the Reporting menu with organisation-scoped reports to organisation owners.'),
+        description: translate('Show the Reporting menu with organization-scoped reports to organization owners.'),
       },
       {
         key: 'show_permission_reviews',
-        description: translate('Allows to show permission reviews tab and popups for organisations.'),
+        description: translate('Allows to show permission reviews tab and popups for organizations.'),
       },
       {
         key: 'show_project_digest',
@@ -126,7 +126,7 @@ export const FeaturesDescription: FeatureSection[] = [
       },
       {
         key: 'catalogue_only',
-        description: translate('Run the marketplace as a catalogue: offerings can be browsed but not ordered, order lists and pricing are hidden, and anonymous visitors land on the marketplace instead of the login page.'),
+        description: translate('Run the marketplace as a catalog: offerings can be browsed but not ordered, order lists and pricing are hidden, and anonymous visitors land on the marketplace instead of the login page.'),
       },
       {
         key: 'conceal_audit_log_from_end_users',

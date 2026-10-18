@@ -127,7 +127,7 @@ describe('RoundLifecycleActions', () => {
 
     await waitFor(() => expect(useModal().confirm).toHaveBeenCalled());
     const [, body] = vi.mocked(useModal().confirm).mock.lastCall as any;
-    expect(body).toContain('Unsubmitted drafts are cancelled.');
+    expect(body).toContain('Unsubmitted drafts are canceled.');
   });
 
   it('does not close a round of a call that is not active', async () => {

@@ -11,7 +11,9 @@ const LANGUAGE_COUNTRY: Record<string, string> = {
   da: 'dk',
   de: 'de',
   el: 'gr',
-  en: 'gb',
+  // en is US English; en-gb (enabled separately) gets the UK flag.
+  en: 'us',
+  'en-gb': 'gb',
   es: 'es',
   et: 'ee',
   fr: 'fr',

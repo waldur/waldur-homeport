@@ -60,7 +60,7 @@ export const getMaintenanceState = (
     case 'Completed':
       return { label: translate('Completed'), color: 'success' };
     case 'Cancelled':
-      return { label: translate('Cancelled'), color: 'danger' };
+      return { label: translate('Canceled'), color: 'danger' };
 
     default:
       return { label: state, color: 'neutral' };

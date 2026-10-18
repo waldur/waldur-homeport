@@ -40,7 +40,7 @@ export const MaintenanceCancelAction: FC<MaintenanceCancelActionProps> = ({
     confirmation: {
       title: translate('Cancel maintenance'),
       body: translate(
-        'Cancelling will halt the maintenance and notify affected consumers. Please provide a reason that will be recorded in internal notes.',
+        'Canceling will halt the maintenance and notify affected consumers. Please provide a reason that will be recorded in internal notes.',
       ),
       options: {
         showInput: true,
@@ -52,9 +52,9 @@ export const MaintenanceCancelAction: FC<MaintenanceCancelActionProps> = ({
         type: 'danger',
       },
     },
-    successMessage: translate('Maintenance cancelled'),
+    successMessage: translate('Maintenance canceled'),
     successDescription: translate(
-      'The maintenance window {name} has been cancelled.',
+      'The maintenance window {name} has been canceled.',
       { name: row.name },
     ),
     errorMessage: translate('Unable to cancel maintenance announcement.'),

@@ -118,7 +118,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
   const toggleFavorite = (item: BreadcrumbItem, event?: MouseEvent) => {
     if (isFavorite(item.to, item.params)) {
       removeFavorite(item.to, item.params, event);
-      return translate('Removed from favourites');
+      return translate('Removed from favorites');
     }
     addFavoritePage(
       {
@@ -130,7 +130,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
       },
       event,
     );
-    return translate('Added to favourites');
+    return translate('Added to favorites');
   };
 
   // Ctrl/Cmd+D adds the highlighted row to the favourites or removes it: the
@@ -177,7 +177,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
         />
         <span id={hintId} className="sr-only">
           {translate(
-            'Press {shortcut} to add the highlighted item to favourites or remove it.',
+            'Press {shortcut} to add the highlighted item to favorites or remove it.',
             { shortcut: FAVORITE_SHORTCUT },
           )}
         </span>

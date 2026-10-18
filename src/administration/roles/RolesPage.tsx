@@ -8,7 +8,7 @@ import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 const CATALOGUE_TAB = {
   key: 'catalogue',
-  title: translate('Catalogue'),
+  title: translate('Catalog'),
   component: lazyComponent(() =>
     import('./RolesList').then((module) => ({
       default: module.RolesList,

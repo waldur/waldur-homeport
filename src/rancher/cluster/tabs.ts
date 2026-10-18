@@ -89,7 +89,7 @@ export const RancherClusterTabConfiguration: ResourceTabsConfiguration = {
         },
         {
           key: 'catalogs',
-          title: translate('Catalogues'),
+          title: translate('Catalogs'),
           component: lazyComponent(() =>
             import('../catalog/ClusterCatalogList').then((module) => ({
               default: module.ClusterCatalogList,

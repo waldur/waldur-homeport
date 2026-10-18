@@ -941,7 +941,7 @@ export const OrganisationReportsTab: FC = () => {
 
             <p className="text-quaternary small mb-3">
               {translate(
-                'Fetches reports for each project in parallel — this may take 15–30 seconds for large organisations. Tip: selecting a year or month limits projects to those active during that period, which is usually the fastest way to narrow the load for large organisations.',
+                'Fetches reports for each project in parallel — this may take 15–30 seconds for large organizations. Tip: selecting a year or month limits projects to those active during that period, which is usually the fastest way to narrow the load for large organizations.',
               )}
             </p>
 

@@ -13,14 +13,14 @@ export const RemoteSyncSynchroniseAction = (props: RemoteSyncActionProps) => {
       marketplaceRemoteSynchronisationsRunSynchronisation({
         path: { uuid: props.row.uuid },
       }),
-    successMessage: translate('Synchronisation has been successful.'),
-    errorMessage: translate('Unable to synchronise.'),
+    successMessage: translate('Synchronization has been successful.'),
+    errorMessage: translate('Unable to synchronize.'),
     refetch: props.refetch,
   });
 
   return (
     <ActionItem
-      title={translate('Synchronise')}
+      title={translate('Synchronize')}
       action={mutate}
       iconNode={<GearSixIcon weight="bold" />}
       disabled={isLoading}

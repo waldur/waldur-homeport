@@ -174,7 +174,7 @@ export const LimitHorizonView: FC<Props> = ({
         'one row per (offering · component) — bar spans current_period_start → current_period_end',
       )}
       normalization={translate(
-        'inner-fill width = usage / limit; colour: <70% green, <90% amber, <100% orange, ≥100% red',
+        'inner-fill width = usage / limit; color: <70% green, <90% amber, <100% orange, ≥100% red',
       )}
       scenarioNote={
         !rows.length

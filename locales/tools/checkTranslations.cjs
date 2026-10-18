@@ -3,6 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const { isGeneratedLocale } = require('./generatedLocales.cjs');
+
 const ts = require('typescript');
 
 /**
@@ -249,7 +251,11 @@ class TranslationAnalyzer {
     try {
       const localeFiles = fs
         .readdirSync(localesDir)
-        .filter((file) => file.endsWith('.json'));
+        .filter(
+          (file) =>
+            file.endsWith('.json') &&
+            !isGeneratedLocale(file.replace('.json', '')),
+        );
 
       for (const file of localeFiles) {
         const locale = file.replace('.json', '');

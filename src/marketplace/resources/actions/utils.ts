@@ -35,7 +35,7 @@ export const getResourceActionOptions = () =>
     },
     { value: ResourceAction.SHOW_USAGE, label: translate('Show usage') },
     { value: ResourceAction.SUBMIT_REPORT, label: translate('Submit report') },
-    { value: ResourceAction.SYNCHRONIZE, label: translate('Synchronise') },
+    { value: ResourceAction.SYNCHRONIZE, label: translate('Synchronize') },
     { value: ResourceAction.TERMINATE, label: translate('Terminate') },
     { value: ResourceAction.UNLINK, label: translate('Unlink') },
     { value: ResourceAction.UPDATE_LIMITS, label: translate('Update limits') },

@@ -7,6 +7,7 @@ import { LanguageCountry } from './LanguageSelectorDropdown';
 // LanguageCountry entry, otherwise CountryFlagIcon gets an undefined code.
 const BACKEND_LANGUAGE_CODES = [
   'en',
+  'en-gb',
   'et',
   'lt',
   'lv',
@@ -32,5 +33,10 @@ const BACKEND_LANGUAGE_CODES = [
 describe('LanguageCountry', () => {
   it.each(BACKEND_LANGUAGE_CODES)('maps %s to a country code', (code) => {
     expect(LanguageCountry[code]).toBeTruthy();
+  });
+
+  it('flags US English and British English separately', () => {
+    expect(LanguageCountry['en']).toBe('us');
+    expect(LanguageCountry['en-gb']).toBe('gb');
   });
 });

@@ -3,6 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const { refuseGeneratedLocale } = require('./generatedLocales.cjs');
+
 /**
  * Simple LLM Translation Processor
  *
@@ -113,6 +115,7 @@ class SimpleLLMProcessor {
   }
 
   loadData() {
+    refuseGeneratedLocale(this.language);
     const rootDir = path.join(__dirname, '../../');
 
     // Load template and translations

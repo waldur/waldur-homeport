@@ -12,7 +12,7 @@ const validators = [validateState('OK')];
 
 export const PullFloatingIpsAction: FC<TenantActionProps> = ({ resource }) => (
   <AsyncActionButton
-    title={translate('Synchronise')}
+    title={translate('Synchronize')}
     iconNode={<ArrowsClockwiseIcon weight="bold" />}
     resource={resource}
     validators={validators}

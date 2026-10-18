@@ -23,7 +23,7 @@ export const useEmailChange = (user) => {
 
   const cancelRequestMutation = useManagedMutation<any, any, void>({
     mutationFn: () => usersCancelChangeEmail({ path: { uuid: user.uuid } }),
-    successMessage: translate('Email change request has been cancelled.'),
+    successMessage: translate('Email change request has been canceled.'),
     onSuccess: () => {
       setCurrentUser({ ...user, requested_email: null });
     },

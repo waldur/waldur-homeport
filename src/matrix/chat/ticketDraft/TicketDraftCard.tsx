@@ -52,7 +52,7 @@ const DraftState: FC<{ state: TicketDraftState }> = ({ state }) => {
     case 'cancelled':
       return (
         <div className="tc-ticket-draft__outcome text-quaternary" role="status">
-          {translate('This draft was cancelled.')}
+          {translate('This draft was canceled.')}
         </div>
       );
     case 'expired':
@@ -127,7 +127,7 @@ const TicketDraftView: FC<{
   const busy = creating || cancelling;
   const busyReason = creating
     ? translate('The ticket is being created.')
-    : translate('The draft is being cancelled.');
+    : translate('The draft is being canceled.');
   const note = gone
     ? translate('This draft can no longer be sent from here.')
     : readOnlyNote;
@@ -225,7 +225,7 @@ const TicketDraftView: FC<{
             onClick={create}
             pending={creating}
             disabled={cancelling}
-            disabledReason={translate('The draft is being cancelled.')}
+            disabledReason={translate('The draft is being canceled.')}
           />
           <BaseButton
             label={translate('Edit')}

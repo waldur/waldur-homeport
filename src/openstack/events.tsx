@@ -137,7 +137,7 @@ const formatSecurityGroupRulesChangedEvent = (event: RulesChangedContext) => {
 
   if (event.trigger === 'backend_sync') {
     return translate(
-      'Security group "{name}" rules synchronised from backend: {summary}.',
+      'Security group "{name}" rules synchronized from backend: {summary}.',
       { name: event.security_group_name, summary },
       formatJsxTemplate,
     );

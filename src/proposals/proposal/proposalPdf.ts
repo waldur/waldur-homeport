@@ -89,7 +89,7 @@ export const buildProposalDocument = (
       field(translate('State'), formatProposalState(proposal.state)),
       field(translate('Applicant'), proposal.created_by_name),
       field(translate('Email'), proposal.applicant_email),
-      field(translate('Organisation'), proposal.applicant_organization),
+      field(translate('Organization'), proposal.applicant_organization),
       field(translate('Science sub-domain'), proposal.science_sub_domain_name),
       field(translate('Created'), formatDateTime(proposal.created)),
     ]),

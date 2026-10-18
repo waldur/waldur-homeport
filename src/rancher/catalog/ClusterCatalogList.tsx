@@ -64,7 +64,7 @@ export const ClusterCatalogList: FunctionComponent<
     <Table
       {...props}
       columns={columns}
-      verboseName={translate('catalogues')}
+      verboseName={translate('catalogs')}
       showPageSizeSelector
       tableActions={<CatalogCreateButton cluster={resourceScope} />}
       rowActions={({ row }) =>
