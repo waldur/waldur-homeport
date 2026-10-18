@@ -19300,6 +19300,7 @@
       "feature_area": "affiliates"
     }
   },
+  "End date must not be before the start date.": {},
   "End date of the agreement is {date}.": {
     "context": {
       "variables": {
@@ -54522,6 +54523,7 @@
       "feature_area": "actions"
     }
   },
+  "Start date must not be after the end date.": {},
   "Start date selected, choose end date": {
     "context": {
       "feature_area": "DatePicker"

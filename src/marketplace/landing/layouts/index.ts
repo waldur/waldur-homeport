@@ -1,4 +1,6 @@
-import { ComponentType, lazy } from 'react';
+import { ComponentType } from 'react';
+
+import { trackedLazy } from '@/navigation/pageLoading';
 
 import { MarketplaceLayoutProps } from './types';
 
@@ -8,13 +10,13 @@ export const LAYOUTS: Record<
   MarketplaceLayoutType,
   ComponentType<MarketplaceLayoutProps>
 > = {
-  classic: lazy(() =>
+  classic: trackedLazy(() =>
     import('./ClassicLayout').then((m) => ({ default: m.ClassicLayout })),
   ),
-  sidebar: lazy(() =>
+  sidebar: trackedLazy(() =>
     import('./SidebarLayout').then((m) => ({ default: m.SidebarLayout })),
   ),
-  carousel: lazy(() =>
+  carousel: trackedLazy(() =>
     import('./CarouselLayout').then((m) => ({ default: m.CarouselLayout })),
   ),
 };

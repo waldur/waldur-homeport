@@ -1,8 +1,9 @@
 import { ErrorBoundary } from '@sentry/react';
-import { ComponentType, FC, lazy, Suspense } from 'react';
+import { ComponentType, FC, Suspense } from 'react';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { ErrorMessage } from '@/ErrorMessage';
+import { trackedLazy } from '@/navigation/pageLoading';
 
 /**
  * Like lazyComponent, but the React.lazy handle is created once at module
@@ -14,7 +15,7 @@ import { ErrorMessage } from '@/ErrorMessage';
 export function lazyOnce<P extends object>(
   loader: () => Promise<{ default: ComponentType<P> }>,
 ): FC<P> {
-  const Lazy = lazy(loader);
+  const Lazy = trackedLazy(loader);
   const LazyOnce: FC<P> = (props) => (
     <ErrorBoundary fallback={ErrorMessage}>
       <Suspense fallback={<LoadingSpinner />}>
