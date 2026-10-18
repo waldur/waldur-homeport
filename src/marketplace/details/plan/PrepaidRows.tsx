@@ -40,7 +40,6 @@ const PrepaidRow = ({
       <FormTable.Item
         key={component.type}
         label={component.name}
-        htmlFor={viewMode ? undefined : `limit-${component.type}`}
         description={<ComponentCost component={component} />}
         value={
           // Every other row honours viewMode; this one did not, so a read-only
@@ -63,7 +62,6 @@ const PrepaidRow = ({
               validate={validateValue}
               render={({ input, meta }) => (
                 <MeasuredUnitInput
-                  id={`limit-${component.type}`}
                   input={input}
                   meta={meta}
                   component={component}

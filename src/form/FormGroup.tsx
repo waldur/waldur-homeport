@@ -1,18 +1,25 @@
 import classNames from 'classnames';
-import { uniqueId } from 'lodash-es';
 import {
   createContext,
   FC,
   PropsWithChildren,
   ReactNode,
   useContext,
+  useId,
   useMemo,
   useState,
 } from 'react';
-import { Form } from 'react-bootstrap';
 import { FieldMetaState } from 'react-final-form';
 
-import { HelpIcon, TooltipProps } from 'waldur-ui';
+import {
+  FormField,
+  FormFieldset,
+  FormLabel,
+  FormLegend,
+  FormText,
+  HelpIcon,
+  TooltipProps,
+} from 'waldur-ui';
 
 import { FieldError } from './FieldError';
 
@@ -47,6 +54,13 @@ export interface FormGroupProps {
 
   id?: string;
   controlId?: string;
+  /**
+   * The group holds several controls (a start and an end, a select and a
+   * custom value, a list of rows). It is drawn as a fieldset named by the
+   * label, as a legend, and each control inside names itself; the default
+   * points one label at one control, which is wrong for several.
+   */
+  group?: boolean;
 }
 
 /**
@@ -74,7 +88,6 @@ export const useFormGroupA11y = () => useContext(FormGroupA11yContext);
 
 export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
   const {
-    input,
     required,
     label,
     description,
@@ -95,19 +108,22 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     space = 7,
     id,
     controlId: propsControlId,
+    group,
   } = props;
 
   const tooltip = propsTooltip || help;
   const tooltipEnd = propsTooltipEnd || helpEnd;
 
-  const controlId = useMemo(
-    () => propsControlId || id || input?.name || uniqueId('form-group-'),
-    [propsControlId, id, input?.name],
-  );
+  // Only an id somebody asked for. Otherwise each control takes an id of its
+  // own and the label points at the first, so a group holding several controls
+  // (selects, pickers, a list of rows) never repeats one id.
+  const controlId = propsControlId || id;
 
-  // The help icon is a button, so it sits beside the <label>, not inside it:
-  // inside, it would be one of the control's labels and be announced as part
-  // of its name.
+  // The ids of the label, help and error text, for a control that wires its
+  // ARIA itself (the date pickers, through useFormGroupA11y). Derived from
+  // the group, not the control, since the group need not have a control id.
+  const ownId = useId();
+  const baseId = controlId || ownId;
   const shownError =
     !hideError &&
     meta &&
@@ -121,14 +137,17 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
   const hasError = !!shownError && !controlError;
   const a11y = useMemo<FormGroupA11y>(
     () => ({
-      labelId: hasLabel ? `${controlId}-label` : undefined,
-      descriptionId: hasDescription ? `${controlId}-description` : undefined,
-      errorId: hasError ? `${controlId}-error` : undefined,
+      labelId: hasLabel ? `${baseId}-label` : undefined,
+      descriptionId: hasDescription ? `${baseId}-description` : undefined,
+      errorId: hasError ? `${baseId}-error` : undefined,
       setControlError,
     }),
-    [controlId, hasLabel, hasDescription, hasError],
+    [baseId, hasLabel, hasDescription, hasError],
   );
 
+  // The help icon is a button, so it sits beside the <label>, not inside it:
+  // inside, it would be one of the control's labels and be announced as part
+  // of its name.
   const labelNode = !hideLabel && (label || tooltip) && (
     <>
       {tooltip && !tooltipEnd && (
@@ -140,28 +159,29 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
           />{' '}
         </>
       )}
-      {label && (
-        <Form.Label
-          id={a11y.labelId}
-          className={classNames({ required, 'me-auto': true })}
-        >
-          {label}
-        </Form.Label>
-      )}
+      {label &&
+        (group ? (
+          <FormLegend id={a11y.labelId} required={required} className="me-auto">
+            {label}
+          </FormLegend>
+        ) : (
+          <FormLabel id={a11y.labelId} required={required} className="me-auto">
+            {label}
+          </FormLabel>
+        ))}
     </>
   );
 
+  const fieldClassName = classNames(
+    {
+      grow: Boolean(actions),
+    },
+    !actions && (containerClassName || className),
+    !spaceless && `mb-${space}`,
+  );
+  const Wrapper = group ? FormFieldset : FormField;
   const mainContent = (
-    <Form.Group
-      className={classNames(
-        {
-          grow: Boolean(actions),
-        },
-        !actions && (containerClassName || className),
-        !spaceless && `mb-${space}`,
-      )}
-      controlId={controlId}
-    >
+    <Wrapper className={fieldClassName} {...(group ? {} : { controlId })}>
       {quickAction || (tooltip && tooltipEnd) ? (
         <div className="flex items-end">
           {labelNode && <span className="me-auto">{labelNode}</span>}
@@ -181,10 +201,10 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
         <div>{children}</div>
       </FormGroupA11yContext.Provider>
       {description && (
-        <Form.Text id={a11y.descriptionId}>{description}</Form.Text>
+        <FormText id={a11y.descriptionId}>{description}</FormText>
       )}
       {hasError && <FieldError id={a11y.errorId} error={shownError} />}
-    </Form.Group>
+    </Wrapper>
   );
 
   if (actions) {

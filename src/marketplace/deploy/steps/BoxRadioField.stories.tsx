@@ -31,7 +31,7 @@ import { BoxRadioChoice, BoxRadioField } from './BoxRadioField';
  *   and a radio indicator (trailing by default, or leading with `leftRadio: true`).
  */
 const meta: Meta<typeof BoxRadioField> = {
-  title: 'Forms/BoxRadioField',
+  title: 'Forms/Check controls/BoxRadioField',
   component: BoxRadioField,
   parameters: {
     docs: {

@@ -17,10 +17,10 @@ import * as Popover from '@radix-ui/react-popover';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import classNames from 'classnames';
 import { useState, FC, useEffect, forwardRef } from 'react';
-import { Modal, FormLabel } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField, FormLabel } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -51,19 +51,20 @@ const LinkEditForm = ({ initialUrl, onCancel }) => {
             onCancel();
           }}
         >
-          <FormLabel>URL</FormLabel>
-          <Field name="url">
-            {({ input, meta }) => (
-              <StringField
-                input={input}
-                meta={meta}
-                id="url"
-                placeholder="https://..."
-                autoFocus
-                className="mb-5"
-              />
-            )}
-          </Field>
+          <FormField>
+            <FormLabel>URL</FormLabel>
+            <Field name="url">
+              {({ input, meta }) => (
+                <StringField
+                  input={input}
+                  meta={meta}
+                  placeholder="https://..."
+                  autoFocus
+                  containerClassName="mb-5"
+                />
+              )}
+            </Field>
+          </FormField>
 
           <div>
             <BaseButton

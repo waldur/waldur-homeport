@@ -1,10 +1,10 @@
 import React from 'react';
-import { FormControl, InputGroup } from 'react-bootstrap';
 import { useForm } from 'react-final-form';
 
 import { BaseButton } from 'waldur-ui';
 
 import { range } from '@/core/utils';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 
 import { FieldProps } from '../types';
@@ -28,15 +28,15 @@ export const PasswordField: React.FC<FieldProps> = (props) => {
 
   const renderControl = React.useCallback(
     (fieldProps) => (
-      <InputGroup>
-        <FormControl {...fieldProps.input} />
+      <div className="flex gap-2">
+        <BaseInputField containerClassName="flex-1" {...fieldProps.input} />
         <BaseButton
           onClick={setGeneratedPassword}
           label={translate('Generate password')}
           variant="tertiary"
           size="lg"
         />
-      </InputGroup>
+      </div>
     ),
 
     [setGeneratedPassword],

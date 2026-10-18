@@ -12,7 +12,6 @@ export const SelectField: FunctionComponent<SelectFieldProps> = (props) => {
     <Select
       {...rest}
       id={undefined}
-      inputId={input.name}
       data-testid={props['data-testid']}
       name={input.name}
       value={

@@ -38,6 +38,67 @@ import { SubmitButton, StringGroup } from '@/form';
 />;
 ```
 
+## Labels, Fields and Help Text
+
+A field is waldur-ui's `FormField` around a `FormLabel`, a control and a
+`FormText`. The field links its label to its control by itself: `Input`,
+`Textarea`, `NativeSelect` (so also `NumberInput` and `SecretInput`), the date
+pickers and `Select` give themselves an id when they sit in a field, and the
+label points at the first of them. Write no `htmlFor` or `id`, and no
+`controlId`.
+
+**One label per control.** A `<label>` names one control. A field that holds
+several controls under one question (a start and an end, a select and its custom
+value, a list of rows) is a group, not a field with several controls: draw it
+as a `FormFieldset` named by a `FormLegend` (`<FormGroup group label=...>` in a
+react-final-form form), and give every control inside a name of its own, a
+`FormField` + `FormLabel` or an `aria-label` that says which one it is
+(`aria-label={`${translate('Limit')} ${i + 1}`}` for a row). The group's name is
+announced with each control, and `FormText` written directly inside the
+fieldset describes the fieldset, not each control. A select with an "other"
+value input gets the label on the select and an `aria-label` on the input. A
+table of controls is a group too, named by the legend, each cell by its
+`aria-label`. A `FormLabel` outside any field links to nothing, and the
+`waldur-custom/no-orphan-form-label` lint rule rejects it: use the legend for a
+group, `FormHeading` for text that captions something that is not a control (a
+read-only value, a preview), and a `FormField` for a label and its control.
+Where a field does hold several controls and no group fits, each keeps its own
+unique id and the label names the first.
+
+A label and a control that cannot share a wrapper, such as the two cells of a
+table row, share a `FieldScope` instead (the same linking with no element of its
+own): `FormTable.Item` is one, so its label names the control in its value with
+no `htmlFor`. A hand-written `<label>` reads the target with
+`useFieldLabelFor()`.
+
+The label always names the control that is really there: if a control keeps an
+`id` of its own, even inside a field with a `controlId`, that is the one the
+label points at.
+
+Pass `controlId` only when the id has to be known: it is then the id of every
+control inside, so use it for one control. `FormGroup` from `@/form` passes one
+only when you give it `controlId` or `id`; it no longer derives one from the
+field's name, because react-select and the pickers take the id too and a group
+with several of them would repeat it. Tests look a control up by role and name
+or `data-testid`, not by an id. A control with an `id` of its own keeps it, and
+the label points at that. `FormLabel required` draws the
+asterisk; `<FormText variant="danger">` is an error line. `FormField` draws no
+spacing, so give it the margin the layout needs, and `as="td"` makes it a table
+cell. Inside a react-final-form form use `FormGroup` (below), which builds all
+of this from a field's props.
+
+**Errors are announced.** `FieldError` renders `role="alert"`, so a screen reader
+reads the message when it appears, not only when the control is next focused;
+`aria-describedby` (linked by the field) covers that second case. `FieldWarning`
+is a polite `role="status"`. Mount the message only while there is something to
+say (both already return nothing without an error) and do not wrap it in
+another alert, or it is read twice. A one-off error line written with
+`<FormText variant="danger">` needs `role="alert"` itself.
+
+Never react-bootstrap `Form.Group`, `Form.Label` or `Form.Text`, nor the
+`form-label`, `form-text` and `required` classes; the
+`waldur-custom/no-bootstrap-form-control` lint rule rejects them.
+
 ## Autonomous Field Group Architecture (*Group Pattern)
 
 To reduce boilerplate, improve type safety, and enforce UI consistency, Waldur uses the **Autonomous Field Group** pattern. A single base input (e.g. `StringField`) is wrapped by three sibling HOCs depending on context — see the [Edit Field Architecture](#edit-field-architecture-editfield-pattern) section below for the full cross-reference table.
@@ -105,29 +166,35 @@ Most standard fields have a corresponding `*Group` component exported from `@/fo
 
 ### When to Use Manual `FormGroup` + `Field`
 
-While autonomous groups are the standard, there are specific architectural exceptions where manually separating `<Form.Group>` (or `FormGroup`) and `<Field>` (or `<FieldArray>`) remains the correct approach:
+While autonomous groups are the standard, there are specific architectural exceptions where manually separating `<FormField>` (or `FormGroup`) and `<Field>` (or `<FieldArray>`) remains the correct approach:
 
 1. **Complex Arrays (`FieldArray`)**: When mapping over an array of data (e.g., configuring multiple network allocation pools or IP rules), you typically want a single label for the entire collection rather than repeating the label for every row.
-2. **Multi-field Inline Layouts**: When several logical fields compose a single input concept (e.g., Start IP and End IP, Min/Max range, X/Y coordinates) that need to be grouped horizontally using `InputGroup` or a table layout.
+2. **Multi-field Inline Layouts**: When several logical fields compose a single input concept (e.g., Start IP and End IP, Min/Max range, X/Y coordinates) that need to be grouped horizontally in a flex row or a table layout.
 
 Example: Array of Inline Inputs
 
 ```tsx
-import { Form, InputGroup } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
+import { FormField, FormLabel, FormText } from 'waldur-ui';
+
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 
 // The Array Renderer
 const AllocationPoolsList = ({ fields }) => (
   <>
     {fields.map((name, index) => (
-      <InputGroup key={index} className="mb-3">
+      <div key={index} className="d-flex align-items-center gap-2 mb-3">
         {/* Manual Field used here to strip out FormGroup wrappers inside the row */}
-        <Field name={`${name}.start`} component="input" className="form-control" />
-        <InputGroup.Text>-</InputGroup.Text>
-        <Field name={`${name}.end`} component="input" className="form-control" />
-      </InputGroup>
+        <Field name={`${name}.start`}>
+          {({ input }) => <BaseInputField {...input} containerClassName="flex-1" />}
+        </Field>
+        <span className="text-quaternary">-</span>
+        <Field name={`${name}.end`}>
+          {({ input }) => <BaseInputField {...input} containerClassName="flex-1" />}
+        </Field>
+      </div>
     ))}
   </>
 );
@@ -135,11 +202,11 @@ const AllocationPoolsList = ({ fields }) => (
 // The Parent Container
 export const NetworkPoolField = () => (
   {/* Manual FormGroup used here as the singular label wrapper for the whole list */}
-  <Form.Group>
-    <Form.Label>{translate('Allocation pools')}</Form.Label>
+  <FormField>
+    <FormLabel>{translate('Allocation pools')}</FormLabel>
     <FieldArray name="allocation_pools" component={AllocationPoolsList} />
-    <Form.Text>{translate('Define IP ranges for automatic assignment.')}</Form.Text>
-  </Form.Group>
+    <FormText>{translate('Define IP ranges for automatic assignment.')}</FormText>
+  </FormField>
 );
 ```
 
@@ -343,6 +410,33 @@ tests only cover what a story can't: `TimeInput`'s editing rules, anything
 that needs a frozen clock (the maintenance floor), and crash safety on
 malformed data — don't repeat a story's assertion in a test. Run
 them with `yarn test:storybook packages/ui/src/DatePicker src/form`.
+
+## Form Stories in Storybook
+
+Form stories sit under `Forms/`, one folder per kind of control, in the order
+set by `storySort` in `.storybook/preview.tsx`:
+
+| Folder           | What lives there                                                                  |
+| ---------------- | --------------------------------------------------------------------------------- |
+| `Layout`         | `FormGroup`, `FormTable`: what wraps a control                                    |
+| `Text inputs`    | `Input`, `Textarea`, `Input group`, `Number input`, `Secret input`, `Range input` |
+| `Selection`      | `Native select`, `Select`, and fields built on them                               |
+| `Check controls` | `Checkbox`, `Switch`, `Radio`, `BoxRadioField`                                    |
+| `Date & time`    | `Calendar` and the pickers                                                        |
+| `Edit fields`    | The read-only-with-edit rows                                                      |
+
+- **One story file per primitive**, next to it in `packages/ui`, titled
+  `Forms/<Folder>/<Component>`. A text control has `Playground` (with controls),
+  `States` (the shared `StateGrid`: default, filled, invalid, disabled, read
+  only, outlined beside solid) and `Sizes`, then whatever is specific to it.
+  Hover and focus are live; use the pseudo-state toolbar to pin them.
+- **`Form fields` per folder** covers only what the react-final-form adapters in
+  `src/form` add: the stored value, touched and invalid reaching the control,
+  props such as `solid` and `icon`. It does not repeat the look, which the
+  primitive's page specifies.
+- A story asserts what is on screen, not markup, so it survives a restyle.
+- Add a new control's folder and its pages to `storySort`; an unlisted page
+  sorts alphabetically after the listed ones.
 
 ## Autonomous Table Filters (*Filter Pattern)
 

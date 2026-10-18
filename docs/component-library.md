@@ -29,19 +29,25 @@ See the [menus guide](menus.md) for when to use which, recipes and how the looks
 
 ### Forms and Input Components
 
-| Component                     | Location                          | Description            | Key Features                                                                    |
-| ----------------------------- | --------------------------------- | ---------------------- | ------------------------------------------------------------------------------- |
-| **WizardForm**                | `src/wizard/WizardForm.tsx`       | Multi-step form wizard | Step navigation, validation, progress indicator                                 |
-| **VStepperFormStepCard**      | `src/wizard/VStepperFormStep.tsx` | Card-based form step   | Loading state, disabled state with tooltip                                      |
-| **Checkbox / Radio / Switch** | `waldur-ui`                       | Check controls         | `label`/`description`/`tooltip` props, `md`/`sm`, `checked` + `onCheckedChange` |
-| **RadioGroup**                | `waldur-ui`                       | Set of radio options   | Options in, value out; fieldset + legend, `orientation`                         |
-| **SelectField**               | `src/form/SelectField.tsx`        | Dropdown selection     | Options, search, validation                                                     |
-| **StringField**               | `src/form/StringField.tsx`        | Text input field       | Validation, placeholder, help text                                              |
-| **NumberField**               | `src/form/NumberField.tsx`        | Numeric input          | Min/max validation, step control                                                |
-| **DateField**                 | `src/form/DateField.tsx`          | Date picker            | Date selection, validation                                                      |
-| **FileUploadField**           | `src/form/FileUploadField.tsx`    | File upload            | Drag & drop, validation                                                         |
-| **MarkdownEditor**            | `src/form/MarkdownEditor.tsx`     | Markdown editor        | Preview, syntax highlighting                                                    |
-| **SecretField**               | `src/form/SecretField.tsx`        | Password/secret input  | Show/hide toggle, validation                                                    |
+| Component                            | Location                          | Description            | Key Features                                                                      |
+| ------------------------------------ | --------------------------------- | ---------------------- | --------------------------------------------------------------------------------- |
+| **WizardForm**                       | `src/wizard/WizardForm.tsx`       | Multi-step form wizard | Step navigation, validation, progress indicator                                   |
+| **VStepperFormStepCard**             | `src/wizard/VStepperFormStep.tsx` | Card-based form step   | Loading state, disabled state with tooltip                                        |
+| **Checkbox / Radio / Switch**        | `waldur-ui`                       | Check controls         | `label`/`description`/`tooltip` props, `md`/`sm`, `checked` + `onCheckedChange`   |
+| **RadioGroup**                       | `waldur-ui`                       | Set of radio options   | Options in, value out; fieldset + legend, `orientation`                           |
+| **Input / Textarea**                 | `waldur-ui`                       | Text controls          | Native props + ref, `invalid` (sets `aria-invalid`), `solid`, `md`/`sm` in px     |
+| **InputGroup**                       | `waldur-ui`                       | Adornments in a field  | `start` / `end` nodes, `invalid` icon, `align`; measures them so padding fits     |
+| **NumberInput / SecretInput**        | `waldur-ui`                       | Number, secret inputs  | Steppers + unit + clamp on blur; show/hide button                                 |
+| **RangeInput**                       | `waldur-ui`                       | Range slider           | Token-coloured track filled to the thumb                                          |
+| **FormField / FormLabel / FormText** | `waldur-ui`                       | Field, label, help     | `controlId` links label and control; `required`; `as="td"`                        |
+| **NativeSelect**                     | `waldur-ui`                       | Browser `<select>`     | `<option>` children, `sm`/`md`/`lg`, `fit`, caret icon; `Select` for search/multi |
+| **SelectField**                      | `src/form/SelectField.tsx`        | Dropdown selection     | Options, search, validation                                                       |
+| **StringField**                      | `src/form/StringField.tsx`        | Text input field       | RFF adapter over `Input`; validation, placeholder, leading `icon`                 |
+| **NumberField**                      | `src/form/NumberField.tsx`        | Numeric input          | Min/max validation, step control                                                  |
+| **DateField**                        | `src/form/DateField.tsx`          | Date picker            | Date selection, validation                                                        |
+| **FileUploadField**                  | `src/form/FileUploadField.tsx`    | File upload            | Drag & drop, validation                                                           |
+| **MarkdownEditor**                   | `src/form/MarkdownEditor.tsx`     | Markdown editor        | Preview, syntax highlighting                                                      |
+| **SecretField**                      | `src/form/SecretField.tsx`        | Password/secret input  | Show/hide toggle, validation                                                      |
 
 ### Button Components
 
@@ -221,12 +227,12 @@ export const MyEditButton = ({ row, refetch }) => (
 
 ### Cards and Layout Components
 
-| Component          | Location                                          | Description        | Key Features                         |
-| ------------------ | ------------------------------------------------- | ------------------ | ------------------------------------ |
-| **Panel**          | `src/core/Panel.tsx`                              | Basic card panel   | Header, actions, flexible content    |
+| Component          | Location                                                        | Description        | Key Features                         |
+| ------------------ | --------------------------------------------------------------- | ------------------ | ------------------------------------ |
+| **Panel**          | `src/core/Panel.tsx`                                            | Basic card panel   | Header, actions, flexible content    |
 | **AccordionCard**  | `waldur-ui` (`packages/ui/src/AccordionCard/AccordionCard.tsx`) | Collapsible card   | Toggle functionality, custom styling |
-| **WidgetCard**     | `src/dashboard/WidgetCard.tsx`                    | Dashboard widget   | Flexible layout, action dropdown     |
-| **StatisticsCard** | `src/core/StatisticsCard.tsx`                     | Statistics display | Large value display, "View all" link |
+| **WidgetCard**     | `src/dashboard/WidgetCard.tsx`                                  | Dashboard widget   | Flexible layout, action dropdown     |
+| **StatisticsCard** | `src/core/StatisticsCard.tsx`                                   | Statistics display | Large value display, "View all" link |
 
 ### Data Display Components
 
@@ -256,12 +262,12 @@ export const MyEditButton = ({ row, refetch }) => (
 
 ### Utility Components
 
-| Component                 | Location                             | Description        | Key Features                    |
-| ------------------------- | ------------------------------------ | ------------------ | ------------------------------- |
-| **CopyToClipboard**       | `src/core/CopyToClipboard.tsx`       | Copy functionality | Click to copy, success feedback |
-| **CopyToClipboardButton** | `src/core/CopyToClipboardButton.tsx` | Copy button        | Icon button, tooltip            |
-| **Tooltip**               | `packages/ui/src/Tooltip/Tooltip.tsx`        | Tooltip wrapper    | Help text, positioning          |
-| **ProgressSteps**         | `src/wizard/ProgressSteps.tsx`       | Step indicator     | Multi-step processes, progress  |
+| Component                 | Location                              | Description        | Key Features                    |
+| ------------------------- | ------------------------------------- | ------------------ | ------------------------------- |
+| **CopyToClipboard**       | `src/core/CopyToClipboard.tsx`        | Copy functionality | Click to copy, success feedback |
+| **CopyToClipboardButton** | `src/core/CopyToClipboardButton.tsx`  | Copy button        | Icon button, tooltip            |
+| **Tooltip**               | `packages/ui/src/Tooltip/Tooltip.tsx` | Tooltip wrapper    | Help text, positioning          |
+| **ProgressSteps**         | `src/wizard/ProgressSteps.tsx`        | Step indicator     | Multi-step processes, progress  |
 
 ## Component Design Principles
 

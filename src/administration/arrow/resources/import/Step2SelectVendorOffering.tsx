@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Form as BsForm } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
 import { adminArrowVendorOfferingMappingsList } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, NativeSelect } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
@@ -51,7 +50,7 @@ const VendorOfferingSelect = ({ input }: { input: any }) => {
   }
 
   return (
-    <BsForm.Select
+    <NativeSelect
       value={input.value?.uuid || ''}
       onChange={(e) => {
         const selected = data?.find((item) => item.uuid === e.target.value);
@@ -64,7 +63,7 @@ const VendorOfferingSelect = ({ input }: { input: any }) => {
           {item.arrow_vendor_name} → {item.offering_name}
         </option>
       ))}
-    </BsForm.Select>
+    </NativeSelect>
   );
 };
 

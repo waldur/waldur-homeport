@@ -118,11 +118,9 @@ export const MappingStep: FC<MappingStepProps> = ({
                 <FormTable.Item
                   key={plan.uuid}
                   label={planLabel(plan)}
-                  htmlFor={`plan-${plan.uuid}`}
                   value={
                     <>
                       <Select
-                        inputId={`plan-${plan.uuid}`}
                         options={targetPlans}
                         value={selected ?? null}
                         getOptionValue={(option: BaseProviderPlan) =>
@@ -168,11 +166,9 @@ export const MappingStep: FC<MappingStepProps> = ({
                 <FormTable.Item
                   key={component.type}
                   label={componentLabel(component)}
-                  htmlFor={`component-${source.uuid}-${component.type}`}
                   value={
                     <>
                       <Select
-                        inputId={`component-${source.uuid}-${component.type}`}
                         options={targetComponents}
                         value={selected ?? null}
                         getOptionValue={(option: OfferingComponent) =>

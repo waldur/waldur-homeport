@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Form } from 'react-bootstrap';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
 import { BaseButton } from 'waldur-ui';
 
 import { FormGroup } from './FormGroup';
+import { BaseInputField } from './InputField';
 
 /**
  * `FormGroup` wraps a control with its label, description, help and error.
@@ -13,7 +13,7 @@ import { FormGroup } from './FormGroup';
  * control's labels and be announced as part of the field's name.
  */
 const meta: Meta<typeof FormGroup> = {
-  title: 'Forms/FormGroup',
+  title: 'Forms/Layout/FormGroup',
   component: FormGroup,
   parameters: { layout: 'padded' },
   decorators: [
@@ -44,7 +44,7 @@ export const WithHelp: Story = {
     label: 'Project name',
     help: 'Shown in lists and invoices.',
     required: true,
-    children: <Form.Control />,
+    children: <BaseInputField />,
   },
   play: async ({ canvasElement }) => {
     const help = await expectHelpBesideLabel(canvasElement);
@@ -92,7 +92,7 @@ export const WithQuickAction: Story = {
 
 /** No help: no extra tab stop. */
 export const WithoutHelp: Story = {
-  args: { label: 'Project name', children: <Form.Control /> },
+  args: { label: 'Project name', children: <BaseInputField /> },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByLabelText('Project name')).toBeInTheDocument();

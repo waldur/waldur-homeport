@@ -1,8 +1,8 @@
 import { MinusIcon, PlusIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Form } from 'react-bootstrap';
 import { FieldRenderProps } from 'react-final-form';
 
+import { Input } from 'waldur-ui';
 import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -82,7 +82,7 @@ const BaseSliderNumberField: FC<BaseSliderNumberFieldProps> = ({
         </div>
       </div>
       <div className="slider-number-input-control">
-        <Form.Control
+        <Input
           name={name}
           value={value as any}
           onChange={(e) => onChange?.(Number(e.target.value))}
@@ -92,7 +92,7 @@ const BaseSliderNumberField: FC<BaseSliderNumberFieldProps> = ({
           step={step}
           disabled={disabled}
           onBlur={() => change(value)}
-          isInvalid={isInvalid}
+          invalid={isInvalid}
           id={id}
         />
 

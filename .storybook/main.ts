@@ -7,6 +7,11 @@ import { mergeConfig } from 'vite';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const ROOT = path.resolve(__dirname, '..');
+const WORKTREES = `${path.sep}.claude${path.sep}worktrees${path.sep}`;
+const isNestedWorktree = (file: string) =>
+  file.startsWith(ROOT) && file.slice(ROOT.length).includes(WORKTREES);
+
 const config: StorybookConfig = {
   stories: [
     '../src/**/*.stories.@(ts|tsx)',
@@ -29,9 +34,12 @@ const config: StorybookConfig = {
       mergeConfig(viteConfig, {
         plugins: [tailwindcss()],
         server: {
-          // Sibling Claude Code worktrees hold full copies of the repo;
-          // watching them exhausts the inotify limit (ENOSPC).
-          watch: { ignored: ['**/.claude/worktrees/**'] },
+          // Worktrees nested under this checkout hold full copies of the repo;
+          // watching them exhausts the inotify limit (ENOSPC). Only paths
+          // below this checkout are tested, so a Storybook started from inside
+          // a worktree still watches its own files (a `**/.claude/worktrees/**`
+          // glob matched them too, and edits never reached the browser).
+          watch: { ignored: [isNestedWorktree] },
         },
         resolve: {
           alias: {

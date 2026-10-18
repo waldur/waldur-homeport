@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { capitalize, words } from 'lodash-es';
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
+
+import { FormText } from 'waldur-ui';
 
 const formatKey = (key: string) => capitalize(words(key).join(' '));
 
@@ -65,8 +66,11 @@ export const FieldError: FunctionComponent<FieldErrorProps> = ({
   id,
 }) => {
   return error ? (
-    <Form.Text id={id} className="text-danger" as="div">
+    // role="alert": the message is mounted when the error appears, so a
+    // screen reader announces it then. Describing the control (aria-describedby)
+    // only reads it when the control is focused.
+    <FormText id={id} variant="danger" as="div" role="alert">
       <FieldErrorMessage error={error} center={center} />
-    </Form.Text>
+    </FormText>
   ) : null;
 };

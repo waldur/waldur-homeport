@@ -1,7 +1,8 @@
 import { FC, useState, useMemo } from 'react';
-import { Form } from 'react-bootstrap';
 import { Form as RffForm, useFormState } from 'react-final-form';
 import { OpenStackInstanceAggregateGroupByEnum } from 'waldur-js-client';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -49,8 +50,8 @@ const OpenstackInstancesAggregateViewTable: FC<any> = () => {
 
   return (
     <div>
-      <div className="mb-6" style={{ maxWidth: 300 }}>
-        <Form.Label>{translate('Group by')}</Form.Label>
+      <FormField className="mb-6" style={{ maxWidth: 300 }}>
+        <FormLabel>{translate('Group by')}</FormLabel>
         <Select
           value={selectedOption}
           options={GROUP_BY_OPTIONS}
@@ -58,7 +59,7 @@ const OpenstackInstancesAggregateViewTable: FC<any> = () => {
           getOptionValue={(o) => o.value}
           getOptionLabel={(o) => o.label}
         />
-      </div>
+      </FormField>
 
       {isLoading ? (
         <LoadingSpinner />

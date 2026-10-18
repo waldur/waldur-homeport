@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, useEffect, useLayoutEffect, useRef } from 'react';
-import { Form, FormControlProps } from 'react-bootstrap';
+
+import { BaseInputField, BaseInputFieldProps } from '@/form/InputField';
 
 const MASK = '•';
 
@@ -57,7 +58,7 @@ export const applyMaskedEdit = (
 };
 
 interface MaskedKeyInputProps extends Omit<
-  FormControlProps,
+  BaseInputFieldProps,
   'type' | 'value' | 'onChange'
 > {
   value: string;
@@ -195,13 +196,13 @@ export const MaskedKeyInput: FC<MaskedKeyInputProps> = ({
   // Keyed by mode, so switching between the uncontrolled and the controlled
   // input mounts a new one rather than turning one into the other.
   return masked ? (
-    <Form.Control
+    <BaseInputField
       key="masked"
       {...shared}
       defaultValue={MASK.repeat(value.length)}
     />
   ) : (
-    <Form.Control
+    <BaseInputField
       key="plain"
       {...shared}
       value={value}

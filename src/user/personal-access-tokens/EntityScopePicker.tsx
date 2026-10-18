@@ -10,6 +10,7 @@ interface EntityScopePickerProps {
   value: { uuid: string; name: string } | null;
   onChange: (value: { uuid: string; name: string } | null) => void;
   isDisabled?: boolean;
+  'aria-label'?: string;
 }
 
 /**
@@ -22,6 +23,7 @@ export const EntityScopePicker: FunctionComponent<EntityScopePickerProps> = ({
   value,
   onChange,
   isDisabled,
+  'aria-label': ariaLabel,
 }) => {
   // Reset the selected entity if the type changes underneath us.
   useEffect(() => {
@@ -44,6 +46,7 @@ export const EntityScopePicker: FunctionComponent<EntityScopePickerProps> = ({
     return (
       <AsyncSelect
         isDisabled
+        aria-label={ariaLabel}
         placeholder={translate('Pick a type first')}
         loadOptions={() => Promise.resolve({ options: [], hasMore: false })}
       />
@@ -54,6 +57,7 @@ export const EntityScopePicker: FunctionComponent<EntityScopePickerProps> = ({
     <AsyncSelect
       // Force remount when `type` changes so the cached options are dropped.
       key={type}
+      aria-label={ariaLabel}
       value={value}
       onChange={handleChange}
       loadOptions={loadOptions}

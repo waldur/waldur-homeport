@@ -48,6 +48,7 @@ export const ValidatorConfiguration = ({
 
   return (
     <FormGroup
+      group
       label={translate('Cross-field validators')}
       description={translate(
         'Add validation rules comparing this field to other numeric fields',
@@ -71,6 +72,7 @@ export const ValidatorConfiguration = ({
                         }
                         onChange={fieldProps.input.onChange}
                         options={VALIDATOR_TYPES}
+                        aria-label={`${translate('Validator type')} ${index + 1}`}
                         placeholder={translate('Validator type')}
                         isClearable={false}
                       />
@@ -90,6 +92,7 @@ export const ValidatorConfiguration = ({
                         }
                         onChange={fieldProps.input.onChange}
                         options={targetFieldOptions}
+                        aria-label={`${translate('Target field')} ${index + 1}`}
                         placeholder={translate('Target field')}
                         isClearable={false}
                       />

@@ -25,7 +25,6 @@ import { SlotDurationGroup } from './components/SlotDurationGroup';
 import { TimeZoneGroup } from './components/TimeZoneGroup';
 import { WeekdaysGroup } from './components/WeekdaysGroup';
 import { WeekendsGroup } from './components/WeekendsGroup';
-import './OfferingScheduler.scss';
 
 const INITIAL_CONFIG = {
   weekends: true,

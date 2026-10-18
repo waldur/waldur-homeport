@@ -1,9 +1,8 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import { VersionHistory } from 'waldur-js-client';
 
-import { BaseButton, DatePicker } from 'waldur-ui';
+import { BaseButton, DatePicker, FormField, FormLabel } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -42,10 +41,10 @@ export const VersionStateAtTimestamp: FunctionComponent<
   }
 
   return (
-    <div className="flex items-center gap-3">
-      <Form.Label className="mb-0 text-nowrap text-quaternary text-xs">
+    <FormField className="flex items-center gap-3">
+      <FormLabel className="mb-0 text-nowrap text-quaternary text-xs">
         {translate('State at:')}
-      </Form.Label>
+      </FormLabel>
       <DatePicker
         enableTime
         value={timestamp}
@@ -70,6 +69,6 @@ export const VersionStateAtTimestamp: FunctionComponent<
           {translate('No version found at this time')}
         </span>
       )}
-    </div>
+    </FormField>
   );
 };

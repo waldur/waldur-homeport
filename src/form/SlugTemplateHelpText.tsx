@@ -1,3 +1,5 @@
+import { FormText } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface Placeholder {
@@ -13,7 +15,7 @@ interface SlugTemplateHelpTextProps {
 export const SlugTemplateHelpText = ({
   placeholders,
 }: SlugTemplateHelpTextProps) => (
-  <div className="form-text text-quaternary mt-2">
+  <FormText as="div" variant="muted" className="mt-2">
     <p className="mb-2">{translate('Supported placeholders:')}</p>
     <table className="table table-sm table-borderless mb-0">
       <tbody>
@@ -30,5 +32,5 @@ export const SlugTemplateHelpText = ({
         ))}
       </tbody>
     </table>
-  </div>
+  </FormText>
 );

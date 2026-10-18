@@ -1,14 +1,14 @@
 import { FC } from 'react';
-import { FormControl } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
+import { NativeSelect } from 'waldur-ui';
+
 const FormField: FC<any> = ({ input, ...rest }) => (
-  <FormControl
+  <NativeSelect
     {...input}
     {...rest}
-    as="select"
     value={input.value}
-    onChange={(e: any) => input.onChange(e.target.value)}
+    onChange={(e) => input.onChange(e.target.value)}
   />
 );
 

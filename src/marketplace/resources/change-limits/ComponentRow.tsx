@@ -1,8 +1,7 @@
 import { FC } from 'react';
-import { Form } from 'react-bootstrap';
 import { Field as FinalFormField } from 'react-final-form';
 
-import { Switch } from 'waldur-ui';
+import { FormField, FormText, Switch } from 'waldur-ui';
 
 import { composeValidators } from '@/core/validators';
 import { NumberField } from '@/form';
@@ -33,7 +32,7 @@ interface ComponentRowProps {
 }
 
 const CellWrapper: FC<any> = (props) => (
-  <Form.Group as="td" onClick={(e) => e.stopPropagation()}>
+  <FormField as="td" onClick={(e) => e.stopPropagation()}>
     {props.offeringComponent.is_boolean ? (
       <Switch
         label=""
@@ -50,7 +49,7 @@ const CellWrapper: FC<any> = (props) => (
         step={getLimitStep(props.offeringComponent)}
       />
     )}
-  </Form.Group>
+  </FormField>
 );
 
 export const ComponentRow: FC<ComponentRowProps> = ({
@@ -70,9 +69,9 @@ export const ComponentRow: FC<ComponentRowProps> = ({
         <td>
           {renderFieldOrDash(component.newLimit)} {component.measured_unit}
           {derived ? (
-            <div className="form-text text-quaternary">
+            <FormText as="div" variant="muted">
               {translate('Calculated from the order options')}
-            </div>
+            </FormText>
           ) : null}
         </td>
       ) : (

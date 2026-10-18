@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC, useMemo } from 'react';
-import { Form as BootstrapForm } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { useToggle } from 'react-use';
@@ -12,7 +11,7 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
-import { Switch } from 'waldur-ui';
+import { FormField, FormLabel, Switch } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
 import { translate } from '@/i18n';
@@ -119,11 +118,11 @@ export const UpdateInternalIpsDialog: FC<UpdateInternalIpsDialogProps> = ({
             error={error}
           >
             {subnets ? (
-              <BootstrapForm.Group>
+              <FormField>
                 <div className="flex justify-between mb-5">
-                  <BootstrapForm.Label className="mb-0">
+                  <FormLabel className="mb-0">
                     {translate('Connected subnets')}
-                  </BootstrapForm.Label>
+                  </FormLabel>
                   <Switch
                     checked={hasCustomIp}
                     onCheckedChange={toggleCustomIp}
@@ -138,7 +137,7 @@ export const UpdateInternalIpsDialog: FC<UpdateInternalIpsDialogProps> = ({
                   subnets={subnets}
                   hasCustomIp={hasCustomIp}
                 />
-              </BootstrapForm.Group>
+              </FormField>
             ) : null}
           </AsyncActionDialog>
         </form>

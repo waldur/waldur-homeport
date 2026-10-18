@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
 import { OpenStackFlavor } from 'waldur-js-client';
+
+import { FormText } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
@@ -14,7 +15,7 @@ export const LonghornWorkerWarning: FunctionComponent<{}> = () => {
     return null;
   }
   return (
-    <Form.Text
+    <FormText
       className={classNames('mb-0', {
         'text-danger': longhornSelected,
         'text-quaternary': !longhornSelected,
@@ -27,6 +28,6 @@ export const LonghornWorkerWarning: FunctionComponent<{}> = () => {
         : translate(
             'A minimal expected configuration of worker is 4 vCPU and 4 GB RAM.',
           )}
-    </Form.Text>
+    </FormText>
   );
 };

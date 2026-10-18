@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
-import { FormControl } from 'react-bootstrap';
+
+import { NativeSelect } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -10,9 +11,8 @@ export const SelectControl: FunctionComponent<{
   getLabel;
   getValue;
 }> = ({ id, input, options, getLabel, getValue }) => (
-  <FormControl
+  <NativeSelect
     id={id}
-    as="select"
     value={getValue(input.value)}
     onChange={(e: any) =>
       input.onChange(
@@ -26,5 +26,5 @@ export const SelectControl: FunctionComponent<{
         {getLabel(option)}
       </option>
     ))}
-  </FormControl>
+  </NativeSelect>
 );

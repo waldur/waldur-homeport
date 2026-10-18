@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
 import { Field, FieldRenderProps } from 'react-final-form';
 
 import { Tooltip } from 'waldur-ui';
@@ -7,6 +6,7 @@ import { Tooltip } from 'waldur-ui';
 import { ENV } from '@/core/config';
 import { FieldError } from '@/form';
 import { FormGroup } from '@/form';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 
 // These limitations are imposed by underlying operating system
@@ -54,24 +54,25 @@ const UsernameField: FC<UsernameFieldProps> = ({
   'data-testid': testId,
 }) => (
   <>
-    <InputGroup className="mb-2">
-      {ENV.plugins.WALDUR_CORE.FREEIPA_USERNAME_PREFIX && (
-        <Tooltip label={translate('Username prefix')}>
-          <InputGroup.Text>
-            {ENV.plugins.WALDUR_CORE.FREEIPA_USERNAME_PREFIX}
-          </InputGroup.Text>
-        </Tooltip>
-      )}
-      <Form.Control
-        type="text"
-        placeholder={placeholder}
-        autoFocus={autoFocus}
-        disabled={disabled}
-        data-testid={testId}
-        isInvalid={meta.touched && !!meta.error}
-        {...input}
-      />
-    </InputGroup>
+    <BaseInputField
+      type="text"
+      containerClassName="mb-2"
+      start={
+        ENV.plugins.WALDUR_CORE.FREEIPA_USERNAME_PREFIX && (
+          <Tooltip label={translate('Username prefix')}>
+            <span className="pointer-events-auto text-secondary">
+              {ENV.plugins.WALDUR_CORE.FREEIPA_USERNAME_PREFIX}
+            </span>
+          </Tooltip>
+        )
+      }
+      placeholder={placeholder}
+      autoFocus={autoFocus}
+      disabled={disabled}
+      data-testid={testId}
+      isInvalid={meta.touched && !!meta.error}
+      {...input}
+    />
     {meta.touched && meta.error && <FieldError error={meta.error} />}
   </>
 );

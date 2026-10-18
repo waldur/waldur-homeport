@@ -9,7 +9,7 @@ import {
   useRef,
 } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormText } from 'waldur-ui';
 
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { formatFilesize } from '@/core/utils';
@@ -157,7 +157,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
               })
             : null}
         </div>
-        <div className="form-text">
+        <FormText as="div">
           {isChanged && input.value instanceof File ? (
             <>
               {input.value.name} {formatFilesize(input.value.size, 'B')}{' '}
@@ -170,7 +170,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
               ) : null}
             </>
           ) : null}
-        </div>
+        </FormText>
       </div>
     </div>
   );

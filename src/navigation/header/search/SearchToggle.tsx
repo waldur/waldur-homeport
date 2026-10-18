@@ -132,7 +132,7 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
                 query={query}
                 setQuery={setQuery}
                 show={show}
-                className="hidden lg:block"
+                className="hidden lg:block w-[325px]"
                 showShortcut={!show}
                 onOpen={() => setShow(true)}
               />

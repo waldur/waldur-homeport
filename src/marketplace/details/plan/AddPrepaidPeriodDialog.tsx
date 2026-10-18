@@ -1,11 +1,13 @@
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import { Form as BootstrapForm } from 'react-bootstrap';
 import { Form as ReactFinalForm, useFormState } from 'react-final-form';
 import { Project } from 'waldur-js-client';
 
+import { FormField, FormLabel } from 'waldur-ui';
+
 import { formatDate, formatISODate } from '@/core/dateUtils';
 import { SelectGroup, SubmitButton, DateGroup } from '@/form';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -81,14 +83,14 @@ const PrepaidFormContent = ({
         <div className="mb-4">
           <div className="row">
             <div className="col-md-6">
-              <BootstrapForm.Group controlId="from_date">
-                <BootstrapForm.Label>{translate('From')}</BootstrapForm.Label>
-                <BootstrapForm.Control
+              <FormField>
+                <FormLabel>{translate('From')}</FormLabel>
+                <BaseInputField
                   type="text"
                   value={formatDate(effectiveStartDate)}
                   disabled
                 />
-              </BootstrapForm.Group>
+              </FormField>
             </div>
             <div className="col-md-6">
               <DateGroup

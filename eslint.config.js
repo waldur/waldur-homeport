@@ -205,16 +205,30 @@ export default tseslint
         // Zero instances remain: every checkbox, radio and switch is a waldur-ui
         // Checkbox/Radio/Switch, and the .form-check styles are deleted.
         'waldur-custom/no-bootstrap-form-check': 'error',
+        // Native selects are waldur-ui's NativeSelect; Form.Select and
+        // .form-select are going away.
+        'waldur-custom/no-bootstrap-form-select': 'error',
+        // Text inputs are waldur-ui's Input, Textarea, NumberInput, SecretInput,
+        // InputGroup and RangeInput; FormControl, InputGroup and the
+        // form-control / input-group classes are going away.
+        'waldur-custom/no-bootstrap-form-control': 'error',
         // Zero instances remain: every progress bar is a waldur-ui Progress and
         // the .progress styles are deleted.
         'waldur-custom/no-bootstrap-progress': 'error',
         'waldur-custom/no-bootstrap-tabs': 'error',
+        // A FormLabel outside a FormField names no control: use FormFieldset +
+        // FormLegend for a group, FormHeading for a caption.
+        'waldur-custom/no-orphan-form-label': 'error',
         // Bootstrap's .border is !important in an earlier layer, so a Tailwind
         // border colour next to it never paints. Autofixes to border-[1px].
         'waldur-custom/no-bootstrap-border-with-tailwind-color': 'error',
         // State colours come from the status matrix (semantic/status.css);
         // deliberate exceptions carry an eslint-disable with the reason.
         'waldur-custom/no-raw-status-ramp': 'error',
+        // A colour token with a utility is written as the utility
+        // (text-tertiary, not text-[var(--text-tertiary)]); the table is read
+        // from tailwind/theme.css. Autofixes.
+        'waldur-custom/prefer-token-utility': 'error',
         // A ramp step, white or a hex is the same colour in both themes: use a
         // semantic utility or give it a dark: partner in the same class list.
         'waldur-custom/require-dark-pair': 'error',
@@ -447,6 +461,8 @@ export default tseslint
         'packages/eslint-plugin-waldur/rules/require-font-size-scale.js',
         'packages/eslint-plugin-waldur/rules/enforce-border-radius-tokens.js',
         'packages/eslint-plugin-waldur/rules/no-raw-status-ramp.js',
+        'packages/eslint-plugin-waldur/rules/prefer-token-utility.js',
+        'packages/eslint-plugin-waldur/rules/prefer-token-utility.test.ts',
         'src/tailwindBootstrapColors.test.ts',
       ],
       rules: {
@@ -455,6 +471,7 @@ export default tseslint
         'waldur-custom/require-font-size-scale': 'off',
         'waldur-custom/enforce-border-radius-tokens': 'off',
         'waldur-custom/no-bootstrap-border-with-tailwind-color': 'off',
+        'waldur-custom/prefer-token-utility': 'off',
         'waldur-custom/no-raw-status-ramp': 'off',
       },
     },

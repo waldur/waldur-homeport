@@ -1,10 +1,15 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment } from 'react';
-import { Form, FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  FormField,
+  FormFieldset,
+  FormLegend,
+  FormText,
+} from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { NumberField, StringField } from '@/form';
@@ -33,7 +38,7 @@ const FieldsListGroup = ({
   return (
     <>
       {fields.length && fields.length > 0 && (
-        <Form.Group id="tres-billing-weights">
+        <FormField id="tres-billing-weights">
           <div>
             <table className="table px-0 mb-0">
               <thead>
@@ -53,6 +58,7 @@ const FieldsListGroup = ({
                             <StringField
                               input={input}
                               meta={meta}
+                              aria-label={`${translate('Resource Type')} ${index + 1}`}
                               placeholder={translate(
                                 'e.g., CPU, Mem, GRES/gpu',
                               )}
@@ -72,6 +78,7 @@ const FieldsListGroup = ({
                             <NumberField
                               input={input}
                               meta={meta}
+                              aria-label={`${translate('Weight')} ${index + 1}`}
                               step="any"
                               min={0}
                             />
@@ -94,7 +101,7 @@ const FieldsListGroup = ({
               </tbody>
             </table>
           </div>
-        </Form.Group>
+        </FormField>
       )}
       <div>
         <BaseButton
@@ -110,17 +117,17 @@ const FieldsListGroup = ({
 };
 
 export const TresBillingWeightsField = () => (
-  <div className="mb-7">
-    <FormLabel>{translate('TRES Billing Weights')}</FormLabel>
-    <div className="form-text mb-3">
+  <FormFieldset className="mb-7">
+    <FormLegend>{translate('TRES Billing Weights')}</FormLegend>
+    <FormText as="div" className="mb-3">
       {translate(
         'Define weights for each TRES type to calculate billing units.',
       )}
-    </div>
+    </FormText>
     <FieldArray name="tres_billing_weights_array">
       {(props) => <FieldsListGroup {...props} />}
     </FieldArray>
-  </div>
+  </FormFieldset>
 );
 
 // Helper functions for converting between array and Record formats

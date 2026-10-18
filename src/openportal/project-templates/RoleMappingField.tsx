@@ -1,11 +1,11 @@
-import classNames from 'classnames';
 import React, { FunctionComponent, useCallback, useState } from 'react';
-import { Form } from 'react-bootstrap';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField, FormLabel } from 'waldur-ui';
 
+import { FieldError } from '@/form/FieldError';
+import { BaseInputField } from '@/form/InputField';
 import { AsyncSelect } from '@/form/select';
-import { FormField } from '@/form/types';
+import { FormField as FormFieldProps } from '@/form/types';
 import { translate } from '@/i18n';
 import { roleAutocomplete } from '@/permissions/utils';
 
@@ -13,7 +13,7 @@ interface RoleMapping {
   [key: string]: any;
 }
 
-interface RoleMappingFieldProps extends FormField {
+interface RoleMappingFieldProps extends FormFieldProps {
   placeholder?: string;
   validator?: any;
   solid?: boolean;
@@ -120,15 +120,13 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
         </div>
 
         <div className="row mb-3 items-end">
-          <div className="col-md-5">
-            <Form.Label className="sr-only">
+          <FormField className="col-md-5">
+            <FormLabel className="sr-only">
               {translate('Remote Role Name')}
-            </Form.Label>
-            <Form.Control
-              className={classNames(
-                solid && 'form-control-solid',
-                hasError && 'is-invalid',
-              )}
+            </FormLabel>
+            <BaseInputField
+              solid={solid}
+              isInvalid={Boolean(hasError)}
               type="text"
               value={remoteRoleName}
               onChange={handleRemoteRoleChange}
@@ -139,11 +137,9 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
               }
               aria-label={translate('Enter remote role name')}
             />
-          </div>
-          <div className="col-md-5">
-            <Form.Label className="sr-only">
-              {translate('Local Role')}
-            </Form.Label>
+          </FormField>
+          <FormField className="col-md-5">
+            <FormLabel className="sr-only">{translate('Local Role')}</FormLabel>
             <AsyncSelect
               value={localRole}
               onChange={(option) => setLocalRole(option)}
@@ -158,7 +154,7 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
               noOptionsMessage={() => translate('No roles found')}
               isClearable={true}
             />
-          </div>
+          </FormField>
           <div className="col-md-2">
             <BaseButton
               type="button"
@@ -176,7 +172,7 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
         </div>
 
         {/* Display validation errors */}
-        {hasError && <div className="invalid-feedback block">{meta.error}</div>}
+        {hasError && <FieldError error={meta.error} />}
       </div>
     </div>
   );

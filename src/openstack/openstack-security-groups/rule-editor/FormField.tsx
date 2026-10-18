@@ -1,10 +1,12 @@
 import { FC } from 'react';
-import { Form as BootstrapForm } from 'react-bootstrap';
+
+import { FormField as UiFormField, NativeSelect } from 'waldur-ui';
+
+import { BaseInputField } from '@/form/InputField';
 
 interface FormFieldProps {
   input: any;
   meta: { error?: string; touched?: boolean };
-  as?: any;
   children?: React.ReactNode;
   [key: string]: any;
 }
@@ -12,21 +14,37 @@ interface FormFieldProps {
 export const FormField: FC<FormFieldProps> = ({
   input,
   meta: { error, touched },
-  as: Component = BootstrapForm.Control,
-  children,
   'aria-label': ariaLabel,
   ...rest
 }) => (
-  <BootstrapForm.Group as="td">
-    <Component
+  <UiFormField as="td">
+    <BaseInputField
       {...input}
       {...rest}
       isInvalid={touched && !!error}
       title={touched && error ? error : undefined}
-      className="form-control"
+      aria-label={ariaLabel}
+    />
+  </UiFormField>
+);
+
+/** A rule-editor table cell holding a native select; the error is its tooltip. */
+export const FormSelectField: FC<FormFieldProps> = ({
+  input,
+  meta: { error, touched },
+  children,
+  'aria-label': ariaLabel,
+  ...rest
+}) => (
+  <UiFormField as="td">
+    <NativeSelect
+      {...input}
+      {...rest}
+      invalid={touched && !!error}
+      title={touched && error ? error : undefined}
       aria-label={ariaLabel}
     >
       {children}
-    </Component>
-  </BootstrapForm.Group>
+    </NativeSelect>
+  </UiFormField>
 );

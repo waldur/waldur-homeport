@@ -1,8 +1,10 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
 
+import { FormText } from 'waldur-ui';
+
 import { SubmitButton } from '@/form';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -47,27 +49,23 @@ export const UserEmailChangeDialog: FunctionComponent<{
     >
       {user.requested_email ? (
         <>
-          <Form.Control
-            readOnly
-            defaultValue={user.requested_email}
-            className="form-control-solid"
-          />
+          <BaseInputField readOnly defaultValue={user.requested_email} solid />
 
-          <Form.Text className="text-quaternary">
+          <FormText variant="muted">
             {translate('Request has been sent')}
-          </Form.Text>
+          </FormText>
         </>
       ) : (
-        <Form.Control
+        <BaseInputField
           type="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
       )}
       {isProtected && (
-        <Form.Text className="text-quaternary">
+        <FormText variant="muted">
           {translate('Synchronized from identity provider')}
-        </Form.Text>
+        </FormText>
       )}
     </ModalDialog>
   );

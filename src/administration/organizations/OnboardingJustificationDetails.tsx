@@ -1,6 +1,6 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card, Col, Form as BootstrapForm, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { Field as FormField, Form } from 'react-final-form';
 import {
   OnboardingJustification,
@@ -10,6 +10,7 @@ import {
 import { BaseButton } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { BaseTextField } from '@/form/TextField';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { AttachmentsList } from '@/form/upload/AttachmentsList';
 import { translate } from '@/i18n';
@@ -197,9 +198,9 @@ export const OnboardingJustificationDetails: FC<
                     <Col xs={12} md={6}>
                       <FormField name="staff_notes">
                         {({ input }) => (
-                          <BootstrapForm.Control
+                          <BaseTextField
                             {...input}
-                            as="textarea"
+
                             rows={3}
                             placeholder={translate('Enter a description...')}
                             disabled={!canEditNotes}

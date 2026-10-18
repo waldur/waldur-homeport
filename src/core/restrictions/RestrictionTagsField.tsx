@@ -48,7 +48,6 @@ export const RestrictionTagsField: FC<RestrictionTagsFieldProps> = ({
 
   return (
     <CreatableSelect
-      inputId={input.name}
       isMulti
       isClearable
       isDisabled={isDisabled}

@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC } from 'react';
-import { FormGroup, FormLabel } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { OpenStackBackup, openstackBackupsRestore } from 'waldur-js-client';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
@@ -79,7 +80,7 @@ export const BackupRestoreDialog: FC<{
                   isMulti={true}
                   options={asyncState.data.securityGroups}
                 />
-                <FormGroup className="mb-5">
+                <FormField className="mb-5">
                   <FormLabel>{translate('Networks')}</FormLabel>
                   <FieldArray name="networks">
                     {({ fields }) => (
@@ -91,7 +92,7 @@ export const BackupRestoreDialog: FC<{
                       />
                     )}
                   </FieldArray>
-                </FormGroup>
+                </FormField>
               </>
             ) : null}
           </AsyncActionDialog>

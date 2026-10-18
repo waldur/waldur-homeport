@@ -218,6 +218,7 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                 />
 
                 <FormGroup
+                  group
                   label={translate('Restrict to specific entities')}
                   description={
                     hasGlobalScope
@@ -248,6 +249,7 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                                       meta={meta}
                                       simpleValue
                                       options={typeOptions}
+                                      aria-label={`${translate('Type')} ${index + 1}`}
                                       placeholder={translate('Type')}
                                       isDisabled={
                                         hasGlobalScope ||
@@ -261,6 +263,7 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                                 <Field name={`${name}.entity`}>
                                   {({ input }) => (
                                     <EntityScopePicker
+                                      aria-label={`${translate('Entity')} ${index + 1}`}
                                       type={row?.type ?? null}
                                       value={input.value || null}
                                       onChange={input.onChange}

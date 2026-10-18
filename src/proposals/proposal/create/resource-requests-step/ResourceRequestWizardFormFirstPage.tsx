@@ -3,6 +3,8 @@ import { FunctionComponent, useMemo } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
+import { FormField, FormLabel } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -87,10 +89,8 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
         ) : (
           <Field<any> name="offering" validate={required}>
             {({ input, meta }) => (
-              <>
-                <label className="form-label font-medium" htmlFor={input.name}>
-                  {translate('Offering')}
-                </label>
+              <FormField>
+                <FormLabel>{translate('Offering')}</FormLabel>
                 <SelectField
                   input={input}
                   meta={meta}
@@ -114,7 +114,7 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
                     }
                   }}
                 />
-              </>
+              </FormField>
             )}
           </Field>
         )}

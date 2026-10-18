@@ -42,6 +42,7 @@ export const Button = page('button', 'Button');
 export const Card = page('card', 'Card');
 export const Check = page('check', 'Checkbox, radio, switch');
 export const Dialog = page('dialog', 'Dialog');
+export const Input = page('input', 'Input, textarea');
 export const Menu = page('menu', 'Menu');
 export const Progress = page('progress', 'Progress');
 export const Sheet = page('sheet', 'Sheet');

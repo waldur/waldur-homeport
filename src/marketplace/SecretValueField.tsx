@@ -1,8 +1,8 @@
 import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import React from 'react';
-import { Form } from 'react-bootstrap';
 import { useToggle } from 'react-use';
+
+import { Input, InputGroup } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -11,35 +11,39 @@ interface SecretValueFieldProps {
   className?: string;
 }
 
+/**
+ * A secret shown read-only. It is a text input drawn in the
+ * `text-security-disc` font rather than `type="password"`: the browser
+ * refuses to copy from a password field, and this value is here to be copied.
+ */
 export const SecretValueField: React.FC<SecretValueFieldProps> = (props) => {
   const [showSecret, onToggle] = useToggle(false);
+  const label = showSecret ? translate('Hide') : translate('Show');
 
   return (
-    <div className={classNames('has-password', props.className)}>
-      <Form.Control
-        readOnly={true}
+    <InputGroup
+      className={props.className}
+      end={
+        <button
+          type="button"
+          title={label}
+          aria-label={label}
+          onClick={onToggle}
+          className="pointer-events-auto flex cursor-pointer items-center border-0 bg-transparent p-0 text-quaternary hover:text-secondary"
+        >
+          {showSecret ? (
+            <EyeSlashIcon size={18} weight="bold" />
+          ) : (
+            <EyeIcon size={18} weight="bold" />
+          )}
+        </button>
+      }
+    >
+      <Input
+        readOnly
         value={props.value}
-        style={
-          showSecret
-            ? null
-            : {
-                fontFamily: 'text-security-disc',
-              }
-        }
+        style={showSecret ? undefined : { fontFamily: 'text-security-disc' }}
       />
-
-      <button
-        className="text-btn password-icon"
-        type="button"
-        title={showSecret ? translate('Hide') : translate('Show')}
-        onClick={onToggle}
-      >
-        {!showSecret ? (
-          <EyeIcon size={18} weight="bold" />
-        ) : (
-          <EyeSlashIcon size={18} weight="bold" />
-        )}
-      </button>
-    </div>
+    </InputGroup>
   );
 };

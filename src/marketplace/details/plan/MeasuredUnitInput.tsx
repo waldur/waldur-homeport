@@ -1,8 +1,8 @@
-import { Form, InputGroup } from 'react-bootstrap';
 import { FieldMetaState } from 'react-final-form';
 import { PublicOfferingDetails, Offering } from 'waldur-js-client';
 
 import { FieldError } from '@/form';
+import { BaseInputField } from '@/form/InputField';
 import { getLimitStep } from '@/marketplace/common/utils';
 
 import { Component } from './types';
@@ -35,29 +35,27 @@ export const MeasuredUnitInput = ({
     undefined;
   return (
     <div>
-      <InputGroup className="mw-200px">
-        <Form.Control
-          id={id}
-          name={input.name}
-          type="number"
-          step={getLimitStep(component)}
-          min={component.min_value || 0}
-          max={component.max_value}
-          aria-describedby={describedBy}
-          aria-invalid={Boolean(error)}
-          isInvalid={Boolean(error)}
-          value={input.value}
-          onChange={(e: any) => input.onChange(e.target.value)}
-          onBlur={input.onBlur}
-          onFocus={input.onFocus}
-        />
-
-        {component.measured_unit && (
-          <InputGroup.Text className="text-quaternary" id={unitId}>
-            {component.measured_unit}
-          </InputGroup.Text>
-        )}
-      </InputGroup>
+      <BaseInputField
+        containerClassName="mw-200px"
+        id={id}
+        name={input.name}
+        type="number"
+        step={getLimitStep(component)}
+        min={component.min_value || 0}
+        max={component.max_value}
+        aria-describedby={describedBy}
+        aria-invalid={Boolean(error)}
+        isInvalid={Boolean(error)}
+        value={input.value}
+        onChange={(e: any) => input.onChange(e.target.value)}
+        onBlur={input.onBlur}
+        onFocus={input.onFocus}
+        end={
+          component.measured_unit && (
+            <span id={unitId}>{component.measured_unit}</span>
+          )
+        }
+      />
       <FieldError id={getLimitErrorId(component)} error={error} />
     </div>
   );

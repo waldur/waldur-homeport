@@ -8,6 +8,7 @@ import { AlertItem, Badge, BaseButton } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
@@ -219,9 +220,8 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
 
           <div className="flex gap-2 items-start">
             <div className="grow">
-              <input
+              <BaseInputField
                 type="text"
-                className="form-control"
                 value={manualClaimInput}
                 onChange={(e) => setManualClaimInput(e.target.value)}
                 placeholder={translate(

@@ -10,6 +10,7 @@ import {
   StringGroup,
 } from '@/form';
 import { FormGroup } from '@/form';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import {
   isProfileAttributeEnabled,
@@ -74,10 +75,11 @@ const AllowedRedirectsField = () => {
 
               return (
                 <div key={index}>
-                  <div className={`input-group mb-${hasError ? '1' : '3'}`}>
-                    <input
+                  <div className={`flex gap-2 mb-${hasError ? '1' : '3'}`}>
+                    <BaseInputField
                       type="text"
-                      className={`form-control ${hasError ? 'is-invalid' : ''}`}
+                      containerClassName="flex-1"
+                      isInvalid={Boolean(hasError)}
                       placeholder="https://example.com"
                       value={url}
                       onChange={(e) => updateUrl(index, e.target.value)}

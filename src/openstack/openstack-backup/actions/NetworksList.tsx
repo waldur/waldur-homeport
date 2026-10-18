@@ -2,7 +2,7 @@ import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Field } from 'react-final-form';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, NativeSelect } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -45,17 +45,16 @@ const SubnetField = ({ name, subnets, networks, network }) => {
   );
 
   return (
-    <Field
-      name={`${name}.subnet`}
-      component="select"
-      className="form-control"
-      aria-label={translate('Subnet')}
-    >
-      {freeSubnets.map((option, index) => (
-        <option value={option.value} key={index}>
-          {option.label}
-        </option>
-      ))}
+    <Field name={`${name}.subnet`}>
+      {({ input }) => (
+        <NativeSelect {...input} aria-label={translate('Subnet')}>
+          {freeSubnets.map((option, index) => (
+            <option value={option.value} key={index}>
+              {option.label}
+            </option>
+          ))}
+        </NativeSelect>
+      )}
     </Field>
   );
 };
@@ -67,17 +66,16 @@ const FloatingIpField = ({ name, floatingIps, networks, network }) => {
   );
 
   return (
-    <Field
-      name={`${name}.floating_ip`}
-      component="select"
-      className="form-control"
-      aria-label={translate('Floating IP')}
-    >
-      {freeFloatingIps.map((option, index) => (
-        <option value={option.value} key={index}>
-          {option.label}
-        </option>
-      ))}
+    <Field name={`${name}.floating_ip`}>
+      {({ input }) => (
+        <NativeSelect {...input} aria-label={translate('Floating IP')}>
+          {freeFloatingIps.map((option, index) => (
+            <option value={option.value} key={index}>
+              {option.label}
+            </option>
+          ))}
+        </NativeSelect>
+      )}
     </Field>
   );
 };

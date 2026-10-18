@@ -1,11 +1,9 @@
 import { FC, useMemo } from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { BasePublicPlan } from 'waldur-js-client';
 
-import { Switch } from 'waldur-ui';
+import { FormField, NumberInput, Switch } from 'waldur-ui';
 
-import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
 import { ENV } from '@/core/config';
 import { composeValidators } from '@/core/validators';
 import { translate } from '@/i18n';
@@ -42,30 +40,10 @@ const CellWrapper: FC<any> = (props) => {
   const step = getLimitStep(props.offeringComponent);
   const parse = getLimitParser(props.offeringComponent);
 
-  // This cell clamps to the current limit as the user types, so it cannot hand
-  // the raw text to the Field's own parse -- it has to parse, clamp, and pass a
-  // value back. Doing that with parseInt truncated every fraction here no
-  // matter what precision the component declared, which is why the clamping
-  // goes through the component's own parser instead.
-  const toNumber = (value) => {
-    const parsed = parseFloat(String(parse(value)));
-    return Number.isFinite(parsed) ? parsed : 0;
-  };
-
-  // Rounded to the step's precision for the same reason BaseNumberField does
-  // it: repeated float addition drifts, and 0.1 + 0.2 landing as
-  // 0.30000000000000004 would be refused by the limit precision check.
-  const stepDecimals = (String(step).split('.')[1] || '').length;
-  const adjustValue = (amount: number) => {
-    const newValue = Math.max(
-      0,
-      Math.min(currentLimit, toNumber(props.input.value) + amount),
-    );
-    props.input.onChange(Number(newValue.toFixed(stepDecimals)));
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
+  // The typed text, or the number a stepper click produced (NumberInput
+  // already rounds that to the step's precision and keeps it in range).
+  const handleChange = (next: string | number) => {
+    const inputValue = String(next);
     if (inputValue === '') {
       props.input.onChange('');
       return;
@@ -83,7 +61,7 @@ const CellWrapper: FC<any> = (props) => {
   };
 
   return (
-    <Form.Group as="td" onClick={(e) => e.stopPropagation()}>
+    <FormField as="td" onClick={(e) => e.stopPropagation()}>
       {props.offeringComponent.is_boolean ? (
         <Switch
           label=""
@@ -91,32 +69,21 @@ const CellWrapper: FC<any> = (props) => {
           onCheckedChange={(value) => props.input.onChange(value ? 1 : 0)}
         />
       ) : (
-        <InputGroup className="input-group-number">
-          <Form.Control
-            type="number"
-            name={`row-${props.offeringComponent.type}-input`}
-            aria-label={translate('Limit for {component}', {
-              component: props.offeringComponent.name,
-            })}
-            data-testid={`row-${props.offeringComponent.type}-input`}
-            step={step}
-            min={props.limits?.min || 0}
-            max={currentLimit}
-            value={props.input.value}
-            onChange={handleChange}
-            onBlur={props.input.onBlur}
-          />
-          <div className="input-group-addons">
-            <CaretUpDownButtons
-              onClickUp={() => adjustValue(step)}
-              onClickDown={() => adjustValue(-step)}
-              upLabel={translate('Increase value')}
-              downLabel={translate('Decrease value')}
-            />
-          </div>
-        </InputGroup>
+        <NumberInput
+          name={`row-${props.offeringComponent.type}-input`}
+          aria-label={translate('Limit for {component}', {
+            component: props.offeringComponent.name,
+          })}
+          data-testid={`row-${props.offeringComponent.type}-input`}
+          step={step}
+          min={props.limits?.min || 0}
+          max={currentLimit}
+          value={props.input.value}
+          onValueChange={handleChange}
+          onBlur={props.input.onBlur}
+        />
       )}
-    </Form.Group>
+    </FormField>
   );
 };
 

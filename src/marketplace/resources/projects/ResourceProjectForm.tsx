@@ -9,6 +9,8 @@ import {
   marketplaceResourceProjectsPartialUpdate,
 } from 'waldur-js-client';
 
+import { FormFieldset, FormLegend, FormText } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { StringGroup, SubmitButton, TextGroup } from '@/form';
 import { NumberField } from '@/form/NumberField';
@@ -212,16 +214,11 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
             />
             <TextGroup name="description" label={translate('Description')} />
             {limitComponents.length > 0 && (
-              <div className="mb-7">
-                <label className="form-label font-medium">
+              <FormFieldset className="mb-7">
+                <FormLegend required={limitsRequired}>
                   {translate('Limits')}
-                  {limitsRequired && (
-                    <span className="text-danger ms-1" aria-hidden="true">
-                      *
-                    </span>
-                  )}
-                </label>
-                <p className="form-text text-quaternary mt-0 mb-2">
+                </FormLegend>
+                <FormText as="p" variant="muted" className="mt-0 mb-2">
                   {limitsRequired
                     ? translate(
                         'Required: every component must have a value greater than zero.',
@@ -229,7 +226,7 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                     : translate(
                         'Optional per-component caps for this project.',
                       )}
-                </p>
+                </FormText>
                 <Card className="card-table card-bordered full-width">
                   <Card.Body className="p-0">
                     <table className="table table-row-bordered align-middle mb-0">
@@ -298,6 +295,7 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                                     <NumberField
                                       input={input}
                                       meta={meta}
+                                      aria-label={c.name ?? c.type}
                                       min={0}
                                       max={cap ?? undefined}
                                     />
@@ -314,7 +312,7 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                     </table>
                   </Card.Body>
                 </Card>
-              </div>
+              </FormFieldset>
             )}
           </ModalDialog>
         </form>

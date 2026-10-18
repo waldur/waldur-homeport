@@ -95,6 +95,6 @@ describe('YearField', () => {
     render(<YearField input={mockInput as any} solid />);
 
     const inputElement = screen.getByRole('spinbutton');
-    expect(inputElement).toHaveClass('form-control-solid');
+    expect(inputElement).toHaveClass('bg-[var(--input-solid-bg)]');
   });
 });

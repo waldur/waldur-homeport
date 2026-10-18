@@ -8,13 +8,13 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import {
   CachedProjectStorageReport as StorageReportApiItem,
   CachedProjectUsageReport as UsageReportApiItem,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, NativeSelect } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -228,9 +228,9 @@ export const OpenPortalReportsTab: FC = () => {
 
           {/* Resource / destination picker */}
           {allResources.length > 1 && (
-            <Form.Select
+            <NativeSelect
               size="lg"
-              style={{ width: 'auto' }}
+              fit
               value={activeResource}
               onChange={(e) => {
                 setSelectedResource(e.target.value);
@@ -242,14 +242,14 @@ export const OpenPortalReportsTab: FC = () => {
                   {nameMaps?.offering?.[r] ?? r}
                 </option>
               ))}
-            </Form.Select>
+            </NativeSelect>
           )}
 
           {/* Month picker */}
           {allMonths.length > 0 && (
-            <Form.Select
+            <NativeSelect
               size="lg"
-              style={{ width: 'auto' }}
+              fit
               value={activeMonth}
               onChange={(e) => setSelectedMonth(e.target.value)}
             >
@@ -259,7 +259,7 @@ export const OpenPortalReportsTab: FC = () => {
                   {m}
                 </option>
               ))}
-            </Form.Select>
+            </NativeSelect>
           )}
 
           {reportsCacheAge && (

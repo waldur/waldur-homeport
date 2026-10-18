@@ -5,12 +5,12 @@ import {
 } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
 
 import { AccordionCard } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { SelectField } from '@/form';
+import { BaseInputField } from '@/form/InputField';
 import { BaseTextField } from '@/form/TextField';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
@@ -108,7 +108,7 @@ const BlurableStringInput: React.FC<{
   const [internalValue, setInternalValue] = useState(value);
 
   return (
-    <Form.Control
+    <BaseInputField
       type="text"
       placeholder={placeholder}
       value={internalValue}

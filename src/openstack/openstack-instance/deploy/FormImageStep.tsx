@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { debounce } from 'lodash-es';
 import { useCallback, useMemo, useState } from 'react';
-import { FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { openstackImagesList } from 'waldur-js-client';
+
+import { FormHeading } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -65,9 +66,9 @@ export const FormImageStep = (props: FormStepProps) => {
         </div>
       }
     >
-      <FormLabel className="required">
+      <FormHeading as="p" required>
         {translate('Operating system options')}
-      </FormLabel>
+      </FormHeading>
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (

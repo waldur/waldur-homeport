@@ -9,13 +9,14 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Form, FormControlProps, InputGroup } from 'react-bootstrap';
 
 import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
-interface FilterBoxProps extends FormControlProps {
+import { BaseInputField, BaseInputFieldProps } from './InputField';
+
+interface FilterBoxProps extends BaseInputFieldProps {
   autoFocus?: boolean;
   /**
    * Enter is swallowed so it doesn't submit an enclosing form. Pass false
@@ -93,44 +94,39 @@ export const FilterBox = forwardRef<HTMLInputElement, FilterBoxProps>(
     };
 
     return (
-      <InputGroup
+      <BaseInputField
+        type="text"
+        containerClassName={classNames('filter-box', className)}
+        start={
+          <span className="[&>svg]:size-[20px]">
+            <MagnifyingGlassIcon weight="bold" />
+          </span>
+        }
+        end={
+          (rightAction || showClear) && (
+            <span className="pointer-events-auto flex items-center gap-2">
+              {showClear && (
+                <BaseButton
+                  size="sm"
+                  variant="text-secondary"
+                  onClick={clear}
+                  iconNode={<XIcon weight="bold" />}
+                  tooltip={translate('Clear')}
+                />
+              )}
+              {rightAction}
+            </span>
+          )
+        }
         className={classNames(
-          'has-icon',
-          (rightAction || showClear) && 'has-icon-right',
-          className,
+          isSearch && '[&::-webkit-search-cancel-button]:appearance-none',
+          inputClassName,
         )}
-      >
-        <div className="input-group-icon">
-          <MagnifyingGlassIcon weight="bold" />
-        </div>
-        <Form.Control
-          type="text"
-          className={classNames(
-            isSearch && '[&::-webkit-search-cancel-button]:appearance-none',
-            // Room for the clear button beside a right action.
-            rightAction && showClear && 'pe-[76px]!',
-            inputClassName,
-          )}
-          {...props}
-          ref={inputRef}
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
-        />
-        {(rightAction || showClear) && (
-          <div className="input-group-icon input-group-icon-right flex items-center gap-2">
-            {showClear && (
-              <BaseButton
-                size="sm"
-                variant="text-secondary"
-                onClick={clear}
-                iconNode={<XIcon weight="bold" />}
-                tooltip={translate('Clear')}
-              />
-            )}
-            {rightAction}
-          </div>
-        )}
-      </InputGroup>
+        {...props}
+        ref={inputRef}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+      />
     );
   },
 );

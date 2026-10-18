@@ -1,8 +1,7 @@
 import { Info } from 'luxon';
 import { FC, useMemo } from 'react';
-import { Form } from 'react-bootstrap';
 
-import { MonthPicker } from 'waldur-ui';
+import { FormField, FormLabel, MonthPicker } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -51,17 +50,14 @@ export const ReportPreFilters: FC<ReportPreFiltersProps> = ({
 
   return (
     <div className="flex items-center gap-3 mb-3 flex-wrap">
-      <div>
-        <Form.Label className="small mb-1" htmlFor="filterMonth">
-          {translate('Month')}
-        </Form.Label>
+      <FormField>
+        <FormLabel className="small mb-1">{translate('Month')}</FormLabel>
         <MonthPicker
-          id="filterMonth"
           value={value}
           onChange={handleChange}
           placeholder={translate('All months')}
         />
-      </div>
+      </FormField>
     </div>
   );
 };

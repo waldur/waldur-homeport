@@ -1,9 +1,8 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment, ReactNode, useCallback, useEffect, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import { Field, useField } from 'react-final-form';
 
-import { BaseButton, HelpIcon, TablePagination } from 'waldur-ui';
+import { BaseButton, FormField, HelpIcon, TablePagination } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { usePagination } from '@/core/usePagination';
@@ -251,7 +250,7 @@ export const EmailsListGroup = ({
     <div className="mb-3">
       <div id="emails-list-group">
         {fields.length > 0 && (
-          <Form.Group>
+          <FormField>
             <table className="table h-auto table-fixed align-top px-0 gy-2 mb-0">
               <thead>
                 <tr className="text-sm font-medium">
@@ -412,7 +411,7 @@ export const EmailsListGroup = ({
                 })}
               </tbody>
             </table>
-          </Form.Group>
+          </FormField>
         )}
         <div>
           <BaseButton

@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import {
   adminArrowBillingSyncsSyncResourceHistoricalConsumption,
   Resource,
@@ -10,6 +9,9 @@ import {
   AlertItem,
   Badge,
   BaseButton,
+  FormField,
+  FormLabel,
+  FormText,
   MonthPicker,
   parseDateValue,
   toIsoMonth,
@@ -151,8 +153,8 @@ export const ForceImportConsumptionDialog = ({
         )}
       </p>
 
-      <Form.Group className="mb-3">
-        <Form.Label>{translate('Resource')}</Form.Label>
+      <FormField className="mb-3">
+        <FormLabel>{translate('Resource')}</FormLabel>
         <AsyncSelect
           placeholder={translate('Select resource...')}
           loadOptions={loadResources}
@@ -165,40 +167,34 @@ export const ForceImportConsumptionDialog = ({
           noOptionsMessage={() => translate('No resources with backend ID')}
           isClearable
         />
-        <Form.Text className="text-quaternary">
+        <FormText variant="muted">
           {translate(
             'Only resources with an Arrow license reference are shown',
           )}
-        </Form.Text>
-      </Form.Group>
+        </FormText>
+      </FormField>
 
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="force-import-period-from">
-          {translate('From period')}
-        </Form.Label>
+      <FormField className="mb-3">
+        <FormLabel>{translate('From period')}</FormLabel>
         <MonthPicker
-          id="force-import-period-from"
           value={parseDateValue(periodFrom)}
           onChange={(month) => setPeriodFrom(toIsoMonth(month))}
           maxDate={periodTo}
           // Required: the dialog seeds a range and the API needs both ends.
           clearable={false}
         />
-      </Form.Group>
+      </FormField>
 
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="force-import-period-to">
-          {translate('To period')}
-        </Form.Label>
+      <FormField className="mb-3">
+        <FormLabel>{translate('To period')}</FormLabel>
         <MonthPicker
-          id="force-import-period-to"
           value={parseDateValue(periodTo)}
           onChange={(month) => setPeriodTo(toIsoMonth(month))}
           minDate={periodFrom}
           // Required: the dialog seeds a range and the API needs both ends.
           clearable={false}
         />
-      </Form.Group>
+      </FormField>
     </>
   );
 

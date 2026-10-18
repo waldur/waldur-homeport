@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
+import { Input } from 'waldur-ui';
+
 import FormTable from './FormTable';
 
 /**
@@ -10,7 +12,7 @@ import FormTable from './FormTable';
  * keeps naming only the control it is for.
  */
 const meta: Meta<typeof FormTable> = {
-  title: 'Forms/FormTable',
+  title: 'Forms/Layout/FormTable',
   component: FormTable,
   parameters: { layout: 'padded' },
 };
@@ -23,18 +25,16 @@ export const WithTooltips: Story = {
     <FormTable>
       <FormTable.Item
         label="Backend ID"
-        htmlFor="backend-id"
         required
         colon
         tooltip="Identifier of the resource in the backend."
-        value={<input id="backend-id" className="form-control" />}
+        value={<Input />}
       />
       <FormTable.Item
         label="Username policy"
-        htmlFor="username-policy"
         colon
         warnTooltip="This option clears all usernames of the existing offering users."
-        value={<input id="username-policy" className="form-control" />}
+        value={<Input />}
       />
       <FormTable.Item label="Plain row" value="No tooltips here" />
     </FormTable>
@@ -42,14 +42,11 @@ export const WithTooltips: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     // Each label names its input and nothing else.
-    await expect(canvas.getByLabelText(/Backend ID/)).toHaveAttribute(
-      'id',
-      'backend-id',
-    );
-    await expect(canvas.getByLabelText(/Username policy/)).toHaveAttribute(
-      'id',
-      'username-policy',
-    );
+    // The row links them itself, so each input has an id of its own.
+    const backendId = canvas.getByLabelText(/Backend ID/);
+    const usernamePolicy = canvas.getByLabelText(/Username policy/);
+    await expect(backendId).not.toBe(usernamePolicy);
+    await expect(backendId).toHaveAttribute('id');
 
     const help = canvas.getByRole('button', { name: 'Help' });
     const warning = canvas.getByRole('button', { name: 'Warning' });
@@ -78,19 +75,15 @@ export const WithDescription: Story = {
     <FormTable>
       <FormTable.Item
         label="Retention"
-        htmlFor="retention"
         description="How long backups are kept."
         tooltip="Applies to new backups only."
-        value={<input id="retention" className="form-control" />}
+        value={<Input />}
       />
     </FormTable>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByLabelText('Retention')).toHaveAttribute(
-      'id',
-      'retention',
-    );
+    await expect(canvas.getByLabelText('Retention').tagName).toBe('INPUT');
     await expect(
       canvas.getByRole('button', { name: 'Help' }).closest('label'),
     ).toBeNull();

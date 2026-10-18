@@ -51,6 +51,19 @@ const renderHeader = (props: { compact?: boolean } = {}) =>
     </>,
   );
 
+describe('SearchToggle layout', () => {
+  // The header gives the field no width of its own, so the toggle has to: it
+  // was 325px before and shrank to 264px once the field stopped carrying it.
+  it('gives the header search field its 325px width', () => {
+    renderHeader();
+    // The field's container is the only handle on its width.
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(getHeaderInput().closest('form')!.parentElement).toHaveClass(
+      'w-[325px]',
+    );
+  });
+});
+
 describe('SearchToggle keyboard navigation', () => {
   const user = userEvent.setup();
 

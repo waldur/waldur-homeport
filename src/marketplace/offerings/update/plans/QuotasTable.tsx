@@ -5,6 +5,7 @@ import {
   ProviderPlanDetails as Plan,
 } from 'waldur-js-client';
 
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import {
   BillingTypeBadge,
@@ -47,16 +48,16 @@ const QuotaRow: FC<{ component: OfferingComponent; plan: Plan }> = ({
       </td>
       <td>
         <Field
-          component="input"
-          min={0}
-          className="form-control"
           name={`quotas.${component.type}`}
           type="number"
           validate={validateNonNegative}
-          inputMode="numeric"
           parse={parseIntField}
           format={formatIntField}
-        />
+        >
+          {({ input }) => (
+            <BaseInputField {...input} min={0} inputMode="numeric" />
+          )}
+        </Field>
       </td>
       <td>{price === null ? DASH_ESCAPE_CODE : price}</td>
       <td>{charge || DASH_ESCAPE_CODE}</td>

@@ -1,4 +1,3 @@
-import { Form, InputGroup } from 'react-bootstrap';
 import { Field, Form as FinalForm } from 'react-final-form';
 import {
   marketplaceOrdersUpdate,
@@ -7,10 +6,11 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { BaseButton, Switch } from 'waldur-ui';
+import { BaseButton, FormField, FormLabel, Switch } from 'waldur-ui';
 
 import { composeValidators } from '@/core/validators';
 import { DateField } from '@/form/DateField';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { useOrderStartDateBounds } from '@/marketplace/deploy/steps/useOrderStartDateBounds';
@@ -37,25 +37,15 @@ const LimitInput = (
     max?: number;
     unit?: string;
   },
-) =>
-  props.unit ? (
-    <InputGroup>
-      <Form.Control
-        type="number"
-        min={props.min}
-        max={props.max}
-        {...props.input}
-      />
-      <InputGroup.Text>{props.unit}</InputGroup.Text>
-    </InputGroup>
-  ) : (
-    <Form.Control
-      type="number"
-      min={props.min}
-      max={props.max}
-      {...props.input}
-    />
-  );
+) => (
+  <BaseInputField
+    type="number"
+    min={props.min}
+    max={props.max}
+    end={props.unit}
+    {...props.input}
+  />
+);
 
 export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
   const { resolve } = props;
@@ -115,11 +105,11 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
         )}
       />
     ) : (
-      <Form.Group className="mb-4" key={c.type}>
-        <Form.Label>
+      <FormField className="mb-4" key={c.type}>
+        <FormLabel>
           {c.name}
           {c.measured_unit ? ` (${c.measured_unit})` : null}
-        </Form.Label>
+        </FormLabel>
         <Field
           name={`limits.${c.type}`}
           parse={parseIntField}
@@ -136,7 +126,7 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
             />
           )}
         </Field>
-      </Form.Group>
+      </FormField>
     );
 
   return (
@@ -197,7 +187,7 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
                 ))}
               </>
             ) : resolve.name === 'limits' && component ? (
-              <Form.Group>{renderComponentField(component)}</Form.Group>
+              <FormField>{renderComponentField(component)}</FormField>
             ) : null}
           </ModalDialog>
         </form>

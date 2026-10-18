@@ -1,6 +1,7 @@
 import { ClockIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { FormGroup } from '@/form';
 import { Select } from '@/form/select';
@@ -21,42 +22,41 @@ export const BusinessHoursGroup: FunctionComponent<BusinessHoursGroupProps> = ({
   setEndTime,
 }) => (
   <FormGroup
+    group
     label={translate('Business hours')}
     help={translate('Daily available booking time range')}
   >
-    <Form.Label
-      className="col-xs-2 svg-icon svg-icon-2"
-      htmlFor="react-select-startTime--value"
-    >
-      <ClockIcon weight="bold" />
-    </Form.Label>
-    <Select
-      instanceId="startTime"
-      className="col-xs-4"
-      name="startTime"
-      isSearchable={false}
-      isClearable={false}
-      isMulti={false}
-      options={getOptions(60)}
-      value={getOptions(60).filter(({ value }) => value === startTime)}
-      onChange={(option: any) => setStartTime(option.value)}
-    />
+    <FormField>
+      <FormLabel className="svg-icon svg-icon-2">
+        <ClockIcon weight="bold" />
+        <span className="sr-only">{translate('From')}</span>
+      </FormLabel>
+      <Select
+        instanceId="startTime"
+        name="startTime"
+        isSearchable={false}
+        isClearable={false}
+        isMulti={false}
+        options={getOptions(60)}
+        value={getOptions(60).filter(({ value }) => value === startTime)}
+        onChange={(option: any) => setStartTime(option.value)}
+      />
+    </FormField>
 
-    <Form.Label className="col-xs-2" htmlFor="react-select-endTime--value">
-      {translate('till')}
-    </Form.Label>
-    <Select
-      instanceId="endTime"
-      name="endTime"
-      className="col-xs-4"
-      isSearchable={false}
-      isClearable={false}
-      isMulti={false}
-      options={[...getOptions(60), { value: '24:00', label: '24:00' }]}
-      value={[...getOptions(60), { value: '24:00', label: '24:00' }].filter(
-        ({ value }) => value === endTime,
-      )}
-      onChange={(option: any) => setEndTime(option.value)}
-    />
+    <FormField>
+      <FormLabel>{translate('till')}</FormLabel>
+      <Select
+        instanceId="endTime"
+        name="endTime"
+        isSearchable={false}
+        isClearable={false}
+        isMulti={false}
+        options={[...getOptions(60), { value: '24:00', label: '24:00' }]}
+        value={[...getOptions(60), { value: '24:00', label: '24:00' }].filter(
+          ({ value }) => value === endTime,
+        )}
+        onChange={(option: any) => setEndTime(option.value)}
+      />
+    </FormField>
   </FormGroup>
 );

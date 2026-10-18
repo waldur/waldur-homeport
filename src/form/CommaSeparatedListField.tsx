@@ -1,13 +1,14 @@
 import { FC, useState } from 'react';
-import { Form, FormControlProps } from 'react-bootstrap';
 import { FieldRenderProps } from 'react-final-form';
 
 import { translate } from '@/i18n';
 
+import { BaseInputField, BaseInputFieldProps } from './InputField';
+
 // ── Base (Pure UI) ──────────────────────────────────────
 
 interface BaseCommaSeparatedListFieldProps extends Omit<
-  FormControlProps,
+  BaseInputFieldProps,
   'value' | 'onChange' | 'onBlur'
 > {
   /** The current array value */
@@ -61,8 +62,8 @@ const BaseCommaSeparatedListField: FC<BaseCommaSeparatedListFieldProps> = ({
   };
 
   return (
-    <Form.Control
-      className={solid && 'form-control-solid'}
+    <BaseInputField
+      solid={solid}
       type="text"
       placeholder={placeholder}
       {...rest}

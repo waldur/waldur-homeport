@@ -1,14 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import {
   marketplaceServiceProvidersGenerateSiteAgentConfig,
   marketplaceServiceProvidersOfferingsList,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, Checkbox } from 'waldur-ui';
+import {
+  AlertItem,
+  BaseButton,
+  Checkbox,
+  FormField,
+  FormLabel,
+  FormText,
+  NativeSelect,
+} from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -179,10 +187,8 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
           )}
         />
       ) : (
-        <Form.Group className="mb-4">
-          <Form.Label className="font-medium">
-            {translate('Select SLURM Offerings')}
-          </Form.Label>
+        <FormField className="mb-4">
+          <FormLabel>{translate('Select SLURM Offerings')}</FormLabel>
           <div className="mb-2">
             <button
               type="button"
@@ -216,49 +222,49 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
               />
             ))}
           </div>
-          <Form.Text className="text-quaternary">
+          <FormText variant="muted">
             {translate('{count} offering(s) selected', {
               count: selectedOfferings.length,
             })}
-          </Form.Text>
-        </Form.Group>
+          </FormText>
+        </FormField>
       )}
 
       {/* Common configuration options - shown for both fixed offering and multi-select cases */}
       {(fixedOffering || (offerings && offerings.length > 0)) && (
         <>
-          <Form.Group className="mb-4">
+          <FormField className="mb-4">
             <Checkbox
               id="include-policy-settings"
               checked={includePolicySettings}
               onChange={(e) => setIncludePolicySettings(e.target.checked)}
               label={translate('Include SLURM policy settings')}
             />
-            <Form.Text className="text-quaternary">
+            <FormText variant="muted">
               {translate(
                 'When enabled, includes SLURM periodic usage policy configuration if available.',
               )}
-            </Form.Text>
-          </Form.Group>
+            </FormText>
+          </FormField>
 
-          <Form.Group className="mb-4">
-            <Form.Label>{translate('API URL (optional)')}</Form.Label>
-            <Form.Control
+          <FormField className="mb-4">
+            <FormLabel>{translate('API URL (optional)')}</FormLabel>
+            <BaseInputField
               type="url"
               placeholder="https://waldur.example.com/api/"
               value={apiUrl}
               onChange={(e) => setApiUrl(e.target.value)}
             />
-            <Form.Text className="text-quaternary">
+            <FormText variant="muted">
               {translate(
                 'Override the Waldur API URL. Leave empty to use the current server URL.',
               )}
-            </Form.Text>
-          </Form.Group>
+            </FormText>
+          </FormField>
 
-          <Form.Group className="mb-4">
-            <Form.Label>{translate('Timezone (optional)')}</Form.Label>
-            <Form.Select
+          <FormField className="mb-4">
+            <FormLabel>{translate('Timezone (optional)')}</FormLabel>
+            <NativeSelect
               value={timezone}
               onChange={(e) => setTimezone(e.target.value)}
             >
@@ -267,11 +273,11 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
                   {tz || translate('Default (server timezone)')}
                 </option>
               ))}
-            </Form.Select>
-            <Form.Text className="text-quaternary">
+            </NativeSelect>
+            <FormText variant="muted">
               {translate('Timezone for the site agent scheduler.')}
-            </Form.Text>
-          </Form.Group>
+            </FormText>
+          </FormField>
         </>
       )}
     </ModalDialog>

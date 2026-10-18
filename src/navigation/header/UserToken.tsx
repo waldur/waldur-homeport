@@ -1,7 +1,7 @@
 import { CopyIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 
-import { buttonVariants, Menu } from 'waldur-ui';
+import { buttonVariants, cn, inputVariants, Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
@@ -24,11 +24,14 @@ export const UserToken = ({ token }: { token: string }) => {
       <span className="flex grow items-center me-2 text-nowrap">
         {translate('API token')}
       </span>
-      <span className="input-group" aria-hidden="true">
+      <span className="flex w-full items-stretch" aria-hidden="true">
         {/* Sized like the <input> this replaces: contain:inline-size stops the
             token text from widening it. */}
         <span
-          className="form-control form-control-sm form-control-solid h-30px overflow-hidden whitespace-nowrap [contain:inline-size]"
+          className={cn(
+            inputVariants({ size: 'sm', solid: true }),
+            'h-30px min-w-0 flex-1 rounded-e-none overflow-hidden whitespace-nowrap [contain:inline-size]',
+          )}
           style={{ fontFamily: 'text-security-disc' }}
         >
           {token}
@@ -36,7 +39,7 @@ export const UserToken = ({ token }: { token: string }) => {
         <span
           className={classNames(
             buttonVariants({ variant: 'primary', size: 'sm' }),
-            'px-3 h-30px',
+            'px-3 h-30px rounded-s-none',
           )}
         >
           <span className="inline-flex size-4 shrink-0 items-center justify-center [&>svg]:size-4">

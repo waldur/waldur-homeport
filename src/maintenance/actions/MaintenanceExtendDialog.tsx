@@ -1,18 +1,18 @@
 import { ClockClockwiseIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Form as BSForm } from 'react-bootstrap';
 import { Form as FinalForm, Field, useFormState } from 'react-final-form';
 import {
   MaintenanceAnnouncement,
   maintenanceAnnouncementsPartialUpdate,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField, FormLabel, FormText } from 'waldur-ui';
 
 import { formatMediumDateTime, parseDate } from '@/core/dateUtils';
 import { DateTimeField } from '@/form/DateTimeField';
 import { FormFooter } from '@/form/FormFooter';
+import { BaseTextField } from '@/form/TextField';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -138,15 +138,15 @@ const ExtendForm: FC<ExtendFormProps> = ({
         iconNode={<ClockClockwiseIcon weight="bold" />}
         footer={<FormFooter submitLabel={translate('Extend')} />}
       >
-        <BSForm.Group className="mb-4">
-          <BSForm.Label>{translate('Current end')}</BSForm.Label>
-          <div className="form-control-plaintext">
+        <FormField className="mb-4">
+          <FormLabel>{translate('Current end')}</FormLabel>
+          <div className="py-[10px] text-secondary">
             {formatMediumDateTime(currentEnd)}
           </div>
-        </BSForm.Group>
+        </FormField>
 
-        <BSForm.Group className="mb-4">
-          <BSForm.Label>{translate('Quick extend')}</BSForm.Label>
+        <FormField className="mb-4">
+          <FormLabel>{translate('Quick extend')}</FormLabel>
           <div
             role="group"
             aria-label={translate('Quick extend options')}
@@ -170,10 +170,10 @@ const ExtendForm: FC<ExtendFormProps> = ({
               );
             })}
           </div>
-        </BSForm.Group>
+        </FormField>
 
-        <BSForm.Group className="mb-4">
-          <BSForm.Label>{translate('New end')}</BSForm.Label>
+        <FormField className="mb-4">
+          <FormLabel>{translate('New end')}</FormLabel>
           <Field
             name="scheduled_end"
             render={({ input }) => (
@@ -191,33 +191,28 @@ const ExtendForm: FC<ExtendFormProps> = ({
             )}
           />
           {newEndPreview && (
-            <BSForm.Text className="text-quaternary">
+            <FormText variant="muted">
               {translate('Will be set to: {value}', { value: newEndPreview })}
-            </BSForm.Text>
+            </FormText>
           )}
           {invalid && (
-            <BSForm.Text className="text-danger">
+            <FormText variant="danger" role="alert">
               {translate('New end must be after the current end.')}
-            </BSForm.Text>
+            </FormText>
           )}
-        </BSForm.Group>
+        </FormField>
 
-        <BSForm.Group>
-          <BSForm.Label>
+        <FormField>
+          <FormLabel>
             {translate('Reason (optional, recorded in internal notes)')}
-          </BSForm.Label>
+          </FormLabel>
           <Field
             name="reason"
             render={({ input }) => (
-              <BSForm.Control
-                as="textarea"
-                rows={3}
-                disabled={submitting}
-                {...input}
-              />
+              <BaseTextField rows={3} disabled={submitting} {...input} />
             )}
           />
-        </BSForm.Group>
+        </FormField>
       </ModalDialog>
     </form>
   );

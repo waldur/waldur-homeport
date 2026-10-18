@@ -1,12 +1,8 @@
-import { WarningCircleIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
-import { FC, useState, useEffect } from 'react';
-import { Form, InputGroup, Table } from 'react-bootstrap';
+import { FC, FocusEvent, useState, useEffect } from 'react';
+import { Table } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { Badge, NumberInput, Tooltip } from 'waldur-ui';
 
-import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { Limits } from '@/marketplace/common/types';
@@ -61,12 +57,47 @@ const AllocationInputCell: FC<{
   const numericValue = parseInt(localValue, 10) || 0;
   const exceedsCapacity = numericValue + otherAllocated > freedAmount;
 
-  const adjustValue = (amount: number) => {
-    const value = parseInt(localValue, 10) || 0;
-    const newValue = Math.max(0, value + amount);
-    setLocalValue(String(newValue));
-    onAllocationChange(resource.uuid, component.type, newValue);
+  const handleValue = (next: string | number) => {
+    const inputValue = String(next);
+    setLocalValue(inputValue);
+    if (inputValue === '') {
+      return;
+    }
+    const value = parseInt(inputValue, 10);
+    if (!isNaN(value) && value >= 0) {
+      onAllocationChange(resource.uuid, component.type, value);
+    }
   };
+
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    if (inputValue === '' || inputValue === null || inputValue === undefined) {
+      setLocalValue('0');
+      onAllocationChange(resource.uuid, component.type, 0);
+    } else {
+      const value = parseInt(inputValue, 10);
+      if (!isNaN(value)) {
+        setLocalValue(String(value));
+        onAllocationChange(resource.uuid, component.type, value);
+      }
+    }
+  };
+
+  const allocationInput = (
+    <NumberInput
+      id={`allocation-${resource.uuid}`}
+      data-testid={`allocation-${resource.uuid}`}
+      name={`allocation-${resource.uuid}`}
+      aria-label={translate('Allocation for {resource}', {
+        resource: resource.name,
+      })}
+      min={0}
+      value={localValue}
+      invalid={exceedsCapacity}
+      onValueChange={handleValue}
+      onBlur={handleBlur}
+    />
+  );
 
   return (
     <tr data-testid={rowTestId}>
@@ -82,76 +113,18 @@ const AllocationInputCell: FC<{
       <td>
         {isSelected ? (
           <div style={{ maxWidth: '200px' }}>
-            <InputGroup className="input-group-number">
-              <Form.Control
-                id={`allocation-${resource.uuid}`}
-                data-testid={`allocation-${resource.uuid}`}
-                name={`allocation-${resource.uuid}`}
-                aria-label={translate('Allocation for {resource}', {
-                  resource: resource.name,
-                })}
-                type="number"
-                min={0}
-                value={localValue}
-                className={classNames(exceedsCapacity && 'border-danger')}
-                onChange={(e) => {
-                  const inputValue = e.target.value;
-                  setLocalValue(inputValue);
-                  if (inputValue === '') {
-                    return;
-                  }
-                  const value = parseInt(inputValue, 10);
-                  if (!isNaN(value) && value >= 0) {
-                    onAllocationChange(resource.uuid, component.type, value);
-                  }
-                }}
-                onBlur={(e) => {
-                  const inputValue = e.target.value;
-                  if (
-                    inputValue === '' ||
-                    inputValue === null ||
-                    inputValue === undefined
-                  ) {
-                    setLocalValue('0');
-                    onAllocationChange(resource.uuid, component.type, 0);
-                  } else {
-                    const value = parseInt(inputValue, 10);
-                    if (!isNaN(value)) {
-                      setLocalValue(String(value));
-                      onAllocationChange(resource.uuid, component.type, value);
-                    }
-                  }
-                }}
-              />
-              <div className="input-group-addons">
-                {exceedsCapacity && (
-                  <Tooltip label={translate('Allocation exceeds freed pool')}>
-                    <WarningCircleIcon
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        marginRight: '8px',
-                        cursor: 'help',
-                        zIndex: 10,
-                        position: 'relative',
-                        pointerEvents: 'auto',
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      size={18}
-                      weight="regular"
-                      className="text-danger"
-                    />
-                  </Tooltip>
-                )}
-                <CaretUpDownButtons
-                  onClickUp={() => adjustValue(1)}
-                  onClickDown={() => adjustValue(-1)}
-                  upLabel={translate('Increase value')}
-                  downLabel={translate('Decrease value')}
-                />
-              </div>
-            </InputGroup>
+            {/* Always wrapped: swapping the wrapper in and out would remount
+                the input and drop focus mid-typing. */}
+            <Tooltip
+              alwaysMount
+              label={
+                exceedsCapacity
+                  ? translate('Allocation exceeds freed pool')
+                  : undefined
+              }
+            >
+              <div>{allocationInput}</div>
+            </Tooltip>
           </div>
         ) : (
           <span className="text-quaternary">—</span>

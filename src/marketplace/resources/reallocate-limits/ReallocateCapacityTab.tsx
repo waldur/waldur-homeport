@@ -1,9 +1,17 @@
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
-import { AlertItem, Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
+import {
+  AlertItem,
+  FormField,
+  FormLabel,
+  FormText,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from 'waldur-ui';
 
 import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
@@ -161,10 +169,10 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
 
   return (
     <div>
-      <div className="mb-4">
-        <Form.Label className="mb-2">
+      <FormField className="mb-4">
+        <FormLabel className="mb-2">
           {translate('Find target resource(s)')}
-        </Form.Label>
+        </FormLabel>
         <AsyncSelect
           placeholder={translate('Search and select resources...')}
           loadOptions={async (query, prevOptions, additional) => {
@@ -204,12 +212,12 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
           isMulti={true}
           defaultOptions
         />
-        <div className="form-text mt-2">
+        <FormText as="div" className="mt-2">
           {translate(
             'Search and select resources, adjust allocations in the table.',
           )}
-        </div>
-      </div>
+        </FormText>
+      </FormField>
 
       {components.length === 1 ? (
         <ResourceSelectionTable

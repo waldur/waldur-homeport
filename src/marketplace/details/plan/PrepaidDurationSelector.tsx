@@ -3,6 +3,8 @@ import { DateTime } from 'luxon';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
+import { NativeSelect } from 'waldur-ui';
+
 import { formatDate, formatISODate } from '@/core/dateUtils';
 import FormTable from '@/form/FormTable';
 import { SelectField } from '@/form/select/SelectField';
@@ -22,8 +24,7 @@ import { PrepaidMonthsMode, usePrepaidMonthsMode } from './prepaidDurationMode';
 import { Component } from './types';
 
 const SelectFieldInline = ({ input, options }) => (
-  <select
-    className="form-select"
+  <NativeSelect
     value={input.value}
     onChange={(e) => input.onChange(Number(e.target.value))}
   >
@@ -32,7 +33,7 @@ const SelectFieldInline = ({ input, options }) => (
         {opt.label}
       </option>
     ))}
-  </select>
+  </NativeSelect>
 );
 
 const PrepaidEndDateSelector = ({

@@ -1,12 +1,19 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
-import { Form } from 'react-bootstrap';
 import {
   adminArrowBillingSyncsSyncResourceHistoricalConsumption,
   Resource,
 } from 'waldur-js-client';
 
-import { AlertItem, MonthPicker, parseDateValue, toIsoMonth } from 'waldur-ui';
+import {
+  AlertItem,
+  FormField,
+  FormLabel,
+  FormText,
+  MonthPicker,
+  parseDateValue,
+  toIsoMonth,
+} from 'waldur-ui';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -111,12 +118,9 @@ export const SyncConsumptionHistoryDialog = ({
         )}
       </p>
 
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="sync-history-period-from">
-          {translate('From period')}
-        </Form.Label>
+      <FormField className="mb-3">
+        <FormLabel>{translate('From period')}</FormLabel>
         <MonthPicker
-          id="sync-history-period-from"
           value={parseDateValue(periodFrom)}
           onChange={(month) => setPeriodFrom(toIsoMonth(month))}
           maxDate={periodTo}
@@ -124,17 +128,14 @@ export const SyncConsumptionHistoryDialog = ({
           clearable={false}
           disabled={mutation.isPending}
         />
-        <Form.Text className="text-quaternary">
+        <FormText variant="muted">
           {translate('Start of the date range to sync')}
-        </Form.Text>
-      </Form.Group>
+        </FormText>
+      </FormField>
 
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="sync-history-period-to">
-          {translate('To period')}
-        </Form.Label>
+      <FormField className="mb-3">
+        <FormLabel>{translate('To period')}</FormLabel>
         <MonthPicker
-          id="sync-history-period-to"
           value={parseDateValue(periodTo)}
           onChange={(month) => setPeriodTo(toIsoMonth(month))}
           minDate={periodFrom}
@@ -142,10 +143,10 @@ export const SyncConsumptionHistoryDialog = ({
           clearable={false}
           disabled={mutation.isPending}
         />
-        <Form.Text className="text-quaternary">
+        <FormText variant="muted">
           {translate('End of the date range to sync')}
-        </Form.Text>
-      </Form.Group>
+        </FormText>
+      </FormField>
 
       {mutation.isSuccess && mutation.data && (
         <AlertItem

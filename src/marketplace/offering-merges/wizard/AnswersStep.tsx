@@ -76,10 +76,8 @@ export const AnswersStep: FC<AnswersStepProps> = ({
             <FormTable.Item
               key={key}
               label={<code>{key}</code>}
-              htmlFor={`answer-${key}`}
               value={
                 <Select
-                  inputId={`answer-${key}`}
                   options={targetOptions}
                   value={
                     targetOptions.find(

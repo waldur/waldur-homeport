@@ -3,13 +3,13 @@ import { Field } from 'react-final-form';
 
 import { translate } from '@/i18n';
 
-import { FormField } from './FormField';
+import { FormSelectField } from './FormField';
 
 export const DirectionField: FC<{ name: string; component?: any }> = ({
   name,
-  component = FormField,
+  component = FormSelectField,
 }) => (
-  <Field name={name} component={component} as="select">
+  <Field name={name} component={component}>
     <option value="ingress">{translate('Ingress')}</option>
     <option value="egress">{translate('Egress')}</option>
   </Field>

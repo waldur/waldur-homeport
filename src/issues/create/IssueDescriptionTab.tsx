@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useMemo } from 'react';
-import { Form } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { supportTemplatesList } from 'waldur-js-client';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -97,10 +98,10 @@ export const IssueDescriptionTab = ({
         description={context?.descriptionNote}
       />
       {templateFiles.length > 0 && (
-        <Form.Group className="mb-5">
-          <Form.Label>{translate('Template files')}</Form.Label>
+        <FormField className="mb-5">
+          <FormLabel>{translate('Template files')}</FormLabel>
           <AttachmentsList attachments={templateFiles} />
-        </Form.Group>
+        </FormField>
       )}
       <AttachmentsGroup />
     </>

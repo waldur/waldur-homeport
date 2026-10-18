@@ -49,7 +49,6 @@ export const PauseOfferingDialog: FunctionComponent<{
           >
             <TextGroup
               name="reason"
-              as="textarea"
               placeholder={translate(
                 'Please enter reason why offering has been paused.',
               )}

@@ -35,17 +35,18 @@
   color: white;
 }
 
-.layout-glassmorphism-card .form-control {
+.layout-glassmorphism-card input:not([type='checkbox']):not([type='radio']) {
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
 }
 
-.layout-glassmorphism-card .form-control::placeholder {
+.layout-glassmorphism-card
+  input:not([type='checkbox']):not([type='radio'])::placeholder {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.layout-glassmorphism-card .form-label,
+.layout-glassmorphism-card label,
 .layout-glassmorphism-card .powered-by,
 .layout-glassmorphism-card p,
 .layout-glassmorphism-card .local-login-form {

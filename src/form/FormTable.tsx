@@ -2,7 +2,13 @@ import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
-import { HelpIcon, Tooltip, WarningTip } from 'waldur-ui';
+import {
+  FieldScope,
+  HelpIcon,
+  Tooltip,
+  useFieldLabelFor,
+  WarningTip,
+} from 'waldur-ui';
 
 import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 
@@ -24,8 +30,17 @@ export interface FormTableItemProps {
   actionsClass?: string;
   required?: boolean;
   'data-testid'?: string;
-  htmlFor?: string;
 }
+
+/** The row's label: points at the first control in the row's value cell. */
+const ItemLabel: FC<PropsWithChildren<{ className?: string }>> = ({
+  className,
+  children,
+}) => (
+  <label htmlFor={useFieldLabelFor()} className={className}>
+    {children}
+  </label>
+);
 
 const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
   actions,
@@ -34,16 +49,16 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
   const value = props.children || props.value;
   const groupValues = props.group && Array.isArray(value);
   const titleRowSpan = groupValues ? (value as any[]).length : 1;
-  return (groupValues ? (value as any[]) : [value]).map((row, i) => (
+  const rows = (groupValues ? (value as any[]) : [value]).map((row, i) => (
     <tr key={i} className={props.className} data-testid={props['data-testid']}>
       {i === 0 && props.description ? (
         <th className={row ? 'col-md-4' : 'col-md-auto'} rowSpan={titleRowSpan}>
           <div className="flex items-center">
-            <label htmlFor={props.htmlFor} className="title mb-0">
+            <ItemLabel className="title mb-0">
               {props.label}
               {props.required && <span className="text-danger ms-1">*</span>}
               {props.colon && ':'}
-            </label>
+            </ItemLabel>
             {props.tooltip && (
               <HelpIcon label={props.tooltip} size={20} className="ms-2" />
             )}
@@ -80,11 +95,11 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
       ) : i === 0 && props.label ? (
         <th className="title col-md-3" rowSpan={titleRowSpan}>
           <div className="flex items-center">
-            <label htmlFor={props.htmlFor} className="mb-0">
+            <ItemLabel className="mb-0">
               {props.label}
               {props.required && <span className="text-danger ms-1">*</span>}
               {props.colon && ':'}
-            </label>
+            </ItemLabel>
             {props.tooltip && (
               <HelpIcon label={props.tooltip} size={20} className="ms-2" />
             )}
@@ -118,6 +133,9 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
       </td>
     </tr>
   ));
+  // One scope for every row of a grouped item, so its label (in the first
+  // row) names the first control wherever it is.
+  return <FieldScope>{rows}</FieldScope>;
 };
 
 type FormTableCardProps = FC<

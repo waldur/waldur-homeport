@@ -1,10 +1,9 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, Fragment } from 'react';
-import { Form, FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField, FormLabel, FormText } from 'waldur-ui';
 
 import { StringField } from '@/form';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
@@ -92,7 +91,7 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
 );
 
 export const UserClaimsField: FC = () => (
-  <Form.Group className="mb-7">
+  <FormField className="mb-7">
     <FormLabel>{translate('Identity provider claims')}</FormLabel>
     {/* The validator lives on the FieldArray rather than in the dialog's
         record-level validate: final-form resolves errors per registered field,
@@ -101,10 +100,10 @@ export const UserClaimsField: FC = () => (
     <FieldArray name="user_claims" validate={validateUserClaims}>
       {(props) => <ClaimRows {...props} />}
     </FieldArray>
-    <Form.Text className="text-quaternary">
+    <FormText variant="muted">
       {translate(
         'All claims must match; within one claim any value matches. A value ending in "*" matches by prefix, e.g. "urn:mace:example.org:group:hpc-*". The claim must be listed in the identity provider\'s extra fields for Waldur to receive it.',
       )}
-    </Form.Text>
-  </Form.Group>
+    </FormText>
+  </FormField>
 );

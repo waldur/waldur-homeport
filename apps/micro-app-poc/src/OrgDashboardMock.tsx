@@ -16,6 +16,7 @@ import {
   WaldurLogo,
 } from 'waldur-ui';
 
+import { BillingContactCard } from './BillingContactCard';
 import { ModeNav } from './ModeNav';
 import { OrgSwitcherMenu } from './OrgSwitcherMenu';
 import { ProjectRow, useDashboardData } from './useDashboardData';
@@ -193,6 +194,8 @@ export const OrgDashboardMock = () => {
             />
           </CardContent>
         </Card>
+
+        <BillingContactCard />
       </div>
     </AppShell>
   );

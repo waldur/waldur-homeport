@@ -58,7 +58,6 @@ export const SearchInput = ({
         onSubmit={(event) => event.preventDefault()}
       >
         <BaseStringField
-          className="search-input w-lg-325px"
           value={query}
           onChange={(event) => {
             setQuery(event.target.value);

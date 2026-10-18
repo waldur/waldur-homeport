@@ -1,8 +1,9 @@
 import { useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
-import { Form as BootstrapForm } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { supportFeedbacksCreate } from 'waldur-js-client';
+
+import { FormField } from 'waldur-ui';
 
 import { SubmitButton, TextGroup } from '@/form';
 import { withFormGroup } from '@/form/withFormGroup';
@@ -72,7 +73,7 @@ export const SupportFeedback = () => {
               disabled={isPending}
             />
 
-            <BootstrapForm.Group>
+            <FormField>
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <SubmitButton
                   disabled={invalid}
@@ -80,7 +81,7 @@ export const SupportFeedback = () => {
                   label={translate('Submit')}
                 />
               </div>
-            </BootstrapForm.Group>
+            </FormField>
           </div>
         </form>
       )}

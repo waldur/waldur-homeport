@@ -1,6 +1,7 @@
-import { Form } from 'react-bootstrap';
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 
 import { getGroupInvitationLink } from '../utils';
@@ -8,14 +9,14 @@ import { getGroupInvitationLink } from '../utils';
 export const InvitationLinkField = ({ invitation }) => {
   const link = invitation ? getGroupInvitationLink(invitation) : '';
   return (
-    <Form.Group>
-      <Form.Label>{translate('Invitation link')}</Form.Label>
+    <FormField>
+      <FormLabel>{translate('Invitation link')}</FormLabel>
       <div className="flex gap-2">
-        <Form.Control
+        <BaseInputField
           value={link}
           placeholder={translate('e.g. https://')}
           readOnly
-          className="form-control-solid"
+          solid
         />
 
         <CopyToClipboardButton
@@ -25,6 +26,6 @@ export const InvitationLinkField = ({ invitation }) => {
           onlyButton
         />
       </div>
-    </Form.Group>
+    </FormField>
   );
 };

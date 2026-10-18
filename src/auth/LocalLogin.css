@@ -1,5 +1,5 @@
 .login-input,
-.local-login-form .form-control {
+.local-login-form input:not([type='checkbox']):not([type='radio']) {
   margin-bottom: 8px;
   padding: 8px 14px;
   width: 100%;
@@ -7,7 +7,7 @@
 }
 
 .login-input:focus,
-.local-login-form .form-control:focus {
+.local-login-form input:not([type='checkbox']):not([type='radio']):focus {
   outline: 0;
 }
 

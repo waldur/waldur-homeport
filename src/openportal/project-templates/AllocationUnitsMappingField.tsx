@@ -1,11 +1,11 @@
-import classNames from 'classnames';
 import React, { useState, FunctionComponent, useCallback } from 'react';
-import { Form } from 'react-bootstrap';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField, FormLabel } from 'waldur-ui';
 
+import { FieldError } from '@/form/FieldError';
+import { BaseInputField } from '@/form/InputField';
 import { Select } from '@/form/select';
-import { FormField } from '@/form/types';
+import { FormField as FormFieldProps } from '@/form/types';
 import { translate } from '@/i18n';
 
 const AllocationUnitsOptions = [
@@ -35,7 +35,7 @@ interface AllocationMapping {
   [unit: string]: number;
 }
 
-interface AllocationUnitsMappingProps extends FormField {
+interface AllocationUnitsMappingProps extends FormFieldProps {
   placeholder?: string;
   validator?: any;
   solid?: boolean;
@@ -138,10 +138,10 @@ export const AllocationUnitsMappingField: FunctionComponent<
         </div>
 
         <div className="row mb-3 items-end">
-          <div className="col-md-5">
-            <Form.Label className="sr-only">
+          <FormField className="col-md-5">
+            <FormLabel className="sr-only">
               {translate('Allocation Unit')}
-            </Form.Label>
+            </FormLabel>
             <Select
               value={
                 AllocationUnitsOptions.find(
@@ -155,16 +155,14 @@ export const AllocationUnitsMappingField: FunctionComponent<
               aria-label={translate('Select allocation unit')}
               isSearchable={false}
             />
-          </div>
-          <div className="col-md-5">
-            <Form.Label className="sr-only">
+          </FormField>
+          <FormField className="col-md-5">
+            <FormLabel className="sr-only">
               {translate('Allocation Value')}
-            </Form.Label>
-            <Form.Control
-              className={classNames(
-                solid && 'form-control-solid',
-                hasError && 'is-invalid',
-              )}
+            </FormLabel>
+            <BaseInputField
+              solid={solid}
+              isInvalid={Boolean(hasError)}
               type="number"
               value={allocationValue ?? ''}
               onChange={handleValueChange}
@@ -174,7 +172,7 @@ export const AllocationUnitsMappingField: FunctionComponent<
               min="0"
               aria-label={translate('Enter allocation value')}
             />
-          </div>
+          </FormField>
           <div className="col-md-2">
             <BaseButton
               type="button"
@@ -192,7 +190,7 @@ export const AllocationUnitsMappingField: FunctionComponent<
         </div>
 
         {/* Display validation errors */}
-        {hasError && <div className="invalid-feedback block">{meta.error}</div>}
+        {hasError && <FieldError error={meta.error} />}
       </div>
     </div>
   );

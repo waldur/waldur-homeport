@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
-import { Card, Col, Form, Row, Stack } from 'react-bootstrap';
+import { Card, Col, Row, Stack } from 'react-bootstrap';
 import { usersList, versionRetrieve } from 'waldur-js-client';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { getIconUrl, parseSelectData } from '@/core/api';
 import { ENV } from '@/core/config';
@@ -134,10 +136,10 @@ export const AdministrationProfile = ({
               ) : (
                 <Col xs={12}>
                   {!supportOnly && staff.options.length ? (
-                    <Form.Group as={Row} className="mb-1">
-                      <Form.Label column xs="auto">
+                    <FormField as={Row} className="mb-1">
+                      <FormLabel className="col-auto mb-0 py-[10px]">
                         {translate('Staff')}:
-                      </Form.Label>
+                      </FormLabel>
                       <Col>
                         <SymbolsGroup
                           items={staff.options}
@@ -146,13 +148,13 @@ export const AdministrationProfile = ({
                           onClick={() => goToUsers(true)}
                         />
                       </Col>
-                    </Form.Group>
+                    </FormField>
                   ) : null}
                   {supports.options.length ? (
-                    <Form.Group as={Row} className="mb-1">
-                      <Form.Label column xs="auto">
+                    <FormField as={Row} className="mb-1">
+                      <FormLabel className="col-auto mb-0 py-[10px]">
                         {translate('Support')}:
-                      </Form.Label>
+                      </FormLabel>
                       <Col>
                         <SymbolsGroup
                           items={supports.options}
@@ -161,7 +163,7 @@ export const AdministrationProfile = ({
                           onClick={() => goToUsers(false, true)}
                         />
                       </Col>
-                    </Form.Group>
+                    </FormField>
                   ) : null}
                 </Col>
               )}

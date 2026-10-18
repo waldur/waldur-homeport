@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { useToggle } from 'react-use';
 import {
@@ -9,7 +9,7 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
-import { Switch } from 'waldur-ui';
+import { FormField, FormLabel, Switch } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -87,9 +87,9 @@ export const FixedIPsField: FC<{
   };
 
   return (
-    <Form.Group>
+    <FormField>
       <div className="flex justify-between mb-5">
-        <Form.Label className="mb-0">{translate('Fixed IPs')}</Form.Label>
+        <FormLabel className="mb-0">{translate('Fixed IPs')}</FormLabel>
         <Switch
           checked={customIpEnabled}
           onCheckedChange={toggleCustomIp}
@@ -120,7 +120,7 @@ export const FixedIPsField: FC<{
           )}
         </Row>
       </div>
-    </Form.Group>
+    </FormField>
   );
 };
 

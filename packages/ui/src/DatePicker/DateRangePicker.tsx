@@ -10,6 +10,8 @@ import {
 } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
+import { useControlId, useDescribedBy } from '../Form/controlId';
+
 import { Calendar } from './Calendar';
 import {
   DATE_FORMAT,
@@ -129,7 +131,7 @@ export const DateRangePicker = forwardRef<
     clearable = false,
     onClose,
     autoOpen,
-    id,
+    id: idProp,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     'aria-invalid': ariaInvalid,
@@ -139,6 +141,9 @@ export const DateRangePicker = forwardRef<
   },
   ref,
 ) {
+  const id = useControlId(idProp);
+  // The field's help and error text, besides any given by hand.
+  const describedBy = useDescribedBy(ariaDescribedBy);
   const [open, setOpen] = usePickerOpenState(autoOpen);
   const [draftStart, setDraftStart] = useState<Date | undefined>();
   const [announcement, setAnnouncement] = useState('');
@@ -320,11 +325,7 @@ export const DateRangePicker = forwardRef<
     onOpenCalendar: () => handleOpenChange(true),
     disabled,
     'aria-invalid': !!entry.error || !!ariaInvalid || undefined,
-    'aria-describedby': joinIds(
-      entry.error && errorId,
-      hintId,
-      ariaDescribedBy,
-    ),
+    'aria-describedby': joinIds(entry.error && errorId, hintId, describedBy),
   });
 
   const startLabel = (

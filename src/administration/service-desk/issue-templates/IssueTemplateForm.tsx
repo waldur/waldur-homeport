@@ -1,5 +1,4 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import { Form as FinalForm } from 'react-final-form';
 import {
   supportTemplatesCreate,
@@ -7,6 +6,8 @@ import {
   supportTemplatesDeleteAttachments,
   supportTemplatesUpdate,
 } from 'waldur-js-client';
+
+import { FormHeading } from 'waldur-ui';
 
 import { IssueTemplateTypeOptions } from '@/administration/utils';
 import { formDataOptions } from '@/core/api';
@@ -262,7 +263,7 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
               required
             />
 
-            <Form.Label>{translate('Attachments')}</Form.Label>
+            <FormHeading as="p">{translate('Attachments')}</FormHeading>
             <UploadContainer
               onDrop={onDrop}
               message={translate(

@@ -278,7 +278,7 @@ utilities). They were migrated as:
 | `border-top` / `-bottom` / `-start` / `-end`       | `border-t-[1px] border-t-secondary`, … (`l` / `r` for start / end)        |
 | `text-gray-800`/`900`, `border-gray-300`           | `text-primary`, `border-primary`                                          |
 
-`<Form.Text muted>` renders `text-muted`: give it `className="text-quaternary"` instead.
+`FormText` (waldur-ui) is `text-tertiary`; give it `className="text-quaternary"` for a quieter line, or `text-danger` for an error.
 
 - **The `waldur-custom/no-bootstrap-color-utility` lint rule** reports a retired name with its
   replacement, and a class built as `` `text-${variant}` `` (map each variant to a full class
@@ -318,16 +318,16 @@ green, whatever the tenant configured. So:
 One scale, pinned in physical pixels in `primitives/typography.css` (`@theme static`) to
 prevent distortion under Waldur's forced 13px root font size (`html, body { font-size: 13px !important; }`):
 
-| Token        | Size | Line Height | Tailwind Class | Former Bootstrap Utility |
-| ------------ | ---- | ----------- | -------------- | ------------------------ |
-| `--text-xs`  | 12px | 18px        | `text-xs`      | `fs-7`, `fs-8`           |
-| `--text-sm`  | 14px | 20px        | `text-sm`      | `fs-6`                   |
-| `--text-base`| 16px | 24px        | `text-base`    | `fs-4`, `fs-5`           |
-| `--text-lg`  | 18px | 28px        | `text-lg`      | `fs-3`                   |
-| `--text-xl`  | 20px | 28px        | `text-xl`      | `fs-2`                   |
-| `--text-2xl` | 24px | 32px        | `text-2xl`     | `fs-1`, `fs-1x`          |
-| `--text-3xl` | 30px | 36px        | `text-3xl`     | —                        |
-| `--text-4xl` | 36px | 44px        | `text-4xl`     | —                        |
+| Token         | Size | Line Height | Tailwind Class | Former Bootstrap Utility |
+| ------------- | ---- | ----------- | -------------- | ------------------------ |
+| `--text-xs`   | 12px | 18px        | `text-xs`      | `fs-7`, `fs-8`           |
+| `--text-sm`   | 14px | 20px        | `text-sm`      | `fs-6`                   |
+| `--text-base` | 16px | 24px        | `text-base`    | `fs-4`, `fs-5`           |
+| `--text-lg`   | 18px | 28px        | `text-lg`      | `fs-3`                   |
+| `--text-xl`   | 20px | 28px        | `text-xl`      | `fs-2`                   |
+| `--text-2xl`  | 24px | 32px        | `text-2xl`     | `fs-1`, `fs-1x`          |
+| `--text-3xl`  | 30px | 36px        | `text-3xl`     | —                        |
+| `--text-4xl`  | 36px | 44px        | `text-4xl`     | —                        |
 
 - **No Bootstrap `fs-*`.** Bootstrap's `fs-1` through `fs-8` classes are retired and replaced
   by standard Tailwind `text-*` classes via the `waldur-custom/require-font-size-scale` ESLint rule.
@@ -377,17 +377,17 @@ All corner radius steps are pinned to physical pixels in `primitives/radius.css`
 to prevent fractional `rem` compression under Waldur's forced 13px root font size
 (`html, body { font-size: 13px !important; }`):
 
-| Token            | Size | Tailwind Class   | Former Class / SCSS Variable | Use                                                 |
-| ---------------- | ---- | ---------------- | ---------------------------- | --------------------------------------------------- |
-| `--radius-none`  | 0px  | `rounded-none`   | `rounded-0`                  | Square corners, flush card attachments              |
-| `--radius-xs`    | 2px  | `rounded-xs`     | —                            | Subtle inner corners, tiny tags                     |
-| `--radius-sm`    | 4px  | `rounded-sm`     | `$border-radius-xs` (4px)    | Compact inputs, checkboxes, small indicators        |
-| `--radius-md`    | 6px  | `rounded-md`     | `$border-radius-sm` (6px)    | Standard buttons, form controls, dropdown items     |
-| `--radius-lg`    | 8px  | `rounded-lg`     | `$border-radius` / `-lg` (8px)| Cards, panels, dialog headers, table containers     |
-| `--radius-xl`    | 12px | `rounded-xl`     | `$border-radius-xl` (12px)   | Prominent cards, thread bubbles, chat panels        |
-| `--radius-2xl`   | 16px | `rounded-2xl`    | `$border-radius-2xl` (16px)  | Large feature cards, hero containers                |
-| `--radius-modal` | 20px | `rounded-modal`  | —                            | Dialog content and Sidebar mode-switcher card       |
-| `--radius-full`  | 9999px| `rounded-full`  | `rounded-pill`, `rounded-circle` | Avatars, pills, circular badges, status dots    |
+| Token            | Size   | Tailwind Class  | Former Class / SCSS Variable     | Use                                             |
+| ---------------- | ------ | --------------- | -------------------------------- | ----------------------------------------------- |
+| `--radius-none`  | 0px    | `rounded-none`  | `rounded-0`                      | Square corners, flush card attachments          |
+| `--radius-xs`    | 2px    | `rounded-xs`    | —                                | Subtle inner corners, tiny tags                 |
+| `--radius-sm`    | 4px    | `rounded-sm`    | `$border-radius-xs` (4px)        | Compact inputs, checkboxes, small indicators    |
+| `--radius-md`    | 6px    | `rounded-md`    | `$border-radius-sm` (6px)        | Standard buttons, form controls, dropdown items |
+| `--radius-lg`    | 8px    | `rounded-lg`    | `$border-radius` / `-lg` (8px)   | Cards, panels, dialog headers, table containers |
+| `--radius-xl`    | 12px   | `rounded-xl`    | `$border-radius-xl` (12px)       | Prominent cards, thread bubbles, chat panels    |
+| `--radius-2xl`   | 16px   | `rounded-2xl`   | `$border-radius-2xl` (16px)      | Large feature cards, hero containers            |
+| `--radius-modal` | 20px   | `rounded-modal` | —                                | Dialog content and Sidebar mode-switcher card   |
+| `--radius-full`  | 9999px | `rounded-full`  | `rounded-pill`, `rounded-circle` | Avatars, pills, circular badges, status dots    |
 
 - **No Bootstrap `rounded-0`, `rounded-pill`, `rounded-circle`.** Bootstrap radius utilities are
   retired and replaced by Tailwind `rounded-none` and `rounded-full` via `waldur-custom/enforce-border-radius-tokens`.
@@ -404,24 +404,25 @@ to prevent fractional `rem` compression under Waldur's forced 13px root font siz
 
 ## Guards
 
-| What                                                    | Enforced by                                                          |
-| ------------------------------------------------------- | -------------------------------------------------------------------- |
-| Generated ramps match `colors.json`                     | `generateTokens.test.ts`, `yarn tokens:check`                        |
-| No dead, ghost or redundantly aliased tokens            | `tokenAudit.test.ts`, `yarn tokens:audit`                            |
-| No new duplicate roles (same value in both themes)      | `DUPLICATE_BASELINE` in `scripts/audit-tokens.mjs`, via the same two |
-| Status `-fg` clears AA on every surface                 | `statusContrast.test.ts`                                             |
-| Badge `solid` and Progress fills stay identical         | `progressTokens.test.ts`                                             |
-| Bootstrap emits no colour utility                       | `src/tailwindBootstrapColors.test.ts`                                |
-| No retired Bootstrap colour class name                  | `waldur-custom/no-bootstrap-color-utility`                           |
-| Every semantic utility waldur-ui/shell use is declared  | `tailwindTheme.test.ts`                                              |
-| No Tailwind border colour next to Bootstrap's `.border` | `waldur-custom/no-bootstrap-border-with-tailwind-color` (autofix)    |
-| State colours from the status matrix, not raw ramps     | `waldur-custom/no-raw-status-ramp`                                   |
-| Font size on the scale; no `fs-*` or inline size        | `waldur-custom/require-font-size-scale` (autofixes `fs-*`), stylelint|
-| Font weight on the scale; no `fw-*` or inline weight    | `waldur-custom/require-weight-scale` (autofixes `fw-*`), stylelint   |
-| Corner radius on the scale; no retired or inline radius | `waldur-custom/enforce-border-radius-tokens` (autofix), stylelint    |
-| Bootstrap emits no `fw-*`; Tailwind exactly the scale   | `src/tailwindBootstrapColors.test.ts`                                |
-| Every physical colour has a `dark:` counterpart         | `waldur-custom/require-dark-pair`                                    |
-| No `--bs-*` reads                                       | `waldur-custom/no-bootstrap-css-vars`, stylelint                     |
+| What                                                    | Enforced by                                                                 |
+| ------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Generated ramps match `colors.json`                     | `generateTokens.test.ts`, `yarn tokens:check`                               |
+| No dead, ghost or redundantly aliased tokens            | `tokenAudit.test.ts`, `yarn tokens:audit`                                   |
+| No new duplicate roles (same value in both themes)      | `DUPLICATE_BASELINE` in `scripts/audit-tokens.mjs`, via the same two        |
+| Status `-fg` clears AA on every surface                 | `statusContrast.test.ts`                                                    |
+| Badge `solid` and Progress fills stay identical         | `progressTokens.test.ts`                                                    |
+| Bootstrap emits no colour utility                       | `src/tailwindBootstrapColors.test.ts`                                       |
+| No retired Bootstrap colour class name                  | `waldur-custom/no-bootstrap-color-utility`                                  |
+| Every semantic utility waldur-ui/shell use is declared  | `tailwindTheme.test.ts`                                                     |
+| No Tailwind border colour next to Bootstrap's `.border` | `waldur-custom/no-bootstrap-border-with-tailwind-color` (autofix)           |
+| State colours from the status matrix, not raw ramps     | `waldur-custom/no-raw-status-ramp`                                          |
+| A colour token with a utility is written as the utility | `waldur-custom/prefer-token-utility` (autofix; table read from `theme.css`) |
+| Font size on the scale; no `fs-*` or inline size        | `waldur-custom/require-font-size-scale` (autofixes `fs-*`), stylelint       |
+| Font weight on the scale; no `fw-*` or inline weight    | `waldur-custom/require-weight-scale` (autofixes `fw-*`), stylelint          |
+| Corner radius on the scale; no retired or inline radius | `waldur-custom/enforce-border-radius-tokens` (autofix), stylelint           |
+| Bootstrap emits no `fw-*`; Tailwind exactly the scale   | `src/tailwindBootstrapColors.test.ts`                                       |
+| Every physical colour has a `dark:` counterpart         | `waldur-custom/require-dark-pair`                                           |
+| No `--bs-*` reads                                       | `waldur-custom/no-bootstrap-css-vars`, stylelint                            |
 
 **Duplicate roles.** Two semantic tokens with the same value in both themes are one role with
 two names until shown otherwise. The audit fails on any such group not listed in

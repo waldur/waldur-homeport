@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { PublicOfferingDetails, Offering } from 'waldur-js-client';
 
@@ -7,6 +6,7 @@ import { Switch } from 'waldur-ui';
 
 import { composeValidators } from '@/core/validators';
 import { FieldError } from '@/form';
+import { BaseInputField } from '@/form/InputField';
 import {
   formatIntField,
   getLimitParser,
@@ -50,7 +50,7 @@ const RowWrapper = (
         />
       ) : (
         <>
-          <Form.Control
+          <BaseInputField
             type="number"
             step={getLimitStep(props.offeringComponent)}
             min={props.offeringComponent.min_value || 0}

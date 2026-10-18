@@ -14530,6 +14530,11 @@
       "feature_area": "update-internal-ips"
     }
   },
+  "Custom IP address": {
+    "context": {
+      "feature_area": "update-internal-ips"
+    }
+  },
   "Custom IP configuration": {
     "context": {
       "feature_area": "update-internal-ips"
@@ -14542,6 +14547,11 @@
     }
   },
   "Custom claim": {
+    "context": {
+      "feature_area": "steps"
+    }
+  },
+  "Custom claim name": {
     "context": {
       "feature_area": "steps"
     }
@@ -15462,7 +15472,7 @@
   },
   "Decrease value": {
     "context": {
-      "feature_area": "form"
+      "feature_area": "analytics"
     }
   },
   "Default": {
@@ -19859,6 +19869,11 @@
     }
   },
   "Entitlement": {},
+  "Entity": {
+    "context": {
+      "feature_area": "personal-access-tokens"
+    }
+  },
   "Env variables": {
     "context": {
       "feature_area": "integration"
@@ -23001,7 +23016,7 @@
   },
   "From": {
     "context": {
-      "feature_area": "plan"
+      "feature_area": "booking"
     }
   },
   "From creation": {
@@ -24261,7 +24276,7 @@
   },
   "Hide": {
     "context": {
-      "feature_area": "auth"
+      "feature_area": "marketplace"
     }
   },
   "Hide API keys tab": {
@@ -25897,7 +25912,7 @@
   "Increase or decrease available reviewers": {},
   "Increase value": {
     "context": {
-      "feature_area": "form"
+      "feature_area": "analytics"
     }
   },
   "Increases the total allocation at the start of a period by adding unused capacity from the previous period (capped at {pct}% of the base). This gives users a larger budget to work with.": {
@@ -37363,7 +37378,7 @@
   "Option": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "actions"
+      "feature_area": "options"
     }
   },
   "Option has been added successfully.": {
@@ -43330,6 +43345,11 @@
     }
   },
   "Protocol must be a number between 0 and 255.": {},
+  "Protocol number": {
+    "context": {
+      "feature_area": "rule-editor"
+    }
+  },
   "Provide a brief overview of the offering.": {
     "context": {
       "feature_area": "overview"
@@ -53177,7 +53197,7 @@
   "Should extra issue field mappings be applied": {},
   "Show": {
     "context": {
-      "feature_area": "auth"
+      "feature_area": "marketplace"
     }
   },
   "Show OpenStack tenant migrations action and tab": {
@@ -73929,7 +73949,11 @@
       "feature_area": "posix-id-pools"
     }
   },
-  "till": {},
+  "till": {
+    "context": {
+      "feature_area": "booking"
+    }
+  },
   "today": {
     "context": {
       "feature_area": "policy-watch"

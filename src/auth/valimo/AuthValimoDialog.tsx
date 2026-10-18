@@ -1,6 +1,5 @@
 import { SignInIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
 import { Form as FinalForm, Field } from 'react-final-form';
 import { useMountedState } from 'react-use';
 import {
@@ -8,6 +7,8 @@ import {
   authValimoCreate,
   authValimoResult,
 } from 'waldur-js-client';
+
+import { FormField, FormLabel } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { wait } from '@/core/utils';
@@ -103,30 +104,30 @@ export const AuthValimoDialog = () => {
               </>
             }
           >
-            <Form.Group>
-              <Form.Label>{translate('Mobile phone number')}</Form.Label>
-              <InputGroup>
-                <InputGroup.Text>
-                  {ENV.plugins.WALDUR_AUTH_VALIMO.MOBILE_PREFIX}
-                </InputGroup.Text>
-                <Field name="phoneNumber" required={true}>
-                  {({ input, meta }) => (
-                    <InputField
-                      input={input}
-                      meta={meta}
-                      type="tel"
-                      required={true}
-                      disabled={submitting}
-                    />
-                  )}
-                </Field>
-              </InputGroup>
-            </Form.Group>
+            <FormField>
+              <FormLabel>{translate('Mobile phone number')}</FormLabel>
+              <Field name="phoneNumber" required={true}>
+                {({ input, meta }) => (
+                  <InputField
+                    input={input}
+                    meta={meta}
+                    type="tel"
+                    required={true}
+                    disabled={submitting}
+                    start={
+                      <span className="text-secondary">
+                        {ENV.plugins.WALDUR_AUTH_VALIMO.MOBILE_PREFIX}
+                      </span>
+                    }
+                  />
+                )}
+              </Field>
+            </FormField>
             {challengeCode && (
-              <Form.Group>
-                <Form.Label>{translate('Challenge code')}</Form.Label>
+              <FormField>
+                <FormLabel>{translate('Challenge code')}</FormLabel>
                 <p>{challengeCode}</p>
-              </Form.Group>
+              </FormField>
             )}
           </ModalDialog>
         </form>

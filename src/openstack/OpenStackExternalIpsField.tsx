@@ -1,9 +1,8 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Form } from 'react-bootstrap';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormField } from 'waldur-ui';
 
 import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -19,7 +18,7 @@ const FieldsListGroup: FC<FieldArrayRenderProps<any, any>> = ({ fields }) => {
   return (
     <>
       {fields.length > 0 && (
-        <Form.Group id="openstack-external-ip-set">
+        <FormField id="openstack-external-ip-set">
           <div>
             <table className="table px-0 mb-0">
               <thead>
@@ -46,7 +45,7 @@ const FieldsListGroup: FC<FieldArrayRenderProps<any, any>> = ({ fields }) => {
               </tbody>
             </table>
           </div>
-        </Form.Group>
+        </FormField>
       )}
       <div>
         <BaseButton

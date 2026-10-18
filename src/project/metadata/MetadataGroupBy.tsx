@@ -1,6 +1,4 @@
-import { FormLabel } from 'react-bootstrap';
-
-import { SegmentedControl } from 'waldur-ui';
+import { FormHeading, SegmentedControl } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -22,7 +20,7 @@ export const MetadataGroupBy = ({
 }: MetadataGroupByProps) => {
   return (
     <>
-      <FormLabel className="mb-0">{translate('Group by:')}</FormLabel>
+      <FormHeading className="mb-0">{translate('Group by:')}</FormHeading>
       <SegmentedControl
         aria-label={translate('Group by')}
         size="sm"

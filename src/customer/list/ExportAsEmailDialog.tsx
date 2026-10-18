@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { DateTime } from 'luxon';
 import { FC } from 'react';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { Field, Form as FinalForm } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
@@ -11,7 +11,7 @@ import {
   invoicesList,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, FormFieldset, FormLegend } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { composeValidators, email, required } from '@/core/validators';
@@ -107,10 +107,10 @@ export const ExportAsEmailDialog: FC = () => {
           >
             <Row>
               <Col md={12} lg={8} className="flex flex-col">
-                <div>
-                  <Form.Label>{translate('Emails')}</Form.Label>
+                <FormFieldset>
+                  <FormLegend>{translate('Emails')}</FormLegend>
                   <FieldArray name="emails" component={renderEmails} />
-                </div>
+                </FormFieldset>
 
                 <div className="mt-4">
                   <Field
@@ -144,7 +144,7 @@ const renderEmails = ({ fields }: any) => (
               <EmailField
                 input={input}
                 meta={meta}
-                aria-label={translate('Email')}
+                aria-label={`${translate('Email')} ${index + 1}`}
                 required={true}
               />
             )}

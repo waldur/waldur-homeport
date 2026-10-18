@@ -43,7 +43,7 @@
     -20px -20px 60px #343d3f;
 }
 
-.layout-neumorphism-card .form-control {
+.layout-neumorphism-card input:not([type='checkbox']):not([type='radio']) {
   background: #e0e5ec;
   border: none;
   border-radius: 12px;
@@ -52,7 +52,9 @@
     inset -5px -5px 10px #ffffff;
 }
 
-[data-theme='dark'] .layout-neumorphism-card .form-control {
+[data-theme='dark']
+  .layout-neumorphism-card
+  input:not([type='checkbox']):not([type='radio']) {
   background: #2d3436;
   box-shadow:
     inset 5px 5px 10px #262b2d,

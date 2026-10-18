@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { Form } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
@@ -8,7 +7,7 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import { HelpIcon } from 'waldur-ui';
+import { FormField, HelpIcon } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -30,7 +29,7 @@ const FieldsListMapping = ({
   categories: Pick<MarketplaceCategory, 'group' | 'title' | 'uuid'>[];
 }) => {
   return (
-    <Form.Group>
+    <FormField>
       <table className="table align-middle table-row-bordered border-b-[1px] border-b-secondary mb-3">
         <thead>
           <tr className="text-quaternary text-xs font-medium">
@@ -88,7 +87,7 @@ const FieldsListMapping = ({
           )}
         </tbody>
       </table>
-    </Form.Group>
+    </FormField>
   );
 };
 

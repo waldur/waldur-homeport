@@ -1,7 +1,7 @@
 import { MinusIcon, PlusIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
 
+import { Input } from 'waldur-ui';
 import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -48,7 +48,7 @@ export const BoxNumberField: FunctionComponent<BoxNumberFieldProps> = (
           className="minus-btn btn-no-focus"
           size="sm"
         />
-        <Form.Control
+        <Input
           {...props.input}
           type="number"
           min={0}

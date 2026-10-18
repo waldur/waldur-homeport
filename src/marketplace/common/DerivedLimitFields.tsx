@@ -1,5 +1,7 @@
 import { OptionField } from 'waldur-js-client';
 
+import { FormText } from 'waldur-ui';
+
 import { NumberField } from '@/form';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
@@ -32,7 +34,11 @@ const DerivedQuantities = ({
   }
   const components = getComponentsByType(offering?.components);
   return (
-    <div className="flex flex-col gap-1 form-text text-quaternary mt-2 mb-0">
+    <FormText
+      as="div"
+      variant="muted"
+      className="flex flex-col gap-1 mt-2 mb-0"
+    >
       {types.map((type) => {
         const component = components[type];
         const name = component?.name || type;
@@ -49,7 +55,7 @@ const DerivedQuantities = ({
           </div>
         );
       })}
-    </div>
+    </FormText>
   );
 };
 

@@ -1,11 +1,12 @@
 import { FieldValidator } from 'final-form';
 import { FC, useMemo } from 'react';
-import { FormText } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import {
   MarketplaceProviderOfferingsListData,
   MarketplacePublicOfferingsListData,
 } from 'waldur-js-client';
+
+import { FormText } from 'waldur-ui';
 
 import { FieldError } from '@/form';
 import { translate } from '@/i18n';
@@ -78,7 +79,7 @@ export const OfferingAutocomplete: FC<OfferingAutocompleteProps> = ({
       />
 
       {props.description && (
-        <FormText className="text-quaternary">{props.description}</FormText>
+        <FormText variant="muted">{props.description}</FormText>
       )}
       {props.showError && fieldProps.meta.touched && (
         <FieldError error={fieldProps.meta.error} />

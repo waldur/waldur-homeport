@@ -114,13 +114,13 @@ $bg-height: 232px;
           border-color: var(--color-gray-dark-600);
         }
       }
-      // Through the mixin FilterBox's own icon colour comes from
-      // (_forms.scss), scoped deeper so that it wins.
-      .input-group-icon {
-        @include svg-icon-color(var(--brand-500));
+      // The search icon is the field's start adornment; scoped here so that
+      // it wins over the field's own icon colour.
+      [data-adornment='start'] {
+        color: var(--brand-500);
 
         @include dark-theme {
-          @include svg-icon-color(var(--color-gray-dark-500));
+          color: var(--color-gray-dark-500);
         }
       }
 
@@ -133,8 +133,8 @@ $bg-height: 232px;
             background-color: white;
             border-color: var(--border-primary);
           }
-          .input-group-icon {
-            @include svg-icon-color(var(--text-quaternary));
+          [data-adornment='start'] {
+            color: var(--text-quaternary);
           }
         }
       }

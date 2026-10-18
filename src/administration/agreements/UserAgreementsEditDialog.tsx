@@ -1,6 +1,7 @@
-import { Form } from 'react-bootstrap';
 import { Form as ReactFinalForm } from 'react-final-form';
 import { userAgreementsPartialUpdate } from 'waldur-js-client';
+
+import { FormHeading } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { MarkdownGroup, SubmitButton } from '@/form';
@@ -52,8 +53,8 @@ export const UserAgreementsEditDialog = ({
             }
           >
             <div className="mb-7">
-              <Form.Label>{translate('Language')}</Form.Label>
-              <p className="form-control-plaintext">
+              <FormHeading as="p">{translate('Language')}</FormHeading>
+              <p className="py-[10px] text-secondary">
                 {getLanguageLabel(resolve.initialValues.language)}
               </p>
             </div>

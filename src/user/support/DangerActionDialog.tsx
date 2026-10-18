@@ -1,11 +1,13 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import { IssueTypeEnum, supportIssuesCreate } from 'waldur-js-client';
+
+import { FormField } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { SubmitButton } from '@/form';
+import { BaseTextField } from '@/form/TextField';
 import { translate } from '@/i18n';
 import { ISSUE_IDS } from '@/issues/types/constants';
 import { useModal } from '@/modal/actions';
@@ -65,14 +67,13 @@ export const DangerActionDialog: FunctionComponent<DangerActionPanelProps> = (
           </>
         }
       >
-        <Form.Group>
-          <Form.Control
-            as="textarea"
+        <FormField>
+          <BaseTextField
             rows={3}
             value={reason}
             onChange={(event) => setReason(event.target.value)}
           />
-        </Form.Group>
+        </FormField>
       </ModalDialog>
     </form>
   ) : (
