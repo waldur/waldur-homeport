@@ -158,7 +158,12 @@ const PendingAttachments: FC<{
   return (
     <div className="tc-pending-attachments">
       {files.map((file, i) => (
-        <Tag key={`${file.name}-${i}`} size="sm" onClear={() => onRemove(i)}>
+        <Tag
+          key={`${file.name}-${i}`}
+          size="sm"
+          onClear={() => onRemove(i)}
+          clearLabel={translate('Remove {value}', { value: file.name })}
+        >
           {previews[i] ? (
             <Image src={previews[i] as string} size={20} classes="me-1" />
           ) : (

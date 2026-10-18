@@ -50,6 +50,7 @@ export const SetLocationButton: FC<SetLocationButtonProps> = ({ customer }) => {
   return (
     <CompactEditButton
       variant="secondary"
+      fieldName={translate('Location')}
       onClick={() => {
         openDialog(SetLocationDialog, {
           resolve: {

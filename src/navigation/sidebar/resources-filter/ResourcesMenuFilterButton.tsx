@@ -29,34 +29,21 @@ export const ResourcesMenuFilterButton = () => {
   }, [filters]);
 
   const { openDialog } = useModal();
-  const callback = (e) => {
+  const callback = () => {
     openDialog(FilterByOrgAndProjectDialog, {
       size: 'sm',
       initialValues: values,
     });
-    e.stopPropagation();
   };
   return (
     <Tooltip label={translate('Filter resources')}>
-      {/* A plain <span>, not <button>: this renders inside
-          SidebarMenuAccordion's `badge` slot, which sits inside the
-          accordion header's own real <button> (Collapsible.Trigger). A
-          nested <button> there would be invalid HTML, silently reparented
-          by the browser's parser. `stopPropagation` (already needed
-          regardless, so this button's own click doesn't also toggle the
-          accordion) plus explicit role/tabIndex/onKeyDown restore the same
-          keyboard reachability a native <button> gave for free. */}
-      <span
-        role="button"
-        tabIndex={0}
+      {/* A real button: it is rendered through SidebarMenuAccordion's
+          `action` slot, beside the accordion trigger rather than inside it,
+          so it no longer has to fake one with a span. */}
+      <button
+        type="button"
         className="relative flex size-6 shrink-0 items-center justify-center rounded text-[var(--nav-item-icon)] hover:bg-[var(--nav-item-hover-bg)]"
         onClick={callback}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            callback(e);
-          }
-        }}
         aria-label={translate('Filter resources')}
       >
         <FunnelSimpleIcon size={18} weight="bold" />
@@ -68,7 +55,7 @@ export const ResourcesMenuFilterButton = () => {
             className="me-n2 mt-2 border border-2"
           />
         )}
-      </span>
+      </button>
     </Tooltip>
   );
 };

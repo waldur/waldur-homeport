@@ -44,7 +44,8 @@
   --progress-label-neutral: #ffffff;
   --progress-label-purple: #ffffff;
   --progress-label-blue: var(--color-gray-900);
-  --progress-label-indigo: var(--color-gray-900);
+  /* gray-900 reads 4.4:1 on indigo-500; Badge's solid tone needs 4.5. */
+  --progress-label-indigo: var(--color-gray-950);
   --progress-label-moss: var(--color-gray-900);
   --progress-label-pink: var(--color-gray-900);
   --progress-label-teal: var(--color-gray-900);

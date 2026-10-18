@@ -123,6 +123,7 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
       )}
       <div>
         <BaseButton
+          tooltip={translate('Add')}
           onClick={addRow}
           iconNode={<PlusCircleIcon weight="bold" />}
           variant="tertiary"

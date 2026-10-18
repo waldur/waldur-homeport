@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
+import { ButtonHTMLAttributes, forwardRef, ReactNode, useId } from 'react';
 
 import { cn } from '../cn';
 import { LoadingSpinner } from '../LoadingSpinner';
@@ -63,7 +63,9 @@ export const buttonVariants = cva(
           'focus-visible:bg-[var(--btn-tertiary-bg-hover)] focus-visible:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus-visible:[outline-offset:0px]',
           'disabled:bg-transparent disabled:text-[var(--btn-disabled-text)] data-disabled:bg-transparent data-disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
-        // danger, warning, success switch text to high-contrast white on active press.
+        // danger, warning, success switch text to --btn-pressed-text-on-vivid on
+        // active press: white on the dark light-theme fills, dark on the light
+        // dark-theme fills.
         danger: [
           'shadow-[inset_0_0_0_1px_var(--btn-danger-border)]',
           'bg-[var(--btn-danger-bg)] text-[var(--btn-danger-text)]',
@@ -232,6 +234,20 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
     const isDisabled = disabled || pending;
     const effectiveTooltip = isDisabled ? (disabledReason ?? tooltip) : tooltip;
     const isIconOnly = !label && !!iconNode;
+    // The tooltip names an icon-only button whether or not it is disabled;
+    // the disabled reason only stands in for a missing tooltip. Otherwise the
+    // reason is the button's description, so a screen reader hears "Remove,
+    // At least two options are required" rather than the reason alone.
+    const ariaLabel = label
+      ? undefined
+      : (tooltip ?? (isDisabled ? disabledReason : undefined));
+    const reasonId = useId();
+    const describesReason =
+      isDisabled && !!disabledReason && disabledReason !== ariaLabel;
+    const describedBy =
+      [rest['aria-describedby'], describesReason ? reasonId : undefined]
+        .filter(Boolean)
+        .join(' ') || undefined;
 
     const iconElement = iconNode && (
       <span
@@ -257,13 +273,18 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
         disabled={isDisabled}
         data-disabled={isDisabled ? '' : undefined}
         form={form}
-        aria-label={
-          !label && typeof effectiveTooltip === 'string'
-            ? effectiveTooltip
-            : undefined
-        }
+        aria-label={ariaLabel}
         {...rest}
+        aria-describedby={describedBy}
       >
+        {describesReason && (
+          // Inside the button so BaseButton stays a single element for
+          // Radix `asChild`; aria-hidden keeps it out of the name computed
+          // from the content, and aria-describedby still reads hidden text.
+          <span id={reasonId} className="sr-only" aria-hidden="true">
+            {disabledReason}
+          </span>
+        )}
         {pending && (
           <LoadingSpinner
             // Offsets the default gap so the spinner sits closer to the label.

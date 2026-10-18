@@ -132,6 +132,7 @@ export const AdminCategoriesPage: FunctionComponent<
                       {translate('Error in fetching groups')}
                     </span>
                     <BaseButton
+                      tooltip={translate('Refresh')}
                       onClick={() => refetch()}
                       iconNode={<ArrowsClockwiseIcon weight="bold" />}
                       variant="secondary"

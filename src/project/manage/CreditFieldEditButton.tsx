@@ -10,10 +10,12 @@ const EditCreditFieldDialog = lazyComponent(() =>
   })),
 );
 
-export const CreditFieldEditButton = (props: EditProjectCreditProps) => {
+export const CreditFieldEditButton = (
+  props: EditProjectCreditProps & { label: string },
+) => {
   const { openDialog } = useModal();
   const callback = () => {
     openDialog(EditCreditFieldDialog, { resolve: props });
   };
-  return <CompactEditButton onClick={callback} />;
+  return <CompactEditButton onClick={callback} fieldName={props.label} />;
 };

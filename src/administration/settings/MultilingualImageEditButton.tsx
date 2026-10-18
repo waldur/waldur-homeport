@@ -13,11 +13,13 @@ const MultilingualImageEditDialog = lazyComponent(() =>
 interface MultilingualImageEditButtonProps {
   item: { key: string; description: string; type: string };
   value: Record<string, string>;
+  tooltip: string;
 }
 
 export const MultilingualImageEditButton = ({
   item,
   value,
+  tooltip,
 }: MultilingualImageEditButtonProps) => {
   const { openDialog } = useModal();
   const openFormDialog = useCallback(
@@ -29,5 +31,5 @@ export const MultilingualImageEditButton = ({
     [item, value],
   );
 
-  return <CompactEditButton onClick={openFormDialog} />;
+  return <CompactEditButton onClick={openFormDialog} tooltip={tooltip} />;
 };

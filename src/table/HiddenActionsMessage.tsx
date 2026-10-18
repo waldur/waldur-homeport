@@ -39,6 +39,7 @@ export const HiddenActionsMessage: FunctionComponent<
       </div>
       <div className="ms-auto">
         <BaseButton
+          tooltip={translate('Dismiss')}
           variant="text-secondary"
           size="sm"
           onClick={close}

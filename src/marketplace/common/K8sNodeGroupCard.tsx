@@ -106,6 +106,7 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
         </Badge>
         {canRemove && (
           <BaseButton
+            tooltip={translate('Remove')}
             variant="danger"
             onClick={onRemove}
             iconNode={<TrashIcon weight="bold" />}

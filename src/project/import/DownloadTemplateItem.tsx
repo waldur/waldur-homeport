@@ -3,6 +3,8 @@ import { FC } from 'react';
 
 import { BaseButton } from 'waldur-ui';
 
+import { translate } from '@/i18n';
+
 interface DownloadTemplateItemProps {
   name: string;
   size?: string;
@@ -27,6 +29,7 @@ export const DownloadTemplateItem: FC<DownloadTemplateItemProps> = (props) => {
       </div>
       <div>
         <BaseButton
+          tooltip={translate('Download')}
           onClick={props.onClick}
           iconNode={<DownloadSimpleIcon weight="bold" />}
           iconRight

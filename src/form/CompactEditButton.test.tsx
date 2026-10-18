@@ -5,14 +5,20 @@ import { CompactEditButton } from './CompactEditButton';
 
 describe('CompactEditButton', () => {
   it('renders default icon when no iconNode is provided', () => {
-    render(<CompactEditButton onClick={() => {}} />);
+    render(<CompactEditButton onClick={() => {}} aria-label="Edit name" />);
     expect(screen.getByRole('button')).toBeInTheDocument();
     expect(screen.getByTestId('compact-edit-button')).toBeInTheDocument();
   });
 
   it('renders custom iconNode when provided', () => {
     const customIcon = <div data-testid="custom-compact-icon">Lock</div>;
-    render(<CompactEditButton onClick={() => {}} iconNode={customIcon} />);
+    render(
+      <CompactEditButton
+        onClick={() => {}}
+        iconNode={customIcon}
+        aria-label="Edit name"
+      />,
+    );
 
     expect(screen.getByTestId('custom-compact-icon')).toBeInTheDocument();
     expect(screen.getByTestId('compact-edit-button')).toBeInTheDocument();
@@ -22,6 +28,31 @@ describe('CompactEditButton', () => {
     render(<CompactEditButton onClick={() => {}} tooltip="Edit this field" />);
     expect(
       screen.getByRole('button', { name: /Edit this field/i }),
+    ).toBeInTheDocument();
+  });
+
+  it('names itself after fieldName', () => {
+    render(<CompactEditButton onClick={() => {}} fieldName="Email" />);
+    expect(
+      screen.getByRole('button', { name: 'Edit Email' }),
+    ).toBeInTheDocument();
+  });
+
+  it('falls back to "Edit" when fieldName is not text', () => {
+    render(<CompactEditButton onClick={() => {}} fieldName={<b>Email</b>} />);
+    expect(screen.getByRole('button', { name: 'Edit' })).toBeInTheDocument();
+  });
+
+  it('prefers an explicit tooltip over fieldName', () => {
+    render(
+      <CompactEditButton
+        onClick={() => {}}
+        fieldName="Email"
+        tooltip="Change email"
+      />,
+    );
+    expect(
+      screen.getByRole('button', { name: 'Change email' }),
     ).toBeInTheDocument();
   });
 });

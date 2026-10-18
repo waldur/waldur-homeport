@@ -153,6 +153,7 @@ export const FieldsListGroup = ({
               </h6>
               <div className="card-toolbar m-0">
                 <BaseButton
+                  tooltip={translate('Remove')}
                   onClick={() => removeRow(i)}
                   iconNode={<TrashIcon weight="bold" />}
                   variant="text-danger"

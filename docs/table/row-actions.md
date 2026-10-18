@@ -113,6 +113,8 @@ const ExpandableRowContent = ({ row }) => (
 />;
 ```
 
+The caret in the first visible column is a real button: it takes keyboard focus, exposes `aria-expanded`, controls the details cell (`aria-controls`) while it is open, and is named "Expand"/"Collapse" plus that cell's text ("Expand Web server"). Make the first visible column one that identifies the row, such as its name. Clicking anywhere else on the row still toggles it.
+
 ### Conditional Expandability (`isRowExpandable`)
 
 By default, all rows display carets if `expandableRow` is present. Disable card expansion for specific rows using `isRowExpandable`:

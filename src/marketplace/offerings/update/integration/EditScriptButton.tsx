@@ -39,5 +39,5 @@ export const EditScriptButton: FunctionComponent<ScriptEditorProps> = (
       });
     }
   };
-  return <CompactEditButton onClick={callback} />;
+  return <CompactEditButton onClick={callback} fieldName={props.label} />;
 };

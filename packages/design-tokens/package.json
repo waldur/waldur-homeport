@@ -9,6 +9,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./contrast": "./src/contrast.ts",
+    "./test-support/theme-tokens": "./src/themeTokens.ts",
     "./react": "./src/react.ts",
     "./index.css": "./src/css/index.css",
     "./fonts.css": "./src/css/fonts.css",

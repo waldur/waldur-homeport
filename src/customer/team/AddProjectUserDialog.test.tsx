@@ -125,13 +125,16 @@ describe('AddProjectUserDialog', () => {
 
       await fillForm(user);
 
-      expect(
-        await screen.findByText(
-          'User already has this role in this scope. Update their existing role instead.',
-        ),
-      ).toBeInTheDocument();
+      const reason =
+        'User already has this role in this scope. Update their existing role instead.';
+      // Shown in the alert, and the disabled submit button carries it as
+      // its accessible description.
+      expect(await screen.findAllByText(reason)).not.toHaveLength(0);
       await waitFor(() =>
         expect(screen.getByTestId('submit-button')).toBeDisabled(),
+      );
+      expect(screen.getByTestId('submit-button')).toHaveAccessibleDescription(
+        reason,
       );
     });
 

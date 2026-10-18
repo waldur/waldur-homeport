@@ -140,7 +140,13 @@ const AffiliationsEditButton: FC<{ customer }> = ({ customer }) => {
       size: 'lg',
     });
   }, [customer, refresh, openDialog]);
-  return <CompactEditButton onClick={onClick} variant="secondary" />;
+  return (
+    <CompactEditButton
+      onClick={onClick}
+      variant="secondary"
+      fieldName={translate('Available affiliations')}
+    />
+  );
 };
 
 const BasicInfoTab: FC<CustomerEditPanelProps> = (props) => {
@@ -294,6 +300,7 @@ const SettingsTab: FC<CustomerEditPanelProps> = (props) => {
                 <StaffOnlyIndicator />
                 <CompactEditButton
                   variant="secondary"
+                  fieldName={translate('Project metadata schema')}
                   onClick={() =>
                     openDialog(EditCustomerChecklistDialog, {
                       resolve: {

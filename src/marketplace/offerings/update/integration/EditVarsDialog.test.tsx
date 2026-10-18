@@ -59,7 +59,7 @@ describe('EditVarsDialog', () => {
   it('removes a variable row when clicking delete button', async () => {
     const user = userEvent.setup();
     renderDialog();
-    const removeButton = screen.getByRole('button', { name: '' }); // CompactActionButton with XIcon
+    const removeButton = screen.getByRole('button', { name: 'Remove' });
     await user.click(removeButton);
 
     expect(screen.queryByDisplayValue('VAR1')).not.toBeInTheDocument();

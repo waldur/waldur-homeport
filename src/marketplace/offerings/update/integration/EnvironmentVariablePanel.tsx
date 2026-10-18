@@ -44,6 +44,7 @@ export const EnvironmentVariablePanel: FC<EnvironmentVariablePanelProps> = ({
       </td>
       <td>
         <BaseButton
+          tooltip={translate('Remove')}
           variant="text-danger"
           onClick={() => onRemove(index)}
           iconNode={<XIcon weight="bold" />}

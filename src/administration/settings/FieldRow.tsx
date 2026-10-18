@@ -55,8 +55,8 @@ const MultilingualImageField = ({
   </div>
 );
 
-const CountryListEditButton = ({ onEdit }) => (
-  <CompactEditButton onClick={onEdit} />
+const CountryListEditButton = ({ onEdit, tooltip }) => (
+  <CompactEditButton onClick={onEdit} tooltip={tooltip} />
 );
 
 const LoginPageListField = ({
@@ -120,16 +120,22 @@ export const FieldRow = ({
   editDisabledReason,
 }: FieldRowProps) => {
   const canEdit = Boolean(useUser()?.is_staff);
+  const editLabel = translate('Edit {name}', { name: getKeyTitle(item.key) });
   const actions = !canEdit ? undefined : item.type === 'country_list_field' ? (
-    <CountryListEditButton onEdit={onEdit} />
+    <CountryListEditButton onEdit={onEdit} tooltip={editLabel} />
   ) : item.type === 'multilingual_image_field' ? (
-    <MultilingualImageEditButton item={item} value={value} />
+    <MultilingualImageEditButton
+      item={item}
+      value={value}
+      tooltip={editLabel}
+    />
   ) : item.type === 'json_list_field' ? (
-    <CompactEditButton onClick={onEdit} />
+    <CompactEditButton onClick={onEdit} tooltip={editLabel} />
   ) : (
     <ConfigurationEditButton
       item={item}
       value={value}
+      tooltip={editLabel}
       disabledReason={editDisabledReason}
     />
   );

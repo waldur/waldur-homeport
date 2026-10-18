@@ -1,6 +1,7 @@
 import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 
 import { CompactEditButton } from '@/form/CompactEditButton';
+import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
 import { EditOrderFieldDialog } from './EditOrderFieldDialog';
@@ -32,5 +33,16 @@ export const OrderFieldEditButton = (props: OrderFieldEditButtonProps) => {
     });
   };
 
-  return <CompactEditButton onClick={callback} disabled={props.disabled} />;
+  return (
+    <CompactEditButton
+      onClick={callback}
+      disabled={props.disabled}
+      fieldName={
+        props.title ??
+        (props.name === 'start_date'
+          ? translate('Start date')
+          : translate('Limits'))
+      }
+    />
+  );
 };

@@ -10615,7 +10615,7 @@
   },
   "Clear selection": {
     "context": {
-      "feature_area": "details"
+      "feature_area": "join-organization"
     }
   },
   "Clear termination date": {
@@ -10947,6 +10947,11 @@
   "Collaborative (Grant)": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Collapse": {
+    "context": {
+      "feature_area": "table"
     }
   },
   "Collapse all rows": {
@@ -12764,6 +12769,16 @@
   "Copy without organization": {
     "context": {
       "feature_area": "hygiene"
+    }
+  },
+  "Copy {value}": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "resource"
     }
   },
   "Core Components": {
@@ -20624,6 +20639,11 @@
       "feature_area": "call"
     }
   },
+  "Expand": {
+    "context": {
+      "feature_area": "table"
+    }
+  },
   "Expand all rows": {
     "context": {
       "feature_area": "table"
@@ -24651,6 +24671,7 @@
       "feature_area": "offering-merges"
     }
   },
+  "How many messages the !ticket bot command reads as its context: the latest of its thread, or the replied-to message and those before it.": {},
   "How many minutes before scheduled maintenance users should be notified.": {},
   "How many proposals will I need to review?": {
     "context": {
@@ -31568,6 +31589,7 @@
       "feature_area": "DatePicker"
     }
   },
+  "Minutes a support ticket draft made by the !ticket bot command can be sent before it expires; its content is then erased.": {},
   "Minutes the announcement banner stays visible after maintenance completes": {},
   "Mirrors a membership in SURF Research Access Management (SRAM). Changes made here are overwritten by the next SRAM push.": {},
   "Miss": {
@@ -45034,7 +45056,7 @@
   },
   "Refresh": {
     "context": {
-      "feature_area": "common"
+      "feature_area": "offering"
     }
   },
   "Refresh is available when the room is active — no history exports can be produced in the current state.": {
@@ -45924,7 +45946,8 @@
         "value": {
           "type": "unknown"
         }
-      }
+      },
+      "feature_area": "chat"
     }
   },
   "Removed": {
@@ -50493,6 +50516,16 @@
       "feature_area": "layouts"
     }
   },
+  "Scroll tabs left": {
+    "context": {
+      "feature_area": "navigation"
+    }
+  },
+  "Scroll tabs right": {
+    "context": {
+      "feature_area": "navigation"
+    }
+  },
   "Scrypt salt for per-IP user_slug derivation. Empty disables slug computation (interactions are written without it).": {},
   "Search": {
     "context": {
@@ -53251,9 +53284,19 @@
       "feature_area": "reports"
     }
   },
+  "Show as chart": {
+    "context": {
+      "feature_area": "tos"
+    }
+  },
   "Show as limit of": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Show as table": {
+    "context": {
+      "feature_area": "tos"
     }
   },
   "Show available bot commands": {},
@@ -67109,6 +67152,11 @@
   "Upload file": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Upload files": {
+    "context": {
+      "feature_area": "upload"
     }
   },
   "Upload offering file": {

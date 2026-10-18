@@ -59,6 +59,36 @@ describe('Tag', () => {
     expect(onClear).toHaveBeenCalled();
   });
 
+  it('names the clear button after a text tag', () => {
+    render(<Tag onClear={vi.fn()}>Finland</Tag>);
+
+    expect(
+      screen.getByRole('button', { name: 'Remove Finland' }),
+    ).toBeInTheDocument();
+  });
+
+  it('takes an explicit clear label for rich content', () => {
+    render(
+      <Tag onClear={vi.fn()} clearLabel="Remove report.pdf">
+        <span>icon</span>report.pdf
+      </Tag>,
+    );
+
+    expect(
+      screen.getByRole('button', { name: 'Remove report.pdf' }),
+    ).toBeInTheDocument();
+  });
+
+  it('falls back to "Remove" for rich content without a label', () => {
+    render(
+      <Tag onClear={vi.fn()}>
+        <b>Bold</b>
+      </Tag>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Remove' })).toBeInTheDocument();
+  });
+
   it('does not render clear button when onClear is not provided', () => {
     render(<Tag>No Clear Tag</Tag>);
 

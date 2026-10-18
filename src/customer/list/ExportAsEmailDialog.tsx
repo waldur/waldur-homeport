@@ -152,6 +152,7 @@ const renderEmails = ({ fields }: any) => (
         </Col>
         <Col sm={2}>
           <BaseButton
+            tooltip={translate('Remove')}
             variant="danger"
             onClick={() => fields.remove(index)}
             iconNode={<TrashIcon weight="bold" />}

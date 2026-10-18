@@ -12,6 +12,7 @@ import enforceFeaturedIcon from './rules/enforce-featured-icon.js';
 import enforceNoResultWithCta from './rules/enforce-noresult-with-cta.js';
 import enforcePhosphorIconWeight from './rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './rules/enforce-render-field-or-dash.js';
+import iconButtonNeedsAccessibleName from './rules/icon-button-needs-accessible-name.js';
 import noBootstrapBorderWithTailwindColor from './rules/no-bootstrap-border-with-tailwind-color.js';
 import noBootstrapButtonMarkup from './rules/no-bootstrap-button-markup.js';
 import noBootstrapColorUtility from './rules/no-bootstrap-color-utility.js';
@@ -79,6 +80,7 @@ export default {
     'no-interactive-in-tab-trigger': noInteractiveInTabTrigger,
     'no-tooltip-on-bare-icon': noTooltipOnBareIcon,
     'check-needs-accessible-name': checkNeedsAccessibleName,
+    'icon-button-needs-accessible-name': iconButtonNeedsAccessibleName,
     'enforce-phosphor-icon-weight': enforcePhosphorIconWeight,
     'prefer-classnames-utility': preferClassnamesUtility,
     'enforce-render-field-or-dash': enforceRenderFieldOrDash,

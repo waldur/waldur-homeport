@@ -144,6 +144,11 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
           />
 
           <BaseButton
+            tooltip={
+              mode === 'chart'
+                ? translate('Show as table')
+                : translate('Show as chart')
+            }
             variant="tertiary"
             onClick={() =>
               setMode((prev) => (prev === 'chart' ? 'table' : 'chart'))

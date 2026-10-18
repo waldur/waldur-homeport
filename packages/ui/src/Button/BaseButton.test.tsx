@@ -131,6 +131,74 @@ describe('BaseButton icon-only aria-label fallback', () => {
     const button = screen.getByRole('button', { name: 'Add' });
     expect(button).not.toHaveAttribute('aria-label');
   });
+
+  it('keeps the tooltip as the name while disabled and describes the reason', () => {
+    render(
+      <BaseButton
+        tooltip="Remove"
+        disabled
+        disabledReason="At least two options are required"
+        iconNode={<span>x</span>}
+      />,
+    );
+    const button = screen.getByRole('button', { name: 'Remove' });
+    expect(button).toHaveAccessibleDescription(
+      'At least two options are required',
+    );
+  });
+
+  it('names a disabled icon-only button by its reason when it has no tooltip', () => {
+    render(
+      <BaseButton disabled disabledReason="Busy" iconNode={<span>x</span>} />,
+    );
+    const button = screen.getByRole('button', { name: 'Busy' });
+    expect(button).not.toHaveAttribute('aria-describedby');
+  });
+
+  it('describes the reason on a labelled button without changing its name', () => {
+    render(
+      <BaseButton
+        label="Edit"
+        disabled
+        disabledReason="Profile editing is currently disabled"
+      />,
+    );
+    const button = screen.getByRole('button', { name: 'Edit' });
+    expect(button).toHaveAccessibleDescription(
+      'Profile editing is currently disabled',
+    );
+  });
+
+  it('merges a caller aria-describedby with the reason', () => {
+    render(
+      <>
+        <span id="hint">Saved per project</span>
+        <BaseButton
+          tooltip="Remove"
+          disabled
+          disabledReason="Locked"
+          aria-describedby="hint"
+          iconNode={<span>x</span>}
+        />
+      </>,
+    );
+    expect(
+      screen.getByRole('button', { name: 'Remove' }),
+    ).toHaveAccessibleDescription('Saved per project Locked');
+  });
+
+  it('adds no description while enabled', () => {
+    render(
+      <BaseButton
+        tooltip="Remove"
+        disabledReason="Locked"
+        iconNode={<span>x</span>}
+      />,
+    );
+    expect(screen.getByRole('button', { name: 'Remove' })).not.toHaveAttribute(
+      'aria-describedby',
+    );
+  });
 });
 
 describe('BaseButton ref and prop passthrough', () => {

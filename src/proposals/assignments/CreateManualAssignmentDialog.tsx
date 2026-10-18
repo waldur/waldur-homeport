@@ -10,7 +10,7 @@ import {
   proposalProtectedCallsCreateManualAssignment,
 } from 'waldur-js-client';
 
-import { AlertItem, Tag, Tooltip } from 'waldur-ui';
+import { AlertItem, getRemoveLabel, Tag, Tooltip } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { SubmitButton, StringGroup, SelectGroup } from '@/form';
@@ -25,7 +25,10 @@ import { Call } from '../types';
 import { getWorkloadLimitMessage } from './workloadLimit';
 
 const TruncatedMultiValue = (props: any) => (
-  <Tag onClear={props.removeProps.onClick}>
+  <Tag
+    onClear={props.removeProps.onClick}
+    clearLabel={getRemoveLabel(props.selectProps.getOptionLabel(props.data))}
+  >
     <span
       className="truncate inline-block align-bottom"
       style={{ maxWidth: 260 }}

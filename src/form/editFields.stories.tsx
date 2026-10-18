@@ -24,7 +24,11 @@ import { BooleanEditField, EditFieldProvider } from './editFields';
  */
 const meta: Meta = {
   title: 'Forms/Edit fields/Boolean',
-  parameters: { layout: 'padded' },
+  parameters: {
+    layout: 'padded',
+    // Fails the storybook test run on any axe violation.
+    a11y: { test: 'error' },
+  },
 };
 export default meta;
 

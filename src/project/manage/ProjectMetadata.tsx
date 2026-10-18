@@ -146,6 +146,7 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
               )}
               actions={
                 <CompactEditButton
+                  fieldName={translate('Science domain')}
                   onClick={() =>
                     openDialog(EditScienceDomainDialog, {
                       resolve: { project },

@@ -3,6 +3,7 @@ import { Offering } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
+import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
@@ -44,6 +45,16 @@ export const OfferingMediaButton: FC<{
         customerId: customer.uuid,
       }))
   )
-    return <CompactEditButton onClick={callback} variant="secondary" />;
+    return (
+      <CompactEditButton
+        onClick={callback}
+        variant="secondary"
+        fieldName={
+          props.mediaType === 'thumbnail'
+            ? translate('Logo')
+            : translate('Image')
+        }
+      />
+    );
   return null;
 };

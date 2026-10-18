@@ -148,6 +148,7 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
                   <>
                     <StaffOnlyIndicator />
                     <CompactEditButton
+                      fieldName={row.label}
                       onClick={() =>
                         openDialog(AdjustWithdrawableDialog, {
                           resolve: { credit: creditData, refetch },
@@ -162,6 +163,7 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
                       <CreditFieldEditButton
                         credit={creditData}
                         name={row.key}
+                        label={row.label}
                         disabled={row.disabled}
                       />
                     </>

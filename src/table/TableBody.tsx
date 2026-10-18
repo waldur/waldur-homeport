@@ -10,6 +10,7 @@ import React, {
   FunctionComponent,
   memo,
   useCallback,
+  useId,
   useMemo,
   useState,
 } from 'react';
@@ -79,6 +80,15 @@ const RowActionsCell = ({
     ? (rowActions as (props: { row; fetch }) => React.ReactNode)({ row, fetch })
     : React.createElement(rowActions, { row, fetch });
 
+interface RowExpander {
+  canExpand: boolean;
+  isExpanded: boolean;
+  /** Toggles the row; the expander button calls it. */
+  onToggle: () => void;
+  /** Id of the details cell, which the button controls while it is shown. */
+  detailsId: string;
+}
+
 interface TableCellsProps {
   row;
   columns: TableProps['columns'];
@@ -87,10 +97,7 @@ interface TableCellsProps {
   hasOptionalColumns: TableProps['hasOptionalColumns'];
   pinnedColumns: PinnedColumns;
   pinnedOffsets: PinnedOffsets;
-  expander?: {
-    canExpand: boolean;
-    isExpanded: boolean;
-  };
+  expander?: RowExpander;
   hasLeadingCheckbox?: boolean;
 }
 
@@ -195,15 +202,18 @@ const TableCell = memo(
     column: Column;
     row;
     isFirstColumn?: boolean;
-    expander?: {
-      canExpand: boolean;
-      isExpanded: boolean;
-    };
+    expander?: RowExpander;
     hasLeadingCheckbox?: boolean;
     pinned?: boolean;
     shadow?: boolean | 'start' | 'end';
     pinOffset?: { left: number; right: number };
   }) => {
+    // Derived from the row's details id rather than useId: only the first
+    // cell of an expandable row uses them, and a hook per cell is wasted on
+    // every other cell of every table.
+    const labelId = expander ? `${expander.detailsId}-label` : undefined;
+    const toggleTextId = expander ? `${expander.detailsId}-toggle` : undefined;
+
     // Skip rendering if column is not visible
     if (column.visible === false) {
       return null;
@@ -241,25 +251,35 @@ const TableCell = memo(
       : undefined;
 
     // Nothing to copy (a dash, "not assigned"): no copy button either.
-    const content =
-      column.copyField && valueToCopy !== '' && valueToCopy != null ? (
-        <>
-          <div className="with-copy flex items-center gap-1">
-            <div className="td-data">{renderedContent}</div>
-            <CopyToClipboardButton value={valueToCopy} />
+    const hasCopy =
+      Boolean(column.copyField) && valueToCopy !== '' && valueToCopy != null;
+    // The expander is named after this cell's own text ("Expand Web
+    // server"). The id goes on `.td-data` when the cell has one, so the copy
+    // and filter buttons beside the text stay out of the name.
+    const hasExpander = isFirstColumn && expander?.canExpand;
+    const dataId = hasExpander && (hasCopy || hasFilter) ? labelId : undefined;
+    const content = hasCopy ? (
+      <>
+        <div className="with-copy flex items-center gap-1">
+          <div className="td-data" id={dataId}>
+            {renderedContent}
           </div>
-          {hasFilter && <InlineFilterButton column={column} row={row} />}
-        </>
-      ) : (
-        <>
-          {hasFilter ? (
-            <div className="td-data">{renderedContent}</div>
-          ) : (
-            renderedContent
-          )}
-          {hasFilter && <InlineFilterButton column={column} row={row} />}
-        </>
-      );
+          <CopyToClipboardButton value={valueToCopy} />
+        </div>
+        {hasFilter && <InlineFilterButton column={column} row={row} />}
+      </>
+    ) : (
+      <>
+        {hasFilter ? (
+          <div className="td-data" id={dataId}>
+            {renderedContent}
+          </div>
+        ) : (
+          renderedContent
+        )}
+        {hasFilter && <InlineFilterButton column={column} row={row} />}
+      </>
+    );
 
     const handleClick = column.disabledClick
       ? (e: React.MouseEvent) => e.stopPropagation()
@@ -284,18 +304,43 @@ const TableCell = memo(
             }}
           >
             {expander.canExpand && (
-              <span
+              // A real button, so the row opens from the keyboard too. A
+              // click on it is ignored by the row's own handler (which skips
+              // buttons) and toggles here instead; a click anywhere else on
+              // the row still toggles it as before.
+              <button
+                type="button"
                 data-testid="row-expander"
-                className={classNames({ active: expander.isExpanded })}
+                className={classNames(
+                  'inline-flex size-[24px] shrink-0 items-center justify-center rounded border-0 bg-transparent p-0 text-inherit',
+                  { active: expander.isExpanded },
+                )}
+                aria-expanded={expander.isExpanded}
+                aria-controls={
+                  expander.isExpanded ? expander.detailsId : undefined
+                }
+                aria-labelledby={`${toggleTextId} ${labelId}`}
+                onClick={expander.onToggle}
               >
+                <span id={toggleTextId} className="sr-only">
+                  {expander.isExpanded
+                    ? translate('Collapse')
+                    : translate('Expand')}
+                </span>
                 <CaretDownIcon
                   size={20}
                   weight="bold"
                   className="rotate-toggle-180"
+                  aria-hidden="true"
                 />
-              </span>
+              </button>
             )}
-            <div style={{ minWidth: 0, flex: '1 1 auto' }}>{content}</div>
+            <div
+              id={hasExpander && !dataId ? labelId : undefined}
+              style={{ minWidth: 0, flex: '1 1 auto' }}
+            >
+              {content}
+            </div>
           </div>
         </td>
       );
@@ -401,6 +446,8 @@ interface TableRowProps {
   fieldProps?: { input; meta };
   rowError?: string | string[];
   isRowExpandable?: (row: any) => boolean;
+  /** Id of this row's details cell, for the expander's aria-controls. */
+  detailsId?: string;
 }
 
 const TableRow = memo<TableRowProps>(
@@ -428,6 +475,7 @@ const TableRow = memo<TableRowProps>(
     fieldProps,
     rowError,
     isRowExpandable,
+    detailsId,
   }) => {
     const isRowSelected = useMemo(() => {
       if (!selectedRows) return false;
@@ -478,6 +526,22 @@ const TableRow = memo<TableRowProps>(
 
     const canExpand = expandableRow && (isRowExpandable?.(row) ?? true);
     const isExpanded = Boolean(canExpand && toggled[getId(row, rowIndex)]);
+    const toggleExpanded = useCallback(
+      () => onRowClick(row, rowIndex),
+      [onRowClick, row, rowIndex],
+    );
+    const expander = useMemo(
+      () =>
+        expandableRow
+          ? {
+              canExpand: Boolean(canExpand),
+              isExpanded,
+              onToggle: toggleExpanded,
+              detailsId,
+            }
+          : undefined,
+      [expandableRow, canExpand, isExpanded, toggleExpanded, detailsId],
+    );
 
     return (
       <tr
@@ -554,14 +618,7 @@ const TableRow = memo<TableRowProps>(
           hasOptionalColumns={hasOptionalColumns}
           pinnedColumns={pinnedColumns}
           pinnedOffsets={pinnedOffsets}
-          expander={
-            expandableRow
-              ? {
-                  canExpand,
-                  isExpanded,
-                }
-              : undefined
-          }
+          expander={expander}
           hasLeadingCheckbox={Boolean(enableMultiSelect || fieldType)}
         />
 
@@ -655,6 +712,8 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
     pinnedOffsets = {},
     isRowExpandable,
   }) => {
+    // Several tables can share a page, so each prefixes its details ids.
+    const detailsIdPrefix = useId();
     const columnsMap = useMemo(
       () =>
         columns.reduce(
@@ -726,6 +785,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
           fieldProps={fieldProps}
           rowError={rowError}
           isRowExpandable={isRowExpandable}
+          detailsId={`${detailsIdPrefix}-details-${rowIndex}`}
         />
       ),
       // Note: rowActions is intentionally excluded from dependencies
@@ -749,6 +809,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
         pinnedOffsets,
         onRowClick,
         onChangeField,
+        detailsIdPrefix,
       ],
     );
 
@@ -782,6 +843,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
                       (rowActions ? 1 : 0) +
                       (enableMultiSelect || fieldType ? 1 : 0)
                     }
+                    id={`${detailsIdPrefix}-details-${rowIndex}`}
                     className={expandableRowClassName}
                     data-testid="expanded-row-cell"
                   >

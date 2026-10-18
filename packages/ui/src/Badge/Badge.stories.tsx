@@ -57,6 +57,8 @@ const meta: Meta<typeof Badge> = {
     onlyIcon: false,
   },
   parameters: {
+    // Fails the storybook test run on any axe violation.
+    a11y: { test: 'error' },
     docs: {
       description: {
         component:
@@ -80,7 +82,7 @@ export const VariantToneMatrix: Story = {
     <div className="p-6 bg-[var(--page-bg)] space-y-6">
       {TONES.map((tone) => (
         <div key={tone}>
-          <h4 className="text-xs uppercase font-mono text-quinary mb-3">
+          <h4 className="text-xs uppercase font-mono text-quaternary mb-3">
             Tone: {tone}
           </h4>
           <div className="flex flex-wrap gap-2">
@@ -397,7 +399,9 @@ export const CountersAndOverflow: Story = {
           Constrained Container & Text Truncation
         </h5>
         <div className="w-48 p-3 border rounded bg-white dark:bg-neutral-900 flex flex-col gap-2">
-          <span className="text-xs text-quinary">Container width: 192px</span>
+          <span className="text-xs text-quaternary">
+            Container width: 192px
+          </span>
           <Badge
             variant="secondary"
             tone="outline"

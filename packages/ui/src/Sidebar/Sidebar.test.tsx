@@ -397,6 +397,41 @@ describe('SidebarMenuAccordion', () => {
     expect(trigger).toHaveAttribute('aria-expanded', 'false');
   });
 
+  it('renders an action beside the trigger, not inside it', async () => {
+    const user = userEvent.setup();
+    const onFilter = vi.fn();
+    render(
+      <SidebarMenuAccordion
+        title="Resources"
+        action={
+          <button
+            type="button"
+            aria-label="Filter resources"
+            onClick={onFilter}
+          >
+            F
+          </button>
+        }
+      >
+        <li>Resources content</li>
+      </SidebarMenuAccordion>,
+    );
+
+    const trigger = screen.getByRole('button', { name: 'Resources' });
+    const filter = screen.getByRole('button', { name: 'Filter resources' });
+    // No interactive nesting (axe nested-interactive).
+    expect(trigger).not.toContainElement(filter);
+
+    await user.click(filter);
+    expect(onFilter).toHaveBeenCalledTimes(1);
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
+
+    // Both are reachable from the keyboard, the trigger first.
+    trigger.focus();
+    await user.tab();
+    expect(filter).toHaveFocus();
+  });
+
   it('renders a disabled accordion as static header-only markup', () => {
     render(
       <SidebarMenuAccordion title="Resources" disabled>
@@ -407,6 +442,21 @@ describe('SidebarMenuAccordion', () => {
     expect(screen.getByText('Resources')).toBeInTheDocument();
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
     expect(screen.queryByText('Resources content')).not.toBeInTheDocument();
+  });
+
+  it('keeps no gap for the action in a disabled accordion', () => {
+    const { container } = render(
+      <SidebarMenuAccordion
+        title="Resources"
+        disabled
+        action={<button type="button">F</button>}
+      >
+        <li>Resources content</li>
+      </SidebarMenuAccordion>,
+    );
+
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+    expect(container.querySelector('span.size-6')).toBeNull();
   });
 
   it('shows the disabled tooltip regardless of collapse state', async () => {
@@ -787,12 +837,21 @@ describe('Sidebar Convenience Components', () => {
     render(
       <div>
         <SidebarSeparator data-testid="sep" />
-        <SidebarMenuSeparator data-testid="menu-sep" />
+        <ul>
+          <li>Item</li>
+          <SidebarMenuSeparator data-testid="menu-sep" />
+        </ul>
       </div>,
     );
 
     expect(screen.getByTestId('sep')).toHaveAttribute('role', 'separator');
-    expect(screen.getByTestId('menu-sep')).toHaveAttribute('role', 'separator');
+    // Inside a list it stays a list item, hidden as decoration, so the
+    // list holds nothing but list items.
+    const menuSep = screen.getByTestId('menu-sep');
+    expect(menuSep.tagName).toBe('LI');
+    expect(menuSep).not.toHaveAttribute('role');
+    expect(menuSep).toHaveAttribute('aria-hidden', 'true');
+    expect(screen.getAllByRole('listitem')).toHaveLength(1);
   });
 
   it('renders SidebarInset for main content wrapper', () => {

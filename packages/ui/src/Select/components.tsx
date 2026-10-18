@@ -12,6 +12,7 @@ import {
   MultiValueProps,
   OptionProps,
 } from 'react-select';
+import { translate } from 'waldur-i18n-runtime';
 
 import { Checkbox } from '../Check';
 import { CheckMark } from '../Check/CheckMark';
@@ -115,11 +116,25 @@ export const MultiSelectOption = (props) => {
     </components.Option>
   );
 };
+/**
+ * "Remove <option>" for a multi-select value's remove button. Some selects
+ * return an element from `getOptionLabel`, which cannot be put in a string,
+ * so those fall back to plain "Remove".
+ */
+export const getRemoveLabel = (optionLabel: unknown) =>
+  typeof optionLabel === 'string' || typeof optionLabel === 'number'
+    ? translate('Remove {value}', { value: optionLabel })
+    : translate('Remove');
+
 export const MultiSelectValue = (props: MultiValueProps) => (
   // `.tag` is a flex row, so a bare text child wraps onto a second line and
   // doubles the control's height in a narrow select. Truncate it instead; the
   // values past the limit already collapse into a `+N` tag with a tooltip.
-  <Tag onClear={props.removeProps.onClick} className="max-w-full">
+  <Tag
+    onClear={props.removeProps.onClick}
+    clearLabel={getRemoveLabel(props.selectProps.getOptionLabel(props.data))}
+    className="max-w-full"
+  >
     <span className="truncate">{props.children}</span>
   </Tag>
 );

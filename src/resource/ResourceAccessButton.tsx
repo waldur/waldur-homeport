@@ -3,7 +3,7 @@ import {
   CaretDownIcon,
   CopyIcon,
 } from '@phosphor-icons/react';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 import { BaseButton, Menu, Tooltip } from 'waldur-ui';
 
@@ -41,22 +41,14 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
     }${port ? `:${port}` : ''}`;
   };
 
-  const copyText = useCallback((value) => {
-    if (isSshFormat(value) && resource.username) {
-      const [hostname, port] = value.split('://')[1].split(':');
-      const valueToCopy = `ssh ${resource.username}@${hostname}${
-        port ? ` -p ${port}` : ''
-      }`;
-
-      navigator.clipboard.writeText(valueToCopy).then(() => {
-        showSuccess(translate('Text has been copied'));
-      });
-    } else {
-      navigator.clipboard.writeText(value).then(() => {
-        showSuccess(translate('Text has been copied'));
-      });
+  // An SSH endpoint copies as the command that opens it.
+  const getCopyValue = (url: string) => {
+    if (isSshFormat(url) && resource.username) {
+      const [hostname, port] = url.split('://')[1].split(':');
+      return `ssh ${resource.username}@${hostname}${port ? ` -p ${port}` : ''}`;
     }
-  }, []);
+    return url;
+  };
 
   const endpoints = useMemo(
     () => getResourceAccessEndpoints(resource, offering),
@@ -79,48 +71,51 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
       }
       align="end"
     >
-      {endpoints.map((endpoint, index) => (
-        <Menu.Item
-          key={index}
-          asChild
-          className="flex justify-between px-5 py-3"
-        >
-          <a
-            href={endpoint.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            // On the link, not the row: the row's classes go through
-            // tailwind-merge, which reads `text-anchor` and `text-brand`
-            // as two colours and drops `text-anchor`; Slot only joins them.
-            className="text-anchor text-brand"
-          >
-            <span className="flex flex-center me-6">
-              <span className="svg-icon svg-icon-2 svg-icon-primary me-[12px]">
-                <ArrowSquareOutIcon weight="bold" />
-              </span>
-              {endpoint.name}
-            </span>
-            <Tooltip
-              label={
-                isSshFormat(endpoint.url) && resource.username
-                  ? extendURLWithUsername(endpoint.url)
-                  : endpoint.url
-              }
+      {endpoints.map((endpoint, index) => {
+        const shownUrl =
+          isSshFormat(endpoint.url) && resource.username
+            ? extendURLWithUsername(endpoint.url)
+            : endpoint.url;
+        return (
+          // Two menu items side by side, the link and its copy action, so
+          // the copy control is not nested inside the link (axe
+          // nested-interactive) and arrow keys reach both.
+          <div key={index} className="flex items-stretch">
+            <Menu.Item asChild className="flex-1 px-5 py-3">
+              <a
+                href={endpoint.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                // On the link, not the row: the row's classes go through
+                // tailwind-merge, which reads `text-anchor` and `text-brand`
+                // as two colours and drops `text-anchor`; Slot only joins them.
+                className="text-anchor text-brand"
+              >
+                <span className="flex flex-center">
+                  <span className="svg-icon svg-icon-2 svg-icon-primary me-[12px]">
+                    <ArrowSquareOutIcon weight="bold" />
+                  </span>
+                  {endpoint.name}
+                </span>
+              </a>
+            </Menu.Item>
+            <Menu.CopyItem
+              value={getCopyValue(endpoint.url)}
+              onCopied={() => showSuccess(translate('Text has been copied'))}
+              className="px-3"
             >
-              <BaseButton
-                variant="text-primary"
-                onClick={(e) => {
-                  copyText(endpoint.url);
-                  e.preventDefault();
-                }}
-                iconNode={<CopyIcon weight="bold" />}
-                className="h-20px"
-                size="sm"
-              />
-            </Tooltip>
-          </a>
-        </Menu.Item>
-      ))}
+              <Tooltip label={shownUrl}>
+                <span className="inline-flex text-[var(--btn-text-primary-color)]">
+                  <CopyIcon weight="bold" aria-hidden="true" />
+                </span>
+              </Tooltip>
+              <span className="sr-only">
+                {translate('Copy {value}', { value: shownUrl })}
+              </span>
+            </Menu.CopyItem>
+          </div>
+        );
+      })}
     </ActionsMenu>
   );
 };

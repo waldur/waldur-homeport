@@ -161,6 +161,11 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
                 ))}
               </TabsList>
               <BaseButton
+                tooltip={
+                  mode === 'chart'
+                    ? translate('Show as table')
+                    : translate('Show as chart')
+                }
                 variant="tertiary"
                 size="sm"
                 onClick={() =>

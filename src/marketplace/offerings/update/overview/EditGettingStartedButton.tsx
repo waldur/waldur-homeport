@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
+import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
 const EditGettingStartedDialog = lazyComponent(() =>
@@ -18,5 +19,11 @@ export const EditGettingStartedButton: FC<{ offering; refetch }> = (props) => {
       size: 'lg',
     });
   };
-  return <CompactEditButton onClick={callback} variant="secondary" />;
+  return (
+    <CompactEditButton
+      onClick={callback}
+      variant="secondary"
+      fieldName={translate('Getting started instructions')}
+    />
+  );
 };

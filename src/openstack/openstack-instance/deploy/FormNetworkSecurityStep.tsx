@@ -388,6 +388,7 @@ const renderNetworkRows = ({
                 </Col>
                 <Col xs="auto" className="self-end">
                   <BaseButton
+                    tooltip={translate('Remove')}
                     onClick={() => fields.remove(index)}
                     iconNode={<TrashIcon weight="bold" />}
                     variant="text-danger"
