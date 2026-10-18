@@ -1,13 +1,22 @@
 import { DateTime } from 'luxon';
+import { useFormState } from 'react-final-form';
 
 import { ENV } from '@/core/config';
-import { required } from '@/core/validators';
+import { composeValidators, required } from '@/core/validators';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
 import { DateGroup } from '@/form';
 import { translate } from '@/i18n';
 
+const endAfterStart = (value, allValues) =>
+  value && allValues?.start_date && value < allValues.start_date
+    ? translate('End date must not be before the start date.')
+    : undefined;
+
 export const EndDateGroup = ({ create }: { create?: boolean }) => {
+  const { values } = useFormState({ subscription: { values: true } });
+  const tomorrow = DateTime.now().plus({ days: 1 }).toISODate();
+  const startDate = values?.start_date;
   const isMandatoryFromBackend =
     !!ENV.plugins?.WALDUR_CORE?.PROJECT_END_DATE_MANDATORY;
 
@@ -16,9 +25,13 @@ export const EndDateGroup = ({ create }: { create?: boolean }) => {
     isMandatoryFromBackend ? (
     <DateGroup
       name="end_date"
-      minDate={DateTime.now().plus({ days: 1 }).toISO()}
+      minDate={startDate && startDate > tomorrow ? startDate : tomorrow}
       containerClassName="col-lg"
-      validate={isMandatoryFromBackend ? required : undefined}
+      validate={
+        isMandatoryFromBackend
+          ? composeValidators(required, endAfterStart)
+          : endAfterStart
+      }
       label={translate('End date')}
       help={translate(
         'The date is inclusive. Once reached (plus any configured grace period), all project resources will be scheduled for termination.',
