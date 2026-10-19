@@ -1,4 +1,5 @@
 import { forwardRef, FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Badge, Menu } from 'waldur-ui';
 
@@ -11,6 +12,7 @@ import { UserFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { NavMenuLink } from '@/navigation/NavMenu';
 import { useUser } from '@/workspace/hooks';
+import { isStaffOrSupportOrImpersonating } from '@/workspace/selectors';
 
 import { ThemeSwitcher } from '../../theme/ThemeSwitcher';
 
@@ -104,6 +106,7 @@ const UserMenuHeader = ({ user }: { user: ReturnType<typeof useUser> }) => (
 
 export const UserDropdownMenu: FunctionComponent = () => {
   const user = useUser();
+  const canSeeToken = useSelector(isStaffOrSupportOrImpersonating);
   return (
     <Menu modal={false}>
       <Menu.Trigger asChild>
@@ -149,8 +152,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
           <>
             <Menu.Separator />
             {(!isFeatureVisible(UserFeatures.conceal_api_token) ||
-              user.is_staff ||
-              user.is_support) && <UserToken token={user.token} />}
+              canSeeToken) && <UserToken token={user.token} />}
             <UserIpAddress ip={user.ip_address} />
           </>
         )}

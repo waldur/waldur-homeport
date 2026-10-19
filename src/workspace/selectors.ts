@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { ENV } from '@/core/config';
+import { ImpersonationStorage } from '@/core/StorageManager';
 import { AtLeast } from '@/core/types';
 import { PermissionEnum, RoleEnum } from '@/permissions/enums';
 import {
@@ -32,6 +33,16 @@ export const checkIsStaffOrSupport = (user: User): boolean =>
 
 export const isStaffOrSupport = (state: RootState): boolean =>
   checkIsStaffOrSupport(getUser(state));
+
+/**
+ * Staff or support, or a staff member impersonating somebody. Impersonation
+ * replaces the user with the impersonated account, so is_staff on its own
+ * answers for that account; mastermind honours the impersonation header only
+ * for a staff token. Read from storage rather than `impersonatorUser`, which
+ * the layout loads only after the first transition's guards have run.
+ */
+export const isStaffOrSupportOrImpersonating = (state: RootState): boolean =>
+  isStaffOrSupport(state) || Boolean(ImpersonationStorage.get());
 
 /**
  * Is the role this system role, or a clone of it? A clone bound to one
