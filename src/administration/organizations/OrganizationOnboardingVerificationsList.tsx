@@ -30,10 +30,17 @@ const StatusBadge: FC<{ status: OnboardingVerificationStatusEnum }> = ({
     escalated: 'info',
     expired: 'secondary',
   };
+  const statusLabels: Record<OnboardingVerificationStatusEnum, string> = {
+    pending: translate('Pending'),
+    verified: translate('Verified'),
+    failed: translate('Failed'),
+    escalated: translate('Escalated'),
+    expired: translate('Expired'),
+  };
   const color = statusColors[status] || 'secondary';
   return (
     <Badge variant={color} shape="pill" tone="outline">
-      {status}
+      {statusLabels[status] || status}
     </Badge>
   );
 };

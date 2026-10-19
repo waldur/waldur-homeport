@@ -20091,7 +20091,7 @@
   },
   "Escalated": {
     "context": {
-      "feature_area": "issues"
+      "feature_area": "organizations"
     }
   },
   "Escalation reason": {
@@ -20744,7 +20744,7 @@
   "Expired": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "details"
+      "feature_area": "organizations"
     }
   },
   "Expires": {
@@ -21115,7 +21115,7 @@
   "Failed": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "offering-merges"
+      "feature_area": "organizations"
     }
   },
   "Failed Records": {
@@ -69247,7 +69247,7 @@
   },
   "Verified": {
     "context": {
-      "feature_area": "offering-merges"
+      "feature_area": "organizations"
     }
   },
   "Verified in VIES": {
