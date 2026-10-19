@@ -111,45 +111,6 @@
   }
 }
 
-// Sorting
-.table-sort {
-  &:after {
-    opacity: 0;
-  }
-}
-
-.table-sort,
-.table-sort-asc,
-.table-sort-desc {
-  vertical-align: middle;
-
-  &:after {
-    position: relative;
-    display: inline-block;
-    width: 0.75rem;
-    height: 0.75rem;
-    content: ' ';
-    bottom: auto;
-    right: auto;
-    left: auto;
-    margin-left: 0.5rem;
-  }
-}
-
-.table-sort-asc {
-  &:after {
-    opacity: 1;
-    @include svg-bg-icon(arrow-top, $text-muted);
-  }
-}
-
-.table-sort-desc {
-  &:after {
-    opacity: 1;
-    @include svg-bg-icon(arrow-bottom, $text-muted);
-  }
-}
-
 // Loading
 .table-loading-message {
   display: none;
