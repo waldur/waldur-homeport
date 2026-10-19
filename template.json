@@ -42823,6 +42823,11 @@
       "feature_area": "reporting"
     }
   },
+  "Project views": {
+    "context": {
+      "feature_area": "project"
+    }
+  },
   "Project will be recovered without restoring any team members": {
     "context": {
       "feature_area": "project"
