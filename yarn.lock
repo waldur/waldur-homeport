@@ -19489,6 +19489,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"waldur-boot-splash@workspace:*, waldur-boot-splash@workspace:packages/boot-splash":
+  version: 0.0.0-use.local
+  resolution: "waldur-boot-splash@workspace:packages/boot-splash"
+  dependencies:
+    waldur-api-client: "workspace:*"
+    waldur-design-tokens: "workspace:*"
+  peerDependencies:
+    react: ^18.3.0
+    vite: ^8.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    vite:
+      optional: true
+  languageName: unknown
+  linkType: soft
+
 "waldur-design-tokens@workspace:*, waldur-design-tokens@workspace:packages/design-tokens":
   version: 0.0.0-use.local
   resolution: "waldur-design-tokens@workspace:packages/design-tokens"
@@ -19662,6 +19679,7 @@ __metadata:
     vitest-location-mock: "npm:^1.0.4"
     waldur-api-client: "workspace:*"
     waldur-auth-core: "workspace:*"
+    waldur-boot-splash: "workspace:*"
     waldur-design-tokens: "workspace:*"
     waldur-i18n-runtime: "workspace:*"
     waldur-js-client: "npm:8.1.3-dev.20261018082125.514"
@@ -19707,6 +19725,7 @@ __metadata:
     typescript: "npm:^5.7.3"
     vite: "npm:^8.0.16"
     waldur-api-client: "workspace:*"
+    waldur-boot-splash: "workspace:*"
     waldur-design-tokens: "workspace:*"
     waldur-i18n-runtime: "workspace:*"
     waldur-runtime-config: "workspace:*"
@@ -19739,6 +19758,7 @@ __metadata:
     "@phosphor-icons/react": "npm:^2.1.7"
     "@tanstack/react-query": "npm:^5.80.6"
     waldur-auth-core: "workspace:*"
+    waldur-boot-splash: "workspace:*"
     waldur-design-tokens: "workspace:*"
     waldur-i18n-runtime: "workspace:*"
     waldur-notifications: "workspace:*"

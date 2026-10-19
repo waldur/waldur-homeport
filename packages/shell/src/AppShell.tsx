@@ -1,5 +1,6 @@
 import { BellIcon, QuestionIcon, SquaresFourIcon } from '@phosphor-icons/react';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
+import { useBootSplashDismiss } from 'waldur-boot-splash/react';
 import { translate } from 'waldur-i18n-runtime';
 import { NotificationProvider } from 'waldur-notifications';
 import {
@@ -17,6 +18,7 @@ import {
   TopBar,
 } from 'waldur-ui';
 
+import { whenMicroAppBootstrapped } from './bootstrap';
 import { ShellErrorBoundary } from './ShellErrorBoundary';
 import { CurrentUserProvider } from './useCurrentUser';
 import { UserMenu } from './UserMenu';
@@ -98,6 +100,20 @@ export interface AppShellProps {
  * package's earlier "no i18n dependency" boundary was dropped.
  */
 export function AppShell(props: AppShellProps) {
+  // The boot splash stays until the app is bootstrapped, so the switch from
+  // the default look to the tenant's brand, font and language happens behind
+  // it; pages then show their own loading states.
+  const [bootstrapped, setBootstrapped] = useState(false);
+  useEffect(() => {
+    let mounted = true;
+    void whenMicroAppBootstrapped().then(
+      () => mounted && setBootstrapped(true),
+    );
+    return () => {
+      mounted = false;
+    };
+  }, []);
+  useBootSplashDismiss(bootstrapped);
   return (
     <CurrentUserProvider>
       <ShellThemeProvider>

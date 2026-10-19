@@ -1,7 +1,7 @@
 export { AppShell } from './AppShell';
 export type { AppShellProps } from './AppShell';
 
-export { bootstrapMicroApp } from './bootstrap';
+export { bootstrapMicroApp, whenMicroAppBootstrapped } from './bootstrap';
 export type { MicroAppBootstrapConfig } from './bootstrap';
 
 export { createSharedStorage } from './sharedStorage';

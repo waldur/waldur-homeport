@@ -7,14 +7,13 @@ import {
   useState,
 } from 'react';
 
+import { dismissBootSplash, readSplashBranding } from 'waldur-boot-splash';
 import { initBrandTokens } from 'waldur-design-tokens';
 import { BaseButton } from 'waldur-ui';
 
-import { dismissBootSplash } from './BootSplashGate';
 import { lazyComponent } from './core/lazyComponent';
-import { readSplashBranding } from './core/splashBranding';
 import { translate } from './i18n';
-import './LoadingScreen.css';
+import './BootErrorScreen.css';
 import { ModalShell } from './modal/ModalShell';
 import { ThemeProvider } from './theme/ThemeProvider';
 
@@ -102,10 +101,10 @@ const ErrorState: FunctionComponent<{ error: Error }> = ({ error }) => {
 
 /**
  * The screen shown when the application cannot boot. While it loads, the
- * splash in index.html is shown instead; this replaces it, with the same
- * look (index.html styles .boot-splash for both).
+ * boot splash (waldur-boot-splash) is shown instead; this replaces it, with the same
+ * look (waldur-boot-splash's styles cover .boot-splash for both).
  */
-export const LoadingScreen: FunctionComponent<{ error: Error }> = ({
+export const BootErrorScreen: FunctionComponent<{ error: Error }> = ({
   error,
 }) => (
   <ThemeProvider>

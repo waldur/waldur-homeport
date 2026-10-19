@@ -45372,7 +45372,8 @@
   },
   "Reload": {
     "context": {
-      "feature_area": "core"
+      "feature_area": "core",
+      "action_type": "update"
     }
   },
   "Reload page": {
@@ -54612,6 +54613,17 @@
       "feature_area": "details"
     }
   },
+  "Starting {name}…": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "boot-splash",
+      "action_type": "update"
+    }
+  },
   "Starting…": {
     "context": {
       "feature_area": "reports"
@@ -56083,6 +56095,12 @@
   },
   "Taiwan": {},
   "Taking a snapshot": {},
+  "Taking longer than usual. The server may be busy.": {
+    "context": {
+      "feature_area": "boot-splash",
+      "action_type": "update"
+    }
+  },
   "Target": {
     "context": {
       "primary_ui_type": "title",

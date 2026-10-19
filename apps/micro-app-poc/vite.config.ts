@@ -1,6 +1,7 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import { waldurBootSplash } from 'waldur-boot-splash/vite';
 
 // Deliberately NOT copying waldur-homeport's own vite.config.ts (no `@/`
 // resolve.alias, no proxy config, no shared plugin list). If this app
@@ -15,7 +16,7 @@ export default defineConfig({
   // /node_modules/.vite/*) would collide with the root app's own — both
   // dev servers otherwise expect to own those paths at the origin root.
   base: process.env.DEV_SUBPATH ? '/micro-app-poc/' : '/',
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), waldurBootSplash()],
   server: {
     port: 5180,
   },

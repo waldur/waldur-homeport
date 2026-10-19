@@ -1,0 +1,31 @@
+<!-- The boot splash, injected at the end of <body> by waldurBootSplash()
+     (src/vite.js) with %NAME% filled in. Each [data-boot-text] slot holds
+     the English default; boot-splash.js swaps in the cached deployment name
+     and translations through CSS (see splash.css). A fixed layer outside the app's
+     root, so the app mounts underneath it without it ever being replaced;
+     the app removes it with dismissBootSplash() once its first page is
+     ready. -->
+<div id="boot-splash" class="boot-splash boot-splash--static" role="status">
+  <div class="boot-splash__mark" aria-hidden="true">
+    <svg viewBox="-0.5 9.5 11 11">
+      <path
+        d="m2 10.04v7.98h1.98v2H0v-9.98zm7.96 0v9.98H5.98v-2h1.98v-7.98zm-3.98 3.98v4h-2v-4z"
+      />
+    </svg>
+  </div>
+  <p class="boot-splash__name">
+    <span data-boot-text="name"><span>%NAME%</span></span>
+  </p>
+  <div class="boot-splash__bar"></div>
+  <p class="boot-splash__status">
+    <span data-boot-text="status"><span>Starting %NAME%…</span></span>
+  </p>
+  <div class="boot-splash__slow" hidden>
+    <span data-boot-text="slow"
+      ><span>Taking longer than usual. The server may be busy.</span></span
+    >
+    <button type="button">
+      <span data-boot-text="reload"><span>Reload</span></span>
+    </button>
+  </div>
+</div>

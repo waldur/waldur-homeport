@@ -3,6 +3,7 @@ import {
   initApiClient,
   StorageAdapter,
 } from 'waldur-auth-core';
+import { saveSplashBranding } from 'waldur-boot-splash';
 import {
   applySidebarStyle,
   DEFAULT_PRIMARY_COLORS,
@@ -16,6 +17,7 @@ import {
   LanguageUtilsConfig,
   LanguageUtilsService,
   loadSharedLocale,
+  translate,
 } from 'waldur-i18n-runtime';
 import {
   fetchRuntimeConfig,
@@ -117,8 +119,21 @@ export function bootstrapMicroApp(
   applySidebarStyle(config.defaultSidebarStyle ?? 'dark');
   initBrandTokens(config.defaultBrandColor ?? DEFAULT_BRAND_COLOR);
 
-  return finishBootstrapAsync(languageStorage, config);
+  const finished = finishBootstrapAsync(languageStorage, config);
+  bootstrapped = finished;
+  return finished;
 }
+
+// Resolved from the start, for an app that never calls bootstrapMicroApp().
+let bootstrapped: Promise<unknown> = Promise.resolve();
+
+/**
+ * Settles once bootstrapMicroApp() has finished: the tenant's brand, font,
+ * sidebar style and language are applied, or it gave up on them. Never
+ * rejects. AppShell keeps the boot splash up until then, so the switch from
+ * the defaults to the tenant's look happens behind it.
+ */
+export const whenMicroAppBootstrapped = () => bootstrapped;
 
 /**
  * Silently keeps whatever the sync half above already set as defaults on
@@ -156,6 +171,20 @@ async function finishBootstrapAsync(
       storage: languageStorage,
     });
     LanguageUtilsService.checkLanguage();
+
+    // Fire and forget: only the next visit's splash, in this app or any
+    // other Waldur app on the origin, depends on it. Once the user's
+    // language has loaded, so the splash text is cached in it.
+    const core = runtimeConfig.plugins?.WALDUR_CORE;
+    if (core) {
+      void LanguageUtilsService.whenLoaded().then(() =>
+        saveSplashBranding(core, { translate }),
+      );
+    }
+
+    // Bootstrapped means in the user's language too, so the first page
+    // doesn't flip from English once the dictionary arrives.
+    await LanguageUtilsService.whenLoaded();
   } catch {
     // no backend / not authenticated — same silent fallback afterBootstrap.tsx uses
   }

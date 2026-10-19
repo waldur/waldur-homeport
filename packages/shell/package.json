@@ -9,6 +9,7 @@
     "@phosphor-icons/react": "^2.1.7",
     "@tanstack/react-query": "^5.80.6",
     "waldur-auth-core": "workspace:*",
+    "waldur-boot-splash": "workspace:*",
     "waldur-design-tokens": "workspace:*",
     "waldur-i18n-runtime": "workspace:*",
     "waldur-notifications": "workspace:*",

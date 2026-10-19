@@ -6,6 +6,8 @@ import { defineConfig, PluginOption } from 'vite';
 import { plugin as markdownPlugin, Mode } from 'vite-plugin-markdown';
 import svgr from 'vite-plugin-svgr';
 
+import { waldurBootSplash } from 'waldur-boot-splash/vite';
+
 import reactDisplayNamePlugin from './vite-plugin-react-displayname';
 
 // Tailwind ships in the real app bundle now (src/index.tsx imports
@@ -26,6 +28,7 @@ const plugins: PluginOption[] = [
   }),
   markdownPlugin({ mode: [Mode.REACT] }),
   reactDisplayNamePlugin(),
+  waldurBootSplash({ defaultName: 'Waldur' }),
 ];
 
 export default defineConfig({

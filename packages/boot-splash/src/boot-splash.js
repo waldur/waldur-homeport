@@ -1,22 +1,26 @@
 // Brands the boot splash before its first paint.
 //
-// Served from public/ as a plain classic script for the same reason as
-// boot-redirect.js: production ingresses send `script-src 'self'`, so no
-// inline block. It sits in <head> and is neither deferred nor async, so it
-// runs before the browser parses, let alone paints, the splash in <body>.
-// It therefore cannot touch the splash itself. It sets what the splash's
-// styles in index.html read instead: the theme, and the brand colour, logo
-// and name as custom properties and attributes on <html>.
+// A plain classic script, served and emitted next to the app by the
+// waldurBootSplash() Vite plugin (src/vite.js), for the same reason as
+// waldur-homeport's public/boot-redirect.js: production ingresses send
+// `script-src 'self'`, so no inline block. The plugin puts it in <head>,
+// neither deferred nor async, so it runs before the browser parses, let
+// alone paints, the splash at the end of <body>. It therefore cannot touch
+// the splash itself. It sets what the splash's styles (src/splash.css) read
+// instead: the theme, the brand colour and logo, and the text of each
+// [data-boot-text] slot (the deployment's name, and the status, slow-notice
+// and reload text in the user's language), as custom properties and
+// attributes on <html>.
 //
 // The branding is whatever the previous visit stored under
-// 'waldur/boot-splash' (written by saveSplashBranding() in
-// src/core/splashBranding.ts once the configuration has loaded); the logo is
+// 'waldur/boot-splash' (written by saveSplashBranding() in src/index.ts once
+// the configuration has loaded). Every Waldur app on the origin shares it,
+// so the root app and its micro-apps brand each other's splash. The logo is
 // stored as a small data: URI, so it is there in the very first frame. A
-// first visit, or blocked storage, keeps the Waldur defaults in the markup.
+// first visit, or blocked storage, keeps the defaults in the markup.
 //
-// The application mounts underneath this fixed splash; src/BootSplashGate.tsx
-// removes it once the first page is ready, and LoadingScreen is only shown
-// if the application fails to boot.
+// The application mounts underneath this fixed splash and removes it with
+// dismissBootSplash() once its first page is ready.
 (function (win, doc) {
   'use strict';
 
@@ -31,9 +35,17 @@
     }
   }
 
-  // A CSS string for `content: var(--boot-name)`.
+  // A CSS string for `content: var(--boot-text-*)` and `url()`.
   function cssString(text) {
     return '"' + text.replace(/[\\"\n\r\f]/g, ' ') + '"';
+  }
+
+  // Fills a [data-boot-text] slot of the splash (see splash.css).
+  function setText(key, text) {
+    if (typeof text === 'string' && text) {
+      root.style.setProperty('--boot-text-' + key, cssString(text));
+      root.setAttribute('data-boot-text-' + key, '');
+    }
   }
 
   var branding = null;
@@ -43,7 +55,7 @@
     branding = null;
   }
 
-  // Same rule as getInitialTheme() in src/theme/utils.ts, applied early so
+  // Same rule as the apps' getInitialTheme(), applied early so
   // the splash is not painted light and then flipped to dark.
   var theme = stored('waldur/theme/name');
   if (branding && branding.disableDarkTheme) {
@@ -63,25 +75,16 @@
     ) {
       root.style.setProperty('--boot-brand', branding.color);
     }
-    if (typeof branding.name === 'string' && branding.name) {
-      root.style.setProperty('--boot-name', cssString(branding.name));
-      root.setAttribute('data-boot-name', '');
-
-      // Once DOM is parsed, keep accessible text and aria-label in sync with
-      // the branded name for screen readers (CSS ::after is visual-only).
-      doc.addEventListener('DOMContentLoaded', function () {
-        var splash = doc.getElementById('boot-splash');
-        if (splash) {
-          splash.setAttribute('aria-label', 'Starting ' + branding.name);
-        }
-        var spans = doc.querySelectorAll(
-          '.boot-splash--static .boot-splash__brand > span',
-        );
-        for (var i = 0; i < spans.length; i++) {
-          spans[i].textContent = branding.name;
-        }
-      });
-    }
+    var name = typeof branding.name === 'string' ? branding.name : '';
+    var texts =
+      branding.texts && typeof branding.texts === 'object'
+        ? branding.texts
+        : {};
+    setText('name', name);
+    // Without a cached translation, keep the default wording with the name.
+    setText('status', texts.status || (name && 'Starting ' + name + '…'));
+    setText('slow', texts.slow);
+    setText('reload', texts.reload);
     if (typeof branding.logo === 'string' && branding.logo) {
       root.style.setProperty(
         '--boot-logo',
