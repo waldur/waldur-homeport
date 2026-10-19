@@ -7,7 +7,12 @@ import {
   ReviewerAffiliationRequest,
 } from 'waldur-js-client';
 
-import { required } from '@/core/validators';
+import {
+  composeValidators,
+  endAfterStart,
+  required,
+  startBeforeEnd,
+} from '@/core/validators';
 import {
   BooleanGroup,
   DateGroup,
@@ -100,7 +105,7 @@ export const AffiliationFormDialog = ({
     <Form
       initialValues={initialValues}
       onSubmit={(formData) => mutateAsync(formData)}
-      render={({ handleSubmit, invalid }) => (
+      render={({ handleSubmit, invalid, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={
@@ -167,12 +172,15 @@ export const AffiliationFormDialog = ({
             <DateGroup
               name="start_date"
               label={translate('Start date')}
-              validate={required}
+              maxDate={values?.end_date || undefined}
+              validate={composeValidators(required, startBeforeEnd)}
             />
 
             <DateGroup
               name="end_date"
               label={translate('End date')}
+              minDate={values?.start_date || undefined}
+              validate={endAfterStart}
               description={translate('Leave empty for current affiliation')}
             />
 

@@ -49,6 +49,19 @@ export const requiredUnless =
   (predicate: (allValues: any) => boolean) => (value, allValues?) =>
     predicate(allValues || {}) ? undefined : required(value);
 
+// Cross-field checks for a `start_date`/`end_date` pair held as ISO dates
+// (`yyyy-MM-dd`), which compare correctly as strings. Put each on its own field
+// so the error shows next to whichever date the user is editing.
+export const startBeforeEnd = (value, allValues?) =>
+  value && allValues?.end_date && value > allValues.end_date
+    ? translate('Start date must not be after the end date.')
+    : undefined;
+
+export const endAfterStart = (value, allValues?) =>
+  value && allValues?.start_date && value < allValues.start_date
+    ? translate('End date must not be before the start date.')
+    : undefined;
+
 export const requiredArray = (value) =>
   Array.isArray(value) && value.length
     ? undefined

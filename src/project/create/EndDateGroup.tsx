@@ -2,16 +2,11 @@ import { DateTime } from 'luxon';
 import { useFormState } from 'react-final-form';
 
 import { ENV } from '@/core/config';
-import { composeValidators, required } from '@/core/validators';
+import { composeValidators, endAfterStart, required } from '@/core/validators';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
 import { DateGroup } from '@/form';
 import { translate } from '@/i18n';
-
-const endAfterStart = (value, allValues) =>
-  value && allValues?.start_date && value < allValues.start_date
-    ? translate('End date must not be before the start date.')
-    : undefined;
 
 export const EndDateGroup = ({ create }: { create?: boolean }) => {
   const { values } = useFormState({ subscription: { values: true } });
