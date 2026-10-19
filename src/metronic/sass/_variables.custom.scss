@@ -1,40 +1,7 @@
-// To make future updates easier consider overriding the global variables from _variables.bootstrap.scss and _variables.custom.scss for current demo in this file.
-// Note that this file is included first and variables defined in _variables.bootstrap.scss and _variables.custom.scss
-// are not accessible in this file but you can override any global variable as shown below:
+// Non-colour overrides of Bootstrap's and Metronic's variables. Colours are in
+// _colors.scss. This file is imported first, so a value set here wins over the
+// `!default` in core/components/_variables.scss, which is imported after it.
 
-// Neutral roles
-
-// Bootstrap's and Metronic's neutral colours read the design tokens, so one
-// stylesheet serves both themes. Each is the token with the same value in
-// both themes as the theme-inverted SCSS gray it replaces, except the
-// gray-900/gray-800 text (#101828/#f5f5f6, #182230/#f0f1f1), which becomes
-// --text-primary (#101828/#fafafa) as text-gray-800 did.
-$body-bg: var(--bg-primary) !default;
-$body-color: var(--text-primary) !default;
-$headings-color: var(--text-primary) !default;
-$text-muted: var(--text-quaternary);
-$page-bg: var(--bg-secondary) !default;
-$card-bg: var(--bg-primary) !default;
-$list-group-color: var(--text-primary) !default;
-$list-group-hover-bg: var(--bg-tertiary) !default;
-$list-group-disabled-color: var(--text-tertiary) !default;
-$list-group-action-color: var(--text-secondary) !default;
-$list-group-action-active-bg: var(--bg-quaternary) !default;
-$blockquote-footer-color: var(--text-tertiary) !default;
-$figure-caption-color: var(--text-tertiary) !default;
-$thumbnail-border-color: var(--border-primary) !default;
-$border-dashed-color: var(--border-divider-medium) !default; // Custom variable
-// White text on a dark key in both themes (in dark mode the inverted $gray-900
-// made it near-white); dark mode's key is in core/components/_code.scss.
-$kbd-bg: var(--bg-primary-solid) !default;
-$table-color: var(--text-primary) !default;
-$table-active-bg: var(--bg-tertiary) !default;
-$table-hover-bg: var(--bg-tertiary) !default;
-$table-striped-bg: color-mix(
-  in srgb,
-  var(--bg-tertiary) 75%,
-  transparent
-) !default;
 // Bootstrap builds its text and background utility maps from $body-color and
 // $body-bg with to-rgb(), which needs a Sass colour. Bootstrap emits no colour
 // utilities here (_utilities.scss), so the maps are empty.
@@ -45,13 +12,6 @@ $utilities-bg: () !default;
 // core/components/_tables.scss.
 $table-variants: () !default;
 
-// Links
-
-// Style anchor elements.
-$link-color: var(--text-brand-secondary) !default;
-$link-hover-color: var(--text-brand-secondary) !default;
-
-// -----------------------------
 // Components
 
 // Border Radius — mirrors design tokens in primitives/radius.css:
@@ -74,44 +34,8 @@ $card-px: 1.85rem !default;
 
 // Buttons + Forms
 
-// The brand is the tenant's runtime --brand-* ramp, not the static $primary
-// Bootstrap compiles with. This is the Bootstrap output that would otherwise
-// paint the compile-time default green: the active list-group row. It doesn't
-// go through a Sass colour function, so a CSS variable is safe here.
-$list-group-active-bg: var(--bg-brand-solid) !default;
-$list-group-active-border-color: var(--bg-brand-solid) !default;
-
 // Sets $input-height-lg (the AI assistant history search).
 $input-btn-padding-y-lg: 0.692rem !default;
 
 // Bootstrap's own default is a raw 300.
 $lead-font-weight: var(--font-weight-light) !default;
-
-$input-disabled-bg: var(--bg-secondary) !default;
-$input-disabled-color: var(--text-disabled) !default; // Custom variable
-
-// Form validation. The state colours are the status tokens with the values
-// the theme-inverted ramps gave: invalid is --status-danger-border
-// (#fda29b / #f97066) and its focus --status-danger-solid (#d92d20 /
-// #f04438). Valid is --status-success-solid, which is #12b76a in dark mode
-// (#6ce9a6 before).
-$form-feedback-valid-color: var(--status-success-solid);
-$form-feedback-invalid-color: var(--status-danger-border);
-// Bootstrap's own default for this map runs Sass colour functions on the
-// colours, which cannot take a CSS variable. Nothing reads it now that the
-// validation styles are gone (a waldur-ui input draws its own error state),
-// so it only has to exist.
-$form-validation-states: (
-  'valid': (
-    'color': $form-feedback-valid-color,
-  ),
-  'invalid': (
-    'color': $form-feedback-invalid-color,
-  ),
-);
-
-// Dropdowns
-// Dark mode: 0px 0px 30px rgba(0, 0, 0, 0.3), in _tables.scss.
-$dropdown-box-shadow:
-  0 12px 16px -4px rgba($gray-900, 0.1),
-  0 4px 6px -2px rgba($gray-900, 0.05%) !default;

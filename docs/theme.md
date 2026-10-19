@@ -31,17 +31,15 @@ theme-specific SCSS value. A colour inside an SVG data URI cannot be reached by 
 
 ## Key Files
 
-| File                                             | Purpose                                                                                                                              |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `src/theme/ThemeProvider.tsx`                    | React context provider for theme state                                                                                               |
-| `src/theme/useTheme.ts`                          | Hook to access current theme                                                                                                         |
-| `src/theme/ThemeStorage.ts`                      | localStorage persistence                                                                                                             |
-| `src/theme/utils.ts`                             | Injects the Metronic stylesheet once, sets `data-theme`, initial theme detection                                                     |
-| `src/theme/ThemeSwitcher.tsx`                    | UI toggle component                                                                                                                  |
-| `src/metronic/sass/_tokens.scss`                 | Ring and focus-ring variables                                                                                                        |
-| `src/metronic/sass/_colors.scss`                 | Derived color variables (`$success`, `$text-muted`, brand ramp, …)                                                                   |
-| `src/metronic/sass/_color-ramps.scss`            | Theme-aware color ramps — **generated**, edit `packages/design-tokens/tokens/colors.json` (see [design-tokens.md](design-tokens.md)) |
-| `src/metronic/sass/core/base/mixins/_theme.scss` | `dark-theme` / `light-theme` mixins, `mirrored-ramp-color()`                                                                         |
+| File                                             | Purpose                                                                          |
+| ------------------------------------------------ | -------------------------------------------------------------------------------- |
+| `src/theme/ThemeProvider.tsx`                    | React context provider for theme state                                           |
+| `src/theme/useTheme.ts`                          | Hook to access current theme                                                     |
+| `src/theme/ThemeStorage.ts`                      | localStorage persistence                                                         |
+| `src/theme/utils.ts`                             | Injects the Metronic stylesheet once, sets `data-theme`, initial theme detection |
+| `src/theme/ThemeSwitcher.tsx`                    | UI toggle component                                                              |
+| `src/metronic/sass/_colors.scss`                 | Every Sass colour variable (design tokens as `var(--…)`, `$white`, `$black`)     |
+| `src/metronic/sass/core/base/mixins/_theme.scss` | `dark-theme` / `light-theme` mixins, `mirrored-ramp-color()`                     |
 
 ## Theme Initialization Flow
 

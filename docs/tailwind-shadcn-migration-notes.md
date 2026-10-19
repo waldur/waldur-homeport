@@ -235,9 +235,7 @@ This guarantees `lg` resolves to `992px` identically across Tailwind `lg:` varia
 
 ### Design Tokens & Color Systems
 
-1. **Single Source of Truth**: All color ramps originate in `packages/design-tokens/tokens/colors.json`. Running `yarn tokens:generate` outputs:
-   - `src/metronic/sass/_color-ramps.scss` (consumed by Bootstrap & Metronic SCSS)
-   - `packages/design-tokens/src/css/primitives/colorRamps.css` (consumed by Tailwind)
+1. **Single Source of Truth**: All color ramps originate in `packages/design-tokens/tokens/colors.json`. Running `yarn tokens:generate` outputs `packages/design-tokens/src/css/primitives/colorRamps.css` (consumed by Tailwind). Sass reads no colour ramp: `$white` and `$black` are the only Sass colours the theme defines (top of `core/components/_variables.scss`).
 2. **Theme Color Semantics**:
    - In Tailwind CSS: `--color-gray-N` maintains physical lightness across themes (e.g., `gray-900` is always dark). Dark UI uses a dedicated inverted ramp: `--color-gray-dark-N`.
    - In Metronic SCSS: `$gray-N` variables invert automatically in dark mode (`$gray-900` becomes light in dark mode).

@@ -6,13 +6,12 @@ import { describe, expect, it } from 'vitest';
 import {
   generateAll,
   generateCss,
-  generateScss,
   readTokens,
   repoRoot,
 } from '../scripts/generate-tokens.mjs';
 
 /**
- * The SCSS and CSS ramps are generated from tokens/colors.json. Committing an
+ * The CSS ramps are generated from tokens/colors.json. Committing an
  * edit to the JSON (or to the generator) without regenerating leaves the
  * outputs stale, and committing an edit to an output leaves it disagreeing
  * with the JSON — both fail here, with the fix in the message.
@@ -36,54 +35,22 @@ describe('generator', () => {
       gray: { steps, ...extra },
     },
   });
-  it('emits each step as its value: the SCSS ramps are not themed', () => {
-    const scss = generateScss({
+  it('emits each step as its value: the ramps are not themed', () => {
+    const css = generateCss({
       ramps: { pink: { steps: { '950': { light: '#4e0d30' } } } },
     });
-    expect(scss).toContain('$pink-950: #4e0d30 !default;');
+    expect(css).toContain('--color-pink-950: #4e0d30;');
   });
 
-  it('honours scssName, scssDefault and css: false', () => {
+  it('honours css: false', () => {
     const t = {
       ramps: {
-        error: {
-          scssName: 'danger',
-          steps: { '50': { light: '#fef3f2' } },
-        },
-        primary: {
-          css: false,
-          scssDefault: false,
-          steps: { '50': { light: '#f1f7ef' } },
-        },
+        error: { steps: { '50': { light: '#fef3f2' } } },
+        primary: { css: false, steps: { '50': { light: '#f1f7ef' } } },
       },
     };
-    expect(generateScss(t)).toContain('$danger-50: #fef3f2 !default;');
-    expect(generateScss(t)).toContain('$primary-50: #f1f7ef;');
     expect(generateCss(t)).toContain('--color-error-50: #fef3f2;');
     expect(generateCss(t)).not.toContain('--color-primary');
-  });
-
-  it('keeps a CSS-only step out of the SCSS', () => {
-    const t = {
-      ramps: {
-        pink: { steps: { '400': { light: '#f670c7', scss: false } } },
-      },
-    };
-    expect(generateScss(t)).not.toContain('$pink-400');
-    expect(generateCss(t)).toContain('--color-pink-400: #f670c7;');
-  });
-
-  it('keeps a CSS-only ramp out of the SCSS and emits it as a plain ramp', () => {
-    const t = {
-      ramps: {
-        'gray-dark': {
-          scss: false,
-          steps: { '900': { light: '#161b26' } },
-        },
-      },
-    };
-    expect(generateScss(t)).not.toContain('gray-dark');
-    expect(generateCss(t)).toContain('--color-gray-dark-900: #161b26;');
   });
 
   it('never emits a per-theme override block', () => {
@@ -94,9 +61,9 @@ describe('generator', () => {
   // semantic tokens, so a ramp step has a single value.
   it('rejects a dark value and non-canonical colours', () => {
     expect(() =>
-      generateScss(tokens({ '50': { light: '#f9fafb', dark: '#161b26' } })),
+      generateCss(tokens({ '50': { light: '#f9fafb', dark: '#161b26' } })),
     ).toThrow(/no "dark" value/);
-    expect(() => generateScss(tokens({ '50': { light: '#F9FAFB' } }))).toThrow(
+    expect(() => generateCss(tokens({ '50': { light: '#F9FAFB' } }))).toThrow(
       /lower-case #rrggbb/,
     );
   });

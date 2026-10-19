@@ -5,7 +5,7 @@
  * Every value is the one the Bootstrap/Metronic `.form-check` stylesheet
  * resolved to (src/metronic/sass/core/components/forms/_form-check.scss and
  * the `$form-check-*` / `$form-switch-*` overrides in _variables.custom.scss),
- * translated from the SCSS tokens in _tokens.scss:
+ * translated from the SCSS tokens in the former _tokens.scss:
  *
  *   box/radio bg          $body-bg               white / gray-25
  *   box/radio border      $border-primary        gray-300 / gray-200

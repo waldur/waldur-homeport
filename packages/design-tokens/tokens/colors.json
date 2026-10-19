@@ -1,5 +1,5 @@
 {
-  "$comment": "Colour primitives. `light` is the value in the light theme, `dark` the value in the dark theme; a step with no `dark` is the same in both. Edit here, then run `yarn tokens:generate` — the SCSS and CSS ramps are generated from this file and must not be edited by hand.",
+  "$comment": "Colour primitives. `light` is the value in the light theme, `dark` the value in the dark theme; a step with no `dark` is the same in both. Edit here, then run `yarn tokens:generate` — colorRamps.css is generated from this file and must not be edited by hand.",
   "ramps": {
     "gray": {
       "description": "Neutral, blue-tinted. Physical lightness (900 is dark) and identical in both themes; dark UI reads `gray-dark` instead.",
@@ -20,7 +20,6 @@
     },
     "gray-dark": {
       "description": "The gray ramp for dark UI: neutral where `gray` is blue-tinted. Physical lightness like every other CSS ramp (gray-dark-900 is dark). Dark surfaces read it (the dark-theme token blocks and the `dark` sidebar style); `gray` itself is the same in both themes.",
-      "scss": false,
       "steps": {
         "25": { "light": "#fafafa" },
         "50": { "light": "#f5f5f6" },
@@ -38,7 +37,6 @@
     },
     "error": {
       "description": "Destructive / validation. Called `danger` in the SCSS variables and Bootstrap.",
-      "scssName": "danger",
       "steps": {
         "25": { "light": "#fffbfa" },
         "50": { "light": "#fef3f2" },
@@ -106,7 +104,7 @@
         "50": { "light": "#f4f3ff" },
         "200": { "light": "#d9d6fe" },
         "300": { "light": "#bdb4fe" },
-        "400": { "light": "#9b8afb", "scss": false },
+        "400": { "light": "#9b8afb" },
         "500": { "light": "#7a5af8" },
         "600": { "light": "#6938ef" },
         "700": { "light": "#5925dc" },
@@ -145,7 +143,7 @@
         "50": { "light": "#f5fbee" },
         "200": { "light": "#ceeab0" },
         "300": { "light": "#acdc79" },
-        "400": { "light": "#86cb3c", "scss": false },
+        "400": { "light": "#86cb3c" },
         "500": { "light": "#669f2a" },
         "600": { "light": "#4f7a21" },
         "700": { "light": "#3f621a" },
@@ -158,7 +156,7 @@
         "50": { "light": "#fdf2fa" },
         "200": { "light": "#fcceee" },
         "300": { "light": "#faa7e0" },
-        "400": { "light": "#f670c7", "scss": false },
+        "400": { "light": "#f670c7" },
         "500": { "light": "#ee46bc" },
         "600": { "light": "#dd2590" },
         "700": { "light": "#c11574" },
@@ -184,7 +182,7 @@
         "50": { "light": "#fff6ed" },
         "200": { "light": "#fddcab" },
         "300": { "light": "#feb273" },
-        "400": { "light": "#fd853a", "scss": false },
+        "400": { "light": "#fd853a" },
         "500": { "light": "#fb6514" },
         "600": { "light": "#ec4a0a" },
         "700": { "light": "#c4320a" },
@@ -197,31 +195,12 @@
         "50": { "light": "#fff1f3" },
         "200": { "light": "#fecdd6" },
         "300": { "light": "#fea3b4" },
-        "400": { "light": "#fd6f8e", "scss": false },
+        "400": { "light": "#fd6f8e" },
         "500": { "light": "#f63d68" },
         "600": { "light": "#e31b54" },
         "700": { "light": "#c01048" },
         "900": { "light": "#89123e" },
         "950": { "light": "#510b24" }
-      }
-    },
-    "primary": {
-      "description": "Waldur's static default green. Not exposed to Tailwind: the tenant-configurable brand colour is the runtime --brand-* ramp, not this.",
-      "scssDefault": false,
-      "css": false,
-      "steps": {
-        "25": { "light": "#fafcf9" },
-        "50": { "light": "#f1f7ef" },
-        "100": { "light": "#e6f0e3" },
-        "200": { "light": "#c3dabb" },
-        "300": { "light": "#97bf89" },
-        "400": { "light": "#6ca359" },
-        "500": { "light": "#398500" },
-        "600": { "light": "#307300" },
-        "700": { "light": "#286100" },
-        "800": { "light": "#1f5000" },
-        "900": { "light": "#174000" },
-        "950": { "light": "#103000" }
       }
     }
   }

@@ -8,7 +8,6 @@ $root-font-size-lg: 13px; // Root font size for tablet mode
 $root-font-size-md: 12px; // Root font size for mobile mode
 
 // Page bg
-$page-bg: $gray-50 !default;
 
 // Content Spacing
 $content-spacing: (
@@ -76,9 +75,9 @@ $aside-config: (
   margin-x: 1.3rem,
   menu-indention: 0.75rem,
   bg-color: var(--brand-950),
-  bg-color-dark: $gray-950,
+  bg-color-dark: var(--color-gray-950),
   logo-bg-color: var(--brand-950),
-  logo-bg-color-dark: $gray-950,
+  logo-bg-color-dark: var(--color-gray-950),
   border-right: 1px solid $border-color,
   scrollbar-color: #3b3b64,
   scrollbar-hover-color: color.adjust(#3b3b64, $lightness: 3%),
