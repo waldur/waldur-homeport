@@ -22,7 +22,7 @@
 
 import { notAClassList } from './class-name-tokens.js';
 
-const RETIRED_BOOTSTRAP = {
+export const RETIRED_BOOTSTRAP = {
   'rounded-0': 'rounded-none',
   'rounded-pill': 'rounded-full',
   'rounded-circle': 'rounded-full',

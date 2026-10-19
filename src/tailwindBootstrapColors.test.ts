@@ -50,20 +50,26 @@ function bootstrapColorClasses(css: string) {
   return names;
 }
 
+let cachedMetronicCss: string | null = null;
 function compileMetronic() {
+  if (cachedMetronicCss) return cachedMetronicCss;
   // Light and dark emit the same class names; only the colours differ.
-  return sass.compile(path.join(root, 'src/metronic/sass/style.scss'), {
-    loadPaths: [path.join(root, 'node_modules')],
-    importers: [
-      {
-        findFileUrl: (url) =>
-          url.startsWith('@/')
-            ? pathToFileURL(path.join(root, 'src', url.slice(2)))
-            : null,
-      },
-    ],
-    logger: sass.Logger.silent,
-  }).css;
+  cachedMetronicCss = sass.compile(
+    path.join(root, 'src/metronic/sass/style.scss'),
+    {
+      loadPaths: [path.join(root, 'node_modules')],
+      importers: [
+        {
+          findFileUrl: (url) =>
+            url.startsWith('@/')
+              ? pathToFileURL(path.join(root, 'src', url.slice(2)))
+              : null,
+        },
+      ],
+      logger: sass.Logger.silent,
+    },
+  ).css;
+  return cachedMetronicCss;
 }
 
 /** The candidates Tailwind generates a rule for, from the real entry point. */

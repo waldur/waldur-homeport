@@ -215,6 +215,7 @@
     "storybook-addon-pseudo-states": "^10.5.8",
     "stylelint": "^17.14.0",
     "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-plugin-waldur": "workspace:*",
     "tailwindcss": "^4.3.3",
     "ts-import-plugin": "^3.0.0",
     "typescript": "^5.7.3",
@@ -264,7 +265,11 @@
   },
   "stylelint": {
     "extends": "stylelint-config-recommended-scss",
+    "plugins": [
+      "stylelint-plugin-waldur"
+    ],
     "rules": {
+      "waldur/no-retired-class-selectors": true,
       "no-descending-specificity": null,
       "scss/load-no-partial-leading-underscore": null,
       "scss/operator-no-newline-after": null,

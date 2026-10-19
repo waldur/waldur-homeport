@@ -18252,6 +18252,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"stylelint-plugin-waldur@workspace:*, stylelint-plugin-waldur@workspace:packages/stylelint-plugin-waldur":
+  version: 0.0.0-use.local
+  resolution: "stylelint-plugin-waldur@workspace:packages/stylelint-plugin-waldur"
+  languageName: unknown
+  linkType: soft
+
 "stylelint-scss@npm:^7.0.0":
   version: 7.2.0
   resolution: "stylelint-scss@npm:7.2.0"
@@ -19641,6 +19647,7 @@ __metadata:
     storybook-addon-pseudo-states: "npm:^10.5.8"
     stylelint: "npm:^17.14.0"
     stylelint-config-standard-scss: "npm:^17.0.0"
+    stylelint-plugin-waldur: "workspace:*"
     tailwind-merge: "npm:^3.6.0"
     tailwindcss: "npm:^4.3.3"
     text-security: "npm:^3.2.1"
