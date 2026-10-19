@@ -1,13 +1,22 @@
 import { CaretLeftIcon, ListIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
+import classNames from 'classnames';
 import { FunctionComponent, useState } from 'react';
 
-import { useSidebar, BaseButton, Tooltip, useBreakpointDown } from 'waldur-ui';
+import {
+  useSidebar,
+  BaseButton,
+  IconButton,
+  TopBar,
+  useBreakpointDown,
+} from 'waldur-ui';
 
 import { isAssistantEnabled } from '@/ai-assistant/utils';
 import { DEFAULT_REDIRECT_STATE, isSignInStep } from '@/auth/authNavigation';
 import { getIconUrl } from '@/core/api';
 import { Link } from '@/core/Link';
+import { useIsDrawerOpenWith } from '@/drawer/actions';
+import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
 import { translate } from '@/i18n';
 import { hasSupport as hasSupportSelector } from '@/issues/hooks';
 import { isMatrixChatEnabled } from '@/matrix/utils';
@@ -24,30 +33,34 @@ import { UserDropdownMenu } from './UserDropdown';
 const AsideMobileToggle: FunctionComponent = () => {
   const { openMobile, toggleSidebar } = useSidebar();
   return (
-    <Tooltip label={translate('Toggle navigation menu')} side="bottom">
-      <button
-        id="kt_aside_mobile_toggle"
-        type="button"
-        aria-label={translate('Toggle navigation menu')}
-        aria-expanded={openMobile}
-        onClick={toggleSidebar}
-        className="btn-nav-item me-1"
-      >
-        <span className="svg-icon svg-icon-1x">
-          <ListIcon weight="bold" />
-        </span>
-      </button>
-    </Tooltip>
+    <IconButton
+      id="kt_aside_mobile_toggle"
+      label={translate('Toggle navigation menu')}
+      aria-expanded={openMobile}
+      onClick={toggleSidebar}
+      icon={<ListIcon weight="bold" />}
+      iconSize="lg"
+      className="me-[0.25rem]"
+    />
   );
 };
 
 interface AppHeaderProps {
   hasBreadcrumbs?: boolean;
+  /** The impersonation bar is showing above the header. */
+  hasPageBar?: boolean;
 }
 
 export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   hasBreadcrumbs,
+  hasPageBar,
 }) => {
+  const { state: sidebarState } = useSidebar();
+  const floatingDrawerOpen = [
+    useIsDrawerOpenWith(DRAWER_SHELL_CLASS.ai),
+    useIsDrawerOpenWith(DRAWER_SHELL_CLASS.support),
+    useIsDrawerOpenWith(DRAWER_SHELL_CLASS.confirmation),
+  ].some(Boolean);
   const { state } = useCurrentStateAndParams();
   const user = useUser();
   const imageUrl = getIconUrl('sidebar_logo_mobile');
@@ -76,9 +89,27 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   };
 
   return (
-    <div className="header items-stretch">
-      <div className="container-fluid flex items-stretch justify-between">
-        <div className="flex items-center lg:hidden ms-n2 me-2">
+    <TopBar
+      data-app-header
+      className={classNames(
+        // Fixed to the top of the viewport (under the impersonation bar while
+        // it shows) and, from lg, beside the sidebar, following it as it
+        // collapses. Without a user there is no sidebar.
+        'fixed inset-x-0 top-0 print:hidden',
+        hasPageBar && 'top-[var(--kt-pagebar-height)]',
+        Boolean(user) &&
+          (sidebarState === 'collapsed'
+            ? 'lg:left-[var(--sidebar-width-icon)]'
+            : 'lg:left-[var(--sidebar-width)]'),
+        'lg:transition-[left] lg:duration-300 lg:ease-[ease]',
+        // A floating drawer (z 110, --z-index-mobile-drawer) sits over the
+        // page under the header; lift the header one above it while one is
+        // open, so the header's menus, which open down into the drawer's
+        // band, are not painted behind it.
+        floatingDrawerOpen ? 'z-[111]' : 'z-header',
+      )}
+      left={
+        <div className="flex items-center lg:hidden -ms-[0.5rem] me-[0.5rem]">
           {Boolean(user) && <AsideMobileToggle />}
 
           {!errorImg && (
@@ -92,56 +123,46 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
                     src={imageUrl}
                     alt="Logo"
                     onError={() => setErrorImg(true)}
-                    className="h-30px"
+                    className="h-[30px]"
                   />
                 ) : null}
               </Link>
             </div>
           )}
         </div>
-        <div
-          className="flex items-stretch justify-between grow"
-          style={{ minWidth: 0 }}
-        >
-          <div
-            className="flex items-stretch justify-between grow shrink"
-            // flex-basis: 0 makes this breadcrumb area's width the grown share
-            // of free space — independent of its (long) content width — and
-            // overflow: hidden clips the trail. Together these guarantee it can
-            // never push the header actions (search / confirmation / user menu)
-            // off screen, and they give the breadcrumb <ol> a real width so its
-            // overflow measurement (BreadcrumbTrail in waldur-ui) can collapse the middle.
-            style={{ minWidth: 0, flexBasis: 0, overflow: 'hidden' }}
-          >
-            {Boolean(user) && showGoBack && (
-              <BaseButton
-                variant="text-primary"
-                className="me-3 py-0 self-center text-base"
-                onClick={onGoBack}
-                tooltip={translate('Go back')}
-                style={{ width: '108px', height: '36px' }}
-                iconNode={<CaretLeftIcon size={18} weight="bold" />}
-                label={translate('Go back')}
-              />
-            )}
-            {hasBreadcrumbs && <BreadcrumbMain />}
+      }
+      center={
+        <>
+          {Boolean(user) && showGoBack && (
+            <BaseButton
+              variant="text-primary"
+              className="me-[0.75rem] py-[0px] self-center text-base"
+              onClick={onGoBack}
+              tooltip={translate('Go back')}
+              style={{ width: '108px', height: '36px' }}
+              iconNode={<CaretLeftIcon size={18} weight="bold" />}
+              label={translate('Go back')}
+            />
+          )}
+          {hasBreadcrumbs && <BreadcrumbMain />}
+        </>
+      }
+      right={
+        <>
+          {Boolean(user) && (
+            <SearchToggle compact={Boolean(hasBreadcrumbs || isSmallScr)} />
+          )}
+          {Boolean(user) && showSupportDrawer && <QuickIssueDrawerToggle />}
+          {Boolean(user) && <ConfirmationDrawerToggle />}
+          {isAssistantEnabled(user) && <LLMChatDrawerToggle />}
+          {Boolean(user) && isSmallScr && (
+            <span className="h-[40px] border-r-[1px] border-r-secondary self-center ms-[0.25rem]" />
+          )}
+          <div className="flex items-center ms-[0.75rem]">
+            <UserDropdownMenu />
           </div>
-          <div className="flex items-stretch shrink-0 ms-3">
-            {Boolean(user) && (
-              <SearchToggle compact={Boolean(hasBreadcrumbs || isSmallScr)} />
-            )}
-            {Boolean(user) && showSupportDrawer && <QuickIssueDrawerToggle />}
-            {Boolean(user) && <ConfirmationDrawerToggle />}
-            {isAssistantEnabled(user) && <LLMChatDrawerToggle />}
-            {Boolean(user) && isSmallScr && (
-              <span className="h-40px border-r-[1px] border-r-secondary self-center ms-1" />
-            )}
-            <div className="flex items-center ms-3">
-              <UserDropdownMenu />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        </>
+      }
+    />
   );
 };

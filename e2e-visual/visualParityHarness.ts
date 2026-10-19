@@ -173,21 +173,24 @@ export function createParityHarness(
       `${STORYBOOK_URL}/iframe.html?id=${storyId}&viewMode=story&globals=theme:${theme}`,
     );
 
+    // The Metronic stylesheet is one file for both themes (loadTheme() in
+    // src/theme/utils.ts switches only data-theme, checked below), so this
+    // waits for that file, not for a per-theme one. Found by name: it is not
+    // the first stylesheet — a built Storybook links its own iframe CSS
+    // first. `style.scss` in dev, `assets/style-<hash>.css` once built.
     await page.waitForFunction(
-      (expectedTheme) => {
-        const link = document.querySelector(
-          'link[rel="stylesheet"]',
-        ) as HTMLLinkElement | null;
-        if (!link || !link.href) return false;
-        const isDark = link.href.includes('dark');
-        if (expectedTheme === 'dark' ? !isDark : isDark) return false;
+      () => {
+        const link = Array.from(
+          document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'),
+        ).find((candidate) => /\/style[-.]/.test(candidate.href));
+        if (!link) return false;
         try {
           return (link.sheet?.cssRules.length ?? 0) > 0;
         } catch {
           return false;
         }
       },
-      theme,
+      undefined,
       // 15s wasn't enough margin: a cold Storybook server (first request of
       // the run, triggering on-demand story-chunk compilation) measured
       // 17.5s here after a fresh `yarn install` invalidated Vite's dep-cache.

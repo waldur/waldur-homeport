@@ -2,7 +2,7 @@ import { SparkleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import React, { useEffect, useRef } from 'react';
 
-import { BaseButton, Tooltip } from 'waldur-ui';
+import { BaseButton, IconButton } from 'waldur-ui';
 
 import { useAnonymousThreadContext } from '@/ai-assistant/anonymous/AnonymousThreadProvider';
 import { resetDrawerDOM } from '@/ai-assistant/components/LLMChatDrawer';
@@ -95,7 +95,7 @@ export const LLMChatDrawerToggle: React.FC = () => {
     <HeaderButtonBullet
       variant={hasReply ? 'success' : 'gray-500'}
       blink={hasReply}
-      className="pe-none"
+      className="pointer-events-none"
     />
   ) : null;
 
@@ -117,7 +117,7 @@ export const LLMChatDrawerToggle: React.FC = () => {
       // The sign-in strip runs at 40px — the language select and the mode
       // switcher's `btn-icon` both take it from the form-control height. A
       // labelled button is 36px by default and `size="lg"` overshoots to 44.
-      className="h-40px"
+      className="h-[40px]"
       label={label}
       iconNode={<SparkleIcon weight="bold" />}
       onClick={toggleChatDrawer}
@@ -126,29 +126,22 @@ export const LLMChatDrawerToggle: React.FC = () => {
       data-testid="llm-chat-drawer-toggle"
     />
   ) : (
-    <Tooltip label={label} side="bottom">
-      <button
-        id="llm-chat-drawer-toggle"
-        type="button"
-        onClick={toggleChatDrawer}
-        aria-label={label}
-        aria-expanded={isOpen}
-        data-drawer-toggle
-        data-state={dataState}
-        data-testid="llm-chat-drawer-toggle"
-        className="position-relative btn-nav-item"
-      >
-        <span className="svg-icon svg-icon-2">
-          <SparkleIcon weight="bold" />
-        </span>
-      </button>
-    </Tooltip>
+    <IconButton
+      id="llm-chat-drawer-toggle"
+      label={label}
+      onClick={toggleChatDrawer}
+      aria-expanded={isOpen}
+      data-drawer-toggle
+      data-state={dataState}
+      data-testid="llm-chat-drawer-toggle"
+      icon={<SparkleIcon weight="bold" />}
+    />
   );
 
   // The marker is positioned against this wrapper, not the button, so it must
   // not stretch with the app header's row or `top-0` lands on the header edge.
   return (
-    <div className="flex items-center self-center ms-1 position-relative">
+    <div className="flex items-center self-center ms-[0.25rem] relative">
       {control}
       {marker}
     </div>

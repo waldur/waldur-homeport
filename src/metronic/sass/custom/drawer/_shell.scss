@@ -152,16 +152,6 @@ body:has(#kt_drawer.confirmation-drawer-active) .drawer-overlay {
   height: 100%;
 }
 
-// The drawer (z-index 110) sits above the fixed header (100), but the header's
-// dropdown menus open downward into the drawer's band. Trapped in the header's
-// own stacking context they'd paint behind the drawer, so lift the header above
-// it while a floating drawer is open.
-body:has(#kt_drawer.ai-chat-drawer-active) .header,
-body:has(#kt_drawer.support-drawer-active) .header,
-body:has(#kt_drawer.confirmation-drawer-active) .header {
-  z-index: get($drawer, z-index) + 1;
-}
-
 // Radix's modal Dialog sets `pointer-events: none` on <body>, so the header's
 // drawer toggles would show no hover or pointer cursor and a click on one would
 // only land on the page behind. Keep them live: each toggle closes its own

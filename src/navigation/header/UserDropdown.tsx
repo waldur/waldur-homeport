@@ -38,11 +38,11 @@ const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
     <button
       ref={ref}
       type="button"
-      className="cursor-pointer border-0 bg-transparent flex items-center gap-4 py-2 px-2"
+      className="cursor-pointer border-0 bg-transparent flex items-center gap-[0.924rem] py-[0.5rem] px-[0.5rem]"
       aria-label={translate('User menu')}
       {...props}
     >
-      <div className="cursor-pointer symbol symbol-30px symbol-md-40px justify-center">
+      <div className="relative flex shrink-0 cursor-pointer items-center justify-center">
         {!user ? (
           <ImagePlaceholder width="40px" height="40px" circle />
         ) : (
@@ -51,7 +51,7 @@ const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
       </div>
       <div className="hidden md:flex flex-col items-start justify-center">
         {!user?.is_staff && (
-          <span className="text-quaternary text-xs leading-none mb-2">
+          <span className="text-quaternary text-xs leading-none mb-[0.5rem]">
             {translate('Hello')}
           </span>
         )}
@@ -64,7 +64,7 @@ const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
             size="sm"
             shape="pill"
             tone="outline"
-            className="items-end mt-1"
+            className="items-end mt-[0.25rem]"
           >
             {translate('Staff')}
           </Badge>
@@ -78,7 +78,9 @@ UserMenuToggle.displayName = 'UserMenuToggle';
 /** The user menu's header: the avatar, the name and the email. */
 const UserMenuHeader = ({ user }: { user: ReturnType<typeof useUser> }) => (
   <>
-    <div className="symbol symbol-50px me-5">
+    {/* `symbol-50px` sizes Avatar (a Metronic .symbol) up from the 40px it is
+        given while keeping its 40px initials; it goes when Avatar migrates. */}
+    <div className="symbol symbol-50px me-[1.25rem]">
       {!user ? (
         <ImagePlaceholder width="40px" height="40px" circle />
       ) : (
@@ -112,7 +114,10 @@ export const UserDropdownMenu: FunctionComponent = () => {
       <Menu.Trigger asChild>
         <UserMenuToggle />
       </Menu.Trigger>
-      <Menu.Content align="end" className="font-medium py-4 text-sm w-275px">
+      <Menu.Content
+        align="end"
+        className="font-medium py-[0.924rem] text-sm w-[275px]"
+      >
         {/* The header: a row that links to the profile, so the keyboard
             reaches it like any other row. */}
         {user ? (

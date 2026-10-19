@@ -1,7 +1,7 @@
 import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { KeyboardEvent as ReactKeyboardEvent, useEffect, useRef } from 'react';
 
-import { Popover, PopoverAnchor, PopoverContent, Tooltip } from 'waldur-ui';
+import { IconButton, Popover, PopoverAnchor, PopoverContent } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { getTabbableAfter, getTabbables } from '@/navigation/tabbables';
@@ -113,18 +113,11 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
       <PopoverAnchor asChild>
         <div className="flex items-center" id="searchContainer" ref={anchorRef}>
           {compact ? (
-            <Tooltip label={translate('Search')} side="bottom">
-              <button
-                type="button"
-                onClick={() => setShow(true)}
-                aria-label={translate('Search')}
-                className="btn-nav-item"
-              >
-                <span className="svg-icon svg-icon-2">
-                  <MagnifyingGlassIcon weight="bold" />
-                </span>
-              </button>
-            </Tooltip>
+            <IconButton
+              label={translate('Search')}
+              onClick={() => setShow(true)}
+              icon={<MagnifyingGlassIcon weight="bold" />}
+            />
           ) : (
             <>
               <SearchInput
@@ -136,18 +129,12 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
                 showShortcut={!show}
                 onOpen={() => setShow(true)}
               />
-              <Tooltip label={translate('Search')} side="bottom">
-                <button
-                  type="button"
-                  onClick={() => setShow(true)}
-                  aria-label={translate('Search')}
-                  className="btn-nav-item lg:hidden"
-                >
-                  <span className="svg-icon svg-icon-2">
-                    <MagnifyingGlassIcon weight="bold" />
-                  </span>
-                </button>
-              </Tooltip>
+              <IconButton
+                label={translate('Search')}
+                onClick={() => setShow(true)}
+                icon={<MagnifyingGlassIcon weight="bold" />}
+                className="lg:hidden"
+              />
             </>
           )}
         </div>

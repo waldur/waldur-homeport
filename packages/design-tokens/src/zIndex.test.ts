@@ -29,18 +29,25 @@ const BOOTSTRAP = {
   popover: 1070,
   tooltip: 1080,
 };
-const METRONIC_HEADER = 100;
 const METRONIC_TOOLBAR = 99;
 
 describe('z-index tokens', () => {
+  it('puts the header above the page tabs, below the sidebar panel and drawer', () => {
+    expect(token('header')).toBeGreaterThan(METRONIC_TOOLBAR);
+    expect(token('header')).toBeLessThan(token('sidebar-panel'));
+    // AppHeader lifts it to the drawer's + 1 while a drawer is open, which
+    // must still sit under the header's own popovers.
+    expect(token('mobile-drawer') + 1).toBeLessThan(token('header-popover'));
+  });
+
   it('puts the sidebar panel and mobile drawer above the header, below overlays', () => {
-    expect(token('sidebar-panel')).toBeGreaterThan(METRONIC_HEADER);
-    expect(token('mobile-drawer')).toBeGreaterThan(METRONIC_HEADER);
+    expect(token('sidebar-panel')).toBeGreaterThan(token('header'));
+    expect(token('mobile-drawer')).toBeGreaterThan(token('header'));
     expect(token('mobile-drawer')).toBeLessThan(BOOTSTRAP.modal);
   });
 
   it('puts header popovers above the header, toolbar and sidebar, below modals', () => {
-    expect(token('header-popover')).toBeGreaterThan(METRONIC_HEADER);
+    expect(token('header-popover')).toBeGreaterThan(token('header'));
     expect(token('header-popover')).toBeGreaterThan(METRONIC_TOOLBAR);
     expect(token('header-popover')).toBeGreaterThan(token('sidebar-panel'));
     expect(token('header-popover')).toBeGreaterThan(token('mobile-drawer'));
@@ -48,7 +55,7 @@ describe('z-index tokens', () => {
   });
 
   it('puts nav menus above the header and toolbar, below modals', () => {
-    expect(token('nav-menu')).toBeGreaterThan(METRONIC_HEADER);
+    expect(token('nav-menu')).toBeGreaterThan(token('header'));
     expect(token('nav-menu')).toBeGreaterThan(METRONIC_TOOLBAR);
     expect(token('nav-menu')).toBeLessThan(BOOTSTRAP.modal);
   });

@@ -1,7 +1,7 @@
 import { ChatsCircleIcon } from '@phosphor-icons/react';
 import React from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { IconButton } from 'waldur-ui';
 
 import { useDrawer, useIsDrawerOpenWith } from '@/drawer/actions';
 import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
@@ -27,23 +27,16 @@ export const QuickIssueDrawerToggle: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center ms-1">
-      <Tooltip label={translate('Support')} side="bottom">
-        <button
-          id="quick-issue-toggle"
-          type="button"
-          onClick={toggleSupportDrawer}
-          aria-label={translate('Support')}
-          aria-expanded={isOpen}
-          data-drawer-toggle
-          className="position-relative btn-nav-item"
-        >
-          <span className="svg-icon svg-icon-2">
-            <ChatsCircleIcon weight="bold" />
-          </span>
-          {showChatBullet && <HeaderButtonBullet />}
-        </button>
-      </Tooltip>
+    <div className="flex items-center ms-[0.25rem]">
+      <IconButton
+        id="quick-issue-toggle"
+        label={translate('Support')}
+        onClick={toggleSupportDrawer}
+        aria-expanded={isOpen}
+        data-drawer-toggle
+        icon={<ChatsCircleIcon weight="bold" />}
+        indicator={showChatBullet && <HeaderButtonBullet />}
+      />
     </div>
   );
 };

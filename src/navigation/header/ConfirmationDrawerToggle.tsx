@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { marketplaceProjectUpdateRequestsCount } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { IconButton } from 'waldur-ui';
 
 import { fetchResultCount } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -87,23 +87,16 @@ export const ConfirmationDrawerToggle: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center ms-1">
-      <Tooltip label={translate('Pending tasks')} side="bottom">
-        <button
-          id="pending-confirmations-toggle"
-          type="button"
-          onClick={handleOpenDrawer}
-          aria-label={translate('Pending tasks')}
-          aria-expanded={isOpen}
-          data-drawer-toggle
-          className="position-relative btn-nav-item"
-        >
-          <span className="svg-icon svg-icon-2">
-            <BellIcon weight="bold" />
-          </span>
-          {showBullet && <HeaderButtonBullet />}
-        </button>
-      </Tooltip>
+    <div className="flex items-center ms-[0.25rem]">
+      <IconButton
+        id="pending-confirmations-toggle"
+        label={translate('Pending tasks')}
+        onClick={handleOpenDrawer}
+        aria-expanded={isOpen}
+        data-drawer-toggle
+        icon={<BellIcon weight="bold" />}
+        indicator={showBullet && <HeaderButtonBullet />}
+      />
     </div>
   );
 };

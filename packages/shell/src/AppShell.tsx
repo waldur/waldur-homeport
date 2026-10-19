@@ -1,4 +1,9 @@
-import { BellIcon, QuestionIcon, SquaresFourIcon } from '@phosphor-icons/react';
+import {
+  BellIcon,
+  ListIcon,
+  QuestionIcon,
+  SquaresFourIcon,
+} from '@phosphor-icons/react';
 import { ReactNode, useEffect, useState } from 'react';
 import { useBootSplashDismiss } from 'waldur-boot-splash/react';
 import { translate } from 'waldur-i18n-runtime';
@@ -16,6 +21,7 @@ import {
   SidebarInset,
   SidebarProvider,
   TopBar,
+  useSidebar,
 } from 'waldur-ui';
 
 import { whenMicroAppBootstrapped } from './bootstrap';
@@ -125,6 +131,28 @@ export function AppShell(props: AppShellProps) {
   );
 }
 
+/**
+ * Opens the sidebar where it is a drawer. Below the sidebar's mobile
+ * breakpoint the sidebar, collapse toggle (SidebarBrand) included, lives in
+ * a closed Sheet, so without this nothing on screen can open it. Same
+ * control as waldur-homeport's header toggle (AppHeader.tsx).
+ */
+function MobileSidebarToggle() {
+  const { isMobile, openMobile, toggleSidebar } = useSidebar();
+  if (!isMobile) return null;
+  return (
+    <IconButton
+      label={translate('Toggle navigation menu')}
+      aria-expanded={openMobile}
+      onClick={toggleSidebar}
+      icon={<ListIcon weight="bold" />}
+      iconSize="lg"
+      // Half a step into the bar's padding, as in waldur-homeport.
+      className="-ms-[0.5rem]"
+    />
+  );
+}
+
 function AppShellContent({
   logo,
   onShortcutsClick,
@@ -168,23 +196,33 @@ function AppShellContent({
 
         <SidebarInset className="min-h-0">
           <TopBar
-            left={orgSwitcher}
+            left={
+              <>
+                <MobileSidebarToggle />
+                {orgSwitcher}
+              </>
+            }
             center={
               topBarCenter === null
                 ? undefined
                 : (topBarCenter ?? (
-                    <SearchField
-                      placeholder={translate('Search')}
-                      // '⌘K' isn't translatable content, just the universal
-                      // shortcut-key convention — not worth a prop until an
-                      // app actually needs a different one.
-                      shortcutHint="⌘K"
-                      className="hidden md:flex"
-                    />
+                    // TopBar's middle starts its content at the left, for
+                    // breadcrumbs; this app's search sits in the middle.
+                    <div className="flex w-full items-center justify-center">
+                      <SearchField
+                        placeholder={translate('Search')}
+                        // '⌘K' isn't translatable content, just the universal
+                        // shortcut-key convention — not worth a prop until an
+                        // app actually needs a different one.
+                        shortcutHint="⌘K"
+                        className="hidden md:flex"
+                      />
+                    </div>
                   ))
             }
             right={
-              <>
+              // TopBar leaves spacing between actions to the caller.
+              <div className="flex items-center gap-2">
                 <IconButton
                   icon={<SquaresFourIcon size={18} weight="bold" />}
                   label={translate('Apps')}
@@ -204,7 +242,7 @@ function AppShellContent({
                   onClick={onNotificationsClick}
                 />
                 <UserMenu />
-              </>
+              </div>
             }
           />
 
