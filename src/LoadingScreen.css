@@ -1,85 +1,21 @@
-.loading-screen-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+/* The shared splash layout and palette (.boot-splash, --boot-*) live in
+   index.html, which has to paint them before any stylesheet loads. Only what
+   the error screen adds is styled here. */
+
+.boot-splash__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+  color: var(--boot-fg);
+  text-wrap: balance;
 }
 
-.loading-screen img {
-  display: block;
-  margin: 0 auto;
-  max-width: 300px;
-}
-
-.loading-title {
-  color: #676a6c;
-  text-align: center;
-}
-
-.loading-title::after {
-  color: #2f4050;
-  content: ' .';
-  font-size: 40px;
-  animation: dots-mobile 1s steps(5, end) infinite;
-}
-
-@media screen and (width >= 769px) {
-  .loading-title::after {
-    color: #fff;
-    animation: dots 1s steps(5, end) infinite;
-  }
-}
-
-@keyframes dots-mobile {
-  0% {
-    text-shadow:
-      0.25em 0 0 #fff,
-      0.5em 0 0 #fff;
-  }
-
-  33% {
-    text-shadow:
-      0.25em 0 0 #2f4050,
-      0.5em 0 0 #fff;
-  }
-
-  66% {
-    text-shadow:
-      0.25em 0 0 #2f4050,
-      0.5em 0 0 #2f4050;
-  }
-
-  100% {
-    color: #fff;
-    text-shadow:
-      0.25em 0 0 #fff,
-      0.5em 0 0 #fff;
-  }
-}
-
-@keyframes dots {
-  0% {
-    text-shadow:
-      0.25em 0 0 #2f4050,
-      0.5em 0 0 #2f4050;
-  }
-
-  33% {
-    text-shadow:
-      0.25em 0 0 #fff,
-      0.5em 0 0 #2f4050;
-  }
-
-  66% {
-    text-shadow:
-      0.25em 0 0 #fff,
-      0.5em 0 0 #fff;
-  }
-
-  100% {
-    color: #2f4050;
-    text-shadow:
-      0.25em 0 0 #2f4050,
-      0.5em 0 0 #2f4050;
-  }
+.boot-splash__message {
+  max-width: 480px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--boot-muted);
+  overflow-wrap: anywhere;
 }

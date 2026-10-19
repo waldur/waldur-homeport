@@ -66,6 +66,7 @@ export const KNOWN_RUNTIME_PREFIXES = [
   '--bs-', // Bootstrap legacy variables (guarded by ESLint no-bootstrap-css-vars)
   '--kt-', // Metronic layout dimensions
   '--test-', // Mock variables in unit tests
+  '--boot-', // Boot splash palette, declared inline in index.html (not scanned)
 ];
 
 const CONSUMER_DIRS = ['src', 'packages', 'apps'];
