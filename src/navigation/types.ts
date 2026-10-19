@@ -12,18 +12,3 @@ export interface PageBarTab<T = any> {
   visible?: boolean;
   children?: Omit<PageBarTab<T>, 'children' | 'defaultKey'>[];
 }
-
-export interface IBreadcrumbItem {
-  key: string;
-  text: string;
-  dropdown?: ReactNode | ((close: () => void) => ReactNode);
-  hideDropdownArrow?: boolean;
-  active?: boolean;
-  to?: string;
-  params?: object;
-  onClick?(): void;
-  ellipsis?: 'md' | 'xl' | 'xxl';
-  truncate?: boolean;
-  maxLength?: number;
-  tooltipText?: string;
-}

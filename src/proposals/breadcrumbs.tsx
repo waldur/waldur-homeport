@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 
+import { IBreadcrumbItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
-import { IBreadcrumbItem } from '@/navigation/types';
 import { requestListState, requestListTitle } from '@/proposals/presentation';
 import { ProposalBreadcrumbPopover } from '@/proposals/proposal/ProposalBreadcrumbPopover';
 import { Call, Proposal } from '@/proposals/types';

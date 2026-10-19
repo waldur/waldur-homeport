@@ -9,6 +9,8 @@ import {
   marketplaceResourcesRetrieve,
 } from 'waldur-js-client';
 
+import { IBreadcrumbItem, useBreadcrumbs } from 'waldur-ui';
+
 import { ANNOUNCEMENT_ICON } from '@/administration/utils';
 import { usePermissionView } from '@/auth/PermissionLayout';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -27,7 +29,6 @@ import {
 } from '@/marketplace/resources/request-limits-change/utils';
 import { useModal } from '@/modal/actions';
 import {
-  useBreadcrumbs,
   usePageHero,
   useToolbarActions,
   useExtraAnnouncementBar,
@@ -35,7 +36,6 @@ import {
 import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
 import { useTitle } from '@/navigation/title';
-import { IBreadcrumbItem } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE } from '@/openstack/constants';
 import { PermissionEnum } from '@/permissions/enums';
@@ -338,7 +338,6 @@ export const ResourceDetailsContainer: FunctionComponent<
           text: translate('Offerings'),
           to: 'marketplace-vendor-offerings',
           params: { uuid: providerUuid },
-          ellipsis: 'md',
         },
         {
           key: 'offering',
@@ -349,7 +348,6 @@ export const ResourceDetailsContainer: FunctionComponent<
             offering_uuid: resource.offering_uuid,
             tab: 'resources-list',
           },
-          ellipsis: 'xxl',
         },
         {
           key: 'resource',
@@ -365,9 +363,7 @@ export const ResourceDetailsContainer: FunctionComponent<
         uuid: resource.customer_uuid,
         name: resource.customer_name,
       }),
-      getOrganizationProjectsBreadcrumbItem(resource.customer_uuid, {
-        ellipsis: 'md',
-      }),
+      getOrganizationProjectsBreadcrumbItem(resource.customer_uuid, {}),
       getProjectBreadcrumbItem({
         url: resource.project,
         uuid: resource.project_uuid,
@@ -380,7 +376,6 @@ export const ResourceDetailsContainer: FunctionComponent<
         text: resource.category_title,
         to: 'project.resources',
         params: { uuid: resource.project_uuid },
-        ellipsis: 'xxl',
       },
       {
         key: 'resource',

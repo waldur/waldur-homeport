@@ -298,7 +298,7 @@ import { Popover, PopoverContent, PopoverTrigger } from 'waldur-ui';
 ```
 
 - `PopoverContent` is a bordered card with the dropdown shadow and an 8px radius on Bootstrap's popover layer (`z-popover`, 1070), and nothing else: no width, padding, height cap or motion, since every panel lays out its own content. Add them as classes, e.g. `max-h-(--radix-popover-content-available-height) overflow-y-auto` for a panel that may outgrow the screen, or `animate-[waldur-menu-enter-up_0.3s_ease]` for the menus' entrance.
-- Another layer is a `z-*` class: `z-header-popover` for panels opened from the header (`SearchToggle.tsx`, `DropdownBreadcrumbItem.tsx`), `z-dropdown-menu` to stack like the action menus.
+- Another layer is a `z-*` class: `z-header-popover` for panels opened from the header (`SearchToggle.tsx`, `BreadcrumbTrail.tsx` in waldur-ui), `z-dropdown-menu` to stack like the action menus.
 - `container` picks where the panel is portaled (`CallSettingsMenu.tsx`); `PopoverAnchor` positions it against an element that isn't the trigger (`AsyncSearchBox.tsx`, `SearchToggle.tsx`).
 - A searchable list of links inside a popover (the breadcrumb switchers) is a `cmdk` combobox: the search box keeps focus while the arrow keys highlight the rows, which are `Command.Item asChild` around their `Link`, and Enter opens one. Reuse `BreadcrumbDropdown`, mapping each result to the page it opens with `getItem`, rather than a list of links you Tab through; the `Navigation/BreadcrumbDropdown` stories show every state and key.
 - The panel closes on any click or focus outside it. The `waldur-ui` selects inside need no special case, although they portal their option lists to `document.body`: Radix counts events from React portals opened inside the panel as inside it.

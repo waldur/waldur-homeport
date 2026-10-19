@@ -145,10 +145,3 @@ $modal-content-box-shadow-sm-up:
 $modal-lg: 840px !default;
 $modal-md: 544px !default;
 $modal-sm: 400px !default;
-
-// Breadcrumbs
-$breadcrumb-divider: svg-breadcrumb-divider(css-color(gray, 400)) !default;
-$breadcrumb-divider-color: var(--text-quinary) !default;
-$breadcrumb-item-padding-x: 0.923rem !default;
-$breadcrumb-color: $link-color !default; // Custom variable
-$breadcrumb-active-color: var(--text-quaternary) !default;

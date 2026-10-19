@@ -3,13 +3,20 @@ import classNames from 'classnames';
 import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { SidebarProvider, useSidebar } from 'waldur-ui';
+import {
+  BreadcrumbLinkRenderer,
+  BreadcrumbsProvider,
+  SidebarProvider,
+  useBreadcrumbItems,
+  useSidebar,
+} from 'waldur-ui';
 
 import { ImpersonationBar } from '@/administration/ImpersonationBar';
 import * as AuthService from '@/auth/AuthService';
 import { PermissionDataProvider } from '@/auth/PermissionLayout';
 import WarningBar from '@/auth/WarningBar';
 import { GRID_BREAKPOINTS } from '@/core/constants';
+import { Link } from '@/core/Link';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { InvitationCheck } from '@/invitations/InvitationCheck';
 import { DefaultLayoutConfig, useLayout } from '@/metronic/layout/core';
@@ -37,8 +44,13 @@ import { OutstandingBar } from './OutstandingBar';
 import { UnifiedSidebar } from './sidebar/UnifiedSidebar';
 import { Tab } from './Tab';
 import { Toolbar } from './Toolbar';
-import { IBreadcrumbItem } from './types';
 import { useTabs } from './useTabs';
+
+// A crumb's `to` is a UI-Router state name. The app's Link also conceals links
+// to states this deployment has disabled.
+const renderStateLink: BreadcrumbLinkRenderer = (to, params) => (
+  <Link state={to} params={params} />
+);
 
 export const Layout: React.FC<PropsWithChildren> = ({ children }) => (
   <SidebarProvider
@@ -46,7 +58,9 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => (
     mobileBreakpoint={GRID_BREAKPOINTS.lg}
     style={{ '--sidebar-width-icon': '75px' } as React.CSSProperties}
   >
-    <LayoutContent>{children}</LayoutContent>
+    <BreadcrumbsProvider renderLink={renderStateLink}>
+      <LayoutContent>{children}</LayoutContent>
+    </BreadcrumbsProvider>
   </SidebarProvider>
 );
 
@@ -55,7 +69,7 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
   const currentUser = useUser();
   const impersonatorUser = useSelector(getImpersonatorUser);
   const [actions, setActions] = useState(null);
-  const [breadcrumbs, setBreadcrumbs] = useState<IBreadcrumbItem[]>([]);
+  const breadcrumbs = useBreadcrumbItems();
   const [extraTabs, setExtraTabs] = useState<Tab[]>([]);
   const [fullPage, setFullPage] = useState(false);
   const [PageHero, setPageHero] = useState<React.ReactNode>(null);
@@ -79,8 +93,6 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
       setPageHero,
       setPageBar,
       setExtraAnnouncementBar,
-      setBreadcrumbs,
-      breadcrumbs,
       setExtraToolbar,
     }),
     [
@@ -92,8 +104,6 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
       setPageHero,
       setPageBar,
       setExtraAnnouncementBar,
-      setBreadcrumbs,
-      breadcrumbs,
       setExtraToolbar,
     ],
   );

@@ -10,7 +10,8 @@ import {
 
 let setBreadcrumbs: (items: unknown[]) => void;
 
-// Mirrors Layout: the context value changes whenever breadcrumbs do.
+// A context value that changes under the bars, as Layout's did whenever
+// breadcrumbs changed.
 const Provider: FC<PropsWithChildren> = ({ children }) => {
   const [bars, setExtraAnnouncementBar] = useExtraAnnouncementBars();
   const [breadcrumbs, _setBreadcrumbs] = useState([]);

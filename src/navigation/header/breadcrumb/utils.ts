@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
+import { IBreadcrumbItem } from 'waldur-ui';
+
 import { canAccessOrganization } from '@/customer/utils';
 import { translate } from '@/i18n';
 import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
-import { IBreadcrumbItem } from '@/navigation/types';
 import { Customer } from '@/workspace/types';
 
 export const usePresetBreadcrumbItems = () => {
@@ -35,7 +36,6 @@ export const usePresetBreadcrumbItems = () => {
             syncResourceFilters({ organization: customer, project: null }),
         }
       : {}),
-    ellipsis: 'xl',
     truncate: true,
     ...options,
   });
@@ -52,7 +52,6 @@ export const usePresetBreadcrumbItems = () => {
           params: { uuid: customerUuid },
         }
       : {}),
-    ellipsis: 'xl',
     ...options,
   });
 
@@ -67,7 +66,6 @@ export const usePresetBreadcrumbItems = () => {
     text: project.name,
     to: 'project.dashboard',
     params: { uuid: project.uuid },
-    ellipsis: 'xl',
     truncate: true,
     onClick: () =>
       syncResourceFilters({

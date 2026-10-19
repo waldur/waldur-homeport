@@ -35,7 +35,7 @@ export const FilterSelect = (props: FilterSelectProps) => {
       isClearable={false}
       size="sm"
       components={{ ValueContainer: MultiSelectLimitedValueContainer }}
-      classNames={{ menu: () => 'min-w-225px' }}
+      classNames={{ menu: () => 'min-w-[225px]' }}
       {...props}
     />
   );

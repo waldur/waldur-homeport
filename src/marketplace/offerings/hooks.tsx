@@ -1,7 +1,8 @@
 import { Offering, ServiceProvider } from 'waldur-js-client';
 
+import { IBreadcrumbItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { IBreadcrumbItem } from '@/navigation/types';
 
 import { getMarketplaceTitle } from '../title';
 
@@ -23,7 +24,6 @@ export const getOfferingBreadcrumbItems = (
       text: offering?.customer_name || '...',
       to: 'marketplace-providers.details',
       params: offering ? { customer_uuid: offering.customer_uuid } : undefined,
-      ellipsis: 'xl',
       maxLength: 11,
     },
     {
@@ -31,7 +31,6 @@ export const getOfferingBreadcrumbItems = (
       text: translate('Offerings'),
       to: 'marketplace-vendor-offerings',
       params: offering ? { uuid: offering.customer_uuid } : undefined,
-      ellipsis: 'md',
     },
     {
       key: 'offering',

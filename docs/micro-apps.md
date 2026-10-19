@@ -23,6 +23,12 @@ sidebar-style, i18n, Sentry) doesn't need to rebuild any of that — see
 "Shared app-shell" section. Reach for it directly rather than re-deriving
 the same wiring per app.
 
+The same goes for breadcrumbs: use `waldur-ui`'s `BreadcrumbTrail` (with
+`BreadcrumbsProvider` and `useBreadcrumbs` once pages set their own crumbs)
+rather than copying `src/navigation/header/breadcrumb/`. It knows no router:
+a `renderLink` on the provider turns a crumb's `to` into your router's link.
+See [breadcrumbs.md](breadcrumbs.md).
+
 **The convention is directory presence, not a manifest.** Every `apps/*`
 member is picked up automatically — by `yarn install` (via the
 workspace glob), by the Dockerfile's build loop, by CI's typecheck/build

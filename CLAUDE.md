@@ -37,6 +37,7 @@ For detailed guidance, see `docs/` — full index with one-line descriptions in 
 - `forms.md` - React Final Form and VStepperForm patterns
 - `tabs.md` - Tabs: `Tabs`, `TabNav`, `EmbeddedTabs`, mount modes, migrating off Bootstrap `Nav`/`Tab`
 - `menus.md` - Menus, dropdowns and popovers: `Menu`, `MenuPopover`, `ActionsMenu`, row actions
+- `breadcrumbs.md` - Breadcrumbs: `useBreadcrumbs`, `IBreadcrumbItem`, `BreadcrumbTrail`, `renderLink`, dropdown crumbs
 - `tables.md` - Modular index for useTable, columns, filters, row actions, export, and visual customizations
 - `table/filter-migration-guide.md` - Generated table filters from OpenAPI schema
 - `development-setup.md` - Build, environment, tooling

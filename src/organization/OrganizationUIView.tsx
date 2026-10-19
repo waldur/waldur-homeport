@@ -6,7 +6,7 @@ import {
 } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 
-import { TabNav } from 'waldur-ui';
+import { IBreadcrumbItem, TabNav, useBreadcrumbs } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { CustomerProfile } from '@/customer/dashboard/CustomerProfile';
@@ -14,9 +14,8 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { hasProviderRouting } from '@/issues/hooks';
-import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { usePageHero } from '@/navigation/context';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
-import { IBreadcrumbItem } from '@/navigation/types';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';

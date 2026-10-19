@@ -11,10 +11,9 @@ import { Provider } from 'react-redux';
 import { configureStore } from 'redux-mock-store';
 import { expect, fn, screen, userEvent, waitFor, within } from 'storybook/test';
 
-import { IBreadcrumbItem } from '@/navigation/types';
+import { BreadcrumbTrail, IBreadcrumbItem } from 'waldur-ui';
 
 import { BreadcrumbDropdown } from './BreadcrumbDropdown';
-import { DropdownBreadcrumbItem } from './DropdownBreadcrumbItem';
 
 /**
  * Stories for the breadcrumb switchers (project, resource, offering, order,
@@ -179,7 +178,7 @@ interface ProjectSwitcherProps {
 
 /**
  * src/project/ProjectBreadcrumbPopover.tsx with the fetcher swapped for a
- * fake one, in the panel its popover draws (DropdownBreadcrumbItem.tsx).
+ * fake one, in the panel its popover draws (BreadcrumbTrail.tsx in waldur-ui).
  */
 const ProjectSwitcher = ({
   fetcher,
@@ -537,16 +536,12 @@ const crumb: IBreadcrumbItem = {
 };
 
 /**
- * The switcher in its crumb (`DropdownBreadcrumbItem`). Enter on the crumb
+ * The switcher in its crumb (a `BreadcrumbTrail` item's `dropdown`). Enter on the crumb
  * opens it with focus in the search box; Escape or Tab closes it and puts
  * focus back on the crumb.
  */
 export const InItsCrumb: Story = {
-  render: () => (
-    <ol className="breadcrumb">
-      <DropdownBreadcrumbItem item={crumb} />
-    </ol>
-  ),
+  render: () => <BreadcrumbTrail items={[crumb]} />,
   play: async ({ canvasElement }) => {
     const trigger = within(canvasElement).getByRole('button', {
       name: new RegExp(PROJECTS[2].name),

@@ -110,7 +110,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             // overflow: hidden clips the trail. Together these guarantee it can
             // never push the header actions (search / confirmation / user menu)
             // off screen, and they give the breadcrumb <ol> a real width so its
-            // overflow measurement (Breadcrumbs.tsx) can collapse the middle.
+            // overflow measurement (BreadcrumbTrail in waldur-ui) can collapse the middle.
             style={{ minWidth: 0, flexBasis: 0, overflow: 'hidden' }}
           >
             {Boolean(user) && showGoBack && (

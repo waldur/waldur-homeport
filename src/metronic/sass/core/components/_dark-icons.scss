@@ -1,9 +1,0 @@
-// Dark versions of the icons Bootstrap draws as data URIs (_svg-icons.scss):
-// a var() cannot reach inside one, so the dark-theme mixin swaps the image.
-// The colours are the dark values of the light ones in _variables.custom.scss.
-
-.breadcrumb-item + .breadcrumb-item::before {
-  @include dark-theme {
-    content: escape-svg(svg-breadcrumb-divider(css-color(gray-dark, 500)));
-  }
-}

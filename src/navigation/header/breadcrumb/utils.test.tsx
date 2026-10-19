@@ -145,14 +145,14 @@ describe('usePresetBreadcrumbItems', () => {
 
     const orgItem = result.current.getOrganizationBreadcrumbItem(
       { uuid: 'cust-1', name: 'Acme' },
-      { ellipsis: 'md' },
+      { maxLength: 20 },
     );
     const projectsItem = result.current.getOrganizationProjectsBreadcrumbItem(
       'cust-1',
-      { ellipsis: 'xxl' },
+      { truncate: true },
     );
 
-    expect(orgItem.ellipsis).toBe('md');
-    expect(projectsItem.ellipsis).toBe('xxl');
+    expect(orgItem.maxLength).toBe(20);
+    expect(projectsItem.truncate).toBe(true);
   });
 });

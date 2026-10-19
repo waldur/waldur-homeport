@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
 
+import { cn } from '../cn';
+
 interface MiddleTruncateProps {
   text: string;
   // Number of trailing characters always kept visible at the end, so a
@@ -20,15 +22,19 @@ export const MiddleTruncate: FunctionComponent<MiddleTruncateProps> = ({
   tailLength = 12,
   className,
 }) => {
-  const classes = className
-    ? `middle-truncate ${className}`
-    : 'middle-truncate';
+  const classes = cn(
+    'middle-truncate inline-flex items-baseline min-w-0 max-w-full align-bottom',
+    className,
+  );
 
   // Too short to benefit from a head/tail split — render as one ellipsis span.
   if (text.length <= tailLength + 4) {
     return (
       <span
-        className={`${classes} middle-truncate--simple`}
+        className={cn(
+          classes,
+          'middle-truncate--simple overflow-hidden text-ellipsis whitespace-nowrap',
+        )}
         title={text}
         data-testid="middle-truncate-whole"
       >
@@ -57,16 +63,16 @@ export const MiddleTruncate: FunctionComponent<MiddleTruncateProps> = ({
           mid-word fragments ("HPC Cl" + "uster Access") into the accessibility
           tree. Carry the intact string in a visually hidden node and hide the
           fragments from assistive technology so the name is announced once. */}
-      <span className="visually-hidden">{text}</span>
+      <span className="sr-only">{text}</span>
       <span
-        className="middle-truncate-head"
+        className="middle-truncate-head overflow-hidden text-ellipsis whitespace-nowrap min-w-0"
         aria-hidden="true"
         data-testid="middle-truncate-head"
       >
         {head}
       </span>
       <span
-        className="middle-truncate-tail"
+        className="middle-truncate-tail whitespace-nowrap shrink-0"
         aria-hidden="true"
         data-testid="middle-truncate-tail"
       >

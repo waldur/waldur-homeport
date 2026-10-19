@@ -7,18 +7,18 @@ import {
   marketplaceCategoryGroupsRetrieve,
 } from 'waldur-js-client';
 
+import { IBreadcrumbItem, useBreadcrumbs } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import {
-  useBreadcrumbs,
   useExtraToolbar,
   useFullPage,
   useToolbarActions,
 } from '@/navigation/context';
 import { useTitle } from '@/navigation/title';
-import { IBreadcrumbItem } from '@/navigation/types';
 
 import { CardStyleType } from '../common/cards/index';
 import { CardStyleProvider } from '../landing/CardStyleContext';
