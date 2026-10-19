@@ -12,7 +12,7 @@ import { useTheme } from '@/theme/useTheme';
  * (src/dashboard/utils.ts, src/marketplace/aggregate-limits/utils.ts): the
  * primary/consumed series is the brand green ramp, the secondary / remaining
  * series is neutral gray-300, and status hues use the theme's semantic ramp
- * values (src/metronic/sass/_colors.scss) instead of ad-hoc Tailwind/Bootstrap
+ * values (packages/design-tokens/src/css/primitives/colorRamps.css) instead of ad-hoc Tailwind/Bootstrap
  * hex. Keeping one source here means the experimental widgets track the brand
  * color and never drift back to off-theme palettes.
  */

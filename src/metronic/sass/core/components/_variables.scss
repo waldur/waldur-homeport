@@ -1,55 +1,15 @@
 // Global variables for Bootstrap customization.
 // To override any Bootstrap variable safely you can use _variables.demo.scss
 
-// Bootstrap gray colors map
-$grays: (
-  '25': $gray-25,
-  '50': $gray-50,
-  '100': $gray-100,
-  '200': $gray-200,
-  '300': $gray-300,
-  '400': $gray-400,
-  '500': $gray-500,
-  '600': $gray-600,
-  '700': $gray-700,
-  '800': $gray-800,
-  '900': $gray-900,
-) !default; // Custom variable
+// Bootstrap's two base colours (its own values): this file is imported before
+// bootstrap/scss/variables, so they have to exist here for the rgba() calls
+// below. Every other colour is a design token (var(--…)) or a Bootstrap default
+// that no rule uses.
 
-// Theme colors
-$theme-colors: (
-  'white': $white,
-  // custom color type
-  'light': $light,
-  'primary': $primary,
-  'primary-50': $primary-50,
-  'primary-100': $primary-100,
-  'primary-200': $primary-200,
-  'primary-300': $primary-300,
-  'primary-600': $primary-600,
-  'primary-700': $primary-700,
-  'secondary': $secondary,
-  'success': $success,
-  'success-600': $success-600,
-  'success-700': $success-700,
-  'info': $info,
-  'warning': $warning,
-  'danger': $danger,
-  'danger-600': $danger-600,
-  'dark': $dark,
-  'dark-always': $dark-always,
-  // temporary gray colors
-  'gray': $gray-600,
-  'gray-100': $gray-100,
-  'gray-200': $gray-200,
-  'gray-300': $gray-300,
-  'gray-400': $gray-400,
-  'gray-500': $gray-500,
-  'gray-600': $gray-600,
-  'gray-700': $gray-700,
-  'gray-800': $gray-800,
-  'gray-900': $gray-900,
-) !default;
+// Bootstrap's contextual colours (.btn-primary, .alert-danger, .bg-primary, …)
+// are not used: colour comes from the design tokens. An empty map keeps those
+// generators, and the --bs-<name> custom properties, from emitting anything.
+$theme-colors: () !default;
 
 // Text colors
 
@@ -187,16 +147,12 @@ $position-values: (
 // Body
 
 // Settings for the `<body>` element.
-$body-bg: $white !default;
-$body-color: $gray-900 !default;
 $body-text-align: null !default;
 
 // Links
 
 // Style anchor elements.
-$link-color: var(--text-brand-secondary) !default;
 $link-decoration: none !default;
-$link-hover-color: var(--text-brand-secondary) !default;
 $link-hover-decoration: underline !default;
 
 // Paragraphs
@@ -238,8 +194,6 @@ $container-max-widths: (
 // Define common padding and border radius sizes and more.
 
 $border-width: 1px !default;
-$border-color: var(--border-secondary) !default;
-$border-dashed-color: $gray-300 !default; // Custom variable
 
 $border-widths: (
   0: 0,
@@ -249,8 +203,6 @@ $border-widths: (
   4: 4px,
   5: 5px,
 ) !default;
-
-$component-active-bg: $primary !default;
 
 $transition-base: all 0.2s ease !default;
 $transition-fade: opacity 0.15s linear !default;
@@ -262,8 +214,6 @@ $transition-link:
 // Components
 
 // Define common padding and border radius sizes and more.
-
-$component-active-bg: $primary !default;
 
 // Border Radiues
 $border-radius-sm: 0.275rem !default;
@@ -383,7 +333,6 @@ $headings-font-family: null !default;
 $headings-font-style: null !default;
 $headings-font-weight: $font-weight-bolder !default;
 $headings-line-height: 1.2 !default;
-$headings-color: $gray-900 !default;
 
 $display-font-sizes: (
   1: 5rem,
@@ -401,12 +350,6 @@ $display-line-height: $headings-line-height !default;
 
 // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
 
-$input-btn-focus-color-opacity: 0.25 !default;
-$input-btn-focus-color: rgba(
-  $component-active-bg,
-  $input-btn-focus-color-opacity
-) !default;
-
 $input-btn-padding-y-lg: 0.68rem !default;
 
 // Buttons
@@ -419,15 +362,9 @@ $btn-box-shadow: null !default;
 
 // Forms
 
-$input-disabled-bg: $gray-200 !default;
-
 // Card
-$card-bg: $body-bg !default;
 $card-box-shadow: 0px 0px 20px 0px rgba(76, 87, 125, 0.02) !default; // none in dark mode (_card.scss)
-$card-border-color: $border-color !default;
 $card-border-style: solid !default; // Custom variable
-$card-border-dashed-color: $border-dashed-color !default;
-$card-cap-bg: $white !default;
 $card-py: 2rem !default;
 $card-px: 2.25rem !default;
 $card-border-radius: $border-radius !default;
@@ -440,12 +377,10 @@ $card-header-height: 70px !default; // Custom variable
 $dropdown-box-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15) !default;
 
 // Code
-$code-bg: #f1f3f8 !default; // Custom variable; dark mode in _code.scss
 $code-box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.08) !default; // Custom variable
 $code-padding: 0.1rem 0.4rem !default; // Custom variable
 $code-margin: 0 0.5rem !default; // Custom variable
 $code-border-radius: 0.3rem !default; // Custom variable
-$code-color: #b93993 !default; // Custom variable; dark mode in _code.scss
 
 // Spinners
 
@@ -462,19 +397,7 @@ $table-cell-padding-x: 0.75rem !default;
 $table-cell-padding-y-sm: 0.5rem !default;
 $table-cell-padding-x-sm: 0.5rem !default;
 
-$table-color: $body-color !default;
-$table-bg: transparent !default;
-$table-striped-color: $table-color !default;
-$table-striped-bg: rgba($gray-100, 0.75) !default;
-
-$table-active-color: $table-color !default;
-$table-active-bg: $gray-100 !default;
-
-$table-hover-color: $table-color !default;
-$table-hover-bg: $gray-100 !default;
-
 $table-border-width: $border-width !default;
-$table-border-color: $border-color !default;
 
 // Opacity
 $opacity-values: (

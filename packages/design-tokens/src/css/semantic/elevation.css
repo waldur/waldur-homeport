@@ -4,10 +4,11 @@
  *   --dropdown-shadow   dropdowns, menus and popovers
  *   --overlay-shadow    dialogs and toasts
  *
- * --dropdown-shadow is Metronic's $dropdown-box-shadow as
- * src/metronic/sass/_variables.custom.scss overrides it (also
- * $popover-box-shadow and the $menu map's dropdown shadow), checked against
- * the live app's dropdowns with getComputedStyle.
+ * --dropdown-shadow is the custom dropdown shadow Metronic's
+ * $dropdown-box-shadow used to be overridden with (_variables.custom.scss, now
+ * gone; the same value also served $popover-box-shadow and the $menu map's
+ * dropdown shadow), checked against the live app's dropdowns with
+ * getComputedStyle. .table-loading-message reads it too.
  *
  * --overlay-shadow is the core $dropdown-box-shadow that override replaced.
  * Toast.tsx was built on it before the override was noticed, and keeps it

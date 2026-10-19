@@ -1,42 +1,70 @@
-// Colour ramps (gray, primary, success, info, danger, warning and the custom
-// hues) are generated from packages/design-tokens/tokens/colors.json.
-@import 'color-ramps';
+// Every colour variable of the theme, in one place. Imported before
+// _variables.custom.scss and core/components/_variables.scss (see
+// _init-config.scss), so a value set here wins over any later `!default`.
 
-// -----------------------------
-// Original Bootstrap Variables
+// Colours are the design tokens (var(--…)), so one stylesheet serves both
+// themes; the colour ramps themselves are CSS (--color-<ramp>-<step>) and Sass
+// reads none of them. Bootstrap's other colour names ($gray-*, $primary, …) are
+// left at its own defaults: no compiled rule reads them. Shadows stay with their
+// components (core/components/_variables.scss).
 
-// Bootstrap base colors
-$white: #ffffff !default;
-$black: #000000 !default;
+// Base colours (Bootstrap's own values). These have to be Sass colours: the
+// rgba() calls in the shadows read them.
+$white: #fff !default;
+$black: #000 !default;
 
-$text-muted: $gray-500 !default;
-$backdrop-color: $gray-900; // Custom variable
+// Surfaces and text
+$body-bg: var(--bg-primary) !default;
+$body-color: var(--text-primary) !default;
+$headings-color: var(--text-primary) !default;
+$text-muted: var(--text-quaternary) !default;
+$page-bg: var(--bg-secondary) !default;
 
-// Bootstrap custom colors
-$red: #dc3545 !default;
-$yellow: #ffc107 !default;
-$green: #198754 !default;
-$cyan: #0dcaf0 !default;
+// Borders
+$border-color: var(--border-secondary) !default;
 
-// Bootstrap contextual colors
-// Dark colors
-$dark: $gray-900 !default; // Bootstrap variable
-$dark-always: #181c32 !default; // Custom variable
+// Links
+$link-color: var(--text-brand-secondary) !default;
+$link-hover-color: var(--text-brand-secondary) !default;
 
-// Light colors
-$light: $gray-100 !default; // Bootstrap variable
+// The static default green. The tenant's brand is the runtime --brand-* ramp;
+// Bootstrap runs tint-color() and rgba() on these two, so they must stay Sass
+// colours (a var() is an error there).
+$component-active-bg: #307300 !default;
 
-// -----------------------------
+// Card
+$card-bg: $body-bg !default;
+$card-border-color: $border-color !default;
+$card-border-dashed-color: var(--border-divider-medium) !default;
+$card-cap-bg: $white !default;
 
-// Theme colors
-// Primary base
+// Code
+$code-bg: #f1f3f8 !default; // dark mode in core/components/_code.scss
+$code-color: #b93993 !default; // dark mode in core/components/_code.scss
+$kbd-bg: var(
+  --bg-primary-solid
+) !default; // dark mode in core/components/_code.scss
+$blockquote-footer-color: var(--text-tertiary) !default;
+$figure-caption-color: var(--text-tertiary) !default;
+$thumbnail-border-color: var(--border-primary) !default;
 
-// Primary
-$primary: $primary-600 !default; // Bootstrap variable
+// Inputs
+$input-disabled-bg: var(--bg-secondary) !default;
+$input-disabled-color: var(--text-disabled) !default;
 
-// Bootstrap variables
-$secondary: $primary-50 !default;
-$success: $success-600 !default;
-$info: $info-600 !default;
-$danger: $danger-600 !default;
-$warning: $warning-600 !default;
+// List group
+$list-group-color: var(--text-primary) !default;
+$list-group-hover-bg: var(--bg-tertiary) !default;
+$list-group-disabled-color: var(--text-tertiary) !default;
+$list-group-action-color: var(--text-secondary) !default;
+$list-group-action-active-bg: var(--bg-quaternary) !default;
+$list-group-active-bg: var(--bg-brand-solid) !default;
+
+// Tables
+$table-striped-bg: color-mix(
+  in srgb,
+  var(--bg-tertiary) 75%,
+  transparent
+) !default;
+$table-active-bg: var(--bg-tertiary) !default;
+$table-hover-bg: var(--bg-tertiary) !default;

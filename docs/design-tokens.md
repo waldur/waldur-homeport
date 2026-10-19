@@ -16,16 +16,15 @@ that expose those roles — and how to change one.
 
 **Colour ramps are edited in one file:**
 [`packages/design-tokens/tokens/colors.json`](../packages/design-tokens/tokens/colors.json).
-Never edit the two files generated from it:
+Never edit the file generated from it:
 
-| Generated file                                             | Consumer                                                                                                                            |
-| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `src/metronic/sass/_color-ramps.scss`                      | Bootstrap/Metronic (`$gray-500`, `$success-600`, …), the same values as the CSS ramps |
-| `packages/design-tokens/src/css/primitives/colorRamps.css` | Tailwind and CSS variables (`--color-gray-500`, `bg-success-600`), declared once in `@theme static`                                 |
+| Generated file                                             | Consumer                                                                                            |
+| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `packages/design-tokens/src/css/primitives/colorRamps.css` | Tailwind and CSS variables (`--color-gray-500`, `bg-success-600`), declared once in `@theme static` |
 
 ```bash
-yarn tokens:generate   # rewrite both files from the JSON
-yarn tokens:check      # exit 1 if either is stale (also run by the unit tests)
+yarn tokens:generate   # rewrite colorRamps.css from the JSON
+yarn tokens:check      # exit 1 if it is stale (also run by the unit tests)
 yarn tokens:audit      # dead/ghost tokens, redundant aliases, new duplicate roles (exit 1)
 yarn tokens:duplicates # the same, plus the full duplicate value-profile report
 ```
@@ -41,23 +40,19 @@ in both themes and the pair is not in `DUPLICATE_BASELINE` (see [Guards](#guards
 
 ```jsonc
 "success": {
-  "description": "Optional; becomes a comment in both outputs.",
+  "description": "Optional; becomes a comment in the output.",
   "steps": {
-    "50":  { "light": "#ecfdf3" },
-    "400": { "light": "#f670c7", "scss": false }       // CSS-only: no SCSS variable
+    "50":  { "light": "#ecfdf3" }
   }
 }
 ```
 
-Optional ramp-level keys: `scssName` (the SCSS variable prefix when it differs from the CSS
-name — `error` is `$danger-*`), `scssDefault: false` (omit `!default`), `css: false` (SCSS
-only — the static default green `primary`, which Tailwind never sees), `scss: false` (CSS
-only — `gray-dark`).
+Optional ramp-level key: `css: false` (leave the ramp out of the CSS).
 
 Colours are lower-case `#rrggbb`; the generator rejects anything else. A step has one value:
 the key is `light` for history, and the generator rejects a `dark` one. Ramps are physical and
-the same in both themes; dark UI picks other steps through the semantic tokens. (The SCSS ramps
-used to be theme-inverted for a separate dark compile, `style.dark.scss`, which is gone.)
+the same in both themes; dark UI picks other steps through the semantic tokens. (The Sass
+ramps used to be theme-inverted for a separate dark compile, `style.dark.scss`, which is gone.)
 
 ## Gray in dark mode: `gray` and `gray-dark`
 
@@ -76,7 +71,7 @@ Dark UI wants neutral grays where the light `gray` is blue-tinted (500 is `#6670
   unconditionally, while the `light` style reads `gray`). A component that needs a dark-specific
   gray writes `dark:bg-[var(--color-gray-dark-800)]` or `dark:bg-gray-dark-800`.
 
-`gray-dark` is CSS-only (`"scss": false`). Its values are what the old theme-inverted SCSS grays were
+Sass never reads `gray-dark`. Its values are what the old theme-inverted SCSS grays were
 in dark mode, re-indexed: `gray-dark-N` was the dark value of the mirrored `$gray-N` (25 ↔ 950,
 50 ↔ 900, …). The `mirrored-ramp-color()` mixin keeps that pairing for one-off SCSS colours.
 
@@ -261,7 +256,7 @@ beats every Tailwind utility, important or not: a class Tailwind also defined (`
 removes `color`, `background-color`, `border-color` and `border-top`/`-end`/`-bottom`/`-start`
 from `$utilities`, and the `border: 0` `.border-0` from its `border` utility. (Its width
 utilities stay: `.border-0` … `.border-5`, `.border-top-0`, … set only `border-width`.) Every colour class is Tailwind's and
-follows the design tokens. (`$theme-colors` itself keeps its keys, for the Bootstrap components.)
+follows the design tokens. (`$theme-colors` is an empty map, so no Bootstrap component emits a contextual colour either.)
 
 Bootstrap's old class names paint nothing now, except those Tailwind defines itself (the status
 utilities). They were migrated as:
@@ -306,8 +301,8 @@ green, whatever the tenant configured. So:
   `var(--brand-50)` with a `dark-theme` override to `var(--brand-900)`. For a focus glow, use
   `color-mix(in srgb, var(--focus-ring-color) 25%, transparent)`.
 - Never pass a CSS variable into a Sass colour function (`tint-color`, `shade-color`, `mix`,
-  `rgba($x, …)`): they need a compile-time colour. That is why `$primary` itself stays static.
-- `_variables.custom.scss` already points the Bootstrap outputs that would otherwise paint the
+  `rgba($x, …)`): they need a compile-time colour. That is why the static `$component-active-bg` (the default green, which Bootstrap tints) stays a literal.
+- `_colors.scss` already points the Bootstrap outputs that would otherwise paint the
   static green at the runtime brand: the active list-group row and the range thumb. `.svg-icon-primary`
   is `var(--brand-color)`, so it follows the brand too.
 
@@ -480,8 +475,6 @@ They live with the tokens they document, so a token change and its story change 
 
 ## What is not generated (yet)
 
-- **Derived SCSS variables** — `$success`, `$success-active`, `$text-muted`, `$dark-active`, … stay in
-  `_colors.scss` (they use Sass functions and reference other variables).
 - **The brand ramp** — `--brand-*` is tenant-configurable and injected at runtime
   (`initBrandTokens()`).
 - **The semantic layer** — `--border-*`/`--text-*`/`--btn-*`/`--status-*` CSS files
@@ -592,11 +585,13 @@ Outside that SCSS nothing reads them any more, so neither check has a per-file a
 
 1. Edit `tokens/colors.json`.
 2. `yarn tokens:generate`.
-3. Commit the JSON and both generated files together.
+3. Commit the JSON and the generated file together.
 
 Changing a light value changes what the app renders in both Bootstrap and Tailwind components
-at once, which is the point. A new ramp or step appears in SCSS as `$<name>-<step>` and in CSS
-as `--color-<name>-<step>` (and so as Tailwind utilities).
+at once, which is the point. A new ramp or step appears in CSS as `--color-<name>-<step>` (and so as Tailwind utilities).
+Sass defines no colour ramp. Every Sass colour variable (tokens as `var(--…)`, plus `$white`,
+`$black` and the static default green) lives in `src/metronic/sass/_colors.scss`, and Bootstrap's own
+defaults fill every other `$gray-*` / `$primary` name, none of which reaches a compiled rule.
 
 ## Verifying a refactor changes nothing
 

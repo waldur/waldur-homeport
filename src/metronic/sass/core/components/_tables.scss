@@ -118,12 +118,8 @@
   top: 50%;
   left: 50%;
   @include border-radius($border-radius);
-  box-shadow: $dropdown-box-shadow;
+  box-shadow: var(--dropdown-shadow);
   background-color: var(--bg-primary-solid);
-
-  @include dark-theme {
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
-  }
   // Light text on the dark --bg-primary-solid pill, in both themes.
   color: var(--color-gray-dark-200);
   font-weight: var(--font-weight-medium);
