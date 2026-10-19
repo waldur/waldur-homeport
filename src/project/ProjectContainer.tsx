@@ -26,6 +26,7 @@ const PageHero = ({ project }) => {
     <div className="container-fluid my-5">
       {canEdit && (
         <TabNav
+          aria-label={translate('Project views')}
           activeKey={state.name}
           listClassName="mb-4"
           items={[
