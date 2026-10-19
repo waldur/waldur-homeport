@@ -4,13 +4,16 @@ import { FC, useCallback, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { GroupInvitation, userGroupInvitationsList } from 'waldur-js-client';
 
-import { BaseButton, useBreakpointDown } from 'waldur-ui';
+import {
+  BaseButton,
+  IBreadcrumbItem,
+  useBreadcrumbs,
+  useBreakpointDown,
+} from 'waldur-ui';
 
 import { GroupInvitationTokenStorage } from '@/core/StorageManager';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { useBreadcrumbs } from '@/navigation/context';
-import { IBreadcrumbItem } from '@/navigation/types';
 import { useNotify } from '@/store/notify';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';

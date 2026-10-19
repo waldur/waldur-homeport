@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
+import { IBreadcrumbItem, useBreadcrumbs } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
-import { useBreadcrumbs } from '@/navigation/context';
-import { IBreadcrumbItem } from '@/navigation/types';
 import { isStaffOrSupport } from '@/workspace/selectors';
 
 import {

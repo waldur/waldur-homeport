@@ -1,5 +1,6 @@
+import { IBreadcrumbItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { IBreadcrumbItem } from '@/navigation/types';
 import { PermissionEnum } from '@/permissions/enums';
 
 import { getMarketplaceTitle } from '../title';

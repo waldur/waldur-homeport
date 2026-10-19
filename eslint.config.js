@@ -216,6 +216,7 @@ export default tseslint
         // the .progress styles are deleted.
         'waldur-custom/no-bootstrap-progress': 'error',
         'waldur-custom/no-bootstrap-tabs': 'error',
+        'waldur-custom/no-bootstrap-breadcrumb': 'error',
         // A FormLabel outside a FormField names no control: use FormFieldset +
         // FormLegend for a group, FormHeading for a caption.
         'waldur-custom/no-orphan-form-label': 'error',
@@ -266,7 +267,6 @@ export default tseslint
         // Design system rules
         'waldur-custom/enforce-featured-icon': 'error',
         'waldur-custom/enforce-border-radius-tokens': 'error',
-        'waldur-custom/enforce-breadcrumb-colors': 'error',
         'waldur-custom/no-redundant-vi-mock': 'error',
 
         // React Hooks rules

@@ -14,7 +14,6 @@ import {
 } from 'react';
 
 import { Tab } from './Tab';
-import { IBreadcrumbItem } from './types';
 
 export interface LayoutContextInterface {
   setActions(actions: React.ReactNode): void;
@@ -26,8 +25,6 @@ export interface LayoutContextInterface {
   setPageHero(component: React.ReactNode);
   setPageBar(component: React.ReactNode);
   setExtraAnnouncementBar(id: string, component: React.ReactNode);
-  breadcrumbs: IBreadcrumbItem[];
-  setBreadcrumbs(items: IBreadcrumbItem[]);
 }
 
 const noop = () => {};
@@ -47,8 +44,6 @@ export const LayoutContext = createContext<Partial<LayoutContextInterface>>({
   setPageHero: noop,
   setPageBar: noop,
   setExtraAnnouncementBar: noop,
-  breadcrumbs: [],
-  setBreadcrumbs: noop,
 });
 
 export const useExtraTabs = (tabs: Tab[]) => {
@@ -108,16 +103,6 @@ export const useToolbarActions = (
       layoutContext.setActions(null);
     };
   }, [layoutContext, ...deps]);
-};
-
-export const useBreadcrumbs = (items: IBreadcrumbItem[]) => {
-  const layoutContext = useContext(LayoutContext);
-  useEffect(() => {
-    layoutContext.setBreadcrumbs(items);
-    return () => {
-      layoutContext.setBreadcrumbs([]);
-    };
-  }, [items, layoutContext]);
 };
 
 // Several components show a bar at once (a page's own bar, the footer's

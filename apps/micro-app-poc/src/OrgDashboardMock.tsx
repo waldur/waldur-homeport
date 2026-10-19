@@ -4,6 +4,7 @@ import { AppShell } from 'waldur-shell';
 import {
   Badge,
   BaseButton,
+  BreadcrumbTrail,
   Card,
   CardContent,
   CardHeader,
@@ -142,10 +143,21 @@ export const OrgDashboardMock = () => {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             {/* Breadcrumb/heading track the sidebar: the mode card's own
-                title, then whichever nav item is active. */}
-            <div className="text-sm text-quinary">
-              {currentMode?.title} &gt; {translate('Overview')}
-            </div>
+                title, then whichever nav item is active. The mode crumb
+                opens the same picker as the mode card. waldur-ui's trail
+                needs no router: without a BreadcrumbsProvider renderLink a
+                crumb's `to` is a plain href, and a crumb may instead have,
+                as here, an onClick. */}
+            <BreadcrumbTrail
+              items={[
+                {
+                  key: 'mode',
+                  text: currentMode?.title ?? '',
+                  onClick: () => setPickerOpen(true),
+                },
+                { key: 'page', text: translate('Overview'), active: true },
+              ]}
+            />
             <h1 className="text-2xl font-semibold">{translate('Overview')}</h1>
             <p className="mt-1 text-sm text-quaternary">
               {translate(

@@ -3,6 +3,8 @@ import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { useEffect, useMemo, useRef } from 'react';
 import { usersRetrieve } from 'waldur-js-client';
 
+import { IBreadcrumbItem, useBreadcrumbs } from 'waldur-ui';
+
 import { usePermissionView } from '@/auth/PermissionLayout';
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -11,8 +13,8 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures, UserFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { useBreadcrumbs, usePageHero } from '@/navigation/context';
-import { IBreadcrumbItem, PageBarTab } from '@/navigation/types';
+import { usePageHero } from '@/navigation/context';
+import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { router } from '@/router';
 import { UserProfileHero } from '@/user/dashboard/UserProfileHero';

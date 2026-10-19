@@ -3,11 +3,12 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, ReactNode } from 'react';
 import { Issue, supportIssuesRetrieve } from 'waldur-js-client';
 
+import { useBreadcrumbs } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { goToNotFound } from '@/error/utils';
 import { translate } from '@/i18n';
-import { useBreadcrumbs } from '@/navigation/context';
 import { useTitle } from '@/navigation/title';
 
 import { IssueDetailsContent } from './IssueDetailsContent';

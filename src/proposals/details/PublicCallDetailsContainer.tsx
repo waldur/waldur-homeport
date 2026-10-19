@@ -3,13 +3,15 @@ import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo } from 'react';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
+import { useBreadcrumbs } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { usePageHero } from '@/navigation/context';
 import { useTitle } from '@/navigation/title';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';

@@ -8,11 +8,10 @@ import {
 } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
-import { BadgeVariant } from 'waldur-ui';
+import { BadgeVariant, IBreadcrumbItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
-import { IBreadcrumbItem } from '@/navigation/types';
 import { PermissionEnum, RoleEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import {

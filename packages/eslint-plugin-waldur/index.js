@@ -5,7 +5,6 @@ import enforceBadgeIconPatterns from './rules/enforce-badge-icon-patterns.js';
 import enforceBadgePropsConsistency from './rules/enforce-badge-props-consistency.js';
 import enforceBadgeRightIconPattern from './rules/enforce-badge-right-icon-pattern.js';
 import enforceBorderRadiusTokens from './rules/enforce-border-radius-tokens.js';
-import enforceBreadcrumbColors from './rules/enforce-breadcrumb-colors.js';
 import enforceDialogButtonOrder from './rules/enforce-dialog-button-order.js';
 import enforceDisabledButtonTooltip from './rules/enforce-disabled-button-tooltip.js';
 import enforceFeaturedIcon from './rules/enforce-featured-icon.js';
@@ -14,6 +13,7 @@ import enforcePhosphorIconWeight from './rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './rules/enforce-render-field-or-dash.js';
 import iconButtonNeedsAccessibleName from './rules/icon-button-needs-accessible-name.js';
 import noBootstrapBorderWithTailwindColor from './rules/no-bootstrap-border-with-tailwind-color.js';
+import noBootstrapBreadcrumb from './rules/no-bootstrap-breadcrumb.js';
 import noBootstrapButtonMarkup from './rules/no-bootstrap-button-markup.js';
 import noBootstrapColorUtility from './rules/no-bootstrap-color-utility.js';
 import noBootstrapCssVars from './rules/no-bootstrap-css-vars.js';
@@ -76,6 +76,7 @@ export default {
     'no-bootstrap-form-control': noBootstrapFormControl,
     'no-bootstrap-form-select': noBootstrapFormSelect,
     'no-bootstrap-tabs': noBootstrapTabs,
+    'no-bootstrap-breadcrumb': noBootstrapBreadcrumb,
     'no-orphan-form-label': noOrphanFormLabel,
     'no-interactive-in-tab-trigger': noInteractiveInTabTrigger,
     'no-tooltip-on-bare-icon': noTooltipOnBareIcon,
@@ -93,7 +94,6 @@ export default {
     // Design system rules
     'enforce-featured-icon': enforceFeaturedIcon,
     'enforce-border-radius-tokens': enforceBorderRadiusTokens,
-    'enforce-breadcrumb-colors': enforceBreadcrumbColors,
     'enforce-noresult-with-cta': enforceNoResultWithCta,
     'no-redundant-vi-mock': noRedundantViMock,
   },

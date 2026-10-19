@@ -7,13 +7,14 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
+import { useBreadcrumbs } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { getQueryParams } from '@/core/filters';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
-import { useBreadcrumbs } from '@/navigation/context';
 import { useTitle } from '@/navigation/title';
 import {
   useCallManagedProposalBreadcrumbItems,

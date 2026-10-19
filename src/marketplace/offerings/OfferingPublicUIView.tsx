@@ -10,7 +10,7 @@ import {
   proposalMyRequestedResourcesCount,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, useBreadcrumbs } from 'waldur-ui';
 
 import { isAuthenticated } from '@/auth/AuthService';
 import { fetchResultCount } from '@/core/api';
@@ -21,7 +21,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { isValidAttribute } from '@/marketplace/offerings/details/utils';
-import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { usePageHero } from '@/navigation/context';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { useUser } from '@/workspace/hooks';

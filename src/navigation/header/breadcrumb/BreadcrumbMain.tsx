@@ -1,14 +1,13 @@
 import classNames from 'classnames';
-import { useContext } from 'react';
 
-import { useBreakpointDown } from 'waldur-ui';
-
-import { LayoutContext } from '@/navigation/context';
-
-import { Breadcrumbs } from './Breadcrumbs';
+import {
+  BreadcrumbTrail,
+  useBreadcrumbItems,
+  useBreakpointDown,
+} from 'waldur-ui';
 
 export const BreadcrumbMain = ({ mobile = false }: { mobile?: boolean }) => {
-  const { breadcrumbs } = useContext(LayoutContext);
+  const breadcrumbs = useBreadcrumbItems();
   const isMd = useBreakpointDown('md');
 
   if (!breadcrumbs?.length) return null;
@@ -17,11 +16,11 @@ export const BreadcrumbMain = ({ mobile = false }: { mobile?: boolean }) => {
     return (
       <div
         className={classNames(
-          'breadcrumb-container flex items-center grow',
+          'flex items-center grow min-w-0 overflow-hidden',
           mobile && 'breadcrumb-mobile container-fluid',
         )}
       >
-        <Breadcrumbs />
+        <BreadcrumbTrail />
       </div>
     );
   }

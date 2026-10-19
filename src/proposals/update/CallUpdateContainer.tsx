@@ -3,14 +3,14 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { proposalProtectedCallsRetrieve } from 'waldur-js-client';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import { AlertItem, Badge, useBreadcrumbs } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { AccessDeniedPage } from '@/error/AccessDeniedPage';
 import { InvalidRoutePage } from '@/error/InvalidRoutePage';
 import { translate } from '@/i18n';
 import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
-import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { usePageHero } from '@/navigation/context';
 import { useTitle } from '@/navigation/title';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';

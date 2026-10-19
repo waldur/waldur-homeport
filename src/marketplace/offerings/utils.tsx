@@ -1,8 +1,9 @@
 import { User, Offering } from 'waldur-js-client';
 
+import { IBreadcrumbItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { getFormLimitParser } from '@/marketplace/common/registry';
-import { IBreadcrumbItem } from '@/navigation/types';
 import {
   checkIsOwnerOrStaff,
   checkIsStaffOrSupport,
@@ -85,13 +86,11 @@ export const getPublicOfferingBreadcrumbItems = (
       text: offering?.customer_name || '...',
       to: 'marketplace-providers.details',
       params: offering ? { customer_uuid: offering.customer_uuid } : undefined,
-      ellipsis: 'xl',
       truncate: true,
     },
     {
       key: 'marketplace-offerings',
       text: translate('Offerings'),
-      ellipsis: 'md',
       onClick: () => {
         if (!offering) return;
         // Set organization filter to offerings

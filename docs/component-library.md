@@ -219,11 +219,11 @@ export const MyEditButton = ({ row, refetch }) => (
 
 ### Navigation Components
 
-| Component       | Location                                           | Description            | Key Features                       |
-| --------------- | -------------------------------------------------- | ---------------------- | ---------------------------------- |
-| **TabsList**    | `src/navigation/TabsList.tsx`                      | Tab navigation         | Nested dropdowns, active detection |
-| **Layout**      | `src/navigation/Layout.tsx`                        | Application layout     | Responsive, sidebar, header        |
-| **Breadcrumbs** | `src/navigation/header/breadcrumb/Breadcrumbs.tsx` | Navigation breadcrumbs | Hierarchical navigation            |
+| Component       | Location                                                                                                                     | Description            | Key Features                                                                                                                                                                                   |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **TabsList**    | `src/navigation/TabsList.tsx`                                                                                                | Tab navigation         | Nested dropdowns, active detection                                                                                                                                                             |
+| **Layout**      | `src/navigation/Layout.tsx`                                                                                                  | Application layout     | Responsive, sidebar, header                                                                                                                                                                    |
+| **Breadcrumbs** | `BreadcrumbTrail`, `BreadcrumbsProvider`, `useBreadcrumbs`, `IBreadcrumbItem` in `waldur-ui` (`packages/ui/src/Breadcrumb/`) | Navigation breadcrumbs | Router-agnostic (`renderLink` on the provider; the app's builds `@/core/Link` in `Layout.tsx`), overflow collapse, middle truncation, switcher dropdowns. See [breadcrumbs.md](breadcrumbs.md) |
 
 ### Cards and Layout Components
 

@@ -219,20 +219,20 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
         {...getMenuProps({
           ref: menuRef,
           'aria-label': translate('Search results'),
-          className: 'mh-300px overflow-auto',
+          className: 'max-h-[300px] overflow-auto',
         })}
       >
         {context.status === 'pending' ? (
           <div role="progressbar" aria-label={translate('Loading')}>
-            <p className="text-center text-primary mb-0">
+            <p className="text-center text-primary m-0">
               {translate('Loading')}
             </p>
           </div>
         ) : context.status === 'error' ? (
-          <p className="text-center text-primary mb-0">{translate('Error')}</p>
+          <p className="text-center text-primary m-0">{translate('Error')}</p>
         ) : rows.length === 0 ? (
           typeof emptyMessage === 'string' ? (
-            <p className="text-center text-primary mb-0">{emptyMessage}</p>
+            <p className="text-center text-primary m-0">{emptyMessage}</p>
           ) : (
             emptyMessage
           )

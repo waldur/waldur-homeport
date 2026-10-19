@@ -2,6 +2,8 @@ import { FunctionComponent, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
+import { IBreadcrumbItem, useBreadcrumbs } from 'waldur-ui';
+
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { translate } from '@/i18n';
 import { RefreshButton } from '@/marketplace/common/RefreshButton';
@@ -9,10 +11,10 @@ import { getFormLimitParser } from '@/marketplace/common/registry';
 import { PlanSection } from '@/marketplace/details/plan/PlanSection';
 import { OrderErredView } from '@/marketplace/resources/resource-pending/OrderErredView';
 import { OrderInProgressView } from '@/marketplace/resources/resource-pending/OrderInProgressView';
-import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { usePageHero } from '@/navigation/context';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
 import { useTitle } from '@/navigation/title';
-import { IBreadcrumbItem, PageBarTab } from '@/navigation/types';
+import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
@@ -232,14 +234,12 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
     const order = props.order;
     if (!order) return [];
     return [
-      getOrganizationsBreadcrumbItem({ ellipsis: 'xxl' }),
+      getOrganizationsBreadcrumbItem(),
       getOrganizationBreadcrumbItem({
         uuid: order.customer_uuid,
         name: order.customer_name,
       }),
-      getOrganizationProjectsBreadcrumbItem(order.customer_uuid, {
-        ellipsis: 'xxl',
-      }),
+      getOrganizationProjectsBreadcrumbItem(order.customer_uuid, {}),
       {
         key: 'project.dashboard',
         text: order.project_name,
@@ -248,7 +248,6 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
         dropdown: (close) => (
           <ProjectBreadcrumbPopover order={order} close={close} />
         ),
-        ellipsis: 'xl',
         truncate: true,
       },
       {
@@ -256,7 +255,6 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
         text: order.category_title,
         to: 'project.resources',
         params: { uuid: order.project_uuid },
-        ellipsis: 'xxl',
       },
       linkProviderResource
         ? {
@@ -288,7 +286,6 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
         text: translate('Orders'),
         to: 'marketplace-provider-orders',
         params: { uuid: order.provider_uuid },
-        ellipsis: 'xxl',
       },
       {
         key: 'order',

@@ -6,8 +6,10 @@ import {
   marketplaceProviderOfferingsRetrieve,
 } from 'waldur-js-client';
 
+import { useBreadcrumbs } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
-import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { usePageHero } from '@/navigation/context';
 
 import { PROVIDER_OFFERING_DATA_QUERY_KEY } from './constants';
 import { getOfferingBreadcrumbItems } from './hooks';

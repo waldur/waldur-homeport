@@ -1,13 +1,12 @@
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 
-import { TabNav } from 'waldur-ui';
+import { IBreadcrumbItem, TabNav, useBreadcrumbs } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
-import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { usePageHero } from '@/navigation/context';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
-import { IBreadcrumbItem } from '@/navigation/types';
 import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 
 import { ProjectBreadcrumbPopover } from './ProjectBreadcrumbPopover';
@@ -64,10 +63,10 @@ const ProjectContainerWithHero = (props) => {
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(
     () => [
       getOrganizationsBreadcrumbItem(),
-      getOrganizationBreadcrumbItem(
-        { uuid: project.customer_uuid, name: project.customer_name },
-        { ellipsis: 'md' },
-      ),
+      getOrganizationBreadcrumbItem({
+        uuid: project.customer_uuid,
+        name: project.customer_name,
+      }),
       getOrganizationProjectsBreadcrumbItem(project.customer_uuid),
       {
         key: 'project',

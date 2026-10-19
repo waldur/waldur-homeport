@@ -2,11 +2,12 @@ import { DateTime } from 'luxon';
 import { useMemo } from 'react';
 import { Issue } from 'waldur-js-client';
 
+import { IBreadcrumbItem } from 'waldur-ui';
+
 import { getUUID } from '@/core/utils';
 import { PeriodOption } from '@/form/types';
 import { makeLastTwelveMonthsFilterPeriods } from '@/form/utils';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
-import { IBreadcrumbItem } from '@/navigation/types';
 
 export const getStartAndEndDatesOfMonth = (period: PeriodOption) => {
   const { year, month } = period;
@@ -32,12 +33,6 @@ export const makeLastTwelveMonthsFilterPeriodsAsCreatedRange = () => {
 };
 
 export const useIssueBreadcrumbItems = (issue: Issue): IBreadcrumbItem[] => {
-  const isOrg =
-    issue && issue.customer_uuid && !issue.project_uuid && !issue.resource;
-  const isProject =
-    issue && issue.customer_uuid && issue.project_uuid && !issue.resource;
-  const isResource =
-    issue && issue.customer_uuid && issue.project_uuid && issue.resource;
   const isUser =
     issue && !issue.customer_uuid && !issue.project_uuid && !issue.resource;
 
@@ -50,7 +45,7 @@ export const useIssueBreadcrumbItems = (issue: Issue): IBreadcrumbItem[] => {
         issue?.customer_uuid &&
           getOrganizationBreadcrumbItem(
             { uuid: issue.customer_uuid, name: issue.customer_name },
-            { maxLength: 20, ellipsis: isOrg ? undefined : 'xl' },
+            { maxLength: 20 },
           ),
         issue?.project_uuid &&
           getProjectBreadcrumbItem(
@@ -61,7 +56,7 @@ export const useIssueBreadcrumbItems = (issue: Issue): IBreadcrumbItem[] => {
               customer_uuid: issue.customer_uuid,
               customer_name: issue.customer_name,
             },
-            { maxLength: 20, ellipsis: isProject ? undefined : 'xl' },
+            { maxLength: 20 },
           ),
         issue?.resource && {
           key: 'resource',
@@ -69,7 +64,6 @@ export const useIssueBreadcrumbItems = (issue: Issue): IBreadcrumbItem[] => {
           to: 'marketplace-resource-details',
           params: { resource_uuid: getUUID(issue.resource) },
           maxLength: 20,
-          ellipsis: isResource ? undefined : 'xl',
         },
         isUser && {
           key: 'user',
@@ -77,7 +71,6 @@ export const useIssueBreadcrumbItems = (issue: Issue): IBreadcrumbItem[] => {
           to: 'support-user-manage',
           params: { user_uuid: issue?.caller_uuid },
           maxLength: 30,
-          ellipsis: 'md',
         },
         {
           key: 'issue',
