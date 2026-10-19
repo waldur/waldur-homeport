@@ -7,11 +7,13 @@ import { ChangeEndDateAction } from './ChangeEndDateAction';
 import { DeleteAction } from './DeleteAction';
 import { MoveProjectAction } from './MoveProjectAction';
 import { ProjectEditAction } from './ProjectEditAction';
+import { ProjectVersionHistoryAction } from './ProjectVersionHistoryAction';
 
 const ActionsList = [
   MoveProjectAction,
   ProjectEditAction,
   ChangeEndDateAction,
+  ProjectVersionHistoryAction,
   DeleteAction,
 ];
 

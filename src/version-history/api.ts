@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import {
   customersHistoryList,
   customersHistoryAtRetrieve,
+  projectsHistoryList,
+  projectsHistoryAtRetrieve,
   usersHistoryList,
   usersHistoryAtRetrieve,
   keysHistoryList,
@@ -31,6 +33,7 @@ type HistoryAtFn = (options: {
 const historyListFunctions: Record<HistoryEntityType, HistoryListFn> = {
   resource: marketplaceResourcesHistoryList,
   customer: customersHistoryList,
+  project: projectsHistoryList,
   user: usersHistoryList,
   ssh_key: keysHistoryList,
   offering: marketplaceProviderOfferingsHistoryList,
@@ -40,6 +43,7 @@ const historyListFunctions: Record<HistoryEntityType, HistoryListFn> = {
 const historyAtFunctions: Record<HistoryEntityType, HistoryAtFn> = {
   resource: marketplaceResourcesHistoryAtRetrieve,
   customer: customersHistoryAtRetrieve,
+  project: projectsHistoryAtRetrieve,
   user: usersHistoryAtRetrieve,
   ssh_key: keysHistoryAtRetrieve,
   offering: marketplaceProviderOfferingsHistoryAtRetrieve,

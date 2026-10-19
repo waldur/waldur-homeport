@@ -1,7 +1,13 @@
 import { ButtonVariant, ButtonSize } from 'waldur-ui';
 
 export type HistoryEntityType =
-  'resource' | 'customer' | 'user' | 'ssh_key' | 'offering' | 'plan';
+  | 'resource'
+  | 'customer'
+  | 'project'
+  | 'user'
+  | 'ssh_key'
+  | 'offering'
+  | 'plan';
 
 export interface VersionHistoryButtonProps {
   entityType: HistoryEntityType;
