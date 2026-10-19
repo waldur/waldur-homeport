@@ -342,11 +342,8 @@ type Story = StoryObj<typeof MarketplacePopup>;
 export const Default: Story = {
   render: () => (
     <PopupHarness>
-      <div
-        className="modal-dialog modal-lg my-0"
-        style={{ maxWidth: 880, margin: '0 auto' }}
-      >
-        <div className="modal-content shadow">
+      <div className="mx-auto max-w-[840px]">
+        <div className="relative flex flex-col rounded-xl bg-primary shadow-[var(--modal-shadow)]">
           <MarketplacePopup
             resolve={{
               organization: mockCustomer,
@@ -392,11 +389,8 @@ export const Default: Story = {
 export const CategoryPreselected: Story = {
   render: () => (
     <PopupHarness>
-      <div
-        className="modal-dialog modal-lg my-0"
-        style={{ maxWidth: 880, margin: '0 auto' }}
-      >
-        <div className="modal-content shadow card-bordered">
+      <div className="mx-auto max-w-[840px]">
+        <div className="relative flex flex-col rounded-xl bg-primary shadow-[var(--modal-shadow)] card-bordered">
           <MarketplacePopup
             resolve={{
               organization: mockCustomer,
@@ -424,11 +418,8 @@ export const CategoryPreselected: Story = {
 export const RecentlyAddedOfferings: Story = {
   render: () => (
     <PopupHarness>
-      <div
-        className="modal-dialog modal-lg my-0"
-        style={{ maxWidth: 880, margin: '0 auto' }}
-      >
-        <div className="modal-content shadow card-bordered">
+      <div className="mx-auto max-w-[840px]">
+        <div className="relative flex flex-col rounded-xl bg-primary shadow-[var(--modal-shadow)] card-bordered">
           <MarketplacePopup
             resolve={{
               organization: mockCustomer,
@@ -457,11 +448,8 @@ export const RecentlyAddedOfferings: Story = {
 export const EmptyCategories: Story = {
   render: () => (
     <PopupHarness categories={[]} recent={[]}>
-      <div
-        className="modal-dialog modal-lg my-0"
-        style={{ maxWidth: 880, margin: '0 auto' }}
-      >
-        <div className="modal-content shadow card-bordered">
+      <div className="mx-auto max-w-[840px]">
+        <div className="relative flex flex-col rounded-xl bg-primary shadow-[var(--modal-shadow)] card-bordered">
           <MarketplacePopup
             resolve={{
               organization: mockCustomer,

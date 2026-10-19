@@ -45,7 +45,7 @@ export function EditModalButton<
   resolve,
   getInitialValues,
   size = 'lg',
-  dialogClassName = 'modal-dialog-centered',
+  dialogClassName,
   formId,
   title = translate('Edit'),
   iconNode = <PencilSimpleIcon weight="bold" />,

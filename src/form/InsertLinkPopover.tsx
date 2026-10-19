@@ -17,12 +17,12 @@ import * as Popover from '@radix-ui/react-popover';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import classNames from 'classnames';
 import { useState, FC, useEffect, forwardRef } from 'react';
-import { Modal } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 
-import { BaseButton, FormField, FormLabel } from 'waldur-ui';
+import { BaseButton, FormField, FormLabel, ModalBody } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { ModalShell } from '@/modal/ModalShell';
 
 import { StringField } from './StringField';
 
@@ -246,20 +246,20 @@ const InsertLinkPopover = () => {
 
   return (
     <>
-      <Modal
-        show={linkDialogState.type === 'edit'}
-        centered
+      <ModalShell
+        open={linkDialogState.type === 'edit'}
         onHide={cancelLinkEdit}
+        title={translate('Edit link')}
       >
         {linkDialogState.type === 'edit' && (
-          <Modal.Body>
+          <ModalBody>
             <LinkEditForm
               initialUrl={linkDialogState.url}
               onCancel={cancelLinkEdit}
             />
-          </Modal.Body>
+          </ModalBody>
         )}
-      </Modal>
+      </ModalShell>
       <LinkDialogPreview />
     </>
   );

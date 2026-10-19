@@ -121,7 +121,8 @@
 }
 
 // The react-bootstrap `responsive` wrapper would otherwise draw a box around
-// it (in dialogs, see `.modal .table-responsive` in Metronic's _table.scss).
+// it (in dialogs, see `[data-slot='modal-content'] .table-responsive` in
+// Metronic's _table.scss).
 .table-responsive:has(> .form-table) {
   border: 0 !important;
   box-shadow: none !important;

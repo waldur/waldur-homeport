@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DateTime } from 'luxon';
-import { ComponentProps, useState } from 'react';
+import { ComponentProps, ReactNode, useState } from 'react';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 
-import { Dialog, DialogContent, DialogTitle } from '../Dialog';
+import { ModalDialog, ModalShell } from '../Dialog';
 
 import { DatePicker } from './DatePicker';
 import {
@@ -436,6 +436,16 @@ export const MinDateTimeClampsTheTime: Story = {
 
 // ── In a modal dialog ───────────────────────────────────
 
+/** An open waldur-ui Modal around the picker, as the app's dialogs are. */
+const InAModal = ({ children }: { children: ReactNode }) => {
+  const [open, setOpen] = useState(true);
+  return (
+    <ModalShell open={open} onHide={() => setOpen(false)} size="sm">
+      <ModalDialog title="Set termination date">{children}</ModalDialog>
+    </ModalShell>
+  );
+};
+
 /**
  * In a modal dialog, opening the calendar puts focus on its selected day,
  * so the arrow keys move between days and Enter picks one. The dialog traps
@@ -444,12 +454,9 @@ export const MinDateTimeClampsTheTime: Story = {
  */
 export const InAModalDialog: Story = {
   render: () => (
-    <Dialog defaultOpen>
-      <DialogContent>
-        <DialogTitle>Set termination date</DialogTitle>
-        <Harness initial={june15} />
-      </DialogContent>
-    </Dialog>
+    <InAModal>
+      <Harness initial={june15} />
+    </InAModal>
   ),
   play: async () => {
     // The dialog is portaled out of the story's canvas.
@@ -641,13 +648,10 @@ export const TypeADateWithTime: Story = {
  */
 export const KeyboardOnlyInAModalDialog: Story = {
   render: () => (
-    <Dialog defaultOpen>
-      <DialogContent>
-        <DialogTitle>Set termination date</DialogTitle>
-        <label htmlFor="termination-date">Termination date</label>
-        <Harness id="termination-date" />
-      </DialogContent>
-    </Dialog>
+    <InAModal>
+      <label htmlFor="termination-date">Termination date</label>
+      <Harness id="termination-date" />
+    </InAModal>
   ),
   play: async () => {
     const field = fieldContainer(document.body);

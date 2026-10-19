@@ -35,7 +35,7 @@ export function CreateModalButton<TResolve extends Record<string, unknown>>({
   dialog,
   resolve,
   size = 'lg',
-  dialogClassName = 'modal-dialog-centered',
+  dialogClassName,
   formId,
   title = translate('Add'),
   iconNode = <PlusCircleIcon weight="bold" />,

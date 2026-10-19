@@ -5,7 +5,7 @@
 /* eslint-disable no-console */
 import { useQuery } from '@tanstack/react-query';
 import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
-import { Card, Col, Container, Modal, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row } from 'react-bootstrap';
 import { projectsList } from 'waldur-js-client';
 
 import {
@@ -26,6 +26,8 @@ import { getNextPageUrl } from '@/core/api';
 import { LoadingErred } from '@/core/LoadingErred';
 import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
 import { useCustomer } from '@/workspace/hooks';
 
 import {
@@ -68,15 +70,13 @@ interface ProjectAutocompleteDialogProps {
   projects: OpenPortalProject[];
   selected: Set<string>;
   onConfirm: (next: Set<string>) => void;
-  onClose: () => void;
 }
 
-const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
-  projects,
-  selected,
-  onConfirm,
-  onClose,
-}) => {
+const ProjectAutocompleteDialog: FC<{
+  resolve: ProjectAutocompleteDialogProps;
+}> = ({ resolve: { projects, selected, onConfirm } }) => {
+  const { closeDialog } = useModal();
+  const onClose = () => closeDialog();
   const [draft, setDraft] = useState(() => new Set(selected));
   const [nameFilter, setNameFilter] = useState('');
   const [startAfter, setStartAfter] = useState('');
@@ -119,163 +119,163 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
   };
 
   return (
-    <Modal show onHide={onClose} size="lg" scrollable>
-      <Modal.Header closeButton>
-        <Modal.Title>{translate('Select projects')}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Row className="g-2 mb-3">
-          <Col xs={12} md={4}>
-            <FormField>
-              <FormLabel className="small mb-1">
-                {translate('Search')}
-              </FormLabel>
-              <BaseInputField
-                type="text"
-                size="sm"
-                placeholder={translate('Filter by name…')}
-                value={nameFilter}
-                onChange={(e) => setNameFilter(e.target.value)}
-              />
-            </FormField>
-          </Col>
-          <Col xs={6} md={4}>
-            <FormField>
-              <FormLabel className="small mb-1">
-                {translate('Start date — after')}
-              </FormLabel>
-              <DatePicker
-                size="sm"
-                value={parseDateValue(startAfter)}
-                onChange={(date) => setStartAfter(toIsoDate(date))}
-              />
-            </FormField>
-          </Col>
-          <Col xs={6} md={4}>
-            <FormField>
-              <FormLabel className="small mb-1">
-                {translate('End date — before')}
-              </FormLabel>
-              <DatePicker
-                size="sm"
-                value={parseDateValue(endBefore)}
-                onChange={(date) => setEndBefore(toIsoDate(date))}
-              />
-            </FormField>
-          </Col>
-        </Row>
-        <div className="flex items-center gap-4 mb-3 flex-wrap">
-          <Checkbox
-            id="dlg-showFinished"
-            checked={showFinished}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setShowFinished(e.target.checked)
-            }
-            className="mb-0"
-            label={translate('Finished')}
+    <ModalDialog
+      title={translate('Select projects')}
+      footer={
+        <>
+          <BaseButton
+            variant="secondary"
+            size="sm"
+            onClick={onClose}
+            label={translate('Cancel')}
           />
-          <Checkbox
-            id="dlg-showInGrace"
-            checked={showInGrace}
-            disabled={!showFinished}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setShowInGrace(e.target.checked)
-            }
-            className="mb-0"
-            label={translate('In grace period')}
-          />
-        </div>
-
-        <div className="flex items-center gap-2 mb-2">
-          <Checkbox
-            id="select-all-visible"
-            checked={allVisibleSelected && visible.length > 0}
-            onChange={toggleAll}
-            label={translate('{select} all visible ({count})', {
-              select: allVisibleSelected
-                ? translate('Deselect')
-                : translate('Select'),
-              count: visible.length,
-            })}
-          />
-          <span className="ms-auto text-quaternary small">
-            {translate('{count} of {total} selected', {
+          <BaseButton
+            variant="primary"
+            size="sm"
+            onClick={() => {
+              onConfirm(draft);
+              onClose();
+            }}
+            label={translate('Apply ({count} {project})', {
               count: draft.size,
-              total: projects.length,
+              project:
+                draft.size !== 1 ? translate('projects') : translate('project'),
             })}
-          </span>
-        </div>
-        <div
-          style={{ maxHeight: 320, overflowY: 'auto' }}
-          className="border rounded p-2"
-        >
-          {visible.length === 0 && (
-            <p className="text-quaternary small mb-0 p-2">
-              {translate('No projects match the filters.')}
-            </p>
-          )}
-          {visible.map((p) => (
-            <div key={p.uuid} className="flex items-start gap-2 py-1">
-              <Checkbox
-                id={`proj-${p.uuid}`}
-                checked={draft.has(p.uuid)}
-                onChange={() => toggle(p.uuid)}
-                className="mt-1"
-                label={
-                  <span className="grow" style={{ cursor: 'pointer' }}>
-                    <span>{p.name}</span>
-                    {(p.start_date || p.end_date) && (
-                      <span className="text-quaternary small ms-2">
-                        {p.start_date ?? '?'} →{' '}
-                        {p.end_date ?? translate('ongoing')}
-                      </span>
-                    )}
-                    {p.is_in_grace_period && (
-                      <Badge
-                        variant="warning"
-                        size="sm"
-                        tone="outline"
-                        className="ms-2"
-                      >
-                        {translate('In grace')}
-                      </Badge>
-                    )}
-                    {p.is_expired && !p.is_in_grace_period && (
-                      <Badge
-                        variant="neutral"
-                        size="sm"
-                        tone="outline"
-                        className="ms-2"
-                      >
-                        {translate('Finished')}
-                      </Badge>
-                    )}
-                  </span>
-                }
-              />
-            </div>
-          ))}
-        </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <BaseButton
-          variant="secondary"
-          size="sm"
-          onClick={onClose}
-          label={translate('Cancel')}
+          />
+        </>
+      }
+    >
+      <Row className="g-2 mb-3">
+        <Col xs={12} md={4}>
+          <FormField>
+            <FormLabel className="small mb-1">{translate('Search')}</FormLabel>
+            <BaseInputField
+              type="text"
+              size="sm"
+              placeholder={translate('Filter by name…')}
+              value={nameFilter}
+              onChange={(e) => setNameFilter(e.target.value)}
+            />
+          </FormField>
+        </Col>
+        <Col xs={6} md={4}>
+          <FormField>
+            <FormLabel className="small mb-1">
+              {translate('Start date — after')}
+            </FormLabel>
+            <DatePicker
+              size="sm"
+              value={parseDateValue(startAfter)}
+              onChange={(date) => setStartAfter(toIsoDate(date))}
+            />
+          </FormField>
+        </Col>
+        <Col xs={6} md={4}>
+          <FormField>
+            <FormLabel className="small mb-1">
+              {translate('End date — before')}
+            </FormLabel>
+            <DatePicker
+              size="sm"
+              value={parseDateValue(endBefore)}
+              onChange={(date) => setEndBefore(toIsoDate(date))}
+            />
+          </FormField>
+        </Col>
+      </Row>
+      <div className="flex items-center gap-4 mb-3 flex-wrap">
+        <Checkbox
+          id="dlg-showFinished"
+          checked={showFinished}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setShowFinished(e.target.checked)
+          }
+          className="mb-0"
+          label={translate('Finished')}
         />
-        <BaseButton
-          variant="primary"
-          size="sm"
-          onClick={() => onConfirm(draft)}
-          label={translate('Apply ({count} {project})', {
-            count: draft.size,
-            project:
-              draft.size !== 1 ? translate('projects') : translate('project'),
+        <Checkbox
+          id="dlg-showInGrace"
+          checked={showInGrace}
+          disabled={!showFinished}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setShowInGrace(e.target.checked)
+          }
+          className="mb-0"
+          label={translate('In grace period')}
+        />
+      </div>
+
+      <div className="flex items-center gap-2 mb-2">
+        <Checkbox
+          id="select-all-visible"
+          checked={allVisibleSelected && visible.length > 0}
+          onChange={toggleAll}
+          label={translate('{select} all visible ({count})', {
+            select: allVisibleSelected
+              ? translate('Deselect')
+              : translate('Select'),
+            count: visible.length,
           })}
         />
-      </Modal.Footer>
-    </Modal>
+        <span className="ms-auto text-quaternary small">
+          {translate('{count} of {total} selected', {
+            count: draft.size,
+            total: projects.length,
+          })}
+        </span>
+      </div>
+      <div
+        style={{ maxHeight: 320, overflowY: 'auto' }}
+        className="border rounded p-2"
+      >
+        {visible.length === 0 && (
+          <p className="text-quaternary small mb-0 p-2">
+            {translate('No projects match the filters.')}
+          </p>
+        )}
+        {visible.map((p) => (
+          <div key={p.uuid} className="flex items-start gap-2 py-1">
+            <Checkbox
+              id={`proj-${p.uuid}`}
+              checked={draft.has(p.uuid)}
+              onChange={() => toggle(p.uuid)}
+              className="mt-1"
+              label={
+                <span className="grow" style={{ cursor: 'pointer' }}>
+                  <span>{p.name}</span>
+                  {(p.start_date || p.end_date) && (
+                    <span className="text-quaternary small ms-2">
+                      {p.start_date ?? '?'} →{' '}
+                      {p.end_date ?? translate('ongoing')}
+                    </span>
+                  )}
+                  {p.is_in_grace_period && (
+                    <Badge
+                      variant="warning"
+                      size="sm"
+                      tone="outline"
+                      className="ms-2"
+                    >
+                      {translate('In grace')}
+                    </Badge>
+                  )}
+                  {p.is_expired && !p.is_in_grace_period && (
+                    <Badge
+                      variant="neutral"
+                      size="sm"
+                      tone="outline"
+                      className="ms-2"
+                    >
+                      {translate('Finished')}
+                    </Badge>
+                  )}
+                </span>
+              }
+            />
+          </div>
+        ))}
+      </div>
+    </ModalDialog>
   );
 };
 
@@ -399,7 +399,7 @@ export const OrganisationReportsTab: FC = () => {
   const [selectedProjects, setSelectedProjects] = useState<Set<string>>(
     new Set(),
   );
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const { openDialog } = useModal();
   const effectiveSelected =
     selectedProjects.size > 0 ? selectedProjects : allProjectUuids;
   const selectedUuids = useMemo(
@@ -787,7 +787,20 @@ export const OrganisationReportsTab: FC = () => {
             <BaseButton
               variant="primary"
               size="sm"
-              onClick={() => setDialogOpen(true)}
+              onClick={() =>
+                projects &&
+                openDialog(ProjectAutocompleteDialog, {
+                  size: 'lg',
+                  resolve: {
+                    projects,
+                    selected: effectiveSelected,
+                    onConfirm: (next) => {
+                      setSelectedProjects(next);
+                      setSelectedMonth('all');
+                    },
+                  },
+                })
+              }
               label={translate('Filter selected projects')}
             />
           </div>
@@ -1097,20 +1110,6 @@ export const OrganisationReportsTab: FC = () => {
             </Card.Body>
           </Card>
         )}
-
-      {/* ── Project filter dialog ─────────────────────────────────────── */}
-      {dialogOpen && projects && (
-        <ProjectAutocompleteDialog
-          projects={projects}
-          selected={effectiveSelected}
-          onConfirm={(next) => {
-            setSelectedProjects(next);
-            setSelectedMonth('all');
-            setDialogOpen(false);
-          }}
-          onClose={() => setDialogOpen(false)}
-        />
-      )}
     </Container>
   );
 };

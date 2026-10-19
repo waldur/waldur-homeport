@@ -49,12 +49,7 @@ describe('CreateModalButton', () => {
     const user = userEvent.setup();
     const refetch = vi.fn();
     render(
-      <CreateModalButton
-        dialog={MockDialog}
-        resolve={{ refetch }}
-        size="xl"
-        dialogClassName="modal-dialog-centered"
-      />,
+      <CreateModalButton dialog={MockDialog} resolve={{ refetch }} size="xl" />,
     );
 
     await user.click(screen.getByRole('button'));
@@ -63,7 +58,6 @@ describe('CreateModalButton', () => {
     expect(mockOpenDialog).toHaveBeenCalledWith(MockDialog, {
       resolve: { refetch },
       size: 'xl',
-      dialogClassName: 'modal-dialog-centered',
       formId: undefined,
       initialValues: undefined,
     });

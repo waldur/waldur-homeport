@@ -2,13 +2,7 @@ import { ReactNode } from 'react';
 
 import { BADGE_STYLES, type BadgeVariant } from '../Badge';
 import { cn } from '../cn';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '../Dialog';
+import { ModalDialog, useModalHide } from '../Dialog/Modal';
 
 export interface ModeOption {
   key: string;
@@ -22,14 +16,15 @@ export interface ModeOption {
 }
 
 export interface ModePickerDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  title: string;
-  description?: string;
-  modes: ModeOption[];
-  /** `key` of the mode currently in effect. */
-  value?: string;
-  onSelect: (key: string) => void;
+  resolve: {
+    title: string;
+    description?: string;
+    modes: ModeOption[];
+    /** `key` of the mode currently in effect. */
+    value?: string;
+    /** Called with the picked mode's key; the dialog then closes. */
+    onSelect: (key: string) => void;
+  };
 }
 
 /**
@@ -42,6 +37,9 @@ export interface ModePickerDialogProps {
  * component owns only the dialog shape and the selected/unselected
  * treatment.
  *
+ * A dialog like any other: open it with openDialog / ModalService.open
+ * (`size: 'lg'`), and it closes itself once a mode is picked.
+ *
  * The options are toggle buttons (aria-pressed), not a role="radiogroup":
  * activating one applies the mode and closes the dialog, so each is an
  * action that happens to carry pressed state, and every card stays
@@ -49,33 +47,27 @@ export interface ModePickerDialogProps {
  * arrow-key handling a real radio group would owe its users.
  */
 export const ModePickerDialog = ({
-  open,
-  onOpenChange,
-  title,
-  description,
-  modes,
-  value,
-  onSelect,
-}: ModePickerDialogProps) => (
-  <Dialog open={open} onOpenChange={onOpenChange}>
-    <DialogContent className="max-w-3xl gap-8 p-8">
-      <DialogHeader>
-        <DialogTitle>{title}</DialogTitle>
-        {description && <DialogDescription>{description}</DialogDescription>}
-      </DialogHeader>
+  resolve: { title, description, modes, value, onSelect },
+}: ModePickerDialogProps) => {
+  const hide = useModalHide();
+  return (
+    <ModalDialog title={title} subtitle={description}>
       <div className="grid gap-4 sm:grid-cols-2">
         {modes.map((mode) => (
           <ModePickerOption
             key={mode.key}
             mode={mode}
             selected={mode.key === value}
-            onSelect={onSelect}
+            onSelect={(key) => {
+              onSelect(key);
+              hide?.();
+            }}
           />
         ))}
       </div>
-    </DialogContent>
-  </Dialog>
-);
+    </ModalDialog>
+  );
+};
 
 interface ModePickerOptionProps {
   mode: ModeOption;

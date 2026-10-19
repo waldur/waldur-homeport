@@ -36,7 +36,7 @@ async function login(page: Page) {
     // Try any modal close button
     const modalCloseButton = page
       .locator(
-        '.modal.show button.btn-close, .modal.show button:has-text("Accept"), .modal.show button:has-text("Close"), .modal.show button:has-text("OK")',
+        '[data-slot="modal"] button[data-slot="modal-close"], [data-slot="modal"] button:has-text("Accept"), [data-slot="modal"] button:has-text("Close"), [data-slot="modal"] button:has-text("OK")',
       )
       .first();
     if ((await modalCloseButton.count()) > 0) {
@@ -134,7 +134,7 @@ test.describe('EChart Visual Regression Tests', () => {
 
         // Select first organization if available
         const orgOption = page
-          .locator('.modal-content .list-group-item')
+          .locator('[data-slot="modal-content"] .list-group-item')
           .first();
         if ((await orgOption.count()) > 0) {
           await orgOption.click();
@@ -176,7 +176,7 @@ test.describe('EChart Visual Regression Tests', () => {
         await page.waitForTimeout(500);
 
         const orgOption = page
-          .locator('.modal-content .list-group-item')
+          .locator('[data-slot="modal-content"] .list-group-item')
           .first();
         if ((await orgOption.count()) > 0) {
           await orgOption.click();
@@ -209,13 +209,15 @@ test.describe('EChart Visual Regression Tests', () => {
         await page.waitForTimeout(500);
 
         // Look for a project in the selector
-        const projectTab = page.locator('.modal-content').getByText('Projects');
+        const projectTab = page
+          .locator('[data-slot="modal-content"]')
+          .getByText('Projects');
         if ((await projectTab.count()) > 0) {
           await projectTab.click();
           await page.waitForTimeout(500);
 
           const projectOption = page
-            .locator('.modal-content .list-group-item')
+            .locator('[data-slot="modal-content"] .list-group-item')
             .first();
           if ((await projectOption.count()) > 0) {
             await projectOption.click();

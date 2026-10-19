@@ -54,7 +54,6 @@ export const MultiRenewAllocationsAction = ({
         refetch,
       },
       size: 'xl',
-      fullscreen: 'lg-down',
     });
 
   if (!validResources.length) return null;

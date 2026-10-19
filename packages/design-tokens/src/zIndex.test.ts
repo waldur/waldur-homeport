@@ -78,6 +78,20 @@ describe('z-index tokens', () => {
     expect(token('dropdown-menu')).toBeLessThan(token('picker-popover'));
   });
 
+  it("puts the modal on Bootstrap's modal layers, a confirm above it", () => {
+    expect(token('modal')).toBe(BOOTSTRAP.modal);
+    expect(token('modal-backdrop')).toBeLessThan(token('modal'));
+    expect(token('modal-backdrop')).toBeGreaterThan(token('header-popover'));
+    expect(token('confirm-backdrop')).toBeGreaterThan(token('modal'));
+    expect(token('confirm')).toBeGreaterThan(token('confirm-backdrop'));
+  });
+
+  it('puts popovers, menus and pickers above a confirm over a modal', () => {
+    expect(token('popover')).toBeGreaterThan(token('confirm'));
+    expect(token('dropdown-menu')).toBeGreaterThan(token('confirm'));
+    expect(token('picker-popover')).toBeGreaterThan(token('confirm'));
+  });
+
   it('puts toasts above every Bootstrap overlay', () => {
     expect(token('toast')).toBeGreaterThan(BOOTSTRAP.modal);
     expect(token('toast')).toBeGreaterThan(BOOTSTRAP.popover);

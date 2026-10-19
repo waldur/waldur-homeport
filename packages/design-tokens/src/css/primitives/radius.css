@@ -11,7 +11,8 @@
  *   --radius-lg: 8px
  *   --radius-xl: 12px
  *   --radius-2xl: 16px
- *   --radius-modal: 20px (Dialog content and Sidebar mode-switcher card radius)
+ *   --radius-modal: 20px (the Sidebar mode-switcher card; the Modal itself is
+ *                    --radius-xl, the app's former Bootstrap modal radius)
  */
 @theme static {
   --radius-xs: 2px;

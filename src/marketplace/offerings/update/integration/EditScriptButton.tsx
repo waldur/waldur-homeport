@@ -35,7 +35,6 @@ export const EditScriptButton: FunctionComponent<ScriptEditorProps> = (
         resolve: props,
         formId: EDIT_SCRIPT_FORM_ID,
         size: 'xl',
-        onHide: null,
       });
     }
   };

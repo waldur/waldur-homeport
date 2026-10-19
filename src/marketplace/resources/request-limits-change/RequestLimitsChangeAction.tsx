@@ -36,7 +36,7 @@ const useRequestLimitsChange = ({ resource, refetch }) => {
     RequestLimitsChangeFlowDialog,
     resource,
     { refetch },
-    { size: 'xl', fullscreen: 'lg-down', contentClassName: 'overflow-auto' },
+    { size: 'xl' },
   );
   return { action, tooltip, disabled };
 };

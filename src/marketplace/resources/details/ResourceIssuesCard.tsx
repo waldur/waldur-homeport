@@ -25,7 +25,7 @@ const CreateIssueButton = ({ resource }) => {
         scope: resource,
         scopeType: 'resource',
       },
-      dialogClassName: 'modal-dialog-centered mw-650px',
+      dialogClassName: 'sm:max-w-[650px]',
       formId: ISSUE_CREATION_FORM_ID,
     });
   return (

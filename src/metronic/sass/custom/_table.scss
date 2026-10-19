@@ -511,7 +511,7 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 }
 
 // Tables inside modals — add outer border
-.modal {
+[data-slot='modal-content'] {
   .table-responsive {
     border: 1px solid var(--border-secondary);
     // Rounded like every other box in a dialog. No `overflow: hidden` with it:

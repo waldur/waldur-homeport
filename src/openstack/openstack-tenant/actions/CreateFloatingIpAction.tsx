@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { openstackTenantsCreateFloatingIp } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { routerConfirmField } from '@/modal/RouterSelector';
 import { OpenStackTenant } from '@/openstack/openstack-tenant/types';
 import { AsyncActionButton } from '@/resource/actions/AsyncActionButton';
 import { validateState } from '@/resource/actions/base';
@@ -42,8 +43,7 @@ export const CreateFloatingIpAction: FC<TenantActionProps> = ({
     hasConfirmation
     actionTitle={translate('Create floating IP')}
     confirmationOptions={{
-      showRouterSelect: true,
-      tenantUuid: resource.uuid,
+      extraField: routerConfirmField(resource.uuid),
     }}
   />
 );

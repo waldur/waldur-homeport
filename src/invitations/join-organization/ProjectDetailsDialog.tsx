@@ -1,5 +1,4 @@
 import { FC, useCallback } from 'react';
-import { Modal } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 
 import { BaseButton } from 'waldur-ui';
@@ -70,19 +69,17 @@ export const ProjectDetailsDialog: FC<ProjectDetailsDialogProps> = ({
               </>
             }
           >
-            <Modal.Body>
-              <StringGroup
-                name="project_name"
-                placeholder={translate('Leave empty for auto-generated name')}
-                label={translate('Project name')}
-              />
-              <TextGroup
-                name="project_description"
-                placeholder={translate('Optional description')}
-                label={translate('Project description')}
-                spaceless
-              />
-            </Modal.Body>
+            <StringGroup
+              name="project_name"
+              placeholder={translate('Leave empty for auto-generated name')}
+              label={translate('Project name')}
+            />
+            <TextGroup
+              name="project_description"
+              placeholder={translate('Optional description')}
+              label={translate('Project description')}
+              spaceless
+            />
           </ModalDialog>
         </form>
       )}

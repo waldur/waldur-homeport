@@ -1,6 +1,6 @@
 import { FC, useRef, useState, useEffect } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Badge, ModalBody, ModalTitle } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -26,22 +26,20 @@ interface FullMarkdownModalProps {
 
 const FullMarkdownModal: FC<FullMarkdownModalProps> = ({ resolve }) => {
   return (
-    <div className="modal-header-less">
-      <div className="modal-body">
-        <h5 className="modal-title mb-3">
-          {resolve.title}
-          {resolve.showInternalBadge && (
-            <>
-              {' '}
-              <Badge variant="warning" shape="pill" tone="outline">
-                {translate('Internal')}
-              </Badge>
-            </>
-          )}
-        </h5>
-        <SafeMarkdown text={resolve.text} smallTitles={resolve.smallTitles} />
-      </div>
-    </div>
+    <ModalBody>
+      <ModalTitle as="h5" className="mb-3 text-[15px] leading-[1.555]">
+        {resolve.title}
+        {resolve.showInternalBadge && (
+          <>
+            {' '}
+            <Badge variant="warning" shape="pill" tone="outline">
+              {translate('Internal')}
+            </Badge>
+          </>
+        )}
+      </ModalTitle>
+      <SafeMarkdown text={resolve.text} smallTitles={resolve.smallTitles} />
+    </ModalBody>
   );
 };
 

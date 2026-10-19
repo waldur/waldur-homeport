@@ -30,7 +30,7 @@ export const ReallocateLimitsAction: ActionItemType = ({
     ReallocateLimitsDialog,
     resource,
     { refetch },
-    { size: 'xl', fullscreen: 'lg-down', contentClassName: 'overflow-auto' },
+    { size: 'xl' },
   );
 
   // Reallocation submits one marketplace order per affected resource.

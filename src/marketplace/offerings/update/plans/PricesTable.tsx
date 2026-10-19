@@ -47,8 +47,9 @@ const formatPrice = (value) => {
 //     separator between the information types. This grid is that one: it sits
 //     under a heading and a toggle, above an alert.
 //
-// The border comes from `.modal .table-responsive` (which also rounds it), so
-// a Card, a wrapper div or a border utility here would be a second box.
+// The border comes from the dialog's `.table-responsive` rule (Metronic's
+// _table.scss, which also rounds it), so a Card, a wrapper div or a border
+// utility here would be a second box.
 export const PricesTable: FC<PricesTableProps> = ({
   components,
   plan,

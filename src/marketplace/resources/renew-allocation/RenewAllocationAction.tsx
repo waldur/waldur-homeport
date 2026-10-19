@@ -49,7 +49,7 @@ const useRenewAllocationAction = ({ resource, refetch }) => {
     RenewAllocationDialog,
     resource,
     { refetch },
-    { size: 'xl', fullscreen: 'lg-down' },
+    { size: 'xl' },
   );
 
   return {

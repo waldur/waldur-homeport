@@ -49,7 +49,6 @@ const createActionHandler = (
       const extRow = row;
       openDialog(RenewAllocationDialog, {
         size: 'xl',
-        fullscreen: 'lg-down',
         resolve: {
           resource_uuid: extRow.resource_uuid,
           refetch,

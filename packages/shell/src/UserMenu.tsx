@@ -9,19 +9,11 @@ import {
   Menu,
 } from 'waldur-ui';
 
-import { useCurrentUser } from './useCurrentUser';
+import { CurrentUser, useCurrentUser } from './useCurrentUser';
 import { useShellLanguage } from './useShellLanguage';
 import { useShellTheme } from './useShellTheme';
 
-export interface CurrentUser {
-  fullName: string;
-  firstName: string;
-  email: string;
-  isStaff: boolean;
-  imageSrc?: string;
-  token?: string;
-  ipAddress: string;
-}
+export type { CurrentUser };
 
 // Same acronym derivation as src/core/Avatar.tsx's real Avatar component —
 // not a fabricated placeholder, so a two-letter initials fallback is never

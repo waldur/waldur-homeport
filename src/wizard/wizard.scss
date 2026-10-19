@@ -1,5 +1,5 @@
 .wizard {
-  .modal-body {
+  [data-slot='modal-body'] {
     padding: 0;
   }
 

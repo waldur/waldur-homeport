@@ -1,7 +1,7 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import {
@@ -15,6 +15,9 @@ import { BaseButton } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { renderFieldOrDash } from '@/table/utils';
 import { isStaff as isStaffSelector } from '@/workspace/selectors';
@@ -34,7 +37,7 @@ export const OfferingProfileDetail: FC = () => {
       ),
   });
 
-  const [showAdd, setShowAdd] = useState(false);
+  const { openDialog } = useModal();
   // The profile API is read-open; changing the role catalog is staff-only.
   const isStaff = useSelector(isStaffSelector);
 
@@ -65,7 +68,11 @@ export const OfferingProfileDetail: FC = () => {
             <BaseButton
               label={translate('Add role')}
               iconNode={<PlusCircleIcon weight="bold" />}
-              onClick={() => setShowAdd(true)}
+              onClick={() =>
+                openDialog(AddRoleToProfileDialog, {
+                  resolve: { profileUuid: uuid },
+                })
+              }
               variant="tertiary"
               size="lg"
             />
@@ -118,25 +125,13 @@ export const OfferingProfileDetail: FC = () => {
           )}
         </Card.Body>
       </Card>
-
-      {showAdd && (
-        <AddRoleToProfileDialog
-          profileUuid={uuid}
-          onClose={() => setShowAdd(false)}
-          onAdded={() => {
-            setShowAdd(false);
-          }}
-        />
-      )}
     </div>
   );
 };
 
 const AddRoleToProfileDialog: FC<{
-  profileUuid: string;
-  onClose(): void;
-  onAdded(): void;
-}> = ({ profileUuid, onClose, onAdded }) => {
+  resolve: { profileUuid: string };
+}> = ({ resolve: { profileUuid } }) => {
   // Available roles = system + offering roles whose content_type is
   // resource or resource_project.
   const { data: roles = [] } = useQuery({
@@ -177,61 +172,39 @@ const AddRoleToProfileDialog: FC<{
       }),
     successMessage: translate('Role added to profile.'),
     errorMessage: translate('Unable to add role.'),
-    onSuccess: onAdded,
     invalidateQueries: [{ queryKey: PROFILE_KEY(profileUuid) }],
-    closeModal: false,
   });
 
   return (
-    <div
-      className="modal show block"
-      style={{ background: 'rgba(0,0,0,0.4)' }}
-      tabIndex={-1}
+    <ModalDialog
+      title={translate('Add role to profile')}
+      footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">{translate('Add role to profile')}</h5>
-            <button type="button" className="btn-close" onClick={onClose} />
-          </div>
-          <div className="modal-body">
-            {roles.length === 0 ? (
-              <p>{translate('No eligible roles found.')}</p>
-            ) : (
-              <ul className="list-group">
-                {roles.map((r: any) => (
-                  <li
-                    key={r.uuid}
-                    className="list-group-item flex justify-between items-center"
-                  >
-                    <span>
-                      {r.name}
-                      <span className="text-quaternary ms-2">
-                        ({r.content_type})
-                      </span>
-                    </span>
-                    <BaseButton
-                      variant="primary"
-                      size="sm"
-                      onClick={() => submit(r.uuid)}
-                      disabled={submitting}
-                      disabledReason={translate('Adding role...')}
-                      label={translate('Add')}
-                    />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-          <div className="modal-footer">
-            <BaseButton
-              variant="tertiary"
-              onClick={onClose}
-              label={translate('Close')}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+      {roles.length === 0 ? (
+        <p>{translate('No eligible roles found.')}</p>
+      ) : (
+        <ul className="list-group">
+          {roles.map((r: any) => (
+            <li
+              key={r.uuid}
+              className="list-group-item flex justify-between items-center"
+            >
+              <span>
+                {r.name}
+                <span className="text-quaternary ms-2">({r.content_type})</span>
+              </span>
+              <BaseButton
+                variant="primary"
+                size="sm"
+                onClick={() => submit(r.uuid)}
+                disabled={submitting}
+                disabledReason={translate('Adding role...')}
+                label={translate('Add')}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
+    </ModalDialog>
   );
 };

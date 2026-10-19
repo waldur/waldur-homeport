@@ -155,11 +155,18 @@ import { SubmitButton } from '@/form';
 ```tsx
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 
-// Simple close
-<Modal.Footer>
-  <CloseDialogButton />
-  <SubmitButton submitting={submitting} label={translate('Save')} />
-</Modal.Footer>
+// Simple close, in ModalDialog's footer
+<ModalDialog
+  title={translate('Edit')}
+  footer={
+    <>
+      <CloseDialogButton />
+      <SubmitButton submitting={submitting} label={translate('Save')} />
+    </>
+  }
+>
+  …
+</ModalDialog>
 
 // Custom label
 <CloseDialogButton label={translate('Discard')} />
@@ -170,10 +177,12 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 
 ### Modal and Dialog Components
 
+See [modals.md](modals.md) for the whole modal API.
+
 | Component              | Location                           | Description           | Key Features                       |
 | ---------------------- | ---------------------------------- | --------------------- | ---------------------------------- |
 | **ModalDialog**        | `src/modal/ModalDialog.tsx`        | Base modal component  | Header, body, footer, icon support |
-| **ConfirmationDialog** | `src/modal/ConfirmationDialog.tsx` | Confirmation modal    | Destructive actions, custom text   |
+| **ConfirmationDialog** | `waldur-ui`                        | Confirmation modal    | Destructive actions, custom text   |
 | **ActionDialog**       | `src/modal/ActionDialog.tsx`       | Generic action dialog | Form support, validation           |
 
 ### Button Factory Components

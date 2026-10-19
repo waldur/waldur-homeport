@@ -10,8 +10,8 @@
  * the live app's dropdowns with getComputedStyle.
  *
  * --overlay-shadow is the core $dropdown-box-shadow that override replaced.
- * Dialog.tsx and Toast.tsx were built on it before the override was noticed,
- * and keep it so they don't change.
+ * Toast.tsx was built on it before the override was noticed, and keeps it
+ * so it doesn't change. (The Modal has its own two-step --modal-shadow.)
  *
  * The card shadow (--card-shadow, card.css) and the drawer shadow
  * (--drawer-shadow, sheet.css) are still component tokens.

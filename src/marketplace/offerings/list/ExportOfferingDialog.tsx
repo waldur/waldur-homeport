@@ -1,10 +1,10 @@
 import { FC, useMemo } from 'react';
-import { Modal } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { OfferingExportParametersRequest } from 'waldur-js-client';
 
 import { FormFooter, BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
   const onSubmit = (formData: OfferingExportParametersRequest) => {
@@ -35,10 +35,15 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
       initialValues={initialValues}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-          <Modal.Header>
-            <Modal.Title>{translate('Export offering')}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+          <ModalDialog
+            title={translate('Export offering')}
+            footer={
+              <FormFooter
+                submitLabel={translate('Export')}
+                submitVariant="success"
+              />
+            }
+          >
             <p>
               {translate(
                 'Configure export parameters for offering "{offering_name}".',
@@ -141,13 +146,7 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
                 />
               </div>
             </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <FormFooter
-              submitLabel={translate('Export')}
-              submitVariant="success"
-            />
-          </Modal.Footer>
+          </ModalDialog>
         </form>
       )}
     />

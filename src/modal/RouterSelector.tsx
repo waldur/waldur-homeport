@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { openstackRoutersList } from 'waldur-js-client';
 
-import { FormField, FormLabel } from 'waldur-ui';
+import { ConfirmationExtraField, FormField, FormLabel } from 'waldur-ui';
 
 import { createLoadOptions, AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 
-export const RouterSelector = ({ routerValue, setRouterValue, tenantUuid }) => {
+const RouterSelector = ({ routerValue, setRouterValue, tenantUuid }) => {
   const loadRouters = useMemo(
     () =>
       tenantUuid
@@ -44,3 +44,21 @@ export const RouterSelector = ({ routerValue, setRouterValue, tenantUuid }) => {
     </FormField>
   );
 };
+
+/**
+ * The router picker as a confirmation's extra field: `confirm()` resolves
+ * with `{ router: <url> }` when one is picked.
+ */
+export const routerConfirmField = (
+  tenantUuid: string,
+): ConfirmationExtraField => ({
+  resultKey: 'router',
+  toResult: (router) => router.url,
+  render: (routerValue, setRouterValue) => (
+    <RouterSelector
+      routerValue={routerValue}
+      setRouterValue={setRouterValue}
+      tenantUuid={tenantUuid}
+    />
+  ),
+});

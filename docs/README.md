@@ -32,6 +32,7 @@ Guides for working on Waldur HomePort. Start with [development-setup.md](develop
 | [tailwind-shadcn-migration-notes.md](tailwind-shadcn-migration-notes.md) | Bootstrap → Tailwind/shadcn migration: cascade layers, `!important` collisions, token extraction, lint rules, visual-parity tests            |
 | [e2e-locators.md](e2e-locators.md)                                       | How waldur-integration-testing locates menus, tabs and filters (roles and test ids), and what replaced the old class names                   |
 | [menus.md](menus.md)                                                     | Menus, dropdowns and popovers: which component to use, recipes, rules, how the looks work, testing                                           |
+| [modals.md](modals.md)                                                   | Modals: `openDialog`, `ModalDialog`, `ModalShell`, the parts, sizes and options, `data-slot` styling hooks, testing                          |
 
 ## API and data
 

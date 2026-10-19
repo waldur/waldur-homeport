@@ -33,7 +33,7 @@ export const useStaffRequest = (recipient?: StaffRequestRecipient) => {
     () =>
       openDialog(StaffRequestDialog, {
         resolve: { recipient },
-        dialogClassName: 'modal-dialog-centered mw-650px',
+        dialogClassName: 'sm:max-w-[650px]',
       }),
     [openDialog, recipient],
   );

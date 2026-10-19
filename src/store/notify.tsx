@@ -1,40 +1,15 @@
-import { useMemo } from 'react';
-
-import {
-  NotifyService as BaseNotifyService,
-  ToastOptions,
-  showError,
-  useNotify as useBaseNotify,
-} from 'waldur-notifications';
+import { setErrorResponseFormatter } from 'waldur-notifications';
 
 import { format } from '@/core/ErrorMessageFormatter';
 
 /**
- * The one piece waldur-notifications' own showX primitives can't provide:
- * turning an API error into readable text is app-specific (this app's own
+ * The one piece waldur-notifications can't provide itself: turning an API
+ * error into readable text is app-specific (this app's
  * @/core/ErrorMessageFormatter, tied to waldur-auth-core's error-interceptor
- * shape and @/i18n), so it's composed here on top of the shared package's
- * plain showError rather than living in it.
+ * shape, ENV and @/i18n). Registered here, so every showErrorResponse — the
+ * app's and the shared packages' (useManagedMutation in waldur-shell) —
+ * formats errors this way.
  */
-const showErrorResponse = (
-  error: unknown,
-  message?: string,
-  options?: ToastOptions,
-) => {
-  const details = format(error);
-  const errorMessage = message ? `${message} ${details}` : details;
-  showError(errorMessage, options);
-};
+setErrorResponseFormatter((error) => format(error));
 
-export const useNotify = () => {
-  const base = useBaseNotify();
-  // Memoized so callers using this in dependency arrays don't refire on
-  // render — base is itself referentially stable (see its own useMemo), so
-  // this only ever recomputes once.
-  return useMemo(() => ({ ...base, showErrorResponse }), [base]);
-};
-
-export const NotifyService = {
-  ...BaseNotifyService,
-  errorResponse: showErrorResponse,
-};
+export { NotifyService, useNotify } from 'waldur-notifications';

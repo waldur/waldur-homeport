@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { ServiceProvider } from 'waldur-js-client';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import { Badge, BaseButton, ModalBody, ModalTitle } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
@@ -65,26 +65,26 @@ const parseCleared = (value) => value ?? '';
 // The full explanation opens in a dialog, as TruncatedMarkdown shows long
 // text: one line on the card and a Show more link to the rest.
 const AccountSettingsIntroDialog: FC = () => (
-  <div className="modal-header-less">
-    <div className="modal-body">
-      <h5 className="modal-title mb-3">{translate('Account settings')}</h5>
-      <p>
-        {translate(
-          'These settings decide how the accounts people get on your offerings are named and set up: the username, home directory and login shell that your systems, such as an LDAP directory, receive for each person.',
-        )}
-      </p>
-      <p>
-        {translate(
-          'Each offering uses its own value where it sets one, then the value here, then the built-in default. The User management settings of an offering show which of the three applies.',
-        )}
-      </p>
-      <p className="mb-0">
-        {translate(
-          'Choose per service provider when your offerings share one user directory: a person then has a single account, with the same username and POSIX UID, on all of them.',
-        )}
-      </p>
-    </div>
-  </div>
+  <ModalBody>
+    <ModalTitle as="h5" className="mb-3 text-[15px] leading-[1.555]">
+      {translate('Account settings')}
+    </ModalTitle>
+    <p>
+      {translate(
+        'These settings decide how the accounts people get on your offerings are named and set up: the username, home directory and login shell that your systems, such as an LDAP directory, receive for each person.',
+      )}
+    </p>
+    <p>
+      {translate(
+        'Each offering uses its own value where it sets one, then the value here, then the built-in default. The User management settings of an offering show which of the three applies.',
+      )}
+    </p>
+    <p className="mb-0">
+      {translate(
+        'Choose per service provider when your offerings share one user directory: a person then has a single account, with the same username and POSIX UID, on all of them.',
+      )}
+    </p>
+  </ModalBody>
 );
 
 export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({

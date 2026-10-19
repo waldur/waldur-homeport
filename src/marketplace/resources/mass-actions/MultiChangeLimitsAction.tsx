@@ -127,10 +127,9 @@ export const MultiChangeLimitsAction = ({
   const callback = () =>
     openDialog(MultiChangeLimitsDialog, {
       resolve: { rows, refetch },
-      // Largest modal (with the preview table) — falls back to fullscreen on
-      // smaller screens; the table itself scrolls horizontally if still wider.
+      // Largest modal (with the preview table); the table itself scrolls
+      // horizontally if still wider.
       size: 'xl',
-      fullscreen: 'lg-down',
     });
 
   return (

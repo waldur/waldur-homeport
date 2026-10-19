@@ -6,6 +6,8 @@ export {
   NotifyService,
   show,
   showError,
+  showErrorResponse,
+  setErrorResponseFormatter,
   showInfo,
   showPromise,
   showRedirectMessage,

@@ -57,7 +57,6 @@ export const ServiceProviderCommentWarningBar: FC<
 
   const callback = () =>
     openDialog(ServiceProviderCommentModal, {
-      dialogClassName: 'modal-dialog-centered',
       comment: comment,
       commentUrl: offeringUser.service_provider_comment_url,
       size: 'sm',
