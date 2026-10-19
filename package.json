@@ -261,7 +261,8 @@
       "stubs/**",
       "test/mocks/svg.tsx",
       "vitest.shims.d.ts",
-      "public/boot-redirect.js"
+      "public/boot-redirect.js",
+      "public/boot-splash.js"
     ]
   },
   "stylelint": {

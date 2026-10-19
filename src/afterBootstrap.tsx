@@ -3,6 +3,7 @@ import { initBrandTokens } from 'waldur-design-tokens';
 import { ENV } from './core/config';
 import { initMatomoTracker } from './core/matomo';
 import { initSentry } from './core/sentry';
+import { saveSplashBranding } from './core/splashBranding';
 import { getBrandColor } from './core/utils';
 import {
   initLanguageUtils,
@@ -51,4 +52,6 @@ export function afterBootstrap() {
   initI18n();
   attachTransitions();
   initCssVariables();
+  // Fire and forget: only the next visit's splash depends on it.
+  void saveSplashBranding();
 }

@@ -16,8 +16,8 @@ import { resetUserCache } from '@/user/UsersService';
  * purges them anyway, before anything of the new user is fetched.
  *
  * The bootstrap query is always kept: it holds the public configuration and
- * removing it would re-suspend the whole application — exactly the double
- * "Loading assets" boot this reset exists to avoid.
+ * removing it would re-suspend the whole application — exactly the second
+ * trip through the boot splash this reset exists to avoid.
  */
 export function resetSessionState({ queries = true } = {}) {
   if (queries) {

@@ -13044,6 +13044,15 @@
       "feature_area": "ticketDraft"
     }
   },
+  "Couldn't start {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
   "Count": {
     "context": {
       "primary_ui_type": "title",
@@ -28975,7 +28984,6 @@
       "feature_area": "reports"
     }
   },
-  "Loading assets": {},
   "Loading computes summaries for every project in this organization and may take 10–15 seconds. You can optionally filter to a subset of projects first to speed things up.": {
     "context": {
       "feature_area": "reports"
@@ -61663,7 +61671,6 @@
       "feature_area": "valimo"
     }
   },
-  "Unable to bootstrap application.": {},
   "Unable to cancel booking.": {
     "context": {
       "primary_ui_type": "error_message",

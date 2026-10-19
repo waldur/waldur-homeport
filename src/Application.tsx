@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { AnonymousThreadProvider } from '@/ai-assistant/anonymous/AnonymousThreadProvider';
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
 import { ThreadRuntimeProvider } from '@/ai-assistant/logic/ThreadRuntimeProvider';
+import { BootSplashGate } from '@/BootSplashGate';
 import { BOOTSTRAP_QUERY_KEY, queryClient } from '@/core/queryClient';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { DrawerRoot } from '@/drawer/DrawerRoot';
@@ -58,6 +59,7 @@ const ApplicationInner: FunctionComponent = () => {
                           <ConfirmModalRoot />
                           <DrawerRoot />
                           <UIView />
+                          <BootSplashGate />
                         </AnonymousThreadProvider>
                       </ThreadRuntimeProvider>
                     </ThreadProvider>
@@ -75,11 +77,11 @@ const ApplicationInner: FunctionComponent = () => {
 export const Application: FunctionComponent = () => (
   <QueryClientProvider client={queryClient}>
     <ErrorBoundary
-      fallback={({ error }) => (
-        <LoadingScreen loading={false} error={error as Error} />
-      )}
+      fallback={({ error }) => <LoadingScreen error={error as Error} />}
     >
-      <Suspense fallback={<LoadingScreen loading={true} />}>
+      {/* No fallback of its own: the boot splash from index.html stays over
+          the page until BootSplashGate removes it. */}
+      <Suspense fallback={null}>
         <ApplicationInner />
       </Suspense>
     </ErrorBoundary>
