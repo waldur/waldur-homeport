@@ -1,22 +1,18 @@
 /**
- * Modal enter/exit keyframes, matching what waldur-homeport's own real
- * Bootstrap modal does — the exact source values, not an approximation:
+ * waldur-ui Modal's enter/exit keyframes, matching what waldur-homeport's
+ * Bootstrap modal did — the exact source values, not an approximation. As
+ * in Bootstrap's markup, the dialog box sits inside a scrolling overlay:
  *
- * - dialog:   `transform: translate(0, -50px)` → `none` over
- *             `.3s ease-out` ($modal-fade-transform/$modal-show-transform/
- *             $modal-transition, none of which this app overrides), while
- *             the modal container itself fades opacity over `.15s linear`
- *             ($transition-fade, applied via Bootstrap's own `.fade`).
- *             Both live in one keyframe rather than two stacked
- *             animations: opacity simply finishes at the 50% mark of the
- *             .3s run, which *is* .15s. Radix's Presence tracks a single
- *             animationName per node to decide when an exiting node may
- *             unmount, so one animation is also the safe shape.
- * - backdrop: opacity 0 → 1 over `.15s linear`, Bootstrap's
- *             `.modal-backdrop.fade`/`.show` pair. The alpha stays in
- *             --modal-backdrop-bg rather than in this animation's end
- *             state — see dialog.css's comment on why that
- *             separation matters for the blur.
+ * - dialog box: `transform: translate(0, -50px)` → `none` over
+ *               `.3s ease-out` ($modal-fade-transform/$modal-show-transform/
+ *               $modal-transition); exit is the app's own `.15s ease-in`,
+ *               so the box is gone by the time its fading overlay is.
+ * - overlay and backdrop: opacity 0 → 1 over `.15s linear`, Bootstrap's
+ *               `.fade`/`.show` pair. The box doesn't fade as well, which
+ *               would double the fade. The backdrop's alpha stays in
+ *               --modal-backdrop-bg rather than in this animation's end
+ *               state — see dialog.css's comment on why that separation
+ *               matters for the blur.
  *
  * Keyframes, not CSS transitions: Radix's Presence detects an exit
  * animation by reading the node's computed animationName and waiting for
@@ -30,31 +26,20 @@
  * prefers-reduced-motion. animation-duration is collapsed rather than set
  * to `none` so animationend still fires and Radix still unmounts.
  */
-
-@keyframes waldur-modal-enter {
+@keyframes waldur-modal-slide-in {
   from {
-    opacity: 0;
     transform: translate(0, -50px);
   }
-  50% {
-    opacity: 1;
-  }
   to {
-    opacity: 1;
     transform: none;
   }
 }
 
-@keyframes waldur-modal-exit {
+@keyframes waldur-modal-slide-out {
   from {
-    opacity: 1;
     transform: none;
   }
-  50% {
-    opacity: 0;
-  }
   to {
-    opacity: 0;
     transform: translate(0, -50px);
   }
 }

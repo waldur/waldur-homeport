@@ -14,8 +14,10 @@
  *      105  --z-index-nav-menu        token  (Metronic's old menu dropdown z-index)
  *      110  --z-index-mobile-drawer   token  (= Metronic $drawer z-index)
  *     1000  --z-index-header-popover  token  (= Bootstrap $zindex-dropdown)
- *     1050  Bootstrap $zindex-modal-backdrop
- *     1055  Bootstrap $zindex-modal
+ *     1050  --z-index-modal-backdrop  token  (= Bootstrap $zindex-modal-backdrop)
+ *     1055  --z-index-modal          token  (= Bootstrap $zindex-modal)
+ *     1060  --z-index-confirm-backdrop token (a confirm over a modal)
+ *     1065  --z-index-confirm        token
  *     1070  --z-index-popover        token  (= Bootstrap $zindex-popover;
  *                                            waldur-ui's PopoverContent)
  *     1080  Bootstrap $zindex-tooltip
@@ -49,6 +51,15 @@
      drop down over the fixed toolbar and page tabs, so Tailwind's z-50
      leaves them painted underneath. */
   --z-index-header-popover: 1000;
+  /* waldur-ui's Modal (ModalShell), on the layers of the Bootstrap modal it
+     replaced, which the popover/menu/picker layers above were chosen to
+     clear. A confirmation opened over a modal (ModalShell's
+     layer="confirm") sits one step above it, as the app's
+     .confirm-modal/.confirm-backdrop did. */
+  --z-index-modal-backdrop: 1050;
+  --z-index-modal: 1055;
+  --z-index-confirm-backdrop: 1060;
+  --z-index-confirm: 1065;
   /* waldur-ui's PopoverContent (the column picker, call settings, search
      results). Bootstrap's popover layer, which the react-bootstrap popovers
      these replace sat on: above modals, so a popover opened in one shows. */

@@ -5,14 +5,13 @@ import {
 } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, RadialBackground } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import '@/navigation/header/search/NoResult.scss';
 import { useModal } from '@/modal/actions';
 
 import { lazyComponent } from './core/lazyComponent';
-import { RadialBg } from './navigation/header/search/RadialBg';
 
 const ErrorTraceDialog = lazyComponent(() =>
   import('@/ErrorTraceDialog').then((module) => ({
@@ -31,7 +30,7 @@ export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
 
   return (
     <div className="search-error">
-      <RadialBg className="background" />
+      <RadialBackground className="background" />
       <div className="text-center flex flex-col items-center pb-10 position-relative z-index-1">
         <div className="icon-square icon-lg error-icon">
           <WarningCircleIcon weight="bold" size={24} />

@@ -1,9 +1,10 @@
 import { ChartBarIcon } from '@phosphor-icons/react';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { TosReportingModal } from './TosReportingModal';
@@ -19,30 +20,28 @@ export const TosReportingButton: FC<TosReportingButtonProps> = ({
   providerUuid,
   asDropdownItem,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { openDialog } = useModal();
+  const open = () =>
+    openDialog(TosReportingModal, {
+      size: 'xl',
+      resolve: { offeringUuid, providerUuid },
+    });
 
   return (
     <>
       {asDropdownItem ? (
         <ActionItem
           title={translate('ToS reporting')}
-          action={() => setIsOpen(true)}
+          action={open}
           iconNode={<ChartBarIcon weight="bold" />}
         />
       ) : (
         <BaseButton
           label={translate('ToS reporting')}
           iconNode={<ChartBarIcon weight="bold" />}
-          onClick={() => setIsOpen(true)}
+          onClick={open}
           variant="tertiary"
           size="lg"
-        />
-      )}
-      {isOpen && (
-        <TosReportingModal
-          offeringUuid={offeringUuid}
-          providerUuid={providerUuid}
-          onClose={() => setIsOpen(false)}
         />
       )}
     </>

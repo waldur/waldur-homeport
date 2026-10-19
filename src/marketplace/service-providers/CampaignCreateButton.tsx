@@ -24,7 +24,6 @@ export const CampaignCreateButton: FunctionComponent<{
   const user = useUser();
   const callback = () =>
     openDialog(CampaignDialog, {
-      dialogClassName: 'modal-dialog-centered',
       resolve: {
         refetch,
       },

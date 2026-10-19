@@ -13,6 +13,31 @@ export interface ToastOptions {
   duration?: number;
 }
 
+let formatErrorResponse = (error: unknown): string =>
+  error instanceof Error ? error.message : String(error);
+
+/**
+ * Sets how `showErrorResponse` turns an API error into text. Formatting is
+ * app-specific (the app's API error shape, its config and i18n), so the app
+ * registers its formatter once at startup, as it does i18n-runtime's
+ * setMessageTransform. Until then, Error#message or the value itself.
+ */
+export const setErrorResponseFormatter = (
+  formatter: (error: unknown) => string,
+) => {
+  formatErrorResponse = formatter;
+};
+
+/** An error toast for a failed request: `message`, then the error's details. */
+export const showErrorResponse = (
+  error: unknown,
+  message?: string,
+  options?: ToastOptions,
+) => {
+  const details = formatErrorResponse(error);
+  showError(message ? `${message} ${details}` : details, options);
+};
+
 export const show = (
   variant: AlertItemVariant,
   title: ReactNode,
@@ -81,11 +106,9 @@ export const showPromise = <T>(
       return result;
     },
     (error) => {
-      // No injectable app-specific error formatter here (see this module's
-      // own doc comment) — Error#message covers the common case, falling
-      // back to the value itself for anything else (a plain string reject,
-      // a DRF-shaped object with no `message` property, ...).
-      const fallback = error instanceof Error ? error.message : String(error);
+      // The app's registered formatter (setErrorResponseFormatter), or
+      // Error#message / the value itself until one is registered.
+      const fallback = formatErrorResponse(error);
       const title =
         typeof messages.error === 'function'
           ? messages.error(error)
@@ -98,12 +121,6 @@ export const showPromise = <T>(
   );
 };
 
-/**
- * No `errorResponse`/`showErrorResponse` here: formatting an error into a
- * message is app-specific (it depends on that app's own API error shape and
- * i18n setup) — see waldur-homeport's src/store/notify.tsx for how it
- * composes one on top of this package's plain `showError`.
- */
 export const useNotify = () => {
   // Memoized so callers using these in dependency arrays don't refire on render.
   return useMemo(
@@ -113,6 +130,7 @@ export const useNotify = () => {
       showInfo,
       showRedirectMessage,
       showPromise,
+      showErrorResponse,
       dismiss,
     }),
     [],
@@ -125,5 +143,6 @@ export const NotifyService = {
   info: showInfo,
   warning: showRedirectMessage,
   promise: showPromise,
+  errorResponse: showErrorResponse,
   dismiss,
 };

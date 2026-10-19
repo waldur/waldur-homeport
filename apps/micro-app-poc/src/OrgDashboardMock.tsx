@@ -10,6 +10,7 @@ import {
   CardHeader,
   DataTable,
   DataTableColumn,
+  ModalService,
   ModePickerDialog,
   OrgSwitcher,
   SidebarModeCard,
@@ -76,17 +77,30 @@ export const OrgDashboardMock = () => {
 
   const { customers, selectedUuid, selectCustomer, data } = useDashboardData();
 
-  // The mode the sidebar is currently showing, and whether the picker
-  // that switches it is open. Local state only — a real deployment would
+  // The mode the sidebar is currently showing. Local state only — a real deployment would
   // persist this per user, which needs a backend field this app has no
   // endpoint for yet.
   const [mode, setMode] = useState('finance-reporting');
-  const [pickerOpen, setPickerOpen] = useState(false);
   // Rebuilt every render, not memoized: its translate() calls have to
   // re-resolve once the dictionary loads, same reason `columns` above is
   // not a module constant.
   const modes = getWorkspaceModes();
   const currentMode = modes.find((item) => item.key === mode);
+  // ModalService rather than useModal(): this component renders AppShell,
+  // which mounts the ModalProvider, so it sits above the provider.
+  const openPicker = () =>
+    ModalService.open(ModePickerDialog, {
+      size: 'lg',
+      resolve: {
+        title: translate('Choose your workspace'),
+        description: translate(
+          'You have access to multiple modes. Each gives you a tailored view of Waldur for a specific job. You can switch anytime from the sidebar.',
+        ),
+        modes,
+        value: mode,
+        onSelect: setMode,
+      },
+    });
 
   // Dashes, not mock-number fallbacks, when there's no backend/no
   // customers — see the file header comment. renderFieldOrDash() lives in
@@ -110,7 +124,7 @@ export const OrgDashboardMock = () => {
           icon={currentMode?.icon}
           title={currentMode?.title ?? ''}
           subtitle={getModeSubtitle(mode)}
-          onClick={() => setPickerOpen(true)}
+          onClick={openPicker}
         />
       }
       sidebarContent={<ModeNav mode={mode} projectsCount={projectsCount} />}
@@ -125,20 +139,6 @@ export const OrgDashboardMock = () => {
         </OrgSwitcher>
       }
     >
-      <ModePickerDialog
-        open={pickerOpen}
-        onOpenChange={setPickerOpen}
-        title={translate('Choose your workspace')}
-        description={translate(
-          'You have access to multiple modes. Each gives you a tailored view of Waldur for a specific job. You can switch anytime from the sidebar.',
-        )}
-        modes={modes}
-        value={mode}
-        onSelect={(key) => {
-          setMode(key);
-          setPickerOpen(false);
-        }}
-      />
       <div className="flex flex-1 flex-col gap-6 p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
@@ -153,7 +153,7 @@ export const OrgDashboardMock = () => {
                 {
                   key: 'mode',
                   text: currentMode?.title ?? '',
-                  onClick: () => setPickerOpen(true),
+                  onClick: openPicker,
                 },
                 { key: 'page', text: translate('Overview'), active: true },
               ]}

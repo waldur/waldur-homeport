@@ -12,3 +12,7 @@ export { useShellLanguage } from './useShellLanguage';
 
 export { UserMenu } from './UserMenu';
 export type { CurrentUser } from './UserMenu';
+
+export { useManagedMutation } from './useManagedMutation';
+export type { ManagedMutationProps } from './useManagedMutation';
+export { useBatchMutation } from './useBatchMutation';

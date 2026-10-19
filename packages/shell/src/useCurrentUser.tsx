@@ -10,10 +10,15 @@ import {
 // packages/api-client/src/requestHelpers.ts.
 import { usersMeRetrieve } from 'waldur-js-client';
 
-// CurrentUser is UserMenu.tsx's own prop contract, not a type this file
-// owns — importing it from there (rather than a second, separately
-// maintained copy here) is what keeps the two from drifting apart.
-import { CurrentUser } from './UserMenu';
+export interface CurrentUser {
+  fullName: string;
+  firstName: string;
+  email: string;
+  isStaff: boolean;
+  imageSrc?: string;
+  token?: string;
+  ipAddress: string;
+}
 
 const CurrentUserContext = createContext<CurrentUser | null | undefined>(
   undefined,

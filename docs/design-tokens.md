@@ -309,8 +309,7 @@ green, whatever the tenant configured. So:
 - Never pass a CSS variable into a Sass colour function (`tint-color`, `shade-color`, `mix`,
   `rgba($x, …)`): they need a compile-time colour. That is why `$primary` itself stays static.
 - `_variables.custom.scss` already points the Bootstrap outputs that would otherwise paint the
-  static green at the runtime brand: the shared focus glow (`$input-btn-focus-color`: inputs,
-  selects, `.btn-close`), the active list-group row and the range thumb. `.svg-icon-primary`
+  static green at the runtime brand: the active list-group row and the range thumb. `.svg-icon-primary`
   is `var(--brand-color)`, so it follows the brand too.
 
 ## Font size
@@ -386,7 +385,7 @@ to prevent fractional `rem` compression under Waldur's forced 13px root font siz
 | `--radius-lg`    | 8px    | `rounded-lg`    | `$border-radius` / `-lg` (8px)   | Cards, panels, dialog headers, table containers |
 | `--radius-xl`    | 12px   | `rounded-xl`    | `$border-radius-xl` (12px)       | Prominent cards, thread bubbles, chat panels    |
 | `--radius-2xl`   | 16px   | `rounded-2xl`   | `$border-radius-2xl` (16px)      | Large feature cards, hero containers            |
-| `--radius-modal` | 20px   | `rounded-modal` | —                                | Dialog content and Sidebar mode-switcher card   |
+| `--radius-modal` | 20px   | `rounded-modal` | —                                | Sidebar mode-switcher card                      |
 | `--radius-full`  | 9999px | `rounded-full`  | `rounded-pill`, `rounded-circle` | Avatars, pills, circular badges, status dots    |
 
 - **No Bootstrap `rounded-0`, `rounded-pill`, `rounded-circle`.** Bootstrap radius utilities are

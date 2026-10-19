@@ -1,6 +1,5 @@
 import { ArrowClockwiseIcon, EyeIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useState } from 'react';
-import { Modal } from 'react-bootstrap';
 
 import { BaseButton } from 'waldur-ui';
 
@@ -9,6 +8,7 @@ import Illustration from '@/images/table-placeholders/undraw_fixing_bugs_w7gi.sv
 import { lazyComponent } from './core/lazyComponent';
 import { translate } from './i18n';
 import './LoadingScreen.css';
+import { ModalShell } from './modal/ModalShell';
 import { ThemeProvider } from './theme/ThemeProvider';
 
 const ErrorTraceDialog = lazyComponent(() =>
@@ -38,10 +38,10 @@ export const LoadingScreen: FunctionComponent<{
                 <h2>{translate('Unable to bootstrap application.')}</h2>
 
                 {show && (
-                  <Modal show={show} onHide={() => setShow(false)}>
+                  <ModalShell open={show} onHide={() => setShow(false)}>
                     {/* @ts-ignore */}
                     <ErrorTraceDialog error={error} />
-                  </Modal>
+                  </ModalShell>
                 )}
                 <div className="flex gap-4 mt-2">
                   {/* Not gated on error.stack: the actionable detail lives on

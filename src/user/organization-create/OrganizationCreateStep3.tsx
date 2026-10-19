@@ -3,9 +3,10 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 import { OnboardingVerification } from 'waldur-js-client';
 
+import { RadialBackground } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { RadialBg } from '@/navigation/header/search/RadialBg';
 
 import './OrganizationReviewStatus.scss';
 
@@ -115,7 +116,7 @@ export const OrganizationCreateStep3: FunctionComponent<
     <div className="flex flex-col gap-5">
       <Card className="border-0 shadow-sm">
         <Card.Body className="text-center position-relative overflow-hidden organization-validation-result">
-          <RadialBg className="icon-background" />
+          <RadialBackground className="icon-background" />
           {validationLoading ? (
             <>
               <LoadingSpinner />

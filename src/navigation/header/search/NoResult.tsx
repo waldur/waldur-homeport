@@ -2,11 +2,9 @@ import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { CSSProperties, FC, ReactNode } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, RadialBackground } from 'waldur-ui';
 
 import { translate } from '@/i18n';
-
-import { RadialBg } from './RadialBg';
 
 import './NoResult.scss';
 
@@ -44,7 +42,7 @@ export const NoResult: FC<NoResultProps> = ({
       )}
       style={style}
     >
-      <RadialBg className="background" />
+      <RadialBackground className="background" />
       <div className="text-center flex flex-col items-center pb-10 position-relative z-index-1">
         <div className="icon-square icon-lg search-icon">{icon}</div>
 

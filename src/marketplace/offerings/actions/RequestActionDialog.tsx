@@ -78,7 +78,7 @@ export const RequestActionDialog: FunctionComponent<{
             hideTitle: true,
           },
         },
-        dialogClassName: 'modal-dialog-centered mw-650px',
+        dialogClassName: 'sm:max-w-[650px]',
         formId: ISSUE_CREATION_FORM_ID,
       });
     }

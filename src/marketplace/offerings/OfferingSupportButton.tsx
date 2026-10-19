@@ -55,7 +55,7 @@ export const OfferingSupportButton: FC<{ offering: Offering }> = ({
           }),
         },
       },
-      dialogClassName: 'modal-dialog-centered mw-650px',
+      dialogClassName: 'sm:max-w-[650px]',
       formId: ISSUE_CREATION_FORM_ID,
     });
 

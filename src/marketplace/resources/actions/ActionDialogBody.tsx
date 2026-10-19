@@ -10,10 +10,15 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Modal } from 'react-bootstrap';
-import BootstrapModalContext from 'react-bootstrap/ModalContext';
 
-import { Tabs, TabsList, TabsTrigger } from 'waldur-ui';
+import {
+  ModalBody,
+  ModalHeader,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  useModalHide,
+} from 'waldur-ui';
 
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
@@ -44,18 +49,18 @@ export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const bootstrapModal = useContext(BootstrapModalContext);
+  const modalHide = useModalHide();
   const modalContext = useContext(ModalContext);
 
   const close = useCallback(() => {
-    if (bootstrapModal?.onHide) {
-      bootstrapModal.onHide();
+    if (modalHide) {
+      modalHide();
     } else if (modalContext?.closeDialog) {
       modalContext.closeDialog();
     } else {
       ModalService.close();
     }
-  }, [bootstrapModal, modalContext]);
+  }, [modalHide, modalContext]);
 
   const syncScheduledRef = useRef(false);
 
@@ -201,7 +206,7 @@ export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <ActionComboboxContext.Provider value={contextValue}>
-      <Modal.Header className="without-border pb-4 flex-wrap">
+      <ModalHeader className="flex-wrap pb-[12px]">
         <FilterBox
           {...getInputProps({
             ref: inputRef,
@@ -248,11 +253,11 @@ export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
             </TabsList>
           </Tabs>
         )}
-      </Modal.Header>
-      <Modal.Body
+      </ModalHeader>
+      <ModalBody
         {...getMenuProps({
           ref: listRef,
-          className: 'pt-0 px-0 h-400px overflow-auto',
+          className: 'h-[400px] overflow-auto px-0 pt-0',
           'aria-label': translate('Actions'),
         })}
       >
@@ -274,7 +279,7 @@ export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
             callback={clearSearch}
           />
         )}
-      </Modal.Body>
+      </ModalBody>
     </ActionComboboxContext.Provider>
   );
 };

@@ -37,6 +37,7 @@ For detailed guidance, see `docs/` — full index with one-line descriptions in 
 - `forms.md` - React Final Form and VStepperForm patterns
 - `tabs.md` - Tabs: `Tabs`, `TabNav`, `EmbeddedTabs`, mount modes, migrating off Bootstrap `Nav`/`Tab`
 - `menus.md` - Menus, dropdowns and popovers: `Menu`, `MenuPopover`, `ActionsMenu`, row actions
+- `modals.md` - Modals: `openDialog`, `ModalDialog`, `ModalShell`, waldur-ui Modal parts, `data-slot` styling hooks
 - `breadcrumbs.md` - Breadcrumbs: `useBreadcrumbs`, `IBreadcrumbItem`, `BreadcrumbTrail`, `renderLink`, dropdown crumbs
 - `tables.md` - Modular index for useTable, columns, filters, row actions, export, and visual customizations
 - `table/filter-migration-guide.md` - Generated table filters from OpenAPI schema
@@ -150,6 +151,8 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   - State colours use the status matrix through its utilities: `text-danger` (the `-fg` slot), `bg-danger` / `border-danger` (`-solid`), `bg-danger-subtle` / `border-danger-subtle` (`-bg` / `-border`); same for `success`/`warning`, plus `text-neutral` / `bg-neutral-subtle`. Never raw `success-N`/`warning-N`/`error-N` utilities, nor `text-[var(--status-danger-fg)]` (linter: `no-raw-status-ramp`, which autofixes the latter).
   - Never pair Bootstrap's `border` class with a Tailwind border colour — Bootstrap's `!important` colour wins. Use `border-[1px] border-secondary` (linter autofixes).
   - In SCSS, paint brand with `var(--bg-brand-solid)` / `var(--fg-brand-primary)` / `var(--brand-600)`, never `$primary` (a static compile-time green).
+
+- Dialogs are waldur-ui's Modal: `openDialog` with `ModalDialog` (`@/modal/ModalDialog`), `ModalShell` for one rendered in place, the `ModalHeader`/`ModalBody`/`ModalFooter` parts for a custom layout — never react-bootstrap `Modal`/`CloseButton` or `modal-*`/`btn-close` classes; style a part through its `data-slot`. Linter enforces this (`no-bootstrap-modal`); see `docs/modals.md`
 
 - Use `waldur-ui`'s `Tabs` (state-driven panels) or `TabNav` (router-driven: `items` with `link: <Link … />`), and `EmbeddedTabs` (`@/table/EmbeddedTabs`) for tabs inside an expandable row or card section — never react-bootstrap `Tab`/`Tabs`/`Nav` or `nav-*` classes. Linter enforces this (`no-bootstrap-tabs`); see `docs/tabs.md`
 

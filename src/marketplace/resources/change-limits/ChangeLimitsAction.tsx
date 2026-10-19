@@ -32,7 +32,7 @@ const useChangeLimits = ({ resource, refetch }) => {
     ChangeLimitsDialog,
     resource,
     { refetch },
-    { size: 'xl', fullscreen: 'lg-down', contentClassName: 'overflow-auto' },
+    { size: 'xl' },
   );
   return {
     title: translate('Change limits'),

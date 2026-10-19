@@ -24,8 +24,6 @@ $_theme-colors: $theme-colors;
 $theme-colors: ();
 @import 'bootstrap/scss/list-group';
 $theme-colors: $_theme-colors;
-@import 'bootstrap/scss/close';
-@import 'bootstrap/scss/modal';
 @import 'bootstrap/scss/spinners';
 
 // Bootstrap helpers
@@ -43,7 +41,6 @@ $theme-colors: $_theme-colors;
 @import 'card';
 @import 'buttons';
 @import 'code';
-@import 'modal';
 @import 'tables';
 @import 'image-input';
 @import 'symbol';

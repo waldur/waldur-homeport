@@ -716,11 +716,7 @@
       "feature_area": "openstack"
     }
   },
-  "A conflict is a person who has different usernames on different offerings of this service provider, for example because the offerings generate usernames differently.": {
-    "context": {
-      "feature_area": "accounts"
-    }
-  },
+  "A conflict is a person who has different usernames on different offerings of this service provider, for example because the offerings generate usernames differently.": {},
   "A cost policy": {
     "context": {
       "feature_area": "details"
@@ -10406,11 +10402,7 @@
       "primary_ui_type": "label"
     }
   },
-  "Choose per service provider when your offerings share one user directory: a person then has a single account, with the same username and POSIX UID, on all of them.": {
-    "context": {
-      "feature_area": "service-providers"
-    }
-  },
+  "Choose per service provider when your offerings share one user directory: a person then has a single account, with the same username and POSIX UID, on all of them.": {},
   "Choose specific proposals to find matching reviewers.": {},
   "Choose the OpenStack tenant that will provide infrastructure for this datacenter": {
     "context": {
@@ -10784,7 +10776,7 @@
   },
   "Closing dialog": {
     "context": {
-      "feature_area": "modal"
+      "feature_area": "Dialog"
     }
   },
   "Cloud": {
@@ -17817,11 +17809,7 @@
       "feature_area": "policies"
     }
   },
-  "Each offering uses its own value where it sets one, then the value here, then the built-in default. The User management settings of an offering show which of the three applies.": {
-    "context": {
-      "feature_area": "service-providers"
-    }
-  },
+  "Each offering uses its own value where it sets one, then the value here, then the built-in default. The User management settings of an offering show which of the three applies.": {},
   "Each project can have one chat room. Rooms are created by organization owners (or any role with the \"Create matrix room\" permission), staff and support, and automatically populated with project members. Only staff can disable a room (kicking all members and exporting history) and later re-enable it or delete it entirely.": {
     "context": {
       "feature_area": "matrix"
@@ -18149,6 +18137,11 @@
   "Edit limits": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Edit link": {
+    "context": {
+      "feature_area": "form"
     }
   },
   "Edit link URL": {
@@ -27158,11 +27151,7 @@
       "feature_area": "openstack"
     }
   },
-  "It matters once offerings share accounts. With accounts per service provider, a person has one account, with one username, POSIX UID and home directory, on all of them, so one of the usernames has to be kept. Until then, switching the account scope to per service provider is refused.": {
-    "context": {
-      "feature_area": "accounts"
-    }
-  },
+  "It matters once offerings share accounts. With accounts per service provider, a person has one account, with one username, POSIX UID and home directory, on all of them, so one of the usernames has to be kept. Until then, switching the account scope to per service provider is refused.": {},
   "It was accepted for {email}. If it does not arrive, the problem is past the relay — check its own logs and the recipient spam folder.": {
     "context": {
       "variables": {
@@ -40405,7 +40394,7 @@
   },
   "Please enter the required text to confirm": {
     "context": {
-      "feature_area": "modal"
+      "feature_area": "Dialog"
     }
   },
   "Please enter username and password.": {
@@ -47103,11 +47092,7 @@
       "feature_area": "accounts"
     }
   },
-  "Resolve conflicts lets you choose that username for each person. Their accounts on the other offerings are renamed to it and take over its POSIX UID and home directory. People whose usernames already agree need no choice.": {
-    "context": {
-      "feature_area": "accounts"
-    }
-  },
+  "Resolve conflicts lets you choose that username for each person. Their accounts on the other offerings are renamed to it and take over its POSIX UID and home directory. People whose usernames already agree need no choice.": {},
   "Resolve in merge wizard": {
     "context": {
       "feature_area": "offering-merges"
@@ -58795,11 +58780,7 @@
       "feature_area": "email"
     }
   },
-  "These settings decide how the accounts people get on your offerings are named and set up: the username, home directory and login shell that your systems, such as an LDAP directory, receive for each person.": {
-    "context": {
-      "feature_area": "service-providers"
-    }
-  },
+  "These settings decide how the accounts people get on your offerings are named and set up: the username, home directory and login shell that your systems, such as an LDAP directory, receive for each person.": {},
   "These values are required to generate a working appservice registration. They will be saved to Matrix settings.": {
     "context": {
       "feature_area": "matrix"
@@ -71627,7 +71608,7 @@
   },
   "You have entered data in form. When dialog is closed form data would be lost.": {
     "context": {
-      "feature_area": "modal"
+      "feature_area": "Dialog"
     }
   },
   "You have entered data in form. When drawer is closed form data would be lost.": {
@@ -74796,7 +74777,7 @@
           "type": "number"
         }
       },
-      "feature_area": "modal"
+      "feature_area": "shell"
     }
   },
   "{count} mappings selected": {

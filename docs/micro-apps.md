@@ -177,6 +177,10 @@ MR's live k8s preview, while never appearing in a real `Publish` image.
    reference wiring. Skip this only if the
    new app genuinely needs different chrome, not just different nav
    content (`AppShell` already takes nav items/page content as props).
+   `AppShell` also hosts dialogs: page content opens them with `useModal()`
+   / `confirm()` from `waldur-ui`, as in the main app (see
+   [modals.md](modals.md)). For `useManagedMutation` from `waldur-shell`,
+   wrap the app in a react-query `QueryClientProvider`.
 3. Decide whether it ships: omit `"waldur": { "deploy": false }` to ship by
    default, or add it if it's a demo/POC that should stay CI/preview-only
    (see above).

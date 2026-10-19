@@ -2,10 +2,9 @@ import { ClockCountdownIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, RadialBackground } from 'waldur-ui';
 
 import { translate } from '@/i18n';
-import { RadialBg } from '@/navigation/header/search/RadialBg';
 import { renderFieldOrDash } from '@/table/utils';
 import './OrganizationReviewStatus.scss';
 
@@ -33,7 +32,7 @@ export const OrganizationReviewStatus: FunctionComponent<
   return (
     <Card className="border-0 shadow-sm">
       <Card.Body className="text-center position-relative overflow-hidden organization-review-status">
-        <RadialBg className="icon-background" />
+        <RadialBackground className="icon-background" />
 
         <div className="review-icon-wrapper mb-6">
           <ClockCountdownIcon

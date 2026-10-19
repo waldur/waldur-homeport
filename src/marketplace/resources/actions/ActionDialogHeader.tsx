@@ -1,6 +1,4 @@
-import { Modal } from 'react-bootstrap';
-
-import { Tooltip } from 'waldur-ui';
+import { ModalHeader, ModalTitle, Tooltip } from 'waldur-ui';
 
 import { Image } from '@/core/Image';
 import { getMarketplaceResourceLogo } from '@/marketplace/resources/details/MarketplaceResourceLogo';
@@ -14,9 +12,9 @@ export const ActionDialogHeader = ({
   marketplaceResource;
   name: string;
 }) => (
-  <Modal.Header closeButton className="without-border pb-0">
-    {/* A heading, with the h4 look of Modal.Title's default div. */}
-    <Modal.Title as="h2" className="font-medium h4">
+  <ModalHeader closeButton className="pb-0">
+    {/* A heading, at the 16.25px of Bootstrap's h4 look it used to borrow. */}
+    <ModalTitle as="h2" className="text-[16.25px]">
       {marketplaceResource ? (
         <div className="flex flex-column-auto items-stretch gap-3 grow">
           <Tooltip label={marketplaceResource.category_title}>
@@ -41,6 +39,6 @@ export const ActionDialogHeader = ({
       ) : (
         <>{name}</>
       )}
-    </Modal.Title>
-  </Modal.Header>
+    </ModalTitle>
+  </ModalHeader>
 );

@@ -1,7 +1,6 @@
 import { ChartBarIcon, TableIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
-import { Modal } from 'react-bootstrap';
 import {
   marketplaceProviderOfferingsList,
   marketplaceProviderOfferingsTosStatsRetrieve,
@@ -22,6 +21,7 @@ import { STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { TosAcceptedTrendChart } from './TosAcceptedTrendChart';
 import { TosConsentStatusChart } from './TosConsentStatusChart';
@@ -30,18 +30,17 @@ import { TosRevokedTrendChart } from './TosRevokedTrendChart';
 import { TosVersionAdoptionChart } from './TosVersionAdoptionChart';
 
 interface TosReportingModalProps {
-  offeringUuid?: string;
-  providerUuid?: string;
-  onClose: () => void;
+  resolve: {
+    offeringUuid?: string;
+    providerUuid?: string;
+  };
 }
 
 type ViewType =
   'versionAdoption' | 'consentStatus' | 'acceptedTrend' | 'revokedTrend';
 
 export const TosReportingModal: FC<TosReportingModalProps> = ({
-  offeringUuid: initialOfferingUuid,
-  providerUuid,
-  onClose,
+  resolve: { offeringUuid: initialOfferingUuid, providerUuid },
 }) => {
   const [mode, setMode] = useState<'chart' | 'table'>('chart');
   const [selectedView, setSelectedView] = useState<ViewType>('versionAdoption');
@@ -97,113 +96,108 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
   ];
 
   return (
-    <Modal show onHide={onClose} size="xl">
-      <Modal.Header closeButton>
-        <Modal.Title>{translate('ToS acceptance statistics')}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {providerUuid && (
-          <FormField className="mb-4">
-            <FormLabel>{translate('Select offering')}</FormLabel>
-            {isLoadingOfferings ? (
-              <LoadingSpinner />
-            ) : offeringsError ? (
-              <AlertItem
-                type="floating"
-                variant="error"
-                title={translate('Unable to load offerings.')}
-              />
-            ) : (
-              <Select
-                value={offeringOptions.find(
-                  (opt) => opt.value === selectedOffering,
-                )}
-                onChange={(option) => setSelectedOffering(option?.value)}
-                options={offeringOptions}
-                isClearable={false}
-                placeholder={translate('Select offering')}
-              />
-            )}
-          </FormField>
-        )}
-
-        {!selectedOffering && (
-          <AlertItem
-            type="floating"
-            variant="info"
-            title={translate('Please select an offering to view statistics.')}
-          />
-        )}
-
-        {selectedOffering && isLoading && (
-          <div className="flex justify-center items-center py-5">
+    <ModalDialog title={translate('ToS acceptance statistics')}>
+      {providerUuid && (
+        <FormField className="mb-4">
+          <FormLabel>{translate('Select offering')}</FormLabel>
+          {isLoadingOfferings ? (
             <LoadingSpinner />
-          </div>
-        )}
-        {selectedOffering && error && (
-          <AlertItem
-            type="floating"
-            variant="error"
-            title={translate('Unable to load ToS statistics.')}
-          />
-        )}
-        {selectedOffering && !isLoading && !error && data && (
-          <Tabs
-            value={selectedView}
-            onValueChange={(value) => setSelectedView(value as ViewType)}
-          >
-            <div className="flex justify-between items-center mb-4">
-              <TabsList>
-                {viewOptions.map((option) => (
-                  <TabsTrigger key={option.value} value={option.value}>
-                    {option.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-              <BaseButton
-                tooltip={
-                  mode === 'chart'
-                    ? translate('Show as table')
-                    : translate('Show as chart')
-                }
-                variant="tertiary"
-                size="sm"
-                onClick={() =>
-                  setMode((prev) => (prev === 'chart' ? 'table' : 'chart'))
-                }
-                iconNode={
-                  mode === 'chart' ? (
-                    <TableIcon weight="bold" />
-                  ) : (
-                    <ChartBarIcon weight="bold" />
-                  )
-                }
-              />
-            </div>
-
-            <TabsContent value={selectedView}>
-              {mode === 'chart' ? (
-                <>
-                  {selectedView === 'versionAdoption' && (
-                    <TosVersionAdoptionChart data={data} />
-                  )}
-                  {selectedView === 'consentStatus' && (
-                    <TosConsentStatusChart data={data} />
-                  )}
-                  {selectedView === 'acceptedTrend' && (
-                    <TosAcceptedTrendChart data={data} />
-                  )}
-                  {selectedView === 'revokedTrend' && (
-                    <TosRevokedTrendChart data={data} />
-                  )}
-                </>
-              ) : (
-                <TosDataTables data={data} selectedTable={selectedView} />
+          ) : offeringsError ? (
+            <AlertItem
+              type="floating"
+              variant="error"
+              title={translate('Unable to load offerings.')}
+            />
+          ) : (
+            <Select
+              value={offeringOptions.find(
+                (opt) => opt.value === selectedOffering,
               )}
-            </TabsContent>
-          </Tabs>
-        )}
-      </Modal.Body>
-    </Modal>
+              onChange={(option) => setSelectedOffering(option?.value)}
+              options={offeringOptions}
+              isClearable={false}
+              placeholder={translate('Select offering')}
+            />
+          )}
+        </FormField>
+      )}
+
+      {!selectedOffering && (
+        <AlertItem
+          type="floating"
+          variant="info"
+          title={translate('Please select an offering to view statistics.')}
+        />
+      )}
+
+      {selectedOffering && isLoading && (
+        <div className="flex justify-center items-center py-5">
+          <LoadingSpinner />
+        </div>
+      )}
+      {selectedOffering && error && (
+        <AlertItem
+          type="floating"
+          variant="error"
+          title={translate('Unable to load ToS statistics.')}
+        />
+      )}
+      {selectedOffering && !isLoading && !error && data && (
+        <Tabs
+          value={selectedView}
+          onValueChange={(value) => setSelectedView(value as ViewType)}
+        >
+          <div className="flex justify-between items-center mb-4">
+            <TabsList>
+              {viewOptions.map((option) => (
+                <TabsTrigger key={option.value} value={option.value}>
+                  {option.label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            <BaseButton
+              tooltip={
+                mode === 'chart'
+                  ? translate('Show as table')
+                  : translate('Show as chart')
+              }
+              variant="tertiary"
+              size="sm"
+              onClick={() =>
+                setMode((prev) => (prev === 'chart' ? 'table' : 'chart'))
+              }
+              iconNode={
+                mode === 'chart' ? (
+                  <TableIcon weight="bold" />
+                ) : (
+                  <ChartBarIcon weight="bold" />
+                )
+              }
+            />
+          </div>
+
+          <TabsContent value={selectedView}>
+            {mode === 'chart' ? (
+              <>
+                {selectedView === 'versionAdoption' && (
+                  <TosVersionAdoptionChart data={data} />
+                )}
+                {selectedView === 'consentStatus' && (
+                  <TosConsentStatusChart data={data} />
+                )}
+                {selectedView === 'acceptedTrend' && (
+                  <TosAcceptedTrendChart data={data} />
+                )}
+                {selectedView === 'revokedTrend' && (
+                  <TosRevokedTrendChart data={data} />
+                )}
+              </>
+            ) : (
+              <TosDataTables data={data} selectedTable={selectedView} />
+            )}
+          </TabsContent>
+        </Tabs>
+      )}
+    </ModalDialog>
   );
 };

@@ -1,6 +1,6 @@
 import { ReactElement, ReactNode } from 'react';
 
-import { ButtonVariant, BaseButton } from 'waldur-ui';
+import { ButtonVariant, BaseButton, ConfirmationOptions } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -20,10 +20,7 @@ interface AsyncActionButtonProps<T> {
   className?: string;
   variant?: ButtonVariant;
   hasConfirmation?: boolean;
-  confirmationOptions?: {
-    showRouterSelect?: boolean;
-    tenantUuid?: string;
-  };
+  confirmationOptions?: ConfirmationOptions;
   refetch?(): void;
 }
 

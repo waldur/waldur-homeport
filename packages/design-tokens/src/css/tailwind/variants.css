@@ -28,3 +28,12 @@
 /* A hovered or current page tab (src/navigation/TabsList.tsx), unless the
    tab is disabled. */
 @custom-variant tab-active (&:is(:hover, [aria-current]):not([data-disabled]));
+
+/* Inside waldur-ui's scrollable Modal box: every element that is not the
+   header, body or footer, nor inside one. Those are the wrappers a dialog
+   puts between the box and its sections (a <form>, ModalDialog's own
+   <div>); making them shrinking flex columns lets the body, and only the
+   body, scroll. The chained :not()s keep the specificity of the rule in
+   the app's Bootstrap modal had (ModalRoot.css), which wrappers' own display
+   classes never beat. */
+@custom-variant modal-passthrough (& *:not([data-slot='modal-header']):not([data-slot='modal-body']):not([data-slot='modal-footer']):not([data-slot='modal-header'] *):not([data-slot='modal-body'] *):not([data-slot='modal-footer'] *));

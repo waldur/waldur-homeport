@@ -178,7 +178,7 @@ describe('ResourceCreateUsageDialog', () => {
 
     const footer = screen.getByTestId('modal-footer');
     // eslint-disable-next-line testing-library/no-node-access
-    const body = footer.parentElement.querySelector('.modal-body');
+    const body = footer.parentElement.querySelector('[data-slot="modal-body"]');
     expect(body).not.toBeNull();
     expect(body.contains(footer)).toBe(false);
   });

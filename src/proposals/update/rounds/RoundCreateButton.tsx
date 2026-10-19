@@ -25,7 +25,6 @@ export const RoundCreateButton = ({
     dialog={CallRoundCreateDialog}
     resolve={{ call, refetch }}
     size="md"
-    dialogClassName="modal-md modal-dialog-centered"
     formId="CallRoundForm"
     disabled={disabled}
     tooltip={tooltip}

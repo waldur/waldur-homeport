@@ -33,7 +33,7 @@ async function login(page: Page) {
 
     const modalCloseButton = page
       .locator(
-        '.modal.show button.btn-close, .modal.show button:has-text("Accept"), .modal.show button:has-text("Close")',
+        '[data-slot="modal"] button[data-slot="modal-close"], [data-slot="modal"] button:has-text("Accept"), [data-slot="modal"] button:has-text("Close")',
       )
       .first();
     if ((await modalCloseButton.count()) > 0) {
@@ -75,7 +75,7 @@ async function login(page: Page) {
 
 // Helper to wait for modal to fully render
 async function waitForModal(page: Page) {
-  await page.waitForSelector('.modal.show', { timeout: 10000 });
+  await page.waitForSelector('[data-slot="modal"]', { timeout: 10000 });
   await page.waitForTimeout(500); // Allow animations to complete
 }
 
@@ -108,13 +108,17 @@ test.describe('Wizard Visual Regression Tests', () => {
         await waitForModal(page);
 
         // Screenshot step 1 (Create message)
-        const modal = page.locator('.modal.show .modal-content');
+        const modal = page.locator(
+          '[data-slot="modal"] [data-slot="modal-content"]',
+        );
         await expect(modal).toHaveScreenshot('wizard-broadcast-step1.png', {
           animations: 'disabled',
         });
 
         // Verify header elements exist
-        await expect(page.locator('.modal-header .modal-title')).toBeVisible();
+        await expect(
+          page.locator('[data-slot="modal-header"] [data-slot="modal-title"]'),
+        ).toBeVisible();
         await expect(page.locator('.stepper-nav')).toBeVisible();
       }
     });
@@ -138,14 +142,18 @@ test.describe('Wizard Visual Regression Tests', () => {
           await waitForModal(page);
 
           // Screenshot step 1 (Connection)
-          const modal = page.locator('.modal.show .modal-content');
+          const modal = page.locator(
+            '[data-slot="modal"] [data-slot="modal-content"]',
+          );
           await expect(modal).toHaveScreenshot('wizard-oidc-step1.png', {
             animations: 'disabled',
           });
 
           // Verify header elements
           await expect(
-            page.locator('.modal-header .modal-title'),
+            page.locator(
+              '[data-slot="modal-header"] [data-slot="modal-title"]',
+            ),
           ).toBeVisible();
           await expect(page.locator('.stepper-nav')).toBeVisible();
         }
@@ -171,14 +179,18 @@ test.describe('Wizard Visual Regression Tests', () => {
           await waitForModal(page);
 
           // Screenshot step 1 (Credentials)
-          const modal = page.locator('.modal.show .modal-content');
+          const modal = page.locator(
+            '[data-slot="modal"] [data-slot="modal-content"]',
+          );
           await expect(modal).toHaveScreenshot('wizard-atlassian-step1.png', {
             animations: 'disabled',
           });
 
           // Verify header elements
           await expect(
-            page.locator('.modal-header .modal-title'),
+            page.locator(
+              '[data-slot="modal-header"] [data-slot="modal-title"]',
+            ),
           ).toBeVisible();
           await expect(page.locator('.stepper-nav')).toBeVisible();
         }
@@ -198,7 +210,9 @@ test.describe('Wizard Visual Regression Tests', () => {
         await renewButton.click();
         await waitForModal(page);
 
-        const modal = page.locator('.modal.show .modal-content');
+        const modal = page.locator(
+          '[data-slot="modal"] [data-slot="modal-content"]',
+        );
         await expect(modal).toHaveScreenshot(
           'wizard-renew-allocation-step1.png',
           {
@@ -241,7 +255,7 @@ test.describe('Wizard Visual Regression Tests', () => {
         await waitForModal(page);
 
         // Screenshot footer in isolation
-        const footer = page.locator('.modal-footer');
+        const footer = page.locator('[data-slot="modal-footer"]');
         if ((await footer.count()) > 0) {
           await expect(footer).toHaveScreenshot('wizard-footer-broadcast.png');
         }
@@ -268,7 +282,9 @@ test.describe('Wizard Visual Regression Tests', () => {
         await createButton.click();
         await waitForModal(page);
 
-        const modal = page.locator('.modal.show .modal-content');
+        const modal = page.locator(
+          '[data-slot="modal"] [data-slot="modal-content"]',
+        );
         await expect(modal).toHaveScreenshot(
           'wizard-broadcast-dark-theme.png',
           {
@@ -314,7 +330,7 @@ test.describe('Wizard Visual Regression Tests', () => {
         await waitForModal(page);
 
         // Verify focus is inside modal
-        const _modalContent = page.locator('.modal-content');
+        const _modalContent = page.locator('[data-slot="modal-content"]');
         const activeElement = page.locator(':focus');
 
         // The focused element should be visible

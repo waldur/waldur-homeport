@@ -34,6 +34,8 @@ Removing a hook below breaks that suite without failing anything in HomePort, as
 | `.nav-tabs` / `.nav-line-tabs` (router tab bar)        | `nav[aria-label="Tabs"]` (`TAB_BAR` in `homeport_hooks.py`); a page hero, table sub-tabs or reporting        | no                      |
 | `get_by_role("tab")` in a router tab bar               | `get_by_role("link", name=…)`, or `"button"` for a disabled tab (`tab_item()`)                               | no                      |
 | `.card-body .nav-tabs` (in-page section tabs)          | `[role="tablist"]` with `get_by_role("tab", name=…)` (`SECTION_TABS`)                                        | yes                     |
+| `.modal.show`, `.modal-content` (a dialog)             | `get_by_role("dialog")`, filtered by name or text; its parts are `[data-slot="modal-body"]` and so on        | yes                     |
+| `.btn-close` (a dialog's close button)                 | `get_by_role("button", name="Close")` inside the dialog                                                      | yes                     |
 
 Tab bars moved to waldur-ui's `TabNav` / `Tabs` in waldur/waldur-homeport!7825; the suite matches both markups since waldur/waldur-integration-testing!193. A router tab bar's `aria-label` defaults to "Tabs"; keep that default (or update `TAB_BAR`) when labelling a bar.
 

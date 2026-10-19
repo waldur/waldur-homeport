@@ -435,40 +435,6 @@ $card-border-radius: $border-radius !default;
 $card-header-py: 0.5rem !default; // Custom variable
 $card-header-height: 70px !default; // Custom variable
 
-// Modals
-
-// Padding applied to the modal body
-$modal-inner-padding: 1.75rem !default;
-
-// Margin between elements in footer, must be lower than or equal to 2 * $modal-inner-padding
-$modal-footer-margin-between: 0.5rem !default;
-
-$modal-dialog-margin: 0.5rem !default;
-$modal-dialog-margin-y-sm-up: 1.75rem !default;
-
-$modal-header-border-color: $border-color !default;
-$modal-footer-border-color: $modal-header-border-color !default;
-$modal-header-border-width: 1px !default;
-$modal-footer-border-width: 1px !default;
-
-$modal-content-color: null !default;
-$modal-content-bg: $body-bg !default;
-$modal-content-border-color: null !default;
-$modal-content-border-width: 0 !default;
-$modal-content-border-radius: $border-radius !default;
-$modal-content-inner-border-radius: $border-radius !default;
-
-$modal-content-box-shadow-xs: 0 0.25rem 0.5rem rgba($black, 0.1) !default;
-$modal-content-box-shadow-sm-up: 0 0.5rem 1rem rgba($black, 0.1) !default;
-
-$modal-backdrop-bg: rgba($backdrop-color, 0.7) !default;
-$modal-backdrop-opacity: 1 !default; // Opacity breaks the blur filter of backdrop
-
-$modal-xl: 1140px !default;
-$modal-lg: 800px !default;
-$modal-md: 500px !default;
-$modal-sm: 300px !default;
-
 // Dropdowns
 // Dropdown menu container and contents.
 $dropdown-box-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15) !default;

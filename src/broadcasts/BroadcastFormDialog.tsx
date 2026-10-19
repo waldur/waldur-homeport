@@ -54,7 +54,6 @@ export const BroadcastFormDialog: FC<BroadcastFormDialogProps> = ({
 
   const saveAsTemplate = useCallback((formValues: BroadcastFormData) => {
     openDialog(BroadcastSaveAsTemplateDialog, {
-      dialogClassName: 'modal-dialog-centered',
       resolve: {
         refetch: resolve.refetch,
         broadcastData: formValues,

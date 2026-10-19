@@ -1,8 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useEffect, useState } from 'react';
-import BootstrapModalContext from 'react-bootstrap/ModalContext';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { ModalHideContext } from 'waldur-ui';
 
 import { ActionItem } from '@/resource/actions/ActionItem';
 
@@ -42,7 +43,7 @@ describe('ModalActionsDialog', () => {
 
   const renderDialog = () =>
     render(
-      <BootstrapModalContext.Provider value={{ onHide }}>
+      <ModalHideContext.Provider value={onHide}>
         <ModalActionsDialog
           name="Production Web"
           refetch={vi.fn()}
@@ -55,7 +56,7 @@ describe('ModalActionsDialog', () => {
             state: 'OK',
           }}
         />
-      </BootstrapModalContext.Provider>,
+      </ModalHideContext.Provider>,
     );
 
   beforeEach(() => {
@@ -267,7 +268,7 @@ describe('ModalActionsDialog', () => {
         ) : null;
       };
       render(
-        <BootstrapModalContext.Provider value={{ onHide }}>
+        <ModalHideContext.Provider value={onHide}>
           <ModalActionsDialog
             name="Production Web"
             refetch={vi.fn()}
@@ -284,7 +285,7 @@ describe('ModalActionsDialog', () => {
             resource={{ uuid: 'res-1' }}
             marketplaceResource={{ uuid: 'res-1', state: 'OK' }}
           />
-        </BootstrapModalContext.Provider>,
+        </ModalHideContext.Provider>,
       );
       expect(
         await screen.findByRole('tab', { name: 'Provider actions' }),
@@ -294,7 +295,7 @@ describe('ModalActionsDialog', () => {
     it('offers no tab for a group whose actions all rendered nothing', async () => {
       const Empty = () => null;
       render(
-        <BootstrapModalContext.Provider value={{ onHide }}>
+        <ModalHideContext.Provider value={onHide}>
           <ModalActionsDialog
             name="Production Web"
             refetch={vi.fn()}
@@ -311,7 +312,7 @@ describe('ModalActionsDialog', () => {
             resource={{ uuid: 'res-1' }}
             marketplaceResource={{ uuid: 'res-1', state: 'OK' }}
           />
-        </BootstrapModalContext.Provider>,
+        </ModalHideContext.Provider>,
       );
       await screen.findByText('Start');
       // One group left is no choice to make, so there is no bar at all.

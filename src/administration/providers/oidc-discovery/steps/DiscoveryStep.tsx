@@ -1,3 +1,4 @@
+import { XIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useState } from 'react';
 import { Card, Table } from 'react-bootstrap';
@@ -204,10 +205,12 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                   {values.manualClaims?.includes(claim) && (
                     <button
                       type="button"
-                      className="btn-close ms-2 scale-50"
+                      className="ms-1 inline-flex border-0 bg-transparent p-0 text-current opacity-50 hover:opacity-75"
                       onClick={() => handleRemoveManualClaim(claim)}
                       aria-label={translate('Remove')}
-                    />
+                    >
+                      <XIcon size={10} weight="bold" />
+                    </button>
                   )}
                 </Badge>
               ))}

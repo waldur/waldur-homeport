@@ -1,10 +1,11 @@
-import { createContext, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useFormState } from 'react-final-form';
 
-export const DirtyFormContext = createContext({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setIsDirty: (_: boolean) => {},
-});
+import { DirtyFormContext } from 'waldur-ui';
+
+// The context lives in waldur-ui, beside the ModalRoot that reads it; the
+// react-final-form side that reports into it stays here.
+export { DirtyFormContext };
 
 const useDirtyForm = (isDirty: boolean) => {
   const { setIsDirty } = useContext(DirtyFormContext);

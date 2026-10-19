@@ -21,6 +21,7 @@ import noBootstrapFormCheck from './rules/no-bootstrap-form-check.js';
 import noBootstrapFormControl from './rules/no-bootstrap-form-control.js';
 import noBootstrapFormSelect from './rules/no-bootstrap-form-select.js';
 import noBootstrapLayoutUtility from './rules/no-bootstrap-layout-utility.js';
+import noBootstrapModal from './rules/no-bootstrap-modal.js';
 import noBootstrapProgress from './rules/no-bootstrap-progress.js';
 import noBootstrapTabs from './rules/no-bootstrap-tabs.js';
 import noDirectClientUsage from './rules/no-direct-client-usage.js';
@@ -75,6 +76,7 @@ export default {
     'no-bootstrap-color-utility': noBootstrapColorUtility,
     'no-bootstrap-form-control': noBootstrapFormControl,
     'no-bootstrap-form-select': noBootstrapFormSelect,
+    'no-bootstrap-modal': noBootstrapModal,
     'no-bootstrap-tabs': noBootstrapTabs,
     'no-bootstrap-breadcrumb': noBootstrapBreadcrumb,
     'no-orphan-form-label': noOrphanFormLabel,

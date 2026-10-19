@@ -242,15 +242,6 @@ export const truncate = (fullStr: string, strLen = 30, separator = '...') => {
 
 export const cleanObject = (value: any) => JSON.parse(JSON.stringify(value));
 
-export const createDeferred = () => {
-  const deferred: any = {};
-  deferred.promise = new Promise((resolve, reject) => {
-    deferred.resolve = resolve;
-    deferred.reject = reject;
-  });
-  return deferred;
-};
-
 export const orderByFilter = (sorting: {
   mode: 'asc' | 'desc';
   field: string;

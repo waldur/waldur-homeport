@@ -3,7 +3,10 @@ import { ReactNode } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 import { NotificationProvider } from 'waldur-notifications';
 import {
+  ConfirmModalRoot,
   IconButton,
+  ModalProvider,
+  ModalRoot,
   SearchField,
   Sidebar,
   SidebarBrand,
@@ -121,7 +124,10 @@ function AppShellContent({
   children,
 }: AppShellProps) {
   return (
-    <>
+    // The app's dialog host: page content opens dialogs with useModal() /
+    // ModalService and confirm(), as in waldur-homeport, and the two roots
+    // render them, with a crash inside one caught like a page's.
+    <ModalProvider>
       {/* Standalone, not a wrapper — NotifyService/useNotify write to
           toastStore directly rather than through this subtree, the same
           way waldur-homeport's own NotificationContainer is a sibling of
@@ -192,6 +198,8 @@ function AppShellContent({
           {footer}
         </SidebarInset>
       </SidebarProvider>
-    </>
+      <ModalRoot errorBoundary={ShellErrorBoundary} />
+      <ConfirmModalRoot errorBoundary={ShellErrorBoundary} />
+    </ModalProvider>
   );
 }

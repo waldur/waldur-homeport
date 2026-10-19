@@ -2,11 +2,11 @@
  * ESLint rule steering a ModalDialog's action buttons towards its `footer`
  * prop instead of being hand-rolled inside its children.
  *
- * ModalDialog renders `footer` as a real Modal.Footer — a sibling of
- * Modal.Body inside .modal-content. A SubmitButton/CloseDialogButton
+ * ModalDialog renders `footer` as a real ModalFooter — a sibling of
+ * ModalBody inside the dialog box. A SubmitButton/CloseDialogButton
  * rendered as part of ModalDialog's *children* instead lands nested inside
- * .modal-body: wrong DOM structure (a footer inside a body), and it misses
- * whatever spacing/border-top .modal-footer itself provides. Found live
+ * the body: wrong DOM structure (a footer inside a body), and it misses
+ * the footer's own spacing and alignment. Found live
  * repeatedly as a hand-rolled `d-flex justify-content-end` (or an
  * explicit `<div className="modal-footer">`, sometimes even duplicating
  * `.modal-body` alongside it) sitting inside the <form> instead.

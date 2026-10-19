@@ -215,6 +215,9 @@ export default tseslint
         // Zero instances remain: every progress bar is a waldur-ui Progress and
         // the .progress styles are deleted.
         'waldur-custom/no-bootstrap-progress': 'error',
+        // Zero instances remain: every dialog is waldur-ui's Modal and the
+        // .modal / .btn-close styles are deleted.
+        'waldur-custom/no-bootstrap-modal': 'error',
         'waldur-custom/no-bootstrap-tabs': 'error',
         'waldur-custom/no-bootstrap-breadcrumb': 'error',
         // A FormLabel outside a FormField names no control: use FormFieldset +

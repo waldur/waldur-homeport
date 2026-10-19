@@ -4,11 +4,13 @@ import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
 import React, { FunctionComponent, useContext } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  useFocusThroughRemovals,
+  useInsidePointerDown,
+} from 'waldur-ui';
 
 import { DirtyFormContext } from '@/core/DirtyFormContext';
-import { useFocusThroughRemovals } from '@/core/useFocusThroughRemovals';
-import { useInsidePointerDown } from '@/core/useInsidePointerDown';
 import { ErrorMessage } from '@/ErrorMessage';
 import { translate } from '@/i18n';
 

@@ -5,8 +5,15 @@ import React, { useContext, useEffect } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 vi.unmock('@/modal/actions');
+vi.unmock('../../packages/ui/src/Dialog/modalContext');
 
-import { DatePicker, Popover, PopoverContent, PopoverTrigger } from 'waldur-ui';
+import {
+  CloseDialogButton,
+  DatePicker,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from 'waldur-ui';
 
 import { DirtyFormContext } from '@/core/DirtyFormContext';
 import { Select } from '@/form/select';
@@ -56,14 +63,29 @@ const ParentDialog = () => {
   );
 };
 
-const DirtyDialog = () => {
+const DirtyDialog = ({ showCancel }: { showCancel?: boolean }) => {
   const { setIsDirty } = useContext(DirtyFormContext);
+  const { openDialog } = useModal();
   useEffect(() => {
     setIsDirty(true);
   }, [setIsDirty]);
 
   return (
-    <ModalDialog title="Dirty Dialog">
+    <ModalDialog
+      title="Dirty Dialog"
+      footer={
+        <>
+          {showCancel ? <CloseDialogButton /> : null}
+          <button
+            type="button"
+            data-testid="switch-to-clean"
+            onClick={() => openDialog(SampleDialog, { animation: false })}
+          >
+            Switch
+          </button>
+        </>
+      }
+    >
       <input data-testid="dirty-input" placeholder="Dirty input" />
     </ModalDialog>
   );
@@ -156,8 +178,10 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
 
     expect(await screen.findByTestId('input-1')).toBeInTheDocument();
     expect(screen.getByText('Sample Dialog')).toBeInTheDocument();
-    expect(document.querySelector('.modal-backdrop.show')).toBeInTheDocument();
-    expect(document.querySelector('.modal.show.d-block')).toBeInTheDocument();
+    expect(
+      document.querySelector('[data-slot="modal-backdrop"]'),
+    ).toBeInTheDocument();
+    expect(document.querySelector('[data-slot="modal"]')).toBeInTheDocument();
   });
 
   it('returns focus to the original trigger after closing a nested dialog', async () => {
@@ -178,7 +202,7 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
     await waitFor(() => expect(trigger).toHaveFocus());
   });
 
-  it('supports animated opening with data-state="open" and fade classes', async () => {
+  it('supports animated opening with data-state="open"', async () => {
     const user = userEvent.setup();
 
     const AnimatedTrigger = () => {
@@ -204,16 +228,14 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
     await user.click(screen.getByTestId('anim-trigger-btn'));
 
     await screen.findByTestId('input-1');
-    const backdrop = document.querySelector('.modal-backdrop');
-    const modal = document.querySelector('.modal');
+    const backdrop = document.querySelector('[data-slot="modal-backdrop"]');
+    const modal = document.querySelector('[data-slot="modal"]');
 
-    expect(backdrop).toHaveClass('fade', 'show');
     expect(backdrop).toHaveAttribute('data-state', 'open');
-    expect(backdrop).not.toHaveClass('modal-no-animation');
+    expect(backdrop).not.toHaveClass('animate-none');
 
-    expect(modal).toHaveClass('fade', 'show', 'd-block');
     expect(modal).toHaveAttribute('data-state', 'open');
-    expect(modal).not.toHaveClass('modal-no-animation');
+    expect(modal).not.toHaveClass('animate-none');
   });
 
   it('traps Tab navigation within the modal dialog', async () => {
@@ -288,7 +310,7 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
     await user.click(popoverBtn);
 
     // Modal dialog remains open and active
-    expect(document.querySelector('.modal.show.d-block')).toBeInTheDocument();
+    expect(document.querySelector('[data-slot="modal"]')).toBeInTheDocument();
   });
 
   it('closes the modal dialog when Escape is pressed', async () => {
@@ -328,7 +350,7 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
     expect(screen.queryByTestId('input-1')).not.toBeInTheDocument();
   });
 
-  it('closes on backdrop click outside .modal-content', async () => {
+  it('closes on backdrop click outside the dialog box', async () => {
     const user = userEvent.setup();
 
     render(
@@ -341,14 +363,14 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
     await user.click(screen.getByTestId('trigger-btn'));
     expect(await screen.findByTestId('input-1')).toBeInTheDocument();
 
-    // Click on the outer .modal wrapper (backdrop area)
-    const modalWrapper = document.querySelector('.modal.show.d-block')!;
+    // Click on the scrolling overlay (backdrop area)
+    const modalWrapper = document.querySelector('[data-slot="modal"]')!;
     await user.click(modalWrapper);
 
     expect(screen.queryByTestId('input-1')).not.toBeInTheDocument();
   });
 
-  it('does not close when clicking inside .modal-content', async () => {
+  it('does not close when clicking inside the dialog box', async () => {
     const user = userEvent.setup();
 
     render(
@@ -419,6 +441,77 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
     resolveConfirm!();
   });
 
+  it('CloseDialogButton triggers confirm when form is dirty', async () => {
+    const user = userEvent.setup();
+
+    let resolveConfirm: () => void;
+    const confirmMock = vi.fn().mockImplementation(
+      () =>
+        new Promise<void>((res) => {
+          resolveConfirm = res;
+        }),
+    );
+    const closeDialogMock = vi.fn();
+
+    render(
+      <ModalContext.Provider
+        value={
+          {
+            modalComponent: DirtyDialog,
+            modalProps: { showCancel: true },
+            confirmComponent: null,
+            confirmProps: {},
+            openDialog: vi.fn(),
+            closeDialog: closeDialogMock,
+            returnFocusRef: { current: null },
+            confirm: confirmMock,
+          } as any
+        }
+      >
+        <ModalRoot />
+      </ModalContext.Provider>,
+    );
+
+    expect(await screen.findByTestId('dirty-input')).toBeInTheDocument();
+
+    const cancelButton = screen.getByRole('button', { name: /cancel/i });
+    await user.click(cancelButton);
+
+    expect(confirmMock).toHaveBeenCalledTimes(1);
+    expect(closeDialogMock).not.toHaveBeenCalled();
+
+    resolveConfirm!();
+    await waitFor(() => {
+      expect(closeDialogMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('resets isDirty state when dialog changes', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <ModalProvider>
+        <ModalTrigger component={DirtyDialog} />
+        <ModalRoot />
+      </ModalProvider>,
+    );
+
+    // Open dirty dialog
+    await user.click(screen.getByTestId('trigger-btn'));
+    expect(await screen.findByTestId('dirty-input')).toBeInTheDocument();
+
+    // Now switch to clean dialog from inside the dirty dialog
+    await user.click(screen.getByTestId('switch-to-clean'));
+    expect(await screen.findByTestId('input-1')).toBeInTheDocument();
+
+    // Close clean dialog via close button (header close button)
+    const closeBtn = screen.getByRole('button', { name: /close/i });
+    await user.click(closeBtn);
+
+    // Should close without confirmation
+    expect(screen.queryByTestId('input-1')).not.toBeInTheDocument();
+  });
+
   it('picks an option from a select inside the modal without closing dialog', async () => {
     const user = userEvent.setup();
     pickOption.mockClear();
@@ -438,7 +531,7 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
       { value: 'm1.small', label: 'm1.small' },
       expect.anything(),
     );
-    expect(document.querySelector('.modal.show.d-block')).toBeInTheDocument();
+    expect(document.querySelector('[data-slot="modal"]')).toBeInTheDocument();
   });
 
   it('stacks ConfirmModalRoot on top of ModalRoot', async () => {
@@ -487,12 +580,12 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
     expect(screen.getByText('Are you sure?')).toBeInTheDocument();
 
     // Both parent modal and confirm modal are in DOM
-    const modals = document.querySelectorAll('.modal.show.d-block');
+    const modals = document.querySelectorAll('[data-slot="modal"]');
     expect(modals.length).toBe(2);
 
-    // Confirm modal has confirm-modal class and higher z-index
-    const confirmModal = document.querySelector('.modal.confirm-modal');
-    expect(confirmModal).toBeInTheDocument();
+    // The confirm sits on the higher confirm layer
+    expect(modals[1]).toHaveClass('z-confirm');
+    expect(modals[0]).toHaveClass('z-modal');
   });
 
   it('allows interacting with DatePicker inside modal without stealing focus or getting stuck', async () => {
@@ -685,12 +778,12 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
     await user.click(screen.getByTestId('trigger-btn'));
     await screen.findByTestId('input-1');
 
-    // .modal-dialog takes no pointer events, so the click lands on the
+    // The dialog's outer box takes no pointer events, so the click lands on the
     // overlay around it.
-    expect(document.querySelector('.modal-dialog')).toHaveStyle({
+    expect(document.querySelector('[data-slot="modal-dialog"]')).toHaveStyle({
       pointerEvents: 'none',
     });
-    await user.click(document.querySelector('.modal.show.d-block')!);
+    await user.click(document.querySelector('[data-slot="modal"]')!);
 
     await waitFor(() =>
       expect(screen.queryByTestId('input-1')).not.toBeInTheDocument(),
@@ -709,7 +802,7 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
 
     await user.click(screen.getByTestId('trigger-btn'));
     await screen.findByTestId('input-1');
-    await user.click(document.querySelector('.modal.show.d-block')!);
+    await user.click(document.querySelector('[data-slot="modal"]')!);
 
     expect(screen.getByTestId('input-1')).toBeInTheDocument();
   });

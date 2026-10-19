@@ -268,7 +268,7 @@
 
       &:hover:not(:disabled) {
         background-color: var(--btn-secondary-bg-hover);
-        transform: $modal-scale-transform;
+        transform: scale(1.02);
         box-shadow: $btn-box-shadow;
       }
 
@@ -289,7 +289,7 @@
 
       &:hover:not(:disabled) {
         background-color: var(--bg-primary-hover);
-        transform: $modal-scale-transform;
+        transform: scale(1.02);
         box-shadow: $btn-box-shadow;
       }
 

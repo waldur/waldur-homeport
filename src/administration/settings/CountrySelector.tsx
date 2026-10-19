@@ -128,7 +128,6 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
       render={({ handleSubmit, submitting, pristine }) => (
         <ModalDialog
           title={translate('Available countries')}
-          className="country-selector-modal"
           bodyClassName="p-0"
           footer={
             <>

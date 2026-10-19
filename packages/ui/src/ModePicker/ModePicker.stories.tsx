@@ -9,7 +9,10 @@ import {
   UserCircleIcon,
 } from '@phosphor-icons/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { BaseButton } from '../Button';
+import { ModalProvider, ModalRoot, useModal } from '../Dialog';
 
 import { ModeOption, ModePickerDialog } from './ModePicker';
 
@@ -93,24 +96,42 @@ const modes: ModeOption[] = [
   },
 ];
 
-/** Open by default, so the dialog itself is what the story shows. */
+const Picker = () => {
+  const { openDialog } = useModal();
+  const [value, setValue] = useState('organisation-admin');
+  const open = (current: string) =>
+    openDialog(ModePickerDialog, {
+      size: 'lg',
+      resolve: {
+        title: 'Choose your workspace',
+        description:
+          'You have access to multiple modes. Each gives you a tailored view of Waldur for a specific job. You can switch anytime from the sidebar.',
+        modes,
+        value: current,
+        onSelect: setValue,
+      },
+    });
+  // Open on load, so the dialog itself is what the story shows.
+  useEffect(() => {
+    open(value);
+  }, []);
+  return (
+    <BaseButton
+      variant="primary"
+      label={`Workspace: ${value}`}
+      onClick={() => open(value)}
+    />
+  );
+};
+
+/** Opened through openDialog, as SidebarModeCard does. */
 export const AllModes: Story = {
-  render: () => {
-    const [open, setOpen] = useState(true);
-    const [value, setValue] = useState('organisation-admin');
-    return (
-      <ModePickerDialog
-        open={open}
-        onOpenChange={setOpen}
-        title="Choose your workspace"
-        description="You have access to multiple modes. Each gives you a tailored view of Waldur for a specific job. You can switch anytime from the sidebar."
-        modes={modes}
-        value={value}
-        onSelect={(key) => {
-          setValue(key);
-          setOpen(false);
-        }}
-      />
-    );
-  },
+  render: () => (
+    <ModalProvider>
+      <div className="p-6">
+        <Picker />
+      </div>
+      <ModalRoot />
+    </ModalProvider>
+  ),
 };
