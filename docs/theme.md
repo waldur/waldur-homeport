@@ -26,10 +26,8 @@ The theme is one attribute: `data-theme="light|dark"` on `<html>`. Everything fo
 
 There used to be a second, dark compile (`style.dark.scss`, `$mode: dark`, with the SCSS ramps
 inverted by `isDarkMode()`), swapped in when the theme changed. It is gone; don't reintroduce a
-theme-specific SCSS value. A colour inside an SVG data URI, which a `var()` cannot reach, is a
-function of its colour (`_svg-icons.scss`); a dark variant is a `dark-theme` override that passes
-it `css-color(gray-dark, …)`, which gives the CSS ramp value as Sass. Prefer an inline SVG with
-`currentColor` where you can — the breadcrumb separator moved off a data URI for that reason.
+theme-specific SCSS value. A colour inside an SVG data URI cannot be reached by a `var()`; use an inline SVG with
+`currentColor` instead — the breadcrumb separator and the close icon moved off data URIs for that reason.
 
 ## Key Files
 

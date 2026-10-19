@@ -82,9 +82,7 @@ describe('generator', () => {
         },
       },
     };
-    // No $gray-dark-N variable; only the theme-invariant css-color() map.
-    expect(generateScss(t)).not.toContain('$gray-dark');
-    expect(generateScss(t)).toContain("'gray-dark': (\n    900: #161b26,");
+    expect(generateScss(t)).not.toContain('gray-dark');
     expect(generateCss(t)).toContain('--color-gray-dark-900: #161b26;');
   });
 
