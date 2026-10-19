@@ -175,9 +175,12 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
               <div className="wrapper flex flex-col flex-row-fluid">
                 <CookiesConsent />
                 {!state?.data?.hideHeader && (
-                  <AppHeader hasBreadcrumbs={Boolean(breadcrumbs.length)} />
+                  <AppHeader
+                    hasBreadcrumbs={Boolean(breadcrumbs.length)}
+                    hasPageBar={Boolean(PageBar)}
+                  />
                 )}
-                <BreadcrumbMain mobile />
+                <BreadcrumbMain mobile hasPageBar={Boolean(PageBar)} />
                 <Announcements extraAnnouncement={ExtraAnnouncementBars} />
                 <WarningBar />
                 <OfferingUsersWarningBar />

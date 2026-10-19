@@ -7,6 +7,7 @@ import { extendTailwindMerge } from 'tailwind-merge';
 // the layers in waldur-design-tokens/zIndex.css (its zIndex.test.ts keeps them in
 // sync).
 const Z_INDEX_LAYERS = [
+  'header',
   'sidebar-panel',
   'mobile-drawer',
   'nav-menu',

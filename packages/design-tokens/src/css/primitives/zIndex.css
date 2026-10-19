@@ -8,7 +8,7 @@
  *
  *       95  Stepper form sidebar (sticky, src/form/SidebarLayout.tsx)
  *       99  Metronic fixed toolbar (page tabs, layout/_variables.scss)
- *      100  Metronic header (layout/_variables.scss)
+ *      100  --z-index-header         token  (the app header, waldur-ui TopBar)
  *      101  Outstanding (impersonation) bar (src/navigation/OutstandingBar.tsx)
  *      105  --z-index-sidebar-panel   token  (= Metronic $aside-config z-index)
  *      105  --z-index-nav-menu        token  (Metronic's old menu dropdown z-index)
@@ -42,6 +42,10 @@
  */
 
 @theme {
+  /* The fixed app header. While a floating drawer (110) is open, AppHeader
+     lifts it to one above the drawer: its menus open down into the
+     drawer's band and would otherwise paint behind it. */
+  --z-index-header: 100;
   --z-index-sidebar-panel: 105;
   --z-index-mobile-drawer: 110;
   /* NavMenu's popup panels (user menu, page-tab submenus, footer menus),

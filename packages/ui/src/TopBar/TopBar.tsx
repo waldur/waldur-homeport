@@ -1,4 +1,5 @@
 import { CaretDownIcon, MagnifyingGlassIcon } from '@phosphor-icons/react';
+import { cva, type VariantProps } from 'class-variance-authority';
 import { ComponentProps, forwardRef, ReactNode } from 'react';
 
 import { AvatarFallback, AvatarImage, AvatarRoot } from '../Avatar';
@@ -19,35 +20,52 @@ import { Tooltip } from '../Tooltip';
  * consumer rather than hardcoded, since this primitive has no org-list
  * data of its own.
  */
-export interface TopBarProps {
+export interface TopBarProps extends ComponentProps<'header'> {
+  /** Leading controls, such as the mobile navigation toggle and logo. */
   left?: ReactNode;
+  /** The flexible middle: breadcrumbs, a back button, a search field. */
   center?: ReactNode;
+  /** The fixed action cluster at the end. Children carry their own spacing. */
   right?: ReactNode;
-  className?: string;
 }
 
-export const TopBar = ({ left, center, right, className }: TopBarProps) => (
+/**
+ * The app header's bar, ported from Metronic's `.header` and the
+ * `.container-fluid` inside it (layout/_header.scss, layout/_main.scss):
+ * 55px tall with 15px side padding, 65px and 32px from `lg` (992px), a
+ * 1px `border-secondary` rule at the bottom (inside the height) and the
+ * `bg-primary` surface. Measured identical to it in the signed-in app.
+ *
+ * Only the bar: where it sits (fixed, beside the sidebar, its z-index) is
+ * the page layout's business and comes in through `className`.
+ */
+export const TopBar = ({
+  left,
+  center,
+  right,
+  className,
+  ...props
+}: TopBarProps) => (
   <header
     className={cn(
-      'flex h-16 shrink-0 items-center gap-4 border-b px-4',
-      'border-[var(--sidebar-border)] bg-[var(--page-bg)]',
+      'flex h-[55px] shrink-0 items-stretch justify-between px-[15px] lg:h-[65px] lg:px-[32px]',
+      'border-b-[1px] border-b-secondary bg-primary',
       className,
     )}
+    {...props}
   >
-    {/* min-w-0 on left/center (not right — its icon buttons are a fixed
-        cluster, same as the real app's own header actions, which never
-        shrink) lets a long org name or a wide center slot actually give
-        way on a narrow viewport instead of forcing the header to overflow
-        — flex items default to min-width:auto, which ignores flex-shrink
-        otherwise. */}
-    {left && (
-      <div className="flex min-w-0 shrink items-center gap-3">{left}</div>
-    )}
-    {center && (
-      <div className="flex min-w-0 flex-1 justify-center">{center}</div>
-    )}
+    {left && <div className="flex min-w-0 items-center gap-3">{left}</div>}
+    {/* Always rendered, so the actions stay at the end. flex-basis 0 makes
+        its width the grown share of free space, whatever its content's
+        width, and overflow-hidden clips it: a long breadcrumb trail can
+        never push the actions off screen, and gets a real width to
+        measure its own overflow against. min-w-0 lets it shrink at all —
+        flex items default to min-width:auto, which ignores flex-shrink. */}
+    <div className="flex min-w-0 shrink grow basis-0 items-stretch overflow-hidden">
+      {center}
+    </div>
     {right && (
-      <div className="ml-auto flex shrink-0 items-center gap-2">{right}</div>
+      <div className="ms-[0.75rem] flex shrink-0 items-stretch">{right}</div>
     )}
   </header>
 );
@@ -139,8 +157,62 @@ export const SearchField = ({
 export interface IconButtonProps extends ComponentProps<'button'> {
   icon: ReactNode;
   label: string;
+  /** The default "something new" dot: green, blinking, on the top corner. */
   hasIndicator?: boolean;
+  /** A marker of the caller's own, drawn instead of the default dot. */
+  indicator?: ReactNode;
+  /** `md` is the header's icon, `lg` the mobile navigation toggle's. */
+  iconSize?: VariantProps<typeof iconButton>['iconSize'];
+  /**
+   * `header` is the app header's button. `base` is the plain 36px square the
+   * sidebar's own buttons share (ICON_BUTTON_BASE_CLASSNAME), for a caller
+   * that restyles it, such as the sidebar's shortcuts button.
+   */
+  variant?: VariantProps<typeof iconButton>['variant'];
 }
+
+/**
+ * The header look is Metronic's `.btn-nav-item` with its `.svg-icon
+ * svg-icon-2` icon, which it replaced after a pixel comparison of the two;
+ * e2e-visual/top-bar-geometry.spec.ts keeps its measured size and spacing:
+ *
+ * - 40px square, 6px radius, the header's own surface (`bg-primary`).
+ * - Icon in rem, not px: 1.54rem (`svg-icon-2`) and 1.85rem (`svg-icon-1x`),
+ *   so it shrinks with the 12px mobile root (20px → 18.5px) as it did.
+ * - Hover, keyboard focus and `aria-expanded` (the drawer the button opens is
+ *   showing) fill with `--btn-secondary-bg` and turn the icon brand.
+ * - The ring is the old 0.155rem box-shadow, but on `:focus-visible` only.
+ *   The old one also showed on `:focus`/`:active`, so a clicked button kept
+ *   its ring and fill until focus moved elsewhere; `aria-expanded` now says
+ *   whether its drawer is open, which is what that lingering state stood in
+ *   for. The one deliberate difference from the original.
+ * - Timing as before: the fill 0.2s, the icon colour 0.3s.
+ */
+const iconButton = cva('relative', {
+  variants: {
+    variant: {
+      header: [
+        'flex size-[40px] shrink-0 items-center justify-center rounded-md border-0 bg-primary p-[0px] text-quinary outline-none',
+        'transition-all duration-200 ease-[ease]',
+        '[&_svg]:transition-colors [&_svg]:duration-300 [&_svg]:ease-[ease]',
+        'hover:bg-[var(--btn-secondary-bg)] hover:text-[var(--text-brand-secondary)]',
+        'focus-visible:bg-[var(--btn-secondary-bg)] focus-visible:text-[var(--text-brand-secondary)]',
+        'focus-visible:shadow-[0_0_0_0.155rem_var(--border-brand-solid)]',
+        'aria-expanded:bg-[var(--btn-secondary-bg)] aria-expanded:text-[var(--text-brand-secondary)]',
+      ],
+      base: ICON_BUTTON_BASE_CLASSNAME,
+    },
+    iconSize: {
+      md: '',
+      lg: '',
+    },
+  },
+  compoundVariants: [
+    { variant: 'header', iconSize: 'md', className: '[&_svg]:size-[1.54rem]' },
+    { variant: 'header', iconSize: 'lg', className: '[&_svg]:size-[1.85rem]' },
+  ],
+  defaultVariants: { variant: 'header', iconSize: 'md' },
+});
 
 /**
  * Extends ComponentProps<'button'> (not just onClick/className, the
@@ -159,26 +231,35 @@ export interface IconButtonProps extends ComponentProps<'button'> {
  * both work together.
  */
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ icon, label, hasIndicator, className, ...props }, ref) => (
+  (
+    {
+      icon,
+      label,
+      hasIndicator,
+      indicator,
+      iconSize,
+      variant,
+      className,
+      ...props
+    },
+    ref,
+  ) => (
     <Tooltip label={label} side="bottom">
       <button
         ref={ref}
         type="button"
         aria-label={label}
-        className={cn('relative', ICON_BUTTON_BASE_CLASSNAME, className)}
+        className={cn(iconButton({ variant, iconSize }), className)}
         {...props}
       >
         {icon}
-        {hasIndicator && (
-          // --status-success-fg, not danger: Metronic's real equivalent
-          // (HeaderButtonBullet, src/navigation/header/HeaderButtonBullet.tsx)
-          // defaults to `variant = 'success'` (green) for "there's something
-          // new here" — every one of its real callers (ConfirmationDrawerToggle,
-          // QuickIssueDrawerToggle) uses that default. Danger/red is reserved
-          // for an actual error state, which this generic "has notifications"
-          // dot isn't.
-          <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-[var(--status-success-fg)]" />
-        )}
+        {indicator ??
+          (hasIndicator && (
+            // The app header's HeaderButtonBullet in its default look: green
+            // (not danger, which is for errors) and blinking, centred on the
+            // button's top corner, a half-dot in from the edge.
+            <span className="animation-blink absolute end-0 top-0 inline-block size-[6px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-success" />
+          ))}
       </button>
     </Tooltip>
   ),

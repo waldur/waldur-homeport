@@ -1,5 +1,4 @@
 import { CopyIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
 
 import { buttonVariants, cn, inputVariants, Menu } from 'waldur-ui';
 
@@ -21,7 +20,7 @@ export const UserToken = ({ token }: { token: string }) => {
       aria-label={translate('Copy API token')}
       onCopied={() => showSuccess(translate('Token has been copied'))}
     >
-      <span className="flex grow items-center me-2 text-nowrap">
+      <span className="flex grow items-center me-[0.5rem] whitespace-nowrap">
         {translate('API token')}
       </span>
       <span className="flex w-full items-stretch" aria-hidden="true">
@@ -30,16 +29,16 @@ export const UserToken = ({ token }: { token: string }) => {
         <span
           className={cn(
             inputVariants({ size: 'sm', solid: true }),
-            'h-30px min-w-0 flex-1 rounded-e-none overflow-hidden whitespace-nowrap [contain:inline-size]',
+            'h-[30px] min-w-0 flex-1 rounded-e-none overflow-hidden whitespace-nowrap [contain:inline-size]',
           )}
           style={{ fontFamily: 'text-security-disc' }}
         >
           {token}
         </span>
         <span
-          className={classNames(
+          className={cn(
             buttonVariants({ variant: 'primary', size: 'sm' }),
-            'px-3 h-30px rounded-s-none',
+            'px-[0.75rem] h-[30px] rounded-s-none',
           )}
         >
           <span className="inline-flex size-4 shrink-0 items-center justify-center [&>svg]:size-4">

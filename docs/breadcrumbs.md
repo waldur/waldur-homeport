@@ -113,7 +113,7 @@ This needs a width-constrained parent: the trail's container must be a flex item
 
 ## Mobile
 
-Below the `md` breakpoint the root app draws the trail in a fixed bar under the header (`BreadcrumbMain mobile`). That bar is still positioned by `.breadcrumb-mobile` in `src/metronic/sass/custom/_breadcrumb.scss` (also matched by `layout/_toolbar.scss` and `layout/_sticky-top.scss`). It is header layout, not breadcrumb styling, and moves with the header's own migration; the lint rule allows the class.
+Below the `md` breakpoint the root app draws the trail in a fixed bar under the header (`BreadcrumbMain mobile`): 55px tall like the header, with its surface, bottom rule and 15px side padding, and lowered under the impersonation bar while it shows (`hasPageBar`). Behind it `BreadcrumbMain` renders a 55px spacer in the page flow, so the announcements, warning bars and page content that follow start below the bar rather than underneath it. The bar keeps the class `breadcrumb-mobile` with no styles of its own: `layout/_toolbar.scss` and `layout/_sticky-top.scss` still use it to place the page tabs and sticky elements below the bar, and the lint rule allows it.
 
 ## Micro-apps
 

@@ -131,6 +131,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
               <IconButton
                 icon={<SquaresFourIcon size={24} weight="bold" />}
                 label={translate('Quick shortcuts')}
+                variant="base"
                 className={`${SIDEBAR_ICON_BUTTON_CLASSNAME} group-data-[collapsible=icon]/panel:hidden`}
               />
             </Menu.Trigger>

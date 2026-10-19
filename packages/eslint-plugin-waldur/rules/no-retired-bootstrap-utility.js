@@ -46,6 +46,8 @@ export const RETIRED_UTILITY_PATTERNS = [
     new RegExp(`^flex-${BP}-(?:fill|shrink-[01])$`),
     'a Tailwind breakpoint variant (lg:flex-1, lg:shrink-0)',
   ],
+  // The header's icon button (custom/_nav.scss), now waldur-ui's IconButton.
+  [/^btn-nav-item$/, "waldur-ui's IconButton"],
   // core/components/_svg-icon.scss generates icon sizes at the base size only.
   [
     new RegExp(`^svg-icon-${BP}-[\\w.-]+$`),

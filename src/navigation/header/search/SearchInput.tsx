@@ -53,7 +53,7 @@ export const SearchInput = ({
     <div className={className}>
       {/* A lone text field submits its form on Enter, which would reload the page. */}
       <form
-        className="w-full position-relative"
+        className="w-full relative"
         autoComplete="off"
         onSubmit={(event) => event.preventDefault()}
       >
@@ -71,15 +71,15 @@ export const SearchInput = ({
 
         {/* Keyboard shortcut hint */}
         {showShortcut && !query && (
-          <span className="position-absolute top-50 end-0 translate-middle-y me-4 z-index-5 text-secondary text-xs bg-quaternary px-2 py-1 rounded">
+          <span className="absolute end-0 top-1/2 -translate-y-1/2 me-[0.924rem] z-[5] text-secondary text-xs bg-quaternary px-[0.5rem] py-[0.25rem] rounded-lg">
             {shortcutHint}
           </span>
         )}
 
         {/* Loading */}
         {show && isLoading ? (
-          <span className="position-absolute top-50 end-0 translate-middle-y leading-none me-4 z-index-5">
-            <span className="spinner-border h-15px w-15px align-middle text-quinary" />
+          <span className="absolute end-0 top-1/2 -translate-y-1/2 leading-none me-[0.924rem] z-[5]">
+            <span className="spinner-border size-[15px] align-middle text-quinary" />
           </span>
         ) : null}
         {/* Clear button */}
@@ -87,7 +87,7 @@ export const SearchInput = ({
           <BaseButton
             size="sm"
             variant="text-secondary"
-            className="position-absolute top-50 end-0 translate-middle-y me-4 z-index-5"
+            className="absolute end-0 top-1/2 -translate-y-1/2 me-[0.924rem] z-[5]"
             onClick={() => setQuery('')}
             iconNode={<XIcon weight="bold" />}
             tooltip={translate('Clear')}
