@@ -132,6 +132,7 @@
     "tslib": "^2.8.1",
     "waldur-api-client": "workspace:*",
     "waldur-auth-core": "workspace:*",
+    "waldur-boot-splash": "workspace:*",
     "waldur-design-tokens": "workspace:*",
     "waldur-i18n-runtime": "workspace:*",
     "waldur-js-client": "8.1.3-dev.20261018082125.514",
@@ -262,7 +263,8 @@
       "test/mocks/svg.tsx",
       "vitest.shims.d.ts",
       "public/boot-redirect.js",
-      "public/boot-splash.js"
+      "packages/boot-splash/src/boot-splash.js",
+      "packages/boot-splash/src/splash.css"
     ]
   },
   "stylelint": {

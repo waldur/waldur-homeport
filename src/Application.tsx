@@ -17,9 +17,9 @@ import { ModalRoot } from '@/modal/ModalRoot';
 import { RealtimeRoot } from '@/realtime/RealtimeRoot';
 import store from '@/store/store';
 
+import { BootErrorScreen } from './BootErrorScreen';
 import { loadConfig } from './core/bootstrap';
 import { ErrorMessage } from './ErrorMessage';
-import { LoadingScreen } from './LoadingScreen';
 import { LayoutProvider } from './metronic/layout/core';
 import { ConfirmModalRoot } from './modal/ConfirmModalRoot';
 import { RouteLoadingBar } from './navigation/RouteLoadingBar';
@@ -77,7 +77,7 @@ const ApplicationInner: FunctionComponent = () => {
 export const Application: FunctionComponent = () => (
   <QueryClientProvider client={queryClient}>
     <ErrorBoundary
-      fallback={({ error }) => <LoadingScreen error={error as Error} />}
+      fallback={({ error }) => <BootErrorScreen error={error as Error} />}
     >
       {/* No fallback of its own: the boot splash from index.html stays over
           the page until BootSplashGate removes it. */}

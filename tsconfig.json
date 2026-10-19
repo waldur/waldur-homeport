@@ -36,6 +36,7 @@
     "./typings.d.ts",
     "extractLiteralsFromFiles.ts",
     "vite.config.ts",
+    "packages/boot-splash/src/vite.js",
     "test"
   ],
   "exclude": [

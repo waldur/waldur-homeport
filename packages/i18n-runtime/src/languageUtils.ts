@@ -21,6 +21,8 @@ class LanguageUtilsServiceClass {
 
   dictionary: Record<string, string> = {};
 
+  private loading: Promise<void> = Promise.resolve();
+
   /** Wires this singleton to a host app's config/storage. Must run before any other method. */
   init(config: LanguageUtilsConfig) {
     this.config = config;
@@ -33,10 +35,20 @@ class LanguageUtilsServiceClass {
   setCurrentLanguage(language: LanguageOption) {
     this.currentLanguage = language;
     this.config.storage.set(language.code);
-    this.config.loadLocale(language.code).then((mod) => {
-      this.dictionary = mod.default;
-    });
+    this.loading = this.config.loadLocale(language.code).then(
+      (mod) => {
+        this.dictionary = mod.default;
+      },
+      // A locale that fails to load leaves the previous dictionary in place,
+      // as before; whenLoaded() still settles.
+      () => undefined,
+    );
     Settings.defaultLocale = language.code;
+  }
+
+  /** Settles once the current language's dictionary has loaded (or failed to). */
+  whenLoaded() {
+    return this.loading;
   }
 
   checkLanguage() {

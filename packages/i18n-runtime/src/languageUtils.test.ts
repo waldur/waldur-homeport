@@ -97,4 +97,32 @@ describe('LanguageUtilsService.checkLanguage', () => {
       expect(LanguageUtilsService.dictionary).toEqual({ hi: 'tere' }),
     );
   });
+
+  it('settles whenLoaded() once the dictionary has loaded', async () => {
+    setUrlLanguage(null);
+    const loadLocale = vi
+      .fn()
+      .mockResolvedValue({ default: { Reload: 'Laadi uuesti' } });
+    LanguageUtilsService.init({
+      languageChoices,
+      defaultLanguage: 'et',
+      loadLocale,
+      storage: makeStorage(null),
+    });
+    LanguageUtilsService.checkLanguage();
+    await LanguageUtilsService.whenLoaded();
+    expect(LanguageUtilsService.dictionary).toEqual({ Reload: 'Laadi uuesti' });
+  });
+
+  it('settles whenLoaded() even if the locale fails to load', async () => {
+    setUrlLanguage(null);
+    LanguageUtilsService.init({
+      languageChoices,
+      defaultLanguage: 'et',
+      loadLocale: vi.fn().mockRejectedValue(new Error('offline')),
+      storage: makeStorage(null),
+    });
+    LanguageUtilsService.checkLanguage();
+    await expect(LanguageUtilsService.whenLoaded()).resolves.toBeUndefined();
+  });
 });

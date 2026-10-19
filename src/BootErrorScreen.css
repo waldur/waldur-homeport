@@ -1,5 +1,6 @@
 /* The shared splash layout and palette (.boot-splash, --boot-*) live in
-   index.html, which has to paint them before any stylesheet loads. Only what
+   waldur-boot-splash, inlined into index.html because they have to paint
+   before any stylesheet loads. Only what
    the error screen adds is styled here. */
 
 .boot-splash__title {

@@ -40,9 +40,10 @@ describe('BootSplashGate', () => {
     expect(splash()).toBeNull();
   });
 
-  it('removes the splash at once if the application unmounts first', () => {
+  it('removes the splash if the application unmounts first', () => {
     const { unmount } = render(<BootSplashGate />);
     unmount();
+    act(() => vi.advanceTimersByTime(0));
     expect(splash()).toBeNull();
   });
 });

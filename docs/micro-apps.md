@@ -29,6 +29,8 @@ rather than copying `src/navigation/header/breadcrumb/`. It knows no router:
 a `renderLink` on the provider turns a crumb's `to` into your router's link.
 See [breadcrumbs.md](breadcrumbs.md).
 
+The boot splash is shared too: see [Boot splash](#boot-splash).
+
 **The convention is directory presence, not a manifest.** Every `apps/*`
 member is picked up automatically — by `yarn install` (via the
 workspace glob), by the Dockerfile's build loop, by CI's typecheck/build
@@ -61,6 +63,50 @@ entry/port; generalizing to every `apps/*` member automatically would need
 a small discoverable ports registry (e.g. extending the `waldur.deploy`
 package.json convention below with a `devPort` field) — not worth it with
 only one real example today.
+
+## Boot splash
+
+`packages/boot-splash` (`waldur-boot-splash`) gives every app the same
+branded loading screen as the root app, from the very first frame:
+
+- **`waldurBootSplash()`** (`waldur-boot-splash/vite`) goes in the app's
+  `vite.config.ts`. It inlines the splash's styles into the app's own
+  `index.html`, adds its markup at the end of `<body>` (outside the app's
+  root, as a fixed layer), and links a small `boot-splash.js` that runs
+  render-blocking in `<head>` and brands the splash from the cache before it
+  paints. The script is served in dev and emitted in build as a
+  content-hashed file under `assets/`, so nginx's immutable caching applies
+  and a new version always gets a new URL. It is an external file, not
+  inline, because production sends `script-src 'self'`. `index.html` itself
+  needs nothing. Other pages built with the same config, such as Storybook's
+  `iframe.html`, are left alone.
+- **`saveSplashBranding(WALDUR_CORE, { translate })`** caches the
+  deployment's name, brand colour, compact logo and dark-theme setting, and
+  the splash's text in the user's language, for the next visit. The logo is
+  redrawn at display size into a small data URI; one that can't be made
+  small enough is dropped, so the splash shows the default mark instead of an
+  empty box. `bootstrapMicroApp()` calls it once the runtime config and the
+  user's language have loaded; the root app calls it from
+  `afterBootstrap()`.
+- **`useBootSplashDismiss(ready)`** (`waldur-boot-splash/react`) fades the
+  splash out once `ready`, or removes it if unmounted first, so a crash
+  never stays hidden behind it. `AppShell` passes "bootstrapped"
+  (`whenMicroAppBootstrapped()` from `waldur-shell`): the splash stays
+  until the tenant's brand, font, sidebar style and language are applied,
+  so the switch from the defaults happens behind it. The root app instead
+  waits for its first route and that route's code chunks
+  (`src/BootSplashGate.tsx`). For anything else, `dismissBootSplash()`.
+
+Every app on the origin shares the cache (`waldur/boot-splash`) and the
+theme key, so the root app and its micro-apps brand each other's splash: a
+user who has opened one gets a branded splash in the others on first visit.
+A browser that has never loaded any of them shows the `defaultName` passed to
+the plugin, the Waldur colours and English text.
+
+A micro-app that crashes before `AppShell` mounts keeps the splash, whose
+"Taking longer than usual" notice offers a reload after 8 seconds. Mount
+`useBootSplashDismiss` higher up, or call `dismissBootSplash()` from the
+error screen, if the app has one of its own.
 
 ## Build & serve pipeline
 
@@ -177,6 +223,10 @@ MR's live k8s preview, while never appearing in a real `Publish` image.
    reference wiring. Skip this only if the
    new app genuinely needs different chrome, not just different nav
    content (`AppShell` already takes nav items/page content as props).
+   Add `waldurBootSplash()` from `waldur-boot-splash/vite` to its
+   `vite.config.ts` plugins for the shared boot splash (see
+   [Boot splash](#boot-splash)); `AppShell` takes it down once the app is
+   bootstrapped.
    `AppShell` also hosts dialogs: page content opens them with `useModal()`
    / `confirm()` from `waldur-ui`, as in the main app (see
    [modals.md](modals.md)). For `useManagedMutation` from `waldur-shell`,
