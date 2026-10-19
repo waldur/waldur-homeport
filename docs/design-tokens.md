@@ -20,7 +20,7 @@ Never edit the two files generated from it:
 
 | Generated file                                             | Consumer                                                                                                                            |
 | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `src/metronic/sass/_color-ramps.scss`                      | Bootstrap/Metronic (`$gray-500`, `$success-600`, …), the same values as the CSS ramps; and `css-color($ramp, $step)` for a data URI |
+| `src/metronic/sass/_color-ramps.scss`                      | Bootstrap/Metronic (`$gray-500`, `$success-600`, …), the same values as the CSS ramps |
 | `packages/design-tokens/src/css/primitives/colorRamps.css` | Tailwind and CSS variables (`--color-gray-500`, `bg-success-600`), declared once in `@theme static`                                 |
 
 ```bash
@@ -76,8 +76,7 @@ Dark UI wants neutral grays where the light `gray` is blue-tinted (500 is `#6670
   unconditionally, while the `light` style reads `gray`). A component that needs a dark-specific
   gray writes `dark:bg-[var(--color-gray-dark-800)]` or `dark:bg-gray-dark-800`.
 
-`gray-dark` is CSS-only (`"scss": false`); SCSS reads it, where a `var()` cannot reach (a data
-URI), as `css-color(gray-dark, 500)`. Its values are what the old theme-inverted SCSS grays were
+`gray-dark` is CSS-only (`"scss": false`). Its values are what the old theme-inverted SCSS grays were
 in dark mode, re-indexed: `gray-dark-N` was the dark value of the mirrored `$gray-N` (25 ↔ 950,
 50 ↔ 900, …). The `mirrored-ramp-color()` mixin keeps that pairing for one-off SCSS colours.
 
