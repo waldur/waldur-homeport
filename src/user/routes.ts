@@ -20,6 +20,7 @@ import {
   getUser,
   hasNonProjectPermissions,
   isStaffOrSupport,
+  isStaffOrSupportOrImpersonating,
 } from '@/workspace/selectors';
 
 import { arePasskeysEnabled } from './passkeys/utils';
@@ -79,7 +80,7 @@ export const states: StateDeclaration[] = [
           isFeatureVisible(UserFeatures.ssh_keys) ||
           ENV.plugins.WALDUR_CORE.FREEIPA_ENABLED ||
           !isFeatureVisible(UserFeatures.conceal_remote_accounts) ||
-          isStaffOrSupport(state) ||
+          isStaffOrSupportOrImpersonating(state) ||
           !isFeatureVisible(UserFeatures.conceal_api_token) ||
           canUsePersonalAccessTokens(state) ||
           arePasskeysEnabled(),
@@ -321,7 +322,7 @@ export const states: StateDeclaration[] = [
       permissions: [
         (state) =>
           !isFeatureVisible(UserFeatures.conceal_api_token) ||
-          isStaffOrSupport(state),
+          isStaffOrSupportOrImpersonating(state),
       ],
     },
   },

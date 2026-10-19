@@ -1,6 +1,7 @@
-import { afterEach, beforeEach, describe, it, expect } from 'vitest';
+import { afterEach, beforeEach, describe, it, expect, vi } from 'vitest';
 
 import { ENV } from '@/core/config';
+import { ImpersonationStorage } from '@/core/StorageManager';
 import { PermissionEnum, RoleEnum } from '@/permissions/enums';
 import { type RootState } from '@/store/reducers';
 
@@ -19,6 +20,7 @@ import {
   isOwnerOrStaff,
   isOwnerOrStaffOrReader,
   isServiceProviderManager,
+  isStaffOrSupportOrImpersonating,
 } from './selectors';
 
 describe('isOwnerOrStaff selector', () => {
@@ -705,5 +707,40 @@ describe('organization role clones and accounting', () => {
       ],
     };
     expect(canViewAccounting(state(user))).toBe(false);
+  });
+});
+
+describe('isStaffOrSupportOrImpersonating', () => {
+  const state = (user) => ({ workspace: { user } }) as RootState;
+  const regularUser = { is_staff: false, is_support: false, uuid: 'u' };
+
+  beforeEach(() => {
+    vi.spyOn(ImpersonationStorage, 'get').mockReturnValue(null);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('is true for staff and support', () => {
+    expect(
+      isStaffOrSupportOrImpersonating(
+        state({ ...regularUser, is_staff: true }),
+      ),
+    ).toBe(true);
+    expect(
+      isStaffOrSupportOrImpersonating(
+        state({ ...regularUser, is_support: true }),
+      ),
+    ).toBe(true);
+  });
+
+  it('is false for a regular user', () => {
+    expect(isStaffOrSupportOrImpersonating(state(regularUser))).toBe(false);
+  });
+
+  it('is true while staff impersonates a regular user', () => {
+    vi.mocked(ImpersonationStorage.get).mockReturnValue('impersonated-uuid');
+    expect(isStaffOrSupportOrImpersonating(state(regularUser))).toBe(true);
   });
 });
