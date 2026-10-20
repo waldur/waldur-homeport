@@ -39,6 +39,22 @@ export const isSignInStep = (stateName: string) =>
   stateName === PASSKEY_GATE_STATE ||
   stateName === PROFILE_GATE_STATE;
 
+/**
+ * A plain copy of the pending toParams that JSON.stringify can always take.
+ * router.globals.params is a StateParams that ui-router rewrites in place on
+ * every transition, so a caller that passed it to go('login') as toParams
+ * leaves it pointing at itself; its own values are the login page's by then,
+ * so nothing of the intended page is left to keep.
+ */
+const toPlainParams = (toParams: object | undefined): object => {
+  if (!toParams || toParams === router.globals.params) {
+    return {};
+  }
+  return Object.fromEntries(
+    Object.entries(toParams).filter(([, value]) => value !== toParams),
+  );
+};
+
 export function storeRedirect() {
   if (
     router.globals.params?.toState &&
@@ -47,7 +63,7 @@ export function storeRedirect() {
   ) {
     RedirectStorage.set({
       toState: router.globals.params.toState,
-      toParams: router.globals.params.toParams,
+      toParams: toPlainParams(router.globals.params.toParams),
     });
   }
 }

@@ -1,3 +1,4 @@
+import { StateParams } from '@uirouter/core';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { router } from '@/router';
@@ -116,6 +117,38 @@ describe('authNavigation', () => {
       });
     });
 
+    // A caller that hands go('login') the live router.globals.params as
+    // toParams (useCurrentStateAndParams returns that very object) leaves it
+    // pointing at itself once ui-router copies the login params into it in
+    // place, and the LandingPage effect used to throw "Converting circular
+    // structure to JSON" here.
+    it('does not throw when toParams is the live StateParams itself', () => {
+      const params = new StateParams({ uuid: 'offering-uuid' });
+      Object.keys(params).forEach((key) => delete params[key]);
+      Object.assign(params, {
+        toState: 'public-offering-details',
+        toParams: params,
+      });
+      router.globals.params = params as never;
+      expect(() => storeRedirect()).not.toThrow();
+      expect(RedirectStorage.get()).toEqual({
+        toState: 'public-offering-details',
+        toParams: {},
+      });
+    });
+
+    it('stores a plain copy of StateParams toParams', () => {
+      router.globals.params = new StateParams({
+        toState: 'project.details',
+        toParams: new StateParams({ uuid: '1' }),
+      }) as never;
+      storeRedirect();
+      expect(RedirectStorage.get()).toEqual({
+        toState: 'project.details',
+        toParams: { uuid: '1' },
+      });
+    });
+
     it('does not store when toState is the default redirect state', () => {
       router.globals.params = {
         toState: 'profile.details',
@@ -217,6 +250,20 @@ describe('authNavigation', () => {
         REPLACE,
       );
       expect(RedirectStorage.get()).toBeNull();
+    });
+
+    it('resumes a page stored by storeRedirect from StateParams', async () => {
+      router.globals.params = new StateParams({
+        toState: 'public-offering-details',
+        toParams: new StateParams({ uuid: 'offering-uuid' }),
+      }) as never;
+      storeRedirect();
+      await redirectOnSuccess();
+      expect(router.stateService.go).toHaveBeenCalledWith(
+        'public-offering-details',
+        { uuid: 'offering-uuid' },
+        REPLACE,
+      );
     });
 
     it('falls back to the default state when nothing was stored', async () => {
