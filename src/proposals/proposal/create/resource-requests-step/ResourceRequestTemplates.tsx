@@ -39,6 +39,11 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { useSubmitProposalResourcesFromTemplates } from '../utils';
 
+import {
+  hasSlurmPlacement,
+  SlurmPlacementFields,
+} from './SlurmPlacementFields';
+
 interface ResourceRequestTemplatesProps {
   call: PublicCall;
   proposal: Proposal;
@@ -64,9 +69,12 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
             valueCol={7}
           />
         </Col>
+        <SlurmPlacementFields attributes={row.attributes} />
       </Row>
       {!keyValues.length ? (
-        <span>{translate('This resource request has no attributes.')}</span>
+        hasSlurmPlacement(row.attributes) ? null : (
+          <span>{translate('This resource request has no attributes.')}</span>
+        )
       ) : (
         <div className="card card-table card-bordered">
           <div className="card-body">
