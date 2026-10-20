@@ -14,10 +14,12 @@ export type SegmentedVariant = 'neutral' | 'brand';
 // it can read verbatim in a scanned file (dynamic string interpolation is not
 // scanned by Tailwind v4). Radius follows the size, as it does on BaseButton.
 // Record<ButtonSize, …>, so a new button size cannot be added without a radius here.
+// *-of-type, not first/last: inside a <form> Radix adds a hidden <input> after
+// each radio, so the last segment is never :last-child.
 const EDGE_RADIUS: Record<ButtonSize, string> = {
-  sm: 'first:rounded-l-md last:rounded-r-md',
-  md: 'first:rounded-l-lg last:rounded-r-lg',
-  lg: 'first:rounded-l-lg last:rounded-r-lg',
+  sm: 'first-of-type:rounded-l-md last-of-type:rounded-r-md',
+  md: 'first-of-type:rounded-l-lg last-of-type:rounded-r-lg',
+  lg: 'first-of-type:rounded-l-lg last-of-type:rounded-r-lg',
 };
 
 // Selected fill per variant and per primitive (RadioGroup `checked`, Tabs
@@ -78,7 +80,7 @@ export const segmentedItemClassName = ({
       variant: variant === 'brand' ? 'secondary' : 'tertiary',
       size,
     }),
-    'relative -ml-px rounded-none first:ml-0',
+    'relative -ml-px rounded-none first-of-type:ml-0',
     EDGE_RADIUS[size],
     fullWidth && 'flex-1',
     'focus-visible:z-[2] data-[state=checked]:z-[1] aria-selected:z-[1]',

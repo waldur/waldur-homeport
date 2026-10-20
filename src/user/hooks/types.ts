@@ -1,7 +1,10 @@
+import { EventGroupSection } from './eventGroupLabels';
+
 export interface EventGroupOption {
   key: string;
   title: string;
-  help_text: string;
+  description?: string;
+  section?: EventGroupSection;
 }
 
 export type HookType = 'email' | 'webhook';

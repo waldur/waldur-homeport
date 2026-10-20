@@ -21,12 +21,12 @@ const mockEventGroups = [
   {
     key: 'users',
     title: 'Users',
-    help_text: 'User related events',
+    description: 'User related events',
   },
   {
     key: 'resources',
     title: 'Resources',
-    help_text: 'Resource related events',
+    description: 'Resource related events',
   },
 ];
 
@@ -168,6 +168,23 @@ describe('HookDetailsDialog', () => {
           },
         });
         expect(mockRefetch).toHaveBeenCalled();
+      });
+    });
+
+    it('should drop an unticked group on update', async () => {
+      await renderUpdate();
+      vi.mocked(hooksWebPartialUpdate).mockResolvedValue(null);
+      await userEvent.click(screen.getByLabelText('Users'));
+      await userEvent.click(screen.getByText('Update'));
+      await waitFor(() => {
+        expect(hooksWebPartialUpdate).toHaveBeenCalledWith({
+          path: { uuid: 'test-uuid' },
+          body: {
+            destination_url: 'https://example.com/webhook',
+            is_active: true,
+            event_groups: [],
+          },
+        });
       });
     });
 
