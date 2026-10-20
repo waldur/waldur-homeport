@@ -5,11 +5,6 @@ body {
   background-color: $page-bg;
 }
 
-// Font color from Content background color
-.text-page-bg {
-  color: $page-bg;
-}
-
 // Desktop Mode
 @include media-breakpoint-up(lg) {
   // Containers

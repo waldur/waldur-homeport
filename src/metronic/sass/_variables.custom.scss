@@ -19,6 +19,9 @@ $table-variants: () !default;
 // Note on legacy Bootstrap mapping:
 // Bootstrap lacks an explicit -md step, so $border-radius-sm (6px) corresponds to --radius-md,
 // and $border-radius-xs (4px) corresponds to --radius-sm.
+// The full scale is kept (including -2xs, -md and -2xl, which have no current
+// consumers) so every --radius-* token has an SCSS counterpart; see
+// docs/design-tokens.md.
 $border-radius-2xs: 2px !default; // mirrors --radius-xs (2px)
 $border-radius-xs: 4px !default; // mirrors --radius-sm (4px)
 $border-radius-sm: 6px !default; // mirrors --radius-md (6px)
