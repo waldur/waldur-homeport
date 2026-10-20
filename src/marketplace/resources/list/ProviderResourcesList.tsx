@@ -10,7 +10,6 @@ import {
 import { BaseButton } from 'waldur-ui';
 
 import { BackendIdTip } from '@/core/BackendIdTip';
-import { BooleanBadge } from '@/core/BooleanBadge';
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
@@ -24,6 +23,7 @@ import { ResourceMultiSelectAction } from '@/marketplace/resources/mass-actions/
 import { Category } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
 import { createFetcher } from '@/table/api';
+import { BooleanField } from '@/table/BooleanField';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useFilterValues } from '@/table/useFilterValues';
@@ -191,7 +191,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Requested downscaling'),
-      render: ({ row }) => <BooleanBadge value={row.downscaled} />,
+      render: ({ row }) => <BooleanField value={row.downscaled} />,
       filter: 'downscaled',
       inlineFilter: () => true,
       export: 'downscaled',
@@ -202,7 +202,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Restrict member access'),
-      render: ({ row }) => <BooleanBadge value={row.restrict_member_access} />,
+      render: ({ row }) => <BooleanField value={row.restrict_member_access} />,
       filter: 'restrict_member_access',
       inlineFilter: () => true,
       export: 'restrict_member_access',
@@ -213,7 +213,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Requested pausing'),
-      render: ({ row }) => <BooleanBadge value={row.paused} />,
+      render: ({ row }) => <BooleanField value={row.paused} />,
       filter: 'paused',
       inlineFilter: () => true,
       export: 'paused',

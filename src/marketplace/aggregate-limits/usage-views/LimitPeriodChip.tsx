@@ -59,7 +59,7 @@ export const LimitPeriodChip: FC<Props> = ({
         size={size === 'sm' ? 'sm' : undefined}
         leftIcon={<InfinityIcon weight="bold" size={iconSize} />}
         shape="pill"
-        tone="light"
+        tone="outline"
         tooltip={translate(
           'Usage-based component — no limit period defined; values are raw measurements.',
         )}
@@ -87,7 +87,7 @@ export const LimitPeriodChip: FC<Props> = ({
         )
       }
       shape="pill"
-      tone="light"
+      tone="outline"
       tooltip={window ? `${familyLabel} · ${window}` : familyLabel}
     >
       {familyLabel}

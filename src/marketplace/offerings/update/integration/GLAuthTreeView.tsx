@@ -52,13 +52,13 @@ const kindBadge = (
 ): { text: string; variant: BadgeVariant; tone: BadgeTone } => {
   switch (kind) {
     case 'project':
-      return { text: 'project', variant: 'secondary', tone: 'solid' };
+      return { text: 'project', variant: 'secondary', tone: 'outline' };
     case 'resource_role':
-      return { text: 'resource role', variant: 'primary', tone: 'light' };
+      return { text: 'resource role', variant: 'primary', tone: 'outline' };
     case 'resource_project_role':
-      return { text: 'rp role', variant: 'success', tone: 'light' };
+      return { text: 'rp role', variant: 'success', tone: 'outline' };
     case 'personal':
-      return { text: 'personal', variant: 'neutral', tone: 'light' };
+      return { text: 'personal', variant: 'neutral', tone: 'outline' };
   }
 };
 
@@ -177,8 +177,8 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
     name: `cn=${u.username},ou=users,${BASE_DN}`,
     type: 'user',
     badge: u.disabled
-      ? { text: translate('disabled'), variant: 'danger', tone: 'light' }
-      : { text: translate('active'), variant: 'success', tone: 'light' },
+      ? { text: translate('disabled'), variant: 'danger', tone: 'outline' }
+      : { text: translate('active'), variant: 'success', tone: 'outline' },
     children: userAttributes(u),
   }));
 
@@ -191,7 +191,7 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
     badge: {
       text: translate('service account'),
       variant: 'info',
-      tone: 'light',
+      tone: 'outline',
     },
     children: svcAcctAttributes(r),
   }));
@@ -204,7 +204,7 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
       badge: {
         text: translate('{n} entries', { n: tree.groups.length }),
         variant: 'secondary',
-        tone: 'solid',
+        tone: 'outline',
       },
       children: groupChildren,
     },
@@ -215,7 +215,7 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
       badge: {
         text: translate('{n} entries', { n: tree.users.length }),
         variant: 'secondary',
-        tone: 'solid',
+        tone: 'outline',
       },
       children: userChildren,
     },
@@ -228,7 +228,7 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
       badge: {
         text: translate('{n} entries', { n: tree.robot_accounts.length }),
         variant: 'secondary',
-        tone: 'solid',
+        tone: 'outline',
       },
       children: svcacctChildren,
     });
@@ -242,7 +242,7 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
       badge: {
         text: translate('offering: {name}', { name: tree.offering.name }),
         variant: 'secondary',
-        tone: 'solid',
+        tone: 'outline',
       },
       children: ous,
     },

@@ -97,7 +97,7 @@ export const TenantSubnetsList: FunctionComponent<{ resourceScope }> = ({
                   variant="secondary"
                   size="sm"
                   shape="pill"
-                  tone="light"
+                  tone="outline"
                   tooltip={translate(
                     'How instances on this subnet get their IPv6 address.',
                   )}

@@ -41,7 +41,7 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
             <Badge
               variant={hasProfile ? 'success' : 'secondary'}
               shape="circle"
-              tone="solid"
+              tone="outline"
               className="p-2"
             >
               {hasProfile ? '✓' : '1'}
@@ -54,7 +54,7 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
             <Badge
               variant={isPublished ? 'success' : 'secondary'}
               shape="circle"
-              tone="solid"
+              tone="outline"
               className="p-2"
             >
               {isPublished ? '✓' : '2'}

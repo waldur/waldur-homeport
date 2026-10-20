@@ -70,7 +70,7 @@ const PosixIdPoolsListView: FunctionComponent<PosixIdPoolsListViewProps> = ({
       {
         title: translate('Scope'),
         render: ({ row }: { row: PosixIdPool }) => (
-          <Badge variant="primary" tone="light">
+          <Badge variant="primary" tone="outline">
             {getScopeLabel(row.scope)}
           </Badge>
         ),

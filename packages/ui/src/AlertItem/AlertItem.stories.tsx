@@ -67,7 +67,7 @@ export const WithTitleAfter: Story = {
         variant="info"
         title="Acme Cloud Project"
         titleAfter={
-          <Badge variant="warning" size="sm" tone="light">
+          <Badge variant="warning" size="sm" tone="outline">
             Expires in 2 days
           </Badge>
         }
@@ -103,7 +103,7 @@ export const StackedList: Story = {
         variant="info"
         title="Acme Cloud Project"
         titleAfter={
-          <Badge variant="warning" size="sm" tone="light">
+          <Badge variant="warning" size="sm" tone="outline">
             Expires in 2 days
           </Badge>
         }

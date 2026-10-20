@@ -6,11 +6,11 @@ import {
 
 import { HelpIcon } from 'waldur-ui';
 
-import { BooleanBadge } from '@/core/BooleanBadge';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { ProjectLink } from '@/project/ProjectLink';
 import { createFetcher } from '@/table/api';
+import { BooleanField } from '@/table/BooleanField';
 import Table from '@/table/Table';
 import { TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -85,7 +85,7 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
           ),
           render: ({ row }) => (
             <div className="flex items-center gap-2">
-              <BooleanBadge value={row.has_fired} />
+              <BooleanField value={row.has_fired} />
               {row.has_fired && row.affected_resources_count > 0 && (
                 <span className="text-quaternary text-xs">
                   {translate('{count} resources', {

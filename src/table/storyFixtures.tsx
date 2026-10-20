@@ -103,7 +103,7 @@ export const TableStoryGridItem = ({ row }: { row: TableStoryRow }) => (
         <Field
           label="Status"
           value={
-            <Badge variant={STATUS_VARIANT[row.status]} tone="light">
+            <Badge variant={STATUS_VARIANT[row.status]} tone="outline">
               {row.status}
             </Badge>
           }
@@ -315,7 +315,7 @@ export const tableStoryColumns: Column<TableStoryRow>[] = [
     id: 'status',
     title: 'Status',
     render: ({ row }) => (
-      <Badge variant={STATUS_VARIANT[row.status]} tone="light">
+      <Badge variant={STATUS_VARIANT[row.status]} tone="outline">
         {row.status}
       </Badge>
     ),

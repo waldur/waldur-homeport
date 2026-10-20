@@ -99,7 +99,7 @@ const RelevanceCell = ({ row }: { row: ChangelogEntry }) => {
           variant={row.relevant ? 'success' : 'neutral'}
           label={row.relevant ? translate('Yes') : translate('No')}
           shape="pill"
-          tone="light"
+          tone="outline"
         />
       </span>
     </Tooltip>

@@ -88,7 +88,7 @@ export const SoftwarePackageExpandableRow: FC<OwnProps> = ({
         <Field label={translate('Categories')} labelWidth={140}>
           <div className="flex flex-wrap gap-1">
             {categories.map((cat) => (
-              <Badge key={cat} variant="info" tone="light">
+              <Badge key={cat} variant="info" tone="outline">
                 {cat}
               </Badge>
             ))}

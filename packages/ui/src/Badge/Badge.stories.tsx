@@ -33,8 +33,8 @@ const VARIANTS: BadgeVariant[] = [
   'rose',
 ];
 
-const TONES: BadgeTone[] = ['outline', 'light', 'solid'];
-const SHAPES: BadgeShape[] = ['rounded', 'pill', 'circle', 'roundless'];
+const TONES: BadgeTone[] = ['outline'];
+const SHAPES: BadgeShape[] = ['pill', 'circle', 'roundless'];
 
 const meta: Meta<typeof Badge> = {
   title: 'Data Display/Badge',
@@ -52,7 +52,7 @@ const meta: Meta<typeof Badge> = {
     children: 'Badge',
     variant: 'primary',
     tone: 'outline',
-    shape: 'rounded',
+    shape: 'pill',
     hasBullet: false,
     onlyIcon: false,
   },
@@ -62,7 +62,7 @@ const meta: Meta<typeof Badge> = {
     docs: {
       description: {
         component:
-          'Waldur design-system Badge supporting 15 variants and 3 tones (outline, light, solid), with pill, roundless, bullet, icon slots, tooltips, and backwards compatibility for legacy call patterns.',
+          'Waldur design-system Badge supporting 15 variants in the bordered outline tone, with pill, roundless, bullet, icon slots, tooltips, and backwards compatibility for legacy call patterns.',
       },
     },
   },
@@ -75,7 +75,7 @@ export const Playground: Story = {};
 
 /**
  * Full variant × tone matrix.
- * Supports all 15 core design-token color ramps across outline, light, and solid tones.
+ * Supports all 15 core design-token color ramps in the outline tone.
  */
 export const VariantToneMatrix: Story = {
   render: () => (
@@ -99,22 +99,16 @@ export const VariantToneMatrix: Story = {
 };
 
 /**
- * Shape variants: standard rounded (8px via design token), pill (full-rounded), and roundless (square).
+ * Shape variants: pill (default, full-rounded) and roundless (square).
  */
 export const Shapes: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4 p-6 items-center">
-      <Badge variant="primary" tone="outline">
-        Standard (8px)
-      </Badge>
       <Badge variant="primary" shape="pill" tone="outline">
         Pill Shape
       </Badge>
       <Badge variant="primary" shape="roundless" tone="outline">
         Roundless
-      </Badge>
-      <Badge variant="success" shape="pill" tone="solid">
-        Solid Pill
       </Badge>
       <Badge variant="neutral" shape="roundless" tone="outline">
         Neutral Square
@@ -145,13 +139,13 @@ export const Sizes: Story = {
       </div>
       <div className="flex items-center gap-3">
         <span className="text-xs font-mono text-quaternary w-24">Pill:</span>
-        <Badge variant="primary" size="sm" shape="pill" tone="light">
+        <Badge variant="primary" size="sm" shape="pill" tone="outline">
           Small (sm)
         </Badge>
-        <Badge variant="primary" shape="pill" tone="light">
+        <Badge variant="primary" shape="pill" tone="outline">
           Default
         </Badge>
-        <Badge variant="primary" size="lg" shape="pill" tone="light">
+        <Badge variant="primary" size="lg" shape="pill" tone="outline">
           Large (lg)
         </Badge>
       </div>
@@ -199,7 +193,7 @@ export const IconsAndSlots: Story = {
           leftIcon={<StarIcon size={14} weight="fill" />}
           rightIcon={<ArrowRightIcon size={14} weight="bold" />}
           shape="pill"
-          tone="light"
+          tone="outline"
         >
           Featured Offer
         </Badge>
@@ -243,21 +237,21 @@ export const OnlyIcon: Story = {
       <Badge
         variant="primary"
         leftIcon={<StarIcon size={14} weight="fill" />}
-        tone="solid"
+        tone="outline"
         onlyIcon
       />
       <Badge
         variant="success"
         leftIcon={<CheckIcon size={14} weight="bold" />}
         shape="pill"
-        tone="solid"
+        tone="outline"
         onlyIcon
       />
       <Badge
         variant="danger"
         leftIcon={<XIcon size={14} weight="bold" />}
         shape="pill"
-        tone="light"
+        tone="outline"
         onlyIcon
       />
       <Badge
@@ -271,7 +265,7 @@ export const OnlyIcon: Story = {
         size="sm"
         leftIcon={<InfoIcon size={12} weight="bold" />}
         shape="pill"
-        tone="solid"
+        tone="outline"
         onlyIcon
       />
       <Badge
@@ -279,7 +273,7 @@ export const OnlyIcon: Story = {
         size="lg"
         leftIcon={<StarIcon size={18} weight="fill" />}
         shape="pill"
-        tone="solid"
+        tone="outline"
         onlyIcon
       />
     </div>
@@ -311,12 +305,6 @@ export const Bullets: Story = {
         </Badge>
       </div>
       <div className="flex flex-wrap items-center gap-3">
-        <Badge variant="success" tone="light" hasBullet>
-          Light Tone Bullet
-        </Badge>
-        <Badge variant="success" tone="solid" hasBullet>
-          Solid Tone Bullet
-        </Badge>
         <Badge variant="info" size="sm" shape="pill" tone="outline" hasBullet>
           Small Bullet
         </Badge>
@@ -347,7 +335,7 @@ export const Tooltips: Story = {
         variant="danger"
         leftIcon={<WarningIcon size={14} weight="bold" />}
         shape="pill"
-        tone="light"
+        tone="outline"
         tooltip="Critical: Node memory usage exceeds 90%."
         tooltipProps={{ side: 'bottom' }}
       >
@@ -382,13 +370,13 @@ export const CountersAndOverflow: Story = {
           <Badge variant="neutral" shape="pill" tone="outline">
             0
           </Badge>
-          <Badge variant="primary" shape="pill" tone="solid">
+          <Badge variant="primary" shape="pill" tone="outline">
             3
           </Badge>
-          <Badge variant="danger" shape="pill" tone="solid">
+          <Badge variant="danger" shape="pill" tone="outline">
             99+
           </Badge>
-          <Badge variant="warning" size="sm" shape="pill" tone="solid">
+          <Badge variant="warning" size="sm" shape="pill" tone="outline">
             1.2k
           </Badge>
         </div>
@@ -412,7 +400,7 @@ export const CountersAndOverflow: Story = {
           <Badge
             variant="info"
             shape="pill"
-            tone="light"
+            tone="outline"
             className="truncate max-w-full"
           >
             Short label
@@ -497,7 +485,7 @@ export const Circle: Story = {
           <Badge variant="danger" size="sm" shape="circle">
             3
           </Badge>
-          <Badge variant="neutral" size="sm" shape="circle" tone="light">
+          <Badge variant="neutral" size="sm" shape="circle" tone="outline">
             4
           </Badge>
         </div>

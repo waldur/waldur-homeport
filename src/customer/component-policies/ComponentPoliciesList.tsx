@@ -6,10 +6,10 @@ import {
   MarketplaceProjectEstimatedCostPoliciesListData,
 } from 'waldur-js-client';
 
-import { BooleanBadge } from '@/core/BooleanBadge';
 import { translate } from '@/i18n';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
+import { BooleanField } from '@/table/BooleanField';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { useCustomer } from '@/workspace/hooks';
@@ -62,7 +62,7 @@ export const ComponentPoliciesList: FC = () => {
         },
         {
           title: translate('Has fired'),
-          render: ({ row }) => <BooleanBadge value={row.has_fired} />,
+          render: ({ row }) => <BooleanField value={row.has_fired} />,
         },
         {
           title: translate('Options'),

@@ -97,7 +97,7 @@ export const Step3PreviewAndImport: FC<Step3Props> = (props) => {
           <div>
             <WithTooltip label={row.customerName} />
             {row.customerMatched && (
-              <Badge variant="success" tone="light" className="ms-2">
+              <Badge variant="success" tone="outline" className="ms-2">
                 {translate('Matched')}
               </Badge>
             )}

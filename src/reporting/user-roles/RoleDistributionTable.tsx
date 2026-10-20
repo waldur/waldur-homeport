@@ -2,9 +2,9 @@ import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { CustomerMemberCount } from 'waldur-js-client';
 
-import { BooleanBadge } from '@/core/BooleanBadge';
 import { ChartCard } from '@/core/ChartCard';
 import { translate } from '@/i18n';
+import { BooleanField } from '@/table/BooleanField';
 import { SimpleTable } from '@/table/SimpleTable';
 import { Column } from '@/table/types';
 import { getSimpleExportData } from '@/table/utils';
@@ -35,7 +35,7 @@ const columns: Column<CustomerMemberCount>[] = [
   },
   {
     title: translate('Has resources'),
-    render: ({ row }) => <BooleanBadge value={row.has_resources} />,
+    render: ({ row }) => <BooleanField value={row.has_resources} />,
   },
 ];
 

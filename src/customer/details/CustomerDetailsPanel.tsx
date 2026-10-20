@@ -45,7 +45,7 @@ const TabBadge = ({ count }: { count: number; tabKey?: string }) => (
       variant="neutral"
       size="sm"
       shape="circle"
-      tone="light"
+      tone="outline"
       className="ms-2"
     >
       {count}

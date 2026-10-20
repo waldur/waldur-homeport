@@ -170,8 +170,6 @@ export const ResourceLimitChangeInfo = ({
                             <ChangesAmountBadge
                               changes={component.changedPrice}
                               asPrice
-                              badgePill
-                              badgeOutline
                               unit={null}
                               badgeSm
                               showSign

@@ -65,25 +65,25 @@ const EncryptionBadge: FC<{ track: LiveKitTrack }> = ({ track }) => {
   switch (getTrackEncryption(track)) {
     case 'gcm':
       return (
-        <Badge variant="success" tone="light">
+        <Badge variant="success" tone="outline">
           {translate('Encrypted')}
         </Badge>
       );
     case 'custom':
       return (
-        <Badge variant="info" tone="light">
+        <Badge variant="info" tone="outline">
           {translate('Encrypted (custom)')}
         </Badge>
       );
     case 'none':
       return (
-        <Badge variant="warning" tone="light">
+        <Badge variant="warning" tone="outline">
           {translate('Not encrypted')}
         </Badge>
       );
     default:
       return (
-        <Badge variant="neutral" tone="light">
+        <Badge variant="neutral" tone="outline">
           {translate('Encryption unknown')}
         </Badge>
       );
@@ -111,7 +111,7 @@ const ParticipantRow: FC<{ participant: LiveKitParticipant }> = ({
       <span className="font-medium">{participant.identity}</span>
       <Badge
         variant={participant.state === 'ACTIVE' ? 'success' : 'neutral'}
-        tone="light"
+        tone="outline"
       >
         {participant.state}
       </Badge>

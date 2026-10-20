@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { RancherCluster } from 'waldur-js-client';
 
-import { BooleanBadge } from '@/core/BooleanBadge';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
+import { BooleanField } from '@/table/BooleanField';
 import { renderFieldOrDash } from '@/table/utils';
 
 export const ClusterSummary: FC<{
@@ -54,7 +54,7 @@ export const ClusterSummary: FC<{
           label={translate('Longhorn')}
           labelCol={6}
           valueCol={6}
-          value={<BooleanBadge value={resourceScope?.install_longhorn} />}
+          value={<BooleanField value={resourceScope?.install_longhorn} />}
         />
       </Col>
     </Row>

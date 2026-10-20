@@ -25,8 +25,6 @@ export const ChangedLimitField: FunctionComponent<ChangedLimitFieldProps> = ({
   return (
     <ChangesAmountBadge
       changes={changedLimit}
-      badgePill
-      badgeOutline
       unit={unit ? ' ' + unit : ''}
       keepDecimals
       badgeSm

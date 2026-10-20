@@ -47,7 +47,7 @@ export const Default: Story = {
               <TableCell>OpenStack Cloud</TableCell>
               <TableCell className="font-mono text-xs">192.168.10.12</TableCell>
               <TableCell>
-                <Badge variant="success" shape="pill" tone="light" hasBullet>
+                <Badge variant="success" shape="pill" tone="outline" hasBullet>
                   Active
                 </Badge>
               </TableCell>
@@ -60,7 +60,7 @@ export const Default: Story = {
               <TableCell>PostgreSQL Cluster</TableCell>
               <TableCell className="font-mono text-xs">192.168.10.45</TableCell>
               <TableCell>
-                <Badge variant="neutral" shape="pill" tone="light" hasBullet>
+                <Badge variant="neutral" shape="pill" tone="outline" hasBullet>
                   Running
                 </Badge>
               </TableCell>
@@ -75,7 +75,7 @@ export const Default: Story = {
               <TableCell>Kubernetes Pod</TableCell>
               <TableCell className="font-mono text-xs">192.168.10.88</TableCell>
               <TableCell>
-                <Badge variant="warning" shape="pill" tone="light" hasBullet>
+                <Badge variant="warning" shape="pill" tone="outline" hasBullet>
                   Risk
                 </Badge>
               </TableCell>

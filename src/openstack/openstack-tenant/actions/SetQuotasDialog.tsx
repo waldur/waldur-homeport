@@ -345,8 +345,6 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
           <ChangesAmountBadge
             changes={difference}
             unit={row.unit ? ` ${row.unit}` : ''}
-            badgePill
-            badgeOutline
             keepDecimals
             badgeSm
             showSign

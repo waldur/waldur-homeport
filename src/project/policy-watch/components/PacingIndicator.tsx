@@ -157,7 +157,7 @@ export const PacingIndicator: FC<Props> = ({
           )
         }
         shape="pill"
-        tone="light"
+        tone="outline"
       >
         {pct0(fraction)}
       </Badge>

@@ -189,7 +189,7 @@ export const StorageReportVis: FC<Props> = ({
             },
           )}
           {report.isEmpty && (
-            <Badge variant="secondary" tone="solid" className="ms-2">
+            <Badge variant="secondary" tone="outline" className="ms-2">
               {translate('Empty')}
             </Badge>
           )}

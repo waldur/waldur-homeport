@@ -75,7 +75,7 @@ const ProviderStatusMenu = ({
     return (
       <Badge
         variant={variant === 'tertiary' ? 'neutral' : variant}
-        tone="light"
+        tone="outline"
       >
         {status}
       </Badge>

@@ -234,7 +234,7 @@ export const TreemapView: FC<Props> = ({ components }) => {
           <Badge
             variant="indigo"
             shape="roundless"
-            tone="light"
+            tone="outline"
             tooltip={translate('Top-level rectangles — one per offering')}
           >
             {translate('Offering')}
@@ -243,7 +243,7 @@ export const TreemapView: FC<Props> = ({ components }) => {
           <Badge
             variant="warning"
             shape="roundless"
-            tone="light"
+            tone="outline"
             tooltip={translate(
               'Inside each offering — usage-based vs limit-based components',
             )}
@@ -254,7 +254,7 @@ export const TreemapView: FC<Props> = ({ components }) => {
           <Badge
             variant="success"
             shape="roundless"
-            tone="light"
+            tone="outline"
             tooltip={translate('Leaf rectangles — one per OfferingComponent')}
           >
             {translate('Component')}

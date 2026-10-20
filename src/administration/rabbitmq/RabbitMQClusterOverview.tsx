@@ -135,7 +135,7 @@ const RabbitMQClusterOverviewContent: FC<
             </h6>
             <div className="flex flex-wrap gap-2">
               {data.listeners.map((listener, index) => (
-                <Badge key={index} variant="neutral" tone="light">
+                <Badge key={index} variant="neutral" tone="outline">
                   {listener.protocol}:{listener.port}
                 </Badge>
               ))}

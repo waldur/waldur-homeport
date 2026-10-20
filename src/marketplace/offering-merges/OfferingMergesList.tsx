@@ -56,7 +56,7 @@ const MergeSummary: FC<{ row: OfferingMerge }> = ({ row }) => {
               : translate('Verification failed')
           }
           variant={verification.passed ? 'success' : 'danger'}
-          tone="light"
+          tone="outline"
           shape="pill"
         />
       )}

@@ -3,12 +3,12 @@ import { FC, useMemo } from 'react';
 
 import { HelpIcon } from 'waldur-ui';
 
-import { BooleanBadge } from '@/core/BooleanBadge';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { policyPeriodOptions } from '@/customer/cost-policies/utils';
 import { translate } from '@/i18n';
 import { useOrganizationGroups } from '@/marketplace/common/utils';
+import { BooleanField } from '@/table/BooleanField';
 import Table from '@/table/Table';
 import { TableProps } from '@/table/types';
 
@@ -100,7 +100,7 @@ export const PoliciesTable: FC<TableProps> = ({ columns, ...props }) => {
               />
             </>
           ),
-          render: ({ row }) => <BooleanBadge value={row.has_fired} />,
+          render: ({ row }) => <BooleanField value={row.has_fired} />,
         },
       ]}
       title={translate('Policy')}

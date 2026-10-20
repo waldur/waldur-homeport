@@ -35,7 +35,7 @@ export const CeleryWorkerInfo = ({
     <AccordionCard
       title={workerName}
       actions={
-        <Badge variant="success" tone="light">
+        <Badge variant="success" tone="outline">
           {translate('Running')}
         </Badge>
       }

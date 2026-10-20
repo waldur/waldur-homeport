@@ -269,11 +269,11 @@ const ProjectGroupsTable: FC<{ provider: ServiceProvider }> = ({
         title: translate('Status'),
         render: ({ row }: { row: ServiceProviderProjectGroup }) =>
           row.in_use ? (
-            <Badge variant="success" tone="light">
+            <Badge variant="success" tone="outline">
               {translate('In use')}
             </Badge>
           ) : (
-            <Badge variant="neutral" tone="light">
+            <Badge variant="neutral" tone="outline">
               {translate('Not in use')}
             </Badge>
           ),

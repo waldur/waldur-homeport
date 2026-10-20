@@ -129,8 +129,6 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
                           changes={row.changedSubTotalPrc}
                           showSign
                           asBadge
-                          badgePill
-                          badgeOutline
                           badgeSm
                           reverseColor
                           fractionDigits={0}
