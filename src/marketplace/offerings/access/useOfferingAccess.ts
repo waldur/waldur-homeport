@@ -153,9 +153,11 @@ export const useOfferingAccess = (
             { positiveButton: translate('Log in') },
           );
           // Come back here after signing in, as usePublicCallApply does.
+          // `params` is ui-router's live params object, which entering login
+          // overwrites in place, so pass a snapshot of it.
           router.stateService.go('login', {
             toState: state?.name,
-            toParams: params,
+            toParams: { ...params },
           });
         } catch {
           // User cancelled

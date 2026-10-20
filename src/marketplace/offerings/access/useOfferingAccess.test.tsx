@@ -359,6 +359,17 @@ describe('useOfferingAccess', () => {
       expect(chooserCalls()).toHaveLength(0);
     });
 
+    // ui-router overwrites its live params object in place when login is
+    // entered, so handing that object over loses the offering uuid and makes
+    // toParams refer to itself.
+    it('passes a snapshot of the params, not the live object', async () => {
+      const params = vi.mocked(useCurrentStateAndParams)().params;
+      await click();
+      const [, loginParams] = vi.mocked(globalRouter.stateService.go).mock
+        .calls[0] as any[];
+      expect(loginParams.toParams).not.toBe(params);
+    });
+
     it('stays put when the login prompt is dismissed', async () => {
       vi.mocked(useModal().confirm).mockRejectedValue(undefined as any);
       await click();
