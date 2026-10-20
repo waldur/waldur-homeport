@@ -18,7 +18,8 @@ export const ProposalRoleBasedTabs = ({
   proposal: Proposal;
   /** user review */
   review: ProposalReview;
-  call: Pick<PublicCall, 'uuid' | 'customer_uuid' | 'manager_uuid'>;
+  /** Undefined until loaded; meanwhile staff see the Call manager tab disabled. */
+  call?: Pick<PublicCall, 'uuid' | 'customer_uuid' | 'manager_uuid'>;
 }) => {
   const router = useRouter();
   const user = useUser();
@@ -46,7 +47,7 @@ export const ProposalRoleBasedTabs = ({
     // The call-manager proposal view is customer-workspace-scoped and needs the
     // organization uuid. (proposal-review is review-scoped and needs no uuid.)
     if (state === 'call-management.proposal-details') {
-      Object.assign(params, { uuid: call.customer_uuid });
+      Object.assign(params, { uuid: call?.customer_uuid });
     }
 
     return params;
