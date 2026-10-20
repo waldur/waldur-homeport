@@ -1504,6 +1504,7 @@
       "feature_area": "accounts"
     }
   },
+  "Account and access": {},
   "Account deletion": {
     "context": {
       "feature_area": "support"
@@ -2853,6 +2854,11 @@
       "action_type": "read"
     }
   },
+  "Admin panel changes": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Admin state": {
     "context": {
       "primary_ui_type": "title",
@@ -4007,6 +4013,7 @@
       "feature_area": "invitations"
     }
   },
+  "Allowed network ranges being added, changed or removed for organizations and offerings.": {},
   "Allowed networks": {
     "context": {
       "feature_area": "personal-access-tokens"
@@ -6804,6 +6811,7 @@
       "primary_ui_type": "label"
     }
   },
+  "Assistant chats being accessed, flagged for personal data or prompt injection, and feedback.": {},
   "Assistant message was canceled": {
     "context": {
       "feature_area": "streaming"
@@ -9168,6 +9176,7 @@
       "feature_area": "access"
     }
   },
+  "Call documents being added or removed and reviewer workload.": {},
   "Call duplicated successfully.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -10582,6 +10591,11 @@
   "Clear end date": {
     "context": {
       "feature_area": "project"
+    }
+  },
+  "Clear filter": {
+    "context": {
+      "feature_area": "hooks"
     }
   },
   "Clear filters": {
@@ -12282,6 +12296,7 @@
       "feature_area": "tos"
     }
   },
+  "Consent to the terms of service being given or withdrawn.": {},
   "Consequences the merge does not prevent. Each one has to be acknowledged before the merge may be run.": {
     "context": {
       "feature_area": "offering-merges"
@@ -12799,6 +12814,12 @@
       }
     }
   },
+  "Cost and usage policies": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "Cost and usage policies being created, changed or deleted.": {},
   "Cost breakdown": {
     "context": {
       "primary_ui_type": "label",
@@ -22253,6 +22274,11 @@
       "feature_area": "chat"
     }
   },
+  "Filter events": {
+    "context": {
+      "feature_area": "hooks"
+    }
+  },
   "Filter for IAAS/SAAS classification. Optional — used to pre-filter billing export data.": {},
   "Filter for IaaS/SaaS classification (optional)": {
     "context": {
@@ -26967,10 +26993,11 @@
   },
   "Invoices": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "list"
     }
   },
+  "Invoices and invoice items being created, changed, paid or canceled.": {},
   "Invoices and usage summaries": {
     "context": {
       "feature_area": "offering-merges"
@@ -33739,6 +33766,11 @@
       "feature_area": "pubsub"
     }
   },
+  "No events match the filter.": {
+    "context": {
+      "feature_area": "hooks"
+    }
+  },
   "No expansion": {
     "context": {
       "primary_ui_type": "label",
@@ -35942,6 +35974,11 @@
       "feature_area": "event-subscriptions"
     }
   },
+  "Offering accounting": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Offering accounts": {
     "context": {
       "feature_area": "accounts"
@@ -35979,6 +36016,7 @@
     }
   },
   "Offering components": {},
+  "Offering components, plans and prices being changed.": {},
   "Offering cost chart": {
     "context": {
       "feature_area": "expandable"
@@ -36636,6 +36674,7 @@
       "feature_area": "organizations"
     }
   },
+  "Onboarding verifications being removed.": {},
   "Once affinity scores are computed, an assignment algorithm can be used to optimally assign reviewers to proposals while respecting constraints.": {
     "context": {
       "feature_area": "matching"
@@ -37088,6 +37127,7 @@
       "feature_area": "vm-type-overview"
     }
   },
+  "OpenStack RBAC policies being created or deleted.": {},
   "OpenStack configuration applied successfully.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -37129,6 +37169,12 @@
       "feature_area": "create"
     }
   },
+  "OpenStack floating IPs": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "OpenStack floating IPs being attached, detached or updated.": {},
   "OpenStack infrastructure": {
     "context": {
       "feature_area": "common"
@@ -37163,6 +37209,7 @@
       "feature_area": "reporting"
     }
   },
+  "OpenStack instances, volumes, load balancers and other tenant resources.": {},
   "OpenStack load balancer has been created.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -37175,6 +37222,17 @@
       "feature_area": "actions"
     }
   },
+  "OpenStack network sharing": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "OpenStack networks": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "OpenStack networks being created, updated, imported or deleted.": {},
   "OpenStack networks has been created.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -37197,6 +37255,12 @@
       "feature_area": "update-security-groups"
     }
   },
+  "OpenStack ports": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "OpenStack ports being created, updated or deleted, and their security settings.": {},
   "OpenStack replication has been initiated.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -37208,6 +37272,11 @@
       "primary_ui_type": "label"
     }
   },
+  "OpenStack resources": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "OpenStack resources provisioning": {},
   "OpenStack router has been created.": {
     "context": {
@@ -37215,16 +37284,34 @@
       "feature_area": "actions"
     }
   },
+  "OpenStack routers": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "OpenStack routers being updated and their interfaces.": {},
   "OpenStack security group events": {
     "context": {
       "primary_ui_type": "title"
     }
   },
+  "OpenStack security groups": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "OpenStack security groups and their rules being changed.": {},
   "OpenStack subnet": {
     "context": {
       "feature_area": "openstack-subnet"
     }
   },
+  "OpenStack subnets": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "OpenStack subnets being created, updated or deleted, and their host routes.": {},
   "OpenStack system flavor for load balancer node": {
     "context": {
       "feature_area": "create"
@@ -37764,6 +37851,7 @@
       "feature_area": "integration"
     }
   },
+  "Orders and resources being created, changed, paused or terminated, including backups and limit changes.": {},
   "Orders by state": {
     "context": {
       "feature_area": "orders"
@@ -37864,6 +37952,7 @@
       "primary_ui_type": "label"
     }
   },
+  "Organization and project credits being granted, reduced, adjusted or rolled back.": {},
   "Organization and project need to be selected.": {
     "context": {
       "feature_area": "steps"
@@ -38213,6 +38302,8 @@
     }
   },
   "Organizations above threshold": {},
+  "Organizations and projects": {},
+  "Organizations being created, updated or deleted, and changes to their credits and allowed offerings.": {},
   "Organizations holding it": {
     "context": {
       "feature_area": "hygiene"
@@ -38247,7 +38338,7 @@
   },
   "Other": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "service-desk"
     }
   },
@@ -42941,6 +43032,7 @@
       "feature_area": "role-mapping"
     }
   },
+  "Projects being created, updated or deleted, change requests and permission reviews.": {},
   "Projects by OECD classification": {
     "context": {
       "feature_area": "project-classification"
@@ -43081,6 +43173,7 @@
       "feature_area": "create-review"
     }
   },
+  "Proposal reviews being canceled.": {},
   "Proposal role": {
     "context": {
       "primary_ui_type": "title",
@@ -43136,6 +43229,7 @@
     }
   },
   "Proposals accepted": {},
+  "Proposals advancing through review, being canceled, and their documents.": {},
   "Proposals still without a decision will be rejected automatically": {
     "context": {
       "feature_area": "lifecycle"
@@ -44901,6 +44995,7 @@
       "feature_area": "chat"
     }
   },
+  "Records being created, changed or deleted in the admin panel.": {},
   "Recover": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -47783,6 +47878,11 @@
       "feature_area": "usage-by-customer"
     }
   },
+  "Resources and orders": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Resources are activated on {date}": {
     "context": {
       "variables": {
@@ -47901,6 +48001,7 @@
       "feature_area": "reporting"
     }
   },
+  "Resources of your offerings being requested, changed or terminated, for service providers.": {},
   "Resources paused status updated.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -49321,6 +49422,7 @@
       "feature_area": "affiliations"
     }
   },
+  "Roles being granted, changed or revoked, and role definitions.": {},
   "Roles cannot be granted on a private offering.": {
     "context": {
       "feature_area": "team"
@@ -49988,9 +50090,11 @@
   },
   "SSH keys": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "ssh-keys"
     }
   },
+  "SSH keys being added or removed.": {},
   "SSH public key": {
     "context": {
       "primary_ui_type": "label",
@@ -53731,6 +53835,12 @@
       "feature_area": "steps"
     }
   },
+  "Sign-ins and access tokens": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "Sign-ins, sign-outs, failed sign-in attempts, passkeys and personal access tokens.": {},
   "Signals that integrators should provision per-resource robot accounts instead of offering users. Does not block creating robot accounts on offerings that use offering users (for example LEXIS links). Unset means off.": {
     "context": {
       "feature_area": "integration"
@@ -55477,9 +55587,11 @@
   },
   "Support requests": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "list"
     }
   },
+  "Support requests and their attachments being created, updated or deleted.": {},
   "Support ticket created.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -56633,7 +56745,7 @@
   },
   "Terms of service": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "agreements"
     }
   },
@@ -67784,6 +67896,12 @@
     }
   },
   "User account lifecycle": {},
+  "User accounts": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "User accounts being created, updated, activated, deactivated or deleted, and offering user accounts.": {},
   "User actions": {
     "context": {
       "feature_area": "administration"

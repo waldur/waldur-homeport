@@ -2,9 +2,12 @@ import { eventsEventGroupsRetrieve } from 'waldur-js-client';
 
 import { titleCase } from '@/core/utils';
 
+import { EVENT_GROUP_LABELS, EVENT_GROUP_SECTIONS } from './eventGroupLabels';
 import { EventGroupOption } from './types';
 
-export const formatEventTitle = (choice) => {
+// Used only for a group the label map does not know yet, so an older or
+// newer backend still renders something readable.
+const formatDerivedEventTitle = (choice) => {
   const map = {
     ssh: 'SSH',
     jira: 'JIRA',
@@ -22,18 +25,31 @@ export const formatEventTitle = (choice) => {
   return choice + ' events';
 };
 
+export const formatEventTitle = (choice) =>
+  EVENT_GROUP_LABELS[choice]?.title() ?? formatDerivedEventTitle(choice);
+
+const SECTION_ORDER = Object.keys(EVENT_GROUP_SECTIONS);
+
 export const loadEventGroupsOptions: () => Promise<
   EventGroupOption[]
 > = async () => {
   const groups = await eventsEventGroupsRetrieve().then(
     (response) => response.data,
   );
-  const options = Object.keys(groups)
-    .map((key) => ({
-      key,
-      title: formatEventTitle(key),
-      help_text: groups[key].join(', '),
-    }))
-    .sort((a, b) => a.title.localeCompare(b.title));
-  return options;
+  return Object.keys(groups)
+    .map((key) => {
+      const label = EVENT_GROUP_LABELS[key];
+      return {
+        key,
+        title: formatEventTitle(key),
+        description: label?.description(),
+        section: label?.section,
+      };
+    })
+    .sort((a, b) => {
+      // Unknown groups sort after every known section.
+      const sa = a.section ? SECTION_ORDER.indexOf(a.section) : Infinity;
+      const sb = b.section ? SECTION_ORDER.indexOf(b.section) : Infinity;
+      return sa - sb || a.title.localeCompare(b.title);
+    });
 };

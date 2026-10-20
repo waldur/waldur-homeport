@@ -15,6 +15,7 @@ import { required } from '@/core/validators';
 import { SubmitButton, StringGroup, BooleanGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -27,8 +28,9 @@ const useHookForm = (hook, refetch) => {
   const saveHookMutation = useManagedMutation<any, any, HookFormData>({
     mutationFn: async (formData) => {
       const hookType = hook ? hook.hook_type : formData.hook_type;
-      const event_groups = Object.keys(
-        formData.event_groups,
+      // An unticked box stays in the form as `false`; only ticked ones are sent.
+      const event_groups = Object.keys(formData.event_groups).filter(
+        (group) => formData.event_groups[group],
       ) as EventGroupsEnum[];
       if (hook) {
         if (hookType == 'email') {
@@ -129,13 +131,16 @@ export const HookDetailsDialog: FunctionComponent<{
                 : translate('Create notification')
             }
             footer={
-              <SubmitButton
-                variant="primary"
-                submitting={submitting}
-                invalid={invalid}
-              >
-                {hook ? translate('Update') : translate('Create')}
-              </SubmitButton>
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  variant="primary"
+                  submitting={submitting}
+                  invalid={invalid}
+                >
+                  {hook ? translate('Update') : translate('Create')}
+                </SubmitButton>
+              </>
             }
           >
             {loading ? (
@@ -145,16 +150,23 @@ export const HookDetailsDialog: FunctionComponent<{
             ) : (
               <>
                 {!hook ? (
-                  <Field
-                    name="hook_type"
-                    validate={required}
-                    render={({ input }) => <HookTypeField input={input} />}
-                  />
+                  <FormGroup label={translate('Notification method')}>
+                    <Field
+                      name="hook_type"
+                      validate={required}
+                      render={({ input }) => <HookTypeField input={input} />}
+                    />
+                  </FormGroup>
                 ) : (
                   <>
-                    <FormGroup label={translate('Notification method')}>
-                      {titleCase(values.hook_type)}
-                    </FormGroup>
+                    <p className="mb-5 flex gap-1 text-sm">
+                      <span className="font-medium text-secondary">
+                        {translate('Notification method')}:
+                      </span>
+                      <span className="text-quaternary">
+                        {titleCase(values.hook_type)}
+                      </span>
+                    </p>
                     <BooleanGroup
                       name="is_active"
                       label={translate('Enabled')}
@@ -167,6 +179,7 @@ export const HookDetailsDialog: FunctionComponent<{
                     type="email"
                     validate={required}
                     data-testid="email-address"
+                    space={2}
                     label={translate('Email address')}
                     required
                   />
@@ -176,6 +189,7 @@ export const HookDetailsDialog: FunctionComponent<{
                     type="url"
                     validate={required}
                     data-testid="destination-url"
+                    space={2}
                     label={translate('Destination URL')}
                     required
                   />
