@@ -16,6 +16,13 @@ export const ResourceTemplateExpandableRow: FC<OwnProps> = ({ row }) => (
       value={(row.attributes as any).end_date}
     />
 
+    <Field label={translate('QoS')} value={(row.attributes as any).qos} />
+
+    <Field
+      label={translate('Partition')}
+      value={(row.attributes as any).partition}
+    />
+
     <Field label={translate('Description')} value={row.description} />
 
     <Field

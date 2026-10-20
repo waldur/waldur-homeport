@@ -9,6 +9,8 @@ import { BooleanField } from '@/table/BooleanField';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { SlurmPlacementFields } from './SlurmPlacementFields';
+
 const UserInputs = ({ callOffering, optionsValues }) => (
   <section>
     <table className="table-details w-full">
@@ -81,6 +83,7 @@ export const ResourceRequestExpandableRow = ({
             valueCol={7}
           />
         </Col>
+        <SlurmPlacementFields attributes={row.attributes} />
       </Row>
       <TabbedPlanComponents
         offering={row.requested_offering as any}
