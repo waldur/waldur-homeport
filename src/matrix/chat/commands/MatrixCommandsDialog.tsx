@@ -44,7 +44,7 @@ const CommandRow: FC<{
           <span className="tc-commands-row__args"> {command.args}</span>
         )}
         {command.source === 'client' && (
-          <Badge variant="secondary" shape="pill" tone="light">
+          <Badge variant="secondary" shape="pill" tone="outline">
             {translate('Waldur only')}
           </Badge>
         )}

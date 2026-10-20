@@ -178,7 +178,7 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
                           ? 'warning'
                           : 'neutral'
                     }
-                    tone="light"
+                    tone="outline"
                   >
                     {state.title}
                   </Badge>

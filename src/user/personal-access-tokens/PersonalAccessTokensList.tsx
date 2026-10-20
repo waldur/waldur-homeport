@@ -24,20 +24,20 @@ const TokenStatus: FunctionComponent<{ row: PersonalAccessToken }> = ({
 }) => {
   if (!row.is_active) {
     return (
-      <Badge variant="danger" tone="light">
+      <Badge variant="danger" tone="outline">
         {translate('Revoked')}
       </Badge>
     );
   }
   if (new Date(row.expires_at) < new Date()) {
     return (
-      <Badge variant="warning" tone="light">
+      <Badge variant="warning" tone="outline">
         {translate('Expired')}
       </Badge>
     );
   }
   return (
-    <Badge variant="success" tone="light">
+    <Badge variant="success" tone="outline">
       {translate('Active')}
     </Badge>
   );

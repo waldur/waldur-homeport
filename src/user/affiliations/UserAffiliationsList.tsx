@@ -1,8 +1,5 @@
-import { CheckCircleIcon, MinusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { userPermissionsList, UserPermissionsListData } from 'waldur-js-client';
-
-import { Tooltip } from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
@@ -10,6 +7,7 @@ import { translate } from '@/i18n';
 import { RoleEnum } from '@/permissions/enums';
 import { formatRoleType } from '@/permissions/utils';
 import { createFetcher } from '@/table/api';
+import { BooleanField } from '@/table/BooleanField';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
@@ -204,24 +202,7 @@ export const UserAffiliationsList: FunctionComponent<
       ? [
           {
             title: translate('Active'),
-            render: ({ row }) =>
-              row.is_active ? (
-                <Tooltip label={translate('Active')}>
-                  <CheckCircleIcon
-                    size={20}
-                    weight="fill"
-                    className="text-success"
-                  />
-                </Tooltip>
-              ) : (
-                <Tooltip label={translate('Revoked')}>
-                  <MinusCircleIcon
-                    size={20}
-                    weight="bold"
-                    className="text-quaternary"
-                  />
-                </Tooltip>
-              ),
+            render: ({ row }) => <BooleanField value={row.is_active} />,
             filter: 'show_inactive',
           },
         ]

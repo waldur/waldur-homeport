@@ -33,7 +33,7 @@ const RestrictionsDisplay: FC<{
       <strong>{title}:</strong>
       <div className="flex flex-wrap gap-2 mt-2">
         {values.map((value) => (
-          <Badge key={value} variant="neutral" tone="light">
+          <Badge key={value} variant="neutral" tone="outline">
             {value}
           </Badge>
         ))}

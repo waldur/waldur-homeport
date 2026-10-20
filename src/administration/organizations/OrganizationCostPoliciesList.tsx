@@ -6,7 +6,6 @@ import {
 
 import { HelpIcon } from 'waldur-ui';
 
-import { BooleanBadge } from '@/core/BooleanBadge';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { CostPolicyActions } from '@/customer/cost-policies/CostPolicyActions';
 import { CostPolicyCreateButton } from '@/customer/cost-policies/CostPolicyCreateButton';
@@ -14,6 +13,7 @@ import { getCostPolicyActionOptions } from '@/customer/cost-policies/utils';
 import { OrganizationNameLink } from '@/customer/list/OrganizationNameLink';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
+import { BooleanField } from '@/table/BooleanField';
 import {
   MarketplaceCustomerEstimatedCostPoliciesFilter,
   selectMarketplaceCustomerEstimatedCostPoliciesFilter,
@@ -87,7 +87,7 @@ export const OrganizationCostPoliciesList: FC<Partial<TableWithPortal>> = ({
               />
             </>
           ),
-          render: ({ row }) => <BooleanBadge value={row.has_fired} />,
+          render: ({ row }) => <BooleanField value={row.has_fired} />,
         },
         {
           title: translate('Credit'),

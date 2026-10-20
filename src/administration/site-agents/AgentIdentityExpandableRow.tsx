@@ -50,7 +50,7 @@ const EventDeliverySection: FC<{ agentUuid: string }> = ({ agentUuid }) => {
                   : 'warning'
             }
             shape="pill"
-            tone={hasConsumerQueue ? 'solid' : 'outline'}
+            tone="outline"
           >
             {hasConsumerQueue
               ? translate('Unified consumer')

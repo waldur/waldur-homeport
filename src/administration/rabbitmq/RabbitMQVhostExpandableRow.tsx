@@ -92,7 +92,7 @@ export const RabbitMQVhostExpandableRow: FC<
                 label={queueType}
                 variant={variant}
                 shape="pill"
-                tone={queueType === 'classic' ? 'outline' : 'solid'}
+                tone="outline"
               />
             );
           },

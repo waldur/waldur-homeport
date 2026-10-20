@@ -49,7 +49,7 @@ const columns: DataTableColumn<ProjectRow>[] = [
     key: 'status',
     header: 'Status',
     render: (row) => (
-      <Badge variant={row.statusTone} shape="pill" tone="light" hasBullet>
+      <Badge variant={row.statusTone} shape="pill" tone="outline" hasBullet>
         {row.status}
       </Badge>
     ),

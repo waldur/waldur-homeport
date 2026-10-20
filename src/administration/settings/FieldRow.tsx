@@ -43,7 +43,7 @@ const MultilingualImageField = ({
   <div className="flex flex-wrap gap-2">
     {value && typeof value === 'object' && Object.keys(value).length > 0 ? (
       Object.entries(value).map(([lang]) => (
-        <Badge key={lang} variant="primary" tone="light">
+        <Badge key={lang} variant="primary" tone="outline">
           {lang.toUpperCase()}
         </Badge>
       ))
@@ -76,7 +76,7 @@ const LoginPageListField = ({
     return (
       <div className="flex flex-wrap gap-2">
         {value.map((stat, i) => (
-          <Badge key={i} variant="primary" tone="light">
+          <Badge key={i} variant="primary" tone="outline">
             {stat.value} {stat.label}
           </Badge>
         ))}
@@ -196,7 +196,7 @@ export const FieldRow = ({
               const label =
                 item.options.find((option) => option.value === v)?.label || v;
               return (
-                <Badge key={v} variant="primary" tone="light">
+                <Badge key={v} variant="primary" tone="outline">
                   {label}
                 </Badge>
               );

@@ -269,7 +269,7 @@ const RoleNameField = ({
       description={
         changed ? (
           <span className="flex items-center gap-2">
-            <Badge variant="warning" shape="pill" tone="light">
+            <Badge variant="warning" shape="pill" tone="outline">
               {translate('New name')}
             </Badge>
             {current
@@ -277,7 +277,7 @@ const RoleNameField = ({
               : translate('Current: no name')}
           </span>
         ) : (
-          <Badge variant="neutral" shape="pill" tone="light">
+          <Badge variant="neutral" shape="pill" tone="outline">
             {translate('Unchanged')}
           </Badge>
         )

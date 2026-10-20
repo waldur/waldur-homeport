@@ -114,7 +114,7 @@ const TabBadge = ({ stats }: { stats: TabStats; tabKey?: string }) => {
           variant="danger"
           size="sm"
           shape="circle"
-          tone="solid"
+          tone="outline"
           className="ms-2"
         >
           {stats.missingMandatory}
@@ -127,7 +127,7 @@ const TabBadge = ({ stats }: { stats: TabStats; tabKey?: string }) => {
       variant="neutral"
       size="sm"
       shape="circle"
-      tone="light"
+      tone="outline"
       className="ms-2"
       data-testid="tab-badge-total"
     >
@@ -543,7 +543,7 @@ const buildGeographicFields = ({
               Array.isArray(value) && value.length > 0 ? (
                 <span className="flex flex-wrap gap-2">
                   {(value as string[]).map((code) => (
-                    <Badge key={code} variant="neutral" tone="light">
+                    <Badge key={code} variant="neutral" tone="outline">
                       <CountryFlag countryCode={code} fontSize={14} /> {code}
                     </Badge>
                   ))}
@@ -823,7 +823,7 @@ const buildSystemFields = ({
                 ? user.eduperson_assurance
                 : []
               ).map((uri) => (
-                <Badge key={uri} variant="info" tone="light">
+                <Badge key={uri} variant="info" tone="outline">
                   {formatAssuranceUri(uri)}
                 </Badge>
               ))}

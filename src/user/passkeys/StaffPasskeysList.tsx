@@ -40,11 +40,11 @@ export const StaffPasskeysList: FunctionComponent<{ user? }> = ({ user }) => {
       title: translate('Status'),
       render: ({ row }) =>
         row.is_active ? (
-          <Badge variant="success" tone="light">
+          <Badge variant="success" tone="outline">
             {translate('Active')}
           </Badge>
         ) : (
-          <Badge variant="danger" tone="light">
+          <Badge variant="danger" tone="outline">
             {translate('Revoked')}
           </Badge>
         ),

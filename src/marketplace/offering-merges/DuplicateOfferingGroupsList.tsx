@@ -169,7 +169,7 @@ const IssueCount: FC<{
         </ul>
       }
     >
-      <Badge variant={variant} shape="pill" tone="light">
+      <Badge variant={variant} shape="pill" tone="outline">
         {issues.length}
       </Badge>
     </Tooltip>

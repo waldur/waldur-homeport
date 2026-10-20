@@ -71,7 +71,7 @@ export const GrowthPage: FC = () => {
           size="sm"
           leftIcon={grew ? <TrendUpIcon weight="bold" /> : undefined}
           shape="pill"
-          tone={grew ? 'light' : 'outline'}
+          tone="outline"
         >
           {`+${count}`}
         </Badge>

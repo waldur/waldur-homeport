@@ -4,13 +4,13 @@ import { Answer, QuestionAdmin } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
 
-import { BooleanBadge } from '@/core/BooleanBadge';
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { formatFilesize } from '@/core/utils';
 import { downloadFile } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { BooleanField } from '@/table/BooleanField';
 import { renderFieldOrDash } from '@/table/utils';
 
 interface ParsedAnswerProps {
@@ -137,7 +137,7 @@ export const ParsedAnswer: FC<ParsedAnswerProps> = ({ question, answer }) => {
     Array.isArray(answerValue) ? (
       renderFieldOrDash(answerValue.join(', '))
     ) : answerValue === true || answerValue === false ? (
-      <BooleanBadge value={answerValue} />
+      <BooleanField value={answerValue} />
     ) : (
       answerValue
     )

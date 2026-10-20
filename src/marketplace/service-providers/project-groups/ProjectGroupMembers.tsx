@@ -13,7 +13,7 @@ export const ProjectGroupMembers: FC<{ members?: string[] }> = ({
     {members?.length ? (
       <div className="flex flex-wrap gap-2">
         {members.map((username) => (
-          <Badge key={username} variant="neutral" tone="light">
+          <Badge key={username} variant="neutral" tone="outline">
             {username}
           </Badge>
         ))}

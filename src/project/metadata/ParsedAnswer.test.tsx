@@ -139,7 +139,7 @@ describe('ParsedAnswer', () => {
   });
 
   describe('boolean answers', () => {
-    it('renders BooleanBadge for true value', () => {
+    it('renders BooleanField for true value', () => {
       const question = {
         uuid: 'q1',
         question_type: 'boolean',
@@ -154,11 +154,11 @@ describe('ParsedAnswer', () => {
         <ParsedAnswer question={question as any} answer={answer as any} />,
       );
 
-      // BooleanBadge renders "Yes" or similar for true
+      // BooleanField renders "Yes" or similar for true
       expect(screen.getByText('Yes')).toBeInTheDocument();
     });
 
-    it('renders BooleanBadge for false value', () => {
+    it('renders BooleanField for false value', () => {
       const question = {
         uuid: 'q1',
         question_type: 'boolean',
@@ -173,7 +173,7 @@ describe('ParsedAnswer', () => {
         <ParsedAnswer question={question as any} answer={answer as any} />,
       );
 
-      // BooleanBadge renders "No" or similar for false
+      // BooleanField renders "No" or similar for false
       expect(screen.getByText('No')).toBeInTheDocument();
     });
   });

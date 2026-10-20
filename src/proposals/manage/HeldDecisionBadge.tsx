@@ -51,7 +51,7 @@ export const HeldDecisionBadge: FC<{ proposalUuid: string }> = ({
     <Badge
       variant={heldDecisionVariant(outcome)}
       shape="pill"
-      tone="light"
+      tone="outline"
       data-testid="held-decision-badge"
     >
       {heldDecisionLabel(outcome)}

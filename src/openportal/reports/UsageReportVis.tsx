@@ -233,7 +233,7 @@ export const UsageReportVis: FC<Props> = ({
             },
           )}
           {!report.isComplete && (
-            <Badge variant="warning" tone="solid" className="ms-2">
+            <Badge variant="warning" tone="outline" className="ms-2">
               {translate('In progress')}
             </Badge>
           )}

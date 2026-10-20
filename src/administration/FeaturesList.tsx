@@ -315,7 +315,7 @@ export const FeaturesList = () => {
                               <Badge
                                 variant="secondary"
                                 size="sm"
-                                tone="light"
+                                tone="outline"
                                 className="ms-2"
                               >
                                 {filteredCount}

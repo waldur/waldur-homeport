@@ -16,8 +16,6 @@ interface ChangesAmountBadgeProps {
   keepDecimals?: boolean;
   asBadge?: boolean;
   asPrice?: boolean;
-  badgeOutline?: boolean;
-  badgePill?: boolean;
   badgeSm?: boolean;
   reverseColor?: boolean;
   unit?: string;
@@ -32,8 +30,6 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
   keepDecimals,
   asBadge = true,
   asPrice,
-  badgeOutline,
-  badgePill,
   badgeSm,
   reverseColor,
   unit = '%',
@@ -77,8 +73,7 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
           <Badge
             variant={colorVariant}
             size={badgeSm ? 'sm' : undefined}
-            shape={badgePill ? 'pill' : undefined}
-            tone={badgeOutline ? 'outline' : 'light'}
+            tone="outline"
             onlyIcon
           >
             {arrowIcon}
@@ -106,8 +101,7 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
           variant={colorVariant}
           size={badgeSm ? 'sm' : undefined}
           leftIcon={arrowIcon}
-          shape={badgePill ? 'pill' : undefined}
-          tone={badgeOutline ? 'outline' : 'light'}
+          tone="outline"
         >
           {content}
         </Badge>
@@ -128,8 +122,7 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
         <Badge
           variant="neutral"
           size={badgeSm ? 'sm' : undefined}
-          shape={badgePill ? 'pill' : undefined}
-          tone={badgeOutline ? 'outline' : 'light'}
+          tone="outline"
         >
           0{unit}
         </Badge>

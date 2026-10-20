@@ -136,7 +136,7 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
               <div className="mb-3">
                 <h5 className="mb-1 font-medium">{project.name}</h5>
                 <div>
-                  <Badge variant="primary" tone="light">
+                  <Badge variant="primary" tone="outline">
                     {projectId}
                   </Badge>
                 </div>

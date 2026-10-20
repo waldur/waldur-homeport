@@ -1,5 +1,8 @@
-import { CheckIcon, XIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
+
+import { Badge } from 'waldur-ui';
+
+import { translate } from '@/i18n';
 
 interface BooleanFieldProps {
   value: boolean;
@@ -7,8 +10,13 @@ interface BooleanFieldProps {
 
 export const BooleanField: FunctionComponent<BooleanFieldProps> = ({
   value,
-}) => (
-  <span className="svg-icon svg-icon-5">
-    {value ? <CheckIcon weight="bold" /> : <XIcon weight="bold" />}
-  </span>
-);
+}) =>
+  value ? (
+    <Badge variant="success" shape="pill" tone="outline">
+      {translate('Yes')}
+    </Badge>
+  ) : (
+    <Badge variant="neutral" shape="pill" tone="outline">
+      {translate('No')}
+    </Badge>
+  );

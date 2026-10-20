@@ -206,11 +206,11 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
             }
             value={
               options.project_groups_enabled ? (
-                <Badge variant="success" tone="light">
+                <Badge variant="success" tone="outline">
                   {translate('Enabled')}
                 </Badge>
               ) : (
-                <Badge variant="neutral" tone="light">
+                <Badge variant="neutral" tone="outline">
                   {translate('Disabled')}
                 </Badge>
               )

@@ -12,7 +12,7 @@ const KIND_BADGES: Record<
 > = {
   consumer: {
     variant: 'primary',
-    tone: 'solid',
+    tone: 'outline',
     label: translate('Consumer'),
     tip: translate('Unified pub/sub queue: receives every enabled event type'),
   },

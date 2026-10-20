@@ -18,7 +18,7 @@ import { PasskeyRegisterButton } from './PasskeyRegisterButton';
 const PasskeyStatus: FunctionComponent<{ row }> = ({ row }) => {
   if (!row.is_active) {
     return (
-      <Badge variant="danger" tone="light">
+      <Badge variant="danger" tone="outline">
         {translate('Revoked')}
       </Badge>
     );
@@ -29,13 +29,13 @@ const PasskeyStatus: FunctionComponent<{ row }> = ({ row }) => {
   // "stopped working".
   if (row.is_orphaned) {
     return (
-      <Badge variant="warning" tone="light">
+      <Badge variant="warning" tone="outline">
         {translate('Unusable')}
       </Badge>
     );
   }
   return (
-    <Badge variant="success" tone="light">
+    <Badge variant="success" tone="outline">
       {translate('Active')}
     </Badge>
   );

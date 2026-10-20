@@ -18,7 +18,7 @@ export const RoundLifecycleBadge: FC<{
       <StateIndicator
         label={lifecycle.label}
         variant={lifecycle.color}
-        tone="light"
+        tone="outline"
         shape="pill"
         data-testid="round-lifecycle-badge"
       />

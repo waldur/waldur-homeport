@@ -21,12 +21,15 @@ export type BadgeVariant =
   | 'orange'
   | 'rose';
 
-export type BadgeTone = 'solid' | 'light' | 'outline';
-export type BadgeShape = 'rounded' | 'pill' | 'circle' | 'roundless';
+// Badges are always the bordered outline style.
+export type BadgeTone = 'outline';
+export type BadgeShape = 'pill' | 'circle' | 'roundless';
 
 /**
  * Maps 15 Variants × 3 Tones directly to Tailwind classes.
  * Dark mode handles exact overrides (e.g. `dark:bg-brand-950`).
+ * Badge renders only `outline`; `solid` and `light` remain for ModePicker
+ * and the Progress colour parity.
  *
  * Note: `solid` and `light` tones use `border-transparent` because
  * the `border-[1px]` is structural. Visually, a transparent border
@@ -40,7 +43,10 @@ export type BadgeShape = 'rounded' | 'pill' | 'circle' | 'roundless';
  *   them equal), and their text is the Progress label for the same fill:
  *   dark on the lighter fills, where white read 2.3-3.7:1.
  */
-export const BADGE_STYLES: Record<BadgeVariant, Record<BadgeTone, string>> = {
+export const BADGE_STYLES: Record<
+  BadgeVariant,
+  Record<'solid' | 'light' | 'outline', string>
+> = {
   primary: {
     solid: 'border-transparent bg-[var(--bg-brand-solid)] text-white',
     light: 'border-transparent bg-brand-50 text-brand dark:bg-brand-950',
@@ -170,7 +176,6 @@ const badgeVariants = cva(
         lg: 'text-sm',
       },
       shape: {
-        rounded: 'rounded-lg',
         pill: 'rounded-full',
         circle: 'rounded-full aspect-square justify-center size-6 min-w-6 p-0',
         roundless: 'rounded-none',
@@ -181,7 +186,7 @@ const badgeVariants = cva(
       },
     },
     defaultVariants: {
-      shape: 'rounded',
+      shape: 'pill',
       onlyIcon: false,
     },
     compoundVariants: [
@@ -238,8 +243,8 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
     {
       className,
       variant = 'primary',
-      tone = 'solid',
-      shape = 'rounded',
+      tone = 'outline',
+      shape = 'pill',
       size,
       leftIcon,
       rightIcon,

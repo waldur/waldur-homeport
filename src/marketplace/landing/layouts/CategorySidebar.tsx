@@ -83,7 +83,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
           {item.title}
         </span>
         {'offering_count' in item && item.offering_count !== undefined && (
-          <Badge variant="secondary" shape="pill" tone="solid">
+          <Badge variant="secondary" shape="pill" tone="outline">
             {item.offering_count}
           </Badge>
         )}
@@ -139,7 +139,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
                     </div>
                     <span className="grow">{cat.title}</span>
                     {cat.offering_count !== undefined && (
-                      <Badge variant="secondary" shape="pill" tone="solid">
+                      <Badge variant="secondary" shape="pill" tone="outline">
                         {cat.offering_count}
                       </Badge>
                     )}

@@ -75,7 +75,7 @@ export const CommandPopup: FC<CommandPopupProps> = ({
             <Badge
               variant="secondary"
               shape="pill"
-              tone="light"
+              tone="outline"
               className="tc-command-item__source"
             >
               {translate('Waldur only')}

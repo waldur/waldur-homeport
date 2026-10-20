@@ -125,21 +125,21 @@ export const CeleryTaskTable = ({
             showDuration ? (
               row.time_start ? (
                 <Tooltip label={formatDateTime(row.time_start * 1000)}>
-                  <Badge variant="primary" tone="light">
+                  <Badge variant="primary" tone="outline">
                     {formatDuration(row.time_start)}
                   </Badge>
                 </Tooltip>
               ) : (
-                <Badge variant="secondary" tone="light">
+                <Badge variant="secondary" tone="outline">
                   {translate('Pending')}
                 </Badge>
               )
             ) : row.acknowledged ? (
-              <Badge variant="success" tone="light">
+              <Badge variant="success" tone="outline">
                 {translate('Acknowledged')}
               </Badge>
             ) : (
-              <Badge variant="warning" tone="light">
+              <Badge variant="warning" tone="outline">
                 {translate('Pending')}
               </Badge>
             ),
@@ -153,7 +153,7 @@ export const CeleryTaskTable = ({
                   ? 'info'
                   : 'secondary'
               }
-              tone="light"
+              tone="outline"
             >
               {(row.delivery_info?.priority as number) ?? 0}
             </Badge>

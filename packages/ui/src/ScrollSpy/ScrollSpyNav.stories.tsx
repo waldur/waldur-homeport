@@ -380,7 +380,7 @@ export const WithStatusIndicators: Story = {
               />
               <span>General info</span>
             </span>
-            <Badge variant="success" size="sm" tone="light">
+            <Badge variant="success" size="sm" tone="outline">
               Completed
             </Badge>
           </div>
@@ -397,7 +397,7 @@ export const WithStatusIndicators: Story = {
               />
               <span>Quotas & limits</span>
             </span>
-            <Badge variant="warning" size="sm" tone="light">
+            <Badge variant="warning" size="sm" tone="outline">
               2 errors
             </Badge>
           </div>
@@ -408,7 +408,7 @@ export const WithStatusIndicators: Story = {
         title: (
           <div className="flex items-center justify-between gap-2">
             <span>Security settings</span>
-            <Badge variant="primary" size="sm" tone="solid">
+            <Badge variant="primary" size="sm" tone="outline">
               Required
             </Badge>
           </div>

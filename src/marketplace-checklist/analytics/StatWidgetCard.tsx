@@ -24,8 +24,6 @@ export const StatWidgetCard: FC<StatWidgetCardProps> = ({
             changes={changes}
             showOnInfinity
             fractionDigits={0}
-            badgeOutline
-            badgePill
           />
         </Stack>
       </Card.Body>

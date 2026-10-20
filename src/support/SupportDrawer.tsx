@@ -76,7 +76,7 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
                   <ChatsCircleIcon size={16} weight="bold" />
                   {translate('Team chat')}
                   {matrixUnread > 0 && (
-                    <Badge variant="primary" shape="pill" tone="light">
+                    <Badge variant="primary" shape="pill" tone="outline">
                       {matrixUnread > 99 ? '99+' : matrixUnread}
                     </Badge>
                   )}

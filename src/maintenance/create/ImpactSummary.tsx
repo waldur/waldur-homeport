@@ -197,7 +197,7 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
             <Badge
               key={item.level}
               variant="info"
-              tone="light"
+              tone="outline"
               title={item.label}
             >
               {item.label}: {item.count}

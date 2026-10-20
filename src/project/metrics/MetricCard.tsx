@@ -336,8 +336,6 @@ export const MetricCard: FC<{
                   changes={change}
                   showOnZero
                   asBadge
-                  badgeOutline
-                  badgePill
                   fractionDigits={0}
                   reverseColor={metric.good_direction === 'down'}
                 />

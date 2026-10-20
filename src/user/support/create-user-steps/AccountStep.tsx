@@ -127,12 +127,12 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
                 variant="success"
                 size="sm"
                 leftIcon={<ShieldCheckIcon weight="bold" />}
-                tone="light"
+                tone="outline"
               >
                 {translate('Set')}
               </Badge>
             ) : (
-              <Badge variant="warning" size="sm" tone="light">
+              <Badge variant="warning" size="sm" tone="outline">
                 {translate('Not set')}
               </Badge>
             )}

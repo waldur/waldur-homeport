@@ -18,12 +18,12 @@ describe('Badge', () => {
     expect(ref.current?.textContent).toBe('Ref Badge');
   });
 
-  it('applies default primary solid attributes', () => {
+  it('defaults to a primary outline pill', () => {
     render(<Badge data-testid="badge">Default</Badge>);
     const el = screen.getByTestId('badge');
     expect(el).toHaveAttribute('data-variant', 'primary');
-    expect(el).toHaveAttribute('data-tone', 'solid');
-    expect(el).toHaveClass('badge');
+    expect(el).toHaveAttribute('data-tone', 'outline');
+    expect(el).toHaveClass('badge', 'rounded-full');
   });
 
   it('applies outline tone attributes', () => {
@@ -35,18 +35,6 @@ describe('Badge', () => {
     const el = screen.getByTestId('badge');
     expect(el).toHaveAttribute('data-variant', 'success');
     expect(el).toHaveAttribute('data-tone', 'outline');
-    expect(el).toHaveClass('badge');
-  });
-
-  it('applies light tone attributes', () => {
-    render(
-      <Badge variant="warning" tone="light" data-testid="badge">
-        Light
-      </Badge>,
-    );
-    const el = screen.getByTestId('badge');
-    expect(el).toHaveAttribute('data-variant', 'warning');
-    expect(el).toHaveAttribute('data-tone', 'light');
     expect(el).toHaveClass('badge');
   });
 
@@ -78,16 +66,16 @@ describe('Badge', () => {
     );
     const orangeEl = screen.getByTestId('orange-badge');
     expect(orangeEl).toHaveAttribute('data-variant', 'orange');
-    expect(orangeEl).toHaveAttribute('data-tone', 'solid');
+    expect(orangeEl).toHaveAttribute('data-tone', 'outline');
 
     render(
-      <Badge variant="rose" tone="light" data-testid="rose-badge">
+      <Badge variant="rose" data-testid="rose-badge">
         Rose
       </Badge>,
     );
     const roseEl = screen.getByTestId('rose-badge');
     expect(roseEl).toHaveAttribute('data-variant', 'rose');
-    expect(roseEl).toHaveAttribute('data-tone', 'light');
+    expect(roseEl).toHaveAttribute('data-tone', 'outline');
   });
 
   it('applies shape classes correctly', () => {

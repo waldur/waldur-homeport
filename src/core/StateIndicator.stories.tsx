@@ -15,7 +15,7 @@ const VARIANTS: BadgeVariant[] = [
   'neutral',
 ];
 
-const TONES: BadgeTone[] = ['light', 'outline', 'solid'];
+const TONES: BadgeTone[] = ['outline'];
 
 const meta: Meta<typeof StateIndicator> = {
   title: 'Data Display/StateIndicator',
@@ -30,14 +30,14 @@ const meta: Meta<typeof StateIndicator> = {
   args: {
     label: 'Creating',
     variant: 'primary',
-    tone: 'light',
+    tone: 'outline',
     active: true,
   },
   parameters: {
     docs: {
       description: {
         component:
-          "A resource or order state as a Badge. `active` adds a spinner for an in-progress state, in the badge's own text colour: white on a `solid` badge, the variant colour on `light` and `outline` ones (brand for `primary` and `secondary`). Backend labels in all caps are title-cased (`ACTIVE` → `Active`); short acronyms (`OK`) stay as they are.",
+          "A resource or order state as a Badge. `active` adds a spinner for an in-progress state, in the badge's own text colour (brand for `primary` and `secondary`). Backend labels in all caps are title-cased (`ACTIVE` → `Active`); short acronyms (`OK`) stay as they are.",
       },
     },
   },
@@ -106,13 +106,6 @@ export const PrimarySpinnerIsBrand: Story = {
       <StateIndicator
         label="Creating"
         variant="primary"
-        tone="light"
-        active
-        data-testid="primary-light"
-      />
-      <StateIndicator
-        label="Creating"
-        variant="primary"
         tone="outline"
         active
         data-testid="primary-outline"
@@ -122,27 +115,23 @@ export const PrimarySpinnerIsBrand: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const nearBlack = resolve(canvasElement, 'var(--text-primary)');
-    for (const id of ['primary-light', 'primary-outline']) {
+    for (const id of ['primary-outline']) {
       const badge = canvas.getByTestId(id);
       const spinner = within(badge).getByRole('status');
       const colour = getComputedStyle(spinner).color;
-      // The badge's own brand text (brand-600 on light, brand-700 on
-      // outline), never the neutral text colour.
+      // The badge's own brand text, never the neutral text colour.
       await expect(colour, id).toBe(getComputedStyle(badge).color);
       await expect(colour, id).not.toBe(nearBlack);
     }
-    await expect(
-      getComputedStyle(canvas.getByTestId('primary-light')).color,
-    ).toBe(resolve(canvasElement, 'var(--brand-color)'));
   },
 };
 
 export const LabelNormalization: Story = {
   render: () => (
     <div className="flex gap-2">
-      <StateIndicator label="ACTIVE" variant="success" tone="light" />
-      <StateIndicator label="OK" variant="success" tone="light" />
-      <StateIndicator label="Erred" variant="danger" tone="light" />
+      <StateIndicator label="ACTIVE" variant="success" tone="outline" />
+      <StateIndicator label="OK" variant="success" tone="outline" />
+      <StateIndicator label="Erred" variant="danger" tone="outline" />
     </div>
   ),
   play: async ({ canvasElement }) => {

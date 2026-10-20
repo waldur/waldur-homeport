@@ -5,7 +5,7 @@ import { StateIndicator } from './StateIndicator';
 
 describe('StateIndicator', () => {
   it('shows no spinner unless active', () => {
-    render(<StateIndicator label="Done" variant="success" tone="light" />);
+    render(<StateIndicator label="Done" variant="success" tone="outline" />);
     expect(screen.queryByRole('status')).not.toBeInTheDocument();
   });
 
@@ -15,11 +15,9 @@ describe('StateIndicator', () => {
   // the .badge-* classes no longer exist, which left the spinner brand on a
   // solid brand badge.
   it.each([
-    ['primary', 'light'],
     ['primary', 'outline'],
-    ['primary', 'solid'],
-    ['secondary', 'light'],
-    ['danger', 'solid'],
+    ['secondary', 'outline'],
+    ['danger', 'outline'],
   ] as const)(
     'a %s %s spinner takes the badge text colour',
     (variant, tone) => {

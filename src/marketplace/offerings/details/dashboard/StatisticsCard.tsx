@@ -44,8 +44,6 @@ export const StatisticsCard: FC<StatisticsCardProps> = ({
                 <ChangesAmountBadge
                   changes={changes}
                   asBadge
-                  badgeOutline
-                  badgePill
                   fractionDigits={0}
                 />
               </span>

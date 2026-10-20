@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { MigrationDetails } from 'waldur-js-client';
 
-import { BooleanBadge } from '@/core/BooleanBadge';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 import { ErrorMessageField } from '@/resource/summary/ErrorMessageField';
+import { BooleanField } from '@/table/BooleanField';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 export const MigrationExpandableRow: FC<{
@@ -43,12 +43,12 @@ export const MigrationExpandableRow: FC<{
 
     <Field
       label={translate('Skip connection to extnet')}
-      value={<BooleanBadge value={row.mappings?.skip_connection_extnet} />}
+      value={<BooleanField value={row.mappings?.skip_connection_extnet} />}
     />
 
     <Field
       label={translate('Copy ports connected to instances')}
-      value={<BooleanBadge value={row.mappings?.sync_instance_ports} />}
+      value={<BooleanField value={row.mappings?.sync_instance_ports} />}
     />
 
     <ErrorMessageField resource={row} />
