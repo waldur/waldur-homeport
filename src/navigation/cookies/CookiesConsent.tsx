@@ -31,6 +31,8 @@ export const CookiesConsent: FunctionComponent = () => {
     }
   };
 
+  // Re-run only when consent or the route changes: a new hideConsent every
+  // render would otherwise reopen the dialog on each re-render.
   useEffect(() => {
     if (state.name === 'about.privacy') return;
     if (
@@ -43,9 +45,10 @@ export const CookiesConsent: FunctionComponent = () => {
           acceptEssential: () => hideConsent(true),
         },
         backdrop: 'static',
+        keyboard: false,
       });
     }
-  }, [accepted, state, openDialog, hideConsent]);
+  }, [accepted, state.name]);
 
   return null;
 };
