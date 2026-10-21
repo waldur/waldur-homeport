@@ -8,6 +8,7 @@ import { marketplaceResourceApiKeysPartialUpdate } from 'waldur-js-client';
 import { renderWithProviders } from '@/test/harness';
 
 import { EditApiKeySettingsDialog } from './EditApiKeySettingsDialog';
+import { KeyComponent } from './types';
 
 // Runs the real mutationFn, so the PATCH body the form produces is observable
 // on the (globally auto-mocked) SDK call.
@@ -24,9 +25,11 @@ const renderDialog = (
   {
     settingsEditable = true,
     resourceLimits = {},
+    components = [TOKENS],
   }: {
+    components?: KeyComponent[];
     settingsEditable?: boolean;
-    resourceLimits?: Record<string, number>;
+    resourceLimits?: Record<string, Record<string, number>>;
   } = {},
 ) =>
   renderWithProviders(
@@ -37,12 +40,12 @@ const renderDialog = (
             uuid: 'k1',
             client_id: 'KEY1',
             state: 'OK',
-            limits: { tokens: 10 },
+            spending_limits: { tokens: { month: 10 } },
             allowed_models: ['retired'],
             ...key,
           } as any,
-          resource: { uuid: 'res-1', limits: resourceLimits } as any,
-          components: [TOKENS],
+          resource: { uuid: 'res-1', spending_limits: resourceLimits } as any,
+          components,
           models: ['gpt-4o'],
           refetch: vi.fn(),
           settingsEditable,
@@ -67,7 +70,9 @@ describe('EditApiKeySettingsDialog', () => {
     await waitFor(() =>
       expect(marketplaceResourceApiKeysPartialUpdate).toHaveBeenCalled(),
     );
-    expect(sentBody()).toEqual({ limits: { tokens: 20 } });
+    expect(sentBody()).toEqual({
+      spending_limits: { tokens: { month: 20 } },
+    });
   });
 
   it('opens the key to every model once the user clears the list', async () => {
@@ -80,7 +85,10 @@ describe('EditApiKeySettingsDialog', () => {
     await waitFor(() =>
       expect(marketplaceResourceApiKeysPartialUpdate).toHaveBeenCalled(),
     );
-    expect(sentBody()).toEqual({ limits: { tokens: 10 }, allowed_models: [] });
+    expect(sentBody()).toEqual({
+      spending_limits: { tokens: { month: 10 } },
+      allowed_models: [],
+    });
   });
 
   it('keeps the assignee when only a limit changes', async () => {
@@ -94,7 +102,9 @@ describe('EditApiKeySettingsDialog', () => {
     await waitFor(() =>
       expect(marketplaceResourceApiKeysPartialUpdate).toHaveBeenCalled(),
     );
-    expect(sentBody()).toEqual({ limits: { tokens: 20 } });
+    expect(sentBody()).toEqual({
+      spending_limits: { tokens: { month: 20 } },
+    });
   });
 
   it('unassigns a key when the assignee is cleared', async () => {
@@ -108,7 +118,10 @@ describe('EditApiKeySettingsDialog', () => {
     await waitFor(() =>
       expect(marketplaceResourceApiKeysPartialUpdate).toHaveBeenCalled(),
     );
-    expect(sentBody()).toEqual({ user: null, limits: { tokens: 10 } });
+    expect(sentBody()).toEqual({
+      user: null,
+      spending_limits: { tokens: { month: 10 } },
+    });
   });
 
   // Saving an untouched form would issue nothing, not even a retry.
@@ -146,8 +159,12 @@ describe('EditApiKeySettingsDialog', () => {
   it('saves an assignee change on a key above a lowered resource limit', async () => {
     const user = userEvent.setup();
     renderDialog(
-      { limits: { tokens: 800 }, user_uuid: 'u1', user_full_name: 'Alice' },
-      { resourceLimits: { tokens: 500 } },
+      {
+        spending_limits: { tokens: { month: 800 } },
+        user_uuid: 'u1',
+        user_full_name: 'Alice',
+      },
+      { resourceLimits: { tokens: { month: 500 } } },
     );
     await screen.findByText('Alice');
     expect(screen.getByRole('spinbutton')).toBeValid();
@@ -157,6 +174,72 @@ describe('EditApiKeySettingsDialog', () => {
     await waitFor(() =>
       expect(marketplaceResourceApiKeysPartialUpdate).toHaveBeenCalled(),
     );
-    expect(sentBody()).toEqual({ user: null, limits: { tokens: 800 } });
+    expect(sentBody()).toEqual({
+      user: null,
+      spending_limits: { tokens: { month: 800 } },
+    });
+  });
+
+  // Key limits took any number before they had periods.
+  it('saves an assignee change on a key whose limit has more decimals', async () => {
+    const user = userEvent.setup();
+    renderDialog({
+      spending_limits: { tokens: { month: 0.125 } },
+      user_uuid: 'u1',
+      user_full_name: 'Alice',
+    });
+    await screen.findByText('Alice');
+    expect(
+      screen.queryByText('Use at most 2 decimal places.'),
+    ).not.toBeInTheDocument();
+    await user.click(screen.getByRole('combobox'));
+    await user.keyboard('{Backspace}');
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+    await waitFor(() =>
+      expect(marketplaceResourceApiKeysPartialUpdate).toHaveBeenCalled(),
+    );
+    expect(sentBody()).toEqual({
+      user: null,
+      spending_limits: { tokens: { month: 0.125 } },
+    });
+  });
+
+  it("offers each period the component offers, capped by the resource's limit", async () => {
+    const user = userEvent.setup();
+    renderDialog(
+      { spending_limits: null },
+      {
+        components: [
+          {
+            type: 'token_cost',
+            name: 'Token cost',
+            billing_type: 'usage',
+            spending_limit_periods: { day: {}, month: {} },
+          },
+        ],
+        resourceLimits: { token_cost: { day: 20 } },
+      },
+    );
+    expect(await screen.findByText('Daily limit')).toBeInTheDocument();
+    expect(screen.getByText('Monthly limit')).toBeInTheDocument();
+    expect(screen.getByText('Up to 20')).toBeInTheDocument();
+    expect(screen.getByText('resets 00:00 UTC')).toBeInTheDocument();
+    const [day, month] = screen.getAllByRole('spinbutton');
+    await user.type(day, '0');
+    expect(await screen.findByText('Must be above 0.')).toBeInTheDocument();
+    await user.clear(day);
+    await user.type(day, '25');
+    expect(await screen.findByText('Must not exceed 20.')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
+    await user.clear(day);
+    await user.type(day, '5');
+    await user.type(month, '50');
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+    await waitFor(() =>
+      expect(marketplaceResourceApiKeysPartialUpdate).toHaveBeenCalled(),
+    );
+    expect(sentBody()).toEqual({
+      spending_limits: { token_cost: { day: 5, month: 50 } },
+    });
   });
 });

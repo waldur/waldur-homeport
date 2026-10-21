@@ -1,3 +1,9 @@
+import { translate } from '@/i18n';
+import {
+  getSpendingLimitLabel,
+  SpendingLimitPeriod,
+} from '@/marketplace/common/spendingLimits';
+
 import { ApiKeyRow, KeyComponent } from './types';
 
 export const componentLabel = (component: KeyComponent) =>
@@ -5,6 +11,8 @@ export const componentLabel = (component: KeyComponent) =>
 
 export interface ComponentUsage {
   component: KeyComponent;
+  // Set on a limit other than the month's; the month reading has none.
+  period?: SpendingLimitPeriod;
   used?: number;
   limit?: number;
   inherited: boolean;
@@ -51,6 +59,53 @@ export const getComponentUsage = (
   };
 };
 
+/**
+ * The key's limits on periods other than the month, as the backend measured
+ * them. The month reading comes from getComponentUsage, which also falls back
+ * to the resource's limit.
+ */
+export const getPeriodUsages = (
+  row: ApiKeyRow,
+  component: KeyComponent,
+): ComponentUsage[] =>
+  (row.spending_limit_status ?? [])
+    .filter(
+      (status) =>
+        status.component_type === component.type && status.period !== 'month',
+    )
+    .map((status) => {
+      // Key limits are above 0; guarded all the same.
+      const ratio = status.limit > 0 ? (status.used / status.limit) * 100 : 100;
+      return {
+        component,
+        period: status.period,
+        used: status.used,
+        limit: status.limit,
+        inherited: false,
+        ratio,
+        overLimit: status.used > status.limit,
+      };
+    });
+
+/** "Token cost", or "Token cost · Daily limit" for a limit other than the month's. */
+export const getReadingLabel = (reading: ComponentUsage) =>
+  reading.period
+    ? translate('{component} · {limit}', {
+        component: componentLabel(reading.component),
+        limit: getSpendingLimitLabel(reading.period),
+      })
+    : componentLabel(reading.component);
+
+/** Every reading of a component: the month's first, then the other periods' limits. */
+export const getComponentReadings = (
+  row: ApiKeyRow,
+  component: KeyComponent,
+  resourceLimits: Record<string, number>,
+) => [
+  getComponentUsage(row, component, resourceLimits),
+  ...getPeriodUsages(row, component),
+];
+
 // Colours a meter by how close the key is to its limit. A key's own limit pauses
 // the key once reached; an inherited one is the resource's, which limits the
 // whole resource instead.
@@ -63,14 +118,17 @@ export const getMeterVariant = (ratio?: number) =>
         ? 'warning'
         : undefined;
 
-// The component closest to its limit, so a nearly exhausted key stands out.
+// The limit closest to being reached, of any component and period, so a
+// nearly exhausted key stands out.
 export const getHeadlineUsage = (
   row: ApiKeyRow,
   components: KeyComponent[],
   resourceLimits: Record<string, number>,
 ) =>
   components
-    .map((component) => getComponentUsage(row, component, resourceLimits))
+    .flatMap((component) =>
+      getComponentReadings(row, component, resourceLimits),
+    )
     .filter((reading) => reading.ratio !== undefined)
     .reduce<ComponentUsage | undefined>(
       (worst, reading) =>

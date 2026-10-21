@@ -16,6 +16,7 @@ import {
   getSpendingLimitLabel,
   getSpendingLimitResetText,
   isEmptyAmount,
+  isHeldAmount,
   SpendingLimitPeriod,
   validateSpendingLimitAmount,
 } from './spendingLimits';
@@ -39,9 +40,13 @@ const makeValidator =
     component: CappedComponent,
     period: SpendingLimitPeriod,
     maximum?: number | null,
+    positive?: boolean,
   ) =>
-  (value, allValues) =>
-    validateSpendingLimitAmount(value, maximum) ||
+  (value, allValues, meta?: { initial?: unknown }) =>
+    validateSpendingLimitAmount(value, maximum, {
+      positive,
+      held: isHeldAmount(value, meta?.initial),
+    }) ||
     getSpendingLimitOrderErrors(get(allValues, [name, component.type]))[period];
 
 // Kept as typed: the payload formatter turns the text into a number, so a
@@ -52,14 +57,16 @@ const PeriodInput: FC<{
   name: string;
   component: CappedComponent;
   period: SpendingLimitPeriod;
-}> = ({ name, component, period }) => {
+  disabled?: boolean;
+  positive?: boolean;
+}> = ({ name, component, period, disabled, positive }) => {
   const maximum = getPeriodBounds(component, period).maximum;
   const id = getSpendingLimitFieldId(component.type, period);
   return (
     <Field
       name={`${name}.${component.type}.${period}`}
       parse={parseAmount}
-      validate={makeValidator(name, component, period, maximum)}
+      validate={makeValidator(name, component, period, maximum, positive)}
       render={({ input, meta }) => {
         // Shown on first change, not only on blur: Submit is disabled as
         // you type, and the reason must be visible by then. An ordering
@@ -69,7 +76,10 @@ const PeriodInput: FC<{
         // shows its error at once.
         const isOrderError =
           Boolean(meta.error) &&
-          !validateSpendingLimitAmount(input.value, maximum);
+          !validateSpendingLimitAmount(input.value, maximum, {
+            positive,
+            held: isHeldAmount(input.value, meta.initial),
+          });
         const isStoredValue = !meta.modified && !isEmptyAmount(meta.initial);
         const error =
           meta.modified || meta.touched || isOrderError || isStoredValue
@@ -83,7 +93,9 @@ const PeriodInput: FC<{
               type="number"
               min={0}
               max={maximum ?? undefined}
-              step="0.01"
+              // A held amount with more decimals must not trip the
+              // browser's own step check, which would block the submit.
+              step={isHeldAmount(input.value, meta.initial) ? 'any' : '0.01'}
               placeholder={translate('No limit')}
               containerClassName="mw-200px"
               aria-invalid={Boolean(error)}
@@ -91,6 +103,7 @@ const PeriodInput: FC<{
                 error ? getErrorId(component.type, period) : undefined
               }
               isInvalid={Boolean(error)}
+              disabled={disabled}
               value={input.value ?? ''}
               onChange={(e) => input.onChange(e.target.value)}
               onBlur={input.onBlur}
@@ -128,7 +141,10 @@ const ComponentSubmitError: FC<{ name: string; componentType: string }> = ({
 export const SpendingLimitFields: FC<{
   components: CappedComponent[];
   name?: string;
-}> = ({ components, name = 'spending_limits' }) => (
+  disabled?: boolean;
+  // Refuse a limit of 0, as an API key's limits do.
+  positive?: boolean;
+}> = ({ components, name = 'spending_limits', disabled, positive }) => (
   <>
     {components.map((component) => (
       <div
@@ -160,6 +176,8 @@ export const SpendingLimitFields: FC<{
                     name={name}
                     component={component}
                     period={period}
+                    disabled={disabled}
+                    positive={positive}
                   />
                 }
                 actions={

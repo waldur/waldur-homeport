@@ -14,12 +14,12 @@
 import {
   OfferingComponent,
   SpendingLimitBounds,
-  SpendingLimitStatusPeriodEnum,
+  SpendingLimitPeriodEnum,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 
-export type SpendingLimitPeriod = SpendingLimitStatusPeriodEnum;
+export type SpendingLimitPeriod = SpendingLimitPeriodEnum;
 
 /** Shortest first: a shorter period's amount may not exceed a longer one's. */
 export const SPENDING_LIMIT_PERIODS: SpendingLimitPeriod[] = [
@@ -137,14 +137,27 @@ export const getCappedComponents = <
       getOfferedPeriods(component).length > 0,
   );
 
+/** Whether a field still holds the amount it was loaded with, in any number form. */
+export const isHeldAmount = (value: unknown, initial: unknown) =>
+  !isEmptyAmount(value) &&
+  !isEmptyAmount(initial) &&
+  Number(String(value).trim()) === Number(initial);
+
 /**
  * An amount's error: it must be a non-negative number with at most two
- * decimal places, and no more than `maximum` when one is given. An empty value
- * is valid — it sets no limit.
+ * decimal places, and no more than `maximum` when one is given. `positive`
+ * refuses zero too, as an API key's limits do. A `held` amount — the one the
+ * field was loaded with — skips the size and decimal places rules: an API
+ * key's limit set before limits had periods may break them, and the backend
+ * takes it back unchanged. An empty value is valid — it sets no limit.
  */
 export const validateSpendingLimitAmount = (
   value: unknown,
   maximum?: number | null,
+  {
+    positive = false,
+    held = false,
+  }: { positive?: boolean; held?: boolean } = {},
 ): string | undefined => {
   if (isEmptyAmount(value)) {
     return undefined;
@@ -156,11 +169,14 @@ export const validateSpendingLimitAmount = (
   if (amount < 0) {
     return translate('Must not be negative.');
   }
-  if (amount >= MAX_AMOUNT) {
+  if (positive && amount === 0) {
+    return translate('Must be above 0.');
+  }
+  if (!held && amount >= MAX_AMOUNT) {
     return translate('This amount is too large.');
   }
   const factor = 10 ** DECIMAL_PLACES;
-  if (Math.round(amount * factor) / factor !== amount) {
+  if (!held && Math.round(amount * factor) / factor !== amount) {
     return translate('Use at most {places} decimal places.', {
       places: DECIMAL_PLACES,
     });

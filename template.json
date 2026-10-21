@@ -17878,6 +17878,11 @@
       "feature_area": "lifecycle"
     }
   },
+  "Each limit pauses this key alone once reached, and may not exceed the resource's limit for the same period. Clear a field to remove that limit.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Each mount point should be used once at most.": {
     "context": {
       "feature_area": "create"
@@ -27243,6 +27248,29 @@
     }
   },
   "It matters once offerings share accounts. With accounts per service provider, a person has one account, with one username, POSIX UID and home directory, on all of them, so one of the usernames has to be kept. Until then, switching the account scope to per service provider is refused.": {},
+  "It resumes on its own once under its limits again, or when a limit is raised.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "It resumes shortly.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "It resumes {relative}, on {date}, or when a limit is raised.": {
+    "context": {
+      "variables": {
+        "relative": {
+          "type": "unknown"
+        },
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "api-keys"
+    }
+  },
   "It was accepted for {email}. If it does not arrive, the problem is past the relay — check its own logs and the recipient spam folder.": {
     "context": {
       "variables": {
@@ -32210,6 +32238,7 @@
   },
   "Must be 128 characters or fewer.": {},
   "Must be 500 characters or less.": {},
+  "Must be above 0.": {},
   "Must be at least 1000 (lower values are reserved for system accounts). The value must fall within the offering’s POSIX ID pool and is rejected if already allocated.": {},
   "Must be between {n} and {m}.": {
     "context": {
@@ -39302,7 +39331,21 @@
       "feature_area": "details"
     }
   },
-  "Paused on reaching a limit. It resumes on its own once under its limits again: when a new month begins or a limit is raised.": {},
+  "Paused on reaching a limit.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "Paused on reaching a limit: {limits}.": {
+    "context": {
+      "variables": {
+        "limits": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "api-keys"
+    }
+  },
   "Paused resources": {
     "context": {
       "feature_area": "policies"
@@ -47687,16 +47730,6 @@
   "Resource limit change request": {
     "context": {
       "feature_area": "resource-pending"
-    }
-  },
-  "Resource limit: {value}": {
-    "context": {
-      "variables": {
-        "value": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "api-keys"
     }
   },
   "Resource limits change request has been submitted.": {
@@ -74908,6 +74941,18 @@
       }
     }
   },
+  "{component} · {limit}": {
+    "context": {
+      "variables": {
+        "component": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "{component} — {limit}": {
     "context": {
       "variables": {
@@ -76644,6 +76689,19 @@
         }
       },
       "feature_area": "change-limits"
+    }
+  },
+  "{limit} of {component}": {
+    "context": {
+      "variables": {
+        "limit": {
+          "type": "unknown"
+        },
+        "component": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "api-keys"
     }
   },
   "{minutes} min": {

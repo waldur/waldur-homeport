@@ -12,6 +12,7 @@ import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 
 import {
   AssigneeOption,
+  getKeyLimitFieldComponents,
   getKeySettingsFields,
   KeySettingsFormValues,
   serializeKeySettings,
@@ -56,7 +57,7 @@ export const EditApiKeySettingsDialog: FC<{
             full_name: row.user_full_name || row.user_uuid,
           }
         : null,
-      limits: row.limits ?? {},
+      spending_limits: row.spending_limits ?? {},
       allowed_models: (row.allowed_models ?? []).filter((model) =>
         models.includes(model),
       ),
@@ -65,11 +66,15 @@ export const EditApiKeySettingsDialog: FC<{
   );
 
   const assigneeField = useAssigneeField(resource);
+  const limitComponents = useMemo(
+    () => getKeyLimitFieldComponents(resource, components, row.spending_limits),
+    [resource, components, row.spending_limits],
+  );
   const fields = useMemo(
     () => [
       assigneeField,
       ...getKeySettingsFields(resource, components, models, {
-        currentLimits: row.limits,
+        currentLimits: row.spending_limits,
         disabledReason: settingsEditable
           ? undefined
           : translate(
@@ -77,7 +82,14 @@ export const EditApiKeySettingsDialog: FC<{
             ),
       }),
     ],
-    [assigneeField, resource, components, models, row.limits, settingsEditable],
+    [
+      assigneeField,
+      resource,
+      components,
+      models,
+      row.spending_limits,
+      settingsEditable,
+    ],
   );
 
   const mutation = useManagedMutation<
@@ -93,7 +105,12 @@ export const EditApiKeySettingsDialog: FC<{
           // Sent only when changed: the backend audits every assignee change.
           ...(user !== (row.user_uuid ?? null) ? { user } : {}),
           ...(settingsEditable
-            ? serializeKeySettings(values, components, models, modelsTouched)
+            ? serializeKeySettings(
+                values,
+                limitComponents,
+                models,
+                modelsTouched,
+              )
             : {}),
         },
       });

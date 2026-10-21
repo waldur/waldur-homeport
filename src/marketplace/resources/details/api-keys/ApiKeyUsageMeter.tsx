@@ -6,7 +6,7 @@ import { formatUsageValue } from '@/core/formatNumber';
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
-import { ComponentUsage, componentLabel, getMeterVariant } from './keyLimits';
+import { ComponentUsage, getMeterVariant, getReadingLabel } from './keyLimits';
 
 export const UsageMeter: FC<{ reading: ComponentUsage }> = ({ reading }) => {
   const { used, limit, component } = reading;
@@ -22,7 +22,7 @@ export const UsageMeter: FC<{ reading: ComponentUsage }> = ({ reading }) => {
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-x-4">
-        <span>{componentLabel(component)}</span>
+        <span>{getReadingLabel(reading)}</span>
         <span>
           {limit === undefined
             ? used !== undefined
@@ -45,7 +45,7 @@ export const UsageMeter: FC<{ reading: ComponentUsage }> = ({ reading }) => {
           value={used ?? 0}
           max={limit}
           variant={getMeterVariant(reading.ratio)}
-          label={componentLabel(component)}
+          label={getReadingLabel(reading)}
         />
       )}
     </div>
@@ -58,7 +58,7 @@ export const ApiKeyUsageSummary: FC<{ reading?: ComponentUsage }> = ({
   reading ? (
     <div className="min-w-[200px]">
       <div className="flex items-center justify-between gap-x-4">
-        <span>{componentLabel(reading.component)}</span>
+        <span>{getReadingLabel(reading)}</span>
         <span className="whitespace-nowrap">
           {Math.round(reading.ratio ?? 0)}%
         </span>
@@ -68,7 +68,7 @@ export const ApiKeyUsageSummary: FC<{ reading?: ComponentUsage }> = ({
         value={reading.used ?? 0}
         max={reading.limit}
         variant={getMeterVariant(reading.ratio)}
-        label={componentLabel(reading.component)}
+        label={getReadingLabel(reading)}
       />
     </div>
   ) : (

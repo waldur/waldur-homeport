@@ -8,6 +8,7 @@ import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 
 import {
   AssigneeOption,
+  getKeyLimitFieldComponents,
   getKeySettingsFields,
   KeySettingsFormValues,
   serializeKeySettings,
@@ -30,6 +31,10 @@ export const RequestApiKeyDialog: FC<{
   };
 }> = ({ resolve: { resource, components, models, refetch } }) => {
   const assigneeField = useAssigneeField(resource);
+  const limitComponents = useMemo(
+    () => getKeyLimitFieldComponents(resource, components),
+    [resource, components],
+  );
 
   const mutation = useManagedMutation<any, any, RequestApiKeyFormValues>({
     mutationFn: (values) =>
@@ -39,7 +44,7 @@ export const RequestApiKeyDialog: FC<{
           // An unassigned key is shared: any member of the project or its
           // organization can reveal it.
           user: values.user?.uuid ?? null,
-          ...serializeKeySettings(values, components, models),
+          ...serializeKeySettings(values, limitComponents, models),
         },
       }),
     successMessage: translate('API key requested'),
