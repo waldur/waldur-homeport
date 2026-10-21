@@ -218,6 +218,41 @@ describe('IssueCreateDialog Component', () => {
     expect(mockRefetch).toHaveBeenCalled();
   });
 
+  // The caller of an offering is usually not a member of its provider's
+  // organization. Scoping the request to that organization would be refused,
+  // and even when allowed would hide the request from the caller; the offering
+  // alone routes it to the provider.
+  it('routes a request opened from an offering by offering only', async () => {
+    vi.mocked(supportIssuesCreate).mockResolvedValue({
+      data: { uuid: 'issue-1', key: 'SUP-1', url: 'http://example.com/1/' },
+    } as any);
+
+    renderComponent({
+      scopeType: 'offering',
+      scope: {
+        name: 'Offering 1',
+        uuid: 'offering-1',
+        customer_name: 'Provider',
+        customer_uuid: 'provider-1',
+        customer: 'http://example.com/provider/',
+      },
+      issue: { summary: 'Question', description: 'About the offering' },
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId('next-button-step-0')).not.toBeDisabled();
+    });
+    await user.click(screen.getByTestId('next-button-step-0'));
+    await user.click(await screen.findByTestId('confirm-button'));
+
+    await waitFor(() => {
+      expect(supportIssuesCreate).toHaveBeenCalled();
+    });
+    const body = vi.mocked(supportIssuesCreate).mock.calls[0][0].body;
+    expect(body.offering).toBe('offering-1');
+    expect(body).not.toHaveProperty('customer');
+  });
+
   it('renders warning when no request types are configured', async () => {
     vi.mocked(supportRequestTypesList).mockResolvedValue({
       data: [],
