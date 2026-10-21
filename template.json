@@ -1355,6 +1355,11 @@
       "feature_area": "affiliations"
     }
   },
+  "Access is paused: a spending limit is reached": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Access lasts": {
     "context": {
       "feature_area": "access"
@@ -1415,6 +1420,29 @@
   },
   "Access restricted: ToS not accepted.": {
     "context": {
+      "feature_area": "details"
+    }
+  },
+  "Access resumes once usage is under every limit of the resource again.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "Access resumes shortly.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "Access resumes {relative}, on {date}.": {
+    "context": {
+      "variables": {
+        "relative": {
+          "type": "unknown"
+        },
+        "date": {
+          "type": "date"
+        }
+      },
       "feature_area": "details"
     }
   },
@@ -9947,6 +9975,11 @@
       "feature_area": "change-plan"
     }
   },
+  "Change spending limits": {
+    "context": {
+      "feature_area": "change-limits"
+    }
+  },
   "Change status": {
     "context": {
       "feature_area": "issues"
@@ -10376,6 +10409,7 @@
     }
   },
   "Choose an organization role, a project role, or both.": {},
+  "Choose at least one period customers can set a limit for.": {},
   "Choose date": {
     "context": {
       "feature_area": "DatePicker"
@@ -10583,6 +10617,11 @@
       "feature_area": "manage"
     }
   },
+  "Clear a field to remove that limit.": {
+    "context": {
+      "feature_area": "change-limits"
+    }
+  },
   "Clear anyway": {
     "context": {
       "feature_area": "support"
@@ -10601,6 +10640,11 @@
   "Clear filters": {
     "context": {
       "feature_area": "filter"
+    }
+  },
+  "Clear limit": {
+    "context": {
+      "feature_area": "update"
     }
   },
   "Clear search": {
@@ -14855,6 +14899,11 @@
       "feature_area": "plans"
     }
   },
+  "Customers can set spending limits": {
+    "context": {
+      "feature_area": "update"
+    }
+  },
   "Customers pay upfront for the full subscription period. Requires end date.": {},
   "Customized": {
     "context": {
@@ -18992,11 +19041,6 @@
       "feature_area": "support"
     }
   },
-  "Enable limit": {
-    "context": {
-      "feature_area": "update"
-    }
-  },
   "Enable logging of user profile data access events for GDPR compliance.": {},
   "Enable mock returns for the course account service": {},
   "Enable mock returns for the service account service": {},
@@ -19643,6 +19687,7 @@
       "feature_area": "openstack"
     }
   },
+  "Enter a number.": {},
   "Enter a reason for declining": {
     "context": {
       "feature_area": "proposal"
@@ -24186,6 +24231,16 @@
       }
     }
   },
+  "Held by: {limits}.": {
+    "context": {
+      "variables": {
+        "limits": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
+    }
+  },
   "Held decisions": {
     "context": {
       "feature_area": "rounds"
@@ -28228,11 +28283,6 @@
       "primary_ui_type": "label"
     }
   },
-  "Limit amount": {
-    "context": {
-      "feature_area": "update"
-    }
-  },
   "Limit change request has been approved.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -28319,6 +28369,46 @@
   "Limit value": {
     "context": {
       "feature_area": "project-detail"
+    }
+  },
+  "Limit {amount} in total — not enforced": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      },
+      "feature_area": "update"
+    }
+  },
+  "Limit {amount} per month — not enforced": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      },
+      "feature_area": "update"
+    }
+  },
+  "Limit {amount} per quarter — not enforced": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      },
+      "feature_area": "update"
+    }
+  },
+  "Limit {amount} per year — not enforced": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      },
+      "feature_area": "update"
     }
   },
   "Limit-based": {
@@ -30620,7 +30710,7 @@
   },
   "Maximum": {
     "context": {
-      "feature_area": "projects"
+      "feature_area": "update"
     }
   },
   "Maximum GID": {
@@ -32233,6 +32323,29 @@
       }
     }
   },
+  "Must not be negative.": {},
+  "Must not exceed the amount for the {longer} ({amount}).": {
+    "context": {
+      "variables": {
+        "longer": {
+          "type": "unknown"
+        },
+        "amount": {
+          "type": "number"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "Must not exceed {maximum}.": {
+    "context": {
+      "variables": {
+        "maximum": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "Must start with a country prefix ie EE34501234215": {
     "context": {
       "feature_area": "create"
@@ -32504,6 +32617,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "offering-users"
+    }
+  },
+  "Needs the integration to report usage per day.": {
+    "context": {
+      "feature_area": "update"
     }
   },
   "Negative feedback": {
@@ -33952,7 +34070,7 @@
   },
   "No limit": {
     "context": {
-      "feature_area": "steps"
+      "feature_area": "common"
     }
   },
   "No limit changes — current limits will be maintained.": {
@@ -34876,6 +34994,11 @@
   "No usage policy governs this resource.": {
     "context": {
       "feature_area": "policy-watch"
+    }
+  },
+  "No usage reported yet": {
+    "context": {
+      "feature_area": "details"
     }
   },
   "No usage reports yet": {
@@ -44262,7 +44385,8 @@
   "Quantity for invoice item. Tries \"Quantity\" then \"Qty\", defaults to 1.": {},
   "Quarterly": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "common"
     }
   },
   "Quarterly Research (Soft Limits)": {
@@ -44272,6 +44396,11 @@
   },
   "Quarterly billing period with 20% grace ratio allowing overrun. Includes carryover of unused allocation. Ideal for research projects with variable workloads.": {},
   "Quarterly cost": {},
+  "Quarterly limit": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Quarterly total": {
     "context": {
       "feature_area": "change-limits"
@@ -44711,6 +44840,11 @@
     }
   },
   "Reachable from anywhere — no addresses listed.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "Reached": {
     "context": {
       "feature_area": "details"
     }
@@ -45787,6 +45921,13 @@
       "feature_area": "details"
     }
   },
+  "Remove limits": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "change-limits",
+      "action_type": "create"
+    }
+  },
   "Remove link": {
     "context": {
       "feature_area": "form"
@@ -46472,6 +46613,11 @@
   "Reporting settings": {
     "context": {
       "feature_area": "administration"
+    }
+  },
+  "Reports above this limit are accepted and billed. Use spending limits to cap usage.": {
+    "context": {
+      "feature_area": "update"
     }
   },
   "Request": {
@@ -47171,6 +47317,24 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "ai-assistant"
+    }
+  },
+  "Resets shortly": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "Resets {relative}, on {date}": {
+    "context": {
+      "variables": {
+        "relative": {
+          "type": "unknown"
+        },
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "details"
     }
   },
   "Resetting the circuit breaker will force it back to the CLOSED state, allowing messages to be published immediately.": {
@@ -54200,6 +54364,11 @@
       "feature_area": "table"
     }
   },
+  "Some limits are on periods the provider no longer offers": {
+    "context": {
+      "feature_area": "change-limits"
+    }
+  },
   "Some of the resources' termination dates are beyond the project end date. Resource termination will begin on the project's end date.": {
     "context": {
       "feature_area": "project"
@@ -54441,6 +54610,17 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "policy-watch"
+    }
+  },
+  "Spending limits": {
+    "context": {
+      "feature_area": "plan"
+    }
+  },
+  "Spending limits have been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "change-limits"
     }
   },
   "Split Screen": {
@@ -57261,6 +57441,11 @@
       "feature_area": "lifecycle"
     }
   },
+  "The default must not exceed the maximum.": {
+    "context": {
+      "feature_area": "update"
+    }
+  },
   "The default security group cannot be deleted.": {
     "context": {
       "feature_area": "openstack-security-groups"
@@ -57537,6 +57722,11 @@
   "The group has no recommended keeper.": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "The highest limit a customer may set.": {
+    "context": {
+      "feature_area": "update"
     }
   },
   "The homeserver pushes room events to Waldur via the appservice webhook, which only acknowledges them. The Matrix bot, a separate process ({command}) and the encrypted member of every room, reads the rooms through its own sync and answers commands. If commands go unanswered, check that this process is running.": {
@@ -57923,6 +58113,11 @@
       "feature_area": "create"
     }
   },
+  "The offering does not let customers set spending limits on this resource.": {
+    "context": {
+      "feature_area": "change-limits"
+    }
+  },
   "The offering has no components!": {
     "context": {
       "feature_area": "import"
@@ -58167,6 +58362,11 @@
       "feature_area": "access"
     }
   },
+  "The resource is downscaled: a spending limit is reached": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "The resource is not based on usage or limitations.": {
     "context": {
       "feature_area": "list"
@@ -58178,6 +58378,29 @@
   "The response window for this assignment batch has passed.": {
     "context": {
       "feature_area": "review"
+    }
+  },
+  "The restriction lifts once usage is under every limit of the resource again.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "The restriction lifts shortly.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "The restriction lifts {relative}, on {date}.": {
+    "context": {
+      "variables": {
+        "relative": {
+          "type": "unknown"
+        },
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "details"
     }
   },
   "The results of the round have been published.": {
@@ -58934,6 +59157,16 @@
       "feature_area": "lifecycle"
     }
   },
+  "They stay in force until you save; saving removes them: {limits}.": {
+    "context": {
+      "variables": {
+        "limits": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "change-limits"
+    }
+  },
   "They total {total} and cannot be drawn without this credit.": {
     "context": {
       "variables": {
@@ -59003,6 +59236,7 @@
       "feature_area": "team"
     }
   },
+  "This amount is too large.": {},
   "This assignment item is blocked due to a conflict of interest. Forcing an unblock will allow the reviewer to proceed with reviewing the proposal \"{proposal}\". A reason is required for audit purposes.": {
     "context": {
       "variables": {
@@ -65923,6 +66157,12 @@
       "feature_area": "software-catalogs"
     }
   },
+  "Unable to update spending limits.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "change-limits"
+    }
+  },
   "Unable to update static routes.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -66649,6 +66889,16 @@
   "Unused from previous period": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "Up to {maximum}": {
+    "context": {
+      "variables": {
+        "maximum": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "Update": {
@@ -67467,6 +67717,16 @@
       "feature_area": "import-usage"
     }
   },
+  "Usage last reported {relative}": {
+    "context": {
+      "variables": {
+        "relative": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
+    }
+  },
   "Usage metrics broken down by user": {
     "context": {
       "feature_area": "reporting"
@@ -67678,6 +67938,15 @@
   "Use arrow keys to navigate matching actions and press Enter to select.": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Use at most {places} decimal places.": {
+    "context": {
+      "variables": {
+        "places": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Use default ({value})": {
@@ -70477,6 +70746,11 @@
     }
   },
   "What the merge would do if it ran now. It is computed again when the merge runs, and the run is refused if anything changed since.": {},
+  "What the order form starts from.": {
+    "context": {
+      "feature_area": "update"
+    }
+  },
   "What this proposal produced once it was accepted.": {
     "context": {
       "feature_area": "proposal"
@@ -70528,6 +70802,7 @@
       "feature_area": "workflow-steps"
     }
   },
+  "When a limit is reached, access pauses until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.": {},
   "When a round closes, move unsubmitted drafts to the next round instead of canceling them. Applicants keep their content and are notified by email. Drafts are canceled as before when the call has no later round.": {
     "context": {
       "feature_area": "configuration"
@@ -71190,12 +71465,18 @@
   },
   "Yearly": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "common"
     }
   },
   "Yearly estimate": {
     "context": {
       "feature_area": "plan"
+    }
+  },
+  "Yearly limit": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Years experience": {
@@ -72606,7 +72887,11 @@
       "feature_area": "mappings"
     }
   },
-  "day": {},
+  "day": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "default": {
     "context": {
       "feature_area": "partitions"
@@ -73329,7 +73614,7 @@
   "month": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "reports"
+      "feature_area": "common"
     }
   },
   "months": {
@@ -73669,7 +73954,11 @@
       "feature_area": "settings"
     }
   },
-  "quarter": {},
+  "quarter": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "queries": {
     "context": {
       "feature_area": "database-stats"
@@ -73768,6 +74057,31 @@
         }
       },
       "feature_area": "workflow-steps"
+    }
+  },
+  "resets 00:00 UTC": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "resets Monday 00:00 UTC": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "resets on 1 January": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "resets on 1 January, April, July and October": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "resets on the 1st": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "resource": {
@@ -74309,6 +74623,11 @@
       "feature_area": "openstack-volume"
     }
   },
+  "week": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "when usage ≥": {
     "context": {
       "feature_area": "plans"
@@ -74317,6 +74636,11 @@
   "workloads": {
     "context": {
       "feature_area": "cluster"
+    }
+  },
+  "year": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "yes": {
@@ -74582,6 +74906,19 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "{component} — {limit}": {
+    "context": {
+      "variables": {
+        "component": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
     }
   },
   "{count} More resources": {
@@ -76291,6 +76628,22 @@
         }
       },
       "feature_area": "policies"
+    }
+  },
+  "{limit} of {amount} on {component}": {
+    "context": {
+      "variables": {
+        "limit": {
+          "type": "unknown"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "component": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "change-limits"
     }
   },
   "{minutes} min": {
@@ -78165,6 +78518,19 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "{used} / {limit}": {
+    "context": {
+      "variables": {
+        "used": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
     }
   },
   "{used} of {capacity} ids in use; range [{min}–{max}], next {next}.": {

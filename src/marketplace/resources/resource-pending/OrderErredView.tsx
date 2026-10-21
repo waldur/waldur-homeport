@@ -116,6 +116,16 @@ const getSteps = (resource: Resource) => {
   return steps;
 };
 
+/** The order that creates the resource again, as it was ordered. */
+export const getRetryOrderBody = (resource: Resource): OrderCreateRequest => ({
+  offering: resource.offering,
+  project: resource.project,
+  plan: resource.plan,
+  attributes: resource.attributes as OrderCreateRequest['attributes'],
+  limits: resource.limits,
+  spending_limits: resource.spending_limits,
+});
+
 export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
   const { confirm } = useModal();
 
@@ -138,13 +148,7 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
       );
       try {
         const order = await marketplaceOrdersCreate({
-          body: {
-            offering: resource.offering,
-            project: resource.project,
-            plan: resource.plan,
-            attributes: resource.attributes as OrderCreateRequest['attributes'],
-            limits: resource.limits,
-          },
+          body: getRetryOrderBody(resource),
         });
         showSuccess(translate('Order has been submitted.'));
         router.stateService.go('marketplace-resource-details', {

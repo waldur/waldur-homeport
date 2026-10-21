@@ -176,8 +176,11 @@ describe('OfferingComponentDialog', () => {
 
       // Select Usage-based
       await openAndSelectOption(user, /Accounting type/i, /Usage-based/i);
-      // Usage-based shows "Enable limit" switch
-      expect(screen.getByLabelText(/Enable limit/i)).toBeInTheDocument();
+      // Usage-based offers spending limits, not its own limit amount
+      expect(
+        screen.getByLabelText(/Customers can set spending limits/i),
+      ).toBeInTheDocument();
+      expect(screen.queryByLabelText(/Enable limit/i)).not.toBeInTheDocument();
 
       // Select Fixed price
       await openAndSelectOption(user, /Accounting type/i, /Fixed price/i);
@@ -332,6 +335,184 @@ describe('OfferingComponentDialog', () => {
         expect(payload).not.toHaveProperty('type');
         expect(payload).toHaveProperty('name', 'Fast Memory');
       });
+    });
+  });
+  describe('Spending limits', () => {
+    const usageComponent = {
+      uuid: 'comp-2',
+      type: 'token_cost',
+      name: 'Token cost',
+      billing_type: 'usage',
+      measured_unit: 'EUR',
+      limit_period: null,
+      limit_amount: null,
+      is_builtin: false,
+      spending_limit_periods: {},
+    };
+
+    it('writes the ticked periods with their default and maximum', async () => {
+      const user = userEvent.setup();
+      const updateMutation = vi.mocked(
+        marketplaceProviderOfferingsUpdateOfferingComponent,
+      );
+      renderComponent({ offering: mockOffering, component: usageComponent });
+
+      await user.click(
+        screen.getByLabelText(/Customers can set spending limits/i),
+      );
+      expect(
+        screen.getAllByText('Needs the integration to report usage per day.'),
+      ).toHaveLength(2);
+      await user.click(screen.getByLabelText('Daily'));
+      await user.click(screen.getByLabelText('Monthly'));
+
+      await user.type(
+        screen.getByLabelText('Default', {
+          selector: '[name="spending_limit_periods.day.default"]',
+        }),
+        '20',
+      );
+      await user.type(
+        screen.getByLabelText('Maximum', {
+          selector: '[name="spending_limit_periods.day.maximum"]',
+        }),
+        '100',
+      );
+
+      await user.click(screen.getByRole('button', { name: 'Save' }));
+
+      await waitFor(() => {
+        expect(updateMutation).toHaveBeenCalled();
+      });
+      const payload = updateMutation.mock.calls[0][0].body;
+      expect(payload.spending_limit_periods).toEqual({
+        day: { default: 20, maximum: 100 },
+        month: {},
+      });
+      expect(payload).not.toHaveProperty('spending_limits_enabled');
+    });
+
+    it('prefills the periods of a component that offers them', () => {
+      renderComponent({
+        offering: mockOffering,
+        component: {
+          ...usageComponent,
+          spending_limit_periods: { week: { default: 50 } },
+        },
+      });
+      expect(
+        screen.getByLabelText(/Customers can set spending limits/i),
+      ).toBeChecked();
+      expect(screen.getByLabelText('Weekly')).toBeChecked();
+      expect(screen.getByLabelText('Daily')).not.toBeChecked();
+      expect(
+        screen.getByLabelText('Default', {
+          selector: '[name="spending_limit_periods.week.default"]',
+        }),
+      ).toHaveValue(50);
+    });
+
+    it('keeps Save disabled while a default exceeds its maximum', async () => {
+      const user = userEvent.setup();
+      renderComponent({
+        offering: mockOffering,
+        component: {
+          ...usageComponent,
+          spending_limit_periods: { month: {} },
+        },
+      });
+      const save = screen.getByRole('button', { name: 'Save' });
+      await waitFor(() => expect(save).toBeEnabled());
+
+      await user.type(
+        screen.getByLabelText('Default', {
+          selector: '[name="spending_limit_periods.month.default"]',
+        }),
+        '200',
+      );
+      await user.type(
+        screen.getByLabelText('Maximum', {
+          selector: '[name="spending_limit_periods.month.maximum"]',
+        }),
+        '100',
+      );
+      await waitFor(() => expect(save).toBeDisabled());
+      expect(
+        screen.getByText('The default must not exceed the maximum.'),
+      ).toBeInTheDocument();
+    });
+
+    it('keeps Save disabled while no period is ticked', async () => {
+      const user = userEvent.setup();
+      renderComponent({ offering: mockOffering, component: usageComponent });
+      const save = screen.getByRole('button', { name: 'Save' });
+
+      await user.click(
+        screen.getByLabelText(/Customers can set spending limits/i),
+      );
+      await waitFor(() => expect(save).toBeDisabled());
+      expect(
+        screen.getByText(
+          'Choose at least one period customers can set a limit for.',
+        ),
+      ).toBeInTheDocument();
+
+      await user.click(screen.getByLabelText('Yearly'));
+      await waitFor(() => expect(save).toBeEnabled());
+    });
+
+    it('shows a legacy usage limit read-only and lets it be cleared', async () => {
+      const user = userEvent.setup();
+      const updateMutation = vi.mocked(
+        marketplaceProviderOfferingsUpdateOfferingComponent,
+      );
+      renderComponent({
+        offering: mockOffering,
+        component: {
+          ...usageComponent,
+          limit_period: 'month',
+          limit_amount: 500,
+        },
+      });
+
+      expect(screen.getByTestId('legacy-usage-limit')).toHaveTextContent(
+        'Limit 500 per month — not enforced',
+      );
+      expect(screen.queryByLabelText(/Limit amount/i)).not.toBeInTheDocument();
+      expect(screen.queryByLabelText(/Enable limit/i)).not.toBeInTheDocument();
+
+      await user.click(screen.getByRole('button', { name: 'Clear limit' }));
+      expect(
+        screen.queryByTestId('legacy-usage-limit'),
+      ).not.toBeInTheDocument();
+
+      await user.click(screen.getByRole('button', { name: 'Save' }));
+      await waitFor(() => {
+        expect(updateMutation).toHaveBeenCalled();
+      });
+      expect(updateMutation.mock.calls[0][0].body).toMatchObject({
+        limit_amount: null,
+        spending_limit_periods: {},
+      });
+    });
+
+    it('sends no periods for a limit-based component', async () => {
+      const user = userEvent.setup();
+      const updateMutation = vi.mocked(
+        marketplaceProviderOfferingsUpdateOfferingComponent,
+      );
+      renderComponent({ offering: mockOffering, component: mockComponent });
+      expect(
+        screen.queryByLabelText(/Customers can set spending limits/i),
+      ).not.toBeInTheDocument();
+
+      await user.click(screen.getByRole('button', { name: 'Save' }));
+      await waitFor(() => {
+        expect(updateMutation).toHaveBeenCalled();
+      });
+      expect(
+        updateMutation.mock.calls[0][0].body.spending_limit_periods,
+      ).toEqual({});
     });
   });
 });
