@@ -14,6 +14,12 @@ import {
   marketplaceProviderOfferingsHistoryAtRetrieve,
   marketplacePlansHistoryList,
   marketplacePlansHistoryAtRetrieve,
+  marketplaceProjectEstimatedCostPoliciesHistoryList,
+  marketplaceProjectEstimatedCostPoliciesHistoryAtRetrieve,
+  marketplaceCustomerEstimatedCostPoliciesHistoryList,
+  marketplaceCustomerEstimatedCostPoliciesHistoryAtRetrieve,
+  marketplaceOfferingEstimatedCostPoliciesHistoryList,
+  marketplaceOfferingEstimatedCostPoliciesHistoryAtRetrieve,
   VersionHistory,
 } from 'waldur-js-client';
 
@@ -38,6 +44,9 @@ const historyListFunctions: Record<HistoryEntityType, HistoryListFn> = {
   ssh_key: keysHistoryList,
   offering: marketplaceProviderOfferingsHistoryList,
   plan: marketplacePlansHistoryList,
+  project_cost_policy: marketplaceProjectEstimatedCostPoliciesHistoryList,
+  customer_cost_policy: marketplaceCustomerEstimatedCostPoliciesHistoryList,
+  offering_cost_policy: marketplaceOfferingEstimatedCostPoliciesHistoryList,
 };
 
 const historyAtFunctions: Record<HistoryEntityType, HistoryAtFn> = {
@@ -48,6 +57,11 @@ const historyAtFunctions: Record<HistoryEntityType, HistoryAtFn> = {
   ssh_key: keysHistoryAtRetrieve,
   offering: marketplaceProviderOfferingsHistoryAtRetrieve,
   plan: marketplacePlansHistoryAtRetrieve,
+  project_cost_policy: marketplaceProjectEstimatedCostPoliciesHistoryAtRetrieve,
+  customer_cost_policy:
+    marketplaceCustomerEstimatedCostPoliciesHistoryAtRetrieve,
+  offering_cost_policy:
+    marketplaceOfferingEstimatedCostPoliciesHistoryAtRetrieve,
 };
 
 export const useVersionHistory = (

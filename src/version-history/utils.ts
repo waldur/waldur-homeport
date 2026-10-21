@@ -2,6 +2,21 @@ import { translate } from '@/i18n';
 
 import { FieldDiff, HistoryEntityType } from './types';
 
+const costPolicyFieldLabels: Record<string, string> = {
+  scope: 'Scope',
+  created_by: 'Created by',
+  actions: 'Actions',
+  options: 'Options',
+  limit_cost: 'Cost threshold',
+  period: 'Period',
+  use_credit: 'Account for available credit',
+  resource: 'Resource',
+  has_fired: 'Action triggered',
+  fired_datetime: 'Triggered at',
+  organization_groups: 'Organization groups',
+  apply_to_all: 'Apply to all',
+};
+
 // Field labels for different entity types
 const entityFieldLabels: Record<HistoryEntityType, Record<string, string>> = {
   resource: {
@@ -132,6 +147,9 @@ const entityFieldLabels: Record<HistoryEntityType, Record<string, string>> = {
     quotas: 'Quotas',
     future_prices: 'Future prices',
   },
+  project_cost_policy: costPolicyFieldLabels,
+  customer_cost_policy: costPolicyFieldLabels,
+  offering_cost_policy: costPolicyFieldLabels,
 };
 
 // Fields to exclude from diff (internal/technical fields)
