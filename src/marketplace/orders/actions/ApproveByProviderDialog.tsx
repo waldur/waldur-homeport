@@ -15,6 +15,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { FormFieldError } from '@/form/FormFieldError';
 import { translate } from '@/i18n';
+import { getAllModelsOption } from '@/marketplace/common/modelSelection';
 import { splitOptionErrors } from '@/marketplace/common/optionErrors';
 import {
   buildOptionValidator,
@@ -60,6 +61,8 @@ const OptionRow: FC<{
     option,
     optionKey,
     null,
+    undefined,
+    getAllModelsOption(resourceOptions),
   );
   const validateFn = buildOptionValidator(
     option,
@@ -302,7 +305,10 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
                     </div>
                   </div>
                 ) : (
-                  <OptionsForm options={resourceOptions} />
+                  <OptionsForm
+                    options={resourceOptions}
+                    allModelsOption={getAllModelsOption(resourceOptions)}
+                  />
                 )}
               </>
             ) : (

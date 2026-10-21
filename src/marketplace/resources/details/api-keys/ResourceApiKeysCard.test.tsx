@@ -87,23 +87,30 @@ const makeStore = (keys: any[]) =>
 
 // The parent owns useTable and passes the props down; here the Harness plays
 // that role so the card renders through the real Table.
-const Harness: FC<{ offering?: any }> = ({ offering }) => {
+const Harness: FC<{ offering?: any; resource?: any }> = ({
+  offering,
+  resource = RESOURCE,
+}) => {
   const props = useTable({ table: tableId, fetchData: vi.fn() as any });
   return (
-    <ResourceApiKeysCard {...props} resource={RESOURCE} offering={offering} />
+    <ResourceApiKeysCard {...props} resource={resource} offering={offering} />
   );
 };
 
 const renderCard = (
   keys: any[],
-  { offering, user = USER }: { offering?: any; user?: any } = {},
+  {
+    offering,
+    user = USER,
+    resource,
+  }: { offering?: any; user?: any; resource?: any } = {},
 ) => {
   // useUser is mocked globally (test/mocks/workspace.js).
   vi.mocked(useUser).mockReturnValue(user);
   return renderWithProviders(
     <Provider store={makeStore(keys)}>
       <DrawerProvider>
-        <Harness offering={offering} />
+        <Harness offering={offering} resource={resource} />
       </DrawerProvider>
     </Provider>,
   );
@@ -144,6 +151,40 @@ describe('ResourceApiKeysCard', () => {
     expect(screen.getByText('9LEVW594YBQ97LE4WKNY')).toBeInTheDocument();
     expect(screen.getByText('OK')).toBeInTheDocument();
     expect(screen.getByText('Updating')).toBeInTheDocument();
+  });
+
+  // A paused resource leaves each key's own state alone; the tab says what that
+  // state cannot: none of them is served.
+  it('shows a paused resource above its keys and on the serving ones', async () => {
+    vi.mocked(hasPermission).mockReturnValue(true);
+    renderCard(KEYS, {
+      resource: {
+        ...RESOURCE,
+        paused: true,
+        usage_limit_restriction: 'paused',
+      },
+    });
+    expect(
+      await screen.findByText(
+        'This resource is paused, so none of its keys is served.',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/usage reached its limit/)).toBeInTheDocument();
+    expect(screen.getByText('Blocked: resource paused')).toBeInTheDocument();
+    expect(screen.queryByText('OK')).not.toBeInTheDocument();
+    expect(screen.getByText('Updating')).toBeInTheDocument();
+  });
+
+  it('shows no pause on a resource that is not paused', async () => {
+    vi.mocked(hasPermission).mockReturnValue(true);
+    renderCard(KEYS);
+    await screen.findByText('EUMVPW5J5U2ZUQ5AL9L4');
+    expect(
+      screen.queryByText(/This resource is paused/),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Blocked: resource paused'),
+    ).not.toBeInTheDocument();
   });
 
   it('offers reveal to everyone and rotate to managers, no add or revoke', async () => {
@@ -219,22 +260,69 @@ describe('ResourceApiKeysCard', () => {
       expect(screen.queryByText('retired')).not.toBeInTheDocument();
     });
 
-    it('tells a key open to every model from one whose models are retired', async () => {
+    it('tells a key open to every model from one with none and one whose models are retired', async () => {
       renderCard(
         [
-          { uuid: 'k1', client_id: 'KEY1', state: 'OK', allowed_models: null },
+          { uuid: 'k1', client_id: 'KEY1', state: 'OK', allowed_models: ['*'] },
+          { uuid: 'k2', client_id: 'KEY2', state: 'OK', allowed_models: [] },
           {
-            uuid: 'k2',
-            client_id: 'KEY2',
+            uuid: 'k3',
+            client_id: 'KEY3',
             state: 'OK',
             allowed_models: ['retired'],
           },
         ],
         { offering: MANAGED_OFFERING },
       );
-      const [open, retired] = (await screen.findAllByRole('row')).slice(1);
+      const [open, none, retired] = (await screen.findAllByRole('row')).slice(
+        1,
+      );
       expect(within(open).getByText('All models')).toBeInTheDocument();
-      expect(within(retired).queryByText('All models')).not.toBeInTheDocument();
+      for (const row of [none, retired]) {
+        expect(within(row).getByText('No models')).toBeInTheDocument();
+        expect(within(row).queryByText('All models')).not.toBeInTheDocument();
+      }
+    });
+
+    it('shows a key what its resource allows', async () => {
+      const offering = {
+        ...MANAGED_OFFERING,
+        resource_options: {
+          options: {
+            models: {
+              type: 'select_string_multi',
+              choices: ['gpt-4o', 'qwen'],
+            },
+          },
+        },
+      };
+      const keys = [
+        { uuid: 'k1', client_id: 'KEY1', state: 'OK', allowed_models: ['*'] },
+        {
+          uuid: 'k2',
+          client_id: 'KEY2',
+          state: 'OK',
+          allowed_models: ['gpt-4o', 'qwen'],
+        },
+      ];
+      const { unmount } = renderCard(keys, {
+        offering,
+        resource: { ...RESOURCE, options: { models: ['qwen'] } },
+      });
+      const [open, narrowed] = (await screen.findAllByRole('row')).slice(1);
+      expect(within(open).getByText('All models')).toBeInTheDocument();
+      expect(within(narrowed).getByText('qwen')).toBeInTheDocument();
+      expect(within(narrowed).queryByText('gpt-4o')).not.toBeInTheDocument();
+      unmount();
+
+      // All models of a resource that allows none is none.
+      renderCard(keys, {
+        offering,
+        resource: { ...RESOURCE, options: { models: [] } },
+      });
+      for (const row of (await screen.findAllByRole('row')).slice(1)) {
+        expect(within(row).getByText('No models')).toBeInTheDocument();
+      }
     });
 
     it('lets only the assignee, staff or support reveal a personal key', async () => {
@@ -270,9 +358,9 @@ describe('ResourceApiKeysCard', () => {
         for (const name of ['Pause', 'Rotate', 'Delete']) {
           expect(isEnabled(name)).toBe(false);
         }
-        // The assignee is Waldur's alone and changes mid-operation too; only
-        // deletion ends it.
-        expect(isEnabled('Edit key settings')).toBe(state !== 'Deleting');
+        // A key that holds a secret changes hands by rotation, which waits
+        // for the command in flight like any other.
+        expect(isEnabled('Edit key settings')).toBe(false);
       },
     );
 
@@ -294,7 +382,16 @@ describe('ResourceApiKeysCard', () => {
       await openRowActions(0);
       expect(isEnabled('Retry')).toBe(true);
       expect(offered('Rotate')).toBeNull();
-      // The assignee can still change; limits and models are locked.
+      // Limits and models are locked, and so is the assignee: a new one
+      // would rotate the key, which waits for the retry.
+      expect(isEnabled('Edit key settings')).toBe(false);
+    });
+
+    // The rotation is retried with the new assignee.
+    it('lets a key whose rotation failed change hands', async () => {
+      renderManaged({ state: 'Erred', pending_action: 'rotate' });
+      await screen.findByText('KEY1');
+      await openRowActions(0);
       expect(isEnabled('Edit key settings')).toBe(true);
     });
 

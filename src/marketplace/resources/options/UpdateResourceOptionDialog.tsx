@@ -10,6 +10,10 @@ import { Offering } from 'waldur-js-client';
 import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { translate } from '@/i18n';
 import { getDerivedLimitInputs } from '@/marketplace/common/derivedLimits';
+import {
+  ALL_MODELS,
+  getAllModelsOption,
+} from '@/marketplace/common/modelSelection';
 import { splitOptionErrors } from '@/marketplace/common/optionErrors';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
@@ -32,6 +36,7 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
   const { name, ...option } = props.resolve.option;
   const isFormula = option.type === 'component_formula';
   const offering = props.resolve.offering;
+  const allModelsOption = getAllModelsOption(offering?.resource_options);
   const options = useMemo(() => {
     return {
       // The card only offers options that are visible for the resource's
@@ -63,9 +68,13 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
           ? // Ordered before the option existed: the ordered value.
             (getDerivedLimitInputs(props.resolve.resource, offering)[name] ??
             null)
-          : props.resolve.resource && props.resolve.resource.options
-            ? props.resolve.resource.options[name]
-            : null,
+          : name === allModelsOption &&
+              // An unset single choice, kept when the option became a
+              // multiple one, is stored as ''.
+              (props.resolve.resource?.options?.[name] ?? '') === ''
+            ? // A resource that never chose its models is on every model.
+              [ALL_MODELS]
+            : (props.resolve.resource?.options?.[name] ?? null),
       },
       // What the formula validator checks derived limits against; only the
       // attributes are submitted.
@@ -82,7 +91,7 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
           }
         : {}),
     }),
-    [name, isFormula, offering, props.resolve.resource],
+    [name, isFormula, offering, props.resolve.resource, allModelsOption],
   );
 
   const updateMutation = useManagedMutation<any, any, any>({
@@ -132,7 +141,10 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
         >
           {name ? (
             <>
-              <OptionsForm options={options} />
+              <OptionsForm
+                options={options}
+                allModelsOption={allModelsOption}
+              />
               {isFormula ? (
                 <FormulaChangePreview
                   resource={props.resolve.resource}

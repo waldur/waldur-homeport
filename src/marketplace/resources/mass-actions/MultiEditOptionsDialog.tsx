@@ -13,6 +13,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
+import { getAllModelsOption } from '@/marketplace/common/modelSelection';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -135,7 +136,10 @@ export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
             ) : offeringQuery.error ? (
               <LoadingErred loadData={offeringQuery.refetch} className="mb-4" />
             ) : editableOptions?.order.length ? (
-              <OptionsForm options={editableOptions} />
+              <OptionsForm
+                options={editableOptions}
+                allModelsOption={getAllModelsOption(editableOptions)}
+              />
             ) : (
               translate(
                 'There are no resource options defined in the offering.',

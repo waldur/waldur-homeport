@@ -32,9 +32,9 @@ const resourceOptions = {
   },
 };
 
-const renderDialog = (attributes) => {
+const renderDialog = (attributes, options: any = resourceOptions) => {
   vi.mocked(marketplaceOrdersOfferingRetrieve).mockResolvedValue({
-    data: { resource_options: resourceOptions },
+    data: { resource_options: options },
   } as any);
   vi.mocked(marketplaceOrdersApproveByProvider).mockResolvedValue({} as any);
   const order: any = {
@@ -125,6 +125,40 @@ describe('ApproveByProviderDialog option errors', () => {
         'This value is already used by another resource of this offering.',
       ),
     ).toBeInTheDocument();
+  });
+});
+
+describe('ApproveByProviderDialog model selection', () => {
+  const modelOptions = {
+    order: ['models'],
+    options: {
+      models: {
+        type: 'select_string_multi',
+        label: 'Models',
+        choices: ['gpt-4o', 'llama-3'],
+      },
+    },
+  };
+
+  it('shows a requested All models as ticked and lets the provider narrow it', async () => {
+    const user = userEvent.setup();
+    renderDialog(
+      { old_options: { models: ['gpt-4o'] }, new_options: { models: ['*'] } },
+      modelOptions,
+    );
+    const allModels = await screen.findByLabelText('All models');
+    expect(allModels).toBeChecked();
+    expect(screen.getByLabelText('llama-3')).toBeDisabled();
+
+    await user.click(allModels);
+    await user.click(screen.getByLabelText('llama-3'));
+    await user.click(screen.getByRole('button', { name: 'Approve' }));
+    await waitFor(() =>
+      expect(marketplaceOrdersApproveByProvider).toHaveBeenCalledWith({
+        path: { uuid: 'order-1' },
+        body: { attributes: { new_options: { models: ['llama-3'] } } },
+      }),
+    );
   });
 });
 
