@@ -7,7 +7,10 @@ export type HistoryEntityType =
   | 'user'
   | 'ssh_key'
   | 'offering'
-  | 'plan';
+  | 'plan'
+  | 'project_cost_policy'
+  | 'customer_cost_policy'
+  | 'offering_cost_policy';
 
 export interface VersionHistoryButtonProps {
   entityType: HistoryEntityType;
