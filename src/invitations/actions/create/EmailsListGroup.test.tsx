@@ -121,6 +121,36 @@ describe('EmailsListGroup row feedback', () => {
     expect(getForm().getState().valid).toBe(true);
   });
 
+  it('flags a repeated email only while it repeats in the same project', async () => {
+    const getForm = renderList();
+    const message =
+      'This email and role combination is entered more than once.';
+
+    act(() => {
+      getForm().change('rows[4].email', lastEmail);
+      getForm().change('_duplicateInFormEmails', [
+        {
+          email: lastEmail,
+          roleUuid: memberRole.uuid,
+          projectUuid: project.uuid,
+        },
+      ]);
+    });
+
+    expect(await screen.findByText(message)).toBeInTheDocument();
+    expect(getForm().getState().valid).toBe(false);
+
+    act(() => {
+      getForm().change('rows[5].role_project', {
+        role: memberRole,
+        project: { uuid: 'other-project-uuid', name: 'Other project' },
+      });
+    });
+
+    expect(screen.queryByText(message)).not.toBeInTheDocument();
+    expect(getForm().getState().valid).toBe(true);
+  });
+
   it('does not pull the page back once the user pages away', async () => {
     const user = userEvent.setup();
     const getForm = renderList();
