@@ -65,6 +65,8 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
   return (
     <Table<OfferingComponent>
       {...tableProps}
+      // An offering's few components, shown whole.
+      hasPagination={false}
       columns={[
         {
           title: translate('Name'),

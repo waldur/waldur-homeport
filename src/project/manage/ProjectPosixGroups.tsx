@@ -8,6 +8,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
 import { ProjectGroupMembers } from '@/marketplace/service-providers/project-groups/ProjectGroupMembers';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -33,12 +34,12 @@ const useRollupTable = (
   keep: (row: ProjectPosixGroup) => boolean,
 ) => {
   const queryClient = useQueryClient();
+  // The groups come in one cached list; the table pages through it.
   const fetchData = useCallback(
-    () =>
-      fetchProjectPosixGroups(queryClient, projectUuid).then((rows) => {
-        const kept = (rows ?? []).filter(keep);
-        return { rows: kept, resultCount: kept.length };
-      }),
+    (request) =>
+      fetchProjectPosixGroups(queryClient, projectUuid).then((rows) =>
+        createClientPaginatedFetcher((rows ?? []).filter(keep))(request),
+      ),
     [queryClient, projectUuid, keep],
   );
   return useTable<ProjectPosixGroup>({

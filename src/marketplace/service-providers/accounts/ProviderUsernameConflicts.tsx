@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useCallback, useEffect } from 'react';
 import {
   marketplaceServiceProvidersUsernameConflictsList,
   ProviderUsernameConflict,
@@ -10,6 +11,7 @@ import { BaseButton, ModalBody, ModalTitle } from 'waldur-ui';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { useCustomer, useUser } from '@/workspace/hooks';
@@ -22,6 +24,8 @@ const AdoptProviderAccountsDialog = lazyComponent(() =>
     default: module.AdoptProviderAccountsDialog,
   })),
 );
+
+const NO_CONFLICTS: ProviderUsernameConflict[] = [];
 
 interface ProviderUsernameConflictsProps {
   provider: ServiceProvider;
@@ -76,21 +80,45 @@ export const ProviderUsernameConflicts: FC<ProviderUsernameConflictsProps> = ({
   const customer = useCustomer();
   // Resolving is refused by the backend for anyone but owners and staff.
   const canResolve = checkIsOwnerOrStaff(customer, user);
-  const tableProps = useTable({
-    table: `provider-username-conflicts-${provider.uuid}`,
-    fetchData: () =>
+  // Every conflict, fetched once: the table pages through them, and the
+  // dialog that resolves them gets them all.
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['ProviderUsernameConflicts', provider.uuid],
+    queryFn: () =>
       marketplaceServiceProvidersUsernameConflictsList({
         path: { uuid: provider.uuid },
-      }).then((response) => ({
-        rows: response.data,
-        resultCount: response.data.length,
-      })),
+      }).then((response) => response.data),
   });
+  const conflicts = data ?? NO_CONFLICTS;
+  const tableProps = useTable({
+    table: `provider-username-conflicts-${provider.uuid}`,
+    fetchData: createClientPaginatedFetcher(conflicts),
+  });
+  useEffect(() => {
+    tableProps.fetch();
+  }, [data]);
+  // Only Refresh and Retry (force) download the list again; paging, sorting
+  // and search page the rows already held. Memoized: Table fetches again
+  // whenever this changes identity, so an inline function refetches on
+  // every render.
+  const fetch = useCallback(
+    (force?: boolean) => {
+      if (force) {
+        refetch();
+      } else {
+        tableProps.fetch();
+      }
+    },
+    [refetch, tableProps.fetch],
+  );
   const { openDialog } = useModal();
 
   return (
     <Table<ProviderUsernameConflict>
       {...tableProps}
+      loading={isLoading || tableProps.loading}
+      error={error || tableProps.error}
+      fetch={fetch}
       title={translate('Username conflicts')}
       subtitle={
         <>
@@ -115,15 +143,15 @@ export const ProviderUsernameConflicts: FC<ProviderUsernameConflictsProps> = ({
       placeholderHasRetry={false}
       tableActions={
         canResolve &&
-        tableProps.rows.length > 0 && (
+        conflicts.length > 0 && (
           <BaseButton
             label={translate('Resolve conflicts')}
             onClick={() =>
               openDialog(AdoptProviderAccountsDialog, {
                 resolve: {
                   provider,
-                  conflicts: tableProps.rows,
-                  refetch: tableProps.fetch,
+                  conflicts,
+                  refetch,
                 },
               })
             }

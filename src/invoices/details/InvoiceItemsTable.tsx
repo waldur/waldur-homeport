@@ -101,6 +101,9 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
   return (
     <Table<InvoiceTableItem>
       {...tableProps}
+      // Every item of the invoice: the endpoint is not paginated, and Print
+      // invoice prints the page as shown, so a pager would cut the printout.
+      hasPagination={false}
       filters={<InvoicesItemsFilter customerUuid={getUUID(invoice.customer)} />}
       columns={[
         {

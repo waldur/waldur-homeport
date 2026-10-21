@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useCallback, useEffect } from 'react';
 import {
   Offering,
   OfferingAccessSubnetExpanded,
@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableTab } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -42,18 +43,34 @@ export const OfferingConsumerSubnetsTable: FunctionComponent<
   const rows: OfferingAccessSubnetExpanded[] = data?.data?.expanded ?? [];
   const tableProps = useTable({
     table: `offeringConsumerAccessSubnets-${offering.uuid}`,
-    fetchData: () => Promise.resolve({ rows, resultCount: rows.length }),
+    fetchData: createClientPaginatedFetcher(rows),
   });
+  // The fetcher closes over the rows: fetch again once they arrive, or the
+  // table keeps its first, empty, result.
+  useEffect(() => {
+    tableProps.fetch();
+  }, [data]);
+  // Only Refresh and Retry (force) download the list again; paging, sorting
+  // and search page the rows already held. Memoized: Table fetches again
+  // whenever this changes identity, so an inline function refetches on
+  // every render.
+  const fetch = useCallback(
+    (force?: boolean) => {
+      if (force) {
+        refetch();
+      } else {
+        tableProps.fetch();
+      }
+    },
+    [refetch, tableProps.fetch],
+  );
 
   return (
     <Table<OfferingAccessSubnetExpanded>
       {...tableProps}
       loading={isLoading}
       error={error}
-      // Adapt the React Query refetch to the table's void-returning signature.
-      fetch={() => {
-        refetch();
-      }}
+      fetch={fetch}
       id="offering-consumer-access-subnets"
       title={translate('Access subnets')}
       tabs={tabs}
