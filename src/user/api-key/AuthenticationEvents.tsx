@@ -8,10 +8,15 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
+import { checkIsStaffOrSupport } from '@/workspace/selectors';
 
 const EventDateField = ({ row }) => <>{formatRelative(row.created)}</>;
 
 export const AuthenticationEvents: FunctionComponent<{ user }> = ({ user }) => {
+  const currentUser = useUser();
+  // The actor's network details are returned to staff and support only.
+  const showIpAddress = checkIsStaffOrSupport(currentUser);
   const filter = useMemo(
     () => ({
       scope: user.url,
@@ -34,7 +39,7 @@ export const AuthenticationEvents: FunctionComponent<{ user }> = ({ user }) => {
           render: ({ row }) =>
             renderFieldOrDash(eventsRegistry.formatEvent(row)),
         },
-        {
+        showIpAddress && {
           title: translate('IP address'),
           render: ({ row }) => renderFieldOrDash(row.context['ip_address']),
         },
