@@ -31,6 +31,7 @@ import { useUser } from '@/workspace/hooks';
 import { RevealApiKeyDialog } from './RevealApiKeyDialog';
 import {
   canRevealKey,
+  getAssigneeLock,
   getErredTooltip,
   getFailedCommand,
   getStateVariant,
@@ -54,7 +55,7 @@ export const ApiKeyActionsDropdown: FC<{
   row: ApiKeyRow;
   resource: Resource;
   components: KeyComponent[];
-  models: string[];
+  models: string[] | null;
   canManage: boolean;
   // Pause and per-key settings need the offering's key management opt-in;
   // rotate and resume do not.
@@ -230,15 +231,20 @@ export const ApiKeyActionsDropdown: FC<{
   // re-sends it unchanged.
   const settingsEditable =
     isOk || isPaused || (isErred && failedCommand === 'update');
-  // The assignee is Waldur's alone, so it can change in any state short of
-  // deletion, mid-operation too.
+  // A key that holds a secret changes hands by rotation, so its assignee
+  // changes only where it can take one; one that holds none takes a new
+  // assignee in any state short of deletion.
+  const assigneeLock = getAssigneeLock(row);
   const canEdit = row.state !== 'Deleting' && row.state !== 'Deleted';
   const editBlocked =
     rotating || retrying || pausing || removing
       ? translate('An operation is already in progress.')
       : !canEdit
         ? translate('A deleted key cannot be edited.')
-        : undefined;
+        : !settingsEditable && assigneeLock
+          ? // Nothing in the dialog could change.
+            assigneeLock
+          : undefined;
 
   return (
     <ActionsDropdown row={row} refetch={refetch} size="sm">

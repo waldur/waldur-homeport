@@ -1037,6 +1037,12 @@
       "feature_area": "api-keys"
     }
   },
+  "API key settings saved; rotation requested": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "api-keys"
+    }
+  },
   "API key unassigned": {
     "context": {
       "primary_ui_type": "success_message",
@@ -3531,7 +3537,7 @@
   },
   "All models": {
     "context": {
-      "feature_area": "api-keys"
+      "feature_area": "common"
     }
   },
   "All months": {
@@ -8441,6 +8447,7 @@
       "feature_area": "support"
     }
   },
+  "Blocked: resource paused": {},
   "Blockers": {
     "context": {
       "primary_ui_type": "title",
@@ -9989,6 +9996,11 @@
   },
   "Changing flavor": {},
   "Changing password": {},
+  "Changing the assignee rotates the key: its current value stops working and the new assignee reveals a new one.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Channels": {
     "context": {
       "feature_area": "rabbitmq"
@@ -10376,6 +10388,7 @@
     }
   },
   "Choose an organization role, a project role, or both.": {},
+  "Choose at least one model, or All models.": {},
   "Choose date": {
     "context": {
       "feature_area": "DatePicker"
@@ -27188,6 +27201,7 @@
     }
   },
   "It matters once offerings share accounts. With accounts per service provider, a person has one account, with one username, POSIX UID and home directory, on all of them, so one of the usernames has to be kept. Until then, switching the account scope to per service provider is refused.": {},
+  "It resumes once the resource is unpaused.": {},
   "It was accepted for {email}. If it does not arrive, the problem is past the relay — check its own logs and the recipient spam folder.": {
     "context": {
       "variables": {
@@ -27236,6 +27250,7 @@
     }
   },
   "Items on every invoice, closed ones included, are rewritten to name the target offering, plan and component. Use it when past invoices should read as if the target had always been used. Amounts never change.": {},
+  "Its usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.": {},
   "JPG, PNG, PDF or .asice (max {size})": {
     "context": {
       "variables": {
@@ -27992,11 +28007,6 @@
   "Least used checklists": {
     "context": {
       "primary_ui_type": "title"
-    }
-  },
-  "Leave all unticked to allow every model.": {
-    "context": {
-      "feature_area": "api-keys"
     }
   },
   "Leave call": {
@@ -34094,6 +34104,11 @@
   "No microphone was found.": {
     "context": {
       "action_type": "read"
+    }
+  },
+  "No models": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "No more subnets available": {
@@ -48349,6 +48364,7 @@
       "feature_area": "settings"
     }
   },
+  "Resume the key to change its assignee.": {},
   "Resume the key to rotate it.": {
     "context": {
       "feature_area": "api-keys"
@@ -48414,6 +48430,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "actions"
+    }
+  },
+  "Retry the failed command first.": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "Return to call": {
@@ -50261,6 +50282,11 @@
   "Saving in progress": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Saving rotates this key. Anything using the current value will stop working.": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "Saving...": {
@@ -57634,6 +57660,11 @@
       "feature_area": "api-keys"
     }
   },
+  "The key will not be able to call any model.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "The last task reported an error": {
     "context": {
       "feature_area": "offering-merges"
@@ -58172,8 +58203,14 @@
       "feature_area": "list"
     }
   },
+  "The resource is paused, so this key is not served.": {},
   "The resource will be restored automatically when costs drop below the threshold.": {},
   "The resource will be unpaused automatically when costs drop below the threshold.": {},
+  "The resource's API keys will not be able to call any model.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "The resources the merge moves to the target, with the orders, limits and order answers that follow them.": {},
   "The response window for this assignment batch has passed.": {
     "context": {
@@ -59630,6 +59667,11 @@
   "This request cannot be updated in its current state.": {
     "context": {
       "feature_area": "issues"
+    }
+  },
+  "This resource is paused, so none of its keys is served.": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "This resource request has no attributes.": {
@@ -69982,6 +70024,7 @@
       "feature_area": "database-stats"
     }
   },
+  "Wait for the current operation to finish.": {},
   "Waiting": {
     "context": {
       "primary_ui_type": "label",

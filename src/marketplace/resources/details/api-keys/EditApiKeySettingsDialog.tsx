@@ -1,14 +1,17 @@
-import { FormApi } from 'final-form';
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
+import { useField } from 'react-final-form';
 import {
   marketplaceResourceApiKeysPartialUpdate,
   Resource,
 } from 'waldur-js-client';
 
+import { FieldWarning } from '@/form/FieldWarning';
 import { translate } from '@/i18n';
+import { isAllModels } from '@/marketplace/common/modelSelection';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { useNotify } from '@/store/notify';
 
 import {
   AssigneeOption,
@@ -17,22 +20,45 @@ import {
   serializeKeySettings,
   useAssigneeField,
 } from './keySettingsFields';
+import { getAssigneeLock } from './state';
 import { ApiKeyRow, KeyComponent } from './types';
+import { useInvalidateRevealedKey } from './useResourceApiKeys';
 
 interface EditApiKeyFormValues extends KeySettingsFormValues {
   user?: AssigneeOption | null;
 }
+
+const getAssigneeUuid = (values: EditApiKeyFormValues) =>
+  values.user?.uuid ?? null;
+
+// Shown under the assignee once it differs from the key's: saving rotates the
+// key, so its current value is about to stop working.
+const RotationWarning: FC<{ initialAssignee: string | null }> = ({
+  initialAssignee,
+}) => {
+  const user = useField<AssigneeOption | null>('user', {
+    subscription: { value: true },
+  }).input.value;
+  return (user?.uuid ?? null) !== initialAssignee ? (
+    <div className="mb-5">
+      <FieldWarning
+        error={translate(
+          'Saving rotates this key. Anything using the current value will stop working.',
+        )}
+      />
+    </div>
+  ) : null;
+};
 
 export const EditApiKeySettingsDialog: FC<{
   resolve: {
     row: ApiKeyRow;
     resource: Resource;
     components: KeyComponent[];
-    models: string[];
+    models: string[] | null;
     refetch(): void;
     // Limits and models change only on a settled key, or on one whose failed
-    // command was an update; the assignee changes in any state short of
-    // deletion.
+    // command was an update. The assignee follows getAssigneeLock.
     settingsEditable?: boolean;
   };
 }> = ({
@@ -57,17 +83,52 @@ export const EditApiKeySettingsDialog: FC<{
           }
         : null,
       limits: row.limits ?? {},
+      all_models: isAllModels(row.allowed_models),
+      // Models the offering has since retired, or the resource no longer
+      // allows, are not shown; the key keeps them unless All models replaces
+      // its list.
       allowed_models: (row.allowed_models ?? []).filter((model) =>
-        models.includes(model),
+        models?.includes(model),
       ),
+      kept_models: isAllModels(row.allowed_models)
+        ? []
+        : (row.allowed_models ?? []).filter(
+            (model) => !models?.includes(model),
+          ),
     }),
     [row, models],
   );
 
+  const initialAssignee = row.user_uuid ?? null;
+  // A key that holds a secret changes hands by rotation (the dialog opens
+  // only where the offering manages keys).
+  const rotates = Boolean(row.client_id);
+  const assigneeLock = getAssigneeLock(row);
+
   const assigneeField = useAssigneeField(resource);
   const fields = useMemo(
     () => [
-      assigneeField,
+      {
+        ...assigneeField,
+        ...(rotates
+          ? {
+              help_text: translate(
+                'Changing the assignee rotates the key: its current value stops working and the new assignee reveals a new one.',
+              ),
+            }
+          : {}),
+        disabled: Boolean(assigneeLock),
+        disabled_tooltip: assigneeLock,
+      },
+      ...(rotates
+        ? [
+            {
+              name: 'user_rotation_warning',
+              component: RotationWarning,
+              extraProps: { initialAssignee },
+            },
+          ]
+        : []),
       ...getKeySettingsFields(resource, components, models, {
         currentLimits: row.limits,
         disabledReason: settingsEditable
@@ -77,34 +138,72 @@ export const EditApiKeySettingsDialog: FC<{
             ),
       }),
     ],
-    [assigneeField, resource, components, models, row.limits, settingsEditable],
+    [
+      assigneeField,
+      rotates,
+      assigneeLock,
+      initialAssignee,
+      resource,
+      components,
+      models,
+      row.limits,
+      settingsEditable,
+    ],
   );
 
-  const mutation = useManagedMutation<
-    any,
-    any,
-    { values: EditApiKeyFormValues; modelsTouched: boolean }
-  >({
-    mutationFn: ({ values, modelsTouched }) => {
-      const user = values.user?.uuid ?? null;
+  const { showSuccess } = useNotify();
+  const invalidateReveal = useInvalidateRevealedKey();
+  const mutation = useManagedMutation<any, any, EditApiKeyFormValues>({
+    mutationFn: (values) => {
+      const user = getAssigneeUuid(values);
       return marketplaceResourceApiKeysPartialUpdate({
         path: { uuid: row.uuid },
         body: {
-          // Sent only when changed: the backend audits every assignee change.
-          ...(user !== (row.user_uuid ?? null) ? { user } : {}),
+          // Sent only when changed: on a key that holds a secret, a change
+          // rotates it.
+          ...(user !== initialAssignee ? { user } : {}),
           ...(settingsEditable
-            ? serializeKeySettings(values, components, models, modelsTouched)
+            ? serializeKeySettings(values, components, models)
             : {}),
         },
       });
     },
     // Limits and models go to the agent as a command, or with the resume of a
-    // paused key; an assignee change is Waldur's alone. The key's state shows
-    // which.
-    successMessage: translate('API key settings saved'),
+    // paused key. A new assignee on a key that holds a secret goes as a
+    // rotation, which carries them too; on one that holds none it is
+    // Waldur's alone. The key's state shows which.
+    onSuccess: (_data, values) => {
+      const rotated = rotates && getAssigneeUuid(values) !== initialAssignee;
+      if (rotated) {
+        // The old value is about to stop working, and the new assignee
+        // reveals the new one.
+        invalidateReveal(row.uuid);
+      }
+      showSuccess(
+        rotated
+          ? translate('API key settings saved; rotation requested')
+          : translate('API key settings saved'),
+      );
+    },
     errorMessage: translate('Unable to update the API key settings.'),
     refetch,
   });
+
+  // A refused assignee (a second key for the same person, or a key that
+  // cannot be rotated now) is shown on the field, not only in the toast.
+  const submitForm = useCallback(
+    async (values: EditApiKeyFormValues) => {
+      try {
+        await mutation.mutateAsync(values);
+      } catch (error) {
+        const userError = (error as any)?.response?.data?.user;
+        if (userError) {
+          return { user: userError };
+        }
+      }
+    },
+    [mutation.mutateAsync],
+  );
 
   return (
     <ResourceActionDialog
@@ -118,12 +217,7 @@ export const EditApiKeySettingsDialog: FC<{
       disableSubmitWhenPristine
       formFields={fields}
       initialValues={initialValues}
-      submitForm={(values: EditApiKeyFormValues, form?: FormApi) =>
-        mutation.mutateAsync({
-          values,
-          modelsTouched: Boolean(form?.getState().modified?.allowed_models),
-        })
-      }
+      submitForm={submitForm}
     />
   );
 };

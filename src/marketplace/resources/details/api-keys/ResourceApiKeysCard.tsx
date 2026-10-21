@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { Offering, Resource } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import Avatar from '@/core/Avatar';
 import { CreateModalButton } from '@/core/buttons';
@@ -9,6 +9,10 @@ import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
+import {
+  getResourceModels,
+  isAllModels,
+} from '@/marketplace/common/modelSelection';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -21,7 +25,14 @@ import { ApiKeyActionsDropdown } from './ApiKeyActions';
 import { ApiKeyExpandableRow } from './ApiKeyExpandableRow';
 import { ApiKeyUsageSummary } from './ApiKeyUsageMeter';
 import { getHeadlineUsage } from './keyLimits';
-import { getStateLabel, getStateTooltip, getStateVariant } from './state';
+import {
+  getKeyStateVariant,
+  getResourcePause,
+  getResourcePauseMessage,
+  getStateLabel,
+  getStateTooltip,
+  ResourcePause,
+} from './state';
 import { ApiKeyRow, KeyComponent } from './types';
 import { TRANSITIONAL } from './useResourceApiKeys';
 
@@ -37,10 +48,11 @@ const RequestApiKeyDialog = lazyComponent(() =>
 // column stays for as long as any key has one.
 const getColumns = (
   components: KeyComponent[],
-  models: string[],
+  models: string[] | null,
   resourceLimits: Record<string, number>,
   keyManagement: boolean,
   anyAssigned: boolean,
+  pause: ResourcePause | null,
 ): Column<ApiKeyRow>[] => [
   {
     title: translate('Key ID'),
@@ -55,13 +67,13 @@ const getColumns = (
   {
     title: translate('State'),
     render: ({ row }) => {
-      const { variant, active } = getStateVariant(row.state);
+      const { variant, active } = getKeyStateVariant(row, pause);
       return (
         <StateIndicator
-          label={getStateLabel(row)}
+          label={getStateLabel(row, pause)}
           variant={variant}
           active={active}
-          tooltip={getStateTooltip(row)}
+          tooltip={getStateTooltip(row, pause)}
           shape="pill"
           tone="outline"
         />
@@ -92,7 +104,7 @@ const getAssigneeColumn = (): Column<ApiKeyRow> => ({
 
 const getManagedColumns = (
   components: KeyComponent[],
-  models: string[],
+  models: string[] | null,
   resourceLimits: Record<string, number>,
 ): Column<ApiKeyRow>[] => [
   getAssigneeColumn(),
@@ -108,15 +120,19 @@ const getManagedColumns = (
         },
       ]
     : []),
-  ...(models.length
+  ...(models
     ? [
         {
           title: translate('Models'),
           render: ({ row }: { row: ApiKeyRow }) => {
-            // A key with no list may call every model.
-            if (!row.allowed_models?.length) return translate('All models');
-            // Models no longer offered are dropped rather than shown stale.
-            const allowed = row.allowed_models.filter((model) =>
+            // All models is every model the resource allows, which may be none.
+            if (isAllModels(row.allowed_models) && models.length) {
+              return translate('All models');
+            }
+            // Models no longer offered, or no longer allowed by the resource,
+            // are dropped rather than shown stale; a key left with none of
+            // them can call nothing.
+            const allowed = (row.allowed_models ?? []).filter((model) =>
               models.includes(model),
             );
             return allowed.length ? (
@@ -135,7 +151,7 @@ const getManagedColumns = (
                 ))}
               </span>
             ) : (
-              DASH_ESCAPE_CODE
+              translate('No models')
             );
           },
         },
@@ -171,18 +187,14 @@ export const ResourceApiKeysCard = ({
     [resource.limits],
   );
   // The offering's choices, narrowed by the resource's own selection.
-  const models = useMemo<string[]>(() => {
-    const choices = offering?.resource_options?.options?.models?.choices ?? [];
-    const option = (resource.options as any)?.models;
-    // A single-choice models option stores one string rather than a list.
-    const selected: string[] = option ? [].concat(option) : [];
-    return selected.length
-      ? choices.filter((model) => selected.includes(model))
-      : choices;
-  }, [offering, resource.options]);
+  const models = useMemo(
+    () => getResourceModels(offering, resource),
+    [offering, resource],
+  );
   const keyManagement = Boolean(
     offering?.plugin_options?.enable_api_key_provisioning,
   );
+  const pause = getResourcePause(resource);
 
   // useTable has no built-in polling; refresh while any key is mid-operation.
   const rows = (tableProps.rows ?? []) as ApiKeyRow[];
@@ -198,58 +210,72 @@ export const ResourceApiKeysCard = ({
   }, [syncing]);
 
   return (
-    <Table<ApiKeyRow>
-      title={translate('API keys')}
-      verboseName={translate('API keys')}
-      cardBordered
-      columns={getColumns(
-        components,
-        models,
-        resourceLimits,
-        keyManagement,
-        rows.some((key) => key.user_uuid),
-      )}
-      tableActions={
-        canManage && keyManagement ? (
-          <CreateModalButton
-            title={translate('Request key')}
-            dialog={RequestApiKeyDialog}
-            size="md"
-            resolve={{
-              resource,
-              components,
-              models,
-              refetch: tableProps.fetch,
-            }}
-          />
-        ) : undefined
-      }
-      // The expanded row is the per-component usage, which only key
-      // management reports; without it there is nothing to expand, so the
-      // header's expand-all toggle goes too.
-      expandableRow={
-        keyManagement && components.length
-          ? ({ row }) => (
-              <ApiKeyExpandableRow
-                row={row}
-                components={components}
-                resourceLimits={resourceLimits}
-              />
-            )
-          : undefined
-      }
-      rowActions={({ row }) => (
-        <ApiKeyActionsDropdown
-          row={row}
-          resource={resource}
-          components={components}
-          models={models}
-          canManage={canManage}
-          keyManagement={keyManagement}
-          refetch={tableProps.fetch}
+    <>
+      {pause && (
+        <AlertItem
+          type="floating"
+          variant="warning"
+          className="mb-4"
+          title={translate(
+            'This resource is paused, so none of its keys is served.',
+          )}
+          body={getResourcePauseMessage(pause)}
         />
       )}
-      {...tableProps}
-    />
+      <Table<ApiKeyRow>
+        title={translate('API keys')}
+        verboseName={translate('API keys')}
+        cardBordered
+        columns={getColumns(
+          components,
+          models,
+          resourceLimits,
+          keyManagement,
+          rows.some((key) => key.user_uuid),
+          pause,
+        )}
+        tableActions={
+          canManage && keyManagement ? (
+            <CreateModalButton
+              title={translate('Request key')}
+              dialog={RequestApiKeyDialog}
+              size="md"
+              resolve={{
+                resource,
+                components,
+                models,
+                refetch: tableProps.fetch,
+              }}
+            />
+          ) : undefined
+        }
+        // The expanded row is the per-component usage, which only key
+        // management reports; without it there is nothing to expand, so the
+        // header's expand-all toggle goes too.
+        expandableRow={
+          keyManagement && components.length
+            ? ({ row }) => (
+                <ApiKeyExpandableRow
+                  row={row}
+                  components={components}
+                  resourceLimits={resourceLimits}
+                />
+              )
+            : undefined
+        }
+        rowActions={({ row }) => (
+          <ApiKeyActionsDropdown
+            row={row}
+            resource={resource}
+            components={components}
+            models={models}
+            canManage={canManage}
+            keyManagement={keyManagement}
+            refetch={tableProps.fetch}
+          />
+        )}
+        {...tableProps}
+      />
+    </>
   );
 };
