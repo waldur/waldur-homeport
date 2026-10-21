@@ -215,6 +215,19 @@ describe('ResourceApiKeysCard', () => {
     vi.mocked(hasPermission).mockReturnValue(true);
     renderCard([]);
     expect(await screen.findByText('No api keys found')).toBeInTheDocument();
+    expect(screen.getByText('There are no api keys yet.')).toBeInTheDocument();
+  });
+
+  it('says how to get a key when a managed resource has none', async () => {
+    // Under key management a new resource starts with no keys.
+    vi.mocked(hasPermission).mockReturnValue(true);
+    renderCard([], { offering: MANAGED_OFFERING });
+    expect(await screen.findByText('No api keys found')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'API keys are requested here, one at a time, by people who can manage the resource.',
+      ),
+    ).toBeInTheDocument();
   });
 
   describe('with key management', () => {

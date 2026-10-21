@@ -1055,6 +1055,11 @@
       "feature_area": "api-keys"
     }
   },
+  "API keys are requested here, one at a time, by people who can manage the resource.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "API secret code": {
     "context": {
       "feature_area": "service-providers"
@@ -28157,7 +28162,7 @@
     }
   },
   "Lets customers change the number entered for a Component Formula order option after ordering. The change is ordered with the recalculated limits and price. It uses the formulas and bounds of that order option.": {},
-  "Lets users request API keys, assign them, limit their usage and their models, and pause or delete them. Turn on only if the backend behind the site agent supports it, such as the Envoy AI Gateway; others, such as Ceph S3, fail those actions. Without it, keys can only be revealed and rotated.": {
+  "Lets users request API keys, assign them, limit their usage and their models, and pause or delete them. New resources start without keys instead of with two shared ones; existing resources keep theirs. Turn on only if the backend behind the site agent supports it, such as the Envoy AI Gateway; others, such as Ceph S3, fail those actions. Without it, keys can only be revealed and rotated.": {
     "context": {
       "feature_area": "integration"
     }

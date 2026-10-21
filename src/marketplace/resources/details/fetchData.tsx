@@ -165,7 +165,13 @@ export const getResourceTabs = ({
   }
 
   // Any backend that reports API keys gets the tab, unless the offering hides it.
-  if (resource.has_api_keys && !offering.plugin_options?.hide_api_keys_tab) {
+  // Under key management a resource starts with no keys, and the tab is where
+  // the first one is requested.
+  if (
+    (resource.has_api_keys ||
+      offering.plugin_options?.enable_api_key_provisioning) &&
+    !offering.plugin_options?.hide_api_keys_tab
+  ) {
     tabs.push({
       key: 'api-keys',
       title: translate('API keys'),
