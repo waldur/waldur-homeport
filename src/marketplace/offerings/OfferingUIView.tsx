@@ -9,7 +9,7 @@ import {
 import { useBreadcrumbs } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
-import { usePageHero } from '@/navigation/context';
+import { LayoutSlot } from '@/navigation/slots';
 
 import { PROVIDER_OFFERING_DATA_QUERY_KEY } from './constants';
 import { getOfferingBreadcrumbItems } from './hooks';
@@ -45,17 +45,6 @@ export const OfferingUIView = (props) => {
     refetchOnWindowFocus: false,
   });
 
-  usePageHero(
-    <OfferingViewHero
-      offering={offeringData?.offering as any}
-      refetch={refetch}
-      isRefetching={isRefetching}
-      isLoading={isLoading}
-      error={error}
-    />,
-    [offeringData?.offering, refetch, isRefetching, isLoading, error],
-  );
-
   const page = state.name.includes('update') ? 'edit' : 'details';
   const breadcrumbItems = useMemo(
     () =>
@@ -69,19 +58,30 @@ export const OfferingUIView = (props) => {
   useBreadcrumbs(breadcrumbItems);
 
   return (
-    <UIView
-      render={(Component, { key, ...uiViewProps }) => (
-        <Component
-          key={key}
-          {...props}
-          {...uiViewProps}
-          offeringData={offeringData}
-          refetchOffering={refetch}
-          isLoadingOffering={isLoading}
-          isRefetchingOffering={isRefetching}
-          errorOffering={error}
+    <>
+      <LayoutSlot name="hero">
+        <OfferingViewHero
+          offering={offeringData?.offering as any}
+          refetch={refetch}
+          isRefetching={isRefetching}
+          isLoading={isLoading}
+          error={error}
         />
-      )}
-    />
+      </LayoutSlot>
+      <UIView
+        render={(Component, { key, ...uiViewProps }) => (
+          <Component
+            key={key}
+            {...props}
+            {...uiViewProps}
+            offeringData={offeringData}
+            refetchOffering={refetch}
+            isLoadingOffering={isLoading}
+            isRefetchingOffering={isRefetching}
+            errorOffering={error}
+          />
+        )}
+      />
+    </>
   );
 };

@@ -10,7 +10,6 @@ vi.mock('@/ai-assistant/utils', () => ({
   isAnonymousVisitor: vi.fn(),
 }));
 vi.mock('@/ai-assistant/components/LLMChatDrawer', () => ({
-  resetDrawerDOM: vi.fn(),
   LLMChatDrawerToolbar: () => null,
 }));
 vi.mock('@/navigation/useTabs', () => ({

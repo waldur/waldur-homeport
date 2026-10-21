@@ -20,7 +20,6 @@ import store from '@/store/store';
 import { BootErrorScreen } from './BootErrorScreen';
 import { loadConfig } from './core/bootstrap';
 import { ErrorMessage } from './ErrorMessage';
-import { LayoutProvider } from './metronic/layout/core';
 import { ConfirmModalRoot } from './modal/ConfirmModalRoot';
 import { RouteLoadingBar } from './navigation/RouteLoadingBar';
 import { NotificationContainer } from './NotificationContainer';
@@ -40,34 +39,32 @@ const ApplicationInner: FunctionComponent = () => {
     <ErrorBoundary fallback={ErrorMessage}>
       <UIRouter router={router}>
         <Provider store={store}>
-          <LayoutProvider>
-            <ThemeProvider>
-              {/* Drawer/Modal providers must wrap MatrixRoot: MatrixCallHost
+          <ThemeProvider>
+            {/* Drawer/Modal providers must wrap MatrixRoot: MatrixCallHost
                     (rendered inside MatrixRoot) opens the chat drawer from the
                     call widget via useDrawer, so it needs the same shared
                     DrawerProvider instance as the rest of the app. */}
-              <ModalProvider>
-                <DrawerProvider>
-                  <MatrixRoot>
-                    <ThreadProvider>
-                      <ThreadRuntimeProvider>
-                        <AnonymousThreadProvider>
-                          <RouteLoadingBar />
-                          <RealtimeRoot />
-                          <NotificationContainer />
-                          <ModalRoot />
-                          <ConfirmModalRoot />
-                          <DrawerRoot />
-                          <UIView />
-                          <BootSplashGate />
-                        </AnonymousThreadProvider>
-                      </ThreadRuntimeProvider>
-                    </ThreadProvider>
-                  </MatrixRoot>
-                </DrawerProvider>
-              </ModalProvider>
-            </ThemeProvider>
-          </LayoutProvider>
+            <ModalProvider>
+              <DrawerProvider>
+                <MatrixRoot>
+                  <ThreadProvider>
+                    <ThreadRuntimeProvider>
+                      <AnonymousThreadProvider>
+                        <RouteLoadingBar />
+                        <RealtimeRoot />
+                        <NotificationContainer />
+                        <ModalRoot />
+                        <ConfirmModalRoot />
+                        <DrawerRoot />
+                        <UIView />
+                        <BootSplashGate />
+                      </AnonymousThreadProvider>
+                    </ThreadRuntimeProvider>
+                  </ThreadProvider>
+                </MatrixRoot>
+              </DrawerProvider>
+            </ModalProvider>
+          </ThemeProvider>
         </Provider>
       </UIRouter>
     </ErrorBoundary>

@@ -1,42 +1,23 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { getFullscreenElement } from '@/core/fullscreen';
 
-const DRAWER_WIDTH_DEFAULT = '800px';
-
-const getExpandedWidth = () => {
-  const isMinimized =
-    document.body.getAttribute('data-kt-aside-minimize') === 'on';
-  const asideWidth = isMinimized ? 75 : 300;
-  return `calc(100% - ${asideWidth}px - 8px)`;
-};
-
-const setDrawerWidth = (width: string) => {
-  const drawer = document.getElementById('kt_drawer');
-  if (drawer) {
-    drawer.style.setProperty('--drawer-width', width);
-  }
-};
+import { useDrawer } from './actions';
 
 /**
- * Drives the drawer's expand ("full screen") toggle. State lives both in React
- * (for the toolbar icon) and on `#kt_drawer[data-expanded]`/its inline
- * `--drawer-width`, because the panel body reads the DOM attribute directly.
+ * Drives the drawer's expand ("full screen") toggle. The state lives in
+ * DrawerContext; DrawerRoot widens the panel from it.
  */
 export const useDrawerExpand = (): {
   expanded: boolean;
   toggle: () => void;
 } => {
-  const [expanded, setExpanded] = useState(false);
+  const { expanded, setExpanded } = useDrawer();
 
-  const toggle = useCallback(() => {
-    const drawer = document.getElementById('kt_drawer');
-    const isCurrentlyExpanded = drawer?.dataset.expanded === 'true';
-    const next = !isCurrentlyExpanded;
-    setExpanded(next);
-    setDrawerWidth(next ? getExpandedWidth() : DRAWER_WIDTH_DEFAULT);
-    if (drawer) drawer.dataset.expanded = String(next);
-  }, []);
+  const toggle = useCallback(
+    () => setExpanded(!expanded),
+    [expanded, setExpanded],
+  );
 
   // Collapse expanded view immediately on any window resize
   useEffect(() => {
@@ -57,9 +38,6 @@ export const useDrawerExpand = (): {
     const collapse = () => {
       if (fsTransition || getFullscreenElement()) return;
       setExpanded(false);
-      setDrawerWidth(DRAWER_WIDTH_DEFAULT);
-      const drawer = document.getElementById('kt_drawer');
-      if (drawer) drawer.dataset.expanded = 'false';
     };
 
     document.addEventListener('fullscreenchange', markFsTransition);
@@ -71,42 +49,7 @@ export const useDrawerExpand = (): {
       document.removeEventListener('webkitfullscreenchange', markFsTransition);
       window.removeEventListener('resize', collapse);
     };
-  }, [expanded]);
-
-  // DrawerRoot re-declares --drawer-width from drawerProps.width on every
-  // render (open/content swap, etc.), clobbering the imperative expanded
-  // value. While expanded that silently shrinks the drawer back to the panel
-  // width even though `data-expanded` stays true, so the expanded two-pane
-  // layout renders cramped into the narrow drawer. Re-assert the expanded
-  // width whenever it's reset to a fixed (non-calc) value; the calc() guard
-  // makes the observer's own write a no-op so it can't loop, and the
-  // data-expanded gate yields to a deliberate collapse.
-  useEffect(() => {
-    if (!expanded) return;
-    const drawer = document.getElementById('kt_drawer');
-    if (!drawer || typeof MutationObserver === 'undefined') return;
-    const enforce = () => {
-      if (drawer.dataset.expanded !== 'true') return;
-      if (!drawer.style.getPropertyValue('--drawer-width').startsWith('calc')) {
-        setDrawerWidth(getExpandedWidth());
-      }
-    };
-    enforce();
-    const observer = new MutationObserver(enforce);
-    observer.observe(drawer, {
-      attributes: true,
-      attributeFilter: ['style'],
-    });
-    return () => observer.disconnect();
-  }, [expanded]);
-
-  useEffect(() => {
-    return () => {
-      setDrawerWidth(DRAWER_WIDTH_DEFAULT);
-      const drawer = document.getElementById('kt_drawer');
-      drawer?.removeAttribute('data-expanded');
-    };
-  }, []);
+  }, [expanded, setExpanded]);
 
   return { expanded, toggle };
 };

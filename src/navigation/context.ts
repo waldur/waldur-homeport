@@ -1,54 +1,37 @@
-import { omit } from 'lodash-es';
-import {
-  DependencyList,
-  Fragment,
-  ReactNode,
-  createContext,
-  createElement,
-  useCallback,
-  useContext,
-  useEffect,
-  useId,
-  useMemo,
-  useState,
-} from 'react';
+import { createContext, useContext, useLayoutEffect } from 'react';
 
 import { Tab } from './Tab';
 
+/**
+ * Page state Layout needs that is data, not markup. Content a page adds to
+ * the chrome (hero, tab actions, filter bar, announcements) goes through
+ * LayoutSlot instead (slots.tsx).
+ */
 export interface LayoutContextInterface {
-  setActions(actions: React.ReactNode): void;
   extraTabs: Tab[];
   setExtraTabs(tabs: Tab[]): void;
   fullPage: boolean;
   setFullPage(value: boolean): void;
-  setExtraToolbar(component: React.ReactNode);
-  setPageHero(component: React.ReactNode);
-  setPageBar(component: React.ReactNode);
-  setExtraAnnouncementBar(id: string, component: React.ReactNode);
 }
 
 const noop = () => {};
 
-// Every use* hook below calls its setter unconditionally (no optional
-// chaining), so a consumer rendered without a real LayoutContext.Provider -
-// most commonly a unit test - crashed on a bare `{}` default. No-op stubs
-// mean that case degrades silently instead, matching how these hooks behave
-// once a real provider mounts and simply does nothing with the update.
+// The hooks below call their setter unconditionally, so a consumer rendered
+// without a real LayoutContext.Provider (most commonly a unit test) gets
+// no-op stubs instead of crashing on a bare `{}` default.
 export const LayoutContext = createContext<Partial<LayoutContextInterface>>({
-  setActions: noop,
   extraTabs: [],
   setExtraTabs: noop,
   fullPage: false,
   setFullPage: noop,
-  setExtraToolbar: noop,
-  setPageHero: noop,
-  setPageBar: noop,
-  setExtraAnnouncementBar: noop,
 });
+
+// From a layout effect, so Layout takes the change in the same paint as the
+// page that made it.
 
 export const useExtraTabs = (tabs: Tab[]) => {
   const layoutContext = useContext(LayoutContext);
-  useEffect(() => {
+  useLayoutEffect(() => {
     layoutContext.setExtraTabs(tabs);
     return () => {
       layoutContext.setExtraTabs([]);
@@ -58,86 +41,10 @@ export const useExtraTabs = (tabs: Tab[]) => {
 
 export const useFullPage = () => {
   const layoutContext = useContext(LayoutContext);
-  useEffect(() => {
+  useLayoutEffect(() => {
     layoutContext.setFullPage(true);
     return () => {
       layoutContext.setFullPage(false);
     };
   }, [layoutContext]);
-};
-
-export const useExtraToolbar = (
-  component: ReactNode,
-  deps: DependencyList = [],
-) => {
-  const layoutContext = useContext(LayoutContext);
-  useEffect(() => {
-    layoutContext.setExtraToolbar(component);
-    return () => {
-      layoutContext.setExtraToolbar(null);
-    };
-  }, [layoutContext, ...deps]);
-};
-
-export const usePageHero = (
-  component: ReactNode,
-  deps: DependencyList = [],
-) => {
-  const layoutContext = useContext(LayoutContext);
-  useEffect(() => {
-    layoutContext.setPageHero(component);
-    return () => {
-      layoutContext.setPageHero(null);
-    };
-  }, [layoutContext, ...deps]);
-};
-
-export const useToolbarActions = (
-  component: ReactNode,
-  deps: DependencyList = [],
-) => {
-  const layoutContext = useContext(LayoutContext);
-  useEffect(() => {
-    layoutContext.setActions(component);
-    return () => {
-      layoutContext.setActions(null);
-    };
-  }, [layoutContext, ...deps]);
-};
-
-// Several components show a bar at once (a page's own bar, the footer's
-// security alert), so each owns a slot keyed by its id; with a single shared
-// slot, whichever effect ran last wiped out the others' bars.
-export const useExtraAnnouncementBars = () => {
-  const [bars, setBars] = useState<Record<string, ReactNode>>({});
-  const setBar = useCallback(
-    (id: string, component: ReactNode) =>
-      setBars((prev) => {
-        if (component) return { ...prev, [id]: component };
-        return id in prev ? omit(prev, id) : prev;
-      }),
-    [],
-  );
-  const elements = useMemo(
-    () =>
-      Object.entries(bars).map(([id, component]) =>
-        createElement(Fragment, { key: id }, component),
-      ),
-    [bars],
-  );
-  return [elements, setBar] as const;
-};
-
-export const useExtraAnnouncementBar = (
-  component: ReactNode,
-  deps: DependencyList = [],
-) => {
-  const id = useId();
-  const { setExtraAnnouncementBar } = useContext(LayoutContext);
-  useEffect(() => {
-    setExtraAnnouncementBar(id, component);
-    return () => {
-      setExtraAnnouncementBar(id, null);
-    };
-  }, [setExtraAnnouncementBar, id, ...deps]);
 };

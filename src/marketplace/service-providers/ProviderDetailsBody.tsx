@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react';
-import { Col, Row, Container } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 import { OfferingGrid } from '@/marketplace/common/OfferingGrid';
+import { PAGE_CONTAINER_BOUNDED_CLASSNAME } from '@/navigation/pageContainer';
 import { Field } from '@/resource/summary';
 
 import { OfferingLogo } from '../common/OfferingLogo';
@@ -26,7 +27,7 @@ export const ProviderDetailsBody: FunctionComponent<{
     <Col md={9}>
       <h2 className="font-bold mb-4">{provider.customer_name}</h2>
       <Col sm={12}>
-        <Container>
+        <div className={PAGE_CONTAINER_BOUNDED_CLASSNAME}>
           {provider.customer_native_name && (
             <Field
               label={translate('Native name')}
@@ -39,7 +40,7 @@ export const ProviderDetailsBody: FunctionComponent<{
               value={provider.customer_abbreviation}
             />
           )}
-        </Container>
+        </div>
       </Col>
 
       <hr />

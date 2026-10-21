@@ -8,21 +8,16 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { getMarketplaceTitle } from '@/marketplace/title';
 import { useMarketplacePublicTabs } from '@/marketplace/utils';
-import {
-  useExtraToolbar,
-  useFullPage,
-  useToolbarActions,
-} from '@/navigation/context';
+import { useFullPage } from '@/navigation/context';
 import { useTitle } from '@/navigation/title';
 
 import { CardStyleType } from '../common/cards/index';
 
 import { CardStyleProvider } from './CardStyleContext';
-import { PageBarFilters } from './filter/PageBarFilters';
+import { MarketplaceScopeBar } from './filter/PageBarFilters';
 import { setMarketplaceFilter } from './filter/store/actions';
 import { getMarketplaceFilters } from './filter/store/selectors';
 import { LAYOUTS, MarketplaceLayoutType } from './layouts';
-import { MarketplaceLandingFilter } from './MarketplaceLandingFilter';
 
 export const LandingPage: FC<{}> = () => {
   useTitle(getMarketplaceTitle());
@@ -62,13 +57,11 @@ export const LandingPage: FC<{}> = () => {
     [dispatch, formValues],
   );
 
-  useToolbarActions(<MarketplaceLandingFilter />, []);
-  useExtraToolbar(filters.length ? <PageBarFilters /> : null, [filters]);
-
   const LayoutComponent = LAYOUTS[layout];
 
   return (
     <CardStyleProvider cardStyle={cardStyle}>
+      <MarketplaceScopeBar />
       <Suspense fallback={<LoadingSpinner />}>
         <LayoutComponent onTagClick={handleTagClick} />
       </Suspense>

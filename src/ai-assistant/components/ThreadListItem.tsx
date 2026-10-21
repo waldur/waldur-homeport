@@ -8,6 +8,7 @@ import { ThreadSession } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
 
+import { useOptionalDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionsMenu } from '@/table/ActionsDropdown';
@@ -43,32 +44,30 @@ ThreadItemMenuToggle.displayName = 'ThreadItemMenuToggle';
 // their own separate nested copy of @radix-ui/react-focus-scope (different
 // node_modules paths despite matching version numbers), so they don't
 // coordinate focus with each other. This menu only ever renders inside the
-// content drawer's Dialog (ChatHistorySidebar → LLMChatDrawer → #kt_drawer),
+// content drawer's Dialog (ChatHistorySidebar → LLMChatDrawer → the drawer panel),
 // whose own focus trap is active while the drawer is open — the instant
 // this Trigger's default document.body portal tries to move focus into its
 // portaled Content, the Dialog's focus trap (via a DOM `contains()` check
 // against its own container, which the default portal escapes) snaps focus
 // straight back to whatever was focused before, and DropdownMenu reads that
 // as "focus left me" and closes itself in the same tick — reported live as
-// "opens and instantly closes." Anchoring the portal back inside #kt_drawer
+// "opens and instantly closes." Anchoring the portal back inside the panel
 // keeps the menu's content within the Dialog's own focus boundary. Falls
 // back to Radix's own default (document.body) wherever the drawer isn't
 // present — Storybook/tests that don't render the real layout shell.
-const getThreadItemMenuPortalContainer = () =>
-  document.getElementById('kt_drawer') ?? undefined;
-
 const ThreadItemMenu: FC<ThreadItemMenuProps> = ({
   threadId,
   onAction,
   isArchived,
 }) => {
+  const container = useOptionalDrawer()?.panel ?? undefined;
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- stopPropagation wrapper
     <div className="aui-history-item-menu" onClick={(e) => e.stopPropagation()}>
       <ActionsMenu
         side="bottom"
         toggle={<ThreadItemMenuToggle />}
-        container={getThreadItemMenuPortalContainer()}
+        container={container}
         align="end"
       >
         <ActionItem

@@ -1,12 +1,14 @@
 import { FingerprintIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FunctionComponent, useState } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 
 import { BaseButton } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { PAGE_CONTAINER_BOUNDED_CLASSNAME } from '@/navigation/pageContainer';
 import { router } from '@/router';
 import { useNotify } from '@/store/notify';
 import { getBlockedNavigation } from '@/user/blockedNavigation';
@@ -108,7 +110,7 @@ export const PasskeyEnrollmentRequired: FunctionComponent = () => {
     });
 
   return (
-    <Container className="py-10">
+    <div className={classNames(PAGE_CONTAINER_BOUNDED_CLASSNAME, 'py-10')}>
       <Row className="justify-center">
         <Col md={7} lg={6}>
           <Card>
@@ -144,6 +146,6 @@ export const PasskeyEnrollmentRequired: FunctionComponent = () => {
           </Card>
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 };

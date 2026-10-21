@@ -1,5 +1,6 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
+import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 import { Table } from 'react-bootstrap';
 import { Offering } from 'waldur-js-client';
@@ -15,8 +16,9 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { translate } from '@/i18n';
 import { ParentLink } from '@/marketplace/resources/details/ParentResourceLink';
-import { useExtraAnnouncementBar } from '@/navigation/context';
 import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
+import { LayoutSlot } from '@/navigation/slots';
 import { useTitle } from '@/navigation/title';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE } from '@/openstack/constants';
@@ -51,25 +53,6 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
   const offering = props.offering;
 
   useTitle(offering ? offering.name : translate('Marketplace offering'));
-
-  useExtraAnnouncementBar(
-    offering?.state === 'Unavailable' ? (
-      <AnnouncementBar
-        label={translate('This offering is temporarily unavailable.')}
-        description={
-          [TENANT_TYPE, VOLUME_TYPE, INSTANCE_TYPE].includes(offering.type)
-            ? translate(
-                'Operations on its resources (tenants, instances and volumes) are currently blocked.',
-              )
-            : translate('Operations on its resources are currently blocked.')
-        }
-        icon={ANNOUNCEMENT_ICON.warning.icon}
-        variant={ANNOUNCEMENT_ICON.warning.variant}
-        colored
-      />
-    ) : null,
-    [offering],
-  );
 
   const isAdmin = isDescendantOf('admin', state);
   const manageState = isAdmin
@@ -120,7 +103,26 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
   }
 
   return (
-    <div className="container-fluid my-5">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-[1.25rem]')}>
+      {offering?.state === 'Unavailable' && (
+        <LayoutSlot name="announcements">
+          <AnnouncementBar
+            label={translate('This offering is temporarily unavailable.')}
+            description={
+              [TENANT_TYPE, VOLUME_TYPE, INSTANCE_TYPE].includes(offering.type)
+                ? translate(
+                    'Operations on its resources (tenants, instances and volumes) are currently blocked.',
+                  )
+                : translate(
+                    'Operations on its resources are currently blocked.',
+                  )
+            }
+            icon={ANNOUNCEMENT_ICON.warning.icon}
+            variant={ANNOUNCEMENT_ICON.warning.variant}
+            colored
+          />
+        </LayoutSlot>
+      )}
       {canManageAndEditOfferings && (
         <TabNav
           activeKey={state.name}

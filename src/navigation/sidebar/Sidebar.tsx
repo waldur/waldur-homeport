@@ -43,7 +43,7 @@ export const Sidebar: React.FC<PropsWithChildren> = ({ children }) => {
   // Start below the impersonation bar (or any other outstanding bar), like
   // the header and toolbar do.
   return (
-    <SidebarRoot className="in-[.outstanding-bar-enabled]:top-(--kt-pagebar-height) in-[.outstanding-bar-enabled]:h-[calc(100svh-var(--kt-pagebar-height))]">
+    <SidebarRoot className="top-[var(--layout-page-bar-height,0px)] h-[calc(100svh-var(--layout-page-bar-height,0px))]">
       <SidebarBrandHeader onToggle={markUserToggled} />
       <SidebarContent>
         <SidebarMenu>{children}</SidebarMenu>

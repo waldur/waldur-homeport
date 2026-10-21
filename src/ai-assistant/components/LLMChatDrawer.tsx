@@ -3,7 +3,7 @@ import {
   ArrowsOutSimpleIcon,
   ListIcon,
 } from '@phosphor-icons/react';
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import { BaseButton } from 'waldur-ui';
 
@@ -22,9 +22,7 @@ import { useChatDrawerPreference } from '@/chat/chatDrawerPreferences';
 import { useDrawer } from '@/drawer/actions';
 import { DrawerCloseButton } from '@/drawer/DrawerCloseButton';
 import { useDrawerExpand } from '@/drawer/useDrawerExpand';
-import { isDrawerOpen } from '@/drawer/utils';
 import { translate } from '@/i18n';
-import { useLayout } from '@/metronic/layout/core';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 import { useUser } from '@/workspace/hooks';
 
@@ -32,31 +30,10 @@ interface LLMChatDrawerProps {
   close?: () => void;
 }
 
-const DRAWER_WIDTH_DEFAULT = '800px';
-
-const setDrawerWidth = (width: string) => {
-  const drawer = document.getElementById('kt_drawer');
-  if (drawer) {
-    drawer.style.setProperty('--drawer-width', width);
-  }
-};
-
-/** Reset all AI drawer DOM state to defaults. */
-export const resetDrawerDOM = () => {
-  const drawer = document.getElementById('kt_drawer');
-  if (!drawer) return;
-  drawer.removeAttribute('data-expanded');
-  drawer.removeAttribute('data-history-open');
-  drawer.style.removeProperty('--drawer-width');
-};
-
 export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
   const { expanded, toggle: toggleExpand } = useDrawerExpand();
-  const [historyOpen, setHistoryOpen] = useState(false);
   const { hasNewMessages } = useThreadContext();
-  const { closeDrawer } = useDrawer();
-  const { config } = useLayout();
-  const isFirstAsideChange = useRef(true);
+  const { historyOpen, setHistoryOpen } = useDrawer();
   // History sidebar only makes sense on the AI tab; matrix has its own room
   // list. Subscribe to the shared pref so the toolbar updates as the user
   // toggles tabs inside UnifiedChatDrawer.
@@ -68,31 +45,10 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
   const [activeTab] = useChatDrawerPreference('activeTab');
   const showHistoryToggle = !isAnonymous && activeTab === 'ai';
 
-  // Close the drawer when the main aside minimize state flips. The drawer's
-  // layout is anchored to the main content area's width; when that changes,
-  // closing is cleaner than trying to reflow. Same pattern as the
-  // impersonation-change handler in LLMChatDrawerToggle.
-  useEffect(() => {
-    if (isFirstAsideChange.current) {
-      isFirstAsideChange.current = false;
-      return;
-    }
-    closeDrawer();
-  }, [config.aside.minimized, closeDrawer]);
-
-  const toggleHistory = useCallback(() => {
-    const drawer = document.getElementById('kt_drawer');
-    const isOpen = drawer?.dataset.historyOpen === 'true';
-    const next = !isOpen;
-    setHistoryOpen(next);
-    if (drawer) {
-      if (next) {
-        drawer.dataset.historyOpen = 'true';
-      } else {
-        drawer.removeAttribute('data-history-open');
-      }
-    }
-  }, []);
+  const toggleHistory = useCallback(
+    () => setHistoryOpen(!historyOpen),
+    [historyOpen, setHistoryOpen],
+  );
 
   // Close history sidebar when resizing from tablet to desktop
   useEffect(() => {
@@ -101,8 +57,6 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
     const handleResize = () => {
       if (window.innerWidth >= 992) {
         setHistoryOpen(false);
-        const drawer = document.getElementById('kt_drawer');
-        drawer?.removeAttribute('data-history-open');
       }
     };
 
@@ -110,17 +64,7 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [historyOpen]);
-
-  useEffect(() => {
-    return () => {
-      // History sidebar is the toolbar's own state; width + data-expanded are
-      // owned by useDrawerExpand, and the drawer class by DrawerRoot.
-      document
-        .getElementById('kt_drawer')
-        ?.removeAttribute('data-history-open');
-    };
-  }, []);
+  }, [historyOpen, setHistoryOpen]);
 
   return (
     <>
@@ -182,40 +126,10 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
   );
 };
 
-let cleanupTimeout: ReturnType<typeof setTimeout> | null = null;
-
 export const LLMChatDrawer: React.FC<LLMChatDrawerProps> = ({ close }) => {
   const [showDisclosure, setShowDisclosure] = useState(
     () => !isDisclosureAcknowledged(),
   );
-
-  useEffect(() => {
-    if (cleanupTimeout !== null) {
-      clearTimeout(cleanupTimeout);
-      cleanupTimeout = null;
-    }
-
-    // Ensure clean state on mount (e.g. after impersonation change).
-    setDrawerWidth(DRAWER_WIDTH_DEFAULT);
-    document.getElementById('kt_drawer')?.removeAttribute('data-expanded');
-
-    return () => {
-      if (isDrawerOpen()) {
-        resetDrawerDOM();
-      } else {
-        // Drawer already sliding out — delay the reset so the card keeps its
-        // width while it leaves. But another drawer (Support, Pending
-        // confirmations) may open — and expand — within that window;
-        // `resetDrawerDOM` mutates shared #kt_drawer state (width,
-        // data-expanded, data-history-open), so only run it while the drawer is
-        // still idle.
-        cleanupTimeout = setTimeout(() => {
-          cleanupTimeout = null;
-          if (!isDrawerOpen()) resetDrawerDOM();
-        }, 350);
-      }
-    };
-  }, []);
 
   const handleAcknowledge = () => {
     acknowledgeDisclosure();

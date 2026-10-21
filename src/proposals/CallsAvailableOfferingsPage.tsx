@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
@@ -8,6 +9,7 @@ import { translate } from '@/i18n';
 import { OfferingStateCell } from '@/marketplace/offerings/list/OfferingStateCell';
 import { getStates } from '@/marketplace/offerings/list/OfferingStateFilter';
 import { useFullPage } from '@/navigation/context';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { AvailableOfferingCard } from '@/proposals/AvailableOfferingCard';
 import { createFetcher } from '@/table/api';
 import {
@@ -100,7 +102,7 @@ export const CallsAvailableOfferingsPage: FunctionComponent = () => {
         context="calls"
       />
 
-      <div className="container-fluid mt-20 mb-10">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-20 mb-10')}>
         <CallsAvailableOfferingsTable />
       </div>
     </>

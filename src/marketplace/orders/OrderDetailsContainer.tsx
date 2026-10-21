@@ -11,8 +11,8 @@ import {
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { useExtraAnnouncementBar } from '@/navigation/context';
 import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
+import { LayoutSlot } from '@/navigation/slots';
 
 import { OrderDetails } from './details/OrderDetails';
 import { hasFreshConsumerResponse } from './utils';
@@ -97,22 +97,27 @@ export const OrderDetailsContainer: React.FC<{}> = () => {
     );
   }, [data?.order, order_uuid, router]);
 
-  useExtraAnnouncementBar(messagingBar, [messagingBar]);
-
-  return isLoading ? (
-    <LoadingSpinner />
-  ) : error ? (
-    <h3 className="text-center">
-      {translate('Unable to load order details.')}
-    </h3>
-  ) : data ? (
-    <OrderDetails
-      refetch={refetch}
-      order={data.order}
-      offering={data.offering}
-      limits={data.limits}
-      resource={data.resource}
-      isRefetching={isRefetching}
-    />
-  ) : null;
+  return (
+    <>
+      {messagingBar && (
+        <LayoutSlot name="announcements">{messagingBar}</LayoutSlot>
+      )}
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : error ? (
+        <h3 className="text-center">
+          {translate('Unable to load order details.')}
+        </h3>
+      ) : data ? (
+        <OrderDetails
+          refetch={refetch}
+          order={data.order}
+          offering={data.offering}
+          limits={data.limits}
+          resource={data.resource}
+          isRefetching={isRefetching}
+        />
+      ) : null}
+    </>
+  );
 };

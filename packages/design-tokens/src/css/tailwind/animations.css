@@ -256,3 +256,29 @@
 .animation-spin {
   animation: animation-spin 2s infinite linear;
 }
+
+/**
+ * The app drawer's slide in from (and out to) the right edge, Metronic's
+ * `.drawer-end` / `.drawer-on` transform at its 0.3s ease-in-out.
+ * Keyframes for the same Presence reason as the modal's above. The
+ * slide-in holds no end frame: a held
+ * `matrix(1, 0, 0, 1, 0, 0)` would still make the drawer the containing
+ * block for `position: fixed` menus portalled into it.
+ */
+@keyframes waldur-drawer-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes waldur-drawer-slide-out {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

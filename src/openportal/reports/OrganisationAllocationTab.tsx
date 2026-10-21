@@ -17,9 +17,10 @@
 
 import { FileXlsIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
+import classNames from 'classnames';
 import { DateTime } from 'luxon';
 import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import type { ProjectAccountingSummary } from 'waldur-js-client';
 import {
   openportalAccountingSummaryList,
@@ -53,6 +54,7 @@ import { BaseInputField } from '@/form/InputField';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { useCustomer } from '@/workspace/hooks';
 
 import type { OpenPortalProject } from './api';
@@ -1030,7 +1032,7 @@ export const OrganisationAllocationTab: FC = () => {
   );
 
   return (
-    <Container fluid className="py-4">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-4')}>
       {/* ── Toolbar ────────────────────────────────────────────────────── */}
       <div className="flex items-center gap-3 mb-4 flex-wrap">
         <h4 className="mb-0">{translate('Allocation Summary')}</h4>
@@ -1993,6 +1995,6 @@ export const OrganisationAllocationTab: FC = () => {
           </Card.Body>
         </Card>
       )}
-    </Container>
+    </div>
   );
 };

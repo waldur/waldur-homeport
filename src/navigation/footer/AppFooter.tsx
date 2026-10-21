@@ -1,4 +1,5 @@
 import { ArrowCircleUpIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FunctionComponent, useEffect, useState } from 'react';
 import { Version, versionRetrieve } from 'waldur-js-client';
 
@@ -12,8 +13,9 @@ import { format } from '@/core/ErrorMessageFormatter';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { useExtraAnnouncementBar } from '@/navigation/context';
 import { BackendHealthStatusIndicator } from '@/navigation/footer/BackendHealthStatusIndicator';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
+import { LayoutSlot } from '@/navigation/slots';
 import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
@@ -90,17 +92,6 @@ export const AppFooter: FunctionComponent = () => {
   // one to show and compare against - not the frontend build.
   const backendVersion = versionInfo?.version;
 
-  // Show security banner at top of page via layout context
-  useExtraAnnouncementBar(
-    securityAlert ? (
-      <SecurityAlertBanner
-        alert={securityAlert}
-        currentVersion={backendVersion}
-      />
-    ) : null,
-    [securityAlert, backendVersion],
-  );
-
   const showUpgradeAvailable =
     versionInfo?.latest_version &&
     backendVersion !== versionInfo.latest_version &&
@@ -128,9 +119,29 @@ export const AppFooter: FunctionComponent = () => {
     : translate('Update available');
 
   return (
-    <div className="footer flex flex-col">
+    <div
+      // `footer`: the legacy hook the waldur-integration-testing suite
+      // selects the footer by, unstyled (docs/e2e-locators.md).
+      data-testid="app-footer"
+      className="footer flex flex-col bg-primary border-t-[1px] border-t-secondary print:hidden"
+    >
+      {/* The security alert shows at the top of the page, with the
+          announcements. */}
+      {securityAlert && (
+        <LayoutSlot name="announcements">
+          <SecurityAlertBanner
+            alert={securityAlert}
+            currentVersion={backendVersion}
+          />
+        </LayoutSlot>
+      )}
       <div className="py-4 flex lg:flex-col">
-        <div className="container-fluid flex flex-col md:flex-row items-center justify-between text-sm">
+        <div
+          className={classNames(
+            PAGE_CONTAINER_CLASSNAME,
+            'flex flex-col md:flex-row items-center justify-between text-sm',
+          )}
+        >
           <div className="text-primary font-medium order-2 order-md-1 icon-align">
             {user && (
               <>

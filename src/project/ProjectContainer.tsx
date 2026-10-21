@@ -1,12 +1,14 @@
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
+import classNames from 'classnames';
 import { useMemo } from 'react';
 
 import { IBreadcrumbItem, TabNav, useBreadcrumbs } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
-import { usePageHero } from '@/navigation/context';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
+import { LayoutSlot } from '@/navigation/slots';
 import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 
 import { ProjectBreadcrumbPopover } from './ProjectBreadcrumbPopover';
@@ -23,7 +25,7 @@ const PageHero = ({ project }) => {
   const params = { uuid: project.uuid };
 
   return (
-    <div className="container-fluid my-5">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-[1.25rem]')}>
       {canEdit && (
         <TabNav
           aria-label={translate('Project views')}
@@ -52,8 +54,6 @@ const PageHero = ({ project }) => {
 
 const ProjectContainerWithHero = (props) => {
   const project = useProject();
-
-  usePageHero(<PageHero project={project} />, [project]);
 
   const {
     getOrganizationsBreadcrumbItem,
@@ -85,7 +85,14 @@ const ProjectContainerWithHero = (props) => {
   );
   useBreadcrumbs(breadcrumbItems);
 
-  return <UIView {...props} />;
+  return (
+    <>
+      <LayoutSlot name="hero">
+        <PageHero project={project} />
+      </LayoutSlot>
+      <UIView {...props} />
+    </>
+  );
 };
 
 export const ProjectContainer = (props) => {

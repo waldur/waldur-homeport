@@ -7,7 +7,7 @@ import {
 
 import { translate } from '@/i18n';
 import { Category } from '@/marketplace/types';
-import { useToolbarActions } from '@/navigation/context';
+import { LayoutSlot } from '@/navigation/slots';
 import { ActionsUnavailable } from '@/table/ActionsDropdown';
 
 import { OFFERING_CUSTOMERS_LIST_FILTER } from '../expandable/constants';
@@ -23,42 +23,46 @@ interface OfferingDetailsProps {
 }
 
 export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
-  useToolbarActions(
-    // `integration_status` is null — not [] — for callers the backend does not
-    // consider offering administrators; see `get_integration_status` in the
-    // marketplace serializer and the `| null` in the SDK type. A throw here
-    // takes down every tab of the page, since this runs in the shared shell.
-    props.offering.integration_status?.length > 0 ? (
-      <ConnectionStatusIndicator status={props.offering.integration_status} />
-    ) : null,
-    [props.offering],
-  );
-
   const uniqueFormId = useMemo(
     () => `${OFFERING_CUSTOMERS_LIST_FILTER}-${props.offering.uuid}`,
     [props.offering],
   );
 
+  // `integration_status` is null — not [] — for callers the backend does not
+  // consider offering administrators; see `get_integration_status` in the
+  // marketplace serializer and the `| null` in the SDK type. A throw here
+  // takes down every tab of the page, since this runs in the shared shell.
+  const connectionStatus = props.offering.integration_status?.length > 0 && (
+    <LayoutSlot name="actions">
+      <ConnectionStatusIndicator status={props.offering.integration_status} />
+    </LayoutSlot>
+  );
+
   return props.tabSpec ? (
-    <div
-      className={classNames(
-        'provider-offering',
-        props.offering.state === 'Unavailable' && 'disabled-view',
-      )}
-    >
-      <ActionsUnavailable
-        reason={
-          props.offering.state === 'Unavailable'
-            ? translate('This offering is unavailable.')
-            : undefined
-        }
+    <>
+      {connectionStatus}
+      <div
+        className={classNames(
+          'provider-offering',
+          props.offering.state === 'Unavailable' && 'disabled-view',
+        )}
       >
-        <props.tabSpec.component
-          offering={props.offering}
-          plansUsage={props.plansUsage}
-          uniqueFormId={uniqueFormId}
-        />
-      </ActionsUnavailable>
-    </div>
-  ) : null;
+        <ActionsUnavailable
+          reason={
+            props.offering.state === 'Unavailable'
+              ? translate('This offering is unavailable.')
+              : undefined
+          }
+        >
+          <props.tabSpec.component
+            offering={props.offering}
+            plansUsage={props.plansUsage}
+            uniqueFormId={uniqueFormId}
+          />
+        </ActionsUnavailable>
+      </div>
+    </>
+  ) : (
+    connectionStatus || null
+  );
 };

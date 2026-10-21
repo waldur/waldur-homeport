@@ -1,6 +1,5 @@
 import { CaretLeftIcon, ListIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import classNames from 'classnames';
 import { FunctionComponent, useState } from 'react';
 
 import {
@@ -15,8 +14,6 @@ import { isAssistantEnabled } from '@/ai-assistant/utils';
 import { DEFAULT_REDIRECT_STATE, isSignInStep } from '@/auth/authNavigation';
 import { getIconUrl } from '@/core/api';
 import { Link } from '@/core/Link';
-import { useIsDrawerOpenWith } from '@/drawer/actions';
-import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
 import { translate } from '@/i18n';
 import { hasSupport as hasSupportSelector } from '@/issues/hooks';
 import { isMatrixChatEnabled } from '@/matrix/utils';
@@ -47,20 +44,11 @@ const AsideMobileToggle: FunctionComponent = () => {
 
 interface AppHeaderProps {
   hasBreadcrumbs?: boolean;
-  /** The impersonation bar is showing above the header. */
-  hasPageBar?: boolean;
 }
 
 export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   hasBreadcrumbs,
-  hasPageBar,
 }) => {
-  const { state: sidebarState } = useSidebar();
-  const floatingDrawerOpen = [
-    useIsDrawerOpenWith(DRAWER_SHELL_CLASS.ai),
-    useIsDrawerOpenWith(DRAWER_SHELL_CLASS.support),
-    useIsDrawerOpenWith(DRAWER_SHELL_CLASS.confirmation),
-  ].some(Boolean);
   const { state } = useCurrentStateAndParams();
   const user = useUser();
   const imageUrl = getIconUrl('sidebar_logo_mobile');
@@ -91,23 +79,8 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   return (
     <TopBar
       data-app-header
-      className={classNames(
-        // Fixed to the top of the viewport (under the impersonation bar while
-        // it shows) and, from lg, beside the sidebar, following it as it
-        // collapses. Without a user there is no sidebar.
-        'fixed inset-x-0 top-0 print:hidden',
-        hasPageBar && 'top-[var(--kt-pagebar-height)]',
-        Boolean(user) &&
-          (sidebarState === 'collapsed'
-            ? 'lg:left-[var(--sidebar-width-icon)]'
-            : 'lg:left-[var(--sidebar-width)]'),
-        'lg:transition-[left] lg:duration-300 lg:ease-[ease]',
-        // A floating drawer (z 110, --z-index-mobile-drawer) sits over the
-        // page under the header; lift the header one above it while one is
-        // open, so the header's menus, which open down into the drawer's
-        // band, are not painted behind it.
-        floatingDrawerOpen ? 'z-[111]' : 'z-header',
-      )}
+      // Layout places it: sticky at the top of the page, beside the sidebar.
+      className="print:hidden"
       left={
         <div className="flex items-center lg:hidden -ms-[0.5rem] me-[0.5rem]">
           {Boolean(user) && <AsideMobileToggle />}

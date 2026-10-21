@@ -2,10 +2,11 @@
 $expandArrowWidth: 48px;
 $checkboxWidth: 32px;
 
-$aside: 300px;
-$asideMinimized: 75px;
-// Includes 300px of aside + Arrow width
+// The page's padding, the table's own cells and the arrow column around an
+// expanded row. The sidebar beside the page comes on top of it: its current
+// width, which useSidebarLayoutShim publishes (0px without a sidebar).
 $tableSidesSpace: 180px;
+$sidebar: var(--layout-sidebar-width, 0px);
 
 table .has-multiselect .expandable-container {
   margin-left: calc($expandArrowWidth + $checkboxWidth);
@@ -14,21 +15,13 @@ table .has-multiselect .expandable-container {
 table .expandable-container {
   margin-left: $expandArrowWidth;
 
-  width: calc(100vw - $tableSidesSpace - $aside);
+  width: calc(100vw - $tableSidesSpace - $sidebar);
   position: sticky;
   left: 16px;
 
   &.has-multiselect {
     margin-left: calc($expandArrowWidth + $checkboxWidth);
-    width: calc(100vw - $tableSidesSpace - $aside - $checkboxWidth);
-  }
-
-  [data-kt-aside-minimize='on'] & {
-    width: calc(100vw - $tableSidesSpace - $asideMinimized);
-
-    &.has-multiselect {
-      width: calc(100vw - $tableSidesSpace - $asideMinimized - $checkboxWidth);
-    }
+    width: calc(100vw - $tableSidesSpace - $sidebar - $checkboxWidth);
   }
 
   // As table

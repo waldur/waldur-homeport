@@ -1,9 +1,11 @@
+import classNames from 'classnames';
 import { FC } from 'react';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 
 import { ReportingTitle } from '../ReportingTitle';
@@ -42,7 +44,7 @@ export const UserAffiliationsPage: FC = () => {
   return (
     <>
       <ReportingTitle reportKey="user-affiliations" />
-      <div className="container-fluid pb-6">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'pb-6')}>
         <AffiliationsChart data={data} refetch={refetch} />
       </div>
     </>

@@ -34,7 +34,7 @@ export const UnifiedChatDrawer: FC<UnifiedChatDrawerProps> = (props) => {
   const user = useUser();
   if (isAnonymousVisitor(user)) {
     return (
-      <div className="unified-chat-drawer unified-chat-drawer--single h-full flex flex-col">
+      <div className="unified-chat-drawer h-full flex flex-col animate-[waldur-backdrop-enter_0.2s_ease]">
         <AnonymousChatPanel close={props.close} />
       </div>
     );
@@ -43,9 +43,7 @@ export const UnifiedChatDrawer: FC<UnifiedChatDrawerProps> = (props) => {
 };
 
 /**
- * The sparkle drawer is AI-only. Team chat moved to the Support drawer; this
- * keeps the `unified-chat-drawer` wrapper so the drawer body fill-height SCSS
- * still applies and the expand toolbar keeps working.
+ * The sparkle drawer is AI-only; Team chat moved to the Support drawer.
  */
 const AuthenticatedChatDrawer: FC<UnifiedChatDrawerProps> = ({ close }) => {
   // The drawer toolbar (rendered outside this tree) keys its history toggle off
@@ -62,7 +60,7 @@ const AuthenticatedChatDrawer: FC<UnifiedChatDrawerProps> = ({ close }) => {
   }, [currentThreadId, clearNotification]);
 
   return (
-    <div className="unified-chat-drawer unified-chat-drawer--single h-full flex flex-col">
+    <div className="unified-chat-drawer h-full flex flex-col animate-[waldur-backdrop-enter_0.2s_ease]">
       <div className="grow overflow-hidden flex">
         <div className="h-full w-full flex flex-col">
           <LLMChatDrawer close={close} />
