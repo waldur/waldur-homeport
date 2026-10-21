@@ -10,6 +10,7 @@ import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
 import { useNotify } from '@/store/notify';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -77,10 +78,7 @@ export const Step3PreviewAndImport: FC<Step3Props> = (props) => {
             row.itemName.toLowerCase().includes(q),
         );
       }
-      return Promise.resolve({
-        rows,
-        resultCount: rows.length,
-      });
+      return createClientPaginatedFetcher(rows)(request);
     },
     queryField: 'query',
   });

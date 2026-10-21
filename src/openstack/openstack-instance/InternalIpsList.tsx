@@ -53,6 +53,8 @@ export const InternalIpsList: FunctionComponent<{
   return (
     <Table<OpenStackNestedPort>
       {...props}
+      // The instance's few ports, shown whole.
+      hasPagination={false}
       columns={[
         {
           title: translate('IP address'),

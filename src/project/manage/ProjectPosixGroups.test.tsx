@@ -81,10 +81,12 @@ describe('ProjectPosixGroups', () => {
     await expect(providerOptions.fetchData({} as any)).resolves.toEqual({
       rows: [providerGroup],
       resultCount: 1,
+      nextPage: null,
     });
     await expect(offeringOptions.fetchData({} as any)).resolves.toEqual({
       rows: [roleGroup],
       resultCount: 1,
+      nextPage: null,
     });
     // One request serves both tables.
     expect(marketplaceProjectPosixGroupsList).toHaveBeenCalledTimes(1);

@@ -20,6 +20,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table, { TableColumns } from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -123,10 +124,7 @@ export const Step5PreviewAndImport: FC<Step5Props> = ({
           (row) => row.name && row.name.toLowerCase().includes(q),
         );
       }
-      return Promise.resolve({
-        rows,
-        resultCount: rows.length,
-      });
+      return createClientPaginatedFetcher(rows)(request);
     },
     queryField: 'query',
     filter: cacheFilter,

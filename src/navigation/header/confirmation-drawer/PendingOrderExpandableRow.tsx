@@ -53,6 +53,8 @@ const NestedKeyValueTable: FC<{
   return (
     <Table<KeyValueRow>
       {...tableProps}
+      // The order's attributes, shown whole.
+      hasPagination={false}
       columns={[
         { title: keyLabel, render: ({ row }) => row.key },
         ...(hasPrevious

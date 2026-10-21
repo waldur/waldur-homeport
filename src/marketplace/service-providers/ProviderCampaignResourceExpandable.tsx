@@ -1,27 +1,36 @@
-import { useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { promotionsCampaignsResourcesList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { PublicResourceLink } from '@/marketplace/resources/list/PublicResourceLink';
-import { createFetcher } from '@/table/api';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
 export const ProviderCampaignResourceExpandable = ({ campaign }) => {
-  const tableOptions = useMemo(
-    () => ({
-      table: 'marketplace-provider-campaign-resources',
-      fetchData: createFetcher(promotionsCampaignsResourcesList, {
+  // The endpoint sends every resource at once: fetch them once and page
+  // through them in memory.
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['ProviderCampaignResources', campaign.uuid],
+    queryFn: () =>
+      promotionsCampaignsResourcesList({
         path: { uuid: campaign.uuid },
-      }),
-    }),
-    [campaign],
-  );
-  const tableProps = useTable(tableOptions);
+      }).then((response) => response.data),
+  });
+  const tableProps = useTable({
+    table: `marketplace-provider-campaign-resources-${campaign.uuid}`,
+    fetchData: createClientPaginatedFetcher(data ?? []),
+  });
+  useEffect(() => {
+    tableProps.fetch();
+  }, [data]);
   return (
     <Table
       {...tableProps}
+      loading={isLoading || tableProps.loading}
+      error={error || tableProps.error}
       columns={[
         {
           title: translate('Name'),
