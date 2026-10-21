@@ -27,6 +27,7 @@ import { BatchProjectActions } from './BatchProjectActions';
 import { ProjectCostField } from './ProjectCostField';
 import { ProjectKindField } from './ProjectKindField';
 import { ProjectLink } from './ProjectLink';
+import { ProjectResourcesExpandableRow } from './ProjectResourcesExpandableRow';
 import { ProjectsTableActions } from './ProjectsTableActions';
 
 const mandatoryFields = [
@@ -36,6 +37,7 @@ const mandatoryFields = [
   'customer_uuid', // DeleteAction
   'url', // ChangeEndDateAction
   'end_date', // ChangeEndDateRequestDialog
+  'is_removed', // isRowExpandable
 ];
 
 interface ProjectsListProps extends Partial<TableProps> {
@@ -177,6 +179,8 @@ export const ProjectsList: FC<ProjectsListProps> = ({
     <ProjectsListTable
       {...tableProps}
       filters={<ProjectsFilter />}
+      expandableRow={ProjectResourcesExpandableRow}
+      isRowExpandable={(row) => !row.is_removed}
       formId={ProjectsFilterFormId}
       {...props}
       customer={customer || currentCustomer}

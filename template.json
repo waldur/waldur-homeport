@@ -59606,6 +59606,11 @@
       "feature_area": "project"
     }
   },
+  "This project has no active resources.": {
+    "context": {
+      "feature_area": "project"
+    }
+  },
   "This project has no resources with allocated limits.": {
     "context": {
       "feature_area": "project-detail"
@@ -67331,6 +67336,12 @@
   "Usage (GB)": {},
   "Usage (h)": {},
   "Usage (hours)": {},
+  "Usage / limit": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "project"
+    }
+  },
   "Usage <70%": {
     "context": {
       "feature_area": "views"
