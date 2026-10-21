@@ -28,6 +28,7 @@ import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
+import { getComponentUsage } from './keyLimits';
 import { RevealApiKeyDialog } from './RevealApiKeyDialog';
 import {
   canRevealKey,
@@ -35,6 +36,7 @@ import {
   getErredTooltip,
   getFailedCommand,
   getStateVariant,
+  isKeyAssignee,
   UNGOVERNED_COMMANDS,
 } from './state';
 import { ApiKeyRow, KeyComponent } from './types';
@@ -91,6 +93,34 @@ export const ApiKeyActionsDropdown: FC<{
   const resumesErred = isErred && !canRetry;
   const resumes = isPaused || resumesErred;
   const canReveal = canRevealKey(row, user);
+  // The assignee may rotate their own key and retry a rotation that failed.
+  // Putting a rotation in a stranded key's failed command's place stays with
+  // managers: it would bring back a key whose pause failed.
+  const isAssignee = isKeyAssignee(row, user);
+  const canRotate = canManage || isAssignee;
+  const showRetry =
+    canRetry && (canManage || (isAssignee && failedCommand === 'rotate'));
+  const showRotate = !canRetry && (canManage || (isAssignee && !isErred));
+  // A rotation in flight would hold off the pause a key's limit calls for, so
+  // the assignee cannot rotate an active key that reached its limit this
+  // month; a manager can, and the key is paused once it settles. Limits are
+  // enforced only under key management.
+  const atLimitReason =
+    !canManage &&
+    keyManagement &&
+    isOk &&
+    components.some(
+      (component) =>
+        (getComponentUsage(
+          row,
+          component,
+          (resource.limits ?? {}) as Record<string, number>,
+        ).ratio ?? 0) >= 100,
+    )
+      ? translate(
+          'This key has reached its limit this month. A manager can rotate it.',
+        )
+      : undefined;
   const keyName = row.client_id ? (
     <strong>{row.client_id}</strong>
   ) : (
@@ -255,7 +285,8 @@ export const ApiKeyActionsDropdown: FC<{
             resolve: {
               uuid: row.uuid,
               clientId: row.client_id,
-              canManage,
+              canRotate,
+              rotateDisabledReason: atLimitReason,
               onRotate: () => rotate(),
             },
           })
@@ -299,7 +330,7 @@ export const ApiKeyActionsDropdown: FC<{
           }
         />
       )}
-      {canManage && canRetry && (
+      {showRetry && (
         <ActionItem
           title={translate('Retry')}
           action={() => retry(undefined)}
@@ -308,16 +339,29 @@ export const ApiKeyActionsDropdown: FC<{
           tooltip={inProgress ?? getErredTooltip(row)}
         />
       )}
-      {canManage && !canRetry && (
+      {showRotate && (
         <ActionItem
           title={translate('Rotate')}
           action={() => rotate(undefined)}
           iconNode={<ArrowsClockwiseIcon weight="bold" />}
-          disabled={Boolean(inProgress) || isPaused || neverCreated}
+          disabled={
+            Boolean(inProgress) ||
+            isPaused ||
+            neverCreated ||
+            Boolean(atLimitReason)
+          }
           tooltip={
             inProgress ??
             neverCreatedTooltip ??
-            (isPaused ? translate('Resume the key to rotate it.') : undefined)
+            (isPaused
+              ? canManage
+                ? translate('Resume the key to rotate it.')
+                : row.paused_by_limit
+                  ? translate(
+                      'Paused on reaching its limit. It can be rotated once it resumes.',
+                    )
+                  : translate('A paused key cannot be rotated.')
+              : atLimitReason)
           }
         />
       )}

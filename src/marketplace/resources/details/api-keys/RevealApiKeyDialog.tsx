@@ -18,7 +18,11 @@ interface OwnProps {
   resolve: {
     uuid: string;
     clientId?: string | null;
-    canManage: boolean;
+    // A manager of the resource's users, or the key's assignee.
+    canRotate: boolean;
+    // Why the Rotate button is offered but locked, e.g. the key reached its
+    // limit and only a manager may rotate it now.
+    rotateDisabledReason?: string;
     onRotate: () => void;
   };
 }
@@ -60,14 +64,15 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
         <ScopeSubtitle label={translate('Key ID')} name={resolve.clientId} />
       }
       footer={
-        resolve.canManage ? (
+        resolve.canRotate ? (
           <BaseButton
             size="lg"
             variant="primary"
             onClick={rotate}
-            disabled={!ready}
+            disabled={!ready || Boolean(resolve.rotateDisabledReason)}
             disabledReason={
-              !ready ? translate('API key is not ready to rotate') : undefined
+              resolve.rotateDisabledReason ??
+              (!ready ? translate('API key is not ready to rotate') : undefined)
             }
             label={translate('Rotate')}
             iconNode={<ArrowsClockwiseIcon weight="bold" />}
