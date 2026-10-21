@@ -25,6 +25,12 @@ export const canRevealKey = (row: ApiKeyRow, user?: User) =>
     row.user_uuid === user?.uuid ||
     Boolean(checkIsStaffOrSupport(user)));
 
+// The assignee holds the key's value, so may replace it: rotate the key, or
+// retry a rotation of it that failed. Every other command stays with whoever
+// manages the resource's users.
+export const isKeyAssignee = (row: ApiKeyRow, user?: User) =>
+  Boolean(row.user_uuid) && row.user_uuid === user?.uuid;
+
 // Commands every key-carrying backend takes, governed or not.
 export const UNGOVERNED_COMMANDS: ResourceApiKeyAction[] = ['rotate', 'resume'];
 

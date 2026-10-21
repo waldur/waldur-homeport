@@ -8,6 +8,7 @@ import {
   getResourcePause,
   getStateLabel,
   getStateTooltip,
+  isKeyAssignee,
 } from './state';
 
 const row = (overrides: Record<string, unknown> = {}) =>
@@ -20,6 +21,20 @@ describe('getFailedCommand', () => {
 
   it('is a rotation for a key that erred before commands were recorded', () => {
     expect(getFailedCommand(row())).toBe('rotate');
+  });
+});
+
+describe('isKeyAssignee', () => {
+  const me = { uuid: 'me' } as any;
+
+  it('is the user the key is assigned to', () => {
+    expect(isKeyAssignee(row({ user_uuid: 'me' }), me)).toBe(true);
+    expect(isKeyAssignee(row({ user_uuid: 'someone-else' }), me)).toBe(false);
+  });
+
+  it('is nobody for a key shared by the project', () => {
+    expect(isKeyAssignee(row({ user_uuid: null }), me)).toBe(false);
+    expect(isKeyAssignee(row(), undefined)).toBe(false);
   });
 });
 

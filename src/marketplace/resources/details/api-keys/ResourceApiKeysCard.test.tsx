@@ -6,6 +6,7 @@ import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
+import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useTable } from '@/table/useTable';
@@ -13,6 +14,7 @@ import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { ResourceApiKeysCard } from './ResourceApiKeysCard';
+import { RevealApiKeyDialog } from './RevealApiKeyDialog';
 
 // Rows are supplied through the mocked redux table state, so no real request
 // fires — the card renders through the real @/table/Table (TableLoader).
@@ -130,6 +132,17 @@ const isEnabled = (name: string) => {
   const item = offered(name);
   expect(item, `${name} is offered`).not.toBeNull();
   return item!.getAttribute('aria-disabled') !== 'true';
+};
+
+// What the reveal dialog was opened with: it offers rotation on canRotate.
+const revealDialogProps = async () => {
+  await userEvent.click(offered('Reveal')!);
+  const { openDialog } = vi.mocked(useModal)();
+  expect(openDialog).toHaveBeenCalledWith(
+    RevealApiKeyDialog,
+    expect.anything(),
+  );
+  return vi.mocked(openDialog).mock.calls[0][1].resolve;
 };
 
 // getAllByRole('row')[0] is the header; data rows follow. The Table renders
@@ -349,6 +362,134 @@ describe('ResourceApiKeysCard', () => {
       expect(isEnabled('Reveal')).toBe(true);
     });
 
+    describe('for an assignee without manage permission', () => {
+      beforeEach(() => vi.mocked(hasPermission).mockReturnValue(false));
+
+      it('offers rotate next to reveal, and nothing else', async () => {
+        renderManaged({ state: 'OK', user_uuid: USER.uuid });
+        await screen.findByText('KEY1');
+        expect(
+          screen.queryByRole('button', { name: /Request key/ }),
+        ).not.toBeInTheDocument();
+        await openRowActions(0);
+        expect(isEnabled('Reveal')).toBe(true);
+        expect(isEnabled('Rotate')).toBe(true);
+        for (const name of ['Pause', 'Retry', 'Edit key settings', 'Delete']) {
+          expect(offered(name)).toBeNull();
+        }
+      });
+
+      it('offers rotation in the reveal dialog too', async () => {
+        renderManaged({ state: 'OK', user_uuid: USER.uuid });
+        await screen.findByText('KEY1');
+        await openRowActions(0);
+        expect((await revealDialogProps()).canRotate).toBe(true);
+      });
+
+      it('offers no rotation in the reveal dialog of a shared key', async () => {
+        renderManaged({ state: 'OK' });
+        await screen.findByText('KEY1');
+        await openRowActions(0);
+        expect((await revealDialogProps()).canRotate).toBe(false);
+      });
+
+      it('offers no rotate for a key assigned to someone else', async () => {
+        renderManaged({ state: 'OK', user_uuid: 'someone-else' });
+        await screen.findByText('KEY1');
+        await openRowActions(0);
+        expect(offered('Rotate')).toBeNull();
+      });
+
+      it('retries a rotation that failed', async () => {
+        renderManaged({
+          state: 'Erred',
+          pending_action: 'rotate',
+          user_uuid: USER.uuid,
+        });
+        await screen.findByText('KEY1');
+        await openRowActions(0);
+        expect(isEnabled('Retry')).toBe(true);
+        expect(offered('Rotate')).toBeNull();
+      });
+
+      it.each(['pause', 'resume', 'update', 'delete', 'create'])(
+        'offers neither retry nor rotate after a failed %s',
+        async (pending_action) => {
+          renderManaged({
+            state: 'Erred',
+            pending_action,
+            user_uuid: USER.uuid,
+          });
+          await screen.findByText('KEY1');
+          await openRowActions(0);
+          for (const name of ['Retry', 'Rotate', 'Resume', 'Delete']) {
+            expect(offered(name)).toBeNull();
+          }
+        },
+      );
+
+      it('cannot rotate a paused key, nor resume it', async () => {
+        renderManaged({ state: 'Paused', user_uuid: USER.uuid });
+        await screen.findByText('KEY1');
+        await openRowActions(0);
+        expect(isEnabled('Rotate')).toBe(false);
+        expect(offered('Resume')).toBeNull();
+      });
+
+      // A rotation in flight would hold off the pause its limit calls for.
+      describe('a key that reached its limit this month', () => {
+        const AT_LIMIT = {
+          state: 'OK',
+          user_uuid: USER.uuid,
+          limits: { daily: 10 },
+          current_usages: { daily: 10 },
+          usage_period: `${new Date().toISOString().slice(0, 7)}-01`,
+        };
+        const REASON =
+          'This key has reached its limit this month. A manager can rotate it.';
+
+        it('cannot be rotated by its assignee', async () => {
+          renderManaged(AT_LIMIT);
+          await screen.findByText('KEY1');
+          await openRowActions(0);
+          expect(isEnabled('Rotate')).toBe(false);
+          expect((await revealDialogProps()).rotateDisabledReason).toBe(REASON);
+        });
+
+        it('can be rotated below its limit', async () => {
+          renderManaged({ ...AT_LIMIT, current_usages: { daily: 9 } });
+          await screen.findByText('KEY1');
+          await openRowActions(0);
+          expect(isEnabled('Rotate')).toBe(true);
+          expect(
+            (await revealDialogProps()).rotateDisabledReason,
+          ).toBeUndefined();
+        });
+
+        // Usage of an earlier month counts against no limit.
+        it('can be rotated once a new month begins', async () => {
+          renderManaged({ ...AT_LIMIT, usage_period: '2020-01-01' });
+          await screen.findByText('KEY1');
+          await openRowActions(0);
+          expect(isEnabled('Rotate')).toBe(true);
+        });
+      });
+    });
+
+    // The key is paused once the rotation settles.
+    it('lets a manager rotate a key that reached its limit', async () => {
+      vi.mocked(hasPermission).mockReturnValue(true);
+      renderManaged({
+        state: 'OK',
+        limits: { daily: 10 },
+        current_usages: { daily: 12 },
+        usage_period: `${new Date().toISOString().slice(0, 7)}-01`,
+      });
+      await screen.findByText('KEY1');
+      await openRowActions(0);
+      expect(isEnabled('Rotate')).toBe(true);
+    });
+
     it.each(['Creating', 'Updating', 'Deleting'])(
       'refuses a second command while the key is %s',
       async (state) => {
@@ -486,6 +627,42 @@ describe('ResourceApiKeysCard', () => {
       await screen.findByText('KEY1');
       await openRowActions(0);
       expect(offered('Unassign')).toBeNull();
+    });
+
+    it('still lets the assignee rotate their key', async () => {
+      vi.mocked(hasPermission).mockReturnValue(false);
+      renderUnmanaged({ state: 'OK', user_uuid: USER.uuid });
+      await screen.findByText('KEY1');
+      await openRowActions(0);
+      expect(isEnabled('Rotate')).toBe(true);
+    });
+
+    // Rotating or resuming in a failed command's place is a manager's call:
+    // for the assignee it would undo a pause meant for them.
+    it('leaves a stranded key to a manager, not its assignee', async () => {
+      vi.mocked(hasPermission).mockReturnValue(false);
+      renderUnmanaged({
+        state: 'Erred',
+        pending_action: 'pause',
+        user_uuid: USER.uuid,
+      });
+      await screen.findByText('KEY1');
+      await openRowActions(0);
+      for (const name of ['Rotate', 'Retry', 'Resume']) {
+        expect(offered(name)).toBeNull();
+      }
+    });
+
+    it('lets the assignee retry a failed rotation', async () => {
+      vi.mocked(hasPermission).mockReturnValue(false);
+      renderUnmanaged({
+        state: 'Erred',
+        pending_action: 'rotate',
+        user_uuid: USER.uuid,
+      });
+      await screen.findByText('KEY1');
+      await openRowActions(0);
+      expect(isEnabled('Retry')).toBe(true);
     });
 
     it('offers no unassign for a key shared by the project', async () => {

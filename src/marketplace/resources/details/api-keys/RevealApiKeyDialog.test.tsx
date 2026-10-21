@@ -12,12 +12,24 @@ vi.mock('./useResourceApiKeys', () => ({
 
 const SECRET = 'sk-UgZG4fr0ZYsw5zoz82P8u0btLZ3xfjosOvbegJWxAX0';
 
-const renderDialog = (canManage = true) =>
+const renderDialog = (canRotate = true, rotateDisabledReason?: string) =>
   renderWithProviders(
     <RevealApiKeyDialog
-      resolve={{ uuid: 'k1', canManage, onRotate: vi.fn() }}
+      resolve={{
+        uuid: 'k1',
+        canRotate,
+        rotateDisabledReason,
+        onRotate: vi.fn(),
+      }}
     />,
   );
+
+const revealed = () =>
+  vi.mocked(useRevealedApiKey).mockReturnValue({
+    value: SECRET,
+    revealing: false,
+    reveal: vi.fn().mockResolvedValue(SECRET),
+  });
 
 describe('RevealApiKeyDialog', () => {
   it('shows the revealed key as readable, selectable text', async () => {
@@ -49,5 +61,31 @@ describe('RevealApiKeyDialog', () => {
     expect(
       await screen.findByText('Unable to reveal the API key.'),
     ).toBeInTheDocument();
+  });
+
+  it('offers rotation to whoever may rotate the key', async () => {
+    revealed();
+    renderDialog(true);
+    await screen.findByDisplayValue(SECRET);
+    expect(screen.getByRole('button', { name: 'Rotate' })).toBeEnabled();
+  });
+
+  it('offers no rotation to anyone else', async () => {
+    revealed();
+    renderDialog(false);
+    await screen.findByDisplayValue(SECRET);
+    expect(
+      screen.queryByRole('button', { name: 'Rotate' }),
+    ).not.toBeInTheDocument();
+  });
+
+  it('locks rotation it may not do now', async () => {
+    revealed();
+    renderDialog(
+      true,
+      'This key has reached its limit this month. A manager can rotate it.',
+    );
+    await screen.findByDisplayValue(SECRET);
+    expect(screen.getByRole('button', { name: 'Rotate' })).toBeDisabled();
   });
 });

@@ -814,6 +814,11 @@
       "feature_area": "plan"
     }
   },
+  "A paused key cannot be rotated.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "A person’s account on one offering: one row for each offering the person uses.": {
     "context": {
       "feature_area": "offering-users"
@@ -39195,6 +39200,11 @@
     }
   },
   "Paused on reaching a limit. It resumes on its own once under its limits again: when a new month begins or a limit is raised.": {},
+  "Paused on reaching its limit. It can be rotated once it resumes.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Paused resources": {
     "context": {
       "feature_area": "policies"
@@ -59344,6 +59354,11 @@
   "This justification has already been reviewed": {
     "context": {
       "feature_area": "organizations"
+    }
+  },
+  "This key has reached its limit this month. A manager can rotate it.": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "This mandatory step is shown by default and is configured automatically once the call workflow is set up.": {
