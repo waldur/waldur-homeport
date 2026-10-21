@@ -4,6 +4,7 @@ import {
   useCurrentStateAndParams,
   useRouter,
 } from '@uirouter/react';
+import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 
 import { IBreadcrumbItem, TabNav, useBreadcrumbs } from 'waldur-ui';
@@ -14,8 +15,9 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { hasProviderRouting } from '@/issues/hooks';
-import { usePageHero } from '@/navigation/context';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
+import { LayoutSlot } from '@/navigation/slots';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
@@ -112,7 +114,7 @@ const PageHero = ({ customer }) => {
   const dashboardState = getDashboardState(router.globals.current);
 
   return (
-    <div className="container-fluid my-5">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-[1.25rem]')}>
       {showTabs && (
         <TabNav
           activeKey={dashboardState}
@@ -168,8 +170,6 @@ const WithHero = (props) => {
     return null;
   }
 
-  usePageHero(<PageHero customer={customer} />);
-
   const { getOrganizationsBreadcrumbItem } = usePresetBreadcrumbItems();
 
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(
@@ -186,7 +186,14 @@ const WithHero = (props) => {
   );
   useBreadcrumbs(breadcrumbItems);
 
-  return <UIView {...props} />;
+  return (
+    <>
+      <LayoutSlot name="hero">
+        <PageHero customer={customer} />
+      </LayoutSlot>
+      <UIView {...props} />
+    </>
+  );
 };
 
 export const OrganizationUIView: FunctionComponent = (props) => {

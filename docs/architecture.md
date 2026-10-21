@@ -163,6 +163,40 @@ const {
 return <Component {...props} />;
 ```
 
+#### Page Content in the Layout Chrome (LayoutSlot)
+
+A page shows content in `Layout`'s chrome, outside its own place in the DOM, by rendering a `LayoutSlot` (`src/navigation/slots.tsx`) in its own JSX. The children are portalled into the slot's element, but stay in the page's React tree: they read the page's state, hooks and context, re-render with the page, and come and go with it.
+
+| Slot            | Where it shows                                       | Occupants            |
+| :-------------- | :--------------------------------------------------- | :------------------- |
+| `hero`          | the page hero above the page tabs                    | one (innermost page) |
+| `actions`       | controls at the end of the page tabs row             | one (innermost page) |
+| `filters`       | the filter bar under the page tabs                   | one (innermost page) |
+| `announcements` | bars under the header, after the admin announcements | all, in mount order  |
+
+```tsx
+return (
+  <>
+    <LayoutSlot name="hero">
+      <PageHero customer={customer} />
+    </LayoutSlot>
+    {offering.state === 'Unavailable' && (
+      <LayoutSlot name="announcements">
+        <AnnouncementBar label={translate('Unavailable')} />
+      </LayoutSlot>
+    )}
+    <UIView />
+  </>
+);
+```
+
+Rules:
+
+- **Render the slot only when there is something to show.** A mounted slot counts as filled, and `Layout` makes room for it (the page tabs row, the filter bar, the content spacing around a hero), even if its children render nothing. Put the condition around `<LayoutSlot>`, not inside it.
+- **Innermost page wins.** `hero`, `actions` and `filters` show only the occupant in the deepest UI-Router view: a page nested inside another hero page replaces its parent's hero, and the parent's shows again when the nested page goes. No `skipHero` route flag is needed for that.
+- **Markup only.** Data the layout needs (tabs, breadcrumbs, title, full-page mode) goes through `usePageTabsTransmitter`, `useBreadcrumbs`, `useTitle`, `useExtraTabs` and `useFullPage`, not through a slot.
+- **Outside `Layout` a slot renders nothing** (a story, a unit test without the shell). Tests that need the content render a host with `useLayoutSlots` and `LayoutSlotsProvider`, as `slots.test.tsx` and `PageBarFilters.test.tsx` do.
+
 #### Route Best Practices
 
 1. **Use `dynamic: true`** for any parameter that controls UI state within a page (subtabs, filters, panel states)
@@ -343,8 +377,8 @@ first paint, so the entry graph is kept deliberately small:
   Firefox cancels the page's in-flight requests when a navigation starts, and
   an app booting alongside the redirect would see its lazy chunks fail and
   reload, cancelling the redirect (`src/core/bootGuard.ts`).
-- `yarn build:check` (`scripts/bundle-budget.mjs`, run by the `Check cold-path
-  budget` CI job on every MR) fails when the entry script plus its
+- `yarn build:check` (`scripts/bundle-budget.mjs`, run by the
+  `Check cold-path budget` CI job on every MR) fails when the entry script plus its
   `modulepreload`s exceed the gzip budget, or when echarts, matrix-js-sdk,
   livekit-client, monaco-editor,
   @mdxeditor/editor or mermaid appear in that set. Each of those is loaded

@@ -1,6 +1,6 @@
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { FC, useEffect } from 'react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { setViewport } from 'waldur-ui';
 
@@ -9,6 +9,11 @@ const h = vi.hoisted(() => ({
   matrixClient: {} as any,
   rooms: {} as any,
   call: {} as any,
+  drawerExpanded: false,
+}));
+
+vi.mock('@/drawer/useDrawerExpanded', () => ({
+  useDrawerExpanded: () => h.drawerExpanded,
 }));
 
 vi.mock('./useMatrixClient', () => ({
@@ -59,16 +64,7 @@ beforeEach(() => {
     error: null,
   };
   h.rooms = { rooms: ROOMS, totalUnread: 0, isLoading: false };
-
-  const drawer = document.createElement('div');
-  drawer.id = 'kt_drawer';
-  drawer.dataset.expanded = 'false';
-  document.body.appendChild(drawer);
-});
-
-afterEach(() => {
-  // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-  document.getElementById('kt_drawer')?.remove();
+  h.drawerExpanded = false;
 });
 
 describe('MatrixChatPanel — deep-link does not fight manual navigation', () => {
@@ -106,49 +102,33 @@ describe('MatrixChatPanel — deep-link does not fight manual navigation', () =>
 });
 
 describe('MatrixChatPanel — call stability across expand', () => {
-  it('does not remount MatrixChatDrawer when the drawer toggles data-expanded', async () => {
-    render(<MatrixChatPanel defaultRoomUuid="room-1" />);
+  it('does not remount MatrixChatDrawer when the drawer expands or collapses', () => {
+    const { rerender } = render(<MatrixChatPanel defaultRoomUuid="room-1" />);
     expect(h.drawerMountCount).toBe(1);
 
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    const drawer = document.getElementById('kt_drawer')!;
-    await act(async () => {
-      drawer.dataset.expanded = 'true';
-      await Promise.resolve();
-    });
+    h.drawerExpanded = true;
+    rerender(<MatrixChatPanel defaultRoomUuid="room-1" />);
     expect(h.drawerMountCount).toBe(1);
 
-    await act(async () => {
-      drawer.dataset.expanded = 'false';
-      await Promise.resolve();
-    });
+    h.drawerExpanded = false;
+    rerender(<MatrixChatPanel defaultRoomUuid="room-1" />);
     expect(h.drawerMountCount).toBe(1);
   });
 });
 
 describe('MatrixChatPanel — responsive dock layout', () => {
-  it('does not dock sidebar on mobile even when drawer is expanded', async () => {
+  it('does not dock sidebar on mobile even when drawer is expanded', () => {
     setViewport('mobile');
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    const drawer = document.getElementById('kt_drawer')!;
-    await act(async () => {
-      drawer.dataset.expanded = 'true';
-      await Promise.resolve();
-    });
+    h.drawerExpanded = true;
 
     render(<MatrixChatPanel defaultRoomUuid="room-1" />);
     // eslint-disable-next-line testing-library/no-node-access
     expect(screen.getByTestId('room-list').parentElement).toHaveClass('hidden');
   });
 
-  it('docks sidebar on desktop when drawer is expanded', async () => {
+  it('docks sidebar on desktop when drawer is expanded', () => {
     setViewport('desktop');
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    const drawer = document.getElementById('kt_drawer')!;
-    await act(async () => {
-      drawer.dataset.expanded = 'true';
-      await Promise.resolve();
-    });
+    h.drawerExpanded = true;
 
     render(<MatrixChatPanel defaultRoomUuid="room-1" />);
     // eslint-disable-next-line testing-library/no-node-access

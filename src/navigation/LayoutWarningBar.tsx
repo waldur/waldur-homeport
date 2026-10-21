@@ -4,6 +4,8 @@ import { FC, ReactNode } from 'react';
 
 import { FeaturedIcon } from 'waldur-ui';
 
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
+
 type LayoutWarningBarVariant = 'warning' | 'danger';
 
 interface LayoutWarningBarProps {
@@ -59,7 +61,8 @@ export const LayoutWarningBar: FC<LayoutWarningBarProps> = ({
     >
       <div
         className={classNames(
-          'container-fluid flex w-full items-center gap-2',
+          PAGE_CONTAINER_CLASSNAME,
+          'flex w-full items-center gap-2',
           centered && 'justify-center text-center',
           className,
         )}

@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
+import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
@@ -11,7 +12,8 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { usePageHero } from '@/navigation/context';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
+import { LayoutSlot } from '@/navigation/slots';
 import { useTitle } from '@/navigation/title';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
@@ -67,7 +69,7 @@ const tabs: PageBarTab[] = [
 
 const PageHero = ({ call }) =>
   call ? (
-    <div className="container-fluid my-5">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-[1.25rem]')}>
       <CallTabs call={call} />
       <PublicCallDetailsHero call={call} />
     </div>
@@ -97,8 +99,6 @@ export const PublicCallDetailsContainer: FC = () => {
 
   useTitle(call ? call.name : translate('Call details'));
 
-  usePageHero(<PageHero call={call} />, [call]);
-
   const breadcrumbItems = usePublicCallBreadcrumbItems(call);
   useBreadcrumbs(breadcrumbItems);
 
@@ -125,21 +125,28 @@ export const PublicCallDetailsContainer: FC = () => {
 
   const { tabSpec } = usePageTabsTransmitter(filteredTabs);
 
-  return isLoading ? (
-    <LoadingSpinner />
-  ) : error ? (
-    <h3>{translate('Unable to load call details.')}</h3>
-  ) : call ? (
-    <UIView
-      render={(Component, { key, ...props }) => (
-        <Component
-          key={key}
-          {...props}
-          refresh={refetch}
-          call={call}
-          tabSpec={tabSpec}
+  return (
+    <>
+      <LayoutSlot name="hero">
+        <PageHero call={call} />
+      </LayoutSlot>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : error ? (
+        <h3>{translate('Unable to load call details.')}</h3>
+      ) : call ? (
+        <UIView
+          render={(Component, { key, ...props }) => (
+            <Component
+              key={key}
+              {...props}
+              refresh={refetch}
+              call={call}
+              tabSpec={tabSpec}
+            />
+          )}
         />
-      )}
-    />
-  ) : null;
+      ) : null}
+    </>
+  );
 };

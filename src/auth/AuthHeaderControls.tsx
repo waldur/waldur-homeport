@@ -9,7 +9,7 @@ import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
  * language picker into the middle of the screen.
  *
  * `auth-header-controls` also tells the AI drawer it is on a page without the
- * app header (see drawer/_shell.scss).
+ * app header (see the sign-in offsets in DrawerRoot.tsx).
  */
 export const AuthHeaderControls: FC = () => (
   <div className="auth-header-controls flex items-center gap-2">

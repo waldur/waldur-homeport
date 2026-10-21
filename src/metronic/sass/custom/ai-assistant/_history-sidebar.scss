@@ -1,37 +1,37 @@
 // Sidebar hidden by default
-#kt_drawer:not([data-expanded='true']):not([data-history-open='true'])
+[data-slot='drawer']:not([data-expanded='true']):not([data-history-open='true'])
   .aui-history-sidebar {
   display: none !important;
 }
 
 // Desktop: show sidebar and switch to row layout when drawer is expanded
-#kt_drawer[data-expanded='true'] .aui-chat-drawer {
+[data-slot='drawer'][data-expanded='true'] .aui-chat-drawer {
   flex-direction: row;
 }
 
-#kt_drawer[data-expanded='true'] .aui-history-sidebar {
+[data-slot='drawer'][data-expanded='true'] .aui-history-sidebar {
   display: flex;
 }
 
 // Tablet: full-width drawer, sidebar side-by-side when toggled open
 @media (min-width: 768px) and (max-width: 991px) {
   // Side-by-side layout when history is open
-  #kt_drawer[data-history-open='true'] .aui-chat-drawer {
+  [data-slot='drawer'][data-history-open='true'] .aui-chat-drawer {
     flex-direction: row;
   }
 
-  #kt_drawer[data-history-open='true'] .aui-history-sidebar {
+  [data-slot='drawer'][data-history-open='true'] .aui-history-sidebar {
     display: flex !important;
   }
 }
 
 // Mobile: full-screen drawer with sidebar as slide-in overlay
 @media (max-width: 767px) {
-  #kt_drawer[data-history-open='true'] .aui-chat-drawer {
+  [data-slot='drawer'][data-history-open='true'] .aui-chat-drawer {
     flex-direction: column;
   }
 
-  #kt_drawer[data-history-open='true'] .aui-history-sidebar {
+  [data-slot='drawer'][data-history-open='true'] .aui-history-sidebar {
     display: flex !important;
     width: 100%;
     min-width: 100%;
@@ -40,7 +40,9 @@
   }
 
   // Hide chat when history is open on mobile
-  #kt_drawer[data-history-open='true'] .aui-chat-drawer > .aui-chat-main {
+  [data-slot='drawer'][data-history-open='true']
+    .aui-chat-drawer
+    > .aui-chat-main {
     display: none !important;
   }
 
@@ -102,44 +104,6 @@
   font-size: $h3-font-size;
   line-height: 1.5;
   color: var(--text-secondary);
-}
-
-// Lower the chat/support drawer z-index so header dropdowns (z-index: 105)
-// render on top
-#kt_drawer.ai-chat-drawer-active,
-#kt_drawer.support-drawer-active {
-  z-index: 100 !important;
-}
-
-// Remove default drawer body padding for AI chat
-#kt_drawer.ai-chat-drawer-active #kt_drawer_body > .p-9 {
-  padding: 0 !important;
-}
-
-// AI chat drawer — buttons overlay inside the content area, no separate header
-#kt_drawer.ai-chat-drawer-active #kt_drawer_header {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  left: auto;
-  z-index: 1;
-  border: none;
-  background: transparent;
-  min-height: 0 !important;
-  padding: 0 !important;
-  margin: 0;
-
-  // Hide the title text
-  > div:first-child {
-    display: none;
-  }
-
-  .card-toolbar {
-    margin-left: auto;
-    gap: 8px !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
 }
 
 // layout_O1PDTF: Tertiary Contained button (Size=Medium*, Color=Tertiary)

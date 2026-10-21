@@ -93,6 +93,9 @@ export const ConfirmationDrawerToggle: React.FC = () => {
         label={translate('Pending tasks')}
         onClick={handleOpenDrawer}
         aria-expanded={isOpen}
+        // Clickable through the open dialog's body pointer lock: it closes
+        // or switches a floating drawer.
+        className="pointer-events-auto"
         data-drawer-toggle
         icon={<BellIcon weight="bold" />}
         indicator={showBullet && <HeaderButtonBullet />}

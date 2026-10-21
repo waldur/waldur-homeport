@@ -54,10 +54,6 @@ vi.mock('@/marketplace/deploy/initUtils', () => ({
 vi.mock('@/navigation/context', () => ({
   useFullPage: vi.fn(),
   useBreadcrumbs: vi.fn(),
-  useToolbarActions: vi.fn(),
-  usePageHero: vi.fn(),
-  useExtraToolbar: vi.fn(),
-  useExtraAnnouncementBar: vi.fn(),
   useExtraTabs: vi.fn(),
 }));
 

@@ -33,6 +33,9 @@ export const QuickIssueDrawerToggle: React.FC = () => {
         label={translate('Support')}
         onClick={toggleSupportDrawer}
         aria-expanded={isOpen}
+        // Clickable through the open dialog's body pointer lock: it closes
+        // or switches a floating drawer.
+        className="pointer-events-auto"
         data-drawer-toggle
         icon={<ChatsCircleIcon weight="bold" />}
         indicator={showChatBullet && <HeaderButtonBullet />}

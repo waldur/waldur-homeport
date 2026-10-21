@@ -4,17 +4,15 @@ import { useSelector } from 'react-redux';
 
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
-import { useExtraToolbar, useToolbarActions } from '@/navigation/context';
 import { useTitle } from '@/navigation/title';
 
 import { CardStyleType } from '../common/cards/index';
 import { CardStyleProvider } from '../landing/CardStyleContext';
-import { PageBarFilters } from '../landing/filter/PageBarFilters';
+import { MarketplaceScopeBar } from '../landing/filter/PageBarFilters';
 import {
   getContextFiltersForOfferings,
   getMarketplaceFilters,
 } from '../landing/filter/store/selectors';
-import { MarketplaceLandingFilter } from '../landing/MarketplaceLandingFilter';
 import { useMarketplacePublicTabs } from '../utils';
 
 import { PublicOfferingsList } from './PublicOfferingsList';
@@ -31,8 +29,6 @@ export const AllOfferingsList = () => {
     'detailed';
 
   const filters = useSelector(getMarketplaceFilters);
-  useToolbarActions(<MarketplaceLandingFilter />, []);
-  useExtraToolbar(filters.length ? <PageBarFilters /> : null, [filters]);
   const contextFilter = useMemo(
     () => getContextFiltersForOfferings(filters),
     [filters],
@@ -40,6 +36,7 @@ export const AllOfferingsList = () => {
 
   return (
     <CardStyleProvider cardStyle={cardStyle}>
+      <MarketplaceScopeBar />
       <PublicOfferingsList
         showCategory
         showOrganization

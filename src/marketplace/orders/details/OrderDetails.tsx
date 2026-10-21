@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
@@ -11,8 +12,9 @@ import { getFormLimitParser } from '@/marketplace/common/registry';
 import { PlanSection } from '@/marketplace/details/plan/PlanSection';
 import { OrderErredView } from '@/marketplace/resources/resource-pending/OrderErredView';
 import { OrderInProgressView } from '@/marketplace/resources/resource-pending/OrderInProgressView';
-import { usePageHero } from '@/navigation/context';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
+import { LayoutSlot } from '@/navigation/slots';
 import { useTitle } from '@/navigation/title';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
@@ -171,7 +173,10 @@ const PageHero = ({ isRefetching, ...props }: OrderDetailsProps) => {
       <PublicDashboardHero
         hideQuickSection
         cardBordered
-        className="container-fluid my-5 d-print-none"
+        className={classNames(
+          PAGE_CONTAINER_CLASSNAME,
+          'my-[1.25rem] print:hidden',
+        )}
         logo={props.offering.thumbnail}
         logoAlt={props.offering.name}
         logoTooltip={props.offering.name}
@@ -202,13 +207,6 @@ const PageHero = ({ isRefetching, ...props }: OrderDetailsProps) => {
 
 export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
   useTitle(translate('Order details'));
-  usePageHero(<PageHero {...props} isRefetching={props.isRefetching} />, [
-    props.isRefetching,
-    props.offering,
-    props.order,
-    props.resource,
-    props.refetch,
-  ]);
 
   const {
     getOrganizationsBreadcrumbItem,
@@ -312,8 +310,11 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
     tabSpec: { component: Component },
   } = usePageTabsTransmitter(tabs);
 
-  if (props) {
-    return (
+  return (
+    <>
+      <LayoutSlot name="hero">
+        <PageHero {...props} isRefetching={props.isRefetching} />
+      </LayoutSlot>
       <Form onSubmit={() => {}}>
         {() => (
           <>
@@ -322,7 +323,6 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
           </>
         )}
       </Form>
-    );
-  }
-  return null;
+    </>
+  );
 };

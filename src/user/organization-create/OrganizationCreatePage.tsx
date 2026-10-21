@@ -10,6 +10,7 @@ import { SubmitButton } from '@/form';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { PAGE_CONTAINER_XXL_CLASSNAME } from '@/navigation/pageContainer';
 import { useNotify } from '@/store/notify';
 import { ProgressStep, VerticalProgressSteps } from '@/wizard';
 
@@ -306,7 +307,7 @@ export const OrganizationCreatePage: FC = () => {
           </p>
         </div>
       </SidebarLayout.Header>
-      <div className="container-xxl">
+      <div className={PAGE_CONTAINER_XXL_CLASSNAME}>
         {submissionComplete ? (
           <div className="flex gap-7">
             <div className="shrink-0" style={{ width: '300px' }}>

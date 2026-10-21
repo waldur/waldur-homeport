@@ -206,6 +206,8 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   - `isStaffOnly` on an `*EditField` swaps the edit button for a `StaffOnlyIndicator` for non-staff. For more complex gates, still use `hasPermission()` and wire `hideActions` on the enclosing `FormTable`/`TabbedSection`.
   - Canonical examples: `src/customer/details/CustomerDetailsPanel.tsx`, `src/openstack/OpenStackCredentialsSection.tsx`, `src/marketplace/offerings/update/integration/LifecyclePolicySection.tsx`.
 
+- **Page content in the layout chrome** (hero, page-tab actions, filter bar, announcement bars) goes through `<LayoutSlot name="…">` rendered in the page's own JSX, only when there is something to show; see `docs/architecture.md` → "Page Content in the Layout Chrome". Never store React elements in a context from an effect to render them elsewhere.
+
 - **`use*` prefix discipline** — do not prefix a utility with `use*` unless it actually calls React hooks. `eslint-plugin-react-hooks` enforces conditional-call ordering by name, so a non-hook helper named `useX` will silently break the lint rule the moment a real hook is added to it, or when callers invoke it after an early return. Use `getXxx`/`computeXxx` for plain functions.
 
 ## Sentry Issue Workflow

@@ -28,13 +28,9 @@ import {
   PENDING_LIMIT_CHANGE_REQUESTS_COUNT_KEY,
 } from '@/marketplace/resources/request-limits-change/utils';
 import { useModal } from '@/modal/actions';
-import {
-  usePageHero,
-  useToolbarActions,
-  useExtraAnnouncementBar,
-} from '@/navigation/context';
 import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
+import { LayoutSlot } from '@/navigation/slots';
 import { useTitle } from '@/navigation/title';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE } from '@/openstack/constants';
@@ -418,34 +414,6 @@ export const ResourceDetailsContainer: FunctionComponent<
     };
   }, [resource, providerView]);
 
-  usePageHero(
-    !data || isLoading ? null : (
-      <>
-        {!providerView && (
-          <>
-            <TosConsentWarningBanner
-              offering={data.offering}
-              userHasConsent={data.offering?.user_has_consent}
-              userHasOfferingUser={data.offering?.user_has_offering_user}
-            />
-            <ProfileCompletenessWarningBanner offering={data.offering} />
-          </>
-        )}
-        <ResourceDetailsHero
-          providerView={providerView}
-          resource={resource}
-          scope={data.scope}
-          offering={data.offering}
-          components={data.components}
-          refetch={refetch}
-          isLoading={isRefetching}
-        />
-      </>
-    ),
-
-    [resource, data, refetch, isLoading, isRefetching, providerView],
-  );
-
   const messagingBar = useMemo(() => {
     // Asks the consumer to answer the provider, so a provider has nothing to do.
     if (providerView) return null;
@@ -489,9 +457,90 @@ export const ResourceDetailsContainer: FunctionComponent<
     );
   }, [resource, providerView]);
 
-  useExtraAnnouncementBar(
-    !data || isLoading ? null : (
+  const openTeamModal = useCallback(() => {
+    if (data.offering.state === 'Unavailable') return;
+    openDialog(ResourceTeamDialog, {
+      size: 'xl',
+      resolve: { resource },
+    });
+  }, [resource]);
+
+  // The badge lists the parent project's team, which needs the view-team
+  // permission; without it the request is a 403, so it is not made at all.
+  const showProjectTeam =
+    !providerView &&
+    canViewTeam(user, {
+      customerId: resource?.customer_uuid,
+      projectId: resource?.project_uuid,
+    });
+
+  const teamBadge = showProjectTeam && (
+    <LayoutSlot name="actions">
+      <ProjectUsersBadge
+        compact
+        max={3}
+        className={classNames(
+          'col-auto items-center me-10',
+          data?.offering?.state === 'Unavailable' && 'disabled-view',
+        )}
+        onClick={openTeamModal}
+        projectId={resource?.project_uuid}
+      />
+    </LayoutSlot>
+  );
+
+  const { tabSpec } = usePageTabsTransmitter(tabs);
+
+  if (belongsToOtherProvider) {
+    goToNotFound();
+    return null;
+  }
+
+  if (error) {
+    if (error['response']?.status === 404) {
+      goToNotFound();
+      return null;
+    } else {
+      return <ErrorView error={error} />;
+    }
+  }
+
+  if (isLoading) {
+    return (
       <>
+        {teamBadge}
+        <LoadingSpinner />
+      </>
+    );
+  }
+
+  if (!data) return teamBadge || null;
+
+  return (
+    <>
+      {teamBadge}
+      <LayoutSlot name="hero">
+        {!providerView && (
+          <>
+            <TosConsentWarningBanner
+              offering={data.offering}
+              userHasConsent={data.offering?.user_has_consent}
+              userHasOfferingUser={data.offering?.user_has_offering_user}
+            />
+            <ProfileCompletenessWarningBanner offering={data.offering} />
+          </>
+        )}
+        <ResourceDetailsHero
+          providerView={providerView}
+          resource={resource}
+          scope={data.scope}
+          offering={data.offering}
+          components={data.components}
+          refetch={refetch}
+          isLoading={isRefetching}
+        />
+      </LayoutSlot>
+      <LayoutSlot name="announcements">
         {data.offering.state === 'Unavailable' ? (
           <AnnouncementBar
             label={translate('{offeringType} is currently unavailable.', {
@@ -518,85 +567,25 @@ export const ResourceDetailsContainer: FunctionComponent<
         {resource?.offering_uuid && (
           <PublicMaintenanceCard offeringUuid={resource.offering_uuid} />
         )}
-      </>
-    ),
-    [data, isLoading, messagingBar, resource, providerView],
-  );
-
-  const openTeamModal = useCallback(() => {
-    if (data.offering.state === 'Unavailable') return;
-    openDialog(ResourceTeamDialog, {
-      size: 'xl',
-      resolve: { resource },
-    });
-  }, [resource]);
-
-  // The badge lists the parent project's team, which needs the view-team
-  // permission; without it the request is a 403, so it is not made at all.
-  const showProjectTeam =
-    !providerView &&
-    canViewTeam(user, {
-      customerId: resource?.customer_uuid,
-      projectId: resource?.project_uuid,
-    });
-
-  useToolbarActions(
-    showProjectTeam ? (
-      <ProjectUsersBadge
-        compact
-        max={3}
-        className={classNames(
-          'col-auto items-center me-10',
-          data?.offering?.state === 'Unavailable' && 'disabled-view',
+      </LayoutSlot>
+      <UIView
+        render={(Component, { key, ...props }) => (
+          <Component
+            key={key}
+            {...props}
+            refetch={refetch}
+            data={{
+              resource,
+              resourceScope: data.scope,
+              offering: data.offering,
+            }}
+            isLoading={isLoading || isRefetching}
+            error={error}
+            tabSpec={tabSpec}
+          />
         )}
-        onClick={openTeamModal}
-        projectId={resource?.project_uuid}
       />
-    ) : null,
-
-    [openTeamModal, showProjectTeam],
-  );
-
-  const { tabSpec } = usePageTabsTransmitter(tabs);
-
-  if (belongsToOtherProvider) {
-    goToNotFound();
-    return null;
-  }
-
-  if (error) {
-    if (error['response']?.status === 404) {
-      goToNotFound();
-      return null;
-    } else {
-      return <ErrorView error={error} />;
-    }
-  }
-
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
-  if (!data) return null;
-
-  return (
-    <UIView
-      render={(Component, { key, ...props }) => (
-        <Component
-          key={key}
-          {...props}
-          refetch={refetch}
-          data={{
-            resource,
-            resourceScope: data.scope,
-            offering: data.offering,
-          }}
-          isLoading={isLoading || isRefetching}
-          error={error}
-          tabSpec={tabSpec}
-        />
-      )}
-    />
+    </>
   );
 };
 

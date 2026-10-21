@@ -16,14 +16,6 @@ const OpenMobileSidebar = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-const setLayout = vi.fn();
-vi.mock('@/metronic/layout/core', () => ({
-  useLayout: () => ({
-    config: { aside: { minimized: false } },
-    setLayout,
-  }),
-}));
-
 vi.mock('@/theme/useTheme', () => ({
   useTheme: () => ({ theme: 'dark' }),
 }));
@@ -74,7 +66,10 @@ describe('Sidebar', () => {
     expect(screen.getByTestId('mock-sidebar-footer')).toBeInTheDocument();
   });
 
-  it('mirrors a collapsed sidebar into the Metronic layout config', () => {
+  it("publishes a collapsed sidebar's width for the drawers and expandable rows", () => {
+    // A desktop width where the sidebar stays collapsed (from 1400px it
+    // opens itself, useSidebarLayoutShim).
+    setViewport(1200);
     render(
       <SidebarProvider defaultOpen={false}>
         <Sidebar>
@@ -83,9 +78,9 @@ describe('Sidebar', () => {
       </SidebarProvider>,
     );
 
-    expect(setLayout).toHaveBeenCalledWith({
-      aside: { minimized: true },
-    });
+    expect(
+      document.documentElement.style.getPropertyValue('--layout-sidebar-width'),
+    ).toBe('var(--sidebar-width-icon)');
   });
 
   it('renders the mobile drawer as a dialog when open', () => {

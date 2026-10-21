@@ -19,7 +19,7 @@ export interface CategorySelection {
   isGroup: boolean;
 }
 
-// Sticks 20px below the fixed header, page tabs, filter bar and impersonation
+// Sticks 20px below the sticky header, page tabs, filter bar and impersonation
 // bar (--layout-sticky-top), and never grows past the bottom of the screen:
 // a long list scrolls inside the card.
 const cardClassName = classNames(

@@ -1,4 +1,5 @@
 import { UIView, useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import classNames from 'classnames';
 import { FC, createContext, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -7,6 +8,7 @@ import { SegmentedControl, TabNav } from 'waldur-ui';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { useFullPage } from '@/navigation/context';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { isStaffOrSupport } from '@/workspace/selectors';
 
 import { CustomerReportingLanding } from './CustomerReportingLanding';
@@ -31,7 +33,7 @@ export const ReportingLayout: FC = () => {
   // category tabs and their lists stay staff/support only.
   if (!isStaff) {
     return (
-      <div className="container-fluid py-9">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-9')}>
         <h1 className="mb-5">{translate('Reporting')}</h1>
         <CustomerReportingLanding />
       </div>
@@ -39,7 +41,7 @@ export const ReportingLayout: FC = () => {
   }
 
   return (
-    <div className="container-fluid py-9">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-9')}>
       <div className="flex justify-between items-center gap-4 mb-5">
         <h1>{translate('Reporting')}</h1>
         {isDashboard && (

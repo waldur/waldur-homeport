@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
+import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 import { proposalProtectedCallsRetrieve } from 'waldur-js-client';
 
@@ -11,7 +12,8 @@ import { InvalidRoutePage } from '@/error/InvalidRoutePage';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { usePageHero } from '@/navigation/context';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
+import { LayoutSlot } from '@/navigation/slots';
 import { useTitle } from '@/navigation/title';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
@@ -28,7 +30,7 @@ import { CallProposalsList } from './CallProposalsList';
 import { CallReviewsList } from './CallReviewsList';
 
 const PageHero = ({ call, refetch }) => (
-  <div className="container-fluid my-5">
+  <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-[1.25rem]')}>
     <CallTabs call={call} />
     <CallUpdateHero call={call} refetch={refetch} />
   </div>
@@ -67,8 +69,6 @@ const Body = ({ call, refetch, loading }) => {
     [call],
   );
 
-  usePageHero(<PageHero call={call} refetch={refetch} />);
-
   const breadcrumbItems = useCallBreadcrumbItems(call);
   useBreadcrumbs(breadcrumbItems);
 
@@ -76,7 +76,14 @@ const Body = ({ call, refetch, loading }) => {
     tabSpec: { component: Component },
   } = usePageTabsTransmitter(tabs);
 
-  return <Component call={call} refetch={refetch} loading={loading} />;
+  return (
+    <>
+      <LayoutSlot name="hero">
+        <PageHero call={call} refetch={refetch} />
+      </LayoutSlot>
+      <Component call={call} refetch={refetch} loading={loading} />
+    </>
+  );
 };
 
 export const CallManageContainer: FunctionComponent = () => {

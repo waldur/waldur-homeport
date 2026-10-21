@@ -1295,22 +1295,6 @@
   padding-top: 0;
 }
 
-// Single-chat (AI-off) mode: MatrixChatHeader portals its kebab into the
-// drawer's floating control row (it is appended last). Slot it between the
-// expand and close controls → expand · kebab · close. The kebab keeps the
-// default-order expand ahead of it and pushes the close button(s) after.
-#kt_drawer_header .card-toolbar:has(.tc-toolbar-kebab) {
-  .tc-toolbar-kebab {
-    order: 1;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  > span:not(:first-child):not(.tc-toolbar-kebab) {
-    order: 2;
-  }
-}
-
 // The popover portals to <body>, beside the chat drawer (z-index 100), which
 // PopoverContent's popover layer (z-popover) clears.
 .tc-members-popover {

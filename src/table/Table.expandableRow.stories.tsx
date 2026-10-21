@@ -16,11 +16,11 @@ import Table from './Table';
 /**
  * Every `ExpandableContainer` variant — the piece most at risk in the
  * Tailwind port, since its width math (`ExpandableContainer.scss`) computes
- * off a literal `100vw` minus fixed aside/sidebar offsets, assuming
- * Metronic's real aside is present. Storybook has no aside at all, so the
- * computed width in the default `ExpandableRow` story below is expected to
- * run narrower than it would in the real app — that mismatch is the actual
- * risk these stories exist to make visible, not a bug in them. See
+ * off a literal `100vw` minus fixed page offsets and the sidebar's width
+ * (`--layout-sidebar-width`). Storybook has no sidebar, so the variable is
+ * unset and counts as 0px, but the fixed offsets still assume the app's
+ * page padding — that viewport arithmetic is the actual risk these stories
+ * exist to make visible, not a bug in them. See
  * `ExpandableRowFluid` for the opt-out real narrow-context callers (a
  * modal, a side panel) already use to sidestep it.
  *

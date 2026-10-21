@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
@@ -14,6 +15,7 @@ import {
   useOfferingListFilter,
 } from '@/marketplace/landing/utils';
 import { getMarketplaceTitle } from '@/marketplace/title';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -53,7 +55,7 @@ export const SidebarLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
 
   return (
     <div className="sidebar-layout">
-      <div className="container-fluid py-6">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-6')}>
         <div className="flex justify-between items-center mb-6">
           <h1 className="mb-0 text-2xl">{title}</h1>
           <FilterBox

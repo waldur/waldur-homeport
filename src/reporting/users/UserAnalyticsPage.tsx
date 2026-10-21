@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
@@ -5,6 +6,7 @@ import { ChartCard } from '@/core/ChartCard';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { ExportData } from '@/table/exporters/types';
 import { formatOrganizationType } from '@/user/support/aai-constants';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
@@ -79,7 +81,7 @@ export const UserAnalyticsPage: FC = () => {
   return (
     <>
       <ReportingTitle reportKey="user-analytics" />
-      <div className="container-fluid pb-6">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'pb-6')}>
         {(showNationality || showCountry) && (
           <Row className="mb-5 g-5">
             {showNationality && (

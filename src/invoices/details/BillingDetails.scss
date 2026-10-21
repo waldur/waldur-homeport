@@ -3,14 +3,54 @@
     visibility: hidden;
   }
 
-  .content {
+  // Layout's page content: everything under the app chrome.
+  [data-slot='page-content'] {
     visibility: visible;
     position: absolute;
     left: 0;
     top: 0;
+    // The page's width, not the table's: the items must fit on the paper.
+    right: 0;
 
     .hero {
       visibility: hidden;
+    }
+  }
+
+  // The organization's actions (Support) do nothing on paper.
+  .public-dashboard-hero-actions {
+    display: none !important;
+  }
+
+  // Lay the items out across the page instead of at their screen widths:
+  // drop the columns' minimum widths and the horizontal scroll, and wrap
+  // the cells the screen truncates.
+  .card-table {
+    .table-responsive {
+      overflow: visible !important;
+    }
+
+    table {
+      width: 100% !important;
+    }
+
+    col {
+      width: auto !important;
+      min-width: 0 !important;
+    }
+
+    td.ellipsis,
+    td.ellipsis > * {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+    }
+
+    // The row selection checkboxes.
+    table:has(td.row-control) col:first-child,
+    table:has(td.row-control) thead th:first-child,
+    td.row-control {
+      display: none;
     }
   }
 

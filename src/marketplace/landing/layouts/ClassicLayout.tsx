@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC } from 'react';
 
 import { getIconUrl } from '@/core/api';
@@ -6,6 +7,7 @@ import DefaultDarkImage from '@/dashboard/hero/servers-room-dark.png';
 import DefaultLightImage from '@/dashboard/hero/servers-room-light.png';
 import { translate } from '@/i18n';
 import { getMarketplaceTitle } from '@/marketplace/title';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { useTheme } from '@/theme/useTheme';
 
 import { CategoriesList } from '../CategoriesList';
@@ -33,10 +35,10 @@ export const ClassicLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
           <OfferingsSearchBox />
         </div>
       </LandingHeroSection>
-      <div className="container-fluid">
+      <div className={PAGE_CONTAINER_CLASSNAME}>
         <CategoriesList />
       </div>
-      <div className="container-fluid mb-10">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mb-10')}>
         <OfferingsGroup onTagClick={onTagClick} />
       </div>
     </div>

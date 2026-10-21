@@ -7,7 +7,6 @@ import {
   useContext,
   useState,
   PropsWithChildren,
-  ReactNode,
 } from 'react';
 import { Card } from 'react-bootstrap';
 
@@ -16,7 +15,7 @@ import { translate } from '@/i18n';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 
-type Permission = 'allowed' | 'limited' | 'restricted' | 'custom';
+type Permission = 'allowed' | 'limited' | 'restricted';
 interface PermissionMessage {
   title: string;
   message: string;
@@ -27,7 +26,8 @@ interface PermissionOptions {
   className?: string;
 }
 
-type Banner = PermissionMessage | ReactNode;
+// Markup a page shows above itself goes through LayoutSlot "announcements".
+type Banner = PermissionMessage;
 
 interface PermissionContextInterface {
   permission: Permission;

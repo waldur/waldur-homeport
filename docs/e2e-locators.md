@@ -14,6 +14,8 @@ Left to do: the suite can drop the legacy half of each selector in `tests/compon
 
 Removing a hook below breaks that suite without failing anything in HomePort, as removing the legacy classes too early did in integration pipeline 138738.
 
+The page chrome is at step 1: the page tabs row, the filter bar under it and the footer render both their legacy class (`toolbar`, `extra-toolbar`, `footer`, unstyled since waldur/waldur-homeport!7967 moved the layout to Tailwind) and a `data-testid`. Dropping the classes with that MR broke integration pipelines 145810 and 145953. Delete them only once the suite selects the test ids.
+
 ## Mapping
 
 | Old selector                                           | New hook                                                                                                     | Before !7711?           |
@@ -22,6 +24,9 @@ Removing a hook below breaks that suite without failing anything in HomePort, as
 | `.dropdown-item`                                       | `[data-testid="action-item"]` (also `get_by_role("menuitem")`: every row has the role, inside a menu or not) | role partly, test id no |
 | `.dropdown-toggle`                                     | `[data-testid="actions-toggle"]`; the icon-only kebab is also `get_by_role("button", name="Actions")`        | no                      |
 | `.menu.menu-row` (page tab row)                        | `get_by_role("navigation", name="Page tabs")`                                                                | no                      |
+| `.toolbar` (page tabs row with its actions)            | `[data-testid="page-toolbar"]`                                                                               | no                      |
+| `.extra-toolbar` (filter bar under the page tabs)      | `[data-testid="filter-bar"]`                                                                                 | no                      |
+| `.footer` (app footer)                                 | `[data-testid="app-footer"]`                                                                                 | no                      |
 | `.toolbar .menu-item` (a page tab)                     | `get_by_role("link", name=…)` or `get_by_role("button", name=…)` inside `.toolbar`                           | yes                     |
 | `.menu-arrow` (tab with a submenu)                     | the tab's button has `aria-haspopup="menu"`                                                                  | yes                     |
 | `.menu-sub:visible` (tab submenu)                      | `get_by_role("menu")`                                                                                        | yes                     |

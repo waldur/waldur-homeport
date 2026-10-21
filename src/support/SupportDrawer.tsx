@@ -67,7 +67,7 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
       value={activeTab}
       onValueChange={(key) => key && setSupportTab(key as SupportDrawerTab)}
     >
-      <div className="support-drawer h-full flex flex-col">
+      <div className="support-drawer h-full flex flex-col animate-[waldur-backdrop-enter_0.2s_ease]">
         {(showChat || showHelpdesk) && (
           <div className="support-drawer-tabs shrink-0">
             <TabsList>

@@ -8,25 +8,34 @@ import {
 import { useSidebar } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
-import { useLayout } from '@/metronic/layout/core';
 import { useTheme } from '@/theme/useTheme';
 
 /**
- * Bridges waldur-ui's Sidebar (the new source of truth for open/collapsed
- * state) into homeport's own Metronic layout config, whose `aside.minimized`
- * boolean several unrelated pieces of the app still depend on:
- * AppHeader/Toolbar/_main.scss's content-offset padding-left (via the body
- * classes/attributes LayoutSetup.initAside derives from it) and
- * LLMChatDrawer's own minimize-flip-detection effect. See this repo's
- * sidebar migration plan for the full rationale — in short, LayoutProvider's
- * setLayout() rebuilds every body class from this config on *every* call
- * (LayoutProvider.tsx), so nothing here writes to document.body directly;
- * mirroring into `layout.config.aside.minimized` is the only thing needed
- * for those consumers to keep working unchanged.
+ * The width the sidebar takes beside the page: the full or the icon-rail
+ * width, or none below the desktop breakpoint, where it opens over the page.
+ * `--layout-sidebar-width` on <html> is what the drawers (which render
+ * outside SidebarProvider) and the expandable table rows size themselves by.
+ */
+export const getSidebarWidthStyle = (
+  collapsed: boolean,
+  mobile: boolean,
+): Record<string, string> => ({
+  '--layout-sidebar-width': mobile
+    ? '0px'
+    : collapsed
+      ? 'var(--sidebar-width-icon)'
+      : 'var(--sidebar-width)',
+});
+
+/**
+ * Keeps the rest of the app in step with waldur-ui's Sidebar, the source of
+ * truth for open/collapsed state: publishes the width it takes
+ * (getSidebarWidthStyle), applies the configured sidebar colour style, and
+ * auto-minimizes the sidebar on medium desktop widths until the user
+ * toggles it.
  */
 export function useSidebarLayoutShim() {
-  const { state, open, setOpen } = useSidebar();
-  const layout = useLayout();
+  const { state, open, setOpen, isMobile } = useSidebar();
   const { theme } = useTheme();
   const userToggledRef = useRef(false);
   const openRef = useRef(open);
@@ -35,37 +44,20 @@ export function useSidebarLayoutShim() {
   setOpenRef.current = setOpen;
 
   useEffect(() => {
-    const minimized = state === 'collapsed';
-    if (
-      typeof layout.config.aside !== 'object' ||
-      layout.config.aside === null
-    ) {
-      return;
-    }
-    if (layout.config.aside.minimized === minimized) return;
-    layout.setLayout({ aside: { ...layout.config.aside, minimized } });
-    // layout.config/layout.setLayout are a fresh object/closure every
-    // render (LayoutProvider holds no memoization) — depending on `state`
-    // alone, with the redundant-write guard above, is what keeps this from
-    // looping.
-  }, [state, layout.config.aside]);
-
-  // Keep document.body's data-kt-aside-minimize attribute in immediate sync with
-  // the sidebar's collapsed state so that Metronic header/toolbar content-offset CSS
-  // responds synchronously and doesn't wait for layout.setLayout render cycles.
-  useEffect(() => {
-    if (state === 'collapsed') {
-      document.body.setAttribute('data-kt-aside-minimize', 'on');
-    } else {
-      document.body.removeAttribute('data-kt-aside-minimize');
-    }
-  }, [state]);
+    const style = getSidebarWidthStyle(state === 'collapsed', isMobile);
+    const root = document.documentElement.style;
+    Object.entries(style).forEach(([name, value]) =>
+      root.setProperty(name, value),
+    );
+    return () => {
+      Object.keys(style).forEach((name) => root.removeProperty(name));
+    };
+  }, [state, isMobile]);
 
   // Auto-minimize on medium desktop widths (768–1399px), ported from the
   // production BrandName.tsx's own resize effect — same band, same
   // "only when the user hasn't manually toggled" gate, now driving the new
-  // sidebar's setOpen directly (the effect above keeps
-  // layout.config.aside.minimized mirrored as a side effect).
+  // sidebar's setOpen directly (the effect above publishes the result).
   // Uses refs for open and setOpen so the window resize listener is registered
   // once on mount rather than re-registering and re-running on every open state change.
   useEffect(() => {

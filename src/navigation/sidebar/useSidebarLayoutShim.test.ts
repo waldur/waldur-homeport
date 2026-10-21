@@ -3,12 +3,14 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ENV } from '@/core/config';
 
-import { useSidebarLayoutShim } from './useSidebarLayoutShim';
+import {
+  getSidebarWidthStyle,
+  useSidebarLayoutShim,
+} from './useSidebarLayoutShim';
 
-const setLayout = vi.fn();
-let mockLayoutConfig = { aside: { minimized: false } };
 let mockSidebarState: 'expanded' | 'collapsed' = 'expanded';
 let mockOpen = true;
+let mockMobile = false;
 const setOpen = vi.fn((value: boolean) => {
   mockOpen = value;
   mockSidebarState = value ? 'expanded' : 'collapsed';
@@ -20,6 +22,7 @@ vi.mock('waldur-ui', () => ({
     state: mockSidebarState,
     open: mockOpen,
     setOpen,
+    isMobile: mockMobile,
   }),
 }));
 
@@ -33,13 +36,6 @@ vi.mock('waldur-design-tokens', () => ({
     configured === 'auto' ? (theme === 'dark' ? 'dark' : 'light') : configured,
 }));
 
-vi.mock('@/metronic/layout/core', () => ({
-  useLayout: () => ({
-    config: mockLayoutConfig,
-    setLayout,
-  }),
-}));
-
 vi.mock('@/theme/useTheme', () => ({
   useTheme: () => ({ theme: mockTheme }),
 }));
@@ -47,28 +43,11 @@ vi.mock('@/theme/useTheme', () => ({
 describe('useSidebarLayoutShim', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mockLayoutConfig = { aside: { minimized: false } };
     mockSidebarState = 'expanded';
     mockOpen = true;
+    mockMobile = false;
     mockTheme = 'dark';
     ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE = 'dark';
-  });
-
-  it('mirrors a collapsed sidebar state into the Metronic layout config', () => {
-    mockSidebarState = 'collapsed';
-    renderHook(() => useSidebarLayoutShim());
-
-    expect(setLayout).toHaveBeenCalledWith({
-      aside: { minimized: true },
-    });
-  });
-
-  it('does not call setLayout when already in sync', () => {
-    mockLayoutConfig = { aside: { minimized: false } };
-    mockSidebarState = 'expanded';
-    renderHook(() => useSidebarLayoutShim());
-
-    expect(setLayout).not.toHaveBeenCalled();
   });
 
   it('applies the resolved sidebar style token on mount', () => {
@@ -142,22 +121,35 @@ describe('useSidebarLayoutShim', () => {
     addEventListenerSpy.mockRestore();
   });
 
-  it('synchronizes data-kt-aside-minimize attribute on document.body', () => {
+  it('publishes the width the sidebar takes on <html> and removes it on unmount', () => {
+    const style = document.documentElement.style;
     mockSidebarState = 'collapsed';
-    const { rerender } = renderHook(() => useSidebarLayoutShim());
-    expect(document.body.getAttribute('data-kt-aside-minimize')).toBe('on');
+    const { rerender, unmount } = renderHook(() => useSidebarLayoutShim());
+    expect(style.getPropertyValue('--layout-sidebar-width')).toBe(
+      'var(--sidebar-width-icon)',
+    );
 
     mockSidebarState = 'expanded';
     rerender();
-    expect(document.body.getAttribute('data-kt-aside-minimize')).toBeNull();
+    expect(style.getPropertyValue('--layout-sidebar-width')).toBe(
+      'var(--sidebar-width)',
+    );
+
+    unmount();
+    expect(style.getPropertyValue('--layout-sidebar-width')).toBe('');
   });
+});
 
-  it('does not crash or call setLayout when layout.config.aside is false or non-object', () => {
-    // @ts-expect-error simulating aside: false when user is unauthenticated
-    mockLayoutConfig = { aside: false };
-    mockSidebarState = 'collapsed';
-
-    expect(() => renderHook(() => useSidebarLayoutShim())).not.toThrow();
-    expect(setLayout).not.toHaveBeenCalled();
+describe('getSidebarWidthStyle', () => {
+  it('is the full or icon-rail width on desktop, none on a phone', () => {
+    expect(getSidebarWidthStyle(false, false)).toEqual({
+      '--layout-sidebar-width': 'var(--sidebar-width)',
+    });
+    expect(getSidebarWidthStyle(true, false)).toEqual({
+      '--layout-sidebar-width': 'var(--sidebar-width-icon)',
+    });
+    expect(getSidebarWidthStyle(true, true)).toEqual({
+      '--layout-sidebar-width': '0px',
+    });
   });
 });
