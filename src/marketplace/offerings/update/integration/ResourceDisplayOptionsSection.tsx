@@ -60,7 +60,7 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
               name="plugin_options.enable_api_key_provisioning"
               label={translate('Manage API keys one by one')}
               description={translate(
-                'Lets users request API keys, assign them, limit their usage and their models, and pause or delete them. Turn on only if the backend behind the site agent supports it, such as the Envoy AI Gateway; others, such as Ceph S3, fail those actions. Without it, keys can only be revealed and rotated.',
+                'Lets users request API keys, assign them, limit their usage and their models, and pause or delete them. New resources start without keys instead of with two shared ones; existing resources keep theirs. Turn on only if the backend behind the site agent supports it, such as the Envoy AI Gateway; others, such as Ceph S3, fail those actions. Without it, keys can only be revealed and rotated.',
               )}
             />
           )}

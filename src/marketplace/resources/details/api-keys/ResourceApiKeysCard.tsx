@@ -225,6 +225,14 @@ export const ResourceApiKeysCard = ({
       <Table<ApiKeyRow>
         title={translate('API keys')}
         verboseName={translate('API keys')}
+        // A resource under key management starts with no keys.
+        emptyMessage={
+          keyManagement
+            ? translate(
+                'API keys are requested here, one at a time, by people who can manage the resource.',
+              )
+            : undefined
+        }
         cardBordered
         columns={getColumns(
           components,
