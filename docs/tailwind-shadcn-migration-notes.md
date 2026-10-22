@@ -117,7 +117,7 @@ Vite injects component-level stylesheets (`import './Foo.scss'`) as **unlayered*
 Consequently, any selector in a component SCSS file will override styles inside `@layer bootstrap`.
 
 > [!IMPORTANT]
-> **Scoping Rule**: Component SCSS must be strictly scoped under its own unique component class (e.g. `.my-component .title`), **never** directly under a layout root (`.aside`, `.header`, `.toolbar`, `.card`). Nesting a layout class inside your own root is safe; styling an ancestor layout root directly in component SCSS breaks layout rules app-wide. Global layout overrides belong exclusively in `src/metronic/sass/custom/` inside the bootstrap layer.
+> **Scoping Rule**: Component SCSS must be strictly scoped under its own unique component class (e.g. `.my-component .title`), **never** directly under a layout root (`.aside`, `.header`, `.toolbar`, `.card`). Nesting a layout class inside your own root is safe; styling an ancestor layout root directly in component SCSS breaks layout rules app-wide. Global layout overrides belong exclusively in `src/styles/bootstrap/custom/` inside the bootstrap layer.
 
 #### Production Layer Optimization
 

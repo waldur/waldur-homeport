@@ -252,7 +252,7 @@ beats every Tailwind utility, important or not: a class Tailwind also defined (`
 `text-white`) silently painted Bootstrap's compiled colour, theme-inverted in dark mode, and no
 `dark:`/`hover:` variant beside it applied.
 
-**Bootstrap emits no colour utility any more.** `src/metronic/sass/core/components/_utilities.scss`
+**Bootstrap emits no colour utility any more.** `src/styles/bootstrap/_utilities.scss`
 removes `color`, `background-color`, `border-color` and `border-top`/`-end`/`-bottom`/`-start`
 from `$utilities`, and the `border: 0` `.border-0` from its `border` utility. (Its width
 utilities stay: `.border-0` … `.border-5`, `.border-top-0`, … set only `border-width`.) Every colour class is Tailwind's and
@@ -388,7 +388,7 @@ to prevent fractional `rem` compression under Waldur's forced 13px root font siz
   `rounded-xl` is 0.75rem). Under Waldur's forced 13px root font size, unpinned `rem` tokens shrink
   unintentionally (`rounded-sm` becomes 3.25px, `rounded-xl` becomes 9.75px). Pinning the scale preserves
   crisp, consistent corner geometry.
-- **SCSS variables** (`src/metronic/sass/_variables.custom.scss`) mirror the design tokens:
+- **SCSS variables** (`src/styles/bootstrap/_variables.scss`) mirror the design tokens:
   `$border-radius-xs` is 4px (`--radius-sm`), `$border-radius-sm` is 6px (`--radius-md`),
   `$border-radius` and `$border-radius-lg` are 8px (`--radius-lg`), `$border-radius-xl` is 12px (`--radius-xl`),
   and `$border-radius-2xl` is 16px (`--radius-2xl`).
@@ -575,9 +575,9 @@ plus its `gray-dark` mirror at the call site.
 Two checks keep new reads out: the `waldur-custom/no-bootstrap-css-vars` ESLint rule (TS/TSX,
 including `getCssVar('--bs-…')`) and stylelint's `declaration-property-value-disallowed-list` and
 `property-disallowed-list` (CSS/SCSS). The Metronic SCSS is exempt, as it defines the variables:
-stylelint's `ignoreFiles` skips `src/metronic/**/*.scss`. That also covers
-`src/metronic/sass/custom/**`, so a new `--bs-*` read there is not caught; review it. The ESLint
-rule has no exemption and checks the TS/TSX under `src/metronic` too.
+stylelint's `ignoreFiles` skips `src/styles/bootstrap/**/*.scss`. That also covers
+`src/styles/bootstrap/custom/**`, so a new `--bs-*` read there is not caught; review it. The ESLint
+rule has no exemption and checks all TS/TSX too.
 
 Outside that SCSS nothing reads them any more, so neither check has a per-file allow list.
 
@@ -590,7 +590,7 @@ Outside that SCSS nothing reads them any more, so neither check has a per-file a
 Changing a light value changes what the app renders in both Bootstrap and Tailwind components
 at once, which is the point. A new ramp or step appears in CSS as `--color-<name>-<step>` (and so as Tailwind utilities).
 Sass defines no colour ramp. Every Sass colour variable (tokens as `var(--…)`, plus `$white`,
-`$black` and the static default green) lives in `src/metronic/sass/_colors.scss`, and Bootstrap's own
+`$black` and the static default green) lives in `src/styles/bootstrap/_variables.scss`, and Bootstrap's own
 defaults fill every other `$gray-*` / `$primary` name, none of which reaches a compiled rule.
 
 ## Verifying a refactor changes nothing
@@ -599,11 +599,11 @@ When the generator, the data model or the Metronic SCSS changes and no pixel sho
 snapshot the Metronic stylesheet before and compare after:
 
 ```bash
-node scripts/metronic-css-diff.mjs save /tmp/before.json   # on the base commit
-node scripts/metronic-css-diff.mjs compare /tmp/before.json
+node scripts/color-diff.mjs save /tmp/before.json   # on the base commit
+node scripts/color-diff.mjs compare /tmp/before.json
 ```
 
-It compiles `src/metronic/sass/style.scss` and records what every declaration resolves to in
+It compiles `src/styles/bootstrap/index.scss` and records what every declaration resolves to in
 each theme, with the design tokens and the `dark-theme` / `light-theme` overrides applied, so a
 change that keeps the rendered colour (a token in place of an SCSS gray of the same value)
 reports nothing.

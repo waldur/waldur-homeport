@@ -1,0 +1,6 @@
+// Rule-emitting half of the theme. Requires `_config.scss` to have been
+// imported at the top level first.
+
+@import 'bootstrap';
+@import 'components';
+@import 'custom/style';

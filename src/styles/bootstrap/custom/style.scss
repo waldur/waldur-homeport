@@ -1,12 +1,10 @@
-// Variables, Mixins
-
 // Theme Elements
-@import 'base';
-@import 'borders';
-@import 'buttons';
-@import 'content';
+@import '../legacy/base';
+@import '../legacy/borders';
+@import '../legacy/buttons';
+@import '../legacy/content';
 @import 'file-upload';
-@import 'icon';
+@import '../legacy/icon';
 @import 'landing';
 @import 'marketplaces-selector';
 @import 'table';

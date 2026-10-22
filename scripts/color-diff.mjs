@@ -3,10 +3,10 @@
 // resolves to, in the light and the dark theme, so a refactor of the SCSS
 // colour variables can be checked declaration by declaration.
 //
-//   node scripts/metronic-css-diff.mjs save <snapshot.json>
-//   node scripts/metronic-css-diff.mjs compare <snapshot.json>
+//   node scripts/color-diff.mjs save <snapshot.json>
+//   node scripts/color-diff.mjs compare <snapshot.json>
 //
-// Light is style.scss with the light design tokens, dark the same stylesheet
+// Light is index.scss with the light design tokens, dark the same stylesheet
 // with the dark tokens (the `:root[data-theme='dark']` blocks), as the app
 // renders them. Every var() is resolved against the tokens and the
 // stylesheet's own :root; one nobody defines (the runtime --brand-* ramp)
@@ -25,7 +25,7 @@ import postcss from 'postcss';
 import * as sass from 'sass';
 
 const root = path.resolve(fileURLToPath(import.meta.url), '../..');
-const sassDir = path.join(root, 'src/metronic/sass');
+const sassDir = path.join(root, 'src/styles/bootstrap');
 const tokensDir = path.join(root, 'packages/design-tokens/src/css');
 
 const compile = (file) =>
@@ -190,7 +190,7 @@ function declarations(css, tokens, theme) {
 
 function snapshot() {
   const tokens = tokenVars();
-  const lightCss = compile('style.scss');
+  const lightCss = compile('index.scss');
   return {
     light: declarations(lightCss, tokens.light, 'light'),
     dark: declarations(lightCss, tokens.dark, 'dark'),
@@ -199,7 +199,7 @@ function snapshot() {
 
 const [command, file] = process.argv.slice(2);
 if (!['save', 'compare'].includes(command) || !file) {
-  console.error('usage: metronic-css-diff.mjs save|compare <snapshot.json>');
+  console.error('usage: color-diff.mjs save|compare <snapshot.json>');
   process.exit(2);
 }
 

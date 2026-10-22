@@ -1,4 +1,123 @@
 // Global variables for Bootstrap customization.
+// Consolidated variables file: combines colors, custom design token overrides,
+// and component/layout settings. Imported before bootstrap/scss/variables.
+
+// Every colour variable of the theme, in one place. Imported before
+// _variables.custom.scss and core/components/_variables.scss (see
+// _init-config.scss), so a value set here wins over any later `!default`.
+
+// Colours are the design tokens (var(--…)), so one stylesheet serves both
+// themes; the colour ramps themselves are CSS (--color-<ramp>-<step>) and Sass
+// reads none of them. Bootstrap's other colour names ($gray-*, $primary, …) are
+// left at its own defaults: no compiled rule reads them. Shadows stay with their
+// components (core/components/_variables.scss).
+
+// Base colours (Bootstrap's own values). These have to be Sass colours: the
+// rgba() calls in the shadows read them.
+$white: #fff !default;
+$black: #000 !default;
+
+// Surfaces and text
+$body-bg: var(--bg-primary) !default;
+$body-color: var(--text-primary) !default;
+$headings-color: var(--text-primary) !default;
+$text-muted: var(--text-quaternary) !default;
+
+// Borders
+$border-color: var(--border-secondary) !default;
+
+// Links
+$link-color: var(--text-brand-secondary) !default;
+$link-hover-color: var(--text-brand-secondary) !default;
+
+// The static default green. The tenant's brand is the runtime --brand-* ramp;
+// Bootstrap runs tint-color() and rgba() on these two, so they must stay Sass
+// colours (a var() is an error there).
+$component-active-bg: #307300 !default;
+
+// Card
+$card-bg: $body-bg !default;
+$card-border-color: $border-color !default;
+$card-border-dashed-color: var(--border-divider-medium) !default;
+$card-cap-bg: $white !default;
+
+// Code
+$code-bg: #f1f3f8 !default; // dark mode in core/components/_code.scss
+$code-color: #b93993 !default; // dark mode in core/components/_code.scss
+$kbd-bg: var(
+  --bg-primary-solid
+) !default; // dark mode in core/components/_code.scss
+$blockquote-footer-color: var(--text-tertiary) !default;
+$figure-caption-color: var(--text-tertiary) !default;
+$thumbnail-border-color: var(--border-primary) !default;
+
+// Inputs
+$input-disabled-bg: var(--bg-secondary) !default;
+$input-disabled-color: var(--text-disabled) !default;
+
+// List group
+$list-group-color: var(--text-primary) !default;
+$list-group-hover-bg: var(--bg-tertiary) !default;
+$list-group-disabled-color: var(--text-tertiary) !default;
+$list-group-action-color: var(--text-secondary) !default;
+$list-group-action-active-bg: var(--bg-quaternary) !default;
+$list-group-active-bg: var(--bg-brand-solid) !default;
+
+// Tables
+$table-striped-bg: color-mix(
+  in srgb,
+  var(--bg-tertiary) 75%,
+  transparent
+) !default;
+$table-active-bg: var(--bg-tertiary) !default;
+$table-hover-bg: var(--bg-tertiary) !default;
+
+// Non-colour overrides of Bootstrap's and Metronic's variables. Colours are in
+// _colors.scss. This file is imported first, so a value set here wins over the
+// `!default` in core/components/_variables.scss, which is imported after it.
+
+// Bootstrap builds its text and background utility maps from $body-color and
+// $body-bg with to-rgb(), which needs a Sass colour. Bootstrap emits no colour
+// utilities here (_utilities.scss), so the maps are empty.
+$utilities-text: () !default;
+$utilities-bg: () !default;
+// Bootstrap generates a .table-{color} for each colour by mixing it with
+// $body-bg in Sass. The two the app uses are written with the tokens in
+// core/components/_tables.scss.
+$table-variants: () !default;
+
+// Components
+
+// Border Radius — mirrors design tokens in primitives/radius.css:
+//   --radius-xs: 2px, --radius-sm: 4px, --radius-md: 6px, --radius-lg: 8px, --radius-xl: 12px, --radius-2xl: 16px
+// Note on legacy Bootstrap mapping:
+// Bootstrap lacks an explicit -md step, so $border-radius-sm (6px) corresponds to --radius-md,
+// and $border-radius-xs (4px) corresponds to --radius-sm.
+// The full scale is kept (including -2xs, -md and -2xl, which have no current
+// consumers) so every --radius-* token has an SCSS counterpart; see
+// docs/design-tokens.md.
+$border-radius-2xs: 2px !default; // mirrors --radius-xs (2px)
+$border-radius-xs: 4px !default; // mirrors --radius-sm (4px)
+$border-radius-sm: 6px !default; // mirrors --radius-md (6px)
+$border-radius-md: 6px !default; // mirrors --radius-md (6px)
+$border-radius: 8px !default; // mirrors --radius-lg (8px)
+$border-radius-lg: 8px !default; // mirrors --radius-lg (8px)
+$border-radius-xl: 12px !default; // mirrors --radius-xl (12px)
+$border-radius-2xl: 16px !default; // mirrors --radius-2xl (16px)
+
+// Card
+$card-py: var(--card-padding-y, 1.23rem) !default;
+$card-px: var(--card-padding-x, 1.85rem) !default;
+
+// Buttons + Forms
+
+// Sets $input-height-lg (the AI assistant history search).
+$input-btn-padding-y-lg: 0.692rem !default;
+
+// Bootstrap's own default is a raw 300.
+$lead-font-weight: var(--font-weight-light) !default;
+
+// Global variables for Bootstrap customization.
 
 // Bootstrap's two base colours (its own values): this file is imported before
 // bootstrap/scss/variables, so they have to exist here for the rgba() calls
@@ -213,12 +332,6 @@ $transition-link:
 // Components
 
 // Define common padding and border radius sizes and more.
-
-// Border Radiues
-$border-radius-sm: 0.275rem !default;
-$border-radius: 0.475rem !default;
-$border-radius-lg: 0.775rem !default;
-$border-radius-xl: 1rem !default; // Custom variable
 
 // Box shadow
 $box-shadow-xs: 0 0.1rem 0.75rem 0.25rem rgba($black, 0.05) !default; // Custom variable
