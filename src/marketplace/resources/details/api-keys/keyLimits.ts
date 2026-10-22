@@ -87,14 +87,21 @@ export const getPeriodUsages = (
       };
     });
 
-/** "Token cost", or "Token cost · Daily limit" for a limit other than the month's. */
-export const getReadingLabel = (reading: ComponentUsage) =>
-  reading.period
+/**
+ * "Token cost · Daily limit", "Token cost · Monthly limit", or just "Token
+ * cost" for the month's usage of a component with no month limit.
+ */
+export const getReadingLabel = (reading: ComponentUsage) => {
+  // The month reading carries no period; its limit, own or inherited, is the month's.
+  const period =
+    reading.period ?? (reading.limit !== undefined ? 'month' : undefined);
+  return period
     ? translate('{component} · {limit}', {
         component: componentLabel(reading.component),
-        limit: getSpendingLimitLabel(reading.period),
+        limit: getSpendingLimitLabel(period),
       })
     : componentLabel(reading.component);
+};
 
 /** Every reading of a component: the month's first, then the other periods' limits. */
 export const getComponentReadings = (

@@ -1,7 +1,7 @@
 import { groupBy } from 'lodash-es';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
-import { Resource, SpendingLimitStatus } from 'waldur-js-client';
+import { SpendingLimitStatus } from 'waldur-js-client';
 
 import { AlertItem, Badge, Progress } from 'waldur-ui';
 
@@ -12,13 +12,13 @@ import {
   getSpendingLimitLabel,
 } from '@/marketplace/common/spendingLimits';
 
-type StatusResource = Pick<
-  Resource,
-  | 'spending_limit_status'
-  | 'usage_limit_restriction'
-  | 'usage_limit_resumes_at'
-  | 'offering_components'
->;
+import {
+  getRestrictionHeldBy,
+  getRestrictionResumes,
+  RestrictedResource,
+} from './spendingLimitRestriction';
+
+type StatusResource = RestrictedResource;
 
 const getComponent = (resource: StatusResource, type: string) =>
   resource.offering_components?.find((component) => component.type === type);
@@ -77,52 +77,19 @@ const RestrictionNotice: FC<{ resource: StatusResource }> = ({ resource }) => {
   if (!resource.usage_limit_restriction) {
     return null;
   }
-  const reached = (resource.spending_limit_status || []).filter(
-    (status) => status.reached,
-  );
-  if (reached.length === 0) {
+  const heldBy = getRestrictionHeldBy(resource);
+  if (!heldBy) {
     return null;
   }
-  const limits = reached
-    .map((status) =>
-      translate('{component} — {limit}', {
-        component: getComponentName(resource, status.component_type),
-        limit: getSpendingLimitLabel(status.period),
-      }),
-    )
-    .join('; ');
   // A downscaled resource keeps access, so its notice speaks of the restriction.
-  const downscaled = resource.usage_limit_restriction === 'downscaled';
-  const title = downscaled
-    ? translate('The resource is downscaled: a spending limit is reached')
-    : translate('Access is paused: a spending limit is reached');
-  const resumesAt = resource.usage_limit_resumes_at;
-  // The reset task lifts the restriction within a few minutes of this time.
-  const resumes = !resumesAt
-    ? downscaled
-      ? translate(
-          'The restriction lifts once usage is under every limit of the resource again.',
-        )
-      : translate(
-          'Access resumes once usage is under every limit of the resource again.',
-        )
-    : new Date(resumesAt).getTime() <= Date.now()
-      ? downscaled
-        ? translate('The restriction lifts shortly.')
-        : translate('Access resumes shortly.')
-      : downscaled
-        ? translate('The restriction lifts {relative}, on {date}.', {
-            relative: formatRelative(resumesAt),
-            date: formatMediumDateTime(resumesAt),
-          })
-        : translate('Access resumes {relative}, on {date}.', {
-            relative: formatRelative(resumesAt),
-            date: formatMediumDateTime(resumesAt),
-          });
+  const title =
+    resource.usage_limit_restriction === 'downscaled'
+      ? translate('The resource is downscaled: a spending limit is reached')
+      : translate('Access is paused: a spending limit is reached');
   const body = (
     <>
-      <div>{translate('Held by: {limits}.', { limits })}</div>
-      <div>{resumes}</div>
+      <div>{heldBy}</div>
+      <div>{getRestrictionResumes(resource)}</div>
     </>
   );
   return (
