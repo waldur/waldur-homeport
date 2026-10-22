@@ -1,6 +1,6 @@
 import { DotsThreeIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { debounce } from 'lodash-es';
+import { debounce } from 'es-toolkit';
 import {
   FunctionComponent,
   useCallback,

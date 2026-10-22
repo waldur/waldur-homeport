@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { debounce } from 'lodash-es';
+import { debounce } from 'es-toolkit';
 import { useCallback, useMemo, useState } from 'react';
 import { Field } from 'react-final-form';
 import { openstackImagesList } from 'waldur-js-client';
