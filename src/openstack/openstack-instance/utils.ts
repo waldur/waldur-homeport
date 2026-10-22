@@ -128,8 +128,14 @@ const getVolumeTypeRequirements = (formData) => {
   return required;
 };
 
+// Neutron does not require a subnet name, so a nameless subnet is shown by its
+// CIDR; a bare name would leave it a blank, unsearchable select option.
+export function formatSubnetName(subnet) {
+  return subnet.name || subnet.cidr;
+}
+
 export function formatSubnet(subnet) {
-  return `${subnet.name} (${subnet.cidr})`;
+  return subnet.name ? `${subnet.name} (${subnet.cidr})` : subnet.cidr;
 }
 
 export function flavorValidator(model, choice) {

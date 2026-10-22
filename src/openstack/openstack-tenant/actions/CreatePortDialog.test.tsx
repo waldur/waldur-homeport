@@ -101,6 +101,22 @@ describe('CreatePortDialog', () => {
     });
   });
 
+  it('lists a nameless subnet by its CIDR', async () => {
+    const user = userEvent.setup();
+    vi.mocked(openstackSubnetsList).mockResolvedValue({
+      data: [{ ...mockSubnets[0], name: '', cidr: '10.0.3.0/24' }],
+    } as any);
+    renderDialog();
+
+    await user.click(await screen.findByLabelText('Network'));
+    await user.click(await screen.findByText('Network 1'));
+
+    await user.click(await screen.findByLabelText('Subnet'));
+    expect(
+      await screen.findByRole('option', { name: '10.0.3.0/24' }),
+    ).toBeDefined();
+  });
+
   it('toggles custom IP configuration and shows manual input', async () => {
     const user = userEvent.setup();
     vi.mocked(openstackSubnetsList).mockResolvedValue({
