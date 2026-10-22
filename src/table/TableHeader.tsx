@@ -2,13 +2,13 @@ import { CaretDownIcon, PushPinIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 
+import { translate } from 'waldur-i18n-runtime';
 import { Checkbox, Tooltip } from 'waldur-ui';
 
 import {
   CaretDownSmallIcon,
   CaretUpSmallIcon,
 } from '@/core/CaretUpDownButtons';
-import { translate } from '@/i18n';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableFiltersMenu } from './TableFiltersMenu';

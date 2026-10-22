@@ -1,5 +1,6 @@
+import { useModal } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
-import { useModal } from '@/modal/actions';
 
 import { ExportFormat } from './exporters/types';
 import { TableProps } from './types';
