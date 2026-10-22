@@ -215,6 +215,19 @@ describe('ResourceApiKeysCard', () => {
     expect(screen.queryByText('Revoke')).not.toBeInTheDocument();
   });
 
+  it('manages keys with the consumer API key permission on the project or organization', async () => {
+    // Project managers and administrators hold it on the project, the
+    // organization owner on the organization.
+    vi.mocked(hasPermission).mockReturnValue(true);
+    renderCard(KEYS);
+    await screen.findByText('EUMVPW5J5U2ZUQ5AL9L4');
+    expect(hasPermission).toHaveBeenCalledWith(expect.anything(), {
+      permission: 'RESOURCE.MANAGE_CONSUMER_API_KEY',
+      projectId: 'proj-1',
+      customerId: 'cust-1',
+    });
+  });
+
   it('offers only reveal without manage permission', async () => {
     vi.mocked(hasPermission).mockReturnValue(false);
     renderCard(KEYS);

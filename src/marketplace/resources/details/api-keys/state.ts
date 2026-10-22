@@ -2,10 +2,12 @@ import { Resource, ResourceApiKeyAction, User } from 'waldur-js-client';
 
 import { BadgeVariant } from 'waldur-ui';
 
+import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
+import { getSpendingLimitLabel } from '@/marketplace/common/spendingLimits';
 import { checkIsStaffOrSupport } from '@/workspace/selectors';
 
-import { ApiKeyRow, ApiKeyState } from './types';
+import { ApiKeyRow, ApiKeyState, KeyComponent } from './types';
 
 export const getStateVariant = (
   state?: ApiKeyState,
@@ -57,11 +59,45 @@ export const getErredTooltip = (row: ApiKeyRow) => {
 };
 
 // A key Waldur paused on reaching a limit comes back on its own, unlike one a
-// person paused.
-const PAUSED_BY_CAP_TOOLTIP = () =>
-  translate(
-    'Paused on reaching a limit. It resumes on its own once under its limits again: when a new month begins or a limit is raised.',
+// person paused: when every reached limit resets (limit_resumes_at), or when a
+// limit is raised.
+const getPausedByLimitTooltip = (
+  row: ApiKeyRow,
+  components: KeyComponent[],
+) => {
+  const reached = (row.spending_limit_status ?? []).filter(
+    (status) => status.reached,
   );
+  const which = reached.length
+    ? translate('Paused on reaching a limit: {limits}.', {
+        limits: reached
+          .map((status) =>
+            translate('{limit} of {component}', {
+              limit: getSpendingLimitLabel(status.period),
+              component:
+                components.find((c) => c.type === status.component_type)
+                  ?.name || status.component_type,
+            }),
+          )
+          .join(', '),
+      })
+    : translate('Paused on reaching a limit.');
+  const resumesAt = row.limit_resumes_at;
+  const resumes = !resumesAt
+    ? translate(
+        'It resumes on its own once under its limits again, or when a limit is raised.',
+      )
+    : new Date(resumesAt).getTime() <= Date.now()
+      ? translate('It resumes shortly.')
+      : translate(
+          'It resumes {relative}, on {date}, or when a limit is raised.',
+          {
+            relative: formatRelative(resumesAt),
+            date: formatMediumDateTime(resumesAt),
+          },
+        );
+  return `${which} ${resumes}`;
+};
 
 // A paused resource stops every key it has, but leaves their own states alone:
 // each key keeps its reason to stay paused, or not, for when the resource
@@ -101,13 +137,14 @@ export const getKeyStateVariant = (
 export const getStateTooltip = (
   row: ApiKeyRow,
   pause?: ResourcePause | null,
+  components: KeyComponent[] = [],
 ) =>
   pause && isBlockedByResource(row, pause)
     ? `${translate('The resource is paused, so this key is not served.')} ${getResourcePauseMessage(pause)}`
     : row.state === 'Erred'
       ? getErredTooltip(row)
       : row.state === 'Paused' && row.paused_by_limit
-        ? PAUSED_BY_CAP_TOOLTIP()
+        ? getPausedByLimitTooltip(row, components)
         : '';
 
 // Pause, resume, rotate and settings updates all show the key as Updating;

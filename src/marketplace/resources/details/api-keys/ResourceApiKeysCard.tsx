@@ -73,7 +73,7 @@ const getColumns = (
           label={getStateLabel(row, pause)}
           variant={variant}
           active={active}
-          tooltip={getStateTooltip(row, pause)}
+          tooltip={getStateTooltip(row, pause, components)}
           shape="pill"
           tone="outline"
         />
@@ -174,7 +174,7 @@ export const ResourceApiKeysCard = ({
 }: ResourceApiKeysCardProps) => {
   const user = useUser();
   const canManage = hasPermission(user, {
-    permission: PermissionEnum.MANAGE_RESOURCE_USERS,
+    permission: PermissionEnum.MANAGE_RESOURCE_CONSUMER_API_KEY,
     projectId: resource.project_uuid,
     customerId: resource.customer_uuid,
   });

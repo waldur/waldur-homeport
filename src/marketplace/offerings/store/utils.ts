@@ -9,6 +9,7 @@ import { isUniqueOptionFieldType } from '@/marketplace/common/optionErrors';
 import { isPatternFieldType } from '@/marketplace/common/optionPattern';
 import { isTransformFieldType } from '@/marketplace/common/optionTransform';
 import { getFormLimitSerializer } from '@/marketplace/common/registry';
+import { formatComponentSpendingLimitPeriods } from '@/marketplace/common/spendingLimits';
 
 import { PlanFormData, OptionFormData } from './types';
 
@@ -153,13 +154,21 @@ export const formatOption = (option: OptionFormData) => {
 const getBillingTypeValue = (option) =>
   typeof option === 'object' ? option.value : option;
 
-export const formatComponent = (component, offering?) => {
+export const formatComponent = (formData, offering?) => {
+  // The dialog's own switch; the API reads the periods it leaves ticked.
+  const { spending_limits_enabled, ...component } = formData;
   const limitSerializer = offering
     ? getFormLimitSerializer(offering.type)
     : (x) => x;
+  const billingType = getBillingTypeValue(component.billing_type);
   return {
     ...component,
-    billing_type: getBillingTypeValue(component.billing_type),
+    billing_type: billingType,
+    spending_limit_periods: formatComponentSpendingLimitPeriods(
+      spending_limits_enabled,
+      component.spending_limit_periods,
+      billingType,
+    ),
     limit_period: component.limit_period ? component.limit_period.value : null,
     min_value: limitSerializer({ [component.type]: component.min_value })[
       component.type

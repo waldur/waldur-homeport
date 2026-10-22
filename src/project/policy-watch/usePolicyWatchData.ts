@@ -15,6 +15,7 @@ import {
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { formatISODate } from '@/core/dateUtils';
+import { isHeldGate } from '@/customer/cost-policies/triggerStatus';
 import { getCostPolicyActionOptions } from '@/customer/cost-policies/utils';
 import { translate } from '@/i18n';
 import { Project } from '@/workspace/types';
@@ -472,6 +473,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
           scopeName: p.scopeName,
           action: p.action,
           hasFired: p.hasFired,
+          heldByCredit: isHeldGate(p.gate),
         })),
       },
       today,

@@ -11,6 +11,8 @@ import { CheckoutSummaryProps } from '../deploy/types';
 import { OfferingEditPanelProps } from '../offerings/update/integration/types';
 import { AttributesType, OrderDetailsProps } from '../types';
 
+import { SpendingLimitFormValues } from './spendingLimits';
+
 export type Limits = Record<string, number>;
 
 export type LimitParser = (limits: Limits) => Limits;
@@ -69,6 +71,8 @@ export interface DeployFormData {
   plan?: Plan;
   start_date?: string;
   attachment?: any;
+  /** Spending limits on usage-based components, see `spendingLimits.ts`. */
+  spending_limits?: SpendingLimitFormValues;
 }
 
 export interface OrderFormComponentProps {

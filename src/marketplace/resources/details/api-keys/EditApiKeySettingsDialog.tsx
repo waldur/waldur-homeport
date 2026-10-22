@@ -11,6 +11,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 
 import {
+  getKeyLimitFieldComponents,
   getKeySettingsFields,
   KeySettingsFormValues,
   serializeKeySettings,
@@ -31,7 +32,7 @@ export const EditApiKeySettingsDialog: FC<{
   // Stable, so re-renders while saving don't reset what the user entered.
   const initialValues = useMemo<KeySettingsFormValues>(
     () => ({
-      limits: row.limits ?? {},
+      spending_limits: row.spending_limits ?? {},
       all_models: isAllModels(row.allowed_models),
       // Models the offering has since retired, or the resource no longer
       // allows, are not shown; the key keeps them unless All models replaces
@@ -48,12 +49,16 @@ export const EditApiKeySettingsDialog: FC<{
     [row, models],
   );
 
+  const limitComponents = useMemo(
+    () => getKeyLimitFieldComponents(resource, components, row.spending_limits),
+    [resource, components, row.spending_limits],
+  );
   const fields = useMemo(
     () =>
       getKeySettingsFields(resource, components, models, {
-        currentLimits: row.limits,
+        currentLimits: row.spending_limits,
       }),
-    [resource, components, models, row.limits],
+    [resource, components, models, row.spending_limits],
   );
 
   // Limits and models go to the agent as a command, or with the resume of a
@@ -62,7 +67,7 @@ export const EditApiKeySettingsDialog: FC<{
     mutationFn: (values) =>
       marketplaceResourceApiKeysPartialUpdate({
         path: { uuid: row.uuid },
-        body: serializeKeySettings(values, components, models),
+        body: serializeKeySettings(values, limitComponents, models),
       }),
     successMessage: translate('API key settings saved'),
     errorMessage: translate('Unable to update the API key settings.'),

@@ -1,6 +1,7 @@
 import { FunctionComponent, ReactNode } from 'react';
 
-import { translate } from '@/i18n';
+import { translate } from 'waldur-i18n-runtime';
+
 import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { TableProps } from './types';

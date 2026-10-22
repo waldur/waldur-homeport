@@ -3,6 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { ComponentType, FC, createElement, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { translate } from 'waldur-i18n-runtime';
 import {
   BaseButton,
   ButtonSize,
@@ -14,7 +15,6 @@ import {
   menuItem,
 } from 'waldur-ui';
 
-import { translate } from '@/i18n';
 import { resetSelection, setFilterQuery, toggleColumn } from '@/table/actions';
 import { getTableState, selectSelectedRows } from '@/table/selectors';
 import { TableQuery } from '@/table/TableQuery';

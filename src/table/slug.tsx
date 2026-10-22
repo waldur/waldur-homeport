@@ -1,4 +1,4 @@
-import { translate } from '@/i18n';
+import { translate } from 'waldur-i18n-runtime';
 
 export const SLUG_COLUMN = {
   title: translate('Slug'),

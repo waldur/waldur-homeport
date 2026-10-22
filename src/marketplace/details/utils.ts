@@ -5,8 +5,11 @@ import {
   getFormLimitSerializer,
   getFormSerializer,
 } from '@/marketplace/common/registry';
+import { formatSpendingLimits } from '@/marketplace/common/spendingLimits';
 
 import { DeployFormData } from '../common/types';
+
+import { getEffectiveComponents } from './plan/effectiveComponents';
 
 const formatLimits = (offering: Offering, formData: DeployFormData) => {
   let limits = {};
@@ -116,6 +119,24 @@ const formatAttributes = (
   return newAttributes;
 };
 
+// Only the components the chosen plan bills on usage take spending limits;
+// left out entirely when none are set, so other orders are unchanged.
+const formatOrderSpendingLimits = (
+  offering: Offering,
+  formData: DeployFormData,
+): Pick<OrderCreateRequest, 'spending_limits'> => {
+  if (!formData.spending_limits || !offering.components) {
+    return {};
+  }
+  const spendingLimits = formatSpendingLimits(
+    formData.spending_limits,
+    getEffectiveComponents(offering, formData.plan),
+  );
+  return Object.keys(spendingLimits).length > 0
+    ? { spending_limits: spendingLimits }
+    : {};
+};
+
 export const formatOrderForCreate = (
   offering: Offering,
   formData: DeployFormData,
@@ -125,6 +146,7 @@ export const formatOrderForCreate = (
   plan: formData?.plan?.url,
   attributes: formatAttributes(offering, formData),
   limits: formatLimits(offering, formData),
+  ...formatOrderSpendingLimits(offering, formData),
   accepting_terms_of_service: true,
   start_date: formData.start_date,
 });

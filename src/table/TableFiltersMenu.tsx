@@ -17,12 +17,11 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { BaseButton, MenuPopover } from 'waldur-ui';
+import { translate } from 'waldur-i18n-runtime';
+import { BaseButton, MenuPopover, useModal } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
-import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
 import { COLUMN_FILTER_TOGGLE_CLASS } from './constants';

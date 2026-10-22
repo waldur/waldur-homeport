@@ -38,9 +38,9 @@ export interface ReportDefinition {
   key: string;
   title: string;
   description?: string;
-  /** Description shown to organization owners, where the report is scoped to one organization */
+  /** Description shown to non-staff users, where the report is scoped to one organization */
   scopedDescription?: string;
-  /** Icon of the report card shown to organization owners */
+  /** Icon of the report card shown to non-staff users */
   icon?: Icon;
   state: string;
   /** Optional feature flag - report only visible when feature is enabled */
@@ -482,7 +482,7 @@ export const getVisibleReports = (
 };
 
 /**
- * Reports listed to organization owners, in CUSTOMER_SCOPED_REPORTS order.
+ * Reports listed to non-staff users, in CUSTOMER_SCOPED_REPORTS order.
  */
 export const getCustomerScopedReports = (): ReportDefinition[] => {
   const reports = Object.values(getCategoryConfig()).flatMap((category) =>
