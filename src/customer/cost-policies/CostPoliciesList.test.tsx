@@ -1,7 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+import { customerCreditsList } from 'waldur-js-client';
 
-import { CostPoliciesListTable } from './CostPoliciesList';
+import { renderWithProviders } from '@/test/harness';
+import { useCustomer } from '@/workspace/hooks';
+
+import { CostPoliciesList, CostPoliciesListTable } from './CostPoliciesList';
 
 vi.mock('@/table/useTable', () => ({
   useTable: () => ({ fetch: vi.fn(), rows: [] }),
@@ -49,12 +53,26 @@ describe('CostPoliciesListTable', () => {
     expect(screen.queryByText(/12\.00/)).not.toBeInTheDocument();
   });
 
-  it('renders a withheld organization credit as a dash', () => {
+  it('does not repeat the organization credit on every row', () => {
     render(<CostPoliciesListTable table="test" />);
-    const { container } = render(
-      <>{column('Organization credit').render({ row })}</>,
+    expect(column('Organization credit')).toBeUndefined();
+    expect(column('Project credit')).toBeDefined();
+  });
+
+  it('shows the organization credit once, as the subtitle', async () => {
+    vi.mocked(useCustomer).mockReturnValue({ uuid: 'org' } as any);
+    vi.mocked(customerCreditsList).mockResolvedValue({
+      data: [{ value: '483155.00' }],
+    } as any);
+    renderWithProviders(<CostPoliciesList />);
+    await waitFor(() =>
+      expect(tableProps.subtitle).toMatch(
+        /^Organization credit, .+ balance: .*483,155\.00$/,
+      ),
     );
-    expect(container.textContent).toBe('—');
+    expect(customerCreditsList).toHaveBeenCalledWith({
+      query: { customer_uuid: 'org' },
+    });
   });
 
   it('shows why the policy waits next to "Action triggered"', () => {
@@ -64,4 +82,31 @@ describe('CostPoliciesListTable', () => {
       'Waiting for project credit',
     );
   });
+
+  it.each([
+    [1, '1 resource'],
+    [3, '3 resources'],
+  ])(
+    'counts %i affected resource(s) after a fired policy',
+    (count, expected) => {
+      render(<CostPoliciesListTable table="test" />);
+      render(
+        <>
+          {column('Action triggered').render({
+            row: {
+              ...row,
+              has_fired: true,
+              affected_resources_count: count,
+              trigger_status: {
+                gate: 'credit_exhausted',
+                triggered: true,
+                credit_value_compared: '0.00',
+              },
+            },
+          })}
+        </>,
+      );
+      expect(screen.getByText(expected)).toBeInTheDocument();
+    },
+  );
 });
