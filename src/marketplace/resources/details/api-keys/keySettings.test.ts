@@ -112,20 +112,6 @@ describe('getKeySettingsFields', () => {
     )[0] as any;
     expect(field.maxValue).toBe(500);
   });
-
-  it('locks every setting with a reason', () => {
-    const fields = getKeySettingsFields(
-      { limits: {} } as any,
-      [TOKENS],
-      ['gpt-4o'],
-      { disabledReason: 'Locked' },
-    ) as any[];
-    expect(fields).toHaveLength(2);
-    for (const field of fields) {
-      expect(field.disabled).toBe(true);
-      expect(field.disabled_tooltip).toBe('Locked');
-    }
-  });
 });
 
 describe('getComponentUsage', () => {

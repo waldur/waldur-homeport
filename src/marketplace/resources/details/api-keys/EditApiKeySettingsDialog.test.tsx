@@ -24,11 +24,9 @@ const WARNING = 'The key will not be able to call any model.';
 const renderDialog = (
   key: Record<string, unknown> = {},
   {
-    settingsEditable = true,
     resourceLimits = {},
     models = ['gpt-4o'],
   }: {
-    settingsEditable?: boolean;
     resourceLimits?: Record<string, number>;
     models?: string[] | null;
   } = {},
@@ -49,7 +47,6 @@ const renderDialog = (
           components: [TOKENS],
           models,
           refetch: vi.fn(),
-          settingsEditable,
         }}
       />
     </Provider>,
@@ -174,11 +171,15 @@ describe('EditApiKeySettingsDialog', () => {
     expect(sentBody()).toEqual({ limits: { tokens: 20 } });
   });
 
-  it('keeps the assignee when only a limit changes', async () => {
+  // The assignee is chosen when the key is requested; an edit that names
+  // one is refused.
+  it('neither shows nor sends the assignee', async () => {
     const user = userEvent.setup();
     renderDialog({ user_uuid: 'u1', user_full_name: 'Alice' });
-    expect(await screen.findByText('Alice')).toBeInTheDocument();
-    const limitInput = screen.getByRole('spinbutton');
+    const limitInput = await screen.findByRole('spinbutton');
+    expect(screen.queryByText('Assignee')).not.toBeInTheDocument();
+    expect(screen.queryByText('Alice')).not.toBeInTheDocument();
+    expect(screen.queryByRole('combobox')).not.toBeInTheDocument();
     await user.clear(limitInput);
     await user.type(limitInput, '20');
     await user.click(screen.getByRole('button', { name: 'Save' }));
@@ -187,24 +188,6 @@ describe('EditApiKeySettingsDialog', () => {
     );
     expect(sentBody()).toEqual({
       limits: { tokens: 20 },
-      allowed_models: ['retired'],
-    });
-  });
-
-  it('unassigns a key when the assignee is cleared', async () => {
-    const user = userEvent.setup();
-    renderDialog({ user_uuid: 'u1', user_full_name: 'Alice' });
-    await screen.findByText('Alice');
-    await user.click(screen.getByRole('combobox'));
-    await user.keyboard('{Backspace}');
-    expect(screen.queryByText('Alice')).not.toBeInTheDocument();
-    await user.click(screen.getByRole('button', { name: 'Save' }));
-    await waitFor(() =>
-      expect(marketplaceResourceApiKeysPartialUpdate).toHaveBeenCalled(),
-    );
-    expect(sentBody()).toEqual({
-      user: null,
-      limits: { tokens: 10 },
       allowed_models: ['retired'],
     });
   });
@@ -222,112 +205,22 @@ describe('EditApiKeySettingsDialog', () => {
     expect(save()).toBeEnabled();
   });
 
-  // A failed rotation is retried with the new assignee; limits and models
-  // wait for the key to settle.
-  it('changes only the assignee of a key whose rotation failed', async () => {
-    const user = userEvent.setup();
-    renderDialog(
-      {
-        state: 'Erred',
-        pending_action: 'rotate',
-        user_uuid: 'u1',
-        user_full_name: 'Alice',
-      },
-      { settingsEditable: false },
-    );
-    await screen.findByText('Alice');
-    expect(screen.getByRole('spinbutton')).toBeDisabled();
-    expect(screen.getByLabelText('All models')).toBeDisabled();
-    expect(screen.getByLabelText('gpt-4o')).toBeDisabled();
-    await user.click(screen.getByRole('combobox'));
-    await user.keyboard('{Backspace}');
-    await user.click(screen.getByRole('button', { name: 'Save' }));
-    await waitFor(() =>
-      expect(marketplaceResourceApiKeysPartialUpdate).toHaveBeenCalled(),
-    );
-    expect(sentBody()).toEqual({ user: null });
-  });
-
   // The resource limit was lowered below the key's after it was set.
-  it('saves an assignee change on a key above a lowered resource limit', async () => {
+  it('saves a key above a lowered resource limit without touching the limit', async () => {
     const user = userEvent.setup();
     renderDialog(
-      { limits: { tokens: 800 }, user_uuid: 'u1', user_full_name: 'Alice' },
+      { limits: { tokens: 800 } },
       { resourceLimits: { tokens: 500 } },
     );
-    await screen.findByText('Alice');
-    expect(screen.getByRole('spinbutton')).toBeValid();
-    await user.click(screen.getByRole('combobox'));
-    await user.keyboard('{Backspace}');
+    expect(await screen.findByRole('spinbutton')).toBeValid();
+    await user.click(screen.getByLabelText('gpt-4o'));
     await user.click(screen.getByRole('button', { name: 'Save' }));
     await waitFor(() =>
       expect(marketplaceResourceApiKeysPartialUpdate).toHaveBeenCalled(),
     );
     expect(sentBody()).toEqual({
-      user: null,
       limits: { tokens: 800 },
-      allowed_models: ['retired'],
-    });
-  });
-
-  describe('a change of assignee', () => {
-    const ROTATION_HELP =
-      'Changing the assignee rotates the key: its current value stops working and the new assignee reveals a new one.';
-    const ROTATION_WARNING =
-      'Saving rotates this key. Anything using the current value will stop working.';
-    const ALICE = { user_uuid: 'u1', user_full_name: 'Alice' };
-
-    it('says that it rotates a key that holds a secret', async () => {
-      const user = userEvent.setup();
-      renderDialog(ALICE);
-      await screen.findByText('Alice');
-      expect(screen.getByText(ROTATION_HELP)).toBeInTheDocument();
-      expect(screen.queryByText(ROTATION_WARNING)).not.toBeInTheDocument();
-      await user.click(screen.getByRole('combobox'));
-      await user.keyboard('{Backspace}');
-      expect(screen.getByText(ROTATION_WARNING)).toBeInTheDocument();
-    });
-
-    // A pending request holds no secret: it just takes the new assignee.
-    it('says nothing of rotation for a key that holds no secret', async () => {
-      const user = userEvent.setup();
-      renderDialog(
-        { ...ALICE, client_id: '', state: 'Creating' },
-        { settingsEditable: false },
-      );
-      await screen.findByText('Alice');
-      expect(screen.queryByText(ROTATION_HELP)).not.toBeInTheDocument();
-      await user.click(screen.getByRole('combobox'));
-      await user.keyboard('{Backspace}');
-      expect(screen.queryByText(ROTATION_WARNING)).not.toBeInTheDocument();
-    });
-
-    it.each([
-      [{ state: 'Paused' }, true],
-      [{ state: 'Updating', pending_action: 'update' }, false],
-      [{ state: 'Erred', pending_action: 'pause' }, false],
-    ])(
-      'is locked on a key that cannot rotate now (%o)',
-      async (key, settingsEditable) => {
-        renderDialog({ ...ALICE, ...key }, { settingsEditable });
-        await screen.findByText('Alice');
-        expect(screen.getByRole('combobox', { hidden: true })).toBeDisabled();
-      },
-    );
-
-    it('shows a refused assignee on the field', async () => {
-      const user = userEvent.setup();
-      vi.mocked(marketplaceResourceApiKeysPartialUpdate).mockRejectedValueOnce({
-        response: { data: { user: ['Alice already holds key KEY2.'] } },
-      });
-      renderDialog(ALICE);
-      await screen.findByText('Alice');
-      await user.click(screen.getByRole('combobox'));
-      await user.keyboard('{Backspace}');
-      await user.click(screen.getByRole('button', { name: 'Save' }));
-      expect(
-        await screen.findByText('Alice already holds key KEY2.'),
-      ).toBeInTheDocument();
+      allowed_models: ['gpt-4o', 'retired'],
     });
   });
 });

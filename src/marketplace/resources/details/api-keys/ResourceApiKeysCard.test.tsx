@@ -512,8 +512,7 @@ describe('ResourceApiKeysCard', () => {
         for (const name of ['Pause', 'Rotate', 'Delete']) {
           expect(isEnabled(name)).toBe(false);
         }
-        // A key that holds a secret changes hands by rotation, which waits
-        // for the command in flight like any other.
+        // Limits and models wait for the command in flight.
         expect(isEnabled('Edit key settings')).toBe(false);
       },
     );
@@ -526,8 +525,9 @@ describe('ResourceApiKeysCard', () => {
       });
       await openRowActions(0);
       expect(isEnabled('Delete')).toBe(true);
-      // Only the assignee: limits and models wait for the key to settle.
-      expect(isEnabled('Edit key settings')).toBe(true);
+      // Its assignee was chosen with the request; limits and models wait for
+      // the key to settle.
+      expect(isEnabled('Edit key settings')).toBe(false);
     });
 
     it('retries the failed command in place of rotating', async () => {
@@ -536,17 +536,15 @@ describe('ResourceApiKeysCard', () => {
       await openRowActions(0);
       expect(isEnabled('Retry')).toBe(true);
       expect(offered('Rotate')).toBeNull();
-      // Limits and models are locked, and so is the assignee: a new one
-      // would rotate the key, which waits for the retry.
+      // Limits and models wait for the retry.
       expect(isEnabled('Edit key settings')).toBe(false);
     });
 
-    // The rotation is retried with the new assignee.
-    it('lets a key whose rotation failed change hands', async () => {
+    it('locks the settings of a key whose rotation failed', async () => {
       renderManaged({ state: 'Erred', pending_action: 'rotate' });
       await screen.findByText('KEY1');
       await openRowActions(0);
-      expect(isEnabled('Edit key settings')).toBe(true);
+      expect(isEnabled('Edit key settings')).toBe(false);
     });
 
     it('locks a deleting key against edits', async () => {
@@ -609,7 +607,8 @@ describe('ResourceApiKeysCard', () => {
     });
 
     // Reveal still honours an assignee set while management was on, so the
-    // portal shows whose key it is and lets a manager share it again.
+    // portal shows whose key it is. Nobody can unassign it: an assignee is
+    // fixed when the key is requested.
     it('shows the assignee of a key assigned while management was on', async () => {
       renderUnmanaged({
         state: 'OK',
@@ -624,7 +623,7 @@ describe('ResourceApiKeysCard', () => {
       expect(screen.getByText('Alice')).toBeInTheDocument();
       await openRowActions(0);
       expect(isEnabled('Reveal')).toBe(false);
-      expect(isEnabled('Unassign')).toBe(true);
+      expect(offered('Unassign')).toBeNull();
     });
 
     it('lets the assignee reveal their key', async () => {
@@ -632,14 +631,6 @@ describe('ResourceApiKeysCard', () => {
       await screen.findByText('KEY1');
       await openRowActions(0);
       expect(isEnabled('Reveal')).toBe(true);
-    });
-
-    it('offers no unassign without manage permission', async () => {
-      vi.mocked(hasPermission).mockReturnValue(false);
-      renderUnmanaged({ state: 'OK', user_uuid: USER.uuid });
-      await screen.findByText('KEY1');
-      await openRowActions(0);
-      expect(offered('Unassign')).toBeNull();
     });
 
     it('still lets the assignee rotate their key', async () => {
@@ -676,13 +667,6 @@ describe('ResourceApiKeysCard', () => {
       await screen.findByText('KEY1');
       await openRowActions(0);
       expect(isEnabled('Retry')).toBe(true);
-    });
-
-    it('offers no unassign for a key shared by the project', async () => {
-      renderUnmanaged({ state: 'OK' });
-      await screen.findByText('KEY1');
-      await openRowActions(0);
-      expect(offered('Unassign')).toBeNull();
     });
 
     it('offers no request, pause, settings or delete', async () => {

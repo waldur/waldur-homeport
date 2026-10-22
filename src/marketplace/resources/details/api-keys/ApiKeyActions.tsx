@@ -5,12 +5,10 @@ import {
   PlayIcon,
   SlidersIcon,
   TrashIcon,
-  UserMinusIcon,
 } from '@phosphor-icons/react';
 import { FC } from 'react';
 import {
   marketplaceResourceApiKeysDestroy,
-  marketplaceResourceApiKeysPartialUpdate,
   marketplaceResourceApiKeysPause,
   marketplaceResourceApiKeysResume,
   marketplaceResourceApiKeysRetry,
@@ -32,7 +30,6 @@ import { getComponentUsage } from './keyLimits';
 import { RevealApiKeyDialog } from './RevealApiKeyDialog';
 import {
   canRevealKey,
-  getAssigneeLock,
   getErredTooltip,
   getFailedCommand,
   getStateVariant,
@@ -211,29 +208,6 @@ export const ApiKeyActionsDropdown: FC<{
     },
   });
 
-  // Without key management the settings dialog is gone, yet reveal still
-  // honours an assignee set while it was on; lifting it is the one setting that
-  // stays open, so the key can be shared with the project again.
-  const { mutate: unassign, isPending: unassigning } = useManagedMutation({
-    mutationFn: () =>
-      marketplaceResourceApiKeysPartialUpdate({
-        path: { uuid: row.uuid },
-        body: { user: null },
-      }),
-    confirmation: {
-      title: translate('Unassign API key'),
-      body: translate(
-        'Unassign API key {name} from {user}? Anyone with access to the resource can then reveal it.',
-        { name: keyName, user: <strong>{row.user_full_name}</strong> },
-        formatJsxTemplate,
-      ),
-      options: confirmOptions(),
-    },
-    successMessage: translate('API key unassigned'),
-    errorMessage: translate('Unable to unassign the API key.'),
-    onSuccess: () => refetch(),
-  });
-
   const inProgress =
     getStateVariant(row.state).active ||
     rotating ||
@@ -261,19 +235,16 @@ export const ApiKeyActionsDropdown: FC<{
   // re-sends it unchanged.
   const settingsEditable =
     isOk || isPaused || (isErred && failedCommand === 'update');
-  // A key that holds a secret changes hands by rotation, so its assignee
-  // changes only where it can take one; one that holds none takes a new
-  // assignee in any state short of deletion.
-  const assigneeLock = getAssigneeLock(row);
   const canEdit = row.state !== 'Deleting' && row.state !== 'Deleted';
   const editBlocked =
     rotating || retrying || pausing || removing
       ? translate('An operation is already in progress.')
       : !canEdit
         ? translate('A deleted key cannot be edited.')
-        : !settingsEditable && assigneeLock
-          ? // Nothing in the dialog could change.
-            assigneeLock
+        : !settingsEditable
+          ? translate(
+              'Limits and models can be changed once the key is active.',
+            )
           : undefined;
 
   return (
@@ -376,7 +347,6 @@ export const ApiKeyActionsDropdown: FC<{
                 components,
                 models,
                 refetch,
-                settingsEditable,
               },
               size: 'md',
             })
@@ -387,14 +357,6 @@ export const ApiKeyActionsDropdown: FC<{
           tooltip={editBlocked}
         />
       ) : null}
-      {canManage && !keyManagement && row.user_uuid && (
-        <ActionItem
-          title={translate('Unassign')}
-          action={() => unassign(undefined)}
-          iconNode={<UserMinusIcon weight="bold" />}
-          disabled={unassigning}
-        />
-      )}
       {canManage && keyManagement && (
         // Set apart from the reversible actions above it.
         <Menu.Separator />

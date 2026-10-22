@@ -1047,18 +1047,6 @@
       "feature_area": "api-keys"
     }
   },
-  "API key settings saved; rotation requested": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "api-keys"
-    }
-  },
-  "API key unassigned": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "api-keys"
-    }
-  },
   "API keys": {
     "context": {
       "primary_ui_type": "title",
@@ -10016,11 +10004,6 @@
   },
   "Changing flavor": {},
   "Changing password": {},
-  "Changing the assignee rotates the key: its current value stops working and the new assignee reveals a new one.": {
-    "context": {
-      "feature_area": "api-keys"
-    }
-  },
   "Channels": {
     "context": {
       "feature_area": "rabbitmq"
@@ -28475,7 +28458,7 @@
       "feature_area": "api-keys"
     }
   },
-  "Limits and models can be changed once the key is active. The assignee can be changed now.": {
+  "Limits and models can be changed once the key is active.": {
     "context": {
       "feature_area": "api-keys"
     }
@@ -48423,7 +48406,6 @@
       "feature_area": "settings"
     }
   },
-  "Resume the key to change its assignee.": {},
   "Resume the key to rotate it.": {
     "context": {
       "feature_area": "api-keys"
@@ -48489,11 +48471,6 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "actions"
-    }
-  },
-  "Retry the failed command first.": {
-    "context": {
-      "feature_area": "api-keys"
     }
   },
   "Return to call": {
@@ -50341,11 +50318,6 @@
   "Saving in progress": {
     "context": {
       "feature_area": "integration"
-    }
-  },
-  "Saving rotates this key. Anything using the current value will stop working.": {
-    "context": {
-      "feature_area": "api-keys"
     }
   },
   "Saving...": {
@@ -65408,12 +65380,6 @@
       "feature_area": "support"
     }
   },
-  "Unable to unassign the API key.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "api-keys"
-    }
-  },
   "Unable to undo the merge.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -66388,30 +66354,6 @@
   "Unarchive": {
     "context": {
       "feature_area": "ai-assistant"
-    }
-  },
-  "Unassign": {
-    "context": {
-      "feature_area": "api-keys"
-    }
-  },
-  "Unassign API key": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "api-keys"
-    }
-  },
-  "Unassign API key {name} from {user}? Anyone with access to the resource can then reveal it.": {
-    "context": {
-      "variables": {
-        "name": {
-          "type": "string"
-        },
-        "user": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "api-keys"
     }
   },
   "Unassigned": {
@@ -70228,7 +70170,6 @@
       "feature_area": "database-stats"
     }
   },
-  "Wait for the current operation to finish.": {},
   "Waiting": {
     "context": {
       "primary_ui_type": "label",
