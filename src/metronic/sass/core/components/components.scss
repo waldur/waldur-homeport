@@ -5,9 +5,21 @@
 @import 'bootstrap/scss/reboot';
 @import 'bootstrap/scss/type';
 @import 'bootstrap/scss/images';
+// containers: nothing uses container-{sm,md,lg,xl}; empty $container-max-widths
+// generates .container and .container-fluid only.
+$_container-max-widths: $container-max-widths;
+$container-max-widths: ();
 @import 'bootstrap/scss/containers';
+$container-max-widths: $_container-max-widths;
 @import 'bootstrap/scss/grid';
+// tables: nothing uses table-responsive-{sm,md,lg,xl,xxl}; (xs: 0) generates
+// base .table-responsive only.
+$_grid-breakpoints: $grid-breakpoints;
+$grid-breakpoints: (
+  xs: 0,
+);
 @import 'bootstrap/scss/tables';
+$grid-breakpoints: $_grid-breakpoints;
 // Breadcrumbs are waldur-ui Breadcrumb/BreadcrumbItem and Tailwind utilities.
 // None of Bootstrap's forms partials remain: checkboxes, radios and switches
 // are waldur-ui Checkbox/Radio/Switch, inputs are Input/Textarea/NativeSelect
@@ -19,16 +31,26 @@
 // .link-{color} for every $theme-colors key, in compile-time (and, in dark
 // mode, theme-inverted) colours. Nothing uses them: colour comes from the
 // design tokens. Import both with no theme colours so only the structural
-// rules remain.
+// rules remain. Emptying $grid-breakpoints trims list-group-horizontal*.
 $_theme-colors: $theme-colors;
 $theme-colors: ();
+$grid-breakpoints: ();
 @import 'bootstrap/scss/list-group';
+$grid-breakpoints: $_grid-breakpoints;
 $theme-colors: $_theme-colors;
 @import 'bootstrap/scss/spinners';
 
-// Bootstrap helpers
+// Bootstrap helpers: ratio-* and sticky-{sm,md,lg,xl,xxl}-top are trimmed
+// via $aspect-ratios and $grid-breakpoints.
 $theme-colors: ();
+$_aspect-ratios: $aspect-ratios;
+$aspect-ratios: ();
+$grid-breakpoints: (
+  xs: 0,
+);
 @import 'bootstrap/scss/helpers';
+$grid-breakpoints: $_grid-breakpoints;
+$aspect-ratios: $_aspect-ratios;
 $theme-colors: $_theme-colors;
 
 // Bootstrap utilities
@@ -47,6 +69,5 @@ $theme-colors: $_theme-colors;
 @import 'svg-icon';
 @import 'timeline';
 @import 'bullet';
-@import 'rotate';
 @import 'scroll';
 @import 'consent-dialog';

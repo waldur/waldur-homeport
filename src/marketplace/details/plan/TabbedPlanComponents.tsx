@@ -177,7 +177,7 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
 
         {/* CONTENT */}
         {/* The first row's own top padding is dropped so the two gaps do not add up to 32px. */}
-        <div className="tab-content [&_table.form-table_tr:first-child>*]:pt-0">
+        <div className="[&_table.form-table_tr:first-child>*]:pt-0">
           {tabs.map((tab) => (
             <TabsContent key={tab.eventKey} value={tab.eventKey}>
               {tab.content}

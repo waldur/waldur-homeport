@@ -15,7 +15,7 @@ import { cn } from '../cn';
  * silently breaks (zero bottom padding) for a label+value-only card.
  *
  * Real values (root font-size is 13px in that app, not 16px — see
- * src/metronic/sass/layout/_variables.scss's $root-font-size; expressed
+ * src/metronic/sass/_variables.custom.scss's $font-size-root; expressed
  * below as arbitrary rem values, not their px-at-13px-root equivalents,
  * so this actually stays in sync if the root font-size ever changes —
  * see Card.tsx's own comment on the same choice):

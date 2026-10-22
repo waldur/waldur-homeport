@@ -351,8 +351,6 @@
   "jscpd": {
     "ignore": [
       "src/form/BoxNumberField.scss",
-      "src/metronic/sass/core/components/buttons/_theme.scss",
-      "src/metronic/sass/core/components/mixins/_buttons.scss",
       "src/metronic/sass/core/base/functions/_get.scss",
       "src/table/generated/ProposalProposalsFilter.tsx",
       "src/table/generated/MarketplaceStatsOpenstackInstancesFilter.tsx",

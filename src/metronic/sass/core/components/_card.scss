@@ -38,16 +38,6 @@
         justify-content: center;
       }
 
-      .card-icon {
-        margin-right: 0.75rem;
-        line-height: 0;
-
-        .svg-icon {
-          @include svg-icon-size(24px);
-          @include svg-icon-color(var(--text-tertiary));
-        }
-      }
-
       &,
       .card-label {
         font-weight: var(--font-weight-medium);
@@ -98,53 +88,6 @@
     border-top: $card-border-width $card-border-style $card-border-color;
   }
 
-  // Scroll
-  .card-scroll {
-    position: relative;
-    overflow: auto;
-  }
-
-  // Reset padding x
-  &.card-px-0 {
-    .card-header,
-    .card-body,
-    .card-footer {
-      padding-left: 0;
-      padding-right: 0;
-    }
-  }
-
-  &.card-py-0 {
-    .card-header,
-    .card-body,
-    .card-footer {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-  }
-
-  &.card-p-0 {
-    .card-header,
-    .card-body,
-    .card-footer {
-      padding: 0;
-    }
-  }
-
-  // Dashed style
-  &.card-dashed {
-    box-shadow: none;
-    border: $card-border-width dashed $card-border-dashed-color;
-
-    > .card-header {
-      border-bottom: 1px dashed $card-border-dashed-color;
-    }
-
-    > .card-footer {
-      border-top: 1px dashed $card-border-dashed-color;
-    }
-  }
-
   // Bordered style
   &.card-bordered {
     box-shadow: none;
@@ -178,32 +121,6 @@
   }
 }
 
-// Responsive header stretch
-.card {
-  @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
-      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-
-      // Header stretch
-      .card-header#{$infix}-stretch {
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-        align-items: stretch;
-
-        .card-toolbar {
-          margin: 0;
-          align-items: stretch;
-        }
-      }
-    }
-  }
-}
-
-// Utilities
-.card-p {
-  padding: $card-py $card-px !important;
-}
-
 .card-px {
   padding-left: $card-px !important;
   padding-right: $card-px !important;
@@ -220,30 +137,6 @@
 .card-py {
   padding-top: $card-py !important;
   padding-bottom: $card-py !important;
-}
-
-.card-rounded {
-  border-radius: $card-border-radius;
-}
-
-.card-rounded-start {
-  border-top-left-radius: $card-border-radius;
-  border-bottom-left-radius: $card-border-radius;
-}
-
-.card-rounded-end {
-  border-top-right-radius: $card-border-radius;
-  border-bottom-right-radius: $card-border-radius;
-}
-
-.card-rounded-top {
-  border-top-left-radius: $card-border-radius;
-  border-top-right-radius: $card-border-radius;
-}
-
-.card-rounded-bottom {
-  border-bottom-left-radius: $card-border-radius;
-  border-bottom-right-radius: $card-border-radius;
 }
 
 // Mobile mode

@@ -64,16 +64,10 @@
   // Sizes
   @include symbol-size(get($symbol-sizes, default));
 
-  @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
-      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-
-      @each $name, $value in $symbol-sizes {
-        @if ($name != 'default') {
-          &.symbol#{$infix}-#{$name} {
-            @include symbol-size($value);
-          }
-        }
+  @each $name, $value in $symbol-sizes {
+    @if ($name != 'default') {
+      &.symbol-#{$name} {
+        @include symbol-size($value);
       }
     }
   }
