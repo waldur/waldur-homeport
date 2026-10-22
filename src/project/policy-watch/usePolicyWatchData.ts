@@ -367,6 +367,8 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         hasFired: p.has_fired,
         firedDatetime: p.fired_datetime || null,
         affectedResourcesCount: p.affected_resources_count || 0,
+        gate: p.trigger_status?.gate ?? null,
+        triggered: p.trigger_status?.triggered ?? null,
       });
     }
 
@@ -386,6 +388,8 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         hasFired: p.has_fired,
         firedDatetime: p.fired_datetime || null,
         affectedResourcesCount: p.affected_resources_count || 0,
+        gate: p.trigger_status?.gate ?? null,
+        triggered: p.trigger_status?.triggered ?? null,
       });
     }
 
@@ -437,6 +441,8 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         hasFired: sp.has_fired,
         firedDatetime: sp.fired_datetime || null,
         affectedResourcesCount: sp.affected_resources_count || 0,
+        gate: null,
+        triggered: null,
       });
     }
 

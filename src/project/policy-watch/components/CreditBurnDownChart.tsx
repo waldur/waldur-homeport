@@ -8,10 +8,11 @@ import { ENV } from '@/core/config';
 import { EChart } from '@/core/EChart';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { getBrandColor } from '@/core/utils';
+import { isHeldGate } from '@/customer/cost-policies/triggerStatus';
 import { translate } from '@/i18n';
 
 import { getWatchColors } from '../chartColors';
-import { PolicyWatchData } from '../types';
+import { PolicySaturation, PolicyWatchData } from '../types';
 
 const currency = () => ENV.plugins.WALDUR_CORE.CURRENCY_NAME;
 
@@ -83,13 +84,27 @@ const findXAxisBucket = (date: string, labels: string[]): string | null => {
   }
 };
 
-const policyMarkerColor = (
-  hasFired: boolean,
-  saturationPct: number,
+/** A held policy whose projected firing is this close counts as imminent. */
+const HELD_WARNING_DAYS = 30;
+
+export const policyMarkerColor = (
+  policy: Pick<
+    PolicySaturation,
+    'hasFired' | 'saturationPct' | 'gate' | 'triggered' | 'etaDays'
+  >,
 ): string => {
   const c = getWatchColors();
-  if (hasFired) return c.danger;
-  if (saturationPct >= 80) return c.warning;
+  // Fired, or over its limit with the actions about to run.
+  if (policy.hasFired || policy.triggered) return c.danger;
+  // A cost policy over its cap but held by credit waits for the credit to run
+  // down, so its saturation alone does not say when it fires; the server's
+  // projection, which counts the credit, does.
+  if (isHeldGate(policy.gate)) {
+    return policy.etaDays !== null && policy.etaDays <= HELD_WARNING_DAYS
+      ? c.warning
+      : c.muted;
+  }
+  if (policy.saturationPct >= 80) return c.warning;
   return c.muted;
 };
 
@@ -109,7 +124,7 @@ const policyFireDateMarkers = (data: PolicyWatchData, xLabels: string[]) => {
     .map((p) => {
       const bucket = findXAxisBucket(p.etaDate as string, xLabels);
       if (!bucket) return null;
-      const color = policyMarkerColor(p.hasFired, p.saturationPct);
+      const color = policyMarkerColor(p);
       const kindLabel =
         p.policyKind === 'slurm-periodic'
           ? translate('SLURM')
