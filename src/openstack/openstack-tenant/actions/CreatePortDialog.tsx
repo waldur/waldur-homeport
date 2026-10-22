@@ -20,6 +20,7 @@ import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { CustomIpFieldFinal as CustomIpField } from '@/openstack/openstack-instance/actions/update-internal-ips/CustomIpFieldFinal';
 import { SubnetValueContainer } from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
+import { formatSubnetName } from '@/openstack/openstack-instance/utils';
 import {
   createDescriptionField,
   createLatinNameField,
@@ -107,7 +108,7 @@ export const FixedIPsField: FC<{
               options={subnets || []}
               placeholder={translate('Select subnet')}
               getOptionValue={(option) => option.url}
-              getOptionLabel={(option) => option.name}
+              getOptionLabel={formatSubnetName}
               noUpdateOnBlur
               spaceless
               components={{ ValueContainer: SubnetValueContainer }}

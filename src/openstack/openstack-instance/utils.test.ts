@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
-import { formatAddressList, validateOpenstackInstanceName } from './utils';
+import {
+  formatAddressList,
+  formatSubnet,
+  formatSubnetName,
+  validateOpenstackInstanceName,
+} from './utils';
 
 describe('OpenStack Instance Name Validator', () => {
   it('allows trailing slash', () => {
@@ -72,5 +77,31 @@ describe('formatAddressList', () => {
       fixed_ips: [],
     };
     expect(formatAddressList(row)).toBe('—');
+  });
+});
+
+describe('formatSubnet', () => {
+  it('shows the name and CIDR of a named subnet', () => {
+    expect(formatSubnet({ name: 'private', cidr: '10.0.0.0/24' })).toBe(
+      'private (10.0.0.0/24)',
+    );
+  });
+
+  it('shows only the CIDR of a nameless subnet', () => {
+    expect(formatSubnet({ name: '', cidr: '10.0.0.0/24' })).toBe('10.0.0.0/24');
+  });
+});
+
+describe('formatSubnetName', () => {
+  it('shows the name of a named subnet', () => {
+    expect(formatSubnetName({ name: 'private', cidr: '10.0.0.0/24' })).toBe(
+      'private',
+    );
+  });
+
+  it('shows the CIDR of a nameless subnet', () => {
+    expect(formatSubnetName({ name: '', cidr: '10.0.0.0/24' })).toBe(
+      '10.0.0.0/24',
+    );
   });
 });
