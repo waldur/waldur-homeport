@@ -21,7 +21,7 @@ import {
   selectTableSavedFilters,
 } from './selectors';
 import { TableFilterService, TableFiltersGroup } from './TableFilterService';
-import { TableProps } from './types';
+import { TableProps, TablesRootState } from './types';
 import { getSavedFiltersKey } from './utils';
 
 import './SavedFilterSelect.scss';
@@ -89,10 +89,10 @@ export const SavedFilterSelect = ({
     dispatch(setSavedFilters(table, TableFilterService.list(key).reverse()));
   }, [table, key, dispatch]);
 
-  const list = useSelector((state: any) =>
+  const list = useSelector((state: TablesRootState) =>
     selectTableSavedFilters(state, table),
   );
-  const selected = useSelector((state: any) =>
+  const selected = useSelector((state: TablesRootState) =>
     selectSelectedSavedFilter(state, table),
   );
 

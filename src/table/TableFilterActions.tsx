@@ -10,6 +10,7 @@ import { selectSavedFilter, setSavedFilters } from './actions';
 import { TableFilterContext } from './FilterContextProvider';
 import { selectFilterValues, selectSelectedSavedFilter } from './selectors';
 import { TableFilterService } from './TableFilterService';
+import { TablesRootState } from './types';
 import { getSavedFiltersKey } from './utils';
 
 interface TableFilterActionsProps {
@@ -29,7 +30,7 @@ export const TableFilterActions: React.FC<TableFilterActionsProps> = (
 
   const formValues = useSelector(selectFilterValues(props.table)) || {};
 
-  const selectedSavedFilter = useSelector((state: any) =>
+  const selectedSavedFilter = useSelector((state: TablesRootState) =>
     selectSelectedSavedFilter(state, props.table),
   );
 

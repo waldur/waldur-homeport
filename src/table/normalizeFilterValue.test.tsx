@@ -7,7 +7,7 @@ import { describe, it, expect } from 'vitest';
 import { TableFilterContext } from './FilterContextProvider';
 import { useNormalizeSelectFilterValue } from './normalizeFilterValue';
 import { getTableState } from './selectors';
-import { tableInitialReducer } from './store';
+import { tablesReducer } from './store';
 
 const OPTIONS = [
   { value: 'OK', label: 'OK' },
@@ -31,7 +31,7 @@ const renderWithRedux = (
 ): (() => any) => {
   const table = 'testTable';
   const rootReducer = combineReducers({
-    tables: tableInitialReducer,
+    tables: tablesReducer,
   });
   const store = createStore(rootReducer, {
     tables: {

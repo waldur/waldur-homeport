@@ -10,7 +10,7 @@ import { ModalProvider } from '@/modal/ModalContext';
 import { DASH_ESCAPE_CODE } from './constants';
 import { FilterContextProvider } from './FilterContextProvider';
 import { StringFilter } from './filters';
-import { tableInitialReducer } from './store';
+import { tablesReducer } from './store';
 import { TableBody } from './TableBody';
 import { TableFilters } from './TableFilters';
 import { renderFieldOrDash } from './utils';
@@ -273,7 +273,7 @@ describe('TableBody inline filter shortcut (hasFilterMenu regression)', () => {
   // masking exactly the bug this test exists to catch.
   const renderWithFilters = () => {
     const table = 'TableBodyRegressionTable';
-    const store = createStore(combineReducers({ tables: tableInitialReducer }));
+    const store = createStore(combineReducers({ tables: tablesReducer }));
 
     const ktContentContainer = document.createElement('div');
     ktContentContainer.id = 'kt_content_container';

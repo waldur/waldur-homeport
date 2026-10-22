@@ -1,13 +1,15 @@
 import { arrayMove } from '@dnd-kit/sortable';
 import { isEqual } from 'lodash-es';
-import { Reducer } from 'redux';
-
-import { ALL_RESOURCES_TABLE_ID } from '@/marketplace/resources/list/constants';
-import { createByKey } from '@/store/utils';
+import {
+  combineReducers,
+  legacy_createStore as createStore,
+  Reducer,
+  Store,
+} from 'redux';
 
 import * as actions from './actions';
 import { INITIAL_STATE } from './constants';
-import { TableState } from './types';
+import { TableState, TablesRootState, TablesState } from './types';
 
 const pagination = (state = INITIAL_STATE, action): TableState => {
   switch (action.type) {
@@ -298,20 +300,19 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
   }
 };
 
-export const reducer = createByKey(
-  (action) => action.payload && action.payload.table,
-  (action) => action.payload.table,
-)(pagination) as Reducer<Record<string, TableState>>;
-
-const initialTableState = {
-  // We need this to be created first because we use this for sidebar resource filters
-  [ALL_RESOURCES_TABLE_ID]: INITIAL_STATE,
+/** Every table's state, keyed by table id; an action names its table in
+ * `payload.table` and leaves the others alone. */
+export const tablesReducer: Reducer<TablesState> = (state = {}, action) => {
+  const table = action.payload?.table;
+  if (!table) {
+    return state;
+  }
+  return { ...state, [table]: pagination(state[table], action) };
 };
 
-export const tableInitialReducer = (state = initialTableState, action) => {
-  const tableState = reducer(state, action);
-  return {
-    ...state,
-    ...tableState,
-  };
-};
+/** A store holding only table state, for an app with no Redux store of its
+ * own. An app that has one adds `tables: tablesReducer` to it instead. */
+export const createTablesStore = (
+  tables: TablesState = {},
+): Store<TablesRootState> =>
+  createStore(combineReducers({ tables: tablesReducer }), { tables });

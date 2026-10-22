@@ -7,7 +7,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { INITIAL_STATE } from '@/table/constants';
 import { setTableQueryRows } from '@/table/mockTableQuery';
-import { reducer as tableReducer } from '@/table/store';
+import { tablesReducer } from '@/table/store';
 import { renderWithProviders } from '@/test/harness';
 
 import { InvitationList } from './InvitationList';
@@ -31,7 +31,7 @@ const invitation = {
 // which only takes effect if the reducer actually runs.
 const makeStore = () => {
   setTableQueryRows([invitation]);
-  return createStore(combineReducers({ tables: tableReducer }), {
+  return createStore(combineReducers({ tables: tablesReducer }), {
     tables: {
       'admin-invitations': {
         ...INITIAL_STATE,

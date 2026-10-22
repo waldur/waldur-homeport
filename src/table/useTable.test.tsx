@@ -7,7 +7,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { renderHookWithProviders } from '@/test/harness';
 
-import { reducer as tableReducer } from './store';
+import { tablesReducer } from './store';
 import { useTable } from './useTable';
 import { useTableQuery } from './useTableQuery';
 
@@ -24,7 +24,7 @@ vi.mock('./useTableQuery', () => ({
 
 const createTestStore = (initialState = {}) => {
   const rootReducer = combineReducers({
-    tables: tableReducer,
+    tables: tablesReducer,
   });
   return createStore(rootReducer, initialState);
 };

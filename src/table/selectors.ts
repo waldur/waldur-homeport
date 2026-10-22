@@ -1,29 +1,33 @@
 import { createSelector } from 'reselect';
 
-import { type RootState } from '@/store/reducers';
-
 import { INITIAL_STATE } from './constants';
-import { type StateTables, type TableState } from './types';
+import { type TableState, type TablesRootState } from './types';
 
 // Stable empty references to avoid creating new objects on each selector call
 const EMPTY_OBJECT = {};
 const EMPTY_ARRAY = [];
 
-export const selectTableSavedFilters = (state: RootState, table: string) => {
+export const selectTableSavedFilters = (
+  state: TablesRootState,
+  table: string,
+) => {
   if (state.tables && state.tables[table]) {
     return state.tables[table].savedFilters;
   }
   return EMPTY_ARRAY;
 };
 
-export const selectSelectedSavedFilter = (state: RootState, table: string) => {
+export const selectSelectedSavedFilter = (
+  state: TablesRootState,
+  table: string,
+) => {
   if (state.tables && state.tables[table]) {
     return state.tables[table].selectedSavedFilter;
   }
   return null;
 };
 
-export const selectFiltersStorage = (state: RootState, table: string) => {
+export const selectFiltersStorage = (state: TablesRootState, table: string) => {
   if (state.tables && state.tables[table]) {
     return state.tables[table].filtersStorage;
   }
@@ -35,25 +39,27 @@ export const selectFiltersStorage = (state: RootState, table: string) => {
 // is safe to use directly as a useEffect dependency.
 export const selectRegisteredFilterNames =
   (table: string) =>
-  (state: RootState): string[] =>
+  (state: TablesRootState): string[] =>
     getTableState(table)(state)?.registeredFilterNames ?? EMPTY_ARRAY;
 
-export const selectSelectedRows = (table: string) => (state: RootState) => {
-  if (state.tables && state.tables[table]) {
-    return state.tables[table].selectedRows;
-  }
-  return null;
-};
+export const selectSelectedRows =
+  (table: string) => (state: TablesRootState) => {
+    if (state.tables && state.tables[table]) {
+      return state.tables[table].selectedRows;
+    }
+    return null;
+  };
 
-type TableSelector = (table: string) => (state: StateTables) => TableState;
+type TableSelector = (table: string) => (state: TablesRootState) => TableState;
 
-export const getTableState: TableSelector = (table) => (state: RootState) => {
-  if (state.tables && state.tables[table]) {
-    return state.tables[table];
-  } else {
-    return INITIAL_STATE;
-  }
-};
+export const getTableState: TableSelector =
+  (table) => (state: TablesRootState) => {
+    if (state.tables && state.tables[table]) {
+      return state.tables[table];
+    } else {
+      return INITIAL_STATE;
+    }
+  };
 
 /** Converts filtersStorage array into a flat {name: value} map.
  *  This replaces `useFormState().values` in filter consumers.
@@ -67,14 +73,14 @@ export const getTableState: TableSelector = (table) => (state: RootState) => {
  */
 const filterValuesSelectorCache = new Map<
   string,
-  (state: RootState) => Record<string, any>
+  (state: TablesRootState) => Record<string, any>
 >();
 
 export const selectFilterValues = (table: string) => {
   let selector = filterValuesSelectorCache.get(table);
   if (!selector) {
     selector = createSelector(
-      [(state: RootState) => getTableState(table)(state)?.filtersStorage],
+      [(state: TablesRootState) => getTableState(table)(state)?.filtersStorage],
       (filtersStorage) => {
         if (!filtersStorage?.length) return EMPTY_OBJECT;
         return filtersStorage.reduce(
@@ -93,6 +99,6 @@ export const selectFilterValues = (table: string) => {
 
 /** Returns a single filter value by name */
 export const selectFilterValue =
-  (table: string, name: string) => (state: RootState) =>
+  (table: string, name: string) => (state: TablesRootState) =>
     getTableState(table)(state)?.filtersStorage?.find((f) => f.name === name)
       ?.value ?? null;
