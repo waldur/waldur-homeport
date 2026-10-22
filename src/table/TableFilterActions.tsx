@@ -16,7 +16,9 @@ import { getSavedFiltersKey } from './utils';
 interface TableFilterActionsProps {
   filters: JSX.Element;
   table: string;
+  /** Applies the filters and closes the panel. */
   apply: () => any;
+  /** Closes the panel, discarding the changes made in it. */
   close(): void;
 }
 
@@ -63,11 +65,6 @@ export const TableFilterActions: React.FC<TableFilterActionsProps> = (
     dispatch(selectSavedFilter(props.table, newItem));
   };
 
-  const applyCallback = () => {
-    props.close();
-    props.apply();
-  };
-
   return (
     <div className="flex items-center gap-2">
       <BaseButton
@@ -90,7 +87,7 @@ export const TableFilterActions: React.FC<TableFilterActionsProps> = (
       <BaseButton
         size="sm"
         variant="primary"
-        onClick={applyCallback}
+        onClick={props.apply}
         label={translate('Apply')}
       />
     </div>

@@ -9,18 +9,28 @@ import React, {
 } from 'react';
 import { Card, Stack } from 'react-bootstrap';
 import { createPortal } from 'react-dom';
+import { useDispatch, useStore } from 'react-redux';
 
 import { TablePagination, useBreakpointDown } from 'waldur-ui';
 
+import { restoreFilters } from './actions';
 import { TableContent } from './components/content';
 import { TableToolbar, TableToolbarActions } from './components/toolbar';
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableProvider } from './context';
 import { FilterContextProvider } from './FilterContextProvider';
 import { HiddenActionsMessage } from './HiddenActionsMessage';
+import { getTableState } from './selectors';
 import { TableFilters } from './TableFilters';
+import { TableFilterSheet } from './TableFilterSheet';
 import { TableRefreshButton } from './TableRefreshButton';
-import { Column, PinnedColumns, PinnedOffsets, TableProps } from './types';
+import {
+  Column,
+  PinnedColumns,
+  PinnedOffsets,
+  TableProps,
+  TablesRootState,
+} from './types';
 import { computePinnedOffsets, computePinnedShadows } from './utils';
 
 import './Table.scss';
@@ -485,6 +495,8 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
 
 function Table<RowType = any>(props: TableProps<RowType>) {
   const {
+    table,
+    setFilter,
     fetch,
     filterPosition: originalFilterPosition,
     setFilterPosition,
@@ -559,7 +571,51 @@ function Table<RowType = any>(props: TableProps<RowType>) {
     }
   }, []);
 
-  return <TableInternal {...props} filterPosition={filterPosition} />;
+  // The narrow-viewport filter panel belongs to the table, so it opens the
+  // same way in any app, inside a drawer or not. Its fields change the
+  // table's filters as they are edited, so the filters it opened with are
+  // kept, and put back unless the panel is closed with Apply.
+  const dispatch = useDispatch();
+  const store = useStore<TablesRootState>();
+  const [filterPanel, setFilterPanel] = useState<{
+    filters: JSX.Element;
+    formId?: string;
+  } | null>(null);
+  const openedWith = useRef<ReturnType<ReturnType<typeof getTableState>>>();
+  const openFiltersDrawer = useCallback(
+    (filters: JSX.Element, formId?: string) => {
+      openedWith.current = getTableState(table)(store.getState());
+      applyFiltersFn?.(false);
+      setFilterPanel({ filters, formId });
+    },
+    [applyFiltersFn, store, table],
+  );
+  const cancelFilterPanel = useCallback(() => {
+    const { filtersStorage, selectedSavedFilter } = openedWith.current;
+    dispatch(restoreFilters(table, filtersStorage, selectedSavedFilter));
+    setFilterPanel(null);
+  }, [dispatch, table]);
+  const applyFilterPanel = useCallback(() => {
+    applyFiltersFn?.(true);
+    setFilterPanel(null);
+  }, [applyFiltersFn]);
+
+  return (
+    <>
+      <TableInternal
+        {...props}
+        filterPosition={filterPosition}
+        openFiltersDrawer={openFiltersDrawer}
+      />
+      <TableFilterSheet
+        panel={filterPanel}
+        onCancel={cancelFilterPanel}
+        onApply={applyFilterPanel}
+        table={table}
+        setFilter={setFilter}
+      />
+    </>
+  );
 }
 
 /**

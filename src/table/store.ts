@@ -165,6 +165,13 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         registeredFilterNames: [],
       };
 
+    case actions.RESTORE_FILTERS:
+      return {
+        ...state,
+        filtersStorage: action.payload.filtersStorage,
+        selectedSavedFilter: action.payload.selectedSavedFilter,
+      };
+
     case actions.CLEAR_ALL_FILTERS:
       return {
         ...state,

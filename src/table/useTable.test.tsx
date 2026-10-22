@@ -139,7 +139,6 @@ describe('useTable', () => {
       expect(typeof result.current.toggleColumn).toBe('function');
       expect(typeof result.current.initColumnPositions).toBe('function');
       expect(typeof result.current.swapColumns).toBe('function');
-      expect(typeof result.current.openFiltersDrawer).toBe('function');
       expect(typeof result.current.renderFiltersDrawer).toBe('function');
     });
 

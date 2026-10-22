@@ -174,6 +174,7 @@ export function TableToolbarActions() {
                 setDisplayMode={actions.setDisplayMode}
                 filter={filter}
                 filters={slots.filters}
+                formId={config.formId}
                 filterPosition={filterPosition}
                 filtersStorage={filtersStorage}
                 setFilter={actions.setFilter}
