@@ -28,11 +28,11 @@ import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
-import { getComponentUsage } from './keyLimits';
 import { RevealApiKeyDialog } from './RevealApiKeyDialog';
 import {
   canRevealKey,
   getAssigneeLock,
+  getAtLimitReason,
   getErredTooltip,
   getFailedCommand,
   getStateVariant,
@@ -102,25 +102,11 @@ export const ApiKeyActionsDropdown: FC<{
     canRetry && (canManage || (isAssignee && failedCommand === 'rotate'));
   const showRotate = !canRetry && (canManage || (isAssignee && !isErred));
   // A rotation in flight would hold off the pause a key's limit calls for, so
-  // the assignee cannot rotate an active key that reached its limit this
-  // month; a manager can, and the key is paused once it settles. Limits are
-  // enforced only under key management.
+  // the assignee cannot rotate an active key that reached any of its limits,
+  // of whatever period; a manager can, and the key is paused once it settles.
+  // Limits are enforced only under key management.
   const atLimitReason =
-    !canManage &&
-    keyManagement &&
-    isOk &&
-    components.some(
-      (component) =>
-        (getComponentUsage(
-          row,
-          component,
-          (resource.limits ?? {}) as Record<string, number>,
-        ).ratio ?? 0) >= 100,
-    )
-      ? translate(
-          'This key has reached its limit this month. A manager can rotate it.',
-        )
-      : undefined;
+    !canManage && keyManagement && isOk ? getAtLimitReason(row) : undefined;
   const keyName = row.client_id ? (
     <strong>{row.client_id}</strong>
   ) : (

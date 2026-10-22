@@ -86,6 +86,40 @@ export const getErredTooltip = (row: ApiKeyRow) => {
   return row.error_message ? `${failed}: ${row.error_message}` : failed;
 };
 
+// The backend refuses the assignee a rotation of an active key that reached
+// any of its own limits, whatever the period. The period named is the one
+// that holds the key longest: the reached limit that resets last.
+export const getAtLimitReason = (row: ApiKeyRow): string | undefined => {
+  const reached = (row.spending_limit_status ?? []).filter(
+    (status) => status.reached,
+  );
+  if (reached.length === 0) {
+    return undefined;
+  }
+  const longest = reached.reduce((last, status) =>
+    new Date(status.resets_at).getTime() > new Date(last.resets_at).getTime()
+      ? status
+      : last,
+  );
+  return {
+    day: translate(
+      'This key has reached its daily limit. A manager can rotate it.',
+    ),
+    week: translate(
+      'This key has reached its weekly limit. A manager can rotate it.',
+    ),
+    month: translate(
+      'This key has reached its monthly limit. A manager can rotate it.',
+    ),
+    quarter: translate(
+      'This key has reached its quarterly limit. A manager can rotate it.',
+    ),
+    year: translate(
+      'This key has reached its yearly limit. A manager can rotate it.',
+    ),
+  }[longest.period];
+};
+
 // A key Waldur paused on reaching a limit comes back on its own, unlike one a
 // person paused: when every reached limit resets (limit_resumes_at), or when a
 // limit is raised.

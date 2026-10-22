@@ -473,28 +473,51 @@ describe('ResourceApiKeysCard', () => {
         expect(offered('Resume')).toBeNull();
       });
 
-      // A rotation in flight would hold off the pause its limit calls for.
-      describe('a key that reached its limit this month', () => {
+      // A rotation in flight would hold off the pause its limit calls for,
+      // whichever period the limit is on.
+      describe('a key that reached one of its limits', () => {
+        const status = (period: string, used: number) => ({
+          component_type: 'daily',
+          period,
+          limit: 10,
+          used,
+          resets_at: '2026-11-01T00:00:00Z',
+          reached: used >= 10,
+        });
         const AT_LIMIT = {
           state: 'OK',
           user_uuid: USER.uuid,
-          limits: { daily: 10 },
-          current_usages: { daily: 10 },
-          usage_period: `${new Date().toISOString().slice(0, 7)}-01`,
+          spending_limit_status: [status('day', 10), status('month', 4)],
         };
-        const REASON =
-          'This key has reached its limit this month. A manager can rotate it.';
 
         it('cannot be rotated by its assignee', async () => {
           renderManaged(AT_LIMIT);
           await screen.findByText('KEY1');
           await openRowActions(0);
           expect(isEnabled('Rotate')).toBe(false);
-          expect((await revealDialogProps()).rotateDisabledReason).toBe(REASON);
+          expect((await revealDialogProps()).rotateDisabledReason).toBe(
+            'This key has reached its daily limit. A manager can rotate it.',
+          );
         });
 
-        it('can be rotated below its limit', async () => {
-          renderManaged({ ...AT_LIMIT, current_usages: { daily: 9 } });
+        it('cannot be rotated at its monthly limit either', async () => {
+          renderManaged({
+            ...AT_LIMIT,
+            spending_limit_status: [status('day', 4), status('month', 10)],
+          });
+          await screen.findByText('KEY1');
+          await openRowActions(0);
+          expect(isEnabled('Rotate')).toBe(false);
+          expect((await revealDialogProps()).rotateDisabledReason).toBe(
+            'This key has reached its monthly limit. A manager can rotate it.',
+          );
+        });
+
+        it('can be rotated below every limit', async () => {
+          renderManaged({
+            ...AT_LIMIT,
+            spending_limit_status: [status('day', 9), status('month', 4)],
+          });
           await screen.findByText('KEY1');
           await openRowActions(0);
           expect(isEnabled('Rotate')).toBe(true);
@@ -503,9 +526,26 @@ describe('ResourceApiKeysCard', () => {
           ).toBeUndefined();
         });
 
-        // Usage of an earlier month counts against no limit.
-        it('can be rotated once a new month begins', async () => {
-          renderManaged({ ...AT_LIMIT, usage_period: '2020-01-01' });
+        // Only the key's own limits pause it, so only they block rotation;
+        // the backend lets the assignee rotate under a reached resource limit.
+        it("can be rotated at the resource's limit", async () => {
+          renderCard(
+            [
+              {
+                uuid: 'k1',
+                client_id: 'KEY1',
+                state: 'OK',
+                user_uuid: USER.uuid,
+                current_usages: { daily: 10 },
+                usage_period: `${new Date().toISOString().slice(0, 7)}-01`,
+                spending_limit_status: [],
+              },
+            ],
+            {
+              offering: MANAGED_OFFERING,
+              resource: { ...RESOURCE, limits: { daily: 10 } },
+            },
+          );
           await screen.findByText('KEY1');
           await openRowActions(0);
           expect(isEnabled('Rotate')).toBe(true);
@@ -518,9 +558,16 @@ describe('ResourceApiKeysCard', () => {
       vi.mocked(hasPermission).mockReturnValue(true);
       renderManaged({
         state: 'OK',
-        limits: { daily: 10 },
-        current_usages: { daily: 12 },
-        usage_period: `${new Date().toISOString().slice(0, 7)}-01`,
+        spending_limit_status: [
+          {
+            component_type: 'daily',
+            period: 'day',
+            limit: 10,
+            used: 12,
+            resets_at: '2026-11-01T00:00:00Z',
+            reached: true,
+          },
+        ],
       });
       await screen.findByText('KEY1');
       await openRowActions(0);
