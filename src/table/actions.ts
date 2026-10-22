@@ -8,9 +8,6 @@ export const FETCH_LIST_GOTO_PAGE = 'waldur/table/GOTO_PAGE';
 export const SET_MODE = 'waldur/table/SET_MODE';
 export const SET_FILTER_QUERY = 'waldur/table/SET_QUERY';
 export const RESET_PAGINATION = 'waldur/table/RESET_PAGINATION';
-export const ENTITY_CREATE = 'waldur/table/ENTITY_CREATE';
-export const ENTITY_UPDATE = 'waldur/table/ENTITY_UPDATE';
-export const ENTITY_DELETE = 'waldur/table/ENTITY_DELETE';
 export const PAGE_SIZE_UPDATE = 'waldur/table/PAGE_SIZE_UPDATE';
 export const SORT_LIST_START = 'waldur/table/SORT_LIST_START';
 export const SORT_LIST_DONE = 'waldur/table/SORT_LIST_DONE';
@@ -34,17 +31,10 @@ export const REGISTER_FILTER_NAME = 'waldur/table/REGISTER_FILTER_NAME';
 export const CLEAR_REGISTERED_FILTER_NAMES =
   'waldur/table/CLEAR_REGISTERED_FILTER_NAMES';
 
-export const fetchListDone = (
-  table: string,
-  entities: object,
-  order: string[],
-  resultCount: number,
-) => ({
+export const fetchListDone = (table: string, resultCount: number) => ({
   type: FETCH_LIST_DONE,
   payload: {
     table,
-    entities,
-    order,
     resultCount,
   },
 });

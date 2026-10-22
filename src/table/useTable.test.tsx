@@ -44,10 +44,43 @@ describe('useTable', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.mocked(useTableQuery).mockReturnValue({
+      data: undefined,
+      isLoading: false,
+      isFetching: false,
+      error: null,
+      refetch: vi.fn(),
+    });
   });
 
   afterEach(() => {
     vi.clearAllMocks();
+  });
+
+  describe('rows', () => {
+    it('serves the rows from the query and keeps them out of Redux', () => {
+      const store = createTestStore();
+      const rows = [{ uuid: '1' }, { uuid: '2' }];
+      vi.mocked(useTableQuery).mockReturnValue({
+        data: { rows, resultCount: 2 },
+        isLoading: false,
+        isFetching: false,
+        error: null,
+        refetch: vi.fn(),
+      });
+
+      const { result } = renderHookWithProviders(
+        () => useTable({ table: 'TestTable', fetchData: mockFetchData }),
+        { wrapper: createWrapper(store) },
+      );
+
+      expect(result.current.rows).toBe(rows);
+      expect(result.current.pagination.resultCount).toBe(2);
+      const tableState = store.getState().tables.TestTable;
+      expect(tableState.pagination.resultCount).toBe(2);
+      expect(tableState).not.toHaveProperty('entities');
+      expect(tableState).not.toHaveProperty('order');
+    });
   });
 
   describe('initialization', () => {
@@ -557,8 +590,6 @@ describe('useTable', () => {
       // Simulate "Invalid page" response (handled in useTableQuery, returns invalidPage flag)
       vi.mocked(useTableQuery).mockReturnValue({
         data: {
-          entities: {},
-          order: [],
           resultCount: 0,
           rows: [],
           invalidPage: true,
@@ -607,8 +638,6 @@ describe('useTable', () => {
       // Simulate normal data response (no invalidPage flag)
       vi.mocked(useTableQuery).mockReturnValue({
         data: {
-          entities: { '1': { uuid: '1' } },
-          order: ['1'],
           resultCount: 1,
           rows: [{ uuid: '1' }],
         },

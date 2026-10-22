@@ -95,8 +95,6 @@ export interface FilterItem {
 }
 
 export interface TableState {
-  entities?: Record<string, any>;
-  order?: string[];
   loading?: boolean;
   error?: any;
   mode?: DisplayMode;

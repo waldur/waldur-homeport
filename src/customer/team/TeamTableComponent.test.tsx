@@ -6,21 +6,14 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { setTableQueryRows } from '@/table/mockTableQuery';
 import { useTable } from '@/table/useTable';
 import { renderWithProviders } from '@/test/harness';
 
 import { TeamTableComponent } from './TeamTableComponent';
 
-// Avoid real API calls; rows are supplied through the mocked redux table state.
-vi.mock('@/table/useTableQuery', () => ({
-  useTableQuery: () => ({
-    data: undefined,
-    isLoading: false,
-    isFetching: false,
-    error: null,
-    refetch: vi.fn(),
-  }),
-}));
+// Serves the rows given to setTableQueryRows (none by default); no request fires.
+vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
 
 const mockStore = configureStore();
 const rowId = 'member-uuid-1';
@@ -33,13 +26,12 @@ const row = {
   expiration_time: '2025-12-31T23:59:59Z',
 };
 const tableId = 'team-table-test';
-const storeWith = (member: Record<string, unknown>) =>
-  mockStore({
+const storeWith = (member: Record<string, unknown>) => {
+  setTableQueryRows([member]);
+  return mockStore({
     tables: {
       [tableId]: {
         loading: false,
-        entities: { [rowId]: member },
-        order: [rowId],
         pagination: { pageSize: 10, resultCount: 1, currentPage: 1 },
         toggled: {},
         activeColumns: {},
@@ -47,6 +39,7 @@ const storeWith = (member: Record<string, unknown>) =>
       },
     },
   });
+};
 
 // Renders the real TeamTableComponent through the real Table (TableLoader),
 // so the feature-gated `!hideExpiration && {…}` column entry actually flows

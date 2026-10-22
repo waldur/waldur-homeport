@@ -23,10 +23,11 @@ export type ProjectGrantRow = CustomerProjectGrant & {
   project_uuid: string;
 };
 
-// Composite uuid (project uuid + role name) survives the table's entity-dict
-// de-dup in `transformRows` (src/table/utils.tsx); without it, two grants on
-// the same project with different roles collapse to one row. role_name is the
-// discriminator because NestedProjectPermission has no role_uuid.
+// Composite uuid (project uuid + role name): the table keys per-row state such
+// as the expanded toggle by uuid (`getId` in src/table/utils.tsx), so without
+// it two grants on the same project with different roles would expand and
+// collapse together. role_name is the discriminator because
+// NestedProjectPermission has no role_uuid.
 export const toProjectGrantRow = (
   grant: CustomerProjectGrant,
 ): ProjectGrantRow => ({

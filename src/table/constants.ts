@@ -9,8 +9,6 @@ export const COLUMN_ACTIONS_KEY = '__actions__';
 export const COLUMN_FILTER_TOGGLE_CLASS = 'column-filter-toggle';
 
 export const INITIAL_STATE: TableState = {
-  entities: {},
-  order: [],
   loading: false,
   error: null,
   mode: 'table',
