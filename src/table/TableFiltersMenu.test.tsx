@@ -7,7 +7,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { setFilter } from './actions';
 import { TableFilterContext } from './FilterContextProvider';
 import { StringFilter } from './filters';
-import { tableInitialReducer } from './store';
+import { tablesReducer } from './store';
 import { TableFiltersMenu } from './TableFiltersMenu';
 import { FilterItem } from './types';
 
@@ -26,7 +26,7 @@ describe('TableFiltersMenu', () => {
     outerFilterPosition: 'menu' | 'sidebar' = 'menu',
   ) => {
     const table = 'TableFiltersMenuRegressionTable';
-    const store = createStore(combineReducers({ tables: tableInitialReducer }));
+    const store = createStore(combineReducers({ tables: tablesReducer }));
     // Through the real reducer rather than a preloaded state tree: this
     // slice's own reducer owns every other per-table default
     // (`savedFilters` among them, which SaveFilterItems reads eagerly),
@@ -279,9 +279,7 @@ describe('TableFiltersMenu', () => {
     // optional; a synchronous check right after `render()` would still
     // see the first pass.
     const { container } = render(
-      <Provider
-        store={createStore(combineReducers({ tables: tableInitialReducer }))}
-      >
+      <Provider store={createStore(combineReducers({ tables: tablesReducer }))}>
         <TableFilterContext.Provider
           value={{
             table: 'x',

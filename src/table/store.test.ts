@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 import * as actions from './actions';
 import { getTableState } from './selectors';
-import { reducer } from './store';
+import { tablesReducer as reducer } from './store';
 
 describe('Table reducer', () => {
   it('should return default state', () => {

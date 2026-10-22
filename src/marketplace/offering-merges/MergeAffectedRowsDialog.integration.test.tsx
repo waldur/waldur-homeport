@@ -9,7 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
-import { tableInitialReducer } from '@/table/store';
+import { tablesReducer } from '@/table/store';
 import { renderWithProviders } from '@/test/harness';
 
 import { MergeAffectedRowsDialog } from './MergeAffectedRowsDialog';
@@ -54,9 +54,7 @@ const respond = (rows: OfferingMergeAffectedRow[], count: number) =>
 
 const renderDialog = () =>
   renderWithProviders(
-    <Provider
-      store={createStore(combineReducers({ tables: tableInitialReducer }))}
-    >
+    <Provider store={createStore(combineReducers({ tables: tablesReducer }))}>
       <DrawerProvider>
         <MergeAffectedRowsDialog resolve={{ mergeUuid: 'merge-1', entry }} />
       </DrawerProvider>

@@ -9,7 +9,7 @@ import { DrawerProvider } from '@/drawer/DrawerContext';
 import { TABLE_PENDING_PUBLIC_ORDERS } from '@/marketplace/orders/list/constants';
 import { INITIAL_STATE } from '@/table/constants';
 import { setTableQueryRows } from '@/table/mockTableQuery';
-import { reducer as tableReducer } from '@/table/store';
+import { tablesReducer } from '@/table/store';
 import { renderWithProviders } from '@/test/harness';
 
 import { PendingConsumerOrders } from './PendingConsumerOrders';
@@ -36,7 +36,7 @@ const order = {
 // which only takes effect if the reducer actually runs.
 const makeStore = () => {
   setTableQueryRows([order]);
-  return createStore(combineReducers({ tables: tableReducer }), {
+  return createStore(combineReducers({ tables: tablesReducer }), {
     tables: {
       [TABLE_PENDING_PUBLIC_ORDERS]: {
         ...INITIAL_STATE,

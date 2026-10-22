@@ -34,7 +34,7 @@ import {
   selectTableSavedFilters,
 } from './selectors';
 import { TableFilterService } from './TableFilterService';
-import { TableProps } from './types';
+import { TableProps, TablesRootState } from './types';
 import { getSavedFiltersKey } from './utils';
 
 const SaveFilterDialog = lazyComponent(() =>
@@ -123,12 +123,12 @@ const SaveFilterItems = ({ table, formId, apply }) => {
   const { activeItemName, setActiveItemName } = useContext(TableFilterContext);
   const formValues = useSelector(selectFilterValues(table)) || {};
 
-  const selectedSavedFilter = useSelector((state: any) =>
+  const selectedSavedFilter = useSelector((state: TablesRootState) =>
     selectSelectedSavedFilter(state, table),
   );
   const key = useMemo(() => getSavedFiltersKey(table, formId), [table, formId]);
 
-  const list = useSelector((state: any) =>
+  const list = useSelector((state: TablesRootState) =>
     selectTableSavedFilters(state, table),
   );
 
