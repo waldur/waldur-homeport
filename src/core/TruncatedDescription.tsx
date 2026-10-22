@@ -1,4 +1,4 @@
-import { truncate } from 'lodash-es';
+import { truncate } from 'es-toolkit/compat';
 import { FC } from 'react';
 import { useToggle } from 'react-use';
 

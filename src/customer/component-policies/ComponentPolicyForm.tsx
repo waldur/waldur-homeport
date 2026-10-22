@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { lowerCase, upperFirst } from 'lodash-es';
+import { lowerCase, upperFirst } from 'es-toolkit/compat';
 import { FC, useMemo } from 'react';
 import {
   Customer,

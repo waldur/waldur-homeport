@@ -1,5 +1,5 @@
+import { lowerCase, upperFirst } from 'es-toolkit/compat';
 import arrayMutators from 'final-form-arrays';
-import { lowerCase, upperFirst } from 'lodash-es';
 import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import {
