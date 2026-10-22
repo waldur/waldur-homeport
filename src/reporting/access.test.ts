@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { ENV } from '@/core/config';
 
+import { getReportingOrganizations } from './access';
 import { states } from './routes';
 
 const stateByName = Object.fromEntries(
@@ -38,10 +39,12 @@ const owner = {
     },
   ],
 };
-const manager = {
+const withRole = (role_name: string) => ({
   ...owner,
-  permissions: [{ ...owner.permissions[0], role_name: 'CUSTOMER.MANAGER' }],
-};
+  permissions: [{ ...owner.permissions[0], role_name }],
+});
+const reader = withRole('CUSTOMER.READER');
+const manager = withRole('CUSTOMER.MANAGER');
 const staff = { is_staff: true, permissions: [] };
 const member = {
   is_staff: false,
@@ -61,15 +64,31 @@ const reportStates = states
     (name) => !['reporting', 'reporting-dashboard-layout'].includes(name),
   );
 
+const VIEW_REPORTING = 'CUSTOMER.VIEW_REPORTING';
+
 let features;
+let roles;
 
 beforeEach(() => {
   features = ENV.FEATURES;
+  roles = ENV.roles;
   ENV.FEATURES = { customer: { show_organisation_reporting: true } };
+  ENV.roles = [
+    { name: 'CUSTOMER.OWNER', permissions: [VIEW_REPORTING] },
+    { name: 'CUSTOMER.READER', permissions: [VIEW_REPORTING] },
+    { name: 'CUSTOMER.MANAGER', permissions: [] },
+    { name: 'CUSTOMER.ANALYST', permissions: [VIEW_REPORTING] },
+    {
+      name: 'CUSTOMER.org.OWNER',
+      template_name: 'CUSTOMER.OWNER',
+      permissions: [],
+    },
+  ] as any;
 });
 
 afterEach(() => {
   ENV.FEATURES = features;
+  ENV.roles = roles;
   delete (ENV.plugins as any).WALDUR_CORE.ENABLED_REPORTING_SCREENS;
 });
 
@@ -78,19 +97,25 @@ describe('reporting access', () => {
     reportStates.forEach((name) => expect(canEnter(name, staff)).toBe(true));
   });
 
-  it('lets organization owners reach only the landing page and scoped reports', () => {
-    const reachable = reportStates.filter((name) => canEnter(name, owner));
-    expect(reachable.sort()).toEqual(
-      [
-        'reporting-dashboard',
-        'reporting-organization-summary',
-        'reporting-project-detail',
-        'reporting-quotas',
-        'reporting-resource-usage',
-        'reporting-user-usage',
-      ].sort(),
-    );
-  });
+  it.each([
+    ['owners', owner],
+    ['readers', reader],
+  ])(
+    'lets organization %s reach only the landing page and scoped reports',
+    (_, user) => {
+      const reachable = reportStates.filter((name) => canEnter(name, user));
+      expect(reachable.sort()).toEqual(
+        [
+          'reporting-dashboard',
+          'reporting-organization-summary',
+          'reporting-project-detail',
+          'reporting-quotas',
+          'reporting-resource-usage',
+          'reporting-user-usage',
+        ].sort(),
+      );
+    },
+  );
 
   it('keeps users without an organization role out', () => {
     reportStates.forEach((name) => expect(canEnter(name, member)).toBe(false));
@@ -110,32 +135,32 @@ describe('reporting access', () => {
     reportStates.forEach((name) => expect(canEnter(name, staff)).toBe(true));
   });
 
-  it('treats a clone of the owner as an owner', () => {
-    const roles = ENV.roles;
-    ENV.roles = [
-      { name: 'CUSTOMER.org.OWNER', template_name: 'CUSTOMER.OWNER' },
-      { name: 'CUSTOMER.org.READER', template_name: 'CUSTOMER.READER' },
-    ] as any;
-    const withRole = (role_name: string) => ({
+  it('lets in any role that grants CUSTOMER.VIEW_REPORTING', () => {
+    expect(
+      canEnter('reporting-organization-summary', withRole('CUSTOMER.ANALYST')),
+    ).toBe(true);
+  });
+
+  it('keeps out an owner clone without CUSTOMER.VIEW_REPORTING', () => {
+    expect(
+      canEnter(
+        'reporting-organization-summary',
+        withRole('CUSTOMER.org.OWNER'),
+      ),
+    ).toBe(false);
+  });
+
+  it('lists an organization once when several roles grant the permission', () => {
+    const user = {
       ...owner,
-      permissions: [{ ...owner.permissions[0], role_name }],
-    });
-    try {
-      expect(
-        canEnter(
-          'reporting-organization-summary',
-          withRole('CUSTOMER.org.OWNER'),
-        ),
-      ).toBe(true);
-      expect(
-        canEnter(
-          'reporting-organization-summary',
-          withRole('CUSTOMER.org.READER'),
-        ),
-      ).toBe(false);
-    } finally {
-      ENV.roles = roles;
-    }
+      permissions: [
+        owner.permissions[0],
+        { ...owner.permissions[0], role_name: 'CUSTOMER.READER' },
+      ],
+    };
+    expect(getReportingOrganizations(user as any)).toEqual([
+      { uuid: 'c1', name: 'Org' },
+    ]);
   });
 
   it('keeps owners out when no scoped report is enabled', () => {
