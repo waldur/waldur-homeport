@@ -25,7 +25,7 @@ export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
         className="hover:text-brand cursor-pointer inline-block"
       />
       <ResourceFlags resource={row} />
-      <PublicMaintenanceBadge offeringUuid={row.offering_uuid} />
+      <PublicMaintenanceBadge offeringUuid={row.offering_uuid} compact />
     </div>
   );
 };
