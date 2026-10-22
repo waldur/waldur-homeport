@@ -58,7 +58,7 @@ export const StructuredCard: Story = {
             </div>
           </div>
         </CardContent>
-        <CardFooter className="justify-between border-t border-secondary pt-4">
+        <CardFooter className="justify-between">
           <BaseButton variant="secondary" size="sm" label="Manage" />
           <BaseButton variant="primary" size="sm" label="Restart" />
         </CardFooter>
