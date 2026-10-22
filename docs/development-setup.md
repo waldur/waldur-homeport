@@ -18,6 +18,8 @@ This guide covers development environment setup, build configuration, and essent
 - `yarn format:check` - Check code formatting with Prettier
 - `yarn format:fix` - Auto-format code with Prettier
 - `yarn style:check` - Check SCSS/CSS styles with Stylelint
+- `yarn styles:usage report` - Report Bootstrap/Metronic SCSS class usage and unused classes per partial
+- `yarn styles:usage compare` - Compare Bootstrap/Metronic CSS usage and selector order against baseline
 - `yarn deps:unused` - Check for unused dependencies with Knip
 - `yarn tsgo` - Typescript type check
 
@@ -238,6 +240,18 @@ http://localhost:8001/projects/{uuid}/manage/?include_terminated=true&tab=genera
 - Use `console.log` statements in components for debugging state
 - Check network requests to verify API calls are working correctly
 - Use `take_snapshot` to verify UI changes are applied
+
+## Bootstrap CSS Usage & Migration
+
+As part of the Tailwind + shadcn migration (Epic #467), `scripts/bootstrap-css-usage.mjs` tracks classes emitted by Bootstrap and Metronic stylesheets and ensures that dead classes do not accumulate and selector order does not regress:
+
+- `yarn styles:usage report`: Compiles each SCSS partial, extracts emitted class names, and compares them against whole tokens in tracked source files (`src/`, `packages/`, `apps/`). Prints per-partial used and unused class counts and names.
+  - **False positives**: Whole-token matching treats words in comments or strings (e.g. `visible`, `table`, `scroll`) as a use. Therefore, a "used" count is an upper bound.
+- `yarn styles:usage compare [baseline.json]`: Compares current stylesheets against `scripts/bootstrap-css-usage.baseline.json` (runs in CI):
+  - Fails if a new unused class appears in any partial.
+  - Fails and prints a unified diff if selectors are added, modified, or reordered.
+  - Passes when classes and selectors are removed.
+- `yarn styles:usage save [baseline.json]`: Saves the current compiled byte size, per-partial unused classes, and source-order selector list to the baseline JSON. Each later task in Epic #467 that removes dead rules re-runs `save` and commits the smaller baseline.
 
 ## Translation Management
 

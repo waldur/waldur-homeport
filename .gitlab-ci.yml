@@ -107,6 +107,7 @@ Scan JS dependencies:
         - vite.config.ts
         - .eslintrc.cjs
         - .eslintignore
+        - scripts/**/*
         - .gitlab-ci.yml
 
 Run type checking:
@@ -191,6 +192,13 @@ Check translation template is current:
         echo "template.json is out of date. Run 'yarn i18n:extract' and commit the result."
         exit 1
       fi
+
+# Asserts that classes emitted by Bootstrap and Metronic stylesheets do not
+# regress in usage and that selectors are not added, modified or reordered (issue #469).
+Check Bootstrap CSS usage:
+  <<: *linter-rules
+  script:
+    - yarn styles:usage compare
 
 Run code duplication detection:
   stage: test
