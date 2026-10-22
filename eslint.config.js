@@ -123,6 +123,15 @@ const RESTRICTED_IMPORTS = [
     message:
       'Use TablePagination or Pagination from "waldur-ui" instead of react-bootstrap/PageItem.',
   },
+  // lodash-es is being retired (#455). A change that removes the last import
+  // of a helper adds its name here, so it cannot come back; once the list
+  // covers everything, importNames goes and the whole module is banned.
+  {
+    name: 'lodash-es',
+    importNames: ['concat', 'isNumber', 'noop', 'padStart', 'sum', 'sumBy'],
+    message:
+      'lodash-es is being retired (#455). Use native code, or es-toolkit / es-toolkit/compat where lodash semantics matter.',
+  },
 ];
 
 // Menus and popovers are built from waldur-ui's Menu / MenuPopover (see
