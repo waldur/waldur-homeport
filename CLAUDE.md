@@ -217,7 +217,7 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   </EditFieldProvider>;
   ```
 
-  - `callback` receives a partial PATCH body like `{ service_attributes: { backend_url: 'x' } }` (built via `lodash.set` from the field's `name` path). The backend endpoint must accept partial updates.
+  - `callback` receives a partial PATCH body like `{ service_attributes: { backend_url: 'x' } }` (built via `set` from `es-toolkit/compat` from the field's `name` path). The backend endpoint must accept partial updates.
   - For marketplace plugin credentials, compose `BaseCredentialsSection` (`@/marketplace/offerings/update/integration/BaseCredentialsSection`) instead of redoing the layout — it provides the scope state badge and sync button.
   - For multi-section panels with URL-synced tabs, use `TabbedSection` from `@/form/TabbedSection`. Note: `enableSearch` filters by walking direct children only; if a tab's content is a composite subcomponent (e.g. `<BasicInfoTab/>`), the search will treat it as one opaque child. Flatten the fields directly under `<TabbedSection.Tab>` when search is needed.
   - `*EditField`'s `renderValue` may return `null`/`undefined` — the HOC substitutes `DASH_ESCAPE_CODE`, so no explicit dash fallback is needed.

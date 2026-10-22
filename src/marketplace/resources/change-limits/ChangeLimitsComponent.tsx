@@ -1,4 +1,4 @@
-import { get } from 'lodash-es';
+import { get } from 'es-toolkit/compat';
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
