@@ -77,7 +77,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
     <Link state="profile.details">
       {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE && sidebarLogo ? (
         <>
-          {/* Metronic's original [data-kt-aside-minimize='on']:not(:hover)
+          {/* Metronic's original collapsed-and-not-hovered aside
               behavior swaps to this compact mark when truly collapsed,
               not just hides the brand row outright —
               group-data-[collapsible=icon]/panel:block does the same swap here.

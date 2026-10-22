@@ -1,13 +1,14 @@
 import { useCallback } from 'react';
 import { Form } from 'react-final-form';
 
+import { translate } from 'waldur-i18n-runtime';
+import { useNotify } from 'waldur-notifications';
+import { useModal } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { SubmitButton, StringGroup } from '@/form';
-import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/notify';
 
 interface SaveFilterDialogProps {
   resolve: {

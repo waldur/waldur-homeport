@@ -1,20 +1,17 @@
 /**
- * Shell classes applied to `#kt_drawer` to turn the default Metronic panel into
- * a drawer-specific floating card (and hide the page overlay).
+ * The floating-card drawers: DrawerRoot renders a drawer opened with one of
+ * these `shellClass` values as a card under the header, without the page
+ * overlay, and adds per-drawer touches (the chats' own scrolling, the
+ * assistant's headerless controls). It also sets the value as the panel's
+ * `data-shell`.
  *
- * Each class is referenced from two sites that MUST stay in sync:
+ * Each value is referenced from two sites that MUST stay in sync:
  *  1. the header toggle's `isDrawerOpenWithClass(...)` open/close check, and
- *  2. the `open*` helper's `shellClass` drawer prop, which DrawerRoot renders.
+ *  2. the `open*` helper's `shellClass` drawer prop.
  *
- * Never add one with `classList` — DrawerRoot owns #kt_drawer's className and
- * rewrites it whenever that changes, closing included.
- *
- * Keeping the literals here means renaming a class — or adding a new drawer —
- * touches one place instead of risking a missed site (which silently breaks the
- * toggle's close).
- *
- * NOTE: the matching CSS in `src/metronic/sass/custom/**` hardcodes these same
- * strings; keep them aligned when changing a value.
+ * Keeping the literals here means renaming one — or adding a new drawer —
+ * touches one place instead of risking a missed site (which silently breaks
+ * the toggle's close).
  */
 export const DRAWER_SHELL_CLASS = {
   ai: 'ai-chat-drawer-active',

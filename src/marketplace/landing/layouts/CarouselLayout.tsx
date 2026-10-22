@@ -1,4 +1,5 @@
 import { CaretRightIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FC } from 'react';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
@@ -17,6 +18,7 @@ import {
 import { CategoryLink } from '@/marketplace/links/CategoryLink';
 import { getMarketplaceTitle } from '@/marketplace/title';
 import { Category } from '@/marketplace/types';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { createFetcher } from '@/table/api';
 import { useTable } from '@/table/useTable';
 
@@ -53,7 +55,7 @@ export const CarouselLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
 
   return (
     <div className="carousel-layout">
-      <div className="container-fluid py-6">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-6')}>
         {/* Page title */}
         <div className="flex justify-between items-center mb-6">
           <h1 className="mb-0 text-2xl">{title}</h1>

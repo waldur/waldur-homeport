@@ -7,8 +7,7 @@ import {
   PhoneIcon,
   TerminalWindowIcon,
 } from '@phosphor-icons/react';
-import { FC, useEffect, useLayoutEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { FC, useEffect, useState } from 'react';
 
 import {
   BaseButton,
@@ -80,29 +79,6 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   // Compact view hides the room list behind the back button, so flag when any
   // other room has unread the user can't currently see.
   const otherRoomsUnread = useMatrixTotalUnread(activeRoomId);
-
-  // In single-chat (AI-off) mode the drawer's floating expand/close controls
-  // overlap the chat header, so the room kebab is portaled into that toolbar
-  // row instead. The slot only exists in the unified drawer's single mode;
-  // anywhere else (AI tab present, or the full-page Communication view) the
-  // kebab stays inline. Queried without `:has()` so jsdom can run it in tests.
-  const [toolbarSlot, setToolbarSlot] = useState<HTMLElement | null>(null);
-  // Re-resolve when the room context changes, not on every render. The slot
-  // is owned by the unified drawer and only changes when the drawer mode
-  // (single vs. tabbed) flips, which happens at mount/route-level —
-  // running this on every render churned through document.getElementById +
-  // querySelector every animation frame.
-  useLayoutEffect(() => {
-    const drawer = document.getElementById('kt_drawer');
-    const single = drawer?.querySelector('.unified-chat-drawer--single');
-    setToolbarSlot(
-      single
-        ? (drawer!.querySelector(
-            '#kt_drawer_header .card-toolbar',
-          ) as HTMLElement | null)
-        : null,
-    );
-  }, [roomUuid]);
 
   const isThisRoomsCall = call.inThisRoomsCall;
   // Mute reads push rules, which only exist once the initial sync completes;
@@ -285,14 +261,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
         )}
       </div>
 
-      {toolbarSlot ? (
-        createPortal(
-          <span className="tc-toolbar-kebab">{kebab}</span>,
-          toolbarSlot,
-        )
-      ) : (
-        <div className="tc-header-kebab">{kebab}</div>
-      )}
+      <div className="tc-header-kebab">{kebab}</div>
     </div>
   );
 };

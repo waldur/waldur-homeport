@@ -86,13 +86,13 @@ export const IssueDetailsTab = ({
         offering_name: scope.offering_name,
       });
     } else if (context.scopeType === 'offering') {
-      // Ticket opened from an offering: prefill the offering's organization and
-      // set the offering so the backend routes it to that provider's helpdesk.
-      change('customer', {
-        name: scope.customer_name,
-        uuid: scope.customer_uuid,
-        url: scope.customer,
-      });
+      // Ticket opened from an offering: the offering alone routes it to the
+      // provider's helpdesk. The provider's organization is not the request's
+      // organization: a ticket scoped to it is visible only to that
+      // organization's members, so the caller could not follow their own
+      // request. Start as standalone; the caller may still pick their own
+      // organization.
+      change('standaloneIssue', true);
       change('offering', scope.uuid);
     }
   }, [context, change]);

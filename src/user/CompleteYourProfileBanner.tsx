@@ -1,8 +1,10 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 
 import { FeaturedIcon } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 
 interface CompleteYourProfileBannerProps {
   /** Name of the page the profile gate turned the user away from, if known. */
@@ -20,7 +22,12 @@ export const CompleteYourProfileBanner = ({
     className="h-60px bg-primary border-b-[1px] border-b-secondary"
     role="status"
   >
-    <div className="container-fluid flex items-center h-full">
+    <div
+      className={classNames(
+        PAGE_CONTAINER_CLASSNAME,
+        'flex items-center h-full',
+      )}
+    >
       <div className="flex items-center">
         <FeaturedIcon
           icon={<WarningCircleIcon weight="bold" />}

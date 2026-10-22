@@ -1,4 +1,5 @@
 import { InfoIcon, WarningIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { PublicOfferingDetails, Resource } from 'waldur-js-client';
@@ -11,6 +12,7 @@ import { OrderConsumerActions } from '@/marketplace/orders/actions/OrderConsumer
 import { OrderProviderActions } from '@/marketplace/orders/actions/OrderProviderActions';
 import { canReviewOrderAsConsumer } from '@/marketplace/orders/actions/selectors';
 import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 import { ActionsMenu } from '@/table/ActionsDropdown';
 import { ProgressSteps } from '@/wizard';
@@ -268,7 +270,7 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
   const hasChangePlanRequest = hasResourceChangePlanRequest(resource);
   const hasLimitChangeRequest = hasResourceLimitChangeRequest(resource);
   return (
-    <div className="container-fluid mt-6">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-6')}>
       <Card className="card-bordered border-divider-medium border-dashed border-1 overflow-hidden">
         <Card.Body className="flex flex-col sm:flex-row items-center gap-4">
           <ProgressSteps steps={steps} bgClass="bg-primary" className="grow" />

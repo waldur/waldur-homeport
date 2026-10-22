@@ -16,7 +16,7 @@ export const CostPoliciesDetailsDialog = ({ resolve: { project } }) => {
         filter={{ project_uuid: project.uuid }}
         hasActionBar={false}
         rowActions={null}
-        hideColumns={['project', 'price_estimate']}
+        hideColumns={['project', 'current_cost']}
       />
     </ModalDialog>
   );

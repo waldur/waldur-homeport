@@ -26,7 +26,7 @@ type CappedComponent = Pick<
   'type' | 'name' | 'measured_unit' | 'spending_limit_periods'
 >;
 
-export const getSpendingLimitFieldId = (
+const getSpendingLimitFieldId = (
   componentType: string,
   period: SpendingLimitPeriod,
 ) => `spending-limit-${componentType}-${period}`;

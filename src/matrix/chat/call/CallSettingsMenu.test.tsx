@@ -106,8 +106,10 @@ describe('CallSettingsMenu', () => {
     await user.click(await screen.findByRole('option', { name: 'Headset' }));
 
     expect(setActiveMediaDevice).toHaveBeenCalledWith('headset');
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    expect(document.getElementById('kt_drawer')).toHaveClass('drawer-on');
+    expect(
+      // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
+      document.querySelector('[data-slot="drawer"]'),
+    ).toHaveAttribute('data-state', 'open');
   });
 
   it('tells the user when the microphone cannot be switched to', async () => {

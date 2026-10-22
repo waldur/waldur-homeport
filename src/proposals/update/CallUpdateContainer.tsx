@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
+import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 import { proposalProtectedCallsRetrieve } from 'waldur-js-client';
 
@@ -10,7 +11,8 @@ import { AccessDeniedPage } from '@/error/AccessDeniedPage';
 import { InvalidRoutePage } from '@/error/InvalidRoutePage';
 import { translate } from '@/i18n';
 import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
-import { usePageHero } from '@/navigation/context';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
+import { LayoutSlot } from '@/navigation/slots';
 import { useTitle } from '@/navigation/title';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
@@ -57,7 +59,7 @@ const PageHero = ({ call, refetch }) => (
         className="bg-warning-subtle border-b border-secondary py-3 px-8"
       />
     )}
-    <div className="container-fluid my-5">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-[1.25rem]')}>
       <CallTabs call={call} />
       <CallUpdateHero call={call} refetch={refetch} />
     </div>
@@ -201,8 +203,6 @@ const Body = ({ call, refetch, loading }) => {
     [call],
   );
 
-  usePageHero(<PageHero call={call} refetch={refetch} />);
-
   const breadcrumbItems = useCallBreadcrumbItems(call);
   useBreadcrumbs(breadcrumbItems);
 
@@ -222,12 +222,17 @@ const Body = ({ call, refetch, loading }) => {
   const isReadOnly = call.state === 'archived' || !canUpdate;
 
   return (
-    <Component
-      call={call}
-      refetch={refetch}
-      loading={loading}
-      isReadOnly={isReadOnly}
-    />
+    <>
+      <LayoutSlot name="hero">
+        <PageHero call={call} refetch={refetch} />
+      </LayoutSlot>
+      <Component
+        call={call}
+        refetch={refetch}
+        loading={loading}
+        isReadOnly={isReadOnly}
+      />
+    </>
   );
 };
 

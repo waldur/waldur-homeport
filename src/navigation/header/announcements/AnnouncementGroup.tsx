@@ -1,9 +1,11 @@
 import { CaretDownIcon, CaretUpIcon, InfoIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { AdminAnnouncement } from 'waldur-js-client';
 
 import { ANNOUNCEMENT_ICON } from '@/administration/utils';
 import { translate } from '@/i18n';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 
 import { AnnouncementBar } from './AnnouncementBar';
 
@@ -26,7 +28,12 @@ export const AnnouncementGroup: FC<AnnouncementGroupProps> = ({
         onClick={() => setExpanded((value) => !value)}
         aria-expanded={expanded}
       >
-        <div className="container-fluid flex items-center gap-3">
+        <div
+          className={classNames(
+            PAGE_CONTAINER_CLASSNAME,
+            'flex items-center gap-3',
+          )}
+        >
           <div className="icon-square">
             <InfoIcon weight="bold" />
           </div>

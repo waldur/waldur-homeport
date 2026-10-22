@@ -44,6 +44,8 @@ import {
 } from './derivedLimits';
 import { fetchOpenstackOptions } from './fetchOpenstackOptions';
 import { K8sClusterConfigurationForm } from './K8sClusterConfigurationForm';
+import { ALL_MODELS } from './modelSelection';
+import { ModelSelectionField } from './ModelSelectionField';
 import { validateMultiDatacenterConfiguration } from './multi-datacenter-k8s-types';
 import { getOptionPatternValidator } from './optionPattern';
 import { getOptionTransformValidator } from './optionTransform';
@@ -203,9 +205,21 @@ export const buildOptionValidator = (
   return composeValidators(...validators);
 };
 
-export const getComponentAndParams = (option, key, customer, loaders?: any) => {
+export const getComponentAndParams = (
+  option,
+  key,
+  customer,
+  loaders?: any,
+  allModelsOption?: string,
+) => {
   let OptionField: FC<Partial<FormGroupProps>> = StringField;
   let params: Record<string, any> = {};
+  if (key === allModelsOption) {
+    return {
+      OptionField: ModelSelectionField as FC<Partial<FormGroupProps>>,
+      params: { options: option.choices } as Record<string, any>,
+    };
+  }
   switch (option.type) {
     case 'text':
       OptionField = TextField;
@@ -340,6 +354,15 @@ export const getComponentAndParams = (option, key, customer, loaders?: any) => {
   return { OptionField, params };
 };
 
+// One array for every render: react-final-form registers the field again
+// whenever its initialValue changes identity.
+const ORDERED_MODELS_INITIAL = [ALL_MODELS];
+
+const validateOrderedModels = (value: unknown) =>
+  Array.isArray(value) && !value.length
+    ? translate('Choose at least one model, or All models.')
+    : undefined;
+
 /**
  * Inner component for react-final-form that uses useFormState for cross-field validation.
  * This is a separate component to ensure useFormState only subscribes when finalForm=true.
@@ -347,9 +370,19 @@ export const getComponentAndParams = (option, key, customer, loaders?: any) => {
 export const OptionsForm = ({
   options,
   customer: preferedCustomer,
+  allModelsOption,
+  orderForm,
 }: {
   options: OfferingOptions;
   customer?: DeployFormData['customer'];
+  // The option that holds the resource's model selection, which also offers
+  // All models (getAllModelsOption). An order sends ["*"] for it as well.
+  allModelsOption?: string;
+  // An order: the model selection starts on All models, and an empty one is
+  // refused, so unticking everything cannot order a resource without models.
+  // Not for edits of several resources at once, where an untouched field
+  // must stay unset.
+  orderForm?: boolean;
 }) => {
   const { values } = useFormState({ subscription: { values: true } });
   const form = useForm();
@@ -402,14 +435,17 @@ export const OptionsForm = ({
             key,
             customer,
             { loadTenants, loadInstances },
+            allModelsOption,
           );
+
+          const orderedModels = orderForm && key === allModelsOption;
 
           // Build validator with cross-field support
           const validateFn = buildOptionValidator(
             option,
             options,
             values,
-            params.validate,
+            orderedModels ? validateOrderedModels : params.validate,
             hiddenKeys,
             key,
           );
@@ -441,6 +477,9 @@ export const OptionsForm = ({
                     component={OptionField}
                     validate={validateFn}
                     {...fieldParams}
+                    {...(orderedModels
+                      ? { initialValue: ORDERED_MODELS_INITIAL }
+                      : {})}
                     {...(OptionField === SwitchField
                       ? { label: option.label, description: option.help_text }
                       : {})}

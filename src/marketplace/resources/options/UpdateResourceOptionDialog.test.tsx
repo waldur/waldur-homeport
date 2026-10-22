@@ -244,4 +244,87 @@ describe('UpdateResourceOptionDialog', () => {
       );
     });
   });
+
+  describe('models option under key management', () => {
+    const MODELS = {
+      name: 'models',
+      label: 'Models',
+      type: 'select_string_multi',
+      choices: ['gpt-4o', 'llama-3'],
+    };
+    const MANAGED = {
+      uuid: 'off-1',
+      plugin_options: { enable_api_key_provisioning: true },
+      resource_options: { options: { models: MODELS }, order: ['models'] },
+    };
+    const WARNING =
+      "The resource's API keys will not be able to call any model.";
+
+    const renderModels = (
+      options: Record<string, unknown>,
+      offering = MANAGED,
+    ) =>
+      renderDialog({
+        resolve: {
+          resource: { uuid: 'res-1', options } as any,
+          offering: offering as any,
+          option: MODELS as any,
+          refetch: vi.fn(),
+        },
+      });
+
+    const submitted = async (user: ReturnType<typeof userEvent.setup>) => {
+      vi.mocked(marketplaceResourcesUpdateOptions).mockClear();
+      vi.mocked(marketplaceResourcesUpdateOptions).mockResolvedValue({} as any);
+      await user.click(screen.getByRole('button', { name: 'Update' }));
+      await waitFor(() =>
+        expect(marketplaceResourcesUpdateOptions).toHaveBeenCalled(),
+      );
+      return vi.mocked(marketplaceResourcesUpdateOptions).mock.calls[0][0].body
+        .options.models;
+    };
+
+    it('opens on All models for a resource that never chose', () => {
+      renderModels({});
+      expect(screen.getByLabelText('All models')).toBeChecked();
+      expect(screen.getByLabelText('gpt-4o')).toBeDisabled();
+      expect(screen.queryByText(WARNING)).not.toBeInTheDocument();
+    });
+
+    it('sends every model once All models is ticked', async () => {
+      const user = userEvent.setup();
+      renderModels({ models: ['gpt-4o'] });
+      expect(screen.getByLabelText('All models')).not.toBeChecked();
+      await user.click(screen.getByLabelText('All models'));
+      expect(screen.getByLabelText('gpt-4o')).toBeDisabled();
+      expect(await submitted(user)).toEqual(['*']);
+    });
+
+    it('lets the individual ticks decide again once All models is unticked', async () => {
+      const user = userEvent.setup();
+      renderModels({ models: ['gpt-4o'] });
+      await user.click(screen.getByLabelText('All models'));
+      await user.click(screen.getByLabelText('All models'));
+      expect(screen.getByLabelText('gpt-4o')).toBeChecked();
+      expect(await submitted(user)).toEqual(['gpt-4o']);
+    });
+
+    it('warns but still sends no model when nothing is ticked', async () => {
+      const user = userEvent.setup();
+      renderModels({ models: ['*'] });
+      await user.click(screen.getByLabelText('All models'));
+      expect(screen.getByText(WARNING)).toBeInTheDocument();
+      expect(await submitted(user)).toEqual([]);
+    });
+
+    // So an offering that turns key management on later finds its
+    // resources on every model.
+    it('offers All models without key management too', () => {
+      renderModels(
+        { models: ['gpt-4o'] },
+        { ...MANAGED, plugin_options: { enable_api_key_provisioning: false } },
+      );
+      expect(screen.getByLabelText('All models')).toBeInTheDocument();
+    });
+  });
 });

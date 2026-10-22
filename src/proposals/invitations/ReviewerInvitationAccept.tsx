@@ -1,8 +1,9 @@
 import { CheckCircleIcon, InfoIcon, XCircleIcon } from '@phosphor-icons/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
+import classNames from 'classnames';
 import { FC, useCallback } from 'react';
-import { Card, Container } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import {
   reviewerInvitationsRetrieve,
   reviewerInvitationsAccept,
@@ -17,6 +18,7 @@ import { DEFAULT_REDIRECT_STATE } from '@/auth/authNavigation';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { useTitle } from '@/navigation/title';
 import { router } from '@/router';
 import { useNotify } from '@/store/notify';
@@ -185,7 +187,7 @@ export const ReviewerInvitationAccept: FC = () => {
 
   if (invitationError) {
     return (
-      <Container fluid className="py-10">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-10')}>
         <Card className="card-bordered">
           <Card.Body className="text-center py-10">
             <h3 className="text-danger mb-4">
@@ -198,7 +200,7 @@ export const ReviewerInvitationAccept: FC = () => {
             </p>
           </Card.Body>
         </Card>
-      </Container>
+      </div>
     );
   }
 
@@ -209,7 +211,7 @@ export const ReviewerInvitationAccept: FC = () => {
   // CheckIcon if invitation is already processed
   if (invitation.invitation_status !== 'pending') {
     return (
-      <Container fluid className="py-10">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-10')}>
         <Card className="card-bordered">
           <Card.Body className="text-center py-10">
             <h3 className="mb-4">
@@ -222,7 +224,7 @@ export const ReviewerInvitationAccept: FC = () => {
             </p>
           </Card.Body>
         </Card>
-      </Container>
+      </div>
     );
   }
 
@@ -238,7 +240,7 @@ export const ReviewerInvitationAccept: FC = () => {
       : undefined;
 
   return (
-    <Container fluid className="py-10">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-10')}>
       <div className="mb-6">
         <h1 className="text-xl font-semibold mb-1">
           {translate('You have been invited to review')}
@@ -309,6 +311,6 @@ export const ReviewerInvitationAccept: FC = () => {
           />
         </div>
       </div>
-    </Container>
+    </div>
   );
 };

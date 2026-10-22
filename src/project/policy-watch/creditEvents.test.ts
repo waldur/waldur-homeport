@@ -217,6 +217,25 @@ describe('buildCreditEvents', () => {
     expect(event.consequence).toContain('next policy evaluation');
   });
 
+  it('says a policy over its cost limit is held back by the credit', () => {
+    // Saturation far above 100 % reads as "about to fire" unless the row says
+    // the credit is what holds it back (waldur/waldur-mastermind#604).
+    const events = build({
+      exhaustionDate: null,
+      policies: [
+        {
+          actionLabel: 'Pause resources',
+          etaDays: 30,
+          action: 'request_pausing',
+          heldByCredit: true,
+        },
+      ],
+    });
+    expect(kinds(events)).toEqual(['policy']);
+    expect(events[0].consequence).toContain('credit covers it');
+    expect(events[0].tone).toBe('warning');
+  });
+
   it('does not bind, or claim anything is stopping, for a notify-only policy', () => {
     // It reaches its threshold like any other, but nothing is done to the
     // resources — so it must not turn the card critical while the row beside

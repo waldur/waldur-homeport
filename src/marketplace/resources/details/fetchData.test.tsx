@@ -22,6 +22,16 @@ describe('getResourceTabs: API keys', () => {
     expect(tabKeys({ has_api_keys: false }, {})).not.toContain('api-keys');
   });
 
+  it('shows it for a resource without keys when the offering manages them', () => {
+    // A new resource there starts with none; the tab is where one is requested.
+    expect(
+      tabKeys(
+        { has_api_keys: false },
+        { plugin_options: { enable_api_key_provisioning: true } },
+      ),
+    ).toContain('api-keys');
+  });
+
   it('leaves it out when the offering hides it', () => {
     expect(
       tabKeys(

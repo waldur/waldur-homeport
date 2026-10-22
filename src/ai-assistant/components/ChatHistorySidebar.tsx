@@ -21,6 +21,7 @@ import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
 import { useChatDrawerPreference } from '@/chat/chatDrawerPreferences';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SidebarToggleGraphic } from '@/core/SidebarToggleGraphic';
+import { useOptionalDrawer } from '@/drawer/actions';
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 
@@ -33,6 +34,7 @@ export const ChatHistorySidebar: FC = () => {
   const { currentThreadId, threadNotifications, getIsRunning } =
     useThreadContext();
   const runtime = useAssistantRuntime();
+  const drawer = useOptionalDrawer();
   const queryClient = useQueryClient();
 
   const { data: threads, isLoading } = useThreadList({
@@ -50,12 +52,10 @@ export const ChatHistorySidebar: FC = () => {
     (threadId: string) => {
       if (threadId === currentThreadId) return;
       runtime.threads.switchToThread(threadId);
-      // Close history sidebar (toolbar reads DOM state on next toggle)
-      document
-        .getElementById('kt_drawer')
-        ?.removeAttribute('data-history-open');
+      // Below lg the history covers the chat; picking a thread closes it.
+      drawer?.setHistoryOpen(false);
     },
-    [runtime, currentThreadId],
+    [runtime, currentThreadId, drawer],
   );
 
   const handleArchive = useCallback(

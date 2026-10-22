@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useEffect } from 'react';
 import {
   SupportUser,
   SupportUserAttachmentBrief,
@@ -11,6 +12,7 @@ import {
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -21,7 +23,8 @@ import { renderFieldOrDash } from '@/table/utils';
 type ConnectionsSlice = keyof SupportUserConnections;
 
 // One shared endpoint backs every tab, so each table pulls its own slice out of
-// the response. Tabs unmount when inactive, so only the visible one fetches.
+// the response, fetched once and shared between the tabs, and pages through it
+// in memory: the endpoint is not paginated.
 const ConnectionsTable = <RowType,>({
   supportUserUuid,
   slice,
@@ -33,20 +36,27 @@ const ConnectionsTable = <RowType,>({
   columns: Column<RowType>[];
   verboseName: string;
 }) => {
-  const tableProps = useTable<RowType>({
-    table: `SupportUserConnections-${slice}-${supportUserUuid}`,
-    fetchData: () =>
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['SupportUserConnections', supportUserUuid],
+    queryFn: () =>
       supportUsersConnectionsRetrieve({
         path: { uuid: supportUserUuid },
-      }).then((response) => {
-        const rows = (response.data?.[slice] ?? []) as RowType[];
-        return { rows, resultCount: rows.length };
-      }),
+      }).then((response) => response.data),
   });
+  const rows = (data?.[slice] ?? []) as RowType[];
+  const tableProps = useTable<RowType>({
+    table: `SupportUserConnections-${slice}-${supportUserUuid}`,
+    fetchData: createClientPaginatedFetcher(rows),
+  });
+  useEffect(() => {
+    tableProps.fetch();
+  }, [data]);
 
   return (
     <Table<RowType>
       {...tableProps}
+      loading={isLoading || tableProps.loading}
+      error={error || tableProps.error}
       columns={columns}
       verboseName={verboseName}
       hideTitle

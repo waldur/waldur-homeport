@@ -45,8 +45,8 @@ export const OfferingSupportButton: FC<{ offering: Offering }> = ({
   const openCreateDialog = () =>
     openDialog(IssueCreateDialog, {
       resolve: {
-        // Prefills the offering's organization and routes the request to that
-        // offering's provider helpdesk (see IssueDetailsTab).
+        // Routes the request to that offering's provider helpdesk (see
+        // IssueDetailsTab).
         scope: offering,
         scopeType: 'offering',
         issue: {

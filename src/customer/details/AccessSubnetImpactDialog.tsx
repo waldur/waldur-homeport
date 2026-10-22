@@ -1,4 +1,5 @@
-import { FC, useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useEffect, useMemo } from 'react';
 import {
   AccessSubnetImpactResource,
   accessSubnetsResourceImpactRetrieve,
@@ -8,6 +9,7 @@ import { AlertItem, Badge } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
@@ -67,6 +69,8 @@ const AddressList = ({ row }: { row: AccessSubnetImpactResource }) => {
   );
 };
 
+const NO_RESOURCES: AccessSubnetImpactResource[] = [];
+
 /**
  * What the access subnets actually mean for resources.
  *
@@ -87,22 +91,26 @@ export const AccessSubnetImpactDialog: FC<AccessSubnetImpactDialogProps> = ({
     }),
     [customerUuid, accessSubnetUuid],
   );
-  // The table owns the fetch rather than mirroring a separate useQuery into it:
-  // a fetchData closing over already-fetched rows captures the empty array from
-  // the first render and never re-runs, so the table stays empty.
+  // Every affected resource, fetched once: the counts below read them all,
+  // and the table pages through them. A fetchData closing over these rows
+  // keeps the first, empty, result unless the table is told to fetch again
+  // when they arrive.
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['AccessSubnetImpact', filter],
+    queryFn: () =>
+      accessSubnetsResourceImpactRetrieve({ query: filter }).then(
+        (response) => response.data?.resources,
+      ),
+  });
+  const rows: AccessSubnetImpactResource[] = data ?? NO_RESOURCES;
   const tableProps = useTable({
     table: `access-subnet-impact-${customerUuid}-${accessSubnetUuid ?? 'all'}`,
-    filter,
-    fetchData: async () => {
-      const response = await accessSubnetsResourceImpactRetrieve({
-        query: filter,
-      });
-      const resources = response.data?.resources ?? [];
-      return { rows: resources, resultCount: resources.length };
-    },
+    fetchData: createClientPaginatedFetcher(rows),
   });
+  useEffect(() => {
+    tableProps.fetch();
+  }, [data]);
 
-  const rows: AccessSubnetImpactResource[] = tableProps.rows ?? [];
   const unrestricted = rows.filter((row) => row.unrestricted);
   const advisoryOnly = rows.filter((row) => !row.concealment_enabled);
 
@@ -141,6 +149,8 @@ export const AccessSubnetImpactDialog: FC<AccessSubnetImpactDialogProps> = ({
 
       <Table<AccessSubnetImpactResource>
         {...tableProps}
+        loading={isLoading || tableProps.loading}
+        error={error || tableProps.error}
         id="access-subnet-impact"
         columns={[
           {

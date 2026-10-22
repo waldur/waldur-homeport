@@ -7,6 +7,7 @@ import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
@@ -29,14 +30,7 @@ export const Step1SelectChecklist: FC<WizardFormStepProps> = (props) => {
 
   const tableProps = useTable({
     table: 'OfferingChecklistSelectorTable',
-    fetchData: (request) => {
-      let rows = [...data];
-      const q = (request.filter?.name || '').trim().toLowerCase();
-      if (q) {
-        rows = rows.filter((row) => row.name.toLowerCase().includes(q));
-      }
-      return Promise.resolve({ rows });
-    },
+    fetchData: createClientPaginatedFetcher(data ?? [], { queryField: 'name' }),
     queryField: 'name',
   });
 

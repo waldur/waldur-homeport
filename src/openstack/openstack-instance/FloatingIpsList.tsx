@@ -31,6 +31,8 @@ export const FloatingIpsList: FunctionComponent<{
   return (
     <Table<OpenStackNestedFloatingIp>
       {...props}
+      // The instance's few floating IPs, shown whole.
+      hasPagination={false}
       columns={[
         {
           title: translate('IP address'),

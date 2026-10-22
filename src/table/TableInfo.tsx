@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { translate } from '@/i18n';
+import { translate } from 'waldur-i18n-runtime';
 
 import { Pagination } from './types';
 

@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { describe, expect, it, vi, beforeEach, Mock } from 'vitest';
 
-import { useModal } from '@/modal/actions';
+import { useModal } from 'waldur-ui';
 
 import { ExportDialog } from './ExportDialog';
 import { registerTable } from './registry';

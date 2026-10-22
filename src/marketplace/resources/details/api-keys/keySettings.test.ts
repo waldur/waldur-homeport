@@ -50,7 +50,7 @@ describe('serializeKeySettings', () => {
           },
         },
         limitComponents(),
-        [],
+        null,
       ),
     ).toEqual({ spending_limits: { token_cost: { day: 5, month: 50 } } });
   });
@@ -62,25 +62,26 @@ describe('serializeKeySettings', () => {
     });
   });
 
-  // A key limited to retired models shows none ticked; saving an unrelated
-  // change must not send that empty list, which would allow every model.
-  it('leaves untouched models out of an edit', () => {
+  it('sends the ticked models as a list', () => {
     expect(
       serializeKeySettings(
-        { spending_limits: { tokens: { month: 5 } }, allowed_models: [] },
-        limitComponents(),
-        ['gpt-4o'],
-        false,
+        { all_models: false, allowed_models: ['gpt-4o'] },
+        [],
+        ['gpt-4o', 'llama-3'],
       ),
-    ).toEqual({ spending_limits: { tokens: { month: 5 } } });
+    ).toEqual({ allowed_models: ['gpt-4o'] });
   });
 
-  // Unticking everything is how a key is opened to every model, even when its
-  // list only named retired ones and the form therefore looks unchanged.
-  it('sends models the user touched in an edit, even if back to empty', () => {
+  // The individual ticks stay in the form while All models locks them; they
+  // must not be what is sent.
+  it('sends every model as its own value, whatever is ticked under it', () => {
     expect(
-      serializeKeySettings({ allowed_models: [] }, [], ['gpt-4o'], true),
-    ).toEqual({ allowed_models: [] });
+      serializeKeySettings(
+        { all_models: true, allowed_models: ['gpt-4o'] },
+        [],
+        ['gpt-4o', 'llama-3'],
+      ),
+    ).toEqual({ allowed_models: ['*'] });
   });
 
   it('leaves out the settings the offering does not have', () => {
@@ -88,7 +89,7 @@ describe('serializeKeySettings', () => {
       serializeKeySettings(
         { spending_limits: { tokens: { month: 1 } }, allowed_models: ['x'] },
         [],
-        [],
+        null,
       ),
     ).toEqual({});
   });
@@ -99,7 +100,7 @@ describe('serializeKeySettings', () => {
       serializeKeySettings(
         { spending_limits: { tokens: { day: 3, month: 5 } } },
         limitComponents(),
-        [],
+        null,
       ),
     ).toEqual({ spending_limits: { tokens: { month: 5 } } });
   });
@@ -165,7 +166,7 @@ describe('getKeySettingsFields', () => {
   });
 
   it('has no limit field on an offering without components', () => {
-    expect(getKeySettingsFields({} as any, [], [])).toEqual([]);
+    expect(getKeySettingsFields({} as any, [], null)).toEqual([]);
   });
 });
 

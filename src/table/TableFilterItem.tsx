@@ -12,6 +12,7 @@ import React, {
 import { useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
 
+import { translate } from 'waldur-i18n-runtime';
 import {
   AccordionContent,
   AccordionItem,
@@ -21,8 +22,6 @@ import {
   RemoveFilterBadgeButton,
   MenuPopover,
 } from 'waldur-ui';
-
-import { translate } from '@/i18n';
 
 import { TableFilterContext } from './FilterContextProvider';
 import { closeFlyoutOnTabOut } from './filterMenuFocus';

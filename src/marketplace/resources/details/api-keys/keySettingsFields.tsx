@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { Field } from 'react-final-form';
+import { Field, useField } from 'react-final-form';
 import {
   PatchedResourceApiKeyUpdateRequest,
   Resource,
@@ -8,10 +8,14 @@ import {
   usersList,
 } from 'waldur-js-client';
 
+import { Checkbox } from 'waldur-ui';
+
 import { FormGroup } from '@/form';
+import { FieldWarning } from '@/form/FieldWarning';
 import { createLoadOptions } from '@/form/select';
 import { SelectMultiBooleanGroup } from '@/form/SelectMultiBooleanGroup';
 import { translate } from '@/i18n';
+import { ALL_MODELS } from '@/marketplace/common/modelSelection';
 import { SpendingLimitFields } from '@/marketplace/common/SpendingLimitFields';
 import { SpendingLimitFormValues } from '@/marketplace/common/spendingLimits';
 
@@ -22,24 +26,47 @@ import {
 } from './keySpendingLimits';
 import { KeyComponent } from './types';
 
+// The All models tick is a form value of its own, so the individual ticks
+// keep their state while it locks them and decide again once it is cleared.
+const ALL_MODELS_FIELD = 'all_models';
+
 export const ModelsField: FC<{
   name: string;
   label: string;
   options: string[];
-  description?: string;
   space?: number;
   disabled?: boolean;
-}> = ({ name, label, options, description, space, disabled }) => (
-  <FormGroup label={label} description={description} space={space}>
-    <Field
-      name={name}
-      component={SelectMultiBooleanGroup}
-      options={options}
-      checkboxes
-      disabled={disabled}
-    />
-  </FormGroup>
-);
+}> = ({ name, label, options, space, disabled }) => {
+  const allModels = useField<boolean>(ALL_MODELS_FIELD).input;
+  const selected = useField<string[]>(name, { subscription: { value: true } })
+    .input.value;
+  const everyModel = Boolean(allModels.value);
+  return (
+    <FormGroup label={label} space={space}>
+      <div className="flex flex-col gap-8px">
+        <Checkbox
+          label={translate('All models')}
+          checked={everyModel}
+          disabled={disabled}
+          onCheckedChange={(checked: boolean) => allModels.onChange(checked)}
+        />
+        <Field
+          name={name}
+          component={SelectMultiBooleanGroup}
+          options={options}
+          checkboxes
+          disabled={disabled || everyModel}
+        />
+      </div>
+      {/* Not an error: a key with no models is a valid thing to ask for. */}
+      {(!options.length || (!everyModel && !selected?.length)) && (
+        <FieldWarning
+          error={translate('The key will not be able to call any model.')}
+        />
+      )}
+    </FormGroup>
+  );
+};
 
 const KeyLimitsField: FC<{
   label: string;
@@ -102,11 +129,14 @@ export const getKeyLimitFieldComponents = (
   currentLimits?: ResourceApiKeyStatus['spending_limits'],
 ) => getKeyLimitComponents(components, resource.spending_limits, currentLimits);
 
-// Limits and models shared by the request and edit dialogs; empty inherits the resource's.
+// Limits and models shared by the request and edit dialogs. An empty limit
+// inherits the resource's; no model ticked means no model. ``models`` are the
+// ones the resource allows (getResourceModels), null when the offering lists
+// none, and then there is no Models field.
 export const getKeySettingsFields = (
   resource: Resource,
   components: KeyComponent[],
-  models: string[],
+  models: string[] | null,
   { currentLimits, disabledReason }: KeySettingsFieldsOptions = {},
 ) => {
   const locked = {
@@ -136,7 +166,7 @@ export const getKeySettingsFields = (
           },
         ]
       : []),
-    ...(models.length
+    ...(models
       ? [
           {
             name: 'allowed_models',
@@ -144,9 +174,6 @@ export const getKeySettingsFields = (
             extraProps: {
               label: translate('Models'),
               options: models,
-              description: translate(
-                'Leave all unticked to allow every model.',
-              ),
             },
             space: 5,
             ...locked,
@@ -158,21 +185,26 @@ export const getKeySettingsFields = (
 
 export interface KeySettingsFormValues {
   spending_limits?: SpendingLimitFormValues;
+  all_models?: boolean;
+  // The individual ticks; they count only while all_models is off.
   allowed_models?: string[];
+  // The key's models the dialog does not show, because the offering retired
+  // them or the resource no longer allows them. The key keeps its list as
+  // chosen, so they go back with the ticks.
+  kept_models?: string[];
 }
 
-// Only the settings the dialog shows are sent, and limits always in full: a
-// cleared limit or an empty model list is how the user removes one, so leaving
-// the field out would keep the old value instead. The backend stores empty as
-// null, which for models means every model. So an edit sends models only when
-// the user touched them: a key limited to models the offering has since
-// retired shows none ticked, and saving an unrelated change would otherwise
-// open it to every model.
+// Only the settings the dialog shows are sent, and always in full: a cleared
+// limit is how the user removes one, so leaving the field out would keep the
+// old value instead. Models are sent as the form shows them: every model as
+// its own value, and the ticks otherwise, with the key's models the dialog
+// does not show. No tick is an empty list, which the backend stores as no
+// model, so a key limited to models it can no longer call, which shows none
+// ticked, is never widened.
 export const serializeKeySettings = (
   values: KeySettingsFormValues,
   limitComponents: KeyLimitComponent[],
-  models: string[],
-  modelsTouched = true,
+  models: string[] | null,
 ): Pick<
   PatchedResourceApiKeyUpdateRequest,
   'spending_limits' | 'allowed_models'
@@ -185,7 +217,11 @@ export const serializeKeySettings = (
         ),
       }
     : {}),
-  ...(models.length && modelsTouched
-    ? { allowed_models: values.allowed_models ?? [] }
+  ...(models
+    ? {
+        allowed_models: values.all_models
+          ? [ALL_MODELS]
+          : [...(values.allowed_models ?? []), ...(values.kept_models ?? [])],
+      }
     : {}),
 });

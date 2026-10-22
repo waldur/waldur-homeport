@@ -4,18 +4,22 @@ import { useEffectOnce } from 'react-use';
 import { usersRetrieve } from 'waldur-js-client';
 
 import { goToNotFound } from '@/error/utils';
-import { usePageHero } from '@/navigation/context';
+import { LayoutSlot } from '@/navigation/slots';
 import { useSetUser, useUser } from '@/workspace/hooks';
 
 import { UserProfileHero } from './dashboard/UserProfileHero';
 
 const WithHero = () => {
   const user = useUser();
-  const { state } = useCurrentStateAndParams();
 
-  usePageHero(<UserProfileHero user={user} isLoading={!user} />, [user, state]);
-
-  return <UIView />;
+  return (
+    <>
+      <LayoutSlot name="hero">
+        <UserProfileHero user={user} isLoading={!user} />
+      </LayoutSlot>
+      <UIView />
+    </>
+  );
 };
 
 export const UserDetailsPage: FunctionComponent = () => {

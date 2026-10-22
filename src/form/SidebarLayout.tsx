@@ -5,11 +5,17 @@ import { Card } from 'react-bootstrap';
 import { useBreakpointDown } from 'waldur-ui';
 
 import { useFullPage } from '@/navigation/context';
+import { PAGE_CONTAINER_XXL_CLASSNAME } from '@/navigation/pageContainer';
 
 import './SidebarLayout.scss';
 
 const Container: FC<PropsWithChildren> = (props) => (
-  <div className="v-stepper-form container-xxl flex flex-col xl:flex-row gap-5 pb-10">
+  <div
+    className={classNames(
+      PAGE_CONTAINER_XXL_CLASSNAME,
+      'v-stepper-form flex flex-col xl:flex-row gap-5 pb-10',
+    )}
+  >
     {props.children}
   </div>
 );
@@ -25,24 +31,29 @@ const Body: FC<PropsWithChildren<{ className? }>> = (props) => (
   </div>
 );
 
-// Sticks below the fixed header, page tabs and impersonation bar
-// (--layout-sticky-top, see layout/_sticky-top.scss).
+// Sticks below the sticky header, page tabs and impersonation bar
+// (--layout-sticky-top, measured by Layout in navigation/chromeHeights.ts).
 const stickyClassName = classNames(
   'sticky z-95',
   'h-[calc(100vh-var(--layout-sticky-top)-10px)]',
 );
 
+// Beside the form from xl: what the Metronic `.drawer` classes it borrowed
+// still applied under the sticky placement above (a flex box scrolling its
+// own overflow, pinned to the bottom and right edges).
+const sideColumnClassName = 'flex overflow-auto bottom-0 right-0';
+
 const cardClassName = classNames(
   stickyClassName,
   'top-(--layout-sticky-top)',
-  'in-[.toolbar-fixed]:h-[calc(100vh-var(--layout-sticky-top))]',
+  'in-[[data-page-tabs]]:h-[calc(100vh-var(--layout-sticky-top))]',
 );
 
 const transparentClassName = classNames(
   stickyClassName,
   'top-[calc(var(--layout-sticky-top)+10px)]',
-  'in-[.toolbar-fixed]:top-[calc(var(--layout-sticky-top)+20px)]',
-  'in-[.toolbar-fixed]:h-fit',
+  'in-[[data-page-tabs]]:top-[calc(var(--layout-sticky-top)+20px)]',
+  'in-[[data-page-tabs]]:h-fit',
 );
 
 const Sidebar: FC<
@@ -60,9 +71,7 @@ const Sidebar: FC<
       className={classNames(
         'v-stepper-form-sidebar',
         cardClassName,
-        isVMode
-          ? props.hideOnVertical && 'hidden'
-          : 'drawer drawer-end drawer-on',
+        isVMode ? props.hideOnVertical && 'hidden' : sideColumnClassName,
       )}
     >
       <Card className="card-bordered w-full">
@@ -81,9 +90,7 @@ const Sidebar: FC<
       className={classNames(
         'v-stepper-form-sidebar transparent',
         transparentClassName,
-        isVMode
-          ? props.hideOnVertical && 'hidden'
-          : 'drawer drawer-end drawer-on',
+        isVMode ? props.hideOnVertical && 'hidden' : sideColumnClassName,
       )}
     >
       <div className="w-full">
@@ -97,7 +104,8 @@ const Sidebar: FC<
 const Header: FC<PropsWithChildren<{ className?: string }>> = (props) => (
   <div
     className={classNames(
-      'container-xxl v-stepper-form-header',
+      PAGE_CONTAINER_XXL_CLASSNAME,
+      'v-stepper-form-header',
       props.className,
     )}
   >

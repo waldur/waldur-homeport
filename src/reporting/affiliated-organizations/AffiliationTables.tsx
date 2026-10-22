@@ -1,8 +1,9 @@
-import { FC, ReactNode, useMemo } from 'react';
+import { FC, ReactNode, useEffect, useMemo } from 'react';
 
 import { CountryFlagIcon } from '@/core/CountryFlagIcon';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -31,8 +32,12 @@ export const AffiliationReportTable: FC<{ rows: AffiliationRow[] }> = ({
 }) => {
   const tableProps = useTable<AffiliationRow>({
     table: 'AffiliationReportTable',
-    fetchData: () => Promise.resolve({ rows, resultCount: rows.length }),
+    fetchData: createClientPaginatedFetcher(rows),
   });
+  // The rows change with the report's filters: page through the new ones.
+  useEffect(() => {
+    tableProps.fetch();
+  }, [rows]);
 
   const columns = useMemo<Column<AffiliationRow>[]>(
     () => [
@@ -93,8 +98,12 @@ export const AffiliationCountryTable: FC<{ rows: AffiliationCountryRow[] }> = ({
 }) => {
   const tableProps = useTable<AffiliationCountryRow>({
     table: 'AffiliationCountryTable',
-    fetchData: () => Promise.resolve({ rows, resultCount: rows.length }),
+    fetchData: createClientPaginatedFetcher(rows),
   });
+  // The rows change with the report's filters: page through the new ones.
+  useEffect(() => {
+    tableProps.fetch();
+  }, [rows]);
 
   const columns = useMemo<Column<AffiliationCountryRow>[]>(
     () => [

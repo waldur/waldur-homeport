@@ -1,9 +1,9 @@
 import { CaretDownIcon, FunnelSimpleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Card, Stack } from 'react-bootstrap';
 import { Form, useForm } from 'react-final-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { BaseButton, Popover, PopoverContent, PopoverTrigger } from 'waldur-ui';
@@ -19,6 +19,7 @@ import { OrganizationAutocomplete } from '../orders/OrganizationAutocomplete';
 import { ProjectAutocomplete } from '../resources/list/ProjectAutocomplete';
 
 import { setMarketplaceFilter } from './filter/store/actions';
+import { getMarketplaceFilters } from './filter/store/selectors';
 
 import './MarketplaceLandingFilter.scss';
 
@@ -61,10 +62,28 @@ const LandingFilterFields = ({ values }) => {
   );
 };
 
-export const MarketplaceLandingFilter = () => {
+export const MarketplaceLandingFilter = ({
+  align = 'start',
+  size = 'md',
+}: {
+  /** The popover's edge lined up with the trigger's. */
+  align?: 'start' | 'end';
+  /** md in the tab row, as tall as a tab; sm in the 44px filter bar. */
+  size?: 'sm' | 'md';
+}) => {
   const user = useUser();
   const dispatch = useDispatch<any>();
   const [show, setShow] = useState(false);
+  // The form starts from the filters in the URL, and starts over when the
+  // applied filters change (applied, removed, cleared). Never undefined:
+  // final-form would take that as its values and then throw on the first
+  // change ("Cannot call setIn() with undefined state"), so after Clear
+  // filters nothing could be picked.
+  const filters = useSelector(getMarketplaceFilters);
+  const initialValues = useMemo<FormData>(
+    () => getInitialValues() ?? {},
+    [filters],
+  );
 
   const { syncResourceFilters } =
     useOrganizationAndProjectAutocompletesForResources();
@@ -93,7 +112,7 @@ export const MarketplaceLandingFilter = () => {
   return (
     <Form<FormData>
       onSubmit={apply}
-      initialValues={getInitialValues()}
+      initialValues={initialValues}
       render={({ handleSubmit, values }) => (
         <Popover open={show} onOpenChange={setShow}>
           <PopoverTrigger asChild>
@@ -101,13 +120,19 @@ export const MarketplaceLandingFilter = () => {
               type="button"
               id="marketplace-landing-filter-toggle"
               variant="tertiary"
+              size={size}
               className={classNames('text-nowrap', show && 'active')}
-              iconNode={<FunnelSimpleIcon size={20} weight="bold" />}
+              iconNode={
+                <FunnelSimpleIcon
+                  size={size === 'sm' ? 16 : 20}
+                  weight="bold"
+                />
+              }
               label={
                 <>
                   {translate('Organization')} & {translate('Project')}
                   <CaretDownIcon
-                    size={18}
+                    size={size === 'sm' ? 16 : 18}
                     className="rotate-toggle-180"
                     weight="bold"
                   />
@@ -116,7 +141,7 @@ export const MarketplaceLandingFilter = () => {
             />
           </PopoverTrigger>
           <PopoverContent
-            align="end"
+            align={align}
             sideOffset={2}
             // react-bootstrap's Dropdown.Menu auto-generated this pointing
             // at the Toggle's id; Radix has no equivalent auto-wiring, so
@@ -129,7 +154,7 @@ export const MarketplaceLandingFilter = () => {
             // stacks like the other dropdowns, and Metronic's dropdown
             // entrance (on Content so that Radix holds it back until the
             // panel is positioned, see waldur-design-tokens/animations.css).
-            className="z-dropdown-menu min-w-400px border-0 animate-[waldur-menu-enter-up_0.3s_ease] motion-reduce:animate-none"
+            className="z-dropdown-menu w-[min(400px,calc(100vw-30px))] border-0 animate-[waldur-menu-enter-up_0.3s_ease] motion-reduce:animate-none"
           >
             <Card className="text-base shadow-sm m-0">
               <Card.Body

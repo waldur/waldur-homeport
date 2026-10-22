@@ -1,7 +1,0 @@
-// Print Mode
-
-// The layout and core/components bundles each need this ruleset (see their
-// own @import sites), and it used to be duplicated verbatim between the two
-// — this file now just re-exports the single canonical copy so there is
-// only one place to edit.
-@import '../core/components/print-mode';

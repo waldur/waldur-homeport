@@ -100,6 +100,8 @@ export const RoundSelectTable: FC<RoundSelectTableProps> = ({
   return (
     <Table<SubmittableRound>
       {...tableProps}
+      // The open submission deadlines, few, shown whole.
+      hasPagination={false}
       columns={columns}
       verboseName={translate('submission deadlines')}
       hideTitle

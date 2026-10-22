@@ -1,7 +1,16 @@
-import { FC, PropsWithChildren } from 'react';
+import { forwardRef, PropsWithChildren } from 'react';
 
-export const OutstandingBar: FC<PropsWithChildren> = ({ children }) => {
-  // Above sticky page content (z-95) and one above the header, so anything
-  // opening down from the bar isn't hidden behind it.
-  return <div className="outstanding-bar z-101">{children}</div>;
-};
+export const OutstandingBar = forwardRef<HTMLDivElement, PropsWithChildren>(
+  ({ children }, ref) => (
+    // Sticks to the top of the page, above sticky page content (z-95) and
+    // one above the header, so anything opening down from the bar isn't
+    // hidden behind it.
+    <div
+      ref={ref}
+      className="sticky top-0 w-full h-[64px] shrink-0 z-101 print:hidden"
+    >
+      {children}
+    </div>
+  ),
+);
+OutstandingBar.displayName = 'OutstandingBar';

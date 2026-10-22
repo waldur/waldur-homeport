@@ -49,6 +49,8 @@ export const PosixGroupsTable = ({
   return (
     <Table
       {...tableProps}
+      // The endpoint sends the few entries whole.
+      hasPagination={false}
       columns={[
         {
           title: translate('GID'),
@@ -131,6 +133,8 @@ const PosixIdentifiersTable = ({
   return (
     <Table
       {...tableProps}
+      // The endpoint sends the few entries whole.
+      hasPagination={false}
       columns={[
         {
           title: translate('Identifier'),
@@ -322,6 +326,8 @@ export const OfferingUsersExpandableRow = ({
       )}
       <Table<QuestionWithAnswer>
         {...tableProps}
+        // The endpoint sends the few entries whole.
+        hasPagination={false}
         columns={[
           {
             title: translate('Question'),

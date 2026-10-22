@@ -279,7 +279,6 @@ const ModelPicker = ({ disabled }: { disabled?: boolean }) => (
     <ModelsField
       name="models"
       label="Allowed models"
-      description="The key can call only the models you tick."
       options={MODELS}
       disabled={disabled}
     />
@@ -291,7 +290,8 @@ export const CheckboxList: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const boxes = canvas.getAllByRole('checkbox');
-    await expect(boxes).toHaveLength(3);
+    // All models, then one per model.
+    await expect(boxes).toHaveLength(4);
     // `checkboxes` asks for 20px boxes, not 44px switch tracks.
     for (const box of boxes) {
       await expect(box.parentElement).toHaveClass('size-[20px]');
@@ -307,6 +307,21 @@ export const CheckboxList: Story = {
     ]);
     await userEvent.click(canvas.getByLabelText('claude-sonnet-5-5'));
     await expect(readValue(canvas).models).toEqual(['claude-opus-5-5']);
+  },
+};
+
+export const CheckboxListLockedByAllModels: Story = {
+  render: () => <ModelPicker />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByLabelText('All models'));
+    for (const model of MODELS) {
+      await expect(canvas.getByLabelText(model)).toBeDisabled();
+    }
+    // The ticks under it keep their state, to decide again once it is cleared.
+    await expect(readValue(canvas).models).toEqual(['claude-sonnet-5-5']);
+    await userEvent.click(canvas.getByLabelText('All models'));
+    await expect(canvas.getByLabelText('claude-opus-5-5')).toBeEnabled();
   },
 };
 

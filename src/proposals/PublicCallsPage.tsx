@@ -1,10 +1,12 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
+import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
 import { ENV } from '@/core/config';
 import { LandingHeroSection } from '@/dashboard/hero/LandingHeroSection';
 import { translate } from '@/i18n';
 import { useFullPage } from '@/navigation/context';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 
 import { PublicCallsList } from './PublicCallsList';
 
@@ -28,7 +30,7 @@ export const PublicCallsPage: FunctionComponent<PublicCallsPageProps> = ({
         context="calls"
       />
 
-      <div className="container-fluid mt-20 mb-10">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-20 mb-10')}>
         <PublicCallsList
           offering_uuid={offering_uuid}
           provider_uuid={provider_uuid}

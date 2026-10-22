@@ -5,6 +5,7 @@ import { PropsWithChildren, ReactNode } from 'react';
 import { FeaturedIcon } from 'waldur-ui';
 
 import '@/user/OfferingUsersWarningBar.scss';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 
 interface ResourceWarningBarProps extends PropsWithChildren {
   actions?: ReactNode;
@@ -22,7 +23,7 @@ export const ResourceWarningBar: React.FC<ResourceWarningBarProps> = ({
 
   return (
     <div className={classNames('resource-warning-bar', className)}>
-      <div className="container-fluid">
+      <div className={PAGE_CONTAINER_CLASSNAME}>
         <div className="flex justify-between items-center py-3">
           <div className="flex items-center">
             {IconComponent && (

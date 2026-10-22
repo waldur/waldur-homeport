@@ -37,7 +37,7 @@ const getRoleUuidForRow = (allValues: any, rowIndex: number): string | null => {
   return row?.role_project?.role?.uuid ?? null;
 };
 
-/** Duplicate (email + role) in form – only show error while the pair still appears more than once */
+/** Duplicate (email + role + project) in form – only show error while the pair still appears more than once */
 const duplicateInFormValidator = (
   value: string,
   allValues: any,
@@ -45,19 +45,30 @@ const duplicateInFormValidator = (
 ) => {
   if (!value) return undefined;
   const list = allValues?._duplicateInFormEmails as
-    Array<{ email: string; roleUuid: string }> | undefined;
+    | Array<{ email: string; roleUuid: string; projectUuid?: string }>
+    | undefined;
   if (!Array.isArray(list)) return undefined;
   const rowIndex = getRowIndexFromFieldName(fieldName);
   if (rowIndex == null) return undefined;
   const roleUuid = getRoleUuidForRow(allValues, rowIndex);
-  const wasFlagged = list.some(
-    (p) => p.email === value && p.roleUuid === roleUuid,
+  const projectUuid = allValues?.rows?.[rowIndex]?.role_project?.project?.uuid;
+  const flagged = list.find(
+    (p) =>
+      p.email === value &&
+      p.roleUuid === roleUuid &&
+      (!p.projectUuid || p.projectUuid === projectUuid),
   );
-  if (!wasFlagged) return undefined;
+  if (!flagged) return undefined;
   const rows = allValues?.rows ?? [];
   const count = rows.filter(
-    (row: { email?: string; role_project?: { role?: { uuid?: string } } }) =>
-      row?.email === value && row?.role_project?.role?.uuid === roleUuid,
+    (row: {
+      email?: string;
+      role_project?: { role?: { uuid?: string }; project?: { uuid?: string } };
+    }) =>
+      row?.email === value &&
+      row?.role_project?.role?.uuid === roleUuid &&
+      (!flagged.projectUuid ||
+        row?.role_project?.project?.uuid === projectUuid),
   ).length;
   if (count <= 1) return undefined;
   return translate(
@@ -121,10 +132,11 @@ const getFeedbackColSpan = () =>
  * is what gates Continue. Only this row's email and role and the verdict lists
  * are subscribed, so typing elsewhere does not re-render every row.
  */
-const RowFeedback = ({ name }: { name: string }) => {
+const RowFeedback = ({ name, rows }: { name: string; rows: any[] }) => {
   const useList = (listName: string) =>
     useField<RowVerdict[]>(listName, { subscription: { value: true } }).input
       .value;
+  const duplicateInForm = useList('_duplicateInFormEmails');
   const pending = useList('_duplicateEmails');
   const blocks = useList('_existingRoleBlocks') as ExistingRoleHit[] | '';
   const warnings = useList('_existingRoleWarnings') as ExistingRoleHit[] | '';
@@ -137,7 +149,16 @@ const RowFeedback = ({ name }: { name: string }) => {
   const row = { email, role_project: roleProject };
 
   let message: ReactNode = null;
-  if (findVerdictForRow(pending, row)) {
+  const inForm = findVerdictForRow(duplicateInForm, row);
+  if (inForm && rows.filter((r) => isVerdictForRow(inForm, r)).length > 1) {
+    message = (
+      <FieldError
+        error={translate(
+          'This email and role combination is entered more than once.',
+        )}
+      />
+    );
+  } else if (findVerdictForRow(pending, row)) {
     message = (
       <FieldError
         error={translate('This email already has a pending invitation.')}
@@ -405,7 +426,7 @@ export const EmailsListGroup = ({
                           />
                         </td>
                       </tr>
-                      <RowFeedback name={user} />
+                      <RowFeedback name={user} rows={fields.value} />
                     </Fragment>
                   );
                 })}

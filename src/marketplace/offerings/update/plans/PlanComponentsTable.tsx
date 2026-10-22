@@ -120,6 +120,8 @@ export const PlanComponentsTable: FC<OwnProps> = (props) => {
   return (
     <Table<EffectiveComponent>
       {...tableProps}
+      // A plan's few components, shown whole.
+      hasPagination={false}
       columns={columns}
       verboseName={translate('components')}
       hideTitle

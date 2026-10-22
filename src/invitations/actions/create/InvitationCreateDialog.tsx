@@ -53,21 +53,26 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
       const formValues = formApi.getState().values;
       const rows = formValues.rows ?? [];
 
-      // 1. In-form duplicates: (email + role) pairs that appear more than once – checked only on Continue
+      // 1. In-form duplicates: (email + role + project) that appear more than once – checked only on Continue
       const pairCounts = new Map<string, number>();
       rows.forEach((row: GroupInviteRow) => {
         const email = row?.email?.trim();
         const roleUuid = row?.role_project?.role?.uuid;
         if (email && roleUuid) {
-          const key = `${email}\0${roleUuid}`;
+          // A project role is a separate invitation in each project.
+          const projectUuid =
+            row.role_project.role.content_type === 'project'
+              ? (row.role_project.project?.uuid ?? '')
+              : '';
+          const key = `${email}\0${roleUuid}\0${projectUuid}`;
           pairCounts.set(key, (pairCounts.get(key) ?? 0) + 1);
         }
       });
       const duplicateInFormPairs = Array.from(pairCounts.entries())
         .filter(([, count]) => count > 1)
         .map(([key]) => {
-          const [email, roleUuid] = key.split('\0');
-          return { email, roleUuid };
+          const [email, roleUuid, projectUuid] = key.split('\0');
+          return { email, roleUuid, projectUuid };
         });
 
       if (duplicateInFormPairs.length > 0) {

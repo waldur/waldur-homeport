@@ -5,7 +5,6 @@ import { usersRetrieve } from 'waldur-js-client';
 
 import { IBreadcrumbItem, useBreadcrumbs } from 'waldur-ui';
 
-import { usePermissionView } from '@/auth/PermissionLayout';
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -13,7 +12,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures, UserFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { usePageHero } from '@/navigation/context';
+import { LayoutSlot } from '@/navigation/slots';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { router } from '@/router';
@@ -266,45 +265,38 @@ export const UserManageContainer = ({ isPersonal }) => {
 
   const { tabSpec } = usePageTabsTransmitter(tabs);
 
-  usePageHero(
-    <UserProfileHero
-      user={user}
-      isLoading={isLoading}
-      refetch={refetch}
-      error={error}
-    />,
-
-    [user, isLoading, refetch, error],
-  );
-
-  usePermissionView(() => {
-    // Not before ToS is accepted: the profile form is disabled until then.
-    if (
-      isPersonal &&
-      user?.agreement_date &&
-      profileCompleteness?.is_complete === false
-    ) {
-      return {
-        permission: 'custom',
-        banner: (
-          <CompleteYourProfileBanner blockedPageLabel={blockedPage?.label} />
-        ),
-      };
-    }
-    return null;
-  }, [isPersonal, user, profileCompleteness, blockedPage]);
-
-  if (isLoading) {
-    return <LoadingSpinner />;
-  } else if (error) {
-    return <LoadingErred loadData={refetch} />;
-  }
+  // Not before ToS is accepted: the profile form is disabled until then.
+  const askToCompleteProfile =
+    isPersonal &&
+    Boolean(user?.agreement_date) &&
+    profileCompleteness?.is_complete === false;
 
   return (
-    <UIView
-      render={(Component, { key, ...props }) => (
-        <Component key={key} {...props} tabSpec={tabSpec} user={user} />
+    <>
+      {askToCompleteProfile && (
+        <LayoutSlot name="announcements">
+          <CompleteYourProfileBanner blockedPageLabel={blockedPage?.label} />
+        </LayoutSlot>
       )}
-    />
+      <LayoutSlot name="hero">
+        <UserProfileHero
+          user={user}
+          isLoading={isLoading}
+          refetch={refetch}
+          error={error}
+        />
+      </LayoutSlot>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : error ? (
+        <LoadingErred loadData={refetch} />
+      ) : (
+        <UIView
+          render={(Component, { key, ...props }) => (
+            <Component key={key} {...props} tabSpec={tabSpec} user={user} />
+          )}
+        />
+      )}
+    </>
   );
 };

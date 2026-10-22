@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { formatPolicyComment, isPolicyComment } from './utils';
+import {
+  computeFieldDiffs,
+  formatPolicyComment,
+  isPolicyComment,
+} from './utils';
 
 describe('version-history utils', () => {
   describe('isPolicyComment', () => {
@@ -43,6 +47,27 @@ describe('version-history utils', () => {
     it('returns raw comment if not matching format', () => {
       expect(formatPolicyComment('Policy action: unknown format')).toBe(
         'Policy action: unknown format',
+      );
+    });
+  });
+
+  describe('computeFieldDiffs', () => {
+    it('labels cost policy fields and lists the changed ones first', () => {
+      const diffs = computeFieldDiffs(
+        'project_cost_policy',
+        { limit_cost: 100, period: 1, use_credit: true },
+        { limit_cost: 250, period: 1, use_credit: true },
+      );
+      expect(diffs[0]).toMatchObject({
+        field: 'limit_cost',
+        label: 'Cost threshold',
+        oldValue: 100,
+        newValue: 250,
+        changed: true,
+      });
+      expect(diffs.filter((diff) => diff.changed)).toHaveLength(1);
+      expect(diffs.map((diff) => diff.label)).toContain(
+        'Account for available credit',
       );
     });
   });

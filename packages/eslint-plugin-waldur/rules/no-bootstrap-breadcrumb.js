@@ -9,10 +9,6 @@
  * - a `breadcrumb`, `breadcrumb-container`, `breadcrumb-item`, `breadcrumb-item-static`,
  *   `breadcrumb-item-static-label`, `breadcrumb-text` or `breadcrumb-back` class token
  *   on any element, which now styles nothing.
- *
- * `breadcrumb-mobile` is allowed: it carries no styles of its own, and is the
- * hook layout/_toolbar.scss and _sticky-top.scss use to place the page tabs and
- * sticky elements below the phone breadcrumb bar (BreadcrumbMain).
  */
 
 import {

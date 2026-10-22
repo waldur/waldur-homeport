@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
 import { getIconUrl } from '@/core/api';
@@ -6,6 +7,7 @@ import { Link } from '@/core/Link';
 import { LandingHeroSection } from '@/dashboard/hero/LandingHeroSection';
 import { translate } from '@/i18n';
 import { useFullPage } from '@/navigation/context';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { CallsAvailableOfferingsList } from '@/proposals/CallsAvailableOfferingsList';
 import { CallsForProposalsList } from '@/proposals/CallsForProposalsList';
 import { useTheme } from '@/theme/useTheme';
@@ -45,10 +47,10 @@ export const CallsForProposals: FunctionComponent = () => {
           </Link>
         </div>
       </LandingHeroSection>
-      <div className="container-fluid my-14">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-14')}>
         <CallsForProposalsList />
       </div>
-      <div className="container-fluid my-14">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-14')}>
         <CallsAvailableOfferingsList />
       </div>
     </>

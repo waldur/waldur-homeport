@@ -1,4 +1,7 @@
+import classNames from 'classnames';
+
 import { Link } from '@/core/Link';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 
 import { Category, CategoryGroup } from '../types';
 
@@ -6,7 +9,12 @@ import './HeroSection.scss';
 
 export const HeroSection = ({ item }: { item: Category | CategoryGroup }) => (
   <div className="category-hero">
-    <div className="container-fluid flex items-center gap-4">
+    <div
+      className={classNames(
+        PAGE_CONTAINER_CLASSNAME,
+        'flex items-center gap-4',
+      )}
+    >
       {item.icon && (
         <img src={item.icon} alt="" className="category-hero-icon" />
       )}

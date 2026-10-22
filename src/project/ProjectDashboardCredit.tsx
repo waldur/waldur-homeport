@@ -7,7 +7,7 @@ import { DateTime } from 'luxon';
 import { Col } from 'react-bootstrap';
 import { Project } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { WarningTip } from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
 import { EChart } from '@/core/EChart';
@@ -15,6 +15,7 @@ import { defaultCurrency } from '@/core/formatCurrency';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { getCostPolicyWarning } from '@/customer/cost-policies/triggerStatus';
 import { COMMON_WIDGET_HEIGHT } from '@/dashboard/constants';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
@@ -43,6 +44,9 @@ export const ProjectDashboardCredit = ({
 }) => {
   const { credit, costPolicies, chart, options, error, isLoading, refetch } =
     useProjectCreditChart(project);
+  // From the policies' own evaluation, not from the stored credit balance,
+  // which only falls at the month-end billing run.
+  const policyWarning = getCostPolicyWarning(costPolicies);
 
   const { openDialog } = useModal();
   const viewDetails = () => {
@@ -87,24 +91,22 @@ export const ProjectDashboardCredit = ({
               })}
               : {defaultCurrency(credit.value)})
             </small>
-            {costPolicies?.some(
-              (p) =>
-                !p.has_fired &&
-                p.limit_cost > 0 &&
-                Number(credit.value) > 0 &&
-                Number(credit.value) <= p.limit_cost * 0.2,
-            ) && (
-              <Tooltip
-                label={translate(
-                  'Credit balance is low. A cost policy may trigger soon, affecting resources in this project.',
-                )}
-              >
-                <WarningOctagonIcon
-                  weight="bold"
+            {policyWarning && (
+              <span className="ms-2 inline-flex">
+                <WarningTip
+                  icon={WarningOctagonIcon}
                   size={16}
-                  className="text-warning ms-2"
+                  label={
+                    policyWarning === 'pending'
+                      ? translate(
+                          'A cost policy has reached its limit. Its actions run at the next evaluation.',
+                        )
+                      : translate(
+                          'Credit left is close to a cost policy limit. The policy may trigger soon, affecting resources in this project.',
+                        )
+                  }
                 />
-              </Tooltip>
+              </span>
             )}
           </>
         }

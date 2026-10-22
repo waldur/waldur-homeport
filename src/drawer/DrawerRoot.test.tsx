@@ -32,7 +32,7 @@ const DirtyDrawerContent = () => {
 
 /**
  * A menu and a popover, the two overlay shapes drawer content actually uses.
- * Both portal outside #kt_drawer, so they only work while Radix can see them
+ * Both portal outside the drawer panel, so they only work while Radix can see them
  * as layers nested inside the drawer's modal Dialog.
  */
 const OverlayDrawerContent = () => (
@@ -90,10 +90,17 @@ const renderDrawer = () => {
   };
 };
 
+const getDrawer = () =>
+  // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
+  document.querySelector('[data-slot="drawer"]');
+const getOverlay = () =>
+  // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
+  document.querySelector('[data-slot="drawer-overlay"]');
+
 /**
  * jsdom applies no stylesheets, so Presence sees no exit animation and drops
- * #kt_drawer the instant it closes. Report the slide-in/slide-out keyframes
- * _shell.scss gives it, read live off the class list the way a browser's
+ * the panel the instant it closes. Report the slide-in/slide-out keyframes
+ * its classes give it, read live off data-state the way a browser's
  * computed style is, so the drawer stays mounted through the slide-out.
  */
 const simulateSlideAnimations = () => {
@@ -102,13 +109,13 @@ const simulateSlideAnimations = () => {
     .spyOn(window, 'getComputedStyle')
     .mockImplementation((element, pseudo) => {
       const styles = getComputedStyle(element, pseudo);
-      if (element.id !== 'kt_drawer') return styles;
+      if (element.getAttribute('data-slot') !== 'drawer') return styles;
       return new Proxy(styles, {
         get: (target, key) =>
           key === 'animationName'
-            ? element.classList.contains('drawer-on')
-              ? 'kt-drawer-slide-in'
-              : 'kt-drawer-slide-out'
+            ? element.getAttribute('data-state') === 'open'
+              ? 'waldur-drawer-slide-in'
+              : 'waldur-drawer-slide-out'
             : Reflect.get(target, key),
       });
     });
@@ -117,7 +124,7 @@ const simulateSlideAnimations = () => {
 /**
  * The shape MatrixCallHost uses to keep a live call alive while it travels
  * between destinations: an element owned by a React tree outside the drawer,
- * appended into a slot inside it. Its DOM parent is #kt_drawer; its React
+ * appended into a slot inside it. Its DOM parent is the drawer panel; its React
  * parent is not.
  */
 const renderDrawerWithDockedPortal = () => {
@@ -153,10 +160,9 @@ describe('DrawerRoot', () => {
   it('is closed and not interactive before opening', () => {
     renderDrawer();
     expect(screen.queryByTestId('drawer-content')).not.toBeInTheDocument();
-    // Radix's Presence doesn't mount #kt_drawer at all until first opened
+    // Radix's Presence doesn't mount the drawer panel at all until first opened
     // (no forceMount — see DrawerRoot.tsx's comment on why).
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    expect(document.getElementById('kt_drawer')).not.toBeInTheDocument();
+    expect(getDrawer()).not.toBeInTheDocument();
   });
 
   it('opens with the given component, title, and an overlay', async () => {
@@ -165,10 +171,8 @@ describe('DrawerRoot', () => {
 
     expect(await screen.findByTestId('drawer-content')).toBeInTheDocument();
     expect(screen.getByText('Panel')).toBeInTheDocument();
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    expect(document.getElementById('kt_drawer')).toHaveClass('drawer-on');
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    expect(document.querySelector('.drawer-overlay')).toBeInTheDocument();
+    expect(getDrawer()).toHaveAttribute('data-state', 'open');
+    expect(getOverlay()).toBeInTheDocument();
   });
 
   it('closes via the header close button and removes the overlay', async () => {
@@ -181,13 +185,11 @@ describe('DrawerRoot', () => {
 
     await waitFor(() => {
       // jsdom applies no real CSS, so Presence sees no exit animation and
-      // unmounts #kt_drawer immediately rather than keeping it around
+      // unmounts the drawer panel immediately rather than keeping it around
       // through the (real-browser-only) slide-out.
-      // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-      expect(document.getElementById('kt_drawer')).not.toBeInTheDocument();
+      expect(getDrawer()).not.toBeInTheDocument();
     });
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    expect(document.querySelector('.drawer-overlay')).not.toBeInTheDocument();
+    expect(getOverlay()).not.toBeInTheDocument();
   });
 
   // The floating-card class is what keeps the drawer below the page header.
@@ -199,17 +201,13 @@ describe('DrawerRoot', () => {
     const { openShelled } = renderDrawer();
     openShelled();
     await screen.findByTestId('drawer-content');
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    expect(document.getElementById('kt_drawer')).toHaveClass(
-      'ai-chat-drawer-active',
-    );
+    expect(getDrawer()).toHaveAttribute('data-shell', 'ai-chat-drawer-active');
 
     await user.click(screen.getByRole('button', { name: 'Close' }));
 
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    const drawer = document.getElementById('kt_drawer');
-    expect(drawer).not.toHaveClass('drawer-on');
-    expect(drawer).toHaveClass('ai-chat-drawer-active');
+    const drawer = getDrawer();
+    expect(drawer).toHaveAttribute('data-state', 'closed');
+    expect(drawer).toHaveAttribute('data-shell', 'ai-chat-drawer-active');
     computedStyle.mockRestore();
   });
 
@@ -244,8 +242,7 @@ describe('DrawerRoot', () => {
     await user.click(screen.getByText('Support'));
 
     expect(onToggle).toHaveBeenCalled();
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    expect(document.getElementById('kt_drawer')).toHaveClass('drawer-on');
+    expect(getDrawer()).toHaveAttribute('data-state', 'open');
   });
 
   it('closes when the content calls the injected close prop', async () => {
@@ -272,8 +269,7 @@ describe('DrawerRoot', () => {
 
     expect(confirmSpy).toHaveBeenCalled();
     expect(screen.getByTestId('dirty-drawer-content')).toBeInTheDocument();
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    expect(document.getElementById('kt_drawer')).toHaveClass('drawer-on');
+    expect(getDrawer()).toHaveAttribute('data-state', 'open');
     confirmSpy.mockRestore();
   });
 
@@ -342,8 +338,7 @@ describe('DrawerRoot', () => {
       { value: 'm1.small', label: 'm1.small' },
       expect.anything(),
     );
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    expect(document.getElementById('kt_drawer')).toHaveClass('drawer-on');
+    expect(getDrawer()).toHaveAttribute('data-state', 'open');
   });
 
   // Radix decides a pointerdown is "inside" via an onPointerDownCapture on the
@@ -359,8 +354,7 @@ describe('DrawerRoot', () => {
 
     await user.click(screen.getByRole('button', { name: 'Toggle microphone' }));
 
-    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-    expect(document.getElementById('kt_drawer')).toHaveClass('drawer-on');
+    expect(getDrawer()).toHaveAttribute('data-state', 'open');
   });
 
   it('does not overwrite an active open drawer when renderDrawer is called with another component', async () => {

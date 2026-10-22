@@ -6,6 +6,7 @@ const h = vi.hoisted(() => ({
   matrixChatEnabled: true,
   hasSupport: true,
   totalUnread: 0,
+  drawerExpanded: false,
 }));
 
 vi.mock('@/matrix/utils', () => ({
@@ -28,6 +29,9 @@ vi.mock('@/navigation/header/quick-issue-drawer/QuickIssueContainer', () => ({
   QuickIssueContainer: () => <div data-testid="quick-issue-container" />,
 }));
 
+vi.mock('@/drawer/useDrawerExpanded', () => ({
+  useDrawerExpanded: () => h.drawerExpanded,
+}));
 vi.mock('./HelpdeskExpanded', () => ({
   HelpdeskExpanded: () => <div data-testid="helpdesk-expanded" />,
 }));
@@ -42,21 +46,13 @@ beforeEach(() => {
   h.matrixChatEnabled = true;
   h.hasSupport = true;
   h.totalUnread = 0;
+  h.drawerExpanded = false;
   resetSupportDrawerPreferences();
 });
 
 afterEach(() => {
   resetSupportDrawerPreferences();
-  // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-  document.getElementById('kt_drawer')?.remove();
 });
-
-const mountDrawerEl = (expanded: boolean) => {
-  const el = document.createElement('div');
-  el.id = 'kt_drawer';
-  if (expanded) el.dataset.expanded = 'true';
-  document.body.appendChild(el);
-};
 
 describe('SupportDrawer', () => {
   it('hides the Team chat tab when matrix chat is disabled', () => {
@@ -95,7 +91,7 @@ describe('SupportDrawer', () => {
   });
 
   it('lets the user switch to Helpdesk after a room deep-link opened on Team chat', async () => {
-    mountDrawerEl(false);
+    h.drawerExpanded = false;
     h.matrixChatEnabled = true;
     h.hasSupport = true;
 
@@ -122,7 +118,7 @@ describe('SupportDrawer', () => {
   });
 
   it('renders the compact issue list on the Helpdesk tab when the drawer is not expanded', () => {
-    mountDrawerEl(false);
+    h.drawerExpanded = false;
     h.matrixChatEnabled = false;
     h.hasSupport = true;
 
@@ -133,7 +129,7 @@ describe('SupportDrawer', () => {
   });
 
   it('renders the two-pane Helpdesk when the drawer is expanded', () => {
-    mountDrawerEl(true);
+    h.drawerExpanded = true;
     h.matrixChatEnabled = false;
     h.hasSupport = true;
 

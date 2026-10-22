@@ -1,6 +1,6 @@
+import { translate } from 'waldur-i18n-runtime';
 import { Tooltip } from 'waldur-ui';
 
-import { translate } from '@/i18n/translate';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { ExportData } from '@/table/exporters/types';
 import { Column } from '@/table/types';

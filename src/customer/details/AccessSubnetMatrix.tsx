@@ -300,7 +300,7 @@ export const AccessSubnetMatrix: FC<AccessSubnetMatrixProps> = ({
         tableActions={
           <>
             <FilteredEventsButton
-              filter={{ customer_uuid, feature: 'access_subnets' }}
+              filter={{ scope: customer.url, feature: 'access_subnets' }}
             />
             <AccessSubnetTableActions
               customerUrl={customer.url}

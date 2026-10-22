@@ -5,6 +5,7 @@ import { formatDate, formatTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { translate } from '@/i18n';
+import { isAllModels } from '@/marketplace/common/modelSelection';
 
 // OpenStack tenant/instance selectors submit the backend_id string (or an
 // array of them). Legacy records may still hold the full option object, so
@@ -19,7 +20,14 @@ const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   text: (value) => value,
   string: (value) => value,
   select_string: (value) => value,
-  select_string_multi: (value) => value.join(', '),
+  // A lone * is only ever valid in a resource's model selection; an empty
+  // selection there is no model, not a missing value.
+  select_string_multi: (value) =>
+    isAllModels(value)
+      ? translate('All models')
+      : value.length
+        ? value.join(', ')
+        : translate('None'),
   select_openstack_tenant: (value) => toBackendId(value),
   select_openstack_instance: (value) => toBackendId(value),
   select_multiple_openstack_tenants: (value) =>

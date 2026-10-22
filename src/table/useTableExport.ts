@@ -2,10 +2,11 @@ import { isEqual } from 'lodash-es';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
+import { translate } from 'waldur-i18n-runtime';
+import { useNotify } from 'waldur-notifications';
+import { useModal } from 'waldur-ui';
+
 import { isEmpty, orderByFilter } from '@/core/utils';
-import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
-import { useNotify } from '@/store/notify';
 import { type RootState } from '@/store/reducers';
 import { fetchAll } from '@/table/api';
 

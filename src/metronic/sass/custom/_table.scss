@@ -472,7 +472,7 @@
 }
 
 // Sidebar filters (TableFilterContainer.tsx in the filter drawer)
-.drawer .filter-container {
+[data-slot='drawer'] .filter-container {
   white-space: normal;
 
   .filter-field {
@@ -481,7 +481,8 @@
 }
 
 // Mobile mode
-$mobile-spacing: get($content-spacing, tablet-and-mobile);
+// The page's side padding below lg (the page container's 15px).
+$mobile-spacing: 15px;
 @include media-breakpoint-down(sm) {
   .card.card-table.full-width {
     margin-left: -$mobile-spacing;

@@ -25,9 +25,6 @@ vi.mock('react-redux', async (importOriginal) => ({
 
 vi.mock('@/navigation/context', () => ({
   useBreadcrumbs: vi.fn(),
-  usePageHero: vi.fn(),
-  useToolbarActions: vi.fn(),
-  useExtraAnnouncementBar: vi.fn(),
 }));
 
 vi.mock('@/navigation/header/breadcrumb/utils', () => ({
