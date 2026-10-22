@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  getComponentReadings,
   getComponentUsage,
   getHeadlineUsage,
   getMeterVariant,
@@ -268,6 +269,32 @@ describe('limits on periods other than the month', () => {
       ratio: 80,
     });
     expect(getReadingLabel(readings[0])).toBe('Token cost · Daily limit');
+  });
+
+  // Next to "· Daily limit", a bare month line would not say what it limits.
+  it('labels the month reading as the monthly limit', () => {
+    const [month] = getComponentReadings(
+      row({ limits: { token_cost: 50 }, current_usages: { token_cost: 4 } }),
+      TOKEN_COST,
+      {},
+    );
+    expect(getReadingLabel(month)).toBe('Token cost · Monthly limit');
+    // An inherited limit is the resource's month limit.
+    const [inherited] = getComponentReadings(
+      row({ current_usages: { token_cost: 4 } }),
+      TOKEN_COST,
+      { token_cost: 80 },
+    );
+    expect(getReadingLabel(inherited)).toBe('Token cost · Monthly limit');
+  });
+
+  it('labels usage with no month limit by its component alone', () => {
+    const [month] = getComponentReadings(
+      row({ current_usages: { token_cost: 4 } }),
+      TOKEN_COST,
+      {},
+    );
+    expect(getReadingLabel(month)).toBe('Token cost');
   });
 
   it('heads the list with the limit closest to being reached', () => {

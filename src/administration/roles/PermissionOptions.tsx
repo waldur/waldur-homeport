@@ -121,7 +121,9 @@ export const PermissionOptions = [
         value: 'RESOURCE.MANAGE_API_KEY',
       },
       {
-        label: translate('Manage consumer api key for resource'),
+        label: translate(
+          'Manage API keys of resources used by the project or organization',
+        ),
         value: 'RESOURCE.MANAGE_CONSUMER_API_KEY',
       },
       {

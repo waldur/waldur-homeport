@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  getAtLimitReason,
   getErredTooltip,
   getFailedCommand,
   getKeyStateVariant,
   getResourcePause,
+  getResourcePauseDetails,
   getStateLabel,
   getStateTooltip,
   isKeyAssignee,
@@ -107,6 +109,67 @@ describe('a key paused at its limit', () => {
   });
 });
 
+describe('getAtLimitReason', () => {
+  const status = (period: string, reached: boolean, resets_at: string) => ({
+    component_type: 'tokens',
+    period,
+    limit: 10,
+    used: reached ? 10 : 1,
+    resets_at,
+    reached,
+  });
+
+  it('is nothing while every limit is under', () => {
+    expect(
+      getAtLimitReason(
+        row({
+          spending_limit_status: [
+            status('day', false, '2026-10-23T00:00:00Z'),
+            status('month', false, '2026-11-01T00:00:00Z'),
+          ],
+        }),
+      ),
+    ).toBeUndefined();
+    expect(getAtLimitReason(row({ spending_limit_status: null }))).toBe(
+      undefined,
+    );
+  });
+
+  // The backend refuses the assignee's rotation on any reached limit, not
+  // only the month's.
+  it.each([
+    ['day', 'daily'],
+    ['week', 'weekly'],
+    ['month', 'monthly'],
+    ['quarter', 'quarterly'],
+    ['year', 'yearly'],
+  ])('names a reached %s limit', (period, adjective) => {
+    expect(
+      getAtLimitReason(
+        row({
+          spending_limit_status: [status(period, true, '2026-11-01T00:00:00Z')],
+        }),
+      ),
+    ).toBe(
+      `This key has reached its ${adjective} limit. A manager can rotate it.`,
+    );
+  });
+
+  it('names the reached limit that holds the key longest', () => {
+    expect(
+      getAtLimitReason(
+        row({
+          spending_limit_status: [
+            status('day', true, '2026-10-23T00:00:00Z'),
+            status('week', true, '2026-10-26T00:00:00Z'),
+            status('month', false, '2026-11-01T00:00:00Z'),
+          ],
+        }),
+      ),
+    ).toBe('This key has reached its weekly limit. A manager can rotate it.');
+  });
+});
+
 describe('getResourcePause', () => {
   it('is nothing on a resource that is not paused', () => {
     expect(
@@ -124,6 +187,53 @@ describe('getResourcePause', () => {
     expect(
       getResourcePause({ paused: true, usage_limit_restriction: '' }),
     ).toBe('other');
+  });
+});
+
+describe('getResourcePauseDetails', () => {
+  const resource = (overrides: Record<string, unknown> = {}) =>
+    ({
+      usage_limit_restriction: 'paused',
+      offering_components: [{ type: 'tokens', name: 'Tokens' }],
+      spending_limit_status: [
+        { component_type: 'tokens', period: 'day', reached: false },
+        { component_type: 'tokens', period: 'month', reached: true },
+      ],
+      usage_limit_resumes_at: null,
+      ...overrides,
+    }) as any;
+
+  // As the Usage tab does: which limit holds the resource, and until when.
+  it('names the reached limit and when access resumes', () => {
+    const resumesAt = new Date(Date.now() + 3 * 86400_000).toISOString();
+    const details = getResourcePauseDetails(
+      'limit',
+      resource({ usage_limit_resumes_at: resumesAt }),
+    );
+    expect(details).toMatch(/^Held by: Tokens — Monthly limit\. /);
+    expect(details).not.toMatch(/Daily limit/);
+    expect(details).toMatch(/Access resumes .+, on .+\.$/);
+  });
+
+  it('says access resumes once under every limit when no time is known', () => {
+    expect(getResourcePauseDetails('limit', resource())).toBe(
+      'Held by: Tokens — Monthly limit. Access resumes once usage is under every limit of the resource again.',
+    );
+  });
+
+  it('falls back to the general message without a reached limit', () => {
+    expect(
+      getResourcePauseDetails(
+        'limit',
+        resource({ spending_limit_status: null }),
+      ),
+    ).toMatch(/usage reached its limit/);
+  });
+
+  it('says the resource must be unpaused when paused for another reason', () => {
+    expect(getResourcePauseDetails('other', resource())).toBe(
+      'It resumes once the resource is unpaused.',
+    );
   });
 });
 
