@@ -22,8 +22,12 @@ vi.mock('@/table/Table', () => ({
   },
 }));
 
+const eventsButtonSpy = vi.fn();
 vi.mock('@/events/FilteredEventsButton', () => ({
-  FilteredEventsButton: () => null,
+  FilteredEventsButton: (props: any) => {
+    eventsButtonSpy(props);
+    return null;
+  },
 }));
 
 vi.mock('./ProjectCreateCreditButton', () => ({
@@ -54,7 +58,11 @@ describe('ProjectCreditsList', () => {
       },
     ] as any;
     tableSpy.mockClear();
-    vi.mocked(useCustomer).mockReturnValue({ uuid: 'acme' } as any);
+    eventsButtonSpy.mockClear();
+    vi.mocked(useCustomer).mockReturnValue({
+      uuid: 'acme',
+      url: 'https://example.org/api/customers/acme/',
+    } as any);
   });
 
   afterEach(() => {
@@ -80,5 +88,15 @@ describe('ProjectCreditsList', () => {
     expect(tableSpy.mock.lastCall[0].rowActions).toBe(
       ProjectCreditReadOnlyActions,
     );
+  });
+
+  it('reads the history log through the organization scope', () => {
+    // Without a scope the events API lists nothing to anyone but staff.
+    vi.mocked(useUser).mockReturnValue(withRole('CUSTOMER.OWNER') as any);
+    render(<ProjectCreditsList />);
+    expect(eventsButtonSpy.mock.lastCall[0].filter).toEqual({
+      feature: 'credits',
+      scope: 'https://example.org/api/customers/acme/',
+    });
   });
 });
