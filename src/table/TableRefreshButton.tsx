@@ -1,9 +1,9 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
+import { translate } from 'waldur-i18n-runtime';
 import { BaseButton } from 'waldur-ui';
 
-import { translate } from '@/i18n';
 import { Sorting } from '@/table/types';
 
 export const LoadingSpinner: FunctionComponent = () => (

@@ -9,6 +9,7 @@ import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 
 import {
   AssigneeOption,
+  getKeyLimitFieldComponents,
   getKeySettingsFields,
   KeySettingsFormValues,
   serializeKeySettings,
@@ -33,6 +34,10 @@ export const RequestApiKeyDialog: FC<{
   };
 }> = ({ resolve: { resource, components, models, refetch } }) => {
   const assigneeField = useAssigneeField(resource);
+  const limitComponents = useMemo(
+    () => getKeyLimitFieldComponents(resource, components),
+    [resource, components],
+  );
 
   const mutation = useManagedMutation<any, any, RequestApiKeyFormValues>({
     mutationFn: (values) =>
@@ -45,7 +50,7 @@ export const RequestApiKeyDialog: FC<{
           // Without a model list there is no Models field to choose in, and
           // a key requested with no models could call nothing.
           ...(models ? {} : { allowed_models: [ALL_MODELS] }),
-          ...serializeKeySettings(values, components, models),
+          ...serializeKeySettings(values, limitComponents, models),
         },
       }),
     successMessage: translate('API key requested'),

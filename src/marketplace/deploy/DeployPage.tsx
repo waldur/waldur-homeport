@@ -32,6 +32,7 @@ import { NavigationBlocker } from '@/form/NavigationBlocker';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { splitOptionErrors } from '@/marketplace/common/optionErrors';
+import { getDefaultSpendingLimits } from '@/marketplace/common/spendingLimits';
 import { useModal } from '@/modal/actions';
 import { INSTANCE_TYPE } from '@/openstack/constants';
 import { calculateSystemVolumeSize } from '@/openstack/openstack-instance/utils';
@@ -446,6 +447,13 @@ export const DeployPage: FC<DeployPageProps> = (props) => {
       }
       if (props.plan) {
         values.plan = props.plan;
+      }
+      // The order form starts from the provider's spending limit defaults.
+      const spendingLimits = getDefaultSpendingLimits(
+        props.offering?.components || [],
+      );
+      if (Object.keys(spendingLimits).length > 0) {
+        values.spending_limits = spendingLimits;
       }
 
       setInitialValues(values);

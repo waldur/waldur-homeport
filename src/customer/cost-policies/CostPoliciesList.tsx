@@ -10,7 +10,6 @@ import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { ProjectLink } from '@/project/ProjectLink';
 import { createFetcher } from '@/table/api';
-import { BooleanField } from '@/table/BooleanField';
 import Table from '@/table/Table';
 import { TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -19,11 +18,12 @@ import { useCustomer } from '@/workspace/hooks';
 
 import { CostPolicyActions } from './CostPolicyActions';
 import { CostPolicyCreateButton } from './CostPolicyCreateButton';
+import { CostPolicyTriggerCell } from './CostPolicyTriggerCell';
 import { getCostPolicyActionOptions, policyPeriodOptions } from './utils';
 
 interface CostPoliciesListTableProps extends Partial<TableProps> {
   table: string;
-  hideColumns?: ('project' | 'price_estimate')[];
+  hideColumns?: ('project' | 'current_cost')[];
 }
 
 export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
@@ -84,8 +84,7 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
             </>
           ),
           render: ({ row }) => (
-            <div className="flex items-center gap-2">
-              <BooleanField value={row.has_fired} />
+            <CostPolicyTriggerCell row={row}>
               {row.has_fired && row.affected_resources_count > 0 && (
                 <span className="text-quaternary text-xs">
                   {translate('{count} resources', {
@@ -93,7 +92,7 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
                   })}
                 </span>
               )}
-            </div>
+            </CostPolicyTriggerCell>
           ),
         },
         {
@@ -132,14 +131,24 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
           title: translate('Cost threshold'),
           render: ({ row }) => <>{defaultCurrency(row.limit_cost)}</>,
         },
-        !hideColumns.includes('price_estimate') && {
-          title: translate('Project estimated cost'),
+        !hideColumns.includes('current_cost') && {
+          title: (
+            <>
+              {translate('Current cost')}{' '}
+              <HelpIcon
+                label={translate(
+                  'The cost this policy compares with its threshold: the cost in the policy period, less what credit pays.',
+                )}
+                size={18}
+              />
+            </>
+          ),
           render: ({ row }) => (
             <>
-              {defaultCurrency(
-                (row.billing_price_estimate &&
-                  row.billing_price_estimate.current) ||
-                  0,
+              {renderFieldOrDash(
+                row.current_cost !== null && row.current_cost !== undefined
+                  ? defaultCurrency(row.current_cost)
+                  : null,
               )}
             </>
           ),

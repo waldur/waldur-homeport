@@ -234,7 +234,9 @@ export const getResourceTabs = ({
       key: 'usage-history',
       title: translate('Usage'),
       component: lazyComponent(() =>
-        import('./UsageCard').then((module) => ({ default: module.UsageCard })),
+        import('./ResourceUsageTab').then((module) => ({
+          default: module.ResourceUsageTab,
+        })),
       ),
     });
   }

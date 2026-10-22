@@ -1,8 +1,7 @@
 import { FunctionComponent } from 'react';
 
+import { translate } from 'waldur-i18n-runtime';
 import { Badge } from 'waldur-ui';
-
-import { translate } from '@/i18n';
 
 interface BooleanFieldProps {
   value: boolean;

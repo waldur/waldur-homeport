@@ -4,6 +4,7 @@ import { translate } from '@/i18n';
 import { OrderSummaryButton } from '@/marketplace/details/OrderSummaryButton';
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
 import { PlanSelectField } from '@/marketplace/details/plan/PlanSelectField';
+import { PlanSpendingLimits } from '@/marketplace/details/plan/PlanSpendingLimits';
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
 import { getOrderablePlans } from '@/marketplace/offerings/details/planPricing';
 import { VStepperFormStepCard } from '@/wizard';
@@ -52,6 +53,7 @@ export const FormPlanStep = (props: FormStepProps) => {
         concealBillingInfo={concealBillingInfo}
         readOnlyLimits={props.params?.readOnlyLimits}
       />
+      <PlanSpendingLimits offering={props.offering} />
     </VStepperFormStepCard>
   );
 };

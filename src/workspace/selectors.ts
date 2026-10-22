@@ -50,7 +50,7 @@ export const isStaffOrSupportOrImpersonating = (state: RootState): boolean =>
  * names the role it was copied from. Mastermind resolves clones the same way
  * (`has_user`), so a clone of the owner is an owner there too.
  */
-export const isRoleOrClone = (roleName: string, systemRole: string): boolean =>
+const isRoleOrClone = (roleName: string, systemRole: string): boolean =>
   roleName === systemRole ||
   ENV.roles?.find(({ name }) => name === roleName)?.template_name ===
     systemRole;

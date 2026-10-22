@@ -1,1 +1,1 @@
-export { saveFile } from '@/core/saveFile';
+export { saveFile } from 'waldur-ui';

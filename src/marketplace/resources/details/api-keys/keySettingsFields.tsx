@@ -3,6 +3,7 @@ import { Field, useField } from 'react-final-form';
 import {
   PatchedResourceApiKeyUpdateRequest,
   Resource,
+  ResourceApiKeyStatus,
   User,
   usersList,
 } from 'waldur-js-client';
@@ -15,8 +16,14 @@ import { createLoadOptions } from '@/form/select';
 import { SelectMultiBooleanGroup } from '@/form/SelectMultiBooleanGroup';
 import { translate } from '@/i18n';
 import { ALL_MODELS } from '@/marketplace/common/modelSelection';
+import { SpendingLimitFields } from '@/marketplace/common/SpendingLimitFields';
+import { SpendingLimitFormValues } from '@/marketplace/common/spendingLimits';
 
-import { componentLabel } from './keyLimits';
+import {
+  formatKeySpendingLimits,
+  getKeyLimitComponents,
+  KeyLimitComponent,
+} from './keySpendingLimits';
 import { KeyComponent } from './types';
 
 // The All models tick is a form value of its own, so the individual ticks
@@ -61,6 +68,23 @@ export const ModelsField: FC<{
   );
 };
 
+const KeyLimitsField: FC<{
+  label: string;
+  components: KeyLimitComponent[];
+  description?: string;
+  space?: number;
+  disabled?: boolean;
+}> = ({ label, components, description, space, disabled }) => (
+  <FormGroup label={label} description={description} space={space}>
+    <SpendingLimitFields
+      components={components}
+      name="spending_limits"
+      disabled={disabled}
+      positive
+    />
+  </FormGroup>
+);
+
 export type AssigneeOption = Pick<User, 'uuid' | 'full_name'> &
   Partial<Pick<User, 'email'>>;
 
@@ -91,12 +115,19 @@ export const useAssigneeField = (resource: Resource) =>
   );
 
 interface KeySettingsFieldsOptions {
-  // The key's own limits: one set before the resource limit was lowered below
-  // it stays valid, so the form still saves without the user touching it.
-  currentLimits?: Record<string, number> | null;
+  // The key's own limits: one set before the provider or the resource moved
+  // stays valid, so the form still saves without the user touching it.
+  currentLimits?: ResourceApiKeyStatus['spending_limits'];
   // Shown but locked when only the assignee may change.
   disabledReason?: string;
 }
+
+/** The components the key dialogs show limit fields for, with the key's maximum per period. */
+export const getKeyLimitFieldComponents = (
+  resource: Resource,
+  components: KeyComponent[],
+  currentLimits?: ResourceApiKeyStatus['spending_limits'],
+) => getKeyLimitComponents(components, resource.spending_limits, currentLimits);
 
 // Limits and models shared by the request and edit dialogs. An empty limit
 // inherits the resource's; no model ticked means no model. ``models`` are the
@@ -108,33 +139,33 @@ export const getKeySettingsFields = (
   models: string[] | null,
   { currentLimits, disabledReason }: KeySettingsFieldsOptions = {},
 ) => {
-  const limits = (resource.limits ?? {}) as Record<string, number>;
   const locked = {
     disabled: Boolean(disabledReason),
     disabled_tooltip: disabledReason,
   };
+  const limitComponents = getKeyLimitFieldComponents(
+    resource,
+    components,
+    currentLimits,
+  );
   return [
-    ...components.map((component) => {
-      // Zero means "no limit", so it must not become the field's maximum.
-      const resourceLimit = limits[component.type] || undefined;
-      const currentLimit = currentLimits?.[component.type] || undefined;
-      return {
-        name: `limits.${component.type}`,
-        label: componentLabel(component),
-        type: 'integer',
-        unit: component.measured_unit,
-        minValue: 0,
-        maxValue:
-          resourceLimit && currentLimit
-            ? Math.max(resourceLimit, currentLimit)
-            : resourceLimit,
-        help_text: resourceLimit
-          ? translate('Resource limit: {value}', { value: resourceLimit })
-          : undefined,
-        space: 5,
-        ...locked,
-      };
-    }),
+    ...(limitComponents.length
+      ? [
+          {
+            name: 'spending_limits',
+            component: KeyLimitsField,
+            extraProps: {
+              label: translate('Limits'),
+              components: limitComponents,
+              description: translate(
+                "Each limit pauses this key alone once reached, and may not exceed the resource's limit for the same period. Clear a field to remove that limit.",
+              ),
+            },
+            space: 5,
+            ...locked,
+          },
+        ]
+      : []),
     ...(models
       ? [
           {
@@ -153,7 +184,7 @@ export const getKeySettingsFields = (
 };
 
 export interface KeySettingsFormValues {
-  limits?: Record<string, number | string | null>;
+  spending_limits?: SpendingLimitFormValues;
   all_models?: boolean;
   // The individual ticks; they count only while all_models is off.
   allowed_models?: string[];
@@ -172,17 +203,17 @@ export interface KeySettingsFormValues {
 // ticked, is never widened.
 export const serializeKeySettings = (
   values: KeySettingsFormValues,
-  components: KeyComponent[],
+  limitComponents: KeyLimitComponent[],
   models: string[] | null,
-): Pick<PatchedResourceApiKeyUpdateRequest, 'limits' | 'allowed_models'> => ({
-  ...(components.length
+): Pick<
+  PatchedResourceApiKeyUpdateRequest,
+  'spending_limits' | 'allowed_models'
+> => ({
+  ...(limitComponents.length
     ? {
-        limits: Object.fromEntries(
-          components
-            .map(({ type }) => [type, values.limits?.[type]] as const)
-            .filter(([, value]) => value !== undefined && value !== null)
-            .filter(([, value]) => value !== '')
-            .map(([type, value]) => [type, Number(value)]),
+        spending_limits: formatKeySpendingLimits(
+          values.spending_limits,
+          limitComponents,
         ),
       }
     : {}),

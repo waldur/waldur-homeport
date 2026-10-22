@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { translate } from '@/i18n';
 import { getBillingTypes } from '@/marketplace/common/billingTypes';
 import { getFormLimitParser } from '@/marketplace/common/registry';
+import { parseComponentSpendingLimitPeriods } from '@/marketplace/common/spendingLimits';
 
 import { getLimitPeriods } from './components/ComponentLimitPeriodField';
 
@@ -28,6 +29,11 @@ export const parseComponent = (component, offering) => {
     limit_amount: limitParser({ [component.type]: component.limit_amount })[
       component.type
     ],
+    spending_limits_enabled:
+      Object.keys(component.spending_limit_periods || {}).length > 0,
+    spending_limit_periods: parseComponentSpendingLimitPeriods(
+      component.spending_limit_periods,
+    ),
   };
 };
 

@@ -17,7 +17,8 @@ import { getReportingOrganizations, ReportingOrganization } from './access';
  * `organization_uuid` param of the `reporting` state, so it survives
  * navigation between the landing page and the reports, and links are
  * shareable. Staff and support may pick any organization; everyone else only
- * one they own, and it is preselected when there is just one.
+ * one where they may view reports, and it is preselected when there is just
+ * one.
  */
 export const useReportingOrganization = () => {
   const user = useUser();

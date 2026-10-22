@@ -45,7 +45,7 @@ export const ReportingTitle: FC<ReportingTitleProps> = ({
   }
 
   const { report } = result;
-  // Owners see the report scoped to one organization.
+  // Non-staff users see the report scoped to one organization.
   const description = isStaff
     ? report.description
     : report.scopedDescription || report.description;

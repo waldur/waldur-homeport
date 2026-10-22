@@ -2412,6 +2412,17 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('MCP server'),
+    items: [
+      {
+        key: 'MCP_ENABLED',
+        description: translate('Serve the remote MCP endpoint (/mcp) from the `waldur mcp_server` process, so AI agent clients can act as the signed-in user.'),
+        default: false,
+        type: 'boolean',
+      },
+    ],
+  },
+  {
     description: translate('Site Agent Logs'),
     items: [
       {

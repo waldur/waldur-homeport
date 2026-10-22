@@ -2,11 +2,11 @@ import createDecorator from 'final-form-calculate';
 import { useMemo } from 'react';
 import { Form } from 'react-final-form';
 
+import { translate } from 'waldur-i18n-runtime';
 import { HelpIcon } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { SubmitButton, SelectGroup, BooleanGroup, RadioGroup } from '@/form';
-import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 

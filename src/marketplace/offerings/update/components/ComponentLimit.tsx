@@ -7,14 +7,14 @@ import { ComponentAccountingTypeWrapper } from './ComponentAccountingTypeWrapper
 import { ComponentBooleanDefaultLimitField } from './ComponentBooleanDefaultLimitField';
 import { ComponentBooleanLimitField } from './ComponentBooleanLimitField';
 import { ComponentDecimalPlacesField } from './ComponentDecimalPlacesField';
-import { ComponentLimitAmountField } from './ComponentLimitAmountField';
-import { ComponentLimitEnableField } from './ComponentLimitEnableField';
+import { ComponentLegacyUsageLimit } from './ComponentLegacyUsageLimit';
 import {
   ComponentLimitPeriodField,
   LimitPeriodOption,
 } from './ComponentLimitPeriodField';
 import { ComponentMaxValueField } from './ComponentMaxValueField';
 import { ComponentMinValueField } from './ComponentMinValueField';
+import { ComponentSpendingLimitPeriodsField } from './ComponentSpendingLimitPeriodsField';
 
 interface Values {
   billing_type?: {
@@ -73,30 +73,20 @@ export const ComponentLimit: FC<{
       );
     }
   } else if (billingType == 'usage') {
-    if (typeof values.limit_amount === 'number') {
-      return (
-        <ComponentAccountingTypeWrapper>
-          <ComponentLimitEnableField />
-          <Row className="g-5">
-            <Col xs={6}>
-              <ComponentLimitPeriodField
-                limitPeriod={values.limit_period}
-                readOnly={props.readOnly}
-              />
-            </Col>
-            <Col xs={6}>
-              <ComponentLimitAmountField />
-            </Col>
-          </Row>
-        </ComponentAccountingTypeWrapper>
-      );
-    } else {
-      return (
-        <ComponentAccountingTypeWrapper>
-          <ComponentLimitEnableField />
-        </ComponentAccountingTypeWrapper>
-      );
-    }
+    // Spending limits replace the usage component's own limit_amount, which
+    // was never enforced; one already set is shown so it can be cleared.
+    return (
+      <ComponentAccountingTypeWrapper>
+        {typeof values.limit_amount === 'number' && (
+          <ComponentLegacyUsageLimit
+            amount={values.limit_amount}
+            limitPeriod={values.limit_period}
+            readOnly={props.readOnly}
+          />
+        )}
+        <ComponentSpendingLimitPeriodsField />
+      </ComponentAccountingTypeWrapper>
+    );
   }
   return null;
 };

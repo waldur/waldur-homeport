@@ -92,7 +92,7 @@ export const useReportBreadcrumbs = ({
   const reportTitle = currentReportDef?.title || currentReport;
 
   // Filtered exactly as the category page and the tab list filter it, so the
-  // dropdown never offers a report those two leave out. Organization owners
+  // dropdown never offers a report those two leave out. Non-staff users
   // have no category pages, only the reports of their landing page.
   const visibleReports = useMemo(
     () => (isStaff ? getVisibleReports(config) : getCustomerScopedReports()),

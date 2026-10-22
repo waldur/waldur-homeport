@@ -15,6 +15,7 @@ import { useNotify } from '@/store/notify';
 
 import {
   AssigneeOption,
+  getKeyLimitFieldComponents,
   getKeySettingsFields,
   KeySettingsFormValues,
   serializeKeySettings,
@@ -82,7 +83,7 @@ export const EditApiKeySettingsDialog: FC<{
             full_name: row.user_full_name || row.user_uuid,
           }
         : null,
-      limits: row.limits ?? {},
+      spending_limits: row.spending_limits ?? {},
       all_models: isAllModels(row.allowed_models),
       // Models the offering has since retired, or the resource no longer
       // allows, are not shown; the key keeps them unless All models replaces
@@ -106,6 +107,10 @@ export const EditApiKeySettingsDialog: FC<{
   const assigneeLock = getAssigneeLock(row);
 
   const assigneeField = useAssigneeField(resource);
+  const limitComponents = useMemo(
+    () => getKeyLimitFieldComponents(resource, components, row.spending_limits),
+    [resource, components, row.spending_limits],
+  );
   const fields = useMemo(
     () => [
       {
@@ -130,7 +135,7 @@ export const EditApiKeySettingsDialog: FC<{
           ]
         : []),
       ...getKeySettingsFields(resource, components, models, {
-        currentLimits: row.limits,
+        currentLimits: row.spending_limits,
         disabledReason: settingsEditable
           ? undefined
           : translate(
@@ -146,7 +151,7 @@ export const EditApiKeySettingsDialog: FC<{
       resource,
       components,
       models,
-      row.limits,
+      row.spending_limits,
       settingsEditable,
     ],
   );
@@ -163,7 +168,7 @@ export const EditApiKeySettingsDialog: FC<{
           // rotates it.
           ...(user !== initialAssignee ? { user } : {}),
           ...(settingsEditable
-            ? serializeKeySettings(values, components, models)
+            ? serializeKeySettings(values, limitComponents, models)
             : {}),
         },
       });

@@ -73,7 +73,7 @@ const getColumns = (
           label={getStateLabel(row, pause)}
           variant={variant}
           active={active}
-          tooltip={getStateTooltip(row, pause)}
+          tooltip={getStateTooltip(row, pause, components)}
           shape="pill"
           tone="outline"
         />

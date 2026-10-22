@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { translate } from 'waldur-i18n-runtime';
 import { BaseButton } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
-import { translate } from '@/i18n';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
 import { TableFilterContext } from './FilterContextProvider';

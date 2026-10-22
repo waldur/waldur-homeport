@@ -1,0 +1,100 @@
+/**
+ * Per-period limits of a resource API key.
+ *
+ * A key's limits have the shape of its resource's spending limits
+ * (`{component_type: {period: amount}}`): `month` on every component, the
+ * other periods where the component offers them to resources, and each capped
+ * by the resource's own limit for the period. They mirror
+ * `marketplace/api_key_spending_limits.py` in waldur-mastermind; the backend
+ * has the final word.
+ */
+import { Resource, SpendingLimitBounds } from 'waldur-js-client';
+
+import {
+  getOfferedPeriods,
+  isEmptyAmount,
+  SPENDING_LIMIT_PERIODS,
+  SpendingLimitFormValues,
+  SpendingLimitPeriod,
+  SpendingLimitsPayload,
+} from '@/marketplace/common/spendingLimits';
+
+import { KeyComponent } from './types';
+
+/** A component as the key dialog's limit fields take it: its periods carry the key's maximum. */
+export type KeyLimitComponent = Omit<KeyComponent, 'measured_unit'> & {
+  name: string;
+  measured_unit?: string;
+  spending_limit_periods: Record<string, SpendingLimitBounds>;
+};
+
+type Limits = Resource['spending_limits'] | null | undefined;
+
+/**
+ * The periods a key may limit on each component, each with the resource's
+ * limit for it as the maximum. A limit the key already holds is accepted again
+ * as it is, so its period stays shown and its amount stays within the maximum
+ * even after the provider or the resource has moved.
+ */
+export const getKeyLimitComponents = (
+  components: KeyComponent[],
+  resourceLimits: Limits,
+  held?: Limits,
+): KeyLimitComponent[] =>
+  components.map((component) => {
+    const offered = new Set<string>(['month']);
+    if (component.billing_type === 'usage') {
+      Object.keys(component.spending_limit_periods ?? {}).forEach((period) =>
+        offered.add(period),
+      );
+    }
+    const own = held?.[component.type] ?? {};
+    Object.entries(own).forEach(([period, amount]) => {
+      if (!isEmptyAmount(amount)) offered.add(period);
+    });
+    const periods: Record<string, SpendingLimitBounds> = {};
+    for (const period of SPENDING_LIMIT_PERIODS) {
+      if (!offered.has(period)) continue;
+      const cap = resourceLimits?.[component.type]?.[period];
+      const amount = own[period];
+      periods[period] = isEmptyAmount(cap)
+        ? {}
+        : {
+            maximum:
+              !isEmptyAmount(amount) && Number(amount) > Number(cap)
+                ? Number(amount)
+                : Number(cap),
+          };
+    }
+    return {
+      ...component,
+      name: component.name || component.type,
+      measured_unit: component.measured_unit || undefined,
+      spending_limit_periods: periods,
+    };
+  });
+
+/**
+ * The `spending_limits` payload of a key: the limits of every shown period,
+ * with empty fields left out. It replaces the key's limits, so `{}` clears
+ * them all.
+ */
+export const formatKeySpendingLimits = (
+  values: SpendingLimitFormValues | undefined,
+  components: KeyLimitComponent[],
+): SpendingLimitsPayload => {
+  const result: SpendingLimitsPayload = {};
+  for (const component of components) {
+    const amounts: Partial<Record<SpendingLimitPeriod, number>> = {};
+    for (const period of getOfferedPeriods(component)) {
+      const value = values?.[component.type]?.[period];
+      if (!isEmptyAmount(value)) {
+        amounts[period] = Number(value);
+      }
+    }
+    if (Object.keys(amounts).length > 0) {
+      result[component.type] = amounts;
+    }
+  }
+  return result;
+};

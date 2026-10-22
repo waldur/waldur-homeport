@@ -1,12 +1,11 @@
+import { uniqBy } from 'lodash-es';
+
 import { isFeatureVisible } from '@/features/connect';
 import { CustomerFeatures } from '@/FeaturesEnums';
-import { RoleEnum } from '@/permissions/enums';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { type RootState } from '@/store/reducers';
-import {
-  getUser,
-  isRoleOrClone,
-  isStaffOrSupport,
-} from '@/workspace/selectors';
+import { getUser, isStaffOrSupport } from '@/workspace/selectors';
 import { User } from '@/workspace/types';
 
 import { isReportingScreenEnabled } from './screens';
@@ -16,7 +15,8 @@ import { isReportingScreenEnabled } from './screens';
 
 /**
  * Reports that make sense for a single organization, in the order they are
- * listed to organization owners. Everything else stays staff/support only.
+ * listed to non-staff users with CUSTOMER.VIEW_REPORTING. Everything else
+ * stays staff/support only.
  */
 export const CUSTOMER_SCOPED_REPORTS = [
   'organization-summary',
@@ -31,18 +31,26 @@ export interface ReportingOrganization {
   name: string;
 }
 
+/**
+ * Organizations where one of the user's roles grants CUSTOMER.VIEW_REPORTING,
+ * owners and readers out of the box. The report endpoints do not check it and
+ * return what the role may list, so a role without PROJECT.LIST and
+ * RESOURCE.LIST gets empty reports.
+ */
 export const getReportingOrganizations = (
   user: User,
 ): ReportingOrganization[] =>
-  (user?.permissions || [])
-    // Owners only: the backend does not scope organization managers
-    // consistently across the report endpoints yet.
-    .filter(
+  uniqBy(
+    (user?.permissions || []).filter(
       (p) =>
         p.scope_type === 'customer' &&
-        isRoleOrClone(p.role_name, RoleEnum.CUSTOMER_OWNER),
-    )
-    .map((p) => ({ uuid: p.scope_uuid, name: p.scope_name }));
+        hasConsumerPermission(user, {
+          permission: PermissionEnum.VIEW_CUSTOMER_REPORTING,
+          customerId: p.scope_uuid,
+        }),
+    ),
+    'scope_uuid',
+  ).map((p) => ({ uuid: p.scope_uuid, name: p.scope_name }));
 
 const hasCustomerScopedReports = () =>
   CUSTOMER_SCOPED_REPORTS.some(isReportingScreenEnabled);

@@ -2,9 +2,10 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { translate } from 'waldur-i18n-runtime';
+
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { useDrawer } from '@/drawer/actions';
-import { translate } from '@/i18n';
 import { getTitle } from '@/navigation/title';
 import { router } from '@/router';
 import { type RootState } from '@/store/reducers';

@@ -4,12 +4,11 @@ import { FC, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { components, OptionProps } from 'react-select';
 
-import { BaseButton, SelectOption } from 'waldur-ui';
+import { translate } from 'waldur-i18n-runtime';
+import { useNotify } from 'waldur-notifications';
+import { BaseButton, SelectOption, useModal } from 'waldur-ui';
 
 import { WindowedSelect } from '@/form/select';
-import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
-import { useNotify } from '@/store/notify';
 
 import {
   clearAllFilters,

@@ -88,6 +88,10 @@ export const PermissionOptions = [
         value: 'CUSTOMER.VIEW_ACCOUNTING',
       },
       {
+        label: translate('View reporting'),
+        value: 'CUSTOMER.VIEW_REPORTING',
+      },
+      {
         label: translate('View team'),
         value: 'CUSTOMER.VIEW_TEAM',
       },
