@@ -30,7 +30,7 @@ export const FeaturesDescription: FeatureSection[] = [
       },
       {
         key: 'show_organisation_reporting',
-        description: translate('Show the Reporting menu with organization-scoped reports to organization owners.'),
+        description: translate('Show the Reporting menu with organization-scoped reports to users with the CUSTOMER.VIEW_REPORTING permission on the organization.'),
       },
       {
         key: 'show_permission_reviews',
