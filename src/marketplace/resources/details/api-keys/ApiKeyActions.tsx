@@ -309,7 +309,7 @@ export const ApiKeyActionsDropdown: FC<{
             (isOk || resumes
               ? row.paused_by_limit
                 ? translate(
-                    'Raising the limit resumes the key on its own. Resumed while still over its limit, it is paused again on the next usage report.',
+                    'It resumes on its own when a limit is raised or the period of a reached limit ends. Resumed by hand while still over a limit, it is paused again as soon as the resume takes effect.',
                   )
                 : undefined
               : translate('The key can be paused once it is active.'))
