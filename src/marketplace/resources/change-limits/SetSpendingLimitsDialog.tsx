@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { isEqual } from 'lodash-es';
 import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
@@ -12,6 +12,7 @@ import {
 
 import { AlertItem } from 'waldur-ui';
 
+import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -24,6 +25,7 @@ import {
   getOfferedPeriods,
   getSpendingLimitLabel,
   getSpendingLimitsNotice,
+  getSpendingLimitSubmitErrors,
   SPENDING_LIMIT_PERIODS,
   SpendingLimitFormValues,
   SpendingLimitPeriod,
@@ -99,6 +101,7 @@ export const SetSpendingLimitsDialog: FC<{
   resolve: { resource; refetch? };
 }> = ({ resolve }) => {
   const resourceUuid = getMarketplaceResourceUuid(resolve.resource);
+  const queryClient = useQueryClient();
   const { data, isLoading, error } = useQuery({
     queryKey: ['SetSpendingLimitsDialog', resourceUuid],
     queryFn: () => loadData(resourceUuid),
@@ -154,13 +157,32 @@ export const SetSpendingLimitsDialog: FC<{
   return (
     <Form<FormValues>
       onSubmit={(values) =>
-        mutation.mutateAsync(values).catch(() => {
-          // Error is handled by useManagedMutation
-        })
+        mutation.mutateAsync(values).then(
+          () => undefined,
+          (reason) => {
+            // useManagedMutation shows the toast. The offering is read again,
+            // since a refusal over a maximum usually means the provider
+            // changed it, so the fields show the new one.
+            queryClient.invalidateQueries({
+              queryKey: ['SetSpendingLimitsDialog', resourceUuid],
+            });
+            const errors = getSpendingLimitSubmitErrors(
+              getErrorBody(reason),
+              components.map((component) => component.type),
+            );
+            return errors ? { spending_limits: errors } : undefined;
+          },
+        )
       }
       initialValues={initialValues}
       initialValuesEqual={isEqual}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({
+        handleSubmit,
+        submitting,
+        hasValidationErrors,
+        hasSubmitErrors,
+        dirtySinceLastSubmit,
+      }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Change spending limits')}
@@ -176,7 +198,12 @@ export const SetSpendingLimitsDialog: FC<{
                 {data && (components.length > 0 || dropped.length > 0) && (
                   <SubmitButton
                     submitting={submitting}
-                    disabled={invalid}
+                    // A refused save blocks only until something is edited;
+                    // `invalid` would keep it disabled for good.
+                    disabled={
+                      hasValidationErrors ||
+                      (hasSubmitErrors && !dirtySinceLastSubmit)
+                    }
                     label={
                       components.length > 0
                         ? translate('Save')

@@ -81,10 +81,15 @@ const PeriodInput: FC<{
             held: isHeldAmount(input.value, meta.initial),
           });
         const isStoredValue = !meta.modified && !isEmptyAmount(meta.initial);
+        // A rejected save marks the field the backend named until it is
+        // edited again.
+        const submitError = meta.dirtySinceLastSubmit
+          ? undefined
+          : meta.submitError;
         const error =
-          meta.modified || meta.touched || isOrderError || isStoredValue
+          (meta.modified || meta.touched || isOrderError || isStoredValue
             ? meta.error
-            : undefined;
+            : undefined) || submitError;
         return (
           <div>
             <BaseInputField
@@ -126,8 +131,8 @@ const ComponentSubmitError: FC<{ name: string; componentType: string }> = ({
     subscription: { submitErrors: true },
   });
   const error = get(submitErrors, [name, componentType]);
-  // A field-level error object is shown by its field; the backend reports
-  // spending limit errors per component, as a list of messages.
+  // Errors keyed by period are shown by their fields; a list is what is left
+  // for the component as a whole (see getSpendingLimitSubmitErrors).
   return typeof error === 'string' || Array.isArray(error) ? (
     <FieldError error={error} />
   ) : null;
