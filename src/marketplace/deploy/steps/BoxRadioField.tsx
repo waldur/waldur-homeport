@@ -1,6 +1,6 @@
 import { CaretDownIcon, CheckIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit';
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 
 import { Menu, Radio } from 'waldur-ui';

@@ -1,5 +1,5 @@
 import { arrayMove } from '@dnd-kit/sortable';
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit';
 import {
   combineReducers,
   legacy_createStore as createStore,

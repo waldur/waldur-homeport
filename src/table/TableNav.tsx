@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { isMatch } from 'lodash-es';
+import { isMatch } from 'es-toolkit/compat';
 import { useMemo } from 'react';
 
 import { TabNav } from 'waldur-ui';

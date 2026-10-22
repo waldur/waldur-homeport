@@ -134,6 +134,8 @@ const RESTRICTED_IMPORTS = [
       'difference',
       'groupBy',
       'isEmpty',
+      'isEqual',
+      'isMatch',
       'isNil',
       'isNumber',
       'merge',

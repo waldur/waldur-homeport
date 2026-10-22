@@ -6,7 +6,7 @@ import {
   useOnStateChanged,
   useRouter,
 } from '@uirouter/react';
-import { isMatch } from 'lodash-es';
+import { isMatch } from 'es-toolkit/compat';
 import {
   FC,
   KeyboardEvent as ReactKeyboardEvent,

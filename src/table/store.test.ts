@@ -3,6 +3,7 @@ import { describe, it, expect } from 'vitest';
 import * as actions from './actions';
 import { getTableState } from './selectors';
 import { tablesReducer as reducer } from './store';
+import { FilterItem } from './types';
 
 describe('Table reducer', () => {
   it('should return default state', () => {
@@ -174,5 +175,50 @@ describe('Table reducer', () => {
       },
     );
     expect(state.users.toggled).toEqual({ 10: true });
+  });
+
+  describe('setFilter', () => {
+    // The reducer compares the component by reference, so share one.
+    const OrganizationFilter = (() => null) as FilterItem['component'];
+    const filter = (value): FilterItem => ({
+      name: 'organization',
+      label: 'Organization',
+      value,
+      component: OrganizationFilter,
+    });
+    const withFilter = reducer(
+      {},
+      actions.setFilter(
+        'users',
+        filter({ uuid: 'o1', meta: { tags: ['a', 'b'], since: 3 } }),
+      ),
+    );
+
+    it('keeps the state when the value is equal, in a different key order', () => {
+      const state = reducer(
+        withFilter,
+        actions.setFilter(
+          'users',
+          filter({ meta: { since: 3, tags: ['a', 'b'] }, uuid: 'o1' }),
+        ),
+      );
+      // tablesReducer always copies the outer object; the table's own state
+      // is what stays the same.
+      expect(state.users).toBe(withFilter.users);
+    });
+
+    it('replaces the filter when a nested value changes', () => {
+      const state = reducer(
+        withFilter,
+        actions.setFilter(
+          'users',
+          filter({ uuid: 'o1', meta: { tags: ['b', 'a'], since: 3 } }),
+        ),
+      );
+      expect(state.users).not.toBe(withFilter.users);
+      expect(state.users.filtersStorage).toEqual([
+        filter({ uuid: 'o1', meta: { tags: ['b', 'a'], since: 3 } }),
+      ]);
+    });
   });
 });

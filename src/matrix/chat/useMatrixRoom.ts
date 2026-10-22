@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { CALL_MEMBER_EVENT } from './call/callMembership';
