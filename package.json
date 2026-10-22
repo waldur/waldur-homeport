@@ -23,7 +23,8 @@
     "tokens:check": "node packages/design-tokens/scripts/generate-tokens.mjs --check",
     "tokens:audit": "node packages/design-tokens/scripts/audit-tokens.mjs",
     "tokens:duplicates": "node packages/design-tokens/scripts/audit-tokens.mjs --duplicates",
-    "tokens:metronic-diff": "node scripts/metronic-css-diff.mjs",
+    "styles:color-diff": "node scripts/color-diff.mjs",
+    "tokens:metronic-diff": "node scripts/color-diff.mjs",
     "styles:usage": "node scripts/bootstrap-css-usage.mjs",
     "style:check": "stylelint \"src/**/*.css\" \"src/**/*.scss\" \"packages/**/*.css\"",
     "lint:check": "eslint src locales/tools packages",
@@ -255,7 +256,7 @@
       ]
     },
     "ignore": [
-      "src/metronic/**",
+      "src/styles/bootstrap/**",
       "src/EventsEnums.ts",
       "src/FeaturesEnums.ts",
       "locales/tools/*.cjs",
@@ -353,7 +354,7 @@
   "jscpd": {
     "ignore": [
       "src/form/BoxNumberField.scss",
-      "src/metronic/sass/core/base/functions/_get.scss",
+      "src/styles/bootstrap/_functions.scss",
       "src/table/generated/ProposalProposalsFilter.tsx",
       "src/table/generated/MarketplaceStatsOpenstackInstancesFilter.tsx",
       "src/openstack/openstack-instance/actions/update-internal-ips/CustomIpFieldFinal.tsx"

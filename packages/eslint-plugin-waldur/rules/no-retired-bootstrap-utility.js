@@ -3,7 +3,7 @@
  *
  * Bootstrap's utility API generated every value at every breakpoint whether
  * or not anything used it: about half the compiled Metronic stylesheet was
- * rules nothing could match. src/metronic/sass/core/components/_utilities.scss
+ * rules nothing could match. src/styles/bootstrap/_utilities.scss
  * now drops the utilities nothing used and the breakpoint variants of those
  * only ever used at the base size. A retired name compiles to nothing, so this
  * rule reports it with the Tailwind class to use instead.

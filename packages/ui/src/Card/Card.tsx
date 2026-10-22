@@ -11,10 +11,10 @@ import { cn } from '../cn';
  * Source of truth:
  * - Spacing tokens `--card-padding-x: 1.85rem` ($card-px) and
  *   `--card-padding-y: 1.23rem` ($card-py) defined in
- *   `src/metronic/sass/_variables.custom.scss` and declared in
+ *   `src/styles/bootstrap/_variables.scss` and declared in
  *   `packages/design-tokens/src/css/components/card.css`.
  * - Header min-height `--card-header-min-height: 70px` from
- *   `src/metronic/sass/core/components/_variables.scss`.
+ *   `src/styles/bootstrap/_variables.scss`.
  * - Surface colors & shadow: `--card-bg`, `--card-shadow`, and
  *   `--card-border-color` from `packages/design-tokens/src/css/components/card.css`.
  * - Radius: 8px (`rounded-lg`, from `$card-border-radius: $border-radius` = 8px

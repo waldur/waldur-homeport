@@ -55,9 +55,12 @@ function compileMetronic() {
   if (cachedMetronicCss) return cachedMetronicCss;
   // Light and dark emit the same class names; only the colours differ.
   cachedMetronicCss = sass.compile(
-    path.join(root, 'src/metronic/sass/style.scss'),
+    path.join(root, 'src/styles/bootstrap/index.scss'),
     {
-      loadPaths: [path.join(root, 'node_modules')],
+      loadPaths: [
+        path.join(root, 'src/styles/bootstrap'),
+        path.join(root, 'node_modules'),
+      ],
       importers: [
         {
           findFileUrl: (url) =>

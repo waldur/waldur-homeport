@@ -1,15 +1,15 @@
 // Config is imported at the top level on purpose: variables declared inside a
 // block become block-locals, and Metronic partials assign to shared names
 // (notably `$border-color`) from within rules, which would then wipe the value
-// for everything imported later. See _init-config.scss.
-@import 'init-config';
+// for everything imported later. See _config.scss.
+@import 'config';
 
 // Named cascade layer so Tailwind utilities can outrank this on pages
 // where both are loaded — matches src/tailwind.css's `@layer bootstrap`
 // order. See docs/tailwind-shadcn-migration-notes.md for why.
 @layer bootstrap {
   // stylelint-disable-next-line no-invalid-position-at-import-rule -- layered on purpose
-  @import 'init-styles';
+  @import 'styles';
 }
 
 // Unlayered on purpose: these override @livekit/components-styles, which is

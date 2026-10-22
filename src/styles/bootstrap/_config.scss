@@ -1,7 +1,7 @@
 // Config-only init: functions, mixins and variables. Emits no CSS.
 
 // This MUST be imported at the top level of an entry point, never from inside
-// a block (see style.scss). Sass scopes a `$var: value` declaration to the
+// a block (see index.scss). Sass scopes a `$var: value` declaration to the
 // block it appears in, and an assignment in a nested block updates the nearest
 // enclosing *local* variable instead of shadowing a global. Metronic's
 // component partials routinely null out shared names inside rules — e.g.
@@ -9,17 +9,16 @@
 // buttons theme partial — so if these variables were block-local
 // the null would leak into every partial imported afterwards.
 
-// Custom functions & mixins
-@import './core/base/functions';
-@import './core/base/mixins';
-@import './core/components/mixins';
+// Functions
+@import 'functions';
 
-// Custom variables
-@import 'colors';
-@import 'variables.custom';
-@import './core/components/variables';
+// Mixins
+@import 'mixins';
 
-// Bootstrap initializaton
+// Variables
+@import 'variables';
+
+// Bootstrap initialization
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/mixins';

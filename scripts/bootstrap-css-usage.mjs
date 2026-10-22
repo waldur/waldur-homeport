@@ -29,191 +29,191 @@ import postcss from 'postcss';
 import * as sass from 'sass';
 
 const root = path.resolve(fileURLToPath(import.meta.url), '../..');
-const sassDir = path.join(root, 'src/metronic/sass');
+const sassDir = path.join(root, 'src/styles/bootstrap');
 export const DEFAULT_BASELINE = path.join(
   root,
   'scripts/bootstrap-css-usage.baseline.json',
 );
 
 export const PARTIALS = [
-  // Bootstrap components (from core/components/components.scss)
+  // Bootstrap components (from _bootstrap.scss)
   {
     name: 'core/components/root',
-    scss: "@import 'init-config'; @import 'core/components/root';",
+    scss: "@import 'config'; @import 'components/root';",
   },
   {
     name: 'bootstrap/scss/reboot',
-    scss: "@import 'init-config'; @import 'bootstrap/scss/reboot';",
+    scss: "@import 'config'; @import 'bootstrap/scss/reboot';",
   },
   {
     name: 'bootstrap/scss/type',
-    scss: "@import 'init-config'; @import 'bootstrap/scss/reboot'; @import 'bootstrap/scss/type';",
+    scss: "@import 'config'; @import 'bootstrap/scss/reboot'; @import 'bootstrap/scss/type';",
   },
   {
     name: 'bootstrap/scss/images',
-    scss: "@import 'init-config'; @import 'bootstrap/scss/images';",
+    scss: "@import 'config'; @import 'bootstrap/scss/images';",
   },
   {
     name: 'bootstrap/scss/containers',
-    scss: "@import 'init-config'; $container-max-widths: (); @import 'bootstrap/scss/containers';",
+    scss: "@import 'config'; $container-max-widths: (); @import 'bootstrap/scss/containers';",
   },
   {
     name: 'bootstrap/scss/grid',
-    scss: "@import 'init-config'; @import 'bootstrap/scss/grid';",
+    scss: "@import 'config'; @import 'bootstrap/scss/grid';",
   },
   {
     name: 'bootstrap/scss/tables',
-    scss: "@import 'init-config'; $grid-breakpoints: (xs: 0); @import 'bootstrap/scss/tables';",
+    scss: "@import 'config'; $grid-breakpoints: (xs: 0); @import 'bootstrap/scss/tables';",
   },
   {
     name: 'bootstrap/scss/transitions',
-    scss: "@import 'init-config'; @import 'bootstrap/scss/transitions';",
+    scss: "@import 'config'; @import 'bootstrap/scss/transitions';",
   },
   {
     name: 'bootstrap/scss/card',
-    scss: "@import 'init-config'; @import 'bootstrap/scss/card';",
+    scss: "@import 'config'; @import 'bootstrap/scss/card';",
   },
   {
     name: 'bootstrap/scss/list-group',
-    scss: "@import 'init-config'; $theme-colors: (); $grid-breakpoints: (); @import 'bootstrap/scss/list-group';",
+    scss: "@import 'config'; $theme-colors: (); $grid-breakpoints: (); @import 'bootstrap/scss/list-group';",
   },
   {
     name: 'bootstrap/scss/spinners',
-    scss: "@import 'init-config'; @import 'bootstrap/scss/spinners';",
+    scss: "@import 'config'; @import 'bootstrap/scss/spinners';",
   },
   {
     name: 'bootstrap/scss/helpers',
-    scss: "@import 'init-config'; $theme-colors: (); $aspect-ratios: (); $grid-breakpoints: (xs: 0); @import 'bootstrap/scss/helpers';",
+    scss: "@import 'config'; $theme-colors: (); $aspect-ratios: (); $grid-breakpoints: (xs: 0); @import 'bootstrap/scss/helpers';",
   },
   {
     name: 'bootstrap/scss/utilities',
-    scss: "@import 'init-config'; @import 'core/components/utilities'; @import 'bootstrap/scss/utilities/api';",
+    scss: "@import 'config'; @import 'utilities'; @import 'bootstrap/scss/utilities/api';",
   },
 
-  // Metronic core/components
+  // Components (from components/)
   {
     name: 'core/components/helpers',
-    scss: "@import 'init-config'; @import 'core/components/helpers';",
+    scss: "@import 'config'; @import 'components/flex'; @import 'components/text';",
   },
   {
     name: 'core/components/separator',
-    scss: "@import 'init-config'; @import 'core/components/separator';",
+    scss: "@import 'config'; @import 'components/separator';",
   },
   {
     name: 'core/components/card',
-    scss: "@import 'init-config'; @import 'core/components/card';",
+    scss: "@import 'config'; @import 'components/card';",
   },
   {
     name: 'core/components/buttons',
-    scss: "@import 'init-config'; @import 'core/components/buttons';",
+    scss: "@import 'config'; @import 'components/buttons';",
   },
   {
     name: 'core/components/code',
-    scss: "@import 'init-config'; @import 'core/components/code';",
+    scss: "@import 'config'; @import 'components/code';",
   },
   {
     name: 'core/components/tables',
-    scss: "@import 'init-config'; @import 'core/components/tables';",
+    scss: "@import 'config'; @import 'components/tables';",
   },
   {
     name: 'core/components/image-input',
-    scss: "@import 'init-config'; @import 'core/components/image-input';",
+    scss: "@import 'config'; @import 'components/image-input';",
   },
   {
     name: 'core/components/symbol',
-    scss: "@import 'init-config'; @import 'core/components/symbol';",
+    scss: "@import 'config'; @import 'components/symbol';",
   },
   {
     name: 'core/components/svg-icon',
-    scss: "@import 'init-config'; @import 'core/components/svg-icon';",
+    scss: "@import 'config'; @import 'components/svg-icon';",
   },
   {
     name: 'core/components/timeline',
-    scss: "@import 'init-config'; @import 'core/components/timeline';",
+    scss: "@import 'config'; @import 'components/timeline';",
   },
   {
     name: 'core/components/bullet',
-    scss: "@import 'init-config'; @import 'core/components/bullet';",
+    scss: "@import 'config'; @import 'components/bullet';",
   },
   {
     name: 'core/components/scroll',
-    scss: "@import 'init-config'; @import 'core/components/scroll';",
+    scss: "@import 'config'; @import 'components/scroll';",
   },
   {
     name: 'core/components/consent-dialog',
-    scss: "@import 'init-config'; @import 'core/components/consent-dialog';",
+    scss: "@import 'config'; @import 'components/consent-dialog';",
   },
 
-  // Metronic custom partials (from custom/style.scss)
+  // Legacy partials (from legacy/)
   {
     name: 'custom/base',
-    scss: "@import 'init-config'; @import 'custom/base';",
+    scss: "@import 'config'; @import 'legacy/base';",
   },
   {
     name: 'custom/borders',
-    scss: "@import 'init-config'; @import 'custom/borders';",
+    scss: "@import 'config'; @import 'legacy/borders';",
   },
   {
     name: 'custom/buttons',
-    scss: "@import 'init-config'; @import 'custom/buttons';",
+    scss: "@import 'config'; @import 'legacy/buttons';",
   },
   {
     name: 'custom/content',
-    scss: "@import 'init-config'; @import 'custom/content';",
+    scss: "@import 'config'; @import 'legacy/content';",
   },
   {
     name: 'custom/file-upload',
-    scss: "@import 'init-config'; @import 'custom/file-upload';",
+    scss: "@import 'config'; @import 'custom/file-upload';",
   },
   {
     name: 'custom/icon',
-    scss: "@import 'init-config'; @import 'custom/icon';",
+    scss: "@import 'config'; @import 'legacy/icon';",
   },
   {
     name: 'custom/landing',
-    scss: "@import 'init-config'; @import 'custom/landing';",
+    scss: "@import 'config'; @import 'custom/landing';",
   },
   {
     name: 'custom/marketplaces-selector',
-    scss: "@import 'init-config'; @import 'custom/marketplaces-selector';",
+    scss: "@import 'config'; @import 'custom/marketplaces-selector';",
   },
   {
     name: 'custom/table',
-    scss: "@import 'init-config'; @import 'custom/table';",
+    scss: "@import 'config'; @import 'custom/table';",
   },
   {
     name: 'custom/CopyToClipboardContainer',
-    scss: "@import 'init-config'; @import 'custom/CopyToClipboardContainer';",
+    scss: "@import 'config'; @import 'custom/CopyToClipboardContainer';",
   },
   {
     name: 'custom/CodeBlock',
-    scss: "@import 'init-config'; @import 'custom/CodeBlock';",
+    scss: "@import 'config'; @import 'custom/CodeBlock';",
   },
   {
     name: 'custom/action-group',
-    scss: "@import 'init-config'; @import 'custom/action-group';",
+    scss: "@import 'config'; @import 'custom/action-group';",
   },
   {
     name: 'custom/ai-assistant/index',
-    scss: "@import 'init-config'; @import 'custom/ai-assistant/index';",
+    scss: "@import 'config'; @import 'custom/ai-assistant/index';",
   },
   {
     name: 'custom/support/helpdesk',
-    scss: "@import 'init-config'; @import 'custom/support/helpdesk';",
+    scss: "@import 'config'; @import 'custom/support/helpdesk';",
   },
   {
     name: 'custom/matrix/index',
-    scss: "@import 'init-config'; @import 'custom/matrix/index';",
+    scss: "@import 'config'; @import 'custom/matrix/index';",
   },
   {
     name: 'custom/tos',
-    scss: "@import 'init-config'; @import 'custom/tos';",
+    scss: "@import 'config'; @import 'custom/tos';",
   },
 
-  // Unlayered LiveKit styles in style.scss
+  // Unlayered LiveKit styles in index.scss
   {
     name: 'custom/matrix/call-livekit',
-    scss: "@import 'init-config'; @import 'custom/matrix/call-livekit';",
+    scss: "@import 'config'; @import 'custom/matrix/call-livekit';",
   },
 ];
 
@@ -238,8 +238,8 @@ export function compilePartial(partialScss, baseDir = sassDir) {
   return sass.compileString(partialScss, getSassOptions(baseDir)).css;
 }
 
-/** Compiles the main stylesheet (style.scss) and extracts byte size and selectors. */
-export function compileStyle(file = 'style.scss', baseDir = sassDir) {
+/** Compiles the main stylesheet (index.scss) and extracts byte size and selectors. */
+export function compileStyle(file = 'index.scss', baseDir = sassDir) {
   const css = sass.compile(
     path.join(baseDir, file),
     getSassOptions(baseDir),
@@ -301,7 +301,7 @@ export function tokenizeContent(content) {
 
 /**
  * Collects tokens from tracked source files under src/, packages/, apps/,
- * excluding the stylesheet directory (src/metronic/).
+ * excluding the stylesheet directory (src/styles/bootstrap/).
  */
 export function getCorpusTokens(options = {}) {
   const repoRoot = options.rootDir ?? root;
@@ -315,7 +315,7 @@ export function getCorpusTokens(options = {}) {
       (f) =>
         f &&
         /\.(ts|tsx|js|mjs|html|scss|css)$/.test(f) &&
-        !f.startsWith('src/metronic/'),
+        !f.startsWith('src/styles/bootstrap/'),
     );
 
   const corpus = new Set();
@@ -505,15 +505,15 @@ function runCli() {
       `\nTotal: ${usage.totalClasses.toLocaleString()} classes | ${usage.totalUsed.toLocaleString()} used (upper bound) | ${usage.totalUnused.toLocaleString()} unused`,
     );
 
-    console.log('\nCompiling style.scss...');
+    console.log('\nCompiling index.scss...');
     const style = compileStyle();
     console.log(
-      `Compiled style.scss: ${style.byteSize.toLocaleString()} bytes, ${style.selectors.length.toLocaleString()} selectors`,
+      `Compiled index.scss: ${style.byteSize.toLocaleString()} bytes, ${style.selectors.length.toLocaleString()} selectors`,
     );
     return;
   }
 
-  console.log('Compiling style.scss for selectors and byte size...');
+  console.log('Compiling index.scss for selectors and byte size...');
   const style = compileStyle();
 
   const unusedMap = {};
@@ -592,7 +592,7 @@ function runCli() {
 
     console.log('\n--- Usage Comparison ---');
     console.log(
-      `Compiled style.scss size : ${style.byteSize.toLocaleString()} bytes (baseline: ${baseline.compiledByteSize.toLocaleString()} bytes, diff: ${sizeDiffSign} bytes)`,
+      `Compiled index.scss size : ${style.byteSize.toLocaleString()} bytes (baseline: ${baseline.compiledByteSize.toLocaleString()} bytes, diff: ${sizeDiffSign} bytes)`,
     );
     console.log(
       `Unused classes           : ${usage.totalUnused.toLocaleString()} (baseline: ${(baseline.totalUnused ?? 0).toLocaleString()}, diff: ${unusedDiffSign})`,

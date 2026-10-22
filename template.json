@@ -22379,7 +22379,6 @@
   },
   "Filters": {
     "context": {
-      "primary_ui_type": "title",
       "feature_area": "charts"
     }
   },

@@ -1,7 +1,7 @@
 // Components
 
 // Bootstrap components
-@import 'root';
+@import 'components/root';
 @import 'bootstrap/scss/reboot';
 @import 'bootstrap/scss/type';
 @import 'bootstrap/scss/images';
@@ -56,18 +56,3 @@ $theme-colors: $_theme-colors;
 // Bootstrap utilities
 @import 'utilities';
 @import 'bootstrap/scss/utilities/api';
-
-// Custom components
-@import 'helpers';
-@import 'separator';
-@import 'card';
-@import 'buttons';
-@import 'code';
-@import 'tables';
-@import 'image-input';
-@import 'symbol';
-@import 'svg-icon';
-@import 'timeline';
-@import 'bullet';
-@import 'scroll';
-@import 'consent-dialog';

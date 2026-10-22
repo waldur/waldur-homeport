@@ -15,11 +15,11 @@ import { cn } from '../cn';
  * silently breaks (zero bottom padding) for a label+value-only card.
  *
  * Real values (root font-size is 13px in that app, not 16px — see
- * src/metronic/sass/_variables.custom.scss's $font-size-root; expressed
+ * src/styles/bootstrap/_variables.scss's $font-size-root; expressed
  * below as arbitrary rem values, not their px-at-13px-root equivalents,
  * so this actually stays in sync if the root font-size ever changes —
  * see Card.tsx's own comment on the same choice):
- * padding is `.card-body.py-5` = 1.85rem sides ($card-px in _variables.custom.scss,
+ * padding is `.card-body.py-5` = 1.85rem sides ($card-px in _variables.scss,
  * mapped to var(--card-padding-x, 1.85rem)) / 1.25rem top+bottom (Bootstrap's `.py-5`
  * spacer, overriding the default card's 1.23rem).
  * The value is a hardcoded `style={{ fontSize: '32px' }}`, not a rem

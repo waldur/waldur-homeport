@@ -24,7 +24,7 @@
   --card-header-solid-bg: var(--color-gray-50);
 
   /* Real Metronic source, from
-     src/metronic/sass/core/components/_card.scss's .card rule:
+     src/styles/bootstrap/components/_card.scss's .card rule:
      `box-shadow: $card-box-shadow` unconditionally, `border` only
      `@if ($card-border-enabled)` — which is itself `if(isDarkMode(),
      true, false)`. Metronic's real card relies on the shadow alone in
