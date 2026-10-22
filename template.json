@@ -1463,8 +1463,7 @@
         "date": {
           "type": "date"
         }
-      },
-      "feature_area": "details"
+      }
     }
   },
   "Access staff": {
@@ -24286,8 +24285,7 @@
         "limits": {
           "type": "unknown"
         }
-      },
-      "feature_area": "details"
+      }
     }
   },
   "Held decisions": {
@@ -58640,8 +58638,7 @@
         "date": {
           "type": "date"
         }
-      },
-      "feature_area": "details"
+      }
     }
   },
   "The results of the round have been published.": {
