@@ -1,4 +1,5 @@
-import { isMatch, pickBy, uniqueId } from 'lodash-es';
+import { pickBy } from 'es-toolkit';
+import { isMatch, uniqueId } from 'lodash-es';
 import { useCallback, useState } from 'react';
 
 import { SearchItemProps } from './SearchItem';
@@ -80,7 +81,7 @@ export const useRecentSearch = () => {
         type,
       };
       if (event) event.preventDefault();
-      recentItem.params = pickBy(recentItem.params, (x) => x !== null);
+      recentItem.params = pickBy(recentItem.params ?? {}, (x) => x !== null);
       if (findRecentSearchItem(recentItem.to, recentItem.params)) return;
       RecentSearchService.add(recentItem);
       setRecentSearchItems(getRecentSearchList());

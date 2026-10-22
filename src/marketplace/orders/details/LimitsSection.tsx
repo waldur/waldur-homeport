@@ -1,5 +1,4 @@
 import { PencilSimpleIcon, XIcon } from '@phosphor-icons/react';
-import { isEmpty } from 'lodash-es';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Card, Stack } from 'react-bootstrap';
 import {
@@ -89,7 +88,7 @@ export const LimitsSection = ({
     [components, selected],
   );
 
-  if (components.length === 0 || isEmpty(limits)) {
+  if (components.length === 0 || !Object.keys(limits ?? {}).length) {
     return (
       <Card className="card-bordered">
         <Card.Header className="custom-card-header custom-padding-zero">

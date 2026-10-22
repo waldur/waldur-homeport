@@ -1,5 +1,5 @@
 import { PencilSimpleIcon, PlusCircleIcon } from '@phosphor-icons/react';
-import { omit } from 'lodash-es';
+import { omit } from 'es-toolkit';
 import { FC } from 'react';
 import { Form } from 'react-final-form';
 import {

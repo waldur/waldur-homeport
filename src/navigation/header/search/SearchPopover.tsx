@@ -1,7 +1,6 @@
 import { LockIcon, PlusIcon, XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { groupBy } from 'es-toolkit';
-import { isEmpty } from 'lodash-es';
 import { Fragment, useCallback } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
@@ -257,7 +256,7 @@ const OrganizationsTabContent = ({
       ) : null}
       <NoResult
         isVisible={
-          isEmpty(result.data?.customers) && result.status !== 'pending'
+          !result.data?.customers?.length && result.status !== 'pending'
         }
         callback={clearSearch}
       />
@@ -303,7 +302,7 @@ const ProjectsTabContent = ({
       ) : null}
       <NoResult
         isVisible={
-          isEmpty(result.data?.projects) && result.status !== 'pending'
+          !result.data?.projects?.length && result.status !== 'pending'
         }
         callback={clearSearch}
       />
@@ -323,9 +322,10 @@ const ResourcesTabContent = ({
   const resourceGroups = result.data?.resources
     ? groupBy(result.data.resources, (item) => item.category_title)
     : null;
+  const hasResourceGroups = Object.keys(resourceGroups ?? {}).length > 0;
   return (
     <>
-      {!isEmpty(resourceGroups) ? (
+      {hasResourceGroups ? (
         <div className="py-5">
           {Object.keys(resourceGroups).map((item, categoryIndex) => (
             <Fragment key={categoryIndex}>
@@ -358,7 +358,7 @@ const ResourcesTabContent = ({
         </div>
       ) : null}
       <NoResult
-        isVisible={isEmpty(resourceGroups) && result.status !== 'pending'}
+        isVisible={!hasResourceGroups && result.status !== 'pending'}
         callback={clearSearch}
       />
     </>
