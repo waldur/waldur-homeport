@@ -6,7 +6,7 @@ import {
 
 import { ApiKeyRow, KeyComponent } from './types';
 
-export const componentLabel = (component: KeyComponent) =>
+const componentLabel = (component: KeyComponent) =>
   component.name || component.type;
 
 export interface ComponentUsage {
