@@ -106,7 +106,7 @@ export const getResourcePause = (
       : 'other'
     : null;
 
-export const getResourcePauseMessage = (pause: ResourcePause) =>
+const getResourcePauseMessage = (pause: ResourcePause) =>
   pause === 'limit'
     ? translate(
         'Its usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.',
