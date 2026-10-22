@@ -1,5 +1,4 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 interface ImageTablePlaceholderProps {
   illustration: React.ReactNode;
@@ -11,14 +10,14 @@ interface ImageTablePlaceholderProps {
 export const ImageTablePlaceholder: React.FC<ImageTablePlaceholderProps> = (
   props,
 ) => (
-  <Row className="justify-center" style={{ clear: 'both' }}>
-    <Col sm={4}>
+  <div style={{ clear: 'both' }} className="justify-center row">
+    <div className="col-sm-4">
       <div style={{ width: '100%' }}>{props.illustration}</div>
       <div className="text-center">
         <h2>{props.title}</h2>
         {props.description && <p>{props.description}</p>}
         {props.action}
       </div>
-    </Col>
-  </Row>
+    </div>
+  </div>
 );

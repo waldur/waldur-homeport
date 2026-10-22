@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { FC, Fragment, ReactNode, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
 
 import {
   resolveTabValue,
@@ -52,11 +51,11 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
   const [toolbarNode, setToolbarNode] = useState<HTMLDivElement | null>(null);
 
   return (
-    <Card className={classNames('card-table card-bordered', className)}>
-      <Card.Header className={headerClassName}>
-        <Row className="card-toolbar g-0 gap-4 w-full">
-          <Col xs>
-            <Card.Title ref={setTitleNode}>
+    <div className={classNames('card-table card-bordered', className, 'card')}>
+      <div className={classNames(headerClassName, 'card-header')}>
+        <div className="card-toolbar g-0 gap-4 w-full row">
+          <div className="col">
+            <div ref={setTitleNode} className="card-title h5">
               <div className="me-2">
                 <h3>{title}</h3>
                 {Boolean(subtitle) && (
@@ -65,13 +64,10 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
                   </small>
                 )}
               </div>
-            </Card.Title>
+            </div>
             {/* Portal destination */}
-          </Col>
-          <Col
-            sm="auto"
-            className="ms-auto max-w-full flex gap-4 max-sm:flex-wrap text-nowrap"
-          >
+          </div>
+          <div className="ms-auto max-w-full flex gap-4 max-sm:flex-wrap text-nowrap col-sm-auto">
             {headerActions}
             <div
               ref={setToolbarNode}
@@ -79,10 +75,10 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
             >
               {/* Portal destination */}
             </div>
-          </Col>
-        </Row>
-      </Card.Header>
-      <Card.Body className="pt-3">
+          </div>
+        </div>
+      </div>
+      <div className="pt-3 card-body">
         <Tabs
           value={activeKey}
           onValueChange={handleSelect}
@@ -129,7 +125,7 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
             </div>
           )}
         </Tabs>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

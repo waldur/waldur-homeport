@@ -1,7 +1,22 @@
 import { FC, createElement } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
-import { TableProps } from './types';
+import { GridSize, TableProps } from './types';
+
+// Largest first, the order react-bootstrap's Col wrote them in.
+const BREAKPOINTS = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'] as const;
+
+/** The Bootstrap grid column classes for `size`: `col-md-6 col-12`, or `col`. */
+const gridColumnClassName = (size: GridSize = {}) => {
+  const classes = BREAKPOINTS.flatMap((breakpoint) => {
+    const span = size[breakpoint];
+    if (!span) {
+      return [];
+    }
+    const infix = breakpoint === 'xs' ? '' : `-${breakpoint}`;
+    return [span === true ? `col${infix}` : `col${infix}-${span}`];
+  });
+  return classes.length ? classes.join(' ') : 'col';
+};
 
 type GridBodyProps = Pick<
   TableProps,
@@ -29,13 +44,14 @@ export const GridBody: FC<GridBodyProps> = ({
   }
 
   // Default responsive Bootstrap grid
+  const columnClassName = gridColumnClassName(gridSize);
   return (
-    <Row className={'g-' + gridSpace}>
+    <div className={`g-${gridSpace} row`}>
       {rows.map((row, rowIndex) => (
-        <Col key={rowIndex} {...gridSize}>
+        <div key={rowIndex} className={columnClassName}>
           {createElement(gridItem, { row })}
-        </Col>
+        </div>
       ))}
-    </Row>
+    </div>
   );
 };
