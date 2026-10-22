@@ -1,7 +1,7 @@
 import { useRouter } from '@uirouter/react';
+import { get } from 'es-toolkit/compat';
 import { FORM_ERROR } from 'final-form';
 import arrayMutators from 'final-form-arrays';
-import { get } from 'lodash-es';
 import {
   FC,
   createRef,

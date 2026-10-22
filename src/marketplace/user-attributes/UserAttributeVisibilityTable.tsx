@@ -1,4 +1,4 @@
-import { get } from 'lodash-es';
+import { get } from 'es-toolkit/compat';
 import { FC, ReactNode, useMemo } from 'react';
 
 import { CheckOrX } from '@/core/CheckOrX';

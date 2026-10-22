@@ -156,4 +156,43 @@ describe('EditFieldDialog', () => {
       }),
     );
   });
+
+  it('pre-fills the value at a nested path and submits the edit there', async () => {
+    const callback = vi.fn().mockResolvedValue({});
+    renderDialog({
+      scope: { service_attributes: { backend_url: 'https://old.example' } },
+      name: 'service_attributes.backend_url',
+      callback,
+    });
+
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveValue('https://old.example');
+    await userEvent.clear(input);
+    await userEvent.type(input, 'https://new.example');
+    await submit();
+
+    await waitFor(() =>
+      expect(callback).toHaveBeenCalledWith({
+        service_attributes: { backend_url: 'https://new.example' },
+      }),
+    );
+  });
+
+  it('submits null at a nested path when a numeric field is cleared', async () => {
+    const callback = vi.fn().mockResolvedValue({});
+    renderDialog({
+      scope: { limits: { cpu: 4 } },
+      name: 'limits.cpu',
+      callback,
+      fieldComponent: NumberField as any,
+      emptyValue: null,
+    });
+
+    await userEvent.clear(screen.getByRole('spinbutton'));
+    await submit();
+
+    await waitFor(() =>
+      expect(callback).toHaveBeenCalledWith({ limits: { cpu: null } }),
+    );
+  });
 });
