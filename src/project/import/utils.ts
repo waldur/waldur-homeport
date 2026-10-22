@@ -1,4 +1,4 @@
-import { difference, uniq, uniqueId } from 'lodash-es';
+import { uniqueId } from 'lodash-es';
 import Papa from 'papaparse';
 import { Offering } from 'waldur-js-client';
 
@@ -93,9 +93,11 @@ export const parseProjectsAndResourcesFile = (file: File) => {
             }
             return acc;
           }, []);
-          const diffFields = difference(
-            projectHeaderFields,
+          const resourceHeaderFields = new Set(
             cleanHeaderFields(RESOURCE_FIELDS),
+          );
+          const diffFields = projectHeaderFields.filter(
+            (field) => !resourceHeaderFields.has(field),
           );
           const resourceFields = header.reduce<IField[]>((acc, field, idx) => {
             if (!diffFields.includes(field) && field !== 'type') {
@@ -212,12 +214,14 @@ export const generateTemplateData = (
     };
   }
   // Generate template file for projects with resources
-  const fixedFields = uniq([
-    TYPE_FIELD,
-    !customerUuid && ORG_FIELD,
-    ...PROJECT_FIELDS,
-    ...RESOURCE_FIELDS,
-  ]);
+  const fixedFields = [
+    ...new Set([
+      TYPE_FIELD,
+      !customerUuid && ORG_FIELD,
+      ...PROJECT_FIELDS,
+      ...RESOURCE_FIELDS,
+    ]),
+  ];
 
   const allFields = fixedFields
     .concat(

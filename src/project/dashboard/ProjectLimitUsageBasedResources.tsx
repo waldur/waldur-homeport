@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { uniq } from 'lodash-es';
 import { FC, useMemo } from 'react';
 import {
   marketplacePublicOfferingsList,
@@ -101,9 +100,9 @@ export const ProjectLimitUsageBasedResources: FC<{ showCost?: boolean }> = ({
       componentsKey?.length
         ? marketplacePublicOfferingsList({
             query: {
-              uuid_list: uniq(
-                tableProps.rows.map((row) => row.offering_uuid),
-              ).join(','),
+              uuid_list: [
+                ...new Set(tableProps.rows.map((row) => row.offering_uuid)),
+              ].join(','),
               field: ['uuid', 'components', 'plans'],
               page_size: tableProps.rows.length,
             },

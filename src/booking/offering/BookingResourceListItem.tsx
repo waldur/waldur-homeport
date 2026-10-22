@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { cloneDeep } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { useCallback, useMemo } from 'react';
 
@@ -42,7 +41,7 @@ function calculateEventItemLayouts(
 
   const layouts: ItemLayout[] = [];
 
-  const schedules = cloneDeep(item.attributes.schedules).sort((a, b) =>
+  const schedules = [...item.attributes.schedules].sort((a, b) =>
     a.start < b.start ? -1 : 1,
   );
 

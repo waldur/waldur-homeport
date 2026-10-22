@@ -1,6 +1,7 @@
 import { LockIcon, PlusIcon, XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { groupBy, isEmpty } from 'lodash-es';
+import { groupBy } from 'es-toolkit';
+import { isEmpty } from 'lodash-es';
 import { Fragment, useCallback } from 'react';
 import { Col, Row } from 'react-bootstrap';
 

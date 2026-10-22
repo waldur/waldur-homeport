@@ -1,5 +1,5 @@
 import { Transition } from '@uirouter/react';
-import { cloneDeep } from 'lodash-es';
+import { cloneDeep } from 'es-toolkit';
 import { useEffect, useState } from 'react';
 import {
   customerCreditsList,
