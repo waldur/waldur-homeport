@@ -2,9 +2,8 @@ import { XIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { translate } from 'waldur-i18n-runtime';
 import { BaseButton, useBreakpointDown } from 'waldur-ui';
-
-import { translate } from '@/i18n';
 
 import { clearAllFilters } from './actions';
 import { TableFiltersMenu } from './TableFiltersMenu';

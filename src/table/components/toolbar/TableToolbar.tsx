@@ -3,10 +3,10 @@ import classNames from 'classnames';
 import { createElement, useCallback } from 'react';
 import { Card } from 'react-bootstrap';
 
+import { translate } from 'waldur-i18n-runtime';
 import { BaseButton, useBreakpointDown } from 'waldur-ui';
 
 import { titleCase } from '@/core/utils';
-import { translate } from '@/i18n';
 
 import { useTableContext } from '../../context';
 import { TableButtons } from '../../TableButtons';

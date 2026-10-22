@@ -21,6 +21,7 @@ import {
 } from '@phosphor-icons/react';
 import { FC, ReactNode, useId, useMemo, useState } from 'react';
 
+import { translate } from 'waldur-i18n-runtime';
 import {
   BaseButton,
   Checkbox,
@@ -32,7 +33,6 @@ import {
 } from 'waldur-ui';
 
 import { FilterBox } from '@/form/FilterBox';
-import { translate } from '@/i18n';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableProps } from './types';

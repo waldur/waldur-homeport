@@ -1,8 +1,7 @@
 import { ListIcon, GridFourIcon } from '@phosphor-icons/react';
 
+import { translate } from 'waldur-i18n-runtime';
 import { BaseButton } from 'waldur-ui';
-
-import { translate } from '@/i18n';
 
 import { TableProps } from './types';
 
