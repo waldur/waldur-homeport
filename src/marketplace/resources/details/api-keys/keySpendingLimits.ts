@@ -8,16 +8,21 @@
  * `marketplace/api_key_spending_limits.py` in waldur-mastermind; the backend
  * has the final word.
  */
-import { Resource, SpendingLimitBounds } from 'waldur-js-client';
+import { Offering, Resource } from 'waldur-js-client';
 
 import {
   getOfferedPeriods,
   isEmptyAmount,
   SPENDING_LIMIT_PERIODS,
+  SpendingLimitFieldBounds,
   SpendingLimitFormValues,
   SpendingLimitPeriod,
   SpendingLimitsPayload,
 } from '@/marketplace/common/spendingLimits';
+import {
+  findResourcePlan,
+  resolvePlanComponents,
+} from '@/marketplace/details/plan/effectiveComponents';
 
 import { KeyComponent } from './types';
 
@@ -25,16 +30,32 @@ import { KeyComponent } from './types';
 export type KeyLimitComponent = Omit<KeyComponent, 'measured_unit'> & {
   name: string;
   measured_unit?: string;
-  spending_limit_periods: Record<string, SpendingLimitBounds>;
+  spending_limit_periods: Record<string, SpendingLimitFieldBounds>;
 };
 
 type Limits = Resource['spending_limits'] | null | undefined;
 
 /**
+ * The offering's components as billed under the resource's plan. A plan may
+ * bill a usage component by limit, and then it takes no spending limit; the
+ * backend reads the periods a key may limit from the plan, so the dialogs
+ * must too. Every component stays, as each takes a monthly key limit.
+ */
+export const getResourceKeyComponents = (
+  offering: Pick<Offering, 'components' | 'plans'> | undefined,
+  planUuid: string | null | undefined,
+): KeyComponent[] =>
+  resolvePlanComponents(
+    offering?.components ?? [],
+    findResourcePlan(offering?.plans, planUuid),
+  );
+
+/**
  * The periods a key may limit on each component, each with the resource's
- * limit for it as the maximum. A limit the key already holds is accepted again
- * as it is, so its period stays shown and its amount stays within the maximum
- * even after the provider or the resource has moved.
+ * limit for it as the maximum of any new amount. As in the backend, a limit
+ * the key already holds is accepted again only as it is (the fields'
+ * `keepHeld`): above a resource limit lowered since, or on a period no longer
+ * offered, which stays shown as `heldOnly` so it can be kept or cleared.
  */
 export const getKeyLimitComponents = (
   components: KeyComponent[],
@@ -49,22 +70,15 @@ export const getKeyLimitComponents = (
       );
     }
     const own = held?.[component.type] ?? {};
-    Object.entries(own).forEach(([period, amount]) => {
-      if (!isEmptyAmount(amount)) offered.add(period);
-    });
-    const periods: Record<string, SpendingLimitBounds> = {};
+    const periods: Record<string, SpendingLimitFieldBounds> = {};
     for (const period of SPENDING_LIMIT_PERIODS) {
-      if (!offered.has(period)) continue;
+      const isHeld = !isEmptyAmount(own[period]);
+      if (!offered.has(period) && !isHeld) continue;
       const cap = resourceLimits?.[component.type]?.[period];
-      const amount = own[period];
-      periods[period] = isEmptyAmount(cap)
-        ? {}
-        : {
-            maximum:
-              !isEmptyAmount(amount) && Number(amount) > Number(cap)
-                ? Number(amount)
-                : Number(cap),
-          };
+      periods[period] = {
+        ...(isEmptyAmount(cap) ? {} : { maximum: Number(cap) }),
+        ...(offered.has(period) ? {} : { heldOnly: true }),
+      };
     }
     return {
       ...component,

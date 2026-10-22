@@ -213,4 +213,50 @@ describe('SetSpendingLimitsDialog', () => {
     );
     expect(marketplaceResourcesSetSpendingLimits).not.toHaveBeenCalled();
   });
+
+  it('marks the field the backend refused and reads the offering again', async () => {
+    const user = userEvent.setup();
+    // The SDK throws the response body with its envelope spread on top.
+    vi.mocked(marketplaceResourcesSetSpendingLimits).mockRejectedValue({
+      token_cost: ['The month limit may not exceed 200.'],
+      response: { status: 400 },
+    });
+    renderDialog();
+    await waitFor(() => expect(getInput('Monthly')).toHaveValue(300));
+
+    await user.clear(getInput('Monthly'));
+    await user.type(getInput('Monthly'), '250');
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+
+    await waitFor(() =>
+      expect(getInput('Monthly')).toHaveAccessibleDescription(
+        'The month limit may not exceed 200.',
+      ),
+    );
+    // The provider may have lowered the maximum: the fields show the new one.
+    await waitFor(() =>
+      expect(marketplaceResourcesOfferingRetrieve).toHaveBeenCalledTimes(2),
+    );
+  });
+
+  it('lets a refused save be retried once a field is edited', async () => {
+    const user = userEvent.setup();
+    vi.mocked(marketplaceResourcesSetSpendingLimits).mockRejectedValueOnce({
+      token_cost: ['The month limit may not exceed 200.'],
+    });
+    renderDialog();
+    await waitFor(() => expect(getInput('Monthly')).toHaveValue(300));
+
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled(),
+    );
+
+    await user.clear(getInput('Monthly'));
+    await user.type(getInput('Monthly'), '150');
+    expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
+    expect(
+      screen.queryByText('The month limit may not exceed 200.'),
+    ).not.toBeInTheDocument();
+  });
 });

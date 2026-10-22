@@ -1,3 +1,5 @@
+import { Resource } from 'waldur-js-client';
+
 import { translate } from '@/i18n';
 import {
   getSpendingLimitLabel,
@@ -20,9 +22,27 @@ export interface ComponentUsage {
   overLimit: boolean;
 }
 
+/** The resource's spending limits, `{component_type: {period: amount}}`. */
+export type ResourceSpendingLimits = Resource['spending_limits'] | undefined;
+
 // Zero means "no limit", as for resource limits.
 const positive = (value?: number | null) =>
   typeof value === 'number' && value > 0 ? value : undefined;
+
+/**
+ * The limit in force on a key for one period: the tighter of its own and its
+ * resource's spending limit for the period, as no key can use more than its
+ * resource may. It is inherited when the resource's is the one in force: the
+ * key has no limit of its own for the period, or its own is higher. A tie
+ * counts as the key's own.
+ */
+const getLimitInForce = (own?: number, resource?: number) => {
+  const limit =
+    own !== undefined && resource !== undefined
+      ? Math.min(own, resource)
+      : (own ?? resource);
+  return { limit, inherited: limit !== undefined && own !== limit };
+};
 
 // Limits are monthly, in UTC months as the backend counts them: usage reported
 // for an earlier month counts as none, e.g. before the agent's first report of
@@ -32,19 +52,20 @@ const getCurrentUsages = (row: ApiKeyRow, now = new Date()) =>
     ? row.current_usages
     : undefined;
 
+/** The month's usage of a component against the month limit in force on the key. */
 export const getComponentUsage = (
   row: ApiKeyRow,
   component: KeyComponent,
-  resourceLimits: Record<string, number>,
+  resourceLimits: ResourceSpendingLimits,
   now = new Date(),
 ): ComponentUsage => {
-  const own = positive(row.limits?.[component.type]);
-  const governing = positive(resourceLimits[component.type]);
-  // No key can use more than its resource may, so the tighter limit is the one in force.
-  const limit =
-    own !== undefined && governing !== undefined
-      ? Math.min(own, governing)
-      : (own ?? governing);
+  const { limit, inherited } = getLimitInForce(
+    positive(
+      row.spending_limits?.[component.type]?.month ??
+        row.limits?.[component.type],
+    ),
+    positive(resourceLimits?.[component.type]?.month),
+  );
   const used = getCurrentUsages(row, now)?.[component.type];
   // A limited key that reported nothing has used none of its limit.
   const ratio = limit !== undefined ? ((used ?? 0) / limit) * 100 : undefined;
@@ -52,21 +73,23 @@ export const getComponentUsage = (
     component,
     used,
     limit,
-    // The applied limit is the resource's unless the key's own limit is the one in force.
-    inherited: limit !== undefined && own !== limit,
+    inherited,
     ratio,
     overLimit: ratio !== undefined && ratio > 100,
   };
 };
 
 /**
- * The key's limits on periods other than the month, as the backend measured
- * them. The month reading comes from getComponentUsage, which also falls back
- * to the resource's limit.
+ * The key's limits on periods other than the month, with the usage the
+ * backend measured for them, each against the limit in force for its period.
+ * Only the key's own limits are measured, so a period the key has no limit of
+ * its own on has no reading; the month reading comes from getComponentUsage,
+ * which reads the month's usage either way.
  */
 export const getPeriodUsages = (
   row: ApiKeyRow,
   component: KeyComponent,
+  resourceLimits: ResourceSpendingLimits,
 ): ComponentUsage[] =>
   (row.spending_limit_status ?? [])
     .filter(
@@ -74,16 +97,20 @@ export const getPeriodUsages = (
         status.component_type === component.type && status.period !== 'month',
     )
     .map((status) => {
+      const { limit, inherited } = getLimitInForce(
+        positive(status.limit),
+        positive(resourceLimits?.[component.type]?.[status.period]),
+      );
       // Key limits are above 0; guarded all the same.
-      const ratio = status.limit > 0 ? (status.used / status.limit) * 100 : 100;
+      const ratio = limit ? (status.used / limit) * 100 : 100;
       return {
         component,
         period: status.period,
         used: status.used,
-        limit: status.limit,
-        inherited: false,
+        limit: limit ?? status.limit,
+        inherited,
         ratio,
-        overLimit: status.used > status.limit,
+        overLimit: limit !== undefined && status.used > limit,
       };
     });
 
@@ -107,10 +134,10 @@ export const getReadingLabel = (reading: ComponentUsage) => {
 export const getComponentReadings = (
   row: ApiKeyRow,
   component: KeyComponent,
-  resourceLimits: Record<string, number>,
+  resourceLimits: ResourceSpendingLimits,
 ) => [
   getComponentUsage(row, component, resourceLimits),
-  ...getPeriodUsages(row, component),
+  ...getPeriodUsages(row, component, resourceLimits),
 ];
 
 // Colours a meter by how close the key is to its limit. A key's own limit pauses
@@ -130,7 +157,7 @@ export const getMeterVariant = (ratio?: number) =>
 export const getHeadlineUsage = (
   row: ApiKeyRow,
   components: KeyComponent[],
-  resourceLimits: Record<string, number>,
+  resourceLimits: ResourceSpendingLimits,
 ) =>
   components
     .flatMap((component) =>

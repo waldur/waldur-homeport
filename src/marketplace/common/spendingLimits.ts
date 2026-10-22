@@ -114,10 +114,19 @@ export const getOfferedPeriods = (
   return SPENDING_LIMIT_PERIODS.filter((period) => period in offered);
 };
 
+/**
+ * A period's bounds as the limit fields take them. `heldOnly` marks a period
+ * no longer offered on which an API key still holds a limit: it may be kept
+ * as it is or cleared, nothing else.
+ */
+export type SpendingLimitFieldBounds = SpendingLimitBounds & {
+  heldOnly?: boolean;
+};
+
 export const getPeriodBounds = (
   component: Pick<OfferingComponent, 'spending_limit_periods'>,
   period: SpendingLimitPeriod,
-): SpendingLimitBounds => component.spending_limit_periods?.[period] || {};
+): SpendingLimitFieldBounds => component.spending_limit_periods?.[period] || {};
 
 /**
  * The components a customer may set spending limits on. Pass the components
@@ -144,10 +153,11 @@ export const isHeldAmount = (value: unknown, initial: unknown) =>
 /**
  * An amount's error: it must be a non-negative number with at most two
  * decimal places, and no more than `maximum` when one is given. `positive`
- * refuses zero too, as an API key's limits do. A `held` amount — the one the
- * field was loaded with — skips the size and decimal places rules: an API
- * key's limit set before limits had periods may break them, and the backend
- * takes it back unchanged. An empty value is valid — it sets no limit.
+ * refuses zero too, as an API key's limits do. A `held` amount — an API key's
+ * limit sent back as the key holds it — skips the size, decimal places and
+ * maximum rules: one set before limits had periods, or before the resource's
+ * limit dropped below it, may break them, and the backend takes it back
+ * unchanged. An empty value is valid — it sets no limit.
  */
 export const validateSpendingLimitAmount = (
   value: unknown,
@@ -179,7 +189,12 @@ export const validateSpendingLimitAmount = (
       places: DECIMAL_PLACES,
     });
   }
-  if (maximum !== null && maximum !== undefined && amount > Number(maximum)) {
+  if (
+    !held &&
+    maximum !== null &&
+    maximum !== undefined &&
+    amount > Number(maximum)
+  ) {
     return translate('Must not exceed {maximum}.', { maximum });
   }
   return undefined;
@@ -286,6 +301,69 @@ export const getOfferedSpendingLimits = (
     }
   }
   return result;
+};
+
+// The backend names a period by its code even in a translated message.
+const PERIOD_IN_MESSAGE = new RegExp(
+  `\\b(${SPENDING_LIMIT_PERIODS.join('|')})\\b`,
+);
+
+const asMessages = (value: unknown): string[] =>
+  (Array.isArray(value) ? value : [value]).filter(
+    (message): message is string => typeof message === 'string',
+  );
+
+/**
+ * A rejected `spending_limits` write as final-form submit errors of the
+ * `<type>.<period>` fields, so the dialog marks the field at fault instead of
+ * only showing a toast.
+ *
+ * The body comes in two shapes: wrapped in `spending_limits` with an error per
+ * period (`{spending_limits: {tokens: {day: [...]}}}`, from the serializer), or
+ * keyed by component type with messages that name the period
+ * (`{tokens: ["The month limit may not exceed 200."]}`, from the limit
+ * validation). A message naming no period stays on its component. Anything
+ * else, such as a refused state, returns undefined: it has no field to go to.
+ */
+export const getSpendingLimitSubmitErrors = (
+  body: Record<string, any> | undefined,
+  componentTypes: string[],
+):
+  | Record<string, string[] | Partial<Record<SpendingLimitPeriod, string[]>>>
+  | undefined => {
+  const source =
+    body?.spending_limits && typeof body.spending_limits === 'object'
+      ? body.spending_limits
+      : body;
+  if (!source || Array.isArray(source)) return undefined;
+  const result = {};
+  for (const type of componentTypes) {
+    const error = source[type];
+    if (!error) continue;
+    if (typeof error === 'object' && !Array.isArray(error)) {
+      const periods = {};
+      for (const period of SPENDING_LIMIT_PERIODS) {
+        const messages = asMessages(error[period]);
+        if (messages.length) periods[period] = messages;
+      }
+      if (Object.keys(periods).length) result[type] = periods;
+      continue;
+    }
+    const messages = asMessages(error);
+    if (!messages.length) continue;
+    const periods = {};
+    for (const message of messages) {
+      // An ordering message names the shorter period first, the one at fault.
+      const period = message.match(PERIOD_IN_MESSAGE)?.[1];
+      if (!period) {
+        result[type] = messages;
+        break;
+      }
+      periods[period] = [...(periods[period] ?? []), message];
+    }
+    if (!result[type]) result[type] = periods;
+  }
+  return Object.keys(result).length ? result : undefined;
 };
 
 /** "20", "20.5" — an amount as the API returns it, without trailing zeros. */
