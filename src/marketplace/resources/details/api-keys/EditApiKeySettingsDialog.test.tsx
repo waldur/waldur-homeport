@@ -347,6 +347,54 @@ describe('EditApiKeySettingsDialog', () => {
     });
   });
 
+  // As the backend: a held limit passes only unchanged.
+  it("caps a changed limit by a resource limit lowered below the key's", async () => {
+    const user = userEvent.setup();
+    renderDialog(
+      { spending_limits: { tokens: { month: 800 } } },
+      { resourceLimits: { tokens: { month: 500 } } },
+    );
+    const input = await screen.findByRole('spinbutton');
+    expect(screen.getByText('Up to 500')).toBeInTheDocument();
+    expect(input).toBeValid();
+    await user.clear(input);
+    await user.type(input, '600');
+    expect(await screen.findByText('Must not exceed 500.')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
+    await user.clear(input);
+    await user.type(input, '800');
+    await waitFor(() =>
+      expect(
+        screen.queryByText('Must not exceed 500.'),
+      ).not.toBeInTheDocument(),
+    );
+    expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
+  });
+
+  it('lets a limit on a period no longer offered be kept or cleared only', async () => {
+    const user = userEvent.setup();
+    const NO_LONGER =
+      'This period is no longer offered: keep the limit as it is or clear it.';
+    renderDialog({ spending_limits: { tokens: { day: 3, month: 10 } } });
+    expect(await screen.findByText('No longer offered')).toBeInTheDocument();
+    const [day] = screen.getAllByRole('spinbutton');
+    await user.clear(day);
+    await user.type(day, '4');
+    expect(await screen.findByText(NO_LONGER)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
+    await user.clear(day);
+    await waitFor(() =>
+      expect(screen.queryByText(NO_LONGER)).not.toBeInTheDocument(),
+    );
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+    await waitFor(() =>
+      expect(marketplaceResourceApiKeysPartialUpdate).toHaveBeenCalled(),
+    );
+    expect(sentBody()).toMatchObject({
+      spending_limits: { tokens: { month: 10 } },
+    });
+  });
+
   describe('a change of assignee', () => {
     const ROTATION_HELP =
       'Changing the assignee rotates the key: its current value stops working and the new assignee reveals a new one.';

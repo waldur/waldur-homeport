@@ -34205,6 +34205,11 @@
       "feature_area": "support"
     }
   },
+  "No longer offered": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "No maintenance announcements found for the selected period.": {
     "context": {
       "feature_area": "maintenance"
@@ -60034,6 +60039,7 @@
       "feature_area": "details"
     }
   },
+  "This period is no longer offered: keep the limit as it is or clear it.": {},
   "This plan has no resources yet.": {
     "context": {
       "feature_area": "plans"

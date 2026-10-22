@@ -12,7 +12,10 @@ import {
   getKeySettingsFields,
   serializeKeySettings,
 } from './keySettingsFields';
-import { getKeyLimitComponents } from './keySpendingLimits';
+import {
+  getKeyLimitComponents,
+  getResourceKeyComponents,
+} from './keySpendingLimits';
 
 const TOKENS = { type: 'tokens', name: 'Tokens' };
 
@@ -133,21 +136,22 @@ describe('getKeyLimitComponents', () => {
   });
 
   // The resource limit was lowered after the key's limit was set: the key's
-  // own value stays valid until the user changes it.
-  it("keeps a key's existing limit valid above a lowered resource limit", () => {
+  // own value stays valid as it is (the fields' keepHeld), but a new amount is
+  // capped by the resource's limit, as the backend caps it.
+  it("caps a new amount by a resource limit lowered below the key's", () => {
     const components = limitComponents(
       { token_cost: { day: 20 } },
       { token_cost: { day: 30 } },
     );
-    expect(periods(components, 'token_cost').day).toEqual({ maximum: 30 });
+    expect(periods(components, 'token_cost').day).toEqual({ maximum: 20 });
   });
 
-  it('keeps showing a limit on a period no longer offered', () => {
+  it('keeps showing a limit on a period no longer offered, to keep or clear', () => {
     const components = limitComponents({}, { tokens: { day: 3 } });
-    expect(Object.keys(periods(components, 'tokens'))).toEqual([
-      'day',
-      'month',
-    ]);
+    expect(periods(components, 'tokens')).toEqual({
+      day: { heldOnly: true },
+      month: {},
+    });
   });
 });
 
@@ -206,7 +210,7 @@ describe('getComponentUsage', () => {
     const reading = getComponentUsage(
       row({ limits: { tokens: 100 }, current_usages: { tokens: 50 } }),
       TOKENS,
-      { tokens: 1000 },
+      { tokens: { month: 1000 } },
     );
     expect(reading).toMatchObject({ limit: 100, ratio: 50, inherited: false });
   });
@@ -215,7 +219,7 @@ describe('getComponentUsage', () => {
     const reading = getComponentUsage(
       row({ current_usages: { tokens: 250 } }),
       TOKENS,
-      { tokens: 1000 },
+      { tokens: { month: 1000 } },
     );
     expect(reading).toMatchObject({ limit: 1000, ratio: 25, inherited: true });
   });
@@ -224,16 +228,36 @@ describe('getComponentUsage', () => {
     const reading = getComponentUsage(
       row({ limits: { tokens: 5000 } }),
       TOKENS,
-      { tokens: 1000 },
+      { tokens: { month: 1000 } },
     );
     expect(reading).toMatchObject({ limit: 1000, inherited: true });
+  });
+
+  // A tie counts as the key's own limit.
+  it('reads a key limit equal to the resource limit as its own', () => {
+    const reading = getComponentUsage(
+      row({ spending_limits: { tokens: { month: 1000 } } }),
+      TOKENS,
+      { tokens: { month: 1000 } },
+    );
+    expect(reading).toMatchObject({ limit: 1000, inherited: false });
+  });
+
+  // Only a limit on the same period caps it.
+  it("ignores the resource's limits on other periods", () => {
+    const reading = getComponentUsage(
+      row({ spending_limits: { tokens: { month: 150 } } }),
+      TOKENS,
+      { tokens: { day: 10 } },
+    );
+    expect(reading).toMatchObject({ limit: 150, inherited: false });
   });
 
   it('treats zero as no limit', () => {
     const reading = getComponentUsage(
       row({ limits: { tokens: 0 }, current_usages: { tokens: 7 } }),
       TOKENS,
-      { tokens: 0 },
+      { tokens: { month: 0 } },
     );
     expect(reading).toMatchObject({ limit: undefined, used: 7 });
   });
@@ -274,6 +298,7 @@ describe('limits on periods other than the month', () => {
         spending_limit_status: [status('day', 4, 5), status('month', 4, 50)],
       }),
       TOKEN_COST,
+      {},
     );
     expect(readings).toHaveLength(1);
     expect(readings[0]).toMatchObject({
@@ -283,6 +308,26 @@ describe('limits on periods other than the month', () => {
       ratio: 80,
     });
     expect(getReadingLabel(readings[0])).toBe('Token cost · Daily limit');
+  });
+
+  it("reads each against the resource's limit for the period when tighter", () => {
+    const readings = getPeriodUsages(
+      row({
+        spending_limit_status: [status('day', 4, 10), status('week', 4, 20)],
+      }),
+      TOKEN_COST,
+      { token_cost: { day: 5, week: 20 } },
+    );
+    expect(readings).toEqual([
+      expect.objectContaining({
+        period: 'day',
+        limit: 5,
+        ratio: 80,
+        inherited: true,
+      }),
+      // A tie counts as the key's own limit.
+      expect.objectContaining({ period: 'week', limit: 20, inherited: false }),
+    ]);
   });
 
   // Next to "· Daily limit", a bare month line would not say what it limits.
@@ -297,7 +342,7 @@ describe('limits on periods other than the month', () => {
     const [inherited] = getComponentReadings(
       row({ current_usages: { token_cost: 4 } }),
       TOKEN_COST,
-      { token_cost: 80 },
+      { token_cost: { month: 80 } },
     );
     expect(getReadingLabel(inherited)).toBe('Token cost · Monthly limit');
   });
@@ -329,7 +374,45 @@ describe('limits on periods other than the month', () => {
       getPeriodUsages(
         row({ spending_limit_status: [status('day', 0, 0)] }),
         TOKEN_COST,
+        {},
       )[0].ratio,
     ).toBe(100);
+  });
+});
+
+describe('getResourceKeyComponents', () => {
+  const offering = {
+    components: [TOKENS, TOKEN_COST],
+    plans: [
+      {
+        uuid: 'plan-limit',
+        components: [{ type: 'token_cost', billing_type: 'limit' }],
+      },
+    ],
+  } as any;
+
+  // The backend reads the periods a key may limit from the plan's billing.
+  it('offers only month on a component the plan bills by limit', () => {
+    const components = getKeyLimitComponents(
+      getResourceKeyComponents(offering, 'plan-limit'),
+      {},
+    );
+    expect(
+      Object.keys(
+        components.find((c) => c.type === 'token_cost')!.spending_limit_periods,
+      ),
+    ).toEqual(['month']);
+  });
+
+  it('keeps the offering billing without a known plan', () => {
+    const components = getKeyLimitComponents(
+      getResourceKeyComponents(offering, undefined),
+      {},
+    );
+    expect(
+      Object.keys(
+        components.find((c) => c.type === 'token_cost')!.spending_limit_periods,
+      ),
+    ).toEqual(['day', 'week', 'month']);
   });
 });

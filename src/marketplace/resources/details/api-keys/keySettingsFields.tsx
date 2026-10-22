@@ -81,6 +81,7 @@ const KeyLimitsField: FC<{
       name="spending_limits"
       disabled={disabled}
       positive
+      keepHeld
     />
   </FormGroup>
 );
