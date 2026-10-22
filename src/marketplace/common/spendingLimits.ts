@@ -77,9 +77,7 @@ export const getSpendingLimitLabel = (period: SpendingLimitPeriod): string =>
   })[period] ?? period;
 
 /** "day", "week", ... — the noun, for "per day" and the ordering messages. */
-export const getSpendingLimitPeriodNoun = (
-  period: SpendingLimitPeriod,
-): string =>
+const getSpendingLimitPeriodNoun = (period: SpendingLimitPeriod): string =>
   ({
     day: translate('day'),
     week: translate('week'),
@@ -285,7 +283,7 @@ export const formatSpendingAmount = (value: number | string) => {
 // ── Provider: the periods a component offers ────────────────────────────
 
 /** One period of the component dialog: ticked, with optional bounds. */
-export interface ComponentPeriodFormValue {
+interface ComponentPeriodFormValue {
   enabled?: boolean;
   default?: number | string | null;
   maximum?: number | string | null;
