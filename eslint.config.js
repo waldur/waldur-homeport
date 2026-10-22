@@ -123,47 +123,11 @@ const RESTRICTED_IMPORTS = [
     message:
       'Use TablePagination or Pagination from "waldur-ui" instead of react-bootstrap/PageItem.',
   },
-  // lodash-es is being retired (#455). A change that removes the last import
-  // of a helper adds its name here, so it cannot come back; once the list
-  // covers everything, importNames goes and the whole module is banned.
+  // lodash-es is retired (#455); es-toolkit replaced it.
   {
     name: 'lodash-es',
-    importNames: [
-      'capitalize',
-      'cloneDeep',
-      'concat',
-      'debounce',
-      'difference',
-      'escape',
-      'escapeRegExp',
-      'get',
-      'groupBy',
-      'isEmpty',
-      'isEqual',
-      'isMatch',
-      'isNil',
-      'isNumber',
-      'lowerCase',
-      'merge',
-      'noop',
-      'omit',
-      'omitBy',
-      'padStart',
-      'pick',
-      'pickBy',
-      'set',
-      'sortBy',
-      'startCase',
-      'sum',
-      'sumBy',
-      'truncate',
-      'uniq',
-      'uniqueId',
-      'upperFirst',
-      'words',
-    ],
     message:
-      'lodash-es is being retired (#455). Use native code, or es-toolkit / es-toolkit/compat where lodash semantics matter.',
+      'lodash-es is retired (#455). Use native code, or es-toolkit / es-toolkit/compat where lodash semantics matter.',
   },
 ];
 
