@@ -466,15 +466,6 @@
   }
 }
 
-// Sidebar filters (TableFilterContainer.tsx in the filter drawer)
-[data-slot='drawer'] .filter-container {
-  white-space: normal;
-
-  .filter-field {
-    padding-top: 0;
-  }
-}
-
 // Mobile mode
 // The page's side padding below lg (the page container's 15px).
 $mobile-spacing: 15px;

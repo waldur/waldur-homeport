@@ -2,17 +2,12 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { translate } from 'waldur-i18n-runtime';
-
-import { useDrawer } from '@/drawer/actions';
 import { getTableState, selectRegisteredFilterNames } from '@/table/selectors';
 
 import * as actions from './actions';
 import { INITIAL_STATE } from './constants';
 import { getTableHost } from './host';
 import { registerTable, unregisterTable } from './registry';
-import { TableFilterActions } from './TableFilterActions';
-import { TableFilterContainer } from './TableFilterContainer';
 import {
   DisplayMode,
   FilterItem,
@@ -46,8 +41,6 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
       }
     };
   }, [table, dispatch]);
-
-  const { openDrawer } = useDrawer();
 
   // Get Redux state for request building
   const tableState = useSelector(getTableState(table));
@@ -229,24 +222,6 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     [dispatch, table],
   );
 
-  const openFiltersDrawer = useCallback(
-    (filters: JSX.Element, formId?: string) => {
-      applyFiltersFn(false);
-      openDrawer(TableFilterContainer, {
-        title: translate('Filters'),
-        subtitle: translate('Apply filters to table data'),
-        width: '500px',
-        table,
-        filters,
-        formId,
-        setFilter: (item: FilterItem) =>
-          dispatch(actions.setFilter(table, item)),
-        apply: () => applyFiltersFn(true),
-        footer: TableFilterActions,
-      });
-    },
-    [openDrawer, applyFiltersFn, table, dispatch],
-  );
   const renderFiltersDrawer = useCallback(() => {
     applyFiltersFn(true);
     dispatch(actions.selectSavedFilter(table, null));
@@ -340,7 +315,6 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   return {
     fetch,
     gotoPage,
-    openFiltersDrawer,
     renderFiltersDrawer,
     setDisplayMode,
     setQuery,

@@ -205,6 +205,7 @@ export interface TableProps<RowType = any> extends TableState {
   gridSize?: ColProps;
   gridSpace?: number;
   gridFixedWidth?: boolean;
+  /** Opens the narrow-viewport filter panel; `BaseTable` supplies its own. */
   openFiltersDrawer?: (filters: React.ReactNode, formId?: string) => void;
   renderFiltersDrawer?: (filters: React.ReactNode, formId?: string) => void;
   dropdownActions?: ReactNode;

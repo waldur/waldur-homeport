@@ -27,6 +27,7 @@ export const INIT_COLUMN_POSITIONS = 'waldur/table/INIT_COLUMN_POSITIONS';
 export const SWAP_COLUMNS = 'waldur/table/SWAP_COLUMNS';
 export const TOGGLE_COLUMN_PIN = 'waldur/table/TOGGLE_COLUMN_PIN';
 export const CLEAR_ALL_FILTERS = 'waldur/table/CLEAR_ALL_FILTERS';
+export const RESTORE_FILTERS = 'waldur/table/RESTORE_FILTERS';
 export const REGISTER_FILTER_NAME = 'waldur/table/REGISTER_FILTER_NAME';
 export const CLEAR_REGISTERED_FILTER_NAMES =
   'waldur/table/CLEAR_REGISTERED_FILTER_NAMES';
@@ -235,6 +236,17 @@ export const toggleColumnPin = (table: string, id: string) => ({
 export const clearAllFilters = (table: string) => ({
   type: CLEAR_ALL_FILTERS,
   payload: { table },
+});
+
+/** Puts back the filters (and selected saved filter) a table had earlier, e.g.
+ * when the filter panel is cancelled after its fields changed them. */
+export const restoreFilters = (
+  table: string,
+  filtersStorage: FilterItem[],
+  selectedSavedFilter: TableFiltersGroup | null,
+) => ({
+  type: RESTORE_FILTERS,
+  payload: { table, filtersStorage, selectedSavedFilter },
 });
 
 /** Record that a filter field with the given `name` is rendered by this table.
