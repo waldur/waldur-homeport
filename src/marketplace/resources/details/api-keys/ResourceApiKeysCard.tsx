@@ -24,7 +24,7 @@ import { useUser } from '@/workspace/hooks';
 import { ApiKeyActionsDropdown } from './ApiKeyActions';
 import { ApiKeyExpandableRow } from './ApiKeyExpandableRow';
 import { ApiKeyUsageSummary } from './ApiKeyUsageMeter';
-import { getHeadlineUsage } from './keyLimits';
+import { getHeadlineUsage, ResourceSpendingLimits } from './keyLimits';
 import { getResourceKeyComponents } from './keySpendingLimits';
 import {
   getKeyStateVariant,
@@ -50,7 +50,7 @@ const RequestApiKeyDialog = lazyComponent(() =>
 const getColumns = (
   components: KeyComponent[],
   models: string[] | null,
-  resourceLimits: Record<string, number>,
+  resourceLimits: ResourceSpendingLimits,
   keyManagement: boolean,
   anyAssigned: boolean,
   pause: ResourcePause | null,
@@ -106,7 +106,7 @@ const getAssigneeColumn = (): Column<ApiKeyRow> => ({
 const getManagedColumns = (
   components: KeyComponent[],
   models: string[] | null,
-  resourceLimits: Record<string, number>,
+  resourceLimits: ResourceSpendingLimits,
 ): Column<ApiKeyRow>[] => [
   getAssigneeColumn(),
   ...(components.length
@@ -183,10 +183,8 @@ export const ResourceApiKeysCard = ({
     () => getResourceKeyComponents(offering, resource.plan_uuid),
     [offering, resource.plan_uuid],
   );
-  const resourceLimits = useMemo(
-    () => (resource.limits ?? {}) as Record<string, number>,
-    [resource.limits],
-  );
+  // The resource's spending limits cap its keys, period by period.
+  const resourceLimits = resource.spending_limits;
   // The offering's choices, narrowed by the resource's own selection.
   const models = useMemo(
     () => getResourceModels(offering, resource),
