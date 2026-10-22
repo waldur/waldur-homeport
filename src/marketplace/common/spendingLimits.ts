@@ -114,10 +114,19 @@ export const getOfferedPeriods = (
   return SPENDING_LIMIT_PERIODS.filter((period) => period in offered);
 };
 
+/**
+ * A period's bounds as the limit fields take them. `heldOnly` marks a period
+ * no longer offered on which an API key still holds a limit: it may be kept
+ * as it is or cleared, nothing else.
+ */
+export type SpendingLimitFieldBounds = SpendingLimitBounds & {
+  heldOnly?: boolean;
+};
+
 export const getPeriodBounds = (
   component: Pick<OfferingComponent, 'spending_limit_periods'>,
   period: SpendingLimitPeriod,
-): SpendingLimitBounds => component.spending_limit_periods?.[period] || {};
+): SpendingLimitFieldBounds => component.spending_limit_periods?.[period] || {};
 
 /**
  * The components a customer may set spending limits on. Pass the components
@@ -144,10 +153,11 @@ export const isHeldAmount = (value: unknown, initial: unknown) =>
 /**
  * An amount's error: it must be a non-negative number with at most two
  * decimal places, and no more than `maximum` when one is given. `positive`
- * refuses zero too, as an API key's limits do. A `held` amount — the one the
- * field was loaded with — skips the size and decimal places rules: an API
- * key's limit set before limits had periods may break them, and the backend
- * takes it back unchanged. An empty value is valid — it sets no limit.
+ * refuses zero too, as an API key's limits do. A `held` amount — an API key's
+ * limit sent back as the key holds it — skips the size, decimal places and
+ * maximum rules: one set before limits had periods, or before the resource's
+ * limit dropped below it, may break them, and the backend takes it back
+ * unchanged. An empty value is valid — it sets no limit.
  */
 export const validateSpendingLimitAmount = (
   value: unknown,
@@ -179,7 +189,12 @@ export const validateSpendingLimitAmount = (
       places: DECIMAL_PLACES,
     });
   }
-  if (maximum !== null && maximum !== undefined && amount > Number(maximum)) {
+  if (
+    !held &&
+    maximum !== null &&
+    maximum !== undefined &&
+    amount > Number(maximum)
+  ) {
     return translate('Must not exceed {maximum}.', { maximum });
   }
   return undefined;

@@ -34,19 +34,38 @@ const getSpendingLimitFieldId = (
 const getErrorId = (componentType: string, period: SpendingLimitPeriod) =>
   `${getSpendingLimitFieldId(componentType, period)}-error`;
 
+interface PeriodRules {
+  maximum?: number | null;
+  positive?: boolean;
+  // The amount the field was loaded with stays valid as it is.
+  keepHeld?: boolean;
+  // A period no longer offered: only the held amount, or none.
+  heldOnly?: boolean;
+}
+
+const validatePeriodAmount = (
+  value: unknown,
+  initial: unknown,
+  { maximum, positive, keepHeld, heldOnly }: PeriodRules,
+) => {
+  const held = Boolean(keepHeld) && isHeldAmount(value, initial);
+  if (heldOnly && !held && !isEmptyAmount(value)) {
+    return translate(
+      'This period is no longer offered: keep the limit as it is or clear it.',
+    );
+  }
+  return validateSpendingLimitAmount(value, maximum, { positive, held });
+};
+
 const makeValidator =
   (
     name: string,
     component: CappedComponent,
     period: SpendingLimitPeriod,
-    maximum?: number | null,
-    positive?: boolean,
+    rules: PeriodRules,
   ) =>
   (value, allValues, meta?: { initial?: unknown }) =>
-    validateSpendingLimitAmount(value, maximum, {
-      positive,
-      held: isHeldAmount(value, meta?.initial),
-    }) ||
+    validatePeriodAmount(value, meta?.initial, rules) ||
     getSpendingLimitOrderErrors(get(allValues, [name, component.type]))[period];
 
 // Kept as typed: the payload formatter turns the text into a number, so a
@@ -59,14 +78,16 @@ const PeriodInput: FC<{
   period: SpendingLimitPeriod;
   disabled?: boolean;
   positive?: boolean;
-}> = ({ name, component, period, disabled, positive }) => {
-  const maximum = getPeriodBounds(component, period).maximum;
+  keepHeld?: boolean;
+}> = ({ name, component, period, disabled, positive, keepHeld }) => {
+  const { maximum, heldOnly } = getPeriodBounds(component, period);
+  const rules: PeriodRules = { maximum, positive, keepHeld, heldOnly };
   const id = getSpendingLimitFieldId(component.type, period);
   return (
     <Field
       name={`${name}.${component.type}.${period}`}
       parse={parseAmount}
-      validate={makeValidator(name, component, period, maximum, positive)}
+      validate={makeValidator(name, component, period, rules)}
       render={({ input, meta }) => {
         // Shown on first change, not only on blur: Submit is disabled as
         // you type, and the reason must be visible by then. An ordering
@@ -76,10 +97,9 @@ const PeriodInput: FC<{
         // shows its error at once.
         const isOrderError =
           Boolean(meta.error) &&
-          !validateSpendingLimitAmount(input.value, maximum, {
-            positive,
-            held: isHeldAmount(input.value, meta.initial),
-          });
+          !validatePeriodAmount(input.value, meta.initial, rules);
+        const held =
+          Boolean(keepHeld) && isHeldAmount(input.value, meta.initial);
         const isStoredValue = !meta.modified && !isEmptyAmount(meta.initial);
         // A rejected save marks the field the backend named until it is
         // edited again.
@@ -97,10 +117,11 @@ const PeriodInput: FC<{
               name={input.name}
               type="number"
               min={0}
-              max={maximum ?? undefined}
-              // A held amount with more decimals must not trip the
-              // browser's own step check, which would block the submit.
-              step={isHeldAmount(input.value, meta.initial) ? 'any' : '0.01'}
+              // A held amount above the maximum or with more decimals must
+              // not trip the browser's own checks, which would block the
+              // submit.
+              max={held ? undefined : (maximum ?? undefined)}
+              step={held ? 'any' : '0.01'}
               placeholder={translate('No limit')}
               containerClassName="mw-200px"
               aria-invalid={Boolean(error)}
@@ -149,7 +170,16 @@ export const SpendingLimitFields: FC<{
   disabled?: boolean;
   // Refuse a limit of 0, as an API key's limits do.
   positive?: boolean;
-}> = ({ components, name = 'spending_limits', disabled, positive }) => (
+  // Accept the amount a field was loaded with as it is, even above its
+  // maximum, as the backend does for an API key's limits.
+  keepHeld?: boolean;
+}> = ({
+  components,
+  name = 'spending_limits',
+  disabled,
+  positive,
+  keepHeld,
+}) => (
   <>
     {components.map((component) => (
       <div
@@ -164,7 +194,7 @@ export const SpendingLimitFields: FC<{
         )}
         <FormTable className="gy-3">
           {getOfferedPeriods(component).map((period) => {
-            const maximum = getPeriodBounds(component, period).maximum;
+            const { maximum, heldOnly } = getPeriodBounds(component, period);
             return (
               <FormTable.Item
                 key={period}
@@ -174,15 +204,23 @@ export const SpendingLimitFields: FC<{
                 // table past a dialog, squeezing every input to its unit.
                 description={
                   <>
-                    {maximum !== null && maximum !== undefined && (
+                    {heldOnly ? (
                       <>
-                        <span>
-                          {translate('Up to {maximum}', {
-                            maximum: formatSpendingAmount(maximum),
-                          })}
-                        </span>
+                        <span>{translate('No longer offered')}</span>
                         {' · '}
                       </>
+                    ) : (
+                      maximum !== null &&
+                      maximum !== undefined && (
+                        <>
+                          <span>
+                            {translate('Up to {maximum}', {
+                              maximum: formatSpendingAmount(maximum),
+                            })}
+                          </span>
+                          {' · '}
+                        </>
+                      )
                     )}
                     <span>{getSpendingLimitResetText(period)}</span>
                   </>
@@ -194,6 +232,7 @@ export const SpendingLimitFields: FC<{
                     period={period}
                     disabled={disabled}
                     positive={positive}
+                    keepHeld={keepHeld}
                   />
                 }
               />

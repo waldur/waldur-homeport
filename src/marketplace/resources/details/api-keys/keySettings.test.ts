@@ -133,21 +133,22 @@ describe('getKeyLimitComponents', () => {
   });
 
   // The resource limit was lowered after the key's limit was set: the key's
-  // own value stays valid until the user changes it.
-  it("keeps a key's existing limit valid above a lowered resource limit", () => {
+  // own value stays valid as it is (the fields' keepHeld), but a new amount is
+  // capped by the resource's limit, as the backend caps it.
+  it("caps a new amount by a resource limit lowered below the key's", () => {
     const components = limitComponents(
       { token_cost: { day: 20 } },
       { token_cost: { day: 30 } },
     );
-    expect(periods(components, 'token_cost').day).toEqual({ maximum: 30 });
+    expect(periods(components, 'token_cost').day).toEqual({ maximum: 20 });
   });
 
-  it('keeps showing a limit on a period no longer offered', () => {
+  it('keeps showing a limit on a period no longer offered, to keep or clear', () => {
     const components = limitComponents({}, { tokens: { day: 3 } });
-    expect(Object.keys(periods(components, 'tokens'))).toEqual([
-      'day',
-      'month',
-    ]);
+    expect(periods(components, 'tokens')).toEqual({
+      day: { heldOnly: true },
+      month: {},
+    });
   });
 });
 
