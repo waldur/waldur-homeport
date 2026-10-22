@@ -71845,6 +71845,16 @@
       "feature_area": "actions"
     }
   },
+  "You can view reports of {count} organizations. Pick one from the filter above to load the reports recommended for that organization.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "reporting"
+    }
+  },
   "You can't join this organization with your current account details. Access is limited to certain users as defined by the organization manager.": {
     "context": {
       "feature_area": "join-organization"
@@ -72147,16 +72157,6 @@
   "You need approval to finish purchasing of services.": {
     "context": {
       "feature_area": "actions"
-    }
-  },
-  "You own {count} organizations. Pick one from the filter above to load the reports recommended for that organization.": {
-    "context": {
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      },
-      "feature_area": "reporting"
     }
   },
   "You started a call": {},

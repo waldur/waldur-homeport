@@ -37,7 +37,7 @@ const ReportCard: FC<{ report: ReportDefinition }> = ({ report }) => {
 };
 
 /**
- * Reporting landing page of organization owners: the reports that make sense
+ * Reporting landing page of non-staff users: the reports that make sense
  * for a single organization, once one is selected.
  */
 export const CustomerReportingLanding: FC = () => {
@@ -63,7 +63,7 @@ export const CustomerReportingLanding: FC = () => {
             icon={<BuildingsIcon weight="bold" size={24} />}
             title={translate('Select an organization to view its reports')}
             message={translate(
-              'You own {count} organizations. Pick one from the filter above to load the reports recommended for that organization.',
+              'You can view reports of {count} organizations. Pick one from the filter above to load the reports recommended for that organization.',
               { count: organizations.length },
             )}
             noAction

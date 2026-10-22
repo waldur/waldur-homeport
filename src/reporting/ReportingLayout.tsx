@@ -29,7 +29,7 @@ export const ReportingLayout: FC = () => {
   const tabs = useMemo(() => getReportingTabs(workspace), [workspace]);
   const isStaff = useSelector(isStaffOrSupport);
 
-  // Organization owners reach only the landing page under this layout; the
+  // Non-staff users reach only the landing page under this layout; the
   // category tabs and their lists stay staff/support only.
   if (!isStaff) {
     return (
