@@ -1,7 +1,7 @@
-import { uniqueId } from 'lodash-es';
 import { DateTime, Duration } from 'luxon';
 
 import { parseDate } from '@/core/dateUtils';
+import { nextId } from '@/core/nextId';
 import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
 
@@ -24,7 +24,7 @@ export const createBooking = (
   }: EventInput | BookingProps,
   timeStamp?: string,
 ): BookingProps => ({
-  id: id || `${uniqueId('booking')}-${timeStamp!}`,
+  id: id || `${nextId('booking')}-${timeStamp!}`,
   start,
   end,
   allDay,
@@ -162,7 +162,7 @@ export const getTimeOptions = (
 
 export const getBookedSlots = (bookedItems: BookedItem[]) =>
   bookedItems.map((item) => ({
-    id: uniqueId('booking'),
+    id: nextId('booking'),
     start: item.start,
     end: item.end,
     allDay: false,

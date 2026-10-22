@@ -1,6 +1,6 @@
-import { uniqueId } from 'lodash-es';
 import Papa from 'papaparse';
 
+import { nextId } from '@/core/nextId';
 import { translate } from '@/i18n';
 
 import templateFile from './offering_users_template.json';
@@ -37,7 +37,7 @@ export const parseOfferingUsersFile = (file: File) => {
 
           const users = rows.map((row) => {
             const userData: RawUser = {
-              uuid: uniqueId(),
+              uuid: nextId(),
             };
             userFields.forEach(({ field, idx }) => {
               userData[field] = row[idx];

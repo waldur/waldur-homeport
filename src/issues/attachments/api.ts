@@ -1,5 +1,4 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { uniqueId } from 'lodash-es';
 import { useCallback, useState } from 'react';
 import {
   supportAttachmentsCreate,
@@ -9,6 +8,7 @@ import {
 
 import { formDataOptions } from '@/core/api';
 import { ENV } from '@/core/config';
+import { nextId } from '@/core/nextId';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
@@ -86,7 +86,7 @@ export const useUploadAttachments = (issueUrl: string) => {
 
       // Add accepted files to uploading list with unique keys
       const newUploading: IssueAttachmentUploading[] = accepted.map((file) => ({
-        key: uniqueId('attachment_'),
+        key: nextId('attachment_'),
         file,
         progress: 0,
       }));
