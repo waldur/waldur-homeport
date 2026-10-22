@@ -7,7 +7,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Card, Stack } from 'react-bootstrap';
 import { createPortal } from 'react-dom';
 import { useDispatch, useStore } from 'react-redux';
 
@@ -361,7 +360,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
         {props.standalone && (
           <div className="table-standalone-header flex justify-between gap-4">
             <div>
-              <Stack direction="horizontal" gap={2}>
+              <div className="hstack gap-2">
                 <h1 className="mb-0 text-2xl">
                   {props.title || props.alterTitle}
                 </h1>
@@ -371,7 +370,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                     loading={props.loading}
                   />
                 )}
-              </Stack>
+              </div>
               {Boolean(props.subtitle) && (
                 <p
                   className={classNames(
@@ -390,7 +389,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
         )}
 
         {/* Main card */}
-        <Card
+        <div
           className={classNames(
             'card-table',
             props.fullWidth && 'full-width',
@@ -398,10 +397,11 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
             props.fieldName ? 'field-table' : '',
             props.mode === 'grid' && Boolean(props.gridItem) && 'grid-table',
             props.className,
+            'card',
           )}
           id={props.id}
         >
-          {/* Toolbar (Card.Header with title and actions) */}
+          {/* Toolbar (card header with title and actions) */}
           <TableToolbar />
 
           {/* Portals */}
@@ -418,9 +418,9 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
 
           {/* Tabs */}
           {props.nav ? (
-            <Card.Header className="table-tabs border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto">
+            <div className="table-tabs border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto card-header">
               {props.nav}
-            </Card.Header>
+            </div>
           ) : null}
 
           {/* Menu/Sidebar filters */}
@@ -428,7 +428,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
             ? (props.filterPosition === 'menu' ||
                 (props.filterPosition === 'sidebar' &&
                   props.filtersStorage.length > 0)) && (
-                <Card.Header
+                <div
                   className={classNames(
                     'border-b-[1px] border-b-secondary min-h-auto py-2',
                     {
@@ -436,6 +436,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                         !showFilterMenuToggle &&
                         props.filterPosition === 'menu',
                     },
+                    'card-header',
                   )}
                 >
                   <TableFilters
@@ -450,7 +451,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                     applyFiltersFn={props.applyFiltersFn}
                     selectedSavedFilter={props.selectedSavedFilter}
                   />
-                </Card.Header>
+                </div>
               )
             : null}
 
@@ -458,16 +459,16 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
           {!closedHiddenActionsMessage &&
             props.hasOptionalColumns &&
             props.activeColumns[COLUMN_ACTIONS_KEY] === false && (
-              <Card.Header className="border-b-[1px] border-b-secondary">
+              <div className="border-b-[1px] border-b-secondary card-header">
                 <HiddenActionsMessage
                   toggleColumn={props.toggleColumn}
                   close={() => setClosedHiddenActionsMessage(true)}
                 />
-              </Card.Header>
+              </div>
             )}
 
           {/* Main content */}
-          <Card.Body className={props.bodyClassName}>
+          <div className={classNames(props.bodyClassName, 'card-body')}>
             <div
               ref={tableResponsiveRef}
               className="table-responsive dataTables_wrapper"
@@ -486,8 +487,8 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
               />
             )}
             {props.footer}
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </TableProvider>
     </FilterContextProvider>
   );

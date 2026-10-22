@@ -1,12 +1,18 @@
 import { FieldValidator } from 'final-form';
 import React, { ComponentType, ReactNode } from 'react';
-import { ColProps } from 'react-bootstrap';
 
 import { Fetcher, FetcherOptions, TableRequest } from 'waldur-api-client';
 
 import { TableFiltersGroup } from './TableFilterService';
 
 export type { Fetcher, FetcherOptions, TableRequest };
+
+/** How many of 12 columns a grid-mode card spans, from each breakpoint up
+ * (`true`: share the row equally). Rendered as the Bootstrap grid's `col-*`
+ * classes. */
+export type GridSize = Partial<
+  Record<'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl', number | 'auto' | true>
+>;
 
 /** Every table's state, keyed by table id. */
 export type TablesState = Record<string, TableState>;
@@ -202,7 +208,7 @@ export interface TableProps<RowType = any> extends TableState {
   columns?: Array<Column<RowType>>;
   setDisplayMode?: (mode: DisplayMode) => void;
   gridItem?: React.ComponentType<{ row: RowType }>;
-  gridSize?: ColProps;
+  gridSize?: GridSize;
   gridSpace?: number;
   gridFixedWidth?: boolean;
   /** Opens the narrow-viewport filter panel; `BaseTable` supplies its own. */
