@@ -50,6 +50,9 @@ export interface CreditEventInput {
      *  only notifies — the credit rows claim resources keep running. */
     action?: string;
     hasFired?: boolean;
+    /** Over its cost limit, but a credit holds it back until the credit left
+     *  falls to the limit (`trigger_status` gate `held_by_*`). */
+    heldByCredit?: boolean;
   }[];
 }
 
@@ -323,12 +326,16 @@ export const buildCreditEvents = (
           : translate(
               'The threshold is reached. This action is applied at the next policy evaluation.',
             )
-        : policy.kind === 'customer-cost'
+        : policy.heldByCredit
           ? translate(
-              'Organization-wide cap on {scope}, measured across every project under it. Other projects spending against the same cap bring it closer.',
-              { scope: policy.scopeName || translate('the organization') },
+              'The cost is already over this limit, but the credit covers it. Fires once the credit left falls to the limit.',
             )
-          : translate('Fires if the current usage trend holds.'),
+          : policy.kind === 'customer-cost'
+            ? translate(
+                'Organization-wide cap on {scope}, measured across every project under it. Other projects spending against the same cap bring it closer.',
+                { scope: policy.scopeName || translate('the organization') },
+              )
+            : translate('Fires if the current usage trend holds.'),
       // Danger is reserved for a threshold that actually stops something:
       // `HealthView` turns a danger-toned binding event into a critical card,
       // and a notify-only policy reaching its threshold must not do that while
