@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useCombobox } from 'downshift';
-import { debounce } from 'lodash-es';
+import { debounce } from 'es-toolkit';
 import { ReactNode, useEffect, useId, useMemo, useRef, useState } from 'react';
 
 import { translate } from '@/i18n';

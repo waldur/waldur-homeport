@@ -131,6 +131,7 @@ const RESTRICTED_IMPORTS = [
     importNames: [
       'cloneDeep',
       'concat',
+      'debounce',
       'difference',
       'groupBy',
       'isEmpty',

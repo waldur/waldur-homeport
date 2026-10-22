@@ -1,4 +1,4 @@
-import { debounce } from 'lodash-es';
+import { debounce } from 'es-toolkit';
 import { Component } from 'react';
 
 import { translate } from 'waldur-i18n-runtime';
