@@ -128,7 +128,19 @@ const RESTRICTED_IMPORTS = [
   // covers everything, importNames goes and the whole module is banned.
   {
     name: 'lodash-es',
-    importNames: ['concat', 'isNumber', 'noop', 'padStart', 'sum', 'sumBy'],
+    importNames: [
+      'cloneDeep',
+      'concat',
+      'difference',
+      'groupBy',
+      'isNumber',
+      'noop',
+      'padStart',
+      'sortBy',
+      'sum',
+      'sumBy',
+      'uniq',
+    ],
     message:
       'lodash-es is being retired (#455). Use native code, or es-toolkit / es-toolkit/compat where lodash semantics matter.',
   },

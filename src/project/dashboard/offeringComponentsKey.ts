@@ -1,5 +1,3 @@
-import { uniq } from 'lodash-es';
-
 /**
  * React Query key parts for the components of the offerings behind a set of
  * resource rows: the full offering UUIDs, deduplicated and sorted so the same
@@ -9,4 +7,4 @@ import { uniq } from 'lodash-es';
  */
 export const getOfferingComponentsKey = (
   rows: { offering_uuid: string }[],
-): string[] => uniq(rows.map((row) => row.offering_uuid)).sort();
+): string[] => [...new Set(rows.map((row) => row.offering_uuid))].sort();
