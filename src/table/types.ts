@@ -262,7 +262,11 @@ export interface TableProps<RowType = any> extends TableState {
   subtitle?: React.ReactNode;
   hasActionBar?: boolean;
   hasHeaders?: boolean;
+  /** Router-driven tabs above the rows; homeport's `Table` renders them as
+   * `nav`. A table without that wrapper passes `nav` itself. */
   tabs?: TableTab[];
+  /** A tab bar shown above the rows, e.g. waldur-ui's `TabNav`. */
+  nav?: ReactNode;
   enableMultiSelect?: boolean;
   multiSelectActions?: React.ComponentType<{ rows: RowType[]; refetch }>;
   selectRow?(row: RowType): void;

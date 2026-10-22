@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { describe, expect, it, vi } from 'vitest';
 
+import BaseTable from './BaseTable';
 import Table from './Table';
 
 const TableWrapper = (component) => {
@@ -29,6 +30,33 @@ describe('Table', () => {
     activeColumns: {},
     columnPositions: [],
   };
+
+  describe('tabs', () => {
+    it('shows the tab bar passed as nav, with no router', () => {
+      render(
+        TableWrapper(
+          <BaseTable {...props} nav={<nav aria-label="Views">Views</nav>} />,
+        ),
+      );
+      expect(screen.getByRole('navigation', { name: 'Views' })).toBeVisible();
+    });
+
+    it('renders tabs as links in the homeport table', () => {
+      render(
+        TableWrapper(
+          <Table
+            {...props}
+            tabs={[
+              { key: 'all', title: 'All', state: 'projects', default: true },
+              { key: 'mine', title: 'Mine', state: 'projects.mine' },
+            ]}
+          />,
+        ),
+      );
+      expect(screen.getByRole('link', { name: 'All' })).toBeVisible();
+      expect(screen.getByRole('link', { name: 'Mine' })).toBeVisible();
+    });
+  });
 
   describe('special states', () => {
     it('renders message if list is empty', () => {
