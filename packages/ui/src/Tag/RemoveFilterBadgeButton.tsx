@@ -1,6 +1,7 @@
 import { XIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import React from 'react';
+
+import { cn } from '../cn';
 
 interface RemoveFilterBadgeButtonProps {
   onClick(event: React.MouseEvent<HTMLButtonElement>): void;
@@ -16,7 +17,7 @@ export const RemoveFilterBadgeButton: React.FC<
   <button
     type="button"
     aria-label={label}
-    className={classNames(
+    className={cn(
       'text-btn text-quinary hover:text-quaternary leading-none',
       className,
     )}
