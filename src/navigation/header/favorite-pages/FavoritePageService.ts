@@ -5,7 +5,8 @@ import {
   useRouter,
 } from '@uirouter/react';
 import { pickBy } from 'es-toolkit';
-import { isMatch, uniqueId } from 'lodash-es';
+import { isMatch } from 'es-toolkit/compat';
+import { uniqueId } from 'lodash-es';
 import { useCallback, useMemo, useSyncExternalStore } from 'react';
 import { useSelector } from 'react-redux';
 import {

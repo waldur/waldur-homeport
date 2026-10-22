@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit';
 import { useSelector } from 'react-redux';
 
 import { translate } from 'waldur-i18n-runtime';

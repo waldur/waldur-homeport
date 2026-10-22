@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit';
 import React, {
   useCallback,
   useEffect,

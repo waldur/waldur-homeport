@@ -1,6 +1,6 @@
 import { CaretRightIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit';
 import React, {
   FC,
   PropsWithChildren,

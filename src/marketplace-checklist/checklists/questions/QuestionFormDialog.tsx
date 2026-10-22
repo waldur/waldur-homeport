@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { isEqual } from 'es-toolkit';
 import { FormApi } from 'final-form';
 import arrayMutators from 'final-form-arrays';
-import { isEqual } from 'lodash-es';
 import { FC, useMemo, useState } from 'react';
 import { Form } from 'react-final-form';
 import {

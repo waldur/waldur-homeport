@@ -1,5 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
