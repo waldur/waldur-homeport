@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { capitalize, words } from 'lodash-es';
+import { capitalize, words } from 'es-toolkit/compat';
 import { FunctionComponent } from 'react';
 
 import { FormText } from 'waldur-ui';

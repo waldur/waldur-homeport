@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { capitalize } from 'lodash-es';
+import { capitalize } from 'es-toolkit/compat';
 import { useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { overrideSettingsRetrieve } from 'waldur-js-client';

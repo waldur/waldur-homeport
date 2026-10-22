@@ -1,4 +1,4 @@
-import { capitalize, lowerCase } from 'lodash-es';
+import { capitalize, lowerCase } from 'es-toolkit/compat';
 import { FunctionComponent } from 'react';
 
 import { Badge, BadgeShape, BadgeTone, BadgeVariant } from 'waldur-ui';
