@@ -25,6 +25,7 @@ import { ApiKeyActionsDropdown } from './ApiKeyActions';
 import { ApiKeyExpandableRow } from './ApiKeyExpandableRow';
 import { ApiKeyUsageSummary } from './ApiKeyUsageMeter';
 import { getHeadlineUsage } from './keyLimits';
+import { getResourceKeyComponents } from './keySpendingLimits';
 import {
   getKeyStateVariant,
   getResourcePause,
@@ -163,7 +164,7 @@ interface ResourceApiKeysCardProps extends TableProps<ApiKeyRow> {
   resource: Resource;
   offering?: Pick<
     Offering,
-    'components' | 'plugin_options' | 'resource_options'
+    'components' | 'plans' | 'plugin_options' | 'resource_options'
   >;
 }
 
@@ -179,8 +180,8 @@ export const ResourceApiKeysCard = ({
     customerId: resource.customer_uuid,
   });
   const components = useMemo<KeyComponent[]>(
-    () => offering?.components ?? [],
-    [offering],
+    () => getResourceKeyComponents(offering, resource.plan_uuid),
+    [offering, resource.plan_uuid],
   );
   const resourceLimits = useMemo(
     () => (resource.limits ?? {}) as Record<string, number>,

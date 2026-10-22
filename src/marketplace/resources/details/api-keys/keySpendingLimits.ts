@@ -8,7 +8,7 @@
  * `marketplace/api_key_spending_limits.py` in waldur-mastermind; the backend
  * has the final word.
  */
-import { Resource } from 'waldur-js-client';
+import { Offering, Resource } from 'waldur-js-client';
 
 import {
   getOfferedPeriods,
@@ -19,6 +19,10 @@ import {
   SpendingLimitPeriod,
   SpendingLimitsPayload,
 } from '@/marketplace/common/spendingLimits';
+import {
+  findResourcePlan,
+  resolvePlanComponents,
+} from '@/marketplace/details/plan/effectiveComponents';
 
 import { KeyComponent } from './types';
 
@@ -30,6 +34,21 @@ export type KeyLimitComponent = Omit<KeyComponent, 'measured_unit'> & {
 };
 
 type Limits = Resource['spending_limits'] | null | undefined;
+
+/**
+ * The offering's components as billed under the resource's plan. A plan may
+ * bill a usage component by limit, and then it takes no spending limit; the
+ * backend reads the periods a key may limit from the plan, so the dialogs
+ * must too. Every component stays, as each takes a monthly key limit.
+ */
+export const getResourceKeyComponents = (
+  offering: Pick<Offering, 'components' | 'plans'> | undefined,
+  planUuid: string | null | undefined,
+): KeyComponent[] =>
+  resolvePlanComponents(
+    offering?.components ?? [],
+    findResourcePlan(offering?.plans, planUuid),
+  );
 
 /**
  * The periods a key may limit on each component, each with the resource's

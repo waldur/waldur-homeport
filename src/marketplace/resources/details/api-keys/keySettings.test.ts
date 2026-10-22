@@ -12,7 +12,10 @@ import {
   getKeySettingsFields,
   serializeKeySettings,
 } from './keySettingsFields';
-import { getKeyLimitComponents } from './keySpendingLimits';
+import {
+  getKeyLimitComponents,
+  getResourceKeyComponents,
+} from './keySpendingLimits';
 
 const TOKENS = { type: 'tokens', name: 'Tokens' };
 
@@ -332,5 +335,42 @@ describe('limits on periods other than the month', () => {
         TOKEN_COST,
       )[0].ratio,
     ).toBe(100);
+  });
+});
+
+describe('getResourceKeyComponents', () => {
+  const offering = {
+    components: [TOKENS, TOKEN_COST],
+    plans: [
+      {
+        uuid: 'plan-limit',
+        components: [{ type: 'token_cost', billing_type: 'limit' }],
+      },
+    ],
+  } as any;
+
+  // The backend reads the periods a key may limit from the plan's billing.
+  it('offers only month on a component the plan bills by limit', () => {
+    const components = getKeyLimitComponents(
+      getResourceKeyComponents(offering, 'plan-limit'),
+      {},
+    );
+    expect(
+      Object.keys(
+        components.find((c) => c.type === 'token_cost')!.spending_limit_periods,
+      ),
+    ).toEqual(['month']);
+  });
+
+  it('keeps the offering billing without a known plan', () => {
+    const components = getKeyLimitComponents(
+      getResourceKeyComponents(offering, undefined),
+      {},
+    );
+    expect(
+      Object.keys(
+        components.find((c) => c.type === 'token_cost')!.spending_limit_periods,
+      ),
+    ).toEqual(['day', 'week', 'month']);
   });
 });
