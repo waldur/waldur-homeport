@@ -1,5 +1,4 @@
 // Global variables for Bootstrap customization.
-// To override any Bootstrap variable safely you can use _variables.demo.scss
 
 // Bootstrap's two base colours (its own values): this file is imported before
 // bootstrap/scss/variables, so they have to exist here for the rgba() calls
@@ -226,9 +225,6 @@ $box-shadow-xs: 0 0.1rem 0.75rem 0.25rem rgba($black, 0.05) !default; // Custom 
 $box-shadow-sm: 0 0.1rem 1rem 0.25rem rgba($black, 0.05) !default;
 $box-shadow: 0 0.5rem 1.5rem 0.5rem rgba($black, 0.075) !default;
 $box-shadow-lg: 0 1rem 2rem 1rem rgba($black, 0.1) !default;
-$box-shadow-xl:
-  0 20px 24px -4px rgba(16, 24, 40, 0.1),
-  0 8px 8px -4px rgba(16, 24, 40, 0.04) !default;
 
 // Grid columns
 
@@ -346,18 +342,6 @@ $display-font-sizes: (
 $display-font-weight: $font-weight-bolder !default;
 $display-line-height: $headings-line-height !default;
 
-// Buttons + Forms
-
-// Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
-
-$input-btn-padding-y-lg: 0.68rem !default;
-
-// Buttons
-
-// For each of Bootstrap's buttons, define text, background, and border color.
-
-$btn-box-shadow: null !default;
-
 // Allows for customizing button radius independently from global border radius
 
 // Forms
@@ -365,16 +349,10 @@ $btn-box-shadow: null !default;
 // Card
 $card-box-shadow: 0px 0px 20px 0px rgba(76, 87, 125, 0.02) !default; // none in dark mode (_card.scss)
 $card-border-style: solid !default; // Custom variable
-$card-py: 2rem !default;
-$card-px: 2.25rem !default;
 $card-border-radius: $border-radius !default;
 
 $card-header-py: 0.5rem !default; // Custom variable
 $card-header-height: 70px !default; // Custom variable
-
-// Dropdowns
-// Dropdown menu container and contents.
-$dropdown-box-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15) !default;
 
 // Code
 $code-box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.08) !default; // Custom variable
@@ -422,20 +400,6 @@ $zindex-values: (
   3: 3,
   4: 4,
   5: 5,
-) !default;
-
-// Letter spacing
-$letter-spacing-values: (
-  1: 0.1rem,
-  2: 0.115rem,
-  3: 0.125rem,
-  4: 0.25rem,
-  5: 0.5rem,
-  n1: -0.1rem,
-  n2: -0.115rem,
-  n3: -0.125rem,
-  n4: -0.25rem,
-  n5: -0.5rem,
 ) !default;
 
 // Custom hight and width sizes

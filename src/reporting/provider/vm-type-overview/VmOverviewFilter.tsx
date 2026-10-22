@@ -18,7 +18,7 @@ export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
 ) => (
   <div className="card">
     <div className="card-body mb-2 border-b-[1px] border-b-secondary">
-      <form className="form-inline" id="vm-overview-filter">
+      <form id="vm-overview-filter">
         <Field name="shared" type="checkbox">
           {({ input }) => (
             <SwitchField input={input} label={translate('Show shared')} />

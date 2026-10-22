@@ -82,11 +82,6 @@ $utilities: map.merge(
       class: border-left,
       values: $border-widths,
     ),
-    'letter-spacing': (
-      property: letter-spacing,
-      class: ls,
-      values: $letter-spacing-values,
-    ),
   )
 );
 
@@ -132,8 +127,7 @@ $utilities: map.remove(
   'min-viewport-height',
   'align-content',
   'negative-margin-x',
-  'negative-margin-y',
-  'letter-spacing'
+  'negative-margin-y'
 );
 
 // Used only at the base size: no breakpoint variant (`.p-lg-3`, `.min-h-md-
@@ -185,9 +179,3 @@ $utilities: map.merge(
       ),
   )
 );
-
-.content-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}

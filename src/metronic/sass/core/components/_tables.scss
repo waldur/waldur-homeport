@@ -1,5 +1,7 @@
 // Table
 
+@use 'sass:map';
+
 // Table
 .table {
   // Fix for BS 5.1.2 update
@@ -61,36 +63,11 @@
     border-collapse: separate;
   }
 
-  // Flush
-  &.table-flush {
-    tr,
-    th,
-    td {
-      padding: inherit;
-    }
-  }
-
   // Row bordered
   &.table-row-bordered {
     tr {
       border-bottom-width: 1px;
       border-bottom-style: solid;
-      border-bottom-color: var(--border-secondary);
-    }
-
-    tfoot {
-      th,
-      td {
-        border-top-width: 1px !important;
-      }
-    }
-  }
-
-  // Row dashed
-  &.table-row-dashed {
-    tr {
-      border-bottom-width: 1px;
-      border-bottom-style: dashed;
       border-bottom-color: var(--border-secondary);
     }
 
@@ -129,52 +106,48 @@
   transform: translateX(-50%) translateY(-50%);
 }
 
-.table-loading {
-  position: relative;
-
-  .table-loading-message {
-    display: block;
-  }
-}
-
 // Cell gutters, at the base size only: Metronic generated every $gutters value
 // at every breakpoint, and tables only ever use the base classes
 // (.table.gy-4.gx-5). A Bootstrap grid .row keeps its own responsive gutters.
 // No DataTables fixes either: DataTables is not a dependency.
-@each $name, $value in $gutters {
+@each $name in ('0', '1', '2', '3', '4', '5', '6', '10') {
   .table.g-#{$name} {
     th,
     td {
-      padding: $value;
+      padding: map.get($gutters, $name);
     }
   }
+}
 
+@each $name in ('0', '2', '3', '4', '5', '8px') {
   .table.gy-#{$name} {
     th,
     td {
-      padding-top: $value;
-      padding-bottom: $value;
+      padding-top: map.get($gutters, $name);
+      padding-bottom: map.get($gutters, $name);
     }
   }
+}
 
+@each $name in ('4', '5', '8px') {
   .table.gx-#{$name} {
     th,
     td {
-      padding-left: $value;
-      padding-right: $value;
+      padding-left: map.get($gutters, $name);
+      padding-right: map.get($gutters, $name);
     }
   }
+}
 
-  .table.gs-#{$name} {
-    th,
-    td {
-      &:first-child {
-        padding-left: $value;
-      }
+.table.gs-0 {
+  th,
+  td {
+    &:first-child {
+      padding-left: map.get($gutters, '0');
+    }
 
-      &:last-child {
-        padding-right: $value;
-      }
+    &:last-child {
+      padding-right: map.get($gutters, '0');
     }
   }
 }

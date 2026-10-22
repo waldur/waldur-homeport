@@ -217,3 +217,9 @@ hr {
   background-color: $border-color;
   opacity: 1;
 }
+
+.content-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

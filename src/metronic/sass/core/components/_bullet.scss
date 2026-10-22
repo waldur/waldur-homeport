@@ -9,10 +9,3 @@
   height: get($bullet, bar-height);
   flex-shrink: 0;
 }
-
-// Dot bullet
-.bullet-dot {
-  width: get($bullet, dot-size);
-  height: get($bullet, dot-size);
-  border-radius: 100% !important;
-}

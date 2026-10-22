@@ -13,15 +13,6 @@
     background-image: none !important;
   }
 
-  // Wrapper
-  .image-input-wrapper {
-    width: 120px;
-    height: 120px;
-    @include border-radius($border-radius);
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
   // Actions
   [data-kt-image-input-action] {
     cursor: pointer;
@@ -69,18 +60,6 @@
     [data-kt-image-input-action='remove'],
     [data-kt-image-input-action='cancel'] {
       display: none;
-    }
-  }
-
-  // Bordered style
-  &.image-input-outline {
-    .image-input-wrapper {
-      border: 3px solid $body-bg;
-      box-shadow: $box-shadow-sm;
-
-      @include dark-theme {
-        box-shadow: $box-shadow;
-      }
     }
   }
 }
