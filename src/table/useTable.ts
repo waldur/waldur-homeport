@@ -4,14 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from 'waldur-i18n-runtime';
 
-import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { useDrawer } from '@/drawer/actions';
-import { getTitle } from '@/navigation/title';
-import { router } from '@/router';
 import { getTableState, selectRegisteredFilterNames } from '@/table/selectors';
 
 import * as actions from './actions';
 import { INITIAL_STATE } from './constants';
+import { getTableHost } from './host';
 import { registerTable, unregisterTable } from './registry';
 import { TableFilterActions } from './TableFilterActions';
 import { TableFilterContainer } from './TableFilterContainer';
@@ -22,24 +20,10 @@ import {
   Sorting,
   TableOptionsType,
 } from './types';
+import { getInitialValues, syncFiltersToURL } from './urlFilters';
 import { useTableQuery } from './useTableQuery';
 
 const EMPTY_ROWS = [];
-
-const getDefaultTitle = () => {
-  const pageTitle = getTitle();
-  const breadcrumbs = router.globals.$current.path
-    .filter((part) => part.data?.breadcrumb)
-    .map((part) => part.data.breadcrumb())
-    .flat();
-
-  let breadcrumbTitle = breadcrumbs.pop();
-  if (!breadcrumbTitle) {
-    breadcrumbTitle = router.globals.$current.parent?.data?.breadcrumb?.();
-  }
-
-  return breadcrumbTitle || pageTitle;
-};
 
 export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   const { table } = options;
@@ -336,7 +320,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     [dispatch, table],
   );
 
-  const alterTitle = getDefaultTitle();
+  const alterTitle = getTableHost().getDefaultTitle();
 
   // React Query's cache is the only copy of the rows; Redux keeps per-table UI
   // state (pagination, filters, selection) but never the rows themselves.
