@@ -1,9 +1,11 @@
 import { WarningCircleIcon, XIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { useToggle } from 'react-use';
 
 import { FeaturedIcon } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 
 export const ResourceEndDateConflictBar = () => {
   const [show, toggle] = useToggle(true);
@@ -12,7 +14,12 @@ export const ResourceEndDateConflictBar = () => {
 
   return (
     <div className="bar bg-primary border-b-[1px] border-b-secondary h-60px">
-      <div className="container-fluid w-full flex items-center gap-2">
+      <div
+        className={classNames(
+          PAGE_CONTAINER_CLASSNAME,
+          'w-full flex items-center gap-2',
+        )}
+      >
         <FeaturedIcon
           icon={<WarningCircleIcon weight="bold" />}
           variant="warning"

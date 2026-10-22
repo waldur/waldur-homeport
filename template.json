@@ -722,6 +722,11 @@
       "feature_area": "details"
     }
   },
+  "A cost policy has reached its limit. Its actions run at the next evaluation.": {
+    "context": {
+      "feature_area": "project"
+    }
+  },
   "A custom .png image file for login page": {},
   "A custom PNG icon for Keycloak login button": {},
   "A custom favicon .png image file": {},
@@ -812,6 +817,11 @@
   "A one-time fee applied on activation.": {
     "context": {
       "feature_area": "plan"
+    }
+  },
+  "A paused key cannot be rotated.": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "A person’s account on one offering: one row for each offering the person uses.": {
@@ -1037,6 +1047,12 @@
       "feature_area": "api-keys"
     }
   },
+  "API key settings saved; rotation requested": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "api-keys"
+    }
+  },
   "API key unassigned": {
     "context": {
       "primary_ui_type": "success_message",
@@ -1046,6 +1062,11 @@
   "API keys": {
     "context": {
       "primary_ui_type": "title",
+      "feature_area": "api-keys"
+    }
+  },
+  "API keys are requested here, one at a time, by people who can manage the resource.": {
+    "context": {
       "feature_area": "api-keys"
     }
   },
@@ -3559,7 +3580,7 @@
   },
   "All models": {
     "context": {
-      "feature_area": "api-keys"
+      "feature_area": "common"
     }
   },
   "All months": {
@@ -8138,6 +8159,11 @@
     }
   },
   "Belgium": {},
+  "Below limit": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Best for": {
     "context": {
       "feature_area": "reviewer-discovery"
@@ -8469,6 +8495,7 @@
       "feature_area": "support"
     }
   },
+  "Blocked: resource paused": {},
   "Blockers": {
     "context": {
       "primary_ui_type": "title",
@@ -10022,6 +10049,11 @@
   },
   "Changing flavor": {},
   "Changing password": {},
+  "Changing the assignee rotates the key: its current value stops working and the new assignee reveals a new one.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Channels": {
     "context": {
       "feature_area": "rabbitmq"
@@ -10409,6 +10441,7 @@
     }
   },
   "Choose an organization role, a project role, or both.": {},
+  "Choose at least one model, or All models.": {},
   "Choose at least one period customers can set a limit for.": {},
   "Choose date": {
     "context": {
@@ -13997,11 +14030,6 @@
       "feature_area": "policy-watch"
     }
   },
-  "Credit balance is low. A cost policy may trigger soon, affecting resources in this project.": {
-    "context": {
-      "feature_area": "project"
-    }
-  },
   "Credit card or banking details": {
     "context": {
       "feature_area": "ai-assistant"
@@ -14060,6 +14088,21 @@
   "Credit is overallocated": {
     "context": {
       "feature_area": "dashboard"
+    }
+  },
+  "Credit left is above the limit {limit}": {
+    "context": {
+      "variables": {
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "Credit left is close to a cost policy limit. The policy may trigger soon, affecting resources in this project.": {
+    "context": {
+      "feature_area": "project"
     }
   },
   "Credit limit beyond which approval is required": {
@@ -14337,6 +14380,12 @@
         }
       },
       "feature_area": "details"
+    }
+  },
+  "Current cost": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "organizations"
     }
   },
   "Current country: {value}.": {
@@ -20201,7 +20250,7 @@
   "Estimated cost": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "organizations"
+      "feature_area": "list"
     }
   },
   "Estimated cost breakdown": {
@@ -27243,6 +27292,7 @@
     }
   },
   "It matters once offerings share accounts. With accounts per service provider, a person has one account, with one username, POSIX UID and home directory, on all of them, so one of the usernames has to be kept. Until then, switching the account scope to per service provider is refused.": {},
+  "It resumes once the resource is unpaused.": {},
   "It was accepted for {email}. If it does not arrive, the problem is past the relay — check its own logs and the recipient spam folder.": {
     "context": {
       "variables": {
@@ -27291,6 +27341,12 @@
     }
   },
   "Items on every invoice, closed ones included, are rewritten to name the target offering, plan and component. Use it when past invoices should read as if the target had always been used. Amounts never change.": {},
+  "Its actions run at the next evaluation of the policy.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
+  "Its usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.": {},
   "JPG, PNG, PDF or .asice (max {size})": {
     "context": {
       "variables": {
@@ -28049,11 +28105,6 @@
       "primary_ui_type": "title"
     }
   },
-  "Leave all unticked to allow every model.": {
-    "context": {
-      "feature_area": "api-keys"
-    }
-  },
   "Leave call": {
     "context": {
       "feature_area": "call"
@@ -28202,7 +28253,7 @@
     }
   },
   "Lets customers change the number entered for a Component Formula order option after ordering. The change is ordered with the recalculated limits and price. It uses the formulas and bounds of that order option.": {},
-  "Lets users request API keys, assign them, limit their usage and their models, and pause or delete them. Turn on only if the backend behind the site agent supports it, such as the Envoy AI Gateway; others, such as Ceph S3, fail those actions. Without it, keys can only be revealed and rotated.": {
+  "Lets users request API keys, assign them, limit their usage and their models, and pause or delete them. New resources start without keys instead of with two shared ones; existing resources keep theirs. Turn on only if the backend behind the site agent supports it, such as the Envoy AI Gateway; others, such as Ceph S3, fail those actions. Without it, keys can only be revealed and rotated.": {
     "context": {
       "feature_area": "integration"
     }
@@ -28347,6 +28398,18 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "details"
+    }
+  },
+  "Limit reached": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Limit reached, actions pending": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
     }
   },
   "Limit to resource (optional)": {
@@ -29521,6 +29584,7 @@
       "feature_area": "openstack-instance"
     }
   },
+  "MCP server": {},
   "MTU": {
     "context": {
       "primary_ui_type": "label",
@@ -34212,6 +34276,11 @@
   "No microphone was found.": {
     "context": {
       "action_type": "read"
+    }
+  },
+  "No models": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "No more subnets available": {
@@ -39303,6 +39372,11 @@
     }
   },
   "Paused on reaching a limit. It resumes on its own once under its limits again: when a new month begins or a limit is raised.": {},
+  "Paused on reaching its limit. It can be rotated once it resumes.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Paused resources": {
     "context": {
       "feature_area": "policies"
@@ -42577,12 +42651,6 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "policy-watch"
-    }
-  },
-  "Project estimated cost": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "cost-policies"
     }
   },
   "Project events": {
@@ -47319,6 +47387,12 @@
       "feature_area": "ai-assistant"
     }
   },
+  "Resets at next evaluation": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
+    }
+  },
   "Resets shortly": {
     "context": {
       "feature_area": "details"
@@ -48513,6 +48587,7 @@
       "feature_area": "settings"
     }
   },
+  "Resume the key to change its assignee.": {},
   "Resume the key to rotate it.": {
     "context": {
       "feature_area": "api-keys"
@@ -48578,6 +48653,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "actions"
+    }
+  },
+  "Retry the failed command first.": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "Return to call": {
@@ -50425,6 +50505,11 @@
   "Saving in progress": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Saving rotates this key. Anything using the current value will stop working.": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "Saving...": {
@@ -52560,6 +52645,7 @@
       "feature_area": "database-stats"
     }
   },
+  "Serve the remote MCP endpoint (/mcp) from the `waldur mcp_server` process, so AI agent clients can act as the signed-in user.": {},
   "Server": {
     "context": {
       "primary_ui_type": "label",
@@ -53756,7 +53842,7 @@
       "feature_area": "features"
     }
   },
-  "Show the Reporting menu with organization-scoped reports to organization owners.": {
+  "Show the Reporting menu with organization-scoped reports to users with the CUSTOMER.VIEW_REPORTING permission on the organization.": {
     "context": {
       "feature_area": "features"
     }
@@ -57164,6 +57250,11 @@
       "feature_area": "support"
     }
   },
+  "The actions it ran are undone at the next evaluation of the policy.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "The actual date when resources will be terminated, including the grace period.": {
     "context": {
       "feature_area": "manage"
@@ -57393,6 +57484,145 @@
     }
   },
   "The conversation is still loading. Try again shortly.": {},
+  "The cost after credit, {cost}, is at or below the limit, {limit}.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost after credit, {cost}, is over the limit, {limit}, and the credit left is at or below it.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost after credit, {cost}, is over the limit, {limit}, and the credit left, {credit}, is at or below it.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        },
+        "credit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies",
+      "action_type": "update"
+    }
+  },
+  "The cost after credit, {cost}, is over the limit, {limit}, but the organization credit left is above it. The policy fires once that credit falls to the limit.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost after credit, {cost}, is over the limit, {limit}, but the organization credit left, {credit}, is above it. The policy fires once that credit falls to the limit.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        },
+        "credit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies",
+      "action_type": "update"
+    }
+  },
+  "The cost after credit, {cost}, is over the limit, {limit}, but the project credit left is above it. The policy fires once that credit falls to the limit.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost after credit, {cost}, is over the limit, {limit}, but the project credit left, {credit}, is above it. The policy fires once that credit falls to the limit.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        },
+        "credit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies",
+      "action_type": "update"
+    }
+  },
+  "The cost is already over this limit, but the credit covers it. Fires once the credit left falls to the limit.": {
+    "context": {
+      "feature_area": "policy-watch"
+    }
+  },
+  "The cost this policy compares with its threshold: the cost in the policy period, less what credit pays.": {
+    "context": {
+      "feature_area": "organizations"
+    }
+  },
+  "The cost, {cost}, is over the limit, {limit}, and there is no credit.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost, {cost}, is over the limit, {limit}; this policy does not take credit into account.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
   "The credit has expired, so nothing is drawn from it any more and there is no rate to project from.": {
     "context": {
       "feature_area": "views"
@@ -57820,6 +58050,11 @@
     }
   },
   "The key was never created, so it has nothing to rotate.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "The key will not be able to call any model.": {
     "context": {
       "feature_area": "api-keys"
     }
@@ -58372,8 +58607,14 @@
       "feature_area": "list"
     }
   },
+  "The resource is paused, so this key is not served.": {},
   "The resource will be restored automatically when costs drop below the threshold.": {},
   "The resource will be unpaused automatically when costs drop below the threshold.": {},
+  "The resource's API keys will not be able to call any model.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "The resources the merge moves to the target, with the orders, limits and order answers that follow them.": {},
   "The response window for this assignment batch has passed.": {
     "context": {
@@ -59406,7 +59647,11 @@
       "feature_area": "create"
     }
   },
-  "This email and role combination is entered more than once.": {},
+  "This email and role combination is entered more than once.": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "This feature is disabled": {
     "context": {
       "feature_area": "error"
@@ -59537,6 +59782,11 @@
   "This justification has already been reviewed": {
     "context": {
       "feature_area": "organizations"
+    }
+  },
+  "This key has reached its limit this month. A manager can rotate it.": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "This mandatory step is shown by default and is configured automatically once the call workflow is set up.": {
@@ -59836,6 +60086,11 @@
       "feature_area": "project"
     }
   },
+  "This project has no active resources.": {
+    "context": {
+      "feature_area": "project"
+    }
+  },
   "This project has no resources with allocated limits.": {
     "context": {
       "feature_area": "project-detail"
@@ -59855,6 +60110,11 @@
   "This request cannot be updated in its current state.": {
     "context": {
       "feature_area": "issues"
+    }
+  },
+  "This resource is paused, so none of its keys is served.": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "This resource request has no attributes.": {
@@ -67577,6 +67837,12 @@
   "Usage (GB)": {},
   "Usage (h)": {},
   "Usage (hours)": {},
+  "Usage / limit": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "project"
+    }
+  },
   "Usage <70%": {
     "context": {
       "feature_area": "views"
@@ -69954,6 +70220,12 @@
       "feature_area": "create"
     }
   },
+  "View reporting": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
+    }
+  },
   "View response": {
     "context": {
       "feature_area": "orders"
@@ -70236,6 +70508,7 @@
       "feature_area": "database-stats"
     }
   },
+  "Wait for the current operation to finish.": {},
   "Waiting": {
     "context": {
       "primary_ui_type": "label",
@@ -70245,6 +70518,18 @@
   "Waiting for a worker…": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "Waiting for organization credit": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Waiting for project credit": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
     }
   },
   "Waiting for support": {
@@ -71841,6 +72126,16 @@
       "feature_area": "actions"
     }
   },
+  "You can view reports of {count} organizations. Pick one from the filter above to load the reports recommended for that organization.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "reporting"
+    }
+  },
   "You can't join this organization with your current account details. Access is limited to certain users as defined by the organization manager.": {
     "context": {
       "feature_area": "join-organization"
@@ -72143,16 +72438,6 @@
   "You need approval to finish purchasing of services.": {
     "context": {
       "feature_area": "actions"
-    }
-  },
-  "You own {count} organizations. Pick one from the filter above to load the reports recommended for that organization.": {
-    "context": {
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      },
-      "feature_area": "reporting"
     }
   },
   "You started a call": {},
@@ -76165,6 +76450,20 @@
         }
       },
       "feature_area": "workflow-steps"
+    }
+  },
+  "{credit} left, limit {limit}": {
+    "context": {
+      "variables": {
+        "credit": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies",
+      "action_type": "update"
     }
   },
   "{currencyName} / day": {

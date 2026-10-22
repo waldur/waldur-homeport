@@ -4,13 +4,15 @@
 /* eslint-disable no-console */
 
 import { useQuery } from '@tanstack/react-query';
+import classNames from 'classnames';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Card, Container } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { AlertItem, BaseButton, NativeSelect } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { translate } from '@/i18n';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 
 import {
   fetchOfferingMapping,
@@ -312,7 +314,7 @@ export const SystemUsageTab: FC = () => {
   }, [reportsLoading, loadingStage]);
 
   return (
-    <Container fluid className="py-4">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-4')}>
       {/* ── Toolbar ────────────────────────────────────────────────────── */}
       <div className="flex items-center gap-3 mb-4 flex-wrap">
         <h4 className="mb-0">{translate('System Usage Report')}</h4>
@@ -551,6 +553,6 @@ export const SystemUsageTab: FC = () => {
           </Card.Body>
         </Card>
       )}
-    </Container>
+    </div>
   );
 };

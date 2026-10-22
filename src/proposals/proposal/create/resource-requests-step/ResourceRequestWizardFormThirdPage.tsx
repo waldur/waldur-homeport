@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { useFormState } from 'react-final-form';
 
 import { translate } from '@/i18n';
+import { getAllModelsOption } from '@/marketplace/common/modelSelection';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
 import { PREPAID_DURATION_MONTHS } from '@/proposals/prepaidDuration';
 import { PurchaseOrderFields } from '@/proposals/PurchaseOrderFields';
@@ -38,7 +39,13 @@ export const ResourceRequestWizardFormThirdPage: FunctionComponent<
 
   return (
     <WizardForm {...props}>
-      {_offering?.options ? <OptionsForm options={_offering.options} /> : null}
+      {_offering?.options ? (
+        <OptionsForm
+          options={_offering.options}
+          allModelsOption={getAllModelsOption(_offering.resource_options)}
+          orderForm
+        />
+      ) : null}
       {cost.known ? (
         <div className="flex justify-between items-baseline border-t-[1px] border-t-secondary pt-4 mt-4">
           <span className="font-medium">{translate('Estimated cost')}</span>

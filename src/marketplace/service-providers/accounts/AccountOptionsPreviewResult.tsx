@@ -8,6 +8,7 @@ import {
 import { AlertItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -26,7 +27,7 @@ const RenamesTable: FC<{ offering: OfferingAccountPreview }> = ({
   const rows = offering.renames;
   const tableProps = useTable({
     table: `account-options-preview-renames-${offering.uuid}`,
-    fetchData: () => Promise.resolve({ rows, resultCount: rows.length }),
+    fetchData: createClientPaginatedFetcher(rows),
   });
   return (
     <Table<AccountRename>

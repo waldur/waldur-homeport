@@ -17,6 +17,7 @@ import {
   useContext,
 } from 'react';
 
+import { translate } from 'waldur-i18n-runtime';
 import {
   buttonVariants,
   ButtonVariant,
@@ -26,8 +27,6 @@ import {
   getButtonIconSize,
   Menu,
 } from 'waldur-ui';
-
-import { translate } from '@/i18n';
 
 import { DropdownActionItemType } from './types';
 

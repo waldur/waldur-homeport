@@ -263,7 +263,7 @@ describe('TableBody inline filter shortcut (hasFilterMenu regression)', () => {
   // *before* render(), and the tree is rendered directly into it via
   // RTL's `container` option — not as a React-rendered child inside the
   // tree under test. In the real app this id belongs to a page-shell
-  // element (src/metronic/layout/components/Content.tsx) that's already
+  // element (the page content container in src/navigation/Layout.tsx) that's already
   // mounted, from an earlier commit, by the time any table underneath it
   // renders for the first time. Nesting it as a plain JSX ancestor in the
   // SAME initial render — as an earlier version of this test did — commits

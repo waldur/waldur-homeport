@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
+import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import {
   marketplaceCategoriesList,
   marketplaceCategoryGroupsRetrieve,
@@ -13,18 +13,13 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import {
-  useExtraToolbar,
-  useFullPage,
-  useToolbarActions,
-} from '@/navigation/context';
+import { useFullPage } from '@/navigation/context';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { useTitle } from '@/navigation/title';
 
 import { CardStyleType } from '../common/cards/index';
 import { CardStyleProvider } from '../landing/CardStyleContext';
-import { PageBarFilters } from '../landing/filter/PageBarFilters';
-import { getMarketplaceFilters } from '../landing/filter/store/selectors';
-import { MarketplaceLandingFilter } from '../landing/MarketplaceLandingFilter';
+import { MarketplaceScopeBar } from '../landing/filter/PageBarFilters';
 import { getMarketplaceTitle } from '../title';
 import { useMarketplacePublicTabs } from '../utils';
 
@@ -58,9 +53,6 @@ export const CategoryGroupPage: FunctionComponent = () => {
     (ENV.plugins.WALDUR_CORE.MARKETPLACE_CARD_STYLE as CardStyleType) ||
     'detailed';
 
-  const filters = useSelector(getMarketplaceFilters);
-  useToolbarActions(<MarketplaceLandingFilter />, []);
-  useExtraToolbar(filters.length ? <PageBarFilters /> : null, [filters]);
   useTitle(queryResult?.data?.title);
 
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(
@@ -82,17 +74,28 @@ export const CategoryGroupPage: FunctionComponent = () => {
   useBreadcrumbs(breadcrumbItems);
 
   if (queryResult.isLoading) {
-    return <LoadingSpinner />;
+    return (
+      <>
+        <MarketplaceScopeBar />
+        <LoadingSpinner />
+      </>
+    );
   }
 
   if (queryResult.isError || !queryResult.data) {
-    return <h3>{translate('Unable to load category')}</h3>;
+    return (
+      <>
+        <MarketplaceScopeBar />
+        <h3>{translate('Unable to load category')}</h3>
+      </>
+    );
   }
 
   return (
     <CardStyleProvider cardStyle={cardStyle}>
+      <MarketplaceScopeBar />
       <HeroSection item={queryResult.data} />
-      <div className="container-fluid py-6">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-6')}>
         <CategoryGroupOfferingsList categoryGroup={queryResult.data} />
       </div>
     </CardStyleProvider>

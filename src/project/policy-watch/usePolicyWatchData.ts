@@ -15,6 +15,7 @@ import {
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { formatISODate } from '@/core/dateUtils';
+import { isHeldGate } from '@/customer/cost-policies/triggerStatus';
 import { getCostPolicyActionOptions } from '@/customer/cost-policies/utils';
 import { translate } from '@/i18n';
 import { Project } from '@/workspace/types';
@@ -367,6 +368,8 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         hasFired: p.has_fired,
         firedDatetime: p.fired_datetime || null,
         affectedResourcesCount: p.affected_resources_count || 0,
+        gate: p.trigger_status?.gate ?? null,
+        triggered: p.trigger_status?.triggered ?? null,
       });
     }
 
@@ -386,6 +389,8 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         hasFired: p.has_fired,
         firedDatetime: p.fired_datetime || null,
         affectedResourcesCount: p.affected_resources_count || 0,
+        gate: p.trigger_status?.gate ?? null,
+        triggered: p.trigger_status?.triggered ?? null,
       });
     }
 
@@ -437,6 +442,8 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         hasFired: sp.has_fired,
         firedDatetime: sp.fired_datetime || null,
         affectedResourcesCount: sp.affected_resources_count || 0,
+        gate: null,
+        triggered: null,
       });
     }
 
@@ -466,6 +473,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
           scopeName: p.scopeName,
           action: p.action,
           hasFired: p.hasFired,
+          heldByCredit: isHeldGate(p.gate),
         })),
       },
       today,

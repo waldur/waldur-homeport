@@ -21,7 +21,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { isValidAttribute } from '@/marketplace/offerings/details/utils';
-import { usePageHero } from '@/navigation/context';
+import { LayoutSlot } from '@/navigation/slots';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { useUser } from '@/workspace/hooks';
@@ -335,19 +335,6 @@ export const OfferingPublicUIView = () => {
   );
   const { tabSpec } = usePageTabsTransmitter(tabs);
 
-  usePageHero(
-    <OfferingViewHero
-      offering={data?.offering}
-      refetch={refetch}
-      isLoading={isLoading}
-      isRefetching={isRefetching}
-      error={error}
-      isPublic
-    />,
-
-    [data, isRefetching, refetch, error, isLoading],
-  );
-
   const router = useRouter();
   const breadcrumbItems = useMemo(
     () => getPublicOfferingBreadcrumbItems(data?.offering, router),
@@ -356,24 +343,36 @@ export const OfferingPublicUIView = () => {
   useBreadcrumbs(breadcrumbItems);
 
   return (
-    <UIView
-      render={(Component, { key, ...props }) => {
-        // Use tabSpec.component if available (for tab navigation)
-        const ComponentToRender = tabSpec?.component || Component;
-        return (
-          <ComponentToRender
-            key={key}
-            {...props}
-            refetch={refetch}
-            data={data}
-            isLoading={isLoading}
-            error={error}
-            tabSpec={tabSpec}
-            offering={data?.offering}
-            category={data?.category}
-          />
-        );
-      }}
-    />
+    <>
+      <LayoutSlot name="hero">
+        <OfferingViewHero
+          offering={data?.offering}
+          refetch={refetch}
+          isLoading={isLoading}
+          isRefetching={isRefetching}
+          error={error}
+          isPublic
+        />
+      </LayoutSlot>
+      <UIView
+        render={(Component, { key, ...props }) => {
+          // Use tabSpec.component if available (for tab navigation)
+          const ComponentToRender = tabSpec?.component || Component;
+          return (
+            <ComponentToRender
+              key={key}
+              {...props}
+              refetch={refetch}
+              data={data}
+              isLoading={isLoading}
+              error={error}
+              tabSpec={tabSpec}
+              offering={data?.offering}
+              category={data?.category}
+            />
+          );
+        }}
+      />
+    </>
   );
 };

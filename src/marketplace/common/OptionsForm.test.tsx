@@ -822,4 +822,66 @@ describe('OptionsForm Integration', () => {
       ).toBeInTheDocument();
     });
   });
+
+  describe('model selection on an order', () => {
+    const modelOptions = {
+      order: ['models'],
+      options: {
+        models: {
+          type: 'select_string_multi',
+          label: 'Models',
+          choices: ['gpt-4o', 'llama'],
+        },
+      },
+    };
+
+    const renderOrder = () => {
+      const onSubmit = vi.fn();
+      renderWithProviders(
+        <Form
+          onSubmit={onSubmit}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <OptionsForm
+                options={modelOptions as any}
+                allModelsOption="models"
+                orderForm
+              />
+              <button type="submit">Submit</button>
+            </form>
+          )}
+        />,
+      );
+      return onSubmit;
+    };
+
+    it('starts on All models and orders every model', async () => {
+      const user = userEvent.setup();
+      const onSubmit = renderOrder();
+      expect(screen.getByLabelText('All models')).toBeChecked();
+      await user.click(screen.getByRole('button', { name: 'Submit' }));
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+      expect(onSubmit.mock.calls[0][0].attributes.models).toEqual(['*']);
+    });
+
+    it('refuses an order with no model ticked', async () => {
+      const user = userEvent.setup();
+      const onSubmit = renderOrder();
+      await user.click(screen.getByLabelText('All models'));
+      await user.click(screen.getByRole('button', { name: 'Submit' }));
+      expect(onSubmit).not.toHaveBeenCalled();
+      expect(
+        screen.getByText('Choose at least one model, or All models.'),
+      ).toBeInTheDocument();
+    });
+
+    it('orders the models ticked', async () => {
+      const user = userEvent.setup();
+      const onSubmit = renderOrder();
+      await user.click(screen.getByLabelText('All models'));
+      await user.click(screen.getByLabelText('llama'));
+      await user.click(screen.getByRole('button', { name: 'Submit' }));
+      expect(onSubmit.mock.calls[0][0].attributes.models).toEqual(['llama']);
+    });
+  });
 });

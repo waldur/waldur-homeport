@@ -5,7 +5,6 @@ import React, { useEffect, useRef } from 'react';
 import { BaseButton, IconButton } from 'waldur-ui';
 
 import { useAnonymousThreadContext } from '@/ai-assistant/anonymous/AnonymousThreadProvider';
-import { resetDrawerDOM } from '@/ai-assistant/components/LLMChatDrawer';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
 import { isAnonymousVisitor, isAssistantEnabled } from '@/ai-assistant/utils';
 import { openUnifiedChatDrawer } from '@/chat/openUnifiedChatDrawer';
@@ -38,7 +37,8 @@ export const LLMChatDrawerToggle: React.FC = () => {
     setHasUnreadReply: setAnonymousHasReply,
   } = useAnonymousThreadContext();
 
-  // Force-close drawer and clean up DOM when user changes (impersonation end/start)
+  // Force-close the drawer when the user changes (impersonation end/start);
+  // it reopens as a plain panel.
   useEffect(() => {
     if (user?.uuid === prevUserUuid.current) return;
     prevUserUuid.current = user?.uuid;
@@ -46,7 +46,6 @@ export const LLMChatDrawerToggle: React.FC = () => {
     if (isDrawerOpen()) {
       closeDrawer();
     }
-    resetDrawerDOM();
   }, [user?.uuid, closeDrawer]);
 
   // Visitors had no "new reply" signal at all: their stream finishes into
@@ -117,7 +116,9 @@ export const LLMChatDrawerToggle: React.FC = () => {
       // The sign-in strip runs at 40px — the language select and the mode
       // switcher's `btn-icon` both take it from the form-control height. A
       // labelled button is 36px by default and `size="lg"` overshoots to 44.
-      className="h-[40px]"
+      // pointer-events-auto: clickable through the open dialog's body
+      // pointer lock, to close the drawer.
+      className="h-[40px] pointer-events-auto"
       label={label}
       iconNode={<SparkleIcon weight="bold" />}
       onClick={toggleChatDrawer}
@@ -131,6 +132,9 @@ export const LLMChatDrawerToggle: React.FC = () => {
       label={label}
       onClick={toggleChatDrawer}
       aria-expanded={isOpen}
+      // Clickable through the open dialog's body pointer lock: it closes
+      // or switches a floating drawer.
+      className="pointer-events-auto"
       data-drawer-toggle
       data-state={dataState}
       data-testid="llm-chat-drawer-toggle"

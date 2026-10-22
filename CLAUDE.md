@@ -75,17 +75,35 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
 
   For data you already hold in memory (or that comes from one aggregate
   endpoint), `fetchData` may resolve rows directly instead of using
-  `createFetcher`:
+  `createFetcher`. The table pages only what `fetchData` returns: resolving
+  every row with the pager on shows pages that all list the same rows. So
+  either page them with `createClientPaginatedFetcher` (see
+  `docs/table/fetching.md`), or, for a short bounded list, turn the pager off:
 
   ```typescript
+  import { createClientPaginatedFetcher } from '@/table/api';
+
   const tableProps = useTable({
     table: `my-nested-table-${scopeUuid}`,
-    fetchData: () => Promise.resolve({ rows, resultCount: rows.length }),
+    fetchData: createClientPaginatedFetcher(rows),
   });
+  // Rows from a separate useQuery: the fetcher closes over them, so fetch
+  // again when they arrive, or the table keeps its first, empty, result.
+  useEffect(() => {
+    tableProps.fetch();
+  }, [data]);
   // Nested/embedded tables: drop the chrome the parent already provides.
   <Table {...tableProps} columns={columns} verboseName={translate('items')}
          hideTitle hasActionBar={false} placeholderHasRetry={false} />
+
+  // A short, bounded list: every row, no pager.
+  <Table {...tableProps} hasPagination={false} … />
   ```
+
+  The same holds for `createFetcher` on an endpoint that is not paginated
+  (a detail action returning a plain list, with no `X-Result-Count`): its
+  count is `NaN` and the pager shows over every row. Fetch the list once with
+  `useQuery` and page it as above, or set `hasPagination={false}`.
 
   Reference: `src/customer/roles/RoleUsersExpandableRow.tsx`,
   `src/administration/celery/CeleryTaskTable.tsx` (in-memory rows).
@@ -205,6 +223,8 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   - `*EditField`'s `renderValue` may return `null`/`undefined` — the HOC substitutes `DASH_ESCAPE_CODE`, so no explicit dash fallback is needed.
   - `isStaffOnly` on an `*EditField` swaps the edit button for a `StaffOnlyIndicator` for non-staff. For more complex gates, still use `hasPermission()` and wire `hideActions` on the enclosing `FormTable`/`TabbedSection`.
   - Canonical examples: `src/customer/details/CustomerDetailsPanel.tsx`, `src/openstack/OpenStackCredentialsSection.tsx`, `src/marketplace/offerings/update/integration/LifecyclePolicySection.tsx`.
+
+- **Page content in the layout chrome** (hero, page-tab actions, filter bar, announcement bars) goes through `<LayoutSlot name="…">` rendered in the page's own JSX, only when there is something to show; see `docs/architecture.md` → "Page Content in the Layout Chrome". Never store React elements in a context from an effect to render them elsewhere.
 
 - **`use*` prefix discipline** — do not prefix a utility with `use*` unless it actually calls React hooks. `eslint-plugin-react-hooks` enforces conditional-call ordering by name, so a non-hook helper named `useX` will silently break the lint rule the moment a real hook is added to it, or when callers invoke it after an early return. Use `getXxx`/`computeXxx` for plain functions.
 

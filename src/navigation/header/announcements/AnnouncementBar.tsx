@@ -6,6 +6,7 @@ import { BaseButton, FeaturedIcon, FeaturedIconVariant } from 'waldur-ui';
 
 import { parseMarkdownLinksOnly } from '@/core/sanitize';
 import { translate } from '@/i18n';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 
 import { useTextTruncation } from './useTextTruncation';
 
@@ -74,7 +75,8 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
     >
       <div
         className={classNames(
-          'container-fluid flex w-full items-center gap-[6.5px] py-[6.5px]',
+          PAGE_CONTAINER_CLASSNAME,
+          'flex w-full items-center gap-[6.5px] py-[6.5px]',
           ellipsis && 'truncate',
         )}
       >

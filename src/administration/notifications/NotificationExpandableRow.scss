@@ -1,17 +1,13 @@
-// Space taken by the table around an expandable row's content (includes the
-// 300px aside), so the tab strip can scroll sideways instead of widening it.
-$table-sides-space: 495px;
+// Space taken by the table around an expandable row's content, so the tab
+// strip can scroll sideways instead of widening it. The sidebar comes on top
+// of it: its current width, which useSidebarLayoutShim publishes.
+$table-sides-space: 195px;
 
 .notification-templates-tabs {
   width: 100%;
 
   .expandable-container & {
-    width: calc(100vw - $table-sides-space);
-  }
-  [data-kt-aside-minimize='on'] .expandable-container & {
-    width: calc(
-      100vw - $table-sides-space + 226px
-    ); // 226px free on aside minimized
+    width: calc(100vw - $table-sides-space - var(--layout-sidebar-width, 0px));
   }
 }
 
@@ -19,9 +15,8 @@ $table-sides-space: 495px;
 @media (max-width: 992px) {
   .notification-templates-tabs {
     .expandable-container & {
-      width: calc(
-        100vw - $table-sides-space + 300px + 30px
-      ); // 300px from aside hidden + 30px from container, space released
+      // No sidebar beside the page; 30px from the container, space released.
+      width: calc(100vw - $table-sides-space + 30px);
     }
   }
 }

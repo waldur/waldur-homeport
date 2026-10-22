@@ -1,8 +1,7 @@
 import { FunnelSimpleIcon } from '@phosphor-icons/react';
 
+import { translate } from 'waldur-i18n-runtime';
 import { Badge, BaseButton } from 'waldur-ui';
-
-import { translate } from '@/i18n';
 
 interface TableFilterButtonProps {
   onClick: (event: React.MouseEvent) => void;

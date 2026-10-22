@@ -2,10 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect } from 'react';
 import { screen, userEvent, waitFor, within } from 'storybook/test';
 
+import { translate } from 'waldur-i18n-runtime';
+
 import { useDrawer } from '@/drawer/actions';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { DrawerRoot } from '@/drawer/DrawerRoot';
-import { translate } from '@/i18n';
 
 import {
   tableStoryActiveFilters,

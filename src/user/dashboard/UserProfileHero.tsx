@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
+import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 import { User } from 'waldur-js-client';
 
@@ -8,6 +9,7 @@ import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { isDescendantOf } from '@/navigation/useTabs';
 
 import { UsersService } from '../UsersService';
@@ -50,7 +52,7 @@ export const UserProfileHero: FC<UserProfileHeroProps> = ({
   ) : error ? (
     <LoadingErred loadData={refetch} />
   ) : (
-    <div className="container-fluid my-5">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-[1.25rem]')}>
       <TabNav
         listClassName="mb-4"
         activeKey={editActive ? 'edit' : 'view'}

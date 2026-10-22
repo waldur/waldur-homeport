@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { forwardRef } from 'react';
 
 import {
   BreadcrumbTrail,
@@ -9,51 +10,42 @@ import {
 interface BreadcrumbMainProps {
   /** The phone layout: the trail in its own bar under the header. */
   mobile?: boolean;
-  /** The impersonation bar is showing above the header. */
-  hasPageBar?: boolean;
 }
 
-export const BreadcrumbMain = ({
-  mobile = false,
-  hasPageBar = false,
-}: BreadcrumbMainProps) => {
-  const breadcrumbs = useBreadcrumbItems();
-  const isMd = useBreakpointDown('md');
+export const BreadcrumbMain = forwardRef<HTMLDivElement, BreadcrumbMainProps>(
+  ({ mobile = false }, ref) => {
+    const breadcrumbs = useBreadcrumbItems();
+    const isMd = useBreakpointDown('md');
 
-  if (!breadcrumbs?.length) return null;
+    if (!breadcrumbs?.length) return null;
 
-  if (mobile === isMd) {
-    const trail = (
-      <div
-        className={classNames(
-          'flex items-center grow min-w-0 overflow-hidden',
-          mobile && [
-            // Below md the trail gets a bar of its own, fixed under the 55px
-            // header and as tall, with the header's surface, rule and side
-            // padding.
-            'fixed inset-x-0 z-20 h-[55px] px-[15px] border-b-[1px] border-b-secondary bg-primary',
-            hasPageBar
-              ? 'top-[calc(55px+var(--kt-pagebar-height))]'
-              : 'top-[55px]',
-            // No styles: the hook layout/_toolbar.scss and _sticky-top.scss
-            // use to place the page tabs and sticky elements below the bar.
-            'breadcrumb-mobile',
-          ],
-        )}
-      >
-        <BreadcrumbTrail />
-      </div>
-    );
-    if (!mobile) return trail;
-    return (
-      <>
-        {trail}
-        {/* Holds the fixed bar's place in the page flow, so whatever follows
-            it — announcements, warning bars, the page — starts below the bar
-            instead of underneath it. */}
-        <div aria-hidden="true" className="h-[55px] shrink-0" />
-      </>
-    );
-  }
-  return null;
-};
+    if (mobile === isMd) {
+      return (
+        <div
+          ref={ref}
+          className={classNames(
+            'flex items-center min-w-0 overflow-hidden',
+            // In the header the trail takes the free width; the phone bar
+            // sits in the page's flex column and keeps its own height.
+            mobile ? 'shrink-0' : 'grow',
+            // Below md the trail gets a bar of its own under the header, as
+            // tall, with the header's surface, rule and side padding. It
+            // sticks under the header on its own, below the drawer layer, so
+            // a floating drawer, which hangs from the header, covers it.
+            // mt-px undoes the header group's -mb-px: the bar starts under
+            // the header's rule; -mb-px lets what follows start under its own.
+            mobile && [
+              'h-[55px] px-[15px] border-b-[1px] border-b-secondary bg-primary',
+              'sticky z-99 mt-px -mb-px print:hidden',
+              'top-[calc(var(--layout-page-bar-height,0px)+var(--layout-header-height,0px))]',
+            ],
+          )}
+        >
+          <BreadcrumbTrail />
+        </div>
+      );
+    }
+    return null;
+  },
+);
+BreadcrumbMain.displayName = 'BreadcrumbMain';

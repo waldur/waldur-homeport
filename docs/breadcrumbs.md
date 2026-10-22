@@ -113,7 +113,7 @@ This needs a width-constrained parent: the trail's container must be a flex item
 
 ## Mobile
 
-Below the `md` breakpoint the root app draws the trail in a fixed bar under the header (`BreadcrumbMain mobile`): 55px tall like the header, with its surface, bottom rule and 15px side padding, and lowered under the impersonation bar while it shows (`hasPageBar`). Behind it `BreadcrumbMain` renders a 55px spacer in the page flow, so the announcements, warning bars and page content that follow start below the bar rather than underneath it. The bar keeps the class `breadcrumb-mobile` with no styles of its own: `layout/_toolbar.scss` and `layout/_sticky-top.scss` still use it to place the page tabs and sticky elements below the bar, and the lint rule allows it.
+Below the `md` breakpoint the root app draws the trail in a bar of its own under the header (`BreadcrumbMain mobile`): 55px tall like the header, with its surface, bottom rule and 15px side padding. It sticks on its own right under the header (and the impersonation bar while that shows), and the announcements, warning bars and page content that follow start below it in the page flow. Its measured height is `--layout-breadcrumb-bar-height`, beside the header's `--layout-header-height` (`navigation/chromeHeights.ts`): the page tabs and sticky page content (`--layout-sticky-top`) sit below both, while the floating drawers hang from the header alone and cover the bar, which stays below the drawer layer (`z-99`).
 
 ## Micro-apps
 

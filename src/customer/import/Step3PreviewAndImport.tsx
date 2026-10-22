@@ -8,6 +8,7 @@ import { Badge } from 'waldur-ui';
 import { translate } from '@/i18n';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
 import { useNotify } from '@/store/notify';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table, { TableColumns } from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -82,13 +83,15 @@ export const Step3PreviewAndImport: FC<WizardFormStepProps> = (props) => {
       if (q) {
         rows = rows.filter((row) => row.name.toLowerCase().includes(q));
       }
-      return Promise.resolve({
-        rows,
-        resultCount: rows.length,
-      });
+      return createClientPaginatedFetcher(rows)(request);
     },
     queryField: 'query',
   });
+
+  // The fetcher closes over the parsed rows: fetch again once they arrive.
+  useEffect(() => {
+    tableProps.fetch();
+  }, [data]);
 
   const columns = useMemo<TableColumns<Customer>>(
     () => [

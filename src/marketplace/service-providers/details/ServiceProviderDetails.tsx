@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 import { Stack } from 'react-bootstrap';
 import { ServiceProvider } from 'waldur-js-client';
@@ -9,7 +10,8 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
-import { usePageHero } from '@/navigation/context';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
+import { LayoutSlot } from '@/navigation/slots';
 import { useTitle } from '@/navigation/title';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
@@ -63,7 +65,7 @@ const ProviderDetailsHero: FunctionComponent<ProviderDetailsProps> = (data) => {
       hideQuickSection
       cardBordered
       logo={data.provider.customer_image}
-      className="container-fluid my-5"
+      className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-[1.25rem]')}
       logoAlt={data.provider.customer_name}
       logoTooltip={data.provider.customer_name}
       logoCircle
@@ -98,8 +100,14 @@ export const ServiceProviderDetails: FunctionComponent<ProviderDetailsProps> = (
   );
   useBreadcrumbs(breadcrumbItems);
   useTitle(translate('Service provider details'));
-  usePageHero(<ProviderDetailsHero {...data} />);
   const tabs = useMemo(() => getProviderPageTabs(data), []);
   const { tabSpec } = usePageTabsTransmitter(tabs);
-  return tabSpec?.component ? <tabSpec.component /> : null;
+  return (
+    <>
+      <LayoutSlot name="hero">
+        <ProviderDetailsHero {...data} />
+      </LayoutSlot>
+      {tabSpec?.component ? <tabSpec.component /> : null}
+    </>
+  );
 };

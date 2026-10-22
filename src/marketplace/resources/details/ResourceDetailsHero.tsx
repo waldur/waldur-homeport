@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import {
   OfferingComponent,
   PublicOfferingDetails,
@@ -7,6 +8,7 @@ import {
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { translate } from '@/i18n';
 import { RefreshButton } from '@/marketplace/common/RefreshButton';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { INSTANCE_TYPE, VOLUME_TYPE } from '@/openstack/constants';
 import { formatResourceType } from '@/resource/utils';
 import { ActionsUnavailable } from '@/table/ActionsDropdown';
@@ -75,7 +77,10 @@ export const ResourceDetailsHero = ({
           <OrderErredView resource={resource} />
         ) : null}
         <PublicDashboardHero
-          containerClassName="container-fluid my-5"
+          containerClassName={classNames(
+            PAGE_CONTAINER_CLASSNAME,
+            'my-[1.25rem]',
+          )}
           cardBordered
           logo={getMarketplaceResourceLogo(resource)}
           logoAlt={resource.category_title}

@@ -1,9 +1,11 @@
+import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
 import { getIconUrl } from '@/core/api';
 import { ENV } from '@/core/config';
 import { isFeatureVisible } from '@/features/connect';
 import { DeploymentFeatures } from '@/FeaturesEnums';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 
 export const DisclaimerArea: FunctionComponent = () => {
   if (!isFeatureVisible(DeploymentFeatures.enable_disclaimer_area)) {
@@ -19,7 +21,12 @@ export const DisclaimerArea: FunctionComponent = () => {
 
   return (
     <div className="border-t-[1px] border-t-secondary py-6">
-      <div className="container-fluid flex flex-col md:flex-row items-center justify-center gap-6 text-xs text-quaternary">
+      <div
+        className={classNames(
+          PAGE_CONTAINER_CLASSNAME,
+          'flex flex-col md:flex-row items-center justify-center gap-6 text-xs text-quaternary',
+        )}
+      >
         {text && <span>{text}</span>}
         {logo && (
           <img

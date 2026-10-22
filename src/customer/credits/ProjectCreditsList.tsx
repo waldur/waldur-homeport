@@ -66,7 +66,7 @@ export const ProjectCreditsList: FC = () => {
       tableActions={
         <>
           <FilteredEventsButton
-            filter={{ feature: 'credits', customer_uuid: customer.uuid }}
+            filter={{ feature: 'credits', scope: customer.url }}
           />
 
           {canManage && (

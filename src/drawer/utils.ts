@@ -1,22 +1,15 @@
-/**
- * Checks if the drawer is currently visible.
- *
- * Note: This checks the actual DOM state rather than Redux state because
- * the drawer can be closed by multiple user interactions (ESC key,
- * clicking overlay, close button) that don't go through Redux actions.
- *
- * @returns true if the drawer is currently shown to the user
- */
-export const isDrawerOpen = (): boolean => {
-  const drawerEl = document.getElementById('kt_drawer');
-  return drawerEl?.classList.contains('drawer-on') ?? false;
-};
+import { drawerState } from './DrawerContext';
 
 /**
- * True when the drawer is open AND showing the drawer identified by its shell
- * class (e.g. `ai-chat-drawer-active`). Lets a toggle button decide between
+ * Whether the drawer is open, for code outside React (stream callbacks,
+ * effects). React components read `isOpen` from useDrawer() instead.
+ */
+export const isDrawerOpen = (): boolean => drawerState.isOpen;
+
+/**
+ * True when the drawer is open AND showing the drawer with this shell class
+ * (e.g. `ai-chat-drawer-active`). Lets a toggle button decide between
  * closing its own drawer and switching to it from another one.
  */
 export const isDrawerOpenWithClass = (className: string): boolean =>
-  isDrawerOpen() &&
-  Boolean(document.getElementById('kt_drawer')?.classList.contains(className));
+  drawerState.isOpen && drawerState.shellClass === className;

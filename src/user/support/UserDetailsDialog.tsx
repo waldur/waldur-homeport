@@ -17,6 +17,7 @@ import { KeysList } from '@/user/keys/KeysList';
 import { UserDetailsTable } from '@/user/support/UserDetailsTable';
 import { UserOfferingList } from '@/user/UserOfferingList';
 import { useUser } from '@/workspace/hooks';
+import { checkIsStaffOrSupport } from '@/workspace/selectors';
 
 import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 
@@ -35,6 +36,10 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
   resolve: { user, loading, error, refetch },
 }) => {
   const currentUser = useUser() as User;
+  // Events filed on a user and the user's roles are readable only by that
+  // user, staff and support; anyone else would get an empty tab.
+  const canViewPersonalRecords =
+    checkIsStaffOrSupport(currentUser) || currentUser?.uuid === user?.uuid;
   return (
     <ModalDialog
       title={translate('User details of {fullName}', {
@@ -58,18 +63,18 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
         <Tabs mount="active" defaultValue="details">
           <TabsList className="mb-4">
             <TabsTrigger value="details">{translate('Details')}</TabsTrigger>
-            <TabsTrigger value="audit-log">
-              {translate('Audit log')}
-            </TabsTrigger>
+            {canViewPersonalRecords ? (
+              <TabsTrigger value="audit-log">
+                {translate('Audit log')}
+              </TabsTrigger>
+            ) : null}
             {isFeatureVisible(UserFeatures.ssh_keys) ? (
               <TabsTrigger value="keys">{translate('Keys')}</TabsTrigger>
             ) : null}
             <TabsTrigger value="remote-accounts">
               {translate('Remote accounts')}
             </TabsTrigger>
-            {currentUser.is_staff ||
-            currentUser.is_support ||
-            currentUser.uuid === user.uuid ? (
+            {canViewPersonalRecords ? (
               <TabsTrigger value="roles-and-permissions">
                 {translate('Roles and permissions')}
               </TabsTrigger>
@@ -91,14 +96,16 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
             <TabsContent value="details">
               <UserDetailsTable user={user} />
             </TabsContent>
-            <TabsContent value="audit-log">
-              <UserEvents
-                user={user}
-                hasActionBar={false}
-                fullWidth
-                cardBordered={false}
-              />
-            </TabsContent>
+            {canViewPersonalRecords ? (
+              <TabsContent value="audit-log">
+                <UserEvents
+                  user={user}
+                  hasActionBar={false}
+                  fullWidth
+                  cardBordered={false}
+                />
+              </TabsContent>
+            ) : null}
             {isFeatureVisible(UserFeatures.ssh_keys) ? (
               <TabsContent value="keys">
                 <KeysList
@@ -117,9 +124,7 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
                 cardBordered={false}
               />
             </TabsContent>
-            {currentUser.is_staff ||
-            currentUser.is_support ||
-            currentUser.uuid === user.uuid ? (
+            {canViewPersonalRecords ? (
               <TabsContent value="roles-and-permissions">
                 <UserAffiliationsList
                   user={user}

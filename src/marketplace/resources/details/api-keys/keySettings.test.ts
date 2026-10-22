@@ -27,7 +27,7 @@ describe('serializeKeySettings', () => {
       serializeKeySettings(
         { limits: { tokens: '500', requests: '' } },
         [TOKENS, REQUESTS],
-        [],
+        null,
       ),
     ).toEqual({ limits: { tokens: 500 } });
   });
@@ -39,25 +39,26 @@ describe('serializeKeySettings', () => {
     });
   });
 
-  // A key limited to retired models shows none ticked; saving an unrelated
-  // change must not send that empty list, which would allow every model.
-  it('leaves untouched models out of an edit', () => {
+  it('sends the ticked models as a list', () => {
     expect(
       serializeKeySettings(
-        { limits: { tokens: 5 }, allowed_models: [] },
-        [TOKENS],
-        ['gpt-4o'],
-        false,
+        { all_models: false, allowed_models: ['gpt-4o'] },
+        [],
+        ['gpt-4o', 'llama-3'],
       ),
-    ).toEqual({ limits: { tokens: 5 } });
+    ).toEqual({ allowed_models: ['gpt-4o'] });
   });
 
-  // Unticking everything is how a key is opened to every model, even when its
-  // list only named retired ones and the form therefore looks unchanged.
-  it('sends models the user touched in an edit, even if back to empty', () => {
+  // The individual ticks stay in the form while All models locks them; they
+  // must not be what is sent.
+  it('sends every model as its own value, whatever is ticked under it', () => {
     expect(
-      serializeKeySettings({ allowed_models: [] }, [], ['gpt-4o'], true),
-    ).toEqual({ allowed_models: [] });
+      serializeKeySettings(
+        { all_models: true, allowed_models: ['gpt-4o'] },
+        [],
+        ['gpt-4o', 'llama-3'],
+      ),
+    ).toEqual({ allowed_models: ['*'] });
   });
 
   it('leaves out the settings the offering does not have', () => {
@@ -65,7 +66,7 @@ describe('serializeKeySettings', () => {
       serializeKeySettings(
         { limits: { tokens: 1 }, allowed_models: ['x'] },
         [],
-        [],
+        null,
       ),
     ).toEqual({});
   });
@@ -73,7 +74,7 @@ describe('serializeKeySettings', () => {
 
 describe('getKeySettingsFields', () => {
   const limitField = (limits: Record<string, number>) =>
-    getKeySettingsFields({ limits } as any, [TOKENS], [])[0] as any;
+    getKeySettingsFields({ limits } as any, [TOKENS], null)[0] as any;
 
   it("bounds a key's limit by the resource limit", () => {
     expect(limitField({ tokens: 1000 }).maxValue).toBe(1000);
@@ -92,7 +93,7 @@ describe('getKeySettingsFields', () => {
     const field = getKeySettingsFields(
       { limits: { tokens: 500 } } as any,
       [TOKENS],
-      [],
+      null,
       {
         currentLimits: { tokens: 800 },
       },
@@ -104,7 +105,7 @@ describe('getKeySettingsFields', () => {
     const field = getKeySettingsFields(
       { limits: { tokens: 500 } } as any,
       [TOKENS],
-      [],
+      null,
       {
         currentLimits: { tokens: 200 },
       },

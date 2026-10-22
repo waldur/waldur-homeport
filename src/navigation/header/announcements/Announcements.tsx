@@ -1,8 +1,18 @@
+import { Ref } from 'react';
+
 import { AdminAnnouncements } from './AdminAnnouncements';
 
-export const Announcements = ({ extraAnnouncement }) => (
+/**
+ * The admin announcements, then the bars pages add (LayoutSlot
+ * `announcements`), rendered into `extraRef`.
+ */
+export const Announcements = ({
+  extraRef,
+}: {
+  extraRef?: Ref<HTMLDivElement>;
+}) => (
   <div>
     <AdminAnnouncements />
-    {extraAnnouncement}
+    <div ref={extraRef} />
   </div>
 );

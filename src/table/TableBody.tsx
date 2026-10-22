@@ -16,11 +16,11 @@ import React, {
 } from 'react';
 import { Field, useFormState } from 'react-final-form';
 
+import { translate } from 'waldur-i18n-runtime';
 import { BaseButton, Checkbox, MenuPopover, Radio, Tooltip } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { FieldErrorMessage } from '@/form/FieldError';
-import { translate } from '@/i18n';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableFilterContext } from './FilterContextProvider';

@@ -2,6 +2,7 @@ import classNames from 'classnames';
 
 import { AccordionCard } from 'waldur-ui';
 
+import { getAllModelsOption } from '@/marketplace/common/modelSelection';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
 import { StepContent } from '@/wizard/VStepperFormStep';
 
@@ -22,7 +23,12 @@ export const FormAdditionalConfigurationStep = (props: FormStepProps) => {
         disabled={props.disabled}
         disabledReason={props.disabledTooltip}
       >
-        <OptionsForm options={props.offering.options} customer={customer} />
+        <OptionsForm
+          options={props.offering.options}
+          customer={customer}
+          allModelsOption={getAllModelsOption(props.offering.resource_options)}
+          orderForm
+        />
       </StepContent>
     </AccordionCard>
   );

@@ -18,6 +18,7 @@ import { translate } from '@/i18n';
 import { sharesProviderAccounts } from '@/marketplace/service-providers/accounts/ProviderAccountLink';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
 import { useNotify } from '@/store/notify';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table, { TableColumns } from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -123,10 +124,7 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
           row.user_username.toLowerCase().includes(q),
         );
       }
-      return Promise.resolve({
-        rows,
-        resultCount: rows.length,
-      });
+      return createClientPaginatedFetcher(rows)(request);
     },
     queryField: 'query',
   });

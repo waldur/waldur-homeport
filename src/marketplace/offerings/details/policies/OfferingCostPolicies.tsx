@@ -9,6 +9,7 @@ import { translate } from '@/i18n';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { useTable } from '@/table/useTable';
+import { VersionHistoryButton } from '@/version-history';
 
 import { CostPolicyCreateButton } from './CostPolicyCreateButton';
 import { PoliciesTable } from './PoliciesTable';
@@ -46,6 +47,12 @@ export const OfferingCostPolicies: FC<OfferingCostPoliciesProps> = ({
             type="cost"
             offering={offering}
             refetch={tableProps.fetch}
+          />
+          <VersionHistoryButton
+            entityType="offering_cost_policy"
+            entityUuid={row.uuid}
+            entityName={offering.name}
+            asDropdownItem
           />
           <PolicyDeleteAction
             row={row}

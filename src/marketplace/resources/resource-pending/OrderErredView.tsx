@@ -5,6 +5,7 @@ import {
 } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
+import classNames from 'classnames';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import {
@@ -20,6 +21,7 @@ import { omit } from '@/core/utils';
 import { translate } from '@/i18n';
 import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
 import { useModal } from '@/modal/actions';
+import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
@@ -169,7 +171,7 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
   }
   const steps = getSteps(resource);
   return (
-    <div className="container-fluid mt-6">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-6')}>
       <Card className="card-bordered overflow-hidden">
         <Card.Body className="flex flex-col sm:flex-row items-center gap-4">
           <ProgressSteps steps={steps} bgClass="bg-primary" className="grow" />

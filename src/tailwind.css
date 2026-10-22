@@ -150,3 +150,67 @@
     visibility: visible !important;
   }
 }
+
+/* The page's base styles, from Metronic's core/layout/_base.scss and the
+   body background in layout/_main.scss. They stay in the `bootstrap` layer,
+   where they always were, so they compete with Bootstrap's reboot exactly as
+   before. This file loads before the Metronic stylesheet, so the body rules
+   use `html body` to keep beating the reboot's `body` rules regardless of
+   order.
+
+   Root font size: 13px, 12px below md, scaled by --font-size-adjust (the
+   user's text-size setting, afterBootstrap.tsx). Every rem in the app is
+   relative to it. Body text is 1.077rem (14px at the 13px root). */
+@layer bootstrap {
+  html {
+    font-family: sans-serif;
+    text-size-adjust: 100%;
+  }
+
+  html,
+  html body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-weight: var(--font-weight-normal);
+    font-family: var(--font-family, Inter, Helvetica, 'sans-serif');
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body {
+    font-size: calc(13px * var(--font-size-adjust, 1)) !important;
+  }
+
+  @media (max-width: 767.98px) {
+    html,
+    body {
+      font-size: calc(12px * var(--font-size-adjust, 1)) !important;
+    }
+  }
+
+  body {
+    font-size: 1.077rem !important;
+  }
+
+  html a:hover,
+  html a:active,
+  html a:focus,
+  body a:hover,
+  body a:active,
+  body a:focus {
+    text-decoration: none !important;
+  }
+
+  html body {
+    display: flex;
+    flex-direction: column;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+  }
+
+  canvas {
+    user-select: none;
+  }
+}

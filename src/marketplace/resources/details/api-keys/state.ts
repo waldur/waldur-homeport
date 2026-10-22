@@ -1,4 +1,4 @@
-import { ResourceApiKeyAction, User } from 'waldur-js-client';
+import { Resource, ResourceApiKeyAction, User } from 'waldur-js-client';
 
 import { BadgeVariant } from 'waldur-ui';
 
@@ -25,6 +25,12 @@ export const canRevealKey = (row: ApiKeyRow, user?: User) =>
     row.user_uuid === user?.uuid ||
     Boolean(checkIsStaffOrSupport(user)));
 
+// The assignee holds the key's value, so may replace it: rotate the key, or
+// retry a rotation of it that failed. Every other command stays with whoever
+// manages the resource's users.
+export const isKeyAssignee = (row: ApiKeyRow, user?: User) =>
+  Boolean(row.user_uuid) && row.user_uuid === user?.uuid;
+
 // Commands every key-carrying backend takes, governed or not.
 export const UNGOVERNED_COMMANDS: ResourceApiKeyAction[] = ['rotate', 'resume'];
 
@@ -32,6 +38,29 @@ export const UNGOVERNED_COMMANDS: ResourceApiKeyAction[] = ['rotate', 'resume'];
 // were recorded was rotating.
 export const getFailedCommand = (row: ApiKeyRow): ResourceApiKeyAction =>
   (row.pending_action || 'rotate') as ResourceApiKeyAction;
+
+// Under key management, a key that holds a secret changes hands by rotation,
+// so its assignee changes only when it can take a rotation: from OK, or from
+// Erred after a failed rotation, which is then retried with the new assignee.
+// A key that holds no secret yet just takes the new assignee. Mirrors the
+// 400 on ``user`` the backend answers otherwise.
+export const getAssigneeLock = (row: ApiKeyRow): string | undefined => {
+  if (!row.client_id) {
+    return undefined;
+  }
+  if (row.state === 'Paused') {
+    return translate('Resume the key to change its assignee.');
+  }
+  if (row.state === 'Erred') {
+    return getFailedCommand(row) === 'rotate'
+      ? undefined
+      : translate('Retry the failed command first.');
+  }
+  if (row.pending_action || getStateVariant(row.state).active) {
+    return translate('Wait for the current operation to finish.');
+  }
+  return undefined;
+};
 
 const getCommandLabel = (command: ResourceApiKeyAction) =>
   ({
@@ -57,16 +86,59 @@ const PAUSED_BY_CAP_TOOLTIP = () =>
     'Paused on reaching a limit. It resumes on its own once under its limits again: when a new month begins or a limit is raised.',
   );
 
-export const getStateTooltip = (row: ApiKeyRow) =>
-  row.state === 'Erred'
-    ? getErredTooltip(row)
-    : row.state === 'Paused' && row.paused_by_limit
-      ? PAUSED_BY_CAP_TOOLTIP()
-      : '';
+// A paused resource stops every key it has, but leaves their own states alone:
+// each key keeps its reason to stay paused, or not, for when the resource
+// resumes. So a key reads OK while it serves nothing, unless the resource's
+// pause is shown on it.
+export type ResourcePause = 'limit' | 'other';
+
+export const getResourcePause = (
+  resource: Pick<Resource, 'paused' | 'usage_limit_restriction'>,
+): ResourcePause | null =>
+  resource.paused
+    ? resource.usage_limit_restriction === 'paused'
+      ? 'limit'
+      : 'other'
+    : null;
+
+export const getResourcePauseMessage = (pause: ResourcePause) =>
+  pause === 'limit'
+    ? translate(
+        'Its usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.',
+      )
+    : translate('It resumes once the resource is unpaused.');
+
+// Only a key that would otherwise serve reads as blocked; a paused, erred or
+// changing key already says why it is not serving.
+const isBlockedByResource = (row: ApiKeyRow, pause?: ResourcePause | null) =>
+  Boolean(pause) && row.state === 'OK';
+
+export const getKeyStateVariant = (
+  row: ApiKeyRow,
+  pause?: ResourcePause | null,
+): { variant: BadgeVariant; active: boolean } =>
+  isBlockedByResource(row, pause)
+    ? { variant: 'warning', active: false }
+    : getStateVariant(row.state);
+
+export const getStateTooltip = (
+  row: ApiKeyRow,
+  pause?: ResourcePause | null,
+) =>
+  pause && isBlockedByResource(row, pause)
+    ? `${translate('The resource is paused, so this key is not served.')} ${getResourcePauseMessage(pause)}`
+    : row.state === 'Erred'
+      ? getErredTooltip(row)
+      : row.state === 'Paused' && row.paused_by_limit
+        ? PAUSED_BY_CAP_TOOLTIP()
+        : '';
 
 // Pause, resume, rotate and settings updates all show the key as Updating;
 // pending_action says which one is in flight.
-export const getStateLabel = (row: ApiKeyRow) => {
+export const getStateLabel = (row: ApiKeyRow, pause?: ResourcePause | null) => {
+  if (isBlockedByResource(row, pause)) {
+    return translate('Blocked: resource paused');
+  }
   if (row.state === 'Updating') {
     if (row.pending_action === 'pause') return translate('Pausing');
     if (row.pending_action === 'resume') return translate('Resuming');
