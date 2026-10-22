@@ -1,6 +1,5 @@
 import { PlusIcon, XIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { uniqueId } from 'lodash-es';
 import { DateTime, Duration } from 'luxon';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Field } from 'react-final-form';
@@ -10,6 +9,7 @@ import { marketplaceBookingsList } from 'waldur-js-client';
 import { BaseButton } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
+import { nextId } from '@/core/nextId';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { VStepperFormStepCard } from '@/wizard';
@@ -87,7 +87,7 @@ const renderScheduleRows = ({
             parse={(v: [Date, Date]) =>
               v
                 ? {
-                    id: uniqueId(),
+                    id: nextId(),
                     start: v[0],
                     end: v[1],
                   }

@@ -1,4 +1,4 @@
-import { uniqueId } from 'lodash-es';
+import { nextId } from '@/core/nextId';
 
 export interface TableFiltersGroup {
   id: string;
@@ -15,9 +15,9 @@ class TableFilterServiceClass {
     const prevList = this.list(key);
     let id = filtersGroup.id;
     if (!id) {
-      id = uniqueId();
+      id = nextId();
       while (prevList.some((p) => p.id === id)) {
-        id = uniqueId();
+        id = nextId();
       }
     }
     const newGroup = { ...filtersGroup, id };

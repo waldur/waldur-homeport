@@ -1,7 +1,7 @@
-import { uniqueId } from 'lodash-es';
 import Papa from 'papaparse';
 import { Offering } from 'waldur-js-client';
 
+import { nextId } from '@/core/nextId';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
 
@@ -120,7 +120,7 @@ export const parseProjectsAndResourcesFile = (file: File) => {
             const projectName = row[header.indexOf('name')];
             // Extract project rows
             const projectData: Record<string, any> = {
-              uuid: uniqueId(),
+              uuid: nextId(),
             };
             projectFields.forEach(({ field, idx }) => {
               projectData[field] = parseValue(row[idx]);
@@ -140,7 +140,7 @@ export const parseProjectsAndResourcesFile = (file: File) => {
                 )
                 .map((resourceRow) => {
                   const resourceData: Record<string, any> = {
-                    uuid: uniqueId(),
+                    uuid: nextId(),
                   };
                   const limits: Record<string, any> = {};
                   const attributes: Record<string, any> = {};

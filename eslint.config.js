@@ -156,6 +156,7 @@ const RESTRICTED_IMPORTS = [
       'sumBy',
       'truncate',
       'uniq',
+      'uniqueId',
       'upperFirst',
       'words',
     ],
