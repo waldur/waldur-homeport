@@ -29732,6 +29732,12 @@
       "feature_area": "roles"
     }
   },
+  "Manage consumer api key for resource": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
+    }
+  },
   "Manage custom scripts": {
     "context": {
       "feature_area": "integration"
