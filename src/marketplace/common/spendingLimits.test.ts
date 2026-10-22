@@ -9,6 +9,7 @@ import {
   getOfferedPeriods,
   getSpendingLimitOrderErrors,
   getSpendingLimitResetText,
+  getSpendingLimitSubmitErrors,
   parseComponentSpendingLimitPeriods,
   validateSpendingLimitAmount,
 } from './spendingLimits';
@@ -197,5 +198,71 @@ describe('component dialog periods', () => {
     expect(formatComponentSpendingLimitPeriods(true, periods, 'limit')).toEqual(
       {},
     );
+  });
+});
+
+describe('getSpendingLimitSubmitErrors', () => {
+  const types = ['token_cost', 'storage'];
+
+  it('puts a message naming a period on that period', () => {
+    expect(
+      getSpendingLimitSubmitErrors(
+        { token_cost: ['The month limit may not exceed 200.'] },
+        types,
+      ),
+    ).toEqual({
+      token_cost: { month: ['The month limit may not exceed 200.'] },
+    });
+  });
+
+  it('puts an ordering message on the shorter period', () => {
+    expect(
+      getSpendingLimitSubmitErrors(
+        {
+          storage: [
+            'Limits: the day amount (50) is above the week amount (40).',
+          ],
+        },
+        types,
+      ),
+    ).toEqual({
+      storage: {
+        day: ['Limits: the day amount (50) is above the week amount (40).'],
+      },
+    });
+  });
+
+  it('keeps a message naming no period on its component', () => {
+    expect(
+      getSpendingLimitSubmitErrors(
+        { token_cost: ['This component does not accept spending limits.'] },
+        types,
+      ),
+    ).toEqual({
+      token_cost: ['This component does not accept spending limits.'],
+    });
+  });
+
+  it('reads per-period errors wrapped in spending_limits', () => {
+    expect(
+      getSpendingLimitSubmitErrors(
+        {
+          spending_limits: {
+            token_cost: { day: ['A valid number is required.'] },
+          },
+        },
+        types,
+      ),
+    ).toEqual({ token_cost: { day: ['A valid number is required.'] } });
+  });
+
+  it('leaves errors with no field to the toast', () => {
+    expect(
+      getSpendingLimitSubmitErrors(
+        { 0: 'Spending limits cannot be changed in the current state.' },
+        types,
+      ),
+    ).toBeUndefined();
+    expect(getSpendingLimitSubmitErrors(undefined, types)).toBeUndefined();
   });
 });
