@@ -1,4 +1,4 @@
-import { isNil, omitBy } from 'lodash-es';
+import { omitBy } from 'es-toolkit';
 import {
   BillingUnit,
   PlanBillingMode,
@@ -97,7 +97,7 @@ export const formatOption = (option: OptionFormData) => {
   ) {
     // A cleared setting (for example topology_mode set back to "the type
     // decides") must disappear rather than reach the backend as null.
-    item.default_configs = omitBy(default_configs, isNil);
+    item.default_configs = omitBy(default_configs, (value) => value == null);
   }
 
   // Handle validators for cross-field validation
@@ -141,7 +141,7 @@ export const formatOption = (option: OptionFormData) => {
   // out, and a transform with nothing set is not sent at all, so an option
   // whose transform was cleared loses it.
   if (transform && isTransformFieldType(item.type)) {
-    const kept = omitBy(transform, (value) => isNil(value) || value === '');
+    const kept = omitBy(transform, (value) => value == null || value === '');
     if (Object.keys(kept).length) {
       item.transform = kept;
     }

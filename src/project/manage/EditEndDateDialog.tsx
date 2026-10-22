@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { pick } from 'lodash-es';
+import { pick } from 'es-toolkit/compat';
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Form, FormRenderProps, useField } from 'react-final-form';

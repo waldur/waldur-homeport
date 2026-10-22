@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
+import { pick } from 'es-toolkit/compat';
 import { FORM_ERROR } from 'final-form';
-import { get, pick } from 'lodash-es';
+import { get } from 'lodash-es';
 import { createRef, FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Field, Form } from 'react-final-form';
 import {
