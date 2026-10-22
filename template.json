@@ -53678,7 +53678,7 @@
       "feature_area": "features"
     }
   },
-  "Show the Reporting menu with organization-scoped reports to organization owners.": {
+  "Show the Reporting menu with organization-scoped reports to users with the CUSTOMER.VIEW_REPORTING permission on the organization.": {
     "context": {
       "feature_area": "features"
     }
@@ -57405,6 +57405,11 @@
       },
       "feature_area": "cost-policies",
       "action_type": "update"
+    }
+  },
+  "The cost is already over this limit, but the credit covers it. Fires once the credit left falls to the limit.": {
+    "context": {
+      "feature_area": "policy-watch"
     }
   },
   "The cost this policy compares with its threshold: the cost in the policy period, less what credit pays.": {
@@ -69944,6 +69949,12 @@
   "View proposal": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "View reporting": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
     }
   },
   "View response": {
