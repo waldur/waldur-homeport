@@ -1,4 +1,4 @@
-import { difference, isNumber, uniq, uniqueId } from 'lodash-es';
+import { difference, uniq, uniqueId } from 'lodash-es';
 import Papa from 'papaparse';
 import { Offering } from 'waldur-js-client';
 
@@ -74,7 +74,7 @@ const cleanHeaderFields = (fields: string[]) =>
 const parseValue = (value) => {
   if (['true', 'TRUE'].includes(value)) return true;
   if (['false', 'FALSE'].includes(value)) return false;
-  if (isNumber(value)) return Number(value);
+  if (typeof value === 'number') return Number(value);
   return value;
 };
 

@@ -1,4 +1,4 @@
-import { padStart, uniqueId } from 'lodash-es';
+import { uniqueId } from 'lodash-es';
 import { DateTime, Duration } from 'luxon';
 
 import { parseDate } from '@/core/dateUtils';
@@ -137,7 +137,7 @@ export const getDurationOptions = () =>
     label: `${hours} hours`,
   }));
 
-const pad2 = (value: string | number) => padStart(String(value), 2, '0');
+const pad2 = (value: string | number) => String(value).padStart(2, '0');
 
 export const getTimeOptions = (
   timeStep = 30,

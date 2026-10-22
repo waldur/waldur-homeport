@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { concat, uniq } from 'lodash-es';
+import { uniq } from 'lodash-es';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { useDebouncedValue } from '@/core/useDebouncedValue';
@@ -72,10 +72,10 @@ export function useTableQuery<RowType = any>(
       const activeFields = Object.values(activeColumns)
         .filter(Boolean)
         .flat() as string[];
-      result = uniq(concat(customFields, activeFields));
+      result = uniq(([] as string[]).concat(customFields, activeFields));
     }
     if (mandatoryFields) {
-      result = uniq(concat(result, mandatoryFields));
+      result = uniq([...result, ...mandatoryFields]);
     }
     return result;
   }, [filter?.field, activeColumns, mandatoryFields]);

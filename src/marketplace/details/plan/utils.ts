@@ -1,4 +1,3 @@
-import { sumBy } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
 import {
@@ -207,6 +206,9 @@ export const combinePrices = (
   }
 };
 
+const sumSubTotals = (components: Component[]) =>
+  components.reduce((total, component) => total + component.subTotal, 0);
+
 const calculateTotalPeriods = (components: Component[]) => {
   return components.reduce((totalPeriods, component) => {
     component.prices.forEach((price, i) => {
@@ -277,7 +279,7 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
           acc[per] = {
             rows: rows,
             totalPeriods: calculateTotalPeriods(rows),
-            total: Number(sumBy(rows, 'subTotal').toFixed(2)),
+            total: Number(sumSubTotals(rows).toFixed(2)),
           };
           return acc;
         },
@@ -327,9 +329,8 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
   const periodicTotal: number = useMemo(
     () =>
       Number(
-        sumBy(
+        sumSubTotals(
           (fixedRows || []).concat(periodicLimitedRows || []),
-          'subTotal',
         ).toFixed(2),
       ),
     [fixedRows, periodicLimitedRows],

@@ -1,4 +1,3 @@
-import { padStart } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { useCallback, useMemo, useState } from 'react';
 import { ListGroup } from 'react-bootstrap';
@@ -25,7 +24,7 @@ interface Time {
   m: string;
 }
 
-const pad2 = (value: string | number) => padStart(String(value), 2, '0');
+const pad2 = (value: string | number) => String(value).padStart(2, '0');
 
 type DayRange = { from: DateBound; to: DateBound };
 

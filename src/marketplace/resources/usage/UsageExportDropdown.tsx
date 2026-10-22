@@ -1,5 +1,5 @@
 import { init } from 'echarts';
-import { sum, uniq } from 'lodash-es';
+import { uniq } from 'lodash-es';
 import { useCallback } from 'react';
 import { ProjectUser, OfferingComponent } from 'waldur-js-client';
 
@@ -221,7 +221,10 @@ export const useUsageExport = (props: UsageExportDropdownProps) => {
         totalRecord.push(
           ...allFormattedUsages.map(
             (compUsages) =>
-              sum(compUsages.map((usage) => Number(usage?.value))) || 'N/A',
+              compUsages.reduce(
+                (total, usage) => total + Number(usage?.value),
+                0,
+              ) || 'N/A',
           ),
         );
         exportData.data.push(totalRecord);
