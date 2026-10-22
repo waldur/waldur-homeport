@@ -32,8 +32,8 @@ $border-radius-xl: 12px !default; // mirrors --radius-xl (12px)
 $border-radius-2xl: 16px !default; // mirrors --radius-2xl (16px)
 
 // Card
-$card-py: 1.23rem !default;
-$card-px: 1.85rem !default;
+$card-py: var(--card-padding-y, 1.23rem) !default;
+$card-px: var(--card-padding-x, 1.85rem) !default;
 
 // Buttons + Forms
 

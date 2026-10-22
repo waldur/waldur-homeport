@@ -6,6 +6,14 @@
  * Both themes are defined in this file.
  */
 :root {
+  /* Spacing and dimensions matching live Metronic .card ($card-px: 1.85rem,
+     $card-py: 1.23rem in _variables.custom.scss, and $card-header-height: 70px
+     in core/components/_variables.scss). Preserved in rem so scaling with
+     root font-size remains exact. */
+  --card-padding-x: 1.85rem;
+  --card-padding-y: 1.23rem;
+  --card-header-min-height: 70px;
+
   /* Collapsible card header (waldur-ui AccordionCard), matching the
      Metronic card it replaced: header text/caret ($gray-700), title
      ($headings-color), the compact variant's title (.text-secondary) and
