@@ -9,16 +9,6 @@ import * as actions from './actions';
 import { INITIAL_STATE } from './constants';
 import { TableState } from './types';
 
-const deleteEntity = (state, action) => {
-  const { [action.payload.uuid]: _, ...entities } = state.entities;
-  const index = state.order.indexOf(action.payload.uuid);
-  return {
-    ...state,
-    entities,
-    order: [...state.order.slice(0, index), ...state.order.slice(index + 1)],
-  };
-};
-
 const pagination = (state = INITIAL_STATE, action): TableState => {
   switch (action.type) {
     case actions.FETCH_LIST_START:
@@ -30,8 +20,6 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
     case actions.FETCH_LIST_DONE:
       return {
         ...state,
-        entities: action.payload.entities,
-        order: action.payload.order,
         pagination: {
           ...state.pagination,
           resultCount: action.payload.resultCount,
@@ -77,31 +65,6 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
           currentPage: 1,
         },
       };
-
-    case actions.ENTITY_CREATE:
-      return {
-        ...state,
-        entities: {
-          ...state.entities,
-          [action.payload.uuid]: action.payload.content,
-        },
-        order: [...state.order, action.payload.uuid],
-      };
-
-    case actions.ENTITY_UPDATE:
-      return {
-        ...state,
-        entities: {
-          ...state.entities,
-          [action.payload.uuid]:
-            typeof action.payload.content === 'function'
-              ? action.payload.content(state.entities[action.payload.uuid])
-              : action.payload.content,
-        },
-      };
-
-    case actions.ENTITY_DELETE:
-      return deleteEntity(state, action);
 
     case actions.PAGE_SIZE_UPDATE:
       return {

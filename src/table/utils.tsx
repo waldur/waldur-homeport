@@ -98,16 +98,6 @@ export const formatLongText = (value) =>
     value
   );
 
-export const transformRows = (rows: any[]) => {
-  const entities: object = {};
-  const order: any[] = [];
-  rows.forEach((row, index) => {
-    entities[getId(row, index)] = row;
-    order.push(getId(row, index));
-  });
-  return { entities, order };
-};
-
 export const renderFieldOrDash = (field) => (field ? field : DASH_ESCAPE_CODE);
 
 export function getNoResultMessage({ query, verboseName, customEmpty = null }) {

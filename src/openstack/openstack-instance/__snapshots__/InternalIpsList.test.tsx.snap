@@ -29,24 +29,18 @@ exports[`InternalIpsList > renders list 1`] = `
               </span>
             </div>
             <button
-              aria-label="Loading"
+              aria-label="Refresh"
               class="inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_transparent] bg-transparent text-[var(--btn-text-secondary-color)] hover:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-transparent active:shadow-none disabled:bg-transparent disabled:text-[var(--btn-disabled-text)] data-disabled:bg-transparent data-disabled:text-[var(--btn-disabled-text)] rounded-lg text-base leading-6 p-0 h-[44px] w-[44px]"
-              data-disabled=""
               data-state="closed"
-              disabled=""
               type="button"
             >
               <span
                 class="inline-flex shrink-0 items-center justify-center text-[var(--btn-icon-color,currentColor)] size-5 [&>svg]:size-5"
               >
                 <span
-                  class="animation-spin"
-                >
-                  <span
-                    data-testid="ArrowsClockwiseIcon"
-                    weight="bold"
-                  />
-                </span>
+                  data-testid="ArrowsClockwiseIcon"
+                  weight="bold"
+                />
               </span>
             </button>
           </div>
@@ -83,21 +77,7 @@ exports[`InternalIpsList > renders list 1`] = `
         style="min-height: 300px;"
       >
         <div
-          class="table-loading-overlay"
-        >
-          <h1
-            class="mb-0"
-          >
-            <span
-              class="animation-spin text-brand"
-              data-testid="SpinnerIcon"
-              role="status"
-              weight="bold"
-            />
-          </h1>
-        </div>
-        <div
-          class="table-container table-hover-shadow table-content-refetching"
+          class="table-container table-hover-shadow"
           data-testid="table-container"
         >
           <table

@@ -4,21 +4,14 @@ import configureStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
+import { setTableQueryRows } from '@/table/mockTableQuery';
 import { renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { ProviderTeamPage } from './ProviderTeamPage';
 
-// Mock useTableQuery to not make actual API calls
-vi.mock('@/table/useTableQuery', () => ({
-  useTableQuery: () => ({
-    data: undefined,
-    isLoading: false,
-    isFetching: false,
-    error: null,
-    refetch: vi.fn(),
-  }),
-}));
+// Serves the rows given to setTableQueryRows (none by default); no request fires.
+vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
 
 const mockStore = configureStore();
 const rowId = 'permission-uuid-1';
@@ -35,10 +28,6 @@ const row = {
 const tableId = 'service-provider-users';
 const state = {
   loading: false,
-  entities: {
-    [rowId]: row,
-  },
-  order: [rowId],
   pagination: {
     pageSize: 10,
     resultCount: 1,
@@ -70,6 +59,7 @@ vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
   service_provider_uuid: 'provider-uuid',
   service_provider: '/api/service-providers/provider-uuid/',
 } as any);
+setTableQueryRows([row]);
 const store = mockStore({
   tables: {
     [tableId]: state,

@@ -80,11 +80,11 @@ export const ResourceUsersListExpandableRow: FunctionComponent<{
   resourceUuid: string;
   refetch: () => void;
 }> = ({ row, resourceUuid, refetch }) => {
-  // Composite uuid (rp_uuid + role_uuid) survives the table's
-  // entity-dict de-dup in `transformRows` (src/table/utils.tsx);
-  // without it, two grants on the same RP with different roles
-  // collapse to one row. Original RP uuid preserved as `rp_uuid` for
-  // the action handlers (need the real id for the API call).
+  // Composite uuid (rp_uuid + role_uuid): the table keys per-row state
+  // such as the expanded toggle by uuid (`getId` in src/table/utils.tsx),
+  // so without it two grants on the same RP with different roles would
+  // share that state. Original RP uuid preserved as `rp_uuid` for the
+  // action handlers (need the real id for the API call).
   const tableProps = useTable<
     ResourceProjectGrant & { uuid: string; rp_uuid: string }
   >({
