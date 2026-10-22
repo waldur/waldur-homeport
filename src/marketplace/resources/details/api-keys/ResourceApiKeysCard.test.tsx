@@ -188,6 +188,30 @@ describe('ResourceApiKeysCard', () => {
     expect(screen.getByText('Updating')).toBeInTheDocument();
   });
 
+  // The Usage tab names the limit and the resume time; so does the banner.
+  it('names the limit that paused the resource and when it resumes', async () => {
+    vi.mocked(hasPermission).mockReturnValue(true);
+    renderCard(KEYS, {
+      resource: {
+        ...RESOURCE,
+        paused: true,
+        usage_limit_restriction: 'paused',
+        offering_components: [{ type: 'tokens', name: 'Tokens' }],
+        spending_limit_status: [
+          { component_type: 'tokens', period: 'week', reached: true },
+        ],
+        usage_limit_resumes_at: new Date(
+          Date.now() + 2 * 86400_000,
+        ).toISOString(),
+      },
+    });
+    expect(
+      await screen.findByText(
+        /Held by: Tokens — Weekly limit\. Access resumes/,
+      ),
+    ).toBeInTheDocument();
+  });
+
   it('shows no pause on a resource that is not paused', async () => {
     vi.mocked(hasPermission).mockReturnValue(true);
     renderCard(KEYS);
