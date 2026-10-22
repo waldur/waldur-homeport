@@ -2,6 +2,7 @@ import type {
   CustomerCredit,
   CustomerEstimatedCostPolicy,
   InvoiceCost,
+  PolicyGateEnum,
   ProjectCredit,
   ProjectEstimatedCostPolicy,
   Resource,
@@ -45,6 +46,13 @@ export interface PolicySaturation {
   hasFired: boolean;
   firedDatetime: string | null;
   affectedResourcesCount: number;
+  /** For cost policies, the check that decided the policy's own evaluation
+   *  (`trigger_status`), and whether it fires on the current figures. Null
+   *  for SLURM policies and for a backend that does not send it. A cost
+   *  policy far over its cap can still be held by credit, so saturation alone
+   *  does not say it is about to fire. */
+  gate: PolicyGateEnum | null;
+  triggered: boolean | null;
 }
 
 export interface ResourceHealth {

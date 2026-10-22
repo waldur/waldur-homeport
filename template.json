@@ -722,6 +722,11 @@
       "feature_area": "details"
     }
   },
+  "A cost policy has reached its limit. Its actions run at the next evaluation.": {
+    "context": {
+      "feature_area": "project"
+    }
+  },
   "A custom .png image file for login page": {},
   "A custom PNG icon for Keycloak login button": {},
   "A custom favicon .png image file": {},
@@ -8126,6 +8131,11 @@
     }
   },
   "Belgium": {},
+  "Below limit": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Best for": {
     "context": {
       "feature_area": "reviewer-discovery"
@@ -13976,11 +13986,6 @@
       "feature_area": "policy-watch"
     }
   },
-  "Credit balance is low. A cost policy may trigger soon, affecting resources in this project.": {
-    "context": {
-      "feature_area": "project"
-    }
-  },
   "Credit card or banking details": {
     "context": {
       "feature_area": "ai-assistant"
@@ -14039,6 +14044,21 @@
   "Credit is overallocated": {
     "context": {
       "feature_area": "dashboard"
+    }
+  },
+  "Credit left is above the limit {limit}": {
+    "context": {
+      "variables": {
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "Credit left is close to a cost policy limit. The policy may trigger soon, affecting resources in this project.": {
+    "context": {
+      "feature_area": "project"
     }
   },
   "Credit limit beyond which approval is required": {
@@ -14316,6 +14336,12 @@
         }
       },
       "feature_area": "details"
+    }
+  },
+  "Current cost": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "organizations"
     }
   },
   "Current country: {value}.": {
@@ -20179,7 +20205,7 @@
   "Estimated cost": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "organizations"
+      "feature_area": "list"
     }
   },
   "Estimated cost breakdown": {
@@ -27260,6 +27286,11 @@
     }
   },
   "Items on every invoice, closed ones included, are rewritten to name the target offering, plan and component. Use it when past invoices should read as if the target had always been used. Amounts never change.": {},
+  "Its actions run at the next evaluation of the policy.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Its usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.": {},
   "JPG, PNG, PDF or .asice (max {size})": {
     "context": {
@@ -28317,6 +28348,18 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "details"
+    }
+  },
+  "Limit reached": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Limit reached, actions pending": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
     }
   },
   "Limit to resource (optional)": {
@@ -29451,6 +29494,7 @@
       "feature_area": "openstack-instance"
     }
   },
+  "MCP server": {},
   "MTU": {
     "context": {
       "primary_ui_type": "label",
@@ -42486,12 +42530,6 @@
       "feature_area": "policy-watch"
     }
   },
-  "Project estimated cost": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "cost-policies"
-    }
-  },
   "Project events": {
     "context": {
       "primary_ui_type": "title"
@@ -47201,6 +47239,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "ai-assistant"
+    }
+  },
+  "Resets at next evaluation": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
     }
   },
   "Resetting the circuit breaker will force it back to the CLOSED state, allowing messages to be published immediately.": {
@@ -52437,6 +52481,7 @@
       "feature_area": "database-stats"
     }
   },
+  "Serve the remote MCP endpoint (/mcp) from the `waldur mcp_server` process, so AI agent clients can act as the signed-in user.": {},
   "Server": {
     "context": {
       "primary_ui_type": "label",
@@ -57025,6 +57070,11 @@
       "feature_area": "support"
     }
   },
+  "The actions it ran are undone at the next evaluation of the policy.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "The actual date when resources will be terminated, including the grace period.": {
     "context": {
       "feature_area": "manage"
@@ -57254,6 +57304,140 @@
     }
   },
   "The conversation is still loading. Try again shortly.": {},
+  "The cost after credit, {cost}, is at or below the limit, {limit}.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost after credit, {cost}, is over the limit, {limit}, and the credit left is at or below it.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost after credit, {cost}, is over the limit, {limit}, and the credit left, {credit}, is at or below it.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        },
+        "credit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies",
+      "action_type": "update"
+    }
+  },
+  "The cost after credit, {cost}, is over the limit, {limit}, but the organization credit left is above it. The policy fires once that credit falls to the limit.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost after credit, {cost}, is over the limit, {limit}, but the organization credit left, {credit}, is above it. The policy fires once that credit falls to the limit.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        },
+        "credit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies",
+      "action_type": "update"
+    }
+  },
+  "The cost after credit, {cost}, is over the limit, {limit}, but the project credit left is above it. The policy fires once that credit falls to the limit.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost after credit, {cost}, is over the limit, {limit}, but the project credit left, {credit}, is above it. The policy fires once that credit falls to the limit.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        },
+        "credit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies",
+      "action_type": "update"
+    }
+  },
+  "The cost this policy compares with its threshold: the cost in the policy period, less what credit pays.": {
+    "context": {
+      "feature_area": "organizations"
+    }
+  },
+  "The cost, {cost}, is over the limit, {limit}, and there is no credit.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost, {cost}, is over the limit, {limit}; this policy does not take credit into account.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
   "The credit has expired, so nothing is drawn from it any more and there is no rate to project from.": {
     "context": {
       "feature_area": "views"
@@ -70056,6 +70240,18 @@
       "feature_area": "offering-merges"
     }
   },
+  "Waiting for organization credit": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Waiting for project credit": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
+    }
+  },
   "Waiting for support": {
     "context": {
       "primary_ui_type": "label"
@@ -75906,6 +76102,20 @@
         }
       },
       "feature_area": "workflow-steps"
+    }
+  },
+  "{credit} left, limit {limit}": {
+    "context": {
+      "variables": {
+        "credit": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies",
+      "action_type": "update"
     }
   },
   "{currencyName} / day": {

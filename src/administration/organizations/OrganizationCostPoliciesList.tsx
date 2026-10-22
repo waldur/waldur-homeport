@@ -9,11 +9,11 @@ import { HelpIcon } from 'waldur-ui';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { CostPolicyActions } from '@/customer/cost-policies/CostPolicyActions';
 import { CostPolicyCreateButton } from '@/customer/cost-policies/CostPolicyCreateButton';
+import { CostPolicyTriggerCell } from '@/customer/cost-policies/CostPolicyTriggerCell';
 import { getCostPolicyActionOptions } from '@/customer/cost-policies/utils';
 import { OrganizationNameLink } from '@/customer/list/OrganizationNameLink';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
-import { BooleanField } from '@/table/BooleanField';
 import {
   MarketplaceCustomerEstimatedCostPoliciesFilter,
   selectMarketplaceCustomerEstimatedCostPoliciesFilter,
@@ -23,6 +23,7 @@ import Table from '@/table/Table';
 import { TableWithPortal } from '@/table/types';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { tabTableProps } from '../tabTableProps';
 
@@ -87,25 +88,37 @@ export const OrganizationCostPoliciesList: FC<Partial<TableWithPortal>> = ({
               />
             </>
           ),
-          render: ({ row }) => <BooleanField value={row.has_fired} />,
+          render: ({ row }) => <CostPolicyTriggerCell row={row} />,
         },
         {
           title: translate('Credit'),
           render: ({ row }) =>
-            row.customer_credit ? defaultCurrency(row.customer_credit) : 'N/A',
+            renderFieldOrDash(
+              row.customer_credit ? defaultCurrency(row.customer_credit) : null,
+            ),
         },
         {
           title: translate('Cost threshold'),
           render: ({ row }) => <>{defaultCurrency(row.limit_cost)}</>,
         },
         {
-          title: translate('Estimated cost'),
+          title: (
+            <>
+              {translate('Current cost')}{' '}
+              <HelpIcon
+                label={translate(
+                  'The cost this policy compares with its threshold: the cost in the policy period, less what credit pays.',
+                )}
+                size={18}
+              />
+            </>
+          ),
           render: ({ row }) => (
             <>
-              {defaultCurrency(
-                (row.billing_price_estimate &&
-                  row.billing_price_estimate.current) ||
-                  0,
+              {renderFieldOrDash(
+                row.current_cost !== null && row.current_cost !== undefined
+                  ? defaultCurrency(row.current_cost)
+                  : null,
               )}
             </>
           ),
