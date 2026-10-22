@@ -1463,8 +1463,7 @@
         "date": {
           "type": "date"
         }
-      },
-      "feature_area": "details"
+      }
     }
   },
   "Access staff": {
@@ -24291,8 +24290,7 @@
         "limits": {
           "type": "unknown"
         }
-      },
-      "feature_area": "details"
+      }
     }
   },
   "Held decisions": {
@@ -27298,6 +27296,11 @@
   },
   "It matters once offerings share accounts. With accounts per service provider, a person has one account, with one username, POSIX UID and home directory, on all of them, so one of the usernames has to be kept. Until then, switching the account scope to per service provider is refused.": {},
   "It resumes on its own once under its limits again, or when a limit is raised.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "It resumes on its own when a limit is raised or the period of a reached limit ends. Resumed by hand while still over a limit, it is paused again as soon as the resume takes effect.": {
     "context": {
       "feature_area": "api-keys"
     }
@@ -44802,11 +44805,6 @@
       "feature_area": "rabbitmq"
     }
   },
-  "Raising the limit resumes the key on its own. Resumed while still over its limit, it is paused again on the next usage report.": {
-    "context": {
-      "feature_area": "api-keys"
-    }
-  },
   "Rancher Server": {
     "context": {
       "feature_area": "create"
@@ -58679,8 +58677,7 @@
         "date": {
           "type": "date"
         }
-      },
-      "feature_area": "details"
+      }
     }
   },
   "The results of the round have been published.": {
@@ -59823,7 +59820,27 @@
       "feature_area": "organizations"
     }
   },
-  "This key has reached its limit this month. A manager can rotate it.": {
+  "This key has reached its daily limit. A manager can rotate it.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "This key has reached its monthly limit. A manager can rotate it.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "This key has reached its quarterly limit. A manager can rotate it.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "This key has reached its weekly limit. A manager can rotate it.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "This key has reached its yearly limit. A manager can rotate it.": {
     "context": {
       "feature_area": "api-keys"
     }
