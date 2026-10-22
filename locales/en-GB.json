@@ -240,6 +240,7 @@
   "Loading computes summaries for every project in this organization and may take 10–15 seconds. You can optionally filter to a subset of projects first to speed things up.": "Loading computes summaries for every project in this organisation and may take 10–15 seconds. You can optionally filter to a subset of projects first to speed things up.",
   "Location of {name} organization": "Location of {name} organisation",
   "Maintenance canceled": "Maintenance cancelled",
+  "Manage API keys of resources used by the project or organization": "Manage API keys of resources used by the project or organisation",
   "Manage Arrow (ArrowSphere) cloud distribution platform integration for billing synchronization.": "Manage Arrow (ArrowSphere) cloud distribution platform integration for billing synchronisation.",
   "Manage organization onboarding verifications, justifications, and configurations.": "Manage organisation onboarding verifications, justifications, and configurations.",
   "Manually trigger consumption data synchronization from Arrow.": "Manually trigger consumption data synchronisation from Arrow.",
