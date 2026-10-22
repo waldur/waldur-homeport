@@ -53650,7 +53650,7 @@
       "feature_area": "features"
     }
   },
-  "Show the Reporting menu with organization-scoped reports to organization owners.": {
+  "Show the Reporting menu with organization-scoped reports to users with the CUSTOMER.VIEW_REPORTING permission on the organization.": {
     "context": {
       "feature_area": "features"
     }
@@ -69886,6 +69886,12 @@
   "View proposal": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "View reporting": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
     }
   },
   "View response": {
