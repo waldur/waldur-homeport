@@ -148,12 +148,23 @@ export const SpendingLimitFields: FC<{
               <FormTable.Item
                 key={period}
                 label={getSpendingLimitLabel(period)}
+                // The reset goes under the label, where it wraps: in the
+                // actions column it never wraps, and the quarter's widens the
+                // table past a dialog, squeezing every input to its unit.
                 description={
-                  maximum !== null && maximum !== undefined
-                    ? translate('Up to {maximum}', {
-                        maximum: formatSpendingAmount(maximum),
-                      })
-                    : undefined
+                  <>
+                    {maximum !== null && maximum !== undefined && (
+                      <>
+                        <span>
+                          {translate('Up to {maximum}', {
+                            maximum: formatSpendingAmount(maximum),
+                          })}
+                        </span>
+                        {' · '}
+                      </>
+                    )}
+                    <span>{getSpendingLimitResetText(period)}</span>
+                  </>
                 }
                 value={
                   <PeriodInput
@@ -161,11 +172,6 @@ export const SpendingLimitFields: FC<{
                     component={component}
                     period={period}
                   />
-                }
-                actions={
-                  <span className="text-sm text-tertiary">
-                    {getSpendingLimitResetText(period)}
-                  </span>
                 }
               />
             );
