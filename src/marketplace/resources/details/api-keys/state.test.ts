@@ -6,6 +6,7 @@ import {
   getFailedCommand,
   getKeyStateVariant,
   getResourcePause,
+  getResourcePauseDetails,
   getStateLabel,
   getStateTooltip,
   isKeyAssignee,
@@ -80,6 +81,53 @@ describe('getResourcePause', () => {
     expect(
       getResourcePause({ paused: true, usage_limit_restriction: '' }),
     ).toBe('other');
+  });
+});
+
+describe('getResourcePauseDetails', () => {
+  const resource = (overrides: Record<string, unknown> = {}) =>
+    ({
+      usage_limit_restriction: 'paused',
+      offering_components: [{ type: 'tokens', name: 'Tokens' }],
+      spending_limit_status: [
+        { component_type: 'tokens', period: 'day', reached: false },
+        { component_type: 'tokens', period: 'month', reached: true },
+      ],
+      usage_limit_resumes_at: null,
+      ...overrides,
+    }) as any;
+
+  // As the Usage tab does: which limit holds the resource, and until when.
+  it('names the reached limit and when access resumes', () => {
+    const resumesAt = new Date(Date.now() + 3 * 86400_000).toISOString();
+    const details = getResourcePauseDetails(
+      'limit',
+      resource({ usage_limit_resumes_at: resumesAt }),
+    );
+    expect(details).toMatch(/^Held by: Tokens — Monthly limit\. /);
+    expect(details).not.toMatch(/Daily limit/);
+    expect(details).toMatch(/Access resumes .+, on .+\.$/);
+  });
+
+  it('says access resumes once under every limit when no time is known', () => {
+    expect(getResourcePauseDetails('limit', resource())).toBe(
+      'Held by: Tokens — Monthly limit. Access resumes once usage is under every limit of the resource again.',
+    );
+  });
+
+  it('falls back to the general message without a reached limit', () => {
+    expect(
+      getResourcePauseDetails(
+        'limit',
+        resource({ spending_limit_status: null }),
+      ),
+    ).toMatch(/usage reached its limit/);
+  });
+
+  it('says the resource must be unpaused when paused for another reason', () => {
+    expect(getResourcePauseDetails('other', resource())).toBe(
+      'It resumes once the resource is unpaused.',
+    );
   });
 });
 
