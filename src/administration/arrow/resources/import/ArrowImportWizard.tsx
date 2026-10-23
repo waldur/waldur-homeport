@@ -129,7 +129,7 @@ export const ArrowImportWizard: FC<ArrowImportWizardProps> = (props) => {
       initialValues={{
         selectedLicenses: [],
       }}
-      modalProps={{ bodyClassName: 'min-h-400px' }}
+      modalProps={{ bodyClassName: 'min-h-[400px]' }}
     />
   );
 };

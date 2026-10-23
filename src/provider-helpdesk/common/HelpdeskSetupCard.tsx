@@ -45,7 +45,7 @@ export const HelpdeskSetupCard: FC = () => {
         <div className="icon-square icon-lg bg-brand-subtle text-brand">
           <LifebuoyIcon weight="bold" size={24} />
         </div>
-        <div className="grow min-w-200px">
+        <div className="grow min-w-[200px]">
           <h4 className="mb-1">{translate('Set up provider helpdesk')}</h4>
           <p className="text-quaternary text-sm mb-0">
             {translate(

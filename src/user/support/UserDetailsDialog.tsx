@@ -50,7 +50,7 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
       )}
       iconNode={<UserGearIcon weight="bold" />}
       iconColor="success"
-      bodyClassName="h-425px"
+      bodyClassName="h-[425px]"
     >
       {loading ? (
         <LoadingSpinner />

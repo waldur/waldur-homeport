@@ -5,9 +5,11 @@
   justify-content: center;
   align-items: center;
   margin: 18px 0;
+  padding: 0 16px;
 
   h1 {
-    font-size: 295px;
+    // Three digits are ~1.9em wide: scale with the viewport on phones.
+    font-size: clamp(96px, 44vw, 295px);
     font-weight: var(--font-weight-bold);
     line-height: 1.1;
     margin: 0;

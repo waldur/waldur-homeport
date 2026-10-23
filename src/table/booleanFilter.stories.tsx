@@ -9,7 +9,7 @@ import { Accordion } from 'waldur-ui';
 import { FilterContextProvider } from './FilterContextProvider';
 import { BooleanFilter } from './filters';
 import { selectFilterValues } from './selectors';
-import { tableInitialReducer } from './store';
+import { tablesReducer } from './store';
 
 /**
  * `BooleanFilter`: a switch that narrows a table, for example "Active only".
@@ -39,7 +39,7 @@ const FilterValue = () => {
 
 const Harness = ({ children }: { children: React.ReactNode }) => {
   const [store] = useState(() =>
-    createStore(combineReducers({ tables: tableInitialReducer })),
+    createStore(combineReducers({ tables: tablesReducer })),
   );
   return (
     <Provider store={store}>

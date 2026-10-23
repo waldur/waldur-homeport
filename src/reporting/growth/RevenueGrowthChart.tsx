@@ -157,7 +157,7 @@ export const RevenueGrowthChart: FC = () => {
       onChange={(value: AccountingOption) => setAccountingFilter(value)}
       options={accountingOptions}
       isClearable={false}
-      className="grow-0 mw-200px"
+      className="grow-0 max-w-[200px]"
     />
   );
 

@@ -3,36 +3,42 @@ import { HTMLAttributes } from 'react';
 import { cn } from '../cn';
 
 /**
- * shadcn's actual Card recipe (Card/CardHeader/CardTitle/CardDescription/
- * CardContent/CardFooter as plain div wrappers — see
- * https://ui.shadcn.com/docs/components/card) — background/border point at
- * waldur-design-tokens' --card-bg / --border-secondary tokens instead
- * of shadcn's own default palette. StatCard composes these rather than
- * duplicating the card shell.
+ * shadcn's Card recipe (Card/CardHeader/CardTitle/CardDescription/
+ * CardContent/CardFooter as composable div wrappers — see
+ * https://ui.shadcn.com/docs/components/card) aligned to the live Metronic
+ * `.card` design system.
  *
- * Shadow/border/radius/padding are Metronic's real .card values (see
- * src/metronic/sass/core/components/_card.scss and waldur-design-tokens/card.css's
- * comment on --card-shadow/--card-border-color), not shadcn defaults or
- * guesses: real cards rely on the shadow alone in light mode (no border)
- * and flip to a border with no shadow in dark mode, at ~6px radius
- * (rounded-md, not shadcn's default rounded-xl) and 2rem/2.25rem
- * vertical/horizontal padding ($card-py/$card-px — 26px/29.25px at this
- * app's real 13px root, not the 32px/36px a 16px root would give).
- * Arbitrary rem values, not their px-at-13px-root equivalents: a px value
- * matches only at that one exact root font-size and silently stops
- * matching the real (rem-based) component the moment the page's root
- * font-size changes — a browser zoom, an OS text-size accessibility
- * setting, or simply a different host app (apps/micro-app-poc's own
- * tailwind.css runs at the unmodified 16px root — see its own comment).
- * rem here still resolves correctly in that app: it has no Metronic
- * loaded to force 13px, so 1rem is genuinely 16px there, same as any of
- * its own native Tailwind spacing.
+ * Source of truth:
+ * - Spacing tokens `--card-padding-x: 1.85rem` ($card-px) and
+ *   `--card-padding-y: 1.23rem` ($card-py) defined in
+ *   `src/styles/bootstrap/_variables.scss` and declared in
+ *   `packages/design-tokens/src/css/components/card.css`.
+ * - Header min-height `--card-header-min-height: 70px` from
+ *   `src/styles/bootstrap/_variables.scss`.
+ * - Surface colors & shadow: `--card-bg`, `--card-shadow`, and
+ *   `--card-border-color` from `packages/design-tokens/src/css/components/card.css`.
+ * - Radius: 8px (`rounded-lg`, from `$card-border-radius: $border-radius` = 8px
+ *   / `--radius-lg`).
+ *
+ * Header geometry in Metronic (`_base.scss` and `_card.scss`):
+ * - `.card-header` sits inside the card with horizontal margin `mx-[var(--card-padding-x,1.85rem)]`
+ *   and vertical padding `py-[0.5rem]`, so its bottom border spans between the margins.
+ *   Flex layout with `items-center justify-between flex-wrap min-h-[var(--card-header-min-height,70px)]`.
+ * - `.card-title` is `text-[1.275rem] font-medium leading-[1.2] text-primary`
+ *   with `my-[0.5rem] mr-[0.5rem] ml-0 flex items-center`.
+ * - `.card-body` (CardContent) has `px-[var(--card-padding-x,1.85rem)] py-[var(--card-padding-y,1.23rem)]`.
+ *   Unlike default shadcn, there is no `pt-0` in Metronic.
+ * - `.card-footer` has `px-[var(--card-padding-x,1.85rem)] py-[var(--card-padding-y,1.23rem)]`,
+ *   `border-t border-secondary bg-transparent flex items-center`.
+ *
+ * Preserved in rem so responsive scaling (13px root font-size in Homeport)
+ * remains exact and adapts across root font changes.
  */
 export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
-        'rounded-md border-[1px] text-primary',
+        'rounded-lg border-[1px] text-primary',
         'border-[var(--card-border-color)] bg-[var(--card-bg)] shadow-[var(--card-shadow)]',
         className,
       )}
@@ -47,7 +53,11 @@ export function CardHeader({
 }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn('flex flex-col gap-1.5 px-[2.25rem] py-[2rem]', className)}
+      className={cn(
+        'flex items-center justify-between flex-wrap min-h-[var(--card-header-min-height,70px)]',
+        'mx-[var(--card-padding-x,1.85rem)] py-[0.5rem] border-b border-secondary bg-transparent',
+        className,
+      )}
       {...props}
     />
   );
@@ -60,19 +70,10 @@ export function CardTitle({
 }: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      // m-0: Tailwind's preflight zeroes heading margins, but on any page
-      // that also loads Bootstrap (e.g. this package rendered inside the
-      // main waldur-homeport app or its Storybook), the cascade layer order
-      // documented in docs/tailwind-shadcn-migration-notes.md deliberately
-      // ranks `bootstrap` above Tailwind's `base` layer — so Bootstrap
-      // Reboot's un-layered h1-h6 margin-bottom (0.5rem) wins over preflight
-      // and silently reappears here. Found via
-      // e2e-visual/stat-card-parity.spec.ts: StatCard rendered 6.5px taller
-      // than the real StatsCard specifically because of this leak. An
-      // explicit m-0 (Tailwind's `utilities` layer, ranked above
-      // `bootstrap`) closes the gap regardless of layer order or which host
-      // app renders this.
-      className={cn('m-0 text-sm font-medium text-quaternary', className)}
+      className={cn(
+        'my-[0.5rem] mr-[0.5rem] ml-0 flex items-center text-[1.275rem] leading-[1.2] font-medium text-primary',
+        className,
+      )}
       {...props}
     >
       {children}
@@ -86,10 +87,7 @@ export function CardDescription({
 }: HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      // m-0: same Bootstrap-Reboot-margin leak as CardTitle above (Reboot
-      // also sets <p> margin-bottom: 1rem) — pre-empted here even though no
-      // current consumer has hit it yet.
-      className={cn('m-0 text-sm text-quinary', className)}
+      className={cn('m-0 text-[1rem] text-quaternary', className)}
       {...props}
     />
   );
@@ -100,7 +98,13 @@ export function CardContent({
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('px-[2.25rem] pt-0 pb-[2rem]', className)} {...props} />
+    <div
+      className={cn(
+        'px-[var(--card-padding-x,1.85rem)] py-[var(--card-padding-y,1.23rem)]',
+        className,
+      )}
+      {...props}
+    />
   );
 }
 
@@ -110,7 +114,10 @@ export function CardFooter({
 }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn('flex items-center px-[2.25rem] pt-0 pb-[2rem]', className)}
+      className={cn(
+        'flex items-center px-[var(--card-padding-x,1.85rem)] py-[var(--card-padding-y,1.23rem)] border-t border-secondary bg-transparent',
+        className,
+      )}
       {...props}
     />
   );

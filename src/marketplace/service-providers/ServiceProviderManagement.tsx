@@ -70,7 +70,7 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
             value={
               <SecretValueField
                 value={secretCode?.api_secret_code}
-                className="mw-300px"
+                className="max-w-[300px]"
               />
             }
             actions={

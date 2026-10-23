@@ -57,7 +57,7 @@ const SECTION_TABLE_PROPS = {
   hideRefresh: true,
   placeholderHasRetry: false,
   className: 'mt-5',
-  headerClassName: 'min-h-40px py-0',
+  headerClassName: 'min-h-[40px] py-0',
   titleClassName: 'h4 font-medium text-secondary',
   minHeight: 'auto',
 } as const;

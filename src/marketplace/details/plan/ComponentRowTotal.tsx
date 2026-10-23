@@ -48,7 +48,7 @@ export const ComponentRowTotal = (props: {
               }
             />
           )}
-          <span className="text-base text-secondary min-w-150px text-end">
+          <span className="text-base text-secondary min-w-[150px] text-end">
             {usageAmount
               ? usageAmount
               : !props.isFloor

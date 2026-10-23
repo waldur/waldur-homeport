@@ -10,12 +10,15 @@ import { selectSavedFilter, setSavedFilters } from './actions';
 import { TableFilterContext } from './FilterContextProvider';
 import { selectFilterValues, selectSelectedSavedFilter } from './selectors';
 import { TableFilterService } from './TableFilterService';
+import { TablesRootState } from './types';
 import { getSavedFiltersKey } from './utils';
 
 interface TableFilterActionsProps {
   filters: JSX.Element;
   table: string;
+  /** Applies the filters and closes the panel. */
   apply: () => any;
+  /** Closes the panel, discarding the changes made in it. */
   close(): void;
 }
 
@@ -29,7 +32,7 @@ export const TableFilterActions: React.FC<TableFilterActionsProps> = (
 
   const formValues = useSelector(selectFilterValues(props.table)) || {};
 
-  const selectedSavedFilter = useSelector((state: any) =>
+  const selectedSavedFilter = useSelector((state: TablesRootState) =>
     selectSelectedSavedFilter(state, props.table),
   );
 
@@ -62,11 +65,6 @@ export const TableFilterActions: React.FC<TableFilterActionsProps> = (
     dispatch(selectSavedFilter(props.table, newItem));
   };
 
-  const applyCallback = () => {
-    props.close();
-    props.apply();
-  };
-
   return (
     <div className="flex items-center gap-2">
       <BaseButton
@@ -89,7 +87,7 @@ export const TableFilterActions: React.FC<TableFilterActionsProps> = (
       <BaseButton
         size="sm"
         variant="primary"
-        onClick={applyCallback}
+        onClick={props.apply}
         label={translate('Apply')}
       />
     </div>

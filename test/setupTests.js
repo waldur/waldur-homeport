@@ -20,8 +20,12 @@ import {
   resetViewport,
   setupVirtualViewport,
 } from '../packages/ui/src/testing/viewport';
+import { configureHomeportTableHost } from '../src/core/tableHost';
 
 configure({ asyncUtilTimeout: 5000 });
+
+// Tables read the URL and their default title through UI-Router, as in the app.
+configureHomeportTableHost();
 
 if (typeof globalThis.ResizeObserver === 'undefined') {
   globalThis.ResizeObserver = class ResizeObserver {

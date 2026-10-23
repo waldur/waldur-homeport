@@ -1,4 +1,4 @@
-import { pick } from 'lodash-es';
+import { pick } from 'es-toolkit/compat';
 import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { customerCreditsPartialUpdate } from 'waldur-js-client';

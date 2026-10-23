@@ -43,9 +43,9 @@ const FieldsListGroup = ({
             <table className="table px-0 mb-0">
               <thead>
                 <tr>
-                  <td className="w-50">{translate('Resource Type')}</td>
+                  <td className="w-1/2">{translate('Resource Type')}</td>
                   <td>{translate('Weight')}</td>
-                  <td className="w-5px" />
+                  <td className="w-[5px]" />
                 </tr>
               </thead>
               <tbody>

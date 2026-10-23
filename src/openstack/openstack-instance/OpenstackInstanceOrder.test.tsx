@@ -18,7 +18,7 @@ import {
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { getServiceProviderByCustomer } from '@/marketplace/common/api';
 import { DeployPage } from '@/marketplace/deploy/DeployPage';
-import { tableInitialReducer as tables } from '@/table/store';
+import { tablesReducer as tables } from '@/table/store';
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption } from '@/test/select';
 import { mockListResponse } from '@/test/utils';

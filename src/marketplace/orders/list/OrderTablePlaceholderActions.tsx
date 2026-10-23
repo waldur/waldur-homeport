@@ -12,7 +12,7 @@ export const OrderTablePlaceholderActions = () => {
     <Link
       state="public.marketplace-landing"
       buttonVariant="primary"
-      className="w-175px mw-350px"
+      className="w-[175px] max-w-[350px]"
     >
       {translate('Go to marketplace')}
     </Link>

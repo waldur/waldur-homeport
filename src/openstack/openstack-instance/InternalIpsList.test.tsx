@@ -1,9 +1,12 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { OpenStackNestedPort } from 'waldur-js-client';
 
 import { renderTable } from '@/table/testUtils';
 
 import { InternalIpsList } from './InternalIpsList';
+
+// Serves the row renderTable sets; no request fires.
+vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
 
 const renderList = () => {
   const item: Partial<OpenStackNestedPort> = {

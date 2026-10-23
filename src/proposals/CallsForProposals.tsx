@@ -34,14 +34,14 @@ export const CallsForProposals: FunctionComponent = () => {
           <Link
             state="calls-for-proposals-all-available-offerings"
             buttonVariant="tertiary"
-            className="w-200px"
+            className="w-[200px]"
           >
             {translate('Available offerings')}
           </Link>
           <Link
             state="calls-for-proposals-all-calls"
             buttonVariant="primary"
-            className="w-200px"
+            className="w-[200px]"
           >
             {translate('All calls')}
           </Link>

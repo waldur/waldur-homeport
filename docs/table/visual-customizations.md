@@ -83,7 +83,7 @@ Adjust header toolbar visibility and standalone modes:
 
 - **`title`**: String or React Node overriding the table header title.
 - **`hideTitle`**: Boolean to hide the title header.
-- **`alterTitle`**: Auto-resolved page title calculated by `useTable` from breadcrumbs. Used as a default fallback when `title` is not provided.
+- **`alterTitle`**: The default title `useTable` gets from the table host: the last breadcrumb in homeport (`src/core/tableHost.ts`), `document.title` without a configured host. Used as a fallback when `title` is not provided.
 - **`subtitle`**: Secondary text displayed below the title.
 - **`verboseName`**: Defines the resource type name. It is automatically title-cased as a fallback for the title header and used dynamically in empty and search-miss placeholder screens (e.g., "There are no projects yet.", "No projects found matching current filters.").
 - **`emptyMessage`**: React Node to completely override the text displayed when the table contains zero rows.

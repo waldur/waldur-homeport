@@ -1810,6 +1810,12 @@
       "feature_area": "actions"
     }
   },
+  "Actions pending": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
+    }
+  },
   "Actions taken": {
     "context": {
       "feature_area": "policies"
@@ -14072,16 +14078,6 @@
       "feature_area": "dashboard"
     }
   },
-  "Credit left is above the limit {limit}": {
-    "context": {
-      "variables": {
-        "limit": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "cost-policies"
-    }
-  },
   "Credit left is close to a cost policy limit. The policy may trigger soon, affecting resources in this project.": {
     "context": {
       "feature_area": "project"
@@ -22415,7 +22411,6 @@
   },
   "Filters": {
     "context": {
-      "primary_ui_type": "title",
       "feature_area": "charts"
     }
   },
@@ -28424,12 +28419,6 @@
     }
   },
   "Limit reached": {
-    "context": {
-      "primary_ui_type": "label",
-      "feature_area": "cost-policies"
-    }
-  },
-  "Limit reached, actions pending": {
     "context": {
       "primary_ui_type": "label",
       "feature_area": "cost-policies"
@@ -37808,16 +37797,6 @@
       "feature_area": "projects"
     }
   },
-  "Optional reason (displayed in logs)": {
-    "context": {
-      "feature_area": "actions"
-    }
-  },
-  "Optional reason (displayed to users)": {
-    "context": {
-      "feature_area": "actions"
-    }
-  },
   "Optional reason captured in the audit trail.": {
     "context": {
       "feature_area": "actions"
@@ -38227,12 +38206,6 @@
       "feature_area": "organization-create"
     }
   },
-  "Organization credit": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "cost-policies"
-    }
-  },
   "Organization credit could not be updated.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -38254,6 +38227,20 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "policy-watch"
+    }
+  },
+  "Organization credit, {date} balance: {credit}": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        },
+        "credit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies",
+      "action_type": "update"
     }
   },
   "Organization dashboard": {
@@ -71345,6 +71332,11 @@
     }
   },
   "Whether this mapping is enabled for sync": {},
+  "Whether this policy's actions are in effect, for example pausing or downscaling. The status's tooltip says why, with the figures the policy compared.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Which HEAppE deployment this offering targets. Not the same as the cluster ID.": {
     "context": {
       "feature_area": "integration"
@@ -76184,7 +76176,7 @@
           "type": "number"
         }
       },
-      "feature_area": "resource-requests-step"
+      "feature_area": "cost-policies"
     }
   },
   "{count} resource(s)": {
@@ -76497,20 +76489,6 @@
         }
       },
       "feature_area": "workflow-steps"
-    }
-  },
-  "{credit} left, limit {limit}": {
-    "context": {
-      "variables": {
-        "credit": {
-          "type": "unknown"
-        },
-        "limit": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "cost-policies",
-      "action_type": "update"
     }
   },
   "{currencyName} / day": {

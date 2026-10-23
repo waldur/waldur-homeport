@@ -148,7 +148,7 @@ export const ResourceTemplateFormDialog: FC<ResourceTemplateFormDialogProps> = (
       }
       initialValues={props.initialValues}
       data={{ call: props.resolve.call }}
-      modalProps={{ bodyClassName: 'h-500px' }}
+      modalProps={{ bodyClassName: 'h-[500px]' }}
       onChange={handleFormChange}
     />
   );

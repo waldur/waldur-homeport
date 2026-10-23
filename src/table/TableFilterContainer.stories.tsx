@@ -1,12 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useEffect } from 'react';
 import { screen, userEvent, waitFor, within } from 'storybook/test';
-
-import { translate } from 'waldur-i18n-runtime';
-
-import { useDrawer } from '@/drawer/actions';
-import { DrawerProvider } from '@/drawer/DrawerContext';
-import { DrawerRoot } from '@/drawer/DrawerRoot';
 
 import {
   tableStoryActiveFilters,
@@ -14,8 +7,8 @@ import {
   tableStorySavedFilters,
 } from './storyFixtures';
 import { withSeededTableStore, withTableProviders } from './storyProviders';
-import { TableFilterActions } from './TableFilterActions';
 import { TableFilterContainer } from './TableFilterContainer';
+import { TableFilterSheet } from './TableFilterSheet';
 
 /**
  * `TableFilterContainer` — the mobile/narrow-viewport filter layout, always
@@ -23,14 +16,11 @@ import { TableFilterContainer } from './TableFilterContainer';
  * `"header"`, an always-visible inline row for `<Table filterPosition=
  * "header">`, but no real caller ever paired that with `filters` — dead
  * code, removed). `Table.tsx`'s own `isSm` breakpoint check flips
- * `filterPosition` from `'menu'` to `'sidebar'` and opens this inside a
- * drawer (`useTable()`'s `renderFiltersDrawer`/`openFiltersDrawer`, via
- * `useDrawer()`) — a fixed 500px-wide panel (`openFiltersDrawer`'s own
- * `width: '500px'`, matched by the wrapper below), not something that
- * scales with the real viewport. So unlike `Table.filtersAndLayout
- * .stories.tsx`'s `MobileViewport`, these don't need `globals.viewport` —
- * the drawer is the same fixed width regardless of screen size; what makes
- * this "mobile" is the layout itself (an accordion), not a narrower canvas.
+ * `filterPosition` from `'menu'` to `'sidebar'`, and the table opens this
+ * in its own `TableFilterSheet` — full width below lg, 500px from lg. So
+ * unlike `Table.filtersAndLayout.stories.tsx`'s `MobileViewport`, these
+ * don't need `globals.viewport`; what makes this "mobile" is the layout
+ * itself (an accordion), not a narrower canvas.
  *
  * Each filter field renders through `TableSidebarFilterItem`
  * (TableFilterItem.tsx), a distinct component from the "menu" popover's
@@ -124,47 +114,14 @@ export const SidebarWithSavedFilters: Story = {
   },
 };
 
-/** Mirrors `useTable()`'s real `openFiltersDrawer` call exactly: this
- * component is never actually mounted bare in production the way the
- * stories above render it — it's always opened through `useDrawer()` into
- * the real `DrawerRoot` (`DrawerRoot.tsx`), which supplies the "Filters" /
- * "Apply filters to table data" header and, from `drawerProps.footer`,
- * `TableFilterActions`'s "Update filter" / Cancel / Apply row — the actual
- * chrome a user sees, not just the bare accordion the stories above
- * isolate. `DrawerRoot` renders the body and footer as *siblings*, each
- * `React.createElement`d straight from `drawerProps` — not nested inside
- * one another — so `TableFilterActions` never sees `TableFilterContainer`'s
- * own `TableFilterContext.Provider`; its `context.form` read falls back to
- * `''`. That's real production behavior (every caller hits the same
- * DrawerRoot), not something specific to this story.
+/** The panel as the table opens it (`BaseTable`'s `TableFilterSheet`): the
+ * "Filters" header and `TableFilterActions`' Save / Cancel / Apply row, which
+ * sits inside the filter context, so it saves under this `formId`.
  *
  * A saved filter is pre-selected (`selectedSavedFilter`) so
- * `SavedFilterSelect`'s own `Control` shows its delete-filter button too —
- * only rendered once `getValue()[0]` is truthy (see that file's own
- * `Control` component) — which `Sidebar`/`SidebarExpanded`/
- * `SidebarWithSavedFilters` above never trigger. */
-const FilterDrawerHarness = () => {
-  const { openDrawer } = useDrawer();
-  useEffect(() => {
-    openDrawer(TableFilterContainer, {
-      title: translate('Filters'),
-      subtitle: translate('Apply filters to table data'),
-      width: '500px',
-      table: TABLE_ID,
-      filters: tableStoryFilters,
-      formId: FORM_ID,
-      setFilter: noop,
-      apply: noop,
-      footer: TableFilterActions,
-    });
-    // Real usage (useTable.ts's openFiltersDrawer) fires this from a click
-    // handler, once — an empty dep array here matches that "once" intent
-    // for this story's own one-shot auto-open, not a missing-dependency bug.
-  }, []);
-  return <DrawerRoot />;
-};
-
-export const AsFilterDrawer: Story = {
+ * `SavedFilterSelect`'s own `Control` shows its delete-filter button and
+ * the footer says "Update filter". */
+export const AsFilterSheet: Story = {
   decorators: [
     withSeededTableStore(TABLE_ID, {
       savedFilters: tableStorySavedFilters,
@@ -172,9 +129,13 @@ export const AsFilterDrawer: Story = {
     }),
   ],
   render: () => (
-    <DrawerProvider>
-      <FilterDrawerHarness />
-    </DrawerProvider>
+    <TableFilterSheet
+      panel={{ filters: tableStoryFilters, formId: FORM_ID }}
+      onCancel={noop}
+      onApply={noop}
+      table={TABLE_ID}
+      setFilter={noop}
+    />
   ),
   play: async () => {
     await waitFor(() => screen.getByRole('heading', { name: 'Filters' }));

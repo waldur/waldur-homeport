@@ -9,6 +9,7 @@ import { DrawerProvider } from '@/drawer/DrawerContext';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { hasConsumerPermission } from '@/permissions/hasPermission';
+import { setTableQueryRows } from '@/table/mockTableQuery';
 import { useTable } from '@/table/useTable';
 import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
@@ -16,17 +17,8 @@ import { useUser } from '@/workspace/hooks';
 import { ResourceApiKeysCard } from './ResourceApiKeysCard';
 import { RevealApiKeyDialog } from './RevealApiKeyDialog';
 
-// Rows are supplied through the mocked redux table state, so no real request
-// fires — the card renders through the real @/table/Table (TableLoader).
-vi.mock('@/table/useTableQuery', () => ({
-  useTableQuery: () => ({
-    data: undefined,
-    isLoading: false,
-    isFetching: false,
-    error: null,
-    refetch: vi.fn(),
-  }),
-}));
+// Serves the rows given to setTableQueryRows (none by default); no request fires.
+vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
 vi.mock('@/permissions/hasPermission', () => ({
   hasConsumerPermission: vi.fn(),
 }));
@@ -74,13 +66,12 @@ const MANAGED_OFFERING = {
   resource_options: { options: { models: { choices: ['gpt-4o'] } } },
 } as any;
 
-const makeStore = (keys: any[]) =>
-  mockStore({
+const makeStore = (keys: any[]) => {
+  setTableQueryRows(keys);
+  return mockStore({
     tables: {
       [tableId]: {
         loading: false,
-        entities: Object.fromEntries(keys.map((k) => [k.uuid, k])),
-        order: keys.map((k) => k.uuid),
         pagination: { pageSize: 10, resultCount: keys.length, currentPage: 1 },
         toggled: {},
         activeColumns: {},
@@ -88,6 +79,7 @@ const makeStore = (keys: any[]) =>
       },
     },
   });
+};
 
 // The parent owns useTable and passes the props down; here the Harness plays
 // that role so the card renders through the real Table.

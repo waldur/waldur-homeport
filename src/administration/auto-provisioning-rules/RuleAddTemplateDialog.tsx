@@ -107,7 +107,7 @@ export const RuleAddTemplateDialog: FC<RuleAddTemplateDialogProps> = (
       }
       initialValues={props.initialValues}
       data={{ rule: props.resolve.rule }}
-      modalProps={{ bodyClassName: 'h-500px' }}
+      modalProps={{ bodyClassName: 'h-[500px]' }}
     />
   );
 };

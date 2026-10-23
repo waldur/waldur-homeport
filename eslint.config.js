@@ -123,6 +123,12 @@ const RESTRICTED_IMPORTS = [
     message:
       'Use TablePagination or Pagination from "waldur-ui" instead of react-bootstrap/PageItem.',
   },
+  // lodash-es is retired (#455); es-toolkit replaced it.
+  {
+    name: 'lodash-es',
+    message:
+      'lodash-es is retired (#455). Use native code, or es-toolkit / es-toolkit/compat where lodash semantics matter.',
+  },
 ];
 
 // Menus and popovers are built from waldur-ui's Menu / MenuPopover (see

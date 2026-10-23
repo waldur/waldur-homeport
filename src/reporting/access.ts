@@ -1,4 +1,4 @@
-import { uniqBy } from 'lodash-es';
+import { uniqBy } from 'es-toolkit';
 
 import { isFeatureVisible } from '@/features/connect';
 import { CustomerFeatures } from '@/FeaturesEnums';
@@ -49,7 +49,7 @@ export const getReportingOrganizations = (
           customerId: p.scope_uuid,
         }),
     ),
-    'scope_uuid',
+    (p) => p.scope_uuid,
   ).map((p) => ({ uuid: p.scope_uuid, name: p.scope_name }));
 
 const hasCustomerScopedReports = () =>

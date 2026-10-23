@@ -99,7 +99,7 @@ export const HelpdeskOverviewPage: FC = () => {
             label={label}
             value={value}
             isStuck
-            labelClass="min-w-150px"
+            labelClass="min-w-[150px]"
             className="text-sm"
           />
         ))}

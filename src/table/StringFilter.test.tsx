@@ -7,12 +7,12 @@ import { describe, expect, it } from 'vitest';
 import { TableFilterContext } from './FilterContextProvider';
 import { StringFilter } from './filters';
 import { getTableState } from './selectors';
-import { tableInitialReducer } from './store';
+import { tablesReducer } from './store';
 
 describe('StringFilter', () => {
   it('stores a string rather than a DOM event so the table query key can be serialized', async () => {
     const table = 'OfferingSoftwarePackages';
-    const store = createStore(combineReducers({ tables: tableInitialReducer }));
+    const store = createStore(combineReducers({ tables: tablesReducer }));
 
     render(
       <Provider store={store}>

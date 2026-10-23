@@ -102,7 +102,7 @@ export const PosixGroupsTable = ({
       hideIfEmpty
       hideRefresh
       className="mt-7"
-      headerClassName="min-h-40px py-0"
+      headerClassName="min-h-[40px] py-0"
       titleClassName="h4 font-medium text-secondary"
       minHeight="auto"
     />
@@ -173,7 +173,7 @@ const PosixIdentifiersTable = ({
       hideIfEmpty
       hideRefresh
       className="mt-7"
-      headerClassName="min-h-40px py-0"
+      headerClassName="min-h-[40px] py-0"
       titleClassName="h4 font-medium text-secondary"
       minHeight="auto"
     />
@@ -235,7 +235,7 @@ export const OfferingUsersExpandableRow = ({
               <ProviderAccountButton row={offeringUser} />
             </>
           }
-          labelClass="mw-175px"
+          labelClass="max-w-[175px]"
         />
       )}
       {showPosix && <PosixIdentifiersTable offeringUser={offeringUser} />}
@@ -251,7 +251,7 @@ export const OfferingUsersExpandableRow = ({
                 renderFieldOrDash(consent?.version)
               )
             }
-            labelClass="mw-175px"
+            labelClass="max-w-[175px]"
           />
           <Field
             label={translate('ToS consent date')}
@@ -264,13 +264,13 @@ export const OfferingUsersExpandableRow = ({
                 'N/A'
               )
             }
-            labelClass="mw-175px"
+            labelClass="max-w-[175px]"
           />
           {consent?.revocation_date && (
             <Field
               label={translate('ToS revocation date')}
               value={formatDateTime(consent.revocation_date)}
-              labelClass="mw-175px"
+              labelClass="max-w-[175px]"
             />
           )}
         </>
@@ -287,13 +287,13 @@ export const OfferingUsersExpandableRow = ({
             'N/A'
           )
         }
-        labelClass="mw-175px"
+        labelClass="max-w-[175px]"
         className="align-baseline"
       />
       <Field
         label={translate('Comment URL')}
         value={renderFieldOrDash(offeringUser.service_provider_comment_url)}
-        labelClass="mw-175px"
+        labelClass="max-w-[175px]"
       />
       {ENV.plugins.WALDUR_CORE.ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS && (
         <>
@@ -304,7 +304,7 @@ export const OfferingUsersExpandableRow = ({
                 ? translate('Complete')
                 : translate('Incomplete')
             }
-            labelClass="mw-175px"
+            labelClass="max-w-[175px]"
           />
           {offeringUser.missing_profile_attributes?.length > 0 && (
             <Field
@@ -319,7 +319,7 @@ export const OfferingUsersExpandableRow = ({
                         .replace(/^\w/, (c) => c.toUpperCase());
                 })
                 .join(', ')}
-              labelClass="mw-175px"
+              labelClass="max-w-[175px]"
             />
           )}
         </>
@@ -352,7 +352,7 @@ export const OfferingUsersExpandableRow = ({
         hideIfEmpty
         hideRefresh
         className="mt-7"
-        headerClassName="min-h-40px py-0"
+        headerClassName="min-h-[40px] py-0"
         titleClassName="h4 font-medium text-secondary"
         minHeight="auto"
         rowActions={

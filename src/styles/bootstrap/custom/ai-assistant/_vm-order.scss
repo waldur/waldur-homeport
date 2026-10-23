@@ -1,0 +1,299 @@
+// VM Order Block Styles
+
+.aui-vm-order-block {
+  margin-bottom: 1rem;
+
+  // Intro text
+  .aui-vm-order-intro {
+    font-size: $font-size-base;
+    line-height: 1.75;
+  }
+
+  // Section heading
+  .aui-vm-order-heading {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  // Preview card
+  .aui-vm-order-preview {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 1.3rem;
+    background-color: var(--bg-tertiary);
+    border-radius: 0.9rem;
+    transition: background-color 0.2s ease;
+    border: 1px solid var(--border-primary);
+
+    &:hover {
+      background-color: var(--bg-quaternary);
+    }
+
+    // Avatar circle
+    .aui-vm-order-preview-avatar {
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bg-quaternary);
+      color: var(--text-secondary);
+      border-radius: 50%;
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--text-xs);
+      flex-shrink: 0;
+    }
+
+    // Content (name and project)
+    .aui-vm-order-preview-content {
+      flex: 1;
+      min-width: 0; // Allow text truncation
+
+      .aui-vm-order-preview-name {
+        font-size: var(--text-lg);
+        font-weight: var(--font-weight-medium);
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .aui-vm-order-preview-project {
+        font-size: var(--text-lg);
+        color: var(--text-tertiary);
+      }
+    }
+
+    // Details box (flavor, OS, network, SSH key, volume)
+    .aui-vm-order-preview-details {
+      margin-left: 2.5rem;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: flex-end;
+      @include mirrored-ramp-color(background-color, blue, 50);
+      @include mirrored-ramp-color(color, blue, 700);
+      border: 1px solid;
+      @include mirrored-ramp-color(border-color, blue, 200);
+      border-radius: 0.5rem;
+      padding: 1rem 1.25rem;
+      font-size: var(--text-sm);
+      flex-shrink: 0;
+    }
+
+    .aui-vm-order-preview-detail-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      white-space: nowrap;
+      width: 100%;
+    }
+
+    .aui-vm-order-preview-detail-label {
+      font-weight: var(--font-weight-medium);
+      @include mirrored-ramp-color(color, blue, 700);
+      opacity: 0.7;
+      min-width: 4rem;
+    }
+
+    .aui-vm-order-preview-detail-value {
+      margin-left: auto;
+      font-weight: var(--font-weight-medium);
+    }
+
+    // Success variant
+    &--success {
+      @include mirrored-ramp-color(background-color, success, 50);
+      @include mirrored-ramp-color(border-color, success, 200);
+
+      .aui-vm-order-preview-avatar {
+        @include mirrored-ramp-color(background-color, success, 100);
+        @include mirrored-ramp-color(color, success, 700);
+      }
+    }
+  }
+
+  // VM ID display
+  .aui-vm-order-id {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--bg-tertiary);
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-primary);
+
+    .aui-vm-order-id-label {
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-secondary);
+    }
+
+    code {
+      font-size: var(--text-xs);
+      padding: 0.25rem 0.5rem;
+      background-color: var(--bg-primary);
+      border-radius: 0.25rem;
+      color: var(--text-primary);
+      font-family: monospace;
+    }
+  }
+
+  // Confirmation question
+  .aui-vm-order-confirm {
+    font-size: $font-size-base;
+    line-height: 1.75;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  // Form fields (form mode)
+  .aui-vm-order-form {
+    margin-top: 1.25rem;
+
+    .aui-vm-order-form-field {
+      margin-bottom: 1.25rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .aui-vm-order-form-label {
+        display: block;
+        font-size: var(--text-sm);
+        font-weight: var(--font-weight-semibold);
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  // Result card (error state only)
+  .aui-vm-order-result {
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-primary);
+
+    // Error variant
+    &--error {
+      @include mirrored-ramp-color(background-color, error, 50);
+      @include mirrored-ramp-color(border-color, error, 200);
+
+      .aui-vm-order-result-icon {
+        @include mirrored-ramp-color(background-color, error, 100);
+        @include mirrored-ramp-color(color, error, 600);
+      }
+    }
+
+    // Header with icon and message
+    .aui-vm-order-result-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+
+      .aui-vm-order-result-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .aui-vm-order-result-message {
+        font-size: var(--text-sm);
+        font-weight: var(--font-weight-semibold);
+        color: var(--text-primary);
+      }
+    }
+
+    // Error details
+    .aui-vm-order-result-error {
+      display: flex;
+      align-items: start;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      @include mirrored-ramp-color(background-color, error, 100);
+      border-radius: 0.375rem;
+      @include mirrored-ramp-color(color, error, 600);
+      font-size: var(--text-xs);
+
+      svg {
+        flex-shrink: 0;
+        margin-top: 0.125rem;
+      }
+    }
+  }
+}
+
+// Action buttons (rendered in message footer, outside content box)
+.aui-vm-order-actions {
+  display: flex;
+  gap: 1.1rem;
+  padding-top: 2rem;
+  padding-bottom: 0.8rem;
+
+  .aui-vm-order-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    font-size: $font-size-base;
+    font-weight: var(--font-weight-medium);
+    border-radius: 0.615rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    // Primary button (Create)
+    &--primary {
+      background-color: var(--btn-secondary-bg);
+      color: var(--text-brand-primary);
+      border: 1px solid var(--border-brand);
+
+      svg {
+        color: var(--btn-secondary-icon);
+      }
+
+      &:hover:not(:disabled) {
+        background-color: var(--btn-secondary-bg-hover);
+        transform: scale(1.02);
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(0);
+      }
+    }
+
+    // Secondary button (Modify)
+    &--secondary {
+      background-color: var(--bg-primary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-primary);
+
+      svg {
+        color: var(--text-quaternary);
+      }
+
+      &:hover:not(:disabled) {
+        background-color: var(--bg-primary-hover);
+        transform: scale(1.02);
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(0);
+      }
+    }
+  }
+}

@@ -214,13 +214,13 @@ import { NavMenuLink } from '@/navigation/NavMenu';
   <Menu.Trigger asChild>
     <UserMenuToggle />
   </Menu.Trigger>
-  <Menu.Content align="end" className="fw-bold py-4 fs-6 w-275px">
+  <Menu.Content align="end" className="fw-bold py-4 fs-6 w-[275px]">
     <UISrefActive class="active">
       <NavMenuLink state="profile.details" label={translate('Profile')} />
     </UISrefActive>
     <Menu.Sub>
       <Menu.SubTrigger>{translate('Language')}</Menu.SubTrigger>
-      <Menu.SubContent className="fw-bold w-175px py-4">
+      <Menu.SubContent className="fw-bold w-[175px] py-4">
         <Menu.RadioGroup value={current} onValueChange={setLanguage}>
           <Menu.RadioItem value="en">English</Menu.RadioItem>
           <Menu.RadioItem value="et">Eesti</Menu.RadioItem>
@@ -260,7 +260,7 @@ import { MenuPopover } from 'waldur-ui';
   <MenuPopover.Trigger asChild>
     <BaseButton label={translate('Add filter')} />
   </MenuPopover.Trigger>
-  <MenuPopover.Content align="start" className="w-250px py-3">
+  <MenuPopover.Content align="start" className="w-[250px] py-3">
     {filters.map((filter) => (
       <MenuPopover key={filter.name}>
         <MenuPopover.Trigger asChild>
@@ -310,7 +310,7 @@ A form with a react-bootstrap `Card` of its own lets the `Card` draw the panel (
   align="end"
   sideOffset={2}
   aria-labelledby="my-filter-toggle"
-  className="z-dropdown-menu min-w-400px border-0"
+  className="z-dropdown-menu min-w-[400px] border-0"
 >
   <Card>…</Card>
 </PopoverContent>

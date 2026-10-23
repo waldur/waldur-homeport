@@ -13,6 +13,7 @@ import {
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { setTableQueryRows } from '@/table/mockTableQuery';
 import { inActionsMenu, renderWithProviders } from '@/test/harness';
 
 import { EventConsumerExpandableRow } from './EventConsumerExpandableRow';
@@ -23,15 +24,8 @@ import {
 import { EventConsumersCard } from './EventConsumersCard';
 import { EventConsumerWebhookDialog } from './EventConsumerWebhookDialog';
 
-vi.mock('@/table/useTableQuery', () => ({
-  useTableQuery: () => ({
-    data: undefined,
-    isLoading: false,
-    isFetching: false,
-    error: null,
-    refetch: vi.fn(),
-  }),
-}));
+// Serves the rows given to setTableQueryRows (none by default); no request fires.
+vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
 vi.mock('@/modal/useManagedMutation', () => ({
   useManagedMutation: vi.fn(),
 }));
@@ -82,13 +76,12 @@ const consumers = [
 ];
 
 const mockStore = configureStore();
+setTableQueryRows(consumers);
 const store = mockStore({
   workspace: { user: { is_staff: true } },
   tables: {
     EventConsumers: {
       loading: false,
-      entities: Object.fromEntries(consumers.map((c) => [c.uuid, c])),
-      order: consumers.map((c) => c.uuid),
       pagination: {
         pageSize: 10,
         resultCount: consumers.length,

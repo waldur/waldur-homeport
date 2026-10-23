@@ -1,0 +1,182 @@
+// Table
+
+@use 'sass:map';
+
+// Table
+.table {
+  // Fix for BS 5.1.2 update
+  & > :not(:first-child) {
+    border-color: transparent;
+    border-width: 0;
+    border-style: none;
+  }
+
+  > :not(:last-child) > :last-child > * {
+    border-bottom-color: inherit;
+  }
+
+  tr,
+  th,
+  td {
+    border-color: inherit;
+    border-width: inherit;
+    border-style: inherit;
+    text-transform: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    color: inherit;
+    height: inherit;
+    min-height: inherit;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  tfoot,
+  tbody {
+    > tr:last-child {
+      border-bottom: 0 !important;
+
+      th,
+      td {
+        border-bottom: 0 !important;
+      }
+    }
+  }
+
+  tfoot {
+    th,
+    td {
+      border-top: inherit;
+    }
+  }
+
+  // Rounded
+  &.table-rounded {
+    border-radius: $border-radius;
+    border-spacing: 0;
+    border-collapse: separate;
+  }
+
+  // Row bordered
+  &.table-row-bordered {
+    tr {
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      border-bottom-color: var(--border-secondary);
+    }
+
+    tfoot {
+      th,
+      td {
+        border-top-width: 1px !important;
+      }
+    }
+  }
+
+  // Row border colour. Metronic generated one per gray step; the app uses
+  // only gray-200, which is the divider.
+  &.table-row-gray-200 {
+    tr {
+      border-bottom-color: var(--border-divider);
+    }
+  }
+}
+
+// Loading
+.table-loading-message {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include border-radius($border-radius);
+  box-shadow: var(--dropdown-shadow);
+  background-color: var(--bg-primary-solid);
+  // Light text on the dark --bg-primary-solid pill, in both themes.
+  color: var(--color-gray-dark-200);
+  font-weight: var(--font-weight-medium);
+  margin: 0 !important;
+  width: auto;
+  padding: 1rem 2rem !important;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+// Cell gutters, at the base size only: Metronic generated every $gutters value
+// at every breakpoint, and tables only ever use the base classes
+// (.table.gy-4.gx-5). A Bootstrap grid .row keeps its own responsive gutters.
+// No DataTables fixes either: DataTables is not a dependency.
+@each $name in ('0', '1', '2', '3', '4', '5', '6', '10') {
+  .table.g-#{$name} {
+    th,
+    td {
+      padding: map.get($gutters, $name);
+    }
+  }
+}
+
+@each $name in ('0', '2', '3', '4', '5', '8px') {
+  .table.gy-#{$name} {
+    th,
+    td {
+      padding-top: map.get($gutters, $name);
+      padding-bottom: map.get($gutters, $name);
+    }
+  }
+}
+
+@each $name in ('4', '5', '8px') {
+  .table.gx-#{$name} {
+    th,
+    td {
+      padding-left: map.get($gutters, $name);
+      padding-right: map.get($gutters, $name);
+    }
+  }
+}
+
+.table.gs-0 {
+  th,
+  td {
+    &:first-child {
+      padding-left: map.get($gutters, '0');
+    }
+
+    &:last-child {
+      padding-right: map.get($gutters, '0');
+    }
+  }
+}
+
+// The table variants in use (Bootstrap's are not generated: $table-variants).
+// Bootstrap's maths, in color-mix(): striped, active and hover move the row
+// background 5%, 10% and 7.5% towards the text colour.
+@mixin waldur-table-variant($bg, $color) {
+  // stylelint-disable property-disallowed-list -- Bootstrap's .table reads these hooks
+  --bs-table-bg: #{$bg};
+  --bs-table-striped-bg: color-mix(in srgb, #{$bg} 95%, #{$color});
+  --bs-table-striped-color: #{$color};
+  --bs-table-active-bg: color-mix(in srgb, #{$bg} 90%, #{$color});
+  --bs-table-active-color: #{$color};
+  --bs-table-hover-bg: color-mix(in srgb, #{$bg} 92.5%, #{$color});
+  --bs-table-hover-color: #{$color};
+  // stylelint-enable property-disallowed-list
+  color: #{$color};
+  border-color: color-mix(in srgb, #{$bg} 90%, #{$color});
+}
+
+.table-light {
+  @include waldur-table-variant(var(--bg-tertiary), var(--text-primary));
+}
+
+// 20% of the solid warning over the page, as Bootstrap's 80% tint over white.
+.table-warning {
+  @include waldur-table-variant(
+    color-mix(in srgb, var(--status-warning-solid) 20%, var(--bg-primary)),
+    var(--text-primary)
+  );
+}

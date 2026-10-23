@@ -1,4 +1,4 @@
-import { debounce } from 'lodash-es';
+import { debounce } from 'es-toolkit';
 import { projectsList } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';

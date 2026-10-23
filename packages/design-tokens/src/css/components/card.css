@@ -6,6 +6,14 @@
  * Both themes are defined in this file.
  */
 :root {
+  /* Spacing and dimensions matching live Metronic .card ($card-px: 1.85rem,
+     $card-py: 1.23rem and $card-header-height: 70px, in
+     src/styles/bootstrap/_variables.scss). Preserved in rem so scaling with
+     root font-size remains exact. */
+  --card-padding-x: 1.85rem;
+  --card-padding-y: 1.23rem;
+  --card-header-min-height: 70px;
+
   /* Collapsible card header (waldur-ui AccordionCard), matching the
      Metronic card it replaced: header text/caret ($gray-700), title
      ($headings-color), the compact variant's title (.text-secondary) and
@@ -16,7 +24,7 @@
   --card-header-solid-bg: var(--color-gray-50);
 
   /* Real Metronic source, from
-     src/metronic/sass/core/components/_card.scss's .card rule:
+     src/styles/bootstrap/components/_card.scss's .card rule:
      `box-shadow: $card-box-shadow` unconditionally, `border` only
      `@if ($card-border-enabled)` — which is itself `if(isDarkMode(),
      true, false)`. Metronic's real card relies on the shadow alone in

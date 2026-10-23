@@ -1,0 +1,25 @@
+// Config-only init: functions, mixins and variables. Emits no CSS.
+
+// This MUST be imported at the top level of an entry point, never from inside
+// a block (see index.scss). Sass scopes a `$var: value` declaration to the
+// block it appears in, and an assignment in a nested block updates the nearest
+// enclosing *local* variable instead of shadowing a global. Metronic's
+// component partials routinely null out shared names inside rules — e.g.
+// `.btn.btn-outline.btn-outline-dashed { $border-color: null; }` in the former
+// buttons theme partial — so if these variables were block-local
+// the null would leak into every partial imported afterwards.
+
+// Functions
+@import 'functions';
+
+// Mixins
+@import 'mixins';
+
+// Variables
+@import 'variables';
+
+// Bootstrap initialization
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';

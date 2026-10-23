@@ -1,5 +1,4 @@
-import { uniqueId } from 'lodash-es';
-import { ComponentType, FC, useMemo } from 'react';
+import { ComponentType, FC, useId } from 'react';
 import { Field, UseFieldConfig } from 'react-final-form';
 
 import { FormGroup, FormGroupProps } from './FormGroup';
@@ -50,10 +49,8 @@ export function withFormGroup<P extends object>(
       ...rest
     } = props;
 
-    const controlId = useMemo(
-      () => propsControlId || id || input?.name || uniqueId('form-group-'),
-      [propsControlId, id, input?.name],
-    );
+    const generatedId = useId();
+    const controlId = propsControlId || id || input?.name || generatedId;
 
     // Group FormGroup-specific props
     const formGroupProps: FormGroupProps = {

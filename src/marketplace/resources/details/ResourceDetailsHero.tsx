@@ -90,7 +90,7 @@ export const ResourceDetailsHero = ({
           title={<ResourceDetailsHeaderTitle resource={resource} />}
           quickActions={
             isRPOnly ? null : (
-              <div className="flex flex-col flex-wrap gap-2 w-sm-120px">
+              <div className="flex flex-col flex-wrap gap-2 sm:w-[120px]">
                 <RefreshButton
                   refetch={refetch}
                   isLoading={isLoading}

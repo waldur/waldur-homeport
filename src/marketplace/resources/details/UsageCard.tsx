@@ -121,7 +121,7 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
               // Fixed, not content-sized: the `w-full` container would other-
               // wise claim the whole toolbar row when empty and grow with each
               // chip, shifting every control beside it on every selection.
-              className="w-250px"
+              className="w-[250px]"
             />
           ) : null}
           {periodOptions.length > 1 && (

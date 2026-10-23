@@ -1,0 +1,11 @@
+// Bullet
+
+// Base
+.bullet {
+  display: inline-block;
+  background-color: get($bullet, bg-color);
+  @include border-radius(get($bullet, bar-border-radius));
+  width: get($bullet, bar-width);
+  height: get($bullet, bar-height);
+  flex-shrink: 0;
+}

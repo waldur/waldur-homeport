@@ -385,7 +385,7 @@ export const OrganizationCreatePage: FC = () => {
                             ? translate('You are on the first step')
                             : undefined
                         }
-                        className="min-w-125px"
+                        className="min-w-[125px]"
                         label={translate('Back')}
                         iconNode={<CaretLeftIcon weight="bold" />}
                         size="lg"
@@ -393,7 +393,7 @@ export const OrganizationCreatePage: FC = () => {
                       <div className="flex gap-3">
                         <BaseButton
                           variant="tertiary"
-                          className="min-w-125px"
+                          className="min-w-[125px]"
                           onClick={handleCancel}
                           label={translate('Cancel')}
                           size="lg"
@@ -405,7 +405,7 @@ export const OrganizationCreatePage: FC = () => {
                           }
                           invalid={submitDisabled}
                           disabledReason={submitDisabledReason || undefined}
-                          className="min-w-125px"
+                          className="min-w-[125px]"
                           iconNode={
                             !isLast ? (
                               <CaretRightIcon weight="bold" />

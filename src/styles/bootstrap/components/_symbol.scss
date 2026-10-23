@@ -1,0 +1,103 @@
+// symbol
+
+@use 'sass:map';
+
+// Base
+.symbol {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+  @include border-radius($border-radius);
+
+  // Darkmode background in lists
+  .list-group-item & {
+    background-color: inherit;
+
+    @include dark-theme {
+      background-color: #ffffff;
+    }
+  }
+
+  // Label
+  .symbol-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+    color: var(--text-quaternary);
+    background-color: var(--bg-tertiary);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    @include border-radius($border-radius);
+  }
+
+  // Image
+  > img {
+    width: 100%;
+    flex-shrink: 0;
+    display: inline-block;
+    @include border-radius($border-radius);
+  }
+
+  // Circle
+  &.symbol-circle {
+    &,
+    > img,
+    .symbol-label {
+      border-radius: 50%;
+    }
+  }
+
+  // Background contain
+  &.symbol-contain {
+    &,
+    > img,
+    .symbol-label {
+      background-size: contain;
+    }
+  }
+
+  // Sizes
+  @include symbol-size(get($symbol-sizes, default));
+
+  @each $name, $value in $symbol-sizes {
+    @if ($name != 'default') {
+      &.symbol-#{$name} {
+        @include symbol-size($value);
+      }
+    }
+  }
+}
+
+// Group
+.symbol-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: 10px;
+
+  > * {
+    z-index: 0;
+    margin-left: -16px;
+
+    &:hover {
+      z-index: 1;
+    }
+  }
+
+  .symbol {
+    position: relative;
+    border: 2px solid $body-bg;
+    transition: all 0.3s ease;
+  }
+
+  &.symbol-hover {
+    .symbol {
+      cursor: pointer;
+    }
+  }
+}

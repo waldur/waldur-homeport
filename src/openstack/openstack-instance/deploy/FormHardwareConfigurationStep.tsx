@@ -1,4 +1,4 @@
-import { debounce } from 'lodash-es';
+import { debounce } from 'es-toolkit';
 import { useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-final-form';
 import { OpenStackFlavor, OpenStackImage } from 'waldur-js-client';

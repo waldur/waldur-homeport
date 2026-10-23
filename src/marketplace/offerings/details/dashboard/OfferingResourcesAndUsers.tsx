@@ -133,7 +133,7 @@ export const OfferingResourcesAndUsers: FC<OwnProps> = ({ offering }) => {
     <FormTable.Card
       title={translate('Resources & users')}
       className="card-bordered mb-5"
-      headerClassName="min-h-60px"
+      headerClassName="min-h-[60px]"
     >
       <FormTable detailsMode className="gy-5">
         {isLoading || error ? (

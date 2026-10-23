@@ -1,11 +1,16 @@
+import { useQuery } from '@tanstack/react-query';
+import { DateTime } from 'luxon';
 import { FC, useMemo } from 'react';
 import {
+  customerCreditsList,
   marketplaceProjectEstimatedCostPoliciesList,
   MarketplaceProjectEstimatedCostPoliciesListData,
 } from 'waldur-js-client';
 
 import { HelpIcon } from 'waldur-ui';
 
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { ProjectLink } from '@/project/ProjectLink';
@@ -77,7 +82,7 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
               {translate('Action triggered')}{' '}
               <HelpIcon
                 label={translate(
-                  "Shows whether this policy's action has been executed (for example, pausing or downscaling) after exceeding the limit.",
+                  "Whether this policy's actions are in effect, for example pausing or downscaling. The status's tooltip says why, with the figures the policy compared.",
                 )}
                 size={18}
               />
@@ -86,27 +91,22 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
           render: ({ row }) => (
             <CostPolicyTriggerCell row={row}>
               {row.has_fired && row.affected_resources_count > 0 && (
-                <span className="text-quaternary text-xs">
-                  {translate('{count} resources', {
-                    count: row.affected_resources_count,
-                  })}
+                <span className="text-quaternary text-xs whitespace-nowrap">
+                  {/* Whole strings per form: inflected languages do not take
+                      "{count} resource(s)". */}
+                  {row.affected_resources_count === 1
+                    ? translate('{count} resource', { count: 1 })
+                    : translate('{count} resources', {
+                        count: row.affected_resources_count,
+                      })}
                 </span>
               )}
             </CostPolicyTriggerCell>
           ),
         },
-        {
-          title: translate('Organization credit'),
-          render: ({ row }) => (
-            <>
-              {renderFieldOrDash(
-                row.customer_credit
-                  ? defaultCurrency(row.customer_credit)
-                  : null,
-              )}
-            </>
-          ),
-        },
+        // No organization credit column: the list is always one
+        // organization's, so it would repeat one figure on every row. The
+        // organization page shows it once, as the subtitle.
         {
           title: translate('Project credit'),
           render: ({ row }) => (
@@ -183,5 +183,31 @@ export const CostPoliciesList = () => {
     return result;
   }, [customer]);
 
-  return <CostPoliciesListTable table="CostPoliciesList" filter={filter} />;
+  const { data: credit } = useQuery({
+    queryKey: ['CostPoliciesOrganizationCredit', customer?.uuid],
+    queryFn: () =>
+      customerCreditsList({ query: { customer_uuid: customer.uuid } }).then(
+        (response) => response.data[0] ?? null,
+      ),
+    enabled: Boolean(customer?.uuid),
+    staleTime: SHORT_STALE_TIME,
+  });
+
+  return (
+    <CostPoliciesListTable
+      table="CostPoliciesList"
+      filter={filter}
+      // Dated as on the organization dashboard: this is the stored balance,
+      // while a policy's tooltip gives the credit left after this month's
+      // usage so far.
+      subtitle={
+        credit
+          ? translate('Organization credit, {date} balance: {credit}', {
+              date: formatDate(DateTime.now().startOf('month')),
+              credit: defaultCurrency(credit.value),
+            })
+          : undefined
+      }
+    />
+  );
 };

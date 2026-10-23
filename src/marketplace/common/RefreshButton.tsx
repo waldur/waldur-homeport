@@ -22,7 +22,7 @@ export const RefreshButton = ({
     pending={isLoading}
     size={size}
     variant="tertiary"
-    className={classNames('min-w-100px', className)}
+    className={classNames('min-w-[100px]', className)}
     onClick={!isLoading ? refetch : undefined}
     label={translate('Refresh')}
     iconNode={<ArrowClockwiseIcon weight="bold" />}

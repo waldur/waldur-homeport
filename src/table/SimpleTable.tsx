@@ -1,7 +1,23 @@
-import { Table } from 'react-bootstrap';
+import {
+  cn,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { Column } from './types';
 
+// The main Table's cell box: 44px rows, ~10px gutters. Arbitrary values, not
+// px-2/py-0: Bootstrap's own .px-2/.py-0 are !important and would win.
+const cell = 'h-[44px] px-[10px] py-[0px] align-middle';
+
+/**
+ * A short list of rows already in memory, with the main table's look but none
+ * of its fetching, paging, sorting or filters.
+ */
 export const SimpleTable = <T = any,>({
   columns,
   rows,
@@ -10,31 +26,40 @@ export const SimpleTable = <T = any,>({
   columns: Column<T>[];
   rows: T[];
   rowKey?: string;
-}) => {
-  return (
-    <div className="table-responsive">
-      <Table className="table table-row-bordered table-row-gray-200 align-middle gs-0 gy-3 p-0 m-0 text-start text-tertiary">
-        <thead>
-          <tr className="font-medium text-quaternary text-xs gs-0">
-            {columns.map((column, index) => (
-              <th key={index} className={column.headerClassName}>
-                {column.title}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {(rows || []).map((row, rowIndex) => (
-            <tr key={row[rowKey as string] || rowIndex}>
-              {columns.map((column, colIndex) => (
-                <td key={colIndex} className={column.className}>
-                  <column.render row={row} />
-                </td>
-              ))}
-            </tr>
+}) => (
+  <Table>
+    <TableHeader>
+      <TableRow className="bg-secondary border-divider last:border-b-[1px] hover:bg-secondary">
+        {columns.map((column, index) => (
+          <TableHead
+            key={index}
+            className={cn(
+              cell,
+              'text-xs font-medium text-quaternary whitespace-nowrap',
+              column.headerClassName,
+            )}
+          >
+            {column.title}
+          </TableHead>
+        ))}
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {(rows || []).map((row, rowIndex) => (
+        <TableRow
+          key={row[rowKey as string] || rowIndex}
+          className="border-divider hover:bg-transparent"
+        >
+          {columns.map((column, colIndex) => (
+            <TableCell
+              key={colIndex}
+              className={cn(cell, 'text-quaternary', column.className)}
+            >
+              <column.render row={row} />
+            </TableCell>
           ))}
-        </tbody>
-      </Table>
-    </div>
-  );
-};
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+);

@@ -65,8 +65,8 @@ export const NoResult: FC<NoResultProps> = ({
               <BaseButton
                 variant="tertiary"
                 className={classNames(
-                  'mw-175px min-w-120px',
-                  actions ? 'w-175px' : 'w-50',
+                  'max-w-[175px] min-w-[120px]',
+                  actions ? 'w-[175px]' : 'w-1/2',
                 )}
                 onClick={callback}
                 label={buttonTitle}

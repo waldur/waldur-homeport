@@ -1,4 +1,4 @@
-import { pick } from 'lodash-es';
+import { pick } from 'es-toolkit/compat';
 import { Form } from 'react-final-form';
 import { projectsPartialUpdate } from 'waldur-js-client';
 

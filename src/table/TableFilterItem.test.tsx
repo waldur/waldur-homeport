@@ -8,7 +8,7 @@ import { ModalProvider } from '@/modal/ModalContext';
 
 import { TableFilterContext } from './FilterContextProvider';
 import { SelectFilter, StringFilter } from './filters';
-import { tableInitialReducer } from './store';
+import { tablesReducer } from './store';
 import { TableFilterContainer } from './TableFilterContainer';
 import { TableSidebarFilterValues } from './TableFilterItem';
 
@@ -173,7 +173,7 @@ describe('TableSidebarFilterValues', () => {
 describe('TableMenuFilterItem (filterPosition="menu")', () => {
   const renderMenuFilter = (apply = vi.fn()) => {
     const table = 'MenuFilterRegressionTable';
-    const store = createStore(combineReducers({ tables: tableInitialReducer }));
+    const store = createStore(combineReducers({ tables: tablesReducer }));
     render(
       <Provider store={store}>
         <TableFilterContext.Provider
@@ -242,7 +242,7 @@ describe('TableMenuFilterItem (filterPosition="menu")', () => {
 describe('TableSidebarFilterItem (filterPosition="sidebar")', () => {
   const renderSidebarFilter = () => {
     const table = 'SidebarFilterRegressionTable';
-    const store = createStore(combineReducers({ tables: tableInitialReducer }));
+    const store = createStore(combineReducers({ tables: tablesReducer }));
     render(
       <Provider store={store}>
         <ModalProvider>
@@ -289,7 +289,7 @@ describe('TableSidebarFilterItem (filterPosition="sidebar")', () => {
   // menu over the rows below; in the sidebar only the focused one shows.
   it('shows only the focused select filter menu when several are expanded', async () => {
     const user = userEvent.setup();
-    const store = createStore(combineReducers({ tables: tableInitialReducer }));
+    const store = createStore(combineReducers({ tables: tablesReducer }));
     render(
       <Provider store={store}>
         <ModalProvider>

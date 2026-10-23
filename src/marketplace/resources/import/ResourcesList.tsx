@@ -83,7 +83,7 @@ export const ResourcesList: FunctionComponent<{
             />
           ),
 
-          className: 'min-w-150px',
+          className: 'min-w-[150px]',
           disabledClick: true,
         },
       ]}
