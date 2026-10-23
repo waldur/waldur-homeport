@@ -391,6 +391,39 @@ describe('ResourceApiKeysCard', () => {
       }
     });
 
+    // The resource's month limit is inherited, but the key's usage going
+    // over it pauses nothing; the key's own daily limit is what heads it.
+    it("heads a key's usage with its own limit, not the resource's", async () => {
+      renderCard(
+        [
+          {
+            uuid: 'k1',
+            client_id: 'KEY1',
+            state: 'OK',
+            current_usages: { daily: 500 },
+            usage_period: `${new Date().toISOString().slice(0, 7)}-01`,
+            spending_limit_status: [
+              {
+                component_type: 'daily',
+                period: 'day',
+                used: 1,
+                limit: 10,
+                resets_at: '2026-10-22T00:00:00Z',
+                reached: false,
+              },
+            ],
+          },
+        ],
+        {
+          offering: MANAGED_OFFERING,
+          resource: { ...RESOURCE, spending_limits: { daily: { month: 40 } } },
+        },
+      );
+      const [row] = (await screen.findAllByRole('row')).slice(1);
+      expect(within(row).getByText('10%')).toBeInTheDocument();
+      expect(within(row).queryByText('1250%')).not.toBeInTheDocument();
+    });
+
     it('lets only the assignee, staff or support reveal a personal key', async () => {
       renderManaged({ state: 'OK', user_uuid: 'someone-else' });
       await screen.findByText('KEY1');

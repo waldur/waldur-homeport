@@ -228,7 +228,9 @@ export const SetSpendingLimitsDialog: FC<{
               <>
                 {components.length > 0 && (
                   <p className="mb-5 text-sm text-tertiary">
-                    {getSpendingLimitsNotice()}{' '}
+                    {getSpendingLimitsNotice(
+                      data.offering.plugin_options?.action_on_usage_limit,
+                    )}{' '}
                     {translate('Clear a field to remove that limit.')}
                   </p>
                 )}
@@ -262,7 +264,9 @@ export const SetSpendingLimitsDialog: FC<{
                   />
                 )}
                 {components.length > 0 && (
-                  <SpendingLimitFields components={components} />
+                  // Named even when there is only one: "Daily limit" alone
+                  // does not say what it caps.
+                  <SpendingLimitFields components={components} showNames />
                 )}
               </>
             )}

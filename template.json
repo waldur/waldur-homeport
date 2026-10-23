@@ -17926,7 +17926,7 @@
       "feature_area": "lifecycle"
     }
   },
-  "Each limit pauses this key alone once reached, and may not exceed the resource's limit for the same period. Clear a field to remove that limit.": {
+  "Each limit pauses this key alone once reached, and may not exceed the resource's limit for the same or a longer period. Clear a field to remove that limit.": {
     "context": {
       "feature_area": "api-keys"
     }
@@ -27377,7 +27377,6 @@
       "feature_area": "cost-policies"
     }
   },
-  "Its usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.": {},
   "JPG, PNG, PDF or .asice (max {size})": {
     "context": {
       "variables": {
@@ -28283,8 +28282,18 @@
       "feature_area": "features"
     }
   },
+  "Let users limit API keys": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Lets customers change the number entered for a Component Formula order option after ordering. The change is ordered with the recalculated limits and price. It uses the formulas and bounds of that order option.": {},
   "Lets users request API keys, assign them, limit their usage and their models, and pause or delete them. New resources start without keys instead of with two shared ones; existing resources keep theirs. Turn on only if the backend behind the site agent supports it, such as the Envoy AI Gateway; others, such as Ceph S3, fail those actions. Without it, keys can only be revealed and rotated.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "Lets users set spending limits on each API key, within the resource’s own limits. Turned off, no new key limit is accepted; limits keys already hold stay until cleared.": {
     "context": {
       "feature_area": "integration"
     }
@@ -37184,6 +37193,11 @@
       "feature_area": "ticketDraft"
     }
   },
+  "Only then can keys be limited per day, week, quarter or year, where a component offers those periods; otherwise keys are limited per month only. Turn on only if the site agent reports each key’s usage per day, or those limits are never reached.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Only these roles": {
     "context": {
       "feature_area": "pubsub"
@@ -44969,6 +44983,7 @@
       "feature_area": "details"
     }
   },
+  "Reaching a limit is reported but does not pause access.": {},
   "React with {label}": {
     "context": {
       "variables": {
@@ -54238,6 +54253,11 @@
       "feature_area": "rabbitmq"
     }
   },
+  "Site agent reports API key usage per day": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Site agent status": {
     "context": {
       "feature_area": "policies"
@@ -58086,6 +58106,11 @@
       "feature_area": "keys"
     }
   },
+  "The key is still active at the provider until the failed command succeeds.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "The key was never created, so it has nothing to resume.": {
     "context": {
       "feature_area": "api-keys"
@@ -58657,6 +58682,7 @@
       "feature_area": "common"
     }
   },
+  "The resource's usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.": {},
   "The resources the merge moves to the target, with the orders, limits and order answers that follow them.": {},
   "The response window for this assignment batch has passed.": {
     "context": {
@@ -71150,6 +71176,7 @@
     }
   },
   "When a limit is reached, access pauses until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.": {},
+  "When a limit is reached, the resource is downscaled until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.": {},
   "When a round closes, move unsubmitted drafts to the next round instead of canceling them. Applicants keep their content and are notified by email. Drafts are canceled as before when the call has no later round.": {
     "context": {
       "feature_area": "configuration"
@@ -74162,6 +74189,11 @@
     }
   },
   "over limit": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "over the resource's limit": {
     "context": {
       "feature_area": "api-keys"
     }
