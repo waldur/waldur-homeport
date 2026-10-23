@@ -4,7 +4,10 @@
  * A provider lets customers cap the use of a usage-based component per
  * calendar period (`OfferingComponent.spending_limit_periods`, each period with
  * an optional default and maximum); the customer's amounts live on the
- * resource as `spending_limits: {component_type: {period: amount}}`.
+ * resource as `spending_limits: {component_type: {period: amount}}`. `total`
+ * is the one period that is not a calendar period: it counts all usage since
+ * the resource started and never resets, so a limit it holds lifts only when
+ * the limit is raised or cleared.
  *
  * The period labels, reset texts and validation here are shared by the
  * component dialog (provider), the order form and the set-spending-limits
@@ -22,7 +25,8 @@ import { translate } from '@/i18n';
 // Taken from the model rather than its generated enum, whose name depends on
 // how many serializers share the choices (SpendingLimitStatusPeriodEnum while
 // only the status has them, SpendingLimitPeriodEnum once API keys do too).
-export type SpendingLimitPeriod = SpendingLimitStatus['period'];
+// `total` is named as well while the published SDK predates it.
+export type SpendingLimitPeriod = SpendingLimitStatus['period'] | 'total';
 
 /** Shortest first: a shorter period's amount may not exceed a longer one's. */
 export const SPENDING_LIMIT_PERIODS: SpendingLimitPeriod[] = [
@@ -31,6 +35,7 @@ export const SPENDING_LIMIT_PERIODS: SpendingLimitPeriod[] = [
   'month',
   'quarter',
   'year',
+  'total',
 ];
 
 /** Periods that sum per-day usage, so the integration must report it per day. */
@@ -64,6 +69,7 @@ export const getSpendingLimitPeriodLabel = (
     month: translate('Monthly'),
     quarter: translate('Quarterly'),
     year: translate('Yearly'),
+    total: translate('All-time'),
   })[period] ?? period;
 
 /**
@@ -77,9 +83,13 @@ export const getSpendingLimitLabel = (period: SpendingLimitPeriod): string =>
     month: translate('Monthly limit'),
     quarter: translate('Quarterly limit'),
     year: translate('Yearly limit'),
+    total: translate('All-time limit'),
   })[period] ?? period;
 
-/** "day", "week", ... — the noun, for "per day" and the ordering messages. */
+/**
+ * "day", "week", ... — the noun, for the ordering messages. `total` has none:
+ * its message names the all-time amount instead.
+ */
 const getSpendingLimitPeriodNoun = (period: SpendingLimitPeriod): string =>
   ({
     day: translate('day'),
@@ -89,7 +99,10 @@ const getSpendingLimitPeriodNoun = (period: SpendingLimitPeriod): string =>
     year: translate('year'),
   })[period] ?? period;
 
-/** When a period's usage starts from zero. Periods are calendar periods in UTC. */
+/**
+ * When a period's usage starts from zero. Periods are calendar periods in UTC;
+ * `total` never resets.
+ */
 export const getSpendingLimitResetText = (
   period: SpendingLimitPeriod,
 ): string =>
@@ -99,25 +112,38 @@ export const getSpendingLimitResetText = (
     month: translate('resets on the 1st'),
     quarter: translate('resets on 1 January, April, July and October'),
     year: translate('resets on 1 January'),
+    total: translate('never resets'),
   })[period] ?? '';
 
 /**
  * What reaching a limit does, as the offering's `action_on_usage_limit` sets
  * it: pause the resource, downscale it, or — when unset — nothing beyond
  * reporting it. The copy must not promise a pause the provider does not apply.
+ * `allTime` says an all-time limit is among the offered ones: it never
+ * resets, so the copy says what lifts it instead. Each case is one string, so
+ * a translator sees the whole notice rather than a sentence and its correction.
  */
 export const getSpendingLimitsNotice = (
   actionOnUsageLimit?: string | null,
+  allTime = false,
 ): string => {
   if (actionOnUsageLimit === 'pause') {
-    return translate(
-      'When a limit is reached, access pauses until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.',
-    );
+    return allTime
+      ? translate(
+          'When a limit is reached, access pauses until that limit resets. An all-time limit never resets: once reached, it holds until it is raised or cleared. Limits are checked each time the provider reports usage, so spending can briefly go over one.',
+        )
+      : translate(
+          'When a limit is reached, access pauses until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.',
+        );
   }
   if (actionOnUsageLimit === 'downscale') {
-    return translate(
-      'When a limit is reached, the resource is downscaled until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.',
-    );
+    return allTime
+      ? translate(
+          'When a limit is reached, the resource is downscaled until that limit resets. An all-time limit never resets: once reached, it holds until it is raised or cleared. Limits are checked each time the provider reports usage, so spending can briefly go over one.',
+        )
+      : translate(
+          'When a limit is reached, the resource is downscaled until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.',
+        );
   }
   return translate('Reaching a limit is reported but does not pause access.');
 };
@@ -132,6 +158,26 @@ export const getOfferedPeriods = (
   const offered = component.spending_limit_periods || {};
   return SPENDING_LIMIT_PERIODS.filter((period) => period in offered);
 };
+
+/**
+ * Whether a reached all-time limit is among the statuses. It never resets, so
+ * while it holds a resource or key the backend gives no time it lifts.
+ */
+export const isAllTimeLimitReached = (
+  statuses:
+    { period: SpendingLimitPeriod; reached: boolean }[] | null | undefined,
+) =>
+  (statuses ?? []).some(
+    (status) => status.reached && status.period === 'total',
+  );
+
+/** Whether any of the components offers an all-time limit. */
+export const offersAllTimeLimit = (
+  components: Pick<OfferingComponent, 'spending_limit_periods'>[],
+) =>
+  components.some((component) =>
+    getOfferedPeriods(component).includes('total'),
+  );
 
 /**
  * A period's bounds as the limit fields take them. `heldOnly` marks a period
@@ -221,7 +267,7 @@ export const validateSpendingLimitAmount = (
 
 /**
  * A shorter period's amount may not exceed a longer one's (day ≤ week ≤ month
- * ≤ quarter ≤ year). Returns the error of each shorter period that does, keyed
+ * ≤ quarter ≤ year ≤ total). Returns the error of each shorter period that does, keyed
  * by period. Empty and non-numeric amounts are skipped, as the backend skips
  * periods without an amount.
  */
@@ -238,13 +284,18 @@ export const getSpendingLimitOrderErrors = (
   present.slice(0, -1).forEach((shorter, index) => {
     const longer = present[index + 1];
     if (Number(amounts[shorter]) > Number(amounts[longer])) {
-      errors[shorter] = translate(
-        'Must not exceed the amount for the {longer} ({amount}).',
-        {
-          longer: getSpendingLimitPeriodNoun(longer),
-          amount: Number(amounts[longer]),
-        },
-      );
+      errors[shorter] =
+        longer === 'total'
+          ? translate('Must not exceed the all-time amount ({amount}).', {
+              amount: Number(amounts[longer]),
+            })
+          : translate(
+              'Must not exceed the amount for the {longer} ({amount}).',
+              {
+                longer: getSpendingLimitPeriodNoun(longer),
+                amount: Number(amounts[longer]),
+              },
+            );
     }
   });
   return errors;

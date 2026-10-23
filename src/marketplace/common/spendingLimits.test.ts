@@ -7,10 +7,13 @@ import {
   getDefaultSpendingLimits,
   getOfferedSpendingLimits,
   getOfferedPeriods,
+  getSpendingLimitLabel,
   getSpendingLimitOrderErrors,
+  getSpendingLimitPeriodLabel,
   getSpendingLimitResetText,
   getSpendingLimitsNotice,
   getSpendingLimitSubmitErrors,
+  offersAllTimeLimit,
   parseComponentSpendingLimitPeriods,
   validateSpendingLimitAmount,
 } from './spendingLimits';
@@ -53,6 +56,28 @@ describe('spending limit periods', () => {
       'resets on 1 January, April, July and October',
     );
     expect(getSpendingLimitResetText('year')).toBe('resets on 1 January');
+    expect(getSpendingLimitResetText('total')).toBe('never resets');
+  });
+
+  // All-time is the one period that is not a calendar period.
+  it('names the all-time limit and lists it after the year', () => {
+    expect(getSpendingLimitLabel('total')).toBe('All-time limit');
+    expect(getSpendingLimitPeriodLabel('total')).toBe('All-time');
+    expect(
+      getOfferedPeriods({
+        spending_limit_periods: { total: {}, year: {}, month: {} },
+      }),
+    ).toEqual(['month', 'year', 'total']);
+  });
+
+  it('tells whether any component offers an all-time limit', () => {
+    expect(offersAllTimeLimit([tokenCost, storage])).toBe(false);
+    expect(
+      offersAllTimeLimit([
+        tokenCost,
+        { ...storage, spending_limit_periods: { total: {} } },
+      ]),
+    ).toBe(true);
   });
 
   it('keeps only usage-based components that offer a period', () => {
@@ -72,6 +97,23 @@ describe('getSpendingLimitsNotice', () => {
     );
     expect(getSpendingLimitsNotice('downscale')).toMatch(
       /^When a limit is reached, the resource is downscaled until that limit resets\./,
+    );
+  });
+
+  it('says what lifts an all-time limit, which never resets', () => {
+    const allTime =
+      'An all-time limit never resets: once reached, it holds until it is raised or cleared.';
+    expect(getSpendingLimitsNotice('pause', true)).toBe(
+      `When a limit is reached, access pauses until that limit resets. ${allTime} Limits are checked each time the provider reports usage, so spending can briefly go over one.`,
+    );
+    expect(getSpendingLimitsNotice('downscale', true)).toBe(
+      `When a limit is reached, the resource is downscaled until that limit resets. ${allTime} Limits are checked each time the provider reports usage, so spending can briefly go over one.`,
+    );
+    expect(getSpendingLimitsNotice('pause')).not.toContain(allTime);
+    expect(getSpendingLimitsNotice('downscale')).not.toContain(allTime);
+    // Nothing is held when a reached limit is only reported.
+    expect(getSpendingLimitsNotice(undefined, true)).toBe(
+      'Reaching a limit is reported but does not pause access.',
     );
   });
 
@@ -129,6 +171,15 @@ describe('getSpendingLimitOrderErrors', () => {
     ).toEqual({ day: 'Must not exceed the amount for the month (30).' });
   });
 
+  it('names the all-time amount when the longer period is total', () => {
+    expect(getSpendingLimitOrderErrors({ year: 600, total: 500 })).toEqual({
+      year: 'Must not exceed the all-time amount (500).',
+    });
+    expect(
+      getSpendingLimitOrderErrors({ month: 50, year: '', total: 40 }),
+    ).toEqual({ month: 'Must not exceed the all-time amount (40).' });
+  });
+
   it('accepts equal and increasing amounts', () => {
     expect(
       getSpendingLimitOrderErrors({
@@ -136,6 +187,7 @@ describe('getSpendingLimitOrderErrors', () => {
         week: 20,
         month: 300,
         year: 1000,
+        total: 1000,
       }),
     ).toEqual({});
   });
@@ -198,6 +250,21 @@ describe('component dialog periods', () => {
     });
   });
 
+  it('round-trips an all-time period', () => {
+    const form = parseComponentSpendingLimitPeriods({
+      total: { maximum: 5000 },
+      month: {},
+    });
+    expect(form).toEqual({
+      month: { enabled: true, default: undefined, maximum: undefined },
+      total: { enabled: true, default: undefined, maximum: 5000 },
+    });
+    expect(formatComponentSpendingLimitPeriods(true, form, 'usage')).toEqual({
+      month: {},
+      total: { maximum: 5000 },
+    });
+  });
+
   it('drops unticked periods and empty bounds', () => {
     expect(
       formatComponentSpendingLimitPeriods(
@@ -250,6 +317,27 @@ describe('getSpendingLimitSubmitErrors', () => {
       storage: {
         day: ['Limits: the day amount (50) is above the week amount (40).'],
       },
+    });
+  });
+
+  it('puts a message naming the total on that period', () => {
+    expect(
+      getSpendingLimitSubmitErrors(
+        {
+          token_cost: [
+            'Limits: the year amount (600) is above the total amount (500).',
+          ],
+          storage: ['The total limit may not exceed 900.'],
+        },
+        types,
+      ),
+    ).toEqual({
+      token_cost: {
+        year: [
+          'Limits: the year amount (600) is above the total amount (500).',
+        ],
+      },
+      storage: { total: ['The total limit may not exceed 900.'] },
     });
   });
 

@@ -29,6 +29,17 @@ const getComponentName = (resource: StatusResource, type: string) =>
 const getPercent = (status: SpendingLimitStatus) =>
   status.limit > 0 ? (status.used / status.limit) * 100 : 100;
 
+// An all-time limit has no reset time: it never resets.
+const ResetText: FC<{ resetsAt: string | null }> = ({ resetsAt }) =>
+  !resetsAt
+    ? translate('Never resets')
+    : new Date(resetsAt).getTime() <= Date.now()
+      ? translate('Resets shortly')
+      : translate('Resets {relative}, on {date}', {
+          relative: formatRelative(resetsAt),
+          date: formatMediumDateTime(resetsAt),
+        });
+
 const StatusRow: FC<{ status: SpendingLimitStatus; unit?: string }> = ({
   status,
   unit,
@@ -62,12 +73,7 @@ const StatusRow: FC<{ status: SpendingLimitStatus; unit?: string }> = ({
         size="sm"
       />
       <div className="mt-1 text-xs text-quaternary">
-        {new Date(status.resets_at).getTime() <= Date.now()
-          ? translate('Resets shortly')
-          : translate('Resets {relative}, on {date}', {
-              relative: formatRelative(status.resets_at),
-              date: formatMediumDateTime(status.resets_at),
-            })}
+        <ResetText resetsAt={status.resets_at} />
       </div>
     </div>
   );

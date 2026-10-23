@@ -6,6 +6,7 @@ import { SpendingLimitFields } from '@/marketplace/common/SpendingLimitFields';
 import {
   getCappedComponents,
   getSpendingLimitsNotice,
+  offersAllTimeLimit,
 } from '@/marketplace/common/spendingLimits';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 
@@ -39,6 +40,7 @@ export const PlanSpendingLimits = ({
       <p className="mb-4 text-sm text-tertiary">
         {getSpendingLimitsNotice(
           offering.plugin_options?.action_on_usage_limit,
+          offersAllTimeLimit(components),
         )}
       </p>
       <SpendingLimitFields components={components} />

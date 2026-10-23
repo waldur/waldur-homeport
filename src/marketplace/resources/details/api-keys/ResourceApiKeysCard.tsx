@@ -54,6 +54,7 @@ const getColumns = (
   keyManagement: boolean,
   anyAssigned: boolean,
   pause: ResourcePause | null,
+  resource: Resource,
 ): Column<ApiKeyRow>[] => [
   {
     title: translate('Key ID'),
@@ -74,7 +75,7 @@ const getColumns = (
           label={getStateLabel(row, pause)}
           variant={variant}
           active={active}
-          tooltip={getStateTooltip(row, pause, components)}
+          tooltip={getStateTooltip(row, pause, components, resource)}
           shape="pill"
           tone="outline"
         />
@@ -243,6 +244,7 @@ export const ResourceApiKeysCard = ({
           keyManagement,
           rows.some((key) => key.user_uuid),
           pause,
+          resource,
         )}
         tableActions={
           canManage && keyManagement ? (

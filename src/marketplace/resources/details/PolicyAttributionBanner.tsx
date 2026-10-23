@@ -10,6 +10,7 @@ import { Resource } from 'waldur-js-client';
 import { formatMediumDateTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
+import { isAllTimeLimitReached } from '@/marketplace/common/spendingLimits';
 import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
 
 import {
@@ -17,6 +18,10 @@ import {
   PolicyAttribution,
   POLICY_LABELS,
 } from './ResourceFlags';
+import {
+  getRestrictionHeldBy,
+  getRestrictionResumes,
+} from './spendingLimitRestriction';
 
 const formatBannerDescription = (attr: PolicyAttribution): string => {
   const policyType = attr.policy_class
@@ -91,6 +96,24 @@ const FLAGS: FlagConfig[] = [
   },
 ];
 
+// What lifts a usage-limit restriction, in the Usage tab's words, when the
+// spending limits say it: a reached all-time limit holds until it is raised or
+// cleared, and a reached calendar limit lifts when it resets. Otherwise (a
+// limit-billed component over its limit, or no spending limit status) usage
+// has to drop below the limit, as the flag's own message says.
+const getUsageLimitRecovery = (resource: Resource, fallback: string) => {
+  if (
+    !resource.usage_limit_resumes_at &&
+    !isAllTimeLimitReached(resource.spending_limit_status)
+  ) {
+    return fallback;
+  }
+  const heldBy =
+    getRestrictionHeldBy(resource) ??
+    translate('Reported usage reached the configured limit.');
+  return `${heldBy} ${getRestrictionResumes(resource)}`;
+};
+
 export const PolicyAttributionBanner: FC<{ resource: Resource }> = ({
   resource,
 }) => {
@@ -141,7 +164,10 @@ export const PolicyAttributionBanner: FC<{ resource: Resource }> = ({
                 icon={Icon}
                 variant="danger"
                 label={usageLimitLabel}
-                description={usageLimitRecovery}
+                description={getUsageLimitRecovery(
+                  resource,
+                  usageLimitRecovery,
+                )}
                 colored
               />
             );

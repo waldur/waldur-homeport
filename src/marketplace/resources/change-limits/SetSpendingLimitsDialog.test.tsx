@@ -105,6 +105,49 @@ describe('SetSpendingLimitsDialog', () => {
     ).toBeInTheDocument();
   });
 
+  it('offers an all-time limit that never resets, and says what lifts it', async () => {
+    vi.mocked(marketplaceResourcesOfferingRetrieve).mockResolvedValue({
+      data: {
+        ...offering,
+        plugin_options: { action_on_usage_limit: 'pause' },
+        components: [
+          {
+            ...offering.components[0],
+            spending_limit_periods: { month: {}, total: { maximum: 5000 } },
+          },
+        ],
+      },
+    } as any);
+    vi.mocked(marketplaceResourcesRetrieve).mockResolvedValue({
+      data: { ...resource, spending_limits: { token_cost: { total: 1500 } } },
+    } as any);
+    const user = userEvent.setup();
+    renderDialog();
+    await waitFor(() => expect(getInput('All-time')).toHaveValue(1500));
+    expect(screen.getByTestId('spending-limits-token_cost')).toHaveTextContent(
+      'Up to 5000 · never resets',
+    );
+    expect(
+      screen.getByText(
+        /An all-time limit never resets: once reached, it holds until it is raised or cleared\./,
+      ),
+    ).toBeInTheDocument();
+
+    await user.type(getInput('Monthly'), '2000');
+    expect(
+      await screen.findByText('Must not exceed the all-time amount (1500).'),
+    ).toBeInTheDocument();
+    await user.clear(getInput('Monthly'));
+    await user.type(getInput('Monthly'), '200');
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+    await waitFor(() =>
+      expect(marketplaceResourcesSetSpendingLimits).toHaveBeenCalledWith({
+        path: { uuid: 'res-1' },
+        body: { spending_limits: { token_cost: { month: 200, total: 1500 } } },
+      }),
+    );
+  });
+
   it('names a limit on a period no longer offered, which saving drops', async () => {
     renderDialog();
     expect(

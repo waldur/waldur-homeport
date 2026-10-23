@@ -26,6 +26,7 @@ import {
   getSpendingLimitLabel,
   getSpendingLimitsNotice,
   getSpendingLimitSubmitErrors,
+  offersAllTimeLimit,
   SPENDING_LIMIT_PERIODS,
   SpendingLimitFormValues,
   SpendingLimitPeriod,
@@ -230,6 +231,7 @@ export const SetSpendingLimitsDialog: FC<{
                   <p className="mb-5 text-sm text-tertiary">
                     {getSpendingLimitsNotice(
                       data.offering.plugin_options?.action_on_usage_limit,
+                      offersAllTimeLimit(components),
                     )}{' '}
                     {translate('Clear a field to remove that limit.')}
                   </p>

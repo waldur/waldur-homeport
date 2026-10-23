@@ -392,6 +392,37 @@ describe('OfferingComponentDialog', () => {
       expect(payload).not.toHaveProperty('spending_limits_enabled');
     });
 
+    it('offers an all-time period, which never resets', async () => {
+      const user = userEvent.setup();
+      const updateMutation = vi.mocked(
+        marketplaceProviderOfferingsUpdateOfferingComponent,
+      );
+      renderComponent({ offering: mockOffering, component: usageComponent });
+
+      await user.click(
+        screen.getByLabelText(/Customers can set spending limits/i),
+      );
+      expect(
+        screen.getByText(/Counts all usage since the resource started\./),
+      ).toBeInTheDocument();
+      await user.click(screen.getByLabelText('All-time'));
+      await user.type(
+        screen.getByLabelText('Maximum', {
+          selector: '[name="spending_limit_periods.total.maximum"]',
+        }),
+        '5000',
+      );
+
+      await user.click(screen.getByRole('button', { name: 'Save' }));
+
+      await waitFor(() => {
+        expect(updateMutation).toHaveBeenCalled();
+      });
+      expect(
+        updateMutation.mock.calls[0][0].body.spending_limit_periods,
+      ).toEqual({ total: { maximum: 5000 } });
+    });
+
     it('prefills the periods of a component that offers them', () => {
       renderComponent({
         offering: mockOffering,

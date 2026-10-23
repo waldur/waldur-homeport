@@ -131,6 +131,75 @@ describe('SpendingLimitStatusCard', () => {
     );
   });
 
+  it('says an all-time limit never resets', () => {
+    renderWithProviders(
+      <SpendingLimitStatusCard
+        resource={{
+          ...baseResource,
+          spending_limit_status: [
+            status({
+              period: 'total',
+              limit: 5000,
+              used: 1200,
+              resets_at: null,
+            }),
+          ],
+        }}
+      />,
+    );
+    const total = screen.getByTestId('spending-limit-status-token_cost-total');
+    expect(total).toHaveTextContent('All-time limit');
+    expect(total).toHaveTextContent('1200 / 5000 EUR');
+    expect(total).toHaveTextContent('Never resets');
+    expect(total).not.toHaveTextContent('Resets');
+  });
+
+  // The backend sets no resume time while a reached total holds the resource.
+  it('says a reached all-time limit holds until it is raised or cleared', () => {
+    const reachedTotal = status({
+      period: 'total',
+      limit: 5000,
+      used: 5000,
+      resets_at: null,
+      reached: true,
+    });
+    const { unmount } = renderWithProviders(
+      <SpendingLimitStatusCard
+        resource={{
+          ...baseResource,
+          usage_limit_restriction: 'paused',
+          usage_limit_resumes_at: null,
+          spending_limit_status: [
+            status({ used: 20, reached: true }),
+            reachedTotal,
+          ],
+        }}
+      />,
+    );
+    const notice = screen.getByTestId('spending-limit-restriction');
+    expect(notice).toHaveTextContent(
+      'Held by: Token cost — Daily limit; Token cost — All-time limit.',
+    );
+    expect(notice).toHaveTextContent(
+      'Access stays paused until the all-time limit is raised or cleared.',
+    );
+    unmount();
+
+    renderWithProviders(
+      <SpendingLimitStatusCard
+        resource={{
+          ...baseResource,
+          usage_limit_restriction: 'downscaled',
+          usage_limit_resumes_at: null,
+          spending_limit_status: [reachedTotal],
+        }}
+      />,
+    );
+    expect(screen.getByTestId('spending-limit-restriction')).toHaveTextContent(
+      'The restriction stays until the all-time limit is raised or cleared.',
+    );
+  });
+
   it('shows no restriction while none is applied, even if a limit is reached', () => {
     renderWithProviders(
       <SpendingLimitStatusCard
