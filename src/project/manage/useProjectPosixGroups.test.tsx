@@ -53,7 +53,7 @@ describe('useProjectPosixGroups error handling', () => {
       .catch(() => undefined);
 
     expect(router.stateService.target).toHaveBeenCalledWith(
-      'errorPage.severError',
+      'errorPage.serverError',
     );
   });
 });
