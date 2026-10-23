@@ -201,16 +201,15 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
       {filterOpen && (
         <div className="flex border-b-[1px] border-b-secondary py-1 px-5">
           {filters.map((filter) => (
+            // `component` must keep its identity across renders: an inline
+            // function is a new component type each time, so every re-render
+            // (focusing the select is one) remounts it and closes its menu.
             <Field
               key={filter.field}
               name={filter.field}
-              component={(fieldProps) => (
-                <FilterSelect
-                  placeholder={filter.label}
-                  options={filter.options}
-                  {...fieldProps}
-                />
-              )}
+              component={FilterSelect}
+              placeholder={filter.label}
+              options={filter.options}
             />
           ))}
         </div>

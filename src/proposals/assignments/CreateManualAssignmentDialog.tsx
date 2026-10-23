@@ -39,22 +39,17 @@ const TruncatedMultiValue = (props: any) => (
 );
 
 const FirstChipValueContainer = (props: any) => {
-  if (!props.hasValue) {
-    return (
-      <components.ValueContainer {...props}>
-        {props.children}
-      </components.ValueContainer>
-    );
-  }
-
+  // One shape with and without a value, so the input keeps its child slot and
+  // is not remounted on the first pick; see waldur-ui's
+  // MultiSelectLimitedValueContainer.
   const [values, ...otherChildren] = props.children;
-  const visibleValues = values.slice(0, 1);
-  const hiddenValues = values.slice(1);
+  const visibleValues = Array.isArray(values) ? values.slice(0, 1) : values;
+  const hiddenValues = Array.isArray(values) ? values.slice(1) : [];
 
   return (
     <components.ValueContainer
       {...props}
-      className="flex-nowrap overflow-hidden"
+      className={props.hasValue ? 'flex-nowrap overflow-hidden' : undefined}
     >
       {visibleValues}
       {hiddenValues.length > 0 && (
