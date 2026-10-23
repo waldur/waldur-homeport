@@ -76,6 +76,32 @@ describe('withEditField', () => {
     expect(editBtn).toHaveAttribute('data-icon', 'custom-icon');
   });
 
+  it('shows the value at a nested name, and keeps falsy values', () => {
+    renderWithProviders(
+      <EditFieldProvider
+        scope={{
+          service_attributes: { backend_url: 'https://x', debug: false },
+        }}
+        callback={vi.fn()}
+      >
+        <EnhancedField
+          name="service_attributes.backend_url"
+          label="URL"
+          renderValue={(value) => `url: ${value}`}
+        />
+        <EnhancedField
+          name="service_attributes.debug"
+          label="Debug"
+          renderValue={(value) => `debug: ${value}`}
+        />
+      </EditFieldProvider>,
+    );
+
+    const values = screen.getAllByTestId('fti-value');
+    expect(values[0]).toHaveTextContent('url: https://x');
+    expect(values[1]).toHaveTextContent('debug: false');
+  });
+
   it('respects renderValue override', () => {
     const scope = { test: 'initial value' };
     const callback = vi.fn();

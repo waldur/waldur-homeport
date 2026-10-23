@@ -49,7 +49,7 @@ const LiveKitCallsTab: FC = () => {
             <BaseButton
               pending={isFetching}
               variant="tertiary"
-              className="mw-175px min-w-120px w-50"
+              className="max-w-[175px] min-w-[120px] w-1/2"
               onClick={() => refetch()}
               label={translate('Retry')}
               size="lg"
@@ -68,7 +68,7 @@ const LiveKitCallsTab: FC = () => {
               <BaseButton
                 pending={isFetching}
                 variant="tertiary"
-                className="mw-175px min-w-120px w-50"
+                className="max-w-[175px] min-w-[120px] w-1/2"
                 onClick={() => refetch()}
                 label={translate('Refresh')}
                 size="lg"

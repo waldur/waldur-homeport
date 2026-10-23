@@ -24,7 +24,7 @@ interface ThreadItemMenuProps {
  * TableDropdownToggle for the general requirement. A custom Toggle (rather
  * than reusing TableDropdownToggle's icon-only variant) exists only because
  * that variant doesn't forward a custom className, and this trigger needs
- * aui-history-item-menu-trigger (src/metronic/sass/custom/ai-assistant/
+ * aui-history-item-menu-trigger (src/styles/bootstrap/custom/ai-assistant/
  * _history-sidebar.scss — shows the trigger on row hover).
  */
 const ThreadItemMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => (

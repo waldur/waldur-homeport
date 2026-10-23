@@ -1,4 +1,4 @@
-import { groupBy } from 'lodash-es';
+import { groupBy } from 'es-toolkit';
 import { Resource, ResourceState } from 'waldur-js-client';
 
 export interface ProjectInfo {
@@ -20,7 +20,7 @@ export const ACTIVE_RESOURCE_STATES: ResourceState[] = [
 export const groupResourcesByProject = (
   resources: Resource[],
 ): ProjectInfo[] => {
-  const grouped = groupBy(resources, 'project_uuid');
+  const grouped = groupBy(resources, (resource) => resource.project_uuid);
 
   return Object.entries(grouped).map(([projectUuid, projectResources]) => ({
     uuid: projectUuid,

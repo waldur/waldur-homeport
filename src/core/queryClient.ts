@@ -36,7 +36,7 @@ export const queryClient = new QueryClient({
         // HTTP 428 Precondition Required - user profile incomplete with enforcement enabled
         router.stateService.go('profile-manage');
       } else if (error?.response?.status === 500) {
-        router.stateService.target('errorPage.severError');
+        router.stateService.target('errorPage.serverError');
       } else if (error?.response?.status === 503) {
         router.stateService.target('errorPage.serviceNotAvailable');
       } else if (error?.response?.status == 404) {

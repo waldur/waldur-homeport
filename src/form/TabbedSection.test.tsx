@@ -5,7 +5,9 @@ import { describe, expect, it, vi, beforeEach } from 'vitest';
 
 import { TabbedSection } from './TabbedSection';
 
-vi.mock('lodash-es', async (importOriginal) => {
+// The search box (TableQuery) commits its query after a 1 s debounce, longer
+// than waitFor waits; fire it on the next tick instead.
+vi.mock('es-toolkit', async (importOriginal) => {
   const mod: any = await importOriginal();
   return {
     ...mod,

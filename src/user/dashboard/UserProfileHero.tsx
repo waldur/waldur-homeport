@@ -63,7 +63,7 @@ export const UserProfileHero: FC<UserProfileHeroProps> = ({
                   key: 'view',
                   title: translate('View'),
                   link: <Link state="profile.details" />,
-                  className: 'text-center min-w-60px',
+                  className: 'text-center min-w-[60px]',
                   disabled: !isValidUser,
                   tooltip: isValidUser ? undefined : disabledReason,
                 },
@@ -73,7 +73,7 @@ export const UserProfileHero: FC<UserProfileHeroProps> = ({
             key: 'edit',
             title: translate('Edit'),
             link: <Link state="profile-manage" />,
-            className: 'text-center min-w-60px',
+            className: 'text-center min-w-[60px]',
           },
         ]}
       />

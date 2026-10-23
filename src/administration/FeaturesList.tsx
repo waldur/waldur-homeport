@@ -344,7 +344,7 @@ export const FeaturesList = () => {
                       align="end"
                       onOpenChange={updateOverflow}
                     >
-                      <div className="mh-200px overflow-auto">
+                      <div className="max-h-[200px] overflow-auto">
                         {FEATURES_TABS.filter((tab) =>
                           hiddenTabKeys.has(tab.key),
                         ).map((tab) => {

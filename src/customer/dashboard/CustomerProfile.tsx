@@ -37,7 +37,7 @@ export const CustomerProfile = ({
             <CountryFlag
               countryCode={customer.country}
               fontSize={22}
-              className="h-25px"
+              className="h-[25px]"
             />
           )}
           <h3 className="mb-0">{customer.name}</h3>

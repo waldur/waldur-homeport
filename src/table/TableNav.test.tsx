@@ -87,6 +87,91 @@ describe('TableNav', () => {
     );
   });
 
+  describe('focus across a route switch', () => {
+    const teamTabs = [
+      { key: 'users', title: 'Active', state: 'team-users' },
+      { key: 'invitations', title: 'Invitations', state: 'team-invitations' },
+    ];
+
+    // The router replaces the page, and the bar with it: a new key remounts.
+    const switchTo = (rerender, stateName: string, tabs = teamTabs) => {
+      vi.mocked(useCurrentStateAndParams).mockReturnValue({
+        state: { name: stateName },
+        params: {},
+      } as any);
+      rerender(
+        <div key={stateName}>
+          <TableNav tabs={tabs} />
+        </div>,
+      );
+    };
+
+    const renderOn = (stateName: string) => {
+      vi.mocked(useCurrentStateAndParams).mockReturnValue({
+        state: { name: stateName },
+        params: {},
+      } as any);
+      return render(
+        <div key={stateName}>
+          <TableNav tabs={teamTabs} />
+        </div>,
+      );
+    };
+
+    const pressEnterOn = async (name: string) => {
+      const link = screen.getByRole('link', { name });
+      link.focus();
+      await userEvent.keyboard('{Enter}');
+      return link;
+    };
+
+    it('moves focus to the current tab of the bar that replaces it', async () => {
+      const { rerender } = renderOn('team-users');
+      const link = await pressEnterOn('Invitations');
+
+      switchTo(rerender, 'team-invitations');
+
+      const current = screen.getByRole('link', { name: 'Invitations' });
+      expect(current).not.toBe(link);
+      expect(current).toHaveAttribute('aria-current', 'page');
+      expect(current).toHaveFocus();
+    });
+
+    it('leaves focus alone after a pointer click', async () => {
+      const { rerender } = renderOn('team-users');
+      await userEvent.click(screen.getByRole('link', { name: 'Invitations' }));
+
+      switchTo(rerender, 'team-invitations');
+
+      expect(document.body).toHaveFocus();
+    });
+
+    it('does not take focus for a different set of tabs', async () => {
+      const { rerender } = renderOn('team-users');
+      await pressEnterOn('Invitations');
+
+      switchTo(rerender, 'elsewhere', [
+        { key: 'a', title: 'A', state: 'elsewhere' },
+        { key: 'b', title: 'B', state: 'other' },
+      ]);
+
+      expect(document.body).toHaveFocus();
+    });
+
+    it('does not steal focus the user has moved elsewhere', async () => {
+      const { rerender } = renderOn('team-users');
+      await pressEnterOn('Invitations');
+      const input = document.createElement('input');
+      document.body.appendChild(input);
+      input.focus();
+
+      switchTo(rerender, 'team-invitations');
+
+      expect(input).toHaveFocus();
+      input.remove();
+    });
+  });
+
   it('keeps a tab with onSelect as a button that calls it', async () => {
     const onSelect = vi.fn();
     render(

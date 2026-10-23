@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
-import { ColProps } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { MarketplacePublicOfferingsListData } from 'waldur-js-client';
 
 import { CardStyleType } from '@/marketplace/common/cards';
 import { RootState } from '@/store/reducers';
+import { GridSize } from '@/table/types';
 import { getCustomer, getProject } from '@/workspace/selectors';
 
 import {
@@ -75,7 +75,7 @@ export const useOfferingListFilter = (
   );
 };
 
-export const getOfferingGridSize = (cardStyle: CardStyleType): ColProps =>
+export const getOfferingGridSize = (cardStyle: CardStyleType): GridSize =>
   cardStyle === 'list'
     ? { xs: 12 }
     : cardStyle === 'compact'

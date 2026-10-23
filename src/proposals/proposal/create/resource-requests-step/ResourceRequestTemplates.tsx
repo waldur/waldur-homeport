@@ -135,7 +135,7 @@ const TableTitle = () => (
           'This call uses predefined resource templates. You can only select from the available templates below. Custom resource configurations are not allowed.',
         )}
         autoWidth
-        contentClassName="mw-350px"
+        contentClassName="max-w-[350px]"
       >
         <QuestionIcon weight="bold" size={16} className="w-full" />
       </Tooltip>
@@ -356,7 +356,7 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
           disabled={!newCount && !removedCount}
           disabledReason={translate('No changes to save')}
           pending={isPending}
-          className="min-w-125px"
+          className="min-w-[125px]"
           variant="tertiary"
           size="lg"
         />

@@ -8,7 +8,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { SubmitButton, TextGroup } from '@/form';
+import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -72,7 +72,6 @@ const OfferingResourcesTable = ({ offering }) => {
       initialSorting={{ field: 'created', mode: 'desc' }}
       initialPageSize={5}
       hasActionBar={false}
-      className="mb-5"
     />
   );
 };
@@ -123,10 +122,10 @@ export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
                     { offeringName: offering.name },
                   )
             }
-            bodyClassName="h-500px"
+            bodyClassName="h-[500px]"
             footer={
               <>
-                <CloseDialogButton className="w-175px" />
+                <CloseDialogButton className="w-[175px]" />
                 <SubmitButton
                   submitting={submitting}
                   label={
@@ -135,7 +134,9 @@ export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
                       : translate('Confirm')
                   }
                   className={
-                    offering.state === 'Unavailable' ? 'mw-200px' : 'w-175px'
+                    offering.state === 'Unavailable'
+                      ? 'max-w-[200px]'
+                      : 'w-[175px]'
                   }
                 />
               </>
@@ -157,15 +158,6 @@ export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
               </p>
             )}
             <OfferingResourcesTable offering={offering} />
-            <TextGroup
-              name="reason"
-              placeholder={
-                offering.state === 'Unavailable'
-                  ? translate('Optional reason (displayed in logs)')
-                  : translate('Optional reason (displayed to users)')
-              }
-              rows={3}
-            />
           </ModalDialog>
         </form>
       )}

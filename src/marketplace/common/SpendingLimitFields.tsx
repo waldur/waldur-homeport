@@ -1,4 +1,4 @@
-import { get } from 'lodash-es';
+import { get } from 'es-toolkit/compat';
 import { FC } from 'react';
 import { Field, useFormState } from 'react-final-form';
 import { OfferingComponent } from 'waldur-js-client';
@@ -123,7 +123,7 @@ const PeriodInput: FC<{
               max={held ? undefined : (maximum ?? undefined)}
               step={held ? 'any' : '0.01'}
               placeholder={translate('No limit')}
-              containerClassName="mw-200px"
+              containerClassName="max-w-[200px]"
               aria-invalid={Boolean(error)}
               aria-describedby={
                 error ? getErrorId(component.type, period) : undefined

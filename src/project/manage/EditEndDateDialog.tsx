@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { pick } from 'lodash-es';
+import { pick } from 'es-toolkit/compat';
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Form, FormRenderProps, useField } from 'react-final-form';
@@ -180,17 +180,19 @@ const FormModalComponent: FC<
               })
             : translate('Some conflicting resources are unselected')
         }
-        bodyClassName={adjustModalHeight ? 'flex flex-col h-400px' : 'h-200px'}
+        bodyClassName={
+          adjustModalHeight ? 'flex flex-col h-[400px]' : 'h-[200px]'
+        }
         footer={
           <>
             {step === 1 ? (
-              <CloseDialogButton className="min-w-125px" />
+              <CloseDialogButton className="min-w-[125px]" />
             ) : (
               <BaseButton
                 label={translate('Go back')}
                 onClick={() => setStep(1)}
                 variant="tertiary"
-                className="min-w-125px"
+                className="min-w-[125px]"
                 size="lg"
               />
             )}
@@ -201,7 +203,7 @@ const FormModalComponent: FC<
                 step === 1 ? translate('Save') : translate('Confirm & save')
               }
               variant="primary"
-              className="min-w-125px"
+              className="min-w-[125px]"
               onClick={(event) => {
                 if (step === 1 && ignoredResources.length > 0) {
                   event.preventDefault();

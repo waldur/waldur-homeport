@@ -7,7 +7,7 @@
  * 25-950) come from colorRamps.css, which is GENERATED. Edit
  * tokens/colors.json and run `yarn tokens:generate`; never edit the output.
  * Sass reads none of these: the theme's Sass colours are only $white and
- * $black (src/metronic/sass/core/components/_variables.scss).
+ * $black (src/styles/bootstrap/_variables.scss).
  * See docs/design-tokens.md.
  *
  * Every ramp is physical: step 900 is dark in both themes. The dark theme is

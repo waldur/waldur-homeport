@@ -59,3 +59,50 @@ describe('useTableQuery retry', () => {
     expect(fallback).toHaveBeenCalledTimes(1);
   });
 });
+
+describe('useTableQuery while the next page loads', () => {
+  const pending = () => new Promise<never>(() => undefined);
+  const page = (name: string) => ({ rows: [{ uuid: name }], resultCount: 2 });
+
+  it("keeps the table's last rows until the next page arrives", async () => {
+    let next: (value) => void;
+    const fetchData = vi
+      .fn()
+      .mockResolvedValueOnce(page('first'))
+      .mockReturnValueOnce(new Promise((resolve) => (next = resolve)));
+    let currentPage = 1;
+    const { result, rerender } = renderHookWithProviders(() =>
+      useTableQuery({ ...options(fetchData), currentPage } as any),
+    );
+    await waitFor(() =>
+      expect(result.current.data?.rows).toEqual([{ uuid: 'first' }]),
+    );
+
+    currentPage = 2;
+    rerender();
+    await waitFor(() => expect(result.current.isFetching).toBe(true));
+    expect(result.current.data?.rows).toEqual([{ uuid: 'first' }]);
+
+    next(page('second'));
+    await waitFor(() =>
+      expect(result.current.data?.rows).toEqual([{ uuid: 'second' }]),
+    );
+  });
+
+  it("does not show another table's rows", async () => {
+    const fetchData = vi
+      .fn()
+      .mockResolvedValueOnce(page('first'))
+      .mockReturnValueOnce(pending());
+    let table = 'one';
+    const { result, rerender } = renderHookWithProviders(() =>
+      useTableQuery({ ...options(fetchData), table } as any),
+    );
+    await waitFor(() => expect(result.current.data?.rows).toHaveLength(1));
+
+    table = 'two';
+    rerender();
+    await waitFor(() => expect(result.current.isFetching).toBe(true));
+    expect(result.current.data).toBeUndefined();
+  });
+});

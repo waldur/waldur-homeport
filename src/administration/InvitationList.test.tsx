@@ -6,22 +6,14 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { INITIAL_STATE } from '@/table/constants';
-import { reducer as tableReducer } from '@/table/store';
+import { setTableQueryRows } from '@/table/mockTableQuery';
+import { tablesReducer } from '@/table/store';
 import { renderWithProviders } from '@/test/harness';
 
 import { InvitationList } from './InvitationList';
 
-// Rows are supplied through the seeded redux table state, so no real request
-// fires — the list renders through the real @/table/Table.
-vi.mock('@/table/useTableQuery', () => ({
-  useTableQuery: () => ({
-    data: undefined,
-    isLoading: false,
-    isFetching: false,
-    error: null,
-    refetch: vi.fn(),
-  }),
-}));
+// Serves the rows given to setTableQueryRows (none by default); no request fires.
+vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
 
 const invitation = {
   uuid: '5b9a1d3e6c7f4a8e9b2d1c0f3e4a5b6c',
@@ -37,17 +29,17 @@ const invitation = {
 
 // A real store, not redux-mock-store: expanding a row dispatches TOGGLE_ROW,
 // which only takes effect if the reducer actually runs.
-const makeStore = () =>
-  createStore(combineReducers({ tables: tableReducer }), {
+const makeStore = () => {
+  setTableQueryRows([invitation]);
+  return createStore(combineReducers({ tables: tablesReducer }), {
     tables: {
       'admin-invitations': {
         ...INITIAL_STATE,
-        entities: { [invitation.uuid]: invitation },
-        order: [invitation.uuid],
         pagination: { pageSize: 10, resultCount: 1, currentPage: 1 },
       },
     },
   } as any);
+};
 
 describe('InvitationList', () => {
   it('shows the invitation link in an expandable row', async () => {

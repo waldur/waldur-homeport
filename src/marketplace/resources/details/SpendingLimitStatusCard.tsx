@@ -1,4 +1,4 @@
-import { groupBy } from 'lodash-es';
+import { groupBy } from 'es-toolkit';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { SpendingLimitStatus } from 'waldur-js-client';

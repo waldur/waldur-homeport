@@ -144,7 +144,7 @@ export const OfferingComponentUsageExpandableRow: FC<
                   </span>
                 )}
               </div>
-              <div className="flex min-h-70px">
+              <div className="flex min-h-[70px]">
                 {isLoading ? (
                   <LoadingSpinner className="grow" />
                 ) : error ? (

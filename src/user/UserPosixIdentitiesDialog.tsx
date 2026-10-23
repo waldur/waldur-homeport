@@ -134,7 +134,7 @@ export const UserPosixIdentitiesDialog: FC<{
     <ModalDialog
       title={translate('POSIX identities')}
       footer={
-        <CloseDialogButton label={translate('Close')} className="w-150px" />
+        <CloseDialogButton label={translate('Close')} className="w-[150px]" />
       }
     >
       <p className="text-secondary text-xs mb-2">

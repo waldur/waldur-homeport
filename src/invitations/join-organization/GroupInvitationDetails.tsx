@@ -16,7 +16,7 @@ export const GroupInvitationDetails = ({
         <CloseDialogButton
           variant="primary"
           label={translate('OK')}
-          className="w-100px"
+          className="w-[100px]"
         />
       }
     >

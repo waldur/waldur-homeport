@@ -45,7 +45,11 @@ import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
 import { VStepperFormStepCard } from '@/wizard';
 
-import { formatSubnet, getDefaultFloatingIps } from '../utils';
+import {
+  formatSubnet,
+  formatSubnetName,
+  getDefaultFloatingIps,
+} from '../utils';
 
 import { FormSecurityGroupsField } from './FormSecurityGroupsField';
 import { FormSSHPublicKeysField } from './FormSSHPublicKeysField';
@@ -352,7 +356,7 @@ const renderNetworkRows = ({
                     required={true}
                     placeholder={translate('Select subnet')}
                     getOptionValue={(option) => option.url}
-                    getOptionLabel={(option) => option.name}
+                    getOptionLabel={formatSubnetName}
                     noUpdateOnBlur
                     spaceless
                     components={{ ValueContainer: SubnetValueContainer }}

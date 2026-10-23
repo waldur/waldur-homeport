@@ -36,13 +36,13 @@ const PageHero = ({ project }) => {
               key: 'project.dashboard',
               title: translate('View'),
               link: <Link state="project.dashboard" params={params} />,
-              className: 'text-center min-w-60px',
+              className: 'text-center min-w-[60px]',
             },
             {
               key: 'project-manage',
               title: translate('Edit'),
               link: <Link state="project-manage" params={params} />,
-              className: 'text-center min-w-60px',
+              className: 'text-center min-w-[60px]',
             },
           ]}
         />

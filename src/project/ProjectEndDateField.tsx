@@ -88,7 +88,7 @@ export const ProjectEndDateField: FC<{ row: Project }> = ({ row }) => {
               className="ms-1"
               tooltipProps={{
                 autoWidth: true,
-                contentClassName: 'mw-300px',
+                contentClassName: 'max-w-[300px]',
               }}
             />
           )

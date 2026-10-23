@@ -301,7 +301,7 @@ export const MultiChangeLimitsDialog: FC<MultiChangeLimitsDialogProps> = (
                         >
                           {/* Numeric input: keep it at a normal field width
                               instead of stretching to the full modal. */}
-                          <div className="mw-325px">
+                          <div className="max-w-[325px]">
                             <Field
                               name={`limits.${component.type}`}
                               validate={composeValidators(

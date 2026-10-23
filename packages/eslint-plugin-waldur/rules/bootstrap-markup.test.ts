@@ -34,7 +34,7 @@ describe('no-bootstrap-button-markup', () => {
     ],
     invalid: [
       {
-        code: 'const A = () => <button type="button" className="btn btn-danger min-w-125px" />;',
+        code: 'const A = () => <button type="button" className="btn btn-danger min-w-[125px]" />;',
         errors: [{ messageId: 'noBootstrapButtonMarkup' }],
       },
       {

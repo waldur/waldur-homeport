@@ -1,6 +1,6 @@
 import { screen, within, MatcherFunction } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { escapeRegExp } from 'lodash-es';
+import { escapeRegExp } from 'es-toolkit/compat';
 
 /**
  * Helpers for interacting with react-select / react-select-async-paginate

@@ -1,4 +1,4 @@
-import { merge } from 'lodash-es';
+import { merge } from 'es-toolkit/compat';
 import {
   marketplaceProviderOfferingsUpdateBackendIdRules,
   marketplaceProviderOfferingsUpdateIntegration,
@@ -104,23 +104,28 @@ export const useUpdateOfferingIntegration = (
   return { update };
 };
 
+// The update_backend_id_rules action replaces the whole backend_id_rules JSON
+// blob, but each inline EditField submits only its own path. Deep-merge the
+// partial change into the offering's current rules so sibling keys (e.g.
+// format.regex vs uniqueness.scope) are preserved. es-toolkit/compat's merge,
+// not the main entry's: that one takes two arguments and ignores the rest.
+export const mergeBackendIdRules = (
+  current: Record<string, any> | undefined,
+  change: Record<string, any> | undefined,
+) => merge({}, current ?? {}, change ?? {});
+
 export const useUpdateOfferingBackendIdRules = (
   offering: ProviderOfferingDetails,
   refetch?,
 ) => {
   const { mutateAsync: update } = useManagedMutation<any, any, any>({
-    // The update_backend_id_rules action replaces the whole backend_id_rules
-    // JSON blob, but each inline EditField submits only its own path. Deep-merge
-    // the partial change into the offering's current rules so sibling keys (e.g.
-    // format.regex vs uniqueness.scope) are preserved.
     mutationFn: (formData) =>
       marketplaceProviderOfferingsUpdateBackendIdRules({
         path: { uuid: offering.uuid },
         body: {
-          backend_id_rules: merge(
-            {},
-            offering.backend_id_rules ?? {},
-            formData.backend_id_rules ?? {},
+          backend_id_rules: mergeBackendIdRules(
+            offering.backend_id_rules,
+            formData.backend_id_rules,
           ),
         },
       }),

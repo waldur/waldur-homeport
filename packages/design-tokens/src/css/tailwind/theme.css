@@ -18,7 +18,7 @@
  * (background.css), `border-primary` is var(--border-primary) (borders.css).
  *
  * In waldur-homeport, Bootstrap no longer emits .text-/.bg-/.border- primary
- * or -secondary (src/metronic/sass/core/components/_utilities.scss), so
+ * or -secondary (src/styles/bootstrap/_utilities.scss), so
  * these are the only definitions there.
  *
  * State colours read the status matrix (semantic/status.css), named like

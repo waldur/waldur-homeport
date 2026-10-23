@@ -4,6 +4,7 @@ import { PublicMaintenanceAnnouncement } from 'waldur-js-client';
 import {
   getMaintenancesForOffering,
   isCurrentOrUpcoming,
+  isUnderway,
 } from './usePublicMaintenances';
 
 const OFFERING_UUID = 'offering-1';
@@ -51,6 +52,44 @@ describe('isCurrentOrUpcoming', () => {
     expect(
       isCurrentOrUpcoming(makeMaintenance({ scheduled_end: undefined })),
     ).toBe(true);
+  });
+});
+
+describe('isUnderway', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('is underway once started by the provider', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2050-01-01T09:00:00Z'));
+    expect(isUnderway(makeMaintenance({ state: 'In progress' }))).toBe(true);
+  });
+
+  it('is underway when still Scheduled but its window has opened', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2050-01-01T11:00:00Z'));
+    expect(isUnderway(makeMaintenance({}))).toBe(true);
+  });
+
+  it('is not underway before its window opens', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2050-01-01T09:00:00Z'));
+    expect(isUnderway(makeMaintenance({}))).toBe(false);
+  });
+
+  it('is not underway once its window has closed', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2050-01-01T13:00:00Z'));
+    expect(isUnderway(makeMaintenance({}))).toBe(false);
+  });
+
+  it('is underway with an open window and no scheduled end', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2050-01-01T11:00:00Z'));
+    expect(isUnderway(makeMaintenance({ scheduled_end: undefined }))).toBe(
+      true,
+    );
   });
 });
 

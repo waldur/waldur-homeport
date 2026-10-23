@@ -84,13 +84,13 @@ export const AdjustResourceDatesDialog: FunctionComponent<
             }
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   submitting={submitting}
                   label={translate('Save')}
                   disabled={invalid}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

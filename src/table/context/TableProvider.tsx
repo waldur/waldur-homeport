@@ -192,7 +192,6 @@ export function TableProvider<TData = any>({
         tableActions: props.tableActions,
         dropdownActions: props.dropdownActions,
         footer: props.footer,
-        tabs: props.tabs,
       },
 
       // Display
@@ -311,7 +310,6 @@ export function TableProvider<TData = any>({
       props.tableActions,
       props.dropdownActions,
       props.footer,
-      props.tabs,
       props.title,
       props.alterTitle,
       props.subtitle,

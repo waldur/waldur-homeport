@@ -47,7 +47,7 @@ export const PendingMembershipReviewDialog: FunctionComponent<
       footer={
         <>
           <CloseDialogButton
-            className="min-w-125px"
+            className="min-w-[125px]"
             label={translate('Remind me later')}
           />
           <BaseButton

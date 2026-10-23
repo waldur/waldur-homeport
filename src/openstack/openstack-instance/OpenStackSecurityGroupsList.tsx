@@ -115,7 +115,7 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
           <ManageSecurityGroupsButton resource={props.resource} />
         </div>
       </Card.Header>
-      <Card.Body className="min-h-300px">
+      <Card.Body className="min-h-[300px]">
         <Tabs value={activeKey} onValueChange={setActiveKey}>
           {ports?.length > 0 && (
             <TabsList scrollable>

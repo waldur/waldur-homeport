@@ -61,9 +61,9 @@ export const CookieSettingsDialog: FC<CookieSettingsDialogProps> = ({
           onClick={close}
         />
         <div className="flex gap-3">
-          <CloseDialogButton className="min-w-100px" onClick={close} />
+          <CloseDialogButton className="min-w-[100px]" onClick={close} />
           <CloseDialogButton
-            className="min-w-100px"
+            className="min-w-[100px]"
             label={translate('Save')}
             variant="primary"
             onClick={close}

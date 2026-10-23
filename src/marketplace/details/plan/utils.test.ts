@@ -1,7 +1,9 @@
+import { renderHook } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { BasePublicPlan, PublicOfferingDetails } from 'waldur-js-client';
 
-import { combinePrices } from './utils';
+import { Component, PricesData } from './types';
+import { combinePrices, useComponentsDetailPrices } from './utils';
 
 describe('combinePrices', () => {
   const createOffering = (
@@ -754,5 +756,51 @@ describe('combinePrices', () => {
       expect(disk.discountApplied).toBe(false);
       expect(disk.discountDeferred).toBe(true);
     });
+  });
+});
+
+describe('useComponentsDetailPrices', () => {
+  const component = (
+    billing_type: string,
+    subTotal: number,
+    limit_period?: string,
+  ) =>
+    ({
+      billing_type,
+      limit_period,
+      subTotal,
+      prices: [subTotal],
+    }) as Component;
+
+  const render = (components: Component[]) =>
+    renderHook(() =>
+      useComponentsDetailPrices({
+        components,
+        periods: ['month'],
+        total: 0,
+        totalPeriods: [],
+        periodKeys: [],
+      } as PricesData),
+    ).result.current;
+
+  it('sums the sub-totals of fixed and periodic limit rows, rounded to cents', () => {
+    const { periodic } = render([
+      component('fixed', 10.004),
+      component('fixed', 0),
+      component('limit', 5.5, 'month'),
+      component('limit', 2.25, 'annual'),
+      component('limit', 99, 'total'),
+    ]);
+
+    expect(periodic.total).toBe(17.75);
+    expect(periodic.limitedRowsByPeriod.month.total).toBe(5.5);
+    expect(periodic.limitedRowsByPeriod.annual.total).toBe(2.25);
+  });
+
+  it('gives zero totals when there are no rows to sum', () => {
+    const { periodic } = render([]);
+
+    expect(periodic.total).toBe(0);
+    expect(periodic.limitedRowsByPeriod.month.total).toBe(0);
   });
 });

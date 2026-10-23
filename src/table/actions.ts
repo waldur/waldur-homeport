@@ -8,9 +8,6 @@ export const FETCH_LIST_GOTO_PAGE = 'waldur/table/GOTO_PAGE';
 export const SET_MODE = 'waldur/table/SET_MODE';
 export const SET_FILTER_QUERY = 'waldur/table/SET_QUERY';
 export const RESET_PAGINATION = 'waldur/table/RESET_PAGINATION';
-export const ENTITY_CREATE = 'waldur/table/ENTITY_CREATE';
-export const ENTITY_UPDATE = 'waldur/table/ENTITY_UPDATE';
-export const ENTITY_DELETE = 'waldur/table/ENTITY_DELETE';
 export const PAGE_SIZE_UPDATE = 'waldur/table/PAGE_SIZE_UPDATE';
 export const SORT_LIST_START = 'waldur/table/SORT_LIST_START';
 export const SORT_LIST_DONE = 'waldur/table/SORT_LIST_DONE';
@@ -30,21 +27,15 @@ export const INIT_COLUMN_POSITIONS = 'waldur/table/INIT_COLUMN_POSITIONS';
 export const SWAP_COLUMNS = 'waldur/table/SWAP_COLUMNS';
 export const TOGGLE_COLUMN_PIN = 'waldur/table/TOGGLE_COLUMN_PIN';
 export const CLEAR_ALL_FILTERS = 'waldur/table/CLEAR_ALL_FILTERS';
+export const RESTORE_FILTERS = 'waldur/table/RESTORE_FILTERS';
 export const REGISTER_FILTER_NAME = 'waldur/table/REGISTER_FILTER_NAME';
 export const CLEAR_REGISTERED_FILTER_NAMES =
   'waldur/table/CLEAR_REGISTERED_FILTER_NAMES';
 
-export const fetchListDone = (
-  table: string,
-  entities: object,
-  order: string[],
-  resultCount: number,
-) => ({
+export const fetchListDone = (table: string, resultCount: number) => ({
   type: FETCH_LIST_DONE,
   payload: {
     table,
-    entities,
-    order,
     resultCount,
   },
 });
@@ -245,6 +236,17 @@ export const toggleColumnPin = (table: string, id: string) => ({
 export const clearAllFilters = (table: string) => ({
   type: CLEAR_ALL_FILTERS,
   payload: { table },
+});
+
+/** Puts back the filters (and selected saved filter) a table had earlier, e.g.
+ * when the filter panel is cancelled after its fields changed them. */
+export const restoreFilters = (
+  table: string,
+  filtersStorage: FilterItem[],
+  selectedSavedFilter: TableFiltersGroup | null,
+) => ({
+  type: RESTORE_FILTERS,
+  payload: { table, filtersStorage, selectedSavedFilter },
 });
 
 /** Record that a filter field with the given `name` is rendered by this table.

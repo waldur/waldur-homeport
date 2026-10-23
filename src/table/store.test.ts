@@ -1,10 +1,9 @@
 import { describe, it, expect } from 'vitest';
 
-import { initialState } from '@/table/store.fixture';
-
 import * as actions from './actions';
 import { getTableState } from './selectors';
-import { reducer } from './store';
+import { tablesReducer as reducer } from './store';
+import { FilterItem } from './types';
 
 describe('Table reducer', () => {
   it('should return default state', () => {
@@ -18,8 +17,6 @@ describe('Table reducer', () => {
         resultCount: 0,
         currentPage: 1,
       },
-      entities: {},
-      order: [],
       sorting: {
         mode: undefined,
         field: null,
@@ -67,6 +64,9 @@ describe('Table reducer', () => {
     expect(state.users.loading).toBe(false);
     expect(state.users.error).toBe(null);
     expect(state.users.pagination.resultCount).toBe(1);
+    // Rows live in React Query's cache only.
+    expect(state.users).not.toHaveProperty('entities');
+    expect(state.users).not.toHaveProperty('order');
   });
 
   // Leaf filters self-register their name so the table can tell its own filter
@@ -127,128 +127,6 @@ describe('Table reducer', () => {
     expect(state.users.pagination.currentPage).toBe(3);
   });
 
-  it('should handle ENTITY_CREATE action', () => {
-    const prevState = reducer(
-      {},
-      {
-        type: actions.FETCH_LIST_DONE,
-        payload: {
-          table: 'users',
-          entities: initialState.entities,
-          order: initialState.order,
-          resultCount: 2,
-        },
-      },
-    );
-    const state: any = reducer(prevState, {
-      type: actions.ENTITY_CREATE,
-      payload: {
-        table: 'users',
-        uuid: '52ff72e159d7472fb35d4db517e6c16k',
-        content: {
-          uuid: '52ff72e159d7472fb35d4db517e6c16k',
-          full_name: 'John Brown',
-          email: 'john@gmail.com',
-        },
-      },
-    });
-    expect(state.users.entities).toEqual({
-      '10ff42e159d7472fb35d4db517e6c16e': {
-        uuid: '10ff42e159d7472fb35d4db517e6c16e',
-        full_name: 'Dereck Benon',
-        email: 'dereck@gmail.com',
-      },
-      '412ff42e159g7472fb3524db517e65165': {
-        uuid: '412ff42e159g7472fb3524db517e65165',
-        full_name: 'Alice Grown',
-        email: 'alice@gmail.com',
-      },
-      '52ff72e159d7472fb35d4db517e6c16k': {
-        uuid: '52ff72e159d7472fb35d4db517e6c16k',
-        full_name: 'John Brown',
-        email: 'john@gmail.com',
-      },
-    });
-    expect(state.users.order).toEqual([
-      '10ff42e159d7472fb35d4db517e6c16e',
-      '412ff42e159g7472fb3524db517e65165',
-      '52ff72e159d7472fb35d4db517e6c16k',
-    ]);
-  });
-
-  it('should handle ENTITY_UPDATE action', () => {
-    const prevState = reducer(
-      {},
-      {
-        type: actions.FETCH_LIST_DONE,
-        payload: {
-          table: 'users',
-          entities: initialState.entities,
-          order: initialState.order,
-          resultCount: 2,
-        },
-      },
-    );
-    const state: any = reducer(prevState, {
-      type: actions.ENTITY_UPDATE,
-      payload: {
-        table: 'users',
-        uuid: '10ff42e159d7472fb35d4db517e6c16e',
-        content: {
-          uuid: '10ff42e159d7472fb35d4db517e6c16e',
-          full_name: 'Derek',
-          email: 'derek@gmail.com',
-        },
-      },
-    });
-    expect(state.users.entities).toEqual({
-      '10ff42e159d7472fb35d4db517e6c16e': {
-        uuid: '10ff42e159d7472fb35d4db517e6c16e',
-        full_name: 'Derek',
-        email: 'derek@gmail.com',
-      },
-      '412ff42e159g7472fb3524db517e65165': {
-        uuid: '412ff42e159g7472fb3524db517e65165',
-        full_name: 'Alice Grown',
-        email: 'alice@gmail.com',
-      },
-    });
-    expect(state.users.order).toEqual([
-      '10ff42e159d7472fb35d4db517e6c16e',
-      '412ff42e159g7472fb3524db517e65165',
-    ]);
-  });
-
-  it('should handle ENTITY_DELETE action', () => {
-    const prevState = reducer(
-      {},
-      {
-        type: actions.FETCH_LIST_DONE,
-        payload: {
-          table: 'users',
-          entities: initialState.entities,
-          order: initialState.order,
-          resultCount: 2,
-        },
-      },
-    );
-    const state: any = reducer(prevState, {
-      type: actions.ENTITY_DELETE,
-      payload: {
-        table: 'users',
-        uuid: '10ff42e159d7472fb35d4db517e6c16e',
-      },
-    });
-    expect(state.users.entities).toEqual({
-      '412ff42e159g7472fb3524db517e65165': {
-        uuid: '412ff42e159g7472fb3524db517e65165',
-        full_name: 'Alice Grown',
-        email: 'alice@gmail.com',
-      },
-    });
-    expect(state.users.order).toEqual(['412ff42e159g7472fb3524db517e65165']);
-  });
-
   it('should handle PAGE_SIZE_UPDATE action', () => {
     const state: any = reducer(
       {},
@@ -297,5 +175,50 @@ describe('Table reducer', () => {
       },
     );
     expect(state.users.toggled).toEqual({ 10: true });
+  });
+
+  describe('setFilter', () => {
+    // The reducer compares the component by reference, so share one.
+    const OrganizationFilter = (() => null) as FilterItem['component'];
+    const filter = (value): FilterItem => ({
+      name: 'organization',
+      label: 'Organization',
+      value,
+      component: OrganizationFilter,
+    });
+    const withFilter = reducer(
+      {},
+      actions.setFilter(
+        'users',
+        filter({ uuid: 'o1', meta: { tags: ['a', 'b'], since: 3 } }),
+      ),
+    );
+
+    it('keeps the state when the value is equal, in a different key order', () => {
+      const state = reducer(
+        withFilter,
+        actions.setFilter(
+          'users',
+          filter({ meta: { since: 3, tags: ['a', 'b'] }, uuid: 'o1' }),
+        ),
+      );
+      // tablesReducer always copies the outer object; the table's own state
+      // is what stays the same.
+      expect(state.users).toBe(withFilter.users);
+    });
+
+    it('replaces the filter when a nested value changes', () => {
+      const state = reducer(
+        withFilter,
+        actions.setFilter(
+          'users',
+          filter({ uuid: 'o1', meta: { tags: ['b', 'a'], since: 3 } }),
+        ),
+      );
+      expect(state.users).not.toBe(withFilter.users);
+      expect(state.users.filtersStorage).toEqual([
+        filter({ uuid: 'o1', meta: { tags: ['b', 'a'], since: 3 } }),
+      ]);
+    });
   });
 });

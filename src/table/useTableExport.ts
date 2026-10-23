@@ -1,5 +1,4 @@
-import { isEqual } from 'lodash-es';
-import { useMemo } from 'react';
+import { isEqual } from 'es-toolkit';
 import { useSelector } from 'react-redux';
 
 import { translate } from 'waldur-i18n-runtime';
@@ -7,14 +6,13 @@ import { useNotify } from 'waldur-notifications';
 import { useModal } from 'waldur-ui';
 
 import { isEmpty, orderByFilter } from '@/core/utils';
-import { type RootState } from '@/store/reducers';
 import { fetchAll } from '@/table/api';
 
 import { DASH_ESCAPE_CODE } from './constants';
 import exportAs from './exporters';
 import { ExportConfig } from './exporters/types';
 import { getTableOptions } from './registry';
-import { makeSelectTableRows, getTableState } from './selectors';
+import { getTableState } from './selectors';
 import { TableRequest } from './types';
 
 export function useTableExport(table, props?) {
@@ -30,8 +28,9 @@ export function useTableExport(table, props?) {
   } = getTableOptions(table);
 
   const tableState = useSelector(getTableState(table));
-  const selectRows = useMemo(() => makeSelectTableRows(), []);
-  let rows = useSelector((state: RootState) => selectRows(state, table));
+  // The rows on screen, from the table that opened the dialog; all-pages export
+  // fetches its own below.
+  let rows = props?.rows ?? [];
   const customExport = Boolean(exportFields || exportRow);
 
   async function fetchRows(config) {

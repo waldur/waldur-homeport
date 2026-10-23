@@ -46,7 +46,9 @@ export const ChatHistorySidebar: FC = () => {
 
   const handleNewChat = useCallback(() => {
     runtime.threads.switchToNewThread();
-  }, [runtime]);
+    // Below lg the history covers the chat; starting a new one closes it.
+    drawer?.setHistoryOpen(false);
+  }, [runtime, drawer]);
 
   const handleSwitchThread = useCallback(
     (threadId: string) => {

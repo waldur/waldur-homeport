@@ -1,4 +1,4 @@
-import { capitalize, pick } from 'lodash-es';
+import { capitalize, pick } from 'es-toolkit/compat';
 import { useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { overrideSettings } from 'waldur-js-client';

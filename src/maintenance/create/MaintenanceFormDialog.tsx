@@ -158,7 +158,7 @@ export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
           <PlusCircleIcon weight="bold" />
         ),
         iconColor: 'success',
-        bodyClassName: 'h-500px',
+        bodyClassName: 'h-[500px]',
       }}
     />
   );

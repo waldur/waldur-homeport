@@ -193,7 +193,7 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
       // dialog used to grow and shrink as the applicant moved through it, which
       // slid the footer buttons out from under the cursor. pb-0 because the
       // footer supplies the gap below.
-      modalProps={{ bodyClassName: 'min-h-550px pb-0' }}
+      modalProps={{ bodyClassName: 'min-h-[550px] pb-0' }}
       data={{
         call: {
           uuid: props.resolve.proposal.call_uuid,

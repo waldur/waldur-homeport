@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit';
 import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import {

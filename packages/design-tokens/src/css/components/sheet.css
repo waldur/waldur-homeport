@@ -7,7 +7,7 @@
  */
 :root {
   /* Real Metronic source:
-     core/components/_variables.scss's $drawer map
+     the $drawer map in Metronic's former core/components/_variables.scss
      (box-shadow/overlay-bg-color, Metronic's mobile slide-in panel,
      directly analogous to Sheet.tsx), read from the SCSS source. */
   --drawer-shadow: 0px 1px 9px -3px rgba(0, 0, 0, 0.05);

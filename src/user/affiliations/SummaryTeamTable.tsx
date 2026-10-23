@@ -115,7 +115,7 @@ export const SummaryTeamTable: FC<OwnProps> = ({
           title: translate('Username'),
           render: ({ row }) => getValue(row, 'username'),
           copyField: (row) => getValue(row, 'username'),
-          className: 'w-25',
+          className: 'w-1/4',
         },
         {
           title: translate('Email'),
@@ -128,12 +128,12 @@ export const SummaryTeamTable: FC<OwnProps> = ({
               ? translate('Role in organization')
               : translate('Role in project'),
           render: RoleField,
-          className: 'w-25',
+          className: 'w-1/4',
         },
         {
           title: translate('Role expiration'),
           render: ({ row }) => renderRoleExpirationDate(row),
-          className: 'w-45px',
+          className: 'w-[45px]',
         },
       ]}
       verboseName={translate('Team members')}

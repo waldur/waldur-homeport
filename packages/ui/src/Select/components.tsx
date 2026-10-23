@@ -3,7 +3,7 @@ import {
   MagnifyingGlassIcon,
   XIcon,
 } from '@phosphor-icons/react';
-import { uniqueId } from 'lodash-es';
+import { useId } from 'react';
 import {
   ClearIndicatorProps,
   components,
@@ -140,6 +140,7 @@ export const MultiSelectValue = (props: MultiValueProps) => (
 );
 
 export const MultiSelectLimitedValueContainer = (props) => {
+  const tooltipId = useId();
   if (!props.hasValue) {
     return (
       <components.ValueContainer {...props}>
@@ -159,7 +160,7 @@ export const MultiSelectLimitedValueContainer = (props) => {
 
       {hiddenValues.length > 0 && (
         <Tooltip
-          id={uniqueId('tip-multiselect')}
+          id={tooltipId}
           label={hiddenValues.map((child) => child.props?.children).join(', ')}
         >
           <div className="inline-block">

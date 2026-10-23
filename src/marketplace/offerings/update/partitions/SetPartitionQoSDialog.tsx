@@ -99,12 +99,12 @@ export const SetPartitionQoSDialog: FC<SetPartitionQoSDialogProps> = ({
               })}
               footer={
                 <>
-                  <CloseDialogButton className="w-125px" />
+                  <CloseDialogButton className="w-[125px]" />
                   <SubmitButton
                     submitting={submitting}
                     label={translate('Save')}
                     variant="primary"
-                    className="w-125px"
+                    className="w-[125px]"
                   />
                 </>
               }

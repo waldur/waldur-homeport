@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
-import { sortBy } from 'lodash-es';
 import { FC, useMemo } from 'react';
 import {
   marketplacePublicOfferingsList,
@@ -135,15 +134,13 @@ export const ResourceUsageLimits: FC<{
   }
   // Closest to its limit first, so the inline summary shows what matters;
   // components without a limit keep their offering order after them.
-  const items = sortBy(
-    (
-      offerings.find((offering) => offering.uuid === row.offering_uuid)
-        ?.components || []
-    )
-      .filter(isMeasuredComponent)
-      .map((component) => getComponentUsage(component, row)),
-    (item) => -(item.percent ?? -1),
-  );
+  const items = (
+    offerings.find((offering) => offering.uuid === row.offering_uuid)
+      ?.components || []
+  )
+    .filter(isMeasuredComponent)
+    .map((component) => getComponentUsage(component, row))
+    .sort((a, b) => (b.percent ?? -1) - (a.percent ?? -1));
   if (!items.length) {
     return <>{DASH_ESCAPE_CODE}</>;
   }

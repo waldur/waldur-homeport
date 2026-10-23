@@ -2,8 +2,8 @@
  * Text input and textarea tokens for waldur-ui's Input and Textarea.
  *
  * Every value is the one the Bootstrap/Metronic `.form-control` stylesheet
- * resolved to (src/metronic/sass/core/components/forms/_form-control.scss,
- * src/metronic/sass/custom/_forms.scss and the `$input-*` overrides,
+ * resolved to (the former forms/_form-control.scss and
+ * custom/_forms.scss and the `$input-*` overrides,
  * the former `$form-feedback-*` ones included):
  *
  *   bg                    $input-bg                        bg-primary

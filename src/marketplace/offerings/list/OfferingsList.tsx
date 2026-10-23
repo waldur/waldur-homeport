@@ -187,7 +187,9 @@ export const BaseOfferingsList: FunctionComponent<{
       {...props}
       {...tabTableProps(portal)}
       placeholderActions={
-        showActions && <CreateOfferingButton className="w-175px mw-350px" />
+        showActions && (
+          <CreateOfferingButton className="w-[175px] max-w-[350px]" />
+        )
       }
       tableActions={
         showActions &&

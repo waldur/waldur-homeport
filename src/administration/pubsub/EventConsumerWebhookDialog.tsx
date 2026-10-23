@@ -164,13 +164,13 @@ export const EventConsumerWebhookDialog: FC<
             )}
             footer={
               <>
-                <CloseDialogButton className="w-175px" />
+                <CloseDialogButton className="w-[175px]" />
                 <SubmitButton
                   disabled={invalid || pristine}
                   submitting={submitting}
                   label={isEdit ? translate('Save') : translate('Create')}
                   variant="primary"
-                  className="w-175px"
+                  className="w-[175px]"
                 />
               </>
             }

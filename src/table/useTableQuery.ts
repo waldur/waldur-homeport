@@ -1,12 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { concat, uniq } from 'lodash-es';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { useDebouncedValue } from '@/core/useDebouncedValue';
 import { orderByFilter } from '@/core/utils';
 
 import { Fetcher, Sorting, TableRequest } from './types';
-import { transformRows } from './utils';
 
 interface UseTableQueryOptions {
   table: string;
@@ -27,8 +25,6 @@ interface UseTableQueryOptions {
 }
 
 interface TableQueryData<RowType = any> {
-  entities: Record<string, RowType>;
-  order: string[];
   resultCount: number;
   rows: RowType[];
   invalidPage?: boolean;
@@ -75,10 +71,12 @@ export function useTableQuery<RowType = any>(
       const activeFields = Object.values(activeColumns)
         .filter(Boolean)
         .flat() as string[];
-      result = uniq(concat(customFields, activeFields));
+      result = [
+        ...new Set(([] as string[]).concat(customFields, activeFields)),
+      ];
     }
     if (mandatoryFields) {
-      result = uniq(concat(result, mandatoryFields));
+      result = [...new Set([...result, ...mandatoryFields])];
     }
     return result;
   }, [filter?.field, activeColumns, mandatoryFields]);
@@ -161,10 +159,7 @@ export function useTableQuery<RowType = any>(
       const request = buildRequest(signal);
       try {
         const response = await fetchData(request);
-        const { entities, order } = transformRows(response.rows);
         return {
-          entities,
-          order,
           resultCount: response.resultCount ?? response.rows.length,
           rows: response.rows,
         };
@@ -177,8 +172,6 @@ export function useTableQuery<RowType = any>(
           (err as any)?.detail || (err as any)?.response?.data?.detail;
         if (detail === 'Invalid page.') {
           return {
-            entities: {},
-            order: [],
             resultCount: 0,
             rows: [],
             invalidPage: true,
@@ -187,6 +180,10 @@ export function useTableQuery<RowType = any>(
         throw err;
       }
     },
+    // While the next page, sort or search loads, keep showing this table's
+    // last rows under the loading mask rather than an empty table.
+    placeholderData: (previousData, previousQuery) =>
+      previousQuery?.queryKey[1] === table ? previousData : undefined,
     staleTime,
     ...(retry !== undefined && { retry }),
     ...(meta && { meta }),

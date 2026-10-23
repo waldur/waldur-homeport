@@ -38,12 +38,12 @@ export const GLAuthConfigDialog: FC<OwnProps> = (props) => {
           <CopyToClipboard
             value={props.resolve.config}
             label={translate('Copy')}
-            className="w-150px"
+            className="w-[150px]"
           />
         )
       }
       footer={
-        <CloseDialogButton label={translate('Close')} className="w-150px" />
+        <CloseDialogButton label={translate('Close')} className="w-[150px]" />
       }
     >
       <Tabs

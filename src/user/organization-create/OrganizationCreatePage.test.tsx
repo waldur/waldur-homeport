@@ -1,7 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useRouter } from '@uirouter/react';
-import { noop } from 'lodash-es';
 import {
   afterAll,
   beforeAll,
@@ -97,9 +96,12 @@ const fillManualStep2Fields = async () => {
   await userEvent.type(nameInput, 'Test Organization');
 };
 
+// Shared by on and off, which need the same function to detach it.
+const ignoreRejection = () => {};
+
 describe('OrganizationCreatePage', () => {
-  beforeAll(() => process.on('unhandledRejection', noop));
-  afterAll(() => process.off('unhandledRejection', noop));
+  beforeAll(() => process.on('unhandledRejection', ignoreRejection));
+  afterAll(() => process.off('unhandledRejection', ignoreRejection));
 
   beforeEach(() => {
     vi.clearAllMocks();

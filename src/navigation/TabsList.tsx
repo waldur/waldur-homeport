@@ -6,7 +6,7 @@ import {
   useOnStateChanged,
   useRouter,
 } from '@uirouter/react';
-import { isMatch } from 'lodash-es';
+import { isMatch } from 'es-toolkit/compat';
 import {
   FC,
   KeyboardEvent as ReactKeyboardEvent,
@@ -175,7 +175,7 @@ const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
       </li>
       <Menu.Content
         align="start"
-        className="font-semibold text-sm py-2 w-200px"
+        className="font-semibold text-sm py-2 w-[200px]"
         onKeyDown={handleContentKeyDown}
         onCloseAutoFocus={handleCloseAutoFocus}
       >

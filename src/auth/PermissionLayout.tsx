@@ -87,12 +87,12 @@ const RestrictedView = () => {
   return (
     <Card className="card-bordered">
       <Card.Body>
-        <div className="flex flex-col items-center justify-center my-10 my-xl-20 min-h-150px">
+        <div className="flex flex-col items-center justify-center my-10 my-xl-20 min-h-[150px]">
           <span className="svg-icon mb-6 svg-icon-5x text-danger">
             <ShieldWarningIcon weight="bold" />
           </span>
           <h3 className="text-danger mb-4">{pageMessage.title}</h3>
-          <p className="mb-10 text-primary mw-400px text-center">
+          <p className="mb-10 text-primary max-w-[400px] text-center">
             {pageMessage.message}
           </p>
           <Link state="profile.details" buttonVariant="primary">

@@ -10,7 +10,7 @@ Every tab bar in HomePort is built from `waldur-ui` primitives (`Tabs`, `TabNav`
 | changes the URL; the router draws the panel (no panels here)            | `TabNav` with link `items`                                                        |
 | switches panels that are tables, in an expandable row or a card section | `EmbeddedTabs` (`@/table/EmbeddedTabs`)                                           |
 | shares one card header and toolbar between several tables               | `TableWithTabs` (see [layout-wrappers](table/layout-wrappers.md))                 |
-| is a table's own router-driven sub-navigation (`tabs` prop of `Table`)  | `TableNav` (formerly `TableTabs`), a `TabNav`                                     |
+| is a table's own router-driven sub-navigation (`tabs` prop of `Table`)  | `TableNav` (formerly `TableTabs`), a `TabNav`; `BaseTable` takes any bar as `nav` |
 | groups form fields into URL-synced, searchable sections                 | `TabbedSection` (see [forms.md](forms.md))                                        |
 | is a segmented bar over a few large panels (e.g. the sign-in method)    | `Tabs` with `TabsList variant="segmented"`, see [Segmented tabs](#segmented-tabs) |
 | is a two-or-three-way view switch rather than tabs of content           | `SegmentedControl` (see [a11y-decision-matrix.md](a11y-decision-matrix.md))       |
@@ -152,7 +152,7 @@ import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 <EmbeddedTabs
   framed
   defaultValue="projects"
-  className="min-h-375px"
+  className="min-h-[375px]"
   tabs={[
     {
       key: 'projects',
@@ -242,7 +242,7 @@ Use this instead of `SegmentedControl` whenever each option owns a distinct, lar
   **Don't make every param dynamic.** `dynamic` only helps a param the page rewrites with `stateService.go` on the _same_ state while it is mounted, and only if the page reads that param reactively (`useCurrentStateAndParams`, `useUrlTab`). Leave it alone when:
 
   - the page reads it **once at mount** (`useState(params.mode)`), because a remount is what picks up a new value. The reporting analytics routes' `?mode` is the example: made dynamic, a deep link to another mode would leave the page stale;
-  - it is a **table filter**, because filters are written with `router.urlService.url(...)` (`src/core/filters.ts`), which updates the URL without a state transition, so the page never remounts for them;
+  - it is a **table filter**, because filters are written with `router.urlService.url(...)` (homeport's table host, `src/core/tableHost.ts`), which updates the URL without a state transition, so the page never remounts for them;
   - it is only set **on entry** (`?token=…`, `?review_uuid=…`, links from other pages).
 
   The rule is limited to `tab`, `q` and `*_tab` / `*Tab` for that reason. A tab bar driven by another param name (the call lists use `?state`) has to be declared dynamic by hand, after checking that the page reads the param reactively.

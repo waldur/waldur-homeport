@@ -98,7 +98,7 @@ export const ProposalUsersListSummary: FC<{
   return (
     <EmbeddedTabs
       defaultValue="users"
-      className="min-h-175px"
+      className="min-h-[175px]"
       tabs={[
         {
           key: 'users',

@@ -98,13 +98,13 @@ export const PublicationFormDialog = ({
             iconColor={isEdit ? 'warning' : 'success'}
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   submitting={submitting}
                   disabled={invalid}
                   label={isEdit ? translate('Update') : translate('Add')}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

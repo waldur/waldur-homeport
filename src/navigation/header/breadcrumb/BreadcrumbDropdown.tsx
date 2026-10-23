@@ -1,5 +1,5 @@
 import { FunnelSimpleIcon } from '@phosphor-icons/react';
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit';
 import {
   KeyboardEvent,
   MouseEvent,

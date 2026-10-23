@@ -1,4 +1,4 @@
-import { get } from 'lodash-es';
+import { get } from 'es-toolkit/compat';
 import { DateTime } from 'luxon';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
@@ -182,7 +182,7 @@ const PrepaidMonthsSelector = ({
   );
 
   // Requests written before the switch carry an end date instead of a length.
-  const storedEndDate = get(values, 'attributes.end_date');
+  const storedEndDate = values?.attributes?.end_date;
 
   // Seed the field, and snap it back when the choice stops being offered.
   // Declared before the effect that clears the stored end date so that it still
@@ -263,7 +263,7 @@ const PrepaidMonthsSelector = ({
       }
       value={
         <div>
-          <div className="mw-200px">
+          <div className="max-w-[200px]">
             <Field name={mode.name}>
               {({ input, meta }) => (
                 <SelectField

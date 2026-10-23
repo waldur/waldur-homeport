@@ -52,7 +52,7 @@ export const NameGroup = ({
             <small className="text-quaternary me-2">
               {translate('Loading projects')}
             </small>
-            <LoadingSpinnerSimple className="mb-2 w-20px h-20px" />
+            <LoadingSpinnerSimple className="mb-2 w-[20px] h-[20px]" />
           </div>
         ) : null
       }

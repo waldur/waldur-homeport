@@ -2,19 +2,22 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
+import { setTableQueryRows } from '@/table/mockTableQuery';
 import { TableState } from '@/table/types';
 import { renderWithProviders } from '@/test/harness';
 
 const fakeInstance = { uuid: 'test-uuid', state: 'OK' };
 
-export const renderTable = (Component, tableId, rowId, row) => {
+/**
+ * Renders a table component with one row. The test file must also stand in
+ * for the table query:
+ *   vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
+ */
+export const renderTable = (Component, tableId, _rowId, row) => {
+  setTableQueryRows([row]);
   const mockStore = configureStore();
   const state: TableState = {
     loading: false,
-    entities: {
-      [rowId]: row,
-    },
-    order: [rowId],
     pagination: {
       pageSize: 10,
       resultCount: 1,
