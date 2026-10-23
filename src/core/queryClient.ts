@@ -1,11 +1,12 @@
 import { QueryCache, QueryClient } from '@tanstack/react-query';
 
 import { retryServerErrors } from '@/core/queryRetry';
-import { goToNotFound } from '@/error/utils';
-import { router } from '@/router';
+import { getErrorStatus, goToErrorPage } from '@/error/utils';
 
 /** Key of the root suspense query that bootstraps the app (Application.tsx). */
 export const BOOTSTRAP_QUERY_KEY = ['Application'];
+
+const QUERY_REDIRECT_STATUSES = [404, 428];
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,17 +31,13 @@ export const queryClient = new QueryClient({
       if (detail === 'Invalid page.') {
         return;
       }
-      if (error?.response?.status === 403) {
-        router.stateService.target('errorPage.noPermission');
-      } else if (error?.response?.status === 428) {
-        // HTTP 428 Precondition Required - user profile incomplete with enforcement enabled
-        router.stateService.go('profile-manage');
-      } else if (error?.response?.status === 500) {
-        router.stateService.target('errorPage.serverError');
-      } else if (error?.response?.status === 503) {
-        router.stateService.target('errorPage.serviceNotAvailable');
-      } else if (error?.response?.status == 404) {
-        goToNotFound();
+      // Only a missing resource (404) and an incomplete profile (428) leave
+      // the page. Any other failure is left to the component that asked:
+      // tables and most queries render their own error state with a retry,
+      // and redirecting the whole page because one section failed would hide
+      // everything else on it.
+      if (QUERY_REDIRECT_STATUSES.includes(getErrorStatus(error))) {
+        goToErrorPage(error);
       }
     },
   }),

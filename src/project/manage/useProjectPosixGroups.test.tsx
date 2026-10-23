@@ -9,51 +9,61 @@ import { renderHookWithProviders } from '@/test/harness';
 
 import { useProjectPosixGroups } from './useProjectPosixGroups';
 
-vi.mock('@/error/utils', () => ({ goToNotFound: vi.fn() }));
 vi.mock('@/features/connect', () => ({ isFeatureVisible: vi.fn(() => true) }));
 
 // What the SDK's fetch client rejects with: the body's keys plus the
 // transport fields that its error interceptor puts next to them.
-const serverError = {
-  detail: 'Internal error.',
-  response: { status: 500 },
-  status: 500,
-  statusText: 'Internal Server Error',
+const apiError = (status: number, statusText: string) => ({
+  detail: statusText,
+  response: { status },
+  status,
+  statusText,
   url: 'http://localhost/api/marketplace-project-posix-groups/',
-};
+});
+const serverError = apiError(500, 'Internal Server Error');
+const notFoundError = apiError(404, 'Not Found');
 
 describe('useProjectPosixGroups error handling', () => {
   afterEach(() => {
     queryClient.clear();
   });
 
-  it('keeps the page in place on a server error, for the tab to show it', async () => {
-    vi.mocked(router.stateService.target).mockClear();
-    vi.mocked(marketplaceProjectPosixGroupsList).mockRejectedValue(serverError);
+  it.each([
+    ['a server error', serverError],
+    ['a missing list', notFoundError],
+  ])(
+    'keeps the page in place on %s, for the tab to show it',
+    async (_name, error) => {
+      vi.mocked(router.stateService.go).mockClear();
+      vi.mocked(marketplaceProjectPosixGroupsList).mockRejectedValue(error);
 
-    const { result } = renderHookWithProviders(
-      () => useProjectPosixGroups('p-500'),
-      { queryClient },
-    );
+      const { result } = renderHookWithProviders(
+        () => useProjectPosixGroups(`p-${error.status}`),
+        { queryClient },
+      );
 
-    await waitFor(() => expect(result.current.isError).toBe(true), {
-      timeout: 4000,
-    });
-    expect(router.stateService.target).not.toHaveBeenCalled();
-  });
+      await waitFor(() => expect(result.current.isError).toBe(true), {
+        timeout: 4000,
+      });
+      expect(router.stateService.go).not.toHaveBeenCalled();
+    },
+  );
 
-  it('is needed: the same error without the opt-out redirects', async () => {
-    vi.mocked(router.stateService.target).mockClear();
+  // A 404 is what still redirects without the opt-out; see queryClient.test.ts.
+  it('is needed: the same 404 without the opt-out redirects', async () => {
+    vi.mocked(router.stateService.go).mockClear();
     await queryClient
       .fetchQuery({
         queryKey: ['control-without-opt-out'],
-        queryFn: () => Promise.reject(serverError),
+        queryFn: () => Promise.reject(notFoundError),
         retry: false,
       })
       .catch(() => undefined);
 
-    expect(router.stateService.target).toHaveBeenCalledWith(
-      'errorPage.serverError',
+    expect(router.stateService.go).toHaveBeenCalledWith(
+      'errorPage.notFound',
+      undefined,
+      { location: false },
     );
   });
 });
