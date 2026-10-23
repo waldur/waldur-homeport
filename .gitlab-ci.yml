@@ -594,6 +594,12 @@ Trigger integration tests:
     project: waldur/waldur-integration-testing
     branch: main
     strategy: depend
+    # A bridge passes its needs' dotenv variables (E2E_SUITES, below) only with
+    # pipeline_variables on. It also passes this pipeline's own run and
+    # schedule variables; the one schedule sets SKIP_TESTS, which the rules
+    # below already stop at this bridge.
+    forward:
+      pipeline_variables: true
   # Without `needs:` this bridge is only stage-ordered, so it could not start
   # until every job in `test`, `build` and `release` had finished — including the
   # ~15-minute "Run E2E visual tests" job, which is `allow_failure: true` and so
@@ -607,6 +613,12 @@ Trigger integration tests:
       optional: true
     - job: Publish latest docker image
       optional: true
+    # Its dotenv carries E2E_SUITES, the E2E areas this change can affect;
+    # downstream a job runs only for its areas or "all". Without it every job
+    # runs. See "Select E2E suites".
+    - job: Select E2E suites
+      optional: true
+      artifacts: true
   # TRIGGER_SOURCE lets the downstream E2E suite skip backend-only jobs
   # (ansible, mitogen, terraform, SCIM, GLAuth, OpenPortal, waldur-cli) that
   # drive the Mastermind API directly and start no browser. The OIDC suite is
@@ -620,6 +632,10 @@ Trigger integration tests:
   # suite. The include-list is a
   # positive filter: it matches whenever any runtime-affecting path changed.
   rules:
+    # Skip tests if said so. Without this the "Lint latest docker image"
+    # schedule ran the whole suite against :latest.
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
+      when: never
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes: &integration_test_changes
         - src/**/*
@@ -642,6 +658,31 @@ Trigger integration tests:
       changes: *integration_test_changes
       variables:
         WALDUR_HOMEPORT_IMAGE: "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-e2e"
+
+# Names the E2E areas this merge request can affect (scripts/select-e2e-suites.mjs)
+# as E2E_SUITES, which "Trigger integration tests" forwards downstream: an
+# OpenStack-only change runs the OpenStack suites, not all of them. Develop gets
+# "all". Same rules as the trigger, and no yarn install: node and git suffice.
+Select E2E suites:
+  stage: test
+  interruptible: true
+  needs: []
+  cache: []
+  before_script:
+    - apk add --no-cache git
+  rules:
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      changes: *integration_test_changes
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes: *integration_test_changes
+  script:
+    - node scripts/select-e2e-suites.mjs | tee e2e-suites.env
+  artifacts:
+    expire_in: 1 day
+    reports:
+      dotenv: e2e-suites.env
 
 Test k8s deployment:
   stage: validate
