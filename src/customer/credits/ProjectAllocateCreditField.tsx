@@ -1,13 +1,14 @@
 import { FC, useMemo } from 'react';
 
 import { ENV } from '@/core/config';
+import { defaultCurrency } from '@/core/formatCurrency';
 import {
   composeValidators,
   lessThanOrEqual,
   required,
 } from '@/core/validators';
 import { NumberGroup } from '@/form';
-import { formatJsxTemplate, translate } from '@/i18n';
+import { translate } from '@/i18n';
 
 export const ProjectAllocateCreditField: FC<{
   organizationCredit: number | string;
@@ -22,10 +23,7 @@ export const ProjectAllocateCreditField: FC<{
     [organizationCredit],
   );
 
-  const valueFieldDescriptionData = {
-    currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-    credits: organizationCredit ?? 0,
-  };
+  const credits = defaultCurrency(organizationCredit ?? 0);
   return (
     <NumberGroup
       name="value"
@@ -35,14 +33,12 @@ export const ProjectAllocateCreditField: FC<{
       description={
         isEdit
           ? translate(
-              'Previously saved credit value for this organization: {currency} {credits}',
-              valueFieldDescriptionData,
-              formatJsxTemplate,
+              'Previously saved credit value for this organization: {credits}',
+              { credits },
             )
           : translate(
-              'Credits available for this organization: {currency} {credits}',
-              valueFieldDescriptionData,
-              formatJsxTemplate,
+              'Credits available for this organization: {customer_credit}',
+              { customer_credit: credits },
             )
       }
       validate={validate}
