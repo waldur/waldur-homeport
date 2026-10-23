@@ -7,8 +7,8 @@
  */
 :root {
   /* Spacing and dimensions matching live Metronic .card ($card-px: 1.85rem,
-     $card-py: 1.23rem in _variables.custom.scss, and $card-header-height: 70px
-     in core/components/_variables.scss). Preserved in rem so scaling with
+     $card-py: 1.23rem and $card-header-height: 70px, in
+     src/styles/bootstrap/_variables.scss). Preserved in rem so scaling with
      root font-size remains exact. */
   --card-padding-x: 1.85rem;
   --card-padding-y: 1.23rem;

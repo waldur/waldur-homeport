@@ -31,15 +31,15 @@ theme-specific SCSS value. A colour inside an SVG data URI cannot be reached by 
 
 ## Key Files
 
-| File                                             | Purpose                                                                          |
-| ------------------------------------------------ | -------------------------------------------------------------------------------- |
-| `src/theme/ThemeProvider.tsx`                    | React context provider for theme state                                           |
-| `src/theme/useTheme.ts`                          | Hook to access current theme                                                     |
-| `src/theme/ThemeStorage.ts`                      | localStorage persistence                                                         |
-| `src/theme/utils.ts`                             | Injects the Bootstrap stylesheet once, sets `data-theme`, initial theme detection|
-| `src/theme/ThemeSwitcher.tsx`                    | UI toggle component                                                              |
-| `src/styles/bootstrap/_variables.scss`           | Consolidated Sass variables (design tokens as `var(--…)`, `$white`, `$black`)   |
-| `src/styles/bootstrap/_mixins.scss`              | `dark-theme` / `light-theme` mixins, `mirrored-ramp-color()`                     |
+| File                                   | Purpose                                                                           |
+| -------------------------------------- | --------------------------------------------------------------------------------- |
+| `src/theme/ThemeProvider.tsx`          | React context provider for theme state                                            |
+| `src/theme/useTheme.ts`                | Hook to access current theme                                                      |
+| `src/theme/ThemeStorage.ts`            | localStorage persistence                                                          |
+| `src/theme/utils.ts`                   | Injects the Bootstrap stylesheet once, sets `data-theme`, initial theme detection |
+| `src/theme/ThemeSwitcher.tsx`          | UI toggle component                                                               |
+| `src/styles/bootstrap/_variables.scss` | Consolidated Sass variables (design tokens as `var(--…)`, `$white`, `$black`)     |
+| `src/styles/bootstrap/_mixins.scss`    | `dark-theme` / `light-theme` mixins, `mirrored-ramp-color()`                      |
 
 ## Theme Initialization Flow
 
