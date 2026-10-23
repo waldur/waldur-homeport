@@ -3,7 +3,7 @@
  *
  * Bootstrap's utility API generated every value at every breakpoint whether
  * or not anything used it: about half the compiled Metronic stylesheet was
- * rules nothing could match. src/metronic/sass/core/components/_utilities.scss
+ * rules nothing could match. src/styles/bootstrap/_utilities.scss
  * now drops the utilities nothing used and the breakpoint variants of those
  * only ever used at the base size. A retired name compiles to nothing, so this
  * rule reports it with the Tailwind class to use instead.
@@ -35,7 +35,9 @@ export const RETIRED_UTILITY_PATTERNS = [
   ],
   // Breakpoint variants of utilities only ever used at the base size.
   [
-    new RegExp(`^(?:h|mh|min-w|min-h|fs|mx|px|py|pt|pe|pb)-${BP}-[\\w.-]+$`),
+    new RegExp(
+      `^(?:w|mw|h|mh|min-w|min-h|fs|mx|px|py|pt|pe|pb)-${BP}-[\\w.-]+$`,
+    ),
     'a Tailwind breakpoint variant (lg:p-3, md:min-h-[100px])',
   ],
   [
@@ -46,9 +48,16 @@ export const RETIRED_UTILITY_PATTERNS = [
     new RegExp(`^flex-${BP}-(?:fill|shrink-[01])$`),
     'a Tailwind breakpoint variant (lg:flex-1, lg:shrink-0)',
   ],
+  // Fixed-size and max-size utilities retired in #473.
+  [/^mw-[\w.-]+$/, 'max-w-* (max-w-[175px], max-w-full, …)'],
+  [/^mh-[\w.-]+$/, 'max-h-* (max-h-[300px], max-h-full, …)'],
+  [
+    /^(?:w|min-w|h|min-h)-\d+px$/,
+    'a Tailwind arbitrary size (w-[125px], min-w-[125px], …)',
+  ],
   // The header's icon button (custom/_nav.scss), now waldur-ui's IconButton.
   [/^btn-nav-item$/, "waldur-ui's IconButton"],
-  // core/components/_svg-icon.scss generates icon sizes at the base size only.
+  // src/styles/bootstrap/components/_svg-icon.scss generates icon sizes at the base size only.
   [
     new RegExp(`^svg-icon-${BP}-[\\w.-]+$`),
     'svg-icon-<size> with a Tailwind breakpoint variant on the svg (lg:size-6)',

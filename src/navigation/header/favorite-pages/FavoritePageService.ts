@@ -4,7 +4,8 @@ import {
   useCurrentStateAndParams,
   useRouter,
 } from '@uirouter/react';
-import { isMatch, pickBy, uniqueId } from 'lodash-es';
+import { pickBy } from 'es-toolkit';
+import { isMatch } from 'es-toolkit/compat';
 import { useCallback, useMemo, useSyncExternalStore } from 'react';
 import { useSelector } from 'react-redux';
 import {
@@ -15,6 +16,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { nextId } from '@/core/nextId';
 import { translate } from '@/i18n';
 import { getTitle, getSubtitle } from '@/navigation/title';
 import { isDescendantOf } from '@/navigation/useTabs';
@@ -69,9 +71,9 @@ class FavoritePageServiceClass {
 
   add = (page: Omit<FavoritePage, 'id'>) => {
     const prevList = this.list();
-    let id = uniqueId();
+    let id = nextId();
     while (prevList.some((p) => p.id === id)) {
-      id = uniqueId();
+      id = nextId();
     }
     const newPage = { ...page, id };
     localStorage.setItem(
@@ -226,7 +228,7 @@ export const useFavoritePages = () => {
   const addFavoritePage = useCallback(
     (page: Omit<FavoritePage, 'id'>, event = null) => {
       if (event) event.preventDefault();
-      page.params = pickBy(page.params, (value) => value !== null);
+      page.params = pickBy(page.params ?? {}, (value) => value !== null);
       if (findFavoritePage(page.state, page.params)) return;
       FavoritePageService.add(page);
       if (event) event.stopPropagation();

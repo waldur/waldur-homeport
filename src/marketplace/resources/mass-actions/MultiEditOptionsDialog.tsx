@@ -115,7 +115,7 @@ export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
             iconColor="success"
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   disabled={
                     hasValidationErrors ||
@@ -126,7 +126,7 @@ export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
                   submitting={submitting}
                   label={translate('Confirm')}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

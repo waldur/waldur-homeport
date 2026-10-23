@@ -133,7 +133,7 @@ const FlavorSelectionModal: React.FC<FlavorSelectionModalProps> = ({
             }
             footer={
               <>
-                <CloseDialogButton className="w-125px" />
+                <CloseDialogButton className="w-[125px]" />
                 <SubmitButton
                   submitting={submitting}
                   disabled={invalid}
@@ -143,7 +143,7 @@ const FlavorSelectionModal: React.FC<FlavorSelectionModalProps> = ({
                 />
               </>
             }
-            bodyClassName="h-500px"
+            bodyClassName="h-[500px]"
           >
             <div className="mb-3">
               <FilterBox

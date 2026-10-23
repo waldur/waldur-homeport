@@ -1,0 +1,149 @@
+import { getTableHost } from './host';
+
+const isEmpty = (obj) => !obj || Object.keys(obj).length === 0;
+
+// Separator for compact uuid:name format
+const COMPACT_SEPARATOR = '::';
+
+/**
+ * Compacts a filter value for URL storage.
+ * For objects with uuid, stores as "uuid::name" string.
+ * This keeps URLs shorter than JSON while preserving display names.
+ */
+const compactFilterValue = (value: any): any => {
+  if (value === null || value === undefined) {
+    return value;
+  }
+  if (Array.isArray(value)) {
+    return value.map(compactFilterValue);
+  }
+  if (typeof value === 'object' && value.uuid) {
+    // Store as "uuid::name" or "uuid::title" for compact representation
+    const label = value.name || value.title || '';
+    return `${value.uuid}${COMPACT_SEPARATOR}${label}`;
+  }
+  return value;
+};
+
+// Pattern to detect compact "uuid::name" format
+const COMPACT_UUID_PATTERN =
+  /^([0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12})::(.*)$/i;
+
+// Pattern to detect plain UUID (without name)
+const PLAIN_UUID_PATTERN =
+  /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i;
+
+/**
+ * Expands a compacted filter value from URL.
+ * "uuid::name" strings are converted to {uuid, name} objects.
+ * Plain UUID strings are converted to {uuid} objects.
+ */
+const expandFilterValue = (value: any): any => {
+  if (value === null || value === undefined) {
+    return value;
+  }
+  if (Array.isArray(value)) {
+    return value.map(expandFilterValue);
+  }
+  if (typeof value === 'string') {
+    // Check for compact "uuid::name" format first
+    const match = value.match(COMPACT_UUID_PATTERN);
+    if (match) {
+      const obj: any = { uuid: match[1] };
+      if (match[2]) obj.name = match[2];
+      return obj;
+    }
+    // Also handle plain UUIDs (without name) - will show UUID in badge
+    if (PLAIN_UUID_PATTERN.test(value)) {
+      return { uuid: value };
+    }
+  }
+  return value;
+};
+
+const formatParam = (param: string) => {
+  const decoded = (decodeURIComponent(param) as any).replaceAll('+', ' ');
+  try {
+    return JSON.parse(decoded);
+  } catch {
+    return decoded;
+  }
+};
+
+export const getQueryParams = (): { [key: string]: any } => {
+  const search = getTableHost().readQuery();
+  let urlParams = {};
+  for (const [key, value] of Object.entries(search)) {
+    const parsed = Array.isArray(value)
+      ? value.map((v) => formatParam(v)).filter(Boolean)
+      : formatParam(value as string);
+    // Expand UUID strings back to {uuid: ...} objects
+    urlParams = {
+      ...urlParams,
+      [key]: expandFilterValue(parsed),
+    };
+  }
+  return urlParams;
+};
+
+// Refer to https://stackoverflow.com/a/41542008
+export const syncFiltersToURL = (form: any) => {
+  if (!form || isEmpty(form)) {
+    return;
+  }
+  if ('URLSearchParams' in window) {
+    const searchParams = new URLSearchParams(window.location.search);
+    for (const [key, value] of Object.entries(form)) {
+      if (key && value) {
+        // Compact the value to only store uuid for objects
+        const compactedValue = compactFilterValue(value);
+        // Store strings directly, JSON encode objects/arrays
+        const encoded =
+          typeof compactedValue === 'string'
+            ? compactedValue
+            : JSON.stringify(compactedValue);
+        searchParams.set(key, encoded);
+      }
+      if (!value) {
+        searchParams.delete(key);
+      }
+    }
+    // URLSearchParams.toString() form-encodes spaces as '+', but ui-router's
+    // own param decoding (used by useIsActive/stateService.includes for
+    // sidebar highlighting) calls plain decodeURIComponent, which leaves '+'
+    // as a literal '+' instead of a space — so a value like an org/project
+    // name never matches the freshly-computed JS string once it round-trips
+    // through the URL, breaking the active-link check. '+' only appears
+    // here as an encoded space (an actual '+' in a value is escaped to
+    // '%2B' by toString()), so blanket-replacing it with '%20' is safe and
+    // makes ui-router's decode match ours (see formatParam's own
+    // .replaceAll('+', ' ') above for the same fix on the read side).
+    getTableHost().writeQuery(searchParams.toString().replace(/\+/g, '%20'));
+  }
+};
+
+/**
+ * Builds the initial filter values for a table from its explicit defaults plus
+ * the current URL query params.
+ *
+ * When `allowedKeys` is provided, only URL params whose key is in that set are
+ * absorbed. This prevents a table from swallowing unrelated global URL params
+ * (e.g. the workspace `organization`/`project` selector) as phantom filters.
+ * Explicit `initialValues` are always kept regardless.
+ */
+export const getInitialValues = (initialValues?, allowedKeys?: Set<string>) => {
+  const queryParams = getQueryParams();
+  if (isEmpty(queryParams)) {
+    return initialValues;
+  }
+  const queryParamValues = initialValues ? { ...initialValues } : {};
+  for (const [key, value] of Object.entries(queryParams)) {
+    if (allowedKeys && !allowedKeys.has(key)) {
+      continue;
+    }
+    if (key && (Array.isArray(value) ? value.length : value)) {
+      queryParamValues[key] = value;
+    }
+  }
+  return queryParamValues;
+};

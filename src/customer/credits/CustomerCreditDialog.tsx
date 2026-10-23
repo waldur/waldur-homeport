@@ -97,13 +97,13 @@ export const CustomerCreditDialog: FC<CustomerCreditDialogProps> = ({
             }
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   disabled={invalid || !dirty}
                   submitting={submitting}
                   label={isEdit ? translate('Confirm') : translate('Create')}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                   data-testid="submit-button"
                 />
               </>

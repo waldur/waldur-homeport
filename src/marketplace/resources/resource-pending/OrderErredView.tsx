@@ -25,7 +25,7 @@ import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
-import { ProgressSteps } from '@/wizard';
+import { ProgressSteps, VerticalProgressSteps } from '@/wizard';
 import { useUser } from '@/workspace/hooks';
 
 import { formatTimelineEntry } from './utils';
@@ -174,7 +174,16 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
     <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-6')}>
       <Card className="card-bordered overflow-hidden">
         <Card.Body className="flex flex-col sm:flex-row items-center gap-4">
-          <ProgressSteps steps={steps} bgClass="bg-primary" className="grow" />
+          {/* A phone is too narrow to lay the steps side by side: their labels
+              and dates run into each other, so list them top to bottom. */}
+          <div className="w-full sm:hidden">
+            <VerticalProgressSteps steps={steps} />
+          </div>
+          <ProgressSteps
+            steps={steps}
+            bgClass="bg-primary"
+            className="hidden sm:block grow"
+          />
 
           <div className="flex sm:flex-col gap-3 text-nowrap">
             {canCreateOrder && (

@@ -81,7 +81,7 @@ export const AssignOfferingChecklistFormDialog: FC<OwnProps> = (props) => {
       wizardForms={WizardForms}
       title={translate('Assign checklist')}
       data={{ provider: props.resolve.provider }}
-      modalProps={{ bodyClassName: 'h-500px' }}
+      modalProps={{ bodyClassName: 'h-[500px]' }}
     />
   );
 };

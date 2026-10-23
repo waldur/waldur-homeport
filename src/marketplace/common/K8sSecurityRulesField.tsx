@@ -112,7 +112,7 @@ const BlurableStringInput: React.FC<{
       type="text"
       placeholder={placeholder}
       value={internalValue}
-      className="h-35px"
+      className="h-[35px]"
       onChange={(e) => setInternalValue(e.target.value)}
       onBlur={() => onChange(internalValue)}
       onKeyDown={(e) => e.key === 'Enter' && onChange(internalValue)}

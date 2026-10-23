@@ -118,7 +118,7 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
             <div className="flex flex-col justify-between items-end h-full">
               <div>
                 {showTotalSection && (
-                  <table className="font-medium text-xs w-75">
+                  <table className="font-medium text-xs w-3/4">
                     <tbody>
                       {!isAccountingMode && (
                         <OverviewItemTr

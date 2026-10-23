@@ -8,22 +8,13 @@ import { renderWithProviders } from '@/test/harness';
 
 import { EventSubscriptionsList } from './EventSubscriptionsList';
 
-vi.mock('@/table/useTableQuery', () => ({
-  useTableQuery: () => ({
-    data: undefined,
-    isLoading: false,
-    isFetching: false,
-    error: null,
-    refetch: vi.fn(),
-  }),
-}));
+// Serves the rows given to setTableQueryRows (none by default); no request fires.
+vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
 
 const store = configureStore()({
   tables: {
     EventSubscriptionsList: {
       loading: false,
-      entities: {},
-      order: [],
       pagination: { pageSize: 10, resultCount: 0, currentPage: 1 },
       toggled: {},
       activeColumns: {},

@@ -261,7 +261,7 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
             iconColor="success"
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   disabled={offeringQuery.isLoading || !!offeringQuery.error}
                   submitting={submitting || approveOrderMutation.isPending}

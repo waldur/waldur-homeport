@@ -20,7 +20,7 @@ export function loadTheme(theme: ThemeName) {
     styleTag.type = 'text/css';
     styleTag.crossOrigin = '';
     document.head.appendChild(styleTag);
-    import('@/metronic/sass/style.scss?url').then((url) => {
+    import('@/styles/bootstrap/index.scss?url').then((url) => {
       styleTag.href = url.default as string;
     });
   }

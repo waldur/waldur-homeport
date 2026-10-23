@@ -60,9 +60,9 @@ const FieldsListGroup = ({
         <table className="table table-row-bordered border-b-[1px] border-b-secondary mb-3">
           <thead>
             <tr>
-              <td className="w-50">{translate('Remote category')}</td>
-              <td className="w-50">{translate('Local category')}</td>
-              <td className="w-70px">{translate('Actions')}</td>
+              <td className="w-1/2">{translate('Remote category')}</td>
+              <td className="w-1/2">{translate('Local category')}</td>
+              <td className="w-[70px]">{translate('Actions')}</td>
             </tr>
           </thead>
           <tbody>

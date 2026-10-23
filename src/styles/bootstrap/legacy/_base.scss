@@ -1,0 +1,223 @@
+body {
+  overflow-x: hidden;
+}
+
+/* CARD */
+.card {
+  .card-header {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-secondary);
+    margin: 0 $card-px;
+    padding: $card-header-py 0;
+  }
+
+  &.card-solid {
+    overflow: hidden;
+
+    .card-header {
+      margin: 0;
+      padding-left: $card-px;
+      padding-right: $card-px;
+      min-height: 48px;
+      color: var(--text-primary);
+      font-size: $font-size-lg;
+      background-color: var(--bg-secondary);
+    }
+  }
+
+  &.card-sm {
+    padding-top: 0.307rem;
+    padding-bottom: 0.307rem;
+
+    .card-header {
+      margin-left: 1.23rem; // 16px
+      margin-right: 1.23rem;
+      padding: 0;
+      min-height: 36px;
+
+      .card-title {
+        margin-top: 0.615rem;
+        margin-bottom: 0.615rem;
+      }
+    }
+    .card-body {
+      padding: 1.23rem;
+      padding-bottom: 0.923rem;
+    }
+  }
+}
+
+/* LIST-GROUP & ITEMS */
+.list-group-item {
+  background-color: var(--bg-primary);
+
+  @include dark-theme {
+    background-color: var(--bg-tertiary);
+  }
+
+  &:hover {
+    background-color: var(--bg-quaternary);
+  }
+  &.active {
+    color: var(--text-primary);
+    background-color: var(--bg-quaternary);
+    border-color: var(--border-divider);
+  }
+}
+
+// Named `rotate-toggle-180`, not the more obvious `rotate-180`: Tailwind
+// (enabled app-wide since it's now part of the same bundle) content-scans
+// every source file for class-name-shaped strings and generates a
+// utility for anything matching `rotate-<number>`, regardless of whether
+// the file meant it as a Tailwind class at all. A bare `.rotate-180` here
+// collided with Tailwind's own `.rotate-180 { rotate: 180deg }` utility,
+// which — living in the `utilities` layer, declared last — wins over
+// this rule regardless of specificity or the `.show`/`.active` gating
+// below, unconditionally rotating the icon any time the class is merely
+// present in the DOM (confirmed live: an "Add ▾" toggle stuck rotated
+// while its menu was closed).
+// The transition lives here, on the always-present base class, not inside
+// the conditional block below — matching core's own .rotate-{value}
+// family (the former Metronic _rotate.scss), which declared `transition` on
+// its own unconditioned `.rotate-#{$value}` rule for exactly this reason.
+// A transition declared only inside `.active > &` only takes effect
+// while `.active` is present: it animates the icon rotating IN as that
+// class is added, but the moment it's removed (collapsing), the element
+// no longer matches that rule at all, `transition` reverts to unset, and
+// the snap back to 0deg happens instantly instead of reversing the
+// animation (reported live: table row expanders and dropdown-toggle
+// carets animated opening but not closing).
+.rotate-toggle-180 {
+  transition: transform 0.3s ease;
+}
+
+.collapsible:not(.collapsed),
+.show,
+.active {
+  > .rotate-toggle-180 {
+    transform: rotateZ(180deg);
+  }
+}
+
+.image-placeholder {
+  color: var(--text-quaternary);
+  background-color: var(--bg-tertiary);
+}
+
+/* Typography */
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+}
+
+%ellipsis-lines {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.ellipsis-lines {
+  @extend %ellipsis-lines;
+
+  &-1 {
+    @extend %ellipsis-lines;
+    -webkit-line-clamp: 1;
+  }
+  &-2 {
+    @extend %ellipsis-lines;
+    -webkit-line-clamp: 2;
+  }
+  &-3 {
+    @extend %ellipsis-lines;
+    -webkit-line-clamp: 3;
+  }
+}
+
+.btn-text-align {
+  line-height: 1.5;
+  padding: calc(0.75rem + 1px) calc(1.5rem + 1px);
+}
+
+.text-link {
+  background-color: transparent;
+  border: none;
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  color: var(--text-primary);
+  text-decoration: underline;
+
+  &:hover {
+    color: var(--text-brand-secondary);
+    text-decoration: none;
+  }
+}
+.text-anchor {
+  background-color: transparent;
+  color: $link-color;
+  text-decoration: $link-decoration;
+  font-size: $font-size-lg;
+  border: none;
+  cursor: pointer;
+  display: inline;
+  margin: 0;
+  padding: 0;
+
+  &:hover {
+    color: $link-color;
+    text-decoration: underline !important;
+    transition: $transition-base;
+  }
+  &:disabled {
+    color: var(--text-disabled);
+    cursor: not-allowed;
+    text-decoration: none !important;
+  }
+
+  &.text-anchor-danger {
+    color: var(--status-danger-fg);
+    &:hover {
+      color: var(--status-danger-fg);
+    }
+  }
+}
+.text-btn {
+  background-color: transparent;
+  color: $text-muted;
+  border: none;
+  cursor: pointer;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+.text-pre {
+  white-space: pre;
+}
+
+.h-0 {
+  height: 0;
+  overflow: hidden;
+}
+
+hr {
+  background-color: $border-color;
+  opacity: 1;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

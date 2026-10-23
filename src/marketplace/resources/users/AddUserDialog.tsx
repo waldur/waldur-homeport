@@ -92,7 +92,7 @@ export const AddUserDialog: FC<{ resolve: AddUserResolve }> = ({ resolve }) => {
             title={translate('Assign user')}
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   label={translate('Assign')}
                   submitting={submitting}
@@ -100,7 +100,7 @@ export const AddUserDialog: FC<{ resolve: AddUserResolve }> = ({ resolve }) => {
                     invalid || rolesLoading || filteredRoles.length === 0
                   }
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

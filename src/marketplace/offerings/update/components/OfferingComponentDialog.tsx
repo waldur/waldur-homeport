@@ -1,5 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { omit } from 'lodash-es';
+import { omit } from 'es-toolkit';
 import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import {
@@ -78,13 +78,13 @@ export const OfferingComponentDialog: FC<{
             iconColor={!isEdit ? 'success' : null}
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
                   label={isEdit ? translate('Save') : translate('Confirm')}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

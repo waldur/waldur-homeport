@@ -83,7 +83,7 @@ export const AnswerFormDialog: FC<AnswerFormDialogProps> = ({ resolve }) => {
             title={resolve.title || question.description}
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   disabled={
                     (invalid && !modifiedSinceLastSubmit) || hasFileError
@@ -91,7 +91,7 @@ export const AnswerFormDialog: FC<AnswerFormDialogProps> = ({ resolve }) => {
                   submitting={submitting}
                   label={translate('Save')}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

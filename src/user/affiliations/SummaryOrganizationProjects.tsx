@@ -57,7 +57,7 @@ export const SummaryOrganizationProjects = ({ customer }) => {
         <NoResult
           title={translate('No projects found')}
           message={
-            <p className="mw-350px">
+            <p className="max-w-[350px]">
               {translate(
                 'No projects available in the current organization. Start by adding or managing projects to get started.',
               )}

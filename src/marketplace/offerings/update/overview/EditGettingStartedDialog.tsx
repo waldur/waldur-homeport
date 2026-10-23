@@ -46,7 +46,7 @@ export const EditGettingStartedDialog: FC<{
           >
             <Row>
               <Col md={12} lg={8} className="flex flex-col">
-                <div className="grow min-h-225px">
+                <div className="grow min-h-[225px]">
                   <div className="size-sm">
                     <TextGroup
                       name="template"

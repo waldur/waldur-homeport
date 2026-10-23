@@ -80,13 +80,13 @@ export const ExportCallDialog: FC<ExportCallDialogProps> = ({ resolve }) => {
             )}
             footer={
               <>
-                <div className="min-w-150px">
+                <div className="min-w-[150px]">
                   <CloseDialogButton
                     label={translate('Cancel')}
                     className="w-full"
                   />
                 </div>
-                <div className="min-w-150px">
+                <div className="min-w-[150px]">
                   <SubmitButton
                     submitting={submitting || mutation.isPending}
                     label={translate('Export')}

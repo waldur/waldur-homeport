@@ -64,7 +64,7 @@ export const OfferingAlerts: FC<OwnProps> = ({ offering }) => {
       title={translate('Agent logs')}
       verboseName={translate('Agent log')}
       className="mb-5"
-      headerClassName="min-h-60px"
+      headerClassName="min-h-[60px]"
       fullWidth
       expandableRow={ExpandableRow}
       columns={[

@@ -1,6 +1,6 @@
 import { CaretDownIcon, CheckIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit';
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 
 import { Menu, Radio } from 'waldur-ui';
@@ -240,7 +240,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                   {/* Options menu */}
                   <Menu.Content
                     align="start"
-                    className="border font-medium rounded-none mw-250px text-sm py-3"
+                    className="border font-medium rounded-none max-w-[250px] text-sm py-3"
                     // Compact rows, as in the footer menus.
                     density="compact"
                   >

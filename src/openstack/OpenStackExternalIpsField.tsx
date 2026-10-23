@@ -23,9 +23,9 @@ const FieldsListGroup: FC<FieldArrayRenderProps<any, any>> = ({ fields }) => {
             <table className="table px-0 mb-0">
               <thead>
                 <tr>
-                  <td className="w-50">{translate('Floating IP')}</td>
+                  <td className="w-1/2">{translate('Floating IP')}</td>
                   <td>{translate('External IP')}</td>
-                  <td className="w-5px" />
+                  <td className="w-[5px]" />
                 </tr>
               </thead>
               <tbody>

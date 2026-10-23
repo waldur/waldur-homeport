@@ -94,7 +94,7 @@ export const TableDropdownToggle = forwardRef<
       disabled = false,
       labeled = false,
       variant = 'tertiary',
-      className = 'min-w-100px w-full',
+      className = 'min-w-[100px] w-full',
       size = 'lg',
       tooltip,
       ...rest

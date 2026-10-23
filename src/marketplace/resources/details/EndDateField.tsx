@@ -58,7 +58,7 @@ export const EndDateField = ({ resource }) => {
               className="ms-1"
               tooltipProps={{
                 autoWidth: true,
-                contentClassName: 'mw-275px',
+                contentClassName: 'max-w-[275px]',
               }}
             />
           ) : ownEndDate && projectEndDate ? (

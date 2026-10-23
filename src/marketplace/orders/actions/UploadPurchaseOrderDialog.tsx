@@ -55,13 +55,13 @@ export const UploadPurchaseOrderDialog = ({
             iconColor="success"
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   submitting={submitting}
                   disabled={invalid}
                   label={translate('Approve')}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

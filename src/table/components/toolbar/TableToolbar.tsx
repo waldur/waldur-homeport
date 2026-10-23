@@ -1,7 +1,6 @@
 import { XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { createElement, useCallback } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { translate } from 'waldur-i18n-runtime';
 import { BaseButton, useBreakpointDown } from 'waldur-ui';
@@ -174,6 +173,7 @@ export function TableToolbarActions() {
                 setDisplayMode={actions.setDisplayMode}
                 filter={filter}
                 filters={slots.filters}
+                formId={config.formId}
                 filterPosition={filterPosition}
                 filtersStorage={filtersStorage}
                 setFilter={actions.setFilter}
@@ -214,7 +214,7 @@ export function TableToolbarTitle() {
 
   return (
     <div className="grow order-0" data-testid="table-toolbar-title-container">
-      <Card.Title>
+      <div className="card-title h5">
         {!config.hideTitle && (
           <div className="me-2">
             <span className={classNames('h3', display.titleClassName)}>
@@ -232,7 +232,7 @@ export function TableToolbarTitle() {
         {!config.hideRefresh && !portal?.refresh && (
           <TableRefreshButton fetch={actions.fetch} loading={loading} />
         )}
-      </Card.Title>
+      </div>
     </div>
   );
 }
@@ -251,10 +251,11 @@ export function TableToolbar() {
   }
 
   return (
-    <Card.Header
+    <div
       className={classNames(
         'border-b-[1px] border-b-secondary',
         display.headerClassName,
+        'card-header',
       )}
       data-testid="table-toolbar"
     >
@@ -262,6 +263,6 @@ export function TableToolbar() {
         <TableToolbarTitle />
         {!portal?.toolbar && <TableToolbarActions />}
       </div>
-    </Card.Header>
+    </div>
   );
 }

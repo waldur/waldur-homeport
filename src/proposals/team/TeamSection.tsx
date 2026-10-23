@@ -189,7 +189,7 @@ export const TeamSection: FC<
             only the team roster so the info matches the viewer's role. */}
         <EmbeddedTabs
           defaultValue="users"
-          className="min-h-175px"
+          className="min-h-[175px]"
           tabs={[
             {
               key: 'users',

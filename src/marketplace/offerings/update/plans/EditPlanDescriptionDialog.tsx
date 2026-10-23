@@ -1,5 +1,5 @@
+import { isEqual } from 'es-toolkit';
 import { FORM_ERROR } from 'final-form';
-import { isEqual } from 'lodash-es';
 import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { marketplacePlansUpdate } from 'waldur-js-client';

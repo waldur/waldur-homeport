@@ -1,5 +1,5 @@
+import { get, set } from 'es-toolkit/compat';
 import arrayMutators from 'final-form-arrays';
-import { get, set } from 'lodash-es';
 import { useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
 

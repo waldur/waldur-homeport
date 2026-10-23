@@ -73,14 +73,14 @@ export const WizardForm: FC<WizardFormProps> = ({
           {props.step > 0 && (
             <BaseButton
               variant="tertiary"
-              className="min-w-125px me-auto"
+              className="min-w-[125px] me-auto"
               onClick={props.onPrev}
               label={translate('Back')}
               iconNode={<CaretLeftIcon weight="bold" />}
               size="lg"
             />
           )}
-          <CloseDialogButton className="min-w-125px" />
+          <CloseDialogButton className="min-w-[125px]" />
           <SubmitButton
             disabled={props.invalid || submitDisabled}
             disabledReason={submitTooltip}
@@ -90,7 +90,7 @@ export const WizardForm: FC<WizardFormProps> = ({
                 ? props.submitLabel || translate('Submit')
                 : translate('Next')
             }
-            className="min-w-125px"
+            className="min-w-[125px]"
             iconNode={!isLast ? <CaretRightIcon weight="bold" /> : undefined}
           />
         </>

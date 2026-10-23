@@ -1,5 +1,8 @@
-import { isMatch, pickBy, uniqueId } from 'lodash-es';
+import { pickBy } from 'es-toolkit';
+import { isMatch } from 'es-toolkit/compat';
 import { useCallback, useState } from 'react';
+
+import { nextId } from '@/core/nextId';
 
 import { SearchItemProps } from './SearchItem';
 
@@ -17,9 +20,9 @@ interface RecentSearchItem {
 class RecentSearchServiceClass {
   add = (item: Omit<RecentSearchItem, 'id'>) => {
     const prevList = this.list();
-    let id = uniqueId();
+    let id = nextId();
     while (prevList.some((p) => p.id === id)) {
-      id = uniqueId();
+      id = nextId();
     }
     const newItem = { ...item, id };
     const newList = prevList
@@ -80,7 +83,7 @@ export const useRecentSearch = () => {
         type,
       };
       if (event) event.preventDefault();
-      recentItem.params = pickBy(recentItem.params, (x) => x !== null);
+      recentItem.params = pickBy(recentItem.params ?? {}, (x) => x !== null);
       if (findRecentSearchItem(recentItem.to, recentItem.params)) return;
       RecentSearchService.add(recentItem);
       setRecentSearchItems(getRecentSearchList());

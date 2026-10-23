@@ -1,4 +1,4 @@
-import { escape } from 'lodash-es';
+import { escape } from 'es-toolkit/compat';
 import { DateTime } from 'luxon';
 import { MaintenanceAnnouncement } from 'waldur-js-client';
 

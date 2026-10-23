@@ -48,17 +48,17 @@ export const ProviderAccountExpandableRow = ({
       <Field
         label={translate('Created')}
         value={formatDateTime(account.created)}
-        labelClass="mw-175px"
+        labelClass="max-w-[175px]"
       />
       <Field
         label={translate('Runtime state')}
         value={<OfferingUserRuntimeStateField row={account} />}
-        labelClass="mw-175px"
+        labelClass="max-w-[175px]"
       />
       <Field
         label={translate('Restricted')}
         value={account.is_restricted ? translate('Yes') : translate('No')}
-        labelClass="mw-175px"
+        labelClass="max-w-[175px]"
       />
       <Field
         label={translate('Comment')}
@@ -72,13 +72,13 @@ export const ProviderAccountExpandableRow = ({
             renderFieldOrDash(null)
           )
         }
-        labelClass="mw-175px"
+        labelClass="max-w-[175px]"
         className="align-baseline"
       />
       <Field
         label={translate('Comment URL')}
         value={renderFieldOrDash(account.service_provider_comment_url)}
-        labelClass="mw-175px"
+        labelClass="max-w-[175px]"
       />
       <Table<OfferingUser>
         {...tableProps}
@@ -118,7 +118,7 @@ export const ProviderAccountExpandableRow = ({
         verboseName={translate('offering accounts')}
         hideRefresh
         className="mt-7"
-        headerClassName="min-h-40px py-0"
+        headerClassName="min-h-[40px] py-0"
         titleClassName="h4 font-medium text-secondary"
         minHeight="auto"
       />

@@ -97,7 +97,7 @@ export const MaintenanceTimelineView: FC<MaintenanceTimelineViewProps> = ({
 
   const actions = (
     <div className="flex gap-4 me-4">
-      <FormGroup label={translate('Group by')} className="mw-150px mb-0">
+      <FormGroup label={translate('Group by')} className="max-w-[150px] mb-0">
         <Select
           value={selectedGrouping}
           onChange={(option: GroupingOption | null) =>
@@ -107,7 +107,7 @@ export const MaintenanceTimelineView: FC<MaintenanceTimelineViewProps> = ({
           isClearable={false}
         />
       </FormGroup>
-      <FormGroup label={translate('Color by')} className="mw-150px mb-0">
+      <FormGroup label={translate('Color by')} className="max-w-[150px] mb-0">
         <Select
           value={selectedColor}
           onChange={(option: ColorOption | null) =>

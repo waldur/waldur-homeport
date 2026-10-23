@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { groupBy } from 'lodash-es';
+import { groupBy } from 'es-toolkit';
 import { useForm, useFormState } from 'react-final-form';
 import {
   remoteWaldurApiSharedOfferings,

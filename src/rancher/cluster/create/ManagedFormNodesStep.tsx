@@ -1,4 +1,4 @@
-import { debounce } from 'lodash-es';
+import { debounce } from 'es-toolkit';
 import { useCallback, useState } from 'react';
 import { Field, useForm } from 'react-final-form';
 import { Offering } from 'waldur-js-client';

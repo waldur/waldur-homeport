@@ -1,7 +1,7 @@
-import { padStart, uniqueId } from 'lodash-es';
 import { DateTime, Duration } from 'luxon';
 
 import { parseDate } from '@/core/dateUtils';
+import { nextId } from '@/core/nextId';
 import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
 
@@ -24,7 +24,7 @@ export const createBooking = (
   }: EventInput | BookingProps,
   timeStamp?: string,
 ): BookingProps => ({
-  id: id || `${uniqueId('booking')}-${timeStamp!}`,
+  id: id || `${nextId('booking')}-${timeStamp!}`,
   start,
   end,
   allDay,
@@ -137,7 +137,7 @@ export const getDurationOptions = () =>
     label: `${hours} hours`,
   }));
 
-const pad2 = (value: string | number) => padStart(String(value), 2, '0');
+const pad2 = (value: string | number) => String(value).padStart(2, '0');
 
 export const getTimeOptions = (
   timeStep = 30,
@@ -162,7 +162,7 @@ export const getTimeOptions = (
 
 export const getBookedSlots = (bookedItems: BookedItem[]) =>
   bookedItems.map((item) => ({
-    id: uniqueId('booking'),
+    id: nextId('booking'),
     start: item.start,
     end: item.end,
     allDay: false,

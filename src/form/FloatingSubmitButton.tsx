@@ -29,7 +29,7 @@ export const FloatingSubmitButton: FC<OwnProps> = ({
       <Tooltip
         label={errorsExist ? <FieldErrorMessage error={errors} center /> : null}
         autoWidth
-        contentClassName="mw-225px"
+        contentClassName="max-w-[225px]"
       >
         <SubmitButton
           submitting={submitting}

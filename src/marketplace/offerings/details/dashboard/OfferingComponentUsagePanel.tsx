@@ -43,7 +43,7 @@ export const OfferingComponentUsagePanel: FC<
     <FormTable.Card
       title={translate('Component usage')}
       className="card-bordered mb-5"
-      headerClassName="min-h-60px"
+      headerClassName="min-h-[60px]"
     >
       <FormTable detailsMode className="gy-5">
         {isLoading || error ? (

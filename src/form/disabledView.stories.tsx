@@ -12,7 +12,7 @@ import { Checkbox, Radio, Switch } from 'waldur-ui';
  * clickable, and a click on it still toggles the control.
  *
  * These stories run against the real compiled stylesheet (`.disabled-view` is
- * in `src/metronic/sass/custom/_content.scss`), so a selector that stops
+ * in `src/styles/bootstrap/legacy/_content.scss`), so a selector that stops
  * matching the markup fails here.
  */
 const meta: Meta = {

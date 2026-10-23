@@ -275,7 +275,7 @@ import FormTable from '@/form/FormTable';
 
 ### Callback contract
 
-When the user submits the modal, the dialog builds a body via `lodash.set({}, field.name, value)` and passes it to the provider's `callback`. The callback receives a **partial** PATCH-shaped object:
+When the user submits the modal, the dialog builds a body via `set({}, field.name, value)` (`es-toolkit/compat`) and passes it to the provider's `callback`. The callback receives a **partial** PATCH-shaped object:
 
 ```ts
 // User edited service_attributes.backend_url
@@ -289,7 +289,7 @@ The backend endpoint behind `callback` must therefore accept partial updates (PA
 
 ### Common props
 
-- `name` — dotted path into `scope` (e.g. `service_attributes.backend_url`). Reads via `lodash.get`, writes via `lodash.set`.
+- `name` — dotted path into `scope` (e.g. `service_attributes.backend_url`). Reads via `get`, writes via `set`, both from `es-toolkit/compat`, which treat the path exactly as lodash did.
 - `label`, `description`, `required`, `validate`, `format`, `parse` — passed through to the modal's `<Field>`. There is no `normalize`: React Final Form ignores it, so convert the stored value with `format` and the typed value with `parse`.
 - `isStaffOnly` — non-staff users see a `<StaffOnlyIndicator/>` instead of the edit button; the read-only value is still visible.
 - `renderValue(value)` — override the read-only display. May return `null`/`undefined`; the HOC substitutes `DASH_ESCAPE_CODE`, so no manual dash fallback is needed.

@@ -237,7 +237,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                       onClick={prevStep}
                       iconNode={<CaretLeftIcon weight="bold" />}
                       variant="tertiary"
-                      className="w-125px me-auto"
+                      className="w-[125px] me-auto"
                       size="lg"
                     />
                   )}
@@ -249,12 +249,12 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                         closeDialog();
                       }}
                       variant="primary"
-                      className="w-125px"
+                      className="w-[125px]"
                       size="lg"
                     />
                   ) : (
                     <>
-                      <CloseDialogButton className="w-125px" />
+                      <CloseDialogButton className="w-[125px]" />
                       {activeTab === 'batch' && step === 0 ? (
                         <BaseButton
                           label={translate('Next')}
@@ -266,7 +266,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                             'Please fill in the required fields',
                           )}
                           variant="primary"
-                          className="w-125px"
+                          className="w-[125px]"
                           size="lg"
                         />
                       ) : (
@@ -278,7 +278,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                           }
                           label={translate('Create')}
                           variant="primary"
-                          className="w-125px"
+                          className="w-[125px]"
                         />
                       )}
                     </>

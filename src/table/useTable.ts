@@ -2,24 +2,12 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { translate } from 'waldur-i18n-runtime';
-
-import { getInitialValues, syncFiltersToURL } from '@/core/filters';
-import { useDrawer } from '@/drawer/actions';
-import { getTitle } from '@/navigation/title';
-import { router } from '@/router';
-import { type RootState } from '@/store/reducers';
-import {
-  makeSelectTableRows,
-  getTableState,
-  selectRegisteredFilterNames,
-} from '@/table/selectors';
+import { getTableState, selectRegisteredFilterNames } from '@/table/selectors';
 
 import * as actions from './actions';
 import { INITIAL_STATE } from './constants';
+import { getTableHost } from './host';
 import { registerTable, unregisterTable } from './registry';
-import { TableFilterActions } from './TableFilterActions';
-import { TableFilterContainer } from './TableFilterContainer';
 import {
   DisplayMode,
   FilterItem,
@@ -27,22 +15,10 @@ import {
   Sorting,
   TableOptionsType,
 } from './types';
+import { getInitialValues, syncFiltersToURL } from './urlFilters';
 import { useTableQuery } from './useTableQuery';
 
-const getDefaultTitle = () => {
-  const pageTitle = getTitle();
-  const breadcrumbs = router.globals.$current.path
-    .filter((part) => part.data?.breadcrumb)
-    .map((part) => part.data.breadcrumb())
-    .flat();
-
-  let breadcrumbTitle = breadcrumbs.pop();
-  if (!breadcrumbTitle) {
-    breadcrumbTitle = router.globals.$current.parent?.data?.breadcrumb?.();
-  }
-
-  return breadcrumbTitle || pageTitle;
-};
+const EMPTY_ROWS = [];
 
 export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   const { table } = options;
@@ -65,8 +41,6 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
       }
     };
   }, [table, dispatch]);
-
-  const { openDrawer } = useDrawer();
 
   // Get Redux state for request building
   const tableState = useSelector(getTableState(table));
@@ -189,7 +163,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
       activeColumns,
     });
 
-  // Sync fetched data to Redux for compatibility
+  // Keep Redux's result count, error and first-fetch flags in step with the query
   useEffect(() => {
     if (data) {
       // Handle "Invalid page" by resetting pagination to page 1
@@ -197,14 +171,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
         dispatch(actions.resetPagination(table));
         return;
       }
-      dispatch(
-        actions.fetchListDone(
-          table,
-          data.entities,
-          data.order,
-          data.resultCount,
-        ),
-      );
+      dispatch(actions.fetchListDone(table, data.resultCount));
       // Reset sorting loading state if it was active
       if (sorting.loading) {
         dispatch(actions.sortListDone(table));
@@ -255,24 +222,6 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     [dispatch, table],
   );
 
-  const openFiltersDrawer = useCallback(
-    (filters: JSX.Element, formId?: string) => {
-      applyFiltersFn(false);
-      openDrawer(TableFilterContainer, {
-        title: translate('Filters'),
-        subtitle: translate('Apply filters to table data'),
-        width: '500px',
-        table,
-        filters,
-        formId,
-        setFilter: (item: FilterItem) =>
-          dispatch(actions.setFilter(table, item)),
-        apply: () => applyFiltersFn(true),
-        footer: TableFilterActions,
-      });
-    },
-    [openDrawer, applyFiltersFn, table, dispatch],
-  );
   const renderFiltersDrawer = useCallback(() => {
     applyFiltersFn(true);
     dispatch(actions.selectSavedFilter(table, null));
@@ -346,17 +295,11 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     [dispatch, table],
   );
 
-  const alterTitle = getDefaultTitle();
+  const alterTitle = getTableHost().getDefaultTitle();
 
-  // Get rows from Redux (synced from React Query via useEffect above)
-  // This maintains backward compatibility with tests that populate Redux directly
-  // Each useTable instance gets its own selector to avoid cache thrashing
-  // when multiple tables are active (e.g. page table + drawer table).
-  const selectRows = useMemo(() => makeSelectTableRows(), []);
-  const reduxRows = useSelector(
-    (state: RootState) => selectRows(state, table) as RowType[],
-  );
-  const rows = data?.rows ?? reduxRows;
+  // React Query's cache is the only copy of the rows; Redux keeps per-table UI
+  // state (pagination, filters, selection) but never the rows themselves.
+  const rows = (data?.rows ?? EMPTY_ROWS) as RowType[];
 
   // Memoize pagination to prevent infinite re-renders in Table's useEffect
   // that depends on props.pagination
@@ -372,7 +315,6 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   return {
     fetch,
     gotoPage,
-    openFiltersDrawer,
     renderFiltersDrawer,
     setDisplayMode,
     setQuery,

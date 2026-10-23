@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { truncate } from 'lodash-es';
+import { truncate } from 'es-toolkit/compat';
 import { FC } from 'react';
 import {
   PublicOfferingDetails,
