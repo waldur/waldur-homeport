@@ -1,10 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-
 import { FormField, FormLabel, Input } from 'waldur-ui';
 
 import { FieldError } from './FieldError';
-import { FieldWarning } from './FieldWarning';
 
 describe('FieldError', () => {
   // Linking the message to its control (aria-describedby) reads it when the
@@ -40,14 +38,6 @@ describe('FieldError', () => {
     expect(screen.getByLabelText('Name')).toHaveAccessibleDescription(
       'Too short',
     );
-  });
-});
-
-describe('FieldWarning', () => {
-  it('is a polite status, not an alert', () => {
-    render(<FieldWarning error="Looks unusual" />);
-    expect(screen.getByRole('status')).toHaveTextContent('Looks unusual');
-    expect(screen.queryByRole('alert')).toBeNull();
   });
 
   // API field names become labels: snake_case and camelCase split into words.

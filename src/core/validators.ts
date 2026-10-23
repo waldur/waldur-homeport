@@ -1,6 +1,10 @@
+import { required } from 'waldur-form';
+
 import { ENV } from '@/core/config';
 import { LATIN_NAME_PATTERN } from '@/core/utils';
 import { translate } from '@/i18n';
+
+export { required };
 
 // Validators receive (value, allValues, meta) from react-final-form; forward all
 // three so composed validators can cross-check other fields in the form.
@@ -28,11 +32,6 @@ export const isMatchPattern =
       return message;
     }
   };
-
-export const required = (value) =>
-  value || [0, false].includes(value)
-    ? undefined
-    : translate('This field is required.');
 
 /**
  * `required`, skipped while `predicate(allValues)` holds.

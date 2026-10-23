@@ -10657,7 +10657,7 @@
   },
   "Clear": {
     "context": {
-      "feature_area": "form"
+      "feature_area": "search"
     }
   },
   "Clear (None)": {
@@ -30606,7 +30606,7 @@
   "Max": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "form"
+      "feature_area": "assignments"
     }
   },
   "Max TRES Minutes": {

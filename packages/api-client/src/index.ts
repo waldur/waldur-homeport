@@ -25,4 +25,7 @@ export {
 } from './tableFetcher';
 export type { DataPage, SdkFunction } from './tableFetcher';
 
+export { createLoadOptions } from './createLoadOptions';
+export type { AsyncSelectLoader } from './createLoadOptions';
+
 export type { Fetcher, FetcherOptions, TableRequest } from './types';
