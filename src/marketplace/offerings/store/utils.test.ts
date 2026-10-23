@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { formatOption } from './utils';
+import { dropHiddenPrepaidSettings, formatOption } from './utils';
 
 describe('formatOption', () => {
   it.each(['single_datacenter_k8s_config', 'multi_datacenter_k8s_config'])(
@@ -207,5 +207,57 @@ describe('formatOption display_limit_config', () => {
         display_limit_config: { component_type: 'inodes' },
       }),
     ).not.toHaveProperty('display_limit_config');
+  });
+});
+
+describe('dropHiddenPrepaidSettings', () => {
+  const prepaid = {
+    billing_type: 'one',
+    is_prepaid: true,
+    min_prepaid_duration: 3,
+    overage_component: 'overage-uuid',
+  };
+
+  it('keeps a one-time prepaid component as it is', () => {
+    expect(dropHiddenPrepaidSettings(prepaid, 'one')).toEqual(prepaid);
+  });
+
+  // Moved off one-time, the component can no longer be prepaid, and the form
+  // no longer shows the settings that would say it is.
+  it('stops a component moved off one-time from being prepaid', () => {
+    const moved = dropHiddenPrepaidSettings(
+      { ...prepaid, billing_type: 'limit' },
+      'one',
+    );
+    expect(moved).toMatchObject({
+      billing_type: 'limit',
+      is_prepaid: false,
+      min_prepaid_duration: null,
+      overage_component: null,
+    });
+  });
+
+  // A component made prepaid under another type before that rule keeps its
+  // flag while its type stays; only a move to yet another type drops it.
+  it('keeps an older prepaid component of another type while its type stays', () => {
+    const legacy = { billing_type: 'limit', is_prepaid: true };
+    expect(dropHiddenPrepaidSettings(legacy, 'limit')).toEqual(legacy);
+    expect(
+      dropHiddenPrepaidSettings({ ...legacy, billing_type: 'usage' }, 'limit'),
+    ).toMatchObject({ billing_type: 'usage', is_prepaid: false });
+  });
+
+  // Unticking "Pre-paid component" hides the durations but kept them in the
+  // payload, which the backend refuses for a component that is not prepaid.
+  it('drops the settings of a component that is not prepaid', () => {
+    expect(
+      dropHiddenPrepaidSettings({ ...prepaid, is_prepaid: false }, 'one'),
+    ).toMatchObject({ min_prepaid_duration: null, overage_component: null });
+  });
+
+  it('does not let a new component of another type be prepaid', () => {
+    expect(
+      dropHiddenPrepaidSettings({ billing_type: 'limit', is_prepaid: true }),
+    ).toMatchObject({ is_prepaid: false });
   });
 });
