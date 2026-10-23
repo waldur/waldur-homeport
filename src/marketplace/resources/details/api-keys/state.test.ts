@@ -49,19 +49,29 @@ describe('getErredTooltip', () => {
   });
 
   // Erred alone reads as stopped, but the provider still serves the key.
-  it('says a key whose limit pause failed is still active', () => {
-    expect(
-      getErredTooltip(
-        row({
-          pending_action: 'pause',
-          paused_by_limit: true,
-          error_message: 'gateway down',
-        }),
-      ),
-    ).toBe(
-      'Pause failed: gateway down The key is still active at the provider until the failed command succeeds.',
-    );
-  });
+  // The agent's error rarely ends with a period; the note is a sentence of
+  // its own whether it does or not.
+  it.each([
+    ['gateway down', 'Pause failed: gateway down.'],
+    ['Gateway down.', 'Pause failed: Gateway down.'],
+    ['Is the gateway down?', 'Pause failed: Is the gateway down?'],
+    ['', 'Pause failed.'],
+  ])(
+    'says a key whose limit pause failed is still active (error %j)',
+    (error_message, failed) => {
+      expect(
+        getErredTooltip(
+          row({
+            pending_action: 'pause',
+            paused_by_limit: true,
+            error_message,
+          }),
+        ),
+      ).toBe(
+        `${failed} The key is still active at the provider until the failed command succeeds.`,
+      );
+    },
+  );
 });
 
 describe('a key paused at its limit', () => {
