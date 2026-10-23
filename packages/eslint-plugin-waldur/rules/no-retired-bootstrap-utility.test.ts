@@ -20,7 +20,7 @@ describe('no-retired-bootstrap-utility', () => {
     valid: [
       // Still generated: base sizes, and the responsive utilities in use.
       {
-        code: 'const A = () => <div className="min-h-100px px-5 mt-md-0 my-lg-0 mt-n2 flex-lg-row" />;',
+        code: 'const A = () => <div className="min-h-[100px] px-5 mt-md-0 my-lg-0 mt-n2 flex-lg-row" />;',
       },
       {
         code: 'const A = () => <span className="svg-icon svg-icon-2 svg-icon-5tx" />;',

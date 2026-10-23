@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { Accordion } from 'waldur-ui';
 
@@ -11,12 +11,14 @@ interface TableFilterContainerProps {
   formId?: string;
   table?: string;
   setFilter?: (item: FilterItem) => void;
-  close?(): void; // comes from the drawer
+  /** Actions under the filters (Save / Cancel / Apply), inside the same
+   * filter context so they save under this `formId`. */
+  footer?: ReactNode;
 }
 
-/** The mobile/narrow-viewport filter drawer — opened via `useTable()`'s
- * `renderFiltersDrawer`/`openFiltersDrawer`, always at `filterPosition:
- * "sidebar"`. A `filterPosition="header"` variant used to live here too
+/** The mobile/narrow-viewport filter panel's content — shown by the table's
+ * `TableFilterSheet` when its `openFiltersDrawer` runs, always at
+ * `filterPosition: "sidebar"`. A `filterPosition="header"` variant used to live here too
  * (an always-visible inline row, for `<Table filterPosition="header">`),
  * but no real caller ever paired that prop with `filters` — `Table.tsx`'s
  * own header-filters render branch required both together and never fired
@@ -33,7 +35,7 @@ export const TableFilterContainer: FC<TableFilterContainerProps> = (props) => {
         setFilter: props.setFilter,
       }}
     >
-      <div className="filter-container">
+      <div className="flex-1 min-h-0 overflow-y-auto p-6 whitespace-normal [&_.filter-field]:pt-0">
         <SavedFilterSelect
           table={props.table}
           formId={filtersFormId}
@@ -41,6 +43,11 @@ export const TableFilterContainer: FC<TableFilterContainerProps> = (props) => {
         />
         <Accordion type="multiple">{props.filters}</Accordion>
       </div>
+      {props.footer && (
+        <div className="py-4 px-6 border-t-[1px] border-t-secondary">
+          {props.footer}
+        </div>
+      )}
     </TableFilterContext.Provider>
   );
 };

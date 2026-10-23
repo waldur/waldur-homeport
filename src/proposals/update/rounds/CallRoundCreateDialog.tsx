@@ -152,7 +152,7 @@ export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
       initialValues={{ timezone: DateTime.local().zoneName }}
       submitLabel={translate('Create')}
       validate={validate}
-      modalProps={{ bodyClassName: 'min-h-600px' }}
+      modalProps={{ bodyClassName: 'min-h-[600px]' }}
     />
   );
 };

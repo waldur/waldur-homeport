@@ -1,0 +1,20 @@
+// Theme Elements
+// The legacy/ partials are imported one by one, interleaved with custom/, to
+// keep the order the rules have always been emitted in (file-upload sits
+// between content and icon).
+@import '../legacy/base';
+@import '../legacy/borders';
+@import '../legacy/buttons';
+@import '../legacy/content';
+@import 'file-upload';
+@import '../legacy/icon';
+@import 'landing';
+@import 'marketplaces-selector';
+@import 'table';
+@import 'CopyToClipboardContainer';
+@import 'CodeBlock';
+@import 'action-group';
+@import 'ai-assistant/index';
+@import 'support/helpdesk';
+@import 'matrix/index';
+@import 'tos';

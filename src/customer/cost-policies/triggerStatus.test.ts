@@ -32,11 +32,10 @@ describe('getTriggerStatusView', () => {
       policy('held_by_project_credit', false, '2850.00'),
     );
     expect(view.label).toBe('Waiting for project credit');
-    expect(view.detail).toContain('2,850.00');
-    expect(view.detail).toContain('100.00');
     expect(view.explanation).toContain('7,701.67');
+    expect(view.explanation).toContain('2,850.00');
+    expect(view.explanation).toContain('100.00');
     expect(view.held).toBe(true);
-    expect(view.pending).toBe(false);
     expect(view.variant).toBe('warning');
   });
 
@@ -45,15 +44,14 @@ describe('getTriggerStatusView', () => {
       policy('held_by_customer_credit', false, null),
     );
     expect(view.label).toBe('Waiting for organization credit');
-    expect(view.detail).toMatch(/^Credit left is above the limit .*100\.00$/);
     expect(view.explanation).toContain('organization credit left is above');
     expect(view.explanation).not.toContain('null');
   });
 
   it('says the actions are pending when triggered but not fired', () => {
     const view = getTriggerStatusView(policy('credit_exhausted', true, '0.00'));
-    expect(view.pending).toBe(true);
-    expect(view.label).toBe('Limit reached, actions pending');
+    expect(view.label).toBe('Actions pending');
+    expect(view.explanation).toContain('is over the limit');
     expect(view.note).toContain('next evaluation');
   });
 
@@ -61,7 +59,6 @@ describe('getTriggerStatusView', () => {
     const view = getTriggerStatusView(
       policy('no_credit', true, null, { has_fired: true }),
     );
-    expect(view.pending).toBe(false);
     expect(view.label).toBe('Limit reached');
     expect(view.label).not.toContain('Waiting');
     expect(view.explanation).toContain('there is no credit');

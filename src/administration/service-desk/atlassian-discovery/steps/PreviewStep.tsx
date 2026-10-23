@@ -68,13 +68,13 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
     <>
       <BaseButton
         variant="tertiary"
-        className="min-w-125px me-auto"
+        className="min-w-[125px] me-auto"
         onClick={() => props.onPrev(values)}
         label={translate('Back')}
         iconNode={<CaretLeftIcon weight="bold" />}
         size="lg"
       />
-      <CloseDialogButton className="min-w-125px" />
+      <CloseDialogButton className="min-w-[125px]" />
       <BaseButton
         pending={saveSettingsMutation.isPending}
         label={translate('Save Settings')}

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { get } from 'lodash-es';
+import { get } from 'es-toolkit/compat';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useForm } from 'react-final-form';

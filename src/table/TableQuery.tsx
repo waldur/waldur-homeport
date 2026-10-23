@@ -1,4 +1,4 @@
-import { debounce } from 'lodash-es';
+import { debounce } from 'es-toolkit';
 import { Component } from 'react';
 
 import { translate } from 'waldur-i18n-runtime';
@@ -39,7 +39,7 @@ export class TableQuery extends Component<TableQueryProps, State> {
         placeholder={translate('Search...')}
         value={this.state.query}
         onChange={this.setQuery}
-        className="min-w-125px"
+        className="min-w-[125px]"
         inputClassName={this.props.inputClassName}
       />
     );

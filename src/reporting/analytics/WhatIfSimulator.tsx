@@ -64,7 +64,7 @@ const ParamInput: FC<{
   if (param.type === 'select' && param.options) {
     return (
       <NativeSelect
-        containerClassName="w-50"
+        containerClassName="w-1/2"
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >

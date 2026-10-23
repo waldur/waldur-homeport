@@ -89,7 +89,7 @@ export const MatrixRoomExpandableRow: FC<{ row: MatrixRoom }> = ({ row }) => (
     <EmbeddedTabs
       framed
       defaultValue="history"
-      className="min-h-375px"
+      className="min-h-[375px]"
       tabs={[
         {
           key: 'history',

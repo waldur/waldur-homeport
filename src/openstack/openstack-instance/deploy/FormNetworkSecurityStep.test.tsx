@@ -54,6 +54,14 @@ const SUBNET_UNROUTED = {
   is_connected: false,
 };
 
+// Neutron does not require a subnet name.
+const SUBNET_NAMELESS = {
+  url: 'https://example.com/api/openstack-subnets/nameless/',
+  uuid: 'nameless',
+  name: '',
+  cidr: '10.0.3.0/24',
+};
+
 // What getDefaultFloatingIps() returns for the "no floating IP" choice; the
 // select labels options by `address`, so seeding a row without one renders an
 // empty control.
@@ -320,5 +328,39 @@ describe('FormNetworkSecurityStep — auto-seed first network row', () => {
     // Even if a stale click landed, the form state should still be 1 row.
     await userEvent.click(addButton).catch(() => undefined);
     expect(getValues()?.attributes?.networks).toHaveLength(1);
+  });
+
+  it('shows a seeded nameless subnet by its CIDR', async () => {
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([SUBNET_NAMELESS]),
+    );
+
+    renderStep();
+
+    expect(await screen.findByText(SUBNET_NAMELESS.cidr)).toBeInTheDocument();
+  });
+
+  it('finds a nameless subnet by its CIDR', async () => {
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([SUBNET, SUBNET_NAMELESS]),
+    );
+    const user = userEvent.setup();
+    const { getValues } = renderStep({
+      attributes: {
+        networks: [{ subnet: SUBNET, floatingIp: SKIP_FIP }],
+      },
+    });
+
+    await screen.findByText(SUBNET.name);
+
+    await user.type(screen.getByRole('combobox', { name: /Subnet/ }), '10.0.3');
+    await user.click(
+      await screen.findByRole('option', { name: SUBNET_NAMELESS.cidr }),
+    );
+
+    await waitFor(() => {
+      const [row] = getValues().attributes.networks;
+      expect(row.subnet.uuid).toBe(SUBNET_NAMELESS.uuid);
+    });
   });
 });

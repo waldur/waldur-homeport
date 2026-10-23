@@ -58,7 +58,7 @@ export const ChartCard: React.FC<ChartCardProps> = ({
 
   return (
     <Card className="h-full card-bordered">
-      <Card.Header className="items-center border-0 pt-5 pb-2 min-h-60px">
+      <Card.Header className="items-center border-0 pt-5 pb-2 min-h-[60px]">
         <Card.Title className="items-start flex-col m-0">
           <span className="card-label font-medium text-primary">{title}</span>
           {summary && (

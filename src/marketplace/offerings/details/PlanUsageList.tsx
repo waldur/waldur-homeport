@@ -18,19 +18,19 @@ const PlanGroup = ({ plan }: { plan: PlanUsageResponse }) => (
     <table className="text-tertiary w-full mb-10">
       <tbody>
         <tr>
-          <th className="w-50 text-secondary font-medium">
+          <th className="w-1/2 text-secondary font-medium">
             {translate('Active count')}:
           </th>
           <td>{plan.usage}</td>
         </tr>
         <tr>
-          <th className="w-50 text-secondary font-medium">
+          <th className="w-1/2 text-secondary font-medium">
             {translate('Limit')}:
           </th>
           <td>{renderFieldOrDash(plan.limit)}</td>
         </tr>
         <tr>
-          <th className="w-50 text-secondary font-medium">
+          <th className="w-1/2 text-secondary font-medium">
             {translate('Remaining')}:
           </th>
           <td>{plan.remaining === null ? 'N/A' : plan.remaining}</td>

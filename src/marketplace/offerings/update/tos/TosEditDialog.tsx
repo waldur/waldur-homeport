@@ -77,10 +77,10 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
             iconNode={<PencilIcon weight="bold" />}
             footer={
               <div className="flex gap-3 justify-end mt-4">
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Update')}

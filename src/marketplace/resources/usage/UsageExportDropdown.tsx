@@ -1,5 +1,4 @@
 import { init } from 'echarts';
-import { sum, uniq } from 'lodash-es';
 import { useCallback } from 'react';
 import { ProjectUser, OfferingComponent } from 'waldur-js-client';
 
@@ -136,7 +135,9 @@ export const useUsageExport = (props: UsageExportDropdownProps) => {
       const filterUsernames = props.users?.length
         ? props.users.map((user) => user.offering_user_username)
         : null;
-      const usernames = uniq((userUsages || []).map((usage) => usage.username))
+      const usernames = [
+        ...new Set((userUsages || []).map((usage) => usage.username)),
+      ]
         .filter(
           (username) => !filterUsernames || filterUsernames.includes(username),
         )
@@ -221,7 +222,10 @@ export const useUsageExport = (props: UsageExportDropdownProps) => {
         totalRecord.push(
           ...allFormattedUsages.map(
             (compUsages) =>
-              sum(compUsages.map((usage) => Number(usage?.value))) || 'N/A',
+              compUsages.reduce(
+                (total, usage) => total + Number(usage?.value),
+                0,
+              ) || 'N/A',
           ),
         );
         exportData.data.push(totalRecord);

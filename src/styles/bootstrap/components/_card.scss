@@ -1,0 +1,150 @@
+// Card
+
+@use 'sass:map';
+
+// Base
+.card {
+  border: 0;
+  box-shadow: $card-box-shadow;
+
+  // Dark mode draws the card's edge with a border instead of a shadow.
+  @include dark-theme {
+    border: $card-border-width $card-border-style $card-border-color;
+    box-shadow: none;
+  }
+
+  // Header
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+    min-height: $card-header-height;
+    padding: 0 $card-px;
+    background-color: transparent;
+    border-bottom: $card-border-width $card-border-style $card-border-color;
+
+    // Title — 18px semibold per design system (text,lg)
+    .card-title {
+      display: flex;
+      align-items: center;
+      margin: $card-header-py;
+      margin-left: 0;
+      font-size: $h3-font-size;
+      font-weight: var(--font-weight-semibold);
+
+      &.flex-col {
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      &,
+      .card-label {
+        font-weight: var(--font-weight-medium);
+        font-size: 1.275rem;
+        color: var(--text-primary);
+      }
+
+      .card-label {
+        margin: 0 0.75rem 0 0;
+        flex-wrap: wrap;
+      }
+
+      // Description
+      small {
+        color: $text-muted;
+        font-size: 1rem;
+      }
+
+      // Headings
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 0;
+      }
+    }
+
+    // Toolbar
+    .card-toolbar {
+      display: flex;
+      align-items: center;
+      margin: $card-header-py 0;
+      flex-wrap: wrap;
+    }
+  }
+
+  // Body
+  .card-body {
+    padding: $card-py $card-px;
+  }
+
+  // Footer
+  .card-footer {
+    padding: $card-py $card-px;
+    background-color: transparent;
+    border-top: $card-border-width $card-border-style $card-border-color;
+  }
+
+  // Bordered style
+  &.card-bordered {
+    box-shadow: none;
+    border: $card-border-width $card-border-style $card-border-color;
+  }
+
+  // Flush header and footer borders
+  &.card-flush {
+    > .card-header {
+      border-bottom: 0;
+    }
+
+    > .card-footer {
+      border-top: 0;
+    }
+  }
+
+  &.card-shadow {
+    box-shadow: $card-box-shadow;
+    border: 0;
+
+    @include dark-theme {
+      box-shadow: none;
+    }
+  }
+
+  &.card-widget {
+    .card-body {
+      padding: 20px;
+    }
+  }
+}
+
+.card-px {
+  padding-left: $card-px !important;
+  padding-right: $card-px !important;
+}
+
+.card-shadow {
+  box-shadow: $card-box-shadow;
+
+  @include dark-theme {
+    box-shadow: none;
+  }
+}
+
+.card-py {
+  padding-top: $card-py !important;
+  padding-bottom: $card-py !important;
+}
+
+// Mobile mode
+@include media-breakpoint-down(md) {
+  .card {
+    > .card-header:not(.flex-nowrap) {
+      padding-top: $card-header-py;
+      padding-bottom: $card-header-py;
+    }
+  }
+}

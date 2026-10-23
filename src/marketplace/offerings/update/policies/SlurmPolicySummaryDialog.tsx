@@ -408,7 +408,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
             <table className="table align-middle table-row-bordered text-xs gy-3 gx-5">
               <tbody className="text-tertiary">
                 <tr>
-                  <td className="font-medium text-primary w-250px">
+                  <td className="font-medium text-primary w-[250px]">
                     {translate('Unused from previous period')}
                   </td>
                   <td>
@@ -666,7 +666,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
               <tbody className="text-tertiary">
                 {configSummary.map((row) => (
                   <tr key={row.label}>
-                    <td className="font-medium text-primary w-200px">
+                    <td className="font-medium text-primary w-[200px]">
                       {row.label}
                     </td>
                     <td>

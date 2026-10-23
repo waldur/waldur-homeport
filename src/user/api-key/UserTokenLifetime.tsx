@@ -50,12 +50,12 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
     <Card className="card-bordered mb-6">
       <Card.Header>
         <Row className="card-toolbar g-0 gap-4 w-full">
-          <Col xs className="order-0 mw-sm-25">
+          <Col xs className="order-0 sm:max-w-1/4">
             <Card.Title>
               <span className="h3 me-2">{translate('API token')}</span>
             </Card.Title>
           </Col>
-          <Col sm="auto" className="order-1 order-sm-2 min-w-25 ms-auto">
+          <Col sm="auto" className="order-1 order-sm-2 min-w-1/4 ms-auto">
             <div className="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-3">
               <SubmitButton
                 variant="primary"

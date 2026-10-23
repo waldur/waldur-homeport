@@ -1,5 +1,5 @@
+import { lowerCase, upperFirst } from 'es-toolkit/compat';
 import arrayMutators from 'final-form-arrays';
-import { lowerCase, upperFirst } from 'lodash-es';
 import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import {
@@ -98,13 +98,13 @@ export const ComponentPolicyFormDialog: FC<ComponentPolicyFormDialogProps> = ({
             }
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   disabled={invalid || !dirty}
                   submitting={submitMutation.isPending}
                   label={isEdit ? translate('Edit') : translate('Create')}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

@@ -1,6 +1,6 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { debounce } from 'lodash-es';
+import { debounce } from 'es-toolkit';
 import {
   FunctionComponent,
   MutableRefObject,

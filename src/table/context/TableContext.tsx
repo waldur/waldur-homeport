@@ -94,7 +94,6 @@ interface TableSlots<TData = any> {
   tableActions?: React.ReactNode;
   dropdownActions?: React.ReactNode;
   footer?: React.ReactNode;
-  tabs?: TableProps['tabs'];
 }
 
 /**

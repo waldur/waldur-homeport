@@ -35,10 +35,10 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
             <table className="table px-0 mb-0">
               <thead>
                 <tr>
-                  <td className="w-50">{translate('Component')}</td>
-                  <td className="w-25">{translate('Limit')}</td>
-                  <td className="w-25">{translate('Period')}</td>
-                  <td className="w-5px" />
+                  <td className="w-1/2">{translate('Component')}</td>
+                  <td className="w-1/4">{translate('Limit')}</td>
+                  <td className="w-1/4">{translate('Period')}</td>
+                  <td className="w-[5px]" />
                 </tr>
               </thead>
               <tbody>

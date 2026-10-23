@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { pick } from 'lodash-es';
+import { pick } from 'es-toolkit/compat';
 import { useCallback, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { checklistsAdminList, customersPartialUpdate } from 'waldur-js-client';

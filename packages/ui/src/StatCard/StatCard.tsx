@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import { Badge, type BadgeVariant } from '../Badge';
-import { Card, CardContent, CardTitle } from '../Card';
+import { Card, CardContent } from '../Card';
 import { cn } from '../cn';
 
 /**
@@ -15,24 +15,19 @@ import { cn } from '../cn';
  * silently breaks (zero bottom padding) for a label+value-only card.
  *
  * Real values (root font-size is 13px in that app, not 16px — see
- * src/metronic/sass/layout/_variables.scss's $root-font-size; expressed
+ * src/styles/bootstrap/_variables.scss's $font-size-root; expressed
  * below as arbitrary rem values, not their px-at-13px-root equivalents,
  * so this actually stays in sync if the root font-size ever changes —
  * see Card.tsx's own comment on the same choice):
- * padding is `.card-body.py-5` = 2.25rem sides ($card-px, unchanged from
- * the default card) / 1.25rem top+bottom (Bootstrap's `.py-5` spacer,
- * overriding the default card's 2rem) — not Card.tsx's own 2.25rem/2rem.
+ * padding is `.card-body.py-5` = 1.85rem sides ($card-px in _variables.scss,
+ * mapped to var(--card-padding-x, 1.85rem)) / 1.25rem top+bottom (Bootstrap's `.py-5`
+ * spacer, overriding the default card's 1.23rem).
  * The value is a hardcoded `style={{ fontSize: '32px' }}`, not a rem
  * token, so text-[32px] here matches it exactly rather than
  * approximating with Tailwind's own text-3xl (30px). The label is
- * `.fs-6.fw-bold` (14px) — Card.tsx's own CardTitle default (font-medium,
- * unmodified) already matches: this app's Metronic build overrides
- * Bootstrap's font-weight scale (src/metronic/sass/core/components/
- * _variables.scss: `$font-weight-bold: 500` — Bootstrap's own default is
- * 700 — `$font-weight-bolder: 600`), so real `.fw-bold` is genuinely
- * Tailwind's font-medium (500), not font-bold (700). The value's own
- * font-semibold (600) is correct as-is: it has no explicit weight class in
- * the real component, so it inherits `$headings-font-weight: $font-weight-bolder`
+ * `.text-sm.font-medium.text-quaternary` matching src/core/StatsCard.tsx directly.
+ * The value's own font-semibold (600) is correct as-is: it has no explicit weight
+ * class in the real component, so it inherits `$headings-font-weight: $font-weight-bolder`
  * = 600 from its real `<h1>` tag. The card itself is `.card-bordered`
  * (unconditionally bordered, box-shadow: none in BOTH themes) — a
  * different real variant than Card.tsx's own default (theme-conditional
@@ -81,8 +76,8 @@ export const StatCard = ({
         made the value->footer gap 0.25rem too wide. Applied as mt-[..] on
         each row instead, as rem (not their px-at-13px-root equivalents —
         see this file's top comment on why). */}
-    <CardContent className="flex flex-col px-[2.25rem] py-[1.25rem]">
-      <CardTitle>{label}</CardTitle>
+    <CardContent className="flex flex-col px-[var(--card-padding-x,1.85rem)] py-[1.25rem]">
+      <div className="text-sm font-medium text-quaternary">{label}</div>
       {/* leading-[1.2] + mb-[0.5rem]: the real component renders this as an
           <h1>, which — unlike CardTitle's h3, deliberately zeroed above —
           keeps its real Bootstrap heading typography here: $headings-

@@ -115,7 +115,7 @@ export const MaintenanceReportingFilter: FC<
 
   return (
     <div className="flex flex-wrap gap-6 mb-6">
-      <FormGroup label={translate('Preset')} className="grow mw-150px">
+      <FormGroup label={translate('Preset')} className="grow max-w-[150px]">
         <Select
           value={selectedPreset}
           onChange={(option: PresetOption | null) => {
@@ -129,7 +129,7 @@ export const MaintenanceReportingFilter: FC<
         />
       </FormGroup>
 
-      <FormGroup label={translate('Start date')} className="grow mw-150px">
+      <FormGroup label={translate('Start date')} className="grow max-w-[150px]">
         <DatePicker
           value={isoDateToDate(filter.startDate)}
           onChange={(date) =>
@@ -144,7 +144,7 @@ export const MaintenanceReportingFilter: FC<
         />
       </FormGroup>
 
-      <FormGroup label={translate('End date')} className="grow mw-150px">
+      <FormGroup label={translate('End date')} className="grow max-w-[150px]">
         <DatePicker
           value={isoDateToDate(filter.endDate)}
           onChange={(date) =>
@@ -159,7 +159,7 @@ export const MaintenanceReportingFilter: FC<
         />
       </FormGroup>
 
-      <FormGroup label={translate('State')} className="grow mw-250px">
+      <FormGroup label={translate('State')} className="grow max-w-[250px]">
         <Select
           value={selectedStates}
           onChange={(options: StateOption[] | null) =>
@@ -176,7 +176,7 @@ export const MaintenanceReportingFilter: FC<
 
       <FormGroup
         label={translate('Maintenance type')}
-        className="grow mw-200px"
+        className="grow max-w-[200px]"
       >
         <Select
           value={selectedMaintenanceType}

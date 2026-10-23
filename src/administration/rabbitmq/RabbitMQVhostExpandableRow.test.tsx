@@ -5,31 +5,23 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceSiteAgentConnectionStatsRetrieve } from 'waldur-js-client';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
+import { setTableQueryRows } from '@/table/mockTableQuery';
 import { renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import type { RmqQueueStats, RmqVhostStats } from './api';
 import { RabbitMQVhostExpandableRow } from './RabbitMQVhostExpandableRow';
 
-// Rows come from the mocked redux table state; no table request fires.
-vi.mock('@/table/useTableQuery', () => ({
-  useTableQuery: () => ({
-    data: undefined,
-    isLoading: false,
-    isFetching: false,
-    error: null,
-    refetch: vi.fn(),
-  }),
-}));
+// Serves the rows given to setTableQueryRows (none by default); no request fires.
+vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
 
 const mockStore = configureStore();
-const makeStore = (vhostName: string, queues: RmqQueueStats[]) =>
-  mockStore({
+const makeStore = (vhostName: string, queues: RmqQueueStats[]) => {
+  setTableQueryRows(queues);
+  return mockStore({
     tables: {
       [`RabbitMQQueues-${vhostName}`]: {
         loading: false,
-        entities: Object.fromEntries(queues.map((q) => [q.name, q])),
-        order: queues.map((q) => q.name),
         pagination: {
           pageSize: 10,
           resultCount: queues.length,
@@ -41,6 +33,7 @@ const makeStore = (vhostName: string, queues: RmqQueueStats[]) =>
       },
     },
   });
+};
 
 const renderRow = (row: RmqVhostStats) =>
   renderWithProviders(

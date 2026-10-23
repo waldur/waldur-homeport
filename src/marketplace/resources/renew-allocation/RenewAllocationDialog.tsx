@@ -195,7 +195,7 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
       )}
       initialValues={initialValues as Partial<RenewAllocationFormData>}
       data={{ resources }}
-      modalProps={{ bodyClassName: 'h-450px' }}
+      modalProps={{ bodyClassName: 'h-[450px]' }}
     />
   );
 };

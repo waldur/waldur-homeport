@@ -8,14 +8,17 @@ import { getTriggerStatusView, TriggerStatusPolicy } from './triggerStatus';
 
 interface CostPolicyTriggerCellProps {
   row: TriggerStatusPolicy;
-  /** Shown after the "Action triggered" badge, e.g. the affected resources. */
+  /** Shown after the status, e.g. the affected resources. */
   children?: ReactNode;
 }
 
-/** "Action triggered" with the reason the policy fires or waits.
+/** "Action triggered" as one badge, with the reason in its tooltip.
  *
- * A policy over its limit whose actions have not run yet shows that instead of
- * a plain "No", which reads as a broken policy.
+ * The badge already answers yes or no, so a separate Yes/No is shown only for
+ * an older backend that sends no `trigger_status`. A policy over its limit
+ * whose actions have not run yet says so, instead of a plain "No" that reads
+ * as a broken policy. The figures behind the reason stay in the tooltip, so
+ * every row is one line.
  */
 export const CostPolicyTriggerCell: FC<CostPolicyTriggerCellProps> = ({
   row,
@@ -23,10 +26,8 @@ export const CostPolicyTriggerCell: FC<CostPolicyTriggerCellProps> = ({
 }) => {
   const status = getTriggerStatusView(row);
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      {!status?.pending && <BooleanField value={Boolean(row.has_fired)} />}
-      {children}
-      {status && (
+    <div className="flex items-center gap-2">
+      {status ? (
         <Badge
           variant={status.variant}
           shape="pill"
@@ -41,21 +42,17 @@ export const CostPolicyTriggerCell: FC<CostPolicyTriggerCellProps> = ({
               status.explanation
             )
           }
+          className="whitespace-nowrap"
           // Focusable, so the reason is reachable without a mouse.
           tabIndex={0}
           data-testid="cost-policy-trigger-status"
         >
           {status.label}
         </Badge>
+      ) : (
+        <BooleanField value={Boolean(row.has_fired)} />
       )}
-      {status?.detail && (
-        <span
-          className="text-quaternary w-full text-xs"
-          data-testid="cost-policy-trigger-detail"
-        >
-          {status.detail}
-        </span>
-      )}
+      {children}
     </div>
   );
 };

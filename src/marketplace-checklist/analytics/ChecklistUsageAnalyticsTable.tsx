@@ -72,7 +72,7 @@ export const ChecklistUsageAnalyticsTable = () => {
     <TableWithTabs
       tabs={tabs}
       title={translate('Checklist usage analytics')}
-      headerClassName="min-h-60px"
+      headerClassName="min-h-[60px]"
       className="h-full"
     />
   );

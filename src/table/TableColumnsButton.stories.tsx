@@ -153,7 +153,7 @@ export const Open: Story = {
       canvas.getByRole('button', { name: 'Toggle visible columns' }),
     );
     await waitFor(() =>
-      expect(document.querySelector('.mw-400px')).toBeTruthy(),
+      expect(document.querySelector('.max-w-\\[400px\\]')).toBeTruthy(),
     );
   },
 };

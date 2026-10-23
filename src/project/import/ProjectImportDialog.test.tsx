@@ -1,6 +1,5 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { noop } from 'lodash-es';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {
@@ -110,9 +109,12 @@ const navigateToUploadStep = async (user, withResources = false) => {
   });
 };
 
+// Shared by on and off, which need the same function to detach it.
+const ignoreRejection = () => {};
+
 describe('ProjectImportDialog Component', () => {
-  beforeAll(() => process.on('unhandledRejection', noop));
-  afterAll(() => process.off('unhandledRejection', noop));
+  beforeAll(() => process.on('unhandledRejection', ignoreRejection));
+  afterAll(() => process.off('unhandledRejection', ignoreRejection));
 
   beforeEach(() => {
     resetTableRegistry();

@@ -183,7 +183,7 @@ export const UsageExpandableRow = ({
                   </span>
                 )}
               </div>
-              <div className="flex min-h-70px">
+              <div className="flex min-h-[70px]">
                 {isLoading || isLoadingResource ? (
                   <LoadingSpinner className="grow" />
                 ) : error || errorResource ? (

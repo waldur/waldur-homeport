@@ -315,7 +315,7 @@ the actions look (`ActionsMenu`).
 - `src/quotas/` - Resource quotas management
 - `src/theme/` - Theme management (dark/light mode)
 - `src/user/` - User management
-- `src/metronic/` - UI framework integration
+- `src/styles/bootstrap/` - Bootstrap / legacy SCSS styles
 
 ## Backend Integration
 

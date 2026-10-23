@@ -1,6 +1,5 @@
 import { FieldValidator } from 'final-form';
 import React, { ComponentType, ReactNode } from 'react';
-import { ColProps } from 'react-bootstrap';
 
 import { Fetcher, FetcherOptions, TableRequest } from 'waldur-api-client';
 
@@ -8,8 +7,19 @@ import { TableFiltersGroup } from './TableFilterService';
 
 export type { Fetcher, FetcherOptions, TableRequest };
 
-export interface StateTables {
-  tables: { [key: string]: TableState };
+/** How many of 12 columns a grid-mode card spans, from each breakpoint up
+ * (`true`: share the row equally). Rendered as the Bootstrap grid's `col-*`
+ * classes. */
+export type GridSize = Partial<
+  Record<'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl', number | 'auto' | true>
+>;
+
+/** Every table's state, keyed by table id. */
+export type TablesState = Record<string, TableState>;
+
+/** The slice of an app's Redux state that tables read: `tables`, at the root. */
+export interface TablesRootState {
+  tables: TablesState;
 }
 
 export interface TableOptionsType<RowType = any> {
@@ -95,8 +105,6 @@ export interface FilterItem {
 }
 
 export interface TableState {
-  entities?: Record<string, any>;
-  order?: string[];
   loading?: boolean;
   error?: any;
   mode?: DisplayMode;
@@ -200,9 +208,10 @@ export interface TableProps<RowType = any> extends TableState {
   columns?: Array<Column<RowType>>;
   setDisplayMode?: (mode: DisplayMode) => void;
   gridItem?: React.ComponentType<{ row: RowType }>;
-  gridSize?: ColProps;
+  gridSize?: GridSize;
   gridSpace?: number;
   gridFixedWidth?: boolean;
+  /** Opens the narrow-viewport filter panel; `BaseTable` supplies its own. */
   openFiltersDrawer?: (filters: React.ReactNode, formId?: string) => void;
   renderFiltersDrawer?: (filters: React.ReactNode, formId?: string) => void;
   dropdownActions?: ReactNode;
@@ -260,7 +269,11 @@ export interface TableProps<RowType = any> extends TableState {
   subtitle?: React.ReactNode;
   hasActionBar?: boolean;
   hasHeaders?: boolean;
+  /** Router-driven tabs above the rows; homeport's `Table` renders them as
+   * `nav`. A table without that wrapper passes `nav` itself. */
   tabs?: TableTab[];
+  /** A tab bar shown above the rows, e.g. waldur-ui's `TabNav`. */
+  nav?: ReactNode;
   enableMultiSelect?: boolean;
   multiSelectActions?: React.ComponentType<{ rows: RowType[]; refetch }>;
   selectRow?(row: RowType): void;

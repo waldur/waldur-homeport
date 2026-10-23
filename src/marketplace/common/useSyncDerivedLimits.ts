@@ -1,4 +1,4 @@
-import { get } from 'lodash-es';
+import { get } from 'es-toolkit/compat';
 import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-final-form';
 

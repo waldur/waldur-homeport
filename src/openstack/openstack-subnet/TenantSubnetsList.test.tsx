@@ -1,11 +1,14 @@
 import { screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { OpenStackSubNet } from 'waldur-js-client';
 
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderTable } from '@/table/testUtils';
 
 import { TenantSubnetsList } from './TenantSubnetsList';
+
+// Serves the row renderTable sets; no request fires.
+vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
 
 const subnet = (overrides: Partial<OpenStackSubNet>) =>
   ({

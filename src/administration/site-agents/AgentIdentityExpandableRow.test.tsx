@@ -5,19 +5,13 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceSiteAgentConnectionStatsRetrieve } from 'waldur-js-client';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
+import { setTableQueryRows } from '@/table/mockTableQuery';
 import { renderWithProviders } from '@/test/harness';
 
 import { AgentIdentityExpandableRow } from './AgentIdentityExpandableRow';
 
-vi.mock('@/table/useTableQuery', () => ({
-  useTableQuery: () => ({
-    data: undefined,
-    isLoading: false,
-    isFetching: false,
-    error: null,
-    refetch: vi.fn(),
-  }),
-}));
+// Serves the rows given to setTableQueryRows (none by default); no request fires.
+vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
 
 const AGENT_UUID = 'agent-1';
 const CONSUMER_QUEUE = 'consumer_0dc92ac0518e4604a2e27ff11120df6c';
@@ -31,13 +25,12 @@ const identity = {
 } as any;
 
 const mockStore = configureStore();
-const makeStore = (queues: any[]) =>
-  mockStore({
+const makeStore = (queues: any[]) => {
+  setTableQueryRows(queues);
+  return mockStore({
     tables: {
       [`AgentQueues-${AGENT_UUID}`]: {
         loading: false,
-        entities: Object.fromEntries(queues.map((q) => [q.name, q])),
-        order: queues.map((q) => q.name),
         pagination: {
           pageSize: 10,
           resultCount: queues.length,
@@ -49,6 +42,7 @@ const makeStore = (queues: any[]) =>
       },
     },
   });
+};
 
 const agentWith = (queues: any[]) => ({
   agents: [

@@ -153,7 +153,7 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
           ),
 
           render: ({ row }) => <>{defaultCurrency(row.price)}</>,
-          className: invoiceView ? undefined : 'w-150px',
+          className: invoiceView ? undefined : 'w-[150px]',
         },
         ...(invoiceView
           ? [
@@ -164,7 +164,7 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
               {
                 title: translate('Total'),
                 render: ({ row }) => <>{defaultCurrency(row.total)}</>,
-                className: 'w-150px',
+                className: 'w-[150px]',
               },
             ]
           : []),

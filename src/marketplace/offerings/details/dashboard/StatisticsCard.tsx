@@ -49,7 +49,7 @@ export const StatisticsCard: FC<StatisticsCardProps> = ({
               </span>
             </Tooltip>
           ) : max ? (
-            <div className="grow mw-80px mb-3">
+            <div className="grow max-w-[80px] mb-3">
               <Progress
                 value={value}
                 max={max}

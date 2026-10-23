@@ -1,23 +1,15 @@
 import { arrayMove } from '@dnd-kit/sortable';
-import { isEqual } from 'lodash-es';
-import { Reducer } from 'redux';
-
-import { ALL_RESOURCES_TABLE_ID } from '@/marketplace/resources/list/constants';
-import { createByKey } from '@/store/utils';
+import { isEqual } from 'es-toolkit';
+import {
+  combineReducers,
+  legacy_createStore as createStore,
+  Reducer,
+  Store,
+} from 'redux';
 
 import * as actions from './actions';
 import { INITIAL_STATE } from './constants';
-import { TableState } from './types';
-
-const deleteEntity = (state, action) => {
-  const { [action.payload.uuid]: _, ...entities } = state.entities;
-  const index = state.order.indexOf(action.payload.uuid);
-  return {
-    ...state,
-    entities,
-    order: [...state.order.slice(0, index), ...state.order.slice(index + 1)],
-  };
-};
+import { TableState, TablesRootState, TablesState } from './types';
 
 const pagination = (state = INITIAL_STATE, action): TableState => {
   switch (action.type) {
@@ -30,8 +22,6 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
     case actions.FETCH_LIST_DONE:
       return {
         ...state,
-        entities: action.payload.entities,
-        order: action.payload.order,
         pagination: {
           ...state.pagination,
           resultCount: action.payload.resultCount,
@@ -77,31 +67,6 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
           currentPage: 1,
         },
       };
-
-    case actions.ENTITY_CREATE:
-      return {
-        ...state,
-        entities: {
-          ...state.entities,
-          [action.payload.uuid]: action.payload.content,
-        },
-        order: [...state.order, action.payload.uuid],
-      };
-
-    case actions.ENTITY_UPDATE:
-      return {
-        ...state,
-        entities: {
-          ...state.entities,
-          [action.payload.uuid]:
-            typeof action.payload.content === 'function'
-              ? action.payload.content(state.entities[action.payload.uuid])
-              : action.payload.content,
-        },
-      };
-
-    case actions.ENTITY_DELETE:
-      return deleteEntity(state, action);
 
     case actions.PAGE_SIZE_UPDATE:
       return {
@@ -198,6 +163,13 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
       return {
         ...state,
         registeredFilterNames: [],
+      };
+
+    case actions.RESTORE_FILTERS:
+      return {
+        ...state,
+        filtersStorage: action.payload.filtersStorage,
+        selectedSavedFilter: action.payload.selectedSavedFilter,
       };
 
     case actions.CLEAR_ALL_FILTERS:
@@ -335,20 +307,19 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
   }
 };
 
-export const reducer = createByKey(
-  (action) => action.payload && action.payload.table,
-  (action) => action.payload.table,
-)(pagination) as Reducer<Record<string, TableState>>;
-
-const initialTableState = {
-  // We need this to be created first because we use this for sidebar resource filters
-  [ALL_RESOURCES_TABLE_ID]: INITIAL_STATE,
+/** Every table's state, keyed by table id; an action names its table in
+ * `payload.table` and leaves the others alone. */
+export const tablesReducer: Reducer<TablesState> = (state = {}, action) => {
+  const table = action.payload?.table;
+  if (!table) {
+    return state;
+  }
+  return { ...state, [table]: pagination(state[table], action) };
 };
 
-export const tableInitialReducer = (state = initialTableState, action) => {
-  const tableState = reducer(state, action);
-  return {
-    ...state,
-    ...tableState,
-  };
-};
+/** A store holding only table state, for an app with no Redux store of its
+ * own. An app that has one adds `tables: tablesReducer` to it instead. */
+export const createTablesStore = (
+  tables: TablesState = {},
+): Store<TablesRootState> =>
+  createStore(combineReducers({ tables: tablesReducer }), { tables });

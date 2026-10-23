@@ -10,7 +10,7 @@ export const OfferingAccessButton = ({ offering }) =>
       href={offering.access_url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`min-w-100px ${buttonVariants({ variant: 'primary' })}`}
+      className={`min-w-[100px] ${buttonVariants({ variant: 'primary' })}`}
     >
       <span className="svg-icon svg-icon-2">
         <ArrowSquareOutIcon weight="bold" />

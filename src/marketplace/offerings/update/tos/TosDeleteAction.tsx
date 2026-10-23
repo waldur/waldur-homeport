@@ -1,4 +1,4 @@
-import { truncate } from 'lodash-es';
+import { truncate } from 'es-toolkit/compat';
 import { marketplaceOfferingTermsOfServiceDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';

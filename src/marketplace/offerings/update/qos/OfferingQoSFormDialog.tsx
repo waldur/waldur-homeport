@@ -1,5 +1,5 @@
 import { PencilSimpleIcon, PlusCircleIcon } from '@phosphor-icons/react';
-import { omit } from 'lodash-es';
+import { omit } from 'es-toolkit';
 import { FC } from 'react';
 import { Form } from 'react-final-form';
 import {
@@ -65,16 +65,16 @@ export const OfferingQoSFormDialog: FC<OfferingQoSFormDialogProps> = ({
                 ? translate('Edit QoS profile')
                 : translate('Add QoS profile')
             }
-            bodyClassName="h-500px"
+            bodyClassName="h-[500px]"
             footer={
               <>
-                <CloseDialogButton className="w-125px" />
+                <CloseDialogButton className="w-[125px]" />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
                   label={isEdit ? translate('Edit') : translate('Add')}
                   variant="primary"
-                  className="w-125px"
+                  className="w-[125px]"
                 />
               </>
             }

@@ -331,7 +331,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
             }
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   disabled={pristine}
                   disabledReason={
@@ -341,7 +341,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
                   }
                   submitting={submitting}
                   label={translate('Save')}
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

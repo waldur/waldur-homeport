@@ -1,4 +1,3 @@
-import { uniq } from 'lodash-es';
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { useToggle } from 'react-use';
@@ -176,8 +175,10 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
       parseOfferingUsersFile(_file)
         .then(async (_data) => {
           // Prepare the requests payload here and save it in the formData
-          const offeringUuids = uniq(_data.map((user) => user.offering_uuid));
-          const usernames = uniq(_data.map((user) => user.username));
+          const offeringUuids = [
+            ...new Set(_data.map((user) => user.offering_uuid)),
+          ];
+          const usernames = [...new Set(_data.map((user) => user.username))];
 
           // Fetch required data (users and offerings)
           const offerings = await marketplaceProviderOfferingsList({

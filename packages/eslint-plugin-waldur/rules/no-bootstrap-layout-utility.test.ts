@@ -22,6 +22,9 @@ describe('no-bootstrap-layout-utility', () => {
         code: 'const A = () => <div className="flex block hidden inline-flex grid flex-col items-center justify-between grow shrink-0 w-full h-full truncate md:hidden lg:flex" />;',
       },
       {
+        code: 'const A = () => <div className="w-10 w-28 w-32 min-w-26 min-w-28 h-11 h-6 w-0 w-auto h-auto min-h-auto min-w-auto" />;',
+      },
+      {
         code: "const A = () => <div className={cn('hover:items-center', 'md:justify-between')} />;",
       },
       // Non-class lists
@@ -159,12 +162,10 @@ describe('no-bootstrap-layout-utility', () => {
         ],
       },
       {
-        code: 'const A = () => <div className="w-100 h-100 mw-100 mh-100 text-truncate" />;',
+        code: 'const A = () => <div className="mw-100 mh-100 text-truncate" />;',
         output:
-          'const A = () => <div className="w-full h-full max-w-full max-h-full truncate" />;',
+          'const A = () => <div className="max-w-full max-h-full truncate" />;',
         errors: [
-          { messageId: 'layoutUtility' },
-          { messageId: 'layoutUtility' },
           { messageId: 'layoutUtility' },
           { messageId: 'layoutUtility' },
           { messageId: 'layoutUtility' },
@@ -191,6 +192,188 @@ describe('no-bootstrap-layout-utility', () => {
         errors: [
           { messageId: 'layoutUtility' },
           { messageId: 'layoutUtility' },
+        ],
+      },
+      {
+        // Fixed-size pixel sizing utilities
+        code: 'const A = () => <div className="w-125px min-w-125px mw-175px h-500px mh-300px min-h-60px" />;',
+        output:
+          'const A = () => <div className="w-[125px] min-w-[125px] max-w-[175px] h-[500px] max-h-[300px] min-h-[60px]" />;',
+        errors: [
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'w-125px', fix: 'w-[125px]' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'min-w-125px', fix: 'min-w-[125px]' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'mw-175px', fix: 'max-w-[175px]' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'h-500px', fix: 'h-[500px]' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'mh-300px', fix: 'max-h-[300px]' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'min-h-60px', fix: 'min-h-[60px]' },
+          },
+        ],
+      },
+      {
+        // Percentage sizing utilities Tailwind does not define
+        code: 'const A = () => <div className="mw-50 mh-50" />;',
+        output: 'const A = () => <div className="max-w-1/2 max-h-1/2" />;',
+        errors: [
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'mw-50', fix: 'max-w-1/2' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'mh-50', fix: 'max-h-1/2' },
+          },
+        ],
+      },
+      {
+        // Also Tailwind spacing classes: no autofix, a suggestion per reading.
+        code: 'const A = () => <div className="w-50 hover:min-h-100" />;',
+        output: null,
+        errors: [
+          {
+            messageId: 'ambiguousSize',
+            data: { token: 'w-50', percent: 'w-1/2', pixels: 'w-[200px]' },
+            suggestions: [
+              {
+                messageId: 'useReplacement',
+                data: { fix: 'w-1/2' },
+                output:
+                  'const A = () => <div className="w-1/2 hover:min-h-100" />;',
+              },
+              {
+                messageId: 'useReplacement',
+                data: { fix: 'w-[200px]' },
+                output:
+                  'const A = () => <div className="w-[200px] hover:min-h-100" />;',
+              },
+            ],
+          },
+          {
+            messageId: 'ambiguousSize',
+            data: {
+              token: 'hover:min-h-100',
+              percent: 'hover:min-h-full',
+              pixels: 'hover:min-h-[400px]',
+            },
+            suggestions: [
+              {
+                messageId: 'useReplacement',
+                data: { fix: 'hover:min-h-full' },
+                output:
+                  'const A = () => <div className="w-50 hover:min-h-full" />;',
+              },
+              {
+                messageId: 'useReplacement',
+                data: { fix: 'hover:min-h-[400px]' },
+                output:
+                  'const A = () => <div className="w-50 hover:min-h-[400px]" />;',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        code: 'const A = () => <div className="w-25 w-75 h-100 min-w-50" />;',
+        output: null,
+        errors: [
+          {
+            messageId: 'ambiguousSize',
+            data: { token: 'w-25', percent: 'w-1/4', pixels: 'w-[100px]' },
+            suggestions: 2,
+          },
+          {
+            messageId: 'ambiguousSize',
+            data: { token: 'w-75', percent: 'w-3/4', pixels: 'w-[300px]' },
+            suggestions: 2,
+          },
+          {
+            messageId: 'ambiguousSize',
+            data: { token: 'h-100', percent: 'h-full', pixels: 'h-[400px]' },
+            suggestions: 2,
+          },
+          {
+            messageId: 'ambiguousSize',
+            data: {
+              token: 'min-w-50',
+              percent: 'min-w-1/2',
+              pixels: 'min-w-[200px]',
+            },
+            suggestions: 2,
+          },
+        ],
+      },
+      {
+        // Responsive size utilities
+        code: 'const A = () => <div className="mw-sm-25 mw-lg-200px w-sm-120px min-h-md-100px h-lg-100px w-sm-auto" />;',
+        output:
+          'const A = () => <div className="sm:max-w-1/4 lg:max-w-[200px] sm:w-[120px] md:min-h-[100px] lg:h-[100px] sm:w-auto" />;',
+        errors: [
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'mw-sm-25', fix: 'sm:max-w-1/4' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'mw-lg-200px', fix: 'lg:max-w-[200px]' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'w-sm-120px', fix: 'sm:w-[120px]' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'min-h-md-100px', fix: 'md:min-h-[100px]' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'h-lg-100px', fix: 'lg:h-[100px]' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'w-sm-auto', fix: 'sm:w-auto' },
+          },
+        ],
+      },
+      {
+        // Table column definition
+        code: "const col = { title: 'Actions', className: 'min-w-125px' };",
+        output: "const col = { title: 'Actions', className: 'min-w-[125px]' };",
+        errors: [
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'min-w-125px', fix: 'min-w-[125px]' },
+          },
+        ],
+      },
+      {
+        // Unset sizing
+        code: 'const A = () => <div className="w-unset min-w-unset" />;',
+        output: 'const A = () => <div className="w-[unset] min-w-[unset]" />;',
+        errors: [
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'w-unset', fix: 'w-[unset]' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'min-w-unset', fix: 'min-w-[unset]' },
+          },
         ],
       },
     ],

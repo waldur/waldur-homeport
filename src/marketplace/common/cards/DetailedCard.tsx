@@ -49,7 +49,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
     >
       <Card className="card-bordered h-full overflow-hidden cursor-pointer border-hover-brand">
         {/* Image section */}
-        <div className="h-120px flex flex-center border-b-[1px] border-b-secondary bg-brand-subtle">
+        <div className="h-[120px] flex flex-center border-b-[1px] border-b-secondary bg-brand-subtle">
           {image ? (
             <img
               alt={offering.name}
@@ -62,7 +62,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
             />
           ) : (
             <span className="svg-icon svg-icon-5tx svg-icon-dark">
-              <Placeholder className="mh-120px" />
+              <Placeholder className="max-h-[120px]" />
             </span>
           )}
         </div>

@@ -1,5 +1,5 @@
+import { get } from 'es-toolkit/compat';
 import { FieldValidator } from 'final-form';
-import { get } from 'lodash-es';
 import { ComponentType, FC, ReactNode } from 'react';
 import { FieldProps } from 'react-final-form';
 

@@ -90,7 +90,7 @@ const OrganizationsTableBody: FunctionComponent<
       verboseName={translate('Organizations')}
       showPageSizeSelector={true}
       tableActions={
-        <div className="form-inline min-w-200px">
+        <div className="min-w-[200px]">
           <SelectFilter
             title={translate('Accounting is running')}
             name="accounting_is_running"

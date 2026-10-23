@@ -47,6 +47,24 @@ export const isCurrentOrUpcoming = (
 };
 
 /**
+ * Whether the maintenance is happening now. A provider moves an announcement
+ * to In progress by hand, so one still Scheduled whose window has opened is
+ * underway too: telling users it happened "6 hours ago" would be wrong.
+ */
+export const isUnderway = (
+  maintenance: PublicMaintenanceAnnouncement,
+): boolean => {
+  if (maintenance.state === 'In progress') return true;
+  if (!maintenance.scheduled_start) return false;
+  const now = Date.now();
+  if (parseDate(maintenance.scheduled_start).toMillis() > now) return false;
+  return (
+    !maintenance.scheduled_end ||
+    parseDate(maintenance.scheduled_end).toMillis() >= now
+  );
+};
+
+/**
  * Filters maintenance announcements affecting a given offering, keeping only
  * those whose window is current or upcoming.
  * Returns an empty array when no offering UUID is supplied so that

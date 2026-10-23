@@ -43,4 +43,19 @@ describe('StateIndicator', () => {
     expect(screen.getByText('Active')).toBeInTheDocument();
     expect(screen.getByText('OK')).toBeInTheDocument();
   });
+
+  // Backend states arrive in capitals; lodash-style word splitting turns
+  // underscores into spaces before the first letter is capitalised.
+  it.each([
+    ['CREATION_SCHEDULED', 'Creation scheduled'],
+    ['ERRED', 'Erred'],
+    // lodash's lowerCase strips accents, and so does es-toolkit/compat's.
+    ['ÉCHEC_TOTAL', 'Echec total'],
+    ['OK', 'OK'],
+    ['N/A', 'N/A'],
+    ['Partially done', 'Partially done'],
+  ])('labels %s as %s', (label, expected) => {
+    render(<StateIndicator label={label} variant="success" tone="outline" />);
+    expect(screen.getByText(expected)).toBeInTheDocument();
+  });
 });

@@ -212,13 +212,13 @@ const RemoteSyncRenderer = ({
         )}
         footer={
           <>
-            <CloseDialogButton className="w-175px" />
+            <CloseDialogButton className="w-[175px]" />
             <SubmitButton
               disabled={Boolean(invalid || pristine || connecting || error)}
               submitting={submitting}
               label={isEdit ? translate('Save') : translate('Create')}
               variant="primary"
-              className="w-175px"
+              className="w-[175px]"
             />
           </>
         }
@@ -242,7 +242,7 @@ const RemoteSyncRenderer = ({
             type="floating"
             variant="warning"
             title={<>{translate('Connecting')}...</>}
-            className="overflow-auto mh-200px"
+            className="overflow-auto max-h-[200px]"
           />
         ) : error ? (
           <AlertItem
@@ -250,7 +250,7 @@ const RemoteSyncRenderer = ({
             variant="error"
             title={translate('Error')}
             body={<FieldError error={error} />}
-            className="overflow-auto mh-200px"
+            className="overflow-auto max-h-[200px]"
           />
         ) : null}
         <Row>

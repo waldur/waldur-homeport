@@ -49,4 +49,19 @@ describe('FieldWarning', () => {
     expect(screen.getByRole('status')).toHaveTextContent('Looks unusual');
     expect(screen.queryByRole('alert')).toBeNull();
   });
+
+  // API field names become labels: snake_case and camelCase split into words.
+  it('labels each field of an object error by its readable name', () => {
+    render(
+      <FieldError
+        error={{
+          backend_url: ['Enter a valid URL.'],
+          maxNodeCount: ['Too many.'],
+        }}
+      />,
+    );
+    const alert = screen.getByRole('alert');
+    expect(alert).toHaveTextContent('Backend url: Enter a valid URL.');
+    expect(alert).toHaveTextContent('Max node count: Too many.');
+  });
 });

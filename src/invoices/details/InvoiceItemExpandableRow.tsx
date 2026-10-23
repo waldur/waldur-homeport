@@ -277,7 +277,7 @@ export const InvoiceItemExpandableRow: FC<OwnProps> = (props) => {
                     </th>
                   </>
                 )}
-                <th className="w-150px">{translate('Actions')}</th>
+                <th className="w-[150px]">{translate('Actions')}</th>
               </tr>
             </thead>
             <tbody>

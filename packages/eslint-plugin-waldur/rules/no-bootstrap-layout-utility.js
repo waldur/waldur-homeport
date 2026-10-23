@@ -17,8 +17,8 @@
  *   justify-content-between → justify-between
  *   flex-grow-1            → grow
  *   flex-shrink-0          → shrink-0
- *   w-100                  → w-full
- *   h-100                  → h-full
+ *   mw-100                 → max-w-full
+ *   min-w-125px            → min-w-[125px]
  *   text-truncate          → truncate
  *
  * This rule reports all such classes and autofixes them to their Tailwind counterparts.
@@ -28,6 +28,12 @@
  * never stops wrapping. When the class list keeps such a base, a responsive
  * `flex-sm-nowrap` / `flex-sm-wrap` is reported without a fix: write
  * `max-sm:flex-wrap` (or `max-sm:flex-nowrap`) in place of both classes.
+ *
+ * Another: `w-50`, `h-25`, `min-w-75`, `min-h-100` (and the rest of
+ * w/h/min-w/min-h × 25/50/75/100) are also Tailwind spacing classes, and
+ * Bootstrap no longer generates them (#473), so new code using one may mean
+ * Tailwind's `w-50` (200px). They are reported without a fix, with a
+ * suggestion for each reading: `w-1/2` (Bootstrap's 50%) or `w-[200px]`.
  */
 
 import { notAClassList } from './class-name-tokens.js';
@@ -110,8 +116,66 @@ const STATIC_LAYOUT_MAP = {
   'text-truncate': 'truncate',
 };
 
+const SIZE_PROP_MAP = {
+  w: 'w',
+  mw: 'max-w',
+  'min-w': 'min-w',
+  h: 'h',
+  mh: 'max-h',
+  'min-h': 'min-h',
+};
+
+const SIZE_VALUE_MAP = {
+  25: '1/4',
+  50: '1/2',
+  75: '3/4',
+  100: 'full',
+  auto: 'auto',
+  unset: '[unset]',
+};
+
+const SIZE_RE =
+  /^(w|mw|min-w|h|mh|min-h)(?:-(sm|md|lg|xl|xxl))?-(\d+px|25|50|75|100|auto|unset)$/;
+
+// Bootstrap percentages whose names Tailwind also defines, as multiples of
+// its 4px spacing unit (packages/design-tokens/src/css/primitives/spacing.css).
+const AMBIGUOUS_SIZE_RE = /^(w|h|min-w|min-h)-(25|50|75|100)$/;
+const SPACING_PX = 4;
+
+/** w-50 → { percent: 'w-1/2', pixels: 'w-[200px]' }, else null. */
+const getAmbiguousSize = (name) => {
+  const m = AMBIGUOUS_SIZE_RE.exec(name);
+  if (!m) return null;
+  return {
+    percent: getLayoutReplacement(name),
+    pixels: `${m[1]}-[${Number(m[2]) * SPACING_PX}px]`,
+  };
+};
+
+const getSizeReplacement = (name) => {
+  const m = SIZE_RE.exec(name);
+  if (!m) return null;
+  const prop = SIZE_PROP_MAP[m[1]];
+  const bp = m[2] ? BP_MAP[m[2]] : null;
+  const rawVal = m[3];
+  let val;
+  if (rawVal.endsWith('px')) {
+    val = `[${rawVal}]`;
+  } else if (rawVal === 'auto' && (prop === 'max-w' || prop === 'max-h')) {
+    val = 'none';
+  } else {
+    val = SIZE_VALUE_MAP[rawVal];
+  }
+  const base = `${prop}-${val}`;
+  const replacement = bp ? `${bp}:${base}` : base;
+  return replacement === name ? null : replacement;
+};
+
 export const getLayoutReplacement = (name) => {
   if (STATIC_LAYOUT_MAP[name]) return STATIC_LAYOUT_MAP[name];
+
+  const size = getSizeReplacement(name);
+  if (size) return size;
 
   let m =
     /^d-(sm|md|lg|xl|xxl)-(none|block|flex|inline|inline-block|inline-flex|grid|table|table-row|table-cell)$/.exec(
@@ -182,10 +246,14 @@ export default {
       recommended: true,
     },
     fixable: 'code',
+    hasSuggestions: true,
     schema: [],
     messages: {
       layoutUtility:
         '"{{ token }}" is a Bootstrap layout utility. Use "{{ fix }}" instead.',
+      ambiguousSize:
+        '"{{ token }}" was Bootstrap\'s percentage size, but Tailwind reads it as a spacing step. Write "{{ percent }}" for the percentage or "{{ pixels }}" for the fixed size.',
+      useReplacement: 'Replace with "{{ fix }}".',
       wrapConflict:
         '"{{ token }}" next to "{{ base }}": Bootstrap\'s !important .{{ base }} would beat "{{ fix }}". Replace both with "{{ alternative }}".',
     },
@@ -227,7 +295,30 @@ export default {
           );
           regex.lastIndex = searchOffset;
           const match = regex.exec(sourceText);
-          if (match) {
+          const ambiguous = getAmbiguousSize(name);
+          if (ambiguous) {
+            const range = match && [
+              node.range[0] + match.index,
+              node.range[0] + match.index + token.length,
+            ];
+            if (match) searchOffset = match.index + token.length;
+            const options = [ambiguous.percent, ambiguous.pixels].map(
+              (value) => prefix + value + suffix,
+            );
+
+            context.report({
+              node,
+              messageId: 'ambiguousSize',
+              data: { token, percent: options[0], pixels: options[1] },
+              suggest: range
+                ? options.map((option) => ({
+                    messageId: 'useReplacement',
+                    data: { fix: option },
+                    fix: (fixer) => fixer.replaceTextRange(range, option),
+                  }))
+                : [],
+            });
+          } else if (match) {
             const tokenStart = node.range[0] + match.index;
             const tokenEnd = tokenStart + token.length;
             searchOffset = match.index + token.length;

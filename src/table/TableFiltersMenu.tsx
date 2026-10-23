@@ -34,7 +34,7 @@ import {
   selectTableSavedFilters,
 } from './selectors';
 import { TableFilterService } from './TableFilterService';
-import { TableProps } from './types';
+import { TableProps, TablesRootState } from './types';
 import { getSavedFiltersKey } from './utils';
 
 const SaveFilterDialog = lazyComponent(() =>
@@ -95,7 +95,7 @@ const FlyoutRow: FC<
       <MenuPopover.Content
         side="right"
         align="start"
-        className="w-250px py-3 shadow-sm"
+        className="w-[250px] py-3 shadow-sm"
         // Same close-focus rule as the filter rows — see
         // TableMenuFilterItem's onCloseAutoFocus in TableFilterItem.tsx.
         onCloseAutoFocus={(e) =>
@@ -123,12 +123,12 @@ const SaveFilterItems = ({ table, formId, apply }) => {
   const { activeItemName, setActiveItemName } = useContext(TableFilterContext);
   const formValues = useSelector(selectFilterValues(table)) || {};
 
-  const selectedSavedFilter = useSelector((state: any) =>
+  const selectedSavedFilter = useSelector((state: TablesRootState) =>
     selectSelectedSavedFilter(state, table),
   );
   const key = useMemo(() => getSavedFiltersKey(table, formId), [table, formId]);
 
-  const list = useSelector((state: any) =>
+  const list = useSelector((state: TablesRootState) =>
     selectTableSavedFilters(state, table),
   );
 
@@ -447,10 +447,10 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
               // closes it and focus returns to the funnel icon.
               onKeyDown={(e) => closeFlyoutOnTabOut(e, () => setOpen(false))}
               align="start"
-              // w-375px: matches TableFilterItem.tsx's own single-filter
+              // w-[375px]: matches TableFilterItem.tsx's own single-filter
               // flyout (same kind of content — one filter's field), wide
               // enough for an AsyncSelect's search box and option list.
-              className="table-filters-menu font-medium text-sm w-375px"
+              className="table-filters-menu font-medium text-sm w-[375px]"
             >
               {props.filters}
             </MenuPopover.Content>
@@ -490,7 +490,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
               // above then returns focus to the "+" trigger.
               onKeyDown={(e) => closeFlyoutOnTabOut(e, () => setOpen(false))}
               align="start"
-              className="table-filters-menu font-medium py-1 text-sm w-250px"
+              className="table-filters-menu font-medium py-1 text-sm w-[250px]"
             >
               <SaveFilterItems
                 table={props.table}

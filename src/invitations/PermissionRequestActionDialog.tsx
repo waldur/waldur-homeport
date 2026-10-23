@@ -58,7 +58,7 @@ export const PermissionRequestActionDialog: FunctionComponent<OwnProps> = (
                     submitting={isRejecting}
                     disabled={invalid || isPending}
                     variant="danger"
-                    className="w-150px"
+                    className="w-[150px]"
                     onClick={() => {
                       actionRef.current = 'reject';
                       handleSubmit();
@@ -69,7 +69,7 @@ export const PermissionRequestActionDialog: FunctionComponent<OwnProps> = (
                   <SubmitButton
                     submitting={isApproving}
                     disabled={invalid || isPending}
-                    className="w-150px"
+                    className="w-[150px]"
                     onClick={() => {
                       actionRef.current = 'approve';
                       handleSubmit();

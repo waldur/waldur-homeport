@@ -9,6 +9,7 @@ import { DrawerProvider } from '@/drawer/DrawerContext';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { hasConsumerPermission } from '@/permissions/hasPermission';
+import { setTableQueryRows } from '@/table/mockTableQuery';
 import { useTable } from '@/table/useTable';
 import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
@@ -16,17 +17,8 @@ import { useUser } from '@/workspace/hooks';
 import { ResourceApiKeysCard } from './ResourceApiKeysCard';
 import { RevealApiKeyDialog } from './RevealApiKeyDialog';
 
-// Rows are supplied through the mocked redux table state, so no real request
-// fires — the card renders through the real @/table/Table (TableLoader).
-vi.mock('@/table/useTableQuery', () => ({
-  useTableQuery: () => ({
-    data: undefined,
-    isLoading: false,
-    isFetching: false,
-    error: null,
-    refetch: vi.fn(),
-  }),
-}));
+// Serves the rows given to setTableQueryRows (none by default); no request fires.
+vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
 vi.mock('@/permissions/hasPermission', () => ({
   hasConsumerPermission: vi.fn(),
 }));
@@ -74,13 +66,12 @@ const MANAGED_OFFERING = {
   resource_options: { options: { models: { choices: ['gpt-4o'] } } },
 } as any;
 
-const makeStore = (keys: any[]) =>
-  mockStore({
+const makeStore = (keys: any[]) => {
+  setTableQueryRows(keys);
+  return mockStore({
     tables: {
       [tableId]: {
         loading: false,
-        entities: Object.fromEntries(keys.map((k) => [k.uuid, k])),
-        order: keys.map((k) => k.uuid),
         pagination: { pageSize: 10, resultCount: keys.length, currentPage: 1 },
         toggled: {},
         activeColumns: {},
@@ -88,6 +79,7 @@ const makeStore = (keys: any[]) =>
       },
     },
   });
+};
 
 // The parent owns useTable and passes the props down; here the Harness plays
 // that role so the card renders through the real Table.
@@ -729,7 +721,8 @@ describe('ResourceApiKeysCard', () => {
     });
 
     // Reveal still honours an assignee set while management was on, so the
-    // portal shows whose key it is and lets a manager share it again.
+    // portal shows whose key it is. Nobody can unassign it: an assignee is
+    // fixed when the key is requested.
     it('shows the assignee of a key assigned while management was on', async () => {
       renderUnmanaged({
         state: 'OK',
@@ -744,7 +737,7 @@ describe('ResourceApiKeysCard', () => {
       expect(screen.getByText('Alice')).toBeInTheDocument();
       await openRowActions(0);
       expect(isEnabled('Reveal')).toBe(false);
-      expect(isEnabled('Unassign')).toBe(true);
+      expect(offered('Unassign')).toBeNull();
     });
 
     it('lets the assignee reveal their key', async () => {
@@ -752,14 +745,6 @@ describe('ResourceApiKeysCard', () => {
       await screen.findByText('KEY1');
       await openRowActions(0);
       expect(isEnabled('Reveal')).toBe(true);
-    });
-
-    it('offers no unassign without manage permission', async () => {
-      vi.mocked(hasConsumerPermission).mockReturnValue(false);
-      renderUnmanaged({ state: 'OK', user_uuid: USER.uuid });
-      await screen.findByText('KEY1');
-      await openRowActions(0);
-      expect(offered('Unassign')).toBeNull();
     });
 
     it('still lets the assignee rotate their key', async () => {
@@ -796,13 +781,6 @@ describe('ResourceApiKeysCard', () => {
       await screen.findByText('KEY1');
       await openRowActions(0);
       expect(isEnabled('Retry')).toBe(true);
-    });
-
-    it('offers no unassign for a key shared by the project', async () => {
-      renderUnmanaged({ state: 'OK' });
-      await screen.findByText('KEY1');
-      await openRowActions(0);
-      expect(offered('Unassign')).toBeNull();
     });
 
     it('offers no request, pause, settings or delete', async () => {

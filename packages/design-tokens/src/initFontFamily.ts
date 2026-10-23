@@ -13,7 +13,7 @@
  * font-related variable) — that one only compensates Metronic's own
  * 13px-root-based heading sizes for fonts like "Maven Pro" that render
  * visually larger at the same px size
- * (src/metronic/sass/core/layout/_base.scss); nothing outside Metronic
+ * (the former Metronic layout _base.scss); nothing outside Metronic
  * consumes it, so there's nothing for it to do here.
  */
 export function initFontFamily(

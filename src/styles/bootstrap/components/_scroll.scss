@@ -1,0 +1,57 @@
+// Scroll
+
+// Customize native scrollbars only for desktop mode
+@include media-breakpoint-up(lg) {
+  main,
+  span,
+  ol,
+  ul,
+  pre,
+  div {
+    // Firefox
+    scrollbar-width: thin;
+
+    // Webkit
+    &::-webkit-scrollbar {
+      width: get($scrollbar, width);
+      height: get($scrollbar, height);
+    }
+
+    // Default color
+    @include scrollbar-color(
+      get($scrollbar, color),
+      get($scrollbar, hover-color)
+    );
+  }
+}
+
+// Overflow scroll
+.scroll {
+  overflow: scroll;
+  position: relative;
+
+  // Tablet & mobile modes
+  @include media-breakpoint-down(lg) {
+    overflow: auto;
+  }
+}
+
+.scroll-x {
+  overflow-x: scroll;
+  position: relative;
+
+  // Tablet & mobile modes
+  @include media-breakpoint-down(lg) {
+    overflow-x: auto;
+  }
+}
+
+.scroll-y {
+  overflow-y: scroll;
+  position: relative;
+
+  // Tablet & mobile modes
+  @include media-breakpoint-down(lg) {
+    overflow-y: auto;
+  }
+}

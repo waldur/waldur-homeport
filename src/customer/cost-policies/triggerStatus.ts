@@ -16,15 +16,11 @@ export interface TriggerStatusPolicy {
 export interface TriggerStatusView {
   /** Short text for the badge in a list cell. */
   label: string;
-  /** The figures behind a waiting policy, shown under the badge. */
-  detail?: string;
-  /** The full reason, for the badge's tooltip. */
+  /** The full reason with its figures, for the badge's tooltip. */
   explanation: string;
   /** What happens next, shown after the reason in the tooltip. */
   note?: string;
   variant: BadgeVariant;
-  /** The policy is over its limit but its actions have not run yet. */
-  pending: boolean;
   /** Cost is over the limit, but a credit balance still holds the policy. */
   held: boolean;
 }
@@ -75,16 +71,16 @@ export const getTriggerStatusView = (
         label: translate('Limit reached'),
         explanation: reason,
         variant: 'danger',
-        pending: false,
         held,
       };
     }
+    // The tooltip says the limit is reached; the badge only says what is
+    // left to happen.
     return {
-      label: translate('Limit reached, actions pending'),
+      label: translate('Actions pending'),
       explanation: reason,
       note: translate('Its actions run at the next evaluation of the policy.'),
       variant: 'warning',
-      pending: true,
       held,
     };
   }
@@ -98,23 +94,20 @@ export const getTriggerStatusView = (
         'The actions it ran are undone at the next evaluation of the policy.',
       ),
       variant: 'info',
-      pending: false,
       held,
     };
   }
 
   if (held) {
+    // The credit left and the limit are in the reason, so the tooltip carries
+    // them rather than a second line under the badge.
     return {
       label:
         status.gate === 'held_by_project_credit'
           ? translate('Waiting for project credit')
           : translate('Waiting for organization credit'),
-      detail: credit
-        ? translate('{credit} left, limit {limit}', { credit, limit })
-        : translate('Credit left is above the limit {limit}', { limit }),
       explanation: reason,
       variant: 'warning',
-      pending: false,
       held,
     };
   }
@@ -122,7 +115,6 @@ export const getTriggerStatusView = (
     label: translate('Below limit'),
     explanation: reason,
     variant: 'success',
-    pending: false,
     held,
   };
 };

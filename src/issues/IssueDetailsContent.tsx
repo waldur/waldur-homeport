@@ -92,12 +92,12 @@ export const IssueDetailsContent: FunctionComponent<
           )
         }
       >
-        <div className="mw-450px">
+        <div className="max-w-[450px]">
           <Field
             label={translate('Caller')}
             value={issue.caller_full_name}
             isStuck
-            labelClass="min-w-100px"
+            labelClass="min-w-[100px]"
             className="text-sm"
           />
           <Field
@@ -107,14 +107,14 @@ export const IssueDetailsContent: FunctionComponent<
               date: formatDateTime(issue.created),
             })}
             isStuck
-            labelClass="min-w-100px"
+            labelClass="min-w-[100px]"
             className="text-sm"
           />
           <Field
             label={translate('Request type')}
             value={issue.type}
             isStuck
-            labelClass="min-w-100px"
+            labelClass="min-w-[100px]"
             className="text-sm"
           />
           {issue.link && staffOrSupport && (
@@ -129,7 +129,7 @@ export const IssueDetailsContent: FunctionComponent<
                 />
               }
               isStuck
-              labelClass="min-w-100px"
+              labelClass="min-w-[100px]"
               className="text-sm"
             />
           )}
@@ -146,7 +146,7 @@ export const IssueDetailsContent: FunctionComponent<
                 </Link>
               }
               isStuck
-              labelClass="min-w-100px"
+              labelClass="min-w-[100px]"
               className="text-sm"
             />
           )}

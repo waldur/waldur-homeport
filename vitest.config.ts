@@ -33,7 +33,7 @@ export default mergeConfig(
           'e2e/',
           'src/vendor.ts',
           'src/echarts/',
-          'src/metronic/',
+          'src/styles/bootstrap/',
           'build.dev/',
           '**/*.config.{ts,js}',
           '**/*.setup.{ts,js}',

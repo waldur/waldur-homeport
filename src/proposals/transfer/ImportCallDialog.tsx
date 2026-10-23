@@ -69,7 +69,7 @@ const ImportResult: FC<{ result: CallImportResponse }> = ({ result }) => {
         { name: result.call_name },
       )}
       footer={
-        <div className="min-w-150px">
+        <div className="min-w-[150px]">
           <BaseButton
             variant="primary"
             label={translate('Open call')}
@@ -173,13 +173,13 @@ export const ImportCallDialog: FC<ImportCallDialogProps> = ({ resolve }) => {
             )}
             footer={
               <>
-                <div className="min-w-150px">
+                <div className="min-w-[150px]">
                   <CloseDialogButton
                     label={translate('Cancel')}
                     className="w-full"
                   />
                 </div>
-                <div className="min-w-150px">
+                <div className="min-w-[150px]">
                   <SubmitButton
                     submitting={submitting || mutation.isPending}
                     label={translate('Import')}
