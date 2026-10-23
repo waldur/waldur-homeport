@@ -551,7 +551,8 @@ describe('getResourceKeyComponents', () => {
     ).toEqual({ day: { heldOnly: true }, month: {} });
   });
 
-  // Nothing is spent on a component the plan prices at zero.
+  // A LiteLLM cost cap is priced at zero, yet it is what a key's spend is
+  // capped on: the price says how the plan bills it, not what it measures.
   describe('a component the plan prices at zero', () => {
     const priced = {
       ...offering,
@@ -563,45 +564,22 @@ describe('getResourceKeyComponents', () => {
             {
               type: 'token_cost',
               billing_type: 'usage',
-              price: '1.0000000000',
+              price: '0.0000000000',
             },
           ],
         },
       ],
     } as any;
 
-    it('takes no key limit', () => {
+    it('takes key limits like any other component', () => {
       const components = getKeyLimitComponents(
         getResourceKeyComponents(priced, 'plan-free-tokens'),
-        {},
-      );
-      expect(components.map((c) => c.type)).toEqual(['token_cost']);
-    });
-
-    it('keeps a limit the key holds on it, to keep or clear', () => {
-      const components = getKeyLimitComponents(
-        getResourceKeyComponents(priced, 'plan-free-tokens'),
-        {},
-        { tokens: { month: 5 } },
-      );
-      expect(
-        components.find((c) => c.type === 'tokens')!.spending_limit_periods,
-      ).toEqual({ month: { heldOnly: true } });
-    });
-
-    // The plan may predate the component.
-    it('does not count a component the plan does not price as free', () => {
-      const components = getKeyLimitComponents(
-        getResourceKeyComponents(
-          {
-            ...priced,
-            plans: [{ uuid: 'p', components: [{ type: 'token_cost' }] }],
-          },
-          'p',
-        ),
         {},
       );
       expect(components.map((c) => c.type)).toEqual(['tokens', 'token_cost']);
+      expect(
+        components.find((c) => c.type === 'tokens')!.spending_limit_periods,
+      ).toEqual({ month: {} });
     });
   });
 });
