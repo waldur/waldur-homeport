@@ -56,13 +56,6 @@ const getComponentKeyPeriods = (
   );
 };
 
-// A price as the API returns it ("0.0000000000"); a missing one is not zero.
-const isZeroPrice = (price: string | number | null | undefined) =>
-  price !== null &&
-  price !== undefined &&
-  String(price).trim() !== '' &&
-  Number(price) === 0;
-
 /**
  * The offering's components as billed under the resource's plan, each with
  * the periods a key may limit on it (`keyPeriods`), as the backend offers
@@ -71,10 +64,11 @@ const isZeroPrice = (price: string | number | null | undefined) =>
  * - none on any component when the offering turns key limits off
  *   (`plugin_options.api_key_limits`, on unless set to false);
  * - only `month` unless the offering declares per-key daily usage
- *   (`plugin_options.api_key_daily_usage`, off unless set);
- * - none on a component the plan prices at zero, as nothing is spent on it;
- *   one the plan does not price is not counted as free, as the plan may
- *   predate it.
+ *   (`plugin_options.api_key_daily_usage`, off unless set).
+ *
+ * The plan's price does not matter: a LiteLLM cost cap is priced at zero, as
+ * the plan bills a limit component on the limit itself, yet it is what a
+ * key's spend is capped on.
  *
  * A plan may bill a usage component by limit, and then it takes no spending
  * limit; the backend reads the periods a key may limit from the plan, so the
@@ -89,18 +83,12 @@ export const getResourceKeyComponents = (
   const limitsOffered = options?.api_key_limits !== false;
   const dailyUsage = options?.api_key_daily_usage === true;
   const plan = findResourcePlan(offering?.plans, planUuid);
-  const free = new Set(
-    (plan?.components ?? [])
-      .filter((component) => isZeroPrice(component.price))
-      .map((component) => component.type),
-  );
   return resolvePlanComponents(offering?.components ?? [], plan).map(
     (component) => ({
       ...component,
-      keyPeriods:
-        !limitsOffered || free.has(component.type)
-          ? []
-          : getComponentKeyPeriods(component, dailyUsage),
+      keyPeriods: limitsOffered
+        ? getComponentKeyPeriods(component, dailyUsage)
+        : [],
     }),
   );
 };
