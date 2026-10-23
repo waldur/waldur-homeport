@@ -7,6 +7,7 @@ import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
 import { formatComponentQuantity } from '@/marketplace/common/componentQuantity';
+import { formatMonthCount } from '@/marketplace/common/prepaidTotalDisplay';
 import { CheckoutPricingRow } from '@/marketplace/deploy/CheckoutPricingRow';
 import { Customer } from '@/workspace/types';
 
@@ -29,13 +30,23 @@ interface OrderSummaryPlanRowsProps {
  * and the feature flags, and none of that says anything about the label.
  */
 export const getRowLabel = (component: Component) => {
+  // The offering states prepaid limits as the total for the subscription: lead
+  // with the amount the customer gets, and say how it was reached.
+  if (component.showTotalAmount) {
+    return translate('{name} {total} ({monthly} per month × {months})', {
+      name: component.name,
+      total: formatComponentQuantity(component.amount, component),
+      monthly: formatComponentQuantity(component.displayAmount, component),
+      months: formatMonthCount(component.durationInMonths),
+    });
+  }
   const qty = formatComponentQuantity(
     component.displayAmount ?? component.amount,
     component,
   );
   const base = qty ? `${component.name} ${qty}` : component.name;
   if (component.displayAmount != null && component.durationInMonths) {
-    return `${base} × ${translate('{count} months', { count: component.durationInMonths })}`;
+    return `${base} × ${formatMonthCount(component.durationInMonths)}`;
   }
   return base;
 };

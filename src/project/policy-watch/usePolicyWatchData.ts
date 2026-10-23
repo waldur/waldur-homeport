@@ -7,6 +7,7 @@ import {
   marketplaceCustomerEstimatedCostPoliciesList,
   marketplaceProjectEstimatedCostPoliciesList,
   marketplaceResourcesList,
+  MarketplaceResourcesListData,
   marketplaceSlurmPeriodicUsagePoliciesList,
   projectCreditsList,
   Resource,
@@ -25,6 +26,7 @@ import { buildCreditEvents } from './creditEvents';
 import { creditableCostThisMonth } from './creditPacing';
 import { projectCreditRunway, safeNumber } from './creditRunway';
 import { costPolicyMetrics } from './policyEta';
+import { getQuotaTotals } from './quotaSaturation';
 import {
   CreditBreakdown,
   CreditRunway,
@@ -258,6 +260,11 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
             'current_usages',
             'limit_usage',
             'limits',
+            // Which limit_usage entries cover the whole subscription; not in
+            // the SDK's field enum yet.
+            'prepaid_total_component_types' as NonNullable<
+              MarketplaceResourcesListData['query']['field']
+            >[number],
             'state',
             'project',
             'project_uuid',
@@ -513,13 +520,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         usedTotal = slurm.currentValue;
         limitTotal = slurm.thresholdValue;
       } else if (hasQuota) {
-        limitTotal = Object.values(r.limits as Record<string, number>).reduce(
-          (a, b) => a + b,
-          0,
-        );
-        usedTotal = Object.values(
-          r.limit_usage as Record<string, number>,
-        ).reduce((a, b) => a + b, 0);
+        ({ usedTotal, limitTotal } = getQuotaTotals(r));
         saturation = limitTotal > 0 ? (usedTotal / limitTotal) * 100 : 0;
       }
 

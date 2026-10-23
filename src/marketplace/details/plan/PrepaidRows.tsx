@@ -5,7 +5,11 @@ import { defaultCurrency } from '@/core/formatCurrency';
 import { composeValidators } from '@/core/validators';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { formatQuantityLabel } from '@/marketplace/common/componentQuantity';
+import {
+  formatComponentQuantity,
+  formatQuantityLabel,
+} from '@/marketplace/common/componentQuantity';
+import { formatMonthCount } from '@/marketplace/common/prepaidTotalDisplay';
 import { formatIntField, getLimitParser } from '@/marketplace/common/utils';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
@@ -34,6 +38,16 @@ const PrepaidRow = ({
     [component.min_value, component.max_value],
   );
   const validateValue = composeValidators(...validate);
+  // The figure entered is per month; an offering that shows prepaid limits as
+  // one total says beside it what the subscription adds up to.
+  const totalHint = component.showTotalAmount ? (
+    <span className="block font-normal text-quaternary">
+      {translate('Total for {months}: {total}', {
+        months: formatMonthCount(component.durationInMonths),
+        total: formatComponentQuantity(component.amount, component),
+      })}
+    </span>
+  ) : null;
 
   return (
     <>
@@ -53,21 +67,25 @@ const PrepaidRow = ({
                 component.displayAmount ?? component.amount,
                 component,
               )}
+              {totalHint}
             </span>
           ) : (
-            <Field
-              name={`limits.${component.type}`}
-              parse={getLimitParser(component)}
-              format={formatIntField}
-              validate={validateValue}
-              render={({ input, meta }) => (
-                <MeasuredUnitInput
-                  input={input}
-                  meta={meta}
-                  component={component}
-                />
-              )}
-            />
+            <>
+              <Field
+                name={`limits.${component.type}`}
+                parse={getLimitParser(component)}
+                format={formatIntField}
+                validate={validateValue}
+                render={({ input, meta }) => (
+                  <MeasuredUnitInput
+                    input={input}
+                    meta={meta}
+                    component={component}
+                  />
+                )}
+              />
+              {totalHint}
+            </>
           )
         }
         actions={

@@ -8,9 +8,12 @@ import {
 } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
-import { calculateMonthsDifference } from '@/core/dateUtils';
 import { formatCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
+import {
+  getPrepaidDurationMonths,
+  showsPrepaidLimitsAsTotal,
+} from '@/marketplace/common/prepaidTotalDisplay';
 import { getFormLimitParser } from '@/marketplace/common/registry';
 import { getBillingPeriods } from '@/marketplace/common/utils';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
@@ -28,20 +31,24 @@ export const combinePrices = (
   plan: BasePublicPlan,
   limits: Limits,
   usages: Limits,
-  offering: Pick<PublicOfferingDetails, 'type' | 'components'>,
+  offering: Pick<PublicOfferingDetails, 'type' | 'components'> &
+    Partial<Pick<PublicOfferingDetails, 'plugin_options'>>,
   end_date?: string,
   start_date?: string,
 ): PricesData => {
   if (plan && offering) {
+    const prepaidAsTotal = showsPrepaidLimitsAsTotal(offering.plugin_options);
     const { periods, multipliers, periodKeys } = getBillingPeriods(plan.unit);
     const offeringLimits = parseOfferingLimits(offering);
     // Billing fields come from the plan: a usage plan turns the builtin limit
     // components of an OpenStack offering into usage rows, for example.
     const offeringComponents = getEffectiveComponents(offering, plan);
 
-    // Calculate the duration multiplier based on the end_date
+    // A prepaid amount is multiplied by the months of the period, counted the
+    // way the backend bills them and the agent budgets them: a partial month
+    // rounds up.
     const effectiveStartDate = start_date || DateTime.now().toISODate();
-    const durationInMonths = calculateMonthsDifference(
+    const durationInMonths = getPrepaidDurationMonths(
       effectiveStartDate,
       end_date,
     );
@@ -158,6 +165,14 @@ export const combinePrices = (
         quantityUnknown,
         displayAmount,
         durationInMonths: displayAmount != null ? durationInMonths : undefined,
+        // `amount` is then the total for the period, which the offering asks
+        // to state ahead of the monthly figure. Only a one-time component: the
+        // backend neither totals nor bills a prepaid `few` one per month.
+        showTotalAmount:
+          prepaidAsTotal &&
+          component.billing_type === 'one' &&
+          displayAmount != null &&
+          durationInMonths != null,
         prices,
         subTotal,
         price,
@@ -496,7 +511,7 @@ export const getPrepaidCostParts = (
   // available where the period is a length (see PrepaidMonthsMode).
   const durationInMonths =
     component.durationInMonths ??
-    calculateMonthsDifference(effectiveStartDate, endDate);
+    getPrepaidDurationMonths(effectiveStartDate, endDate);
 
   // The component.amount is the total for the whole period.
   // We need the base amount per month for the details string.

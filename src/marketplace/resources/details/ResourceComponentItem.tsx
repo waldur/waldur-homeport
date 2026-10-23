@@ -9,6 +9,11 @@ import {
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import {
+  getPrepaidDurationMonths,
+  getPrepaidTotalComponentTypes,
+  PrepaidTotalResource,
+} from '@/marketplace/common/prepaidTotalDisplay';
+import {
   formatSpendingAmount,
   getSpendingLimitLabel,
 } from '@/marketplace/common/spendingLimits';
@@ -150,16 +155,95 @@ export const getDisplayUnit = (
   return UNIT_CONVERSIONS[measuredUnit]?.[factor] ?? measuredUnit;
 };
 
+/**
+ * The resource fields getQuotaCellProps reads, for lists that request only
+ * the fields they show. Without the dates and the total component types a
+ * prepaid limit falls back to its monthly figure, while the resource's own
+ * page shows the total.
+ */
+export const RESOURCE_QUOTA_FIELDS = [
+  'offering_type',
+  'limits',
+  'display_limits',
+  'limit_usage',
+  'current_usages',
+  'created',
+  'end_date',
+  'prepaid_total_component_types',
+];
+
+/** The unit after a figure, saying when it covers the whole subscription. */
+export const formatQuotaUnits = (
+  units: string | undefined,
+  isTotal: boolean,
+): string =>
+  isTotal
+    ? units
+      ? translate('{units} in total', { units })
+      : translate('in total')
+    : units || '';
+
+type QuotaResource = Pick<
+  Resource,
+  'current_usages' | 'limits' | 'limit_usage' | 'offering_type'
+> &
+  Partial<Pick<Resource, 'created' | 'end_date'>> &
+  ResourceDisplayLimits &
+  PrepaidTotalResource;
+
+/**
+ * The months a prepaid component's limit covers when it is shown as one total
+ * for the subscription, or undefined to keep the monthly view.
+ *
+ * The backend names the components it counts that way (resolved under the
+ * resource's plan, which can override the offering component) and sums their
+ * usage over the subscription into limit_usage. The stored limit is the
+ * monthly figure ordered; the agent gives the backend that figure times these
+ * months, as one budget. Without the dates or the total usage, the monthly view
+ * stays rather than setting one month's usage against the whole budget.
+ */
+const getPrepaidTotalMonths = (
+  component: OfferingComponent,
+  resource: QuotaResource,
+): number | undefined =>
+  getPrepaidTotalComponentTypes(resource).includes(component.type) &&
+  resource.limit_usage?.[component.type] != null
+    ? getPrepaidDurationMonths(resource.created, resource.end_date)
+    : undefined;
+
 export const getQuotaCellProps = (
   component: OfferingComponent,
-  resource: Pick<
-    Resource,
-    'current_usages' | 'limits' | 'limit_usage' | 'offering_type'
-  > &
-    ResourceDisplayLimits,
+  resource: QuotaResource,
 ) => {
   if (!component) {
-    return { usage: '', limit: '', title: '', units: '', displayUnit: '' };
+    return {
+      usage: '',
+      limit: '',
+      title: '',
+      units: '',
+      displayUnit: '',
+      isTotal: false,
+    };
+  }
+  const prepaidTotalMonths = getPrepaidTotalMonths(component, resource);
+  if (prepaidTotalMonths) {
+    const displayUnit = getDisplayUnit(
+      component.measured_unit,
+      component.factor,
+      resource.offering_type,
+    );
+    const monthlyLimit = resource.limits?.[component.type];
+    return {
+      usage: normalize(resource.limit_usage[component.type], component.factor),
+      limit:
+        monthlyLimit != null
+          ? normalize(monthlyLimit * prepaidTotalMonths, component.factor)
+          : null,
+      title: component.name,
+      displayUnit,
+      units: displayUnit,
+      isTotal: true,
+    };
   }
   const displayUnit = getDisplayUnit(
     component.measured_unit,
@@ -197,6 +281,7 @@ export const getQuotaCellProps = (
     title: component.name,
     displayUnit,
     units: displayUnit,
+    isTotal: false,
   };
 };
 
@@ -278,7 +363,7 @@ export const ResourceComponentItem = ({
     );
   }
 
-  const cellProps = getQuotaCellProps(component, resource);
+  const { isTotal, ...cellProps } = getQuotaCellProps(component, resource);
   const props = thisMonth
     ? {
         ...cellProps,
@@ -304,12 +389,20 @@ export const ResourceComponentItem = ({
         displayUnit={props.displayUnit}
         stacked={stacked}
         limitFrequency={
-          component.billing_type === 'limit' &&
-          (limitPeriodMap[limitPeriod as string] || translate('Monthly'))
+          isTotal
+            ? translate('Total')
+            : component.billing_type === 'limit' &&
+              (limitPeriodMap[limitPeriod as string] || translate('Monthly'))
         }
       />
     );
   }
 
-  return <QuotaCell {...props} description={description} />;
+  return (
+    <QuotaCell
+      {...props}
+      units={formatQuotaUnits(props.units, isTotal)}
+      description={description}
+    />
+  );
 };

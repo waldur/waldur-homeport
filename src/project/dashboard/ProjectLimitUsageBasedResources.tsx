@@ -12,6 +12,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { RESOURCE_QUOTA_FIELDS } from '@/marketplace/resources/details/ResourceComponentItem';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
 import { ResourceActionsButton } from '@/marketplace/resources/list/ResourceActionsButton';
 import { ResourceNameField } from '@/marketplace/resources/list/ResourceNameField';
@@ -46,10 +47,7 @@ const RenewalField = withResourceComponentsLoader(({ row, component }) =>
 const mandatoryFields = resourcesListRequiredFields(false).concat([
   'offering_uuid',
   'offering_name',
-  'limit_usage',
-  'limits',
-  'display_limits',
-  'current_usages',
+  ...RESOURCE_QUOTA_FIELDS,
   'state',
   'renewal_date',
   'plan_uuid',

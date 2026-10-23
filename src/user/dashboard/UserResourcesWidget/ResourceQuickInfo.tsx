@@ -22,7 +22,10 @@ import {
   findResourcePlan,
   resolvePlanComponents,
 } from '@/marketplace/details/plan/effectiveComponents';
-import { getQuotaCellProps } from '@/marketplace/resources/details/ResourceComponentItem';
+import {
+  formatQuotaUnits,
+  getQuotaCellProps,
+} from '@/marketplace/resources/details/ResourceComponentItem';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
 import { getResourceAccessEndpoints, isSshFormat } from '@/resource/utils';
 import { useNotify } from '@/store/notify';
@@ -134,6 +137,8 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                           {component.limit
                             ? `${component.usage}/${component.limit}`
                             : component.usage}
+                          {component.isTotal &&
+                            ` ${formatQuotaUnits(undefined, true)}`}
                         </div>
                         <div className="text-quaternary text-xs">
                           {component.title}

@@ -41668,11 +41668,11 @@
       "feature_area": "plan"
     }
   },
-  "Prepaid for {totalMonths} months ({startDate} — {endDate}). {remainingMonths} months remaining.": {
+  "Prepaid for {duration} ({startDate} — {endDate}). {remaining} remaining.": {
     "context": {
       "variables": {
-        "totalMonths": {
-          "type": "number"
+        "duration": {
+          "type": "unknown"
         },
         "startDate": {
           "type": "date"
@@ -41680,7 +41680,7 @@
         "endDate": {
           "type": "date"
         },
-        "remainingMonths": {
+        "remaining": {
           "type": "unknown"
         }
       },
@@ -53797,6 +53797,11 @@
       "feature_area": "generated"
     }
   },
+  "Show each prepaid component as the total for the whole subscription, the monthly amount times the months ordered, instead of a monthly amount. Usage is then counted over the whole subscription too. Turn on when the backend enforces that total as one budget, as the SLURM site agent does. Ordering and billing do not change.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Show end date field in project create dialog.": {
     "context": {
       "feature_area": "features"
@@ -53877,6 +53882,11 @@
   "Show plan": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Show prepaid limits as a total": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Show processes": {
@@ -61369,6 +61379,19 @@
   "Total for the year": {
     "context": {
       "feature_area": "credits"
+    }
+  },
+  "Total for {months}: {total}": {
+    "context": {
+      "variables": {
+        "months": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "plan"
     }
   },
   "Total freed": {
@@ -73858,6 +73881,7 @@
       "feature_area": "reporting"
     }
   },
+  "in total": {},
   "in {count} projects": {
     "context": {
       "variables": {
@@ -77394,6 +77418,24 @@
       "feature_area": "plans"
     }
   },
+  "{name} {total} ({monthly} per month × {months})": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "total": {
+          "type": "number"
+        },
+        "monthly": {
+          "type": "unknown"
+        },
+        "months": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "{name} — page {current} of {total}, exported {date}": {
     "context": {
       "primary_ui_type": "text_content",
@@ -78952,6 +78994,15 @@
     "context": {
       "variables": {
         "type": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "{units} in total": {
+    "context": {
+      "variables": {
+        "units": {
           "type": "unknown"
         }
       }

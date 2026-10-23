@@ -16,6 +16,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
+import { RESOURCE_QUOTA_FIELDS } from '@/marketplace/resources/details/ResourceComponentItem';
 import { ResourceFlags } from '@/marketplace/resources/details/ResourceFlags';
 import { ExpandableResourceSummary } from '@/marketplace/resources/list/ExpandableResourceSummary';
 import { ResourceTerminationDateField } from '@/marketplace/resources/list/ResourceTerminationDateField';
@@ -304,13 +305,11 @@ const mandatoryFields: MarketplaceProviderResourcesListData['query']['field'] =
     'backend_id', // ShowUsageAction, ReportUsageAction, SetBackendIdAction
     'is_usage_based', // Expandable view, ShowUsageAction, ReportUsageAction
     'is_limit_based', // Expandable view, ShowUsageAction, ReportUsageAction
-    'limits', // Expandable view
-    // Expandable view; not in the SDK's field enum yet (see ResourceDisplayLimits)
-    'display_limits' as NonNullable<
+    // Expandable view; display_limits and prepaid_total_component_types are
+    // not in the SDK's field enum yet (see ResourceDisplayLimits)
+    ...(RESOURCE_QUOTA_FIELDS as NonNullable<
       MarketplaceProviderResourcesListData['query']['field']
-    >[number],
-    'limit_usage', // Expandable view
-    'current_usages', // Expandable view
+    >),
     'state', // Almost all actions
     'slug', // SetSlugAction
     'end_date', // EditResourceEndDateByProviderAction

@@ -9,6 +9,8 @@ import { SLUG_COLUMN } from '@/table/slug';
 import { Column } from '@/table/types';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { RESOURCE_QUOTA_FIELDS } from '../details/ResourceComponentItem';
+
 import { NON_TERMINATED_STATES } from './constants';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
@@ -82,10 +84,7 @@ export const resourcesListRequiredFields = (hasExpandableView = true) =>
     'marketplace_plan_uuid', // ChangeLimitsAction
     'is_limit_based', // Expandable view, ChangeLimitsAction
     'is_usage_based', // Expandable view, ShowUsageAction, ReportUsageAction
-    hasExpandableView ? 'limits' : null, // Expandable view
-    hasExpandableView ? 'display_limits' : null, // Expandable view
-    hasExpandableView ? 'limit_usage' : null, // Expandable view
-    hasExpandableView ? 'current_usages' : null, // Expandable view
+    ...(hasExpandableView ? RESOURCE_QUOTA_FIELDS : []), // Expandable view
     hasExpandableView ? 'parent_uuid' : null, // Expandable view
     hasExpandableView ? 'parent_name' : null, // Expandable view
     'customer_uuid', // SetBackendIdAction
