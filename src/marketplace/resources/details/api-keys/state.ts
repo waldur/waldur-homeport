@@ -10,7 +10,7 @@ import {
   getRestrictionResumes,
   RestrictedResource,
 } from '@/marketplace/resources/details/spendingLimitRestriction';
-import { checkIsStaffOrSupport } from '@/workspace/selectors';
+import { isProjectMember } from '@/permissions/isProjectMember';
 
 import { ApiKeyRow, ApiKeyState, KeyComponent } from './types';
 
@@ -24,13 +24,47 @@ export const getStateVariant = (
   return { variant: 'success', active: true };
 };
 
-// A personal key is revealed only by its assignee, or by staff and support;
-// the backend refuses anyone else.
-export const canRevealKey = (row: ApiKeyRow, user?: User) =>
-  row.state === 'OK' &&
-  (!row.user_uuid ||
-    row.user_uuid === user?.uuid ||
-    Boolean(checkIsStaffOrSupport(user)));
+// Mirrors the backend's reveal checks, which hold staff and support to them
+// too: a role on the resource's project or its organization, and for a
+// personal key, being its assignee. Staff reveal any other key by
+// impersonating someone who may.
+export const getRevealBlockedReason = (
+  row: ApiKeyRow,
+  user: User | undefined,
+  resource: Pick<Resource, 'project_uuid' | 'customer_uuid'>,
+): string | undefined => {
+  if (row.state !== 'OK') {
+    return translate('The key can be revealed once it is active.');
+  }
+  const isConsumerMember =
+    isProjectMember(user, resource.project_uuid, { includeStaff: false }) ||
+    Boolean(
+      user?.permissions?.some(
+        ({ scope_type, scope_uuid }) =>
+          scope_type === 'customer' && scope_uuid === resource.customer_uuid,
+      ),
+    );
+  if (!isConsumerMember) {
+    // Staff reach a key's value only as someone who may reveal it, and only
+    // staff can impersonate.
+    if (user?.is_staff) {
+      return row.user_uuid
+        ? translate(
+            "Only members of the resource's project or organization can reveal its keys. As staff, you can reveal this key by impersonating its assignee.",
+          )
+        : translate(
+            "Only members of the resource's project or organization can reveal its keys. As staff, you can reveal this key by impersonating one of them.",
+          );
+    }
+    return translate(
+      "Only members of the resource's project or organization can reveal its keys.",
+    );
+  }
+  if (row.user_uuid && row.user_uuid !== user?.uuid) {
+    return translate('Only the assignee can reveal this key.');
+  }
+  return undefined;
+};
 
 // The assignee holds the key's value, so may replace it: rotate the key, or
 // retry a rotation of it that failed. Every other command stays with whoever

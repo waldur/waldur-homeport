@@ -7,6 +7,7 @@ import {
   getKeyStateVariant,
   getResourcePause,
   getResourcePauseDetails,
+  getRevealBlockedReason,
   getStateLabel,
   getStateTooltip,
   isKeyAssignee,
@@ -290,5 +291,89 @@ describe('a key on a paused resource', () => {
   it('reads OK on a resource that is not paused', () => {
     expect(getStateLabel(ok, null)).toBe('OK');
     expect(getKeyStateVariant(ok, null).variant).toBe('success');
+  });
+});
+
+describe('getRevealBlockedReason', () => {
+  const resource = { project_uuid: 'proj-1', customer_uuid: 'cust-1' };
+  const role = (scope_type: string, scope_uuid: string) => ({
+    scope_type,
+    scope_uuid,
+    role_name: 'ROLE',
+  });
+  const user = (overrides: Record<string, unknown> = {}) =>
+    ({ uuid: 'me', permissions: [], ...overrides }) as any;
+  const member = user({ permissions: [role('project', 'proj-1')] });
+  const ok = (overrides: Record<string, unknown> = {}) =>
+    row({ state: 'OK', ...overrides });
+  const NOT_A_MEMBER =
+    "Only members of the resource's project or organization can reveal its keys.";
+  const NOT_THE_ASSIGNEE = 'Only the assignee can reveal this key.';
+
+  it('waits for the key to be active', () => {
+    expect(
+      getRevealBlockedReason(row({ state: 'Updating' }), member, resource),
+    ).toBe('The key can be revealed once it is active.');
+  });
+
+  it('lets a project or organization member reveal a shared key', () => {
+    expect(getRevealBlockedReason(ok(), member, resource)).toBeUndefined();
+    expect(
+      getRevealBlockedReason(
+        ok(),
+        user({ permissions: [role('customer', 'cust-1')] }),
+        resource,
+      ),
+    ).toBeUndefined();
+  });
+
+  it('refuses anyone without a role on the project or organization', () => {
+    for (const outsider of [
+      user(),
+      user({ is_support: true }),
+      user({ permissions: [role('project', 'proj-2')] }),
+      // The provider's side reaches the key, but never reads it.
+      user({ permissions: [role('service_provider', 'cust-1')] }),
+    ]) {
+      expect(getRevealBlockedReason(ok(), outsider, resource)).toBe(
+        NOT_A_MEMBER,
+      );
+    }
+  });
+
+  // Impersonation is staff's route to a key, and staff's alone.
+  it('points staff outside the project at impersonation', () => {
+    const staff = user({ is_staff: true });
+    expect(getRevealBlockedReason(ok(), staff, resource)).toBe(
+      `${NOT_A_MEMBER} As staff, you can reveal this key by impersonating one of them.`,
+    );
+    expect(
+      getRevealBlockedReason(
+        ok({ user_uuid: 'someone-else' }),
+        staff,
+        resource,
+      ),
+    ).toBe(
+      `${NOT_A_MEMBER} As staff, you can reveal this key by impersonating its assignee.`,
+    );
+  });
+
+  it('keeps a personal key to its assignee, staff and support included', () => {
+    expect(
+      getRevealBlockedReason(ok({ user_uuid: 'me' }), member, resource),
+    ).toBeUndefined();
+    for (const other of [
+      member,
+      user({ ...member, is_staff: true }),
+      user({ ...member, is_support: true }),
+    ]) {
+      expect(
+        getRevealBlockedReason(
+          ok({ user_uuid: 'someone-else' }),
+          other,
+          resource,
+        ),
+      ).toBe(NOT_THE_ASSIGNEE);
+    }
   });
 });

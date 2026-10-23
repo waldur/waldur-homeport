@@ -37090,6 +37090,17 @@
     }
   },
   "Only lowercase letters, numbers, and @/./+/-/_ characters are allowed.": {},
+  "Only members of the resource's project or organization can reveal its keys.": {},
+  "Only members of the resource's project or organization can reveal its keys. As staff, you can reveal this key by impersonating its assignee.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "Only members of the resource's project or organization can reveal its keys. As staff, you can reveal this key by impersonating one of them.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Only members of this room can read its messages.": {
     "context": {
       "feature_area": "matrix"
@@ -37164,11 +37175,7 @@
       "feature_area": "api-keys"
     }
   },
-  "Only the assignee can reveal this key.": {
-    "context": {
-      "feature_area": "api-keys"
-    }
-  },
+  "Only the assignee can reveal this key.": {},
   "Only the credentials of the selected method are kept; the others are cleared on update.": {
     "context": {
       "feature_area": "service-desk"
@@ -58096,11 +58103,7 @@
       "feature_area": "api-keys"
     }
   },
-  "The key can be revealed once it is active.": {
-    "context": {
-      "feature_area": "api-keys"
-    }
-  },
+  "The key can be revealed once it is active.": {},
   "The key has been created.": {
     "context": {
       "primary_ui_type": "success_message",

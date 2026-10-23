@@ -28,10 +28,10 @@ import { useUser } from '@/workspace/hooks';
 
 import { RevealApiKeyDialog } from './RevealApiKeyDialog';
 import {
-  canRevealKey,
   getAtLimitReason,
   getErredTooltip,
   getFailedCommand,
+  getRevealBlockedReason,
   getStateVariant,
   isKeyAssignee,
   UNGOVERNED_COMMANDS,
@@ -89,7 +89,7 @@ export const ApiKeyActionsDropdown: FC<{
   // resume is the one that brings back a key whose pause failed.
   const resumesErred = isErred && !canRetry;
   const resumes = isPaused || resumesErred;
-  const canReveal = canRevealKey(row, user);
+  const revealBlocked = getRevealBlockedReason(row, user, resource);
   // The assignee may rotate their own key and retry a rotation that failed.
   // Putting a rotation in a stranded key's failed command's place stays with
   // managers: it would bring back a key whose pause failed.
@@ -249,14 +249,8 @@ export const ApiKeyActionsDropdown: FC<{
           })
         }
         iconNode={<EyeIcon weight="bold" />}
-        disabled={!canReveal}
-        tooltip={
-          !isOk
-            ? translate('The key can be revealed once it is active.')
-            : !canReveal
-              ? translate('Only the assignee can reveal this key.')
-              : undefined
-        }
+        disabled={Boolean(revealBlocked)}
+        tooltip={revealBlocked}
       />
       {canManage && showPauseResume && (
         <ActionItem
