@@ -160,6 +160,7 @@ export const RoleGroup: FunctionComponent<{
       }
       getOptionLabel={(role: Role) => formatRoleLabel(role, qualifiers)}
       getOptionValue={({ name }) => name}
+      required
       validate={required}
       components={{ Option: RoleOption }}
       label={translate('Role')}

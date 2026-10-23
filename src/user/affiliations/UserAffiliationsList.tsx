@@ -14,6 +14,7 @@ import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useUser } from '@/workspace/hooks';
 
+import { AddUserRoleButton } from './AddUserRoleButton';
 import { RolePopover } from './RolePopover';
 import { UserAffiliationExpandableRow } from './UserAffiliationExpandableRow';
 import { UserAffiliationsBulkRemoveButton } from './UserAffiliationsBulkRemoveButton';
@@ -26,6 +27,12 @@ interface UserAffiliationsListProps {
   hasActionBar?: boolean;
   fullWidth?: boolean;
   cardBordered?: boolean;
+  /**
+   * Staff grant from this list. Off on the personal dashboard: a grant there
+   * would be the signed-in user adding their own role, and the page was not
+   * the place this action was introduced for.
+   */
+  allowRoleGrant?: boolean;
 }
 
 interface UserAffiliationsFilterValues {
@@ -39,7 +46,13 @@ interface UserAffiliationsFilterValues {
 
 export const UserAffiliationsList: FunctionComponent<
   UserAffiliationsListProps
-> = ({ user, hasActionBar = true, fullWidth, cardBordered = true }) => {
+> = ({
+  user,
+  hasActionBar = true,
+  fullWidth,
+  cardBordered = true,
+  allowRoleGrant = true,
+}) => {
   const values = useFilterValues('UserAffiliationsList');
   const formValues = (values as UserAffiliationsFilterValues) || {
     scope_type: undefined,
@@ -219,30 +232,54 @@ export const UserAffiliationsList: FunctionComponent<
     },
   ];
 
+  const canGrantRole = allowRoleGrant && Boolean(currentUser?.is_staff);
+  const addRole = canGrantRole ? (
+    <AddUserRoleButton user={user} refetch={props.fetch} />
+  ) : null;
+  const headerActions = (
+    <>
+      {hasActionBar && addRole}
+      <UserAffiliationsDropdownActions />
+    </>
+  );
+
   return (
-    <Table
-      {...props}
-      columns={columns}
-      formId="UserAffiliationsFilter"
-      verboseName={translate('roles')}
-      title={translate('Roles and permissions')}
-      emptyMessage={translate(
-        'Roles are granted by creating an organization or accepting an invitation to an organization or project.',
+    <>
+      {/* The details dialog has no toolbar, and its filter menu portals
+          behind the dialog, so the filters are omitted there. Add still
+          opens the grant dialog. The row is omitted when there is no button,
+          so support does not get an empty gap above the table. */}
+      {!hasActionBar && addRole && (
+        <div className="flex justify-end mb-4">{addRole}</div>
       )}
-      placeholderActions={<UserAffiliationsDropdownActions />}
-      placeholderHasRetry={hasSearchOrFilters}
-      filters={<UserAffiliationsFilter showRoleStatus={isStaffOrSupport} />}
-      tableActions={<UserAffiliationsDropdownActions />}
-      initialPageSize={10}
-      expandableRow={UserAffiliationExpandableRow}
-      rowActions={UserAffiliationsRowActions}
-      hasActionBar={hasActionBar}
-      fullWidth={fullWidth}
-      cardBordered={cardBordered}
-      enableMultiSelect={hasActionBar}
-      multiSelectActions={
-        hasActionBar ? UserAffiliationsBulkRemoveButton : undefined
-      }
-    />
+      <Table
+        {...props}
+        columns={columns}
+        formId="UserAffiliationsFilter"
+        verboseName={translate('roles')}
+        title={translate('Roles and permissions')}
+        emptyMessage={translate(
+          'Roles are granted by creating an organization or accepting an invitation to an organization or project.',
+        )}
+        placeholderActions={headerActions}
+        placeholderHasRetry={hasSearchOrFilters}
+        filters={
+          hasActionBar ? (
+            <UserAffiliationsFilter showRoleStatus={isStaffOrSupport} />
+          ) : undefined
+        }
+        tableActions={headerActions}
+        initialPageSize={10}
+        expandableRow={UserAffiliationExpandableRow}
+        rowActions={UserAffiliationsRowActions}
+        hasActionBar={hasActionBar}
+        fullWidth={fullWidth}
+        cardBordered={cardBordered}
+        enableMultiSelect={hasActionBar}
+        multiSelectActions={
+          hasActionBar ? UserAffiliationsBulkRemoveButton : undefined
+        }
+      />
+    </>
   );
 };

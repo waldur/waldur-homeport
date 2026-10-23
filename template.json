@@ -2529,6 +2529,16 @@
       "feature_area": "profiles"
     }
   },
+  "Add role to {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "affiliations"
+    }
+  },
   "Add route": {
     "context": {
       "feature_area": "openstack-tenant"
@@ -10202,7 +10212,9 @@
   },
   "Checking the existing roles of this user...": {
     "context": {
-      "feature_area": "team"
+      "primary_ui_type": "submit_button",
+      "feature_area": "team",
+      "action_type": "create"
     }
   },
   "Checking the outgoing mail configuration...": {
@@ -36976,6 +36988,13 @@
       "feature_area": "questions"
     }
   },
+  "Only staff can add roles.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "affiliations",
+      "action_type": "create"
+    }
+  },
   "Only staff can manage OpenStack tenant.": {
     "context": {
       "action_type": "update"
@@ -49270,6 +49289,12 @@
       "feature_area": "roles"
     }
   },
+  "Role has been added.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "affiliations"
+    }
+  },
   "Role has been cloned into the organization.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -51188,6 +51213,13 @@
       "feature_area": "roles"
     }
   },
+  "Select a scope and a role.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "affiliations",
+      "action_type": "create"
+    }
+  },
   "Select a start and end date/time.": {},
   "Select a step and fill required fields.": {
     "context": {
@@ -51798,6 +51830,16 @@
   "Select science domain...": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Select scope first": {
+    "context": {
+      "feature_area": "affiliations"
+    }
+  },
+  "Select scope type first": {
+    "context": {
+      "feature_area": "affiliations"
     }
   },
   "Select security groups...": {

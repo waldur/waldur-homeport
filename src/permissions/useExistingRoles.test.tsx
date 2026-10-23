@@ -1,6 +1,9 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { projectsListUsersList } from 'waldur-js-client';
+import {
+  marketplaceProviderOfferingsListUsersList,
+  projectsListUsersList,
+} from 'waldur-js-client';
 
 import { createTestWrapper } from '@/test/harness';
 import { mockListResponse } from '@/test/utils';
@@ -78,6 +81,32 @@ describe('useExistingRoles', () => {
         useExistingRoles({
           role: {
             uuid: 'r',
+            name: 'RESOURCE.ADMIN',
+            content_type: 'resource',
+          } as any,
+          userUuid: 'user-uuid',
+          scopeUuid: 'resource-uuid',
+        }),
+      { wrapper },
+    );
+
+    expect(result.current.isChecking).toBe(false);
+    expect(result.current.hits).toEqual([]);
+    expect(projectsListUsersList).not.toHaveBeenCalled();
+  });
+
+  it('looks up an existing offering role through the offering list_users action', async () => {
+    vi.mocked(marketplaceProviderOfferingsListUsersList).mockResolvedValue(
+      mockListResponse([
+        { role_uuid: 'offering-role', role_name: 'OFFERING.MANAGER' },
+      ]) as any,
+    );
+    const { wrapper } = createTestWrapper();
+    const { result } = renderHook(
+      () =>
+        useExistingRoles({
+          role: {
+            uuid: 'offering-role',
             name: 'OFFERING.MANAGER',
             content_type: 'offering',
           } as any,
@@ -87,8 +116,11 @@ describe('useExistingRoles', () => {
       { wrapper },
     );
 
-    expect(result.current.isChecking).toBe(false);
-    expect(result.current.hits).toEqual([]);
-    expect(projectsListUsersList).not.toHaveBeenCalled();
+    await waitFor(() => expect(result.current.hits).toHaveLength(1));
+    expect(marketplaceProviderOfferingsListUsersList).toHaveBeenCalledWith({
+      path: { uuid: 'offering-uuid' },
+      query: { user: 'user-uuid', page_size: 100 },
+    });
+    expect(result.current.hits[0].isSameRole).toBe(true);
   });
 });
