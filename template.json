@@ -37634,16 +37634,6 @@
       "feature_area": "projects"
     }
   },
-  "Optional reason (displayed in logs)": {
-    "context": {
-      "feature_area": "actions"
-    }
-  },
-  "Optional reason (displayed to users)": {
-    "context": {
-      "feature_area": "actions"
-    }
-  },
   "Optional reason captured in the audit trail.": {
     "context": {
       "feature_area": "actions"
