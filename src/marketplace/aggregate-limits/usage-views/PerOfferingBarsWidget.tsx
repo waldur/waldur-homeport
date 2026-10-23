@@ -1,7 +1,7 @@
 import { useId, useMemo, useState } from 'react';
 import { ComponentsUsageStatsPerOffering, Project } from 'waldur-js-client';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
+import { Select } from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -45,6 +45,23 @@ export const PerOfferingBarsWidget = ({
   const labelId = useId();
   const effectiveType = activeType ?? componentTypes[0]?.type;
 
+  const typeOptions = useMemo(
+    () =>
+      componentTypes.map(({ type, name }) => ({
+        value: type,
+        label: name !== type ? `${name} (${type})` : name,
+        type,
+        name,
+      })),
+    [componentTypes],
+  );
+
+  const selectedOption = useMemo(
+    () =>
+      typeOptions.find((opt) => opt.value === effectiveType) ?? typeOptions[0],
+    [typeOptions, effectiveType],
+  );
+
   const filteredData = useMemo(() => {
     if (!data?.components?.length || componentTypes.length <= 1) return data;
     return {
@@ -78,7 +95,7 @@ export const PerOfferingBarsWidget = ({
     return null;
   }
 
-  const showComponentTypeTabs = componentTypes.length > 1;
+  const showComponentTypeSelect = componentTypes.length > 1;
 
   const chart = (
     <>
@@ -93,28 +110,38 @@ export const PerOfferingBarsWidget = ({
     </>
   );
 
-  if (!showComponentTypeTabs) {
+  if (!showComponentTypeSelect) {
     return chart;
   }
 
   return (
-    <Tabs value={effectiveType} onValueChange={setActiveType}>
+    <>
       <div className="flex items-center gap-2 mb-2 flex-wrap">
         <small id={labelId} className="text-secondary">
           {translate('Component type')}:
         </small>
-        <TabsList aria-labelledby={labelId}>
-          {componentTypes.map(({ type, name }) => (
-            <TabsTrigger key={type} value={type} title={`type=${type}`}>
-              {name}
-              <small className="text-quaternary ms-1 font-normal">
-                ({type})
-              </small>
-            </TabsTrigger>
-          ))}
-        </TabsList>
+        <div className="min-w-[200px]">
+          <Select
+            aria-labelledby={labelId}
+            aria-label={translate('Component type')}
+            size="sm"
+            isClearable={false}
+            isSearchable={false}
+            value={selectedOption}
+            onChange={(opt: any) => setActiveType(opt?.value)}
+            options={typeOptions}
+            formatOptionLabel={(opt: any) => (
+              <span>
+                {opt.name}
+                <small className="text-quaternary ms-1 font-normal">
+                  ({opt.type})
+                </small>
+              </span>
+            )}
+          />
+        </div>
       </div>
-      <TabsContent value={effectiveType}>{chart}</TabsContent>
-    </Tabs>
+      {chart}
+    </>
   );
 };
