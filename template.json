@@ -44963,6 +44963,7 @@
       "feature_area": "details"
     }
   },
+  "Reaching a limit is reported but does not pause access.": {},
   "React with {label}": {
     "context": {
       "variables": {
@@ -71144,6 +71145,7 @@
     }
   },
   "When a limit is reached, access pauses until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.": {},
+  "When a limit is reached, the resource is downscaled until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.": {},
   "When a round closes, move unsubmitted drafts to the next round instead of canceling them. Applicants keep their content and are notified by email. Drafts are canceled as before when the call has no later round.": {
     "context": {
       "feature_area": "configuration"

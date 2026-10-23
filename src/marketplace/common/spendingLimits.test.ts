@@ -9,6 +9,7 @@ import {
   getOfferedPeriods,
   getSpendingLimitOrderErrors,
   getSpendingLimitResetText,
+  getSpendingLimitsNotice,
   getSpendingLimitSubmitErrors,
   parseComponentSpendingLimitPeriods,
   validateSpendingLimitAmount,
@@ -62,6 +63,26 @@ describe('spending limit periods', () => {
       getCappedComponents([{ ...tokenCost, billing_type: 'limit' }]),
     ).toEqual([]);
   });
+});
+
+describe('getSpendingLimitsNotice', () => {
+  it('follows the offering action on a reached limit', () => {
+    expect(getSpendingLimitsNotice('pause')).toMatch(
+      /^When a limit is reached, access pauses until that limit resets\./,
+    );
+    expect(getSpendingLimitsNotice('downscale')).toMatch(
+      /^When a limit is reached, the resource is downscaled until that limit resets\./,
+    );
+  });
+
+  it.each([undefined, null, ''])(
+    'says a reached limit only is reported when the action is %j',
+    (action) => {
+      expect(getSpendingLimitsNotice(action)).toBe(
+        'Reaching a limit is reported but does not pause access.',
+      );
+    },
+  );
 });
 
 describe('validateSpendingLimitAmount', () => {

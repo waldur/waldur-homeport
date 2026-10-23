@@ -36,7 +36,11 @@ export const PlanSpendingLimits = ({
       <h4 className="mb-1 text-base font-semibold text-primary">
         {translate('Spending limits')}
       </h4>
-      <p className="mb-4 text-sm text-tertiary">{getSpendingLimitsNotice()}</p>
+      <p className="mb-4 text-sm text-tertiary">
+        {getSpendingLimitsNotice(
+          offering.plugin_options?.action_on_usage_limit,
+        )}
+      </p>
       <SpendingLimitFields components={components} />
     </section>
   );

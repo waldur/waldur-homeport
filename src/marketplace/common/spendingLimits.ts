@@ -98,10 +98,26 @@ export const getSpendingLimitResetText = (
     year: translate('resets on 1 January'),
   })[period] ?? '';
 
-export const getSpendingLimitsNotice = () =>
-  translate(
-    'When a limit is reached, access pauses until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.',
-  );
+/**
+ * What reaching a limit does, as the offering's `action_on_usage_limit` sets
+ * it: pause the resource, downscale it, or — when unset — nothing beyond
+ * reporting it. The copy must not promise a pause the provider does not apply.
+ */
+export const getSpendingLimitsNotice = (
+  actionOnUsageLimit?: string | null,
+): string => {
+  if (actionOnUsageLimit === 'pause') {
+    return translate(
+      'When a limit is reached, access pauses until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.',
+    );
+  }
+  if (actionOnUsageLimit === 'downscale') {
+    return translate(
+      'When a limit is reached, the resource is downscaled until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.',
+    );
+  }
+  return translate('Reaching a limit is reported but does not pause access.');
+};
 
 export const isEmptyAmount = (value: unknown) =>
   value === null || value === undefined || String(value).trim() === '';

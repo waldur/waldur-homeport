@@ -34,9 +34,10 @@ const offering: any = {
   type: 'Marketplace.Basic',
   url: 'https://example.com/api/marketplace-offerings/1/',
   components: [tokenCost, cores],
+  plugin_options: { action_on_usage_limit: 'pause' },
 };
 
-const renderSection = (initialValues = {}) => {
+const renderSection = (initialValues = {}, section = offering) => {
   const onSubmit = vi.fn();
   const view = renderWithProviders(
     <Form
@@ -48,7 +49,7 @@ const renderSection = (initialValues = {}) => {
     >
       {({ handleSubmit, invalid }) => (
         <form onSubmit={handleSubmit}>
-          <PlanSpendingLimits offering={offering} />
+          <PlanSpendingLimits offering={section} />
           <button type="submit" disabled={invalid}>
             Submit
           </button>
@@ -84,6 +85,26 @@ describe('PlanSpendingLimits', () => {
       ),
     ).toBeInTheDocument();
     expect(screen.getByText('Up to 100')).toBeInTheDocument();
+  });
+
+  it('does not promise a pause the offering does not apply', () => {
+    renderSection({}, { ...offering, plugin_options: {} });
+    expect(
+      screen.getByText(
+        'Reaching a limit is reported but does not pause access.',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/access pauses/)).not.toBeInTheDocument();
+  });
+
+  it('says the resource is downscaled when the offering downscales', () => {
+    renderSection(
+      {},
+      { ...offering, plugin_options: { action_on_usage_limit: 'downscale' } },
+    );
+    expect(
+      screen.getByText(/the resource is downscaled until that limit resets/),
+    ).toBeInTheDocument();
   });
 
   it('renders nothing when no component takes spending limits', () => {

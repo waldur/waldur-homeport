@@ -173,12 +173,16 @@ export const SpendingLimitFields: FC<{
   // Accept the amount a field was loaded with as it is, even above its
   // maximum, as the backend does for an API key's limits.
   keepHeld?: boolean;
+  // Head each component's fields with its name even when there is only one;
+  // with several they are always named.
+  showNames?: boolean;
 }> = ({
   components,
   name = 'spending_limits',
   disabled,
   positive,
   keepHeld,
+  showNames,
 }) => (
   <>
     {components.map((component) => (
@@ -187,7 +191,7 @@ export const SpendingLimitFields: FC<{
         className="mb-5 last:mb-0"
         data-testid={`spending-limits-${component.type}`}
       >
-        {components.length > 1 && (
+        {(showNames || components.length > 1) && (
           <h6 className="mb-2 text-sm font-medium text-primary">
             {component.name}
           </h6>
