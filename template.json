@@ -29836,6 +29836,12 @@
       "feature_area": "offerings"
     }
   },
+  "Manage API keys of resources used by the project or organization": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
+    }
+  },
   "Manage API keys one by one": {
     "context": {
       "feature_area": "integration"

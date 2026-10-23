@@ -8,7 +8,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { setTableQueryRows } from '@/table/mockTableQuery';
 import { useTable } from '@/table/useTable';
 import { renderWithProviders } from '@/test/harness';
@@ -19,7 +19,9 @@ import { RevealApiKeyDialog } from './RevealApiKeyDialog';
 
 // Serves the rows given to setTableQueryRows (none by default); no request fires.
 vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
-vi.mock('@/permissions/hasPermission', () => ({ hasPermission: vi.fn() }));
+vi.mock('@/permissions/hasPermission', () => ({
+  hasConsumerPermission: vi.fn(),
+}));
 vi.mock('@/modal/useManagedMutation', () => ({
   useManagedMutation: vi.fn(() => ({ mutate: vi.fn(), isPending: false })),
 }));
@@ -149,7 +151,7 @@ describe('ResourceApiKeysCard', () => {
   beforeEach(() => vi.clearAllMocks());
 
   it('lists the keys with their state via the standard table', async () => {
-    vi.mocked(hasPermission).mockReturnValue(true);
+    vi.mocked(hasConsumerPermission).mockReturnValue(true);
     renderCard(KEYS);
     // The id is what a user matches against their own configuration.
     expect(await screen.findByText('EUMVPW5J5U2ZUQ5AL9L4')).toBeInTheDocument();
@@ -161,7 +163,7 @@ describe('ResourceApiKeysCard', () => {
   // A paused resource leaves each key's own state alone; the tab says what that
   // state cannot: none of them is served.
   it('shows a paused resource above its keys and on the serving ones', async () => {
-    vi.mocked(hasPermission).mockReturnValue(true);
+    vi.mocked(hasConsumerPermission).mockReturnValue(true);
     renderCard(KEYS, {
       resource: {
         ...RESOURCE,
@@ -182,7 +184,7 @@ describe('ResourceApiKeysCard', () => {
 
   // The Usage tab names the limit and the resume time; so does the banner.
   it('names the limit that paused the resource and when it resumes', async () => {
-    vi.mocked(hasPermission).mockReturnValue(true);
+    vi.mocked(hasConsumerPermission).mockReturnValue(true);
     renderCard(KEYS, {
       resource: {
         ...RESOURCE,
@@ -205,7 +207,7 @@ describe('ResourceApiKeysCard', () => {
   });
 
   it('shows no pause on a resource that is not paused', async () => {
-    vi.mocked(hasPermission).mockReturnValue(true);
+    vi.mocked(hasConsumerPermission).mockReturnValue(true);
     renderCard(KEYS);
     await screen.findByText('EUMVPW5J5U2ZUQ5AL9L4');
     expect(
@@ -217,7 +219,7 @@ describe('ResourceApiKeysCard', () => {
   });
 
   it('offers reveal to everyone and rotate to managers, no add or revoke', async () => {
-    vi.mocked(hasPermission).mockReturnValue(true);
+    vi.mocked(hasConsumerPermission).mockReturnValue(true);
     renderCard(KEYS);
     await screen.findByText('EUMVPW5J5U2ZUQ5AL9L4');
     // The count is fixed at provisioning: rotate re-mints in place, and neither
@@ -231,8 +233,22 @@ describe('ResourceApiKeysCard', () => {
     expect(screen.queryByText('Revoke')).not.toBeInTheDocument();
   });
 
+  it('manages keys with the consumer API key permission on the project or organization', async () => {
+    // Project managers and administrators hold it on the project, the
+    // organization owner on the organization. A role on the organization as
+    // a service provider does not count (hasConsumerPermission).
+    vi.mocked(hasConsumerPermission).mockReturnValue(true);
+    renderCard(KEYS);
+    await screen.findByText('EUMVPW5J5U2ZUQ5AL9L4');
+    expect(hasConsumerPermission).toHaveBeenCalledWith(expect.anything(), {
+      permission: 'RESOURCE.MANAGE_CONSUMER_API_KEY',
+      projectId: 'proj-1',
+      customerId: 'cust-1',
+    });
+  });
+
   it('offers only reveal without manage permission', async () => {
-    vi.mocked(hasPermission).mockReturnValue(false);
+    vi.mocked(hasConsumerPermission).mockReturnValue(false);
     renderCard(KEYS);
     await screen.findByText('EUMVPW5J5U2ZUQ5AL9L4');
     await openRowActions(0);
@@ -241,7 +257,7 @@ describe('ResourceApiKeysCard', () => {
   });
 
   it('shows the standard empty state with no keys', async () => {
-    vi.mocked(hasPermission).mockReturnValue(true);
+    vi.mocked(hasConsumerPermission).mockReturnValue(true);
     renderCard([]);
     expect(await screen.findByText('No api keys found')).toBeInTheDocument();
     expect(screen.getByText('There are no api keys yet.')).toBeInTheDocument();
@@ -249,7 +265,7 @@ describe('ResourceApiKeysCard', () => {
 
   it('says how to get a key when a managed resource has none', async () => {
     // Under key management a new resource starts with no keys.
-    vi.mocked(hasPermission).mockReturnValue(true);
+    vi.mocked(hasConsumerPermission).mockReturnValue(true);
     renderCard([], { offering: MANAGED_OFFERING });
     expect(await screen.findByText('No api keys found')).toBeInTheDocument();
     expect(
@@ -260,7 +276,7 @@ describe('ResourceApiKeysCard', () => {
   });
 
   describe('with key management', () => {
-    beforeEach(() => vi.mocked(hasPermission).mockReturnValue(true));
+    beforeEach(() => vi.mocked(hasConsumerPermission).mockReturnValue(true));
 
     it('lets a manager request a key and govern an active one', async () => {
       renderManaged({ state: 'OK' });
@@ -282,7 +298,7 @@ describe('ResourceApiKeysCard', () => {
     });
 
     it('offers nothing but reveal without manage permission', async () => {
-      vi.mocked(hasPermission).mockReturnValue(false);
+      vi.mocked(hasConsumerPermission).mockReturnValue(false);
       renderManaged({ state: 'OK' });
       await screen.findByText('KEY1');
       expect(
@@ -425,7 +441,7 @@ describe('ResourceApiKeysCard', () => {
     });
 
     describe('for an assignee without manage permission', () => {
-      beforeEach(() => vi.mocked(hasPermission).mockReturnValue(false));
+      beforeEach(() => vi.mocked(hasConsumerPermission).mockReturnValue(false));
 
       it('offers rotate next to reveal, and nothing else', async () => {
         renderManaged({ state: 'OK', user_uuid: USER.uuid });
@@ -580,7 +596,7 @@ describe('ResourceApiKeysCard', () => {
 
     // The key is paused once the rotation settles.
     it('lets a manager rotate a key that reached its limit', async () => {
-      vi.mocked(hasPermission).mockReturnValue(true);
+      vi.mocked(hasConsumerPermission).mockReturnValue(true);
       renderManaged({
         state: 'OK',
         spending_limit_status: [
@@ -670,7 +686,7 @@ describe('ResourceApiKeysCard', () => {
   });
 
   describe('without key management', () => {
-    beforeEach(() => vi.mocked(hasPermission).mockReturnValue(true));
+    beforeEach(() => vi.mocked(hasConsumerPermission).mockReturnValue(true));
 
     const renderUnmanaged = (key: any, user?: any) =>
       renderCard([{ uuid: 'k1', client_id: 'KEY1', ...key }], {
@@ -732,7 +748,7 @@ describe('ResourceApiKeysCard', () => {
     });
 
     it('still lets the assignee rotate their key', async () => {
-      vi.mocked(hasPermission).mockReturnValue(false);
+      vi.mocked(hasConsumerPermission).mockReturnValue(false);
       renderUnmanaged({ state: 'OK', user_uuid: USER.uuid });
       await screen.findByText('KEY1');
       await openRowActions(0);
@@ -742,7 +758,7 @@ describe('ResourceApiKeysCard', () => {
     // Rotating or resuming in a failed command's place is a manager's call:
     // for the assignee it would undo a pause meant for them.
     it('leaves a stranded key to a manager, not its assignee', async () => {
-      vi.mocked(hasPermission).mockReturnValue(false);
+      vi.mocked(hasConsumerPermission).mockReturnValue(false);
       renderUnmanaged({
         state: 'Erred',
         pending_action: 'pause',
@@ -756,7 +772,7 @@ describe('ResourceApiKeysCard', () => {
     });
 
     it('lets the assignee retry a failed rotation', async () => {
-      vi.mocked(hasPermission).mockReturnValue(false);
+      vi.mocked(hasConsumerPermission).mockReturnValue(false);
       renderUnmanaged({
         state: 'Erred',
         pending_action: 'rotate',

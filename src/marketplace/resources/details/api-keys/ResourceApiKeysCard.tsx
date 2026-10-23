@@ -14,7 +14,7 @@ import {
   isAllModels,
 } from '@/marketplace/common/modelSelection';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { Column, TableProps } from '@/table/types';
@@ -174,8 +174,11 @@ export const ResourceApiKeysCard = ({
   ...tableProps
 }: ResourceApiKeysCardProps) => {
   const user = useUser();
-  const canManage = hasPermission(user, {
-    permission: PermissionEnum.MANAGE_RESOURCE_USERS,
+  // The backend checks the permission on the project and its organization
+  // only: a role on the organization as a service provider acts for the
+  // provider and does not count.
+  const canManage = hasConsumerPermission(user, {
+    permission: PermissionEnum.MANAGE_RESOURCE_CONSUMER_API_KEY,
     projectId: resource.project_uuid,
     customerId: resource.customer_uuid,
   });

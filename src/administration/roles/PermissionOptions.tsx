@@ -121,6 +121,12 @@ export const PermissionOptions = [
         value: 'RESOURCE.MANAGE_API_KEY',
       },
       {
+        label: translate(
+          'Manage API keys of resources used by the project or organization',
+        ),
+        value: 'RESOURCE.MANAGE_CONSUMER_API_KEY',
+      },
+      {
         label: translate('Reject booking request for resource'),
         value: 'RESOURCE.REJECT_BOOKING_REQUEST',
       },
