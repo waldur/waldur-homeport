@@ -31,6 +31,7 @@
     "lint:fix": "eslint --fix src locales/tools packages",
     "deps:unused": "knip --include files,types,enumMembers,exports",
     "deps:circular": "madge --exclude 'broadcasts/BroadcastFooter' --exclude 'js-client' --circular src/**/*",
+    "deps:dedupe": "yarn dedupe --check",
     "test": "vitest --project=unit",
     "test:e2e": "playwright test --project e2e",
     "test:e2e:visual": "playwright test --project visual --workers=1",

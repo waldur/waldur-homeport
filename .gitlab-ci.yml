@@ -166,6 +166,7 @@ Run style and dependency checks:
     - yarn style:check
     - yarn deps:unused
     - yarn deps:circular
+    - yarn deps:dedupe
     # Source strings are US English; en-GB.json is generated from them.
     # Extract first so the check sees the strings as they are in src/, and
     # fail when the committed en-GB.json does not match what they generate.
