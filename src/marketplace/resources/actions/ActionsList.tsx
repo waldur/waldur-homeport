@@ -13,6 +13,7 @@ import { SetErredActionItem } from '@/resource/actions/SetErredActionItem';
 import { UnlinkActionItem } from '@/resource/actions/UnlinkActionItem';
 
 import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
+import { SetSpendingLimitsAction } from '../change-limits/SetSpendingLimitsAction';
 import { ResourceDetailsAction } from '../details/popup/ResourceDetailsAction';
 import { ReportUsageAction } from '../list/ReportUsageAction';
 import { ReportUserUsageAction } from '../list/ReportUserUsageAction';
@@ -41,6 +42,7 @@ export const ActionsList = [
   SubmitReportAction,
   ChangePlanAction,
   ChangeLimitsAction,
+  SetSpendingLimitsAction,
   RequestLimitsChangeAction,
   RequestEndDateChangeAction,
   RenewAllocationActionAction,
@@ -61,6 +63,7 @@ export const CustomerResourceActions = [
   EditAction,
   ChangePlanAction,
   ChangeLimitsAction,
+  SetSpendingLimitsAction,
   RequestLimitsChangeAction,
   RequestEndDateChangeAction,
   RenewAllocationActionAction,

@@ -3,6 +3,11 @@ import { Resource, ResourceApiKeyAction, User } from 'waldur-js-client';
 import { BadgeVariant } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import {
+  getRestrictionHeldBy,
+  getRestrictionResumes,
+  RestrictedResource,
+} from '@/marketplace/resources/details/spendingLimitRestriction';
 import { checkIsStaffOrSupport } from '@/workspace/selectors';
 
 import { ApiKeyRow, ApiKeyState } from './types';
@@ -101,12 +106,25 @@ export const getResourcePause = (
       : 'other'
     : null;
 
-export const getResourcePauseMessage = (pause: ResourcePause) =>
+const getResourcePauseMessage = (pause: ResourcePause) =>
   pause === 'limit'
     ? translate(
         'Its usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.',
       )
     : translate('It resumes once the resource is unpaused.');
+
+// The tab's banner names the limit that holds the resource and when it
+// resumes, in the Usage tab's words. Without a reached limit to name, it says
+// what a key's tooltip does.
+export const getResourcePauseDetails = (
+  pause: ResourcePause,
+  resource: RestrictedResource,
+) => {
+  const heldBy = pause === 'limit' ? getRestrictionHeldBy(resource) : undefined;
+  return heldBy
+    ? `${heldBy} ${getRestrictionResumes(resource)}`
+    : getResourcePauseMessage(pause);
+};
 
 // Only a key that would otherwise serve reads as blocked; a paused, erred or
 // changing key already says why it is not serving.

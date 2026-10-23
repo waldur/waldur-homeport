@@ -28,7 +28,7 @@ import { getHeadlineUsage } from './keyLimits';
 import {
   getKeyStateVariant,
   getResourcePause,
-  getResourcePauseMessage,
+  getResourcePauseDetails,
   getStateLabel,
   getStateTooltip,
   ResourcePause,
@@ -219,7 +219,7 @@ export const ResourceApiKeysCard = ({
           title={translate(
             'This resource is paused, so none of its keys is served.',
           )}
-          body={getResourcePauseMessage(pause)}
+          body={getResourcePauseDetails(pause, resource)}
         />
       )}
       <Table<ApiKeyRow>

@@ -180,6 +180,30 @@ describe('ResourceApiKeysCard', () => {
     expect(screen.getByText('Updating')).toBeInTheDocument();
   });
 
+  // The Usage tab names the limit and the resume time; so does the banner.
+  it('names the limit that paused the resource and when it resumes', async () => {
+    vi.mocked(hasPermission).mockReturnValue(true);
+    renderCard(KEYS, {
+      resource: {
+        ...RESOURCE,
+        paused: true,
+        usage_limit_restriction: 'paused',
+        offering_components: [{ type: 'tokens', name: 'Tokens' }],
+        spending_limit_status: [
+          { component_type: 'tokens', period: 'week', reached: true },
+        ],
+        usage_limit_resumes_at: new Date(
+          Date.now() + 2 * 86400_000,
+        ).toISOString(),
+      },
+    });
+    expect(
+      await screen.findByText(
+        /Held by: Tokens — Weekly limit\. Access resumes/,
+      ),
+    ).toBeInTheDocument();
+  });
+
   it('shows no pause on a resource that is not paused', async () => {
     vi.mocked(hasPermission).mockReturnValue(true);
     renderCard(KEYS);
@@ -601,7 +625,8 @@ describe('ResourceApiKeysCard', () => {
     });
 
     // Reveal still honours an assignee set while management was on, so the
-    // portal shows whose key it is and lets a manager share it again.
+    // portal shows whose key it is. Nobody can unassign it: an assignee is
+    // fixed when the key is requested.
     it('shows the assignee of a key assigned while management was on', async () => {
       renderUnmanaged({
         state: 'OK',
@@ -616,7 +641,7 @@ describe('ResourceApiKeysCard', () => {
       expect(screen.getByText('Alice')).toBeInTheDocument();
       await openRowActions(0);
       expect(isEnabled('Reveal')).toBe(false);
-      expect(isEnabled('Unassign')).toBe(true);
+      expect(offered('Unassign')).toBeNull();
     });
 
     it('lets the assignee reveal their key', async () => {
@@ -624,14 +649,6 @@ describe('ResourceApiKeysCard', () => {
       await screen.findByText('KEY1');
       await openRowActions(0);
       expect(isEnabled('Reveal')).toBe(true);
-    });
-
-    it('offers no unassign without manage permission', async () => {
-      vi.mocked(hasPermission).mockReturnValue(false);
-      renderUnmanaged({ state: 'OK', user_uuid: USER.uuid });
-      await screen.findByText('KEY1');
-      await openRowActions(0);
-      expect(offered('Unassign')).toBeNull();
     });
 
     it('still lets the assignee rotate their key', async () => {
@@ -668,13 +685,6 @@ describe('ResourceApiKeysCard', () => {
       await screen.findByText('KEY1');
       await openRowActions(0);
       expect(isEnabled('Retry')).toBe(true);
-    });
-
-    it('offers no unassign for a key shared by the project', async () => {
-      renderUnmanaged({ state: 'OK' });
-      await screen.findByText('KEY1');
-      await openRowActions(0);
-      expect(offered('Unassign')).toBeNull();
     });
 
     it('offers no request, pause, settings or delete', async () => {
