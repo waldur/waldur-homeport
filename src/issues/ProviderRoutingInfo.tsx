@@ -81,7 +81,7 @@ export const ProviderRoutingInfo: FC<{ issue: Issue }> = ({ issue }) => {
             label={translate('Escalation reason')}
             value={issue.escalation_reason}
             isStuck
-            labelClass="min-w-150px"
+            labelClass="min-w-[150px]"
             className="text-sm"
           />
         )}
@@ -93,7 +93,7 @@ export const ProviderRoutingInfo: FC<{ issue: Issue }> = ({ issue }) => {
               label={label}
               value={v}
               isStuck
-              labelClass="min-w-150px"
+              labelClass="min-w-[150px]"
               className="text-sm"
             />
           ))}

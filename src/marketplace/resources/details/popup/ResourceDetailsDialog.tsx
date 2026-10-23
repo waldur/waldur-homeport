@@ -18,7 +18,7 @@ export const ResourceDetailsDialog: FC<ActionDialogProps> = ({
       subtitle={translate('Key information about the resource.')}
       iconNode={<CopySimpleIcon weight="bold" />}
       iconColor="success"
-      bodyClassName="h-350px"
+      bodyClassName="h-[350px]"
     >
       <Tabs mount="active" defaultValue="details">
         <TabsList>

@@ -69,14 +69,14 @@ export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
         <Field
           label={translate('Organization')}
           value={order.customer_name}
-          labelClass="w-100px"
+          labelClass="w-[100px]"
           labelCol="auto"
           valueCol="auto"
         />
         <Field
           label={translate('Project')}
           value={order.project_name}
-          labelClass="w-100px"
+          labelClass="w-[100px]"
           labelCol="auto"
           valueCol="auto"
         />
@@ -101,7 +101,7 @@ export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
               />
             )
           }
-          labelClass="w-100px"
+          labelClass="w-[100px]"
           labelCol="auto"
           valueCol="auto"
         />
@@ -121,7 +121,7 @@ export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
               order.offering_name
             )
           }
-          labelClass="w-100px"
+          labelClass="w-[100px]"
           labelCol="auto"
           valueCol="auto"
         />
@@ -131,7 +131,7 @@ export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
           <Field
             label={translate('Purchase order')}
             value={<PurchaseOrderBadge order={order} offering={offering} />}
-            labelClass="w-125px"
+            labelClass="w-[125px]"
             labelCol="auto"
             valueCol="auto"
           />

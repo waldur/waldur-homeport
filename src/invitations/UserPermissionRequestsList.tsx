@@ -53,7 +53,7 @@ export const UserPermissionRequestsList: FC<OwnProps> = ({
     {
       title: translate('State'),
       render: PermissionRequestStateField,
-      className: 'w-175px',
+      className: 'w-[175px]',
     },
   ];
 
@@ -69,7 +69,7 @@ export const UserPermissionRequestsList: FC<OwnProps> = ({
       placeholderHasRetry={false}
       hoverShadow={false}
       hideRefresh
-      headerClassName="py-0 min-h-45px"
+      headerClassName="py-0 min-h-[45px]"
       titleClassName="text-sm font-semibold text-secondary"
       rowActions={UserPermissionRequestRowActions}
     />

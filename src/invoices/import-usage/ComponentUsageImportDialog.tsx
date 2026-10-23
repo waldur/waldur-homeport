@@ -156,7 +156,7 @@ export const ComponentUsageImportDialog: FC<ComponentUsageImportDialogProps> = (
         month: monthOptions.find((m) => m.value === currentMonth),
       }}
       data={{ parseResult, onFileParsed: handleFileParsed }}
-      modalProps={{ bodyClassName: 'h-500px' }}
+      modalProps={{ bodyClassName: 'h-[500px]' }}
     />
   );
 };

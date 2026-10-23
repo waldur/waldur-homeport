@@ -78,13 +78,13 @@ export const OfferingComponentDialog: FC<{
             iconColor={!isEdit ? 'success' : null}
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
                   label={isEdit ? translate('Save') : translate('Confirm')}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

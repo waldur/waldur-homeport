@@ -44,7 +44,7 @@ export const OfferingAgentInfo: FC<OwnProps> = ({
     <FormTable.Card
       title={translate('Agent info')}
       className="card-bordered mb-5"
-      headerClassName="min-h-60px gap-3"
+      headerClassName="min-h-[60px] gap-3"
       actions={
         <Select
           options={agentIdentities}
@@ -52,7 +52,7 @@ export const OfferingAgentInfo: FC<OwnProps> = ({
           getOptionValue={(opt) => opt.uuid}
           getOptionLabel={(opt) => opt.name}
           onChange={setAgentIdentity}
-          className="grow w-175px mw-sm-350px"
+          className="grow w-[175px] sm:max-w-[350px]"
         />
       }
     >

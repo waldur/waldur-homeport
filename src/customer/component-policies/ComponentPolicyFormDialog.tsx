@@ -98,13 +98,13 @@ export const ComponentPolicyFormDialog: FC<ComponentPolicyFormDialogProps> = ({
             }
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   disabled={invalid || !dirty}
                   submitting={submitMutation.isPending}
                   label={isEdit ? translate('Edit') : translate('Create')}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

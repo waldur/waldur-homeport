@@ -171,7 +171,7 @@ export const VisibleIfConfiguration: FC<VisibleIfConfigurationProps> = ({
               action={() => form.change('visible_if', undefined)}
               tooltip={translate('Remove rule')}
               // Square at the selects' own height, so the rule stays one row.
-              className="h-40px w-40px"
+              className="h-[40px] w-[40px]"
             />
           </div>
         </div>

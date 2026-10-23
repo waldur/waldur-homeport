@@ -150,7 +150,7 @@ export const BookingResourceListItem = ({
           <div
             className={
               layout.diffHours > 2
-                ? 'min-h-100px position-sticky top-0 py-3'
+                ? 'min-h-[100px] position-sticky top-0 py-3'
                 : 'h-full position-relative py-2'
             }
           >

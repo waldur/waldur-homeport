@@ -517,7 +517,7 @@ export const SearchPopover = ({
             </TabsTrigger>
           )}
         </TabsList>
-        <div className="tab-content overflow-auto min-h-200px">
+        <div className="tab-content overflow-auto min-h-[200px]">
           <TabsContent value="all">
             <AllResultsTabContent
               result={result}

@@ -263,7 +263,7 @@ const PrepaidMonthsSelector = ({
       }
       value={
         <div>
-          <div className="mw-200px">
+          <div className="max-w-[200px]">
             <Field name={mode.name}>
               {({ input, meta }) => (
                 <SelectField

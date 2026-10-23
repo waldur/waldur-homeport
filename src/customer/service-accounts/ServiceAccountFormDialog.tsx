@@ -141,13 +141,13 @@ export const ServiceAccountFormDialog: FC<OwnProps> = ({
             iconColor="success"
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   submitting={submitting}
                   label={isEdit ? translate('Save') : translate('Create')}
                   disabled={invalid}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

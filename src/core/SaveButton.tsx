@@ -23,7 +23,7 @@ export const SaveButton: FC<SaveButtonProps> = ({
   const button = (
     <div className="position-relative">
       <BaseButton
-        className={`min-w-80px ${className || ''}`.trim()}
+        className={`min-w-[80px] ${className || ''}`.trim()}
         variant={dirty ? 'warning' : 'primary'}
         disabled={submitting}
         disabledReason={translate('Saving...')}

@@ -61,13 +61,13 @@ export const EditOfferingChecklistDialog: FC<{
             title={translate('Assigned compliance checklist')}
             footer={
               <>
-                <CloseDialogButton className="w-125px" />
+                <CloseDialogButton className="w-[125px]" />
                 <SubmitButton
                   disabled={invalid || pristine}
                   submitting={submitting}
                   label={translate('Save')}
                   variant="primary"
-                  className="w-125px"
+                  className="w-[125px]"
                 />
               </>
             }

@@ -121,7 +121,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
                       <span className="font-normal me-1">
                         {translate('Selected organization')}:
                       </span>
-                      <b className="ellipsis mw-lg-200px mw-xl-300px">
+                      <b className="ellipsis lg:max-w-[200px] xl:max-w-[300px]">
                         {values.invitation.customer_name}
                       </b>
                     </div>

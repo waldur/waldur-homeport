@@ -83,13 +83,13 @@ const renderNodeRows = ({ fields, flavors }: any) => {
             <table className="table align-middle">
               <thead>
                 <tr>
-                  <th className="w-200px">{translate('Required nodes')}</th>
+                  <th className="w-[200px]">{translate('Required nodes')}</th>
                   <th />
-                  <th className="w-250px" />
-                  <th className="w-100px text-center">1, 3 or 5</th>
-                  <th className="w-100px text-center">1 or more</th>
-                  <th className="w-100px text-center">1 or more</th>
-                  <th className="w-5px" />
+                  <th className="w-[250px]" />
+                  <th className="w-[100px] text-center">1, 3 or 5</th>
+                  <th className="w-[100px] text-center">1 or more</th>
+                  <th className="w-[100px] text-center">1 or more</th>
+                  <th className="w-[5px]" />
                 </tr>
               </thead>
               <tbody>

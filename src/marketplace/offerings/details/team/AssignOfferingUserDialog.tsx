@@ -84,13 +84,13 @@ export const AssignOfferingUserDialog: FC<{
             iconColor="success"
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   label={translate('Add role')}
                   submitting={submitting}
                   disabled={invalid || rolesLoading || roles.length === 0}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

@@ -33,8 +33,8 @@ const FieldsListMapping = ({
       <table className="table align-middle table-row-bordered border-b-[1px] border-b-secondary mb-3">
         <thead>
           <tr className="text-quaternary text-xs font-medium">
-            <td className="w-50">{translate('Remote category')}</td>
-            <td className="w-50">{translate('Local category')}</td>
+            <td className="w-1/2">{translate('Remote category')}</td>
+            <td className="w-1/2">{translate('Local category')}</td>
           </tr>
         </thead>
         <tbody className="text-sm">

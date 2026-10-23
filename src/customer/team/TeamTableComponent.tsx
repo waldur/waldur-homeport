@@ -157,7 +157,7 @@ export const TeamTableComponent = <
             </span>
           );
         },
-        className: 'w-25',
+        className: 'w-1/4',
         filter:
           context === 'organization'
             ? 'organization_role'
@@ -173,7 +173,7 @@ export const TeamTableComponent = <
       !hideExpiration && {
         title: translate('Role expiration'),
         render: ({ row }) => renderRoleExpirationDate(row),
-        className: 'w-45px',
+        className: 'w-[45px]',
         export: (row) => renderRoleExpirationDate(row),
         id: 'expiration_time',
         keys: ['expiration_time'],

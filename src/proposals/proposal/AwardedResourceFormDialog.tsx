@@ -167,7 +167,7 @@ export const AwardedResourceFormDialog: FC<AwardedResourceFormDialogProps> = ({
       steps={wizard.steps}
       wizardForms={wizard.wizardForms}
       initialValues={initialValues}
-      modalProps={{ bodyClassName: 'min-h-550px pb-0' }}
+      modalProps={{ bodyClassName: 'min-h-[550px] pb-0' }}
       data={{
         call: { uuid: proposal.call_uuid, name: proposal.call_name },
         award: true,

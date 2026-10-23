@@ -51,7 +51,7 @@ const ColumnsPopover: FC<{
   activeColumns: Record<string, string[] | false>;
   onToggle: (column: ExpandableRowToolbarColumn) => void;
 }> = ({ columns, activeColumns, onToggle }) => (
-  <div className="py-2 mw-250px">
+  <div className="py-2 max-w-[250px]">
     {columns.map((column) => (
       <button
         key={column.id}

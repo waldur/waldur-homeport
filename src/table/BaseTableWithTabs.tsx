@@ -83,7 +83,7 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
           value={activeKey}
           onValueChange={handleSelect}
           mount="active"
-          className="min-h-175px"
+          className="min-h-[175px]"
         >
           <div className="flex justify-between">
             <TabsList scrollable scrollClassName="grow">

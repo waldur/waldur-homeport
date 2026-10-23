@@ -31,7 +31,7 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
           <tr>
             <td className="w-40">{translate('Claim')}</td>
             <td>{translate('Accepted values')}</td>
-            <td className="w-5px" />
+            <td className="w-[5px]" />
           </tr>
         </thead>
         <tbody>

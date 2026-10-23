@@ -10,7 +10,7 @@ const DetailRow: FC<PropsWithChildren<{ label: string }>> = ({
   children,
 }) => (
   <div className="flex gap-4">
-    <div className="min-w-125px">{label}</div>
+    <div className="min-w-[125px]">{label}</div>
     <div className="text-quaternary">{children}</div>
   </div>
 );

@@ -152,7 +152,7 @@ import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 <EmbeddedTabs
   framed
   defaultValue="projects"
-  className="min-h-375px"
+  className="min-h-[375px]"
   tabs={[
     {
       key: 'projects',

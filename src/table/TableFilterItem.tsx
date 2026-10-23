@@ -461,13 +461,13 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
               <div className="flex gap-4">
                 <BaseButton
                   variant="tertiary"
-                  className="grow w-50"
+                  className="grow w-1/2"
                   onClick={closeMenu}
                   label={translate('Cancel')}
                   size="lg"
                 />
                 <BaseButton
-                  className="grow w-50"
+                  className="grow w-1/2"
                   onClick={() => onApply()}
                   label={translate('Apply')}
                   variant="primary"
@@ -497,7 +497,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
         <MenuPopover.Content
           side="right"
           align="start"
-          className="w-375px py-3 shadow-sm"
+          className="w-[375px] py-3 shadow-sm"
           // Radix returns focus to this row on close, so the keyboard
           // stays in the list. Two exceptions skip that:
           // - a sibling row has taken over (`activeItemName` is set): the
@@ -529,13 +529,13 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
                     <div className="flex gap-4">
                       <BaseButton
                         variant="tertiary"
-                        className="grow w-50"
+                        className="grow w-1/2"
                         onClick={() => setOpen(false)}
                         label={translate('Cancel')}
                         size="lg"
                       />
                       <BaseButton
-                        className="grow w-50"
+                        className="grow w-1/2"
                         onClick={() => onApply()}
                         label={translate('Apply')}
                         variant="primary"

@@ -280,7 +280,7 @@ export const ProjectImportDialog: FC<ProjectImportDialogProps> = (props) => {
           <form onSubmit={handleSubmit} data-testid="project-import-dialog">
             <ModalDialog
               title={translate('Bulk import of projects')}
-              bodyClassName="h-500px wizard"
+              bodyClassName="h-[500px] wizard"
               footer={
                 <WizardButtons
                   isFirstStep={isFirstStep}

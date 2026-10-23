@@ -45,7 +45,7 @@ export const ProviderProjectExpandableRow: FC<OwnProps> = ({
       <EmbeddedTabs
         framed
         defaultValue="team"
-        className="min-h-375px"
+        className="min-h-[375px]"
         tabs={[
           {
             key: 'team',

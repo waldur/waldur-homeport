@@ -106,7 +106,7 @@ export const TableGrowthPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
         <BaseButton
           pending={isSampling}
           variant="tertiary"
-          className="min-w-100px"
+          className="min-w-[100px]"
           onClick={() => triggerSampling()}
           label={translate('Sample now')}
           iconNode={<LightningIcon weight="bold" />}

@@ -19,7 +19,7 @@ export const CompleteYourProfileBanner = ({
   blockedPageLabel,
 }: CompleteYourProfileBannerProps) => (
   <div
-    className="h-60px bg-primary border-b-[1px] border-b-secondary"
+    className="h-[60px] bg-primary border-b-[1px] border-b-secondary"
     role="status"
   >
     <div

@@ -36,7 +36,7 @@ export const MeasuredUnitInput = ({
   return (
     <div>
       <BaseInputField
-        containerClassName="mw-200px"
+        containerClassName="max-w-[200px]"
         id={id}
         name={input.name}
         type="number"

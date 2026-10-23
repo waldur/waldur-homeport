@@ -42,13 +42,13 @@ export const AnswerReviewDialog: FC<AnswerReviewDialogProps> = ({
             title={translate('Review')}
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Save')}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

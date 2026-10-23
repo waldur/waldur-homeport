@@ -437,7 +437,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
             title={
               isEdit ? translate('Edit question') : translate('Add question')
             }
-            bodyClassName="h-500px mh-500px"
+            bodyClassName="h-[500px] max-h-[500px]"
             footer={
               <>
                 {!isEdit && (
@@ -450,7 +450,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
                     id="check-another"
                   />
                 )}
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   disabled={invalid || pristine}
                   submitting={submitting}
@@ -458,7 +458,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
                     isEdit ? translate('Save changes') : translate('Confirm')
                   }
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

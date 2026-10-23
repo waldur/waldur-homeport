@@ -86,7 +86,7 @@ export const OneTimeTab = ({
               'If not set, the order is processed immediately after approval.',
             )}
             value={
-              <div className="mw-200px">
+              <div className="max-w-[200px]">
                 <Field name="start_date">
                   {({ input, meta }) => (
                     <DateField input={input} meta={meta} {...dateFieldProps} />

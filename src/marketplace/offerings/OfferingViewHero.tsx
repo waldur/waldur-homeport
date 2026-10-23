@@ -141,7 +141,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                   tooltip: translate(
                     'The public view is currently inactive as this offering is in draft status.',
                   ),
-                  className: 'text-center min-w-60px',
+                  className: 'text-center min-w-[60px]',
                   testId: 'offering-tab-public',
                 }
               : {
@@ -155,7 +155,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                       )}
                     />
                   ),
-                  className: 'text-center min-w-60px',
+                  className: 'text-center min-w-[60px]',
                   testId: 'offering-tab-public',
                 },
             {
@@ -167,7 +167,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                   params={getParams('marketplace-offering-details')}
                 />
               ),
-              className: 'text-center min-w-60px',
+              className: 'text-center min-w-[60px]',
               testId: 'offering-tab-manage',
             },
             {
@@ -179,7 +179,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                   params={getParams('marketplace-offering-update')}
                 />
               ),
-              className: 'text-center min-w-60px',
+              className: 'text-center min-w-[60px]',
               testId: 'offering-tab-edit',
             },
           ]}
@@ -233,7 +233,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
               <Table className="mb-0 px-0 h-auto text-xs w-auto mt-1">
                 <tbody>
                   <tr>
-                    <th className="font-medium w-150px p-0 pe-3">
+                    <th className="font-medium w-[150px] p-0 pe-3">
                       {translate('Shared/Billing enabled')}:
                     </th>
                     <td className="text-quaternary p-0">
@@ -245,7 +245,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                     </td>
                   </tr>
                   <tr>
-                    <th className="font-medium w-100px p-0 pe-3">
+                    <th className="font-medium w-[100px] p-0 pe-3">
                       {translate('Type')}:
                     </th>
                     <td className="text-quaternary p-0">

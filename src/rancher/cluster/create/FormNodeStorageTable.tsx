@@ -40,10 +40,10 @@ export const FormNodeStorageTable: FC<
         <table className="table align-middle">
           <thead>
             <tr>
-              <th className="w-200px">{props.title}</th>
-              <th className="w-125px" />
+              <th className="w-[200px]">{props.title}</th>
+              <th className="w-[125px]" />
               {props?.volumeTypeChoices?.length > 0 && (
-                <th className="w-250px" />
+                <th className="w-[250px]" />
               )}
             </tr>
           </thead>
@@ -134,7 +134,7 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
         </td>
       )}
       {props.onDeleteRow && (
-        <td className="w-60px">
+        <td className="w-[60px]">
           <BaseButton
             tooltip={translate('Remove')}
             variant="text-danger"

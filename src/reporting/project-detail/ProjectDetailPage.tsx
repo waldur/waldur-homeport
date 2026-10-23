@@ -294,7 +294,7 @@ export const ProjectDetailPage: FC = () => {
       </ReportingTitle>
       {/* Filters */}
       <div className="flex flex-wrap gap-6 mb-6">
-        <FormGroup label={translate('Project')} className="grow mw-400px">
+        <FormGroup label={translate('Project')} className="grow max-w-[400px]">
           <AsyncSelect
             key={selectedOrganization?.uuid || 'no-org'}
             placeholder={translate('Select project...')}
@@ -311,7 +311,7 @@ export const ProjectDetailPage: FC = () => {
           />
         </FormGroup>
 
-        <FormGroup label={translate('Resource')} className="grow mw-400px">
+        <FormGroup label={translate('Resource')} className="grow max-w-[400px]">
           <Select
             placeholder={translate('Select resource...')}
             options={resourceOptions}
@@ -329,7 +329,7 @@ export const ProjectDetailPage: FC = () => {
 
         <FormGroup
           label={translate('Component type')}
-          className="grow mw-300px"
+          className="grow max-w-[300px]"
         >
           <Select
             placeholder={translate('All types')}

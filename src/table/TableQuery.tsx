@@ -39,7 +39,7 @@ export class TableQuery extends Component<TableQueryProps, State> {
         placeholder={translate('Search...')}
         value={this.state.query}
         onChange={this.setQuery}
-        className="min-w-125px"
+        className="min-w-[125px]"
         inputClassName={this.props.inputClassName}
       />
     );
