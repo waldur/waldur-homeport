@@ -47,6 +47,21 @@ describe('getErredTooltip', () => {
       ),
     ).toBe('Pause failed: gateway down');
   });
+
+  // Erred alone reads as stopped, but the provider still serves the key.
+  it('says a key whose limit pause failed is still active', () => {
+    expect(
+      getErredTooltip(
+        row({
+          pending_action: 'pause',
+          paused_by_limit: true,
+          error_message: 'gateway down',
+        }),
+      ),
+    ).toBe(
+      'Pause failed: gateway down The key is still active at the provider until the failed command succeeds.',
+    );
+  });
 });
 
 describe('a key paused at its limit', () => {
@@ -244,7 +259,10 @@ describe('a key on a paused resource', () => {
   it('reads as blocked, not OK', () => {
     expect(getStateLabel(ok, 'limit')).toBe('Blocked: resource paused');
     expect(getKeyStateVariant(ok, 'limit').variant).toBe('warning');
-    expect(getStateTooltip(ok, 'limit')).toMatch(/usage reached its limit/);
+    // The resource's usage, not the key's: the key may be far below its own.
+    expect(getStateTooltip(ok, 'limit')).toMatch(
+      /The resource's usage reached its limit\./,
+    );
   });
 
   it('says it resumes with the resource when paused for another reason', () => {

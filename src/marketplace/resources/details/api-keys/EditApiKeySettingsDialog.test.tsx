@@ -291,6 +291,30 @@ describe('EditApiKeySettingsDialog', () => {
     });
   });
 
+  // No key may spend more in a day than its resource may in the month.
+  it("caps a shorter period by the resource's limit for a longer one", async () => {
+    const user = userEvent.setup();
+    renderDialog(
+      { spending_limits: null },
+      {
+        components: [
+          {
+            type: 'token_cost',
+            name: 'Token cost',
+            billing_type: 'usage',
+            spending_limit_periods: { day: {}, month: {} },
+          },
+        ],
+        resourceLimits: { token_cost: { month: 40 } },
+      },
+    );
+    const [day] = await screen.findAllByRole('spinbutton');
+    expect(screen.getAllByText('Up to 40')).toHaveLength(2);
+    await user.type(day, '45');
+    expect(await screen.findByText('Must not exceed 40.')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
+  });
+
   // As the backend: a held limit passes only unchanged.
   it("caps a changed limit by a resource limit lowered below the key's", async () => {
     const user = userEvent.setup();
