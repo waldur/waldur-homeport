@@ -4,11 +4,15 @@ import { Form } from 'react-final-form';
 
 import { STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
-import { WizardButtons } from '@/marketplace/offerings/import/WizardButtons';
-import { WizardTabs } from '@/marketplace/offerings/import/WizardTabs';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ProgressStep, WizardStepIndicator, useWizard } from '@/wizard';
+import {
+  ProgressStep,
+  WizardButtons,
+  WizardStepIndicator,
+  WizardTabs,
+  useWizard,
+} from '@/wizard';
 
 import { loadData } from '../change-limits/utils';
 

@@ -31,4 +31,14 @@ describe('ProgressSteps', () => {
     expect(screen.getByTestId('custom-icon')).toBeInTheDocument();
     expect(screen.getAllByTestId('CheckIcon')).toHaveLength(2);
   });
+
+  it('controls completed and current steps via activeIndex', () => {
+    render(<ProgressSteps steps={steps(0)} activeIndex={1} />);
+    expect(screen.getAllByTestId('CheckIcon')).toHaveLength(1);
+    expect(screen.getAllByTestId('CircleIcon')).toHaveLength(2);
+    expect(screen.getByRole('listitem', { name: 'Review' })).toHaveAttribute(
+      'aria-current',
+      'step',
+    );
+  });
 });

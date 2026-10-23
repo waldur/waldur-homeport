@@ -6,6 +6,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { WizardStepProps } from './types';
 import { Wizard } from './Wizard';
 import { WizardModal } from './WizardModal';
+import { WizardStepIndicator } from './WizardStepIndicator';
 
 // Test step components
 const Step1: FC<WizardStepProps> = (props) => (
@@ -280,6 +281,33 @@ describe('WizardStepIndicator', () => {
     expect(
       screen.getByRole('group', { name: /form progress/i }),
     ).toBeInTheDocument();
+  });
+
+  it('passes canonical step from props.steps on step click', async () => {
+    const onClick = vi.fn();
+    render(
+      <WizardStepIndicator steps={steps} value={steps[0]} onClick={onClick} />,
+    );
+
+    await userEvent.click(screen.getByText('Step 2'));
+    expect(onClick).toHaveBeenCalledWith(steps[1], 1);
+    // Explicitly verify reference equality
+    expect(onClick.mock.calls[0][0]).toBe(steps[1]);
+  });
+
+  it('does not fire onClick when disabled is true', async () => {
+    const onClick = vi.fn();
+    render(
+      <WizardStepIndicator
+        steps={steps}
+        value={steps[0]}
+        onClick={onClick}
+        disabled={true}
+      />,
+    );
+
+    await userEvent.click(screen.getByText('Step 2'));
+    expect(onClick).not.toHaveBeenCalled();
   });
 
   describe('steps as a function of the values', () => {

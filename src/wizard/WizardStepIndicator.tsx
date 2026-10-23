@@ -24,22 +24,29 @@ import type { WizardStep, WizardStepIndicatorProps } from './types';
  * ```
  */
 export const WizardStepIndicator: FC<WizardStepIndicatorProps> = (props) => {
-  // Mark steps as completed based on current position
-  const steps = useMemo((): WizardStep[] => {
-    const currentIndex = props.steps.findIndex(
-      (step) => step.label === props.value.label,
+  const currentIndex = useMemo(() => {
+    return props.steps.findIndex(
+      (step) =>
+        step === props.value ||
+        (Boolean(step.key) &&
+          Boolean(props.value?.key) &&
+          step.key === props.value.key),
     );
-    return props.steps.map((step, i) => ({
-      ...step,
-      completed: currentIndex > i ? true : false,
-    }));
   }, [props.steps, props.value]);
+
+  const handleStepClick =
+    props.onClick && !props.disabled
+      ? (step: WizardStep, index: number) => {
+          props.onClick!(props.steps[index] ?? step, index);
+        }
+      : undefined;
 
   return (
     <div role="group" aria-label={translate('Form progress')}>
       <ProgressSteps
-        steps={steps}
-        onClick={props.onClick}
+        steps={props.steps}
+        activeIndex={currentIndex}
+        onClick={handleStepClick}
         bgClass="bg-primary"
         className="mt-4 mb-4"
       />

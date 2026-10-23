@@ -8,13 +8,16 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
-import { WizardStepIndicator, useWizard } from '@/wizard';
+import {
+  WizardButtons,
+  WizardStepIndicator,
+  WizardTabs,
+  useWizard,
+} from '@/wizard';
 import { useCustomer } from '@/workspace/hooks';
 
 import { OFFERING_IMPORT_STEPS, OFFERING_IMPORT_TABS } from './tabs';
 import { OfferingImportFormData } from './types';
-import { WizardButtons } from './WizardButtons';
-import { WizardTabs } from './WizardTabs';
 
 export const RemoteOfferingImportDialog = ({ refetch }: { refetch?() }) => {
   const { step, setStep, goBack, goNext, isFirstStep, isLastStep } = useWizard(

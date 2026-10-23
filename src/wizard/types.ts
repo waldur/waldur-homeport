@@ -161,6 +161,8 @@ export interface WizardStepIndicatorProps {
 export interface UseWizardReturn {
   /** Current step object */
   step: WizardStep;
+  /** Current step index (0-based) */
+  currentIndex: number;
   /** Set the current step */
   setStep: (step: WizardStep) => void;
   /** Navigate to the previous step */

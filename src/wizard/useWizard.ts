@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
-import type { WizardStep, UseWizardReturn } from './types';
+import type { UseWizardReturn, WizardStep } from './types';
 
 /**
  * Hook for managing wizard step state.
@@ -17,7 +17,7 @@ import type { WizardStep, UseWizardReturn } from './types';
  *   { key: 'step2', label: 'Step 2', completed: false },
  * ];
  *
- * const { step, goNext, goBack, isFirstStep, isLastStep } = useWizard(steps);
+ * const { step, currentIndex, goNext, goBack, isFirstStep, isLastStep } = useWizard(steps);
  *
  * return (
  *   <div>
@@ -29,24 +29,53 @@ import type { WizardStep, UseWizardReturn } from './types';
  * ```
  */
 export const useWizard = (steps: WizardStep[]): UseWizardReturn => {
-  const [step, setStep] = useState<WizardStep>(() => steps[0]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const goBack = () => {
-    const currentIndex = steps.indexOf(step);
-    if (currentIndex > 0) {
-      setStep(steps[currentIndex - 1]);
-    }
+  const safeIndex =
+    steps.length > 0
+      ? Math.min(Math.max(0, currentIndex), steps.length - 1)
+      : 0;
+  const step = steps[safeIndex];
+
+  const findStepIndex = useCallback(
+    (target: WizardStep): number => {
+      const directIndex = steps.indexOf(target);
+      if (directIndex !== -1) return directIndex;
+      return steps.findIndex(
+        (s) => Boolean(s.key) && Boolean(target?.key) && s.key === target.key,
+      );
+    },
+    [steps],
+  );
+
+  const setStep = useCallback(
+    (newStep: WizardStep) => {
+      const index = findStepIndex(newStep);
+      if (index !== -1) {
+        setCurrentIndex(index);
+      }
+    },
+    [findStepIndex],
+  );
+
+  const goBack = useCallback(() => {
+    setCurrentIndex((prev) => Math.max(0, prev - 1));
+  }, []);
+
+  const goNext = useCallback(() => {
+    setCurrentIndex((prev) => Math.min(steps.length - 1, prev + 1));
+  }, [steps.length]);
+
+  const isFirstStep = safeIndex === 0;
+  const isLastStep = safeIndex === steps.length - 1;
+
+  return {
+    step,
+    currentIndex: safeIndex,
+    setStep,
+    goBack,
+    goNext,
+    isFirstStep,
+    isLastStep,
   };
-
-  const goNext = () => {
-    const currentIndex = steps.indexOf(step);
-    if (currentIndex < steps.length - 1) {
-      setStep(steps[currentIndex + 1]);
-    }
-  };
-
-  const isFirstStep = step === steps[0];
-  const isLastStep = step === steps[steps.length - 1];
-
-  return { step, setStep, goBack, goNext, isFirstStep, isLastStep };
 };

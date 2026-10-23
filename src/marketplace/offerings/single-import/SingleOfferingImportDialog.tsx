@@ -10,11 +10,13 @@ import {
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { WizardStepIndicator, useWizard } from '@/wizard';
+import {
+  WizardButtons,
+  WizardStepIndicator,
+  WizardTabs,
+  useWizard,
+} from '@/wizard';
 import { useCustomer } from '@/workspace/hooks';
-
-import { WizardButtons } from '../import/WizardButtons';
-import { WizardTabs } from '../import/WizardTabs';
 
 import { ImportErrorBoundary } from './ImportErrorBoundary';
 import {

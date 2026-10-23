@@ -6,6 +6,8 @@ export { WizardFormContainer } from './WizardFormContainer';
 // Layout components
 export { WizardModal } from './WizardModal';
 export { WizardStepIndicator } from './WizardStepIndicator';
+export { WizardTabs } from './WizardTabs';
+export { WizardButtons } from './WizardButtons';
 export { FormSteps } from './FormSteps';
 export { VStepperFormStepCard } from './VStepperFormStep';
 export { ProgressSteps } from './ProgressSteps';

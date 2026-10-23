@@ -3,10 +3,14 @@ import { FunctionComponent, useMemo } from 'react';
 import { Form } from 'react-final-form';
 
 import { translate } from '@/i18n';
-import { WizardButtons } from '@/marketplace/offerings/import/WizardButtons';
-import { WizardTabs } from '@/marketplace/offerings/import/WizardTabs';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { ProgressStep, WizardStepIndicator, useWizard } from '@/wizard';
+import {
+  ProgressStep,
+  WizardButtons,
+  WizardStepIndicator,
+  WizardTabs,
+  useWizard,
+} from '@/wizard';
 import { useUser } from '@/workspace/hooks';
 
 import { useRequestTypes } from '../api';
