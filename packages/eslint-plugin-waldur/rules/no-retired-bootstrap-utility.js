@@ -48,7 +48,7 @@ export const RETIRED_UTILITY_PATTERNS = [
   ],
   // The header's icon button (custom/_nav.scss), now waldur-ui's IconButton.
   [/^btn-nav-item$/, "waldur-ui's IconButton"],
-  // core/components/_svg-icon.scss generates icon sizes at the base size only.
+  // src/styles/bootstrap/components/_svg-icon.scss generates icon sizes at the base size only.
   [
     new RegExp(`^svg-icon-${BP}-[\\w.-]+$`),
     'svg-icon-<size> with a Tailwind breakpoint variant on the svg (lg:size-6)',

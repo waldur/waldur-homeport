@@ -1,16 +1,16 @@
-// Global variables for Bootstrap customization.
-// Consolidated variables file: combines colors, custom design token overrides,
-// and component/layout settings. Imported before bootstrap/scss/variables.
+// Every Sass variable of the theme: colours, non-colour overrides, then the
+// component settings. Imported by _config.scss before bootstrap/scss/variables,
+// so a value set here wins over Bootstrap's own `!default`. Each variable is
+// declared once; the first `!default` assignment of a name is the one that
+// holds, so never add a second one further down.
 
-// Every colour variable of the theme, in one place. Imported before
-// _variables.custom.scss and core/components/_variables.scss (see
-// _init-config.scss), so a value set here wins over any later `!default`.
+// Colours
 
 // Colours are the design tokens (var(--…)), so one stylesheet serves both
 // themes; the colour ramps themselves are CSS (--color-<ramp>-<step>) and Sass
 // reads none of them. Bootstrap's other colour names ($gray-*, $primary, …) are
-// left at its own defaults: no compiled rule reads them. Shadows stay with their
-// components (core/components/_variables.scss).
+// left at its own defaults: no compiled rule reads them. The shadows are with
+// the component settings below.
 
 // Base colours (Bootstrap's own values). These have to be Sass colours: the
 // rgba() calls in the shadows read them.
@@ -42,11 +42,9 @@ $card-border-dashed-color: var(--border-divider-medium) !default;
 $card-cap-bg: $white !default;
 
 // Code
-$code-bg: #f1f3f8 !default; // dark mode in core/components/_code.scss
-$code-color: #b93993 !default; // dark mode in core/components/_code.scss
-$kbd-bg: var(
-  --bg-primary-solid
-) !default; // dark mode in core/components/_code.scss
+$code-bg: #f1f3f8 !default; // dark mode in components/_code.scss
+$code-color: #b93993 !default; // dark mode in components/_code.scss
+$kbd-bg: var(--bg-primary-solid) !default; // dark mode in components/_code.scss
 $blockquote-footer-color: var(--text-tertiary) !default;
 $figure-caption-color: var(--text-tertiary) !default;
 $thumbnail-border-color: var(--border-primary) !default;
@@ -72,9 +70,7 @@ $table-striped-bg: color-mix(
 $table-active-bg: var(--bg-tertiary) !default;
 $table-hover-bg: var(--bg-tertiary) !default;
 
-// Non-colour overrides of Bootstrap's and Metronic's variables. Colours are in
-// _colors.scss. This file is imported first, so a value set here wins over the
-// `!default` in core/components/_variables.scss, which is imported after it.
+// Non-colour overrides of Bootstrap's and Metronic's variables
 
 // Bootstrap builds its text and background utility maps from $body-color and
 // $body-bg with to-rgb(), which needs a Sass colour. Bootstrap emits no colour
@@ -83,7 +79,7 @@ $utilities-text: () !default;
 $utilities-bg: () !default;
 // Bootstrap generates a .table-{color} for each colour by mixing it with
 // $body-bg in Sass. The two the app uses are written with the tokens in
-// core/components/_tables.scss.
+// components/_tables.scss.
 $table-variants: () !default;
 
 // Components
@@ -117,12 +113,7 @@ $input-btn-padding-y-lg: 0.692rem !default;
 // Bootstrap's own default is a raw 300.
 $lead-font-weight: var(--font-weight-light) !default;
 
-// Global variables for Bootstrap customization.
-
-// Bootstrap's two base colours (its own values): this file is imported before
-// bootstrap/scss/variables, so they have to exist here for the rgba() calls
-// below. Every other colour is a design token (var(--…)) or a Bootstrap default
-// that no rule uses.
+// Component settings
 
 // Bootstrap's contextual colours (.btn-primary, .alert-danger, .bg-primary, …)
 // are not used: colour comes from the design tokens. An empty map keeps those

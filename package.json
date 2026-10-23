@@ -24,7 +24,6 @@
     "tokens:audit": "node packages/design-tokens/scripts/audit-tokens.mjs",
     "tokens:duplicates": "node packages/design-tokens/scripts/audit-tokens.mjs --duplicates",
     "styles:color-diff": "node scripts/color-diff.mjs",
-    "tokens:metronic-diff": "node scripts/color-diff.mjs",
     "styles:usage": "node scripts/bootstrap-css-usage.mjs",
     "style:check": "stylelint \"src/**/*.css\" \"src/**/*.scss\" \"packages/**/*.css\"",
     "lint:check": "eslint src locales/tools packages",

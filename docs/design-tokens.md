@@ -302,7 +302,7 @@ green, whatever the tenant configured. So:
   `color-mix(in srgb, var(--focus-ring-color) 25%, transparent)`.
 - Never pass a CSS variable into a Sass colour function (`tint-color`, `shade-color`, `mix`,
   `rgba($x, …)`): they need a compile-time colour. That is why the static `$component-active-bg` (the default green, which Bootstrap tints) stays a literal.
-- `_colors.scss` already points the Bootstrap outputs that would otherwise paint the
+- `src/styles/bootstrap/_variables.scss` already points the Bootstrap outputs that would otherwise paint the
   static green at the runtime brand: the active list-group row and the range thumb. `.svg-icon-primary`
   is `var(--brand-color)`, so it follows the brand too.
 
@@ -574,10 +574,10 @@ plus its `gray-dark` mirror at the call site.
 
 Two checks keep new reads out: the `waldur-custom/no-bootstrap-css-vars` ESLint rule (TS/TSX,
 including `getCssVar('--bs-…')`) and stylelint's `declaration-property-value-disallowed-list` and
-`property-disallowed-list` (CSS/SCSS). The Metronic SCSS is exempt, as it defines the variables:
-stylelint's `ignoreFiles` skips `src/styles/bootstrap/**/*.scss`. That also covers
-`src/styles/bootstrap/custom/**`, so a new `--bs-*` read there is not caught; review it. The ESLint
-rule has no exemption and checks all TS/TSX too.
+`property-disallowed-list` (CSS/SCSS). stylelint has no ignore list, so both apply to
+`src/styles/bootstrap/**` too: the few places that must set one of Bootstrap's own hooks (the
+`.table` custom properties) carry a `stylelint-disable` comment saying why. The ESLint rule has no
+exemption either and checks all TS/TSX.
 
 Outside that SCSS nothing reads them any more, so neither check has a per-file allow list.
 

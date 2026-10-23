@@ -57,10 +57,7 @@ function compileMetronic() {
   cachedMetronicCss = sass.compile(
     path.join(root, 'src/styles/bootstrap/index.scss'),
     {
-      loadPaths: [
-        path.join(root, 'src/styles/bootstrap'),
-        path.join(root, 'node_modules'),
-      ],
+      loadPaths: [path.join(root, 'node_modules')],
       importers: [
         {
           findFileUrl: (url) =>

@@ -81,7 +81,7 @@ body {
 // while its menu was closed).
 // The transition lives here, on the always-present base class, not inside
 // the conditional block below — matching core's own .rotate-{value}
-// family (core/components/_rotate.scss), which declares `transition` on
+// family (the former Metronic _rotate.scss), which declared `transition` on
 // its own unconditioned `.rotate-#{$value}` rule for exactly this reason.
 // A transition declared only inside `.active > &` only takes effect
 // while `.active` is present: it animates the icon rotating IN as that

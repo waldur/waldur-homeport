@@ -35,6 +35,9 @@ export const DEFAULT_BASELINE = path.join(
   'scripts/bootstrap-css-usage.baseline.json',
 );
 
+// Each `name` is the partial's path before the move to src/styles/bootstrap
+// (#471), kept as is because it keys the per-partial entries in
+// bootstrap-css-usage.baseline.json; `scss` holds the current path.
 export const PARTIALS = [
   // Bootstrap components (from _bootstrap.scss)
   {
