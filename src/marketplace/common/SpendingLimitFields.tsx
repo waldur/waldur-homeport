@@ -133,7 +133,10 @@ const ComponentSubmitError: FC<{ name: string; componentType: string }> = ({
 export const SpendingLimitFields: FC<{
   components: CappedComponent[];
   name?: string;
-}> = ({ components, name = 'spending_limits' }) => (
+  // Head each component's fields with its name even when there is only one;
+  // with several they are always named.
+  showNames?: boolean;
+}> = ({ components, name = 'spending_limits', showNames }) => (
   <>
     {components.map((component) => (
       <div
@@ -141,7 +144,7 @@ export const SpendingLimitFields: FC<{
         className="mb-5 last:mb-0"
         data-testid={`spending-limits-${component.type}`}
       >
-        {components.length > 1 && (
+        {(showNames || components.length > 1) && (
           <h6 className="mb-2 text-sm font-medium text-primary">
             {component.name}
           </h6>

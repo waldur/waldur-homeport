@@ -75,6 +75,36 @@ describe('SetSpendingLimitsDialog', () => {
     expect(getInput('Monthly')).toHaveValue(300);
   });
 
+  it('names the component even when it is the only one capped', async () => {
+    renderDialog();
+    await waitFor(() => expect(getInput('Daily')).toHaveValue(20));
+    expect(screen.getByTestId('spending-limits-token_cost')).toHaveTextContent(
+      /^Token cost/,
+    );
+  });
+
+  it('does not promise a pause the offering does not apply', async () => {
+    renderDialog();
+    expect(
+      await screen.findByText(
+        /Reaching a limit is reported but does not pause access\./,
+      ),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/access pauses/)).not.toBeInTheDocument();
+  });
+
+  it('says access pauses when the offering pauses resources', async () => {
+    vi.mocked(marketplaceResourcesOfferingRetrieve).mockResolvedValue({
+      data: { ...offering, plugin_options: { action_on_usage_limit: 'pause' } },
+    } as any);
+    renderDialog();
+    expect(
+      await screen.findByText(
+        /When a limit is reached, access pauses until that limit resets\./,
+      ),
+    ).toBeInTheDocument();
+  });
+
   it('names a limit on a period no longer offered, which saving drops', async () => {
     renderDialog();
     expect(
