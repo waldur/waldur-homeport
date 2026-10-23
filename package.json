@@ -64,7 +64,6 @@
     "@emoji-mart/data": "^1.2.1",
     "@emoji-mart/react": "^1.1.1",
     "@fontsource/open-sans": "^4.5.14",
-    "@iconify-json/ph": "^1.2.2",
     "@jonkoops/matomo-tracker": "^0.7.0",
     "@lezer/highlight": "^1.0.0",
     "@livekit/components-react": "^2.9.19",

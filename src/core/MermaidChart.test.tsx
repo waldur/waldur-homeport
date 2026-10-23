@@ -2,7 +2,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 const mermaid = vi.hoisted(() => ({
-  registerIconPacks: vi.fn(),
   initialize: vi.fn(),
   parse: vi.fn(() => Promise.resolve(true)),
   render: vi.fn(() => Promise.resolve({ svg: '<svg></svg>' })),
@@ -49,14 +48,6 @@ describe('MermaidChart', () => {
     rerender(<MermaidChart code="graph LR; A-->B" />);
     await waitFor(() => expect(mermaid.render).toHaveBeenCalledTimes(2));
     expect(lastDarkMode()).toBe(true);
-  });
-
-  it('registers the icon pack once, however often it renders', async () => {
-    const { rerender } = render(<MermaidChart code="graph LR; A-->B" />);
-    setTheme('dark');
-    rerender(<MermaidChart code="graph LR; A-->B" />);
-    await waitFor(() => expect(mermaid.render).toHaveBeenCalledTimes(2));
-    expect(mermaid.registerIconPacks.mock.calls.length).toBeLessThanOrEqual(1);
   });
 
   it('ignores a render that finishes after the theme changed', async () => {
