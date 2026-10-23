@@ -1,4 +1,4 @@
-import { FunnelSimpleIcon, GearSixIcon, XIcon } from '@phosphor-icons/react';
+import { GearSixIcon, XIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { ComponentType, FC, createElement, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -154,13 +154,6 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
             refetch,
             size: 'md',
           })}
-        <BaseButton
-          iconNode={<FunnelSimpleIcon weight="bold" />}
-          tooltip={translate('Filter')}
-          onClick={() => {}}
-          size="md"
-          variant="tertiary"
-        />
         {hasSettings ? (
           <Popover>
             {/* size="md" matches the disabled fallback branch below so the two
