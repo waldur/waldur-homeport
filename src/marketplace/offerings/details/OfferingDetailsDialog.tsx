@@ -55,7 +55,7 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
           name={props.resolve.offering.name}
         />
       }
-      bodyClassName="h-500px"
+      bodyClassName="h-[500px]"
       footer={
         <OfferingDetailsLink
           offering_uuid={props.resolve.offering.uuid}

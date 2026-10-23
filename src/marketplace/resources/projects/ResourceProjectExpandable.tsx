@@ -140,7 +140,7 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
                     title: translate('Username'),
                     render: ({ row }) => row.user_username,
                     copyField: (row) => row.user_username,
-                    className: 'w-25',
+                    className: 'w-1/4',
                   },
                   {
                     title: translate('Email'),
@@ -150,12 +150,12 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
                   {
                     title: translate('Role in project'),
                     render: RoleField,
-                    className: 'w-25',
+                    className: 'w-1/4',
                   },
                   {
                     title: translate('Role expiration'),
                     render: ({ row }) => renderRoleExpirationDate(row),
-                    className: 'w-45px',
+                    className: 'w-[45px]',
                   },
                 ]}
                 verboseName={translate('team members')}

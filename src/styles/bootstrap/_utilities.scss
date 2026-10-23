@@ -21,42 +21,6 @@ $utilities: map.merge(
       class: opacity,
       values: $opacity-values,
     ),
-    'width': (
-      responsive: true,
-      property: width,
-      class: w,
-      values: $custom-sizes,
-    ),
-    'max-width': (
-      responsive: true,
-      property: max-width,
-      class: mw,
-      values: $custom-sizes,
-    ),
-    'min-width': (
-      responsive: true,
-      property: min-width,
-      class: min-w,
-      values: $custom-sizes,
-    ),
-    'height': (
-      responsive: true,
-      property: height,
-      class: h,
-      values: $custom-sizes,
-    ),
-    'max-height': (
-      responsive: true,
-      property: max-height,
-      class: mh,
-      values: $custom-sizes,
-    ),
-    'min-height': (
-      responsive: true,
-      property: min-height,
-      class: min-h,
-      values: $custom-sizes,
-    ),
     'z-index': (
       property: z-index,
       class: z-index,
@@ -115,6 +79,18 @@ $utilities: map.remove($utilities, 'line-height');
 // Font size comes from Tailwind's scale (primitives/typography.css) and require-font-size-scale, so no .fs-* either.
 $utilities: map.remove($utilities, 'font-size');
 
+// Sizing utilities come from Tailwind and design tokens, so no .w-*, .mw-*,
+// .min-w-*, .h-*, .mh-*, .min-h-* either (#473).
+$utilities: map.remove(
+  $utilities,
+  'width',
+  'max-width',
+  'min-width',
+  'height',
+  'max-height',
+  'min-height'
+);
+
 // Utilities nothing in the app uses, so Bootstrap stops generating them
 // (no-retired-bootstrap-utility reports the names, with the Tailwind class to
 // use instead; Tailwind defines its own float-*).
@@ -136,10 +112,6 @@ $utilities: map.remove(
 // variant (`lg:p-3`) instead.
 @each $key
   in (
-    'height',
-    'max-height',
-    'min-width',
-    'min-height',
     'flex',
     'flex-shrink',
     'margin-x',

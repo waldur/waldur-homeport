@@ -88,19 +88,19 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
     <>
       <BaseButton
         variant="tertiary"
-        className="min-w-125px me-auto"
+        className="min-w-[125px] me-auto"
         onClick={() => props.onPrev(values)}
         label={translate('Back')}
         iconNode={<CaretLeftIcon weight="bold" />}
         size="lg"
       />
-      <CloseDialogButton className="min-w-125px" />
+      <CloseDialogButton className="min-w-[125px]" />
       <SubmitButton
         submitting={loading}
         disabled={selectedCount === 0 || loading}
         label={translate('Continue')}
         onClick={handleContinue}
-        className="min-w-125px"
+        className="min-w-[125px]"
         iconNode={<CaretRightIcon weight="bold" />}
       />
     </>

@@ -65,16 +65,16 @@ export const OfferingQoSFormDialog: FC<OfferingQoSFormDialogProps> = ({
                 ? translate('Edit QoS profile')
                 : translate('Add QoS profile')
             }
-            bodyClassName="h-500px"
+            bodyClassName="h-[500px]"
             footer={
               <>
-                <CloseDialogButton className="w-125px" />
+                <CloseDialogButton className="w-[125px]" />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
                   label={isEdit ? translate('Edit') : translate('Add')}
                   variant="primary"
-                  className="w-125px"
+                  className="w-[125px]"
                 />
               </>
             }

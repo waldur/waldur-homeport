@@ -171,7 +171,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                 <>
                   <CloseDialogButton
                     variant="tertiary"
-                    className="min-w-125px"
+                    className="min-w-[125px]"
                   />
                   <SubmitButton
                     disabled={invalid}
@@ -181,7 +181,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                     // dialog in the app uses.
                     label={translate('Create')}
                     variant="primary"
-                    className="min-w-125px"
+                    className="min-w-[125px]"
                   />
                 </>
               }

@@ -80,7 +80,7 @@ export const OfferingCostsChart: FunctionComponent<OfferingCostChartProps> = ({
             <Card.Header>
               <Card.Title>{translate('Offering cost chart')}</Card.Title>
               <div className="card-toolbar">
-                <div className="min-w-200px">
+                <div className="min-w-[200px]">
                   <AccountingRunningField />
                 </div>
               </div>

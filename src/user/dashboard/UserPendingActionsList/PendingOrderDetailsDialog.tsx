@@ -61,14 +61,14 @@ const OrderSummaryTab: FC<{ order: OrderDetails }> = ({ order }) => {
         <Field
           label={translate('Organization')}
           value={order.customer_name}
-          labelClass="w-100px"
+          labelClass="w-[100px]"
         />
       </Col>
       <Col xs={12} sm={6}>
         <Field
           label={translate('Project')}
           value={order.project_name}
-          labelClass="w-100px"
+          labelClass="w-[100px]"
         />
       </Col>
       <Col xs={12} sm={6}>
@@ -84,14 +84,14 @@ const OrderSummaryTab: FC<{ order: OrderDetails }> = ({ order }) => {
               renderFieldOrDash(order.resource_name)
             )
           }
-          labelClass="w-100px"
+          labelClass="w-[100px]"
         />
       </Col>
       <Col xs={12} sm={6}>
         <Field
           label={translate('Offering')}
           value={order.offering_name}
-          labelClass="w-100px"
+          labelClass="w-[100px]"
         />
       </Col>
       <Col xs={12} sm={6}>
@@ -107,7 +107,7 @@ const OrderSummaryTab: FC<{ order: OrderDetails }> = ({ order }) => {
               {typeBadge.label}
             </Badge>
           }
-          labelClass="w-100px"
+          labelClass="w-[100px]"
         />
       </Col>
       <Col xs={12} sm={6}>
@@ -118,21 +118,21 @@ const OrderSummaryTab: FC<{ order: OrderDetails }> = ({ order }) => {
               ? `${order.created_by_full_name} (${order.created_by_username})`
               : order.created_by_username
           }
-          labelClass="w-100px"
+          labelClass="w-[100px]"
         />
       </Col>
       <Col xs={12} sm={6}>
         <Field
           label={translate('Created at')}
           value={formatDateTime(order.created)}
-          labelClass="w-100px"
+          labelClass="w-[100px]"
         />
       </Col>
       <Col xs={12} sm={6}>
         <Field
           label={translate('Provider')}
           value={order.provider_name}
-          labelClass="w-100px"
+          labelClass="w-[100px]"
         />
       </Col>
     </Row>
@@ -371,11 +371,11 @@ export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
       )}
       iconNode={<ClipboardTextIcon weight="bold" />}
       iconColor="warning"
-      bodyClassName="min-h-300px"
+      bodyClassName="min-h-[300px]"
       footer={
         <>
           <CloseDialogButton
-            className="min-w-100px"
+            className="min-w-[100px]"
             disabled={isSubmitting}
             disabledReason={translate(
               'Please wait for the current action to complete',
@@ -393,7 +393,7 @@ export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
                   : undefined
             }
             variant="danger"
-            className="min-w-100px"
+            className="min-w-[100px]"
             onClick={() => rejectOrderMutation.mutate()}
             label={translate('Reject')}
           />
@@ -409,7 +409,7 @@ export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
                   : undefined
             }
             variant="success"
-            className="min-w-100px"
+            className="min-w-[100px]"
             onClick={handleApprove}
             label={translate('Approve')}
           />

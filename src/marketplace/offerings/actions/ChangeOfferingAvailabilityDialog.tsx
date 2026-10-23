@@ -122,10 +122,10 @@ export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
                     { offeringName: offering.name },
                   )
             }
-            bodyClassName="h-500px"
+            bodyClassName="h-[500px]"
             footer={
               <>
-                <CloseDialogButton className="w-175px" />
+                <CloseDialogButton className="w-[175px]" />
                 <SubmitButton
                   submitting={submitting}
                   label={
@@ -134,7 +134,9 @@ export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
                       : translate('Confirm')
                   }
                   className={
-                    offering.state === 'Unavailable' ? 'mw-200px' : 'w-175px'
+                    offering.state === 'Unavailable'
+                      ? 'max-w-[200px]'
+                      : 'w-[175px]'
                   }
                 />
               </>

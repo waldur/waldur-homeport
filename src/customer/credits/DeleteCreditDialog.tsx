@@ -75,11 +75,11 @@ export const DeleteCreditDialog: FC<DeleteCreditDialogProps> = ({
       title={translate('Delete organization credit')}
       footer={
         <>
-          <CloseDialogButton className="min-w-125px" />
+          <CloseDialogButton className="min-w-[125px]" />
           <BaseButton
             variant="danger"
             size="lg"
-            className="min-w-125px"
+            className="min-w-[125px]"
             pending={isPending}
             disabled={isLoading}
             disabledReason={

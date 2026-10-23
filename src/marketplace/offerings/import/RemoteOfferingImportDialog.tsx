@@ -84,7 +84,7 @@ export const RemoteOfferingImportDialog = ({ refetch }: { refetch?() }) => {
               subtitle={translate(
                 'Connect offerings from remote organizations with configurable rules and mappings.',
               )}
-              bodyClassName="h-400px"
+              bodyClassName="h-[400px]"
               footer={
                 <WizardButtons
                   isLastStep={isLastStep}

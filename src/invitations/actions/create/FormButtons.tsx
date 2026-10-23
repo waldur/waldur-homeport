@@ -41,10 +41,10 @@ export const FormButtons: FC<FormButtonsProps> = ({
 
   return step === 1 ? (
     <>
-      <CloseDialogButton className="w-150px" />
+      <CloseDialogButton className="w-[150px]" />
       <BaseButton
         pending={isCheckingDuplicates}
-        className="w-150px"
+        className="w-[150px]"
         onClick={handleContinue}
         disabled={!valid || isCheckingDuplicates || actionDisabled}
         disabledReason={actionDisabled ? actionDisabledReason : undefined}
@@ -57,18 +57,18 @@ export const FormButtons: FC<FormButtonsProps> = ({
     <>
       <BaseButton
         variant="tertiary"
-        className="w-150px"
+        className="w-[150px]"
         onClick={() => setStep(1)}
         label={translate('Go back')}
         iconNode={<CaretLeftIcon weight="bold" />}
         size="lg"
       />
-      <CloseDialogButton className="ms-auto w-150px" />
+      <CloseDialogButton className="ms-auto w-[150px]" />
       <SubmitButton
         label={translate('Send invitation')}
         submitting={submitting}
         variant="primary"
-        className="min-w-150px"
+        className="min-w-[150px]"
         disabled={!valid || actionDisabled}
         disabledReason={actionDisabled ? actionDisabledReason : undefined}
       />

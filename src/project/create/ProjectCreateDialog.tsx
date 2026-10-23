@@ -188,7 +188,7 @@ export const ProjectCreateDialog = ({
         setSelectedCustomer,
       }}
       modalProps={{
-        bodyClassName: 'h-500px',
+        bodyClassName: 'h-[500px]',
         iconNode: <PlusCircleIcon weight="bold" />,
         iconColor: 'success',
       }}

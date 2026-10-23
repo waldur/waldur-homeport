@@ -144,7 +144,7 @@ export const OrganizationImportDialog: FC<OrganizationImportDialogProps> = (
       title={translate('Bulk import of organizations')}
       wizardForms={WizardForms}
       submitLabel={translate('Import & create')}
-      modalProps={{ bodyClassName: 'h-500px' }}
+      modalProps={{ bodyClassName: 'h-[500px]' }}
     />
   );
 };

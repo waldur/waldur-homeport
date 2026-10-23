@@ -81,15 +81,15 @@ export const NotificationUpdateDialog = ({
           <ModalDialog
             title={translate('Update notification template')}
             subtitle={resolve.notification.description}
-            bodyClassName="h-500px overflow-auto"
+            bodyClassName="h-[500px] overflow-auto"
             footer={
               <>
-                <CloseDialogButton className="min-w-150px" />
+                <CloseDialogButton className="min-w-[150px]" />
                 <SubmitButton
                   submitting={submitting}
                   disabled={pristine}
                   label={translate('Confirm')}
-                  className="min-w-150px"
+                  className="min-w-[150px]"
                 />
               </>
             }

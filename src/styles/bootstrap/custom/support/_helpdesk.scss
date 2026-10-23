@@ -90,7 +90,7 @@
   }
 
   .table-toolbar-search,
-  .table-toolbar-search .min-w-125px {
+  .table-toolbar-search > * {
     min-width: 0 !important;
   }
 

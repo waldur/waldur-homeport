@@ -175,7 +175,7 @@ export const ReallocateLimitsDialog: FunctionComponent<
               </div>
 
               <div
-                className="min-h-400px"
+                className="min-h-[400px]"
                 style={{
                   maxHeight: '400px',
                   overflowY: 'auto',

@@ -28,6 +28,18 @@ describe('checkRetiredClass', () => {
       replacement: 'sm:justify-end',
     });
     expect(checkRetiredClass('w-100')).toEqual({ replacement: 'w-full' });
+    expect(checkRetiredClass('w-50')).toEqual({ replacement: 'w-1/2' });
+    expect(checkRetiredClass('w-125px')).toEqual({ replacement: 'w-[125px]' });
+    expect(checkRetiredClass('min-w-125px')).toEqual({
+      replacement: 'min-w-[125px]',
+    });
+    expect(checkRetiredClass('mw-175px')).toEqual({
+      replacement: 'max-w-[175px]',
+    });
+    expect(checkRetiredClass('h-500px')).toEqual({ replacement: 'h-[500px]' });
+    expect(checkRetiredClass('mw-sm-25')).toEqual({
+      replacement: 'sm:max-w-1/4',
+    });
     expect(checkRetiredClass('flex-column')).toEqual({
       replacement: 'flex-col',
     });

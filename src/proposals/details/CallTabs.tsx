@@ -46,13 +46,13 @@ export const CallTabs = ({ call }: { call: Call }) => {
               tooltip: translate(
                 'The public view is currently inactive as this call is archived or draft.',
               ),
-              className: 'text-center min-w-60px',
+              className: 'text-center min-w-[60px]',
             }
           : {
               key: 'public-call.details',
               title: translate('Public'),
               link: <Link state="public-call.details" params={params} />,
-              className: 'text-center min-w-60px',
+              className: 'text-center min-w-[60px]',
             },
         ...(canManage
           ? [
@@ -60,7 +60,7 @@ export const CallTabs = ({ call }: { call: Call }) => {
                 key: 'protected-call.manage',
                 title: translate('Manage'),
                 link: <Link state="protected-call.manage" params={params} />,
-                className: 'text-center min-w-60px',
+                className: 'text-center min-w-[60px]',
               },
             ]
           : []),
@@ -68,7 +68,7 @@ export const CallTabs = ({ call }: { call: Call }) => {
           key: 'protected-call.main',
           title: translate('Edit'),
           link: <Link state="protected-call.main" params={params} />,
-          className: 'text-center min-w-60px',
+          className: 'text-center min-w-[60px]',
         },
       ]}
     />

@@ -19,7 +19,7 @@ const StateField = ({ row }) => {
   const title = row.is_active ? translate('Enabled') : translate('Disabled');
   return (
     <span
-      className={`status-circle inline-block rounded w-10px h-10px ${cls}`}
+      className={`status-circle inline-block rounded w-[10px] h-[10px] ${cls}`}
       title={title}
     />
   );

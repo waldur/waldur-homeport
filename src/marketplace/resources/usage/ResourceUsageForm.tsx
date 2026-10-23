@@ -400,7 +400,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                       )}
                     </div>
                     <Menu.Content look="actions">
-                      <div className="mh-200px overflow-auto">
+                      <div className="max-h-[200px] overflow-auto">
                         {wrappedComponents.map((component) => (
                           <Menu.Item
                             key={component.uuid}
@@ -439,7 +439,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                 </div>
               </div>
             ) : (
-              <div className="w-35px" />
+              <div className="w-[35px]" />
             )}
           </div>
           <>

@@ -118,7 +118,7 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
   return (
     // Cards in a row share its height; the menu sits at the bottom so the
     // buttons line up however long the description is.
-    <Card className="bg-tertiary dark:bg-quaternary min-h-150px h-full border-[1px] border-transparent hover:border-secondary cursor-pointer">
+    <Card className="bg-tertiary dark:bg-quaternary min-h-[150px] h-full border-[1px] border-transparent hover:border-secondary cursor-pointer">
       <Card.Body className="pe-5 flex">
         <div className="flex grow">
           <div className="flex flex-row justify-between grow">

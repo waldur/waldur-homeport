@@ -126,7 +126,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
           getOptionValue={(option) => option.type}
           onChange={onChangeScript}
           isDisabled={submitting || executing}
-          className={isSmallScr ? 'w-250px' : 'w-300px'}
+          className={isSmallScr ? 'w-[250px]' : 'w-[300px]'}
         />
 
         <BaseButton

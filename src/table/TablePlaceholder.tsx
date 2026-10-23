@@ -42,13 +42,13 @@ export const TablePlaceholder: FunctionComponent<TablePlaceholderProps> = ({
       title={title}
       message={
         filtersStorage?.length ? (
-          <p className="mw-300px">
+          <p className="max-w-[300px]">
             {translate(
               'Please try again with different keywords or check your filters',
             )}
           </p>
         ) : (
-          <span className="mw-350px">{message}</span>
+          <span className="max-w-[350px]">{message}</span>
         )
       }
       buttonTitle={

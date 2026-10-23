@@ -54,7 +54,7 @@ const ReportsDropdown: FC<ReportsDropdownProps> = ({
   currentKey,
   close,
 }) => (
-  <div className="mh-300px overflow-auto py-2">
+  <div className="max-h-[300px] overflow-auto py-2">
     {reports.map((report) => (
       <ReportDropdownItem
         key={report.key}

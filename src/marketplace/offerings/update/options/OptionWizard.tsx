@@ -35,7 +35,7 @@ const getSteps = (resourceType) => (values) =>
 // basics, and the modal used to shrink under the cursor. Sized for the
 // option step at its tallest -- a visibility rule row plus the dependents
 // error -- so that step never pushes past it.
-const STEP_HEIGHT = 'min-h-550px';
+const STEP_HEIGHT = 'min-h-[550px]';
 
 const OptionStep: FC<WizardStepProps> = (props) => {
   const { resourceType, offering, optionKey } = props.data;

@@ -80,7 +80,7 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
 
   return (
     <div className="issue-comment timeline-item">
-      <div className="timeline-line w-30px" />
+      <div className="timeline-line w-[30px]" />
       <CommentAvatar comment={comment} />
       <div className="timeline-content">
         <div className="flex justify-between gap-5 gap-md-20">

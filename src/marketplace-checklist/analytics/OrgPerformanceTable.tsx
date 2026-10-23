@@ -60,7 +60,7 @@ export const OrgPerformanceTable = () => {
       ]}
       hideRefresh
       minHeight="auto"
-      headerClassName="min-h-60px"
+      headerClassName="min-h-[60px]"
     />
   );
 };

@@ -49,7 +49,7 @@ export const ProjectExpandableRow: FC<OwnProps> = (props) => {
       <EmbeddedTabs
         framed
         defaultValue="resources"
-        className="min-h-375px"
+        className="min-h-[375px]"
         tabs={[
           {
             key: 'resources',

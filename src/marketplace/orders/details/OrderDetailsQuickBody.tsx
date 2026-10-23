@@ -17,7 +17,7 @@ export const OrderDetailsQuickBody = ({
   const typeBadge = useMemo(() => getOrderType(order), [order]);
   const extraFieldProps = autoWidth
     ? {
-        labelClass: 'w-100px',
+        labelClass: 'w-[100px]',
         labelCol: 'auto',
         valueCol: 'auto',
       }

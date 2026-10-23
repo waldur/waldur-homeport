@@ -282,7 +282,7 @@ export const EmailsListGroup = ({
                     className={
                       isFeatureVisible(InvitationsFeatures.conceal_civil_number)
                         ? undefined
-                        : 'w-250px'
+                        : 'w-[250px]'
                     }
                   >
                     {translate('Email')}

@@ -18,7 +18,7 @@ export const PlanExpandableRow: FC<OwnProps> = (props) => (
     <EmbeddedTabs
       framed
       defaultValue="components"
-      className="min-h-375px"
+      className="min-h-[375px]"
       tabs={[
         {
           key: 'components',

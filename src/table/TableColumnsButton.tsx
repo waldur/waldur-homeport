@@ -196,7 +196,7 @@ const ColumnsPopover = ({
   );
 
   return (
-    <div className="mw-400px">
+    <div className="max-w-[400px]">
       <div className="p-5">
         <FilterBox
           type="search"
@@ -221,7 +221,7 @@ const ColumnsPopover = ({
           ? translate('Columns found: {count}', { count: matches.length })
           : ''}
       </div>
-      <div className="mh-300px overflow-auto pb-2">
+      <div className="max-h-[300px] overflow-auto pb-2">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}

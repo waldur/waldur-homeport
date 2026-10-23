@@ -141,13 +141,13 @@ export const CostPolicyFormDialog: FC<CostPolicyFormDialogProps> = (props) => {
             }
             footer={
               <>
-                <CloseDialogButton className="min-w-125px" />
+                <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   disabled={invalid || !dirty}
                   submitting={submitting}
                   label={isEdit ? translate('Edit') : translate('Create')}
                   variant="primary"
-                  className="min-w-125px"
+                  className="min-w-[125px]"
                 />
               </>
             }

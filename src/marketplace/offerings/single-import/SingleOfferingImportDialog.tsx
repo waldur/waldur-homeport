@@ -280,7 +280,7 @@ export const SingleOfferingImportDialog: FunctionComponent<
               subtitle={translate(
                 'Import a single offering from an exported JSON or YAML file with configurable options.',
               )}
-              bodyClassName="h-400px"
+              bodyClassName="h-[400px]"
               footer={
                 <WizardButtons
                   isLastStep={isLastStep}
