@@ -58087,11 +58087,7 @@
       "feature_area": "keys"
     }
   },
-  "The key is still active at the provider until the failed command succeeds.": {
-    "context": {
-      "feature_area": "api-keys"
-    }
-  },
+  "The key is still active at the provider until the failed command succeeds.": {},
   "The key was never created, so it has nothing to resume.": {
     "context": {
       "feature_area": "api-keys"
