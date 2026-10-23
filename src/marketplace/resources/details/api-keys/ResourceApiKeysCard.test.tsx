@@ -624,8 +624,7 @@ describe('ResourceApiKeysCard', () => {
         for (const name of ['Pause', 'Rotate', 'Delete']) {
           expect(isEnabled(name)).toBe(false);
         }
-        // A key that holds a secret changes hands by rotation, which waits
-        // for the command in flight like any other.
+        // Limits and models wait for the command in flight.
         expect(isEnabled('Edit key settings')).toBe(false);
       },
     );
@@ -638,8 +637,9 @@ describe('ResourceApiKeysCard', () => {
       });
       await openRowActions(0);
       expect(isEnabled('Delete')).toBe(true);
-      // Only the assignee: limits and models wait for the key to settle.
-      expect(isEnabled('Edit key settings')).toBe(true);
+      // Its assignee was chosen with the request; limits and models wait for
+      // the key to settle.
+      expect(isEnabled('Edit key settings')).toBe(false);
     });
 
     it('retries the failed command in place of rotating', async () => {
@@ -648,17 +648,15 @@ describe('ResourceApiKeysCard', () => {
       await openRowActions(0);
       expect(isEnabled('Retry')).toBe(true);
       expect(offered('Rotate')).toBeNull();
-      // Limits and models are locked, and so is the assignee: a new one
-      // would rotate the key, which waits for the retry.
+      // Limits and models wait for the retry.
       expect(isEnabled('Edit key settings')).toBe(false);
     });
 
-    // The rotation is retried with the new assignee.
-    it('lets a key whose rotation failed change hands', async () => {
+    it('locks the settings of a key whose rotation failed', async () => {
       renderManaged({ state: 'Erred', pending_action: 'rotate' });
       await screen.findByText('KEY1');
       await openRowActions(0);
-      expect(isEnabled('Edit key settings')).toBe(true);
+      expect(isEnabled('Edit key settings')).toBe(false);
     });
 
     it('locks a deleting key against edits', async () => {

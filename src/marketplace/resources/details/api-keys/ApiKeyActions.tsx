@@ -29,7 +29,6 @@ import { useUser } from '@/workspace/hooks';
 import { RevealApiKeyDialog } from './RevealApiKeyDialog';
 import {
   canRevealKey,
-  getAssigneeLock,
   getAtLimitReason,
   getErredTooltip,
   getFailedCommand,
@@ -222,19 +221,16 @@ export const ApiKeyActionsDropdown: FC<{
   // re-sends it unchanged.
   const settingsEditable =
     isOk || isPaused || (isErred && failedCommand === 'update');
-  // A key that holds a secret changes hands by rotation, so its assignee
-  // changes only where it can take one; one that holds none takes a new
-  // assignee in any state short of deletion.
-  const assigneeLock = getAssigneeLock(row);
   const canEdit = row.state !== 'Deleting' && row.state !== 'Deleted';
   const editBlocked =
     rotating || retrying || pausing || removing
       ? translate('An operation is already in progress.')
       : !canEdit
         ? translate('A deleted key cannot be edited.')
-        : !settingsEditable && assigneeLock
-          ? // Nothing in the dialog could change.
-            assigneeLock
+        : !settingsEditable
+          ? translate(
+              'Limits and models can be changed once the key is active.',
+            )
           : undefined;
 
   return (
@@ -337,7 +333,6 @@ export const ApiKeyActionsDropdown: FC<{
                 components,
                 models,
                 refetch,
-                settingsEditable,
               },
               size: 'md',
             })

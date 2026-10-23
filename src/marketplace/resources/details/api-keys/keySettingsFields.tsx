@@ -89,8 +89,9 @@ const KeyLimitsField: FC<{
 export type AssigneeOption = Pick<User, 'uuid' | 'full_name'> &
   Partial<Pick<User, 'email'>>;
 
-// The assignee picker shared by the request and edit dialogs. It lists the
-// resource's project members, the only users the backend accepts.
+// The request dialog's assignee picker: a key's assignee is chosen only when
+// it is requested. It lists the resource's project members, the only users
+// the backend accepts.
 export const useAssigneeField = (resource: Resource) =>
   useMemo(
     () => ({
@@ -102,7 +103,7 @@ export const useAssigneeField = (resource: Resource) =>
         field: ['full_name', 'email', 'uuid'],
         o: ['full_name'],
       }),
-      // A key's current assignee comes without an email.
+      // Not every account has an email.
       getOptionLabel: ({ full_name, email }: AssigneeOption) =>
         email ? `${full_name} (${email})` : full_name,
       getOptionValue: ({ uuid }: AssigneeOption) => uuid,
@@ -119,8 +120,6 @@ interface KeySettingsFieldsOptions {
   // The key's own limits: one set before the provider or the resource moved
   // stays valid, so the form still saves without the user touching it.
   currentLimits?: ResourceApiKeyStatus['spending_limits'];
-  // Shown but locked when only the assignee may change.
-  disabledReason?: string;
 }
 
 /** The components the key dialogs show limit fields for, with the key's maximum per period. */
@@ -138,12 +137,8 @@ export const getKeySettingsFields = (
   resource: Resource,
   components: KeyComponent[],
   models: string[] | null,
-  { currentLimits, disabledReason }: KeySettingsFieldsOptions = {},
+  { currentLimits }: KeySettingsFieldsOptions = {},
 ) => {
-  const locked = {
-    disabled: Boolean(disabledReason),
-    disabled_tooltip: disabledReason,
-  };
   const limitComponents = getKeyLimitFieldComponents(
     resource,
     components,
@@ -163,7 +158,6 @@ export const getKeySettingsFields = (
               ),
             },
             space: 5,
-            ...locked,
           },
         ]
       : []),
@@ -177,7 +171,6 @@ export const getKeySettingsFields = (
               options: models,
             },
             space: 5,
-            ...locked,
           },
         ]
       : []),

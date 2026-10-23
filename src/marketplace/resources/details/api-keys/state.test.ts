@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  getAssigneeLock,
   getAtLimitReason,
   getErredTooltip,
   getFailedCommand,
@@ -291,47 +290,5 @@ describe('a key on a paused resource', () => {
   it('reads OK on a resource that is not paused', () => {
     expect(getStateLabel(ok, null)).toBe('OK');
     expect(getKeyStateVariant(ok, null).variant).toBe('success');
-  });
-});
-
-describe('getAssigneeLock', () => {
-  const key = (overrides: Record<string, unknown>) =>
-    row({ client_id: 'KEY1', state: 'OK', ...overrides });
-
-  it('leaves the assignee open on an active key', () => {
-    expect(getAssigneeLock(key({}))).toBeUndefined();
-  });
-
-  it('leaves it open on a key that holds no secret yet', () => {
-    expect(
-      getAssigneeLock(
-        row({ client_id: '', state: 'Creating', pending_action: 'create' }),
-      ),
-    ).toBeUndefined();
-  });
-
-  it('locks it on a paused key', () => {
-    expect(getAssigneeLock(key({ state: 'Paused' }))).toBe(
-      'Resume the key to change its assignee.',
-    );
-  });
-
-  it('locks it while a command is in flight', () => {
-    expect(
-      getAssigneeLock(key({ state: 'Updating', pending_action: 'update' })),
-    ).toBe('Wait for the current operation to finish.');
-  });
-
-  it('locks it on a key whose failed command is not a rotation', () => {
-    expect(
-      getAssigneeLock(key({ state: 'Erred', pending_action: 'pause' })),
-    ).toBe('Retry the failed command first.');
-  });
-
-  // The rotation is retried with the new assignee.
-  it('leaves it open on a key whose rotation failed', () => {
-    expect(
-      getAssigneeLock(key({ state: 'Erred', pending_action: 'rotate' })),
-    ).toBeUndefined();
   });
 });

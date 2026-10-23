@@ -181,20 +181,6 @@ describe('getKeyLimitComponents', () => {
 });
 
 describe('getKeySettingsFields', () => {
-  it('locks every setting with a reason', () => {
-    const fields = getKeySettingsFields(
-      { spending_limits: {} } as any,
-      [TOKENS],
-      ['gpt-4o'],
-      { disabledReason: 'Locked' },
-    ) as any[];
-    expect(fields).toHaveLength(2);
-    for (const field of fields) {
-      expect(field.disabled).toBe(true);
-      expect(field.disabled_tooltip).toBe('Locked');
-    }
-  });
-
   it('has no limit field on an offering without components', () => {
     expect(getKeySettingsFields({} as any, [], null)).toEqual([]);
   });

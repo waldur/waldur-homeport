@@ -46,29 +46,6 @@ export const UNGOVERNED_COMMANDS: ResourceApiKeyAction[] = ['rotate', 'resume'];
 export const getFailedCommand = (row: ApiKeyRow): ResourceApiKeyAction =>
   (row.pending_action || 'rotate') as ResourceApiKeyAction;
 
-// Under key management, a key that holds a secret changes hands by rotation,
-// so its assignee changes only when it can take a rotation: from OK, or from
-// Erred after a failed rotation, which is then retried with the new assignee.
-// A key that holds no secret yet just takes the new assignee. Mirrors the
-// 400 on ``user`` the backend answers otherwise.
-export const getAssigneeLock = (row: ApiKeyRow): string | undefined => {
-  if (!row.client_id) {
-    return undefined;
-  }
-  if (row.state === 'Paused') {
-    return translate('Resume the key to change its assignee.');
-  }
-  if (row.state === 'Erred') {
-    return getFailedCommand(row) === 'rotate'
-      ? undefined
-      : translate('Retry the failed command first.');
-  }
-  if (row.pending_action || getStateVariant(row.state).active) {
-    return translate('Wait for the current operation to finish.');
-  }
-  return undefined;
-};
-
 const getCommandLabel = (command: ResourceApiKeyAction) =>
   ({
     create: translate('Creation'),
