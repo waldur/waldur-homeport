@@ -18723,6 +18723,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"waldur-form@workspace:*, waldur-form@workspace:packages/form":
+  version: 0.0.0-use.local
+  resolution: "waldur-form@workspace:packages/form"
+  dependencies:
+    "@phosphor-icons/react": "npm:^2.1.7"
+    "@types/luxon": "npm:^3.7.2"
+    classnames: "npm:^2.2.5"
+    es-toolkit: "npm:^1.52.0"
+  peerDependencies:
+    final-form: ^4.20.10
+    final-form-calculate: 1.3.2
+    luxon: ^3.7.2
+    react: ^18.3.0
+    react-dom: ^18.3.0
+    react-final-form: ^6.5.9
+    waldur-i18n-runtime: "workspace:*"
+    waldur-ui: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "waldur-homeport@workspace:.":
   version: 0.0.0-use.local
   resolution: "waldur-homeport@workspace:."
@@ -18887,6 +18907,7 @@ __metadata:
     waldur-auth-core: "workspace:*"
     waldur-boot-splash: "workspace:*"
     waldur-design-tokens: "workspace:*"
+    waldur-form: "workspace:*"
     waldur-i18n-runtime: "workspace:*"
     waldur-js-client: "npm:8.1.4-rc.2.dev.20261023132234.540"
     waldur-notifications: "workspace:*"

@@ -10,6 +10,8 @@ import { withFormGroup } from './withFormGroup';
 // test/mocks/date.tsx swaps DateField for a plain input app-wide; this test
 // is about the real one.
 vi.unmock('@/form/DateField');
+vi.unmock('waldur-form');
+vi.unmock('./DateField');
 
 const DateGroup = withFormGroup(DateField);
 
