@@ -47491,6 +47491,12 @@
       "feature_area": "policies"
     }
   },
+  "Resets": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "details"
+    }
+  },
   "Resets at": {
     "context": {
       "primary_ui_type": "title",
@@ -53646,6 +53652,7 @@
       "feature_area": "create"
     }
   },
+  "Shortly": {},
   "Shortname": {
     "context": {
       "primary_ui_type": "title",
@@ -59947,6 +59954,12 @@
         }
       },
       "feature_area": "broadcasts"
+    }
+  },
+  "This month": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "details"
     }
   },
   "This month's credit consumption": {
@@ -78295,6 +78308,18 @@
       "variables": {
         "relative": {
           "type": "unknown"
+        }
+      }
+    }
+  },
+  "{relative}, on {date}": {
+    "context": {
+      "variables": {
+        "relative": {
+          "type": "unknown"
+        },
+        "date": {
+          "type": "date"
         }
       }
     }

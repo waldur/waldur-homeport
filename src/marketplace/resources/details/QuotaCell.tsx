@@ -30,14 +30,16 @@ const CellDescription = ({
   description,
 }: QuotaCellProps) => (
   <>
-    <span className="font-semibold text-xs text-primary text-nowrap ellipsis">
-      {title}
-      {description && (
-        <>
-          {' '}
-          <HelpIcon label={description} />
-        </>
-      )}
+    {/* The help icon sits beside the title, not in it: a long title is cut
+        off at the end, and the icon with it. */}
+    <span className="flex min-w-0 items-center gap-1">
+      <span
+        className="min-w-0 font-semibold text-xs text-primary text-nowrap ellipsis"
+        title={typeof title === 'string' ? title : undefined}
+      >
+        {title}
+      </span>
+      {description && <HelpIcon label={description} />}
     </span>
     <span className="font-semibold text-xs text-primary text-nowrap ellipsis">
       {limit

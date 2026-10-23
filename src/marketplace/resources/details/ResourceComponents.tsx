@@ -3,7 +3,10 @@ import { Resource, OfferingComponent } from 'waldur-js-client';
 
 import { ResourceDisplayLimits } from '../types';
 
-import { ResourceComponentItem } from './ResourceComponentItem';
+import {
+  getResourceComponentEntries,
+  ResourceComponentItem,
+} from './ResourceComponentItem';
 import { ResourceShowMoreComponents } from './ResourceShowMoreComponents';
 
 export const ResourceComponents = ({
@@ -14,19 +17,24 @@ export const ResourceComponents = ({
     Resource,
     'name' | 'current_usages' | 'limits' | 'limit_usage'
   > &
+    Partial<Pick<Resource, 'spending_limit_status'>> &
     ResourceDisplayLimits;
   components: OfferingComponent[];
 }) => {
-  if (components.length <= 2) {
+  const entries = getResourceComponentEntries(resource, components);
+  if (entries.length <= 2) {
     return (
       <Row className="gy-4">
-        {components.map((component) => (
-          <Col key={component.type} xs={12} sm={12 / components.length}>
+        {entries.map((entry) => (
+          <Col key={entry.key} xs={12} sm={12 / entries.length}>
             <ResourceComponentItem
               expanded
-              stacked={components.length === 2}
+              stacked={entries.length === 2}
               resource={resource}
-              component={component}
+              component={entry.component}
+              spendingLimit={entry.spendingLimit}
+              thisMonth={entry.thisMonth}
+              noUsageThisMonth={entry.noUsageThisMonth}
             />
           </Col>
         ))}
@@ -37,13 +45,19 @@ export const ResourceComponents = ({
   return (
     <>
       <Row>
-        {components.slice(0, 4).map((component) => (
-          <Col key={component.type} xs={12} sm={6} md={12} xl={6}>
-            <ResourceComponentItem resource={resource} component={component} />
+        {entries.slice(0, 4).map((entry) => (
+          <Col key={entry.key} xs={12} sm={6} md={12} xl={6}>
+            <ResourceComponentItem
+              resource={resource}
+              component={entry.component}
+              spendingLimit={entry.spendingLimit}
+              thisMonth={entry.thisMonth}
+              noUsageThisMonth={entry.noUsageThisMonth}
+            />
           </Col>
         ))}
       </Row>
-      {components?.length > 4 && (
+      {entries.length > 4 && (
         <div className="grow flex items-end mt-5">
           <ResourceShowMoreComponents
             resource={resource}
