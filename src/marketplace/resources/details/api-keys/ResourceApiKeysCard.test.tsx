@@ -56,7 +56,19 @@ const KEYS = [
 const tableId = `resource-api-keys-${RESOURCE.uuid}`;
 const mockStore = configureStore();
 
-const USER = { uuid: 'me', is_staff: false, is_support: false };
+// Reveal needs a role on the resource's project or organization.
+const PROJECT_ROLE = {
+  scope_type: 'project',
+  scope_uuid: RESOURCE.project_uuid,
+  role_name: 'PROJECT.MEMBER',
+};
+
+const USER = {
+  uuid: 'me',
+  is_staff: false,
+  is_support: false,
+  permissions: [PROJECT_ROLE],
+};
 
 // Key management is the offering's opt-in; its component and model list feed
 // the settings dialog.
@@ -416,18 +428,43 @@ describe('ResourceApiKeysCard', () => {
       expect(within(row).queryByText('1250%')).not.toBeInTheDocument();
     });
 
-    it('lets only the assignee, staff or support reveal a personal key', async () => {
+    it('lets only the assignee reveal a personal key', async () => {
       renderManaged({ state: 'OK', user_uuid: 'someone-else' });
       await screen.findByText('KEY1');
       await openRowActions(0);
       expect(isEnabled('Reveal')).toBe(false);
     });
 
-    it('lets staff reveal a key assigned to someone else', async () => {
-      renderManaged(
-        { state: 'OK', user_uuid: 'someone-else' },
-        { ...USER, is_staff: true },
-      );
+    // Staff and support are held to the same rules as members: staff reveal
+    // anything else by impersonation.
+    it('refuses staff and support a key assigned to someone else', async () => {
+      for (const role of [{ is_staff: true }, { is_support: true }]) {
+        const { unmount } = renderManaged(
+          { state: 'OK', user_uuid: 'someone-else' },
+          { ...USER, ...role },
+        );
+        await screen.findByText('KEY1');
+        await openRowActions(0);
+        expect(isEnabled('Reveal')).toBe(false);
+        unmount();
+      }
+    });
+
+    it('refuses staff and support outside the project even a shared key', async () => {
+      for (const role of [{ is_staff: true }, { is_support: true }]) {
+        const { unmount } = renderManaged(
+          { state: 'OK' },
+          { ...USER, ...role, permissions: [] },
+        );
+        await screen.findByText('KEY1');
+        await openRowActions(0);
+        expect(isEnabled('Reveal')).toBe(false);
+        unmount();
+      }
+    });
+
+    it('lets staff in the project reveal a shared key', async () => {
+      renderManaged({ state: 'OK' }, { ...USER, is_staff: true });
       await screen.findByText('KEY1');
       await openRowActions(0);
       expect(isEnabled('Reveal')).toBe(true);

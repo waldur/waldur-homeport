@@ -20,7 +20,7 @@ import {
   InferenceModelState,
   useInferenceModels,
 } from '../../playground/useInferenceModels';
-import { canRevealKey } from '../api-keys/state';
+import { getRevealBlockedReason } from '../api-keys/state';
 import {
   useResourceApiKeysTable,
   useRevealedApiKey,
@@ -140,13 +140,12 @@ export const InferenceServiceView = ({
   const { rows } = useResourceApiKeysTable(resource);
   const user = useUser();
   const keys = (rows as ResourceApiKeyStatus[] | undefined) ?? [];
-  // The viewer's own or a shared key first, so the playground's usage is not
-  // charged to someone else's key; staff and support may fall back to any.
-  const activeKey =
-    keys.find(
-      (key) =>
-        key.state === 'OK' && (!key.user_uuid || key.user_uuid === user?.uuid),
-    ) ?? keys.find((key) => canRevealKey(key, user));
+  // The viewer's own or a shared key, the only ones reveal hands them, so the
+  // playground's usage is never charged to someone else's key. Staff and
+  // support are no exception.
+  const activeKey = keys.find(
+    (key) => !getRevealBlockedReason(key, user, resource),
+  );
   const playgroundKey = useRevealedApiKey(activeKey?.uuid ?? '');
   const modelState = useInferenceModels(endpoint, playgroundKey.value);
 

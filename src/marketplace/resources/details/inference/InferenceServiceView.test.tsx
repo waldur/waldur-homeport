@@ -44,6 +44,8 @@ const makeResource = (
 ) =>
   ({
     uuid: 'res-1',
+    project_uuid: 'proj-1',
+    customer_uuid: 'cust-1',
     offering_plugin_options: { expose_inference_playground: true },
     endpoints,
   }) as any;
@@ -64,8 +66,23 @@ const setup = ({ keys = [], revealValue = null } = {}) => {
   return { reveal };
 };
 
+// Reveal needs a role on the resource's project or organization.
+const MEMBER = {
+  uuid: 'me',
+  permissions: [
+    {
+      scope_type: 'project',
+      scope_uuid: 'proj-1',
+      role_name: 'PROJECT.MEMBER',
+    },
+  ],
+};
+
 describe('InferenceServiceView', () => {
-  beforeEach(() => vi.clearAllMocks());
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(useUser).mockReturnValue(MEMBER as any);
+  });
 
   it('renders the endpoint and playground, leaving keys to their own tab', () => {
     setup();
@@ -119,23 +136,30 @@ describe('InferenceServiceView', () => {
     // Reveal refuses another user's personal key, which would leave the
     // playground unable to authenticate.
     it('skips a key assigned to someone else for a shared one', () => {
-      renderWith([OTHERS, SHARED], { uuid: 'me' });
+      renderWith([OTHERS, SHARED], MEMBER);
       expect(useRevealedApiKey).toHaveBeenCalledWith('k2');
-    });
-
-    it("prefers staff's own or a shared key over someone else's", () => {
-      renderWith([OTHERS, SHARED], { uuid: 'me', is_staff: true });
-      expect(useRevealedApiKey).toHaveBeenCalledWith('k2');
-    });
-
-    it("lets staff fall back to someone else's key", () => {
-      renderWith([OTHERS], { uuid: 'me', is_staff: true });
-      expect(useRevealedApiKey).toHaveBeenCalledWith('k1');
     });
 
     it("picks no key when every active key is someone else's", () => {
-      renderWith([OTHERS], { uuid: 'me' });
+      renderWith([OTHERS], MEMBER);
       expect(useRevealedApiKey).toHaveBeenCalledWith('');
+    });
+
+    // Reveal holds staff and support to the same rules as members.
+    it("gives staff and support no one else's key", () => {
+      for (const role of [{ is_staff: true }, { is_support: true }]) {
+        vi.mocked(useRevealedApiKey).mockClear();
+        renderWith([OTHERS], { ...MEMBER, ...role });
+        expect(useRevealedApiKey).toHaveBeenCalledWith('');
+      }
+    });
+
+    it('picks no key for staff and support outside the project', () => {
+      for (const role of [{ is_staff: true }, { is_support: true }]) {
+        vi.mocked(useRevealedApiKey).mockClear();
+        renderWith([SHARED], { ...MEMBER, ...role, permissions: [] });
+        expect(useRevealedApiKey).toHaveBeenCalledWith('');
+      }
     });
   });
 });
