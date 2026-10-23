@@ -11,12 +11,16 @@ import { formatISODate } from '@/core/dateUtils';
 import { getCustomer } from '@/customer/utils';
 import { translate } from '@/i18n';
 import { formatOrderForCreate } from '@/marketplace/details/utils';
-import { WizardButtons } from '@/marketplace/offerings/import/WizardButtons';
-import { WizardTabs } from '@/marketplace/offerings/import/WizardTabs';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
-import { ProgressStep, WizardStepIndicator, useWizard } from '@/wizard';
+import {
+  ProgressStep,
+  WizardButtons,
+  WizardStepIndicator,
+  WizardTabs,
+  useWizard,
+} from '@/wizard';
 
 import { Step1ImportType } from './Step1ImportType';
 import { Step2SelectOffering } from './Step2SelectOffering';

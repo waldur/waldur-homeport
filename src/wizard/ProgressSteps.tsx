@@ -40,6 +40,7 @@ export interface ProgressStep {
 
 interface ProgressStepsProps {
   steps: ProgressStep[];
+  activeIndex?: number;
   bgClass?: string;
   className?: string;
   onClick?(step: ProgressStep, index: number): void;
@@ -47,6 +48,7 @@ interface ProgressStepsProps {
 
 export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
   steps,
+  activeIndex,
   className,
   bgClass,
   children,
@@ -63,13 +65,21 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
             role="list"
           >
             {steps.map((step, i) => {
+              const isControlled = typeof activeIndex === 'number';
+              const completed = isControlled
+                ? i < activeIndex
+                : Boolean(step.completed);
               const current =
                 !step.disabled &&
-                ((i === 0 && !step.completed) ||
-                  (steps[i - 1] && steps[i - 1].completed && !step.completed));
+                (isControlled
+                  ? i === activeIndex
+                  : (i === 0 && !step.completed) ||
+                    (steps[i - 1] &&
+                      steps[i - 1].completed &&
+                      !step.completed));
               const variant = step.variant || DEFAULT_VARIANT;
               const hasVariant = variant !== DEFAULT_VARIANT;
-              const reached = step.completed || current;
+              const reached = completed || current;
               return (
                 <div
                   key={step.key ?? i}
@@ -83,89 +93,145 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                   }}
                   role="listitem"
                   data-state={
-                    step.completed
-                      ? 'completed'
-                      : current
-                        ? 'current'
-                        : 'upcoming'
+                    completed ? 'completed' : current ? 'current' : 'upcoming'
                   }
                   aria-current={current ? 'step' : undefined}
-                  aria-label={step.label}
+                  aria-label={
+                    typeof step.label === 'string' ? step.label : undefined
+                  }
                 >
-                  <div className="flex flex-col items-center">
+                  {/* A zero-width box at the marker's centre line; the
+                      connector ends there and runs left to the previous
+                      step's marker. The first step has none. */}
+                  {i > 0 && (
                     <div
-                      className={cn(
-                        'z-[1] flex items-center justify-center rounded-full transition-colors duration-200',
-                        current
-                          ? 'mb-[12px] size-[26px] border-[2px] border-tertiary outline-4 outline-[var(--fg-brand-primary)]'
-                          : 'mb-[14px] size-6',
-                        reached
-                          ? 'bg-[var(--fg-brand-primary)] text-[var(--fg-white)]'
-                          : 'border-[2px] border-divider bg-primary text-senary',
-                        hasVariant &&
-                          (current
-                            ? [
-                                STEP_BG_CLASSES[variant],
-                                STEP_OUTLINE_CLASSES[variant],
-                              ]
-                            : step.completed && STEP_BG_CLASSES[variant]),
-                        Boolean(onClick) && 'cursor-pointer',
-                      )}
-                      onClick={() => onClick && onClick(step, i)}
+                      className="pointer-events-none absolute top-0 flex h-6 items-center"
                       aria-hidden="true"
                     >
-                      {step.icon ? (
-                        step.icon
-                      ) : step.completed ? (
-                        <CheckIcon size={16} weight="bold" />
-                      ) : (
-                        <CircleIcon size={10} weight="fill" />
-                      )}
-                    </div>
-                    {/* A zero-width box at the marker's centre line; the
-                        connector ends there and runs left to the previous
-                        step's marker. The first step has none. */}
-                    {i > 0 && (
-                      <div className="absolute flex h-6 items-center">
-                        <div
-                          className={cn(
-                            'absolute right-0 h-[2px]',
-                            reached
-                              ? 'bg-[var(--fg-brand-primary)]'
-                              : 'bg-[var(--border-divider)]',
-                            current && hasVariant && STEP_BG_CLASSES[variant],
-                          )}
-                          style={{ width: 100 / steps.length + 'cqi' }}
-                        />
-                      </div>
-                    )}
-
-                    <div className="flex flex-col justify-center text-center">
                       <div
                         className={cn(
-                          'text-sm leading-5 font-medium',
-                          current
-                            ? hasVariant
-                              ? STEP_TEXT_CLASSES[variant]
-                              : 'text-[var(--text-brand-primary)]'
-                            : 'text-secondary',
-                          step.labelClass,
+                          'absolute right-0 h-[2px]',
+                          reached
+                            ? 'bg-[var(--fg-brand-primary)]'
+                            : 'bg-[var(--border-divider)]',
+                          current && hasVariant && STEP_BG_CLASSES[variant],
                         )}
-                      >
-                        {step.label}
-                      </div>
-                      {step.description && (
-                        // No variant class: the design system keeps supporting
-                        // text neutral whatever status the step wears, and only
-                        // colours the title.
-                        <div className="text-sm leading-5 text-quaternary">
-                          {step.description.map((line, i) => (
-                            <div key={i}>{line}</div>
-                          ))}
-                        </div>
-                      )}
+                        style={{ width: 100 / steps.length + 'cqi' }}
+                      />
                     </div>
-                  </div>
+                  )}
+
+                  {onClick ? (
+                    <button
+                      type="button"
+                      className="group flex flex-col items-center border-0 bg-transparent p-0 text-center font-inherit cursor-pointer rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+                      onClick={() => onClick(step, i)}
+                    >
+                      <div
+                        className={cn(
+                          'z-[1] flex items-center justify-center rounded-full transition-colors duration-200',
+                          current
+                            ? 'mb-[12px] size-[26px] border-[2px] border-tertiary outline-4 outline-[var(--fg-brand-primary)]'
+                            : 'mb-[14px] size-6',
+                          reached
+                            ? 'bg-[var(--fg-brand-primary)] text-[var(--fg-white)]'
+                            : 'border-[2px] border-divider bg-primary text-senary',
+                          hasVariant &&
+                            (current
+                              ? [
+                                  STEP_BG_CLASSES[variant],
+                                  STEP_OUTLINE_CLASSES[variant],
+                                ]
+                              : completed && STEP_BG_CLASSES[variant]),
+                        )}
+                        aria-hidden="true"
+                      >
+                        {step.icon ? (
+                          step.icon
+                        ) : completed ? (
+                          <CheckIcon size={16} weight="bold" />
+                        ) : (
+                          <CircleIcon size={10} weight="fill" />
+                        )}
+                      </div>
+
+                      <div className="flex flex-col justify-center text-center">
+                        <div
+                          className={cn(
+                            'text-sm leading-5 font-medium',
+                            current
+                              ? hasVariant
+                                ? STEP_TEXT_CLASSES[variant]
+                                : 'text-[var(--text-brand-primary)]'
+                              : 'text-secondary',
+                            step.labelClass,
+                          )}
+                        >
+                          {step.label}
+                        </div>
+                        {step.description && (
+                          <div className="text-sm leading-5 text-quaternary">
+                            {step.description.map((line, j) => (
+                              <div key={j}>{line}</div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </button>
+                  ) : (
+                    <div className="flex flex-col items-center">
+                      <div
+                        className={cn(
+                          'z-[1] flex items-center justify-center rounded-full transition-colors duration-200',
+                          current
+                            ? 'mb-[12px] size-[26px] border-[2px] border-tertiary outline-4 outline-[var(--fg-brand-primary)]'
+                            : 'mb-[14px] size-6',
+                          reached
+                            ? 'bg-[var(--fg-brand-primary)] text-[var(--fg-white)]'
+                            : 'border-[2px] border-divider bg-primary text-senary',
+                          hasVariant &&
+                            (current
+                              ? [
+                                  STEP_BG_CLASSES[variant],
+                                  STEP_OUTLINE_CLASSES[variant],
+                                ]
+                              : completed && STEP_BG_CLASSES[variant]),
+                        )}
+                        aria-hidden="true"
+                      >
+                        {step.icon ? (
+                          step.icon
+                        ) : completed ? (
+                          <CheckIcon size={16} weight="bold" />
+                        ) : (
+                          <CircleIcon size={10} weight="fill" />
+                        )}
+                      </div>
+
+                      <div className="flex flex-col justify-center text-center">
+                        <div
+                          className={cn(
+                            'text-sm leading-5 font-medium',
+                            current
+                              ? hasVariant
+                                ? STEP_TEXT_CLASSES[variant]
+                                : 'text-[var(--text-brand-primary)]'
+                              : 'text-secondary',
+                            step.labelClass,
+                          )}
+                        >
+                          {step.label}
+                        </div>
+                        {step.description && (
+                          <div className="text-sm leading-5 text-quaternary">
+                            {step.description.map((line, j) => (
+                              <div key={j}>{line}</div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}

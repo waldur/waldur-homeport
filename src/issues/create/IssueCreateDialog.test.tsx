@@ -169,6 +169,47 @@ describe('IssueCreateDialog Component', () => {
     });
   });
 
+  it('allows navigating directly to Description step via step indicator without breaking the form', async () => {
+    renderComponent();
+
+    await waitFor(() => {
+      expect(
+        screen.getByText('Define issue type and context'),
+      ).toBeInTheDocument();
+    });
+
+    // Click on the Description step indicator
+    const descriptionStep = screen.getByText('Description');
+    await user.click(descriptionStep);
+
+    // Form fields in Description tab must be rendered
+    await waitFor(() => {
+      expect(screen.getByLabelText(/Title/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/Request description/i)).toBeInTheDocument();
+    });
+
+    // Click back to the first step via step indicator
+    const detailsStep = screen.getByText('Define issue type and context');
+    await user.click(detailsStep);
+
+    await waitFor(() => {
+      expect(screen.getByText('Organization')).toBeInTheDocument();
+    });
+
+    // Navigate to Description step again via indicator
+    await user.click(descriptionStep);
+    await waitFor(() => {
+      expect(screen.getByLabelText(/Title/i)).toBeInTheDocument();
+    });
+
+    // Back button should work to return to details step
+    const backBtn = screen.getByRole('button', { name: /Back/i });
+    await user.click(backBtn);
+    await waitFor(() => {
+      expect(screen.getByText('Organization')).toBeInTheDocument();
+    });
+  });
+
   it('submits form and navigates on success', async () => {
     const mockRefetch = vi.fn();
     const mockIssue = {

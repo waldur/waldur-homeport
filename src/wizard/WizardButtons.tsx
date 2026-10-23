@@ -7,7 +7,7 @@ import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 
-interface WizardButtonsProps {
+export interface WizardButtonsProps {
   goBack(): void;
   goNext(): void;
   submitting: boolean;
