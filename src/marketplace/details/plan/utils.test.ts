@@ -52,6 +52,29 @@ describe('combinePrices', () => {
   };
 
   describe('one-time component amount calculation', () => {
+    // Billing charges a `few` component its plan amount and never multiplies
+    // it by the months, even when an older offering marks it prepaid and the
+    // stored limits carry its type.
+    it('prices a prepaid on-plan-switch component at its plan amount', () => {
+      const offering = createOffering([
+        { type: 'setup', billing_type: 'few', is_prepaid: true },
+      ]);
+      const plan = createPlan({ setup: 1 }, { setup: 50 }, 'month');
+
+      const [setup] = combinePrices(
+        plan,
+        { setup: 3 },
+        {},
+        offering,
+        '2026-10-15',
+        '2026-08-15',
+      ).components;
+
+      expect(setup.amount).toBe(1);
+      expect(setup.displayAmount).toBeUndefined();
+      expect(setup.subTotal).toBe(50);
+    });
+
     it('should use quota value of 0 for one-time components instead of defaulting to 1', () => {
       const offering = createOffering([
         { type: 'slurm_cpu', billing_type: 'one' },

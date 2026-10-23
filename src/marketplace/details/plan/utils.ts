@@ -72,7 +72,15 @@ export const combinePrices = (
         component.billing_type === 'few'
       ) {
         // If the one-time component is prepaid, take its value from limits.
-        if (component.is_prepaid && limits && limits[component.type]) {
+        // Billing multiplies only a one-time component by the months; a `few`
+        // one is charged its plan amount even when an older offering marks it
+        // prepaid and stored limits carry its type.
+        if (
+          component.billing_type === 'one' &&
+          component.is_prepaid &&
+          limits &&
+          limits[component.type]
+        ) {
           amount = limits[component.type];
           displayAmount = amount;
           if (durationInMonths) {

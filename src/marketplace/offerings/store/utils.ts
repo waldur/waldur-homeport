@@ -154,6 +154,47 @@ export const formatOption = (option: OptionFormData) => {
 const getBillingTypeValue = (option) =>
   typeof option === 'object' ? option.value : option;
 
+// The settings the component form shows only for a prepaid component.
+const PREPAID_SETTINGS = [
+  'min_prepaid_duration',
+  'max_prepaid_duration',
+  'prepaid_duration_step',
+  'min_renewal_duration',
+  'max_renewal_duration',
+  'renewal_duration_step',
+  'overage_component',
+];
+
+/**
+ * A formatted component without the prepaid settings the form no longer
+ * shows, which the backend would refuse.
+ *
+ * Only a one-time component can be prepaid, and only for it does the form
+ * show the prepaid settings. A component moved to another type therefore stops
+ * being prepaid, unless it keeps the type it was saved with: one made prepaid
+ * under another type before that rule stays as it is. A component that is not
+ * prepaid carries no prepaid settings.
+ */
+export const dropHiddenPrepaidSettings = <
+  T extends { billing_type?: string; is_prepaid?: boolean },
+>(
+  component: T,
+  savedBillingType?: string,
+): T => {
+  const isPrepaid =
+    component.is_prepaid &&
+    (component.billing_type === 'one' ||
+      component.billing_type === savedBillingType);
+  if (isPrepaid) {
+    return component;
+  }
+  return {
+    ...component,
+    is_prepaid: false,
+    ...Object.fromEntries(PREPAID_SETTINGS.map((name) => [name, null])),
+  };
+};
+
 export const formatComponent = (formData, offering?) => {
   // The dialog's own switch; the API reads the periods it leaves ticked.
   const { spending_limits_enabled, ...component } = formData;

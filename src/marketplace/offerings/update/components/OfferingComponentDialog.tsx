@@ -9,7 +9,10 @@ import {
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { formatComponent } from '@/marketplace/offerings/store/utils';
+import {
+  dropHiddenPrepaidSettings,
+  formatComponent,
+} from '@/marketplace/offerings/store/utils';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -34,7 +37,10 @@ export const OfferingComponentDialog: FC<{
 
   const submitMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) => {
-      const data = formatComponent(formData, resolve.offering);
+      const data = dropHiddenPrepaidSettings(
+        formatComponent(formData, resolve.offering),
+        resolve.component?.billing_type,
+      );
       if (isEdit) {
         const payload = labelsLocked
           ? omit(data, ['name', 'measured_unit', 'type'])

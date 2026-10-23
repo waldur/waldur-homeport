@@ -272,6 +272,42 @@ describe('OfferingComponentDialog', () => {
       });
     });
 
+    // Only a one-time component can be prepaid, and the prepaid settings show
+    // only for it; switching away must not send them hidden, or the backend
+    // refuses the save.
+    it('clears the prepaid settings when leaving the one-time type', async () => {
+      const user = userEvent.setup();
+      const updateMutation = vi.mocked(
+        marketplaceProviderOfferingsUpdateOfferingComponent,
+      );
+      renderComponent({
+        offering: mockOffering,
+        component: {
+          ...mockComponent,
+          type: 'cpu',
+          billing_type: 'one',
+          is_prepaid: true,
+          min_prepaid_duration: 3,
+          max_renewal_duration: 12,
+        },
+      });
+
+      await openAndSelectOption(user, /Accounting type/i, /Limit-based/i);
+      await user.click(screen.getByRole('button', { name: 'Save' }));
+
+      await waitFor(() => {
+        expect(updateMutation).toHaveBeenCalledWith({
+          path: { uuid: 'offering-1' },
+          body: expect.objectContaining({
+            billing_type: 'limit',
+            is_prepaid: false,
+            min_prepaid_duration: null,
+            max_renewal_duration: null,
+          }),
+        });
+      });
+    });
+
     it('omits read-only fields for builtin components on TENANT_TYPE offering', async () => {
       const user = userEvent.setup();
       const updateMutation = vi.mocked(
