@@ -14,12 +14,15 @@
 import {
   OfferingComponent,
   SpendingLimitBounds,
-  SpendingLimitStatusPeriodEnum,
+  SpendingLimitStatus,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 
-export type SpendingLimitPeriod = SpendingLimitStatusPeriodEnum;
+// Taken from the model rather than its generated enum, whose name depends on
+// how many serializers share the choices (SpendingLimitStatusPeriodEnum while
+// only the status has them, SpendingLimitPeriodEnum once API keys do too).
+export type SpendingLimitPeriod = SpendingLimitStatus['period'];
 
 /** Shortest first: a shorter period's amount may not exceed a longer one's. */
 export const SPENDING_LIMIT_PERIODS: SpendingLimitPeriod[] = [
