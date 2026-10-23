@@ -12,7 +12,12 @@ import {
 import { cleanObject } from './core/utils';
 import { getCustomer } from './customer/utils';
 import { DrawerService } from './drawer/actions';
-import { setPrevParams, setPrevState } from './error/utils';
+import {
+  getErrorStatus,
+  goToErrorPage,
+  setPrevParams,
+  setPrevState,
+} from './error/utils';
 import { isFeatureVisible } from './features/connect';
 import { MarketplaceFeatures } from './FeaturesEnums';
 import { translate } from './i18n';
@@ -321,7 +326,7 @@ export function attachTransitions() {
 
     // Erred state is terminal, user should not be redirected from erred state to login
     // so that he would be able to read error message details
-    if (error.detail && error.detail.status === 401) {
+    if (getErrorStatus(error.detail) === 401) {
       RedirectStorage.set({
         toState: transition.to().name,
         toParams: transition.to().params,
@@ -329,20 +334,8 @@ export function attachTransitions() {
       clearAuthCache();
       return goTo('login');
     }
-    if (error.detail) {
-      if (error.detail.status === 403) {
-        return goTo('errorPage.noPermission');
-      }
-      if (error.detail.status === 428) {
-        // HTTP 428 Precondition Required - user profile incomplete with enforcement enabled
-        return goTo('profile-manage');
-      }
-      if (error.detail.status === 500) {
-        return goTo('errorPage.serverError');
-      }
-      if (error.detail.status === 503) {
-        return goTo('errorPage.serviceNotAvailable');
-      }
+    if (goToErrorPage(error.detail, transition.router.stateService)) {
+      return;
     }
     if (error['redirectTo'] && error['status'] !== -1) {
       return goTo(error['redirectTo']);

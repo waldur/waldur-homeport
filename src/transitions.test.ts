@@ -35,6 +35,12 @@ vi.mock('./auth/AuthService', () => ({
   clearAuthCache: vi.fn(),
 }));
 
+// A 401 clears the cached session on its way to the login page.
+vi.mock('./auth/authNavigation', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./auth/authNavigation')>()),
+  clearAuthCache: vi.fn(),
+}));
+
 vi.mock('./core/StorageManager', () => ({
   GroupInvitationTokenStorage: {
     set: (...args) => mockGroupInvitationTokenSet(...args),
@@ -47,7 +53,8 @@ vi.mock('./core/utils', () => ({
   cleanObject: (obj) => obj,
 }));
 
-vi.mock('./error/utils', () => ({
+vi.mock('./error/utils', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./error/utils')>()),
   setPrevParams: vi.fn(),
   setPrevState: vi.fn(),
 }));
@@ -415,15 +422,28 @@ describe('Transition error fallback', () => {
     });
   });
 
+  // The error states keep the address that failed, so a refresh retries it
+  // rather than landing on '/'; profile-manage is a page with its own url.
   it.each([
-    [403, 'errorPage.noPermission'],
-    [428, 'profile-manage'],
-    [500, 'errorPage.serverError'],
-    [503, 'errorPage.serviceNotAvailable'],
-  ])('sends %i to %s', (status, expected) => {
+    [403, 'errorPage.noPermission', { location: false }],
+    [404, 'errorPage.notFound', { location: false }],
+    [428, 'profile-manage', undefined],
+    [500, 'errorPage.serverError', { location: false }],
+    [503, 'errorPage.serviceNotAvailable', { location: false }],
+  ])('sends %i to %s', (status, expected, options) => {
     errorHook.callback(erred({ status }));
 
-    expect(mockGo).toHaveBeenCalledWith(expected, undefined, undefined);
+    expect(mockGo).toHaveBeenCalledWith(expected, undefined, options);
+  });
+
+  it('saves the destination and sends 401 to login', () => {
+    errorHook.callback(erred({ status: 401 }));
+
+    expect(mockRedirectStorageSet).toHaveBeenCalledWith({
+      toState: 'some-state',
+      toParams: expect.any(Function),
+    });
+    expect(mockGo).toHaveBeenCalledWith('login', undefined, undefined);
   });
 
   // A transition also "fails" when the user clicks a second link while the
