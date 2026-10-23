@@ -141,18 +141,16 @@ export const MultiSelectValue = (props: MultiValueProps) => (
 
 export const MultiSelectLimitedValueContainer = (props) => {
   const tooltipId = useId();
-  if (!props.hasValue) {
-    return (
-      <components.ValueContainer {...props}>
-        {props.children}
-      </components.ValueContainer>
-    );
-  }
-
   const valuesLimit = 2;
+  // react-select passes [placeholder or values, input]. Render that same
+  // shape whether or not anything is selected: if the input moves to another
+  // child slot, React remounts it, and the focused <input> is removed without
+  // react-select seeing a blur, so its menu stays open after focus has moved.
   const [values, ...otherChildren] = props.children;
-  const hiddenValues = values.slice(valuesLimit);
-  const displayValues = values.slice(0, valuesLimit);
+  const hiddenValues = Array.isArray(values) ? values.slice(valuesLimit) : [];
+  const displayValues = Array.isArray(values)
+    ? values.slice(0, valuesLimit)
+    : values;
 
   return (
     <components.ValueContainer {...props}>

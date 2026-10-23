@@ -3,19 +3,21 @@ import { components, Props as SelectProps } from 'react-select';
 import { Select } from '@/form/select';
 
 const MultiSelectLimitedValueContainer = (props) => {
-  if (!props.hasValue) {
-    return (
-      <components.ValueContainer {...props}>
-        {props.children}
-      </components.ValueContainer>
-    );
-  }
-
+  // One shape with and without a value, so the input keeps its child slot and
+  // is not remounted on the first pick; see waldur-ui's
+  // MultiSelectLimitedValueContainer.
   const [values, ...otherChildren] = props.children;
 
   return (
     <components.ValueContainer {...props}>
-      {props.selectProps.placeholder} ({values.length}){otherChildren}
+      {props.hasValue ? (
+        <>
+          {props.selectProps.placeholder} ({values.length})
+        </>
+      ) : (
+        values
+      )}
+      {otherChildren}
     </components.ValueContainer>
   );
 };

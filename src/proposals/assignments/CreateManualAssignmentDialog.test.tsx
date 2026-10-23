@@ -134,6 +134,18 @@ describe('CreateManualAssignmentDialog', () => {
     ).toBeDisabled();
   });
 
+  it('keeps the proposals input mounted when the first proposal is picked', async () => {
+    const user = userEvent.setup();
+    renderDialog();
+
+    await screen.findByText('Manual assignment');
+    const proposals = screen.getAllByRole('combobox')[1];
+    await user.click(proposals);
+    await user.click(await screen.findByText('PROP-1: First Proposal'));
+
+    expect(screen.getAllByRole('combobox')[1]).toBe(proposals);
+  });
+
   it('pre-populates and locks the proposals field when initialProposal is given', async () => {
     renderDialog({ initialProposal: fakeProposal });
 

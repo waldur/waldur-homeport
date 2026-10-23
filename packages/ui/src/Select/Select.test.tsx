@@ -43,6 +43,20 @@ describe('Select component', () => {
     expect(screen.getByRole('button', { name: 'Remove' })).toBeInTheDocument();
   });
 
+  it('keeps the multi-select input mounted when the first value is selected or the last removed', () => {
+    const renderSelect = (value) => (
+      <Select isMulti options={options} value={value} onChange={() => {}} />
+    );
+    const { rerender } = render(renderSelect([]));
+    const input = screen.getByRole('combobox');
+
+    rerender(renderSelect([options[0]]));
+    expect(screen.getByRole('combobox')).toBe(input);
+
+    rerender(renderSelect([]));
+    expect(screen.getByRole('combobox')).toBe(input);
+  });
+
   it('renders options with selected value at top when menu opens', async () => {
     render(
       <Select
