@@ -1855,16 +1855,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iconify-json/ph@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "@iconify-json/ph@npm:1.2.2"
-  dependencies:
-    "@iconify/types": "npm:*"
-  checksum: 10c0/a8e3a276364a125bdaefab07ae78425113baa34c11b22b4c33ab8ac01fd13c5ee8afccbb26f1a1aaaabd1681ed68dc6eb791df2d41d18724cab1362c61d3cd37
-  languageName: node
-  linkType: hard
-
-"@iconify/types@npm:*, @iconify/types@npm:^2.0.0":
+"@iconify/types@npm:^2.0.0":
   version: 2.0.0
   resolution: "@iconify/types@npm:2.0.0"
   checksum: 10c0/65a3be43500c7ccacf360e136d00e1717f050b7b91da644e94370256ac66f582d59212bdb30d00788aab4fc078262e91c95b805d1808d654b72f6d2072a7e4b2
@@ -18745,7 +18736,6 @@ __metadata:
     "@emoji-mart/data": "npm:^1.2.1"
     "@emoji-mart/react": "npm:^1.1.1"
     "@fontsource/open-sans": "npm:^4.5.14"
-    "@iconify-json/ph": "npm:^1.2.2"
     "@jonkoops/matomo-tracker": "npm:^0.7.0"
     "@lezer/highlight": "npm:^1.0.0"
     "@livekit/components-react": "npm:^2.9.19"

@@ -14,21 +14,6 @@ interface MermaidChartProps {
   className?: string;
 }
 
-let iconsRegistered = false;
-
-const registerIcons = () => {
-  if (iconsRegistered) return;
-  iconsRegistered = true;
-
-  // Register Phosphor icons pack (lazy loaded)
-  mermaid.registerIconPacks([
-    {
-      name: 'ph',
-      loader: () => import('@iconify-json/ph').then((module) => module.icons),
-    },
-  ]);
-};
-
 // Mermaid draws SVG from resolved colours, so it has to be configured again
 // whenever the theme changes.
 const configureMermaid = () => {
@@ -60,7 +45,6 @@ export const MermaidChart: FC<MermaidChartProps> = ({ code, className }) => {
   const { theme } = useTheme();
 
   useEffect(() => {
-    registerIcons();
     configureMermaid();
 
     let cancelled = false;
