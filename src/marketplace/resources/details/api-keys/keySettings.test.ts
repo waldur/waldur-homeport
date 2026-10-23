@@ -456,8 +456,10 @@ describe('limits on periods other than the month', () => {
 });
 
 describe('getResourceKeyComponents', () => {
+  // Periods other than month need per-key daily usage; see below.
   const offering = {
     components: [TOKENS, TOKEN_COST],
+    plugin_options: { api_key_daily_usage: true },
     plans: [
       {
         uuid: 'plan-limit',
@@ -489,6 +491,78 @@ describe('getResourceKeyComponents', () => {
         components.find((c) => c.type === 'token_cost')!.spending_limit_periods,
       ),
     ).toEqual(['day', 'week', 'month']);
+  });
+
+  const keyPeriods = (
+    plugin_options: Record<string, unknown>,
+    held?: Record<string, Record<string, number>>,
+  ) =>
+    Object.fromEntries(
+      getKeyLimitComponents(
+        getResourceKeyComponents({ ...offering, plugin_options }, undefined),
+        {},
+        held,
+      ).map((component) => [
+        component.type,
+        Object.keys(component.spending_limit_periods),
+      ]),
+    );
+
+  // Day and week limits would never be reached without per-day key usage,
+  // and quarter and year would count the current month alone.
+  it('offers only month unless the offering reports per-key daily usage', () => {
+    expect(keyPeriods({})).toEqual({
+      tokens: ['month'],
+      token_cost: ['month'],
+    });
+    expect(keyPeriods({ api_key_daily_usage: false })).toEqual({
+      tokens: ['month'],
+      token_cost: ['month'],
+    });
+    expect(keyPeriods({ api_key_daily_usage: true })).toEqual({
+      tokens: ['month'],
+      token_cost: ['day', 'week', 'month'],
+    });
+  });
+
+  it('offers no key limit on an offering that turns them off', () => {
+    expect(
+      keyPeriods({ api_key_limits: false, api_key_daily_usage: true }),
+    ).toEqual({});
+    // Key limits are on unless turned off.
+    expect(keyPeriods({ api_key_limits: true })).toEqual({
+      tokens: ['month'],
+      token_cost: ['month'],
+    });
+  });
+
+  // As the backend: limits a key already holds stay until cleared.
+  it('keeps limits a key holds once the offering stops offering them', () => {
+    const components = getKeyLimitComponents(
+      getResourceKeyComponents(
+        { ...offering, plugin_options: { api_key_limits: false } },
+        undefined,
+      ),
+      {},
+      { token_cost: { day: 2, month: 5 } },
+    );
+    expect(components).toEqual([
+      expect.objectContaining({
+        type: 'token_cost',
+        spending_limit_periods: {
+          day: { heldOnly: true },
+          month: { heldOnly: true },
+        },
+      }),
+    ]);
+    const monthOnly = getKeyLimitComponents(
+      getResourceKeyComponents({ ...offering, plugin_options: {} }, undefined),
+      {},
+      { token_cost: { day: 2 } },
+    );
+    expect(
+      monthOnly.find((c) => c.type === 'token_cost')!.spending_limit_periods,
+    ).toEqual({ day: { heldOnly: true }, month: {} });
   });
 
   // Nothing is spent on a component the plan prices at zero.

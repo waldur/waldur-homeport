@@ -37,14 +37,18 @@ export type KeyLimitComponent = Omit<KeyComponent, 'measured_unit'> & {
 type Limits = Resource['spending_limits'] | null | undefined;
 
 /**
- * The periods a key may limit on a component, shortest first: `month`, and
- * the component's own periods where it is billed by usage.
+ * The periods a key may limit on a component, shortest first: `month`, and,
+ * where the provider reports each key's usage per day, the component's own
+ * periods if it is billed by usage. Without per-day usage, day and week limits
+ * would never be reached, and quarter and year would count the current month
+ * alone.
  */
 const getComponentKeyPeriods = (
   component: KeyComponent,
+  dailyUsage = true,
 ): SpendingLimitPeriod[] => {
   const own =
-    component.billing_type === 'usage'
+    dailyUsage && component.billing_type === 'usage'
       ? Object.keys(component.spending_limit_periods ?? {})
       : [];
   return SPENDING_LIMIT_PERIODS.filter(
@@ -61,17 +65,29 @@ const isZeroPrice = (price: string | number | null | undefined) =>
 
 /**
  * The offering's components as billed under the resource's plan, each with
- * the periods a key may limit on it (`keyPeriods`). A plan may bill a usage
- * component by limit, and then it takes no spending limit; the backend reads
- * the periods a key may limit from the plan, so the dialogs must too. A
- * component the plan prices at zero takes no key limit at all, as nothing is
- * spent on it; one the plan does not price is not counted as free, as the
- * plan may predate it. Every component stays, for its usage readings.
+ * the periods a key may limit on it (`keyPeriods`), as the backend offers
+ * them:
+ *
+ * - none on any component when the offering turns key limits off
+ *   (`plugin_options.api_key_limits`, on unless set to false);
+ * - only `month` unless the offering declares per-key daily usage
+ *   (`plugin_options.api_key_daily_usage`, off unless set);
+ * - none on a component the plan prices at zero, as nothing is spent on it;
+ *   one the plan does not price is not counted as free, as the plan may
+ *   predate it.
+ *
+ * A plan may bill a usage component by limit, and then it takes no spending
+ * limit; the backend reads the periods a key may limit from the plan, so the
+ * dialogs must too. Every component stays, for its usage readings.
  */
 export const getResourceKeyComponents = (
-  offering: Pick<Offering, 'components' | 'plans'> | undefined,
+  offering:
+    Pick<Offering, 'components' | 'plans' | 'plugin_options'> | undefined,
   planUuid: string | null | undefined,
 ): KeyComponent[] => {
+  const options = offering?.plugin_options;
+  const limitsOffered = options?.api_key_limits !== false;
+  const dailyUsage = options?.api_key_daily_usage === true;
   const plan = findResourcePlan(offering?.plans, planUuid);
   const free = new Set(
     (plan?.components ?? [])
@@ -81,9 +97,10 @@ export const getResourceKeyComponents = (
   return resolvePlanComponents(offering?.components ?? [], plan).map(
     (component) => ({
       ...component,
-      keyPeriods: free.has(component.type)
-        ? []
-        : getComponentKeyPeriods(component),
+      keyPeriods:
+        !limitsOffered || free.has(component.type)
+          ? []
+          : getComponentKeyPeriods(component, dailyUsage),
     }),
   );
 };

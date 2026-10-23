@@ -19,6 +19,7 @@ export interface KeyComponent {
   billing_type?: OfferingComponent['billing_type'];
   spending_limit_periods?: OfferingComponent['spending_limit_periods'];
   // The periods a key may limit on the component, as the backend offers them
-  // (getResourceKeyComponents); unset, month and the component's own periods.
+  // (getResourceKeyComponents); unset, month and the component's own periods,
+  // as on an offering that reports per-key daily usage.
   keyPeriods?: SpendingLimitPeriod[];
 }
