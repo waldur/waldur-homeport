@@ -83,7 +83,14 @@ export const getErredTooltip = (row: ApiKeyRow) => {
   const failed = translate('{command} failed', {
     command: getCommandLabel(getFailedCommand(row)),
   });
-  return row.error_message ? `${failed}: ${row.error_message}` : failed;
+  const tooltip = row.error_message
+    ? `${failed}: ${row.error_message}`
+    : failed;
+  // A pause on reaching a limit that failed leaves the key serving: Erred
+  // alone reads as stopped.
+  return getFailedCommand(row) === 'pause' && row.paused_by_limit
+    ? `${tooltip} ${translate('The key is still active at the provider until the failed command succeeds.')}`
+    : tooltip;
 };
 
 // The backend refuses the assignee a rotation of an active key that reached
@@ -179,7 +186,7 @@ export const getResourcePause = (
 const getResourcePauseMessage = (pause: ResourcePause) =>
   pause === 'limit'
     ? translate(
-        'Its usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.',
+        "The resource's usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.",
       )
     : translate('It resumes once the resource is unpaused.');
 

@@ -159,7 +159,7 @@ export const getKeySettingsFields = (
               label: translate('Limits'),
               components: limitComponents,
               description: translate(
-                "Each limit pauses this key alone once reached, and may not exceed the resource's limit for the same period. Clear a field to remove that limit.",
+                "Each limit pauses this key alone once reached, and may not exceed the resource's limit for the same or a longer period. Clear a field to remove that limit.",
               ),
             },
             space: 5,

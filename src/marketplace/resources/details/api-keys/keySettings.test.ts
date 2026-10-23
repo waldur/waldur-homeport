@@ -125,13 +125,38 @@ describe('getKeyLimitComponents', () => {
     ]);
   });
 
-  // The provider's maximum is for resources; a key is capped by its resource.
-  it("caps each period by the resource's limit for it", () => {
-    const components = limitComponents({ token_cost: { day: 20 } });
+  // The provider's maximum is for resources; a key is capped by its resource,
+  // as no key may spend more in a period than its resource may in that period
+  // or any longer one.
+  it("caps each period by the resource's limits for it and every longer period", () => {
+    const components = limitComponents({ token_cost: { day: 20, month: 50 } });
     expect(periods(components, 'token_cost')).toEqual({
       day: { maximum: 20 },
-      week: {},
-      month: {},
+      week: { maximum: 50 },
+      month: { maximum: 50 },
+    });
+    // A day limit above the month's is capped by the month's.
+    expect(
+      periods(
+        limitComponents({ token_cost: { day: 80, month: 50 } }),
+        'token_cost',
+      ).day,
+    ).toEqual({ maximum: 50 });
+  });
+
+  it('applies no provider maximum, nor a cap without a resource limit', () => {
+    // TOKEN_COST offers month with a provider maximum of 1000.
+    expect(periods(limitComponents(), 'token_cost').month).toEqual({});
+  });
+
+  it("caps a held period by the resource's longer limits too", () => {
+    const components = limitComponents(
+      { tokens: { year: 100 } },
+      { tokens: { day: 3 } },
+    );
+    expect(periods(components, 'tokens')).toEqual({
+      day: { maximum: 100, heldOnly: true },
+      month: { maximum: 100 },
     });
   });
 
@@ -279,6 +304,9 @@ describe('usage against a limit', () => {
     expect(getMeterVariant(85)).toBe('warning');
     expect(getMeterVariant(100)).toBe('danger');
     expect(getMeterVariant(102)).toBe('danger');
+    // The resource's limit does not pause the key.
+    expect(getMeterVariant(102, true)).toBe('warning');
+    expect(getMeterVariant(13, true)).toBeUndefined();
   });
 });
 
@@ -369,6 +397,53 @@ describe('limits on periods other than the month', () => {
     expect(headline).toMatchObject({ period: 'day', ratio: 80 });
   });
 
+  // The month reading comes first from the API's shape; the dialogs list
+  // periods shortest first, and so must the row.
+  it('lists the readings shortest period first', () => {
+    const readings = getComponentReadings(
+      row({
+        spending_limits: { token_cost: { day: 5, week: 20, month: 50 } },
+        current_usages: { token_cost: 4 },
+        spending_limit_status: [
+          status('week', 4, 20),
+          status('month', 4, 50),
+          status('day', 4, 5),
+        ],
+      }),
+      TOKEN_COST,
+      {},
+    );
+    expect(readings.map((reading) => reading.period ?? 'month')).toEqual([
+      'day',
+      'week',
+      'month',
+    ]);
+  });
+
+  // The resource's limit is not the key's: the key's usage going over it
+  // pauses nothing, so it must not head an OK key as its breach.
+  it("heads the list with the key's own limit over an inherited one", () => {
+    const headline = getHeadlineUsage(
+      row({
+        current_usages: { token_cost: 500 },
+        spending_limit_status: [status('day', 1, 10)],
+      }),
+      [TOKEN_COST],
+      { token_cost: { month: 40 } },
+    );
+    expect(headline).toMatchObject({ period: 'day', inherited: false });
+  });
+
+  it('heads with an inherited limit only when the key has none, and warns at most', () => {
+    const headline = getHeadlineUsage(
+      row({ current_usages: { token_cost: 500 } }),
+      [TOKEN_COST],
+      { token_cost: { month: 40 } },
+    )!;
+    expect(headline).toMatchObject({ inherited: true, overLimit: true });
+    expect(getMeterVariant(headline.ratio, headline.inherited)).toBe('warning');
+  });
+
   it('reads a limit of 0 as reached, should one come', () => {
     expect(
       getPeriodUsages(
@@ -414,5 +489,59 @@ describe('getResourceKeyComponents', () => {
         components.find((c) => c.type === 'token_cost')!.spending_limit_periods,
       ),
     ).toEqual(['day', 'week', 'month']);
+  });
+
+  // Nothing is spent on a component the plan prices at zero.
+  describe('a component the plan prices at zero', () => {
+    const priced = {
+      ...offering,
+      plans: [
+        {
+          uuid: 'plan-free-tokens',
+          components: [
+            { type: 'tokens', billing_type: 'usage', price: '0.0000000000' },
+            {
+              type: 'token_cost',
+              billing_type: 'usage',
+              price: '1.0000000000',
+            },
+          ],
+        },
+      ],
+    } as any;
+
+    it('takes no key limit', () => {
+      const components = getKeyLimitComponents(
+        getResourceKeyComponents(priced, 'plan-free-tokens'),
+        {},
+      );
+      expect(components.map((c) => c.type)).toEqual(['token_cost']);
+    });
+
+    it('keeps a limit the key holds on it, to keep or clear', () => {
+      const components = getKeyLimitComponents(
+        getResourceKeyComponents(priced, 'plan-free-tokens'),
+        {},
+        { tokens: { month: 5 } },
+      );
+      expect(
+        components.find((c) => c.type === 'tokens')!.spending_limit_periods,
+      ).toEqual({ month: { heldOnly: true } });
+    });
+
+    // The plan may predate the component.
+    it('does not count a component the plan does not price as free', () => {
+      const components = getKeyLimitComponents(
+        getResourceKeyComponents(
+          {
+            ...priced,
+            plans: [{ uuid: 'p', components: [{ type: 'token_cost' }] }],
+          },
+          'p',
+        ),
+        {},
+      );
+      expect(components.map((c) => c.type)).toEqual(['tokens', 'token_cost']);
+    });
   });
 });

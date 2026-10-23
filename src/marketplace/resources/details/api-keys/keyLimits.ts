@@ -3,6 +3,7 @@ import { Resource } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import {
   getSpendingLimitLabel,
+  SPENDING_LIMIT_PERIODS,
   SpendingLimitPeriod,
 } from '@/marketplace/common/spendingLimits';
 
@@ -130,42 +131,54 @@ export const getReadingLabel = (reading: ComponentUsage) => {
     : componentLabel(reading.component);
 };
 
-/** Every reading of a component: the month's first, then the other periods' limits. */
+// The month reading carries no period of its own.
+const getReadingOrder = (reading: ComponentUsage) =>
+  SPENDING_LIMIT_PERIODS.indexOf(reading.period ?? 'month');
+
+/** Every reading of a component, shortest period first, as the dialogs list them. */
 export const getComponentReadings = (
   row: ApiKeyRow,
   component: KeyComponent,
   resourceLimits: ResourceSpendingLimits,
-) => [
-  getComponentUsage(row, component, resourceLimits),
-  ...getPeriodUsages(row, component, resourceLimits),
-];
+) =>
+  [
+    getComponentUsage(row, component, resourceLimits),
+    ...getPeriodUsages(row, component, resourceLimits),
+  ].sort((a, b) => getReadingOrder(a) - getReadingOrder(b));
 
-// Colours a meter by how close the key is to its limit. A key's own limit pauses
-// the key once reached; an inherited one is the resource's, which limits the
-// whole resource instead.
-export const getMeterVariant = (ratio?: number) =>
+// Colours a meter by how close the key is to its limit. A key's own limit
+// pauses the key once reached, so reaching it is a breach; an inherited one is
+// the resource's, which the key's usage alone does not stop, so it warns at
+// most.
+export const getMeterVariant = (ratio?: number, inherited = false) =>
   ratio === undefined
     ? undefined
     : ratio >= 100
-      ? 'danger'
+      ? inherited
+        ? 'warning'
+        : 'danger'
       : ratio >= 80
         ? 'warning'
         : undefined;
 
-// The limit closest to being reached, of any component and period, so a
-// nearly exhausted key stands out.
+// The key's own limit closest to being reached, of any component and period,
+// so a nearly exhausted key stands out. The resource's limits it inherits head
+// the list only when the key has none of its own: one the key's usage went
+// over does not pause the key, so it must not read as the key's breach.
 export const getHeadlineUsage = (
   row: ApiKeyRow,
   components: KeyComponent[],
   resourceLimits: ResourceSpendingLimits,
-) =>
-  components
+) => {
+  const readings = components
     .flatMap((component) =>
       getComponentReadings(row, component, resourceLimits),
     )
-    .filter((reading) => reading.ratio !== undefined)
-    .reduce<ComponentUsage | undefined>(
-      (worst, reading) =>
-        !worst || reading.ratio! > worst.ratio! ? reading : worst,
-      undefined,
-    );
+    .filter((reading) => reading.ratio !== undefined);
+  const own = readings.filter((reading) => !reading.inherited);
+  return (own.length ? own : readings).reduce<ComponentUsage | undefined>(
+    (worst, reading) =>
+      !worst || reading.ratio! > worst.ratio! ? reading : worst,
+    undefined,
+  );
+};

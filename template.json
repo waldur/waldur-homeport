@@ -17926,7 +17926,7 @@
       "feature_area": "lifecycle"
     }
   },
-  "Each limit pauses this key alone once reached, and may not exceed the resource's limit for the same period. Clear a field to remove that limit.": {
+  "Each limit pauses this key alone once reached, and may not exceed the resource's limit for the same or a longer period. Clear a field to remove that limit.": {
     "context": {
       "feature_area": "api-keys"
     }
@@ -27377,7 +27377,6 @@
       "feature_area": "cost-policies"
     }
   },
-  "Its usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.": {},
   "JPG, PNG, PDF or .asice (max {size})": {
     "context": {
       "variables": {
@@ -58081,6 +58080,11 @@
       "feature_area": "keys"
     }
   },
+  "The key is still active at the provider until the failed command succeeds.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "The key was never created, so it has nothing to resume.": {
     "context": {
       "feature_area": "api-keys"
@@ -58652,6 +58656,7 @@
       "feature_area": "common"
     }
   },
+  "The resource's usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.": {},
   "The resources the merge moves to the target, with the orders, limits and order answers that follow them.": {},
   "The response window for this assignment batch has passed.": {
     "context": {
@@ -74158,6 +74163,11 @@
     }
   },
   "over limit": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "over the resource's limit": {
     "context": {
       "feature_area": "api-keys"
     }

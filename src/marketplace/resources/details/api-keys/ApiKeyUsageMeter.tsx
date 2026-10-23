@@ -17,7 +17,12 @@ export const UsageMeter: FC<{ reading: ComponentUsage }> = ({ reading }) => {
       ? []
       : [
           reading.inherited && translate('inherited'),
-          reading.overLimit && translate('over limit'),
+          // An inherited limit is the resource's: going over it does not
+          // pause the key.
+          reading.overLimit &&
+            (reading.inherited
+              ? translate("over the resource's limit")
+              : translate('over limit')),
         ].filter(Boolean);
   return (
     <div>
@@ -44,7 +49,7 @@ export const UsageMeter: FC<{ reading: ComponentUsage }> = ({ reading }) => {
           className="mt-1"
           value={used ?? 0}
           max={limit}
-          variant={getMeterVariant(reading.ratio)}
+          variant={getMeterVariant(reading.ratio, reading.inherited)}
           label={getReadingLabel(reading)}
         />
       )}
@@ -67,7 +72,7 @@ export const ApiKeyUsageSummary: FC<{ reading?: ComponentUsage }> = ({
         className="mt-1"
         value={reading.used ?? 0}
         max={reading.limit}
-        variant={getMeterVariant(reading.ratio)}
+        variant={getMeterVariant(reading.ratio, reading.inherited)}
         label={getReadingLabel(reading)}
       />
     </div>
