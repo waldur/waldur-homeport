@@ -95,7 +95,9 @@ const OfferingListItem: FunctionComponent<{
                 </ImagePlaceholder>
               </div>
             )}
-            <div>
+            {/* A flex child keeps its content width unless min-width is 0,
+                which would stop `ellipsis` from truncating long text. */}
+            <div className="min-w-0">
               <h5 className="title ellipsis mb-1">{truncate(item.name, 40)}</h5>
               <p className="description ellipsis text-xs mb-0">
                 <TextWithoutFormatting html={truncate(item.description, 120)} />
