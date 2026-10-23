@@ -110,7 +110,9 @@
 // at every breakpoint, and tables only ever use the base classes
 // (.table.gy-4.gx-5). A Bootstrap grid .row keeps its own responsive gutters.
 // No DataTables fixes either: DataTables is not a dependency.
-@each $name in ('0', '1', '2', '3', '4', '5', '6', '10') {
+// The keys are unquoted: $gutters is keyed by numbers (0, 8px), and a quoted
+// '0' finds nothing, so map.get() returns null and the rule compiles away.
+@each $name in (0, 1, 2, 3, 4, 5, 6, 10) {
   .table.g-#{$name} {
     th,
     td {
@@ -119,7 +121,7 @@
   }
 }
 
-@each $name in ('0', '2', '3', '4', '5', '8px') {
+@each $name in (0, 2, 3, 4, 5, 8px) {
   .table.gy-#{$name} {
     th,
     td {
@@ -129,7 +131,7 @@
   }
 }
 
-@each $name in ('4', '5', '8px') {
+@each $name in (4, 5, 8px) {
   .table.gx-#{$name} {
     th,
     td {
@@ -143,11 +145,11 @@
   th,
   td {
     &:first-child {
-      padding-left: map.get($gutters, '0');
+      padding-left: map.get($gutters, 0);
     }
 
     &:last-child {
-      padding-right: map.get($gutters, '0');
+      padding-right: map.get($gutters, 0);
     }
   }
 }
