@@ -5,12 +5,10 @@ import {
   PlayIcon,
   SlidersIcon,
   TrashIcon,
-  UserMinusIcon,
 } from '@phosphor-icons/react';
 import { FC } from 'react';
 import {
   marketplaceResourceApiKeysDestroy,
-  marketplaceResourceApiKeysPartialUpdate,
   marketplaceResourceApiKeysPause,
   marketplaceResourceApiKeysResume,
   marketplaceResourceApiKeysRetry,
@@ -211,29 +209,6 @@ export const ApiKeyActionsDropdown: FC<{
     },
   });
 
-  // Without key management the settings dialog is gone, yet reveal still
-  // honours an assignee set while it was on; lifting it is the one setting that
-  // stays open, so the key can be shared with the project again.
-  const { mutate: unassign, isPending: unassigning } = useManagedMutation({
-    mutationFn: () =>
-      marketplaceResourceApiKeysPartialUpdate({
-        path: { uuid: row.uuid },
-        body: { user: null },
-      }),
-    confirmation: {
-      title: translate('Unassign API key'),
-      body: translate(
-        'Unassign API key {name} from {user}? Anyone with access to the resource can then reveal it.',
-        { name: keyName, user: <strong>{row.user_full_name}</strong> },
-        formatJsxTemplate,
-      ),
-      options: confirmOptions(),
-    },
-    successMessage: translate('API key unassigned'),
-    errorMessage: translate('Unable to unassign the API key.'),
-    onSuccess: () => refetch(),
-  });
-
   const inProgress =
     getStateVariant(row.state).active ||
     rotating ||
@@ -387,14 +362,6 @@ export const ApiKeyActionsDropdown: FC<{
           tooltip={editBlocked}
         />
       ) : null}
-      {canManage && !keyManagement && row.user_uuid && (
-        <ActionItem
-          title={translate('Unassign')}
-          action={() => unassign(undefined)}
-          iconNode={<UserMinusIcon weight="bold" />}
-          disabled={unassigning}
-        />
-      )}
       {canManage && keyManagement && (
         // Set apart from the reversible actions above it.
         <Menu.Separator />

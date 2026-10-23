@@ -625,7 +625,8 @@ describe('ResourceApiKeysCard', () => {
     });
 
     // Reveal still honours an assignee set while management was on, so the
-    // portal shows whose key it is and lets a manager share it again.
+    // portal shows whose key it is. Nobody can unassign it: an assignee is
+    // fixed when the key is requested.
     it('shows the assignee of a key assigned while management was on', async () => {
       renderUnmanaged({
         state: 'OK',
@@ -640,7 +641,7 @@ describe('ResourceApiKeysCard', () => {
       expect(screen.getByText('Alice')).toBeInTheDocument();
       await openRowActions(0);
       expect(isEnabled('Reveal')).toBe(false);
-      expect(isEnabled('Unassign')).toBe(true);
+      expect(offered('Unassign')).toBeNull();
     });
 
     it('lets the assignee reveal their key', async () => {
@@ -648,14 +649,6 @@ describe('ResourceApiKeysCard', () => {
       await screen.findByText('KEY1');
       await openRowActions(0);
       expect(isEnabled('Reveal')).toBe(true);
-    });
-
-    it('offers no unassign without manage permission', async () => {
-      vi.mocked(hasPermission).mockReturnValue(false);
-      renderUnmanaged({ state: 'OK', user_uuid: USER.uuid });
-      await screen.findByText('KEY1');
-      await openRowActions(0);
-      expect(offered('Unassign')).toBeNull();
     });
 
     it('still lets the assignee rotate their key', async () => {
@@ -692,13 +685,6 @@ describe('ResourceApiKeysCard', () => {
       await screen.findByText('KEY1');
       await openRowActions(0);
       expect(isEnabled('Retry')).toBe(true);
-    });
-
-    it('offers no unassign for a key shared by the project', async () => {
-      renderUnmanaged({ state: 'OK' });
-      await screen.findByText('KEY1');
-      await openRowActions(0);
-      expect(offered('Unassign')).toBeNull();
     });
 
     it('offers no request, pause, settings or delete', async () => {

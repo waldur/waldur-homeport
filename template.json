@@ -1053,12 +1053,6 @@
       "feature_area": "api-keys"
     }
   },
-  "API key unassigned": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "api-keys"
-    }
-  },
   "API keys": {
     "context": {
       "primary_ui_type": "title",
@@ -65632,12 +65626,6 @@
       "feature_area": "support"
     }
   },
-  "Unable to unassign the API key.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "api-keys"
-    }
-  },
   "Unable to undo the merge.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -66618,30 +66606,6 @@
   "Unarchive": {
     "context": {
       "feature_area": "ai-assistant"
-    }
-  },
-  "Unassign": {
-    "context": {
-      "feature_area": "api-keys"
-    }
-  },
-  "Unassign API key": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "api-keys"
-    }
-  },
-  "Unassign API key {name} from {user}? Anyone with access to the resource can then reveal it.": {
-    "context": {
-      "variables": {
-        "name": {
-          "type": "string"
-        },
-        "user": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "api-keys"
     }
   },
   "Unassigned": {
