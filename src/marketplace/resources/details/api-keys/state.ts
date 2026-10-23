@@ -4,7 +4,10 @@ import { BadgeVariant } from 'waldur-ui';
 
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { getSpendingLimitLabel } from '@/marketplace/common/spendingLimits';
+import {
+  getSpendingLimitLabel,
+  isAllTimeLimitReached,
+} from '@/marketplace/common/spendingLimits';
 import {
   getRestrictionHeldBy,
   getRestrictionResumes,
@@ -108,6 +111,10 @@ export const getErredTooltip = (row: ApiKeyRow) => {
   return `${ended} ${translate('The key is still active at the provider until the failed command succeeds.')}`;
 };
 
+// When a reached limit resets; an all-time limit, which never does, last.
+const getResetTime = (resetsAt: string | null) =>
+  resetsAt ? new Date(resetsAt).getTime() : Infinity;
+
 // The backend refuses the assignee a rotation of an active key that reached
 // any of its own limits, whatever the period. The period named is the one
 // that holds the key longest: the reached limit that resets last.
@@ -119,7 +126,7 @@ export const getAtLimitReason = (row: ApiKeyRow): string | undefined => {
     return undefined;
   }
   const longest = reached.reduce((last, status) =>
-    new Date(status.resets_at).getTime() > new Date(last.resets_at).getTime()
+    getResetTime(status.resets_at) > getResetTime(last.resets_at)
       ? status
       : last,
   );
@@ -139,12 +146,16 @@ export const getAtLimitReason = (row: ApiKeyRow): string | undefined => {
     year: translate(
       'This key has reached its yearly limit. A manager can rotate it.',
     ),
+    total: translate(
+      'This key has reached its all-time limit. A manager can rotate it.',
+    ),
   }[longest.period];
 };
 
 // A key Waldur paused on reaching a limit comes back on its own, unlike one a
 // person paused: when every reached limit resets (limit_resumes_at), or when a
-// limit is raised.
+// limit is raised. A reached all-time limit never resets, so the backend sets
+// no time while it holds the key: only raising or clearing it resumes the key.
 const getPausedByLimitTooltip = (
   row: ApiKeyRow,
   components: KeyComponent[],
@@ -167,19 +178,24 @@ const getPausedByLimitTooltip = (
       })
     : translate('Paused on reaching a limit.');
   const resumesAt = row.limit_resumes_at;
-  const resumes = !resumesAt
-    ? translate(
-        'It resumes on its own once under its limits again, or when a limit is raised.',
-      )
-    : new Date(resumesAt).getTime() <= Date.now()
-      ? translate('It resumes shortly.')
-      : translate(
-          'It resumes {relative}, on {date}, or when a limit is raised.',
-          {
-            relative: formatRelative(resumesAt),
-            date: formatMediumDateTime(resumesAt),
-          },
-        );
+  const resumes =
+    !resumesAt && isAllTimeLimitReached(reached)
+      ? translate(
+          'It stays paused until the all-time limit is raised or cleared.',
+        )
+      : !resumesAt
+        ? translate(
+            'It resumes on its own once under its limits again, or when a limit is raised.',
+          )
+        : new Date(resumesAt).getTime() <= Date.now()
+          ? translate('It resumes shortly.')
+          : translate(
+              'It resumes {relative}, on {date}, or when a limit is raised.',
+              {
+                relative: formatRelative(resumesAt),
+                date: formatMediumDateTime(resumesAt),
+              },
+            );
   return `${which} ${resumes}`;
 };
 
@@ -231,13 +247,21 @@ export const getKeyStateVariant = (
     ? { variant: 'warning', active: false }
     : getStateVariant(row.state);
 
+// With the resource, a blocked key's tooltip says what the tab's banner does:
+// which limit holds the resource and what lifts it. A reached all-time limit
+// is lifted by raising or clearing it, never by a new period.
 export const getStateTooltip = (
   row: ApiKeyRow,
   pause?: ResourcePause | null,
   components: KeyComponent[] = [],
+  resource?: RestrictedResource,
 ) =>
   pause && isBlockedByResource(row, pause)
-    ? `${translate('The resource is paused, so this key is not served.')} ${getResourcePauseMessage(pause)}`
+    ? `${translate('The resource is paused, so this key is not served.')} ${
+        resource
+          ? getResourcePauseDetails(pause, resource)
+          : getResourcePauseMessage(pause)
+      }`
     : row.state === 'Erred'
       ? getErredTooltip(row)
       : row.state === 'Paused' && row.paused_by_limit

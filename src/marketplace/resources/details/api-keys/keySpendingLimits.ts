@@ -4,7 +4,8 @@
  * A key's limits have the shape of its resource's spending limits
  * (`{component_type: {period: amount}}`): `month` on every component the
  * resource's plan charges for, the other periods where the component offers
- * them to resources, and each capped by the resource's own limits for the
+ * them to resources (only `total` among them unless the provider reports each
+ * key's usage per day), and each capped by the resource's own limits for the
  * period and every longer one. They mirror
  * `marketplace/api_key_spending_limits.py` in waldur-mastermind; the backend
  * has the final word.
@@ -36,23 +37,30 @@ export type KeyLimitComponent = Omit<KeyComponent, 'measured_unit'> & {
 
 type Limits = Resource['spending_limits'] | null | undefined;
 
+// The periods a key's usage answers without per-day reports: the month's
+// figure, and the running total the backend keeps across months.
+const WITHOUT_DAILY_USAGE: SpendingLimitPeriod[] = ['month', 'total'];
+
 /**
- * The periods a key may limit on a component, shortest first: `month`, and,
- * where the provider reports each key's usage per day, the component's own
- * periods if it is billed by usage. Without per-day usage, day and week limits
- * would never be reached, and quarter and year would count the current month
- * alone.
+ * The periods a key may limit on a component, shortest first: `month`, and the
+ * component's own periods if it is billed by usage — all of them where the
+ * provider reports each key's usage per day, otherwise only `total`. Without
+ * per-day usage, day and week limits would never be reached, and quarter and
+ * year would count the current month alone.
  */
 const getComponentKeyPeriods = (
   component: KeyComponent,
   dailyUsage = true,
 ): SpendingLimitPeriod[] => {
   const own =
-    dailyUsage && component.billing_type === 'usage'
+    component.billing_type === 'usage'
       ? Object.keys(component.spending_limit_periods ?? {})
       : [];
   return SPENDING_LIMIT_PERIODS.filter(
-    (period) => period === 'month' || own.includes(period),
+    (period) =>
+      period === 'month' ||
+      (own.includes(period) &&
+        (dailyUsage || WITHOUT_DAILY_USAGE.includes(period))),
   );
 };
 
@@ -63,7 +71,8 @@ const getComponentKeyPeriods = (
  *
  * - none on any component when the offering turns key limits off
  *   (`plugin_options.api_key_limits`, on unless set to false);
- * - only `month` unless the offering declares per-key daily usage
+ * - only `month`, and `total` where the component offers it, unless the
+ *   offering declares per-key daily usage
  *   (`plugin_options.api_key_daily_usage`, off unless set).
  *
  * The plan's price does not matter: a LiteLLM cost cap is priced at zero, as

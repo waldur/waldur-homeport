@@ -511,6 +511,45 @@ describe('getResourceKeyComponents', () => {
     });
   });
 
+  // A total reads the key's running total, which needs no per-day reports.
+  it('offers an all-time limit wherever the component offers it', () => {
+    const allTime = {
+      ...offering,
+      components: [
+        TOKENS,
+        {
+          ...TOKEN_COST,
+          spending_limit_periods: { day: {}, year: {}, total: {} },
+        },
+      ],
+    };
+    const periodsOf = (plugin_options: Record<string, unknown>) =>
+      Object.keys(
+        getKeyLimitComponents(
+          getResourceKeyComponents({ ...allTime, plugin_options }, undefined),
+          {},
+        ).find((c) => c.type === 'token_cost')!.spending_limit_periods,
+      );
+    expect(periodsOf({})).toEqual(['month', 'total']);
+    expect(periodsOf({ api_key_daily_usage: true })).toEqual([
+      'day',
+      'month',
+      'year',
+      'total',
+    ]);
+  });
+
+  it('caps a key by the resource total, the longest period', () => {
+    const [component] = getKeyLimitComponents(
+      [{ ...TOKEN_COST, spending_limit_periods: { total: {} } }],
+      { token_cost: { month: 80, total: 50 } },
+    );
+    expect(component.spending_limit_periods).toEqual({
+      month: { maximum: 50 },
+      total: { maximum: 50 },
+    });
+  });
+
   it('offers no key limit on an offering that turns them off', () => {
     expect(
       keyPeriods({ api_key_limits: false, api_key_daily_usage: true }),

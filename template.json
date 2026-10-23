@@ -1460,6 +1460,11 @@
       "feature_area": "roles"
     }
   },
+  "Access stays paused until the all-time limit is raised or cleared.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Access subnet has been created.": {
     "context": {
       "feature_area": "details"
@@ -3755,6 +3760,16 @@
         }
       },
       "feature_area": "hygiene"
+    }
+  },
+  "All-time": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "All-time limit": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Allocate all free capacity to continue": {
@@ -13200,6 +13215,11 @@
   "Country of residence field": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Counts all usage since the resource started. Never resets: once reached, it holds until the customer raises or clears it.": {
+    "context": {
+      "feature_area": "update"
     }
   },
   "Coupon": {
@@ -27320,6 +27340,11 @@
       "feature_area": "api-keys"
     }
   },
+  "It stays paused until the all-time limit is raised or cleared.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "It was accepted for {email}. If it does not arrive, the problem is past the relay — check its own logs and the recipient spam folder.": {
     "context": {
       "variables": {
@@ -32425,6 +32450,16 @@
     }
   },
   "Must not be negative.": {},
+  "Must not exceed the all-time amount ({amount}).": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "Must not exceed the amount for the {longer} ({amount}).": {
     "context": {
       "variables": {
@@ -32862,6 +32897,7 @@
       "feature_area": "usage-monitoring"
     }
   },
+  "Never resets": {},
   "New": {
     "context": {
       "primary_ui_type": "title",
@@ -37197,7 +37233,7 @@
       "feature_area": "ticketDraft"
     }
   },
-  "Only then can keys be limited per day, week, quarter or year, where a component offers those periods; otherwise keys are limited per month only. Turn on only if the site agent reports each key’s usage per day, or those limits are never reached.": {
+  "Only then can keys be limited per day, week, quarter or year, where a component offers those periods; otherwise keys are limited per month, and all-time where a component offers it. Turn on only if the site agent reports each key’s usage per day, or those limits are never reached.": {
     "context": {
       "feature_area": "integration"
     }
@@ -46717,6 +46753,11 @@
       "feature_area": "support-users"
     }
   },
+  "Reported usage reached the configured limit.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Reported usage reached the configured limit. It will be restored automatically when usage drops below the limit.": {},
   "Reported usage reached the configured limit. It will be unpaused automatically when usage drops below the limit.": {},
   "Reported: {time}": {
@@ -47462,11 +47503,7 @@
       "feature_area": "cost-policies"
     }
   },
-  "Resets shortly": {
-    "context": {
-      "feature_area": "details"
-    }
-  },
+  "Resets shortly": {},
   "Resets {relative}, on {date}": {
     "context": {
       "variables": {
@@ -47476,8 +47513,7 @@
         "date": {
           "type": "date"
         }
-      },
-      "feature_area": "details"
+      }
     }
   },
   "Resetting the circuit breaker will force it back to the CLOSED state, allowing messages to be published immediately.": {
@@ -58717,6 +58753,11 @@
       }
     }
   },
+  "The restriction stays until the all-time limit is raised or cleared.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "The results of the round have been published.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -59855,6 +59896,11 @@
   "This justification has already been reviewed": {
     "context": {
       "feature_area": "organizations"
+    }
+  },
+  "This key has reached its all-time limit. A manager can rotate it.": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "This key has reached its daily limit. A manager can rotate it.": {
@@ -71150,8 +71196,26 @@
       "feature_area": "workflow-steps"
     }
   },
-  "When a limit is reached, access pauses until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.": {},
-  "When a limit is reached, the resource is downscaled until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.": {},
+  "When a limit is reached, access pauses until that limit resets. An all-time limit never resets: once reached, it holds until it is raised or cleared. Limits are checked each time the provider reports usage, so spending can briefly go over one.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "When a limit is reached, access pauses until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "When a limit is reached, the resource is downscaled until that limit resets. An all-time limit never resets: once reached, it holds until it is raised or cleared. Limits are checked each time the provider reports usage, so spending can briefly go over one.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "When a limit is reached, the resource is downscaled until that limit resets. Limits are checked each time the provider reports usage, so spending can briefly go over one.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "When a round closes, move unsubmitted drafts to the next round instead of canceling them. Applicants keep their content and are notified by email. Drafts are canceled as before when the call has no later round.": {
     "context": {
       "feature_area": "configuration"
@@ -74004,6 +74068,11 @@
   "networks": {
     "context": {
       "feature_area": "openstack-network"
+    }
+  },
+  "never resets": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "no": {

@@ -7,7 +7,10 @@ import { Resource } from 'waldur-js-client';
 
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { getSpendingLimitLabel } from '@/marketplace/common/spendingLimits';
+import {
+  getSpendingLimitLabel,
+  isAllTimeLimitReached,
+} from '@/marketplace/common/spendingLimits';
 
 export type RestrictedResource = Pick<
   Resource,
@@ -45,6 +48,16 @@ export const getRestrictionResumes = (resource: RestrictedResource) => {
   // A downscaled resource keeps access, so its notice speaks of the restriction.
   const downscaled = resource.usage_limit_restriction === 'downscaled';
   const resumesAt = resource.usage_limit_resumes_at;
+  // Only raising or clearing a reached all-time limit lifts the restriction.
+  if (!resumesAt && isAllTimeLimitReached(resource.spending_limit_status)) {
+    return downscaled
+      ? translate(
+          'The restriction stays until the all-time limit is raised or cleared.',
+        )
+      : translate(
+          'Access stays paused until the all-time limit is raised or cleared.',
+        );
+  }
   // The reset task lifts the restriction within a few minutes of this time.
   if (!resumesAt) {
     return downscaled

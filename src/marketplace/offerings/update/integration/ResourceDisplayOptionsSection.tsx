@@ -95,7 +95,7 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
                 name="plugin_options.api_key_daily_usage"
                 label={translate('Site agent reports API key usage per day')}
                 description={translate(
-                  'Only then can keys be limited per day, week, quarter or year, where a component offers those periods; otherwise keys are limited per month only. Turn on only if the site agent reports each key’s usage per day, or those limits are never reached.',
+                  'Only then can keys be limited per day, week, quarter or year, where a component offers those periods; otherwise keys are limited per month, and all-time where a component offers it. Turn on only if the site agent reports each key’s usage per day, or those limits are never reached.',
                 )}
               />
             </EditFieldProvider>

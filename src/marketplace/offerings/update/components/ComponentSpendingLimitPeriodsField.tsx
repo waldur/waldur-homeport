@@ -77,7 +77,11 @@ const PeriodRow: FC<{ period: SpendingLimitPeriod; enabled: boolean }> = ({
           description={
             DAILY_REPORTED_PERIODS.includes(period)
               ? translate('Needs the integration to report usage per day.')
-              : undefined
+              : period === 'total'
+                ? translate(
+                    'Counts all usage since the resource started. Never resets: once reached, it holds until the customer raises or clears it.',
+                  )
+                : undefined
           }
           checked={Boolean(input.checked)}
           onCheckedChange={(checked) => input.onChange(checked)}

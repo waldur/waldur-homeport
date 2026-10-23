@@ -133,10 +133,40 @@ describe('a key paused at its limit', () => {
       ),
     ).toMatch(/resumes shortly/);
   });
+
+  // The backend sets no resume time while a reached total holds the key.
+  it('stays paused until a reached all-time limit is raised or cleared', () => {
+    const tooltip = getStateTooltip(
+      row({
+        state: 'Paused',
+        paused_by_limit: true,
+        limit_resumes_at: null,
+        spending_limit_status: [
+          {
+            component_type: 'token_cost',
+            period: 'total',
+            limit: 500,
+            used: 500,
+            resets_at: null,
+            reached: true,
+          },
+        ],
+      }),
+      null,
+      [{ type: 'token_cost', name: 'Token cost' }],
+    );
+    expect(tooltip).toBe(
+      'Paused on reaching a limit: All-time limit of Token cost. It stays paused until the all-time limit is raised or cleared.',
+    );
+  });
 });
 
 describe('getAtLimitReason', () => {
-  const status = (period: string, reached: boolean, resets_at: string) => ({
+  const status = (
+    period: string,
+    reached: boolean,
+    resets_at: string | null,
+  ) => ({
     component_type: 'tokens',
     period,
     limit: 10,
@@ -169,6 +199,7 @@ describe('getAtLimitReason', () => {
     ['month', 'monthly'],
     ['quarter', 'quarterly'],
     ['year', 'yearly'],
+    ['total', 'all-time'],
   ])('names a reached %s limit', (period, adjective) => {
     expect(
       getAtLimitReason(
@@ -193,6 +224,20 @@ describe('getAtLimitReason', () => {
         }),
       ),
     ).toBe('This key has reached its weekly limit. A manager can rotate it.');
+  });
+
+  // An all-time limit never resets, so it holds the key longer than any other.
+  it('names a reached all-time limit, which never resets, over the others', () => {
+    expect(
+      getAtLimitReason(
+        row({
+          spending_limit_status: [
+            status('total', true, null),
+            status('year', true, '2027-01-01T00:00:00Z'),
+          ],
+        }),
+      ),
+    ).toBe('This key has reached its all-time limit. A manager can rotate it.');
   });
 });
 
@@ -247,6 +292,22 @@ describe('getResourcePauseDetails', () => {
     );
   });
 
+  it('says a reached all-time limit holds the resource until raised or cleared', () => {
+    expect(
+      getResourcePauseDetails(
+        'limit',
+        resource({
+          spending_limit_status: [
+            { component_type: 'tokens', period: 'month', reached: true },
+            { component_type: 'tokens', period: 'total', reached: true },
+          ],
+        }),
+      ),
+    ).toBe(
+      'Held by: Tokens — Monthly limit; Tokens — All-time limit. Access stays paused until the all-time limit is raised or cleared.',
+    );
+  });
+
   it('falls back to the general message without a reached limit', () => {
     expect(
       getResourcePauseDetails(
@@ -278,6 +339,36 @@ describe('a key on a paused resource', () => {
 
   it('says it resumes with the resource when paused for another reason', () => {
     expect(getStateTooltip(ok, 'other')).toMatch(/resource is unpaused/);
+  });
+
+  // A new period never lifts a total, so the tooltip must not promise one.
+  it('says a reached all-time limit holds the resource until raised or cleared', () => {
+    const tooltip = getStateTooltip(ok, 'limit', [], {
+      usage_limit_restriction: 'paused',
+      usage_limit_resumes_at: null,
+      offering_components: [{ type: 'tokens', name: 'Tokens' }],
+      spending_limit_status: [
+        { component_type: 'tokens', period: 'total', reached: true },
+      ],
+    } as any);
+    expect(tooltip).toBe(
+      'The resource is paused, so this key is not served. Held by: Tokens — All-time limit. Access stays paused until the all-time limit is raised or cleared.',
+    );
+    expect(tooltip).not.toMatch(/new period/);
+  });
+
+  it('says when a reached calendar limit of the resource resets', () => {
+    const resumesAt = new Date(Date.now() + 3 * 86400_000).toISOString();
+    expect(
+      getStateTooltip(ok, 'limit', [], {
+        usage_limit_restriction: 'paused',
+        usage_limit_resumes_at: resumesAt,
+        offering_components: [{ type: 'tokens', name: 'Tokens' }],
+        spending_limit_status: [
+          { component_type: 'tokens', period: 'month', reached: true },
+        ],
+      } as any),
+    ).toMatch(/Held by: Tokens — Monthly limit\. Access resumes .+, on .+\.$/);
   });
 
   it('keeps its own reason when it is not serving anyway', () => {
