@@ -51,6 +51,11 @@ export const UserAffiliationsRowActions: FC<UserAffiliationsRowActionsProps> = (
         'Revoking {role} role for {scope}. This will remove associated permissions immediately.',
         { role: row.role_name, scope: scopeLabel },
       ),
+      options: {
+        positiveButton: translate('Confirm'),
+        negativeButton: translate('Cancel'),
+        positiveButtonVariant: 'danger',
+      },
     },
     successMessage: translate('Access has been revoked.'),
     errorMessage: translate('Unable to revoke access.'),
@@ -69,6 +74,11 @@ export const UserAffiliationsRowActions: FC<UserAffiliationsRowActionsProps> = (
         'Restoring {role} role for {scope}. This will reinstate associated permissions immediately.',
         { role: row.role_name, scope: scopeLabel },
       ),
+      options: {
+        positiveButton: translate('Confirm'),
+        negativeButton: translate('Cancel'),
+        positiveButtonVariant: 'primary',
+      },
     },
     successMessage: translate('Access has been restored.'),
     errorMessage: translate('Unable to restore access.'),

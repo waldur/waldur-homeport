@@ -3,8 +3,11 @@ import { useMemo } from 'react';
 import {
   callManagingOrganisationsListUsersList,
   customersListUsersList,
+  marketplaceProviderOfferingsListUsersList,
   marketplaceServiceProvidersListUsersList,
   projectsListUsersList,
+  proposalProposalsListUsersList,
+  proposalProtectedCallsListUsersList,
   UserRoleDetails,
 } from 'waldur-js-client';
 
@@ -14,20 +17,28 @@ import { ExistingRoleHit, mapUserRoleDetails } from './existingRoles';
 import { Role } from './types';
 
 type ScopeWithListUsers =
-  'project' | 'customer' | 'call_organizer' | 'service_provider';
+  | 'project'
+  | 'customer'
+  | 'offering'
+  | 'call'
+  | 'proposal'
+  | 'call_organizer'
+  | 'service_provider';
 
 const SCOPES_WITH_LIST_USERS: ScopeWithListUsers[] = [
   'project',
   'customer',
+  'offering',
+  'call',
+  'proposal',
   'call_organizer',
   'service_provider',
 ];
 
 /**
- * Every scope an add-user dialog can target exposes the same list_users action,
- * mirroring the four-way branch in AddUserDialog's saveUser. The calls are
- * spelled out one by one rather than kept in a lookup table because the
- * generated signatures differ per endpoint and only line up behind a cast.
+ * Every grantable scope exposes list_users with the same user filter. The
+ * calls are spelled out one by one rather than kept in a lookup table because
+ * the generated signatures differ per endpoint and only line up behind a cast.
  */
 const listScopeUsers = async (
   contentType: Role['content_type'],
@@ -43,6 +54,29 @@ const listScopeUsers = async (
     case 'customer':
       return (
         (await customersListUsersList({ path: { uuid }, query })).data ?? []
+      );
+    case 'offering':
+      return (
+        (
+          await marketplaceProviderOfferingsListUsersList({
+            path: { uuid },
+            query,
+          })
+        ).data ?? []
+      );
+    case 'call':
+      return (
+        (
+          await proposalProtectedCallsListUsersList({
+            path: { uuid },
+            query,
+          })
+        ).data ?? []
+      );
+    case 'proposal':
+      return (
+        (await proposalProposalsListUsersList({ path: { uuid }, query }))
+          .data ?? []
       );
     case 'call_organizer':
       return (

@@ -266,7 +266,7 @@ export const UserDashboard: FC = () => {
       )}
 
       <div className="mt-5">
-        <UserAffiliationsList user={user} />
+        <UserAffiliationsList user={user} allowRoleGrant={false} />
       </div>
     </>
   );

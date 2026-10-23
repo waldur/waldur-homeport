@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { useUser } from '@/workspace/hooks';
@@ -14,8 +15,15 @@ vi.mock('@/user/support/UserDetailsTable', () => ({
 }));
 vi.mock('@/user/keys/KeysList', () => ({ KeysList: () => null }));
 vi.mock('@/user/UserOfferingList', () => ({ UserOfferingList: () => null }));
+const affiliationsProps = vi.hoisted(() => ({
+  current: undefined as { hasActionBar?: boolean } | undefined,
+}));
+
 vi.mock('@/user/affiliations/UserAffiliationsList', () => ({
-  UserAffiliationsList: () => null,
+  UserAffiliationsList: (props) => {
+    affiliationsProps.current = props;
+    return <div>roles and permissions</div>;
+  },
 }));
 vi.mock('@/user/data-access/DataAccessDialogContent', () => ({
   DataAccessDialogContent: () => null,
@@ -61,5 +69,17 @@ describe('UserDetailsDialog audit log tab', () => {
     renderAs({ uuid: 'other-user', is_staff: false, is_support: false });
     expect(auditLogTab()).not.toBeInTheDocument();
     expect(screen.getByRole('tab', { name: 'Details' })).toBeInTheDocument();
+  });
+
+  it('keeps the roles list compact so its filter menu is not shown inside the dialog', async () => {
+    const user = userEvent.setup();
+    renderAs({ uuid: 'staff-user', is_staff: true, is_support: false });
+
+    await user.click(
+      screen.getByRole('tab', { name: 'Roles and permissions' }),
+    );
+
+    expect(screen.getByText('roles and permissions')).toBeInTheDocument();
+    expect(affiliationsProps.current?.hasActionBar).toBe(false);
   });
 });
