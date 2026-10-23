@@ -137,7 +137,7 @@
     "waldur-boot-splash": "workspace:*",
     "waldur-design-tokens": "workspace:*",
     "waldur-i18n-runtime": "workspace:*",
-    "waldur-js-client": "8.1.4-rc.2.dev.20261023104814.538",
+    "waldur-js-client": "8.1.4-rc.2.dev.20261023132234.540",
     "waldur-notifications": "workspace:*",
     "waldur-runtime-config": "workspace:*",
     "waldur-shell": "workspace:*",

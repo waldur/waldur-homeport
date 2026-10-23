@@ -17,6 +17,7 @@ import { ConsoleAction } from './actions/ConsoleAction';
 import { ConsoleLogAction } from './actions/ConsoleLogAction';
 import { DestroyAction } from './actions/DestroyAction';
 import { EditAction } from './actions/EditAction';
+import { HardRebootAction } from './actions/HardRebootAction';
 import { RescueAction } from './actions/RescueAction';
 import { RestartAction } from './actions/RestartAction';
 import { StartAction } from './actions/StartAction';
@@ -32,6 +33,7 @@ export const OpenStackInstanceActions = (props) => (
       <StartAction {...props} />
       <StopAction {...props} />
       <RestartAction {...props} />
+      <HardRebootAction {...props} />
       <RescueAction {...props} />
       <UnrescueAction {...props} />
       <EditAction {...props} />
