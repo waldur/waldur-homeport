@@ -8,7 +8,10 @@ import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 
 import { ResourceDisplayLimits } from '../types';
 
-import { ResourceComponentItem } from './ResourceComponentItem';
+import {
+  getResourceComponentEntries,
+  ResourceComponentItem,
+} from './ResourceComponentItem';
 
 interface ResourceComponentsDialogProps {
   resolve: {
@@ -16,6 +19,7 @@ interface ResourceComponentsDialogProps {
       Resource,
       'name' | 'current_usages' | 'limits' | 'limit_usage'
     > &
+      Partial<Pick<Resource, 'spending_limit_status'>> &
       ResourceDisplayLimits;
     components: OfferingComponent[];
   };
@@ -36,14 +40,19 @@ export const ResourceComponentsDialog: React.FC<
       footer={<CloseDialogButton label={translate('Done')} />}
     >
       <Row>
-        {resolve.components.map((component) => (
-          <Col key={component.type} xs={12} sm={6} md={4} lg={3}>
-            <ResourceComponentItem
-              resource={resolve.resource as any}
-              component={component}
-            />
-          </Col>
-        ))}
+        {getResourceComponentEntries(resolve.resource, resolve.components).map(
+          (entry) => (
+            <Col key={entry.key} xs={12} sm={6} md={4} lg={3}>
+              <ResourceComponentItem
+                resource={resolve.resource as any}
+                component={entry.component}
+                spendingLimit={entry.spendingLimit}
+                thisMonth={entry.thisMonth}
+                noUsageThisMonth={entry.noUsageThisMonth}
+              />
+            </Col>
+          ),
+        )}
       </Row>
     </ModalDialog>
   );

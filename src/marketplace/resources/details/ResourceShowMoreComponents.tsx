@@ -20,6 +20,7 @@ export const ResourceShowMoreComponents = ({
     Resource,
     'name' | 'current_usages' | 'limits' | 'limit_usage'
   > &
+    Partial<Pick<Resource, 'spending_limit_status'>> &
     ResourceDisplayLimits;
   components: OfferingComponent[];
 }) => {

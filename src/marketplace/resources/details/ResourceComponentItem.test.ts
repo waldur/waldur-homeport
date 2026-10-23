@@ -1,10 +1,19 @@
+import { DateTime } from 'luxon';
 import { describe, expect, it } from 'vitest';
 import { OfferingComponent } from 'waldur-js-client';
 
 import { TENANT_TYPE } from '@/openstack/constants';
 import { VMWARE_VM } from '@/vmware/constants';
 
-import { getDisplayUnit, getQuotaCellProps } from './ResourceComponentItem';
+import {
+  getDisplayUnit,
+  getQuotaCellProps,
+  getResetsText,
+  getResetsValue,
+  getResourceComponentEntries,
+  getSpendingLimitCellProps,
+  isReportedBeforeThisMonth,
+} from './ResourceComponentItem';
 
 const makeComponent = (
   overrides: Partial<OfferingComponent> = {},
@@ -307,5 +316,234 @@ describe('getQuotaCellProps', () => {
       );
       expect(props.limit).toBe('10');
     });
+  });
+});
+
+const status = (component_type: string, period: string, used, limit) =>
+  ({
+    component_type,
+    period,
+    used,
+    limit,
+    reached: used >= limit,
+    resets_at: '2026-10-24T00:00:00Z',
+    last_reported_at: null,
+  }) as any;
+
+describe('getResourceComponentEntries', () => {
+  const tokens = makeComponent({ type: 'input_tokens', name: 'input_tokens' });
+  const cost = makeComponent({
+    type: 'token_cost',
+    name: 'token_cost',
+    billing_type: 'usage',
+    measured_unit: 'EUR',
+  });
+
+  it('names its own usage as this month beside limits without a month one', () => {
+    const entries = getResourceComponentEntries(
+      {
+        spending_limit_status: [
+          status('token_cost', 'day', 1.1, 3),
+          status('token_cost', 'week', 4.4, 10),
+        ],
+      },
+      [tokens, cost],
+    );
+    expect(entries.map((entry) => entry.key)).toEqual([
+      'input_tokens',
+      'token_cost',
+      'token_cost-day',
+      'token_cost-week',
+    ]);
+    expect(entries[0].thisMonth).toBeUndefined();
+    expect(entries[1].thisMonth).toBe(true);
+    expect(entries[2].spendingLimit.period).toBe('day');
+    expect(entries[2].component).toBe(cost);
+  });
+
+  // The month limit's entry shows the same month-to-date figure.
+  it('leaves its own usage out beside a month limit', () => {
+    const entries = getResourceComponentEntries(
+      {
+        spending_limit_status: [
+          status('token_cost', 'day', 1.1, 3),
+          status('token_cost', 'month', 8.8, 40),
+        ],
+      },
+      [tokens, cost],
+    );
+    expect(entries.map((entry) => entry.key)).toEqual([
+      'input_tokens',
+      'token_cost-day',
+      'token_cost-month',
+    ]);
+  });
+
+  // A resource option shown as the component's limit is not the month limit.
+  it('keeps its own entry beside a month limit when it has a limit of its own', () => {
+    const entries = getResourceComponentEntries(
+      {
+        limits: { token_cost: 100 },
+        spending_limit_status: [status('token_cost', 'month', 5, 40)],
+      },
+      [cost],
+    );
+    expect(entries.map((entry) => entry.key)).toEqual([
+      'token_cost',
+      'token_cost-month',
+    ]);
+    expect(entries[0].thisMonth).toBe(true);
+  });
+
+  it('keeps its own entry beside a month limit for a displayed limit', () => {
+    const entries = getResourceComponentEntries(
+      {
+        display_limits: { token_cost: 100 },
+        spending_limit_status: [status('token_cost', 'month', 5, 40)],
+      },
+      [cost],
+    );
+    expect(entries.map((entry) => entry.key)).toEqual([
+      'token_cost',
+      'token_cost-month',
+    ]);
+  });
+
+  // current_usages still holds last month's row until this month's report.
+  it('has no usage this month when the latest report predates it', () => {
+    const lastMonth = DateTime.utc()
+      .startOf('month')
+      .minus({ days: 3 })
+      .toISO();
+    const entries = getResourceComponentEntries(
+      {
+        spending_limit_status: [
+          {
+            ...status('token_cost', 'day', 0, 3),
+            last_reported_at: lastMonth,
+          },
+        ],
+      },
+      [cost],
+    );
+    expect(entries[0]).toMatchObject({
+      key: 'token_cost',
+      thisMonth: true,
+      noUsageThisMonth: true,
+    });
+  });
+
+  it("takes the usage as this month's once reported this month", () => {
+    const entries = getResourceComponentEntries(
+      {
+        spending_limit_status: [
+          {
+            ...status('token_cost', 'day', 0, 3),
+            last_reported_at: DateTime.utc().toISO(),
+          },
+        ],
+      },
+      [cost],
+    );
+    expect(entries[0].thisMonth).toBe(true);
+    expect(entries[0].noUsageThisMonth).toBeUndefined();
+  });
+
+  it('lists the components alone when nothing is limited', () => {
+    const entries = getResourceComponentEntries({}, [tokens, cost]);
+    expect(entries.map((e) => e.key)).toEqual(['input_tokens', 'token_cost']);
+    expect(entries.some((e) => e.thisMonth)).toBe(false);
+  });
+});
+
+describe('getSpendingLimitCellProps', () => {
+  it('names the period and reads the used and limit amounts', () => {
+    expect(
+      getSpendingLimitCellProps(
+        makeComponent({
+          type: 'token_cost',
+          name: 'token_cost',
+          billing_type: 'usage',
+          measured_unit: 'EUR',
+        }),
+        status('token_cost', 'day', 1.1234, 3),
+      ),
+    ).toEqual({
+      usage: '1.12',
+      limit: '3',
+      title: 'token_cost · Daily limit',
+      displayUnit: 'EUR',
+      units: 'EUR',
+    });
+  });
+});
+
+describe('getResetsText', () => {
+  it('says an all-time limit never resets', () => {
+    expect(
+      getResetsText({
+        ...status('token_cost', 'total', 1, 3),
+        resets_at: null,
+      }),
+    ).toBe('Never resets');
+  });
+
+  it('says a period whose reset time has passed resets shortly', () => {
+    expect(
+      getResetsText({
+        ...status('token_cost', 'day', 1, 3),
+        resets_at: '2000-01-01T00:00:00Z',
+      }),
+    ).toBe('Resets shortly');
+  });
+});
+
+describe('isReportedBeforeThisMonth', () => {
+  const now = DateTime.fromISO('2026-10-01T05:00:00Z', { zone: 'utc' });
+
+  it('is true for a report before the 1st, in UTC', () => {
+    expect(isReportedBeforeThisMonth('2026-09-30T23:59:59Z', now)).toBe(true);
+    // 1 October 01:00 in UTC+3 is still September in UTC.
+    expect(isReportedBeforeThisMonth('2026-10-01T01:00:00+03:00', now)).toBe(
+      true,
+    );
+  });
+
+  it('is false for a report since the 1st', () => {
+    expect(isReportedBeforeThisMonth('2026-10-01T00:00:00Z', now)).toBe(false);
+  });
+
+  // Nothing reported at all: there is no earlier month's figure to mistake.
+  it('is false when nothing is reported', () => {
+    expect(isReportedBeforeThisMonth(null, now)).toBe(false);
+  });
+});
+
+describe('getResetsValue', () => {
+  it('says an all-time limit never resets', () => {
+    expect(
+      getResetsValue({
+        ...status('token_cost', 'total', 1, 3),
+        resets_at: null,
+      }),
+    ).toBe('Never');
+  });
+
+  it('says a period whose reset time has passed resets shortly', () => {
+    expect(
+      getResetsValue({
+        ...status('token_cost', 'day', 1, 3),
+        resets_at: '2000-01-01T00:00:00Z',
+      }),
+    ).toBe('Shortly');
+  });
+
+  it('says when a period resets', () => {
+    expect(
+      getResetsValue({
+        ...status('token_cost', 'month', 1, 3),
+        resets_at: DateTime.utc().plus({ days: 3 }).toISO(),
+      }),
+    ).toMatch(/^in \d+ days, on .+/);
   });
 });

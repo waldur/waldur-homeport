@@ -14,6 +14,8 @@ interface QuotaSingleView {
   billingType?: string;
   limitFrequency?: string;
   displayUnit?: string;
+  // When a spending limit's period starts from zero.
+  resets?: string;
   // Two components share the width, so details stack as label/value rows
   // instead of spreading out in columns.
   stacked?: boolean;
@@ -26,6 +28,7 @@ export const QuotaSingleView = ({
   billingType,
   limitFrequency,
   displayUnit,
+  resets,
   stacked,
 }: QuotaSingleView) => {
   const percent = getUsagePercentOfLimitComponent(limit, usage);
@@ -38,6 +41,7 @@ export const QuotaSingleView = ({
       label: translate('Limit period'),
       value: limitFrequency,
     },
+    resets && { label: translate('Resets'), value: resets },
   ].filter(Boolean);
 
   return (

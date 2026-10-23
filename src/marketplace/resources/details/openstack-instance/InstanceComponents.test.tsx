@@ -5,11 +5,15 @@ import { InstanceComponents } from './InstanceComponents';
 
 const buildInstance = (volumes) => ({ cores: 2, ram: 4096, volumes }) as any;
 
-// Each quota cell renders its title and its value as adjacent spans.
+// Each quota cell renders its title (in a row with its help icon) and then
+// its value.
 const getStorageRows = () =>
   screen
     .getAllByText(/storage$/i)
-    .map((node) => [node.textContent, node.nextSibling?.textContent]);
+    .map((node) => [
+      node.textContent,
+      node.parentElement.nextSibling?.textContent,
+    ]);
 
 describe('InstanceComponents', () => {
   it('labels volumes without a type as plain storage', () => {
