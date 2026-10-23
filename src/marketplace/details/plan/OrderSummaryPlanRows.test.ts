@@ -47,6 +47,39 @@ describe('getRowLabel', () => {
     ).toBe('Compute 2,000 hours × 12 months');
   });
 
+  // An offering that shows prepaid limits as a total leads with what the
+  // customer gets for the subscription, not the monthly figure.
+  it('leads with the total when the offering shows prepaid totals', () => {
+    expect(
+      getRowLabel(
+        component({
+          amount: 6,
+          displayAmount: 3,
+          durationInMonths: 2,
+          showTotalAmount: true,
+        }),
+      ),
+    ).toBe('Compute 6 hours (3 hours per month × 2 months)');
+  });
+
+  it('counts a single month in the singular', () => {
+    expect(
+      getRowLabel(
+        component({ amount: 3, displayAmount: 3, durationInMonths: 1 }),
+      ),
+    ).toBe('Compute 3 hours × 1 month');
+    expect(
+      getRowLabel(
+        component({
+          amount: 3,
+          displayAmount: 3,
+          durationInMonths: 1,
+          showTotalAmount: true,
+        }),
+      ),
+    ).toBe('Compute 3 hours (3 hours per month × 1 month)');
+  });
+
   it('states the plain amount when no duration applies', () => {
     expect(getRowLabel(component({ amount: 2000, displayAmount: 2000 }))).toBe(
       'Compute 2,000 hours',

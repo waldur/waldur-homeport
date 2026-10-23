@@ -6,6 +6,7 @@ import { TENANT_TYPE } from '@/openstack/constants';
 import { VMWARE_VM } from '@/vmware/constants';
 
 import {
+  formatQuotaUnits,
   getDisplayUnit,
   getQuotaCellProps,
   getResetsText,
@@ -13,6 +14,7 @@ import {
   getResourceComponentEntries,
   getSpendingLimitCellProps,
   isReportedBeforeThisMonth,
+  RESOURCE_QUOTA_FIELDS,
 } from './ResourceComponentItem';
 
 const makeComponent = (
@@ -114,6 +116,26 @@ describe('getQuotaCellProps for a VMware virtual machine', () => {
       resource,
     );
     expect(props.limit).toBe('45');
+    expect(props.displayUnit).toBe('GB');
+  });
+
+  // A list that requests only RESOURCE_QUOTA_FIELDS still knows the offering
+  // type, or it would promote these gigabytes to terabytes.
+  it('keeps the unit from the fields a list requests', () => {
+    const listed = Object.fromEntries(
+      Object.entries(resource).filter(([field]) =>
+        RESOURCE_QUOTA_FIELDS.includes(field),
+      ),
+    );
+    const props = getQuotaCellProps(
+      makeComponent({
+        type: 'ram',
+        name: 'RAM',
+        measured_unit: 'GB',
+        factor: 1024,
+      }),
+      listed as any,
+    );
     expect(props.displayUnit).toBe('GB');
   });
 });
@@ -316,6 +338,87 @@ describe('getQuotaCellProps', () => {
       );
       expect(props.limit).toBe('10');
     });
+  });
+});
+
+describe('getQuotaCellProps for prepaid components shown as a total', () => {
+  const prepaid = makeComponent({
+    type: 'cpu',
+    name: 'CPU',
+    measured_unit: 'Hours',
+    billing_type: 'one',
+    is_prepaid: true,
+  });
+  const resource = (overrides = {}) =>
+    makeResource({
+      limits: { cpu: 5 },
+      current_usages: { cpu: 2 },
+      limit_usage: { cpu: 7 },
+      created: '2026-08-15T10:00:00+00:00',
+      end_date: '2026-11-15',
+      prepaid_total_component_types: ['cpu'],
+      ...overrides,
+    });
+
+  // The agent gives SLURM the monthly limit times the months as one budget,
+  // and usage counts against it for the whole subscription.
+  it('shows the limit and usage for the whole subscription', () => {
+    const props = getQuotaCellProps(prepaid, resource());
+    expect(props.limit).toBe('15');
+    expect(props.usage).toBe('7');
+    expect(props.isTotal).toBe(true);
+  });
+
+  // The backend leaves a component out when the offering does not ask for
+  // totals, or when the resource's plan bills it as something other than a
+  // one-time prepaid component.
+  it('keeps the monthly view for a component the backend does not total', () => {
+    const props = getQuotaCellProps(
+      prepaid,
+      resource({ prepaid_total_component_types: [] }),
+    );
+    expect(props.limit).toBe('5');
+    expect(props.usage).toBe('2');
+    expect(props.isTotal).toBe(false);
+  });
+
+  it('keeps the monthly view without the total usage', () => {
+    const props = getQuotaCellProps(prepaid, resource({ limit_usage: {} }));
+    expect(props.limit).toBe('5');
+    expect(props.usage).toBe('2');
+    expect(props.isTotal).toBe(false);
+  });
+
+  it('keeps the monthly view when the resource dates are unknown', () => {
+    const props = getQuotaCellProps(prepaid, resource({ end_date: null }));
+    expect(props.limit).toBe('5');
+    expect(props.usage).toBe('2');
+  });
+
+  // Lists request only the fields they show; with RESOURCE_QUOTA_FIELDS a
+  // listed resource reads the same as on its own page.
+  it('shows the total from the fields a list requests', () => {
+    const listed = Object.fromEntries(
+      Object.entries(resource()).filter(([field]) =>
+        RESOURCE_QUOTA_FIELDS.includes(field),
+      ),
+    );
+    const props = getQuotaCellProps(prepaid, listed as any);
+    expect(props.limit).toBe('15');
+    expect(props.usage).toBe('7');
+    expect(props.isTotal).toBe(true);
+  });
+});
+
+describe('formatQuotaUnits', () => {
+  it('says when the figures cover the whole subscription', () => {
+    expect(formatQuotaUnits('hours', true)).toBe('hours in total');
+    expect(formatQuotaUnits('', true)).toBe('in total');
+  });
+
+  it('leaves a monthly unit as it is', () => {
+    expect(formatQuotaUnits('hours', false)).toBe('hours');
+    expect(formatQuotaUnits(undefined, false)).toBe('');
   });
 });
 

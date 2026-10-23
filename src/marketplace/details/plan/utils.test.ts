@@ -159,6 +159,80 @@ describe('combinePrices', () => {
     });
   });
 
+  describe('prepaid components shown as a total', () => {
+    const components = [{ type: 'cpu', billing_type: 'one', is_prepaid: true }];
+    const totalOffering = {
+      ...createOffering(components),
+      plugin_options: { display_prepaid_limits_as_total: true },
+    } as PublicOfferingDetails;
+    const plan = createPlan({}, { cpu: 1 }, 'month');
+
+    // 15 Aug – 20 Oct: the backend bills and the agent budgets three months,
+    // so the total, the quantity and the price all count three.
+    it('counts a partial month the way the backend bills it', () => {
+      const [cpu] = combinePrices(
+        plan,
+        { cpu: 3 },
+        {},
+        totalOffering,
+        '2026-10-20',
+        '2026-08-15',
+      ).components;
+      expect(cpu.showTotalAmount).toBe(true);
+      expect(cpu.durationInMonths).toBe(3);
+      expect(cpu.amount).toBe(9);
+      expect(cpu.subTotal).toBe(9);
+    });
+
+    it('stays monthly when the offering does not ask for totals', () => {
+      const [cpu] = combinePrices(
+        plan,
+        { cpu: 3 },
+        {},
+        createOffering(components),
+        '2026-10-20',
+        '2026-08-15',
+      ).components;
+      expect(cpu.showTotalAmount).toBe(false);
+      // The period is priced the same way whether or not it is shown as a
+      // total: a partial month rounds up, as the invoice does.
+      expect(cpu.durationInMonths).toBe(3);
+      expect(cpu.amount).toBe(9);
+    });
+
+    // The backend totals and bills per month only one-time prepaid
+    // components, so a prepaid `few` component is not stated as a total.
+    it('states no total for a prepaid component billed on plan switch', () => {
+      const [few] = combinePrices(
+        plan,
+        { cpu: 3 },
+        {},
+        {
+          ...createOffering([
+            { type: 'cpu', billing_type: 'few', is_prepaid: true },
+          ]),
+          plugin_options: { display_prepaid_limits_as_total: true },
+        } as PublicOfferingDetails,
+        '2026-10-20',
+        '2026-08-15',
+      ).components;
+      expect(few.showTotalAmount).toBe(false);
+    });
+
+    it('has no total without an end date', () => {
+      const [cpu] = combinePrices(
+        plan,
+        { cpu: 3 },
+        {},
+        totalOffering,
+        undefined,
+        '2026-08-15',
+      ).components;
+      expect(cpu.showTotalAmount).toBe(false);
+      expect(cpu.amount).toBe(3);
+    });
+  });
+
   describe('regression test for production bug', () => {
     it('should calculate correct total matching backend (679.20, not 804.20)', () => {
       // This test reproduces the production bug where frontend showed 804.20

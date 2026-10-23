@@ -14,6 +14,12 @@ export interface Component extends OfferingComponent {
   displayAmount?: number;
   durationInMonths?: number;
   /**
+   * A prepaid component of an offering that shows prepaid limits as one total
+   * (`display_prepaid_limits_as_total`): `amount` — the monthly figure times
+   * `durationInMonths` — is the quantity to state, not `displayAmount`.
+   */
+  showTotalAmount?: boolean;
+  /**
    * True when the component's quantity is chosen by the customer at order time
    * and no order supplies it yet (public offering pricing). `amount` is 0 by
    * fallback in that case and must not be presented as an included quantity.

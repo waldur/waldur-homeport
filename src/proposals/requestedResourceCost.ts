@@ -128,7 +128,9 @@ export const hasRequestedAmount = (row: RequestedResourceLike): boolean =>
 export const computeRequestedCost = (
   plan: any,
   limits: Record<string, number> | null | undefined,
-  offering: { type?: string; components?: unknown } | undefined,
+  offering:
+    | { type?: string; components?: unknown; plugin_options?: unknown }
+    | undefined,
   prepaidDurationMonths?: number | null,
   legacyEndDate?: string | null,
 ): RequestedResourceCost => {
@@ -148,7 +150,10 @@ export const computeRequestedCost = (
     {
       type: offering?.type,
       components: (offering?.components as any) || [],
-    } as Pick<PublicOfferingDetails, 'type' | 'components'>,
+      // An offering that shows prepaid limits as a total words a request the
+      // same way here as on its order form.
+      plugin_options: offering?.plugin_options as any,
+    } as Pick<PublicOfferingDetails, 'type' | 'components' | 'plugin_options'>,
     endDate,
   );
   if (!prices.components.length) {

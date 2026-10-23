@@ -116,6 +116,19 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
               )}
             />
           )}
+          {/* Only one-time prepaid components are multiplied by the months
+              ordered, so only they have a total to show. */}
+          {props.offering.components?.some(
+            (c) => c.is_prepaid && c.billing_type === 'one',
+          ) && (
+            <BooleanEditField
+              name="plugin_options.display_prepaid_limits_as_total"
+              label={translate('Show prepaid limits as a total')}
+              description={translate(
+                'Show each prepaid component as the total for the whole subscription, the monthly amount times the months ordered, instead of a monthly amount. Usage is then counted over the whole subscription too. Turn on when the backend enforces that total as one budget, as the SLURM site agent does. Ordering and billing do not change.',
+              )}
+            />
+          )}
           {props.offering.type === TENANT_TYPE && (
             <BooleanEditField
               name="plugin_options.show_ssh_key_loss_warning"

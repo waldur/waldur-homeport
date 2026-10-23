@@ -17,7 +17,11 @@ import { formatUsageValue } from '@/core/formatNumber';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { QuotaProgressBar } from '@/marketplace/resources/details/QuotaProgressBar';
-import { getQuotaCellProps } from '@/marketplace/resources/details/ResourceComponentItem';
+import {
+  formatQuotaUnits,
+  getQuotaCellProps,
+  RESOURCE_QUOTA_FIELDS,
+} from '@/marketplace/resources/details/ResourceComponentItem';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
 import { ResourceNameField } from '@/marketplace/resources/list/ResourceNameField';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
@@ -34,10 +38,7 @@ const mandatoryFields = resourcesListRequiredFields(false).concat([
   'offering_uuid',
   'offering_name',
   'offering_type',
-  'limits',
-  'limit_usage',
-  'display_limits',
-  'current_usages',
+  ...RESOURCE_QUOTA_FIELDS,
 ]);
 
 // Stable fallback so the memoized columns are not rebuilt on every render
@@ -57,13 +58,17 @@ interface ComponentUsage {
   limit: string | number | null;
   displayUnit: string;
   percent: number | null;
+  isTotal: boolean;
 }
 
 const getComponentUsage = (
   component: OfferingComponent,
   row: Resource,
 ): ComponentUsage => {
-  const { usage, limit, displayUnit } = getQuotaCellProps(component, row);
+  const { usage, limit, displayUnit, isTotal } = getQuotaCellProps(
+    component,
+    row,
+  );
   // getQuotaCellProps gives "0" for a limit the resource does not store, so
   // only a positive limit counts; otherwise 0 / 0 would show as "NaN%".
   const hasLimit = Number(limit) > 0;
@@ -76,14 +81,18 @@ const getComponentUsage = (
     limit: hasLimit ? limit : null,
     displayUnit,
     percent: Number.isFinite(percent) ? percent : null,
+    isTotal,
   };
 };
 
-const formatFigures = (item: ComponentUsage) =>
-  (item.limit !== null
-    ? `${formatUsageValue(item.usage)} / ${formatUsageValue(item.limit)}`
-    : formatUsageValue(item.usage)) +
-  (item.displayUnit ? ` ${item.displayUnit}` : '');
+const formatFigures = (item: ComponentUsage) => {
+  const units = formatQuotaUnits(item.displayUnit, item.isTotal);
+  return (
+    (item.limit !== null
+      ? `${formatUsageValue(item.usage)} / ${formatUsageValue(item.limit)}`
+      : formatUsageValue(item.usage)) + (units ? ` ${units}` : '')
+  );
+};
 
 // Same thresholds as QuotaProgressBar, for figures shown without a bar.
 const getFiguresClassName = (percent: number | null) =>

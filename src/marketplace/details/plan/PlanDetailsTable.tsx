@@ -2,10 +2,14 @@ import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { calculateMonthsDifference, formatDate } from '@/core/dateUtils';
+import { formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
+import {
+  formatMonthCount,
+  getPrepaidDurationMonths,
+} from '@/marketplace/common/prepaidTotalDisplay';
 import { PriceTooltip } from '@/price/PriceTooltip';
 import { useCustomer } from '@/workspace/hooks';
 
@@ -223,24 +227,25 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
             <p className="text-quaternary mt-2 mb-4 text-xs">
               {props.startDate && props.endDate
                 ? (() => {
-                    const totalMonths = calculateMonthsDifference(
+                    // Counted as the period is billed, like the quantities
+                    // above: a partial month rounds up, both in the period
+                    // and in what is left of it. Nothing is left once it ends.
+                    const totalMonths = getPrepaidDurationMonths(
                       props.startDate,
                       props.endDate,
                     );
-                    const remainingMonths = Math.max(
-                      0,
-                      calculateMonthsDifference(
-                        DateTime.now().toISODate(),
-                        props.endDate,
-                      ),
-                    );
+                    const today = DateTime.now().toISODate();
+                    const remainingMonths =
+                      DateTime.fromISO(props.endDate) > DateTime.fromISO(today)
+                        ? getPrepaidDurationMonths(today, props.endDate)
+                        : 0;
                     return translate(
-                      'Prepaid for {totalMonths} months ({startDate} — {endDate}). {remainingMonths} months remaining.',
+                      'Prepaid for {duration} ({startDate} — {endDate}). {remaining} remaining.',
                       {
-                        totalMonths,
+                        duration: formatMonthCount(totalMonths),
                         startDate: formatDate(props.startDate),
                         endDate: formatDate(props.endDate),
-                        remainingMonths,
+                        remaining: formatMonthCount(remainingMonths),
                       },
                     );
                   })()
