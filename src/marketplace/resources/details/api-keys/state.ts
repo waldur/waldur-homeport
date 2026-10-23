@@ -84,13 +84,17 @@ export const getErredTooltip = (row: ApiKeyRow) => {
     command: getCommandLabel(getFailedCommand(row)),
   });
   const tooltip = row.error_message
-    ? `${failed}: ${row.error_message}`
+    ? `${failed}: ${row.error_message.trim()}`
     : failed;
   // A pause on reaching a limit that failed leaves the key serving: Erred
   // alone reads as stopped.
-  return getFailedCommand(row) === 'pause' && row.paused_by_limit
-    ? `${tooltip} ${translate('The key is still active at the provider until the failed command succeeds.')}`
-    : tooltip;
+  if (getFailedCommand(row) !== 'pause' || !row.paused_by_limit) {
+    return tooltip;
+  }
+  // The agent's error may or may not end its sentence; the next one must
+  // start a new one either way.
+  const ended = /[.!?]$/.test(tooltip) ? tooltip : `${tooltip}.`;
+  return `${ended} ${translate('The key is still active at the provider until the failed command succeeds.')}`;
 };
 
 // The backend refuses the assignee a rotation of an active key that reached
