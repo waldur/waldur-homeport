@@ -83,7 +83,7 @@ describe('RevealApiKeyDialog', () => {
     revealed();
     renderDialog(
       true,
-      'This key has reached its limit this month. A manager can rotate it.',
+      'This key has reached its daily limit. A manager can rotate it.',
     );
     await screen.findByDisplayValue(SECRET);
     expect(screen.getByRole('button', { name: 'Rotate' })).toBeDisabled();

@@ -133,10 +133,19 @@ export const getOfferedPeriods = (
   return SPENDING_LIMIT_PERIODS.filter((period) => period in offered);
 };
 
+/**
+ * A period's bounds as the limit fields take them. `heldOnly` marks a period
+ * no longer offered on which an API key still holds a limit: it may be kept
+ * as it is or cleared, nothing else.
+ */
+export type SpendingLimitFieldBounds = SpendingLimitBounds & {
+  heldOnly?: boolean;
+};
+
 export const getPeriodBounds = (
   component: Pick<OfferingComponent, 'spending_limit_periods'>,
   period: SpendingLimitPeriod,
-): SpendingLimitBounds => component.spending_limit_periods?.[period] || {};
+): SpendingLimitFieldBounds => component.spending_limit_periods?.[period] || {};
 
 /**
  * The components a customer may set spending limits on. Pass the components
@@ -154,14 +163,28 @@ export const getCappedComponents = <
       getOfferedPeriods(component).length > 0,
   );
 
+/** Whether a field still holds the amount it was loaded with, in any number form. */
+export const isHeldAmount = (value: unknown, initial: unknown) =>
+  !isEmptyAmount(value) &&
+  !isEmptyAmount(initial) &&
+  Number(String(value).trim()) === Number(initial);
+
 /**
  * An amount's error: it must be a non-negative number with at most two
- * decimal places, and no more than `maximum` when one is given. An empty value
- * is valid — it sets no limit.
+ * decimal places, and no more than `maximum` when one is given. `positive`
+ * refuses zero too, as an API key's limits do. A `held` amount — an API key's
+ * limit sent back as the key holds it — skips the size, decimal places and
+ * maximum rules: one set before limits had periods, or before the resource's
+ * limit dropped below it, may break them, and the backend takes it back
+ * unchanged. An empty value is valid — it sets no limit.
  */
 export const validateSpendingLimitAmount = (
   value: unknown,
   maximum?: number | null,
+  {
+    positive = false,
+    held = false,
+  }: { positive?: boolean; held?: boolean } = {},
 ): string | undefined => {
   if (isEmptyAmount(value)) {
     return undefined;
@@ -173,16 +196,24 @@ export const validateSpendingLimitAmount = (
   if (amount < 0) {
     return translate('Must not be negative.');
   }
-  if (amount >= MAX_AMOUNT) {
+  if (positive && amount === 0) {
+    return translate('Must be above 0.');
+  }
+  if (!held && amount >= MAX_AMOUNT) {
     return translate('This amount is too large.');
   }
   const factor = 10 ** DECIMAL_PLACES;
-  if (Math.round(amount * factor) / factor !== amount) {
+  if (!held && Math.round(amount * factor) / factor !== amount) {
     return translate('Use at most {places} decimal places.', {
       places: DECIMAL_PLACES,
     });
   }
-  if (maximum !== null && maximum !== undefined && amount > Number(maximum)) {
+  if (
+    !held &&
+    maximum !== null &&
+    maximum !== undefined &&
+    amount > Number(maximum)
+  ) {
     return translate('Must not exceed {maximum}.', { maximum });
   }
   return undefined;

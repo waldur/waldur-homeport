@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   getAssigneeLock,
+  getAtLimitReason,
   getErredTooltip,
   getFailedCommand,
   getKeyStateVariant,
@@ -47,6 +48,31 @@ describe('getErredTooltip', () => {
       ),
     ).toBe('Pause failed: gateway down');
   });
+
+  // Erred alone reads as stopped, but the provider still serves the key.
+  // The agent's error rarely ends with a period; the note is a sentence of
+  // its own whether it does or not.
+  it.each([
+    ['gateway down', 'Pause failed: gateway down.'],
+    ['Gateway down.', 'Pause failed: Gateway down.'],
+    ['Is the gateway down?', 'Pause failed: Is the gateway down?'],
+    ['', 'Pause failed.'],
+  ])(
+    'says a key whose limit pause failed is still active (error %j)',
+    (error_message, failed) => {
+      expect(
+        getErredTooltip(
+          row({
+            pending_action: 'pause',
+            paused_by_limit: true,
+            error_message,
+          }),
+        ),
+      ).toBe(
+        `${failed} The key is still active at the provider until the failed command succeeds.`,
+      );
+    },
+  );
 });
 
 describe('a key paused at its limit', () => {
@@ -61,6 +87,112 @@ describe('a key paused at its limit', () => {
   it('explains when it comes back', () => {
     expect(getStateTooltip(limited)).toMatch(/resumes on its own/);
     expect(getStateTooltip(row({ state: 'Paused' }))).toBe('');
+  });
+
+  it('names the limit it reached and when it resumes', () => {
+    const tooltip = getStateTooltip(
+      row({
+        state: 'Paused',
+        paused_by_limit: true,
+        limit_resumes_at: '2999-01-02T00:00:00Z',
+        spending_limit_status: [
+          {
+            component_type: 'token_cost',
+            period: 'day',
+            limit: 5,
+            used: 5,
+            resets_at: '2999-01-02T00:00:00Z',
+            reached: true,
+          },
+          {
+            component_type: 'token_cost',
+            period: 'month',
+            limit: 50,
+            used: 5,
+            resets_at: '2999-02-01T00:00:00Z',
+            reached: false,
+          },
+        ],
+      }),
+      null,
+      [{ type: 'token_cost', name: 'Token cost' }],
+    );
+    expect(tooltip).toMatch(/Daily limit of Token cost\./);
+    expect(tooltip).not.toMatch(/Monthly/);
+    expect(tooltip).toMatch(/It resumes .*2999/);
+  });
+
+  it('resumes shortly once the reset has passed', () => {
+    expect(
+      getStateTooltip(
+        row({
+          state: 'Paused',
+          paused_by_limit: true,
+          limit_resumes_at: '2000-01-02T00:00:00Z',
+        }),
+      ),
+    ).toMatch(/resumes shortly/);
+  });
+});
+
+describe('getAtLimitReason', () => {
+  const status = (period: string, reached: boolean, resets_at: string) => ({
+    component_type: 'tokens',
+    period,
+    limit: 10,
+    used: reached ? 10 : 1,
+    resets_at,
+    reached,
+  });
+
+  it('is nothing while every limit is under', () => {
+    expect(
+      getAtLimitReason(
+        row({
+          spending_limit_status: [
+            status('day', false, '2026-10-23T00:00:00Z'),
+            status('month', false, '2026-11-01T00:00:00Z'),
+          ],
+        }),
+      ),
+    ).toBeUndefined();
+    expect(getAtLimitReason(row({ spending_limit_status: null }))).toBe(
+      undefined,
+    );
+  });
+
+  // The backend refuses the assignee's rotation on any reached limit, not
+  // only the month's.
+  it.each([
+    ['day', 'daily'],
+    ['week', 'weekly'],
+    ['month', 'monthly'],
+    ['quarter', 'quarterly'],
+    ['year', 'yearly'],
+  ])('names a reached %s limit', (period, adjective) => {
+    expect(
+      getAtLimitReason(
+        row({
+          spending_limit_status: [status(period, true, '2026-11-01T00:00:00Z')],
+        }),
+      ),
+    ).toBe(
+      `This key has reached its ${adjective} limit. A manager can rotate it.`,
+    );
+  });
+
+  it('names the reached limit that holds the key longest', () => {
+    expect(
+      getAtLimitReason(
+        row({
+          spending_limit_status: [
+            status('day', true, '2026-10-23T00:00:00Z'),
+            status('week', true, '2026-10-26T00:00:00Z'),
+            status('month', false, '2026-11-01T00:00:00Z'),
+          ],
+        }),
+      ),
+    ).toBe('This key has reached its weekly limit. A manager can rotate it.');
   });
 });
 
@@ -138,7 +270,10 @@ describe('a key on a paused resource', () => {
   it('reads as blocked, not OK', () => {
     expect(getStateLabel(ok, 'limit')).toBe('Blocked: resource paused');
     expect(getKeyStateVariant(ok, 'limit').variant).toBe('warning');
-    expect(getStateTooltip(ok, 'limit')).toMatch(/usage reached its limit/);
+    // The resource's usage, not the key's: the key may be far below its own.
+    expect(getStateTooltip(ok, 'limit')).toMatch(
+      /The resource's usage reached its limit\./,
+    );
   });
 
   it('says it resumes with the resource when paused for another reason', () => {

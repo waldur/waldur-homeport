@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
 import {
   BooleanEditField,
@@ -21,6 +21,23 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
   const { update } = useUpdateOfferingIntegration(
     props.offering,
     props.refetch,
+  );
+  const pluginOptions = props.offering.plugin_options;
+  const keyManagement =
+    props.offering.type === SITE_AGENT_PLUGIN &&
+    Boolean(pluginOptions?.enable_api_key_provisioning);
+  // The key options read as the backend applies them when unset: key limits
+  // on, per-key daily usage off.
+  const keyOptionsScope = useMemo(
+    () => ({
+      ...props.offering,
+      plugin_options: {
+        ...pluginOptions,
+        api_key_limits: pluginOptions?.api_key_limits !== false,
+        api_key_daily_usage: pluginOptions?.api_key_daily_usage === true,
+      },
+    }),
+    [props.offering, pluginOptions],
   );
 
   return (
@@ -63,6 +80,25 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
                 'Lets users request API keys, assign them, limit their usage and their models, and pause or delete them. New resources start without keys instead of with two shared ones; existing resources keep theirs. Turn on only if the backend behind the site agent supports it, such as the Envoy AI Gateway; others, such as Ceph S3, fail those actions. Without it, keys can only be revealed and rotated.',
               )}
             />
+          )}
+          {keyManagement && (
+            <EditFieldProvider scope={keyOptionsScope} callback={update}>
+              <BooleanEditField
+                name="plugin_options.api_key_limits"
+                label={translate('Let users limit API keys')}
+                description={translate(
+                  'Lets users set spending limits on each API key, within the resource’s own limits. Turned off, no new key limit is accepted; limits keys already hold stay until cleared.',
+                )}
+              />
+              {/* A claim about the agent, as above: nothing checks it. */}
+              <BooleanEditField
+                name="plugin_options.api_key_daily_usage"
+                label={translate('Site agent reports API key usage per day')}
+                description={translate(
+                  'Only then can keys be limited per day, week, quarter or year, where a component offers those periods; otherwise keys are limited per month only. Turn on only if the site agent reports each key’s usage per day, or those limits are never reached.',
+                )}
+              />
+            </EditFieldProvider>
           )}
           <SelectEditField
             name="plugin_options.disabled_resource_actions"

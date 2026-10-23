@@ -17928,6 +17928,11 @@
       "feature_area": "lifecycle"
     }
   },
+  "Each limit pauses this key alone once reached, and may not exceed the resource's limit for the same or a longer period. Clear a field to remove that limit.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Each mount point should be used once at most.": {
     "context": {
       "feature_area": "create"
@@ -27291,7 +27296,35 @@
     }
   },
   "It matters once offerings share accounts. With accounts per service provider, a person has one account, with one username, POSIX UID and home directory, on all of them, so one of the usernames has to be kept. Until then, switching the account scope to per service provider is refused.": {},
+  "It resumes on its own once under its limits again, or when a limit is raised.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "It resumes on its own when a limit is raised or the period of a reached limit ends. Resumed by hand while still over a limit, it is paused again as soon as the resume takes effect.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "It resumes once the resource is unpaused.": {},
+  "It resumes shortly.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "It resumes {relative}, on {date}, or when a limit is raised.": {
+    "context": {
+      "variables": {
+        "relative": {
+          "type": "unknown"
+        },
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "api-keys"
+    }
+  },
   "It was accepted for {email}. If it does not arrive, the problem is past the relay — check its own logs and the recipient spam folder.": {
     "context": {
       "variables": {
@@ -27345,7 +27378,6 @@
       "feature_area": "cost-policies"
     }
   },
-  "Its usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.": {},
   "JPG, PNG, PDF or .asice (max {size})": {
     "context": {
       "variables": {
@@ -28251,8 +28283,18 @@
       "feature_area": "features"
     }
   },
+  "Let users limit API keys": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Lets customers change the number entered for a Component Formula order option after ordering. The change is ordered with the recalculated limits and price. It uses the formulas and bounds of that order option.": {},
   "Lets users request API keys, assign them, limit their usage and their models, and pause or delete them. New resources start without keys instead of with two shared ones; existing resources keep theirs. Turn on only if the backend behind the site agent supports it, such as the Envoy AI Gateway; others, such as Ceph S3, fail those actions. Without it, keys can only be revealed and rotated.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "Lets users set spending limits on each API key, within the resource’s own limits. Turned off, no new key limit is accepted; limits keys already hold stay until cleared.": {
     "context": {
       "feature_area": "integration"
     }
@@ -32267,6 +32309,7 @@
   },
   "Must be 128 characters or fewer.": {},
   "Must be 500 characters or less.": {},
+  "Must be above 0.": {},
   "Must be at least 1000 (lower values are reserved for system accounts). The value must fall within the offering’s POSIX ID pool and is rejected if already allocated.": {},
   "Must be between {n} and {m}.": {
     "context": {
@@ -34158,6 +34201,11 @@
   "No logs selected": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "No longer offered": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "No maintenance announcements found for the selected period.": {
@@ -37141,6 +37189,11 @@
       "feature_area": "ticketDraft"
     }
   },
+  "Only then can keys be limited per day, week, quarter or year, where a component offers those periods; otherwise keys are limited per month only. Turn on only if the site agent reports each key’s usage per day, or those limits are never reached.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Only these roles": {
     "context": {
       "feature_area": "pubsub"
@@ -39369,7 +39422,21 @@
       "feature_area": "details"
     }
   },
-  "Paused on reaching a limit. It resumes on its own once under its limits again: when a new month begins or a limit is raised.": {},
+  "Paused on reaching a limit.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "Paused on reaching a limit: {limits}.": {
+    "context": {
+      "variables": {
+        "limits": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "api-keys"
+    }
+  },
   "Paused on reaching its limit. It can be rotated once it resumes.": {
     "context": {
       "feature_area": "api-keys"
@@ -44751,11 +44818,6 @@
       "feature_area": "rabbitmq"
     }
   },
-  "Raising the limit resumes the key on its own. Resumed while still over its limit, it is paused again on the next usage report.": {
-    "context": {
-      "feature_area": "api-keys"
-    }
-  },
   "Rancher Server": {
     "context": {
       "feature_area": "create"
@@ -47760,16 +47822,6 @@
   "Resource limit change request": {
     "context": {
       "feature_area": "resource-pending"
-    }
-  },
-  "Resource limit: {value}": {
-    "context": {
-      "variables": {
-        "value": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "api-keys"
     }
   },
   "Resource limits change request has been submitted.": {
@@ -54218,6 +54270,11 @@
       "feature_area": "rabbitmq"
     }
   },
+  "Site agent reports API key usage per day": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Site agent status": {
     "context": {
       "feature_area": "policies"
@@ -58066,6 +58123,7 @@
       "feature_area": "keys"
     }
   },
+  "The key is still active at the provider until the failed command succeeds.": {},
   "The key was never created, so it has nothing to resume.": {
     "context": {
       "feature_area": "api-keys"
@@ -58637,6 +58695,7 @@
       "feature_area": "common"
     }
   },
+  "The resource's usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.": {},
   "The resources the merge moves to the target, with the orders, limits and order answers that follow them.": {},
   "The response window for this assignment batch has passed.": {
     "context": {
@@ -59805,7 +59864,27 @@
       "feature_area": "organizations"
     }
   },
-  "This key has reached its limit this month. A manager can rotate it.": {
+  "This key has reached its daily limit. A manager can rotate it.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "This key has reached its monthly limit. A manager can rotate it.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "This key has reached its quarterly limit. A manager can rotate it.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "This key has reached its weekly limit. A manager can rotate it.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "This key has reached its yearly limit. A manager can rotate it.": {
     "context": {
       "feature_area": "api-keys"
     }
@@ -59999,6 +60078,7 @@
       "feature_area": "details"
     }
   },
+  "This period is no longer offered: keep the limit as it is or clear it.": {},
   "This plan has no resources yet.": {
     "context": {
       "feature_area": "plans"
@@ -74101,6 +74181,11 @@
       "feature_area": "api-keys"
     }
   },
+  "over the resource's limit": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "passkeys": {
     "context": {
       "feature_area": "passkeys"
@@ -75185,6 +75270,18 @@
     "context": {
       "variables": {
         "component": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "{component} · {limit}": {
+    "context": {
+      "variables": {
+        "component": {
+          "type": "unknown"
+        },
+        "limit": {
           "type": "unknown"
         }
       }
@@ -76926,6 +77023,19 @@
         }
       },
       "feature_area": "change-limits"
+    }
+  },
+  "{limit} of {component}": {
+    "context": {
+      "variables": {
+        "limit": {
+          "type": "unknown"
+        },
+        "component": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "api-keys"
     }
   },
   "{minutes} min": {
