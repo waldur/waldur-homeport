@@ -14167,20 +14167,6 @@
       "feature_area": "organizations-compliance"
     }
   },
-  "Credits available for this organization: {currency} {credits}": {
-    "context": {
-      "variables": {
-        "currency": {
-          "type": "unknown"
-        },
-        "credits": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "credits",
-      "action_type": "update"
-    }
-  },
   "Credits available for this organization: {customer_credit}": {
     "context": {
       "variables": {
@@ -14188,7 +14174,7 @@
           "type": "unknown"
         }
       },
-      "feature_area": "create",
+      "feature_area": "credits",
       "action_type": "update"
     }
   },
@@ -41994,12 +41980,9 @@
       "feature_area": "DatePicker"
     }
   },
-  "Previously saved credit value for this organization: {currency} {credits}": {
+  "Previously saved credit value for this organization: {credits}": {
     "context": {
       "variables": {
-        "currency": {
-          "type": "unknown"
-        },
         "credits": {
           "type": "unknown"
         }

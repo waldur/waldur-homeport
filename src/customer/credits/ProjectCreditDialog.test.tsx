@@ -44,7 +44,7 @@ describe('ProjectCreditDialog', () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText('Credits available for this organization: EUR 1000'),
+        screen.getByText('Credits available for this organization: €1,000.00'),
       ).toBeInTheDocument();
     });
   });

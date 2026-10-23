@@ -2927,7 +2927,7 @@
   "Preview offering": "Pakkumise eelvaade",
   "Preview order form": "Eelvaata tellimisvormi",
   "Previous months": "Eelmised kuud",
-  "Previously saved credit value for this organization: {currency} {credits}": "Selle organisatsiooni varasem krediidiväärtus: {currency} {credits}",
+  "Previously saved credit value for this organization: {credits}": "Selle organisatsiooni varasem krediidiväärtus: {credits}",
   "Price": "Hind",
   "Price for consumption": "Tarbimise hind",
   "Price for remaining {count} months": "Hind järelejäänud {count} kuu eest",

@@ -2969,7 +2969,7 @@
   "Preview order form": "Peržiūrėkite užsakymo formą",
   "Previous Usage": "Ankstesnis naudojimas",
   "Previous months": "Ankstesni mėnesiai",
-  "Previously saved credit value for this organization: {currency} {credits}": "Anksčiau išsaugota šios organizacijos kredito reikšmė: {currency} {credits}",
+  "Previously saved credit value for this organization: {credits}": "Anksčiau išsaugota šios organizacijos kredito reikšmė: {credits}",
   "Price": "Kaina",
   "Price for consumption": "Vartojimo kaina",
   "Price for remaining {count} months": "Kaina už likusius {count} mėn.",
