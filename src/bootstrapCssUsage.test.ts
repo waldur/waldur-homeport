@@ -1,7 +1,9 @@
 // @vitest-environment node
+import postcss from 'postcss';
 import { describe, expect, it } from 'vitest';
 
 import {
+  compilePartial,
   diffSelectors,
   extractClasses,
   extractSelectors,
@@ -287,6 +289,36 @@ describe('bootstrapCssUsage', () => {
       expect(findNewUnusedClasses(baseline, current)).toEqual({
         'custom/new-partial': ['unreferenced-class'],
       });
+    });
+  });
+
+  describe('table cell gutters', () => {
+    const css = compilePartial(
+      "@import 'config'; @import 'components/tables';",
+    );
+    const declarations = (selector: string) => {
+      const found: Record<string, string> = {};
+      postcss.parse(css).walkRules((rule) => {
+        if (rule.selectors.includes(selector)) {
+          rule.walkDecls((decl) => {
+            found[decl.prop] = decl.value;
+          });
+        }
+      });
+      return found;
+    };
+
+    it.each([
+      ['.table.g-5 td', { padding: '1.25rem' }],
+      ['.table.gy-0 td', { 'padding-top': '0rem', 'padding-bottom': '0rem' }],
+      [
+        '.table.gx-8px td',
+        { 'padding-left': '0.616rem', 'padding-right': '0.616rem' },
+      ],
+      ['.table.gx-5 th', { 'padding-left': '1.25rem' }],
+      ['.table.gs-0 td:first-child', { 'padding-left': '0rem' }],
+    ])('pads %s', (selector, expected) => {
+      expect(declarations(selector)).toMatchObject(expected);
     });
   });
 });
