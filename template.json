@@ -24152,6 +24152,11 @@
       "feature_area": "common"
     }
   },
+  "Hard reboot": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Hard timeout in seconds for a full streaming request including LLM completion.": {},
   "Hardware configuration": {
     "context": {
@@ -26310,6 +26315,7 @@
       "feature_area": "update-floating-ips"
     }
   },
+  "Instance is stopped. Start it instead.": {},
   "Instance name": {
     "context": {
       "primary_ui_type": "title",
