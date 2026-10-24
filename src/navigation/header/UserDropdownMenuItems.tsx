@@ -1,12 +1,17 @@
 import { UISrefActive, useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 
-import { Menu } from 'waldur-ui';
+import { Menu, MenuDisclosure } from 'waldur-ui';
 
+import { translate } from '@/i18n';
 import { NavMenuLink } from '@/navigation/NavMenu';
 
 import { getTabs } from '../useTabs';
 
+/**
+ * The profile pages. A page with sub-pages (Credentials) is a section
+ * with its pages in a flyout.
+ */
 export const UserDropdownMenuItems = () => {
   const router = useRouter();
 
@@ -21,16 +26,17 @@ export const UserDropdownMenuItems = () => {
       {items.map((item, index) =>
         item.children?.length > 0 ? (
           <UISrefActive class="active" key={index}>
-            <Menu.Sub>
-              <Menu.SubTrigger>{item.title}</Menu.SubTrigger>
-              <Menu.SubContent className="font-medium w-[175px] py-[0.5rem]">
-                {item.children.map((child, childIndex) => (
-                  <UISrefActive class="active" key={childIndex}>
-                    <NavMenuLink state={child.to} label={child.title} />
-                  </UISrefActive>
-                ))}
-              </Menu.SubContent>
-            </Menu.Sub>
+            <MenuDisclosure.Section
+              label={item.title}
+              backLabel={translate('Back')}
+              contentClassName="font-medium w-[175px] py-[0.5rem]"
+            >
+              {item.children.map((child, childIndex) => (
+                <UISrefActive class="active" key={childIndex}>
+                  <NavMenuLink state={child.to} label={child.title} />
+                </UISrefActive>
+              ))}
+            </MenuDisclosure.Section>
           </UISrefActive>
         ) : (
           <UISrefActive class="active" key={index}>

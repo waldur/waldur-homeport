@@ -8,6 +8,7 @@ import {
   MouseEvent,
   ReactNode,
   Ref,
+  useContext,
   useId,
 } from 'react';
 
@@ -15,6 +16,7 @@ import { cn } from '../cn';
 import { Tooltip } from '../Tooltip';
 
 import {
+  MenuCloseContext,
   MenuLook,
   MenuRowOptions,
   useMenuKind,
@@ -112,11 +114,13 @@ export type MenuItemProps = ComponentPropsWithoutRef<
 /**
  * A command row, rendered for what it sits in (see MenuKind): a Radix menu
  * item in a Menu; a `role="menuitem"` button that closes the panel in a
- * MenuPopover; a plain button anywhere else (a list of actions in a dialog,
- * which is no menu, so its rows are no menu items). `onSelect` works the same in all
- * three: it fires on pointer and keyboard activation, and the panel closes
- * afterwards unless the handler calls `event.preventDefault()`. `asChild`
- * composes a link or another element as the row.
+ * MenuPopover; a plain button or link that closes the panel in a
+ * MenuDisclosure; a plain button anywhere else (a list of actions in a
+ * dialog, which is no menu, so its rows are no menu items). `onSelect`
+ * works the same in all four: it fires on pointer and keyboard activation,
+ * and the panel closes afterwards unless the handler calls
+ * `event.preventDefault()`. `asChild` composes a link or another element
+ * as the row.
  */
 export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
   (
@@ -124,6 +128,7 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
     ref,
   ) => {
     const kind = useMenuKind();
+    const closeDisclosure = useContext(MenuCloseContext);
     const panelLook = useMenuLook();
     const effectiveLook = look ?? panelLook;
     const rowClassName = useMenuItemClassName(look);
@@ -231,7 +236,16 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
           onClick?.(event as unknown as MouseEvent<HTMLDivElement>);
           // The synthetic event stands in for Radix's select event: a
           // handler that prevents its default keeps the popover open.
-          if (!event.defaultPrevented) onSelect?.(event as unknown as Event);
+          if (event.defaultPrevented) {
+            // A link navigating through the router, or the caller's
+            // onClick: the row was still chosen.
+            if (kind === 'disclosure') closeDisclosure?.();
+            return;
+          }
+          onSelect?.(event as unknown as Event);
+          if (kind === 'disclosure' && !event.defaultPrevented) {
+            closeDisclosure?.();
+          }
         }}
         {...(rest as unknown as ComponentPropsWithoutRef<'button'>)}
       >

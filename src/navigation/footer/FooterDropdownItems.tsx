@@ -6,9 +6,8 @@ import { NavMenuLink } from '@/navigation/NavMenu';
 
 /**
  * A command row in a FooterDropdown. The `<li>` keeps FooterDropdown's
- * `<ul>` valid. Must render inside a FooterDropdown: Radix's Item throws
- * outside a menu, which is why footer/MenuItem.tsx (also rendered
- * standalone in the footer bar) is a separate component.
+ * `<ul>` valid. Selecting it closes the dropdown. footer/MenuItem.tsx is
+ * the footer bar's own link, styled for the bar rather than the panel.
  */
 export const FooterDropdownItem = (
   props: ComponentPropsWithoutRef<typeof Menu.Item>,

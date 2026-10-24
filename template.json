@@ -12765,7 +12765,7 @@
   },
   "Copy API token": {
     "context": {
-      "feature_area": "header"
+      "feature_area": "api-key"
     }
   },
   "Copy applicant-data visibility settings.": {
@@ -15105,11 +15105,7 @@
       "feature_area": "openstack-instance"
     }
   },
-  "Dark theme": {
-    "context": {
-      "feature_area": "theme"
-    }
-  },
+  "Dark theme": {},
   "Dashboard": {
     "context": {
       "primary_ui_type": "title",
@@ -56063,12 +56059,12 @@
   },
   "Switch to dark mode": {
     "context": {
-      "feature_area": "theme"
+      "feature_area": "header"
     }
   },
   "Switch to light mode": {
     "context": {
-      "feature_area": "theme"
+      "feature_area": "header"
     }
   },
   "Switching from limit-based to usage-based billing. The fee of \"{current}\" is charged for its current billing period: a monthly plan keeps this month's fee, a daily plan is charged for the days used. From then on you are billed for actual consumption at the rates of \"{target}\"; nothing is charged in advance. Your quotas stay unchanged and now cap usage instead of being billed.": {
@@ -61026,12 +61022,6 @@
     }
   },
   "Token for access user": {},
-  "Token has been copied": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "header"
-    }
-  },
   "Token has been deleted.": {
     "context": {
       "primary_ui_type": "success_message",

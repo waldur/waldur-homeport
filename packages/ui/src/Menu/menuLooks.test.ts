@@ -16,6 +16,9 @@ describe('menu looks', () => {
     expect(
       classes(menuSurface({ look: 'nav', container: 'popover' })),
     ).toMatchSnapshot();
+    expect(
+      classes(menuSurface({ look: 'nav', container: 'disclosure' })),
+    ).toMatchSnapshot();
   });
 
   it('keeps the nav row, with its density and tone variants', () => {

@@ -178,8 +178,8 @@ export function UserMenu() {
             <Menu.Separator />
           </>
         )}
-        {/* As ThemeSwitcher.tsx's: a menuitemcheckbox showing a switch;
-            choosing it keeps the menu open. */}
+        {/* A menuitemcheckbox showing a switch; choosing it keeps the
+            menu open. */}
         <Menu.CheckboxItem
           checked={theme === 'dark'}
           onCheckedChange={toggleTheme}
@@ -189,8 +189,8 @@ export function UserMenu() {
         </Menu.CheckboxItem>
         {currentUser && <Menu.Separator />}
         {currentUser?.token && (
-          // As UserToken.tsx: the label, a masked field and a Copy button,
-          // as the look of one row that copies. The field and button are
+          // The label, a masked field and a Copy button, as the look of
+          // one row that copies. The field and button are
           // hidden from screen readers (the token is a secret).
           <Menu.CopyItem
             value={currentUser.token}
@@ -217,8 +217,8 @@ export function UserMenu() {
           </Menu.CopyItem>
         )}
         {currentUser && (
-          // As UserIpAddress.tsx: the label above the address and a Copy
-          // button, as the look of one row that copies.
+          // The label above the address and a Copy button, as the look of
+          // one row that copies.
           <Menu.CopyItem
             value={currentUser.ipAddress}
             className="block"

@@ -1,31 +1,23 @@
 import { forwardRef, FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
-import { Badge, Menu } from 'waldur-ui';
+import { Badge, Menu, MenuDisclosure } from 'waldur-ui';
 
 import Avatar from '@/core/Avatar';
-import { ENV } from '@/core/config';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { Link } from '@/core/Link';
-import { isFeatureVisible } from '@/features/connect';
-import { UserFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { NavMenuLink } from '@/navigation/NavMenu';
 import { useUser } from '@/workspace/hooks';
-import { isStaffOrSupportOrImpersonating } from '@/workspace/selectors';
-
-import { ThemeSwitcher } from '../../theme/ThemeSwitcher';
 
 import { LanguageSelectorDropdown } from './LanguageSelectorDropdown';
 import { LogoutMenuItem } from './LogoutMenuItem';
 import { UserDropdownMenuItems } from './UserDropdownMenuItems';
 import { UserIpAddress } from './UserIpAddress';
-import { UserToken } from './UserToken';
 import { WebShellMenuItem } from './WebShellMenuItem';
 
 /**
- * forwardRef so this composes under Menu.Trigger's `asChild` — see
- * ActionsDropdown.tsx's TableDropdownToggle for the general requirement.
+ * forwardRef so this composes under MenuDisclosure.Trigger's `asChild` —
+ * see ActionsDropdown.tsx's TableDropdownToggle for the general requirement.
  */
 const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
   const user = useUser();
@@ -106,15 +98,20 @@ const UserMenuHeader = ({ user }: { user: ReturnType<typeof useUser> }) => (
   </>
 );
 
+/**
+ * The user menu: a list of links (the profile pages, Log out, Sign in for
+ * guests) and a few buttons (language, copy the IP address), so a
+ * disclosure the keyboard Tabs through, not an application menu. The token
+ * is on the API token page, and the theme switch is a header button.
+ */
 export const UserDropdownMenu: FunctionComponent = () => {
   const user = useUser();
-  const canSeeToken = useSelector(isStaffOrSupportOrImpersonating);
   return (
-    <Menu modal={false}>
-      <Menu.Trigger asChild>
+    <MenuDisclosure>
+      <MenuDisclosure.Trigger asChild>
         <UserMenuToggle />
-      </Menu.Trigger>
-      <Menu.Content
+      </MenuDisclosure.Trigger>
+      <MenuDisclosure.Content
         align="end"
         className="font-medium py-[0.924rem] text-sm w-[275px]"
       >
@@ -146,22 +143,15 @@ export const UserDropdownMenu: FunctionComponent = () => {
 
         {user && <LogoutMenuItem />}
 
-        {!ENV.plugins.WALDUR_CORE.DISABLE_DARK_THEME && (
-          <>
-            <Menu.Separator />
-            <ThemeSwitcher />
-          </>
-        )}
-
+        {/* Not with the token on the API token page: that page is hidden
+            when the token is concealed, and the IP address is no secret. */}
         {user && (
           <>
             <Menu.Separator />
-            {(!isFeatureVisible(UserFeatures.conceal_api_token) ||
-              canSeeToken) && <UserToken token={user.token} />}
             <UserIpAddress ip={user.ip_address} />
           </>
         )}
-      </Menu.Content>
-    </Menu>
+      </MenuDisclosure.Content>
+    </MenuDisclosure>
   );
 };

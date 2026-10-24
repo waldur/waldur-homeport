@@ -17,10 +17,13 @@ How to build any menu or menu-like popover in HomePort: row actions, "Add" menus
 | An action menu opened by your own button                          | `ActionsMenu toggle={<YourButton />}`                   | [Custom trigger](#custom-trigger)                         |
 | An action menu whose trigger sits elsewhere in the markup         | `Menu` + `Menu.Trigger` + `Menu.Content look="actions"` | [Trigger elsewhere](#trigger-elsewhere)                   |
 | An action menu with a search box or other input                   | `MenuPopover` with `look="actions"`                     | [Menu with a search box](#menu-with-a-search-box)         |
-| Header, user, language, page-tab or footer menu                   | `Menu` (nav look), `NavMenuLink` for router links       | [Nav menus](#nav-menus)                                   |
+| The user menu or a footer menu: a list of navigation links        | `MenuDisclosure`, `NavMenuLink` for router links        | [Link lists](#link-lists-disclosures)                     |
+| A page-tab submenu (Offerings)                                    | `Menu` (nav look), `NavMenuLink` for router links       | [Nav menus](#nav-menus)                                   |
 | A filter list or picker holding inputs                            | `MenuPopover` (nav look)                                | [Filter and picker popovers](#filter-and-picker-popovers) |
 | A panel with no menu rows (column picker, search results, a form) | `Popover` + `PopoverContent`                            | [Plain popovers](#plain-popovers)                         |
 | Resource actions filtered by importance or a search query         | `ActionList` around `ActionItem`s                       | [Filtering resource actions](#filtering-resource-actions) |
+
+**Menu or disclosure?** A list of places to go (profile pages, privacy policy, support links) that the user reads like part of the page is a disclosure: its rows are links and buttons in the Tab order. A menu (`role="menu"`, arrow keys) is for application commands.
 
 **Menu or popover?** If every child is a command row, it is a menu. If the panel holds an input, a select, a date picker or a search field, it is a popover: a menu's typeahead takes the keystrokes typed into an input. A popover is a `MenuPopover` only when it holds menu rows (`Menu.Item`, `MenuPopover.Item`, rows styled with `useMenuItemClassName`); anything else is a plain `Popover`.
 
@@ -46,6 +49,7 @@ How to build any menu or menu-like popover in HomePort: row actions, "Add" menus
 | `Menu`                       | `packages/ui/src/Menu/` (`waldur-ui`)  | Radix DropdownMenu with the app's defaults and looks built in                                                  |
 | `Menu.TriggerButton`         | same                                   | Dropdown button trigger wrapping BaseButton and rotating ButtonCaret                                           |
 | `MenuPopover`                | same                                   | The same surfaces on a Radix Popover, for panels with inputs                                                   |
+| `MenuDisclosure`             | same                                   | The nav surface as a disclosure: a button that shows a list of links, Tabbed through                           |
 | `menuSurface`, `menuItem`, … | `packages/ui/src/Menu/` (collocated)   | The looks, as cva recipes collocated with each component (`MenuContent.tsx`, `MenuItem.tsx`, …)                |
 | `MenuLookProvider`, hooks    | `packages/ui/src/Menu/menuContext.tsx` | The look and container kind a panel hands to its rows; `useMenuItemClassName()` for an element styled as a row |
 | `ActionsMenu`                | `src/table/ActionsDropdown.tsx`        | An action menu with its trigger (kebab, labeled, "Add" or custom)                                              |
@@ -202,9 +206,39 @@ When an action-styled panel holds an input (such as a search box), use `MenuPopo
 
 The input keeps every keystroke, and choosing a `Menu.Item` row still closes the panel (`ScriptEditorHeader.tsx`).
 
+### Link lists (disclosures)
+
+The header user menu and the footer menus (Legal & Privacy, Support, More) are lists of links behind a button, so they follow the [disclosure pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/) rather than the menu one:
+
+```tsx
+import { Menu, MenuDisclosure } from 'waldur-ui';
+import { NavMenuLink } from '@/navigation/NavMenu';
+
+<MenuDisclosure openOnHover="desktop">
+  <MenuDisclosure.Trigger asChild>
+    <button type="button">{translate('Support')}</button>
+  </MenuDisclosure.Trigger>
+  <MenuDisclosure.Content side="top" align="end" density="compact">
+    <NavMenuLink state="about.privacy" label={translate('Privacy policy')} />
+    <Menu.Item onSelect={openCookieSettings}>
+      {translate('Cookie settings')}
+    </Menu.Item>
+    <MenuDisclosure.Section label={translate('Credentials')}>
+      <NavMenuLink state="profile-keys" label={translate('SSH keys')} />
+    </MenuDisclosure.Section>
+  </MenuDisclosure.Content>
+</MenuDisclosure>;
+```
+
+- The trigger is a button with `aria-expanded`; Enter, Space or a click opens the panel and focus stays on the trigger. Tab walks through the rows; Tab past the last row, Escape or a click outside closes it (Escape returns focus to the trigger).
+- The panel is not portaled: it follows the trigger in the DOM, which is what puts its rows in the Tab order right after the trigger.
+- The rows are the usual parts: `Menu.Item` renders a plain button, `Menu.Item asChild` / `NavMenuLink` a link, `Menu.CopyItem` a copy button, `Menu.Separator` a divider. Choosing a row closes the panel unless its `onSelect` prevents default.
+- A nested list (a profile page with sub-pages) is a `MenuDisclosure.Section`: a row with its links in a flyout beside it. The flyout is not portaled either, so Tab from the row enters it and Tab past its last row moves on (and closes it); hover opens it on desktop, and Escape closes only the flyout. Below `md` there is no room beside the panel, so the section drills down instead: its rows replace the panel's under a back row, and Escape goes back up a level.
+- `openOnHover` works as `Menu`'s (below). Hover is only an extra: the trigger still opens on click and from the keyboard.
+
 ### Nav menus
 
-The header user menu, the language submenu, page-tab submenus and the footer menus use `Menu` in its default `nav` look:
+Page-tab submenus (Offerings in the toolbar, the page bar's tab groups) and menus of commands and settings (`packages/shell`'s user menu, below) use `Menu` in its default `nav` look:
 
 ```tsx
 import { Menu } from 'waldur-ui';
@@ -249,7 +283,7 @@ import { NavMenuLink } from '@/navigation/NavMenu';
 - `Menu.Label` and `Menu.Separator` are a section caption and a divider in the panel's look.
 - Typography (`fw-bold`, `fs-6`) is set per panel. In `packages/shell` and the micro-app, which have no Bootstrap, write it in Tailwind (`py-[12px] text-[14px] font-medium`).
 
-**Hover to open** (page tabs, footer): `<Menu openOnHover="desktop">` opens on hover at the `lg` breakpoint and up, and on click below it, with a 200ms close delay. `openOnHover` (or `={true}`) hovers at every width. `open`/`onOpenChange` may still be controlled, e.g. to close the menu on Tab (`TabsList.tsx`).
+**Hover to open** (page tabs, footer): `<Menu openOnHover="desktop">` (or `<MenuDisclosure openOnHover="desktop">`) opens on hover at the `lg` breakpoint and up, and on click below it, with a 200ms close delay. `openOnHover` (or `={true}`) hovers at every width. `open`/`onOpenChange` may still be controlled, e.g. to close the menu on Tab (`TabsList.tsx`).
 
 ### Filter and picker popovers
 

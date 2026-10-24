@@ -5,10 +5,12 @@ export type MenuLook = 'nav' | 'actions';
 /**
  * What a row sits in, which decides what Menu.Item renders: a Radix menu
  * item (`menu`), a `role="menuitem"` button that closes its Radix Popover
- * (`popover`), or a plain button with no Radix ancestor at all (`plain`,
- * e.g. a list of actions in a dialog, which is no menu). A Radix item throws outside a menu.
+ * (`popover`), a plain button or link that closes a MenuDisclosure
+ * (`disclosure`: a list of navigation links, which is no menu), or a plain
+ * button with no Radix ancestor at all (`plain`, e.g. a list of actions in
+ * a dialog, which is no menu). A Radix item throws outside a menu.
  */
-export type MenuKind = 'menu' | 'popover' | 'plain';
+export type MenuKind = 'menu' | 'popover' | 'disclosure' | 'plain';
 
 /**
  * Row options a nav panel sets for the rows inside it. The panel renders
@@ -61,5 +63,13 @@ export const MenuLookProvider = ({
 };
 
 export const useMenuLook = () => useContext(MenuLookContext).look;
+
+/**
+ * Closes the MenuDisclosure a row sits in. A disclosure closes on a chosen
+ * row itself rather than through Radix's Popover.Close, which stays open
+ * when the click's default is prevented, as the app's router Link always
+ * does to navigate.
+ */
+export const MenuCloseContext = createContext<(() => void) | null>(null);
 
 export const useMenuKind = () => useContext(MenuLookContext).kind;
