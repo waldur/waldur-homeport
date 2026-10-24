@@ -1,19 +1,38 @@
-import { OpenStreetMapProvider } from 'leaflet-geosearch';
-
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-geosearch/assets/css/leaflet.css';
 
+import { escapeHtml } from '@/core/utils';
 import { translate } from '@/i18n';
 import { CustomMarkerIcon } from '@/map/CustomMarkerIcon';
+import { NotifyService } from '@/store/notify';
 
 import { formatCoordinates } from './coordinates';
 import { GeoSearchControlElement } from './GeoSearchControlElement';
 import { MapContainer } from './MapContainer';
 import { Marker, Popup } from './Marker';
 import { OpenStreetMapTileLayer } from './OpenStreetMapTileLayer';
+import { PoliteOpenStreetMapProvider } from './politeProvider';
 import './SetLocationDialog.scss';
 
-const provider = new OpenStreetMapProvider();
+// The public Nominatim server. Its usage policy forbids autocomplete, so a
+// search runs only when the user presses Enter; the provider enforces the
+// rest (rate, caching, backoff). One instance for the page, so every map
+// shares its limits.
+const provider = new PoliteOpenStreetMapProvider(
+  {},
+  {
+    onNoResults: () =>
+      NotifyService.info(translate('No location found for this address.')),
+    onError: () =>
+      NotifyService.error(
+        translate('Location search is unavailable right now. Try again later.'),
+      ),
+  },
+);
+
+// Leaflet puts popup content in as HTML, and the label is Nominatim's
+// display_name: OpenStreetMap data that anyone can edit.
+const popupFormat = ({ result }) => escapeHtml(result.label);
 
 export const LocationContainer = ({ input: { value, onChange }, ...props }) => {
   const coordinates = formatCoordinates(value);
@@ -39,13 +58,13 @@ export const LocationContainer = ({ input: { value, onChange }, ...props }) => {
           style="bar"
           showMarker={true}
           showPopup={true}
-          popupFormat={({ result }) => result.label}
+          popupFormat={popupFormat}
           maxMarkers={1}
           retainZoomLevel={true}
           animateZoom={true}
           autoClose={true}
-          autoComplete={true}
-          searchLabel={translate('Enter address...')}
+          autoComplete={false}
+          searchLabel={translate('Type an address and press Enter')}
           keepResult={false}
           updateMap={true}
           onLocationFound={(loc) => {
