@@ -3,7 +3,6 @@ import path from 'path';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig, PluginOption } from 'vite';
-import { plugin as markdownPlugin, Mode } from 'vite-plugin-markdown';
 import svgr from 'vite-plugin-svgr';
 
 import { waldurBootSplash } from 'waldur-boot-splash/vite';
@@ -26,7 +25,6 @@ const plugins: PluginOption[] = [
       plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
     },
   }),
-  markdownPlugin({ mode: [Mode.REACT] }),
   reactDisplayNamePlugin(),
   waldurBootSplash({ defaultName: 'Waldur' }),
 ];

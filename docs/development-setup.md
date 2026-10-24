@@ -108,7 +108,6 @@ yarn info vite version
 - SVG files processed through SVGR plugin for React components
 - Images and static assets in `src/images/`
 - Font files managed through Vite's asset pipeline
-- Markdown content processed through vite-plugin-markdown
 - Monaco Editor for code editing capabilities
 - Sass for SCSS preprocessing
 
@@ -116,7 +115,7 @@ yarn info vite version
 
 #### Check current versions
 
-`yarn info @svgr/rollup-plugin vite-plugin-markdown monaco-editor sass version`
+`yarn info @svgr/rollup-plugin monaco-editor sass version`
 
 ## Environment Variables
 

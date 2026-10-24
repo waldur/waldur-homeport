@@ -16424,6 +16424,8 @@
       "feature_area": "api-keys"
     }
   },
+  "Deleting a cluster also deletes the infrastructure its Kubernetes nodes run on:": {},
+  "Deleting an OpenStack tenant also deletes all resources created within it.": {},
   "Deleting...": {
     "context": {
       "feature_area": "reviewer-discovery"
@@ -21160,6 +21162,11 @@
       "feature_area": "openstack"
     }
   },
+  "External networks (if they belong to the tenant)": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "External reference": {
     "context": {
       "feature_area": "create"
@@ -25717,6 +25724,7 @@
       "feature_area": "reviewer"
     }
   },
+  "In particular, the following items from this tenant will be deleted:": {},
   "In progress": {
     "context": {
       "primary_ui_type": "label",
@@ -26449,6 +26457,11 @@
   "Internal network mask (CIDR)": {
     "context": {
       "feature_area": "openstack"
+    }
+  },
+  "Internal networks": {
+    "context": {
+      "feature_area": "actions"
     }
   },
   "Internal notes": {
@@ -40806,6 +40819,7 @@
       "feature_area": "update"
     }
   },
+  "Please make sure you have backed up your data.": {},
   "Please make sure you know what you are doing and set to 10 minutes if unsure.": {
     "context": {
       "feature_area": "api-key"
@@ -67049,6 +67063,7 @@
       "feature_area": "mass-actions"
     }
   },
+  "Unlink the VMs from their Kubernetes nodes first if you want to keep them.": {},
   "Unlock": {
     "context": {
       "feature_area": "chat"
@@ -69633,6 +69648,11 @@
       "feature_area": "reporting"
     }
   },
+  "VMs": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "VMware Tools": {
     "context": {
       "feature_area": "vmware"
@@ -70352,6 +70372,11 @@
       "feature_area": "reporting"
     }
   },
+  "Virtual machines": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "Virtual machines count": {},
   "Visibility": {
     "context": {
@@ -70532,6 +70557,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "openstack-instance"
+    }
+  },
+  "Volumes and snapshots": {
+    "context": {
+      "feature_area": "actions"
     }
   },
   "Volumes count": {},
