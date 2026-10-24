@@ -19753,11 +19753,6 @@
       "feature_area": "common"
     }
   },
-  "Enter address...": {
-    "context": {
-      "feature_area": "map"
-    }
-  },
   "Enter agent name": {
     "context": {
       "feature_area": "site-agents"
@@ -29390,6 +29385,11 @@
       "feature_area": "list"
     }
   },
+  "Location search is unavailable right now. Try again later.": {
+    "context": {
+      "primary_ui_type": "error_message"
+    }
+  },
   "Locked": {
     "context": {
       "primary_ui_type": "label"
@@ -34180,6 +34180,7 @@
       "feature_area": "details"
     }
   },
+  "No location found for this address.": {},
   "No logs selected": {
     "context": {
       "feature_area": "support"
@@ -61814,6 +61815,11 @@
   "Type a value to add it": {
     "context": {
       "feature_area": "restrictions"
+    }
+  },
+  "Type an address and press Enter": {
+    "context": {
+      "feature_area": "map"
     }
   },
   "Type an identity source and press Enter": {
