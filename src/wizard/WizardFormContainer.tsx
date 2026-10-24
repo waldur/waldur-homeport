@@ -2,7 +2,7 @@ import { FormApi } from 'final-form';
 import { ComponentType, useState } from 'react';
 import { Form, FormSpy } from 'react-final-form';
 
-import { ProgressStep } from '@/wizard';
+import type { ProgressStep } from './ProgressSteps';
 
 interface WizardFormContainerProps<FormValues = any> {
   form?: string;

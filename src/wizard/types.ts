@@ -4,7 +4,7 @@ import { FormRenderProps } from 'react-final-form';
 
 import { FeaturedIconVariant } from 'waldur-ui';
 
-import { ProgressStep } from '@/wizard';
+import type { ProgressStep } from './ProgressSteps';
 
 /**
  * WizardStep is an alias for ProgressStep to maintain compatibility.

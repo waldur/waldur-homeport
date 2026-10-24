@@ -8,8 +8,8 @@ import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { ProgressStep } from '@/wizard';
 
+import type { ProgressStep } from './ProgressSteps';
 import { WizardStepIndicator } from './WizardStepIndicator';
 
 import '@/wizard/wizard.scss';

@@ -46,7 +46,7 @@ Use this agent when:
 ### Dependency Management
 
 - `yarn deps:unused` - Knip for unused dependencies
-- `yarn deps:circular` - Madge for circular dependencies
+- `yarn deps:circular` - oxlint `import/no-cycle` for circular dependencies
 - `yarn install` - Install dependencies with lockfile integrity
 - `yarn outdated` - Check for outdated packages
 - `yarn info <package>` - Check specific package versions
@@ -113,7 +113,7 @@ Use this agent when:
 - **Prettier 3.6.2**: 2 spaces, semicolons, single quotes
 - **Stylelint 16.14.1**: SCSS/CSS linting
 - **Knip**: Unused dependency detection
-- **Madge**: Circular dependency analysis
+- **oxlint `import/no-cycle`**: Circular dependency analysis (resolves `@/` imports)
 - **Husky 9.1.7**: Git hooks for quality checks
 - **Lint-staged**: Pre-commit formatting
 

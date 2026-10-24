@@ -1,8 +1,8 @@
 import { FC, useMemo } from 'react';
 
 import { translate } from '@/i18n';
-import { ProgressSteps } from '@/wizard';
 
+import { ProgressSteps } from './ProgressSteps';
 import type { WizardStep, WizardStepIndicatorProps } from './types';
 
 /**

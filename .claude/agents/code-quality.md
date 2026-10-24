@@ -11,7 +11,7 @@ This agent specializes in:
 - **Test Code Sharing**: Proper mocking patterns and test utilities
 - **SDK Types**: Waldur JS Client type usage and best practices
 - **Error Handling**: Comprehensive error handling patterns
-- **Code Quality Tools**: Knip, Madge, and automated quality checks
+- **Code Quality Tools**: Knip, oxlint import cycles, and automated quality checks
 
 ## When to Use
 
@@ -72,7 +72,7 @@ Every commit must:
 - **Prettier 3.6.2**: 2 spaces, semicolons, single quotes
 - **Stylelint 16.14.1**: SCSS/CSS linting
 - **Knip**: Unused dependency detection
-- **Madge**: Circular dependency analysis
+- **oxlint `import/no-cycle`**: Circular dependency analysis (resolves `@/` imports)
 - **Husky**: Git hooks for quality checks
 
 ## Error Handling Best Practices
