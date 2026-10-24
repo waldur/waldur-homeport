@@ -9,12 +9,22 @@ import {
 } from '@phosphor-icons/react';
 import {
   ChangeEvent,
+  createContext,
+  CSSProperties,
   FC,
+  forwardRef,
+  HTMLAttributes,
   KeyboardEvent as ReactKeyboardEvent,
+  MouseEvent as ReactMouseEvent,
+  memo,
+  useContext,
+  useDeferredValue,
+  useId,
   useMemo,
+  useRef,
   useState,
 } from 'react';
-import { NodeApi, NodeRendererProps, Tree } from 'react-arborist';
+import { FixedSizeList } from 'react-window';
 import type {
   GlauthGroupKind,
   GlauthTree,
@@ -45,6 +55,8 @@ interface TreeNodeData {
   type: NodeType;
   badge?: { text: string; variant: BadgeVariant; tone?: BadgeTone };
   children?: TreeNodeData[];
+  /** Name and badge, lower-cased once for searching. */
+  searchText?: string;
 }
 
 const kindBadge = (
@@ -159,7 +171,7 @@ const svcAcctAttributes = (r: GlauthTreeRobotAccount): TreeNodeData[] => {
   }));
 };
 
-const buildTree = (tree: GlauthTree): TreeNodeData[] => {
+const buildNodes = (tree: GlauthTree): TreeNodeData[] => {
   const groupChildren: TreeNodeData[] = tree.groups.map((g) => ({
     id: `group:${g.gid}`,
     // Default glauth `nameformat` is `cn` — so groups appear as cn=… DNs.
@@ -249,6 +261,16 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
   ];
 };
 
+const withSearchText = (nodes: TreeNodeData[]): TreeNodeData[] =>
+  nodes.map((node) => ({
+    ...node,
+    // A line break keeps a query from matching across name and badge.
+    searchText: `${node.name}\n${node.badge?.text ?? ''}`.toLowerCase(),
+    children: node.children && withSearchText(node.children),
+  }));
+
+const buildTree = (tree: GlauthTree) => withSearchText(buildNodes(tree));
+
 const iconFor = (type: NodeType) => {
   switch (type) {
     case 'root':
@@ -267,38 +289,57 @@ const iconFor = (type: NodeType) => {
 };
 
 const INDENT_PX = 22;
+const ROW_HEIGHT = 28;
+const VIEWPORT_HEIGHT = 500;
 
-const NodeRow: FC<NodeRendererProps<TreeNodeData>> = ({
-  node,
-  style,
-  dragHandle,
-}) => {
-  const data = node.data;
-  const hasChildren = (data.children?.length ?? 0) > 0;
+/** One visible line of the tree, in display order. */
+interface TreeRow {
+  node: TreeNodeData;
+  /** This row's place in the flattened list, and its parent's. */
+  index: number;
+  parentIndex?: number;
+  level: number;
+  hasChildren: boolean;
+  isOpen: boolean;
+  /** Position among the siblings shown at this level, from 1. */
+  position: number;
+  siblings: number;
+}
+
+interface NodeRowProps {
+  id: string;
+  row: TreeRow;
+  style: CSSProperties;
+  isActive: boolean;
+  showFocus: boolean;
+}
+
+// Rows take no focus and handle no events: the tree container is the one
+// Tab stop and points at the active row with aria-activedescendant, so a
+// row that scrolls out of the virtualised list never takes focus with it.
+const NodeRow: FC<NodeRowProps> = ({ id, row, style, isActive, showFocus }) => {
+  const data = row.node;
   const isAttr = data.type === 'attr';
   const isWaldur = data.type === 'waldur_attr';
-  const handleToggle = () => hasChildren && node.toggle();
-  const handleKey = (e: ReactKeyboardEvent<HTMLDivElement>) => {
-    if (!hasChildren) return;
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      node.toggle();
-    }
-  };
-  const { paddingLeft: _ignored, ...positionStyle } = style;
-  const guides = Array.from({ length: node.level });
+  const guides = Array.from({ length: row.level });
   return (
     <div
-      ref={dragHandle}
-      style={positionStyle}
+      id={id}
+      style={style}
       className={`ldap-tree-row flex items-stretch ${
-        node.isSelected ? 'bg-brand-subtle' : ''
+        isActive ? 'bg-brand-subtle' : ''
+      } ${
+        isActive && showFocus
+          ? 'outline outline-2 -outline-offset-2 outline-brand'
+          : ''
       }`}
-      onClick={handleToggle}
-      onKeyDown={handleKey}
       role="treeitem"
-      aria-selected={node.isSelected}
-      tabIndex={0}
+      aria-level={row.level + 1}
+      aria-setsize={row.siblings}
+      aria-posinset={row.position}
+      aria-expanded={row.hasChildren ? row.isOpen : undefined}
+      aria-selected={isActive}
+      data-node-id={data.id}
     >
       {guides.map((_, i) => (
         // Metronic's $border-dashed-color ($gray-300). Arbitrary values, as
@@ -320,8 +361,8 @@ const NodeRow: FC<NodeRendererProps<TreeNodeData>> = ({
           className="me-1 text-quaternary inline-flex"
           style={{ width: 14 }}
         >
-          {hasChildren ? (
-            node.isOpen ? (
+          {row.hasChildren ? (
+            row.isOpen ? (
               <CaretDownIcon weight="bold" size={12} />
             ) : (
               <CaretRightIcon weight="bold" size={12} />
@@ -383,17 +424,331 @@ const renderAttribute = (line: string, isWaldur: boolean) => {
   );
 };
 
-const matchesQuery = (node: NodeApi<TreeNodeData>, term: string) => {
-  const q = term.trim().toLowerCase();
-  if (!q) return true;
-  if (node.data.name.toLowerCase().includes(q)) return true;
-  if (node.data.badge?.text.toLowerCase().includes(q)) return true;
-  return false;
+const EMPTY: Set<string> = new Set();
+/** Rows a PageUp or PageDown moves by: what the viewport shows. */
+const PAGE = Math.floor(VIEWPORT_HEIGHT / ROW_HEIGHT);
+
+/** `query` is already trimmed and lower-cased. */
+const matchesQuery = (node: TreeNodeData, query: string) =>
+  node.searchText.includes(query);
+
+/** Ids of the nodes a search shows: those that match, and their ancestors. */
+const searchVisible = (nodes: TreeNodeData[], query: string) => {
+  const visible = new Set<string>();
+  const walk = (node: TreeNodeData): boolean => {
+    let shown = matchesQuery(node, query);
+    for (const child of node.children ?? []) {
+      // Every child is walked: a match deeper down shows this node too.
+      shown = walk(child) || shown;
+    }
+    if (shown) visible.add(node.id);
+    return shown;
+  };
+  nodes.forEach(walk);
+  return visible;
 };
 
+/**
+ * The rows on screen. Without a search every node starts open and `toggled`
+ * holds the closed ones. During a search the ancestors of a match start
+ * open and show only the branches that lead to matches; a match whose own
+ * children do not match starts closed, and opening it shows all of them.
+ * There `toggled` holds the nodes flipped from that default.
+ */
+const flatten = (
+  nodes: TreeNodeData[],
+  toggled: Set<string>,
+  visible: Set<string> | null,
+): TreeRow[] => {
+  const rows: TreeRow[] = [];
+  const walk = (
+    siblings: TreeNodeData[],
+    level: number,
+    filtered: boolean,
+    parentIndex?: number,
+  ) => {
+    siblings.forEach((node, position) => {
+      const children = node.children ?? [];
+      const hasChildren = children.length > 0;
+      const shownChildren =
+        filtered && visible
+          ? children.filter((child) => visible.has(child.id))
+          : children;
+      // An ancestor of a match keeps to the matching branches; any other
+      // node, once opened, shows everything under it.
+      const leadsToMatch = Boolean(
+        filtered && visible && shownChildren.length > 0,
+      );
+      const openByDefault = visible ? leadsToMatch : true;
+      const isOpen = hasChildren && openByDefault !== toggled.has(node.id);
+      const index = rows.length;
+      rows.push({
+        node,
+        index,
+        parentIndex,
+        level,
+        hasChildren,
+        isOpen,
+        position: position + 1,
+        siblings: siblings.length,
+      });
+      if (isOpen) {
+        walk(
+          leadsToMatch ? shownChildren : children,
+          level + 1,
+          leadsToMatch,
+          index,
+        );
+      }
+    });
+  };
+  walk(visible ? nodes.filter((node) => visible.has(node.id)) : nodes, 0, true);
+  return rows;
+};
+
+interface RowData {
+  baseId: string;
+  rows: TreeRow[];
+  activeIndex?: number;
+  showFocus: boolean;
+}
+
+// Outside the tree component, so react-window keeps its rows mounted
+// between renders instead of seeing a new component type each time.
+const VirtualRow = memo(
+  ({
+    index,
+    style,
+    data,
+  }: {
+    index: number;
+    style: CSSProperties;
+    data: RowData;
+  }) => (
+    <NodeRow
+      id={`${data.baseId}-${index}`}
+      row={data.rows[index]}
+      style={style}
+      isActive={index === data.activeIndex}
+      showFocus={data.showFocus}
+    />
+  ),
+);
+
+const rowKey = (index: number, data: RowData) => data.rows[index].node.id;
+
+// The tree's own attributes and handlers, for the element that scrolls.
+const TreeProps = createContext<HTMLAttributes<HTMLDivElement>>({});
+
+// react-window's scrolling element is the tree itself: the one element that
+// takes focus. A scroller with nothing focusable inside is a Tab stop of its
+// own in current browsers, so a separate tree element around it would leave
+// a second, silent stop; and a click on a row focuses this element directly.
+const TreeViewport = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    const { className: treeClassName, ...treeProps } = useContext(TreeProps);
+    return (
+      <div
+        ref={ref}
+        {...props}
+        {...treeProps}
+        className={`${className ?? ''} ${treeClassName ?? ''}`}
+        data-testid="ldap-tree-viewport"
+      />
+    );
+  },
+);
+
+/**
+ * A read-only, virtualised tree: every node starts open, a search shows the
+ * matches with their ancestors opened, and the keyboard follows the WAI-ARIA
+ * tree pattern (arrows, Page Up/Down, Home/End, Enter/Space).
+ */
 export const GLAuthTreeView: FC<{ tree: GlauthTree }> = ({ tree }) => {
   const data = useMemo(() => buildTree(tree), [tree]);
   const [search, setSearch] = useState('');
+  // Typing stays responsive while a large directory is filtered.
+  const query = useDeferredValue(search).trim().toLowerCase();
+  // Each mode keeps its own flipped nodes, and a search's start empty for
+  // each term, so clearing it brings back whatever was open before.
+  const [closed, setClosed] = useState<Set<string>>(() => new Set());
+  const [searchToggled, setSearchToggled] = useState({
+    query: '',
+    ids: new Set<string>(),
+  });
+  const [activeId, setActiveId] = useState<string>();
+  // Focus that came from the keyboard, which is when the ring shows.
+  const [keyboardFocus, setKeyboardFocus] = useState(false);
+  const [rendered, setRendered] = useState({ start: 0, stop: -1 });
+  const pointerDown = useRef(false);
+  const listRef = useRef<FixedSizeList<RowData>>(null);
+  const baseId = useId();
+
+  const visible = useMemo(
+    () => (query ? searchVisible(data, query) : null),
+    [data, query],
+  );
+  const toggled = query
+    ? searchToggled.query === query
+      ? searchToggled.ids
+      : EMPTY
+    : closed;
+  const rows = useMemo(
+    () => flatten(data, toggled, visible),
+    [data, toggled, visible],
+  );
+
+  // The row the keyboard acts on: the one last clicked or moved to, or the
+  // first row once the keyboard brings focus in. Nothing is highlighted
+  // before either.
+  const chosen = rows.find((row) => row.node.id === activeId);
+  const activeRow = chosen ?? (keyboardFocus ? rows[0] : undefined);
+  const activeIndex = activeRow?.index ?? 0;
+  const activeShown =
+    activeRow !== undefined &&
+    activeIndex >= rendered.start &&
+    activeIndex <= rendered.stop;
+
+  const toggle = (row: TreeRow) => {
+    if (!row.hasChildren) return;
+    const flip = (ids: Set<string>) => {
+      const next = new Set(ids);
+      if (next.has(row.node.id)) next.delete(row.node.id);
+      else next.add(row.node.id);
+      return next;
+    };
+    if (query) {
+      setSearchToggled((prev) => ({
+        query,
+        ids: flip(prev.query === query ? prev.ids : EMPTY),
+      }));
+    } else {
+      setClosed(flip);
+    }
+  };
+
+  const activate = (index: number) => {
+    const row = rows[Math.max(0, Math.min(index, rows.length - 1))];
+    if (!row) return;
+    setActiveId(row.node.id);
+    listRef.current?.scrollToItem(row.index);
+  };
+
+  const handleKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
+    // Leave browser and screen-reader shortcuts alone.
+    if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    const row = rows[activeIndex];
+    if (!row) return;
+    const index = row.index;
+    switch (e.key) {
+      case 'ArrowDown':
+        activate(index + 1);
+        break;
+      case 'ArrowUp':
+        activate(index - 1);
+        break;
+      case 'PageDown':
+        activate(index + PAGE);
+        break;
+      case 'PageUp':
+        activate(index - PAGE);
+        break;
+      case 'Home':
+        activate(0);
+        break;
+      case 'End':
+        activate(rows.length - 1);
+        break;
+      case 'ArrowRight':
+        if (row.hasChildren && !row.isOpen) {
+          activate(index);
+          toggle(row);
+        } else if (rows[index + 1]?.parentIndex === index) {
+          activate(index + 1);
+        } else {
+          activate(index);
+        }
+        break;
+      case 'ArrowLeft':
+        if (row.isOpen) {
+          activate(index);
+          toggle(row);
+        } else {
+          activate(row.parentIndex ?? index);
+        }
+        break;
+      case 'Enter':
+      case ' ':
+        // Act on the active row where it can be seen, even after the list
+        // was scrolled away from it with the mouse.
+        activate(index);
+        toggle(row);
+        break;
+      default:
+        return;
+    }
+    e.preventDefault();
+    setKeyboardFocus(true);
+  };
+
+  // One handler for every row: the rows themselves stay plain.
+  const handleClick = (e: ReactMouseEvent<HTMLDivElement>) => {
+    const target = (e.target as HTMLElement).closest<HTMLElement>(
+      '[data-node-id]',
+    );
+    const row = rows.find((r) => r.node.id === target?.dataset.nodeId);
+    if (!row) return;
+    setActiveId(row.node.id);
+    toggle(row);
+  };
+
+  const itemData = useMemo<RowData>(
+    () => ({
+      baseId,
+      rows,
+      activeIndex: activeRow?.index,
+      showFocus: keyboardFocus,
+    }),
+    [baseId, rows, activeRow, keyboardFocus],
+  );
+
+  // It points at the active row, so it stays one Tab stop even after its
+  // rows scroll out of the list, and shows its own ring only while the
+  // active row is out of view.
+  const treeProps: HTMLAttributes<HTMLDivElement> = {
+    className: `outline-none ${
+      keyboardFocus && !activeShown
+        ? 'outline outline-2 -outline-offset-2 outline-brand'
+        : ''
+    }`,
+    role: 'tree',
+    'aria-label': translate('GLAuth directory'),
+    'aria-activedescendant': activeShown
+      ? `${baseId}-${activeIndex}`
+      : undefined,
+    tabIndex: 0,
+    onKeyDown: handleKeyDown,
+    onClick: handleClick,
+    onMouseDown: () => {
+      pointerDown.current = true;
+      setKeyboardFocus(false);
+    },
+    onFocus: () => {
+      // A click picks its own row; only keyboard focus brings the active
+      // row (or the first) into view and shows the ring.
+      if (pointerDown.current) {
+        pointerDown.current = false;
+        return;
+      }
+      setKeyboardFocus(true);
+      listRef.current?.scrollToItem(chosen?.index ?? 0);
+    },
+    onBlur: () => {
+      pointerDown.current = false;
+      setKeyboardFocus(false);
+    },
+  };
+
   return (
     <div className="ldap-tree-view">
       <div className="mb-2 small text-quaternary">
@@ -413,22 +768,23 @@ export const GLAuthTreeView: FC<{ tree: GlauthTree }> = ({ tree }) => {
         }
       />
       <div className="border rounded bg-primary">
-        <Tree<TreeNodeData>
-          data={data}
-          openByDefault
-          rowHeight={28}
-          indent={0}
-          width="100%"
-          height={500}
-          disableDrag
-          disableDrop
-          disableEdit
-          disableMultiSelection
-          searchTerm={search}
-          searchMatch={matchesQuery}
-        >
-          {NodeRow}
-        </Tree>
+        <TreeProps.Provider value={treeProps}>
+          <FixedSizeList<RowData>
+            ref={listRef}
+            height={VIEWPORT_HEIGHT}
+            width="100%"
+            itemCount={rows.length}
+            itemSize={ROW_HEIGHT}
+            itemData={itemData}
+            itemKey={rowKey}
+            outerElementType={TreeViewport}
+            onItemsRendered={({ visibleStartIndex, visibleStopIndex }) =>
+              setRendered({ start: visibleStartIndex, stop: visibleStopIndex })
+            }
+          >
+            {VirtualRow}
+          </FixedSizeList>
+        </TreeProps.Provider>
       </div>
     </div>
   );

@@ -4773,27 +4773,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-dnd/asap@npm:^4.0.0":
-  version: 4.0.1
-  resolution: "@react-dnd/asap@npm:4.0.1"
-  checksum: 10c0/9e78ea5a281c87c35f08839d100f0fddf6001f37da2366ff6d8ea0f426302e213675fe7f70825660603cc8bc81e41768bd18000df966564787fd64d7c4478c7c
-  languageName: node
-  linkType: hard
-
-"@react-dnd/invariant@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@react-dnd/invariant@npm:2.0.0"
-  checksum: 10c0/32219873b096a4bc6bfab9e9ca3007f90770ad4365deee2277eed303413f9936fd828ec46884aae31267df8dde16edf9bffc99c149a38b0fee829380670fadef
-  languageName: node
-  linkType: hard
-
-"@react-dnd/shallowequal@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@react-dnd/shallowequal@npm:2.0.0"
-  checksum: 10c0/3251e70e2575d18aaadf995066341c04ed6a1e692895fa71a925fd34daaeca294e7565daf9151dee7fd992de65ed36ba75517c73bc504ddd0d0adfdc59854cc4
-  languageName: node
-  linkType: hard
-
 "@react-hook/intersection-observer@npm:^3.1.1":
   version: 3.1.2
   resolution: "@react-hook/intersection-observer@npm:3.1.2"
@@ -8697,17 +8676,6 @@ __metadata:
   version: 5.2.2
   resolution: "diff@npm:5.2.2"
   checksum: 10c0/52da594c54e9033423da26984b1449ae6accd782d5afc4431c9a192a8507ddc83120fe8f925d7220b9da5b5963c7b6f5e46add3660a00cb36df7a13420a09d4b
-  languageName: node
-  linkType: hard
-
-"dnd-core@npm:14.0.1":
-  version: 14.0.1
-  resolution: "dnd-core@npm:14.0.1"
-  dependencies:
-    "@react-dnd/asap": "npm:^4.0.0"
-    "@react-dnd/invariant": "npm:^2.0.0"
-    redux: "npm:^4.1.1"
-  checksum: 10c0/449c5b7101003937e1aff3bbdb4e2deb6cd59f235a43f3e5e0d82ced5d3c982038cde00bf211d5ce6a263b3a7705fa231e9019431b890a80cc9a78be154fadee
   languageName: node
   linkType: hard
 
@@ -13922,22 +13890,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-arborist@npm:^3.10.1":
-  version: 3.10.5
-  resolution: "react-arborist@npm:3.10.5"
-  dependencies:
-    react-dnd: "npm:^14.0.3"
-    react-dnd-html5-backend: "npm:^14.0.3"
-    react-window: "npm:^1.8.11"
-    redux: "npm:^5.0.0"
-    use-sync-external-store: "npm:^1.2.0"
-  peerDependencies:
-    react: ">= 16.14"
-    react-dom: ">= 16.14"
-  checksum: 10c0/5763532db57470470224f4f6ce8d024410b7637b90d90d4fcd84ccd1acf048e8a18ab1f4c889c931779acd379deef83901b20795b748846ec6fbe229f31d82ed
-  languageName: node
-  linkType: hard
-
 "react-aria@npm:^3.48.0":
   version: 3.50.0
   resolution: "react-aria@npm:3.50.0"
@@ -14008,40 +13960,6 @@ __metadata:
   dependencies:
     es6-symbol: "npm:^3"
   checksum: 10c0/7b7924681059d60ea06dca38fd7ec066cc32625bdbf9795d21d9c8c667601997d5061e87d9738dad7fc8ff6e17cf08ebeb9fc4c470f17fc78b9229e3d38f7938
-  languageName: node
-  linkType: hard
-
-"react-dnd-html5-backend@npm:^14.0.3":
-  version: 14.1.0
-  resolution: "react-dnd-html5-backend@npm:14.1.0"
-  dependencies:
-    dnd-core: "npm:14.0.1"
-  checksum: 10c0/d10327fc72147250b0e93876b773a2843b60586299dbbc415e045f2e86dd931c5ffc5b2056bb99aa900af1d54a7306b4f28aab30ce5b7297a71da15e41c89d37
-  languageName: node
-  linkType: hard
-
-"react-dnd@npm:^14.0.3":
-  version: 14.0.5
-  resolution: "react-dnd@npm:14.0.5"
-  dependencies:
-    "@react-dnd/invariant": "npm:^2.0.0"
-    "@react-dnd/shallowequal": "npm:^2.0.0"
-    dnd-core: "npm:14.0.1"
-    fast-deep-equal: "npm:^3.1.3"
-    hoist-non-react-statics: "npm:^3.3.2"
-  peerDependencies:
-    "@types/hoist-non-react-statics": ">= 3.3.1"
-    "@types/node": ">= 12"
-    "@types/react": ">= 16"
-    react: ">= 16.14"
-  peerDependenciesMeta:
-    "@types/hoist-non-react-statics":
-      optional: true
-    "@types/node":
-      optional: true
-    "@types/react":
-      optional: true
-  checksum: 10c0/8785299e8aaf8d358ddbc68518206c6733855ae883e95e5c2ff74f36328c4a7dad8b796b614d7ef0d62a77b15656d80c145f7c1c0f1d6928d86e5ac18cc6f8b6
   languageName: node
   linkType: hard
 
@@ -14487,19 +14405,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"redux@npm:^4.1.1, redux@npm:^4.2.1":
+"redux@npm:^4.2.1":
   version: 4.2.1
   resolution: "redux@npm:4.2.1"
   dependencies:
     "@babel/runtime": "npm:^7.9.2"
   checksum: 10c0/136d98b3d5dbed1cd6279c8c18a6a74c416db98b8a432a46836bdd668475de6279a2d4fd9d1363f63904e00f0678a8a3e7fa532c897163340baf1e71bb42c742
-  languageName: node
-  linkType: hard
-
-"redux@npm:^5.0.0":
-  version: 5.0.1
-  resolution: "redux@npm:5.0.1"
-  checksum: 10c0/b10c28357194f38e7d53b760ed5e64faa317cc63de1fb95bc5d9e127fab956392344368c357b8e7a9bedb0c35b111e7efa522210cfdc3b3c75e5074718e9069c
   languageName: node
   linkType: hard
 
@@ -16433,7 +16344,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-sync-external-store@npm:^1.0.0, use-sync-external-store@npm:^1.2.0, use-sync-external-store@npm:^1.5.0, use-sync-external-store@npm:^1.6.0":
+"use-sync-external-store@npm:^1.0.0, use-sync-external-store@npm:^1.5.0, use-sync-external-store@npm:^1.6.0":
   version: 1.6.0
   resolution: "use-sync-external-store@npm:1.6.0"
   peerDependencies:
@@ -16833,7 +16744,6 @@ __metadata:
     prettier: "npm:^3.6.2"
     qs: "npm:^6.16.0"
     react: "npm:^18.3.0"
-    react-arborist: "npm:^3.10.1"
     react-bootstrap: "npm:^2.10.9"
     react-dom: "npm:^18.3.0"
     react-dropzone: "npm:^14.3.5"

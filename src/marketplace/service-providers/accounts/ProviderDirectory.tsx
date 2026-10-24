@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import {
   marketplaceServiceProvidersGlauthTreeRetrieve,
@@ -14,7 +14,10 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { MonacoEditor } from '@/form/MonacoEditor';
 import { translate } from '@/i18n';
-import { GLAuthTreeView } from '@/marketplace/offerings/update/integration/GLAuthTreeView';
+import {
+  GLAuthTreeView,
+  type GlauthTree,
+} from '@/marketplace/offerings/update/integration/GLAuthTreeView';
 
 interface ProviderDirectoryProps {
   provider: ServiceProvider;
@@ -46,6 +49,29 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
       }).then((response) => response.data),
     refetchOnWindowFocus: false,
   });
+  // One object per fetched tree: the view rebuilds and re-filters its rows
+  // whenever it gets a new one.
+  const directory = useMemo<GlauthTree | undefined>(
+    () =>
+      treeQuery.data && {
+        // The tree view names its root after one offering; here the
+        // directory is the provider's.
+        offering: {
+          uuid: provider.uuid,
+          name: provider.customer_name,
+          slug: provider.customer_slug ?? '',
+        },
+        groups: treeQuery.data.groups,
+        users: treeQuery.data.users,
+        robot_accounts: treeQuery.data.robot_accounts,
+      },
+    [
+      treeQuery.data,
+      provider.uuid,
+      provider.customer_name,
+      provider.customer_slug,
+    ],
+  );
 
   if (configQuery.isLoading || treeQuery.isLoading) {
     return <LoadingSpinner />;
@@ -129,20 +155,7 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
                   </div>
                 </TabsContent>
                 <TabsContent value="tree">
-                  <GLAuthTreeView
-                    tree={{
-                      // The tree view names its root after one offering; here
-                      // the directory is the provider's.
-                      offering: {
-                        uuid: provider.uuid,
-                        name: provider.customer_name,
-                        slug: provider.customer_slug ?? '',
-                      },
-                      groups: tree.groups,
-                      users: tree.users,
-                      robot_accounts: tree.robot_accounts,
-                    }}
-                  />
+                  <GLAuthTreeView tree={directory} />
                 </TabsContent>
               </>
             </Tabs>

@@ -108,7 +108,6 @@
     "pdfmake": "^0.2.18",
     "qs": "^6.16.0",
     "react": "^18.3.0",
-    "react-arborist": "^3.10.1",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^18.3.0",
     "react-dropzone": "^14.3.5",
