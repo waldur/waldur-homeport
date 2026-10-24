@@ -17,7 +17,7 @@ export interface CopyButtonProps {
 }
 
 /**
- * UserToken.tsx/UserIpAddress.tsx's real copy buttons show a toast via
+ * The app's own copy buttons (CopyToClipboardButton.tsx) show a toast via
  * @/store/notify, a whole app-wide notification system with no equivalent
  * in a standalone consumer — a transient label swap on the button itself
  * (label → copiedLabel, then back) is the honest equivalent, not a

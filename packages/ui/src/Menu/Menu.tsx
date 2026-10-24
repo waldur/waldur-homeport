@@ -13,6 +13,7 @@ import { MenuSub, MenuSubContent, MenuSubTrigger } from './MenuSub';
 import { MenuTrigger } from './MenuTrigger';
 import { MenuTriggerButton } from './MenuTriggerButton';
 
+export { MenuDisclosure } from './MenuDisclosure';
 export { MenuPopover } from './MenuPopover';
 
 /**

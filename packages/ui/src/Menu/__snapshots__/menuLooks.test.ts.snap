@@ -109,6 +109,27 @@ exports[`menu looks > keeps the nav panels 2`] = `
 ]
 `;
 
+exports[`menu looks > keeps the nav panels 3`] = `
+[
+  "animate-[waldur-menu-enter-up_0.3s_ease]",
+  "bg-[var(--menu-bg)]",
+  "data-[side=top]:animate-[waldur-menu-enter-down_0.3s_ease]",
+  "data-[state=closed]:animate-none",
+  "flex",
+  "flex-col",
+  "list-none",
+  "m-[0px]",
+  "max-h-(--radix-popover-content-available-height)",
+  "motion-reduce:animate-none",
+  "overflow-x-hidden",
+  "overflow-y-auto",
+  "p-[0px]",
+  "rounded-lg",
+  "shadow-[var(--dropdown-shadow)]",
+  "z-nav-menu",
+]
+`;
+
 exports[`menu looks > keeps the nav row, with its density and tone variants 1`] = `
 [
   "[&>svg:first-child]:me-[12px]",

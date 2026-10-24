@@ -15,9 +15,8 @@ describe('FooterDropdown', () => {
     );
 
     expect(screen.getByText('Test Dropdown')).toBeInTheDocument();
-    // Radix mounts the panel only once open — matching real ARIA menu
-    // behaviour, unlike Metronic's original always-in-DOM-just-hidden
-    // markup this replaces.
+    // Radix mounts the panel only once open, unlike Metronic's original
+    // always-in-DOM-just-hidden markup this replaces.
     expect(screen.queryByTestId('child')).not.toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Test Dropdown' }));
@@ -41,8 +40,10 @@ describe('FooterDropdown', () => {
     );
 
     await user.click(screen.getByRole('button', { name: 'Test Dropdown' }));
-    const rows = await screen.findAllByRole('menuitem');
-    expect(rows).toHaveLength(2);
+    const rows = [
+      await screen.findByRole('button', { name: 'Plain row' }),
+      screen.getByRole('link', { name: 'Link row' }),
+    ];
     for (const row of rows) {
       expect(row).toHaveClass('text-[var(--menu-item-text)]');
     }
@@ -57,9 +58,36 @@ describe('FooterDropdown', () => {
     );
 
     await user.click(screen.getByRole('button', { name: 'Test Dropdown' }));
-    const panel = await screen.findByRole('menu');
-    expect(panel.tagName).toBe('UL');
+    const panel = await screen.findByTestId('footer-dropdown-panel');
     expect(panel).toHaveClass('group/menu');
     expect(panel).toHaveAttribute('data-density', 'compact');
+  });
+
+  // A list of links, so a disclosure: Tab walks through the rows (not the
+  // arrow keys), and Tab past the last one moves on and closes it.
+  it('lets Tab walk through its rows and out', async () => {
+    const user = userEvent.setup();
+    render(
+      <>
+        <FooterDropdown title="Test Dropdown">
+          <FooterDropdownItem>First</FooterDropdownItem>
+          <FooterDropdownItem>Second</FooterDropdownItem>
+        </FooterDropdown>
+        <button type="button">After</button>
+      </>,
+    );
+
+    const trigger = screen.getByRole('button', { name: 'Test Dropdown' });
+    trigger.focus();
+    await user.keyboard('{Enter}');
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+
+    await user.tab();
+    expect(screen.getByRole('button', { name: 'First' })).toHaveFocus();
+    await user.tab();
+    expect(screen.getByRole('button', { name: 'Second' })).toHaveFocus();
+    await user.tab();
+    expect(screen.getByRole('button', { name: 'After' })).toHaveFocus();
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
   });
 });

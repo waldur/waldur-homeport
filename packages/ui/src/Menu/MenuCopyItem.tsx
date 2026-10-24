@@ -24,9 +24,10 @@ type MenuCopyItemProps = Omit<
 };
 
 /**
- * A row that copies a value (the API token, the IP address). It is a menu
- * item, so arrow keys reach it and choosing it copies; it stays open, so
- * the confirmation can be seen. It has no look of its own: the caller
+ * A row that copies a value (the support email, the API token). It is a
+ * Menu.Item, so it is reached as any other row in its panel (the arrow keys
+ * in a menu, Tab in a disclosure) and choosing it copies; the panel stays
+ * open, so the confirmation can be seen. It has no look of its own: the caller
  * renders the row, for instance a field and a "Copy" button as visuals.
  */
 export const MenuCopyItem = ({

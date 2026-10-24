@@ -6,6 +6,7 @@ import { User } from 'waldur-js-client';
 
 import { FormField, FormText, Tooltip } from 'waldur-ui';
 
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { SubmitButton } from '@/form';
 import { FormGroup } from '@/form';
 import { Select } from '@/form/select';
@@ -72,7 +73,17 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
       </Card.Header>
       <Card.Body>
         <FormGroup label={translate('API token')}>
-          <SecretField value={props.user.token} />
+          <div className="flex items-center gap-2">
+            <SecretField value={props.user.token} />
+            <CopyToClipboardButton
+              value={props.user.token}
+              size={20}
+              className="mb-0 mt-0"
+              buttonClassName="text-quaternary"
+              verbose={translate('API token')}
+              label={translate('Copy API token')}
+            />
+          </div>
         </FormGroup>
         <FormGroup
           label={

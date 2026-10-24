@@ -1,7 +1,7 @@
 import { CaretUpIcon } from '@phosphor-icons/react';
 import React from 'react';
 
-import { Menu } from 'waldur-ui';
+import { MenuDisclosure } from 'waldur-ui';
 
 import { FOOTER_LINK_CLASSNAME } from '@/navigation/footer/MenuItem';
 
@@ -11,19 +11,11 @@ interface FooterDropdownProps {
 }
 
 /**
- * A direct `<li>` child of FooterLinks.tsx's `<ul>`. Menu.Content's
- * `asChild` composes a `<ul>` for its content, so its rows
- * (FooterDropdownItems.tsx) are `<li>`s too.
+ * A direct `<li>` child of FooterLinks.tsx's `<ul>`, holding a list of
+ * links and commands (FooterDropdownItems.tsx `<li>`s) behind a button: a
+ * disclosure, which the keyboard Tabs through, not an application menu.
  *
- * Each FooterDropdown is its own independent Radix Root — there is no
- * shared parent menu to nest a Sub under; FooterLinks.tsx's own
- * "this is a Metronic menu group" marker on its wrapping `<ul>` only
- * ever coordinated Metronic's *global* click-outside/hover handling
- * across these independent instances, which Radix does per-instance on
- * its own, so that attribute is dropped there rather than carried
- * forward unused.
- *
- * Hover-to-open at `lg`+ is waldur-ui Menu's `openOnHover="desktop"`.
+ * Hover-to-open at `lg`+ is MenuDisclosure's `openOnHover="desktop"`.
  */
 
 export const FooterDropdown: React.FC<FooterDropdownProps> = ({
@@ -32,8 +24,8 @@ export const FooterDropdown: React.FC<FooterDropdownProps> = ({
 }) => {
   return (
     <li data-testid="footer-dropdown">
-      <Menu openOnHover="desktop">
-        <Menu.Trigger asChild>
+      <MenuDisclosure openOnHover="desktop">
+        <MenuDisclosure.Trigger asChild>
           {/* A <button>, not a <span>: the trigger has to be reachable by
               keyboard (WCAG 2.1.1). */}
           <button type="button" className={FOOTER_LINK_CLASSNAME}>
@@ -44,18 +36,18 @@ export const FooterDropdown: React.FC<FooterDropdownProps> = ({
               className="ms-[8px] shrink-0"
             />
           </button>
-        </Menu.Trigger>
-        <Menu.Content
-          asChild
+        </MenuDisclosure.Trigger>
+        <MenuDisclosure.Content
+          data-testid="footer-dropdown-panel"
           side="top"
           align="end"
           className="p-[6.5px] min-w-[200px]"
           // Metronic's base row padding with the footer's `px-3`.
           density="compact"
         >
-          <ul>{children}</ul>
-        </Menu.Content>
-      </Menu>
+          <ul className="m-[0px] list-none p-[0px]">{children}</ul>
+        </MenuDisclosure.Content>
+      </MenuDisclosure>
     </li>
   );
 };

@@ -6,9 +6,9 @@ import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
 /**
- * The user's IP address with a copy icon: a menu item, so arrow keys reach
- * it. Choosing the row copies the address; the icon is its look only. The
- * menu stays open.
+ * The user's IP address with a copy icon: a button in the user menu.
+ * Choosing the row copies the address; the icon is its look only. The menu
+ * stays open.
  */
 export const UserIpAddress = ({ ip }: { ip: string }) => {
   const { showSuccess } = useNotify();

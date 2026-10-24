@@ -21,6 +21,9 @@ interface OwnProps {
   buttonVariant?: ButtonVariant;
   onlyButton?: boolean;
   verbose?: string;
+  /** The button's accessible name, when "Copy to clipboard" does not say
+   * what it copies (an icon next to a masked field). */
+  label?: string;
 }
 
 export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
@@ -31,6 +34,7 @@ export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
   size,
   onlyButton,
   verbose = translate('Text'),
+  label = translate('Copy to clipboard'),
 }) => {
   const { showSuccess } = useNotify();
 
@@ -54,10 +58,10 @@ export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
         buttonClassName,
       )}
       type="button"
-      aria-label={translate('Copy to clipboard')}
+      aria-label={label}
       onClick={(e) => onClick(e)}
     >
-      <Tooltip label={translate('Copy to clipboard')}>
+      <Tooltip label={label}>
         <CopyIcon weight="bold" size={size} />
       </Tooltip>
     </button>

@@ -28,7 +28,7 @@ const MENU_PANEL_MOTION_CLASSNAME =
   'animate-[waldur-menu-enter-up_0.3s_ease] data-[side=top]:animate-[waldur-menu-enter-down_0.3s_ease] motion-reduce:animate-none';
 
 export type SurfaceLook = 'nav' | 'actions';
-export type SurfaceContainer = 'menu' | 'popover';
+export type SurfaceContainer = 'menu' | 'popover' | 'disclosure';
 
 // The surfaces reset margin and padding (an `asChild` <ul> has the
 // browser's) with arbitrary values, not `m-0`/`p-0`: Bootstrap defines
@@ -48,6 +48,14 @@ const navSurface = cva(
         // filter's select needs room for its own option list), and hidden
         // while closed for the table filter panels that stay mounted.
         popover: 'data-[state=closed]:hidden',
+        // A MenuDisclosure panel: a list of links that scrolls inside the
+        // space Radix measures, like a menu. Closed, it has no animation:
+        // Radix keeps a closing panel mounted until its animation ends, and
+        // a panel closed while its entrance replays (after a section
+        // expands and it repositions) stayed in the page, off-screen, with
+        // keyboard focus inside it.
+        disclosure:
+          'max-h-(--radix-popover-content-available-height) overflow-x-hidden overflow-y-auto data-[state=closed]:animate-none',
       },
     },
     defaultVariants: { container: 'menu' },

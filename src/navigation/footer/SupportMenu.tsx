@@ -11,9 +11,9 @@ import { FooterDropdown } from './FooterDropdown';
 import { IssuesLink } from './IssuesLink';
 
 /**
- * A contact value (the support email or phone) that copies when chosen: a
- * menu item, so arrow keys reach it, that stays open, since the user may
- * copy it more than once or copy it and then look at another row.
+ * A contact value (the support email or phone) as a button that copies it.
+ * The dropdown stays open, since the user may copy it more than once or
+ * copy it and then look at another row.
  */
 const SupportSubMenuItem = ({ title, onCopied }) =>
   title ? (

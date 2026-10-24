@@ -3,6 +3,8 @@ import { createContext, PointerEvent, useRef } from 'react';
 import { useBreakpointDown } from '../useMediaQuery';
 
 export interface HoverHandlers {
+  /** Whether hover opens the menu at the current viewport width. */
+  enabled: boolean;
   trigger: {
     onMouseEnter(): void;
     onMouseLeave(): void;
@@ -52,6 +54,7 @@ export const useHoverOpen = (
     },
   };
   const handlers: HoverHandlers = {
+    enabled,
     trigger: {
       ...mouse,
       onPointerDown: (event) => {
