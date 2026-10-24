@@ -5,7 +5,6 @@ import { EditFieldProvider } from '@/form/editFields';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
-import { GoogleCalendarActions } from './GoogleCalendarActions';
 import { RemoteActions } from './RemoteActions';
 import { OfferingEditPanelProps } from './types';
 import { useUpdateOfferingIntegration } from './utils';
@@ -25,7 +24,6 @@ export const BaseProvisioningConfigSection: FC<
         <>
           <EditSchedulesButton {...props} />
           <RemoteActions offering={props.offering} />
-          <GoogleCalendarActions offering={props.offering} />
         </>
       }
       className="card-bordered mb-7"
