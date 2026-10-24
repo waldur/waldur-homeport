@@ -2,7 +2,6 @@ import { FunctionComponent, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
-import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { isEmpty } from '@/core/utils';
 import { translate } from '@/i18n';
 import { AttributesList } from '@/marketplace/offerings/details/AttributesList';
@@ -37,8 +36,6 @@ export const PublicOfferingAttributesCard: FunctionComponent<
     () =>
       !!offering.datacite_doi ||
       offering.citation_count >= 0 ||
-      (!!offering.google_calendar_link &&
-        offering.type === OFFERING_TYPE_BOOKING) ||
       hasValidAttributes,
     [offering, hasValidAttributes],
   );

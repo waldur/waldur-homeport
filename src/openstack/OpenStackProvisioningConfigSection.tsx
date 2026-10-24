@@ -12,7 +12,6 @@ import {
 } from '@/form/editFields';
 import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
-import { GoogleCalendarActions } from '@/marketplace/offerings/update/integration/GoogleCalendarActions';
 import { RemoteActions } from '@/marketplace/offerings/update/integration/RemoteActions';
 import { OfferingEditPanelProps } from '@/marketplace/offerings/update/integration/types';
 import { useUpdateOfferingIntegration } from '@/marketplace/offerings/update/integration/utils';
@@ -45,7 +44,6 @@ export const OpenStackProvisioningConfigSection: FC<OfferingEditPanelProps> = (
           <>
             <EditSchedulesButton {...props} />
             <RemoteActions offering={props.offering} />
-            <GoogleCalendarActions offering={props.offering} />
           </>
         }
       >

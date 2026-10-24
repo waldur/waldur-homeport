@@ -1,10 +1,8 @@
 import { FunctionComponent } from 'react';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
-import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { translate } from '@/i18n';
 import { CopyToClipboard } from '@/marketplace/common/CopyToClipboard';
-import { GoogleCalendarLink } from '@/marketplace/offerings/details/GoogleCalendarLink';
 import { ReferralDetailsButton } from '@/marketplace/referral/ReferralDetailsButton';
 import './PublicOfferingAttributesSection.scss';
 
@@ -34,9 +32,5 @@ export const PublicOfferingAttributesSection: FunctionComponent<
         )}
       </div>
     )}
-    {offering.google_calendar_link &&
-      offering.type === OFFERING_TYPE_BOOKING && (
-        <GoogleCalendarLink link={offering.google_calendar_link} />
-      )}
   </div>
 );

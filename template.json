@@ -9206,11 +9206,6 @@
       "feature_area": "common"
     }
   },
-  "Calendar": {
-    "context": {
-      "feature_area": "details"
-    }
-  },
   "Calendar month": {
     "context": {
       "primary_ui_type": "label"
@@ -10739,11 +10734,6 @@
   "Click to reject this project.": {
     "context": {
       "feature_area": "managed-projects"
-    }
-  },
-  "Click to see Google Calendar": {
-    "context": {
-      "feature_area": "details"
     }
   },
   "Click-through": {
@@ -23702,29 +23692,6 @@
   "Good to know:": {
     "context": {
       "feature_area": "project-digest"
-    }
-  },
-  "Google Calendar": {
-    "context": {
-      "feature_area": "integration"
-    }
-  },
-  "Google Calendar has been published successfully.": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "integration"
-    }
-  },
-  "Google Calendar has been synced successfully.": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "integration"
-    }
-  },
-  "Google Calendar has been unpublished successfully.": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "integration"
     }
   },
   "Government": {
@@ -44141,11 +44108,6 @@
       "action_type": "create"
     }
   },
-  "Publish as Google Calendar": {
-    "context": {
-      "feature_area": "integration"
-    }
-  },
   "Publish profile": {
     "context": {
       "feature_area": "invitations"
@@ -56210,11 +56172,6 @@
       "feature_area": "actions"
     }
   },
-  "Sync with Google Calendar": {
-    "context": {
-      "feature_area": "integration"
-    }
-  },
   "Synced": {
     "context": {
       "primary_ui_type": "label"
@@ -64548,12 +64505,6 @@
       "feature_area": "wizard"
     }
   },
-  "Unable to publish Google Calendar.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "integration"
-    }
-  },
   "Unable to publish profile.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -65688,12 +65639,6 @@
       "feature_area": "freeipa"
     }
   },
-  "Unable to sync Google Calendar.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "integration"
-    }
-  },
   "Unable to sync ORCID data.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -65854,12 +65799,6 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "openstack-security-groups"
-    }
-  },
-  "Unable to unpublish Google Calendar.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "integration"
     }
   },
   "Unable to unpublish profile.": {
@@ -67166,11 +67105,6 @@
   "Unpublish": {
     "context": {
       "feature_area": "reviewer"
-    }
-  },
-  "Unpublish as Google Calendar": {
-    "context": {
-      "feature_area": "integration"
     }
   },
   "Unpublish profile": {
