@@ -1,7 +1,6 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
 
 import eslint from '@eslint/js';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import prettier from 'eslint-plugin-prettier';
@@ -156,7 +155,7 @@ export default tseslint
     {
       files: ['**/*.{js,ts,tsx}'],
       plugins: {
-        '@typescript-eslint': tsPlugin,
+        '@typescript-eslint': tseslint.plugin,
         react: reactPlugin,
         'react-hooks': reactHooks,
         prettier: prettier,

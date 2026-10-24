@@ -1,5 +1,5 @@
-import tsParser from '@typescript-eslint/parser';
 import { RuleTester } from 'eslint';
+import { parser as tsParser } from 'typescript-eslint';
 import { describe } from 'vitest';
 
 import noBootstrapButtonMarkup from './no-bootstrap-button-markup.js';

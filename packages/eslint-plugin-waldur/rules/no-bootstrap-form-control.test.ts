@@ -1,5 +1,5 @@
-import tsParser from '@typescript-eslint/parser';
 import { RuleTester } from 'eslint';
+import { parser as tsParser } from 'typescript-eslint';
 import { describe } from 'vitest';
 
 import noBootstrapFormControl from './no-bootstrap-form-control.js';

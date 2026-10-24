@@ -1,6 +1,6 @@
 import readXlsxFile from 'read-excel-file/browser';
-import { v4 as uuidv4 } from 'uuid';
 
+import { randomUUID } from '@/core/utils';
 import { COMPONENT_USAGE_IMPORT_FORM_ID } from '@/invoices/constants';
 
 import {
@@ -80,7 +80,7 @@ export const mapRowsToUsage = (
       }
 
       return {
-        uuid: uuidv4(),
+        uuid: randomUUID(),
         customerName,
         customerUuid: matchedCustomer?.uuid,
         customerMatched: !!matchedCustomer,

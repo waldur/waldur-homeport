@@ -89,7 +89,7 @@ yarn info vite version
 - **Knip** for unused dependency detection
 - **oxlint `import/no-cycle`** for circular dependency analysis
 - **Lint-staged** for pre-commit code formatting
-- **PostCSS** with autoprefixer and cssnano for CSS optimization
+- **CSS**: SCSS compiled by Sass, Tailwind CSS v4 through `@tailwindcss/vite` (which adds vendor prefixes itself), and Vite's minification in production builds. There is no PostCSS configuration.
 
 ### Modern Development Practices
 
