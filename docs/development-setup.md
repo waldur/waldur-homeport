@@ -34,7 +34,7 @@ For detailed testing standards and strategy, see [Testing Standards & Strategy](
 ### Dependency Management
 
 - `yarn deps:unused` - Find unused dependencies and exports with Knip
-- `yarn deps:circular` - Check for circular dependencies with Madge
+- `yarn deps:circular` - Check for import cycles with oxlint `import/no-cycle` (config: `.oxlintrc.cycles.json`; `@/` imports are resolved). Every static import counts, including `import type` / `export type` and a plain import of a type; only a dynamic `import()` does not, since lazy pages and dialogs are split off that way. oxlint reports each import that closes a cycle rather than the whole chain: follow the reported import lines from file to file to see it.
 
 #### Version Management
 
@@ -87,7 +87,7 @@ yarn info vite version
 ### Code Quality & Analysis
 
 - **Knip** for unused dependency detection
-- **Madge** for circular dependency analysis
+- **oxlint `import/no-cycle`** for circular dependency analysis
 - **Lint-staged** for pre-commit code formatting
 - **PostCSS** with autoprefixer and cssnano for CSS optimization
 

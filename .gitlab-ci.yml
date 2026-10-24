@@ -100,6 +100,9 @@ Scan JS dependencies:
         - src/**/*.scss
         - src/**/*.ts
         - src/**/*.tsx
+        # oxlint checks plain JS for import cycles too (yarn deps:circular).
+        - src/**/*.js
+        - src/**/*.jsx
         - package.json
         - yarn.lock
         - tsconfig.json
@@ -107,6 +110,7 @@ Scan JS dependencies:
         - vite.config.ts
         - .eslintrc.cjs
         - .eslintignore
+        - .oxlintrc.cycles.json
         - scripts/**/*
         - .gitlab-ci.yml
 

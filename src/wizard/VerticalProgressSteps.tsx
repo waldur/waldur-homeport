@@ -2,7 +2,7 @@ import { CheckIcon, CircleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import { ProgressStep } from '@/wizard';
+import type { ProgressStep } from './ProgressSteps';
 
 interface VerticalProgressStepsProps {
   steps: ProgressStep[];

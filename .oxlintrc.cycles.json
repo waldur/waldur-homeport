@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  // `yarn deps:circular`: import cycles only, passed explicitly with -c so a
+  // default .oxlintrc.json can never change what this check runs. oxlint
+  // resolves the `@/` alias through the tsconfig.json it discovers next to
+  // the files, so no --tsconfig flag is needed.
+  "plugins": ["import"],
+  "categories": {
+    "correctness": "off",
+    "suspicious": "off",
+    "pedantic": "off",
+    "perf": "off",
+    "style": "off",
+    "restriction": "off",
+    "nursery": "off"
+  },
+  "rules": {
+    // Type-only imports count too, as they did for madge. Dynamic import()
+    // never counts: it is how lazy pages and dialogs are split off.
+    "import/no-cycle": ["error", { "ignoreTypes": false }]
+  }
+}
