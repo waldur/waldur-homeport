@@ -15,13 +15,42 @@ const STOPPED_RUNTIME_STATES = [
   'POWERED_OFF',
 ];
 
-export const getResourceStateVariant = (resource: Resource): BadgeVariant => {
+const formatState = (state: string) =>
+  state === 'OK' ? state : capitalize(lowerCase(state));
+
+// The cloud reports a broken object in its own words: Nova ERROR, Cinder
+// error, error_extending, error_deleting and so on.
+const isErrorRuntimeState = (runtimeState?: string) =>
+  runtimeState === 'ERRED' || /^error/i.test(runtimeState ?? '');
+
+/**
+ * Why the resource counts as erred, or null when it does not. Checked from
+ * the most specific layer to the least: what the cloud reports, then the
+ * backend object Waldur keeps for it, then the marketplace resource itself.
+ */
+export const getResourceErrorReason = (resource: Resource): string | null => {
   const runtimeState = resource.backend_metadata?.runtime_state;
   const backendState = resource.backend_metadata?.state;
-  const states = [runtimeState, resource.state, backendState];
-  if (states.includes('Erred') || states.includes('ERRED')) {
+  if (isErrorRuntimeState(runtimeState)) {
+    return translate('The provider reports this resource as {state}.', {
+      state: formatState(runtimeState),
+    });
+  }
+  if (backendState === 'ERRED' || backendState === 'Erred') {
+    return translate('An operation on the provider side failed.');
+  }
+  if (resource.state === 'Erred') {
+    return translate('The last operation on this resource failed.');
+  }
+  return null;
+};
+
+export const getResourceStateVariant = (resource: Resource): BadgeVariant => {
+  if (getResourceErrorReason(resource)) {
     return 'danger';
   }
+  const runtimeState = resource.backend_metadata?.runtime_state;
+  const backendState = resource.backend_metadata?.state;
   if (resource.state === 'Terminated' || backendState === 'Deleted') {
     return 'warning';
   }
@@ -47,23 +76,29 @@ export const ResourceStateField = ({
     ['Creating', 'Updating', 'Terminating'].includes(resource.state) ||
     (backendState && !['OK', 'ERRED', 'Deleted'].includes(backendState));
 
-  const state = runtimeState || backendState || resource.state;
+  // Label, colour and tooltip all follow the same decision, so a red badge
+  // never carries a healthy label such as OK or Active.
+  const errorReason = getResourceErrorReason(resource);
+  const label = errorReason
+    ? translate('Erred')
+    : formatState(runtimeState || backendState || resource.state);
+  const tooltip = errorReason
+    ? [errorReason, resource.error_message].filter(Boolean).join(' ')
+    : resource.backend_metadata?.action
+      ? translate('{action} in progress', {
+          action: resource.backend_metadata.action,
+        })
+      : '';
   return (
     <StateIndicator
-      label={state === 'OK' ? state : capitalize(lowerCase(state))}
+      label={label}
       variant={getResourceStateVariant(resource)}
       active={isActive}
       shape={shape}
       tone={tone}
       hasBullet={hasBullet}
       size={size}
-      tooltip={
-        resource.backend_metadata?.action
-          ? translate('{action} in progress', {
-              action: resource.backend_metadata.action,
-            })
-          : ''
-      }
+      tooltip={tooltip}
       data-testid="state-indicator"
     />
   );

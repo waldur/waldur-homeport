@@ -4298,6 +4298,7 @@
       "feature_area": "api-keys"
     }
   },
+  "An operation on the provider side failed.": {},
   "An option with this internal name already exists.": {
     "context": {
       "feature_area": "options"
@@ -7947,11 +7948,6 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "resources"
-    }
-  },
-  "Backend state: Erred": {
-    "context": {
-      "feature_area": "details"
     }
   },
   "Backend status: all services working": {
@@ -58164,6 +58160,7 @@
       "feature_area": "api-keys"
     }
   },
+  "The last operation on this resource failed.": {},
   "The last task reported an error": {
     "context": {
       "feature_area": "offering-merges"
@@ -58642,6 +58639,15 @@
         }
       },
       "feature_area": "rounds"
+    }
+  },
+  "The provider reports this resource as {state}.": {
+    "context": {
+      "variables": {
+        "state": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "The public view is currently inactive as this call is archived or draft.": {
