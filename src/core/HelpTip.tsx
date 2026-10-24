@@ -26,10 +26,7 @@ export const HelpTip: FC<HelpTipProps> = ({
       {/* The trigger is the span rather than the icon itself, so the hover
           target is the whole mark and the test id survives icon changes. */}
       <span className="inline-flex text-quaternary" data-testid="help-tip">
-        <QuestionIcon
-          weight="bold"
-          className="svg-icon svg-icon-4 icon-align"
-        />
+        <QuestionIcon size={16} weight="bold" className="-mt-[3px]" />
       </span>
     </Tooltip>
   </>

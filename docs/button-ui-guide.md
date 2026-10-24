@@ -435,7 +435,7 @@ When `pending={true}`:
 
 > [!CAUTION]
 > **Never wrap button icons in `.svg-icon`**.
-> Legacy Metronic stylesheets define `.svg-icon { fill: #A1A5B7 !important; }`. This rule beats `currentColor` and turns crisp white icons on primary buttons into a muddy gray. Always pass bare Phosphor icons directly to `iconNode`.
+> `.svg-icon` has been retired (#530) and is prohibited by ESLint (`no-retired-bootstrap-utility`). Always pass bare Phosphor icons directly to `iconNode`.
 
 ---
 

@@ -69,12 +69,10 @@ export const FreeIPAAccountCreate: React.FC<FreeIPAAccountCreateOwnProps> = ({
                 submitting={submitting}
                 disabled={invalid}
                 variant="primary"
-              >
-                <span className="svg-icon svg-icon-2">
-                  <PlusIcon weight="bold" />
-                </span>{' '}
-                {translate('Create')}
-              </SubmitButton>
+                label={translate('Create')}
+                iconNode={<PlusIcon weight="bold" />}
+                iconOnLeft
+              />
             </div>
           </FormField>
         </form>

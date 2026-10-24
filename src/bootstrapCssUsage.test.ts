@@ -210,10 +210,10 @@ describe('bootstrapCssUsage', () => {
         expect(isClassAllowed('symbol-group-hover', new Set())).toBe(true);
       });
 
-      it('allows svg-icon-* runtime classes', () => {
-        expect(isClassAllowed('svg-icon', new Set())).toBe(true);
-        expect(isClassAllowed('svg-icon-2hx', new Set())).toBe(true);
-        expect(isClassAllowed('svg-icon-primary', new Set())).toBe(true);
+      it('rejects retired svg-icon-* runtime classes', () => {
+        expect(isClassAllowed('svg-icon', new Set())).toBe(false);
+        expect(isClassAllowed('svg-icon-2hx', new Set())).toBe(false);
+        expect(isClassAllowed('svg-icon-primary', new Set())).toBe(false);
       });
 
       it('allows LiveKit third-party lk-* classes', () => {

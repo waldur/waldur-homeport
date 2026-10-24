@@ -116,10 +116,8 @@ const PasskeyStep = ({ ceremony, onCancel }) => {
 
   return (
     <div className="mb-2 text-center">
-      <div className="mb-5">
-        <span className="svg-icon svg-icon-2x text-brand">
-          <FingerprintIcon weight="bold" />
-        </span>
+      <div className="mb-5 flex justify-center">
+        <FingerprintIcon size={26} weight="bold" className="text-brand" />
       </div>
       <p className="text-quaternary mb-5">
         {translate(

@@ -21,7 +21,9 @@
       border-color: transparent !important;
     }
 
-    @include svg-icon-color(var(--text-quinary), true);
+    svg {
+      color: var(--text-quinary) !important;
+    }
   }
 
   input {

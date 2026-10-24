@@ -197,8 +197,7 @@ export const BrandVariant: Story = {
 
 /**
  * Icons inside segments (the hook-type picker): plain Phosphor icons with a
- * `size`, not a Metronic `.svg-icon` wrapper -- that class's fixed gray fill
- * would beat the segment's text color. The segment's own gap spaces them.
+ * `size` prop inheriting the segment's text color. The segment's own gap spaces them.
  */
 export const WithIcons: Story = {
   render: () => {

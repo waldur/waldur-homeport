@@ -22,9 +22,6 @@ describe('no-retired-bootstrap-utility', () => {
       {
         code: 'const A = () => <div className="min-h-[100px] px-5 mt-md-0 my-lg-0 mt-n2 flex-lg-row" />;',
       },
-      {
-        code: 'const A = () => <span className="svg-icon svg-icon-2 svg-icon-5tx" />;',
-      },
       // Tailwind's own classes.
       {
         code: 'const A = () => <div className="float-start lg:p-3 -mx-2 content-center h-screen tracking-wide" />;',
@@ -58,13 +55,27 @@ describe('no-retired-bootstrap-utility', () => {
         ],
       },
       {
-        code: 'const A = () => <span className="svg-icon svg-icon-lg-3" />;',
+        code: 'const A = () => <span className="svg-icon svg-icon-2 svg-icon-5tx" />;',
         errors: [
           {
             messageId: 'retired',
             data: {
-              token: 'svg-icon-lg-3',
-              hint: 'svg-icon-<size> with a Tailwind breakpoint variant on the svg (lg:size-6)',
+              token: 'svg-icon',
+              hint: 'bare Phosphor or SVGR icon with size prop or Tailwind size-* (size-5, size-6) and text-* for color',
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'svg-icon-2',
+              hint: 'bare Phosphor or SVGR icon with size prop or Tailwind size-* (size-5, size-6) and text-* for color',
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'svg-icon-5tx',
+              hint: 'bare Phosphor or SVGR icon with size prop or Tailwind size-* (size-5, size-6) and text-* for color',
             },
           },
         ],

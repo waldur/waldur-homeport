@@ -50,9 +50,11 @@ const SortableField = ({ name, index, onRemove, disabled }) => {
         {...listeners}
         className={isDragging ? 'cursor-grabbing' : 'cursor-grab'}
       >
-        <span className="svg-icon svg-icon-1 svg-icon-gray">
-          <DotsSixVerticalIcon weight="bold" />
-        </span>
+        <DotsSixVerticalIcon
+          size={24}
+          weight="bold"
+          className="text-quaternary"
+        />
       </td>
       <td>
         <Field name={name} validate={required}>

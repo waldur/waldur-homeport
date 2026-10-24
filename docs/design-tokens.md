@@ -303,8 +303,7 @@ green, whatever the tenant configured. So:
 - Never pass a CSS variable into a Sass colour function (`tint-color`, `shade-color`, `mix`,
   `rgba($x, …)`): they need a compile-time colour. That is why the static `$component-active-bg` (the default green, which Bootstrap tints) stays a literal.
 - `src/styles/bootstrap/_variables.scss` already points the Bootstrap outputs that would otherwise paint the
-  static green at the runtime brand: the active list-group row and the range thumb. `.svg-icon-primary`
-  is `var(--brand-color)`, so it follows the brand too.
+  static green at the runtime brand: the active list-group row and the range thumb.
 
 ## Font size
 

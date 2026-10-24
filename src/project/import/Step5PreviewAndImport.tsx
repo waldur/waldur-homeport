@@ -141,8 +141,9 @@ export const Step5PreviewAndImport: FC<Step5Props> = ({
               row.is_industry && (
                 <Tooltip label={translate('Industry project')}>
                   <FactoryIcon
+                    size={16}
                     weight="bold"
-                    className="svg-icon svg-icon-4 ms-3"
+                    className="ms-3 inline-block text-quaternary"
                   />
                 </Tooltip>
               )}

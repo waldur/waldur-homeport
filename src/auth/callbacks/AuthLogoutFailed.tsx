@@ -16,10 +16,12 @@ export const AuthLogoutFailed: FunctionComponent = () => {
       <h3 className="app-title centered">{translate('Logout failed')}</h3>
       {typeof message === 'string' && <p className="mt-3">{message}</p>}
       <p className="mt-3">
-        <button className="text-btn" type="button" onClick={explicitLogout}>
-          <span className="svg-icon svg-icon-2">
-            <SignOutIcon weight="bold" />
-          </span>{' '}
+        <button
+          className="text-btn inline-flex items-center gap-2"
+          type="button"
+          onClick={explicitLogout}
+        >
+          <SignOutIcon size={20} weight="bold" />
           {translate('Perform local logout')}
         </button>
       </p>

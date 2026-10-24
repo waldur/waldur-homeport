@@ -36,9 +36,7 @@ export const ResourceEndDateConflictBar = () => {
           </span>
         </p>
         <button className="text-btn ms-auto" onClick={toggle}>
-          <span className="svg-icon svg-icon-2">
-            <XIcon weight="bold" />
-          </span>
+          <XIcon size={20} weight="bold" />
         </button>
       </div>
     </div>

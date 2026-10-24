@@ -192,12 +192,10 @@ export const GroupInvitationCreateDialog = ({
                       ? getOnlyOneProjectManagerTooltip()
                       : undefined
                   }
-                >
-                  <span className="svg-icon svg-icon-2">
-                    <LinkIcon weight="bold" />
-                  </span>
-                  {translate('Generate link')}
-                </SubmitButton>
+                  label={translate('Generate link')}
+                  iconNode={<LinkIcon weight="bold" />}
+                  iconOnLeft
+                />
               </div>
               <InvitationLinkField invitation={invitation} />
             </ModalDialog>

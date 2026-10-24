@@ -127,10 +127,6 @@ export const PARTIALS = [
     scss: "@import 'config'; @import 'components/symbol';",
   },
   {
-    name: 'core/components/svg-icon',
-    scss: "@import 'config'; @import 'components/svg-icon';",
-  },
-  {
     name: 'core/components/timeline',
     scss: "@import 'config'; @import 'components/timeline';",
   },
@@ -394,7 +390,6 @@ export function isClassAllowed(cls, corpusTokens) {
   // 3. Runtime-built prefixes
   if (/^symbol-\d+px$/.test(cls)) return true;
   if (/^symbol-group(?:-[\w-]+)?$/.test(cls)) return true;
-  if (/^svg-icon(?:-[\w-]+)?$/.test(cls)) return true;
 
   // 4. Third-party markup
   if (/^lk-/.test(cls)) return true;

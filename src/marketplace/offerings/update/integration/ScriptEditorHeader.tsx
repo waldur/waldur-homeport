@@ -215,18 +215,16 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
                   </Link>
                 ) : (
                   <>
-                    <span>
-                      <span className="svg-icon svg-icon-2">
-                        {option.type === 'environ' ? (
-                          <KeyIcon weight="bold" />
-                        ) : option.type === 'options' ? (
-                          <KeyboardIcon weight="bold" />
-                        ) : option.type === 'roles' ? (
-                          <UserIcon weight="bold" />
-                        ) : (
-                          <SlidersIcon weight="bold" />
-                        )}
-                      </span>
+                    <span className="inline-flex items-center gap-3">
+                      {option.type === 'environ' ? (
+                        <KeyIcon size={20} weight="bold" />
+                      ) : option.type === 'options' ? (
+                        <KeyboardIcon size={20} weight="bold" />
+                      ) : option.type === 'roles' ? (
+                        <UserIcon size={20} weight="bold" />
+                      ) : (
+                        <SlidersIcon size={20} weight="bold" />
+                      )}
                       <span>{option.label}</span>
                       <span className="text-quaternary ms-3">
                         {option.type === 'environ'

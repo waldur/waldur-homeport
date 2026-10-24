@@ -49,9 +49,7 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
               }}
             />
           ) : (
-            <span className="svg-icon svg-icon-5tx svg-icon-dark">
-              <Placeholder className="max-h-[70px]" />
-            </span>
+            <Placeholder className="size-[75px] text-primary max-h-[70px]" />
           )}
         </div>
 

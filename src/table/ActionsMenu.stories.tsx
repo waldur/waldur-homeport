@@ -131,7 +131,7 @@ export const Toggles: Story = {
 
 /**
  * The labeled toggle on the `primary` variant, not just the default
- * `tertiary`: the caret's colour once came from `.svg-icon`'s fixed gray,
+ * `tertiary`: the caret's colour once came from legacy `.svg-icon`'s fixed gray,
  * invisible on `tertiary` but wrong on `primary`'s white text (ProviderCard's
  * "Enabled" toggle). Kept here so that regression stays visible.
  */

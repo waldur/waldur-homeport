@@ -8,6 +8,7 @@ import {
   WarningIcon,
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
+import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import {
@@ -25,8 +26,7 @@ import { ChangesAmountBadge } from './ChangesAmountBadge';
 import IconPendingApproval from './icons/pending-approval.svg';
 
 interface ProviderWidget {
-  icon?: any;
-  iconNode?: ReactNode;
+  iconNode: ReactNode;
   value: string | number;
   title: string;
   changes: number;
@@ -84,7 +84,7 @@ const generateWidgetsData = (statistics: ServiceProviderStatistics) => [
     to: { state: '#' },
   },
   {
-    icon: IconPendingApproval,
+    iconNode: <IconPendingApproval className="size-10 max-h-[50px]" />,
     value: statistics.pending_orders,
     title: translate('Orders pending approval'),
     changes: 0,
@@ -126,22 +126,12 @@ const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
     className="card-bordered grow min-h-[225px] hover:border-[var(--border-brand)]"
   >
     <Card.Body className="py-10 px-6">
-      {item.icon && (
-        <span
-          className={
-            'svg-icon svg-icon-2tx ' +
-            (item.active ? 'svg-icon-success' : 'svg-icon-gray-300')
-          }
-        >
-          <item.icon className="max-h-[50px]" />
-        </span>
-      )}
       {item.iconNode && (
         <span
-          className={
-            'svg-icon-2tx ' +
-            (item.active ? 'svg-icon-success' : 'svg-icon-gray-300')
-          }
+          className={classNames(
+            'inline-flex',
+            item.active ? 'text-success' : 'text-senary',
+          )}
         >
           {item.iconNode}
         </span>

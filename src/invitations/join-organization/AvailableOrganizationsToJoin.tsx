@@ -133,12 +133,10 @@ export const AvailableOrganizationsToJoin: FC = () => {
                     disabled={invalid || !values?.invitation?.uuid}
                     variant="primary"
                     className="ms-6"
-                  >
-                    <span className="svg-icon svg-icon-2">
-                      <LockOpenIcon weight="bold" />
-                    </span>
-                    {translate('Request access')}
-                  </SubmitButton>
+                    label={translate('Request access')}
+                    iconNode={<LockOpenIcon weight="bold" />}
+                    iconOnLeft
+                  />
                 ) : values?.invitation?.uuid ? (
                   <BaseButton
                     onClick={() => continueToAutentification(values.invitation)}

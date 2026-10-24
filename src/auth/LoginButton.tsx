@@ -25,7 +25,7 @@ export const LoginButton = ({
       <>
         <div className="login-button-icon">
           {image}
-          {icon && <span className="svg-icon">{icon}</span>}
+          {icon}
         </div>
         <div className="login-button-text">
           {translate('Sign in with {label}', { label })}

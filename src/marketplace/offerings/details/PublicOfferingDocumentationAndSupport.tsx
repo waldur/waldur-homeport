@@ -33,9 +33,7 @@ export const PublicOfferingDocumentationAndSupport: FunctionComponent<
               rel="noopener noreferrer"
               className={buttonVariants({ variant: 'tertiary' })}
             >
-              <span className="svg-icon svg-icon-2">
-                <ArrowSquareOutIcon weight="bold" />
-              </span>{' '}
+              <ArrowSquareOutIcon size={20} weight="bold" />
               {translate('Open documentation')}
             </a>
           </div>
@@ -49,9 +47,7 @@ export const PublicOfferingDocumentationAndSupport: FunctionComponent<
               rel="noopener noreferrer"
               className={buttonVariants({ variant: 'tertiary' })}
             >
-              <span className="svg-icon svg-icon-2">
-                <ArrowSquareOutIcon weight="bold" />
-              </span>{' '}
+              <ArrowSquareOutIcon size={20} weight="bold" />
               {translate('Open helpdesk')}
             </a>
           </div>

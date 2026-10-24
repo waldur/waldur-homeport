@@ -27,8 +27,8 @@ export const BusinessHoursGroup: FunctionComponent<BusinessHoursGroupProps> = ({
     help={translate('Daily available booking time range')}
   >
     <FormField>
-      <FormLabel className="svg-icon svg-icon-2">
-        <ClockIcon weight="bold" />
+      <FormLabel className="inline-flex items-center text-quaternary">
+        <ClockIcon size={20} weight="bold" />
         <span className="sr-only">{translate('From')}</span>
       </FormLabel>
       <Select

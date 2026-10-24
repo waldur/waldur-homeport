@@ -95,12 +95,13 @@ export const AuthValimoDialog = () => {
             footer={
               <>
                 <CloseDialogButton />
-                <SubmitButton invalid={invalid} submitting={submitting}>
-                  <span className="svg-icon svg-icon-2">
-                    <SignInIcon weight="bold" />
-                  </span>{' '}
-                  {translate('Sign in')}
-                </SubmitButton>
+                <SubmitButton
+                  invalid={invalid}
+                  submitting={submitting}
+                  label={translate('Sign in')}
+                  iconNode={<SignInIcon weight="bold" />}
+                  iconOnLeft
+                />
               </>
             }
           >

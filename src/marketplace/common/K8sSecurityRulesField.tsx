@@ -272,9 +272,7 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
           toggle="labeled"
           label={
             <>
-              <span className="svg-icon svg-icon-2">
-                <PlusCircleIcon weight="bold" />
-              </span>
+              <PlusCircleIcon size={20} weight="bold" />
               {translate('Add rule')}
             </>
           }

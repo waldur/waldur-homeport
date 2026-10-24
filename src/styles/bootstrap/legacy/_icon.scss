@@ -5,13 +5,21 @@
   background-color: transparent;
   line-height: 0.9;
 
-  @include svg-icon-color(var(--text-secondary));
-  @include svg-icon-size(20px);
+  color: var(--text-secondary);
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 
   &.icon-lg {
     padding: 11px;
     border-radius: 12px;
-    @include svg-icon-size(24px);
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 }
 

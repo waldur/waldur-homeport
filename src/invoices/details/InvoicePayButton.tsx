@@ -32,9 +32,7 @@ export const InvoicePayButton: FC<InvoicePayButtonProps> = ({
       target="_self"
       rel="noopener noreferrer"
     >
-      <span className="svg-icon svg-icon-2">
-        <MoneyIcon weight="bold" />
-      </span>
+      <MoneyIcon size={20} weight="bold" />
       {translate('Pay')}
     </a>
   ) : (

@@ -248,6 +248,8 @@ describe('Retired Bootstrap utilities', () => {
       'mt-lg-n1',
       'flex-md-fill',
       'flex-lg-shrink-0',
+      'svg-icon',
+      'svg-icon-2',
       'svg-icon-lg-3',
       'svg-icon-md-2x',
       'lh-1',

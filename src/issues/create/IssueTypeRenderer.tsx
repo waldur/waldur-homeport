@@ -5,7 +5,7 @@ import { IssueTypeOption } from './types';
 export const IssueTypeRenderer: FunctionComponent<IssueTypeOption> = (
   option,
 ) => (
-  <div>
-    <div className="svg-icon inline">{option.iconNode}</div> {option.label}
+  <div className="inline-flex items-center gap-2 [&>svg]:size-[20px]">
+    {option.iconNode} {option.label}
   </div>
 );

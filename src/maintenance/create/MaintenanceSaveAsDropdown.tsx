@@ -38,9 +38,7 @@ export const MaintenanceSaveAsDropdown: FC<OwnProps> = ({
       toggle="labeled"
       label={
         <>
-          <span className="svg-icon svg-icon-2">
-            <FloppyDiskBackIcon weight="bold" />
-          </span>
+          <FloppyDiskBackIcon size={20} weight="bold" />
           {translate('Save as')}
         </>
       }
