@@ -88,7 +88,6 @@ Use this agent when:
 - **Images**: Static assets in `src/images/`
 - **Fonts**: Managed through Vite asset pipeline
 - **Sass**: SCSS preprocessing with Sass 1.85.0
-- **Markdown**: Processed through vite-plugin-markdown
 - **Monaco Editor**: Code editing capabilities
 
 ## Environment Configuration

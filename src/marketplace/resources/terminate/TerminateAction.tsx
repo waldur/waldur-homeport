@@ -1,14 +1,14 @@
 import { XCircleIcon } from '@phosphor-icons/react';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { marketplaceResourcesTerminate } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
 import { checkOrderCanBeApproved } from '@/marketplace/orders/actions/selectors';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ReactComponent as TenantSubtitle } from '@/openstack/openstack-tenant/actions/DestroyActionSubtitle.md';
+import { TenantDestroySubtitle } from '@/openstack/openstack-tenant/actions/TenantDestroySubtitle';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ReactComponent as ClusterSubtitle } from '@/rancher/cluster/actions/DestroyActionSubtitle.md';
+import { ClusterDestroySubtitle } from '@/rancher/cluster/actions/ClusterDestroySubtitle';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { validateState } from '@/resource/actions/base';
 import { useValidators } from '@/resource/actions/useValidators';
@@ -17,6 +17,18 @@ import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 import { ResourceAction } from '../actions/constants';
 
 const validators = [validateState('OK', 'ERRED', 'Erred')];
+
+/** What terminating takes with it, for the types where that is more than
+ * the resource itself. */
+const getTerminateSubtitle = (resourceType: string) => {
+  if (resourceType === 'OpenStack.Tenant') {
+    return <TenantDestroySubtitle />;
+  }
+  if (resourceType === 'Rancher.Cluster') {
+    return <ClusterDestroySubtitle />;
+  }
+  return null;
+};
 
 interface TerminateActionProps {
   resource: any;
@@ -32,16 +44,6 @@ export const TerminateAction: FC<TerminateActionProps> = ({
   const customer = useCustomer();
   const project = useProject();
   const orderCanBeApproved = checkOrderCanBeApproved(user, customer, project);
-
-  const dialogSubtitle = useMemo(() => {
-    if (resource.resource_type === 'OpenStack.Tenant') {
-      return <TenantSubtitle />;
-    }
-    if (resource.resource_type === 'Rancher.Cluster') {
-      return <ClusterSubtitle />;
-    }
-    return null;
-  }, [resource.resource_type]);
 
   const mutation = useManagedMutation<any, any, void>({
     mutationFn: () =>
@@ -78,7 +80,7 @@ export const TerminateAction: FC<TerminateActionProps> = ({
             },
             formatJsxTemplate,
           )}
-          {dialogSubtitle}
+          {getTerminateSubtitle(resource.resource_type)}
         </>
       ),
       options: {

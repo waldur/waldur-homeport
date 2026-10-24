@@ -394,7 +394,6 @@ first paint, so the entry graph is kept deliberately small:
 - SVG files processed through SVGR 8.1.0 plugin for React components
 - Images and static assets in `src/images/`
 - Font files managed through Vite's asset pipeline
-- Markdown content processed through vite-plugin-markdown
 - Monaco Editor 0.52.2 for code editing capabilities
 - Sass 1.85.0 for SCSS preprocessing
 
