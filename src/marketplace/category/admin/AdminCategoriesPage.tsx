@@ -121,9 +121,11 @@ export const AdminCategoriesPage: FunctionComponent<
             if (row.group) {
               if (loadingGroups) {
                 return (
-                  <span className="svg-icon svg-icon-4 animation-spin me-2">
-                    <ArrowsClockwiseIcon weight="bold" />
-                  </span>
+                  <ArrowsClockwiseIcon
+                    size={16}
+                    weight="bold"
+                    className="animate-spin me-2"
+                  />
                 );
               } else if (errorGroups) {
                 return (

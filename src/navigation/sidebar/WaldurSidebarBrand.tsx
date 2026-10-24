@@ -174,9 +174,11 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
                 )}
               </div>
               <div className="ms-2">
-                <span className="svg-icon svg-icon-primary svg-icon-1x">
-                  <ArrowSquareOutIcon weight="bold" />
-                </span>
+                <ArrowSquareOutIcon
+                  size={24}
+                  weight="bold"
+                  className="text-brand"
+                />
               </div>
             </a>
           </Menu.Item>

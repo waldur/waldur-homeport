@@ -184,7 +184,7 @@ export const SubnetValueContainer = (props) => {
             </div>
           }
         >
-          <QuestionIcon weight="bold" className="svg-icon svg-icon-2" />
+          <QuestionIcon size={20} weight="bold" className="text-quaternary" />
         </Tooltip>
       </div>
     </components.ValueContainer>

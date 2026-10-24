@@ -23437,7 +23437,9 @@
   },
   "Generate link": {
     "context": {
-      "feature_area": "actions"
+      "primary_ui_type": "submit_button",
+      "feature_area": "actions",
+      "action_type": "create"
     }
   },
   "Generate matches": {
@@ -46816,7 +46818,9 @@
   },
   "Request access": {
     "context": {
-      "feature_area": "join-organization"
+      "primary_ui_type": "submit_button",
+      "feature_area": "join-organization",
+      "action_type": "create"
     }
   },
   "Request account removal for {userName}.": {
@@ -54153,7 +54157,9 @@
   },
   "Sign in": {
     "context": {
-      "feature_area": "valimo"
+      "primary_ui_type": "submit_button",
+      "feature_area": "valimo",
+      "action_type": "create"
     }
   },
   "Sign in method": {

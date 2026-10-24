@@ -86,9 +86,11 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
       {showIndustry &&
         isFeatureVisible(ProjectFeatures.show_industry_flag) &&
         row.is_industry && (
-          <span className="svg-icon svg-icon-4">
-            <FactoryIcon weight="bold" />
-          </span>
+          <FactoryIcon
+            size={16}
+            weight="bold"
+            className="inline-block text-quaternary"
+          />
         )}
       {row.is_removed && (
         <Badge variant="danger" shape="pill" tone="outline" className="text-xs">

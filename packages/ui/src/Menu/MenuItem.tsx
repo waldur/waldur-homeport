@@ -55,7 +55,6 @@ const NAV_MENU_ITEM_CLASSNAME = [
   'group-data-[density=base]/menu:px-[12px] group-data-[density=base]/menu:py-[8px] group-data-[density=base]/menu:leading-[inherit]',
   'group-data-[tone=strong]/menu:not-data-disabled:text-[var(--menu-item-strong-text)]',
   'data-disabled:cursor-not-allowed data-disabled:text-[var(--menu-item-disabled-text)] hover:focus-visible:outline-none',
-  '[&_.svg-icon]:inline-flex [&_.svg-icon]:items-center [&_.svg-icon]:justify-center [&_.svg-icon]:size-[20px] [&_.svg-icon]:me-[12px] [&_.svg-icon]:shrink-0 [&_.svg-icon>svg]:size-[20px]',
   '[&>svg:first-child]:me-[12px] [&>svg:first-child]:size-[20px] [&>svg:first-child]:shrink-0',
   MENU_ROW_FOCUS_RING_CLASSNAME,
   'menu-row-active:bg-[var(--menu-item-hover-bg)] menu-row-active:text-[var(--menu-item-hover-text)]',
@@ -79,7 +78,6 @@ const ACTIONS_MENU_ITEM_CLASSNAME = [
   'action-row-active:bg-[var(--menu-item-hover-bg)] action-row-active:text-[var(--menu-item-hover-text)]',
   'action-row-disabled:pointer-events-none action-row-disabled:text-[var(--menu-item-muted-text)]',
   'hover:focus-visible:outline-none',
-  '[&_.svg-icon]:inline-flex [&_.svg-icon]:items-center [&_.svg-icon]:justify-center [&_.svg-icon]:size-[20px] [&_.svg-icon]:me-[12px] [&_.svg-icon]:shrink-0 [&_.svg-icon>svg]:size-[20px]',
   '[&>svg:first-child]:me-[12px] [&>svg:first-child]:size-[20px] [&>svg:first-child]:shrink-0',
   MENU_ROW_FOCUS_RING_CLASSNAME,
 ].join(' ');

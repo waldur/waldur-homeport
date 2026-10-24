@@ -32,9 +32,11 @@ const Control = (props) => (
       {...props}
       className={classNames('grow', props.className)}
     >
-      <span className="svg-icon svg-icon-2 svg-icon-gray-700 ms-3 me-2">
-        <FunnelIcon weight="bold" />
-      </span>
+      <FunnelIcon
+        size={20}
+        weight="bold"
+        className="ms-3 me-2 text-secondary shrink-0"
+      />
       {props.children}
     </components.Control>
     {Boolean(props.getValue()[0]) && (

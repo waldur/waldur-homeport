@@ -20,7 +20,6 @@ import { BaseButton } from 'waldur-ui';
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
-import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { getUUID } from '@/core/utils';
 import { required } from '@/core/validators';
 import { SubmitButton, SelectGroup, StringGroup } from '@/form';
@@ -275,21 +274,13 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
                   size="lg"
                 />
                 <SubmitButton
-                  submitting={submitting}
+                  submitting={submitting || isLoadingOfferings}
                   disabled={
                     invalid || isLoadingOfferings || Boolean(errorOfferings)
                   }
                   label={translate('Save')}
                   variant="primary"
                   className="min-w-[125px]"
-                  children={
-                    isLoadingOfferings ? (
-                      <span className="svg-icon svg-icon-2">
-                        {}
-                        <LoadingSpinnerSimple />
-                      </span>
-                    ) : null
-                  }
                 />
               </>
             }

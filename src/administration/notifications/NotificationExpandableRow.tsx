@@ -28,8 +28,9 @@ export const NotificationExpandableRow: FunctionComponent<{
                 {formatHeader(template.path)}
                 <Tooltip label={translate('Content is overridden')}>
                   <PencilSimpleIcon
+                    size={16}
                     weight="bold"
-                    className="svg-icon svg-icon-5 ms-3"
+                    className="ms-3 text-quaternary"
                   />
                 </Tooltip>
               </span>

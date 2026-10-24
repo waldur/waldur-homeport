@@ -24,12 +24,7 @@ export const ProjectActions = ({ project }: ProjectActionsProps) => {
       buttonIconOnly={isCourseProject}
       aria-label={translate('Support')}
     >
-      {/* size (not a `.svg-icon` wrapper) for the exact px dimensions --
-          `.svg-icon`'s color mixin sets a fixed muted-gray fill with
-          nothing to override it now this Link carries no `.btn` (see
-          ActionsDropdown.tsx's TableDropdownToggle for the full
-          explanation) -- letting the icon's own fill="currentColor"
-          inherit the button's actual text color instead. */}
+      {/* Sized with size prop so icon's fill="currentColor" inherits button text color */}
       <HeadsetIcon weight="bold" size={20} />
       {!isCourseProject && translate('Support')}
     </Link>

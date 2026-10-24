@@ -21,10 +21,6 @@
   width: 30px;
   height: 30px;
 }
-.login-button-icon .svg-icon {
-  margin: 0;
-}
-
 .login-button-text {
   font-size: var(--text-sm);
   display: flex;

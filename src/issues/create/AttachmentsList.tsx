@@ -12,10 +12,12 @@ export const AttachmentsList: FunctionComponent<{ attachments }> = ({
   <ul className="list-unstyled">
     {attachments.map((attachment, index) => (
       <li key={index}>
-        <FileDownloader url={attachment.file} name={attachment.name}>
-          <span className="svg-icon svg-icon-2">
-            <CloudArrowDownIcon weight="bold" />
-          </span>{' '}
+        <FileDownloader
+          url={attachment.file}
+          name={attachment.name}
+          className="text-btn hover:text-brand inline-flex items-center gap-2"
+        >
+          <CloudArrowDownIcon size={20} weight="bold" />
           {attachment.name}
         </FileDownloader>
       </li>

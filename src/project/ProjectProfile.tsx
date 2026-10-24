@@ -35,9 +35,11 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
       <h3 className="mb-1 flex items-center flex-wrap">
         {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
           project.is_industry && (
-            <span className="svg-icon svg-icon-3 me-3">
-              <FactoryIcon weight="bold" />
-            </span>
+            <FactoryIcon
+              size={18}
+              weight="bold"
+              className="me-3 text-quaternary"
+            />
           )}
         <span>{project.name}</span>
         {project.kind === 'course' ? (
@@ -77,16 +79,14 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
 const ProjectKindCard = ({ project }: ProjectProfileProps) => {
   return (
     <div className="flex gap-7 ms-n2">
-      <div className="border rounded w-[40px] h-[40px] flex flex-center shrink-0">
-        <span className="svg-icon svg-icon-2 svg-icon-gray-600">
-          {project.kind === 'course' ? (
-            <GraduationCapIcon weight="bold" />
-          ) : project.kind === 'public' ? (
-            <GlobeSimpleIcon weight="bold" />
-          ) : (
-            <CircleIcon weight="bold" />
-          )}
-        </span>
+      <div className="border rounded size-10 flex items-center justify-center shrink-0 text-tertiary">
+        {project.kind === 'course' ? (
+          <GraduationCapIcon size={20} weight="bold" />
+        ) : project.kind === 'public' ? (
+          <GlobeSimpleIcon size={20} weight="bold" />
+        ) : (
+          <CircleIcon size={20} weight="bold" />
+        )}
       </div>
       <div>
         <h6 className="font-medium">

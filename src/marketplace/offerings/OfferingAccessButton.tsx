@@ -12,9 +12,7 @@ export const OfferingAccessButton = ({ offering }) =>
       rel="noopener noreferrer"
       className={`min-w-[100px] ${buttonVariants({ variant: 'primary' })}`}
     >
-      <span className="svg-icon svg-icon-2">
-        <ArrowSquareOutIcon weight="bold" />
-      </span>{' '}
+      <ArrowSquareOutIcon size={20} weight="bold" />
       {translate('Access')}
     </a>
   ) : null;

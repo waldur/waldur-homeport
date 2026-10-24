@@ -89,7 +89,7 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
                   <EstimatedCost />
                   <h4 className="mb-4">{date}</h4>
                 </div>
-                <span className="text-primary ms-4 svg-icon svg-icon-2">
+                <span className="text-primary ms-4 inline-flex items-center">
                   {costTrend === -1 ? (
                     <ArrowDownIcon size={20} weight="bold" />
                   ) : costTrend === 1 ? (

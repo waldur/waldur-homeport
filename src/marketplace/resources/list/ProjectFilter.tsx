@@ -21,9 +21,11 @@ const formatOptionLabel = (option) => (
     {option.name}
     {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
       option.is_industry && (
-        <span className="svg-icon svg-icon-3 ms-3">
-          <FactoryIcon weight="bold" />
-        </span>
+        <FactoryIcon
+          size={18}
+          weight="bold"
+          className="ms-3 inline-block text-quaternary"
+        />
       )}
   </div>
 );

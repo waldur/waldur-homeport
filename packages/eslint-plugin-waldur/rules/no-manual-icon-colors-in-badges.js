@@ -12,16 +12,7 @@ function isIconComponent(node) {
   const name = node.openingElement?.name?.name;
   if (!name) return false;
 
-  // Common icon patterns
-  return (
-    name.endsWith('Icon') ||
-    name === 'i' ||
-    node.openingElement.attributes?.some(
-      (attr) =>
-        attr.name?.name === 'className' &&
-        attr.value?.value?.includes('svg-icon'),
-    )
-  );
+  return name.endsWith('Icon') || name === 'i';
 }
 
 function getClassNameValue(attr) {

@@ -91,10 +91,12 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
                 // as two colours and drops `text-anchor`; Slot only joins them.
                 className="text-anchor text-brand"
               >
-                <span className="flex flex-center">
-                  <span className="svg-icon svg-icon-2 svg-icon-primary me-[12px]">
-                    <ArrowSquareOutIcon weight="bold" />
-                  </span>
+                <span className="flex items-center">
+                  <ArrowSquareOutIcon
+                    size={20}
+                    weight="bold"
+                    className="text-brand me-[12px] shrink-0"
+                  />
                   {endpoint.name}
                 </span>
               </a>

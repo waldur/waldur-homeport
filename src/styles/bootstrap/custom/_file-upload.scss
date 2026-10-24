@@ -67,7 +67,7 @@
       text-decoration: none;
     }
 
-    @include svg-icon-color(var(--text-quinary));
+    color: var(--text-quinary);
   }
 
   .attachment-item__body {
@@ -105,7 +105,7 @@
     padding: 14px;
 
     .attachment-item__thumb {
-      @include svg-icon-color(var(--status-danger-fg));
+      color: var(--status-danger-fg);
     }
   }
 }

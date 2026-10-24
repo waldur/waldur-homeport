@@ -115,10 +115,12 @@ export const PasskeyEnrollmentRequired: FunctionComponent = () => {
         <Col md={7} lg={6}>
           <Card>
             <Card.Body className="text-center p-10">
-              <div className="mb-5">
-                <span className="svg-icon svg-icon-3x text-brand">
-                  <FingerprintIcon weight="bold" />
-                </span>
+              <div className="mb-5 flex justify-center">
+                <FingerprintIcon
+                  size={51}
+                  weight="bold"
+                  className="text-brand"
+                />
               </div>
               <h2 className="mb-4">{translate('Add a passkey to continue')}</h2>
               <p className="text-quaternary mb-8">
