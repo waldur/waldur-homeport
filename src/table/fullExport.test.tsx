@@ -106,3 +106,122 @@ describe('ExportDialog layout', () => {
     expect(screen.getByText('All pages')).toBeInTheDocument();
   });
 });
+
+describe('ExportDialog PDF size warning', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    (useModal as Mock).mockReturnValue({
+      openDialog: vi.fn(),
+      closeDialog: vi.fn(),
+    });
+    registerTable({
+      table: 'pdf-table',
+      fetchData: () => Promise.resolve({ rows: [], resultCount: 0 }),
+    } as any);
+  });
+
+  const renderDialog = (format, resultCount, ownProps = {}) =>
+    render(
+      <Provider
+        store={createStore(() => ({
+          tables: {
+            'pdf-table': {
+              pagination: { resultCount, currentPage: 1, pageSize: 10 },
+              activeColumns: {},
+            },
+          },
+        }))}
+      >
+        <ExportDialog
+          resolve={{
+            table: 'pdf-table',
+            format,
+            ownProps: {
+              columns: Array.from({ length: 10 }, (_, i) => ({ id: `c${i}` })),
+              rows: [],
+              ...ownProps,
+            } as any,
+          }}
+        />
+      </Provider>,
+    );
+
+  it('warns and blocks a PDF of every page when it is over the cell limit', () => {
+    renderDialog('pdf', 5_001);
+    expect(screen.getByText(/a PDF holds at most/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Export' })).toBeDisabled();
+  });
+
+  it('says nothing for a PDF within the limits', () => {
+    renderDialog('pdf', 5_000);
+    expect(screen.queryByText(/a PDF holds at most/)).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Export' })).toBeEnabled();
+  });
+
+  it('counts the columns the export holds, not the actions or unexported ones', () => {
+    const columns = [
+      ...Array.from({ length: 10 }, (_, i) => ({
+        id: `c${i}`,
+        keys: [`c${i}`],
+      })),
+      { id: 'hidden', keys: ['hidden'], export: false },
+    ];
+    renderDialog('pdf', 5_000, {
+      columns,
+      // The table lists its row actions among the active columns.
+      activeColumns: {
+        ...Object.fromEntries(columns.map((c) => [c.id, c.keys])),
+        actions: [],
+      },
+    });
+    expect(screen.queryByText(/a PDF holds at most/)).not.toBeInTheDocument();
+  });
+
+  it('says nothing for CSV of the same table', () => {
+    renderDialog('csv', 50_000);
+    expect(screen.queryByText(/a PDF holds at most/)).not.toBeInTheDocument();
+  });
+});
+
+describe('ExportDialog PDF size warning for tables that build their own rows', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    (useModal as Mock).mockReturnValue({
+      openDialog: vi.fn(),
+      closeDialog: vi.fn(),
+    });
+    registerTable({
+      table: 'custom-rows-table',
+      fetchData: () => Promise.resolve({ rows: [], resultCount: 0 }),
+      exportRow: (row) => [row.name],
+    } as any);
+  });
+
+  it('checks the row count alone instead of reporting zero columns', () => {
+    render(
+      <Provider
+        store={createStore(() => ({
+          tables: {
+            'custom-rows-table': {
+              pagination: { resultCount: 12_000, currentPage: 1, pageSize: 10 },
+              activeColumns: {},
+            },
+          },
+        }))}
+      >
+        <ExportDialog
+          resolve={{
+            table: 'custom-rows-table',
+            format: 'pdf',
+            ownProps: { columns: [], rows: [] } as any,
+          }}
+        />
+      </Provider>,
+    );
+
+    expect(
+      screen.getByText(/12,000 rows, but a PDF holds at most 10,000/),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/0 columns/)).not.toBeInTheDocument();
+  });
+});

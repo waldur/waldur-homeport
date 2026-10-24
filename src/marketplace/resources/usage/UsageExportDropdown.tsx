@@ -1,5 +1,5 @@
 import { init } from 'echarts';
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import { ProjectUser, OfferingComponent } from 'waldur-js-client';
 
 import { ChartExportDropdown } from '@/core/ChartExportDropdown';
@@ -114,10 +114,13 @@ const exportAsPng = (props: UsageExportDropdownProps) => {
 };
 
 export const useUsageExport = (props: UsageExportDropdownProps) => {
-  const { showError } = useNotify();
+  const { showError, showErrorResponse } = useNotify();
+  // A PDF takes a server round trip; a second click meanwhile would only
+  // download it twice.
+  const exporting = useRef(false);
 
   return useCallback(
-    (format) => {
+    async (format) => {
       if (format === 'png') {
         const result = exportAsPng(props);
         if (!result) {
@@ -236,13 +239,22 @@ export const useUsageExport = (props: UsageExportDropdownProps) => {
         return;
       }
 
-      exportAs(
-        format,
-        translate('Usage history - {resource}', {
-          resource: props.resource.name,
-        }),
-        exportData,
-      );
+      // A PDF is rendered on the server, which can refuse it.
+      if (exporting.current) return;
+      exporting.current = true;
+      try {
+        await exportAs(
+          format,
+          translate('Usage history - {resource}', {
+            resource: props.resource.name,
+          }),
+          exportData,
+        );
+      } catch (e) {
+        showErrorResponse(e, translate('Unable to export usage.'));
+      } finally {
+        exporting.current = false;
+      }
     },
     [props],
   );

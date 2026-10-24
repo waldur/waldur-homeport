@@ -203,7 +203,7 @@ export const downloadProposalPdf = async (
   // Large bundle: kept off the page until someone asks for a document.
   const [{ default: pdfmake }, { getFonts }, { saveFile }] = await Promise.all([
     import('pdfmake/build/pdfmake.min'),
-    import('@/table/exporters/pdf'),
+    import('./pdfFonts'),
     import('@/table/exporters/saveFile'),
   ]);
   const pdf = pdfmake.createPdf(
