@@ -17,7 +17,11 @@ interface ProjectAutocompleteProps {
   validator?: FieldValidator<any>;
 }
 
-const getOptionLabel = (option) => (
+// react-select reads `getOptionLabel` as the option's text, which its live
+// region announces, so the industry flag is drawn in `formatOptionLabel`.
+const getOptionLabel = (option) => option.name;
+
+const formatOptionLabel = (option) => (
   <div>
     {option.name}
     {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
@@ -49,7 +53,8 @@ export const ProjectAutocomplete: React.FC<ProjectAutocompleteProps> = (
         cacheUniqs={[customer_uuid]}
         defaultOptions
         getOptionValue={getOptionValue}
-        getOptionLabel={getOptionLabel as any}
+        getOptionLabel={getOptionLabel}
+        formatOptionLabel={formatOptionLabel}
         value={fieldProps.input.value}
         onChange={(value) => fieldProps.input.onChange(value)}
         noOptionsMessage={noOptionsMessage}

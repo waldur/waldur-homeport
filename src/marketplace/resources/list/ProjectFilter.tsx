@@ -12,7 +12,11 @@ interface ProjectFilterProps {
   [key: string]: any;
 }
 
-const getOptionLabel = (option) => (
+// react-select reads `getOptionLabel` as the option's text, which its live
+// region announces, so the industry flag is drawn in `formatOptionLabel`.
+const getOptionLabel = (option) => option.name;
+
+const formatOptionLabel = (option) => (
   <div>
     {option.name}
     {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
@@ -42,6 +46,7 @@ export const ProjectFilter: FC<ProjectFilterProps> = ({
       loadOptions={loadOptions}
       getOptionValue={(option) => option.uuid}
       getOptionLabel={getOptionLabel}
+      formatOptionLabel={formatOptionLabel}
       {...props}
     />
   );
