@@ -6,7 +6,6 @@ import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { ResourceStateField } from '../list/ResourceStateField';
 
 import { ParentResourceLink } from './ParentResourceLink';
-import { ResourceBackendState } from './ResourceBackendState';
 import { ResourceFlags } from './ResourceFlags';
 
 interface ResourceDetailsHeaderTitleProps {
@@ -34,7 +33,6 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<
           size="sm"
         />
 
-        <ResourceBackendState resource={resource} />
         <ResourceFlags resource={resource} />
       </div>
       <ParentResourceLink resource={resource} />
