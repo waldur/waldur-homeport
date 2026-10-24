@@ -59726,6 +59726,52 @@
       "feature_area": "create"
     }
   },
+  "This export has {characters} characters of text, but a PDF holds at most {maxCharacters}. Export it as CSV or Excel instead.": {
+    "context": {
+      "variables": {
+        "characters": {
+          "type": "unknown"
+        },
+        "maxCharacters": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "This export has {rows} rows and {columns} columns, but a PDF holds at most {maxRows} rows, {maxColumns} columns and {maxCells} cells. Export it as CSV or Excel, or narrow it down with filters or fewer columns.": {
+    "context": {
+      "variables": {
+        "rows": {
+          "type": "unknown"
+        },
+        "columns": {
+          "type": "unknown"
+        },
+        "maxRows": {
+          "type": "unknown"
+        },
+        "maxColumns": {
+          "type": "unknown"
+        },
+        "maxCells": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "This export has {rows} rows, but a PDF holds at most {maxRows}. Export it as CSV or Excel, or narrow it down with filters.": {
+    "context": {
+      "variables": {
+        "rows": {
+          "type": "unknown"
+        },
+        "maxRows": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "exporters"
+    }
+  },
   "This feature is disabled": {
     "context": {
       "feature_area": "error"
@@ -60317,6 +60363,11 @@
   "This suspends automatic approval for this project until it is explicitly approved. Continue?": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "This table has no columns to export.": {
+    "context": {
+      "action_type": "export"
     }
   },
   "This template includes all required fields for HPC project import: {fields} (required) etc.": {
@@ -63696,6 +63747,12 @@
       "feature_area": "transfer"
     }
   },
+  "Unable to export chart.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "core"
+    }
+  },
   "Unable to export history.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -63713,6 +63770,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "proposal"
+    }
+  },
+  "Unable to export usage.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "usage"
     }
   },
   "Unable to extend disk.": {

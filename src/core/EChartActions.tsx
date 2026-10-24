@@ -1,8 +1,11 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useRef } from 'react';
+import { exportPdf as renderPdf } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 import exportAs from '@/table/exporters';
+import { getPdfTitle } from '@/table/exporters/pdfLimits';
+import { saveFile } from '@/table/exporters/saveFile';
 import { ExportData } from '@/table/exporters/types';
 
 import { ChartExportDropdown } from './ChartExportDropdown';
@@ -16,60 +19,41 @@ interface EChartActionsProps {
   exportTitle?: string;
 }
 
-const generatePDF = async (image: any, title?: string) => {
-  const pdfmake = await import('pdfmake/build/pdfmake.min');
-  const { getFonts } = await import('@/table/exporters/pdf');
-
-  const docDefinition = {
-    pageSize: 'A4',
-    pageOrientation: 'portrait',
-    pageMargins: [30, 30, 30, 30],
-    content: [
-      title
-        ? {
-            text: title,
-            fontSize: 10,
-          }
-        : null,
-      {
-        image,
-        width: 530,
-      },
-    ],
-
-    defaultStyle: {
-      font: 'OpenSans',
-    },
-  };
-
-  const fonts = getFonts();
-
-  pdfmake
-    .createPdf(docDefinition, null, fonts)
-    .download((title || new Date().getTime()) + '.pdf');
-};
+const getChartPng = (chartInstance) =>
+  chartInstance.getDataURL({
+    pixelRatio: 2,
+    backgroundColor: '#fff',
+    type: 'png',
+    excludeComponents: ['toolbox'],
+  });
 
 export const EChartActions: FC<EChartActionsProps> = ({
   chartInstance,
   ...props
 }) => {
-  const makePdf = useCallback(() => {
-    if (!chartInstance) return;
-    const imagePng = decodeURIComponent(
-      chartInstance.getDataURL({
-        pixelRatio: 2,
-        backgroundColor: '#fff',
-        type: 'png',
-        excludeComponents: ['toolbox'],
-      }),
-    );
-    generatePDF(imagePng, props.exportTitle);
-  }, [chartInstance, props.exportTitle]);
+  const { showInfo, showErrorResponse } = useNotify();
 
-  const { showInfo } = useNotify();
+  // The server lays the chart out under its title, as it does table exports.
+  // A second click while it renders would only download the same PDF twice.
+  const rendering = useRef(false);
+  const makePdf = useCallback(async () => {
+    if (!chartInstance || rendering.current) return;
+    rendering.current = true;
+    try {
+      const image = getChartPng(chartInstance).split(',')[1];
+      const { data: pdf } = await renderPdf({
+        body: { title: getPdfTitle(props.exportTitle), image },
+      });
+      saveFile(pdf, `${props.exportTitle || new Date().getTime()}.pdf`);
+    } catch (e) {
+      showErrorResponse(e, translate('Unable to export chart.'));
+    } finally {
+      rendering.current = false;
+    }
+  }, [chartInstance, props.exportTitle, showErrorResponse]);
 
   const exportData = useCallback(
-    (format) => {
+    async (format) => {
       if (!chartInstance) return;
       const options = chartInstance.getOption();
       const hasData = options.series?.[0]?.data?.length;
@@ -95,19 +79,18 @@ export const EChartActions: FC<EChartActionsProps> = ({
         exportData.data.push(record);
       });
 
-      exportAs(format, props.exportTitle, exportData);
+      try {
+        await exportAs(format, props.exportTitle, exportData);
+      } catch (e) {
+        showErrorResponse(e, translate('Unable to export chart.'));
+      }
     },
-    [chartInstance, showInfo, props.exportTitle],
+    [chartInstance, showInfo, showErrorResponse, props.exportTitle],
   );
 
   const handleExportPng = useCallback(() => {
     if (!chartInstance) return;
-    const url = chartInstance.getDataURL({
-      pixelRatio: 2,
-      backgroundColor: '#fff',
-      type: 'png',
-      excludeComponents: ['toolbox'],
-    });
+    const url = getChartPng(chartInstance);
     const link = document.createElement('a');
     link.href = url;
     link.download = `${props.exportTitle || 'chart'}.png`;

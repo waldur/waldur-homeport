@@ -15,6 +15,52 @@ import { getTableOptions } from './registry';
 import { getTableState } from './selectors';
 import { TableRequest } from './types';
 
+/** The table's columns as an automatic export writes them: in the user's
+ * order, only the enabled ones, without those marked `export: false`. */
+function getExportColumns(props) {
+  let exportColumns = [];
+  // Apply order of columns
+  if (
+    props.columnPositions &&
+    !isEmpty(props.columnPositions.filter(Boolean))
+  ) {
+    props.columnPositions.forEach((colName) => {
+      const column = props.columns.find((col) => col.id === colName);
+      if (column) {
+        exportColumns.push(column);
+      }
+    });
+  } else {
+    exportColumns = props.columns ?? [];
+  }
+
+  // Apply enabled columns
+  if (props.activeColumns && !isEmpty(props.activeColumns)) {
+    const activeColumnsKeys = Object.values(props.activeColumns);
+    exportColumns = exportColumns.filter((col) =>
+      activeColumnsKeys.some((keys) => isEqual(keys, col.keys)),
+    );
+  }
+
+  // Remove false columns
+  return exportColumns.filter((col) => col.export !== false);
+}
+
+/** How many columns an export of this table holds, known before any row is
+ * fetched. Undefined for a table whose own exportRow sets them. */
+export function getExportColumnCount(table, props): number | undefined {
+  const { exportFields, exportRow } = getTableOptions(table);
+  if (exportFields) {
+    const fields =
+      typeof exportFields === 'function' ? exportFields(props) : exportFields;
+    return fields?.length;
+  }
+  if (exportRow) {
+    return undefined;
+  }
+  return getExportColumns(props ?? {}).length;
+}
+
 export function useTableExport(table, props?) {
   const { closeDialog } = useModal();
   const { showSuccess, showErrorResponse } = useNotify();
@@ -34,35 +80,7 @@ export function useTableExport(table, props?) {
   const customExport = Boolean(exportFields || exportRow);
 
   async function fetchRows(config) {
-    // Calculate array for export data automatically
-    let exportColumns = [];
-    if (!customExport) {
-      // Apply order of columns
-      if (
-        props.columnPositions &&
-        !isEmpty(props.columnPositions.filter(Boolean))
-      ) {
-        props.columnPositions.forEach((colName) => {
-          const column = props.columns.find((col) => col.id === colName);
-          if (column) {
-            exportColumns.push(column);
-          }
-        });
-      } else {
-        exportColumns = props.columns;
-      }
-
-      // Apply enabled columns
-      if (props.activeColumns && !isEmpty(props.activeColumns)) {
-        const activeColumnsKeys = Object.values(props.activeColumns);
-        exportColumns = exportColumns.filter((col) =>
-          activeColumnsKeys.some((keys) => isEqual(keys, col.keys)),
-        );
-      }
-
-      // Remove false columns
-      exportColumns = exportColumns.filter((col) => col.export !== false);
-    }
+    const exportColumns = customExport ? [] : getExportColumns(props);
 
     if (config.allPages) {
       // Use current filter from props (passed from Table component) instead of
