@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 
 import {
   getImportSummary,
@@ -10,10 +10,6 @@ import {
   mapRowsToUsage,
   parseExcelFile,
 } from './utils';
-
-vi.mock('uuid', () => ({
-  v4: () => 'test-uuid',
-}));
 
 // Polyfill File.arrayBuffer for jsdom (used by read-excel-file/browser)
 beforeAll(() => {

@@ -117,8 +117,11 @@ async function patchMatrixSdkLoggers() {
       }
     }
   } catch {
-    // loglevel is a transitive dep of matrix-js-sdk; if it ever stops
-    // being reachable, fall back to the per-client logger only.
+    // The patch only works on the loglevel instance matrix-js-sdk itself
+    // uses. package.json declares loglevel with the SDK's own range
+    // (^1.9.2), so both resolve to one copy; keep the two in step when
+    // the SDK is upgraded. If it cannot be loaded, fall back to the
+    // per-client logger only.
   }
 }
 

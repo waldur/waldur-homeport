@@ -1,5 +1,5 @@
-import tsParser from '@typescript-eslint/parser';
 import { RuleTester } from 'eslint';
+import { parser as tsParser } from 'typescript-eslint';
 import { describe, expect, it } from 'vitest';
 
 import rule, { namedFor, readUtilities } from './prefer-token-utility.js';

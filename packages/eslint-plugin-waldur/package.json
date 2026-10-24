@@ -5,5 +5,10 @@
   "description": "Waldur HomePort's custom ESLint rules",
   "type": "module",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^9.30.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.0"
+  }
 }

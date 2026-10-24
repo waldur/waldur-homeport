@@ -29,5 +29,9 @@
       "optional": true
     }
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "react": "^18.3.0",
+    "vite": "^8.1.6"
+  }
 }
