@@ -1,8 +1,8 @@
 {
-  "compiledByteSize": 344007,
-  "totalClasses": 3575,
-  "totalUsed": 1057,
-  "totalUnused": 2518,
+  "compiledByteSize": 343278,
+  "totalClasses": 3570,
+  "totalUsed": 1051,
+  "totalUnused": 2519,
   "unused": {
     "bootstrap/scss/type": [
       "blockquote-footer",
@@ -547,6 +547,7 @@
       "gap-md-18",
       "gap-md-19",
       "gap-md-2",
+      "gap-md-20",
       "gap-md-2px",
       "gap-md-3",
       "gap-md-4",
