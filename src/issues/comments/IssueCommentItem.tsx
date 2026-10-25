@@ -87,9 +87,9 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
     <TimelineItem className="issue-comment">
       <TimelineConnector />
       <CommentAvatar comment={comment} />
-      <TimelineContent>
-        <div className="flex justify-between gap-5 gap-md-20">
-          <div>
+      <TimelineContent className="pb-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4">
+          <div className="min-w-0 flex-1">
             <div className="text-xs text-quaternary">
               <button
                 onClick={openUserDialog}
@@ -108,7 +108,7 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
                 </span>
               )}
             </div>
-            <div className="text-sm text-quaternary">
+            <div className="text-sm text-quaternary break-words">
               {ENV.plugins?.WALDUR_SUPPORT?.ACTIVE_BACKEND_TYPE ===
               'atlassian' ? (
                 <FormattedJira text={comment.description} />

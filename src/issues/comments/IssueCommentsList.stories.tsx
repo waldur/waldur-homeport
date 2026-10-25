@@ -1,11 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 
 import { ENV } from '@/core/config';
 import { ModalProvider } from '@/modal/ModalContext';
 
+import { IssueCommentsContext } from './IssueCommentsContext';
 import { IssueCommentsList } from './IssueCommentsList';
 import { Comment } from './types';
+
+const queryClient = new QueryClient();
 
 ENV.plugins = {
   ...ENV.plugins,
@@ -31,7 +35,7 @@ const mockComments: Comment[] = [
     issue_key: 'SUP-101',
     url: '/api/support-comments/1/',
     update_is_available: true,
-    destroy_is_available: false,
+    destroy_is_available: true,
   },
   {
     uuid: 'comment-2',
@@ -64,7 +68,7 @@ const mockComments: Comment[] = [
     issue: 'issue-1',
     issue_key: 'SUP-101',
     url: '/api/support-comments/3/',
-    update_is_available: false,
+    update_is_available: true,
     destroy_is_available: false,
   },
 ];
@@ -77,22 +81,47 @@ export default meta;
 
 type Story = StoryObj;
 
+const mockIssue = { url: '/api/support-issues/1/' } as any;
+
 export const Default: Story = {
   render: () => (
-    <ModalProvider>
-      <div className="max-w-2xl bg-primary p-6 rounded-lg border-[1px] border-secondary">
-        <IssueCommentsList comments={mockComments} />
-      </div>
-    </ModalProvider>
+    <QueryClientProvider client={queryClient}>
+      <ModalProvider>
+        <IssueCommentsContext.Provider value={mockIssue}>
+          <div className="max-w-2xl bg-primary p-6 rounded-lg border-[1px] border-secondary">
+            <IssueCommentsList comments={mockComments} />
+          </div>
+        </IssueCommentsContext.Provider>
+      </ModalProvider>
+    </QueryClientProvider>
+  ),
+};
+
+export const MobileViewport: Story = {
+  globals: { viewport: 'mobile' },
+  render: () => (
+    <QueryClientProvider client={queryClient}>
+      <ModalProvider>
+        <IssueCommentsContext.Provider value={mockIssue}>
+          <div className="w-[360px] max-w-full bg-primary p-4 rounded-lg border-[1px] border-secondary">
+            <IssueCommentsList comments={mockComments} />
+          </div>
+        </IssueCommentsContext.Provider>
+      </ModalProvider>
+    </QueryClientProvider>
   ),
 };
 
 export const Empty: Story = {
   render: () => (
-    <ModalProvider>
-      <div className="max-w-2xl bg-primary p-6 rounded-lg border-[1px] border-secondary">
-        <IssueCommentsList comments={[]} />
-      </div>
-    </ModalProvider>
+    <QueryClientProvider client={queryClient}>
+      <ModalProvider>
+        <IssueCommentsContext.Provider value={mockIssue}>
+          <div className="max-w-2xl bg-primary p-6 rounded-lg border-[1px] border-secondary">
+            <IssueCommentsList comments={[]} />
+          </div>
+        </IssueCommentsContext.Provider>
+      </ModalProvider>
+    </QueryClientProvider>
   ),
 };

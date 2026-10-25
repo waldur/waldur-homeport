@@ -22,7 +22,7 @@ export const CommentDeleteButton: FC<CommentDeleteButtonProps> = ({
 
   const deleteComment = useManagedMutation({
     mutationFn: () => supportCommentsDestroy({ path: { uuid: comment.uuid } }),
-    invalidateQueries: [{ queryKey: [ISSUE_COMMENTS_QUERY_KEY, issue.url] }],
+    invalidateQueries: [{ queryKey: [ISSUE_COMMENTS_QUERY_KEY, issue?.url] }],
     errorMessage: translate('Unable to delete comment.'),
     confirmation: {
       title: translate('Delete comment'),
