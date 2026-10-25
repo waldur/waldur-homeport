@@ -5,7 +5,7 @@ import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { RoleEnum } from '@/permissions/enums';
-import { formatRoleType } from '@/permissions/utils';
+import { formatRoleType, formatScopeName } from '@/permissions/utils';
 import { createFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -183,7 +183,7 @@ export const UserAffiliationsList: FunctionComponent<
             <>{row.scope_name}</>
           );
         }
-        return <>{row.scope_name}</>;
+        return <>{formatScopeName(row)}</>;
       },
       filter: 'scope_name',
     },

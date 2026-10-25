@@ -9,6 +9,7 @@ import {
   proposalProposalsListUsersList,
   proposalProtectedCallsListUsersList,
   UserRoleDetails,
+  userPermissionsList,
 } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
@@ -96,6 +97,20 @@ const listScopeUsers = async (
           })
         ).data ?? []
       );
+    case 'global':
+      // There is one site scope and no list_users on it: the user's active
+      // site-wide grants are the roles held "there". The fields the check
+      // reads (role uuid and name, email) are common to both shapes.
+      return ((
+        await userPermissionsList({
+          query: {
+            user,
+            scope_type: 'global',
+            is_active: true,
+            page_size: 100,
+          },
+        })
+      ).data ?? []) as unknown as UserRoleDetails[];
     default:
       return [];
   }
@@ -122,11 +137,15 @@ export const useExistingRoles = ({
   userUuid,
   scopeUuid,
 }: ExistingRolesParams) => {
+  const isSiteWide = role?.content_type === 'global';
   const enabled = Boolean(
     role &&
-    SCOPES_WITH_LIST_USERS.includes(role.content_type as ScopeWithListUsers) &&
-    scopeUuid &&
-    userUuid,
+    userUuid &&
+    (isSiteWide ||
+      (SCOPES_WITH_LIST_USERS.includes(
+        role.content_type as ScopeWithListUsers,
+      ) &&
+        scopeUuid)),
   );
 
   const { data, isPending } = useQuery<UserRoleDetails[]>({

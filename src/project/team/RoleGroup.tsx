@@ -29,6 +29,7 @@ export const renderRoleType = (roleType: RoleType) =>
     call: 'C',
     call_organizer: 'CO',
     proposal: 'PR',
+    global: 'S',
   })[roleType] || '';
 
 // Every option of one open dropdown shares the same options array, so the

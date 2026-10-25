@@ -5,12 +5,14 @@ import {
   customersAddUser,
   customersList,
   customersListUsersList,
+  globalUserRolesCreate,
   projectsAddUser,
   projectsList,
   projectsListUsersList,
   proposalProposalsList,
   proposalPublicCallsRetrieve,
   rolesList,
+  userPermissionsList,
 } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -247,5 +249,98 @@ describe('AddUserRoleDialog', () => {
       );
     });
     expect(screen.queryByText('Select scope first')).not.toBeInTheDocument();
+  });
+  it('grants a site-wide role without asking for a scope', async () => {
+    ENV.roles = [
+      {
+        uuid: 'desk-uuid',
+        name: 'GLOBAL.ORDER_DESK',
+        description: 'Order desk',
+        content_type: 'global',
+        is_active: true,
+        is_system_role: false,
+      },
+      {
+        uuid: 'reader-uuid',
+        name: 'CUSTOMER.READER',
+        description: 'Organization reader',
+        content_type: 'customer',
+        is_active: true,
+        is_system_role: true,
+      },
+    ] as any;
+    vi.mocked(globalUserRolesCreate).mockReset();
+    vi.mocked(globalUserRolesCreate).mockResolvedValue({} as any);
+    vi.mocked(userPermissionsList).mockResolvedValue(mockListResponse([]));
+    const user = userEvent.setup();
+    renderDialog();
+
+    await openAndSelectOption(user, 'Scope type', 'Site-wide');
+    expect(
+      screen.queryByRole('combobox', { name: 'Scope' }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('Select scope first')).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole('combobox', { name: 'Role' }));
+    expect(screen.queryByText('Organization reader')).not.toBeInTheDocument();
+    await openAndSelectOption(user, 'Role', 'Order desk');
+
+    const submit = screen.getByRole('button', { name: 'Confirm' });
+    await waitFor(() => expect(submit).toBeEnabled());
+    await user.click(submit);
+
+    await waitFor(() => {
+      expect(globalUserRolesCreate).toHaveBeenCalledWith({
+        body: {
+          user: 'target-uuid',
+          role: 'GLOBAL.ORDER_DESK',
+          expiration_time: undefined,
+        },
+      });
+    });
+    expect(customersAddUser).not.toHaveBeenCalled();
+  });
+  it('blocks a site-wide role the user already holds', async () => {
+    ENV.roles = [
+      {
+        uuid: 'desk-uuid',
+        name: 'GLOBAL.ORDER_DESK',
+        description: 'Order desk',
+        content_type: 'global',
+        is_active: true,
+        is_system_role: false,
+      },
+    ] as any;
+    vi.mocked(globalUserRolesCreate).mockReset();
+    vi.mocked(userPermissionsList).mockResolvedValue(
+      mockListResponse([
+        {
+          role_uuid: 'desk-uuid',
+          role_name: 'GLOBAL.ORDER_DESK',
+          scope_type: 'global',
+        },
+      ]),
+    );
+    const user = userEvent.setup();
+    renderDialog();
+
+    await openAndSelectOption(user, 'Scope type', 'Site-wide');
+    await openAndSelectOption(user, 'Role', 'Order desk');
+
+    expect(
+      (
+        await screen.findAllByText(
+          'User already has this role in this scope. Update their existing role instead.',
+        )
+      ).length,
+    ).toBeGreaterThan(0);
+    expect(screen.getByRole('button', { name: 'Confirm' })).toBeDisabled();
+    expect(userPermissionsList).toHaveBeenCalledWith({
+      query: expect.objectContaining({
+        user: 'target-uuid',
+        scope_type: 'global',
+        is_active: true,
+      }),
+    });
   });
 });

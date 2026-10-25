@@ -30,7 +30,11 @@ import { getCurrentUser } from '@/user/UsersService';
 import { useSetUser, useUser } from '@/workspace/hooks';
 
 import { grantScopeLoaders } from './grantScopeLoaders';
-import { grantUserRole, isGrantableScopeType } from './grantUserRole';
+import {
+  grantSiteRole,
+  grantUserRole,
+  isGrantableScopeType,
+} from './grantUserRole';
 
 interface AddUserRoleFormValues {
   scope_type?: RoleType;
@@ -68,23 +72,28 @@ export const AddUserRoleDialog: FC<AddUserRoleDialogProps> = ({
 
   const grantMutation = useManagedMutation<any, any, AddUserRoleFormValues>({
     mutationFn: async (formData) => {
-      if (
-        !formData.scope_type ||
-        !isGrantableScopeType(formData.scope_type) ||
-        !formData.scope?.uuid ||
-        !formData.role?.name
+      const body = {
+        user: user.uuid,
+        role: formData.role?.name,
+        expiration_time: formData.expiration_time,
+      };
+      let result;
+      if (formData.scope_type === 'global' && body.role) {
+        result = await grantSiteRole(body);
+      } else if (
+        formData.scope_type &&
+        isGrantableScopeType(formData.scope_type) &&
+        formData.scope?.uuid &&
+        body.role
       ) {
+        result = await grantUserRole(
+          formData.scope_type,
+          formData.scope.uuid,
+          body,
+        );
+      } else {
         return Promise.reject(new Error('Incomplete role grant'));
       }
-      const result = await grantUserRole(
-        formData.scope_type,
-        formData.scope.uuid,
-        {
-          user: user.uuid,
-          role: formData.role.name,
-          expiration_time: formData.expiration_time,
-        },
-      );
       // A grant to the signed-in user changes the permissions the session
       // already holds. Refreshing after a failed lookup must not report the
       // grant itself as failed, or a retry creates a duplicate.
@@ -151,6 +160,9 @@ const AddUserRoleForm: FC<AddUserRoleFormProps> = ({
 }) => {
   const scopeType = values.scope_type;
   const scopeUuid = values.scope?.uuid;
+  // A site-wide role is granted on the one site scope, so there is nothing to
+  // pick between the type and the role.
+  const isSiteWide = scopeType === 'global';
   const projectUuid = scopeType === 'project' ? scopeUuid : undefined;
   // A proposal row has no customer of its own. The call it belongs to does,
   // and that is the organization whose proposal roles should be offered.
@@ -248,29 +260,33 @@ const AddUserRoleForm: FC<AddUserRoleFormProps> = ({
           placeholder={translate('Select...')}
           onChange={onScopeTypeChange}
         />
-        <AsyncSelectGroup
-          key={scopeType || 'none'}
-          name="scope"
-          label={translate('Scope')}
-          required
-          validate={required}
-          isDisabled={!scopeType}
-          placeholder={
-            scopeType
-              ? translate('Select...')
-              : translate('Select scope type first')
-          }
-          loadOptions={
-            scopeType && grantScopeLoaders[scopeType]
-              ? grantScopeLoaders[scopeType]
-              : emptyScopeLoader
-          }
-          getOptionValue={(option) => option.uuid}
-          getOptionLabel={getScopeLabel}
-          defaultOptions={Boolean(scopeType)}
-          onChange={onScopeChange}
-        />
-        {scopeUuid && scopeType && !isProposalCustomerLoading ? (
+        {!isSiteWide && (
+          <AsyncSelectGroup
+            key={scopeType || 'none'}
+            name="scope"
+            label={translate('Scope')}
+            required
+            validate={required}
+            isDisabled={!scopeType}
+            placeholder={
+              scopeType
+                ? translate('Select...')
+                : translate('Select scope type first')
+            }
+            loadOptions={
+              scopeType && grantScopeLoaders[scopeType]
+                ? grantScopeLoaders[scopeType]
+                : emptyScopeLoader
+            }
+            getOptionValue={(option) => option.uuid}
+            getOptionLabel={getScopeLabel}
+            defaultOptions={Boolean(scopeType)}
+            onChange={onScopeChange}
+          />
+        )}
+        {isSiteWide ? (
+          <RoleGroup types={['global']} user={currentUser} />
+        ) : scopeUuid && scopeType && !isProposalCustomerLoading ? (
           <RoleGroup
             types={[scopeType]}
             user={currentUser}

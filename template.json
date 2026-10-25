@@ -886,6 +886,11 @@
       "feature_area": "views"
     }
   },
+  "A site-wide role cannot manage an organization's team.": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
   "A snapshot of all messages in a room, saved as a JSON file. Optionally includes media files in a ZIP archive. Can be triggered manually, on a schedule, or automatically before project deletion.": {},
   "A summary of the conversation goes to the helpdesk, and only you can confirm it.": {
     "context": {
@@ -17923,6 +17928,11 @@
     }
   },
   "Each offering uses its own value where it sets one, then the value here, then the built-in default. The User management settings of an offering show which of the three applies.": {},
+  "Each permission applies to every object. Grant it to a user from their Roles and permissions tab.": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
   "Each project can have one chat room. Rooms are created by organization owners (or any role with the \"Create matrix room\" permission), staff and support, and automatically populated with project members. Only staff can disable a room (kicking all members and exporting history) and later re-enable it or delete it entirely.": {
     "context": {
       "feature_area": "matrix"
@@ -19965,6 +19975,7 @@
       "feature_area": "auth"
     }
   },
+  "Entire site": {},
   "Entitlement": {},
   "Entity": {
     "context": {
@@ -54297,6 +54308,11 @@
   "Site agents": {
     "context": {
       "feature_area": "pubsub"
+    }
+  },
+  "Site-wide": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Site-wide burst cap across all assistant traffic.": {},

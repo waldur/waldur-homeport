@@ -16,4 +16,5 @@ export const ROLE_TYPES = [
     value: 'call_organizer',
     label: translate('Call managing organization'),
   },
+  { value: 'global', label: translate('Site-wide') },
 ] as { value: RoleType; label: string }[];

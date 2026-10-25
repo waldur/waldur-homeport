@@ -156,4 +156,48 @@ describe('getPermissionSummary', () => {
       `0/${PermissionOptions.length} groups · 0 permissions`,
     );
   });
+  it('shows disabled permissions without letting them be selected', async () => {
+    const user = userEvent.setup();
+    const [first, second] = FIRST.options;
+    const DisabledHost = () => {
+      const [value, setValue] = useState<string[]>([]);
+      return (
+        <>
+          <output data-testid="selected-count">{value.length}</output>
+          <PermissionField
+            input={{ value, onChange: setValue }}
+            disabledPermissions={[first.value]}
+            disabledReason="Not on this type"
+          />
+        </>
+      );
+    };
+    render(<DisabledHost />);
+
+    expect(screen.getByLabelText(first.label)).toBeDisabled();
+    expect(screen.getByText('Not on this type')).toBeInTheDocument();
+    expect(screen.getByLabelText(second.label)).toBeEnabled();
+
+    await user.click(screen.getByLabelText('Select all'));
+    expect(selectedCount()).toBe(FIRST.options.length - 1);
+    expect(screen.getByLabelText(first.label)).not.toBeChecked();
+    expect(screen.getByLabelText('Select all')).toBeChecked();
+  });
+  it('reads a group as full when every selectable permission is ticked', async () => {
+    const user = userEvent.setup();
+    const [first] = FIRST.options;
+    const DisabledHost = () => {
+      const [value, setValue] = useState<string[]>([]);
+      return (
+        <PermissionField
+          input={{ value, onChange: setValue }}
+          disabledPermissions={[first.value]}
+        />
+      );
+    };
+    render(<DisabledHost />);
+
+    await user.click(screen.getByLabelText('Select all'));
+    expect(groupItem(FIRST.label).textContent).toBe(`${FIRST.label}Full`);
+  });
 });

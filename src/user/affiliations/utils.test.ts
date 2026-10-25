@@ -28,7 +28,7 @@ ENV.roles = [
   },
 ] as any;
 
-import { canDeletePermission } from './utils';
+import { canDeletePermission, canRestorePermission } from './utils';
 
 const buildUser = (overrides: Partial<User> = {}): User =>
   ({
@@ -170,5 +170,33 @@ describe('canDeletePermission', () => {
       project_uuid: undefined,
     });
     expect(canDeletePermission(user, perm)).toBeFalsy();
+  });
+});
+
+describe('site-wide grants', () => {
+  const perm = buildPerm({
+    scope_type: 'global',
+    customer_uuid: null,
+    role_name: 'GLOBAL.ORDER_DESK',
+  });
+  const owner = buildUser({
+    permissions: [
+      {
+        scope_uuid: 'customer-1',
+        scope_type: 'customer',
+        role_name: 'CUSTOMER.OWNER',
+      } as any,
+    ],
+  });
+
+  it('lets staff revoke and restore them', () => {
+    const staff = buildUser({ is_staff: true });
+    expect(canDeletePermission(staff, perm)).toBe(true);
+    expect(canRestorePermission(staff, perm)).toBe(true);
+  });
+
+  it('does not let an organization owner revoke or restore them', () => {
+    expect(canDeletePermission(owner, perm)).toBeFalsy();
+    expect(canRestorePermission(owner, perm)).toBeFalsy();
   });
 });
