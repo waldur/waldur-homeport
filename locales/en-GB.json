@@ -1,6 +1,7 @@
 {
   "1 organization": "1 organisation",
   "A rule that does not create a project must grant an organization role.": "A rule that does not create a project must grant an organisation role.",
+  "A site-wide role cannot manage an organization's team.": "A site-wide role cannot manage an organisation's team.",
   "API accounts for automation at organization and project level.": "API accounts for automation at organisation and project level.",
   "Access policies cannot be configured because no organization groups are defined.": "Access policies cannot be configured because no organisation groups are defined.",
   "Access subnets by organization": "Access subnets by organisation",

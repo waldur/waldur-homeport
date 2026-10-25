@@ -1,8 +1,8 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Field, Form, useForm, useFormState } from 'react-final-form';
 import {
   rolesCreate,
   rolesRetrieve,
@@ -11,6 +11,8 @@ import {
   RoleModifyRequest,
   userPermissionsList,
 } from 'waldur-js-client';
+
+import { FormText } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -22,6 +24,7 @@ import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ROLE_TYPES } from '@/permissions/constants';
+import { GlobalDeniedPermissions } from '@/permissions/enums';
 import { useNotify } from '@/store/notify';
 
 import { getPermissionSummary, PermissionField } from './PermissionField';
@@ -55,6 +58,29 @@ const getReachSummary = (role, organizations: number | null) => {
     users: held,
     organizations: across,
   });
+};
+
+/**
+ * A site-wide role cannot carry the organization team permissions, so they
+ * leave the selection as soon as the type is site-wide: kept hidden, they
+ * would still satisfy "at least one permission" and then be refused.
+ */
+const SiteWidePermissionGuard: FC = () => {
+  const form = useForm();
+  const { values } = useFormState({ subscription: { values: true } });
+  const { content_type, permissions } = values;
+  useEffect(() => {
+    if (content_type !== 'global' || !Array.isArray(permissions)) {
+      return;
+    }
+    const kept = permissions.filter(
+      (permission) => !GlobalDeniedPermissions.includes(permission),
+    );
+    if (kept.length !== permissions.length) {
+      form.change('permissions', kept);
+    }
+  }, [content_type, permissions, form]);
+  return null;
 };
 
 interface RoleFormDialogProps {
@@ -280,12 +306,28 @@ export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
                 />
               </Col>
             </Row>
+            <SiteWidePermissionGuard />
+            {values.content_type === 'global' && (
+              <FormText className="mb-4">
+                {translate(
+                  'Each permission applies to every object. Grant it to a user from their Roles and permissions tab.',
+                )}
+              </FormText>
+            )}
 
             <FormGroup required hideLabel spaceless>
               <Field
                 component={PermissionField}
                 name="permissions"
                 validate={requiredArray}
+                disabledPermissions={
+                  values.content_type === 'global'
+                    ? GlobalDeniedPermissions
+                    : undefined
+                }
+                disabledReason={translate(
+                  "A site-wide role cannot manage an organization's team.",
+                )}
               />
             </FormGroup>
           </ModalDialog>

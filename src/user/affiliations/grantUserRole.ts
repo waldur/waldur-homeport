@@ -1,6 +1,8 @@
 import {
   callManagingOrganisationsAddUser,
   customersAddUser,
+  globalUserRolesCreate,
+  GlobalUserRoleCreateRequest,
   marketplaceProviderOfferingsAddUser,
   marketplaceServiceProvidersAddUser,
   projectsAddUser,
@@ -29,6 +31,10 @@ export const isGrantableScopeType = (
   scopeType: string,
 ): scopeType is GrantableScopeType =>
   Object.prototype.hasOwnProperty.call(GRANT_BY_SCOPE, scopeType);
+
+/** A site-wide role has no scope to pick: there is one site. Staff only. */
+export const grantSiteRole = (body: GlobalUserRoleCreateRequest) =>
+  globalUserRolesCreate({ body });
 
 export const grantUserRole = (
   scopeType: GrantableScopeType,

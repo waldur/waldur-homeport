@@ -2,6 +2,7 @@ import { User } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 
+import { GlobalDeniedPermissions } from './enums';
 import { PermissionRequest, RoleType } from './types';
 
 /** Does the named role carry this permission, per the roles the server sent? */
@@ -35,6 +36,25 @@ export function checkScope(
 }
 
 /**
+ * A site-wide grant holds its permissions on every object, so it answers a
+ * request for any scope. As on the backend, it never answers one of the
+ * permissions a site-wide role cannot carry, whatever the role lists.
+ */
+function checkGlobalScope(
+  user: Pick<User, 'is_staff' | 'permissions'>,
+  targetPerm,
+) {
+  if (GlobalDeniedPermissions.includes(targetPerm)) {
+    return false;
+  }
+  return !!user?.permissions?.some(
+    (permission) =>
+      permission.scope_type === 'global' &&
+      roleGrants(permission.role_name, targetPerm),
+  );
+}
+
+/**
  * Roles granted on a ServiceProvider rather than on a customer — "Service
  * provider manager" (CUSTOMER.MANAGER) is the one that exists today. Their
  * `scope_uuid` is the provider's, so a `customerId` request never matched them
@@ -61,6 +81,9 @@ export const hasPermission = (
   request: PermissionRequest,
 ) => {
   if (user?.is_staff) {
+    return true;
+  }
+  if (checkGlobalScope(user, request.permission)) {
     return true;
   }
   if (request.projectId) {
@@ -120,6 +143,7 @@ export const hasConsumerPermission = (
     return true;
   }
   return (
+    checkGlobalScope(user, request.permission) ||
     (!!request.projectId &&
       checkScope(user, 'project', request.projectId, request.permission)) ||
     (!!request.customerId &&

@@ -138,6 +138,13 @@ export const formatRole = (
 export const formatRoleType = (content_type: RoleType) =>
   ROLE_TYPES.find(({ value }) => value === content_type)?.label || content_type;
 
+/** A grant's scope as people read it: the site scope has no name of its own. */
+export const formatScopeName = (grant: {
+  scope_type?: string;
+  scope_name?: string;
+}) =>
+  grant.scope_type === 'global' ? translate('Entire site') : grant.scope_name;
+
 type LabelledRole = Pick<Role, 'name' | 'description'> &
   Partial<
     Pick<Role, 'uuid' | 'content_type' | 'is_system_role' | 'customer_name'>

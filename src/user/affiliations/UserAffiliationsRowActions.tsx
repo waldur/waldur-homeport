@@ -4,6 +4,7 @@ import { Permission } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { formatScopeName } from '@/permissions/utils';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { ActionsMenu } from '@/table/ActionsDropdown';
@@ -37,7 +38,7 @@ export const UserAffiliationsRowActions: FC<UserAffiliationsRowActionsProps> = (
     [user, row],
   );
 
-  const scopeLabel = renderFieldOrDash(row.scope_name);
+  const scopeLabel = renderFieldOrDash(formatScopeName(row));
 
   const { mutate: revoke, isPending: isRevoking } = useManagedMutation<
     any,

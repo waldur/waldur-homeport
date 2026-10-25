@@ -59,6 +59,10 @@ export const canDeletePermission = (user: User, perm: Permission) => {
     case 'resource_project':
       permission = PermissionEnum.DELETE_RESOURCE_PROJECT_PERMISSION;
       break;
+    case 'global':
+      // Only staff grant and revoke site-wide roles.
+      permission = PermissionEnum.STAFF_ACCESS;
+      break;
   }
   return hasPermission(user, getPermissionCheckArgs(perm, permission));
 };
@@ -93,6 +97,10 @@ export const canRestorePermission = (user: User, perm: Permission) => {
       break;
     case 'resource_project':
       permission = PermissionEnum.CREATE_RESOURCE_PROJECT_PERMISSION;
+      break;
+    case 'global':
+      // Only staff grant and revoke site-wide roles.
+      permission = PermissionEnum.STAFF_ACCESS;
       break;
   }
   return hasPermission(user, getPermissionCheckArgs(perm, permission));

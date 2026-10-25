@@ -25,6 +25,7 @@ interface PermissionOption {
 interface PermissionEntity {
   label: string;
   options: PermissionOption[];
+  selectable: number;
   selectedCount: number;
   matches: PermissionOption[];
 }
@@ -34,6 +35,10 @@ interface PermissionFieldProps {
     value: string[];
     onChange: (value: string[]) => void;
   };
+  /** Shown but not selectable, e.g. what a role of this type cannot carry. */
+  disabledPermissions?: string[];
+  /** Why they cannot be selected; shown beside each of them. */
+  disabledReason?: string;
 }
 
 /**
@@ -57,7 +62,11 @@ const TAB_TRIGGER_BASE =
  * Custom hook managing search filtering across permission groups,
  * tracking selected permissions, and ensuring an active group is always selected.
  */
-const usePermissionGroups = (selected: string[], query: string) => {
+const usePermissionGroups = (
+  selected: string[],
+  query: string,
+  disabledSet: Set<string>,
+) => {
   const selectedSet = useMemo(() => new Set(selected), [selected]);
   const [activeKey, setActiveKey] = useState(PermissionOptions[0].label);
 
@@ -68,8 +77,14 @@ const usePermissionGroups = (selected: string[], query: string) => {
       PermissionOptions.map((entity) => ({
         label: entity.label,
         options: entity.options,
-        selectedCount: entity.options.filter((option) =>
-          selectedSet.has(option.value),
+        // Coverage is of what can be chosen: a disabled permission is never
+        // selectable, so it counts towards neither side.
+        selectable: entity.options.filter(
+          (option) => !disabledSet.has(option.value),
+        ).length,
+        selectedCount: entity.options.filter(
+          (option) =>
+            !disabledSet.has(option.value) && selectedSet.has(option.value),
         ).length,
         // Codes are matched as well as labels: they are the identifiers the API
         // and the permission checks use, so an admin looking for
@@ -81,7 +96,7 @@ const usePermissionGroups = (selected: string[], query: string) => {
             option.value.toLowerCase().includes(term),
         ),
       })),
-    [term, selectedSet],
+    [term, selectedSet, disabledSet],
   );
 
   // A search that empties the open group would leave a dead panel; move to the
@@ -121,7 +136,7 @@ const PermissionGroupTab: FC<PermissionGroupTabProps> = ({
   entity,
   isActive,
 }) => {
-  const coverage = getCoverage(entity.selectedCount, entity.options.length);
+  const coverage = getCoverage(entity.selectedCount, entity.selectable);
 
   return (
     <TabsTrigger
@@ -152,6 +167,8 @@ const PermissionGroupTab: FC<PermissionGroupTabProps> = ({
 interface PermissionOptionsPanelProps {
   activeGroup: PermissionEntity;
   selectedSet: Set<string>;
+  disabledSet: Set<string>;
+  disabledReason?: string;
   onToggleOption: (value: string, checked: boolean) => void;
   onToggleShown: (checked: boolean) => void;
 }
@@ -159,12 +176,16 @@ interface PermissionOptionsPanelProps {
 const PermissionOptionsPanel: FC<PermissionOptionsPanelProps> = ({
   activeGroup,
   selectedSet,
+  disabledSet,
+  disabledReason,
   onToggleOption,
   onToggleShown,
 }) => {
   const shown = activeGroup.matches;
+  const selectable = shown.filter((option) => !disabledSet.has(option.value));
   const allShownSelected =
-    shown.length > 0 && shown.every((option) => selectedSet.has(option.value));
+    selectable.length > 0 &&
+    selectable.every((option) => selectedSet.has(option.value));
 
   return (
     <TabsContent
@@ -183,19 +204,24 @@ const PermissionOptionsPanel: FC<PermissionOptionsPanelProps> = ({
         onCheckedChange={onToggleShown}
       />
       <hr className="mt-0 mb-2" />
-      {shown.map((option: PermissionOption) => (
-        <Checkbox
-          className="min-h-[22px] mb-2"
-          key={option.value}
-          id={`permission-${option.value}`}
-          size="sm"
-          label={option.label}
-          checked={selectedSet.has(option.value)}
-          onCheckedChange={(checked: boolean) =>
-            onToggleOption(option.value, checked)
-          }
-        />
-      ))}
+      {shown.map((option: PermissionOption) => {
+        const disabled = disabledSet.has(option.value);
+        return (
+          <Checkbox
+            className="min-h-[22px] mb-2"
+            key={option.value}
+            id={`permission-${option.value}`}
+            size="sm"
+            label={option.label}
+            checked={!disabled && selectedSet.has(option.value)}
+            disabled={disabled}
+            description={disabled ? disabledReason : undefined}
+            onCheckedChange={(checked: boolean) =>
+              onToggleOption(option.value, checked)
+            }
+          />
+        );
+      })}
     </TabsContent>
   );
 };
@@ -213,6 +239,10 @@ export const PermissionField = (props: PermissionFieldProps) => {
   );
 
   const [query, setQuery] = useState('');
+  const disabledSet = useMemo(
+    () => new Set(props.disabledPermissions ?? []),
+    [props.disabledPermissions],
+  );
   const {
     groups,
     activeKey,
@@ -220,7 +250,7 @@ export const PermissionField = (props: PermissionFieldProps) => {
     activeGroup,
     selectedSet,
     hasMatches,
-  } = usePermissionGroups(selected, query);
+  } = usePermissionGroups(selected, query, disabledSet);
 
   const toggleOption = (value: string, checked: boolean) =>
     props.input.onChange(
@@ -232,7 +262,9 @@ export const PermissionField = (props: PermissionFieldProps) => {
   // Bulk selection acts on what the search actually shows, so narrowing to
   // "delete" and ticking "Select all" cannot silently grant the whole group.
   const toggleShown = (checked: boolean) => {
-    const values = activeGroup.matches.map((option) => option.value);
+    const values = activeGroup.matches
+      .map((option) => option.value)
+      .filter((value) => !disabledSet.has(value));
     props.input.onChange(
       checked
         ? [...selected, ...values.filter((value) => !selectedSet.has(value))]
@@ -288,6 +320,8 @@ export const PermissionField = (props: PermissionFieldProps) => {
           <PermissionOptionsPanel
             activeGroup={activeGroup}
             selectedSet={selectedSet}
+            disabledSet={disabledSet}
+            disabledReason={props.disabledReason}
             onToggleOption={toggleOption}
             onToggleShown={toggleShown}
           />

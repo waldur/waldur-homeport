@@ -269,4 +269,81 @@ describe('RoleFormDialog', () => {
     expect(screen.queryByText('Save')).not.toBeInTheDocument();
     expect(screen.queryByText('New role')).not.toBeInTheDocument();
   });
+  it('creates a site-wide role without organization team permissions', async () => {
+    const user = userEvent.setup();
+    const createSpy = vi.mocked(rolesCreate).mockResolvedValue({} as any);
+    vi.mocked(rolesList).mockResolvedValue(mockListResponse([]));
+    renderDialog();
+
+    await user.type(screen.getByLabelText(/Role name/), 'Order desk');
+    await user.type(screen.getByLabelText(/Code/), 'GLOBAL.ORDER_DESK');
+    await user.click(screen.getByLabelText(/Type/));
+    await user.click(screen.getByText('Organization'));
+
+    const openGroup = (label: string) =>
+      user.click(
+        screen
+          .getAllByRole('tab')
+          .find((tab) =>
+            new RegExp(`^${label}(None|Partial|Full)$`).test(tab.textContent),
+          ),
+      );
+    await openGroup('Team members');
+    await user.click(screen.getByLabelText('Create permission customer'));
+    await openGroup('Customer');
+    await user.click(screen.getByLabelText('List users'));
+
+    await user.click(screen.getByLabelText(/Type/));
+    await user.click(screen.getByText('Site-wide'));
+
+    expect(screen.getByLabelText('List users')).toBeChecked();
+    await openGroup('Team members');
+    const denied = screen.getByLabelText('Create permission customer');
+    expect(denied).toBeDisabled();
+    expect(denied).not.toBeChecked();
+    expect(
+      screen.getAllByText(
+        "A site-wide role cannot manage an organization's team.",
+      ).length,
+    ).toBeGreaterThan(0);
+
+    const save = screen.getByText('Save');
+    await waitFor(() => expect(save).toBeEnabled());
+    await user.click(save);
+
+    await waitFor(() => {
+      expect(createSpy).toHaveBeenCalledWith({
+        body: expect.objectContaining({
+          name: 'GLOBAL.ORDER_DESK',
+          content_type: 'global',
+          permissions: ['CUSTOMER.LIST_USERS'],
+        }),
+      });
+    });
+  });
+  it('drops organization team permissions when the type becomes site-wide', async () => {
+    const user = userEvent.setup();
+    renderDialog();
+    await user.type(screen.getByLabelText(/Role name/), 'Team desk');
+    await user.type(screen.getByLabelText(/Code/), 'GLOBAL.TEAM_DESK');
+    await user.click(screen.getByLabelText(/Type/));
+    await user.click(screen.getByText('Organization'));
+    await user.click(
+      screen
+        .getAllByRole('tab')
+        .find((tab) =>
+          /^Team members(None|Partial|Full)$/.test(tab.textContent),
+        ),
+    );
+    await user.click(screen.getByLabelText('Create permission customer'));
+    await waitFor(() => expect(screen.getByText('Save')).toBeEnabled());
+
+    await user.click(screen.getByLabelText(/Type/));
+    await user.click(screen.getByText('Site-wide'));
+
+    // The only permission was one a site-wide role cannot carry, so nothing is
+    // left to save.
+    await waitFor(() => expect(screen.getByText('Save')).toBeDisabled());
+    expect(screen.getByText(/· 0 permissions/)).toBeInTheDocument();
+  });
 });

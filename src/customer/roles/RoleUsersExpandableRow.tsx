@@ -4,6 +4,7 @@ import { Permission, RoleDetails, userPermissionsList } from 'waldur-js-client';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { formatScopeName } from '@/permissions/utils';
 import { createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -27,6 +28,9 @@ const SCOPE_UUID_PARAM = {
 };
 
 const renderScope = (row: Permission) => {
+  if (row.scope_type === 'global') {
+    return formatScopeName(row);
+  }
   if (!row.scope_name) {
     return renderFieldOrDash(row.scope_name);
   }

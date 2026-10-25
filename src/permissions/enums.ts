@@ -179,3 +179,9 @@ export const PermissionEnum = {
   STAFF_ACCESS: 'STAFF.ACCESS',
   SUPPORT_ACCESS: 'SUPPORT.ACCESS',
 };
+
+export const GlobalDeniedPermissions = [
+  'CUSTOMER.CREATE_PERMISSION',
+  'CUSTOMER.DELETE_PERMISSION',
+  'CUSTOMER.UPDATE_PERMISSION',
+];
