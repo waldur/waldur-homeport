@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import { VersionHistory } from 'waldur-js-client';
 
+import { Timeline } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { VersionHistoryItem } from './VersionHistoryItem';
@@ -39,10 +41,7 @@ export const VersionHistoryTimeline: FunctionComponent<
   }
 
   return (
-    <ul
-      className="timeline timeline-border-dashed list-unstyled mb-0 px-5 py-5"
-      aria-label={translate('Revisions')}
-    >
+    <Timeline className="mb-0 px-5 py-5" aria-label={translate('Revisions')}>
       {versions.map((version, index) => (
         <VersionHistoryItem
           key={version.id}
@@ -53,6 +52,6 @@ export const VersionHistoryTimeline: FunctionComponent<
           totalVersions={versions.length}
         />
       ))}
-    </ul>
+    </Timeline>
   );
 };

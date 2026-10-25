@@ -237,7 +237,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
           )
         ) : (
           <>
-            <div className="timeline">
+            <div>
               {rows.map((item, index) => (
                 <BreadcrumbSearchItem
                   key={item.value}

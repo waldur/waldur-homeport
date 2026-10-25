@@ -37,6 +37,7 @@ export * from './StatCard';
 export * from './Table';
 export * from './Tabs';
 export * from './Tag';
+export * from './Timeline';
 export * from './Toast';
 export * from './Tooltip';
 export * from './TopBar';

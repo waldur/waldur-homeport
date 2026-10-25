@@ -27,6 +27,11 @@ describe('no-retired-bootstrap-utility', () => {
         code: 'const A = () => <div className="float-start lg:p-3 -mx-2 content-center h-screen tracking-wide" />;',
       },
       { code: "type C = 'vw-100';" },
+      // User-facing translation string or non-class function call containing the word "timeline"
+      { code: "const title = translate('Maintenance timeline');" },
+      {
+        code: "const A = () => <EChart exportTitle={translate('Cross-provider maintenance analytics and timeline')} />;",
+      },
     ],
     invalid: [
       {
@@ -76,6 +81,53 @@ describe('no-retired-bootstrap-utility', () => {
             data: {
               token: 'svg-icon-5tx',
               hint: 'bare Phosphor or SVGR icon with size prop or Tailwind size-* (size-5, size-6) and text-* for color',
+            },
+          },
+        ],
+      },
+      {
+        code: 'const A = () => <div className="timeline timeline-item timeline-line timeline-icon timeline-content timeline-border-dashed" />;',
+        errors: [
+          {
+            messageId: 'retired',
+            data: {
+              token: 'timeline',
+              hint: 'waldur-ui Timeline primitive (<Timeline>, <TimelineItem>, <TimelineConnector>, <TimelineIcon>, <TimelineContent>) or Tailwind flex layout',
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'timeline-item',
+              hint: 'waldur-ui Timeline primitive (<Timeline>, <TimelineItem>, <TimelineConnector>, <TimelineIcon>, <TimelineContent>) or Tailwind flex layout',
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'timeline-line',
+              hint: 'waldur-ui Timeline primitive (<Timeline>, <TimelineItem>, <TimelineConnector>, <TimelineIcon>, <TimelineContent>) or Tailwind flex layout',
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'timeline-icon',
+              hint: 'waldur-ui Timeline primitive (<Timeline>, <TimelineItem>, <TimelineConnector>, <TimelineIcon>, <TimelineContent>) or Tailwind flex layout',
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'timeline-content',
+              hint: 'waldur-ui Timeline primitive (<Timeline>, <TimelineItem>, <TimelineConnector>, <TimelineIcon>, <TimelineContent>) or Tailwind flex layout',
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'timeline-border-dashed',
+              hint: 'waldur-ui Timeline primitive (<Timeline>, <TimelineItem>, <TimelineConnector>, <TimelineIcon>, <TimelineContent>) or Tailwind flex layout',
             },
           },
         ],

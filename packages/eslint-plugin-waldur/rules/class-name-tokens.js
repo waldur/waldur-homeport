@@ -144,7 +144,6 @@ export const getNativeElementName = (node) =>
   isNativeElement(node) ? node.name.name : null;
 
 export const CLASS_HELPERS = /^(?:classNames|classnames|cn|clsx|cx|twMerge)$/;
-const TEST_CALLS = /^(?:it|test|describe)$/;
 /** Wrappers a class list passes through on its way to an attribute. */
 const PASS_THROUGH = new Set([
   'ConditionalExpression',
@@ -152,6 +151,9 @@ const PASS_THROUGH = new Set([
   'JSXExpressionContainer',
   'TemplateLiteral',
 ]);
+
+const NON_CLASS_PROPS =
+  /^(?:variant|data-slot|data-testid|title|label|description|component|message|summary|text|name|id|value|placeholder|key|url|path|type|role)$/;
 
 /**
  * A string that holds a name, not a class list: `variant="text-danger"` (a
@@ -169,7 +171,10 @@ export const notAClassList = (node) => {
   switch (parent.type) {
     // Class lists also travel in props like backgroundColor="bg-info".
     case 'JSXAttribute':
-      return parent.name.name === 'variant';
+      return (
+        NON_CLASS_PROPS.test(parent.name.name) ||
+        Boolean(parent.name.name?.startsWith?.('aria-'))
+      );
     case 'Property':
       if (parent.key === child && !parent.computed) {
         const call = parent.parent?.parent;
@@ -178,16 +183,17 @@ export const notAClassList = (node) => {
           CLASS_HELPERS.test(call.callee.name ?? '')
         );
       }
-      return (parent.key.name ?? parent.key.value) === 'variant';
+      return NON_CLASS_PROPS.test(
+        String(parent.key.name ?? parent.key.value ?? ''),
+      );
     case 'TSLiteralType':
     case 'BinaryExpression':
     case 'SwitchCase':
       return true;
     case 'CallExpression': {
       const callee = parent.callee.object ?? parent.callee;
-      return (
-        parent.arguments[0] === child && TEST_CALLS.test(callee.name ?? '')
-      );
+      const name = callee.name ?? callee.property?.name ?? '';
+      return !CLASS_HELPERS.test(name);
     }
     default:
       return false;

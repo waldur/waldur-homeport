@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
 
+import { Timeline } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { IssueCommentItem } from './IssueCommentItem';
@@ -22,10 +24,10 @@ export const IssueCommentsList: FunctionComponent<
     return <div>{translate('There are no comments yet.')}</div>;
   }
   return (
-    <div className="timeline">
+    <Timeline>
       {comments.map((comment) => (
         <IssueCommentItem key={comment.uuid} comment={comment} />
       ))}
-    </div>
+    </Timeline>
   );
 };

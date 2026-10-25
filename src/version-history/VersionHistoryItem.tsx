@@ -2,7 +2,14 @@ import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { VersionHistory } from 'waldur-js-client';
 
-import { Badge, cn } from 'waldur-ui';
+import {
+  Badge,
+  cn,
+  TimelineConnector,
+  TimelineContent,
+  TimelineIcon,
+  TimelineItem,
+} from 'waldur-ui';
 
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { StateIndicator } from '@/core/StateIndicator';
@@ -46,22 +53,21 @@ const AVATAR_COLOR_CLASSES: Record<string, string> = {
 
 const VersionAvatar: FunctionComponent<{
   userName: string;
-  isFirst: boolean;
-}> = ({ userName, isFirst }) => {
+}> = ({ userName }) => {
   const color = nameToColor(userName);
 
   // Decorative: the name is spelled out beside it.
   return (
-    <div
-      className={cn(
-        'timeline-icon z-10 shrink-0 mr-4 size-8 rounded-full flex items-center justify-center text-xs font-medium border-b-4 border-[var(--bg-primary)]',
-        !isFirst && 'border-t-4 border-[var(--bg-primary)]',
-        AVATAR_COLOR_CLASSES[color] || AVATAR_COLOR_CLASSES.primary,
-      )}
-      aria-hidden="true"
-    >
-      {getAbbreviation(userName)}
-    </div>
+    <TimelineIcon aria-hidden="true">
+      <div
+        className={cn(
+          'size-8 rounded-full flex items-center justify-center text-xs font-medium',
+          AVATAR_COLOR_CLASSES[color] || AVATAR_COLOR_CLASSES.primary,
+        )}
+      >
+        {getAbbreviation(userName)}
+      </div>
+    </TimelineIcon>
   );
 };
 
@@ -96,66 +102,65 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
   // selected revision is the one the diff shows, hence aria-current. Button
   // content must be phrasing content, so the text blocks are spans.
   return (
-    <li
+    <TimelineItem
+      isSelected={isSelected}
       className={cn(
-        'timeline-item relative rounded transition-colors',
+        'rounded transition-colors',
         isSelected ? 'bg-brand-subtle' : 'hover:bg-primary-hover',
         'has-[>button:focus-visible]:outline-[var(--focus-ring-width)] has-[>button:focus-visible]:outline-[var(--focus-ring-color)] has-[>button:focus-visible]:outline-offset-[var(--focus-ring-offset)] has-[>button:focus-visible]:outline-solid',
       )}
     >
-      <div
-        className="timeline-line w-[30px] border-l-2 border-secondary"
-        aria-hidden="true"
-      />
-      <VersionAvatar userName={userName} isFirst={versionIndex === 0} />
-      <button
-        type="button"
-        className={cn(
-          'timeline-content stretched-link block w-full py-2 pr-3 border-0 bg-transparent text-left text-inherit focus-visible:outline-none mb-0 pb-3',
-          versionIndex !== 0 && 'mt-1',
-        )}
-        aria-current={isSelected || undefined}
-        onClick={onSelect}
-      >
-        <span className="flex justify-between items-start">
-          <span className="block grow min-w-0">
-            <span className={cn('block text-xs', mutedText)}>
-              <span className="font-medium text-sm mr-3">{userName}</span>
-              {isPolicyComment(version.revision_comment) && (
-                <Badge
-                  variant="warning"
-                  size="sm"
-                  leftIcon={<ShieldWarningIcon weight="bold" />}
-                  shape="pill"
-                  tone="outline"
-                  className="mr-2"
+      <TimelineConnector />
+      <VersionAvatar userName={userName} />
+      <TimelineContent asChild>
+        <button
+          type="button"
+          className="stretched-link block w-full py-2 pr-3 border-0 bg-transparent text-left text-inherit focus-visible:outline-none mb-0 pb-3"
+          aria-current={isSelected || undefined}
+          onClick={onSelect}
+        >
+          <span className="flex justify-between items-start">
+            <span className="block grow min-w-0">
+              <span className={cn('block text-xs', mutedText)}>
+                <span className="font-medium text-sm mr-3">{userName}</span>
+                {isPolicyComment(version.revision_comment) && (
+                  <Badge
+                    variant="warning"
+                    size="sm"
+                    leftIcon={<ShieldWarningIcon weight="bold" />}
+                    shape="pill"
+                    tone="outline"
+                    className="mr-2"
+                  >
+                    {translate('Policy')}
+                  </Badge>
+                )}
+                <time
+                  dateTime={version.revision_date}
+                  title={formatMediumDateTime(version.revision_date)}
                 >
-                  {translate('Policy')}
-                </Badge>
-              )}
-              <time
-                dateTime={version.revision_date}
-                title={formatMediumDateTime(version.revision_date)}
-              >
-                {formatRelative(version.revision_date)}
-              </time>
-            </span>
-            {version.revision_comment && (
-              <span className={cn('block text-xs mt-1 break-words', mutedText)}>
-                {isPolicyComment(version.revision_comment)
-                  ? formatPolicyComment(version.revision_comment)
-                  : version.revision_comment}
+                  {formatRelative(version.revision_date)}
+                </time>
               </span>
-            )}
+              {version.revision_comment && (
+                <span
+                  className={cn('block text-xs mt-1 break-words', mutedText)}
+                >
+                  {isPolicyComment(version.revision_comment)
+                    ? formatPolicyComment(version.revision_comment)
+                    : version.revision_comment}
+                </span>
+              )}
+            </span>
+            <StateIndicator
+              label={versionLabel}
+              variant={versionIndex === 0 ? 'success' : 'secondary'}
+              tone="outline"
+              shape="pill"
+            />
           </span>
-          <StateIndicator
-            label={versionLabel}
-            variant={versionIndex === 0 ? 'success' : 'secondary'}
-            tone="outline"
-            shape="pill"
-          />
-        </span>
-      </button>
-    </li>
+        </button>
+      </TimelineContent>
+    </TimelineItem>
   );
 };
