@@ -35,7 +35,6 @@ export const CommentEditButton: FC<CommentEditButtonProps> = ({ comment }) => {
     <BaseButton
       size="sm"
       variant="tertiary"
-      className="me-3"
       onClick={openEditCommentDialog}
       label={translate('Change')}
       iconNode={<PencilSimpleIcon weight="bold" />}

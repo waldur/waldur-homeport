@@ -127,10 +127,6 @@ export const PARTIALS = [
     scss: "@import 'config'; @import 'components/symbol';",
   },
   {
-    name: 'core/components/timeline',
-    scss: "@import 'config'; @import 'components/timeline';",
-  },
-  {
     name: 'core/components/bullet',
     scss: "@import 'config'; @import 'components/bullet';",
   },

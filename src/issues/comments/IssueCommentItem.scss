@@ -1,5 +1,0 @@
-@use '../../core/timeline-item' as *;
-
-.timeline .issue-comment {
-  @include timeline-item-base;
-}

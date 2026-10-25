@@ -1,5 +1,12 @@
 import { FunctionComponent } from 'react';
 
+import {
+  TimelineConnector,
+  TimelineContent,
+  TimelineIcon,
+  TimelineItem,
+} from 'waldur-ui';
+
 import Avatar from '@/core/Avatar';
 import { ENV } from '@/core/config';
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
@@ -18,8 +25,6 @@ const UserPopover = lazyComponent(() =>
 
 import { CommentActions } from './CommentActions';
 import { Comment } from './types';
-
-import './IssueCommentItem.scss';
 
 interface IssueCommentItemProps {
   comment: Comment;
@@ -54,7 +59,7 @@ const CommentAvatar = ({ comment }) => {
   const color = nameToColor(comment.author_name);
 
   return (
-    <div className="timeline-icon me-4">
+    <TimelineIcon>
       <Avatar
         src={comment.author_image}
         name={comment.author_name}
@@ -62,7 +67,7 @@ const CommentAvatar = ({ comment }) => {
         circle
         labelClassName={`text-base font-medium ${AVATAR_COLOR_CLASSES[color] || AVATAR_COLOR_CLASSES.primary}`}
       />
-    </div>
+    </TimelineIcon>
   );
 };
 
@@ -79,12 +84,12 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
   };
 
   return (
-    <div className="issue-comment timeline-item">
-      <div className="timeline-line w-[30px]" />
+    <TimelineItem className="issue-comment">
+      <TimelineConnector />
       <CommentAvatar comment={comment} />
-      <div className="timeline-content">
-        <div className="flex justify-between gap-5 gap-md-20">
-          <div>
+      <TimelineContent className="pb-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4">
+          <div className="min-w-0 flex-1">
             <div className="text-xs text-quaternary">
               <button
                 onClick={openUserDialog}
@@ -103,8 +108,8 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
                 </span>
               )}
             </div>
-            <div className="text-sm text-quaternary">
-              {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE ===
+            <div className="text-sm text-quaternary break-words">
+              {ENV.plugins?.WALDUR_SUPPORT?.ACTIVE_BACKEND_TYPE ===
               'atlassian' ? (
                 <FormattedJira text={comment.description} />
               ) : (
@@ -114,7 +119,7 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
           </div>
           <CommentActions comment={comment} />
         </div>
-      </div>
-    </div>
+      </TimelineContent>
+    </TimelineItem>
   );
 };

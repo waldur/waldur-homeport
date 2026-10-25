@@ -62,6 +62,11 @@ export const RETIRED_UTILITY_PATTERNS = [
     /^svg-icon(?:-[\w.-]+)?$/,
     'bare Phosphor or SVGR icon with size prop or Tailwind size-* (size-5, size-6) and text-* for color',
   ],
+  // timeline retired in #561; use waldur-ui Timeline component or Tailwind flex utilities.
+  [
+    /^timeline(?:-(?:item|line|icon|content|border-dashed))?$/,
+    'waldur-ui Timeline primitive (<Timeline>, <TimelineItem>, <TimelineConnector>, <TimelineIcon>, <TimelineContent>) or Tailwind flex layout',
+  ],
 ];
 
 const retired = (token) =>
