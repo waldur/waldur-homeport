@@ -231,6 +231,10 @@ export const PermissionOptions = [
         value: 'OFFERING.DRY_RUN_SCRIPT',
       },
       {
+        label: translate('List offering'),
+        value: 'OFFERING.LIST',
+      },
+      {
         label: translate('Manage backend resources'),
         value: 'OFFERING.MANAGE_BACKEND_RESOURCES',
       },

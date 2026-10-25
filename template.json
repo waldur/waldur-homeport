@@ -28865,6 +28865,12 @@
   },
   "List of user profile attributes that are mandatory.": {},
   "List of username that users are not allowed to select": {},
+  "List offering": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
+    }
+  },
   "List order": {
     "context": {
       "primary_ui_type": "label",
