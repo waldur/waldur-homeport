@@ -299,7 +299,7 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
                 }
               }}
             />
-            <div className="size-sm">
+            <div>
               {!isLoading && error ? (
                 <LoadingErred
                   loadData={refetch}

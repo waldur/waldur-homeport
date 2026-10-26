@@ -145,7 +145,7 @@ export const PermissionRequestActionDialog: FunctionComponent<OwnProps> = (
             </div>
             {!readOnly && <hr />}
             {!readOnly && (
-              <div className="size-lg">
+              <div>
                 <TextGroup
                   name="comment"
                   label={translate('Reason')}

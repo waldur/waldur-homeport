@@ -107,7 +107,7 @@ export const AdjustResourceDatesDialog: FunctionComponent<
             />
             <div className="row">
               <div className="col-sm-6">
-                <div className="size-sm">
+                <div>
                   <DateGroup
                     name="start_date"
                     label={translate('Start date')}
@@ -116,7 +116,7 @@ export const AdjustResourceDatesDialog: FunctionComponent<
                 </div>
               </div>
               <div className="col-sm-6">
-                <div className="size-sm">
+                <div>
                   <DateGroup
                     name="end_date"
                     label={translate('End date')}
@@ -126,7 +126,7 @@ export const AdjustResourceDatesDialog: FunctionComponent<
                 </div>
               </div>
             </div>
-            <div className="size-sm">
+            <div>
               <TextGroup
                 name="comment"
                 label={translate('Comment')}

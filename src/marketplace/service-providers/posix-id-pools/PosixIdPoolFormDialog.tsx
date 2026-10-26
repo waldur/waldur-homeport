@@ -358,7 +358,7 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
               />
             }
           >
-            <div className="size-sm">
+            <div>
               {submitError && !dirtySinceLastSubmit && (
                 <AlertItem
                   variant="error"

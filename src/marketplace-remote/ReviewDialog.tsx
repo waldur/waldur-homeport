@@ -35,7 +35,7 @@ export const ReviewDialog: FC<ReviewDialogProps> = ({ resolve }) => {
             }
             footer={<FormFooter />}
           >
-            <div className="size-sm">
+            <div>
               <TextGroup label={translate('Comment')} name="review_comment" />
             </div>
           </ModalDialog>

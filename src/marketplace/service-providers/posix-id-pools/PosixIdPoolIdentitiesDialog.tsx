@@ -130,7 +130,7 @@ export const PosixIdPoolIdentitiesDialog: FC<
 
   return (
     <ModalDialog title={translate('POSIX identities')}>
-      <div className="size-xl">
+      <div>
         <Table<PosixIdentity>
           {...tableProps}
           columns={columns}

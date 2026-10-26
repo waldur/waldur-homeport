@@ -130,7 +130,7 @@ const EditProjectUserDialogFormBody: FC<{
           </>
         }
       >
-        <div className="size-sm">
+        <div>
           <UserGroup permission={resolve.customer} />
           <ProjectGroup project={resolve.project} />
           <RoleGroup

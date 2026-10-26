@@ -28,6 +28,7 @@
     "style:check": "stylelint \"src/**/*.css\" \"src/**/*.scss\" \"packages/**/*.css\"",
     "lint:check": "eslint src locales/tools packages",
     "lint:fix": "eslint --fix src locales/tools packages",
+    "lint:classes:baseline": "node scripts/unknown-classes-baseline.mjs",
     "deps:unused": "knip --include files,types,enumMembers,exports,dependencies,unlisted",
     "deps:circular": "oxlint -c .oxlintrc.cycles.json --disable-nested-config src",
     "deps:dedupe": "yarn dedupe --check",
@@ -226,6 +227,13 @@
     ]
   },
   "knip": {
+    "workspaces": {
+      "packages/eslint-plugin-waldur": {
+        "entry": [
+          "lib/class-oracle.worker.js"
+        ]
+      }
+    },
     "eslint": {
       "entry": [
         "eslint.config.js"

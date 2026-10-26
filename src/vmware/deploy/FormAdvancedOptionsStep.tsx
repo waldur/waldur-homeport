@@ -72,7 +72,7 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
       disabledTooltip={props.disabledTooltip}
     >
       {data && (
-        <div className="size-xl">
+        <div className="mx-auto w-full max-w-[1440px]">
           {advancedMode && data.clusters.length > 0 && (
             <SelectGroup
               label={translate('Cluster')}

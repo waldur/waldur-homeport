@@ -195,7 +195,7 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                 />
               }
             >
-              <div className="size-lg">
+              <div>
                 <StringGroup
                   name="name"
                   validate={required}

@@ -58,7 +58,7 @@ export const EditCapacityDialog: FC<EditCapacityDialogProps> = ({
               </>
             }
           >
-            <div className="size-lg">
+            <div>
               <Field
                 label={translate('Name')}
                 value={poolMember.reviewer_name}

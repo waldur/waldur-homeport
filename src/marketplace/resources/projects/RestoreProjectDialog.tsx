@@ -141,7 +141,7 @@ export const RestoreProjectDialog: FunctionComponent<
                   },
                 ]}
               />
-              <div className="size-sm">
+              <div>
                 <BooleanGroup
                   name="restore_team_members"
                   label={translate(

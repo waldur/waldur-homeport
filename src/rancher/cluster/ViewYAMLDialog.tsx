@@ -77,7 +77,7 @@ export const ViewYAMLDialog: FC<ViewYAMLDialogProps> = ({ resolve }) => {
             {loading ? (
               <LoadingSpinner />
             ) : (
-              <div className="size-sm">
+              <div>
                 <Field name="yaml">
                   {({ input }) => (
                     <MonacoField input={input} language="yaml" height={400} />

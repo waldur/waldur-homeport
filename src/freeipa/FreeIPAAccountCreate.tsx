@@ -64,7 +64,7 @@ export const FreeIPAAccountCreate: React.FC<FreeIPAAccountCreateOwnProps> = ({
         <form onSubmit={handleSubmit}>
           <UsernameGroup />
           <FormField>
-            <div className="pull-right">
+            <div className="float-right">
               <SubmitButton
                 submitting={submitting}
                 disabled={invalid}

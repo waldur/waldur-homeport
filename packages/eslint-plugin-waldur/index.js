@@ -39,6 +39,7 @@ import noRetiredBootstrapUtility from './rules/no-retired-bootstrap-utility.js';
 import noTemplateInTranslate from './rules/no-template-in-translate.js';
 import noTooltipOnBareIcon from './rules/no-tooltip-on-bare-icon.js';
 import noUndefinedInMutationBody from './rules/no-undefined-in-mutation-body.js';
+import noUnknownClass from './rules/no-unknown-class.js';
 import preferClassnamesUtility from './rules/prefer-classnames-utility.js';
 import preferMutateOverMutateAsync from './rules/prefer-mutate-over-mutateAsync.js';
 import preferTokenUtility from './rules/prefer-token-utility.js';
@@ -92,6 +93,7 @@ export default {
     'enforce-disabled-button-tooltip': enforceDisabledButtonTooltip,
     'no-template-in-translate': noTemplateInTranslate,
     'no-undefined-in-mutation-body': noUndefinedInMutationBody,
+    'no-unknown-class': noUnknownClass,
 
     // Design system rules
     'enforce-featured-icon': enforceFeaturedIcon,

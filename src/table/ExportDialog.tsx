@@ -99,7 +99,7 @@ export const ExportDialog = (props: ExportDialogProps) => {
                 </>
               }
             >
-              <div className="size-sm">
+              <div>
                 {/* Only for tables with more to write than their columns. */}
                 {fullExport && (
                   <RadioGroup

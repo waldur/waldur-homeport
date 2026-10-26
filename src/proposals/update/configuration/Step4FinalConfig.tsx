@@ -12,7 +12,7 @@ export const Step4FinalConfig: FC<WizardFormStepProps> = (props) => {
 
   return (
     <WizardForm {...props}>
-      <div className="size-lg">
+      <div>
         <TextGroup
           name="description"
           maxLength={1000}

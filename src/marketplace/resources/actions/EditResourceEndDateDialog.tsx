@@ -114,7 +114,7 @@ export const EditResourceEndDateDialog: FunctionComponent<
                 </>
               }
             >
-              <div className="size-sm">
+              <div>
                 <DateGroup
                   name="end_date"
                   label={translate('Termination date')}

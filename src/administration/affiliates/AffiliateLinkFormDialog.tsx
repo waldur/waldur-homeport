@@ -174,7 +174,7 @@ export const AffiliateLinkFormDialog: FC<OwnProps> = ({
               </>
             }
           >
-            <div className="size-sm">
+            <div>
               {isEdit ? (
                 <>
                   <StringGroup

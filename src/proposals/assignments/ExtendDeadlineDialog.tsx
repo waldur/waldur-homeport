@@ -81,7 +81,7 @@ export const ExtendDeadlineDialog: FC<ExtendDeadlineDialogProps> = ({
               </>
             }
           >
-            <div className="size-lg">
+            <div>
               {batch.expires_at && (
                 <FormGroup label={translate('Current deadline')}>
                   <div className="py-[10px] text-secondary">

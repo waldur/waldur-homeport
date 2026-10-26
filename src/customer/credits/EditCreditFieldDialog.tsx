@@ -64,7 +64,7 @@ export const EditCreditFieldDialog: FC<{
               </>
             }
           >
-            <div className="size-sm">
+            <div>
               {resolve.name === 'offerings' ? (
                 <CustomerCreditOfferingsField />
               ) : resolve.name === 'value' ? (

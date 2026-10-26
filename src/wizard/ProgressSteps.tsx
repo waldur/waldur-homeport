@@ -122,9 +122,12 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                   )}
 
                   {onClick ? (
+                    // Padding cancelled by a negative margin: the focus ring
+                    // clears the label without moving the marker. Arbitrary
+                    // px, not p-2: Bootstrap's `.p-2` is 0.5rem !important.
                     <button
                       type="button"
-                      className="group flex flex-col items-center border-0 bg-transparent p-0 text-center font-inherit cursor-pointer rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+                      className="group -m-[8px] flex flex-col items-center rounded-lg border-0 bg-transparent p-[8px] text-center cursor-pointer"
                       onClick={() => onClick(step, i)}
                     >
                       <div

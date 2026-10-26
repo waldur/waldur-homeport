@@ -115,7 +115,7 @@ export const VendorOfferingMappingDialog: FC<
                 />
               }
             >
-              <div className="size-sm">
+              <div>
                 <Field name="arrow_vendor_name" validate={required}>
                   {({ input, meta }) => (
                     <FormGroup

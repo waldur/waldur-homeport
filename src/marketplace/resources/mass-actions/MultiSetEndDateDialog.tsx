@@ -114,7 +114,7 @@ export const MultiSetEndDateDialog: FC<MultiSetEndDateDialogProps> = (
               />
             }
           >
-            <div className="size-sm">
+            <div>
               <BooleanGroup
                 name="clear"
                 label={translate('Clear termination date')}

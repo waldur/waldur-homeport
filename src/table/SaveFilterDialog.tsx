@@ -60,7 +60,7 @@ export const SaveFilterDialog = (props: SaveFilterDialogProps) => {
               </>
             }
           >
-            <div className="size-sm">
+            <div>
               <StringGroup
                 name="name"
                 label={translate('Filter name')}

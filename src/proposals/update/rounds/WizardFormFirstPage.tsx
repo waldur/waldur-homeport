@@ -42,7 +42,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
   }, [cutoff_time, start_time]);
   return (
     <WizardForm {...props}>
-      <div className="size-sm">
+      <div>
         <TimezoneGroup
           name="timezone"
           label={translate('Time zone')}

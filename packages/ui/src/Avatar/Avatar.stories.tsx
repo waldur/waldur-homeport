@@ -90,29 +90,29 @@ export const InitialsAndAcronyms: Story = {
     <div className="flex flex-wrap items-center gap-6 p-6">
       <div className="flex flex-col items-center gap-2">
         <Avatar name="Alice Cooper" size={44} />
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs text-tertiary">
           Full Name (&quot;AC&quot;)
         </span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Avatar name="Administrator" size={44} />
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs text-tertiary">
           Single Word (&quot;A&quot;)
         </span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Avatar name="European High Performance Computing" size={44} />
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs text-tertiary">
           Multi-word (&quot;EH&quot;)
         </span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Avatar initials="VIP" size={44} tone="brand" />
-        <span className="text-xs text-muted-foreground">Explicit Initials</span>
+        <span className="text-xs text-tertiary">Explicit Initials</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Avatar name="?" size={44} />
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs text-tertiary">
           Placeholder (&quot;?&quot;)
         </span>
       </div>
@@ -129,19 +129,19 @@ export const Shapes: Story = {
     <div className="flex items-center gap-8 p-6">
       <div className="flex flex-col items-center gap-2">
         <Avatar name="Circle User" size={48} shape="circle" />
-        <span className="text-xs font-medium text-foreground">
+        <span className="text-xs font-medium text-primary">
           shape=&quot;circle&quot;
         </span>
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs text-tertiary">
           Users, staff, team members
         </span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Avatar name="Square Project" size={48} shape="square" />
-        <span className="text-xs font-medium text-foreground">
+        <span className="text-xs font-medium text-primary">
           shape=&quot;square&quot;
         </span>
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs text-tertiary">
           Projects, categories, rooms
         </span>
       </div>
@@ -157,7 +157,7 @@ export const SizesAndScales: Story = {
   render: () => (
     <div className="flex flex-col gap-6 p-6">
       <div>
-        <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground block mb-3">
+        <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-3">
           Numeric Prop Sizes (with auto-proportional font size)
         </span>
         <div className="flex items-center gap-4">
@@ -172,7 +172,7 @@ export const SizesAndScales: Story = {
         </div>
       </div>
       <div>
-        <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground block mb-3">
+        <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-3">
           Tailwind className Sizing (precedence without inline override)
         </span>
         <div className="flex items-center gap-4">
@@ -193,7 +193,7 @@ export const TonesAndColorVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-6 p-6">
       <div>
-        <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground block mb-3">
+        <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-3">
           Semantic Tone Variants
         </span>
         <div className="flex items-center gap-4">
@@ -206,7 +206,7 @@ export const TonesAndColorVariants: Story = {
         </div>
       </div>
       <div>
-        <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground block mb-3">
+        <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-3">
           Custom Chat Author Colors (via fallbackClassName)
         </span>
         <div className="flex items-center gap-4">
@@ -249,12 +249,8 @@ export const ImageLoadingAndFallback: Story = {
           name="Jane Doe"
           size={48}
         />
-        <span className="text-xs font-medium text-foreground">
-          User Portrait
-        </span>
-        <span className="text-xs text-muted-foreground">
-          Default (object-cover)
-        </span>
+        <span className="text-xs font-medium text-primary">User Portrait</span>
+        <span className="text-xs text-tertiary">Default (object-cover)</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Avatar
@@ -264,8 +260,8 @@ export const ImageLoadingAndFallback: Story = {
           shape="square"
           isContain
         />
-        <span className="text-xs font-medium text-foreground">Logo / Icon</span>
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs font-medium text-primary">Logo / Icon</span>
+        <span className="text-xs text-tertiary">
           isContain (object-contain)
         </span>
       </div>
@@ -275,20 +271,18 @@ export const ImageLoadingAndFallback: Story = {
           name="Broken Image"
           size={48}
         />
-        <span className="text-xs font-medium text-foreground">Broken URL</span>
-        <span className="text-xs text-muted-foreground">Initials fallback</span>
+        <span className="text-xs font-medium text-primary">Broken URL</span>
+        <span className="text-xs text-tertiary">Initials fallback</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Avatar
           src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
           size={48}
         />
-        <span className="text-xs font-medium text-foreground">
+        <span className="text-xs font-medium text-primary">
           Image-only Logo
         </span>
-        <span className="text-xs text-muted-foreground">
-          Transparent fallback
-        </span>
+        <span className="text-xs text-tertiary">Transparent fallback</span>
       </div>
     </div>
   ),
@@ -304,19 +298,19 @@ export const CustomChildrenFallback: Story = {
         <Avatar size={44}>
           <UserIcon weight="bold" className="size-5 text-quaternary" />
         </Avatar>
-        <span className="text-xs text-muted-foreground">User Icon</span>
+        <span className="text-xs text-tertiary">User Icon</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Avatar size={44} shape="square">
           <CubeIcon weight="bold" className="size-5 text-quaternary" />
         </Avatar>
-        <span className="text-xs text-muted-foreground">Cube Icon</span>
+        <span className="text-xs text-tertiary">Cube Icon</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Avatar size={44} shape="square">
           <FolderIcon weight="bold" className="size-5 text-quaternary" />
         </Avatar>
-        <span className="text-xs text-muted-foreground">Folder Icon</span>
+        <span className="text-xs text-tertiary">Folder Icon</span>
       </div>
     </div>
   ),
@@ -344,7 +338,7 @@ export const AvatarGroupStacks: Story = {
     return (
       <div className="flex flex-col gap-6 p-6">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground block mb-3">
+          <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-3">
             Automatic Truncation with Overflow Badge (max=3, total=7)
           </span>
           <AvatarGroup
@@ -366,7 +360,7 @@ export const AvatarGroupStacks: Story = {
         </div>
 
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground block mb-3">
+          <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-3">
             Spacing Variants (sm, md, lg)
           </span>
           <div className="flex flex-col gap-4">

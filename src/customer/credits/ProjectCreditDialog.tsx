@@ -122,7 +122,7 @@ export const ProjectCreditDialog: FC<ProjectCreditDialogProps> = ({
               </>
             }
           >
-            <div className="size-lg">
+            <div>
               <OrganizationProjectSelectField disabled={isEdit} />
               {isLoading ? (
                 <LoadingSpinner />

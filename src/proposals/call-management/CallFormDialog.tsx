@@ -185,7 +185,7 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
               />
             }
           >
-            <div className="size-lg">
+            <div>
               <StringGroup
                 label={translate('Name')}
                 name="name"

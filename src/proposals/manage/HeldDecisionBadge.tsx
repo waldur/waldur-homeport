@@ -36,12 +36,10 @@ export const HeldDecisionBadge: FC<{ proposalUuid: string }> = ({
     // tentative outcome a moment later.
     return (
       <span
-        className="placeholder-glow inline-block"
+        className="inline-block h-[1em] w-[7rem] animate-pulse rounded-full bg-tertiary align-middle"
         aria-busy="true"
         data-testid="held-decision-badge-loading"
-      >
-        <span className="placeholder rounded-full" style={{ width: '7rem' }} />
-      </span>
+      />
     );
   }
   const outcome = (data ?? []).find(

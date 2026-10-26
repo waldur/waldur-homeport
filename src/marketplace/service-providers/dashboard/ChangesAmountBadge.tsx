@@ -41,7 +41,7 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
   const isInfinity = Math.abs(num) === Infinity;
 
   let colorVariant: BadgeVariant = 'neutral';
-  let textColorClass = 'text-default';
+  let textColorClass = '';
   if (isNonZero) {
     if (isNegative) {
       colorVariant = reverseColor ? 'success' : 'danger';
@@ -128,7 +128,7 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
         </Badge>
       );
     }
-    return <span className="text-default">0{unit}</span>;
+    return <span>0{unit}</span>;
   }
 
   return null;

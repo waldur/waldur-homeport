@@ -20,7 +20,7 @@ export const DecoratedField: React.FC<OwnProps> = (props) => (
   <Col sm={6}>
     <FormField controlId={props.variable}>
       {props.action ? (
-        <div className="pull-right">
+        <div className="float-right">
           <small>{props.action}</small>
         </div>
       ) : null}

@@ -70,7 +70,7 @@ export const SelectOfferingTab = () => {
   };
 
   return (
-    <div className="size-lg">
+    <div>
       <Field
         label={translate('API URL')}
         value={formData?.api_url}

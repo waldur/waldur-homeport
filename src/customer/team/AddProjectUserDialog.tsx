@@ -126,7 +126,7 @@ const AddProjectUserDialogFormBody: FC<{
           </>
         }
       >
-        <div className="size-sm">
+        <div>
           <UserGroup permission={resolve.customer} />
           <OrganizationProjectSelectField />
           <RoleGroup

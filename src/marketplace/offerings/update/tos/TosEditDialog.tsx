@@ -88,7 +88,7 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
               </div>
             }
           >
-            <div className="size-lg">
+            <div>
               <StringGroup
                 name="version"
                 validate={required}

@@ -16,7 +16,7 @@ export const AttributeSection: FunctionComponent<AttributeSectionProps> = (
 ) => (
   <>
     {!props.hideHeader && (
-      <tr className="gray-bg">
+      <tr className="bg-secondary">
         <th>{props.section.title}</th>
         <th />
       </tr>
