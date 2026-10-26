@@ -1,4 +1,8 @@
-import { CheckCircleIcon, WarningCircleIcon } from '@phosphor-icons/react';
+import {
+  CheckCircleIcon,
+  ClockCountdownIcon,
+  WarningCircleIcon,
+} from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 import { OnboardingVerification } from 'waldur-js-client';
@@ -7,6 +11,8 @@ import { RadialBackground } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+
+import { isIdentityReview } from './utils';
 
 import './OrganizationReviewStatus.scss';
 
@@ -22,8 +28,13 @@ export const OrganizationCreateStep3: FunctionComponent<
 > = (props) => {
   const { validationResult, validationLoading, isManual } = props;
 
+  // The register confirmed the representative rights of an identity the user
+  // entered: not a failure, the application continues to manual review.
+  const identityReview = isIdentityReview(validationResult);
+
   // Disable next button when automatic validation is escalated
-  const submitDisabled = validationResult?.status === 'escalated' && !isManual;
+  const submitDisabled =
+    validationResult?.status === 'escalated' && !isManual && !identityReview;
 
   // Notify parent about submit disabled state
   if (props.onSubmitDisabledChange) {
@@ -32,6 +43,17 @@ export const OrganizationCreateStep3: FunctionComponent<
 
   const getStatusIcon = () => {
     if (!validationResult) return null;
+    if (identityReview) {
+      return (
+        <div className="validation-icon-wrapper mb-7">
+          <ClockCountdownIcon
+            size={34}
+            weight="bold"
+            className="text-tertiary"
+          />
+        </div>
+      );
+    }
 
     switch (validationResult.status) {
       case 'verified':
@@ -57,6 +79,7 @@ export const OrganizationCreateStep3: FunctionComponent<
 
   const getStatusTitle = () => {
     if (!validationResult) return '';
+    if (identityReview) return translate('Manual review required');
 
     switch (validationResult.status) {
       case 'verified':
@@ -70,6 +93,11 @@ export const OrganizationCreateStep3: FunctionComponent<
 
   const getStatusMessage = () => {
     if (!validationResult) return '';
+    if (identityReview) {
+      return translate(
+        'The business register confirms the representative rights of the person you identified. As your login does not confirm that this is you, staff review the application before the organization is created. Continue to submit it for review.',
+      );
+    }
 
     switch (validationResult.status) {
       case 'verified':

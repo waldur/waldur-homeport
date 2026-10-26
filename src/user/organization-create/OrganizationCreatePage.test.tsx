@@ -791,6 +791,40 @@ describe('OrganizationCreatePage', () => {
       });
     });
 
+    it('sends a typed identity on to manual review', async () => {
+      vi.mocked(onboardingVerificationsRunValidation).mockResolvedValueOnce({
+        data: {
+          uuid: 'verification-uuid-1',
+          status: 'escalated',
+          error_message: 'PERSON_IDENTITY_NOT_VERIFIED',
+          verified_company_data: { name: 'Registered Company OÜ' },
+        },
+      } as any);
+
+      await goToStep3();
+      await waitFor(() => {
+        expect(screen.getByText('Manual review required')).toBeInTheDocument();
+      });
+      expect(
+        screen.queryByText('Automatic verification failed'),
+      ).not.toBeInTheDocument();
+
+      clickSubmit(); // Step 3 -> Step 4
+      await waitFor(() => {
+        expect(screen.getByText('Create')).toBeInTheDocument();
+      });
+      await user.click(screen.getByText('Create'));
+
+      await waitFor(() => {
+        expect(screen.getByText('Review in progress')).toBeInTheDocument();
+      });
+      expect(onboardingJustificationsCreateJustification).toHaveBeenCalledWith({
+        body: { verification_uuid: 'verification-uuid-1' },
+      });
+      expect(onboardingVerificationsCreateCustomer).not.toHaveBeenCalled();
+      expect(screen.getByText('Registered Company OÜ')).toBeInTheDocument();
+    });
+
     it('shows no results message when validation fails before producing results', async () => {
       vi.mocked(onboardingVerificationsStartVerification).mockRejectedValueOnce(
         new Error('failed'),
@@ -878,6 +912,46 @@ describe('OrganizationCreatePage', () => {
           screen.getByText('Company registration code'),
         ).toBeInTheDocument();
       });
+    });
+
+    it('says that a typed identity is reviewed manually', async () => {
+      renderComponent();
+      await selectMethod('Estonian Business Register (Äriregister)');
+      clickSubmit();
+
+      await waitFor(() => {
+        expect(
+          screen.getByText('Your application will be reviewed manually'),
+        ).toBeInTheDocument();
+      });
+      expect(screen.getByPlaceholderText('39901010101')).toBeInTheDocument();
+      expect(
+        screen.getByText('Optional information and supporting documents'),
+      ).toBeInTheDocument();
+    });
+
+    it('uses the civil number from the login without manual review', async () => {
+      vi.mocked(useUser).mockReturnValue({
+        uuid: 'user-1',
+        full_name: 'Test User',
+        civil_number: '38001085718',
+        identity_provider_fields: [],
+      } as any);
+      renderComponent();
+      await selectMethod('Estonian Business Register (Äriregister)');
+      clickSubmit();
+
+      await waitFor(() => {
+        expect(
+          screen.getByText('Personal identity received: 38001085718'),
+        ).toBeInTheDocument();
+      });
+      expect(
+        screen.queryByText('Your application will be reviewed manually'),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByPlaceholderText('39901010101'),
+      ).not.toBeInTheDocument();
     });
 
     it('shows customer checklist questions for manual method', async () => {
