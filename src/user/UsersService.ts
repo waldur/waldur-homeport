@@ -8,6 +8,7 @@ import {
   ImpersonationStorage,
 } from '@/core/StorageManager';
 import store from '@/store/store';
+import { termsAcceptedOrImpersonating } from '@/user/termsGate';
 import { getProfileCompleteness } from '@/user/useProfileCompleteness';
 import { setCurrentUser, setImpersonatorUser } from '@/workspace/actions';
 import { getUser } from '@/workspace/selectors';
@@ -92,7 +93,8 @@ export const getCurrentUser = async (
 /**
  * Whether the user may use the application without first completing their
  * profile. Staff and support are always valid; everyone else needs a complete
- * profile and accepted terms. Frontend always enforces profile completeness
+ * profile and accepted terms (not while staff impersonate them, as staff may
+ * not accept for the user). Frontend always enforces profile completeness
  * (enforcement_enabled is for API only).
  */
 export const isUserValid = (user: User): boolean => {
@@ -100,7 +102,7 @@ export const isUserValid = (user: User): boolean => {
     return true;
   }
   const completeness = getProfileCompleteness(user);
-  return completeness.is_complete && Boolean(user.agreement_date);
+  return completeness.is_complete && termsAcceptedOrImpersonating(user);
 };
 
 // Both setters change the headers every request carries, so a /users/me/
