@@ -1,6 +1,7 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 import { Tooltip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
@@ -9,6 +10,7 @@ import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import {
   getCategoryConfig,
@@ -70,7 +72,11 @@ export const ReportingReportList: FC<ReportingReportListProps> = ({
 }) => {
   const config = useMemo(() => getCategoryConfig()[category], [category]);
 
-  const filteredReports = useMemo(() => getVisibleReports(config), [config]);
+  const isStaff = useSelector(isStaffSelector);
+  const filteredReports = useMemo(
+    () => getVisibleReports(config, isStaff),
+    [config, isStaff],
+  );
 
   // Deep link to a category of a feature this deployment does not run.
   if (!config || (config.feature && !isFeatureVisible(config.feature))) {

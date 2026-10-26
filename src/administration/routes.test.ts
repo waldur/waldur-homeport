@@ -19,6 +19,21 @@ const registerAdminStates = () => {
   return router;
 };
 
+describe('administration routes', () => {
+  // The remote synchronisation endpoint answers support users with 403.
+  it('shows remote offering sync to staff only', () => {
+    const route = states.find(
+      (s) => s.name === 'admin-marketplace-remote-sync',
+    );
+    const allows = (user) =>
+      route.data.permissions.every((permission) =>
+        permission({ workspace: { user } } as any),
+      );
+    expect(allows({ is_staff: true })).toBe(true);
+    expect(allows({ is_staff: false, is_support: true })).toBe(false);
+  });
+});
+
 describe('administration header menu', () => {
   // UI-Router hands a state without its own `data` the parent's `data`, so a
   // redirect-only child of a submenu inherits the submenu's breadcrumb and is

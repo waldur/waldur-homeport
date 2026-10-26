@@ -1,6 +1,7 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import type { SoftwareCatalog } from 'waldur-js-client';
 import {
   marketplaceSoftwareCatalogsList,
@@ -28,6 +29,7 @@ import { TableWithTabs } from '@/table/TableWithTabs';
 import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { FieldRow } from '../settings/FieldRow';
 
@@ -66,6 +68,8 @@ const UpdateCatalogAction = ({
 
 const CatalogsTab: FC<Partial<TableWithPortal>> = ({ portal }) => {
   const { openDialog } = useModal();
+  // Discovering and updating catalogs are staff-only; support may only list them.
+  const isStaff = useSelector(isStaffSelector);
   const filter = useMemo(() => ({}), []);
   const tableProps = useTable({
     table: 'AdminSoftwareCatalogs',
@@ -121,19 +125,25 @@ const CatalogsTab: FC<Partial<TableWithPortal>> = ({ portal }) => {
         },
       ]}
       verboseName={translate('software catalogs')}
-      rowActions={({ row }) => (
-        <ActionsDropdown row={row} refetch={tableProps.fetch}>
-          <UpdateCatalogAction row={row} refetch={tableProps.fetch} />
-        </ActionsDropdown>
-      )}
+      rowActions={
+        isStaff
+          ? ({ row }) => (
+              <ActionsDropdown row={row} refetch={tableProps.fetch}>
+                <UpdateCatalogAction row={row} refetch={tableProps.fetch} />
+              </ActionsDropdown>
+            )
+          : undefined
+      }
       tableActions={
-        <BaseButton
-          onClick={openDiscover}
-          label={translate('Check for updates')}
-          iconNode={<ArrowsClockwiseIcon weight="bold" />}
-          variant="tertiary"
-          size="lg"
-        />
+        isStaff ? (
+          <BaseButton
+            onClick={openDiscover}
+            label={translate('Check for updates')}
+            iconNode={<ArrowsClockwiseIcon weight="bold" />}
+            variant="tertiary"
+            size="lg"
+          />
+        ) : undefined
       }
     />
   );

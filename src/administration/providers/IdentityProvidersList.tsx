@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { ReactNode, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { IdentityProvider, overrideSettingsRetrieve } from 'waldur-js-client';
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
@@ -23,6 +24,7 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useUrlTab } from '@/navigation/useUrlTab';
 import { SettingsDescription } from '@/SettingsDescription';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { getIdentityProviders } from '../api';
 import { FieldRow } from '../settings/FieldRow';
@@ -213,6 +215,7 @@ const ProvidersTabContent = ({
 );
 
 export const IdentityProvidersList = () => {
+  const isStaff = useSelector(isStaffSelector);
   const tabs = useMemo(() => {
     const result = [...IDENTITY_TABS];
     if (isFeatureVisible(UserFeatures.show_identity_bridge)) {
@@ -309,7 +312,8 @@ export const IdentityProvidersList = () => {
                       groupName={translate('Identity Bridge')}
                       settingsData={settingsData}
                     />
-                    <IdentityBridgeTab />
+                    {/* The ISD statistics endpoint is staff-only. */}
+                    {isStaff && <IdentityBridgeTab />}
                   </>
                 ) : tab.key === 'scim' ? (
                   <>

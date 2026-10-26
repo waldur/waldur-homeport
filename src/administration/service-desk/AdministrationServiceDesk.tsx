@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { capitalize } from 'es-toolkit/compat';
 import { useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
 import {
@@ -25,6 +26,7 @@ import { useModal } from '@/modal/actions';
 import { useUrlTab } from '@/navigation/useUrlTab';
 import { SettingsDescription } from '@/SettingsDescription';
 import { useUser } from '@/workspace/hooks';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { FieldRow } from '../settings/FieldRow';
 import { SupportUsersList } from '../support-users/SupportUsersList';
@@ -223,22 +225,27 @@ export const AdministrationServiceDesk = () => {
   });
 
   // Issue statuses and support users only exist once a helpdesk is configured.
+  // The issue status endpoint is staff-only.
   const supportEnabled = hasSupport();
+  const isStaff = useSelector(isStaffSelector);
+  const showIssueStatuses = supportEnabled && isStaff;
   const tabs = useMemo(
     () => [
       { key: 'configuration', title: translate('Configuration') },
       { key: 'credentials', title: translate('Credentials') },
-      ...(supportEnabled
+      ...(showIssueStatuses
         ? [
             {
               key: 'issue-statuses',
               title: translate('Issue status mapping'),
             },
-            { key: 'support-users', title: translate('Support users') },
           ]
         : []),
+      ...(supportEnabled
+        ? [{ key: 'support-users', title: translate('Support users') }]
+        : []),
     ],
-    [supportEnabled],
+    [supportEnabled, showIssueStatuses],
   );
   const { activeKey, handleSelect } = useUrlTab(tabs, 'tab');
 
@@ -276,7 +283,7 @@ export const AdministrationServiceDesk = () => {
             <TabsContent value="credentials">
               <CredentialsTab data={data} />
             </TabsContent>
-            {supportEnabled && (
+            {showIssueStatuses && (
               <TabsContent value="issue-statuses">
                 <IssueStatusList />
               </TabsContent>

@@ -5,7 +5,7 @@ import { CustomerFeatures } from '@/FeaturesEnums';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { type RootState } from '@/store/reducers';
-import { getUser, isStaffOrSupport } from '@/workspace/selectors';
+import { getUser, isStaff, isStaffOrSupport } from '@/workspace/selectors';
 import { User } from '@/workspace/types';
 
 import { isReportingScreenEnabled } from './screens';
@@ -24,6 +24,17 @@ export const CUSTOMER_SCOPED_REPORTS = [
   'resource-usage',
   'user-usage',
   'project-detail',
+];
+
+/**
+ * Reports built on staff-only endpoints, which answer support users with 403.
+ * They are hidden from support, in the report lists and at the route.
+ */
+export const STAFF_ONLY_REPORTS = [
+  'projects-by-affiliated-organization',
+  'call-performance',
+  'review-progress',
+  'resource-demand',
 ];
 
 export interface ReportingOrganization {
@@ -71,7 +82,20 @@ export const canAccessReporting = (state: RootState): boolean =>
 export const reportPermissions = (key: string) => [
   () => isReportingScreenEnabled(key),
   (state: RootState) =>
-    isStaffOrSupport(state) ||
-    (CUSTOMER_SCOPED_REPORTS.includes(key) &&
-      checkCanAccessCustomerReporting(getUser(state))),
+    STAFF_ONLY_REPORTS.includes(key)
+      ? isStaff(state)
+      : isStaffOrSupport(state) ||
+        (CUSTOMER_SCOPED_REPORTS.includes(key) &&
+          checkCanAccessCustomerReporting(getUser(state))),
+];
+
+/**
+ * Route guard of a report category: open when the user may open any of its
+ * reports, so the category follows its reports' guards instead of repeating them.
+ */
+export const categoryPermissions = (keys: string[]) => [
+  (state: RootState) =>
+    keys.some((key) =>
+      reportPermissions(key).every((permission) => permission(state)),
+    ),
 ];

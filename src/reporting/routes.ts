@@ -7,7 +7,17 @@ import { MarketplaceFeatures, SupportFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { isStaffOrSupport } from '@/workspace/selectors';
 
-import { canAccessReporting, reportPermissions } from './access';
+import {
+  canAccessReporting,
+  categoryPermissions,
+  reportPermissions,
+} from './access';
+
+const PROPOSALS_REPORTS = [
+  'call-performance',
+  'review-progress',
+  'resource-demand',
+];
 
 export const states: StateDeclaration[] = [
   {
@@ -311,7 +321,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     redirectTo: 'reporting-call-performance-analytics',
     data: {
-      permissions: [isStaffOrSupport],
+      permissions: categoryPermissions(PROPOSALS_REPORTS),
       breadcrumb: () => translate('Proposals'),
       priority: 200,
       feature: MarketplaceFeatures.show_experimental_ui_components,
@@ -330,7 +340,7 @@ export const states: StateDeclaration[] = [
       })),
     ),
     data: {
-      permissions: [isStaffOrSupport],
+      permissions: categoryPermissions(PROPOSALS_REPORTS),
       breadcrumb: () => translate('Proposals'),
       priority: 200,
       feature: MarketplaceFeatures.show_experimental_ui_components,
@@ -393,6 +403,8 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Call Performance Analysis'),
       feature: MarketplaceFeatures.show_experimental_ui_components,
+      // Guarded like the report it analyses.
+      permissions: reportPermissions('call-performance'),
     },
   },
   {
@@ -407,6 +419,8 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Review Progress Analysis'),
       feature: MarketplaceFeatures.show_experimental_ui_components,
+      // Guarded like the report it analyses.
+      permissions: reportPermissions('review-progress'),
     },
   },
   {
@@ -421,6 +435,8 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Resource Demand Analysis'),
       feature: MarketplaceFeatures.show_experimental_ui_components,
+      // Guarded like the report it analyses.
+      permissions: reportPermissions('resource-demand'),
     },
   },
 

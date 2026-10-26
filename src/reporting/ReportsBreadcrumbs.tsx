@@ -6,7 +6,7 @@ import { IBreadcrumbItem, useBreadcrumbs } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
-import { isStaffOrSupport } from '@/workspace/selectors';
+import { isStaff, isStaffOrSupport } from '@/workspace/selectors';
 
 import {
   getCategoryConfig,
@@ -84,7 +84,8 @@ export const useReportBreadcrumbs = ({
   category,
   additionalItems = EMPTY_ITEMS,
 }: UseReportBreadcrumbsOptions) => {
-  const isStaff = useSelector(isStaffOrSupport);
+  const staffOrSupport = useSelector(isStaffOrSupport);
+  const staff = useSelector(isStaff);
   const config = category ? categoryConfig[category] : null;
   const currentReportDef = config?.reports?.find(
     (r) => r.key === currentReport,
@@ -95,8 +96,11 @@ export const useReportBreadcrumbs = ({
   // dropdown never offers a report those two leave out. Non-staff users
   // have no category pages, only the reports of their landing page.
   const visibleReports = useMemo(
-    () => (isStaff ? getVisibleReports(config) : getCustomerScopedReports()),
-    [config, isStaff],
+    () =>
+      staffOrSupport
+        ? getVisibleReports(config, staff)
+        : getCustomerScopedReports(),
+    [config, staffOrSupport, staff],
   );
 
   // Only show dropdown if there are multiple visible reports and no additional items
@@ -112,7 +116,7 @@ export const useReportBreadcrumbs = ({
               text: translate('Reporting'),
               to: 'reporting-dashboard',
             },
-            ...(isStaff
+            ...(staffOrSupport
               ? [
                   {
                     key: 'category',
@@ -147,7 +151,7 @@ export const useReportBreadcrumbs = ({
           ],
     [
       config,
-      isStaff,
+      staffOrSupport,
       reportTitle,
       additionalItems,
       category,

@@ -833,6 +833,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Remote offering sync'),
       priority: 70,
+      permissions: [isStaff],
     },
   },
 

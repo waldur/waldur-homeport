@@ -54,6 +54,21 @@ describe('getReportingTabs', () => {
     expect(tabs.map((tab) => tab.state)).toContain('reporting-proposals-list');
   });
 
+  it('hides the proposals tab from support, whose reports are staff-only', () => {
+    setFeatures({
+      marketplace: {
+        show_call_management_functionality: true,
+        show_experimental_ui_components: true,
+      },
+    });
+    const tabs = getReportingTabs({
+      user: { is_staff: false, is_support: true, permissions: [] },
+    });
+    expect(tabs.map((tab) => tab.state)).not.toContain(
+      'reporting-proposals-list',
+    );
+  });
+
   it.each([
     ['everything off', {}],
     [
