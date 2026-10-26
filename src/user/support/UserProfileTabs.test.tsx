@@ -217,9 +217,52 @@ describe('UserProfileTabs', () => {
       ).toBeInTheDocument();
     });
 
-    it('renders ChangeEmailButton', () => {
-      renderTabs();
+    it('renders ChangeEmailButton on own profile', () => {
+      vi.mocked(useUser).mockReturnValue({
+        uuid: 'user-1',
+        is_staff: true,
+        is_support: false,
+      } as any);
+      renderTabs(makeUser({ uuid: 'user-1' }));
+
       expect(screen.getByTestId('change-email-btn')).toBeInTheDocument();
+      expect(screen.queryByTestId('edit-email')).not.toBeInTheDocument();
+    });
+
+    it('lets staff edit another user email directly', async () => {
+      const user = userEvent.setup();
+      renderTabs(makeUser({ uuid: 'user-2' }));
+
+      expect(screen.queryByTestId('change-email-btn')).not.toBeInTheDocument();
+      await user.click(screen.getByTestId('edit-email'));
+      const callback = mockOpenDialog.mock.calls[0][1].resolve.callback;
+      await act(async () => {
+        await callback({ email: 'jane@example.com' });
+      });
+
+      expect(mockUpdateUserCallback).toHaveBeenCalledWith({
+        email: 'jane@example.com',
+      });
+    });
+
+    it('does not let support edit another user email directly', () => {
+      vi.mocked(useUser).mockReturnValue({
+        uuid: 'admin-1',
+        is_staff: false,
+        is_support: true,
+      } as any);
+      renderTabs(makeUser({ uuid: 'user-2' }));
+
+      expect(screen.queryByTestId('edit-email')).not.toBeInTheDocument();
+    });
+
+    it('does not let staff edit an email managed by the identity provider', () => {
+      renderTabs(
+        makeUser({ uuid: 'user-2', identity_provider_fields: ['email'] }),
+      );
+
+      expect(screen.queryByTestId('edit-email')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('change-email-btn')).not.toBeInTheDocument();
     });
   });
 
@@ -491,6 +534,15 @@ describe('UserProfileTabs', () => {
   // ── Disabled prop ────────────────────────────────────────────────────────────
 
   describe('disabled prop', () => {
+    // The change-email button is shown on the user's own profile.
+    beforeEach(() => {
+      vi.mocked(useUser).mockReturnValue({
+        uuid: 'user-1',
+        is_staff: false,
+        is_support: false,
+      } as any);
+    });
+
     it('passes disabled to ChangeEmailButton when disabled=true', () => {
       renderTabs(makeUser(), true);
 

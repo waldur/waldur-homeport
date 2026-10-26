@@ -13,7 +13,7 @@ import { renderFieldOrDash } from '@/table/utils';
 import { formatIsdName } from './IsdBadges';
 
 const fieldIsProtected = (user: User, field: string) =>
-  user.identity_provider_fields.includes(field) ||
+  (user.identity_provider_fields || []).includes(field) ||
   (
     ENV.plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS || []
   ).includes(user.registration_method);

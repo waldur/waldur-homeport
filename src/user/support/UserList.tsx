@@ -197,6 +197,10 @@ const mandatoryFields: UsersListData['query']['field'] = [
   'has_usable_password',
   // UserEditButton (edit dialog needs these fields)
   'can_use_personal_access_tokens',
+  'identity_provider_fields',
+  'registration_method',
+  'organization_vat_code',
+  'organization_address',
   'description',
   'personal_title',
   'gender',
