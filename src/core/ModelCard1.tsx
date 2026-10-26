@@ -33,7 +33,7 @@ export const ModelCard1: FC<ModelCard1Props> = ({
     onClick={props.onClick}
   >
     {(props.image || props.placeholder) && (
-      <div className="h-[85px] flex flex-center border-b-[1px] border-b-secondary">
+      <div className="h-[85px] flex items-center justify-center border-b-[1px] border-b-secondary">
         {props.image ? (
           <img
             alt="model-card"

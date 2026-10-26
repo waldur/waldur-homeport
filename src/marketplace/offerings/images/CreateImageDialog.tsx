@@ -48,10 +48,10 @@ export const CreateImageDialog = (props: {
             iconColor="success"
             footer={
               <>
-                <CloseDialogButton className="flex-equal" />
+                <CloseDialogButton className="flex-1" />
                 <SubmitButton
                   variant="primary"
-                  className="flex-equal"
+                  className="flex-1"
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Confirm')}

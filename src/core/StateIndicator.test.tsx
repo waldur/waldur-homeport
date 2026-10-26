@@ -26,7 +26,7 @@ describe('StateIndicator', () => {
       );
       const spinner = screen.getByRole('status');
       expect(spinner).toHaveClass('text-current');
-      // eslint-disable-next-line waldur-custom/no-bootstrap-color-utility -- asserts the old class is gone
+
       expect(spinner).not.toHaveClass(`text-${variant}`);
       expect(spinner).not.toHaveClass(`badge-${variant}`);
       expect(spinner).not.toHaveClass('text-brand');

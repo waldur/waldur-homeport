@@ -78,13 +78,13 @@ export const EditCustomerChecklistDialog = ({
             headerLess
             footer={
               <>
-                <CloseDialogButton className="flex-equal" />
+                <CloseDialogButton className="flex-1" />
                 <SubmitButton
                   disabled={invalid || !dirty}
                   submitting={submitting}
                   label={translate('Confirm')}
                   variant="primary"
-                  className="flex-equal"
+                  className="flex-1"
                 />
               </>
             }

@@ -10,7 +10,7 @@ export const ImportButton: FunctionComponent<{
   <SubmitButton
     disabled={disabled}
     submitting={submitting}
-    className="flex-equal"
+    className="flex-1"
     label={translate('Import')}
   />
 );

@@ -68,13 +68,13 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
             title={getFieldTitle(resolve.name)}
             footer={
               <>
-                <CloseDialogButton className="flex-equal" />
+                <CloseDialogButton className="flex-1" />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Confirm')}
                   variant="primary"
-                  className="flex-equal"
+                  className="flex-1"
                 />
               </>
             }

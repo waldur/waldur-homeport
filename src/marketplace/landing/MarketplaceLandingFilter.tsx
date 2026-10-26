@@ -177,14 +177,14 @@ export const MarketplaceLandingFilter = ({
                 <Stack direction="horizontal" gap={4}>
                   <BaseButton
                     variant="tertiary"
-                    className="flex-equal"
+                    className="flex-1"
                     onClick={() => setShow(false)}
                     label={translate('Cancel')}
                     size="lg"
                   />
                   <SubmitButton
                     submitting={false}
-                    className="flex-equal"
+                    className="flex-1"
                     label={translate('Apply')}
                   />
                 </Stack>

@@ -42,13 +42,13 @@ export const ChecklistStatusDialog: FC<ChecklistStatusDialogProps> = ({
             title={translate('Change status')}
             footer={
               <>
-                <CloseDialogButton className="flex-equal" />
+                <CloseDialogButton className="flex-1" />
                 <SubmitButton
                   disabled={invalid || pristine}
                   submitting={submitting}
                   label={translate('Save')}
                   variant="primary"
-                  className="flex-equal"
+                  className="flex-1"
                 />
               </>
             }

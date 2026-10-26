@@ -77,13 +77,13 @@ export const EventSubscriptionForm = ({
             }
             footer={
               <>
-                <CloseDialogButton className="flex-equal" />
+                <CloseDialogButton className="flex-1" />
                 <SubmitButton
                   submitting={submitting}
                   invalid={invalid}
                   label={isEdit ? translate('Update') : translate('Create')}
                   variant="primary"
-                  className="flex-equal"
+                  className="flex-1"
                 />
               </>
             }

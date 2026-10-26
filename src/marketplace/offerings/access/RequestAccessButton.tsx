@@ -32,7 +32,7 @@ export const RequestAccessButton = ({
       disabled={disabled || loading}
       disabledReason={disabledReason}
       onClick={handleRequestAccess}
-      className="order-2 order-sm-1 flex-sm-column-auto flex-root"
+      className="order-2 order-sm-1 sm:flex-none flex-1"
       iconNode={<PaperPlaneTiltIcon weight="bold" />}
       label={translate('Request')}
     />

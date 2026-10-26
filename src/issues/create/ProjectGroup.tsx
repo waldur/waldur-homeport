@@ -31,7 +31,7 @@ export const ProjectGroup = ({ disabled }) => {
         key={customer.uuid}
         name="project"
         label={translate('Project')}
-        containerClassName="flex-equal"
+        containerClassName="flex-1"
         isClearable={true}
         defaultOptions
         loadOptions={loadProjects}
@@ -47,7 +47,7 @@ export const ProjectGroup = ({ disabled }) => {
     <SelectGroup
       name="project"
       label={translate('Project')}
-      containerClassName="flex-equal"
+      containerClassName="flex-1"
       getOptionValue={(option) => option.uuid}
       getOptionLabel={(option) => option.name}
       options={

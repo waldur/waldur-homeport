@@ -376,6 +376,112 @@ describe('no-bootstrap-layout-utility', () => {
           },
         ],
       },
+      {
+        // Metronic flex helpers - flex-center alone
+        code: 'const A = () => <div className="flex-center" />;',
+        output:
+          'const A = () => <div className="flex items-center justify-center" />;',
+        errors: [
+          {
+            messageId: 'layoutUtility',
+            data: {
+              token: 'flex-center',
+              fix: 'flex items-center justify-center',
+            },
+          },
+        ],
+      },
+      {
+        // Metronic flex helpers - flex-center with flex / inline-flex
+        code: 'const A = () => <div className="flex flex-center gap-4" />;',
+        output:
+          'const A = () => <div className="flex items-center justify-center gap-4" />;',
+        errors: [
+          {
+            messageId: 'layoutUtility',
+            data: {
+              token: 'flex-center',
+              fix: 'items-center justify-center',
+            },
+          },
+        ],
+      },
+      {
+        code: 'const A = () => <div className="inline-flex flex-center" />;',
+        output:
+          'const A = () => <div className="inline-flex items-center justify-center" />;',
+        errors: [
+          {
+            messageId: 'layoutUtility',
+            data: {
+              token: 'flex-center',
+              fix: 'items-center justify-center',
+            },
+          },
+        ],
+      },
+      {
+        // Metronic flex helpers - sizing and fluid
+        code: 'const A = () => <div className="flex-root flex-equal flex-column-fluid flex-column-auto flex-lg-row-fluid flex-sm-column-auto" />;',
+        output:
+          'const A = () => <div className="flex-1 flex-1 flex-auto flex-none lg:flex-auto lg:min-w-0 sm:flex-none" />;',
+        errors: [
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'flex-root', fix: 'flex-1' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'flex-equal', fix: 'flex-1' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'flex-column-fluid', fix: 'flex-auto' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'flex-column-auto', fix: 'flex-none' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: {
+              token: 'flex-lg-row-fluid',
+              fix: 'lg:flex-auto lg:min-w-0',
+            },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'flex-sm-column-auto', fix: 'sm:flex-none' },
+          },
+        ],
+      },
+      {
+        // Responsive flex helper variants
+        code: 'const A = () => <div className="flex-md-column-auto flex-lg-column-fluid flex-xl-row-fluid flex-sm-equal" />;',
+        output:
+          'const A = () => <div className="md:flex-none lg:flex-auto xl:flex-auto xl:min-w-0 sm:flex-1" />;',
+        errors: [
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'flex-md-column-auto', fix: 'md:flex-none' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'flex-lg-column-fluid', fix: 'lg:flex-auto' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: {
+              token: 'flex-xl-row-fluid',
+              fix: 'xl:flex-auto xl:min-w-0',
+            },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'flex-sm-equal', fix: 'sm:flex-1' },
+          },
+        ],
+      },
     ],
   });
 });

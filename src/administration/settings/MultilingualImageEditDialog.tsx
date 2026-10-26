@@ -104,14 +104,14 @@ export const MultilingualImageEditDialog: FC<
       title={getKeyTitle(item.key)}
       footer={
         <>
-          <CloseDialogButton className="flex-equal" />
+          <CloseDialogButton className="flex-1" />
           <BaseButton
             pending={onSubmitMutation.isPending}
             disabled={!hasChanges}
             disabledReason={
               !hasChanges ? translate('No changes to save') : undefined
             }
-            className="flex-equal"
+            className="flex-1"
             onClick={() => onSubmitMutation.mutate()}
             label={translate('Confirm')}
             variant="primary"

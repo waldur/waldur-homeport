@@ -85,10 +85,10 @@ export const FilterByOrgAndProjectDialog: FC<
             )}
             footer={
               <>
-                <CloseDialogButton className="flex-equal" />
+                <CloseDialogButton className="flex-1" />
                 <SubmitButton
                   submitting={submitting}
-                  className="flex-equal"
+                  className="flex-1"
                   label={translate('Apply')}
                 />
               </>

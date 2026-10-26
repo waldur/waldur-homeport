@@ -20,6 +20,13 @@
  *   mw-100                 → max-w-full
  *   min-w-125px            → min-w-[125px]
  *   text-truncate          → truncate
+ *   flex-center            → items-center justify-center (or flex items-center justify-center)
+ *   flex-root              → flex-1
+ *   flex-equal             → flex-1
+ *   flex-column-fluid      → flex-auto
+ *   flex-column-auto       → flex-none
+ *   flex-lg-row-fluid      → lg:flex-auto lg:min-w-0
+ *   flex-sm-column-auto    → sm:flex-none
  *
  * This rule reports all such classes and autofixes them to their Tailwind counterparts.
  *
@@ -106,6 +113,14 @@ const STATIC_LAYOUT_MAP = {
   'flex-shrink-0': 'shrink-0',
   'flex-shrink-1': 'shrink',
 
+  // Metronic Flex Helpers
+  'flex-center': 'flex items-center justify-center',
+  'flex-root': 'flex-1',
+  'flex-equal': 'flex-1',
+  'flex-column-auto': 'flex-none',
+  'flex-column-fluid': 'flex-auto',
+  'flex-row-fluid': 'flex-auto min-w-0',
+
   // Sizing
   'w-100': 'w-full',
   'h-100': 'h-full',
@@ -188,7 +203,7 @@ export const getLayoutReplacement = (name) => {
   }
 
   m =
-    /^flex-(sm|md|lg|xl|xxl)-(column|column-reverse|row|row-reverse|wrap|nowrap|fill|grow-0|grow-1|grow|shrink-0|shrink-1|shrink)$/.exec(
+    /^flex-(sm|md|lg|xl|xxl)-(column|column-reverse|row|row-reverse|wrap|nowrap|fill|grow-0|grow-1|grow|shrink-0|shrink-1|shrink|column-auto|column-fluid|row-fluid|center|root|equal)$/.exec(
       name,
     );
   if (m) {
@@ -205,6 +220,11 @@ export const getLayoutReplacement = (name) => {
     if (val === 'grow-0') return `${bp}:grow-0`;
     if (val === 'shrink' || val === 'shrink-0') return `${bp}:shrink-0`;
     if (val === 'shrink-1') return `${bp}:shrink`;
+    if (val === 'column-auto') return `${bp}:flex-none`;
+    if (val === 'column-fluid') return `${bp}:flex-auto`;
+    if (val === 'row-fluid') return `${bp}:flex-auto ${bp}:min-w-0`;
+    if (val === 'center') return `${bp}:items-center ${bp}:justify-center`;
+    if (val === 'root' || val === 'equal') return `${bp}:flex-1`;
   }
 
   m =
@@ -271,7 +291,16 @@ export default {
         const parts = split(token);
         if (!parts) continue;
         const { prefix, name, suffix } = parts;
-        const replacement = getLayoutReplacement(name);
+        let replacement = getLayoutReplacement(name);
+        if (
+          name === 'flex-center' &&
+          (tokens.includes('flex') ||
+            tokens.includes('inline-flex') ||
+            tokens.includes('d-flex') ||
+            tokens.includes('d-inline-flex'))
+        ) {
+          replacement = 'items-center justify-center';
+        }
         const wrap = /^flex-(sm|md|lg|xl|xxl)-(wrap|nowrap)$/.exec(name);
         const base =
           wrap && (wrap[2] === 'nowrap' ? 'flex-wrap' : 'flex-nowrap');
@@ -287,7 +316,10 @@ export default {
             },
           });
         } else if (replacement) {
-          const fix = prefix + replacement + suffix;
+          const fix = replacement
+            .split(/\s+/)
+            .map((cls) => prefix + cls + suffix)
+            .join(' ');
           // Find token location within node text safely using word boundary
           const regex = new RegExp(
             `(?<=^|[\\s'"\`}])${escape(token)}(?=$|[\\s'"\`$])`,

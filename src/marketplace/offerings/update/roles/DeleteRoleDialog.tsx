@@ -28,11 +28,11 @@ export const DeleteRoleDialog = ({
       iconColor="danger"
       footer={
         <>
-          <CloseDialogButton className="flex-equal" />
+          <CloseDialogButton className="flex-1" />
           <BaseButton
             pending={deleteMutation.isPending}
             variant="danger"
-            className="flex-equal"
+            className="flex-1"
             onClick={() => deleteMutation.mutate()}
             label={translate('Delete')}
             size="lg"

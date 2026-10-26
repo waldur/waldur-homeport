@@ -99,11 +99,11 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
         footer={
           <>
             {step === 1 ? (
-              <CloseDialogButton className="flex-equal" />
+              <CloseDialogButton className="flex-1" />
             ) : (
               <BaseButton
                 variant="tertiary"
-                className="flex-equal"
+                className="flex-1"
                 onClick={() => setStep((current) => current - 1)}
                 label={translate('Back')}
                 size="lg"
@@ -111,7 +111,7 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
             )}
             {step === 1 || step === 2 ? (
               <BaseButton
-                className="flex-equal"
+                className="flex-1"
                 disabled={!nextEnabled}
                 disabledReason={
                   !nextEnabled

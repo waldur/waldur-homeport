@@ -41,7 +41,7 @@ interface ConfirmationDialogProps {
   };
 }
 
-// The pair of footer buttons share the row equally (Metronic's .flex-equal).
+// The pair of footer buttons share the row equally (formerly Metronic's .flex-equal).
 const EQUAL_BUTTON = 'flex-[1_0_0] px-[10.5px]';
 
 /**

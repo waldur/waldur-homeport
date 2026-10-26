@@ -23,7 +23,7 @@ const Container: FC<PropsWithChildren> = (props) => (
 const Body: FC<PropsWithChildren<{ className? }>> = (props) => (
   <div
     className={classNames(
-      'flex flex-col flex-lg-row-fluid gap-5',
+      'flex flex-col lg:flex-auto lg:min-w-0 gap-5',
       props.className,
     )}
   >
