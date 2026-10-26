@@ -549,7 +549,7 @@ const FieldMappingTable: FC<FieldMappingTableProps> = ({
   <div className="table-responsive">
     <table className="table align-middle table-row-bordered text-xs gy-3 gx-4 mb-0">
       <thead>
-        <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
+        <tr className="text-start text-quaternary font-medium text-xs text-uppercase">
           <th>{sourceLabel}</th>
           <th>{targetLabel || translate('Waldur Model.Field')}</th>
           <th>{translate('Description')}</th>
@@ -805,7 +805,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered text-xs gy-4 gx-4">
               <thead>
-                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase">
                   <th style={{ width: '15%' }}>{translate('Type')}</th>
                   <th style={{ width: '25%' }}>{translate('Trigger')}</th>
                   <th style={{ width: '25%' }}>{translate('Name format')}</th>
@@ -952,7 +952,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase">
                   <th style={{ width: '20%' }}>{translate('State')}</th>
                   <th>{translate('Description')}</th>
                 </tr>

@@ -35,7 +35,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
             </colgroup>
             <thead>
               <tr
-                class="text-start text-quaternary font-semibold text-xs gs-0 align-middle"
+                class="text-start text-quaternary font-semibold text-xs align-middle"
               >
                 <th
                   data-pin-key="column-0"

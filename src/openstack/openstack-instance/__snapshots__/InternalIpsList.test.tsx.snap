@@ -99,7 +99,7 @@ exports[`InternalIpsList > renders list 1`] = `
             </colgroup>
             <thead>
               <tr
-                class="text-start text-quaternary font-semibold text-xs gs-0 align-middle"
+                class="text-start text-quaternary font-semibold text-xs align-middle"
               >
                 <th
                   data-pin-key="column-0"
