@@ -1,4 +1,3 @@
-/* eslint-disable waldur-custom/no-bootstrap-color-utility, waldur-custom/enforce-border-radius-tokens */
 import stylelint from 'stylelint';
 import { describe, expect, it } from 'vitest';
 
@@ -42,6 +41,23 @@ describe('checkRetiredClass', () => {
     });
     expect(checkRetiredClass('flex-column')).toEqual({
       replacement: 'flex-col',
+    });
+    expect(checkRetiredClass('flex-center')).toEqual({
+      replacement: 'flex items-center justify-center',
+    });
+    expect(checkRetiredClass('flex-root')).toEqual({ replacement: 'flex-1' });
+    expect(checkRetiredClass('flex-equal')).toEqual({ replacement: 'flex-1' });
+    expect(checkRetiredClass('flex-column-fluid')).toEqual({
+      replacement: 'flex-auto',
+    });
+    expect(checkRetiredClass('flex-column-auto')).toEqual({
+      replacement: 'flex-none',
+    });
+    expect(checkRetiredClass('flex-lg-row-fluid')).toEqual({
+      replacement: 'lg:flex-auto lg:min-w-0',
+    });
+    expect(checkRetiredClass('flex-sm-column-auto')).toEqual({
+      replacement: 'sm:flex-none',
     });
   });
 

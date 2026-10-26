@@ -334,7 +334,7 @@ export const BaseDeployPage = ({
   if (props.previewMode) {
     return (
       <form className="form">
-        <div className="deploy-preview-steps flex flex-col flex-lg-row-fluid gap-5 gap-lg-7">
+        <div className="deploy-preview-steps flex flex-col lg:flex-auto lg:min-w-0 gap-5 gap-lg-7">
           {formSteps.map((step, i) => (
             <div ref={stepRefs.current[i]} key={step.id}>
               <step.component

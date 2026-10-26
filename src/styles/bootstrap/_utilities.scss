@@ -91,6 +91,19 @@ $utilities: map.remove(
   'min-height'
 );
 
+// Display and flex utilities come from Tailwind, so no .d-* or Bootstrap .flex-*
+// either. no-bootstrap-layout-utility reports them with their Tailwind
+// equivalents, and removing them eliminates !important collisions with Tailwind.
+$utilities: map.remove(
+  $utilities,
+  'display',
+  'flex',
+  'flex-direction',
+  'flex-grow',
+  'flex-shrink',
+  'flex-wrap'
+);
+
 // Utilities nothing in the app uses, so Bootstrap stops generating them
 // (no-retired-bootstrap-utility reports the names, with the Tailwind class to
 // use instead; Tailwind defines its own float-*).
@@ -112,8 +125,6 @@ $utilities: map.remove(
 // variant (`lg:p-3`) instead.
 @each $key
   in (
-    'flex',
-    'flex-shrink',
     'margin-x',
     'negative-margin-top',
     'negative-margin-end',

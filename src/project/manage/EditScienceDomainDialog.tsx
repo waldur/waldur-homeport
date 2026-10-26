@@ -42,12 +42,12 @@ export const EditScienceDomainDialog = ({ resolve: { project } }) => {
             title={translate('Edit science domain')}
             footer={
               <>
-                <CloseDialogButton className="flex-equal" />
+                <CloseDialogButton className="flex-1" />
                 <SubmitButton
                   submitting={submitting}
                   label={translate('Confirm')}
                   variant="primary"
-                  className="flex-equal"
+                  className="flex-1"
                 />
               </>
             }

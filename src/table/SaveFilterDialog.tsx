@@ -49,13 +49,13 @@ export const SaveFilterDialog = (props: SaveFilterDialogProps) => {
             subtitle={translate('Filters can be saved and reused on any pages')}
             footer={
               <>
-                <CloseDialogButton className="flex-equal" />
+                <CloseDialogButton className="flex-1" />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
                   label={isEdit ? translate('Update') : translate('Save')}
                   variant="primary"
-                  className="flex-equal"
+                  className="flex-1"
                 />
               </>
             }

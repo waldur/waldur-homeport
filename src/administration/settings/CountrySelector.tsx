@@ -131,10 +131,10 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
           bodyClassName="p-0"
           footer={
             <>
-              <CloseDialogButton className="flex-equal" />
+              <CloseDialogButton className="flex-1" />
               <SubmitButton
                 submitting={submitting}
-                className="flex-equal"
+                className="flex-1"
                 onClick={handleSubmit}
                 disabled={pristine}
                 label={translate('Save')}

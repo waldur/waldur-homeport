@@ -23,7 +23,7 @@ interface FormFooterProps {
   submitDisabledReason?: string;
   /** Show cancel button - defaults to true */
   showCancel?: boolean;
-  /** Apply flex-equal class for full-width buttons */
+  /** Apply flex-1 class for full-width buttons */
   fullWidth?: boolean;
   /** Bootstrap variant for submit button - defaults to 'primary' */
   submitVariant?: ButtonVariant;
@@ -77,7 +77,7 @@ export const FormFooter: FC<FormFooterProps> = ({
   submitChildren,
 }) => {
   const { submitting, invalid } = useFormState();
-  const buttonClassName = fullWidth ? 'flex-equal' : undefined;
+  const buttonClassName = fullWidth ? 'flex-1' : undefined;
 
   return (
     <>

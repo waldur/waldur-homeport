@@ -96,7 +96,7 @@ export const PARTIALS = [
   // Components (from components/)
   {
     name: 'core/components/helpers',
-    scss: "@import 'config'; @import 'components/flex'; @import 'components/text';",
+    scss: "@import 'config'; @import 'components/text';",
   },
   {
     name: 'core/components/separator',

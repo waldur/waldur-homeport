@@ -153,10 +153,10 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
             }
             footer={
               <>
-                <CloseDialogButton className="flex-equal" />
+                <CloseDialogButton className="flex-1" />
                 <BaseButton
                   variant="primary"
-                  className="flex-equal"
+                  className="flex-1"
                   label={translate('Save')}
                   onClick={handleSubmit}
                   disabled={invalid || submitting}

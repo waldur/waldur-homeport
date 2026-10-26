@@ -23,7 +23,7 @@ export const OrganizationGroup = ({ disabled }) => {
       name="customer"
       label={translate('Organization')}
       validate={validateCustomer}
-      containerClassName="flex-equal"
+      containerClassName="flex-1"
       defaultOptions
       loadOptions={loadOrganizations}
       getOptionLabel={(option) => option.name}

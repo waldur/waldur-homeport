@@ -56,7 +56,7 @@ export const UserDeactivateDialog: FunctionComponent<
         iconColor="danger"
         footer={
           <>
-            <CloseDialogButton className="flex-equal" />
+            <CloseDialogButton className="flex-1" />
             <SubmitButton
               submitting={isPending}
               disabled={!trimmedReason}
@@ -66,7 +66,7 @@ export const UserDeactivateDialog: FunctionComponent<
                   : undefined
               }
               variant="danger"
-              className="flex-equal"
+              className="flex-1"
               label={translate('Deactivate')}
             />
           </>

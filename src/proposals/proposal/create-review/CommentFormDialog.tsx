@@ -44,14 +44,14 @@ export const CommentFormDialog: FC<CommentFormDialogProps> = (props) => {
             }
             footer={
               <>
-                <CloseDialogButton variant="tertiary" className="flex-equal" />
+                <CloseDialogButton variant="tertiary" className="flex-1" />
 
                 <SubmitButton
                   disabled={invalid || pristine}
                   submitting={submitting}
                   label={translate('Confirm')}
                   variant="primary"
-                  className="flex-equal"
+                  className="flex-1"
                 />
               </>
             }

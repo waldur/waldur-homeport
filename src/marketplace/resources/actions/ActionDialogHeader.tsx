@@ -16,7 +16,7 @@ export const ActionDialogHeader = ({
     {/* A heading, at the 16.25px of Bootstrap's h4 look it used to borrow. */}
     <ModalTitle as="h2" className="text-[16.25px]">
       {marketplaceResource ? (
-        <div className="flex flex-column-auto items-stretch gap-3 grow">
+        <div className="flex flex-none items-stretch gap-3 grow">
           <Tooltip label={marketplaceResource.category_title}>
             <span className="inline-flex">
               <Image

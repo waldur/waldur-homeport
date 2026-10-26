@@ -54,11 +54,11 @@ export const RevokeTosDialog = ({
       iconColor="danger"
       footer={
         <>
-          <CloseDialogButton className="flex-equal" />
+          <CloseDialogButton className="flex-1" />
           <BaseButton
             pending={revokeMutation.isPending}
             variant="danger"
-            className="flex-equal"
+            className="flex-1"
             onClick={() => revokeMutation.mutate()}
             label={translate('Revoke')}
             size="lg"

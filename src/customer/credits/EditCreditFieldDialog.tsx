@@ -53,13 +53,13 @@ export const EditCreditFieldDialog: FC<{
             headerLess
             footer={
               <>
-                <CloseDialogButton className="flex-equal" />
+                <CloseDialogButton className="flex-1" />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Confirm')}
                   variant="primary"
-                  className="flex-equal"
+                  className="flex-1"
                 />
               </>
             }

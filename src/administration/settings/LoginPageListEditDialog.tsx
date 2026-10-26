@@ -293,10 +293,10 @@ export const LoginPageListEditDialog: FC<LoginPageListEditDialogProps> = ({
       title={getKeyTitle(item.key)}
       footer={
         <>
-          <CloseDialogButton className="flex-equal" />
+          <CloseDialogButton className="flex-1" />
           <BaseButton
             pending={submitMutation.isPending}
-            className="flex-equal"
+            className="flex-1"
             onClick={() => submitMutation.mutate()}
             label={translate('Confirm')}
             variant="primary"

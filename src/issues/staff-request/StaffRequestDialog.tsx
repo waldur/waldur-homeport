@@ -142,12 +142,12 @@ export const StaffRequestDialog: FunctionComponent<StaffRequestDialogProps> = ({
             iconColor="success"
             footer={
               <>
-                <CloseDialogButton variant="tertiary" className="flex-equal" />
+                <CloseDialogButton variant="tertiary" className="flex-1" />
                 <SubmitButton
                   disabled={invalid || submitting || isLoading || noTypes}
                   submitting={submitting}
                   label={translate('Send')}
-                  className="flex-equal"
+                  className="flex-1"
                 />
               </>
             }

@@ -23,7 +23,7 @@ export const UserEmailChangeDialog: FunctionComponent<{
       subtitle={translate('Provide an email address for notifications')}
       footer={
         <>
-          <CloseDialogButton variant="tertiary" className="flex-equal" />
+          <CloseDialogButton variant="tertiary" className="flex-1" />
 
           {!user.requested_email ? (
             <SubmitButton
@@ -31,7 +31,7 @@ export const UserEmailChangeDialog: FunctionComponent<{
               submitting={submitting}
               label={translate('Request change')}
               variant="primary"
-              className="flex-equal"
+              className="flex-1"
               onClick={() => handleSubmit()}
             />
           ) : (
@@ -40,7 +40,7 @@ export const UserEmailChangeDialog: FunctionComponent<{
               submitting={submitting}
               label={translate('Cancel request')}
               variant="danger"
-              className="flex-equal"
+              className="flex-1"
               onClick={() => cancelRequest()}
             />
           )}

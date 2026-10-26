@@ -63,13 +63,13 @@ export const CookiesConsentDialog: FC<OwnProps> = ({ resolve }) => {
             <BaseButton
               onClick={resolve.acceptEssential}
               variant="tertiary"
-              className="flex-equal"
+              className="flex-1"
               label={translate('Deny analytical cookies')}
               size="lg"
             />
             <BaseButton
               onClick={resolve.acceptAll}
-              className="flex-equal"
+              className="flex-1"
               label={translate('Accept all')}
               variant="primary"
               size="lg"

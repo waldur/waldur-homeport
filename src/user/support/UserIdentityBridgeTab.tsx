@@ -103,12 +103,12 @@ const EditManagedIsdsDialog: FC<EditManagedIsdsDialogProps> = ({ resolve }) => {
             headerLess
             footer={
               <>
-                <CloseDialogButton variant="tertiary" className="flex-equal" />
+                <CloseDialogButton variant="tertiary" className="flex-1" />
                 <SubmitButton
                   submitting={submitting}
                   label={translate('Save')}
                   variant="primary"
-                  className="flex-equal"
+                  className="flex-1"
                 />
               </>
             }

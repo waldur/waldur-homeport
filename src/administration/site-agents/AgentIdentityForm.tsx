@@ -101,7 +101,7 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
         title={translate('Edit agent identity: {name}', {
           name: resolve.identity.name,
         })}
-        footer={<CloseDialogButton className="flex-equal" />}
+        footer={<CloseDialogButton className="flex-1" />}
       >
         <LoadingSpinner />
       </ModalDialog>
@@ -126,13 +126,13 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
             }
             footer={
               <>
-                <CloseDialogButton className="flex-equal" />
+                <CloseDialogButton className="flex-1" />
                 <SubmitButton
                   submitting={submitting}
                   invalid={invalid}
                   label={isEdit ? translate('Update') : translate('Create')}
                   variant="primary"
-                  className="flex-equal"
+                  className="flex-1"
                 />
               </>
             }
