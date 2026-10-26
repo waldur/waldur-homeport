@@ -532,6 +532,7 @@ export const SupportEnum = {
 export const Terms_of_serviceEnum = {
   terms_of_service_consent_granted: 'terms_of_service_consent_granted',
   terms_of_service_consent_revoked: 'terms_of_service_consent_revoked',
+  user_terms_of_service_accepted: 'user_terms_of_service_accepted',
 };
 
 export const UsersEnum = {
