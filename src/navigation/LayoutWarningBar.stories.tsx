@@ -113,7 +113,9 @@ export const CenteredWithoutIcon: Story = {
   },
   play: async ({ canvasElement }) => {
     const bar = getBar(canvasElement);
-    await expect(bar!.querySelector('.featured-icon, svg')).toBeNull();
+    await expect(
+      bar!.querySelector('[data-slot="featured-icon"], svg'),
+    ).toBeNull();
   },
 };
 

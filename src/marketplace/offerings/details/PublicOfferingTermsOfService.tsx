@@ -74,7 +74,7 @@ export const PublicOfferingTermsOfService: FunctionComponent<
         </PublicOfferingCardTitle>
 
         {hasTextContent && (
-          <div className="tos-content-display">
+          <div>
             <SafeMarkdown text={activeTos.terms_of_service} />
           </div>
         )}

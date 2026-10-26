@@ -58,7 +58,7 @@ export const avatarRootVariants = cva(
 );
 
 export const avatarFallbackVariants = cva(
-  'avatar-label flex size-full items-center justify-center font-medium leading-none select-none',
+  'flex size-full items-center justify-center font-medium leading-none select-none',
   {
     variants: {
       tone: {

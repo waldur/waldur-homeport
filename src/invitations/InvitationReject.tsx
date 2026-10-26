@@ -29,11 +29,9 @@ export const InvitationReject: FunctionComponent = () => {
   });
 
   return (
-    <div className="middle-box text-center">
+    <div className="text-center">
       <LoadingSpinner />
-      <h3 className="app-title centered">
-        {translate('Invitation rejection')}
-      </h3>
+      <h3>{translate('Invitation rejection')}</h3>
     </div>
   );
 };

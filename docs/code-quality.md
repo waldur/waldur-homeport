@@ -133,6 +133,7 @@ A class is known when either:
 
 - **Tailwind generates CSS for it.** The rule asks the same Tailwind design system the build loads from `src/tailwind.css`, so variants, arbitrary values, `!`, opacity modifiers, `@theme` tokens and `@utility` definitions are judged exactly as the build judges them. There is no hand-kept list of utilities.
 - **A stylesheet defines it.** Every `.scss` (compiled with Sass) and `.css` file under `src/`, `packages/` and `apps/`, plus the `node_modules` stylesheets the source imports, contributes its class selectors. A class counts as defined if it appears in any selector, including one that only applies inside a parent (`.card .small`).
+- **An arbitrary variant styles it.** A class selected inside a Tailwind arbitrary variant in any source file (`[&_.x]:`, `has-[.x]:`, `group-[.x]:`) counts as defined, since that variant styles it. These are read from the source on every recheck, not cached; the lint plugin's own files are skipped.
 
 The rule reads class positions only:
 
@@ -147,11 +148,11 @@ Implementation: `packages/eslint-plugin-waldur/lib/class-oracle.js`, reached fro
 
 ### Existing violations
 
-Classes that predate the rule are listed per file in `unknown-classes.baseline.json`. A listed class is not reported in its file; any other unknown class is, whatever else the change does. A listed class the file no longer has (fixed, removed, or now defined by a stylesheet) is reported as stale, so the list only shrinks.
+Existing violations are listed per file in `unknown-classes.baseline.json`. A listed class is not reported in its file; any other unknown class is, whatever else the change does. A listed class the file no longer has (fixed, removed, or now defined by a stylesheet) is reported as stale, so the list only shrinks.
 
 - After fixing listed classes, rewrite the list: `yarn lint:classes:baseline`.
 - Never add entries for new code. Fix the class instead.
 
 ### Classes that deliberately style nothing
 
-A class used only as a hook (for a test or a third-party script) should be a `data-*` attribute instead (`data-slot`, `data-testid`). Where it cannot be, list a pattern in the rule's `allow` option in `eslint.config.js`, so each exception is a visible decision. `UNKNOWN_CLASS_HOOKS` there lists the classes the end-to-end suite in `waldur-integration-testing` selects on (`.toolbar`, `.filter-field`, react-select's `metronic-select__*`, …); remove one only together with its selector there. Test files (`*.test.ts(x)`) are exempt because they pass made-up classes to check that a prop is forwarded.
+A class used only as a hook (for a test or a third-party script) should be a `data-*` attribute instead (`data-slot`, `data-testid`); [class-names-and-data-attributes.md](class-names-and-data-attributes.md) says which one. Where it cannot be, list a pattern in the rule's `allow` option in `eslint.config.js`, so each exception is a visible decision. `UNKNOWN_CLASS_HOOKS` there lists the classes the end-to-end suite in `waldur-integration-testing` selects on, now only react-select's `metronic-select__*`; remove one only together with its selector there. Test files (`*.test.ts(x)`) are exempt because they pass made-up classes to check that a prop is forwarded.

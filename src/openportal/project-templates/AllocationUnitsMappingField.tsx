@@ -98,7 +98,7 @@ export const AllocationUnitsMappingField: FunctionComponent<
   const hasError = meta?.touched && meta?.error;
 
   return (
-    <div className="allocation-units-mapping-field">
+    <div>
       <div className="mb-3">
         {hasMappings ? (
           <>

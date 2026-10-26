@@ -13,25 +13,25 @@ describe('Tag', () => {
     expect(screen.getByText('Test Tag')).toBeInTheDocument();
   });
 
-  it('applies the tag class', () => {
+  it('marks the tag with its data-slot', () => {
     render(<Tag>Test Tag</Tag>);
 
     const tagElement = screen.getByText('Test Tag');
-    expect(tagElement).toHaveClass('tag');
+    expect(tagElement).toHaveAttribute('data-slot', 'tag');
   });
 
-  it('applies size class when size prop is provided', () => {
+  it('marks the size when the size prop is provided', () => {
     render(<Tag size="sm">Small Tag</Tag>);
 
     const tagElement = screen.getByText('Small Tag');
-    expect(tagElement).toHaveClass('tag-sm');
+    expect(tagElement).toHaveAttribute('data-size', 'sm');
   });
 
-  it('applies lg size class', () => {
+  it('marks the lg size', () => {
     render(<Tag size="lg">Large Tag</Tag>);
 
     const tagElement = screen.getByText('Large Tag');
-    expect(tagElement).toHaveClass('tag-lg');
+    expect(tagElement).toHaveAttribute('data-size', 'lg');
   });
 
   it('applies custom className', () => {
@@ -103,7 +103,7 @@ describe('Tag', () => {
     expect(ref.current?.textContent).toContain('Ref Tag');
   });
 
-  it('ref element has correct class', () => {
+  it('ref element has the slot, size and custom class', () => {
     const ref = createRef<HTMLSpanElement>();
     render(
       <Tag ref={ref} size="sm" className="extra">
@@ -111,8 +111,8 @@ describe('Tag', () => {
       </Tag>,
     );
 
-    expect(ref.current).toHaveClass('tag');
-    expect(ref.current).toHaveClass('tag-sm');
+    expect(ref.current).toHaveAttribute('data-slot', 'tag');
+    expect(ref.current).toHaveAttribute('data-size', 'sm');
     expect(ref.current).toHaveClass('extra');
   });
 });

@@ -241,7 +241,7 @@ export const CustomRangeDatePicker = (props: CustomRangeDatePickerProps) => {
 
   return (
     <div className="booking-range-picker">
-      <div className="booking-range-picker-dates">
+      <div>
         <div className="booking-range-picker-titles">
           <div className="booking-range-picker-title">
             <label>{translate('From date')}</label>

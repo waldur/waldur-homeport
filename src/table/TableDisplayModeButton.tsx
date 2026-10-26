@@ -25,7 +25,6 @@ export const TableDisplayModeButton = (
       onClick={() =>
         props.setDisplayMode(props.mode === 'grid' ? 'table' : 'grid')
       }
-      className="btn-toggle-mode"
     />
   );
 };

@@ -223,7 +223,7 @@ const PresetSelector: FC = () => {
               className={`h-full cursor-pointer border-2 ${
                 selectedPreset === preset.key
                   ? 'border-brand bg-brand-subtle'
-                  : 'border-light-dark'
+                  : 'border-secondary'
               }`}
               onClick={() => applyPreset(preset)}
               style={{ cursor: 'pointer' }}

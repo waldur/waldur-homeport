@@ -21,7 +21,7 @@ export const IdentityProviderIndicator = ({
 }: IdentityProviderIndicatorProps) => (
   <div className="flex items-center">
     <Tooltip label={user.registration_method}>
-      <div className="size-10 shrink-0 inline-flex items-center justify-center rounded-full overflow-hidden img-wrapper">
+      <div className="size-10 shrink-0 inline-flex items-center justify-center rounded-full overflow-hidden">
         <IdentityProviderLogo name={user.registration_method} />
       </div>
     </Tooltip>

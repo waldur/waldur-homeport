@@ -38,8 +38,8 @@ export const OfferingUpdateContainer: FC<OwnProps> = (props) => {
 
   return props.tabSpec ? (
     <div
+      data-testid="provider-offering"
       className={classNames(
-        'provider-offering',
         data.offering.state === 'Unavailable' && 'disabled-view',
       )}
     >

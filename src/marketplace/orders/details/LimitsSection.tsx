@@ -145,7 +145,7 @@ export const LimitsSection = ({
         )}
       </Card.Header>
       <Card.Body>
-        <table className="table align-middle table-row-bordered text-sm gy-4 no-footer">
+        <table className="table align-middle table-row-bordered text-sm gy-4">
           <thead>
             <tr className="align-middle">
               {editable && (

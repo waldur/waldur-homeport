@@ -50,7 +50,6 @@ export const CookieSettingsDialog: FC<CookieSettingsDialogProps> = ({
     title={translate('Cookie settings')}
     iconNode={<CookieIcon weight="bold" />}
     iconColor="warning"
-    className="cookie-settings-dialog"
     bodyClassName="pt-0 pb-2"
     footer={
       <div className="flex items-center justify-between w-full gap-3">

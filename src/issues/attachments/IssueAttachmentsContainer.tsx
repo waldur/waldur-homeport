@@ -27,7 +27,7 @@ export const IssueAttachmentsContainer: React.FC<
 
   return (
     <IssueAttachmentsContext.Provider value={issue}>
-      <Card className="card-bordered issue-attachments">
+      <Card className="card-bordered">
         <Card.Header>
           <Card.Title>
             <span className="me-2">{translate('Attachments')}</span>

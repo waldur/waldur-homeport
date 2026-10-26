@@ -15,7 +15,7 @@ describe('FeaturedIcon', () => {
     expect(screen.getByTestId('dummy-icon')).toBeInTheDocument();
     expect(el).toHaveAttribute('data-variant', 'success');
     expect(el).toHaveAttribute('data-tone', 'outline');
-    expect(el).toHaveClass('featured-icon');
+    expect(el).toHaveAttribute('data-slot', 'featured-icon');
     expect(el).toHaveStyle({ width: '38px', height: '38px' });
   });
 
@@ -23,7 +23,7 @@ describe('FeaturedIcon', () => {
     const ref = createRef<HTMLDivElement>();
     render(<FeaturedIcon ref={ref} icon={dummyIcon} />);
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
-    expect(ref.current).toHaveClass('featured-icon');
+    expect(ref.current).toHaveAttribute('data-slot', 'featured-icon');
   });
 
   it('supports explicit tone="solid" and tone="outline"', () => {
@@ -167,7 +167,8 @@ describe('FeaturedIcon', () => {
       />,
     );
     const el = screen.getByTestId('featured-icon');
-    expect(el).toHaveClass('featured-icon', 'custom-featured-icon');
+    expect(el).toHaveAttribute('data-slot', 'featured-icon');
+    expect(el).toHaveClass('custom-featured-icon');
     expect(el).toHaveStyle({ margin: '10px' });
   });
 });

@@ -45,7 +45,7 @@ export const CeleryInfoPage = () => {
   const hasWorkers = workers.length > 0;
 
   return (
-    <div className="celery-info-page pt-5">
+    <div className="pt-5">
       {!hasWorkers && (
         <AlertItem
           variant="warning"

@@ -44,6 +44,7 @@ For detailed guidance, see `docs/` — full index with one-line descriptions in 
 - `development-setup.md` - Build, environment, tooling
 - `design-tokens.md` - Colour ramps generated from `tokens/colors.json` (never edit `colorRamps.css`)
 - `ui-consistency-guidelines.md` - Empty states, buttons, loading, tooltips
+- `class-names-and-data-attributes.md` - Perceivable state is native/ARIA (styled via `disabled:`/`aria-*:`); classes only style; `data-slot`/`data-state`/`data-testid` mark the rest, never a marker class
 
 Subagents in `.claude/agents/` provide deep expertise for each area.
 

@@ -2,7 +2,9 @@
  * Knows every class name the app can actually style: whatever Tailwind
  * generates CSS for, plus every class selector in the app's own
  * stylesheets (compiled SCSS, plain CSS, and the node_modules stylesheets
- * the source imports). A class in neither is a typo or a leftover.
+ * the source imports), plus every class a source file selects in an
+ * arbitrary variant (`[&_.has-error]:text-warning`). A class in none of
+ * them is a typo or a leftover.
  *
  * Tailwind is asked directly, through the same design system the build
  * uses (`__unstable__loadDesignSystem` on the CSS entry point), so
@@ -48,6 +50,7 @@ const SKIP_DIRS = new Set([
   'storybook-static',
 ]);
 const SOURCE_DIRS = ['src', 'packages', 'apps'];
+const PLUGIN_DIR = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 
 const walk = (dir, out = []) => {
   let entries;
@@ -78,6 +81,42 @@ const unescapeIdent = (ident) =>
   );
 
 const CLASS_SELECTOR = /\.(-?(?:\\.|[\w-]|[\u0080-\uFFFF])+)/g;
+
+// A Tailwind arbitrary variant (`[&_.has-error]:`, `has-[.x]:`,
+// `group-[.x]:`), one level of nested brackets allowed (`[&_[data-x]]:`).
+// It starts a class token or follows another variant, and is either a
+// selector with `&` or the argument of a `has-`/`group-`/… variant, which
+// keeps out computed keys such as `{ [Foo.bar]: 1 }`.
+const ARBITRARY_VARIANT =
+  /(?<=^|[\s'"`:-])\[((?:[^\s'"`[\]]|\[[^\s'"`[\]]*\])+)\]:/gm;
+
+/**
+ * Classes that source files style through another element's arbitrary
+ * variant: `[&_.has-error]:text-warning` styles `.has-error`, though no
+ * stylesheet names it. Underscores are spaces there, as Tailwind reads them.
+ */
+export const variantClassesIn = (text, classes = new Set()) => {
+  for (const m of text.matchAll(ARBITRARY_VARIANT)) {
+    if (text[m.index - 1] !== '-' && !m[1].includes('&')) continue;
+    const selector = m[1].replace(/(?<!\\)_/g, ' ');
+    for (const c of selector.matchAll(CLASS_SELECTOR)) {
+      // `[0.5rem]` is a value; a class starts like an identifier.
+      if (/^-?[A-Za-z_\\]/.test(c[1])) classes.add(unescapeIdent(c[1]));
+    }
+  }
+  return classes;
+};
+
+const collectVariantClasses = (files) => {
+  const classes = new Set();
+  for (const file of files) {
+    if (!SCRIPT.test(file) || file.endsWith('.d.ts')) continue;
+    // This plugin's own comments and fixtures are examples, not styling.
+    if (file.startsWith(PLUGIN_DIR + path.sep)) continue;
+    variantClassesIn(readFileSync(file, 'utf8'), classes);
+  }
+  return classes;
+};
 
 const addSelectorClasses = (css, from, classes) => {
   let ast;
@@ -215,7 +254,7 @@ const stylesheetClassesFor = (root, files, key) => {
 // one walk of the tree costs per file, so it must not walk per file.
 const RECHECK_MS = 5000;
 
-let stylesheets = null; // { root, key, classes, checkedAt }
+let stylesheets = null; // { root, key, variantKey, classes, checkedAt }
 // Both keyed by entry path, and emptied whenever a stylesheet (the Tailwind
 // entry and theme among them) changes.
 const designSystems = new Map(); // → Promise<design system>
@@ -229,11 +268,23 @@ const currentStylesheets = (root) => {
   }
   const files = SOURCE_DIRS.flatMap((d) => walk(path.join(root, d)));
   const key = fingerprint(root, files);
-  if (stylesheets?.root !== root || stylesheets.key !== key) {
+  // Read from source on every recheck rather than cached on disk with the
+  // stylesheets, whose key does not cover scripts.
+  const variantClasses = collectVariantClasses(files);
+  const variantKey = [...variantClasses].sort().join(' ');
+  if (
+    stylesheets?.root !== root ||
+    stylesheets.key !== key ||
+    stylesheets.variantKey !== variantKey
+  ) {
     stylesheets = {
       root,
       key,
-      classes: stylesheetClassesFor(root, files, key),
+      variantKey,
+      classes: new Set([
+        ...stylesheetClassesFor(root, files, key),
+        ...variantClasses,
+      ]),
     };
     designSystems.clear();
     oracles.clear();

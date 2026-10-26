@@ -13,7 +13,7 @@ const Container: FC<PropsWithChildren> = (props) => (
   <div
     className={classNames(
       PAGE_CONTAINER_XXL_CLASSNAME,
-      'v-stepper-form flex flex-col xl:flex-row gap-5 pb-10',
+      'flex flex-col xl:flex-row gap-5 pb-10',
     )}
   >
     {props.children}

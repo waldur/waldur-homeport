@@ -27,7 +27,7 @@ const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (props) => {
     <div style={{ maxHeight: 200, maxWidth: 200 }}>
       <Row>
         <Col md={5}>
-          <div className="image">
+          <div>
             <img
               src={getImageUrl(props.input.value)}
               alt={translate('Image here')}

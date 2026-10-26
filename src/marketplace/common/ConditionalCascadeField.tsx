@@ -93,7 +93,7 @@ export const ConditionalCascadeField = ({
   };
 
   return (
-    <div className="conditional-cascade">
+    <div>
       {tooltip && (
         <FormText as="div" variant="muted" className="mb-3">
           {tooltip}

@@ -326,9 +326,7 @@ const NodeRow: FC<NodeRowProps> = ({ id, row, style, isActive, showFocus }) => {
     <div
       id={id}
       style={style}
-      className={`ldap-tree-row flex items-stretch ${
-        isActive ? 'bg-brand-subtle' : ''
-      } ${
+      className={`flex items-stretch ${isActive ? 'bg-brand-subtle' : ''} ${
         isActive && showFocus
           ? 'outline outline-2 -outline-offset-2 outline-brand'
           : ''
@@ -347,7 +345,7 @@ const NodeRow: FC<NodeRowProps> = ({ id, row, style, isActive, showFocus }) => {
         <span
           key={i}
           aria-hidden="true"
-          className="ldap-tree-guide shrink-0 border-[color:var(--color-gray-300)] dark:border-[color:var(--color-gray-dark-600)]"
+          className="shrink-0 border-[color:var(--color-gray-300)] dark:border-[color:var(--color-gray-dark-600)]"
           style={{
             width: INDENT_PX,
             borderLeftWidth: 1,
@@ -750,7 +748,7 @@ export const GLAuthTreeView: FC<{ tree: GlauthTree }> = ({ tree }) => {
   };
 
   return (
-    <div className="ldap-tree-view">
+    <div>
       <div className="mb-2 small text-quaternary">
         {translate(
           'Waldur projection of GLAuth entries. The actual base DN ({base}) and DN format ({nameformat}) are configured on the GLAuth server. Italic rows marked ※ are Waldur context — useful for debugging, but NOT returned by an ldapsearch.',

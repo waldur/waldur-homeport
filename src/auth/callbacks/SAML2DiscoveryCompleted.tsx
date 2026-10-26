@@ -14,7 +14,7 @@ export const SAML2DiscoveryCompleted = () => {
     handleSaml2Login(qs.entityID);
   });
   return (
-    <div className="middle-box text-center">
+    <div className="text-center">
       <LoadingSpinner />
       <h3>
         {translate(

@@ -81,7 +81,7 @@ exports[`InternalIpsList > renders list 1`] = `
           data-testid="table-container"
         >
           <table
-            class="table align-middle table-row-bordered text-sm gy-0 gx-8px no-footer"
+            class="table align-middle table-row-bordered text-sm gy-0 gx-8px"
           >
             <colgroup>
               <col

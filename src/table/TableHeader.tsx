@@ -166,7 +166,7 @@ const TableTh = ({
         column.orderField && 'sorting-column',
         column.filter && filters && 'filter-column',
         isFirstDataColumn && expandableRow && 'first-expandable-column',
-        pinned && 'pinned pinned-start',
+        pinned && 'pinned',
         pinned && shadow === 'end' && 'shadow-end',
         pinned && shadow === 'start' && 'shadow-start',
       ) || undefined

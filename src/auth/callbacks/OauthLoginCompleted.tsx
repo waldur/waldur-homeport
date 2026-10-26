@@ -53,15 +53,15 @@ export const OauthLoginCompleted: FunctionComponent = () => {
   }, [router, provider]);
 
   return error ? (
-    <div className="middle-box text-center">
-      <h3 className="app-title centered">{translate('Login failed')}</h3>
+    <div className="text-center">
+      <h3>{translate('Login failed')}</h3>
       {typeof error === 'string' && <p className="mt-3">{error}</p>}
       <p className="mt-3">
         <Link state="login"> &lt; {translate('Back to login')} </Link>
       </p>
     </div>
   ) : (
-    <div className="middle-box text-center">
+    <div className="text-center">
       <LoadingSpinner />
       <h3>{translate('Logging user in')}</h3>
     </div>

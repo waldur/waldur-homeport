@@ -14,7 +14,6 @@ export const AccountingPeriodFilter: FC<any> = ({
     badgeValue={(value) => value?.label}
     placeholder={translate('Select accounting period')}
     isClearable={false}
-    className="accounting-period-selector"
     ellipsis={false}
     {...props}
   />

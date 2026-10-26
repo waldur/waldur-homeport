@@ -290,16 +290,14 @@ const TokenSummary = ({ quota }) => {
 
         return (
           <div key={p.key} className="token-stat-item">
-            <span className="token-label">{p.label}</span>
+            <span>{p.label}</span>
             <QuotaProgressBar
               percent={percent ?? 0}
               size="xs"
               className="grow"
               label={typeof p.label === 'string' ? p.label : undefined}
             />
-            <span className="token-value">
-              {percent !== null ? `${percent}%` : '∞'}
-            </span>
+            <span>{percent !== null ? `${percent}%` : '∞'}</span>
           </div>
         );
       })}

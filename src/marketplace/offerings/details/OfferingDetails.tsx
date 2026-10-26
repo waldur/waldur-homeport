@@ -42,8 +42,8 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
     <>
       {connectionStatus}
       <div
+        data-testid="provider-offering"
         className={classNames(
-          'provider-offering',
           props.offering.state === 'Unavailable' && 'disabled-view',
         )}
       >

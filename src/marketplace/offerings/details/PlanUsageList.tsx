@@ -13,7 +13,7 @@ interface OwnProps {
 }
 
 const PlanGroup = ({ plan }: { plan: PlanUsageResponse }) => (
-  <div className="plan">
+  <div>
     <h4 className="font-medium mb-4">{plan.plan_name}:</h4>
     <table className="text-tertiary w-full mb-10">
       <tbody>

@@ -40,7 +40,7 @@ export const OneTimeTab = ({
     ENV.plugins.WALDUR_CORE.ENABLE_ORDER_START_DATE;
 
   return (
-    <section className="plan-details-section">
+    <section>
       <FormTable>
         {/* One */}
         {oneTime.initialRows.length > 0 && (

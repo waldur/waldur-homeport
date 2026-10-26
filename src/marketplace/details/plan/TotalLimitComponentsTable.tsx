@@ -36,7 +36,7 @@ export const TotalLimitComponentsTable: FunctionComponent<
 
   return (
     <div className="table-responsive mb-4">
-      <Table className="table align-middle table-row-bordered text-sm gy-4 no-footer">
+      <Table className="table align-middle table-row-bordered text-sm gy-4">
         <thead>
           <tr className="align-middle">
             <th className="col-sm-1">{translate('Component name')}</th>

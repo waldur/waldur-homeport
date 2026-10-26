@@ -144,14 +144,15 @@ export const WithValidationErrors: Story = {
       {
         key: 'step-components',
         title: (
-          <div className="flex justify-between items-center w-full">
-            <span className="text-warning font-semibold">
-              Components & limits
-            </span>
+          <div
+            data-error=""
+            className="flex justify-between items-center w-full"
+          >
+            <span className="font-semibold">Components & limits</span>
             <Tooltip label="Quota exceeds project limit">
               <WarningCircleIcon
                 weight="bold"
-                className="text-warning size-5 shrink-0 has-error"
+                className="text-warning size-5 shrink-0"
               />
             </Tooltip>
           </div>
@@ -393,7 +394,7 @@ export const WithStatusIndicators: Story = {
             <span className="flex items-center gap-2">
               <WarningCircleIcon
                 weight="bold"
-                className="text-warning size-4 shrink-0 has-error"
+                className="text-warning size-4 shrink-0"
               />
               <span>Quotas & limits</span>
             </span>

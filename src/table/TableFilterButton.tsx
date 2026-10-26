@@ -27,7 +27,6 @@ export const TableFilterButton = ({
         tooltip={translate('Set filters')}
         iconNode={<FunnelSimpleIcon weight="bold" />}
         onClick={onClick}
-        className="btn-toggle-filters"
       />
       {count > 0 && (
         <Badge

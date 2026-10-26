@@ -106,7 +106,6 @@ const RowWrapper2 = (
     hidePrices={props.hidePrices}
     period={props.period}
     activePriceIndex={props.activePriceIndex}
-    className="control"
   >
     {props.offeringComponent.is_boolean ? (
       <Switch

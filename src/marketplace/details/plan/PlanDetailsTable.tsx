@@ -129,7 +129,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
       <div className={props.columnClassName}>
         {hasExtraRows && (
           <div className="table-responsive mb-4">
-            <Table className="table align-middle table-row-bordered text-sm gy-4 no-footer">
+            <Table className="table align-middle table-row-bordered text-sm gy-4">
               <thead>
                 <HeaderRow
                   periods={!activeFixedPriceProfile ? props.periods : []}

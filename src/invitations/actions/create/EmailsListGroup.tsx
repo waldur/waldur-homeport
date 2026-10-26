@@ -290,7 +290,7 @@ export const EmailsListGroup = ({
                   {!isFeatureVisible(
                     InvitationsFeatures.conceal_civil_number,
                   ) && (
-                    <td className="id-column">
+                    <td>
                       {ENV.plugins.WALDUR_CORE.INVITATION_CIVIL_NUMBER_LABEL ||
                         translate('Civil number')}{' '}
                       <HelpIcon
@@ -300,7 +300,7 @@ export const EmailsListGroup = ({
                       />
                     </td>
                   )}
-                  <td className="role-column w-[380px]">{translate('Role')}</td>
+                  <td className="w-[380px]">{translate('Role')}</td>
                   <td className="w-[54px]" />
                 </tr>
               </thead>
@@ -380,7 +380,7 @@ export const EmailsListGroup = ({
                             </Field>
                           </td>
                         )}
-                        <td className="role-column">
+                        <td>
                           <RoleAndProjectSelectField
                             name={`${user}.role_project`}
                             roles={roles}

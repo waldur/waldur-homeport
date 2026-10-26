@@ -13,7 +13,7 @@ export const ResourceEndDateConflictBar = () => {
   if (!show) return null;
 
   return (
-    <div className="bar bg-primary border-b-[1px] border-b-secondary h-[60px]">
+    <div className="bg-primary border-b-[1px] border-b-secondary h-[60px]">
       <div
         className={classNames(
           PAGE_CONTAINER_CLASSNAME,

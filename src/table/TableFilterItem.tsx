@@ -62,10 +62,7 @@ export const TableSidebarFilterValues = ({
   return !['', undefined].includes(value) ? (
     badgeValue ? (
       badgeValue(value) ? (
-        <div
-          className="filter-value"
-          style={!ellipsis ? { maxWidth: 'unset' } : undefined}
-        >
+        <div style={!ellipsis ? { maxWidth: 'unset' } : undefined}>
           <Badge
             variant="neutral"
             size="lg"
@@ -100,7 +97,7 @@ export const TableSidebarFilterValues = ({
               )
             }
             tone="outline"
-            className="filter-value text-xs"
+            className="text-xs"
             style={!ellipsis ? { maxWidth: 'unset' } : undefined}
           >
             {getValueLabel(v)}
@@ -120,7 +117,7 @@ export const TableSidebarFilterValues = ({
           )
         }
         tone="outline"
-        className="filter-value text-xs"
+        className="text-xs"
         style={!ellipsis ? { maxWidth: 'unset' } : undefined}
       >
         {getValueLabel(value)}
@@ -223,7 +220,8 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
       <AccordionTrigger>{props.title}</AccordionTrigger>
       <AccordionContent>
         <div
-          className={classNames('filter-field', props.showValueBadge && 'mb-2')}
+          data-slot="filter-field"
+          className={classNames(props.showValueBadge && 'mb-2')}
         >
           {props.children}
         </div>
@@ -442,7 +440,8 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
         {/* `role="presentation"`, not `aria-hidden`: aria-hidden would
             hide the filter field inside from screen readers too. */}
         <div
-          className="filter-field px-[12px] py-[8px]"
+          data-slot="filter-field"
+          className="px-[12px] py-[8px]"
           onClick={(e) => e.stopPropagation()}
           role="presentation"
         >
@@ -457,7 +456,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
         {!instantApply && menuIsOpen && (
           <>
             <div className="separator" />
-            <div className="filter-footer px-[12px] pt-[8px]">
+            <div className="px-[12px] pt-[8px]">
               <div className="flex gap-4">
                 <BaseButton
                   variant="tertiary"
@@ -514,7 +513,8 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
         >
           {/* `role="presentation"` — see the column branch above. */}
           <div
-            className="filter-field px-[12px] py-[8px]"
+            data-slot="filter-field"
+            className="px-[12px] py-[8px]"
             onClick={(e) => e.stopPropagation()}
             role="presentation"
           >
@@ -525,7 +525,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
               <div className="separator" />
               <div>
                 {open && (
-                  <div className="filter-footer px-[12px] pt-[8px]">
+                  <div className="px-[12px] pt-[8px]">
                     <div className="flex gap-4">
                       <BaseButton
                         variant="tertiary"

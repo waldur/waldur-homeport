@@ -115,7 +115,8 @@ export const MatrixCallFloatingWidget = forwardRef<
 
   return (
     <div
-      className="matrix-call-widget shadow rounded-lg flex flex-col bg-primary border-[1px] border-secondary fixed z-[1080]"
+      data-testid="matrix-call-widget"
+      className="shadow rounded-lg flex flex-col bg-primary border-[1px] border-secondary fixed z-[1080]"
       style={{
         right: effectivePos.x,
         bottom: effectivePos.y,

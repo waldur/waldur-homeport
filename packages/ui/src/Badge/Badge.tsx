@@ -284,7 +284,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
         {Boolean(leftIcon) && (
           <span
             className={cn(
-              'left-icon inline-flex shrink-0 items-center justify-center',
+              'inline-flex shrink-0 items-center justify-center',
               hasContent && 'mr-1',
             )}
             data-testid="badge-left-icon"
@@ -296,7 +296,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
         {Boolean(rightIcon) && (
           <span
             className={cn(
-              'right-icon inline-flex shrink-0 items-center justify-center',
+              'inline-flex shrink-0 items-center justify-center',
               hasContent && 'ml-1',
             )}
             data-testid="badge-right-icon"

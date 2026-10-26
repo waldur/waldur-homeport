@@ -79,7 +79,7 @@ export const PeriodicTab = ({
     viewMode && limitedRows.some((component) => component.quantityUnknown);
 
   return (
-    <section className="plan-details-section">
+    <section>
       <FormTable>
         {!limitPeriod ||
           (limitPeriod === 'month' && (

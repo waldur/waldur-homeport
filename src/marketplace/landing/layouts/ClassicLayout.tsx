@@ -24,7 +24,7 @@ export const ClassicLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
   const defaultImage = theme === 'dark' ? DefaultDarkImage : DefaultLightImage;
 
   return (
-    <div className="marketplace-landing-page">
+    <div>
       <LandingHeroSection
         header={translate('Welcome to')}
         title={title}

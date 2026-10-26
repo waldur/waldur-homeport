@@ -124,7 +124,7 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
   return (
     <div className="flex flex-wrap items-center gap-2 px-3 py-2">
       {activeTableKey && (
-        <div className="table-toolbar-search expandable-row-search">
+        <div className="table-toolbar-search">
           <TableQuery
             query={query}
             setQuery={handleSetQuery}
@@ -166,11 +166,7 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
                 iconNode={<GearSixIcon weight="bold" />}
               />
             </PopoverTrigger>
-            <PopoverContent
-              align="end"
-              sideOffset={2}
-              className="table-columns-popover"
-            >
+            <PopoverContent align="end" sideOffset={2}>
               <ColumnsPopover
                 columns={optionalColumns}
                 activeColumns={activeColumns}

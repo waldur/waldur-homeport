@@ -13,7 +13,7 @@ import { SlurmPlacementFields } from './SlurmPlacementFields';
 
 const UserInputs = ({ callOffering, optionsValues }) => (
   <section>
-    <table className="table-details w-full">
+    <table className="w-full">
       <tbody>
         {callOffering.options?.order?.map((key) => (
           <tr key={key}>

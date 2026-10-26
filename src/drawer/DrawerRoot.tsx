@@ -135,7 +135,7 @@ export const DrawerRoot: FunctionComponent = () => {
           // tuck the assistant under the sign-in strip, whose 40px controls
           // plus the layouts' 1rem padding end at 56px.
           shell === DRAWER_SHELL_CLASS.ai &&
-            '[body:has(.auth-header-controls)_&]:top-[64px] [body:has(.auth-header-controls)_&]:h-[calc(100vh-64px)]',
+            '[body:has([data-slot=auth-header-controls])_&]:top-[64px] [body:has([data-slot=auth-header-controls])_&]:h-[calc(100vh-64px)]',
         )}
         style={{ '--drawer-width': width } as React.CSSProperties}
         aria-describedby={undefined}

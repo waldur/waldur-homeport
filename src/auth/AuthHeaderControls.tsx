@@ -8,11 +8,11 @@ import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
  * under `justify-content: space-between` — a third loose child would push the
  * language picker into the middle of the screen.
  *
- * `auth-header-controls` also tells the AI drawer it is on a page without the
+ * `data-slot="auth-header-controls"` also tells the AI drawer it is on a page without the
  * app header (see the sign-in offsets in DrawerRoot.tsx).
  */
 export const AuthHeaderControls: FC = () => (
-  <div className="auth-header-controls flex items-center gap-2">
+  <div data-slot="auth-header-controls" className="flex items-center gap-2">
     <LLMChatDrawerToggle />
     <ThemeSwitcherButton />
   </div>

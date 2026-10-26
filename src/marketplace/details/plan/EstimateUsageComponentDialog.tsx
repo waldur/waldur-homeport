@@ -52,7 +52,7 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
               </span>
             </th>
             <td>X</td>
-            <td className="control">
+            <td>
               <MeasuredUnitInput
                 component={props.resolve.component}
                 input={{ value: qty, onChange: setQty }}
@@ -62,7 +62,7 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
               =
             </td>
             {!props.resolve.hidePrices ? (
-              <td className="estimate">
+              <td>
                 {defaultCurrency(qty * props.resolve.component.price)}
                 {perPeriod}
               </td>

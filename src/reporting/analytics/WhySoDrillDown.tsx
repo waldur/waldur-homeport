@@ -341,7 +341,7 @@ export const WhySoDrillDown: FC<WhySoDrillDownProps> = ({
   valueLabel: initialValueLabel,
 }) => {
   return (
-    <div className="why-so-drill-down">
+    <div>
       {/* Header with data source */}
       <div className="flex justify-between items-center mb-4" />
 

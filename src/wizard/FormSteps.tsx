@@ -107,9 +107,9 @@ export const FormSteps: FC<{
       key: step.id,
       title: (
         <div
+          data-error={hasCriticalErrors || hasNormalErrors ? '' : undefined}
           className={classNames(
             'flex justify-between items-center w-full',
-            (hasCriticalErrors || hasNormalErrors) && 'has-error',
             isDisabled && 'text-quaternary',
           )}
         >

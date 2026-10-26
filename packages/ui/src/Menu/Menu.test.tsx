@@ -115,10 +115,16 @@ describe('Menu.Item renders for what it sits in', () => {
     const icon = screen.getByTestId('test-icon');
     const trailing = screen.getByTestId('test-trailing');
     // eslint-disable-next-line testing-library/no-node-access
-    expect(icon.parentElement).toHaveClass('menu-item-icon');
+    expect(icon.parentElement).toHaveAttribute('data-slot', 'menu-item-icon');
     // eslint-disable-next-line testing-library/no-node-access
-    expect(trailing.parentElement).toHaveClass('menu-item-trailing');
-    expect(screen.getByText('Export')).toHaveClass('menu-item-label');
+    expect(trailing.parentElement).toHaveAttribute(
+      'data-slot',
+      'menu-item-trailing',
+    );
+    expect(screen.getByText('Export')).toHaveAttribute(
+      'data-slot',
+      'menu-item-label',
+    );
   });
 
   it('renders tooltip question icon and provides accessible description', () => {
