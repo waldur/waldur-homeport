@@ -20,7 +20,7 @@ export const MatrixMembersList: FC = () => {
   const members = useRoomMembers();
 
   return (
-    <div className="tc-members p-3">
+    <div className="p-3">
       <div className="mb-2">
         {translate('Members')} ({members.length})
       </div>

@@ -170,6 +170,22 @@ describe('FormSteps', () => {
       expect(within(planTab).getByTestId('XCircleIcon')).toBeInTheDocument();
     });
 
+    it('marks the title of a step with errors, which ScrollSpyNav colours', () => {
+      render(
+        <FormSteps
+          steps={baseSteps}
+          disabledSteps={[false, false, false, false]}
+          completedSteps={[true, false, false, false]}
+          errors={{ plan: 'Invalid plan selection' }}
+        />,
+      );
+
+      expect(screen.getByText('Plan')).toHaveAttribute('data-error');
+      expect(screen.getByText('General information')).not.toHaveAttribute(
+        'data-error',
+      );
+    });
+
     it('filters out required errors by default', () => {
       render(
         <FormSteps

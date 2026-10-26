@@ -18,7 +18,7 @@ export const StatisticsCard: React.FC<StatisticsCardProps> = ({
   <Card className="card-bordered mb-5">
     <Card.Body className="flex md:block justify-between items-center">
       {to && (
-        <div className="buttons text-end order-2">
+        <div className="text-end order-2">
           <Link state={to.state} params={to.params} buttonVariant="tertiary">
             {translate('View all')}
           </Link>

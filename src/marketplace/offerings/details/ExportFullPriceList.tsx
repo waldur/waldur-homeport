@@ -79,7 +79,7 @@ export const ExportFullPriceList: FunctionComponent<
   });
 
   return (
-    <div className="exportFullPriceList">
+    <div>
       {loading ? (
         <LoadingSpinnerSimple />
       ) : error ? null : components ? (

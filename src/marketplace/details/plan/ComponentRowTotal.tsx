@@ -30,7 +30,7 @@ export const ComponentRowTotal = (props: {
       : translate('Billed by usage')
     : null;
   return (
-    <tr className="total">
+    <tr>
       {/* `!`: FormTable.scss's unlayered `.form-table th` sets 500, which
           outranks a plain utility; the total row is regular weight. */}
       <th className="col-md title text-base font-normal!">

@@ -37,7 +37,7 @@ export const CommandPopup: FC<CommandPopupProps> = ({
     <div
       ref={listRef}
       id={COMMAND_POPUP_ID}
-      className="tc-mention-popup tc-command-popup"
+      className="tc-mention-popup"
       role="listbox"
       aria-label={translate('Commands')}
     >
@@ -57,7 +57,7 @@ export const CommandPopup: FC<CommandPopupProps> = ({
           }}
           onMouseMove={pointAt(i)}
         >
-          <span className="tc-command-item__syntax">
+          <span>
             <span className="tc-mention-item__name">
               {prefix}
               {command.name}

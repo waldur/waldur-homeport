@@ -157,7 +157,8 @@ InlineFilterButton.displayName = 'InlineFilterButton';
 
 const hasFilterMenu = (key: string) => {
   const item = document.querySelector(
-    '#kt_content_container .table-filters-menu #filter-item-' + key,
+    '#kt_content_container [data-slot="table-filters-menu"] #filter-item-' +
+      key,
   );
   return Boolean(item);
 };
@@ -238,7 +239,7 @@ const TableCell = memo(
       column.className,
       column.inlineFilter && 'has-filter',
       ellipsisEnabled && 'ellipsis',
-      pinned && 'pinned pinned-start',
+      pinned && 'pinned',
       pinned && shadow === 'end' && 'shadow-end',
       pinned && shadow === 'start' && 'shadow-start',
     );

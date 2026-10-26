@@ -26,7 +26,7 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
         </PublicOfferingCardTitle>
         <Row>
           <Col xs={12} lg className="mb-5 mb-lg-0">
-            <div className="map bg-gray-300 dark:bg-gray-dark-600 w-full h-full min-h-[300px]">
+            <div className="bg-gray-300 dark:bg-gray-dark-600 w-full h-full min-h-[300px]">
               {offering.latitude && offering.longitude ? (
                 <LeafletMap
                   latitude={offering.latitude}

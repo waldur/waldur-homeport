@@ -106,7 +106,7 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
 
   if (collapsed) {
     return (
-      <div className="team-chat tc-sidebar tc-sidebar--collapsed">
+      <div className="team-chat">
         {/* The collapse control is hidden in the design, but a persisted
             collapsed state still needs an escape back to the full list. */}
         {onToggleCollapse && (
@@ -144,7 +144,7 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
 
   if (isLoading) {
     return (
-      <div className="team-chat tc-sidebar">
+      <div className="team-chat">
         <div className="tc-placeholder">
           <LoadingSpinner />
         </div>
@@ -157,7 +157,7 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
   const isFiltered = filter !== 'all' || search.trim().length > 0;
 
   return (
-    <div className="team-chat tc-sidebar">
+    <div className="team-chat">
       <div className="tc-sidebar-top">
         <FilterBox
           type="search"

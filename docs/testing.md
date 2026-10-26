@@ -22,7 +22,7 @@ Unit tests are used for testing React components and utilities. They are written
 - **Utilities**:
   - [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/)
   - [@testing-library/user-event](https://testing-library.com/docs/user-event/intro/)
-- **Goal**: Verify behavior, not implementation. Use semantic queries like `screen.getByRole` or `screen.getByLabelText` over test IDs or DOM-based queries (`querySelector`) whenever possible.
+- **Goal**: Verify behavior, not implementation. Use semantic queries like `screen.getByRole` or `screen.getByLabelText` over test IDs or DOM-based queries (`querySelector`) whenever possible. When an element has no role or name to find it by, see [class-names-and-data-attributes.md](class-names-and-data-attributes.md) for `data-testid` versus `data-slot`; never select by a class.
 - **Accessibility**: Integrate automated accessibility checks using `axe-core` within RTL tests where appropriate.
 - **Isolation**: Reset mocks between tests to prevent state leakage.
 

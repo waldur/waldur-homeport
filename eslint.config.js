@@ -154,8 +154,6 @@ const UNKNOWN_CLASS_HOOKS = [
   // react-select's BEM names, kept by waldur-ui's Select (tailwindStyles.ts)
   // for tests/components/select.py and a few stylesheets.
   '^metronic-select(?:-container|__[\\w-]+)$',
-  '^(?:toolbar|extra-toolbar|footer|middle-box|provider-offering)$',
-  '^(?:btn-toggle-filters|filter-field|right-icon|tc-sidebar)$',
 ];
 
 export default tseslint

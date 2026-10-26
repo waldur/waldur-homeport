@@ -188,6 +188,9 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
             {...getRootProps({
               className: 'team-chat h-full flex flex-col position-relative',
             })}
+            // The waldur-integration-testing suite selects the open
+            // conversation by this (docs/e2e-locators.md).
+            data-testid="team-chat-conversation"
           >
             <input {...getInputProps()} />
             {isDragActive && (

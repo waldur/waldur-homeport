@@ -77,7 +77,7 @@ const ResourceQuotaItem = ({ quota }: { quota: Quota }) => {
   const data = useMemo(() => formatQuota(quota), [quota]);
 
   return (
-    <div className="resource-quota-item font-medium flex mb-6">
+    <div className="font-medium flex mb-6">
       <ResourceQuotaChart value={data.usageValue} max={data.limitValue} />
       <div className="ms-3">
         <span className="block">
@@ -126,7 +126,7 @@ export const QuotasTable = ({ resource }: { resource: Resource }) => {
       {translate('You have no quotas yet.')}
     </div>
   ) : (
-    <div className="provider-quotas">
+    <div>
       {quotaCategories.categories.map((group) => (
         <div className="my-6" key={group.key}>
           <h5 className="font-medium mb-6">{group.label}</h5>

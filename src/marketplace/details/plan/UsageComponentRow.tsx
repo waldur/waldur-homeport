@@ -104,7 +104,7 @@ export const UsageComponentRow: FC<UsageComponentRowProps> = (props) => {
                 period: perPeriod,
               })}
             </div>
-            <div className="estimate">
+            <div>
               <BaseButton
                 variant="text-primary"
                 onClick={onClick}

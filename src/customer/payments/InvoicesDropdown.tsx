@@ -29,7 +29,6 @@ export const InvoicesDropdown: FunctionComponent<
   <Menu open={props.open} onOpenChange={props.onToggle}>
     <Menu.TriggerButton
       id="link-invoice-dropdown-btn"
-      className="dropdown-btn"
       disabled={props.disabled}
       variant={props.variant}
       size="lg"

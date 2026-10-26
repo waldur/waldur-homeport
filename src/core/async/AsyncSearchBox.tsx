@@ -121,7 +121,7 @@ export const AsyncSearchBox = <
           align="start"
           sideOffset={2}
           // As wide as the box, but not narrower than a row needs.
-          className="search-results-dropdown z-nav-menu flex flex-col bg-[var(--menu-bg)] w-(--radix-popover-trigger-width) min-w-[280px] animate-[waldur-menu-enter-up_0.3s_ease] data-[side=top]:animate-[waldur-menu-enter-down_0.3s_ease] motion-reduce:animate-none"
+          className="z-nav-menu flex flex-col bg-[var(--menu-bg)] w-(--radix-popover-trigger-width) min-w-[280px] animate-[waldur-menu-enter-up_0.3s_ease] data-[side=top]:animate-[waldur-menu-enter-down_0.3s_ease] motion-reduce:animate-none"
         >
           {/* What the list holds instead of rows sits beside it: a
               listbox takes only options. */}

@@ -45,7 +45,7 @@ const SaveFilterDialog = lazyComponent(() =>
 
 // TableBody.tsx's hasFilterMenu() decides whether to show a cell's inline
 // "filter by this value" shortcut by querying the DOM for
-// `#kt_content_container .table-filters-menu #filter-item-{key}` — a
+// `#kt_content_container [data-slot="table-filters-menu"] #filter-item-{key}` — a
 // selector that assumes this Content lives *inside* the page's content
 // wrapper, matching Metronic's own pre-Radix markup (never portaled).
 // Radix Popover.Portal defaults to document.body, which moves this
@@ -244,7 +244,8 @@ const SaveFilterItems = ({ table, formId, apply }) => {
           // `role="presentation"`, not `aria-hidden`: aria-hidden would
           // hide the select inside from screen readers too.
           <div
-            className="filter-field px-[12px] py-[8px]"
+            data-slot="filter-field"
+            className="px-[12px] py-[8px]"
             onClick={(e) => e.stopPropagation()}
             role="presentation"
           >
@@ -435,7 +436,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
                 closed (its default): TableBody.tsx's hasFilterMenu()
                 decides whether to show a cell's inline-filter shortcut by
                 querying the DOM for `#filter-item-{name}` inside
-                `.table-filters-menu`, and would wrongly find nothing
+                `[data-slot="table-filters-menu"]`, and would wrongly find nothing
                 whenever this menu happens to be closed, which is most of
                 the time. The panel hides itself while closed. */}
             <MenuPopover.Content
@@ -450,7 +451,8 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
               // w-[375px]: matches TableFilterItem.tsx's own single-filter
               // flyout (same kind of content — one filter's field), wide
               // enough for an AsyncSelect's search box and option list.
-              className="table-filters-menu font-medium text-sm w-[375px]"
+              data-slot="table-filters-menu"
+              className="font-medium text-sm w-[375px]"
             >
               {props.filters}
             </MenuPopover.Content>
@@ -490,7 +492,8 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
               // above then returns focus to the "+" trigger.
               onKeyDown={(e) => closeFlyoutOnTabOut(e, () => setOpen(false))}
               align="start"
-              className="table-filters-menu font-medium py-1 text-sm w-[250px]"
+              data-slot="table-filters-menu"
+              className="font-medium py-1 text-sm w-[250px]"
             >
               <SaveFilterItems
                 table={props.table}

@@ -37,17 +37,20 @@ describe('Toast', () => {
     expect(screen.getByText('Notification Message')).toBeInTheDocument();
   });
 
-  it('carries a toast-item-{variant} class as a stable E2E hook', () => {
-    // waldur-integration-testing's tests/components/base.py locates toasts
-    // by this class (`.toast-item-{status}`) — it lives in a separate repo
-    // this package can't type-check against, so losing this silently only
-    // shows up as that suite's E2E tests failing to find a toast at all.
+  it('carries data-slot and data-variant as a stable E2E hook', () => {
+    // waldur-integration-testing locates toasts by
+    // `[data-slot="toast"][data-variant="{status}"]` — it lives in a
+    // separate repo this package can't type-check against, so losing this
+    // silently only shows up as that suite's E2E tests failing to find a
+    // toast at all.
     const { container } = renderToast({ variant: 'success' });
 
-    // Asserting a CSS class hook, not user-facing behavior — no semantic
+    // Asserting an attribute hook, not user-facing behavior — no semantic
     // query for this.
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(container.querySelector('.toast-item-success')).not.toBeNull();
+    expect(
+      // eslint-disable-next-line testing-library/no-node-access
+      container.querySelector('[data-slot="toast"][data-variant="success"]'),
+    ).not.toBeNull();
   });
 
   it('renders action buttons and handles clicks', async () => {

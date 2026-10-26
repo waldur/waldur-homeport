@@ -74,8 +74,10 @@ export const SCROLLSPY_NAV_LINK_BASE =
 export const SCROLLSPY_NAV_LINK_ACTIVE =
   'border-l-brand text-brand font-semibold active';
 
+// An item's title marks itself `data-error` while its section is invalid,
+// which turns it the warning colour (FormSteps does this per wizard step).
 export const SCROLLSPY_NAV_LINK_INACTIVE =
-  'border-l-transparent text-quaternary hover:text-brand hover:border-l-transparent [&_.has-error]:text-warning';
+  'border-l-transparent text-quaternary hover:text-brand hover:border-l-transparent [&_[data-error]]:text-warning';
 
 /**
  * ScrollSpyNav renders an accessible, responsive navigation menu that observes
@@ -169,7 +171,7 @@ export const ScrollSpyNav = forwardRef<HTMLElement, ScrollSpyNavProps>(
       <nav
         ref={ref}
         aria-label={ariaLabel || translate('Page sections')}
-        className={cn('scrollspy-nav', className)}
+        className={className}
         {...rest}
       >
         <ul className="flex flex-col gap-4 m-0 p-0 list-none">

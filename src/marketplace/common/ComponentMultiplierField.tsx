@@ -121,7 +121,7 @@ export const ComponentMultiplierField = ({
   };
 
   return (
-    <div className="component-multiplier-field">
+    <div>
       {tooltip && (
         <FormText as="div" variant="muted" className="mb-3">
           {tooltip}

@@ -126,22 +126,17 @@ const TextBody: FC<{
 
   if (!segments) {
     return (
-      <div className="tc-msg-text">
+      <div>
         <Markdown options={MARKDOWN_BLOCK_OPTIONS}>{body}</Markdown>
       </div>
     );
   }
 
   return (
-    <div className="tc-msg-text">
+    <div>
       {segments.map((segment, i) =>
         segment.type === 'mention' ? (
-          <span
-            key={i}
-            className={classNames('tc-mention-tag', {
-              'is-self': segment.match.isSelf,
-            })}
-          >
+          <span key={i} className="tc-mention-tag">
             @{segment.match.name}
           </span>
         ) : (

@@ -153,11 +153,10 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
       {hasFilters && (
         <div
           ref={slotRef.filters}
-          // The filter bar under the page tabs. `extra-toolbar`: the legacy
-          // hook the waldur-integration-testing suite selects it by, unstyled
-          // (docs/e2e-locators.md).
+          // The filter bar under the page tabs; the waldur-integration-testing
+          // suite selects it by its test id (docs/e2e-locators.md).
           data-testid="filter-bar"
-          className="extra-toolbar h-[44px] border-b-[1px] border-b-secondary *:h-full *:items-center *:content-center"
+          className="h-[44px] border-b-[1px] border-b-secondary *:h-full *:items-center *:content-center"
         />
       )}
     </div>

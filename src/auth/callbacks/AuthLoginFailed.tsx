@@ -20,8 +20,8 @@ export const AuthLoginFailed: FunctionComponent = () => {
   );
 
   return (
-    <div className="middle-box text-center">
-      <h3 className="app-title centered">{translate('Login failed')}</h3>
+    <div className="text-center">
+      <h3>{translate('Login failed')}</h3>
       {safeMessage && (
         <p
           className="mt-3"

@@ -188,7 +188,6 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
               iconNode={<FunnelSimpleIcon weight="bold" />}
               tooltip={translate('Toggle filters')}
               variant="tertiary"
-              className="btn-toggle-filters"
               onClick={setFilterOpen}
               size="lg"
             />

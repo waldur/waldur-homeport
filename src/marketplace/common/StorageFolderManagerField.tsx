@@ -218,7 +218,7 @@ export const StorageFolderManagerField = ({
   );
 
   return (
-    <div className="storage-folder-manager">
+    <div>
       {field.help_text && (
         <FormText as="div" variant="muted" className="mb-3">
           {field.help_text}

@@ -79,7 +79,7 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
   const hasError = meta?.touched && meta?.error;
 
   return (
-    <div className="role-mapping-field">
+    <div>
       <div className="mb-3">
         {hasMappings ? (
           <>

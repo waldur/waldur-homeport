@@ -208,7 +208,7 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
     useSimulation({ params, calculate, data });
 
   return (
-    <div className="what-if-simulator">
+    <div>
       {/* Data source indicator */}
       <div className="flex justify-between items-center mb-4">
         <h6 className="mb-0">

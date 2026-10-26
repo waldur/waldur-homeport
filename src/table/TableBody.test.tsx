@@ -179,7 +179,7 @@ describe('TableBody', () => {
 /**
  * Regression coverage for a live bug: TableBody.tsx's InlineFilterButton
  * only renders for a cell when hasFilterMenu() finds
- * `#kt_content_container .table-filters-menu #filter-item-{key}` in the
+ * `#kt_content_container [data-slot="table-filters-menu"] #filter-item-{key}` in the
  * DOM — a selector written for Metronic's own markup, never portaled.
  * TableFiltersMenu.tsx's Radix Popover.Portal defaulted to document.body,
  * which moves that whole subtree (and every `#filter-item-*` row in it)

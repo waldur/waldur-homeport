@@ -99,11 +99,12 @@ export const FeaturedIcon = forwardRef<HTMLDivElement, FeaturedIconProps>(
     return (
       <div
         ref={ref}
+        data-slot="featured-icon"
         data-variant={variant}
         data-tone={tone}
         className={cn(
           // Base outer styles
-          'featured-icon inline-flex shrink-0 items-center justify-center rounded-full border-2 transition-colors',
+          'inline-flex shrink-0 items-center justify-center rounded-full border-2 transition-colors',
           // Foreground color establishes `currentColor` for borders and inner SVG!
           fg,
           // Tone-based outer styling
@@ -116,10 +117,11 @@ export const FeaturedIcon = forwardRef<HTMLDivElement, FeaturedIconProps>(
         {...props}
       >
         <div
+          data-slot="featured-icon-inner"
           data-testid="featured-icon-inner"
           className={cn(
             // Base inner styles
-            'featured-icon-inner inline-flex items-center justify-center rounded-full border-2',
+            'inline-flex items-center justify-center rounded-full border-2',
             // Tone-based inner styling
             isSolid ? 'border-transparent' : 'border-current/30',
             // Sizes the SVG node provided by the caller unconditionally via static Tailwind classes

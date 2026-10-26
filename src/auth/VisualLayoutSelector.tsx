@@ -33,7 +33,7 @@ export const VisualLayoutSelector: React.FC<VisualLayoutSelectorProps> = ({
   return (
     <div className="layout-selector-root">
       {Object.entries(groupedOptions).map(([category, options]) => (
-        <div key={category} className="layout-group">
+        <div key={category}>
           <h6 className="group-title">{category}</h6>
           <div className="layout-grid">
             {options.map((option) => (

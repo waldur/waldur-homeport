@@ -72,7 +72,7 @@ export const SidebarContent = forwardRef<HTMLDivElement, SidebarContentProps>(
         ref={ref}
         type={type}
         className={cn(
-          'aside-scroll-area relative min-h-0 flex-1 overflow-hidden',
+          'relative min-h-0 flex-1 overflow-hidden',
           'group-data-[collapsible=icon]/panel:overflow-hidden',
           className,
         )}
@@ -93,14 +93,14 @@ export const SidebarContent = forwardRef<HTMLDivElement, SidebarContentProps>(
           orientation="vertical"
           data-testid="aside-scroll-scrollbar"
           className={cn(
-            'aside-scroll-scrollbar z-10 flex w-2 touch-none select-none p-0.5 transition-opacity duration-150',
+            'z-10 flex w-2 touch-none select-none p-0.5 transition-opacity duration-150',
             'data-[state=hidden]:opacity-0 data-[state=visible]:opacity-100',
             'group-data-[collapsible=icon]/panel:hidden',
           )}
         >
           <ScrollAreaPrimitive.Thumb
             data-testid="aside-scroll-thumb"
-            className="aside-scroll-thumb relative flex-1 rounded-full bg-[var(--nav-scrollbar-color,var(--color-gray-500))] transition-colors duration-150 hover:bg-[var(--nav-scrollbar-hover-color,var(--color-gray-400))]"
+            className="relative flex-1 rounded-full bg-[var(--nav-scrollbar-color,var(--color-gray-500))] transition-colors duration-150 hover:bg-[var(--nav-scrollbar-hover-color,var(--color-gray-400))]"
           />
         </ScrollAreaPrimitive.Scrollbar>
         <ScrollAreaPrimitive.Corner />

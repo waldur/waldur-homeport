@@ -29,9 +29,9 @@ export const InvitationApprove: FunctionComponent = () => {
   });
 
   return (
-    <div className="middle-box text-center">
+    <div className="text-center">
       <LoadingSpinner />
-      <h3 className="app-title centered">{translate('Invitation approval')}</h3>
+      <h3>{translate('Invitation approval')}</h3>
     </div>
   );
 };

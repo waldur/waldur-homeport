@@ -332,7 +332,6 @@ export const TableColumnButton: FC<TableProps> = ({
         side="bottom"
         align="end"
         sideOffset={2}
-        className="table-columns-popover"
         aria-label={translate('Visible columns')}
       >
         <ColumnsPopover

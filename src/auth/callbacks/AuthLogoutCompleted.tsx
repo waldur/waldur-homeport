@@ -10,7 +10,7 @@ export const AuthLogoutCompleted: FunctionComponent = () => {
     explicitLogout();
   }, []);
   return (
-    <div className="middle-box text-center">
+    <div className="text-center">
       <LoadingSpinner />
       <h3>
         {translate(

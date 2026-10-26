@@ -255,7 +255,7 @@ const SearchableListQuestion: FC<{
   };
 
   return (
-    <div className="aui-ask-user-list">
+    <div>
       <Select
         isMulti={isMulti}
         isClearable
@@ -420,7 +420,7 @@ export const AskUserFormBody: FC<
                 )}
                 <label className="aui-ask-user-q-text">{q.question}</label>
               </div>
-              <div className="aui-ask-user-q-body">
+              <div>
                 {mode === 'freeform' ? (
                   <FreeformQuestion
                     answer={a as FreeformAnswer}

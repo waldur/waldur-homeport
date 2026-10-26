@@ -340,7 +340,6 @@ describe('ScrollSpy Suite', () => {
 
       const nav = screen.getByRole('navigation', { name: 'Page sections' });
       expect(nav).toBeInTheDocument();
-      expect(nav).toHaveClass('scrollspy-nav');
 
       const links = screen.getAllByRole('link');
       expect(links).toHaveLength(3);

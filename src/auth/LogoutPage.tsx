@@ -51,7 +51,7 @@ export const LogoutPage: FunctionComponent = () => {
     );
   }, []);
   return (
-    <div className="middle-box text-center">
+    <div className="text-center">
       <LoadingSpinner />
       <h3>{translate('User is being logged out.')}</h3>
     </div>

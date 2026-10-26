@@ -18,12 +18,19 @@ export const DropdownLink = forwardRef<
 >(({ state, params, icon, children, ...rest }, ref) => {
   // This component ensures that dropdown is hidden when state transition is triggered
   const router = useRouter();
+  // Menu.Item renders no icon/label slots under asChild, so they are written
+  // out here, marked as MenuItem marks its own.
   const content = icon ? (
     <>
-      <span className="menu-item-icon inline-flex shrink-0 items-center justify-center size-[20px] me-[12px] [&>svg]:size-[20px] leading-none">
+      <span
+        data-slot="menu-item-icon"
+        className="inline-flex shrink-0 items-center justify-center size-[20px] me-[12px] [&>svg]:size-[20px] leading-none"
+      >
         {icon}
       </span>
-      <span className="menu-item-label flex-1 min-w-0">{children}</span>
+      <span data-slot="menu-item-label" className="flex-1 min-w-0">
+        {children}
+      </span>
     </>
   ) : (
     children

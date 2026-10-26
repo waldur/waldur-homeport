@@ -23,10 +23,12 @@ export const Tag = forwardRef<HTMLSpanElement, PropsWithChildren<TagProps>>(
       ref={ref}
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
+      data-slot="tag"
+      data-size={size}
       className={cn(
-        'tag inline-flex items-center gap-1 rounded-md border-[1px] border-primary bg-primary text-secondary px-2',
-        size === 'sm' && 'tag-sm py-[1px] text-xs leading-[18px]',
-        size === 'lg' && 'tag-lg py-[3px] text-sm leading-5',
+        'inline-flex items-center gap-1 rounded-md border-[1px] border-primary bg-primary text-secondary px-2',
+        size === 'sm' && 'py-[1px] text-xs leading-[18px]',
+        size === 'lg' && 'py-[3px] text-sm leading-5',
         !size && 'py-[1px] text-sm leading-5',
         onClick && 'cursor-pointer select-none',
         className,

@@ -76,7 +76,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
 
   return (
     <div
-      className={classNames('image-input image-input-outline', {
+      className={classNames('image-input', {
         'image-input-empty': !input.value,
         'image-input-changed': isChanged,
       })}

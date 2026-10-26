@@ -13,7 +13,7 @@ interface PublicOfferingAttributesSectionProps {
 export const PublicOfferingAttributesSection: FunctionComponent<
   PublicOfferingAttributesSectionProps
 > = ({ offering }) => (
-  <div className="bordered publicOfferingAttributesSection mb-2">
+  <div className="publicOfferingAttributesSection mb-2">
     {offering.datacite_doi && (
       <div>
         <b>{translate('Datacite DOI')}:</b>

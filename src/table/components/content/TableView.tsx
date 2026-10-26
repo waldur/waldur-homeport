@@ -37,7 +37,7 @@ export function TableView() {
   return (
     <table
       className={classNames(
-        'table align-middle table-row-bordered text-sm gy-0 gx-8px no-footer',
+        'table align-middle table-row-bordered text-sm gy-0 gx-8px',
         {
           'table-expandable': Boolean(slots.expandableRow),
           'table-hover': config.hoverable,

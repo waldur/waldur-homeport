@@ -164,20 +164,24 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
       hasSlots && !props.asChild ? (
         <>
           {icon && (
-            <span className="menu-item-icon inline-flex shrink-0 items-center justify-center size-[20px] me-[12px] [&>svg]:size-[20px] leading-none">
+            <span
+              data-slot="menu-item-icon"
+              className="inline-flex shrink-0 items-center justify-center size-[20px] me-[12px] [&>svg]:size-[20px] leading-none"
+            >
               {icon}
             </span>
           )}
           <span
-            className={cn(
-              'menu-item-label flex-1 min-w-0',
-              props.disabled && 'opacity-50',
-            )}
+            data-slot="menu-item-label"
+            className={cn('flex-1 min-w-0', props.disabled && 'opacity-50')}
           >
             {children}
           </span>
           {effectiveTrailing && (
-            <span className="menu-item-trailing ms-auto ps-3 inline-flex shrink-0 items-center pointer-events-auto">
+            <span
+              data-slot="menu-item-trailing"
+              className="ms-auto ps-3 inline-flex shrink-0 items-center pointer-events-auto"
+            >
               {effectiveTrailing}
             </span>
           )}

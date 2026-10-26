@@ -25,7 +25,7 @@ export const DashboardCard: FC<DashboardCardProps> = ({
   return (
     <Card
       className={`card-bordered ${
-        isClickable ? 'card-hover cursor-pointer' : 'opacity-50'
+        isClickable ? 'hover:border-brand cursor-pointer' : 'opacity-50'
       }`}
       onClick={isClickable ? onClick : undefined}
       style={{

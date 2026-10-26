@@ -23,7 +23,7 @@ export const MiddleTruncate: FunctionComponent<MiddleTruncateProps> = ({
   className,
 }) => {
   const classes = cn(
-    'middle-truncate inline-flex items-baseline min-w-0 max-w-full align-bottom',
+    'inline-flex items-baseline min-w-0 max-w-full align-bottom',
     className,
   );
 
@@ -33,7 +33,7 @@ export const MiddleTruncate: FunctionComponent<MiddleTruncateProps> = ({
       <span
         className={cn(
           classes,
-          'middle-truncate--simple overflow-hidden text-ellipsis whitespace-nowrap',
+          'overflow-hidden text-ellipsis whitespace-nowrap',
         )}
         title={text}
         data-testid="middle-truncate-whole"
@@ -65,14 +65,14 @@ export const MiddleTruncate: FunctionComponent<MiddleTruncateProps> = ({
           fragments from assistive technology so the name is announced once. */}
       <span className="sr-only">{text}</span>
       <span
-        className="middle-truncate-head overflow-hidden text-ellipsis whitespace-nowrap min-w-0"
+        className="overflow-hidden text-ellipsis whitespace-nowrap min-w-0"
         aria-hidden="true"
         data-testid="middle-truncate-head"
       >
         {head}
       </span>
       <span
-        className="middle-truncate-tail whitespace-nowrap shrink-0"
+        className="whitespace-nowrap shrink-0"
         aria-hidden="true"
         data-testid="middle-truncate-tail"
       >

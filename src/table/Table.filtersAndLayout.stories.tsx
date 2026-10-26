@@ -114,7 +114,7 @@ export const MobileViewport: Story = {
  * — hovering the "Name" cell reveals a funnel icon; clicking it adds a
  * "name" filter using that row's own value, without opening the filter
  * menu. `TableBody.tsx`'s `hasFilterMenu()` gates the icon on a real DOM
- * query, `#kt_content_container .table-filters-menu #filter-item-{key}` —
+ * query, `#kt_content_container [data-slot="table-filters-menu"] #filter-item-{key}` —
  * a hardcoded selector (Metronic's own pre-Radix markup assumption, never
  * updated), not a React prop check. Real app pages always have
  * `#kt_content_container` as their content wrapper; Storybook doesn't, so

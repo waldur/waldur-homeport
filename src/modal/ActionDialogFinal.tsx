@@ -35,11 +35,7 @@ export const ActionDialogFinal: React.FC<
         />
       }
     >
-      {props.loading ? (
-        <LoadingSpinner />
-      ) : (
-        <div className="col-l">{props.children}</div>
-      )}
+      {props.loading ? <LoadingSpinner /> : <div>{props.children}</div>}
 
       <FieldError error={props.error} />
     </ModalDialog>

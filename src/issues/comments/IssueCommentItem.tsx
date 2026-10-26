@@ -83,7 +83,7 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
   };
 
   return (
-    <TimelineItem className="issue-comment">
+    <TimelineItem>
       <TimelineConnector />
       <CommentAvatar comment={comment} />
       <TimelineContent className="pb-6">

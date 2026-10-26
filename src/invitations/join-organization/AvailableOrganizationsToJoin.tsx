@@ -106,7 +106,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
             standalone
             standaloneActionsInTable
             tableActions={
-              <div className="anonymous-join-organization-action flex items-center w-full">
+              <div className="flex items-center w-full">
                 {values?.invitation?.uuid ? (
                   <>
                     <BaseButton

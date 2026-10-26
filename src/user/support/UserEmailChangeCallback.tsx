@@ -53,11 +53,9 @@ export const UserEmailChangeCallback: FunctionComponent = () => {
   }, []);
 
   return (
-    <div className="middle-box text-center">
+    <div className="text-center">
       <LoadingSpinner />
-      <h3 className="app-title centered">
-        {translate('Verifying email change')}
-      </h3>
+      <h3>{translate('Verifying email change')}</h3>
     </div>
   );
 };

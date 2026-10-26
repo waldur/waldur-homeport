@@ -12,8 +12,8 @@ export const AuthLogoutFailed: FunctionComponent = () => {
   const message = qs?.message;
 
   return (
-    <div className="middle-box text-center">
-      <h3 className="app-title centered">{translate('Logout failed')}</h3>
+    <div className="text-center">
+      <h3>{translate('Logout failed')}</h3>
       {typeof message === 'string' && <p className="mt-3">{message}</p>}
       <p className="mt-3">
         <button

@@ -93,10 +93,10 @@ export const Toolbar: FunctionComponent<OwnProps> = ({ actionsRef }) => {
 
   return (
     <div
-      // `toolbar`: the legacy hook the waldur-integration-testing suite
-      // selects the page tabs by, unstyled (docs/e2e-locators.md).
+      // The waldur-integration-testing suite selects the page tabs by this
+      // (docs/e2e-locators.md).
       data-testid="page-toolbar"
-      className="toolbar flex items-center h-[55px] lg:h-[60px] bg-primary border-y-[1px] border-y-secondary"
+      className="flex items-center h-[55px] lg:h-[60px] bg-primary border-y-[1px] border-y-secondary"
     >
       <div
         className={classNames(

@@ -58,7 +58,6 @@ export const PublicOfferingDetails: FunctionComponent<
   return tabSpec ? (
     <div
       className={classNames(
-        'publicOfferingDetails',
         offering.state === 'Unavailable' && 'disabled-view',
       )}
     >

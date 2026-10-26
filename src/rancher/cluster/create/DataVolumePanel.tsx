@@ -21,10 +21,13 @@ interface OwnProps {
 export const DataVolumePanel: FunctionComponent<OwnProps> = (props) => (
   <Card className="card-bordered">
     <Card.Header>
-      <RemoveButton onClick={() => props.onRemove(props.volumeIndex)} />
       <h4>
         {translate('Data volume #{index}', { index: props.volumeIndex + 1 })}
       </h4>
+      <RemoveButton
+        onClick={() => props.onRemove(props.volumeIndex)}
+        className="self-center"
+      />
     </Card.Header>
     <Card.Body>
       {isFeatureVisible(RancherFeatures.volume_mount_point) && (

@@ -200,7 +200,7 @@ export const SwitchClassNameIdAndTestId: Story = {
     <Harness>
       <DirectSwitch
         label="Notify me"
-        className="story-row"
+        className="mt-2"
         id="notify-switch"
         data-testid="notify"
       />
@@ -212,7 +212,7 @@ export const SwitchClassNameIdAndTestId: Story = {
     // The id and test id reach the input; the class lands on the outer row.
     await expect(control).toHaveAttribute('id', 'notify-switch');
     await expect(canvas.getByTestId('notify')).toBe(control);
-    await expect(rowOf(control)).toHaveClass('story-row');
+    await expect(rowOf(control)).toHaveClass('mt-2');
     await expect(canvas.getByText('Notify me')).toHaveAttribute(
       'for',
       'notify-switch',

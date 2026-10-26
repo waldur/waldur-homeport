@@ -41,10 +41,15 @@ export const InvoicePayButton: FC<InvoicePayButtonProps> = ({
     // OpenPublicOffering.tsx / MatrixChatHeader.tsx).
     <Menu.Item asChild>
       <a href={row.payment_url} target="_self" rel="noopener noreferrer">
-        <span className="menu-item-icon inline-flex shrink-0 items-center justify-center size-[20px] me-[12px] [&>svg]:size-[20px] leading-none">
+        {/* Menu.Item renders no icon/label slots under asChild, so they
+            are written out here, marked as MenuItem marks its own. */}
+        <span
+          data-slot="menu-item-icon"
+          className="inline-flex shrink-0 items-center justify-center size-[20px] me-[12px] [&>svg]:size-[20px] leading-none"
+        >
           <MoneyIcon weight="bold" />
         </span>
-        <span className="menu-item-label flex-1 min-w-0">
+        <span data-slot="menu-item-label" className="flex-1 min-w-0">
           {translate('Pay')}
         </span>
       </a>

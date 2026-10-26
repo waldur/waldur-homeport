@@ -1,6 +1,8 @@
 import { RuleTester } from 'eslint';
 import { parser as tsParser } from 'typescript-eslint';
-import { describe } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
+import { variantClassesIn } from '../lib/class-oracle.js';
 
 import rule from './no-unknown-class.js';
 
@@ -129,5 +131,27 @@ describe('no-unknown-class', () => {
         errors: [unknown('flx-col', ' Did you mean "flex-col"?')],
       },
     ],
+  });
+});
+
+describe('variantClassesIn', () => {
+  it('collects the classes an arbitrary variant styles', () => {
+    expect([
+      ...variantClassesIn(
+        'className="[&_.has-error]:text-warning has-[.picked]:p-2 group-[.open]:flex [&_[data-x]]:pt-0"',
+      ),
+    ]).toEqual(['has-error', 'picked', 'open']);
+  });
+
+  it('reads underscores as spaces, as Tailwind does', () => {
+    expect([...variantClassesIn('"[&.rdp-range_end]:rounded"')]).toEqual([
+      'rdp-range',
+    ]);
+  });
+
+  it('skips values and computed keys', () => {
+    expect([
+      ...variantClassesIn('const a = { [Foo.bar]: 1 }; "max-[0.5rem]:hidden"'),
+    ]).toEqual([]);
   });
 });

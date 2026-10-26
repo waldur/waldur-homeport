@@ -260,7 +260,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
         )}
       </div>
 
-      <div className="tc-header-kebab">{kebab}</div>
+      <div>{kebab}</div>
     </div>
   );
 };

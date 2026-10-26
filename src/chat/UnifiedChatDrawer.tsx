@@ -34,7 +34,7 @@ export const UnifiedChatDrawer: FC<UnifiedChatDrawerProps> = (props) => {
   const user = useUser();
   if (isAnonymousVisitor(user)) {
     return (
-      <div className="unified-chat-drawer h-full flex flex-col animate-[waldur-backdrop-enter_0.2s_ease]">
+      <div className="h-full flex flex-col animate-[waldur-backdrop-enter_0.2s_ease]">
         <AnonymousChatPanel close={props.close} />
       </div>
     );
@@ -60,7 +60,7 @@ const AuthenticatedChatDrawer: FC<UnifiedChatDrawerProps> = ({ close }) => {
   }, [currentThreadId, clearNotification]);
 
   return (
-    <div className="unified-chat-drawer h-full flex flex-col animate-[waldur-backdrop-enter_0.2s_ease]">
+    <div className="h-full flex flex-col animate-[waldur-backdrop-enter_0.2s_ease]">
       <div className="grow overflow-hidden flex">
         <div className="h-full w-full flex flex-col">
           <LLMChatDrawer close={close} />

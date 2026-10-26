@@ -61,8 +61,6 @@ export const OfferingDetailsPage: React.FC = () => {
     if (project?.end_date) {
       const endDate = parseDate(project.end_date);
       const now = parseDate(null);
-      const options =
-        !loading && !error ? { className: 'deploy-page-banner' } : undefined;
       if (endDate.hasSame(now, 'day') || endDate < now) {
         return {
           permission: 'restricted',
@@ -73,7 +71,6 @@ export const OfferingDetailsPage: React.FC = () => {
             message: translate(
               'New resources cannot be scheduled for creation.',
             ),
-            options,
           },
         };
       } else {
@@ -86,13 +83,12 @@ export const OfferingDetailsPage: React.FC = () => {
             message: translate(
               'All resources will be scheduled for termination once the date is reached.',
             ),
-            options,
           },
         };
       }
     }
     return null;
-  }, [project, loading, error]);
+  }, [project]);
 
   if (loading) {
     return <LoadingSpinner />;

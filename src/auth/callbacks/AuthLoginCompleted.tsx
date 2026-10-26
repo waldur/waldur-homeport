@@ -26,7 +26,7 @@ export const AuthLoginCompleted: FunctionComponent = () => {
   }, [params]);
 
   return (
-    <div className="middle-box text-center">
+    <div className="text-center">
       <LoadingSpinner />
       <h3>{translate('Logging user in')}</h3>
     </div>

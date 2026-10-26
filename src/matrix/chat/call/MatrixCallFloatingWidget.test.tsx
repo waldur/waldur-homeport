@@ -93,13 +93,8 @@ describe('MatrixCallFloatingWidget — drag', () => {
       'waldur_matrix_call_widget_pos',
       JSON.stringify({ x: 100, y: 80 }),
     );
-    const { container } = render(<MatrixCallFloatingWidget roomName="X" />, {
-      wrapper,
-    });
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const widget = container.querySelector(
-      '.matrix-call-widget',
-    ) as HTMLElement;
+    render(<MatrixCallFloatingWidget roomName="X" />, { wrapper });
+    const widget = screen.getByTestId('matrix-call-widget');
     expect(widget.style.right).toBe('100px');
     expect(widget.style.bottom).toBe('80px');
   });

@@ -83,16 +83,12 @@ export const Toast = ({
       onOpenChange={onOpenChange}
       duration={duration}
       data-waldur-animated=""
+      // The waldur-integration-testing suite finds toasts by these
+      // (homeport_hooks.toast()). It lives in a separate repo this package
+      // can't type-check against, so renaming them breaks it silently.
+      data-slot="toast"
+      data-variant={variant}
       className={cn(
-        // toast-item/toast-item-{variant}: not a styling hook (every visual
-        // rule below is a Tailwind utility) — a stable CSS marker the
-        // waldur-integration-testing E2E suite locates toasts by
-        // (tests/components/base.py's _notifications(), which already
-        // matches both this and the older reapop markup for exactly this
-        // migration). Dropping it here breaks that suite silently, since it
-        // lives in a separate repo this package can't type-check against.
-        'toast-item',
-        `toast-item-${variant}`,
         'data-[state=open]:animate-[waldur-toast-enter_.2s_ease-out]',
         'data-[state=closed]:animate-[waldur-toast-exit_.15s_ease-in]',
         // Live-follows the drag. A completed swipe (data-swipe=end) stops

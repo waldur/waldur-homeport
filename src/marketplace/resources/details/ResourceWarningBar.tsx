@@ -33,7 +33,7 @@ export const ResourceWarningBar: React.FC<ResourceWarningBarProps> = ({
                 size="sm"
               />
             )}
-            <div className="ms-2 resource-warning-bar__content">{children}</div>
+            <div className="ms-2">{children}</div>
           </div>
           {actions && <div className="ms-3 flex items-center">{actions}</div>}
         </div>
