@@ -115,6 +115,7 @@ interface CoreConfiguration {
   AFFILIATES_ENABLED?: boolean;
   VAT_TAXATION_ENABLED?: boolean;
   PAT_ENABLED?: boolean;
+  API_TOKEN_MAX_LIFETIME_MINUTES?: number;
   KEYCLOAK_ICON: string;
   RANCHER_USERNAME_INPUT_LABEL: string;
   DISCLAIMER_AREA_TEXT: string;

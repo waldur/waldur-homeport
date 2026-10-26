@@ -1241,6 +1241,12 @@ export const SettingsDescription = [
         default: '',
         type: 'secret_field',
       },
+      {
+        key: 'API_TOKEN_MAX_LIFETIME_MINUTES',
+        description: translate('Maximum API token lifetime, in minutes, that a non-staff user can choose. 0 means no limit, which also allows tokens that never expire. Staff can choose any lifetime. A lifetime chosen before the limit was set is kept until the user changes it.'),
+        default: 0,
+        type: 'integer',
+      },
     ],
   },
   {
