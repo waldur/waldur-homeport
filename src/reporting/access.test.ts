@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { ENV } from '@/core/config';
 
-import { getReportingOrganizations } from './access';
+import { categoryPermissions, getReportingOrganizations } from './access';
 import { states } from './routes';
 
 const stateByName = Object.fromEntries(
@@ -46,6 +46,7 @@ const withRole = (role_name: string) => ({
 const reader = withRole('CUSTOMER.READER');
 const manager = withRole('CUSTOMER.MANAGER');
 const staff = { is_staff: true, permissions: [] };
+const support = { is_staff: false, is_support: true, permissions: [] };
 const member = {
   is_staff: false,
   is_support: false,
@@ -95,6 +96,36 @@ afterEach(() => {
 describe('reporting access', () => {
   it('lets staff reach every reporting state', () => {
     reportStates.forEach((name) => expect(canEnter(name, staff)).toBe(true));
+  });
+
+  // Their endpoints answer support users with 403.
+  it('keeps support out of the reports built on staff-only endpoints only', () => {
+    const unreachable = reportStates.filter((name) => !canEnter(name, support));
+    expect(unreachable.sort()).toEqual(
+      [
+        'reporting-call-performance',
+        'reporting-call-performance-analytics',
+        'reporting-projects-by-affiliated-organization',
+        'reporting-proposals',
+        'reporting-proposals-list',
+        'reporting-resource-demand',
+        'reporting-resource-demand-analytics',
+        'reporting-review-progress',
+        'reporting-review-progress-analytics',
+      ].sort(),
+    );
+  });
+
+  it('opens a category to a user who may open any one of its reports', () => {
+    const allows = (keys: string[], user) =>
+      categoryPermissions(keys).every((permission) =>
+        permission({ workspace: { user } } as any),
+      );
+    expect(allows(['call-performance', 'review-progress'], support)).toBe(
+      false,
+    );
+    expect(allows(['call-performance', 'quotas'], support)).toBe(true);
+    expect(allows(['call-performance'], staff)).toBe(true);
   });
 
   it.each([

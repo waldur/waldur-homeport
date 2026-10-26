@@ -33,7 +33,7 @@ export const states: StateDeclaration[] = [
     component: UIView,
     abstract: true,
     url: '',
-    redirectTo: 'support-active-sessions',
+    redirectTo: 'support-users',
     data: {
       breadcrumb: () => translate('User management'),
     },
@@ -290,6 +290,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Active sessions'),
+      permissions: [isStaff],
     },
   },
 
@@ -380,6 +381,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Notifications'),
+      permissions: [isStaff],
     },
   },
 

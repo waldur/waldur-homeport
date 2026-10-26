@@ -27,7 +27,7 @@ import {
   isStaffOrSupport,
 } from '@/workspace/selectors';
 
-import { CUSTOMER_SCOPED_REPORTS } from './access';
+import { CUSTOMER_SCOPED_REPORTS, STAFF_ONLY_REPORTS } from './access';
 import { AnalyticsMode } from './analytics';
 import { isReportingScreenEnabled } from './screens';
 
@@ -462,12 +462,13 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
 };
 
 /**
- * Reports of a category that this deployment actually shows. Shared by the
+ * Reports of a category that this deployment shows to this user. Shared by the
  * category page and by the category tabs, so a tab can never lead to a page
  * that renders nothing.
  */
 export const getVisibleReports = (
   category: CategoryConfig,
+  isStaff: boolean,
 ): ReportDefinition[] => {
   const showExperimental = isFeatureVisible(
     MarketplaceFeatures.show_experimental_ui_components,
@@ -477,6 +478,7 @@ export const getVisibleReports = (
       (!report.feature || isFeatureVisible(report.feature)) &&
       (!report.attribute || isProfileAttributeEnabled(report.attribute)) &&
       (!report.isExperimental || showExperimental) &&
+      (isStaff || !STAFF_ONLY_REPORTS.includes(report.key)) &&
       !report.isHidden,
   );
 };
@@ -486,7 +488,7 @@ export const getVisibleReports = (
  */
 export const getCustomerScopedReports = (): ReportDefinition[] => {
   const reports = Object.values(getCategoryConfig()).flatMap((category) =>
-    getVisibleReports(category),
+    getVisibleReports(category, false),
   );
   return CUSTOMER_SCOPED_REPORTS.map((key) =>
     reports.find((report) => report.key === key),

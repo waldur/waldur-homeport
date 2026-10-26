@@ -25,6 +25,7 @@ export interface ReportingTab {
  */
 export const getReportingTabs = (workspace): ReportingTab[] => {
   const categories = getCategoryConfig();
+  const staff = Boolean(workspace?.user?.is_staff);
   const tabs: ReportingTab[] = [
     { title: translate('Overview'), state: 'reporting-dashboard' },
   ];
@@ -40,7 +41,7 @@ export const getReportingTabs = (workspace): ReportingTab[] => {
     if (category.permission && !category.permission({ workspace } as any)) {
       return;
     }
-    if (getVisibleReports(category).length === 0) {
+    if (getVisibleReports(category, staff).length === 0) {
       return;
     }
     tabs.push({ title: category.title, state });
