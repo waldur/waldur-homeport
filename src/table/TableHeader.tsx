@@ -385,7 +385,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
         ))}
       </colgroup>
       <thead>
-        <tr className="text-start text-quaternary font-semibold text-xs gs-0 align-middle">
+        <tr className="text-start text-quaternary font-semibold text-xs align-middle">
           {fieldType ? (
             <th
               style={{ width: '10px', paddingLeft: '16px', paddingRight: 0 }}

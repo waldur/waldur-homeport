@@ -8,7 +8,7 @@
  * $dropdown-box-shadow used to be overridden with (_variables.custom.scss, now
  * gone; the same value also served $popover-box-shadow and the $menu map's
  * dropdown shadow), checked against the live app's dropdowns with
- * getComputedStyle. .table-loading-message reads it too.
+ * getComputedStyle.
  *
  * --overlay-shadow is the core $dropdown-box-shadow that override replaced.
  * Toast.tsx was built on it before the override was noticed, and keeps it

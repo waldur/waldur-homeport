@@ -163,7 +163,7 @@ export const PoolSummaryDialog: FC = () => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase">
                   <th>{translate('Status')}</th>
                   <th>{translate('Description')}</th>
                 </tr>
@@ -195,7 +195,7 @@ export const PoolSummaryDialog: FC = () => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase">
                   <th>{translate('Tab')}</th>
                   <th>{translate('Purpose')}</th>
                 </tr>

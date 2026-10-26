@@ -165,7 +165,7 @@ const PreviewCommands: FC<{ config: SlurmPolicyConfig }> = ({ config }) => {
     <div className="table-responsive">
       <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
         <thead>
-          <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
+          <tr className="text-start text-quaternary font-medium text-xs text-uppercase">
             <th>{translate('Type')}</th>
             <th>{translate('Description')}</th>
             <th>{translate('Shell command')}</th>
@@ -321,7 +321,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
             <div className="table-responsive">
               <table className="table align-middle table-row-bordered text-xs gy-3 gx-5">
                 <thead>
-                  <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
+                  <tr className="text-start text-quaternary font-medium text-xs text-uppercase">
                     <th>{translate('Plan')}</th>
                     <th>{translate('Component')}</th>
                     <th>{translate('Type')}</th>
@@ -529,7 +529,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase">
                   <th>{translate('Threshold')}</th>
                   <th>{translate('Condition')}</th>
                   <th>{translate('Action')}</th>
@@ -606,7 +606,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered text-xs gy-3 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase">
                   <th>{translate('Aspect')}</th>
                   <th>{translate('Behavior')}</th>
                 </tr>

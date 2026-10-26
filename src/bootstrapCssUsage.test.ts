@@ -307,14 +307,13 @@ describe('bootstrapCssUsage', () => {
     };
 
     it.each([
-      ['.table.g-5 td', { padding: '1.25rem' }],
+      ['.table.g-1 td', { padding: '0.25rem' }],
       ['.table.gy-0 td', { 'padding-top': '0rem', 'padding-bottom': '0rem' }],
       [
         '.table.gx-8px td',
         { 'padding-left': '0.616rem', 'padding-right': '0.616rem' },
       ],
       ['.table.gx-5 th', { 'padding-left': '1.25rem' }],
-      ['.table.gs-0 td:first-child', { 'padding-left': '0rem' }],
     ])('pads %s', (selector, expected) => {
       expect(declarations(selector)).toMatchObject(expected);
     });
