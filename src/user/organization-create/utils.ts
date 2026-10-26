@@ -179,6 +179,33 @@ export const createRunValidationBody = (
   return body;
 };
 
+// The register's answer verifies the signed-in user only when the identity
+// comes from the account and cannot be edited there: civil_number never can,
+// other fields only when the identity provider manages them. MasterMind sends
+// any other identity to manual review (PERSON_IDENTITY_NOT_VERIFIED).
+export const isIdentityFromAccount = (
+  fieldConfig: PersonIdentifierFieldConfig | null,
+  user: Record<string, any> | null,
+): boolean => {
+  const pif = fieldConfig?.person_identifier_fields;
+  if (!pif || !user) return false;
+  const fields = pif.type === 'object' ? Object.keys(pif.fields) : [pif.field];
+  return fields.every(
+    (field) =>
+      !!user[field] &&
+      (field === 'civil_number' ||
+        (user.identity_provider_fields || []).includes(field)),
+  );
+};
+
+const IDENTITY_REVIEW_ERROR = 'PERSON_IDENTITY_NOT_VERIFIED';
+
+export const isIdentityReview = (
+  validation: OnboardingVerification | null | undefined,
+) =>
+  validation?.status === 'escalated' &&
+  validation.error_message === IDENTITY_REVIEW_ERROR;
+
 export const createVerificationRequestBody = (
   formData: any,
   validationMethod: ValidationMethodEnum | BlankEnum,
@@ -304,7 +331,10 @@ export const handleVerificationStatus = async (
       );
     }
 
-    callbacks.onReview(formData.name || '');
+    // The automatic flow asks for no name: the register supplied it.
+    callbacks.onReview(
+      formData.name || (validation.verified_company_data?.name as string) || '',
+    );
   } else if (validation.status === 'verified') {
     try {
       await onboardingVerificationsCreateCustomer({

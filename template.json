@@ -30167,6 +30167,11 @@
       "feature_area": "mappings"
     }
   },
+  "Manual review required": {
+    "context": {
+      "feature_area": "organization-create"
+    }
+  },
   "Manual verification": {
     "context": {
       "primary_ui_type": "label"
@@ -57463,6 +57468,11 @@
       "feature_area": "broadcasts"
     }
   },
+  "The business register confirms the representative rights of the person you identified. As your login does not confirm that this is you, staff review the application before the organization is created. Continue to submit it for review.": {
+    "context": {
+      "feature_area": "organization-create"
+    }
+  },
   "The call has been created.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -72755,6 +72765,11 @@
       "feature_area": "organization-create"
     }
   },
+  "Your application will be reviewed manually": {
+    "context": {
+      "feature_area": "organization-create"
+    }
+  },
   "Your browser does not support screen sharing.": {
     "context": {
       "action_type": "read"
@@ -72842,6 +72857,11 @@
   "Your honorific title (Mr, Ms, Dr, Prof, etc.)": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "Your identity is not confirmed by your login: it is entered here or can be edited in your profile. The business register is still checked, but staff review your application before the organization is created. To be verified automatically, sign in with a service that confirms your identity, such as a national eID.": {
+    "context": {
+      "feature_area": "organization-create"
     }
   },
   "Your invitation is being processed.": {

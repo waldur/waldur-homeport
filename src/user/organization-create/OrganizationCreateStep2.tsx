@@ -1,4 +1,8 @@
-import { CheckCircleIcon, InfoIcon } from '@phosphor-icons/react';
+import {
+  CheckCircleIcon,
+  ClockCountdownIcon,
+  InfoIcon,
+} from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
@@ -28,7 +32,7 @@ import {
   PersonIdentifierFieldsRenderer,
 } from './PersonIdentifierFieldsRenderer';
 import { OrganizationCreateFormValues } from './types';
-import { QuestionWithMetadata } from './utils';
+import { isIdentityFromAccount, QuestionWithMetadata } from './utils';
 
 interface OrganizationCreateStep2Props {
   getChecklistData?: () => Promise<{
@@ -100,6 +104,13 @@ export const OrganizationCreateStep2: FunctionComponent<
           .map(([, spec]) => spec.label)
       : [];
   const missingProfileLabels = missingNameLabels.join(', ');
+
+  // An identity entered here, or one the user can edit in their profile, does
+  // not prove who is signed in, so the register check goes to manual review.
+  const identityReview =
+    !isManual &&
+    !isIdentityFromAccount(fieldConfig, user) &&
+    missingNameLabels.length === 0;
 
   const getMissingFieldsConfig = (): PersonIdentifierFieldConfig | null =>
     isDnb && pif?.type === 'object'
@@ -191,6 +202,38 @@ export const OrganizationCreateStep2: FunctionComponent<
       </Row>
     );
   };
+
+  // Documents go to the review: they are attached to the justification.
+  const renderDocumentUpload = () => (
+    <div className="mt-8">
+      <FormField>
+        <FormLabel className="mb-2">
+          {translate('Optional information and supporting documents')}
+        </FormLabel>
+        <UploadContainer
+          onDrop={handleFileDrop}
+          message={translate('JPG, PNG, PDF or .asice (max {size})', {
+            size: '2 GB',
+          })}
+          multiple={true}
+          maxSize={2 * 1024 * 1024 * 1024} // 2GB
+          accept={ACCEPTED_FILE_TYPES}
+        />
+        <AttachmentsList
+          uploading={uploadedFiles}
+          className="mt-4"
+          ItemPendingComponent={(itemProps) => (
+            <AttachmentItemPending {...itemProps} onCancel={handleFileCancel} />
+          )}
+        />
+        <p className="mb-0 mt-1 text-quaternary small">
+          {translate(
+            'To speed up the review process, provide as much data as possible',
+          )}
+        </p>
+      </FormField>
+    </div>
+  );
 
   // Reset checklist fetched flag when validation method changes
   useEffect(() => {
@@ -317,6 +360,27 @@ export const OrganizationCreateStep2: FunctionComponent<
                       )}
                     </>
                   )}
+                  {identityReview && (
+                    <Card className="card-bordered mb-4">
+                      <Card.Body className="flex gap-3">
+                        <div className="shrink-0">
+                          <ClockCountdownIcon size={24} weight="duotone" />
+                        </div>
+                        <div className="grow">
+                          <div className="text-primary mb-1">
+                            {translate(
+                              'Your application will be reviewed manually',
+                            )}
+                          </div>
+                          <div className="text-secondary">
+                            {translate(
+                              'Your identity is not confirmed by your login: it is entered here or can be edited in your profile. The business register is still checked, but staff review your application before the organization is created. To be verified automatically, sign in with a service that confirms your identity, such as a national eID.',
+                            )}
+                          </div>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  )}
                   {/* Registration code field for automatic validation */}
                   <div className="mt-6">
                     <StringGroup
@@ -331,6 +395,7 @@ export const OrganizationCreateStep2: FunctionComponent<
                     />
                   </div>
                   {renderChecklistQuestions()}
+                  {identityReview && renderDocumentUpload()}
                 </>
               );
             })()}
@@ -365,38 +430,7 @@ export const OrganizationCreateStep2: FunctionComponent<
 
               {renderChecklistQuestions()}
 
-              {/* Documentation Upload Section */}
-              <div className="mt-8">
-                <FormField>
-                  <FormLabel className="mb-2">
-                    {translate('Optional information and supporting documents')}
-                  </FormLabel>
-                  <UploadContainer
-                    onDrop={handleFileDrop}
-                    message={translate('JPG, PNG, PDF or .asice (max {size})', {
-                      size: '2 GB',
-                    })}
-                    multiple={true}
-                    maxSize={2 * 1024 * 1024 * 1024} // 2GB
-                    accept={ACCEPTED_FILE_TYPES}
-                  />
-                  <AttachmentsList
-                    uploading={uploadedFiles}
-                    className="mt-4"
-                    ItemPendingComponent={(itemProps) => (
-                      <AttachmentItemPending
-                        {...itemProps}
-                        onCancel={handleFileCancel}
-                      />
-                    )}
-                  />
-                  <p className="mb-0 mt-1 text-quaternary small">
-                    {translate(
-                      'To speed up the review process, provide as much data as possible',
-                    )}
-                  </p>
-                </FormField>
-              </div>
+              {renderDocumentUpload()}
             </div>
           )}
         </Card.Body>
