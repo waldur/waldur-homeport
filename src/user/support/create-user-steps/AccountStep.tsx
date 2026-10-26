@@ -15,6 +15,7 @@ import { SecretField } from '@/form/SecretField';
 import { translate } from '@/i18n';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
+import { getProtectedFieldProps } from '../getProtectedFieldProps';
 import { UserFormData, UserFormDialogData } from '../UserFormTypes';
 
 const usernameValidator = (value: string) =>
@@ -39,6 +40,10 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
   const form = useForm<UserFormData>();
   const { values } = useFormState<UserFormData>();
   const { editMode, user } = (props.data || {}) as UserFormDialogData;
+  const emailProps =
+    editMode && user
+      ? getProtectedFieldProps(user, 'email', false, user.email)
+      : undefined;
 
   const handleGeneratePassword = useCallback(() => {
     const password = generatePassword(16);
@@ -77,10 +82,18 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
       />
       <StringGroup
         name="email"
-        validate={composeValidators(required, email)}
+        // The identity provider owns the email, so the API refuses a change.
+        // Don't validate what can't be edited: an empty one would block Next.
+        validate={
+          emailProps?.isProtected
+            ? undefined
+            : composeValidators(required, email)
+        }
         placeholder={translate('e.g. john@example.com')}
         label={translate('Email')}
         required
+        disabled={emailProps?.isProtected}
+        description={emailProps?.tooltip}
       />
       <h6 className="font-medium mb-4 mt-6">{translate('Roles & Status')}</h6>
       <BooleanGroup

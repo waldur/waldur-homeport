@@ -20,6 +20,15 @@ describe('getProtectedFieldProps', () => {
     expect(result.iconNode).toBeDefined();
   });
 
+  // List rows only carry the fields the table asked for.
+  it('treats a user without identity_provider_fields as unprotected', () => {
+    const user = { registration_method: 'default' } as any;
+
+    const result = getProtectedFieldProps(user, 'email', false, 'a@b.c');
+
+    expect(result.isProtected).toBe(false);
+  });
+
   it('uses attribute sources if available', () => {
     const user = {
       identity_provider_fields: ['job_title'],

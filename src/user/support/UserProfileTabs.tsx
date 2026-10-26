@@ -5,6 +5,7 @@ import { Badge, Tooltip } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { composeValidators, email, required } from '@/core/validators';
 import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
@@ -160,6 +161,7 @@ const FieldList = ({
 
 const buildBasicFields = ({
   user,
+  currentUser,
   disabled,
   disabledReason,
   isSelf,
@@ -269,29 +271,46 @@ const buildBasicFields = ({
       label: translate('Email'),
       enabled: true,
       value: user.email,
-      node: (
-        <FormTable.Item
-          label={translate('Email')}
-          value={
-            emailProps.renderValue
-              ? emailProps.renderValue(user.email)
-              : user.email
-          }
-          required={isRequired('email')}
-          description={
-            isSelf
-              ? translate('Provide an email address for notifications')
-              : translate(
-                  "Provide an email address for the user's notifications",
-                )
-          }
-          actions={
-            !emailProps.isProtected ? (
-              <ChangeEmailButton user={user} disabled={disabled} />
-            ) : null
-          }
-        />
-      ),
+      // Staff set another user's email directly. Users change their own
+      // through a link sent to the new address.
+      node:
+        currentUser.is_staff && !isSelf && !emailProps.isProtected ? (
+          <StringEditField
+            name="email"
+            label={translate('Email')}
+            required={isRequired('email')}
+            validate={
+              isRequired('email') ? composeValidators(required, email) : email
+            }
+            disabled={disabled}
+            description={translate(
+              "Provide an email address for the user's notifications",
+            )}
+            {...emailProps}
+          />
+        ) : (
+          <FormTable.Item
+            label={translate('Email')}
+            value={
+              emailProps.renderValue
+                ? emailProps.renderValue(user.email)
+                : user.email
+            }
+            required={isRequired('email')}
+            description={
+              isSelf
+                ? translate('Provide an email address for notifications')
+                : translate(
+                    "Provide an email address for the user's notifications",
+                  )
+            }
+            actions={
+              !emailProps.isProtected ? (
+                <ChangeEmailButton user={user} disabled={disabled} />
+              ) : null
+            }
+          />
+        ),
     },
     {
       name: 'phone_number',

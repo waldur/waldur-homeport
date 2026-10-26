@@ -29,6 +29,101 @@ import { UserFormDialog } from './UserFormDialog';
 
 const handleUnhandledRejection = () => {};
 
+describe('UserFormDialog identity provider fields', () => {
+  const editedUser = (overrides = {}): any => ({
+    uuid: 'edited-user-uuid',
+    username: 'edited.user',
+    email: 'edited@example.com',
+    is_active: true,
+    is_staff: false,
+    is_support: false,
+    can_use_personal_access_tokens: false,
+    has_usable_password: false,
+    identity_provider_fields: [],
+    ...overrides,
+  });
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('lets staff edit an email the identity provider does not manage', () => {
+    renderWithProviders(<UserFormDialog resolve={{ user: editedUser() }} />);
+
+    expect(screen.getByLabelText(/Email/i)).toBeEnabled();
+  });
+
+  // An empty provider-managed email must not block Next: staff cannot fill it.
+  it('shows an email managed by the identity provider read-only', async () => {
+    renderWithProviders(
+      <UserFormDialog
+        resolve={{
+          user: editedUser({
+            email: '',
+            identity_provider_fields: ['email'],
+            identity_provider_label: 'Example IdP',
+          }),
+        }}
+      />,
+    );
+
+    expect(screen.getByLabelText(/Email/i)).toBeDisabled();
+    expect(
+      screen.getByText('Information is coming from Example IdP'),
+    ).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByTestId('wizard-submit-btn')).not.toBeDisabled(),
+    );
+  });
+
+  it('locks the details the identity provider manages', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(
+      <UserFormDialog
+        resolve={{
+          user: editedUser({
+            identity_provider_fields: ['organization'],
+            identity_provider_label: 'Example IdP',
+          }),
+        }}
+      />,
+    );
+
+    await user.click(screen.getByTestId('wizard-submit-btn'));
+    await waitFor(() =>
+      expect(screen.getByLabelText(/Organization name/i)).toBeDisabled(),
+    );
+    expect(screen.getByLabelText(/Job position/i)).toBeEnabled();
+    expect(
+      screen.getByText('Information is coming from Example IdP'),
+    ).toBeInTheDocument();
+  });
+
+  it('locks the details of a user whose registration method is protected', async () => {
+    const core = ENV.plugins.WALDUR_CORE as any;
+    const original = core.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS;
+    core.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS = ['PROTECTED'];
+    try {
+      const user = userEvent.setup();
+      renderWithProviders(
+        <UserFormDialog
+          resolve={{ user: editedUser({ registration_method: 'PROTECTED' }) }}
+        />,
+      );
+
+      expect(screen.getByLabelText(/Email/i)).toBeDisabled();
+      await user.click(screen.getByTestId('wizard-submit-btn'));
+      await waitFor(() =>
+        expect(screen.getByLabelText(/First name/i)).toBeDisabled(),
+      );
+      expect(screen.getByLabelText(/Organization name/i)).toBeDisabled();
+      expect(screen.getByLabelText(/Description/i)).toBeEnabled();
+    } finally {
+      core.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS = original;
+    }
+  });
+});
+
 describe.skip('UserFormDialog', () => {
   const user = userEvent.setup();
   const mockRefetch = vi.fn();
