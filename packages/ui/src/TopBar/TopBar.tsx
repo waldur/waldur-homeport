@@ -2,7 +2,6 @@ import { CaretDownIcon, MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { ComponentProps, forwardRef, ReactNode } from 'react';
 
-import { AvatarFallback, AvatarImage, AvatarRoot } from '../Avatar';
 import { ICON_BUTTON_BASE_CLASSNAME } from '../Button';
 import { cn } from '../cn';
 import { Menu } from '../Menu';
@@ -266,23 +265,4 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 );
 IconButton.displayName = 'IconButton';
 
-export interface AvatarProps {
-  initials: string;
-  imageSrc?: string;
-  className?: string;
-}
-
-/**
- * Convenience wrapper over Avatar.tsx's shadcn-recipe primitives, for the
- * common initials(+optional image) case — reach for AvatarRoot/AvatarImage/
- * AvatarFallback directly for anything more custom. AvatarImage (Radix),
- * not a plain <img>: Radix only renders it once the image has actually
- * loaded, so AvatarFallback shows through automatically while loading or
- * on a broken URL — a plain <img> has no such fallback behavior on error.
- */
-export const Avatar = ({ initials, imageSrc, className }: AvatarProps) => (
-  <AvatarRoot className={className}>
-    {imageSrc && <AvatarImage src={imageSrc} alt={initials} />}
-    <AvatarFallback>{initials}</AvatarFallback>
-  </AvatarRoot>
-);
+export { Avatar, type AvatarProps } from '../Avatar';

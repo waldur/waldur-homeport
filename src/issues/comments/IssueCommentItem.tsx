@@ -1,13 +1,13 @@
 import { FunctionComponent } from 'react';
 
 import {
+  Avatar,
   TimelineConnector,
   TimelineContent,
   TimelineIcon,
   TimelineItem,
 } from 'waldur-ui';
 
-import Avatar from '@/core/Avatar';
 import { ENV } from '@/core/config';
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { FormattedHtml } from '@/core/FormattedHtml';
@@ -64,8 +64,7 @@ const CommentAvatar = ({ comment }) => {
         src={comment.author_image}
         name={comment.author_name}
         size={32}
-        circle
-        labelClassName={`text-base font-medium ${AVATAR_COLOR_CLASSES[color] || AVATAR_COLOR_CLASSES.primary}`}
+        fallbackClassName={`text-base font-medium ${AVATAR_COLOR_CLASSES[color] || AVATAR_COLOR_CLASSES.primary}`}
       />
     </TimelineIcon>
   );

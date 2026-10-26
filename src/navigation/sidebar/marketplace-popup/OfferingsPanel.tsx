@@ -81,19 +81,19 @@ const OfferingListItem: FunctionComponent<{
         >
           <Stack direction="horizontal" gap={3}>
             {item.image ? (
-              <div className="symbol symbol-40px">
-                <img src={item.image} alt="offering" />
+              <div className="size-10 shrink-0 inline-flex items-center justify-center rounded-md overflow-hidden">
+                <img
+                  src={item.image}
+                  alt="offering"
+                  className="size-full object-contain"
+                />
               </div>
             ) : (
-              <div className="symbol">
-                <ImagePlaceholder width="40px" height="40px">
-                  {abbreviation && (
-                    <div className="symbol-label text-sm font-medium">
-                      {abbreviation}
-                    </div>
-                  )}
-                </ImagePlaceholder>
-              </div>
+              <ImagePlaceholder width="40px" height="40px">
+                {abbreviation && (
+                  <span className="text-sm font-medium">{abbreviation}</span>
+                )}
+              </ImagePlaceholder>
             )}
             {/* A flex child keeps its content width unless min-width is 0,
                 which would stop `ellipsis` from truncating long text. */}

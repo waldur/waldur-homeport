@@ -15,7 +15,7 @@ import { useShellTheme } from './useShellTheme';
 
 export type { CurrentUser };
 
-// Same acronym derivation as src/core/Avatar.tsx's real Avatar component —
+// Same acronym derivation as waldur-ui's real Avatar component —
 // not a fabricated placeholder, so a two-letter initials fallback is never
 // shown for a real name it doesn't actually match.
 function getInitials(name: string): string {
@@ -97,7 +97,7 @@ export function UserMenu() {
             // breakpoint pair for.
             className="size-9"
             initials={currentUser ? getInitials(currentUser.fullName) : 'MS'}
-            imageSrc={currentUser?.imageSrc}
+            src={currentUser?.imageSrc}
           />
           {currentUser && (
             // Same structure as UserDropdownMenu.tsx's real header
@@ -152,7 +152,7 @@ export function UserMenu() {
               <Avatar
                 className="me-[16.25px] size-[50px]"
                 initials={getInitials(currentUser.fullName)}
-                imageSrc={currentUser.imageSrc}
+                src={currentUser.imageSrc}
               />
               <div className="flex min-w-0 flex-col">
                 {/* .fw-bolder fs-5 there: 15px, weight 600. */}

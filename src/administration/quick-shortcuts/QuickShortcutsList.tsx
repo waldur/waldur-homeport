@@ -1,6 +1,7 @@
 import { ExternalLink, externalLinksList } from 'waldur-js-client';
 
-import Avatar from '@/core/Avatar';
+import { Avatar } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -22,7 +23,7 @@ export const QuickShortcutsList = () => {
       render: ({ row }) => (
         <div className="flex items-center">
           <div className="me-2">
-            <Avatar name={row.name} src={row.image} circle size={32} />
+            <Avatar name={row.name} src={row.image} size={32} />
           </div>
           <span>{row.name}</span>
         </div>

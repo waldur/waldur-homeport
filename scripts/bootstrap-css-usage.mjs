@@ -123,10 +123,6 @@ export const PARTIALS = [
     scss: "@import 'config'; @import 'components/image-input';",
   },
   {
-    name: 'core/components/symbol',
-    scss: "@import 'config'; @import 'components/symbol';",
-  },
-  {
     name: 'core/components/bullet',
     scss: "@import 'config'; @import 'components/bullet';",
   },
@@ -383,11 +379,7 @@ export function isClassAllowed(cls, corpusTokens) {
     return true;
   }
 
-  // 3. Runtime-built prefixes
-  if (/^symbol-\d+px$/.test(cls)) return true;
-  if (/^symbol-group(?:-[\w-]+)?$/.test(cls)) return true;
-
-  // 4. Third-party markup
+  // 3. Third-party markup
   if (/^lk-/.test(cls)) return true;
 
   return false;

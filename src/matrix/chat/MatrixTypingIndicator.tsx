@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import Avatar from '@/core/Avatar';
+import { Avatar } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { getChatAvatarClass } from './chatColors';
@@ -43,8 +44,7 @@ export const MatrixTypingIndicator: FC<MatrixTypingIndicatorProps> = ({
             name={u.name}
             src={memberImages?.get(u.userId)}
             size={20}
-            circle
-            labelClassName={getChatAvatarClass(u.userId)}
+            fallbackClassName={getChatAvatarClass(u.userId)}
           />
         ))}
       </div>

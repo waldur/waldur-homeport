@@ -2,11 +2,9 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { User } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Avatar, AvatarGroup, Tooltip } from 'waldur-ui';
 
-import Avatar from '@/core/Avatar';
-
-interface SymbolsGroupProps {
+export interface SymbolsGroupProps {
   items: object[];
   max?: number;
   nameKey?: string;
@@ -28,46 +26,31 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
   size = 35,
   space,
   onClick,
-}) => (
-  // Most call sites render this as a read-only avatar strip. Keeping the
-  // button role and the tab stop there put a control in the tab order that
-  // announces itself as a button and does nothing — and Enter on it called an
-  // undefined onClick, throwing TypeError at the keyboard user.
-  <div
-    className={classNames(
-      'symbol-group symbol-hover' + (space && `symbol-group-${space}`),
-    )}
-    onClick={onClick}
-    onKeyDown={onClick ? (e) => e.key === 'Enter' && onClick() : undefined}
-    role={onClick ? 'button' : undefined}
-    tabIndex={onClick ? 0 : undefined}
-  >
-    {items.slice(0, max).map((item: User, index: number) => (
-      <Tooltip key={index} label={item[nameKey]}>
-        <span>
-          {item[imageKey] || item[nameKey] ? (
+}) => {
+  const spacing = space === 'sm' ? 'sm' : space === 'xs' ? 'xs' : 'lg';
+
+  return (
+    <div
+      className={classNames(
+        'inline-flex items-center',
+        onClick && 'cursor-pointer',
+      )}
+      onClick={onClick}
+      onKeyDown={onClick ? (e) => e.key === 'Enter' && onClick() : undefined}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+    >
+      <AvatarGroup spacing={spacing} size={size} max={max} totalCount={length}>
+        {items.map((item: User, index: number) => (
+          <Tooltip key={index} label={item[nameKey]}>
             <Avatar
               size={size}
               src={item[imageKey]}
-              name={item[nameKey]}
-              circle
+              name={item[nameKey] || item[emailKey] || '?'}
             />
-          ) : (
-            <div className={`symbol symbol-circle symbol-${size}px`}>
-              <div className="symbol-label text-base font-medium bg-tertiary text-quaternary">
-                {item[emailKey] ? item[emailKey][0].toUpperCase() : '?'}
-              </div>
-            </div>
-          )}
-        </span>
-      </Tooltip>
-    ))}
-    {(length ?? items.length) > max && (
-      <div className={`symbol symbol-circle symbol-${size}px`}>
-        <div className="symbol-label text-lg font-medium bg-tertiary text-quaternary">
-          +{length ? Math.max(length - max, 0) : items.slice(max).length}
-        </div>
-      </div>
-    )}
-  </div>
-);
+          </Tooltip>
+        ))}
+      </AvatarGroup>
+    </div>
+  );
+};

@@ -8,6 +8,7 @@ import {
   resolveSidebarStyle,
 } from 'waldur-design-tokens';
 import {
+  Avatar,
   IconButton,
   SIDEBAR_ICON_BUTTON_CLASSNAME,
   SidebarBrand,
@@ -16,7 +17,6 @@ import {
 
 import { SHORTCUTS_QUERY_KEY } from '@/administration/quick-shortcuts/utils';
 import { getIconUrl } from '@/core/api';
-import Avatar from '@/core/Avatar';
 import { ENV } from '@/core/config';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -158,12 +158,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
                 />
               )}
               <div className="me-5">
-                <Avatar
-                  name={shortcut.name}
-                  src={shortcut.image}
-                  circle
-                  size={42}
-                />
+                <Avatar name={shortcut.name} src={shortcut.image} size={42} />
               </div>
               <div className="grow text-base">
                 <div className="font-semibold">{shortcut.name}</div>

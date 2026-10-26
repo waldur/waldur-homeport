@@ -86,6 +86,39 @@ describe('no-retired-bootstrap-utility', () => {
         ],
       },
       {
+        code: 'const A = () => <div className="symbol symbol-circle symbol-50px symbol-label" />;',
+        errors: [
+          {
+            messageId: 'retired',
+            data: {
+              token: 'symbol',
+              hint: 'Avatar from waldur-ui, or Tailwind size-* and rounded-* utilities',
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'symbol-circle',
+              hint: 'Avatar from waldur-ui, or Tailwind size-* and rounded-* utilities',
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'symbol-50px',
+              hint: 'Avatar from waldur-ui, or Tailwind size-* and rounded-* utilities',
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'symbol-label',
+              hint: 'Avatar from waldur-ui, or Tailwind size-* and rounded-* utilities',
+            },
+          },
+        ],
+      },
+      {
         code: 'const A = () => <div className="timeline timeline-item timeline-line timeline-icon timeline-content timeline-border-dashed" />;',
         errors: [
           {

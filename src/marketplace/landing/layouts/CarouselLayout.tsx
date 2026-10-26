@@ -90,6 +90,7 @@ export const CarouselLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
                         <CategoryThumbnail
                           title={category.title}
                           icon={category.icon}
+                          shape="square"
                           size={32}
                           fallbackSize={20}
                           fallbackClassName=""

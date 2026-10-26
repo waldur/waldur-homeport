@@ -10,7 +10,8 @@ import {
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 
-import Avatar from '@/core/Avatar';
+import { Avatar } from 'waldur-ui';
+
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 
@@ -150,8 +151,7 @@ export const MatrixRoomListItem: FC<MatrixRoomListItemProps> = ({
         <Avatar
           name={name}
           size={48}
-          circle
-          labelClassName={getChatAvatarClass(uuid)}
+          fallbackClassName={getChatAvatarClass(uuid)}
         />
       </div>
       <div className="tc-row-meta">

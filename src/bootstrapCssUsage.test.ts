@@ -199,15 +199,13 @@ describe('bootstrapCssUsage', () => {
     });
 
     describe('Runtime and third-party prefixes', () => {
-      it('allows symbol-*px runtime classes', () => {
-        expect(isClassAllowed('symbol-25px', new Set())).toBe(true);
-        expect(isClassAllowed('symbol-100px', new Set())).toBe(true);
+      it('rejects retired symbol-* runtime classes', () => {
+        expect(isClassAllowed('symbol', new Set())).toBe(false);
+        expect(isClassAllowed('symbol-25px', new Set())).toBe(false);
+        expect(isClassAllowed('symbol-100px', new Set())).toBe(false);
         expect(isClassAllowed('symbol-circle', new Set())).toBe(false);
-      });
-
-      it('allows symbol-group-* runtime classes', () => {
-        expect(isClassAllowed('symbol-group', new Set())).toBe(true);
-        expect(isClassAllowed('symbol-group-hover', new Set())).toBe(true);
+        expect(isClassAllowed('symbol-group', new Set())).toBe(false);
+        expect(isClassAllowed('symbol-group-hover', new Set())).toBe(false);
       });
 
       it('rejects retired svg-icon-* runtime classes', () => {
