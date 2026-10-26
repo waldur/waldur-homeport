@@ -30820,6 +30820,7 @@
       "feature_area": "update"
     }
   },
+  "Maximum API token lifetime, in minutes, that a non-staff user can choose. 0 means no limit, which also allows tokens that never expire. Staff can choose any lifetime. A lifetime chosen before the limit was set is kept until the user changes it.": {},
   "Maximum GID": {
     "context": {
       "feature_area": "posix-id-pools"
@@ -58182,6 +58183,16 @@
     }
   },
   "The logo image rendered in the disclaimer area below the footer.": {},
+  "The longest token lifetime you can choose is {duration}.": {
+    "context": {
+      "variables": {
+        "duration": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "api-key"
+    }
+  },
   "The maintenance will be marked completed immediately. Please provide a reason that will be recorded in internal notes.": {
     "context": {
       "feature_area": "actions"
