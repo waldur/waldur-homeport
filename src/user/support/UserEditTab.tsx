@@ -5,6 +5,7 @@ import { LOCAL_IDP } from '@/auth/providers/constants';
 import { ExternalLink } from '@/core/ExternalLink';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { isImpersonating } from '@/user/termsGate';
 import { useUser } from '@/workspace/hooks';
 
 import { AcceptTosWarning } from './AcceptTosWarning';
@@ -20,17 +21,20 @@ export const UserEditTab: React.FC<UserEditTabProps> = ({ user }) => {
   const currentUser = useUser();
 
   const isSelf = currentUser.uuid === user.uuid;
+  // Staff impersonating the user see this as their own profile, but only the
+  // user may accept the Terms: no checkbox for them, and no lock either.
+  const canAcceptTerms = isSelf && !isImpersonating();
   // Disable editing if viewing own profile and haven't accepted ToS
-  const isDisabled = isSelf && !currentUser.agreement_date;
+  const isDisabled = canAcceptTerms && !currentUser.agreement_date;
   // Show warning if the viewed user hasn't accepted ToS
   const showTosWarning = !user.agreement_date;
 
   return (
     <>
       {showTosWarning && (
-        <AcceptTosWarning isSelf={isSelf} userName={user.full_name} />
+        <AcceptTosWarning isSelf={canAcceptTerms} userName={user.full_name} />
       )}
-      {isSelf && !user.agreement_date && (
+      {canAcceptTerms && !user.agreement_date && (
         <Card className="card-bordered mb-7">
           <Card.Body>
             <FormTable>

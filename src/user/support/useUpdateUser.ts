@@ -32,7 +32,6 @@ export const useUpdateUser = (user: User) => {
 
       const body = {
         ...data,
-        agree_with_policy: true,
         image: hasImageFile
           ? fileSerializer(data.image)
           : isImageRemoval

@@ -26,6 +26,7 @@ import {
   getStateLabel,
 } from './blockedNavigation';
 import { CompleteYourProfileBanner } from './CompleteYourProfileBanner';
+import { termsAcceptedOrImpersonating } from './termsGate';
 import { useProfileCompleteness } from './useProfileCompleteness';
 
 const UserDetailsTable = lazyComponent(() =>
@@ -138,7 +139,9 @@ export const UserManageContainer = ({ isPersonal }) => {
 
   const isValidUser = useMemo(
     () =>
-      user && profileCompleteness?.is_complete && Boolean(user.agreement_date),
+      user &&
+      profileCompleteness?.is_complete &&
+      termsAcceptedOrImpersonating(user),
     [user, profileCompleteness],
   );
 
@@ -268,7 +271,8 @@ export const UserManageContainer = ({ isPersonal }) => {
   // Not before ToS is accepted: the profile form is disabled until then.
   const askToCompleteProfile =
     isPersonal &&
-    Boolean(user?.agreement_date) &&
+    Boolean(user) &&
+    termsAcceptedOrImpersonating(user) &&
     profileCompleteness?.is_complete === false;
 
   return (

@@ -71,4 +71,21 @@ describe('useUpdateUser', () => {
       expect(body.organization).toBe('');
     });
   });
+
+  // Consent comes only from the Terms checkbox: a profile save, possibly by
+  // staff on someone else's profile, must not accept the Terms for them.
+  it('does not send agree_with_policy with a profile save', async () => {
+    vi.mocked(usersPartialUpdate).mockResolvedValue({
+      data: { uuid: 'user-9' },
+    } as any);
+    const { result } = renderHookWithProviders(() =>
+      useUpdateUser({ uuid: 'user-9' } as any),
+    );
+    await act(async () => {
+      await result.current.callback({ phone_number: '123456789' });
+    });
+
+    const body = vi.mocked(usersPartialUpdate).mock.calls[0][0].body as any;
+    expect(body).not.toHaveProperty('agree_with_policy');
+  });
 });

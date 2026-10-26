@@ -218,6 +218,10 @@ describe('UsersService token expiry', () => {
 });
 
 describe('isUserValid', () => {
+  beforeEach(() => {
+    vi.mocked(ImpersonationStorage.get).mockReturnValue(null);
+  });
+
   it('always accepts staff and support', () => {
     expect(isUserValid({ is_staff: true } as any)).toBe(true);
     expect(isUserValid({ is_support: true } as any)).toBe(true);
@@ -237,5 +241,12 @@ describe('isUserValid', () => {
         agreement_date: '2026-01-01',
       } as any),
     ).toBe(false);
+  });
+  // Staff impersonating may not accept the Terms for the user, so a missing
+  // acceptance must not lock them out; the profile still has to be complete.
+  it('does not require accepted terms while impersonating', () => {
+    vi.mocked(ImpersonationStorage.get).mockReturnValue('user-uuid');
+    expect(isUserValid({ profile_complete: true } as any)).toBe(true);
+    expect(isUserValid({ profile_complete: false } as any)).toBe(false);
   });
 });

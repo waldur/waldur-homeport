@@ -8,6 +8,7 @@ import {
 
 import { useUser } from '@/workspace/hooks';
 
+import { termsAcceptedOrImpersonating } from './termsGate';
 import { getProfileCompleteness } from './useProfileCompleteness';
 
 interface ProfileCompletenessContextValue {
@@ -47,7 +48,7 @@ export const ProfileCompletenessProvider: FC<PropsWithChildren> = ({
     const completeness = getProfileCompleteness(user);
     const isUserExempt = Boolean(user.is_staff || user.is_support);
     const isProfileComplete = completeness.is_complete;
-    const hasAgreementDate = Boolean(user.agreement_date);
+    const hasAgreementDate = termsAcceptedOrImpersonating(user);
 
     // Frontend always enforces profile completeness (enforcement_enabled is for API only)
     // Block navigation if:
