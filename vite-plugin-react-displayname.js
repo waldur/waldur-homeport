@@ -1,9 +1,17 @@
-import { Plugin } from 'vite';
+// @ts-check
+// Plain JavaScript, not TypeScript, so vite.config.ts can import it by its
+// real file name under Vite's native config loader without the whole app
+// type-check allowing `.ts` import paths. The JSDoc types are still checked.
 
-export default function reactDisplayNamePlugin(): Plugin {
+/** @returns {import('vite').Plugin} */
+export default function reactDisplayNamePlugin() {
   return {
     name: 'vite-plugin-react-displayname',
-    transform(code: string, id: string) {
+    /**
+     * @param {string} code
+     * @param {string} id
+     */
+    transform(code, id) {
       // Check if file should be processed
       if (!id.endsWith('.tsx') || id.includes('node_modules')) {
         return null;
@@ -34,7 +42,8 @@ export default function reactDisplayNamePlugin(): Plugin {
       */
 
       // Find all comment ranges to skip matches inside comments
-      const commentRanges: Array<[number, number]> = [];
+      /** @type {Array<[number, number]>} */
+      const commentRanges = [];
       const commentRegex = /\/\/.*$|\/\*[\s\S]*?\*\//gm;
       let commentMatch;
       while ((commentMatch = commentRegex.exec(code)) !== null) {
@@ -44,7 +53,8 @@ export default function reactDisplayNamePlugin(): Plugin {
         ]);
       }
 
-      const isInsideComment = (pos: number) =>
+      /** @param {number} pos */
+      const isInsideComment = (pos) =>
         commentRanges.some(([start, end]) => pos >= start && pos < end);
 
       let match;

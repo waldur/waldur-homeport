@@ -21,7 +21,9 @@
     "waldur-ui": "workspace:*"
   },
   "devDependencies": {
-    "@types/luxon": "^3.7.2"
+    "@types/luxon": "^3.7.2",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
   },
   "license": "MIT"
 }

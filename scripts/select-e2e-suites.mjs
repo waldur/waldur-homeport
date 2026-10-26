@@ -25,7 +25,7 @@ const IMAGE_FILES = [
   'package.json',
   'yarn.lock',
   'vite.config.ts',
-  'vite-plugin-react-displayname.ts',
+  'vite-plugin-react-displayname.js',
   'tsconfig.json',
   'typings.d.ts',
   'generate-filters.cjs',

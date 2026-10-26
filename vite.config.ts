@@ -2,12 +2,12 @@ import path from 'path';
 
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import { defineConfig, PluginOption } from 'vite';
+import { defineConfig, type PluginOption } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
 import { waldurBootSplash } from 'waldur-boot-splash/vite';
 
-import reactDisplayNamePlugin from './vite-plugin-react-displayname';
+import reactDisplayNamePlugin from './vite-plugin-react-displayname.js';
 
 // Tailwind ships in the real app bundle now (src/index.tsx imports
 // tailwind.css), not just in Storybook — it is the prerequisite for using
@@ -32,7 +32,7 @@ const plugins: PluginOption[] = [
 export default defineConfig({
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src/'),
+      '@': path.resolve(import.meta.dirname, './src/'),
     },
   },
   server: {
