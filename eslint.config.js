@@ -422,7 +422,7 @@ export default tseslint
         '*.spec.tsx',
         '*.spec.ts',
         '*.fixture.tsx',
-        'vite-plugin-react-displayname.ts',
+        'vite-plugin-react-displayname.js',
       ],
     },
     {

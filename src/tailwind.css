@@ -15,8 +15,18 @@
 @layer theme, base, bootstrap, utilities;
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/preflight.css' layer(base);
-@import 'tailwindcss/utilities.css' layer(utilities);
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
 @import 'waldur-design-tokens/index.css';
+
+/* Only the code that ships (and Storybook, which renders it) is scanned for
+   classes. Automatic detection read the whole repo — guides, lint rules,
+   baselines, locales — and turned every class name quoted there into CSS,
+   placeholders such as `var(--btn-<variant>-border)` included, which the
+   build's CSS minifier then warned about. */
+@source '../src';
+@source '../packages/*/src/**';
+@source '../index.html';
+@source '../.storybook';
 
 /* The app's one focus ring, for everything that doesn't style its own —
    links, breadcrumbs, sidebar rows, anything with tabindex. In `base`, so

@@ -1,15 +1,10 @@
-import { fileURLToPath } from 'node:url';
 import path from 'path';
 
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig, mergeConfig } from 'vitest/config';
 
-import viteConfig from './vite.config';
-const dirname =
-  typeof __dirname !== 'undefined'
-    ? __dirname
-    : path.dirname(fileURLToPath(import.meta.url));
+import viteConfig from './vite.config.ts';
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default mergeConfig(
@@ -52,7 +47,10 @@ export default mergeConfig(
             alias: [
               {
                 find: /^.*\.svg$/,
-                replacement: path.resolve(__dirname, './test/mocks/svg.tsx'),
+                replacement: path.resolve(
+                  import.meta.dirname,
+                  './test/mocks/svg.tsx',
+                ),
               },
             ],
             testTimeout: 10000,
@@ -65,7 +63,7 @@ export default mergeConfig(
             // The plugin will run tests for the stories defined in your Storybook config
             // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
             storybookTest({
-              configDir: path.join(dirname, '.storybook'),
+              configDir: path.join(import.meta.dirname, '.storybook'),
             }),
           ],
           // Vite's dependency scanner only discovers deps to pre-bundle by
