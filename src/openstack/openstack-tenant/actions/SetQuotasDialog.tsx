@@ -295,7 +295,7 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
   // Derived-size tooltip: dotted underline on the label itself
   const labelContent = row.tooltip ? (
     <Tooltip label={row.tooltip}>
-      <span className="text-nowrap text-decoration-underline-dotted cursor-help">
+      <span className="text-nowrap underline decoration-dotted cursor-help">
         {row.label}
       </span>
     </Tooltip>

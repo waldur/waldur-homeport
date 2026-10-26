@@ -57,7 +57,7 @@ export const CatalogCreateDialog: FC<CatalogCreateDialogProps> = (props) => {
               </>
             }
           >
-            <div className="size-sm">
+            <div>
               <StringGroup
                 name="name"
                 label={translate('Name')}

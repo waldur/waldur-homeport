@@ -170,6 +170,8 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   - Never pair Bootstrap's `border` class with a Tailwind border colour — Bootstrap's `!important` colour wins. Use `border-[1px] border-secondary` (linter autofixes).
   - In SCSS, paint brand with `var(--bg-brand-solid)` / `var(--fg-brand-primary)` / `var(--brand-600)`, never `$primary` (a static compile-time green).
 
+- **Every class must style something.** A class that neither Tailwind generates nor any stylesheet defines is a typo or a leftover, and paints nothing (linter: `no-unknown-class`, which suggests the nearest real class). Existing ones are listed per file in `unknown-classes.baseline.json`. Never add to it: fix the class, then run `yarn lint:classes:baseline`. See `docs/code-quality.md` → "Unknown class guard"
+
 - Dialogs are waldur-ui's Modal: `openDialog` with `ModalDialog` (`@/modal/ModalDialog`), `ModalShell` for one rendered in place, the `ModalHeader`/`ModalBody`/`ModalFooter` parts for a custom layout — never react-bootstrap `Modal`/`CloseButton` or `modal-*`/`btn-close` classes; style a part through its `data-slot`. Linter enforces this (`no-bootstrap-modal`); see `docs/modals.md`
 
 - Use `waldur-ui`'s `Tabs` (state-driven panels) or `TabNav` (router-driven: `items` with `link: <Link … />`), and `EmbeddedTabs` (`@/table/EmbeddedTabs`) for tabs inside an expandable row or card section — never react-bootstrap `Tab`/`Tabs`/`Nav` or `nav-*` classes. Linter enforces this (`no-bootstrap-tabs`); see `docs/tabs.md`

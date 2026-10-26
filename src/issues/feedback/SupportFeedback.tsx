@@ -59,7 +59,7 @@ export const SupportFeedback = () => {
       initialValues={initialValues}
       render={({ handleSubmit, invalid }) => (
         <form onSubmit={handleSubmit} className="center-vertically">
-          <div className="size-sm">
+          <div className="mx-auto w-full max-w-[545px]">
             <EvaluationGroup
               name="evaluation"
               label={translate('Evaluation')}

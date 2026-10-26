@@ -38,7 +38,7 @@ export const PolicyCreateForm: FC<PolicyCreateFormProps> = (props) => {
   } = useOrganizationGroups();
 
   return (
-    <div className="size-lg">
+    <div>
       {props.type === 'usage' ? (
         <ComponentLimitsField components={props.offering.components} />
       ) : (

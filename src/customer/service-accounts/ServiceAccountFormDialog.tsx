@@ -152,7 +152,7 @@ export const ServiceAccountFormDialog: FC<OwnProps> = ({
               </>
             }
           >
-            <div className="size-sm">
+            <div>
               <StringGroup
                 name={isEdit ? 'username' : 'preferred_identifier'}
                 label={

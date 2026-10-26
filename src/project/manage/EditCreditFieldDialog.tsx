@@ -63,7 +63,7 @@ export const EditCreditFieldDialog: FC<{
               </>
             }
           >
-            <div className="size-sm">
+            <div>
               {resolve.name === 'value' ? (
                 <ProjectAllocateCreditField
                   organizationCredit={resolve.credit.customer_credit}

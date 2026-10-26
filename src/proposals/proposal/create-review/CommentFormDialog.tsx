@@ -56,7 +56,7 @@ export const CommentFormDialog: FC<CommentFormDialogProps> = (props) => {
               </>
             }
           >
-            <div className="size-sm">
+            <div>
               <TextGroup
                 label={translate('Comment')}
                 placeholder={translate('Enter a comment...')}

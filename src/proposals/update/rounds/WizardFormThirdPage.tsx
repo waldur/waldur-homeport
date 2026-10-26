@@ -23,7 +23,7 @@ export const WizardFormThirdPage: FunctionComponent<
   const showAllocationDate = allocationMode === 'fixed_date';
   return (
     <WizardForm {...props}>
-      <div className="size-sm">
+      <div>
         {showAllocationDate ? (
           <DateTimeGroup
             label={translate('Allocation date')}

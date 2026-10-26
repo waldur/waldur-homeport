@@ -96,7 +96,7 @@ export const UpdateOfferingMediaDialog: FunctionComponent<
                 className="img-fluid mb-3"
               />
             )}
-            <div className="size-sm">
+            <div>
               <ImageUploadGroup
                 name="images"
                 validate={required}

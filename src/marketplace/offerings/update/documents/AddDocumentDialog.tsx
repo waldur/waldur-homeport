@@ -158,7 +158,7 @@ export const AddDocumentDialog: FC<AddDocumentProps> = ({
               </>
             }
           >
-            <div className="size-sm">
+            <div>
               <UploadContainer
                 onDrop={onDrop}
                 disabled={submitting}

@@ -81,7 +81,7 @@ export const CategoryGroupDialog: FC<CategoryGroupDialogProps> = ({
               />
             }
           >
-            <div className="size-sm">
+            <div>
               <ImageGroup
                 label={translate('Icon')}
                 name="icon"

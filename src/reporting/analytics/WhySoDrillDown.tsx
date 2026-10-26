@@ -113,7 +113,7 @@ const DrillDownRow: FC<{
     <>
       <tr
         className={classNames(
-          item.canDrillDown && 'cursor-pointer hover-bg-light',
+          item.canDrillDown && 'cursor-pointer hover:bg-secondary',
           isExpanded && 'bg-tertiary dark:bg-quaternary',
         )}
         onClick={toggleExpand}

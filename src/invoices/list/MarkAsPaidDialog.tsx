@@ -47,7 +47,7 @@ export const MarkAsPaidDialog: FunctionComponent<any> = (props) => {
             footer={<FormFooter />}
           >
             <div style={{ paddingBottom: '95px' }}>
-              <div className="size-sm">
+              <div>
                 <DateGroup
                   name="date"
                   label={translate('Date')}

@@ -3,7 +3,7 @@ import { StringGroup, SecretGroup } from '@/form';
 import { translate } from '@/i18n';
 
 export const CredentialsTab = () => (
-  <div className="size-lg">
+  <div>
     <StringGroup
       name="api_url"
       label={translate('API URL')}

@@ -84,7 +84,7 @@ export const OfferingGroupAddOfferingDialog = ({
               />
             }
           >
-            <div className="size-sm">
+            <div>
               <AsyncSelectGroup
                 name="offering"
                 label={translate('Offering')}

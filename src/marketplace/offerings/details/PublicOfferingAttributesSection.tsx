@@ -17,7 +17,7 @@ export const PublicOfferingAttributesSection: FunctionComponent<
     {offering.datacite_doi && (
       <div>
         <b>{translate('Datacite DOI')}:</b>
-        <span className="ms-2 m-r">{offering.datacite_doi}</span>
+        <span className="ms-2">{offering.datacite_doi}</span>
         <CopyToClipboard value={offering.datacite_doi} />
       </div>
     )}

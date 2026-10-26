@@ -85,7 +85,7 @@ export const OfferingCostsChart: FunctionComponent<OfferingCostChartProps> = ({
                 </div>
               </div>
             </Card.Header>
-            <Card.Body className="mt-3 p-m">
+            <Card.Body className="mt-3">
               <ChartBody offering={offering} />
             </Card.Body>
           </Card>

@@ -82,7 +82,7 @@ export const TagFormDialog: FC<TagFormDialogProps> = (props) => {
               />
             }
           >
-            <div className="size-sm">
+            <div>
               <StringGroup
                 label={translate('Name')}
                 name="name"

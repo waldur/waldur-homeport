@@ -152,7 +152,7 @@ export const CampaignDialog = ({
             </div>
 
             {step === 0 ? (
-              <div className="size-lg">
+              <div>
                 <StringGroup
                   name="name"
                   label={translate('Campaign name')}
@@ -207,7 +207,7 @@ export const CampaignDialog = ({
                 />
               </div>
             ) : (
-              <div className="size-lg">
+              <div>
                 <NumberGroup
                   name="discount"
                   label={translate('Discount')}

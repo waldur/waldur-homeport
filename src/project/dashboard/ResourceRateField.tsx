@@ -56,7 +56,7 @@ export const ResourceRateField: FC<ResourceRateFieldProps> = ({
 
   return (
     <Tooltip label={rateLabel} body={tooltipBody}>
-      <span className="cursor-help text-decoration-underline-dotted">
+      <span className="cursor-help underline decoration-dotted">
         {rateLabel}
       </span>
     </Tooltip>

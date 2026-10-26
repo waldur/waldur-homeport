@@ -44,7 +44,7 @@ export const Step2SelectOffering: FC<Step2Props> = ({
   );
 
   return (
-    <div className="size-lg">
+    <div>
       <FormField className="mb-7">
         <FormLabel>{translate('Select offering')}</FormLabel>
         <Field

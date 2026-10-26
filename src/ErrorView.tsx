@@ -39,7 +39,7 @@ export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
         <div>
           <h4>{translate('Something went wrong')}</h4>
           <div className="flex flex-col items-center text-quaternary text-sm">
-            <p className="mb-0 mx-300px">
+            <p className="mb-0">
               {translate('An error occurred.')}
               <br />
               {translate('Try reloading or go back to the previous page')}

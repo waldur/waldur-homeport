@@ -219,7 +219,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
               </>
             }
           >
-            <div className="size-lg">
+            <div>
               <SelectGroup
                 label={translate('Match reviewers against')}
                 required

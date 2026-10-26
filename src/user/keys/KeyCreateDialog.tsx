@@ -105,7 +105,7 @@ export const KeyCreateDialog: React.FC<KeyCreateDialogProps> = ({
               />
             }
           >
-            <div className="size-lg">
+            <div>
               <SshKeyRestrictionsBanner />
               <StringGroup
                 name="name"

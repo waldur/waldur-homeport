@@ -130,7 +130,7 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
             iconNode={<PlusCircleIcon weight="bold" />}
             iconColor="success"
           >
-            <div className="size-sm">
+            <div>
               {showProvider && (
                 <AsyncSelectGroup
                   name="organisation"

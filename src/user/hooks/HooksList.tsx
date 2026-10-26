@@ -56,21 +56,18 @@ export const HooksList: FunctionComponent = () => {
         },
         {
           title: translate('Method'),
-          className: 'min-tablet-l',
           render: ({ row }) => titleCase(row.hook_type),
           export: (row) => titleCase(row.hook_type),
           exportKeys: ['hook_type'],
         },
         {
           title: translate('Destination'),
-          className: 'min-tablet-l',
           render: ({ row }) => getDestinationField(row),
           export: (row) => getDestinationField(row),
           exportKeys: ['destination_url', 'email'],
         },
         {
           title: translate('Events'),
-          className: 'min-tablet-l',
           render: ({ row }) => getEventsField(row),
           export: (row) => getEventsField(row),
           exportKeys: ['event_groups'],

@@ -89,7 +89,7 @@ export const SetOfferingGroupDialog = ({
               <SubmitButton submitting={submitting} label={translate('Save')} />
             }
           >
-            <div className="size-sm">
+            <div>
               <AsyncSelectGroup
                 name="offering_group"
                 label={translate('Offering group')}

@@ -27,7 +27,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
 
   return (
     <WizardForm {...props}>
-      <div className="size-lg row">
+      <div className="row">
         <Col lg={4} className="mb-7">
           <Field name="category_uuid">
             {({ input, meta }) => (

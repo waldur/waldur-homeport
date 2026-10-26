@@ -130,10 +130,7 @@ export const EChart = React.forwardRef<any, ChartProps>(
     const style = { width, height };
 
     return (
-      <div
-        className={classNames('content-center-center', className)}
-        style={style}
-      >
+      <div className={className} style={style}>
         {loading && <LoadingSpinner />}
         <EChartActions chartInstance={chartRef.current} {...props} />
         <div

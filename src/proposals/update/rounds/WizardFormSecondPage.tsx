@@ -22,7 +22,7 @@ export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
   }, [cutoff_time, review_duration_in_days]);
   return (
     <WizardForm {...props}>
-      <div className="size-sm">
+      <div>
         <NumberGroup
           label={translate('Review duration (days)')}
           name="review_duration_in_days"

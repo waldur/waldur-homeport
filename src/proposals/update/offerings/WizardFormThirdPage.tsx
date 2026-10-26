@@ -15,7 +15,7 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
 
   return (
     <WizardForm {...props}>
-      <div className="size-lg">
+      <div>
         <p>
           {translate(
             'Are you sure you want to request {provider} to add {offering} to the {call}?',

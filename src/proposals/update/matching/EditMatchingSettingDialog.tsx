@@ -171,7 +171,7 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
               </>
             }
           >
-            <div className="size-lg">
+            <div>
               {isNumberField && (
                 <NumberGroup
                   label={FIELD_LABELS[resolve.name]}

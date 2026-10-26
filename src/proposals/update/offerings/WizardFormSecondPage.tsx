@@ -45,7 +45,7 @@ export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
       ) : queryData.isError ? (
         <LoadingErred loadData={queryData.refetch} />
       ) : (
-        <div className="size-lg">
+        <div>
           <p>
             <strong>{translate('Offering')}: </strong>
             {queryData.data.category_title} / {queryData.data.name}

@@ -9503,7 +9503,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eslint-plugin-waldur@workspace:packages/eslint-plugin-waldur"
   dependencies:
+    "@tailwindcss/node": "npm:^4.3.3"
     eslint: "npm:^9.30.0"
+    postcss: "npm:^8.5.18"
+    sass: "npm:^1.85.0"
+    synckit: "npm:^0.11.13"
     typescript: "npm:^5.7.3"
     typescript-eslint: "npm:^8.24.0"
   languageName: unknown

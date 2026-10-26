@@ -72,7 +72,7 @@ export const BatchSetEndDateDialog: FC<BatchSetEndDateDialogProps> = (
             subtitle={translate('{count} projects selected', { count })}
             footer={<FormFooter submitLabel={translate('Save')} />}
           >
-            <div className="size-sm">
+            <div>
               <BooleanGroup
                 name="clear"
                 label={translate('Clear end date')}

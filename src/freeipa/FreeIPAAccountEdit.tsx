@@ -23,7 +23,7 @@ export const FreeIPAAccountEdit: React.FC<FreeIPAAccountEditOwnProps> = ({
     <div>
       <UsernameGroup profile={profile} />
       <FormField>
-        <div className="pull-right">
+        <div className="float-right">
           {profile.is_active
             ? translate('Profile is enabled.')
             : translate('Profile is disabled.')}

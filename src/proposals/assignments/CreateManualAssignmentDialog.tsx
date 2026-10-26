@@ -299,7 +299,7 @@ export const CreateManualAssignmentDialog: FC<
               </>
             }
           >
-            <div className="size-lg">
+            <div>
               <SelectGroup
                 label={translate('Reviewer')}
                 required

@@ -35,7 +35,7 @@ export const SelectOrganizationTab = () => {
   });
 
   return (
-    <div className="size-lg">
+    <div>
       <SelectGroup
         name="customer"
         label={translate('Organization')}

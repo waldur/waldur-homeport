@@ -11,7 +11,7 @@ export const Step3FinalConfig: FC<WizardFormStepProps> = (props) => {
   const { submitting } = useFormState({ subscription: { submitting: true } });
   return (
     <WizardForm {...props}>
-      <div className="size-lg">
+      <div>
         <AlertItem
           variant="warning"
           type="floating"

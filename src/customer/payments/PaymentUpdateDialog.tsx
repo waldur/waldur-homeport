@@ -77,7 +77,7 @@ export const PaymentUpdateDialog: FunctionComponent<
               </>
             }
           >
-            <div className="size-sm">
+            <div>
               <DateGroup
                 name="date_of_payment"
                 label={translate('Date')}

@@ -59,7 +59,7 @@ export const CreateImageDialog = (props: {
               </>
             }
           >
-            <div className="size-sm">
+            <div>
               <ImageGroup
                 label={translate('Image')}
                 name="image"

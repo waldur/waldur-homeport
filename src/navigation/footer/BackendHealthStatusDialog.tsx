@@ -34,7 +34,7 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
         <LoadingSpinner />
       ) : value ? (
         <div className="table-responsive">
-          <table className="table table-hover no-margins table-row-bordered mb-0">
+          <table className="table table-hover table-row-bordered mb-0">
             <thead>
               <tr>
                 <th>{translate('Check name')}</th>

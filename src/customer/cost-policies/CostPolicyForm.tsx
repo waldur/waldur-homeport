@@ -181,7 +181,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
   });
 
   return (
-    <div className="size-lg">
+    <div>
       <FormWatcher />
       {props.type === 'project' ? (
         <AsyncSelectGroup

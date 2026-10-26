@@ -49,11 +49,7 @@ const NotesContent = ({ notes }: { notes: string }) => {
 
   // No structured entries → preserve existing free-form rendering verbatim.
   if (structured.length === 0) {
-    return (
-      <div className="text-pre-wrap" style={{ whiteSpace: 'pre-wrap' }}>
-        {notes}
-      </div>
-    );
+    return <div className="whitespace-pre-wrap">{notes}</div>;
   }
 
   return (

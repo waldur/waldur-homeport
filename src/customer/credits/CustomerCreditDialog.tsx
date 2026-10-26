@@ -109,7 +109,7 @@ export const CustomerCreditDialog: FC<CustomerCreditDialogProps> = ({
               </>
             }
           >
-            <div className="size-lg">
+            <div>
               <OrganizationSelectField isDisabled={isEdit} />
               {isEdit && <OrganizationCostChart />}
               <CustomerCreditOfferingsField />

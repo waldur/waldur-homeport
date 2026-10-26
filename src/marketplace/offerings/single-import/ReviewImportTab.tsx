@@ -29,7 +29,7 @@ export const ReviewImportTab: FunctionComponent = () => {
   ].filter((option) => formData?.[option.key]);
 
   return (
-    <div className="size-sm">
+    <div>
       <Row>
         <Col md={12}>
           <h5>{translate('Import summary')}</h5>

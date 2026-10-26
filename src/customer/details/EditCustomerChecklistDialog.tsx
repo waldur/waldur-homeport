@@ -89,7 +89,7 @@ export const EditCustomerChecklistDialog = ({
               </>
             }
           >
-            <div className="size-sm">
+            <div>
               {isLoading ? (
                 <LoadingSpinner />
               ) : error ? (

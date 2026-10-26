@@ -56,7 +56,7 @@ export const Step1General: FC<WizardFormStepProps> = (props) => {
   }, [offeringsQuery?.data, offering]);
   return (
     <WizardForm {...props}>
-      <div className="size-lg">
+      <div>
         <StringGroup
           name="name"
           label={translate('Template name')}

@@ -54,7 +54,7 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
         </Card.Title>
       </Card.Header>
       <Card.Body
-        className="mt-3 p-m"
+        className="mt-3"
         style={{ maxWidth: '500px', minWidth: '100%' }}
       >
         {loading ? (

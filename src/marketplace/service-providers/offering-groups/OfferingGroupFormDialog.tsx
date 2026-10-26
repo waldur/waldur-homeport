@@ -114,7 +114,7 @@ export const OfferingGroupFormDialog: FC<OfferingGroupFormDialogProps> = (
               />
             }
           >
-            <div className="size-sm">
+            <div>
               {pickOrganization && (
                 <AsyncSelectGroup
                   name="organization"

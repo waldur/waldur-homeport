@@ -67,7 +67,7 @@ export const EditSchedulesDialog = (props: {
             }
             footer={<FormFooter submitLabel={translate('Update')} />}
           >
-            <div className="size-xl">
+            <div>
               <FieldArray
                 name="schedules"
                 rerenderOnEveryChange

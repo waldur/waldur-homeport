@@ -19,7 +19,7 @@ export const ImagesTab: FunctionComponent<ImagesTabProps> = (props) => {
           <img
             src={item.thumbnail}
             alt="thumb"
-            className="img-thumbnail m-xs"
+            className="img-thumbnail"
             onClick={() =>
               openDialog(ImageDetailsDialog, {
                 resolve: item,

@@ -123,7 +123,7 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
       {queryData.isLoading ? (
         <LoadingSpinner />
       ) : offeringDetails ? (
-        <div className="size-lg">
+        <div>
           <p className="mb-2">
             <strong>{translate('Offering')}: </strong>
             {offeringDetails.category_title} / {offeringDetails.name}

@@ -81,7 +81,7 @@ export const DirectEmailInviteDialog = ({
               </>
             }
           >
-            <div className="size-lg">
+            <div>
               <StringGroup
                 name="email"
                 validate={composeValidators(required, email)}

@@ -243,7 +243,7 @@ export const AccessSubnetMatrix: FC<AccessSubnetMatrixProps> = ({
               { offering: target.label },
             )}
           >
-            <span className="text-quaternary text-decoration-underline-dotted">
+            <span className="text-quaternary underline decoration-dotted">
               {target.label}
             </span>
           </Tooltip>

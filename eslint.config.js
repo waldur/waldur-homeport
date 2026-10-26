@@ -146,6 +146,18 @@ const RADIX_MENU_IMPORTS = [
   },
 ];
 
+// Classes that style nothing on purpose: selectors the end-to-end suite in
+// waldur-integration-testing (tests/components, tests/pages) depends on, so
+// waldur-custom/no-unknown-class must not report them. Prefer a data-testid
+// for a new hook; remove an entry here only together with its selector there.
+const UNKNOWN_CLASS_HOOKS = [
+  // react-select's BEM names, kept by waldur-ui's Select (tailwindStyles.ts)
+  // for tests/components/select.py and a few stylesheets.
+  '^metronic-select(?:-container|__[\\w-]+)$',
+  '^(?:toolbar|extra-toolbar|footer|middle-box|provider-offering)$',
+  '^(?:btn-toggle-filters|filter-field|right-icon|tc-sidebar)$',
+];
+
 export default tseslint
   .config(
     eslint.configs.recommended,
@@ -253,6 +265,13 @@ export default tseslint
         // Bootstrap utilities _utilities.scss no longer generates (unused, or
         // only ever used at the base size) compile to nothing.
         'waldur-custom/no-retired-bootstrap-utility': 'error',
+        // A class that neither Tailwind nor any stylesheet defines styles
+        // nothing — a typo or a leftover. Existing ones are listed per file
+        // in unknown-classes.baseline.json; any other one fails.
+        'waldur-custom/no-unknown-class': [
+          'error',
+          { allow: UNKNOWN_CLASS_HOOKS },
+        ],
         // Bootstrap layout utilities (d-*, flex-column, items-*, justify-*, w-100, etc.)
         // have direct Tailwind equivalents. Autofixes to Tailwind.
         'waldur-custom/no-bootstrap-layout-utility': 'error',
@@ -445,6 +464,21 @@ export default tseslint
         'waldur-custom/require-font-size-scale': 'off',
         'waldur-custom/no-retired-bootstrap-utility': 'off',
         'waldur-custom/no-bootstrap-layout-utility': 'off',
+        // Tests pass made-up classes to check they are forwarded.
+        'waldur-custom/no-unknown-class': 'off',
+      },
+    },
+    {
+      // A standalone app has its own Tailwind entry point.
+      files: ['apps/micro-app-poc/**/*.{ts,tsx}'],
+      rules: {
+        'waldur-custom/no-unknown-class': [
+          'error',
+          {
+            entryPoint: 'apps/micro-app-poc/src/tailwind.css',
+            allow: UNKNOWN_CLASS_HOOKS,
+          },
+        ],
       },
     },
     {

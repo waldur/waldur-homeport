@@ -88,7 +88,7 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
 
   return (
     <WizardForm {...props}>
-      <Row className="size-lg">
+      <Row>
         <SelectGroup
           name="category"
           label={translate('Category')}
