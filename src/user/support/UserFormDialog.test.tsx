@@ -499,3 +499,66 @@ describe.skip('UserFormDialog', () => {
     });
   });
 });
+
+describe('UserFormDialog username rules', () => {
+  const user = userEvent.setup();
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  // `waldur createstaffuser` stores the username as given, so accounts exist
+  // whose names this form would refuse to create.
+  it('edits a user whose username has uppercase letters', async () => {
+    const existingUser = {
+      uuid: 'admin-uuid',
+      username: 'ExampleAdmin',
+      email: 'admin@example.com',
+      is_active: true,
+      is_staff: true,
+      is_support: false,
+      can_use_personal_access_tokens: false,
+      has_usable_password: true,
+    } as any;
+    vi.mocked(usersPartialUpdate).mockResolvedValueOnce({
+      data: { ...existingUser, is_support: true },
+    } as any);
+
+    renderWithProviders(<UserFormDialog resolve={{ user: existingUser }} />);
+
+    await user.click(screen.getByLabelText(/Support/i));
+    const next = screen.getByTestId('wizard-submit-btn');
+    await waitFor(() => expect(next).not.toBeDisabled());
+
+    await user.click(next); // to Personal information
+    await user.click(screen.getByTestId('wizard-submit-btn')); // to Identity
+    await user.click(screen.getByTestId('wizard-submit-btn')); // to Review
+    const save = screen.getByTestId('wizard-submit-btn');
+    await waitFor(() => expect(save).toHaveTextContent('Save'));
+    await user.click(save);
+
+    await waitFor(() => {
+      expect(usersPartialUpdate).toHaveBeenCalledWith({
+        path: { uuid: 'admin-uuid' },
+        body: expect.objectContaining({ is_support: true }),
+      });
+    });
+  });
+
+  it('rejects uppercase letters when creating a user', async () => {
+    renderWithProviders(<UserFormDialog resolve={{}} />);
+
+    const username = screen.getByLabelText(/Username/i);
+    await user.type(username, 'ExampleAdmin');
+    await user.type(screen.getByLabelText(/Email/i), 'admin@example.com');
+    await waitFor(() =>
+      expect(screen.getByTestId('wizard-submit-btn')).toBeDisabled(),
+    );
+
+    await user.clear(username);
+    await user.type(username, 'exampleadmin');
+    await waitFor(() =>
+      expect(screen.getByTestId('wizard-submit-btn')).not.toBeDisabled(),
+    );
+  });
+});

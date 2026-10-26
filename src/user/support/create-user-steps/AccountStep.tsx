@@ -29,6 +29,12 @@ const maxLength128 = (value: string) =>
     ? translate('Must be 128 characters or fewer.')
     : undefined;
 
+const validateUsername = composeValidators(
+  required,
+  usernameValidator,
+  maxLength128,
+);
+
 export const AccountStep: FC<WizardStepProps> = (props) => {
   const form = useForm<UserFormData>();
   const { values } = useFormState<UserFormData>();
@@ -53,7 +59,10 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
     <WizardModal {...props}>
       <StringGroup
         name="username"
-        validate={composeValidators(required, usernameValidator, maxLength128)}
+        // Read-only when editing, here and in the API. Accounts created
+        // outside this form (e.g. `waldur createstaffuser`) can hold names
+        // the create rules reject, which would block every edit unseen.
+        validate={editMode ? undefined : validateUsername}
         placeholder={translate('e.g. john.doe')}
         label={translate('Username')}
         required
