@@ -34,12 +34,12 @@ export const DashboardCard: FC<DashboardCardProps> = ({
       }}
     >
       <Card.Body className="flex items-center">
-        <div className="symbol symbol-50px me-4 shrink-0">
-          <div
-            className={`symbol-label ${isClickable ? backgroundColor : 'bg-gray-300 dark:bg-gray-dark-600'}`}
-          >
-            {icon}
-          </div>
+        <div
+          className={`size-[50px] me-4 shrink-0 rounded-md flex items-center justify-center ${
+            isClickable ? backgroundColor : 'bg-gray-300 dark:bg-gray-dark-600'
+          }`}
+        >
+          {icon}
         </div>
         <div className="grow">
           <Card.Title className="mb-1 h5">{title}</Card.Title>

@@ -46,8 +46,7 @@ const ProviderOrganizationsListComponent = ({ provider }) => {
     {
       title: translate('Members'),
       render: CustomerMembersColumn,
-      // Ellipsis clips the first avatar: symbol-group children have a
-      // negative left margin, which td.ellipsis's overflow-x hides.
+      // Avoid clipping avatar stack rings or overflow tooltips inside table cell.
       ellipsis: false,
     },
     {

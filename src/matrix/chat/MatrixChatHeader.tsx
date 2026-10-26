@@ -10,6 +10,7 @@ import {
 import { FC, useEffect, useState } from 'react';
 
 import {
+  Avatar,
   BaseButton,
   Menu,
   Popover,
@@ -18,7 +19,6 @@ import {
   Tooltip,
 } from 'waldur-ui';
 
-import Avatar from '@/core/Avatar';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { MatrixCredentialsDialog } from '@/matrix/MatrixJoinButton';
@@ -226,8 +226,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
       <Avatar
         name={roomName}
         size={40}
-        circle
-        labelClassName={getChatAvatarClass(roomUuid)}
+        fallbackClassName={getChatAvatarClass(roomUuid)}
       />
 
       <div className="flex items-baseline gap-1 grow" style={{ minWidth: 0 }}>

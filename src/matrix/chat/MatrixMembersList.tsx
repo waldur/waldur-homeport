@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Avatar, Badge } from 'waldur-ui';
 
-import Avatar from '@/core/Avatar';
 import { translate } from '@/i18n';
 
 import { getChatAvatarClass } from './chatColors';
@@ -41,9 +40,8 @@ export const MatrixMembersList: FC = () => {
                 name={m.name}
                 src={m.image}
                 size={24}
-                circle
                 className="shrink-0"
-                labelClassName={getChatAvatarClass(m.userId)}
+                fallbackClassName={getChatAvatarClass(m.userId)}
               />
               <span className="truncate grow">{m.name}</span>
               {roleBadge && (

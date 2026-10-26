@@ -509,32 +509,6 @@ $zindex-values: (
   5: 5,
 ) !default;
 
-// Symbol Sizes
-$symbol-sizes: (
-  20px: 20px,
-  24px: 24px,
-  30px: 30px,
-  32px: 32px,
-  35px: 35px,
-  40px: 40px,
-  42px: 42px,
-  45px: 45px,
-  48px: 48px,
-  default: 50px,
-  50px: 50px,
-  56px: 56px,
-  60px: 60px,
-  64px: 64px,
-  70px: 70px,
-  75px: 75px,
-  100px: 100px,
-  125px: 125px,
-  150px: 150px,
-  160px: 160px,
-  175px: 175px,
-  200px: 200px,
-) !default;
-
 // Bullet
 $bullet: (
   bg-color: var(--text-quinary),

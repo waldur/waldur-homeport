@@ -1,7 +1,7 @@
 import { CubeIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import Avatar from '@/core/Avatar';
+import { Avatar } from 'waldur-ui';
 
 interface CategoryThumbnailProps {
   title: string;
@@ -9,6 +9,7 @@ interface CategoryThumbnailProps {
   size?: number;
   fallbackSize?: number;
   circle?: boolean;
+  shape?: 'circle' | 'square';
   fallbackClassName?: string;
 }
 
@@ -17,11 +18,18 @@ export const CategoryThumbnail: FC<CategoryThumbnailProps> = ({
   icon,
   size = 18,
   fallbackSize,
-  circle,
+  circle = false,
+  shape,
   fallbackClassName = 'text-quaternary',
 }) =>
   icon ? (
-    <Avatar name={title} src={icon} circle={circle} size={size} />
+    <Avatar
+      data-testid="category-thumbnail"
+      name={title}
+      src={icon}
+      shape={shape ?? (circle ? 'circle' : 'square')}
+      size={size}
+    />
   ) : (
     <CubeIcon
       size={fallbackSize ?? size}

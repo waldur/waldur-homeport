@@ -14,25 +14,21 @@ import { MultilingualImageEditButton } from './MultilingualImageEditButton';
 import { getKeyTitle } from './utils';
 
 const ColorField = ({ value }) => (
-  <div className="symbol symbol-50px symbol-circle">
-    <div
-      className="symbol-label"
-      style={{
-        backgroundColor: value,
-      }}
-    />
-  </div>
+  <div
+    className="size-[50px] shrink-0 rounded-full inline-block bg-tertiary"
+    style={{
+      backgroundColor: value,
+    }}
+  />
 );
 
 const ImageField = ({ value }) => (
-  <div className="symbol symbol-50px symbol-circle">
-    <div
-      className="symbol-label"
-      style={{
-        backgroundImage: `url(${value})`,
-      }}
-    />
-  </div>
+  <div
+    className="size-[50px] shrink-0 rounded-full bg-center bg-cover bg-no-repeat inline-block bg-tertiary"
+    style={{
+      backgroundImage: `url(${value})`,
+    }}
+  />
 );
 
 const MultilingualImageField = ({

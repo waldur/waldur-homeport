@@ -55,8 +55,12 @@ const CategoryListItem: FunctionComponent<
         className={active ? 'active' : undefined}
       >
         {item.icon ? (
-          <div className="symbol symbol-40px">
-            <img src={item.icon} alt="category" />
+          <div className="size-10 shrink-0 inline-flex items-center justify-center rounded-md overflow-hidden">
+            <img
+              src={item.icon}
+              alt="category"
+              className="size-full object-contain"
+            />
           </div>
         ) : (
           <ImagePlaceholder width="40px" height="40px" />

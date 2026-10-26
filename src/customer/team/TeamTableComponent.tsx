@@ -1,6 +1,7 @@
 import { ReactNode, useMemo } from 'react';
 
-import Avatar from '@/core/Avatar';
+import { Avatar } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { formatDate } from '@/core/dateUtils';
 import { isFeatureVisible } from '@/features/connect';
@@ -86,7 +87,6 @@ export const TeamTableComponent = <
             <Avatar
               name={getField(row, 'full_name')}
               src={getField(row, 'image')}
-              circle
               size={32}
             />
             <p className="mb-0">

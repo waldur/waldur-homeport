@@ -158,7 +158,7 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
                       size="sm"
                       label={
                         <div className="flex items-center">
-                          <div className="symbol symbol-20px me-2">
+                          <div className="size-5 me-2 shrink-0 inline-flex items-center justify-center">
                             <CountryFlag
                               countryCode={country.value}
                               fontSize={16}

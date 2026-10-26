@@ -87,14 +87,18 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
       })}
     >
       <div>
-        <div className={`symbol symbol-${size}px symbol-circle`}>
+        <div
+          className="relative inline-flex shrink-0 items-center justify-center rounded-full overflow-hidden"
+          style={{ width: `${size}px`, height: `${size}px` }}
+        >
           {input.value ? (
-            <div ref={previewRef} className="symbol-label" />
+            <div
+              ref={previewRef}
+              className="size-full bg-center bg-cover bg-no-repeat rounded-full"
+            />
           ) : (
             <ImagePlaceholder width={`${size}px`} height={`${size}px`} circle>
-              <div className="symbol-label text-xl font-medium w-full h-full">
-                {props.alt}
-              </div>
+              <span className="text-xl font-medium">{props.alt}</span>
             </ImagePlaceholder>
           )}
         </div>

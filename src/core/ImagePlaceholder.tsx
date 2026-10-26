@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
 import './ImagePlaceholder.css';
 
-export const getPlaceholderFontSize = (size: string | number) => {
+const getPlaceholderFontSize = (size: string | number) => {
   const s = typeof size === 'string' ? Number(size.split('px')[0]) : size;
   if (!s) return 18;
   else if (s <= 24) return 12;

@@ -4,9 +4,8 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { reviewerProfilesMeRetrieve } from 'waldur-js-client';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import { Avatar, Badge, BaseButton } from 'waldur-ui';
 
-import Avatar from '@/core/Avatar';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { OrcidLogo } from '@/core/OrcidLogo';
@@ -100,7 +99,6 @@ export const ReviewerProfileSummaryCard: FC<
             src={currentUser?.image}
             name={currentUser?.full_name || currentUser?.username || ''}
             size={56}
-            circle
           />
 
           {/* Profile info */}

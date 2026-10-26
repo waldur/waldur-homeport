@@ -8,8 +8,9 @@ import {
   UserInvitationsCountData,
 } from 'waldur-js-client';
 
+import { Avatar } from 'waldur-ui';
+
 import { fetchResultCount, fixURL } from '@/core/api';
-import Avatar from '@/core/Avatar';
 import { renderRoleExpirationDate } from '@/customer/team/TeamTableComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
@@ -127,7 +128,6 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
                         <Avatar
                           src={row.user_image}
                           name={row.user_full_name}
-                          circle
                         />
                         <p className="mb-0">
                           {row.user_full_name || DASH_ESCAPE_CODE}

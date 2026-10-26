@@ -2,7 +2,8 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 import { CategoryGroup } from 'waldur-js-client';
 
-import Avatar from '@/core/Avatar';
+import { Avatar } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { Category } from '../types';
@@ -18,12 +19,7 @@ export const CategoryCard: FunctionComponent<CategoryCardProps> = (props) => (
   <Card as={props.as} item={props.item} className="card-bordered category-card">
     <Card.Body>
       <div className="category-thumb">
-        <Avatar
-          name={props.item.title}
-          src={props.item.icon}
-          circle
-          size={40}
-        />
+        <Avatar name={props.item.title} src={props.item.icon} size={40} />
       </div>
       <h3 className="text-primary text-center font-medium text-sm mb-0 category-title">
         <span className="ellipsis" title={props.item.title}>

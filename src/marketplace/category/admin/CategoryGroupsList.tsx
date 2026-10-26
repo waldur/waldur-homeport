@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react';
 import { marketplaceCategoryGroupsList } from 'waldur-js-client';
 
+import { Avatar } from 'waldur-ui';
+
 import { tabTableProps } from '@/administration/tabTableProps';
-import Avatar from '@/core/Avatar';
 import { Link } from '@/core/Link';
 import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -34,7 +35,7 @@ export const CategoryGroupsList: FunctionComponent<
           render: ({ row }) => (
             <>
               <div className="inline-block align-middle me-2">
-                <Avatar name={row.title} src={row.icon} circle />
+                <Avatar name={row.title} src={row.icon} />
               </div>
               <Link
                 state="admin-marketplace-categories"

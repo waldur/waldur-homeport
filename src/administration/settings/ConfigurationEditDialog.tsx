@@ -47,15 +47,16 @@ const ColorField = (props) => (
       <div
         key={color}
         role="button"
-        className="symbol symbol-50px symbol-circle m-1"
+        className="size-[50px] shrink-0 rounded-full m-1 cursor-pointer"
         onFocus={() => props.input.onChange(color)}
         tabIndex={index}
-        style={
-          color === props.input.value ? { boxShadow: `0 0 12px ${color}` } : {}
-        }
-      >
-        <div className="symbol-label" style={{ backgroundColor: color }} />
-      </div>
+        style={{
+          backgroundColor: color,
+          ...(color === props.input.value
+            ? { boxShadow: `0 0 12px ${color}` }
+            : {}),
+        }}
+      />
     ))}
     <BaseInputField value={props.input.value} onChange={props.input.onChange} />
   </div>

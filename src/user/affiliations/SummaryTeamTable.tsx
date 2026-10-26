@@ -5,7 +5,8 @@ import {
   projectsListUsersList,
 } from 'waldur-js-client';
 
-import Avatar from '@/core/Avatar';
+import { Avatar } from 'waldur-ui';
+
 import { renderRoleExpirationDate } from '@/customer/team/TeamTableComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
@@ -97,7 +98,6 @@ export const SummaryTeamTable: FC<OwnProps> = ({
               <Avatar
                 src={getValue(row, 'image')}
                 name={getValue(row, 'full_name')}
-                circle
               />
 
               <p className="mb-0">

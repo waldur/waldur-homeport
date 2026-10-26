@@ -74,9 +74,9 @@ describe('MatrixMessageItem markdown rendering', () => {
 describe('MatrixMessageItem sender presentation', () => {
   it('renders an avatar and the sender name for other people’s messages', () => {
     const { container } = renderItem('hi there');
-    // The Avatar renders a Metronic symbol with the sender's initials.
+    // The Avatar renders with the sender's initials.
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    expect(container.querySelector('.symbol')).not.toBeNull();
+    expect(container.querySelector('.avatar')).not.toBeNull();
     expect(screen.getByText('Alice')).toBeInTheDocument();
   });
 
@@ -89,7 +89,7 @@ describe('MatrixMessageItem sender presentation', () => {
       />,
     );
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    expect(container.querySelector('.symbol')).toBeNull();
+    expect(container.querySelector('.avatar')).toBeNull();
     // The read-receipt glyph carries an accessible "Sent" label.
     expect(screen.getByLabelText('Sent')).toBeInTheDocument();
     expect(screen.getByText('You')).toBeInTheDocument();

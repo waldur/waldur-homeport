@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
 
-import { FormHeading } from 'waldur-ui';
+import { Avatar, FormHeading } from 'waldur-ui';
 
-import Avatar from '@/core/Avatar';
 import { translate } from '@/i18n';
 
 import { RateStars } from './RateStars';
@@ -28,11 +27,10 @@ export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
       )}
     >
       <Avatar
-        labelClassName="bg-tertiary text-quaternary"
+        fallbackClassName="bg-tertiary text-quaternary"
         name={props.title}
         src={props.image}
         size={32}
-        circle
       />
 
       <div>

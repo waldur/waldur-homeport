@@ -6,10 +6,9 @@ import {
   MarketplaceCategoriesListData,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { Avatar, BaseButton } from 'waldur-ui';
 
 import { tabTableProps } from '@/administration/tabTableProps';
-import Avatar from '@/core/Avatar';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { truncate } from '@/core/utils';
@@ -108,7 +107,7 @@ export const AdminCategoriesPage: FunctionComponent<
           render: ({ row }) => (
             <>
               <div className="inline-block align-middle me-2">
-                <Avatar name={row.title} src={row.icon} circle />
+                <Avatar name={row.title} src={row.icon} />
               </div>
               <CategoryLink item={row}>{row.title}</CategoryLink>
             </>

@@ -2,7 +2,8 @@ import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect, useMemo } from 'react';
 import { Invitation, userInvitationsList } from 'waldur-js-client';
 
-import Avatar from '@/core/Avatar';
+import { Avatar } from 'waldur-ui';
+
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -61,7 +62,7 @@ const InvitationsListComponent: FunctionComponent = () => {
           title: translate('Email'),
           render: ({ row }) => (
             <div className="flex items-center gap-1">
-              <Avatar name={row?.email} size={32} circle />
+              <Avatar name={row?.email} size={32} />
               {row.email}
               <CopyToClipboardButton value={row.email} />
             </div>

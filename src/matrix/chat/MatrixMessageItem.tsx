@@ -3,7 +3,8 @@ import classNames from 'classnames';
 import Markdown from 'markdown-to-jsx';
 import { FC, Fragment, useMemo } from 'react';
 
-import Avatar from '@/core/Avatar';
+import { Avatar } from 'waldur-ui';
+
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 
@@ -345,8 +346,7 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
         name={cleanName}
         src={senderImage}
         size={40}
-        circle
-        labelClassName={getChatAvatarClass(message.sender)}
+        fallbackClassName={getChatAvatarClass(message.sender)}
       />
     );
   };

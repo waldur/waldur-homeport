@@ -2,9 +2,7 @@ import { PhoneIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import { Tooltip } from 'waldur-ui';
-
-import Avatar from '@/core/Avatar';
+import { Avatar, Tooltip } from 'waldur-ui';
 
 import { RoomCallState } from './call/useAllRoomCallStates';
 import { getChatAvatarClass } from './chatColors';
@@ -45,7 +43,8 @@ export const MatrixRoomRailItem: FC<MatrixRoomRailItemProps> = ({
         <Avatar
           name={name}
           size={32}
-          labelClassName={getChatAvatarClass(uuid)}
+          shape="square"
+          fallbackClassName={getChatAvatarClass(uuid)}
         />
         {activeCall && (
           <span className="tc-rail-call text-success" aria-hidden>

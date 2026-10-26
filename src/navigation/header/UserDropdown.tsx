@@ -1,8 +1,7 @@
 import { forwardRef, FunctionComponent } from 'react';
 
-import { Badge, Menu, MenuDisclosure } from 'waldur-ui';
+import { Avatar, Badge, Menu, MenuDisclosure } from 'waldur-ui';
 
-import Avatar from '@/core/Avatar';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -38,7 +37,7 @@ const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
         {!user ? (
           <ImagePlaceholder width="40px" height="40px" circle />
         ) : (
-          <Avatar src={user.image} name={user.full_name} size={40} circle />
+          <Avatar src={user.image} name={user.full_name} size={40} />
         )}
       </div>
       <div className="hidden md:flex flex-col items-start justify-center">
@@ -70,13 +69,11 @@ UserMenuToggle.displayName = 'UserMenuToggle';
 /** The user menu's header: the avatar, the name and the email. */
 const UserMenuHeader = ({ user }: { user: ReturnType<typeof useUser> }) => (
   <>
-    {/* `symbol-50px` sizes Avatar (a Metronic .symbol) up from the 40px it is
-        given while keeping its 40px initials; it goes when Avatar migrates. */}
-    <div className="symbol symbol-50px me-[1.25rem]">
+    <div className="me-[1.25rem] shrink-0">
       {!user ? (
         <ImagePlaceholder width="40px" height="40px" circle />
       ) : (
-        <Avatar src={user.image} name={user.full_name} size={40} circle />
+        <Avatar src={user.image} name={user.full_name} size={40} />
       )}
     </div>
     <div className="flex flex-col">

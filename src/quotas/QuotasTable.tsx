@@ -60,17 +60,14 @@ const ResourceQuotaChart = ({ value, max }) => {
   };
 
   return max === Infinity ? (
-    <div className="symbol symbol-65px symbol-circle">
-      <ImagePlaceholder
-        width="65px"
-        height="65px"
-        backgroundColor="transparent"
-      >
-        <div className="symbol-label text-2xl font-semibold text-quaternary w-full h-full">
-          {value}
-        </div>
-      </ImagePlaceholder>
-    </div>
+    <ImagePlaceholder
+      width="65px"
+      height="65px"
+      backgroundColor="transparent"
+      circle
+    >
+      <span className="text-2xl font-semibold text-quaternary">{value}</span>
+    </ImagePlaceholder>
   ) : (
     <EChart options={chartOptions} height="65px" width="65px" />
   );

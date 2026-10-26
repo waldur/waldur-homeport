@@ -253,7 +253,7 @@ export const MyEditButton = ({ row, refetch }) => (
 | **TruncatedText**        | `src/core/TruncatedText.tsx`        | Responsive text       | Automatic truncation, expandable         |
 | **TruncatedDescription** | `src/core/TruncatedDescription.tsx` | Description text      | Read more/less functionality             |
 | **ImagePlaceholder**     | `src/core/ImagePlaceholder.tsx`     | Image fallback        | Automatic sizing, circular option        |
-| **Avatar**               | `src/core/Avatar.tsx`               | User avatar           | Profile pictures, initials fallback      |
+| **Avatar**               | `packages/ui/src/Avatar/Avatar.tsx` | User avatar           | Profile pictures, initials fallback      |
 
 ### Loading and State Components
 

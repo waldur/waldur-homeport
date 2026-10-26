@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { Offering, Resource } from 'waldur-js-client';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import { AlertItem, Avatar, Badge } from 'waldur-ui';
 
-import Avatar from '@/core/Avatar';
 import { CreateModalButton } from '@/core/buttons';
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -96,7 +95,7 @@ const getAssigneeColumn = (): Column<ApiKeyRow> => ({
   render: ({ row }) =>
     row.user_full_name ? (
       <span className="flex items-center gap-x-2">
-        <Avatar name={row.user_full_name} size={32} circle />
+        <Avatar name={row.user_full_name} size={32} />
         {row.user_full_name}
       </span>
     ) : (

@@ -214,7 +214,7 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
           <ul className="list-unstyled mb-0">
             {stats.topCustomers.map((customer) => (
               <li key={customer.uuid} className="flex items-center gap-2 mb-2">
-                <span className="symbol symbol-30px font-semibold inline-flex items-center justify-center size-[30px] rounded-full bg-secondary">
+                <span className="font-semibold inline-flex items-center justify-center size-[30px] rounded-full bg-secondary">
                   {getInitials(customer.name)}
                 </span>
                 <span className="grow truncate">{customer.name}</span>

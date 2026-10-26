@@ -51,15 +51,6 @@
     place-self: center;
     width: 48px;
     height: 48px;
-
-    // symbol-48px is not a generated Metronic size, so the label would fall back
-    // to its 50px default and distort the circle. Pin it square.
-    .symbol,
-    .symbol-label {
-      width: 48px;
-      height: 48px;
-      min-height: 48px;
-    }
   }
 
   .tc-row-meta {
@@ -214,18 +205,6 @@
     gap: 0.923rem;
     padding: 0.923rem $card-px;
     border-bottom: 1px solid var(--border-secondary);
-
-    .symbol {
-      flex-shrink: 0;
-      width: 40px;
-      height: 40px;
-
-      .symbol-label {
-        width: 40px;
-        height: 40px;
-        min-height: 40px;
-      }
-    }
   }
 
   .tc-header-members {
@@ -361,16 +340,8 @@
     }
   }
 
-  .tc-msg > .symbol {
+  .tc-msg > .avatar {
     align-self: flex-start;
-    width: 40px;
-    height: 40px;
-
-    .symbol-label {
-      width: 40px;
-      height: 40px;
-      min-height: 40px;
-    }
   }
 
   .tc-msg-body {
@@ -1364,25 +1335,13 @@
   gap: 0.462rem;
   width: fit-content;
   padding: 0.308rem 1.077rem;
-
-  .symbol {
-    width: 20px;
-    height: 20px;
-
-    .symbol-label {
-      width: 20px;
-      height: 20px;
-      min-height: 20px;
-      font-size: 0.6rem;
-    }
-  }
 }
 
 .tc-typing__avatars {
   display: inline-flex;
 
   // Overlap, each notched out of the next with a ring in the surface colour.
-  .symbol {
+  .avatar {
     box-shadow: 0 0 0 1.5px var(--bg-primary);
     border-radius: 50%;
   }
