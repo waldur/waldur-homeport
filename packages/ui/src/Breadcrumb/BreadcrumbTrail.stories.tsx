@@ -42,7 +42,7 @@ const Frame = ({
   width?: number;
   children: ReactNode;
 }) => (
-  <div className="flex p-4" style={{ width }}>
+  <div className="flex p-3" style={{ width }}>
     {children}
   </div>
 );
@@ -62,7 +62,7 @@ const Switcher = ({ close }: { close: () => void }) => (
       <li key={name}>
         <button
           type="button"
-          className="block w-full border-0 bg-transparent px-5 py-2 text-start text-sm text-brand hover:bg-[var(--bg-brand-primary-alt)]"
+          className="block w-full border-0 bg-transparent px-4 py-1.5 text-start text-sm text-brand hover:bg-[var(--bg-brand-primary-alt)]"
           onClick={close}
         >
           {name}
@@ -433,11 +433,11 @@ export const WithProvider: Story = {
     const [page, setPage] = useState('project');
     return (
       <BreadcrumbsProvider renderLink={routerLink}>
-        <div className="flex flex-col gap-3 p-4" style={{ width: 720 }}>
+        <div className="flex flex-col gap-2.5 p-3" style={{ width: 720 }}>
           <div className="flex">
             <BreadcrumbTrail />
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-1.5">
             {Object.keys(PAGES).map((name) => (
               <button
                 key={name}

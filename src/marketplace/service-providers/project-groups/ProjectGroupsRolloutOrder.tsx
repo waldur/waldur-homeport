@@ -4,7 +4,7 @@ import { translate } from '@/i18n';
 
 /** The order that keeps existing groups' GIDs when project groups start. */
 export const ProjectGroupsRolloutOrder: FC = () => (
-  <ol className="mb-0 ps-4">
+  <ol className="mb-0 ps-3">
     <li>
       {translate(
         'Set a project group GID range on the service provider’s POSIX ID pool.',

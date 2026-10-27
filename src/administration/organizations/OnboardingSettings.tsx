@@ -28,7 +28,7 @@ export const OnboardingSettings = () => {
       loadData={refetch}
     />
   ) : data ? (
-    <div className="pt-5">
+    <div className="pt-4">
       {isStaff && (
         <>
           <OnboardingSetup />

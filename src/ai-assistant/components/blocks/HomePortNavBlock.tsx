@@ -20,11 +20,11 @@ export const HomePortNavBlock: FC<UIBlockProps> = ({ block }) => {
   if (!links || links.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-2 my-2">
+    <div className="flex flex-col gap-1.5 my-1.5">
       {block.content && (
         <small className="text-quaternary">{block.content}</small>
       )}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5">
         {links.map((link, i) => (
           <a
             key={i}

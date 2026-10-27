@@ -39,9 +39,9 @@ export const PublicOfferingTermsOfService: FunctionComponent<
 
   if (isLoading) {
     return (
-      <Card className="card-bordered mb-10">
+      <Card className="card-bordered mb-8">
         <Card.Body>
-          <div className="text-center py-5">
+          <div className="text-center py-4">
             <LoadingSpinner />
           </div>
         </Card.Body>
@@ -51,9 +51,9 @@ export const PublicOfferingTermsOfService: FunctionComponent<
 
   if (!activeTos) {
     return (
-      <Card className="card-bordered mb-10">
+      <Card className="card-bordered mb-8">
         <Card.Body>
-          <div className="text-center py-3">
+          <div className="text-center py-2.5">
             <p className="text-quaternary">
               {translate('No Terms of Service available.')}
             </p>
@@ -67,7 +67,7 @@ export const PublicOfferingTermsOfService: FunctionComponent<
   const hasExternalLink = activeTos.terms_of_service_link;
 
   return (
-    <Card className="card-bordered mb-10">
+    <Card className="card-bordered mb-8">
       <Card.Body>
         <PublicOfferingCardTitle>
           {translate('Terms of Service')}
@@ -80,9 +80,9 @@ export const PublicOfferingTermsOfService: FunctionComponent<
         )}
 
         {hasExternalLink && (
-          <div className="mt-4">
+          <div className="mt-3">
             <strong>{translate('External link')}:</strong>
-            <div className="mt-2">
+            <div className="mt-1.5">
               <ExternalLink
                 url={activeTos.terms_of_service_link}
                 label={activeTos.terms_of_service_link}
@@ -93,7 +93,7 @@ export const PublicOfferingTermsOfService: FunctionComponent<
         )}
 
         {!hasTextContent && !hasExternalLink && (
-          <div className="text-center py-3">
+          <div className="text-center py-2.5">
             <p className="text-quaternary">
               {translate('No Terms of Service content available.')}
             </p>

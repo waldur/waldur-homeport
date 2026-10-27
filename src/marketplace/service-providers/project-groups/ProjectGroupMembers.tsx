@@ -8,10 +8,10 @@ import { translate } from '@/i18n';
 export const ProjectGroupMembers: FC<{ members?: string[] }> = ({
   members,
 }) => (
-  <div className="px-4 py-2">
-    <div className="font-medium mb-2">{translate('Members')}</div>
+  <div className="px-3 py-1.5">
+    <div className="font-medium mb-1.5">{translate('Members')}</div>
     {members?.length ? (
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5">
         {members.map((username) => (
           <Badge key={username} variant="neutral" tone="outline">
             {username}

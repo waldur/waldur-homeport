@@ -25,7 +25,7 @@ const NamespaceStats: FunctionComponent<{
   threshold: number;
   emptyText?: string;
 }> = ({ label, stats, threshold, emptyText }) => (
-  <div className="mb-3">
+  <div className="mb-2.5">
     <div className="font-medium mb-1">{label}</div>
     {stats ? (
       <>
@@ -76,7 +76,7 @@ export const PosixIdPoolStatsExpandable: FunctionComponent<{
   }
 
   return (
-    <div className="px-4 py-2" style={{ maxWidth: 480 }}>
+    <div className="px-3 py-1.5" style={{ maxWidth: 480 }}>
       <NamespaceStats
         label={translate('UID')}
         stats={data.uid}

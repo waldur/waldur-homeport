@@ -84,7 +84,7 @@ export const ProjectDashboardCredit = ({
         cardTitle={
           <>
             {chart.title}
-            <small className="text-quaternary text-xs ms-4 font-normal">
+            <small className="text-quaternary text-xs ms-3 font-normal">
               (
               {translate('{date} balance', {
                 date: formatDate(DateTime.now().startOf('month')),
@@ -92,7 +92,7 @@ export const ProjectDashboardCredit = ({
               : {defaultCurrency(credit.value)})
             </small>
             {policyWarning && (
-              <span className="ms-2 inline-flex">
+              <span className="ms-1.5 inline-flex">
                 <WarningTip
                   icon={WarningOctagonIcon}
                   size={16}

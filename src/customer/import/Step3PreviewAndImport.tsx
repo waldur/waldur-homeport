@@ -158,10 +158,10 @@ export const Step3PreviewAndImport: FC<WizardFormStepProps> = (props) => {
       submitTooltip={(!skipErrors && tooltip) || undefined}
     >
       <div>
-        <div className="flex justify-start mb-3">
+        <div className="flex justify-start mb-2.5">
           <div ref={refToolbar}>{/* Portal destination */}</div>
         </div>
-        <div className="flex justify-between text-quaternary mb-3">
+        <div className="flex justify-between text-quaternary mb-2.5">
           <span>
             {data.length} {translate('Organizations')}
           </span>

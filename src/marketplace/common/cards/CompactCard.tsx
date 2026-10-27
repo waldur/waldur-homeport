@@ -28,10 +28,10 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
       <strong>{offering.name}</strong>
       <div className="text-quaternary small">{offering.customer_name}</div>
       {offering.description && (
-        <div className="mt-2 small">{offering.description}</div>
+        <div className="mt-1.5 small">{offering.description}</div>
       )}
       {offering.tags?.length > 0 && (
-        <div className="mt-2">
+        <div className="mt-1.5">
           <TagBadges tags={offering.tags} />
         </div>
       )}
@@ -49,7 +49,7 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
           disabled={!isAllowed}
         >
           <Card className="card-bordered h-full cursor-pointer border-hover-brand">
-            <Card.Body className="p-4 flex items-center gap-3">
+            <Card.Body className="p-3 flex items-center gap-2.5">
               {offering.thumbnail ? (
                 <Image src={offering.thumbnail} size={48} isContain circle />
               ) : (

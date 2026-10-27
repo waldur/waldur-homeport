@@ -97,7 +97,7 @@ export const FullNavigation: Story = {
   render: () => (
     <SidebarProvider className="h-[750px]">
       <Sidebar>
-        <SidebarHeader className="gap-4">
+        <SidebarHeader className="gap-3">
           <SidebarBrand logo={<WaldurLogo />} />
           <SidebarModeCard
             icon={<IdentificationCardIcon size={22} weight="bold" />}
@@ -168,7 +168,7 @@ export const FullNavigation: Story = {
           </SidebarSection>
         </SidebarContent>
 
-        <SidebarFooter className="gap-2">
+        <SidebarFooter className="gap-1.5">
           <SidebarSeparator className="mx-0" />
           <SidebarMenu>
             <SidebarNavItem
@@ -198,7 +198,7 @@ export const AccordionHierarchy: Story = {
   render: () => (
     <SidebarProvider className="h-[650px]">
       <Sidebar>
-        <SidebarHeader className="gap-4">
+        <SidebarHeader className="gap-3">
           <SidebarBrand logo={<WaldurLogo />} />
         </SidebarHeader>
         <SidebarContent>
@@ -261,7 +261,7 @@ export const ScrollableContent: Story = {
     <div className="h-[500px] w-[300px] overflow-hidden rounded-xl border-[1px] border-[var(--sidebar-border)] shadow-md">
       <SidebarProvider className="min-h-0 h-full w-full">
         <Sidebar collapsible="none" className="h-full w-full">
-          <SidebarHeader className="gap-2">
+          <SidebarHeader className="gap-1.5">
             <SidebarBrand logo={<WaldurLogo />} />
           </SidebarHeader>
           <SidebarContent>
@@ -339,7 +339,7 @@ export const CollapsedHoverToExpand: Story = {
   render: () => (
     <SidebarProvider className="h-[600px]" defaultOpen={false}>
       <Sidebar>
-        <SidebarHeader className="gap-4">
+        <SidebarHeader className="gap-3">
           <SidebarBrand logo={<WaldurLogo />} />
           <SidebarModeCard
             icon={<IdentificationCardIcon size={22} weight="bold" />}
@@ -367,7 +367,7 @@ export const CollapsedHoverToExpand: Story = {
           </SidebarSection>
         </SidebarContent>
       </Sidebar>
-      <div className="p-4 text-sm text-quaternary">
+      <div className="p-3 text-sm text-quaternary">
         Content area — should not shift when the sidebar hover-expands.
       </div>
     </SidebarProvider>
@@ -401,13 +401,13 @@ interface ThemedSidebarProps {
 
 const ThemedSidebarPreview = ({ styleName }: ThemedSidebarProps) => (
   <div data-sidebar-style={styleName} className="flex flex-col">
-    <div className="mb-2 text-xs font-semibold tracking-wider text-quaternary uppercase">
+    <div className="mb-1.5 text-xs font-semibold tracking-wider text-quaternary uppercase">
       {styleName}
     </div>
     <div className="h-[550px] w-[300px] overflow-hidden rounded-xl border-[1px] border-[var(--sidebar-border)] shadow-md">
       <SidebarProvider className="min-h-0 h-full w-full">
         <Sidebar collapsible="none" className="h-full w-full">
-          <SidebarHeader className="gap-2">
+          <SidebarHeader className="gap-1.5">
             <SidebarBrand logo={<WaldurLogo />} />
           </SidebarHeader>
           <SidebarContent>
@@ -450,7 +450,7 @@ const ThemedSidebarPreview = ({ styleName }: ThemedSidebarProps) => (
 /** Visual comparison of all 5 supported sidebar color styles (dark, light, primary, accent, accent-light). */
 export const AllThemeStyles: Story = {
   render: () => (
-    <div className="flex flex-wrap gap-8 p-6">
+    <div className="flex flex-wrap gap-6 p-5">
       <ThemedSidebarPreview styleName="dark" />
       <ThemedSidebarPreview styleName="light" />
       <ThemedSidebarPreview styleName="primary" />
@@ -473,14 +473,14 @@ export const InteractiveStyle: StoryObj<{ style: SidebarStyle }> = {
     style: 'accent',
   },
   render: (args) => (
-    <div data-sidebar-style={args.style} className="p-6">
-      <div className="mb-3 text-xs font-semibold tracking-wider text-quaternary uppercase">
+    <div data-sidebar-style={args.style} className="p-5">
+      <div className="mb-2.5 text-xs font-semibold tracking-wider text-quaternary uppercase">
         Current style: {args.style}
       </div>
       <div className="h-[650px] w-[300px] overflow-hidden rounded-xl border-[1px] border-[var(--sidebar-border)] shadow-md">
         <SidebarProvider className="min-h-0 h-full w-full">
           <Sidebar collapsible="none" className="h-full w-full">
-            <SidebarHeader className="gap-4">
+            <SidebarHeader className="gap-3">
               <SidebarBrand logo={<WaldurLogo />} />
               <SidebarModeCard
                 icon={<IdentificationCardIcon size={22} weight="bold" />}
@@ -549,7 +549,7 @@ export const MobileSheetInteraction: Story = {
     <SidebarProvider mobileBreakpoint={100000} className="h-[500px]">
       <SidebarTrigger />
       <Sidebar>
-        <SidebarHeader className="gap-4">
+        <SidebarHeader className="gap-3">
           <SidebarBrand logo={<WaldurLogo />} />
         </SidebarHeader>
         <SidebarContent>

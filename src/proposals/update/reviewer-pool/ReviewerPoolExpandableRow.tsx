@@ -338,7 +338,7 @@ export const ReviewerPoolExpandableRow: FC<ReviewerPoolExpandableRowProps> = ({
     <ExpandableContainer>
       <EmbeddedTabs
         defaultValue="profile"
-        listClassName="mb-4"
+        listClassName="mb-3"
         tabs={[
           {
             key: 'profile',

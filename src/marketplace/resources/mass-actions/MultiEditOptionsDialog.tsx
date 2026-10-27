@@ -134,7 +134,7 @@ export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
             {offeringQuery.isLoading ? (
               <LoadingSpinner />
             ) : offeringQuery.error ? (
-              <LoadingErred loadData={offeringQuery.refetch} className="mb-4" />
+              <LoadingErred loadData={offeringQuery.refetch} className="mb-3" />
             ) : editableOptions?.order.length ? (
               <OptionsForm
                 options={editableOptions}

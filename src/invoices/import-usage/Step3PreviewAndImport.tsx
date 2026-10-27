@@ -95,7 +95,7 @@ export const Step3PreviewAndImport: FC<Step3Props> = (props) => {
           <div>
             <WithTooltip label={row.customerName} />
             {row.customerMatched && (
-              <Badge variant="success" tone="outline" className="ms-2">
+              <Badge variant="success" tone="outline" className="ms-1.5">
                 {translate('Matched')}
               </Badge>
             )}
@@ -183,10 +183,10 @@ export const Step3PreviewAndImport: FC<Step3Props> = (props) => {
       }
     >
       <div>
-        <div className="flex justify-start mb-3">
+        <div className="flex justify-start mb-2.5">
           <div ref={refToolbar}>{/* Portal destination */}</div>
         </div>
-        <div className="flex justify-between text-quaternary mb-3">
+        <div className="flex justify-between text-quaternary mb-2.5">
           <span>
             {summary.errors === 0 && summary.skipped === 0
               ? translate('{n} ready to import', { n: summary.ready })

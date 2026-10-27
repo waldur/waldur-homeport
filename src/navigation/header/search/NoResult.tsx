@@ -43,7 +43,7 @@ export const NoResult: FC<NoResultProps> = ({
       style={style}
     >
       <RadialBackground className="background" />
-      <div className="text-center flex flex-col items-center pb-10 position-relative z-index-1">
+      <div className="text-center flex flex-col items-center pb-8 position-relative z-index-1">
         <div className="icon-square icon-lg search-icon">{icon}</div>
 
         <div>
@@ -60,7 +60,7 @@ export const NoResult: FC<NoResultProps> = ({
           </div>
         </div>
         {(actions || callback) && (
-          <div className="actions flex justify-center gap-4 w-full">
+          <div className="actions flex justify-center gap-3 w-full">
             {Boolean(callback) && (
               <BaseButton
                 variant="tertiary"

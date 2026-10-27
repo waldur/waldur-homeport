@@ -59,8 +59,8 @@ interface Props {
  * work without touching the money, and an empty balance stops neither.
  */
 export const CreditHorizon: FC<Props> = ({ events }) => (
-  <WidgetCard cardTitle={translate('What happens next')} className="mb-5">
-    <div className="separator mt-4 mb-5" />
+  <WidgetCard cardTitle={translate('What happens next')} className="mb-4">
+    <div className="separator mt-3 mb-4" />
     {events.length === 0 ? (
       <p className="text-quaternary mb-0">
         {translate(
@@ -75,7 +75,7 @@ export const CreditHorizon: FC<Props> = ({ events }) => (
           // is dated today, so a project with both a project cap and an
           // organization cap at their thresholds produced two identical keys.
           <div
-            className="flex gap-4"
+            className="flex gap-3"
             key={`${event.kind}-${event.date}-${index}`}
           >
             <div className="flex flex-col items-center">
@@ -85,11 +85,11 @@ export const CreditHorizon: FC<Props> = ({ events }) => (
                 size="sm"
               />
               {!isLast && (
-                <div className="border-l-[1px] border-l-secondary grow my-2" />
+                <div className="border-l-[1px] border-l-secondary grow my-1.5" />
               )}
             </div>
-            <div className={isLast ? 'mb-0' : 'mb-5'}>
-              <div className="flex flex-wrap items-baseline gap-2">
+            <div className={isLast ? 'mb-0' : 'mb-4'}>
+              <div className="flex flex-wrap items-baseline gap-1.5">
                 <span className="font-medium">{event.title}</span>
                 <small className="text-quaternary">{metaLabel(event)}</small>
               </div>

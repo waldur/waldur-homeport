@@ -100,7 +100,7 @@ export const ChangeResourceLimitsTab: FC<ChangeResourceLimitsTabProps> = ({
 
   return (
     <div>
-      <p className="mb-4">
+      <p className="mb-3">
         <strong>{translate('Total freed')}</strong>{' '}
         {freedCapacitySummary && ` - ${freedCapacitySummary}`}
       </p>

@@ -81,7 +81,7 @@ export const CallRoleMappingsList = (props) => {
           <CallRoleMappingsRowActions row={row} refetch={tableProps.fetch} />
         )
       }
-      placeholderComponent={<NoRoleMappingsWarning className="m-6" />}
+      placeholderComponent={<NoRoleMappingsWarning className="m-5" />}
       showPageSizeSelector
     />
   );

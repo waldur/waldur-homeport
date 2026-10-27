@@ -75,7 +75,7 @@ export const ExternalGatewayFixedIpsTable: FC<{
   return (
     <>
       {fields.length > 0 && (
-        <Table responsive bordered striped className="mt-3">
+        <Table responsive bordered striped className="mt-2.5">
           <thead>
             <tr>
               <th>{translate('IP address')}</th>

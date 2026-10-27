@@ -234,7 +234,7 @@ const FormModalComponent: FC<
             <LoadingErred loadData={refetch} />
           ) : resources?.length && value.meta.dirty ? (
             <>
-              <p className="text-secondary font-medium mt-4">
+              <p className="text-secondary font-medium mt-3">
                 {translate(
                   "You've changed the project end date. Some resources now conflict with this date. Review the list below to align or confirm resource termination dates.",
                 )}
@@ -253,7 +253,7 @@ const FormModalComponent: FC<
                 size="sm"
                 checked={confirm}
                 onChange={(value) => setConfirm(value.target.checked)}
-                className="pt-3"
+                className="pt-2.5"
                 label={translate(
                   'Update all selected resource termination dates to match project end date',
                 )}
@@ -264,7 +264,7 @@ const FormModalComponent: FC<
 
         {step === 2 && (
           <div className="flex flex-col grow" style={{ minHeight: 0 }}>
-            <p className="text-secondary mb-4">
+            <p className="text-secondary mb-3">
               {translate(
                 'The following resources were not selected and will be forcibly terminated on the project end date:',
               )}

@@ -201,7 +201,7 @@ export const UsageReportVis: FC<Props> = ({
 
   if (!report) {
     return (
-      <div className="text-quaternary p-4">
+      <div className="text-quaternary p-3">
         {translate('No usage data available.')}
       </div>
     );
@@ -216,7 +216,7 @@ export const UsageReportVis: FC<Props> = ({
   return (
     <div>
       {/* ── Row 1: summary + downloads ───────────────────────────────── */}
-      <div className="flex items-center gap-3 mb-2 flex-wrap">
+      <div className="flex items-center gap-2.5 mb-1.5 flex-wrap">
         <span className="text-quaternary small">
           {translate(
             '{destination} · {hours} h across {numUsers} {user} and {numProjects} {project}',
@@ -233,13 +233,13 @@ export const UsageReportVis: FC<Props> = ({
             },
           )}
           {!report.isComplete && (
-            <Badge variant="warning" tone="outline" className="ms-2">
+            <Badge variant="warning" tone="outline" className="ms-1.5">
               {translate('In progress')}
             </Badge>
           )}
         </span>
 
-        <div className="flex gap-2 ms-auto">
+        <div className="flex gap-1.5 ms-auto">
           <Tooltip label={translate('Download Excel')}>
             <button
               type="button"
@@ -274,7 +274,7 @@ export const UsageReportVis: FC<Props> = ({
           </Tooltip>
         </div>
         {excelProgress && (
-          <span className="text-quaternary small ms-2">
+          <span className="text-quaternary small ms-1.5">
             {translate('Preparing Excel — sheet {current} of {total}…', {
               current: excelProgress.current,
               total: excelProgress.total,
@@ -284,7 +284,7 @@ export const UsageReportVis: FC<Props> = ({
       </div>
 
       {/* ── Row 2: toggle controls ────────────────────────────────────── */}
-      <div className="flex items-center gap-2 mb-3 flex-wrap">
+      <div className="flex items-center gap-1.5 mb-2.5 flex-wrap">
         {/* Metric selector */}
         <SegmentedControl<UsageMetric>
           aria-label={translate('Metric')}

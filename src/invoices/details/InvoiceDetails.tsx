@@ -28,12 +28,12 @@ export const InvoiceDetails = ({
 
   return (
     <>
-      <Card className="card-bordered mb-5">
+      <Card className="card-bordered mb-4">
         <Card.Body className="flex">
           <Row>
             {invoice.customer_details && (
               <Col>
-                <div className="text-base mb-3 text-uppercase">
+                <div className="text-base mb-2.5 text-uppercase">
                   {translate('Invoice to')}
                 </div>
                 <CustomerDetails customer={invoice.customer_details} />
@@ -41,7 +41,7 @@ export const InvoiceDetails = ({
             )}
             {invoice.issuer_details && (
               <Col>
-                <div className="text-base mb-3 text-uppercase">
+                <div className="text-base mb-2.5 text-uppercase">
                   {translate('Invoice from')}
                 </div>
                 <CustomerDetails customer={invoice.issuer_details} />

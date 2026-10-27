@@ -25,24 +25,24 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
   }
 
   return (
-    <Card className="card-bordered mb-6">
-      <Card.Body className="text-center py-10">
-        <div className="mb-4">
+    <Card className="card-bordered mb-5">
+      <Card.Body className="text-center py-8">
+        <div className="mb-3">
           <WarningIcon size={64} className="text-warning" weight="duotone" />
         </div>
-        <h3 className="mb-4">{translate('Profile required')}</h3>
-        <p className="text-quaternary mb-6">
+        <h3 className="mb-3">{translate('Profile required')}</h3>
+        <p className="text-quaternary mb-5">
           {translate(
             'To accept this invitation, you need to complete the following steps:',
           )}
         </p>
-        <div className="flex flex-col items-center gap-4">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <Badge
               variant={hasProfile ? 'success' : 'secondary'}
               shape="circle"
               tone="outline"
-              className="p-2"
+              className="p-1.5"
             >
               {hasProfile ? '✓' : '1'}
             </Badge>
@@ -50,12 +50,12 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
               {translate('Create your reviewer profile')}
             </span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <Badge
               variant={isPublished ? 'success' : 'secondary'}
               shape="circle"
               tone="outline"
-              className="p-2"
+              className="p-1.5"
             >
               {isPublished ? '✓' : '2'}
             </Badge>
@@ -64,7 +64,7 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
             </span>
           </div>
         </div>
-        <div className="mt-8">
+        <div className="mt-6">
           {!hasProfile ? (
             <Link
               state="profile-manage"
@@ -84,7 +84,7 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
           ) : null}
         </div>
         {hasProfile && !isPublished && (
-          <p className="text-quaternary mt-4 small">
+          <p className="text-quaternary mt-3 small">
             {translate(
               'Publishing your profile will make it visible to call managers for reviewer discovery.',
             )}

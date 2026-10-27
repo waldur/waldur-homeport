@@ -200,7 +200,7 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
                               input.onChange(currentSections);
                             }}
                             key={section.key}
-                            className="mb-2"
+                            className="mb-1.5"
                             label={section.title}
                           />
                         ))}

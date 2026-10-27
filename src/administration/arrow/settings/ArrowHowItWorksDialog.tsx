@@ -594,7 +594,7 @@ export const ArrowHowItWorksDialog: FC = () => {
       title={translate('How Arrow Integration works')}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         {/* Overview */}
         <section>
           <AlertItem
@@ -609,7 +609,7 @@ export const ArrowHowItWorksDialog: FC = () => {
             <AlertItem
               type="floating"
               variant="warning"
-              className="mt-4"
+              className="mt-3"
               title={translate('Invoice price source')}
               body={
                 <>
@@ -626,43 +626,43 @@ export const ArrowHowItWorksDialog: FC = () => {
 
         {/* Data Flow Diagram */}
         <section>
-          <h4 className="mb-4">{translate('Data flow overview')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Data flow overview')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Arrow API data is mapped to Waldur models and linked to existing resources, customers, and invoices.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart code={DATA_FLOW_DIAGRAM} className="text-center" />
           </div>
         </section>
 
         {/* Setup Flow */}
         <section>
-          <h4 className="mb-4">{translate('Initial setup flow')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Initial setup flow')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'The setup wizard guides you through connecting to Arrow and mapping customers to Waldur organizations.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart code={SETUP_FLOW_DIAGRAM} className="text-center" />
           </div>
         </section>
 
         {/* Field Mappings Section */}
         <section>
-          <h4 className="mb-4">{translate('Field mappings')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Field mappings')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'The following tables show how Arrow API fields map to Waldur database models.',
             )}
           </p>
 
           {/* Settings Fields */}
-          <div className="mb-6">
-            <h5 className="mb-3">{translate('ArrowSettings')}</h5>
-            <p className="text-quaternary small mb-3">
+          <div className="mb-5">
+            <h5 className="mb-2.5">{translate('ArrowSettings')}</h5>
+            <p className="text-quaternary small mb-2.5">
               {translate(
                 'Stores API configuration and partner info. Only one active settings record per deployment.',
               )}
@@ -675,9 +675,9 @@ export const ArrowHowItWorksDialog: FC = () => {
           </div>
 
           {/* Customer Mapping Fields */}
-          <div className="mb-6">
-            <h5 className="mb-3">{translate('ArrowCustomerMapping')}</h5>
-            <p className="text-quaternary small mb-3">
+          <div className="mb-5">
+            <h5 className="mb-2.5">{translate('ArrowCustomerMapping')}</h5>
+            <p className="text-quaternary small mb-2.5">
               {translate(
                 'Maps Arrow customer references (XSP...) to Waldur organizations.',
               )}
@@ -690,9 +690,9 @@ export const ArrowHowItWorksDialog: FC = () => {
           </div>
 
           {/* Billing Sync Item Fields */}
-          <div className="mb-6">
-            <h5 className="mb-3">{translate('ArrowBillingSyncItem')}</h5>
-            <p className="text-quaternary small mb-3">
+          <div className="mb-5">
+            <h5 className="mb-2.5">{translate('ArrowBillingSyncItem')}</h5>
+            <p className="text-quaternary small mb-2.5">
               {translate(
                 'Links Arrow billing export lines to Waldur InvoiceItems.',
               )}
@@ -705,9 +705,9 @@ export const ArrowHowItWorksDialog: FC = () => {
           </div>
 
           {/* Consumption Record Fields */}
-          <div className="mb-6">
-            <h5 className="mb-3">{translate('ArrowConsumptionRecord')}</h5>
-            <p className="text-quaternary small mb-3">
+          <div className="mb-5">
+            <h5 className="mb-2.5">{translate('ArrowConsumptionRecord')}</h5>
+            <p className="text-quaternary small mb-2.5">
               {translate(
                 'Tracks real-time consumption and final billing amounts for reconciliation.',
               )}
@@ -720,9 +720,9 @@ export const ArrowHowItWorksDialog: FC = () => {
           </div>
 
           {/* Resource Attribute Fields */}
-          <div className="mb-6">
-            <h5 className="mb-3">{translate('Resource attributes')}</h5>
-            <p className="text-quaternary small mb-3">
+          <div className="mb-5">
+            <h5 className="mb-2.5">{translate('Resource attributes')}</h5>
+            <p className="text-quaternary small mb-2.5">
               {translate(
                 'Waldur Resources must have these attributes set to be matched with Arrow data.',
               )}
@@ -737,26 +737,26 @@ export const ArrowHowItWorksDialog: FC = () => {
 
         {/* Billing Sync Flow */}
         <section>
-          <h4 className="mb-4">{translate('Billing synchronization')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Billing synchronization')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Billing sync fetches monthly billing reports from Arrow and creates corresponding records in Waldur.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart code={BILLING_SYNC_DIAGRAM} className="text-center" />
           </div>
         </section>
 
         {/* Reconciliation Flow */}
         <section>
-          <h4 className="mb-4">{translate('Reconciliation process')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Reconciliation process')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'After syncing, reconciliation compares Arrow amounts with Waldur invoices. Discrepancies create compensation items.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart
               code={reconciliationDiagram}
               className="text-center"
@@ -765,10 +765,10 @@ export const ArrowHowItWorksDialog: FC = () => {
           <AlertItem
             type="floating"
             variant="info"
-            className="mt-4"
+            className="mt-3"
             title={translate('Two-stage billing model:')}
             body={
-              <ol className="mb-0 mt-2">
+              <ol className="mb-0 mt-1.5">
                 <li>
                   {translate(
                     'Real-time consumption tracking via consumption API creates provisional invoice items',
@@ -796,8 +796,8 @@ export const ArrowHowItWorksDialog: FC = () => {
 
         {/* Invoice Item Creation */}
         <section>
-          <h4 className="mb-4">{translate('Invoice item creation')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Invoice item creation')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Arrow integration creates two types of invoice items depending on the sync stage.',
             )}
@@ -849,7 +849,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           <AlertItem
             type="floating"
             variant="info"
-            className="mt-4"
+            className="mt-3"
             title={translate('Flow:')}
             body={translate(
               'Provisional items are created during consumption sync and used for end-of-month invoicing. When the final billing export arrives (typically next month), if amounts differ, a compensation item is added to the current month invoice to adjust the difference.',
@@ -859,13 +859,13 @@ export const ArrowHowItWorksDialog: FC = () => {
 
         {/* Consumption Records Flow */}
         <section>
-          <h4 className="mb-4">{translate('Consumption records')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Consumption records')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Consumption records track individual usage items from Arrow and can be mapped to Waldur resources for detailed reporting.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart
               code={CONSUMPTION_FLOW_DIAGRAM}
               className="text-center"
@@ -875,13 +875,13 @@ export const ArrowHowItWorksDialog: FC = () => {
 
         {/* Resource Import Flow */}
         <section>
-          <h4 className="mb-4">{translate('Importing Arrow licenses')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Importing Arrow licenses')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Arrow licenses can be imported as Waldur marketplace resources. The import wizard guides you through selecting a customer, offering, project, and licenses.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart
               code={RESOURCE_IMPORT_DIAGRAM}
               className="text-center"
@@ -890,7 +890,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           <AlertItem
             type="floating"
             variant="info"
-            className="mt-4"
+            className="mt-3"
             title={translate('Resources tab:')}
             body={translate(
               'The Resources tab shows all Waldur resources that can be linked to Arrow. Use "Set backend ID" to manually link a resource to an Arrow license, or use the Import button to create new resources from Arrow licenses.',
@@ -900,15 +900,15 @@ export const ArrowHowItWorksDialog: FC = () => {
 
         {/* Consumption History Sync */}
         <section>
-          <h4 className="mb-4">
+          <h4 className="mb-3">
             {translate('Syncing historical consumption')}
           </h4>
-          <p className="text-quaternary mb-4">
+          <p className="text-quaternary mb-3">
             {translate(
               'After importing a license or linking a resource to Arrow, you can backport historical consumption data. This creates usage records for billing.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart
               code={CONSUMPTION_SYNC_DIAGRAM}
               className="text-center"
@@ -917,10 +917,10 @@ export const ArrowHowItWorksDialog: FC = () => {
           <AlertItem
             type="floating"
             variant="info"
-            className="mt-4"
+            className="mt-3"
             title={translate('How to sync historical consumption:')}
             body={
-              <ol className="mb-0 mt-2">
+              <ol className="mb-0 mt-1.5">
                 <li>
                   {translate(
                     'Go to the Resources tab and find the resource with an Arrow backend ID',
@@ -948,7 +948,7 @@ export const ArrowHowItWorksDialog: FC = () => {
 
         {/* Sync States */}
         <section>
-          <h4 className="mb-4">{translate('Sync states')}</h4>
+          <h4 className="mb-3">{translate('Sync states')}</h4>
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
@@ -973,9 +973,9 @@ export const ArrowHowItWorksDialog: FC = () => {
 
         {/* Key Concepts */}
         <section>
-          <h4 className="mb-4">{translate('Key concepts')}</h4>
+          <h4 className="mb-3">{translate('Key concepts')}</h4>
           {KEY_CONCEPTS.map((concept) => (
-            <div key={concept.term} className="mb-4">
+            <div key={concept.term} className="mb-3">
               <h6 className="font-medium">{concept.term}</h6>
               <p className="text-quaternary mb-0">{concept.description}</p>
             </div>

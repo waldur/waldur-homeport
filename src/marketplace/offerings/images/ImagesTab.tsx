@@ -29,7 +29,7 @@ export const ImagesTab: FunctionComponent<ImagesTabProps> = (props) => {
             aria-hidden="true"
           />
 
-          <h4 className="mt-3">{item.name}</h4>
+          <h4 className="mt-2.5">{item.name}</h4>
           <p>{item.description}</p>
         </Col>
       ))}

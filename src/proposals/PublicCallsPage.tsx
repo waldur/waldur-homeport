@@ -30,7 +30,7 @@ export const PublicCallsPage: FunctionComponent<PublicCallsPageProps> = ({
         context="calls"
       />
 
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-20 mb-10')}>
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-16 mb-8')}>
         <PublicCallsList
           offering_uuid={offering_uuid}
           provider_uuid={provider_uuid}

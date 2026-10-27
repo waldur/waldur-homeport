@@ -34,7 +34,7 @@ export const CategoryGroupsList: FunctionComponent<
           title: translate('Title'),
           render: ({ row }) => (
             <>
-              <div className="inline-block align-middle me-2">
+              <div className="inline-block align-middle me-1.5">
                 <Avatar name={row.title} src={row.icon} />
               </div>
               <Link

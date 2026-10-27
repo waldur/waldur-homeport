@@ -26,7 +26,7 @@ export const BaseProvisioningConfigSection: FC<
           <RemoteActions offering={props.offering} />
         </>
       }
-      className="card-bordered mb-7"
+      className="card-bordered mb-5.5"
     >
       <FormTable>
         <EditFieldProvider scope={props.offering} callback={update}>

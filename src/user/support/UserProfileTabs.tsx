@@ -116,7 +116,7 @@ const TabBadge = ({ stats }: { stats: TabStats; tabKey?: string }) => {
           size="sm"
           shape="circle"
           tone="outline"
-          className="ms-2"
+          className="ms-1.5"
         >
           {stats.missingMandatory}
         </Badge>
@@ -129,7 +129,7 @@ const TabBadge = ({ stats }: { stats: TabStats; tabKey?: string }) => {
       size="sm"
       shape="circle"
       tone="outline"
-      className="ms-2"
+      className="ms-1.5"
       data-testid="tab-badge-total"
     >
       {stats.total}
@@ -147,7 +147,7 @@ const FieldList = ({
   const visible = fields.filter((f) => f.enabled);
   if (visible.length === 0 && emptyMessage) {
     return (
-      <div className="text-quaternary text-center py-6">{emptyMessage}</div>
+      <div className="text-quaternary text-center py-5">{emptyMessage}</div>
     );
   }
   return (
@@ -560,7 +560,7 @@ const buildGeographicFields = ({
             nationalitiesProps.renderValue ||
             ((value) =>
               Array.isArray(value) && value.length > 0 ? (
-                <span className="flex flex-wrap gap-2">
+                <span className="flex flex-wrap gap-1.5">
                   {(value as string[]).map((code) => (
                     <Badge key={code} variant="neutral" tone="outline">
                       <CountryFlag countryCode={code} fontSize={14} /> {code}
@@ -837,7 +837,7 @@ const buildSystemFields = ({
         <FormTable.Item
           label={translate('Assurance levels')}
           value={
-            <span className="flex flex-wrap gap-2">
+            <span className="flex flex-wrap gap-1.5">
               {(Array.isArray(user.eduperson_assurance)
                 ? user.eduperson_assurance
                 : []
@@ -970,7 +970,7 @@ const buildStaffFields = ({
             <div className="flex flex-col gap-1">
               {claims.map(([claim, value]) => (
                 <div key={claim}>
-                  <span className="me-2">{claim}</span>
+                  <span className="me-1.5">{claim}</span>
                   <span className="text-quaternary">
                     {Array.isArray(value) ? value.join(', ') : String(value)}
                   </span>

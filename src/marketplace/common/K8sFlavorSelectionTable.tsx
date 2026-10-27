@@ -145,7 +145,7 @@ const FlavorSelectionModal: React.FC<FlavorSelectionModalProps> = ({
             }
             bodyClassName="h-[500px]"
           >
-            <div className="mb-3">
+            <div className="mb-2.5">
               <FilterBox
                 type="search"
                 placeholder={translate('Search flavors...')}
@@ -227,7 +227,7 @@ export const K8sFlavorSelectionTable: React.FC<
         type="button"
         className={cn(
           buttonVariants({ variant: 'text-primary', size: 'lg' }),
-          'ellipsis justify-start gap-2',
+          'ellipsis justify-start gap-1.5',
         )}
         onClick={openModal}
         disabled={!offeringUuid}

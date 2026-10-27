@@ -64,7 +64,7 @@ export const TosManagementSection: FC<OfferingSectionProps> = ({
       }
       hasQuery
       placeholderComponent={
-        <div className="text-center py-5">
+        <div className="text-center py-4">
           <p className="text-quaternary">
             {translate('No Terms of Service found.')}
           </p>

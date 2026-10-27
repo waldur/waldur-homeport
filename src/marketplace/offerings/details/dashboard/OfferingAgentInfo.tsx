@@ -43,8 +43,8 @@ export const OfferingAgentInfo: FC<OwnProps> = ({
   return (
     <FormTable.Card
       title={translate('Agent info')}
-      className="card-bordered mb-5"
-      headerClassName="min-h-[60px] gap-3"
+      className="card-bordered mb-4"
+      headerClassName="min-h-[60px] gap-2.5"
       actions={
         <Select
           options={agentIdentities}
@@ -92,7 +92,7 @@ export const OfferingAgentInfo: FC<OwnProps> = ({
                 (agentIdentity.dependencies as any[])?.length ? (
                   <BaseButton
                     variant="text-primary"
-                    className="ms-n2"
+                    className="-ms-1.5"
                     onClick={openPackagesDialog}
                     label={translate('Details')}
                     size="sm"

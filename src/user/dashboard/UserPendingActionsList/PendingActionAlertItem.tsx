@@ -62,7 +62,7 @@ export const PendingActionAlertItem: FC<{
     <AlertItem
       variant={getAlertVariant(row.urgency || 'low')}
       title={
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           {displayTitle}
           {row.is_effectively_silenced && (
             <Tooltip
@@ -82,7 +82,7 @@ export const PendingActionAlertItem: FC<{
       titleAfter={<DueDateBadge dueDate={row.due_date} />}
       body={
         <div>
-          <Badge variant="secondary" size="sm" className="mb-2">
+          <Badge variant="secondary" size="sm" className="mb-1.5">
             {getActionTypeLabel(row.action_type)}
           </Badge>
           {MessageComponent ? (
@@ -90,7 +90,7 @@ export const PendingActionAlertItem: FC<{
           ) : (
             <>
               {row.description && (
-                <div className="text-quaternary small mb-2">
+                <div className="text-quaternary small mb-1.5">
                   {row.description}
                 </div>
               )}
@@ -98,7 +98,7 @@ export const PendingActionAlertItem: FC<{
             </>
           )}
           {row.silenced_until && (
-            <div className="text-quaternary mt-2 small">
+            <div className="text-quaternary mt-1.5 small">
               <BellSlashIcon size={14} className="me-1" weight="bold" />
               {translate('Silenced until {date}', {
                 date: new Date(row.silenced_until).toLocaleDateString(),
@@ -108,7 +108,7 @@ export const PendingActionAlertItem: FC<{
         </div>
       }
       actions={
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           {primaryAction && <PrimaryActionButton action={primaryAction} />}
           {remainingActions.length > 0 && (
             <ActionsDropdown

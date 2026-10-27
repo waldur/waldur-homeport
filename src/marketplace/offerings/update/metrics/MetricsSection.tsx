@@ -98,7 +98,7 @@ export const MetricsSection: FC<OfferingSectionProps> = (props) => {
               'Adopt metrics from the catalog before a service reports any.',
             )}
             buttonTitle={translate('Search again')}
-            className="mt-n5"
+            className="-mt-4"
           />
         }
         hasQuery={false}

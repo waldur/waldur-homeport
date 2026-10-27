@@ -39,7 +39,7 @@ export const ProjectAvatar = ({ project }: { project: Project }) => {
       onSubmit={(values: FormData) => avatarMutation.mutateAsync(values)}
       initialValues={{ image: project.image }}
       render={({ handleSubmit, submitting }) => (
-        <Card as="form" onSubmit={handleSubmit} className="card-bordered mb-5">
+        <Card as="form" onSubmit={handleSubmit} className="card-bordered mb-4">
           <Card.Header>
             <Card.Title>
               <h3>{translate('Avatar')}</h3>

@@ -46,7 +46,7 @@ export const WithFormControls: Story = {
               iconNode={<FunnelSimpleIcon weight="bold" />}
             />
           </PopoverTrigger>
-          <PopoverContent align="start" className="w-72 p-4">
+          <PopoverContent align="start" className="w-72 p-3">
             <div className="flex flex-col gap-[12px]">
               <label
                 className="text-sm font-medium text-primary"
@@ -92,7 +92,7 @@ export const BaseButtonAsTrigger: Story = {
             iconNode={<GearIcon weight="bold" />}
           />
         </PopoverTrigger>
-        <PopoverContent className="w-72 p-4">
+        <PopoverContent className="w-72 p-3">
           <div className="text-sm">Popover from a tooltipped icon button.</div>
         </PopoverContent>
       </Popover>

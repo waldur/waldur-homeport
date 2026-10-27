@@ -85,7 +85,7 @@ export const CeleryTaskStats = ({ total }: CeleryTaskStatsProps) => {
   return (
     <AccordionCard
       title={translate('Task execution statistics')}
-      className="mb-6"
+      className="mb-5"
       defaultOpen
     >
       <Table<TaskStatRow>
@@ -122,7 +122,7 @@ export const CeleryTaskStats = ({ total }: CeleryTaskStatsProps) => {
               const percentage = ((row.count / totalCount) * 100).toFixed(1);
               return (
                 <div className="flex items-center justify-end">
-                  <span className="text-quaternary me-2">{percentage}%</span>
+                  <span className="text-quaternary me-1.5">{percentage}%</span>
                   <div style={{ width: '50px' }}>
                     <Progress size="sm" value={Number(percentage)} />
                   </div>

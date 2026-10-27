@@ -129,7 +129,7 @@ export const ProposalReviewCreatePage = () => {
       <Form onSubmit={() => {}}>
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <SidebarLayout.Header className="pb-5">
+            <SidebarLayout.Header className="pb-4">
               <div className="w-full">
                 <ProposalRoleBasedTabs
                   review={data.review}

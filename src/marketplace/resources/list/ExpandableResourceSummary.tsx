@@ -36,7 +36,7 @@ const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
           <Field
             label={backendIdLabel}
             value={
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-1.5">
                 <span>{highlightedId}</span>
                 <CopyToClipboardButton value={highlightedId} onlyButton />
               </span>

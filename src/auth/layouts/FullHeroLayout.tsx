@@ -42,7 +42,7 @@ export const FullHeroLayout = () => {
         <div className="layout-full-hero-content">
           <div className="layout-full-hero-login">
             <div className="layout-full-hero-login-inner">
-              <div className="login-logo mb-2">
+              <div className="login-logo mb-1.5">
                 <img
                   alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
                   src={imageUrl}

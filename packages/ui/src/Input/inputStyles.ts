@@ -13,10 +13,9 @@ export type InputSize = 'sm' | 'md' | 'lg';
  * 1.08rem text and a 1.43 line-height at the 13px root -- 9px / 12px, 14px
  * and 20px here.
  *
- * `border-[1px]`, not `border`, and `pl-[12px]`, not `p-3`: Bootstrap's
- * `.border` and `.p-*` utilities are `!important` and would win over these
- * (see the class-name collision table in
- * docs/tailwind-shadcn-migration-notes.md). Padding is `pl`/`pr` rather than
+ * `border-[1px]`, not `border`: Bootstrap's `.border` utility is
+ * `!important` and would win over these (see the class-name collision table
+ * in docs/tailwind-shadcn-migration-notes.md). Padding is `pl`/`pr` rather than
  * `px` so the invalid state can widen the right side alone, and a caller's
  * `px-*` still replaces both through `cn`. An InputGroup sets `--input-start`
  * and `--input-end` to the width of its adornments and of the invalid icon it

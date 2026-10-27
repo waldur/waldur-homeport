@@ -158,11 +158,11 @@ const StateGrid = ({
   iconSide: IconSide;
   iconShape: 'arrow' | 'caret';
 }) => (
-  // p-12 matches this package's other stories (DropdownMenu.stories.tsx,
+  // p-10 matches this package's other stories (DropdownMenu.stories.tsx,
   // Popover.stories.tsx) — Storybook's canvas has no built-in page
   // padding, so a table rendered without its own wrapper sits flush
   // against the top-left corner instead of reading as a page.
-  <div className="inline-block p-12">
+  <div className="inline-block p-10">
     {/* Not a data table — a Storybook-only state/variant reference grid,
         so @/table/Table (paginated, sortable, backed by useTable) doesn't
         apply. */}
@@ -176,7 +176,7 @@ const StateGrid = ({
           {variants.map((variant) => (
             <th
               key={variant}
-              className="px-3 pb-3 text-left text-sm font-medium text-quaternary"
+              className="px-2.5 pb-2.5 text-left text-sm font-medium text-quaternary"
             >
               {VARIANT_LABELS[variant] ?? variant}
             </th>
@@ -186,11 +186,11 @@ const StateGrid = ({
       <tbody>
         {STATES.map((state) => (
           <tr key={state}>
-            <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-quaternary">
+            <th className="whitespace-nowrap px-1.5 py-2.5 text-right align-middle text-sm font-medium text-quaternary">
               {STATE_LABELS[state]}
             </th>
             {variants.map((variant) => (
-              <td key={variant} className="p-3 text-center align-middle">
+              <td key={variant} className="p-2.5 text-center align-middle">
                 <BaseButton
                   id={stateId(state, variant)}
                   variant={
@@ -314,9 +314,9 @@ const iconOnlyId = (state: IconOnlyState, variant: string) =>
   `icon-only-btn-${state}-${variant}`;
 
 const IconOnlyGrid = ({ size }: { size: ButtonSize }) => (
-  // p-12 matches this package's other stories (DropdownMenu.stories.tsx,
+  // p-10 matches this package's other stories (DropdownMenu.stories.tsx,
   // Popover.stories.tsx) — see StateGrid's own comment above.
-  <div className="inline-block p-12">
+  <div className="inline-block p-10">
     {/* Not a data table — a Storybook-only state/variant reference grid,
         so @/table/Table (paginated, sortable, backed by useTable) doesn't
         apply. */}
@@ -330,7 +330,7 @@ const IconOnlyGrid = ({ size }: { size: ButtonSize }) => (
           {ICON_ONLY_STATES.map((state) => (
             <th
               key={state}
-              className="px-3 pb-3 text-left text-sm font-medium text-quaternary"
+              className="px-2.5 pb-2.5 text-left text-sm font-medium text-quaternary"
             >
               {ICON_ONLY_STATE_LABELS[state]}
             </th>
@@ -340,11 +340,11 @@ const IconOnlyGrid = ({ size }: { size: ButtonSize }) => (
       <tbody>
         {ICON_ONLY_VARIANTS.map((variant) => (
           <tr key={variant}>
-            <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-quaternary">
+            <th className="whitespace-nowrap px-1.5 py-2.5 text-right align-middle text-sm font-medium text-quaternary">
               {VARIANT_LABELS[variant] ?? variant}
             </th>
             {ICON_ONLY_STATES.map((state) => (
-              <td key={state} className="p-3 text-center align-middle">
+              <td key={state} className="p-2.5 text-center align-middle">
                 <BaseButton
                   id={iconOnlyId(state, variant)}
                   variant={
@@ -419,7 +419,7 @@ const SIZE_HEIGHTS: Record<ButtonSize, string> = {
 };
 
 const SizeGrid = () => (
-  <div className="inline-block p-12">
+  <div className="inline-block p-10">
     {/* eslint-disable-next-line waldur-custom/no-hand-rolled-table */}
     <table className="border-collapse">
       <thead>
@@ -430,7 +430,7 @@ const SizeGrid = () => (
           {SIZES.map((size) => (
             <th
               key={size}
-              className="px-3 pb-3 text-left text-sm font-medium text-quaternary"
+              className="px-2.5 pb-2.5 text-left text-sm font-medium text-quaternary"
             >
               {size} ({SIZE_HEIGHTS[size]})
             </th>
@@ -439,21 +439,21 @@ const SizeGrid = () => (
       </thead>
       <tbody>
         <tr>
-          <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-quaternary">
+          <th className="whitespace-nowrap px-1.5 py-2.5 text-right align-middle text-sm font-medium text-quaternary">
             Label
           </th>
           {SIZES.map((size) => (
-            <td key={size} className="p-3 align-middle">
+            <td key={size} className="p-2.5 align-middle">
               <BaseButton variant="primary" size={size} label="Label" />
             </td>
           ))}
         </tr>
         <tr>
-          <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-quaternary">
+          <th className="whitespace-nowrap px-1.5 py-2.5 text-right align-middle text-sm font-medium text-quaternary">
             Label + icon
           </th>
           {SIZES.map((size) => (
-            <td key={size} className="p-3 align-middle">
+            <td key={size} className="p-2.5 align-middle">
               <BaseButton
                 variant="primary"
                 size={size}
@@ -464,11 +464,11 @@ const SizeGrid = () => (
           ))}
         </tr>
         <tr>
-          <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-quaternary">
+          <th className="whitespace-nowrap px-1.5 py-2.5 text-right align-middle text-sm font-medium text-quaternary">
             Icon only
           </th>
           {SIZES.map((size) => (
-            <td key={size} className="p-3 align-middle">
+            <td key={size} className="p-2.5 align-middle">
               <BaseButton
                 variant="primary"
                 size={size}
@@ -504,14 +504,14 @@ export const Sizes: Story = {
 // sidebar doesn't grow a story per layout — the <SectionHeader>s below do
 // that job inside the canvas instead.
 const SectionHeader = ({ title, hint }: { title: string; hint: string }) => (
-  <div className="mb-3">
+  <div className="mb-2.5">
     <h3 className="text-sm font-semibold text-primary">{title}</h3>
     <p className="text-sm text-quaternary">{hint}</p>
   </div>
 );
 
 const UsageSection = ({ children }: { children: ReactNode }) => (
-  <div className="mb-10">{children}</div>
+  <div className="mb-8">{children}</div>
 );
 
 export const RealisticUsage: Story = {
@@ -524,13 +524,13 @@ export const RealisticUsage: Story = {
     },
   },
   render: () => (
-    <div className="p-12" style={{ maxWidth: 640 }}>
+    <div className="p-10" style={{ maxWidth: 640 }}>
       <UsageSection>
         <SectionHeader
           title="Dialog footer"
           hint="CloseDialogButton (tertiary) + a primary submit — the standard modal footer pairing."
         />
-        <div className="flex justify-end gap-3 border-t border-primary pt-4">
+        <div className="flex justify-end gap-2.5 border-t border-primary pt-3">
           <BaseButton variant="tertiary" size="lg" label="Cancel" />
           <BaseButton variant="primary" size="lg" label="Save" />
         </div>
@@ -541,7 +541,7 @@ export const RealisticUsage: Story = {
           title="Destructive confirmation footer"
           hint="Same layout, danger replacing primary — the delete-confirmation shape."
         />
-        <div className="flex justify-end gap-3 border-t border-primary pt-4">
+        <div className="flex justify-end gap-2.5 border-t border-primary pt-3">
           <BaseButton variant="tertiary" size="lg" label="Cancel" />
           <BaseButton variant="danger" size="lg" label="Delete" />
         </div>
@@ -552,7 +552,7 @@ export const RealisticUsage: Story = {
           title="Wizard footer"
           hint="Back (icon-left, tertiary) on the far side, Continue (icon-right, primary) advancing — matches WizardModal's default footer."
         />
-        <div className="flex items-center justify-between border-t border-primary pt-4">
+        <div className="flex items-center justify-between border-t border-primary pt-3">
           <BaseButton
             variant="tertiary"
             size="lg"
@@ -574,7 +574,7 @@ export const RealisticUsage: Story = {
           title="Table toolbar"
           hint="Icon-only utility buttons (search, filter) beside a labeled primary action — a table's action bar."
         />
-        <div className="flex items-center gap-2 border-t border-primary pt-4">
+        <div className="flex items-center gap-1.5 border-t border-primary pt-3">
           <BaseButton
             variant="tertiary"
             size="lg"
@@ -602,7 +602,7 @@ export const RealisticUsage: Story = {
           title="Inline row actions"
           hint="Low-emphasis text-* variants for actions attached to a single list row — never the full-weight Contained colors here."
         />
-        <div className="flex items-center justify-between rounded-md border-[1px] border-primary px-4 py-3">
+        <div className="flex items-center justify-between rounded-md border-[1px] border-primary px-3 py-2.5">
           <span className="text-sm">acc-prod-eu-west-1</span>
           <div className="flex gap-1">
             <BaseButton
@@ -626,7 +626,7 @@ export const RealisticUsage: Story = {
           title="Page header actions (Two-tone secondary)"
           hint="Secondary buttons feature two-tone brand styling: dark plum text paired with a vibrant magenta icon for signature brand actions."
         />
-        <div className="flex items-center gap-3 border-t border-primary pt-4">
+        <div className="flex items-center gap-2.5 border-t border-primary pt-3">
           <BaseButton
             variant="secondary"
             size="md"

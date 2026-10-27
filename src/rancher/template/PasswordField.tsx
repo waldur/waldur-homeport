@@ -28,7 +28,7 @@ export const PasswordField: React.FC<FieldProps> = (props) => {
 
   const renderControl = React.useCallback(
     (fieldProps) => (
-      <div className="flex gap-2">
+      <div className="flex gap-1.5">
         <BaseInputField containerClassName="flex-1" {...fieldProps.input} />
         <BaseButton
           onClick={setGeneratedPassword}

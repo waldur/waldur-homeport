@@ -117,7 +117,7 @@ const BaseSliderNumberField: FC<BaseSliderNumberFieldProps> = ({
           />
         </div>
       </div>
-      {unit && <span className="font-medium text-base ms-3">{unit}</span>}
+      {unit && <span className="font-medium text-base ms-2.5">{unit}</span>}
     </div>
   );
 };

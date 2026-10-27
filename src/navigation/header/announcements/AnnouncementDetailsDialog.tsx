@@ -111,7 +111,9 @@ export const AnnouncementDetailsDialog: FC<{
 
     if (headerParts.length === 0) return null;
 
-    return <div className="text-quaternary mb-3">{headerParts.join(', ')}</div>;
+    return (
+      <div className="text-quaternary mb-2.5">{headerParts.join(', ')}</div>
+    );
   };
 
   const renderMaintenanceFields = () => {
@@ -145,7 +147,7 @@ export const AnnouncementDetailsDialog: FC<{
     if (!hasStructuredContent) return null;
 
     return (
-      <div className="mb-4">
+      <div className="mb-3">
         <SafeMarkdown text={view.description} />
       </div>
     );
@@ -169,9 +171,9 @@ export const AnnouncementDetailsDialog: FC<{
     }
 
     return (
-      <div className="mt-4">
+      <div className="mt-3">
         <h6>{translate('Affected Offerings')}:</h6>
-        <div className="table-responsive mt-2">
+        <div className="table-responsive mt-1.5">
           <Table size="sm">
             <thead>
               <tr>

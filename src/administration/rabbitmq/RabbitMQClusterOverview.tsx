@@ -40,7 +40,7 @@ const RabbitMQClusterOverviewContent: FC<
   return (
     <Row>
       <Col md={4}>
-        <h6 className="text-uppercase text-quaternary mb-3">
+        <h6 className="text-uppercase text-quaternary mb-2.5">
           {translate('Cluster info')}
         </h6>
         <ClusterInfoRow
@@ -62,7 +62,7 @@ const RabbitMQClusterOverviewContent: FC<
       </Col>
 
       <Col md={4}>
-        <h6 className="text-uppercase text-quaternary mb-3">
+        <h6 className="text-uppercase text-quaternary mb-2.5">
           {translate('Object totals')}
         </h6>
         <Table size="sm" borderless className="mb-0">
@@ -102,7 +102,7 @@ const RabbitMQClusterOverviewContent: FC<
       </Col>
 
       <Col md={4}>
-        <h6 className="text-uppercase text-quaternary mb-3">
+        <h6 className="text-uppercase text-quaternary mb-2.5">
           {translate('Queue totals')}
         </h6>
         <Table size="sm" borderless className="mb-0">
@@ -130,10 +130,10 @@ const RabbitMQClusterOverviewContent: FC<
 
         {data.listeners && data.listeners.length > 0 && (
           <>
-            <h6 className="text-uppercase text-quaternary mb-3 mt-4">
+            <h6 className="text-uppercase text-quaternary mb-2.5 mt-3">
               {translate('Listeners')}
             </h6>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {data.listeners.map((listener, index) => (
                 <Badge key={index} variant="neutral" tone="outline">
                   {listener.protocol}:{listener.port}
@@ -160,10 +160,10 @@ export const RabbitMQClusterOverview: FC = () => {
       title={translate('Cluster overview')}
       subtitle={translate('RabbitMQ cluster health and configuration details')}
       defaultOpen={false}
-      className="mb-6"
+      className="mb-5"
     >
       {isLoading && (
-        <div className="text-center py-4">
+        <div className="text-center py-3">
           <LoadingSpinner />
         </div>
       )}

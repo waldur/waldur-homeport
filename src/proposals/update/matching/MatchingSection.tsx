@@ -218,7 +218,7 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
       </Card.Header>
       <Card.Body>
         <Tabs mount="active" value={activeTab} onValueChange={handleTabSelect}>
-          <TabsList className="mb-5">
+          <TabsList className="mb-4">
             {tabs.map((tab) => (
               <TabsTrigger key={tab.key} value={tab.key}>
                 {tab.title}
@@ -250,7 +250,7 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
               <AlertItem
                 type="floating"
                 variant="info"
-                className="mt-4"
+                className="mt-3"
                 title={translate(
                   'Weights should sum to 1.0 for optimal results. Current sum: {sum}',
                   {

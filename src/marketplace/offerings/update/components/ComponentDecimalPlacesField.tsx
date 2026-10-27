@@ -51,7 +51,7 @@ export const ComponentDecimalPlacesField: React.FC<{
       {showAdvisory && (
         <AlertItem
           variant="warning"
-          className="mt-3"
+          className="mt-2.5"
           title={translate('The backend may not keep this precision')}
           body={offering.limit_precision_advisory}
         />

@@ -90,7 +90,7 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
     <Card className="card card-table card-bordered">
       <Card.Header>
         <Card.Title>
-          <span className="me-2">{translate('Security groups details')}</span>
+          <span className="me-1.5">{translate('Security groups details')}</span>
           <RefreshButton
             refetch={activeKey === 'resource' ? props.refetch : refetchPort}
             loading={props.isLoading || isRefetchingPort}

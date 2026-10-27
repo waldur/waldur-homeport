@@ -111,7 +111,7 @@ export const AdministrationLanguages: FunctionComponent = () => {
           <TableQuery query={query} setQuery={setQuery} inputClassName="h-11" />
           {canEdit && (
             <SaveButton
-              className="ms-4"
+              className="ms-3"
               onClick={saveLanguageOptions}
               submitting={submitting}
               dirty={hasChanges}
@@ -120,10 +120,10 @@ export const AdministrationLanguages: FunctionComponent = () => {
         </div>
       }
     >
-      <Row className="mb-n1">
+      <Row className="-mb-1">
         {filteredLanguages.map((language: { code: string; label: string }) => (
           <Col key={language.code} sm={6} md={4}>
-            <div className="border-b-[1px] border-b-secondary py-5">
+            <div className="border-b-[1px] border-b-secondary py-4">
               {canEdit ? (
                 <Switch
                   data-testid={`language_${language.code}`}
@@ -135,7 +135,7 @@ export const AdministrationLanguages: FunctionComponent = () => {
                     <div className="flex items-center">
                       <CountryFlagIcon
                         countryCode={LanguageCountry[language.code]}
-                        className="me-2"
+                        className="me-1.5"
                       />
                       {language.label}
                     </div>
@@ -146,7 +146,7 @@ export const AdministrationLanguages: FunctionComponent = () => {
                   <div className="flex items-center">
                     <CountryFlagIcon
                       countryCode={LanguageCountry[language.code]}
-                      className="me-2"
+                      className="me-1.5"
                     />
                     {language.label}
                   </div>

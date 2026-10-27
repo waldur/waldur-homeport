@@ -23,7 +23,7 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
     <ModalDialog
       title={
         <>
-          <span className="me-2">{translate('Backend health status')}</span>
+          <span className="me-1.5">{translate('Backend health status')}</span>
           <RefreshButton refetch={reFetch} loading={loading} />
         </>
       }

@@ -44,7 +44,7 @@ const MergeSummary: FC<{ row: OfferingMerge }> = ({ row }) => {
     return <>{renderFieldOrDash(null)}</>;
   }
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    <div className="flex flex-wrap items-center gap-1.5">
       {resources !== undefined && (
         <span>{translate('{count} resource(s)', { count: resources })}</span>
       )}

@@ -22,6 +22,23 @@ import {
 
 import { FieldError } from './FieldError';
 
+/**
+ * The bottom margin `space` selects, as a Tailwind spacing step. Each class
+ * is a literal because Tailwind only generates the names it finds in source.
+ */
+export const SPACE_CLASSES = {
+  0: 'mb-0',
+  1: 'mb-1',
+  1.5: 'mb-1.5',
+  2.5: 'mb-2.5',
+  3: 'mb-3',
+  4: 'mb-4',
+  5.5: 'mb-5.5',
+  6: 'mb-6',
+} as const;
+
+export type Space = keyof typeof SPACE_CLASSES;
+
 export interface FormGroupProps {
   label?: ReactNode;
   required?: boolean;
@@ -43,7 +60,7 @@ export interface FormGroupProps {
   className?: string;
   containerClassName?: string;
   spaceless?: boolean;
-  space?: number;
+  space?: Space;
 
   // React Final Form
   input?: any;
@@ -104,7 +121,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     spaceless,
     containerClassName,
     className,
-    space = 7,
+    space = 5.5,
     id,
     controlId: propsControlId,
     group,
@@ -176,7 +193,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
       grow: Boolean(actions),
     },
     !actions && (containerClassName || className),
-    !spaceless && `mb-${space}`,
+    !spaceless && SPACE_CLASSES[space],
   );
   const Wrapper = group ? FormFieldset : FormField;
   const mainContent = (
@@ -188,7 +205,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
           {tooltip && tooltipEnd && (
             <HelpIcon
               label={tooltip}
-              className="ms-2 mb-2 h-5 items-center"
+              className="ms-1.5 mb-1.5 h-5 items-center"
               tooltipProps={tooltipProps}
             />
           )}
@@ -210,7 +227,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     return (
       <div
         className={classNames(
-          'flex items-start gap-4',
+          'flex items-start gap-3',
           containerClassName || className,
         )}
       >

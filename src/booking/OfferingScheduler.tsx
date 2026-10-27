@@ -163,8 +163,8 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = ({
       </Card>
       <>
         {fields.map((schedule, index) => (
-          <div key={index} className="mb-6">
-            <div className="flex justify-between items-center mb-2">
+          <div key={index} className="mb-5">
+            <div className="flex justify-between items-center mb-1.5">
               <label>
                 <b>{translate('Period {i}', { i: index + 1 })}:</b>&nbsp;
                 {fields.value[index]?.start && fields.value[index]?.end && (

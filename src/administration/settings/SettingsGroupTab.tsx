@@ -9,7 +9,7 @@ import { translate } from '@/i18n';
 import { SettingsCard } from './SettingsCard';
 
 /**
- * Constance setting groups shown as one tab of a TableWithTabs page. `pt-5`
+ * Constance setting groups shown as one tab of a TableWithTabs page. `pt-4`
  * keeps the first card off the tab strip.
  */
 export const SettingsGroupTab: FC<{ groupNames: string[] }> = ({
@@ -30,7 +30,7 @@ export const SettingsGroupTab: FC<{ groupNames: string[] }> = ({
     );
 
   return data ? (
-    <div className="pt-5">
+    <div className="pt-4">
       <SettingsCard groupNames={groupNames} settingsSource={data} />
     </div>
   ) : null;

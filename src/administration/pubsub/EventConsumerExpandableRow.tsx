@@ -14,7 +14,7 @@ import { useConsumerQueueStats } from './useConsumerQueueStats';
 
 const listOrDash = (items: string[]) =>
   items.length ? (
-    <ul className="mb-0 ps-4">
+    <ul className="mb-0 ps-3">
       {items.map((item) => (
         <li key={item}>{item}</li>
       ))}

@@ -20,7 +20,7 @@ const hero = (content: ReactNode) => (
 const countryCell = (country: string | null) =>
   country ? (
     <span className="flex items-center">
-      <CountryFlagIcon countryCode={country} size="sm" className="me-2" />
+      <CountryFlagIcon countryCode={country} size="sm" className="me-1.5" />
       {country}
     </span>
   ) : (

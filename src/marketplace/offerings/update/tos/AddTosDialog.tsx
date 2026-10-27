@@ -79,7 +79,7 @@ export const AddTosDialog: FC<AddTosDialogProps> = ({ resolve }) => {
             title={translate('Add Terms of Service')}
             iconNode={<PlusCircleIcon weight="bold" />}
             footer={
-              <div className="flex gap-3 justify-end mt-4">
+              <div className="flex gap-2.5 justify-end mt-3">
                 <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   variant="primary"

@@ -24,17 +24,17 @@ export const ResourcePlanChangeInfo = ({
       <Field
         label={translate('Created by')}
         value={order.created_by_full_name + ` (${order.created_by_username})`}
-        space={2}
+        space={1.5}
       />
       <Field
         label={translate('Created at')}
         value={formatDate(order.created)}
-        space={2}
+        space={1.5}
       />
-      <OrderDetailsQuickBody order={order} space={2} />
+      <OrderDetailsQuickBody order={order} space={1.5} />
       <Field
         label={translate('Plan change')}
-        valueClass="flex items-center gap-2"
+        valueClass="flex items-center gap-1.5"
         value={
           <>
             <Badge variant="blue" shape="pill" tone="outline">
@@ -52,10 +52,10 @@ export const ResourcePlanChangeInfo = ({
             />
           </>
         }
-        space={2}
+        space={1.5}
       />
 
-      <p className="text-quaternary my-6">
+      <p className="text-quaternary my-5">
         {order.new_plan_billing_mode === 'usage'
           ? translate(
               'The new plan is billed by usage: the current plan is charged for its current billing period and consumption is invoiced from the switch. Quotas are unchanged by a plan switch.',

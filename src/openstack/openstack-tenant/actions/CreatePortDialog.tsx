@@ -89,7 +89,7 @@ export const FixedIPsField: FC<{
 
   return (
     <FormField>
-      <div className="flex justify-between mb-5">
+      <div className="flex justify-between mb-4">
         <FormLabel className="mb-0">{translate('Fixed IPs')}</FormLabel>
         <Switch
           checked={customIpEnabled}
@@ -99,7 +99,7 @@ export const FixedIPsField: FC<{
           label={translate('Custom IP configuration')}
         />
       </div>
-      <div className="border-rows mb-4">
+      <div className="border-rows mb-3">
         <Row className="g-4">
           <Col xs={12}>
             <SelectGroup

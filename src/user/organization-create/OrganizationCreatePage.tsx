@@ -299,7 +299,7 @@ export const OrganizationCreatePage: FC = () => {
     <>
       <SidebarLayout.Header>
         <div className="w-full">
-          <h1 className="mb-2">{translate('Create organization')}</h1>
+          <h1 className="mb-1.5">{translate('Create organization')}</h1>
           <p className="text-quaternary mb-0">
             {translate(
               'Register your organization with automatic business verification',
@@ -309,7 +309,7 @@ export const OrganizationCreatePage: FC = () => {
       </SidebarLayout.Header>
       <div className={PAGE_CONTAINER_XXL_CLASSNAME}>
         {submissionComplete ? (
-          <div className="flex gap-7">
+          <div className="flex gap-5.5">
             <div className="shrink-0" style={{ width: '300px' }}>
               <VerticalProgressSteps
                 steps={steps.map((s) => ({ ...s, completed: true }))}
@@ -340,7 +340,7 @@ export const OrganizationCreatePage: FC = () => {
                   }}
                 />
 
-                <div className="flex gap-7">
+                <div className="flex gap-5.5">
                   {/* Left Sidebar with Stepper */}
                   <div className="shrink-0" style={{ width: '300px' }}>
                     <VerticalProgressSteps
@@ -375,7 +375,7 @@ export const OrganizationCreatePage: FC = () => {
                     </div>
 
                     {/* Footer buttons */}
-                    <div className="flex justify-between mt-5 pt-5 border-t-[1px] border-t-secondary">
+                    <div className="flex justify-between mt-4 pt-4 border-t-[1px] border-t-secondary">
                       <BaseButton
                         variant="secondary"
                         onClick={prevStep}
@@ -390,7 +390,7 @@ export const OrganizationCreatePage: FC = () => {
                         iconNode={<CaretLeftIcon weight="bold" />}
                         size="lg"
                       />
-                      <div className="flex gap-3">
+                      <div className="flex gap-2.5">
                         <BaseButton
                           variant="tertiary"
                           className="min-w-[125px]"

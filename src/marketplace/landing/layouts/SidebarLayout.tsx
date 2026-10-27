@@ -55,8 +55,8 @@ export const SidebarLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
 
   return (
     <div className="sidebar-layout">
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-6')}>
-        <div className="flex justify-between items-center mb-6">
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-5')}>
+        <div className="flex justify-between items-center mb-5">
           <h1 className="mb-0 text-2xl">{title}</h1>
           <FilterBox
             type="search"
@@ -66,7 +66,7 @@ export const SidebarLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
           />
         </div>
         <Row className="g-6">
-          <Col xs={12} lg={4} xl={3} className="mb-4 mb-lg-0">
+          <Col xs={12} lg={4} xl={3} className="mb-3 lg:mb-0">
             <CategorySidebar
               selectedCategory={selectedCategory}
               onCategorySelect={setSelectedCategory}

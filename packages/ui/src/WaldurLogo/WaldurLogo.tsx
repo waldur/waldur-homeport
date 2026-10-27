@@ -20,7 +20,7 @@ export interface WaldurLogoProps extends HTMLAttributes<HTMLSpanElement> {
 export const WaldurLogo: FC<WaldurLogoProps> = ({ className, ...props }) => (
   <span
     className={cn(
-      'flex items-center gap-2 text-2xl font-bold tracking-wide leading-none',
+      'flex items-center gap-1.5 text-2xl font-bold tracking-wide leading-none',
       className,
     )}
     {...props}

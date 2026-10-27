@@ -26,7 +26,7 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
 }) => (
   <>
     {fields.length > 0 && (
-      <table className="table px-0 mb-2">
+      <table className="table px-0 mb-1.5">
         <thead>
           <tr>
             <td className="w-40">{translate('Claim')}</td>
@@ -85,13 +85,13 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
       />
     </div>
     {typeof meta.error === 'string' && (
-      <div className="text-danger small mt-2">{meta.error}</div>
+      <div className="text-danger small mt-1.5">{meta.error}</div>
     )}
   </>
 );
 
 export const UserClaimsField: FC = () => (
-  <FormField className="mb-7">
+  <FormField className="mb-5.5">
     <FormLabel>{translate('Identity provider claims')}</FormLabel>
     {/* The validator lives on the FieldArray rather than in the dialog's
         record-level validate: final-form resolves errors per registered field,

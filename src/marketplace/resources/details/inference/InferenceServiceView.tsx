@@ -30,14 +30,14 @@ const CredentialRow: FC<{ label: string; children: ReactNode }> = ({
   label,
   children,
 }) => (
-  <div className="mb-5">
+  <div className="mb-4">
     <div className="text-tertiary text-xs mb-1">{label}</div>
     <div className="font-medium">{children}</div>
   </div>
 );
 
 const EndpointCard: FC<{ endpoint: string }> = ({ endpoint }) => (
-  <Card className="card-bordered mb-6">
+  <Card className="card-bordered mb-5">
     <Card.Header>
       <Card.Title>
         <h3>{translate('Endpoint')}</h3>
@@ -78,7 +78,7 @@ const PlaygroundCard: FC<{
         <Card.Title>
           <h3>{translate('Playground')}</h3>
         </Card.Title>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           {open && (
             <ModelSelect
               models={modelState.models}
@@ -165,10 +165,10 @@ export const InferenceServiceView = ({
   }
   return (
     <div className="row">
-      <div className="col-lg-5 mb-6">
+      <div className="col-lg-5 mb-5">
         <EndpointCard endpoint={endpoint} />
       </div>
-      <div className="col-lg-7 mb-6">
+      <div className="col-lg-7 mb-5">
         <PlaygroundCard
           endpoint={endpoint}
           activeKey={activeKey}

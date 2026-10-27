@@ -75,7 +75,7 @@ export const BatchMoveProjectDialog: FunctionComponent<{
             <FormGroup label={translate('Selected projects')}>
               <ul className="list-group">
                 {rows.map((project) => (
-                  <li key={project.uuid} className="list-group-item py-2">
+                  <li key={project.uuid} className="list-group-item py-1.5">
                     {project.name}
                   </li>
                 ))}

@@ -56,7 +56,7 @@ const UsernameField: FC<UsernameFieldProps> = ({
   <>
     <BaseInputField
       type="text"
-      containerClassName="mb-2"
+      containerClassName="mb-1.5"
       start={
         ENV.plugins.WALDUR_CORE.FREEIPA_USERNAME_PREFIX && (
           <Tooltip label={translate('Username prefix')}>

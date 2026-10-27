@@ -13,7 +13,7 @@ export const ArticleCodeField: FunctionComponent = () => {
       label={translate('Article code')}
       tooltip={translate('Technical code used by accounting software.')}
       tooltipEnd={true}
-      space={5}
+      space={4}
     />
   );
 };

@@ -250,7 +250,7 @@ export const UserAffiliationsList: FunctionComponent<
           opens the grant dialog. The row is omitted when there is no button,
           so support does not get an empty gap above the table. */}
       {!hasActionBar && addRole && (
-        <div className="flex justify-end mb-4">{addRole}</div>
+        <div className="flex justify-end mb-3">{addRole}</div>
       )}
       <Table
         {...props}

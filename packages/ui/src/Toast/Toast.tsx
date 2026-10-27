@@ -30,7 +30,7 @@ export const ToastViewport = forwardRef<
       // app's tailwind.css restores bullets/numbers on bare ol/ul deliberately
       // (see that file's own comment), which reaches this one too since it
       // isn't marked up as a menu/nav.
-      'fixed top-6 right-6 z-50 flex w-[400px] max-w-[calc(100vw-3rem)] list-none flex-col gap-3 outline-none',
+      'fixed top-6 right-6 z-50 flex w-[400px] max-w-[calc(100vw-3rem)] list-none flex-col gap-2.5 outline-none',
       className,
     )}
     {...props}
@@ -103,7 +103,7 @@ export const Toast = ({
       )}
     >
       <AlertItem
-        className="items-start gap-4 rounded-xl bg-[var(--card-bg)] shadow-[var(--overlay-shadow)]"
+        className="items-start gap-3 rounded-xl bg-[var(--card-bg)] shadow-[var(--overlay-shadow)]"
         iconSize="md"
         iconClassName="-m-[9px]"
         type="floating"
@@ -119,7 +119,7 @@ export const Toast = ({
               <div>
                 {message}
                 {hasActions && (
-                  <div className="mt-[10px] flex items-center gap-3">
+                  <div className="mt-[10px] flex items-center gap-2.5">
                     {actions.map((action) => (
                       <RadixToast.Action
                         key={action.label}

@@ -105,7 +105,7 @@ export const OpenStackInstanceSummary = (
               resource={props.resource}
             />
           }
-          className="mt-4"
+          className="mt-3"
           isStuck
         />
       )}

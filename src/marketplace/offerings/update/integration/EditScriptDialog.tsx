@@ -243,7 +243,7 @@ export const EditScriptDialog = ({
               }
               onHide={closeDialog}
               bodyClassName="py-0"
-              extraClassName="editor-header gap-4 py-5"
+              extraClassName="editor-header gap-3 py-4"
               extra={
                 !language ? (
                   <Tooltip
@@ -279,7 +279,7 @@ export const EditScriptDialog = ({
                   <AccordionCard
                     title={translate('Console output')}
                     solid
-                    className="mb-5"
+                    className="mb-4"
                     titleClassName="text-sm"
                   >
                     {scriptExecutionResult ? (
@@ -292,7 +292,7 @@ export const EditScriptDialog = ({
                       </i>
                     )}
                   </AccordionCard>
-                  <div className="flex justify-end gap-4">
+                  <div className="flex justify-end gap-3">
                     <BaseButton
                       variant="tertiary"
                       onClick={closeDialog}

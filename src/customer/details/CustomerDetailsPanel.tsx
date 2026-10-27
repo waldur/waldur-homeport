@@ -46,7 +46,7 @@ const TabBadge = ({ count }: { count: number; tabKey?: string }) => (
       size="sm"
       shape="circle"
       tone="outline"
-      className="ms-2"
+      className="ms-1.5"
     >
       {count}
     </Badge>
@@ -100,7 +100,7 @@ const ProjectMetadataSchemaValue: FC<{ customer }> = ({ customer }) => {
     return (
       <LoadingErred
         loadData={refetch}
-        className="flex items-center justify-center gap-4"
+        className="flex items-center justify-center gap-3"
       />
     );
   }
@@ -108,7 +108,7 @@ const ProjectMetadataSchemaValue: FC<{ customer }> = ({ customer }) => {
   return (
     <>
       {data.name}
-      <span className="text-quaternary ms-2">
+      <span className="text-quaternary ms-1.5">
         ({translate('{count} questions', { count: data.questions_count })})
       </span>
     </>

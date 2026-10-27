@@ -79,7 +79,7 @@ export const BillingSyncList: FunctionComponent<BillingSyncListProps> = ({
   });
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-5">
       <BillingSyncStatusCard />
       <Table<ArrowBillingSync>
         {...tableProps}

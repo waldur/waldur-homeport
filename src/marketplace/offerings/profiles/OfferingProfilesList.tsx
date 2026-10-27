@@ -28,9 +28,9 @@ export const OfferingProfilesList: FC<Partial<TableWithPortal>> = ({
   });
 
   return (
-    // `pt-5`: the spacing contract for a TableWithTabs pane, as in
+    // `pt-4`: the spacing contract for a TableWithTabs pane, as in
     // RoleHygienePage; without it the notice butts up against the tab strip.
-    <div className="pt-5">
+    <div className="pt-4">
       <AlertItem
         variant="info"
         title={translate('What is a service profile?')}

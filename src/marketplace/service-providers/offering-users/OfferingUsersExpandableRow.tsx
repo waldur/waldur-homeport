@@ -63,7 +63,7 @@ export const PosixGroupsTable = ({
           title: translate('Group'),
           render: ({ row }) =>
             row.kind === 'provider_project_group' ? (
-              <span className="inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5">
                 {row.group_name ? <code>{row.group_name}</code> : null}
                 <Badge variant="primary" tone="outline">
                   {translate('Service provider group')}
@@ -101,7 +101,7 @@ export const PosixGroupsTable = ({
       verboseName={translate('Project group GIDs')}
       hideIfEmpty
       hideRefresh
-      className="mt-7"
+      className="mt-5.5"
       headerClassName="min-h-[40px] py-0"
       titleClassName="h4 font-medium text-secondary"
       minHeight="auto"
@@ -172,7 +172,7 @@ const PosixIdentifiersTable = ({
       verboseName={translate('POSIX identifiers')}
       hideIfEmpty
       hideRefresh
-      className="mt-7"
+      className="mt-5.5"
       headerClassName="min-h-[40px] py-0"
       titleClassName="h4 font-medium text-secondary"
       minHeight="auto"
@@ -351,7 +351,7 @@ export const OfferingUsersExpandableRow = ({
         verboseName={translate('Answers')}
         hideIfEmpty
         hideRefresh
-        className="mt-7"
+        className="mt-5.5"
         headerClassName="min-h-[40px] py-0"
         titleClassName="h4 font-medium text-secondary"
         minHeight="auto"

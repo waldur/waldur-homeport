@@ -103,8 +103,8 @@ const projectActionLabel = (
 const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
   const verdictClass = result.would_provision ? 'text-success' : 'text-danger';
   return (
-    <div className="mt-4">
-      <div className="flex items-center gap-2 mb-3">
+    <div className="mt-3">
+      <div className="flex items-center gap-1.5 mb-2.5">
         {result.would_provision ? (
           <CheckCircleIcon size={24} weight="bold" className={verdictClass} />
         ) : (
@@ -129,11 +129,11 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
           variant="warning"
           type="floating"
           title={result.block_reason}
-          className="mb-3"
+          className="mb-2.5"
         />
       )}
 
-      <h6 className="mt-4 mb-2">{translate('Filter outcomes')}</h6>
+      <h6 className="mt-3 mb-1.5">{translate('Filter outcomes')}</h6>
       <div className="table-responsive">
         <table className="table table-sm align-middle">
           <thead>
@@ -155,7 +155,7 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
 
       {result.customer_lookup_performed && (
         <>
-          <h6 className="mt-4 mb-2">{translate('Organization lookup')}</h6>
+          <h6 className="mt-3 mb-1.5">{translate('Organization lookup')}</h6>
           {result.customer_candidates.length === 0 ? (
             <AlertItem
               variant="error"
@@ -215,11 +215,11 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
                 .join(', '),
             },
           )}
-          className="mt-3"
+          className="mt-2.5"
         />
       )}
 
-      <h6 className="mt-4 mb-2">{translate('User attributes')}</h6>
+      <h6 className="mt-3 mb-1.5">{translate('User attributes')}</h6>
       <dl className="row mb-0 small">
         <dt className="col-sm-4">{translate('Username')}</dt>
         <dd className="col-sm-8">{renderFieldOrDash(result.user_username)}</dd>
@@ -341,7 +341,7 @@ export const RuleTestMatchDialog: FC<RuleTestMatchDialogProps> = ({
                   body={translate(
                     'This rule resolves the organization from the user IdP claim, but no protected registration methods are configured. No user will currently pass the protection check.',
                   )}
-                  className="mt-3"
+                  className="mt-2.5"
                 />
               )}
 
@@ -354,7 +354,7 @@ export const RuleTestMatchDialog: FC<RuleTestMatchDialogProps> = ({
                     (mutation.error as Error).message ||
                     translate('Unknown error'),
                 })}
-                className="mt-3"
+                className="mt-2.5"
               />
             )}
 

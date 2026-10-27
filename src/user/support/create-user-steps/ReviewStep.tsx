@@ -20,7 +20,7 @@ const ReviewRow = ({
   value: React.ReactNode;
 }) => (
   <tr>
-    <td className="font-medium text-nowrap pe-4">{label}</td>
+    <td className="font-medium text-nowrap pe-3">{label}</td>
     <td>{renderFieldOrDash(value)}</td>
   </tr>
 );
@@ -38,7 +38,7 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props}>
       {editMode && (
-        <p className="text-quaternary mb-4">
+        <p className="text-quaternary mb-3">
           {translate('Review the changes below and click Save to apply them.')}
         </p>
       )}
@@ -47,7 +47,7 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
           <tr>
             <td
               colSpan={2}
-              className="font-semibold text-uppercase text-quaternary text-xs pb-2 pt-0"
+              className="font-semibold text-uppercase text-quaternary text-xs pb-1.5 pt-0"
             >
               {translate('Account')}
             </td>
@@ -88,7 +88,7 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
           <tr>
             <td
               colSpan={2}
-              className="font-semibold text-uppercase text-quaternary text-xs pb-2 pt-6"
+              className="font-semibold text-uppercase text-quaternary text-xs pb-1.5 pt-5"
             >
               {translate('Personal information')}
             </td>
@@ -137,7 +137,7 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
               <tr>
                 <td
                   colSpan={2}
-                  className="font-semibold text-uppercase text-quaternary text-xs pb-2 pt-6"
+                  className="font-semibold text-uppercase text-quaternary text-xs pb-1.5 pt-5"
                 >
                   {translate('Identity & Profile')}
                 </td>

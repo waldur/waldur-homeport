@@ -41,7 +41,7 @@ const OpenstackInstancesPageTable: FC = () => {
         value={activeTab}
         onValueChange={(k) => setActiveTab(k)}
       >
-        <TabsList bordered={false} className="mb-6">
+        <TabsList bordered={false} className="mb-5">
           <TabsTrigger value="instances">{translate('Instances')}</TabsTrigger>
           <TabsTrigger value="aggregated">
             {translate('Aggregated')}

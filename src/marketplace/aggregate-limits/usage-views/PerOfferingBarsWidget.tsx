@@ -99,7 +99,7 @@ export const PerOfferingBarsWidget = ({
 
   const chart = (
     <>
-      <div className="flex items-center gap-2 mb-1">
+      <div className="flex items-center gap-1.5 mb-1">
         <small className="text-secondary">
           {translate(
             'X-axis: offering · Y-axis: usage stacked under remaining capacity (linear scale, in component’s measured_unit).',
@@ -116,7 +116,7 @@ export const PerOfferingBarsWidget = ({
 
   return (
     <>
-      <div className="flex items-center gap-2 mb-2 flex-wrap">
+      <div className="flex items-center gap-1.5 mb-1.5 flex-wrap">
         <small id={labelId} className="text-secondary">
           {translate('Component type')}:
         </small>

@@ -129,11 +129,9 @@ In production bundles, Vite's CSS minifier removes the explicit `@layer theme, b
 
 CSS Cascade Layers do **not** outrank `!important`. Bootstrap 5's utility API emits utilities with `!important` by default. Because Tailwind and Bootstrap share identical utility names, collisions occur on shared class strings:
 
-| Colliding Class           | Bootstrap Rule (`!important`)                          | Tailwind Expected Rule               | Rendered on App Pages |
-| :------------------------ | :----------------------------------------------------- | :----------------------------------- | :-------------------- |
-| `.border`                 | `border: 1px solid var(--bs-border-color) !important;` | `border-width: 1px;`                 | **Bootstrap**         |
-| `.p-1` through `.p-5`     | `padding: $spacers[N] !important;`                     | `padding: calc(var(--spacing) * N);` | **Bootstrap**         |
-| `.gap-1` through `.gap-5` | `gap: $spacers[N] !important;`                         | `gap: calc(var(--spacing) * N);`     | **Bootstrap**         |
+| Colliding Class | Bootstrap Rule (`!important`)                          | Tailwind Expected Rule | Rendered on App Pages |
+| :-------------- | :----------------------------------------------------- | :--------------------- | :-------------------- |
+| `.border`       | `border: 1px solid var(--bs-border-color) !important;` | `border-width: 1px;`   | **Bootstrap**         |
 
 No colour class collides any more: Bootstrap emits no `text-`/`bg-`/`border-` colour utility at
 all (nor `.border-top`/`-bottom`/`-start`/`-end`, which set a colour), so every colour class is
@@ -142,24 +140,24 @@ Tailwind's, follows the design tokens and takes `dark:`/`hover:` variants. Boots
 way. See
 [design-tokens.md § Bootstrap colour utilities](design-tokens.md).
 
-#### Spacing Anomaly
+#### Spacing Anomaly (resolved, #477)
 
-Bootstrap defines `$spacers: (0: 0, 1: $spacer * .25, 2: $spacer * .5, 3: $spacer * .75, 4: $spacer * 0.154 * 6, 5: $spacer * 1.25)`.
-At Metronic's forced root font size of `13px` (and `12px` on mobile):
-
-- `p-1`, `p-2`, `p-3`, `p-5` render at `0.25rem × N` (`3.25px`, `6.5px`, `9.75px`, `16.25px`).
-- `p-4` renders at `0.924rem` (`12.012px` on desktop, `11.088px` on mobile), whereas Tailwind's `p-4` expects `16px`.
-- Steps above 20 fall through to Tailwind because Bootstrap's `$spacers` map stops at 20.
+Bootstrap's `$spacers` were rem against the forced `13px` root (`12px` on mobile), with an
+irregular step 4 (`0.924rem`, 12px), and its `.m*-*`, `.p*-*` and `.gap-*` utilities were
+`!important` under Tailwind's names, so `p-4` rendered 12px instead of Tailwind's 16px. Bootstrap
+no longer generates any spacing utility: every use was rewritten to the nearest Tailwind step
+(`p-4` → `p-3`), and spacing classes are Tailwind's 4px scale. See
+[design-tokens.md](design-tokens.md) → "Spacing". `$spacers` stays only for the grid
+gutters (`.g-*`, `.gx-*`, `.gy-*`), which go with `Row`/`Col` (#475).
 
 #### Practical Workaround Rules
 
-1. **Exact Pixel Sizing**: For spacing or padding that must match design tokens precisely, use Tailwind arbitrary values: `p-[12px]`, `gap-[8px]`, `px-[16px]`.
-2. **Structural Borders**: Use `border-[1px]` instead of the bare `.border` utility. Bootstrap's
+1. **Structural Borders**: Use `border-[1px]` instead of the bare `.border` utility. Bootstrap's
    `.border` also sets the colour with `!important`, so any Tailwind border colour next to it
    (`border border-brand`, `border border-transparent hover:border-secondary`) never paints.
    Give every state an explicit colour: `border-[1px] border-secondary`, then `border-brand`
    when selected. Enforced (with autofix) by `no-bootstrap-border-with-tailwind-color`.
-3. **Layout & Display Utilities**: Legacy Bootstrap layout classes are retired in favor of native Tailwind equivalents, and Bootstrap no longer generates `display` or `flex` utilities (`src/styles/bootstrap/_utilities.scss`):
+2. **Layout & Display Utilities**: Legacy Bootstrap layout classes are retired in favor of native Tailwind equivalents, and Bootstrap no longer generates `display` or `flex` utilities (`src/styles/bootstrap/_utilities.scss`):
    - Display: `d-flex` → `flex`, `d-block` → `block`, `d-none` → `hidden`, `d-inline` → `inline`, `d-inline-block` → `inline-block`, `d-inline-flex` → `inline-flex`, `d-grid` → `grid`, and responsive breakpoints (`d-md-none` → `md:hidden`, `d-lg-block` → `lg:block`, `d-sm-flex` → `sm:flex`).
    - Flexbox: `flex-column` → `flex-col`, `align-items-*` → `items-*`, `align-self-*` → `self-*`, `justify-content-*` → `justify-*`, `flex-grow-1` → `grow`, `flex-shrink-0` → `shrink-0`.
    - Flex helpers (Metronic `_flex.scss`): `flex-center` → `flex items-center justify-center`, `flex-root` → `flex-1`, `flex-equal` → `flex-1`, `flex-column-fluid` → `flex-auto`, `flex-column-auto` → `flex-none`, `flex-lg-row-fluid` → `lg:flex-auto lg:min-w-0`, `flex-sm-column-auto` → `sm:flex-none`.
@@ -490,9 +488,9 @@ Every menu and menu-like popover is built from one set of parts in `waldur-ui` (
 
 Radix's `Slot` clones trigger elements and attaches positioning refs and event handlers. **Every intermediate trigger component in an `asChild` hierarchy must be wrapped in `forwardRef` and spread `...props`**, or clicks will silently fail.
 
-#### Bootstrap utilities on panels
+#### Spacing and colour classes on panels
 
-Bootstrap's spacing utilities are `!important`, so a Bootstrap class on a panel (`py-4`, `p-0`) beats any Tailwind spacing. The surfaces reset their own margin and padding with arbitrary values (`m-[0px] p-[0px]`) rather than `m-0`/`p-0` for that reason: Bootstrap's `.p-0` would otherwise cancel a caller's Tailwind `py-*`. Tailwind-merge also reads `text-anchor` and `text-primary` as two colours and drops the first; put such classes on the `asChild` child (Slot joins class names without merging them) rather than on the row (see `ResourceAccessButton.tsx`).
+The surfaces reset their own margin and padding (`m-[0px] p-[0px]`); a caller's `py-*` or `my-*` replaces it. Tailwind-merge also reads `text-anchor` and `text-primary` as two colours and drops the first; put such classes on the `asChild` child (Slot joins class names without merging them) rather than on the row (see `ResourceAccessButton.tsx`).
 
 ---
 

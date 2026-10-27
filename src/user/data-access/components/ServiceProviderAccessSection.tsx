@@ -23,7 +23,7 @@ export const ServiceProviderAccessSection: FC<
       <AccordionCard
         title={translate('Service provider access')}
         defaultOpen={false}
-        className="mb-4"
+        className="mb-3"
       >
         <p className="text-quaternary mb-0">
           {isViewerStaffOrSupport
@@ -39,12 +39,12 @@ export const ServiceProviderAccessSection: FC<
   }
 
   return (
-    <div className="mb-4">
-      <h5 className="mb-3">{translate('Service provider access')}</h5>
+    <div className="mb-3">
+      <h5 className="mb-2.5">{translate('Service provider access')}</h5>
       <AlertItem
         type="floating"
         variant="info"
-        className="mb-4"
+        className="mb-3"
         title={
           isViewerStaffOrSupport
             ? translate(
@@ -66,11 +66,11 @@ export const ServiceProviderAccessSection: FC<
               : undefined
           }
           defaultOpen={false}
-          className="mb-3"
+          className="mb-2.5"
           secondary
         >
-          <div className="mb-3">
-            <div className="mb-2">{translate('Exposed fields')}</div>
+          <div className="mb-2.5">
+            <div className="mb-1.5">{translate('Exposed fields')}</div>
             <div className="flex flex-wrap gap-1">
               {provider.exposed_fields.map((field) => (
                 <Badge
@@ -86,7 +86,7 @@ export const ServiceProviderAccessSection: FC<
           </div>
 
           {(provider.consent_date || provider.consent_version) && (
-            <div className="flex gap-4 text-quaternary small">
+            <div className="flex gap-3 text-quaternary small">
               {provider.consent_date && (
                 <span>
                   {translate('Consent given')}:{' '}
@@ -104,8 +104,10 @@ export const ServiceProviderAccessSection: FC<
           {isViewerStaffOrSupport &&
             provider.provider_team &&
             provider.provider_team.length > 0 && (
-              <div className="mt-4">
-                <div className="mb-2">{translate('Provider team members')}</div>
+              <div className="mt-3">
+                <div className="mb-1.5">
+                  {translate('Provider team members')}
+                </div>
                 <Table responsive hover size="sm" className="mb-0">
                   <thead>
                     <tr>

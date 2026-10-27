@@ -31,10 +31,10 @@ export const CarouselSection: FC<CarouselSectionProps> = ({
   };
 
   return (
-    <Card className="card-bordered carousel-section mb-6">
-      <Card.Header className="gap-2">
+    <Card className="card-bordered carousel-section mb-5">
+      <Card.Header className="gap-1.5">
         <h4 className="mb-0">{title}</h4>
-        <div className="flex items-stretch gap-2">
+        <div className="flex items-stretch gap-1.5">
           <BaseButton
             iconNode={<CaretLeftIcon weight="bold" />}
             tooltip={translate('Scroll left')}

@@ -43,16 +43,16 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
         {error ? (
           <button
             type="button"
-            className="text-anchor text-anchor-danger mt-4px"
+            className="text-anchor text-anchor-danger mt-1"
             onClick={() => onRetry(file)}
           >
             {translate('Try again')}
           </button>
         ) : progress || progress === 0 ? (
           progress ? (
-            <Progress className="mt-2" value={progress} />
+            <Progress className="mt-1.5" value={progress} />
           ) : (
-            <Progress className="mt-2" indeterminate />
+            <Progress className="mt-1.5" indeterminate />
           )
         ) : null}
       </div>

@@ -228,7 +228,7 @@ export const SetSpendingLimitsDialog: FC<{
             ) : (
               <>
                 {components.length > 0 && (
-                  <p className="mb-5 text-sm text-tertiary">
+                  <p className="mb-4 text-sm text-tertiary">
                     {getSpendingLimitsNotice(
                       data.offering.plugin_options?.action_on_usage_limit,
                       offersAllTimeLimit(components),
@@ -241,7 +241,7 @@ export const SetSpendingLimitsDialog: FC<{
                     variant="warning"
                     type="floating"
                     iconSize="md"
-                    className="mb-5"
+                    className="mb-4"
                     title={translate(
                       'Some limits are on periods the provider no longer offers',
                     )}

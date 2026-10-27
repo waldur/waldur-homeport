@@ -87,7 +87,7 @@ export const ExtendDeadlineDialog: FC<ExtendDeadlineDialogProps> = ({
                   <div className="py-[10px] text-secondary">
                     {formatDateTime(batch.expires_at)}
                     {batch.is_expired && (
-                      <Badge variant="danger" tone="outline" className="ms-2">
+                      <Badge variant="danger" tone="outline" className="ms-1.5">
                         {translate('Expired')}
                       </Badge>
                     )}

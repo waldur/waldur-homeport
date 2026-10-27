@@ -30,7 +30,7 @@ export const DatabaseReplicationCard: FC<DatabaseReplicationCardProps> = ({
           : translate('This is the primary database')
       }
       defaultOpen={hasReplicationLag}
-      className="mb-6"
+      className="mb-5"
     >
       <Table
         size="sm"
@@ -76,7 +76,7 @@ export const DatabaseReplicationCard: FC<DatabaseReplicationCardProps> = ({
         </tbody>
       </Table>
       {hasReplicationLag && (
-        <small className="text-warning mt-3 block">
+        <small className="text-warning mt-2.5 block">
           {translate(
             'Replica is behind primary. Check network connectivity and primary load.',
           )}

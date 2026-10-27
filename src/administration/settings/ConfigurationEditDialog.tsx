@@ -201,7 +201,7 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                   </Field>
                   {item.key === 'SIDEBAR_STYLE' &&
                     values.value === SIDEBAR_STYLE_PRIMARY && (
-                      <div className="mt-3">
+                      <div className="mt-2.5">
                         <AlertItem
                           type="floating"
                           variant="warning"

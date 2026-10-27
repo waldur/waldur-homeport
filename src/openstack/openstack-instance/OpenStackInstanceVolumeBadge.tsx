@@ -16,7 +16,7 @@ interface VolumeBadgeProps {
 
 const VolumeBadgeTipView = ({ volume, resourceName }: VolumeBadgeProps) => {
   return (
-    <div className="text-start p-2">
+    <div className="text-start p-1.5">
       <Field label={translate('Attached to')} value={resourceName} isStuck />
       <Field
         label={translate('Volume type')}
@@ -39,7 +39,7 @@ const VolumeBadgeTipView = ({ volume, resourceName }: VolumeBadgeProps) => {
           }}
           buttonVariant="secondary"
           buttonSize="sm"
-          className="mt-2"
+          className="mt-1.5"
         >
           {translate('Go to detail view')}
         </Link>
@@ -62,9 +62,14 @@ export const OpenStackInstanceVolumeBadge = ({
       <Badge
         variant="neutral"
         tone="outline"
-        className="cursor-pointer me-3 mb-1"
+        className="cursor-pointer me-2.5 mb-1"
       >
-        <img src={openstackIcon} alt="openstack" width={15} className="me-2" />
+        <img
+          src={openstackIcon}
+          alt="openstack"
+          width={15}
+          className="me-1.5"
+        />
         {volume.name}({formatFilesize(volume.size)}, {volume.type_name})
       </Badge>
     </Tooltip>

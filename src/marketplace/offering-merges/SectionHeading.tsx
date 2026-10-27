@@ -21,7 +21,7 @@ export const SectionHeading: FC<SectionHeadingProps> = ({
   className,
 }) => (
   <h4
-    className={classNames('flex items-center gap-2', className)}
+    className={classNames('flex items-center gap-1.5', className)}
     data-testid="section-heading"
   >
     {title}

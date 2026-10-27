@@ -38,7 +38,7 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
             <FactoryIcon
               size={18}
               weight="bold"
-              className="me-3 text-quaternary"
+              className="me-2.5 text-quaternary"
             />
           )}
         <span>{project.name}</span>
@@ -47,7 +47,7 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
             variant="pink"
             shape="pill"
             tone="outline"
-            className="ms-2 text-nowrap"
+            className="ms-1.5 text-nowrap"
           >
             {translate('Course')}
           </Badge>
@@ -56,7 +56,7 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
             variant="blue"
             shape="pill"
             tone="outline"
-            className="ms-2 text-nowrap"
+            className="ms-1.5 text-nowrap"
           >
             {translate('Public')}
           </Badge>
@@ -78,7 +78,7 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
 
 const ProjectKindCard = ({ project }: ProjectProfileProps) => {
   return (
-    <div className="flex gap-7 ms-n2">
+    <div className="flex gap-5.5 -ms-1.5">
       <div className="border rounded size-10 flex items-center justify-center shrink-0 text-tertiary">
         {project.kind === 'course' ? (
           <GraduationCapIcon size={20} weight="bold" />
@@ -178,7 +178,7 @@ export const ProjectProfile = ({ project }: ProjectProfileProps) => {
       }
       actions={<ProjectActions project={project} />}
     >
-      <Stack direction="horizontal" className="gap-6 mb-1">
+      <Stack direction="horizontal" className="gap-5 mb-1">
         {project.oecd_fos_2007_code && (
           <span>{`${project.oecd_fos_2007_code}. ${project.oecd_fos_2007_label}`}</span>
         )}

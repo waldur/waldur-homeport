@@ -145,7 +145,7 @@ export const ExportDialog = (props: ExportDialogProps) => {
                   <AlertItem
                     type="floating"
                     variant="warning"
-                    className="mb-4"
+                    className="mb-3"
                     title={pdfWarning}
                   />
                 )}
@@ -173,7 +173,7 @@ export const ExportDialog = (props: ExportDialogProps) => {
                               )
                         }
                         size={20}
-                        className="ms-2"
+                        className="ms-1.5"
                       />
                     </>
                   }

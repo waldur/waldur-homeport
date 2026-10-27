@@ -33,11 +33,11 @@ export const DatabaseQueryPerformanceCard: FC<
       title={translate('Query performance')}
       subtitle={translate('Scan statistics and temp file usage')}
       defaultOpen={hasTempFilesWarning || hasHighSeqScans}
-      className="mb-6"
+      className="mb-5"
     >
       <Row>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-3">
+          <h6 className="text-uppercase text-quaternary mb-2.5">
             {translate('Scan statistics')}
           </h6>
           <Table size="sm" borderless className="mb-0">
@@ -53,7 +53,7 @@ export const DatabaseQueryPerformanceCard: FC<
                 </td>
               </tr>
               <tr>
-                <td className="text-quaternary ps-4">
+                <td className="text-quaternary ps-3">
                   {translate('Rows fetched')}
                 </td>
                 <td className="text-end text-quaternary">
@@ -67,7 +67,7 @@ export const DatabaseQueryPerformanceCard: FC<
                 </td>
               </tr>
               <tr>
-                <td className="text-quaternary ps-4">
+                <td className="text-quaternary ps-3">
                   {translate('Rows fetched')}
                 </td>
                 <td className="text-end text-quaternary">
@@ -77,7 +77,7 @@ export const DatabaseQueryPerformanceCard: FC<
             </tbody>
           </Table>
           {hasHighSeqScans && (
-            <small className="text-warning mt-2 block">
+            <small className="text-warning mt-1.5 block">
               {translate(
                 'High sequential scan ratio ({ratio}%). Consider adding indexes.',
                 { ratio: seqScanRatio.toFixed(1) },
@@ -86,7 +86,7 @@ export const DatabaseQueryPerformanceCard: FC<
           )}
         </Col>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-3">
+          <h6 className="text-uppercase text-quaternary mb-2.5">
             {translate('Temporary files')}
           </h6>
           <Table size="sm" borderless className="mb-0">
@@ -99,7 +99,7 @@ export const DatabaseQueryPerformanceCard: FC<
                       <WarningCircleIcon
                         size={16}
                         weight="bold"
-                        className="text-warning ms-2"
+                        className="text-warning ms-1.5"
                       />
                     )}
                   </div>
@@ -121,7 +121,7 @@ export const DatabaseQueryPerformanceCard: FC<
             </tbody>
           </Table>
           {hasTempFilesWarning && (
-            <small className="text-danger mt-2 block">
+            <small className="text-danger mt-1.5 block">
               {translate(
                 'Large temp files indicate queries exceeding work_mem. Consider increasing it.',
               )}

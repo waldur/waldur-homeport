@@ -74,7 +74,7 @@ export const OfferingBookingResourcesCalendarContainer: FunctionComponent<
     <Card className="card-bordered">
       <Card.Header>
         <Card.Title>
-          <span className="me-2">{translate('Bookings')}</span>
+          <span className="me-1.5">{translate('Bookings')}</span>
           {isRefetching ? (
             <LoadingSpinner />
           ) : (

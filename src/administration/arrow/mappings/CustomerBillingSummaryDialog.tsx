@@ -43,7 +43,7 @@ export const CustomerBillingSummaryDialog: FC<
           loadData={refetch}
         />
       ) : data ? (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-5">
           {/* Error message if any (only show for unexpected errors) */}
           {data.error && !data.error.includes('billing') && (
             <AlertItem
@@ -138,7 +138,7 @@ export const CustomerBillingSummaryDialog: FC<
                 title={translate('How resource linking works:')}
                 body={
                   <>
-                    <p className="mb-2 mt-2">
+                    <p className="mb-1.5 mt-1.5">
                       {translate(
                         'Resources are linked to Arrow via their backend_id field, which should contain the Arrow License Reference (e.g., XSP12345).',
                       )}
@@ -175,13 +175,13 @@ export const CustomerBillingSummaryDialog: FC<
             </Card.Header>
             <Card.Body className="p-0">
               {!data.billing_available ? (
-                <div className="text-center text-quaternary py-6">
+                <div className="text-center text-quaternary py-5">
                   {translate(
                     'Billing export not available yet for this period. Final billing data is typically available after the month ends.',
                   )}
                 </div>
               ) : data.billing_lines.length === 0 ? (
-                <div className="text-center text-quaternary py-6">
+                <div className="text-center text-quaternary py-5">
                   {translate(
                     'No billing lines found for this customer in the current period',
                   )}
@@ -260,7 +260,7 @@ export const CustomerBillingSummaryDialog: FC<
             </Card.Header>
             <Card.Body className="p-0">
               {data.consumption_lines.length === 0 ? (
-                <div className="text-center text-quaternary py-6">
+                <div className="text-center text-quaternary py-5">
                   {data.total_customer_resources === 0
                     ? translate(
                         'No resources found for this customer in Waldur',
@@ -328,7 +328,7 @@ export const CustomerBillingSummaryDialog: FC<
           {data.billing_lines.length === 0 &&
             data.consumption_lines.length === 0 &&
             !data.error && (
-              <div className="text-center text-quaternary py-6">
+              <div className="text-center text-quaternary py-5">
                 {translate(
                   'No billing or consumption data found for this customer in the current period.',
                 )}

@@ -49,7 +49,7 @@ export const ReviewerProfileSummaryCard: FC<
   if (isLoading) {
     return (
       <Card className="card-bordered">
-        <Card.Body className="flex items-center justify-center py-6">
+        <Card.Body className="flex items-center justify-center py-5">
           <LoadingSpinner />
         </Card.Body>
       </Card>
@@ -61,7 +61,7 @@ export const ReviewerProfileSummaryCard: FC<
     return (
       <Card className="card-bordered bg-warning-subtle">
         <Card.Body>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <div
               className="flex items-center justify-center rounded-full bg-warning text-white"
               style={{ width: 56, height: 56, minWidth: 56 }}
@@ -93,7 +93,7 @@ export const ReviewerProfileSummaryCard: FC<
   return (
     <Card className="card-bordered">
       <Card.Body>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           {/* Avatar */}
           <Avatar
             src={currentUser?.image}
@@ -103,7 +103,7 @@ export const ReviewerProfileSummaryCard: FC<
 
           {/* Profile info */}
           <div className="grow">
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-center gap-1.5 mb-1">
               <h4 className="mb-0">{currentUser?.full_name}</h4>
               {profile.is_published ? (
                 <Badge variant="success" tone="outline">
@@ -116,7 +116,7 @@ export const ReviewerProfileSummaryCard: FC<
               )}
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 text-quaternary small">
+            <div className="flex flex-wrap items-center gap-2.5 text-quaternary small">
               {profile.orcid_id && (
                 <a
                   href={`https://orcid.org/${profile.orcid_id}`}
@@ -145,7 +145,7 @@ export const ReviewerProfileSummaryCard: FC<
             </div>
 
             {!profile.is_published && (
-              <p className="text-warning mb-0 mt-2 small">
+              <p className="text-warning mb-0 mt-1.5 small">
                 {translate(
                   'Your profile is not published. Publish it to appear in reviewer searches and receive invitations.',
                 )}

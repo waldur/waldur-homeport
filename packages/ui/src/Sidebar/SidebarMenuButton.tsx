@@ -12,7 +12,7 @@ import { useSidebar, useSidebarSubDepth } from './context';
  * hover states, and collapsed icon rail adjustments.
  */
 export const sidebarMenuButtonVariants = cva(
-  'flex h-10 w-full items-center gap-3 overflow-hidden rounded-md px-[12px] py-[7px] text-left text-sm font-medium text-[var(--nav-item-text)] transition-colors group-data-[collapsible=icon]/panel:size-9 group-data-[collapsible=icon]/panel:justify-center group-data-[collapsible=icon]/panel:p-0',
+  'flex h-10 w-full items-center gap-2.5 overflow-hidden rounded-md px-[12px] py-[7px] text-left text-sm font-medium text-[var(--nav-item-text)] transition-colors group-data-[collapsible=icon]/panel:size-9 group-data-[collapsible=icon]/panel:justify-center group-data-[collapsible=icon]/panel:p-0',
   {
     variants: {
       active: {

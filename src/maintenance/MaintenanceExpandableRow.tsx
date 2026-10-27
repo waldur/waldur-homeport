@@ -28,7 +28,7 @@ export const MaintenanceExpandableRow: FC<{
 
   return (
     <ExpandableContainer>
-      <InternalNotes maintenance={maintenance} space={5} />
+      <InternalNotes maintenance={maintenance} space={4} />
       <Table<MaintenanceAnnouncementOffering>
         {...tableProps}
         columns={[

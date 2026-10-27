@@ -81,9 +81,9 @@ export const UserAnalyticsPage: FC = () => {
   return (
     <>
       <ReportingTitle reportKey="user-analytics" />
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'pb-6')}>
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'pb-5')}>
         {(showNationality || showCountry) && (
-          <Row className="mb-5 g-5">
+          <Row className="mb-4 g-5">
             {showNationality && (
               <Col md={showCountry ? 6 : 12}>
                 <ChartCard

@@ -45,14 +45,14 @@ export const QuestionGeneralForm = ({
         validate={required}
         label={translate('Question')}
         required
-        space={5}
+        space={4}
       />
       <TextGroup
         name="user_guidance"
         placeholder={translate('Input placeholder help text for user...')}
         maxLength={300}
         label={translate('User guidance')}
-        space={5}
+        space={4}
       />
       <SelectGroup
         name="question_type"
@@ -61,19 +61,19 @@ export const QuestionGeneralForm = ({
         simpleValue
         label={translate('Question type')}
         required
-        space={5}
+        space={4}
       />
       <BooleanGroup
         name="required"
         label={translate('Is required?')}
-        space={5}
+        space={4}
       />
       <NumberGroup
         name="order"
         placeholder="0"
         min={0}
         label={translate('Question order')}
-        space={5}
+        space={4}
       />
       {['single_select', 'multi_select'].includes(values.question_type) ? (
         <QuestionAnswerOptions />
@@ -83,22 +83,22 @@ export const QuestionGeneralForm = ({
             name="min_value"
             placeholder="0"
             label={translate('Min value')}
-            space={5}
+            space={4}
           />
           <NumberGroup
             name="max_value"
             label={translate('Max value')}
             placeholder="0"
             validate={gt}
-            space={5}
+            space={4}
           />
         </>
       ) : values.question_type === 'likert' ? (
         <>
           <QuestionLikertFields />
-          <hr className="my-5" />
+          <hr className="my-4" />
           <div
-            className="bg-tertiary dark:bg-quaternary border rounded p-3 mb-5"
+            className="bg-tertiary dark:bg-quaternary border rounded p-2.5 mb-4"
             style={{ borderColor: 'var(--border-secondary)' }}
           >
             <div
@@ -126,7 +126,7 @@ export const QuestionGeneralForm = ({
             </div>
             {previewOpen && (
               <>
-                <hr className="my-3" />
+                <hr className="my-2.5" />
                 <LikertPreview
                   config={{
                     likert_scale_length: values.likert_scale_length,
@@ -152,7 +152,7 @@ export const QuestionGeneralForm = ({
           placeholder="e.g., vat_code"
           required
           label={translate('Customer field mapping for onboarding')}
-          space={5}
+          space={4}
           help={translate(
             "Customer model field name to map this answer to the Customer object (e.g., 'registration_code', 'email', 'vat_code').",
           )}
@@ -164,7 +164,7 @@ export const QuestionGeneralForm = ({
           placeholder="e.g., intent"
           required
           label={translate('Intent field mapping for onboarding')}
-          space={5}
+          space={4}
           help={translate(
             "Intent/purpose field to map the answer to the verification metadata (e.g., 'intent', 'registration_purpose').",
           )}

@@ -28,7 +28,7 @@ const px = (v: string) => Number.parseFloat(v);
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-4">
+    <div className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-3">
       {children}
     </div>
   );
@@ -49,7 +49,7 @@ export const Spacing: Story = {
     const [base] = spacing.tokens;
     return (
       <TokenPage title="Spacing" intro={spacing.doc}>
-        <p className="mb-4 text-xs text-quaternary">
+        <p className="mb-3 text-xs text-quaternary">
           Base <Mono>{base?.name}</Mono> ={' '}
           <Mono className="">{base && value(base)}</Mono>. A step N (
           <Mono className="">p-N</Mono>, <Mono className="">gap-N</Mono>, …) is
@@ -123,7 +123,7 @@ function RadiusTile({
   }, []);
   const full = name === '--radius-full';
   return (
-    <div className="flex flex-col items-center gap-2 text-center">
+    <div className="flex flex-col items-center gap-1.5 text-center">
       <div
         ref={ref}
         className={`size-16 border-[1px] border-[var(--border-brand-solid)] bg-brand-subtle ${className ?? ''}`}
@@ -157,7 +157,7 @@ export const Radius: Story = {
   render: () => (
     <TokenPage title="Radius" intro={radius.doc}>
       <Frame>
-        <div className="flex flex-wrap gap-8">
+        <div className="flex flex-wrap gap-6">
           {radius.tokens.map((t) => (
             <RadiusTile
               key={t.name}
@@ -219,7 +219,7 @@ function BreakpointsPage() {
             );
           })}
         </div>
-        <p className="mt-4 text-xs text-quaternary">
+        <p className="mt-3 text-xs text-quaternary">
           This frame is {width}px wide: the filled bars are the breakpoints in
           effect.
         </p>

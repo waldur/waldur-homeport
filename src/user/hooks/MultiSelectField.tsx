@@ -51,7 +51,7 @@ export const MultiSelectField: FunctionComponent<{
 
   return (
     <>
-      <FormGroup label={translate('Events')} space={5}>
+      <FormGroup label={translate('Events')} space={4}>
         <FilterBox
           type="search"
           placeholder={translate('Filter events')}
@@ -72,7 +72,7 @@ export const MultiSelectField: FunctionComponent<{
               key={key}
               role="group"
               aria-labelledby={`event-section-${key}`}
-              className="mb-5 flex flex-col gap-5"
+              className="mb-4 flex flex-col gap-4"
             >
               <h6 id={`event-section-${key}`} className="mb-0">
                 {title}

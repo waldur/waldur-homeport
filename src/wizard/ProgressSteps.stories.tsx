@@ -17,7 +17,7 @@ const meta: Meta<typeof ProgressSteps> = {
   },
   decorators: [
     (Story) => (
-      <div className="p-6 bg-primary" style={{ minWidth: 600 }}>
+      <div className="p-5 bg-primary" style={{ minWidth: 600 }}>
         <Story />
       </div>
     ),
@@ -156,7 +156,7 @@ export const Interactive: Story = {
     }));
 
     return (
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-5">
         <ProgressSteps
           steps={steps}
           onClick={(_, idx) => setCurrentIndex(idx)}

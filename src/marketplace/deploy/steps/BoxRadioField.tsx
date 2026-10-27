@@ -240,7 +240,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                   {/* Options menu */}
                   <Menu.Content
                     align="start"
-                    className="border font-medium rounded-none max-w-[250px] text-sm py-3"
+                    className="border font-medium rounded-none max-w-[250px] text-sm py-2.5"
                     // Compact rows, as in the footer menus.
                     density="compact"
                   >

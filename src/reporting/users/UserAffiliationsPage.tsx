@@ -44,7 +44,7 @@ export const UserAffiliationsPage: FC = () => {
   return (
     <>
       <ReportingTitle reportKey="user-affiliations" />
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'pb-6')}>
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'pb-5')}>
         <AffiliationsChart data={data} refetch={refetch} />
       </div>
     </>

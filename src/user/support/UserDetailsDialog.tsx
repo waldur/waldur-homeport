@@ -61,7 +61,7 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
         />
       ) : user ? (
         <Tabs mount="active" defaultValue="details">
-          <TabsList className="mb-4">
+          <TabsList className="mb-3">
             <TabsTrigger value="details">{translate('Details')}</TabsTrigger>
             {canViewPersonalRecords ? (
               <TabsTrigger value="audit-log">

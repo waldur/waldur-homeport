@@ -13,7 +13,7 @@ interface DownloadTemplateItemProps {
 
 export const DownloadTemplateItem: FC<DownloadTemplateItemProps> = (props) => {
   return (
-    <div className="attachment-item mb-6">
+    <div className="attachment-item mb-5">
       <div className="attachment-item__thumb">
         <FileCsvIcon size={20} weight="bold" className="text-quaternary" />
       </div>

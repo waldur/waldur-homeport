@@ -60,7 +60,7 @@ export const QuotaCell = ({
   const percent = getUsagePercentOfLimitComponent(limit, usage);
 
   return (
-    <div className="flex flex-col mb-3">
+    <div className="flex flex-col mb-2.5">
       <CellDescription
         title={title}
         usage={usage}

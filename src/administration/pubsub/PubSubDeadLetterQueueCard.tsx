@@ -32,10 +32,10 @@ export const PubSubDeadLetterQueueCard: FC = () => {
           : translate('Loading...')
       }
       defaultOpen={hasMessages}
-      className="mb-6"
+      className="mb-5"
     >
       {isLoading ? (
-        <div className="text-center py-4">
+        <div className="text-center py-3">
           <LoadingSpinner />
         </div>
       ) : data ? (
@@ -73,7 +73,7 @@ export const PubSubDeadLetterQueueCard: FC = () => {
           </Table>
           {data.dlq_queues && data.dlq_queues.length > 0 && (
             <>
-              <h6 className="text-uppercase text-quaternary mt-4 mb-3">
+              <h6 className="text-uppercase text-quaternary mt-3 mb-2.5">
                 {translate('DLQ queues')}
               </h6>
               <Table size="sm" borderless className="mb-0">
@@ -109,10 +109,10 @@ export const PubSubDeadLetterQueueCard: FC = () => {
             </>
           )}
           {data.note && (
-            <small className="text-quaternary mt-3 block">{data.note}</small>
+            <small className="text-quaternary mt-2.5 block">{data.note}</small>
           )}
           {hasMessages && (
-            <small className="text-warning mt-3 block">
+            <small className="text-warning mt-2.5 block">
               {translate(
                 'Messages in the dead letter queue indicate failed publishing attempts that need investigation.',
               )}

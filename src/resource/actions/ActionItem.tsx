@@ -30,7 +30,7 @@ const ICON_COLOR_CLASSNAMES: Record<ActionIconColor, string> = {
 };
 
 // Bootstrap's text-dark, in both themes.
-const STAFF_ICON_CLASSNAME = 'ms-1 me-3 text-primary';
+const STAFF_ICON_CLASSNAME = 'ms-1 me-2.5 text-primary';
 
 export interface ActionItemProps {
   title: string;
@@ -141,7 +141,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
               weight="bold"
               aria-hidden="true"
               className={classNames(
-                'ms-1 me-3 text-[var(--menu-item-muted-text)]',
+                'ms-1 me-2.5 text-[var(--menu-item-muted-text)]',
                 props.disabled && 'opacity-50',
               )}
             />

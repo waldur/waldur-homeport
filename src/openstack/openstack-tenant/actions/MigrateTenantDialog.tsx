@@ -136,7 +136,7 @@ export const MigrateTenantDialog: FC<MigrateTenantDialogProps> = ({
             }
             footer={
               <div>
-                <CloseDialogButton className="me-3" />
+                <CloseDialogButton className="me-2.5" />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
@@ -230,7 +230,7 @@ const MigrateTenantFields = ({ offering, resource }) => {
         <LoadingSpinner />
       ) : queryResult.data ? (
         <>
-          <FormField className="mb-7">
+          <FormField className="mb-5.5">
             <FormLabel>{translate('Volume types')}</FormLabel>
             <FieldArray name="volumeTypes">
               {({ fields }) => (
@@ -244,7 +244,7 @@ const MigrateTenantFields = ({ offering, resource }) => {
             options={queryResult.data.networks}
             isMulti
           />
-          <FormField className="mb-7">
+          <FormField className="mb-5.5">
             <FormLabel>{translate('Subnets')}</FormLabel>
             <FieldArray name="subnets">
               {({ fields }) => (

@@ -27,7 +27,7 @@ import { getSavedFiltersKey } from './utils';
 import './SavedFilterSelect.scss';
 
 const Control = (props) => (
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-1.5">
     <components.Control
       {...props}
       className={classNames('grow', props.className)}
@@ -35,7 +35,7 @@ const Control = (props) => (
       <FunnelIcon
         size={20}
         weight="bold"
-        className="ms-3 me-2 text-secondary shrink-0"
+        className="ms-2.5 me-1.5 text-secondary shrink-0"
       />
       {props.children}
     </components.Control>
@@ -45,7 +45,7 @@ const Control = (props) => (
         tooltip={translate('Delete filter')}
         onClick={(e) => props.remove(e, props.getValue()[0])}
         variant="text-danger"
-        className="me-3"
+        className="me-2.5"
         size="sm"
       />
     )}
@@ -153,7 +153,7 @@ export const SavedFilterSelect = ({
   return (
     <div
       className={
-        filterPosition === 'menu' ? 'saved-filters' : 'saved-filters mb-7'
+        filterPosition === 'menu' ? 'saved-filters' : 'saved-filters mb-5.5'
       }
     >
       <WindowedSelect

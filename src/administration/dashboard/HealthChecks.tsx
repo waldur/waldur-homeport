@@ -52,9 +52,11 @@ const HealthInfoItem = ({
 
   const statusContent = (
     <div className="text-center">
-      <div className="flex justify-center items-center mb-2">
+      <div className="flex justify-center items-center mb-1.5">
         {getStatusIcon(isWorking, hasError)}
-        <span className={`ms-2 font-medium ${getStatusColorClass(isWorking)}`}>
+        <span
+          className={`ms-1.5 font-medium ${getStatusColorClass(isWorking)}`}
+        >
           {message}
         </span>
       </div>
@@ -64,7 +66,7 @@ const HealthInfoItem = ({
 
   if (hasError) {
     return (
-      <Col xs={12} md={6} lg={4} xl={3} className="mb-4">
+      <Col xs={12} md={6} lg={4} xl={3} className="mb-3">
         <Tooltip
           label={
             <>
@@ -72,7 +74,7 @@ const HealthInfoItem = ({
             </>
           }
         >
-          <div className="p-3 border rounded bg-danger-subtle cursor-pointer h-full">
+          <div className="p-2.5 border rounded bg-danger-subtle cursor-pointer h-full">
             {statusContent}
           </div>
         </Tooltip>
@@ -81,8 +83,8 @@ const HealthInfoItem = ({
   }
 
   return (
-    <Col xs={12} md={6} lg={4} xl={3} className="mb-4">
-      <div className="p-3 border rounded bg-success-subtle h-full">
+    <Col xs={12} md={6} lg={4} xl={3} className="mb-3">
+      <div className="p-2.5 border rounded bg-success-subtle h-full">
         {statusContent}
       </div>
     </Col>
@@ -102,21 +104,21 @@ export const HealthChecks = ({ healthInfoItems }: HealthChecksProps) => {
   const allWorking = workingCount === totalCount;
 
   return (
-    <Card className="card-bordered mb-5">
+    <Card className="card-bordered mb-4">
       <Card.Body>
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center mb-3">
           <h3 className="mb-0">{translate('Health checks')}</h3>
           <div className="flex items-center">
             {allWorking ? (
               <CheckCircleIcon
                 size={20}
-                className="text-success me-2"
+                className="text-success me-1.5"
                 weight="bold"
               />
             ) : (
               <XCircleIcon
                 size={20}
-                className="text-danger me-2"
+                className="text-danger me-1.5"
                 weight="bold"
               />
             )}

@@ -20,11 +20,11 @@ export const DisclaimerArea: FunctionComponent = () => {
   }
 
   return (
-    <div className="border-t-[1px] border-t-secondary py-6">
+    <div className="border-t-[1px] border-t-secondary py-5">
       <div
         className={classNames(
           PAGE_CONTAINER_CLASSNAME,
-          'flex flex-col md:flex-row items-center justify-center gap-6 text-xs text-quaternary',
+          'flex flex-col md:flex-row items-center justify-center gap-5 text-xs text-quaternary',
         )}
       >
         {text && <span>{text}</span>}

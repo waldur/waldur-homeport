@@ -326,7 +326,7 @@ export const AnonymousChatPanel: FunctionComponent = () => {
       {
         title: translate('Offerings shown'),
         render: ({ row }) => (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <span>{row.offerings_shown ?? 0}</span>
             {Boolean(row.offerings_clicked) && (
               <Badge variant="success" size="sm" tone="outline">
@@ -431,7 +431,7 @@ export const AnonymousChatPanel: FunctionComponent = () => {
   );
 
   return (
-    <div className="pt-5">
+    <div className="pt-4">
       {kpi && (
         <>
           <SummaryWidget stats={stats} className="mx-0" />

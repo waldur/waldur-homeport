@@ -187,10 +187,10 @@ export const ReviewerInvitationAccept: FC = () => {
 
   if (invitationError) {
     return (
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-10')}>
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-8')}>
         <Card className="card-bordered">
-          <Card.Body className="text-center py-10">
-            <h3 className="text-danger mb-4">
+          <Card.Body className="text-center py-8">
+            <h3 className="text-danger mb-3">
               {translate('Invalid invitation')}
             </h3>
             <p className="text-quaternary">
@@ -211,10 +211,10 @@ export const ReviewerInvitationAccept: FC = () => {
   // CheckIcon if invitation is already processed
   if (invitation.invitation_status !== 'pending') {
     return (
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-10')}>
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-8')}>
         <Card className="card-bordered">
-          <Card.Body className="text-center py-10">
-            <h3 className="mb-4">
+          <Card.Body className="text-center py-8">
+            <h3 className="mb-3">
               {translate('Invitation already processed')}
             </h3>
             <p className="text-quaternary">
@@ -240,8 +240,8 @@ export const ReviewerInvitationAccept: FC = () => {
       : undefined;
 
   return (
-    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-10')}>
-      <div className="mb-6">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-8')}>
+      <div className="mb-5">
         <h1 className="text-xl font-semibold mb-1">
           {translate('You have been invited to review')}
         </h1>
@@ -270,8 +270,8 @@ export const ReviewerInvitationAccept: FC = () => {
       {/* COI Policy (informational - disclosure happens at assignment stage) */}
       <COIPolicyCard config={invitation.coi_configuration} />
 
-      <div className="position-sticky bottom-0 z-index-2 flex max-md:flex-wrap items-center justify-between gap-4 border rounded bg-primary px-6 py-4">
-        <div className="hidden md:flex items-center gap-2 flex-1 text-quaternary">
+      <div className="position-sticky bottom-0 z-index-2 flex max-md:flex-wrap items-center justify-between gap-3 border rounded bg-primary px-5 py-3">
+        <div className="hidden md:flex items-center gap-1.5 flex-1 text-quaternary">
           {hasCOIPolicy(invitation.coi_configuration) && (
             <>
               <InfoIcon size={18} weight="bold" className="shrink-0" />
@@ -281,7 +281,7 @@ export const ReviewerInvitationAccept: FC = () => {
             </>
           )}
         </div>
-        <div className="flex gap-3 ms-auto shrink-0">
+        <div className="flex gap-2.5 ms-auto shrink-0">
           <BaseButton
             variant="success"
             onClick={() => acceptMutation.mutate()}

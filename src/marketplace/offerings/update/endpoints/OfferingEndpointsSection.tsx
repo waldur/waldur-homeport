@@ -30,7 +30,7 @@ export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
     <Card className="card-bordered">
       <Card.Header>
         <Card.Title className="h5">
-          <span className="me-2">{translate('Endpoints')}</span>
+          <span className="me-1.5">{translate('Endpoints')}</span>
           <RefreshButton refetch={props.refetch} loading={props.loading} />
         </Card.Title>
         {canAdd && (
@@ -46,7 +46,7 @@ export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
             title={translate('No endpoints found')}
             message={translate("Offering doesn't have endpoints.")}
             buttonTitle={translate('Search again')}
-            className="mt-n5"
+            className="-mt-4"
           />
         ) : (
           <Table bordered={true} hover={true} responsive={true}>
@@ -57,7 +57,7 @@ export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
                   <td className="col-md-9">{endpoint.url}</td>
                   {(canUpdate || canDelete) && (
                     <td className="row-actions">
-                      <div className="flex gap-2">
+                      <div className="flex gap-1.5">
                         {canUpdate && (
                           <EditEndpointButton
                             offering={props.offering}

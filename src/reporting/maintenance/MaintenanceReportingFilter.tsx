@@ -114,7 +114,7 @@ export const MaintenanceReportingFilter: FC<
   );
 
   return (
-    <div className="flex flex-wrap gap-6 mb-6">
+    <div className="flex flex-wrap gap-5 mb-5">
       <FormGroup label={translate('Preset')} className="grow max-w-[150px]">
         <Select
           value={selectedPreset}

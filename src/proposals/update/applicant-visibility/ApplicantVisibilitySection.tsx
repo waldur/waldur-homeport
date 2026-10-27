@@ -26,7 +26,7 @@ const TITLE = (
       )}
       size={20}
       weight="fill"
-      className="mx-2"
+      className="mx-1.5"
     />
   </>
 );
@@ -59,13 +59,13 @@ export const ApplicantVisibilitySection: FC<
       update={update}
       editGate="always"
       disabled={isReadOnly}
-      className="card-bordered mb-5"
+      className="card-bordered mb-4"
       emptyHint={
         isDefault ? (
           <AlertItem
             type="floating"
             variant="info"
-            className="mb-3"
+            className="mb-2.5"
             title={translate(
               'Using global defaults. Saving any field will create a custom configuration for this call.',
             )}

@@ -56,7 +56,7 @@ export const K8sTotalResourcesCard: React.FC<K8sTotalResourcesCardProps> = ({
         </Card.Title>
       </Card.Header>
       <Card.Body>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-3">
           <TotalClusterResourceItem
             label={translate('Controllers')}
             value={totalResources.totalControllerNodes}

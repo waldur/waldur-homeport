@@ -51,7 +51,7 @@ export const OfferingTosExpandableRow: FC<OfferingTosExpandableRowProps> = ({
               variant="neutral"
               shape="pill"
               tone="outline"
-              className="ms-2"
+              className="ms-1.5"
             >
               {resourcesCountQuery.isLoading ? (
                 <LoadingSpinnerSimple />

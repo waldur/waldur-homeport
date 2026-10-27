@@ -79,13 +79,13 @@ export const Playground: Story = {};
  */
 export const VariantToneMatrix: Story = {
   render: () => (
-    <div className="p-6 bg-[var(--page-bg)] space-y-6">
+    <div className="p-5 bg-[var(--page-bg)] space-y-6">
       {TONES.map((tone) => (
         <div key={tone}>
-          <h4 className="text-xs uppercase font-mono text-quaternary mb-3">
+          <h4 className="text-xs uppercase font-mono text-quaternary mb-2.5">
             Tone: {tone}
           </h4>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {VARIANTS.map((variant) => (
               <Badge key={variant} variant={variant} tone={tone}>
                 {variant}
@@ -103,7 +103,7 @@ export const VariantToneMatrix: Story = {
  */
 export const Shapes: Story = {
   render: () => (
-    <div className="flex flex-wrap gap-4 p-6 items-center">
+    <div className="flex flex-wrap gap-3 p-5 items-center">
       <Badge variant="primary" shape="pill" tone="outline">
         Pill Shape
       </Badge>
@@ -122,8 +122,8 @@ export const Shapes: Story = {
  */
 export const Sizes: Story = {
   render: () => (
-    <div className="flex flex-col gap-4 p-6">
-      <div className="flex items-center gap-3">
+    <div className="flex flex-col gap-3 p-5">
+      <div className="flex items-center gap-2.5">
         <span className="text-xs font-mono text-quaternary w-24">
           Standard:
         </span>
@@ -137,7 +137,7 @@ export const Sizes: Story = {
           Large (lg)
         </Badge>
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2.5">
         <span className="text-xs font-mono text-quaternary w-24">Pill:</span>
         <Badge variant="primary" size="sm" shape="pill" tone="outline">
           Small (sm)
@@ -162,8 +162,8 @@ export const Sizes: Story = {
  */
 export const IconsAndSlots: Story = {
   render: () => (
-    <div className="flex flex-col gap-4 p-6">
-      <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-col gap-3 p-5">
+      <div className="flex flex-wrap items-center gap-2.5">
         <Badge
           variant="success"
           leftIcon={<CheckIcon size={14} weight="bold" />}
@@ -198,7 +198,7 @@ export const IconsAndSlots: Story = {
           Featured Offer
         </Badge>
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2.5">
         <Badge
           variant="teal"
           size="sm"
@@ -233,7 +233,7 @@ export const IconsAndSlots: Story = {
  */
 export const OnlyIcon: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-3 p-6">
+    <div className="flex flex-wrap items-center gap-2.5 p-5">
       <Badge
         variant="primary"
         leftIcon={<StarIcon size={14} weight="fill" />}
@@ -286,8 +286,8 @@ export const OnlyIcon: Story = {
  */
 export const Bullets: Story = {
   render: () => (
-    <div className="flex flex-col gap-4 p-6">
-      <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-col gap-3 p-5">
+      <div className="flex flex-wrap items-center gap-2.5">
         <Badge variant="success" shape="pill" tone="outline" hasBullet>
           Online
         </Badge>
@@ -304,7 +304,7 @@ export const Bullets: Story = {
           High Load
         </Badge>
       </div>
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap items-center gap-2.5">
         <Badge variant="info" size="sm" shape="pill" tone="outline" hasBullet>
           Small Bullet
         </Badge>
@@ -322,7 +322,7 @@ export const Bullets: Story = {
  */
 export const Tooltips: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-4 p-6">
+    <div className="flex flex-wrap items-center gap-3 p-5">
       <Badge
         variant="info"
         shape="pill"
@@ -361,12 +361,12 @@ export const Tooltips: Story = {
  */
 export const CountersAndOverflow: Story = {
   render: () => (
-    <div className="flex flex-col gap-5 p-6">
+    <div className="flex flex-col gap-4 p-5">
       <div>
-        <h5 className="text-xs uppercase font-mono text-quaternary mb-2">
+        <h5 className="text-xs uppercase font-mono text-quaternary mb-1.5">
           Numeric Counter Badges
         </h5>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <Badge variant="neutral" shape="pill" tone="outline">
             0
           </Badge>
@@ -383,10 +383,10 @@ export const CountersAndOverflow: Story = {
       </div>
 
       <div>
-        <h5 className="text-xs uppercase font-mono text-quaternary mb-2">
+        <h5 className="text-xs uppercase font-mono text-quaternary mb-1.5">
           Constrained Container & Text Truncation
         </h5>
-        <div className="w-48 p-3 border rounded bg-white dark:bg-neutral-900 flex flex-col gap-2">
+        <div className="w-48 p-2.5 border rounded bg-white dark:bg-neutral-900 flex flex-col gap-1.5">
           <span className="text-xs text-quaternary">
             Container width: 192px
           </span>
@@ -417,7 +417,7 @@ export const CountersAndOverflow: Story = {
  */
 export const Interactive: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-3 p-6">
+    <div className="flex flex-wrap items-center gap-2.5 p-5">
       <Badge
         variant="primary"
         shape="pill"
@@ -455,10 +455,10 @@ export const Interactive: Story = {
  */
 export const Circle: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-6 p-6">
-      <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-wrap items-center gap-5 p-5">
+      <div className="flex flex-col items-center gap-1.5">
         <span className="text-xs text-quaternary">Default (md)</span>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <Badge variant="primary" shape="circle">
             1
           </Badge>
@@ -473,9 +473,9 @@ export const Circle: Story = {
           </Badge>
         </div>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <span className="text-xs text-quaternary">Small (sm)</span>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <Badge variant="primary" size="sm" shape="circle">
             1
           </Badge>
@@ -490,9 +490,9 @@ export const Circle: Story = {
           </Badge>
         </div>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <span className="text-xs text-quaternary">Large (lg)</span>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <Badge variant="primary" size="lg" shape="circle">
             1
           </Badge>

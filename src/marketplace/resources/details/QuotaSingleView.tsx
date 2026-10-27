@@ -54,11 +54,11 @@ export const QuotaSingleView = ({
       </span>
       <QuotaProgressBar
         percent={percent}
-        className="mt-2"
+        className="mt-1.5"
         label={typeof title === 'string' ? title : undefined}
       />
       {stacked ? (
-        <div className="mt-3">
+        <div className="mt-2.5">
           {details.map((detail) => (
             <Field
               key={detail.label}
@@ -70,7 +70,7 @@ export const QuotaSingleView = ({
           ))}
         </div>
       ) : (
-        <Row className="mt-3">
+        <Row className="mt-2.5">
           {details.map((detail) => (
             <Col key={detail.label}>
               <span className="text-secondary font-medium block mb-1">

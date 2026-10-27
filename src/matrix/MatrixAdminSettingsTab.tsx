@@ -56,7 +56,7 @@ export const MatrixAdminSettingsTab = () => {
         <AlertItem
           type="floating"
           variant="info"
-          className="mb-5"
+          className="mb-4"
           title={translate('These settings are managed by the deployment')}
           body={
             <>
@@ -98,23 +98,23 @@ export const MatrixAdminSettingsTab = () => {
       {status && (
         <FormTable.Card
           title={translate('Runtime status')}
-          className="card-bordered mt-5"
+          className="card-bordered mt-4"
         >
           <table className="table table-borderless mb-0">
             <tbody>
               <tr>
-                <td className="font-medium text-nowrap pe-4">
+                <td className="font-medium text-nowrap pe-3">
                   {translate('Bot user ID')}
                 </td>
                 <td>{renderFieldOrDash(status.bot_user_id)}</td>
               </tr>
               <tr>
-                <td className="font-medium text-nowrap pe-4">
+                <td className="font-medium text-nowrap pe-3">
                   {translate('Webhook path')}
                 </td>
                 <td>
                   {status.webhook_path ? (
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5">
                       <code>{status.webhook_path}</code>
                       <CopyToClipboardButton value={status.webhook_path} />
                     </div>
@@ -124,7 +124,7 @@ export const MatrixAdminSettingsTab = () => {
                 </td>
               </tr>
               <tr>
-                <td className="font-medium text-nowrap pe-4">
+                <td className="font-medium text-nowrap pe-3">
                   {translate('Transactions processed')}
                 </td>
                 <td>{status.transaction_count}</td>

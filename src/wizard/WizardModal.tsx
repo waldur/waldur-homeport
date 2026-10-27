@@ -99,7 +99,7 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
             </>
           )
         }
-        headerClassName="pb-5"
+        headerClassName="pb-4"
         {...(modalProps || {})}
       >
         <div className="wizard-big wizard-body clearfix">

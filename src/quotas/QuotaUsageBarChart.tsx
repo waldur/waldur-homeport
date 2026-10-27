@@ -43,7 +43,7 @@ export const getAvailable = (quota) => {
 
 export const ProgressTooltipMessage = ({ quota }) => (
   <div>
-    <p className="mt-2">{getPlanned(quota)}</p>
+    <p className="mt-1.5">{getPlanned(quota)}</p>
     <p>{getAvailable(quota)}</p>
     <p>{getExisting(quota)}</p>
     {exceeds(quota) && (
@@ -55,7 +55,7 @@ export const ProgressTooltipMessage = ({ quota }) => (
 );
 
 export const QuotaUsageBarChartDescription = ({ quota, hideLabel = false }) => (
-  <div className="quota-info flex justify-between gap-4 text-quaternary mb-2">
+  <div className="quota-info flex justify-between gap-3 text-quaternary mb-1.5">
     <p className="mb-0">
       {!hideLabel && formatQuotaName(quota.name)}
       {exceeds(quota) && (

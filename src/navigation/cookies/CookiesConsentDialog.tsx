@@ -56,7 +56,7 @@ export const CookiesConsentDialog: FC<OwnProps> = ({ resolve }) => {
       iconColor="warning"
       className="consent-dialog"
       closeButton={false}
-      bodyClassName="pt-0 pb-10"
+      bodyClassName="pt-0 pb-8"
       footer={
         hasAnalyticalSoftware ? (
           <>

@@ -39,7 +39,7 @@ export const CeleryWorkerInfo = ({
           {translate('Running')}
         </Badge>
       }
-      className="mb-6"
+      className="mb-5"
       defaultOpen
     >
       <FormTable>

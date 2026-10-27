@@ -27,7 +27,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
           className="border-[1px] border-secondary rounded"
           style={{ padding: '16px' }}
         >
-          <h6 className="mb-3">{translate('Version adoption')}</h6>
+          <h6 className="mb-2.5">{translate('Version adoption')}</h6>
           <div className="table-responsive">
             <table className="table table-row-bordered table-row-gray-200">
               <thead>
@@ -62,7 +62,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
           className="border-[1px] border-secondary rounded"
           style={{ padding: '16px' }}
         >
-          <h6 className="mb-3">{translate('Consent status breakdown')}</h6>
+          <h6 className="mb-2.5">{translate('Consent status breakdown')}</h6>
           <div className="table-responsive">
             <table className="table table-row-bordered table-row-gray-200">
               <thead>
@@ -99,7 +99,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
           className="border-[1px] border-secondary rounded"
           style={{ padding: '16px' }}
         >
-          <h6 className="mb-3">{translate('Accepted consents trend')}</h6>
+          <h6 className="mb-2.5">{translate('Accepted consents trend')}</h6>
           <div className="table-responsive">
             <table className="table table-row-bordered table-row-gray-200">
               <thead>
@@ -130,7 +130,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
             </table>
           </div>
           {(data.accepted_consents_over_time || []).length > 4 && (
-            <div className="text-center mt-2">
+            <div className="text-center mt-1.5">
               <BaseButton
                 variant="text-primary"
                 size="sm"
@@ -151,7 +151,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
           className="border-[1px] border-secondary rounded"
           style={{ padding: '16px' }}
         >
-          <h6 className="mb-3">{translate('Revoked consents trend')}</h6>
+          <h6 className="mb-2.5">{translate('Revoked consents trend')}</h6>
           <div className="table-responsive">
             <table className="table table-row-bordered table-row-gray-200">
               <thead>
@@ -182,7 +182,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
             </table>
           </div>
           {data.revoked_consents_over_time.length > 4 && (
-            <div className="text-center mt-2">
+            <div className="text-center mt-1.5">
               <BaseButton
                 variant="text-primary"
                 size="sm"

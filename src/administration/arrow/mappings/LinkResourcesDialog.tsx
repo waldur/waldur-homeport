@@ -42,7 +42,7 @@ export const LinkResourcesDialog: FC<LinkResourcesDialogProps> = ({
           loadData={refetch}
         />
       ) : data ? (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-5">
           {/* Explanation */}
           <AlertItem
             type="floating"

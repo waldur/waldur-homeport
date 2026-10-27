@@ -42,7 +42,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
   if (categories.isLoading) {
     return (
       <Card className={cardClassName}>
-        <Card.Body className="flex justify-center items-center py-10">
+        <Card.Body className="flex justify-center items-center py-8">
           <LoadingSpinner />
         </Card.Body>
       </Card>
@@ -69,7 +69,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
         action
         active={isActive}
         onClick={() => onCategorySelect(isActive ? null : { uuid, isGroup })}
-        className="flex items-center gap-3"
+        className="flex items-center gap-2.5"
       >
         <div className="category-icon shrink-0">
           <CategoryThumbnail
@@ -103,7 +103,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
           action
           active={!selectedCategory}
           onClick={() => onCategorySelect(null)}
-          className="flex items-center gap-3"
+          className="flex items-center gap-2.5"
         >
           <div className="category-icon shrink-0">
             <CategoryThumbnail title="" size={24} />
@@ -127,7 +127,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
                           : { uuid: cat.uuid, isGroup: false },
                       )
                     }
-                    className="flex items-center gap-3 ps-5"
+                    className="flex items-center gap-2.5 ps-4"
                   >
                     <div className="category-icon shrink-0">
                       <CategoryThumbnail

@@ -75,7 +75,7 @@ const meta: Meta<typeof BoxRadioField> = {
   },
   decorators: [
     (Story) => (
-      <div className="p-6 bg-[var(--page-bg)] min-h-[360px] rounded-lg">
+      <div className="p-5 bg-[var(--page-bg)] min-h-[360px] rounded-lg">
         <Story />
       </div>
     ),
@@ -281,13 +281,13 @@ const BoxRadioFieldHarness = ({
   );
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       <BoxRadioField
         input={{ value, onChange: setValue } as any}
         choices={choices}
         {...props}
       />
-      <div className="p-3 bg-[var(--card-bg)] border-[1px] border-secondary rounded-md text-xs font-mono text-quinary flex items-center justify-between">
+      <div className="p-2.5 bg-[var(--card-bg)] border-[1px] border-secondary rounded-md text-xs font-mono text-quinary flex items-center justify-between">
         <span>Current input.value:</span>
         <span className="font-bold text-primary">{JSON.stringify(value)}</span>
       </div>
@@ -465,9 +465,9 @@ export const EllipsisTitle: Story = {
  */
 export const Hoverable: Story = {
   render: () => (
-    <div className="flex flex-col gap-8 max-w-2xl">
+    <div className="flex flex-col gap-6 max-w-2xl">
       <div>
-        <h6 className="text-sm font-semibold mb-3">
+        <h6 className="text-sm font-semibold mb-2.5">
           Horizontal Grid (Hoverable)
         </h6>
         <BoxRadioFieldHarness
@@ -477,7 +477,7 @@ export const Hoverable: Story = {
         />
       </div>
       <div>
-        <h6 className="text-sm font-semibold mb-3">
+        <h6 className="text-sm font-semibold mb-2.5">
           Vertical List (Hoverable)
         </h6>
         <BoxRadioFieldHarness

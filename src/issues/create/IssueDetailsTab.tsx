@@ -157,7 +157,7 @@ export const IssueDetailsTab = ({
         disabled={['customer', 'project', 'resource'].includes(
           context.scopeType,
         )}
-        space={5}
+        space={4}
       />
       <Stack direction="horizontal" gap={3}>
         <OrganizationGroup

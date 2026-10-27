@@ -74,7 +74,7 @@ const FieldMappingRow: FC<FieldMappingRowProps> = ({
   const availableSet = new Set(field.available_claims);
 
   return (
-    <FormField className="row mb-4 items-start">
+    <FormField className="row mb-3 items-start">
       <div className="col-md-4">
         <FormLabel>{field.field}</FormLabel>
         <small className="block text-quaternary">{field.description}</small>
@@ -83,7 +83,7 @@ const FieldMappingRow: FC<FieldMappingRowProps> = ({
         <NativeSelect
           value={selectedValue}
           onChange={(e) => handleSelectChange(e.target.value)}
-          containerClassName="mb-2"
+          containerClassName="mb-1.5"
         >
           <option value={NOT_MAPPED}>-- {translate('Not mapped')} --</option>
 
@@ -245,14 +245,14 @@ export const MappingStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      <h4 className="mb-4">{translate('Claim Mapping')}</h4>
-      <p className="text-quaternary mb-4">
+      <h4 className="mb-3">{translate('Claim Mapping')}</h4>
+      <p className="text-quaternary mb-3">
         {translate(
           'Map OIDC claims from your identity provider to Waldur user profile fields. Only enabled profile attributes are shown.',
         )}
       </p>
 
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-3">
         <Badge variant="primary" tone="outline">
           {translate('{count} of {total} fields mapped', {
             count: mappedCount,
@@ -261,7 +261,7 @@ export const MappingStep: FC<WizardStepProps> = (props) => {
         </Badge>
       </div>
 
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Body>
           {enabledFields.length === 0 ? (
             <p className="text-quaternary mb-0">

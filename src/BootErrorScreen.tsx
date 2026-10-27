@@ -76,7 +76,7 @@ const ErrorState: FunctionComponent<{ error: Error }> = ({ error }) => {
           <ErrorTraceDialog error={error} />
         </ModalShell>
       )}
-      <div className="flex flex-wrap justify-center gap-3 mt-2">
+      <div className="flex flex-wrap justify-center gap-2.5 mt-1.5">
         {/* Not gated on error.stack: the actionable detail lives on
             error.cause, which is often not an Error and so has no
             stack of its own. Gating on it hid the trace in exactly

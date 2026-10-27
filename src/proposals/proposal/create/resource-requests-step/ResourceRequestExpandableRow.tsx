@@ -66,7 +66,7 @@ export const ResourceRequestExpandableRow = ({
           what a reviewer is actually here for — behind a sideways scroll.
           Laid out with the same Field the details overview above uses, so the
           two blocks on one page read as the same kind of thing. */}
-      <Row className="text-sm mb-4">
+      <Row className="text-sm mb-3">
         <Col sm={6}>
           <Field
             label={translate('Provider')}

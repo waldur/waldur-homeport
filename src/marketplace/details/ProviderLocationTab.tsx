@@ -16,14 +16,14 @@ export const ProviderLocationTab: FunctionComponent<
 
   if (!hasLocation) {
     return (
-      <h6 className="text-center text-quaternary my-10">
+      <h6 className="text-center text-quaternary my-8">
         {translate('No location available')}
       </h6>
     );
   }
   return (
     <>
-      <div className="mb-6">
+      <div className="mb-5">
         {props.offering.vendor_details && (
           <FormattedHtml html={props.offering.vendor_details} />
         )}

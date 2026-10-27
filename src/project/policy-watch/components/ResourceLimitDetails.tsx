@@ -89,7 +89,7 @@ const ResourceHealthDetails: FC<{ row: ResourceHealth }> = ({ row }) => {
         )}
         {(bucket === 'paused' || bucket === 'downscaled') && (
           <>
-            <h6 className="mt-4">{translate('Why')}</h6>
+            <h6 className="mt-3">{translate('Why')}</h6>
             {attribution ? (
               <p className="mb-0">
                 {policyTypeLabel}

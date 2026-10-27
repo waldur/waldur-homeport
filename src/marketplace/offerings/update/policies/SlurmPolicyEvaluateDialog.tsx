@@ -71,7 +71,7 @@ export const SlurmPolicyEvaluateDialog: FC<SlurmPolicyEvaluateDialogProps> = ({
     <ModalDialog
       title={translate('Policy evaluation (staff)')}
       footer={
-        <div className="flex gap-2">
+        <div className="flex gap-1.5">
           <CloseDialogButton />
           <BaseButton
             variant="secondary"
@@ -98,7 +98,7 @@ export const SlurmPolicyEvaluateDialog: FC<SlurmPolicyEvaluateDialogProps> = ({
         </div>
       }
     >
-      <p className="text-quaternary mb-4">
+      <p className="text-quaternary mb-3">
         {translate(
           'Dry run shows what actions would be triggered without applying changes. Evaluate runs the full evaluation synchronously — it applies actions and creates evaluation logs.',
         )}
@@ -110,7 +110,7 @@ export const SlurmPolicyEvaluateDialog: FC<SlurmPolicyEvaluateDialogProps> = ({
         <AlertItem
           variant="error"
           type="floating"
-          className="mb-4"
+          className="mb-3"
           title={translate('Dry run failed.')}
           body={String((dryRunMutation.error as Error)?.message || '')}
         />
@@ -120,7 +120,7 @@ export const SlurmPolicyEvaluateDialog: FC<SlurmPolicyEvaluateDialogProps> = ({
         <AlertItem
           variant="error"
           type="floating"
-          className="mb-4"
+          className="mb-3"
           title={translate('Evaluation failed.')}
           body={String((evaluateMutation.error as Error)?.message || '')}
         />
@@ -137,7 +137,7 @@ const DryRunResults: FC<{ data: SlurmPolicyDryRunResponse }> = ({ data }) => (
   <div>
     <h6>
       {translate('Dry run results')}
-      <span className="text-quaternary ms-2 font-normal">
+      <span className="text-quaternary ms-1.5 font-normal">
         {translate('Period')}: {data.billing_period} |{' '}
         {translate('Grace limit')}: {data.grace_limit_percentage.toFixed(0)}%
       </span>
@@ -224,7 +224,7 @@ const EvaluateResults: FC<{ data: SlurmPolicyEvaluateResponse }> = ({
   <div>
     <h6>
       {translate('Evaluation results')}
-      <span className="text-quaternary ms-2 font-normal">
+      <span className="text-quaternary ms-1.5 font-normal">
         {translate('Period')}: {data.billing_period}
       </span>
     </h6>

@@ -17,7 +17,7 @@ export const CheckoutPricingRow = ({
 }: CheckoutPricingRowProps) => (
   <div
     className={classNames(
-      'flex justify-between mb-5 text-secondary',
+      'flex justify-between mb-4 text-secondary',
       className,
     )}
   >

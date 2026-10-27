@@ -136,7 +136,7 @@ export const FeedbackLogsList = () => {
     <>
       <FeedbackLogsStats filter={filter} />
       {summary && (
-        <div className="mb-5">
+        <div className="mb-4">
           <QuestionResults
             surveyUuid={filter.survey_uuid}
             questions={summary.questions}

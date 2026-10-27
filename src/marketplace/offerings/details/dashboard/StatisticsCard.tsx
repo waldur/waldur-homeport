@@ -30,7 +30,7 @@ export const StatisticsCard: FC<StatisticsCardProps> = ({
         ? 'warning'
         : 'danger';
   return (
-    <Card className="card-bordered mb-5">
+    <Card className="card-bordered mb-4">
       <Card.Body>
         <p className="text-sm font-medium text-quaternary mb-1">{title}</p>
         <div className="flex justify-between items-end">
@@ -49,7 +49,7 @@ export const StatisticsCard: FC<StatisticsCardProps> = ({
               </span>
             </Tooltip>
           ) : max ? (
-            <div className="grow max-w-[80px] mb-3">
+            <div className="grow max-w-[80px] mb-2.5">
               <Progress
                 value={value}
                 max={max}

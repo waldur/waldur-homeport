@@ -114,7 +114,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
       />
       <div className="message-body">
         {hasTopRowItems && (
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-1.5 mb-1">
             {selectedMessage.is_flagged && (
               <Tooltip
                 label={formatDetectionCategories(
@@ -164,7 +164,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
                 {translate('Past version')}
               </Badge>
             )}
-            <div className="flex items-center gap-2 ms-auto">
+            <div className="flex items-center gap-1.5 ms-auto">
               {hasVersions && (
                 <VersionSelector
                   displayLabel={translate('Version {current} / {total}', {
@@ -190,7 +190,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
           </div>
         )}
         <div
-          className={classNames('p-3 rounded chat-log-bubble', {
+          className={classNames('p-2.5 rounded chat-log-bubble', {
             'border-l-[1px] border-l-secondary border-3':
               selectedMessage.is_flagged || feedbackSentiment !== null,
             'border-danger':
@@ -316,7 +316,7 @@ export const SupportAIAssistantLogsExpandableRow: FunctionComponent<OwnProps> =
         <ExpandableContainer>
           <OfflineBlockContext.Provider value={true}>
             <div className="flex flex-col">
-              <div className="flex items-center gap-2 pb-2 border-b-[1px] border-b-secondary">
+              <div className="flex items-center gap-1.5 pb-1.5 border-b-[1px] border-b-secondary">
                 <strong>{row.name}</strong>
                 <TokenUsageBadge
                   id={`title-gen-tokens-${row.uuid}`}

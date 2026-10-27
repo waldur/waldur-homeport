@@ -50,9 +50,9 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
   );
 
   return (
-    <Row className="mb-6">
+    <Row className="mb-5">
       <Col md={6} lg={4}>
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center justify-between">
               <div className="flex items-center">
@@ -65,7 +65,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
                   <WarningCircleIcon
                     size={24}
                     weight="bold"
-                    className={getTextClass(connectionHealth) + ' ms-2'}
+                    className={getTextClass(connectionHealth) + ' ms-1.5'}
                   />
                 )}
               </div>
@@ -82,7 +82,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
       </Col>
 
       <Col md={6} lg={4}>
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center">
               <strong className={`display-4 ${getTextClass(cacheHealth)}`}>
@@ -92,7 +92,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
                 <WarningCircleIcon
                   size={24}
                   weight="bold"
-                  className={getTextClass(cacheHealth) + ' ms-2'}
+                  className={getTextClass(cacheHealth) + ' ms-1.5'}
                 />
               )}
             </div>
@@ -102,7 +102,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
       </Col>
 
       <Col md={6} lg={4}>
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center justify-between">
               <div className="flex items-center">
@@ -115,7 +115,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
                   <WarningCircleIcon
                     size={24}
                     weight="bold"
-                    className={getTextClass(deadTupleHealth) + ' ms-2'}
+                    className={getTextClass(deadTupleHealth) + ' ms-1.5'}
                   />
                 )}
               </div>
@@ -133,7 +133,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
       </Col>
 
       <Col md={6} lg={4}>
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center">
               <strong className={`display-4 ${getTextClass(locksHealth)}`}>
@@ -143,7 +143,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
                 <WarningCircleIcon
                   size={24}
                   weight="bold"
-                  className={getTextClass(locksHealth) + ' ms-2'}
+                  className={getTextClass(locksHealth) + ' ms-1.5'}
                 />
               )}
             </div>
@@ -153,7 +153,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
       </Col>
 
       <Col md={6} lg={4}>
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center justify-between">
               <div className="flex items-center">
@@ -164,7 +164,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
                   <WarningCircleIcon
                     size={24}
                     weight="bold"
-                    className={getTextClass(queryHealth) + ' ms-2'}
+                    className={getTextClass(queryHealth) + ' ms-1.5'}
                   />
                 )}
               </div>
@@ -184,7 +184,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
       </Col>
 
       <Col md={6} lg={4}>
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center justify-between">
               <strong className="display-4 text-info">

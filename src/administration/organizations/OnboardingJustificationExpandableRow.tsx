@@ -19,19 +19,19 @@ export const OnboardingJustificationExpandableRow: FC<{
         label={translate('User name')}
         value={row.user_full_name}
         isStuck
-        labelClass="me-2"
+        labelClass="me-1.5"
       />
       <Field
         label={translate('Submitted')}
         value={formatDateTime(row.created)}
         isStuck
-        labelClass="me-2"
+        labelClass="me-1.5"
       />
       <Field
         label={translate('Country')}
         value={row.country || translate('N/A')}
         isStuck
-        labelClass="me-2"
+        labelClass="me-1.5"
       />
       {docs && docs.length > 0 && (
         <Field
@@ -45,7 +45,7 @@ export const OnboardingJustificationExpandableRow: FC<{
             />
           ))}
           isStuck
-          labelClass="me-2"
+          labelClass="me-1.5"
         />
       )}
     </ExpandableContainer>

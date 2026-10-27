@@ -66,9 +66,9 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex flex-wrap justify-between items-center gap-3 px-5 py-4 border-b-[1px] border-b-secondary">
+      <div className="flex flex-wrap justify-between items-center gap-2.5 px-4 py-3 border-b-[1px] border-b-secondary">
         <div className="flex items-center text-nowrap">
-          <span className="font-medium me-2">{translate('Changes')}:</span>
+          <span className="font-medium me-1.5">{translate('Changes')}:</span>
           <StateIndicator
             label={`${changedCount} ${translate('field(s) changed')}`}
             variant={changedCount > 0 ? 'warning' : 'secondary'}
@@ -117,7 +117,7 @@ const TableDiffView: FunctionComponent<{
 }> = ({ diffs }) => {
   if (diffs.length === 0) {
     return (
-      <div className="text-center text-quaternary py-10 text-sm">
+      <div className="text-center text-quaternary py-8 text-sm">
         {translate('No fields to display')}
       </div>
     );
@@ -129,7 +129,7 @@ const TableDiffView: FunctionComponent<{
     <Table responsive className="table-row-bordered align-middle mb-0">
       <thead>
         <tr className="font-medium text-xs text-uppercase text-quaternary">
-          <th className="ps-5 md:min-w-[150px]">{translate('Field')}</th>
+          <th className="ps-4 md:min-w-[150px]">{translate('Field')}</th>
           <th className="md:min-w-[200px]">{translate('Previous')}</th>
           <th className="md:min-w-[200px]">{translate('Current')}</th>
         </tr>
@@ -140,7 +140,7 @@ const TableDiffView: FunctionComponent<{
             key={diff.field}
             className={diff.changed ? 'bg-warning-subtle' : ''}
           >
-            <td className="ps-5">{diff.label}</td>
+            <td className="ps-4">{diff.label}</td>
             <td>
               <pre className="mb-0 text-xs text-quaternary text-wrap text-break bg-transparent">
                 {formatFieldValue(diff.oldValue)}

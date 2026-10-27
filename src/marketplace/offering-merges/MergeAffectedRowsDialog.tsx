@@ -43,7 +43,7 @@ const ValueChange: FC<{ row: OfferingMergeAffectedRow }> = ({ row }) => (
         {translate('Unchanged: it stays on the archived source.')}
       </span>
     ) : (
-      <span className="flex items-start gap-2">
+      <span className="flex items-start gap-1.5">
         <span className="text-quaternary text-xs text-nowrap pt-1">
           {translate('becomes')}
         </span>
@@ -78,7 +78,7 @@ export const MergeAffectedRowsDialog: FC<MergeAffectedRowsDialogProps> = ({
   return (
     <ModalDialog
       title={
-        <span className="flex items-center gap-2">
+        <span className="flex items-center gap-1.5">
           {entry.title}
           <HelpTip
             label={translate(
@@ -88,7 +88,7 @@ export const MergeAffectedRowsDialog: FC<MergeAffectedRowsDialogProps> = ({
         </span>
       }
       subtitle={
-        <span className="flex flex-wrap items-center gap-2">
+        <span className="flex flex-wrap items-center gap-1.5">
           {entry.effectTitle}
           <code className="text-xs">{entry.label}</code>
         </span>
@@ -115,7 +115,7 @@ export const MergeAffectedRowsDialog: FC<MergeAffectedRowsDialogProps> = ({
           },
           {
             title: (
-              <span className="inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5">
                 {translate('Stays on the source')}
                 <HelpTip label={getStaysHelp()} />
               </span>

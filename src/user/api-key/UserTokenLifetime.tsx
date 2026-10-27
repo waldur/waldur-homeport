@@ -105,19 +105,19 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
   });
 
   return (
-    <Card className="card-bordered mb-6">
+    <Card className="card-bordered mb-5">
       <Card.Header>
-        <Row className="card-toolbar g-0 gap-4 w-full">
+        <Row className="card-toolbar g-0 gap-3 w-full">
           <Col xs className="order-0 sm:max-w-1/4">
             <Card.Title>
-              <span className="h3 me-2">{translate('API token')}</span>
+              <span className="h3 me-1.5">{translate('API token')}</span>
             </Card.Title>
           </Col>
           <Col sm="auto" className="order-1 order-sm-2 min-w-1/4 ms-auto">
-            <div className="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-3">
+            <div className="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-2.5">
               <SubmitButton
                 variant="primary"
-                className="me-2"
+                className="me-1.5"
                 submitting={submitting}
                 onClick={() => {
                   handleSubmit();
@@ -130,7 +130,7 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
       </Card.Header>
       <Card.Body>
         <FormGroup label={translate('API token')}>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <SecretField value={props.user.token} />
             <CopyToClipboardButton
               value={props.user.token}

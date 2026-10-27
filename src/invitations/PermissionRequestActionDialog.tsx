@@ -81,7 +81,7 @@ export const PermissionRequestActionDialog: FunctionComponent<OwnProps> = (
               )
             }
           >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               <Field
                 label={translate('Name')}
                 value={permissionRequest.created_by_full_name}
@@ -155,7 +155,7 @@ export const PermissionRequestActionDialog: FunctionComponent<OwnProps> = (
                   )}
                   maxLength={150}
                   rows={4}
-                  space={4}
+                  space={3}
                   disabled={isPending}
                 />
               </div>

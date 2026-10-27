@@ -82,8 +82,8 @@ export const MappingStep: FC<MappingStepProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-5">
-      <div className="flex flex-wrap justify-between items-center gap-3">
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-wrap justify-between items-center gap-2.5">
         <p className="text-quaternary mb-0">
           {translate(
             'Map every source plan and component that resources, orders or usage refer to. Unused ones may stay unmapped: they remain on the archived source.',

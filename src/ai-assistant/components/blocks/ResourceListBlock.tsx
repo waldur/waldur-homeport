@@ -95,9 +95,9 @@ const OfflineResourceList: FC<UIBlockProps> = ({ block }) => {
   }
 
   return (
-    <div className="aui-resource-list-block border rounded bg-tertiary dark:bg-quaternary p-3">
-      <div className="flex items-center justify-between mb-2 gap-2 flex-wrap">
-        <div className="flex items-center gap-2">
+    <div className="aui-resource-list-block border rounded bg-tertiary dark:bg-quaternary p-2.5">
+      <div className="flex items-center justify-between mb-1.5 gap-1.5 flex-wrap">
+        <div className="flex items-center gap-1.5">
           <TableIcon weight="bold" />
           <strong>{translate('Resource table')}</strong>
         </div>
@@ -108,7 +108,7 @@ const OfflineResourceList: FC<UIBlockProps> = ({ block }) => {
       {filterRows.length > 0 ? (
         <div className="flex flex-col gap-1 small">
           {filterRows.map((f) => (
-            <div key={f.key} className="flex gap-2">
+            <div key={f.key} className="flex gap-1.5">
               <span className="text-quaternary" style={{ minWidth: 90 }}>
                 {f.key}
               </span>

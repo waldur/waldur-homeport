@@ -52,7 +52,7 @@ export const MergeRefusalAlert: FC<{
       variant="error"
       title={title}
       body={
-        <div className="flex flex-col gap-2" data-testid="merge-refusal">
+        <div className="flex flex-col gap-1.5" data-testid="merge-refusal">
           {refusal.detail && <span>{refusal.detail}</span>}
           {blockers.length > 0 && (
             <div>

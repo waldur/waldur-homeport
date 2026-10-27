@@ -79,7 +79,7 @@ export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
             ? Math.round((row.current_assignments / row.max_assignments) * 100)
             : 0;
           return (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <Progress
                 className="grow min-w-[60px]"
                 value={percentage}

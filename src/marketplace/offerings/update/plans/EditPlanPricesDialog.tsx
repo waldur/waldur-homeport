@@ -107,7 +107,7 @@ export const EditPlanPricesDialog: FC<{
           >
             <AlertItem
               type="floating"
-              className="mb-5"
+              className="mb-4"
               title={
                 props.resolve.plan.resources_count > 0
                   ? translate('New prices apply from next month')

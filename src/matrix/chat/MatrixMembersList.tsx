@@ -20,8 +20,8 @@ export const MatrixMembersList: FC = () => {
   const members = useRoomMembers();
 
   return (
-    <div className="p-3">
-      <div className="mb-2">
+    <div className="p-2.5">
+      <div className="mb-1.5">
         {translate('Members')} ({members.length})
       </div>
       <div className="flex flex-col gap-1">
@@ -32,7 +32,7 @@ export const MatrixMembersList: FC = () => {
             <div
               key={m.userId}
               className={classNames(
-                'flex items-center gap-2 py-1',
+                'flex items-center gap-1.5 py-1',
                 invited && 'opacity-50',
               )}
             >

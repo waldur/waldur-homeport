@@ -10,7 +10,7 @@ exports[`InternalIpsList > renders list 1`] = `
       data-testid="table-toolbar"
     >
       <div
-        class="card-toolbar flex flex-wrap items-center gap-4 w-full"
+        class="card-toolbar flex flex-wrap items-center gap-3 w-full"
       >
         <div
           class="grow order-0"
@@ -20,7 +20,7 @@ exports[`InternalIpsList > renders list 1`] = `
             class="card-title h5"
           >
             <div
-              class="me-2"
+              class="me-1.5"
             >
               <span
                 class="h3"
@@ -30,7 +30,7 @@ exports[`InternalIpsList > renders list 1`] = `
             </div>
             <button
               aria-label="Refresh"
-              class="inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_transparent] bg-transparent text-[var(--btn-text-secondary-color)] hover:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-transparent active:shadow-none disabled:bg-transparent disabled:text-[var(--btn-disabled-text)] data-disabled:bg-transparent data-disabled:text-[var(--btn-disabled-text)] rounded-lg text-base leading-6 p-0 h-[44px] w-[44px]"
+              class="inline-flex items-center justify-center gap-1.5 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_transparent] bg-transparent text-[var(--btn-text-secondary-color)] hover:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-transparent active:shadow-none disabled:bg-transparent disabled:text-[var(--btn-disabled-text)] data-disabled:bg-transparent data-disabled:text-[var(--btn-disabled-text)] rounded-lg text-base leading-6 p-0 h-[44px] w-[44px]"
               data-state="closed"
               type="button"
             >
@@ -46,13 +46,13 @@ exports[`InternalIpsList > renders list 1`] = `
           </div>
         </div>
         <div
-          class="grow order-2 order-sm-2 flex items-center max-sm:flex-wrap text-nowrap gap-4 ms-auto justify-end"
+          class="grow order-2 order-sm-2 flex items-center max-sm:flex-wrap text-nowrap gap-3 ms-auto justify-end"
         >
           <div
-            class="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-4"
+            class="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-3"
           >
             <button
-              class="inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] bg-[var(--btn-tertiary-bg)] text-[var(--btn-tertiary-text)] hover:bg-[var(--btn-tertiary-bg-hover)] focus-visible:bg-[var(--btn-tertiary-bg-hover)] focus-visible:shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] focus-visible:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-[var(--btn-tertiary-bg-pressed)] active:shadow-none disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)] data-disabled:shadow-[inset_0_0_0_1px_transparent] data-disabled:bg-[var(--btn-disabled-bg)] data-disabled:text-[var(--btn-disabled-text)] rounded-lg px-[16px] py-[10px] text-base leading-6"
+              class="inline-flex items-center justify-center gap-1.5 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] bg-[var(--btn-tertiary-bg)] text-[var(--btn-tertiary-text)] hover:bg-[var(--btn-tertiary-bg-hover)] focus-visible:bg-[var(--btn-tertiary-bg-hover)] focus-visible:shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] focus-visible:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-[var(--btn-tertiary-bg-pressed)] active:shadow-none disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)] data-disabled:shadow-[inset_0_0_0_1px_transparent] data-disabled:bg-[var(--btn-disabled-bg)] data-disabled:text-[var(--btn-disabled-text)] rounded-lg text-base leading-6 px-[16px] py-[10px]"
               type="button"
             >
               <span
@@ -254,7 +254,7 @@ exports[`InternalIpsList > renders list 1`] = `
                       aria-expanded="false"
                       aria-haspopup="menu"
                       aria-label="Actions"
-                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_transparent] bg-transparent text-[var(--btn-text-secondary-color)] hover:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-transparent active:shadow-none disabled:bg-transparent disabled:text-[var(--btn-disabled-text)] data-disabled:bg-transparent data-disabled:text-[var(--btn-disabled-text)] rounded-lg px-[16px] py-[10px] text-base leading-6 p-0 h-[44px] w-[44px]"
+                      class="inline-flex items-center justify-center gap-1.5 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_transparent] bg-transparent text-[var(--btn-text-secondary-color)] hover:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-transparent active:shadow-none disabled:bg-transparent disabled:text-[var(--btn-disabled-text)] data-disabled:bg-transparent data-disabled:text-[var(--btn-disabled-text)] rounded-lg text-base leading-6 p-0 h-[44px] w-[44px]"
                       data-state="closed"
                       data-testid="actions-toggle"
                       id="radix-:r8:"

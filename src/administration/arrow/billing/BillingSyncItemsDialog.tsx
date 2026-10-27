@@ -42,11 +42,11 @@ export const BillingSyncItemsDialog = ({
       }
     >
       {isLoading ? (
-        <div className="text-center py-6">
+        <div className="text-center py-5">
           <LoadingSpinner />
         </div>
       ) : displayItems.length === 0 ? (
-        <div className="text-center text-quaternary py-6">
+        <div className="text-center text-quaternary py-5">
           {translate('No items found')}
         </div>
       ) : (

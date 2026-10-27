@@ -139,7 +139,7 @@ export const GroupInvitationsList: FunctionComponent = () => {
         <GroupInvitationRowActions row={row} refetch={props.fetch} />
       )}
       expandableRow={GroupInvitationsListExpandableRow}
-      expandableRowClassName="pb-2 pe-2"
+      expandableRowClassName="pb-1.5 pe-1.5"
     />
   );
 };

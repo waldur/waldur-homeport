@@ -19,7 +19,7 @@ export const PublicOfferingInfo: FunctionComponent<PublicOfferingInfoProps> = ({
   category,
 }) => {
   return (
-    <Card className="card-bordered mb-10" id="getting-started">
+    <Card className="card-bordered mb-8" id="getting-started">
       <Card.Body>
         <PublicOfferingCardTitle>
           {translate('Description')}

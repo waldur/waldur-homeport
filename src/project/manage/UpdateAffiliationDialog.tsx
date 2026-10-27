@@ -128,7 +128,7 @@ export const UpdateAffiliationDialog: FunctionComponent<
                 variant="info"
                 shape="pill"
                 tone="outline"
-                className="ms-2"
+                className="ms-1.5"
               >
                 {translate('Default')}
               </Badge>
@@ -175,7 +175,7 @@ export const UpdateAffiliationDialog: FunctionComponent<
         />
       ) : (
         <>
-          <div className="flex justify-between items-center mb-3">
+          <div className="flex justify-between items-center mb-2.5">
             <span className="text-quaternary">
               {isStaff
                 ? translate(

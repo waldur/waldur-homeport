@@ -38,9 +38,9 @@ export class ImportErrorBoundary extends Component<Props, State> {
                 )}
               </p>
               {this.state.error && (
-                <details className="mt-2">
+                <details className="mt-1.5">
                   <summary>{translate('Error details')}</summary>
-                  <pre className="mt-2 small">
+                  <pre className="mt-1.5 small">
                     {this.state.error.toString()}
                   </pre>
                 </details>

@@ -89,7 +89,7 @@ function RampTile({ cssVar, step }: { cssVar: string; step: string }) {
       className="overflow-hidden rounded-md border-[1px] border-secondary bg-[var(--card-bg)]"
     >
       <div
-        className="flex h-14 items-end px-2 pb-1.5 font-mono text-xs font-semibold"
+        className="flex h-14 items-end px-1.5 pb-1.5 font-mono text-xs font-semibold"
         style={{
           backgroundColor: `var(${cssVar})`,
           color: readableOn(value) ?? 'inherit',
@@ -97,7 +97,7 @@ function RampTile({ cssVar, step }: { cssVar: string; step: string }) {
       >
         {step}
       </div>
-      <div className="px-2 py-1 font-mono text-[10px] uppercase text-quaternary">
+      <div className="px-1.5 py-1 font-mono text-[10px] uppercase text-quaternary">
         {value || '\u00a0'}
       </div>
     </div>
@@ -106,17 +106,17 @@ function RampTile({ cssVar, step }: { cssVar: string; step: string }) {
 
 function RampSection({ title, prefix, steps, description }: RampSpec) {
   return (
-    <section className="mb-6">
-      <div className="mb-2 flex flex-wrap items-baseline gap-x-3">
+    <section className="mb-5">
+      <div className="mb-1.5 flex flex-wrap items-baseline gap-x-3">
         <h4 className="text-sm font-semibold text-primary">{title}</h4>
         <Mono className="text-[10px] text-quinary">{prefix}-N</Mono>
       </div>
       {description && (
-        <p className="mb-2 max-w-3xl text-xs text-quaternary">
+        <p className="mb-1.5 max-w-3xl text-xs text-quaternary">
           <Prose text={description} />
         </p>
       )}
-      <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 lg:grid-cols-12">
+      <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-6 lg:grid-cols-12">
         {steps.map((step) => (
           <RampTile key={step} cssVar={`${prefix}-${step}`} step={step} />
         ))}
@@ -138,9 +138,9 @@ function RampPage({
   children?: React.ReactNode;
 }) {
   return (
-    <div className="bg-[var(--page-bg)] p-6">
+    <div className="bg-[var(--page-bg)] p-5">
       <h3 className="mb-1 text-base font-semibold text-primary">{title}</h3>
-      <p className="mb-6 max-w-3xl text-xs text-quaternary">{blurb}</p>
+      <p className="mb-5 max-w-3xl text-xs text-quaternary">{blurb}</p>
       {ramps.map((ramp) => (
         <RampSection key={ramp.prefix} {...ramp} />
       ))}
@@ -157,7 +157,7 @@ function ComparisonBar({ cssVar }: { cssVar: string }) {
   return (
     <div
       title={cssVar}
-      className="flex h-9 items-center justify-end rounded-md border-[1px] border-secondary px-2 font-mono text-[10px] uppercase"
+      className="flex h-9 items-center justify-end rounded-md border-[1px] border-secondary px-1.5 font-mono text-[10px] uppercase"
       style={{
         backgroundColor: `var(${cssVar})`,
         color: readableOn(value) ?? 'inherit',
@@ -172,11 +172,11 @@ function ComparisonBar({ cssVar }: { cssVar: string }) {
 function GrayComparison() {
   const steps = Object.keys(RAMPS.gray.steps);
   return (
-    <section className="mb-6">
-      <h4 className="mb-2 text-sm font-semibold text-primary">
+    <section className="mb-5">
+      <h4 className="mb-1.5 text-sm font-semibold text-primary">
         Gray vs Gray (dark theme)
       </h4>
-      <p className="mb-3 max-w-3xl text-xs text-quaternary">
+      <p className="mb-2.5 max-w-3xl text-xs text-quaternary">
         Dark UI wants neutral grays where gray is blue-tinted (500 is #667085 vs
         #85888e), so dark surfaces (the dark-theme token blocks and the dark
         sidebar style) read gray-dark instead of gray.

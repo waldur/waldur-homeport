@@ -54,7 +54,7 @@ const ReviewProgressColumn: FC<{ row: CallPerformanceStat }> = ({ row }) => {
 
   return (
     <div className="flex flex-col gap-1">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5">
         <span>
           {row.reviews_completed}/{row.total_reviews}
         </span>

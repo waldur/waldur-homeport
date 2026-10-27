@@ -12,7 +12,7 @@ import { ViewYAMLButton } from './ViewYAMLButton';
 
 export const ServiceActions: FC<{ row; fetch }> = ({ row, fetch }) => {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-1.5">
       <ViewYAMLButton
         yamlRetrieve={rancherServicesYamlRetrieve}
         yamlUpdate={rancherServicesYamlUpdate}

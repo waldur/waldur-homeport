@@ -35,7 +35,7 @@ export const TotalLimitComponentsTable: FunctionComponent<
   );
 
   return (
-    <div className="table-responsive mb-4">
+    <div className="table-responsive mb-3">
       <Table className="table align-middle table-row-bordered text-sm gy-4">
         <thead>
           <tr className="align-middle">
@@ -79,7 +79,7 @@ export const TotalLimitComponentsTable: FunctionComponent<
                           meta={meta}
                           type="number"
                           step={getLimitStep(component)}
-                          className="px-2"
+                          className="px-1.5"
                         />
                       )}
                     </Field>

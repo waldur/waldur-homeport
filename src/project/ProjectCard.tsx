@@ -69,7 +69,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
           <Field
             label={translate('Organization')}
             value={project.customer_name}
-            space={2}
+            space={1.5}
             labelCol={6}
             valueCol={6}
             valueClass="ellipsis"
@@ -78,7 +78,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
           <Field
             label={translate('Resources')}
             value={renderFieldOrDash(project.resources_count)}
-            space={2}
+            space={1.5}
             labelCol={6}
             valueCol={6}
           />
@@ -129,7 +129,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
                 <ProjectLifecycleBadge project={project} className="ms-1" />
               </>
             }
-            space={2}
+            space={1.5}
             labelCol={6}
             valueCol={6}
           />
@@ -143,7 +143,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
                     ? defaultCurrency(project.billing_price_estimate.total || 0)
                     : DASH_ESCAPE_CODE
                 }
-                space={2}
+                space={1.5}
                 labelCol={6}
                 valueCol={6}
               />
@@ -154,7 +154,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
                   value={renderFieldOrDash(
                     defaultCurrency(project.project_credit),
                   )}
-                  space={2}
+                  space={1.5}
                   labelCol={6}
                   valueCol={6}
                 />
@@ -166,7 +166,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
       footer={
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <div
-          className="flex justify-end items-center gap-2"
+          className="flex justify-end items-center gap-1.5"
           onClick={stopPropagation}
         >
           {canEdit && (

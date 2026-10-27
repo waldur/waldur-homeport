@@ -83,12 +83,12 @@ export const AdoptProviderAccountsDialog: FC<
             }
           >
             {submitError && (
-              <AlertItem variant="error" title={submitError} className="mb-4" />
+              <AlertItem variant="error" title={submitError} className="mb-3" />
             )}
             {pendingSwitch && (
               <AlertItem
                 variant="info"
-                className="mb-4"
+                className="mb-3"
                 data-testid="pending-switch"
                 title={translate(
                   '{count} person(s) have different usernames on different offerings. Switching to per service provider accounts is applied once every conflict is resolved.',
@@ -103,7 +103,7 @@ export const AdoptProviderAccountsDialog: FC<
             </p>
             <AlertItem
               variant="warning"
-              className="mb-5"
+              className="mb-4"
               title={translate(
                 'Renaming a live account changes who owns its files on your systems. Move or re-own the files of the renamed accounts afterwards.',
               )}

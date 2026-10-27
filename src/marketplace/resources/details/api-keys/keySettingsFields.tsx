@@ -8,6 +8,7 @@ import {
   usersList,
 } from 'waldur-js-client';
 
+import type { Space } from 'waldur-form';
 import { Checkbox } from 'waldur-ui';
 
 import { FormGroup } from '@/form';
@@ -34,7 +35,7 @@ export const ModelsField: FC<{
   name: string;
   label: string;
   options: string[];
-  space?: number;
+  space?: Space;
   disabled?: boolean;
 }> = ({ name, label, options, space, disabled }) => {
   const allModels = useField<boolean>(ALL_MODELS_FIELD).input;
@@ -43,7 +44,7 @@ export const ModelsField: FC<{
   const everyModel = Boolean(allModels.value);
   return (
     <FormGroup label={label} space={space}>
-      <div className="flex flex-col gap-8px">
+      <div className="flex flex-col gap-2">
         <Checkbox
           label={translate('All models')}
           checked={everyModel}
@@ -72,7 +73,7 @@ const KeyLimitsField: FC<{
   label: string;
   components: KeyLimitComponent[];
   description?: string;
-  space?: number;
+  space?: Space;
   disabled?: boolean;
 }> = ({ label, components, description, space, disabled }) => (
   <FormGroup label={label} description={description} space={space}>
@@ -111,7 +112,7 @@ export const useAssigneeField = (resource: Resource) =>
       help_text: translate(
         'Only the assignee can reveal the key. Leave empty for a key shared by the project.',
       ),
-      space: 5,
+      space: 4,
     }),
     [resource.project_uuid],
   );
@@ -157,7 +158,7 @@ export const getKeySettingsFields = (
                 "Each limit pauses this key alone once reached, and may not exceed the resource's limit for the same or a longer period. Clear a field to remove that limit.",
               ),
             },
-            space: 5,
+            space: 4,
           },
         ]
       : []),
@@ -170,7 +171,7 @@ export const getKeySettingsFields = (
               label: translate('Models'),
               options: models,
             },
-            space: 5,
+            space: 4,
           },
         ]
       : []),

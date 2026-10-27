@@ -115,8 +115,8 @@ const AllocationPoolsList: FunctionComponent<
         </p>
       )}
       {fields.map((name, index) => (
-        <div key={index} className="mb-3">
-          <div className="flex items-center gap-2">
+        <div key={index} className="mb-2.5">
+          <div className="flex items-center gap-1.5">
             <Field name={`${name}.start`} type="text">
               {({ input }) => (
                 <BaseInputField
@@ -171,7 +171,7 @@ const AllocationPoolsList: FunctionComponent<
           )}
         </div>
       ))}
-      <div className="mb-3">
+      <div className="mb-2.5">
         <BaseButton
           onClick={addPool}
           label={translate('Add allocation pool')}

@@ -82,7 +82,7 @@ export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
-        <LoadingErred loadData={refetch} className="mb-4" />
+        <LoadingErred loadData={refetch} className="mb-3" />
       ) : null}
 
       {isSmallScr ? (

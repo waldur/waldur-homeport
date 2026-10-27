@@ -14,10 +14,10 @@ export const AuthLogoutFailed: FunctionComponent = () => {
   return (
     <div className="text-center">
       <h3>{translate('Logout failed')}</h3>
-      {typeof message === 'string' && <p className="mt-3">{message}</p>}
-      <p className="mt-3">
+      {typeof message === 'string' && <p className="mt-2.5">{message}</p>}
+      <p className="mt-2.5">
         <button
-          className="text-btn inline-flex items-center gap-2"
+          className="text-btn inline-flex items-center gap-1.5"
           type="button"
           onClick={explicitLogout}
         >

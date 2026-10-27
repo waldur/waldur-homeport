@@ -78,7 +78,7 @@ const FilterSelect = ({
 
 /** A yes/no filter, as BooleanFilter's checkbox renders it in the app. */
 const FilterCheckbox = ({ label }: { label: string }) => (
-  <label className="flex items-center gap-2 text-sm">
+  <label className="flex items-center gap-1.5 text-sm">
     <input type="checkbox" className="size-4" />
     {label}
   </label>
@@ -126,7 +126,7 @@ const FiltersFrame = ({
   children: ReactNode;
   style?: CSSProperties;
 }) => (
-  <div className="max-w-sm bg-[var(--card-bg)] p-4" style={style}>
+  <div className="max-w-sm bg-[var(--card-bg)] p-3" style={style}>
     {children}
   </div>
 );
@@ -234,7 +234,7 @@ const PERMISSION_GROUPS = [
  */
 export const Boxed: Story = {
   render: () => (
-    <div className="max-w-md bg-[var(--page-bg)] p-6">
+    <div className="max-w-md bg-[var(--page-bg)] p-5">
       <Accordion
         type="multiple"
         defaultValue={['project']}
@@ -244,7 +244,7 @@ export const Boxed: Story = {
           <AccordionItem key={group.value} value={group.value}>
             <AccordionTrigger>{group.title}</AccordionTrigger>
             <AccordionContent>
-              <ul className="m-0 list-disc ps-5">
+              <ul className="m-0 list-disc ps-4">
                 {group.permissions.map((permission) => (
                   <li key={permission}>{permission}</li>
                 ))}

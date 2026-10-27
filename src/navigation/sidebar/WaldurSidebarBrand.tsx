@@ -147,7 +147,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
           <Menu.Item
             key={shortcut.uuid}
             asChild
-            className="flex items-center py-5 ps-6 pe-2 position-relative"
+            className="flex items-center py-4 ps-5 pe-1.5 position-relative"
           >
             <a href={shortcut.link} target="_blank" rel="noopener noreferrer">
               {/* Show separator line only if there are multiple items and not the last item */}
@@ -157,18 +157,18 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
                   style={{ width: 'calc(100% - 24px)' }}
                 />
               )}
-              <div className="me-5">
+              <div className="me-4">
                 <Avatar name={shortcut.name} src={shortcut.image} size={42} />
               </div>
               <div className="grow text-base">
                 <div className="font-semibold">{shortcut.name}</div>
                 {shortcut.description && (
-                  <div className="font-normal text-quaternary mt-3">
+                  <div className="font-normal text-quaternary mt-2.5">
                     {shortcut.description}
                   </div>
                 )}
               </div>
-              <div className="ms-2">
+              <div className="ms-1.5">
                 <ArrowSquareOutIcon
                   size={24}
                   weight="bold"

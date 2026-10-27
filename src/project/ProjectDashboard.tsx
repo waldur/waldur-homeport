@@ -188,7 +188,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           {project.description && (
             <Col
               md={project.staff_notes ? 6 : 12}
-              className="mb-5"
+              className="mb-4"
               style={COMMON_WIDGET_HEIGHT}
             >
               <Panel
@@ -220,7 +220,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           {project.staff_notes && (user.is_staff || user.is_support) && (
             <Col
               md={project.description ? 6 : 12}
-              className="mb-5"
+              className="mb-4"
               style={COMMON_WIDGET_HEIGHT}
             >
               <Panel
@@ -266,12 +266,12 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
       )}
       <Row>
         {!shouldConcealPrices && showBillingInfo && (
-          <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+          <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
             <ProjectDashboardCostLimits project={project} />
           </Col>
         )}
         {showTeam && (
-          <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+          <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
             <TeamWidget
               api={() =>
                 projectsListUsersList({
@@ -304,7 +304,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           </Col>
         )}
         {shouldShowCurrentMonthWidget && (
-          <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+          <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
             <AggregateLimitWidget
               project={project}
               data={currentMonthFilteredData}
@@ -317,7 +317,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           </Col>
         )}
         {shouldShowAggregateLimitWidget && (
-          <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+          <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
             <AggregateLimitWidget
               project={project}
               data={aggregateLimitData}
@@ -329,7 +329,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           </Col>
         )}
         {showBillingInfo && (
-          <ProjectDashboardCredit project={project} className="mb-5" />
+          <ProjectDashboardCredit project={project} className="mb-4" />
         )}
       </Row>
       {/* The Health block is for projects with a credit allocation and gates

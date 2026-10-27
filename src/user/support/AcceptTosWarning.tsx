@@ -31,7 +31,7 @@ export const AcceptTosWarning = ({
     }
     // A blocking action, so it keeps the tinted, warning-bordered surface the
     // neutral floating card would otherwise lose.
-    className="mb-7 border-2 border-warning bg-warning-subtle"
+    className="mb-5.5 border-2 border-warning bg-warning-subtle"
     role="alert"
   />
 );

@@ -16,7 +16,7 @@ export const StatWidgetCard: FC<StatWidgetCardProps> = ({
 }) => {
   return (
     <Card className="card-bordered h-full">
-      <Card.Body className="py-6">
+      <Card.Body className="py-5">
         <div className="text-sm text-quaternary font-medium mb-1">{label}</div>
         <Stack direction="horizontal" gap={2} className="justify-between">
           <div className="display-6 font-bold">{value}</div>

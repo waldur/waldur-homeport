@@ -63,7 +63,7 @@ export const K8sSecurityConfigSection: React.FC<
           name: 'public_access_rules',
         }}
         meta={DEFAULT_FIELD_META}
-        className="mb-5"
+        className="mb-4"
       />
 
       <K8sSecurityRulesField

@@ -77,7 +77,7 @@ const DuplicateOfferingsExpandableRow: FC<{ row: DuplicateOfferingGroup }> = ({
   return (
     <ExpandableContainer>
       {issues.length > 0 && (
-        <div className="flex flex-col gap-2 mb-4">
+        <div className="flex flex-col gap-1.5 mb-3">
           {issues.map(({ issue, variant }, index) => (
             <AlertItem
               key={`${issue.code}-${index}`}
@@ -162,7 +162,7 @@ const IssueCount: FC<{
   ) : (
     <Tooltip
       label={
-        <ul className="mb-0 ps-4 text-start">
+        <ul className="mb-0 ps-3 text-start">
           {issues.map((issue, index) => (
             <li key={`${issue.code}-${index}`}>{issue.message}</li>
           ))}

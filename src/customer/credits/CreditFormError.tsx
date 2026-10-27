@@ -12,7 +12,7 @@ export const CreditFormError: FC = () => {
 
   return (
     <FormField>
-      <div className="text-danger mt-2">{error || submitError}</div>
+      <div className="text-danger mt-1.5">{error || submitError}</div>
     </FormField>
   );
 };

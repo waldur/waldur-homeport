@@ -32,7 +32,7 @@ export const CleanupConsumptionAction = () => {
     <Card className="h-full">
       <Card.Body>
         <h6>{translate('Cleanup Consumption Data')}</h6>
-        <p className="text-quaternary small mb-3">
+        <p className="text-quaternary small mb-2.5">
           {translate('Remove orphaned or stale consumption records.')}
         </p>
         <RemovalActionButton
@@ -44,7 +44,7 @@ export const CleanupConsumptionAction = () => {
           <AlertItem
             type="floating"
             variant="info"
-            className="mt-3 mb-0"
+            className="mt-2.5 mb-0"
             title={
               <small>
                 {translate('Cleanup result:')}{' '}

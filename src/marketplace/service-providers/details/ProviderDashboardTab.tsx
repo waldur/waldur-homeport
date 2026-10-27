@@ -83,7 +83,7 @@ export const ProviderDashboardTab = (props) => {
       {isFeatureVisible(
         MarketplaceFeatures.show_call_management_functionality,
       ) && (
-        <div className="mt-5">
+        <div className="mt-4">
           <PublicCallsList
             provider_uuid={props.data.provider.customer_uuid}
             offering_uuid={null}

@@ -57,10 +57,10 @@ export const K8sKubernetesConfigSection: React.FC<
         <AlertItem
           type="floating"
           variant="warning"
-          className="mb-4"
+          className="mb-3"
           title={translate('Configuration incomplete')}
           body={
-            <ul className="mb-0 mt-2">
+            <ul className="mb-0 mt-1.5">
               {configurationWarnings.map((warning, index) => (
                 <li key={index}>{warning}</li>
               ))}
@@ -71,7 +71,7 @@ export const K8sKubernetesConfigSection: React.FC<
 
       {/* Kubernetes Version Selection */}
       <K8sFormSection title={translate('Kubernetes configuration')}>
-        <FormGroup label={translate('Kubernetes version')} required space={5}>
+        <FormGroup label={translate('Kubernetes version')} required space={4}>
           <SelectField
             input={{
               value: kubernetesVersion,
@@ -98,7 +98,7 @@ export const K8sKubernetesConfigSection: React.FC<
               'Where the controller nodes run: three in one site, or one in each of three sites.',
             )}
             required
-            space={5}
+            space={4}
           >
             <SelectField
               input={{
@@ -114,14 +114,14 @@ export const K8sKubernetesConfigSection: React.FC<
               <AlertItem
                 type="floating"
                 variant="info"
-                className="mt-3 mb-0"
+                className="mt-2.5 mb-0"
                 title={topologyNotice}
               />
             )}
           </FormGroup>
         )}
 
-        <FormGroup space={5}>
+        <FormGroup space={4}>
           <Checkbox
             label={translate('Install Longhorn distributed storage')}
             description={
@@ -138,7 +138,7 @@ export const K8sKubernetesConfigSection: React.FC<
 
         {getLoadBalancerMode(defaultConfigs) === 'optional' &&
           onLoadBalancerChange && (
-            <FormGroup space={5}>
+            <FormGroup space={4}>
               <Checkbox
                 label={translate('Include load balancer nodes')}
                 description={translate(

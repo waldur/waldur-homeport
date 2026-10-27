@@ -160,10 +160,10 @@ export const MarketplaceLandingFilter = ({
               <Card.Body
                 as="form"
                 onSubmit={handleSubmit}
-                className="flex flex-col gap-8"
+                className="flex flex-col gap-6"
               >
                 <div>
-                  <Card.Title as="div" className="h3 mb-5">
+                  <Card.Title as="div" className="h3 mb-4">
                     {translate('Filter by organization/project')}
                   </Card.Title>
                   <Card.Subtitle className="font-normal text-quaternary">

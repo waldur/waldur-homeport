@@ -39,7 +39,7 @@ export const Playground: Story = {
   render: (args) => {
     const [checked, setChecked] = useState(false);
     return (
-      <div className="p-6">
+      <div className="p-5">
         <Checkbox {...args} checked={checked} onCheckedChange={setChecked} />
       </div>
     );
@@ -56,7 +56,7 @@ const STATES = [
 
 export const AllStates: Story = {
   render: () => (
-    <div className="p-6 grid grid-cols-[auto_auto_auto] items-center gap-4 text-sm">
+    <div className="p-5 grid grid-cols-[auto_auto_auto] items-center gap-3 text-sm">
       <span />
       <span>md</span>
       <span>sm</span>
@@ -75,7 +75,7 @@ export const Labelled: Story = {
   render: () => {
     const [skip, setSkip] = useState(false);
     return (
-      <div className="p-6 flex flex-col gap-[16px] max-w-[480px]">
+      <div className="p-5 flex flex-col gap-[16px] max-w-[480px]">
         <Checkbox
           label="Update all selected resource termination dates to match project end date"
           size="sm"

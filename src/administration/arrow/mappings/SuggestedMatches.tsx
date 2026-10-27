@@ -67,7 +67,7 @@ export const SuggestedMatches: FC<SuggestedMatchesProps> = ({
       <Card.Header>
         <h5 className="mb-0">
           {translate('Suggested Matches')}
-          <Badge variant="primary" className="ms-2">
+          <Badge variant="primary" className="ms-1.5">
             {suggestions.length}
           </Badge>
         </h5>

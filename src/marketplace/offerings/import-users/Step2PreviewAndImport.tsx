@@ -299,10 +299,10 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
       submitTooltip={!skipErrors && validation.message}
     >
       <div>
-        <div className="flex justify-start mb-3">
+        <div className="flex justify-start mb-2.5">
           <div ref={refToolbar}>{/* Portal destination */}</div>
         </div>
-        <div className="flex justify-between text-quaternary mb-3">
+        <div className="flex justify-between text-quaternary mb-2.5">
           <span>
             {validation.invalid === 0
               ? translate('{n} valid', { n: validation.valid })

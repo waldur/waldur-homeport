@@ -32,7 +32,7 @@ export const CompleteYourProfileBanner = ({
         <FeaturedIcon
           icon={<WarningCircleIcon weight="bold" />}
           variant="warning"
-          className="me-2"
+          className="me-1.5"
         />
 
         <p className="mb-0">

@@ -147,7 +147,7 @@ const ProjectAutocompleteDialog: FC<{
         </>
       }
     >
-      <Row className="g-2 mb-3">
+      <Row className="g-2 mb-2.5">
         <Col xs={12} md={4}>
           <FormField>
             <FormLabel className="small mb-1">{translate('Search')}</FormLabel>
@@ -185,7 +185,7 @@ const ProjectAutocompleteDialog: FC<{
           </FormField>
         </Col>
       </Row>
-      <div className="flex items-center gap-4 mb-3 flex-wrap">
+      <div className="flex items-center gap-3 mb-2.5 flex-wrap">
         <Checkbox
           id="dlg-showFinished"
           checked={showFinished}
@@ -207,7 +207,7 @@ const ProjectAutocompleteDialog: FC<{
         />
       </div>
 
-      <div className="flex items-center gap-2 mb-2">
+      <div className="flex items-center gap-1.5 mb-1.5">
         <Checkbox
           id="select-all-visible"
           checked={allVisibleSelected && visible.length > 0}
@@ -228,15 +228,15 @@ const ProjectAutocompleteDialog: FC<{
       </div>
       <div
         style={{ maxHeight: 320, overflowY: 'auto' }}
-        className="border rounded p-2"
+        className="border rounded p-1.5"
       >
         {visible.length === 0 && (
-          <p className="text-quaternary small mb-0 p-2">
+          <p className="text-quaternary small mb-0 p-1.5">
             {translate('No projects match the filters.')}
           </p>
         )}
         {visible.map((p) => (
-          <div key={p.uuid} className="flex items-start gap-2 py-1">
+          <div key={p.uuid} className="flex items-start gap-1.5 py-1">
             <Checkbox
               id={`proj-${p.uuid}`}
               checked={draft.has(p.uuid)}
@@ -246,7 +246,7 @@ const ProjectAutocompleteDialog: FC<{
                 <span className="grow" style={{ cursor: 'pointer' }}>
                   <span>{p.name}</span>
                   {(p.start_date || p.end_date) && (
-                    <span className="text-quaternary small ms-2">
+                    <span className="text-quaternary small ms-1.5">
                       {p.start_date ?? '?'} →{' '}
                       {p.end_date ?? translate('ongoing')}
                     </span>
@@ -256,7 +256,7 @@ const ProjectAutocompleteDialog: FC<{
                       variant="warning"
                       size="sm"
                       tone="outline"
-                      className="ms-2"
+                      className="ms-1.5"
                     >
                       {translate('In grace')}
                     </Badge>
@@ -266,7 +266,7 @@ const ProjectAutocompleteDialog: FC<{
                       variant="neutral"
                       size="sm"
                       tone="outline"
-                      className="ms-2"
+                      className="ms-1.5"
                     >
                       {translate('Finished')}
                     </Badge>
@@ -769,13 +769,13 @@ export const OrganisationReportsTab: FC = () => {
   }, [projectsLoading, reportsLoading, loadingStage]);
 
   return (
-    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-4')}>
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-3')}>
       {/* ── Toolbar ──────────────────────────────────────────────────── */}
-      <div className="flex items-center gap-3 mb-4 flex-wrap">
+      <div className="flex items-center gap-2.5 mb-3 flex-wrap">
         <h4 className="mb-0">{translate('Usage Report')}</h4>
 
         {projects && projects.length > 0 && (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <span className="text-quaternary small">
               {translate('{count} of {total} {project} selected', {
                 count: effectiveSelected.size,
@@ -846,7 +846,7 @@ export const OrganisationReportsTab: FC = () => {
         )}
 
         {loadTriggered && (
-          <div className="ms-auto flex items-center gap-2">
+          <div className="ms-auto flex items-center gap-1.5">
             {projectsCacheAge && (
               <span className="text-quaternary small">
                 {translate('Cached {age}', {
@@ -879,12 +879,14 @@ export const OrganisationReportsTab: FC = () => {
 
       {/* ── Load prompt ──────────────────────────────────────────────── */}
       {showLoadPrompt && !projectsLoading && !reportsLoading && (
-        <Card className="mb-4">
+        <Card className="mb-3">
           <Card.Body>
-            <p className="mb-2">{translate('Usage reports not yet loaded')}</p>
+            <p className="mb-1.5">
+              {translate('Usage reports not yet loaded')}
+            </p>
 
             {/* Project pre-filters */}
-            <Row className="g-2 mb-3">
+            <Row className="g-2 mb-2.5">
               <Col xs={12} md={4}>
                 <FormField>
                   <FormLabel className="small mb-1">
@@ -925,7 +927,7 @@ export const OrganisationReportsTab: FC = () => {
             </Row>
 
             {/* Project status checkboxes */}
-            <div className="flex items-center gap-4 mb-3 flex-wrap">
+            <div className="flex items-center gap-3 mb-2.5 flex-wrap">
               <Checkbox
                 id="includeFinished"
                 checked={includeFinished}
@@ -954,7 +956,7 @@ export const OrganisationReportsTab: FC = () => {
               onMonthChange={setFilterMonth}
             />
 
-            <p className="text-quaternary small mb-3">
+            <p className="text-quaternary small mb-2.5">
               {translate(
                 'Fetches reports for each project in parallel — this may take 15–30 seconds for large organizations. Tip: selecting a year or month limits projects to those active during that period, which is usually the fastest way to narrow the load for large organizations.',
               )}
@@ -1009,7 +1011,7 @@ export const OrganisationReportsTab: FC = () => {
         <AlertItem
           type="floating"
           variant="warning"
-          className="mb-3"
+          className="mb-2.5"
           title={translate('This is taking a while.')}
           body={translate(
             'To speed things up: use a specific year/month filter, or search for fewer projects when loading. Large datasets with many users and projects take longer to process.',
@@ -1059,7 +1061,7 @@ export const OrganisationReportsTab: FC = () => {
         <AlertItem
           type="floating"
           variant="info"
-          className="mb-3"
+          className="mb-2.5"
           title={translate(
             'User names shown for top {max} users by usage only. {count} more {user} not mapped.',
             {
@@ -1086,7 +1088,7 @@ export const OrganisationReportsTab: FC = () => {
 
       {/* ── Charts ───────────────────────────────────────────────────── */}
       {activeUsage.length > 0 && nameMaps !== undefined && !showLoadPrompt && (
-        <Card className="mb-4">
+        <Card className="mb-3">
           <Card.Header>{translate('Usage')}</Card.Header>
           <Card.Body>
             <UsageReportVis
@@ -1101,7 +1103,7 @@ export const OrganisationReportsTab: FC = () => {
       {activeStorage.length > 0 &&
         nameMaps !== undefined &&
         !showLoadPrompt && (
-          <Card className="mb-4">
+          <Card className="mb-3">
             <Card.Header>{translate('Storage')}</Card.Header>
             <Card.Body>
               <StorageReportVis

@@ -148,7 +148,7 @@ export const AggregateLimitDetailsDialog = ({
         <div className="col-md-4">
           <Select
             placeholder={translate('Select component')}
-            className="mb-2 w-full"
+            className="mb-1.5 w-full"
             value={
               selectedComponentType
                 ? {
@@ -168,7 +168,7 @@ export const AggregateLimitDetailsDialog = ({
       </div>
 
       {includeTerminated && (
-        <p className="text-quaternary text-xs mb-2">
+        <p className="text-quaternary text-xs mb-1.5">
           {translate(
             'Usage of terminated resources is included in the totals, but only active resources are listed.',
           )}

@@ -58,7 +58,7 @@ export const AudienceFields: FC<{ allUsersLabel: string; hint?: string }> = ({
             noOptionsMessage={() => translate('No organizations found')}
             isMulti={true}
           />
-          {hint && <FormText className="mb-6">{hint}</FormText>}
+          {hint && <FormText className="mb-5">{hint}</FormText>}
         </>
       )}
     </>

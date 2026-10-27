@@ -67,11 +67,11 @@ export const OrganizationCreateStep4: FunctionComponent<
   }, [checklistFetched]);
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       <Card className="border-0 shadow-sm">
-        <Card.Body className="p-8">
-          <h5 className="mb-4 font-semibold">{translate('Your Intent')}</h5>
-          <p className="text-quaternary mb-6">
+        <Card.Body className="p-6">
+          <h5 className="mb-3 font-semibold">{translate('Your Intent')}</h5>
+          <p className="text-quaternary mb-5">
             {translate(
               'Please provide additional information about your organization and goals.',
             )}
@@ -80,7 +80,7 @@ export const OrganizationCreateStep4: FunctionComponent<
           {loading ? (
             <LoadingSpinner />
           ) : (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               {checklistQuestions.map((question) => (
                 <ChecklistQuestionField
                   key={question.uuid}

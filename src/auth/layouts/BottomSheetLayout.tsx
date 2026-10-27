@@ -49,7 +49,7 @@ export const BottomSheetLayout = () => {
       <div className="layout-bottom-sheet-panel">
         <div className="layout-bottom-sheet-handle" />
         <div className="layout-bottom-sheet-content">
-          <div className="login-logo mb-3">
+          <div className="login-logo mb-2.5">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
               src={imageUrl}

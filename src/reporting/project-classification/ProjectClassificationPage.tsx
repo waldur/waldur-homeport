@@ -54,10 +54,10 @@ export const ProjectClassificationPage: FC = () => {
 
       <ClassificationSummaryCards summary={summary} />
 
-      <div className="my-6">
+      <div className="my-5">
         <SegmentedControl<TabKey>
           aria-label={translate('Classification view')}
-          itemClassName="px-6"
+          itemClassName="px-5"
           options={[
             { value: 'oecd', label: translate('By OECD code') },
             { value: 'industry', label: translate('By industry') },

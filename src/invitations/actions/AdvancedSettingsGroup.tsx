@@ -18,7 +18,7 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
     <AccordionCard
       title={translate('Advanced settings')}
       size="sm"
-      className="mb-5 bg-secondary"
+      className="mb-4 bg-secondary"
       titleClassName="text-sm"
     >
       <BooleanGroup

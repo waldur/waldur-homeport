@@ -83,7 +83,7 @@ export const TeamTableComponent = <
       {
         title: translate('Member'),
         render: ({ row }) => (
-          <div className="content-wrapper gap-2">
+          <div className="content-wrapper gap-1.5">
             <Avatar
               name={getField(row, 'full_name')}
               src={getField(row, 'image')}
@@ -131,7 +131,7 @@ export const TeamTableComponent = <
           // contexts only provide the scalar role_name.
           const roles = (row as any).roles;
           return (
-            <span className="inline-flex items-center gap-2 flex-wrap">
+            <span className="inline-flex items-center gap-1.5 flex-wrap">
               {Array.isArray(roles) && roles.length > 0 ? (
                 roles.map((grant) => (
                   <span

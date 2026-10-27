@@ -119,7 +119,7 @@ export const UpdateInternalIpsDialog: FC<UpdateInternalIpsDialogProps> = ({
           >
             {subnets ? (
               <FormField>
-                <div className="flex justify-between mb-5">
+                <div className="flex justify-between mb-4">
                   <FormLabel className="mb-0">
                     {translate('Connected subnets')}
                   </FormLabel>

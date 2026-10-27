@@ -53,7 +53,7 @@ export const AccordionTrigger = forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        'group flex flex-1 items-center justify-between gap-4 px-6 py-5 text-left',
+        'group flex flex-1 items-center justify-between gap-3 px-5 py-4 text-left',
         'text-sm font-semibold text-primary',
         'transition-colors hover:bg-primary-hover',
         'data-[state=open]:bg-primary-hover data-[state=open]:text-brand-700 dark:data-[state=open]:text-brand-200',
@@ -96,7 +96,7 @@ export const AccordionContent = forwardRef<
     )}
     {...props}
   >
-    <div className={cn('px-6 pt-2 pb-5', className)}>{children}</div>
+    <div className={cn('px-5 pt-1.5 pb-4', className)}>{children}</div>
   </AccordionPrimitive.Content>
 ));
 AccordionContent.displayName = 'AccordionContent';

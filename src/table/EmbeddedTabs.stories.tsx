@@ -14,7 +14,7 @@ const meta: Meta<typeof EmbeddedTabs> = {
   component: EmbeddedTabs,
   decorators: [
     (Story) => (
-      <div className="p-6 max-w-3xl">
+      <div className="p-5 max-w-3xl">
         <Story />
       </div>
     ),
@@ -25,7 +25,7 @@ export default meta;
 type Story = StoryObj<typeof EmbeddedTabs>;
 
 const Placeholder = ({ children }: { children: string }) => (
-  <div className="p-4 text-sm text-quaternary">{children}</div>
+  <div className="p-3 text-sm text-quaternary">{children}</div>
 );
 
 const tabs = [
@@ -85,7 +85,7 @@ export const ConditionalTab: Story = {
       <div>
         <button
           type="button"
-          className="mb-3 text-sm underline"
+          className="mb-2.5 text-sm underline"
           onClick={() => setCanListUsers((value) => !value)}
         >
           {canListUsers ? 'Revoke' : 'Grant'} permission to list users
@@ -108,7 +108,7 @@ export const WithHeader: Story = {
   args: {
     defaultValue: 'projects',
     header: (
-      <div className="flex items-center justify-between gap-4 px-4 py-3 border-b">
+      <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b">
         <span className="text-sm font-bold">Team</span>
         <span className="text-xs text-quaternary">header actions</span>
       </div>
@@ -123,7 +123,7 @@ export const Controlled: Story = {
     const [value, setValue] = useState('resources');
     return (
       <div>
-        <p className="mb-2 text-sm">
+        <p className="mb-1.5 text-sm">
           Open tab: <strong>{value}</strong>
         </p>
         <EmbeddedTabs

@@ -88,7 +88,7 @@ export const Small: Story = {
 export const SmallWarning: Story = {
   args: {
     title: (
-      <span className="flex items-center gap-2 text-[color:var(--status-warning-fg)]">
+      <span className="flex items-center gap-1.5 text-[color:var(--status-warning-fg)]">
         <WarningCircleIcon weight="bold" size={20} />
         Membership restrictions apply
       </span>

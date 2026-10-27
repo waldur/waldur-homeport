@@ -41,10 +41,10 @@ export const AffiliationGroup = ({
     <span>
       {option.name}
       {option.abbreviation && (
-        <span className="text-quaternary ms-2">({option.abbreviation})</span>
+        <span className="text-quaternary ms-1.5">({option.abbreviation})</span>
       )}
       {isStaff && customerDefaultUuids.has(option.uuid) && (
-        <Badge variant="info" shape="pill" tone="outline" className="ms-2">
+        <Badge variant="info" shape="pill" tone="outline" className="ms-1.5">
           {translate('Default')}
         </Badge>
       )}

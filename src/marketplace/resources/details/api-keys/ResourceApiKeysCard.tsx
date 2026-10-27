@@ -139,7 +139,7 @@ const getManagedColumns = (
             return allowed.length ? (
               // Table cells have no vertical padding of their own, so wrapped
               // chips need it to stay clear of the row borders.
-              <span className="flex flex-wrap gap-3 py-3">
+              <span className="flex flex-wrap gap-2.5 py-2.5">
                 {allowed.map((model) => (
                   <Badge
                     key={model}
@@ -217,7 +217,7 @@ export const ResourceApiKeysCard = ({
         <AlertItem
           type="floating"
           variant="warning"
-          className="mb-4"
+          className="mb-3"
           title={translate(
             'This resource is paused, so none of its keys is served.',
           )}

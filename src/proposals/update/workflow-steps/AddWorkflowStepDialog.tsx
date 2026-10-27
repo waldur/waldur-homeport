@@ -102,7 +102,7 @@ const formatStepOption = (
   option: StepOption,
   meta: { context: 'menu' | 'value' },
 ) => (
-  <div className="flex items-center justify-between gap-2">
+  <div className="flex items-center justify-between gap-1.5">
     <span className={option.isDisabled ? 'text-quaternary' : undefined}>
       {option.label}
     </span>
@@ -327,12 +327,12 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
 
               {showAllocationExtras && (
                 <>
-                  <div className="separator my-5" />
+                  <div className="separator my-4" />
                   <BooleanGroup
                     name="include_award_response"
                     spaceless={true}
                     label={
-                      <span className="inline-flex items-center gap-2">
+                      <span className="inline-flex items-center gap-1.5">
                         {translate('Include Award response')}
                         <HelpIcon
                           label={translate(

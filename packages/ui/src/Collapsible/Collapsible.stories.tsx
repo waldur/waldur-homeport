@@ -24,12 +24,12 @@ export default meta;
 type Story = StoryObj<typeof Collapsible>;
 
 const Panel = ({ keepMounted }: { keepMounted?: boolean }) => (
-  <div className="max-w-sm bg-[var(--page-bg)] p-6">
+  <div className="max-w-sm bg-[var(--page-bg)] p-5">
     <Collapsible
       keepMounted={keepMounted}
       className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] text-primary"
     >
-      <CollapsibleTrigger className="group flex w-full items-center justify-between px-6 py-5 text-sm font-semibold">
+      <CollapsibleTrigger className="group flex w-full items-center justify-between px-5 py-4 text-sm font-semibold">
         Advanced settings
         <CaretDownIcon
           size={16}
@@ -39,11 +39,11 @@ const Panel = ({ keepMounted }: { keepMounted?: boolean }) => (
         />
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div className="flex flex-col gap-2 px-6 pb-5 text-sm">
+        <div className="flex flex-col gap-1.5 px-5 pb-4 text-sm">
           <label htmlFor={`note-${keepMounted}`}>Note</label>
           <input
             id={`note-${keepMounted}`}
-            className="rounded-md border-[1px] border-secondary px-3 py-2"
+            className="rounded-md border-[1px] border-secondary px-2.5 py-1.5"
             placeholder="Type, collapse, reopen"
           />
         </div>

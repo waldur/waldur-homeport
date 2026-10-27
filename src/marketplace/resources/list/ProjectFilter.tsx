@@ -24,7 +24,7 @@ const formatOptionLabel = (option) => (
         <FactoryIcon
           size={18}
           weight="bold"
-          className="ms-3 inline-block text-quaternary"
+          className="ms-2.5 inline-block text-quaternary"
         />
       )}
   </div>

@@ -104,10 +104,10 @@ function IntentRow({ intent }: { intent: string }) {
   const slot = (s: string) => `var(--status-${intent}-${s})`;
   return (
     <div className="contents">
-      <div className="py-3 font-mono text-xs font-semibold text-primary">
+      <div className="py-2.5 font-mono text-xs font-semibold text-primary">
         {intent}
       </div>
-      <div className="py-3">
+      <div className="py-2.5">
         {has(intent, 'bg') && (
           <span
             className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium"
@@ -127,7 +127,7 @@ function IntentRow({ intent }: { intent: string }) {
           </span>
         )}
       </div>
-      <div className="py-3">
+      <div className="py-2.5">
         {has(intent, 'solid') ? (
           <span
             className="inline-flex rounded-md px-2.5 py-0.5 text-xs font-medium"
@@ -139,10 +139,10 @@ function IntentRow({ intent }: { intent: string }) {
           <span className="text-xs text-quinary">no -solid</span>
         )}
       </div>
-      <div className="py-3 text-sm font-medium" style={{ color: slot('fg') }}>
+      <div className="py-2.5 text-sm font-medium" style={{ color: slot('fg') }}>
         Text on the card
       </div>
-      <div className="flex flex-col py-3">
+      <div className="flex flex-col py-2.5">
         <span className="text-[11px] text-quaternary">
           on card <Ratio fg={`--status-${intent}-fg`} bg="--card-bg" />
         </span>
@@ -170,14 +170,14 @@ export const Status: Story = {
   render: () => (
     <TokenPage title="Status matrix" intro={status.doc}>
       <div
-        className="mb-6 grid items-center gap-x-6 rounded-md border-[1px] border-secondary bg-[var(--card-bg)] px-4 [&>.contents>*]:border-t-[1px] [&>.contents>*]:border-t-secondary"
+        className="mb-5 grid items-center gap-x-6 rounded-md border-[1px] border-secondary bg-[var(--card-bg)] px-3 [&>.contents>*]:border-t-[1px] [&>.contents>*]:border-t-secondary"
         style={{ gridTemplateColumns: '6rem repeat(3, auto) 1fr' }}
       >
         {['Intent', '-bg + -fg', '-solid', '-fg', 'Contrast of -fg'].map(
           (h) => (
             <div
               key={h}
-              className="py-2 text-[11px] font-semibold uppercase tracking-wide text-quaternary"
+              className="py-1.5 text-[11px] font-semibold uppercase tracking-wide text-quaternary"
             >
               {h}
             </div>

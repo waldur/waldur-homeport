@@ -63,7 +63,7 @@ const ReallocateLimitsDialogSubtitle = ({ resource, offering }) => (
       )}
     </div>
     {resource && offering && (
-      <div className="mt-3 mb-0">
+      <div className="mt-2.5 mb-0">
         {translate('Source')}: {resource.customer_name} /{' '}
         {resource.project_name} / {resource.name} — {translate('Offering')}:{' '}
         {offering.name}
@@ -105,7 +105,7 @@ export const ReallocateLimitsDialog: FunctionComponent<
   if (dataQuery.isLoading) {
     return (
       <ModalDialog title={translate('Reallocate resource limits')}>
-        <div className="text-center p-5">
+        <div className="text-center p-4">
           <div className="spinner-border" role="status">
             <span className="visually-hidden">{translate('Loading...')}</span>
           </div>
@@ -117,7 +117,7 @@ export const ReallocateLimitsDialog: FunctionComponent<
   if (dataQuery.error) {
     return (
       <ModalDialog title={translate('Reallocate resource limits')}>
-        <div className="text-center p-5">
+        <div className="text-center p-4">
           <h3>{translate('Unable to load data.')}</h3>
         </div>
       </ModalDialog>
@@ -168,7 +168,7 @@ export const ReallocateLimitsDialog: FunctionComponent<
               className="overflow-hidden"
               bodyClassName="overflow-hidden border-0 pt-0"
             >
-              <div className="pt-4">
+              <div className="pt-3">
                 <WizardStepIndicator
                   steps={steps}
                   value={step}

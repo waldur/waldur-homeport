@@ -41,7 +41,7 @@ export const VersionStateAtTimestamp: FunctionComponent<
   }
 
   return (
-    <FormField className="flex items-center gap-3">
+    <FormField className="flex items-center gap-2.5">
       <FormLabel className="mb-0 text-nowrap text-quaternary text-xs">
         {translate('State at:')}
       </FormLabel>

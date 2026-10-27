@@ -38,7 +38,7 @@ type Story = StoryObj<typeof Progress>;
 
 export const Default: Story = {
   render: () => (
-    <div className="p-6 max-w-md">
+    <div className="p-5 max-w-md">
       <Progress value={40} label="Usage" />
     </div>
   ),
@@ -46,9 +46,9 @@ export const Default: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div className="p-6 max-w-md flex flex-col gap-4">
+    <div className="p-5 max-w-md flex flex-col gap-3">
       {SIZES.map((size) => (
-        <div key={size} className="flex items-center gap-4">
+        <div key={size} className="flex items-center gap-3">
           <span className="w-8 text-sm">{size}</span>
           <Progress size={size} value={60} label={size} />
         </div>
@@ -59,9 +59,9 @@ export const Sizes: Story = {
 
 export const Variants: Story = {
   render: () => (
-    <div className="p-6 max-w-md flex flex-col gap-3">
+    <div className="p-5 max-w-md flex flex-col gap-2.5">
       {VARIANTS.map((variant) => (
-        <div key={variant} className="flex items-center gap-4">
+        <div key={variant} className="flex items-center gap-3">
           <span className="w-16 text-sm">{variant}</span>
           <Progress variant={variant} value={65} label={variant} />
         </div>
@@ -72,7 +72,7 @@ export const Variants: Story = {
 
 export const Empty: Story = {
   render: () => (
-    <div className="p-6 max-w-md">
+    <div className="p-5 max-w-md">
       <Progress value={0} variant="danger" label="Empty" />
     </div>
   ),
@@ -80,7 +80,7 @@ export const Empty: Story = {
 
 export const Stacked: Story = {
   render: () => (
-    <div className="p-6 max-w-md flex flex-col gap-4">
+    <div className="p-5 max-w-md flex flex-col gap-3">
       <Progress
         size="lg"
         label="Policy thresholds"
@@ -104,7 +104,7 @@ export const Stacked: Story = {
 
 export const Indeterminate: Story = {
   render: () => (
-    <div className="p-6 max-w-md">
+    <div className="p-5 max-w-md">
       <Progress indeterminate label="Uploading" />
     </div>
   ),

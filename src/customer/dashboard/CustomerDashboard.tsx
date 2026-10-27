@@ -114,7 +114,7 @@ export const CustomerDashboard: FunctionComponent = () => {
       {showTerminatedSwitch && (
         <Col
           xs={12}
-          className="flex flex-wrap items-center justify-end gap-3 mb-5"
+          className="flex flex-wrap items-center justify-end gap-2.5 mb-4"
         >
           {includeTerminated && (
             <span className="text-quaternary text-xs">
@@ -132,7 +132,7 @@ export const CustomerDashboard: FunctionComponent = () => {
         </Col>
       )}
       {shouldShowCurrentMonthWidget && (
-        <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+        <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
           <AggregateLimitWidget
             customer={customer}
             data={currentMonthFilteredData}
@@ -145,7 +145,7 @@ export const CustomerDashboard: FunctionComponent = () => {
         </Col>
       )}
       {shouldShowAggregateLimitWidget && (
-        <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+        <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
           <AggregateLimitWidget
             customer={customer}
             data={aggregateLimitData}
@@ -157,7 +157,7 @@ export const CustomerDashboard: FunctionComponent = () => {
         </Col>
       )}
       {Boolean(customer.credit) && (
-        <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+        <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
           <CustomerDashboardCredit customer={customer} />
         </Col>
       )}

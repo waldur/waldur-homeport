@@ -213,7 +213,7 @@ export const AccountOptionsPreviewDialog: FC<
                 !serviceProvider.account_options?.project_groups_enabled && (
                   <AlertItem
                     variant="info"
-                    className="mb-4"
+                    className="mb-3"
                     title={translate('Before enabling project groups')}
                     body={<ProjectGroupsRolloutOrder />}
                   />
@@ -222,7 +222,7 @@ export const AccountOptionsPreviewDialog: FC<
                 serviceProvider.account_options?.project_groups_enabled && (
                   <AlertItem
                     variant="info"
-                    className="mb-4"
+                    className="mb-3"
                     title={translate('Turning project groups off')}
                     body={translate(
                       'Existing groups stay, with their GIDs and members, and stay listed for your directory. Projects that start using your offerings get no group until you turn it on again.',
@@ -232,7 +232,7 @@ export const AccountOptionsPreviewDialog: FC<
               {preview && !current && (
                 <AlertItem
                   variant="info"
-                  className="mb-4"
+                  className="mb-3"
                   title={translate(
                     'The settings changed since the preview. Preview again to apply them.',
                   )}

@@ -19,8 +19,8 @@ export const ServiceProviderCommentModal: FC<
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       {commentUrl && (
-        <div className="mb-4">
-          <div className="text-secondary font-medium mb-2">
+        <div className="mb-3">
+          <div className="text-secondary font-medium mb-1.5">
             {translate('Service provider URL')}:
           </div>
           <div className="text-quaternary">
@@ -31,7 +31,7 @@ export const ServiceProviderCommentModal: FC<
         </div>
       )}
       <div>
-        <div className="text-secondary font-medium mb-2">
+        <div className="text-secondary font-medium mb-1.5">
           {translate('Comment')}:
         </div>
         <div className="text-quaternary">

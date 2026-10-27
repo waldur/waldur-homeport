@@ -77,9 +77,9 @@ export const OrdersFilter: FC<OrdersFilterProps> = ({
   );
 
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center gap-5">
       {extraFilters}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         <label
           className={classNames(
             'text-quaternary whitespace-nowrap',

@@ -52,7 +52,7 @@ export const UserAgreementComponent: FunctionComponent<
 
   return (
     <div>
-      <div className="mb-6 card card-bordered">
+      <div className="mb-5 card card-bordered">
         <div className="card-body">
           <SafeMarkdown text={option.content} />
         </div>

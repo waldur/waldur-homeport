@@ -87,7 +87,7 @@ export const EmailHealthPage: FC = () => {
     <Panel
       title={title}
       actions={
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <RefreshButton refetch={reload} isLoading={isRefetching} />
           <BaseButton
             pending={probe.isPending}
@@ -110,7 +110,7 @@ export const EmailHealthPage: FC = () => {
     >
       <AlertItem
         variant={summary.variant}
-        className="mb-6"
+        className="mb-5"
         title={summary.title()}
         body={
           <>
@@ -127,7 +127,7 @@ export const EmailHealthPage: FC = () => {
       {probe.isError && (
         <AlertItem
           variant="error"
-          className="mb-6"
+          className="mb-5"
           title={translate('The connection test could not be run')}
           body={getRequestErrorMessage(probe.error)}
         />
@@ -136,7 +136,7 @@ export const EmailHealthPage: FC = () => {
         (probe.data.success ? (
           <AlertItem
             variant="info"
-            className="mb-6"
+            className="mb-5"
             title={translate('The relay answered')}
             body={translate(
               'The connection was opened in {latency} ms. This proves the API service reaches the relay; notifications are sent by the Celery workers, which may reach the network differently.',
@@ -146,7 +146,7 @@ export const EmailHealthPage: FC = () => {
         ) : (
           <AlertItem
             variant="error"
-            className="mb-6"
+            className="mb-5"
             title={translate('The relay could not be reached')}
             body={<code className="text-break">{probe.data.error}</code>}
           />

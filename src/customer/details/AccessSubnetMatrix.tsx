@@ -192,7 +192,7 @@ export const AccessSubnetMatrix: FC<AccessSubnetMatrixProps> = ({
                   target: target.label,
                 })}
           </p>
-          {warning && <p className="text-warning mt-2 mb-0">{warning}</p>}
+          {warning && <p className="text-warning mt-1.5 mb-0">{warning}</p>}
         </>,
       );
     } catch {
@@ -228,7 +228,7 @@ export const AccessSubnetMatrix: FC<AccessSubnetMatrixProps> = ({
                 <LockIcon
                   size={14}
                   weight="bold"
-                  className="ms-2 text-quaternary"
+                  className="ms-1.5 text-quaternary"
                 />
               </Tooltip>
             )}

@@ -59,7 +59,7 @@ export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
 
   return (
     <>
-      <FormField className="mb-5">
+      <FormField className="mb-4">
         <FormLabel>
           {translate('Select a project to preview the digest')}
         </FormLabel>
@@ -78,7 +78,7 @@ export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
 
       {preview && !isPending && (
         <div
-          className="rounded shadow-sm p-6"
+          className="rounded shadow-sm p-5"
           style={{ backgroundColor: '#fff', color: '#333' }}
         >
           <FormattedHtml html={preview.html_body} />

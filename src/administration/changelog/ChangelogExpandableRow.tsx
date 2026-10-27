@@ -17,7 +17,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
 }) => (
   <ExpandableContainer>
     {/* Description */}
-    <p className="text-quaternary mb-3">{row.description}</p>
+    <p className="text-quaternary mb-2.5">{row.description}</p>
 
     {/* Security details */}
     {row.security && (
@@ -28,7 +28,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
             : 'warning'
         }
         title={
-          <span className="flex items-center gap-2">
+          <span className="flex items-center gap-1.5">
             {translate('Security')}
             <StateIndicator
               variant={
@@ -74,15 +74,15 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
             )}
           </>
         }
-        className="mb-3"
+        className="mb-2.5"
       />
     )}
 
     {/* Actions */}
     {row.actions && row.actions.length > 0 && (
-      <div className="mb-3">
+      <div className="mb-2.5">
         <strong className="small">{translate('Post-upgrade actions')}</strong>
-        <ul className="mb-0 ps-3 small mt-1">
+        <ul className="mb-0 ps-2.5 small mt-1">
           {row.actions.map((action, i) => (
             <li key={i} className={action.automatic ? 'text-success' : ''}>
               {action.description}
@@ -103,13 +103,13 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
       (row.settings_analysis &&
         Object.keys(row.settings_analysis).length > 0) ||
       (row.plugin_analysis && Object.keys(row.plugin_analysis).length > 0)) && (
-      <div className="flex flex-wrap gap-3 mb-3">
+      <div className="flex flex-wrap gap-2.5 mb-2.5">
         {/* Affected counts */}
         {(row.affected_resources_count !== undefined ||
           row.affected_users_count !== undefined) && (
           <Card className="flex-1">
-            <CardContent className="py-2 px-3">
-              <strong className="small block mb-2">
+            <CardContent className="py-1.5 px-2.5">
+              <strong className="small block mb-1.5">
                 {translate('Impact analysis')}
               </strong>
               {row.affected_resources_count !== undefined && (
@@ -138,8 +138,8 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
         {row.settings_analysis &&
           Object.keys(row.settings_analysis).length > 0 && (
             <Card className="flex-1">
-              <CardContent className="py-2 px-3">
-                <strong className="small block mb-2">
+              <CardContent className="py-1.5 px-2.5">
+                <strong className="small block mb-1.5">
                   {translate('Settings impact')}
                 </strong>
                 {Object.entries(
@@ -152,14 +152,14 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
                     }
                   >,
                 ).map(([key, val]) => (
-                  <div key={key} className="small mb-2">
+                  <div key={key} className="small mb-1.5">
                     <code className="text-brand">{key}</code>
                     {val.is_customized && (
                       <Badge
                         variant="warning"
                         shape="pill"
                         tone="outline"
-                        className="ms-2"
+                        className="ms-1.5"
                       >
                         {translate('Customized')}
                       </Badge>
@@ -180,8 +180,8 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
         {/* Plugin analysis */}
         {row.plugin_analysis && Object.keys(row.plugin_analysis).length > 0 && (
           <Card className="flex-1">
-            <CardContent className="py-2 px-3">
-              <strong className="small block mb-2">
+            <CardContent className="py-1.5 px-2.5">
+              <strong className="small block mb-1.5">
                 {translate('Plugin status')}
               </strong>
               {Object.entries(

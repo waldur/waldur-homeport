@@ -158,7 +158,7 @@ export const MessageGutter: FunctionComponent<
   const formatDate = isDesktop ? formatDateTime : formatShortDateTime;
 
   return (
-    <div className="message-gutter flex flex-col gap-2 text-quaternary">
+    <div className="message-gutter flex flex-col gap-1.5 text-quaternary">
       <div>
         <Badge variant={SENDER_BADGES[sender].variant} size="sm" tone="outline">
           {SENDER_BADGES[sender].label}
@@ -225,7 +225,7 @@ export const FeedbackStrip: FunctionComponent<
   return (
     <div
       className={classNames(
-        'message-feedback mt-1 px-3 py-2 rounded border small',
+        'message-feedback mt-1 px-2.5 py-1.5 rounded border small',
         positive ? 'bg-success-subtle' : 'bg-danger-subtle',
       )}
     >

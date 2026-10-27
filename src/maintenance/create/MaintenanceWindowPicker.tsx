@@ -138,7 +138,7 @@ export const MaintenanceWindowPicker: FC<FieldRenderProps<WindowValue>> = (
         meta={props.meta}
         onPartialStartChange={setPartialStart}
       />
-      <div className="flex flex-wrap gap-2 mt-2">
+      <div className="flex flex-wrap gap-1.5 mt-1.5">
         {chips.map((chip) => {
           const disabled = chip.requiresStart && !start;
           return (
@@ -163,12 +163,12 @@ export const MaintenanceWindowPicker: FC<FieldRenderProps<WindowValue>> = (
         />
       </div>
       {hasFullRange ? (
-        <div className="text-quaternary mt-2">
+        <div className="text-quaternary mt-1.5">
           {formatDuration(value[0] as Date, value[1] as Date)}
         </div>
       ) : null}
       {props.meta.touched && props.meta.error ? (
-        <div className="text-danger mt-2">{props.meta.error}</div>
+        <div className="text-danger mt-1.5">{props.meta.error}</div>
       ) : null}
     </div>
   );

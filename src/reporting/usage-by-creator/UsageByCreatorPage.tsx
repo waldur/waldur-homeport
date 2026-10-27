@@ -22,7 +22,7 @@ export const UsageByCreatorPage: FC = () => {
         value={activeTab}
         onValueChange={(k) => setActiveTab(k as TabKey)}
       >
-        <TabsList className="mb-6">
+        <TabsList className="mb-5">
           <TabsTrigger value="affiliation">
             {translate('By affiliation')}
           </TabsTrigger>

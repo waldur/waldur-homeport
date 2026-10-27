@@ -39,7 +39,7 @@ type Story = StoryObj<typeof Textarea>;
 
 export const Playground: Story = {
   render: (args) => (
-    <div className="max-w-[420px] p-6">
+    <div className="max-w-[420px] p-5">
       <Textarea aria-label="Playground" {...args} />
     </div>
   ),
@@ -76,7 +76,7 @@ export const States: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div className="flex max-w-[420px] flex-col gap-4 p-6">
+    <div className="flex max-w-[420px] flex-col gap-3 p-5">
       <Textarea aria-label="Small" size="sm" rows={2} placeholder="Small" />
       <Textarea aria-label="Medium" rows={2} placeholder="Medium (default)" />
       <Textarea aria-label="Large" size="lg" rows={2} placeholder="Large" />

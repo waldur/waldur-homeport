@@ -40,7 +40,7 @@ const NotificationTabs = ({
       value={activeKey}
       onValueChange={(key) => key && setActiveKey(key)}
     >
-      <TabsList className="mb-3">
+      <TabsList className="mb-2.5">
         {fields.value.map((template) => (
           <TabsTrigger key={template.path} value={template.path}>
             {formatHeader(template.path)}

@@ -69,7 +69,7 @@ export const TableFilterSheet: FC<TableFilterSheetProps> = ({
           }
         }}
       >
-        <div className="flex items-center justify-between gap-2 min-h-[70px] mx-6 py-2 border-b-[1px] border-b-secondary">
+        <div className="flex items-center justify-between gap-1.5 min-h-[70px] mx-5 py-1.5 border-b-[1px] border-b-secondary">
           <div>
             <SheetTitle className="text-lg">{translate('Filters')}</SheetTitle>
             <SheetDescription className="font-medium text-quaternary">

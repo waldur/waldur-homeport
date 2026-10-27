@@ -59,7 +59,7 @@ const ProviderCustomersContent: FC<{ providerUuid: string }> = ({
     <>
       <SummaryWidget stats={stats} />
 
-      <Row className="g-4 mb-6">
+      <Row className="g-4 mb-5">
         <Col xs={12}>
           <CustomerAcquisitionTrendChart monthly={data.monthly || []} />
         </Col>
@@ -85,7 +85,7 @@ export const ProviderCustomersPage: FC = () => {
         return (
           <>
             <ReportingTitle reportKey="provider-customers">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
                 <label className="text-quaternary text-xs whitespace-nowrap">
                   {translate('Provider')}:
                 </label>

@@ -47,14 +47,14 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
   });
 
   return (
-    <Card className="card-bordered mb-10">
+    <Card className="card-bordered mb-8">
       <Card.Header>
         <Card.Title className="h5">
           {translate('Component usage chart')}
         </Card.Title>
       </Card.Header>
       <Card.Body
-        className="mt-3"
+        className="mt-2.5"
         style={{ maxWidth: '500px', minWidth: '100%' }}
       >
         {loading ? (

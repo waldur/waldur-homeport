@@ -17,7 +17,7 @@ export const UpgradeNotificationDialog: FunctionComponent<
   <ModalDialog
     title={translate('Upgrade available')}
     iconNode={<InfoIcon size={28} color="#04bc38" weight="bold" />}
-    footerClassName="block px-4 pb-4"
+    footerClassName="block px-3 pb-3"
     footer={
       <CloseDialogButton
         label={translate('Close')}

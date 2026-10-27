@@ -125,7 +125,7 @@ export const PoolExpandableRow: FC<PoolExpandableRowProps> = ({ row }) => {
     <ExpandableContainer>
       <EmbeddedTabs
         defaultValue="members"
-        listClassName="mb-4"
+        listClassName="mb-3"
         tabs={[
           {
             key: 'members',

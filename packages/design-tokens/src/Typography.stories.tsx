@@ -21,9 +21,9 @@ type Story = StoryObj;
 
 export const TypeScale: Story = {
   render: () => (
-    <div className="p-6 bg-[var(--page-bg)] space-y-8 max-w-4xl">
+    <div className="p-5 bg-[var(--page-bg)] space-y-8 max-w-4xl">
       <div className="space-y-6">
-        <h3 className="text-base font-semibold text-primary border-b border-secondary pb-2">
+        <h3 className="text-base font-semibold text-primary border-b border-secondary pb-1.5">
           Headings
         </h3>
         <p className="text-[11px] text-quaternary -mt-2">
@@ -33,7 +33,7 @@ export const TypeScale: Story = {
           block, ensuring consistent rendering at non-standard root font sizes.
         </p>
 
-        <div className="flex items-baseline justify-between border-b border-secondary pb-3">
+        <div className="flex items-baseline justify-between border-b border-secondary pb-2.5">
           <span className="font-mono text-xs text-quinary w-24">
             Display (3xl)
           </span>
@@ -43,7 +43,7 @@ export const TypeScale: Story = {
           <span className="font-mono text-xs text-quinary">30px, pinned</span>
         </div>
 
-        <div className="flex items-baseline justify-between border-b border-secondary pb-3">
+        <div className="flex items-baseline justify-between border-b border-secondary pb-2.5">
           <span className="font-mono text-xs text-quinary w-24">H1 (2xl)</span>
           <h1 className="m-0 text-2xl font-bold text-primary flex-1">
             Projects and Allocations
@@ -51,7 +51,7 @@ export const TypeScale: Story = {
           <span className="font-mono text-xs text-quinary">24px, pinned</span>
         </div>
 
-        <div className="flex items-baseline justify-between border-b border-secondary pb-3">
+        <div className="flex items-baseline justify-between border-b border-secondary pb-2.5">
           <span className="font-mono text-xs text-quinary w-24">H2 (xl)</span>
           <h2 className="m-0 text-xl font-semibold text-primary flex-1">
             Virtual Machines Overview
@@ -59,7 +59,7 @@ export const TypeScale: Story = {
           <span className="font-mono text-xs text-quinary">20px, pinned</span>
         </div>
 
-        <div className="flex items-baseline justify-between border-b border-secondary pb-3">
+        <div className="flex items-baseline justify-between border-b border-secondary pb-2.5">
           <span className="font-mono text-xs text-quinary w-24">H3 (lg)</span>
           <h3 className="m-0 text-lg font-semibold text-primary flex-1">
             Resource Details & Quotas
@@ -67,7 +67,7 @@ export const TypeScale: Story = {
           <span className="font-mono text-xs text-quinary">18px, pinned</span>
         </div>
 
-        <div className="flex items-baseline justify-between border-b border-secondary pb-3">
+        <div className="flex items-baseline justify-between border-b border-secondary pb-2.5">
           <span className="font-mono text-xs text-quinary w-24">H4 (base)</span>
           <h4 className="m-0 text-base font-semibold text-primary flex-1">
             Network Configuration
@@ -77,11 +77,11 @@ export const TypeScale: Story = {
       </div>
 
       <div className="space-y-6">
-        <h3 className="text-base font-semibold text-primary border-b border-secondary pb-2">
+        <h3 className="text-base font-semibold text-primary border-b border-secondary pb-1.5">
           Body Text & Monospace
         </h3>
 
-        <div className="flex items-baseline justify-between border-b border-secondary pb-3">
+        <div className="flex items-baseline justify-between border-b border-secondary pb-2.5">
           <span className="font-mono text-xs text-quinary w-24">Body Base</span>
           <p className="m-0 text-base text-primary flex-1">
             Standard paragraph text used for primary documentation,
@@ -90,7 +90,7 @@ export const TypeScale: Story = {
           <span className="font-mono text-xs text-quinary">16px / Regular</span>
         </div>
 
-        <div className="flex items-baseline justify-between border-b border-secondary pb-3">
+        <div className="flex items-baseline justify-between border-b border-secondary pb-2.5">
           <span className="font-mono text-xs text-quinary w-24">
             Body Small
           </span>
@@ -101,7 +101,7 @@ export const TypeScale: Story = {
           <span className="font-mono text-xs text-quinary">14px / Regular</span>
         </div>
 
-        <div className="flex items-baseline justify-between border-b border-secondary pb-3">
+        <div className="flex items-baseline justify-between border-b border-secondary pb-2.5">
           <span className="font-mono text-xs text-quinary w-24">
             Caption (xs)
           </span>
@@ -112,9 +112,9 @@ export const TypeScale: Story = {
           <span className="font-mono text-xs text-quinary">12px / Medium</span>
         </div>
 
-        <div className="flex items-baseline justify-between pb-3">
+        <div className="flex items-baseline justify-between pb-2.5">
           <span className="font-mono text-xs text-quinary w-24">Monospace</span>
-          <Mono className="text-xs bg-primary-hover px-2 py-1 rounded text-primary flex-1 max-w-fit">
+          <Mono className="text-xs bg-primary-hover px-1.5 py-1 rounded text-primary flex-1 max-w-fit">
             ssh -i ~/.ssh/id_rsa user@192.168.1.100
           </Mono>
           <span className="font-mono text-xs text-quinary">Code / Mono</span>
@@ -142,13 +142,13 @@ const SIZES = typography.tokens
 export const Tokens: Story = {
   render: () => (
     <TokenPage title="Type tokens" intro={typography.doc}>
-      <div className="mb-6 rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-4">
+      <div className="mb-5 rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-3">
         <Mono className="text-xs text-primary">{fontStack?.name}</Mono>
         <Mono className="ml-3 text-[11px] text-tertiary">
           {fontStack && Object.values(fontStack.values)[0]}
         </Mono>
       </div>
-      <div className="grid grid-cols-[8rem_10rem_1fr] items-baseline gap-y-4 rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-4">
+      <div className="grid grid-cols-[8rem_10rem_1fr] items-baseline gap-y-4 rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-3">
         {SIZES.map((size) => (
           <div key={size} className="contents">
             <Mono className="text-xs text-primary">text-{size}</Mono>

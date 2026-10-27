@@ -93,7 +93,7 @@ const EncryptionBadge: FC<{ track: LiveKitTrack }> = ({ track }) => {
 const TrackRow: FC<{ track: LiveKitTrack }> = ({ track }) => {
   const resolution = formatTrackResolution(track);
   return (
-    <div className="flex items-center gap-2 text-quaternary text-xs">
+    <div className="flex items-center gap-1.5 text-quaternary text-xs">
       <TrackGlyph track={track} />
       <span>{formatTrackSource(track)}</span>
       {resolution && <span>{resolution}</span>}
@@ -106,7 +106,7 @@ const TrackRow: FC<{ track: LiveKitTrack }> = ({ track }) => {
 const ParticipantRow: FC<{ participant: LiveKitParticipant }> = ({
   participant,
 }) => (
-  <div className="border-b-[1px] border-b-secondary py-3">
+  <div className="border-b-[1px] border-b-secondary py-2.5">
     <div className="flex items-center justify-between">
       <span className="font-medium">{participant.identity}</span>
       <Badge
@@ -116,7 +116,7 @@ const ParticipantRow: FC<{ participant: LiveKitParticipant }> = ({
         {participant.state}
       </Badge>
     </div>
-    <div className="text-quaternary text-xs mb-2 flex items-center gap-2">
+    <div className="text-quaternary text-xs mb-1.5 flex items-center gap-1.5">
       {participant.is_publisher && (
         <span className="flex items-center gap-1">
           <BroadcastIcon weight="bold" /> {translate('Publisher')}

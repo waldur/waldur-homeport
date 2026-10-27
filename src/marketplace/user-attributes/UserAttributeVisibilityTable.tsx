@@ -40,7 +40,7 @@ export const UserAttributeVisibilityTable: FC<
   error,
   refetch,
   emptyHint,
-  className = 'card-bordered mb-7',
+  className = 'card-bordered mb-5.5',
   editGate = 'staff',
   disabled = false,
 }) => {

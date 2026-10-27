@@ -56,7 +56,7 @@ const getCoverage = (
       : { label: translate('Partial'), variant: 'warning' };
 
 const TAB_TRIGGER_BASE =
-  'flex items-center justify-between w-full min-h-[36px] py-[7px] px-3 border-y-0 border-r-0 border-l-2 rounded-none bg-transparent text-sm leading-5 text-left cursor-pointer transition-colors hover:text-brand disabled:opacity-40 disabled:cursor-not-allowed';
+  'flex items-center justify-between w-full min-h-[36px] py-[7px] px-2.5 border-y-0 border-r-0 border-l-2 rounded-none bg-transparent text-sm leading-5 text-left cursor-pointer transition-colors hover:text-brand disabled:opacity-40 disabled:cursor-not-allowed';
 
 /**
  * Custom hook managing search filtering across permission groups,
@@ -190,25 +190,25 @@ const PermissionOptionsPanel: FC<PermissionOptionsPanelProps> = ({
   return (
     <TabsContent
       value={activeGroup.label}
-      className="border-t md:border-t-0 md:border-l border-secondary pt-4 md:ps-4 outline-none"
+      className="border-t md:border-t-0 md:border-l border-secondary pt-3 md:ps-4 outline-none"
     >
-      <p className="text-quaternary text-sm font-medium leading-5 mb-4">
+      <p className="text-quaternary text-sm font-medium leading-5 mb-3">
         {activeGroup.label}
       </p>
       <Checkbox
         id="permission-select-all"
-        className="min-h-[22px] mb-2"
+        className="min-h-[22px] mb-1.5"
         size="sm"
         label={translate('Select all')}
         checked={allShownSelected}
         onCheckedChange={onToggleShown}
       />
-      <hr className="mt-0 mb-2" />
+      <hr className="mt-0 mb-1.5" />
       {shown.map((option: PermissionOption) => {
         const disabled = disabledSet.has(option.value);
         return (
           <Checkbox
-            className="min-h-[22px] mb-2"
+            className="min-h-[22px] mb-1.5"
             key={option.value}
             id={`permission-${option.value}`}
             size="sm"
@@ -282,7 +282,7 @@ export const PermissionField = (props: PermissionFieldProps) => {
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         placeholder={translate('Search...')}
-        className="mb-4"
+        className="mb-3"
       />
       <hr className="m-0" />
       {!hasMatches ? (
@@ -298,8 +298,8 @@ export const PermissionField = (props: PermissionFieldProps) => {
           orientation="vertical"
           className="grid grid-cols-1 md:grid-cols-2 flex-1"
         >
-          <div className="pt-4 md:pe-4">
-            <p className="text-quaternary text-sm font-medium leading-5 mb-4">
+          <div className="pt-3 md:pe-4">
+            <p className="text-quaternary text-sm font-medium leading-5 mb-3">
               {translate('Permissions')}
             </p>
             <TabsList

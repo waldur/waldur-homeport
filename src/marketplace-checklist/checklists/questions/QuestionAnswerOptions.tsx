@@ -106,7 +106,7 @@ const DraggableFieldsListGroup = ({
   return (
     <Card
       id="question-answer-options"
-      className="card-bordered bg-secondary py-3"
+      className="card-bordered bg-secondary py-2.5"
     >
       <FormField>
         <DndContext

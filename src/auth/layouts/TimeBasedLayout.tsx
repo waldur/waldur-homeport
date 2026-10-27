@@ -85,7 +85,7 @@ export const TimeBasedLayout = () => {
           <h2>{theme.greeting}</h2>
         </div>
         <div className="layout-time-based-card">
-          <div className="login-logo mb-3">
+          <div className="login-logo mb-2.5">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
               src={imageUrl}

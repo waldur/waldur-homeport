@@ -125,7 +125,7 @@ export const AccessSubnetImpactDialog: FC<AccessSubnetImpactDialogProps> = ({
       {unrestricted.length > 0 && (
         <AlertItem
           variant="warning"
-          className="mb-4"
+          className="mb-3"
           title={translate('{count} resource(s) are reachable from anywhere', {
             count: unrestricted.length,
           })}
@@ -137,7 +137,7 @@ export const AccessSubnetImpactDialog: FC<AccessSubnetImpactDialogProps> = ({
       {advisoryOnly.length > 0 && (
         <AlertItem
           variant="info"
-          className="mb-4"
+          className="mb-3"
           title={translate('{count} resource(s) are advisory only', {
             count: advisoryOnly.length,
           })}

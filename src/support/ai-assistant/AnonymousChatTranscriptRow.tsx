@@ -71,7 +71,7 @@ const ReviewVerdict: FunctionComponent<{
           outputTokens={feedback.llm_judge_output_tokens}
         />
         <div className="message-body">
-          <div className="flex items-center flex-wrap gap-2 mb-1">
+          <div className="flex items-center flex-wrap gap-1.5 mb-1">
             {score != null && (
               <Badge
                 variant={getResolutionBadgeVariant(score)}
@@ -97,7 +97,7 @@ const ReviewVerdict: FunctionComponent<{
               </Badge>
             )}
           </div>
-          <div className="p-3 rounded chat-log-bubble">
+          <div className="p-2.5 rounded chat-log-bubble">
             {feedback.llm_summary || (
               <span className="text-quaternary">
                 {translate('(no summary)')}
@@ -108,7 +108,7 @@ const ReviewVerdict: FunctionComponent<{
             Boolean(feedback.llm_hallucination_details) && (
               <AlertItem
                 variant="error"
-                className="mt-2"
+                className="mt-1.5"
                 title={translate('Unsupported claim')}
                 body={feedback.llm_hallucination_details}
               />
@@ -117,7 +117,7 @@ const ReviewVerdict: FunctionComponent<{
       </div>
       {/* Same weight as the hairline between turns, just darker — enough to
           mark where commentary ends and the conversation begins. */}
-      <div className="border-b-[1px] border-[var(--border-divider-strong)] mx-3" />
+      <div className="border-b-[1px] border-[var(--border-divider-strong)] mx-2.5" />
     </>
   );
 };
@@ -156,7 +156,7 @@ const InteractionTurns: FunctionComponent<{
         />
         <div className="message-body">
           {interaction.is_flagged && (
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-center gap-1.5 mb-1">
               <Tooltip
                 label={formatDetectionCategories(
                   interaction.injection_categories,
@@ -184,7 +184,7 @@ const InteractionTurns: FunctionComponent<{
             </div>
           )}
           <div
-            className={classNames('p-3 rounded chat-log-bubble', {
+            className={classNames('p-2.5 rounded chat-log-bubble', {
               'border-l-[1px] border-3 border-danger': interaction.is_flagged,
             })}
           >
@@ -209,7 +209,7 @@ const InteractionTurns: FunctionComponent<{
         </MessageGutter>
         <div className="message-body">
           <div
-            className={classNames('p-3 rounded chat-log-bubble', {
+            className={classNames('p-2.5 rounded chat-log-bubble', {
               'border-l-[1px] border-l-secondary border-3': sentiment !== null,
               'border-success': sentiment === 'positive',
               'border-danger': sentiment === 'negative',
@@ -232,7 +232,7 @@ const InteractionTurns: FunctionComponent<{
               category={interaction.feedback?.category}
             >
               {Boolean(interaction.feedback?.comment) && (
-                <span className="fst-italic ms-2">
+                <span className="fst-italic ms-1.5">
                   “{interaction.feedback?.comment}”
                 </span>
               )}
@@ -286,7 +286,7 @@ export const AnonymousChatTranscriptRow: FunctionComponent<{
     <ExpandableContainer>
       <OfflineBlockContext.Provider value={true}>
         <div className="flex flex-col">
-          <div className="flex items-center gap-2 pb-2 border-b-[1px] border-b-secondary">
+          <div className="flex items-center gap-1.5 pb-1.5 border-b-[1px] border-b-secondary">
             <strong>{row.user_slug || row.session_id}</strong>
           </div>
           {verdict?.llm_reviewed_at && (

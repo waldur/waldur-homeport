@@ -45,7 +45,7 @@ export const OrganizationCreateStep3: FunctionComponent<
     if (!validationResult) return null;
     if (identityReview) {
       return (
-        <div className="validation-icon-wrapper mb-7">
+        <div className="validation-icon-wrapper mb-5.5">
           <ClockCountdownIcon
             size={34}
             weight="bold"
@@ -58,13 +58,13 @@ export const OrganizationCreateStep3: FunctionComponent<
     switch (validationResult.status) {
       case 'verified':
         return (
-          <div className="validation-icon-wrapper mb-7">
+          <div className="validation-icon-wrapper mb-5.5">
             <CheckCircleIcon size={34} weight="bold" className="text-success" />
           </div>
         );
       case 'escalated':
         return (
-          <div className="validation-icon-wrapper mb-7">
+          <div className="validation-icon-wrapper mb-5.5">
             <WarningCircleIcon
               size={34}
               weight="bold"
@@ -141,14 +141,14 @@ export const OrganizationCreateStep3: FunctionComponent<
   };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       <Card className="border-0 shadow-sm">
         <Card.Body className="text-center position-relative overflow-hidden organization-validation-result">
           <RadialBackground className="icon-background" />
           {validationLoading ? (
             <>
               <LoadingSpinner />
-              <h5 className="mt-6 mb-3">
+              <h5 className="mt-5 mb-2.5">
                 {translate('Verifying your company...')}
               </h5>
               <p className="text-quaternary">
@@ -160,11 +160,8 @@ export const OrganizationCreateStep3: FunctionComponent<
           ) : validationResult ? (
             <>
               {getStatusIcon()}
-              <h3 className="mb-3 font-medium">{getStatusTitle()}</h3>
-              <p
-                className="text-quaternary mb-0 text-base mb-20"
-                style={{ maxWidth: '500px', margin: '0 auto' }}
-              >
+              <h3 className="mb-2.5 font-medium">{getStatusTitle()}</h3>
+              <p className="text-quaternary mx-auto mb-16 max-w-[500px] text-base">
                 {getStatusMessage()}
               </p>
             </>

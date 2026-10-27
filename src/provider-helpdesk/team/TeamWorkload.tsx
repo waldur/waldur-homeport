@@ -14,12 +14,12 @@ export const TeamWorkload: FC<{ helpdeskUuid: string }> = ({
   const { data: workload = [] } = useTeamWorkload(helpdeskUuid);
   if (!workload.length) return null;
   return (
-    <div className="row g-3 mb-4">
+    <div className="row g-3 mb-3">
       {workload.map((member) => (
         <div className="col-sm-6 col-lg-3" key={member.uuid}>
           <div className="card card-bordered h-full">
             <div className="card-body">
-              <div className="flex justify-between items-center mb-2">
+              <div className="flex justify-between items-center mb-1.5">
                 <strong className="truncate">{member.user_full_name}</strong>
                 {!member.has_capacity && (
                   <Badge variant="danger" shape="pill" tone="outline">

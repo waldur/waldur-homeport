@@ -83,7 +83,7 @@ const RoomActions: FC<{
   if (!PromotedAction && groups.length === 0) return null;
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1.5">
       {PromotedAction && (
         <PromotedAction
           row={room}
@@ -132,7 +132,7 @@ const HistoryExportsCard: FC<{
       title={translate('History exports')}
       className="card-bordered"
       actions={
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           {isActive ? (
             <div ref={setRefreshSlot} className="flex items-center" />
           ) : (
@@ -171,7 +171,7 @@ const RoomDetails: FC<{
   <>
     <FormTable.Card
       title={translate('Chat room')}
-      className="card-bordered mb-6"
+      className="card-bordered mb-5"
       actions={
         <RoomActions
           room={room}

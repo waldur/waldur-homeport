@@ -28,10 +28,10 @@ export const EventSubscriptionQueuesCard: FC = () => {
           : translate('Loading...')
       }
       defaultOpen={false}
-      className="mb-6"
+      className="mb-5"
     >
       {isLoading ? (
-        <div className="text-center py-4">
+        <div className="text-center py-3">
           <LoadingSpinner />
         </div>
       ) : data && data.length > 0 ? (

@@ -78,7 +78,7 @@ export const StaffPasskeysList: FunctionComponent<{ user? }> = ({ user }) => {
           body={translate(
             'Revoking it leaves the user with none. If passkeys are required for their account they will be held at the enrollment page until they add another, so make sure they can reach a device first.',
           )}
-          className="mb-4"
+          className="mb-3"
         />
       )}
       <Table

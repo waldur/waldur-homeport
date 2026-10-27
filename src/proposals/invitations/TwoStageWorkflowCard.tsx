@@ -13,17 +13,17 @@ interface StepBoxProps {
 }
 
 const StepBox: FC<StepBoxProps> = ({ step, title, description, items }) => (
-  <div className="flex-1 border rounded p-4">
-    <div className="flex items-center gap-2 mb-2">
+  <div className="flex-1 border rounded p-3">
+    <div className="flex items-center gap-1.5 mb-1.5">
       <h5 className="mb-0">{title}</h5>
       <Badge variant="success" shape="pill" tone="outline">
         {translate('Step {n}', { n: String(step) })}
       </Badge>
     </div>
-    <p className="text-quaternary mb-3">{description}</p>
-    <ul className="list-unstyled flex flex-col gap-2 mb-0">
+    <p className="text-quaternary mb-2.5">{description}</p>
+    <ul className="list-unstyled flex flex-col gap-1.5 mb-0">
       {items.map((item) => (
-        <li key={item} className="flex items-start gap-2">
+        <li key={item} className="flex items-start gap-1.5">
           <CheckCircleIcon
             size={18}
             weight="bold"
@@ -43,9 +43,9 @@ export const TwoStageWorkflowCard: FC = () => (
       'The review process has two stages. Understanding these stages helps you know what to expect.',
     )}
     defaultOpen
-    className="mb-6"
+    className="mb-5"
   >
-    <div className="flex flex-col md:flex-row items-stretch gap-4">
+    <div className="flex flex-col md:flex-row items-stretch gap-3">
       <StepBox
         step={1}
         title={translate('Join the pool')}

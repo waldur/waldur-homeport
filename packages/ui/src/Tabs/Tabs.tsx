@@ -340,7 +340,7 @@ export const TabsTrigger = forwardRef<
             size={16}
             weight="bold"
             aria-hidden="true"
-            className="ms-2 shrink-0 text-quinary"
+            className="ms-1.5 shrink-0 text-quinary"
           />
         ) : null}
         <TabCount

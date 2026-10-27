@@ -24,7 +24,7 @@ const SupportSubMenuItem = ({ title, onCopied }) =>
         className="overflow-hidden"
       >
         <span className="grow truncate">{title}</span>
-        <span className="ms-2 shrink-0" aria-hidden="true">
+        <span className="ms-1.5 shrink-0" aria-hidden="true">
           <CopyIcon weight="bold" />
         </span>
       </Menu.CopyItem>

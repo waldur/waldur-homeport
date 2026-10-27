@@ -69,7 +69,7 @@ export interface ScrollSpyNavProps extends Omit<
 }
 
 export const SCROLLSPY_NAV_LINK_BASE =
-  'w-full flex-1 block py-3 px-4 m-0 font-semibold border-y-0 border-r-0 border-l-2 rounded-none transition-colors cursor-pointer text-sm leading-5 no-underline [&>*]:w-full';
+  'w-full flex-1 block py-2.5 px-3 m-0 font-semibold border-y-0 border-r-0 border-l-2 rounded-none transition-colors cursor-pointer text-sm leading-5 no-underline [&>*]:w-full';
 
 export const SCROLLSPY_NAV_LINK_ACTIVE =
   'border-l-brand text-brand font-semibold active';
@@ -174,7 +174,7 @@ export const ScrollSpyNav = forwardRef<HTMLElement, ScrollSpyNavProps>(
         className={className}
         {...rest}
       >
-        <ul className="flex flex-col gap-4 m-0 p-0 list-none">
+        <ul className="flex flex-col gap-3 m-0 p-0 list-none">
           {items.map((item) => {
             const isActive =
               currentActiveKey === item.key ||

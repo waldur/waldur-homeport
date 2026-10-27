@@ -310,7 +310,7 @@ export const ChecklistFileUpload: FC<ChecklistFileUploadProps> = ({
       )}
 
       {isProcessing && (
-        <div className="flex items-center gap-2 mt-2 text-quaternary">
+        <div className="flex items-center gap-1.5 mt-1.5 text-quaternary">
           <LoadingSpinner />
           <span>{translate('Processing files...')}</span>
         </div>

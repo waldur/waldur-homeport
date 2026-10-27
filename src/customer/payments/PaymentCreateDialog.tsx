@@ -51,7 +51,7 @@ export const PaymentCreateDialog: FunctionComponent<
             title={translate('Add payment')}
             footer={
               <>
-                <CloseDialogButton className="me-3" />
+                <CloseDialogButton className="me-2.5" />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}

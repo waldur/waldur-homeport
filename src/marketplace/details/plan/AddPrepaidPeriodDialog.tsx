@@ -80,7 +80,7 @@ const PrepaidFormContent = ({
       />
 
       {isCustomRange ? (
-        <div className="mb-4">
+        <div className="mb-3">
           <div className="row">
             <div className="col-md-6">
               <FormField>

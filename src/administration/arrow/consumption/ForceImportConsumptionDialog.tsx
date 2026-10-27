@@ -147,13 +147,13 @@ export const ForceImportConsumptionDialog = ({
 
   const renderFormPhase = () => (
     <>
-      <p className="text-quaternary mb-4">
+      <p className="text-quaternary mb-3">
         {translate(
           'Force import consumption data from Arrow, including finalized periods. Select a resource and date range to preview.',
         )}
       </p>
 
-      <FormField className="mb-3">
+      <FormField className="mb-2.5">
         <FormLabel>{translate('Resource')}</FormLabel>
         <AsyncSelect
           placeholder={translate('Select resource...')}
@@ -174,7 +174,7 @@ export const ForceImportConsumptionDialog = ({
         </FormText>
       </FormField>
 
-      <FormField className="mb-3">
+      <FormField className="mb-2.5">
         <FormLabel>{translate('From period')}</FormLabel>
         <MonthPicker
           value={parseDateValue(periodFrom)}
@@ -185,7 +185,7 @@ export const ForceImportConsumptionDialog = ({
         />
       </FormField>
 
-      <FormField className="mb-3">
+      <FormField className="mb-2.5">
         <FormLabel>{translate('To period')}</FormLabel>
         <MonthPicker
           value={parseDateValue(periodTo)}
@@ -200,7 +200,7 @@ export const ForceImportConsumptionDialog = ({
 
   const renderPreviewPhase = () => (
     <>
-      <p className="text-quaternary mb-3">
+      <p className="text-quaternary mb-2.5">
         {translate('Preview of consumption data from Arrow for {resource}.', {
           resource: selectedResource?.name,
         })}
@@ -270,10 +270,10 @@ export const ForceImportConsumptionDialog = ({
         <AlertItem
           type="floating"
           variant="warning"
-          className="mt-3"
+          className="mt-2.5"
           title={translate('Some periods had errors:')}
           body={
-            <ul className="mb-0 mt-2">
+            <ul className="mb-0 mt-1.5">
               {previewMutation.data.errors.map((err: any, idx: number) => (
                 <li key={idx}>
                   {err.period}: {err.error}
@@ -296,7 +296,7 @@ export const ForceImportConsumptionDialog = ({
           }
           title={translate('Force import completed')}
           body={
-            <ul className="mb-0 mt-2">
+            <ul className="mb-0 mt-1.5">
               <li>
                 {translate('Periods synced')}:{' '}
                 {importMutation.data.periods_synced}
@@ -325,10 +325,10 @@ export const ForceImportConsumptionDialog = ({
         <AlertItem
           type="floating"
           variant="warning"
-          className="mt-3"
+          className="mt-2.5"
           title={translate('Some periods had errors:')}
           body={
-            <ul className="mb-0 mt-2">
+            <ul className="mb-0 mt-1.5">
               {importMutation.data.errors.map((err: any, idx: number) => (
                 <li key={idx}>
                   {err.period}: {err.error}

@@ -23,7 +23,7 @@ const DetailsValue: FC<{ value: unknown }> = ({ value }) => {
       return <span className="text-quaternary">{translate('Empty list')}</span>;
     }
     return (
-      <ul className="mb-0 ps-4">
+      <ul className="mb-0 ps-3">
         {value.map((item, index) => (
           <li key={index}>
             <DetailsValue value={item} />
@@ -44,7 +44,7 @@ const DetailsValue: FC<{ value: unknown }> = ({ value }) => {
         {entries.map(([key, item]) => (
           <Fragment key={key}>
             <dt className="col-sm-4 text-break">{humanizeDetailsKey(key)}</dt>
-            <dd className="col-sm-8 mb-2 text-break">
+            <dd className="col-sm-8 mb-1.5 text-break">
               <DetailsValue value={item} />
             </dd>
           </Fragment>
@@ -74,7 +74,7 @@ export const MergeCheckDetailsDialog: FC<MergeCheckDetailsDialogProps> = ({
   <ModalDialog
     title={translate('Verification check')}
     subtitle={
-      <span className="flex flex-wrap items-center gap-2">
+      <span className="flex flex-wrap items-center gap-1.5">
         <code className="text-xs">{check.code}</code>
         <StateIndicator
           label={check.passed ? translate('Passed') : translate('Failed')}
@@ -87,9 +87,9 @@ export const MergeCheckDetailsDialog: FC<MergeCheckDetailsDialogProps> = ({
     footer={<CloseDialogButton label={translate('Close')} />}
   >
     <DetailsValue value={check.details ?? null} />
-    <details className="mt-5" data-testid="merge-check-raw">
+    <details className="mt-4" data-testid="merge-check-raw">
       <summary className="text-quaternary">{translate('Raw payload')}</summary>
-      <pre className="text-xs mb-0 mt-2 overflow-auto">
+      <pre className="text-xs mb-0 mt-1.5 overflow-auto">
         {JSON.stringify(check.details ?? null, null, 2)}
       </pre>
     </details>

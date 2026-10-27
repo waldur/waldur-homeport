@@ -119,7 +119,7 @@ export const PublishRoundResultsDialog: FC<PublishRoundResultsDialogProps> = ({
             'They stay held and their applicants have not been told. Retry once the cause is fixed.',
           )}
         />
-        <ul className="mt-4" data-testid="failed-proposals">
+        <ul className="mt-3" data-testid="failed-proposals">
           {failed.map((proposal) => (
             <li key={proposal.uuid}>{proposal.name}</li>
           ))}
@@ -199,7 +199,7 @@ export const PublishRoundResultsDialog: FC<PublishRoundResultsDialogProps> = ({
                   required
                   validate={required}
                   maxLength={1000}
-                  className="mt-4"
+                  className="mt-3"
                 />
               </>
             ) : null}

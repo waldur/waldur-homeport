@@ -136,7 +136,7 @@ export const MergeEntriesView: FC<MergeEntriesViewProps> = ({
         <SectionHeading
           title={translate('What the merge changes')}
           help={getChangesHelp()}
-          className="mb-3"
+          className="mb-2.5"
         />
         <p className="text-quaternary mb-0">{translate('Nothing to move.')}</p>
       </section>
@@ -144,13 +144,13 @@ export const MergeEntriesView: FC<MergeEntriesViewProps> = ({
   }
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       {areas.map((area) => (
         <section key={area.key}>
           <SectionHeading
             title={area.title}
             help={getAreaHelp(area.key) ?? getChangesHelp()}
-            className="mb-3"
+            className="mb-2.5"
           />
           <StaticTable<MergeEntryRow>
             table={`${tableId}-area-${area.key}`}

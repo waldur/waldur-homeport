@@ -70,7 +70,7 @@ const renderEvaluators = (row: CallWorkflowStep) => {
   return (
     <ul className="list-unstyled mb-0">
       {users.map((user) => (
-        <li key={user.uuid} className="flex items-center gap-2">
+        <li key={user.uuid} className="flex items-center gap-1.5">
           <span>{user.full_name || user.username}</span>
           <span className="text-quaternary">
             {user.username} · {user.email}

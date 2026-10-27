@@ -16,7 +16,7 @@ export const PublicOfferingImages: FunctionComponent<
   PublicOfferingImagesProps
 > = ({ offering }) => {
   return offering.screenshots.length ? (
-    <Card className="card-bordered mb-10" id="images">
+    <Card className="card-bordered mb-8" id="images">
       <Card.Body>
         <PublicOfferingCardTitle>{translate('Images')}</PublicOfferingCardTitle>
         <ImagesTab images={offering.screenshots} />

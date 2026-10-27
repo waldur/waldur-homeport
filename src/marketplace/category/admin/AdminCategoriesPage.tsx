@@ -106,7 +106,7 @@ export const AdminCategoriesPage: FunctionComponent<
           orderField: 'title',
           render: ({ row }) => (
             <>
-              <div className="inline-block align-middle me-2">
+              <div className="inline-block align-middle me-1.5">
                 <Avatar name={row.title} src={row.icon} />
               </div>
               <CategoryLink item={row}>{row.title}</CategoryLink>
@@ -123,7 +123,7 @@ export const AdminCategoriesPage: FunctionComponent<
                   <ArrowsClockwiseIcon
                     size={16}
                     weight="bold"
-                    className="animate-spin me-2"
+                    className="animate-spin me-1.5"
                   />
                 );
               } else if (errorGroups) {

@@ -50,7 +50,7 @@ export const ChangelogSummaryDialog: FunctionComponent<
         </>
       }
     >
-      <div className="mb-4">
+      <div className="mb-3">
         <p className="text-base mb-1">
           {currentVersion} &rarr; <strong>{latestVersion}</strong>
         </p>
@@ -63,7 +63,7 @@ export const ChangelogSummaryDialog: FunctionComponent<
         <AlertItem
           variant={alert.max_urgency === 'critical' ? 'error' : 'warning'}
           type="floating"
-          className="mb-3"
+          className="mb-2.5"
           title={
             alert.count === 1
               ? translate('1 security fix, {urgency} urgency', { urgency })
@@ -76,7 +76,7 @@ export const ChangelogSummaryDialog: FunctionComponent<
       )}
 
       {summary.has_breaking_changes && (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <Badge
             variant={ENTRY_TYPE_CONFIG.breaking.variant}
             shape="pill"

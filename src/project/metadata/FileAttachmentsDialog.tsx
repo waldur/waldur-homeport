@@ -33,7 +33,7 @@ export const FileAttachmentsDialog: FC<FileAttachmentsDialogProps> = ({
     title={translate('File attachments')}
     footer={<CloseDialogButton className="min-w-[125px]" />}
   >
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-2.5">
       {resolve.files.map((file) => (
         <BaseButton
           key={file.stored_file_id}

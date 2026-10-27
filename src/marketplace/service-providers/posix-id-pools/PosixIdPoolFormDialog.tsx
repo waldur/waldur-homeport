@@ -109,13 +109,13 @@ const RangeGuidance: FC<{ pool?: PosixIdPool; siblings: PosixIdPool[] }> = ({
   return (
     <AlertItem
       variant="info"
-      className="mb-5"
+      className="mb-4"
       title={translate('Allowed values: {min} to {max}', {
         min: POSIX_ID_MIN,
         max: POSIX_ID_MAX,
       })}
       body={
-        <ul className="mb-0 ps-4">
+        <ul className="mb-0 ps-3">
           <li>
             {translate(
               'Values below {min} are reserved for system accounts on the hosts.',
@@ -196,8 +196,8 @@ const GroupRangeFields: FC<{ pool?: PosixIdPool; submitting: boolean }> = ({
   submitting,
 }) => (
   <>
-    <h6 className="mt-2 mb-1">{translate('Project group GIDs')}</h6>
-    <p className="text-quaternary text-xs mb-3">
+    <h6 className="mt-1.5 mb-1">{translate('Project group GIDs')}</h6>
+    <p className="text-quaternary text-xs mb-2.5">
       {translate(
         'Optional. Reserves GIDs for the one POSIX group each project gets at this service provider. Without it, project groups take GIDs from the GID range shared with users’ primary groups. Set it before enabling project groups in the account settings.',
       )}
@@ -221,7 +221,10 @@ const GroupRangeFields: FC<{ pool?: PosixIdPool; submitting: boolean }> = ({
       </div>
     </div>
     {pool?.next_group_gid != null && (
-      <p className="text-quaternary text-xs mb-3" data-testid="next-group-gid">
+      <p
+        className="text-quaternary text-xs mb-2.5"
+        data-testid="next-group-gid"
+      >
         {translate('Next project group GID: {next}', {
           next: pool.next_group_gid,
         })}
@@ -363,7 +366,7 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
                 <AlertItem
                   variant="error"
                   title={submitError}
-                  className="mb-4"
+                  className="mb-3"
                 />
               )}
               {!isEdit && (
@@ -373,7 +376,7 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
                 />
               )}
               <RangeGuidance pool={pool} siblings={siblings} />
-              <p className="text-quaternary text-xs mb-3">
+              <p className="text-quaternary text-xs mb-2.5">
                 {translate(
                   'Define at least one range. Leave a range empty to source it externally — for example UIDs from an OIDC claim while GIDs are allocated by Waldur.',
                 )}

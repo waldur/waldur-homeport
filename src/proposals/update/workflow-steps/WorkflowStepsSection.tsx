@@ -75,7 +75,7 @@ const StepNameCell = ({ row }: { row: CallWorkflowStep }) => {
   // be noise on a table whose rows are mostly enabled.
   const disabled = !row.is_enabled && !def?.mandatory;
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1.5">
       {def?.mandatory && (
         <Tooltip label={translate('Mandatory step. Cannot be removed.')}>
           <LockSimpleIcon size={14} weight="bold" className="text-quaternary" />
@@ -269,7 +269,7 @@ export const WorkflowStepsSection: FC<WorkflowStepsSectionProps> = ({
         expandableRow={WorkflowStepExpandableRow}
         rowClass={rowClass}
       />
-      <div className="mt-5">
+      <div className="mt-4">
         <WorkflowSequencePreview
           steps={sortedRows}
           onReset={viewOnly ? undefined : () => tableProps.fetch(true)}

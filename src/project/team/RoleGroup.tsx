@@ -60,9 +60,9 @@ const RoleOption: FunctionComponent<OptionProps<Role>> = (props) => {
         <span>
           {label}
           {qualifier && (
-            <span className="text-quaternary ms-2 small">{qualifier}</span>
+            <span className="text-quaternary ms-1.5 small">{qualifier}</span>
           )}
-          <SramRoleBadge roleName={props.data.name} className="ms-2" />
+          <SramRoleBadge roleName={props.data.name} className="ms-1.5" />
         </span>
         <span
           style={{

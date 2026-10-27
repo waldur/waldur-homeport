@@ -69,7 +69,7 @@ export function SidebarMenuSubItem({
 }
 
 const sidebarMenuSubButtonVariants = cva(
-  'flex h-10 w-full items-center gap-3 overflow-hidden rounded-none pl-11 pr-[12px] py-[7px] text-left text-sm font-medium text-[var(--nav-item-text)] transition-colors',
+  'flex h-10 w-full items-center gap-2.5 overflow-hidden rounded-none pl-11 pr-[12px] py-[7px] text-left text-sm font-medium text-[var(--nav-item-text)] transition-colors',
   {
     variants: {
       active: {
@@ -128,7 +128,7 @@ export function SidebarMenuSeparator({
   return (
     <li
       aria-hidden="true"
-      className={cn('my-2 h-px bg-[var(--nav-separator)]', className)}
+      className={cn('my-1.5 h-px bg-[var(--nav-separator)]', className)}
       {...props}
     />
   );

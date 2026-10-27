@@ -29,10 +29,10 @@ export const RabbitMQPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
 
   if (isLoading || !data) {
     return (
-      <div className="pt-5">
-        <div className="text-center py-10">
+      <div className="pt-4">
+        <div className="text-center py-8">
           <LoadingSpinner />
-          <p className="text-quaternary mt-4">
+          <p className="text-quaternary mt-3">
             {translate('Fetching RabbitMQ statistics, please standby...')}
           </p>
         </div>
@@ -45,7 +45,7 @@ export const RabbitMQPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
     const is503 = errorMessage.includes('503');
 
     return (
-      <div className="pt-5">
+      <div className="pt-4">
         <AlertItem
           variant="error"
           type="floating"
@@ -67,7 +67,7 @@ export const RabbitMQPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
   }
 
   const panelActions = (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-3">
       <RefreshButton refetch={refetch} isLoading={isRefetching} />
       {isStaff && (
         <>
@@ -79,7 +79,7 @@ export const RabbitMQPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
   );
 
   return (
-    <div className="pt-5">
+    <div className="pt-4">
       <TabToolbar portal={portal}>{panelActions}</TabToolbar>
       <RabbitMQOverviewCards data={data} />
       <RabbitMQClusterOverview />

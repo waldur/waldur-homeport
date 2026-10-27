@@ -36,7 +36,7 @@ const AccordionSection: FC<AccordionSectionProps> = ({
       style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       <div
-        className="flex items-center justify-between px-5 py-4 cursor-pointer"
+        className="flex items-center justify-between px-4 py-3 cursor-pointer"
         onClick={() => setOpen((v) => !v)}
         role="button"
         tabIndex={0}
@@ -47,7 +47,7 @@ const AccordionSection: FC<AccordionSectionProps> = ({
           }
         }}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <span className="text-brand">{icon}</span>
           <span className="font-medium text-sm">{title}</span>
         </div>
@@ -58,7 +58,7 @@ const AccordionSection: FC<AccordionSectionProps> = ({
         )}
       </div>
       {open && (
-        <div className="px-5 pb-5 pt-0">
+        <div className="px-4 pb-4 pt-0">
           <div className="text-quaternary leading-relaxed">{children}</div>
         </div>
       )}
@@ -70,12 +70,12 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
   onAcknowledge,
 }) => {
   return (
-    <div className="flex flex-col items-center grow overflow-auto py-8 px-5">
-      <div className="text-center mb-8">
-        <div className="mb-4">
+    <div className="flex flex-col items-center grow overflow-auto py-6 px-4">
+      <div className="text-center mb-6">
+        <div className="mb-3">
           <SparkleIcon size={32} weight="duotone" className="text-brand" />
         </div>
-        <h2 className="font-medium text-lg mb-2">
+        <h2 className="font-medium text-lg mb-1.5">
           {translate('Before you begin')}
         </h2>
         <p className="text-quaternary text-sm mb-0">
@@ -86,7 +86,7 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
       </div>
 
       <div
-        className="flex flex-col gap-3 w-full mb-8"
+        className="flex flex-col gap-2.5 w-full mb-6"
         style={{ maxWidth: 520 }}
       >
         <AccordionSection
@@ -94,7 +94,7 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
           title={translate('Experimental AI & external processing')}
           defaultOpen
         >
-          <p className="mb-4">
+          <p className="mb-3">
             {translate(
               'This assistant is powered by AI and may produce inaccurate or incomplete responses. Always verify critical information before acting on it.',
             )}
@@ -110,12 +110,12 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
           icon={<LockIcon size={18} weight="duotone" />}
           title={translate('Privacy & data security: what not to share')}
         >
-          <p className="mb-3">
+          <p className="mb-2.5">
             {translate(
               'For your security, never share the following types of information:',
             )}
           </p>
-          <ul className="mb-0 ps-4">
+          <ul className="mb-0 ps-3">
             <li>{translate('SSH keys')}</li>
             <li>{translate('API tokens and secrets')}</li>
             <li>{translate('Passwords and credentials')}</li>
@@ -129,7 +129,7 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
           icon={<SparkleIcon size={18} weight="duotone" />}
           title={translate('Safe usage & support')}
         >
-          <ul className="mb-4 ps-4">
+          <ul className="mb-3 ps-3">
             <li>
               {translate(
                 'Verify commands and configurations before executing them.',
@@ -152,7 +152,7 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
       <div className="w-full" style={{ maxWidth: 520 }}>
         <BaseButton
           variant="primary"
-          className="w-full py-3 font-medium text-sm"
+          className="w-full py-2.5 font-medium text-sm"
           onClick={onAcknowledge}
           label={translate('I understand')}
         />

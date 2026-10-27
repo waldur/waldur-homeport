@@ -66,7 +66,7 @@ const parseCleared = (value) => value ?? '';
 // text: one line on the card and a Show more link to the rest.
 const AccountSettingsIntroDialog: FC = () => (
   <ModalBody>
-    <ModalTitle as="h5" className="mb-3 text-[15px] leading-[1.555]">
+    <ModalTitle as="h5" className="mb-2.5 text-[15px] leading-[1.555]">
       {translate('Account settings')}
     </ModalTitle>
     <p>
@@ -120,7 +120,7 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
         )
       }
     >
-      <p className="text-quaternary mb-6">
+      <p className="text-quaternary mb-5">
         {translate(
           'How the accounts people get on your offerings are named and set up.',
         )}{' '}

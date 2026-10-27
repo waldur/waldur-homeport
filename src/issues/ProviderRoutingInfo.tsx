@@ -59,12 +59,12 @@ export const ProviderRoutingInfo: FC<{ issue: Issue }> = ({ issue }) => {
   ];
 
   return (
-    <Card className="card-bordered mb-5">
+    <Card className="card-bordered mb-4">
       <Card.Header>
         <Card.Title>{translate('Provider routing')}</Card.Title>
       </Card.Header>
       <Card.Body>
-        <div className="flex flex-wrap gap-2 mb-3">
+        <div className="flex flex-wrap gap-1.5 mb-2.5">
           <Badge variant="info" shape="pill" tone="outline">
             {translate('Routed')}
           </Badge>

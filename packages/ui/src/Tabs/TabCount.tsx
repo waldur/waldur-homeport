@@ -16,7 +16,7 @@ export const TabCount = ({
       variant={active ? 'primary' : 'neutral'}
       shape="pill"
       tone="outline"
-      className="ms-2"
+      className="ms-1.5"
     >
       {loading ? <LoadingSpinner size={12} /> : count}
     </Badge>

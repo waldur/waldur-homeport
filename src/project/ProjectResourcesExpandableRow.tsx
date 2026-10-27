@@ -156,9 +156,9 @@ export const ResourceUsageLimits: FC<{
   const hiddenCount = items.length - INLINE_COMPONENTS;
   return (
     // Fixed name and minimum figure widths line the components up across rows.
-    <div className="flex items-center gap-2 text-xs text-nowrap">
+    <div className="flex items-center gap-1.5 text-xs text-nowrap">
       {items.slice(0, INLINE_COMPONENTS).map((item, index) => (
-        <span key={item.component.type} className="flex items-center gap-2">
+        <span key={item.component.type} className="flex items-center gap-1.5">
           {index > 0 && <span className="text-tertiary">·</span>}
           <span
             className="text-tertiary w-28 truncate"
@@ -187,7 +187,7 @@ export const ResourceUsageLimits: FC<{
             side="bottom"
             align="end"
             sideOffset={4}
-            className="p-3 max-h-(--radix-popover-content-available-height) overflow-y-auto"
+            className="p-2.5 max-h-(--radix-popover-content-available-height) overflow-y-auto"
           >
             <div className={usageGridClassName}>
               {items.map((item) => (

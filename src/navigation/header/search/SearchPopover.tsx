@@ -47,13 +47,15 @@ interface TabContentProps
 }
 
 const SectionTitle = ({ title, className = '' }) => (
-  <h6 className={classNames('text-secondary font-medium mb-3 mx-5', className)}>
+  <h6
+    className={classNames('text-secondary font-medium mb-2.5 mx-4', className)}
+  >
     {title}
   </h6>
 );
 
 const SectionNoResult = () => (
-  <p className="text-quaternary mb-5 mx-5">{translate('No result found')}</p>
+  <p className="text-quaternary mb-4 mx-4">{translate('No result found')}</p>
 );
 
 const AllResultsTabContent = ({
@@ -72,10 +74,10 @@ const AllResultsTabContent = ({
 }: TabContentProps) => {
   return (
     <Row className="mx-0">
-      <Col md={12} lg={6} className="py-5 px-0">
+      <Col md={12} lg={6} className="py-4 px-0">
         {Boolean(recentSearchItems?.length) && (
-          <div className="mb-3">
-            <div className="flex items-center justify-between mx-5 mb-3">
+          <div className="mb-2.5">
+            <div className="flex items-center justify-between mx-4 mb-2.5">
               <h6 className="text-secondary font-medium mb-0">
                 {translate('Recent')}
               </h6>
@@ -93,7 +95,7 @@ const AllResultsTabContent = ({
             ))}
           </div>
         )}
-        <div className="mb-3">
+        <div className="mb-2.5">
           <SectionTitle title={translate('Favorites')} />
           {favPages.length > 0 ? (
             favPages.map((page) => (
@@ -115,7 +117,7 @@ const AllResultsTabContent = ({
           {!isCurrentPageFavorite && (
             <BaseButton
               variant="text-primary"
-              className="ms-5"
+              className="ms-4"
               onClick={addCurrentPageFavorite}
               label={translate('Add current page')}
               iconNode={<PlusIcon weight="bold" />}
@@ -124,10 +126,10 @@ const AllResultsTabContent = ({
           )}
         </div>
       </Col>
-      <Col md={12} lg={6} className="bg-secondary pb-5 px-0">
+      <Col md={12} lg={6} className="bg-secondary pb-4 px-0">
         {result.data?.resultsCount ? (
           <>
-            <div className="mb-3 mt-5">
+            <div className="mb-2.5 mt-4">
               <SectionTitle title={translate('Organizations')} />
               {result.data?.customersCount ? (
                 result.data.customers.slice(0, 3).map((item) => (
@@ -151,7 +153,7 @@ const AllResultsTabContent = ({
                 <SectionNoResult />
               )}
             </div>
-            <div className="mb-3">
+            <div className="mb-2.5">
               <SectionTitle title={translate('Projects')} />
               {result.data?.projectsCount ? (
                 result.data.projects.slice(0, 3).map((item) => (
@@ -234,7 +236,7 @@ const OrganizationsTabContent = ({
   return (
     <>
       {result.data?.customersCount ? (
-        <div className="py-5">
+        <div className="py-4">
           {result.data.customers.map((item) => (
             <SearchItem
               key={item.uuid}
@@ -276,7 +278,7 @@ const ProjectsTabContent = ({
   return (
     <>
       {result.data?.projectsCount ? (
-        <div className="py-5">
+        <div className="py-4">
           {result.data.projects.map((item) => (
             <SearchItem
               key={item.uuid}
@@ -326,10 +328,10 @@ const ResourcesTabContent = ({
   return (
     <>
       {hasResourceGroups ? (
-        <div className="py-5">
+        <div className="py-4">
           {Object.keys(resourceGroups).map((item, categoryIndex) => (
             <Fragment key={categoryIndex}>
-              <SectionTitle title={item} className="mt-3" />
+              <SectionTitle title={item} className="mt-2.5" />
               {resourceGroups[item].map((resource, resourceIndex) => (
                 <SearchItem
                   key={resourceIndex}
@@ -413,7 +415,7 @@ const UsersTabContent = ({
   return (
     <>
       {usersResult?.data?.usersCount ? (
-        <div className="py-5">
+        <div className="py-4">
           {usersResult.data.users.map((user) => (
             <SearchItem
               key={user.uuid}
@@ -468,13 +470,13 @@ export const SearchPopover = ({
     useRecentSearch();
 
   return (
-    <div className="pt-5">
+    <div className="pt-4">
       <SearchInput
         result={result}
         query={query}
         show={show}
         setQuery={setQuery}
-        className="px-5 mb-6"
+        className="px-4 mb-5"
       />
 
       <Tabs
@@ -484,7 +486,7 @@ export const SearchPopover = ({
       >
         <TabsList scrollable>
           <TabsTrigger
-            className="ms-5"
+            className="ms-4"
             value="all"
             count={result.data?.resultsCount}
           >
@@ -500,7 +502,7 @@ export const SearchPopover = ({
             {translate('Projects')}
           </TabsTrigger>
           <TabsTrigger
-            className={isStaffOrSupportUser ? undefined : 'me-5'}
+            className={isStaffOrSupportUser ? undefined : 'me-4'}
             value="resources"
             count={result.data?.resourcesCount}
           >
@@ -508,7 +510,7 @@ export const SearchPopover = ({
           </TabsTrigger>
           {isStaffOrSupportUser && (
             <TabsTrigger
-              className="me-5"
+              className="me-4"
               value="users"
               count={usersResult?.data?.usersCount}
             >

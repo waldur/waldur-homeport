@@ -193,11 +193,11 @@ export const ResourceSelectionTable: FC<ResourceSelectionTableProps> = ({
 
   return (
     <div>
-      <div className="mb-3">
+      <div className="mb-2.5">
         <strong>{translate('Freed capacity')}</strong>: {freedAmount}{' '}
         {component.name} {component.measured_unit}
         {totalAllocated > 0 && (
-          <span className="ms-3">
+          <span className="ms-2.5">
             <strong>{translate('Allocated')}</strong>: {totalAllocated}{' '}
             {component.measured_unit}
           </span>

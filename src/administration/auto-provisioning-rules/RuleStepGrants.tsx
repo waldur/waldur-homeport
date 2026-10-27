@@ -67,7 +67,7 @@ export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
         <AlertItem
           type="floating"
           variant="info"
-          className="mb-5"
+          className="mb-4"
           title={translate('Organization matching')}
           body={
             <>
@@ -77,7 +77,7 @@ export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
                 )}
               </div>
               {protectedMethods.length === 0 ? (
-                <div className="mt-2">
+                <div className="mt-1.5">
                   {translate(
                     'Warning: PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS is empty — no user will currently match.',
                   )}

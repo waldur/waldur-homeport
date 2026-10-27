@@ -74,7 +74,7 @@ describe('BaseButton disabled tooltip', () => {
       <BaseButton
         size="sm"
         label="Back"
-        className="me-3 align-self-center"
+        className="me-2.5 align-self-center"
         tooltip="Go back"
       />,
     );

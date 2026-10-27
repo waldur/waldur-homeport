@@ -80,7 +80,7 @@ export const ProjectDigestConfigPage: FC = () => {
     <>
       <FormTable.Card
         title={translate('Project digest emails')}
-        className="card-bordered mb-5"
+        className="card-bordered mb-4"
         actions={
           <>
             {formState.isEnabled && (
@@ -108,7 +108,7 @@ export const ProjectDigestConfigPage: FC = () => {
           </>
         }
       >
-        <p className="text-quaternary mb-5">
+        <p className="text-quaternary mb-4">
           {translate(
             'Configure periodic email digests sent to project members, summarizing project status including resources, timelines, and team information.',
           )}

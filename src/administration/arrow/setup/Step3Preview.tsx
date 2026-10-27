@@ -66,14 +66,14 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
-      <h4 className="mb-4">{translate('Preview Settings')}</h4>
-      <p className="text-quaternary mb-4">
+      <h4 className="mb-3">{translate('Preview Settings')}</h4>
+      <p className="text-quaternary mb-3">
         {translate(
           'Review the settings below before saving. These will configure the Arrow integration.',
         )}
       </p>
 
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <h5 className="mb-0">{translate('Connection')}</h5>
         </Card.Header>
@@ -119,7 +119,7 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
         </Card.Body>
       </Card>
 
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <h5 className="mb-0">{translate('Customer Mappings')}</h5>
         </Card.Header>
@@ -146,7 +146,7 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
                         <td>
                           {arrowRef}
                           {arrowCustomer && (
-                            <span className="text-quaternary ms-2">
+                            <span className="text-quaternary ms-1.5">
                               ({arrowCustomer.companyName})
                             </span>
                           )}
@@ -167,12 +167,12 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
       </Card>
 
       {values.exportTypes.length > 0 && (
-        <Card className="mb-4">
+        <Card className="mb-3">
           <Card.Header>
             <h5 className="mb-0">{translate('Available Export Types')}</h5>
           </Card.Header>
           <Card.Body>
-            <p className="text-quaternary small mb-3">
+            <p className="text-quaternary small mb-2.5">
               {translate(
                 'These billing export types are available from your Arrow account. Compatible types have all required fields.',
               )}

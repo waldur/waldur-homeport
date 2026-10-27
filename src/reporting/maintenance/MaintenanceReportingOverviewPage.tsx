@@ -70,7 +70,7 @@ export const MaintenanceReportingOverviewPage: FC = () => {
             value={activeTab}
             onValueChange={(k) => setActiveTab(k as MaintenanceViewTab)}
           >
-            <TabsList bordered={false} className="mb-6">
+            <TabsList bordered={false} className="mb-5">
               <TabsTrigger value="table">{translate('Table')}</TabsTrigger>
               <TabsTrigger value="timeline">
                 {translate('Timeline')}

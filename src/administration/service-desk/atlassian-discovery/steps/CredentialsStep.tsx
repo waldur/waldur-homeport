@@ -99,8 +99,8 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
-      <div className="mb-6">
-        <h4 className="mb-4">{translate('Sign-in method')}</h4>
+      <div className="mb-5">
+        <h4 className="mb-3">{translate('Sign-in method')}</h4>
         <RadioGroup
           name="auth_method"
           label={translate('Authentication method')}
@@ -108,8 +108,8 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
           required
         />
       </div>
-      <div className="mb-6">
-        <h4 className="mb-4">{translate('Connection Settings')}</h4>
+      <div className="mb-5">
+        <h4 className="mb-3">{translate('Connection Settings')}</h4>
 
         <StringGroup
           name="api_url"
@@ -135,9 +135,9 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
         />
       </div>
       {isServiceAccount && (
-        <div className="mb-6">
-          <h4 className="mb-4">{translate('Service account credential')}</h4>
-          <p className="text-quaternary mb-4">
+        <div className="mb-5">
+          <h4 className="mb-3">{translate('Service account credential')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'In Atlassian Administration, open Directory, then Service accounts, and create an OAuth 2.0 credential for the service account with the scopes read:servicedesk-request, write:servicedesk-request, manage:servicedesk-customer, read:jira-work, write:jira-work and read:jira-user. The service account needs a Jira Service Management agent license and the Service Desk Team role on the project.',
             )}
@@ -159,9 +159,9 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
         </div>
       )}
       {values.auth_method === 'api_token' && (
-        <div className="mb-6">
-          <h4 className="mb-4">{translate('API Token Authentication')}</h4>
-          <p className="text-quaternary mb-4">
+        <div className="mb-5">
+          <h4 className="mb-3">{translate('API Token Authentication')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'For Atlassian Cloud, create an API token at https://id.atlassian.com/manage-profile/security/api-tokens',
             )}
@@ -178,11 +178,11 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
         </div>
       )}
       {values.auth_method === 'personal_access_token' && (
-        <div className="mb-6">
-          <h4 className="mb-4">
+        <div className="mb-5">
+          <h4 className="mb-3">
             {translate('Personal Access Token Authentication')}
           </h4>
-          <p className="text-quaternary mb-4">
+          <p className="text-quaternary mb-3">
             {translate(
               'For Jira Server/Data Center, create a PAT in your profile settings.',
             )}
@@ -196,8 +196,8 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
         </div>
       )}
       {values.auth_method === 'basic' && (
-        <div className="mb-6">
-          <h4 className="mb-4">{translate('Basic Authentication')}</h4>
+        <div className="mb-5">
+          <h4 className="mb-3">{translate('Basic Authentication')}</h4>
 
           <StringGroup name="username" label={translate('Username')} required />
 
@@ -209,7 +209,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
           type="floating"
           variant="error"
           title={error}
-          className="mb-4"
+          className="mb-3"
         />
       )}
       {serverInfo && (
@@ -220,7 +220,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
             version: serverInfo.version,
             type: serverInfo.deployment_type,
           })}
-          className="mb-4"
+          className="mb-3"
         />
       )}
     </WizardModal>

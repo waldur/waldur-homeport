@@ -61,7 +61,7 @@ export const MatrixEncryptionNotice: FC = () => {
       <AlertItem
         type="floating"
         variant="warning"
-        className="m-3"
+        className="m-2.5"
         title={translate('Encrypted messages cannot be read')}
         body={translate(
           'Your chat encryption keys could not be unlocked in this session. If you set up or reset encryption in another Matrix app, such as Element, enter the recovery key it gave you. Reset encryption only if you have no recovery key.',
@@ -91,7 +91,7 @@ export const MatrixEncryptionNotice: FC = () => {
       <AlertItem
         type="floating"
         variant="error"
-        className="m-3"
+        className="m-2.5"
         title={translate('Encryption is unavailable in this browser')}
         body={translate(
           'Encrypted conversations cannot be read or written. Unencrypted ones still work.',

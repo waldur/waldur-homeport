@@ -33,11 +33,11 @@ export const DatabaseMaintenanceCard: FC<DatabaseMaintenanceCardProps> = ({
       title={translate('Maintenance')}
       subtitle={translate('Vacuum and tuple statistics')}
       defaultOpen={needsAttention}
-      className="mb-6"
+      className="mb-5"
     >
       <Row>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-3">
+          <h6 className="text-uppercase text-quaternary mb-2.5">
             {translate('Tuple statistics')}
           </h6>
           <Table size="sm" borderless className="mb-0">
@@ -68,7 +68,7 @@ export const DatabaseMaintenanceCard: FC<DatabaseMaintenanceCardProps> = ({
           </Table>
         </Col>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-3">
+          <h6 className="text-uppercase text-quaternary mb-2.5">
             {translate('Vacuum status')}
           </h6>
           <Table size="sm" borderless className="mb-0">
@@ -91,7 +91,7 @@ export const DatabaseMaintenanceCard: FC<DatabaseMaintenanceCardProps> = ({
                       <WarningCircleIcon
                         size={16}
                         weight="bold"
-                        className="text-danger ms-2"
+                        className="text-danger ms-1.5"
                       />
                     )}
                   </div>
@@ -107,7 +107,7 @@ export const DatabaseMaintenanceCard: FC<DatabaseMaintenanceCardProps> = ({
             </tbody>
           </Table>
           {hasTransactionAgeWarning && (
-            <small className="text-danger mt-2 block">
+            <small className="text-danger mt-1.5 block">
               {translate(
                 'Transaction ID wraparound risk! Run vacuum on large tables.',
               )}

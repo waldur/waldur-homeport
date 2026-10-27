@@ -169,7 +169,7 @@ export const FormCloudStep = (props: FormStepProps) => {
             <div>
               <StepCardTabs tabs={tabs} tab={tab} setTab={setTab} />
             </div>
-            <div className="flex gap-10 justify-end">
+            <div className="flex gap-8 justify-end">
               <BaseButton
                 variant="tertiary"
                 className="text-nowrap"

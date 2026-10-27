@@ -135,7 +135,7 @@ export const GeneralConfigurationSection: FC<
   return (
     <FormTable.Card
       title={translate('General configuration')}
-      className="card-bordered mb-5"
+      className="card-bordered mb-4"
     >
       <EditFieldProvider
         scope={props.call}

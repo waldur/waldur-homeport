@@ -19,7 +19,7 @@ const meta: Meta<typeof SimpleTable<OrgRow>> = {
   component: SimpleTable,
   decorators: [
     (Story) => (
-      <div className="p-6 bg-primary rounded-lg border-[1px] border-secondary max-w-[720px]">
+      <div className="p-5 bg-primary rounded-lg border-[1px] border-secondary max-w-[720px]">
         <Story />
       </div>
     ),

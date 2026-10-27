@@ -17,8 +17,8 @@ export const StorageDataTypeArrayField = ({
 }: FieldArrayRenderProps<any, HTMLElement>) => (
   <div>
     {fields.map((member, index) => (
-      <Card key={index} className="card-bordered bg-secondary mb-3">
-        <Card.Header className="mx-4 min-h-auto">
+      <Card key={index} className="card-bordered bg-secondary mb-2.5">
+        <Card.Header className="mx-3 min-h-auto">
           <h6 className="mb-0 text-tertiary">
             {translate('Storage Data Type {index}', { index: index + 1 })}
           </h6>
@@ -32,7 +32,7 @@ export const StorageDataTypeArrayField = ({
             />
           </div>
         </Card.Header>
-        <Card.Body className="px-4">
+        <Card.Body className="px-3">
           <Row>
             <Col md={6}>
               <StringGroup

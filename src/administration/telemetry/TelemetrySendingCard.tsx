@@ -42,7 +42,7 @@ export const TelemetrySendingCard = () => {
   };
 
   return (
-    <FormTable.Card title={translate('Sending')} className="card-bordered mb-5">
+    <FormTable.Card title={translate('Sending')} className="card-bordered mb-4">
       <FormTable>
         <FormTable.Item
           label={translate('Send telemetry metrics')}

@@ -92,7 +92,7 @@ const sheetVariants = cva(
   // data-[state=closed]:pointer-events-none: this node is still present
   // (not yet unmounted) during the closing slide-out transition, same
   // reasoning as SheetOverlay's own matching class.
-  'fixed z-mobile-drawer flex flex-col gap-4 border-[var(--sidebar-border)] bg-[var(--sidebar-bg)] text-primary shadow-[var(--drawer-shadow)] transition-transform duration-300 ease-in-out data-[state=closed]:pointer-events-none',
+  'fixed z-mobile-drawer flex flex-col gap-3 border-[var(--sidebar-border)] bg-[var(--sidebar-bg)] text-primary shadow-[var(--drawer-shadow)] transition-transform duration-300 ease-in-out data-[state=closed]:pointer-events-none',
   {
     variants: {
       side: {
@@ -152,14 +152,14 @@ SheetContent.displayName = SheetPrimitive.Content.displayName;
 
 export function SheetHeader({ className, ...props }: ComponentProps<'div'>) {
   return (
-    <div className={cn('flex flex-col gap-1.5 p-4', className)} {...props} />
+    <div className={cn('flex flex-col gap-1.5 p-3', className)} {...props} />
   );
 }
 
 export function SheetFooter({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      className={cn('mt-auto flex flex-col gap-2 p-4', className)}
+      className={cn('mt-auto flex flex-col gap-1.5 p-3', className)}
       {...props}
     />
   );

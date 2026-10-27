@@ -55,11 +55,11 @@ export const CustomerMediaPanel = (props: CustomerMediaPanelOwnProps) => {
   );
 
   if (props.embedded) {
-    return <div className="p-7">{content}</div>;
+    return <div className="p-5.5">{content}</div>;
   }
 
   return (
-    <Card className="card-bordered mb-5">
+    <Card className="card-bordered mb-4">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Logo')}</h3>

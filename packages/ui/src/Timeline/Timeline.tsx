@@ -122,7 +122,7 @@ export const TimelineContent = forwardRef<
     <Comp
       ref={ref}
       data-slot="timeline-content"
-      className={cn('flex-1 min-w-0 pb-3', className)}
+      className={cn('flex-1 min-w-0 pb-2.5', className)}
       {...props}
     />
   );

@@ -56,7 +56,7 @@ export const ProposalUsersListSummary: FC<{
   const usersList = (
     <>
       {rules.dropdown ? (
-        <div className="flex justify-end pt-3">
+        <div className="flex justify-end pt-2.5">
           <TeamDropdownActions
             scope={props.scope}
             roleTypes={['proposal']}
@@ -66,7 +66,7 @@ export const ProposalUsersListSummary: FC<{
         </div>
       ) : null}
       {rules.teamNote ? (
-        <p className="text-quaternary py-3 mb-0">{rules.teamNote}</p>
+        <p className="text-quaternary py-2.5 mb-0">{rules.teamNote}</p>
       ) : null}
       <UsersList
         table={usersTable}

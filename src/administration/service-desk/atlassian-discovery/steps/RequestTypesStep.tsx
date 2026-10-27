@@ -109,9 +109,9 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
   if (loading) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <div className="text-center py-10">
+        <div className="text-center py-8">
           <Spinner animation="border" />
-          <p className="mt-4">{translate('Loading request types...')}</p>
+          <p className="mt-3">{translate('Loading request types...')}</p>
         </div>
       </WizardModal>
     );
@@ -141,14 +141,14 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
-      <h4 className="mb-4">{translate('Select Request Types')}</h4>
-      <p className="text-quaternary mb-4">
+      <h4 className="mb-3">{translate('Select Request Types')}</h4>
+      <p className="text-quaternary mb-3">
         {translate(
           'Select which request types should be available for creating support tickets.',
         )}
       </p>
 
-      <Table hover className="mb-6">
+      <Table hover className="mb-5">
         <thead>
           <tr>
             <th style={{ width: 40 }}>

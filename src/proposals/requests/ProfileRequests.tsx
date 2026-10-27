@@ -68,7 +68,7 @@ export const ProfileRequests: FC = () => {
       // resources view in the page header, and an unset size would render 36px
       // in one and (before the control stopped stretching) 44px in the other.
       size="lg"
-      itemClassName="px-6"
+      itemClassName="px-5"
     />
   );
 

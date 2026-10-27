@@ -47,10 +47,10 @@ export const OfferingProfileDetail: FC = () => {
 
   return (
     <div>
-      <Card className="mb-3">
+      <Card className="mb-2.5">
         <Card.Body>
-          <h3 className="mb-2">{profile.name}</h3>
-          <p className="text-quaternary mb-3">
+          <h3 className="mb-1.5">{profile.name}</h3>
+          <p className="text-quaternary mb-2.5">
             {renderFieldOrDash(profile.description)}
           </p>
           <p className="mb-0">
@@ -191,7 +191,9 @@ const AddRoleToProfileDialog: FC<{
             >
               <span>
                 {r.name}
-                <span className="text-quaternary ms-2">({r.content_type})</span>
+                <span className="text-quaternary ms-1.5">
+                  ({r.content_type})
+                </span>
               </span>
               <BaseButton
                 variant="primary"

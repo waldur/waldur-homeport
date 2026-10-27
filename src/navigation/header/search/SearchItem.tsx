@@ -47,11 +47,11 @@ export const SearchItem = (props: SearchItemProps) => {
     useOrganizationAndProjectAutocompletesForResources();
 
   return (
-    <div className="search-result-item flex items-center py-2 px-5 hover:bg-[var(--bg-brand-primary-alt)] cursor-pointer">
+    <div className="search-result-item flex items-center py-1.5 px-4 hover:bg-[var(--bg-brand-primary-alt)] cursor-pointer">
       <Link
         state={props.to}
         params={props.params}
-        className="search-result-item__link flex text-brand items-center me-4"
+        className="search-result-item__link flex text-brand items-center me-3"
         onClick={(e) => {
           if (props.onClick) {
             props.onClick(props);
@@ -61,7 +61,7 @@ export const SearchItem = (props: SearchItemProps) => {
       >
         <ItemImage
           item={{ image: props.image, name: props.title }}
-          className="me-4"
+          className="me-3"
           circle
         />
 
@@ -73,13 +73,13 @@ export const SearchItem = (props: SearchItemProps) => {
         </div>
       </Link>
       {/*
-        The link's me-4 keeps the trailing controls the same distance from the
-        title that the avatar keeps on the other side, and gap-2 separates them
+        The link's me-3 keeps the trailing controls the same distance from the
+        title that the avatar keeps on the other side, and gap-1.5 separates them
         from each other. The distance sits on the link rather than as padding
         here: the controls are lifted above the link's stretched overlay, so
         their padding would be a strip of the row that no longer opens it.
       */}
-      <div className="search-result-item__controls ms-auto flex gap-2">
+      <div className="search-result-item__controls ms-auto flex gap-1.5">
         {props.badge && <div>{props.badge}</div>}
         {props.actions}
         {props.addFavoritePage && (

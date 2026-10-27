@@ -18,19 +18,19 @@ export const OrdersContent: FC<OrdersContentProps> = ({ data }) => {
     <>
       <OrdersSummaryCards stats={data.summary} />
 
-      <Row className="g-4 mb-6">
+      <Row className="g-4 mb-5">
         <Col xs={12}>
           <OrdersTrendChart dailyStats={data.daily} />
         </Col>
       </Row>
 
-      <Row className="g-4 mb-6">
+      <Row className="g-4 mb-5">
         <Col xs={12}>
           <OrdersDailyCostChart dailyStats={data.daily} />
         </Col>
       </Row>
 
-      <Row className="g-4 mb-6">
+      <Row className="g-4 mb-5">
         <Col xs={12}>
           <OrdersDailyTypeChart dailyStats={data.daily} />
         </Col>

@@ -5,6 +5,6 @@ interface OwnProps {
 }
 
 export const PublicOfferingCardTitle: FC<PropsWithChildren<OwnProps>> = ({
-  className = 'mb-8',
+  className = 'mb-6',
   children,
 }) => <h3 className={className}>{children}</h3>;

@@ -22,10 +22,10 @@ const RerouteImpactWarning: FC = () => (
   <AlertItem
     type="floating"
     variant="warning"
-    className="mb-4"
+    className="mb-3"
     title={translate('Rerouting this ticket will:')}
     body={
-      <ul className="mb-0 ps-4">
+      <ul className="mb-0 ps-3">
         <li>
           {translate(
             'Withdraw the ticket from the current provider (and remove it from their system where supported).',

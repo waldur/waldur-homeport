@@ -92,7 +92,7 @@ export const StatCard = ({
         {value}
       </div>
       {(trend || hint) && (
-        <div className="mt-[0.5rem] flex flex-wrap items-center gap-2 text-sm">
+        <div className="mt-[0.5rem] flex flex-wrap items-center gap-1.5 text-sm">
           {trend && (
             <Badge variant={trend.tone ?? 'neutral'}>{trend.label}</Badge>
           )}

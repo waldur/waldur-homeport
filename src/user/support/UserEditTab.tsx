@@ -35,7 +35,7 @@ export const UserEditTab: React.FC<UserEditTabProps> = ({ user }) => {
         <AcceptTosWarning isSelf={canAcceptTerms} userName={user.full_name} />
       )}
       {canAcceptTerms && !user.agreement_date && (
-        <Card className="card-bordered mb-7">
+        <Card className="card-bordered mb-5.5">
           <Card.Body>
             <FormTable>
               <FormTable.Item value={<TermsOfServiceCheckbox user={user} />} />

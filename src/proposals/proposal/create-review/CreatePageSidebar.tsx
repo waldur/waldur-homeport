@@ -65,7 +65,7 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
   });
   return (
     <>
-      <Panel title={translate('Progress')} cardBordered className="mb-5">
+      <Panel title={translate('Progress')} cardBordered className="mb-4">
         <ScrollSpyNav items={tabs} />
       </Panel>
       <ProposalCostTotal
@@ -81,14 +81,14 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
             }
             label={translate('Submit review')}
             variant="primary"
-            className="w-full mt-2"
+            className="w-full mt-1.5"
             size="lg"
           />
           <BaseButton
             onClick={() => rejectMutation.mutate()}
             label={translate('Send back')}
             variant="danger"
-            className="w-full mt-2"
+            className="w-full mt-1.5"
             pending={rejectMutation.isPending}
             size="lg"
           />

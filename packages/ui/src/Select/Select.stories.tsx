@@ -57,15 +57,15 @@ export const Playground: Story = {};
  */
 export const Sizes: Story = {
   render: () => (
-    <div className="p-6 bg-[var(--page-bg)] flex items-end gap-6">
+    <div className="p-5 bg-[var(--page-bg)] flex items-end gap-5">
       <div className="w-64">
-        <div className="text-xs uppercase font-mono text-quinary mb-2">
+        <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           Default
         </div>
         <Select options={ORG_OPTIONS} placeholder="Select an organization..." />
       </div>
       <div className="w-64">
-        <div className="text-xs uppercase font-mono text-quinary mb-2">
+        <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           size=&quot;sm&quot;
         </div>
         <Select
@@ -87,15 +87,15 @@ export const Sizes: Story = {
  */
 export const ControlStates: Story = {
   render: () => (
-    <div className="p-6 bg-[var(--page-bg)] flex items-start gap-6">
+    <div className="p-5 bg-[var(--page-bg)] flex items-start gap-5">
       <div className="w-64">
-        <div className="text-xs uppercase font-mono text-quinary mb-2">
+        <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           Default
         </div>
         <Select options={ORG_OPTIONS} placeholder="Select an organization..." />
       </div>
       <div className="w-64">
-        <div className="text-xs uppercase font-mono text-quinary mb-2">
+        <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           Focused
         </div>
         <Select
@@ -105,7 +105,7 @@ export const ControlStates: Story = {
         />
       </div>
       <div className="w-64">
-        <div className="text-xs uppercase font-mono text-quinary mb-2">
+        <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           Disabled
         </div>
         <Select
@@ -115,7 +115,7 @@ export const ControlStates: Story = {
         />
       </div>
       <div className="w-64">
-        <div className="text-xs uppercase font-mono text-quinary mb-2">
+        <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           Error
         </div>
         <Select
@@ -144,9 +144,9 @@ export const ControlStates: Story = {
  */
 export const SingleVsMultiOptions: Story = {
   render: () => (
-    <div className="p-6 bg-[var(--page-bg)] flex items-start gap-6">
+    <div className="p-5 bg-[var(--page-bg)] flex items-start gap-5">
       <div className="w-64">
-        <div className="text-xs uppercase font-mono text-quinary mb-2">
+        <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           Single-select (checkmark)
         </div>
         <Select
@@ -162,7 +162,7 @@ export const SingleVsMultiOptions: Story = {
         />
       </div>
       <div className="w-64">
-        <div className="text-xs uppercase font-mono text-quinary mb-2">
+        <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           Multi-select (checkboxes)
         </div>
         <Select
@@ -195,9 +195,9 @@ export const SingleVsMultiOptions: Story = {
  */
 export const TableFilterVariant: Story = {
   render: () => (
-    <div className="p-6 bg-[var(--page-bg)] flex items-start gap-6">
+    <div className="p-5 bg-[var(--page-bg)] flex items-start gap-5">
       <div className="w-72">
-        <div className="text-xs uppercase font-mono text-quinary mb-2">
+        <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           Empty (icon shown)
         </div>
         <Select
@@ -209,7 +209,7 @@ export const TableFilterVariant: Story = {
         />
       </div>
       <div className="w-72">
-        <div className="text-xs uppercase font-mono text-quinary mb-2">
+        <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           Has a value (icon hidden)
         </div>
         <Select
@@ -230,11 +230,11 @@ export const TableFilterVariant: Story = {
  */
 export const TableCellVariant: Story = {
   render: () => (
-    <table className="m-6 border-collapse">
+    <table className="m-5 border-collapse">
       <thead>
         <tr className="text-xs uppercase font-mono text-quinary text-left">
-          <th className="pb-2 pr-4">Protocol</th>
-          <th className="pb-2">Direction</th>
+          <th className="pb-1.5 pr-4">Protocol</th>
+          <th className="pb-1.5">Direction</th>
         </tr>
       </thead>
       <tbody>
@@ -281,7 +281,7 @@ export const Async: Story = {
       return { options, hasMore: false };
     };
     return (
-      <div className="p-6 bg-[var(--page-bg)] w-64">
+      <div className="p-5 bg-[var(--page-bg)] w-64">
         {/* `defaultOptions={true}`, not a literal array: that asks
             react-select-async-paginate to fetch the first page itself via
             `loadOptions('')` on mount/open — passing the same array as a
@@ -307,7 +307,7 @@ export const Creatable: Story = {
       null,
     );
     return (
-      <div className="p-6 bg-[var(--page-bg)] w-64">
+      <div className="p-5 bg-[var(--page-bg)] w-64">
         <CreatableSelect
           options={options}
           value={value}

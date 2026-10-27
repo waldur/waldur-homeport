@@ -18,7 +18,7 @@ import { useCustomer } from '@/workspace/hooks';
 
 const FlatStatistics = ({ count, title }) => {
   return (
-    <Col className="text-md-center mb-4">
+    <Col className="text-md-center mb-3">
       <strong className="block text-xl">{count}</strong>
       <strong className="health-title">{title}</strong>
     </Col>
@@ -76,7 +76,7 @@ export const CallManagementDashboard = () => {
         <LoadingErred
           message={translate('Unable to load statistics data')}
           loadData={refetch}
-          className="mb-4"
+          className="mb-3"
         />
       )}
       {data && (
@@ -114,7 +114,7 @@ export const CallManagementDashboard = () => {
             </>
           )}
           <Col>
-            <Card className="card-bordered mb-6">
+            <Card className="card-bordered mb-5">
               <Card.Body>
                 <div className="flex justify-start lg:justify-between flex-wrap">
                   <FlatStatistics

@@ -149,7 +149,7 @@ const ButtonGroupQuestion: FC<{
 
   return (
     <div role={isMulti ? 'group' : 'radiogroup'}>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5">
         {question.options!.map((opt) => {
           const picked = isPicked(opt);
           const dimmed = hasSingleSelectPick && !picked;
@@ -273,7 +273,7 @@ const SearchableListQuestion: FC<{
           </div>
         )}
       />
-      <div className="mt-2">
+      <div className="mt-1.5">
         <button
           type="button"
           onClick={() =>

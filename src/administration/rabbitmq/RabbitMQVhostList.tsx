@@ -77,7 +77,7 @@ export const RabbitMQVhostList: FC<RabbitMQVhostListProps> = ({ data }) => {
 
   if (data.vhosts.length === 0) {
     return (
-      <div className="text-center text-quaternary py-10">
+      <div className="text-center text-quaternary py-8">
         {translate('No subscription queues found')}
       </div>
     );

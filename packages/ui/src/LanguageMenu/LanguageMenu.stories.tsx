@@ -34,7 +34,7 @@ export const Default: Story = {
   render: () => {
     const [current, setCurrent] = useState<LanguageOption>(LANGUAGES[0]);
     return (
-      <div className="p-12">
+      <div className="p-10">
         <Menu>
           <Menu.Trigger asChild>
             <BaseButton variant="secondary" label="Preferences" />

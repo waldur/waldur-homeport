@@ -179,7 +179,7 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
     <div className="team-chat">
       <div className="tc-placeholder">
         <div>
-          <ChatsCircleIcon size={40} weight="thin" className="mb-3" />
+          <ChatsCircleIcon size={40} weight="thin" className="mb-2.5" />
           <div>{translate('You are not a member of this conversation')}</div>
           <div>
             {translate('Only members of this room can read its messages.')}
@@ -193,7 +193,7 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
     <div className="team-chat">
       <div className="tc-placeholder">
         <div>
-          <ChatsCircleIcon size={40} weight="thin" className="mb-3" />
+          <ChatsCircleIcon size={40} weight="thin" className="mb-2.5" />
           <div>{translate('Select a conversation')}</div>
           <div>{translate('Pick a room from the list to start chatting.')}</div>
         </div>

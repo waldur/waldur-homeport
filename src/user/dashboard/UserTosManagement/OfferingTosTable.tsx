@@ -61,7 +61,7 @@ export const OfferingTosTable: FC<OfferingTosTableProps> = memo(
                 onClick={() => openViewDialog(row)}
               >
                 {row.version || 'v1.0'}
-                <span className="text-anchor small block mt-2">
+                <span className="text-anchor small block mt-1.5">
                   {formatDate(row.created)}
                 </span>
               </button>

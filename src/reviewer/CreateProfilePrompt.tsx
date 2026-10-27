@@ -17,11 +17,11 @@ export const CreateProfilePrompt: FC = () => {
 
   return (
     <Card className="card-bordered">
-      <Card.Body className="text-center py-10">
-        <h3 className="mb-5">
+      <Card.Body className="text-center py-8">
+        <h3 className="mb-4">
           {translate('You do not have a reviewer profile yet.')}
         </h3>
-        <p className="text-quaternary mb-5">
+        <p className="text-quaternary mb-4">
           {translate(
             'Create a reviewer profile to manage your affiliations, expertise, and publications for proposal reviews.',
           )}

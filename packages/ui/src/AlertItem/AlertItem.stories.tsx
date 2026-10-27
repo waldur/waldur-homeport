@@ -38,10 +38,10 @@ export const Playground: Story = {};
 
 export const VariantMatrix: Story = {
   render: () => (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-5">
       {TYPES.map((type) => (
         <div key={type}>
-          <div className="text-sm text-quaternary mb-2">type="{type}"</div>
+          <div className="text-sm text-quaternary mb-1.5">type="{type}"</div>
           <div className="flex flex-col max-w-[480px]">
             {VARIANTS.map((variant) => (
               <AlertItem
@@ -50,7 +50,7 @@ export const VariantMatrix: Story = {
                 type={type}
                 title={`${variant} alert`}
                 body="Supporting copy explaining the state in one short sentence."
-                className={type === 'floating' ? 'mb-3' : undefined}
+                className={type === 'floating' ? 'mb-2.5' : undefined}
               />
             ))}
           </div>
@@ -79,7 +79,7 @@ export const WithTitleAfter: Story = {
 
 export const WithActions: Story = {
   render: () => (
-    <div className="flex flex-col gap-4 max-w-[480px]">
+    <div className="flex flex-col gap-3 max-w-[480px]">
       <AlertItem
         variant="warning"
         title="Credit budget 90% consumed"
@@ -126,7 +126,7 @@ export const StackedList: Story = {
 
 export const Floating: Story = {
   render: () => (
-    <div className="flex flex-col gap-3 max-w-[480px]">
+    <div className="flex flex-col gap-2.5 max-w-[480px]">
       <AlertItem
         variant="error"
         type="floating"

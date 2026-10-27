@@ -42,7 +42,7 @@ export const WithHintOnly: Story = {
 /** Roughly the mockup's 4-tile row. */
 export const Row: Story = {
   render: () => (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-4 gap-3">
       <StatCard
         label="Projects"
         value={12}

@@ -73,7 +73,7 @@ export const ReportingCard: FC<{ metrics: OfferingMetric[] }> = ({
   return (
     <FormTable.Card
       title={translate('Reporting')}
-      className="card-bordered mt-5"
+      className="card-bordered mt-4"
     >
       <FormTable alignTop>
         <Item

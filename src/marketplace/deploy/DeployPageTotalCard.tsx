@@ -46,7 +46,7 @@ export const DeployPageTotalCard: FC<
       <Card.Body>
         {children}
         {offering?.plugin_options?.require_purchase_order_upload ? (
-          <div className="flex items-center gap-2 mt-4 mb-4 text-warning text-xs">
+          <div className="flex items-center gap-1.5 mt-3 mb-3 text-warning text-xs">
             {}
             <WarningCircleIcon size={16} weight="fill" className="shrink-0" />
             <Tooltip
@@ -58,7 +58,7 @@ export const DeployPageTotalCard: FC<
             </Tooltip>
           </div>
         ) : offering?.plugin_options?.enable_purchase_order_upload ? (
-          <div className="flex items-center gap-2 mt-4 mb-4 text-info text-xs">
+          <div className="flex items-center gap-1.5 mt-3 mb-3 text-info text-xs">
             <Tooltip
               label={translate(
                 'After this order is created, a purchase order document (PDF) can optionally be attached before approval.',

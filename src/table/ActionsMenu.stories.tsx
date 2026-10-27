@@ -42,7 +42,7 @@ const meta: Meta<typeof ActionsMenu> = {
   },
   decorators: [
     (Story) => (
-      <div className="p-12" style={{ minHeight: 360 }}>
+      <div className="p-10" style={{ minHeight: 360 }}>
         <Story />
       </div>
     ),
@@ -90,7 +90,7 @@ const DragHandle = forwardRef<HTMLButtonElement>((props, ref) => (
     ref={ref}
     type="button"
     aria-label="Reorder"
-    className="rounded-md border px-2 py-1"
+    className="rounded-md border px-1.5 py-1"
     {...props}
   >
     <DotsSixVerticalIcon weight="bold" />
@@ -137,7 +137,7 @@ export const Toggles: Story = {
  */
 export const LabeledVariantsAndSizes: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-4">
+    <div className="flex flex-wrap items-center gap-3">
       <ActionsMenu toggle="labeled" label="Enabled" variant="primary">
         {items}
       </ActionsMenu>

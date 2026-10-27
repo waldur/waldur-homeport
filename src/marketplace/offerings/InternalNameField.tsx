@@ -35,7 +35,7 @@ export const InternalNameField: FunctionComponent<InternalNameFieldProps> = (
         'Technical name intended for integration and automated reporting. Please use Latin letters without spaces only.',
       )}
       tooltipEnd={true}
-      space={5}
+      space={4}
       disabled={props.disabled}
       readOnly={props.readOnly}
     />

@@ -137,9 +137,9 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
   if (loading) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <div className="text-center py-10">
+        <div className="text-center py-8">
           <Spinner animation="border" />
-          <p className="mt-4">
+          <p className="mt-3">
             {translate('Discovering OpenStack infrastructure...')}
           </p>
         </div>
@@ -150,27 +150,27 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
       {/* External Networks */}
-      <h4 className="mb-4">{translate('External Networks')}</h4>
+      <h4 className="mb-3">{translate('External Networks')}</h4>
       {errors.networks ? (
         <AlertItem
           type="floating"
           variant="error"
           title={errors.networks}
-          className="mb-4"
+          className="mb-3"
         />
       ) : values.externalNetworks.length === 0 ? (
         <AlertItem
           type="floating"
           variant="warning"
           title={translate('No external networks found.')}
-          className="mb-4"
+          className="mb-3"
         />
       ) : (
         <>
-          <p className="text-quaternary mb-4">
+          <p className="text-quaternary mb-3">
             {translate('Select the external network for the offering.')}
           </p>
-          <div className="row g-3 mb-6">
+          <div className="row g-3 mb-5">
             {values.externalNetworks.map((network) => (
               <div key={network.id} className="col-md-6">
                 <Card
@@ -186,7 +186,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                   <Card.Body>
                     <div className="flex items-start">
                       <Radio
-                        className="me-3"
+                        className="me-2.5"
                         aria-label={network.name}
                         checked={
                           values.selectedExternalNetworkId === network.id
@@ -231,7 +231,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
       )}
 
       {/* Availability Zones */}
-      <div className="row mb-6">
+      <div className="row mb-5">
         <div className="col-sm-6">
           <FormGroup label={translate('Instance availability zone')}>
             {errors.instanceAZs ? (
@@ -292,8 +292,8 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
 
       {/* Volume Types (informational) */}
       {!errors.volumeTypes && values.volumeTypes.length > 0 && (
-        <div className="mb-6">
-          <h5 className="mb-3">{translate('Volume Types')}</h5>
+        <div className="mb-5">
+          <h5 className="mb-2.5">{translate('Volume Types')}</h5>
           <Table bordered size="sm">
             <thead>
               <tr>
@@ -317,8 +317,8 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
 
       {/* Flavors (informational) */}
       {!errors.flavors && values.flavors.length > 0 && (
-        <div className="mb-6">
-          <h5 className="mb-3">{translate('Flavors')}</h5>
+        <div className="mb-5">
+          <h5 className="mb-2.5">{translate('Flavors')}</h5>
           <Table bordered size="sm">
             <thead>
               <tr>

@@ -134,9 +134,9 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
         <div id="marketplaces-selector">
           {step === 1 ? (
             // STEP 1
-            <div className="px-7">
-              <Row className="gx-4 mb-4">
-                <Col lg={6} className="mb-4 mb-lg-0">
+            <div className="px-5.5">
+              <Row className="gx-4 mb-3">
+                <Col lg={6} className="mb-3 lg:mb-0">
                   <OrganizationAutocomplete
                     placeholder={translate('Select an organization')}
                     validator={required}
@@ -155,8 +155,8 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
           ) : step === 2 ? (
             // STEP 2
             <>
-              <div className="px-7">
-                <Row className="mb-4">
+              <div className="px-5.5">
+                <Row className="mb-3">
                   <Col xs={12}>
                     <FilterBox
                       id="import-resource-search-box"
@@ -168,7 +168,7 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
                   </Col>
                 </Row>
               </div>
-              <div className="border-b-[1px] border-b-secondary mx-7" />
+              <div className="border-b-[1px] border-b-secondary mx-5.5" />
               <DataLoader
                 filter={filter}
                 customer={organization}
@@ -181,7 +181,7 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
             </>
           ) : (
             // STEP 3
-            <div className="px-7">
+            <div className="px-5.5">
               {Boolean(offering) && (
                 <ResourcesList
                   offering={offering}

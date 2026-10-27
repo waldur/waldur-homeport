@@ -38,7 +38,7 @@ const ReportDropdownItem: FC<{
   <div className={classNames(isCurrent && 'bg-brand-subtle')}>
     <Link
       state={report.state}
-      className="flex text-brand items-center py-2 px-5 hover:bg-primary-hover"
+      className="flex text-brand items-center py-1.5 px-4 hover:bg-primary-hover"
       onClick={close}
     >
       <span className="text-sm">{report.title}</span>
@@ -54,7 +54,7 @@ const ReportsDropdown: FC<ReportsDropdownProps> = ({
   currentKey,
   close,
 }) => (
-  <div className="max-h-[300px] overflow-auto py-2">
+  <div className="max-h-[300px] overflow-auto py-1.5">
     {reports.map((report) => (
       <ReportDropdownItem
         key={report.key}

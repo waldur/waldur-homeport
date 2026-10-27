@@ -9,6 +9,6 @@ export const ComponentBooleanLimitField: FunctionComponent = () => (
     label={translate('Allow to enable/disable component only')}
     size="sm"
     align="center"
-    space={5}
+    space={4}
   />
 );

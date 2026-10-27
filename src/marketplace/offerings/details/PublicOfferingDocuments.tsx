@@ -12,7 +12,7 @@ export const PublicOfferingDocuments: FunctionComponent<
   PublicOfferingDocumentsProps
 > = ({ offering }) => {
   return (
-    <Row className="mb-10" id="documents">
+    <Row className="mb-8" id="documents">
       <Col sm={12} md>
         <PublicOfferingDocumentsTable offering={offering} />
       </Col>

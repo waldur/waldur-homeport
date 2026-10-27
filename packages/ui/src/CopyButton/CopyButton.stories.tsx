@@ -32,8 +32,8 @@ export const Playground: Story = {};
 
 export const ContextUsage: Story = {
   render: () => (
-    <div className="p-6 bg-[var(--page-bg)] space-y-4 max-w-md">
-      <div className="flex items-center justify-between p-3 rounded-md border-[1px] border-secondary bg-[var(--card-bg)]">
+    <div className="p-5 bg-[var(--page-bg)] space-y-4 max-w-md">
+      <div className="flex items-center justify-between p-2.5 rounded-md border-[1px] border-secondary bg-[var(--card-bg)]">
         <div>
           <div className="text-xs text-quinary">API Token</div>
           <div className="font-mono text-xs text-primary">ab73...9f12</div>
@@ -45,7 +45,7 @@ export const ContextUsage: Story = {
         />
       </div>
 
-      <div className="flex items-center justify-between p-3 rounded-md border-[1px] border-secondary bg-[var(--card-bg)]">
+      <div className="flex items-center justify-between p-2.5 rounded-md border-[1px] border-secondary bg-[var(--card-bg)]">
         <div>
           <div className="text-xs text-quinary">Public IP</div>
           <div className="font-mono text-xs text-primary">192.168.1.42</div>

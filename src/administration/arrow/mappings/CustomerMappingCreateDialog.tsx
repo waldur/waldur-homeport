@@ -113,8 +113,8 @@ export const CustomerMappingCreateDialog = ({
   if (isLoadingSettings || isLoadingAvailable) {
     return (
       <ModalDialog title={translate('Create Customer Mapping')}>
-        <div className="flex items-center justify-center py-10">
-          <LoadingSpinnerSimple className="me-2" />
+        <div className="flex items-center justify-center py-8">
+          <LoadingSpinnerSimple className="me-1.5" />
           {translate('Loading Arrow customers...')}
         </div>
       </ModalDialog>
@@ -231,7 +231,7 @@ export const CustomerMappingCreateDialog = ({
               subscription={{ value: true }}
               render={({ input }) =>
                 input.value ? (
-                  <div className="mb-4 p-3 border rounded">
+                  <div className="mb-3 p-2.5 border rounded">
                     <small className="text-quaternary block mb-1">
                       {translate('Selected Arrow Customer')}
                     </small>
@@ -297,7 +297,7 @@ export const CustomerMappingCreateDialog = ({
                     <AlertItem
                       type="floating"
                       variant="success"
-                      className="mb-4"
+                      className="mb-3"
                       title={translate(
                         'Auto-matched with {confidence}% confidence',
                         {
@@ -315,7 +315,7 @@ export const CustomerMappingCreateDialog = ({
               <AlertItem
                 type="floating"
                 variant="error"
-                className="mb-4"
+                className="mb-3"
                 title={error}
               />
             )}

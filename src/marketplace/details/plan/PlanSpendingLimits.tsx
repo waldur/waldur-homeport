@@ -33,11 +33,11 @@ export const PlanSpendingLimits = ({
   }
 
   return (
-    <section className="mt-6" data-testid="plan-spending-limits">
+    <section className="mt-5" data-testid="plan-spending-limits">
       <h4 className="mb-1 text-base font-semibold text-primary">
         {translate('Spending limits')}
       </h4>
-      <p className="mb-4 text-sm text-tertiary">
+      <p className="mb-3 text-sm text-tertiary">
         {getSpendingLimitsNotice(
           offering.plugin_options?.action_on_usage_limit,
           offersAllTimeLimit(components),

@@ -40,10 +40,10 @@ export const NetworkStatisticsCard: FC<NetworkStatisticsCardProps> = ({
   isIncrease = false,
 }) => {
   return (
-    <Card className="card-bordered mb-5">
-      <Card.Body className="flex justify-between items-end gap-2">
+    <Card className="card-bordered mb-4">
+      <Card.Body className="flex justify-between items-end gap-1.5">
         <div>
-          <span className="block text-quaternary mb-3">{title}</span>
+          <span className="block text-quaternary mb-2.5">{title}</span>
           <h1 className="block text-2xl mb-0 text-primary">{value}GB/day</h1>
         </div>
         <ChangeIndicator isIncrease={isIncrease} change={change} />

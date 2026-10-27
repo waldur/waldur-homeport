@@ -114,7 +114,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
                       onClick={() => form.change('invitation', null)}
                       iconNode={<XIcon weight="bold" />}
                       variant="secondary"
-                      className="btn-no-focus me-2"
+                      className="btn-no-focus me-1.5"
                       size="sm"
                     />
                     <div className="flex flex-wrap text-sm ellipsis">
@@ -132,7 +132,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
                     submitting={submitting}
                     disabled={invalid || !values?.invitation?.uuid}
                     variant="primary"
-                    className="ms-6"
+                    className="ms-5"
                     label={translate('Request access')}
                     iconNode={<LockOpenIcon weight="bold" />}
                     iconOnLeft
@@ -142,7 +142,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
                     onClick={() => continueToAutentification(values.invitation)}
                     label={translate('Continue to autentification')}
                     variant="primary"
-                    className="ms-6"
+                    className="ms-5"
                     size={isSmallScr ? 'sm' : 'lg'}
                   />
                 ) : null}

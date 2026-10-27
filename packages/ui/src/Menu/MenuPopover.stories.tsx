@@ -54,7 +54,7 @@ const Trigger = ({ label, icon }: { label: string; icon?: ReactNode }) => (
  */
 export const NavFilterList: Story = {
   render: () => (
-    <div className="p-12 pb-[260px]">
+    <div className="p-10 pb-[260px]">
       <MenuPopover defaultOpen>
         <Trigger label="Add filter" icon={<FunnelSimpleIcon weight="bold" />} />
         <MenuPopover.Content
@@ -88,7 +88,7 @@ const SearchableList = () => {
       <MenuPopover>
         <Trigger label="Pick a resource" />
         <MenuPopover.Content look="actions" align="start" className="w-[260px]">
-          <label className="flex items-center gap-2 border-b px-[16px] py-[8px]">
+          <label className="flex items-center gap-1.5 border-b px-[16px] py-[8px]">
             <MagnifyingGlassIcon weight="bold" />
             <input
               aria-label="Search"
@@ -106,7 +106,7 @@ const SearchableList = () => {
           ))}
         </MenuPopover.Content>
       </MenuPopover>
-      <p className="mt-3">Picked: {picked ?? 'nothing yet'}</p>
+      <p className="mt-2.5">Picked: {picked ?? 'nothing yet'}</p>
     </>
   );
 };
@@ -118,7 +118,7 @@ const SearchableList = () => {
  */
 export const SearchAndPick: Story = {
   render: () => (
-    <div className="p-12 pb-[260px]">
+    <div className="p-10 pb-[260px]">
       <SearchableList />
     </div>
   ),
@@ -149,7 +149,7 @@ export const SearchAndPick: Story = {
  */
 export const ForceMounted: Story = {
   render: () => (
-    <div className="p-12 pb-[200px]">
+    <div className="p-10 pb-[200px]">
       <MenuPopover>
         <Trigger label="Filters" />
         <MenuPopover.Content forceMount align="start" className="w-[220px]">

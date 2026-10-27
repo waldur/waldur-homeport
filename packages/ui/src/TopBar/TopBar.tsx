@@ -53,7 +53,7 @@ export const TopBar = ({
     )}
     {...props}
   >
-    {left && <div className="flex min-w-0 items-center gap-3">{left}</div>}
+    {left && <div className="flex min-w-0 items-center gap-2.5">{left}</div>}
     {/* Always rendered, so the actions stay at the end. flex-basis 0 makes
         its width the grown share of free space, whatever its content's
         width, and overflow-hidden clips it: a long breadcrumb trail can
@@ -92,7 +92,7 @@ export const OrgSwitcher = ({
           // a flex parent (e.g. TopBar's left slot on a narrow viewport) —
           // flex items default to min-width:auto, which ignores flex-shrink
           // and any child's own truncate class otherwise.
-          'flex min-w-0 items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-medium',
+          'flex min-w-0 items-center gap-1.5 rounded-lg px-1.5 py-1.5 text-sm font-medium',
           // --bg-primary-hover, not --nav-item-hover-bg: OrgSwitcher sits in
           // the TopBar, not the sidebar, so it shouldn't inherit the
           // sidebar's own SIDEBAR_STYLE-driven hover color.
@@ -138,7 +138,7 @@ export const SearchField = ({
 }: SearchFieldProps) => (
   <div
     className={cn(
-      'flex w-full max-w-md items-center gap-2 rounded-lg border-[1px] px-3 py-2 text-sm',
+      'flex w-full max-w-md items-center gap-1.5 rounded-lg border-[1px] px-2.5 py-1.5 text-sm',
       'border-secondary bg-[var(--card-bg)] text-quinary',
       className,
     )}

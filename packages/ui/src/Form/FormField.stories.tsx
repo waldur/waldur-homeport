@@ -29,7 +29,7 @@ type Story = StoryObj<typeof FormField>;
 
 export const Default: Story = {
   render: () => (
-    <div className="flex max-w-[420px] flex-col gap-6 p-6">
+    <div className="flex max-w-[420px] flex-col gap-5 p-5">
       <FormField>
         <FormLabel>Name</FormLabel>
         <Input placeholder="Project name" />
@@ -49,7 +49,7 @@ export const Default: Story = {
 /** The label names whichever control is inside. */
 export const Controls: Story = {
   render: () => (
-    <div className="flex max-w-[420px] flex-col gap-6 p-6">
+    <div className="flex max-w-[420px] flex-col gap-5 p-5">
       <FormField>
         <FormLabel>Notes</FormLabel>
         <Textarea rows={3} />
@@ -69,7 +69,7 @@ export const Controls: Story = {
 export const HelpVariants: Story = {
   name: 'Help variants',
   render: () => (
-    <div className="flex max-w-[420px] flex-col gap-4 p-6">
+    <div className="flex max-w-[420px] flex-col gap-3 p-5">
       <FormText>default: help under a field.</FormText>
       <FormText variant="muted">muted: a quieter note.</FormText>
       <FormText variant="warning">warning: a caution.</FormText>
@@ -82,7 +82,7 @@ export const HelpVariants: Story = {
 export const SeveralControls: Story = {
   name: 'Several controls',
   render: () => (
-    <FormField className="flex max-w-[420px] flex-col gap-2 p-6">
+    <FormField className="flex max-w-[420px] flex-col gap-1.5 p-5">
       <FormLabel>Allocation range</FormLabel>
       <Input aria-describedby="range-help" placeholder="From" />
       <Input placeholder="To" />
@@ -98,7 +98,7 @@ export const SeveralControls: Story = {
 export const GroupOfControls: Story = {
   name: 'Group of controls',
   render: () => (
-    <FormFieldset className="flex max-w-[420px] flex-col gap-2 p-6">
+    <FormFieldset className="flex max-w-[420px] flex-col gap-1.5 p-5">
       <FormLegend required>Allocation range</FormLegend>
       <FormField>
         <FormLabel>From</FormLabel>

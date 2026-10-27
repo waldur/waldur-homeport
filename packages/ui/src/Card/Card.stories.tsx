@@ -32,7 +32,7 @@ type Story = StoryObj<typeof Card>;
  */
 export const StructuredCard: Story = {
   render: () => (
-    <div className="p-6 bg-[var(--page-bg)] max-w-md">
+    <div className="p-5 bg-[var(--page-bg)] max-w-md">
       <Card>
         <CardHeader>
           <CardTitle>Virtual Machine Overview</CardTitle>
@@ -72,13 +72,13 @@ export const StructuredCard: Story = {
  */
 export const SimpleCard: Story = {
   render: () => (
-    <div className="p-6 bg-[var(--page-bg)] max-w-sm">
-      <Card className="p-4">
+    <div className="p-5 bg-[var(--page-bg)] max-w-sm">
+      <Card className="p-3">
         <div className="text-xs font-mono uppercase text-quinary">
           Total Usage
         </div>
         <div className="text-2xl font-bold text-primary mt-1">1,420.50 EUR</div>
-        <div className="text-xs text-quaternary mt-2">
+        <div className="text-xs text-quaternary mt-1.5">
           +12% from previous billing cycle
         </div>
       </Card>

@@ -276,7 +276,7 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
             <AttachmentsList
               attachments={visibleAttachments}
               uploading={pendingFiles}
-              className="mb-7"
+              className="mb-5.5"
               ItemComponent={(itemProps) => (
                 <AttachmentItem onDelete={removeAttachment} {...itemProps} />
               )}

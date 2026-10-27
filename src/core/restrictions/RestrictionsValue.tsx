@@ -17,7 +17,7 @@ export const RestrictionsValue: FC<RestrictionsValueProps> = ({
     return <span className="text-quaternary fst-italic">{emptyMessage}</span>;
   }
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-1.5">
       {values.map((value) => (
         <Badge key={value} variant="neutral" tone="outline">
           {value}

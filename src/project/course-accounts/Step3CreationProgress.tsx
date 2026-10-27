@@ -101,7 +101,7 @@ export const Step3CreationProgress: FC<Step3CreationProgressProps> = ({
 
   return (
     <div>
-      <div className="flex gap-3 mb-4 items-center">
+      <div className="flex gap-2.5 mb-3 items-center">
         {counts.Pending > 0 && (
           <Badge variant="warning" shape="pill" tone="outline">
             {translate('{n} Pending', { n: counts.Pending })}

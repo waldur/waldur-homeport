@@ -45,7 +45,7 @@ export const BackendHealthStatusIndicator: FC = () => {
     : translate('Backend status: some services failing');
 
   return (
-    <span className="ms-8px">
+    <span className="ms-2">
       <Tooltip label={label}>
         <button
           type="button"

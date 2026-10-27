@@ -25,7 +25,7 @@ const SidebarBrandHeader = ({ onToggle }: { onToggle: () => void }) => {
     return null;
   }
   return (
-    <SidebarHeader className="gap-4">
+    <SidebarHeader className="gap-3">
       <WaldurSidebarBrand onToggle={onToggle} />
     </SidebarHeader>
   );

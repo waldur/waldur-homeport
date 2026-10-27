@@ -18,7 +18,7 @@ export const SupportDataAccessLogsExpandableRow: FC<
 
   return (
     <ExpandableContainer>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2.5">
         {/* Accessed fields */}
         <div>
           <strong>{translate('Accessed fields')}:</strong>

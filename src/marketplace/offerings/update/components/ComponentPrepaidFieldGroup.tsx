@@ -31,7 +31,7 @@ export const ComponentPrepaidFieldGroup: FC<{
 
   return billingType == 'one' ? (
     <ComponentAccountingTypeWrapper>
-      <Row className="g-5 mb-5">
+      <Row className="g-5 mb-4">
         <Col xs>
           <ComponentMinValueField />
         </Col>
@@ -43,11 +43,11 @@ export const ComponentPrepaidFieldGroup: FC<{
         name="is_prepaid"
         label={translate('Pre-paid component')}
         description={getPrepaidDescription()}
-        space={5}
+        space={4}
       />
       {isPrepaid ? (
         <>
-          <Row className="g-5 mb-5 items-end">
+          <Row className="g-5 mb-4 items-end">
             <Col xs>
               <NumberGroup
                 name="min_prepaid_duration"
@@ -70,7 +70,7 @@ export const ComponentPrepaidFieldGroup: FC<{
               />
             </Col>
           </Row>
-          <Row className="g-5 mb-5 items-end">
+          <Row className="g-5 mb-4 items-end">
             <Col xs>
               <NumberGroup
                 name="min_renewal_duration"

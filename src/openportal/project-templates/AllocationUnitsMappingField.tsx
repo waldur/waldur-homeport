@@ -99,13 +99,13 @@ export const AllocationUnitsMappingField: FunctionComponent<
 
   return (
     <div>
-      <div className="mb-3">
+      <div className="mb-2.5">
         {hasMappings ? (
           <>
-            <div className="text-quaternary mb-2">
+            <div className="text-quaternary mb-1.5">
               {translate('Current mappings:')}
             </div>
-            <ul className="list-group mb-3">
+            <ul className="list-group mb-2.5">
               {Object.entries(currentMappings).map(([unit, value]) => (
                 <li
                   key={unit}
@@ -128,16 +128,16 @@ export const AllocationUnitsMappingField: FunctionComponent<
             </ul>
           </>
         ) : (
-          <div className="text-quaternary mb-3">
+          <div className="text-quaternary mb-2.5">
             {translate('No mappings added yet.')}
           </div>
         )}
 
-        <div className="text-quaternary mb-2">
+        <div className="text-quaternary mb-1.5">
           {translate('Add a new mapping:')}
         </div>
 
-        <div className="row mb-3 items-end">
+        <div className="row mb-2.5 items-end">
           <FormField className="col-md-5">
             <FormLabel className="sr-only">
               {translate('Allocation Unit')}

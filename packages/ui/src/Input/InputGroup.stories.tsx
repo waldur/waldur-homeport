@@ -25,7 +25,7 @@ const SearchIcon = <MagnifyingGlassIcon size={20} weight="bold" />;
 
 export const Start: Story = {
   render: () => (
-    <div className="flex max-w-[420px] flex-col gap-4 p-6">
+    <div className="flex max-w-[420px] flex-col gap-3 p-5">
       <InputGroup start={SearchIcon}>
         <Input aria-label="Search" placeholder="Search..." />
       </InputGroup>
@@ -38,7 +38,7 @@ export const Start: Story = {
 
 export const End: Story = {
   render: () => (
-    <div className="flex max-w-[420px] flex-col gap-4 p-6">
+    <div className="flex max-w-[420px] flex-col gap-3 p-5">
       <InputGroup end={<span className="text-sm">EUR</span>}>
         <Input aria-label="Price" defaultValue="12.50" />
       </InputGroup>
@@ -53,7 +53,7 @@ export const End: Story = {
 export const InvalidIcon: Story = {
   name: 'Invalid icon',
   render: () => (
-    <div className="flex max-w-[420px] flex-col gap-4 p-6">
+    <div className="flex max-w-[420px] flex-col gap-3 p-5">
       <InputGroup invalid>
         <Input aria-label="Invalid" invalid defaultValue="Not an email" />
       </InputGroup>

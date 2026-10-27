@@ -59,7 +59,7 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
 
   if (topProposals.length === 0 && matchedKeywords.length === 0) {
     return (
-      <ExpandableContainer className="p-4">
+      <ExpandableContainer className="p-3">
         <p className="text-quaternary mb-0">
           {translate('No detailed match information available.')}
         </p>
@@ -68,14 +68,14 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
   }
 
   return (
-    <ExpandableContainer className="p-4">
+    <ExpandableContainer className="p-3">
       {/* Matched Keywords Section */}
       {matchedKeywords.length > 0 && (
-        <div className="mb-4">
-          <h6 className="font-medium mb-3">
+        <div className="mb-3">
+          <h6 className="font-medium mb-2.5">
             {translate('Matched expertise keywords')}
           </h6>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {matchedKeywords.map((keyword, index) => (
               <Badge key={index} variant="primary" shape="pill" tone="outline">
                 {keyword}
@@ -88,7 +88,7 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
       {/* Top Proposals Section */}
       {topProposals.length > 0 && (
         <div>
-          <h6 className="font-medium mb-3">
+          <h6 className="font-medium mb-2.5">
             {translate('Best matching proposals')}
           </h6>
           <div className="table-responsive">
@@ -106,7 +106,7 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
                     <td>
                       <div>
                         {proposal.slug && (
-                          <span className="text-quaternary me-2">
+                          <span className="text-quaternary me-1.5">
                             {proposal.slug}:
                           </span>
                         )}
@@ -131,7 +131,7 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
 
       {/* Source Type Info */}
       {row.source_type && (
-        <div className="mt-3 pt-3 border-t-[1px] border-t-secondary">
+        <div className="mt-2.5 pt-2.5 border-t-[1px] border-t-secondary">
           <small className="text-quaternary">
             {translate('Match source')}:{' '}
             {row.source_type_display || row.source_type}

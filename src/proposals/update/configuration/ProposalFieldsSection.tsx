@@ -39,7 +39,7 @@ const TITLE = (
       )}
       size={20}
       weight="fill"
-      className="mx-2"
+      className="mx-1.5"
     />
   </>
 );
@@ -47,7 +47,7 @@ const TITLE = (
 /** The consumers a field feeds, so the cost of switching it off is visible here
  * rather than only in the backend it silently affects. */
 const UsageList: FC<{ usage: ProposalFieldUsage[] }> = ({ usage }) => (
-  <div className="flex flex-wrap gap-2">
+  <div className="flex flex-wrap gap-1.5">
     {usage.map((item) => {
       const tooltip = getUsageTooltip(item);
       const badge = (
@@ -100,7 +100,7 @@ export const ProposalFieldsSection: FC<ProposalFieldsSectionProps> = ({
   }
 
   return (
-    <FormTable.Card title={TITLE} className="card-bordered mb-5">
+    <FormTable.Card title={TITLE} className="card-bordered mb-4">
       <FormTable>
         {/* Always-on fields come first, so the list reads as the whole step
             rather than only the part that can be changed. */}

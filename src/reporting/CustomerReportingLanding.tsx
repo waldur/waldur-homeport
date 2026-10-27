@@ -16,8 +16,8 @@ const ReportCard: FC<{ report: ReportDefinition }> = ({ report }) => {
   const Glyph = report.icon;
   return (
     <Card className="card-bordered h-full">
-      <Card.Body className="flex flex-col gap-4 p-4">
-        <div className="flex items-center gap-3">
+      <Card.Body className="flex flex-col gap-3 p-3">
+        <div className="flex items-center gap-2.5">
           {Glyph && (
             <div className="icon-square shrink-0">
               <Glyph size={24} weight="bold" />
@@ -29,7 +29,7 @@ const ReportCard: FC<{ report: ReportDefinition }> = ({ report }) => {
           {report.scopedDescription || report.description}
         </p>
       </Card.Body>
-      <Card.Footer className="flex justify-end py-3 px-4">
+      <Card.Footer className="flex justify-end py-2.5 px-3">
         <Link state={report.state}>{translate('View details')}</Link>
       </Card.Footer>
     </Card>
@@ -46,7 +46,7 @@ export const CustomerReportingLanding: FC = () => {
 
   return (
     <Card className="card-bordered">
-      <Card.Header className="py-4">
+      <Card.Header className="py-3">
         <ReportingOrganizationSelect />
       </Card.Header>
       <Card.Body>

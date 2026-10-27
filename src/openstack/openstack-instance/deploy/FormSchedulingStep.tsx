@@ -72,7 +72,7 @@ export const FormSchedulingStep = (props: FormStepProps) => {
         >
           <Table<OpenStackServerGroup>
             {...tableProps}
-            className="mt-n4"
+            className="-mt-3"
             columns={[
               {
                 title: translate('Name'),

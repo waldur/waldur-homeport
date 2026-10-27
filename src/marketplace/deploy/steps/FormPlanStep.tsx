@@ -42,7 +42,7 @@ export const FormPlanStep = (props: FormStepProps) => {
         )
       }
     >
-      <div className="flex gap-6 mb-5">
+      <div className="flex gap-5 mb-4">
         <div className="grow">
           <PlanSelectField plans={plans} offering={props.offering} />
         </div>

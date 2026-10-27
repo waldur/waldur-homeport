@@ -34,7 +34,7 @@ export const OrderSummaryTab = ({
         orderType.type === 'limits_update' && <ExportOrderComponentsButton />
       }
     >
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2.5">
         {user?.is_staff && (
           <Field
             label={translate('Order UUID')}

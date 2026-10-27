@@ -54,7 +54,7 @@ export const UserProfileHero: FC<UserProfileHeroProps> = ({
   ) : (
     <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-[1.25rem]')}>
       <TabNav
-        listClassName="mb-4"
+        listClassName="mb-3"
         activeKey={editActive ? 'edit' : 'view'}
         items={[
           ...(showViewTab

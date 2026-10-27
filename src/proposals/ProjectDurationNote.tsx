@@ -60,7 +60,9 @@ export const ProjectDurationNote: FC<{ duration: ProjectDuration }> = ({
       value={
         <>
           {formatProjectDuration(duration)}
-          {hint && <span className="text-quaternary ms-2 text-xs">{hint}</span>}
+          {hint && (
+            <span className="text-quaternary ms-1.5 text-xs">{hint}</span>
+          )}
         </>
       }
       labelCol={5}

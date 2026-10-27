@@ -30,7 +30,7 @@ export const CallsForProposals: FunctionComponent = () => {
         context="calls"
         backgroundImage={`url(${backendImage}), url(${defaultImage})`}
       >
-        <div className="flex justify-center gap-5">
+        <div className="flex justify-center gap-4">
           <Link
             state="calls-for-proposals-all-available-offerings"
             buttonVariant="tertiary"
@@ -47,10 +47,10 @@ export const CallsForProposals: FunctionComponent = () => {
           </Link>
         </div>
       </LandingHeroSection>
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-14')}>
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-11.5')}>
         <CallsForProposalsList />
       </div>
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-14')}>
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-11.5')}>
         <CallsAvailableOfferingsList />
       </div>
     </>

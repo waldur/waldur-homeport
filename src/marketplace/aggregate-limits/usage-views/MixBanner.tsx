@@ -36,7 +36,7 @@ export const MixBanner: FC<MixBannerProps> = ({
   scenarioNote,
 }) => {
   return (
-    <div className="flex flex-wrap items-center gap-2 small mb-2 px-2 py-2 rounded bg-secondary">
+    <div className="flex flex-wrap items-center gap-1.5 small mb-1.5 px-1.5 py-1.5 rounded bg-secondary">
       <Badge variant={codeVariant[mix.code]} tone="outline">
         {mix.label}
       </Badge>

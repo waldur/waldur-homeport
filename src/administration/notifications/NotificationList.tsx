@@ -52,12 +52,12 @@ export const NotificationList = () => {
                   <PencilSimpleIcon
                     size={16}
                     weight="bold"
-                    className="ms-3 text-quaternary"
+                    className="ms-2.5 text-quaternary"
                   />
                 </Tooltip>
               )}
               {row.description && (
-                <HelpIcon label={row.description} className="ms-2" />
+                <HelpIcon label={row.description} className="ms-1.5" />
               )}
             </>
           ),

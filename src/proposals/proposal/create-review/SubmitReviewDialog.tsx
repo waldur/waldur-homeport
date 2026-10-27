@@ -132,11 +132,11 @@ export const SubmitReviewDialog: FC<SubmitReviewDialogProps> = ({
                 const starValue = Number(fieldProps.input.value) || 0;
                 const ratingId = `rating-${fieldProps.input.name}`;
                 return (
-                  <div className="mb-7">
+                  <div className="mb-5.5">
                     <FormHeading id={`${ratingId}-label`}>
                       {translate('Rate')}
                     </FormHeading>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3">
                       <div
                         id={ratingId}
                         role="group"
@@ -151,7 +151,7 @@ export const SubmitReviewDialog: FC<SubmitReviewDialogProps> = ({
                           onChange={(value) => fieldProps.input.onChange(value)}
                         />
                       </div>
-                      <span className="text-secondary mt-2">
+                      <span className="text-secondary mt-1.5">
                         {fieldProps.input.value === 1
                           ? translate('1 star')
                           : translate('{count} stars', {
@@ -176,7 +176,7 @@ export const SubmitReviewDialog: FC<SubmitReviewDialogProps> = ({
               placeholder={translate('Add your notes here')}
             />
             {coiRequired && (
-              <div className="mt-4">
+              <div className="mt-3">
                 <Field name="coi_confirmed" type="checkbox">
                   {(props) => (
                     <SwitchField

@@ -98,7 +98,7 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
   return (
     <ModalDialog title={translate('ToS acceptance statistics')}>
       {providerUuid && (
-        <FormField className="mb-4">
+        <FormField className="mb-3">
           <FormLabel>{translate('Select offering')}</FormLabel>
           {isLoadingOfferings ? (
             <LoadingSpinner />
@@ -131,7 +131,7 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
       )}
 
       {selectedOffering && isLoading && (
-        <div className="flex justify-center items-center py-5">
+        <div className="flex justify-center items-center py-4">
           <LoadingSpinner />
         </div>
       )}
@@ -147,7 +147,7 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
           value={selectedView}
           onValueChange={(value) => setSelectedView(value as ViewType)}
         >
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center mb-3">
             <TabsList>
               {viewOptions.map((option) => (
                 <TabsTrigger key={option.value} value={option.value}>

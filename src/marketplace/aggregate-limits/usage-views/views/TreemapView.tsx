@@ -228,7 +228,7 @@ export const TreemapView: FC<Props> = ({ components }) => {
             : undefined
         }
       />
-      <div className="flex flex-wrap items-center gap-3 mb-2">
+      <div className="flex flex-wrap items-center gap-2.5 mb-1.5">
         <div className="flex items-center gap-1 small">
           <span className="text-secondary">{translate('Levels')}:</span>
           <Badge

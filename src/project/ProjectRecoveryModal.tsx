@@ -147,30 +147,33 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
               </>
             }
           >
-            <div className="mb-4">
+            <div className="mb-3">
               <h5>{translate('Project Recovery')}</h5>
-              <p className="text-quaternary mb-3">
+              <p className="text-quaternary mb-2.5">
                 {translate(
                   'You are about to recover the removed project "{projectName}". This action will:',
                   { projectName: project.name },
                 )}
               </p>
               <ul className="list-unstyled">
-                <li className="mb-2">
-                  <CheckIcon className="text-success me-2" weight="bold" />
+                <li className="mb-1.5">
+                  <CheckIcon className="text-success me-1.5" weight="bold" />
                   {translate('Restore project access and functionality')}
                 </li>
-                <li className="mb-2">
-                  <CheckIcon className="text-success me-2" weight="bold" />
+                <li className="mb-1.5">
+                  <CheckIcon className="text-success me-1.5" weight="bold" />
                   {translate('Re-enable project management capabilities')}
                 </li>
-                <li className="mb-2">
-                  <WarningIcon className="text-warning me-2" weight="bold" />
+                <li className="mb-1.5">
+                  <WarningIcon className="text-warning me-1.5" weight="bold" />
                   {translate('Resources will need to be manually recreated')}
                 </li>
                 {!hasTerminationMetadata && (
-                  <li className="mb-2">
-                    <WarningIcon className="text-warning me-2" weight="bold" />
+                  <li className="mb-1.5">
+                    <WarningIcon
+                      className="text-warning me-1.5"
+                      weight="bold"
+                    />
                     {translate(
                       'User roles will need to be manually reassigned',
                     )}
@@ -180,7 +183,7 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
             </div>
 
             {hasPreviousMembers && (
-              <div className="mb-4">
+              <div className="mb-3">
                 <RadioGroup
                   name="roleRecoveryOption"
                   defaultValue=""
@@ -194,10 +197,10 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
                   'send_invitations_to_previous_members' ||
                   values.roleRecoveryOption === 'restore_team_members') && (
                   <div
-                    className="border rounded p-3 mb-3 mt-3"
+                    className="border rounded p-2.5 mb-2.5 mt-2.5"
                     style={{ maxHeight: '200px', overflowY: 'auto' }}
                   >
-                    <h6 className="mb-2">
+                    <h6 className="mb-1.5">
                       {translate('Previous team members:')}
                     </h6>
                     <div className="table-responsive">
@@ -231,7 +234,7 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
               </div>
             )}
 
-            <div className="mb-4">
+            <div className="mb-3">
               <DateGroup
                 name="end_date"
                 placeholder="YYYY-MM-DD"

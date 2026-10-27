@@ -51,7 +51,7 @@ const PendingChangeValue: FC<{
   newValue: any;
 }> = ({ option, oldValue, newValue }) => {
   return (
-    <span className="inline-flex items-center gap-2 flex-wrap">
+    <span className="inline-flex items-center gap-1.5 flex-wrap">
       <span className="text-quaternary">
         <OptionValue option={option} value={oldValue} />
       </span>

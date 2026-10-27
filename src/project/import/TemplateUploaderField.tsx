@@ -18,7 +18,7 @@ export const TemplateUploaderField = ({
           'text/csv': ['.csv'],
         }}
         multiple={false}
-        className={description ? 'mb-3' : 'mb-6'}
+        className={description ? 'mb-2.5' : 'mb-5'}
         maxSize={10 * 1024 * 1024}
       />
 

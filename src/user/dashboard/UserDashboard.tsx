@@ -187,7 +187,7 @@ export const UserDashboard: FC = () => {
   return (
     <>
       {(hasResources || showOtherWidgets) && (
-        <Row className="mb-5 gy-4">
+        <Row className="mb-4 gy-4">
           {hasResources && (
             <Col md={4}>
               <DashboardCard
@@ -260,12 +260,12 @@ export const UserDashboard: FC = () => {
       )}
 
       {isFeatureVisible(UserFeatures.pending_user_actions) && (
-        <div className="mb-5">
+        <div className="mb-4">
           <UserPendingActionsList user={user} />
         </div>
       )}
 
-      <div className="mt-5">
+      <div className="mt-4">
         <UserAffiliationsList user={user} allowRoleGrant={false} />
       </div>
     </>

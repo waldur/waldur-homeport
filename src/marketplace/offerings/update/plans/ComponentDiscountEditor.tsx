@@ -74,18 +74,18 @@ export const ComponentDiscountEditor: FunctionComponent<
   const canUseTierBuilder = parseFormulaToTiers(currentFormula) !== null;
 
   return (
-    <div className="mb-8 border-b-[1px] border-b-secondary pb-6">
-      <div className="mb-3">
+    <div className="mb-6 border-b-[1px] border-b-secondary pb-5">
+      <div className="mb-2.5">
         <strong>{component.name}</strong>
         {component.measured_unit && (
-          <span className="text-quaternary ms-2">
+          <span className="text-quaternary ms-1.5">
             ({component.measured_unit})
           </span>
         )}
-        <BillingTypeBadge component={component} className="ms-2" />
+        <BillingTypeBadge component={component} className="ms-1.5" />
       </div>
 
-      <div className="mb-4" style={{ maxWidth: 400 }}>
+      <div className="mb-3" style={{ maxWidth: 400 }}>
         <SelectGroup
           name={`${base}.discount_aggregation`}
           label={translate('Discount scope')}
@@ -99,12 +99,12 @@ export const ComponentDiscountEditor: FunctionComponent<
       {mode === 'tiers' ? (
         <>
           {tiers.length === 0 && (
-            <p className="text-quaternary mb-3">
+            <p className="text-quaternary mb-2.5">
               {translate('No discount — add a tier to grant one.')}
             </p>
           )}
           {tiers.map((tier, index) => (
-            <div className="flex items-center gap-2 mb-2" key={index}>
+            <div className="flex items-center gap-1.5 mb-1.5" key={index}>
               <span className="text-quaternary">
                 {translate('when usage ≥')}
               </span>
@@ -133,7 +133,7 @@ export const ComponentDiscountEditor: FunctionComponent<
               />
             </div>
           ))}
-          <div className="flex items-center gap-4 mt-3">
+          <div className="flex items-center gap-3 mt-2.5">
             <BaseButton
               type="button"
               variant="tertiary"
@@ -153,7 +153,7 @@ export const ComponentDiscountEditor: FunctionComponent<
             />
           </div>
           {tiers.length > 0 && (
-            <div className="flex items-center gap-2 mt-4 text-quaternary">
+            <div className="flex items-center gap-1.5 mt-3 text-quaternary">
               {translate('Preview: at usage')}
               <BaseInputField
                 type="number"
@@ -178,7 +178,7 @@ export const ComponentDiscountEditor: FunctionComponent<
               />
             )}
           </Field>
-          <p className="text-quaternary mt-1 mb-2">
+          <p className="text-quaternary mt-1 mb-1.5">
             {translate(
               'Percentage discount as a function of the usage (bound to `usage`), clamped to 0-100. Functions: MIN, MAX, LN, LOG10, FLOOR, CEIL, POW, ABS.',
             )}

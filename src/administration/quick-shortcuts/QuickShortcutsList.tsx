@@ -22,7 +22,7 @@ export const QuickShortcutsList = () => {
       title: translate('Name'),
       render: ({ row }) => (
         <div className="flex items-center">
-          <div className="me-2">
+          <div className="me-1.5">
             <Avatar name={row.name} src={row.image} size={32} />
           </div>
           <span>{row.name}</span>

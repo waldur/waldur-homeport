@@ -89,7 +89,7 @@ export const ReviewAndConfirmTab: FC<ReviewAndConfirmTabProps> = ({
 
   return (
     <div>
-      <div className="mb-4">
+      <div className="mb-3">
         {translate(
           'Please review the changes below before confirming the reallocation.',
         )}

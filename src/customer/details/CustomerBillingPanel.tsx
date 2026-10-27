@@ -96,7 +96,7 @@ export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
     <EditFieldProvider scope={props.customer} callback={props.callback}>
       <FormTable.Card
         title={translate('Details')}
-        className="card-bordered mb-5"
+        className="card-bordered mb-4"
       >
         <FormTable hideActions={!props.canUpdate}>
           <DateEditField

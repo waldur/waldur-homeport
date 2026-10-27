@@ -66,7 +66,7 @@ const PeriodRow: FC<{ period: SpendingLimitPeriod; enabled: boolean }> = ({
   period,
   enabled,
 }) => (
-  <div className="mb-4">
+  <div className="mb-3">
     <Field
       name={`spending_limit_periods.${period}.enabled`}
       type="checkbox"
@@ -89,7 +89,7 @@ const PeriodRow: FC<{ period: SpendingLimitPeriod; enabled: boolean }> = ({
       )}
     />
     {enabled && (
-      <Row className="g-5 mt-0 ps-8">
+      <Row className="g-5 mt-0 ps-6">
         <Col xs={6}>
           <NumberGroup
             name={`spending_limit_periods.${period}.default`}
@@ -145,7 +145,7 @@ export const ComponentSpendingLimitPeriodsField: FC = () => {
         hideError
         size="sm"
         align="center"
-        space={5}
+        space={4}
       />
       {values.spending_limits_enabled && (
         <div data-testid="spending-limit-periods">

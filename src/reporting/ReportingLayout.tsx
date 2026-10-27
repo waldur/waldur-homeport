@@ -33,16 +33,16 @@ export const ReportingLayout: FC = () => {
   // category tabs and their lists stay staff/support only.
   if (!isStaff) {
     return (
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-9')}>
-        <h1 className="mb-5">{translate('Reporting')}</h1>
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-7.5')}>
+        <h1 className="mb-4">{translate('Reporting')}</h1>
         <CustomerReportingLanding />
       </div>
     );
   }
 
   return (
-    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-9')}>
-      <div className="flex justify-between items-center gap-4 mb-5">
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-7.5')}>
+      <div className="flex justify-between items-center gap-3 mb-4">
         <h1>{translate('Reporting')}</h1>
         {isDashboard && (
           <SegmentedControl<number>
@@ -59,7 +59,7 @@ export const ReportingLayout: FC = () => {
       </div>
 
       <TabNav
-        listClassName="mb-5"
+        listClassName="mb-4"
         items={tabs.map((tab) => ({
           key: tab.state,
           title: tab.title,

@@ -461,7 +461,7 @@ export const OfferingMergeWizard: FC = () => {
         </Card.Title>
       </Card.Header>
       <Card.Body>
-        <div className="wizard wizard-vertical flex flex-col lg:flex-row gap-7">
+        <div className="wizard wizard-vertical flex flex-col lg:flex-row gap-5.5">
           <div className="shrink-0" style={{ width: '280px' }}>
             <VerticalProgressSteps
               steps={steps}
@@ -478,7 +478,7 @@ export const OfferingMergeWizard: FC = () => {
               </p>
             )}
             <div className="wizard-body-vertical">{renderStep()}</div>
-            <div className="flex justify-between mt-5 pt-5 border-t-[1px] border-t-secondary">
+            <div className="flex justify-between mt-4 pt-4 border-t-[1px] border-t-secondary">
               <BaseButton
                 label={translate('Back')}
                 variant="tertiary"
@@ -491,7 +491,7 @@ export const OfferingMergeWizard: FC = () => {
                     : undefined
                 }
               />
-              <div className="flex gap-3">
+              <div className="flex gap-2.5">
                 <BaseButton
                   label={translate('Close')}
                   variant="tertiary"

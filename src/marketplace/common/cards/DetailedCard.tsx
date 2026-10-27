@@ -65,9 +65,9 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
           )}
         </div>
 
-        <Card.Body className="p-5 flex flex-col">
+        <Card.Body className="p-4 flex flex-col">
           {/* Header with logo and title */}
-          <div className="flex items-center gap-4 mb-4">
+          <div className="flex items-center gap-3 mb-3">
             {offering.thumbnail ? (
               <Image src={offering.thumbnail} size={48} isContain circle />
             ) : (
@@ -91,7 +91,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
 
           {/* Description */}
           {offering.description ? (
-            <p className="text-quaternary small ellipsis-lines-3 mb-4 grow">
+            <p className="text-quaternary small ellipsis-lines-3 mb-3 grow">
               {offering.description}
             </p>
           ) : (
@@ -99,7 +99,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
           )}
 
           {/* Badges */}
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-1.5 mb-3">
             {offering.category_title && (
               <Badge variant="neutral" tone="outline" className="font-normal">
                 {offering.category_title}
@@ -156,7 +156,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
         </Card.Body>
 
         {/* Footer */}
-        <Card.Footer className="py-4 px-5 flex justify-end gap-2">
+        <Card.Footer className="py-3 px-4 flex justify-end gap-1.5">
           <CardRequestAccessButton
             offering={offering}
             orderDisabledReason={isDisabled ? disabledButtonTooltip : undefined}

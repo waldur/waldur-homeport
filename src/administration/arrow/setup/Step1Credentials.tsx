@@ -66,9 +66,9 @@ export const Step1Credentials: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
-      <div className="mb-6">
-        <h4 className="mb-4">{translate('Arrow API Credentials')}</h4>
-        <p className="text-quaternary mb-4">
+      <div className="mb-5">
+        <h4 className="mb-3">{translate('Arrow API Credentials')}</h4>
+        <p className="text-quaternary mb-3">
           {translate(
             'Enter your Arrow API credentials to connect your ArrowSphere account.',
           )}
@@ -96,7 +96,7 @@ export const Step1Credentials: FC<WizardStepProps> = (props) => {
         <AlertItem
           type="floating"
           variant="error"
-          className="mb-4"
+          className="mb-3"
           title={error}
         />
       )}

@@ -29,7 +29,7 @@ type Story = StoryObj<typeof SecretInput>;
 
 export const Playground: Story = {
   render: (args) => (
-    <div className="max-w-[420px] p-6">
+    <div className="max-w-[420px] p-5">
       <SecretInput
         aria-label="Playground"
         defaultValue="s3cr3t-token"

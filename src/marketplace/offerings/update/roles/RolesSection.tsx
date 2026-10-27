@@ -48,7 +48,7 @@ export const RolesSection: FC<OfferingSectionProps> = (props) => {
         <AlertItem
           variant="info"
           type="floating"
-          className="mb-3"
+          className="mb-2.5"
           title={translate(
             'Roles for this offering are managed centrally by the service profile "{profile}". To edit, manage the profile from the administration panel.',
             { profile: profileName },
@@ -110,7 +110,7 @@ export const RolesSection: FC<OfferingSectionProps> = (props) => {
                 : translate("Offering doesn't have roles.")
             }
             buttonTitle={translate('Search again')}
-            className="mt-n5"
+            className="-mt-4"
           />
         }
         hasQuery={false}

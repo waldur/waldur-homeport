@@ -78,7 +78,7 @@ export const DatabaseActiveQueries: FC<DatabaseActiveQueriesProps> = ({
       {
         title: translate('Query'),
         render: ({ row }: { row: ActiveQuery }) => (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <Tooltip label={row.query_preview}>
               <code style={{ maxWidth: '300px' }} className="text-xs truncate">
                 {row.query_preview.length > 50
@@ -100,7 +100,7 @@ export const DatabaseActiveQueries: FC<DatabaseActiveQueriesProps> = ({
       title={translate('Active queries')}
       subtitle={translate('{count} queries running', { count: data.count })}
       defaultOpen={hasLongQueries}
-      className="mb-6"
+      className="mb-5"
     >
       {data.queries.length === 0 ? (
         <p className="text-quaternary mb-0">{translate('No active queries')}</p>
@@ -116,7 +116,7 @@ export const DatabaseActiveQueries: FC<DatabaseActiveQueriesProps> = ({
         />
       )}
       {data.waiting_on_locks > 0 && (
-        <div className="mt-3 text-warning">
+        <div className="mt-2.5 text-warning">
           {translate('{count} queries waiting on locks', {
             count: data.waiting_on_locks,
           })}

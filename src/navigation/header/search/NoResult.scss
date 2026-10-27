@@ -35,8 +35,10 @@
     margin-bottom: 4px;
     font-weight: var(--font-weight-medium);
   }
+}
 
-  .actions {
-    margin-top: 24px;
-  }
+// ErrorView (.search-error) spaces its actions with mt-1.5 instead. This
+// stylesheet is unlayered, so a rule here would beat that utility.
+.search-no-result .actions {
+  margin-top: 24px;
 }

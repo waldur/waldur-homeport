@@ -51,7 +51,7 @@ export const getProtectedFieldProps = (
 
   const renderValue = showProtectedMissingWarning
     ? (val: any) => (
-        <span className="inline-flex items-center gap-2">
+        <span className="inline-flex items-center gap-1.5">
           <span>{renderFieldOrDash(val)}</span>
           <Tooltip
             label={translate('Required field not provided by {idp}', {

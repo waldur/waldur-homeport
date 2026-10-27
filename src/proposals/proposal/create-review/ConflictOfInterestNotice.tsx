@@ -35,7 +35,7 @@ export const ConflictOfInterestNotice: FC<ConflictOfInterestNoticeProps> = ({
     <AlertItem
       variant="warning"
       type="floating"
-      className="mb-5"
+      className="mb-4"
       title={translate('This call requires a conflict of interest declaration')}
       body={translate(
         'You will be asked to confirm you have no conflict of interest with this proposal before your review can be submitted. If you do have one, decline the review now rather than reading further.',

@@ -140,19 +140,19 @@ const ExtendForm: FC<ExtendFormProps> = ({
         iconNode={<ClockClockwiseIcon weight="bold" />}
         footer={<FormFooter submitLabel={translate('Extend')} />}
       >
-        <FormField className="mb-4">
+        <FormField className="mb-3">
           <FormLabel>{translate('Current end')}</FormLabel>
           <div className="py-[10px] text-secondary">
             {formatMediumDateTime(currentEnd)}
           </div>
         </FormField>
 
-        <FormField className="mb-4">
+        <FormField className="mb-3">
           <FormLabel>{translate('Quick extend')}</FormLabel>
           <div
             role="group"
             aria-label={translate('Quick extend options')}
-            className="flex flex-wrap gap-2"
+            className="flex flex-wrap gap-1.5"
           >
             {QUICK_OFFSETS.map((offset) => {
               const isSelected = activeQuickKey === offset.key;
@@ -174,7 +174,7 @@ const ExtendForm: FC<ExtendFormProps> = ({
           </div>
         </FormField>
 
-        <FormField className="mb-4">
+        <FormField className="mb-3">
           <FormLabel>{translate('New end')}</FormLabel>
           <Field
             name="scheduled_end"

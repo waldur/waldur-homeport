@@ -315,7 +315,7 @@ export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
             </Row>
             <SiteWidePermissionGuard />
             {values.content_type === 'global' && (
-              <FormText className="mb-4">
+              <FormText className="mb-3">
                 {translate(
                   'Each permission applies to every object. Grant it to a user from their Roles and permissions tab.',
                 )}

@@ -100,10 +100,10 @@ export const AdministrationProfile = ({
   );
 
   return (
-    <Card className="card-bordered mb-5">
+    <Card className="card-bordered mb-4">
       <Card.Body>
         <Row>
-          <Col xs="auto" className="mb-4">
+          <Col xs="auto" className="mb-3">
             <DashboardHeroLogo
               logo={image}
               logoAlt={ENV.plugins.WALDUR_CORE.SITE_NAME}
@@ -114,10 +114,10 @@ export const AdministrationProfile = ({
             />
           </Col>
           <Col>
-            <Row className="my-6 mt-md-0">
+            <Row className="my-5 md:mt-0">
               <Col>
                 <h2>{ENV.plugins.WALDUR_CORE.SITE_NAME}</h2>
-                <Stack direction="horizontal" className="gap-6 text-quaternary">
+                <Stack direction="horizontal" className="gap-5 text-quaternary">
                   {version?.version && (
                     <span>
                       {translate('Version')}&nbsp;{version.version}

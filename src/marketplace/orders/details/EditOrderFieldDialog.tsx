@@ -105,7 +105,7 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
         )}
       />
     ) : (
-      <FormField className="mb-4" key={c.type}>
+      <FormField className="mb-3" key={c.type}>
         <FormLabel>
           {c.name}
           {c.measured_unit ? ` (${c.measured_unit})` : null}

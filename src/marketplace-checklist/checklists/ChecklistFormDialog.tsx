@@ -104,7 +104,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
               placeholder={translate('e.g. GDPR Compliance')}
               label={translate('Checklist name')}
               required
-              space={5}
+              space={4}
             />
 
             <SelectGroup
@@ -114,14 +114,14 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
               simpleValue
               label={translate('Checklist type')}
               required
-              space={5}
+              space={4}
             />
 
             <TextGroup
               name="description"
               placeholder={translate('Brief description of this checklist...')}
               label={translate('Description')}
-              space={5}
+              space={4}
             />
           </ModalDialog>
         </form>

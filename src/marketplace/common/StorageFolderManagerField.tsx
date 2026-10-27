@@ -220,7 +220,7 @@ export const StorageFolderManagerField = ({
   return (
     <div>
       {field.help_text && (
-        <FormText as="div" variant="muted" className="mb-3">
+        <FormText as="div" variant="muted" className="mb-2.5">
           {field.help_text}
         </FormText>
       )}
@@ -314,7 +314,7 @@ const HardQuotaOverride = ({
   hardQuotaError,
   onFieldChange,
 }: HardQuotaOverrideProps) => (
-  <Row className="mt-3">
+  <Row className="mt-2.5">
     <Col md={6}>
       <FormField>
         <FormLabel>{translate('Hard Quota Override (TB)')}</FormLabel>
@@ -346,7 +346,7 @@ const QuotaSummaryCard = ({
   );
 
   return (
-    <Card className="mt-3 bg-tertiary dark:bg-quaternary">
+    <Card className="mt-2.5 bg-tertiary dark:bg-quaternary">
       <Card.Header>
         <h6>{translate('Calculated Quotas')}</h6>
       </Card.Header>

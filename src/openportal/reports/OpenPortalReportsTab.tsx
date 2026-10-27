@@ -204,8 +204,8 @@ export const OpenPortalReportsTab: FC = () => {
   return (
     <Card className="card-bordered">
       <Card.Header className="border-b-[1px] border-b-secondary">
-        <div className="flex items-center gap-3 flex-wrap w-full">
-          <div className="flex items-center me-2">
+        <div className="flex items-center gap-2.5 flex-wrap w-full">
+          <div className="flex items-center me-1.5">
             <span className="h3 mb-0">{translate('Usage Report')}</span>
             <BaseButton
               iconNode={<ArrowsClockwiseIcon weight="bold" />}
@@ -303,8 +303,8 @@ export const OpenPortalReportsTab: FC = () => {
 
         {/* Usage chart */}
         {activeUsage.length > 0 && nameMaps !== undefined && (
-          <div className="mb-6">
-            <h4 className="font-semibold mb-3">{translate('Usage')}</h4>
+          <div className="mb-5">
+            <h4 className="font-semibold mb-2.5">{translate('Usage')}</h4>
             <UsageReportVis
               reports={activeUsage}
               height="400px"
@@ -316,7 +316,7 @@ export const OpenPortalReportsTab: FC = () => {
         {/* Storage chart */}
         {activeStorage.length > 0 && nameMaps !== undefined && (
           <div>
-            <h4 className="font-semibold mb-3">{translate('Storage')}</h4>
+            <h4 className="font-semibold mb-2.5">{translate('Storage')}</h4>
             <StorageReportVis
               reports={activeStorage}
               height="360px"

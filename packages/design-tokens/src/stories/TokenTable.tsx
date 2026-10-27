@@ -39,7 +39,7 @@ export function Prose({ text }: { text: string }) {
 /** A docblock: prose paragraphs, and indented ones as an aligned list. */
 function Doc({ text }: { text: string }) {
   return (
-    <div className="mb-6 max-w-4xl space-y-2 text-xs text-quaternary">
+    <div className="mb-5 max-w-4xl space-y-2 text-xs text-quaternary">
       {text.split('\n\n').map((para, i) =>
         /^\s{2,}/.test(para) ? (
           <Mono key={i} className="block whitespace-pre text-[11px]">
@@ -66,7 +66,7 @@ export function TokenPage({
   children: ReactNode;
 }) {
   return (
-    <div className="bg-[var(--page-bg)] p-6">
+    <div className="bg-[var(--page-bg)] p-5">
       <h3 className="mb-1 text-base font-semibold text-primary">{title}</h3>
       {intro && <Doc text={intro} />}
       {children}
@@ -126,7 +126,7 @@ function Contrast({ value, surface }: { value: string; surface: string }) {
   const tone =
     ratio >= 4.5 ? 'text-success' : ratio >= 3 ? 'text-warning' : 'text-danger';
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1.5">
       <span
         className="rounded px-1.5 py-0.5 text-sm font-semibold"
         style={{ color: value, background: `var(${surface})` }}
@@ -154,10 +154,10 @@ function Row({
   const value = useResolvedVar(token.name);
   return (
     <div className="contents">
-      <div className="py-2">
+      <div className="py-1.5">
         <Preview token={token} value={value} />
       </div>
-      <div className="min-w-0 py-2">
+      <div className="min-w-0 py-1.5">
         <Mono className="text-xs font-semibold text-primary">{token.name}</Mono>
         {token.note && (
           <p className="mt-1 max-w-md text-[11px] text-quaternary">
@@ -165,7 +165,7 @@ function Row({
           </p>
         )}
       </div>
-      <div className="py-2">
+      <div className="py-1.5">
         {(utilities?.get(token.name) ?? []).map((u) => (
           <Mono key={u} className="mr-1 block text-[11px] text-secondary">
             {u}
@@ -173,11 +173,14 @@ function Row({
         ))}
       </div>
       {blocks.map((block) => (
-        <Mono key={block} className="break-all py-2 text-[11px] text-tertiary">
+        <Mono
+          key={block}
+          className="break-all py-1.5 text-[11px] text-tertiary"
+        >
           {token.values[block] ? shortValue(token.values[block]) : INHERITS}
         </Mono>
       ))}
-      <div className="py-2">
+      <div className="py-1.5">
         <Mono
           className="text-[11px] text-quaternary rounded-sm"
           style={
@@ -194,7 +197,7 @@ function Row({
         </Mono>
       </div>
       {contrastOn && (
-        <div className="py-2">
+        <div className="py-1.5">
           {isForeground(token.name) && (
             <Contrast value={value} surface={contrastOn} />
           )}
@@ -240,13 +243,13 @@ export function TokenTable({
   ];
   return (
     <div
-      className="grid items-start gap-x-4 rounded-md border-[1px] border-secondary bg-[var(--card-bg)] px-4 [&>.contents>*]:border-t-[1px] [&>.contents>*]:border-t-secondary"
+      className="grid items-start gap-x-4 rounded-md border-[1px] border-secondary bg-[var(--card-bg)] px-3 [&>.contents>*]:border-t-[1px] [&>.contents>*]:border-t-secondary"
       style={{ gridTemplateColumns: columns }}
     >
       {header.map((h, i) => (
         <div
           key={i}
-          className="py-2 text-[11px] font-semibold uppercase tracking-wide text-quaternary"
+          className="py-1.5 text-[11px] font-semibold uppercase tracking-wide text-quaternary"
         >
           {h}
         </div>
@@ -255,7 +258,7 @@ export function TokenTable({
         <Fragment key={token.name}>
           {token.section && (
             <div
-              className="pb-1 pt-4 text-xs font-semibold text-secondary"
+              className="pb-1 pt-3 text-xs font-semibold text-secondary"
               style={{ gridColumn: '1 / -1' }}
             >
               {token.section}

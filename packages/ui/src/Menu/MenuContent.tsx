@@ -31,9 +31,8 @@ export type SurfaceLook = 'nav' | 'actions';
 export type SurfaceContainer = 'menu' | 'popover' | 'disclosure';
 
 // The surfaces reset margin and padding (an `asChild` <ul> has the
-// browser's) with arbitrary values, not `m-0`/`p-0`: Bootstrap defines
-// `.m-0`/`.p-0` with !important, which would override a caller's Tailwind
-// `py-*` or `my-*` wherever Bootstrap is loaded (the main app, Storybook).
+// browser's). A caller's `py-*` or `my-*` still wins: Tailwind orders the
+// shorthand before it.
 
 // No border, the page body's background, an 8px radius and z-index 105.
 // Like Metronic, it sets no text colour; only rows are gray-600.

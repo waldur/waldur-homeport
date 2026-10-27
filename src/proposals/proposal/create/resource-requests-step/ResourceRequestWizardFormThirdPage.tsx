@@ -47,7 +47,7 @@ export const ResourceRequestWizardFormThirdPage: FunctionComponent<
         />
       ) : null}
       {cost.known ? (
-        <div className="flex justify-between items-baseline border-t-[1px] border-t-secondary pt-4 mt-4">
+        <div className="flex justify-between items-baseline border-t-[1px] border-t-secondary pt-3 mt-3">
           <span className="font-medium">{translate('Estimated cost')}</span>
           <span className="text-base">
             <RequestedResourceCostLabel cost={cost} />

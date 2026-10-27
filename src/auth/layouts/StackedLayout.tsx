@@ -48,7 +48,7 @@ export const StackedLayout = () => {
       </div>
       <div className="layout-stacked-login">
         <div className="layout-stacked-login-content">
-          <div className="login-logo mb-3">
+          <div className="login-logo mb-2.5">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
               src={imageUrl}

@@ -180,7 +180,7 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
           {effectiveTrailing && (
             <span
               data-slot="menu-item-trailing"
-              className="ms-auto ps-3 inline-flex shrink-0 items-center pointer-events-auto"
+              className="ms-auto ps-2.5 inline-flex shrink-0 items-center pointer-events-auto"
             >
               {effectiveTrailing}
             </span>

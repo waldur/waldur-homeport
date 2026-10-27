@@ -239,7 +239,7 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                           return (
                             <div
                               key={name}
-                              className="flex items-start gap-2 mb-2"
+                              className="flex items-start gap-1.5 mb-1.5"
                             >
                               <div style={{ flex: '0 0 220px' }}>
                                 <Field name={`${name}.type`}>

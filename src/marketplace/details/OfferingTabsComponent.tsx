@@ -21,7 +21,7 @@ export const OfferingTabsComponent: React.FC<OfferingTabsComponentProps> = (
   }
   return (
     <Tabs mount="active" defaultValue={props.tabs[0].key}>
-      <TabsList className="border-transparent font-medium my-6">
+      <TabsList className="border-transparent font-medium my-5">
         {props.tabs.map((tab) => (
           <TabsTrigger key={tab.key} value={tab.key}>
             {tab.title}
@@ -31,7 +31,7 @@ export const OfferingTabsComponent: React.FC<OfferingTabsComponentProps> = (
       <div className="tab-content">
         {props.tabs.map((tab) => (
           <TabsContent key={tab.key} value={tab.key}>
-            <div className="mt-3">{React.createElement(tab.component)}</div>
+            <div className="mt-2.5">{React.createElement(tab.component)}</div>
           </TabsContent>
         ))}
       </div>

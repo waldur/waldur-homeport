@@ -37,7 +37,7 @@ export const LexisLinkIntegrationSection: FC<OfferingEditPanelProps> = (
   return (
     <FormTable.Card
       title={translate('LEXIS integration')}
-      className="card-bordered mb-7"
+      className="card-bordered mb-5.5"
     >
       <EditFieldProvider scope={props.offering} callback={update}>
         <FormTable>

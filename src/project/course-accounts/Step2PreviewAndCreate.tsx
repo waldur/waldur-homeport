@@ -130,7 +130,7 @@ export const Step2PreviewAndCreate = ({ skipErrors, setSkipErrors }) => {
 
   return (
     <div>
-      <div className="flex justify-between text-quaternary mb-3">
+      <div className="flex justify-between text-quaternary mb-2.5">
         <span>{translate('{n} users identified', { n: data.length })}</span>
         <span>{translate('Verify your data before importing')}</span>
       </div>

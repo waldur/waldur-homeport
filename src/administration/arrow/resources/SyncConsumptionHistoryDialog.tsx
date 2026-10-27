@@ -112,13 +112,13 @@ export const SyncConsumptionHistoryDialog = ({
         </>
       }
     >
-      <p className="text-quaternary mb-4">
+      <p className="text-quaternary mb-3">
         {translate(
           'Fetch historical consumption data from Arrow and create usage records for billing.',
         )}
       </p>
 
-      <FormField className="mb-3">
+      <FormField className="mb-2.5">
         <FormLabel>{translate('From period')}</FormLabel>
         <MonthPicker
           value={parseDateValue(periodFrom)}
@@ -133,7 +133,7 @@ export const SyncConsumptionHistoryDialog = ({
         </FormText>
       </FormField>
 
-      <FormField className="mb-3">
+      <FormField className="mb-2.5">
         <FormLabel>{translate('To period')}</FormLabel>
         <MonthPicker
           value={parseDateValue(periodTo)}
@@ -154,7 +154,7 @@ export const SyncConsumptionHistoryDialog = ({
           variant="success"
           title={translate('Sync completed')}
           body={
-            <ul className="mb-0 mt-2">
+            <ul className="mb-0 mt-1.5">
               <li>
                 {translate('Periods synced')}: {mutation.data.periods_synced}
               </li>
@@ -176,10 +176,10 @@ export const SyncConsumptionHistoryDialog = ({
         <AlertItem
           type="floating"
           variant="warning"
-          className="mt-3"
+          className="mt-2.5"
           title={translate('Some periods had errors:')}
           body={
-            <ul className="mb-0 mt-2">
+            <ul className="mb-0 mt-1.5">
               {mutation.data.errors.map((err: any, idx: number) => (
                 <li key={idx}>
                   {err.period}: {err.error}

@@ -183,7 +183,7 @@ export const EventConsumerWebhookDialog: FC<
                 body={translate(
                   'This consumer receives events about every user in the system, including names and email addresses. Narrow it down with object types and filters, and only point it at a system you trust.',
                 )}
-                className="mb-6"
+                className="mb-5"
               />
             )}
             <SecretGroup

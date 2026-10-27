@@ -16,6 +16,7 @@
     "build": "NODE_OPTIONS=--max-old-space-size=8192 vite build",
     "build:check": "node scripts/bundle-budget.mjs",
     "snapshots:theme": "node scripts/theme-snapshots.mjs",
+    "codemod:bootstrap-spacing": "node scripts/codemods/bootstrap-spacing.mjs",
     "preview": "vite preview",
     "format:check": "prettier --check \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",
     "format:fix": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",

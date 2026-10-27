@@ -32,7 +32,7 @@ const ProviderOverviewContent: FC<{ providerUuid: string }> = ({
   if (!data) return null;
 
   const renderValueWithChange = (value: number, change?: number) => (
-    <div className="flex items-baseline gap-2">
+    <div className="flex items-baseline gap-1.5">
       <span className="text-3xl font-bold">{value}</span>
       {change !== undefined && (
         <span

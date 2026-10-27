@@ -12,7 +12,7 @@ export const HeroSection = ({ item }: { item: Category | CategoryGroup }) => (
     <div
       className={classNames(
         PAGE_CONTAINER_CLASSNAME,
-        'flex items-center gap-4',
+        'flex items-center gap-3',
       )}
     >
       {item.icon && (
@@ -22,7 +22,7 @@ export const HeroSection = ({ item }: { item: Category | CategoryGroup }) => (
         <h1 className="text-2xl font-medium mb-0">{item.title}</h1>
         {item.description && <p className="mb-0 mt-1">{item.description}</p>}
         {(item as CategoryGroup).categories?.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-2">
+          <div className="flex flex-wrap gap-1.5 mt-1.5">
             {(item as CategoryGroup).categories.map((category) => (
               <Link
                 state="public.marketplace-category"

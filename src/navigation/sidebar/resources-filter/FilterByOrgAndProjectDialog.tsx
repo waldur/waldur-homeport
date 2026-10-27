@@ -43,7 +43,7 @@ const DialogFields: FC = () => {
   }, [project, organization, organizationUuid, projectCustomerUuid, form]);
 
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-5.5">
       <OrganizationAutocomplete />
       <ProjectAutocomplete
         customer_uuid={organizationUuid}

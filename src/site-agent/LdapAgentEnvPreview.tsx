@@ -55,7 +55,7 @@ export const LdapAgentEnvPreview: FC<LdapAgentEnvPreviewProps> = ({
             label={translate('Back')}
             size="lg"
           />
-          <div className="flex gap-2">
+          <div className="flex gap-1.5">
             <BaseButton
               variant="tertiary"
               onClick={handleCopy}
@@ -105,11 +105,11 @@ export const LdapAgentEnvPreview: FC<LdapAgentEnvPreviewProps> = ({
         />
       </div>
 
-      <div className="mt-3 text-quaternary small">
+      <div className="mt-2.5 text-quaternary small">
         <p className="mb-1">
           <strong>{translate('Next steps:')}</strong>
         </p>
-        <ol className="mb-0 ps-3">
+        <ol className="mb-0 ps-2.5">
           <li>
             {translate(
               'Replace CHANGEME placeholder values with actual credentials.',

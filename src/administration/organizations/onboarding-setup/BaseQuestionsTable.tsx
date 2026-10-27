@@ -376,7 +376,7 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
           variant="purple"
           shape="pill"
           tone="outline"
-          className="px-3 py-2"
+          className="px-2.5 py-1.5"
         >
           {getQuestionTypeLabel(row.question_type)}
         </Badge>
@@ -396,7 +396,7 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
             variant="danger"
             shape="pill"
             tone="outline"
-            className="px-3 py-2"
+            className="px-2.5 py-1.5"
           >
             {translate('Required')}
           </Badge>
@@ -405,7 +405,7 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
             variant="neutral"
             shape="pill"
             tone="outline"
-            className="px-3 py-2"
+            className="px-2.5 py-1.5"
           >
             {translate('Optional')}
           </Badge>

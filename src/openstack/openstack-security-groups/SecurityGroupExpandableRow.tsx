@@ -16,7 +16,7 @@ export const SecurityGroupExpandableRow: FC<{
     <ExpandableContainer>
       <EmbeddedTabs
         defaultValue="rules"
-        listClassName="mb-4"
+        listClassName="mb-3"
         tabs={[
           {
             key: 'rules',

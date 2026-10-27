@@ -30,12 +30,12 @@ export const ProviderDetailsDialog = (props) => {
     return (
       url && (
         <ListGroup.Item key={urlKey}>
-          <div className="ms-2 me-auto">
+          <div className="ms-1.5 me-auto">
             <div className="font-medium">{label}</div>
             <div className="copy-to-clipboard-container">
               {url}
               <CopyToClipboardButton
-                className="mx-2 hover:text-brand cursor-pointer inline z-index-1"
+                className="mx-1.5 hover:text-brand cursor-pointer inline z-index-1"
                 value={url}
               />
             </div>

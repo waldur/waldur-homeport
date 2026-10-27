@@ -77,7 +77,7 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
                     </Badge>
                   }
                   tooltipProps={{ theme: 'light', autoWidth: true }}
-                  className="px-2"
+                  className="px-1.5"
                 >
                   +1
                 </Badge>

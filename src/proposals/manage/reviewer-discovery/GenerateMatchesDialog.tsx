@@ -233,8 +233,8 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
 
               {/* Call description preview */}
               {values.source?.value === 'call_description' && (
-                <div className="border rounded p-3 bg-tertiary dark:bg-quaternary mb-4">
-                  <div className="font-medium mb-2">{resolve.call.name}</div>
+                <div className="border rounded p-2.5 bg-tertiary dark:bg-quaternary mb-3">
+                  <div className="font-medium mb-1.5">{resolve.call.name}</div>
                   {resolve.call.description ? (
                     <div
                       className="text-quaternary small"
@@ -255,7 +255,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
 
               {/* All proposals info */}
               {values.source?.value === 'all_proposals' && (
-                <div className="border rounded p-3 bg-tertiary dark:bg-quaternary mb-4">
+                <div className="border rounded p-2.5 bg-tertiary dark:bg-quaternary mb-3">
                   {proposalsLoading ? (
                     <span className="text-quaternary">
                       {translate('Loading proposals...')}
@@ -328,11 +328,11 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
               )}
 
               {/* Advanced options */}
-              <details className="mb-4">
+              <details className="mb-3">
                 <summary className="cursor-pointer text-quaternary">
                   {translate('Advanced options')}
                 </summary>
-                <div className="mt-3">
+                <div className="mt-2.5">
                   <FormGroup label={translate('Minimum match score (%)')}>
                     <Field name="min_threshold">
                       {({

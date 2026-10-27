@@ -107,21 +107,21 @@ export const TableStoryGridItem = ({ row }: { row: TableStoryRow }) => (
               {row.status}
             </Badge>
           }
-          space={2}
+          space={1.5}
           labelCol={6}
           valueCol={6}
         />
         <Field
           label="Owner"
           value={row.owner}
-          space={2}
+          space={1.5}
           labelCol={6}
           valueCol={6}
         />
         <Field
           label="Created"
           value={row.created}
-          space={2}
+          space={1.5}
           labelCol={6}
           valueCol={6}
         />
@@ -243,7 +243,7 @@ export const TableStoryBulkDeleteButton = ({
  * it's a real, documented, working code path, not a hypothetical one.
  */
 export const TableStoryInlineRowActions = () => (
-  <div className="flex gap-2">
+  <div className="flex gap-1.5">
     <BaseButton
       onClick={() => undefined}
       label="Edit"

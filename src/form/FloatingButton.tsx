@@ -11,7 +11,7 @@ export const FloatingButton: FC<PropsWithChildren> = (props) => {
 
   return (
     <>
-      <div ref={mainButtonRef} className="flex justify-between mt-5">
+      <div ref={mainButtonRef} className="flex justify-between mt-4">
         {props.children}
       </div>
       <div

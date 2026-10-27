@@ -184,7 +184,7 @@ export const OrganizationCreateStep2: FunctionComponent<
     if (checklistQuestions.length === 0) return null;
 
     return (
-      <Row className="g-4 pt-4">
+      <Row className="g-4 pt-3">
         {checklistQuestions.map((question, index) => {
           const isLastOdd =
             checklistQuestions.length % 2 !== 0 &&
@@ -205,9 +205,9 @@ export const OrganizationCreateStep2: FunctionComponent<
 
   // Documents go to the review: they are attached to the justification.
   const renderDocumentUpload = () => (
-    <div className="mt-8">
+    <div className="mt-6">
       <FormField>
-        <FormLabel className="mb-2">
+        <FormLabel className="mb-1.5">
           {translate('Optional information and supporting documents')}
         </FormLabel>
         <UploadContainer
@@ -221,7 +221,7 @@ export const OrganizationCreateStep2: FunctionComponent<
         />
         <AttachmentsList
           uploading={uploadedFiles}
-          className="mt-4"
+          className="mt-3"
           ItemPendingComponent={(itemProps) => (
             <AttachmentItemPending {...itemProps} onCancel={handleFileCancel} />
           )}
@@ -270,19 +270,19 @@ export const OrganizationCreateStep2: FunctionComponent<
   }, [checklistFetched, isManual]);
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       <Card className="border-0 shadow-sm">
-        <Card.Body className="p-8">
+        <Card.Body className="p-6">
           {!isManual &&
             (() => {
               const methodInfo = getAuthMethodInfo(validationMethod);
 
               return (
                 <>
-                  <p className="mb-3">{methodInfo.title}</p>
+                  <p className="mb-2.5">{methodInfo.title}</p>
                   {hasRequiredFields() ? (
-                    <Card className="card-bordered mb-6">
-                      <Card.Body className="flex gap-3">
+                    <Card className="card-bordered mb-5">
+                      <Card.Body className="flex gap-2.5">
                         <div className="shrink-0">
                           <CheckCircleIcon
                             size={24}
@@ -304,8 +304,8 @@ export const OrganizationCreateStep2: FunctionComponent<
                       </Card.Body>
                     </Card>
                   ) : blockForIncompleteProfile ? (
-                    <Card className="card-bordered mb-4">
-                      <Card.Body className="flex gap-3">
+                    <Card className="card-bordered mb-3">
+                      <Card.Body className="flex gap-2.5">
                         <div className="shrink-0">
                           <InfoIcon size={24} weight="duotone" />
                         </div>
@@ -313,7 +313,7 @@ export const OrganizationCreateStep2: FunctionComponent<
                           <div className="text-primary mb-1">
                             {translate('Complete your profile to continue')}
                           </div>
-                          <div className="text-secondary mb-3">
+                          <div className="text-secondary mb-2.5">
                             {missingProfileLabels
                               ? translate(
                                   'This check uses your identity from your account, but your profile is missing: {attributes}. Add it to your profile to continue.',
@@ -336,8 +336,8 @@ export const OrganizationCreateStep2: FunctionComponent<
                     </Card>
                   ) : (
                     <>
-                      <Card className="card-bordered mb-4">
-                        <Card.Body className="flex gap-3">
+                      <Card className="card-bordered mb-3">
+                        <Card.Body className="flex gap-2.5">
                           <div className="shrink-0">
                             <InfoIcon size={24} weight="duotone" />
                           </div>
@@ -361,8 +361,8 @@ export const OrganizationCreateStep2: FunctionComponent<
                     </>
                   )}
                   {identityReview && (
-                    <Card className="card-bordered mb-4">
-                      <Card.Body className="flex gap-3">
+                    <Card className="card-bordered mb-3">
+                      <Card.Body className="flex gap-2.5">
                         <div className="shrink-0">
                           <ClockCountdownIcon size={24} weight="duotone" />
                         </div>
@@ -382,7 +382,7 @@ export const OrganizationCreateStep2: FunctionComponent<
                     </Card>
                   )}
                   {/* Registration code field for automatic validation */}
-                  <div className="mt-6">
+                  <div className="mt-5">
                     <StringGroup
                       name="registration_code"
                       label={translate('Company registration code')}
@@ -401,8 +401,8 @@ export const OrganizationCreateStep2: FunctionComponent<
             })()}
 
           {isManual && (
-            <div className="pt-2">
-              <p className="text-secondary mb-6">
+            <div className="pt-1.5">
+              <p className="text-secondary mb-5">
                 {translate(
                   'Please provide your organization details. Supporting documents will help speed up the review process.',
                 )}

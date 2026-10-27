@@ -110,7 +110,7 @@ const EmptyState: FC<{ canManage: boolean; actions?: ReactNode }> = ({
       title={translate('No project groups yet')}
       message={
         <>
-          <p className="mb-2">{WHAT_THEY_ARE()}</p>
+          <p className="mb-1.5">{WHAT_THEY_ARE()}</p>
           <p className="mb-0">
             {translate(
               'To start: set a project group GID range on the POSIX ID pool, adopt the groups your directory already holds, then enable project groups in the account settings.',
@@ -119,7 +119,7 @@ const EmptyState: FC<{ canManage: boolean; actions?: ReactNode }> = ({
           {/* The switch lives on the account settings page, which has its
               own feature flag. */}
           {!isFeatureVisible(MarketplaceFeatures.show_provider_accounts) && (
-            <p className="mb-0 mt-2">
+            <p className="mb-0 mt-1.5">
               {translate(
                 'Account settings are not enabled on this portal; ask its administrator to turn on provider accounts so project groups can be switched on.',
               )}

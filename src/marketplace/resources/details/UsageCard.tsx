@@ -105,7 +105,7 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
         <Card.Title>
           <h3>{translate('Usage history')}</h3>
         </Card.Title>
-        <div className="card-toolbar gap-4">
+        <div className="card-toolbar gap-3">
           {teamError ? (
             <LoadingErred message={translate('Error')} loadData={refetchTeam} />
           ) : usersFilterOptions.length > 0 ? (

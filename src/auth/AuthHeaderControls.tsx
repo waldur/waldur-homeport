@@ -12,7 +12,7 @@ import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
  * app header (see the sign-in offsets in DrawerRoot.tsx).
  */
 export const AuthHeaderControls: FC = () => (
-  <div data-slot="auth-header-controls" className="flex items-center gap-2">
+  <div data-slot="auth-header-controls" className="flex items-center gap-1.5">
     <LLMChatDrawerToggle />
     <ThemeSwitcherButton />
   </div>

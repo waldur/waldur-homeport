@@ -47,15 +47,15 @@ export const FreeIpaAccount = () => {
   return (
     <Card className="card-bordered">
       <Card.Header>
-        <Row className="card-toolbar g-0 gap-4 w-full">
+        <Row className="card-toolbar g-0 gap-3 w-full">
           <Col xs className="order-0 sm:max-w-1/4">
             <Card.Title>
-              <span className="h3 me-2">{translate('FreeIPA account')}</span>
+              <span className="h3 me-1.5">{translate('FreeIPA account')}</span>
             </Card.Title>
           </Col>
           {profile && (
             <Col sm="auto" className="order-1 order-sm-2 min-w-1/4 ms-auto">
-              <div className="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-3">
+              <div className="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-2.5">
                 <SyncProfile
                   profile={profile}
                   refreshProfile={refreshProfile}

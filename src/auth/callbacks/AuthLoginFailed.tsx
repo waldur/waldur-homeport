@@ -24,12 +24,12 @@ export const AuthLoginFailed: FunctionComponent = () => {
       <h3>{translate('Login failed')}</h3>
       {safeMessage && (
         <p
-          className="mt-3"
+          className="mt-2.5"
           dangerouslySetInnerHTML={{ __html: safeMessage }}
           data-testid="login-failed-message"
         />
       )}
-      <p className="mt-3">
+      <p className="mt-2.5">
         <Link state="login"> &lt; {translate('Back to login')} </Link>
       </p>
     </div>

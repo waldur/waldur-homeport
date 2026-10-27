@@ -171,7 +171,7 @@ export const ResourceLimitsHistoryChart: FC<
       {(ref) => (
         <>
           {isLoading ? (
-            <LoadingSpinner className="py-10" />
+            <LoadingSpinner className="py-8" />
           ) : hasData && chartOptions ? (
             <EChart ref={ref} options={chartOptions} height="350px" />
           ) : null}

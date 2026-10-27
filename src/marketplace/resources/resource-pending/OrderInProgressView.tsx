@@ -270,9 +270,9 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
   const hasChangePlanRequest = hasResourceChangePlanRequest(resource);
   const hasLimitChangeRequest = hasResourceLimitChangeRequest(resource);
   return (
-    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-6')}>
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-5')}>
       <Card className="card-bordered border-divider-medium border-dashed border-1 overflow-hidden">
-        <Card.Body className="flex flex-col sm:flex-row items-center gap-4">
+        <Card.Body className="flex flex-col sm:flex-row items-center gap-3">
           {/* A phone is too narrow to lay the steps side by side: their labels
               and dates run into each other, so list them top to bottom. */}
           <div className="w-full sm:hidden">
@@ -284,7 +284,7 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
             className="hidden sm:block grow"
           />
 
-          <div className="flex sm:flex-col gap-3 text-nowrap">
+          <div className="flex sm:flex-col gap-2.5 text-nowrap">
             {!customerView &&
               (hasChangePlanRequest || hasLimitChangeRequest ? (
                 <ResourceViewChangeButton

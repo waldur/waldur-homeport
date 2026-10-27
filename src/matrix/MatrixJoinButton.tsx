@@ -106,10 +106,10 @@ const GeneratedPassword: FC = () => {
         pending={isPending}
         variant={password ? 'tertiary' : 'secondary'}
         size="sm"
-        className={password ? 'mt-2' : undefined}
+        className={password ? 'mt-1.5' : undefined}
       />
       {!password && (
-        <small className="text-quaternary block mt-2">
+        <small className="text-quaternary block mt-1.5">
           {translate(
             'Generating a password replaces any Matrix password set before.',
           )}
@@ -142,7 +142,7 @@ const RecoveryKey: FC = () => {
           variant="secondary"
           size="sm"
         />
-        <small className="text-quaternary block mt-2">
+        <small className="text-quaternary block mt-1.5">
           {translate(
             'Your Matrix client asks for it to read your encrypted messages.',
           )}

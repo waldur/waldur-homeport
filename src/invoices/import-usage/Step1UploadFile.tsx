@@ -67,10 +67,10 @@ export const Step1UploadFile: FC<Step1Props> = (props) => {
   return (
     <WizardForm {...props}>
       <div className="text-quaternary">
-        <h6 className="font-medium mb-5">
+        <h6 className="font-medium mb-4">
           1. {translate('Select billing period')}
         </h6>
-        <Row className="mb-6">
+        <Row className="mb-5">
           <Col md={6}>
             <Field name="year" validate={required}>
               {({ input, meta }) => (
@@ -101,7 +101,7 @@ export const Step1UploadFile: FC<Step1Props> = (props) => {
 
         <hr />
 
-        <h6 className="font-medium mb-5">2. {translate('Upload your file')}</h6>
+        <h6 className="font-medium mb-4">2. {translate('Upload your file')}</h6>
         <Field
           name="file"
           validate={validateFile}
@@ -120,11 +120,11 @@ export const Step1UploadFile: FC<Step1Props> = (props) => {
                   'text/csv': ['.csv'],
                 }}
                 multiple={false}
-                className="mb-3"
+                className="mb-2.5"
                 maxSize={10 * 1024 * 1024}
               />
 
-              <ul className="mb-5">
+              <ul className="mb-4">
                 <li>{translate('Supported formats')}: .xlsx, .xls, .csv</li>
                 <li>
                   {translate('Required columns')}:{' '}

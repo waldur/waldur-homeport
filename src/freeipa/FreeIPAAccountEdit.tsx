@@ -10,7 +10,7 @@ interface FreeIPAAccountEditOwnProps {
 }
 
 const UsernameGroup = ({ profile }) => (
-  <FormField className=" mb-7">
+  <FormField className=" mb-5.5">
     <FormLabel>{translate('Username')}</FormLabel>
     <BaseInputField readOnly defaultValue={profile.username} solid />
   </FormField>

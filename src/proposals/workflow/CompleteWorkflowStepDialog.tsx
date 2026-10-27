@@ -121,7 +121,7 @@ export const CompleteWorkflowStepDialog: FC<
               <AlertItem
                 variant="error"
                 type="floating"
-                className="mb-5"
+                className="mb-4"
                 title={translate('The step cannot be completed yet')}
                 body={refusal}
               />

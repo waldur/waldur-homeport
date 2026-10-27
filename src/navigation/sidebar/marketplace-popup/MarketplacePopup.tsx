@@ -77,13 +77,13 @@ const MarketplacePopupForm: FC<{ categoryUuid?: string }> = ({
       subtitle={translate(
         'Select an organization and project, then choose a category, an offering, and follow the prompts',
       )}
-      headerClassName="pb-4"
-      bodyClassName="p-0 pb-4"
+      headerClassName="pb-3"
+      bodyClassName="p-0 pb-3"
     >
       <div id="marketplaces-selector">
-        <div className="px-7">
-          <Row className="gx-4 mb-4">
-            <Col lg={6} className="mb-4 mb-lg-0">
+        <div className="px-5.5">
+          <Row className="gx-4 mb-3">
+            <Col lg={6} className="mb-3 lg:mb-0">
               <OrganizationAutocomplete
                 placeholder={translate('Select an organization')}
               />
@@ -96,7 +96,7 @@ const MarketplacePopupForm: FC<{ categoryUuid?: string }> = ({
               />
             </Col>
           </Row>
-          <Row className="mb-4">
+          <Row className="mb-3">
             <Col xs={12}>
               <FilterBox
                 id="marketplaces-selector-search-box"
@@ -108,7 +108,7 @@ const MarketplacePopupForm: FC<{ categoryUuid?: string }> = ({
             </Col>
           </Row>
         </div>
-        <div className="border-b-[1px] border-b-secondary mx-7" />
+        <div className="border-b-[1px] border-b-secondary mx-5.5" />
         <DataLoader
           filter={filter}
           customer={values?.organization}

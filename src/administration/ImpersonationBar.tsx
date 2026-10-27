@@ -39,7 +39,7 @@ export const ImpersonationBar = () => {
     <div
       className={classNames(
         PAGE_CONTAINER_CLASSNAME,
-        'impersonation-bar flex items-center justify-between h-full gap-4',
+        'impersonation-bar flex items-center justify-between h-full gap-3',
       )}
     >
       <Stack direction="horizontal" gap={4} className="font-medium">

@@ -84,7 +84,7 @@ export const RoleAvailabilitiesList: FC<TableWithPortal> = ({ portal }) => {
                 variant="neutral"
                 shape="pill"
                 tone="outline"
-                className="ms-2"
+                className="ms-1.5"
               >
                 {row.scope_type}
               </Badge>

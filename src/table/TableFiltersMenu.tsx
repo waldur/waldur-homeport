@@ -95,7 +95,7 @@ const FlyoutRow: FC<
       <MenuPopover.Content
         side="right"
         align="start"
-        className="w-[250px] py-3 shadow-sm"
+        className="w-[250px] py-2.5 shadow-sm"
         // Same close-focus rule as the filter rows — see
         // TableMenuFilterItem's onCloseAutoFocus in TableFilterItem.tsx.
         onCloseAutoFocus={(e) =>

@@ -159,16 +159,16 @@ export const UsageExpandableRow = ({
             value={renderFieldOrDash(row.description)}
           />
         </Col>
-        <Col sm={6} className="border-sm-start ps-md-9">
+        <Col sm={6} className="border-sm-start md:ps-7.5">
           <Card className="card-bordered">
-            <Card.Body className="p-4">
-              <div className="flex items-center justify-between gap-2 text-nowrap flex-wrap">
+            <Card.Body className="p-3">
+              <div className="flex items-center justify-between gap-1.5 text-nowrap flex-wrap">
                 <div>
                   {periodOptions.length > 1 && (
                     <SegmentedControl<number>
                       aria-label={translate('Time period')}
                       size="sm"
-                      itemClassName="px-4"
+                      itemClassName="px-3"
                       options={periodOptions}
                       value={period}
                       onValueChange={setPeriod}
@@ -193,7 +193,7 @@ export const UsageExpandableRow = ({
                   />
                 ) : chartData.length ? (
                   <>
-                    <div className="flex flex-col justify-between text-xs text-nowrap pt-2">
+                    <div className="flex flex-col justify-between text-xs text-nowrap pt-1.5">
                       <span>
                         {translate('Max')}
                         {': '}

@@ -26,7 +26,7 @@ export const Tag = forwardRef<HTMLSpanElement, PropsWithChildren<TagProps>>(
       data-slot="tag"
       data-size={size}
       className={cn(
-        'inline-flex items-center gap-1 rounded-md border-[1px] border-primary bg-primary text-secondary px-2',
+        'inline-flex items-center gap-1 rounded-md border-[1px] border-primary bg-primary text-secondary px-1.5',
         size === 'sm' && 'py-[1px] text-xs leading-[18px]',
         size === 'lg' && 'py-[3px] text-sm leading-5',
         !size && 'py-[1px] text-sm leading-5',

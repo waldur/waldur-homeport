@@ -74,10 +74,10 @@ export const EditGettingStartedDialog: FC<{
               </Col>
               <Col
                 xs="auto"
-                className="border-e-2 border-divider-medium mx-5 p-0"
+                className="border-e-2 border-divider-medium mx-4 p-0"
               />
 
-              <Col className="pb-20">
+              <Col className="pb-16">
                 <FormHeading as="p">{translate('Preview')}</FormHeading>
                 <CodePreview
                   template={values.template}

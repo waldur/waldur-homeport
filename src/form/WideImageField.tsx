@@ -81,7 +81,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
 
   return (
     <div
-      className={classNames('image-input flex flex-col sm:flex-row gap-8', {
+      className={classNames('image-input flex flex-col sm:flex-row gap-6', {
         'image-input-empty': !input.value,
         'image-input-changed': isChanged,
       })}
@@ -111,7 +111,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
               })
             : translate('Upload an image JPG or PNG')}
         </p>
-        <div className="flex gap-2 mb-4">
+        <div className="flex gap-1.5 mb-3">
           <BaseButton
             variant="tertiary"
             size="sm"

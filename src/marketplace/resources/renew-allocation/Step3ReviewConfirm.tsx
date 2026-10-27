@@ -39,15 +39,15 @@ const LimitChangesSummary: FC<{
 
   if (changes.length === 0) {
     return (
-      <p className="text-quaternary mb-4">
+      <p className="text-quaternary mb-3">
         {translate('No limit changes — current limits will be maintained.')}
       </p>
     );
   }
 
   return (
-    <div className="mb-4">
-      <h6 className="mb-2">{translate('Limit changes')}</h6>
+    <div className="mb-3">
+      <h6 className="mb-1.5">{translate('Limit changes')}</h6>
       <Table size="sm" borderless className="mb-0">
         <thead>
           <tr className="border-b-[1px] border-b-secondary">
@@ -101,20 +101,20 @@ export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props}>
       {!isMulti && (
-        <div className="mb-6">
+        <div className="mb-5">
           <SummaryField
             label={translate('Resource')}
             value={resource?.name}
             labelCol={4}
             valueCol={8}
-            className="mb-3"
+            className="mb-2.5"
           />
           <SummaryField
             label={translate('Organization / Project')}
             value={departmentToInvoice}
             labelCol={4}
             valueCol={8}
-            className="mb-3"
+            className="mb-2.5"
           />
           <SummaryField
             label={translate('Extension')}
@@ -125,17 +125,17 @@ export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
             }
             labelCol={4}
             valueCol={8}
-            className="mb-3"
+            className="mb-2.5"
           />
           <SummaryField
             label={translate('New end date')}
             value={newEndDate}
             labelCol={4}
             valueCol={8}
-            className="mb-3"
+            className="mb-2.5"
           />
 
-          <hr className="my-4" />
+          <hr className="my-3" />
 
           <LimitChangesSummary resource={resource} newLimits={newLimits} />
 

@@ -94,7 +94,7 @@ export const Groups: Story = {
 
 export const States: Story = {
   render: () => (
-    <div className="flex max-w-[520px] flex-col gap-4">
+    <div className="flex max-w-[520px] flex-col gap-3">
       <BaseStringField placeholder="Default" aria-label="Default" />
       <BaseStringField defaultValue="Invalid" isInvalid aria-label="Invalid" />
       <BaseStringField defaultValue="Disabled" disabled aria-label="Disabled" />

@@ -38,7 +38,7 @@ export const ClassicLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
       <div className={PAGE_CONTAINER_CLASSNAME}>
         <CategoriesList />
       </div>
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mb-10')}>
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mb-8')}>
         <OfferingsGroup onTagClick={onTagClick} />
       </div>
     </div>

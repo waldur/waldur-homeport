@@ -239,7 +239,7 @@ export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
           <Tabs
             value={effectiveGroup}
             onValueChange={setActiveGroup}
-            className="w-full mt-4"
+            className="w-full mt-3"
           >
             {/* Wraps rather than scrolls: a clipped last tab reads as a broken
                 label, and nothing tells the user the strip scrolls. */}

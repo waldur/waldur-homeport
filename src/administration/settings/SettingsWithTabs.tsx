@@ -119,7 +119,7 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
       )}
       <Card.Body>
         <Tabs mount="active" value={activeKey} onValueChange={handleSelect}>
-          <TabsList className="mb-5">
+          <TabsList className="mb-4">
             {tabs.map((tab) => {
               const filteredCount = getFilteredCount(tab.key);
               const hasMatches = filteredCount > 0;

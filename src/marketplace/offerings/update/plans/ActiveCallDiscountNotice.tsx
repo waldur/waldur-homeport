@@ -44,7 +44,7 @@ export const ActiveCallDiscountNotice: FC<ActiveCallDiscountNoticeProps> = ({
   return (
     <AlertItem
       variant="warning"
-      className="mb-5"
+      className="mb-4"
       title={translate('This offering is open in {count} active call(s)', {
         count: data.length,
       })}

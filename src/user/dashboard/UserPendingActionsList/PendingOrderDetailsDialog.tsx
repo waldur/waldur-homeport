@@ -425,7 +425,7 @@ export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
         />
       ) : order ? (
         <Tabs mount="active" defaultValue="summary">
-          <TabsList className="mb-4">
+          <TabsList className="mb-3">
             <TabsTrigger value="summary">{translate('Summary')}</TabsTrigger>
             <TabsTrigger value="attributes">
               {translate('Attributes')}

@@ -354,7 +354,7 @@ const NodeRow: FC<NodeRowProps> = ({ id, row, style, isActive, showFocus }) => {
           }}
         />
       ))}
-      <div className="flex items-center px-2 py-1 grow min-w-0">
+      <div className="flex items-center px-1.5 py-1 grow min-w-0">
         <span
           className="me-1 text-quaternary inline-flex"
           style={{ width: 14 }}
@@ -368,7 +368,7 @@ const NodeRow: FC<NodeRowProps> = ({ id, row, style, isActive, showFocus }) => {
           ) : null}
         </span>
         <span
-          className={`me-2 inline-flex ${
+          className={`me-1.5 inline-flex ${
             isWaldur ? 'text-info' : 'text-tertiary'
           }`}
         >
@@ -396,7 +396,7 @@ const NodeRow: FC<NodeRowProps> = ({ id, row, style, isActive, showFocus }) => {
           <Badge
             variant={data.badge.variant}
             tone={data.badge.tone}
-            className="ms-2 shrink-0"
+            className="ms-1.5 shrink-0"
           >
             {data.badge.text}
           </Badge>
@@ -749,14 +749,14 @@ export const GLAuthTreeView: FC<{ tree: GlauthTree }> = ({ tree }) => {
 
   return (
     <div>
-      <div className="mb-2 small text-quaternary">
+      <div className="mb-1.5 small text-quaternary">
         {translate(
           'Waldur projection of GLAuth entries. The actual base DN ({base}) and DN format ({nameformat}) are configured on the GLAuth server. Italic rows marked ※ are Waldur context — useful for debugging, but NOT returned by an ldapsearch.',
           { base: BASE_DN, nameformat: 'nameformat' },
         )}
       </div>
       <FilterBox
-        className="mb-3"
+        className="mb-2.5"
         placeholder={translate(
           'Filter by DN, attribute, role or badge (e.g. memberUid, admin, 60000)…',
         )}

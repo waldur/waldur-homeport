@@ -105,11 +105,11 @@ export const OrganizationCreateStep1: FunctionComponent<
   }, [validationMethod]);
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       <Card className="border-0 shadow-sm">
-        <Card.Body className="p-8">
-          <h4 className="mb-4">{translate('Select verification method')}</h4>
-          <p className="text-secondary mb-6">
+        <Card.Body className="p-6">
+          <h4 className="mb-3">{translate('Select verification method')}</h4>
+          <p className="text-secondary mb-5">
             {translate(
               'Choose how you would like to verify your organization. Automatic verification provides instant results if your company is registered in the selected business register.',
             )}
@@ -130,9 +130,9 @@ export const OrganizationCreateStep1: FunctionComponent<
           />
 
           {loading && (
-            <div className="mt-4">
+            <div className="mt-3">
               <LoadingSpinner />
-              <p className="text-center text-quaternary mt-2">
+              <p className="text-center text-quaternary mt-1.5">
                 {translate('Loading required fields...')}
               </p>
             </div>
@@ -145,7 +145,7 @@ export const OrganizationCreateStep1: FunctionComponent<
 
               return (
                 <Card className="card-bordered">
-                  <Card.Body className="flex gap-3">
+                  <Card.Body className="flex gap-2.5">
                     <div className="shrink-0">
                       <InfoIcon size={24} weight="duotone" />
                     </div>

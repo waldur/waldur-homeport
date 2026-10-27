@@ -31,7 +31,7 @@ export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
   return (
     <div className="search-error">
       <RadialBackground className="background" />
-      <div className="text-center flex flex-col items-center pb-10 position-relative z-index-1">
+      <div className="text-center flex flex-col items-center pb-8 position-relative z-index-1">
         <div className="icon-square icon-lg error-icon">
           <WarningCircleIcon weight="bold" size={24} />
         </div>
@@ -46,7 +46,7 @@ export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
             </p>
           </div>
         </div>
-        <div className="actions flex gap-4 mt-2">
+        <div className="actions flex gap-3 mt-1.5">
           <BaseButton
             variant="tertiary"
             onClick={openErrorTraceDialog}

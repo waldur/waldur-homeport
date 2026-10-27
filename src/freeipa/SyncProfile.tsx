@@ -44,7 +44,7 @@ export const SyncProfile: FunctionComponent<{
         onClick={() => syncProfile()}
         label={translate('Sync profile')}
         iconNode={<ArrowsClockwiseIcon weight="bold" />}
-        className="ms-2"
+        className="ms-1.5"
         size="lg"
       />
     </Tooltip>

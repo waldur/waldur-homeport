@@ -53,13 +53,13 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
   return (
     <div className={classNames('card-table card-bordered', className, 'card')}>
       <div className={classNames(headerClassName, 'card-header')}>
-        <div className="card-toolbar g-0 gap-4 w-full row">
+        <div className="card-toolbar g-0 gap-3 w-full row">
           <div className="col">
             <div ref={setTitleNode} className="card-title h5">
-              <div className="me-2">
+              <div className="me-1.5">
                 <h3>{title}</h3>
                 {Boolean(subtitle) && (
-                  <small className="text-sm font-normal block mt-2">
+                  <small className="text-sm font-normal block mt-1.5">
                     {subtitle}
                   </small>
                 )}
@@ -67,18 +67,18 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
             </div>
             {/* Portal destination */}
           </div>
-          <div className="ms-auto max-w-full flex gap-4 max-sm:flex-wrap text-nowrap col-sm-auto">
+          <div className="ms-auto max-w-full flex gap-3 max-sm:flex-wrap text-nowrap col-sm-auto">
             {headerActions}
             <div
               ref={setToolbarNode}
-              className="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-4"
+              className="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-3"
             >
               {/* Portal destination */}
             </div>
           </div>
         </div>
       </div>
-      <div className="pt-3 card-body">
+      <div className="pt-2.5 card-body">
         <Tabs
           value={activeKey}
           onValueChange={handleSelect}
@@ -95,7 +95,7 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
             </TabsList>
             {actions ? (
               Array.isArray(actions) && actions.length ? (
-                <div className="flex items-center border-b-[1px] border-b-secondary gap-2">
+                <div className="flex items-center border-b-[1px] border-b-secondary gap-1.5">
                   {actions.map((action, index) => (
                     <Fragment key={index}>
                       {action.activeKeys.includes(activeKey)

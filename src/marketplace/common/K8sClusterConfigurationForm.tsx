@@ -154,7 +154,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
             size="sm"
             shape="pill"
             tone="outline"
-            className="ms-4"
+            className="ms-3"
           >
             {dcResources.totalNodes} nodes, {dcResources.totalVCpus} vCPUs,{' '}
             {dcResources.totalRam}GB RAM
@@ -163,7 +163,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
       }
       secondary
       defaultOpen
-      className="mb-5 bg-secondary"
+      className="mb-4 bg-secondary"
     >
       {/* OpenStack Infrastructure Selection */}
       <FormGroup
@@ -172,7 +172,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
           'Choose the OpenStack tenant that will provide infrastructure for this datacenter',
         )}
         required
-        space={5}
+        space={4}
       >
         <SelectField
           input={{
@@ -231,7 +231,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
           labelCol={4}
           valueCol={7}
           valueClass="offset-sm-1"
-          space={5}
+          space={4}
         />
       )}
 
@@ -276,7 +276,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
           labelCol={4}
           valueCol={7}
           valueClass="offset-sm-1"
-          space={datacenter?.openstack_infrastructure ? 5 : 0}
+          space={datacenter?.openstack_infrastructure ? 4 : 0}
         />
       )}
 
@@ -299,7 +299,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
             valueCol={7}
             labelClass="col"
             valueClass="offset-sm-1 col-auto"
-            space={5}
+            space={4}
             className="gy-2 items-center"
           />
 
@@ -471,7 +471,7 @@ export const K8sClusterConfigurationForm: React.FC<
         <AlertItem
           type="floating"
           variant="warning"
-          className="mb-4"
+          className="mb-3"
           title={translate(
             'This cluster was configured with a different topology than the offering now allows.',
           )}

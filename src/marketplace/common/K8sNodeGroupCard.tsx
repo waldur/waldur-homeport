@@ -89,10 +89,10 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
   return (
     <div
       className={
-        index > 0 ? 'pt-5 border-t-[1px] border-t-secondary' : undefined
+        index > 0 ? 'pt-4 border-t-[1px] border-t-secondary' : undefined
       }
     >
-      <Stack direction="horizontal" gap={4} className="h-[32px] mb-5">
+      <Stack direction="horizontal" gap={4} className="h-[32px] mb-4">
         <h6 className="text-secondary mb-0">
           {translate('Node group #{n}', { n: index + 1 })}
         </h6>
@@ -127,7 +127,7 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
                 : translate('Provides distributed storage for the cluster')
             }
             helpEnd
-            space={5}
+            space={4}
           >
             <SelectField
               input={{
@@ -143,7 +143,7 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
 
         {/* OpenStack Flavor Selection */}
         <Col sm={6} md={4}>
-          <FormGroup label={translate('OpenStack flavor')} required space={5}>
+          <FormGroup label={translate('OpenStack flavor')} required space={4}>
             <K8sFlavorSelectionTable
               offeringUuid={offeringUuid}
               selectedFlavor={selectedFlavor}
@@ -164,7 +164,7 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
               type: nodeGroup.type,
             })}
             helpEnd
-            space={5}
+            space={4}
           >
             <BaseNumberField
               value={nodeGroup.node_count}
@@ -183,7 +183,7 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
             label={translate('System disk')}
             help={translate('Operating system and kubernetes components')}
             helpEnd
-            space={5}
+            space={4}
           >
             <BaseInputField
               type="number"
@@ -203,7 +203,7 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
                 : translate('Local storage cache and temporary data')
             }
             helpEnd
-            space={5}
+            space={4}
           >
             <BaseNumberField
               value={nodeGroup.disk_config.data_disk_size_gb}
@@ -227,7 +227,7 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
                 'Distributed storage pool for cluster persistence',
               )}
               helpEnd
-              space={5}
+              space={4}
             >
               <BaseNumberField
                 value={nodeGroup.disk_config.virtual_san_disk_size_gb || 500}

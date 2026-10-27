@@ -272,12 +272,12 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
                   ) : checklistQuery.error ? (
                     <LoadingErred
                       loadData={checklistQuery.refetch}
-                      className="inline-flex items-center justify-center gap-4 ms-4"
+                      className="inline-flex items-center justify-center gap-3 ms-3"
                     />
                   ) : checklistQuery.data ? (
                     <>
                       {checklistQuery.data.name}
-                      <span className="text-quaternary ms-2">
+                      <span className="text-quaternary ms-1.5">
                         (
                         {translate('{count} questions', {
                           count: checklistQuery.data.questions_count,

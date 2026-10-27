@@ -54,7 +54,7 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
         </div>
 
         {/* Content: avatar + title */}
-        <Card.Body className="p-4 flex items-center gap-3">
+        <Card.Body className="p-3 flex items-center gap-2.5">
           {offering.thumbnail ? (
             <Image src={offering.thumbnail} size={48} isContain circle />
           ) : (
@@ -71,7 +71,7 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
         </Card.Body>
 
         {/* Footer */}
-        <Card.Footer className="py-4 px-5 flex justify-end gap-4">
+        <Card.Footer className="py-3 px-4 flex justify-end gap-3">
           <CardRequestAccessButton
             offering={offering}
             orderDisabledReason={isDisabled ? disabledButtonTooltip : undefined}

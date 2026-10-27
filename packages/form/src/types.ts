@@ -2,6 +2,8 @@ import { FieldValidator } from 'final-form';
 import React, { ReactNode } from 'react';
 import { FieldProps, FieldRenderProps } from 'react-final-form';
 
+import type { Space } from './FormGroup';
+
 type Formatter = NonNullable<FieldProps<any, any>['format']>;
 type Parser = NonNullable<FieldProps<any, any>['parse']>;
 
@@ -24,7 +26,7 @@ export interface FormField {
   onBlur?(e): void;
   containerClassName?: string;
   spaceless?: boolean;
-  space?: number;
+  space?: Space;
   'data-testid'?: string;
   autoFocus?: boolean;
   readOnly?: boolean;

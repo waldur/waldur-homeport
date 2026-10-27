@@ -35,13 +35,13 @@ export const ProjectCostChart: FC = () => {
     <Accordion
       type="single"
       collapsible
-      className="mb-7 rounded-md border-[1px] border-solid border-secondary"
+      className="mb-5.5 rounded-md border-[1px] border-solid border-secondary"
     >
       <AccordionItem value="chart">
         <AccordionTrigger>
           <div className="font-semibold">
             {translate('Project cost history')}
-            {isLoadingChart && <LoadingSpinnerSimple className="ms-2" />}
+            {isLoadingChart && <LoadingSpinnerSimple className="ms-1.5" />}
           </div>
         </AccordionTrigger>
         <AccordionContent>

@@ -123,14 +123,14 @@ export const OfferingComponentUsageExpandableRow: FC<
             value={integrationTypeLabel}
           />
         </Col>
-        <Col sm={6} className="border-sm-start ps-md-9">
+        <Col sm={6} className="border-sm-start md:ps-7.5">
           <Card className="card-bordered">
-            <Card.Body className="p-4">
-              <div className="flex items-center justify-between gap-2 text-nowrap flex-wrap mb-4">
+            <Card.Body className="p-3">
+              <div className="flex items-center justify-between gap-1.5 text-nowrap flex-wrap mb-3">
                 <SegmentedControl<number>
                   aria-label={translate('Time period')}
                   size="sm"
-                  itemClassName="px-4"
+                  itemClassName="px-3"
                   options={[6, 12].map((m) => ({
                     value: m,
                     label: translate('{month} months', { month: m }),
@@ -151,7 +151,7 @@ export const OfferingComponentUsageExpandableRow: FC<
                   <LoadingErred loadData={refetch} className="grow" />
                 ) : usageData.length ? (
                   <>
-                    <div className="flex flex-col justify-between text-xs text-nowrap pt-2 me-4">
+                    <div className="flex flex-col justify-between text-xs text-nowrap pt-1.5 me-3">
                       <span>
                         {translate('Max usage')}:{' '}
                         {formatUsageValue(Math.max(...usageData))}

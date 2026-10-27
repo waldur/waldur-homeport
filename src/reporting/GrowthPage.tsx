@@ -119,7 +119,7 @@ export const GrowthPage: FC = () => {
         ]}
       />
 
-      <Row className="g-5 mb-5">
+      <Row className="g-5 mb-4">
         <Col lg={6}>
           <UsersOverTimeChart data={sliceTotal(data?.userTrends, 'month')} />
         </Col>
@@ -130,7 +130,7 @@ export const GrowthPage: FC = () => {
         </Col>
       </Row>
 
-      <Row className="g-5 mb-5">
+      <Row className="g-5 mb-4">
         <Col lg={6}>
           <ResourcesOverTimeChart
             data={slice(data?.resourceTrends, 'period')}
@@ -141,7 +141,7 @@ export const GrowthPage: FC = () => {
         </Col>
       </Row>
 
-      <Row className="g-5 mb-5">
+      <Row className="g-5 mb-4">
         <Col lg={6}>
           <TopProvidersTable data={data?.topProviders} />
         </Col>

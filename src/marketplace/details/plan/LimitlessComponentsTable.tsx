@@ -17,7 +17,7 @@ export const LimitlessComponentsTable = ({
   const shouldConcealPrices =
     isFeatureVisible(MarketplaceFeatures.conceal_prices) || concealBillingInfo;
   return (
-    <div className="table-responsive mb-4">
+    <div className="table-responsive mb-3">
       <table className="table align-middle table-row-bordered text-sm gy-4">
         <thead>
           <tr className="align-middle">

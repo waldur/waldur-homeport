@@ -22,7 +22,7 @@ type Story = StoryObj<typeof LoadingSpinner>;
 
 export const Default: Story = {
   render: () => (
-    <div className="flex gap-6 p-6 items-center">
+    <div className="flex gap-5 p-5 items-center">
       <LoadingSpinner size={16} />
       <LoadingSpinner size={24} />
       <LoadingSpinner size={32} />
@@ -33,7 +33,7 @@ export const Default: Story = {
 
 export const ColoredVariants: Story = {
   render: () => (
-    <div className="flex gap-6 p-6 items-center">
+    <div className="flex gap-5 p-5 items-center">
       <LoadingSpinner size={24} className="text-brand" />
       <LoadingSpinner size={24} className="text-success" />
       <LoadingSpinner size={24} className="text-warning" />
@@ -44,7 +44,7 @@ export const ColoredVariants: Story = {
 
 export const InButton: Story = {
   render: () => (
-    <div className="flex gap-4 p-6 items-center">
+    <div className="flex gap-3 p-5 items-center">
       <BaseButton
         variant="primary"
         label="Saving..."

@@ -65,7 +65,7 @@ export const CustomerDashboardCredit = ({
         cardTitle={
           <>
             {chart.title}
-            <small className="text-quaternary text-xs ms-4 font-normal">
+            <small className="text-quaternary text-xs ms-3 font-normal">
               (
               {translate('{date} balance', {
                 date: formatDate(DateTime.now().startOf('month')),
@@ -76,7 +76,7 @@ export const CustomerDashboardCredit = ({
               <WarningTip
                 label={translate('Credit is overallocated')}
                 icon={WarningOctagonIcon}
-                className="ms-2"
+                className="ms-1.5"
               />
             )}
           </>

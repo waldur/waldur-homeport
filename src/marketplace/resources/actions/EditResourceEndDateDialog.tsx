@@ -166,7 +166,7 @@ export const EditResourceEndDateDialog: FunctionComponent<
                           },
                         )}
                         <button
-                          className="text-anchor font-medium block mt-2"
+                          className="text-anchor font-medium block mt-1.5"
                           type="button"
                           onClick={() => {
                             form.change(
@@ -179,7 +179,7 @@ export const EditResourceEndDateDialog: FunctionComponent<
                         </button>
                       </>
                     }
-                    className="mt-5"
+                    className="mt-4"
                   />
                 )}
               </div>

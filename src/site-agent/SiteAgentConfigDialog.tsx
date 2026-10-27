@@ -169,7 +169,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
       {fixedOffering ? (
         <>
           {/* Show fixed offering info */}
-          <div className="bg-brand-subtle rounded p-3 mb-4">
+          <div className="bg-brand-subtle rounded p-2.5 mb-3">
             <div className="text-secondary small mb-1">
               {translate('Generating configuration for:')}
             </div>
@@ -187,9 +187,9 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
           )}
         />
       ) : (
-        <FormField className="mb-4">
+        <FormField className="mb-3">
           <FormLabel>{translate('Select SLURM Offerings')}</FormLabel>
-          <div className="mb-2">
+          <div className="mb-1.5">
             <button
               type="button"
               className="text-btn text-brand"
@@ -201,7 +201,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
             </button>
           </div>
           <div
-            className="border rounded p-3"
+            className="border rounded p-2.5"
             style={{ maxHeight: '200px', overflowY: 'auto' }}
           >
             {offerings.map((offering) => (
@@ -210,11 +210,11 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
                 checked={selectedOfferings.includes(offering.uuid)}
                 onChange={() => handleOfferingToggle(offering.uuid)}
                 key={offering.uuid}
-                className="mb-2"
+                className="mb-1.5"
                 label={
                   <span>
                     {offering.name}
-                    <span className="text-quaternary ms-2">
+                    <span className="text-quaternary ms-1.5">
                       ({offering.uuid.slice(0, 8)}...)
                     </span>
                   </span>
@@ -233,7 +233,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
       {/* Common configuration options - shown for both fixed offering and multi-select cases */}
       {(fixedOffering || (offerings && offerings.length > 0)) && (
         <>
-          <FormField className="mb-4">
+          <FormField className="mb-3">
             <Checkbox
               id="include-policy-settings"
               checked={includePolicySettings}
@@ -247,7 +247,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
             </FormText>
           </FormField>
 
-          <FormField className="mb-4">
+          <FormField className="mb-3">
             <FormLabel>{translate('API URL (optional)')}</FormLabel>
             <BaseInputField
               type="url"
@@ -262,7 +262,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
             </FormText>
           </FormField>
 
-          <FormField className="mb-4">
+          <FormField className="mb-3">
             <FormLabel>{translate('Timezone (optional)')}</FormLabel>
             <NativeSelect
               value={timezone}

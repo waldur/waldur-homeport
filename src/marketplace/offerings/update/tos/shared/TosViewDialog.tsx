@@ -75,8 +75,8 @@ export const TosViewDialog = ({
       }
     >
       {tos.terms_of_service && (
-        <div className="mb-4">
-          <h5 className="mb-3">{translate('Terms of service content')}</h5>
+        <div className="mb-3">
+          <h5 className="mb-2.5">{translate('Terms of service content')}</h5>
           <div
             ref={tosContentRef}
             className="border rounded tos-content-preview"
@@ -87,9 +87,9 @@ export const TosViewDialog = ({
         </div>
       )}
       {tos.terms_of_service_link && (
-        <div className="mb-3">
+        <div className="mb-2.5">
           <strong>{translate('External link:')}</strong>
-          <div className="mt-2">
+          <div className="mt-1.5">
             <a
               href={tos.terms_of_service_link}
               target="_blank"

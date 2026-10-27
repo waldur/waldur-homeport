@@ -70,15 +70,15 @@ const ImpactPreview: FC<{
     BILLING_MODES.find((m) => m.value === targetMode)?.label || targetMode;
 
   return (
-    <div className="mt-4 p-3 bg-tertiary dark:bg-quaternary rounded">
-      <div className="font-medium mb-2">
+    <div className="mt-3 p-2.5 bg-tertiary dark:bg-quaternary rounded">
+      <div className="font-medium mb-1.5">
         {translate('Impact: {count} components will be changed', {
           count: affected.length,
         })}
       </div>
       <div className="flex flex-col gap-1">
         {affected.map((c: any) => (
-          <div key={c.uuid} className="flex items-center gap-2 text-xs">
+          <div key={c.uuid} className="flex items-center gap-1.5 text-xs">
             <span>{c.name}</span>
             <span className="text-quaternary">
               {getBillingTypeLabel(c.billing_type)}
@@ -148,12 +148,12 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
               </>
             }
           >
-            <p className="text-quaternary mb-4">
+            <p className="text-quaternary mb-3">
               {translate(
                 'Switch all infrastructure components between monthly, prepaid, and usage-based billing.',
               )}
             </p>
-            <p className="text-quaternary mb-4">
+            <p className="text-quaternary mb-3">
               {explicitPlans.length
                 ? translate(
                     'Plans with their own billing mode are not affected: {plans}.',
@@ -165,13 +165,13 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
             </p>
             <Field name="billing_mode">
               {({ input }) => (
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-2.5">
                   {availableModes.map((mode) => (
                     <label
                       key={mode.value}
                       // border-[1px], not Bootstrap's .border: its !important
                       // colour would override the selected border-brand.
-                      className={`flex items-start gap-3 p-3 rounded border-[1px] cursor-pointer ${
+                      className={`flex items-start gap-2.5 p-2.5 rounded border-[1px] cursor-pointer ${
                         input.value === mode.value
                           ? 'border-brand bg-brand-subtle'
                           : 'border-secondary'

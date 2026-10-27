@@ -59,7 +59,7 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-5">
       <FormTable.Card
         title={translate('Provider message')}
         actions={

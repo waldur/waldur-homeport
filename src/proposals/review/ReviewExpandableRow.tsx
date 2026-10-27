@@ -28,8 +28,8 @@ const COMMENT_FIELDS: { key: keyof ProposalReview; label: string }[] = [
 ];
 
 const SectionHeader: FunctionComponent<{ title: string }> = ({ title }) => (
-  <div className="field-row mt-4">
-    <div className="border-b-[1px] border-b-secondary pb-2 mb-2">
+  <div className="field-row mt-3">
+    <div className="border-b-[1px] border-b-secondary pb-1.5 mb-1.5">
       <strong>{title}</strong>
     </div>
   </div>
@@ -80,7 +80,7 @@ export const ReviewDetails: FC<{ review: ProposalReview }> = ({ review }) => {
         label={translate('Score')}
         value={
           review.summary_score ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <RateStars value={review.summary_score} size={18} />
               <span className="text-quaternary">
                 ({review.summary_score}/5)

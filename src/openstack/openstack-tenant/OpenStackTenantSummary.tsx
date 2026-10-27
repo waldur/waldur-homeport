@@ -95,7 +95,7 @@ const QuotaBadges = ({
           key={quota.name}
           quota={quota}
           image={openstackIcon}
-          className="me-3 mb-1"
+          className="me-2.5 mb-1"
         />
       ))}
       {quotas.length > max && (
@@ -186,7 +186,7 @@ export const OpenStackTenantSummary: FunctionComponent<
         </Col>
       </Row>
       {quotas.length > 0 && (
-        <Row className="mt-4">
+        <Row className="mt-3">
           <Col>
             <Field
               label={translate('Quotas')}

@@ -70,7 +70,7 @@ export const PendingRequestDialog: FC<PendingRequestDialogProps> = ({
         )}
       </p>
       {request.requested_end_date && (
-        <p className="text-secondary mt-2">
+        <p className="text-secondary mt-1.5">
           {translate('Requested end date')}:{' '}
           {formatDate(request.requested_end_date)}
         </p>

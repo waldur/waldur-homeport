@@ -34,7 +34,7 @@ type Story = StoryObj<typeof Timeline>;
 
 export const Default: Story = {
   render: () => (
-    <div className="max-w-md p-6 bg-primary">
+    <div className="max-w-md p-5 bg-primary">
       <Timeline aria-label="Activity history">
         <TimelineItem>
           <TimelineConnector />
@@ -108,7 +108,7 @@ export const Default: Story = {
 
 export const SingleItem: Story = {
   render: () => (
-    <div className="max-w-md p-6 bg-primary">
+    <div className="max-w-md p-5 bg-primary">
       <Timeline aria-label="Single event">
         <TimelineItem>
           <TimelineConnector />
@@ -139,7 +139,7 @@ export const SingleItem: Story = {
 
 export const WithSelection: Story = {
   render: () => (
-    <div className="max-w-md p-6 bg-primary">
+    <div className="max-w-md p-5 bg-primary">
       <Timeline aria-label="Version revisions">
         <TimelineItem className="rounded bg-brand-subtle" isSelected>
           <TimelineConnector />
@@ -150,7 +150,7 @@ export const WithSelection: Story = {
               </AvatarFallback>
             </AvatarRoot>
           </TimelineIcon>
-          <TimelineContent className="py-2 pr-3">
+          <TimelineContent className="py-1.5 pr-3">
             <div className="flex justify-between items-center">
               <span className="font-medium text-sm text-primary">
                 Current revision
@@ -175,7 +175,7 @@ export const WithSelection: Story = {
               </AvatarFallback>
             </AvatarRoot>
           </TimelineIcon>
-          <TimelineContent className="py-2 pr-3">
+          <TimelineContent className="py-1.5 pr-3">
             <div className="flex justify-between items-center">
               <span className="font-medium text-sm text-primary">
                 Previous revision
@@ -196,7 +196,7 @@ export const WithSelection: Story = {
 
 export const DashedVariant: Story = {
   render: () => (
-    <div className="max-w-md p-6 bg-primary">
+    <div className="max-w-md p-5 bg-primary">
       <Timeline aria-label="Workflow progress">
         <TimelineItem>
           <TimelineConnector variant="dashed" />

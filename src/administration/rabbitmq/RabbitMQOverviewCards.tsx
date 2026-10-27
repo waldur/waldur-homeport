@@ -29,9 +29,9 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
   ).length;
 
   return (
-    <Row className="mb-6">
+    <Row className="mb-5">
       <Col md={6} lg={4}>
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center">
               <strong
@@ -43,11 +43,11 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
                 <WarningCircleIcon
                   size={24}
                   weight="bold"
-                  className="text-danger ms-2"
+                  className="text-danger ms-1.5"
                 />
               )}
             </div>
-            <strong className="block mb-2">
+            <strong className="block mb-1.5">
               {translate('Total messages')}
             </strong>
             {isHighMessageCount && (
@@ -61,24 +61,26 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
         </Card>
       </Col>
       <Col md={6} lg={4}>
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Body>
             <strong className="block display-4 text-success">
               {data.total_queues.toLocaleString()}
             </strong>
-            <strong className="block mb-2">{translate('Total queues')}</strong>
+            <strong className="block mb-1.5">
+              {translate('Total queues')}
+            </strong>
           </Card.Body>
         </Card>
       </Col>
       <Col md={6} lg={4}>
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Body>
             <strong
               className={`block display-4 ${vhostsWithIssues > 0 ? 'text-warning' : 'text-success'}`}
             >
               {vhostsWithIssues}
             </strong>
-            <strong className="block mb-2">
+            <strong className="block mb-1.5">
               {translate('Vhosts needing attention')}
             </strong>
           </Card.Body>

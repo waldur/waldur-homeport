@@ -34,7 +34,7 @@ type Story = StoryObj<typeof Sheet>;
  */
 export const RightDrawer: Story = {
   render: () => (
-    <div className="p-6">
+    <div className="p-5">
       <Sheet>
         <SheetTrigger asChild>
           <BaseButton variant="secondary" label="Open Right Drawer" />
@@ -46,14 +46,14 @@ export const RightDrawer: Story = {
               Detailed metadata and provisioning state for the selected item.
             </SheetDescription>
           </SheetHeader>
-          <div className="p-4 space-y-4 text-sm text-quaternary">
-            <div className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-3">
+          <div className="p-3 space-y-4 text-sm text-quaternary">
+            <div className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-2.5">
               <div className="font-medium text-primary">Instance UUID</div>
               <div className="font-mono text-xs text-quinary mt-1">
                 9c42b10a-48d1-4cb3-a7bb-1294dbe8a901
               </div>
             </div>
-            <div className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-3">
+            <div className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-2.5">
               <div className="font-medium text-primary">Network Interfaces</div>
               <div className="text-xs text-quinary mt-1">
                 eth0 (10.0.0.15/24)
@@ -79,7 +79,7 @@ export const RightDrawer: Story = {
  */
 export const LeftNavigationDrawer: Story = {
   render: () => (
-    <div className="p-6">
+    <div className="p-5">
       <Sheet>
         <SheetTrigger asChild>
           <BaseButton variant="primary" label="Open Navigation Sheet" />
@@ -89,17 +89,17 @@ export const LeftNavigationDrawer: Story = {
             <SheetTitle>Waldur Cloud</SheetTitle>
             <SheetDescription>Main navigation menu</SheetDescription>
           </SheetHeader>
-          <div className="p-4 space-y-2">
-            <div className="rounded-md px-3 py-2 text-sm font-medium bg-primary-hover text-primary">
+          <div className="p-3 space-y-2">
+            <div className="rounded-md px-2.5 py-1.5 text-sm font-medium bg-primary-hover text-primary">
               Dashboard
             </div>
-            <div className="rounded-md px-3 py-2 text-sm font-medium text-quaternary hover:bg-primary-hover">
+            <div className="rounded-md px-2.5 py-1.5 text-sm font-medium text-quaternary hover:bg-primary-hover">
               Marketplace
             </div>
-            <div className="rounded-md px-3 py-2 text-sm font-medium text-quaternary hover:bg-primary-hover">
+            <div className="rounded-md px-2.5 py-1.5 text-sm font-medium text-quaternary hover:bg-primary-hover">
               Organizations
             </div>
-            <div className="rounded-md px-3 py-2 text-sm font-medium text-quaternary hover:bg-primary-hover">
+            <div className="rounded-md px-2.5 py-1.5 text-sm font-medium text-quaternary hover:bg-primary-hover">
               Settings
             </div>
           </div>
@@ -114,7 +114,7 @@ export const LeftNavigationDrawer: Story = {
  */
 export const BottomSheet: Story = {
   render: () => (
-    <div className="p-6">
+    <div className="p-5">
       <Sheet>
         <SheetTrigger asChild>
           <BaseButton variant="tertiary" label="Open Bottom Drawer" />
@@ -126,7 +126,7 @@ export const BottomSheet: Story = {
               Background export tasks scheduled for download.
             </SheetDescription>
           </SheetHeader>
-          <div className="p-4 text-sm text-quaternary">
+          <div className="p-3 text-sm text-quaternary">
             No active downloads in progress.
           </div>
         </SheetContent>

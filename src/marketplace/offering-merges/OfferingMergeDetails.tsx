@@ -72,10 +72,10 @@ export const OfferingMergeDetails: FC = () => {
   }
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       <Card>
-        <Card.Body className="flex flex-col gap-4">
-          <div className="flex flex-wrap justify-between items-start gap-3">
+        <Card.Body className="flex flex-col gap-3">
+          <div className="flex flex-wrap justify-between items-start gap-2.5">
             <div>
               <h2 className="mb-1">
                 {translate('Merge into {target}', {
@@ -84,7 +84,7 @@ export const OfferingMergeDetails: FC = () => {
               </h2>
               <OfferingMergeStateBadge state={merge.state} />
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-2.5">
               {canManage && isEditable(merge.state) && (
                 <BaseButton
                   label={translate('Continue in wizard')}
@@ -149,7 +149,7 @@ export const OfferingMergeDetails: FC = () => {
 
       <Card>
         <Card.Header>
-          <Card.Title className="flex items-center gap-2">
+          <Card.Title className="flex items-center gap-1.5">
             {translate('Mappings')}
             <HelpTip label={getMappingsHelp()} />
           </Card.Title>
@@ -161,7 +161,7 @@ export const OfferingMergeDetails: FC = () => {
 
       <Card>
         <Card.Header>
-          <Card.Title className="flex items-center gap-2">
+          <Card.Title className="flex items-center gap-1.5">
             {translate('Preview')}
             <HelpTip label={getChangesHelp()} />
           </Card.Title>

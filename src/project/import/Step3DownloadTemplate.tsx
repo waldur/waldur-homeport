@@ -61,7 +61,7 @@ export const Step3DownloadTemplate: FC<Step3Props> = ({
 
   return (
     <div className="text-quaternary">
-      <p className="mb-6">
+      <p className="mb-5">
         {importType === 'projects_only'
           ? translate(
               'Fill the template with your project details, then upload it in the next step.',

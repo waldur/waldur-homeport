@@ -132,11 +132,11 @@ export const ReviewerProfilePanel = ({
   return (
     <Tabs value={activeTab} onValueChange={(key) => onTabChange(key as TabKey)}>
       <Card className="card-bordered">
-        <Card.Header className="border-b-0 pt-4">
-          <div className="flex flex-col lg:flex-row w-full gap-4">
+        <Card.Header className="border-b-0 pt-3">
+          <div className="flex flex-col lg:flex-row w-full gap-3">
             {/* Left side: Title, refresh, and status badges */}
             <div className="flex flex-col">
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-1.5 mb-1.5">
                 <h3 className="mb-0">{translate('Reviewer profile')}</h3>
                 {profile.is_published ? (
                   <Badge variant="success" tone="outline">
@@ -173,7 +173,7 @@ export const ReviewerProfilePanel = ({
             </div>
 
             {/* Right side: Controls */}
-            <div className="flex flex-wrap items-center gap-3 ms-lg-auto">
+            <div className="flex flex-wrap items-center gap-2.5 lg:ms-auto">
               <ReviewerProfileAddDropdown profile={profile} />
               {profile.is_published ? (
                 <BaseButton
@@ -197,7 +197,7 @@ export const ReviewerProfilePanel = ({
         </Card.Header>
         {/* Tabs navigation */}
         <Card.Header className="border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto">
-          <TabsList scrollable scrollClassName="grow pt-4" bordered={false}>
+          <TabsList scrollable scrollClassName="grow pt-3" bordered={false}>
             {tabs.map((tab) => (
               <TabsTrigger key={tab.key} value={tab.key}>
                 {tab.title}
@@ -205,7 +205,7 @@ export const ReviewerProfilePanel = ({
             ))}
           </TabsList>
         </Card.Header>
-        <Card.Body className={activeTab === 'info' ? 'pt-4' : 'pt-0 pb-0'}>
+        <Card.Body className={activeTab === 'info' ? 'pt-3' : 'pt-0 pb-0'}>
           <TabsContent value={activeTab}>{children}</TabsContent>
         </Card.Body>
       </Card>

@@ -29,8 +29,8 @@ export const PreviewStep: FC<PreviewStepProps> = ({
   const current = isPreviewCurrent(merge);
   const previewable = isPreviewable(merge.state);
   return (
-    <div className="flex flex-col gap-5">
-      <div className="flex flex-wrap justify-between items-center gap-3">
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-wrap justify-between items-center gap-2.5">
         <p className="text-quaternary mb-0">
           {translate(
             'The preview counts what moves, lists what blocks the merge and what needs your acknowledgement. Changing a mapping discards it.',

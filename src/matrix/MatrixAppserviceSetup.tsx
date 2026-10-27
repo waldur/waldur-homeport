@@ -205,8 +205,8 @@ export const MatrixAppserviceSetupDialog: FC = () => {
 
             {step === 'prereqs' && (
               <>
-                <h5 className="mb-3">{translate('Homeserver')}</h5>
-                <p className="mb-4">
+                <h5 className="mb-2.5">{translate('Homeserver')}</h5>
+                <p className="mb-3">
                   {translate(
                     'These values are required to generate a working appservice registration. They will be saved to Matrix settings.',
                   )}
@@ -270,7 +270,7 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                   <AlertItem
                     type="floating"
                     variant="warning"
-                    className="mb-4"
+                    className="mb-3"
                     title={translate('AS and HS tokens are already configured')}
                     body={
                       <>
@@ -332,15 +332,15 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                   )}
                 </p>
                 <div className="position-relative">
-                  <pre className="bg-tertiary dark:bg-quaternary p-4 rounded">
+                  <pre className="bg-tertiary dark:bg-quaternary p-3 rounded">
                     {result.registration_yaml}
                   </pre>
-                  <div className="position-absolute top-0 end-0 m-2">
+                  <div className="position-absolute top-0 end-0 m-1.5">
                     <CopyToClipboardButton value={result.registration_yaml} />
                   </div>
                 </div>
                 {result.webhook_url && (
-                  <div className="mt-3">
+                  <div className="mt-2.5">
                     <strong>{translate('Webhook URL')}:</strong>{' '}
                     <code>{result.webhook_url}</code>
                   </div>

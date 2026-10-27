@@ -131,7 +131,7 @@ export const ProposalDetailsDialog: FC<ProposalDetailsDialogProps> = ({
             ) : null}
             {(reviews ?? []).map((review) => (
               <TabsContent key={review.uuid} value={`review-${review.uuid}`}>
-                <div className="pt-4">
+                <div className="pt-3">
                   <ReviewDetails review={review} />
                 </div>
               </TabsContent>

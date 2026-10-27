@@ -117,9 +117,9 @@ const FieldsListGroup = ({
 };
 
 export const TresBillingWeightsField = () => (
-  <FormFieldset className="mb-7">
+  <FormFieldset className="mb-5.5">
     <FormLegend>{translate('TRES Billing Weights')}</FormLegend>
-    <FormText as="div" className="mb-3">
+    <FormText as="div" className="mb-2.5">
       {translate(
         'Define weights for each TRES type to calculate billing units.',
       )}

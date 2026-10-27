@@ -39,9 +39,9 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
   const failureRateLevel = getSuccessRateLevel(data.metrics.failure_rate);
 
   return (
-    <Row className="mb-6">
+    <Row className="mb-5">
       <Col md={6} lg={3}>
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center">
               <strong className={`display-4 ${getTextClass(healthLevel)}`}>
@@ -51,7 +51,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
                 <WarningCircleIcon
                   size={24}
                   weight="bold"
-                  className={getTextClass(healthLevel) + ' ms-2'}
+                  className={getTextClass(healthLevel) + ' ms-1.5'}
                 />
               )}
             </div>
@@ -61,7 +61,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
       </Col>
 
       <Col md={6} lg={3}>
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center">
               <strong
@@ -73,7 +73,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
                 <WarningCircleIcon
                   size={24}
                   weight="bold"
-                  className={getTextClass(circuitBreakerLevel) + ' ms-2'}
+                  className={getTextClass(circuitBreakerLevel) + ' ms-1.5'}
                 />
               )}
             </div>
@@ -85,7 +85,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
       </Col>
 
       <Col md={6} lg={3}>
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center justify-between">
               <div className="flex items-center">
@@ -98,7 +98,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
                   <WarningCircleIcon
                     size={24}
                     weight="bold"
-                    className={getTextClass(failureRateLevel) + ' ms-2'}
+                    className={getTextClass(failureRateLevel) + ' ms-1.5'}
                   />
                 )}
               </div>
@@ -112,7 +112,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
       </Col>
 
       <Col md={6} lg={3}>
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center justify-between">
               <strong className="display-4 text-info">

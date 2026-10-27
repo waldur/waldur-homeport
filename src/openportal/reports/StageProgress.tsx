@@ -28,7 +28,7 @@ export const StageProgress: FC<StageProgressProps> = ({
   const indeterminate = max === 0;
 
   return (
-    <div className="mb-3">
+    <div className="mb-2.5">
       <div className="flex justify-between small text-quaternary mb-1">
         <span>
           {translate('Stage {stage} of {total} — {label}', {

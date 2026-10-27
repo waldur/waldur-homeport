@@ -19,7 +19,7 @@ export const CeleryResourceUsage = ({ rusage }: CeleryResourceUsageProps) => {
   return (
     <AccordionCard
       title={translate('Resource usage')}
-      className="mb-6"
+      className="mb-5"
       defaultOpen={false}
     >
       <FormTable>

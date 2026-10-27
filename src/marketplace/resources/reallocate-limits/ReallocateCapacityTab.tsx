@@ -169,8 +169,8 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
 
   return (
     <div>
-      <FormField className="mb-4">
-        <FormLabel className="mb-2">
+      <FormField className="mb-3">
+        <FormLabel className="mb-1.5">
           {translate('Find target resource(s)')}
         </FormLabel>
         <AsyncSelect
@@ -212,7 +212,7 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
           isMulti={true}
           defaultOptions
         />
-        <FormText as="div" className="mt-2">
+        <FormText as="div" className="mt-1.5">
           {translate(
             'Search and select resources, adjust allocations in the table.',
           )}
@@ -234,7 +234,7 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
           value={activeComponentTab}
           onValueChange={(key) => setActiveComponentTab(key as string)}
         >
-          <TabsList className="mb-4">
+          <TabsList className="mb-3">
             {components.map((component) => (
               <TabsTrigger key={component.type} value={component.type}>
                 {component.name}

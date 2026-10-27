@@ -358,9 +358,9 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
       >
         {/* Standalone header */}
         {props.standalone && (
-          <div className="table-standalone-header flex justify-between gap-4">
+          <div className="table-standalone-header flex justify-between gap-3">
             <div>
-              <div className="hstack gap-2">
+              <div className="hstack gap-1.5">
                 <h1 className="mb-0 text-2xl">
                   {props.title || props.alterTitle}
                 </h1>
@@ -375,7 +375,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                 <p
                   className={classNames(
                     'text-base font-normal block text-quaternary mb-0',
-                    props.hideRefresh && 'mt-2',
+                    props.hideRefresh && 'mt-1.5',
                   )}
                 >
                   {props.subtitle}
@@ -383,7 +383,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
               )}
             </div>
             {!props.standaloneActionsInTable && (
-              <div className="hidden sm:flex gap-4">{props.tableActions}</div>
+              <div className="hidden sm:flex gap-3">{props.tableActions}</div>
             )}
           </div>
         )}
@@ -430,7 +430,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                   props.filtersStorage.length > 0)) && (
                 <div
                   className={classNames(
-                    'border-b-[1px] border-b-secondary min-h-auto py-2',
+                    'border-b-[1px] border-b-secondary min-h-auto py-1.5',
                     {
                       hidden:
                         !showFilterMenuToggle &&

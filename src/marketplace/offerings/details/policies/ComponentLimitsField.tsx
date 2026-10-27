@@ -152,7 +152,7 @@ interface ComponentLimitsFieldWrapperProps {
 export const ComponentLimitsField = ({
   components,
 }: ComponentLimitsFieldWrapperProps) => (
-  <FormFieldset className="mb-7">
+  <FormFieldset className="mb-5.5">
     <FormLegend required>
       {translate('When component limits reaches')}
     </FormLegend>

@@ -56,9 +56,9 @@ export const ValidatorConfiguration = ({
     >
       <FieldArray name="validators">
         {({ fields }) => (
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2.5">
             {fields.map((name, index) => (
-              <div key={name} className="flex gap-2 items-center">
+              <div key={name} className="flex gap-1.5 items-center">
                 <div className="grow">
                   <Field
                     name={`${name}.type`}

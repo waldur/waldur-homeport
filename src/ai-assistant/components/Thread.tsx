@@ -375,7 +375,7 @@ const BlockBasedContent: FC<BlockBasedContentProps> = ({ selector }) => {
     <>
       {/* Only show version indicator when history exists and not streaming */}
       {hasHistory && !isRunning && (
-        <div className="aui-version-indicator gap-2">
+        <div className="aui-version-indicator gap-1.5">
           <VersionSelector
             displayLabel={displayLabel}
             isViewingHistory={isViewingHistory}

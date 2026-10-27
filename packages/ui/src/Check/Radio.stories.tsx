@@ -26,7 +26,7 @@ export const Group: Story = {
     const [period, setPeriod] = useState('monthly');
     const [format, setFormat] = useState('csv');
     return (
-      <div className="p-6 flex flex-col gap-[32px] max-w-[480px]">
+      <div className="p-5 flex flex-col gap-[32px] max-w-[480px]">
         <RadioGroup
           label="Billing period"
           tooltip="Applies from the next invoice."
@@ -76,7 +76,7 @@ const STATES = [
 
 export const AllStates: Story = {
   render: () => (
-    <div className="p-6 grid grid-cols-[auto_auto_auto] items-center gap-4 text-sm">
+    <div className="p-5 grid grid-cols-[auto_auto_auto] items-center gap-3 text-sm">
       <span />
       <span>md</span>
       <span>sm</span>
@@ -95,7 +95,7 @@ export const Keyboard: Story = {
   render: () => {
     const [period, setPeriod] = useState('monthly');
     return (
-      <div className="p-6 max-w-[480px]">
+      <div className="p-5 max-w-[480px]">
         <RadioGroup
           label="Billing period"
           value={period}

@@ -119,13 +119,13 @@ export const AdminCreateMatrixRoomDialog: FC<
         </>
       }
     >
-      <p className="mb-4">
+      <p className="mb-3">
         {translate(
           'Select a project to create a Matrix chat room for. All project members will be invited automatically.',
         )}
       </p>
       {error && <AlertItem type="floating" variant="error" title={error} />}
-      <FormField className="mb-4">
+      <FormField className="mb-3">
         <FormLabel>{translate('Organization')}</FormLabel>
         <AsyncSelect
           placeholder={translate('Select organization...')}

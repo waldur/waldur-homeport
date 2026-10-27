@@ -61,7 +61,7 @@ export const StaffPasskeyRevokeDialog: FunctionComponent<
               body={translate(
                 'They will not be able to use this passkey again. If it was their only one and passkeys are required for their account, they will be asked to enroll a new one before they can continue.',
               )}
-              className="mb-4"
+              className="mb-3"
             />
             <TextGroup
               name="reason"

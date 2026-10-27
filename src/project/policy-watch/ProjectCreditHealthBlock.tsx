@@ -48,8 +48,8 @@ const CreditHealth: FC<Props> = ({ project }) => {
   }
 
   return (
-    <Row className="mt-3">
-      <Col xs={12} className="mb-3">
+    <Row className="mt-2.5">
+      <Col xs={12} className="mb-2.5">
         <HealthView data={data} />
       </Col>
     </Row>

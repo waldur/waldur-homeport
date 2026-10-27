@@ -168,7 +168,7 @@ const TrailCrumb = forwardRef<HTMLLIElement, TrailCrumbProps>(
             <CaretLeftIcon
               weight="bold"
               size={24}
-              className="me-2 shrink-0 inline-block align-middle"
+              className="me-1.5 shrink-0 inline-block align-middle"
             />
             {translate('Go back to')}&nbsp;
           </>
@@ -281,7 +281,7 @@ const MenuCrumb = ({ item }: { item: IBreadcrumbItem }) => {
     <CaretDownIcon
       weight="bold"
       size={16}
-      className="shrink-0 ms-2 text-secondary"
+      className="shrink-0 ms-1.5 text-secondary"
       aria-hidden="true"
     />
   );
@@ -392,7 +392,7 @@ const MenuCrumb = ({ item }: { item: IBreadcrumbItem }) => {
         side="bottom"
         align="start"
         sideOffset={2}
-        className="z-header-popover max-w-[400px] min-w-[200px] pb-2"
+        className="z-header-popover max-w-[400px] min-w-[200px] pb-1.5"
       >
         {typeof item.dropdown === 'function'
           ? item.dropdown(() => setShow(false))
@@ -429,7 +429,7 @@ const PlainCrumb = ({
   );
 };
 
-const HIDDEN_ROW_CLASS = 'block py-2 px-5 text-sm';
+const HIDDEN_ROW_CLASS = 'block py-1.5 px-4 text-sm';
 const HIDDEN_LINK_CLASS = cn(
   HIDDEN_ROW_CLASS,
   'text-brand hover:bg-[var(--bg-brand-primary-alt)]',

@@ -137,11 +137,11 @@ export const TeamSection: FC<
 
   return (
     <Card className="card-bordered" id={props.id}>
-      <Card.Header className="pt-4 pb-2">
+      <Card.Header className="pt-3 pb-1.5">
         <Card.Title>
           <h3>{props.title}</h3>
         </Card.Title>
-        <div className="card-toolbar gap-4">
+        <div className="card-toolbar gap-3">
           {showTeamActions ? (
             <TeamDropdownActions
               refetchUsers={refetchUsers}
@@ -197,7 +197,7 @@ export const TeamSection: FC<
               content: (
                 <>
                   {rules?.teamNote && !props.readOnlyMode ? (
-                    <p className="text-quaternary py-3 mb-0">
+                    <p className="text-quaternary py-2.5 mb-0">
                       {rules.teamNote}
                     </p>
                   ) : null}

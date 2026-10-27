@@ -89,7 +89,7 @@ export const ProjectDashboardCostLimits = ({
       cardTitle={
         <>
           {translate('Project cost')}
-          <small className="text-quaternary text-xs ms-4 font-normal">
+          <small className="text-quaternary text-xs ms-3 font-normal">
             ({translate('Current month\u2019s cost')}: {chart.current})
           </small>
         </>

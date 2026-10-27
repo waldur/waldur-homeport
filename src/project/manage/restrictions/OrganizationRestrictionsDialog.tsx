@@ -19,7 +19,7 @@ const RestrictionsDisplay: FC<{
 }> = ({ title, values }) => {
   if (values.length === 0) {
     return (
-      <div className="mb-4">
+      <div className="mb-3">
         <strong>{title}:</strong>{' '}
         <span className="text-quaternary fst-italic">
           {translate('No restrictions configured')}
@@ -29,9 +29,9 @@ const RestrictionsDisplay: FC<{
   }
 
   return (
-    <div className="mb-4">
+    <div className="mb-3">
       <strong>{title}:</strong>
-      <div className="flex flex-wrap gap-2 mt-2">
+      <div className="flex flex-wrap gap-1.5 mt-1.5">
         {values.map((value) => (
           <Badge key={value} variant="neutral" tone="outline">
             {value}
@@ -69,7 +69,7 @@ export const OrganizationRestrictionsDialog: FC<
         </p>
       ) : (
         <>
-          <p className="text-quaternary mb-4">
+          <p className="text-quaternary mb-3">
             {translate(
               'These restrictions are configured at the organization level and apply to all projects within this organization.',
             )}

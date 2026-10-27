@@ -12,9 +12,9 @@ export const ProjectDigestSummaryDialog: FC = () => {
       title={translate('How project digest works')}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         <section>
-          <h4 className="mb-4">{translate('Overview')}</h4>
+          <h4 className="mb-3">{translate('Overview')}</h4>
           <p className="text-quaternary mb-0">
             {translate(
               'Project digest sends periodic email summaries to project members, giving them an overview of each project they belong to. Digests include information such as active resources, project timelines, and team composition.',
@@ -23,24 +23,24 @@ export const ProjectDigestSummaryDialog: FC = () => {
         </section>
 
         <section>
-          <h4 className="mb-4">{translate('How it works')}</h4>
+          <h4 className="mb-3">{translate('How it works')}</h4>
           <ol className="text-quaternary mb-0">
-            <li className="mb-2">
+            <li className="mb-1.5">
               {translate(
                 'An organization owner enables digest emails and chooses the frequency (weekly, bi-weekly, or monthly) and the delivery day.',
               )}
             </li>
-            <li className="mb-2">
+            <li className="mb-1.5">
               {translate(
                 'Optionally, specific sections can be selected to include in the digest. If none are selected, all available sections are included.',
               )}
             </li>
-            <li className="mb-2">
+            <li className="mb-1.5">
               {translate(
                 'On the scheduled day, the system collects data for each project in the organization.',
               )}
             </li>
-            <li className="mb-2">
+            <li className="mb-1.5">
               {translate(
                 'Each project member receives an email summarizing only the projects they belong to.',
               )}
@@ -54,8 +54,8 @@ export const ProjectDigestSummaryDialog: FC = () => {
         </section>
 
         <section>
-          <h4 className="mb-4">{translate('Available sections')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Available sections')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'The digest can include the following sections, depending on which plugins are installed:',
             )}
@@ -105,7 +105,7 @@ export const ProjectDigestSummaryDialog: FC = () => {
         </section>
 
         <section>
-          <h4 className="mb-4">{translate('Frequency options')}</h4>
+          <h4 className="mb-3">{translate('Frequency options')}</h4>
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
@@ -156,7 +156,7 @@ export const ProjectDigestSummaryDialog: FC = () => {
             variant="info"
             title={translate('Good to know:')}
             body={
-              <ul className="mb-0 mt-2">
+              <ul className="mb-0 mt-1.5">
                 <li>
                   {translate(
                     'Use the "Send test email" button to send a digest to yourself for review.',

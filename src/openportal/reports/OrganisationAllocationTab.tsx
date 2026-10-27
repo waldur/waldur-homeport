@@ -504,7 +504,7 @@ const ProjectAutocompleteDialog: FC<{
         </>
       }
     >
-      <Row className="g-2 mb-3">
+      <Row className="g-2 mb-2.5">
         <Col xs={12} md={4}>
           <FormField>
             <FormLabel className="small mb-1">{translate('Search')}</FormLabel>
@@ -545,7 +545,7 @@ const ProjectAutocompleteDialog: FC<{
         </Col>
       </Row>
 
-      <div className="flex items-center gap-2 mb-2">
+      <div className="flex items-center gap-1.5 mb-1.5">
         <Checkbox
           id="alloc-select-all"
           checked={allVisibleSelected && visible.length > 0}
@@ -570,10 +570,10 @@ const ProjectAutocompleteDialog: FC<{
 
       <div
         style={{ maxHeight: 320, overflowY: 'auto' }}
-        className="border rounded p-2"
+        className="border rounded p-1.5"
       >
         {visible.length === 0 && (
-          <p className="text-quaternary small mb-0 p-2">
+          <p className="text-quaternary small mb-0 p-1.5">
             {translate('No projects match the filters.')}
           </p>
         )}
@@ -587,7 +587,7 @@ const ProjectAutocompleteDialog: FC<{
                 <>
                   <span>{p.name}</span>
                   {(p.start_date || p.end_date) && (
-                    <span className="text-quaternary small ms-2">
+                    <span className="text-quaternary small ms-1.5">
                       {p.start_date ?? '?'} →{' '}
                       {p.end_date ?? translate('ongoing')}
                     </span>
@@ -597,7 +597,7 @@ const ProjectAutocompleteDialog: FC<{
                       variant="warning"
                       size="sm"
                       tone="outline"
-                      className="ms-2"
+                      className="ms-1.5"
                     >
                       {translate('In grace')}
                     </Badge>
@@ -607,7 +607,7 @@ const ProjectAutocompleteDialog: FC<{
                       variant="neutral"
                       size="sm"
                       tone="outline"
-                      className="ms-2"
+                      className="ms-1.5"
                     >
                       {translate('Finished')}
                     </Badge>
@@ -646,7 +646,7 @@ const StatCard: FC<StatCardProps> = ({ label, value, variant = 'default' }) => {
       border={variant !== 'default' ? variant : undefined}
       style={{ minWidth: 180 }}
     >
-      <Card.Body className="py-3">
+      <Card.Body className="py-2.5">
         <div className="text-quaternary small mb-1">{label}</div>
         <div className={`text-base font-medium ${textClass}`}>
           {(variant === 'warning' || variant === 'danger') && (
@@ -1032,13 +1032,13 @@ export const OrganisationAllocationTab: FC = () => {
   );
 
   return (
-    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-4')}>
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-3')}>
       {/* ── Toolbar ────────────────────────────────────────────────────── */}
-      <div className="flex items-center gap-3 mb-4 flex-wrap">
+      <div className="flex items-center gap-2.5 mb-3 flex-wrap">
         <h4 className="mb-0">{translate('Allocation Summary')}</h4>
 
         {projects && projects.length > 0 && (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <span className="text-quaternary small">
               {translate('{count} of {total} {project} selected', {
                 count: effectiveSelected.size,
@@ -1071,7 +1071,7 @@ export const OrganisationAllocationTab: FC = () => {
         )}
 
         {loadTriggered && (
-          <div className="ms-auto flex items-center gap-2">
+          <div className="ms-auto flex items-center gap-1.5">
             {(() => {
               const age = customer
                 ? getCacheAge(`alloc-summaries-${customer.uuid}`)
@@ -1138,19 +1138,19 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* Load prompt — shown before the user triggers the fetch */}
       {showLoadPrompt && !loadTriggered && (
-        <Card className="mb-4">
+        <Card className="mb-3">
           <Card.Body>
             <p className="mb-1">
               {translate('Allocation data not yet loaded')}
             </p>
-            <p className="mb-3 text-quaternary small">
+            <p className="mb-2.5 text-quaternary small">
               {translate(
                 'Loading computes summaries for every project in this organization and may take 10–15 seconds. You can optionally filter to a subset of projects first to speed things up.',
               )}
             </p>
 
             {/* Project pre-filters */}
-            <Row className="g-2 mb-3">
+            <Row className="g-2 mb-2.5">
               <Col xs={12} md={4}>
                 <FormField>
                   <FormLabel className="small mb-1">
@@ -1221,7 +1221,7 @@ export const OrganisationAllocationTab: FC = () => {
         <AlertItem
           type="floating"
           variant="warning"
-          className="mb-3"
+          className="mb-2.5"
           title={translate('This is taking a while.')}
           body={translate(
             'To speed things up: use the project search or date filters to load fewer projects.',
@@ -1241,7 +1241,7 @@ export const OrganisationAllocationTab: FC = () => {
         !summariesLoading &&
         !summariesError &&
         summaries.length === 0 && (
-          <p className="text-quaternary p-4">
+          <p className="text-quaternary p-3">
             {translate(
               'No accounting summaries found for the selected projects.',
             )}
@@ -1250,7 +1250,7 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* ── Summary stats ───────────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <div className="flex flex-wrap gap-3 mb-4">
+        <div className="flex flex-wrap gap-2.5 mb-3">
           <StatCard
             label={translate('Total {currencyName} awarded', { currencyName })}
             value={fmtCredits(stats.totalCredits)}
@@ -1295,8 +1295,8 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* ── Burn-down chart ─────────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <Card className="mb-4">
-          <Card.Header className="flex items-center gap-3">
+        <Card className="mb-3">
+          <Card.Header className="flex items-center gap-2.5">
             <span>{translate('Predicted allocation burn-down')}</span>
 
             {chartOptions && (
@@ -1329,7 +1329,7 @@ export const OrganisationAllocationTab: FC = () => {
               </button>
             </Tooltip>
             {excelProgress && (
-              <span className="text-quaternary small ms-2">
+              <span className="text-quaternary small ms-1.5">
                 {translate('Preparing Excel — sheet {current} of {total}…', {
                   current: excelProgress.current,
                   total: excelProgress.total,
@@ -1353,8 +1353,8 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* ── Consumption chart ───────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <Card className="mb-4">
-          <Card.Header className="flex items-center gap-3">
+        <Card className="mb-3">
+          <Card.Header className="flex items-center gap-2.5">
             <span>{translate('Predicted daily consumption')}</span>
 
             {consumptionOptions && (
@@ -1390,7 +1390,7 @@ export const OrganisationAllocationTab: FC = () => {
               </button>
             </Tooltip>
             {excelProgress && (
-              <span className="text-quaternary small ms-2">
+              <span className="text-quaternary small ms-1.5">
                 {translate('Preparing Excel — sheet {current} of {total}…', {
                   current: excelProgress.current,
                   total: excelProgress.total,
@@ -1443,7 +1443,7 @@ export const OrganisationAllocationTab: FC = () => {
                       formatJsxTemplate,
                     )}
               </span>
-              <ul className="mb-0 ps-4 mt-2">
+              <ul className="mb-0 ps-3 mt-1.5">
                 {noEndDateSummaries.map((s) => {
                   const unspent = Math.max(
                     0,
@@ -1475,8 +1475,8 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* ── Concerning projects ─────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <Card className="mb-4">
-          <Card.Header className="flex items-center gap-2">
+        <Card className="mb-3">
+          <Card.Header className="flex items-center gap-1.5">
             <span>{translate('Concerning Projects')}</span>
             {slowStart.length +
               inactive.length +
@@ -1514,9 +1514,9 @@ export const OrganisationAllocationTab: FC = () => {
           <Card.Body>
             {/* ── Threshold controls ──────────────────────────────────── */}
             {showThresholds && (
-              <div className="p-3 mb-3 bg-tertiary dark:bg-quaternary rounded small">
+              <div className="p-2.5 mb-2.5 bg-tertiary dark:bg-quaternary rounded small">
                 <Row className="g-2">
-                  <Col xs={12} className="flex items-center gap-2 flex-wrap">
+                  <Col xs={12} className="flex items-center gap-1.5 flex-wrap">
                     <span style={{ minWidth: 120 }}>
                       {translate('Slow start')}:
                     </span>
@@ -1549,7 +1549,7 @@ export const OrganisationAllocationTab: FC = () => {
                       formatJsxTemplate,
                     )}
                   </Col>
-                  <Col xs={12} className="flex items-center gap-2 flex-wrap">
+                  <Col xs={12} className="flex items-center gap-1.5 flex-wrap">
                     <span style={{ minWidth: 120 }}>
                       {translate('Inactive')}:
                     </span>
@@ -1596,7 +1596,7 @@ export const OrganisationAllocationTab: FC = () => {
                       formatJsxTemplate,
                     )}
                   </Col>
-                  <Col xs={12} className="flex items-center gap-2 flex-wrap">
+                  <Col xs={12} className="flex items-center gap-1.5 flex-wrap">
                     <span style={{ minWidth: 120 }}>
                       {translate('Nearly depleted')}:
                     </span>
@@ -1635,7 +1635,7 @@ export const OrganisationAllocationTab: FC = () => {
                       formatJsxTemplate,
                     )}
                   </Col>
-                  <Col xs={12} className="flex items-center gap-2 flex-wrap">
+                  <Col xs={12} className="flex items-center gap-1.5 flex-wrap">
                     <span style={{ minWidth: 120 }}>
                       {translate('Off track')}:
                     </span>
@@ -1694,7 +1694,7 @@ export const OrganisationAllocationTab: FC = () => {
                 value={concerningTab}
                 onValueChange={(k) => setConcerningTab(k as any)}
               >
-                <TabsList className="mb-3">
+                <TabsList className="mb-2.5">
                   <TabsTrigger value="slowStart">
                     <>
                       {translate('Slow start')}
@@ -1702,7 +1702,7 @@ export const OrganisationAllocationTab: FC = () => {
                         <Badge
                           variant="warning"
                           tone="outline"
-                          className="ms-2"
+                          className="ms-1.5"
                         >
                           {slowStart.length}
                         </Badge>
@@ -1716,7 +1716,7 @@ export const OrganisationAllocationTab: FC = () => {
                         <Badge
                           variant="warning"
                           tone="outline"
-                          className="ms-2"
+                          className="ms-1.5"
                         >
                           {inactive.length}
                         </Badge>
@@ -1727,7 +1727,11 @@ export const OrganisationAllocationTab: FC = () => {
                     <>
                       {translate('Nearly depleted')}
                       {depleted.length > 0 && (
-                        <Badge variant="danger" tone="outline" className="ms-2">
+                        <Badge
+                          variant="danger"
+                          tone="outline"
+                          className="ms-1.5"
+                        >
                           {depleted.length}
                         </Badge>
                       )}
@@ -1740,7 +1744,7 @@ export const OrganisationAllocationTab: FC = () => {
                         <Badge
                           variant="warning"
                           tone="outline"
-                          className="ms-2"
+                          className="ms-1.5"
                         >
                           {offTrack.length}
                         </Badge>
@@ -1751,7 +1755,7 @@ export const OrganisationAllocationTab: FC = () => {
                 <div className="tab-content">
                   <TabsContent value="slowStart">
                     <div>
-                      <p className="text-quaternary small mb-2">
+                      <p className="text-quaternary small mb-1.5">
                         {translate(
                           'Started ≥ {months} {month} ago but spent less than {percent}% of their allocation — may not have got going yet.',
                           {
@@ -1807,7 +1811,7 @@ export const OrganisationAllocationTab: FC = () => {
                   </TabsContent>
                   <TabsContent value="inactive">
                     <div>
-                      <p className="text-quaternary small mb-2">
+                      <p className="text-quaternary small mb-1.5">
                         {translate(
                           "Started ≥ {months} {month} ago, no spend recorded this month, and more than {percent}% of allocation still remaining. Note: only the current month's activity is visible here.",
                           {
@@ -1865,7 +1869,7 @@ export const OrganisationAllocationTab: FC = () => {
                   </TabsContent>
                   <TabsContent value="depleted">
                     <div>
-                      <p className="text-quaternary small mb-2">
+                      <p className="text-quaternary small mb-1.5">
                         {translate(
                           'At least {percent}% of allocation spent, but still ≥ {days} days until the project ends — may need a top-up.',
                           {
@@ -1923,7 +1927,7 @@ export const OrganisationAllocationTab: FC = () => {
                   </TabsContent>
                   <TabsContent value="offTrack">
                     <div>
-                      <p className="text-quaternary small mb-2">
+                      <p className="text-quaternary small mb-1.5">
                         {translate(
                           'After the {day}th of the month, actual daily average spend differs from predicted by more than {percent}%.',
                           {

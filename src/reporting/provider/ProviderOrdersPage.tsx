@@ -24,7 +24,7 @@ const ProviderOrdersPageContent: FC<{
   });
 
   const providerFilter = (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-3">
       <label className="text-quaternary text-xs whitespace-nowrap">
         {translate('Provider')}:
       </label>

@@ -25,7 +25,7 @@ export const AdministrationTelemetry = () => {
     );
 
   return (
-    <div className="pt-5">
+    <div className="pt-4">
       <TelemetrySendingCard />
       {data ? (
         <SettingsCard

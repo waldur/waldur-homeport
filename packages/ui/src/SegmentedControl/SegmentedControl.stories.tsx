@@ -31,7 +31,7 @@ export const Interactive: Story = {
   render: () => {
     const [view, setView] = useState<string>('requests');
     return (
-      <div className="flex items-center gap-4 p-6">
+      <div className="flex items-center gap-3 p-5">
         <SegmentedControl
           aria-label="Group by"
           options={LENSES}
@@ -48,7 +48,7 @@ export const Sizes: Story = {
   render: () => {
     const [view, setView] = useState<string>('requests');
     return (
-      <div className="flex flex-col items-start gap-4 p-6">
+      <div className="flex flex-col items-start gap-3 p-5">
         {(['sm', 'md', 'lg'] as const).map((size) => (
           <SegmentedControl
             key={size}
@@ -69,13 +69,13 @@ export const WideSegments: Story = {
   render: () => {
     const [view, setView] = useState<string>('requests');
     return (
-      <div className="p-6">
+      <div className="p-5">
         <SegmentedControl
           aria-label="Group by"
           options={LENSES}
           value={view}
           onValueChange={setView}
-          itemClassName="px-6"
+          itemClassName="px-5"
         />
       </div>
     );
@@ -86,7 +86,7 @@ export const ThreeOptionsFullWidth: Story = {
   render: () => {
     const [view, setView] = useState<string>('day');
     return (
-      <div className="max-w-md p-6">
+      <div className="max-w-md p-5">
         <SegmentedControl
           aria-label="Period"
           fullWidth
@@ -107,7 +107,7 @@ export const WithDisabledOption: Story = {
   render: () => {
     const [view, setView] = useState<string>('requests');
     return (
-      <div className="p-6">
+      <div className="p-5">
         <SegmentedControl
           aria-label="Group by"
           options={[
@@ -133,8 +133,8 @@ export const BesideTallerSibling: Story = {
   render: () => {
     const [view, setView] = useState<string>('requests');
     return (
-      <div className="flex gap-4 p-6">
-        <div className="flex h-11 w-52 items-center rounded-lg border-[1px] border-[var(--btn-tertiary-border)] bg-primary px-3 text-sm text-quaternary">
+      <div className="flex gap-3 p-5">
+        <div className="flex h-11 w-52 items-center rounded-lg border-[1px] border-[var(--btn-tertiary-border)] bg-primary px-2.5 text-sm text-quaternary">
           Search (44px)
         </div>
         <SegmentedControl
@@ -154,15 +154,15 @@ export const BesideTallerSibling: Story = {
  */
 export const AsTabsWithPanels: Story = {
   render: () => (
-    <Tabs defaultValue="username" className="w-full max-w-sm p-6">
+    <Tabs defaultValue="username" className="w-full max-w-sm p-5">
       <TabsList variant="segmented" fullWidth aria-label="Sign in method">
         <TabsTrigger value="username">Username</TabsTrigger>
         <TabsTrigger value="token">Access token</TabsTrigger>
       </TabsList>
-      <TabsContent value="username" className="pt-4 text-sm">
+      <TabsContent value="username" className="pt-3 text-sm">
         Username and password fields
       </TabsContent>
-      <TabsContent value="token" className="pt-4 text-sm">
+      <TabsContent value="token" className="pt-3 text-sm">
         Token field
       </TabsContent>
     </Tabs>
@@ -178,7 +178,7 @@ export const BrandVariant: Story = {
   render: () => {
     const [view, setView] = useState<string>('requests');
     return (
-      <div className="flex flex-col items-start gap-4 p-6">
+      <div className="flex flex-col items-start gap-3 p-5">
         {(['sm', 'md'] as const).map((size) => (
           <SegmentedControl
             key={size}
@@ -203,7 +203,7 @@ export const WithIcons: Story = {
   render: () => {
     const [view, setView] = useState<string>('email');
     return (
-      <div className="p-6">
+      <div className="p-5">
         <SegmentedControl
           aria-label="Hook type"
           options={[

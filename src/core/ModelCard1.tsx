@@ -49,9 +49,9 @@ export const ModelCard1: FC<ModelCard1Props> = ({
         )}
       </div>
     )}
-    <Card.Body className="p-5 flex flex-col">
+    <Card.Body className="p-4 flex flex-col">
       <div
-        className={classNames('flex items-center gap-4', props.body && 'mb-6')}
+        className={classNames('flex items-center gap-3', props.body && 'mb-5')}
       >
         {props.logo ? (
           <Image src={props.logo} size={48} isContain circle />
@@ -94,7 +94,7 @@ export const ModelCard1: FC<ModelCard1Props> = ({
         ))}
     </Card.Body>
     {props.footer && (
-      <Card.Footer className="py-4 px-5">{props.footer}</Card.Footer>
+      <Card.Footer className="py-3 px-4">{props.footer}</Card.Footer>
     )}
   </Card>
 );

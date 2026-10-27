@@ -112,7 +112,7 @@ export const ExportAsEmailDialog: FC = () => {
                   <FieldArray name="emails" component={renderEmails} />
                 </FormFieldset>
 
-                <div className="mt-4">
+                <div className="mt-3">
                   <Field
                     name="accounting_period"
                     component={AccountingPeriodFieldComponent}
@@ -120,7 +120,7 @@ export const ExportAsEmailDialog: FC = () => {
                   />
                 </div>
 
-                <div className="mt-4" />
+                <div className="mt-3" />
               </Col>
             </Row>
           </ModalDialog>
@@ -133,7 +133,7 @@ export const ExportAsEmailDialog: FC = () => {
 const renderEmails = ({ fields }: any) => (
   <>
     {fields.map((emailName: any, index: number) => (
-      <Row key={emailName} className="mb-3">
+      <Row key={emailName} className="mb-2.5">
         <Col md={10}>
           <Field
             name={emailName}

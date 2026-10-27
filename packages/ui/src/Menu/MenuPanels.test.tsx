@@ -55,7 +55,7 @@ describe('Menu.Content', () => {
         <Menu.Trigger asChild>
           <button type="button">Open menu</button>
         </Menu.Trigger>
-        <Menu.Content align="start" style={{ width: 320 }} className="py-4">
+        <Menu.Content align="start" style={{ width: 320 }} className="py-3">
           <Menu.Item>First</Menu.Item>
         </Menu.Content>
       </Menu>,
@@ -65,7 +65,7 @@ describe('Menu.Content', () => {
 
     const menu = await screen.findByRole('menu');
     expect(menu).toHaveClass(
-      'py-4',
+      'py-3',
       'max-h-(--radix-dropdown-menu-content-available-height)',
       'overflow-y-auto',
     );

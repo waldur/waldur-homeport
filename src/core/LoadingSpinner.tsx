@@ -24,11 +24,11 @@ export const LoadingSpinner: FunctionComponent<LoadingSpinnerProps> = ({
   helpText,
   className,
 }) => (
-  <div className={classNames('text-center mb-5', className)}>
+  <div className={classNames('text-center mb-4', className)}>
     <h1>
       {}
       <LoadingSpinnerSimple />
     </h1>
-    {helpText && <p className="text-quaternary mt-3 mb-0">{helpText}</p>}
+    {helpText && <p className="text-quaternary mt-2.5 mb-0">{helpText}</p>}
   </div>
 );

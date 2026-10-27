@@ -464,7 +464,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
             }
           >
             <Tabs mount="visited" defaultValue="general">
-              <TabsList className="mb-5">
+              <TabsList className="mb-4">
                 <TabsTrigger value="general">
                   {translate('General')}
                 </TabsTrigger>

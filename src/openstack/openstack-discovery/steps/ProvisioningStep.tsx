@@ -44,13 +44,13 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
-      <h4 className="mb-4">{translate('Provisioning Configuration')}</h4>
-      <p className="text-quaternary mb-6">
+      <h4 className="mb-3">{translate('Provisioning Configuration')}</h4>
+      <p className="text-quaternary mb-5">
         {translate(
           'Configure flavor filtering, console access, network, and operational settings. All fields are optional.',
         )}
       </p>
-      <h5 className="mb-3">{translate('Flavor & Volume Filtering')}</h5>
+      <h5 className="mb-2.5">{translate('Flavor & Volume Filtering')}</h5>
       <StringGroup
         name="flavor_exclude_regex"
         label={translate('Flavor exclude regex')}
@@ -65,7 +65,7 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
           'List of comma-separated volume types which should not be possible to select when creating VM/Volume.',
         )}
       />
-      <h5 className="mb-3 mt-6">{translate('Console Access')}</h5>
+      <h5 className="mb-2.5 mt-5">{translate('Console Access')}</h5>
       <StringGroup
         name="console_type"
         placeholder="novnc"
@@ -81,7 +81,7 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
           'A client-accessible domain name override in case OpenStack is returning an internal domain. Leave empty to use the domain returned by OpenStack.',
         )}
       />
-      <h5 className="mb-3 mt-6">{translate('Network')}</h5>
+      <h5 className="mb-2.5 mt-5">{translate('Network')}</h5>
       <CommaSeparatedListGroup
         label={translate('Default DNS servers')}
         description={translate(
@@ -93,7 +93,7 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
         name="create_ha_routers"
         label={translate('Create highly available Neutron routers')}
       />
-      <h5 className="mb-3 mt-6">{translate('Operations')}</h5>
+      <h5 className="mb-2.5 mt-5">{translate('Operations')}</h5>
       <BooleanGroup
         name="live_resize_of_volumes_enabled"
         label={translate('Allow live volume resize')}

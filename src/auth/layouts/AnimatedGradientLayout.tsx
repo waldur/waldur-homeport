@@ -45,7 +45,7 @@ export const AnimatedGradientLayout = () => {
       </div>
       <div className="layout-animated-gradient-content">
         <div className="layout-animated-gradient-card">
-          <div className="login-logo mb-3">
+          <div className="login-logo mb-2.5">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
               src={imageUrl}

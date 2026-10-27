@@ -58,7 +58,7 @@ export const MaintenanceDetailsDialog: FC<{
       <Field
         label={translate('Affected offerings')}
         valueCol={12}
-        valueClass="mt-2"
+        valueClass="mt-1.5"
       >
         <AffectedOfferingsTable values={affectedOfferingsProps} />
       </Field>

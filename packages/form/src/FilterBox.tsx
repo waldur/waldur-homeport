@@ -102,7 +102,7 @@ export const FilterBox = forwardRef<HTMLInputElement, FilterBoxProps>(
         }
         end={
           (rightAction || showClear) && (
-            <span className="pointer-events-auto flex items-center gap-2">
+            <span className="pointer-events-auto flex items-center gap-1.5">
               {showClear && (
                 <BaseButton
                   size="sm"

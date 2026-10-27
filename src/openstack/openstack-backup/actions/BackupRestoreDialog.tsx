@@ -80,7 +80,7 @@ export const BackupRestoreDialog: FC<{
                   isMulti={true}
                   options={asyncState.data.securityGroups}
                 />
-                <FormField className="mb-5">
+                <FormField className="mb-4">
                   <FormLabel>{translate('Networks')}</FormLabel>
                   <FieldArray name="networks">
                     {({ fields }) => (
