@@ -185,7 +185,7 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
             className="hidden sm:block grow"
           />
 
-          <div className="flex sm:flex-col gap-2.5 text-nowrap">
+          <div className="flex sm:flex-col gap-2.5 whitespace-nowrap">
             {canCreateOrder && (
               <BaseButton
                 variant="tertiary"

@@ -38,7 +38,7 @@ export const SaveButton: FC<SaveButtonProps> = ({
           variant="warning"
           shape="circle"
           tone="outline"
-          className="position-absolute top-0 start-100 translate-middle"
+          className="position-absolute top-0 start-full translate-middle"
         >
           !
         </Badge>

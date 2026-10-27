@@ -67,11 +67,11 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
             </div>
             {/* Portal destination */}
           </div>
-          <div className="ms-auto max-w-full flex gap-3 max-sm:flex-wrap text-nowrap col-sm-auto">
+          <div className="ms-auto max-w-full flex gap-3 max-sm:flex-wrap whitespace-nowrap col-sm-auto">
             {headerActions}
             <div
               ref={setToolbarNode}
-              className="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-3"
+              className="flex sm:justify-end max-sm:flex-wrap whitespace-nowrap gap-3"
             >
               {/* Portal destination */}
             </div>

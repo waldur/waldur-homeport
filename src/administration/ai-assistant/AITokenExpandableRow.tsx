@@ -75,7 +75,7 @@ const renderUsageCell = (percentage: number | null) => {
         className="grow"
         label={translate('Usage')}
       />
-      <span className="text-nowrap" style={{ minWidth: '40px' }}>
+      <span className="whitespace-nowrap" style={{ minWidth: '40px' }}>
         {percentage}%
       </span>
     </div>

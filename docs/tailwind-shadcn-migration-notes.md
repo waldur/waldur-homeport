@@ -157,11 +157,12 @@ gutters (`.g-*`, `.gx-*`, `.gy-*`), which go with `Row`/`Col` (#475).
    (`border border-brand`, `border border-transparent hover:border-secondary`) never paints.
    Give every state an explicit colour: `border-[1px] border-secondary`, then `border-brand`
    when selected. Enforced (with autofix) by `no-bootstrap-border-with-tailwind-color`.
-2. **Layout & Display Utilities**: Legacy Bootstrap layout classes are retired in favor of native Tailwind equivalents, and Bootstrap no longer generates `display` or `flex` utilities (`src/styles/bootstrap/_utilities.scss`):
+2. **Layout & Display Utilities**: Legacy Bootstrap layout classes are retired in favor of native Tailwind equivalents, and Bootstrap no longer generates `display`, `flex`, flex-alignment (`justify-content`, `align-items`, `align-self`) or `order` utilities (`src/styles/bootstrap/_utilities.scss`):
    - Display: `d-flex` → `flex`, `d-block` → `block`, `d-none` → `hidden`, `d-inline` → `inline`, `d-inline-block` → `inline-block`, `d-inline-flex` → `inline-flex`, `d-grid` → `grid`, and responsive breakpoints (`d-md-none` → `md:hidden`, `d-lg-block` → `lg:block`, `d-sm-flex` → `sm:flex`).
-   - Flexbox: `flex-column` → `flex-col`, `align-items-*` → `items-*`, `align-self-*` → `self-*`, `justify-content-*` → `justify-*`, `flex-grow-1` → `grow`, `flex-shrink-0` → `shrink-0`.
+   - Flexbox: `flex-column` → `flex-col`, `align-items-*` → `items-*`, `align-self-*` → `self-*`, `justify-content-*` → `justify-*`, `flex-grow-1` → `grow`, `flex-shrink-0` → `shrink-0`, `order-sm-2` → `sm:order-2` (`order-0`…`5`, `order-first` and `order-last` keep their names).
    - Flex helpers (Metronic `_flex.scss`): `flex-center` → `flex items-center justify-center`, `flex-root` → `flex-1`, `flex-equal` → `flex-1`, `flex-column-fluid` → `flex-auto`, `flex-column-auto` → `flex-none`, `flex-lg-row-fluid` → `lg:flex-auto lg:min-w-0`, `flex-sm-column-auto` → `sm:flex-none`.
    - Sizing & Text: `w-100` → `w-full`, `h-100` → `h-full`, `mw-100` → `max-w-full`, `mh-100` → `max-h-full`, `text-truncate` → `truncate`.
+   - Shared names (#478): Bootstrap no longer generates text alignment, white-space, overflow, opacity, vertical alignment, visibility, the position offsets, `shadow-none` or `rounded-0`, so `text-center`, `overflow-hidden`, `opacity-50`, `align-middle`, `invisible`, `top-0` and the like are Tailwind's. Bootstrap's were `!important`, so a variant beside one (`opacity-50 hover:opacity-75`) now applies, and an unlayered component rule now beats one. Bootstrap-only spellings: `text-nowrap` → `whitespace-nowrap` and `text-wrap` → `whitespace-normal` (Tailwind's set the newer `text-wrap` property), `text-md-center` → `md:text-center`, and the percentage offsets `start-50` → `start-1/2`, `top-100` → `top-full` (Tailwind reads `start-50` as 200px, so these are reported without an autofix).
    - Enforced (with automated autofix) by `waldur-custom/no-bootstrap-layout-utility`.
 
 ---

@@ -10,17 +10,6 @@ $utilities: map.merge(
       responsive: true,
       values: static relative absolute fixed sticky,
     ),
-    'opacity': (
-      property: opacity,
-      class: opacity,
-      values: $opacity-values,
-    ),
-    'opacity-hover': (
-      property: opacity,
-      state: hover,
-      class: opacity,
-      values: $opacity-values,
-    ),
     'z-index': (
       property: z-index,
       class: z-index,
@@ -91,8 +80,9 @@ $utilities: map.remove(
   'min-height'
 );
 
-// Display and flex utilities come from Tailwind, so no .d-* or Bootstrap .flex-*
-// either. no-bootstrap-layout-utility reports them with their Tailwind
+// Display, flex, flex-alignment and order utilities come from Tailwind, so no
+// .d-*, Bootstrap .flex-*, .justify-content-*, .align-items-*, .align-self-*
+// or .order-* either (#478). no-bootstrap-layout-utility reports them with their Tailwind
 // equivalents, and removing them eliminates !important collisions with Tailwind.
 $utilities: map.remove(
   $utilities,
@@ -101,7 +91,11 @@ $utilities: map.remove(
   'flex-direction',
   'flex-grow',
   'flex-shrink',
-  'flex-wrap'
+  'flex-wrap',
+  'justify-content',
+  'align-items',
+  'align-self',
+  'order'
 );
 
 // Spacing comes from Tailwind's 4px scale (#477), so no .m*-*, .p*-* or
@@ -148,6 +142,52 @@ $utilities: map.remove(
   'viewport-height',
   'min-viewport-height',
   'align-content'
+);
+
+// Utilities whose names and values Tailwind shares (#478, group A): text
+// alignment, white-space (now whitespace-*), overflow, opacity, vertical
+// alignment, visibility and the position offsets. Bootstrap's were
+// `!important`, so a Tailwind variant beside one (`opacity-50
+// hover:opacity-75`) never applied, and a component rule could not override
+// one. no-bootstrap-layout-utility reports the spellings only Bootstrap had:
+// `text-md-center`, `text-nowrap`, and the percentage offsets `start-50`,
+// which are spacing steps in Tailwind.
+$utilities: map.remove(
+  $utilities,
+  'text-align',
+  'white-space',
+  'overflow',
+  'opacity',
+  'align',
+  'visibility',
+  'top',
+  'bottom',
+  'start',
+  'end'
+);
+
+// `.shadow-none` and `.rounded-0` too (the rest of each family has values of
+// its own and stays for now): Tailwind's shadow-none and rounded-none do the
+// same, and Bootstrap's `!important` beat any variant beside them.
+$utilities: map.merge(
+  $utilities,
+  (
+    'shadow': map.merge(
+        map.get($utilities, 'shadow'),
+        (
+          values: map.remove(
+              map.get(map.get($utilities, 'shadow'), values),
+              'none'
+            ),
+        )
+      ),
+    'rounded': map.merge(
+        map.get($utilities, 'rounded'),
+        (
+          values: map.remove(map.get(map.get($utilities, 'rounded'), values), 0),
+        )
+      ),
+  )
 );
 
 // `.border-0` too: Tailwind's sets the same zero width, and Bootstrap's

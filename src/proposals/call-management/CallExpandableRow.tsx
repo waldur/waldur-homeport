@@ -39,7 +39,7 @@ export const CallExpandableRow: FunctionComponent<{
       <Field
         label={translate('Resource availability')}
         value="44.54/100 % (i)"
-        className="text-nowrap"
+        className="whitespace-nowrap"
       />
     </ExpandableContainer>
   );

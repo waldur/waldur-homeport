@@ -44,7 +44,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
           <div className="flex justify-end grow">
             <BaseButton
               variant="tertiary"
-              className="text-nowrap"
+              className="whitespace-nowrap"
               iconNode={<PlusIcon weight="bold" />}
               label={translate('New interface')}
               onClick={() => {}}

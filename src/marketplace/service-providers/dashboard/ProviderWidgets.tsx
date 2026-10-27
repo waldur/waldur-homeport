@@ -136,7 +136,7 @@ const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
           {item.iconNode}
         </span>
       )}
-      <h1 className="display-6 text-nowrap mb-0 mt-1.5">{item.value}</h1>
+      <h1 className="display-6 whitespace-nowrap mb-0 mt-1.5">{item.value}</h1>
       <p className="text-xs font-semibold mb-4 h-[40px] text-primary">
         {item.title}
       </p>

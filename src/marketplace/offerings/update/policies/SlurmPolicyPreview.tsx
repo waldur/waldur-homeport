@@ -564,7 +564,7 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
               <tbody>
                 {preview.command_history.map((cmd) => (
                   <tr key={cmd.uuid}>
-                    <td className="text-nowrap">
+                    <td className="whitespace-nowrap">
                       {formatDateTime(cmd.executed_at)}
                     </td>
                     <td>

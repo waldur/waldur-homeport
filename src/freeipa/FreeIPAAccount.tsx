@@ -54,8 +54,8 @@ export const FreeIpaAccount = () => {
             </Card.Title>
           </Col>
           {profile && (
-            <Col sm="auto" className="order-1 order-sm-2 min-w-1/4 ms-auto">
-              <div className="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-2.5">
+            <Col sm="auto" className="order-1 sm:order-2 min-w-1/4 ms-auto">
+              <div className="flex sm:justify-end max-sm:flex-wrap whitespace-nowrap gap-2.5">
                 <SyncProfile
                   profile={profile}
                   refreshProfile={refreshProfile}

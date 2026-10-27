@@ -20,7 +20,7 @@ const ReviewRow = ({
   value: React.ReactNode;
 }) => (
   <tr>
-    <td className="font-medium text-nowrap pe-3">{label}</td>
+    <td className="font-medium whitespace-nowrap pe-3">{label}</td>
     <td>{renderFieldOrDash(value)}</td>
   </tr>
 );

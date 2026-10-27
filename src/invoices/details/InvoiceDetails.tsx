@@ -74,7 +74,7 @@ export const InvoiceDetails = ({
                     <td className="text-primary">
                       <span>{translate('Total filtered')}</span>
                       {': '}
-                      <span className="text-end text-primary text-nowrap min-w-[125px]">
+                      <span className="text-end text-primary whitespace-nowrap min-w-[125px]">
                         {defaultCurrency(totalFiltered)}
                       </span>
                     </td>
@@ -85,7 +85,7 @@ export const InvoiceDetails = ({
                   </td>
                   <td
                     width="12%"
-                    className="text-end text-primary text-nowrap min-w-[150px] border-b-[1px] border-b-secondary"
+                    className="text-end text-primary whitespace-nowrap min-w-[150px] border-b-[1px] border-b-secondary"
                   >
                     {defaultCurrency(invoice.price)}
                   </td>
@@ -99,7 +99,7 @@ export const InvoiceDetails = ({
                   </td>
                   <td
                     width="12%"
-                    className="text-end text-primary text-nowrap min-w-[150px] border-b-[1px] border-b-secondary"
+                    className="text-end text-primary whitespace-nowrap min-w-[150px] border-b-[1px] border-b-secondary"
                   >
                     {defaultCurrency(invoice.tax)}
                   </td>
@@ -113,7 +113,7 @@ export const InvoiceDetails = ({
                   </td>
                   <td
                     width="12%"
-                    className="text-end text-primary text-nowrap min-w-[150px]"
+                    className="text-end text-primary whitespace-nowrap min-w-[150px]"
                   >
                     {defaultCurrency(invoice.total)}
                   </td>

@@ -120,7 +120,7 @@ export const UserProposalsList: FC<UserProposalsListProps> = ({
       render: ({ row }) => <EndingField endDate={row.round?.cutoff_time} />,
       keys: ['round'],
       id: 'ending',
-      className: 'text-nowrap',
+      className: 'whitespace-nowrap',
     },
     {
       title: translate('State'),

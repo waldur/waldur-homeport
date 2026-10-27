@@ -160,7 +160,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
           disabled={submitting}
           disabledReason={translate('Saving in progress')}
           pending={executing}
-          className="text-nowrap"
+          className="whitespace-nowrap"
           iconNode={<PlayIcon weight="bold" />}
           label={
             isSmallScr ? translate('Dry run') : translate('Dry run script')

@@ -31,8 +31,76 @@ describe('no-bootstrap-layout-utility', () => {
       { code: "type D = 'd-flex';" },
       { code: "const o = { variant: 'd-flex' };" },
       { code: "const isFlex = cls === 'd-flex';" },
+      // Tailwind's own text, whitespace and position classes.
+      {
+        code: 'const A = () => <div className="whitespace-nowrap text-center md:text-start top-0 start-0 top-1/2 start-full" />;',
+      },
+      // Bootstrap's order-* names without a breakpoint are Tailwind's too.
+      {
+        code: 'const A = () => <div className="order-0 order-2 order-first order-last sm:order-1" />;',
+      },
     ],
     invalid: [
+      {
+        code: 'const A = () => <div className="text-nowrap text-wrap text-md-center" />;',
+        output:
+          'const A = () => <div className="whitespace-nowrap whitespace-normal md:text-center" />;',
+        errors: [
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'text-nowrap', fix: 'whitespace-nowrap' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'text-wrap', fix: 'whitespace-normal' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'text-md-center', fix: 'md:text-center' },
+          },
+        ],
+      },
+      {
+        code: 'const A = () => <span className="start-50" />;',
+        output: null,
+        errors: [
+          {
+            messageId: 'ambiguousSize',
+            data: {
+              token: 'start-50',
+              percent: 'start-1/2',
+              pixels: 'start-[200px]',
+            },
+            suggestions: [
+              {
+                messageId: 'useReplacement',
+                data: { fix: 'start-1/2' },
+                output: 'const A = () => <span className="start-1/2" />;',
+              },
+              {
+                messageId: 'useReplacement',
+                data: { fix: 'start-[200px]' },
+                output: 'const A = () => <span className="start-[200px]" />;',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        code: 'const A = () => <div className="order-2 order-sm-1 order-xxl-last" />;',
+        output:
+          'const A = () => <div className="order-2 sm:order-1 2xl:order-last" />;',
+        errors: [
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'order-sm-1', fix: 'sm:order-1' },
+          },
+          {
+            messageId: 'layoutUtility',
+            data: { token: 'order-xxl-last', fix: '2xl:order-last' },
+          },
+        ],
+      },
       {
         // Bootstrap's !important .flex-wrap beats sm:flex-nowrap: no autofix.
         code: 'const A = () => <div className="d-flex flex-wrap flex-sm-nowrap" />;',

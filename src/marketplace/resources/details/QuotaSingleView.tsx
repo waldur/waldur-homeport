@@ -46,7 +46,7 @@ export const QuotaSingleView = ({
 
   return (
     <div className="flex flex-col">
-      <span className="font-medium text-primary text-nowrap ellipsis">
+      <span className="font-medium text-primary whitespace-nowrap ellipsis">
         {limit
           ? `${formatUsageValue(usage)} / ${formatUsageValue(limit)}`
           : formatUsageValue(usage)}{' '}

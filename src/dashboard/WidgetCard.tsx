@@ -95,13 +95,13 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
               {(title || meta) && (
                 <Col>
                   <Row className="items-center gap-3 mb-1.5">
-                    <h1 className="mb-0 text-nowrap text-2xl col col-sm-12 col-md col-xxl-12">
+                    <h1 className="mb-0 whitespace-nowrap text-2xl col col-sm-12 col-md col-xxl-12">
                       {title}
                     </h1>
                     {meta && (
                       <Col
                         xs="auto"
-                        className="text-secondary text-nowrap text-sm"
+                        className="text-secondary whitespace-nowrap text-sm"
                       >
                         {meta}
                       </Col>

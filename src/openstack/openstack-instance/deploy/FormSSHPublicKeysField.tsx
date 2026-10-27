@@ -73,7 +73,7 @@ export const FormSSHPublicKeysField = (props: Partial<TableProps>) => {
           onClick={openFormDialog}
           label={translate('Create new')}
           iconNode={<PlusCircleIcon weight="bold" />}
-          className="text-nowrap"
+          className="whitespace-nowrap"
           variant="tertiary"
           size="lg"
         />

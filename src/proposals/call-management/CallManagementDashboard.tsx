@@ -18,7 +18,7 @@ import { useCustomer } from '@/workspace/hooks';
 
 const FlatStatistics = ({ count, title }) => {
   return (
-    <Col className="text-md-center mb-3">
+    <Col className="md:text-center mb-3">
       <strong className="block text-xl">{count}</strong>
       <strong className="health-title">{title}</strong>
     </Col>

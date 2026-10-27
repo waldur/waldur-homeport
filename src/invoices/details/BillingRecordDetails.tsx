@@ -34,7 +34,7 @@ export const BillingRecordDetails: FC<BillingRecordDetailsProps> = ({
                   <span>{translate('Total filtered')}</span>{' '}
                   <small>{translate('(VAT is not included)')}</small>
                   {': '}
-                  <span className="text-end text-primary text-nowrap min-w-[125px]">
+                  <span className="text-end text-primary whitespace-nowrap min-w-[125px]">
                     {defaultCurrency(totalFiltered)}
                   </span>
                 </td>
@@ -46,7 +46,7 @@ export const BillingRecordDetails: FC<BillingRecordDetailsProps> = ({
               </td>
               <td
                 width="12%"
-                className="text-end text-primary text-nowrap min-w-[150px]"
+                className="text-end text-primary whitespace-nowrap min-w-[150px]"
               >
                 {defaultCurrency(invoice.price)}
               </td>

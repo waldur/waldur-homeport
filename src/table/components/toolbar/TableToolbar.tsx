@@ -91,7 +91,7 @@ export function TableToolbarActions() {
     <>
       {/* Multi-select actions */}
       {selectedRows?.length > 0 && slots.multiSelectActions && (
-        <div className="order-1 order-sm-1 flex justify-start flex-wrap text-nowrap gap-3">
+        <div className="order-1 flex justify-start flex-wrap whitespace-nowrap gap-3">
           <div className="flex items-center font-normal text-primary me-1.5">
             <BaseButton
               iconNode={<XIcon weight="bold" />}
@@ -119,13 +119,13 @@ export function TableToolbarActions() {
       {(config.hasQuery || showActionsColumn) && (
         <div
           className={classNames(
-            'grow order-2 order-sm-2 flex items-center',
+            'grow order-2 flex items-center',
             // In a tabbed card's header the toolbar shares the width with the
             // card title; let search and buttons wrap instead of overflowing.
             // Bootstrap's .flex-wrap is !important and would beat a Tailwind
             // sm:flex-nowrap, so wrap only below sm for a standalone table.
             portal?.toolbar ? 'flex-wrap' : 'max-sm:flex-wrap',
-            'text-nowrap gap-3',
+            'whitespace-nowrap gap-3',
             showTitle ? 'ms-auto justify-end' : 'justify-between',
           )}
         >
@@ -153,7 +153,7 @@ export function TableToolbarActions() {
           )}
 
           {showActionsColumn && (
-            <div className="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-3">
+            <div className="flex sm:justify-end max-sm:flex-wrap whitespace-nowrap gap-3">
               <TableButtons
                 table={config.table}
                 rows={rows}

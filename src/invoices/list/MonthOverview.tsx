@@ -36,7 +36,7 @@ const OverviewItemTr = ({ title, value }) => {
   return (
     <tr>
       <td className="text-decoration-underline w-full py-2.5">{title}</td>
-      <td className="text-quaternary text-nowrap">{value}</td>
+      <td className="text-quaternary whitespace-nowrap">{value}</td>
     </tr>
   );
 };

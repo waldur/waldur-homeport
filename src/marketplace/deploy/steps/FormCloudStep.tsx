@@ -172,7 +172,7 @@ export const FormCloudStep = (props: FormStepProps) => {
             <div className="flex gap-8 justify-end">
               <BaseButton
                 variant="tertiary"
-                className="text-nowrap"
+                className="whitespace-nowrap"
                 onClick={() => {}}
                 iconNode={<PlusIcon weight="bold" />}
                 label={translate('New cloud')}

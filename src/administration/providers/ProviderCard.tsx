@@ -190,7 +190,7 @@ export const ProviderCard: FC<ProviderCardProps> = ({
               <IdentityProviderLogo name={type} maxHeight={40} />
             </div>
             <div className="grow">
-              <h1 className="text-xl text-nowrap font-bold">{title}</h1>
+              <h1 className="text-xl whitespace-nowrap font-bold">{title}</h1>
               <p className="text-sm text-primary">{description}</p>
               <ProviderStatusMenu
                 provider={provider}

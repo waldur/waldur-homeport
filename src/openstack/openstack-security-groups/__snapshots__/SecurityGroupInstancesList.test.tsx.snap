@@ -201,7 +201,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                 >
                   <div>
                     <span
-                      class="text-nowrap"
+                      class="whitespace-nowrap"
                     >
                       192.168.42.14
                       <div
@@ -223,7 +223,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       </div>
                     </span>
                     <span
-                      class="text-quaternary ms-1 text-nowrap"
+                      class="text-quaternary ms-1 whitespace-nowrap"
                     >
                       theses-and-papers-on-mach-sub-net (192.168.42.0/24)
                     </span>
@@ -233,7 +233,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                   class="ellipsis"
                 >
                   <span
-                    class="text-nowrap"
+                    class="whitespace-nowrap"
                   >
                     10.10.10.5
                     <div

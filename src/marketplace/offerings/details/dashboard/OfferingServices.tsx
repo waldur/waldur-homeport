@@ -78,7 +78,7 @@ export const OfferingServices: FC<OwnProps> = ({ agentIdentity }) => {
               actions={
                 <BaseButton
                   variant="text-primary"
-                  className="text-nowrap"
+                  className="whitespace-nowrap"
                   onClick={() => openProcessesDialog(service)}
                   label={translate('Show processes')}
                   size="sm"

@@ -68,7 +68,7 @@ const ShowPreviewButton = () => {
       disabledReason={translate('No security groups selected')}
       label={translate('Preview')}
       iconNode={<EyeIcon weight="bold" />}
-      className="text-nowrap"
+      className="whitespace-nowrap"
       variant="tertiary"
       size="lg"
     />

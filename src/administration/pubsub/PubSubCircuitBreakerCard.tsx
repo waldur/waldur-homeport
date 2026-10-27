@@ -127,7 +127,7 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                 <tbody>
                   {data.state_history.slice(0, 10).map((transition, index) => (
                     <tr key={index}>
-                      <td className="text-nowrap">
+                      <td className="whitespace-nowrap">
                         {formatTimestamp(transition.timestamp)}
                       </td>
                       <td>

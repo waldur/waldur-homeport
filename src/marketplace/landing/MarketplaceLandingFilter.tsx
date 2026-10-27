@@ -121,7 +121,7 @@ export const MarketplaceLandingFilter = ({
               id="marketplace-landing-filter-toggle"
               variant="tertiary"
               size={size}
-              className={classNames('text-nowrap', show && 'active')}
+              className={classNames('whitespace-nowrap', show && 'active')}
               iconNode={
                 <FunnelSimpleIcon
                   size={size === 'sm' ? 16 : 20}

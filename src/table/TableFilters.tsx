@@ -44,7 +44,7 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
         <div
           className={
             isMd
-              ? 'flex items-stretch text-nowrap gap-3 w-full'
+              ? 'flex items-stretch whitespace-nowrap gap-3 w-full'
               : 'flex flex-wrap gap-3 w-full'
           }
         >

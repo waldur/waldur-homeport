@@ -35,7 +35,7 @@ const InternalIps: FC<{ ports: OpenStackNestedPort[] }> = ({ ports }) => {
         <div key={port.url}>
           <IPList value={port.fixed_ips.map((fixedIp) => fixedIp.ip_address)} />
           {port.subnet_name ? (
-            <span className="text-quaternary ms-1 text-nowrap">
+            <span className="text-quaternary ms-1 whitespace-nowrap">
               {formatSubnet(port)}
             </span>
           ) : null}

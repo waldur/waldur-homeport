@@ -204,7 +204,7 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = ({
         ))}
         <BaseButton
           variant="text-primary"
-          className="text-nowrap"
+          className="whitespace-nowrap"
           onClick={addRow}
           iconNode={<PlusCircleIcon weight="bold" />}
           label={translate('Add time period')}

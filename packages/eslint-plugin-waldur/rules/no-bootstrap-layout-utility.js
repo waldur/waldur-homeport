@@ -27,6 +27,7 @@
  *   flex-column-auto       → flex-none
  *   flex-lg-row-fluid      → lg:flex-auto lg:min-w-0
  *   flex-sm-column-auto    → sm:flex-none
+ *   order-sm-2             → sm:order-2
  *
  * This rule reports all such classes and autofixes them to their Tailwind counterparts.
  *
@@ -41,6 +42,14 @@
  * Bootstrap no longer generates them (#473), so new code using one may mean
  * Tailwind's `w-50` (200px). They are reported without a fix, with a
  * suggestion for each reading: `w-1/2` (Bootstrap's 50%) or `w-[200px]`.
+ * The position offsets `top`/`bottom`/`start`/`end` × 25/50/75/100 are the
+ * same case since Bootstrap stopped generating them (#478): `start-50` was
+ * `left: 50%`, Tailwind's is 200px.
+ *
+ * `text-nowrap` and `text-wrap` become `whitespace-nowrap` and
+ * `whitespace-normal`: Bootstrap's set `white-space`, Tailwind's the newer
+ * `text-wrap` property, which older browsers ignore. `text-md-center` and the
+ * other breakpoint text alignments become `md:text-center`.
  */
 
 import { notAClassList } from './class-name-tokens.js';
@@ -127,8 +136,11 @@ const STATIC_LAYOUT_MAP = {
   'mw-100': 'max-w-full',
   'mh-100': 'max-h-full',
 
-  // Text
+  // Text. Tailwind's text-nowrap/text-wrap set the newer `text-wrap`
+  // property; Bootstrap's set `white-space`, which whitespace-* still does.
   'text-truncate': 'truncate',
+  'text-nowrap': 'whitespace-nowrap',
+  'text-wrap': 'whitespace-normal',
 };
 
 const SIZE_PROP_MAP = {
@@ -154,7 +166,8 @@ const SIZE_RE =
 
 // Bootstrap percentages whose names Tailwind also defines, as multiples of
 // its 4px spacing unit (packages/design-tokens/src/css/primitives/spacing.css).
-const AMBIGUOUS_SIZE_RE = /^(w|h|min-w|min-h)-(25|50|75|100)$/;
+const AMBIGUOUS_SIZE_RE =
+  /^(w|h|min-w|min-h|top|bottom|start|end)-(25|50|75|100)$/;
 const SPACING_PX = 4;
 
 /** w-50 → { percent: 'w-1/2', pixels: 'w-[200px]' }, else null. */
@@ -192,7 +205,14 @@ export const getLayoutReplacement = (name) => {
   const size = getSizeReplacement(name);
   if (size) return size;
 
-  let m =
+  // Bootstrap's position offsets were percentages (#478).
+  let m = /^(top|bottom|start|end)-(25|50|75|100)$/.exec(name);
+  if (m) return `${m[1]}-${SIZE_VALUE_MAP[m[2]]}`;
+
+  m = /^text-(sm|md|lg|xl|xxl)-(start|end|center)$/.exec(name);
+  if (m) return `${BP_MAP[m[1]]}:text-${m[2]}`;
+
+  m =
     /^d-(sm|md|lg|xl|xxl)-(none|block|flex|inline|inline-block|inline-flex|grid|table|table-row|table-cell)$/.exec(
       name,
     );
@@ -244,6 +264,11 @@ export const getLayoutReplacement = (name) => {
       name,
     );
   if (m) return `${BP_MAP[m[1]]}:justify-${m[2]}`;
+
+  // Bootstrap's order-0…5/first/last keep their names in Tailwind; only the
+  // breakpoint infix is Bootstrap's.
+  m = /^order-(sm|md|lg|xl|xxl)-(first|last|[0-5])$/.exec(name);
+  if (m) return `${BP_MAP[m[1]]}:order-${m[2]}`;
 
   return null;
 };

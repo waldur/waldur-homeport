@@ -284,7 +284,7 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
             className="hidden sm:block grow"
           />
 
-          <div className="flex sm:flex-col gap-2.5 text-nowrap">
+          <div className="flex sm:flex-col gap-2.5 whitespace-nowrap">
             {!customerView &&
               (hasChangePlanRequest || hasLimitChangeRequest ? (
                 <ResourceViewChangeButton

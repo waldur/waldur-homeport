@@ -25,7 +25,7 @@ export const RequestedLimits: FC<{
   return (
     <span className="flex flex-col">
       {entries.map(([key, value]) => (
-        <span key={key} className="text-nowrap">
+        <span key={key} className="whitespace-nowrap">
           {/* Component types are snake_case: cpu_hours -> Cpu hours. */}
           <span className="text-quaternary">
             {titleCase(key.replace(/_/g, ' '))}:{' '}

@@ -112,7 +112,7 @@ export const VersionHistoryDialog: FunctionComponent<
       <div className="flex flex-col" style={{ height: '70vh' }}>
         {/* Toolbar: wraps onto two rows on a phone. */}
         <div className="flex flex-wrap justify-between items-center gap-2.5 px-4 py-3 border-b-[1px] border-b-secondary">
-          <div className="flex items-center gap-1.5 text-nowrap">
+          <div className="flex items-center gap-1.5 whitespace-nowrap">
             <span className="text-quaternary text-xs">
               {translate('Total')}:
             </span>

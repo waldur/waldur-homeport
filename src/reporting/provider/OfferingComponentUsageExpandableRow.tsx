@@ -126,7 +126,7 @@ export const OfferingComponentUsageExpandableRow: FC<
         <Col sm={6} className="border-sm-start md:ps-7.5">
           <Card className="card-bordered">
             <Card.Body className="p-3">
-              <div className="flex items-center justify-between gap-1.5 text-nowrap flex-wrap mb-3">
+              <div className="flex items-center justify-between gap-1.5 whitespace-nowrap flex-wrap mb-3">
                 <SegmentedControl<number>
                   aria-label={translate('Time period')}
                   size="sm"
@@ -151,7 +151,7 @@ export const OfferingComponentUsageExpandableRow: FC<
                   <LoadingErred loadData={refetch} className="grow" />
                 ) : usageData.length ? (
                   <>
-                    <div className="flex flex-col justify-between text-xs text-nowrap pt-1.5 me-3">
+                    <div className="flex flex-col justify-between text-xs whitespace-nowrap pt-1.5 me-3">
                       <span>
                         {translate('Max usage')}:{' '}
                         {formatUsageValue(Math.max(...usageData))}

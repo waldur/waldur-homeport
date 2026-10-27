@@ -118,7 +118,7 @@ export const ComponentRow: FC<ComponentRowProps> = ({
 
   return (
     <tr data-testid={`row-${component.type}`}>
-      <td className="text-nowrap">{component.name}</td>
+      <td className="whitespace-nowrap">{component.name}</td>
       <td>{renderFieldOrDash(component.limit)}</td>
       <Field
         name={`limits.${component.type}`}

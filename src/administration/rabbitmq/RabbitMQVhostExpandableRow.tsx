@@ -54,7 +54,7 @@ export const RabbitMQVhostExpandableRow: FC<
             <code
               className={
                 queue.queue_kind === 'consumer'
-                  ? 'text-xs text-nowrap'
+                  ? 'text-xs whitespace-nowrap'
                   : 'text-xs text-break'
               }
               title={queue.name}

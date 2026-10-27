@@ -133,7 +133,7 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
               <ServiceDeskProviderLogo name={serviceDeskProvider} />
             </div>
             <div className="grow flex flex-col">
-              <h1 className="text-xl text-nowrap font-bold">
+              <h1 className="text-xl whitespace-nowrap font-bold">
                 {capitalize(serviceDeskProvider)}
               </h1>
               {isAtlassian && isConfigured ? (

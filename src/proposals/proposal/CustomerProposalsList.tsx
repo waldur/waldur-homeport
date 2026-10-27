@@ -85,7 +85,7 @@ export const CustomerProposalsList: FC = () => {
         {
           title: translate('Ending'),
           render: ({ row }) => <EndingField endDate={row.round?.cutoff_time} />,
-          className: 'text-nowrap',
+          className: 'whitespace-nowrap',
         },
         {
           title: translate('State'),

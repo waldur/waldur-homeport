@@ -111,7 +111,7 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
                 <HelpIcon label={row.type} className="ms-1" />
               </>
             ),
-            className: 'text-nowrap',
+            className: 'whitespace-nowrap',
           },
           {
             title: translate('Old limit'),
