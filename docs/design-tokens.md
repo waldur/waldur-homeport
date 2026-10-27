@@ -607,7 +607,9 @@ each theme, with the design tokens and the `dark-theme` / `light-theme` override
 change that keeps the rendered colour (a token in place of an SCSS gray of the same value)
 reports nothing.
 For the CSS side, compile `src/tailwind.css` with `@tailwindcss/node` and diff the emitted
-`--color-*` declarations.
+`--color-*` declarations. To see the rendered result, screenshot every Storybook story on both
+commits in both themes with `scripts/theme-snapshots.mjs` (see
+[visual-testing.md](visual-testing.md) → "Storybook comparison").
 
 Metronic stylesheets consume CSS custom properties directly (`var(--text-primary)`,
 `var(--bg-primary)`, `var(--border-primary)`, etc.), ensuring identical token resolution

@@ -4,13 +4,14 @@ Guides for working on Waldur HomePort. Start with [development-setup.md](develop
 
 ## Getting started
 
-| Guide                                              | Covers                                                                                 |
-| -------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [development-setup.md](development-setup.md)       | Environment setup, essential commands, build tooling, browser debugging, i18n commands |
-| [development-workflow.md](development-workflow.md) | Planning, TDD, problem-solving approach                                                |
-| [architecture.md](architecture.md)                 | Redux store, UI-Router routing, component organization                                 |
-| [code-quality.md](code-quality.md)                 | Linting, formatting, TypeScript checks                                                 |
-| [testing.md](testing.md)                           | Vitest unit testing and E2E standards                                                  |
+| Guide                                              | Covers                                                                                        |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [development-setup.md](development-setup.md)       | Environment setup, essential commands, build tooling, browser debugging, i18n commands        |
+| [development-workflow.md](development-workflow.md) | Planning, TDD, problem-solving approach                                                       |
+| [architecture.md](architecture.md)                 | Redux store, UI-Router routing, component organization                                        |
+| [code-quality.md](code-quality.md)                 | Linting, formatting, TypeScript checks                                                        |
+| [testing.md](testing.md)                           | Vitest unit testing and E2E standards                                                         |
+| [visual-testing.md](visual-testing.md)             | Visual regression: Storybook comparison, parity and geometry specs, CI screenshots, reporting |
 
 ## UI patterns
 

@@ -29,7 +29,7 @@ For detailed testing standards and strategy, see [Testing Standards & Strategy](
 
 - `yarn test` - Run unit tests with Vitest
 - `yarn test:e2e` - Run Playwright E2E tests
-- `yarn test:visual` - Run Playwright visual regression tests
+- `yarn test:visual` - Run every Playwright project, including the visual specs (see [visual-testing.md](visual-testing.md))
 
 ### Dependency Management
 
