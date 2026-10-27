@@ -1,15 +1,20 @@
-import type { Resource, ArrowConsumptionRecord } from 'waldur-js-client';
+import { useMemo } from 'react';
+import {
+  adminArrowConsumptionRecordsList,
+  type ArrowConsumptionRecord,
+  type Resource,
+} from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
-import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
-
-import { useResourceConsumptionHistory } from '../api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 interface ViewConsumptionHistoryDialogProps {
   resolve: {
@@ -21,9 +26,17 @@ export const ViewConsumptionHistoryDialog = ({
   resolve,
 }: ViewConsumptionHistoryDialogProps) => {
   const { resource } = resolve;
-  const { data, isLoading, error } = useResourceConsumptionHistory(
-    resource.uuid,
+
+  // The endpoint pages on the server, so the table fetches it page by page.
+  const filter = useMemo(
+    () => ({ resource_uuid: resource.uuid }),
+    [resource.uuid],
   );
+  const tableProps = useTable({
+    table: `arrow-consumption-history-${resource.uuid}`,
+    fetchData: createFetcher(adminArrowConsumptionRecordsList),
+    filter,
+  });
 
   return (
     <ModalDialog
@@ -41,59 +54,58 @@ export const ViewConsumptionHistoryDialog = ({
       }
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : error ? (
-        <div className="text-danger">{translate('Failed to load data')}</div>
-      ) : !data || data.length === 0 ? (
-        <div className="text-quaternary">
-          {translate('No consumption records found for this resource.')}
-        </div>
-      ) : (
-        <div className="table-responsive">
-          <table className="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>{translate('Period')}</th>
-                <th>{translate('Consumed (Sell)')}</th>
-                <th>{translate('Final (Sell)')}</th>
-                <th>{translate('Status')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((record: ArrowConsumptionRecord) => (
-                <tr key={record.uuid}>
-                  <td>{record.billing_period}</td>
-                  <td>{defaultCurrency(record.consumed_sell)}</td>
-                  <td>
-                    {record.final_sell
-                      ? defaultCurrency(record.final_sell)
-                      : DASH_ESCAPE_CODE}
-                  </td>
-                  <td>
-                    <div className="flex flex-col gap-1">
-                      <Badge
-                        variant={record.is_finalized ? 'success' : 'warning'}
-                        shape="pill"
-                        tone="outline"
-                      >
-                        {record.is_finalized
-                          ? translate('Finalized')
-                          : translate('Pending')}
-                      </Badge>
-                      {record.is_reconciled && (
-                        <Badge variant="primary" shape="pill" tone="outline">
-                          {translate('Reconciled')}
-                        </Badge>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      <Table<ArrowConsumptionRecord>
+        {...tableProps}
+        columns={[
+          {
+            title: translate('Period'),
+            render: ({ row }) => <>{row.billing_period}</>,
+          },
+          {
+            title: translate('Consumed (Sell)'),
+            render: ({ row }) => <>{defaultCurrency(row.consumed_sell)}</>,
+          },
+          {
+            title: translate('Final (Sell)'),
+            render: ({ row }) => (
+              <>
+                {row.final_sell
+                  ? defaultCurrency(row.final_sell)
+                  : DASH_ESCAPE_CODE}
+              </>
+            ),
+          },
+          {
+            title: translate('Status'),
+            render: ({ row }) => (
+              <div className="flex flex-col gap-1">
+                <Badge
+                  variant={row.is_finalized ? 'success' : 'warning'}
+                  shape="pill"
+                  tone="outline"
+                >
+                  {row.is_finalized
+                    ? translate('Finalized')
+                    : translate('Pending')}
+                </Badge>
+                {row.is_reconciled && (
+                  <Badge variant="primary" shape="pill" tone="outline">
+                    {translate('Reconciled')}
+                  </Badge>
+                )}
+              </div>
+            ),
+          },
+        ]}
+        verboseName={translate('consumption records')}
+        emptyMessage={translate(
+          'No consumption records found for this resource.',
+        )}
+        hideTitle
+        hasActionBar={false}
+        fullWidth
+        minHeight="auto"
+      />
     </ModalDialog>
   );
 };

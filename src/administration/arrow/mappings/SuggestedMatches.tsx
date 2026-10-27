@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Card, Table } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import {
   adminArrowCustomerMappingsLinkResource,
   LicenseSuggestion,
@@ -9,6 +9,7 @@ import { Badge, BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { SimpleTable } from '@/table/SimpleTable';
 
 import { arrowQueryKeys } from '../api';
 
@@ -73,60 +74,66 @@ export const SuggestedMatches: FC<SuggestedMatchesProps> = ({
         </h5>
       </Card.Header>
       <Card.Body className="p-0">
-        <Table className="mb-0" size="sm" hover>
-          <thead>
-            <tr>
-              <th>{translate('Waldur Resource')}</th>
-              <th>{translate('Arrow License')}</th>
-              <th>{translate('Confidence')}</th>
-              <th className="text-end">{translate('Action')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {suggestions.map((suggestion, idx) => (
-              <tr key={idx}>
-                <td>
-                  <strong>{suggestion.resource_name}</strong>
-                </td>
-                <td>
-                  <span className="small">{suggestion.license_reference}</span>
-                  {suggestion.license_name && (
+        <SimpleTable<LicenseSuggestion>
+          columns={[
+            {
+              title: translate('Waldur Resource'),
+              render: ({ row }) => <strong>{row.resource_name}</strong>,
+            },
+            {
+              title: translate('Arrow License'),
+              render: ({ row }) => (
+                <>
+                  {row.license_reference}
+                  {row.license_name && (
                     <div className="text-quaternary small">
-                      {suggestion.license_name}
+                      {row.license_name}
                     </div>
                   )}
-                </td>
-                <td>
-                  <Badge
-                    variant={
-                      suggestion.confidence >= 0.8
-                        ? 'success'
-                        : suggestion.confidence >= 0.5
-                          ? 'warning'
-                          : 'secondary'
-                    }
-                  >
-                    {Math.round(suggestion.confidence * 100)}%
-                  </Badge>
-                </td>
-                <td className="text-end">
-                  <BaseButton
-                    onClick={() =>
-                      linkResourceMutation.mutate({
-                        resourceUuid: suggestion.resource_uuid,
-                        licenseReference: suggestion.license_reference,
-                      })
-                    }
-                    label={translate('Link')}
-                    variant="success"
-                    pending={linkResourceMutation.isPending}
-                    size="lg"
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+                </>
+              ),
+            },
+            {
+              title: translate('Confidence'),
+              render: ({ row }) => (
+                <Badge
+                  variant={
+                    row.confidence >= 0.8
+                      ? 'success'
+                      : row.confidence >= 0.5
+                        ? 'warning'
+                        : 'secondary'
+                  }
+                >
+                  {Math.round(row.confidence * 100)}%
+                </Badge>
+              ),
+            },
+            {
+              // Linking is what the list is for, so it stays a button on
+              // each row rather than a row action behind a menu.
+              title: translate('Action'),
+              className: 'text-end',
+              headerClassName: 'text-end',
+              render: ({ row }) => (
+                <BaseButton
+                  onClick={() =>
+                    linkResourceMutation.mutate({
+                      resourceUuid: row.resource_uuid,
+                      licenseReference: row.license_reference,
+                    })
+                  }
+                  label={translate('Link')}
+                  variant="success"
+                  pending={linkResourceMutation.isPending}
+                  size="lg"
+                />
+              ),
+            },
+          ]}
+          rows={suggestions}
+          rowKey="license_reference"
+        />
       </Card.Body>
     </Card>
   );

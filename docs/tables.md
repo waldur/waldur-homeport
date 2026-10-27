@@ -19,6 +19,10 @@ To make table integration rules, properties, and layouts easier to navigate, the
 | **[Pillar 7: Layout Wrappers & Portals](./table/layout-wrappers.md)**   | Rendering multiple tables within tabs (`TableWithTabs`) and forwarding rendering portals (`portal`).                                                                            |
 | **[Pillar 8: Form Integration](./table/form-integration.md)**           | Embedding tables as input fields in `react-final-form` (`fieldType`, `fieldName`, `rowValidate`).                                                                               |
 
+Replacing a react-bootstrap `<Table>` or raw `<table>`? Start with the
+**[Migration guide](./table/migration-guide.md)**: it decides whether the list
+becomes `Table`, `SimpleTable`, a form grid or a label/value block.
+
 ---
 
 ## Complex Table Example

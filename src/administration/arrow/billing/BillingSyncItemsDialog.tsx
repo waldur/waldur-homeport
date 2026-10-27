@@ -1,4 +1,3 @@
-import { Table } from 'react-bootstrap';
 import type { ArrowBillingSync, ArrowBillingSyncItem } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
@@ -8,6 +7,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { SimpleTable } from '@/table/SimpleTable';
 
 import { useArrowBillingSyncItems } from '../api';
 
@@ -16,6 +16,48 @@ interface BillingSyncItemsDialogProps {
     billingSync: ArrowBillingSync;
   };
 }
+
+const BillingSyncItemsTable = ({
+  items,
+}: {
+  items: ArrowBillingSyncItem[];
+}) => (
+  <div className="max-h-[500px] overflow-y-auto">
+    <SimpleTable<ArrowBillingSyncItem>
+      columns={[
+        {
+          title: translate('Line Reference'),
+          render: ({ row }) => <>{row.arrow_line_reference}</>,
+        },
+        {
+          title: translate('Subscription'),
+          render: ({ row }) => <>{row.subscription_reference}</>,
+        },
+        {
+          title: translate('Vendor'),
+          render: ({ row }) => <>{row.vendor_name}</>,
+        },
+        {
+          title: translate('Description'),
+          render: ({ row }) => <>{row.description}</>,
+        },
+        {
+          title: translate('Quantity'),
+          className: 'text-end',
+          headerClassName: 'text-end',
+          render: ({ row }) => <>{row.quantity}</>,
+        },
+        {
+          title: translate('Original Price'),
+          className: 'text-end',
+          headerClassName: 'text-end',
+          render: ({ row }) => <>{defaultCurrency(row.original_price)}</>,
+        },
+      ]}
+      rows={items}
+    />
+  </div>
+);
 
 export const BillingSyncItemsDialog = ({
   resolve,
@@ -50,38 +92,7 @@ export const BillingSyncItemsDialog = ({
           {translate('No items found')}
         </div>
       ) : (
-        <div className="table-responsive" style={{ maxHeight: '500px' }}>
-          <Table striped bordered hover size="sm">
-            <thead className="sticky-top bg-primary">
-              <tr>
-                <th>{translate('Line Reference')}</th>
-                <th>{translate('Subscription')}</th>
-                <th>{translate('Vendor')}</th>
-                <th>{translate('Description')}</th>
-                <th className="text-end">{translate('Quantity')}</th>
-                <th className="text-end">{translate('Original Price')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {displayItems.map((item: ArrowBillingSyncItem, index: number) => (
-                <tr key={item.arrow_line_reference || index}>
-                  <td>
-                    <span className="small">{item.arrow_line_reference}</span>
-                  </td>
-                  <td>
-                    <span className="small">{item.subscription_reference}</span>
-                  </td>
-                  <td>{item.vendor_name}</td>
-                  <td>{item.description}</td>
-                  <td className="text-end">{item.quantity}</td>
-                  <td className="text-end">
-                    {defaultCurrency(item.original_price)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
+        <BillingSyncItemsTable items={displayItems} />
       )}
     </ModalDialog>
   );

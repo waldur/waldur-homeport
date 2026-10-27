@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Card, Table } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import type { ArrowSettings } from 'waldur-js-client';
 
 import { Badge, BaseButton } from 'waldur-ui';
@@ -10,9 +10,10 @@ import { ExternalLink } from '@/core/ExternalLink';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { useArrowSettings } from '../api';
 
@@ -99,74 +100,64 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
           </div>
         </Card.Header>
         <Card.Body>
-          <Table borderless size="sm">
-            <tbody>
-              <tr>
-                <td className="text-quaternary" style={{ width: '30%' }}>
-                  {translate('API URL')}
-                </td>
-                <td>
-                  <ExternalLink
-                    url={currentSettings.api_url}
-                    label={currentSettings.api_url}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Partner Name')}</td>
-                <td>{currentSettings.partner_name || DASH_ESCAPE_CODE}</td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Partner Reference')}
-                </td>
-                <td>
-                  {currentSettings.partner_reference ? (
-                    <span className="flex items-center gap-1.5">
-                      {currentSettings.partner_reference}
-                      <CopyToClipboardButton
-                        value={currentSettings.partner_reference}
-                        onlyButton
-                      />
-                    </span>
-                  ) : (
-                    DASH_ESCAPE_CODE
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Export Type Reference')}
-                </td>
-                <td>
-                  {currentSettings.export_type_reference ? (
-                    <span className="flex items-center gap-1.5">
-                      {currentSettings.export_type_reference}
-                      <CopyToClipboardButton
-                        value={currentSettings.export_type_reference}
-                        onlyButton
-                      />
-                    </span>
-                  ) : (
-                    DASH_ESCAPE_CODE
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Invoice Price Source')}
-                </td>
-                <td>
-                  {currentSettings.invoice_price_source === 'buy'
-                    ? translate('Buy price')
-                    : translate('Sell price')}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Invoice Item Prefix')}
-                </td>
-                <td>
+          <FormTable>
+            <FormTable.Item
+              label={translate('API URL')}
+              value={
+                <ExternalLink
+                  url={currentSettings.api_url}
+                  label={currentSettings.api_url}
+                />
+              }
+            />
+            <FormTable.Item
+              label={translate('Partner Name')}
+              value={renderFieldOrDash(currentSettings.partner_name)}
+            />
+            <FormTable.Item
+              label={translate('Partner Reference')}
+              value={
+                currentSettings.partner_reference ? (
+                  <span className="flex items-center gap-1.5">
+                    {currentSettings.partner_reference}
+                    <CopyToClipboardButton
+                      value={currentSettings.partner_reference}
+                      onlyButton
+                    />
+                  </span>
+                ) : (
+                  renderFieldOrDash(null)
+                )
+              }
+            />
+            <FormTable.Item
+              label={translate('Export Type Reference')}
+              value={
+                currentSettings.export_type_reference ? (
+                  <span className="flex items-center gap-1.5">
+                    {currentSettings.export_type_reference}
+                    <CopyToClipboardButton
+                      value={currentSettings.export_type_reference}
+                      onlyButton
+                    />
+                  </span>
+                ) : (
+                  renderFieldOrDash(null)
+                )
+              }
+            />
+            <FormTable.Item
+              label={translate('Invoice Price Source')}
+              value={
+                currentSettings.invoice_price_source === 'buy'
+                  ? translate('Buy price')
+                  : translate('Sell price')
+              }
+            />
+            <FormTable.Item
+              label={translate('Invoice Item Prefix')}
+              value={
+                <>
                   <div>
                     {currentSettings.invoice_item_prefix || 'Arrow consumption'}
                   </div>
@@ -180,30 +171,28 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                       },
                     )}
                   </div>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Sync Enabled')}</td>
-                <td>
-                  <Badge
-                    variant={
-                      currentSettings.sync_enabled ? 'success' : 'neutral'
-                    }
-                    shape="pill"
-                    tone="outline"
-                  >
-                    {currentSettings.sync_enabled
-                      ? translate('Yes')
-                      : translate('No')}
-                  </Badge>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Created')}</td>
-                <td>{formatDateTime(currentSettings.created)}</td>
-              </tr>
-            </tbody>
-          </Table>
+                </>
+              }
+            />
+            <FormTable.Item
+              label={translate('Sync Enabled')}
+              value={
+                <Badge
+                  variant={currentSettings.sync_enabled ? 'success' : 'neutral'}
+                  shape="pill"
+                  tone="outline"
+                >
+                  {currentSettings.sync_enabled
+                    ? translate('Yes')
+                    : translate('No')}
+                </Badge>
+              }
+            />
+            <FormTable.Item
+              label={translate('Created')}
+              value={formatDateTime(currentSettings.created)}
+            />
+          </FormTable>
         </Card.Body>
       </Card>
     </div>

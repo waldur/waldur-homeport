@@ -1,15 +1,46 @@
 import { FC } from 'react';
-import { Card, Table } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { ArrowLicense } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { SimpleTable } from '@/table/SimpleTable';
 
 interface ArrowLicensesListProps {
   licenses: ArrowLicense[];
 }
+
+// Every license is in the discovery response, so the list scrolls rather
+// than pages.
+const ArrowLicensesTable: FC<ArrowLicensesListProps> = ({ licenses }) => (
+  <div className="max-h-[300px] overflow-y-auto">
+    <SimpleTable<ArrowLicense>
+      columns={[
+        {
+          title: translate('License Reference'),
+          render: ({ row }) => <>{row.license_reference}</>,
+        },
+        {
+          title: translate('Vendor'),
+          render: ({ row }) => <>{row.vendor_name || DASH_ESCAPE_CODE}</>,
+        },
+        {
+          title: translate('Offer'),
+          render: ({ row }) => (
+            <>{row.offer_name || row.friendly_name || DASH_ESCAPE_CODE}</>
+          ),
+        },
+        {
+          title: translate('SKU'),
+          render: ({ row }) => <>{row.offer_sku || DASH_ESCAPE_CODE}</>,
+        },
+      ]}
+      rows={licenses}
+    />
+  </div>
+);
 
 export const ArrowLicensesList: FC<ArrowLicensesListProps> = ({ licenses }) => (
   <Card>
@@ -27,34 +58,7 @@ export const ArrowLicensesList: FC<ArrowLicensesListProps> = ({ licenses }) => (
           {translate('No licenses found in Arrow billing export')}
         </div>
       ) : (
-        <div className="table-responsive" style={{ maxHeight: '300px' }}>
-          <Table className="mb-0" size="sm">
-            <thead className="sticky-top bg-primary">
-              <tr>
-                <th>{translate('License Reference')}</th>
-                <th>{translate('Vendor')}</th>
-                <th>{translate('Offer')}</th>
-                <th>{translate('SKU')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {licenses.map((license, idx) => (
-                <tr key={idx}>
-                  <td>
-                    <span className="small">{license.license_reference}</span>
-                  </td>
-                  <td>{license.vendor_name || DASH_ESCAPE_CODE}</td>
-                  <td>
-                    {license.offer_name ||
-                      license.friendly_name ||
-                      DASH_ESCAPE_CODE}
-                  </td>
-                  <td>{license.offer_sku || DASH_ESCAPE_CODE}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
+        <ArrowLicensesTable licenses={licenses} />
       )}
     </Card.Body>
   </Card>

@@ -1,15 +1,65 @@
 import { FC } from 'react';
-import { Card, Table } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { WaldurResourceForLinking } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { SimpleTable } from '@/table/SimpleTable';
 
 interface WaldurResourcesListProps {
   resources: WaldurResourceForLinking[];
 }
+
+// Every resource is in the discovery response, so the list scrolls rather
+// than pages.
+const WaldurResourcesTable: FC<WaldurResourcesListProps> = ({ resources }) => (
+  <div className="max-h-[300px] overflow-y-auto">
+    <SimpleTable<WaldurResourceForLinking>
+      columns={[
+        {
+          title: translate('Resource'),
+          render: ({ row }) => <strong>{row.name}</strong>,
+        },
+        {
+          title: translate('Project'),
+          render: ({ row }) => <>{row.project_name || DASH_ESCAPE_CODE}</>,
+        },
+        {
+          title: translate('Offering'),
+          render: ({ row }) => <>{row.offering_name || DASH_ESCAPE_CODE}</>,
+        },
+        {
+          title: translate('Current backend_id'),
+          render: ({ row }) =>
+            row.backend_id ? (
+              <span className="text-success">{row.backend_id}</span>
+            ) : (
+              <span className="text-quaternary">{translate('Not set')}</span>
+            ),
+        },
+        {
+          title: translate('State'),
+          render: ({ row }) => (
+            <Badge
+              variant={
+                row.state === 'OK'
+                  ? 'success'
+                  : row.state === 'Erred'
+                    ? 'danger'
+                    : 'secondary'
+              }
+            >
+              {row.state}
+            </Badge>
+          ),
+        },
+      ]}
+      rows={resources}
+    />
+  </div>
+);
 
 export const WaldurResourcesList: FC<WaldurResourcesListProps> = ({
   resources,
@@ -29,54 +79,7 @@ export const WaldurResourcesList: FC<WaldurResourcesListProps> = ({
           {translate('No resources found for this customer')}
         </div>
       ) : (
-        <div className="table-responsive" style={{ maxHeight: '300px' }}>
-          <Table className="mb-0" size="sm">
-            <thead className="sticky-top bg-primary">
-              <tr>
-                <th>{translate('Resource')}</th>
-                <th>{translate('Project')}</th>
-                <th>{translate('Offering')}</th>
-                <th>{translate('Current backend_id')}</th>
-                <th>{translate('State')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {resources.map((resource) => (
-                <tr key={resource.uuid}>
-                  <td>
-                    <strong>{resource.name}</strong>
-                  </td>
-                  <td>{resource.project_name || DASH_ESCAPE_CODE}</td>
-                  <td>{resource.offering_name || DASH_ESCAPE_CODE}</td>
-                  <td>
-                    {resource.backend_id ? (
-                      <span className="small text-success">
-                        {resource.backend_id}
-                      </span>
-                    ) : (
-                      <span className="text-quaternary">
-                        {translate('Not set')}
-                      </span>
-                    )}
-                  </td>
-                  <td>
-                    <Badge
-                      variant={
-                        resource.state === 'OK'
-                          ? 'success'
-                          : resource.state === 'Erred'
-                            ? 'danger'
-                            : 'secondary'
-                      }
-                    >
-                      {resource.state}
-                    </Badge>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
+        <WaldurResourcesTable resources={resources} />
       )}
     </Card.Body>
   </Card>

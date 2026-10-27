@@ -1,8 +1,11 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card, Table } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
-import { adminArrowSettingsSaveSettings } from 'waldur-js-client';
+import {
+  adminArrowSettingsSaveSettings,
+  ExportTypeCompatibility,
+} from 'waldur-js-client';
 
 import { AlertItem, Badge, BaseButton } from 'waldur-ui';
 
@@ -10,10 +13,94 @@ import { ExternalLink } from '@/core/ExternalLink';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { Field } from '@/resource/summary';
+import { SimpleTable } from '@/table/SimpleTable';
+import { Column } from '@/table/types';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { arrowQueryKeys } from '../api';
 import type { ArrowSetupFormValues } from '../types';
+
+interface MappingRow {
+  arrowRef: string;
+  arrowCompany?: string;
+  waldurName: string;
+}
+
+const getMappingColumns = (): Column<MappingRow>[] => [
+  {
+    title: translate('Arrow Reference'),
+    render: ({ row }) => (
+      <>
+        {row.arrowRef}
+        {row.arrowCompany && (
+          <span className="text-quaternary ms-1.5">({row.arrowCompany})</span>
+        )}
+      </>
+    ),
+  },
+  {
+    title: translate('Waldur Organization'),
+    render: ({ row }) => <>{row.waldurName}</>,
+  },
+];
+
+const getExportTypeColumns = (): Column<ExportTypeCompatibility>[] => [
+  {
+    title: translate('Export Type'),
+    render: ({ row }) => (
+      <>
+        <span className="font-medium">{row.name}</span>
+        <br />
+        <span className="text-quaternary small">{row.reference}</span>
+      </>
+    ),
+  },
+  {
+    title: translate('Status'),
+    render: ({ row }) =>
+      row.recommended ? (
+        <Badge variant="success" shape="pill" tone="outline">
+          {translate('Recommended')}
+        </Badge>
+      ) : row.compatible ? (
+        <Badge variant="primary" shape="pill" tone="outline">
+          {translate('Compatible')}
+        </Badge>
+      ) : (
+        <Badge variant="danger" shape="pill" tone="outline">
+          {translate('Missing fields')}
+        </Badge>
+      ),
+  },
+  {
+    title: translate('Fields'),
+    render: ({ row }) => (
+      <>
+        <small className="text-quaternary">
+          {translate('{found}/{total} required', {
+            found: row.required_fields_found,
+            total: row.required_fields_total,
+          })}
+          {', '}
+          {translate('{found}/{total} important', {
+            found: row.important_fields_found,
+            total: row.important_fields_total,
+          })}
+        </small>
+        {row.missing_required_fields.length > 0 && (
+          <div className="mt-1">
+            <small className="text-danger">
+              {translate('Missing: {fields}', {
+                fields: row.missing_required_fields.join(', '),
+              })}
+            </small>
+          </div>
+        )}
+      </>
+    ),
+  },
+];
 
 export const Step3Preview: FC<WizardStepProps> = (props) => {
   const { values } = useFormState<ArrowSetupFormValues>();
@@ -42,6 +129,17 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
   });
 
   const mappingCount = Object.keys(values.selectedMappings).length;
+  const partnerInfo = values.partnerInfo as Record<string, unknown> | null;
+  const mappingRows: MappingRow[] = Object.entries(values.selectedMappings).map(
+    ([arrowRef, waldurUuid]) => ({
+      arrowRef,
+      arrowCompany: values.customers.find((c) => c.reference === arrowRef)
+        ?.companyName,
+      waldurName:
+        values.waldurCustomers.find((c) => c.uuid === waldurUuid)?.name ||
+        waldurUuid,
+    }),
+  );
 
   const renderFooter = () => (
     <>
@@ -78,44 +176,18 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
           <h5 className="mb-0">{translate('Connection')}</h5>
         </Card.Header>
         <Card.Body>
-          <Table borderless size="sm">
-            <tbody>
-              <tr>
-                <td className="text-quaternary" style={{ width: '40%' }}>
-                  {translate('API URL')}
-                </td>
-                <td>
-                  <ExternalLink url={values.api_url} label={values.api_url} />
-                </td>
-              </tr>
-              {values.partnerInfo && (
-                <>
-                  <tr>
-                    <td className="text-quaternary">
-                      {translate('Partner Name')}
-                    </td>
-                    <td>
-                      {String(
-                        (values.partnerInfo as Record<string, unknown>)
-                          .company_name || '',
-                      )}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="text-quaternary">
-                      {translate('Partner Reference')}
-                    </td>
-                    <td>
-                      {String(
-                        (values.partnerInfo as Record<string, unknown>)
-                          .reference || '',
-                      )}
-                    </td>
-                  </tr>
-                </>
-              )}
-            </tbody>
-          </Table>
+          <Field
+            label={translate('API URL')}
+            value={<ExternalLink url={values.api_url} label={values.api_url} />}
+          />
+          <Field
+            label={translate('Partner Name')}
+            value={partnerInfo?.company_name as string}
+          />
+          <Field
+            label={translate('Partner Reference')}
+            value={partnerInfo?.reference as string}
+          />
         </Card.Body>
       </Card>
 
@@ -125,39 +197,11 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
         </Card.Header>
         <Card.Body>
           {mappingCount > 0 ? (
-            <Table borderless size="sm">
-              <thead>
-                <tr>
-                  <th>{translate('Arrow Reference')}</th>
-                  <th>{translate('Waldur Organization')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Object.entries(values.selectedMappings).map(
-                  ([arrowRef, waldurUuid]) => {
-                    const waldurCustomer = values.waldurCustomers.find(
-                      (c) => c.uuid === waldurUuid,
-                    );
-                    const arrowCustomer = values.customers.find(
-                      (c) => c.reference === arrowRef,
-                    );
-                    return (
-                      <tr key={arrowRef}>
-                        <td>
-                          {arrowRef}
-                          {arrowCustomer && (
-                            <span className="text-quaternary ms-1.5">
-                              ({arrowCustomer.companyName})
-                            </span>
-                          )}
-                        </td>
-                        <td>{waldurCustomer?.name || waldurUuid}</td>
-                      </tr>
-                    );
-                  },
-                )}
-              </tbody>
-            </Table>
+            <SimpleTable
+              columns={getMappingColumns()}
+              rows={mappingRows}
+              rowKey="arrowRef"
+            />
           ) : (
             <span className="text-quaternary">
               {translate('No customer mappings configured')}
@@ -177,65 +221,11 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
                 'These billing export types are available from your Arrow account. Compatible types have all required fields.',
               )}
             </p>
-            <Table borderless size="sm">
-              <thead>
-                <tr>
-                  <th>{translate('Export Type')}</th>
-                  <th>{translate('Status')}</th>
-                  <th>{translate('Fields')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {values.exportTypes.map((et) => (
-                  <tr key={et.reference}>
-                    <td>
-                      <span className="font-medium">{et.name}</span>
-                      <br />
-                      <span className="text-quaternary small">
-                        {et.reference}
-                      </span>
-                    </td>
-                    <td>
-                      {et.recommended ? (
-                        <Badge variant="success" shape="pill" tone="outline">
-                          {translate('Recommended')}
-                        </Badge>
-                      ) : et.compatible ? (
-                        <Badge variant="primary" shape="pill" tone="outline">
-                          {translate('Compatible')}
-                        </Badge>
-                      ) : (
-                        <Badge variant="danger" shape="pill" tone="outline">
-                          {translate('Missing fields')}
-                        </Badge>
-                      )}
-                    </td>
-                    <td>
-                      <small className="text-quaternary">
-                        {translate('{found}/{total} required', {
-                          found: et.required_fields_found,
-                          total: et.required_fields_total,
-                        })}
-                        {', '}
-                        {translate('{found}/{total} important', {
-                          found: et.important_fields_found,
-                          total: et.important_fields_total,
-                        })}
-                      </small>
-                      {et.missing_required_fields.length > 0 && (
-                        <div className="mt-1">
-                          <small className="text-danger">
-                            {translate('Missing: {fields}', {
-                              fields: et.missing_required_fields.join(', '),
-                            })}
-                          </small>
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+            <SimpleTable
+              columns={getExportTypeColumns()}
+              rows={values.exportTypes}
+              rowKey="reference"
+            />
           </Card.Body>
         </Card>
       )}

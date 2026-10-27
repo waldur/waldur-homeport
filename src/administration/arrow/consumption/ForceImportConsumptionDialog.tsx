@@ -26,6 +26,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { SimpleTable } from '@/table/SimpleTable';
 
 type Phase = 'form' | 'preview' | 'result';
 
@@ -38,6 +39,61 @@ interface PreviewPeriod {
   is_finalized: boolean;
   is_reconciled: boolean;
 }
+
+const PreviewTable = ({ periods }: { periods: PreviewPeriod[] }) => (
+  <SimpleTable<PreviewPeriod>
+    columns={[
+      {
+        title: translate('Period'),
+        render: ({ row }) => <>{row.period}</>,
+      },
+      {
+        title: translate('Arrow Sell'),
+        render: ({ row }) => (
+          <>{defaultCurrency(parseFloat(row.consumed_sell))}</>
+        ),
+      },
+      {
+        title: translate('Current Sell'),
+        render: ({ row }) => (
+          <>
+            {row.has_existing
+              ? defaultCurrency(parseFloat(row.existing_consumed_sell))
+              : DASH_ESCAPE_CODE}
+          </>
+        ),
+      },
+      {
+        title: translate('Status'),
+        render: ({ row }) =>
+          row.has_existing ? (
+            <div className="flex flex-col gap-1">
+              {row.is_finalized ? (
+                <Badge variant="danger" shape="pill" tone="outline">
+                  {translate('Finalized — will overwrite')}
+                </Badge>
+              ) : (
+                <Badge variant="warning" shape="pill" tone="outline">
+                  {translate('Pending — will update')}
+                </Badge>
+              )}
+              {row.is_reconciled && (
+                <Badge variant="primary" shape="pill" tone="outline">
+                  {translate('Reconciled')}
+                </Badge>
+              )}
+            </div>
+          ) : (
+            <Badge variant="success" shape="pill" tone="outline">
+              {translate('New')}
+            </Badge>
+          ),
+      },
+    ]}
+    rows={periods}
+    rowKey="period"
+  />
+);
 
 interface ForceImportConsumptionDialogProps {
   resolve: {
@@ -215,55 +271,7 @@ export const ForceImportConsumptionDialog = ({
           )}
         />
       ) : (
-        <div className="table-responsive">
-          <table className="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>{translate('Period')}</th>
-                <th>{translate('Arrow Sell')}</th>
-                <th>{translate('Current Sell')}</th>
-                <th>{translate('Status')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {previewData.map((item) => (
-                <tr key={item.period}>
-                  <td>{item.period}</td>
-                  <td>{defaultCurrency(parseFloat(item.consumed_sell))}</td>
-                  <td>
-                    {item.has_existing
-                      ? defaultCurrency(parseFloat(item.existing_consumed_sell))
-                      : DASH_ESCAPE_CODE}
-                  </td>
-                  <td>
-                    {item.has_existing ? (
-                      <div className="flex flex-col gap-1">
-                        {item.is_finalized ? (
-                          <Badge variant="danger" shape="pill" tone="outline">
-                            {translate('Finalized — will overwrite')}
-                          </Badge>
-                        ) : (
-                          <Badge variant="warning" shape="pill" tone="outline">
-                            {translate('Pending — will update')}
-                          </Badge>
-                        )}
-                        {item.is_reconciled && (
-                          <Badge variant="primary" shape="pill" tone="outline">
-                            {translate('Reconciled')}
-                          </Badge>
-                        )}
-                      </div>
-                    ) : (
-                      <Badge variant="success" shape="pill" tone="outline">
-                        {translate('New')}
-                      </Badge>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <PreviewTable periods={previewData} />
       )}
 
       {previewMutation.data?.errors?.length > 0 && (
