@@ -107,7 +107,7 @@ export const MatrixRecoveryKeyDialog: FC<MatrixRecoveryKeyDialogProps> = ({
       <Form id={FORM_ID} onSubmit={submit} noValidate>
         <FormField>
           <FormLabel>{translate('Recovery key')}</FormLabel>
-          <Stack gap={2} direction="horizontal">
+          <Stack className="gap-1.5" direction="horizontal">
             <MaskedKeyInput
               value={recoveryKey}
               onChange={setRecoveryKey}

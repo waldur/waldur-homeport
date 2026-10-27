@@ -83,7 +83,7 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
       <FormField className="mb-1.5">
         <FormLabel>{translate('Key')}</FormLabel>
         {ready ? (
-          <Stack gap={2} direction="horizontal">
+          <Stack className="gap-1.5" direction="horizontal">
             {/* readOnly, not disabled: a disabled input renders its text muted
                 and cannot be selected, so the key is both hard to read and
                 impossible to copy by hand. */}

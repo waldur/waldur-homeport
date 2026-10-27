@@ -104,7 +104,7 @@ const ChartItem: FC<ChartItemProps> = ({
   ]);
 
   return (
-    <Stack direction="horizontal" gap={4}>
+    <Stack direction="horizontal" className="gap-3">
       <DonutChart data={data} />
       <div className="flex flex-col gap-1">
         <span className="flex items-center gap-1.5 text-xs">
@@ -196,7 +196,7 @@ export const HypervisorSummaryCharts: FC<{
         </Card.Title>
       </Card.Header>
       <Card.Body className="p-5">
-        <Stack direction="horizontal" gap={10} className="flex-wrap">
+        <Stack direction="horizontal" className="gap-8 flex-wrap">
           <ChartItem
             used={usedVcpus}
             total={totalVcpus}

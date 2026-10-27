@@ -37,7 +37,7 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
         clickable
         footer={
           <div className="flex justify-between items-center">
-            <Stack direction="horizontal" gap={1}>
+            <Stack direction="horizontal" className="gap-1">
               {/* An archived call keeps its rounds for the record; their
                   dates would read as an open call. */}
               {call.state === 'archived' ? (
@@ -83,7 +83,7 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
                 </Badge>
               )}
             </Stack>
-            <Stack direction="horizontal" gap={2}>
+            <Stack direction="horizontal" className="gap-1.5">
               <PublicCallApplyButton
                 call={call}
                 title={translate('Apply to call')}

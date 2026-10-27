@@ -159,7 +159,7 @@ export const IssueDetailsTab = ({
         )}
         space={4}
       />
-      <Stack direction="horizontal" gap={3}>
+      <Stack direction="horizontal" className="gap-2.5">
         <OrganizationGroup
           disabled={
             standaloneIssue ||

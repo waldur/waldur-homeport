@@ -51,8 +51,7 @@ const CategoryListItem: FunctionComponent<
     >
       <Stack
         direction="horizontal"
-        gap={3}
-        className={active ? 'active' : undefined}
+        className={classNames('gap-2.5', { active })}
       >
         {item.icon ? (
           <div className="size-10 shrink-0 inline-flex items-center justify-center rounded-md overflow-hidden">

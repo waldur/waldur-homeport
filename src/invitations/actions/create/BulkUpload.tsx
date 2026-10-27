@@ -99,8 +99,7 @@ export const BulkUpload: FC<OwnProps> = (props) => {
         <Col>
           <Stack
             direction="horizontal"
-            gap={2}
-            className="items-center font-medium"
+            className="gap-1.5 items-center font-medium"
           >
             <span className="font-medium">{file.name}</span>
             <CheckCircleIcon size={16} weight="fill" className="text-success" />

@@ -174,7 +174,7 @@ export const MarketplaceLandingFilter = ({
                 </div>
                 <LandingFilterFields values={values} />
 
-                <Stack direction="horizontal" gap={4}>
+                <Stack direction="horizontal" className="gap-3">
                   <BaseButton
                     variant="tertiary"
                     className="flex-1"

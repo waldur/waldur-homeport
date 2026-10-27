@@ -32,11 +32,7 @@ export const CustomerProfile = ({
     cardBordered
     title={
       <div>
-        <Stack
-          direction="horizontal"
-          gap={4}
-          className="text-quaternary mb-2.5"
-        >
+        <Stack direction="horizontal" className="gap-3 text-quaternary mb-2.5">
           {customer.country && (
             <CountryFlag
               countryCode={customer.country}
@@ -48,8 +44,7 @@ export const CustomerProfile = ({
         </Stack>
         <Stack
           direction="horizontal"
-          gap={5}
-          className="flex-wrap text-quaternary leading-none"
+          className="gap-4 flex-wrap text-quaternary leading-none"
         >
           {customer.organization_groups?.length > 0 && (
             <span className="whitespace-nowrap">

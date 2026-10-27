@@ -24,7 +24,7 @@ export const ServiceAccountShowInfoDialog = ({ resolve }: OwnProps) => {
       </FormField>
       <FormField className="mb-5.5">
         <FormLabel>{translate('API token')}</FormLabel>
-        <Stack gap={2} direction="horizontal">
+        <Stack className="gap-1.5" direction="horizontal">
           <BaseSecretField value={resolve.token} disabled className="grow" />
 
           <CopyToClipboardButton
