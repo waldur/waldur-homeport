@@ -31,6 +31,7 @@ For detailed guidance, see `docs/` — full index with one-line descriptions in 
 - `development-workflow.md` - Planning, TDD, problem-solving
 - `code-quality.md` - Linting, formatting, TypeScript
 - `testing.md` - Frameworks, strategy, unit & E2E standards
+- `visual-testing.md` - Visual regression: Storybook comparison against `develop`, parity/geometry specs, integration-testing screenshots, what to report
 - `architecture.md` - Redux, component patterns
 - `component-library.md` - UI components, BaseDeployPage
 - `api-integration.md` - React Query, CRUD patterns

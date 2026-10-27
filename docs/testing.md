@@ -411,6 +411,10 @@ E2E and visual regression tests are implemented using [Playwright](https://playw
 
 - **Location**: `e2e/` (Workflows) and `e2e-visual/` (Visual Regression).
 - **Focus**: Critical user journeys and visual consistency across themes.
+- **Visual regression**: [visual-testing.md](visual-testing.md) covers which tool answers which
+  question: the Storybook comparison of every story against `develop` (`scripts/theme-snapshots.mjs`),
+  parity and geometry specs, page screenshots, the integration-testing screenshots and what to
+  report in a merge request. None of the visual checks run in CI.
 
 ---
 
@@ -420,7 +424,7 @@ E2E and visual regression tests are implemented using [Playwright](https://playw
 | :----------------- | :---------------------------- |
 | `yarn test`        | Run unit tests with Vitest    |
 | `yarn test:e2e`    | Run E2E tests with Playwright |
-| `yarn test:visual` | Run visual regression tests   |
+| `yarn test:visual` | Run every Playwright project  |
 
 ---
 
