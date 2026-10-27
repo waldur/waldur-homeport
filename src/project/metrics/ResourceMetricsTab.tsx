@@ -167,7 +167,7 @@ export const ResourceMetricsTab: FC<{ resource: Resource }> = ({
               tooltipProps={{
                 // Wide enough for a date and time on one line, never wider
                 // than the screen.
-                className: 'max-w-[min(22rem,calc(100vw-2rem))]',
+                contentClassName: 'max-w-[min(22rem,calc(100vw-2rem))]',
                 body: status.details.length
                   ? status.details.map((line) => <div key={line}>{line}</div>)
                   : undefined,
