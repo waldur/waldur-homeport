@@ -59,6 +59,19 @@ describe('usePublicCallApply', () => {
     expect(result.current.activeRound).toBeNull();
   });
 
+  // An archived call keeps its rounds, and their dates may still be open.
+  it.each([[[round('r-open', 'open')]], [[]]])(
+    'says an archived call takes no proposals (rounds: %j)',
+    (rounds) => {
+      const archived = { ...call(...rounds), state: 'archived' };
+      const { result } = renderHook(() => usePublicCallApply(archived as any));
+      expect(result.current.activeRound).toBeNull();
+      expect(result.current.disabledReason).toBe(
+        'This call is archived and no longer accepts proposals.',
+      );
+    },
+  );
+
   describe('with an explicitly chosen round', () => {
     it('takes it when open', () => {
       const chosen = round('r-open', 'open');

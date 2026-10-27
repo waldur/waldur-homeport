@@ -170,6 +170,24 @@ export const getRoundsWithStatus = (rounds: NestedRound[]) =>
     status: getRoundStatus(round),
   }));
 
+/**
+ * The call's first round, while it is open or yet to open.
+ *
+ * Null for a call that is not active: an archived call keeps its rounds for
+ * the record, but whatever their dates say, none of them takes proposals.
+ */
+export const getActiveRound = (call: Pick<Call, 'state' | 'rounds'>) => {
+  if (call.state !== 'active') return null;
+  // Rounds come sorted open, scheduled, then ended (PublicCallSerializer).
+  const first = call.rounds[0];
+  return first && (first.status === 'open' || first.status === 'scheduled')
+    ? first
+    : null;
+};
+
+export const getArchivedCallNotice = () =>
+  translate('This call is archived and no longer accepts proposals.');
+
 export const getCallStatus = (
   call: Call,
 ): { label: string; color: BadgeVariant } => {

@@ -1,4 +1,4 @@
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -8,22 +8,12 @@ import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { Call } from './types';
-import { getRoundsWithStatus } from './utils';
+import { getActiveRound } from './utils';
 
 export const PublicCallExpandableRow: FunctionComponent<{
   row: Call;
 }> = ({ row }) => {
-  const activeRound = useMemo(() => {
-    const items = getRoundsWithStatus(row.rounds);
-    const first = items[0];
-    if (
-      first &&
-      (first.status.value === 'open' || first.status.value === 'scheduled')
-    ) {
-      return first;
-    }
-    return null;
-  }, [row]);
+  const activeRound = getActiveRound(row);
 
   return (
     <ExpandableContainer>

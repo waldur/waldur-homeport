@@ -34,11 +34,7 @@ import { CallCard } from './CallCard';
 import { PublicCallApplyAction } from './details/PublicCallApplyAction';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
 import { Call } from './types';
-import {
-  formatCallState,
-  getCallStateOptions,
-  getRoundsWithStatus,
-} from './utils';
+import { formatCallState, getCallStateOptions, getActiveRound } from './utils';
 
 const useCallTabs = (
   offering_uuid?: string,
@@ -114,17 +110,7 @@ const CallColumns = [
   {
     title: translate('Active round'),
     render: ({ row }) => {
-      const activeRound = useMemo(() => {
-        const items = getRoundsWithStatus(row.rounds);
-        const first = items[0];
-        if (
-          first &&
-          (first.status.value === 'open' || first.status.value === 'scheduled')
-        ) {
-          return first;
-        }
-        return null;
-      }, [row.rounds]);
+      const activeRound = getActiveRound(row);
       return (
         <>
           {activeRound ? formatDateTime(activeRound.cutoff_time) : <>&mdash;</>}

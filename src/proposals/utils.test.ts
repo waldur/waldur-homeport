@@ -6,6 +6,7 @@ import { Call } from '@/proposals/types';
 
 import {
   checkIsCallManager,
+  getActiveRound,
   getCallStatus,
   getNonCanceledProposalStates,
   getReviewStateBadgeVariant,
@@ -105,6 +106,32 @@ describe('getRoundsWithStatus', () => {
       value: 'ended',
       color: 'danger',
     });
+  });
+});
+
+describe('getActiveRound', () => {
+  const round = (uuid: string, status: string) =>
+    ({ uuid, status }) as NestedRound;
+  const call = (state: string, ...rounds: NestedRound[]) =>
+    ({ state, rounds }) as Call;
+
+  it('returns the first round while it is open or scheduled', () => {
+    expect(getActiveRound(call('active', round('r1', 'open')))?.uuid).toBe(
+      'r1',
+    );
+    expect(getActiveRound(call('active', round('r1', 'scheduled')))?.uuid).toBe(
+      'r1',
+    );
+  });
+
+  it('returns null once the first round has ended, or with no rounds', () => {
+    expect(getActiveRound(call('active', round('r1', 'ended')))).toBeNull();
+    expect(getActiveRound(call('active'))).toBeNull();
+  });
+
+  // Its rounds stay for the record; their dates do not reopen the call.
+  it('returns null for an archived call with an open round', () => {
+    expect(getActiveRound(call('archived', round('r1', 'open')))).toBeNull();
   });
 });
 

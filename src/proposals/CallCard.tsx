@@ -11,7 +11,7 @@ import { translate } from '@/i18n';
 
 import { PublicCallApplyButton } from './details/PublicCallApplyButton';
 import { Call } from './types';
-import { getRoundsWithStatus } from './utils';
+import { getCallStatus, getRoundsWithStatus } from './utils';
 
 const CallLink = ({ call, asButton = false, children }) => (
   <Link
@@ -26,6 +26,7 @@ const CallLink = ({ call, asButton = false, children }) => (
 
 export const CallCard: FC<{ call: Call }> = ({ call }) => {
   const nextRound = getRoundsWithStatus(call.rounds)[0];
+  const status = getCallStatus(call);
 
   return (
     <CallLink call={call}>
@@ -37,7 +38,13 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
         footer={
           <div className="flex justify-between items-center">
             <Stack direction="horizontal" gap={1}>
-              {!nextRound ? (
+              {/* An archived call keeps its rounds for the record; their
+                  dates would read as an open call. */}
+              {call.state === 'archived' ? (
+                <Badge variant={status.color} shape="pill" tone="outline">
+                  {status.label}
+                </Badge>
+              ) : !nextRound ? (
                 <div className="text-quaternary">{translate('No rounds')}</div>
               ) : nextRound.status.label === 'Open' ? (
                 <Badge variant="warning" shape="pill" tone="outline">
