@@ -25,7 +25,7 @@ describe('splitSeries', () => {
     const groups = splitSeries(INPUT, 'user', true, 2);
 
     expect(groups.map((g) => g.key)).toEqual(['alice', 'bob', OTHER_GROUP]);
-    const other = groups[2].byDay;
+    const other = groups[2].values;
     expect(Object.fromEntries(other)).toEqual({
       '2026-10-01': 2,
       '2026-10-02': 1,
@@ -65,7 +65,7 @@ describe('splitSeries', () => {
       true,
     );
 
-    expect(alice.byDay.size).toBe(0);
+    expect(alice.values.size).toBe(0);
   });
 });
 

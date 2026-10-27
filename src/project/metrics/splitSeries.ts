@@ -1,5 +1,5 @@
 /**
- * A metric's daily series split by one attribute, for the card's chart: the
+ * A metric's series split by one attribute, for the card's chart: the
  * largest values by name, the rest folded into one "Other" group. The full
  * list stays in the breakdown dialog.
  */
@@ -13,11 +13,24 @@ export interface SplitInput {
 
 export interface SplitGroup {
   key: string;
-  /** Value per UTC day (YYYY-MM-DD); a missing day has no entry. */
-  byDay: Map<string, number>;
+  /** Value per bucket of the chart; a bucket without data has no entry. */
+  values: Map<string, number>;
 }
 
-const dayOf = (timestamp: string) => timestamp.slice(0, 10);
+/** A series' points as values per bucket; by default, sums per UTC day. */
+export type BucketValues = (
+  points: SplitInput['points'],
+) => Map<string, number>;
+
+const sumPerDay: BucketValues = (points) => {
+  const values = new Map<string, number>();
+  points.forEach((point) => {
+    if (point.value === null || point.value === undefined) return;
+    const day = point.timestamp.slice(0, 10);
+    values.set(day, (values.get(day) ?? 0) + Number(point.value));
+  });
+  return values;
+};
 
 /**
  * Rank the groups by their total over the window and keep the largest.
@@ -30,33 +43,32 @@ export const splitSeries = (
   attribute: string,
   additive: boolean,
   maxNamed = MAX_NAMED_GROUPS,
+  bucketValues: BucketValues = sumPerDay,
 ): SplitGroup[] => {
   const groups = series.map((item) => {
-    const byDay = new Map<string, number>();
-    item.points.forEach((point) => {
-      if (point.value === null || point.value === undefined) return;
-      const day = dayOf(point.timestamp);
-      byDay.set(day, (byDay.get(day) ?? 0) + Number(point.value));
-    });
+    const values = bucketValues(item.points);
     const raw = item.attributes?.[attribute];
     return {
       key: raw === null || raw === undefined || raw === '' ? '—' : String(raw),
-      byDay,
-      total: Array.from(byDay.values()).reduce((sum, value) => sum + value, 0),
+      values,
+      total: Array.from(values.values()).reduce((sum, value) => sum + value, 0),
     };
   });
   groups.sort((a, b) => b.total - a.total || a.key.localeCompare(b.key));
   const named = groups.slice(0, maxNamed);
   const rest = groups.slice(maxNamed);
-  const result: SplitGroup[] = named.map(({ key, byDay }) => ({ key, byDay }));
+  const result: SplitGroup[] = named.map(({ key, values }) => ({
+    key,
+    values,
+  }));
   if (additive && rest.length) {
-    const byDay = new Map<string, number>();
+    const values = new Map<string, number>();
     rest.forEach((group) =>
-      group.byDay.forEach((value, day) =>
-        byDay.set(day, (byDay.get(day) ?? 0) + value),
+      group.values.forEach((value, bucket) =>
+        values.set(bucket, (values.get(bucket) ?? 0) + value),
       ),
     );
-    result.push({ key: OTHER_GROUP, byDay });
+    result.push({ key: OTHER_GROUP, values });
   }
   return result;
 };

@@ -56,7 +56,7 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
               {cardTitle}
             </Card.Title>
             {cardAction && <div className="p-0 m-0 shrink-0">{cardAction}</div>}
-            {actions?.length && (
+            {actions?.length > 0 && (
               <ActionsMenu
                 side="bottom"
                 align="center"

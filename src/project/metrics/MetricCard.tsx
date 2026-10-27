@@ -4,12 +4,12 @@ import {
   FlagIcon,
   ListBulletsIcon,
 } from '@phosphor-icons/react';
-import { FC, useMemo, useState } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { Col } from 'react-bootstrap';
 import { ProjectMetric, ResourceMetric } from 'waldur-js-client';
 
 import { getCssVar } from 'waldur-design-tokens';
-import { Badge, BaseButton, HelpIcon, Tooltip } from 'waldur-ui';
+import { Badge, HelpIcon, Tooltip } from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -22,6 +22,9 @@ import {
   formatFigure,
   getChangeLabel,
   getGoalPeriodOptions,
+  getRateUnit,
+  getSecondsAxis,
+  isScaledUnit,
 } from '@/marketplace/metrics/options';
 import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
 import { useModal } from '@/modal/actions';
@@ -29,6 +32,15 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
+import {
+  DEFAULT_RANGE,
+  getBucketValues,
+  getTimelineAxis,
+  getTimelineEnd,
+  getTimelineQuery,
+  isFineRange,
+  MetricRange,
+} from './metricTimeline';
 import {
   assignColorSlots,
   OTHER_GROUP,
@@ -49,44 +61,40 @@ const MetricGoalDialog = lazyComponent(() =>
   })),
 );
 
-const TREND_DAYS = 90;
 const CHART_HEIGHT = 200;
+const AXIS_SPLITS = 2;
 
-// The axis starts at the first day with data, but never shows fewer days
-// than this, so a week-old metric is not stretched into three bars.
-const MIN_AXIS_DAYS = 14;
-const DAY_MS = 86400000;
-
-// Daily roll-ups start at UTC midnight; label them in UTC too, or a viewer
-// west of Greenwich sees every bucket a day early.
-const dayKey = (date: Date) => date.toISOString().slice(0, 10);
-const dayLabel = (date: Date) =>
-  date.toLocaleDateString(undefined, {
-    timeZone: 'UTC',
-    month: 'short',
-    day: 'numeric',
-  });
-
-const trendDays = () => {
-  const today = new Date();
-  today.setUTCHours(0, 0, 0, 0);
-  return Array.from(
-    { length: TREND_DAYS },
-    (_, index) => new Date(today.getTime() - (TREND_DAYS - 1 - index) * DAY_MS),
+const sumValues = (maps: Map<string, number>[]) => {
+  const total = new Map<string, number>();
+  maps.forEach((values) =>
+    values.forEach((value, key) =>
+      total.set(key, (total.get(key) ?? 0) + value),
+    ),
   );
+  return total;
 };
 
 /**
  * One metric's card: a project's combined figure, with its goal, or, given
  * resourceUuid, one resource's own figure. Goals apply to the project figure,
- * so a resource's card has none.
+ * so a resource's card has none. The chart covers range up to anchor, the
+ * time it was last asked to show; 90 days up to now unless given.
  */
 export const MetricCard: FC<{
   item: ProjectMetric | ResourceMetric;
   project?: { uuid: string; name: string; customer_uuid?: string };
   resourceUuid?: string;
+  range?: MetricRange;
+  anchor?: number;
   refetch(): void;
-}> = ({ item, project, resourceUuid, refetch }) => {
+}> = ({
+  item,
+  project,
+  resourceUuid,
+  range = DEFAULT_RANGE,
+  anchor,
+  refetch,
+}) => {
   const { openDialog } = useModal();
   const user = useUser();
   const metric = item.offering_metric;
@@ -99,16 +107,29 @@ export const MetricCard: FC<{
   // one, or the total, from the card's menu.
   const [splitBy, setSplitBy] = useState<string | null>(attributes[0] ?? null);
   const theme = useChartThemeColors();
-  const days = useMemo(trendDays, []);
+  const [mountedAt] = useState(() => Date.now());
+  const at = anchor ?? mountedAt;
+  const fine = isFineRange(range);
+  // Over hours, bytes and I/O operations read best as rates: MB/s, IOPS.
+  const rateUnit = isCounter && fine ? getRateUnit(metric.unit) : null;
+  // A counter is spread over the time between its points only when each
+  // group the chart gets is one series. Over hours, the total of a counter
+  // with one attribute is asked for by that attribute and added up here.
+  const groupBy =
+    splitBy ??
+    (fine && isCounter && attributes.length === 1 ? attributes[0] : null);
+  const spread =
+    attributes.length === 0 || (attributes.length === 1 && Boolean(groupBy));
+  const timeline = useMemo(() => getTimelineQuery(range, at), [range, at]);
   const { data } = useMetricSeries({
     offering_metric_uuid: metric.uuid,
     ...(resourceUuid
       ? { resource_uuid: resourceUuid }
       : { project_uuid: project.uuid }),
-    start: days[0].toISOString(),
-    granularity: 'day',
+    start: timeline.start,
+    granularity: timeline.granularity,
     aggregate: 'last',
-    ...(splitBy ? { group_by: splitBy } : {}),
+    ...(groupBy ? { group_by: groupBy } : {}),
   });
   const points = useMemo(
     () => (data?.series ?? []).flatMap((series) => series.points),
@@ -133,25 +154,51 @@ export const MetricCard: FC<{
         customerId: project.customer_uuid,
       }));
 
-  const axisDays = useMemo(() => {
-    const keys = points.map((point) => dayKey(new Date(point.timestamp)));
-    const first = keys.length
-      ? days.findIndex((day) => keys.includes(dayKey(day)))
-      : -1;
-    const from = first < 0 ? 0 : Math.min(first, days.length - MIN_AXIS_DAYS);
-    return days.slice(Math.max(from, 0));
-  }, [points, days]);
+  const end = useMemo(() => getTimelineEnd(at, points), [at, points]);
+  const bucketValues = useCallback(
+    (series: typeof points) =>
+      getBucketValues(range, end, series, {
+        counter: isCounter,
+        spread,
+        rate: Boolean(rateUnit),
+      }),
+    [range, end, isCounter, spread, rateUnit],
+  );
+  const axis = useMemo(
+    () => getTimelineAxis(range, end, points),
+    [range, end, points],
+  );
   const groups = useMemo(
-    () => (splitBy ? splitSeries(data?.series ?? [], splitBy, additive) : null),
-    [data, splitBy, additive],
+    () =>
+      splitBy
+        ? splitSeries(
+            data?.series ?? [],
+            splitBy,
+            additive,
+            undefined,
+            bucketValues,
+          )
+        : null,
+    [data, splitBy, additive, bucketValues],
+  );
+  // Each returned group on its own, then added up.
+  const totals = useMemo(
+    () =>
+      groups
+        ? null
+        : sumValues(
+            (data?.series ?? []).map((series) => bucketValues(series.points)),
+          ),
+    [groups, data, bucketValues],
+  );
+  const hasData = axis.keys.some((key) =>
+    groups ? groups.some((group) => group.values.has(key)) : totals.has(key),
   );
   const chartOptions = useMemo(() => {
-    const byDay = new Map(
-      points.map((point) => [
-        dayKey(new Date(point.timestamp)),
-        point.value === null ? null : Number(point.value),
-      ]),
-    );
+    const chartUnit = rateUnit ?? metric.unit;
+    // A line of one or two points draws nothing without its symbols.
+    const fewPoints = (values: { value: number | null }[]) =>
+      values.filter((datum) => datum.value !== null).length <= 2;
     const palette = SPLIT_RAMPS.map((ramp) => getCssVar(`--color-${ramp}-500`));
     const slots = assignColorSlots((groups ?? []).map((group) => group.key));
     const series = groups
@@ -160,11 +207,12 @@ export const MetricCard: FC<{
           type: isCounter ? ('bar' as const) : ('line' as const),
           stack: additive ? 'split' : undefined,
           areaStyle: !isCounter && additive ? { opacity: 0.3 } : undefined,
-          showSymbol: false,
-          data: axisDays.map((day) => {
-            const value = group.byDay.get(dayKey(day));
-            return { value: value === undefined ? null : value };
-          }),
+          showSymbol: fewPoints(
+            axis.keys.map((key) => ({ value: group.values.get(key) ?? null })),
+          ),
+          data: axis.keys.map((key) => ({
+            value: group.values.get(key) ?? null,
+          })),
           color:
             group.key === OTHER_GROUP
               ? theme.neutral
@@ -174,14 +222,27 @@ export const MetricCard: FC<{
           {
             name: metric.name,
             type: isCounter ? ('bar' as const) : ('line' as const),
-            // A day without data is a gap, not a zero.
-            data: axisDays.map((day) => {
-              const value = byDay.get(dayKey(day));
-              return { value: value === undefined ? null : value };
-            }),
+            // A bucket without data is a gap, not a zero.
+            data: axis.keys.map((key) => ({ value: totals.get(key) ?? null })),
             color: getChartBrandColor(),
           },
         ];
+    // The top of the axis: the highest day, stacked groups added up, or the
+    // goal line when it is higher.
+    const columns = series.map((serie) =>
+      serie.data.map((datum) => datum.value ?? 0),
+    );
+    const axisMax = Math.max(
+      0,
+      goal && !isCounter ? Number(goal.value) : 0,
+      ...(groups && additive
+        ? axis.keys.map((_, index) =>
+            columns.reduce((sum, column) => sum + column[index], 0),
+          )
+        : columns.flat()),
+    );
+    const secondsAxis =
+      chartUnit === 's' ? getSecondsAxis(axisMax, AXIS_SPLITS) : null;
     const base = getCostWidgetChartOptions(
       series,
       // A counter's goal is for a whole period; drawing it over daily bars
@@ -196,7 +257,8 @@ export const MetricCard: FC<{
             },
           ]
         : undefined,
-      axisDays.map(dayLabel),
+      axis.labels,
+      (value) => formatFigure(value, chartUnit),
     );
     return {
       ...base,
@@ -230,11 +292,31 @@ export const MetricCard: FC<{
       grid: { ...base.grid, top: 8, bottom: groups ? 28 : base.grid.bottom },
       yAxis: base.yAxis.map((axis) => ({
         ...axis,
-        splitNumber: 2,
-        axisLabel: { hideOverlap: true },
+        splitNumber: AXIS_SPLITS,
+        ...(secondsAxis && { interval: secondsAxis.interval }),
+        axisLabel: {
+          hideOverlap: true,
+          // 600 MB rather than 600,000,000, and rates with their unit;
+          // other units stay bare numbers.
+          ...(secondsAxis
+            ? { formatter: secondsAxis.formatter }
+            : (isScaledUnit(chartUnit) || rateUnit) && {
+                formatter: (value: number) => formatFigure(value, chartUnit),
+              }),
+        },
       })),
     };
-  }, [points, groups, axisDays, goal, isCounter, additive, metric, theme]);
+  }, [
+    totals,
+    groups,
+    axis,
+    goal,
+    isCounter,
+    additive,
+    metric,
+    theme,
+    rateUnit,
+  ]);
 
   const openGoal = () =>
     openDialog(MetricGoalDialog, {
@@ -292,9 +374,10 @@ export const MetricCard: FC<{
         </>
       }
       title={formatFigure(item.current, metric.unit)}
-      meta={
-        // The goal is where people look for it: on the card. Whoever may
-        // change it can click it; a card without one offers to set one.
+      cardAction={
+        // The goal is where people look for it: on the card, beside its menu,
+        // so a card with a goal is laid out like one without. Whoever may
+        // change it can click it; setting one is in the card's menu.
         goal ? (
           canSetGoal ? (
             <Tooltip
@@ -317,14 +400,6 @@ export const MetricCard: FC<{
           ) : (
             goalBadge
           )
-        ) : canSetGoal ? (
-          <BaseButton
-            variant="text-primary"
-            size="sm"
-            iconNode={<FlagIcon weight="bold" />}
-            label={translate('Set goal')}
-            onClick={openGoal}
-          />
         ) : undefined
       }
       right={
@@ -394,7 +469,7 @@ export const MetricCard: FC<{
           : []),
       ]}
     >
-      {points.length ? (
+      {hasData ? (
         <EChart options={chartOptions} height={`${CHART_HEIGHT}px`} />
       ) : (
         // Same height as a chart, so cards in a row line up.
@@ -402,7 +477,9 @@ export const MetricCard: FC<{
           className="flex items-center justify-center text-quaternary text-xs"
           style={{ height: CHART_HEIGHT }}
         >
-          {translate('No data reported yet.')}
+          {fine
+            ? translate('No data in this period.')
+            : translate('No data reported yet.')}
         </div>
       )}
     </WidgetCard>

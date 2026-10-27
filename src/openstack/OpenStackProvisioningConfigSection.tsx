@@ -1,6 +1,8 @@
 import { FC } from 'react';
 
 import { EditSchedulesButton } from '@/booking/EditSchedulesButton';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
 import {
   BooleanEditField,
   CommaSeparatedListEditField,
@@ -19,6 +21,19 @@ import { useUpdateOfferingIntegration } from '@/marketplace/offerings/update/int
 import { OpenStackExternalIpsField } from './OpenStackExternalIpsField';
 
 const ExternalIpsEditField = withEditField(OpenStackExternalIpsField);
+
+// The metrics Waldur reads from Nova's server diagnostics, by catalogue key;
+// the volume ones go on each attached volume's own resource.
+const getInstanceMetricOptions = () => [
+  { value: 'vm.cpu.utilization', label: translate('CPU utilization') },
+  { value: 'vm.cpu.time', label: translate('CPU time') },
+  { value: 'vm.memory.utilization', label: translate('Memory utilization') },
+  { value: 'vm.network.io', label: translate('Network traffic') },
+  { value: 'vm.disk.io', label: translate('Disk throughput') },
+  { value: 'vm.disk.operations', label: translate('Disk I/O operations') },
+  { value: 'volume.io', label: translate('Volume throughput') },
+  { value: 'volume.operations', label: translate('Volume I/O operations') },
+];
 
 const BILLING_SOURCE_OPTIONS = [
   { value: 'quota', label: translate('Quota (flavor-derived)') },
@@ -176,6 +191,50 @@ export const OpenStackProvisioningConfigSection: FC<OfferingEditPanelProps> = (
             description={translate('Leave empty for no limit.')}
           />
         </TabbedSection.Tab>
+
+        {isFeatureVisible(ProjectFeatures.show_custom_metrics) && (
+          <TabbedSection.Tab
+            id="instance-metrics"
+            title={translate('Instance metrics')}
+          >
+            <BooleanEditField
+              name="plugin_options.instance_metrics_enabled"
+              label={translate('Collect instance metrics')}
+              description={translate(
+                "Read the CPU, memory, network and disk counters of the instances in this offering's tenants, and of the volumes attached to them, from the Nova API, and show them on their projects' Metrics tab. Turning this off hides the metrics; what was collected is deleted after the archive grace period.",
+              )}
+            />
+            <SelectEditField
+              name="plugin_options.instance_metrics"
+              label={translate('Metrics shown')}
+              description={translate('Leave empty to show all of them.')}
+              options={getInstanceMetricOptions()}
+              isMulti
+              simpleValue
+              renderValue={(value: string[]) =>
+                value?.length
+                  ? getInstanceMetricOptions()
+                      .filter((option) => value.includes(option.value))
+                      .map((option) => option.label)
+                      .join(', ')
+                  : translate('All')
+              }
+            />
+            <NumberEditField
+              name="plugin_options.instance_metrics_poll_interval_minutes"
+              label={translate('Polling interval')}
+              description={translate(
+                'How often each instance is read: 5 to 1440 minutes, every 6 hours when empty. Every read is one Nova API call per instance. People who manage an instance can have it read faster for a while.',
+              )}
+              unit={translate('min')}
+              renderValue={(value: number) =>
+                value
+                  ? `${value} ${translate('min')}`
+                  : translate('6 hours (default)')
+              }
+            />
+          </TabbedSection.Tab>
+        )}
 
         <TabbedSection.Tab id="billing" title={translate('Billing')}>
           <SelectEditField

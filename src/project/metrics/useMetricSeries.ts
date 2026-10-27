@@ -17,4 +17,13 @@ export const useMetricSeries = (query: {
       marketplaceMetricSeriesRetrieve({ query }).then(
         (response) => response.data,
       ),
+    // While another span loads, the last one stays in view, as long as it
+    // is bucketed alike: daily points read as raw ones would be nonsense.
+    placeholderData: (previous, previousQuery) => {
+      const last = previousQuery?.queryKey[1] as typeof query | undefined;
+      return last?.granularity === query.granularity &&
+        last?.group_by === query.group_by
+        ? previous
+        : undefined;
+    },
   });

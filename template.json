@@ -579,6 +579,11 @@
       "feature_area": "proposals"
     }
   },
+  "24 hours": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "25 (maximum)": {
     "context": {
       "primary_ui_type": "label",
@@ -628,10 +633,25 @@
       "feature_area": "proposals"
     }
   },
+  "6 hours": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "6 hours (default)": {
+    "context": {
+      "feature_area": "openstack"
+    }
+  },
   "6 months": {
     "context": {
       "primary_ui_type": "label",
       "feature_area": "reporting"
+    }
+  },
+  "7 days": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "7 point": {
@@ -655,6 +675,11 @@
     }
   },
   "777 - Full access, no setgid": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "90 days": {
     "context": {
       "primary_ui_type": "label"
     }
@@ -854,6 +879,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "users"
+    }
+  },
+  "A read is on its way.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "A reason is required to deactivate a user.": {
@@ -7904,9 +7934,20 @@
       "feature_area": "chat"
     }
   },
+  "Back to the usual updates.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "metrics"
+    }
+  },
   "Back to tier builder": {
     "context": {
       "feature_area": "plans"
+    }
+  },
+  "Back to usual updates": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Backend": {
@@ -9083,6 +9124,16 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "software-catalogs"
+    }
+  },
+  "CPU time": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "CPU utilization": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "CSV": {
@@ -11060,6 +11111,11 @@
   "Collapse to panel": {
     "context": {
       "feature_area": "ai-assistant"
+    }
+  },
+  "Collect instance metrics": {
+    "context": {
+      "feature_area": "openstack"
     }
   },
   "Collection disabled": {
@@ -17266,6 +17322,11 @@
       "feature_area": "steps"
     }
   },
+  "Disk I/O operations": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Disk creation has been scheduled.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -17281,6 +17342,11 @@
   "Disk name": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Disk throughput": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Disks": {
@@ -20503,6 +20569,18 @@
       "feature_area": "pubsub"
     }
   },
+  "Every 15 minutes": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
+    }
+  },
+  "Every 5 minutes": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
+    }
+  },
   "Every active role grant matching this consumer’s filters is sent to it again as a role_snapshot message, so the receiver can rebuild its state. Continue?": {
     "context": {
       "feature_area": "pubsub"
@@ -20526,6 +20604,12 @@
   "Every granted project lasts exactly this long, and no prepaid subscription requested under the call may run past it. Leave empty to let the longest subscription requested decide.": {
     "context": {
       "feature_area": "configuration"
+    }
+  },
+  "Every hour": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
     }
   },
   "Every month service provider can report up to the amount requested by user.": {
@@ -21943,6 +22027,16 @@
       "primary_ui_type": "label"
     }
   },
+  "Faster updates": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Faster updates…": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Favorites": {
     "context": {
       "feature_area": "search"
@@ -22823,6 +22917,21 @@
     }
   },
   "Font family used in the UI.": {},
+  "For 1 hour": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "For 24 hours": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "For 6 hours": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "For Atlassian Cloud, create an API token at https://id.atlassian.com/manage-profile/security/api-tokens": {
     "context": {
       "feature_area": "steps"
@@ -22868,6 +22977,11 @@
   "For example, the decision reference": {
     "context": {
       "feature_area": "lifecycle"
+    }
+  },
+  "For how long": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "For marketplace-only mode, where applicants request access to an offering instead of submitting a proposal to a call.": {
@@ -24793,6 +24907,11 @@
       "feature_area": "rounds"
     }
   },
+  "How often each instance is read: 5 to 1440 minutes, every 6 hours when empty. Every read is one Nova API call per instance. People who manage an instance can have it read faster for a while.": {
+    "context": {
+      "feature_area": "openstack"
+    }
+  },
   "How parent resource limits are enforced on child resource projects. Default is none.": {
     "context": {
       "feature_area": "integration"
@@ -26307,6 +26426,11 @@
     }
   },
   "Instance is stopped. Start it instead.": {},
+  "Instance metrics": {
+    "context": {
+      "feature_area": "openstack"
+    }
+  },
   "Instance name": {
     "context": {
       "primary_ui_type": "title",
@@ -28026,6 +28150,15 @@
       "primary_ui_type": "title"
     }
   },
+  "Last update {time}": {
+    "context": {
+      "variables": {
+        "time": {
+          "type": "date"
+        }
+      }
+    }
+  },
   "Last updated": {
     "context": {
       "primary_ui_type": "title",
@@ -28190,6 +28323,11 @@
   "Leave empty to receive every type.": {
     "context": {
       "feature_area": "pubsub"
+    }
+  },
+  "Leave empty to show all of them.": {
+    "context": {
+      "feature_area": "openstack"
     }
   },
   "Leave empty to sync all resources. Select a resource to sync only its billing lines.": {
@@ -31262,6 +31400,11 @@
       "feature_area": "deploy"
     }
   },
+  "Memory utilization": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Mentions": {
     "context": {
       "primary_ui_type": "label",
@@ -31529,6 +31672,11 @@
   "Metrics offerings can adopt. Providers may add private ones for their own offerings.": {
     "context": {
       "feature_area": "metrics"
+    }
+  },
+  "Metrics shown": {
+    "context": {
+      "feature_area": "openstack"
     }
   },
   "Mexico": {},
@@ -32858,6 +33006,11 @@
       "feature_area": "openstack-network"
     }
   },
+  "Network traffic": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Networking": {
     "context": {
       "primary_ui_type": "title"
@@ -33255,6 +33408,15 @@
   "Next 90 days": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Next around {time}": {
+    "context": {
+      "variables": {
+        "time": {
+          "type": "date"
+        }
+      }
     }
   },
   "Next cutoff": {
@@ -33887,6 +34049,11 @@
   "No data found": {
     "context": {
       "feature_area": "usage-by-creator"
+    }
+  },
+  "No data in this period.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "No data reported yet.": {
@@ -35573,6 +35740,25 @@
   "Not reached": {
     "context": {
       "feature_area": "proposal"
+    }
+  },
+  "Not read while the instance is not running.": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
+    }
+  },
+  "Not read while the volume is detached from an instance.": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
+    }
+  },
+  "Not read yet": {},
+  "Not read: the instance has no OpenStack server.": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
     }
   },
   "Not received from any identity provider: {claims}. Waldur only stores a claim that is listed in the provider's extra fields, so this rule cannot match anyone until it is added there.": {
@@ -41267,6 +41453,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Polling interval": {
+    "context": {
+      "feature_area": "openstack"
+    }
+  },
   "Pool": {
     "context": {
       "primary_ui_type": "title",
@@ -42814,6 +43005,11 @@
         }
       },
       "feature_area": "create"
+    }
+  },
+  "Project goals": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Project grants": {
@@ -45047,6 +45243,31 @@
   "Reactions": {
     "context": {
       "feature_area": "chat"
+    }
+  },
+  "Read": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Read the CPU, memory, network and disk counters of the instances in this offering's tenants, and of the volumes attached to them, from the Nova API, and show them on their projects' Metrics tab. Turning this off hides the metrics; what was collected is deleted after the archive grace period.": {
+    "context": {
+      "feature_area": "openstack"
+    }
+  },
+  "Read this instance and its volumes more often for a while, for example while you investigate a problem. Afterwards they are read at the usual interval again.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Read with {instance}": {
+    "context": {
+      "variables": {
+        "instance": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "metrics"
     }
   },
   "Read-only mode": {
@@ -53318,11 +53539,6 @@
       "feature_area": "openstack-tenant"
     }
   },
-  "Set goal": {
-    "context": {
-      "feature_area": "metrics"
-    }
-  },
   "Set limits": {
     "context": {
       "feature_area": "actions"
@@ -54836,6 +55052,13 @@
   "Specify where the offering is hosted.": {
     "context": {
       "feature_area": "overview"
+    }
+  },
+  "Speed up": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "metrics",
+      "action_type": "create"
     }
   },
   "Spendable": {
@@ -58147,6 +58370,7 @@
       "feature_area": "import"
     }
   },
+  "The instance is not running.": {},
   "The instance will be stopped if it is running. Existing backups and volume snapshots will be deleted.": {
     "context": {
       "feature_area": "actions"
@@ -58426,6 +58650,18 @@
   "The message was not sent": {
     "context": {
       "feature_area": "email"
+    }
+  },
+  "The metrics are being read now, and then more often.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "metrics"
+    }
+  },
+  "The metrics are being read.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "metrics"
     }
   },
   "The microphone is in use by another application.": {
@@ -59195,6 +59431,16 @@
   "The value shown to the customer is the component limit multiplied by this factor": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "The volume is read with {instance}, the instance it is attached to: read {instance} and its volumes more often for a while. Afterwards they are read at the usual interval again.": {
+    "context": {
+      "variables": {
+        "instance": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "metrics"
     }
   },
   "The worker node is expected to have at least 4 vCPU and 4 GB RAM to run Longhorn.": {
@@ -60419,11 +60665,6 @@
   "This resource will expire soon. Review and renew to prevent downtime.": {
     "context": {
       "feature_area": "UserPendingActionsList"
-    }
-  },
-  "This resource's own figures. Goals apply to the project's combined figure, on the project's Metrics tab.": {
-    "context": {
-      "feature_area": "metrics"
     }
   },
   "This resource's service hasn't adopted any metrics.": {
@@ -62695,6 +62936,12 @@
       "primary_ui_type": "error_message"
     }
   },
+  "Unable to change the updates.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "metrics"
+    }
+  },
   "Unable to check for duplicate invitations.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -64741,6 +64988,12 @@
       "feature_area": "matrix"
     }
   },
+  "Unable to read the metrics now.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "metrics"
+    }
+  },
   "Unable to recalculate user actions.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -65716,6 +65969,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "UserPendingActionsList"
+    }
+  },
+  "Unable to speed up the updates.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "metrics"
     }
   },
   "Unable to start passkey enrollment.": {
@@ -67647,6 +67906,11 @@
       "feature_area": "notifications"
     }
   },
+  "Update now": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Update of OpenStack instance internal IPs has been scheduled.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -67893,6 +68157,75 @@
         }
       },
       "feature_area": "robot-accounts"
+    }
+  },
+  "Updated every hour": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Updated every hour until {time}": {
+    "context": {
+      "variables": {
+        "time": {
+          "type": "date"
+        }
+      },
+      "feature_area": "metrics"
+    }
+  },
+  "Updated every {count} hours": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "metrics"
+    }
+  },
+  "Updated every {count} hours until {time}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "time": {
+          "type": "date"
+        }
+      },
+      "feature_area": "metrics"
+    }
+  },
+  "Updated every {count} minutes": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "Updated every {count} minutes until {time}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "time": {
+          "type": "date"
+        }
+      }
+    }
+  },
+  "Updated less than {count} minutes ago. Try again later.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "metrics"
     }
   },
   "Updating": {
@@ -70641,6 +70974,11 @@
       "feature_area": "blocks"
     }
   },
+  "Volume I/O operations": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Volume Types": {
     "context": {
       "feature_area": "steps"
@@ -70726,6 +71064,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "openstack-snapshot"
+    }
+  },
+  "Volume throughput": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Volume type": {
@@ -73376,6 +73719,11 @@
       "feature_area": "admin"
     }
   },
+  "bytes": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "calls": {
     "context": {
       "feature_area": "review"
@@ -74200,7 +74548,11 @@
     }
   },
   "milli CPUs": {},
-  "min": {},
+  "min": {
+    "context": {
+      "feature_area": "openstack"
+    }
+  },
   "minimum draw of {floor} ÷ 30 days": {
     "context": {
       "variables": {
@@ -74800,6 +75152,7 @@
     }
   },
   "running": {},
+  "seconds": {},
   "security group": {
     "context": {
       "feature_area": "openstack-security-groups"

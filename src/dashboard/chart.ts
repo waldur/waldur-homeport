@@ -92,6 +92,7 @@ export const getCostWidgetChartOptions = (
   series: SeriesOption[],
   hLines?: HLine[],
   xAxisValues?: string[],
+  formatValue?: (value: number) => string,
 ) => {
   const options = {
     grid: {
@@ -122,7 +123,7 @@ export const getCostWidgetChartOptions = (
           tooltipText += `
             <div class="flex justify-between gap-6">
               <span>${param.marker} ${escapeHtml(param.seriesName)}</span>
-              <strong class="text-end">${param.value}</strong>
+              <strong class="text-end">${formatValue ? escapeHtml(formatValue(param.value)) : param.value}</strong>
             </div>
           `;
         });
