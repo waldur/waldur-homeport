@@ -115,7 +115,9 @@ const ExtendForm: FC<ExtendFormProps> = ({
   values,
   currentEnd,
 }) => {
-  const { submitting, invalid } = useFormState<ExtendFormValues>();
+  const { submitting, invalid } = useFormState<ExtendFormValues>({
+    subscription: { submitting: true, invalid: true },
+  });
   const [activeQuickKey, setActiveQuickKey] = useState<string | null>('30m');
 
   const applyQuickOffset = useCallback(

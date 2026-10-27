@@ -61,7 +61,6 @@ export const ViewYAMLDialog: FC<ViewYAMLDialogProps> = ({ resolve }) => {
     <Form<{ yaml: string }>
       onSubmit={(values) => updateYamlMutation.mutateAsync(values)}
       initialValues={initialValues}
-      enableReinitialize={true}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

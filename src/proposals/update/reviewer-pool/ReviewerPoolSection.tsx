@@ -168,7 +168,6 @@ const ReviewerPoolSectionTable: FC<ReviewerPoolSectionProps> = ({ call }) => {
 
 export const ReviewerPoolSection: FC<any> = (props) => (
   <Form
-    id={CallReviewerPoolsFilterFormId}
     onSubmit={() => {}}
     subscription={{
       values: true,

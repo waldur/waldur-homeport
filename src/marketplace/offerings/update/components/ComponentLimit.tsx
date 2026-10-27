@@ -29,7 +29,7 @@ export const ComponentLimit: FC<{
   readOnly?: boolean;
   offering?: ProviderOfferingDetails;
 }> = (props) => {
-  const { values } = useFormState<Values>();
+  const { values } = useFormState<Values>({ subscription: { values: true } });
   const billingType = values.billing_type?.value;
 
   if (billingType == 'limit') {

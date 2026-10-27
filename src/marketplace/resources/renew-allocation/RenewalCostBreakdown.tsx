@@ -76,7 +76,9 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
   const shouldConcealPrices =
     isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
     project?.customer_display_billing_info_in_projects === false;
-  const { values } = useFormState<RenewAllocationFormData>();
+  const { values } = useFormState<RenewAllocationFormData>({
+    subscription: { values: true },
+  });
 
   const resourceUuid = getMarketplaceResourceUuid(resource);
 

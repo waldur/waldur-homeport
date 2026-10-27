@@ -190,7 +190,16 @@ const AllocationPoolsList: FunctionComponent<
 export const InternalNetworkAllocationPool: FunctionComponent = () => (
   <FormField>
     <FormLabel>{translate('Internal network allocation pool')}</FormLabel>
-    <FieldArray name="allocation_pools" component={AllocationPoolsList} />
+    <FieldArray
+      name="allocation_pools"
+      component={AllocationPoolsList}
+      subscription={{
+        length: true,
+        value: true,
+        error: true,
+        submitFailed: true,
+      }}
+    />
     <FormText variant="muted">
       {translate(
         'Define IP range that will be used for automatic assignment to instances.',

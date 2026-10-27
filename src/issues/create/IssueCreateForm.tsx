@@ -88,7 +88,6 @@ export const IssueCreateForm: FunctionComponent<OwnProps> = ({
     <Form<IssueFormData>
       onSubmit={onCreateIssue}
       initialValues={resolve.issue}
-      destroyOnUnmount={false}
       render={({ handleSubmit, submitting: formSubmitting, invalid }) => {
         const submitting = formSubmitting || externalSubmitting;
         return (

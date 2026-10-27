@@ -60,8 +60,6 @@ export const K8sSecurityConfigSection: React.FC<
           onChange: onPublicAccessRulesChange,
           onBlur: () => {},
           onFocus: () => {},
-          onDragStart: () => {},
-          onDrop: () => {},
           name: 'public_access_rules',
         }}
         meta={DEFAULT_FIELD_META}
@@ -82,8 +80,6 @@ export const K8sSecurityConfigSection: React.FC<
           onChange: onAdministrativeAccessRulesChange as any,
           onBlur: () => {},
           onFocus: () => {},
-          onDragStart: () => {},
-          onDrop: () => {},
           name: 'administrative_access_rules',
         }}
         meta={DEFAULT_FIELD_META}

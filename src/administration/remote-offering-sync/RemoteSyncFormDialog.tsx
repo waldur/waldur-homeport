@@ -138,7 +138,7 @@ const RemoteSyncRenderer = ({
   invalid,
   values,
   remoteSync,
-}: FormRenderProps<FormData, Partial<FormData>> & {
+}: FormRenderProps<FormData> & {
   remoteSync: RemoteSynchronisation;
 }) => {
   const {

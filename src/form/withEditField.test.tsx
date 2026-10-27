@@ -133,9 +133,11 @@ describe('withEditField', () => {
   });
 
   it('renders option labels (not raw values) for multi-select arrays', () => {
-    const SelectLike = (props: FieldRenderProps<any>) => (
-      <input {...props.input} />
-    );
+    const SelectLike = (
+      props: FieldRenderProps<any> & {
+        options: { value: string; label: string }[];
+      },
+    ) => <input {...props.input} />;
     const EnhancedSelect = withEditField(SelectLike);
     const scope = { roles: ['a', 'c'] };
     const callback = vi.fn();

@@ -29,14 +29,16 @@ export const EditRolePermissionsDialog: FC<{
   const { showErrorResponse } = useNotify();
 
   const onSubmit = useCallback(
-    async (formData: RoleModifyRequest) => {
+    async (formData: { permissions: string[] }) => {
       try {
         await rolesUpdate({
           path: { uuid: row.uuid },
           body: {
             name: row.name,
             content_type: row.content_type,
-            permissions: formData.permissions,
+            // The schema types `permissions` as an object; the API takes the list.
+            permissions:
+              formData.permissions as unknown as RoleModifyRequest['permissions'],
           },
         });
         ENV.roles = await getRoles();

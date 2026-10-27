@@ -38,7 +38,7 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
   inputs,
   readOnly,
 }) => {
-  const { values } = useFormState();
+  const { values } = useFormState({ subscription: { values: true } });
   const limitsName = parentName ? `${parentName}.limits` : 'limits';
   const options = data.offering.options?.options;
   const derivedTypes = React.useMemo(

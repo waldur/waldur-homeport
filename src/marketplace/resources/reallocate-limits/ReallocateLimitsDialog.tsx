@@ -137,7 +137,6 @@ export const ReallocateLimitsDialog: FunctionComponent<
         }
       }}
       initialValues={initialValues}
-      enableReinitialize
     >
       {({ handleSubmit, submitting, invalid, values }) => {
         const { canProceed, nextButtonTooltip, freedCapacity } =

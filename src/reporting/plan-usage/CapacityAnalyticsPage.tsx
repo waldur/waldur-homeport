@@ -7,10 +7,7 @@ import { marketplacePlansUsageStatsList } from 'waldur-js-client';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import {
-  selectMarketplacePlansUsageStatsFilter,
-  MarketplacePlansUsageStatsFilterFormId,
-} from '@/table/generated/MarketplacePlansUsageStatsFilter';
+import { selectMarketplacePlansUsageStatsFilter } from '@/table/generated/MarketplacePlansUsageStatsFilter';
 
 import { AnalyticsMode, AnalyticsPageContent } from '../analytics';
 import { ReportingTitle } from '../ReportingTitle';
@@ -112,7 +109,6 @@ const CapacityAnalyticsPageTable: FC = () => {
 
 export const CapacityAnalyticsPage: FC<any> = (props) => (
   <Form
-    id={MarketplacePlansUsageStatsFilterFormId}
     onSubmit={() => {}}
     subscription={{
       values: true,

@@ -273,11 +273,7 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
           reviews={reviews}
         />
       ) : (
-        <Form
-          id={FORM_ID}
-          onSubmit={NOOP_SUBMIT}
-          subscription={{ values: true }}
-        >
+        <Form onSubmit={NOOP_SUBMIT} subscription={{ values: true }}>
           {() => (
             <ProposalResourcesTableComponent
               proposal={proposal}

@@ -68,11 +68,7 @@ export const EditSchedulesDialog = (props: {
             footer={<FormFooter submitLabel={translate('Update')} />}
           >
             <div>
-              <FieldArray
-                name="schedules"
-                rerenderOnEveryChange
-                component={OfferingScheduler}
-              />
+              <FieldArray name="schedules" component={OfferingScheduler} />
             </div>
           </ModalDialog>
         </form>

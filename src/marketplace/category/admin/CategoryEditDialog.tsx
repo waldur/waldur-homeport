@@ -26,6 +26,11 @@ import { getCategoryGroups } from '@/marketplace/common/api';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
+// The form holds the saved icon's URL until a new file is picked.
+type CategoryFormValues = Omit<MarketplaceCategoryRequest, 'icon'> & {
+  icon?: string | Blob | File;
+};
+
 interface CategoryEditDialogProps {
   resolve: {
     category?: any;
@@ -68,44 +73,42 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
     staleTime: FAST_STALE_TIME,
   });
 
-  const saveCategoryMutation = useManagedMutation<
-    any,
-    any,
-    MarketplaceCategoryRequest
-  >({
-    mutationFn: (formData) => {
-      if (isEdit) {
-        return marketplaceCategoriesUpdate({
-          path: { uuid: category.uuid },
-          body: {
-            ...formData,
-            icon: fileSerializer(formData.icon),
-          },
-          ...formDataOptions,
-        }).then((response) => response.data);
-      } else {
-        return marketplaceCategoriesCreate({
-          body: {
-            ...formData,
-            icon: fileSerializer(formData.icon),
-          },
-          ...formDataOptions,
-        }).then((response) => response.data);
-      }
+  const saveCategoryMutation = useManagedMutation<any, any, CategoryFormValues>(
+    {
+      mutationFn: (formData) => {
+        if (isEdit) {
+          return marketplaceCategoriesUpdate({
+            path: { uuid: category.uuid },
+            body: {
+              ...formData,
+              icon: fileSerializer(formData.icon),
+            },
+            ...formDataOptions,
+          }).then((response) => response.data);
+        } else {
+          return marketplaceCategoriesCreate({
+            body: {
+              ...formData,
+              icon: fileSerializer(formData.icon),
+            },
+            ...formDataOptions,
+          }).then((response) => response.data);
+        }
+      },
+      successMessage: isEdit
+        ? translate('The category has been updated.')
+        : translate('The category has been created.'),
+      errorMessage: isEdit
+        ? translate('Unable to update category.')
+        : translate('Unable to create category.'),
+      refetch,
+      onSuccess: (result) => {
+        if (category?.uuid) {
+          queryClient.setQueryData(['CategoryData', category.uuid], result);
+        }
+      },
     },
-    successMessage: isEdit
-      ? translate('The category has been updated.')
-      : translate('The category has been created.'),
-    errorMessage: isEdit
-      ? translate('Unable to update category.')
-      : translate('Unable to create category.'),
-    refetch,
-    onSuccess: (result) => {
-      if (category?.uuid) {
-        queryClient.setQueryData(['CategoryData', category.uuid], result);
-      }
-    },
-  });
+  );
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -115,7 +118,7 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
 
   return (
     <Form
-      onSubmit={(values: MarketplaceCategoryRequest) =>
+      onSubmit={(values: CategoryFormValues) =>
         saveCategoryMutation.mutateAsync(values).catch(() => {})
       }
       initialValues={categoryData}

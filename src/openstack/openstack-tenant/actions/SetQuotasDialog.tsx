@@ -265,7 +265,7 @@ interface QuotaTableRowProps {
 }
 
 const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
-  const { values } = useFormState();
+  const { values } = useFormState({ subscription: { values: true } });
 
   const newValueRaw: number | undefined = row.fieldName
     ? values[row.fieldName]

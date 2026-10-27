@@ -26,7 +26,9 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
   categoryUuid,
 }) => {
   const form = useForm<FormData>();
-  const { values, submitting } = useFormState<FormData>();
+  const { values, submitting } = useFormState<FormData>({
+    subscription: { values: true, submitting: true },
+  });
 
   const {
     step,

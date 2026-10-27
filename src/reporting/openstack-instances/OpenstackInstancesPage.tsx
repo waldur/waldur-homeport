@@ -5,10 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import {
-  selectMarketplaceStatsOpenstackInstancesFilter,
-  MarketplaceStatsOpenstackInstancesFilterFormId,
-} from '@/table/generated/MarketplaceStatsOpenstackInstancesFilter';
+import { selectMarketplaceStatsOpenstackInstancesFilter } from '@/table/generated/MarketplaceStatsOpenstackInstancesFilter';
 
 import { ReportingTitle } from '../ReportingTitle';
 
@@ -66,7 +63,6 @@ const OpenstackInstancesPageTable: FC = () => {
 
 export const OpenstackInstancesPage: FC<any> = (props) => (
   <Form
-    id={MarketplaceStatsOpenstackInstancesFilterFormId}
     onSubmit={() => {}}
     subscription={{
       values: true,

@@ -7,7 +7,7 @@ import { projectAutocomplete } from '@/marketplace/common/autocompletes';
 
 export const ProjectGroup = ({ disabled }) => {
   const form = useForm();
-  const { values } = useFormState();
+  const { values } = useFormState({ subscription: { values: true } });
   const customer = values.customer;
   const project = values.project;
 

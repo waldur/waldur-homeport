@@ -25,7 +25,7 @@ interface Values {
 export const ComponentPrepaidFieldGroup: FC<{
   offering: ProviderOfferingDetails;
 }> = (props) => {
-  const { values } = useFormState<Values>();
+  const { values } = useFormState<Values>({ subscription: { values: true } });
   const billingType = values.billing_type?.value;
   const isPrepaid = values.is_prepaid;
 

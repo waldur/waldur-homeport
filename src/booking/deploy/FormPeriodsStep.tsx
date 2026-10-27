@@ -150,7 +150,6 @@ export const FormPeriodsStep = (props: FormStepProps) => {
       <FieldArray
         name="attributes.schedules"
         component={renderScheduleRows}
-        rerenderOnEveryChange
         availableSchedules={props.offering.attributes['schedules'] || []}
         bookedItems={bookedItems}
       />
