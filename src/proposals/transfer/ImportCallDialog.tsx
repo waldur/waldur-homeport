@@ -217,7 +217,7 @@ export const ImportCallDialog: FC<ImportCallDialogProps> = ({ resolve }) => {
               <AlertItem
                 variant="error"
                 type="floating"
-                className="mt-4"
+                className="mt-3"
                 title={fileError}
               />
             )}
@@ -226,14 +226,14 @@ export const ImportCallDialog: FC<ImportCallDialogProps> = ({ resolve }) => {
               <AlertItem
                 variant="error"
                 type="floating"
-                className="mt-4"
+                className="mt-3"
                 title={translate('Unable to import call.')}
                 body={format(mutation.error)}
               />
             )}
 
             {parsed && (
-              <div className="mt-6">
+              <div className="mt-5">
                 <StringGroup
                   name="name"
                   validate={required}
@@ -241,7 +241,7 @@ export const ImportCallDialog: FC<ImportCallDialogProps> = ({ resolve }) => {
                   required
                 />
                 {parsed.sections.length > 0 && (
-                  <h5 className="mb-4">{translate('Import options')}</h5>
+                  <h5 className="mb-3">{translate('Import options')}</h5>
                 )}
                 {parsed.sections.map((section) => (
                   <BooleanGroup

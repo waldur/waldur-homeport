@@ -28,7 +28,7 @@ export const ModelSelectionField: FC<ModelSelectionFieldProps> = ({
   // decide again once it is cleared.
   const ticks = useRef<string[]>(everyModel ? [] : value);
   return (
-    <div className="flex flex-col gap-8px">
+    <div className="flex flex-col gap-2">
       <Checkbox
         label={translate('All models')}
         checked={everyModel}

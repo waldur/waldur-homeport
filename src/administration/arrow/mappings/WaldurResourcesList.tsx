@@ -18,14 +18,14 @@ export const WaldurResourcesList: FC<WaldurResourcesListProps> = ({
     <Card.Header>
       <h5 className="mb-0">
         {translate('Waldur Resources')}
-        <Badge variant="neutral" tone="outline" className="ms-2">
+        <Badge variant="neutral" tone="outline" className="ms-1.5">
           {resources?.length || 0}
         </Badge>
       </h5>
     </Card.Header>
     <Card.Body className="p-0">
       {!resources || resources.length === 0 ? (
-        <div className="text-center text-quaternary py-6">
+        <div className="text-center text-quaternary py-5">
           {translate('No resources found for this customer')}
         </div>
       ) : (

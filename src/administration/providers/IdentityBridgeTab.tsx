@@ -60,11 +60,11 @@ export const IdentityBridgeTab: FC = () => {
   if (!stats) return null;
 
   return (
-    <div className="flex flex-col gap-6 mt-6">
+    <div className="flex flex-col gap-5 mt-5">
       {/* Per-ISD Health Table */}
       {stats.users_per_isd?.length > 0 && (
         <div>
-          <h5 className="mb-4">{translate('ISD health')}</h5>
+          <h5 className="mb-3">{translate('ISD health')}</h5>
           <div className="table-responsive">
             <table className="table table-bordered align-middle">
               <thead>
@@ -114,7 +114,7 @@ export const IdentityBridgeTab: FC = () => {
       {/* Identity Managers */}
       {stats.identity_managers?.length > 0 && (
         <div>
-          <h5 className="mb-4">{translate('Identity managers')}</h5>
+          <h5 className="mb-3">{translate('Identity managers')}</h5>
           <div className="table-responsive">
             <table className="table table-bordered align-middle">
               <thead>
@@ -140,7 +140,7 @@ export const IdentityBridgeTab: FC = () => {
 
       {/* Summary Metrics */}
       <div>
-        <h5 className="mb-4">{translate('Summary')}</h5>
+        <h5 className="mb-3">{translate('Summary')}</h5>
         <FormTable hideActions detailsMode className="gy-5">
           <FormTable.Item
             label={translate('Total federated users')}

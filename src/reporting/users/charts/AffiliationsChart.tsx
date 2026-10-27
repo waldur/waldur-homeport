@@ -254,7 +254,7 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
   return (
     <>
       {/* Filters */}
-      <Card className="mb-6">
+      <Card className="mb-5">
         <Card.Header>
           <Card.Title>{translate('Filters')}</Card.Title>
         </Card.Header>
@@ -318,7 +318,7 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
         ]}
       />
 
-      <Row className="mb-3">
+      <Row className="mb-2.5">
         <Col>
           <ChartCard
             title={

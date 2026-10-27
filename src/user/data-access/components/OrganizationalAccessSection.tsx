@@ -55,7 +55,7 @@ export const OrganizationalAccessSection: FC<
       <AccordionCard
         title={translate('Organizational access')}
         defaultOpen={false}
-        className="mb-4"
+        className="mb-3"
       >
         <p className="text-quaternary mb-0">
           {isViewerStaffOrSupport
@@ -93,9 +93,9 @@ export const OrganizationalAccessSection: FC<
       title={translate('Organizational access')}
       subtitle={translate('Member of {summary}', { summary: summaryText })}
       defaultOpen={false}
-      className="mb-4"
+      className="mb-3"
     >
-      <p className="text-quaternary mb-4">
+      <p className="text-quaternary mb-3">
         {isViewerStaffOrSupport
           ? translate(
               "Other members of these organizations and projects can see this user's basic profile information.",

@@ -258,7 +258,7 @@ const AllocationOutcome: FC<{
       }
       defaultOpen
     >
-      <Row className="text-sm mb-4">
+      <Row className="text-sm mb-3">
         <Col sm={project ? 6 : 12}>
           <Field
             label={translate('Project')}
@@ -291,7 +291,7 @@ const AllocationOutcome: FC<{
         )}
       </Row>
 
-      <h6 className="text-secondary font-medium mb-3">
+      <h6 className="text-secondary font-medium mb-2.5">
         {translate('Resources:')}
       </h6>
       <Table<OutcomeRow>
@@ -308,7 +308,7 @@ const AllocationOutcome: FC<{
                 {
                   title: translate('Awarded'),
                   render: ({ row }: { row: OutcomeRow }) => (
-                    <div className="flex flex-wrap gap-2 items-center">
+                    <div className="flex flex-wrap gap-1.5 items-center">
                       {row.awardedName && <span>{row.awardedName}</span>}
                       {row.change && row.change !== 'unchanged' && (
                         <AwardChangeBadge change={row.change} />
@@ -348,7 +348,7 @@ const AllocationOutcome: FC<{
 
       {!rolesLoading && roles && (
         <>
-          <h6 className="text-secondary font-medium mt-6 mb-3">
+          <h6 className="text-secondary font-medium mt-5 mb-2.5">
             {translate('Project access:')}
           </h6>
           <AllocatedTeamTable proposalUuid={proposal.uuid} roles={roles} />

@@ -32,7 +32,7 @@ export const CeleryOverviewCards = ({ data }: CeleryOverviewCardsProps) => {
   const totalProcessed = countTotalProcessed(data.stats);
 
   return (
-    <Row className="mb-6">
+    <Row className="mb-5">
       <Col md={6} lg={3}>
         <StatisticsCard title={translate('Active tasks')} value={activeCount} />
       </Col>

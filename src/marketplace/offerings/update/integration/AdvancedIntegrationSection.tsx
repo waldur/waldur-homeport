@@ -51,7 +51,7 @@ export const AdvancedIntegrationSection: FC<OfferingEditPanelProps> = (
     <Card className="card-bordered">
       <Card.Body>
         <Tabs mount="active" value={activeKey} onValueChange={handleSelect}>
-          <TabsList className="mb-5">
+          <TabsList className="mb-4">
             {tabs.map((tab) => (
               <TabsTrigger key={tab.key} value={tab.key}>
                 {tab.title}

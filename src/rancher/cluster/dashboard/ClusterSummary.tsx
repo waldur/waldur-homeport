@@ -15,7 +15,7 @@ export const ClusterSummary: FC<{
     <Row className="text-sm">
       <Col xl={6} xxl={4}>
         <Field
-          className="mb-2"
+          className="mb-1.5"
           label={translate('Kubernetes version')}
           value={renderFieldOrDash(resourceScope?.kubernetes_version)}
           labelCol={6}
@@ -23,7 +23,7 @@ export const ClusterSummary: FC<{
         />
         {resourceScope?.public_ips?.length > 0 && (
           <Field
-            className="mb-2"
+            className="mb-1.5"
             label={translate('Load balancer IPs')}
             value={renderFieldOrDash(
               resourceScope?.public_ips
@@ -41,7 +41,7 @@ export const ClusterSummary: FC<{
         )}
         {resourceScope?.router_ips?.length > 0 && (
           <Field
-            className="mb-2"
+            className="mb-1.5"
             label={translate('Router IPs')}
             value={renderFieldOrDash(resourceScope?.router_ips.join(','))}
             hasCopy={Boolean(resourceScope?.router_ips?.length)}
@@ -50,7 +50,7 @@ export const ClusterSummary: FC<{
           />
         )}
         <Field
-          className="mb-2"
+          className="mb-1.5"
           label={translate('Longhorn')}
           labelCol={6}
           valueCol={6}

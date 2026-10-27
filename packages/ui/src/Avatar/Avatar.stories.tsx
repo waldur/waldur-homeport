@@ -87,30 +87,30 @@ export const Default: Story = {
  */
 export const InitialsAndAcronyms: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-6 p-6">
-      <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-wrap items-center gap-5 p-5">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar name="Alice Cooper" size={44} />
         <span className="text-xs text-tertiary">
           Full Name (&quot;AC&quot;)
         </span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar name="Administrator" size={44} />
         <span className="text-xs text-tertiary">
           Single Word (&quot;A&quot;)
         </span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar name="European High Performance Computing" size={44} />
         <span className="text-xs text-tertiary">
           Multi-word (&quot;EH&quot;)
         </span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar initials="VIP" size={44} tone="brand" />
         <span className="text-xs text-tertiary">Explicit Initials</span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar name="?" size={44} />
         <span className="text-xs text-tertiary">
           Placeholder (&quot;?&quot;)
@@ -126,8 +126,8 @@ export const InitialsAndAcronyms: Story = {
  */
 export const Shapes: Story = {
   render: () => (
-    <div className="flex items-center gap-8 p-6">
-      <div className="flex flex-col items-center gap-2">
+    <div className="flex items-center gap-6 p-5">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar name="Circle User" size={48} shape="circle" />
         <span className="text-xs font-medium text-primary">
           shape=&quot;circle&quot;
@@ -136,7 +136,7 @@ export const Shapes: Story = {
           Users, staff, team members
         </span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar name="Square Project" size={48} shape="square" />
         <span className="text-xs font-medium text-primary">
           shape=&quot;square&quot;
@@ -155,12 +155,12 @@ export const Shapes: Story = {
  */
 export const SizesAndScales: Story = {
   render: () => (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-5 p-5">
       <div>
-        <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-3">
+        <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-2.5">
           Numeric Prop Sizes (with auto-proportional font size)
         </span>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <Avatar name="Size 20" size={20} />
           <Avatar name="Size 24" size={24} />
           <Avatar name="Size 32" size={32} />
@@ -172,10 +172,10 @@ export const SizesAndScales: Story = {
         </div>
       </div>
       <div>
-        <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-3">
+        <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-2.5">
           Tailwind className Sizing (precedence without inline override)
         </span>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <Avatar className="size-9" name="Shell Trigger" />
           <Avatar className="size-10" name="Size 10" />
           <Avatar className="size-[50px]" name="User Menu" />
@@ -191,12 +191,12 @@ export const SizesAndScales: Story = {
  */
 export const TonesAndColorVariants: Story = {
   render: () => (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-5 p-5">
       <div>
-        <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-3">
+        <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-2.5">
           Semantic Tone Variants
         </span>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <Avatar name="Subtle Tone" size={40} tone="subtle" />
           <Avatar name="Brand Tone" size={40} tone="brand" />
           <Avatar name="Primary Tone" size={40} tone="primary" />
@@ -206,10 +206,10 @@ export const TonesAndColorVariants: Story = {
         </div>
       </div>
       <div>
-        <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-3">
+        <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-2.5">
           Custom Chat Author Colors (via fallbackClassName)
         </span>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <Avatar
             name="Alice Cooper"
             size={40}
@@ -242,8 +242,8 @@ export const TonesAndColorVariants: Story = {
  */
 export const ImageLoadingAndFallback: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-8 p-6">
-      <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-wrap items-center gap-6 p-5">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar
           src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
           name="Jane Doe"
@@ -252,7 +252,7 @@ export const ImageLoadingAndFallback: Story = {
         <span className="text-xs font-medium text-primary">User Portrait</span>
         <span className="text-xs text-tertiary">Default (object-cover)</span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar
           src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop&q=80"
           name="Abstract Shape"
@@ -265,7 +265,7 @@ export const ImageLoadingAndFallback: Story = {
           isContain (object-contain)
         </span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar
           src="https://invalid-url.example/broken.jpg"
           name="Broken Image"
@@ -274,7 +274,7 @@ export const ImageLoadingAndFallback: Story = {
         <span className="text-xs font-medium text-primary">Broken URL</span>
         <span className="text-xs text-tertiary">Initials fallback</span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar
           src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
           size={48}
@@ -293,20 +293,20 @@ export const ImageLoadingAndFallback: Story = {
  */
 export const CustomChildrenFallback: Story = {
   render: () => (
-    <div className="flex items-center gap-6 p-6">
-      <div className="flex flex-col items-center gap-2">
+    <div className="flex items-center gap-5 p-5">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar size={44}>
           <UserIcon weight="bold" className="size-5 text-quaternary" />
         </Avatar>
         <span className="text-xs text-tertiary">User Icon</span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar size={44} shape="square">
           <CubeIcon weight="bold" className="size-5 text-quaternary" />
         </Avatar>
         <span className="text-xs text-tertiary">Cube Icon</span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <Avatar size={44} shape="square">
           <FolderIcon weight="bold" className="size-5 text-quaternary" />
         </Avatar>
@@ -336,9 +336,9 @@ export const AvatarGroupStacks: Story = {
     ];
 
     return (
-      <div className="flex flex-col gap-6 p-6">
+      <div className="flex flex-col gap-5 p-5">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-3">
+          <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-2.5">
             Automatic Truncation with Overflow Badge (max=3, total=7)
           </span>
           <AvatarGroup
@@ -360,10 +360,10 @@ export const AvatarGroupStacks: Story = {
         </div>
 
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-3">
+          <span className="text-xs font-semibold uppercase tracking-wider text-tertiary block mb-2.5">
             Spacing Variants (sm, md, lg)
           </span>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <AvatarGroup spacing="sm">
               <Avatar name="Alice Cooper" size={32} />
               <Avatar name="Bob Martin" size={32} />
@@ -395,7 +395,7 @@ export const AvatarGroupStacks: Story = {
  */
 export const PrimitivesComposition: Story = {
   render: () => (
-    <div className="flex items-center gap-6 p-6">
+    <div className="flex items-center gap-5 p-5">
       <div className="relative inline-block">
         <AvatarRoot className="size-12">
           <AvatarImage

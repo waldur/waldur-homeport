@@ -42,7 +42,7 @@ const PageBarFilters = ({ withPicker = false }: { withPicker?: boolean }) => {
         'flex items-center bg-primary',
       )}
     >
-      <div className="flex w-full items-center gap-4 overflow-x-auto text-nowrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="flex w-full items-center gap-3 overflow-x-auto text-nowrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {withPicker && <MarketplaceLandingFilter size="sm" />}
         {filters?.length > 0 && (
           <>

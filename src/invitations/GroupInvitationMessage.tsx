@@ -9,9 +9,11 @@ export const GroupInvitationMessage: FunctionComponent<{
   invitation: GroupInvitation;
 }> = ({ invitation }) => (
   <>
-    <p className="mb-3">{formatInvitation(invitation, invitation.is_public)}</p>
+    <p className="mb-2.5">
+      {formatInvitation(invitation, invitation.is_public)}
+    </p>
     {invitation.custom_text && (
-      <p className="text-quaternary mb-3">{invitation.custom_text}</p>
+      <p className="text-quaternary mb-2.5">{invitation.custom_text}</p>
     )}
     <p className="mb-0">
       {invitation.is_public

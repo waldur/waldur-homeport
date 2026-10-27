@@ -110,7 +110,7 @@ export const FieldsListGroup = ({
 
   return (
     <>
-      <div className="mb-5">
+      <div className="mb-4">
         <RadioGroup
           name="dependency_logic_operator"
           defaultValue="and"
@@ -146,8 +146,8 @@ export const FieldsListGroup = ({
         );
 
         return (
-          <Card key={name} className="card-bordered bg-secondary mb-3">
-            <Card.Header className="mx-4 min-h-auto">
+          <Card key={name} className="card-bordered bg-secondary mb-2.5">
+            <Card.Header className="mx-3 min-h-auto">
               <h6 className="mb-0 text-tertiary">
                 {translate('Condition {index}', { index: i + 1 })}
               </h6>
@@ -161,7 +161,7 @@ export const FieldsListGroup = ({
                 />
               </div>
             </Card.Header>
-            <Card.Body key={name + i} className="px-4">
+            <Card.Body key={name + i} className="px-3">
               <FormGroup
                 label={translate('Depends on question')}
                 description={translate(

@@ -73,7 +73,7 @@ const SubnetCell: FC<{ row: EffectiveRoute }> = ({ row }) => {
       <>
         <span>{row.subnet_name}</span>
         {row.subnet_cidr ? (
-          <span className="text-quaternary ms-2">{row.subnet_cidr}</span>
+          <span className="text-quaternary ms-1.5">{row.subnet_cidr}</span>
         ) : null}
       </>
     );
@@ -166,7 +166,7 @@ export const EffectiveRoutesCard: FC<Props> = ({ routerUuid }) => {
   }));
 
   return (
-    <Card className="mt-4">
+    <Card className="mt-3">
       <Card.Header className="flex justify-between items-center">
         <Card.Title className="mb-0">
           {translate('Effective routes')}

@@ -66,12 +66,12 @@ const InstanceRow: FC<{
   indent?: boolean;
 }> = ({ inst, indent }) => (
   <tr>
-    <td className={indent ? 'ps-8' : 'ps-4'}>{inst.name}</td>
+    <td className={indent ? 'ps-6' : 'ps-3'}>{inst.name}</td>
     <td>{renderFieldOrDash(inst.cores)}</td>
     <td>{inst.ram != null ? formatRam(inst.ram) : '\u2014'}</td>
     <td>{renderFieldOrDash(inst.customer_name)}</td>
     <td>{renderFieldOrDash(inst.project_name)}</td>
-    <td className="pe-4">{renderFieldOrDash(inst.offering_name)}</td>
+    <td className="pe-3">{renderFieldOrDash(inst.offering_name)}</td>
   </tr>
 );
 
@@ -80,7 +80,7 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
 
   return (
     <div
-      className="flex flex-col gap-4"
+      className="flex flex-col gap-3"
       style={{ overflow: 'auto', maxHeight: '70vh' }}
     >
       {groups.map((group) => {
@@ -99,7 +99,7 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
         return (
           <div key={group.hostname} className="border rounded">
             {/* Hypervisor header */}
-            <div className="flex items-center gap-2 px-4 py-3 border-b-[1px] border-b-secondary bg-brand-subtle">
+            <div className="flex items-center gap-1.5 px-3 py-2.5 border-b-[1px] border-b-secondary bg-brand-subtle">
               {isUnassigned ? (
                 <QuestionIcon className="text-warning" weight="bold" />
               ) : (
@@ -123,12 +123,12 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
               <table className="table table-row-bordered align-middle text-xs mb-0">
                 <thead>
                   <tr className="text-quaternary font-medium text-xs text-uppercase">
-                    <th className="ps-4">{translate('Instance')}</th>
+                    <th className="ps-3">{translate('Instance')}</th>
                     <th>{translate('vCPU')}</th>
                     <th>{translate('RAM')}</th>
                     <th>{translate('Organization')}</th>
                     <th>{translate('Project')}</th>
-                    <th className="pe-4">{translate('Tenant')}</th>
+                    <th className="pe-3">{translate('Tenant')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -136,16 +136,16 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
                   {serverGroups.map((sg) => (
                     <>
                       <tr key={sg.key}>
-                        <td colSpan={6} className="ps-4 py-2 bg-info-subtle">
+                        <td colSpan={6} className="ps-3 py-1.5 bg-info-subtle">
                           <UsersThreeIcon
-                            className="text-info me-2"
+                            className="text-info me-1.5"
                             weight="bold"
                             size={16}
                           />
                           <span className="font-medium text-info text-xs">
                             {sg.name}
                           </span>
-                          <span className="text-quaternary text-xs ms-2">
+                          <span className="text-quaternary text-xs ms-1.5">
                             {sg.policy}
                           </span>
                         </td>
@@ -165,7 +165,7 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
                     <tr>
                       <td
                         colSpan={6}
-                        className="ps-4 py-2 bg-tertiary dark:bg-quaternary"
+                        className="ps-3 py-1.5 bg-tertiary dark:bg-quaternary"
                       >
                         <span className="text-quaternary text-xs font-medium">
                           {translate('No server group')}

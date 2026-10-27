@@ -54,7 +54,7 @@ export const ResourceViewChangeDialog: FC<ResourceViewChangeDialogProps> = ({
             {translate('Go to order')}
           </OrderDetailsLink>
           {order.state === 'pending-consumer' ? (
-            <div className="flex flex-row-reverse gap-4">
+            <div className="flex flex-row-reverse gap-3">
               <OrderConsumerActions
                 order={order}
                 offering={offering}
@@ -63,7 +63,7 @@ export const ResourceViewChangeDialog: FC<ResourceViewChangeDialogProps> = ({
               />
             </div>
           ) : order.state === 'pending-provider' ? (
-            <div className="flex flex-row-reverse gap-4">
+            <div className="flex flex-row-reverse gap-3">
               <OrderProviderActions
                 order={order}
                 refetch={refetch}
@@ -74,7 +74,7 @@ export const ResourceViewChangeDialog: FC<ResourceViewChangeDialogProps> = ({
         </>
       }
     >
-      <Field label={translate('Order UUID')} value={order.uuid} space={2} />
+      <Field label={translate('Order UUID')} value={order.uuid} space={1.5} />
 
       {hasChangePlanRequest && <ResourcePlanChangeInfo resource={resource} />}
       {hasChangePlanRequest && hasLimitChangeRequest && <hr />}

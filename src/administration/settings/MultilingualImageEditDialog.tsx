@@ -120,13 +120,13 @@ export const MultilingualImageEditDialog: FC<
         </>
       }
     >
-      <p className="text-quaternary mb-4">{item.description}</p>
+      <p className="text-quaternary mb-3">{item.description}</p>
       <Tabs
         mount="all"
         value={activeTab}
         onValueChange={(k) => setActiveTab(k || languageChoices[0]?.code)}
       >
-        <TabsList className="mb-4">
+        <TabsList className="mb-3">
           {languageChoices.map((lang) => (
             <TabsTrigger key={lang.code} value={lang.code}>
               {lang.label}
@@ -136,7 +136,7 @@ export const MultilingualImageEditDialog: FC<
         <div className="tab-content">
           {languageChoices.map((lang) => (
             <TabsContent key={lang.code} value={lang.code}>
-              <div className="pt-4">
+              <div className="pt-3">
                 <WideImageField
                   input={{
                     name: `image_${lang.code}`,

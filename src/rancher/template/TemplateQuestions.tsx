@@ -45,7 +45,7 @@ export const TemplateQuestions: FC<
     <SubmitButton
       variant="success"
       size="sm"
-      className="mt-2"
+      className="mt-1.5"
       submitting={props.submitting}
       label={translate('Create application')}
       disabled={props.invalid || ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE}

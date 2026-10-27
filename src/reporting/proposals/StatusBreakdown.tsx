@@ -14,7 +14,7 @@ export const StatusBreakdown: FC<{
   }[];
 }> = ({ statuses }) => {
   return (
-    <div className="flex flex-row gap-2">
+    <div className="flex flex-row gap-1.5">
       <div>{translate('Status breakdown')}:</div>
       {statuses.map(({ key, label, value, variant }) => (
         <Badge key={key} variant={variant} tone="outline">

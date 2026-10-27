@@ -135,7 +135,7 @@ export const MatrixCommandsDialog: FC<MatrixCommandsDialogProps> = ({
           </CollapsibleContent>
         </Collapsible>
       )}
-      <p className="text-quaternary small mt-4 mb-0">
+      <p className="text-quaternary small mt-3 mb-0">
         {translate(
           'Type / or ! in the message box to pick a command. In other Matrix apps, type the ! form.',
         )}

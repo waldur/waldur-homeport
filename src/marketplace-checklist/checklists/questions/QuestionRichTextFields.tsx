@@ -26,7 +26,7 @@ export const QuestionRichTextFields: FC = () => (
       placeholder="5000"
       min={1}
       label={translate('Character limit')}
-      space={5}
+      space={4}
       help={translate('Leave empty for no limit.')}
     />
     <RadioGroup
@@ -34,7 +34,7 @@ export const QuestionRichTextFields: FC = () => (
       label={translate('Toolbar level')}
       options={TOOLBAR_OPTIONS}
       defaultValue="standard"
-      space={5}
+      space={4}
     />
   </>
 );

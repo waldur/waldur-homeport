@@ -189,7 +189,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
       title={translate('How Reviewer-Proposal Matching works')}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         {/* Important Note */}
         <section>
           <AlertItem
@@ -197,7 +197,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
             variant="info"
             title={translate('Who is included in matching:')}
             body={
-              <ul className="mb-0 mt-2">
+              <ul className="mb-0 mt-1.5">
                 <li>
                   {translate(
                     'Only reviewers who have ACCEPTED the pool invitation are included.',
@@ -220,13 +220,13 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* Affinity Computation Flow */}
         <section>
-          <h4 className="mb-4">{translate('Affinity computation flow')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Affinity computation flow')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'When you click "Compute matrix", the system calculates how well each reviewer matches each proposal based on their expertise and the proposal content.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart
               code={generateAffinityFlowDiagram(config)}
               className="text-center"
@@ -236,7 +236,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* Scoring Methods */}
         <section>
-          <h4 className="mb-4">{translate('Scoring methods')}</h4>
+          <h4 className="mb-3">{translate('Scoring methods')}</h4>
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
@@ -255,7 +255,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
                         <Badge
                           variant="success"
                           tone="outline"
-                          className="ms-2"
+                          className="ms-1.5"
                         >
                           {translate('Active')}
                         </Badge>
@@ -274,14 +274,14 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* Data Sources */}
         <section>
-          <h4 className="mb-4">{translate('Data sources')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Data sources')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'The following data is used to compute affinity scores:',
             )}
           </p>
           {DATA_SOURCES.map((source) => (
-            <div key={source.source} className="mb-4">
+            <div key={source.source} className="mb-3">
               <h6 className="font-medium">{source.source}</h6>
               <ul className="mb-0">
                 {source.fields.map((field) => (
@@ -296,13 +296,13 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* Assignment Algorithm */}
         <section>
-          <h4 className="mb-4">{translate('Assignment algorithm')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Assignment algorithm')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Once affinity scores are computed, an assignment algorithm can be used to optimally assign reviewers to proposals while respecting constraints.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart
               code={generateAssignmentDiagram(config)}
               className="text-center"
@@ -312,33 +312,33 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* Score Interpretation */}
         <section>
-          <h4 className="mb-4">{translate('Score interpretation')}</h4>
-          <div className="flex flex-wrap gap-3">
-            <div className="flex items-center gap-2">
+          <h4 className="mb-3">{translate('Score interpretation')}</h4>
+          <div className="flex flex-wrap gap-2.5">
+            <div className="flex items-center gap-1.5">
               <Badge variant="success" tone="outline">
                 80-100%
               </Badge>
               <span>{translate('Excellent match')}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <Badge variant="primary" tone="outline">
                 60-79%
               </Badge>
               <span>{translate('Good match')}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <Badge variant="warning" tone="outline">
                 40-59%
               </Badge>
               <span>{translate('Moderate match')}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <Badge variant="danger" tone="outline">
                 20-39%
               </Badge>
               <span>{translate('Weak match')}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <Badge variant="secondary" tone="outline">
                 0-19%
               </Badge>

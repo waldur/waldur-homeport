@@ -15,7 +15,7 @@ const VARIANTS = ['info', 'success', 'warning', 'error'] as const;
  */
 const withToastProvider = (Story: () => ReactNode) => (
   <ToastProvider swipeDirection="right">
-    <div className="relative flex max-w-[400px] flex-col gap-3">
+    <div className="relative flex max-w-[400px] flex-col gap-2.5">
       <Story />
     </div>
     <ToastViewport className="static w-auto max-w-none" />

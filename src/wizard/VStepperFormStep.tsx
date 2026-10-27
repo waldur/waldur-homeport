@@ -50,7 +50,7 @@ const StepDisabledNotice: FC<{ disabled?: boolean; reason?: string }> = ({
   reason,
 }) =>
   disabled && reason ? (
-    <AlertItem type="floating" title={reason} className="mb-6" />
+    <AlertItem type="floating" title={reason} className="mb-5" />
   ) : null;
 
 /**
@@ -85,18 +85,18 @@ export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
     >
       {props.disabled && <div className="step-blocker" />}
       <fieldset className="step-fieldset" disabled={props.disabled}>
-        <Card.Header className="gap-2">
-          <div className="flex items-center me-2">
+        <Card.Header className="gap-1.5">
+          <div className="flex items-center me-1.5">
             <div>
               <h4 className="mb-0">{props.title}</h4>
               {props.subtitle && (
-                <small className="text-sm font-normal block mt-2">
+                <small className="text-sm font-normal block mt-1.5">
                   {props.subtitle}
                 </small>
               )}
             </div>
             {props.refetch && (
-              <div className="ms-2">
+              <div className="ms-1.5">
                 <RefreshButton
                   loading={props.refetching}
                   refetch={props.refetch}

@@ -16,7 +16,7 @@ export const SidebarFooter = () => {
     return null;
   }
   return (
-    <SidebarFooterSlot className="gap-2">
+    <SidebarFooterSlot className="gap-1.5">
       <SidebarSeparator className="mx-0" />
       <SidebarMenu>
         <SupportMenu />

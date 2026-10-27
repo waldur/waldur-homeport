@@ -21,10 +21,10 @@ export const PubSubIssuesCard: FC<PubSubIssuesCardProps> = ({ issues }) => {
           : translate('No issues')
       }
       defaultOpen={hasIssues}
-      className="mb-6"
+      className="mb-5"
     >
       {hasIssues ? (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5">
           {issues.map((issue, index) => (
             <AlertItem
               key={index}

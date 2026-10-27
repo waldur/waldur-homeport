@@ -40,7 +40,7 @@ export const CenteredCardLayout = () => {
         </div>
         <div className="layout-centered-card-content">
           <div className="layout-centered-card-box">
-            <div className="login-logo mb-2">
+            <div className="login-logo mb-1.5">
               <img
                 alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
                 src={imageUrl}

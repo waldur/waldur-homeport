@@ -99,7 +99,7 @@ export const WorkflowStepsField: FC<{ disabled?: boolean }> = ({
                 cascadeOff(definition);
               }
             }}
-            space={2}
+            space={1.5}
           />
         );
       })}
@@ -114,14 +114,14 @@ export const OfferViaCallWorkflowStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      <p className="text-quaternary mb-5">
+      <p className="text-quaternary mb-4">
         {translate(
           'Each enabled step is a stage someone has to clear before the request can be granted. The allocation decision alone is the shortest route.',
         )}
       </p>
       <WorkflowStepsField disabled={busy} />
       {chainStep && busy ? (
-        <p className="text-quaternary text-xs mt-4 mb-0">
+        <p className="text-quaternary text-xs mt-3 mb-0">
           {chainStepLabel(chainStep)}…
         </p>
       ) : null}

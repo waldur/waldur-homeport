@@ -20,7 +20,7 @@ export const ProviderGroupSummary: FC<{ projectUuid: string }> = ({
     return null;
   }
   return (
-    <ul className="ps-4 mb-0" data-testid="provider-group-summary">
+    <ul className="ps-3 mb-0" data-testid="provider-group-summary">
       {groups.map((group) => (
         <li key={group.group_uuid ?? group.provider_name}>
           {group.gid == null

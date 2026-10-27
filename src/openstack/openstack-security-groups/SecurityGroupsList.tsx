@@ -100,7 +100,7 @@ export const SecurityGroupsList: FunctionComponent<{ resourceScope }> = ({
       showPageSizeSelector={true}
       hasQuery={true}
       tableActions={
-        <div className="flex gap-2">
+        <div className="flex gap-1.5">
           <CreateSecurityGroupAction
             resource={resourceScope}
             refetch={props.fetch}

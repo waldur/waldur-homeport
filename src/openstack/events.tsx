@@ -70,9 +70,9 @@ export const SecurityGroupRulesDiff: FC<{ context: RulesChangedContext }> = ({
     return null;
   }
   return (
-    <div className="mt-3">
+    <div className="mt-2.5">
       {added_rules?.length > 0 && (
-        <div className="mb-3">
+        <div className="mb-2.5">
           <strong className="text-success">
             {translate('Added rules ({count})', { count: added_rules.length })}
           </strong>
@@ -86,7 +86,7 @@ export const SecurityGroupRulesDiff: FC<{ context: RulesChangedContext }> = ({
         </div>
       )}
       {removed_rules?.length > 0 && (
-        <div className="mb-3">
+        <div className="mb-2.5">
           <strong className="text-danger">
             {translate('Removed rules ({count})', {
               count: removed_rules.length,
@@ -102,7 +102,7 @@ export const SecurityGroupRulesDiff: FC<{ context: RulesChangedContext }> = ({
         </div>
       )}
       {modified_rules?.length > 0 && (
-        <div className="mb-3">
+        <div className="mb-2.5">
           <strong className="text-warning">
             {translate('Modified rules ({count})', {
               count: modified_rules.length,
@@ -186,9 +186,9 @@ export const AllowedAddressPairsDiff: FC<{
     return null;
   }
   return (
-    <div className="mt-3">
+    <div className="mt-2.5">
       {added_pairs?.length > 0 && (
-        <div className="mb-3">
+        <div className="mb-2.5">
           <strong className="text-success">
             {translate('Added pairs ({count})', { count: added_pairs.length })}
           </strong>
@@ -202,7 +202,7 @@ export const AllowedAddressPairsDiff: FC<{
         </div>
       )}
       {removed_pairs?.length > 0 && (
-        <div className="mb-3">
+        <div className="mb-2.5">
           <strong className="text-danger">
             {translate('Removed pairs ({count})', {
               count: removed_pairs.length,
@@ -218,7 +218,7 @@ export const AllowedAddressPairsDiff: FC<{
         </div>
       )}
       {modified_pairs?.length > 0 && (
-        <div className="mb-3">
+        <div className="mb-2.5">
           <strong className="text-warning">
             {translate('Modified pairs ({count})', {
               count: modified_pairs.length,

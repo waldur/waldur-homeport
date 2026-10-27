@@ -17,8 +17,8 @@ export const SummaryWidget = ({
   /**
    * Drops the default bottom margin, for when whatever follows brings its own
    * top spacing. It has to be a prop rather than an `mb-0` in `className`:
-   * Bootstrap generates its spacing utilities with `!important`, so `mb-5`
-   * cannot be overridden from outside.
+   * two margin classes on one element apply in stylesheet order, not in the
+   * order they are written, so `mb-0` would not reliably beat `mb-4`.
    */
   spaceless?: boolean;
 }) => {
@@ -28,7 +28,7 @@ export const SummaryWidget = ({
       : Math.max(2, Math.floor(12 / Math.min(stats.length, 6)));
 
   return (
-    <Row className={classNames('g-4', !spaceless && 'mb-5', className)}>
+    <Row className={classNames('g-4', !spaceless && 'mb-4', className)}>
       {stats.map((stat, index) => (
         <Col key={index} sm={colWidth}>
           <StatsCard

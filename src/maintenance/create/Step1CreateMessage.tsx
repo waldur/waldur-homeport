@@ -215,7 +215,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
         label={translate('External reference (Optional)')}
         description={translate('Link to external maintenance page or ticket')}
       />
-      <hr className="mb-7 mt-0" />
+      <hr className="mb-5.5 mt-0" />
       <TextGroup
         name="internal_notes"
         placeholder={translate(

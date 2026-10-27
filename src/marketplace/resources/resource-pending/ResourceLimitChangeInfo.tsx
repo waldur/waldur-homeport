@@ -86,38 +86,38 @@ export const ResourceLimitChangeInfo = ({
       <Field
         label={translate('Requestor')}
         value={order.created_by_full_name + ` (${order.created_by_username})`}
-        space={2}
+        space={1.5}
       />
       <Field
         label={translate('Requested at')}
         value={formatDate(order.created)}
-        space={2}
+        space={1.5}
       />
-      <OrderDetailsQuickBody order={order} space={2} />
+      <OrderDetailsQuickBody order={order} space={1.5} />
       {userIsRequestor && (
         <Field
           label={translate('Status')}
           value={<OrderStateField order={order} shape="pill" tone="outline" />}
-          space={2}
+          space={1.5}
         />
       )}
 
       {userIsRequestor &&
         (order.state === 'pending-consumer' ? (
-          <p className="text-quaternary my-6">
+          <p className="text-quaternary my-5">
             {translate(
               'Your request has been submitted and is awaiting organization approval.',
             )}
           </p>
         ) : order.state === 'pending-provider' ? (
-          <p className="text-quaternary my-6">
+          <p className="text-quaternary my-5">
             {translate(
               'Your request has been submitted and is awaiting provider approval.',
             )}
           </p>
         ) : null)}
 
-      <Card className="card-table card-bordered mt-6 mb-6">
+      <Card className="card-table card-bordered mt-5 mb-5">
         <Card.Body className="p-0">
           <div className="table-responsive">
             <div className="table-container">

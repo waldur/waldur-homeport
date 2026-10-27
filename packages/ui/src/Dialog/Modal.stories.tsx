@@ -68,7 +68,7 @@ const Demo = ({
 }) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="p-6">
+    <div className="p-5">
       <BaseButton
         variant="primary"
         label={label}
@@ -133,7 +133,7 @@ export const WithIcon: Story = {
  */
 export const Sizes: Story = {
   render: () => (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-1.5">
       {(['sm', 'md', 'lg', 'xl'] as const).map((size) => (
         <Demo key={size} label={`Open ${size}`} shell={{ size }}>
           <ModalDialog title={`Size ${size}`}>

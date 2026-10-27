@@ -21,7 +21,7 @@ export const RecentSearchItem = ({ item }) => {
 
   return (
     <Link
-      className="flex text-brand items-center py-2 px-5 hover:bg-[var(--bg-brand-primary-alt)]"
+      className="flex text-brand items-center py-1.5 px-4 hover:bg-[var(--bg-brand-primary-alt)]"
       state={item.to}
       params={item.params}
       onClick={() => {
@@ -33,21 +33,21 @@ export const RecentSearchItem = ({ item }) => {
         <BuildingsIcon
           size={22}
           weight="bold"
-          className="text-secondary me-4"
+          className="text-secondary me-3"
         />
       ) : item.type === 'project' ? (
         <ClipboardTextIcon
           size={22}
           weight="bold"
-          className="text-secondary me-4"
+          className="text-secondary me-3"
         />
       ) : item.type === 'user' ? (
-        <UserIcon size={22} weight="bold" className="text-secondary me-4" />
+        <UserIcon size={22} weight="bold" className="text-secondary me-3" />
       ) : (
         <SquaresFourIcon
           size={22}
           weight="bold"
-          className="text-secondary me-4"
+          className="text-secondary me-3"
         />
       )}
       <span className="text-sm grow">{item.title}</span>

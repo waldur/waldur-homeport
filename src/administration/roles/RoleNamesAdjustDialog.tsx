@@ -253,7 +253,7 @@ const RoleNameField = ({
       validate={notBlank}
       quickAction={
         preset ? (
-          <span className="small text-quaternary flex items-center gap-2">
+          <span className="small text-quaternary flex items-center gap-1.5">
             {translate('Preset: {name}', { name: preset })}
             {value !== preset && (
               <BaseButton
@@ -268,7 +268,7 @@ const RoleNameField = ({
       }
       description={
         changed ? (
-          <span className="flex items-center gap-2">
+          <span className="flex items-center gap-1.5">
             <Badge variant="warning" shape="pill" tone="outline">
               {translate('New name')}
             </Badge>

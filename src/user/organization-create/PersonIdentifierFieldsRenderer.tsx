@@ -46,7 +46,7 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
 > = ({ fieldConfig, loading }) => {
   if (loading) {
     return (
-      <div className="text-center py-4">
+      <div className="text-center py-3">
         <div className="spinner-border text-brand" role="status">
           <span className="visually-hidden">{translate('Loading...')}</span>
         </div>
@@ -76,12 +76,12 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
       : required;
 
     return (
-      <div className="mb-4">
-        <h6 className="mb-3">
+      <div className="mb-3">
+        <h6 className="mb-2.5">
           {translate('Personal identification required')}
         </h6>
         {person_identifier_fields.description && (
-          <p className="text-quaternary mb-3">
+          <p className="text-quaternary mb-2.5">
             {person_identifier_fields.description}
           </p>
         )}
@@ -109,11 +109,11 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
 
     return (
       <div>
-        <h6 className="mb-3">
+        <h6 className="mb-2.5">
           {translate('Personal identification required')}
         </h6>
         {person_identifier_fields.description && (
-          <p className="text-quaternary mb-3">
+          <p className="text-quaternary mb-2.5">
             {person_identifier_fields.description}
           </p>
         )}

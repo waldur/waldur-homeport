@@ -18,7 +18,7 @@ export const SupportDashboard: FC = () => {
       {isSupportEnabled ? <SupportStatistics /> : null}
       {isSupportEnabled ? (
         <IssuesList
-          className="mb-5"
+          className="mb-4"
           title={translate('Open issues')}
           // `is_open` is the same definition the statistics card above counts
           // with. Filtering on the literal status "Open" left the card saying 1

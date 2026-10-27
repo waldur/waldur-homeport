@@ -110,7 +110,7 @@ const OneTimeComponentsSummary: FC<{
           </div>
         </Card.Body>
       </Card>
-      <p className="text-quaternary mt-3">
+      <p className="text-quaternary mt-2.5">
         {translate(
           'The renewal cost will be calculated based on the extension period selected in the next step.',
         )}
@@ -208,7 +208,7 @@ export const Step1UpdateLimits: FC<OwnProps> = (props) => {
           mount="active"
           defaultValue={resources[0] ? getUuid(resources[0]) : undefined}
         >
-          <TabsList className="mb-4">
+          <TabsList className="mb-3">
             {resources.map((resource) => (
               <TabsTrigger key={resource.uuid} value={getUuid(resource)}>
                 {resource.name}

@@ -6,7 +6,7 @@ import { IssueStatus } from '@/issues/IssueStatus';
 import { RateStars } from '@/proposals/proposal/create-review/RateStars';
 
 export const StatusColumn: FunctionComponent<{ row }> = ({ row }) => (
-  <span className="inline-flex items-center gap-2">
+  <span className="inline-flex items-center gap-1.5">
     <IssueStatus status={row.status} />
     {row.feedback ? (
       <Tooltip

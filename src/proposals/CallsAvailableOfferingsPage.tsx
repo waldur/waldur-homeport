@@ -102,7 +102,7 @@ export const CallsAvailableOfferingsPage: FunctionComponent = () => {
         context="calls"
       />
 
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-20 mb-10')}>
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-16 mb-8')}>
         <CallsAvailableOfferingsTable />
       </div>
     </>

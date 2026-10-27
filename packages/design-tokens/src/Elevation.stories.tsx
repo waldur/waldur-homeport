@@ -50,7 +50,7 @@ const shadowFile: TokenFile = {
 function ShadowCard({ token }: { token: Token & { file?: string } }) {
   return (
     <div
-      className="flex h-32 flex-col items-center justify-center rounded-md bg-[var(--card-bg)] p-4 text-center"
+      className="flex h-32 flex-col items-center justify-center rounded-md bg-[var(--card-bg)] p-3 text-center"
       style={{ boxShadow: `var(${token.name})` }}
     >
       <Mono className="text-xs font-semibold text-primary">{token.name}</Mono>
@@ -58,7 +58,7 @@ function ShadowCard({ token }: { token: Token & { file?: string } }) {
         {token.file ?? 'semantic/elevation.css'}
       </span>
       {token.note && (
-        <span className="mt-2 line-clamp-3 text-[11px] text-quaternary">
+        <span className="mt-1.5 line-clamp-3 text-[11px] text-quaternary">
           <Prose text={token.note} />
         </span>
       )}
@@ -73,7 +73,7 @@ function ShadowCard({ token }: { token: Token & { file?: string } }) {
 export const Shadows: Story = {
   render: () => (
     <TokenPage title="Elevation" intro={elevation.doc}>
-      <div className="mb-8 grid grid-cols-1 gap-8 p-2 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mb-6 grid grid-cols-1 gap-6 p-1.5 sm:grid-cols-2 lg:grid-cols-4">
         {shadowFile.tokens.map((t) => (
           <ShadowCard key={t.name} token={t} />
         ))}

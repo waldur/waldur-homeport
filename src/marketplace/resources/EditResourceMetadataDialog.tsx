@@ -67,8 +67,8 @@ const FieldRows: FC<{
 }> = ({ name, title, addTitle, columns }) => (
   <FieldArray name={name}>
     {({ fields }) => (
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-2">
+      <div className="mb-5">
+        <div className="flex justify-between items-center mb-1.5">
           <span className="font-medium">{title}</span>
           <BaseButton
             label={addTitle}

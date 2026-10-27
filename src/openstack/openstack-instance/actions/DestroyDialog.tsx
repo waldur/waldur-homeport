@@ -20,7 +20,7 @@ const TerminationWarning = () => (
     body={translate(
       'The instance will be stopped if it is running. Existing backups and volume snapshots will be deleted.',
     )}
-    className="mb-4"
+    className="mb-3"
   />
 );
 

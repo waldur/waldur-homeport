@@ -183,7 +183,7 @@ export const FeedbackPromptDialog: FC<FeedbackPromptDialogProps> = ({
             }
           >
             {prompt.survey.intro ? (
-              <div className="mb-6 text-sm text-quaternary">
+              <div className="mb-5 text-sm text-quaternary">
                 <SafeMarkdown text={prompt.survey.intro} />
               </div>
             ) : null}

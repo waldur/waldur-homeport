@@ -49,7 +49,7 @@ const STAY_OPEN = {
 
 // Room below each trigger for its open panel.
 const Gallery = ({ children }: { children: ReactNode }) => (
-  <div className="flex flex-wrap items-start gap-x-[260px] gap-y-[240px] p-12 pb-[320px]">
+  <div className="flex flex-wrap items-start gap-x-[260px] gap-y-[240px] p-10 pb-[320px]">
     {children}
   </div>
 );
@@ -146,7 +146,7 @@ export const RowOptions: Story = {
  */
 export const Submenus: Story = {
   render: () => (
-    <div className="p-12 pb-[300px]">
+    <div className="p-10 pb-[300px]">
       <Menu>
         <Trigger label="Export" />
         <Menu.Content
@@ -223,7 +223,7 @@ const LanguageList = () => {
  */
 export const RadioRows: Story = {
   render: () => (
-    <div className="p-12 pb-[240px]">
+    <div className="p-10 pb-[240px]">
       <LanguageList />
     </div>
   ),
@@ -272,7 +272,7 @@ const ThemeToggle = () => {
  */
 export const CheckboxAndCopyItems: Story = {
   render: () => (
-    <div className="p-12 pb-[240px]">
+    <div className="p-10 pb-[240px]">
       <Menu>
         <Trigger label="Preferences" />
         <Menu.Content align="start" className="w-[275px] py-[12px]">
@@ -324,7 +324,7 @@ export const CheckboxAndCopyItems: Story = {
  */
 export const OpenOnHover: Story = {
   render: () => (
-    <div className="p-12 pb-[240px]">
+    <div className="p-10 pb-[240px]">
       <Menu openOnHover>
         <Trigger label="Offerings" />
         <Menu.Content align="start" className="w-[200px] py-[6.5px]">
@@ -361,7 +361,7 @@ export const SelectingARow: Story = {
   render: (args) => {
     const onSelect = fn();
     return (
-      <div className="p-12 pb-[240px]">
+      <div className="p-10 pb-[240px]">
         <Menu onOpenChange={args.onOpenChange}>
           <Trigger label="Actions" />
           <Menu.Content look="actions" align="start">

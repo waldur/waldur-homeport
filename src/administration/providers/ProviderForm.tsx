@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { Field, useFormState } from 'react-final-form';
 
 import { AlertItem, BaseButton } from 'waldur-ui';
@@ -75,7 +76,12 @@ const AllowedRedirectsField = () => {
 
               return (
                 <div key={index}>
-                  <div className={`flex gap-2 mb-${hasError ? '1' : '3'}`}>
+                  <div
+                    className={classNames(
+                      'flex gap-1.5',
+                      hasError ? 'mb-1' : 'mb-2.5',
+                    )}
+                  >
                     <BaseInputField
                       type="text"
                       containerClassName="flex-1"
@@ -92,7 +98,9 @@ const AllowedRedirectsField = () => {
                     />
                   </div>
                   {hasError && (
-                    <small className="block text-danger mb-3">{urlError}</small>
+                    <small className="block text-danger mb-2.5">
+                      {urlError}
+                    </small>
                   )}
                 </div>
               );
@@ -101,13 +109,13 @@ const AllowedRedirectsField = () => {
             <BaseButton
               variant="secondary"
               size="sm"
-              className="mb-3"
+              className="mb-2.5"
               onClick={addUrl}
               label={`+ ${translate('Add URL')}`}
             />
 
             {currentHomeportUrl && (
-              <small className="block mt-2 text-quaternary">
+              <small className="block mt-1.5 text-quaternary">
                 {translate('Current application origin: {url}', {
                   url: currentHomeportUrl,
                 })}
@@ -115,7 +123,7 @@ const AllowedRedirectsField = () => {
             )}
 
             {isEmpty && (
-              <div className="mt-3">
+              <div className="mt-2.5">
                 <AlertItem
                   type="floating"
                   variant="warning"
@@ -133,7 +141,7 @@ const AllowedRedirectsField = () => {
                 variant="error"
                 type="floating"
                 title={meta.error}
-                className="mt-2"
+                className="mt-1.5"
                 role="alert"
               />
             )}

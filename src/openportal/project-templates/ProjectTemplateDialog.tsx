@@ -188,7 +188,7 @@ export const ProjectTemplateDialog: React.FC<ProjectTemplateDialogProps> = ({
           <ModalDialog
             title={dialogTitle}
             footer={
-              <div className="mb-5 text-end">
+              <div className="mb-4 text-end">
                 <SubmitButton
                   submitting={submitting}
                   invalid={invalid || (isEdit && pristine)}

@@ -119,7 +119,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
 
   return (
     <>
-      <div className="flex gap-4">
+      <div className="flex gap-3">
         <Select
           options={SCRIPT_ROWS.slice(1)}
           value={script}
@@ -215,7 +215,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
                   </Link>
                 ) : (
                   <>
-                    <span className="inline-flex items-center gap-3">
+                    <span className="inline-flex items-center gap-2.5">
                       {option.type === 'environ' ? (
                         <KeyIcon size={20} weight="bold" />
                       ) : option.type === 'options' ? (
@@ -226,7 +226,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
                         <SlidersIcon size={20} weight="bold" />
                       )}
                       <span>{option.label}</span>
-                      <span className="text-quaternary ms-3">
+                      <span className="text-quaternary ms-2.5">
                         {option.type === 'environ'
                           ? 'ENV'
                           : option.type === 'options'

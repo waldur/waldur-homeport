@@ -126,9 +126,9 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
   if (loading) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <div className="text-center py-10">
+        <div className="text-center py-8">
           <Spinner animation="border" />
-          <p className="mt-4">
+          <p className="mt-3">
             {translate('Loading custom fields and priorities...')}
           </p>
         </div>
@@ -146,8 +146,8 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
-      <h4 className="mb-4">{translate('Field Mapping')}</h4>
-      <p className="text-quaternary mb-4">
+      <h4 className="mb-3">{translate('Field Mapping')}</h4>
+      <p className="text-quaternary mb-3">
         {translate(
           'Map Waldur fields to Atlassian custom fields. These mappings allow Waldur to automatically populate issue fields.',
         )}
@@ -274,7 +274,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           title={translate(
             'No custom fields found. You can skip this step and configure field mappings later.',
           )}
-          className="mt-4"
+          className="mt-3"
         />
       )}
     </WizardModal>

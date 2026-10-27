@@ -162,7 +162,7 @@ export const ConsumptionRecordsList: FunctionComponent<
 
 // Expandable row component
 const ConsumptionRecordDetail = ({ row }: { row: ArrowConsumptionRecord }) => (
-  <div className="p-4 border rounded">
+  <div className="p-3 border rounded">
     <div className="row">
       <div className="col-md-6">
         <table className="table table-sm table-borderless mb-0">

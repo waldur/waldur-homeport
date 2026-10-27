@@ -66,14 +66,14 @@ export const PlanSwitchModeExplanation: FC<PlanSwitchModeExplanationProps> = ({
         );
   return (
     <AlertItem
-      className="mt-4"
+      className="mt-3"
       variant="info"
       title={translate('Billing changes with this plan')}
       body={
         <>
-          <p className="mb-2">{summary}</p>
+          <p className="mb-1.5">{summary}</p>
           {usageToLimit && billedLimits.length > 0 && (
-            <ul className="mb-2">
+            <ul className="mb-1.5">
               {billedLimits.map((row) => (
                 <li key={row.name}>
                   {row.name}: {row.limit} {row.measured_unit}

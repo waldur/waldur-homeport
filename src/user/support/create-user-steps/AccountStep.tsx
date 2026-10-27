@@ -95,7 +95,7 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
         disabled={emailProps?.isProtected}
         description={emailProps?.tooltip}
       />
-      <h6 className="font-medium mb-4 mt-6">{translate('Roles & Status')}</h6>
+      <h6 className="font-medium mb-3 mt-5">{translate('Roles & Status')}</h6>
       <BooleanGroup
         name="is_active"
         type="checkbox"
@@ -140,10 +140,10 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
           'Designates whether the user is allowed to create and use personal access tokens.',
         )}
       />
-      <h6 className="font-medium mb-4 mt-6">
+      <h6 className="font-medium mb-3 mt-5">
         {translate('Password')}
         {editMode && (
-          <span className="ms-2">
+          <span className="ms-1.5">
             {user?.has_usable_password ? (
               <Badge
                 variant="success"
@@ -183,7 +183,7 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
               'Leave empty to keep the current password unchanged.',
             )}
           >
-            <div className="flex gap-2">
+            <div className="flex gap-1.5">
               <div className="grow">
                 <Field name="password">
                   {({ input, meta }) => (

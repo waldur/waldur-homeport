@@ -270,7 +270,7 @@ export const CreditBurnDownChart: FC<Props> = ({ data }) => {
   }
 
   return (
-    <div className="mt-6">
+    <div className="mt-5">
       <ChartBlock
         title={translate('Balance over time')}
         hint={
@@ -311,7 +311,7 @@ const ChartBlock: FC<{
   options: any;
 }> = ({ title, hint, options }) => (
   <>
-    <div className="flex items-center gap-2 mb-2">
+    <div className="flex items-center gap-1.5 mb-1.5">
       <h5 className="mb-0">{title}</h5>
       {hint && <HelpIcon label={hint} />}
     </div>

@@ -128,7 +128,7 @@ const Picker = () => {
 export const AllModes: Story = {
   render: () => (
     <ModalProvider>
-      <div className="p-6">
+      <div className="p-5">
         <Picker />
       </div>
       <ModalRoot />

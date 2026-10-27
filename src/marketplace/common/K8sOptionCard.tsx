@@ -29,10 +29,10 @@ export const K8sOptionCard: FC<PropsWithChildren<K8sOptionCardProps>> = ({
   error,
   children,
 }) => (
-  <div className="card card-bordered mb-5">
+  <div className="card card-bordered mb-4">
     <div className="card-body">
       {label && (
-        <div className="mb-5">
+        <div className="mb-4">
           <h5 className="mb-1">
             {label}
             {required && <span className="text-danger ms-1">*</span>}
@@ -41,7 +41,7 @@ export const K8sOptionCard: FC<PropsWithChildren<K8sOptionCardProps>> = ({
         </div>
       )}
       {error && (
-        <div className="mb-5">
+        <div className="mb-4">
           <FieldError error={error} />
         </div>
       )}

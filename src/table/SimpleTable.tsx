@@ -10,8 +10,7 @@ import {
 
 import { Column } from './types';
 
-// The main Table's cell box: 44px rows, ~10px gutters. Arbitrary values, not
-// px-2/py-0: Bootstrap's own .px-2/.py-0 are !important and would win.
+// The main Table's cell box: 44px rows, 10px gutters.
 const cell = 'h-[44px] px-[10px] py-[0px] align-middle';
 
 /**

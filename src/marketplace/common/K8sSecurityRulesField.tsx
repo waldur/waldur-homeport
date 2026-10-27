@@ -406,7 +406,7 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
             equalColWidth
             fullWidth
             cardBordered={false}
-            className="bg-secondary mt-n5 pb-0"
+            className="bg-secondary -mt-4 pb-0"
             rowActions={({ row }) => (
               <ActionsMenu>
                 <ActionItem

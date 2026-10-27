@@ -101,7 +101,7 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
   return (
     <>
       {oneTime.hasOneTimeCost && (
-        <div className="border-b-[1px] border-b-secondary mb-5">
+        <div className="border-b-[1px] border-b-secondary mb-4">
           {!shouldConcealPrices
             ? oneTimeRows.map((row, i) => (
                 <CheckoutPricingRow
@@ -123,7 +123,7 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
         </div>
       )}
       {periodic.hasPeriodicCost && (
-        <div className="border-b-[1px] border-b-secondary mb-5">
+        <div className="border-b-[1px] border-b-secondary mb-4">
           {!shouldConcealPrices && activeFixedPriceProfile
             ? periodic.fixedRows.map((row, i) => (
                 <CheckoutPricingRow
@@ -166,7 +166,7 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
         </div>
       )}
       {hasUsage && (
-        <div className="border-b-[1px] border-b-secondary mb-5">
+        <div className="border-b-[1px] border-b-secondary mb-4">
           {periodic.usageRows.map((row, i) => (
             <CheckoutPricingRow
               key={i}

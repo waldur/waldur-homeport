@@ -154,7 +154,7 @@ const SelectFormStep: FC<{
   placeholder: string;
 }> = ({ intro, label, options, value, onChange, placeholder }) => (
   <div className="aui-vm-order-block" data-has-actions="true">
-    <div className="aui-vm-order-intro mb-3">{intro}</div>
+    <div className="aui-vm-order-intro mb-2.5">{intro}</div>
     <div className="aui-vm-order-form">
       <div className="aui-vm-order-form-field">
         <label className="aui-vm-order-form-label">
@@ -328,12 +328,12 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
     return (
       <div className="aui-vm-order-block" data-has-actions="true">
         {/* Intro text */}
-        <div className="aui-vm-order-intro mb-3">
+        <div className="aui-vm-order-intro mb-2.5">
           {translate('Please select a flavor and image for your VM.')}
         </div>
 
         {/* Section heading */}
-        <h4 className="aui-vm-order-heading mb-3">
+        <h4 className="aui-vm-order-heading mb-2.5">
           {translate('Configure your VM:')}
         </h4>
 
@@ -346,7 +346,7 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
           network={block.network}
           ssh_key_name={block.ssh_key_name}
           system_volume_size={block.system_volume_size}
-          className="mb-4"
+          className="mb-3"
         />
 
         {/* No options available message */}
@@ -439,9 +439,9 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
           // Success state - use preview-style card
           <>
             {block.message && (
-              <div className="aui-vm-order-intro mb-3">{block.message}</div>
+              <div className="aui-vm-order-intro mb-2.5">{block.message}</div>
             )}
-            <h4 className="aui-vm-order-heading mb-3">
+            <h4 className="aui-vm-order-heading mb-2.5">
               {translate('VM order created successfully!')}
             </h4>
             {/* Preview-style card with avatar and badge */}
@@ -459,7 +459,7 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
             />
             {/* Order ID with copy button */}
             {block.order_id && (
-              <div className="aui-vm-order-id mt-3">
+              <div className="aui-vm-order-id mt-2.5">
                 <span className="aui-vm-order-id-label">
                   {translate('Order ID')}:
                 </span>
@@ -471,7 +471,7 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
                 </Link>
                 <CopyToClipboardButton
                   value={block.order_id}
-                  className="ms-2"
+                  className="ms-1.5"
                 />
               </div>
             )}
@@ -485,7 +485,7 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
   return (
     <div className="aui-vm-order-block" data-has-actions="true">
       {/* Section heading */}
-      <h4 className="aui-vm-order-heading mb-3">
+      <h4 className="aui-vm-order-heading mb-2.5">
         {translate('Here is the preview of changes:')}
       </h4>
 
@@ -502,7 +502,7 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
       />
 
       {/* Confirmation question */}
-      <div className="aui-vm-order-confirm mt-4">
+      <div className="aui-vm-order-confirm mt-3">
         {translate('Do you confirm these changes?')}
       </div>
     </div>

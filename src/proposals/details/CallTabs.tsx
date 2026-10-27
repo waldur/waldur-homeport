@@ -31,7 +31,7 @@ export const CallTabs = ({ call }: { call: Call }) => {
   return (
     <TabNav
       activeKey={state.name}
-      listClassName="mb-4"
+      listClassName="mb-3"
       items={[
         call.state !== 'active'
           ? {

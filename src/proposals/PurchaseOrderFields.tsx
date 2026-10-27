@@ -46,9 +46,9 @@ export const PurchaseOrderFields: FC<PurchaseOrderFieldsProps> = ({
     Boolean(values.attachment) || Boolean(existingAttachment);
 
   return (
-    <div className="mt-4">
+    <div className="mt-3">
       <div className="font-medium">{translate('Purchase order')}</div>
-      <div className="text-quaternary text-xs mb-4">
+      <div className="text-quaternary text-xs mb-3">
         {isRequired
           ? usesCallVocabulary()
             ? translate(
@@ -76,7 +76,7 @@ export const PurchaseOrderFields: FC<PurchaseOrderFieldsProps> = ({
         spaceless
       >
         {existingAttachment && !values.attachment ? (
-          <div className="mb-2">
+          <div className="mb-1.5">
             <a
               href={existingAttachment}
               target="_blank"

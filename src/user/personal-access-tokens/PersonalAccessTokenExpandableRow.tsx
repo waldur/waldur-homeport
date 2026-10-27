@@ -30,11 +30,11 @@ export const PersonalAccessTokenExpandableRow: FunctionComponent<{
   return (
     <ExpandableContainer>
       <p>
-        <b className="me-2">{translate('Permissions')}:</b>
+        <b className="me-1.5">{translate('Permissions')}:</b>
         {scopeLabels.length ? scopeLabels.join(', ') : renderFieldOrDash(null)}
       </p>
       <p>
-        <b className="me-2">{translate('Bound to')}:</b>
+        <b className="me-1.5">{translate('Bound to')}:</b>
         {bindings.length === 0
           ? translate('Unrestricted')
           : bindings
@@ -45,17 +45,17 @@ export const PersonalAccessTokenExpandableRow: FunctionComponent<{
               .join(', ')}
       </p>
       <p>
-        <b className="me-2">{translate('Last used from IP')}:</b>
+        <b className="me-1.5">{translate('Last used from IP')}:</b>
         {renderFieldOrDash(row.last_used_ip)}
       </p>
       <p>
-        <b className="me-2">{translate('Allowed networks')}:</b>
+        <b className="me-1.5">{translate('Allowed networks')}:</b>
         {row.allowed_networks?.length
           ? row.allowed_networks.join(', ')
           : translate('Unrestricted')}
       </p>
       <p>
-        <b className="me-2">{translate('Total usage count')}:</b>
+        <b className="me-1.5">{translate('Total usage count')}:</b>
         {renderFieldOrDash(row.use_count)}
       </p>
     </ExpandableContainer>

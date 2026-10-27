@@ -12,7 +12,7 @@ export const CommentActions: FC<{ comment: Comment }> = ({ comment }) => {
     return null;
   }
   return (
-    <div className="flex items-center flex-wrap gap-2 shrink-0">
+    <div className="flex items-center flex-wrap gap-1.5 shrink-0">
       {comment.update_is_available && <CommentEditButton comment={comment} />}
       {comment.destroy_is_available && (
         <CommentDeleteButton comment={comment} />

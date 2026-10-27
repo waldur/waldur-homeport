@@ -43,7 +43,7 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
   return (
     <FormTable.Card
       title={translate('Resource display options')}
-      className="card-bordered mb-7"
+      className="card-bordered mb-5.5"
     >
       <FormTable>
         <EditFieldProvider scope={props.offering} callback={update}>

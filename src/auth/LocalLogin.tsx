@@ -32,7 +32,7 @@ export const LocalLoginForm: FC<LocalLoginFormProps> = ({ onBack }) => (
     {onBack && (
       <BaseButton
         variant="text-secondary"
-        className="mt-2"
+        className="mt-1.5"
         onClick={onBack}
         iconNode={<ArrowLeftIcon weight="bold" />}
         label={translate('Back to all sign-in options')}

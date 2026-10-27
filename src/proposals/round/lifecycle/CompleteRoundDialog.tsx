@@ -38,7 +38,7 @@ const ProposalList: FC<{
   proposals: Outcome['rejected_proposals'];
   testId: string;
 }> = ({ proposals, testId }) => (
-  <ul className="mt-2" data-testid={testId}>
+  <ul className="mt-1.5" data-testid={testId}>
     {proposals.map((proposal) => (
       <li key={proposal.uuid}>{proposal.name}</li>
     ))}
@@ -157,7 +157,7 @@ export const CompleteRoundDialog: FC<CompleteRoundDialogProps> = ({
           </>
         }
       >
-        {refusalAlert ? <div className="mb-4">{refusalAlert}</div> : null}
+        {refusalAlert ? <div className="mb-3">{refusalAlert}</div> : null}
         {outcome.rejected_proposals.length ? (
           <>
             <p className="mb-0">

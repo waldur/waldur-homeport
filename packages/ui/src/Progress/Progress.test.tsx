@@ -84,8 +84,8 @@ describe('Progress', () => {
 
   it('sets the size and forwards the ref', () => {
     const ref = createRef<HTMLDivElement>();
-    render(<Progress ref={ref} value={10} size="xs" className="mt-2" />);
+    render(<Progress ref={ref} value={10} size="xs" className="mt-1.5" />);
     expect(ref.current).toHaveAttribute('data-size', 'xs');
-    expect(ref.current).toHaveClass('mt-2');
+    expect(ref.current).toHaveClass('mt-1.5');
   });
 });

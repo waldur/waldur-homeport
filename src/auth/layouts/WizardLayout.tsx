@@ -51,7 +51,7 @@ export const WizardLayout = () => {
             <BaseButton
               variant="primary"
               size="lg"
-              className="w-full mt-4"
+              className="w-full mt-3"
               onClick={() => setStep(hasSso && hasLocal ? 'method' : 'login')}
               label={translate('Get Started')}
             />
@@ -93,7 +93,7 @@ export const WizardLayout = () => {
             </div>
             <BaseButton
               variant="text-primary"
-              className="mt-3"
+              className="mt-2.5"
               onClick={() => setStep('welcome')}
               label={translate('Back')}
             />
@@ -126,7 +126,7 @@ export const WizardLayout = () => {
             <UserAuthWarning />
             <BaseButton
               variant="text-primary"
-              className="mt-3"
+              className="mt-2.5"
               onClick={() => setStep(hasSso && hasLocal ? 'method' : 'welcome')}
               label={translate('Back')}
             />
@@ -156,7 +156,7 @@ export const WizardLayout = () => {
       </div>
       <div className="layout-wizard-content">
         <div className="layout-wizard-card">
-          <div className="login-logo mb-3">
+          <div className="login-logo mb-2.5">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
               src={imageUrl}

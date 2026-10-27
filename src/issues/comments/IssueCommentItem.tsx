@@ -86,14 +86,14 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
     <TimelineItem>
       <TimelineConnector />
       <CommentAvatar comment={comment} />
-      <TimelineContent className="pb-6">
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4">
+      <TimelineContent className="pb-5">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1.5 sm:gap-4">
           <div className="min-w-0 flex-1">
             <div className="text-xs text-quaternary">
               <button
                 onClick={openUserDialog}
                 type="button"
-                className="text-btn text-secondary font-medium hover:text-brand text-sm me-3"
+                className="text-btn text-secondary font-medium hover:text-brand text-sm me-2.5"
               >
                 {comment.author_name}
               </button>

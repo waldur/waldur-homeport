@@ -33,7 +33,7 @@ export const Interactive: Story = {
   render: () => {
     const [enabled, setEnabled] = useState(false);
     return (
-      <div className="p-6 flex items-center gap-4">
+      <div className="p-5 flex items-center gap-3">
         <Switch checked={enabled} onCheckedChange={setEnabled} />
         <span className="text-sm font-medium text-primary">
           {enabled ? 'Enabled' : 'Disabled'}
@@ -49,8 +49,8 @@ export const InSettingsRow: Story = {
     const [twoFactor, setTwoFactor] = useState(false);
 
     return (
-      <div className="p-6 bg-[var(--page-bg)] max-w-md space-y-4">
-        <div className="flex items-center justify-between p-3 rounded-md border-[1px] border-secondary bg-[var(--card-bg)]">
+      <div className="p-5 bg-[var(--page-bg)] max-w-md space-y-4">
+        <div className="flex items-center justify-between p-2.5 rounded-md border-[1px] border-secondary bg-[var(--card-bg)]">
           <div>
             <div className="text-sm font-semibold text-primary">
               Email Notifications
@@ -62,7 +62,7 @@ export const InSettingsRow: Story = {
           <Switch checked={emailNotifs} onCheckedChange={setEmailNotifs} />
         </div>
 
-        <div className="flex items-center justify-between p-3 rounded-md border-[1px] border-secondary bg-[var(--card-bg)]">
+        <div className="flex items-center justify-between p-2.5 rounded-md border-[1px] border-secondary bg-[var(--card-bg)]">
           <div>
             <div className="text-sm font-semibold text-primary">
               Two-Factor Authentication
@@ -80,7 +80,7 @@ export const InSettingsRow: Story = {
 
 export const States: Story = {
   render: () => (
-    <div className="p-6 grid grid-cols-[auto_auto_auto] items-center gap-4 text-sm">
+    <div className="p-5 grid grid-cols-[auto_auto_auto] items-center gap-3 text-sm">
       <span />
       <span>md</span>
       <span>sm</span>
@@ -117,7 +117,7 @@ export const Labelled: Story = {
   render: () => {
     const [on, setOn] = useState(true);
     return (
-      <div className="p-6">
+      <div className="p-5">
         <Switch
           checked={on}
           onCheckedChange={setOn}

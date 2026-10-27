@@ -80,7 +80,7 @@ const InfoRow = ({
       <tr>
         <td className="pt-0 ps-0" colSpan={3}>
           <Progress
-            className="mb-5"
+            className="mb-4"
             max={max}
             segments={statistics.map((stat) => ({
               value: stat.count,
@@ -89,7 +89,7 @@ const InfoRow = ({
                 'neutral',
             }))}
           />
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {statistics.map((stat) => {
               const state = infoState.find((c) =>
                 c.states.includes(stat.state),
@@ -132,7 +132,7 @@ export const OfferingResourcesAndUsers: FC<OwnProps> = ({ offering }) => {
   return (
     <FormTable.Card
       title={translate('Resources & users')}
-      className="card-bordered mb-5"
+      className="card-bordered mb-4"
       headerClassName="min-h-[60px]"
     >
       <FormTable detailsMode className="gy-5">

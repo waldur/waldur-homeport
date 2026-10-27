@@ -45,10 +45,10 @@ export const ImportReviewTab = () => {
       />
 
       <div>
-        <label className="field-label text-secondary font-semibold mb-4">
+        <label className="field-label text-secondary font-semibold mb-3">
           {translate('Selected mappings')}:
         </label>
-        <table className="table align-middle table-row-bordered mb-3">
+        <table className="table align-middle table-row-bordered mb-2.5">
           <thead>
             <tr className="text-quaternary text-xs font-medium">
               <td>{translate('Remote category')}</td>

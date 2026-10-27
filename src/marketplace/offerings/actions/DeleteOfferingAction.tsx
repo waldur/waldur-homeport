@@ -68,7 +68,7 @@ export const DeleteOfferingAction: FC<DeleteOfferingActionProps> = ({
 
   return (
     <>
-      <div className="separator my-2" />
+      <div className="separator my-1.5" />
       <RemovalActionItem
         title={translate('Delete')}
         action={() => deleteOffering()}

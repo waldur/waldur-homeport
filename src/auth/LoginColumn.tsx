@@ -43,7 +43,7 @@ export const LoginColumn = () => {
       </div>
       <div className="login-body">
         <div className="login-grid-item-container">
-          <div className="login-logo mb-2">
+          <div className="login-logo mb-1.5">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
               src={imageUrl}

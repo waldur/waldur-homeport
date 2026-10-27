@@ -150,7 +150,7 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
       <div className="plan-details-container">
         {/* The bar is also where WarningTooltip lives — keep it in edit mode. */}
         {!props.viewMode && (
-          <div className="flex mb-2">
+          <div className="flex mb-1.5">
             <WarningTooltip />
           </div>
         )}

@@ -178,7 +178,7 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
               size="sm"
               shape="pill"
               tone="outline"
-              className="font-medium ms-2"
+              className="font-medium ms-1.5"
             >
               {translate('Agreement no:')} {customer.agreement_number}
             </Badge>
@@ -194,7 +194,7 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
       enableMultiSelect={user?.is_staff}
       multiSelectActions={InvoiceItemsBulkDelete}
       tableActions={<InvoiceDetailActions invoice={invoice} />}
-      expandableRowClassName="py-2 pe-2"
+      expandableRowClassName="py-1.5 pe-1.5"
       expandableRow={({ row }) => (
         <InvoiceItemExpandableRow
           row={row}

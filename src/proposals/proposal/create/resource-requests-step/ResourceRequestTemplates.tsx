@@ -61,7 +61,7 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
       {/* Off the table: the plan is a property of the template rather than
           something to compare rows by, and the column it held was pushing the
           cost and the purchase order behind a sideways scroll. */}
-      <Row className="text-sm mb-4">
+      <Row className="text-sm mb-3">
         <Col sm={6}>
           <Field
             label={translate('Plan')}
@@ -439,7 +439,7 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
             reviews={reviews}
             fieldName="comment_resource_requests"
             space={0}
-            className="mt-5"
+            className="mt-4"
           />
         </>
       }
@@ -492,7 +492,7 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
         <AlertItem
           type="floating"
           variant="warning"
-          className="mb-4"
+          className="mb-3"
           title={warning.title}
           body={warning.body}
         />

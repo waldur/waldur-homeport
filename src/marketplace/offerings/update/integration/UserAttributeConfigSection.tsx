@@ -22,7 +22,7 @@ const TITLE = (
         'Configure which user profile attributes are exposed to this service provider when users are provisioned. Exposed attributes become visible in the OfferingUser API responses.',
       )}
       size={24}
-      className="mx-2"
+      className="mx-1.5"
     />
   </>
 );

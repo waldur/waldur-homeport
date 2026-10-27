@@ -24,9 +24,9 @@ export const CeleryInfoPage = () => {
   // Early returns for loading and error states
   if (isLoading || !data) {
     return (
-      <div className="text-center py-10">
+      <div className="text-center py-8">
         <LoadingSpinner />
-        <p className="text-quaternary mt-4">
+        <p className="text-quaternary mt-3">
           {translate('Fetching Celery statistics, please standby...')}
         </p>
       </div>
@@ -45,12 +45,12 @@ export const CeleryInfoPage = () => {
   const hasWorkers = workers.length > 0;
 
   return (
-    <div className="pt-5">
+    <div className="pt-4">
       {!hasWorkers && (
         <AlertItem
           variant="warning"
           type="floating"
-          className="mb-6"
+          className="mb-5"
           title={translate('No Celery workers detected')}
           body={translate(
             'Celery may be down or not responding. Task queues and statistics are unavailable.',

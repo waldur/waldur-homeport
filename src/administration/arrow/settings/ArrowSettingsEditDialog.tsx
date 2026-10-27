@@ -156,7 +156,7 @@ export const ArrowSettingsEditDialog = ({
               <AlertItem
                 type="floating"
                 variant="error"
-                className="mb-4"
+                className="mb-3"
                 title={mutationError}
               />
             )}

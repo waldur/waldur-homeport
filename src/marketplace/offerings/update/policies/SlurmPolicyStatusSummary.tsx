@@ -39,8 +39,8 @@ export const SlurmPolicyStatusSummary: FC<SlurmPolicyStatusSummaryProps> = ({
 
   if (!data || data.length === 0) {
     return (
-      <Card className="mb-4 border-dashed border-divider-medium">
-        <Card.Body className="py-3">
+      <Card className="mb-3 border-dashed border-divider-medium">
+        <Card.Body className="py-2.5">
           <div className="text-quaternary text-center">
             {translate('No evaluations recorded yet.')}
           </div>
@@ -87,9 +87,9 @@ export const SlurmPolicyStatusSummary: FC<SlurmPolicyStatusSummaryProps> = ({
   };
 
   return (
-    <Card className="mb-4">
-      <Card.Body className="py-3">
-        <div className="flex flex-wrap gap-4 items-center">
+    <Card className="mb-3">
+      <Card.Body className="py-2.5">
+        <div className="flex flex-wrap gap-3 items-center">
           <div>
             <span className="text-quaternary small">
               {translate('Last evaluation')}

@@ -87,9 +87,9 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
   if (loading) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <div className="text-center py-10">
+        <div className="text-center py-8">
           <Spinner animation="border" />
-          <p className="mt-4">
+          <p className="mt-3">
             {translate('Discovering Service Desk projects...')}
           </p>
         </div>
@@ -121,14 +121,14 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
-      <h4 className="mb-4">{translate('Select Service Desk Project')}</h4>
-      <p className="text-quaternary mb-4">
+      <h4 className="mb-3">{translate('Select Service Desk Project')}</h4>
+      <p className="text-quaternary mb-3">
         {translate(
           'Select the Service Desk project that will be used for support tickets.',
         )}
       </p>
 
-      <div className="row g-3 mb-6">
+      <div className="row g-3 mb-5">
         {values.projects.map((project) => (
           <div key={project.id} className="col-md-6">
             <Card
@@ -142,7 +142,7 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
               <Card.Body>
                 <div className="flex items-start">
                   <Radio
-                    className="me-3"
+                    className="me-2.5"
                     aria-label={project.name}
                     checked={values.selectedProjectId === project.id}
                     onChange={() =>

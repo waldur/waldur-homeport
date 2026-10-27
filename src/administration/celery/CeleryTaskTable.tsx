@@ -53,7 +53,7 @@ const CopyButton = ({ value }: { value: string }) => {
     <BaseButton
       variant="secondary"
       size="sm"
-      className="ms-2"
+      className="ms-1.5"
       onClick={handleCopy}
       tooltip={translate('Copy to clipboard')}
       iconNode={<CopyIcon size={14} weight="bold" />}

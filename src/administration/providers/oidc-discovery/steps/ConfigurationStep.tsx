@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, useEffect } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
@@ -65,7 +66,12 @@ const AllowedRedirectsField: FC = () => {
 
               return (
                 <div key={index}>
-                  <div className={`flex gap-2 mb-${hasError ? '1' : '3'}`}>
+                  <div
+                    className={classNames(
+                      'flex gap-1.5',
+                      hasError ? 'mb-1' : 'mb-2.5',
+                    )}
+                  >
                     <BaseInputField
                       type="text"
                       containerClassName="flex-1"
@@ -82,7 +88,9 @@ const AllowedRedirectsField: FC = () => {
                     />
                   </div>
                   {hasError && (
-                    <small className="block text-danger mb-3">{urlError}</small>
+                    <small className="block text-danger mb-2.5">
+                      {urlError}
+                    </small>
                   )}
                 </div>
               );
@@ -91,13 +99,13 @@ const AllowedRedirectsField: FC = () => {
             <BaseButton
               variant="secondary"
               size="sm"
-              className="mb-3"
+              className="mb-2.5"
               onClick={addUrl}
               label={`+ ${translate('Add URL')}`}
             />
 
             {currentHomeportUrl && (
-              <small className="block mt-2 text-quaternary">
+              <small className="block mt-1.5 text-quaternary">
                 {translate('Current application origin: {url}', {
                   url: currentHomeportUrl,
                 })}
@@ -109,7 +117,7 @@ const AllowedRedirectsField: FC = () => {
                 variant="error"
                 type="floating"
                 title={meta.error}
-                className="mt-2"
+                className="mt-1.5"
                 role="alert"
               />
             )}
@@ -150,8 +158,8 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      <h4 className="mb-4">{translate('Provider Configuration')}</h4>
-      <p className="text-quaternary mb-4">
+      <h4 className="mb-3">{translate('Provider Configuration')}</h4>
+      <p className="text-quaternary mb-3">
         {translate('Configure additional settings for the identity provider.')}
       </p>
       <StringGroup

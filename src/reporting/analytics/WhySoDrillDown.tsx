@@ -118,7 +118,7 @@ const DrillDownRow: FC<{
         )}
         onClick={toggleExpand}
       >
-        <td className={classNames('flex items-center gap-2')}>
+        <td className={classNames('flex items-center gap-1.5')}>
           <div style={{ width: '20px' }} className="flex justify-center">
             {item.canDrillDown && (
               <CaretDownIcon
@@ -149,13 +149,13 @@ const DrillDownRow: FC<{
       {isExpanded && (
         <tr>
           <td colSpan={showChange ? 4 : 3} className="p-0 border-0">
-            <div className="ps-5 pt-0 pb-3 pe-4">
+            <div className="ps-4 pt-0 pb-2.5 pe-3">
               {isLoading ? (
-                <div className="py-4 text-center">
+                <div className="py-3 text-center">
                   <LoadingSpinner />
                 </div>
               ) : error ? (
-                <div className="py-2">
+                <div className="py-1.5">
                   <LoadingErred message={error} loadData={toggleExpand} />
                 </div>
               ) : childData && childDimension ? (
@@ -166,7 +166,7 @@ const DrillDownRow: FC<{
                   valueLabel={valueLabel}
                 />
               ) : (
-                <div className="py-2">
+                <div className="py-1.5">
                   <NoResult
                     title={translate('No details available')}
                     message={translate('No further breakdown for this item.')}
@@ -268,7 +268,7 @@ const WhySoDrillDownTable: FC<{
   };
 
   return (
-    <div className="expandable-container py-3">
+    <div className="expandable-container py-2.5">
       <Table
         hover
         responsive={isRoot}
@@ -343,9 +343,9 @@ export const WhySoDrillDown: FC<WhySoDrillDownProps> = ({
   return (
     <div>
       {/* Header with data source */}
-      <div className="flex justify-between items-center mb-4" />
+      <div className="flex justify-between items-center mb-3" />
 
-      <div className="mb-4">
+      <div className="mb-3">
         <Card className="card-bordered overflow-hidden">
           <WhySoDrillDownTable
             data={initialData}

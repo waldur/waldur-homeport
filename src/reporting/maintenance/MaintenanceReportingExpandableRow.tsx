@@ -48,14 +48,14 @@ export const MaintenanceReportingExpandableRow: FC<{
             </>
           }
           value={renderFieldOrDash(maintenance.internal_notes)}
-          space={5}
+          space={4}
         />
       )}
       {maintenance.message && (
         <Field
           label={translate('Message')}
           value={maintenance.message}
-          space={5}
+          space={4}
         />
       )}
       <Table<MaintenanceAnnouncementOffering>

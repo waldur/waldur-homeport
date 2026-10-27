@@ -56,7 +56,7 @@ export const IssueStatusList: FC = () => {
       columns={columns}
       hasQuery
       title={
-        <span className="flex items-center gap-2">
+        <span className="flex items-center gap-1.5">
           {translate('Issue status mapping')}
           <Tooltip
             label={translate(

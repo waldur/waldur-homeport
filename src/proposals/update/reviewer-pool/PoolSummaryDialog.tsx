@@ -119,7 +119,7 @@ export const PoolSummaryDialog: FC = () => {
       title={translate('How the Reviewer Pool Works')}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         {/* Overview */}
         <section>
           <AlertItem
@@ -134,13 +134,13 @@ export const PoolSummaryDialog: FC = () => {
 
         {/* Main Flow Diagram */}
         <section>
-          <h4 className="mb-4">{translate('Pool construction workflow')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Pool construction workflow')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Build your reviewer pool by finding experts and inviting them to participate. Only accepted pool members can receive proposal assignments.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart
               code={generatePoolWorkflowDiagram()}
               className="text-center"
@@ -150,11 +150,11 @@ export const PoolSummaryDialog: FC = () => {
 
         {/* Invitation Status */}
         <section>
-          <h4 className="mb-4">{translate('Invitation statuses')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Invitation statuses')}</h4>
+          <p className="text-quaternary mb-3">
             {translate('Pool invitations progress through these states:')}
           </p>
-          <div className="border rounded p-4 mb-4">
+          <div className="border rounded p-3 mb-3">
             <MermaidChart
               code={generateInvitationStatusDiagram()}
               className="text-center"
@@ -186,8 +186,8 @@ export const PoolSummaryDialog: FC = () => {
 
         {/* Tab Overview */}
         <section>
-          <h4 className="mb-4">{translate('Reviewer pool tabs')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Reviewer pool tabs')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Use these tabs to manage different aspects of the reviewer pool:',
             )}
@@ -214,8 +214,8 @@ export const PoolSummaryDialog: FC = () => {
 
         {/* Finding Reviewers */}
         <section>
-          <h4 className="mb-4">{translate('Finding reviewers')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Finding reviewers')}</h4>
+          <p className="text-quaternary mb-3">
             {translate('There are two ways to add reviewers to your pool:')}
           </p>
           <div className="row g-4">
@@ -260,7 +260,7 @@ export const PoolSummaryDialog: FC = () => {
 
         {/* Tips */}
         <section>
-          <h4 className="mb-4">{translate('Tips')}</h4>
+          <h4 className="mb-3">{translate('Tips')}</h4>
           <ul className="mb-0">
             <li>
               {translate(

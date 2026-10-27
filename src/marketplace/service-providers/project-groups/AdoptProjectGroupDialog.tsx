@@ -122,7 +122,7 @@ const SelectedProjectGroup: FC<{ providerUuid: string }> = ({
         input.value ? (
           <AlertItem
             variant="warning"
-            className="mb-4"
+            className="mb-3"
             data-testid="existing-group"
             title={existingGroupMessage(input.value)}
           />
@@ -220,7 +220,7 @@ export const AdoptProjectGroupDialog: FC<AdoptProjectGroupDialogProps> = ({
               )}
             </p>
             {submitError && !dirtySinceLastSubmit && (
-              <AlertItem variant="error" title={submitError} className="mb-4" />
+              <AlertItem variant="error" title={submitError} className="mb-3" />
             )}
             {user.is_staff && (
               <Switch
@@ -231,7 +231,7 @@ export const AdoptProjectGroupDialog: FC<AdoptProjectGroupDialogProps> = ({
                   form.change('project', undefined);
                 }}
                 disabled={submitting}
-                className="mb-2"
+                className="mb-1.5"
                 label={translate(
                   'Show all projects, not only those using this service provider',
                 )}

@@ -50,7 +50,7 @@ export const ResourcesGeographyPage: FC = () => {
 
       <ResourcesGeographySummaryCards summary={summary} />
 
-      <Row className="g-5 mb-5">
+      <Row className="g-5 mb-4">
         <Col xs={12} lg={6}>
           <ResourcesByCountryChart data={data.byCountry} />
         </Col>

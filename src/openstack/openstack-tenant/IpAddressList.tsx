@@ -58,7 +58,7 @@ export const IpAddressList: React.FC<any> = ({
           responsive={true}
           bordered={true}
           striped={true}
-          className="mt-3"
+          className="mt-2.5"
         >
           <thead>
             <tr>

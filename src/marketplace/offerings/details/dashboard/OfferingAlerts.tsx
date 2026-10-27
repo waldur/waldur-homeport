@@ -38,7 +38,7 @@ const mandatoryFields: Array<keyof SiteAgentLog> = [
 const ExpandableRow: FC<{ row: SiteAgentLog }> = ({ row }) => (
   <ExpandableContainer>
     <p>
-      <b className="me-2">{translate('Message')}:</b>
+      <b className="me-1.5">{translate('Message')}:</b>
       {row.message}
     </p>
   </ExpandableContainer>
@@ -63,7 +63,7 @@ export const OfferingAlerts: FC<OwnProps> = ({ offering }) => {
       showPageSizeSelector
       title={translate('Agent logs')}
       verboseName={translate('Agent log')}
-      className="mb-5"
+      className="mb-4"
       headerClassName="min-h-[60px]"
       fullWidth
       expandableRow={ExpandableRow}

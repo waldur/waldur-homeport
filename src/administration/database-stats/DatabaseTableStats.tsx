@@ -19,7 +19,7 @@ export const DatabaseTableStats: FC<DatabaseTableStatsProps> = ({ data }) => {
       title={translate('Largest tables')}
       subtitle={translate('Top {count} tables by size', { count: data.length })}
       defaultOpen
-      className="mb-6"
+      className="mb-5"
     >
       <Table hover className="table-row-bordered align-middle mb-0">
         <thead>

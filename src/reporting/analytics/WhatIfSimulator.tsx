@@ -82,7 +82,7 @@ const ParamInput: FC<{
     const max = param.max ?? 100;
 
     return (
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2.5">
         <RangeInput
           value={numValue}
           min={min}
@@ -155,7 +155,7 @@ const ResultRow: FC<{ result: SimulationResult }> = ({ result }) => {
   const isNegative = result.change < 0;
 
   return (
-    <div className="row items-center py-3">
+    <div className="row items-center py-2.5">
       {/* Column 1: Label */}
       <div className="col-4">
         <span>{result.label}</span>
@@ -165,7 +165,7 @@ const ResultRow: FC<{ result: SimulationResult }> = ({ result }) => {
       </div>
 
       {/* Column 2: Values */}
-      <div className="col-5 flex items-center gap-2 text-quaternary">
+      <div className="col-5 flex items-center gap-1.5 text-quaternary">
         <span>{result.originalValue.toLocaleString()}</span>
         <span>&rarr;</span>
         <span className="text-primary">
@@ -210,7 +210,7 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
   return (
     <div>
       {/* Data source indicator */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-3">
         <h6 className="mb-0">
           {translate('Scenario parameters')}
           {hasChanges && (
@@ -219,7 +219,7 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
                 size={16}
                 weight="bold"
                 onClick={resetParams}
-                className="ms-2"
+                className="ms-1.5"
               />
             </Tooltip>
           )}
@@ -230,8 +230,8 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
         <Col>
           {/* Parameter inputs */}
           {params.map((param) => (
-            <FormField key={param.id} className="mb-3">
-              <div className="flex items-center gap-2 mb-2">
+            <FormField key={param.id} className="mb-2.5">
+              <div className="flex items-center gap-1.5 mb-1.5">
                 <FormLabel className="mb-0">{param.label}</FormLabel>
                 {param.description && <HelpIcon label={param.description} />}
               </div>
@@ -247,7 +247,7 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
           {/* Results */}
           {results.length > 0 && (
             <>
-              <h6 className="mb-3">{translate('Projected impact')}</h6>
+              <h6 className="mb-2.5">{translate('Projected impact')}</h6>
               {results.map((result) => (
                 <ResultRow key={result.id} result={result} />
               ))}

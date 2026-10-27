@@ -40,7 +40,7 @@ export const CallDurationPolicy: FC<{
   return (
     <>
       <span>{formatProjectDuration({ days })}</span>
-      <span className="text-quaternary ms-2">
+      <span className="text-quaternary ms-1.5">
         {cap
           ? translate('Prepaid subscriptions {cap}.', {
               cap: formatPrepaidMonthsCap(cap),

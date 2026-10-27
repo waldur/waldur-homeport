@@ -35,7 +35,7 @@ interface MonthOverviewProps {
 const OverviewItemTr = ({ title, value }) => {
   return (
     <tr>
-      <td className="text-decoration-underline w-full py-3">{title}</td>
+      <td className="text-decoration-underline w-full py-2.5">{title}</td>
       <td className="text-quaternary text-nowrap">{value}</td>
     </tr>
   );
@@ -87,9 +87,9 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
               <div className="flex items-center">
                 <div className="text-start">
                   <EstimatedCost />
-                  <h4 className="mb-4">{date}</h4>
+                  <h4 className="mb-3">{date}</h4>
                 </div>
-                <span className="text-primary ms-4 inline-flex items-center">
+                <span className="text-primary ms-3 inline-flex items-center">
                   {costTrend === -1 ? (
                     <ArrowDownIcon size={20} weight="bold" />
                   ) : costTrend === 1 ? (
@@ -100,7 +100,7 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
                 </span>
               </div>
             ) : (
-              <h2 className="mb-6">{date}</h2>
+              <h2 className="mb-5">{date}</h2>
             )}
             <table className="text-xs">
               <tbody>

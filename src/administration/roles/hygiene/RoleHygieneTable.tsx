@@ -92,7 +92,7 @@ export const RoleHygieneTable = ({
             size="sm"
             shape="pill"
             tone="outline"
-            className="ms-2"
+            className="ms-1.5"
           >
             {count(tab.value)}
           </Badge>

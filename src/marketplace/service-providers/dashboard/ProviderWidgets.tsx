@@ -125,7 +125,7 @@ const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
     params={item.to.params}
     className="card-bordered grow min-h-[225px] hover:border-[var(--border-brand)]"
   >
-    <Card.Body className="py-10 px-6">
+    <Card.Body className="py-8 px-5">
       {item.iconNode && (
         <span
           className={classNames(
@@ -136,8 +136,8 @@ const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
           {item.iconNode}
         </span>
       )}
-      <h1 className="display-6 text-nowrap mb-0 mt-2">{item.value}</h1>
-      <p className="text-xs font-semibold mb-5 h-[40px] text-primary">
+      <h1 className="display-6 text-nowrap mb-0 mt-1.5">{item.value}</h1>
+      <p className="text-xs font-semibold mb-4 h-[40px] text-primary">
         {item.title}
       </p>
       <ChangesAmountBadge changes={item.changes} />
@@ -180,7 +180,7 @@ export const ProviderWidgets = ({ provider }) => {
         <>{translate('Unable to load data')}</>
       ) : (
         (value as ProviderWidget[]).map((item, i) => (
-          <Col key={i} xs={6} md={3} lg={6} xxl={3} className="mb-5">
+          <Col key={i} xs={6} md={3} lg={6} xxl={3} className="mb-4">
             <WidgetItem item={item} />
           </Col>
         ))

@@ -65,7 +65,7 @@ export const BookingResourcesCalendar: FunctionComponent<
   };
 
   return (
-    <Row className="booking-resource-items-calendar mb-10">
+    <Row className="booking-resource-items-calendar mb-8">
       <Col md="auto">
         <Calendar
           mode="single"
@@ -80,7 +80,7 @@ export const BookingResourcesCalendar: FunctionComponent<
         />
       </Col>
       {dates && dates[0] ? (
-        <Col className="p-4 flex flex-col">
+        <Col className="p-3 flex flex-col">
           <h2 className="font-medium">
             {parseDate(dates[0]).toFormat('dd LLLL yyyy')}
           </h2>
@@ -110,12 +110,12 @@ export const BookingResourcesCalendar: FunctionComponent<
           </div>
         </Col>
       ) : (
-        <Col className="p-4 text-center">
-          <div className="pt-10 pb-5">
+        <Col className="p-3 text-center">
+          <div className="pt-8 pb-4">
             <CalendarIcon className="display-5" weight="bold" />
           </div>
-          <div className="pb-15 font-medium">
-            <h3 className="text-tertiary text-base mb-2">
+          <div className="pb-12 font-medium">
+            <h3 className="text-tertiary text-base mb-1.5">
               {translate('Select a date')}
             </h3>
           </div>

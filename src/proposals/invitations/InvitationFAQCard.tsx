@@ -36,15 +36,15 @@ export const InvitationFAQCard: FC = () => {
     <AccordionCard
       title={translate('Frequently asked questions')}
       defaultOpen
-      className="mb-6"
+      className="mb-5"
     >
       <Accordion type="multiple" defaultValue={[questions[0].question]}>
         {questions.map(({ question, answer }) => (
           <AccordionItem key={question} value={question}>
-            <AccordionTrigger className="px-0 py-4 hover:bg-transparent data-[state=open]:bg-transparent">
+            <AccordionTrigger className="px-0 py-3 hover:bg-transparent data-[state=open]:bg-transparent">
               {question}
             </AccordionTrigger>
-            <AccordionContent className="px-0 pt-0 pb-4 text-quaternary">
+            <AccordionContent className="px-0 pt-0 pb-3 text-quaternary">
               {answer}
             </AccordionContent>
           </AccordionItem>

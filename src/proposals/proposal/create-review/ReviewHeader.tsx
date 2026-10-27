@@ -36,7 +36,7 @@ export const ReviewHeader = ({
       title={proposal.name}
       slug={proposal.slug}
       badge={
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-1.5 flex-wrap">
           <Badge variant={variant} shape="pill" tone="outline">
             {formatReviewState(review.state)}
           </Badge>

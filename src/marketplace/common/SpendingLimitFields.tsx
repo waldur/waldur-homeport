@@ -188,11 +188,11 @@ export const SpendingLimitFields: FC<{
     {components.map((component) => (
       <div
         key={component.type}
-        className="mb-5 last:mb-0"
+        className="mb-4 last:mb-0"
         data-testid={`spending-limits-${component.type}`}
       >
         {(showNames || components.length > 1) && (
-          <h6 className="mb-2 text-sm font-medium text-primary">
+          <h6 className="mb-1.5 text-sm font-medium text-primary">
             {component.name}
           </h6>
         )}

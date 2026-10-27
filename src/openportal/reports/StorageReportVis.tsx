@@ -153,7 +153,7 @@ export const StorageReportVis: FC<Props> = ({
 
   if (!report) {
     return (
-      <div className="text-quaternary p-4">
+      <div className="text-quaternary p-3">
         {translate('No storage data available.')}
       </div>
     );
@@ -172,7 +172,7 @@ export const StorageReportVis: FC<Props> = ({
   return (
     <div>
       {/* ── Row 1: summary + downloads ───────────────────────────────── */}
-      <div className="flex items-center gap-3 mb-2 flex-wrap">
+      <div className="flex items-center gap-2.5 mb-1.5 flex-wrap">
         <span className="text-quaternary small">
           {translate(
             '{destination} · {numUsers} {user} · {numProjects} {project} · Last generated {date}',
@@ -189,13 +189,13 @@ export const StorageReportVis: FC<Props> = ({
             },
           )}
           {report.isEmpty && (
-            <Badge variant="secondary" tone="outline" className="ms-2">
+            <Badge variant="secondary" tone="outline" className="ms-1.5">
               {translate('Empty')}
             </Badge>
           )}
         </span>
 
-        <div className="flex gap-2 ms-auto">
+        <div className="flex gap-1.5 ms-auto">
           <Tooltip label={translate('Download Excel')}>
             <button
               type="button"
@@ -230,7 +230,7 @@ export const StorageReportVis: FC<Props> = ({
           </Tooltip>
         </div>
         {excelProgress && (
-          <span className="text-quaternary small ms-2">
+          <span className="text-quaternary small ms-1.5">
             {translate('Preparing Excel — sheet {current} of {total}…', {
               current: excelProgress.current,
               total: excelProgress.total,
@@ -240,7 +240,7 @@ export const StorageReportVis: FC<Props> = ({
       </div>
 
       {/* ── Row 2: toggle controls ────────────────────────────────────── */}
-      <div className="flex items-center gap-2 mb-3 flex-wrap">
+      <div className="flex items-center gap-1.5 mb-2.5 flex-wrap">
         {/* Chart type */}
         <SegmentedControl<ChartView>
           aria-label={translate('Chart type')}

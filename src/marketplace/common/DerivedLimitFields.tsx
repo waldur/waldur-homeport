@@ -37,7 +37,7 @@ const DerivedQuantities = ({
     <FormText
       as="div"
       variant="muted"
-      className="flex flex-col gap-1 mt-2 mb-0"
+      className="flex flex-col gap-1 mt-1.5 mb-0"
     >
       {types.map((type) => {
         const component = components[type];

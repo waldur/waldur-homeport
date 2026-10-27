@@ -40,7 +40,7 @@ export const Default: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2.5">
       <Tag size="sm">Small (12px / sm)</Tag>
       <Tag>Default (14px / base)</Tag>
       <Tag size="lg">Large (14px / lg padding)</Tag>
@@ -50,7 +50,7 @@ export const Sizes: Story = {
 
 export const Clearable: Story = {
   render: () => (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2.5">
       <Tag size="sm" onClear={fn()} clearLabel="Remove small tag">
         Small Clearable
       </Tag>
@@ -66,7 +66,7 @@ export const Clearable: Story = {
 
 export const Clickable: Story = {
   render: () => (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2.5">
       <Tag size="sm" onClick={fn()}>
         Clickable small
       </Tag>
@@ -80,7 +80,7 @@ export const Clickable: Story = {
 
 export const WithIcon: Story = {
   render: () => (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2.5">
       <Tag size="sm">
         <TagIcon size={12} weight="bold" />
         Filter tag

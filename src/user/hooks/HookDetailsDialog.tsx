@@ -159,7 +159,7 @@ export const HookDetailsDialog: FunctionComponent<{
                   </FormGroup>
                 ) : (
                   <>
-                    <p className="mb-5 flex gap-1 text-sm">
+                    <p className="mb-4 flex gap-1 text-sm">
                       <span className="font-medium text-secondary">
                         {translate('Notification method')}:
                       </span>
@@ -179,7 +179,7 @@ export const HookDetailsDialog: FunctionComponent<{
                     type="email"
                     validate={required}
                     data-testid="email-address"
-                    space={2}
+                    space={1.5}
                     label={translate('Email address')}
                     required
                   />
@@ -189,7 +189,7 @@ export const HookDetailsDialog: FunctionComponent<{
                     type="url"
                     validate={required}
                     data-testid="destination-url"
-                    space={2}
+                    space={1.5}
                     label={translate('Destination URL')}
                     required
                   />

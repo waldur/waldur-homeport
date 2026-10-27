@@ -154,7 +154,7 @@ const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
     <Menu open={open} onOpenChange={setOpen} openOnHover="desktop">
       <li
         data-testid={tabTestId(parentTab)}
-        className="flex items-center me-0 me-lg-2"
+        className="flex items-center me-0 lg:me-1.5"
       >
         <Menu.Trigger asChild>
           <button
@@ -175,7 +175,7 @@ const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
       </li>
       <Menu.Content
         align="start"
-        className="font-semibold text-sm py-2 w-[200px]"
+        className="font-semibold text-sm py-1.5 w-[200px]"
         onKeyDown={handleContentKeyDown}
         onCloseAutoFocus={handleCloseAutoFocus}
       >

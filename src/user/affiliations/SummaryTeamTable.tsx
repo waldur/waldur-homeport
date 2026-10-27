@@ -94,7 +94,7 @@ export const SummaryTeamTable: FC<OwnProps> = ({
         {
           title: translate('Member'),
           render: ({ row }) => (
-            <div className="content-wrapper gap-2">
+            <div className="content-wrapper gap-1.5">
               <Avatar
                 src={getValue(row, 'image')}
                 name={getValue(row, 'full_name')}

@@ -19,11 +19,11 @@ export const ConnectionStep: FC<WizardStepProps> = (props) => {
           title={translate('Re-discovering settings for: {label}', {
             label: existingProvider.label || existingProvider.provider,
           })}
-          className="mb-4"
+          className="mb-3"
         />
       )}
-      <div className="mb-6">
-        <h4 className="mb-4">{translate('OIDC Connection Settings')}</h4>
+      <div className="mb-5">
+        <h4 className="mb-3">{translate('OIDC Connection Settings')}</h4>
 
         <StringGroup
           name="discovery_url"

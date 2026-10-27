@@ -80,7 +80,7 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
         ) : undefined
       }
     >
-      <FormField className="mb-2">
+      <FormField className="mb-1.5">
         <FormLabel>{translate('Key')}</FormLabel>
         {ready ? (
           <Stack gap={2} direction="horizontal">
@@ -100,7 +100,7 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
             {translate('Unable to reveal the API key.')}
           </div>
         ) : (
-          <div className="flex items-center gap-2 text-quaternary">
+          <div className="flex items-center gap-1.5 text-quaternary">
             <LoadingSpinnerSimple /> {translate('Revealing…')}
           </div>
         )}

@@ -23,7 +23,7 @@ export const PublicOfferingQoS: FunctionComponent<PublicOfferingQoSProps> = ({
   });
 
   return (
-    <Row className="mb-10" id="qos-profiles">
+    <Row className="mb-8" id="qos-profiles">
       <Col sm={12} md>
         <Table<NestedQoS>
           {...tableProps}

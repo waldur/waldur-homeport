@@ -70,7 +70,7 @@ export const TechnicalAssessmentSection: FC<
           : translate('Feasibility decisions from the service provider.')
       }
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         {groups.map((group) => {
           const decision = group.answers.find(
             (answer) => answer.question_type === 'single_select',
@@ -99,7 +99,7 @@ export const TechnicalAssessmentSection: FC<
                 .map((comment) => (
                   <p
                     key={comment.question_uuid}
-                    className="mb-0 mt-2 font-normal text-primary"
+                    className="mb-0 mt-1.5 font-normal text-primary"
                   >
                     {comment.answer_display}
                   </p>

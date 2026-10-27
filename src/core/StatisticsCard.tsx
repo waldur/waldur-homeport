@@ -15,7 +15,7 @@ export const StatisticsCard: React.FC<StatisticsCardProps> = ({
   value,
   to,
 }) => (
-  <Card className="card-bordered mb-5">
+  <Card className="card-bordered mb-4">
     <Card.Body className="flex md:block justify-between items-center">
       {to && (
         <div className="text-end order-2">
@@ -24,9 +24,9 @@ export const StatisticsCard: React.FC<StatisticsCardProps> = ({
           </Link>
         </div>
       )}
-      <div className="mb-4 order-1">
+      <div className="mb-3 order-1">
         <strong className="block display-4 text-success">{value}</strong>
-        <strong className="block mb-2">{title}</strong>
+        <strong className="block mb-1.5">{title}</strong>
       </div>
     </Card.Body>
   </Card>

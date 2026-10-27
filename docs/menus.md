@@ -421,7 +421,7 @@ For an element that must look like a row without being one (a custom picker row)
 
 - **Default alignment.** Radix's `align` defaults to `center`. Menus that grew from a trigger's start edge must say `align="start"`.
 - **Which side.** `ActionsMenu` (and `ActionsDropdown`) open to the left, aligned to the start; pass `side="bottom"` for a menu under a toolbar or "Add" button. `Menu` panels default to `side="bottom"`. A submenu's side is chosen by Radix (right, flipping left near the edge); only its `align` is yours.
-- **Bootstrap `!important` utilities.** In the main app, Bootstrap spacing classes (`py-4`, `p-0`, `mb-2`) are `!important` and beat Tailwind spacing. The menu surfaces reset their own spacing with `m-[0px] p-[0px]`, not `m-0`/`p-0`, for that reason. Prefer one system per property on a panel.
+- **Spacing on a panel.** The menu surfaces reset their own margin and padding (`m-[0px] p-[0px]`); a `py-*` or `my-*` in the panel's `className` replaces it.
 - **tailwind-merge and `text-anchor`.** `cn()` reads `text-anchor` and `text-primary` as two colours and drops the first. Put such classes on the `asChild` child, where Radix's Slot joins class names without merging (`ResourceAccessButton.tsx`).
 - **`Link` and plain strings.** The app's `Link` gives a bare string child the `text-anchor` link style, which replaces the row colour. `NavMenuLink` wraps the label in a `<span>` for this reason; do the same if you compose `Link` yourself.
 - **Hover-opened menus and clicks.** A click on a trigger that hover already opened would close it twice over (trigger toggle, outside press). `openOnHover` handles this; don't wire hover by hand.

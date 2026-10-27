@@ -84,7 +84,7 @@ export const CategoryPage: FunctionComponent = () => {
     <CardStyleProvider cardStyle={cardStyle}>
       <MarketplaceScopeBar />
       <HeroSection item={category.data} />
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-6')}>
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-5')}>
         <CategoryOfferingsList category={category.data} />
       </div>
     </CardStyleProvider>

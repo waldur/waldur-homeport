@@ -95,7 +95,7 @@ export const CategoryGroupPage: FunctionComponent = () => {
     <CardStyleProvider cardStyle={cardStyle}>
       <MarketplaceScopeBar />
       <HeroSection item={queryResult.data} />
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-6')}>
+      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-5')}>
         <CategoryGroupOfferingsList categoryGroup={queryResult.data} />
       </div>
     </CardStyleProvider>

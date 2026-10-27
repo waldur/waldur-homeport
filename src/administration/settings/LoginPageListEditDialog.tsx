@@ -56,8 +56,8 @@ const StatsEditor: FC<{
   return (
     <div>
       {items.map((item, index) => (
-        <div key={index} className="mb-3">
-          <div className="flex gap-2">
+        <div key={index} className="mb-2.5">
+          <div className="flex gap-1.5">
             <BaseInputField
               containerClassName="flex-1"
 
@@ -111,12 +111,12 @@ const CarouselSlidesEditor: FC<{
   return (
     <div>
       {items.map((item, index) => (
-        <div key={index} className="mb-3">
-          <FormField className="mb-2">
+        <div key={index} className="mb-2.5">
+          <FormField className="mb-1.5">
             <FormLabel className="text-xs text-quaternary mb-1">
               {translate('Title')}
             </FormLabel>
-            <div className="flex gap-2">
+            <div className="flex gap-1.5">
               <BaseInputField
                 containerClassName="flex-1"
 
@@ -142,7 +142,7 @@ const CarouselSlidesEditor: FC<{
               placeholder={translate('e.g., Get started with cloud resources')}
             />
           </FormField>
-          {index < items.length - 1 && <hr className="my-4" />}
+          {index < items.length - 1 && <hr className="my-3" />}
         </div>
       ))}
       <BaseButton
@@ -177,12 +177,12 @@ const NewsItemsEditor: FC<{
   return (
     <div>
       {items.map((item, index) => (
-        <div key={index} className="mb-3">
-          <FormField className="mb-2">
+        <div key={index} className="mb-2.5">
+          <FormField className="mb-1.5">
             <FormLabel className="text-xs text-quaternary mb-1">
               {translate('Title')}
             </FormLabel>
-            <div className="flex gap-2">
+            <div className="flex gap-1.5">
               <BaseInputField
                 containerClassName="flex-1"
 
@@ -196,7 +196,7 @@ const NewsItemsEditor: FC<{
               />
             </div>
           </FormField>
-          <div className="flex gap-2 mb-2">
+          <div className="flex gap-1.5 mb-1.5">
             <FormField style={{ width: '120px' }}>
               <FormLabel className="text-xs text-quaternary mb-1">
                 {translate('Date')}
@@ -237,7 +237,7 @@ const NewsItemsEditor: FC<{
               placeholder={translate('Brief description of the news item...')}
             />
           </FormField>
-          {index < items.length - 1 && <hr className="my-4" />}
+          {index < items.length - 1 && <hr className="my-3" />}
         </div>
       ))}
       <BaseButton
@@ -305,7 +305,7 @@ export const LoginPageListEditDialog: FC<LoginPageListEditDialogProps> = ({
         </>
       }
     >
-      <p className="text-quaternary mb-3">{item.description}</p>
+      <p className="text-quaternary mb-2.5">{item.description}</p>
       {renderEditor()}
     </ModalDialog>
   );

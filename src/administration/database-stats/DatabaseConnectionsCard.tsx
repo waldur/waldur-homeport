@@ -33,11 +33,11 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
         percent: data.utilization_percent.toFixed(1),
       })}
       defaultOpen={health !== 'success'}
-      className="mb-6"
+      className="mb-5"
     >
       <Row>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-3">
+          <h6 className="text-uppercase text-quaternary mb-2.5">
             {translate('Connection breakdown')}
           </h6>
           <Table size="sm" borderless className="mb-0">
@@ -72,12 +72,12 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
           </Table>
         </Col>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-3">
+          <h6 className="text-uppercase text-quaternary mb-2.5">
             {translate('Utilization')}
           </h6>
           <Progress
             size="lg"
-            className="mb-3"
+            className="mb-2.5"
             label={translate('Connections')}
             segments={[
               {

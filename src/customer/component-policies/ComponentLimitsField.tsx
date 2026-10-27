@@ -135,7 +135,7 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
 };
 
 export const ComponentLimitsField = ({ components }) => (
-  <FormFieldset className="mb-7">
+  <FormFieldset className="mb-5.5">
     <FormLegend required>
       {translate('When component limits reaches')}
     </FormLegend>

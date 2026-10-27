@@ -363,6 +363,42 @@ One scale, the five weights `fonts.css` loads (Inter 300–700), declared in
   element, drop the weight from the rule, or, if the rule is right for everything else it
   matches, use the important modifier on that element (`font-normal!`) with a comment.
 
+## Spacing
+
+One scale: Tailwind's, with `--spacing` pinned to `4px` in `primitives/spacing.css`, so
+`gap-3` is 12px and `mb-1.5` is 6px at any root font size.
+
+Bootstrap generates no margin, padding or gap utility (#477). Its `.m*-*`, `.p*-*` and `.gap-*`
+used Tailwind's names (`mb-4`, `p-3`, `gap-2`) for its own steps (`$spacers`, rem against the
+13px root, with an irregular step 4) and were `!important`, so every spacing class rendered
+Bootstrap's value. `scripts/codemods/bootstrap-spacing.mjs` rewrote each use to the nearest half
+Tailwind step (`SPACER_TO_TAILWIND` in `packages/eslint-plugin-waldur/rules/bootstrap-spacing.js`):
+
+| Bootstrap step | At 13px root | Tailwind | Bootstrap step | At 13px root | Tailwind |
+| -------------- | ------------ | -------- | -------------- | ------------ | -------- |
+| `1`            | 3.25px       | `1`      | `8`            | 24px         | `6`      |
+| `2`            | 6.5px        | `1.5`    | `9`            | 29.25px      | `7.5`    |
+| `3`            | 9.75px       | `2.5`    | `10`           | 32.5px       | `8`      |
+| `4`            | 12px         | `3`      | `12`           | 39px         | `10`     |
+| `5`            | 16.25px      | `4`      | `15`           | 48.75px      | `12`     |
+| `6`            | 20px         | `5`      | `20`           | 65px         | `16`     |
+| `7`            | 22px         | `5.5`    | `8px`          | 8px          | `2`      |
+
+- **Write Tailwind's step**: `mb-3` is 12px. A step from older code or a Bootstrap-era design
+  note is not the same size under the same name: Bootstrap's `mb-4` is Tailwind's `mb-3`.
+- **No Bootstrap-only spellings**: `mb-md-4` is `md:mb-3`, `mt-n2` is `-mt-1.5`, `gap-8px` is
+  `gap-2`. `no-retired-bootstrap-utility` reports them with the class to use.
+- **No arbitrary `[6.5px]`** to reproduce a Bootstrap step: use the nearest Tailwind step.
+- **No runtime class names.** Tailwind generates only the names it finds in source, so
+  `` `mb-${space}` `` styles nothing. Look the class up in a map of literals, as `FormGroup`'s
+  `space` does (`SPACE_CLASSES` in `waldur-form`; `space` is a Tailwind step).
+- **Mobile:** below `md` the root drops to 12px, so Bootstrap's rem steps shrank by about 8% there;
+  Tailwind's px steps do not. Spacing follows the tokens: the difference is at most about 2.5px.
+- **A spacing class now loses where Bootstrap's `!important` used to win**: to an unlayered
+  stylesheet rule on the same element (a component `.scss` imported from TSX) and to an inline
+  `style`. Set the spacing in one place.
+- `$spacers` is left only for the grid gutters (`.g-*`), which go with `Row`/`Col` (#475).
+
 ## Corner radius
 
 All corner radius steps are pinned to physical pixels in `primitives/radius.css` (`@theme static`)

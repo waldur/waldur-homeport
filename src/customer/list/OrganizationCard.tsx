@@ -58,7 +58,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
           <Field
             label={translate('Email')}
             value={renderFieldOrDash(organization.email)}
-            space={2}
+            space={1.5}
             labelCol={6}
             valueCol={6}
             valueClass="ellipsis"
@@ -67,7 +67,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
           <Field
             label={translate('Projects')}
             value={renderFieldOrDash(organization.projects_count)}
-            space={2}
+            space={1.5}
             labelCol={6}
             valueCol={6}
           />
@@ -75,7 +75,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
           <Field
             label={translate('Created')}
             value={formatDate(organization.created)}
-            space={2}
+            space={1.5}
             labelCol={6}
             valueCol={6}
           />
@@ -89,7 +89,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
                     organization.billing_price_estimate.total) ||
                     0,
                 )}
-                space={2}
+                space={1.5}
                 labelCol={6}
                 valueCol={6}
               />
@@ -100,7 +100,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
                   value={renderFieldOrDash(
                     defaultCurrency(organization.customer_credit),
                   )}
-                  space={2}
+                  space={1.5}
                   labelCol={6}
                   valueCol={6}
                 />
@@ -112,7 +112,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
       footer={
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <div
-          className="flex justify-end items-center gap-2"
+          className="flex justify-end items-center gap-1.5"
           onClick={stopPropagation}
         >
           {canEditCustomer && (

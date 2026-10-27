@@ -87,7 +87,7 @@ export const ProfileCompletenessWarningBanner: FC<
         <BaseButton
           variant="warning"
           size="sm"
-          className="text-orange-600 dark:text-orange-400 px-4 py-2 ms-3"
+          className="text-orange-600 dark:text-orange-400 px-3 py-1.5 ms-2.5"
           onClick={handleCompleteProfile}
           label={translate('Complete profile')}
         />

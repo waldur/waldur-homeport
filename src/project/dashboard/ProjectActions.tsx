@@ -31,7 +31,7 @@ export const ProjectActions = ({ project }: ProjectActionsProps) => {
   );
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-1.5">
       {showIssues &&
         (isCourseProject ? (
           <Tooltip label={translate('Support')}>

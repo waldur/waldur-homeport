@@ -129,18 +129,18 @@ export const AsyncSearchBox = <
             <div
               role="progressbar"
               aria-label={translate('Loading')}
-              className="py-2"
+              className="py-1.5"
             >
               <p className="text-center text-primary mb-0">
                 {translate('Loading')}
               </p>
             </div>
           ) : context.status === 'error' ? (
-            <p className="text-center text-primary mb-0 py-2">
+            <p className="text-center text-primary mb-0 py-1.5">
               {translate('Error')}
             </p>
           ) : rows.length === 0 ? (
-            <p className="text-center text-primary mb-0 px-4 py-2">
+            <p className="text-center text-primary mb-0 px-3 py-1.5">
               {emptyMessage}
             </p>
           ) : null}
@@ -151,7 +151,7 @@ export const AsyncSearchBox = <
                 'aria-label': translate('Search results'),
                 className: classNames(
                   'max-h-[min(300px,var(--radix-popover-content-available-height))] overflow-auto',
-                  rows.length > 0 && 'py-2',
+                  rows.length > 0 && 'py-1.5',
                 ),
               },
               // The list mounts only while the results show.
@@ -172,7 +172,7 @@ export const AsyncSearchBox = <
             {context.status === 'success' && context.hasNextPage && (
               <div
                 ref={sentinelRef}
-                className="text-center py-2 text-quaternary text-xs"
+                className="text-center py-1.5 text-quaternary text-xs"
               >
                 {context.isFetchingNextPage
                   ? translate('Loading more...')

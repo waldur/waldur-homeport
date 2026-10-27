@@ -87,7 +87,7 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
           labelCol="auto"
           valueCol="auto"
           valueClass="ms-auto"
-          className="mb-5"
+          className="mb-4"
           xs="auto"
         />
       )}

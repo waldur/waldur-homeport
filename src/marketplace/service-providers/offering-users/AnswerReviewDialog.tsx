@@ -53,11 +53,11 @@ export const AnswerReviewDialog: FC<AnswerReviewDialogProps> = ({
               </>
             }
           >
-            <h6 className="font-medium mb-3">{translate('Question')}:</h6>
-            <p className="text-secondary text-sm mb-6">
+            <h6 className="font-medium mb-2.5">{translate('Question')}:</h6>
+            <p className="text-secondary text-sm mb-5">
               {resolve.question.description}
             </p>
-            <h6 className="font-medium mb-3">{translate('Answer')}:</h6>
+            <h6 className="font-medium mb-2.5">{translate('Answer')}:</h6>
             <p className="text-secondary text-sm">
               <ParsedAnswer
                 question={resolve.question as any}

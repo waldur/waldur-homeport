@@ -34,7 +34,7 @@ export const ArrowDebugPanel = ({ settings }: ArrowDebugPanelProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-5">
       <Card>
         <Card.Header>
           <Card.Title>
@@ -45,7 +45,7 @@ export const ArrowDebugPanel = ({ settings }: ArrowDebugPanelProps) => {
           <AlertItem
             type="floating"
             variant="warning"
-            className="mb-4"
+            className="mb-3"
             title={translate(
               'These actions are for debugging purposes only. Use with caution.',
             )}

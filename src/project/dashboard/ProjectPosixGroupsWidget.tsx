@@ -33,7 +33,7 @@ export const ProjectPosixGroupsWidget: FC<{ project: Project }> = ({
     <Panel
       title={translate('POSIX groups')}
       cardBordered
-      className="mb-5"
+      className="mb-4"
       actions={
         <Link
           state="project-manage"

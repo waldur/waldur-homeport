@@ -77,9 +77,9 @@ const ResourceQuotaItem = ({ quota }: { quota: Quota }) => {
   const data = useMemo(() => formatQuota(quota), [quota]);
 
   return (
-    <div className="font-medium flex mb-6">
+    <div className="font-medium flex mb-5">
       <ResourceQuotaChart value={data.usageValue} max={data.limitValue} />
-      <div className="ms-3">
+      <div className="ms-2.5">
         <span className="block">
           <span className="text-base">{data.usage}</span>
           <span className="text-xs">/{data.limit}</span>
@@ -128,8 +128,8 @@ export const QuotasTable = ({ resource }: { resource: Resource }) => {
   ) : (
     <div>
       {quotaCategories.categories.map((group) => (
-        <div className="my-6" key={group.key}>
-          <h5 className="font-medium mb-6">{group.label}</h5>
+        <div className="my-5" key={group.key}>
+          <h5 className="font-medium mb-5">{group.label}</h5>
           <Row>
             {group.quotas.map((quota) => (
               <Col xs={6} md={4} lg={3} key={quota.name}>
@@ -141,9 +141,9 @@ export const QuotasTable = ({ resource }: { resource: Resource }) => {
       ))}
       {quotaCategories.additional.length > 0 && (
         <div>
-          <h5 className="font-medium mb-6">{translate('Additional quotas')}</h5>
+          <h5 className="font-medium mb-5">{translate('Additional quotas')}</h5>
           {quotaCategories.additional.map((quota) => (
-            <Row key={quota.name} className="mb-2">
+            <Row key={quota.name} className="mb-1.5">
               <Col sm={4} xs={6}>
                 {formatQuotaName(quota.name)}:
               </Col>

@@ -20,7 +20,7 @@ export const buttonVariants = cva(
   // - Border is rendered as an inset box-shadow to avoid layout height shifts.
   // - transition-[color,background-color,box-shadow] ensures both background and inset-shadow border animate smoothly.
   // - Focus rings use native outline properties for accessibility and forced-colors support.
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed',
+  'inline-flex items-center justify-center gap-1.5 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed',
   {
     variants: {
       // Classes are organized per state: base, hover, focus-visible, active, disabled.
@@ -140,17 +140,24 @@ export const buttonVariants = cva(
       // - md: 36px tall (py-[8px] + leading-5 [20px] + 2x 2px inset shadow, 8px radius)
       // - lg: 44px tall (py-[10px] + leading-6 [24px] + 2x 2px inset shadow, 8px radius)
       size: {
-        sm: 'rounded-md px-[8px] py-[4px] text-sm leading-5',
-        md: 'rounded-lg px-[12px] py-[8px] text-sm leading-5',
-        lg: 'rounded-lg px-[16px] py-[10px] text-base leading-6',
+        sm: 'rounded-md text-sm leading-5',
+        md: 'rounded-lg text-sm leading-5',
+        lg: 'rounded-lg text-base leading-6',
       },
-      // Padding reset for icon-only buttons; dimensions (28px/36px/44px) are pinned in compoundVariants below.
+      // Icon-only buttons have no padding; dimensions (28px/36px/44px) are pinned in compoundVariants below.
       iconOnly: {
         true: 'p-0',
         false: '',
       },
     },
+    // The size padding is a compound variant, not part of `size`, so an
+    // icon-only button never carries it: callers that join buttonVariants()
+    // with classNames rather than cn would otherwise get `px-[16px] p-0`,
+    // where CSS order, not class order, picks the padding.
     compoundVariants: [
+      { size: 'sm', iconOnly: false, class: 'px-[8px] py-[4px]' },
+      { size: 'md', iconOnly: false, class: 'px-[12px] py-[8px]' },
+      { size: 'lg', iconOnly: false, class: 'px-[16px] py-[10px]' },
       { size: 'sm', iconOnly: true, class: 'h-[28px] w-[28px]' },
       { size: 'md', iconOnly: true, class: 'h-[36px] w-[36px]' },
       { size: 'lg', iconOnly: true, class: 'h-[44px] w-[44px]' },

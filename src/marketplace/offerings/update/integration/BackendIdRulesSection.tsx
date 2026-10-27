@@ -46,7 +46,7 @@ export const BackendIdRulesSection: FC<OfferingEditPanelProps> = (props) => {
   return (
     <FormTable.Card
       title={translate('Backend ID rules')}
-      className="card-bordered mb-7"
+      className="card-bordered mb-5.5"
     >
       <FormTable>
         <EditFieldProvider scope={props.offering} callback={update}>

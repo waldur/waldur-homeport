@@ -22,7 +22,7 @@ const formatEntryTimestamp = (date: Date): string => {
 };
 
 const StructuredEntry = ({ entry }: { entry: ParsedInternalNote }) => (
-  <div className="flex items-start gap-2 py-2 border-b-[1px] border-divider-medium border-dashed">
+  <div className="flex items-start gap-1.5 py-1.5 border-b-[1px] border-divider-medium border-dashed">
     {entry.timestamp && (
       <div
         className="text-quaternary small shrink-0"
@@ -58,7 +58,7 @@ const NotesContent = ({ notes }: { notes: string }) => {
         <StructuredEntry key={`s-${index}`} entry={entry} />
       ))}
       {freeForm.length > 0 && (
-        <div className="pt-2 small" style={{ whiteSpace: 'pre-wrap' }}>
+        <div className="pt-1.5 small" style={{ whiteSpace: 'pre-wrap' }}>
           {freeForm.map((entry, index) => (
             <p key={`f-${index}`} className="mb-1">
               {entry.body}

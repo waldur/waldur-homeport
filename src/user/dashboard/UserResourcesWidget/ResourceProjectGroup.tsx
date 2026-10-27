@@ -82,7 +82,7 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
   const title = (
     <span>
       {translate('Project')}: {project.name}
-      <span className="text-quaternary ms-2 font-normal text-xs">
+      <span className="text-quaternary ms-1.5 font-normal text-xs">
         ({translate('Organization')}: {project.customerName})
       </span>
     </span>
@@ -99,13 +99,13 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
       })}
       isOpen={isOpen}
       onToggle={setIsOpen}
-      className="mb-4"
+      className="mb-3"
     >
       {isLoading ? (
-        <div className="flex items-center justify-center py-4">
+        <div className="flex items-center justify-center py-3">
           {}
           <LoadingSpinnerSimple />
-          <span className="ms-2 text-quaternary">
+          <span className="ms-1.5 text-quaternary">
             {translate('Loading project details...')}
           </span>
         </div>
@@ -113,15 +113,15 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
         <>
           {/* Project summary section */}
           {(projectDetails?.description || hasTeamMembers) && (
-            <div className="border rounded p-4 mb-4">
+            <div className="border rounded p-3 mb-3">
               {projectDetails?.description && (
-                <p className="text-quaternary mb-3">
+                <p className="text-quaternary mb-2.5">
                   {projectDetails.description}
                 </p>
               )}
               {hasTeamMembers && (
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2.5">
                     <SymbolsGroup
                       items={teamData.members}
                       max={MAX_TEAM_MEMBERS_DISPLAY}

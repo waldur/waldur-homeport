@@ -108,7 +108,7 @@ const CategoryGroupListItem: FunctionComponent<{
             item={category}
             onClick={onClick}
             selectedItem={selectedItem}
-            className="ps-7 pe-14"
+            className="ps-5.5 pe-11.5"
           />
         ))}
       </CollapsibleContent>
@@ -131,8 +131,8 @@ export const CategoriesPanel: FunctionComponent<{
 }> = ({ categories, selectedCategory, selectCategory, loading }) => {
   return (
     <div className="category-listing">
-      <div className="flex items-center ms-7 mt-2">
-        <h6 className="text-secondary font-medium my-2 me-4">
+      <div className="flex items-center ms-5.5 mt-1.5">
+        <h6 className="text-secondary font-medium my-1.5 me-3">
           {translate('Categories')}
         </h6>
         {loading && (

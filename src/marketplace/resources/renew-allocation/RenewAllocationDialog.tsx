@@ -140,7 +140,7 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center p-10">
+      <div className="flex justify-center items-center p-8">
         <LoadingSpinner />
       </div>
     );
@@ -148,7 +148,7 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
 
   if (error) {
     return (
-      <div className="text-danger p-5">
+      <div className="text-danger p-4">
         {translate('Failed to load resource. Please try again.')}
       </div>
     );
@@ -156,7 +156,7 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
 
   if (!resources.length) {
     return (
-      <div className="text-quaternary p-5">
+      <div className="text-quaternary p-4">
         {translate('No resource available for renewal.')}
       </div>
     );

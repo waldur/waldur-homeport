@@ -193,7 +193,7 @@ export const MatrixHowItWorksDialog: FC = () => {
       closeButton
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         {/* Overview */}
         <section>
           <AlertItem
@@ -208,19 +208,19 @@ export const MatrixHowItWorksDialog: FC = () => {
 
         {/* Setup Flow */}
         <section>
-          <h4 className="mb-4">{translate('Appservice setup')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Appservice setup')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Helm and Docker Compose deployments supply the tokens and, by default, register the appservice on every deploy, so they show no Setup button. On other installations, Setup generates the tokens and a registration YAML, which you then register on the homeserver.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart code={SETUP_FLOW_DIAGRAM} className="text-center" />
           </div>
           <AlertItem
             type="floating"
             variant="info"
-            className="mt-4"
+            className="mt-3"
             title={translate('Setup steps:')}
             body={
               <ol className="mb-0">
@@ -251,13 +251,13 @@ export const MatrixHowItWorksDialog: FC = () => {
 
         {/* Room Lifecycle */}
         <section>
-          <h4 className="mb-4">{translate('Room lifecycle')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Room lifecycle')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Each project can have one chat room. Rooms are created by organization owners (or any role with the "Create matrix room" permission), staff and support, and automatically populated with project members. Only staff can disable a room (kicking all members and exporting history) and later re-enable it or delete it entirely.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart
               code={ROOM_LIFECYCLE_DIAGRAM}
               className="text-center"
@@ -267,23 +267,23 @@ export const MatrixHowItWorksDialog: FC = () => {
 
         {/* Webhook Flow */}
         <section>
-          <h4 className="mb-4">{translate('Webhook and Matrix bot')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Webhook and Matrix bot')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'The homeserver pushes room events to Waldur via the appservice webhook, which only acknowledges them. The Matrix bot, a separate process ({command}) and the encrypted member of every room, reads the rooms through its own sync and answers commands. If commands go unanswered, check that this process is running.',
               { command: <code>waldur matrix_bot</code> },
               formatJsxTemplate,
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart code={WEBHOOK_FLOW_DIAGRAM} className="text-center" />
           </div>
         </section>
 
         {/* Bot Commands */}
         <section>
-          <h4 className="mb-4">{translate('Bot commands')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Bot commands')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'The Waldur bot responds to commands posted in project chat rooms. Type a command in the room and the bot will reply with the relevant information.',
             )}
@@ -312,22 +312,22 @@ export const MatrixHowItWorksDialog: FC = () => {
 
         {/* Export Flow */}
         <section>
-          <h4 className="mb-4">{translate('History export')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('History export')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Chat history can be exported as JSON files with optional media attachments. Exports can be triggered manually, run on a daily schedule, or happen automatically when a room is disabled or a project is deleted.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart code={EXPORT_FLOW_DIAGRAM} className="text-center" />
           </div>
         </section>
 
         {/* Key Concepts */}
         <section>
-          <h4 className="mb-4">{translate('Key concepts')}</h4>
+          <h4 className="mb-3">{translate('Key concepts')}</h4>
           {KEY_CONCEPTS.map((concept) => (
-            <div key={concept.term} className="mb-4">
+            <div key={concept.term} className="mb-3">
               <h6 className="font-medium">{concept.term}</h6>
               <p className="text-quaternary mb-0">{concept.description}</p>
             </div>

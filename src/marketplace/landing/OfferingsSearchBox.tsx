@@ -67,7 +67,7 @@ export const OfferingSearchResult = ({
       className={classNames(
         // The hover background, also on the highlighted row, so the keyboard
         // highlight looks like the pointer's; the brand bar marks it besides.
-        'flex items-center pe-4 hover:bg-[var(--bg-brand-primary-alt)] [&.active]:bg-[var(--bg-brand-primary-alt)]',
+        'flex items-center pe-3 hover:bg-[var(--bg-brand-primary-alt)] [&.active]:bg-[var(--bg-brand-primary-alt)]',
         highlighted && 'active shadow-[inset_3px_0_0_var(--brand-color)]',
       )}
     >
@@ -78,10 +78,10 @@ export const OfferingSearchResult = ({
         // Focus stays in the search box; the option is highlighted through
         // aria-activedescendant, not focused.
         tabIndex={-1}
-        className="flex grow min-w-0 items-center text-brand ps-4 pe-2 py-2"
+        className="flex grow min-w-0 items-center text-brand ps-3 pe-1.5 py-1.5"
       >
         {/* Decorative: the name follows. */}
-        <span aria-hidden="true" className="shrink-0 me-4">
+        <span aria-hidden="true" className="shrink-0 me-3">
           {item.thumbnail ? (
             <Image src={item.thumbnail} size={24} circle />
           ) : (
@@ -165,7 +165,7 @@ export const OfferingsSearchBox = () => {
       emptyMessage={translate(
         'No offerings match your search. To find organizations, projects or resources, use the search in the top bar.',
       )}
-      wrapperClassName="landing-hero__search-box w-full max-w-[432px] px-4"
+      wrapperClassName="landing-hero__search-box w-full max-w-[432px] px-3"
     />
   );
 };

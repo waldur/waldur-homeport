@@ -60,8 +60,8 @@ const RenamesTable: FC<{ offering: OfferingAccountPreview }> = ({
 const OfferingPreview: FC<{ offering: OfferingAccountPreview }> = ({
   offering,
 }) => (
-  <div className="border rounded p-5 mb-4">
-    <h5 className="mb-3">{offering.name}</h5>
+  <div className="border rounded p-4 mb-3">
+    <h5 className="mb-2.5">{offering.name}</h5>
     {offering.changed.length === 0 ? (
       <p className="text-quaternary mb-0">
         {translate(
@@ -70,7 +70,7 @@ const OfferingPreview: FC<{ offering: OfferingAccountPreview }> = ({
       </p>
     ) : (
       <>
-        <ul className="mb-3">
+        <ul className="mb-2.5">
           {offering.changed.map((name) => {
             const setting = offering.settings[name];
             return (
@@ -84,7 +84,7 @@ const OfferingPreview: FC<{ offering: OfferingAccountPreview }> = ({
             );
           })}
         </ul>
-        <p className="mb-3">
+        <p className="mb-2.5">
           {translate(
             'A new person would get {username}, home directory {home} and login shell {shell}.',
             {
@@ -125,14 +125,14 @@ export const AccountOptionsPreviewResult: FC<{
       <AlertItem
         key={warning}
         variant="warning"
-        className="mb-4"
+        className="mb-3"
         title={warning}
       />
     ))}
     {preview.username_conflicts > 0 && (
       <AlertItem
         variant="warning"
-        className="mb-4"
+        className="mb-3"
         title={translate(
           '{count} person(s) have different usernames on different offerings. Switching to per service provider accounts is refused until each keeps one: use Resolve conflicts below, or Accounts > Username conflicts.',
           { count: preview.username_conflicts },

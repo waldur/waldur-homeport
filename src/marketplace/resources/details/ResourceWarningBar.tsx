@@ -24,7 +24,7 @@ export const ResourceWarningBar: React.FC<ResourceWarningBarProps> = ({
   return (
     <div className={classNames('resource-warning-bar', className)}>
       <div className={PAGE_CONTAINER_CLASSNAME}>
-        <div className="flex justify-between items-center py-3">
+        <div className="flex justify-between items-center py-2.5">
           <div className="flex items-center">
             {IconComponent && (
               <FeaturedIcon
@@ -33,9 +33,9 @@ export const ResourceWarningBar: React.FC<ResourceWarningBarProps> = ({
                 size="sm"
               />
             )}
-            <div className="ms-2">{children}</div>
+            <div className="ms-1.5">{children}</div>
           </div>
-          {actions && <div className="ms-3 flex items-center">{actions}</div>}
+          {actions && <div className="ms-2.5 flex items-center">{actions}</div>}
         </div>
       </div>
     </div>

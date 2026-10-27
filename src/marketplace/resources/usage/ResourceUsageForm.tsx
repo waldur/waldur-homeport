@@ -249,7 +249,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
 
   return (
     <div>
-      <div className="text-quaternary mb-4">
+      <div className="text-quaternary mb-3">
         <SummaryField
           label={translate('Client organization')}
           value={props.params.customer_name}
@@ -300,7 +300,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
         )}
       </div>
       {/* Render User and Username for User usage report */}
-      <div className="text-quaternary mb-4">
+      <div className="text-quaternary mb-3">
         {isUserUsage && (
           <>
             {teamError ? (
@@ -332,7 +332,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
       {props.components.length > 0 && (
         <Tabs mount="all" value={activeTab} onValueChange={selectTab}>
           <div className="flex">
-            <TabsList ref={refNav} className="grow mb-4">
+            <TabsList ref={refNav} className="grow mb-3">
               {orderedComponents.map((component) => {
                 const isHidden = wrappedComponents.some(
                   (c) => component.uuid === c.uuid,
@@ -376,7 +376,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
               })}
             </TabsList>
             {wrappedComponents.length > 0 ? (
-              <div className="flex items-end border-b-[1px] border-b-secondary mb-4">
+              <div className="flex items-end border-b-[1px] border-b-secondary mb-3">
                 <div>
                   <Menu>
                     <div className="position-relative inline-flex">
@@ -395,7 +395,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                           size={10}
                           blink={false}
                           variant="danger"
-                          className="me-n2"
+                          className="-me-1.5"
                         />
                       )}
                     </div>
@@ -446,11 +446,11 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
             {props.components.map((component) => (
               <TabsContent key={component.uuid} value={component.uuid}>
                 <div>
-                  <div className="mb-7">
+                  <div className="mb-5.5">
                     {component.description && (
                       <div
                         id={`${component.type}-description`}
-                        className="text-quaternary mb-2"
+                        className="text-quaternary mb-1.5"
                       >
                         {component.description}
                       </div>
@@ -480,7 +480,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                     </Field>
                   </div>
 
-                  <div className="mb-7">
+                  <div className="mb-5.5">
                     <Field name={`components.${component.type}.description`}>
                       {({ input, meta }) => (
                         <TextField

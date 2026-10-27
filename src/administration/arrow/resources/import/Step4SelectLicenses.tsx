@@ -92,8 +92,8 @@ const LinkedLicensesTable = ({
   });
 
   return (
-    <div className="mt-5">
-      <h6 className="text-quaternary mb-3">
+    <div className="mt-4">
+      <h6 className="text-quaternary mb-2.5">
         {translate('Already imported licenses')}
       </h6>
       <Table<ArrowLicense>
@@ -175,12 +175,12 @@ export const Step4SelectLicenses: FC<WizardFormStepProps> = (props) => {
   return (
     <WizardForm {...props}>
       {isLoading ? (
-        <div className="text-center py-10">
+        <div className="text-center py-8">
           <LoadingSpinner />
         </div>
       ) : (
         <div>
-          <p className="text-quaternary mb-5">
+          <p className="text-quaternary mb-4">
             {translate(
               'Select the Arrow licenses to import as Waldur resources.',
             )}

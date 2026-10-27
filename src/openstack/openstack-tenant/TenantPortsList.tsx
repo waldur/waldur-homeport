@@ -199,7 +199,7 @@ export const TenantPortsList: FunctionComponent<{
               iconNode={<XCircleIcon weight="bold" />}
               label={translate('Show all ports')}
               onClick={clearPortFilter}
-              className="me-2"
+              className="me-1.5"
             />
           )}
           <CreatePortAction resource={resourceScope} refetch={props.fetch} />

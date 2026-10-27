@@ -97,7 +97,7 @@ export const PlanForm: FC<PlanFormProps> = ({ offering, plan }) => {
   return (
     <>
       <StringGroup
-        space={5}
+        space={4}
         name="name"
         validate={required}
         label={translate('Name')}
@@ -105,7 +105,7 @@ export const PlanForm: FC<PlanFormProps> = ({ offering, plan }) => {
       />
       {showBillingMode && (
         <SelectGroup
-          space={5}
+          space={4}
           name="billing_mode"
           label={translate('Billing mode')}
           options={getPlanBillingModeOptions()}
@@ -121,7 +121,7 @@ export const PlanForm: FC<PlanFormProps> = ({ offering, plan }) => {
         />
       )}
       <SelectGroup
-        space={5}
+        space={4}
         name="unit"
         validate={required}
         label={translate('Billing period')}
@@ -132,7 +132,7 @@ export const PlanForm: FC<PlanFormProps> = ({ offering, plan }) => {
         description={periodDescription}
       />
       <MarkdownGroup
-        space={5}
+        space={4}
         name="description"
         label={translate('Description')}
       />

@@ -65,7 +65,7 @@ export const PlanPriceCell: FC<PlanPriceCellProps> = ({ plan, offering }) => {
           size="sm"
           shape="pill"
           tone="outline"
-          className="ms-2"
+          className="ms-1.5"
         >
           {translate('Free')}
         </Badge>

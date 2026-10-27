@@ -175,7 +175,7 @@ export const ProjectLimitUsageBasedResources: FC<{ showCost?: boolean }> = ({
   );
 
   return (
-    <div className="mb-5">
+    <div className="mb-4">
       {error && !isLoading && <LoadingErred loadData={refetch} />}
       <Table<Resource>
         {...tableProps}

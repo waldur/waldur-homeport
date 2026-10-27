@@ -52,15 +52,15 @@ export const CallEligibilitySection: FC<CallEligibilitySectionProps> = ({
           <HelpIcon
             label={getEligibilityTooltip()}
             size={20}
-            className="mx-2"
+            className="mx-1.5"
           />
         </>
       }
-      className="card-bordered mb-5"
+      className="card-bordered mb-4"
     >
       <AlertItem
         variant="info"
-        className="mb-5"
+        className="mb-4"
         title={translate('Checked when a proposal is created')}
         body={translate(
           'Drafts started before a restriction was added are not re-checked, and eligibility does not limit who may join the project once the proposal is granted. Values are matched exactly against what the identity provider sends: a scoped affiliation arrives looking like faculty@university.example.',

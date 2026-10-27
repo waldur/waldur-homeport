@@ -13,7 +13,7 @@ import { OfferingMergesList } from './OfferingMergesList';
 export const OfferingMergesPage: FC<Partial<TableWithPortal>> = ({
   portal,
 }) => (
-  <div className="flex flex-col gap-7">
+  <div className="flex flex-col gap-5.5">
     <OfferingMergesList portal={portal} />
     {isFeatureVisible(
       MarketplaceFeatures.show_openstack_duplicate_offerings,

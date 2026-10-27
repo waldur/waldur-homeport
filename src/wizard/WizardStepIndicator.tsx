@@ -48,7 +48,7 @@ export const WizardStepIndicator: FC<WizardStepIndicatorProps> = (props) => {
         activeIndex={currentIndex}
         onClick={handleStepClick}
         bgClass="bg-primary"
-        className="mt-4 mb-4"
+        className="mt-3 mb-3"
       />
     </div>
   );

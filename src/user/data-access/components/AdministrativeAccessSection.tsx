@@ -21,11 +21,11 @@ export const AdministrativeAccessSection: FC<
     title={translate('Administrative access')}
     subtitle={data.description}
     defaultOpen={false}
-    className="mb-4"
+    className="mb-3"
   >
     {/* Counts are only available for staff/support viewers */}
     {data.staff_count !== undefined && data.support_count !== undefined && (
-      <div className="flex gap-6 mb-4">
+      <div className="flex gap-5 mb-3">
         <div>
           <span className="text-quaternary">{translate('Staff')}: </span>
           <strong>{data.staff_count}</strong>

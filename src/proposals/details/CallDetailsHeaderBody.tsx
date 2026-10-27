@@ -24,7 +24,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
         <Table className="mb-0 px-0 h-auto w-auto">
           <tbody>
             <tr>
-              <th className="font-medium w-[125px] p-0 pe-3 pb-1 text-nowrap">
+              <th className="font-medium w-[125px] p-0 pe-2.5 pb-1 text-nowrap">
                 {translate('Open round started')}:
               </th>
               <td className="text-quaternary p-0 pb-1">
@@ -32,7 +32,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
               </td>
             </tr>
             <tr>
-              <th className="font-medium w-[125px] p-0 pe-3 text-nowrap">
+              <th className="font-medium w-[125px] p-0 pe-2.5 text-nowrap">
                 {translate('Open round ends')}:
               </th>
               <td className="text-quaternary p-0">
@@ -40,7 +40,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
               </td>
             </tr>
             <tr>
-              <th className="font-medium w-[125px] p-0 pe-3 pt-1 text-nowrap">
+              <th className="font-medium w-[125px] p-0 pe-2.5 pt-1 text-nowrap">
                 {translate('Project duration')}:
               </th>
               <td className="text-quaternary p-0 pt-1">
@@ -59,7 +59,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
         <Table className="mb-0 px-0 h-auto w-auto">
           <tbody>
             <tr>
-              <th className="font-medium w-[125px] p-0 pe-3 pb-1 text-nowrap">
+              <th className="font-medium w-[125px] p-0 pe-2.5 pb-1 text-nowrap">
                 {translate('Next round starts')}:
               </th>
               <td className="text-quaternary p-0 pb-1">
@@ -67,7 +67,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
               </td>
             </tr>
             <tr>
-              <th className="font-medium w-[125px] p-0 pe-3 text-nowrap">
+              <th className="font-medium w-[125px] p-0 pe-2.5 text-nowrap">
                 {translate('Next round ends')}:
               </th>
               <td className="text-quaternary p-0">
@@ -75,7 +75,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
               </td>
             </tr>
             <tr>
-              <th className="font-medium w-[125px] p-0 pe-3 pt-1 text-nowrap">
+              <th className="font-medium w-[125px] p-0 pe-2.5 pt-1 text-nowrap">
                 {translate('Project duration')}:
               </th>
               <td className="text-quaternary p-0 pt-1">

@@ -40,7 +40,7 @@ export const UserProfile = ({
       cardBordered
       className={className}
       title={
-        <div className="flex flex-wrap gap-4 mb-3">
+        <div className="flex flex-wrap gap-3 mb-2.5">
           <h3 className="mb-0">{user.full_name}</h3>
           {(showStatus || user.is_staff || user.is_support) && (
             <div>

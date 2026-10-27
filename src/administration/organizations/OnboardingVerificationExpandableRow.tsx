@@ -20,13 +20,13 @@ export const OnboardingVerificationExpandableRow: FC<{
         label={translate('Error code')}
         value={message}
         isStuck
-        labelClass="me-2"
+        labelClass="me-1.5"
       />
       <Field
         label={translate('Traceback')}
         value={traceback}
         isStuck
-        labelClass="me-2"
+        labelClass="me-1.5"
       />
     </ExpandableContainer>
   );

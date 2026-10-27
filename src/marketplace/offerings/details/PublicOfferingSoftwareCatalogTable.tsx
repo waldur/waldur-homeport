@@ -147,7 +147,7 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
             <>
               {row.catalog_name}
               {row.catalog_type_display && (
-                <Badge variant="info" tone="outline" className="ms-2">
+                <Badge variant="info" tone="outline" className="ms-1.5">
                   {row.catalog_type_display}
                 </Badge>
               )}

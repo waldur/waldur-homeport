@@ -7,7 +7,7 @@ import { PeriodTotalRow } from './utils';
 export const ComponentTotalRow: FC<{ row: PeriodTotalRow }> = ({ row }) => (
   <tr>
     <td colSpan={5} className="text-end">
-      <span className="font-semibold text-primary me-10">{row.label}:</span>
+      <span className="font-semibold text-primary me-8">{row.label}:</span>
     </td>
     <td className="font-medium text-primary">
       <PriceField

@@ -35,7 +35,7 @@ export const MinimalLayout = () => {
       </div>
       <div className="layout-minimal-content">
         <div className="layout-minimal-form">
-          <div className="login-logo mb-4">
+          <div className="login-logo mb-3">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
               src={imageUrl}

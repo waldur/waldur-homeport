@@ -150,7 +150,7 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
         <Field
           label={translate('Project summary')}
           value={row.project_summary}
-          className="col-md-12 mb-3"
+          className="col-md-12 mb-2.5"
         />
       )}
 
@@ -159,7 +159,7 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
       ) : (
         <EmbeddedTabs
           defaultValue="reviews"
-          listClassName="mb-4"
+          listClassName="mb-3"
           tabs={[
             {
               key: 'reviews',

@@ -21,7 +21,7 @@ export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
   return (
     <div
       className={classNames(
-        'review-comment flex p-5 gap-4',
+        'review-comment flex p-4 gap-3',
         'bg-brand-subtle',
         props.className,
       )}
@@ -37,7 +37,7 @@ export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
         <FormHeading className="mb-0">
           {props.title}
           {Boolean(props.time) && (
-            <small className="text-quaternary ms-2 font-normal">
+            <small className="text-quaternary ms-1.5 font-normal">
               {props.time}
             </small>
           )}

@@ -60,7 +60,7 @@ const StoryRouter = ({ children }: { children: ReactNode }) => {
 const CurrentPage = () => {
   const { state, params } = useCurrentStateAndParams();
   return (
-    <p className="mt-4 text-xs text-quaternary">
+    <p className="mt-3 text-xs text-quaternary">
       Current page:{' '}
       <span data-testid="current-page">
         {state?.name === DETAILS_STATE
@@ -80,7 +80,7 @@ const withHarness = (Story: () => React.ReactElement) => {
   return (
     <QueryClientProvider client={queryClient}>
       <StoryRouter>
-        <div className="p-12" style={{ minHeight: 520 }}>
+        <div className="p-10" style={{ minHeight: 520 }}>
           <Story />
           <CurrentPage />
         </div>

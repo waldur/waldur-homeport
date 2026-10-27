@@ -176,7 +176,7 @@ const RowFeedback = ({ name, rows }: { name: string; rows: any[] }) => {
   if (!message) return null;
   return (
     <tr className="text-sm">
-      <td colSpan={getFeedbackColSpan()} className="border-0 pt-0 pb-2">
+      <td colSpan={getFeedbackColSpan()} className="border-0 pt-0 pb-1.5">
         {message}
       </td>
     </tr>
@@ -268,7 +268,7 @@ export const EmailsListGroup = ({
   };
 
   return (
-    <div className="mb-3">
+    <div className="mb-2.5">
       <div id="emails-list-group">
         {fields.length > 0 && (
           <FormField>
@@ -451,7 +451,7 @@ export const EmailsListGroup = ({
             size="lg"
           />
           {warn && (
-            <span className="text-danger ms-2">
+            <span className="text-danger ms-1.5">
               {translate('Too many empty fields')}
             </span>
           )}

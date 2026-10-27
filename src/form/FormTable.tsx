@@ -60,13 +60,13 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
               {props.colon && ':'}
             </ItemLabel>
             {props.tooltip && (
-              <HelpIcon label={props.tooltip} size={20} className="ms-2" />
+              <HelpIcon label={props.tooltip} size={20} className="ms-1.5" />
             )}
             {props.warnTooltip && (
               <WarningTip
                 label={props.warnTooltip}
                 size={20}
-                className="ms-2"
+                className="ms-1.5"
               />
             )}
           </div>
@@ -101,13 +101,13 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
               {props.colon && ':'}
             </ItemLabel>
             {props.tooltip && (
-              <HelpIcon label={props.tooltip} size={20} className="ms-2" />
+              <HelpIcon label={props.tooltip} size={20} className="ms-1.5" />
             )}
             {props.warnTooltip && (
               <WarningTip
                 label={props.warnTooltip}
                 size={20}
-                className="ms-2"
+                className="ms-1.5"
               />
             )}
           </div>
@@ -161,7 +161,7 @@ const FormTableCard: FormTableCardProps = (props) => {
             )}
           </Card.Title>
           {props.actions && (
-            <div className="card-toolbar grow justify-end gap-3">
+            <div className="card-toolbar grow justify-end gap-2.5">
               {props.actions}
             </div>
           )}

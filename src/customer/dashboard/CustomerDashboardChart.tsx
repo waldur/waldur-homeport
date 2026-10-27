@@ -55,12 +55,12 @@ export const CustomerDashboardChart: FunctionComponent<
     return (
       <>
         {Boolean(costChart.chart) && (
-          <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+          <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
             <WidgetCard
               cardTitle={
                 <>
                   {costChart.chart.title}
-                  <small className="text-quaternary text-xs ms-4 font-normal">
+                  <small className="text-quaternary text-xs ms-3 font-normal">
                     ({translate('Current month’s cost')}:{' '}
                     {costChart.chart.current})
                   </small>
@@ -73,7 +73,7 @@ export const CustomerDashboardChart: FunctionComponent<
           </Col>
         )}
         {Boolean(teamChart.chart) && (
-          <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+          <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
             <TeamWidget
               api={() =>
                 customersUsersList({

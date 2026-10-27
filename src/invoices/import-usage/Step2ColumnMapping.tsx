@@ -42,17 +42,17 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
   return (
     <WizardForm {...props}>
       <div className="text-quaternary">
-        <h6 className="font-medium mb-5">
+        <h6 className="font-medium mb-4">
           {translate('Map columns to fields')}
         </h6>
-        <p className="mb-4">
+        <p className="mb-3">
           {translate(
             'Select which columns from your file correspond to each field.',
           )}
         </p>
 
-        <Row className="mb-4">
-          <Col md={6} className="mb-3">
+        <Row className="mb-3">
+          <Col md={6} className="mb-2.5">
             <SelectGroup
               name="customerColumn"
               label={translate('Customer name')}
@@ -63,7 +63,7 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               isClearable={false}
             />
           </Col>
-          <Col md={6} className="mb-3">
+          <Col md={6} className="mb-2.5">
             <SelectGroup
               name="itemNameColumn"
               label={translate('Item name')}
@@ -74,7 +74,7 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               isClearable={false}
             />
           </Col>
-          <Col md={6} className="mb-3">
+          <Col md={6} className="mb-2.5">
             <SelectGroup
               name="amountColumn"
               label={translate('Amount')}
@@ -85,7 +85,7 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               isClearable={false}
             />
           </Col>
-          <Col md={6} className="mb-3">
+          <Col md={6} className="mb-2.5">
             <SelectGroup
               name="articleCodeColumn"
               label={translate('Article code')}
@@ -94,7 +94,7 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               isClearable
             />
           </Col>
-          <Col md={6} className="mb-3">
+          <Col md={6} className="mb-2.5">
             <SelectGroup
               name="serviceProviderColumn"
               label={translate('Service provider')}
@@ -103,7 +103,7 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               isClearable
             />
           </Col>
-          <Col md={6} className="mb-3">
+          <Col md={6} className="mb-2.5">
             <SelectGroup
               name="offeringColumn"
               label={translate('Offering')}
@@ -112,7 +112,7 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               isClearable
             />
           </Col>
-          <Col md={6} className="mb-3">
+          <Col md={6} className="mb-2.5">
             <SelectGroup
               name="planColumn"
               label={translate('Plan')}
@@ -126,8 +126,8 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
         {previewRows.length > 0 && (
           <>
             <hr />
-            <h6 className="font-medium mb-3">{translate('Preview')}</h6>
-            <p className="text-quaternary mb-3">
+            <h6 className="font-medium mb-2.5">{translate('Preview')}</h6>
+            <p className="text-quaternary mb-2.5">
               {translate('Showing first {count} rows with mapped values', {
                 count: previewRows.length,
               })}

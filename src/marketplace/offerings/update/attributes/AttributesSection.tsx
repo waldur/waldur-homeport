@@ -48,7 +48,7 @@ export const AttributesSection: FC<OfferingSectionProps & { category }> = (
       <TabbedSection
         title={
           <>
-            <span className="me-2">
+            <span className="me-1.5">
               {translate('Category')}: {props.category.title}
             </span>
             <RefreshButton refetch={props.refetch} loading={props.loading} />

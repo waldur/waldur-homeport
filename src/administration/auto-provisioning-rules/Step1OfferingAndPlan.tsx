@@ -144,7 +144,7 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
         <Col>
           <FormField>
             <FormLabel>{translate('Plan')}</FormLabel>
-            <div className="flex gap-6 pb-6 border-b-[1px] border-b-secondary mb-7">
+            <div className="flex gap-5 pb-5 border-b-[1px] border-b-secondary mb-5.5">
               <div className="grow">
                 <PlanSelectField
                   plans={plans}

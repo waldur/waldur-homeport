@@ -67,7 +67,7 @@ const FieldsListGroup = ({
             key={name + i}
             className={
               i + 1 < fields.length
-                ? 'border-b-[1px] border-b-secondary mb-3'
+                ? 'border-b-[1px] border-b-secondary mb-2.5'
                 : undefined
             }
           >
@@ -102,7 +102,7 @@ const FieldsListGroup = ({
           </div>
         ))}
       </FormField>
-      <div className="mt-3">
+      <div className="mt-2.5">
         <BaseButton
           onClick={addRow}
           label={translate('Add guidance')}

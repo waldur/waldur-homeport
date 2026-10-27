@@ -25,7 +25,7 @@ const RouterSelector = ({ routerValue, setRouterValue, tenantUuid }) => {
   );
 
   return (
-    <FormField className="mt-3">
+    <FormField className="mt-2.5">
       <FormLabel>
         {translate('Router')}{' '}
         <span className="text-quaternary">({translate('Optional')})</span>

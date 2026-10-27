@@ -79,7 +79,7 @@ export const CustomerUsersListExpandableRow: FunctionComponent<{
   }, [row.projects]);
 
   return !row.projects || row.projects.length === 0 ? (
-    <div className="text-center py-4">
+    <div className="text-center py-3">
       <p>{translate('No projects are assigned to this user.')}</p>
       <AddProjectUserButton customer={row} refetch={refetch} />
     </div>

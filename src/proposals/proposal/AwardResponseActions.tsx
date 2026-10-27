@@ -145,7 +145,7 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
         <AlertItem
           variant="warning"
           type="floating"
-          className="mt-2"
+          className="mt-1.5"
           title={translate('The award differs from your request')}
           body={translate(
             'Compare the amounts and offerings under Awarded resources before you respond.',
@@ -156,7 +156,7 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
         variant="primary"
         onClick={() => acceptAward.mutate()}
         pending={acceptAward.isPending}
-        className="w-full mt-2"
+        className="w-full mt-1.5"
         iconNode={<CheckCircleIcon weight="bold" />}
         label={
           usesCallVocabulary() ? translate('Accept award') : translate('Accept')
@@ -167,7 +167,7 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
         variant="danger"
         onClick={() => declineAward.mutate()}
         pending={declineAward.isPending}
-        className="w-full mt-2"
+        className="w-full mt-1.5"
         iconNode={<XCircleIcon weight="bold" />}
         label={
           usesCallVocabulary()

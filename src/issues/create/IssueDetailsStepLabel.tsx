@@ -23,7 +23,7 @@ export const IssueDetailsStepLabel = () => {
     <>
       {translate('Issue details')}
       {hasDetails && (
-        <span className="mx-2">
+        <span className="mx-1.5">
           <Tooltip
             label={
               <>

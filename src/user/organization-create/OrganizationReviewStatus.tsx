@@ -34,7 +34,7 @@ export const OrganizationReviewStatus: FunctionComponent<
       <Card.Body className="text-center position-relative overflow-hidden organization-review-status">
         <RadialBackground className="icon-background" />
 
-        <div className="review-icon-wrapper mb-6">
+        <div className="review-icon-wrapper mb-5">
           <ClockCountdownIcon
             size={34}
             weight="bold"
@@ -42,20 +42,19 @@ export const OrganizationReviewStatus: FunctionComponent<
           />
         </div>
 
-        <h3 className="mb-3 font-medium">{translate('Review in progress')}</h3>
+        <h3 className="mb-2.5 font-medium">
+          {translate('Review in progress')}
+        </h3>
 
-        <p
-          className="text-quaternary mb-6 text-base"
-          style={{ maxWidth: '600px', margin: '0 auto' }}
-        >
+        <p className="text-quaternary mx-auto mb-5 max-w-[600px] text-base">
           {translate(
             "Your manual verification request has been submitted and our staff team will review your application within 3 business days. You'll receive an email notification once the review is complete.",
           )}
         </p>
 
-        <div className="mb-6">
+        <div className="mb-5">
           <div className="text-center">
-            <div className="mb-2">
+            <div className="mb-1.5">
               <span className="font-medium text-secondary">
                 {translate('Company')}:
               </span>{' '}
@@ -72,13 +71,10 @@ export const OrganizationReviewStatus: FunctionComponent<
           </div>
         </div>
 
-        <h4 className="mb-3 font-medium">
+        <h4 className="mb-2.5 font-medium">
           {translate('Data storage information')}
         </h4>
-        <p
-          className="text-quaternary mb-6 text-base"
-          style={{ maxWidth: '600px', margin: '0 auto' }}
-        >
+        <p className="text-quaternary mx-auto mb-5 max-w-[600px] text-base">
           {translate(
             'Your application will be available in your dashboard with the relevant submitted information. If your application is rejected, it will remain available for 30 days so you can review the feedback. After this period, it will be automatically removed.',
           )}
@@ -87,7 +83,7 @@ export const OrganizationReviewStatus: FunctionComponent<
         <BaseButton
           variant="tertiary"
           onClick={onGoToDashboard}
-          className="px-8 mt-5"
+          className="px-6 mt-4"
           label={translate('Go to dashboard')}
           size="lg"
         />

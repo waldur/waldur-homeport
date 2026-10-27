@@ -44,7 +44,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
       hideQuickSection={isArchived}
       title={
         <>
-          <div className="flex flex-wrap gap-2 items-center">
+          <div className="flex flex-wrap gap-1.5 items-center">
             <h3 className="mb-0 leading-none">{call.name}</h3>
             <StateIndicator
               variant={status.color}
@@ -53,13 +53,13 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
               shape="pill"
             />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <span className="text-xs text-tertiary">
               {translate('Part of:')}
             </span>
             <span className="text-xs text-brand">{call.customer_name}</span>
           </div>
-          <div className="flex flex-wrap gap-3 mt-1">
+          <div className="flex flex-wrap gap-2.5 mt-1">
             {call.start_date && (
               <span className="text-xs">
                 <span className="font-medium">{translate('Start date:')}</span>{' '}
@@ -86,7 +86,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
         </>
       }
       quickActions={
-        <div className="flex flex-col flex-wrap gap-2">
+        <div className="flex flex-col flex-wrap gap-1.5">
           <CallActions call={call} refetch={refetch} />
         </div>
       }

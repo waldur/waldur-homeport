@@ -32,15 +32,15 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      <h4 className="mb-4">{translate('Preview Settings')}</h4>
-      <p className="text-quaternary mb-4">
+      <h4 className="mb-3">{translate('Preview Settings')}</h4>
+      <p className="text-quaternary mb-3">
         {translate(
           'Review the settings below before saving. These will configure the identity provider.',
         )}
       </p>
 
       {/* Connection Card */}
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <h5 className="mb-0">{translate('Connection')}</h5>
         </Card.Header>
@@ -83,7 +83,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
       </Card>
 
       {/* Attribute Mappings Card */}
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <h5 className="mb-0">{translate('Attribute Mappings')}</h5>
         </Card.Header>
@@ -118,7 +118,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
       </Card>
 
       {/* Configuration Card */}
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <h5 className="mb-0">{translate('Configuration')}</h5>
         </Card.Header>

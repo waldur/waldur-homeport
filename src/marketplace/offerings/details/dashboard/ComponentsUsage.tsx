@@ -132,7 +132,7 @@ export const ComponentsUsage: FC<OwnProps> = ({ offering }) => {
       <LoadingErred
         loadData={refetch}
         message={translate('Unable to load statistics')}
-        className="mb-4"
+        className="mb-3"
       />
     );
   }

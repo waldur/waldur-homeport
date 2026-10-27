@@ -140,7 +140,7 @@ export const BookingResourceListItem = ({
         <div
           key={layout.schedule.id}
           className={classNames(
-            'px-3',
+            'px-2.5',
             item.state === 'Creating'
               ? 'bg-[var(--bg-primary-solid)] text-white'
               : 'bg-tertiary dark:bg-quaternary',
@@ -150,8 +150,8 @@ export const BookingResourceListItem = ({
           <div
             className={
               layout.diffHours > 2
-                ? 'min-h-[100px] position-sticky top-0 py-3'
-                : 'h-full position-relative py-2'
+                ? 'min-h-[100px] position-sticky top-0 py-2.5'
+                : 'h-full position-relative py-1.5'
             }
           >
             {layout.diffHours > 1.1 && (
@@ -181,7 +181,7 @@ export const BookingResourceListItem = ({
                 item.attributes.schedules.length === 1)) && (
               <div>{item.project_name}</div>
             )}
-            <div className="position-absolute bottom-0 end-0 mb-2">
+            <div className="position-absolute bottom-0 end-0 mb-1.5">
               <BaseButton
                 variant="tertiary"
                 className={classNames(layout.diffHours < 1.1 && 'py-1')}

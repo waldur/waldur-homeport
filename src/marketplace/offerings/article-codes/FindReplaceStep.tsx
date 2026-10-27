@@ -144,7 +144,7 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
         <AlertItem
           type="floating"
           variant="warning"
-          className="mb-0 mt-4"
+          className="mb-0 mt-3"
           title={error}
         />
       )}

@@ -31,7 +31,7 @@ export const AnnouncementGroup: FC<AnnouncementGroupProps> = ({
         <div
           className={classNames(
             PAGE_CONTAINER_CLASSNAME,
-            'flex items-center gap-3',
+            'flex items-center gap-2.5',
           )}
         >
           <div className="icon-square">

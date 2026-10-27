@@ -66,7 +66,7 @@ export const RevokeTosDialog = ({
         </>
       }
     >
-      <p className="mb-4">
+      <p className="mb-3">
         {translate(
           'Are you sure you want to revoke your consent for Terms of service version {version} for {offeringName}? This action can be reversed by accepting the ToS again.',
           {
@@ -76,17 +76,17 @@ export const RevokeTosDialog = ({
         )}
       </p>
       {resourcesLoading ? (
-        <div className="text-center py-4">
+        <div className="text-center py-3">
           <LoadingSpinner />
-          <p className="text-quaternary mt-2">
+          <p className="text-quaternary mt-1.5">
             {translate('Loading affected resources...')}
           </p>
         </div>
       ) : (
         resources &&
         resources.length > 0 && (
-          <div className="mb-4">
-            <h6 className="mb-3">
+          <div className="mb-3">
+            <h6 className="mb-2.5">
               {translate('Resources that will be affected:')}
             </h6>
             <div className="card card-table card-bordered">

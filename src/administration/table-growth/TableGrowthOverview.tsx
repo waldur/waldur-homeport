@@ -18,7 +18,7 @@ const StatCard: FC<{
   valueClass?: string;
   extra?: ReactNode;
 }> = ({ value, label, valueClass = '', extra }) => (
-  <Card className="card-bordered mb-5 h-full">
+  <Card className="card-bordered mb-4 h-full">
     <Card.Body>
       <div className="flex items-center">
         <strong className={`text-2xl ${valueClass}`}>{value}</strong>
@@ -34,7 +34,7 @@ export const TableGrowthOverview: FC<TableGrowthOverviewProps> = ({
   alerts,
 }) => {
   return (
-    <Row className="mb-6">
+    <Row className="mb-5">
       <Col md={6} lg={3}>
         <StatCard value={data.date} label={translate('Date')} />
       </Col>
@@ -56,7 +56,7 @@ export const TableGrowthOverview: FC<TableGrowthOverviewProps> = ({
               <WarningCircleIcon
                 size={24}
                 weight="bold"
-                className="text-danger ms-2"
+                className="text-danger ms-1.5"
               />
             ) : null
           }

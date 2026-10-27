@@ -27,7 +27,7 @@ export const EmailConfigCard: FC<EmailConfigCardProps> = ({ data }) => {
           : translate('No relay configured')
       }
       defaultOpen
-      className="mb-6"
+      className="mb-5"
     >
       <p className="text-quaternary">
         {translate(

@@ -19,13 +19,13 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   return (
-    <Card className="card-bordered mb-10">
+    <Card className="card-bordered mb-8">
       <Card.Body>
         <PublicOfferingCardTitle>
           {translate('Location')}
         </PublicOfferingCardTitle>
         <Row>
-          <Col xs={12} lg className="mb-5 mb-lg-0">
+          <Col xs={12} lg className="mb-4 lg:mb-0">
             <div className="bg-gray-300 dark:bg-gray-dark-600 w-full h-full min-h-[300px]">
               {offering.latitude && offering.longitude ? (
                 <LeafletMap
@@ -41,13 +41,13 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
           </Col>
           {showExperimentalUiComponents && (
             <Col xs={12} lg={4}>
-              <div className="bg-tertiary p-10 h-full">
+              <div className="bg-tertiary p-8 h-full">
                 <PublicOfferingCardTitle>
                   {translate('Availability:')}
                 </PublicOfferingCardTitle>
                 <ul>
                   {[1, 2, 3, 4, 5].map((i) => (
-                    <li className="mb-2" key={i}>
+                    <li className="mb-1.5" key={i}>
                       <Link
                         state=""
                         className="text-decoration-underline text-brand"

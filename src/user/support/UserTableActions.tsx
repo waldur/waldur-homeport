@@ -47,7 +47,7 @@ export const UserTableActions = ({ refetch }) => {
       {isStaffUser && (
         <BaseButton
           onClick={openCreateDialog}
-          className="me-3"
+          className="me-2.5"
           iconNode={<UserPlusIcon weight="bold" />}
           label={translate('Create user')}
           variant="tertiary"
@@ -57,7 +57,7 @@ export const UserTableActions = ({ refetch }) => {
       {showEduTeams && (
         <BaseButton
           onClick={openAddRemoteDialog}
-          className="me-3"
+          className="me-2.5"
           iconNode={<PlusIcon weight="bold" />}
           label={translate('Add user')}
           variant="tertiary"

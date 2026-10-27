@@ -51,7 +51,7 @@ export const GLAuthConfigDialog: FC<OwnProps> = (props) => {
         value={view}
         onValueChange={(k) => k && setView(k as View)}
       >
-        <TabsList className="mb-5">
+        <TabsList className="mb-4">
           <TabsTrigger value="toml">{translate('TOML config')}</TabsTrigger>
           <TabsTrigger value="tree" disabled={!hasTree}>
             {translate('Directory')}

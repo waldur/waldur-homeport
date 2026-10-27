@@ -57,7 +57,7 @@ const MethodChoice: FC<{ method: AccessMethod }> = ({ method }) => (
       <div
         // border-[1px], not Bootstrap's .border: its !important colour would
         // override the selected state's border-brand.
-        className={`rounded border-[1px] p-4 ${
+        className={`rounded border-[1px] p-3 ${
           input.checked ? 'border-brand bg-brand-subtle' : 'border-secondary'
         }`}
       >
@@ -171,7 +171,7 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
               </>
             }
           >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               {methods.length > 1
                 ? methods.map((method) => (
                     <MethodChoice key={method.key} method={method} />
@@ -188,7 +188,7 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
                   <div>
                     {methods.length > 1 ? <hr className="mt-0" /> : null}
                     <div className="font-medium">{translate('Project')}</div>
-                    <div className="text-quaternary text-xs mb-4">
+                    <div className="text-quaternary text-xs mb-3">
                       {translate(
                         'The resource is created in the project you pick.',
                       )}
@@ -220,7 +220,7 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
                         ? translate('Round')
                         : translate('Submission deadline')}
                     </div>
-                    <div className="text-quaternary text-xs mb-4">
+                    <div className="text-quaternary text-xs mb-3">
                       {usesCallVocabulary()
                         ? translate(
                             'Your proposal is reviewed under the call and round you pick.',

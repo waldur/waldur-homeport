@@ -36,7 +36,7 @@ export const Playground: Story = {
   render: (args) => {
     const [value, setValue] = useState<number | string>(5);
     return (
-      <div className="max-w-[420px] p-6">
+      <div className="max-w-[420px] p-5">
         <NumberInput
           aria-label="Playground"
           {...args}
@@ -82,7 +82,7 @@ export const Clamping: Story = {
   render: () => {
     const [value, setValue] = useState<number | string>(5);
     return (
-      <div className="flex max-w-[420px] flex-col gap-2 p-6">
+      <div className="flex max-w-[420px] flex-col gap-1.5 p-5">
         <NumberInput
           aria-label="Between 1 and 20"
           value={value}
@@ -98,7 +98,7 @@ export const Clamping: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div className="flex max-w-[420px] flex-col gap-4 p-6">
+    <div className="flex max-w-[420px] flex-col gap-3 p-5">
       <NumberInput
         aria-label="Small"
         size="sm"

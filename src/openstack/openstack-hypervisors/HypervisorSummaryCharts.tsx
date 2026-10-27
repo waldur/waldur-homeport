@@ -107,7 +107,7 @@ const ChartItem: FC<ChartItemProps> = ({
     <Stack direction="horizontal" gap={4}>
       <DonutChart data={data} />
       <div className="flex flex-col gap-1">
-        <span className="flex items-center gap-2 text-xs">
+        <span className="flex items-center gap-1.5 text-xs">
           <span
             className="rounded-full inline-block"
             style={{ width: 8, height: 8, backgroundColor: usedColor }}
@@ -115,7 +115,7 @@ const ChartItem: FC<ChartItemProps> = ({
           {usedLabel}
         </span>
         {isOvercommitted && overcommittedLabel ? (
-          <span className="flex items-center gap-2 text-xs text-warning">
+          <span className="flex items-center gap-1.5 text-xs text-warning">
             <span
               className="rounded-full inline-block"
               style={{ width: 8, height: 8, backgroundColor: warningColor }}
@@ -123,7 +123,7 @@ const ChartItem: FC<ChartItemProps> = ({
             {overcommittedLabel}
           </span>
         ) : (
-          <span className="flex items-center gap-2 text-xs">
+          <span className="flex items-center gap-1.5 text-xs">
             <span
               className="rounded-full inline-block"
               style={{ width: 8, height: 8, backgroundColor: availableColor }}
@@ -131,7 +131,7 @@ const ChartItem: FC<ChartItemProps> = ({
             {availableLabel}
           </span>
         )}
-        <span className="flex items-center gap-2 text-xs">
+        <span className="flex items-center gap-1.5 text-xs">
           <span
             className="rounded-full inline-block"
             style={{ width: 8, height: 8, backgroundColor: totalColor }}
@@ -189,13 +189,13 @@ export const HypervisorSummaryCharts: FC<{
   const disk = computeUsage(usedDisk, totalDisk);
 
   return (
-    <Card className="mb-6 card-bordered">
+    <Card className="mb-5 card-bordered">
       <Card.Header className="border-b-[1px] border-b-secondary">
         <Card.Title>
           <span className="h3">{translate('Hypervisor summary')}</span>
         </Card.Title>
       </Card.Header>
-      <Card.Body className="p-6">
+      <Card.Body className="p-5">
         <Stack direction="horizontal" gap={10} className="flex-wrap">
           <ChartItem
             used={usedVcpus}

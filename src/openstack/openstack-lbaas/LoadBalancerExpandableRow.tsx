@@ -214,7 +214,7 @@ const SecurityGroupsTab: FC<{
 
   if (!portUuid) {
     return (
-      <p className="text-quaternary py-3">
+      <p className="text-quaternary py-2.5">
         {translate('No VIP port assigned.')}
       </p>
     );
@@ -295,8 +295,8 @@ const VipPortDetails: FC<{
   const portLabel = port?.name || port?.uuid || portUuid;
 
   return (
-    <div className="mt-4 border-t-[1px] border-t-secondary pt-4">
-      <div className="row mb-2">
+    <div className="mt-3 border-t-[1px] border-t-secondary pt-3">
+      <div className="row mb-1.5">
         <div className="col-sm-3 font-medium text-quaternary">
           {translate('VIP port')}
         </div>
@@ -317,7 +317,7 @@ const VipPortDetails: FC<{
         </div>
       </div>
       {ipAddresses && (
-        <div className="row mb-2">
+        <div className="row mb-1.5">
           <div className="col-sm-3 font-medium text-quaternary">
             {translate('VIP port IPs')}
           </div>
@@ -325,7 +325,7 @@ const VipPortDetails: FC<{
         </div>
       )}
       {port?.mac_address && (
-        <div className="row mb-2">
+        <div className="row mb-1.5">
           <div className="col-sm-3 font-medium text-quaternary">
             {translate('MAC address')}
           </div>
@@ -333,7 +333,7 @@ const VipPortDetails: FC<{
         </div>
       )}
       {port?.network_name && (
-        <div className="row mb-2">
+        <div className="row mb-1.5">
           <div className="col-sm-3 font-medium text-quaternary">
             {translate('Network')}
           </div>
@@ -364,15 +364,15 @@ const FloatingIpDetails: FC<{ floatingIpUrl?: string | null }> = ({
   if (!floatingIpUrl) return null;
 
   return (
-    <div className="mt-4 border-t-[1px] border-t-secondary pt-4">
-      <div className="row mb-2">
+    <div className="mt-3 border-t-[1px] border-t-secondary pt-3">
+      <div className="row mb-1.5">
         <div className="col-sm-3 font-medium text-quaternary">
           {translate('Floating IP')}
         </div>
         <div className="col-sm-9">
           {floatingIp?.address ? floatingIp.address : renderFieldOrDash(null)}
           {floatingIp?.name && (
-            <span className="text-quaternary ms-2">({floatingIp.name})</span>
+            <span className="text-quaternary ms-1.5">({floatingIp.name})</span>
           )}
         </div>
       </div>
@@ -387,7 +387,7 @@ export const LoadBalancerExpandableRow: FC<LoadBalancerExpandableRowProps> = ({
     <ExpandableContainer>
       <EmbeddedTabs
         defaultValue="details"
-        listClassName="mb-4"
+        listClassName="mb-3"
         tabs={[
           {
             key: 'details',

@@ -19,7 +19,7 @@ export const DisplayNameField: FunctionComponent<DisplayNameFieldProps> = (
       required={true}
       help={translate('Label that is visible to users in Marketplace.')}
       helpEnd
-      space={5}
+      space={4}
       name={props.name}
       validate={required}
       disabled={props.disabled}

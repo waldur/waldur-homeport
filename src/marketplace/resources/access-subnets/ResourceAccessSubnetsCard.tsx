@@ -50,7 +50,7 @@ export const ResourceAccessSubnetsCard: FunctionComponent<
   return (
     <>
       {defaults.length > 0 && (
-        <Card className="card-bordered mb-5">
+        <Card className="card-bordered mb-4">
           <Card.Header>
             <Card.Title className="h5">
               {translate('Default allowed (from provider)')}
@@ -90,7 +90,7 @@ export const ResourceAccessSubnetsCard: FunctionComponent<
               label={translate(
                 'Defined for this organization and offering, and applied to all of its resources of that offering. Managed under the organization’s access control.',
               )}
-              className="ms-2"
+              className="ms-1.5"
             />
           </>
         }

@@ -41,7 +41,7 @@ export const CustomerMembershipRestrictionsPanel: FC<
   });
 
   return (
-    <div className="p-6">
+    <div className="p-5">
       <EditFieldProvider scope={customer} callback={updateCustomer}>
         <FormTable hideActions={!canEdit}>
           <MembershipRestrictionFormItems />

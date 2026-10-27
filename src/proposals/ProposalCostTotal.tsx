@@ -63,7 +63,7 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
               }
               labelCol={12}
               valueCol={12}
-              space={3}
+              space={2.5}
             />
           )}
           {Boolean(total.oneTime) && (
@@ -72,7 +72,7 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
               value={defaultCurrency(total.oneTime)}
               labelCol={12}
               valueCol={12}
-              space={3}
+              space={2.5}
             />
           )}
         </>
@@ -91,7 +91,7 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
       {showsFigures && (
         // Recurring plus one-time, the sum the checkout's own total card shows,
         // so the two pages do not define "total" differently.
-        <div className="separator my-4" />
+        <div className="separator my-3" />
       )}
       {showsFigures && (
         <div className="flex justify-between items-center text-lg">
@@ -111,16 +111,16 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
       <Panel
         title={title ?? translate('Summary')}
         cardBordered
-        className="mb-5"
+        className="mb-4"
       >
         {body}
       </Panel>
     );
   }
   return (
-    <div className="flex justify-end mt-4">
+    <div className="flex justify-end mt-3">
       <div
-        className="border-t-[1px] border-t-secondary pt-3"
+        className="border-t-[1px] border-t-secondary pt-2.5"
         style={{ minWidth: 320 }}
       >
         {body}

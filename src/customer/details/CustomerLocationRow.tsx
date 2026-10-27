@@ -58,7 +58,7 @@ export const CustomerLocationRow: FC<{
               iconNode={<TrashIcon weight="bold" className="text-danger" />}
               onClick={mutate}
               variant="secondary"
-              className="me-3"
+              className="me-2.5"
               size="sm"
               pending={isPending}
               tooltip={translate('Remove')}

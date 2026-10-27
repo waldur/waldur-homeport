@@ -84,7 +84,7 @@ export const ProposalRoleBasedTabs = ({
       // Follows the router: a tab click the unsaved-changes prompt cancels
       // must not leave the clicked tab looking active.
       activeKey={router.globals.current.name}
-      className="mb-8"
+      className="mb-6"
       items={[
         { key: 'proposals.manage-proposal', title: translate('Applicant') },
         showsReviewerTab && {

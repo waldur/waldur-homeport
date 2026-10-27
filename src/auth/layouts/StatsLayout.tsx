@@ -61,7 +61,7 @@ export const StatsLayout = () => {
           <AuthHeaderControls />
         </div>
         <div className="layout-stats-form">
-          <div className="login-logo mb-3">
+          <div className="login-logo mb-2.5">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
               src={imageUrl}

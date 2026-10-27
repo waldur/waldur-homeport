@@ -115,7 +115,7 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
       <TimelineContent asChild>
         <button
           type="button"
-          className="stretched-link block w-full py-2 pr-3 border-0 bg-transparent text-left text-inherit focus-visible:outline-none mb-0 pb-3"
+          className="stretched-link block w-full py-1.5 pr-3 border-0 bg-transparent text-left text-inherit focus-visible:outline-none mb-0 pb-2.5"
           aria-current={isSelected || undefined}
           onClick={onSelect}
         >

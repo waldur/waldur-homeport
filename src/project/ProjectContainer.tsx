@@ -30,7 +30,7 @@ const PageHero = ({ project }) => {
         <TabNav
           aria-label={translate('Project views')}
           activeKey={state.name}
-          listClassName="mb-4"
+          listClassName="mb-3"
           items={[
             {
               key: 'project.dashboard',

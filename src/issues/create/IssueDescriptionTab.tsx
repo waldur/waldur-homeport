@@ -98,7 +98,7 @@ export const IssueDescriptionTab = ({
         description={context?.descriptionNote}
       />
       {templateFiles.length > 0 && (
-        <FormField className="mb-5">
+        <FormField className="mb-4">
           <FormLabel>{translate('Template files')}</FormLabel>
           <AttachmentsList attachments={templateFiles} />
         </FormField>

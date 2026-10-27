@@ -7,7 +7,7 @@ import { ExtendedUserAction } from './types';
 
 export const ActionContext: FC<{ row: ExtendedUserAction }> = ({ row }) => {
   return (
-    <div className="flex items-center gap-3 flex-wrap mt-2">
+    <div className="flex items-center gap-2.5 flex-wrap mt-1.5">
       {row.organization_name && row.organization_uuid && (
         <div className="flex items-center gap-1">
           <span className="text-quaternary small">

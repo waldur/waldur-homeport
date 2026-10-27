@@ -45,7 +45,7 @@ export const Step2SelectOffering: FC<Step2Props> = ({
 
   return (
     <div>
-      <FormField className="mb-7">
+      <FormField className="mb-5.5">
         <FormLabel>{translate('Select offering')}</FormLabel>
         <Field
           name="offering"
@@ -77,14 +77,14 @@ export const Step2SelectOffering: FC<Step2Props> = ({
       </FormField>
       {offering && (
         <Card className="card-bordered text-quaternary bg-secondary offering-components">
-          <Card.Body className="p-5">
+          <Card.Body className="p-4">
             <p className="font-medium mb-0">
               {offering?.components?.length
                 ? translate('This offering includes the following components:')
                 : translate('The offering has no components!')}
             </p>
             {Boolean(offering?.components?.length) && (
-              <ul className="mt-3 mb-0">
+              <ul className="mt-2.5 mb-0">
                 {offering.components.map((component) => (
                   <li key={component.uuid || component.type}>
                     {component.name} ({component.type})

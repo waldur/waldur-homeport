@@ -55,7 +55,7 @@ export const MatrixDiagnosticsDialog: FC = () => {
           <tbody>
             {data.checks.map((check) => (
               <tr key={check.name}>
-                <td className="text-nowrap pe-3" style={{ width: 24 }}>
+                <td className="text-nowrap pe-2.5" style={{ width: 24 }}>
                   {check.ok ? (
                     <CheckCircleIcon
                       size={20}
@@ -70,7 +70,7 @@ export const MatrixDiagnosticsDialog: FC = () => {
                     />
                   )}
                 </td>
-                <td className="font-medium text-nowrap pe-4">{check.label}</td>
+                <td className="font-medium text-nowrap pe-3">{check.label}</td>
                 <td>
                   <span
                     className={check.ok ? 'text-quaternary' : 'text-danger'}

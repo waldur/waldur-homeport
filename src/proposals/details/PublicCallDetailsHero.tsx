@@ -33,7 +33,7 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
       cardBordered
       title={
         <>
-          <div className="flex flex-wrap gap-2 items-center">
+          <div className="flex flex-wrap gap-1.5 items-center">
             <h3 className="mb-0 leading-none">{call.name}</h3>
             <StateIndicator
               variant={status.color}
@@ -55,7 +55,7 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
         )
       }
       quickActions={
-        <div className="flex flex-col flex-wrap gap-2">
+        <div className="flex flex-col flex-wrap gap-1.5">
           <PublicCallApplyButton call={call} size="lg" />
           <CallProposalsButton call={call} />
         </div>

@@ -73,7 +73,7 @@ const ProviderDetailsHero: FunctionComponent<ProviderDetailsProps> = (data) => {
         <Stack
           direction="horizontal"
           gap={2}
-          className="gap-6 text-quaternary mb-1"
+          className="gap-5 text-quaternary mb-1"
         >
           {data.provider.customer_country && (
             <CountryFlag countryCode={data.provider.customer_country} />

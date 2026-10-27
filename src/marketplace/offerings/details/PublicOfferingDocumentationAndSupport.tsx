@@ -16,12 +16,12 @@ interface PublicOfferingDocumentationAndSupportProps {
 export const PublicOfferingDocumentationAndSupport: FunctionComponent<
   PublicOfferingDocumentationAndSupportProps
 > = ({ offering }) => (
-  <Card className="card-bordered mb-10">
+  <Card className="card-bordered mb-8">
     <Card.Body>
       <PublicOfferingCardTitle>
         {translate('Documentation & support')}
       </PublicOfferingCardTitle>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         {offering.documentation_url && (
           <div>
             <p className="font-medium mb-1">

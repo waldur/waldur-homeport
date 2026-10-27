@@ -34,7 +34,7 @@ export const TriggerConsumptionSyncAction = () => {
     <Card className="h-full">
       <Card.Body>
         <h6>{translate('Trigger Consumption Sync')}</h6>
-        <p className="text-quaternary small mb-3">
+        <p className="text-quaternary small mb-2.5">
           {translate(
             'Manually trigger consumption data synchronization from Arrow.',
           )}

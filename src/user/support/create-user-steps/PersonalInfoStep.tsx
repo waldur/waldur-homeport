@@ -33,7 +33,7 @@ export const PersonalInfoStep: FC<WizardStepProps> = (props) => {
           {...lockedProps(props.data, 'native_name')}
         />
       )}
-      <h6 className="font-medium mb-4 mt-6">
+      <h6 className="font-medium mb-3 mt-5">
         {translate('Organization & Contact')}
       </h6>
       <StringGroup

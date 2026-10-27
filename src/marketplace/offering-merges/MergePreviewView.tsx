@@ -33,7 +33,7 @@ const getPriceDifferences = (warnings: OfferingMergeIssue[]) =>
     );
 
 const IssueCode: FC<{ code: string }> = ({ code }) => (
-  <code className="text-xs ms-2">{code}</code>
+  <code className="text-xs ms-1.5">{code}</code>
 );
 
 interface MergePreviewViewProps {
@@ -64,14 +64,14 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
   const prices = getPriceDifferences(warnings);
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       <section>
         <SectionHeading
           title={translate('Blockers')}
           help={translate(
             'What prevents the merge from running. Each one has to be resolved in the mappings or on the offerings themselves.',
           )}
-          className="mb-3"
+          className="mb-2.5"
         />
         {blockers.length === 0 ? (
           <AlertItem
@@ -79,7 +79,7 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
             title={translate('Nothing blocks this merge.')}
           />
         ) : (
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1.5">
             {blockers.map((blocker, index) => (
               <AlertItem
                 key={`${blocker.code}-${index}`}
@@ -102,12 +102,12 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
           help={translate(
             'Consequences the merge does not prevent. Each one has to be acknowledged before the merge may be run.',
           )}
-          className="mb-3"
+          className="mb-2.5"
         />
         {warnings.length === 0 ? (
           <p className="text-quaternary mb-0">{translate('No warnings.')}</p>
         ) : (
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1.5">
             {warnings.map((warning, index) => (
               <AlertItem
                 key={`${warning.code}-${index}`}
@@ -181,7 +181,7 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
           help={translate(
             'How many invoice lines the merge rewrites under the chosen policy, and which usage summaries it recomputes afterwards.',
           )}
-          className="mb-3"
+          className="mb-2.5"
         />
         <FormTable.Card>
           <FormTable>

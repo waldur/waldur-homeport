@@ -25,7 +25,7 @@ export const IdentityProviderIndicator = ({
         <IdentityProviderLogo name={user.registration_method} />
       </div>
     </Tooltip>
-    <div className="ms-5 flex flex-col">
+    <div className="ms-4 flex flex-col">
       <span className="text-quaternary hover:text-brand font-medium">
         {user.identity_provider_label}
       </span>

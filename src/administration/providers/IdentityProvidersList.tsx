@@ -90,7 +90,7 @@ const SettingsTabContent = ({
       <FormTable.Card
         title={groupName}
         actions={actions}
-        className="card-bordered mb-5"
+        className="card-bordered mb-4"
       >
         <FormTable>
           {group.items.map((item) => (
@@ -126,7 +126,7 @@ const ProvidersTabContent = ({
   refetchSettings: () => void;
 }) => (
   <Row>
-    <Col xs={12} md={6} xl={4} className="mb-6">
+    <Col xs={12} md={6} xl={4} className="mb-5">
       <ProviderCard
         title="Keycloak"
         description={translate(
@@ -137,7 +137,7 @@ const ProvidersTabContent = ({
         refetch={refetchProviders}
       />
     </Col>
-    <Col xs={12} md={6} xl={4} className="mb-6">
+    <Col xs={12} md={6} xl={4} className="mb-5">
       <ProviderCard
         title="TARA"
         description={translate('Identity service of the Republic of Estonia')}
@@ -146,7 +146,7 @@ const ProvidersTabContent = ({
         refetch={refetchProviders}
       />
     </Col>
-    <Col xs={12} md={6} xl={4} className="mb-6">
+    <Col xs={12} md={6} xl={4} className="mb-5">
       <ProviderCard
         title="MyAccessID"
         description={translate(
@@ -157,7 +157,7 @@ const ProvidersTabContent = ({
         refetch={refetchProviders}
       />
     </Col>
-    <Col xs={12} md={6} xl={4} className="mb-6">
+    <Col xs={12} md={6} xl={4} className="mb-5">
       <ProviderCard
         title={translate('Local identity provider')}
         description={translate('Digital identity is managed by Waldur itself.')}
@@ -172,7 +172,7 @@ const ProvidersTabContent = ({
         editable={false}
       />
     </Col>
-    <Col xs={12} md={6} xl={4} className="mb-6">
+    <Col xs={12} md={6} xl={4} className="mb-5">
       <ProviderCard
         title="SAML2"
         description={translate(
@@ -187,7 +187,7 @@ const ProvidersTabContent = ({
         editable={false}
       />
     </Col>
-    <Col xs={12} md={6} xl={4} className="mb-6">
+    <Col xs={12} md={6} xl={4} className="mb-5">
       <ProviderCard
         title="FreeIPA"
         description={translate(
@@ -292,7 +292,7 @@ export const IdentityProvidersList = () => {
       </Card.Header>
       <Card.Body>
         <Tabs mount="all" value={activeKey} onValueChange={handleSelect}>
-          <TabsList className="mb-5">
+          <TabsList className="mb-4">
             {tabs.map((tab) => (
               <TabsTrigger
                 key={tab.key}

@@ -52,7 +52,7 @@ export const BrandPatternLayout = () => {
       </div>
       <div className="layout-brand-pattern-content">
         <div className="layout-brand-pattern-card">
-          <div className="login-logo mb-3">
+          <div className="login-logo mb-2.5">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
               src={imageUrl}

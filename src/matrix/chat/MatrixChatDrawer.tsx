@@ -220,7 +220,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
             <CallInProgressBanner />
 
             {showCrossRoomBanner && (
-              <div className="flex items-center gap-2 px-4 py-2 bg-success-subtle border-b-[1px] border-b-secondary">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-success-subtle border-b-[1px] border-b-secondary">
                 <PhoneIcon size={16} className="text-success" weight="fill" />
                 <span className="text-sm grow">
                   {translate('Call in progress in {room}', {
@@ -239,7 +239,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
 
             <div className="grow overflow-hidden flex flex-col">
               {showConnectionError && (
-                <div className="grow flex items-center justify-center p-4">
+                <div className="grow flex items-center justify-center p-3">
                   <LoadingErred
                     loadData={() => connect(roomUuid)}
                     message={

@@ -40,7 +40,7 @@ export const UserDelete = ({ user }: { user: User }) => {
   return (
     <Panel
       title={translate('Delete account')}
-      className="mb-5"
+      className="mb-4"
       cardBordered
       actions={
         <RemovalActionButton
@@ -52,7 +52,7 @@ export const UserDelete = ({ user }: { user: User }) => {
         />
       }
     >
-      <ul className="text-quaternary mb-7">
+      <ul className="text-quaternary mb-5.5">
         {user.agreement_date && (
           <li>
             <TermsOfService agreementDate={user.agreement_date} />

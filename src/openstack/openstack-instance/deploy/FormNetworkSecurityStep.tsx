@@ -129,7 +129,7 @@ const CustomIpField = ({
             value={input?.value}
             onChange={input.onChange}
             hidden={selected?.value !== 'other'}
-            containerClassName={selected?.value === 'other' ? 'mt-4' : 'hidden'}
+            containerClassName={selected?.value === 'other' ? 'mt-3' : 'hidden'}
             autoFocus={autoFocus}
           />
 
@@ -317,8 +317,8 @@ const renderNetworkRows = ({
   }, [fields, fipQuotaExhausted]);
 
   return (
-    <div className="mb-5">
-      <div className="border-rows mb-4">
+    <div className="mb-4">
+      <div className="border-rows mb-3">
         {fields.map((network, index) => {
           // Decided per row: a tenant can hold subnets of both families, and
           // with and without a router, and a row that can take a floating IP
@@ -533,11 +533,11 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
       disabled={props.disabled}
       disabledTooltip={props.disabledTooltip}
     >
-      <div className="mb-5 mt-n4 border-b-[1px] border-b-secondary">
+      <div className="mb-4 -mt-3 border-b-[1px] border-b-secondary">
         {showSshKeyWarning && (
           <AlertItem
             variant="warning"
-            className="mb-4"
+            className="mb-3"
             title={translate(
               'Important: If you lose the SSH private key selected here, you will permanently lose access to your virtual machine (VM). It cannot be recovered without the key.',
             )}
@@ -548,7 +548,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
                     'To reduce this risk, we strongly recommend that you:',
                   )}
                 </p>
-                <ul className="mb-2">
+                <ul className="mb-1.5">
                   <li>
                     {translate(
                       'Keep your SSH private key secure and back it up in a safe location.',
@@ -577,8 +577,8 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
         />
       </div>
 
-      <FormField className="mb-2 border-b-[1px] border-b-secondary">
-        <div className="flex justify-between mb-5">
+      <FormField className="mb-1.5 border-b-[1px] border-b-secondary">
+        <div className="flex justify-between mb-4">
           <FormLabel className="font-semibold mb-0">
             {translate('Network')}
           </FormLabel>

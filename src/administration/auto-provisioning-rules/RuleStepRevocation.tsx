@@ -52,9 +52,9 @@ const Summary: FC = () => {
   ].filter(Boolean) as string[];
 
   return (
-    <div className="mb-5">
-      <h6 className="mb-2">{translate('Summary')}</h6>
-      <ul className="mb-0 ps-4">
+    <div className="mb-4">
+      <h6 className="mb-1.5">{translate('Summary')}</h6>
+      <ul className="mb-0 ps-3">
         <li>
           {filters.length
             ? translate('Matches users by: {filters}.', {

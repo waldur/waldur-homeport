@@ -51,17 +51,17 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
           'Make sure to copy your personal access token now. You will not be able to see it again.',
         )}
         // The secret is shown only once: keep the tinted warning surface.
-        className="mb-4 bg-warning-subtle"
+        className="mb-3 bg-warning-subtle"
       />
 
-      <div className="mb-3">
+      <div className="mb-2.5">
         <FormHeading as="p">{translate('Token name')}</FormHeading>
         <div>{tokenName}</div>
       </div>
 
-      <div className="mb-3">
+      <div className="mb-2.5">
         <FormHeading as="p">{translate('Your token')}</FormHeading>
-        <div className="flex items-center gap-2 p-3 bg-tertiary dark:bg-quaternary rounded">
+        <div className="flex items-center gap-1.5 p-2.5 bg-tertiary dark:bg-quaternary rounded">
           <button
             className="text-btn shrink-0"
             type="button"
@@ -82,7 +82,7 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
 
       <div>
         <FormHeading as="p">{translate('Example usage')}</FormHeading>
-        <div className="flex items-start gap-2 p-3 bg-tertiary dark:bg-quaternary rounded">
+        <div className="flex items-start gap-1.5 p-2.5 bg-tertiary dark:bg-quaternary rounded">
           <code className="grow text-break">
             {showSecret ? curlExample : maskedCurlExample}
           </code>

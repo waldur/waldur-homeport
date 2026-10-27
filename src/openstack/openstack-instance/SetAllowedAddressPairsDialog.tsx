@@ -101,7 +101,12 @@ const PairAddButton = ({ onClick }: { onClick: () => void }) => (
 const PairsTable: React.FC<{ fields: PairsFields }> = ({ fields }) =>
   fields.length > 0 ? (
     <>
-      <Table responsive={true} bordered={true} striped={true} className="mt-3">
+      <Table
+        responsive={true}
+        bordered={true}
+        striped={true}
+        className="mt-2.5"
+      >
         <thead>
           <tr>
             <th>{translate('Internal network mask (CIDR)')}</th>

@@ -32,7 +32,7 @@ export const ProjectCommunication: FC = () => {
   if (activeRoom && isMember) {
     return (
       <div
-        className="card overflow-hidden mt-6"
+        className="card overflow-hidden mt-5"
         style={{ height: 'calc(100vh - 320px)', minHeight: 480 }}
       >
         <MatrixChatPanel

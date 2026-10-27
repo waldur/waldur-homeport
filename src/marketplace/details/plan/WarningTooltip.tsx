@@ -21,7 +21,7 @@ export const WarningTooltip = () => {
         <WarningTip
           label={<FieldError error={submitErrors.plan_entries} />}
           size={18}
-          className="ms-2 mb-1"
+          className="ms-1.5 mb-1"
           tooltipProps={{ autoWidth: true }}
         />
       )}

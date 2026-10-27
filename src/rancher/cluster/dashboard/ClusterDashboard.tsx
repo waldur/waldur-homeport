@@ -14,7 +14,7 @@ export const ClusterDashboard: FC<{
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   return (
     <>
-      <Card className="card-bordered mb-6">
+      <Card className="card-bordered mb-5">
         <Card.Body>
           <ClusterSummary resourceScope={nestedScope} refetch={refetch} />
         </Card.Body>

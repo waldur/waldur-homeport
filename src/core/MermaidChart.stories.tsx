@@ -23,7 +23,7 @@ const withStoryTheme: Decorator = (Story, context) => {
   }, [theme]);
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme: () => {} }}>
-      <div className="min-h-[240px] bg-[var(--card-bg)] p-6">
+      <div className="min-h-[240px] bg-[var(--card-bg)] p-5">
         <Story />
       </div>
     </ThemeContext.Provider>
@@ -188,10 +188,10 @@ const GALLERY: [string, string][] = [
 ];
 
 const Gallery = () => (
-  <div className="grid gap-8 md:grid-cols-2">
+  <div className="grid gap-6 md:grid-cols-2">
     {GALLERY.map(([title, code]) => (
       <section key={title}>
-        <h4 className="mb-2 text-sm font-semibold text-primary">{title}</h4>
+        <h4 className="mb-1.5 text-sm font-semibold text-primary">{title}</h4>
         <MermaidChart code={code} />
       </section>
     ))}

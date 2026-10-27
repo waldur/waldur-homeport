@@ -217,7 +217,7 @@ export const ProposalDetails = ({
 
   return (
     <SidebarLayout.Container>
-      <SidebarLayout.Body className="mb-10">
+      <SidebarLayout.Body className="mb-8">
         <AllocationStartBanner proposal={proposal} />
         <AllocationOutcomeSection proposal={proposal} awardRows={awardRows} />
         <ProposalDetailsOverviewStep
@@ -273,7 +273,7 @@ export const ProposalDetails = ({
         </AccordionCard>
       </SidebarLayout.Body>
       <SidebarLayout.Sidebar transparent>
-        <Panel title={translate('Progress')} cardBordered className="mb-5">
+        <Panel title={translate('Progress')} cardBordered className="mb-4">
           <FormSteps steps={navSteps} hideStatusIcons />
         </Panel>
         <ProposalCostTotal
@@ -288,7 +288,7 @@ export const ProposalDetails = ({
             onClick={() =>
               openDialog(SubmitReviewDialog, { resolve: { review, refetch } })
             }
-            className="w-full mt-2"
+            className="w-full mt-1.5"
             iconNode={<PaperPlaneTiltIcon weight="bold" />}
             label={translate('Submit review')}
             size="lg"
@@ -307,7 +307,7 @@ export const ProposalDetails = ({
                 size: 'md',
               })
             }
-            className="w-full mt-2"
+            className="w-full mt-1.5"
             iconNode={<ChatTextIcon weight="bold" />}
             label={translate('Create review')}
             size="lg"

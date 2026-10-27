@@ -31,10 +31,10 @@ export const PubSubHealthPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
 
   if (isLoading || !data) {
     return (
-      <div className="pt-5">
-        <div className="text-center py-10">
+      <div className="pt-4">
+        <div className="text-center py-8">
           <LoadingSpinner />
-          <p className="text-quaternary mt-4">
+          <p className="text-quaternary mt-3">
             {translate('Fetching PubSub health status, please standby...')}
           </p>
         </div>
@@ -47,7 +47,7 @@ export const PubSubHealthPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
     const is503 = errorMessage.includes('503');
 
     return (
-      <div className="pt-5">
+      <div className="pt-4">
         <AlertItem
           variant="error"
           type="floating"
@@ -69,7 +69,7 @@ export const PubSubHealthPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
   }
 
   const panelActions = (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-3">
       <RefreshButton refetch={refetch} isLoading={isRefetching} />
       <PubSubCircuitBreakerResetButton
         currentState={data.circuit_breaker.state}
@@ -79,7 +79,7 @@ export const PubSubHealthPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
   );
 
   return (
-    <div className="pt-5">
+    <div className="pt-4">
       <TabToolbar portal={portal}>{panelActions}</TabToolbar>
       <PubSubOverviewCards data={data} />
       <PubSubIssuesCard issues={data.issues} />

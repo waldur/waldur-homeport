@@ -116,7 +116,7 @@ const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (props) => {
   const projectMeta = selectedRole ? meta : undefined;
 
   return (
-    <div className="flex flex-col gap-2" data-testid="role-project-select">
+    <div className="flex flex-col gap-1.5" data-testid="role-project-select">
       <Select
         aria-label={roleLabel}
         placeholder={placeholder}

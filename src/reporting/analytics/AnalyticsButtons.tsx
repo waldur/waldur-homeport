@@ -102,7 +102,7 @@ export const AnalyticsButtons: FC<AnalyticsButtonsProps> = ({
   const hasWhySo = supportedModes.includes('why-so');
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-1.5">
       {hasWhatIf && (
         <WhatIfButton
           state={state}

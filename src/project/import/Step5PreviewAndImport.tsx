@@ -143,7 +143,7 @@ export const Step5PreviewAndImport: FC<Step5Props> = ({
                   <FactoryIcon
                     size={16}
                     weight="bold"
-                    className="ms-3 inline-block text-quaternary"
+                    className="ms-2.5 inline-block text-quaternary"
                   />
                 </Tooltip>
               )}
@@ -299,10 +299,10 @@ export const Step5PreviewAndImport: FC<Step5Props> = ({
 
   return (
     <div>
-      <div className="flex justify-start mb-3">
+      <div className="flex justify-start mb-2.5">
         <div ref={refToolbar}>{/* Portal destination */}</div>
       </div>
-      <div className="flex justify-between text-quaternary mb-3">
+      <div className="flex justify-between text-quaternary mb-2.5">
         {importType === 'projects_only' ? (
           <span>
             {data.length} {translate('Projects')}

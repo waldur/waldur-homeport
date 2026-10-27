@@ -45,7 +45,7 @@ export const ResourceSummary: FunctionComponent<ResourceSummaryProps> = (
           </>
         ) : (
           <Tabs mount="active" defaultValue="details">
-            <TabsList className="mb-4">
+            <TabsList className="mb-3">
               <TabsTrigger value="details">{translate('Details')}</TabsTrigger>
               {props.extraTabs &&
                 props.extraTabs.map((tab) => (

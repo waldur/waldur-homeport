@@ -91,7 +91,7 @@ describe('NativeSelect', () => {
       <NativeSelect
         aria-label="Letter"
         fit
-        containerClassName="mb-2"
+        containerClassName="mb-1.5"
         className="font-medium"
       >
         {options}
@@ -100,6 +100,6 @@ describe('NativeSelect', () => {
     const select = screen.getByRole('combobox');
     expect(select).toHaveClass('font-medium', 'w-auto');
     // eslint-disable-next-line testing-library/no-node-access -- the wrapper is what carries the layout classes
-    expect(select.parentElement).toHaveClass('mb-2', 'w-fit');
+    expect(select.parentElement).toHaveClass('mb-1.5', 'w-fit');
   });
 });

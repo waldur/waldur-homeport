@@ -123,7 +123,7 @@ const InvoiceItemLine: FC<{
               </>
             }
           >
-            <span className="text-success ps-5">
+            <span className="text-success ps-4">
               ↳ {translate('Volume discount')}
               {componentLabel ? ` — ${componentLabel}` : ''}
               {dd.discount_percent != null
@@ -137,7 +137,7 @@ const InvoiceItemLine: FC<{
             </span>
           </Tooltip>
         ) : isCompensation ? (
-          <span className="text-quaternary ps-5">
+          <span className="text-quaternary ps-4">
             ↳ {translate('Credit compensation')}
             {componentLabel ? ` — ${componentLabel}` : ''}
           </span>
@@ -229,7 +229,7 @@ export const InvoiceItemExpandableRow: FC<OwnProps> = (props) => {
         <span className="font-medium">{translate('Plan')}: </span>
         {group.plan_name || translate('No plan')}
         {group.start && group.end && (
-          <span className="text-quaternary ms-3">
+          <span className="text-quaternary ms-2.5">
             {formatDate(group.start)} – {formatDate(group.end)}
           </span>
         )}

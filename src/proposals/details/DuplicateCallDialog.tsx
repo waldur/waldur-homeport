@@ -111,7 +111,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
               )}
             />
 
-            <h5 className="mb-4">{translate('Copy options')}</h5>
+            <h5 className="mb-3">{translate('Copy options')}</h5>
             <Row>
               <Col md={6}>
                 <BooleanGroup

@@ -38,7 +38,7 @@ export const ComponentAccountingTypeField: React.FC<
       <FormGroup
         label={translate('Accounting type')}
         controlId="billing_type"
-        space={5}
+        space={4}
       >
         <Field
           name="billing_type"
@@ -59,7 +59,7 @@ export const ComponentAccountingTypeField: React.FC<
       formatOptionLabel={formatOptionWithDescription}
       isClearable={false}
       isDisabled={props.disabled}
-      space={5}
+      space={4}
     />
   );
 };

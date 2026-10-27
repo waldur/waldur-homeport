@@ -63,19 +63,19 @@ export const FilterSelectControl = ({ children, ...props }: ControlProps) => (
       <MagnifyingGlassIcon
         size={20}
         weight="bold"
-        // `me-3`, not `ms-3 me-3`: the icon-to-border gap now comes from
+        // `me-2.5`, not `ms-2.5 me-2.5`: the icon-to-border gap now comes from
         // `control`'s own `px-[11px]` in tailwindStyles.ts (that padding
         // has to apply unconditionally there, since this icon doesn't
         // always render — see the condition above and that comment), so
         // a left margin here would double it up again the same way
-        // `control`'s own left padding once did. `me-3` still supplies the
+        // `control`'s own left padding once did. `me-2.5` still supplies the
         // icon-to-text gap — the old SCSS structure got that for free from
         // `.metronic-select__value-container`'s own left padding
         // (`calc($input-padding-x - 2px)` ≈ 10px), but this migration's
         // `valueContainer` classNames carry no padding of their own.
         // Confirmed live: the old deployment's icon-to-text gap measures
-        // ~10px, matching `me-3` (0.75rem) at this app's 13px root font-size.
-        className="text-quaternary me-3"
+        // ~10px, matching `me-2.5`.
+        className="text-quaternary me-2.5"
       />
     )}
     {children}

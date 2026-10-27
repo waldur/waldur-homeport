@@ -68,7 +68,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
 
   return (
     <>
-      <Panel title={translate('Progress')} cardBordered className="mb-5">
+      <Panel title={translate('Progress')} cardBordered className="mb-4">
         <FormSteps
           key={`steps-${props.steps.length}`}
           steps={props.steps}
@@ -106,7 +106,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
             onClick={props.saveAsDraft}
             label={translate('Save as draft')}
             variant="secondary"
-            className="w-full mt-2"
+            className="w-full mt-1.5"
             disabled={props.submitting || !props.hasUnsavedChanges}
             disabledReason={
               props.submitting
@@ -117,7 +117,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
             size="lg"
           />
           {props.hasUnsavedChanges && !props.isSaving && (
-            <p className="flex items-center justify-center gap-1 text-warning text-sm mt-2 mb-0">
+            <p className="flex items-center justify-center gap-1 text-warning text-sm mt-1.5 mb-0">
               <WarningCircleIcon size={16} weight="bold" />
               {translate('You have unsaved changes')}
             </p>

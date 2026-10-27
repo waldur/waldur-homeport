@@ -45,14 +45,14 @@ export const NameGroup = ({
         error ? (
           <LoadingErred
             loadData={refetch}
-            className="flex items-center gap-2 mb-1"
+            className="flex items-center gap-1.5 mb-1"
           />
         ) : loading ? (
-          <div className="mb-2">
-            <small className="text-quaternary me-2">
+          <div className="mb-1.5">
+            <small className="text-quaternary me-1.5">
               {translate('Loading projects')}
             </small>
-            <LoadingSpinnerSimple className="mb-2 w-[20px] h-[20px]" />
+            <LoadingSpinnerSimple className="mb-1.5 w-[20px] h-[20px]" />
           </div>
         ) : null
       }

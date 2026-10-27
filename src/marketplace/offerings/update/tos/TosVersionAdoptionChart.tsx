@@ -20,7 +20,7 @@ export const TosVersionAdoptionChart: FC<TosVersionAdoptionChartProps> = ({
       className="border-[1px] border-secondary rounded"
       style={{ padding: '16px' }}
     >
-      <h6 className="mb-3">{translate('ToS version adoption')}</h6>
+      <h6 className="mb-2.5">{translate('ToS version adoption')}</h6>
       <EChart options={chartOptions} height="250px" />
     </div>
   );

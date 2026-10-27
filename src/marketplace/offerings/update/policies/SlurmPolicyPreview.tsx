@@ -39,8 +39,8 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
     : undefined;
 
   return (
-    <div className="mb-6">
-      <h6 className="font-semibold mb-3">
+    <div className="mb-5">
+      <h6 className="font-semibold mb-2.5">
         {translate('Threshold Visualization')}
       </h6>
       <div className="position-relative">
@@ -92,7 +92,7 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
           </div>
         )}
       </div>
-      <div className="flex justify-between mt-2 small text-quaternary">
+      <div className="flex justify-between mt-1.5 small text-quaternary">
         <span>0</span>
         <span>
           {notificationThreshold.toLocaleString()} (80%)
@@ -111,7 +111,7 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
           <span className="text-danger">{translate('Blocked QoS')}</span>
         </span>
       </div>
-      <div className="mt-3 small">
+      <div className="mt-2.5 small">
         <strong>{translate('Allocation')}: </strong>
         {allocation.toLocaleString()} {translate('units')}
         {currentUsage !== undefined && (
@@ -142,20 +142,20 @@ const CarryoverDetails: FC<CarryoverDetailsProps> = ({
   carryover,
 }) => {
   return (
-    <div className="mb-6">
-      <h6 className="font-semibold mb-3">
+    <div className="mb-5">
+      <h6 className="font-semibold mb-2.5">
         {translate('Carryover Calculation')}
       </h6>
-      <div className="border rounded p-3">
+      <div className="border rounded p-2.5">
         <div className="row">
           <div className="col-md-6">
-            <div className="mb-2">
+            <div className="mb-1.5">
               <span className="text-quaternary">
                 {translate('Previous Usage')}:{' '}
               </span>
               <strong>{previousUsage.toLocaleString()}</strong>
             </div>
-            <div className="mb-2">
+            <div className="mb-1.5">
               <span className="text-quaternary">
                 {translate('Carryover Factor')}:{' '}
               </span>
@@ -163,17 +163,17 @@ const CarryoverDetails: FC<CarryoverDetailsProps> = ({
             </div>
           </div>
           <div className="col-md-6">
-            <div className="mb-2">
+            <div className="mb-1.5">
               <span className="text-quaternary">{translate('Unused')}: </span>
               <strong>{unused.toLocaleString()}</strong>
             </div>
-            <div className="mb-2">
+            <div className="mb-1.5">
               <span className="text-quaternary">
                 {translate('Carryover Cap')}:{' '}
               </span>
               <strong>{carryoverCap.toLocaleString()}</strong>
             </div>
-            <div className="mb-2">
+            <div className="mb-1.5">
               <span className="text-quaternary">
                 {translate('Carryover')}:{' '}
               </span>
@@ -183,7 +183,7 @@ const CarryoverDetails: FC<CarryoverDetailsProps> = ({
             </div>
           </div>
         </div>
-        <div className="mt-2 small text-quaternary">
+        <div className="mt-1.5 small text-quaternary">
           {translate('Formula: carryover = min(unused, {pct}% × base)', {
             pct: carryoverFactor,
           })}
@@ -208,8 +208,8 @@ const CarryoverInfo: FC<CarryoverInfoProps> = ({
 }) => {
   if (!carryoverEnabled) {
     return (
-      <div className="mb-6">
-        <h6 className="font-semibold mb-3">{translate('Carryover')}</h6>
+      <div className="mb-5">
+        <h6 className="font-semibold mb-2.5">{translate('Carryover')}</h6>
         <div className="text-quaternary">
           {translate(
             'Carryover is disabled. Unused allocation will not carry over to the next period.',
@@ -220,18 +220,18 @@ const CarryoverInfo: FC<CarryoverInfoProps> = ({
   }
 
   return (
-    <div className="mb-6">
-      <h6 className="font-semibold mb-3">
+    <div className="mb-5">
+      <h6 className="font-semibold mb-2.5">
         {translate('Carryover Calculation')}
       </h6>
-      <div className="border rounded p-3">
-        <div className="flex items-center mb-2">
-          <span className="me-2">{translate('Base Allocation')}</span>
+      <div className="border rounded p-2.5">
+        <div className="flex items-center mb-1.5">
+          <span className="me-1.5">{translate('Base Allocation')}</span>
           <span className="font-medium">{baseAllocation.toLocaleString()}</span>
         </div>
         {unusedCarryover > 0 && (
-          <div className="flex items-center mb-2">
-            <span className="me-2">+ {translate('Unused Carryover')}</span>
+          <div className="flex items-center mb-1.5">
+            <span className="me-1.5">+ {translate('Unused Carryover')}</span>
             <span className="font-medium text-success">
               +{unusedCarryover.toLocaleString()}
             </span>
@@ -239,7 +239,7 @@ const CarryoverInfo: FC<CarryoverInfoProps> = ({
         )}
         <hr />
         <div className="flex items-center">
-          <span className="me-2">{translate('Total Allocation')}</span>
+          <span className="me-1.5">{translate('Total Allocation')}</span>
           <span className="font-medium text-base">
             {totalAllocation.toLocaleString()}
           </span>
@@ -298,7 +298,7 @@ const DateProjections: FC<DateProjectionsProps> = ({
     }
 
     return (
-      <div className="mb-2">
+      <div className="mb-1.5">
         <span className="text-quaternary">{label}: </span>
         <span className={statusClass}>{statusText}</span>
       </div>
@@ -323,11 +323,11 @@ const DateProjections: FC<DateProjectionsProps> = ({
   };
 
   return (
-    <div className="mb-6">
-      <h6 className="font-semibold mb-3">{translate('Date Projections')}</h6>
-      <div className="border rounded p-3">
+    <div className="mb-5">
+      <h6 className="font-semibold mb-2.5">{translate('Date Projections')}</h6>
+      <div className="border rounded p-2.5">
         {currentQosStatus && (
-          <div className="mb-3">
+          <div className="mb-2.5">
             <span className="text-quaternary">
               {translate('Current QoS Status')}:{' '}
             </span>
@@ -335,7 +335,7 @@ const DateProjections: FC<DateProjectionsProps> = ({
               {getQosStatusBadge(currentQosStatus).label}
             </Badge>
             {usagePercentage !== undefined && (
-              <span className="ms-2 text-quaternary">
+              <span className="ms-1.5 text-quaternary">
                 ({usagePercentage.toFixed(1)}% {translate('of allocation')})
               </span>
             )}
@@ -356,7 +356,7 @@ const DateProjections: FC<DateProjectionsProps> = ({
           projections.blocked,
           'danger',
         )}
-        <div className="mt-3 small text-quaternary">
+        <div className="mt-2.5 small text-quaternary">
           {translate(
             'Projections are based on average daily usage rate. Actual dates may vary.',
           )}
@@ -439,7 +439,7 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
         <AlertItem
           variant="info"
           type="floating"
-          className="mb-4"
+          className="mb-3"
           title={
             <>
               {translate('Resource')}: {resource.name || resource.uuid}
@@ -511,7 +511,7 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
       )}
 
       {preview.preview_commands && preview.preview_commands.length > 0 && (
-        <div className="mt-4">
+        <div className="mt-3">
           <h6>{translate('Preview commands')}</h6>
           <div className="table-responsive">
             <table className="table table-sm table-hover">
@@ -548,7 +548,7 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
       )}
 
       {preview.command_history && preview.command_history.length > 0 && (
-        <div className="mt-4">
+        <div className="mt-3">
           <h6>{translate('Recent command history')}</h6>
           <div className="table-responsive">
             <table className="table table-sm table-hover">
@@ -623,7 +623,7 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
         </div>
       )}
 
-      <div className="small text-quaternary mt-4">
+      <div className="small text-quaternary mt-3">
         <strong>{translate('Note')}: </strong>
         {resource
           ? translate(

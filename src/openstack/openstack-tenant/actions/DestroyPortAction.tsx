@@ -21,7 +21,7 @@ export const DestroyPortAction: ActionItemType<OpenStackPort> = ({
       refetch={refetch}
       dialogSubtitle={
         warning ? (
-          <p className="text-danger font-medium mt-4 mb-0">{warning}</p>
+          <p className="text-danger font-medium mt-3 mb-0">{warning}</p>
         ) : undefined
       }
     />

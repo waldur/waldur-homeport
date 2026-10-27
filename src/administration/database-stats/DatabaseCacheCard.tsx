@@ -30,14 +30,14 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
         ratio: formatPercent(data.buffer_cache_hit_ratio),
       })}
       defaultOpen={bufferHealth !== 'success' || indexHealth !== 'success'}
-      className="mb-6"
+      className="mb-5"
     >
       <Row>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-3">
+          <h6 className="text-uppercase text-quaternary mb-2.5">
             {translate('Hit ratios')}
           </h6>
-          <div className="mb-4">
+          <div className="mb-3">
             <div className="flex justify-between mb-1">
               <span>{translate('Buffer cache')}</span>
               <span>{formatPercent(data.buffer_cache_hit_ratio)}</span>
@@ -61,7 +61,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
           </div>
         </Col>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-3">
+          <h6 className="text-uppercase text-quaternary mb-2.5">
             {translate('Memory settings')}
           </h6>
           <Table size="sm" borderless className="mb-0">
@@ -84,7 +84,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
               </tr>
             </tbody>
           </Table>
-          <small className="text-quaternary mt-3 block">
+          <small className="text-quaternary mt-2.5 block">
             {translate('Values are in 8KB pages')}
           </small>
         </Col>

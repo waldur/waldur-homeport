@@ -214,11 +214,11 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
             />
             <TextGroup name="description" label={translate('Description')} />
             {limitComponents.length > 0 && (
-              <FormFieldset className="mb-7">
+              <FormFieldset className="mb-5.5">
                 <FormLegend required={limitsRequired}>
                   {translate('Limits')}
                 </FormLegend>
-                <FormText as="p" variant="muted" className="mt-0 mb-2">
+                <FormText as="p" variant="muted" className="mt-0 mb-1.5">
                   {limitsRequired
                     ? translate(
                         'Required: every component must have a value greater than zero.',

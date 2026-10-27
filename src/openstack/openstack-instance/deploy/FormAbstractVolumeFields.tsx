@@ -273,7 +273,7 @@ export const FormAbstractVolumeFields = (
             validate={props.optional ? undefined : required}
             label={props.typeTitle}
             required={!props.optional}
-            space={5}
+            space={4}
             tooltip={props.helpText}
             tooltipEnd
             quickAction={
@@ -298,7 +298,7 @@ export const FormAbstractVolumeFields = (
           name={props.sizeField}
           label={props.sizeTitle}
           required
-          space={5}
+          space={4}
           quickAction={
             <>
               {!showTypeField && props.optional && (
@@ -313,8 +313,8 @@ export const FormAbstractVolumeFields = (
               {!props.hideQuotas && quota && (
                 <QuotaUsageBarChart
                   className={classNames(
-                    'capacity-bar mb-2',
-                    !showTypeField && props.optional && 'ms-4',
+                    'capacity-bar mb-1.5',
+                    !showTypeField && props.optional && 'ms-3',
                   )}
                   quotas={[quota]}
                 />

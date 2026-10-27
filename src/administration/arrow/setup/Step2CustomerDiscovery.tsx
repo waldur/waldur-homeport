@@ -117,9 +117,9 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
   if (discoverCustomers.isPending) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <div className="text-center py-10">
+        <div className="text-center py-8">
           <LoadingSpinner />
-          <p className="mt-4 text-quaternary">
+          <p className="mt-3 text-quaternary">
             {translate('Discovering Arrow customers...')}
           </p>
         </div>
@@ -133,7 +133,7 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
         <AlertItem
           type="floating"
           variant="error"
-          className="mb-4"
+          className="mb-3"
           title={error}
         />
       </WizardModal>
@@ -142,8 +142,8 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
-      <h4 className="mb-4">{translate('Map Arrow Customers to Waldur')}</h4>
-      <p className="text-quaternary mb-4">
+      <h4 className="mb-3">{translate('Map Arrow Customers to Waldur')}</h4>
+      <p className="text-quaternary mb-3">
         {translate(
           'Select which Waldur organization each Arrow customer should be mapped to. High-confidence suggestions are pre-selected.',
         )}
@@ -158,7 +158,7 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
           )}
         />
       ) : (
-        <div className="table-responsive mb-4" style={{ maxHeight: '400px' }}>
+        <div className="table-responsive mb-3" style={{ maxHeight: '400px' }}>
           <BTable striped bordered hover size="sm">
             <thead className="sticky-top bg-primary">
               <tr>
@@ -180,7 +180,7 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
                     <td>
                       <strong>{customer.companyName}</strong>
                       {suggestion?.existing_mapping && (
-                        <Badge variant="info" className="ms-2">
+                        <Badge variant="info" className="ms-1.5">
                           {translate('Already mapped')}
                         </Badge>
                       )}

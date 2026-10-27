@@ -110,7 +110,7 @@ export const Default: Story = {
     'aria-label': 'Form steps',
   },
   render: (args) => (
-    <div className="w-72 p-4 bg-[var(--page-bg)] rounded-lg border-[1px] border-secondary">
+    <div className="w-72 p-3 bg-[var(--page-bg)] rounded-lg border-[1px] border-secondary">
       <ScrollSpyNav {...args} />
     </div>
   ),
@@ -121,9 +121,9 @@ export const Default: Story = {
  */
 export const PartiallyCompleted: Story = {
   render: () => (
-    <div className="w-80 p-4 bg-[var(--page-bg)]">
+    <div className="w-80 p-3 bg-[var(--page-bg)]">
       <Card>
-        <CardHeader className="pb-2">
+        <CardHeader className="pb-1.5">
           <CardTitle className="text-sm font-semibold">Progress</CardTitle>
         </CardHeader>
         <CardContent>
@@ -164,9 +164,9 @@ export const WithValidationErrors: Story = {
     ];
 
     return (
-      <div className="w-80 p-4 bg-[var(--page-bg)]">
+      <div className="w-80 p-3 bg-[var(--page-bg)]">
         <Card>
-          <CardHeader className="pb-2">
+          <CardHeader className="pb-1.5">
             <CardTitle className="text-sm font-semibold">Progress</CardTitle>
           </CardHeader>
           <CardContent>
@@ -230,11 +230,11 @@ export const InteractiveScrolling: Story = {
     }));
 
     return (
-      <div className="flex gap-6 max-w-4xl h-[480px] bg-[var(--page-bg)] p-6 rounded-xl border-[1px] border-secondary">
+      <div className="flex gap-5 max-w-4xl h-[480px] bg-[var(--page-bg)] p-5 rounded-xl border-[1px] border-secondary">
         {/* Sticky sidebar */}
         <div className="w-64 shrink-0">
           <Card className="h-full">
-            <CardHeader className="pb-3">
+            <CardHeader className="pb-2.5">
               <CardTitle className="text-sm font-semibold">
                 Form Sections
               </CardTitle>
@@ -259,11 +259,13 @@ export const InteractiveScrolling: Story = {
             <div
               key={sec.id}
               id={sec.id}
-              className={`p-6 bg-[var(--card-bg)] rounded-lg border-[1px] border-secondary border-l-4 ${sec.color} shadow-xs min-h-[220px]`}
+              className={`p-5 bg-[var(--card-bg)] rounded-lg border-[1px] border-secondary border-l-4 ${sec.color} shadow-xs min-h-[220px]`}
             >
               <h3 className="text-base font-bold text-primary">{sec.title}</h3>
-              <p className="mt-2 text-sm text-quaternary">{sec.description}</p>
-              <div className="mt-6 p-4 bg-secondary rounded border-[1px] border-dashed border-secondary text-xs text-quinary">
+              <p className="mt-1.5 text-sm text-quaternary">
+                {sec.description}
+              </p>
+              <div className="mt-5 p-3 bg-secondary rounded border-[1px] border-dashed border-secondary text-xs text-quinary">
                 Scroll target anchor:{' '}
                 <code className="font-mono">#{sec.id}</code>
               </div>
@@ -281,9 +283,9 @@ export const InteractiveScrolling: Story = {
  */
 export const InsideCard: Story = {
   render: () => (
-    <div className="w-80 p-4 bg-[var(--page-bg)]">
+    <div className="w-80 p-3 bg-[var(--page-bg)]">
       <Card>
-        <CardHeader className="pb-2">
+        <CardHeader className="pb-1.5">
           <CardTitle className="text-sm font-bold uppercase tracking-wider text-quaternary">
             Create Proposal
           </CardTitle>
@@ -348,9 +350,9 @@ export const WizardFormSteps: Story = {
     ];
 
     return (
-      <div className="w-80 p-4 bg-[var(--page-bg)]">
+      <div className="w-80 p-3 bg-[var(--page-bg)]">
         <Card>
-          <CardHeader className="pb-2">
+          <CardHeader className="pb-1.5">
             <CardTitle className="text-sm font-semibold">
               Wizard Steps
             </CardTitle>
@@ -373,8 +375,8 @@ export const WithStatusIndicators: Story = {
       {
         key: 'step-1',
         title: (
-          <div className="flex items-center justify-between gap-2">
-            <span className="flex items-center gap-2">
+          <div className="flex items-center justify-between gap-1.5">
+            <span className="flex items-center gap-1.5">
               <CheckCircleIcon
                 weight="fill"
                 className="text-success size-4 shrink-0"
@@ -390,8 +392,8 @@ export const WithStatusIndicators: Story = {
       {
         key: 'step-2',
         title: (
-          <div className="flex items-center justify-between gap-2">
-            <span className="flex items-center gap-2">
+          <div className="flex items-center justify-between gap-1.5">
+            <span className="flex items-center gap-1.5">
               <WarningCircleIcon
                 weight="bold"
                 className="text-warning size-4 shrink-0"
@@ -407,7 +409,7 @@ export const WithStatusIndicators: Story = {
       {
         key: 'step-3',
         title: (
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center justify-between gap-1.5">
             <span>Security settings</span>
             <Badge variant="primary" size="sm" tone="outline">
               Required
@@ -423,9 +425,9 @@ export const WithStatusIndicators: Story = {
     ];
 
     return (
-      <div className="w-80 p-4 bg-[var(--page-bg)]">
+      <div className="w-80 p-3 bg-[var(--page-bg)]">
         <Card>
-          <CardContent className="pt-6">
+          <CardContent className="pt-5">
             <ScrollSpyNav items={statusItems} activeKey="step-2" />
           </CardContent>
         </Card>

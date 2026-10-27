@@ -11,7 +11,7 @@ import { useTable } from '@/table/useTable';
 const BadgesList = ({ items }) => (
   <>
     {items.map((c, index) => (
-      <Badge key={index} shape="pill" tone="outline" className="me-3">
+      <Badge key={index} shape="pill" tone="outline" className="me-2.5">
         {c.name}
       </Badge>
     ))}

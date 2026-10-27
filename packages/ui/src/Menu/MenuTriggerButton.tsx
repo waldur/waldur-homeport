@@ -48,7 +48,7 @@ export const MenuTriggerButton = forwardRef<
     const leadingIcon = icon ?? (caret && !iconRight ? iconNode : undefined);
 
     const effectiveLabel = leadingIcon ? (
-      <span className="inline-flex items-center gap-2">
+      <span className="inline-flex items-center gap-1.5">
         <span
           className={cn(
             'inline-flex shrink-0 items-center justify-center text-[var(--btn-icon-color,currentColor)]',

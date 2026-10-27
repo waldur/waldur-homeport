@@ -88,11 +88,11 @@ export const SramSettingsTab: FC = () => {
   const settings = (data ?? {}) as Record<string, unknown>;
 
   return (
-    <div className="pt-5">
+    <div className="pt-4">
       {!settings.SCIM_INBOUND_ENABLED && (
         <AlertItem
           variant="warning"
-          className="mb-5"
+          className="mb-4"
           title={translate('Inbound SCIM is disabled')}
           body={translate(
             'SRAM cannot push collaborations or members until SCIM_INBOUND_ENABLED is on.',
@@ -109,7 +109,7 @@ export const SramSettingsTab: FC = () => {
             buttonVariant="tertiary"
             buttonSize="sm"
           >
-            <GearSixIcon weight="bold" className="me-2" />
+            <GearSixIcon weight="bold" className="me-1.5" />
             {translate('Edit in SCIM settings')}
           </Link>
         }

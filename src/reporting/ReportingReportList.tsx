@@ -34,7 +34,7 @@ const AnalyticsColumn = ({ report }: { report: ReportDefinition }) => {
   const hasWhySo = report.analytics.includes('why-so');
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-1.5">
       {hasWhatIf && (
         <Tooltip label={translate('What-If analysis')}>
           <Link state={report.analyticsState} params={{ mode: 'what-if' }}>
@@ -88,12 +88,12 @@ export const ReportingReportList: FC<ReportingReportListProps> = ({
       {filteredReports.map((report) => (
         <Col key={report.key} md={6} xl={4}>
           <Link state={report.state}>
-            <Card className="card-bordered card-solid h-full p-5 flex hover:border-brand cursor-pointer">
+            <Card className="card-bordered card-solid h-full p-4 flex hover:border-brand cursor-pointer">
               <p className="text-primary font-medium text-base mb-1">
                 {report.title}
               </p>
               {report.description && (
-                <p className="text-quaternary my-2">{report.description}</p>
+                <p className="text-quaternary my-1.5">{report.description}</p>
               )}
               <AnalyticsColumn report={report} />
             </Card>

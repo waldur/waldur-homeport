@@ -28,7 +28,7 @@ const renderIcon = (src: string, imgStyle: any) =>
     <ImagePlaceholder
       width={imgStyle.width}
       height={imgStyle.width}
-      className="me-3"
+      className="me-2.5"
     />
   );
 

@@ -55,16 +55,16 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           variant="info"
           type="floating"
           // Same 17.5px step the fields below use.
-          className="mb-5"
+          className="mb-4"
           title={translate('Configuration Guide')}
           body={
             <>
-              <p className="mb-2">
+              <p className="mb-1.5">
                 {translate(
                   'To make this Kubernetes option fully functional, you need to configure:',
                 )}
               </p>
-              <ul className="mb-2">
+              <ul className="mb-1.5">
                 <li>
                   <strong>{translate('Kubernetes Versions')}</strong>{' '}
                   {translate('(Required - see section below)')}
@@ -83,7 +83,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           }
         />
         <SelectGroup
-          space={5}
+          space={4}
           name={`${name}.topology_mode`}
           label={translate('Cluster topology')}
           description={translate(
@@ -109,7 +109,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         <Row>
           <Col md={6}>
             <NumberGroup
-              space={5}
+              space={4}
               label={translate('vCPUs per Controller')}
               tooltipEnd
               help={translate(
@@ -124,7 +124,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           </Col>
           <Col md={6}>
             <NumberGroup
-              space={5}
+              space={4}
               label={translate('RAM per Controller (GB)')}
               tooltipEnd
               help={translate(
@@ -142,7 +142,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         <Row>
           <Col md={6}>
             <NumberGroup
-              space={5}
+              space={4}
               label={translate('System Disk per Controller (GB)')}
               tooltipEnd
               help={translate(
@@ -157,7 +157,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           </Col>
           <Col md={6}>
             <NumberGroup
-              space={5}
+              space={4}
               label={translate('Data Disk per Controller (GB)')}
               tooltipEnd
               help={translate(
@@ -175,7 +175,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
 
       <K8sFormSection title={translate('Load Balancer Defaults')} topSeparator>
         <SelectGroup
-          space={5}
+          space={4}
           name={`${name}.load_balancer_mode`}
           label={translate('Load balancer nodes')}
           description={translate(
@@ -191,7 +191,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             <Row>
               <Col md={6}>
                 <NumberGroup
-                  space={5}
+                  space={4}
                   label={translate('vCPUs per Load Balancer')}
                   tooltipEnd
                   help={translate(
@@ -206,7 +206,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               </Col>
               <Col md={6}>
                 <NumberGroup
-                  space={5}
+                  space={4}
                   label={translate('RAM per Load Balancer (GB)')}
                   tooltipEnd
                   help={translate(
@@ -224,7 +224,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             <Row>
               <Col md={6}>
                 <NumberGroup
-                  space={5}
+                  space={4}
                   label={translate('System Disk per Load Balancer (GB)')}
                   tooltipEnd
                   help={translate(
@@ -239,7 +239,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               </Col>
               <Col md={6}>
                 <NumberGroup
-                  space={5}
+                  space={4}
                   label={translate('Data Disk per Load Balancer (GB)')}
                   tooltipEnd
                   help={translate(
@@ -264,7 +264,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         <Row>
           <Col md={6}>
             <NumberGroup
-              space={5}
+              space={4}
               label={translate('Minimal vCPUs per Worker')}
               tooltipEnd
               help={translate(
@@ -279,7 +279,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           </Col>
           <Col md={6}>
             <NumberGroup
-              space={5}
+              space={4}
               label={translate('Minimal RAM per Worker (GB)')}
               tooltipEnd
               help={translate(
@@ -299,7 +299,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         <Row>
           <Col md={4}>
             <NumberGroup
-              space={5}
+              space={4}
               label={translate('Worker Data Disk (GB)')}
               tooltipEnd
               help={translate('Default size of data disk for worker nodes')}
@@ -312,7 +312,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           </Col>
           <Col md={4}>
             <NumberGroup
-              space={5}
+              space={4}
               label={translate('Storage Data Disk (GB)')}
               tooltipEnd
               help={translate('Default size of data disk for storage nodes')}
@@ -325,7 +325,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           </Col>
           <Col md={4}>
             <NumberGroup
-              space={5}
+              space={4}
               label={translate('Storage SAN Disk (GB)')}
               tooltipEnd
               help={translate(
@@ -348,7 +348,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         <Row>
           <Col md={12}>
             <StringGroup
-              space={5}
+              space={4}
               required
               label={translate('Available Kubernetes Versions')}
               tooltipEnd

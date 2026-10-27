@@ -325,7 +325,7 @@ export const OrganizationsList: FunctionComponent = () => {
       }
       filters={<CustomersFilter />}
       hasOptionalColumns
-      expandableRowClassName="py-2 pe-2"
+      expandableRowClassName="py-1.5 pe-1.5"
       expandableRow={OrganizationExpandableRow}
     />
   );

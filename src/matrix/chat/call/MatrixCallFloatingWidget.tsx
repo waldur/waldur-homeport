@@ -125,7 +125,7 @@ export const MatrixCallFloatingWidget = forwardRef<
       }}
     >
       <div
-        className="flex items-center gap-2 px-2 py-1 border-b-[1px] border-b-secondary"
+        className="flex items-center gap-1.5 px-1.5 py-1 border-b-[1px] border-b-secondary"
         style={{ cursor: 'grab', userSelect: 'none', touchAction: 'none' }}
         onPointerDown={onPointerDown}
       >

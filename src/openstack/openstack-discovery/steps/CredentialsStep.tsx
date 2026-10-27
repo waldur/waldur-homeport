@@ -79,8 +79,8 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
-      <div className="mb-6">
-        <h4 className="mb-4">{translate('Connection Settings')}</h4>
+      <div className="mb-5">
+        <h4 className="mb-3">{translate('Connection Settings')}</h4>
 
         <StringGroup
           name="auth_url"
@@ -163,7 +163,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
         <AlertItem
           type="floating"
           variant="error"
-          className="mb-4"
+          className="mb-3"
           title={error}
         />
       )}
@@ -171,7 +171,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
         <AlertItem
           type="floating"
           variant="success"
-          className="mb-4"
+          className="mb-3"
           title={translate('Connected to OpenStack (project: {project})', {
             project: values.serverInfo.project_name,
           })}

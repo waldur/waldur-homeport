@@ -87,7 +87,7 @@ export const TableNav = ({ tabs }: { tabs: TableTab[] }) => {
       ref={navRef}
       onClickCapture={rememberActivation}
       activeKey={activeKey}
-      className="min-w-0 grow pt-4"
+      className="min-w-0 grow pt-3"
       scrollable
       bordered={false}
       items={tabs.map((tab) =>

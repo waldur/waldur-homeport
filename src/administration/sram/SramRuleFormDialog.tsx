@@ -219,7 +219,7 @@ export const SramRuleFormDialog: FC<SramRuleFormDialogProps> = ({
             {submitError && (
               <AlertItem
                 variant="error"
-                className="mb-5"
+                className="mb-4"
                 title={translate('Unable to save the rule')}
                 body={submitError}
               />
@@ -242,7 +242,7 @@ export const SramRuleFormDialog: FC<SramRuleFormDialogProps> = ({
               className="w-full"
             />
 
-            <h6 className="mt-6 mb-4">{translate('Which SRAM groups')}</h6>
+            <h6 className="mt-5 mb-3">{translate('Which SRAM groups')}</h6>
             <SelectGroup
               name="source_kind"
               label={translate('Source')}
@@ -265,7 +265,7 @@ export const SramRuleFormDialog: FC<SramRuleFormDialogProps> = ({
             />
             <GroupPatternsField />
 
-            <h6 className="mt-6 mb-4">{translate('Which projects')}</h6>
+            <h6 className="mt-5 mb-3">{translate('Which projects')}</h6>
             <div className="row">
               <div className="col-sm-6">
                 <SelectGroup
@@ -299,7 +299,7 @@ export const SramRuleFormDialog: FC<SramRuleFormDialogProps> = ({
               description={<PatternHelp />}
             />
 
-            <h6 className="mt-6 mb-4">{translate('What it grants')}</h6>
+            <h6 className="mt-5 mb-3">{translate('What it grants')}</h6>
             <SelectGroup
               name="project_role"
               label={translate('Project role')}

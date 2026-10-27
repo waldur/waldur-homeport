@@ -25,7 +25,7 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
         waiting: data.waiting_locks,
       })}
       defaultOpen={health !== 'success' || hasExclusiveLocks}
-      className="mb-6"
+      className="mb-5"
     >
       <Table
         size="sm"
@@ -71,7 +71,7 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
         </tbody>
       </Table>
       {hasExclusiveLocks && (
-        <small className="text-warning mt-3 block">
+        <small className="text-warning mt-2.5 block">
           {translate(
             'Access exclusive locks block all other access. This may indicate DDL operations or maintenance in progress.',
           )}

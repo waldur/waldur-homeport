@@ -44,7 +44,7 @@ export const CategoriesList: FC = () => {
   const showMoreButton = categories.data.length > ITEMS_IN_ROW;
 
   return (
-    <div className={!showMoreButton ? 'my-10' : 'mt-10'}>
+    <div className={!showMoreButton ? 'my-8' : 'mt-8'}>
       <Row className="justify-center g-5">
         {items.map((item, index) => (
           <Col key={index} xl={showAll ? 2 : true} lg={4} md={4} sm={6}>
@@ -56,7 +56,7 @@ export const CategoriesList: FC = () => {
         ))}
       </Row>
       {showMoreButton ? (
-        <div className="text-center my-3">
+        <div className="text-center my-2.5">
           <BaseButton
             variant="text-primary"
             onClick={() => setShowAll((value) => !value)}

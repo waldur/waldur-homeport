@@ -126,7 +126,7 @@ export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
                     orderCanBeApproved={orderCanBeApproved}
                   />
                   {showPurchaseOrder && (
-                    <div className="mt-4">
+                    <div className="mt-3">
                       <StringGroup
                         name="request_comment"
                         label={translate('Comment')}

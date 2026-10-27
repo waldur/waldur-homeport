@@ -63,7 +63,7 @@ export const TermsOfServiceCheckbox: FunctionComponent<
       </label>
 
       {isLoading && (
-        <LoadingSpinnerSimple className="ms-2" data-testid="tos-spinner" />
+        <LoadingSpinnerSimple className="ms-1.5" data-testid="tos-spinner" />
       )}
     </div>
   );

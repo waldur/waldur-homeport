@@ -122,7 +122,7 @@ export const ChatHistorySidebar: FC = () => {
         ) : null}
       </div>
       {!collapsed && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5">
           <FilterBox
             type="search"
             placeholder={translate('Search chats...')}

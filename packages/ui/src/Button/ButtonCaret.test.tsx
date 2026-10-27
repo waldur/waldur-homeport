@@ -31,9 +31,9 @@ describe('ButtonCaret and buttonIconSizes', () => {
   });
 
   it('applies custom className and isOpen state', () => {
-    render(<ButtonCaret isOpen className="ms-2" />);
+    render(<ButtonCaret isOpen className="ms-1.5" />);
     const icon = screen.getByTestId('CaretDownIcon');
-    expect(icon).toHaveClass('ms-2', 'rotate-toggle-180');
+    expect(icon).toHaveClass('ms-1.5', 'rotate-toggle-180');
     expect(icon).toHaveStyle({ transform: 'rotateZ(180deg)' });
   });
 });

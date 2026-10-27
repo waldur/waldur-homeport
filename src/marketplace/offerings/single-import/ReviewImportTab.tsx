@@ -65,7 +65,7 @@ export const ReviewImportTab: FunctionComponent = () => {
             <AlertItem
               variant="warning"
               type="floating"
-              className="mb-3"
+              className="mb-2.5"
               title={translate('Warning:')}
               body={translate(
                 'Secret options will be imported and may overwrite existing secrets.',

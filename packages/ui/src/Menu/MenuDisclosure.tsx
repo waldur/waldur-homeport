@@ -336,7 +336,7 @@ const MenuDisclosureSection = ({
           <CaretRightIcon
             weight="bold"
             aria-hidden="true"
-            className="ms-2 size-[14px] shrink-0 rtl:-scale-x-100"
+            className="ms-1.5 size-[14px] shrink-0 rtl:-scale-x-100"
           />
         </button>
         {drilledIn &&
@@ -352,7 +352,7 @@ const MenuDisclosureSection = ({
                 <CaretLeftIcon
                   weight="bold"
                   aria-hidden="true"
-                  className="me-2 size-[14px] shrink-0 rtl:-scale-x-100"
+                  className="me-1.5 size-[14px] shrink-0 rtl:-scale-x-100"
                 />
                 {backLabel && <span className="sr-only">{backLabel}</span>}
                 <span className="grow">{title ?? label}</span>
@@ -388,7 +388,7 @@ const MenuDisclosureSection = ({
         <CaretRightIcon
           weight="bold"
           aria-hidden="true"
-          className="ms-2 size-[14px] shrink-0 rtl:-scale-x-100"
+          className="ms-1.5 size-[14px] shrink-0 rtl:-scale-x-100"
         />
       </PopoverPrimitive.Trigger>
       <PopoverPrimitive.Content

@@ -48,10 +48,10 @@ const StatusRow: FC<{ status: SpendingLimitStatus; unit?: string }> = ({
   const label = getSpendingLimitLabel(status.period);
   return (
     <div
-      className="mb-4 last:mb-0"
+      className="mb-3 last:mb-0"
       data-testid={`spending-limit-status-${status.component_type}-${status.period}`}
     >
-      <div className="mb-1 flex flex-wrap items-center gap-2 text-sm">
+      <div className="mb-1 flex flex-wrap items-center gap-1.5 text-sm">
         <span className="font-medium text-secondary">{label}</span>
         {status.reached && (
           <Badge variant="danger">{translate('Reached')}</Badge>
@@ -103,7 +103,7 @@ const RestrictionNotice: FC<{ resource: StatusResource }> = ({ resource }) => {
       variant="warning"
       type="floating"
       iconSize="md"
-      className="mb-5"
+      className="mb-4"
       title={title}
       body={body}
       data-testid="spending-limit-restriction"
@@ -125,7 +125,7 @@ export const SpendingLimitStatusCard: FC<{ resource: StatusResource }> = ({
   }
   const byComponent = groupBy(statuses, (status) => status.component_type);
   return (
-    <Card className="card-bordered mb-6">
+    <Card className="card-bordered mb-5">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Spending limits')}</h3>
@@ -136,8 +136,8 @@ export const SpendingLimitStatusCard: FC<{ resource: StatusResource }> = ({
         {Object.entries(byComponent).map(([type, componentStatuses]) => {
           const lastReportedAt = componentStatuses[0].last_reported_at;
           return (
-            <div key={type} className="mb-6 last:mb-0">
-              <div className="mb-3 flex flex-wrap items-baseline gap-2">
+            <div key={type} className="mb-5 last:mb-0">
+              <div className="mb-2.5 flex flex-wrap items-baseline gap-1.5">
                 <h4 className="mb-0 text-base font-semibold text-primary">
                   {getComponentName(resource, type)}
                 </h4>

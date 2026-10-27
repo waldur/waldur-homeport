@@ -28,7 +28,7 @@ export const DatabaseTransactionsCard: FC<DatabaseTransactionsCardProps> = ({
         rollback: data.rollback_ratio_percent.toFixed(2),
       })}
       defaultOpen={rollbackHealth !== 'success' || hasDeadlocks}
-      className="mb-6"
+      className="mb-5"
     >
       <Table
         size="sm"
@@ -63,7 +63,7 @@ export const DatabaseTransactionsCard: FC<DatabaseTransactionsCardProps> = ({
                   <WarningCircleIcon
                     size={16}
                     weight="bold"
-                    className="text-danger ms-2"
+                    className="text-danger ms-1.5"
                   />
                 )}
               </div>
@@ -75,7 +75,7 @@ export const DatabaseTransactionsCard: FC<DatabaseTransactionsCardProps> = ({
         </tbody>
       </Table>
       {hasDeadlocks && (
-        <small className="text-danger mt-3 block">
+        <small className="text-danger mt-2.5 block">
           {translate(
             'Deadlocks detected! Review concurrent transaction patterns.',
           )}

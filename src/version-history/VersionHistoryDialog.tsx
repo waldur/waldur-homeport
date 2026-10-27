@@ -111,8 +111,8 @@ export const VersionHistoryDialog: FunctionComponent<
     >
       <div className="flex flex-col" style={{ height: '70vh' }}>
         {/* Toolbar: wraps onto two rows on a phone. */}
-        <div className="flex flex-wrap justify-between items-center gap-3 px-5 py-4 border-b-[1px] border-b-secondary">
-          <div className="flex items-center gap-2 text-nowrap">
+        <div className="flex flex-wrap justify-between items-center gap-2.5 px-4 py-3 border-b-[1px] border-b-secondary">
+          <div className="flex items-center gap-1.5 text-nowrap">
             <span className="text-quaternary text-xs">
               {translate('Total')}:
             </span>
@@ -140,7 +140,7 @@ export const VersionHistoryDialog: FunctionComponent<
                   : 'overflow-auto w-full'
               }
             >
-              <div className="font-medium text-sm px-5 py-4 border-b-[1px] border-b-secondary">
+              <div className="font-medium text-sm px-4 py-3 border-b-[1px] border-b-secondary">
                 {translate('Revisions')}
               </div>
               <VersionHistoryTimeline
@@ -155,7 +155,7 @@ export const VersionHistoryDialog: FunctionComponent<
           {showDiff && (
             <div className="grow overflow-hidden flex flex-col min-w-0">
               {!isWide && (
-                <div className="px-3 py-2 border-b-[1px] border-b-secondary">
+                <div className="px-2.5 py-1.5 border-b-[1px] border-b-secondary">
                   <BaseButton
                     ref={backRef}
                     variant="text-secondary"

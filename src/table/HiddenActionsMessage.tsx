@@ -16,11 +16,11 @@ export const HiddenActionsMessage: FunctionComponent<
   HiddenActionsMessageProps
 > = ({ toggleColumn, close }) => {
   return (
-    <div className="flex gap-5 my-5 w-full">
+    <div className="flex gap-4 my-4 w-full">
       <FeaturedIcon
         icon={<WarningCircleIcon weight="bold" />}
         variant="warning"
-        className="me-2"
+        className="me-1.5"
       />
 
       <div className="font-medium">

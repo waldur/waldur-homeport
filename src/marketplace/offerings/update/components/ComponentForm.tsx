@@ -46,7 +46,7 @@ export const ComponentForm = ({
       name="measured_unit"
       validate={componentMeasuredUnitValidator}
       disabled={readOnly || labelsReadOnly}
-      space={5}
+      space={4}
     />
     <ComponentAccountingTypeField readOnly={readOnly} />
     <ArticleCodeField />

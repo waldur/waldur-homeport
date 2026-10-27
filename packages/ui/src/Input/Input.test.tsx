@@ -83,9 +83,9 @@ describe('Input', () => {
   });
 
   it("lets a caller's padding replace the default", () => {
-    render(<Input aria-label="Name" className="px-2" />);
+    render(<Input aria-label="Name" className="px-1.5" />);
     const input = screen.getByRole('textbox');
-    expect(input).toHaveClass('px-2');
+    expect(input).toHaveClass('px-1.5');
     expect(input).not.toHaveClass('pl-[calc(12px+var(--input-start,0px))]');
   });
 

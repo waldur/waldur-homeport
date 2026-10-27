@@ -27,7 +27,7 @@ export const InvoicePayButton: FC<InvoicePayButtonProps> = ({
 
   return asButton ? (
     <a
-      className={`${buttonVariants({ variant: 'warning' })} px-2`}
+      className={`${buttonVariants({ variant: 'warning' })} px-1.5`}
       href={row.payment_url}
       target="_self"
       rel="noopener noreferrer"

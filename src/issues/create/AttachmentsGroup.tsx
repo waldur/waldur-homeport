@@ -11,7 +11,7 @@ export const AttachmentsGroup = () => {
   const { submitting } = useFormState();
 
   return (
-    <FormField className="mb-5">
+    <FormField className="mb-4">
       <FormLabel>{translate('Attachments')}</FormLabel>
       <Field
         name="files"
@@ -42,7 +42,7 @@ export const AttachmentsGroup = () => {
                     key: file.size,
                     file,
                   }))}
-                  className="p-0 pt-4"
+                  className="p-0 pt-3"
                   ItemPendingComponent={(itemProps) => (
                     <AttachmentItemPending
                       {...itemProps}

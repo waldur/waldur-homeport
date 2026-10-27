@@ -169,7 +169,7 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
               description={translate(
                 'Set to true if this category is for OpenStack Volume. Only one category can have "true" value.',
               )}
-              className="mb-5"
+              className="mb-4"
             />
 
             <BooleanGroup
@@ -178,7 +178,7 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
               description={translate(
                 'Set to true if this category is for OpenStack VM. Only one category can have "true" value.',
               )}
-              className="mb-5"
+              className="mb-4"
             />
           </ModalDialog>
         </form>

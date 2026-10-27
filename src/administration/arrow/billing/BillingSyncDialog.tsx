@@ -128,7 +128,7 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
         </>
       }
     >
-      <FormField className="mb-3">
+      <FormField className="mb-2.5">
         <FormLabel>{translate('Period')}</FormLabel>
         <Select
           placeholder={translate('Select billing period')}
@@ -143,7 +143,7 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
         </FormText>
       </FormField>
 
-      <FormField className="mb-3">
+      <FormField className="mb-2.5">
         <FormLabel>{translate('Resource (optional)')}</FormLabel>
         <AsyncSelect
           placeholder={translate('All resources')}

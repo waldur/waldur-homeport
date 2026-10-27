@@ -84,7 +84,7 @@ export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
           />
         }
       >
-        <div className="text-center text-quaternary p-4">
+        <div className="text-center text-quaternary p-3">
           {usesCallVocabulary()
             ? translate('Proposal not available.')
             : translate('Request not available.')}

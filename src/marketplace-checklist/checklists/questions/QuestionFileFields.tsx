@@ -11,7 +11,7 @@ export const QuestionFileFields: FC<{ multiple?: boolean }> = ({
   <>
     <CommaSeparatedListGroup
       label={translate('Allowed file extensions')}
-      space={5}
+      space={4}
       help={translate(
         'Comma-separated list of extensions (e.g. .pdf, .docx). Leave empty to allow all.',
       )}
@@ -21,7 +21,7 @@ export const QuestionFileFields: FC<{ multiple?: boolean }> = ({
 
     <CommaSeparatedListGroup
       label={translate('Allowed MIME types')}
-      space={5}
+      space={4}
       help={translate(
         'Comma-separated list of MIME types (e.g. application/pdf, image/*). Leave empty to skip MIME validation.',
       )}
@@ -33,7 +33,7 @@ export const QuestionFileFields: FC<{ multiple?: boolean }> = ({
       name="max_file_size_mb"
       placeholder="10"
       label={translate('Maximum file size (MB)')}
-      space={5}
+      space={4}
       help={translate('Leave empty for no size limit.')}
     />
 
@@ -42,7 +42,7 @@ export const QuestionFileFields: FC<{ multiple?: boolean }> = ({
         name="max_files_count"
         placeholder="5"
         label={translate('Maximum number of files')}
-        space={5}
+        space={4}
         help={translate('Leave empty for no limit.')}
       />
     )}

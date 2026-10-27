@@ -54,7 +54,7 @@ export const DocumentationFiles = (props: DocumentationFilesProps) => {
           }
         />
       )}
-      className="mb-3"
+      className="mb-2.5"
     />
   ) : null;
 };

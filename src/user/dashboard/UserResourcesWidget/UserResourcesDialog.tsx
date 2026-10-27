@@ -69,11 +69,11 @@ export const UserResourcesDialog: FC = () => {
           {translate('Failed to load resources. Please try again.')}
         </div>
       ) : data?.projects?.length === 0 ? (
-        <div className="text-quaternary text-center py-4">
+        <div className="text-quaternary text-center py-3">
           {translate('No resources found.')}
         </div>
       ) : (
-        <div className="mt-4">
+        <div className="mt-3">
           {data?.projects?.map((project, index) => (
             <ResourceProjectGroup
               key={project.uuid}
@@ -82,7 +82,7 @@ export const UserResourcesDialog: FC = () => {
             />
           ))}
           {data?.hasMore && (
-            <div className="text-center text-quaternary mt-4 pt-2 border-t-[1px] border-t-secondary">
+            <div className="text-center text-quaternary mt-3 pt-1.5 border-t-[1px] border-t-secondary">
               {translate(
                 'Showing {displayed} of {total} resources. Click "View all resources" to see the complete list.',
                 {

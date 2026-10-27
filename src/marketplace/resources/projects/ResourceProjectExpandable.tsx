@@ -82,11 +82,11 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
       <EmbeddedTabs
         defaultValue="active"
         header={
-          <div className="flex items-center justify-between gap-4 px-4 py-3 border-b-[1px] border-b-secondary">
+          <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b-[1px] border-b-secondary">
             <span className="text-base font-medium text-primary">
               {translate('Team')}
             </span>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <ActionsMenu
                 toggle="labeled"
                 size="sm"
@@ -124,7 +124,7 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
                   {
                     title: translate('Member'),
                     render: ({ row }) => (
-                      <div className="content-wrapper gap-2">
+                      <div className="content-wrapper gap-1.5">
                         <Avatar
                           src={row.user_image}
                           name={row.user_full_name}

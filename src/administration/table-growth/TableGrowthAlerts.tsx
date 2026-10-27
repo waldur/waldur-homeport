@@ -27,15 +27,15 @@ export const TableGrowthAlerts: FC<TableGrowthAlertsProps> = ({ alerts }) => {
   return (
     <AlertItem
       variant="warning"
-      className="mb-6"
+      className="mb-5"
       title={translate('Growth alerts')}
       body={
         <div>
           {Object.entries(grouped).map(([tableName, tableAlerts]) => (
-            <div key={tableName} className="mt-2">
+            <div key={tableName} className="mt-1.5">
               <code>{tableName}</code>
               {tableAlerts.map((alert) => (
-                <span key={alert.period} className="ms-2 text-quaternary">
+                <span key={alert.period} className="ms-1.5 text-quaternary">
                   {alert.period === 'weekly'
                     ? translate('Weekly: {actual}% (threshold: {threshold}%)', {
                         actual: alert.actual.toFixed(1),

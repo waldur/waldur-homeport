@@ -101,8 +101,8 @@ export const SupportUserMergeDialog = ({ resolve }) => {
           </p>
           <ul className="list-unstyled">
             {candidates.map((candidate) => (
-              <li key={candidate.uuid} className="mb-2">
-                <label className="flex items-center gap-2">
+              <li key={candidate.uuid} className="mb-1.5">
+                <label className="flex items-center gap-1.5">
                   <Checkbox
                     size="sm"
                     checked={selected.includes(candidate.uuid)}

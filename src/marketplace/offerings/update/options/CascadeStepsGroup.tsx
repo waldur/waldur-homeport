@@ -67,8 +67,8 @@ export const CascadeStepsGroup = ({
         const hasChoicesMap = fields.value?.[index]?.depends_on;
 
         return (
-          <Card key={name} className="card-bordered bg-secondary mb-3">
-            <Card.Header className="mx-4 min-h-auto">
+          <Card key={name} className="card-bordered bg-secondary mb-2.5">
+            <Card.Header className="mx-3 min-h-auto">
               <h6 className="mb-0 text-tertiary">
                 {translate('Step {index}', { index: index + 1 })}
               </h6>
@@ -84,7 +84,7 @@ export const CascadeStepsGroup = ({
                 />
               </div>
             </Card.Header>
-            <Card.Body className="px-4">
+            <Card.Body className="px-3">
               <StringGroup
                 label={translate('Name')}
                 required={true}

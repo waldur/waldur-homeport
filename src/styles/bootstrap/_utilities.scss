@@ -104,6 +104,39 @@ $utilities: map.remove(
   'flex-wrap'
 );
 
+// Spacing comes from Tailwind's 4px scale (#477), so no .m*-*, .p*-* or
+// .gap-* either. Bootstrap generated them under Tailwind's names (`mb-4`,
+// `p-3`, `gap-2`) with its own rem steps and `!important`, so every spacing
+// class rendered Bootstrap's value. scripts/codemods/bootstrap-spacing.mjs
+// rewrote the uses to the nearest Tailwind step, and
+// no-retired-bootstrap-utility reports the spellings only Bootstrap had
+// (`mb-md-4`, `mt-n2`, `gap-8px`).
+$utilities: map.remove(
+  $utilities,
+  'gap',
+  'margin',
+  'margin-x',
+  'margin-y',
+  'negative-margin',
+  'negative-margin-x',
+  'negative-margin-y',
+  'margin-top',
+  'margin-end',
+  'margin-start',
+  'margin-bottom',
+  'negative-margin-top',
+  'negative-margin-end',
+  'negative-margin-start',
+  'negative-margin-bottom',
+  'padding',
+  'padding-x',
+  'padding-y',
+  'padding-top',
+  'padding-end',
+  'padding-bottom',
+  'padding-start'
+);
+
 // Utilities nothing in the app uses, so Bootstrap stops generating them
 // (no-retired-bootstrap-utility reports the names, with the Tailwind class to
 // use instead; Tailwind defines its own float-*).
@@ -114,40 +147,8 @@ $utilities: map.remove(
   'min-viewport-width',
   'viewport-height',
   'min-viewport-height',
-  'align-content',
-  'negative-margin-x',
-  'negative-margin-y'
+  'align-content'
 );
-
-// Used only at the base size: no breakpoint variant (`.p-lg-3`, `.min-h-md-
-// 100px`) of these was ever used, and the size scales alone generated 64
-// values at each of five breakpoints. A responsive need is a Tailwind
-// variant (`lg:p-3`) instead.
-@each $key
-  in (
-    'margin-x',
-    'negative-margin-top',
-    'negative-margin-end',
-    'negative-margin-start',
-    'padding-x',
-    'padding-y',
-    'padding-top',
-    'padding-end',
-    'padding-bottom'
-  )
-{
-  $utilities: map.merge(
-    $utilities,
-    (
-      $key: map.merge(
-          map.get($utilities, $key),
-          (
-            'responsive': false,
-          )
-        ),
-    )
-  );
-}
 
 // `.border-0` too: Tailwind's sets the same zero width, and Bootstrap's
 // `border: 0 !important` would beat any responsive or state variant beside it.

@@ -70,7 +70,7 @@ const VendorOfferingSelect = ({ input }: { input: any }) => {
 export const Step2SelectVendorOffering: FC<WizardFormStepProps> = (props) => (
   <WizardForm {...props}>
     <div>
-      <p className="text-quaternary mb-5">
+      <p className="text-quaternary mb-4">
         {translate(
           'Select the vendor offering to determine which Arrow licenses to show and which Waldur offering to import into.',
         )}

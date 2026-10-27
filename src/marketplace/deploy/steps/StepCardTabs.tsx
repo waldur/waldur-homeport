@@ -27,7 +27,7 @@ export const StepCardTabs: React.FC<StepCardTabsProps<TabSpec<any>>> = ({
           key={tabItem.key}
           variant={tab.key === tabItem.key ? 'text-primary' : 'text-secondary'}
           className={classNames(
-            'mx-3',
+            'mx-2.5',
             tab.key === tabItem.key && 'text-decoration-underline',
           )}
           onClick={() => setTab(tabItem)}

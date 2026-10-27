@@ -52,7 +52,7 @@ export const ModePickerDialog = ({
   const hide = useModalHide();
   return (
     <ModalDialog title={title} subtitle={description}>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-3 sm:grid-cols-2">
         {modes.map((mode) => (
           <ModePickerOption
             key={mode.key}
@@ -85,7 +85,7 @@ const ModePickerOption = ({
     aria-pressed={selected}
     onClick={() => onSelect(mode.key)}
     className={cn(
-      'flex items-start gap-3 rounded-xl border-[1px] p-4 text-left transition-colors',
+      'flex items-start gap-2.5 rounded-xl border-[1px] p-3 text-left transition-colors',
       selected
         ? 'border-brand ring-2 ring-[var(--bg-brand-subtle)]'
         : 'border-secondary hover:bg-primary-hover',

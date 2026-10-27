@@ -219,7 +219,7 @@ export const QuestionFormModal: FC<QuestionFormModalProps> = ({
             }
           >
             <Tabs mount="all" defaultValue="general">
-              <TabsList className="mb-5">
+              <TabsList className="mb-4">
                 <TabsTrigger value="general">
                   {translate('General')}
                 </TabsTrigger>

@@ -16,7 +16,7 @@ export const BillingSyncStatusCard = () => {
   if (settingsLoading || statusLoading) {
     return (
       <Card>
-        <Card.Body className="text-center py-6">
+        <Card.Body className="text-center py-5">
           <LoadingSpinner />
         </Card.Body>
       </Card>

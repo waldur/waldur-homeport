@@ -147,7 +147,7 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
         <LoadingSpinner />
       ) : offeringDetails ? (
         <div>
-          <p className="mb-2">
+          <p className="mb-1.5">
             <strong>{translate('Offering')}: </strong>
             {offeringDetails.category_title} / {offeringDetails.name}
           </p>
@@ -156,7 +156,7 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
             // the one the call offers; the request always takes the call's.
             <Field<any> name="plan">
               {({ input, meta }) => (
-                <FormField className="mb-5">
+                <FormField className="mb-4">
                   <FormLabel>{translate('Plan')}</FormLabel>
                   <SelectField
                     input={input}
@@ -173,7 +173,7 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
           )}
           {typeof plan === 'object' && (
             <>
-              <div className="flex gap-6 border-b-[1px] border-b-secondary mb-5">
+              <div className="flex gap-5 border-b-[1px] border-b-secondary mb-4">
                 <div className="grow">
                   {!isAward && (
                     <p className="mb-0">

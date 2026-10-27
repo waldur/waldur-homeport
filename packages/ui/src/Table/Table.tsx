@@ -62,7 +62,7 @@ export function TableHead({
   return (
     <th
       className={cn(
-        'px-4 py-3 text-left font-medium text-[var(--table-header-text)]',
+        'px-3 py-2.5 text-left font-medium text-[var(--table-header-text)]',
         className,
       )}
       {...props}
@@ -74,5 +74,7 @@ export function TableCell({
   className,
   ...props
 }: TdHTMLAttributes<HTMLTableCellElement>) {
-  return <td className={cn('px-4 py-3 text-primary', className)} {...props} />;
+  return (
+    <td className={cn('px-3 py-2.5 text-primary', className)} {...props} />
+  );
 }

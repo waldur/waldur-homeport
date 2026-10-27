@@ -35,7 +35,7 @@ interface ProviderUsernameConflictsProps {
 // one line under the title and a Show more link to the rest.
 const UsernameConflictsIntroDialog: FC = () => (
   <ModalBody>
-    <ModalTitle as="h5" className="mb-3 text-[15px] leading-[1.555]">
+    <ModalTitle as="h5" className="mb-2.5 text-[15px] leading-[1.555]">
       {translate('Username conflicts')}
     </ModalTitle>
     <p>

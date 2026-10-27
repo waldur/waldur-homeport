@@ -80,8 +80,8 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
       <FormTable.Item
         label={translate('Registration method')}
         value={
-          <div className="flex justify-between items-center gap-2">
-            <div className="flex items-center gap-2">
+          <div className="flex justify-between items-center gap-1.5">
+            <div className="flex items-center gap-1.5">
               {renderFieldOrDash(props.user.identity_provider_label)}
               {props.user.should_protect_user_details && (
                 <Tooltip
@@ -124,7 +124,7 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
             <div className="flex flex-col gap-1">
               {Object.entries(props.user.details).map(([claim, value]) => (
                 <div key={claim}>
-                  <span className="me-2">{claim}</span>
+                  <span className="me-1.5">{claim}</span>
                   <FieldWithCopy
                     value={
                       Array.isArray(value) ? value.join(', ') : String(value)
@@ -238,7 +238,7 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
         <FormTable.Item
           label={translate('Administrative status')}
           value={
-            <div className="inline-flex items-center gap-2">
+            <div className="inline-flex items-center gap-1.5">
               <Badge variant="danger" tone="outline">
                 {translate('Administratively disabled')}
               </Badge>

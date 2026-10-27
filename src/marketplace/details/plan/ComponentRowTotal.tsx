@@ -37,7 +37,7 @@ export const ComponentRowTotal = (props: {
         {translate('Total')}
       </th>
       <td colSpan={2} className="col-md-auto col-actions">
-        <div className="flex items-center justify-end gap-4">
+        <div className="flex items-center justify-end gap-3">
           {props.period && props.setPeriod && (
             <Switch
               label={translate('Yearly estimate')}

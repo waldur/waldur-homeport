@@ -60,7 +60,7 @@ export const AccessSubnetScopeFields = ({
   };
 
   return (
-    <FormFieldset className="mb-4">
+    <FormFieldset className="mb-3">
       <FormLegend>{translate('Applies to')}</FormLegend>
 
       <Checkbox
@@ -70,7 +70,7 @@ export const AccessSubnetScopeFields = ({
         label={ENV.plugins.WALDUR_CORE.SITE_NAME}
       />
       {appliesToPortal && (
-        <FormText variant="warning" className="mb-2">
+        <FormText variant="warning" className="mb-1.5">
           {translate(
             'Once any address is listed for sign-in, only listed addresses can sign in on behalf of this organization.',
           )}

@@ -47,7 +47,10 @@ const PlaygroundText: TextMessagePartComponent = ({ text }) => {
   return (
     <>
       {reasoning ? (
-        <details className="text-quaternary text-xs mb-2" open={reasoningOpen}>
+        <details
+          className="text-quaternary text-xs mb-1.5"
+          open={reasoningOpen}
+        >
           <summary className="cursor-pointer">{translate('Reasoning')}</summary>
           <div style={{ whiteSpace: 'pre-wrap' }}>{reasoning}</div>
         </details>
@@ -226,7 +229,7 @@ export const PlaygroundThread: FC<{
         type="floating"
         title={translate('Models unavailable')}
         body={error}
-        className="mb-3"
+        className="mb-2.5"
       />
     )}
     <AssistantComposer

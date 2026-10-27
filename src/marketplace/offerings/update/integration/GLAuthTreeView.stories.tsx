@@ -15,7 +15,7 @@ const meta: Meta<typeof GLAuthTreeView> = {
   component: GLAuthTreeView,
   decorators: [
     (Story) => (
-      <div className="p-6 max-w-4xl">
+      <div className="p-5 max-w-4xl">
         <Story />
       </div>
     ),

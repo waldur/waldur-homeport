@@ -118,7 +118,7 @@ const PageHero = ({ customer }) => {
       {showTabs && (
         <TabNav
           activeKey={dashboardState}
-          className="mb-4"
+          className="mb-3"
           items={[
             !isServiceManagerOnly && {
               key: 'organization.dashboard',

@@ -50,7 +50,7 @@ export const AnalyticsAndReports = () => {
   return (
     <Card>
       <Card.Header className="mx-0 border-0">
-        <div className="card-toolbar gap-4">
+        <div className="card-toolbar gap-3">
           {periodOptions.length > 1 && (
             <SegmentedControl<number>
               aria-label={translate('Time period')}
@@ -70,7 +70,7 @@ export const AnalyticsAndReports = () => {
       </Card.Header>
       <Card.Body className="p-0 overflow-hidden">
         {/* Stat cards */}
-        <Row className="mb-5 g-5">
+        <Row className="mb-4 g-5">
           {topCards.map((card) => (
             <Col key={card.label} xs={12} sm={6} md={3} lg={6} xl={3}>
               <StatWidgetCard
@@ -83,7 +83,7 @@ export const AnalyticsAndReports = () => {
         </Row>
 
         {/* Compliance & Checklist Usage Analytics */}
-        <Row className="mb-5 g-5">
+        <Row className="mb-4 g-5">
           <Col md={6} xs={12}>
             <ChecklistUsageAnalyticsTable />
           </Col>

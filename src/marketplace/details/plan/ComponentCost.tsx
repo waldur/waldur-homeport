@@ -14,14 +14,14 @@ export const ComponentCost = ({ component }: { component: Component }) => (
         : defaultCurrency(component.price),
     })}
     {component.discountApplied && component.discountPercent ? (
-      <span className="ms-2 text-success">
+      <span className="ms-1.5 text-success">
         {'− '}
         {translate('{percent}% volume discount', {
           percent: component.discountPercent,
         })}
       </span>
     ) : component.discountDeferred ? (
-      <span className="ms-2 text-quaternary">
+      <span className="ms-1.5 text-quaternary">
         {translate('Volume discount applied on your invoice')}
       </span>
     ) : null}

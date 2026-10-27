@@ -129,7 +129,7 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
                 key={warning}
                 variant="warning"
                 title={warning}
-                className="mb-4"
+                className="mb-3"
               />
             ))}
             <Tabs
@@ -137,7 +137,7 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
               value={view}
               onValueChange={(key) => key && setView(key as View)}
             >
-              <TabsList className="mb-5">
+              <TabsList className="mb-4">
                 <TabsTrigger value="toml">
                   {translate('TOML config')}
                 </TabsTrigger>

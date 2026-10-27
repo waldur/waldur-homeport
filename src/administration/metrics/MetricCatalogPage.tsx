@@ -142,7 +142,7 @@ export const MetricCatalogPage: FC = () => {
       />
       <Table<RetentionPolicy>
         {...policies}
-        className="mt-6"
+        className="mt-5"
         title={translate('Retention policies')}
         subtitle={translate(
           'How long raw points and hourly and daily roll-ups are kept.',

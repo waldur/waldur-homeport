@@ -95,7 +95,7 @@ export const ConditionalCascadeField = ({
   return (
     <div>
       {tooltip && (
-        <FormText as="div" variant="muted" className="mb-3">
+        <FormText as="div" variant="muted" className="mb-2.5">
           {tooltip}
         </FormText>
       )}
@@ -105,7 +105,7 @@ export const ConditionalCascadeField = ({
         const currentValue = selections[step.name] || '';
 
         return (
-          <FormGroup key={step.name} label={step.label} className="mb-3">
+          <FormGroup key={step.name} label={step.label} className="mb-2.5">
             <Select
               value={
                 choices.find((choice) => choice.value === currentValue) || null

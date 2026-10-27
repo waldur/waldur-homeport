@@ -13,7 +13,7 @@ const Container: FC<PropsWithChildren> = (props) => (
   <div
     className={classNames(
       PAGE_CONTAINER_XXL_CLASSNAME,
-      'flex flex-col xl:flex-row gap-5 pb-10',
+      'flex flex-col xl:flex-row gap-4 pb-8',
     )}
   >
     {props.children}
@@ -23,7 +23,7 @@ const Container: FC<PropsWithChildren> = (props) => (
 const Body: FC<PropsWithChildren<{ className? }>> = (props) => (
   <div
     className={classNames(
-      'flex flex-col lg:flex-auto lg:min-w-0 gap-5',
+      'flex flex-col lg:flex-auto lg:min-w-0 gap-4',
       props.className,
     )}
   >
@@ -77,7 +77,7 @@ const Sidebar: FC<
       <Card className="card-bordered w-full">
         {props.title ? (
           <Card.Header>
-            <div className="me-2">
+            <div className="me-1.5">
               <h4 className="mb-0">{props.title}</h4>
             </div>
           </Card.Header>

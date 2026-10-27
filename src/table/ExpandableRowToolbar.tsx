@@ -51,12 +51,15 @@ const ColumnsPopover: FC<{
   activeColumns: Record<string, string[] | false>;
   onToggle: (column: ExpandableRowToolbarColumn) => void;
 }> = ({ columns, activeColumns, onToggle }) => (
-  <div className="py-2 max-w-[250px]">
+  <div className="py-1.5 max-w-[250px]">
     {columns.map((column) => (
       <button
         key={column.id}
         type="button"
-        className={cn(menuItem({ look: 'actions' }), 'flex items-center gap-2')}
+        className={cn(
+          menuItem({ look: 'actions' }),
+          'flex items-center gap-1.5',
+        )}
         aria-pressed={Boolean(activeColumns[column.id])}
         onClick={() => onToggle(column)}
       >
@@ -122,7 +125,7 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
   const hasSettings = Boolean(optionalColumns && optionalColumns.length > 0);
 
   return (
-    <div className="flex flex-wrap items-center gap-2 px-3 py-2">
+    <div className="flex flex-wrap items-center gap-1.5 px-2.5 py-1.5">
       {activeTableKey && (
         <div className="table-toolbar-search">
           <TableQuery
@@ -132,9 +135,9 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
           />
         </div>
       )}
-      <div className="ms-sm-auto flex items-center gap-3">
+      <div className="sm:ms-auto flex items-center gap-2.5">
         {hasSelection && (
-          <div className="flex items-center font-normal text-primary gap-2">
+          <div className="flex items-center font-normal text-primary gap-1.5">
             <BaseButton
               iconNode={<XIcon weight="bold" />}
               tooltip={translate('Clear selection')}

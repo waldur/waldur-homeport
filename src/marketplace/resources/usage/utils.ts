@@ -92,7 +92,7 @@ const formatChart = (
           }
 
           if (details?.length) {
-            tooltip += `<br/><div class="mt-2 text-decoration-underline"><b>${translate('Details')}:</b></div>`;
+            tooltip += `<br/><div class="mt-1.5 text-decoration-underline"><b>${translate('Details')}:</b></div>`;
             tooltip += `<ul class="mb-0">`;
             const hasMoreBtn =
               details.length > MAX_SHOW_ITEMS + 1 && Boolean(openDialog);
@@ -103,7 +103,7 @@ const formatChart = (
             tooltip += `</ul>`;
 
             if (hasMoreBtn) {
-              tooltip += `<div class="text-center mt-3">`;
+              tooltip += `<div class="text-center mt-2.5">`;
               tooltip += `<button id="see-more-btn" class="${buttonVariants({ variant: 'text-primary', size: 'sm' })}">${translate('See more')}`;
               tooltip += `<svg class="shrink-0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm48.49-108.49a12,12,0,0,1,0,17l-40,40a12,12,0,0,1-17,0l-40-40a12,12,0,0,1,17-17L128,135l31.51-31.52A12,12,0,0,1,176.49,103.51Z"></path></svg>`;
               tooltip += `</button></div>`;

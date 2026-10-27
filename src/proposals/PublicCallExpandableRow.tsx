@@ -18,7 +18,7 @@ export const PublicCallExpandableRow: FunctionComponent<{
   return (
     <ExpandableContainer>
       <Row>
-        <Col xs={12} className="text-primary mb-2">
+        <Col xs={12} className="text-primary mb-1.5">
           {row.description ? (
             <Card className="card-bordered card-solid">
               <Card.Header>

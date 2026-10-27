@@ -211,8 +211,8 @@ const PresetSelector: FC = () => {
   );
 
   return (
-    <div className="mb-6">
-      <div className="flex items-center gap-2 mb-3">
+    <div className="mb-5">
+      <div className="flex items-center gap-1.5 mb-2.5">
         <LightningIcon weight="bold" className="text-brand" />
         <span>{translate('Quick Configuration')}</span>
       </div>
@@ -228,8 +228,8 @@ const PresetSelector: FC = () => {
               onClick={() => applyPreset(preset)}
               style={{ cursor: 'pointer' }}
             >
-              <Card.Body className="p-3">
-                <Card.Title className="text-xs font-medium mb-2">
+              <Card.Body className="p-2.5">
+                <Card.Title className="text-xs font-medium mb-1.5">
                   {preset.label}
                 </Card.Title>
                 <Card.Text className="text-xs text-tertiary mb-0">
@@ -240,7 +240,7 @@ const PresetSelector: FC = () => {
           </div>
         ))}
       </div>
-      <FormText as="div" className="mt-2">
+      <FormText as="div" className="mt-1.5">
         {translate(
           'Select a preset to quickly configure common policy patterns. You can customize individual settings after applying a preset.',
         )}
@@ -604,7 +604,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
   );
 
   const enableToggle = (
-    <div className="mb-6">
+    <div className="mb-5">
       <Switch
         id="slurm-policy-toggle"
         checked={isPolicyEnabled}
@@ -644,7 +644,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
           titleClassName="font-normal"
           cardBordered
           actions={
-            <div className="flex gap-3">
+            <div className="flex gap-2.5">
               <PolicyInfoDropdown
                 offering={offering}
                 policyUuid={existingPolicy?.uuid}
@@ -678,7 +678,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
             <AlertItem
               variant="warning"
               type="floating"
-              className="mb-4"
+              className="mb-3"
               title={translate('Warning')}
               body={existingPolicy.warnings.map((warning, index) => (
                 <div key={index}>{warning}</div>

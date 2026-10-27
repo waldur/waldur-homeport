@@ -46,7 +46,7 @@ export const PublicDashboardHero: FC<
         >
           <Card
             className={classNames(
-              'w-full mb-md-0 mb-4',
+              'w-full md:mb-0 mb-3',
               props.cardBordered && 'card-bordered',
             )}
           >
@@ -72,8 +72,8 @@ export const PublicDashboardHero: FC<
               ) : null}
               {/* min-w-0: a flex item won't shrink below its longest word, so an
                   unbroken name would push the details out of the card */}
-              <div className="flex flex-col grow gap-2 min-w-0">
-                <div className="flex sm:flex-row flex-col-reverse sm:items-center gap-3">
+              <div className="flex flex-col grow gap-1.5 min-w-0">
+                <div className="flex sm:flex-row flex-col-reverse sm:items-center gap-2.5">
                   {/* Title */}
                   <div className="grow min-w-0">{props.title}</div>
                   {/* Actions */}
@@ -81,7 +81,7 @@ export const PublicDashboardHero: FC<
                     <div
                       className={classNames(
                         props.mobileBottomActions ? 'hidden sm:flex' : 'flex',
-                        'public-dashboard-hero-actions shrink-0 flex-wrap self-stretch sm:self-start sm:justify-end gap-3',
+                        'public-dashboard-hero-actions shrink-0 flex-wrap self-stretch sm:self-start sm:justify-end gap-2.5',
                       )}
                     >
                       {props.actions}
@@ -96,7 +96,7 @@ export const PublicDashboardHero: FC<
                 )}
                 {/* Actions - at the end */}
                 {props.actions && props.mobileBottomActions && (
-                  <div className="sm:hidden flex flex-wrap self-stretch sm:self-start sm:justify-end gap-3">
+                  <div className="sm:hidden flex flex-wrap self-stretch sm:self-start sm:justify-end gap-2.5">
                     {props.actions}
                   </div>
                 )}
@@ -126,7 +126,7 @@ export const PublicDashboardHero: FC<
                     className={classNames(
                       'grow flex items-end',
                       props.quickFooterClassName,
-                      'mt-5',
+                      'mt-4',
                     )}
                   >
                     {props.quickFooter}

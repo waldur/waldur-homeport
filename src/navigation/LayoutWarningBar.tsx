@@ -62,7 +62,7 @@ export const LayoutWarningBar: FC<LayoutWarningBarProps> = ({
       <div
         className={classNames(
           PAGE_CONTAINER_CLASSNAME,
-          'flex w-full items-center gap-2',
+          'flex w-full items-center gap-1.5',
           centered && 'justify-center text-center',
           className,
         )}
@@ -72,7 +72,7 @@ export const LayoutWarningBar: FC<LayoutWarningBarProps> = ({
         ) : null}
         <p
           className={classNames(
-            'mb-0 py-2 text-sm',
+            'mb-0 py-1.5 text-sm',
             centered ? 'text-center' : 'text-start',
           )}
         >
@@ -81,7 +81,7 @@ export const LayoutWarningBar: FC<LayoutWarningBarProps> = ({
           {children}
         </p>
         {actions ? (
-          <div className="ms-auto flex shrink-0 items-center gap-2">
+          <div className="ms-auto flex shrink-0 items-center gap-1.5">
             {actions}
           </div>
         ) : null}

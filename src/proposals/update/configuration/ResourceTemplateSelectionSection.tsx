@@ -28,7 +28,7 @@ export const ResourceTemplateSelectionSection: FC<
   return (
     <FormTable.Card
       title={translate('Template selection')}
-      className="card-bordered mb-5"
+      className="card-bordered mb-4"
     >
       <EditFieldProvider
         scope={props.call}

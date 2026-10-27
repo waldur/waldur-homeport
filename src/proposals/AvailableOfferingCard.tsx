@@ -15,7 +15,7 @@ export const AvailableOfferingCard: FC<{ availableOffering }> = ({
       body={availableOffering.description}
       clickable
       footer={
-        <div className="flex justify-end gap-2">
+        <div className="flex justify-end gap-1.5">
           <Link
             state="calls-for-proposals-all-calls"
             params={{ offering_uuid: availableOffering.uuid }}

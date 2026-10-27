@@ -69,8 +69,8 @@ export const ClusterStatistics: FC<{
         <TabsTrigger value="storage">{translate('Storage')}</TabsTrigger>
       </TabsList>
       {/* Both tabs show the same figures until WAL-8880 splits them. */}
-      <TabsContent value={activeKey} className="pt-10">
-        <Row className="g-5 mb-10">
+      <TabsContent value={activeKey} className="pt-8">
+        <Row className="g-5 mb-8">
           <Col sm={4}>
             <StatisticsCard
               title={translate('Total resources')}
@@ -88,9 +88,9 @@ export const ClusterStatistics: FC<{
           </Col>
         </Row>
 
-        <Row className="mb-10 g-10">
+        <Row className="mb-8 g-10">
           <Col xs="auto">
-            <h4 className="font-medium mb-7">{translate('Pods')}</h4>
+            <h4 className="font-medium mb-5.5">{translate('Pods')}</h4>
             <StatisticPieChartItem
               title={translate('Used')}
               unit="cores"
@@ -100,7 +100,7 @@ export const ClusterStatistics: FC<{
             />
           </Col>
           <Col xs="auto">
-            <h4 className="font-medium mb-7">{translate('CPU')}</h4>
+            <h4 className="font-medium mb-5.5">{translate('CPU')}</h4>
             <Stack direction="horizontal" gap={10}>
               <StatisticPieChartItem
                 title={translate('Reserved')}
@@ -119,7 +119,7 @@ export const ClusterStatistics: FC<{
             </Stack>
           </Col>
           <Col xs="auto">
-            <h4 className="font-medium mb-7">{translate('Memory')}</h4>
+            <h4 className="font-medium mb-5.5">{translate('Memory')}</h4>
             <Stack direction="horizontal" gap={10}>
               <StatisticPieChartItem
                 title={translate('Reserved')}
@@ -139,8 +139,8 @@ export const ClusterStatistics: FC<{
           </Col>
         </Row>
 
-        <h4 className="font-medium mb-7">{translate('Network')}</h4>
-        <Row className="g-5 mb-10">
+        <h4 className="font-medium mb-5.5">{translate('Network')}</h4>
+        <Row className="g-5 mb-8">
           <Col sm={4}>
             <NetworkStatisticsCard
               isIncrease

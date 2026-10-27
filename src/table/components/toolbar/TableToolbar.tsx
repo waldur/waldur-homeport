@@ -91,8 +91,8 @@ export function TableToolbarActions() {
     <>
       {/* Multi-select actions */}
       {selectedRows?.length > 0 && slots.multiSelectActions && (
-        <div className="order-1 order-sm-1 flex justify-start flex-wrap text-nowrap gap-4">
-          <div className="flex items-center font-normal text-primary me-2">
+        <div className="order-1 order-sm-1 flex justify-start flex-wrap text-nowrap gap-3">
+          <div className="flex items-center font-normal text-primary me-1.5">
             <BaseButton
               iconNode={<XIcon weight="bold" />}
               tooltip={translate('Clear selection')}
@@ -125,12 +125,12 @@ export function TableToolbarActions() {
             // Bootstrap's .flex-wrap is !important and would beat a Tailwind
             // sm:flex-nowrap, so wrap only below sm for a standalone table.
             portal?.toolbar ? 'flex-wrap' : 'max-sm:flex-wrap',
-            'text-nowrap gap-4',
+            'text-nowrap gap-3',
             showTitle ? 'ms-auto justify-end' : 'justify-between',
           )}
         >
           {config.hasQuery && (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <div className="table-toolbar-search">
                 <TableQuery
                   query={query}
@@ -153,7 +153,7 @@ export function TableToolbarActions() {
           )}
 
           {showActionsColumn && (
-            <div className="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-4">
+            <div className="flex sm:justify-end max-sm:flex-wrap text-nowrap gap-3">
               <TableButtons
                 table={config.table}
                 rows={rows}
@@ -216,14 +216,14 @@ export function TableToolbarTitle() {
     <div className="grow order-0" data-testid="table-toolbar-title-container">
       <div className="card-title h5">
         {!config.hideTitle && (
-          <div className="me-2">
+          <div className="me-1.5">
             <span className={classNames('h3', display.titleClassName)}>
               {display.title ||
                 display.alterTitle ||
                 (display.verboseName && titleCase(display.verboseName))}
             </span>
             {Boolean(display.subtitle) && (
-              <small className="text-sm font-normal block mt-4px">
+              <small className="text-sm font-normal block mt-1">
                 {display.subtitle}
               </small>
             )}
@@ -259,7 +259,7 @@ export function TableToolbar() {
       )}
       data-testid="table-toolbar"
     >
-      <div className="card-toolbar flex flex-wrap items-center gap-4 w-full">
+      <div className="card-toolbar flex flex-wrap items-center gap-3 w-full">
         <TableToolbarTitle />
         {!portal?.toolbar && <TableToolbarActions />}
       </div>

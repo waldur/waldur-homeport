@@ -148,7 +148,7 @@ const EventConsumersTable: FC = () => {
   return (
     <>
       {statsUnavailable && (
-        <p className="text-warning mb-3">
+        <p className="text-warning mb-2.5">
           {translate(
             'RabbitMQ statistics are unavailable; queue status and message counts are not shown.',
           )}
@@ -197,7 +197,7 @@ export const EventConsumersCard: FC = () => {
       }
       isOpen={open}
       onToggle={setOpen}
-      className="mb-6"
+      className="mb-5"
     >
       {open && <EventConsumersTable />}
     </AccordionCard>

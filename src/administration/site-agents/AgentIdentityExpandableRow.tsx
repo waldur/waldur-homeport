@@ -38,7 +38,7 @@ const EventDeliverySection: FC<{ agentUuid: string }> = ({ agentUuid }) => {
 
   return (
     <>
-      <h6 className="mb-3 flex items-center gap-2">
+      <h6 className="mb-2.5 flex items-center gap-1.5">
         {translate('Event delivery')}
         {!isLoading && !isError && (
           <Badge
@@ -90,17 +90,17 @@ export const AgentIdentityExpandableRow: FC<
 > = ({ row }) => {
   return (
     <ExpandableContainer>
-      <div className="row mb-4">
+      <div className="row mb-3">
         <div className="col-12">
           <EventDeliverySection agentUuid={row.uuid} />
         </div>
       </div>
       <div className="row">
         <div className="col-md-6">
-          <h6 className="mb-3">{translate('Configuration')}</h6>
+          <h6 className="mb-2.5">{translate('Configuration')}</h6>
           {row.config_file_content ? (
             <pre
-              className="bg-tertiary dark:bg-quaternary p-3 rounded"
+              className="bg-tertiary dark:bg-quaternary p-2.5 rounded"
               style={{ maxHeight: '200px', overflow: 'auto' }}
             >
               {row.config_file_content}
@@ -114,7 +114,7 @@ export const AgentIdentityExpandableRow: FC<
             Array.isArray(row.dependencies) &&
             row.dependencies.length > 0 && (
               <>
-                <h6 className="mt-4 mb-2">{translate('Dependencies')}</h6>
+                <h6 className="mt-3 mb-1.5">{translate('Dependencies')}</h6>
                 <ul className="list-unstyled text-quaternary mb-0">
                   {row.dependencies.map(
                     (
@@ -135,7 +135,7 @@ export const AgentIdentityExpandableRow: FC<
             )}
         </div>
         <div className="col-md-6">
-          <h6 className="mb-3">{translate('Services')}</h6>
+          <h6 className="mb-2.5">{translate('Services')}</h6>
           {row.services && row.services.length > 0 ? (
             <div className="table-responsive">
               <table className="table table-sm table-bordered">

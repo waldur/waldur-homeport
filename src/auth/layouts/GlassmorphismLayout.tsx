@@ -39,7 +39,7 @@ export const GlassmorphismLayout = () => {
       </div>
       <div className="layout-glassmorphism-content">
         <div className="layout-glassmorphism-card">
-          <div className="login-logo mb-3">
+          <div className="login-logo mb-2.5">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
               src={imageUrl}

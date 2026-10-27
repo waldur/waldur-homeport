@@ -145,7 +145,7 @@ export const ResourceRequestsSummary = ({
             reviews={reviews}
             fieldName="comment_resource_requests"
             space={0}
-            className="mt-5"
+            className="mt-4"
           />
         }
       />

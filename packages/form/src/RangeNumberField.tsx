@@ -27,7 +27,7 @@ export const RangeNumberField: FunctionComponent<RangeNumberFieldProps> = ({
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1.5">
       <BaseInputField
         containerClassName="flex-1"
         type="number"

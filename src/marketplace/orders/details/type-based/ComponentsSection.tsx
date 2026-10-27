@@ -73,9 +73,9 @@ export const ComponentsSection = ({
   ];
 
   return (
-    <div className="mb-6">
+    <div className="mb-5">
       <DetailsTable rows={components} columns={columns} />
-      <p className="text-quaternary mt-2 mb-0 text-xs">{title}</p>
+      <p className="text-quaternary mt-1.5 mb-0 text-xs">{title}</p>
     </div>
   );
 };

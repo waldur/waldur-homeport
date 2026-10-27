@@ -25,7 +25,7 @@ export const ProviderDetailsBody: FunctionComponent<{
       )}
     </Col>
     <Col md={9}>
-      <h2 className="font-bold mb-4">{provider.customer_name}</h2>
+      <h2 className="font-bold mb-3">{provider.customer_name}</h2>
       <Col sm={12}>
         <div className={PAGE_CONTAINER_BOUNDED_CLASSNAME}>
           {provider.customer_native_name && (
@@ -44,7 +44,7 @@ export const ProviderDetailsBody: FunctionComponent<{
       </Col>
 
       <hr />
-      <h3 className="font-bold mb-3">{translate('Offerings')}:</h3>
+      <h3 className="font-bold mb-2.5">{translate('Offerings')}:</h3>
       <OfferingGrid width={4} loading={false} loaded={true} items={offerings} />
     </Col>
   </Row>

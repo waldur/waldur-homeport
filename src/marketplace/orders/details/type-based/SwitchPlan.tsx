@@ -43,7 +43,7 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
         label={translate('Plan old')}
         labelWidth={200}
         value={
-          <span className="inline-flex items-center gap-2">
+          <span className="inline-flex items-center gap-1.5">
             <Badge variant="neutral" shape="pill" tone="outline">
               {order.old_plan_name}
             </Badge>
@@ -57,7 +57,7 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
         label={translate('Plan new')}
         labelWidth={200}
         value={
-          <span className="inline-flex items-center gap-2">
+          <span className="inline-flex items-center gap-1.5">
             <Badge variant="moss" shape="pill" tone="outline">
               {order.new_plan_name}
             </Badge>
@@ -122,7 +122,7 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
                       <>&mdash;</>
                     ) : (
                       <>
-                        <span className="me-3">
+                        <span className="me-2.5">
                           {defaultCurrency(row.changedSubTotal)}
                         </span>
                         <ChangesAmountBadge

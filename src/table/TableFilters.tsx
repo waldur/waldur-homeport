@@ -39,19 +39,19 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
   const clearLabel = isMd ? translate('Clear') : translate('Clear filters');
 
   return props.filterPosition === 'menu' || props.filtersStorage.length > 0 ? (
-    <div className="w-full flex flex-wrap gap-4">
+    <div className="w-full flex flex-wrap gap-3">
       <div className={isMd ? 'flex grow scroll-x' : 'flex grow'}>
         <div
           className={
             isMd
-              ? 'flex items-stretch text-nowrap gap-4 w-full'
-              : 'flex flex-wrap gap-4 w-full'
+              ? 'flex items-stretch text-nowrap gap-3 w-full'
+              : 'flex flex-wrap gap-3 w-full'
           }
         >
           {props.filtersStorage.map((item) => (
             <div
               key={item.name}
-              className="flex items-center flex-nowrap font-semibold text-primary text-xs gap-2"
+              className="flex items-center flex-nowrap font-semibold text-primary text-xs gap-1.5"
             >
               {item.label}
               {item.component && <item.component />}

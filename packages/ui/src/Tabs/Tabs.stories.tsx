@@ -28,12 +28,12 @@ export default meta;
 type Story = StoryObj<typeof Tabs>;
 
 const Panel = ({ children }: { children: string }) => (
-  <div className="p-4 text-sm">{children}</div>
+  <div className="p-3 text-sm">{children}</div>
 );
 
 export const LineTabs: Story = {
   render: () => (
-    <div className="p-6 max-w-xl">
+    <div className="p-5 max-w-xl">
       <Tabs defaultValue="overview">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -72,7 +72,7 @@ export const Controlled: Story = {
   render: () => {
     const [value, setValue] = useState('members');
     return (
-      <div className="p-6 max-w-xl">
+      <div className="p-5 max-w-xl">
         <Tabs value={value} onValueChange={setValue}>
           <TabsList>
             <TabsTrigger value="members">Members</TabsTrigger>
@@ -87,7 +87,7 @@ export const Controlled: Story = {
         </Tabs>
         <button
           type="button"
-          className="mt-2 text-sm underline"
+          className="mt-1.5 text-sm underline"
           onClick={() => setValue('invitations')}
         >
           Jump to invitations
@@ -99,7 +99,7 @@ export const Controlled: Story = {
 
 export const WithDisabledAndTooltips: Story = {
   render: () => (
-    <div className="p-6 max-w-xl">
+    <div className="p-5 max-w-xl">
       <Tabs defaultValue="tab1">
         <TabsList>
           <TabsTrigger value="tab1">Available</TabsTrigger>
@@ -133,7 +133,7 @@ export const WithDisabledAndTooltips: Story = {
  */
 export const HintsAndCounts: Story = {
   render: () => (
-    <div className="p-6 max-w-xl">
+    <div className="p-5 max-w-xl">
       <Tabs defaultValue="subnets">
         <TabsList>
           <TabsTrigger
@@ -169,7 +169,7 @@ export const HintsAndCounts: Story = {
  */
 export const ActivationModes: Story = {
   render: () => (
-    <div className="p-6 max-w-xl space-y-6">
+    <div className="p-5 max-w-xl space-y-6">
       {(['automatic', 'manual'] as const).map((mode) => (
         <div key={mode}>
           <p className="text-xs text-quaternary mb-1">
@@ -218,7 +218,7 @@ const MountCounter = ({ label }: { label: string }) => {
     rerender((value) => value + 1);
   }, []);
   return (
-    <div className="p-3 text-sm">
+    <div className="p-2.5 text-sm">
       {label}: mounted {mounts.current}x
     </div>
   );
@@ -231,7 +231,7 @@ const MountCounter = ({ label }: { label: string }) => {
  */
 export const MountModes: Story = {
   render: () => (
-    <div className="p-6 max-w-xl space-y-6">
+    <div className="p-5 max-w-xl space-y-6">
       {(['active', 'visited', 'all'] as const).map((mode) => (
         <div key={mode}>
           <p className="text-xs text-quaternary mb-1">
@@ -257,8 +257,8 @@ export const MountModes: Story = {
 
 export const MountVisitedForm: Story = {
   render: () => (
-    <div className="p-6 max-w-xl">
-      <p className="text-xs text-quaternary mb-2">
+    <div className="p-5 max-w-xl">
+      <p className="text-xs text-quaternary mb-1.5">
         Typing into an input in Tab 1 and navigating to Tab 2 preserves input
         state because mount=&quot;visited&quot; keeps visited tabs mounted in
         DOM.
@@ -268,7 +268,7 @@ export const MountVisitedForm: Story = {
           <TabsTrigger value="general">General</TabsTrigger>
           <TabsTrigger value="advanced">Advanced</TabsTrigger>
         </TabsList>
-        <TabsContent value="general" className="p-4">
+        <TabsContent value="general" className="p-3">
           <label
             htmlFor="story-project-name"
             className="block text-sm font-medium mb-1"
@@ -279,10 +279,10 @@ export const MountVisitedForm: Story = {
             id="story-project-name"
             type="text"
             placeholder="Enter name..."
-            className="border px-3 py-1.5 rounded-md text-sm w-full"
+            className="border px-2.5 py-1.5 rounded-md text-sm w-full"
           />
         </TabsContent>
-        <TabsContent value="advanced" className="p-4">
+        <TabsContent value="advanced" className="p-3">
           <label
             htmlFor="story-api-key"
             className="block text-sm font-medium mb-1"
@@ -293,7 +293,7 @@ export const MountVisitedForm: Story = {
             id="story-api-key"
             type="text"
             placeholder="Enter key..."
-            className="border px-3 py-1.5 rounded-md text-sm w-full"
+            className="border px-2.5 py-1.5 rounded-md text-sm w-full"
           />
         </TabsContent>
       </Tabs>
@@ -309,7 +309,7 @@ export const MountVisitedForm: Story = {
  */
 export const ForceMountOnePanel: Story = {
   render: () => (
-    <div className="p-6 max-w-xl">
+    <div className="p-5 max-w-xl">
       <Tabs defaultValue="summary" mount="active">
         <TabsList>
           <TabsTrigger value="summary">Summary</TabsTrigger>
@@ -318,7 +318,7 @@ export const ForceMountOnePanel: Story = {
         <TabsContent value="summary">
           <Panel>Summary (unmounted whenever you leave it)</Panel>
         </TabsContent>
-        <TabsContent value="draft" forceMount className="p-4">
+        <TabsContent value="draft" forceMount className="p-3">
           <label
             htmlFor="story-draft"
             className="block text-sm font-medium mb-1"
@@ -328,7 +328,7 @@ export const ForceMountOnePanel: Story = {
           <input
             id="story-draft"
             type="text"
-            className="border px-3 py-1.5 rounded-md text-sm w-full"
+            className="border px-2.5 py-1.5 rounded-md text-sm w-full"
           />
         </TabsContent>
       </Tabs>
@@ -367,7 +367,7 @@ const MANY_TABS = [
  */
 export const ScrollableStrip: Story = {
   render: () => (
-    <div className="p-6 w-[360px]">
+    <div className="p-5 w-[360px]">
       <Tabs defaultValue="Overview">
         <TabsList scrollable className="flex-nowrap">
           {MANY_TABS.map((tab) => (
@@ -392,7 +392,7 @@ export const RouterTabNav: Story = {
     const [currentTab, setCurrentTab] = useState('dashboard');
 
     return (
-      <div className="p-6 max-w-xl">
+      <div className="p-5 max-w-xl">
         <TabNav
           items={[
             { key: 'dashboard', title: 'Dashboard' },
@@ -408,7 +408,7 @@ export const RouterTabNav: Story = {
           activeKey={currentTab}
           onSelect={setCurrentTab}
         />
-        <div className="p-4 text-sm text-quaternary">
+        <div className="p-3 text-sm text-quaternary">
           Router currently simulating active route:{' '}
           <strong>{String(currentTab)}</strong>
         </div>
@@ -424,7 +424,7 @@ export const RouterTabNav: Story = {
  */
 export const LinkTabs: Story = {
   render: () => (
-    <div className="p-6 max-w-xl">
+    <div className="p-5 max-w-xl">
       <TabNav
         aria-label="Reporting sections"
         activeKey="Overview"
@@ -450,7 +450,7 @@ export const LinkTabs: Story = {
 
 export const ScrollableTabNav: Story = {
   render: () => (
-    <div className="p-6 w-[360px]">
+    <div className="p-5 w-[360px]">
       <TabNav
         items={MANY_TABS.map((tab) => ({ key: tab, title: tab }))}
         activeKey="Overview"

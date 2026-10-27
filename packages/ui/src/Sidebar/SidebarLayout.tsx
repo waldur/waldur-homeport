@@ -7,7 +7,7 @@ import { cn } from '../cn';
  * Standard slot padding: 16px on full-width view, reduced to 6px in collapsed
  * icon rail mode so buttons center cleanly within the rail.
  */
-const SIDEBAR_SLOT_PADDING = 'p-4 group-data-[collapsible=icon]/panel:px-1.5!';
+const SIDEBAR_SLOT_PADDING = 'p-3 group-data-[collapsible=icon]/panel:px-1.5!';
 
 /**
  * Pinned header container at the top of the sidebar.
@@ -15,7 +15,7 @@ const SIDEBAR_SLOT_PADDING = 'p-4 group-data-[collapsible=icon]/panel:px-1.5!';
 export function SidebarHeader({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      className={cn('flex flex-col gap-2', SIDEBAR_SLOT_PADDING, className)}
+      className={cn('flex flex-col gap-1.5', SIDEBAR_SLOT_PADDING, className)}
       data-sidebar="header"
       {...props}
     />
@@ -28,7 +28,7 @@ export function SidebarHeader({ className, ...props }: ComponentProps<'div'>) {
 export function SidebarFooter({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      className={cn('flex flex-col gap-2', SIDEBAR_SLOT_PADDING, className)}
+      className={cn('flex flex-col gap-1.5', SIDEBAR_SLOT_PADDING, className)}
       data-sidebar="footer"
       {...props}
     />
@@ -45,7 +45,7 @@ export function SidebarSeparator({
   return (
     <div
       role="separator"
-      className={cn('mx-4 h-px bg-[color:var(--nav-separator)]', className)}
+      className={cn('mx-3 h-px bg-[color:var(--nav-separator)]', className)}
       {...props}
     />
   );
@@ -85,7 +85,7 @@ export const SidebarContent = forwardRef<HTMLDivElement, SidebarContentProps>(
           data-sidebar="content-viewport"
           data-testid="aside-menu-wrapper"
         >
-          <div className={cn('flex flex-col gap-4', SIDEBAR_SLOT_PADDING)}>
+          <div className={cn('flex flex-col gap-3', SIDEBAR_SLOT_PADDING)}>
             {children}
           </div>
         </ScrollAreaPrimitive.Viewport>
@@ -132,7 +132,7 @@ export function SidebarGroupLabel({
   return (
     <div
       className={cn(
-        'px-3 pt-3 pb-1 text-xs font-medium tracking-wide text-[var(--nav-section-label)] transition-opacity duration-200',
+        'px-2.5 pt-2.5 pb-1 text-xs font-medium tracking-wide text-[var(--nav-section-label)] transition-opacity duration-200',
         'group-data-[collapsible=icon]/panel:opacity-0',
         className,
       )}

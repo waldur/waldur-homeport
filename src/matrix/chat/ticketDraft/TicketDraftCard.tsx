@@ -192,7 +192,7 @@ const TicketDraftView: FC<{
         type="floating"
         iconSize="sm"
         iconClassName="mt-0"
-        className="p-3"
+        className="p-2.5"
         title={
           draft.helpdesk
             ? translate(

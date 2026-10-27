@@ -39,7 +39,7 @@ export const FormStartupScriptStep = (props: FormStepProps) => {
             body={translate(
               'Cloud-init user data is stored and transmitted in plain text — it is kept unencrypted in the database, forwarded to OpenStack where any process on the instance can read it via the metadata service, and it may appear in logs. Do not put unencrypted secrets (passwords, private keys, API tokens) here; reference a secrets manager or inject them through an encrypted channel instead.',
             )}
-            className="mb-4"
+            className="mb-3"
           />
           {scriptEnabled ? (
             <MonacoGroup

@@ -40,8 +40,8 @@ export const PortRows = ({ fields, subnets, hasCustomIp }: any) => {
   }, [fields, freeSubnets]);
 
   return (
-    <div className="mb-5">
-      <div className="border-rows mb-4">
+    <div className="mb-4">
+      <div className="border-rows mb-3">
         {fields.map((port, index) => (
           <Fragment key={index}>
             <Row className="g-4">

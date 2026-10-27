@@ -104,7 +104,7 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
       <LoadingErred
         message={translate('Unable to load data')}
         loadData={refetch}
-        className="mb-4"
+        className="mb-3"
       />
     );
   }

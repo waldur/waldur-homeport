@@ -58,7 +58,7 @@ export const OfferingServices: FC<OwnProps> = ({ agentIdentity }) => {
   return (
     <FormTable.Card
       title={translate('Services')}
-      className="card-bordered mb-5"
+      className="card-bordered mb-4"
       headerClassName="min-h-[60px]"
     >
       <FormTable detailsMode className="gy-5">

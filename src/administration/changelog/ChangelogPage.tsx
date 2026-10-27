@@ -59,7 +59,7 @@ const TitleCell = ({ row }: { row: ChangelogEntry }) => (
   <div>
     <span className="font-medium">{row.title}</span>
     {row.highlight && (
-      <Badge variant="primary" shape="pill" className="ms-2">
+      <Badge variant="primary" shape="pill" className="ms-1.5">
         {translate('Key')}
       </Badge>
     )}
@@ -216,7 +216,7 @@ const ChangelogTable: FunctionComponent<{
       filters={<ChangelogEntriesFilter />}
       formId={ChangelogEntriesFilterFormId}
       expandableRow={ChangelogExpandableRow}
-      expandableRowClassName="py-2 pe-2"
+      expandableRowClassName="py-1.5 pe-1.5"
       verboseName={translate('changelog entries')}
       subtitle={
         releases.length > 0 && (

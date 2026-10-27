@@ -31,7 +31,7 @@ export const AttachmentRow: FC<AttachmentRowProps> = ({
       variant="tertiary"
       size="md"
     />
-    <div className="grow ms-3 items-center flex">
+    <div className="grow ms-2.5 items-center flex">
       <span className="text-quaternary text-base">
         {value ? (
           <>

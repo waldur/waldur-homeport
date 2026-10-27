@@ -13,7 +13,7 @@ export const ManageSecurityGroupsButton: FunctionComponent<any> = (props) =>
       }}
       buttonVariant="tertiary"
       buttonSize="lg"
-      className="ms-3"
+      className="ms-2.5"
     >
       {translate('Manage security groups')}
     </Link>

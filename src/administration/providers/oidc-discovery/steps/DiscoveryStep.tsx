@@ -100,9 +100,9 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
   if (isLoading) {
     return (
       <WizardModal {...props} submitDisabled>
-        <div className="text-center py-10">
+        <div className="text-center py-8">
           <LoadingSpinner />
-          <p className="mt-4 text-quaternary">
+          <p className="mt-3 text-quaternary">
             {translate('Discovering OIDC metadata from identity provider...')}
           </p>
         </div>
@@ -125,7 +125,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
             (error as Error).message ||
             translate('Unable to connect to the discovery endpoint.')
           }
-          className="mt-4"
+          className="mt-3"
         />
       </WizardModal>
     );
@@ -134,7 +134,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
   if (!discoveryResult) {
     return (
       <WizardModal {...props} submitDisabled>
-        <div className="text-center py-10 text-quaternary">
+        <div className="text-center py-8 text-quaternary">
           {translate('No discovery results available.')}
         </div>
       </WizardModal>
@@ -143,14 +143,14 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      <h4 className="mb-4">{translate('Discovery Results')}</h4>
-      <p className="text-quaternary mb-4">
+      <h4 className="mb-3">{translate('Discovery Results')}</h4>
+      <p className="text-quaternary mb-3">
         {translate(
           'The following information was discovered from your identity provider.',
         )}
       </p>
       {/* Endpoints Card */}
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <h5 className="mb-0">{translate('Discovered Endpoints')}</h5>
         </Card.Header>
@@ -174,7 +174,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
         </Card.Body>
       </Card>
       {/* Claims Card */}
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <h5 className="mb-0">{translate('Supported Claims')}</h5>
         </Card.Header>
@@ -192,7 +192,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
           )}
 
           {allClaims.length > 0 ? (
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-1.5 mb-3">
               {allClaims.map((claim) => (
                 <Badge
                   key={claim}
@@ -216,12 +216,12 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
               ))}
             </div>
           ) : (
-            <p className="text-quaternary mb-4">
+            <p className="text-quaternary mb-3">
               {translate('No claims discovered. Add claims manually below.')}
             </p>
           )}
 
-          <div className="flex gap-2 items-start">
+          <div className="flex gap-1.5 items-start">
             <div className="grow">
               <BaseInputField
                 type="text"
@@ -245,17 +245,17 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
       {/* Suggested Scopes Card */}
       {discoveryResult.suggested_scopes &&
         discoveryResult.suggested_scopes.length > 0 && (
-          <Card className="mb-4">
+          <Card className="mb-3">
             <Card.Header>
               <h5 className="mb-0">{translate('Suggested Scopes')}</h5>
             </Card.Header>
             <Card.Body>
-              <p className="text-quaternary mb-2">
+              <p className="text-quaternary mb-1.5">
                 {translate(
                   'These scopes are recommended based on the discovered claim mappings.',
                 )}
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {discoveryResult.suggested_scopes.map((scope) => (
                   <Badge key={scope} variant="primary" tone="outline">
                     {scope}
@@ -268,12 +268,12 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
       {/* Waldur Fields Card */}
       {discoveryResult.waldur_fields &&
         discoveryResult.waldur_fields.length > 0 && (
-          <Card className="mb-4">
+          <Card className="mb-3">
             <Card.Header>
               <h5 className="mb-0">{translate('Mappable User Fields')}</h5>
             </Card.Header>
             <Card.Body>
-              <p className="text-quaternary mb-2">
+              <p className="text-quaternary mb-1.5">
                 {translate(
                   '{count} Waldur user fields can be mapped to OIDC claims.',
                   { count: discoveryResult.waldur_fields.length },
@@ -312,7 +312,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                 </tbody>
               </Table>
               {discoveryResult.waldur_fields.length > 5 && (
-                <p className="text-quaternary mt-2 mb-0">
+                <p className="text-quaternary mt-1.5 mb-0">
                   {translate('...and {count} more fields', {
                     count: discoveryResult.waldur_fields.length - 5,
                   })}

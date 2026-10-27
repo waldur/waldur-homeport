@@ -91,7 +91,7 @@ export const LiveKitRoomsTable: FC<LiveKitRoomsTableProps> = ({ data }) => {
                   <tr>
                     <td
                       colSpan={6}
-                      className="bg-tertiary dark:bg-quaternary px-4 py-2"
+                      className="bg-tertiary dark:bg-quaternary px-3 py-1.5"
                     >
                       <LiveKitRoomDetails roomName={room.name} />
                     </td>

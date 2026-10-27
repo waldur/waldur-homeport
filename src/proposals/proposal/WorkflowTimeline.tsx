@@ -348,7 +348,7 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
           the applicant's: from outside, parked and working both read as
           waiting. */}
       {showDetails && awaitingManualAdvance && (
-        <div className="text-quaternary small mt-2 px-4 pb-3">
+        <div className="text-quaternary small mt-1.5 px-3 pb-2.5">
           {translate('Awaiting call manager approval to advance.')}
         </div>
       )}

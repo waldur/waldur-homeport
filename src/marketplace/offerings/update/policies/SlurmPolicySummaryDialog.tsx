@@ -292,16 +292,16 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
       title={translate('How SLURM periodic usage policy works')}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         {/* Section 1: End-to-end flow */}
         <section>
-          <h4 className="mb-4">{translate('End-to-end flow')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('End-to-end flow')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'When component usage is reported, the system evaluates the policy and takes action based on configured thresholds.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart
               code={generateEndToEndFlowDiagram(config)}
               className="text-center"
@@ -311,8 +311,8 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* Section 2: Base allocation source */}
         <section>
-          <h4 className="mb-4">{translate('Base allocation')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Base allocation')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'The base allocation for each TRES component is read from the resource limits (set at provisioning time from plan components). Each offering can define multiple components (e.g. cpu, mem, gpu, billing) — the policy evaluates limits per component.',
             )}
@@ -362,27 +362,27 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* Section 3: Usage calculation */}
         <section>
-          <h4 className="mb-4">{translate('Usage calculation')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Usage calculation')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Usage percentage is calculated by comparing current consumption against the total available allocation, which may include carryover from the previous period.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart
               code={generateUsageCalculationDiagram(config)}
               className="text-center"
             />
           </div>
 
-          <h5 className="mt-6 mb-4">{translate('Carryover formula')}</h5>
-          <p className="text-quaternary mb-2">
+          <h5 className="mt-5 mb-3">{translate('Carryover formula')}</h5>
+          <p className="text-quaternary mb-1.5">
             {translate(
               'When carryover is enabled, unused allocation from the previous period carries over, capped at {pct}% of the base allocation:',
               { pct: carryoverPct },
             )}
           </p>
-          <pre className="bg-tertiary dark:bg-quaternary rounded p-4 text-xs mb-4">
+          <pre className="bg-tertiary dark:bg-quaternary rounded p-3 text-xs mb-3">
             {[
               `unused    = max(0, base − previous_usage)`,
               `cap       = ${carryoverPct}% × base`,
@@ -391,10 +391,10 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
             ].join('\n')}
           </pre>
 
-          <h5 className="mb-4">
+          <h5 className="mb-3">
             {translate('Numerical example with current settings')}
           </h5>
-          <p className="text-quaternary mb-2">
+          <p className="text-quaternary mb-1.5">
             {translate(
               'Given base allocation of {base} Nh, previous usage of {prev} Nh, and current usage of {current} Nh:',
               {
@@ -492,8 +492,8 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* Section 4: Action thresholds */}
         <section>
-          <h4 className="mb-4">{translate('Action thresholds')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Action thresholds')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Actions are triggered when usage crosses these thresholds. Each action can be independently enabled or disabled.',
             )}
@@ -502,11 +502,11 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <AlertItem
             variant="info"
             type="floating"
-            className="mb-4"
+            className="mb-3"
             title={translate('Carryover vs Grace ratio')}
             body={
               <>
-                <p className="mb-2">
+                <p className="mb-1.5">
                   <strong>{translate('Carryover factor')}</strong> (
                   {carryoverPct}
                   %):{' '}
@@ -568,8 +568,8 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* Section 5: SLURM commands generated */}
         <section>
-          <h4 className="mb-4">{translate('SLURM commands generated')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('SLURM commands generated')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'The site agent executes these sacctmgr commands on the SLURM cluster to enforce the policy. The commands below are generated from the current configuration using example values (allocation: 1000, previous usage: 600).',
             )}
@@ -579,13 +579,13 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* Section 6: Site agent communication */}
         <section>
-          <h4 className="mb-4">{translate('Site agent communication')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Site agent communication')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Waldur communicates with the SLURM cluster through a STOMP message broker and the site agent.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart
               code={generateSiteAgentDiagram()}
               className="text-center"
@@ -595,10 +595,10 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* Section 7: Multi-offering behavior */}
         <section>
-          <h4 className="mb-4">
+          <h4 className="mb-3">
             {translate('Multiple offerings on same SLURM cluster')}
           </h4>
-          <p className="text-quaternary mb-4">
+          <p className="text-quaternary mb-3">
             {translate(
               'When multiple Waldur offerings target the same SLURM cluster, each offering maps to a separate SLURM account. SLURM uses a hierarchical Fair Tree algorithm where usage propagates up the account tree.',
             )}
@@ -660,7 +660,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* Section 8: Current configuration summary */}
         <section>
-          <h4 className="mb-4">{translate('Current configuration summary')}</h4>
+          <h4 className="mb-3">{translate('Current configuration summary')}</h4>
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <tbody className="text-tertiary">

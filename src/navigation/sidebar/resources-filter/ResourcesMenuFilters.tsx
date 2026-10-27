@@ -32,7 +32,7 @@ export const ResourcesMenuFilters = () => {
         {filterItem ? (
           <Tooltip label={filterItem.value?.name}>
             <div
-              className="flex items-center justify-between gap-2 px-3 py-1.5 min-h-10"
+              className="flex items-center justify-between gap-1.5 px-2.5 py-1.5 min-h-10"
               data-testid="sidebar-resources-filter-item"
             >
               <span
@@ -101,7 +101,7 @@ export const ResourcesMenuFilters = () => {
             </div>
           </Tooltip>
         ) : (
-          <div className="flex items-center justify-center px-3 py-1.5 min-h-10 text-center text-sm font-semibold text-[var(--nav-item-text)]">
+          <div className="flex items-center justify-center px-2.5 py-1.5 min-h-10 text-center text-sm font-semibold text-[var(--nav-item-text)]">
             {translate('Resources in all visible projects')}
           </div>
         )}

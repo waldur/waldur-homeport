@@ -23,7 +23,7 @@ const Pair = ({ caseId }: { caseId: CaseId }) => {
   const hasHeader = caseId !== 'body-only';
 
   return (
-    <div className="flex items-start gap-4 bg-white p-4 dark:bg-neutral-950">
+    <div className="flex items-start gap-3 bg-white p-3 dark:bg-neutral-950">
       <div className="w-[360px]" data-pair={caseId} data-role="old">
         <CardBs className={isBordered ? 'card-bordered' : undefined}>
           {hasHeader && (
@@ -85,7 +85,7 @@ type Story = StoryObj;
 
 export const Default: Story = {
   render: () => (
-    <div className="flex flex-col gap-4 bg-white p-6 dark:bg-neutral-950">
+    <div className="flex flex-col gap-3 bg-white p-5 dark:bg-neutral-950">
       {CASES.map((caseId) => (
         <Pair key={caseId} caseId={caseId} />
       ))}

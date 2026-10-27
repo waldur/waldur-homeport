@@ -27,7 +27,7 @@ interface FullMarkdownModalProps {
 const FullMarkdownModal: FC<FullMarkdownModalProps> = ({ resolve }) => {
   return (
     <ModalBody>
-      <ModalTitle as="h5" className="mb-3 text-[15px] leading-[1.555]">
+      <ModalTitle as="h5" className="mb-2.5 text-[15px] leading-[1.555]">
         {resolve.title}
         {resolve.showInternalBadge && (
           <>
@@ -119,7 +119,7 @@ export const TruncatedMarkdown: FC<TruncatedMarkdownProps> = ({
       {isTruncated && (
         <button
           type="button"
-          className="text-anchor mt-2 text-sm"
+          className="text-anchor mt-1.5 text-sm"
           onClick={handleShowMore}
         >
           {translate('Show more')}

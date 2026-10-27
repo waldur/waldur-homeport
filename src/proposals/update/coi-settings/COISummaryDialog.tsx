@@ -241,16 +241,16 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
       title={translate('How Conflict of Interest detection works')}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         {/* Detection Flow */}
         <section>
-          <h4 className="mb-4">{translate('Detection flow')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Detection flow')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'When Conflict of Interest detection is triggered, the system checks each reviewer against each proposal for potential conflicts.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart
               code={generateDetectionFlowDiagram(config)}
               className="text-center"
@@ -260,8 +260,8 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* COI Types Reference */}
         <section>
-          <h4 className="mb-4">{translate('Conflict types reference')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Conflict types reference')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'Each conflict type has a severity level and a handling action based on your configuration.',
             )}
@@ -312,13 +312,13 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
 
         {/* Status Workflow */}
         <section>
-          <h4 className="mb-4">{translate('Status workflow')}</h4>
-          <p className="text-quaternary mb-4">
+          <h4 className="mb-3">{translate('Status workflow')}</h4>
+          <p className="text-quaternary mb-3">
             {translate(
               'After a conflict of interest is detected, it progresses through these states based on reviewer and manager actions.',
             )}
           </p>
-          <div className="border rounded p-4">
+          <div className="border rounded p-3">
             <MermaidChart
               code={generateStatusDiagram()}
               className="text-center"

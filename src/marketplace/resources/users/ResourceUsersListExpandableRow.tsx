@@ -104,7 +104,7 @@ export const ResourceUsersListExpandableRow: FunctionComponent<{
 
   if (!row.resource_projects || row.resource_projects.length === 0) {
     return (
-      <div className="text-center py-4">
+      <div className="text-center py-3">
         <p>{translate('No projects are assigned to this user.')}</p>
       </div>
     );

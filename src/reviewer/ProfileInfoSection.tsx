@@ -97,7 +97,7 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
 
   const renderOrcidActions = () => {
     return (
-      <div className="flex gap-2">
+      <div className="flex gap-1.5">
         {profile.orcid_id ? (
           <>
             <SyncOrcidAction profile={profile} refetch={refetch} />

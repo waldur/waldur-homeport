@@ -202,7 +202,7 @@ export const ReviewerExpandableRow: FC<ReviewerExpandableRowProps> = ({
     <ExpandableContainer hasMultiSelect>
       <EmbeddedTabs
         defaultValue="profile"
-        listClassName="mb-4"
+        listClassName="mb-3"
         tabs={[
           {
             key: 'profile',

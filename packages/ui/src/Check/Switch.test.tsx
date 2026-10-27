@@ -52,8 +52,8 @@ describe('Switch', () => {
 
   it('renders an inline label row with className on it', () => {
     const { container } = render(
-      <Switch checked={false} label="Dark theme" className="mb-2" />,
+      <Switch checked={false} label="Dark theme" className="mb-1.5" />,
     );
-    expect(container.firstChild).toHaveClass('mb-2', 'inline-flex');
+    expect(container.firstChild).toHaveClass('mb-1.5', 'inline-flex');
   });
 });

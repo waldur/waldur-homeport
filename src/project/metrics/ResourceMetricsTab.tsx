@@ -158,7 +158,7 @@ export const ResourceMetricsTab: FC<{ resource: Resource }> = ({
     <Panel
       title={
         // As a table's title: the refresh icon right after it.
-        <span className="inline-flex items-center gap-2">
+        <span className="inline-flex items-center gap-1.5">
           {translate('Metrics')}
           {status && (
             <HelpIcon
@@ -179,7 +179,7 @@ export const ResourceMetricsTab: FC<{ resource: Resource }> = ({
       }
       cardBordered
       actions={
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2.5">
           <SegmentedControl<MetricRange>
             aria-label={translate('Time period')}
             options={getMetricRangeOptions()}

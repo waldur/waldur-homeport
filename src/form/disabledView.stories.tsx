@@ -28,7 +28,7 @@ const Controls = ({ prefix }: { prefix: string }) => {
   const [on, setOn] = useState(false);
   const [choice, setChoice] = useState('a');
   return (
-    <div className="flex flex-col gap-3" data-testid={prefix}>
+    <div className="flex flex-col gap-2.5" data-testid={prefix}>
       <Checkbox
         label={`${prefix} checkbox`}
         checked={box}

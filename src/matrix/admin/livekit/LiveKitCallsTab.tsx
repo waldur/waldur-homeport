@@ -83,12 +83,12 @@ const LiveKitCallsTab: FC = () => {
   };
 
   return (
-    <div className="mt-5">
+    <div className="mt-4">
       {/* Error, not-configured, and empty states each render their own action
           (Retry / none / Refresh), so the top-bar Refresh appears only when the
           rooms table itself is on screen. */}
       {data && !error && data.rooms.length > 0 && (
-        <div className="flex justify-end mb-3">
+        <div className="flex justify-end mb-2.5">
           <BaseButton
             label={translate('Refresh')}
             onClick={() => refetch()}

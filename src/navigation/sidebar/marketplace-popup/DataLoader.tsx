@@ -129,7 +129,7 @@ export const DataLoader = ({
       )}
     >
       {loadingCategories || loadingGroups ? (
-        <div className="message-wrapper p-4">
+        <div className="message-wrapper p-3">
           <LoadingSpinner />
         </div>
       ) : errorCategories || errorGroups ? (
@@ -137,7 +137,7 @@ export const DataLoader = ({
           <LoadingErred
             message={translate('Unable to load categories')}
             loadData={() => loadCategoryGroups() && loadCategories()}
-            className="text-danger my-10 mx-4"
+            className="text-danger my-8 mx-3"
           />
         </div>
       ) : (

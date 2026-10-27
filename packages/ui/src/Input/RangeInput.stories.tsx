@@ -30,7 +30,7 @@ export const Playground: Story = {
   render: (args) => {
     const [value, setValue] = useState(35);
     return (
-      <div className="flex max-w-[420px] flex-col gap-3 p-6">
+      <div className="flex max-w-[420px] flex-col gap-2.5 p-5">
         <RangeInput
           aria-label="Minimum match score"
           {...args}
@@ -49,7 +49,7 @@ export const Playground: Story = {
 
 export const States: Story = {
   render: () => (
-    <div className="flex max-w-[420px] flex-col gap-6 p-6">
+    <div className="flex max-w-[420px] flex-col gap-5 p-5">
       {[0, 35, 100].map((value) => (
         <RangeInput
           key={value}

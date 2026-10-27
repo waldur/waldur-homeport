@@ -22,7 +22,7 @@ export const SettingsCard: FC<SettingsCardProps> = ({
         <FormTable.Card
           title={group.description}
           key={group.description}
-          className="card-bordered mb-5"
+          className="card-bordered mb-4"
         >
           <FormTable>
             {group.items.map((item) => (

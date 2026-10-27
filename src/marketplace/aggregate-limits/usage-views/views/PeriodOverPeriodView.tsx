@@ -278,8 +278,8 @@ export const PeriodOverPeriodView: FC<Props> = ({
           'Mix-agnostic: each (offering, component) compares against its own previous period — periods are aligned per row, not across rows.',
         )}
       />
-      <div className="flex flex-wrap items-center gap-3 mb-3">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2.5 mb-2.5">
+        <div className="flex items-center gap-1.5">
           <small className="text-secondary">
             {translate('Offering · component')}:
           </small>
@@ -320,7 +320,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
         </div>
         {target?.limit_period && target.limit_period !== 'total' ? (
           <>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <small className="text-secondary">{translate('Period A')}:</small>
               <div style={{ minWidth: 160 }}>
                 <Select
@@ -341,7 +341,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
                 />
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <small className="text-secondary">{translate('Period B')}:</small>
               <div style={{ minWidth: 160 }}>
                 <Select
@@ -377,7 +377,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
         )}
       </div>
       {!options ? (
-        <div className="text-center py-5 text-quaternary">
+        <div className="text-center py-4 text-quaternary">
           {translate('Loading or no data for the selected target.')}
         </div>
       ) : (

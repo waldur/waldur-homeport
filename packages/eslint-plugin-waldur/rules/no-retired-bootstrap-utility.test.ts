@@ -20,13 +20,17 @@ describe('no-retired-bootstrap-utility', () => {
     valid: [
       // Still generated: base sizes, and the responsive utilities in use.
       {
-        code: 'const A = () => <div className="min-h-[100px] px-5 mt-md-0 my-lg-0 mt-n2 flex-lg-row" />;',
+        code: 'const A = () => <div className="min-h-[100px] px-5 flex-lg-row" />;',
       },
       // Tailwind's own classes.
       {
         code: 'const A = () => <div className="float-start lg:p-3 -mx-2 content-center h-screen tracking-wide" />;',
       },
       { code: "type C = 'vw-100';" },
+      // A retired spacing family's plain names are Tailwind's.
+      {
+        code: 'const A = () => <div className="gap-3 md:gap-1.5 my-2 -m-1" />;',
+      },
       // User-facing translation string or non-class function call containing the word "timeline"
       { code: "const title = translate('Maintenance timeline');" },
       {
@@ -34,6 +38,27 @@ describe('no-retired-bootstrap-utility', () => {
       },
     ],
     invalid: [
+      // Spellings only Bootstrap's spacing scale had, with the Tailwind class.
+      {
+        code: "const c = cn('gap-md-4', 'gap-8px');",
+        errors: [
+          {
+            messageId: 'retired',
+            data: { token: 'gap-md-4', hint: 'md:gap-3' },
+          },
+          { messageId: 'retired', data: { token: 'gap-8px', hint: 'gap-2' } },
+        ],
+      },
+      {
+        code: 'const A = () => <div className="my-lg-0 m-n2 mt-md-0 me-n2 mb-lg-5" />;',
+        errors: [
+          { messageId: 'retired', data: { token: 'my-lg-0', hint: 'lg:my-0' } },
+          { messageId: 'retired', data: { token: 'm-n2', hint: '-m-1.5' } },
+          { messageId: 'retired', data: { token: 'mt-md-0', hint: 'md:mt-0' } },
+          { messageId: 'retired', data: { token: 'me-n2', hint: '-me-1.5' } },
+          { messageId: 'retired', data: { token: 'mb-lg-5', hint: 'lg:mb-4' } },
+        ],
+      },
       {
         code: 'const A = () => <div className="vh-100 px-lg-3" />;',
         errors: [
@@ -42,7 +67,7 @@ describe('no-retired-bootstrap-utility', () => {
             messageId: 'retired',
             data: {
               token: 'px-lg-3',
-              hint: 'a Tailwind breakpoint variant (lg:p-3, md:min-h-[100px])',
+              hint: 'lg:px-2.5',
             },
           },
         ],

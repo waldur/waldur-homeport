@@ -33,7 +33,7 @@ export const CustomMessageWrapper = () => {
   }, [value]);
 
   return (
-    <div className="custom-message pe-2">
+    <div className="custom-message pe-1.5">
       {loading ? (
         <LoadingSpinner />
       ) : error ? (

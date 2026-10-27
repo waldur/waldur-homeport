@@ -113,13 +113,15 @@ export const RabbitMQQueueConfigPopover: FC<
 
   const popoverContent = (
     <>
-      <div className="mb-2 font-medium">{translate('Queue configuration')}</div>
+      <div className="mb-1.5 font-medium">
+        {translate('Queue configuration')}
+      </div>
       <div>
         <table className="table table-sm table-borderless mb-0">
           <tbody>
             {configItems.map((item, index) => (
               <tr key={index}>
-                <td className="text-quaternary pe-3">{item.label}</td>
+                <td className="text-quaternary pe-2.5">{item.label}</td>
                 <td>
                   <code>{item.value}</code>
                 </td>

@@ -75,11 +75,11 @@ export const AffiliatedOrganizationsReportPage: FC = () => {
 
       <AffiliationReportTable rows={data.rows} />
 
-      <div className="mt-5">
+      <div className="mt-4">
         <AffiliationCountryTable rows={data.byCountry} />
       </div>
 
-      <p className="text-quaternary text-xs mt-4">
+      <p className="text-quaternary text-xs mt-3">
         {translate(
           'Each project is counted against the affiliation it carries today. Reassigning a project restates its earlier periods, and projects that have been removed no longer contribute to any organization.',
         )}

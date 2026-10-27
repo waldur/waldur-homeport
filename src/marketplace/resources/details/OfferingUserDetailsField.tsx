@@ -40,7 +40,7 @@ export const OfferingUserDetailsField = ({
     <Field
       label={translate('Username')}
       value={
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <b>{username}</b>
           {username !== DASH_ESCAPE_CODE && (
             <CopyToClipboardButton value={username} />

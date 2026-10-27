@@ -39,10 +39,10 @@ export const RoleHygienePage: FC<Partial<TableWithPortal>> = ({ portal }) => {
   }
 
   return (
-    // `pt-5` + the summary's `mx-0`: the spacing contract for a TableWithTabs
+    // `pt-4` + the summary's `mx-0`: the spacing contract for a TableWithTabs
     // pane, as in SupportAIAssistantLogsList. Without it the cards butt up
     // against the tab strip.
-    <div className="pt-5">
+    <div className="pt-4">
       <RoleHygieneSummary report={data} />
       {data.findings.length === 0 ? (
         <NoResult

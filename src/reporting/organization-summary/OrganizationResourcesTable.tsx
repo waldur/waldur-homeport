@@ -225,7 +225,7 @@ export const OrganizationResourcesTable: FC<
       {
         title: translate('Project'),
         render: ({ row }) => (
-          <div className="py-3">
+          <div className="py-2.5">
             <Link state="project.dashboard" params={{ uuid: row.project_uuid }}>
               {renderFieldOrDash(row.project_name)}
             </Link>

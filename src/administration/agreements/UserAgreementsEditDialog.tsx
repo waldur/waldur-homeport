@@ -52,7 +52,7 @@ export const UserAgreementsEditDialog = ({
               <SubmitButton submitting={submitting} label={translate('Save')} />
             }
           >
-            <div className="mb-7">
+            <div className="mb-5.5">
               <FormHeading as="p">{translate('Language')}</FormHeading>
               <p className="py-[10px] text-secondary">
                 {getLanguageLabel(resolve.initialValues.language)}

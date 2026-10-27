@@ -95,7 +95,7 @@ export const ChangeProjectGroupGidDialog: FC<
             {group.gid == null ? (
               <AlertItem
                 variant="info"
-                className="mb-4"
+                className="mb-3"
                 title={translate(
                   'The group has no GID yet. The GID you set is the one it gets.',
                 )}
@@ -103,12 +103,12 @@ export const ChangeProjectGroupGidDialog: FC<
             ) : (
               <AlertItem
                 variant="warning"
-                className="mb-4"
+                className="mb-3"
                 title={translate('The group currently has GID {gid}.', {
                   gid: group.gid,
                 })}
                 body={
-                  <ul className="mb-0 ps-4">
+                  <ul className="mb-0 ps-3">
                     <li>
                       {translate(
                         'Files on shared storage keep the old GID until they are changed with chgrp; renumbering them is up to you.',
@@ -124,7 +124,7 @@ export const ChangeProjectGroupGidDialog: FC<
               />
             )}
             {submitError && !dirtySinceLastSubmit && (
-              <AlertItem variant="error" title={submitError} className="mb-4" />
+              <AlertItem variant="error" title={submitError} className="mb-3" />
             )}
             <NumberGroup
               name="gid"

@@ -43,7 +43,7 @@ export const RejectByProviderButton: FunctionComponent<
       body: (
         <>
           <OrderSummaryRows order={props.row} />
-          <p className="mt-4 mb-0">
+          <p className="mt-3 mb-0">
             {props.row.offering_type === SITE_AGENT_PLUGIN
               ? translate(
                   'Provider rejection is expected to be done by Waldur site agent. Doing it manually can lead to a broken state.',

@@ -37,7 +37,7 @@ export const ComponentLegacyUsageLimit: FC<{
     <AlertItem
       variant="warning"
       type="floating"
-      className="mb-5"
+      className="mb-4"
       iconSize="md"
       title={getLegacyLimitText(amount, limitPeriod?.value)}
       body={translate(

@@ -42,17 +42,17 @@ export const ProviderDefaultSubnets: FC<ProviderDefaultSubnetsProps> = ({
   }
 
   return (
-    <div className="border-t-[1px] border-t-secondary p-6">
+    <div className="border-t-[1px] border-t-secondary p-5">
       <div className="font-medium mb-1">
         {translate('Also allowed by the service provider')}
       </div>
-      <div className="text-quaternary mb-4">
+      <div className="text-quaternary mb-3">
         {translate(
           'Published on the offering and applied to your resources of it. These cannot be changed here.',
         )}
       </div>
       {withDefaults.map((offering) => (
-        <div key={offering.uuid} className="flex flex-wrap gap-2 mb-2">
+        <div key={offering.uuid} className="flex flex-wrap gap-1.5 mb-1.5">
           <span className="text-nowrap">{offering.name}</span>
           {(offering.default_access_subnets ?? []).map((subnet) => (
             <Badge

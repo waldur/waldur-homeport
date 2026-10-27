@@ -30,7 +30,7 @@ export const IssueAttachmentsContainer: React.FC<
       <Card className="card-bordered">
         <Card.Header>
           <Card.Title>
-            <span className="me-2">{translate('Attachments')}</span>
+            <span className="me-1.5">{translate('Attachments')}</span>
             <RefreshButton refetch={refetch} loading={isLoading} />
           </Card.Title>
         </Card.Header>

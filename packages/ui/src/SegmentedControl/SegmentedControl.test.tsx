@@ -146,11 +146,11 @@ describe('SegmentedControl', () => {
   });
 
   it('applies itemClassName to every segment, winning over the size padding', () => {
-    renderControl({ itemClassName: 'px-6' });
+    renderControl({ itemClassName: 'px-5' });
 
     for (const name of ['By request', 'By resource']) {
       const item = screen.getByRole('radio', { name });
-      expect(item).toHaveClass('px-6');
+      expect(item).toHaveClass('px-5');
       expect(item).not.toHaveClass('px-[12px]');
     }
   });

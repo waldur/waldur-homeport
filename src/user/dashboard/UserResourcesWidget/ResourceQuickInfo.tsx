@@ -91,10 +91,10 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
   const hasGettingStarted = offering?.getting_started || endpoints.length > 0;
 
   return (
-    <Card className="card-bordered mb-3">
-      <Card.Body className="py-4">
+    <Card className="card-bordered mb-2.5">
+      <Card.Body className="py-3">
         {/* Header */}
-        <div className="flex justify-between items-start mb-2">
+        <div className="flex justify-between items-start mb-1.5">
           <div className="grow">
             <h5 className="mb-1">{resource.name}</h5>
             <small className="text-quaternary">
@@ -111,20 +111,22 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
 
         {/* Offering description */}
         {offering?.description && (
-          <p className="text-quaternary text-xs mb-3">{offering.description}</p>
+          <p className="text-quaternary text-xs mb-2.5">
+            {offering.description}
+          </p>
         )}
 
         {/* Components section */}
         {isLoadingOffering ? (
-          <div className="flex items-center text-quaternary mb-3">
+          <div className="flex items-center text-quaternary mb-2.5">
             {}
-            <LoadingSpinnerSimple className="me-2" />
+            <LoadingSpinnerSimple className="me-1.5" />
             <span className="text-xs">{translate('Loading details...')}</span>
           </div>
         ) : (
           components.length > 0 && (
-            <div className="mb-3">
-              <div className="text-quaternary text-xs font-medium mb-2">
+            <div className="mb-2.5">
+              <div className="text-quaternary text-xs font-medium mb-1.5">
                 {translate('Components')}
               </div>
               <Row className="g-2">
@@ -132,7 +134,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                   .slice(0, MAX_COMPONENTS_DISPLAY)
                   .map((component) => (
                     <Col key={component.type} xs={6} md={3}>
-                      <div className="border rounded p-2 text-center">
+                      <div className="border rounded p-1.5 text-center">
                         <div className="font-medium">
                           {component.limit
                             ? `${component.usage}/${component.limit}`
@@ -160,21 +162,21 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
 
         {/* Access endpoints */}
         {endpoints.length > 0 && (
-          <div className="mb-3">
-            <div className="text-quaternary text-xs font-medium mb-2">
+          <div className="mb-2.5">
+            <div className="text-quaternary text-xs font-medium mb-1.5">
               {translate('Access resource')}
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {endpoints.map((endpoint, index) => (
                 <div
                   key={index}
-                  className="flex items-center border rounded px-2 py-1"
+                  className="flex items-center border rounded px-1.5 py-1"
                 >
                   <a
                     href={endpoint.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-brand text-decoration-none flex items-center me-2"
+                    className="text-brand text-decoration-none flex items-center me-1.5"
                   >
                     <ArrowSquareOutIcon
                       size={14}
@@ -211,7 +213,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                 }}
                 buttonVariant="text-primary"
                 buttonSize="sm"
-                className="p-0 me-3"
+                className="p-0 me-2.5"
               >
                 <BookOpenIcon size={16} weight="bold" className="me-1" />
                 {translate('Getting started')}

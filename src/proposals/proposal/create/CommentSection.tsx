@@ -49,14 +49,14 @@ export const CommentSection: FC<CommentSectionProps> = ({
           <AddCommentButton
             review={reviews?.[0]}
             onClick={() => onAddCommentClick({ commentField, label })}
-            className={inline ? 'mt-n3' : 'mt-8'}
+            className={inline ? '-mt-2.5' : 'mt-6'}
           />
         )
       }
     >
       {children}
     </ReadOnlyFormControl>
-    <div className={onAddCommentClick ? 'me-15' : undefined}>
+    <div className={onAddCommentClick ? 'me-12' : undefined}>
       <FieldReviewComments reviews={reviews} fieldName={commentField} />
     </div>
   </>

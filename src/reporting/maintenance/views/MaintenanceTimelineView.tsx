@@ -96,7 +96,7 @@ export const MaintenanceTimelineView: FC<MaintenanceTimelineViewProps> = ({
   }, [timelineItems]);
 
   const actions = (
-    <div className="flex gap-4 me-4">
+    <div className="flex gap-3 me-3">
       <FormGroup label={translate('Group by')} className="max-w-[150px] mb-0">
         <Select
           value={selectedGrouping}

@@ -71,7 +71,7 @@ export const UserTosManagementSection: FC = () => {
               <img
                 src={row.thumbnail}
                 alt={row.name}
-                className="me-3 tos-thumbnail"
+                className="me-2.5 tos-thumbnail"
               />
             )}
             <div>

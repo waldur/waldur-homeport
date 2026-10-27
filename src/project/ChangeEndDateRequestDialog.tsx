@@ -98,7 +98,7 @@ export const ChangeEndDateRequestDialog: FC<
               placeholder="dd.mm.yyyy"
             />
             {project.end_date && (
-              <p className="text-secondary mt-2">
+              <p className="text-secondary mt-1.5">
                 {translate('Old end date')}: {formatDate(project.end_date)}
               </p>
             )}

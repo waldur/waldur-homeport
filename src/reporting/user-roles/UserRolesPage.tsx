@@ -44,7 +44,7 @@ export const UserRolesPage: FC = () => {
       <ReportingTitle reportKey="user-roles" />
       <UserRolesSummaryCards summary={summary} />
 
-      <Row className="g-5 mb-5">
+      <Row className="g-5 mb-4">
         <Col xs={12}>
           <RoleDistributionChart data={data.memberCounts} />
         </Col>

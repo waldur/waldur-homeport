@@ -47,7 +47,7 @@ export const Step3ReviewAndCreate: FC<WizardStepProps> = (props) => {
         />
       )}
       <InternalNotes maintenance={values} />
-      <Field label={translate('Impact')} valueCol={12} valueClass="mt-2">
+      <Field label={translate('Impact')} valueCol={12} valueClass="mt-1.5">
         <ImpactSummary
           offerings={values.offerings}
           impactLevels={values.impact_level}
@@ -58,7 +58,7 @@ export const Step3ReviewAndCreate: FC<WizardStepProps> = (props) => {
       <Field
         label={translate('Affected offerings')}
         valueCol={12}
-        valueClass="mt-2"
+        valueClass="mt-1.5"
       >
         <AffectedOfferingsTable values={values} />
       </Field>

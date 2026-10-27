@@ -47,10 +47,13 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
       )}
     >
       <Card.Body className="flex">
-        {left && <div className="me-4 shrink-0">{left}</div>}
+        {left && <div className="me-3 shrink-0">{left}</div>}
         <div className="flex flex-col grow">
           <div
-            className={classNames('flex items-center gap-3 ', actions?.length)}
+            className={classNames(
+              'flex items-center gap-2.5 ',
+              actions?.length,
+            )}
           >
             <Card.Title as="div" className="font-medium grow h4 mb-0">
               {cardTitle}
@@ -88,10 +91,10 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
             )}
           </div>
           {(title || meta || right) && (
-            <Row className="items-end justify-between mt-auto gap-4 g-2">
+            <Row className="items-end justify-between mt-auto gap-3 g-2">
               {(title || meta) && (
                 <Col>
-                  <Row className="items-center gap-4 mb-2">
+                  <Row className="items-center gap-3 mb-1.5">
                     <h1 className="mb-0 text-nowrap text-2xl col col-sm-12 col-md col-xxl-12">
                       {title}
                     </h1>

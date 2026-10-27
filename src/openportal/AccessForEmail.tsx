@@ -31,7 +31,7 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
   index = null,
 }) => {
   return (
-    <Card className="mb-3">
+    <Card className="mb-2.5">
       <Card.Header>
         <Card.Title className="mb-0">
           {index !== null
@@ -44,7 +44,7 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
           <Field
             label={translate('Email')}
             value={userData.email}
-            space={2}
+            space={1.5}
             labelCol={4}
             valueCol={8}
             valueClass="text-break"
@@ -64,7 +64,7 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
                 {userData.status}
               </Badge>
             }
-            space={2}
+            space={1.5}
             labelCol={4}
             valueCol={8}
           />
@@ -72,7 +72,7 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
             <Field
               label={translate('Short name')}
               value={<code className="text-brand">{userData.short_name}</code>}
-              space={2}
+              space={1.5}
               labelCol={4}
               valueCol={8}
             />
@@ -81,7 +81,7 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
             <Field
               label={translate('Invited by')}
               value={userData.invited_by}
-              space={2}
+              space={1.5}
               labelCol={4}
               valueCol={8}
               valueClass="text-break"
@@ -91,7 +91,7 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
             <Field
               label={translate('Reason')}
               value={<span className="text-danger">{userData.reason}</span>}
-              space={2}
+              space={1.5}
               labelCol={4}
               valueCol={8}
             />
@@ -112,7 +112,7 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
     return (
       <Card>
         <Card.Body>
-          <div className="text-center text-quaternary py-4">
+          <div className="text-center text-quaternary py-3">
             {translate('No projects found for this user')}
           </div>
         </Card.Body>
@@ -130,10 +130,10 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
         </Card.Title>
       </Card.Header>
       <Card.Body>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
           {Object.entries(projects).map(([projectId, project]) => (
-            <div key={projectId} className="border rounded p-3">
-              <div className="mb-3">
+            <div key={projectId} className="border rounded p-2.5">
+              <div className="mb-2.5">
                 <h5 className="mb-1 font-medium">{project.name}</h5>
                 <div>
                   <Badge variant="primary" tone="outline">
@@ -146,18 +146,18 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
                 Array.isArray(project.resources) &&
                 project.resources.length > 0 && (
                   <div>
-                    <h6 className="mb-2 text-quaternary font-semibold">
+                    <h6 className="mb-1.5 text-quaternary font-semibold">
                       {translate('Resources ({count})', {
                         count: project.resources.length,
                       })}
                     </h6>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-1.5">
                       {project.resources.map((resource, index) => (
                         <div
                           key={index}
-                          className="bg-tertiary dark:bg-quaternary rounded p-3"
+                          className="bg-tertiary dark:bg-quaternary rounded p-2.5"
                         >
-                          <div className="flex justify-between items-start flex-wrap gap-2">
+                          <div className="flex justify-between items-start flex-wrap gap-1.5">
                             <div className="grow">
                               <div className="text-primary">
                                 {resource.name}
@@ -167,7 +167,7 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
                               <small className="text-quaternary block">
                                 {translate('Username')}
                               </small>
-                              <code className="bg-tertiary dark:bg-gray-800 px-2 py-1 rounded">
+                              <code className="bg-tertiary dark:bg-gray-800 px-1.5 py-1 rounded">
                                 {resource.username}
                               </code>
                             </div>
@@ -221,16 +221,16 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
         </Card.Title>
       </Card.Header>
       <Card.Body>
-        <div className="mb-3">
-          <p className="text-quaternary mb-3">
+        <div className="mb-2.5">
+          <p className="text-quaternary mb-2.5">
             {translate(
               'Search by email, short name, project name, or project ID',
             )}
           </p>
         </div>
 
-        <div className="mb-3">
-          <div className="flex gap-2">
+        <div className="mb-2.5">
+          <div className="flex gap-1.5">
             <FilterBox
               type="search"
               placeholder={translate(
@@ -253,7 +253,7 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
         </div>
 
         {isFetching && (
-          <div className="text-center py-4">
+          <div className="text-center py-3">
             <div className="spinner-border text-brand" role="status">
               <span className="visually-hidden">{translate('Loading...')}</span>
             </div>
@@ -271,7 +271,7 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
         {debouncedQuery && data && data.length > 0 && (
           <>
             {data.length > 1 && (
-              <div className="mb-3">
+              <div className="mb-2.5">
                 <AlertItem
                   type="floating"
                   variant="info"
@@ -287,7 +287,7 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
               </div>
             )}
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2.5">
               {data.map((userData, index) => (
                 <div key={index}>
                   <UserInfoCard

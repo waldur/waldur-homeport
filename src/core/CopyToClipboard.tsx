@@ -40,7 +40,7 @@ export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
       <CopyIcon
         weight="bold"
         size="1.4em"
-        className={rightIcon ? 'ms-2' : 'me-2'}
+        className={rightIcon ? 'ms-1.5' : 'me-1.5'}
       />
       {!rightIcon && label}
     </button>

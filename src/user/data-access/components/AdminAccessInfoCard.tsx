@@ -11,9 +11,9 @@ interface AdminAccessInfoCardProps {
 export const AdminAccessInfoCard: FC<AdminAccessInfoCardProps> = ({
   description,
 }) => (
-  <Card className="card-bordered mb-4">
+  <Card className="card-bordered mb-3">
     <Card.Body>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2.5">
         <ShieldCheckIcon size={32} weight="duotone" className="text-brand" />
         <div>
           <h5 className="mb-1">{translate('Administrative staff')}</h5>

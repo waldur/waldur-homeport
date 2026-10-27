@@ -116,7 +116,7 @@ const PreviewUsersTable: FC<{ row: PreviewRow }> = ({ row }) => {
 
 const PreviewExpandableRow: FC<{ row: PreviewRow }> = ({ row }) => (
   <ExpandableContainer>
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       <PreviewProjectsTable row={row} />
       <PreviewUsersTable row={row} />
     </div>
@@ -156,7 +156,7 @@ export const SramRulePreviewDialog: FC<SramRulePreviewDialogProps> = ({
       title: translate('SRAM group'),
       render: ({ row }) => (
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             {row.group.display_name}
             <SramGroupKindBadge kind={row.group.kind} />
           </div>
@@ -219,7 +219,7 @@ export const SramRulePreviewDialog: FC<SramRulePreviewDialogProps> = ({
       {resolve.rule.is_active === false && (
         <AlertItem
           variant="warning"
-          className="mb-5"
+          className="mb-4"
           title={translate('This rule is inactive')}
           body={translate('It grants nothing until it is activated.')}
         />

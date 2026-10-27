@@ -96,10 +96,10 @@ export const Playground: Story = {};
  */
 export const Matrix: Story = {
   render: () => (
-    <div className="flex flex-col gap-10 p-2">
+    <div className="flex flex-col gap-8 p-1.5">
       {TONES.map((tone) => (
-        <section key={tone} className="flex flex-col gap-4">
-          <div className="flex items-baseline gap-2 border-b border-primary pb-2">
+        <section key={tone} className="flex flex-col gap-3">
+          <div className="flex items-baseline gap-1.5 border-b border-primary pb-1.5">
             <h3 className="text-base font-semibold capitalize text-primary">
               Tone: {tone}
             </h3>
@@ -134,7 +134,7 @@ export const Matrix: Story = {
               {DISPLAY_VARIANTS.map((variant) => (
                 <div
                   key={variant}
-                  className="grid grid-cols-[120px_repeat(4,1fr)] items-center py-3"
+                  className="grid grid-cols-[120px_repeat(4,1fr)] items-center py-2.5"
                 >
                   <div className="font-mono text-xs font-semibold text-primary">
                     {variant}
@@ -167,14 +167,14 @@ export const Matrix: Story = {
  */
 export const ToneComparison: Story = {
   render: () => (
-    <div className="flex flex-col gap-4 p-2">
-      <div className="grid grid-cols-3 gap-4 pb-2 border-b border-primary text-xs font-mono uppercase text-quinary">
+    <div className="flex flex-col gap-3 p-1.5">
+      <div className="grid grid-cols-3 gap-3 pb-1.5 border-b border-primary text-xs font-mono uppercase text-quinary">
         <div>Variant</div>
         <div>Outline (Default)</div>
         <div>Solid</div>
       </div>
       {DISPLAY_VARIANTS.map((variant) => (
-        <div key={variant} className="grid grid-cols-3 items-center gap-4 py-1">
+        <div key={variant} className="grid grid-cols-3 items-center gap-3 py-1">
           <span className="font-mono text-xs font-semibold text-primary">
             {variant}
           </span>
@@ -205,14 +205,14 @@ export const ToneComparison: Story = {
  */
 export const Sizes: Story = {
   render: () => (
-    <div className="flex flex-col gap-6 p-2">
+    <div className="flex flex-col gap-5 p-1.5">
       <div>
-        <h4 className="text-xs font-mono uppercase text-quinary mb-3">
+        <h4 className="text-xs font-mono uppercase text-quinary mb-2.5">
           Outline Tone Sizes
         </h4>
-        <div className="flex items-end gap-6">
+        <div className="flex items-end gap-5">
           {SIZES.map((size) => (
-            <div key={size} className="flex flex-col items-center gap-2">
+            <div key={size} className="flex flex-col items-center gap-1.5">
               <FeaturedIcon
                 icon={<WarningCircleIcon weight="bold" />}
                 variant="warning"
@@ -231,12 +231,12 @@ export const Sizes: Story = {
       </div>
 
       <div>
-        <h4 className="text-xs font-mono uppercase text-quinary mb-3">
+        <h4 className="text-xs font-mono uppercase text-quinary mb-2.5">
           Solid Tone Sizes
         </h4>
-        <div className="flex items-end gap-6">
+        <div className="flex items-end gap-5">
           {SIZES.map((size) => (
-            <div key={size} className="flex flex-col items-center gap-2">
+            <div key={size} className="flex flex-col items-center gap-1.5">
               <FeaturedIcon
                 icon={<WarningCircleIcon weight="bold" />}
                 variant="warning"

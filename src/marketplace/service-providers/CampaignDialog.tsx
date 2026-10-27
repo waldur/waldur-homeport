@@ -141,7 +141,7 @@ export const CampaignDialog = ({
               )
             }
           >
-            <div className="mb-7">
+            <div className="mb-5.5">
               <WizardStepIndicator
                 steps={steps}
                 value={steps[step]}

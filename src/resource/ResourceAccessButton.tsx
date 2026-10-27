@@ -81,7 +81,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
           // the copy control is not nested inside the link (axe
           // nested-interactive) and arrow keys reach both.
           <div key={index} className="flex items-stretch">
-            <Menu.Item asChild className="flex-1 px-5 py-3">
+            <Menu.Item asChild className="flex-1 px-4 py-2.5">
               <a
                 href={endpoint.url}
                 target="_blank"
@@ -104,7 +104,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
             <Menu.CopyItem
               value={getCopyValue(endpoint.url)}
               onCopied={() => showSuccess(translate('Text has been copied'))}
-              className="px-3"
+              className="px-2.5"
             >
               <Tooltip label={shownUrl}>
                 <span className="inline-flex text-[var(--btn-text-primary-color)]">

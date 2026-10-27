@@ -469,7 +469,7 @@ export const LimitHorizonView: FC<Props> = ({
     <>
       {banner}
       {/* Inline legend matches the Figma spec */}
-      <div className="flex flex-wrap items-center gap-3 small mb-2">
+      <div className="flex flex-wrap items-center gap-2.5 small mb-1.5">
         <span className="inline-flex items-center gap-1">
           <span
             className="inline-block size-[10px] rounded-xs"
@@ -531,7 +531,7 @@ export const LimitHorizonView: FC<Props> = ({
       </div>
       <EChart options={options} height={`${chartHeight}px`} width="100%" />
       {skipped > 0 && (
-        <small className="block text-quaternary mt-2">
+        <small className="block text-quaternary mt-1.5">
           {translate('Skipped')}: {skipped}{' '}
           {translate('limit row(s) without configured caps or period bounds.')}
         </small>

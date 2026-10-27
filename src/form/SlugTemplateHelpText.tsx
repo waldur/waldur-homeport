@@ -15,8 +15,8 @@ interface SlugTemplateHelpTextProps {
 export const SlugTemplateHelpText = ({
   placeholders,
 }: SlugTemplateHelpTextProps) => (
-  <FormText as="div" variant="muted" className="mt-2">
-    <p className="mb-2">{translate('Supported placeholders:')}</p>
+  <FormText as="div" variant="muted" className="mt-1.5">
+    <p className="mb-1.5">{translate('Supported placeholders:')}</p>
     <table className="table table-sm table-borderless mb-0">
       <tbody>
         {placeholders.map((p) => (

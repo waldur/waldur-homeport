@@ -72,7 +72,7 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
           <div className="support-drawer-tabs shrink-0">
             <TabsList>
               {showChat && (
-                <TabsTrigger value="chat" className="flex items-center gap-2">
+                <TabsTrigger value="chat" className="flex items-center gap-1.5">
                   <ChatsCircleIcon size={16} weight="bold" />
                   {translate('Team chat')}
                   {matrixUnread > 0 && (
@@ -85,7 +85,7 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
               {showHelpdesk && (
                 <TabsTrigger
                   value="helpdesk"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1.5"
                 >
                   <LifebuoyIcon size={16} weight="bold" />
                   {translate('Helpdesk')}

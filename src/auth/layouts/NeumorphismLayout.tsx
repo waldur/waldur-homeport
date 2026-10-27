@@ -35,7 +35,7 @@ export const NeumorphismLayout = () => {
       </div>
       <div className="layout-neumorphism-content">
         <div className="layout-neumorphism-card">
-          <div className="login-logo mb-3">
+          <div className="login-logo mb-2.5">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
               src={imageUrl}

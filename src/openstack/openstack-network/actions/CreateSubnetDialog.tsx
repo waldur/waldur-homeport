@@ -277,7 +277,7 @@ export const CreateSubnetDialog: FC<
             footer={<FormFooter />}
           >
             {submitError && (
-              <div className="text-danger mb-4">{submitError}</div>
+              <div className="text-danger mb-3">{submitError}</div>
             )}
             {showNetworkField && (
               <AsyncSelectGroup

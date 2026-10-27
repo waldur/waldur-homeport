@@ -94,7 +94,7 @@ const ReportPreview = () => {
       >
         <ModalProvider>
           <DrawerProvider>
-            <div className="p-5">
+            <div className="p-4">
               <SummaryWidget
                 stats={[
                   {
@@ -122,7 +122,7 @@ const ReportPreview = () => {
 
               <AffiliationReportTable rows={REPORT.rows} />
 
-              <div className="mt-5">
+              <div className="mt-4">
                 <AffiliationCountryTable rows={REPORT.byCountry} />
               </div>
             </div>

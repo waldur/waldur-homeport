@@ -155,7 +155,7 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
         className={
           compact
             ? 'text-quaternary'
-            : 'border rounded p-5 text-quaternary text-center bg-tertiary dark:bg-quaternary'
+            : 'border rounded p-4 text-quaternary text-center bg-tertiary dark:bg-quaternary'
         }
       >
         {translate('Select offerings to see who will be notified.')}
@@ -168,11 +168,11 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
   return (
     <div
       className={
-        compact ? '' : 'border rounded p-4 bg-tertiary dark:bg-quaternary'
+        compact ? '' : 'border rounded p-3 bg-tertiary dark:bg-quaternary'
       }
     >
-      {!compact && <h6 className="mb-3">{translate('Estimated impact')}</h6>}
-      <div className="flex gap-4 flex-wrap mb-3">
+      {!compact && <h6 className="mb-2.5">{translate('Estimated impact')}</h6>}
+      <div className="flex gap-3 flex-wrap mb-2.5">
         <div>
           <div className="text-quaternary small">
             {translate('Distinct customers')}
@@ -192,7 +192,7 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
       </div>
 
       {impactBreakdown.length > 0 && (
-        <div className="flex flex-wrap gap-2 mb-3">
+        <div className="flex flex-wrap gap-1.5 mb-2.5">
           {impactBreakdown.map((item) => (
             <Badge
               key={item.level}
@@ -208,12 +208,15 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
 
       {stats.topCustomers.length > 0 && (
         <>
-          <div className="text-quaternary small mb-2">
+          <div className="text-quaternary small mb-1.5">
             {translate('Top affected customers')}
           </div>
           <ul className="list-unstyled mb-0">
             {stats.topCustomers.map((customer) => (
-              <li key={customer.uuid} className="flex items-center gap-2 mb-2">
+              <li
+                key={customer.uuid}
+                className="flex items-center gap-1.5 mb-1.5"
+              >
                 <span className="font-semibold inline-flex items-center justify-center size-[30px] rounded-full bg-secondary">
                   {getInitials(customer.name)}
                 </span>

@@ -64,7 +64,7 @@ export const WorkflowSequencePreview: FC<WorkflowSequencePreviewProps> = ({
       className="card-bordered"
       refetch={onReset}
     >
-      <p className="text-quaternary text-xs mb-5">
+      <p className="text-quaternary text-xs mb-4">
         {translate(
           'Shows the workflow as configured in the steps above. Appears once at least one optional step is enabled.',
         )}
@@ -87,7 +87,7 @@ export const WorkflowSequencePreview: FC<WorkflowSequencePreviewProps> = ({
                 className="text-quaternary block"
               />
             </span>
-            <div className="mt-3 small text-secondary">{definition.name}</div>
+            <div className="mt-2.5 small text-secondary">{definition.name}</div>
             <div className="text-quaternary text-xs mt-1">
               {configured?.duration_in_days
                 ? translate('{count}d', {

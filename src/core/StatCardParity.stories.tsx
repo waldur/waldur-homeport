@@ -20,7 +20,7 @@ const CASES: CaseId[] = ['basic', 'with-hint'];
  * instead of being swamped by an arbitrary, meaningless width delta.
  */
 const Pair = ({ caseId }: { caseId: CaseId }) => (
-  <div className="flex items-start gap-3 bg-white p-2 dark:bg-neutral-950">
+  <div className="flex items-start gap-2.5 bg-white p-1.5 dark:bg-neutral-950">
     <div className="w-[240px]" data-pair={caseId} data-role="old">
       <StatsCard
         label="Active resources"
@@ -59,7 +59,7 @@ type Story = StoryObj;
 
 export const Default: Story = {
   render: () => (
-    <div className="flex flex-col gap-2 bg-white p-10 dark:bg-neutral-950">
+    <div className="flex flex-col gap-1.5 bg-white p-8 dark:bg-neutral-950">
       {CASES.map((caseId) => (
         <Pair key={caseId} caseId={caseId} />
       ))}

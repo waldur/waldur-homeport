@@ -24,16 +24,16 @@ export const PubSubMetricsCard: FC = () => {
       title={translate('Publishing metrics')}
       subtitle={translate('Message statistics')}
       defaultOpen={false}
-      className="mb-6"
+      className="mb-5"
     >
       {isLoading ? (
-        <div className="text-center py-4">
+        <div className="text-center py-3">
           <LoadingSpinner />
         </div>
       ) : data ? (
         <Row>
           <Col lg={6}>
-            <h6 className="text-uppercase text-quaternary mb-3">
+            <h6 className="text-uppercase text-quaternary mb-2.5">
               {translate('Message counts')}
             </h6>
             <Table size="sm" borderless className="mb-0">
@@ -78,7 +78,7 @@ export const PubSubMetricsCard: FC = () => {
             </Table>
           </Col>
           <Col lg={6}>
-            <h6 className="text-uppercase text-quaternary mb-3">
+            <h6 className="text-uppercase text-quaternary mb-2.5">
               {translate('Additional metrics')}
             </h6>
             <Table size="sm" borderless className="mb-0">

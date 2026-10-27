@@ -42,7 +42,7 @@ export const OfferingComponentUsagePanel: FC<
   return (
     <FormTable.Card
       title={translate('Component usage')}
-      className="card-bordered mb-5"
+      className="card-bordered mb-4"
       headerClassName="min-h-[60px]"
     >
       <FormTable detailsMode className="gy-5">
@@ -108,7 +108,7 @@ export const OfferingComponentUsagePanel: FC<
                 })
             ) : (
               <tr>
-                <td colSpan={2} className="text-center text-quaternary py-5">
+                <td colSpan={2} className="text-center text-quaternary py-4">
                   {translate('No usage data available.')}
                 </td>
               </tr>

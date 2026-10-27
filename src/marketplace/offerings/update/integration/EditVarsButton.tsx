@@ -32,7 +32,7 @@ export const EditVarsButton: FunctionComponent<
       onClick={callback}
       iconNode={<PencilSimpleIcon weight="bold" />}
       label={translate('Edit environment variables')}
-      className="me-3"
+      className="me-2.5"
       variant="tertiary"
       size="lg"
     />

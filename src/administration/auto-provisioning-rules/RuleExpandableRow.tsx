@@ -16,24 +16,24 @@ export const RuleExpandableRow: FC<RuleExpandableRowProps> = ({ row }) => (
     <Row className="g-4">
       {Boolean(row.plan) && (
         <Col md={5} xxl={4}>
-          <h6 className="text-secondary mb-3">
+          <h6 className="text-secondary mb-2.5">
             {translate('Resource template')}
           </h6>
           <Field
             label={translate('Category')}
             value={row.category_title}
-            space={2}
+            space={1.5}
           />
           <Field
             label={translate('Offering')}
             value={row.offering_name}
-            space={2}
+            space={1.5}
           />
-          <Field label={translate('Plan')} value={row.plan_name} space={2} />
+          <Field label={translate('Plan')} value={row.plan_name} space={1.5} />
         </Col>
       )}
       <Col xs={6}>
-        <h6 className="text-secondary mb-3">{translate('Attributes')}</h6>
+        <h6 className="text-secondary mb-2.5">{translate('Attributes')}</h6>
         <Field
           label={translate('Email patterns')}
           value={
@@ -42,7 +42,7 @@ export const RuleExpandableRow: FC<RuleExpandableRowProps> = ({ row }) => (
               : DASH_ESCAPE_CODE
           }
           valueClass="ellipsis"
-          space={2}
+          space={1.5}
         />
         <Field
           label={translate('Affiliations')}
@@ -52,7 +52,7 @@ export const RuleExpandableRow: FC<RuleExpandableRowProps> = ({ row }) => (
               : DASH_ESCAPE_CODE
           }
           valueClass="ellipsis"
-          space={2}
+          space={1.5}
         />
         <Field
           label={translate('Identity sources')}
@@ -62,7 +62,7 @@ export const RuleExpandableRow: FC<RuleExpandableRowProps> = ({ row }) => (
               : DASH_ESCAPE_CODE
           }
           valueClass="ellipsis"
-          space={2}
+          space={1.5}
         />
         <Field
           label={translate('Claims')}
@@ -77,30 +77,30 @@ export const RuleExpandableRow: FC<RuleExpandableRowProps> = ({ row }) => (
               : DASH_ESCAPE_CODE
           }
           valueClass="ellipsis"
-          space={2}
+          space={1.5}
         />
         <Field
           label={translate('Organization role')}
           value={row.customer_role_display_name || DASH_ESCAPE_CODE}
-          space={2}
+          space={1.5}
         />
         <Field
           label={translate('Creates project')}
           value={row.create_project ? translate('Yes') : translate('No')}
-          space={2}
+          space={1.5}
         />
         {row.create_project && (
           <Field
             label={translate('Project name template')}
             value={row.project_name_template || translate('Username')}
             valueClass="ellipsis"
-            space={2}
+            space={1.5}
           />
         )}
         <Field
           label={translate('Revokes when unmatched')}
           value={row.revoke_when_unmatched ? translate('Yes') : translate('No')}
-          space={2}
+          space={1.5}
         />
       </Col>
     </Row>

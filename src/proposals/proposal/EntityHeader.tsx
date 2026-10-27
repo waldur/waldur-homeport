@@ -28,7 +28,7 @@ export const EntityHeader = ({
   <div className={className}>
     <div className="flex items-center mb-1">
       <h1 className="mb-0 text-2xl">{title}</h1>
-      <div className="ms-4">{badge}</div>
+      <div className="ms-3">{badge}</div>
       {actions && <div className="ms-auto">{actions}</div>}
     </div>
     <p className="text-sm text-quaternary mb-1">
@@ -37,7 +37,7 @@ export const EntityHeader = ({
         value={slug}
         onlyButton
         size={20}
-        buttonClassName="ms-2"
+        buttonClassName="ms-1.5"
       />
     </p>
     {helpText && <p className="text-sm text-quaternary mb-0">{helpText}</p>}

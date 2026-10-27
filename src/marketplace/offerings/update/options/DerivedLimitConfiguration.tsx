@@ -47,7 +47,7 @@ export const ComponentFormulaConfiguration = ({
       >
         <FieldArray name={name} validate={requiredArray}>
           {({ fields }) => (
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2.5">
               {fields.map((field, index) => (
                 // A fixed grid, so that the columns line up whatever each
                 // row's selected component is called.
@@ -78,7 +78,7 @@ export const ComponentFormulaConfiguration = ({
                       iconNode={<TrashIcon weight="bold" />}
                       tooltip={translate('Remove component')}
                       size="sm"
-                      className="mt-8"
+                      className="mt-6"
                     />
                   </div>
                 </div>

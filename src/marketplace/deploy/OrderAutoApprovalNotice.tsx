@@ -52,7 +52,7 @@ export const OrderAutoApprovalNotice: FC<OrderAutoApprovalNoticeProps> = ({
   const monthlyLabel = defaultCurrency(monthlyCost);
 
   return willAutoApprove ? (
-    <div className="flex items-start gap-2 mt-4 mb-4 text-success text-xs">
+    <div className="flex items-start gap-1.5 mt-3 mb-3 text-success text-xs">
       <CheckCircleIcon size={16} weight="fill" className="shrink-0 mt-1" />
       <span>
         <span>{translate('Order will be auto-approved')}</span>
@@ -64,7 +64,7 @@ export const OrderAutoApprovalNotice: FC<OrderAutoApprovalNoticeProps> = ({
       </span>
     </div>
   ) : (
-    <div className="flex items-start gap-2 mt-4 mb-4 text-quaternary text-xs">
+    <div className="flex items-start gap-1.5 mt-3 mb-3 text-quaternary text-xs">
       <ClockCounterClockwiseIcon
         size={16}
         weight="bold"

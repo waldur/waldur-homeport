@@ -26,7 +26,7 @@ const LayoutWrapper: FC<PropsWithChildren<OwnProps>> = (props) =>
   props.isHorizontal ? (
     <div
       className={classNames(
-        'flex justify-start xl:items-center xl:flex-row flex-col gap-xl-6',
+        'flex justify-start xl:items-center xl:flex-row flex-col xl:gap-5',
         props.className,
       )}
     >

@@ -62,9 +62,9 @@ export const Playground: Story = {};
 /** Every variant and tone with `active`: each spinner matches its badge's text. */
 export const ActiveSpinners: Story = {
   render: () => (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-2.5">
       {TONES.map((tone) => (
-        <div key={tone} className="flex flex-wrap items-center gap-2">
+        <div key={tone} className="flex flex-wrap items-center gap-1.5">
           <span className="w-[64px] text-sm text-quaternary">{tone}</span>
           {VARIANTS.map((variant) => (
             <StateIndicator
@@ -102,7 +102,7 @@ export const ActiveSpinners: Story = {
  */
 export const PrimarySpinnerIsBrand: Story = {
   render: () => (
-    <div className="flex gap-2">
+    <div className="flex gap-1.5">
       <StateIndicator
         label="Creating"
         variant="primary"
@@ -128,7 +128,7 @@ export const PrimarySpinnerIsBrand: Story = {
 
 export const LabelNormalization: Story = {
   render: () => (
-    <div className="flex gap-2">
+    <div className="flex gap-1.5">
       <StateIndicator label="ACTIVE" variant="success" tone="outline" />
       <StateIndicator label="OK" variant="success" tone="outline" />
       <StateIndicator label="Erred" variant="danger" tone="outline" />

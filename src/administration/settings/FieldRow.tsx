@@ -36,7 +36,7 @@ const MultilingualImageField = ({
 }: {
   value: Record<string, string>;
 }) => (
-  <div className="flex flex-wrap gap-2">
+  <div className="flex flex-wrap gap-1.5">
     {value && typeof value === 'object' && Object.keys(value).length > 0 ? (
       Object.entries(value).map(([lang]) => (
         <Badge key={lang} variant="primary" tone="outline">
@@ -70,7 +70,7 @@ const LoginPageListField = ({
 
   if (itemKey === 'LOGIN_PAGE_STATS') {
     return (
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5">
         {value.map((stat, i) => (
           <Badge key={i} variant="primary" tone="outline">
             {stat.value} {stat.label}

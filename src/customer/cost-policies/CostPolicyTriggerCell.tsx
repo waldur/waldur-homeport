@@ -26,7 +26,7 @@ export const CostPolicyTriggerCell: FC<CostPolicyTriggerCellProps> = ({
 }) => {
   const status = getTriggerStatusView(row);
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1.5">
       {status ? (
         <Badge
           variant={status.variant}

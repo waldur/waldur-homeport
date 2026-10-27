@@ -108,7 +108,7 @@ export const PasskeysList: FunctionComponent = () => {
           body={translate(
             'You have one passkey. If you lose that device you will need an administrator to remove it before you can sign in again. A second passkey — on a phone, or a security key — avoids that.',
           )}
-          className="mb-4"
+          className="mb-3"
         />
       )}
       <Table

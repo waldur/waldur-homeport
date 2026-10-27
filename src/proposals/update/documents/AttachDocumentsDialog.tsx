@@ -169,7 +169,7 @@ export const AttachDocumentsDialog: FC<AttachDocumentsProps> = ({
               <AttachmentsList
                 attachments={attachments}
                 uploading={pendingFiles}
-                className="mb-7"
+                className="mb-5.5"
                 ItemComponent={AttachmentItem}
                 ItemPendingComponent={(itemProps) => (
                   <AttachmentItemPending

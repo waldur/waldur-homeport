@@ -43,7 +43,7 @@ type Story = StoryObj<typeof Input>;
 
 export const Playground: Story = {
   render: (args) => (
-    <div className="max-w-[420px] p-6">
+    <div className="max-w-[420px] p-5">
       <Input aria-label="Playground" {...args} />
     </div>
   ),
@@ -80,7 +80,7 @@ export const States: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div className="flex max-w-[420px] flex-col gap-4 p-6">
+    <div className="flex max-w-[420px] flex-col gap-3 p-5">
       <Input aria-label="Small" size="sm" placeholder="Small" />
       <Input aria-label="Medium" placeholder="Medium (default)" />
       <Input aria-label="Large" size="lg" placeholder="Large" />

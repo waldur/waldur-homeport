@@ -11,7 +11,7 @@ export const InvitationLinkField = ({ invitation }) => {
   return (
     <FormField>
       <FormLabel>{translate('Invitation link')}</FormLabel>
-      <div className="flex gap-2">
+      <div className="flex gap-1.5">
         <BaseInputField
           value={link}
           placeholder={translate('e.g. https://')}

@@ -77,7 +77,7 @@
   // pushes Export/Create past its edge; tighten it (but keep enough room that
   // the search isn't cramped against the refresh button) so all four controls
   // (Search, refresh, Export, Create) stay on one row.
-  .card-header .gap-4 {
+  .card-header .gap-3 {
     gap: 0.75rem !important;
   }
 
@@ -130,10 +130,10 @@
   padding: $card-px $card-py;
 
   // The hero packs its header (title + Sync/Show log) and the request details
-  // into a gap-2 column, so the buttons sit right on top of the text. Give them
-  // room in this drawer (the hero is shared, so scope it here).
-  // Bootstrap's .gap-2 utility is !important, so the override must be too.
-  .public-dashboard-hero .card-body > .gap-2 {
+  // into a gap-1.5 column, so the buttons sit right on top of the text. Give
+  // them room in this drawer (the hero is shared, so scope it here).
+  // Tailwind's utilities layer outranks this one, so the override is !important.
+  .public-dashboard-hero .card-body > .gap-1\.5 {
     gap: $card-py !important;
   }
 

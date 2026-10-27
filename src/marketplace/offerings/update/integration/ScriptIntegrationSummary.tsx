@@ -34,7 +34,7 @@ export const ScriptIntegrationSummary = ({
           <EditVarsButton offering={offering} refetch={refetch} />
         )
       }
-      className="card-bordered mb-7"
+      className="card-bordered mb-5.5"
     >
       <FormTable>
         {SCRIPT_ROWS.map((field) => (

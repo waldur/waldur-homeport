@@ -51,11 +51,11 @@ export const IssueDetailsContent: FunctionComponent<
   return (
     <>
       <PublicDashboardHero
-        containerClassName="mb-5"
+        containerClassName="mb-4"
         cardBordered
         hideQuickSection
         title={
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2.5">
             <h3 className="mb-0">
               {issue.key ? `${issue.key}: ${issue.summary}` : issue.summary}
             </h3>
@@ -157,7 +157,7 @@ export const IssueDetailsContent: FunctionComponent<
         <ProviderRoutingInfo issue={issue} />
       )}
 
-      <Card className="card-bordered mb-5">
+      <Card className="card-bordered mb-4">
         <Card.Header>
           <Card.Title>{translate('Description')}</Card.Title>
         </Card.Header>

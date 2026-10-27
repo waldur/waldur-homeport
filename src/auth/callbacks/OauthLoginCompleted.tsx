@@ -55,8 +55,8 @@ export const OauthLoginCompleted: FunctionComponent = () => {
   return error ? (
     <div className="text-center">
       <h3>{translate('Login failed')}</h3>
-      {typeof error === 'string' && <p className="mt-3">{error}</p>}
-      <p className="mt-3">
+      {typeof error === 'string' && <p className="mt-2.5">{error}</p>}
+      <p className="mt-2.5">
         <Link state="login"> &lt; {translate('Back to login')} </Link>
       </p>
     </div>

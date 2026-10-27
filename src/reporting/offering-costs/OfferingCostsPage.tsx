@@ -48,7 +48,7 @@ export const OfferingCostsPage: FC = () => {
     <>
       <ReportingTitle reportKey="offering-costs" />
       <OfferingCostsSummaryCards summary={summary} />
-      <Row className="mb-6">
+      <Row className="mb-5">
         <Col xs={12}>
           <OfferingCostsChart data={data.offerings} />
         </Col>

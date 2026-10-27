@@ -88,7 +88,7 @@ export const Default: Story = {
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
         <IssueCommentsContext.Provider value={mockIssue}>
-          <div className="max-w-2xl bg-primary p-6 rounded-lg border-[1px] border-secondary">
+          <div className="max-w-2xl bg-primary p-5 rounded-lg border-[1px] border-secondary">
             <IssueCommentsList comments={mockComments} />
           </div>
         </IssueCommentsContext.Provider>
@@ -103,7 +103,7 @@ export const MobileViewport: Story = {
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
         <IssueCommentsContext.Provider value={mockIssue}>
-          <div className="w-[360px] max-w-full bg-primary p-4 rounded-lg border-[1px] border-secondary">
+          <div className="w-[360px] max-w-full bg-primary p-3 rounded-lg border-[1px] border-secondary">
             <IssueCommentsList comments={mockComments} />
           </div>
         </IssueCommentsContext.Provider>
@@ -117,7 +117,7 @@ export const Empty: Story = {
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
         <IssueCommentsContext.Provider value={mockIssue}>
-          <div className="max-w-2xl bg-primary p-6 rounded-lg border-[1px] border-secondary">
+          <div className="max-w-2xl bg-primary p-5 rounded-lg border-[1px] border-secondary">
             <IssueCommentsList comments={[]} />
           </div>
         </IssueCommentsContext.Provider>

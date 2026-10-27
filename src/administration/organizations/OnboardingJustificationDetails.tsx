@@ -56,8 +56,8 @@ export const OnboardingJustificationDetails: FC<
       initialValues={{ staff_notes: justification?.staff_notes || '' }}
       render={({ handleSubmit, values }) => (
         <form onSubmit={handleSubmit}>
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2.5">
               <h1 className="mb-0 ml-2">
                 {justification
                   ? `${justification.legal_name} (${justification.legal_person_identifier})`
@@ -67,7 +67,7 @@ export const OnboardingJustificationDetails: FC<
               </h1>
             </div>
             {showActions && (
-              <div className="flex gap-2">
+              <div className="flex gap-1.5">
                 <BaseButton
                   pending={actionLoading}
                   variant="danger"
@@ -100,18 +100,18 @@ export const OnboardingJustificationDetails: FC<
             )}
           </div>
 
-          <Card className="mb-4">
+          <Card className="mb-3">
             <Card.Body>
               {verification?.user_submitted_customer_data &&
                 Object.keys(verification.user_submitted_customer_data).length >
                   0 && (
                   <>
-                    <h3 className="mb-4">
+                    <h3 className="mb-3">
                       {translate("User's organization details")}
                     </h3>
-                    <hr className="my-4" />
+                    <hr className="my-3" />
 
-                    <h4 className="font-medium mb-3">
+                    <h4 className="font-medium mb-2.5">
                       {translate('Organization info')}
                     </h4>
                     {Object.entries(
@@ -124,14 +124,14 @@ export const OnboardingJustificationDetails: FC<
                       />
                     ))}
 
-                    <hr className="my-4" />
+                    <hr className="my-3" />
                   </>
                 )}
 
               {verification?.onboarding_metadata &&
                 Object.keys(verification.onboarding_metadata).length > 0 && (
                   <>
-                    <h4 className="font-medium mb-3">
+                    <h4 className="font-medium mb-2.5">
                       {translate('User answers')}
                     </h4>
                     {Object.entries(verification.onboarding_metadata).map(
@@ -144,17 +144,17 @@ export const OnboardingJustificationDetails: FC<
                       ),
                     )}
 
-                    <hr className="my-4" />
+                    <hr className="my-3" />
                   </>
                 )}
 
               {justification?.supporting_documentation &&
                 justification.supporting_documentation.length > 0 && (
                   <>
-                    <h4 className="font-medium mb-3">
+                    <h4 className="font-medium mb-2.5">
                       {translate('Attached documents')}
                     </h4>
-                    <Row className="mb-3">
+                    <Row className="mb-2.5">
                       {justification.supporting_documentation.map(
                         (doc, index) => (
                           <Col key={index} xs={12} md={6}>
@@ -175,7 +175,7 @@ export const OnboardingJustificationDetails: FC<
                 (justification.error_message ||
                   justification.error_traceback) && (
                   <>
-                    <h4 className="font-medium mb-3">
+                    <h4 className="font-medium mb-2.5">
                       {translate('Automatic validation logs')}
                     </h4>
                     <Field
@@ -191,10 +191,10 @@ export const OnboardingJustificationDetails: FC<
 
               {justification && (
                 <>
-                  <hr className="my-4" />
+                  <hr className="my-3" />
 
-                  <h4 className="font-medium mb-3">{translate('Notes')}</h4>
-                  <Row className="mb-3">
+                  <h4 className="font-medium mb-2.5">{translate('Notes')}</h4>
+                  <Row className="mb-2.5">
                     <Col xs={12} md={6}>
                       <FormField name="staff_notes">
                         {({ input }) => (

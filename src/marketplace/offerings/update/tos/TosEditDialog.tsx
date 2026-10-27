@@ -76,7 +76,7 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
             })}
             iconNode={<PencilIcon weight="bold" />}
             footer={
-              <div className="flex gap-3 justify-end mt-4">
+              <div className="flex gap-2.5 justify-end mt-3">
                 <CloseDialogButton className="min-w-[125px]" />
                 <SubmitButton
                   variant="primary"
@@ -111,7 +111,7 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
                     value={activeTab}
                     onValueChange={(k) => setActiveTab(k)}
                   >
-                    <TabsList className="mb-3">
+                    <TabsList className="mb-2.5">
                       <TabsTrigger value="write">
                         {translate('Write')}
                       </TabsTrigger>

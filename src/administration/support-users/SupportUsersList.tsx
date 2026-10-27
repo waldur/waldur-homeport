@@ -59,7 +59,7 @@ const ConnectionCounts = ({ row }: { row: SupportUser }) => {
     },
   ];
   return (
-    <div className="flex gap-3 text-nowrap">
+    <div className="flex gap-2.5 text-nowrap">
       {counts.map((item) => (
         <Tooltip key={item.key} label={item.label}>
           <span

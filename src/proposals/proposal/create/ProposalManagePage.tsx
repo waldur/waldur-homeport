@@ -191,7 +191,7 @@ export const ProposalManagePage = () => {
 
   return (
     <>
-      <SidebarLayout.Header className="pb-5">
+      <SidebarLayout.Header className="pb-4">
         <div className="w-full">
           {isCallManagerView ? (
             <CallManagerBreadcrumbs call={call} proposal={proposal} />
@@ -205,7 +205,7 @@ export const ProposalManagePage = () => {
           />
           <ProposalHeader
             proposal={proposal}
-            className="mb-7"
+            className="mb-5.5"
             // A utility, not a decision: beside the title, not in the sidebar.
             actions={
               isCallManagerView ? (

@@ -94,7 +94,7 @@ export const CustomIpFieldFinal = ({
             value={input?.value}
             onChange={input.onChange}
             hidden={selected?.value !== 'other'}
-            containerClassName={selected?.value === 'other' ? 'mt-4' : 'hidden'}
+            containerClassName={selected?.value === 'other' ? 'mt-3' : 'hidden'}
             autoFocus={autoFocus}
           />
 

@@ -162,9 +162,9 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
   if (loading) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <div className="text-center py-10">
+        <div className="text-center py-8">
           <Spinner animation="border" />
-          <p className="mt-4">
+          <p className="mt-3">
             {translate('Generating service attributes...')}
           </p>
         </div>
@@ -191,14 +191,14 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
 
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
-      <h4 className="mb-4">{translate('Preview Configuration')}</h4>
-      <p className="text-quaternary mb-4">
+      <h4 className="mb-3">{translate('Preview Configuration')}</h4>
+      <p className="text-quaternary mb-3">
         {translate(
           'Review the configuration below before applying it to the offering.',
         )}
       </p>
 
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <h5 className="mb-0">{translate('Connection')}</h5>
         </Card.Header>
@@ -230,7 +230,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
         </Card.Body>
       </Card>
 
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <h5 className="mb-0">{translate('Selected Infrastructure')}</h5>
         </Card.Header>
@@ -270,7 +270,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
         values.max_concurrent_provision_instance != null ||
         values.max_concurrent_provision_volume != null ||
         values.max_concurrent_provision_snapshot != null) && (
-        <Card className="mb-4">
+        <Card className="mb-3">
           <Card.Header>
             <h5 className="mb-0">{translate('Provisioning')}</h5>
           </Card.Header>
@@ -369,7 +369,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
         values.snapshot_size_limit_gb != null ||
         values.max_instances != null ||
         values.max_volumes != null) && (
-        <Card className="mb-4">
+        <Card className="mb-3">
           <Card.Header>
             <h5 className="mb-0">{translate('Limits')}</h5>
           </Card.Header>
@@ -416,7 +416,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
 
       {values.previewResult && (
         <>
-          <Card className="mb-4">
+          <Card className="mb-3">
             <Card.Header>
               <h5 className="mb-0">{translate('Service Attributes')}</h5>
             </Card.Header>
@@ -447,7 +447,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
             </Card.Body>
           </Card>
 
-          <Card className="mb-4">
+          <Card className="mb-3">
             <Card.Header>
               <h5 className="mb-0">{translate('Plugin Options')}</h5>
             </Card.Header>

@@ -128,7 +128,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
     <div className={props.formGroupClassName}>
       <div className={props.columnClassName}>
         {hasExtraRows && (
-          <div className="table-responsive mb-4">
+          <div className="table-responsive mb-3">
             <Table className="table align-middle table-row-bordered text-sm gy-4">
               <thead>
                 <HeaderRow
@@ -179,7 +179,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               components={usageRows}
               concealBillingInfo={props.concealBillingInfo}
             />
-            <p className="text-quaternary mt-2 mb-4 text-xs">
+            <p className="text-quaternary mt-1.5 mb-3 text-xs">
               {hasExtraRows
                 ? translate(
                     'Additionally service provider can charge for usage of the following components',
@@ -198,7 +198,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               viewMode={props.viewMode}
               hidePrices={props.concealBillingInfo}
             />
-            <p className="text-quaternary mt-2 mb-4 text-xs">
+            <p className="text-quaternary mt-1.5 mb-3 text-xs">
               {translate(
                 'Fee applied according to the maximum value reported by service provider over the whole active state of resource.',
               )}
@@ -211,7 +211,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               components={initialRows}
               concealBillingInfo={props.concealBillingInfo}
             />
-            <p className="text-quaternary mt-2 mb-4 text-xs">
+            <p className="text-quaternary mt-1.5 mb-3 text-xs">
               {translate('A one-time fee applied on activation.')}
             </p>
           </>
@@ -224,7 +224,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               viewMode={true}
               hidePrices={props.concealBillingInfo}
             />
-            <p className="text-quaternary mt-2 mb-4 text-xs">
+            <p className="text-quaternary mt-1.5 mb-3 text-xs">
               {props.startDate && props.endDate
                 ? (() => {
                     // Counted as the period is billed, like the quantities
@@ -261,7 +261,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               components={switchRows}
               concealBillingInfo={props.concealBillingInfo}
             />
-            <p className="text-quaternary mt-2 mb-4 text-xs">
+            <p className="text-quaternary mt-1.5 mb-3 text-xs">
               {translate('Fee applied each time this plan is activated.')}
             </p>
           </>

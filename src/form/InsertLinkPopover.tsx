@@ -60,7 +60,7 @@ const LinkEditForm = ({ initialUrl, onCancel }) => {
                   meta={meta}
                   placeholder="https://..."
                   autoFocus
-                  containerClassName="mb-5"
+                  containerClassName="mb-4"
                 />
               )}
             </Field>
@@ -80,7 +80,7 @@ const LinkEditForm = ({ initialUrl, onCancel }) => {
               size="sm"
               variant="primary"
               type="submit"
-              className="ms-2"
+              className="ms-1.5"
               label={translate('Save')}
             />
           </div>

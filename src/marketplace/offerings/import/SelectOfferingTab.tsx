@@ -75,8 +75,8 @@ export const SelectOfferingTab = () => {
         label={translate('API URL')}
         value={formData?.api_url}
         isStuck
-        className="border-b-[1px] border-b-secondary border-t-[1px] border-t-secondary py-5 mb-5"
-        labelClass="font-semibold me-3"
+        className="border-b-[1px] border-b-secondary border-t-[1px] border-t-secondary py-4 mb-4"
+        labelClass="font-semibold me-2.5"
       />
       <SelectGroup
         name="offerings"

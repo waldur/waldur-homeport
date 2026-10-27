@@ -87,14 +87,14 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
-      <h4 className="mb-4">{translate('Preview Settings')}</h4>
-      <p className="text-quaternary mb-4">
+      <h4 className="mb-3">{translate('Preview Settings')}</h4>
+      <p className="text-quaternary mb-3">
         {translate(
           'Review the settings below before saving. These will be stored in the system configuration.',
         )}
       </p>
 
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <h5 className="mb-0">{translate('Connection')}</h5>
         </Card.Header>
@@ -128,7 +128,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
         </Card.Body>
       </Card>
 
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <h5 className="mb-0">{translate('Project')}</h5>
         </Card.Header>
@@ -157,7 +157,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
         </Card.Body>
       </Card>
 
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <h5 className="mb-0">{translate('Request Types')}</h5>
         </Card.Header>
@@ -189,7 +189,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
         </Card.Body>
       </Card>
 
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <h5 className="mb-0">{translate('Field Mappings')}</h5>
         </Card.Header>

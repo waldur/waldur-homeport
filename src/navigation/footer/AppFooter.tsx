@@ -135,7 +135,7 @@ export const AppFooter: FunctionComponent = () => {
           />
         </LayoutSlot>
       )}
-      <div className="py-4 flex lg:flex-col">
+      <div className="py-3 flex lg:flex-col">
         <div
           className={classNames(
             PAGE_CONTAINER_CLASSNAME,
@@ -155,7 +155,7 @@ export const AppFooter: FunctionComponent = () => {
                   size={20}
                   weight="bold"
                   onClick={openUpgradeDialog}
-                  className={`ms-8px inline-block cursor-pointer ${badgeColorClass}`}
+                  className={`ms-2 inline-block cursor-pointer ${badgeColorClass}`}
                 />
               </Tooltip>
             )}

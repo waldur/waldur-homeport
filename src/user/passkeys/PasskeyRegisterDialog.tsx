@@ -154,7 +154,7 @@ export const PasskeyRegisterDialog: FunctionComponent<
                 body={translate(
                   'Your browser reports no built-in authenticator (Touch ID, Windows Hello). You can still enroll using a phone or a security key from the next prompt.',
                 )}
-                className="mt-3"
+                className="mt-2.5"
               />
             )}
             {!prepared && !error && <LoadingSpinner />}
@@ -163,7 +163,7 @@ export const PasskeyRegisterDialog: FunctionComponent<
                 variant="error"
                 title={translate('Passkey enrollment failed')}
                 body={error}
-                className="mt-3"
+                className="mt-2.5"
               />
             )}
           </ModalDialog>

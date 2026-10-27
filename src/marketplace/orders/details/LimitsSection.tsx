@@ -114,7 +114,7 @@ export const LimitsSection = ({
           <h3>{translate('Limits')}</h3>
         </Card.Title>
         {editable && hasSelection && (
-          <div className="card-toolbar flex items-center gap-3">
+          <div className="card-toolbar flex items-center gap-2.5">
             <Stack direction="horizontal" className="font-normal text-primary">
               <BaseButton
                 iconNode={<XIcon weight="bold" />}

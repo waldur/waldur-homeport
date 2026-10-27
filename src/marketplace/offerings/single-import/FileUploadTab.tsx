@@ -118,8 +118,8 @@ export const FileUploadTab: FunctionComponent = () => {
         )}
 
         {isValidating && (
-          <div className="flex items-center justify-center p-4">
-            <div className="spinner-border text-brand me-2" role="status">
+          <div className="flex items-center justify-center p-3">
+            <div className="spinner-border text-brand me-1.5" role="status">
               <span className="visually-hidden">{translate('Loading...')}</span>
             </div>
             <span>{translate('Validating file...')}</span>

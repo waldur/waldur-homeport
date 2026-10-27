@@ -110,20 +110,20 @@ export const PasskeyEnrollmentRequired: FunctionComponent = () => {
     });
 
   return (
-    <div className={classNames(PAGE_CONTAINER_BOUNDED_CLASSNAME, 'py-10')}>
+    <div className={classNames(PAGE_CONTAINER_BOUNDED_CLASSNAME, 'py-8')}>
       <Row className="justify-center">
         <Col md={7} lg={6}>
           <Card>
-            <Card.Body className="text-center p-10">
-              <div className="mb-5 flex justify-center">
+            <Card.Body className="text-center p-8">
+              <div className="mb-4 flex justify-center">
                 <FingerprintIcon
                   size={51}
                   weight="bold"
                   className="text-brand"
                 />
               </div>
-              <h2 className="mb-4">{translate('Add a passkey to continue')}</h2>
-              <p className="text-quaternary mb-8">
+              <h2 className="mb-3">{translate('Add a passkey to continue')}</h2>
+              <p className="text-quaternary mb-6">
                 {translate(
                   'This deployment requires a passkey for administrator accounts. Add one now to carry on — it takes a moment, and you can use your device screen lock or a security key.',
                 )}
@@ -138,7 +138,7 @@ export const PasskeyEnrollmentRequired: FunctionComponent = () => {
                 size="lg"
               />
               {user?.username && (
-                <p className="text-quaternary mt-6 mb-0">
+                <p className="text-quaternary mt-5 mb-0">
                   {translate('Signed in as {username}', {
                     username: user.username,
                   })}

@@ -33,11 +33,11 @@ export const ListItemCard: FC<OfferingCardVariantProps> = ({
       disabled={!isAllowed}
     >
       <Card className="card-bordered h-full cursor-pointer border-hover-brand">
-        <Card.Body className="p-4 flex gap-4">
+        <Card.Body className="p-3 flex gap-3">
           {/* Left content */}
           <div className="grow overflow-hidden">
             {/* Avatar + Title row */}
-            <div className="flex items-center gap-3 mb-3">
+            <div className="flex items-center gap-2.5 mb-2.5">
               {offering.thumbnail ? (
                 <Image
                   src={offering.thumbnail}
@@ -73,7 +73,7 @@ export const ListItemCard: FC<OfferingCardVariantProps> = ({
           </div>
 
           {/* Right buttons column */}
-          <div className="flex flex-col justify-center gap-4 shrink-0 list-card-actions">
+          <div className="flex flex-col justify-center gap-3 shrink-0 list-card-actions">
             <ViewOfferingButton
               offering={offering}
               disabled={isDisabled}

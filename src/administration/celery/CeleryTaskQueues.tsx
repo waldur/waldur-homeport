@@ -71,7 +71,7 @@ export const CeleryTaskQueues = ({
   return (
     <AccordionCard
       title={translate('Task queues')}
-      className="mb-6"
+      className="mb-5"
       defaultOpen
     >
       <Tabs
@@ -79,13 +79,13 @@ export const CeleryTaskQueues = ({
         value={activeTab}
         onValueChange={(k) => setActiveTab(k)}
       >
-        <TabsList bordered={false} className="mb-4">
+        <TabsList bordered={false} className="mb-3">
           {tabs.map((tab) => (
             <TabsTrigger
               key={tab.key}
               value={tab.key}
               count={tab.count}
-              className="py-4"
+              className="py-3"
             >
               {tab.title}
             </TabsTrigger>

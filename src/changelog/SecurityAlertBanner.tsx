@@ -56,7 +56,7 @@ export const SecurityAlertBanner = ({
     <AlertItem
       variant={isCritical ? 'error' : 'warning'}
       type="floating"
-      className="mb-2"
+      className="mb-1.5"
       title={
         isCritical
           ? translate('Security alert')

@@ -26,9 +26,9 @@ export const ReviewerProfileDialog: FC<ReviewerProfileDialogProps> = ({
       title={translate('Reviewer profile')}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         {/* Header with name and email */}
-        <div className="flex items-start gap-3">
+        <div className="flex items-start gap-2.5">
           <div className="flex items-center justify-center rounded-full bg-brand-subtle text-brand size-16 text-2xl">
             {suggestion.reviewer_name
               .split(' ')
@@ -46,15 +46,17 @@ export const ReviewerProfileDialog: FC<ReviewerProfileDialogProps> = ({
         {/* Biography */}
         {suggestion.reviewer_biography && (
           <div>
-            <h6 className="text-quaternary mb-2">{translate('Biography')}</h6>
+            <h6 className="text-quaternary mb-1.5">{translate('Biography')}</h6>
             <p className="mb-0">{suggestion.reviewer_biography}</p>
           </div>
         )}
 
         {/* Affinity Scores */}
         <div>
-          <h6 className="text-quaternary mb-2">{translate('Match scores')}</h6>
-          <div className="flex gap-4">
+          <h6 className="text-quaternary mb-1.5">
+            {translate('Match scores')}
+          </h6>
+          <div className="flex gap-3">
             <div>
               <div className="text-quaternary small">
                 {translate('Affinity')}

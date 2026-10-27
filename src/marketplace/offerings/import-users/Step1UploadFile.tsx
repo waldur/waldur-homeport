@@ -106,7 +106,7 @@ export const Step1UploadFile: FC<WizardFormStepProps> = (props) => {
   return (
     <WizardForm {...props}>
       <div className="text-quaternary">
-        <h6 className="font-medium mb-5">
+        <h6 className="font-medium mb-4">
           1. {translate('Download template')}
         </h6>
         <DownloadTemplateItem
@@ -115,7 +115,7 @@ export const Step1UploadFile: FC<WizardFormStepProps> = (props) => {
           onClick={onDownloadClick}
         />
         <hr />
-        <h6 className="font-medium mb-5">2. {translate('Upload your file')}</h6>
+        <h6 className="font-medium mb-4">2. {translate('Upload your file')}</h6>
         <Field
           name="file"
           validate={validateFileField}
@@ -129,11 +129,11 @@ export const Step1UploadFile: FC<WizardFormStepProps> = (props) => {
                   'text/csv': ['.csv'],
                 }}
                 multiple={false}
-                className="mb-3"
+                className="mb-2.5"
                 maxSize={10 * 1024 * 1024}
               />
 
-              <ul className="mb-5">
+              <ul className="mb-4">
                 <li>
                   {translate('Required columns')}: Waldur username, offering,
                   offering username

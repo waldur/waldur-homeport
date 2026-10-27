@@ -58,7 +58,7 @@ export const ChartCard: React.FC<ChartCardProps> = ({
 
   return (
     <Card className="h-full card-bordered">
-      <Card.Header className="items-center border-0 pt-5 pb-2 min-h-[60px]">
+      <Card.Header className="items-center border-0 pt-4 pb-1.5 min-h-[60px]">
         <Card.Title className="items-start flex-col m-0">
           <span className="card-label font-medium text-primary">{title}</span>
           {summary && (
@@ -67,7 +67,7 @@ export const ChartCard: React.FC<ChartCardProps> = ({
             </span>
           )}
         </Card.Title>
-        <div className="card-toolbar flex gap-4 m-0">
+        <div className="card-toolbar flex gap-3 m-0">
           {actions}
           <ChartExportDropdown
             disabled={isEmpty}
@@ -82,7 +82,7 @@ export const ChartCard: React.FC<ChartCardProps> = ({
           />
         </div>
       </Card.Header>
-      <Card.Body className="pt-2">
+      <Card.Body className="pt-1.5">
         {isEmpty ? (
           <NoResult
             // Filter-agnostic: this card is used on unfiltered overviews too,

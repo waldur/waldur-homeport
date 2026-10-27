@@ -68,7 +68,7 @@ const renderUsageCell = (percentage: number | null) => {
     return <span className="text-quaternary">{DASH_ESCAPE_CODE}</span>;
   }
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1.5">
       <QuotaProgressBar
         percent={percentage}
         size="sm"
@@ -288,7 +288,7 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
 
   return (
     <ExpandableContainer>
-      <h4 className="mb-4">
+      <h4 className="mb-3">
         {`${translate('AI assistant token usage for')} ${row.full_name || row.username}`}
       </h4>
       {quota && <QuotaUsageDisplay quota={quota} />}
@@ -301,8 +301,8 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
         onSubmit={(values) => handleSubmit(values)}
         initialValues={initialValues}
         render={({ handleSubmit, submitting, pristine }) => (
-          <form className="mt-6" onSubmit={handleSubmit}>
-            <h5 className="mb-3">{translate('Set new limits')}</h5>
+          <form className="mt-5" onSubmit={handleSubmit}>
+            <h5 className="mb-2.5">{translate('Set new limits')}</h5>
 
             <div className="row">
               <div className="col-md-4">
@@ -346,7 +346,7 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
               </div>
             </div>
 
-            <div className="mt-4">
+            <div className="mt-3">
               <SubmitButton
                 submitting={submitting}
                 disabled={pristine || submitting}

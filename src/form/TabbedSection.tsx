@@ -103,18 +103,20 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
             </Card.Title>
           )}
           {actions && (
-            <div className="card-toolbar grow justify-end gap-3">{actions}</div>
+            <div className="card-toolbar grow justify-end gap-2.5">
+              {actions}
+            </div>
           )}
         </Card.Header>
       )}
       <Card.Body>
         <Tabs value={activeKey} onValueChange={handleSelect} mount="active">
           {enableSearch && (
-            <div className="flex justify-end mb-3">
+            <div className="flex justify-end mb-2.5">
               <TableQuery query={query} setQuery={setQuery} />
             </div>
           )}
-          <TabsList className="mb-5">
+          <TabsList className="mb-4">
             {processedTabs.map((tab) => {
               const disabled = hasQuery && tab.count === 0;
               return (

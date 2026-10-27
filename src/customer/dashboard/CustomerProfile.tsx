@@ -32,7 +32,11 @@ export const CustomerProfile = ({
     cardBordered
     title={
       <div>
-        <Stack direction="horizontal" gap={4} className="text-quaternary mb-3">
+        <Stack
+          direction="horizontal"
+          gap={4}
+          className="text-quaternary mb-2.5"
+        >
           {customer.country && (
             <CountryFlag
               countryCode={customer.country}

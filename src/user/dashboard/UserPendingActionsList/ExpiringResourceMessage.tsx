@@ -10,7 +10,7 @@ export const ExpiringResourceMessage: FC<{ row: ExtendedUserAction }> = ({
 }) => {
   return (
     <div>
-      <div className="text-quaternary small mb-2">
+      <div className="text-quaternary small mb-1.5">
         {translate(
           'This resource will expire soon. Review and renew to prevent downtime.',
         )}

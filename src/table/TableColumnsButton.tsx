@@ -197,7 +197,7 @@ const ColumnsPopover = ({
 
   return (
     <div className="max-w-[400px]">
-      <div className="p-5">
+      <div className="p-4">
         <FilterBox
           type="search"
           placeholder={translate('Search...')}
@@ -221,7 +221,7 @@ const ColumnsPopover = ({
           ? translate('Columns found: {count}', { count: matches.length })
           : ''}
       </div>
-      <div className="max-h-[300px] overflow-auto pb-2">
+      <div className="max-h-[300px] overflow-auto pb-1.5">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -282,7 +282,7 @@ const ColumnsPopover = ({
         </DndContext>
 
         {matches.length === 0 && (
-          <div className="text-quaternary text-center py-4 text-xs">
+          <div className="text-quaternary text-center py-3 text-xs">
             {translate('No columns found')}
           </div>
         )}

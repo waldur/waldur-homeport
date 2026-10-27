@@ -63,7 +63,7 @@ const RoundResultsSection: FunctionComponent<RoundExpandableRowProps> = ({
   const showAdoption =
     row.adopted_at !== undefined && canViewRoundAdoption(row, call);
   return (
-    <Row className="mt-4">
+    <Row className="mt-3">
       <Col md={6}>
         <SectionTitle title={translate('Evaluation and results')} />
         <Field label={translate('Stage')} value={lifecycle.label} />
@@ -146,7 +146,7 @@ const SectionTitle: FunctionComponent<{
   title: string;
   className?: string;
 }> = ({ title, className }) => (
-  <div className={`font-medium text-quaternary mb-3 ${className || ''}`}>
+  <div className={`font-medium text-quaternary mb-2.5 ${className || ''}`}>
     {title}
   </div>
 );
@@ -169,7 +169,7 @@ export const RoundExpandableRow: FunctionComponent<RoundExpandableRowProps> = ({
             label={translate('Cutoff time')}
             value={formatDateTime(row.cutoff_time)}
           />
-          <SectionTitle title={translate('Review settings')} className="mt-4" />
+          <SectionTitle title={translate('Review settings')} className="mt-3" />
           <Field
             label={translate('Review duration in days')}
             value={renderFieldOrDash(row.review_duration_in_days)}

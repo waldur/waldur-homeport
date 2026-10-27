@@ -182,7 +182,7 @@ export const PendingOrderExpandableRow: FC<{ row: OrderDetails }> = ({
     <ExpandableContainer className="fluid">
       <EmbeddedTabs
         defaultValue="metadata"
-        listClassName="mb-4"
+        listClassName="mb-3"
         tabs={[
           {
             key: 'metadata',

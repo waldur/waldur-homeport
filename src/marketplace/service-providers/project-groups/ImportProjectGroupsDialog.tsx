@@ -104,10 +104,10 @@ export const ImportProjectGroupsDialog: FC<ImportProjectGroupsDialogProps> = ({
             {problems.length > 0 && !dirtySinceLastSubmit && (
               <AlertItem
                 variant="error"
-                className="mb-4"
+                className="mb-3"
                 title={translate('Nothing was imported.')}
                 body={
-                  <ul className="mb-0 ps-4" data-testid="import-problems">
+                  <ul className="mb-0 ps-3" data-testid="import-problems">
                     {problems.map((problem, index) => (
                       <li key={`${index}-${problem}`}>{problem}</li>
                     ))}

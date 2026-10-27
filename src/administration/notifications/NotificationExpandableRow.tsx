@@ -30,7 +30,7 @@ export const NotificationExpandableRow: FunctionComponent<{
                   <PencilSimpleIcon
                     size={16}
                     weight="bold"
-                    className="ms-3 text-quaternary"
+                    className="ms-2.5 text-quaternary"
                   />
                 </Tooltip>
               </span>
@@ -48,10 +48,10 @@ export const NotificationExpandableRow: FunctionComponent<{
                     value={template.content}
                     textButton
                     rightIcon
-                    className="my-2 hover:text-brand"
+                    className="my-1.5 hover:text-brand"
                   />
                 </Card.Header>
-                <Card.Body className="p-8">
+                <Card.Body className="p-6">
                   <pre className="text-secondary text-sm mb-0">
                     {template.content}
                   </pre>

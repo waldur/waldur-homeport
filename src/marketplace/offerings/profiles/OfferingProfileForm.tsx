@@ -83,7 +83,7 @@ export const OfferingProfileForm: FC<{ resolve: FormResolve }> = ({
               </>
             }
           >
-            <p className="text-quaternary mb-5">
+            <p className="text-quaternary mb-4">
               {translate(
                 'Name the set of roles this profile provides. After saving, add roles to it on the profile page; they become assignable on every offering bound to the profile.',
               )}

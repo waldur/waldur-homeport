@@ -208,7 +208,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                 value={props.resolve.call.name}
                 labelCol={4}
                 valueCol={8}
-                space={2}
+                space={1.5}
               />
               {usesCallVocabulary() ? (
                 <Field
@@ -216,7 +216,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                   value={props.resolve.round.name}
                   labelCol={4}
                   valueCol={8}
-                  space={2}
+                  space={1.5}
                 />
               ) : null}
               <Field
@@ -236,9 +236,9 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                 }
                 labelCol={4}
                 valueCol={8}
-                space={2}
+                space={1.5}
               />
-              <div className="mt-7">
+              <div className="mt-5.5">
                 <StringGroup
                   label={translate('Name')}
                   name="name"
@@ -253,7 +253,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                     project ends up called, so show the whole thing rather than
                     describing the rule in prose. */}
                 {projectName ? (
-                  <div className="text-quaternary text-xs mt-2">
+                  <div className="text-quaternary text-xs mt-1.5">
                     {translate(
                       'Project name: {name}',
                       { name: <strong>{projectName}</strong> },

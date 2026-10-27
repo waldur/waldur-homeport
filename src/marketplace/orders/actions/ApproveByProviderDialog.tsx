@@ -274,7 +274,7 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
             {offeringQuery.isLoading ? (
               <LoadingSpinner />
             ) : offeringQuery.error ? (
-              <LoadingErred loadData={offeringQuery.refetch} className="mb-4" />
+              <LoadingErred loadData={offeringQuery.refetch} className="mb-3" />
             ) : hasOptions ? (
               <>
                 {hasUserSubmittedOptions ? (

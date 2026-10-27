@@ -44,7 +44,7 @@ const options = (
 
 export const Playground: Story = {
   render: (args) => (
-    <div className="max-w-[420px] p-6">
+    <div className="max-w-[420px] p-5">
       <NativeSelect aria-label="Protocol" {...args}>
         {options}
       </NativeSelect>
@@ -79,7 +79,7 @@ export const States: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div className="flex max-w-[420px] flex-col gap-4 p-6">
+    <div className="flex max-w-[420px] flex-col gap-3 p-5">
       <NativeSelect aria-label="Small" size="sm">
         {options}
       </NativeSelect>
@@ -119,7 +119,7 @@ const Case = ({
     <p className="m-0 text-sm text-tertiary">{note}</p>
     <div
       data-testid={title}
-      className={`w-[480px] rounded-lg border-[1px] border-dashed border-secondary p-3 ${className}`}
+      className={`w-[480px] rounded-lg border-[1px] border-dashed border-secondary p-2.5 ${className}`}
     >
       {children}
     </div>
@@ -136,7 +136,7 @@ const Case = ({
 export const FitVersusFill: Story = {
   name: 'Fit versus fill',
   render: () => (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-5 p-5">
       <Case title="Default, in a block" note="Fills the width it is given.">
         <NativeSelect aria-label="Default in block">{MONTHS}</NativeSelect>
       </Case>
@@ -151,7 +151,7 @@ export const FitVersusFill: Story = {
       <Case
         title="Default, in a toolbar row"
         note="Takes all the room left in the row, so the next control is pushed to the edge."
-        className="flex items-center gap-3"
+        className="flex items-center gap-2.5"
       >
         <NativeSelect aria-label="Default in row">{MONTHS}</NativeSelect>
         <span className="shrink-0 text-sm text-tertiary">Export</span>
@@ -159,7 +159,7 @@ export const FitVersusFill: Story = {
       <Case
         title="fit, in a toolbar row"
         note="Takes only the room it needs; the next control follows it."
-        className="flex items-center gap-3"
+        className="flex items-center gap-2.5"
       >
         <NativeSelect aria-label="Fit in row" fit>
           {MONTHS}
@@ -169,7 +169,7 @@ export const FitVersusFill: Story = {
       <Case
         title="fit, in a column"
         note="A column stretches its children; fit keeps the select at its own width and the caret attached."
-        className="flex flex-col gap-2"
+        className="flex flex-col gap-1.5"
       >
         <NativeSelect aria-label="Fit in column" fit>
           {MONTHS}

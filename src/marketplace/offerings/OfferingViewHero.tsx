@@ -126,7 +126,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
       {canManageAndEditOfferings && (
         <TabNav
           activeKey={state.name}
-          listClassName="mb-4"
+          listClassName="mb-3"
           items={[
             offering.state === 'Draft'
               ? {
@@ -201,7 +201,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
         logoCircle
         title={
           <div className="flex flex-col">
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-1.5">
               <h3 className="mb-0 leading-none">{offering.name}</h3>
               <CopyToClipboardButton
                 value={offering.name}
@@ -217,7 +217,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
               })}
               {offering.parent_name && offering.parent_uuid && (
                 <>
-                  <span className="mx-2">•</span>
+                  <span className="mx-1.5">•</span>
                   <ParentLink
                     parent_name={offering.parent_name}
                     state="public-offering.marketplace-public-offering"
@@ -233,7 +233,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
               <Table className="mb-0 px-0 h-auto text-xs w-auto mt-1">
                 <tbody>
                   <tr>
-                    <th className="font-medium w-[150px] p-0 pe-3">
+                    <th className="font-medium w-[150px] p-0 pe-2.5">
                       {translate('Shared/Billing enabled')}:
                     </th>
                     <td className="text-quaternary p-0">
@@ -245,7 +245,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                     </td>
                   </tr>
                   <tr>
-                    <th className="font-medium w-[100px] p-0 pe-3">
+                    <th className="font-medium w-[100px] p-0 pe-2.5">
                       {translate('Type')}:
                     </th>
                     <td className="text-quaternary p-0">

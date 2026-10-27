@@ -59,7 +59,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
                   {props.offering.name}
                 </Stack>
               }
-              labelClass="me-2"
+              labelClass="me-1.5"
               isStuck
             />
           </Col>
@@ -67,7 +67,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
             <Field
               label={translate('Service provider')}
               value={renderFieldOrDash(provider?.customer_name)}
-              labelClass="me-2"
+              labelClass="me-1.5"
               isStuck
             />
           </Col>

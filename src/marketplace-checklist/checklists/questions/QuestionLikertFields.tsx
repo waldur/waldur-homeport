@@ -20,7 +20,7 @@ export const QuestionLikertFields: FC = () => (
       options={SCALE_OPTIONS}
       orientation="horizontal"
       defaultValue={5}
-      space={5}
+      space={4}
     />
     <div className="row">
       <div className="col-sm-6">
@@ -30,7 +30,7 @@ export const QuestionLikertFields: FC = () => (
           validate={required}
           label={translate('Low end label')}
           required
-          space={5}
+          space={4}
         />
       </div>
       <div className="col-sm-6">
@@ -40,14 +40,14 @@ export const QuestionLikertFields: FC = () => (
           validate={required}
           label={translate('High end label')}
           required
-          space={5}
+          space={4}
         />
       </div>
     </div>
     <BooleanGroup
       name="likert_allow_na"
       label={translate('Allow "N/A" answer')}
-      space={5}
+      space={4}
     />
   </>
 );

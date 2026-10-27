@@ -12,9 +12,9 @@ export const OrderDetailsHeaderTitle: FunctionComponent<
   OrderDetailsHeaderTitleProps
 > = ({ order }) => {
   return (
-    <div className="flex flex-wrap gap-2 mb-2 items-center">
+    <div className="flex flex-wrap gap-1.5 mb-1.5 items-center">
       <div className="flex items-center">
-        <h3 className="text-start mb-0 me-2">
+        <h3 className="text-start mb-0 me-1.5">
           {order.attributes.name || order.resource_name || DASH_ESCAPE_CODE}
         </h3>
       </div>

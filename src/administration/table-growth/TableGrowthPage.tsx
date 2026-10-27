@@ -74,10 +74,10 @@ export const TableGrowthPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
 
   if (isLoading || !data) {
     return (
-      <div className="pt-5">
-        <div className="text-center py-10">
+      <div className="pt-4">
+        <div className="text-center py-8">
           <LoadingSpinner />
-          <p className="text-quaternary mt-4">
+          <p className="text-quaternary mt-3">
             {translate('Fetching table growth statistics, please standby...')}
           </p>
         </div>
@@ -89,7 +89,7 @@ export const TableGrowthPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
     const errorMessage = error instanceof Error ? error.message : String(error);
 
     return (
-      <div className="pt-5">
+      <div className="pt-4">
         <AlertItem
           variant="error"
           title={translate('Failed to load table growth statistics')}
@@ -118,7 +118,7 @@ export const TableGrowthPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
   );
 
   return (
-    <div className="pt-5">
+    <div className="pt-4">
       <TabToolbar portal={portal}>{panelActions}</TabToolbar>
       <TableGrowthOverview data={data} alerts={alerts} />
       <TableGrowthAlerts alerts={alerts} />

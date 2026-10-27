@@ -69,7 +69,7 @@ export const PacingIndicator: FC<Props> = ({
     return (
       <AlertItem
         variant="info"
-        className="mb-3"
+        className="mb-2.5"
         title={translate(
           'Pacing not available — no expected consumption or budget set.',
         )}
@@ -169,7 +169,7 @@ export const PacingIndicator: FC<Props> = ({
 
   return (
     <>
-      <Row className="g-4 mb-5">
+      <Row className="g-4 mb-4">
         <Col md={4}>
           <StatsCard
             label={translate('Drawn so far')}
@@ -199,8 +199,8 @@ export const PacingIndicator: FC<Props> = ({
         </Col>
       </Row>
 
-      <div className="flex flex-wrap justify-between items-center gap-2 mb-2">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-wrap justify-between items-center gap-1.5 mb-1.5">
+        <div className="flex items-center gap-1.5">
           <span className="font-medium">{translate('Pacing')}</span>
           <Badge
             variant={tone}
@@ -285,7 +285,7 @@ export const PacingIndicator: FC<Props> = ({
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2 mt-4">
+      <div className="flex flex-wrap gap-1.5 mt-3">
         {isOver && (
           <Badge
             variant="danger"

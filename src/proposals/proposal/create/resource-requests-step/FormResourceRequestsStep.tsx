@@ -139,7 +139,7 @@ const ProposalResourcesTableComponent: FC<ProposalResourcesTableProps> = ({
           reviews={reviews}
           fieldName="comment_resource_requests"
           space={0}
-          className="mt-5"
+          className="mt-4"
         />
       }
     />
@@ -233,7 +233,7 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
       actions={
         // On the title row rather than in a toolbar of its own: the step is one
         // card, and a second bar under the divider only pushed the table down.
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           {readOnlyMode ? (
             onAddCommentClick ? (
               <AddCommentButton

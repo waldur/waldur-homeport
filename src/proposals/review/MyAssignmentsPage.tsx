@@ -65,7 +65,7 @@ const AssignmentItemActions: FC<AssignmentItemActionsProps> = ({
   }
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-1.5">
       <AcceptAssignmentAction item={item} batchUuid={batchUuid} />
       <DeclineAssignmentAction item={item} batchUuid={batchUuid} />
     </div>
@@ -105,7 +105,7 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
   return (
     <ExpandableContainer>
       {batch.manager_notes && (
-        <div className="mb-3 p-3 bg-tertiary dark:bg-quaternary rounded">
+        <div className="mb-2.5 p-2.5 bg-tertiary dark:bg-quaternary rounded">
           <strong>{translate('Notes from manager')}:</strong>
           <p className="mb-0 mt-1">{batch.manager_notes}</p>
         </div>

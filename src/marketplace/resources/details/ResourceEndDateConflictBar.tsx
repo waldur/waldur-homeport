@@ -17,7 +17,7 @@ export const ResourceEndDateConflictBar = () => {
       <div
         className={classNames(
           PAGE_CONTAINER_CLASSNAME,
-          'w-full flex items-center gap-2',
+          'w-full flex items-center gap-1.5',
         )}
       >
         <FeaturedIcon

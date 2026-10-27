@@ -7,8 +7,8 @@ export const ComponentAccountingTypeWrapper: FC<PropsWithChildren> = ({
   children,
 }) => (
   <Card className="card-bordered card-solid bg-secondary min-h-[175px]">
-    <Card.Body className="p-4">
-      <Card.Title as="h6" className="font-medium mb-5">
+    <Card.Body className="p-3">
+      <Card.Title as="h6" className="font-medium mb-4">
         {translate('Accounting type settings')}
       </Card.Title>
       {children}

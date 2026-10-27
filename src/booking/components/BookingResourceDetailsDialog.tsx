@@ -54,7 +54,7 @@ export const BookingResourceDetailsDialog: FC<OwnProps> = (props) => {
         </>
       }
     >
-      <div className="flex justify-between mb-8">
+      <div className="flex justify-between mb-6">
         <div>
           {resource.attributes.schedules.map((sch, i) => (
             <span key={i} className="block font-medium">
@@ -69,7 +69,7 @@ export const BookingResourceDetailsDialog: FC<OwnProps> = (props) => {
         </div>
       </div>
 
-      <div className="mb-8">
+      <div className="mb-6">
         <div className="font-semibold">{resource.customer_name}</div>
         <div>{resource.project_name}</div>
       </div>

@@ -201,7 +201,7 @@ const CreditMetrics: FC<{ data: PolicyWatchData }> = ({ data }) => {
 
   return (
     <>
-      <Row className="g-4 mb-5">
+      <Row className="g-4 mb-4">
         {stats.map((stat, index) => (
           <Col md={stats.length > 2 ? 4 : 6} key={index}>
             <StatsCard label={stat.label} value={stat.value} icon={stat.icon} />
@@ -211,7 +211,7 @@ const CreditMetrics: FC<{ data: PolicyWatchData }> = ({ data }) => {
       {isBlockedByOrganization && (
         <AlertItem
           variant="error"
-          className="mb-3"
+          className="mb-2.5"
           title={
             runway.spendableValue <= 0
               ? translate(
@@ -254,9 +254,9 @@ export const HealthView: FC<Props> = ({ data }) => {
           than as this project's credit. */}
       <WidgetCard
         cardTitle={translate("This month's credit consumption")}
-        className="mb-5"
+        className="mb-4"
       >
-        <div className="separator mt-4 mb-5" />
+        <div className="separator mt-3 mb-4" />
         <PacingIndicator
           pacing={data.pacing}
           creditTerms={data.creditTerms}
@@ -267,8 +267,8 @@ export const HealthView: FC<Props> = ({ data }) => {
         />
       </WidgetCard>
 
-      <WidgetCard cardTitle={translate('Overall credit')} className="mb-5">
-        <div className="separator mt-4 mb-5" />
+      <WidgetCard cardTitle={translate('Overall credit')} className="mb-4">
+        <div className="separator mt-3 mb-4" />
         <CreditMetrics data={data} />
         {data.creditBreakdown && (
           <CreditBreakdownCard breakdown={data.creditBreakdown} />

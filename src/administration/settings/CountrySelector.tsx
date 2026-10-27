@@ -142,14 +142,14 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
             </>
           }
         >
-          <div className="p-7">
-            <div className="mb-4">
+          <div className="p-5.5">
+            <div className="mb-3">
               <TableQuery query={query} setQuery={setQuery} />
             </div>
-            <Row className="mb-n1">
+            <Row className="-mb-1">
               {filteredCountries.map((country) => (
                 <Col key={country.value} sm={6} md={4}>
-                  <div className="border-b-[1px] border-b-secondary py-5">
+                  <div className="border-b-[1px] border-b-secondary py-4">
                     <BooleanGroup
                       data-testid={`country_${country.value}`}
                       name={`countries.${country.value}`}
@@ -158,14 +158,14 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
                       size="sm"
                       label={
                         <div className="flex items-center">
-                          <div className="size-5 me-2 shrink-0 inline-flex items-center justify-center">
+                          <div className="size-5 me-1.5 shrink-0 inline-flex items-center justify-center">
                             <CountryFlag
                               countryCode={country.value}
                               fontSize={16}
                               className="leading-none"
                             />
                           </div>
-                          <span className="text-quaternary me-2">
+                          <span className="text-quaternary me-1.5">
                             {country.value}
                           </span>
                           {country.label !== country.value && (

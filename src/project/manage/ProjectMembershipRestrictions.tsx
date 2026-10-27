@@ -106,7 +106,7 @@ export const ProjectMembershipRestrictions: FC<
   return (
     <Panel
       title={
-        <span className="flex items-center gap-2">
+        <span className="flex items-center gap-1.5">
           {translate('Membership restrictions')}
           <HelpIcon label={getRestrictionsTooltip()} />
         </span>

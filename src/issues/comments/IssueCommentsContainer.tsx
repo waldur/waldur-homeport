@@ -37,10 +37,10 @@ export const IssueCommentsContainer: FC<IssueCommentsContainerProps> = ({
 
   return (
     <IssueCommentsContext.Provider value={issue}>
-      <Card className="card-bordered mb-5">
+      <Card className="card-bordered mb-4">
         <Card.Header>
           <Card.Title>
-            <span className="me-2">{translate('Comments')}</span>
+            <span className="me-1.5">{translate('Comments')}</span>
             <RefreshButton refetch={refetch} loading={isLoading} />
           </Card.Title>
           <div className="card-toolbar">

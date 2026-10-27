@@ -314,9 +314,9 @@ export const SystemUsageTab: FC = () => {
   }, [reportsLoading, loadingStage]);
 
   return (
-    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-4')}>
+    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-3')}>
       {/* ── Toolbar ────────────────────────────────────────────────────── */}
-      <div className="flex items-center gap-3 mb-4 flex-wrap">
+      <div className="flex items-center gap-2.5 mb-3 flex-wrap">
         <h4 className="mb-0">{translate('System Usage Report')}</h4>
 
         {allResources.length > 1 && (
@@ -353,7 +353,7 @@ export const SystemUsageTab: FC = () => {
           </NativeSelect>
         )}
 
-        <div className="ms-auto flex items-center gap-2">
+        <div className="ms-auto flex items-center gap-1.5">
           <BaseButton
             variant="secondary"
             size="sm"
@@ -377,9 +377,9 @@ export const SystemUsageTab: FC = () => {
 
       {/* ── Load prompt ─────────────────────────────────────────────────── */}
       {showLoadPrompt && !loadTriggered && (
-        <Card className="mb-4">
+        <Card className="mb-3">
           <Card.Body>
-            <p className="mb-2">
+            <p className="mb-1.5">
               {translate('System usage data not yet loaded')}
             </p>
 
@@ -391,7 +391,7 @@ export const SystemUsageTab: FC = () => {
               onMonthChange={setFilterMonth}
             />
 
-            <p className="text-quaternary small mb-3">
+            <p className="text-quaternary small mb-2.5">
               {translate(
                 'Fetches all OpenPortal usage and storage reports across every project in the system. Filtering to a specific year or month will be much faster.',
               )}
@@ -465,7 +465,7 @@ export const SystemUsageTab: FC = () => {
         <AlertItem
           type="floating"
           variant="warning"
-          className="mb-3"
+          className="mb-2.5"
           title={translate('This is taking a while.')}
           body={translate(
             'To speed things up: select a specific year and month filter before loading. System-wide data across all projects and users can be very large.',
@@ -504,7 +504,7 @@ export const SystemUsageTab: FC = () => {
         <AlertItem
           type="floating"
           variant="info"
-          className="mb-3"
+          className="mb-2.5"
           title={translate(
             'User names shown for top {max} users by usage only. {count} more {user} not mapped.',
             {
@@ -529,7 +529,7 @@ export const SystemUsageTab: FC = () => {
 
       {/* ── Charts ────────────────────────────────────────────────────── */}
       {activeUsage.length > 0 && nameMaps !== undefined && (
-        <Card className="mb-4">
+        <Card className="mb-3">
           <Card.Header>{translate('Usage')}</Card.Header>
           <Card.Body>
             <UsageReportVis
@@ -542,7 +542,7 @@ export const SystemUsageTab: FC = () => {
       )}
 
       {activeStorage.length > 0 && nameMaps !== undefined && (
-        <Card className="mb-4">
+        <Card className="mb-3">
           <Card.Header>{translate('Storage')}</Card.Header>
           <Card.Body>
             <StorageReportVis

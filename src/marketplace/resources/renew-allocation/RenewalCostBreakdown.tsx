@@ -117,8 +117,8 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
   const limitItems = data.components.filter((c) => c.billing_type === 'limit');
 
   return (
-    <div className="mt-4">
-      <h6 className="mb-3">{translate('Estimated cost breakdown')}</h6>
+    <div className="mt-3">
+      <h6 className="mb-2.5">{translate('Estimated cost breakdown')}</h6>
       <Table size="sm" borderless>
         <thead>
           <tr className="border-b-[1px] border-b-secondary">

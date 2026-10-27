@@ -65,8 +65,8 @@ export const PlanPricesSection: FC<PlanPricesSectionProps> = ({
   return (
     <>
       {/* Separates this block from the fields above, not from its own body. */}
-      <hr className="my-5" />
-      <h6 className="mb-5">{translate('Component prices')}</h6>
+      <hr className="my-4" />
+      <h6 className="mb-4">{translate('Component prices')}</h6>
       {showFreeChoice && (
         <BooleanGroup
           name="is_free"
@@ -76,7 +76,7 @@ export const PlanPricesSection: FC<PlanPricesSectionProps> = ({
           description={translate(
             'Customers can order it at no cost. Nothing is charged for any component.',
           )}
-          space={5}
+          space={4}
         />
       )}
       {!values.is_free && (

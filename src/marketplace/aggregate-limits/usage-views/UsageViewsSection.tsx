@@ -144,8 +144,8 @@ const UsageViews: FC<Props & { variants: VariantInfo[] }> = ({
   const activeVariant = variants.find((v) => v.key === variant) ?? variants[0];
 
   return (
-    <Row className="mt-3">
-      <Col xs={12} className="mb-5">
+    <Row className="mt-2.5">
+      <Col xs={12} className="mb-4">
         <Tabs
           value={activeVariant.key}
           onValueChange={(k) => setVariant(k as Variant)}

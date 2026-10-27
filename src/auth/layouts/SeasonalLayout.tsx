@@ -105,7 +105,7 @@ export const SeasonalLayout = () => {
       </div>
       <div className="layout-seasonal-content">
         <div className="layout-seasonal-card">
-          <div className="login-logo mb-3">
+          <div className="login-logo mb-2.5">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
               src={imageUrl}

@@ -76,7 +76,7 @@ export const ReadOnlyFormControl: FunctionComponent<
   const main = (
     <FormField
       className={classNames(
-        !spaceless && 'mb-7',
+        !spaceless && 'mb-5.5',
         className,
         Boolean(actions) && 'grow',
         inline && 'flex items-center',
@@ -112,7 +112,7 @@ export const ReadOnlyFormControl: FunctionComponent<
 
   if (actions) {
     return (
-      <div className="flex items-start gap-2">
+      <div className="flex items-start gap-1.5">
         {main}
         {actions}
       </div>

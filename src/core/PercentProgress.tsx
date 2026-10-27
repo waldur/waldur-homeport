@@ -32,7 +32,7 @@ export const PercentProgress: FC<PercentProgressProps> = ({
       <span
         className={classNames(
           'block text-end text-secondary',
-          compact ? 'text-xs' : 'text-sm mt-2',
+          compact ? 'text-xs' : 'text-sm mt-1.5',
         )}
       >
         {Number.isInteger(percent) ? percent : percent.toFixed(1)}

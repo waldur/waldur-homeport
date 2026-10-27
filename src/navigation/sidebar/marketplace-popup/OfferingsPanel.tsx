@@ -284,14 +284,14 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
     <div className="offering-listing">
       <button
         type="button"
-        className="btn-back text-anchor font-medium p-2 ms-5 my-2"
+        className="btn-back text-anchor font-medium p-1.5 ms-4 my-1.5"
         onClick={goBack}
       >
         <CaretLeftIcon size={14} weight="bold" />
         {translate('Go back to categories')}
       </button>
-      <div className="divider border-b-[1px] border-b-secondary mx-7" />
-      <h6 className="text-secondary font-medium mt-4 mb-2 ms-7">
+      <div className="divider border-b-[1px] border-b-secondary mx-5.5" />
+      <h6 className="text-secondary font-medium mt-3 mb-1.5 ms-5.5">
         {translate('Offerings')}
       </h6>
       {itemCount === 0 ? (

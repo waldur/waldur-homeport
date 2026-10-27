@@ -25,8 +25,8 @@ export const COIPolicyCard: FC<COIPolicyCardProps> = ({ config }) => {
   }
 
   return (
-    <Card className="card-bordered mb-6">
-      <Card.Body className="flex gap-4">
+    <Card className="card-bordered mb-5">
+      <Card.Body className="flex gap-3">
         <FeaturedIcon
           icon={<InfoIcon weight="bold" />}
           variant="neutral"

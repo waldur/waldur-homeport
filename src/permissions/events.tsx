@@ -418,9 +418,9 @@ export const RoleDefinitionChanges: FC<{
     descriptions,
   } = details;
   return (
-    <div className="mt-3">
+    <div className="mt-2.5">
       {added.length > 0 && (
-        <div className="mb-3">
+        <div className="mb-2.5">
           <strong className="text-success">
             {translate('Added permissions ({count})', { count: added.length })}
           </strong>
@@ -428,7 +428,7 @@ export const RoleDefinitionChanges: FC<{
         </div>
       )}
       {removed.length > 0 && (
-        <div className="mb-3">
+        <div className="mb-2.5">
           <strong className="text-danger">
             {translate('Removed permissions ({count})', {
               count: removed.length,
@@ -438,7 +438,7 @@ export const RoleDefinitionChanges: FC<{
         </div>
       )}
       {permissions.length > 0 && (
-        <div className="mb-3">
+        <div className="mb-2.5">
           <strong>
             {translate('Permissions ({count})', { count: permissions.length })}
           </strong>
@@ -446,12 +446,12 @@ export const RoleDefinitionChanges: FC<{
         </div>
       )}
       {descriptions.map((change) => (
-        <div className="mb-3" key={change.label}>
+        <div className="mb-2.5" key={change.label}>
           <DescriptionChangeLine change={change} />
         </div>
       ))}
       {renamedFrom && (
-        <div className="mb-3">
+        <div className="mb-2.5">
           {translate('Renamed from {old_name} to {role_name}.', {
             old_name: renamedFrom,
             role_name: renamedTo,

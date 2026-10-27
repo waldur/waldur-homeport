@@ -13,6 +13,11 @@
  * reported); src/tailwindBootstrapColors.test.ts checks both directions.
  */
 
+import {
+  RETIRED_SPACING_FAMILIES,
+  isBootstrapOnlySpacing,
+  toTailwindSpacing,
+} from './bootstrap-spacing.js';
 import { notAClassList } from './class-name-tokens.js';
 
 const BP = '(?:sm|md|lg|xl|xxl)';
@@ -27,7 +32,6 @@ export const RETIRED_UTILITY_PATTERNS = [
   [/^vh-100$/, 'h-screen'],
   [/^min-vh-100$/, 'min-h-screen'],
   [/^align-content-\w+$/, 'content-* (content-center, content-between, …)'],
-  [/^(?:mx|my)-n\d+$/, 'a negative Tailwind margin (-mx-2, -my-2)'],
   [/^ls-n?\d+$/, 'tracking-* (tracking-tight, tracking-wide, …)'],
   [
     /^lh-(?:0|1|sm|base|lg|xl|xxl)$/,
@@ -35,14 +39,8 @@ export const RETIRED_UTILITY_PATTERNS = [
   ],
   // Breakpoint variants of utilities only ever used at the base size.
   [
-    new RegExp(
-      `^(?:w|mw|h|mh|min-w|min-h|fs|mx|px|py|pt|pe|pb)-${BP}-[\\w.-]+$`,
-    ),
-    'a Tailwind breakpoint variant (lg:p-3, md:min-h-[100px])',
-  ],
-  [
-    new RegExp(`^(?:mt|me|ms)-${BP}-n[\\w.-]+$`),
-    'a Tailwind breakpoint variant of a negative margin (lg:-mt-2)',
+    new RegExp(`^(?:w|mw|h|mh|min-w|min-h|fs)-${BP}-[\\w.-]+$`),
+    'a Tailwind breakpoint variant (lg:w-1/2, md:min-h-[100px])',
   ],
   [
     new RegExp(`^flex-${BP}-(?:fill|shrink-[01])$`),
@@ -74,8 +72,20 @@ export const RETIRED_UTILITY_PATTERNS = [
   ],
 ];
 
+/**
+ * Spacing moved to Tailwind's scale (#477) and kept its plain names (`mb-4`
+ * is Tailwind's now), so only the spellings Tailwind lacks are reported:
+ * `mb-md-4`, `mt-n2`, `gap-8px`, each with its Tailwind class.
+ */
+const retiredSpacing = (token) => {
+  if (!isBootstrapOnlySpacing(token)) return undefined;
+  const hint = toTailwindSpacing(token, RETIRED_SPACING_FAMILIES);
+  return hint ? [null, hint] : undefined;
+};
+
 const retired = (token) =>
-  RETIRED_UTILITY_PATTERNS.find(([pattern]) => pattern.test(token));
+  RETIRED_UTILITY_PATTERNS.find(([pattern]) => pattern.test(token)) ??
+  retiredSpacing(token);
 
 export default {
   meta: {

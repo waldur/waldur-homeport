@@ -62,7 +62,7 @@ export const MergeProgress: FC<{ merge: OfferingMerge }> = ({ merge }) => {
   }
   const progress = merge.progress;
   return (
-    <div className="flex flex-col gap-2" data-testid="merge-progress">
+    <div className="flex flex-col gap-1.5" data-testid="merge-progress">
       <span>
         {merge.state === 'undoing'
           ? translate('Undoing the merge…')
@@ -107,7 +107,7 @@ const VerificationReport: FC<{
       'Checks run automatically right after the operation, in the same transaction. A failed check rolls nothing back: it tells you to undo.',
     )}
     title={
-      <span className="flex items-center gap-3">
+      <span className="flex items-center gap-2.5">
         {title}
         <PassedBadge passed={report.passed} />
         <span className="text-quaternary text-xs font-normal">
@@ -138,7 +138,7 @@ const VerificationReport: FC<{
 export const MergeVerification: FC<{ merge: OfferingMerge }> = ({ merge }) => {
   const verification = merge.verification;
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       {merge.error_message ? (
         <AlertItem
           variant="error"

@@ -471,7 +471,7 @@ export const EmptyCategories: Story = {
 const TriggerHarness = () => {
   const { openDialog } = useModal();
   return (
-    <div className="p-8 text-center">
+    <div className="p-6 text-center">
       <BaseButton
         variant="primary"
         label="Open Marketplace Popup"

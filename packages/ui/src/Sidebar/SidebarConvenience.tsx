@@ -53,7 +53,7 @@ export const SidebarBrand = ({
   shortcutsButton,
   onToggle,
 }: SidebarBrandProps) => (
-  <div className="relative flex items-center gap-2 group-data-[collapsible=icon]/panel:justify-center">
+  <div className="relative flex items-center gap-1.5 group-data-[collapsible=icon]/panel:justify-center">
     {shortcutsButton !== undefined ? (
       shortcutsButton
     ) : (
@@ -289,7 +289,7 @@ export const SidebarCallToAction = ({
   disabledTooltip,
   'data-testid': dataTestId,
 }: SidebarCallToActionProps) => (
-  <SidebarMenuItem className="mb-6">
+  <SidebarMenuItem className="mb-5">
     <SidebarMenuButton
       type="button"
       disabled={disabled}
@@ -297,7 +297,7 @@ export const SidebarCallToAction = ({
       onClick={disabled ? undefined : onClick}
       data-testid={dataTestId}
       aria-label={typeof label === 'string' ? label : undefined}
-      className="justify-center gap-2 rounded-md border-2 border-[var(--nav-item-icon)] text-[var(--nav-item-icon)] hover:text-[var(--nav-item-text)]"
+      className="justify-center gap-1.5 rounded-md border-2 border-[var(--nav-item-icon)] text-[var(--nav-item-icon)] hover:text-[var(--nav-item-text)]"
     >
       {icon}
       <span className="truncate group-data-[collapsible=icon]/panel:hidden">
@@ -357,7 +357,7 @@ export const SidebarModeCard = ({
     type="button"
     onClick={onClick}
     aria-label={subtitle ? `${title}: ${subtitle}` : title}
-    className="flex w-full items-center gap-3 rounded-modal bg-[var(--card-bg)] p-[9.75px] text-left group-data-[collapsible=icon]/panel:size-9 group-data-[collapsible=icon]/panel:justify-center group-data-[collapsible=icon]/panel:rounded-lg group-data-[collapsible=icon]/panel:p-0"
+    className="flex w-full items-center gap-2.5 rounded-modal bg-[var(--card-bg)] p-[9.75px] text-left group-data-[collapsible=icon]/panel:size-9 group-data-[collapsible=icon]/panel:justify-center group-data-[collapsible=icon]/panel:rounded-lg group-data-[collapsible=icon]/panel:p-0"
   >
     {icon && (
       <span className="flex size-10 shrink-0 items-center justify-center rounded-xl border-[1px] border-solid border-secondary text-primary group-data-[collapsible=icon]/panel:size-full group-data-[collapsible=icon]/panel:rounded-lg group-data-[collapsible=icon]/panel:border-0">

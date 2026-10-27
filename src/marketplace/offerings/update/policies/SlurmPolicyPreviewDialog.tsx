@@ -61,7 +61,7 @@ export const SlurmPolicyPreviewDialog: FC<SlurmPolicyPreviewDialogProps> = ({
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       {resourceOptions.length > 0 && (
-        <FormField className="mb-4">
+        <FormField className="mb-3">
           <FormLabel>{translate('Select Resource')}</FormLabel>
           <SelectField
             input={{

@@ -1,5 +1,7 @@
 import classNames from 'classnames';
 
+import { SPACE_CLASSES, Space } from 'waldur-form';
+
 import { formatRelative } from '@/core/dateUtils';
 import { ProposalReview } from '@/proposals/types';
 
@@ -11,7 +13,7 @@ interface FieldReviewCommentsProps {
   fieldName: string;
   reviews: ProposalReview[];
   hasScore?: boolean;
-  space?: number;
+  space?: Space;
   className?: string;
 }
 
@@ -19,7 +21,7 @@ export const FieldReviewComments = ({
   reviews,
   fieldName,
   hasScore,
-  space = 7,
+  space = 5.5,
   className,
 }: FieldReviewCommentsProps) => {
   if (!reviews) return null;
@@ -38,7 +40,11 @@ export const FieldReviewComments = ({
 
   return (
     <div
-      className={classNames('review-comments-list', 'mb-' + space, className)}
+      className={classNames(
+        'review-comments-list',
+        SPACE_CLASSES[space],
+        className,
+      )}
     >
       {items.map((item, i) => (
         <ReviewComment

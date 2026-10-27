@@ -6,7 +6,7 @@ import { DangerActionPanel } from '@/user/support/DangerActionPanel';
 
 export const ClusterLonghornTab = ({ resource }) =>
   !resource.attributes.install_longhorn ? (
-    <Card className="mb-4">
+    <Card className="mb-3">
       <Card.Header>
         <Card.Title>{translate('Longhorn status')}</Card.Title>
       </Card.Header>
@@ -20,7 +20,7 @@ export const ClusterLonghornTab = ({ resource }) =>
       panelTitle={translate('Remove Loghorn in cluster')}
       buttonTitle={translate('Request deletion')}
       panelDescription={
-        <ul className="text-quaternary mb-7">
+        <ul className="text-quaternary mb-5.5">
           <li>{translate('Permanently remove Longhorn.')}</li>
           <li>{translate('This action cannot be undone.')}</li>
         </ul>

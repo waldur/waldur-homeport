@@ -11,6 +11,6 @@ export const ComponentBooleanDefaultLimitField: FunctionComponent = () => (
     format={Boolean}
     size="sm"
     align="center"
-    space={5}
+    space={4}
   />
 );

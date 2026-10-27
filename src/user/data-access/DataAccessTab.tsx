@@ -84,7 +84,7 @@ export const DataAccessTab: FC<DataAccessTabProps> = ({ user }) => {
             value={activeKey}
             onValueChange={(k) => setActiveKey(k as SubTabKey)}
           >
-            <TabsList className="mb-4">
+            <TabsList className="mb-3">
               <TabsTrigger value="visibility">
                 {translate('Who can access')}
               </TabsTrigger>

@@ -96,13 +96,13 @@ const FeatureSectionPanel = ({
 }) => (
   <FormTable.Card
     title={section.description}
-    className="card-bordered mb-5"
+    className="card-bordered mb-4"
     key={section.key}
   >
     {hasItems ? (
       <FeatureSectionContent section={section} />
     ) : (
-      <p className="text-quaternary p-5 mb-0">
+      <p className="text-quaternary p-4 mb-0">
         {translate('No matching features in this section.')}
       </p>
     )}
@@ -258,7 +258,7 @@ export const FeaturesList = () => {
                   <h3>{translate('Features')}</h3>
                 </Card.Title>
               </div>
-              <div className="card-toolbar flex items-center gap-4 flex-nowrap">
+              <div className="card-toolbar flex items-center gap-3 flex-nowrap">
                 <TableQuery
                   query={query}
                   setQuery={setQuery}
@@ -316,7 +316,7 @@ export const FeaturesList = () => {
                                 variant="secondary"
                                 size="sm"
                                 tone="outline"
-                                className="ms-2"
+                                className="ms-1.5"
                               >
                                 {filteredCount}
                               </Badge>
@@ -369,7 +369,7 @@ export const FeaturesList = () => {
                                   variant="neutral"
                                   size="sm"
                                   tone="outline"
-                                  className="ms-2"
+                                  className="ms-1.5"
                                 >
                                   {filteredCount}
                                 </Badge>
@@ -382,7 +382,7 @@ export const FeaturesList = () => {
                   )}
                 </div>
                 {query && tabsWithMatches.length > 0 && (
-                  <div className="flex items-center gap-2 pt-3 pb-4 flex-wrap border-b-[1px] border-b-secondary">
+                  <div className="flex items-center gap-1.5 pt-2.5 pb-3 flex-wrap border-b-[1px] border-b-secondary">
                     <span className="text-quaternary text-xs">
                       {translate('{count} results found in:', {
                         count: totalResults,

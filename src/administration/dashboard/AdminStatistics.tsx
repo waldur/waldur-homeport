@@ -67,7 +67,7 @@ export const AdminStatistics = () => {
         <LoadingErred
           message={translate('Unable to load statistics data')}
           loadData={refetch}
-          className="mb-4"
+          className="mb-3"
         />
       )}
       {data && (

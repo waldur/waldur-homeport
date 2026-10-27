@@ -124,7 +124,7 @@ export const CallSettingsMenu: FC<CallSettingsMenuProps> = ({ container }) => {
         // The docked call belongs to MatrixCallHost's React tree, not the
         // drawer's, so the drawer would read clicks here as a click away.
         data-dialog-inside=""
-        className="call-device-settings-popover p-4"
+        className="call-device-settings-popover p-3"
       >
         <div className="call-device-settings">
           {kinds.map(({ kind, label }) => (

@@ -60,9 +60,9 @@ export const CustomerMappingExpandableRow: FC<
 
   return (
     <ExpandableContainer>
-      <div className="p-4">
+      <div className="p-3">
         {/* Summary stats */}
-        <div className="flex gap-4 mb-4 flex-wrap">
+        <div className="flex gap-3 mb-3 flex-wrap">
           <div>
             <span className="text-quaternary">
               {translate('Total resources:')}
@@ -99,7 +99,7 @@ export const CustomerMappingExpandableRow: FC<
         <AlertItem
           type="floating"
           variant="info"
-          className="mb-4"
+          className="mb-3"
           title={translate('How linking works:')}
           body={translate(
             'Resource backend_id should contain the Arrow License Reference (e.g., XSP12345). This is used to fetch consumption data from Arrow API.',
@@ -108,8 +108,8 @@ export const CustomerMappingExpandableRow: FC<
 
         {/* Consumption lines (resources with consumption data) */}
         {data.consumption_lines && data.consumption_lines.length > 0 && (
-          <div className="mb-4">
-            <h6 className="mb-2">
+          <div className="mb-3">
+            <h6 className="mb-1.5">
               {translate('Resources with Consumption Data')}
             </h6>
             <Table size="sm" bordered className="mb-0">
@@ -164,9 +164,9 @@ export const CustomerMappingExpandableRow: FC<
 
         {/* Billing lines (from Arrow) */}
         {data.billing_lines && data.billing_lines.length > 0 && (
-          <div className="mb-4">
-            <h6 className="mb-2">{translate('Arrow Billing Lines')}</h6>
-            <p className="text-quaternary small mb-2">
+          <div className="mb-3">
+            <h6 className="mb-1.5">{translate('Arrow Billing Lines')}</h6>
+            <p className="text-quaternary small mb-1.5">
               {translate(
                 'These are the license references from Arrow billing export. Resources with matching backend_id will show consumption data.',
               )}
@@ -211,15 +211,15 @@ export const CustomerMappingExpandableRow: FC<
 
         {/* Empty state */}
         {data.total_customer_resources === 0 && (
-          <div className="text-center text-quaternary py-4">
+          <div className="text-center text-quaternary py-3">
             {translate('No resources found for this customer in Waldur.')}
           </div>
         )}
 
         {data.total_customer_resources > 0 &&
           data.resources_with_backend_id === 0 && (
-            <div className="text-center text-quaternary py-4">
-              <p className="mb-2">
+            <div className="text-center text-quaternary py-3">
+              <p className="mb-1.5">
                 {translate('No resources have backend_id set.')}
               </p>
               <p className="small mb-0">

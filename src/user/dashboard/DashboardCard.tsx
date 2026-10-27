@@ -35,7 +35,7 @@ export const DashboardCard: FC<DashboardCardProps> = ({
     >
       <Card.Body className="flex items-center">
         <div
-          className={`size-[50px] me-4 shrink-0 rounded-md flex items-center justify-center ${
+          className={`size-[50px] me-3 shrink-0 rounded-md flex items-center justify-center ${
             isClickable ? backgroundColor : 'bg-gray-300 dark:bg-gray-dark-600'
           }`}
         >

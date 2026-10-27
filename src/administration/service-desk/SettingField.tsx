@@ -96,7 +96,7 @@ export const SettingField = ({ field }) => {
       }
       format={isDictField ? formatDictField : undefined}
       parse={isDictField ? parseDictField : undefined}
-      {...(isBoolean ? { className: 'mt-3' } : {})}
+      {...(isBoolean ? { className: 'mt-2.5' } : {})}
       {...(isDictField ? { rows: 5 } : {})}
     />
   );

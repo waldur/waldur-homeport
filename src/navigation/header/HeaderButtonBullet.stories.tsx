@@ -53,7 +53,7 @@ const meta: Meta<typeof HeaderButtonBullet> = {
   },
   decorators: [
     (Story) => (
-      <div className="p-6 flex items-center justify-center">
+      <div className="p-5 flex items-center justify-center">
         <Story />
       </div>
     ),
@@ -98,8 +98,8 @@ export const Default: Story = {
  */
 export const Variants: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-8">
-      <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-wrap items-center gap-6">
+      <div className="flex flex-col items-center gap-1.5">
         <div className="relative inline-flex size-10 items-center justify-center rounded-lg border-[1px] border-secondary text-secondary">
           <BellIcon size={20} weight="bold" />
           <HeaderButtonBullet
@@ -113,7 +113,7 @@ export const Variants: Story = {
         </span>
       </div>
 
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <div className="relative inline-flex size-10 items-center justify-center rounded-lg border-[1px] border-secondary text-secondary">
           <FunnelSimpleIcon size={20} weight="bold" />
           <HeaderButtonBullet
@@ -127,7 +127,7 @@ export const Variants: Story = {
         </span>
       </div>
 
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <div className="relative inline-flex size-10 items-center justify-center rounded-lg border-[1px] border-secondary text-secondary">
           <BellIcon size={20} weight="bold" />
           <HeaderButtonBullet
@@ -139,7 +139,7 @@ export const Variants: Story = {
         <span className="text-xs text-secondary font-medium">danger</span>
       </div>
 
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <div className="relative inline-flex size-10 items-center justify-center rounded-lg border-[1px] border-secondary text-secondary">
           <ChatCircleDotsIcon size={20} weight="bold" />
           <HeaderButtonBullet
@@ -174,9 +174,9 @@ export const Variants: Story = {
  */
 export const Sizes: Story = {
   render: () => (
-    <div className="flex items-center gap-8">
+    <div className="flex items-center gap-6">
       {[6, 8, 9, 10, 12].map((size) => (
-        <div key={size} className="flex flex-col items-center gap-2">
+        <div key={size} className="flex flex-col items-center gap-1.5">
           <div className="relative inline-flex size-10 items-center justify-center rounded-lg border-[1px] border-secondary text-secondary">
             <BellIcon size={20} weight="bold" />
             <HeaderButtonBullet
@@ -208,8 +208,8 @@ export const Sizes: Story = {
  */
 export const BlinkingVsStatic: Story = {
   render: () => (
-    <div className="flex items-center gap-8">
-      <div className="flex flex-col items-center gap-2">
+    <div className="flex items-center gap-6">
+      <div className="flex flex-col items-center gap-1.5">
         <div className="relative inline-flex size-10 items-center justify-center rounded-lg border-[1px] border-secondary text-secondary">
           <BellIcon size={20} weight="bold" />
           <HeaderButtonBullet blink={false} data-testid="bullet-static" />
@@ -217,7 +217,7 @@ export const BlinkingVsStatic: Story = {
         <span className="text-xs text-secondary font-medium">Static</span>
       </div>
 
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-1.5">
         <div className="relative inline-flex size-10 items-center justify-center rounded-lg border-[1px] border-secondary text-secondary">
           <BellIcon size={20} weight="bold" />
           <HeaderButtonBullet blink={true} data-testid="bullet-blinking" />
@@ -241,7 +241,7 @@ export const BlinkingVsStatic: Story = {
  */
 export const RealWorldButtons: Story = {
   render: () => (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center gap-5">
       {/* Notifications bell button */}
       <button
         type="button"
@@ -264,7 +264,7 @@ export const RealWorldButtons: Story = {
           size={9}
           blink={false}
           variant="primary"
-          className="-me-2 mt-2 border-[1px] border-2 border-secondary"
+          className="-me-2 mt-1.5 border-[1px] border-2 border-secondary"
         />
       </span>
 

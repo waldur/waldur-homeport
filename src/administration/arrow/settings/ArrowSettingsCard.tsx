@@ -68,16 +68,16 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
   if (!currentSettings) {
     return (
       <Card>
-        <Card.Body className="text-center py-10">
-          <h4 className="mb-4">
+        <Card.Body className="text-center py-8">
+          <h4 className="mb-3">
             {translate('Arrow Integration Not Configured')}
           </h4>
-          <p className="text-quaternary mb-6">
+          <p className="text-quaternary mb-5">
             {translate(
               'Connect your Arrow (ArrowSphere) account to synchronize billing data with Waldur.',
             )}
           </p>
-          <div className="flex gap-2 justify-center">
+          <div className="flex gap-1.5 justify-center">
             <ArrowSetupButton />
             <ArrowHowItWorksButton />
           </div>
@@ -87,13 +87,13 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-5">
       <Card>
         <Card.Header className="flex justify-between items-center">
           <Card.Title>
             <h4 className="mb-0">{translate('Connection Settings')}</h4>
           </Card.Title>
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-1.5 items-center">
             <ArrowHowItWorksButton />
             <ArrowSettingsActions settings={currentSettings} />
           </div>
@@ -122,7 +122,7 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                 </td>
                 <td>
                   {currentSettings.partner_reference ? (
-                    <span className="flex items-center gap-2">
+                    <span className="flex items-center gap-1.5">
                       {currentSettings.partner_reference}
                       <CopyToClipboardButton
                         value={currentSettings.partner_reference}
@@ -140,7 +140,7 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                 </td>
                 <td>
                   {currentSettings.export_type_reference ? (
-                    <span className="flex items-center gap-2">
+                    <span className="flex items-center gap-1.5">
                       {currentSettings.export_type_reference}
                       <CopyToClipboardButton
                         value={currentSettings.export_type_reference}

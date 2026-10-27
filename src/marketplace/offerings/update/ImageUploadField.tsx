@@ -44,7 +44,7 @@ const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (props) => {
             <FileUploadField
               variant="primary"
               size="sm"
-              className="mb-2"
+              className="mb-1.5"
               {...props}
             />
           </div>
@@ -52,7 +52,7 @@ const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (props) => {
             <BaseButton
               variant="danger"
               size="sm"
-              className="mb-2"
+              className="mb-1.5"
               label={translate('Remove')}
               onClick={() => props.input.onChange(null)}
               iconNode={<TrashIcon weight="bold" />}

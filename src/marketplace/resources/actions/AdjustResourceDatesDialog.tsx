@@ -103,7 +103,7 @@ export const AdjustResourceDatesDialog: FunctionComponent<
               body={translate(
                 'Adjusting these dates does not regenerate invoices. Issue credits or refunds separately if needed.',
               )}
-              className="mb-5"
+              className="mb-4"
             />
             <div className="row">
               <div className="col-sm-6">

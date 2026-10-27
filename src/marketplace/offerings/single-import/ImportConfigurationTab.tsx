@@ -40,7 +40,7 @@ export const ImportConfigurationTab: FunctionComponent = () => {
 
   return (
     <>
-      <Row className="mb-7">
+      <Row className="mb-5.5">
         <Col md={12}>
           <AsyncSelectGroup
             name="category"

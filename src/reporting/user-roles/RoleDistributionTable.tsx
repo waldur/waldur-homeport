@@ -20,7 +20,7 @@ const columns: Column<CustomerMemberCount>[] = [
       <div>
         <span>{row.name}</span>
         {row.abbreviation && (
-          <span className="text-quaternary ms-2">({row.abbreviation})</span>
+          <span className="text-quaternary ms-1.5">({row.abbreviation})</span>
         )}
       </div>
     ),

@@ -115,11 +115,11 @@ const PasskeyStep = ({ ceremony, onCancel }) => {
   };
 
   return (
-    <div className="mb-2 text-center">
-      <div className="mb-5 flex justify-center">
+    <div className="mb-1.5 text-center">
+      <div className="mb-4 flex justify-center">
         <FingerprintIcon size={26} weight="bold" className="text-brand" />
       </div>
-      <p className="text-quaternary mb-5">
+      <p className="text-quaternary mb-4">
         {translate(
           'Your password was accepted. Confirm with your passkey to finish signing in.',
         )}
@@ -132,7 +132,7 @@ const PasskeyStep = ({ ceremony, onCancel }) => {
           !prepared ? translate('Preparing the passkey challenge.') : undefined
         }
         label={translate('Confirm with passkey')}
-        className="w-full mb-3"
+        className="w-full mb-2.5"
         data-testid="passkey-mfa-confirm"
         variant="primary"
         size="lg"
@@ -151,7 +151,7 @@ const PasskeyStep = ({ ceremony, onCancel }) => {
           variant="error"
           title={translate('Passkey verification failed')}
           body={error}
-          className="mt-3"
+          className="mt-2.5"
         />
       )}
     </div>
@@ -207,14 +207,14 @@ export const SigninForm = () => {
       render={({ handleSubmit, submitting, submitError, submitErrors }) => {
         const formError = submitErrors?._error || submitError;
         return (
-          <form className="mb-2" onSubmit={handleSubmit}>
+          <form className="mb-1.5" onSubmit={handleSubmit}>
             <Field
               name="signin_by"
               render={({ input }) => (
                 <Tabs
                   value={input.value}
                   onValueChange={input.onChange}
-                  className="w-full mb-5"
+                  className="w-full mb-4"
                 >
                   <TabsList
                     variant="segmented"
@@ -241,7 +241,7 @@ export const SigninForm = () => {
                       label={translate('Password')}
                       placeholder={translate('Enter your password')}
                       className="text-start"
-                      space={8}
+                      space={6}
                     />
                   </TabsContent>
                   <TabsContent value="token">
@@ -254,7 +254,7 @@ export const SigninForm = () => {
                       )}
                       placeholder={translate('Paste here your token')}
                       className="text-start"
-                      space={8}
+                      space={6}
                     />
                   </TabsContent>
                 </Tabs>
@@ -274,7 +274,7 @@ export const SigninForm = () => {
                 variant="error"
                 title={formError}
                 role="alert"
-                className="mt-3 ellipsis-lines-1"
+                className="mt-2.5 ellipsis-lines-1"
                 style={{ maxWidth: '100vh' }}
               />
             )}

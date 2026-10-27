@@ -43,7 +43,7 @@ export const FieldErrorMessage: FunctionComponent<FieldErrorProps> = ({
           error.length === 1 ? (
             error[0]
           ) : (
-            <ul className="mb-0 ps-3">
+            <ul className="mb-0 ps-2.5">
               {error.map((e, i) => (
                 <li key={i}>{e}</li>
               ))}

@@ -112,7 +112,7 @@ const EvaluationHistoryTab: FC<{ policyUuid: string }> = ({ policyUuid }) => {
   if (isLoading) return <LoadingSpinner />;
   if (!data || data.length === 0) {
     return (
-      <div className="text-quaternary text-center py-4">
+      <div className="text-quaternary text-center py-3">
         {translate('No evaluation history available.')}
       </div>
     );
@@ -167,7 +167,7 @@ const EvaluationHistoryTab: FC<{ policyUuid: string }> = ({ policyUuid }) => {
                     </span>
                   )}
                   {prevState?.downscaled !== newState?.downscaled && (
-                    <span className="ms-2">
+                    <span className="ms-1.5">
                       downscaled: {String(prevState?.downscaled)} &rarr;{' '}
                       {String(newState?.downscaled)}
                     </span>
@@ -206,7 +206,7 @@ const CommandHistoryTab: FC<{ policyUuid: string }> = ({ policyUuid }) => {
   if (isLoading) return <LoadingSpinner />;
   if (!data || data.length === 0) {
     return (
-      <div className="text-quaternary text-center py-4">
+      <div className="text-quaternary text-center py-3">
         {translate('No command history available.')}
       </div>
     );
@@ -286,9 +286,9 @@ export const SlurmPolicyExecutionLogDialog: FC<
 > = ({ resolve: { policyUuid } }) => {
   return (
     <ModalDialog title={translate('Policy execution log')} bodyClassName="p-0">
-      <div className="p-4">
+      <div className="p-3">
         <Tabs mount="active" defaultValue="evaluations">
-          <TabsList className="mb-4">
+          <TabsList className="mb-3">
             <TabsTrigger value="evaluations">
               {translate('Evaluation history')}
             </TabsTrigger>

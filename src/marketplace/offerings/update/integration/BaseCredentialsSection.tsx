@@ -26,12 +26,12 @@ export const BaseCredentialsSection: FC<BaseCredentialsSectionProps> = (
     <FormTable.Card
       title={translate('Credentials')}
       actions={
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-1.5 items-center">
           {props.actions}
           <SyncButton offering={props.offering} refetch={props.refetch} />
         </div>
       }
-      className="card-bordered mb-7"
+      className="card-bordered mb-5.5"
     >
       <FormTable>
         <EditFieldProvider scope={props.offering} callback={update}>

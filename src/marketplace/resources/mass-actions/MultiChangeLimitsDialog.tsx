@@ -269,7 +269,7 @@ export const MultiChangeLimitsDialog: FC<MultiChangeLimitsDialogProps> = (
                 {data.skippedComponents.length > 0 && (
                   <AlertItem
                     variant="info"
-                    className="mb-4"
+                    className="mb-3"
                     title={translate('Some components are not editable here')}
                     body={translate(
                       '{names} are not common to all selected VPCs, so they are left unchanged in this order.',
@@ -331,7 +331,7 @@ export const MultiChangeLimitsDialog: FC<MultiChangeLimitsDialogProps> = (
                 ) : (
                   <AlertItem
                     variant="warning"
-                    className="mb-4"
+                    className="mb-3"
                     title={translate('No common editable limits')}
                     body={translate(
                       'The selected VPCs share no limit components that can be changed together. Narrow the selection to VPCs of the same offering.',
@@ -339,7 +339,7 @@ export const MultiChangeLimitsDialog: FC<MultiChangeLimitsDialogProps> = (
                   />
                 )}
 
-                <h6 className="mt-6 mb-3">{translate('Preview')}</h6>
+                <h6 className="mt-5 mb-2.5">{translate('Preview')}</h6>
                 <div className="table-responsive">
                   <table className="table table-row-bordered align-middle">
                     <thead>
@@ -392,7 +392,7 @@ export const MultiChangeLimitsDialog: FC<MultiChangeLimitsDialogProps> = (
                                   key={component.type}
                                   className="text-nowrap"
                                 >
-                                  <span className="inline-flex items-center gap-2">
+                                  <span className="inline-flex items-center gap-1.5">
                                     <span>
                                       {changed !== 0
                                         ? `${beforeNum} → ${afterNum}`

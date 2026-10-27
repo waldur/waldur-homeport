@@ -293,7 +293,7 @@ export const ProjectDetailPage: FC = () => {
         <ReportingOrganizationSelect onChange={handleOrganizationChange} />
       </ReportingTitle>
       {/* Filters */}
-      <div className="flex flex-wrap gap-6 mb-6">
+      <div className="flex flex-wrap gap-5 mb-5">
         <FormGroup label={translate('Project')} className="grow max-w-[400px]">
           <AsyncSelect
             key={selectedOrganization?.uuid || 'no-org'}

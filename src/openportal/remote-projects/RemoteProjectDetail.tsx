@@ -92,9 +92,9 @@ export const RemoteProjectDetail = () => {
 
   return (
     <>
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Body>
-          <div className="flex justify-between items-start mb-3">
+          <div className="flex justify-between items-start mb-2.5">
             <h3 className="mb-0">
               {row.current_project_name || translate('Unnamed project')}
             </h3>
@@ -169,7 +169,7 @@ export const RemoteProjectDetail = () => {
         </Card.Body>
       </Card>
 
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <Card.Title className="mb-0">{translate('Links')}</Card.Title>
         </Card.Header>
@@ -185,7 +185,7 @@ export const RemoteProjectDetail = () => {
       </Card>
 
       {(row.last_sent_details || row.last_confirmed_details) && (
-        <Card className="mb-4">
+        <Card className="mb-3">
           <Card.Body>
             <details>
               <summary className="cursor-pointer">
@@ -195,13 +195,13 @@ export const RemoteProjectDetail = () => {
                     variant="secondary"
                     shape="pill"
                     tone="outline"
-                    className="ms-2"
+                    className="ms-1.5"
                   >
                     {translate('Not yet confirmed')}
                   </Badge>
                 )}
               </summary>
-              <div className="mt-3">
+              <div className="mt-2.5">
                 <DetailsDiff
                   before={row.last_sent_details}
                   after={row.last_confirmed_details}
@@ -215,13 +215,13 @@ export const RemoteProjectDetail = () => {
       )}
 
       {row.pending_details && (
-        <Card className="mb-4">
+        <Card className="mb-3">
           <Card.Body>
             <details>
               <summary className="cursor-pointer">
                 {translate('Pending sync')}
               </summary>
-              <div className="mt-3">
+              <div className="mt-2.5">
                 <Field
                   label={translate('Pending since')}
                   value={
@@ -242,17 +242,17 @@ export const RemoteProjectDetail = () => {
         </Card>
       )}
 
-      <Card className="mb-4">
+      <Card className="mb-3">
         <Card.Header>
           <Card.Title className="mb-0">{translate('Notes')}</Card.Title>
         </Card.Header>
         <Card.Body>
           {row.notes && row.notes.length > 0 ? (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5">
               {row.notes.map((note, index) => (
                 <div
                   key={index}
-                  className="border-b-[1px] border-b-secondary pb-2"
+                  className="border-b-[1px] border-b-secondary pb-1.5"
                 >
                   <div className="text-quaternary small">
                     {note.author} &middot; {formatDateTime(note.timestamp)}

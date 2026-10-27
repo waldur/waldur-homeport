@@ -79,7 +79,7 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
     <Card className="card-bordered">
       <Card.Header>
         <Card.Title>
-          <h3 className="me-2">{translate('Call manager')}</h3>
+          <h3 className="me-1.5">{translate('Call manager')}</h3>
           {loadingToggle && <LoadingSpinner />}
         </Card.Title>
       </Card.Header>

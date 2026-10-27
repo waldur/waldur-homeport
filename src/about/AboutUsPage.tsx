@@ -6,7 +6,7 @@ import { useTitle } from '@/navigation/title';
 export const AboutUsPage = () => {
   useTitle(translate('About us'));
   return (
-    <div className="mb-6 card card-bordered">
+    <div className="mb-5 card card-bordered">
       <div className="card-body">
         <SafeMarkdown text={ENV.plugins.WALDUR_CORE.ABOUT_US_PAGE_CONTENT} />
       </div>

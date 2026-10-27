@@ -49,7 +49,7 @@ export const ReportPreFilters: FC<ReportPreFiltersProps> = ({
   };
 
   return (
-    <div className="flex items-center gap-3 mb-3 flex-wrap">
+    <div className="flex items-center gap-2.5 mb-2.5 flex-wrap">
       <FormField>
         <FormLabel className="small mb-1">{translate('Month')}</FormLabel>
         <MonthPicker

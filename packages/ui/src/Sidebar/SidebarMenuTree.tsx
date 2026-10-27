@@ -80,7 +80,7 @@ const SidebarMenuTreeToggle = ({
         <button
           type="button"
           onClick={onClick}
-          className="flex h-10 w-full items-center gap-3 rounded-none rounded-b-lg px-3 text-left text-sm font-medium text-[var(--nav-item-icon)] transition-colors hover:bg-[var(--nav-item-hover-bg)]"
+          className="flex h-10 w-full items-center gap-2.5 rounded-none rounded-b-lg px-2.5 text-left text-sm font-medium text-[var(--nav-item-icon)] transition-colors hover:bg-[var(--nav-item-hover-bg)]"
         >
           <span
             data-testid="submenu-bullet-spacer"
