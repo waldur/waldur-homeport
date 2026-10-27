@@ -1,9 +1,5 @@
-import { useQueryClient } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import {
-  proposalProtectedCallsAvailableComplianceChecklistsList,
-  proposalProtectedCallsPartialUpdate,
-} from 'waldur-js-client';
+import { proposalProtectedCallsAvailableComplianceChecklistsList } from 'waldur-js-client';
 
 import {
   AsyncSelectEditField,
@@ -16,13 +12,13 @@ import FormTable from '@/form/FormTable';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
 import { userAutocomplete } from '@/marketplace/common/autocompletes';
-import { useManagedMutation } from '@/modal/useManagedMutation';
 import { CallDurationPolicy } from '@/proposals/CallDurationPolicy';
 import {
   getPublishResultsOptions,
   getUndecidedAtCompletionOptions,
 } from '@/proposals/roundLifecycle';
 import { Call } from '@/proposals/types';
+import { useUpdateCall } from '@/proposals/update/useUpdateCall';
 import { getCallReadOnlyReason } from '@/proposals/utils';
 
 /**
@@ -95,24 +91,7 @@ interface GeneralConfigurationSectionProps {
 export const GeneralConfigurationSection: FC<
   GeneralConfigurationSectionProps
 > = (props) => {
-  const queryClient = useQueryClient();
-
-  const { mutateAsync: updateCall } = useManagedMutation({
-    mutationFn: (body: any) =>
-      proposalProtectedCallsPartialUpdate({
-        path: { uuid: props.call.uuid },
-        body,
-      }),
-    successMessage: translate('The call has been updated.'),
-    errorMessage: translate('Unable to update call.'),
-    onSuccess: async () => {
-      props.refetch();
-      await queryClient.invalidateQueries({
-        queryKey: ['Call', props.call.uuid],
-      });
-    },
-    closeModal: false,
-  });
+  const updateCall = useUpdateCall(props.call, props.refetch);
 
   const handleSubmit = (formData: Record<string, any>) => {
     const body = { ...formData };

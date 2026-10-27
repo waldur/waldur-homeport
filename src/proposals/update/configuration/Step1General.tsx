@@ -43,7 +43,9 @@ export const Step1General: FC<WizardFormStepProps> = (props) => {
   const { offering } = values;
 
   useEffect(() => {
-    if (!offering) return;
+    // Until the call's offerings load, an edited template's offering cannot
+    // be matched; clearing it then made the form reset the template's limits.
+    if (!offering || !offeringsQuery?.data) return;
     const fullOffering = (offeringsQuery?.data || []).find(
       (item) => item.uuid === offering.uuid,
     );

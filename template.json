@@ -4584,6 +4584,11 @@
       "feature_area": "workflow-steps"
     }
   },
+  "Applicants can request": {
+    "context": {
+      "feature_area": "configuration"
+    }
+  },
   "Applicants learn the decision": {
     "context": {
       "feature_area": "configuration"
@@ -10434,6 +10439,11 @@
   "Choose a submission deadline": {
     "context": {
       "feature_area": "access"
+    }
+  },
+  "Choose a template first": {
+    "context": {
+      "feature_area": "resource-requests-step"
     }
   },
   "Choose an organization from the dropdown above to view its projects.": {
@@ -35349,6 +35359,16 @@
       "feature_area": "support"
     }
   },
+  "None of this call's resource templates is for {offering}. Choose one of its templates in the resource requests step.": {
+    "context": {
+      "variables": {
+        "offering": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
   "None of your {count} resources have a backend_id set. Set the backend_id to the Arrow license reference to enable consumption tracking.": {
     "context": {
       "variables": {
@@ -36982,6 +37002,11 @@
   "One resource": {
     "context": {
       "feature_area": "service-providers"
+    }
+  },
+  "One template": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "One time cost": {
@@ -53544,6 +53569,11 @@
       "feature_area": "chat"
     }
   },
+  "Several templates": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Severity": {
     "context": {
       "primary_ui_type": "title",
@@ -54609,6 +54639,12 @@
   "Some required information is missing or invalid.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Some resource requests are not from a template": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "resource-requests-step"
     }
   },
   "Some role names were not updated.": {
@@ -56906,6 +56942,11 @@
   "Template role": {
     "context": {
       "feature_area": "roles"
+    }
+  },
+  "Template selection": {
+    "context": {
+      "feature_area": "configuration"
     }
   },
   "Templates": {
@@ -59657,6 +59698,16 @@
       "feature_area": "rounds"
     }
   },
+  "This call allows one template per proposal. Choose the one to keep: saving removes the other requests.": {
+    "context": {
+      "feature_area": "resource-requests-step"
+    }
+  },
+  "This call allows one template per proposal. Choosing a template and saving replaces that request.": {
+    "context": {
+      "feature_area": "resource-requests-step"
+    }
+  },
   "This call announces each decision as it is made, so publishing only records that the round has reached this stage.": {
     "context": {
       "feature_area": "lifecycle"
@@ -59679,6 +59730,11 @@
       "feature_area": "resource-requests-step"
     }
   },
+  "This call only accepts its resource templates. Tick the templates you need and save: the other requests are removed.": {
+    "context": {
+      "feature_area": "resource-requests-step"
+    }
+  },
   "This call requires a conflict of interest declaration": {
     "context": {
       "feature_area": "create-review"
@@ -59687,6 +59743,16 @@
   "This call restricts who may apply. Check the terms before submitting.": {
     "context": {
       "feature_area": "access"
+    }
+  },
+  "This call takes requests through its resource templates. Choose one in the resource requests step.": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
+  "This call uses predefined resource templates. Choose one of the templates below. Custom resource configurations are not allowed.": {
+    "context": {
+      "feature_area": "resource-requests-step"
     }
   },
   "This call uses predefined resource templates. You can only select from the available templates below. Custom resource configurations are not allowed.": {
@@ -60315,6 +60381,18 @@
   "This project was deleted before team member metadata was captured. Only basic project recovery is available. Team members will need to be manually added after recovery.": {
     "context": {
       "feature_area": "project"
+    }
+  },
+  "This proposal holds several resource requests": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "resource-requests-step"
+    }
+  },
+  "This proposal's resource request is not from a template": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "resource-requests-step"
     }
   },
   "This provider does not have a helpdesk yet. A Waldur administrator can register one to start receiving routed tickets.": {
@@ -78914,6 +78992,19 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "{several} lets an applicant combine templates in one proposal. {one} treats them as alternatives, such as access tiers: a proposal holds one resource request at most. Cannot be set to {one} while a draft proposal holds several resource requests.": {
+    "context": {
+      "variables": {
+        "several": {
+          "type": "unknown"
+        },
+        "one": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "configuration"
     }
   },
   "{site}, service desk {project}": {

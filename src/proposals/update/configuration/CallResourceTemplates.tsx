@@ -17,9 +17,11 @@ import { ResourceTemplateCreateButton } from './ResourceTemplateCreateButton';
 import { ResourceTemplateDeleteButton } from './ResourceTemplateDeleteButton';
 import { ResourceTemplateEditButton } from './ResourceTemplateEditButton';
 import { ResourceTemplateExpandableRow } from './ResourceTemplateExpandableRow';
+import { ResourceTemplateSelectionSection } from './ResourceTemplateSelectionSection';
 
 interface CallResourceTemplatesProps {
   call: Call;
+  refetch?: () => void;
   isReadOnly?: boolean;
 }
 
@@ -44,49 +46,56 @@ export const CallResourceTemplates: FC<CallResourceTemplatesProps> = (
   });
 
   return (
-    <Table<CallResourceTemplate>
-      {...tableProps}
-      id="resource-templates"
-      columns={[
-        {
-          title: translate('Name'),
-          render: ({ row }) => <>{row.name}</>,
-        },
-        {
-          title: translate('Offering'),
-          render: ({ row }) => <>{row.requested_offering_name}</>,
-        },
-        {
-          title: translate('Plan'),
-          render: ({ row }) =>
-            renderFieldOrDash(row.requested_offering_plan?.name),
-        },
-      ]}
-      title={translate('Resource templates')}
-      verboseName={translate('Resource templates')}
-      hasQuery
-      tableActions={
-        <ResourceTemplateCreateButton
-          call={props.call}
-          refetch={tableProps.fetch}
-          disabled={props.isReadOnly}
-          tooltip={
-            props.isReadOnly ? getCallReadOnlyReason(props.call) : undefined
-          }
-        />
-      }
-      rowActions={({ row, fetch }) =>
-        props.isReadOnly ? (
-          <ActionsDropdown
-            disabled
-            tooltip={getCallReadOnlyReason(props.call)}
+    <>
+      <ResourceTemplateSelectionSection
+        call={props.call}
+        refetch={props.refetch}
+        isReadOnly={props.isReadOnly}
+      />
+      <Table<CallResourceTemplate>
+        {...tableProps}
+        id="resource-templates"
+        columns={[
+          {
+            title: translate('Name'),
+            render: ({ row }) => <>{row.name}</>,
+          },
+          {
+            title: translate('Offering'),
+            render: ({ row }) => <>{row.requested_offering_name}</>,
+          },
+          {
+            title: translate('Plan'),
+            render: ({ row }) =>
+              renderFieldOrDash(row.requested_offering_plan?.name),
+          },
+        ]}
+        title={translate('Resource templates')}
+        verboseName={translate('Resource templates')}
+        hasQuery
+        tableActions={
+          <ResourceTemplateCreateButton
+            call={props.call}
+            refetch={tableProps.fetch}
+            disabled={props.isReadOnly}
+            tooltip={
+              props.isReadOnly ? getCallReadOnlyReason(props.call) : undefined
+            }
           />
-        ) : (
-          <RowActions row={row} fetch={fetch} call={props.call} />
-        )
-      }
-      expandableRow={ResourceTemplateExpandableRow}
-      showPageSizeSelector
-    />
+        }
+        rowActions={({ row, fetch }) =>
+          props.isReadOnly ? (
+            <ActionsDropdown
+              disabled
+              tooltip={getCallReadOnlyReason(props.call)}
+            />
+          ) : (
+            <RowActions row={row} fetch={fetch} call={props.call} />
+          )
+        }
+        expandableRow={ResourceTemplateExpandableRow}
+        showPageSizeSelector
+      />
+    </>
   );
 };

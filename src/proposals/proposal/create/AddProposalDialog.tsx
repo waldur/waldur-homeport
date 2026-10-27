@@ -43,7 +43,7 @@ interface AddProposalDialogProps {
 
 export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
   const router = useRouter();
-  const { showError, showErrorResponse } = useNotify();
+  const { showError, showErrorResponse, showInfo } = useNotify();
 
   // The call's entry for this offering: it carries the plan and components the
   // amounts are priced against, and the call manager's purchase-order setting.
@@ -58,22 +58,21 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
     );
   }, [props.resolve.call, props.resolve.offering]);
 
-  // The amounts the call manager published for this offering. Attaching an
-  // offering used to create a request asking for nothing, which read as a
-  // priced row costing zero and counted towards a complete proposal. Starting
-  // from the call's own template gives the applicant a figure to adjust rather
-  // than an empty one to discover.
-  const templateLimits = useMemo(() => {
-    if (!requestedOffering) {
-      return undefined;
-    }
-    const template = (props.resolve.call as any).resource_templates?.find(
-      (item) => item.requested_offering_uuid === requestedOffering.uuid,
-    );
-    return template?.limits && Object.keys(template.limits).length
-      ? (template.limits as Record<string, number>)
-      : undefined;
-  }, [props.resolve.call, requestedOffering]);
+  // A call with templates accepts nothing else, so the offering is attached
+  // through its template; with several to choose from, the applicant picks.
+  const callTemplates = useMemo(
+    () => (props.resolve.call as any).resource_templates || [],
+    [props.resolve.call],
+  );
+  const offeringTemplates = useMemo(
+    () =>
+      requestedOffering
+        ? callTemplates.filter(
+            (item) => item.requested_offering_uuid === requestedOffering.uuid,
+          )
+        : [],
+    [callTemplates, requestedOffering],
+  );
 
   // The name is carried into the project created on approval, so it is held to
   // the deployment's project-name pattern — same rule the backend applies in
@@ -111,19 +110,33 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
         if (!requestedOffering) {
           // Don't hand back a proposal named after an offering it lacks.
           showError(attachFailed);
+        } else if (callTemplates.length && offeringTemplates.length > 1) {
+          showInfo(
+            translate(
+              'This call takes requests through its resource templates. Choose one in the resource requests step.',
+            ),
+          );
+        } else if (callTemplates.length && !offeringTemplates.length) {
+          showInfo(
+            translate(
+              "None of this call's resource templates is for {offering}. Choose one of its templates in the resource requests step.",
+              { offering: offering.name },
+            ),
+          );
         } else {
           try {
             await proposalProposalsResourcesSet({
               path: { uuid: response.data.uuid },
-              body: {
-                requested_offering_uuid: requestedOffering.uuid,
-                attributes: {},
-                // The call's published amounts, else nothing. This dialog only
-                // names the proposal; the amounts and the purchase order are
-                // the resource-request step's job on the proposal page.
-                limits: templateLimits || {},
-                purchase_order_reference: '',
-              },
+              body: callTemplates.length
+                ? { call_resource_template_uuid: offeringTemplates[0].uuid }
+                : {
+                    requested_offering_uuid: requestedOffering.uuid,
+                    attributes: {},
+                    // This dialog only names the proposal; the amounts and the
+                    // purchase order are the resource-request step's job.
+                    limits: {},
+                    purchase_order_reference: '',
+                  },
             });
           } catch (error) {
             // The backend names the actual constraint; the sentence alone does not.
