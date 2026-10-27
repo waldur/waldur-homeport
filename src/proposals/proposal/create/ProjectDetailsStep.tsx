@@ -111,6 +111,9 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
       )}
       {isFieldVisible(fieldStates, 'science_sub_domain') && (
         <ScienceDomainGroup
+          // getFieldStates already weighed the project feature against the
+          // call: a science domain the call requires is shown regardless.
+          alwaysShown
           required={isFieldRequired(fieldStates, 'science_sub_domain')}
           initialDomain={
             proposal.science_domain_uuid
