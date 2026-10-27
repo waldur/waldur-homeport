@@ -115,11 +115,22 @@ const bubbleArrow = (theme: 'light' | 'dark') => (
   </svg>
 );
 
-const bubbleChildren = (label: ReactNode, body: ReactNode) => (
+// The body is a softer tone than the label. The dark theme's bubble turns
+// light in dark mode, so its body turns dark there too, or it is unreadable.
+const bodyClassName = (theme: 'light' | 'dark') =>
+  theme === 'dark'
+    ? 'text-gray-300 dark:text-gray-dark-600'
+    : 'text-gray-300 dark:text-gray-dark-300';
+
+const bubbleChildren = (
+  label: ReactNode,
+  body: ReactNode,
+  theme: 'light' | 'dark',
+) => (
   <>
     <div className="font-medium">{label}</div>
     {body && (
-      <div className="mt-[4px] font-normal text-gray-300 dark:text-gray-dark-300">
+      <div className={cn('mt-[4px] font-normal', bodyClassName(theme))}>
         {body}
       </div>
     )}
@@ -188,7 +199,7 @@ export const Tooltip = forwardRef<HTMLButtonElement, TooltipProps>(
               style={{ zIndex }}
               className={bubbleClassName}
             >
-              {bubbleChildren(label, body)}
+              {bubbleChildren(label, body, theme)}
               <PopoverPrimitive.Arrow asChild>
                 {bubbleArrow(theme)}
               </PopoverPrimitive.Arrow>
@@ -218,7 +229,7 @@ export const Tooltip = forwardRef<HTMLButtonElement, TooltipProps>(
                 style={{ zIndex }}
                 className={bubbleClassName}
               >
-                {bubbleChildren(label, body)}
+                {bubbleChildren(label, body, theme)}
                 <TooltipPrimitive.Arrow asChild>
                   {bubbleArrow(theme)}
                 </TooltipPrimitive.Arrow>
