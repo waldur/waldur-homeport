@@ -46,7 +46,7 @@ const EndpointCard: FC<{ endpoint: string }> = ({ endpoint }) => (
     <Card.Body>
       <CredentialRow label={translate('Endpoint')}>
         <div className="flex items-center gap-1">
-          <span className="text-break">{endpoint}</span>
+          <span className="wrap-anywhere">{endpoint}</span>
           <CopyToClipboardButton value={endpoint} />
         </div>
       </CredentialRow>

@@ -186,9 +186,9 @@ export const LimitsSection = ({
                     />
                   </td>
                 )}
-                <td className="text-capitalize">{component.name}</td>
-                <td className="text-capitalize">{component.measured_unit}</td>
-                <td className="text-capitalize">
+                <td className="capitalize">{component.name}</td>
+                <td className="capitalize">{component.measured_unit}</td>
+                <td className="capitalize">
                   {component.is_boolean
                     ? limits[component.type]
                       ? translate('Enabled')

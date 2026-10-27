@@ -233,7 +233,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
                   <span
                     ref={setFeedbackCommentEl}
                     className={classNames(
-                      'message-feedback-comment fst-italic',
+                      'message-feedback-comment italic',
                       !feedbackExpanded && 'ellipsis-lines-2',
                       clickable && 'is-clickable',
                     )}

@@ -47,7 +47,7 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
             space={1.5}
             labelCol={4}
             valueCol={8}
-            valueClass="text-break"
+            valueClass="wrap-anywhere"
           />
           <Field
             label={translate('Status')}
@@ -84,7 +84,7 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
               space={1.5}
               labelCol={4}
               valueCol={8}
-              valueClass="text-break"
+              valueClass="wrap-anywhere"
             />
           )}
           {userData.reason && (
@@ -179,7 +179,7 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
                 )}
 
               {(!project.resources || project.resources.length === 0) && (
-                <div className="text-quaternary fst-italic">
+                <div className="text-quaternary italic">
                   {translate('No resources in this project')}
                 </div>
               )}

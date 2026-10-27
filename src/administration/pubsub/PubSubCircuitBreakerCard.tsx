@@ -53,7 +53,7 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
       ) : data ? (
         <Row>
           <Col lg={6}>
-            <h6 className="text-uppercase text-quaternary mb-2.5">
+            <h6 className="uppercase text-quaternary mb-2.5">
               {translate('Current state')}
             </h6>
             <Table size="sm" borderless className="mb-0">
@@ -110,7 +110,7 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
             </Table>
           </Col>
           <Col lg={6}>
-            <h6 className="text-uppercase text-quaternary mb-2.5">
+            <h6 className="uppercase text-quaternary mb-2.5">
               {translate('State history')}
             </h6>
             {data.state_history && data.state_history.length > 0 ? (

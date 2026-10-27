@@ -135,9 +135,7 @@ export const RoleHygieneTable = ({
           // each column holds one value — the Name/Code pairing the catalogue
           // table already uses.
           title: translate('Check'),
-          render: ({ row }) => (
-            <span className="font-monospace">{row.check}</span>
-          ),
+          render: ({ row }) => <span className="font-mono">{row.check}</span>,
           copyField: (row) => row.check,
         },
         {
@@ -147,7 +145,7 @@ export const RoleHygieneTable = ({
         {
           title: translate('Code'),
           render: ({ row }) => (
-            <span className="font-monospace">{row.role_name}</span>
+            <span className="font-mono">{row.role_name}</span>
           ),
           copyField: (row) => row.role_name,
         },

@@ -21,7 +21,7 @@ const RestrictionsDisplay: FC<{
     return (
       <div className="mb-3">
         <strong>{title}:</strong>{' '}
-        <span className="text-quaternary fst-italic">
+        <span className="text-quaternary italic">
           {translate('No restrictions configured')}
         </span>
       </div>
@@ -62,7 +62,7 @@ export const OrganizationRestrictionsDialog: FC<
       subtitle={customer.name}
     >
       {!hasAnyRestrictions ? (
-        <p className="text-quaternary fst-italic">
+        <p className="text-quaternary italic">
           {translate(
             'No membership restrictions are configured at the organization level.',
           )}

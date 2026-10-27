@@ -240,7 +240,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium text-xs text-uppercase">
+                <tr className="text-start text-quaternary font-medium text-xs uppercase">
                   <th>{translate('Method')}</th>
                   <th>{translate('Description')}</th>
                   <th>{translate('Formula')}</th>

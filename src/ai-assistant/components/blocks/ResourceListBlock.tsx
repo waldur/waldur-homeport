@@ -112,12 +112,12 @@ const OfflineResourceList: FC<UIBlockProps> = ({ block }) => {
               <span className="text-quaternary" style={{ minWidth: 90 }}>
                 {f.key}
               </span>
-              <span className="text-break">{f.value}</span>
+              <span className="wrap-anywhere">{f.value}</span>
             </div>
           ))}
         </div>
       ) : (
-        <div className="small text-quaternary fst-italic">
+        <div className="small text-quaternary italic">
           {translate('No filters applied')}
         </div>
       )}

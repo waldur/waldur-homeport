@@ -33,7 +33,7 @@ export const ProviderDashboardChart: FunctionComponent<
             </Col>
             <Col>
               <h1 className="font-medium">{value[0].chart.current}</h1>
-              <h5 className="font-medium text-uppercase mb-4">
+              <h5 className="font-medium uppercase mb-4">
                 {value[0].chart.title}
               </h5>
               <ChangesAmountBadge

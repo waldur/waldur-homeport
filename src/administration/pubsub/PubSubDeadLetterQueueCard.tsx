@@ -73,7 +73,7 @@ export const PubSubDeadLetterQueueCard: FC = () => {
           </Table>
           {data.dlq_queues && data.dlq_queues.length > 0 && (
             <>
-              <h6 className="text-uppercase text-quaternary mt-3 mb-2.5">
+              <h6 className="uppercase text-quaternary mt-3 mb-2.5">
                 {translate('DLQ queues')}
               </h6>
               <Table size="sm" borderless className="mb-0">

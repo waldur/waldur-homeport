@@ -53,7 +53,7 @@ export const OpenStackInstanceSummary = (
       <Component
         label={translate('Security groups')}
         value={formatSecurityGroups(props)}
-        valueClass="text-decoration-underline"
+        valueClass="underline"
       />
 
       {props.resource.server_group && (

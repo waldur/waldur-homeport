@@ -62,7 +62,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                   {translate('Discovery URL')}
                 </td>
                 <td>
-                  <code className="text-break">{values.discovery_url}</code>
+                  <code className="wrap-anywhere">{values.discovery_url}</code>
                 </td>
               </tr>
               <tr>

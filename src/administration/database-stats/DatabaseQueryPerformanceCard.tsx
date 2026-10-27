@@ -37,7 +37,7 @@ export const DatabaseQueryPerformanceCard: FC<
     >
       <Row>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-2.5">
+          <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Scan statistics')}
           </h6>
           <Table size="sm" borderless className="mb-0">
@@ -86,7 +86,7 @@ export const DatabaseQueryPerformanceCard: FC<
           )}
         </Col>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-2.5">
+          <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Temporary files')}
           </h6>
           <Table size="sm" borderless className="mb-0">

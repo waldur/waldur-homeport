@@ -101,7 +101,7 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
                 {formatRelative(comment.created)}
               </span>
               {!comment.is_public && (
-                <span className="text-uppercase">
+                <span className="uppercase">
                   {' - '}
                   {translate('Internal')}
                 </span>

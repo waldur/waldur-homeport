@@ -84,7 +84,7 @@ export const SendTestEmailDialog: FC = () => {
                 <AlertItem
                   variant="error"
                   title={translate('The message was not sent')}
-                  body={<code className="text-break">{result.error}</code>}
+                  body={<code className="wrap-anywhere">{result.error}</code>}
                 />
               ))}
           </ModalDialog>

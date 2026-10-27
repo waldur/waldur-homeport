@@ -48,10 +48,7 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
                 <ul>
                   {[1, 2, 3, 4, 5].map((i) => (
                     <li className="mb-1.5" key={i}>
-                      <Link
-                        state=""
-                        className="text-decoration-underline text-brand"
-                      >
+                      <Link state="" className="underline text-brand">
                         link {i}
                       </Link>
                     </li>

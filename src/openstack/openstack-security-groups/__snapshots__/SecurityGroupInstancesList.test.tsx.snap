@@ -205,7 +205,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                     >
                       192.168.42.14
                       <div
-                        class="my-1 mx-1.5 hover:text-brand cursor-pointer inline z-index-1 position-relative"
+                        class="my-1 mx-1.5 hover:text-brand cursor-pointer inline z-1 relative"
                       >
                         <button
                           aria-label="Copy to clipboard"
@@ -237,7 +237,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                   >
                     10.10.10.5
                     <div
-                      class="my-1 mx-1.5 hover:text-brand cursor-pointer inline z-index-1 position-relative"
+                      class="my-1 mx-1.5 hover:text-brand cursor-pointer inline z-1 relative"
                     >
                       <button
                         aria-label="Copy to clipboard"

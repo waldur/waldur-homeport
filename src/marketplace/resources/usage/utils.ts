@@ -92,7 +92,7 @@ const formatChart = (
           }
 
           if (details?.length) {
-            tooltip += `<br/><div class="mt-1.5 text-decoration-underline"><b>${translate('Details')}:</b></div>`;
+            tooltip += `<br/><div class="mt-1.5 underline"><b>${translate('Details')}:</b></div>`;
             tooltip += `<ul class="mb-0">`;
             const hasMoreBtn =
               details.length > MAX_SHOW_ITEMS + 1 && Boolean(openDialog);

@@ -40,7 +40,7 @@ const RabbitMQClusterOverviewContent: FC<
   return (
     <Row>
       <Col md={4}>
-        <h6 className="text-uppercase text-quaternary mb-2.5">
+        <h6 className="uppercase text-quaternary mb-2.5">
           {translate('Cluster info')}
         </h6>
         <ClusterInfoRow
@@ -62,7 +62,7 @@ const RabbitMQClusterOverviewContent: FC<
       </Col>
 
       <Col md={4}>
-        <h6 className="text-uppercase text-quaternary mb-2.5">
+        <h6 className="uppercase text-quaternary mb-2.5">
           {translate('Object totals')}
         </h6>
         <Table size="sm" borderless className="mb-0">
@@ -102,7 +102,7 @@ const RabbitMQClusterOverviewContent: FC<
       </Col>
 
       <Col md={4}>
-        <h6 className="text-uppercase text-quaternary mb-2.5">
+        <h6 className="uppercase text-quaternary mb-2.5">
           {translate('Queue totals')}
         </h6>
         <Table size="sm" borderless className="mb-0">
@@ -130,7 +130,7 @@ const RabbitMQClusterOverviewContent: FC<
 
         {data.listeners && data.listeners.length > 0 && (
           <>
-            <h6 className="text-uppercase text-quaternary mb-2.5 mt-3">
+            <h6 className="uppercase text-quaternary mb-2.5 mt-3">
               {translate('Listeners')}
             </h6>
             <div className="flex flex-wrap gap-1.5">

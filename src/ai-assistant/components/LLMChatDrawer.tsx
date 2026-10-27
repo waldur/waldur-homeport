@@ -71,7 +71,7 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
       {/* Desktop: expand/collapse (authenticated only — the anon panel has no
           full-screen layout) */}
       {!isAnonymous && (
-        <span className="hidden lg:inline-flex position-relative">
+        <span className="hidden lg:inline-flex relative">
           <BaseButton
             iconNode={
               expanded ? (
@@ -91,7 +91,7 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
             size="md"
           />
           {hasNewMessages && !expanded && (
-            <HeaderButtonBullet className="pe-none" />
+            <HeaderButtonBullet className="pointer-events-none" />
           )}
         </span>
       )}

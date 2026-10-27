@@ -33,7 +33,7 @@ export const InvoiceDetails = ({
           <Row>
             {invoice.customer_details && (
               <Col>
-                <div className="text-base mb-2.5 text-uppercase">
+                <div className="text-base mb-2.5 uppercase">
                   {translate('Invoice to')}
                 </div>
                 <CustomerDetails customer={invoice.customer_details} />
@@ -41,7 +41,7 @@ export const InvoiceDetails = ({
             )}
             {invoice.issuer_details && (
               <Col>
-                <div className="text-base mb-2.5 text-uppercase">
+                <div className="text-base mb-2.5 uppercase">
                   {translate('Invoice from')}
                 </div>
                 <CustomerDetails customer={invoice.issuer_details} />

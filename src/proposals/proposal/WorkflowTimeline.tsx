@@ -249,9 +249,7 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
 
       let label: ProgressStep['label'];
       if (isAfterFailure) {
-        label = (
-          <span className="text-decoration-line-through">{s.step_name}</span>
-        );
+        label = <span className="line-through">{s.step_name}</span>;
       } else if (isFailure && hasReason) {
         label = (
           <span className="inline-flex items-center gap-1">

@@ -31,6 +31,10 @@ describe('no-bootstrap-layout-utility', () => {
       { code: "type D = 'd-flex';" },
       { code: "const o = { variant: 'd-flex' };" },
       { code: "const isFlex = cls === 'd-flex';" },
+      // Tailwind's names for Bootstrap's group B utilities (#478).
+      {
+        code: 'const A = () => <div className="relative md:sticky uppercase italic font-mono wrap-anywhere no-underline select-none pointer-events-none -translate-1/2 z-1 -z-1 rounded-t-lg" />;',
+      },
       // Tailwind's own text, whitespace and position classes.
       {
         code: 'const A = () => <div className="whitespace-nowrap text-center md:text-start top-0 start-0 top-1/2 start-full" />;',
@@ -41,6 +45,28 @@ describe('no-bootstrap-layout-utility', () => {
       },
     ],
     invalid: [
+      {
+        code: 'const A = () => <div className="position-absolute position-md-sticky text-uppercase fst-italic font-monospace text-break text-decoration-none user-select-none pe-none translate-middle-x z-index-n1 rounded-top" />;',
+        output:
+          'const A = () => <div className="absolute md:sticky uppercase italic font-mono wrap-anywhere no-underline select-none pointer-events-none -translate-x-1/2 -z-1 rounded-t-lg" />;',
+        errors: [
+          ['position-absolute', 'absolute'],
+          ['position-md-sticky', 'md:sticky'],
+          ['text-uppercase', 'uppercase'],
+          ['fst-italic', 'italic'],
+          ['font-monospace', 'font-mono'],
+          ['text-break', 'wrap-anywhere'],
+          ['text-decoration-none', 'no-underline'],
+          ['user-select-none', 'select-none'],
+          ['pe-none', 'pointer-events-none'],
+          ['translate-middle-x', '-translate-x-1/2'],
+          ['z-index-n1', '-z-1'],
+          ['rounded-top', 'rounded-t-lg'],
+        ].map(([token, fix]) => ({
+          messageId: 'layoutUtility',
+          data: { token, fix },
+        })),
+      },
       {
         code: 'const A = () => <div className="text-nowrap text-wrap text-md-center" />;',
         output:

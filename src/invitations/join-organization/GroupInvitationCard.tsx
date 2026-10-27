@@ -51,7 +51,7 @@ export const GroupInvitationCard: FC<{ row: GroupInvitation }> = ({
                 <div
                   className={classNames(
                     'text-sm text-quaternary h-[80px]',
-                    !description && 'fst-italic',
+                    !description && 'italic',
                   )}
                 >
                   {description ? (

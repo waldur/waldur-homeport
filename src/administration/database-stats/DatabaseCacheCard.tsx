@@ -34,7 +34,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
     >
       <Row>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-2.5">
+          <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Hit ratios')}
           </h6>
           <div className="mb-3">
@@ -61,7 +61,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
           </div>
         </Col>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-2.5">
+          <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Memory settings')}
           </h6>
           <Table size="sm" borderless className="mb-0">

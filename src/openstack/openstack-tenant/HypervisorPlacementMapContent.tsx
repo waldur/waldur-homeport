@@ -122,7 +122,7 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
             <div className="table-responsive">
               <table className="table table-row-bordered align-middle text-xs mb-0">
                 <thead>
-                  <tr className="text-quaternary font-medium text-xs text-uppercase">
+                  <tr className="text-quaternary font-medium text-xs uppercase">
                     <th className="ps-3">{translate('Instance')}</th>
                     <th>{translate('vCPU')}</th>
                     <th>{translate('RAM')}</th>

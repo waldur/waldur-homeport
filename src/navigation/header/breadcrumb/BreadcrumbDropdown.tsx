@@ -183,7 +183,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
         </span>
 
         {Boolean(filters) && (
-          <div className="position-relative">
+          <div className="relative">
             <BaseButton
               iconNode={<FunnelSimpleIcon weight="bold" />}
               tooltip={translate('Toggle filters')}

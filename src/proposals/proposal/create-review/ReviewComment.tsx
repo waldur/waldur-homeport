@@ -50,7 +50,7 @@ export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
             {props.children}
           </p>
         ) : (
-          <p className="text-quaternary fst-italic mb-0">
+          <p className="text-quaternary italic mb-0">
             {translate('No explanation')}
           </p>
         )}

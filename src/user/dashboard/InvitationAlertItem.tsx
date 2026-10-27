@@ -39,7 +39,7 @@ export const InvitationAlertItem: FC<InvitationAlertItemProps> = ({
                 })}
           </div>
           {invitation.extra_invitation_text && (
-            <div className="text-quaternary mt-1 fst-italic">
+            <div className="text-quaternary mt-1 italic">
               "{invitation.extra_invitation_text}"
             </div>
           )}

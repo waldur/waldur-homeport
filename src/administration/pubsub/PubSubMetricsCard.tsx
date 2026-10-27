@@ -33,7 +33,7 @@ export const PubSubMetricsCard: FC = () => {
       ) : data ? (
         <Row>
           <Col lg={6}>
-            <h6 className="text-uppercase text-quaternary mb-2.5">
+            <h6 className="uppercase text-quaternary mb-2.5">
               {translate('Message counts')}
             </h6>
             <Table size="sm" borderless className="mb-0">
@@ -78,7 +78,7 @@ export const PubSubMetricsCard: FC = () => {
             </Table>
           </Col>
           <Col lg={6}>
-            <h6 className="text-uppercase text-quaternary mb-2.5">
+            <h6 className="uppercase text-quaternary mb-2.5">
               {translate('Additional metrics')}
             </h6>
             <Table size="sm" borderless className="mb-0">

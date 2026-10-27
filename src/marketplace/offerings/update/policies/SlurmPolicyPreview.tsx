@@ -43,7 +43,7 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
       <h6 className="font-semibold mb-2.5">
         {translate('Threshold Visualization')}
       </h6>
-      <div className="position-relative">
+      <div className="relative">
         <Progress
           size="lg"
           label={translate('Threshold Visualization')}
@@ -67,7 +67,7 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
         />
         {currentUsagePct !== undefined && (
           <div
-            className="position-absolute top-0 bottom-0"
+            className="absolute top-0 bottom-0"
             style={{
               left: `${currentUsagePct}%`,
               width: '3px',
@@ -79,7 +79,7 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
             })}
           >
             <div
-              className="position-absolute font-bold text-xs"
+              className="absolute font-bold text-xs"
               style={{
                 top: '-20px',
                 left: '-30px',

@@ -211,7 +211,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   return (
     <div className="tc-header">
       {onBack && (
-        <div className="position-relative inline-flex">
+        <div className="relative inline-flex">
           <BaseButton
             variant="text-secondary"
             size="sm"

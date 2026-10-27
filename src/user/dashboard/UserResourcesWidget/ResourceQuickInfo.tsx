@@ -176,7 +176,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                     href={endpoint.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-brand text-decoration-none flex items-center me-1.5"
+                    className="text-brand no-underline flex items-center me-1.5"
                   >
                     <ArrowSquareOutIcon
                       size={14}

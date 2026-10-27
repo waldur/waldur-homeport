@@ -43,7 +43,7 @@ export const NoResult: FC<NoResultProps> = ({
       style={style}
     >
       <RadialBackground className="background" />
-      <div className="text-center flex flex-col items-center pb-8 position-relative z-index-1">
+      <div className="text-center flex flex-col items-center pb-8 relative z-1">
         <div className="icon-square icon-lg search-icon">{icon}</div>
 
         <div>

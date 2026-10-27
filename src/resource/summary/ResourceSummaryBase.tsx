@@ -71,7 +71,7 @@ export function ResourceSummaryBase<T extends Resource = Resource>(
       <Component
         label={translate('Metadata')}
         value={ResourceMetadataLink(props)}
-        valueClass="text-decoration-underline"
+        valueClass="underline"
       />
     </>
   );

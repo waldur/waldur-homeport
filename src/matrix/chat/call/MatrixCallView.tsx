@@ -300,7 +300,7 @@ const CallStage: FC<{
 
   return (
     <div className="flex flex-col h-full">
-      <div className="position-relative grow overflow-hidden">
+      <div className="relative grow overflow-hidden">
         {compact ? (
           compactTrack ? (
             <FocusLayout trackRef={compactTrack} style={{ height: '100%' }} />

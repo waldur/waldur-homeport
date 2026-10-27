@@ -29,7 +29,7 @@ export const PublicCallExpandableRow: FunctionComponent<{
               </Card.Body>
             </Card>
           ) : (
-            <p className="text-quaternary fst-italic text-xs mb-0">
+            <p className="text-quaternary italic text-xs mb-0">
               {translate('No description')}
             </p>
           )}
@@ -46,7 +46,7 @@ export const PublicCallExpandableRow: FunctionComponent<{
           </Col>
         ) : (
           <Col xs={12}>
-            <p className="text-quaternary fst-italic text-xs mb-0">
+            <p className="text-quaternary italic text-xs mb-0">
               {translate('No active round')}
             </p>
           </Col>

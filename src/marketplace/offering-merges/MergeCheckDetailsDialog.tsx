@@ -43,8 +43,10 @@ const DetailsValue: FC<{ value: unknown }> = ({ value }) => {
       <dl className="row mb-0">
         {entries.map(([key, item]) => (
           <Fragment key={key}>
-            <dt className="col-sm-4 text-break">{humanizeDetailsKey(key)}</dt>
-            <dd className="col-sm-8 mb-1.5 text-break">
+            <dt className="col-sm-4 wrap-anywhere">
+              {humanizeDetailsKey(key)}
+            </dt>
+            <dd className="col-sm-8 mb-1.5 wrap-anywhere">
               <DetailsValue value={item} />
             </dd>
           </Fragment>

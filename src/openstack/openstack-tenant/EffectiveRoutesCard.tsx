@@ -83,7 +83,7 @@ const SubnetCell: FC<{ row: EffectiveRoute }> = ({ row }) => {
   }
   if (row.source === 'static') {
     return (
-      <span className="text-quaternary fst-italic">
+      <span className="text-quaternary italic">
         {translate('beyond connected and default routes')}
       </span>
     );

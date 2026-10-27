@@ -78,7 +78,7 @@ export const SecurityGroupRulesDiff: FC<{ context: RulesChangedContext }> = ({
           </strong>
           <ul className="mb-0">
             {added_rules.map((rule, i) => (
-              <li key={`a-${i}`} className="font-monospace">
+              <li key={`a-${i}`} className="font-mono">
                 + {formatSecurityGroupRule(rule)}
               </li>
             ))}
@@ -94,7 +94,7 @@ export const SecurityGroupRulesDiff: FC<{ context: RulesChangedContext }> = ({
           </strong>
           <ul className="mb-0">
             {removed_rules.map((rule, i) => (
-              <li key={`r-${i}`} className="font-monospace">
+              <li key={`r-${i}`} className="font-mono">
                 − {formatSecurityGroupRule(rule)}
               </li>
             ))}
@@ -110,7 +110,7 @@ export const SecurityGroupRulesDiff: FC<{ context: RulesChangedContext }> = ({
           </strong>
           <ul className="mb-0">
             {modified_rules.map((entry, i) => (
-              <li key={`m-${i}`} className="font-monospace">
+              <li key={`m-${i}`} className="font-mono">
                 {formatSecurityGroupRule(entry.old)} →{' '}
                 {formatSecurityGroupRule(entry.new)}{' '}
                 <span className="text-quaternary">
@@ -194,7 +194,7 @@ export const AllowedAddressPairsDiff: FC<{
           </strong>
           <ul className="mb-0">
             {added_pairs.map((p, i) => (
-              <li key={`a-${i}`} className="font-monospace">
+              <li key={`a-${i}`} className="font-mono">
                 + {formatAllowedAddressPair(p)}
               </li>
             ))}
@@ -210,7 +210,7 @@ export const AllowedAddressPairsDiff: FC<{
           </strong>
           <ul className="mb-0">
             {removed_pairs.map((p, i) => (
-              <li key={`r-${i}`} className="font-monospace">
+              <li key={`r-${i}`} className="font-mono">
                 − {formatAllowedAddressPair(p)}
               </li>
             ))}
@@ -226,7 +226,7 @@ export const AllowedAddressPairsDiff: FC<{
           </strong>
           <ul className="mb-0">
             {modified_pairs.map((entry, i) => (
-              <li key={`m-${i}`} className="font-monospace">
+              <li key={`m-${i}`} className="font-mono">
                 {formatAllowedAddressPair(entry.old)} →{' '}
                 {formatAllowedAddressPair(entry.new)}
               </li>

@@ -71,9 +71,7 @@ export const RolesList: FC<TableWithPortal> = ({ portal }) => {
           // stays the copyable field.
           title: translate('Code'),
           orderField: 'name',
-          render: ({ row }) => (
-            <span className="font-monospace">{row.name}</span>
-          ),
+          render: ({ row }) => <span className="font-mono">{row.name}</span>,
           copyField: (row) => row.name,
         },
         {

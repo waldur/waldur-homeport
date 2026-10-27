@@ -19,7 +19,7 @@ export class SecretField extends Component<
             <EyeIcon size={20} weight="bold" />
           )}
         </button>{' '}
-        <span className="text-break">{this.getValue()}</span>
+        <span className="wrap-anywhere">{this.getValue()}</span>
       </>
     );
   }

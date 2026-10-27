@@ -270,7 +270,7 @@ export const ReviewerInvitationAccept: FC = () => {
       {/* COI Policy (informational - disclosure happens at assignment stage) */}
       <COIPolicyCard config={invitation.coi_configuration} />
 
-      <div className="position-sticky bottom-0 z-index-2 flex max-md:flex-wrap items-center justify-between gap-3 border rounded bg-primary px-5 py-3">
+      <div className="sticky bottom-0 z-2 flex max-md:flex-wrap items-center justify-between gap-3 border rounded bg-primary px-5 py-3">
         <div className="hidden md:flex items-center gap-1.5 flex-1 text-quaternary">
           {hasCOIPolicy(invitation.coi_configuration) && (
             <>

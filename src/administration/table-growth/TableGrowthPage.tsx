@@ -58,7 +58,7 @@ export const TableGrowthPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
     <Link
       state="admin-database"
       params={{ tab: 'settings' }}
-      className="text-decoration-none self-center"
+      className="no-underline self-center"
     >
       <Badge
         variant={isEnabled ? 'success' : 'warning'}

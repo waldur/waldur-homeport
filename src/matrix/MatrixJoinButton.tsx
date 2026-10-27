@@ -36,7 +36,7 @@ const MaskedSecret: FC<{ value: string }> = ({ value }) => {
   const [revealed, setRevealed] = useState(false);
   return (
     <div className="flex justify-between items-center">
-      <span className="text-break">{revealed ? value : '•'.repeat(12)}</span>
+      <span className="wrap-anywhere">{revealed ? value : '•'.repeat(12)}</span>
       <div className="flex items-center shrink-0">
         <BaseButton
           iconNode={

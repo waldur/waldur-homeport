@@ -148,7 +148,7 @@ export const EmailHealthPage: FC = () => {
             variant="error"
             className="mb-5"
             title={translate('The relay could not be reached')}
-            body={<code className="text-break">{probe.data.error}</code>}
+            body={<code className="wrap-anywhere">{probe.data.error}</code>}
           />
         ))}
 

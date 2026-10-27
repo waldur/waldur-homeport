@@ -484,18 +484,6 @@ $table-cell-padding-x-sm: 0.5rem !default;
 
 $table-border-width: $border-width !default;
 
-// Zindex
-$zindex-values: (
-  n1: -1,
-  n2: -2,
-  0: 0,
-  1: 1,
-  2: 2,
-  3: 3,
-  4: 4,
-  5: 5,
-) !default;
-
 // Bullet
 $bullet: (
   bg-color: var(--text-quinary),

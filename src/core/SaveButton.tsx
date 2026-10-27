@@ -21,7 +21,7 @@ export const SaveButton: FC<SaveButtonProps> = ({
   onClick,
 }) => {
   const button = (
-    <div className="position-relative">
+    <div className="relative">
       <BaseButton
         className={`min-w-[80px] ${className || ''}`.trim()}
         variant={dirty ? 'warning' : 'primary'}
@@ -38,7 +38,7 @@ export const SaveButton: FC<SaveButtonProps> = ({
           variant="warning"
           shape="circle"
           tone="outline"
-          className="position-absolute top-0 start-full translate-middle"
+          className="absolute top-0 start-full -translate-1/2"
         >
           !
         </Badge>
