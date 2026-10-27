@@ -108,7 +108,7 @@
     "monaco-editor": "^0.52.2",
     "papaparse": "^5.2.2",
     "pdfmake": "^0.2.18",
-    "qs": "^6.16.0",
+    "qs": "^6.16.1",
     "react": "^18.3.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^18.3.0",
@@ -360,7 +360,7 @@
   "resolutions": {
     "@codesandbox/nodebox": "portal:./stubs/nodebox",
     "lodash-es": "^4.18.0",
-    "qs": "^6.16.0",
+    "qs": "^6.16.1",
     "diff": "^5.2.2",
     "@xmldom/xmldom": "^0.8.15",
     "flatted": "^3.4.2",
