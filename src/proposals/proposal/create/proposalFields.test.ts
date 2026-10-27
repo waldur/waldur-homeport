@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { ENV } from '@/core/config';
 
@@ -21,10 +21,23 @@ const setAccessMode = (mode?: string) => {
   };
 };
 
+const setScienceDomains = (enabled?: boolean) => {
+  (ENV as any).FEATURES = {
+    ...(ENV as any).FEATURES,
+    project: { ...(ENV as any).FEATURES?.project, science_domain: enabled },
+  };
+};
+
 describe('proposal field states', () => {
+  // A deployment with science domains, so the science domain follows only the
+  // call; the cases without them are below.
+  beforeEach(() => setScienceDomains(true));
   // Every other case in here wants the call-managed default rather than
   // whatever access mode ran last.
-  afterEach(() => setAccessMode(undefined));
+  afterEach(() => {
+    setAccessMode(undefined);
+    setScienceDomains(undefined);
+  });
 
   it('falls back to the pre-configuration behaviour', () => {
     // Matters for calls created before the feature, and for the moment before
@@ -104,6 +117,37 @@ describe('proposal field states', () => {
       'project_summary',
       'science_sub_domain',
     ]);
+  });
+});
+
+// waldur/waldur-homeport#131 on GitHub: a call requiring a science domain on a
+// deployment without the project feature counted a field it never showed.
+describe('science domain without the project.science_domain feature', () => {
+  it('asks for one the call requires', () => {
+    const states = getFieldStates(
+      { field_science_sub_domain: 'required' },
+      false,
+    );
+
+    expect(isFieldVisible(states, 'science_sub_domain')).toBe(true);
+    expect(getRequiredFields(states)).toContain('science_sub_domain');
+  });
+
+  it('neither shows nor counts one the call merely offers', () => {
+    // Optional is the default, so this is every call that never set it.
+    const states = getFieldStates(undefined, false);
+
+    expect(isFieldVisible(states, 'science_sub_domain')).toBe(false);
+    expect(getTrackedFields(states)).not.toContain('science_sub_domain');
+  });
+
+  it('keeps one the call hides hidden', () => {
+    const states = getFieldStates(
+      { field_science_sub_domain: 'hidden' },
+      false,
+    );
+
+    expect(isFieldVisible(states, 'science_sub_domain')).toBe(false);
   });
 });
 

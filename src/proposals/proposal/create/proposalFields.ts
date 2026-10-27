@@ -1,3 +1,5 @@
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
 import {
   ProposalFieldConfig,
   ProposalFieldName,
@@ -19,16 +21,29 @@ const CONFIGURABLE_FIELDS: ProposalFieldName[] = [
  * public call, and a request that has not resolved yet, or a deployment whose
  * backend predates the config, must still render a usable form rather than an
  * empty one.
+ *
+ * A science domain the call requires is asked for whatever the
+ * project.science_domain feature says: the backend refuses the proposal
+ * without one, so hiding it left a required field nobody could fill. One the
+ * call merely offers follows the feature, as the project forms do, so a
+ * deployment without science domains shows no picker on every proposal.
  */
 export const getFieldStates = (
   config?: ProposalFieldConfig,
-): Record<ProposalFieldName, ProposalFieldState> => ({
-  project_summary: config?.field_project_summary ?? 'required',
-  description: config?.field_description ?? 'optional',
-  science_sub_domain: config?.field_science_sub_domain ?? 'optional',
-  supporting_documentation:
-    config?.field_supporting_documentation ?? 'optional',
-});
+  scienceDomainsEnabled = isFeatureVisible(ProjectFeatures.science_domain),
+): Record<ProposalFieldName, ProposalFieldState> => {
+  const scienceSubDomain = config?.field_science_sub_domain ?? 'optional';
+  return {
+    project_summary: config?.field_project_summary ?? 'required',
+    description: config?.field_description ?? 'optional',
+    science_sub_domain:
+      scienceSubDomain === 'optional' && !scienceDomainsEnabled
+        ? 'hidden'
+        : scienceSubDomain,
+    supporting_documentation:
+      config?.field_supporting_documentation ?? 'optional',
+  };
+};
 
 export const isFieldVisible = (
   states: Record<ProposalFieldName, ProposalFieldState>,

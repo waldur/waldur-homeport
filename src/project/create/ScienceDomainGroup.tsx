@@ -15,11 +15,16 @@ interface ScienceDomainGroupProps {
   // Marks the sub-domain as mandatory. The parent domain is a navigation aid
   // for picking one, so only the sub-domain carries the asterisk.
   required?: boolean;
+  // Shows the selector whatever the project.science_domain feature says, for
+  // a caller that has decided that itself: the proposal form, through
+  // getFieldStates, shows a science domain its call requires.
+  alwaysShown?: boolean;
 }
 
 export const ScienceDomainGroup = ({
   initialDomain = null,
   required = false,
+  alwaysShown = false,
 }: ScienceDomainGroupProps = {}) => {
   const form = useForm();
   const [domains, setDomains] = useState([]);
@@ -28,30 +33,42 @@ export const ScienceDomainGroup = ({
   const [loadingDomains, setLoadingDomains] = useState(true);
   const [loadingSubDomains, setLoadingSubDomains] = useState(false);
 
-  const featureVisible = isFeatureVisible(ProjectFeatures.science_domain);
+  const shown = alwaysShown || isFeatureVisible(ProjectFeatures.science_domain);
 
   useEffect(() => {
-    if (!featureVisible) {
+    if (!shown) {
       setLoadingDomains(false);
       return;
     }
     let cancelled = false;
-    scienceDomainsList({ query: { page_size: 100 } }).then(({ data }) => {
-      if (!cancelled) {
-        setDomains(data);
-        setLoadingDomains(false);
-      }
-    });
+    scienceDomainsList({ query: { page_size: 100 } })
+      .then(({ data }) => {
+        if (!cancelled) {
+          setDomains(data);
+        }
+      })
+      .catch(() => {
+        // As for sub-domains below: an empty select, not an unhandled
+        // rejection and a spinner that never stops.
+        if (!cancelled) {
+          setDomains([]);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setLoadingDomains(false);
+        }
+      });
     return () => {
       cancelled = true;
     };
-  }, [featureVisible]);
+  }, [shown]);
 
   // Loading is keyed on the selected domain rather than done inside the change
   // handler, so a domain preselected from an existing value loads its
   // sub-domains on mount too.
   useEffect(() => {
-    if (!featureVisible || !selectedDomain) {
+    if (!shown || !selectedDomain) {
       setSubDomains([]);
       return;
     }
@@ -81,7 +98,7 @@ export const ScienceDomainGroup = ({
     return () => {
       cancelled = true;
     };
-  }, [featureVisible, selectedDomain]);
+  }, [shown, selectedDomain]);
 
   const handleDomainChange = useCallback(
     (option) => {
@@ -91,7 +108,7 @@ export const ScienceDomainGroup = ({
     [form],
   );
 
-  if (!featureVisible) {
+  if (!shown) {
     return null;
   }
 
