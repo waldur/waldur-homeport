@@ -53,7 +53,7 @@ export const ProviderDefaultSubnets: FC<ProviderDefaultSubnetsProps> = ({
       </div>
       {withDefaults.map((offering) => (
         <div key={offering.uuid} className="flex flex-wrap gap-1.5 mb-1.5">
-          <span className="text-nowrap">{offering.name}</span>
+          <span className="whitespace-nowrap">{offering.name}</span>
           {(offering.default_access_subnets ?? []).map((subnet) => (
             <Badge
               key={subnet.uuid}

@@ -74,12 +74,12 @@ describe('BaseButton disabled tooltip', () => {
       <BaseButton
         size="sm"
         label="Back"
-        className="me-2.5 align-self-center"
+        className="me-2.5 self-center"
         tooltip="Go back"
       />,
     );
     const button = screen.getByRole('button', { name: 'Back' });
-    expect(button).toHaveClass('align-self-center');
+    expect(button).toHaveClass('self-center');
   });
 });
 

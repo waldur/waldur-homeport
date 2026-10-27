@@ -295,12 +295,12 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
   // Derived-size tooltip: dotted underline on the label itself
   const labelContent = row.tooltip ? (
     <Tooltip label={row.tooltip}>
-      <span className="text-nowrap underline decoration-dotted cursor-help">
+      <span className="whitespace-nowrap underline decoration-dotted cursor-help">
         {row.label}
       </span>
     </Tooltip>
   ) : (
-    <span className="text-nowrap">{row.label}</span>
+    <span className="whitespace-nowrap">{row.label}</span>
   );
 
   // Marketplace-managed badge: canonical WarnTip after the label
@@ -319,7 +319,7 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
 
   return (
     <tr>
-      <td className="text-nowrap">{labelCell}</td>
+      <td className="whitespace-nowrap">{labelCell}</td>
       <td>{renderFieldOrDash(formatUsage(row.usage, row.name))}</td>
       <td>{renderFieldOrDash(row.limitDisplay)}</td>
       <td onClick={(e) => e.stopPropagation()}>

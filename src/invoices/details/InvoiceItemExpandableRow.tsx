@@ -152,12 +152,12 @@ const InvoiceItemLine: FC<{
           </>
         )}
       </td>
-      <td className="text-nowrap">
+      <td className="whitespace-nowrap">
         {isAdjustment
           ? null
           : `${formatDate(item.start)} – ${formatDate(item.end)}`}
       </td>
-      <td className="text-nowrap">
+      <td className="whitespace-nowrap">
         {item.measured_unit}
         {getBillingUnitSuffix(item.unit) && (
           <span className="text-quaternary">

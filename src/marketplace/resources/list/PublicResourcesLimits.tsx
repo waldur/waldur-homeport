@@ -15,7 +15,7 @@ export const PublicResourcesLimits = ({
   const keyValues = limitEntries(row.limits);
   if (!keyValues.length) return DASH_ESCAPE_CODE;
   return (
-    <div className="text-nowrap">
+    <div className="whitespace-nowrap">
       {keyValues.map((keyValue, index) => (
         <span key={index} className="block">
           {keyValue}

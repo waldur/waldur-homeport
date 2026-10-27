@@ -27,7 +27,7 @@ export const CapacityIndicator: FC<CapacityIndicatorProps> = ({
         max={max}
         variant={variant}
       />
-      <small className="text-nowrap">
+      <small className="whitespace-nowrap">
         {open}/{max}
       </small>
     </div>

@@ -52,7 +52,7 @@ export const CustomerProfile = ({
           className="flex-wrap text-quaternary leading-none"
         >
           {customer.organization_groups?.length > 0 && (
-            <span className="text-nowrap">
+            <span className="whitespace-nowrap">
               <HexagonIcon size={18} weight="duotone" className="me-1" />
               {customer.organization_groups
                 ?.map((group) => group.name)
@@ -60,20 +60,20 @@ export const CustomerProfile = ({
             </span>
           )}
           {customer.email && (
-            <span className="text-nowrap">
+            <span className="whitespace-nowrap">
               <AtIcon size={18} weight="duotone" className="me-1" />
               {customer.email}
             </span>
           )}
           {customer.phone_number && (
-            <span className="text-nowrap">
+            <span className="whitespace-nowrap">
               <DeviceMobileIcon size={18} weight="duotone" className="me-1" />
               {formatPhoneNumber(customer.phone_number)}
             </span>
           )}
           {customer.registration_code &&
             typeof customer.registration_code === 'string' && (
-              <span className="text-nowrap">
+              <span className="whitespace-nowrap">
                 <HashIcon size={18} weight="duotone" className="me-1" />
                 {customer.registration_code}
               </span>

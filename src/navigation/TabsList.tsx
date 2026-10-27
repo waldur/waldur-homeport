@@ -229,7 +229,7 @@ export const TabsList: FC = () => {
           <li
             key={parentIndex}
             data-testid={tabTestId(parentTab)}
-            className="flex items-center text-nowrap"
+            className="flex items-center whitespace-nowrap"
           >
             <TabLink
               to={

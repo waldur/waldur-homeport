@@ -34,7 +34,7 @@ export const TableFilterButton = ({
           size="sm"
           shape="pill"
           tone="outline"
-          className="position-absolute top-0 start-100 translate-middle text-xs"
+          className="position-absolute top-0 start-full translate-middle text-xs"
         >
           {count > 9 ? '9+' : count}
         </Badge>

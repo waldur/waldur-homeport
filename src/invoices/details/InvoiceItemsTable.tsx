@@ -170,7 +170,7 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
           : []),
       ]}
       title={
-        <div className="text-nowrap">
+        <div className="whitespace-nowrap">
           {translate('Invoice no.')} {invoice.number}
           {!invoiceView && customer.agreement_number && (
             <Badge

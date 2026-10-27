@@ -39,7 +39,7 @@ const ClickCount: FunctionComponent<{
 }> = ({ clickCount }) =>
   clickCount ? (
     <Tooltip label={translate('Offering links opened from this reply')}>
-      <span className="text-nowrap">
+      <span className="whitespace-nowrap">
         {translate('{count} clicks', { count: clickCount })}
       </span>
     </Tooltip>

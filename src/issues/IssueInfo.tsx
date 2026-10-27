@@ -45,10 +45,12 @@ const IssueLogDialog = ({ issue }: { issue: Issue }) => {
           <tbody>
             {processingLog.map((entry, index) => (
               <tr key={index}>
-                <td className="text-nowrap">
+                <td className="whitespace-nowrap">
                   {formatDateTime(entry.timestamp)}
                 </td>
-                <td className="text-nowrap">{formatEventName(entry.event)}</td>
+                <td className="whitespace-nowrap">
+                  {formatEventName(entry.event)}
+                </td>
                 <td>
                   <code className="small">
                     {JSON.stringify(entry.details, null, 2)}

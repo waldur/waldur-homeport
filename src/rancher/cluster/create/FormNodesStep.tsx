@@ -174,7 +174,7 @@ const renderNodeRows = ({ fields, flavors }: any) => {
       )}
       <BaseButton
         variant="tertiary"
-        className="text-nowrap"
+        className="whitespace-nowrap"
         onClick={addRow}
         iconNode={<PlusIcon weight="bold" />}
         label={translate('Add')}

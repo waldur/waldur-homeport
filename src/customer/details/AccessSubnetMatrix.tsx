@@ -219,7 +219,7 @@ export const AccessSubnetMatrix: FC<AccessSubnetMatrixProps> = ({
         title: translate('IP'),
         orderField: 'inet',
         render: ({ row }) => (
-          <span className="text-nowrap">
+          <span className="whitespace-nowrap">
             {row.inet}
             {isLocked(row) && (
               <Tooltip

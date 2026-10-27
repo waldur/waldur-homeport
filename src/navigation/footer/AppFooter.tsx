@@ -142,7 +142,7 @@ export const AppFooter: FunctionComponent = () => {
             'flex flex-col md:flex-row items-center justify-between text-sm',
           )}
         >
-          <div className="text-primary font-medium order-2 order-md-1 icon-align">
+          <div className="text-primary font-medium order-2 md:order-1 icon-align">
             {user && (
               <>
                 {translate('Version')}: {ENV.buildId}

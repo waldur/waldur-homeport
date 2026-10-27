@@ -484,19 +484,6 @@ $table-cell-padding-x-sm: 0.5rem !default;
 
 $table-border-width: $border-width !default;
 
-// Opacity
-$opacity-values: (
-  0: 0,
-  5: 0.05,
-  10: 0.1,
-  15: 0.15,
-  20: 0.2,
-  25: 0.25,
-  50: 0.5,
-  75: 0.75,
-  100: 1,
-) !default;
-
 // Zindex
 $zindex-values: (
   n1: -1,

@@ -61,10 +61,10 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
         title: translate('Scheduled'),
         render: ({ row }) => (
           <>
-            <span className="block text-nowrap">
+            <span className="block whitespace-nowrap">
               {formatMediumDateTime(row.scheduled_start)}
             </span>
-            <span className="block text-nowrap text-quaternary">
+            <span className="block whitespace-nowrap text-quaternary">
               {formatMediumDateTime(row.scheduled_end)}
             </span>
           </>
@@ -78,12 +78,12 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
           }
           return (
             <>
-              <span className="block text-nowrap">
+              <span className="block whitespace-nowrap">
                 {row.actual_start
                   ? formatMediumDateTime(row.actual_start)
                   : DASH_ESCAPE_CODE}
               </span>
-              <span className="block text-nowrap text-quaternary">
+              <span className="block whitespace-nowrap text-quaternary">
                 {row.actual_end
                   ? formatMediumDateTime(row.actual_end)
                   : DASH_ESCAPE_CODE}
@@ -104,7 +104,7 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
         render: ({ row }) => {
           const delta = formatDelta(row.overrun_minutes);
           return (
-            <span className={`text-nowrap ${delta.className}`}>
+            <span className={`whitespace-nowrap ${delta.className}`}>
               {delta.text}
             </span>
           );

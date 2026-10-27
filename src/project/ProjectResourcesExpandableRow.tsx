@@ -116,7 +116,7 @@ const UsageLine: FC<{ item: ComponentUsage }> = ({ item }) => (
     ) : (
       <span />
     )}
-    <span className="text-nowrap">
+    <span className="whitespace-nowrap">
       {formatFigures(item)}
       {item.percent !== null && (
         <span className="text-tertiary ms-1">({item.percent}%)</span>
@@ -156,7 +156,7 @@ export const ResourceUsageLimits: FC<{
   const hiddenCount = items.length - INLINE_COMPONENTS;
   return (
     // Fixed name and minimum figure widths line the components up across rows.
-    <div className="flex items-center gap-1.5 text-xs text-nowrap">
+    <div className="flex items-center gap-1.5 text-xs whitespace-nowrap">
       {items.slice(0, INLINE_COMPONENTS).map((item, index) => (
         <span key={item.component.type} className="flex items-center gap-1.5">
           {index > 0 && <span className="text-tertiary">·</span>}

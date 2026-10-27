@@ -107,7 +107,7 @@ export const TokenUsageBadge: FunctionComponent<{
   if (inputTokens == null && outputTokens == null) return null;
   return (
     <Tooltip label={label}>
-      <span className="text-quaternary text-nowrap">
+      <span className="text-quaternary whitespace-nowrap">
         {prefix}
         {inputTokens != null && <>↓ {formatUsageValue(inputTokens)}</>}
         {inputTokens != null && outputTokens != null && ' / '}
@@ -164,7 +164,7 @@ export const MessageGutter: FunctionComponent<
           {SENDER_BADGES[sender].label}
         </Badge>
       </div>
-      <span className="text-nowrap">{formatDate(created)}</span>
+      <span className="whitespace-nowrap">{formatDate(created)}</span>
       <TokenUsageBadge
         id={tokenId}
         label={tokenLabel ?? translate('Message input / output tokens')}

@@ -67,7 +67,7 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
   return (
     <div className="flex flex-col h-full">
       <div className="flex flex-wrap justify-between items-center gap-2.5 px-4 py-3 border-b-[1px] border-b-secondary">
-        <div className="flex items-center text-nowrap">
+        <div className="flex items-center whitespace-nowrap">
           <span className="font-medium me-1.5">{translate('Changes')}:</span>
           <StateIndicator
             label={`${changedCount} ${translate('field(s) changed')}`}
@@ -142,12 +142,12 @@ const TableDiffView: FunctionComponent<{
           >
             <td className="ps-4">{diff.label}</td>
             <td>
-              <pre className="mb-0 text-xs text-quaternary text-wrap text-break bg-transparent">
+              <pre className="mb-0 text-xs text-quaternary whitespace-normal text-break bg-transparent">
                 {formatFieldValue(diff.oldValue)}
               </pre>
             </td>
             <td>
-              <pre className="mb-0 text-xs text-wrap text-break bg-transparent">
+              <pre className="mb-0 text-xs whitespace-normal text-break bg-transparent">
                 {formatFieldValue(diff.newValue)}
               </pre>
             </td>

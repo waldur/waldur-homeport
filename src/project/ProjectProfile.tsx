@@ -47,7 +47,7 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
             variant="pink"
             shape="pill"
             tone="outline"
-            className="ms-1.5 text-nowrap"
+            className="ms-1.5 whitespace-nowrap"
           >
             {translate('Course')}
           </Badge>
@@ -56,7 +56,7 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
             variant="blue"
             shape="pill"
             tone="outline"
-            className="ms-1.5 text-nowrap"
+            className="ms-1.5 whitespace-nowrap"
           >
             {translate('Public')}
           </Badge>

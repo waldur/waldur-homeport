@@ -347,7 +347,10 @@ export const MultiChangeLimitsDialog: FC<MultiChangeLimitsDialogProps> = (
                         <th>{translate('Resource')}</th>
                         <th>{translate('Project')}</th>
                         {data.unionComponents.map((component) => (
-                          <th key={component.type} className="text-nowrap">
+                          <th
+                            key={component.type}
+                            className="whitespace-nowrap"
+                          >
                             {component.name}
                             {component.measured_unit
                               ? ` (${component.measured_unit})`
@@ -390,7 +393,7 @@ export const MultiChangeLimitsDialog: FC<MultiChangeLimitsDialogProps> = (
                               return (
                                 <td
                                   key={component.type}
-                                  className="text-nowrap"
+                                  className="whitespace-nowrap"
                                 >
                                   <span className="inline-flex items-center gap-1.5">
                                     <span>

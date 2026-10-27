@@ -117,7 +117,7 @@ const renderScheduleRows = ({
       ))}
       <BaseButton
         variant="text-primary"
-        className="text-nowrap"
+        className="whitespace-nowrap"
         onClick={addRow}
         iconNode={<PlusIcon weight="bold" />}
         label={translate('Add time period')}

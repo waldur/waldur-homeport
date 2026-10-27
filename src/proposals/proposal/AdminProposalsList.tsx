@@ -119,7 +119,7 @@ export const AdminProposalsList: FC<any> = ({ ...props }) => {
         {
           title: translate('Ending'),
           render: ({ row }) => <EndingField endDate={row.round?.cutoff_time} />,
-          className: 'text-nowrap',
+          className: 'whitespace-nowrap',
           keys: ['round'],
           id: 'ending',
         },

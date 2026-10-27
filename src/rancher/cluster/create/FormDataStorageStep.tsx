@@ -57,7 +57,7 @@ const renderDataVolumeRows = ({
         <td colSpan={4}>
           <BaseButton
             variant="tertiary"
-            className="text-nowrap"
+            className="whitespace-nowrap"
             onClick={() =>
               fields.push({ size: 1, volume_type: defaultVolumeType })
             }

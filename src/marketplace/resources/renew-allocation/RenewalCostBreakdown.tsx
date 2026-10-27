@@ -51,7 +51,9 @@ const ComponentRow: FC<{ item: RenewalEstimateComponent }> = ({ item }) => {
         {' × '}
         {item.period_description}
       </td>
-      <td className="text-end text-nowrap">{defaultCurrency(item.total)}</td>
+      <td className="text-end whitespace-nowrap">
+        {defaultCurrency(item.total)}
+      </td>
     </tr>
   );
 };
@@ -138,7 +140,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
               <td colSpan={2} className="text-end text-quaternary small">
                 {translate('Subscription subtotal')}
               </td>
-              <td className="text-end text-nowrap">
+              <td className="text-end whitespace-nowrap">
                 {defaultCurrency(data.subscription_total)}
               </td>
             </tr>
@@ -151,7 +153,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
               <td colSpan={2} className="text-end text-quaternary small">
                 {translate('Limit change subtotal')}
               </td>
-              <td className="text-end text-nowrap">
+              <td className="text-end whitespace-nowrap">
                 {defaultCurrency(data.limit_change_total)}
               </td>
             </tr>
@@ -162,7 +164,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
             <td colSpan={2} className="text-end font-medium">
               {translate('Total')}
             </td>
-            <td className="text-end text-nowrap font-medium text-base">
+            <td className="text-end whitespace-nowrap font-medium text-base">
               {defaultCurrency(data.total)}
             </td>
           </tr>

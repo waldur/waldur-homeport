@@ -44,7 +44,7 @@ const ValueChange: FC<{ row: OfferingMergeAffectedRow }> = ({ row }) => (
       </span>
     ) : (
       <span className="flex items-start gap-1.5">
-        <span className="text-quaternary text-xs text-nowrap pt-1">
+        <span className="text-quaternary text-xs whitespace-nowrap pt-1">
           {translate('becomes')}
         </span>
         <span>{renderFieldOrDash(row.new_value)}</span>

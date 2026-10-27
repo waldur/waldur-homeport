@@ -144,7 +144,7 @@ const EvaluationHistoryTab: FC<{ policyUuid: string }> = ({ policyUuid }) => {
             const actions = (log.actions_taken || []) as string[];
             return (
               <tr key={log.uuid}>
-                <td className="text-nowrap">
+                <td className="whitespace-nowrap">
                   {formatDateTime(log.evaluated_at)}
                 </td>
                 <td>{log.resource_name || log.resource_uuid}</td>
@@ -228,7 +228,9 @@ const CommandHistoryTab: FC<{ policyUuid: string }> = ({ policyUuid }) => {
         <tbody>
           {data.map((cmd) => (
             <tr key={cmd.uuid}>
-              <td className="text-nowrap">{formatDateTime(cmd.executed_at)}</td>
+              <td className="whitespace-nowrap">
+                {formatDateTime(cmd.executed_at)}
+              </td>
               <td>
                 <Badge
                   variant="secondary"

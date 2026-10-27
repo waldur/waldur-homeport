@@ -273,11 +273,11 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
               <OfferingStateActions
                 offering={offering}
                 refreshOffering={props.refetch}
-                className="order-2 order-sm-1 sm:flex-none flex-1"
+                className="order-2 sm:order-1 sm:flex-none flex-1"
               />
             )}
             {!props.isPublic && (
-              <div className="order-2 order-sm-2">
+              <div className="order-2">
                 <OfferingExtraActionsButton
                   offering={offering}
                   refreshOffering={props.refetch}

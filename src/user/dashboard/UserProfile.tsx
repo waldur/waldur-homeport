@@ -63,25 +63,25 @@ export const UserProfile = ({
         gap={5}
       >
         {user.job_title && (
-          <span className="text-nowrap">
+          <span className="whitespace-nowrap">
             <UserSquareIcon size={18} weight="duotone" className="me-1" />
             {user.job_title}
           </span>
         )}
         {user.organization && (
-          <span className="text-nowrap">
+          <span className="whitespace-nowrap">
             <MapPinLineIcon size={18} weight="duotone" className="me-1" />
             {user.organization}
           </span>
         )}
         {user.email && (
-          <span className="text-nowrap">
+          <span className="whitespace-nowrap">
             <AtIcon size={18} weight="duotone" className="me-1" />
             {user.email}
           </span>
         )}
         {user.phone_number && (
-          <span className="text-nowrap">
+          <span className="whitespace-nowrap">
             <PhoneCallIcon size={18} weight="duotone" className="me-1" />
             {formatPhoneNumber(user.phone_number)}
           </span>

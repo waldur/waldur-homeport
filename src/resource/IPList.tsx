@@ -6,7 +6,7 @@ export const IPList = ({ value }) => {
     return (
       <>
         {ips.map((ip, idx) => (
-          <span key={ip} className="text-nowrap">
+          <span key={ip} className="whitespace-nowrap">
             {ip}
             <CopyToClipboardButton
               value={ip}

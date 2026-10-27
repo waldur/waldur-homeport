@@ -137,7 +137,7 @@ export const ResourceLimitChangeInfo = ({
                 <tbody>
                   {data.components.map((component, index) => (
                     <tr key={index}>
-                      <td className="text-nowrap icon-align">
+                      <td className="whitespace-nowrap icon-align">
                         {component.name}
                         <HelpIcon label={component.type} className="ms-1" />
                       </td>
