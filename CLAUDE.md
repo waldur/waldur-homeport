@@ -69,15 +69,33 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   ```
 
 - **Never hand-roll a table with `react-bootstrap`'s `<Table>`** (or raw
-  `<table>`/`<thead>`/`<tbody>`). Every list — including small ones nested inside
-  an expandable row, a tab or a modal — must use `@/table/Table` with `useTable`.
-  A hand-rolled table silently loses the header styling, sort carets, column
-  sizing, hover/selection, loading skeletons and the shared `NoResult` empty
-  state, so it looks visibly foreign next to every other list in the app.
+  `<table>`/`<thead>`/`<tbody>`). It silently loses the header styling, sort
+  carets, column sizing, hover/selection, loading skeletons and the shared
+  `NoResult` empty state, so it looks visibly foreign next to every other list
+  in the app. Pick the replacement by what the table is, using the decision tree
+  in `docs/table/migration-guide.md`:
+  - **A list of records** read from a paginated endpoint, or that needs
+    search, sorting, filters, selection, expandable rows, a menu of row
+    actions, an empty-state CTA or export → `@/table/Table` with `useTable`,
+    including small ones nested inside an expandable row, a tab or a modal.
+  - **A read-only list already in memory** (dialog summary, preview,
+    reference list, review step) → `SimpleTable` (`@/table/SimpleTable`),
+    which takes the same `Column<T>` definitions. Row count alone is not a
+    reason for `Table`: cap a long one's height with a scroll container.
+  - **Label/value pairs about one object** → not a table, and never a `<dl>`
+    grid or a local `DetailRow`. `FormTable` (+ `FormTable.Item` /
+    `*EditField`) when a row can be edited or acted on, or every property
+    must show even when empty (settings overviews; pass
+    `renderFieldOrDash`). Otherwise `Field` (`@/resource/summary`) for a
+    read-only summary that leaves out empty rows (pass raw values; `0` shows),
+    always inside `ExpandableContainer asTable` in an expandable row. See the
+    guide's "Label/value block".
+  - **A grid of form inputs** → waldur-ui's `Table` primitives, with the file
+    added to `no-hand-rolled-table`'s `ALLOWED_FILES` and a one-line reason.
 
-  For data you already hold in memory (or that comes from one aggregate
-  endpoint), `fetchData` may resolve rows directly instead of using
-  `createFetcher`. The table pages only what `fetchData` returns: resolving
+  For `@/table/Table` with data you already hold in memory (or that comes from
+  one aggregate endpoint), `fetchData` may resolve rows directly instead of
+  using `createFetcher`. The table pages only what `fetchData` returns: resolving
   every row with the pager on shows pages that all list the same rows. So
   either page them with `createClientPaginatedFetcher` (see
   `docs/table/fetching.md`), or, for a short bounded list, turn the pager off:

@@ -6645,6 +6645,7 @@
   },
   "Arrow License": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "mappings"
     }
   },
@@ -6655,11 +6656,13 @@
   },
   "Arrow Reference": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "mappings"
     }
   },
   "Arrow Sell": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "consumption"
     }
   },
@@ -11927,6 +11930,7 @@
   },
   "Confidence": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "mappings"
     }
   },
@@ -12559,6 +12563,7 @@
   },
   "Consumed (Sell)": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "consumption"
     }
   },
@@ -12618,6 +12623,7 @@
   },
   "Consumption": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "mappings"
     }
   },
@@ -14352,6 +14358,7 @@
   },
   "Current Sell": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "consumption"
     }
   },
@@ -14449,6 +14456,7 @@
   },
   "Current backend_id": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "mappings"
     }
   },
@@ -16927,6 +16935,7 @@
   },
   "Details (metadata)": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "settings"
     }
   },
@@ -21131,7 +21140,7 @@
   },
   "Export Type": {
     "context": {
-      "feature_area": "setup"
+      "primary_ui_type": "title"
     }
   },
   "Export Type Reference": {
@@ -21673,7 +21682,7 @@
   "Failed to load data": {
     "context": {
       "primary_ui_type": "error_message",
-      "feature_area": "resources"
+      "feature_area": "analytics"
     }
   },
   "Failed to load data from Arrow": {
@@ -22340,7 +22349,7 @@
   },
   "Fields": {
     "context": {
-      "feature_area": "setup"
+      "primary_ui_type": "title"
     }
   },
   "Fields accessed": {
@@ -22648,6 +22657,7 @@
   },
   "Final (Sell)": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "consumption"
     }
   },
@@ -25940,6 +25950,7 @@
   },
   "In Billing": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "mappings"
     }
   },
@@ -28587,11 +28598,13 @@
   "License Import": {},
   "License Reference": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "consumption"
     }
   },
   "License Reference (backend_id)": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "mappings"
     }
   },
@@ -28913,6 +28926,7 @@
   },
   "Line Reference": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "billing"
     }
   },
@@ -32890,6 +32904,7 @@
   },
   "Name format": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "settings"
     }
   },
@@ -36532,6 +36547,7 @@
   },
   "Offer": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "mappings"
     }
   },
@@ -38943,6 +38959,7 @@
   },
   "Original Price": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "billing"
     }
   },
@@ -44893,6 +44910,7 @@
   },
   "Qty": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "mappings"
     }
   },
@@ -52876,6 +52894,7 @@
   },
   "Sell": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "mappings"
     }
   },
@@ -54452,16 +54471,6 @@
         }
       },
       "feature_area": "shared"
-    }
-  },
-  "Showing 10 of {total} billing lines": {
-    "context": {
-      "variables": {
-        "total": {
-          "type": "number"
-        }
-      },
-      "feature_area": "mappings"
     }
   },
   "Showing first {count} rows with mapped values": {
@@ -62337,6 +62346,7 @@
   },
   "Trigger": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "settings"
     }
   },
@@ -70686,6 +70696,7 @@
   },
   "Vendor": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "billing"
     }
   },
@@ -71498,6 +71509,7 @@
   },
   "Waldur Model.Field": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "settings"
     }
   },
@@ -71515,6 +71527,7 @@
   },
   "Waldur Resource": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "mappings"
     }
   },

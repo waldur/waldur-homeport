@@ -6,7 +6,6 @@ import { SPACE_CLASSES, Space } from 'waldur-form';
 import { HelpIcon, Tooltip } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
-import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import './Field.css';
 
@@ -28,6 +27,13 @@ interface FieldProps {
   space?: Space;
 }
 
+// A row with nothing to show is left out; 0 is a value and is shown.
+const hasContent = (content: ReactNode) =>
+  content !== undefined &&
+  content !== null &&
+  content !== '' &&
+  content !== false;
+
 export const Field: FunctionComponent<FieldProps> = ({
   labelTooltipLen = 20,
   space = 1,
@@ -39,7 +45,8 @@ export const Field: FunctionComponent<FieldProps> = ({
       labelWidth ? { width: labelWidth, minWidth: labelWidth } : undefined,
     [labelWidth],
   );
-  return props.value || props.children ? (
+  const content = hasContent(props.value) ? props.value : props.children;
+  return hasContent(content) ? (
     <Row
       className={classNames(
         'field-row g-0',
@@ -73,7 +80,7 @@ export const Field: FunctionComponent<FieldProps> = ({
         sm={props.isStuck ? undefined : props.valueCol || 9}
         className={classNames('text-quaternary', props.valueClass)}
       >
-        {props.value || props.children || DASH_ESCAPE_CODE}
+        {content}
         {props.tooltip && <HelpIcon label={props.tooltip} className="ms-1" />}
         {props.hasCopy && (
           <CopyToClipboardButton

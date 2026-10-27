@@ -6,6 +6,7 @@ import { MermaidChart } from '@/core/MermaidChart';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { SimpleTable } from '@/table/SimpleTable';
 
 import { useArrowSettings } from '../api';
 
@@ -531,45 +532,45 @@ const SETTINGS_FIELDS = [
   },
 ];
 
+interface FieldMapping {
+  arrowField: string;
+  waldurField: string;
+  description: string;
+}
+
 interface FieldMappingTableProps {
-  fields: Array<{
-    arrowField: string;
-    waldurField: string;
-    description: string;
-  }>;
+  fields: FieldMapping[];
   sourceLabel: string;
   targetLabel?: string;
 }
+
+type InvoiceItemType = ReturnType<typeof getInvoiceItemTypes>[number];
 
 const FieldMappingTable: FC<FieldMappingTableProps> = ({
   fields,
   sourceLabel,
   targetLabel,
 }) => (
-  <div className="table-responsive">
-    <table className="table align-middle table-row-bordered text-xs gy-3 gx-4 mb-0">
-      <thead>
-        <tr className="text-start text-quaternary font-medium text-xs text-uppercase">
-          <th>{sourceLabel}</th>
-          <th>{targetLabel || translate('Waldur Model.Field')}</th>
-          <th>{translate('Description')}</th>
-        </tr>
-      </thead>
-      <tbody className="text-tertiary">
-        {fields.map((field, idx) => (
-          <tr key={idx}>
-            <td>
-              <span className="text-brand">{field.arrowField}</span>
-            </td>
-            <td>
-              <span>{field.waldurField}</span>
-            </td>
-            <td className="text-quaternary">{field.description}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
+  <SimpleTable<FieldMapping>
+    columns={[
+      {
+        title: sourceLabel,
+        render: ({ row }) => <>{row.arrowField}</>,
+        className: 'text-brand',
+      },
+      {
+        title: targetLabel || translate('Waldur Model.Field'),
+        render: ({ row }) => <>{row.waldurField}</>,
+        className: 'text-tertiary',
+      },
+      {
+        title: translate('Description'),
+        render: ({ row }) => <>{row.description}</>,
+      },
+    ]}
+    rows={fields}
+    rowKey="arrowField"
+  />
 );
 
 export const ArrowHowItWorksDialog: FC = () => {
@@ -802,50 +803,59 @@ export const ArrowHowItWorksDialog: FC = () => {
               'Arrow integration creates two types of invoice items depending on the sync stage.',
             )}
           </p>
-          <div className="table-responsive">
-            <table className="table align-middle table-row-bordered text-xs gy-4 gx-4">
-              <thead>
-                <tr className="text-start text-quaternary font-medium text-xs text-uppercase">
-                  <th style={{ width: '15%' }}>{translate('Type')}</th>
-                  <th style={{ width: '25%' }}>{translate('Trigger')}</th>
-                  <th style={{ width: '25%' }}>{translate('Name format')}</th>
-                  <th style={{ width: '15%' }}>{translate('Unit price')}</th>
-                  <th style={{ width: '20%' }}>
-                    {translate('Details (metadata)')}
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-tertiary">
-                {invoiceItemTypes.map((item) => (
-                  <tr key={item.source}>
-                    <td className="font-medium">
-                      <span className="block">{item.type}</span>
-                      <span className="text-quaternary small">
-                        {item.source}
-                      </span>
-                    </td>
-                    <td>{item.trigger}</td>
-                    <td>{item.nameFormat}</td>
-                    <td>
-                      {item.unitPrice}
-                      <div className="text-quaternary small mt-1">
-                        {translate('qty')}: {item.quantity}
-                      </div>
-                    </td>
-                    <td>
-                      <ul className="list-unstyled small mb-0">
-                        {item.details.map((detail, idx) => (
-                          <li key={idx}>
-                            <span className="text-quaternary">{detail}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <SimpleTable<InvoiceItemType>
+            columns={[
+              {
+                title: translate('Type'),
+                render: ({ row }) => (
+                  <>
+                    <span className="block font-medium text-tertiary">
+                      {row.type}
+                    </span>
+                    <span className="small">{row.source}</span>
+                  </>
+                ),
+                headerClassName: 'w-[15%]',
+              },
+              {
+                title: translate('Trigger'),
+                render: ({ row }) => <>{row.trigger}</>,
+                className: 'text-tertiary',
+                headerClassName: 'w-1/4',
+              },
+              {
+                title: translate('Name format'),
+                render: ({ row }) => <>{row.nameFormat}</>,
+                className: 'text-tertiary',
+                headerClassName: 'w-1/4',
+              },
+              {
+                title: translate('Unit price'),
+                render: ({ row }) => (
+                  <>
+                    <span className="text-tertiary">{row.unitPrice}</span>
+                    <div className="small mt-1">
+                      {translate('qty')}: {row.quantity}
+                    </div>
+                  </>
+                ),
+                headerClassName: 'w-[15%]',
+              },
+              {
+                title: translate('Details (metadata)'),
+                render: ({ row }) => (
+                  <ul className="list-unstyled small mb-0">
+                    {row.details.map((detail, idx) => (
+                      <li key={idx}>{detail}</li>
+                    ))}
+                  </ul>
+                ),
+                headerClassName: 'w-1/5',
+              },
+            ]}
+            rows={invoiceItemTypes}
+            rowKey="source"
+          />
           <AlertItem
             type="floating"
             variant="info"
@@ -949,26 +959,23 @@ export const ArrowHowItWorksDialog: FC = () => {
         {/* Sync States */}
         <section>
           <h4 className="mb-3">{translate('Sync states')}</h4>
-          <div className="table-responsive">
-            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
-              <thead>
-                <tr className="text-start text-quaternary font-medium text-xs text-uppercase">
-                  <th style={{ width: '20%' }}>{translate('State')}</th>
-                  <th>{translate('Description')}</th>
-                </tr>
-              </thead>
-              <tbody className="text-tertiary">
-                {SYNC_STATES.map((item) => (
-                  <tr key={item.state}>
-                    <td className="font-medium text-primary">
-                      <span>{item.state}</span>
-                    </td>
-                    <td>{item.description}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <SimpleTable<(typeof SYNC_STATES)[number]>
+            columns={[
+              {
+                title: translate('State'),
+                render: ({ row }) => <>{row.state}</>,
+                className: 'font-medium text-primary',
+                headerClassName: 'w-1/5',
+              },
+              {
+                title: translate('Description'),
+                render: ({ row }) => <>{row.description}</>,
+                className: 'text-tertiary',
+              },
+            ]}
+            rows={SYNC_STATES}
+            rowKey="state"
+          />
         </section>
 
         {/* Key Concepts */}

@@ -35,6 +35,10 @@ const ALLOWED_FILES = [
   // two-cell illustration, not a data table, and packages/ui can't depend on
   // @/table/Table (app-coupled, see the note above) regardless.
   'packages/ui/src/Select/Select.stories.tsx',
+  // A form grid: one organization select per discovered Arrow customer, in a
+  // wizard step. Paging would hide mappings still being chosen; see
+  // docs/table/migration-guide.md, "Form grid".
+  'src/administration/arrow/setup/Step2CustomerDiscovery.tsx',
 ];
 
 export default {

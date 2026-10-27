@@ -10,8 +10,10 @@ import {
 
 import { Column } from './types';
 
-// The main Table's cell box: 44px rows, 10px gutters.
-const cell = 'h-[44px] px-[10px] py-[0px] align-middle';
+// The main Table's cell box: 44px rows, 10px gutters. A cell's height is a
+// minimum, so a one-line row stays 44px while the vertical padding keeps
+// wrapped text and tall controls off the row lines.
+const cell = 'h-[44px] px-2.5 py-2.5 align-middle';
 
 /**
  * A short list of rows already in memory, with the main table's look but none

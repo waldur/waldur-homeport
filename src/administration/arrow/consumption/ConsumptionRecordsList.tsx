@@ -10,8 +10,10 @@ import { Badge } from 'waldur-ui';
 import { formatDateTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 import {
   AdminArrowConsumptionRecordsFilter as ConsumptionRecordsFilter,
   selectAdminArrowConsumptionRecordsFilter as selectConsumptionRecordsFilter,
@@ -160,62 +162,28 @@ export const ConsumptionRecordsList: FunctionComponent<
   );
 };
 
-// Expandable row component
 const ConsumptionRecordDetail = ({ row }: { row: ArrowConsumptionRecord }) => (
-  <div className="p-3 border rounded">
-    <div className="row">
-      <div className="col-md-6">
-        <table className="table table-sm table-borderless mb-0">
-          <tbody>
-            <tr>
-              <td className="text-quaternary" style={{ width: '40%' }}>
-                {translate('UUID')}
-              </td>
-              <td>{row.uuid}</td>
-            </tr>
-            <tr>
-              <td className="text-quaternary">
-                {translate('License Reference')}
-              </td>
-              <td>{row.license_reference}</td>
-            </tr>
-            <tr>
-              <td className="text-quaternary">{translate('Resource')}</td>
-              <td>{row.resource_name || DASH_ESCAPE_CODE}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div className="col-md-6">
-        <table className="table table-sm table-borderless mb-0">
-          <tbody>
-            <tr>
-              <td className="text-quaternary" style={{ width: '40%' }}>
-                {translate('Created')}
-              </td>
-              <td>{formatDateTime(row.created)}</td>
-            </tr>
-            <tr>
-              <td className="text-quaternary">{translate('Billing Period')}</td>
-              <td>{row.billing_period}</td>
-            </tr>
-            <tr>
-              <td className="text-quaternary">
-                {translate('Consumed (Sell)')}
-              </td>
-              <td>{defaultCurrency(row.consumed_sell)}</td>
-            </tr>
-            <tr>
-              <td className="text-quaternary">{translate('Final (Sell)')}</td>
-              <td className="font-medium">
-                {row.final_sell
-                  ? defaultCurrency(row.final_sell)
-                  : DASH_ESCAPE_CODE}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+  <ExpandableContainer asTable>
+    <Field label={translate('UUID')} value={row.uuid} />
+    <Field
+      label={translate('License Reference')}
+      value={row.license_reference}
+    />
+    <Field label={translate('Resource')} value={row.resource_name} />
+    <Field label={translate('Created')} value={formatDateTime(row.created)} />
+    <Field label={translate('Billing Period')} value={row.billing_period} />
+    <Field
+      label={translate('Consumed (Sell)')}
+      value={defaultCurrency(row.consumed_sell)}
+    />
+    <Field
+      label={translate('Final (Sell)')}
+      // No final amount means the billing export has not confirmed it yet,
+      // which is worth showing, so the row keeps a dash instead of going.
+      value={
+        row.final_sell ? defaultCurrency(row.final_sell) : DASH_ESCAPE_CODE
+      }
+      valueClass="font-medium"
+    />
+  </ExpandableContainer>
 );

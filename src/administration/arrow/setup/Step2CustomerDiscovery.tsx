@@ -1,9 +1,18 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { Table as BTable } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
-import { AlertItem, Badge, BaseButton } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  BaseButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Select } from '@/form/select';
@@ -158,65 +167,61 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
           )}
         />
       ) : (
-        <div className="table-responsive mb-3" style={{ maxHeight: '400px' }}>
-          <BTable striped bordered hover size="sm">
-            <thead className="sticky-top bg-primary">
-              <tr>
-                <th>{translate('Arrow Customer')}</th>
-                <th>{translate('Reference')}</th>
-                <th style={{ width: '40%' }}>
-                  {translate('Waldur Organization')}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {values.customers.map((customer) => {
-                const suggestion = getSuggestionForCustomer(customer.reference);
-                const currentValue =
-                  values.selectedMappings[customer.reference];
-
-                return (
-                  <tr key={customer.reference}>
-                    <td>
-                      <strong>{customer.companyName}</strong>
-                      {suggestion?.existing_mapping && (
-                        <Badge variant="info" className="ms-1.5">
-                          {translate('Already mapped')}
-                        </Badge>
+        <Table className="mb-3">
+          <TableHeader>
+            <TableRow>
+              <TableHead>{translate('Arrow Customer')}</TableHead>
+              <TableHead>{translate('Reference')}</TableHead>
+              <TableHead className="w-2/5">
+                {translate('Waldur Organization')}
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {values.customers.map((customer) => {
+              const suggestion = getSuggestionForCustomer(customer.reference);
+              const currentValue = values.selectedMappings[customer.reference];
+              return (
+                <TableRow key={customer.reference}>
+                  <TableCell>
+                    <strong>{customer.companyName}</strong>
+                    {suggestion?.existing_mapping && (
+                      <Badge variant="info" className="ms-1.5">
+                        {translate('Already mapped')}
+                      </Badge>
+                    )}
+                  </TableCell>
+                  <TableCell>{customer.reference}</TableCell>
+                  <TableCell>
+                    <Select
+                      value={waldurCustomerOptions.find(
+                        (o) => o.value === currentValue,
                       )}
-                    </td>
-                    <td>{customer.reference}</td>
-                    <td>
-                      <Select
-                        value={waldurCustomerOptions.find(
-                          (o) => o.value === currentValue,
-                        )}
-                        onChange={(option) =>
-                          handleMappingChange(
-                            customer.reference,
-                            option?.value || null,
-                          )
-                        }
-                        options={waldurCustomerOptions}
-                        isClearable
-                        placeholder={translate('Select organization...')}
-                        isDisabled={suggestion?.existing_mapping}
-                      />
-                      {suggestion?.suggested_waldur_customer &&
-                        !suggestion.existing_mapping && (
-                          <small className="text-quaternary">
-                            {translate('Suggested: {name}', {
-                              name: suggestion.suggested_waldur_customer.name,
-                            })}
-                          </small>
-                        )}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </BTable>
-        </div>
+                      onChange={(option) =>
+                        handleMappingChange(
+                          customer.reference,
+                          option?.value || null,
+                        )
+                      }
+                      options={waldurCustomerOptions}
+                      isClearable
+                      placeholder={translate('Select organization...')}
+                      isDisabled={suggestion?.existing_mapping}
+                    />
+                    {suggestion?.suggested_waldur_customer &&
+                      !suggestion.existing_mapping && (
+                        <small className="text-quaternary">
+                          {translate('Suggested: {name}', {
+                            name: suggestion.suggested_waldur_customer.name,
+                          })}
+                        </small>
+                      )}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
       )}
 
       <div className="flex items-center">

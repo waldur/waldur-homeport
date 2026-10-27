@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Table } from 'react-bootstrap';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
 import { AlertItem, Badge } from 'waldur-ui';
@@ -9,8 +8,99 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { SimpleTable } from '@/table/SimpleTable';
 
 import { useFetchCustomerArrowData } from '../api';
+
+type ArrowData = NonNullable<
+  ReturnType<typeof useFetchCustomerArrowData>['data']
+>;
+type ConsumptionLine = ArrowData['consumption_lines'][number];
+type BillingLine = ArrowData['billing_lines'][number];
+
+const formatSellPrice = (price: number | string) =>
+  `€${Number(price).toFixed(2)}`;
+
+const ConsumptionLinesTable: FC<{
+  lines: ConsumptionLine[];
+  billingLicenseRefs: Set<string>;
+}> = ({ lines, billingLicenseRefs }) => (
+  <SimpleTable<ConsumptionLine>
+    columns={[
+      {
+        title: translate('Resource'),
+        render: ({ row }) => <>{row.resource_name || DASH_ESCAPE_CODE}</>,
+      },
+      {
+        title: translate('License Reference (backend_id)'),
+        render: ({ row }) => <>{row.license_reference}</>,
+      },
+      {
+        title: translate('In Billing'),
+        render: ({ row }) =>
+          billingLicenseRefs.has(row.license_reference) ? (
+            <Badge variant="success" tone="outline">
+              {translate('Yes')}
+            </Badge>
+          ) : (
+            <Badge variant="neutral" tone="outline">
+              {translate('No')}
+            </Badge>
+          ),
+      },
+      {
+        title: translate('Consumption'),
+        className: 'text-end',
+        headerClassName: 'text-end',
+        render: ({ row }) =>
+          row.sell_price != null ? (
+            <>{formatSellPrice(row.sell_price)}</>
+          ) : row.error ? (
+            <span className="text-danger" title={row.error}>
+              {translate('Error')}
+            </span>
+          ) : (
+            <>{DASH_ESCAPE_CODE}</>
+          ),
+      },
+    ]}
+    rows={lines}
+  />
+);
+
+const BillingLinesTable: FC<{
+  lines: BillingLine[];
+}> = ({ lines }) => (
+  <SimpleTable<BillingLine>
+    columns={[
+      {
+        title: translate('Vendor'),
+        render: ({ row }) => <>{row.vendor_name || DASH_ESCAPE_CODE}</>,
+      },
+      {
+        title: translate('License Reference'),
+        render: ({ row }) => <>{row.license_reference || DASH_ESCAPE_CODE}</>,
+      },
+      {
+        title: translate('SKU'),
+        render: ({ row }) => <>{row.offer_sku || DASH_ESCAPE_CODE}</>,
+      },
+      {
+        title: translate('Sell'),
+        className: 'text-end',
+        headerClassName: 'text-end',
+        render: ({ row }) => (
+          <>
+            {row.sell_price != null
+              ? formatSellPrice(row.sell_price)
+              : DASH_ESCAPE_CODE}
+          </>
+        ),
+      },
+    ]}
+    rows={lines}
+  />
+);
 
 interface CustomerMappingExpandableRowProps {
   row: ArrowCustomerMapping;
@@ -112,53 +202,10 @@ export const CustomerMappingExpandableRow: FC<
             <h6 className="mb-1.5">
               {translate('Resources with Consumption Data')}
             </h6>
-            <Table size="sm" bordered className="mb-0">
-              <thead className="table-light">
-                <tr>
-                  <th>{translate('Resource')}</th>
-                  <th>{translate('License Reference (backend_id)')}</th>
-                  <th>{translate('In Billing')}</th>
-                  <th className="text-end">{translate('Consumption')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.consumption_lines.map((line, idx) => {
-                  const inBilling = billingLicenseRefs.has(
-                    line.license_reference,
-                  );
-                  return (
-                    <tr key={idx}>
-                      <td>{line.resource_name || DASH_ESCAPE_CODE}</td>
-                      <td>
-                        <span className="small">{line.license_reference}</span>
-                      </td>
-                      <td>
-                        {inBilling ? (
-                          <Badge variant="success" tone="outline">
-                            {translate('Yes')}
-                          </Badge>
-                        ) : (
-                          <Badge variant="neutral" tone="outline">
-                            {translate('No')}
-                          </Badge>
-                        )}
-                      </td>
-                      <td className="text-end">
-                        {line.sell_price != null ? (
-                          `€${Number(line.sell_price).toFixed(2)}`
-                        ) : line.error ? (
-                          <span className="text-danger" title={line.error}>
-                            {translate('Error')}
-                          </span>
-                        ) : (
-                          DASH_ESCAPE_CODE
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
+            <ConsumptionLinesTable
+              lines={data.consumption_lines}
+              billingLicenseRefs={billingLicenseRefs}
+            />
           </div>
         )}
 
@@ -171,41 +218,12 @@ export const CustomerMappingExpandableRow: FC<
                 'These are the license references from Arrow billing export. Resources with matching backend_id will show consumption data.',
               )}
             </p>
-            <Table size="sm" bordered className="mb-0">
-              <thead className="table-light">
-                <tr>
-                  <th>{translate('Vendor')}</th>
-                  <th>{translate('License Reference')}</th>
-                  <th>{translate('SKU')}</th>
-                  <th className="text-end">{translate('Sell')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.billing_lines.slice(0, 10).map((line, idx) => (
-                  <tr key={idx}>
-                    <td>{line.vendor_name || DASH_ESCAPE_CODE}</td>
-                    <td>
-                      <span className="small">
-                        {line.license_reference || DASH_ESCAPE_CODE}
-                      </span>
-                    </td>
-                    <td>{line.offer_sku || DASH_ESCAPE_CODE}</td>
-                    <td className="text-end">
-                      {line.sell_price != null
-                        ? `€${Number(line.sell_price).toFixed(2)}`
-                        : DASH_ESCAPE_CODE}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-            {data.billing_lines.length > 10 && (
-              <div className="text-quaternary small mt-1">
-                {translate('Showing 10 of {total} billing lines', {
-                  total: data.billing_lines.length,
-                })}
-              </div>
-            )}
+            {/* About ten 44px rows under the header, as many as the list used
+                to show before it was capped; the last one is cut in half so
+                the box reads as scrollable. */}
+            <div className="max-h-[460px] overflow-y-auto">
+              <BillingLinesTable lines={data.billing_lines} />
+            </div>
           </div>
         )}
 

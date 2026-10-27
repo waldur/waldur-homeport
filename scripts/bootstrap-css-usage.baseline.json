@@ -1,7 +1,7 @@
 {
-  "compiledByteSize": 178354,
-  "totalClasses": 1127,
-  "totalUsed": 762,
+  "compiledByteSize": 177754,
+  "totalClasses": 1126,
+  "totalUsed": 761,
   "totalUnused": 365,
   "unused": {
     "bootstrap/scss/type": [
@@ -1348,7 +1348,6 @@
     "@layer bootstrap :: .table.gx-5 td",
     "@layer bootstrap :: .table.gx-8px th",
     "@layer bootstrap :: .table.gx-8px td",
-    "@layer bootstrap :: .table-light",
     "@layer bootstrap :: .table-warning",
     "@layer bootstrap :: .image-input",
     "@layer bootstrap :: .image-input:not(.image-input-empty)",

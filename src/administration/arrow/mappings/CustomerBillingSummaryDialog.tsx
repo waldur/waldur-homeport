@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Card, Table } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
 import { AlertItem } from 'waldur-ui';
@@ -10,9 +10,93 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { Field } from '@/resource/summary';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { SimpleTable } from '@/table/SimpleTable';
 
 import { useFetchCustomerArrowData } from '../api';
+
+type ArrowData = NonNullable<
+  ReturnType<typeof useFetchCustomerArrowData>['data']
+>;
+type BillingLine = ArrowData['billing_lines'][number];
+type ConsumptionLine = ArrowData['consumption_lines'][number];
+
+// The card header above each table shows its total.
+const BillingLinesTable: FC<{ lines: BillingLine[] }> = ({ lines }) => (
+  <SimpleTable<BillingLine>
+    columns={[
+      {
+        title: translate('Vendor'),
+        render: ({ row }) => <>{row.vendor_name || DASH_ESCAPE_CODE}</>,
+      },
+      {
+        title: translate('License Reference'),
+        render: ({ row }) => (
+          <span title={row.license_reference}>
+            {row.license_reference || DASH_ESCAPE_CODE}
+          </span>
+        ),
+      },
+      {
+        title: translate('SKU'),
+        render: ({ row }) => <>{row.offer_sku || DASH_ESCAPE_CODE}</>,
+      },
+      {
+        title: translate('Qty'),
+        className: 'text-end',
+        headerClassName: 'text-end',
+        render: ({ row }) => <>{row.quantity ? String(row.quantity) : '1'}</>,
+      },
+      {
+        title: translate('Sell'),
+        className: 'text-end',
+        headerClassName: 'text-end',
+        render: ({ row }) => (
+          <>
+            {row.sell_price
+              ? defaultCurrency(row.sell_price)
+              : DASH_ESCAPE_CODE}
+          </>
+        ),
+      },
+    ]}
+    rows={lines}
+  />
+);
+
+const ConsumptionLinesTable: FC<{
+  lines: ConsumptionLine[];
+}> = ({ lines }) => (
+  <SimpleTable<ConsumptionLine>
+    columns={[
+      {
+        title: translate('Resource'),
+        render: ({ row }) => <>{row.resource_name || DASH_ESCAPE_CODE}</>,
+      },
+      {
+        title: translate('License Reference (backend_id)'),
+        render: ({ row }) => <>{row.license_reference}</>,
+      },
+      {
+        title: translate('Sell'),
+        className: 'text-end',
+        headerClassName: 'text-end',
+        render: ({ row }) =>
+          row.sell_price ? (
+            <>{defaultCurrency(row.sell_price)}</>
+          ) : row.error ? (
+            <span className="text-danger" title={row.error}>
+              {translate('Error')}
+            </span>
+          ) : (
+            <>{DASH_ESCAPE_CODE}</>
+          ),
+      },
+    ]}
+    rows={lines}
+  />
+);
 
 interface CustomerBillingSummaryDialogProps {
   resolve: {
@@ -57,72 +141,70 @@ export const CustomerBillingSummaryDialog: FC<
           {/* Header info */}
           <Card>
             <Card.Body>
-              <div className="row">
-                <div className="col-md-6">
-                  <Table borderless size="sm" className="mb-0">
-                    <tbody>
-                      <tr>
-                        <td className="text-quaternary">
-                          {translate('Arrow Reference')}
-                        </td>
-                        <td>{data.arrow_reference}</td>
-                      </tr>
-                      <tr>
-                        <td className="text-quaternary">
-                          {translate('Arrow Company')}
-                        </td>
-                        <td>{data.arrow_company_name}</td>
-                      </tr>
-                      <tr>
-                        <td className="text-quaternary">
-                          {translate('Waldur Organization')}
-                        </td>
-                        <td>{data.waldur_customer_name}</td>
-                      </tr>
-                    </tbody>
-                  </Table>
+              {/* Who the mapping links, beside what the period holds. */}
+              <div className="grid grid-cols-1 gap-x-8 md:grid-cols-2">
+                <div>
+                  <Field
+                    label={translate('Arrow Reference')}
+                    value={data.arrow_reference}
+                    labelCol={6}
+                    valueCol={6}
+                    space={1.5}
+                  />
+                  <Field
+                    label={translate('Arrow Company')}
+                    value={data.arrow_company_name}
+                    labelCol={6}
+                    valueCol={6}
+                    space={1.5}
+                  />
+                  <Field
+                    label={translate('Waldur Organization')}
+                    value={data.waldur_customer_name}
+                    labelCol={6}
+                    valueCol={6}
+                    space={1.5}
+                  />
                 </div>
-                <div className="col-md-6">
-                  <Table borderless size="sm" className="mb-0">
-                    <tbody>
-                      <tr>
-                        <td className="text-quaternary">
-                          {translate('Period')}
-                        </td>
-                        <td>
-                          <strong>{data.period}</strong>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="text-quaternary">
-                          {translate('Total resources')}
-                        </td>
-                        <td>{data.total_customer_resources}</td>
-                      </tr>
-                      <tr>
-                        <td className="text-quaternary">
-                          {translate('With license ref (backend_id)')}
-                        </td>
-                        <td>{data.resources_with_backend_id}</td>
-                      </tr>
-                      <tr>
-                        <td className="text-quaternary">
-                          {translate('Consumption fetched')}
-                        </td>
-                        <td>
-                          <strong
-                            className={
-                              data.matched_resources > 0
-                                ? 'text-success'
-                                : 'text-quaternary'
-                            }
-                          >
-                            {data.matched_resources}
-                          </strong>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </Table>
+                <div>
+                  <Field
+                    label={translate('Period')}
+                    value={<strong>{data.period}</strong>}
+                    labelCol={6}
+                    valueCol={6}
+                    space={1.5}
+                  />
+                  <Field
+                    label={translate('Total resources')}
+                    value={data.total_customer_resources}
+                    labelCol={6}
+                    valueCol={6}
+                    space={1.5}
+                  />
+                  <Field
+                    label={translate('With license ref (backend_id)')}
+                    value={data.resources_with_backend_id}
+                    labelCol={6}
+                    valueCol={6}
+                    space={1.5}
+                  />
+                  <Field
+                    label={translate('Consumption fetched')}
+                    value={
+                      <strong
+                        className={
+                          data.matched_resources > 0
+                            ? 'text-success'
+                            : 'text-quaternary'
+                        }
+                      >
+                        {data.matched_resources}
+                      </strong>
+                    }
+                    labelCol={6}
+                    valueCol={6}
+                    space={0}
+                  />
                 </div>
               </div>
             </Card.Body>
@@ -187,53 +269,7 @@ export const CustomerBillingSummaryDialog: FC<
                   )}
                 </div>
               ) : (
-                <div className="table-responsive">
-                  <Table className="mb-0" size="sm">
-                    <thead>
-                      <tr>
-                        <th>{translate('Vendor')}</th>
-                        <th>{translate('License Reference')}</th>
-                        <th>{translate('SKU')}</th>
-                        <th className="text-end">{translate('Qty')}</th>
-                        <th className="text-end">{translate('Sell')}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {data.billing_lines.map((line, idx) => (
-                        <tr key={idx}>
-                          <td>{line.vendor_name || DASH_ESCAPE_CODE}</td>
-                          <td>
-                            <span
-                              className="small"
-                              title={line.license_reference}
-                            >
-                              {line.license_reference || DASH_ESCAPE_CODE}
-                            </span>
-                          </td>
-                          <td>{line.offer_sku || DASH_ESCAPE_CODE}</td>
-                          <td className="text-end">
-                            {line.quantity ? String(line.quantity) : '1'}
-                          </td>
-                          <td className="text-end">
-                            {line.sell_price
-                              ? defaultCurrency(line.sell_price)
-                              : DASH_ESCAPE_CODE}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                    <tfoot className="border-t-[1px] border-t-secondary">
-                      <tr>
-                        <td colSpan={4} className="text-end font-medium">
-                          {translate('Total')}
-                        </td>
-                        <td className="text-end font-medium">
-                          {defaultCurrency(data.billing_total_sell)}
-                        </td>
-                      </tr>
-                    </tfoot>
-                  </Table>
-                </div>
+                <BillingLinesTable lines={data.billing_lines} />
               )}
             </Card.Body>
           </Card>
@@ -274,52 +310,7 @@ export const CustomerBillingSummaryDialog: FC<
                         )}
                 </div>
               ) : (
-                <div className="table-responsive">
-                  <Table className="mb-0" size="sm">
-                    <thead>
-                      <tr>
-                        <th>{translate('Resource')}</th>
-                        <th>{translate('License Reference (backend_id)')}</th>
-                        <th className="text-end">{translate('Sell')}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {data.consumption_lines.map((line, idx) => (
-                        <tr key={idx}>
-                          <td>{line.resource_name || DASH_ESCAPE_CODE}</td>
-                          <td>
-                            <span className="small">
-                              {line.license_reference}
-                            </span>
-                          </td>
-                          <td className="text-end">
-                            {line.sell_price ? (
-                              defaultCurrency(line.sell_price)
-                            ) : line.error ? (
-                              <span className="text-danger" title={line.error}>
-                                {translate('Error')}
-                              </span>
-                            ) : (
-                              DASH_ESCAPE_CODE
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                    {data.consumption_total_sell && (
-                      <tfoot className="border-t-[1px] border-t-secondary">
-                        <tr>
-                          <td colSpan={2} className="text-end font-medium">
-                            {translate('Total')}
-                          </td>
-                          <td className="text-end font-medium">
-                            {defaultCurrency(data.consumption_total_sell)}
-                          </td>
-                        </tr>
-                      </tfoot>
-                    )}
-                  </Table>
-                </div>
+                <ConsumptionLinesTable lines={data.consumption_lines} />
               )}
             </Card.Body>
           </Card>

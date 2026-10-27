@@ -140,10 +140,6 @@
   border-color: color-mix(in srgb, #{$bg} 90%, #{$color});
 }
 
-.table-light {
-  @include waldur-table-variant(var(--bg-tertiary), var(--text-primary));
-}
-
 // 20% of the solid warning over the page, as Bootstrap's 80% tint over white.
 .table-warning {
   @include waldur-table-variant(

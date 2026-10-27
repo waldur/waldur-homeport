@@ -2,7 +2,6 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   adminArrowBillingSyncItemsList,
   adminArrowBillingSyncsConsumptionStatusRetrieve,
-  adminArrowConsumptionRecordsList,
   adminArrowCustomerMappingsAvailableCustomersRetrieve,
   adminArrowCustomerMappingsDiscoverLicensesRetrieve,
   adminArrowCustomerMappingsFetchArrowDataRetrieve,
@@ -35,8 +34,6 @@ export const arrowQueryKeys = {
     [...arrowQueryKeys.all, 'consumptionStatistics'] as const,
   consumptionStatus: () =>
     [...arrowQueryKeys.all, 'consumptionStatus'] as const,
-  resourceConsumption: (resourceUuid: string) =>
-    [...arrowQueryKeys.all, 'resourceConsumption', resourceUuid] as const,
 };
 
 // === Query Hooks ===
@@ -123,20 +120,6 @@ export const useArrowConsumptionStatus = () =>
       return response.data;
     },
     staleTime: SHORT_STALE_TIME,
-  });
-
-/** Fetch resource consumption history (last 12 months) */
-export const useResourceConsumptionHistory = (resourceUuid: string) =>
-  useQuery({
-    queryKey: arrowQueryKeys.resourceConsumption(resourceUuid),
-    queryFn: async () => {
-      const response = await adminArrowConsumptionRecordsList({
-        query: { resource_uuid: resourceUuid },
-      });
-      return response.data;
-    },
-    enabled: Boolean(resourceUuid),
-    staleTime: FAST_STALE_TIME,
   });
 
 // === Mutation Hooks ===
