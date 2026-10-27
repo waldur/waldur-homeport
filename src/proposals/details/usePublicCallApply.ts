@@ -17,7 +17,7 @@ import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
 import { Call } from '../types';
-import { getRoundsWithStatus } from '../utils';
+import { getArchivedCallNotice, getRoundsWithStatus } from '../utils';
 
 const ProposalCreateDialog = lazyComponent(() =>
   import('@/proposals/proposal/create/AddProposalDialog').then((module) => ({
@@ -71,13 +71,16 @@ export const usePublicCallApply = (
   // user, so the backend still refuses an ineligible applicant.
   const ineligible = eligibility?.is_eligible === false;
 
-  const disabledReason = !activeRound
-    ? translate('No open round available.')
-    : ineligible
-      ? translate('You are not eligible to apply to this call.')
-      : eligibilityLoading
-        ? translate('Checking eligibility…')
-        : undefined;
+  const disabledReason =
+    call.state === 'archived'
+      ? getArchivedCallNotice()
+      : !activeRound
+        ? translate('No open round available.')
+        : ineligible
+          ? translate('You are not eligible to apply to this call.')
+          : eligibilityLoading
+            ? translate('Checking eligibility…')
+            : undefined;
 
   const handleApply = useCallback(
     (e?: React.MouseEvent) => {

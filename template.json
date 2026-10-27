@@ -59668,6 +59668,7 @@
     }
   },
   "This call is archived and cannot be edited.": {},
+  "This call is archived and no longer accepts proposals.": {},
   "This call is archived and read-only.": {
     "context": {
       "feature_area": "update"

@@ -5,7 +5,7 @@ import { AlertItem } from 'waldur-ui';
 import { StateIndicator } from '@/core/StateIndicator';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { translate } from '@/i18n';
-import { getCallStatus } from '@/proposals/utils';
+import { getArchivedCallNotice, getCallStatus } from '@/proposals/utils';
 
 import { CallProposalsButton } from '../CallProposalsButton';
 import { Call } from '../types';
@@ -46,7 +46,13 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
         </>
       }
       quickBody={
-        call.rounds.length > 0 && <CallDetailsHeaderBody call={call} />
+        // An archived call keeps its rounds for the record; their dates
+        // would read as an open call, so the applicant is told it is closed.
+        call.state === 'archived' ? (
+          <p className="text-danger">{getArchivedCallNotice()}</p>
+        ) : (
+          call.rounds.length > 0 && <CallDetailsHeaderBody call={call} />
+        )
       }
       quickActions={
         <div className="flex flex-col flex-wrap gap-2">
