@@ -162,6 +162,81 @@ describe('AddProposalDialog', () => {
       expect(useNotify().showError).not.toHaveBeenCalled();
     });
 
+    it('attaches through the template on a call with templates', async () => {
+      vi.mocked(proposalProposalsResourcesSet).mockResolvedValue({
+        data: { uuid: 'requested-resource-uuid' },
+      } as any);
+      renderDialog({
+        call: {
+          ...mockCallWithOffering,
+          resource_templates: [
+            {
+              uuid: 'basic-tier',
+              requested_offering_uuid: 'requested-offering-uuid',
+            },
+          ],
+        },
+        offering: mockOffering,
+      });
+      await submit();
+
+      await waitFor(() => {
+        expect(proposalProposalsResourcesSet).toHaveBeenCalledWith({
+          path: { uuid: 'new-proposal-uuid' },
+          body: { call_resource_template_uuid: 'basic-tier' },
+        });
+      });
+    });
+
+    it('leaves the choice to the applicant when several templates fit', async () => {
+      renderDialog({
+        call: {
+          ...mockCallWithOffering,
+          resource_templates: [
+            {
+              uuid: 'basic-tier',
+              requested_offering_uuid: 'requested-offering-uuid',
+            },
+            {
+              uuid: 'long-tier',
+              requested_offering_uuid: 'requested-offering-uuid',
+            },
+          ],
+        },
+        offering: mockOffering,
+      });
+      await submit();
+
+      await waitFor(() => {
+        expect(useNotify().showInfo).toHaveBeenCalled();
+      });
+      expect(proposalProposalsResourcesSet).not.toHaveBeenCalled();
+      expect(globalRouter.stateService.go).toHaveBeenCalledWith(
+        'proposals.manage-proposal',
+        { proposal_uuid: 'new-proposal-uuid' },
+      );
+    });
+
+    it('says so when no template is for the offering', async () => {
+      renderDialog({
+        call: {
+          ...mockCallWithOffering,
+          resource_templates: [
+            { uuid: 'other-tier', requested_offering_uuid: 'other-offering' },
+          ],
+        },
+        offering: mockOffering,
+      });
+      await submit();
+
+      await waitFor(() => {
+        expect(useNotify().showInfo).toHaveBeenCalledWith(
+          expect.stringContaining('None of this call'),
+        );
+      });
+      expect(proposalProposalsResourcesSet).not.toHaveBeenCalled();
+    });
+
     // Regression: the attach used to be skipped in silence.
     it('warns when the call no longer exposes the offering', async () => {
       renderDialog({

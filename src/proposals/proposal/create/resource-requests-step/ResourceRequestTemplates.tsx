@@ -1,7 +1,8 @@
 import { CheckCircleIcon, CubeIcon, QuestionIcon } from '@phosphor-icons/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { FC, useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { Form, useField } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   CallResourceTemplate,
@@ -11,7 +12,7 @@ import {
   RequestedResource,
 } from 'waldur-js-client';
 
-import { Tooltip, BaseButton } from 'waldur-ui';
+import { AlertItem, Tooltip, BaseButton } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -124,16 +125,22 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
  * Repeating "Resource requests" here put the same heading on screen twice; the
  * badge is the part that says something the card header does not.
  */
-const TableTitle = () => (
+const TableTitle = ({ single }: { single: boolean }) => (
   <Badge
     variant="info"
     size="lg"
     leftIcon={<CubeIcon weight="bold" />}
     rightIcon={
       <Tooltip
-        label={translate(
-          'This call uses predefined resource templates. You can only select from the available templates below. Custom resource configurations are not allowed.',
-        )}
+        label={
+          single
+            ? translate(
+                'This call uses predefined resource templates. Choose one of the templates below. Custom resource configurations are not allowed.',
+              )
+            : translate(
+                'This call uses predefined resource templates. You can only select from the available templates below. Custom resource configurations are not allowed.',
+              )
+        }
         autoWidth
         contentClassName="max-w-[350px]"
       >
@@ -164,6 +171,31 @@ const templateAsRequest = (template: CallResourceTemplate) => ({
 
 const TABLE_ID = 'ProposalResourceTemplatesList';
 
+const TEMPLATE_FIELD = 'template';
+
+// Compared by uuid: a reloaded call brings new template objects, and an
+// identity check would reset an unsaved choice to the saved one.
+const sameTemplateChoice = (a, b) =>
+  a?.[TEMPLATE_FIELD]?.uuid === b?.[TEMPLATE_FIELD]?.uuid;
+
+/**
+ * Hands the radio choice up to the step, which saves and prices it.
+ *
+ * Not through the table selection: its select-all action toggles, so setting
+ * the same row twice clears it, and Save would then delete the saved request.
+ */
+const ReportSingleChoice = ({
+  onChange,
+}: {
+  onChange: (template?: CallResourceTemplate) => void;
+}) => {
+  const { input } = useField(TEMPLATE_FIELD, { subscription: { value: true } });
+  useEffect(() => {
+    onChange(input.value || undefined);
+  }, [input.value, onChange]);
+  return null;
+};
+
 export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
   call,
   proposal,
@@ -171,6 +203,7 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
   change,
 }) => {
   const dispatch = useDispatch();
+  const single = call.resource_template_selection_mode === 'single';
 
   // Fetch existing resources for this proposal
   const { data } = useQuery({
@@ -211,26 +244,53 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
   // Get selected rows from table state
   const tableState = useSelector(getTableState(TABLE_ID));
   const selectedRows: CallResourceTemplate[] = tableState?.selectedRows || [];
+  const [singleChoice, setSingleChoice] = useState<CallResourceTemplate>();
+  // The form keeps the object it was given; read the call's current one, so a
+  // template edited since prices and saves as it is now.
+  const currentChoice = useMemo(
+    () =>
+      singleChoice &&
+      call.resource_templates?.find(
+        (template) => template.uuid === singleChoice.uuid,
+      ),
+    [singleChoice, call.resource_templates],
+  );
+  // What Save and the cost total work from: the radio choice in single mode,
+  // the ticked rows otherwise.
+  const chosenTemplates = useMemo(
+    () => (single ? (currentChoice ? [currentChoice] : []) : selectedRows),
+    [single, currentChoice, selectedRows],
+  );
 
-  // Initialize selection with existing resources when data loads
-  useEffect(() => {
-    if (
-      initialResources.length > 0 &&
-      call.resource_templates?.length > 0 &&
-      tableState?.selectedRows?.length === 0
-    ) {
-      // Find templates that match existing resources
-      const initialSelection = call.resource_templates.filter((template) =>
-        initialResources.some(
+  // Templates the saved requests were made from.
+  const savedTemplates = useMemo(
+    () =>
+      (call.resource_templates || []).filter((template) =>
+        (data ?? []).some(
           (resource: RequestedResource) =>
             resource.call_resource_template === template.url,
         ),
-      );
-      if (initialSelection.length > 0) {
-        dispatch(selectAllRows(TABLE_ID, initialSelection));
-      }
+      ),
+    [data, call.resource_templates],
+  );
+
+  // Initialize selection with existing resources when data loads. Single mode
+  // restores through the radio form's initial values instead.
+  useEffect(() => {
+    if (
+      !single &&
+      savedTemplates.length > 0 &&
+      tableState?.selectedRows?.length === 0
+    ) {
+      dispatch(selectAllRows(TABLE_ID, savedTemplates));
     }
-  }, [initialResources, call.resource_templates, dispatch]);
+  }, [savedTemplates, single, dispatch]);
+
+  // Restores a draft's saved choice into the radio group.
+  const singleInitialValues = useMemo(
+    () => ({ [TEMPLATE_FIELD]: savedTemplates[0] }),
+    [savedTemplates],
+  );
 
   // The purchase order lives on the saved request, not on the template it was
   // made from, so each row reads it through the request it produced.
@@ -285,11 +345,11 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
     isPending,
   } = useSubmitProposalResourcesFromTemplates(
     proposal,
-    selectedRows,
+    chosenTemplates,
     initialResources as RequestedResource[],
   );
 
-  return (
+  const table = (
     <Table<CallResourceTemplate>
       {...tableProps}
       // Render all templates: the header select-all checkbox replaces the
@@ -298,7 +358,9 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
       // requests on save.
       rows={call.resource_templates || []}
       hasPagination={false}
-      enableMultiSelect
+      enableMultiSelect={!single}
+      fieldType={single ? 'radio' : undefined}
+      fieldName={single ? TEMPLATE_FIELD : undefined}
       columns={[
         {
           title: translate('Template name'),
@@ -338,7 +400,7 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
             ]
           : []),
       ]}
-      title={<TableTitle />}
+      title={<TableTitle single={single} />}
       cardBordered={false}
       bodyClassName="px-0"
       headerClassName="mx-0"
@@ -353,8 +415,14 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
           onClick={saveSelections as any}
           label={translate('Save')}
           iconNode={<CheckCircleIcon weight="bold" />}
-          disabled={!newCount && !removedCount}
-          disabledReason={translate('No changes to save')}
+          // A single-template call needs one chosen: saving none would only
+          // remove the request the proposal cannot be submitted without.
+          disabled={(!newCount && !removedCount) || (single && !currentChoice)}
+          disabledReason={
+            single && !currentChoice
+              ? translate('Choose a template first')
+              : translate('No changes to save')
+          }
           pending={isPending}
           className="min-w-[125px]"
           variant="tertiary"
@@ -366,7 +434,7 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
         <>
           {/* What the proposal would cost is what is selected, not what the
               call offers — an unselected template is not being asked for. */}
-          <ProposalCostTotal rows={selectedRows.map(templateAsRequest)} />
+          <ProposalCostTotal rows={chosenTemplates.map(templateAsRequest)} />
           <FieldReviewComments
             reviews={reviews}
             fieldName="comment_resource_requests"
@@ -375,6 +443,79 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
           />
         </>
       }
+    />
+  );
+
+  // A request with no template of the call behind it predates the rule that
+  // a template call takes only its templates, or lost its template since. It
+  // has no row to show it by, and the proposal cannot be submitted with it.
+  const requestWithoutTemplate = (data ?? []).some(
+    (resource: RequestedResource) =>
+      !savedTemplates.some(
+        (template) => template.url === resource.call_resource_template,
+      ),
+  );
+  // The backend keeps a single-template proposal to one request, so several
+  // means a draft from before the rule or one edited outside the form.
+  const severalRequests = single && (data?.length ?? 0) > 1;
+  // Saving keeps the chosen templates and removes every other request, which
+  // should not happen unannounced.
+  const warning = severalRequests
+    ? {
+        title: translate('This proposal holds several resource requests'),
+        body: translate(
+          'This call allows one template per proposal. Choose the one to keep: saving removes the other requests.',
+        ),
+      }
+    : requestWithoutTemplate && single
+      ? {
+          title: translate(
+            "This proposal's resource request is not from a template",
+          ),
+          body: translate(
+            'This call allows one template per proposal. Choosing a template and saving replaces that request.',
+          ),
+        }
+      : requestWithoutTemplate
+        ? {
+            title: translate('Some resource requests are not from a template'),
+            body: translate(
+              'This call only accepts its resource templates. Tick the templates you need and save: the other requests are removed.',
+            ),
+          }
+        : null;
+  // One shape whether or not the warning shows: a table that remounts clears
+  // its selection, and Save would then remove every ticked request.
+  const content = (
+    <>
+      {warning ? (
+        <AlertItem
+          type="floating"
+          variant="warning"
+          className="mb-4"
+          title={warning.title}
+          body={warning.body}
+        />
+      ) : null}
+      {table}
+    </>
+  );
+  if (!single) {
+    return content;
+  }
+  // A form of its own: the radio column binds to a final-form field, and the
+  // choice is saved by the table's Save button, not by the proposal form.
+  return (
+    <Form
+      onSubmit={() => undefined}
+      initialValues={singleInitialValues}
+      initialValuesEqual={sameTemplateChoice}
+      render={() => (
+        <>
+          <ReportSingleChoice onChange={setSingleChoice} />
+          {content}
+        </>
+      )}
     />
   );
 };

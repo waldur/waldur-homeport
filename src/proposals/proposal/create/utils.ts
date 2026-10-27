@@ -56,32 +56,41 @@ export const useSubmitProposalResourcesFromTemplates = (
       if (!call?.resource_templates?.length) return;
 
       try {
-        const addPromises = newSelections.map((resource) => {
-          return proposalProposalsResourcesSet({
-            path: { uuid: proposal.uuid },
-            body: { call_resource_template_uuid: resource.uuid },
-          });
-        });
-        const removePromises = removedSelections.map((resource) => {
-          return proposalProposalsResourcesDestroy({
-            path: { uuid: proposal.uuid, obj_uuid: resource.uuid },
-          });
-        });
         let success;
         let error;
         const sendRequests = async (promises) => {
-          await Promise.allSettled(promises).then((results) => {
-            results.forEach((res) => {
-              if (res.status === 'rejected') {
-                error = res.reason;
-              } else if (res.status === 'fulfilled') {
-                success = true;
-              }
-            });
+          const results = await Promise.allSettled(promises);
+          results.forEach((res) => {
+            if (res.status === 'rejected') {
+              // The first failure is the cause; later ones tend to follow it.
+              error = error ?? res.reason;
+            } else {
+              success = true;
+            }
           });
         };
-        await sendRequests(removePromises);
-        await sendRequests(addPromises);
+        // Removals finish before any addition is sent: a single-selection call
+        // refuses a second template while the replaced one is still there.
+        await sendRequests(
+          removedSelections.map((resource) =>
+            proposalProposalsResourcesDestroy({
+              path: { uuid: proposal.uuid, obj_uuid: resource.uuid },
+            }),
+          ),
+        );
+        // In single mode a failed removal would only make the addition fail
+        // too, and hide why behind the backend's "remove the current one
+        // first". Elsewhere additions do not depend on removals.
+        if (!error || call.resource_template_selection_mode !== 'single') {
+          await sendRequests(
+            newSelections.map((resource) =>
+              proposalProposalsResourcesSet({
+                path: { uuid: proposal.uuid },
+                body: { call_resource_template_uuid: resource.uuid },
+              }),
+            ),
+          );
+        }
         if (showMessages) {
           if (success) {
             showSuccess(translate('Resource requests has been updated.'));

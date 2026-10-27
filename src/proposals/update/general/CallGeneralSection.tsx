@@ -1,6 +1,4 @@
-import { useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
-import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { isFeatureVisible } from '@/features/connect';
@@ -13,8 +11,8 @@ import {
 import FormTable from '@/form/FormTable';
 import { SlugTemplateHelpText } from '@/form/SlugTemplateHelpText';
 import { translate } from '@/i18n';
-import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
+import { useUpdateCall } from '@/proposals/update/useUpdateCall';
 import { getCallReadOnlyReason } from '@/proposals/utils';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -48,24 +46,7 @@ const PROPOSAL_SLUG_PLACEHOLDERS = [
 ];
 
 export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
-  const queryClient = useQueryClient();
-
-  const { mutateAsync: updateCall } = useManagedMutation({
-    mutationFn: (formData: Record<string, any>) =>
-      proposalProtectedCallsPartialUpdate({
-        path: { uuid: props.call.uuid },
-        body: formData,
-      }),
-    successMessage: translate('The call has been updated.'),
-    errorMessage: translate('Unable to update call.'),
-    onSuccess: async () => {
-      props.refetch();
-      await queryClient.invalidateQueries({
-        queryKey: ['Call', props.call.uuid],
-      });
-    },
-    closeModal: false,
-  });
+  const updateCall = useUpdateCall(props.call, props.refetch);
 
   return (
     <FormTable.Card
