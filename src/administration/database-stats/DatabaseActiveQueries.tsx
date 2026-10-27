@@ -57,7 +57,7 @@ export const DatabaseActiveQueries: FC<DatabaseActiveQueriesProps> = ({
       {
         title: translate('State'),
         render: ({ row }: { row: ActiveQuery }) => (
-          <span className="text-capitalize">{row.state}</span>
+          <span className="capitalize">{row.state}</span>
         ),
       },
       {

@@ -164,7 +164,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                       {key.replace(/_/g, ' ')}
                     </td>
                     <td>
-                      <code className="text-break">{value}</code>
+                      <code className="wrap-anywhere">{value}</code>
                     </td>
                   </tr>
                 ),

@@ -28,9 +28,7 @@ const FindingRow: FC<{ finding: EmailFinding }> = ({ finding }) => (
         <div className="text-quaternary">{finding.detail}</div>
       )}
       {finding.remediation && (
-        <div className="text-quaternary fst-italic mt-1">
-          {finding.remediation}
-        </div>
+        <div className="text-quaternary italic mt-1">{finding.remediation}</div>
       )}
     </div>
   </li>

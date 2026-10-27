@@ -148,7 +148,7 @@ export const SupportSystemLogsList = () => {
           <Link
             state="admin-logging-telemetry"
             params={{ tab: 'system-logging' }}
-            className="text-decoration-none"
+            className="no-underline"
           >
             <Badge
               variant={isEnabled ? 'success' : 'warning'}

@@ -21,7 +21,7 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
             'Are you sure you want to request {provider} to add {offering} to the {call}?',
             {
               provider: (
-                <span className="fst-italic">{offering.customer_name}</span>
+                <span className="italic">{offering.customer_name}</span>
               ),
 
               offering: <u>{offering.name}</u>,

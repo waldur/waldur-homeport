@@ -73,7 +73,7 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
               <EyeIcon size={20} weight="bold" />
             )}
           </button>
-          <code className="grow text-break">
+          <code className="grow wrap-anywhere">
             {showSecret ? token : maskedToken}
           </code>
           <CopyToClipboardButton value={token} />
@@ -83,7 +83,7 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
       <div>
         <FormHeading as="p">{translate('Example usage')}</FormHeading>
         <div className="flex items-start gap-1.5 p-2.5 bg-tertiary dark:bg-quaternary rounded">
-          <code className="grow text-break">
+          <code className="grow wrap-anywhere">
             {showSecret ? curlExample : maskedCurlExample}
           </code>
           <CopyToClipboardButton value={curlExample} />

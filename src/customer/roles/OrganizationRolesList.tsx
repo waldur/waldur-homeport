@@ -287,9 +287,7 @@ export const OrganizationRolesList: FC = () => {
           // `name` is the technical code, not a label — see RolesList.
           title: translate('Code'),
           orderField: 'name',
-          render: ({ row }) => (
-            <span className="font-monospace">{row.name}</span>
-          ),
+          render: ({ row }) => <span className="font-mono">{row.name}</span>,
           copyField: (row) => row.name,
         },
         {

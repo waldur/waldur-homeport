@@ -5,16 +5,6 @@
 $utilities: map.merge(
   $utilities,
   (
-    'position': (
-      property: position,
-      responsive: true,
-      values: static relative absolute fixed sticky,
-    ),
-    'z-index': (
-      property: z-index,
-      class: z-index,
-      values: $zindex-values,
-    ),
     'border-top-width': (
       property: border-top-width,
       class: border-top,
@@ -168,7 +158,9 @@ $utilities: map.remove(
 
 // `.shadow-none` and `.rounded-0` too (the rest of each family has values of
 // its own and stays for now): Tailwind's shadow-none and rounded-none do the
-// same, and Bootstrap's `!important` beat any variant beside them.
+// same, and Bootstrap's `!important` beat any variant beside them. And
+// `.rounded-pill`/`.rounded-circle`, which enforce-border-radius-tokens
+// rewrites to rounded-full.
 $utilities: map.merge(
   $utilities,
   (
@@ -184,10 +176,37 @@ $utilities: map.merge(
     'rounded': map.merge(
         map.get($utilities, 'rounded'),
         (
-          values: map.remove(map.get(map.get($utilities, 'rounded'), values), 0),
+          values: map.remove(
+              map.get(map.get($utilities, 'rounded'), values),
+              0,
+              circle,
+              pill
+            ),
         )
       ),
   )
+);
+
+// Bootstrap-only names (#478, group B): no-bootstrap-layout-utility rewrites
+// each to Tailwind's (position-relative → relative, text-uppercase →
+// uppercase, text-break → wrap-anywhere, translate-middle → -translate-1/2,
+// z-index-1 → z-1, rounded-top → rounded-t-lg, …), so Bootstrap stops
+// generating them. The custom position and z-index utilities above went too.
+$utilities: map.remove(
+  $utilities,
+  'position',
+  'text-transform',
+  'font-style',
+  'font-family',
+  'word-wrap',
+  'text-decoration',
+  'user-select',
+  'pointer-events',
+  'translate-middle',
+  'rounded-top',
+  'rounded-end',
+  'rounded-bottom',
+  'rounded-start'
 );
 
 // `.border-0` too: Tailwind's sets the same zero width, and Bootstrap's

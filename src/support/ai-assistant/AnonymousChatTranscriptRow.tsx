@@ -232,7 +232,7 @@ const InteractionTurns: FunctionComponent<{
               category={interaction.feedback?.category}
             >
               {Boolean(interaction.feedback?.comment) && (
-                <span className="fst-italic ms-1.5">
+                <span className="italic ms-1.5">
                   “{interaction.feedback?.comment}”
                 </span>
               )}

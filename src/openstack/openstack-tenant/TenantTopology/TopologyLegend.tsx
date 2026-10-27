@@ -275,7 +275,7 @@ export const TopologyLegend: FC<Props> = ({ nodeTypes, edgeStyles }) => {
     <div className="mt-3">
       {items.length > 0 ? (
         <>
-          <h6 className="text-quaternary text-uppercase text-xs font-medium mb-2.5">
+          <h6 className="text-quaternary uppercase text-xs font-medium mb-2.5">
             {translate('Legend')}
           </h6>
           <div className="row g-3">
@@ -301,7 +301,7 @@ export const TopologyLegend: FC<Props> = ({ nodeTypes, edgeStyles }) => {
       ) : null}
       {edgeItems.length > 0 ? (
         <>
-          <h6 className="text-quaternary text-uppercase text-xs font-medium mt-3 mb-2.5">
+          <h6 className="text-quaternary uppercase text-xs font-medium mt-3 mb-2.5">
             {translate('Edges')}
           </h6>
           <div className="row g-3">

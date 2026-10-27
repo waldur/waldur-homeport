@@ -278,10 +278,10 @@ const WhySoDrillDownTable: FC<{
         )}
       >
         <thead>
-          <tr className="text-quaternary text-xs text-uppercase font-medium border-b-[1px] border-b-secondary">
+          <tr className="text-quaternary text-xs uppercase font-medium border-b-[1px] border-b-secondary">
             <th
               className={classNames(
-                'border-0 cursor-pointer user-select-none hover:text-brand whitespace-nowrap',
+                'border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap',
               )}
               onClick={() => toggleSort('label')}
             >
@@ -289,14 +289,14 @@ const WhySoDrillDownTable: FC<{
               <HeaderSort column="label" />
             </th>
             <th
-              className="text-end border-0 cursor-pointer user-select-none hover:text-brand whitespace-nowrap"
+              className="text-end border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap"
               onClick={() => toggleSort('value')}
             >
               {resolvedValueLabel}
               <HeaderSort column="value" />
             </th>
             <th
-              className="text-end border-0 cursor-pointer user-select-none hover:text-brand whitespace-nowrap"
+              className="text-end border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap"
               onClick={() => toggleSort('share')}
             >
               {translate('Share')}
@@ -304,7 +304,7 @@ const WhySoDrillDownTable: FC<{
             </th>
             {hasChanges && (
               <th
-                className="text-end border-0 cursor-pointer user-select-none hover:text-brand whitespace-nowrap"
+                className="text-end border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap"
                 onClick={() => toggleSort('change')}
               >
                 {translate('Change')}

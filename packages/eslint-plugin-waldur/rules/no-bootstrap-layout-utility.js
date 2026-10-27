@@ -29,6 +29,20 @@
  *   flex-sm-column-auto    → sm:flex-none
  *   order-sm-2             → sm:order-2
  *
+ * and the other Bootstrap-only names (#478, group B):
+ *
+ *   position-absolute      → absolute (position-md-sticky → md:sticky)
+ *   text-uppercase         → uppercase
+ *   fst-italic             → italic
+ *   font-monospace         → font-mono
+ *   text-break             → wrap-anywhere
+ *   text-decoration-none   → no-underline
+ *   user-select-none       → select-none
+ *   pe-none                → pointer-events-none
+ *   translate-middle       → -translate-1/2
+ *   z-index-1              → z-1 (z-index-n1 → -z-1)
+ *   rounded-top            → rounded-t-lg
+ *
  * This rule reports all such classes and autofixes them to their Tailwind counterparts.
  *
  * One exception: Bootstrap emits `.flex-wrap` and `.flex-nowrap` with
@@ -141,6 +155,57 @@ const STATIC_LAYOUT_MAP = {
   'text-truncate': 'truncate',
   'text-nowrap': 'whitespace-nowrap',
   'text-wrap': 'whitespace-normal',
+
+  // Bootstrap-only names Bootstrap no longer generates (#478, group B).
+  // Position (breakpoint variants in getLayoutReplacement)
+  'position-static': 'static',
+  'position-relative': 'relative',
+  'position-absolute': 'absolute',
+  'position-fixed': 'fixed',
+  'position-sticky': 'sticky',
+
+  // Typography
+  'text-uppercase': 'uppercase',
+  'text-capitalize': 'capitalize',
+  'text-lowercase': 'lowercase',
+  'fst-italic': 'italic',
+  'fst-normal': 'not-italic',
+  'font-monospace': 'font-mono',
+  // word-break: break-word, which browsers read as overflow-wrap: anywhere:
+  // a long word may also shrink a flex item or a table cell, which
+  // break-words does not allow.
+  'text-break': 'wrap-anywhere',
+  'text-decoration-underline': 'underline',
+  'text-decoration-none': 'no-underline',
+  'text-decoration-line-through': 'line-through',
+
+  // Interaction
+  'user-select-none': 'select-none',
+  'user-select-all': 'select-all',
+  'user-select-auto': 'select-auto',
+  'pe-none': 'pointer-events-none',
+  'pe-auto': 'pointer-events-auto',
+
+  // Transform
+  'translate-middle': '-translate-1/2',
+  'translate-middle-x': '-translate-x-1/2',
+  'translate-middle-y': '-translate-y-1/2',
+
+  // z-index ($zindex-values)
+  'z-index-n2': '-z-2',
+  'z-index-n1': '-z-1',
+  'z-index-0': 'z-0',
+  'z-index-1': 'z-1',
+  'z-index-2': 'z-2',
+  'z-index-3': 'z-3',
+  'z-index-4': 'z-4',
+  'z-index-5': 'z-5',
+
+  // One-side radius ($border-radius, 8px = rounded-lg)
+  'rounded-top': 'rounded-t-lg',
+  'rounded-end': 'rounded-e-lg',
+  'rounded-bottom': 'rounded-b-lg',
+  'rounded-start': 'rounded-s-lg',
 };
 
 const SIZE_PROP_MAP = {
@@ -211,6 +276,12 @@ export const getLayoutReplacement = (name) => {
 
   m = /^text-(sm|md|lg|xl|xxl)-(start|end|center)$/.exec(name);
   if (m) return `${BP_MAP[m[1]]}:text-${m[2]}`;
+
+  m =
+    /^position-(sm|md|lg|xl|xxl)-(static|relative|absolute|fixed|sticky)$/.exec(
+      name,
+    );
+  if (m) return `${BP_MAP[m[1]]}:${m[2]}`;
 
   m =
     /^d-(sm|md|lg|xl|xxl)-(none|block|flex|inline|inline-block|inline-flex|grid|table|table-row|table-cell)$/.exec(

@@ -122,7 +122,7 @@ export const ReviewerProfileSummaryCard: FC<
                   href={`https://orcid.org/${profile.orcid_id}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-decoration-none"
+                  className="inline-flex items-center gap-1 no-underline"
                 >
                   <OrcidLogo size={14} />
                   {profile.orcid_id}

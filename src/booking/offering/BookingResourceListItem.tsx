@@ -150,14 +150,14 @@ export const BookingResourceListItem = ({
           <div
             className={
               layout.diffHours > 2
-                ? 'min-h-[100px] position-sticky top-0 py-2.5'
-                : 'h-full position-relative py-1.5'
+                ? 'min-h-[100px] sticky top-0 py-2.5'
+                : 'h-full relative py-1.5'
             }
           >
             {layout.diffHours > 1.1 && (
               <div className="flex justify-between">
                 <div>
-                  <span className="block fst-italic">
+                  <span className="block italic">
                     {parseDate(layout.schedule.start).toFormat(
                       "LLL dd',' HH:mm",
                     )}
@@ -181,7 +181,7 @@ export const BookingResourceListItem = ({
                 item.attributes.schedules.length === 1)) && (
               <div>{item.project_name}</div>
             )}
-            <div className="position-absolute bottom-0 end-0 mb-1.5">
+            <div className="absolute bottom-0 end-0 mb-1.5">
               <BaseButton
                 variant="tertiary"
                 className={classNames(layout.diffHours < 1.1 && 'py-1')}

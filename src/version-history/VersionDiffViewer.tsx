@@ -128,7 +128,7 @@ const TableDiffView: FunctionComponent<{
     // share the width, and long values (emails, UUIDs) break instead.
     <Table responsive className="table-row-bordered align-middle mb-0">
       <thead>
-        <tr className="font-medium text-xs text-uppercase text-quaternary">
+        <tr className="font-medium text-xs uppercase text-quaternary">
           <th className="ps-4 md:min-w-[150px]">{translate('Field')}</th>
           <th className="md:min-w-[200px]">{translate('Previous')}</th>
           <th className="md:min-w-[200px]">{translate('Current')}</th>
@@ -142,12 +142,12 @@ const TableDiffView: FunctionComponent<{
           >
             <td className="ps-4">{diff.label}</td>
             <td>
-              <pre className="mb-0 text-xs text-quaternary whitespace-normal text-break bg-transparent">
+              <pre className="mb-0 text-xs text-quaternary whitespace-normal wrap-anywhere bg-transparent">
                 {formatFieldValue(diff.oldValue)}
               </pre>
             </td>
             <td>
-              <pre className="mb-0 text-xs whitespace-normal text-break bg-transparent">
+              <pre className="mb-0 text-xs whitespace-normal wrap-anywhere bg-transparent">
                 {formatFieldValue(diff.newValue)}
               </pre>
             </td>

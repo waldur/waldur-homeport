@@ -377,10 +377,10 @@ const NodeRow: FC<NodeRowProps> = ({ id, row, style, isActive, showFocus }) => {
         <span
           className={
             isAttr || isWaldur
-              ? `small truncate font-monospace ${
-                  isWaldur ? 'fst-italic text-info' : 'text-secondary'
+              ? `small truncate font-mono ${
+                  isWaldur ? 'italic text-info' : 'text-secondary'
                 }`
-              : 'text-brand truncate font-monospace'
+              : 'text-brand truncate font-mono'
           }
           title={
             isWaldur

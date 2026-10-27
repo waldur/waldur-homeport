@@ -37,7 +37,7 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
     >
       <Row>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-2.5">
+          <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Connection breakdown')}
           </h6>
           <Table size="sm" borderless className="mb-0">
@@ -72,7 +72,7 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
           </Table>
         </Col>
         <Col lg={6}>
-          <h6 className="text-uppercase text-quaternary mb-2.5">
+          <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Utilization')}
           </h6>
           <Progress

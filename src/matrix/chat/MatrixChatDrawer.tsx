@@ -186,7 +186,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
         {({ getRootProps, getInputProps, isDragActive }) => (
           <div
             {...getRootProps({
-              className: 'team-chat h-full flex flex-col position-relative',
+              className: 'team-chat h-full flex flex-col relative',
             })}
             // The waldur-integration-testing suite selects the open
             // conversation by this (docs/e2e-locators.md).
@@ -253,7 +253,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
               )}
               {showCallView && (
                 <div
-                  className="position-relative overflow-hidden"
+                  className="relative overflow-hidden"
                   style={{
                     display: 'flex',
                     flex: showChat ? '0 0 60%' : '1 1 auto',
@@ -262,7 +262,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
                   <MatrixCallDockSlot roomId={activeRoomId} />
                   {callLive && (
                     <div
-                      className="position-absolute"
+                      className="absolute"
                       style={{ top: 8, right: 8, zIndex: 2 }}
                     >
                       <Tooltip

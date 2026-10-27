@@ -331,11 +331,11 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                     formatJsxTemplate,
                   )}
                 </p>
-                <div className="position-relative">
+                <div className="relative">
                   <pre className="bg-tertiary dark:bg-quaternary p-3 rounded">
                     {result.registration_yaml}
                   </pre>
-                  <div className="position-absolute top-0 end-0 m-1.5">
+                  <div className="absolute top-0 end-0 m-1.5">
                     <CopyToClipboardButton value={result.registration_yaml} />
                   </div>
                 </div>

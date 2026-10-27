@@ -60,9 +60,7 @@ export const AwardOfferingCell: FC<{
     <div className="flex flex-col gap-1 items-start">
       <span
         className={
-          row.change === 'removed'
-            ? 'text-quaternary text-decoration-line-through'
-            : undefined
+          row.change === 'removed' ? 'text-quaternary line-through' : undefined
         }
       >
         {offering.offering_name}

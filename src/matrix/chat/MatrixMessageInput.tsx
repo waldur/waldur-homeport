@@ -638,7 +638,7 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
   const canSend = Boolean(message.trim()) || pendingFiles.length > 0;
 
   return (
-    <div className="position-relative">
+    <div className="relative">
       {showCommands && commandQuery && (
         <CommandPopup
           commands={filteredCommands}

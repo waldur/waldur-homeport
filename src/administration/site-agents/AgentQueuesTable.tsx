@@ -29,7 +29,7 @@ export const AgentQueuesTable: FC<AgentQueuesTableProps> = ({
       {
         title: translate('Queue'),
         render: ({ row }: { row: AgentQueueInfo }) => (
-          <code className="text-xs text-break" title={row.name}>
+          <code className="text-xs wrap-anywhere" title={row.name}>
             {row.name}
           </code>
         ),

@@ -26,7 +26,7 @@ const PurchaseOrderBadge = ({ order, offering }) => {
       <FileDownloader
         url={order.attachment}
         name={translate('PDF file')}
-        className="text-btn inline-flex items-center gap-1 text-decoration-none"
+        className="text-btn inline-flex items-center gap-1 no-underline"
       >
         <Badge
           variant="success"

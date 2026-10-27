@@ -113,7 +113,7 @@ const detailsTableColumns: Column<UserAffiliationDetail>[] = [
   {
     title: translate('Identifier'),
     render: ({ row }) => (
-      <span className="text-quaternary font-monospace">
+      <span className="text-quaternary font-mono">
         {renderFieldOrDash(row.identifier)}
       </span>
     ),

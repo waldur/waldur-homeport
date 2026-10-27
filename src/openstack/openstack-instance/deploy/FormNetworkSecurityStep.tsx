@@ -598,7 +598,9 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
           {...data}
         />
       </FormField>
-      <div className={!portSecurityEnabled ? 'opacity-50 pe-none' : ''}>
+      <div
+        className={!portSecurityEnabled ? 'opacity-50 pointer-events-none' : ''}
+      >
         <FormSecurityGroupsField
           offering={props.offering}
           cardBordered={false}

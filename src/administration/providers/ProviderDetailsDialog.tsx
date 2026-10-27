@@ -35,7 +35,7 @@ export const ProviderDetailsDialog = (props) => {
             <div className="copy-to-clipboard-container">
               {url}
               <CopyToClipboardButton
-                className="mx-1.5 hover:text-brand cursor-pointer inline z-index-1"
+                className="mx-1.5 hover:text-brand cursor-pointer inline z-1"
                 value={url}
               />
             </div>

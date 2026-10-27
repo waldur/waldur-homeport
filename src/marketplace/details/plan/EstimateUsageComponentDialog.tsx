@@ -40,7 +40,7 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
             <th>
               {props.resolve.component.name}
               <HelpIcon label={props.resolve.component.type} className="mx-1" />
-              <span className="font-normal fst-italic">
+              <span className="font-normal italic">
                 (
                 {props.resolve.component.measured_unit
                   ? translate('{price} per {unit}', {

@@ -11,7 +11,7 @@ export const IPList = ({ value }) => {
             <CopyToClipboardButton
               value={ip}
               size={17}
-              className="mx-1.5 hover:text-brand cursor-pointer inline z-index-1 position-relative"
+              className="mx-1.5 hover:text-brand cursor-pointer inline z-1 relative"
             />
             {idx < ips.length - 1 ? <span className="me-1.5">,</span> : null}
           </span>

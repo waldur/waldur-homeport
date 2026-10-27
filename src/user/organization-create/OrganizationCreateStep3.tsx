@@ -143,7 +143,7 @@ export const OrganizationCreateStep3: FunctionComponent<
   return (
     <div className="flex flex-col gap-4">
       <Card className="border-0 shadow-sm">
-        <Card.Body className="text-center position-relative overflow-hidden organization-validation-result">
+        <Card.Body className="text-center relative overflow-hidden organization-validation-result">
           <RadialBackground className="icon-background" />
           {validationLoading ? (
             <>
