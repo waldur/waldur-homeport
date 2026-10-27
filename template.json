@@ -32166,6 +32166,16 @@
       "feature_area": "setup"
     }
   },
+  "Missing: {options}": {
+    "context": {
+      "variables": {
+        "options": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "proposals"
+    }
+  },
   "Mitigation": {
     "context": {
       "feature_area": "changelog"
@@ -74898,7 +74908,11 @@
       "feature_area": "reports"
     }
   },
-  "none": {},
+  "none": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "notifications": {
     "context": {
       "feature_area": "notifications"
@@ -78849,6 +78863,22 @@
         }
       },
       "feature_area": "details"
+    }
+  },
+  "{option}: {value} (requested {requested})": {
+    "context": {
+      "variables": {
+        "option": {
+          "type": "unknown"
+        },
+        "value": {
+          "type": "unknown"
+        },
+        "requested": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "proposal"
     }
   },
   "{page} is not available yet.": {

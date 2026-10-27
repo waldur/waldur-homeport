@@ -31,7 +31,13 @@ import { ResourceRequestTemplates } from './ResourceRequestTemplates';
 
 // Stable identity so the inert filter form does not reinitialise on every render.
 const NOOP_SUBMIT = () => undefined;
-const columns = resourceRequestColumns({ offeringFilter: true });
+const columns = resourceRequestColumns({
+  offeringFilter: true,
+  showMissingOptions: true,
+});
+// A read-only view of the step cannot fix a missing option, so it is not
+// pointed out there.
+const readOnlyColumns = resourceRequestColumns({ offeringFilter: true });
 
 interface ProposalResourcesTableProps {
   proposal: Proposal;
@@ -87,7 +93,7 @@ const ProposalResourcesTableComponent: FC<ProposalResourcesTableProps> = ({
       // rail narrows this panel, and six columns pushed estimated cost and
       // purchase order — what a reviewer is here for — behind a sideways
       // scroll.
-      columns={columns}
+      columns={readOnlyMode ? readOnlyColumns : columns}
       // The step card above already carries this heading and its own border;
       // repeating both gave the panel a second "Resource requests" title inside
       // a nested box. Same treatment the project team step gives its table.

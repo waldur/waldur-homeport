@@ -24,7 +24,7 @@ import { evaluateCondition } from '@/marketplace-checklist/questionDependencies'
 import { useModal } from '@/modal/actions';
 import { useCallFixedDuration } from '@/proposals/callQueries';
 import { usesCallVocabulary, requestListState } from '@/proposals/presentation';
-import { hasRequestedAmount } from '@/proposals/requestedResourceCost';
+import { isRequestComplete } from '@/proposals/requestedResourceOptions';
 import { useProposalCanSubmit } from '@/proposals/useProposalCanSubmit';
 import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
 import { useNotify } from '@/store/notify';
@@ -422,10 +422,17 @@ export const ProposalSubmissionStep: FC<{
           // A row on its own is not a request. Attaching an offering creates
           // one asking for nothing, which would otherwise tick this step green
           // and let the applicant submit a proposal awarded zero of everything
-          // — validate_requested_amounts_present refuses exactly that.
+          // — validate_requested_amounts_present refuses exactly that. A
+          // required option of the offering left unanswered (a QoS, say) is
+          // refused the same way.
+          // Judged on every request: resources_init holds only the rows the
+          // table last fetched (one page, the filtered offering, the first page
+          // in templates mode). The full list is the query every add, edit
+          // and delete already invalidates; the table's rows stand in until it
+          // loads.
           if (step.id === 'step-resource-requests') {
-            const rows = values?.resources_init || [];
-            return rows.length > 0 && rows.every(hasRequestedAmount);
+            const rows = resourceRows ?? values?.resources_init ?? [];
+            return rows.length > 0 && rows.every(isRequestComplete);
           }
           if (step.required && step.requiredFields?.length) {
             return step.requiredFields.every((fieldName) => {

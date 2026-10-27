@@ -8,8 +8,14 @@ import {
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { translate } from '@/i18n';
+import {
+  getOptionKeys,
+  OfferingOptionsLike,
+} from '@/marketplace/common/requiredOptions';
+import { formatOptionValue } from '@/marketplace/resources/options/OptionValue';
 import { PREPAID_DURATION_MONTHS } from '@/proposals/prepaidDuration';
 import { getRowLimits } from '@/proposals/requestedResourceCost';
+import { getRequestOptionSummary } from '@/proposals/requestedResourceOptions';
 import { HELD_DECISION_STEP } from '@/proposals/roundLifecycle';
 import { Proposal } from '@/proposals/types';
 
@@ -130,6 +136,10 @@ export interface AwardComparisonRow {
   requested?: RequestedResource;
   awarded?: AwardedResource;
   change: AwardChange;
+  /** Options the award answers differently from the request, if any. */
+  changedOptions?: string[];
+  /** The options the line answers, as shown; see getAwardOptionLines. */
+  optionLines?: AwardOptionLine[];
 }
 
 const sameLimits = (a: Record<string, number>, b: Record<string, number>) => {
@@ -140,9 +150,58 @@ const sameLimits = (a: Record<string, number>, b: Record<string, number>) => {
 const prepaidMonths = (attributes?: Record<string, unknown> | null) =>
   Number(attributes?.[PREPAID_DURATION_MONTHS] ?? 0);
 
+const sortKey = (value: unknown) =>
+  value !== null && typeof value === 'object'
+    ? JSON.stringify(value)
+    : String(value);
+
+/**
+ * An answer as it reads, so that answers which read the same are the same: 4
+ * and "4", "<p>a</p>" and "a", "<p></p>" and nothing, a multiple choice in any
+ * order. On top of the shared empty-value rule (isEmptyOptionValue, which
+ * formatOptionValue applies), an unticked box and an empty multiple choice
+ * count as no answer here: neither is shown, so a difference would be
+ * invisible.
+ */
+const normalizeOptionValue = (option, value: unknown): string | null => {
+  if (value === false || (Array.isArray(value) && value.length === 0)) {
+    return null;
+  }
+  const comparable = Array.isArray(value)
+    ? [...value].sort((a, b) => sortKey(a).localeCompare(sortKey(b)))
+    : value;
+  return formatOptionValue(option, comparable);
+};
+
+type OptionsCarrier = Pick<RequestedResource, 'requested_offering'> & {
+  attributes?: Record<string, unknown> | null;
+};
+
+const optionKeys = (item: OptionsCarrier): string[] =>
+  getOptionKeys(item.requested_offering?.options as OfferingOptionsLike);
+
+/**
+ * The offering's options the award answers differently from the request: a
+ * QoS the call manager changed, say. The subscription period is compared on
+ * its own.
+ */
+const changedOptionKeys = (
+  requested: OptionsCarrier,
+  awarded: OptionsCarrier,
+): string[] => {
+  const fields = (awarded.requested_offering?.options as any)?.options ?? {};
+  return optionKeys(awarded).filter(
+    (key) =>
+      key !== PREPAID_DURATION_MONTHS &&
+      normalizeOptionValue(fields[key], requested.attributes?.[key]) !==
+        normalizeOptionValue(fields[key], awarded.attributes?.[key]),
+  );
+};
+
 const compareItem = (
   requested: RequestedResource,
   awarded: AwardedResource,
+  changedOptions: string[],
 ): AwardChange => {
   if (awarded.requested_offering.uuid !== requested.requested_offering.uuid) {
     return 'moved';
@@ -157,6 +216,10 @@ const compareItem = (
   if (
     prepaidMonths(requested.attributes) !== prepaidMonths(awarded.attributes)
   ) {
+    return 'changed';
+  }
+  // Only an option changed — a QoS — is still not what was asked for.
+  if (changedOptions.length) {
     return 'changed';
   }
   return 'unchanged';
@@ -182,11 +245,18 @@ export const compareAward = (
       return { uuid: awarded.uuid, awarded, change: 'added' };
     }
     covered.add(requested.uuid);
+    // Set against the request only on the same offering: another one has
+    // other options.
+    const changedOptions =
+      awarded.requested_offering.uuid === requested.requested_offering.uuid
+        ? changedOptionKeys(requested, awarded)
+        : [];
     return {
       uuid: awarded.uuid,
       requested,
       awarded,
-      change: compareItem(requested, awarded),
+      change: compareItem(requested, awarded, changedOptions),
+      changedOptions,
     };
   });
   for (const requested of requests) {
@@ -194,7 +264,9 @@ export const compareAward = (
       rows.push({ uuid: requested.uuid, requested, change: 'removed' });
     }
   }
-  return rows;
+  // Worked out once here, where the comparison is memoised, rather than by
+  // every cell on every render.
+  return rows.map((row) => ({ ...row, optionLines: getAwardOptionLines(row) }));
 };
 
 export const awardDiffers = (rows: AwardComparisonRow[]) =>
@@ -231,4 +303,49 @@ export const asCostRow = (awarded: AwardedResource) => {
   return awarded.plan && awarded.plan !== offering.plan_details?.uuid
     ? { ...awarded, requested_offering: { ...offering, plan_details: null } }
     : awarded;
+};
+
+/** One option of an award line: its awarded value, and the requested one where
+ * the two differ. */
+export interface AwardOptionLine {
+  key: string;
+  label: string;
+  value: string | null;
+  /** Present only when the award answers the option differently. */
+  requested?: string | null;
+}
+
+/**
+ * The options an award line answers, in the offering's order, with what was
+ * requested beside any the award changed. An item moved to another offering
+ * has other options, so nothing is set against the request then.
+ */
+export const getAwardOptionLines = (
+  row: AwardComparisonRow,
+): AwardOptionLine[] => {
+  const source = row.awarded ?? row.requested;
+  const fields = (source?.requested_offering?.options as any)?.options;
+  if (!fields) {
+    return [];
+  }
+  const shown = new Map(
+    getRequestOptionSummary(source).map((item) => [item.key, item.value]),
+  );
+  const changed = new Set(row.changedOptions ?? []);
+  const requested = new Map(
+    row.requested
+      ? getRequestOptionSummary(row.requested).map((item) => [
+          item.key,
+          item.value,
+        ])
+      : [],
+  );
+  return optionKeys(source)
+    .filter((key) => shown.has(key) || changed.has(key))
+    .map((key) => ({
+      key,
+      label: fields[key]?.label || key,
+      value: shown.get(key) ?? null,
+      ...(changed.has(key) ? { requested: requested.get(key) ?? null } : {}),
+    }));
 };

@@ -24,12 +24,17 @@ const resources: any[] = [
   {
     requested_offering: {
       offering_name: 'HPC',
+      options: {
+        order: ['qos'],
+        options: { qos: { type: 'select_string', label: 'QoS' } },
+      },
       components: [
         { type: 'cpu_hours', name: 'CPU hours', measured_unit: 'h' },
         { type: 'storage', name: 'Storage', measured_unit: 'TB' },
       ],
     },
     limits: { cpu_hours: 80000 },
+    attributes: { qos: 'parallel', prepaid_duration_months: 12 },
     purchase_order_reference: 'PO-7',
     attachment: 'https://example.com/media/orders/po-7.pdf',
   },
@@ -61,6 +66,12 @@ describe('buildProposalDocument', () => {
   });
 
   // A component with no amount asked for is not invented as a zero.
+  // waldur/waldur-homeport#129 on GitHub: the PDF said "Requested: —" for a
+  // request whose QoS was its whole point.
+  it('lists the options the request answers', () => {
+    expect(text).toContain('QoS: parallel');
+  });
+
   it('leaves out components the proposal did not ask for', () => {
     expect(text).not.toContain('Storage');
   });

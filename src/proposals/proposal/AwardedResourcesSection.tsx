@@ -63,10 +63,14 @@ const DescriptionCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
 // without a width keeps a 150px floor; together they pushed this table past
 // the card beside the progress rail. The cells here wrap instead, inside
 // widths that add up to the card.
-const columns: Column<AwardComparisonRow>[] = [
+const awardColumns = (
+  showMissingOptions: boolean,
+): Column<AwardComparisonRow>[] => [
   {
     title: translate('Offering'),
-    render: AwardOfferingCell,
+    render: ({ row }) => (
+      <AwardOfferingCell row={row} showMissingOptions={showMissingOptions} />
+    ),
     width: '30%',
     ellipsis: false,
   },
@@ -97,6 +101,11 @@ const columns: Column<AwardComparisonRow>[] = [
     ellipsis: false,
   },
 ];
+
+// The call manager editing the award is told what a line still lacks; an
+// applicant or reviewer reading it cannot act on that.
+const editableColumns = awardColumns(true);
+const readOnlyColumns = awardColumns(false);
 
 const AwardItemActions: FC<{
   row: AwardedResource;
@@ -289,7 +298,7 @@ export const AwardedResourcesSection: FC<AwardedResourcesSectionProps> = ({
           minHeight="auto"
           verboseName={translate('awarded resources')}
           emptyMessage={translate('Nothing is awarded yet.')}
-          columns={columns}
+          columns={editable ? editableColumns : readOnlyColumns}
           rowActions={rowActions}
         />
       )}
