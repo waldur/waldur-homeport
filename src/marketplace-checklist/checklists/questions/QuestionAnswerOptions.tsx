@@ -158,7 +158,6 @@ export const QuestionAnswerOptions = () => (
   <FieldArray
     name="options"
     component={DraggableFieldsListGroup}
-    rerenderOnEveryChange
     validate={requiredArray}
   />
 );

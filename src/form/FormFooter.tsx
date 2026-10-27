@@ -76,7 +76,9 @@ export const FormFooter: FC<FormFooterProps> = ({
   extraButtonsPosition = 'start',
   submitChildren,
 }) => {
-  const { submitting, invalid } = useFormState();
+  const { submitting, invalid } = useFormState({
+    subscription: { submitting: true, invalid: true },
+  });
   const buttonClassName = fullWidth ? 'flex-1' : undefined;
 
   return (

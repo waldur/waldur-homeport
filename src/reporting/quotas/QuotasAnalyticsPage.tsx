@@ -7,10 +7,7 @@ import { customerQuotasList } from 'waldur-js-client';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import {
-  selectCustomerQuotasFilter,
-  CustomerQuotasFilterFormId,
-} from '@/table/generated/CustomerQuotasFilter';
+import { selectCustomerQuotasFilter } from '@/table/generated/CustomerQuotasFilter';
 
 import {
   AnalyticsCapability,
@@ -299,7 +296,6 @@ const QuotasAnalyticsPageTable: FC = () => {
 
 export const QuotasAnalyticsPage: FC<any> = (props) => (
   <Form
-    id={CustomerQuotasFilterFormId}
     onSubmit={() => {}}
     subscription={{
       values: true,

@@ -89,6 +89,12 @@ export const StorageFolderConfiguration = ({
         <FieldArray
           name={`${name}.storage_data_types`}
           component={StorageDataTypeArrayField}
+          subscription={{
+            length: true,
+            value: true,
+            error: true,
+            touched: true,
+          }}
         />
       </FormGroup>
       <SelectGroup

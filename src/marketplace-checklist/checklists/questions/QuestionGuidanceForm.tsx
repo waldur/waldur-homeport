@@ -123,11 +123,6 @@ export const QuestionGuidanceForm = ({
   values: ChecklistQuestionForm;
 }) => {
   return (
-    <FieldArray
-      name="guidance"
-      component={FieldsListGroup}
-      rerenderOnEveryChange
-      values={values}
-    />
+    <FieldArray name="guidance" component={FieldsListGroup} values={values} />
   );
 };

@@ -12,7 +12,7 @@ const onBefore = () => vi.mocked(useRouter().transitionService.onBefore);
 
 const renderForm = (props: { warnOnUnload?: boolean } = {}) => {
   const result = render(
-    <Form
+    <Form<{ description?: string; users?: string }>
       onSubmit={() => undefined}
       initialValues={{ description: 'Saved' }}
       render={({ form }) => (

@@ -9,7 +9,7 @@ import { formatResourceShort } from '@/marketplace/utils';
 
 export const ResourceGroup = ({ disabled }) => {
   const { change } = useForm();
-  const { values } = useFormState();
+  const { values } = useFormState({ subscription: { values: true } });
   const project = values.project;
   const resource = values.resource;
 

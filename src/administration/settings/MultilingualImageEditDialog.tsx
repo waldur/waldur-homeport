@@ -143,8 +143,6 @@ export const MultilingualImageEditDialog: FC<
                     value: images[lang.code],
                     onChange: (value) => handleImageChange(lang.code, value),
                     onBlur: () => {},
-                    onDragStart: () => {},
-                    onDrop: () => {},
                     onFocus: () => {},
                   }}
                   initialValue={resolve.initialValues?.[lang.code]}

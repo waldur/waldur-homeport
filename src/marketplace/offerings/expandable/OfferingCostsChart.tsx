@@ -25,7 +25,7 @@ interface OfferingCostChartProps {
 }
 
 const ChartBody: FunctionComponent<{ offering: Offering }> = ({ offering }) => {
-  const { values } = useFormState();
+  const { values } = useFormState({ subscription: { values: true } });
   const accounting_is_running = values?.accounting_is_running?.value;
 
   const {

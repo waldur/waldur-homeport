@@ -9,10 +9,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import {
-  selectMarketplaceStatsOpenstackInstancesFilter,
-  MarketplaceStatsOpenstackInstancesFilterFormId,
-} from '@/table/generated/MarketplaceStatsOpenstackInstancesFilter';
+import { selectMarketplaceStatsOpenstackInstancesFilter } from '@/table/generated/MarketplaceStatsOpenstackInstancesFilter';
 
 import { AggregateChart } from './AggregateChart';
 import { AggregateTable } from './AggregateTable';
@@ -88,7 +85,6 @@ const OpenstackInstancesAggregateViewTable: FC<any> = () => {
 
 export const OpenstackInstancesAggregateView: FC<any> = (props) => (
   <RffForm
-    id={MarketplaceStatsOpenstackInstancesFilterFormId}
     onSubmit={() => {}}
     subscription={{
       values: true,

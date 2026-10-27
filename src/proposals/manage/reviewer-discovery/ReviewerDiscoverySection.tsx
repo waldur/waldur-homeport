@@ -442,7 +442,6 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
 
 export const ReviewerDiscoverySection: FC<any> = (props) => (
   <Form
-    id={ReviewerSuggestionsFilterFormId}
     onSubmit={() => {}}
     subscription={{
       values: true,

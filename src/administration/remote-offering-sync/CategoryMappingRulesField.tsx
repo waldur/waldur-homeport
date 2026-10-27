@@ -158,7 +158,6 @@ export const CategoryMappingRulesField = ({ remoteCategories }) => (
   <FieldArray
     name="remotelocalcategory_set"
     component={FieldsListGroup}
-    rerenderOnEveryChange
     validate={requiredArray}
     remoteCategories={remoteCategories}
   />

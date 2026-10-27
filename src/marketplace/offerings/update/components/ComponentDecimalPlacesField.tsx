@@ -28,7 +28,7 @@ interface Values {
 export const ComponentDecimalPlacesField: React.FC<{
   offering?: ProviderOfferingDetails;
 }> = ({ offering }) => {
-  const { values } = useFormState<Values>();
+  const { values } = useFormState<Values>({ subscription: { values: true } });
   // Only once the provider has actually asked for a fraction: the advisory is
   // about a precision that is set, not about the default.
   const showAdvisory =

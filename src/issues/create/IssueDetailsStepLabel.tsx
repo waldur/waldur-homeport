@@ -9,7 +9,9 @@ import { translate } from '@/i18n';
 import { IssueFormData } from './types';
 
 export const IssueDetailsStepLabel = () => {
-  const { values: formValues } = useFormState<IssueFormData>();
+  const { values: formValues } = useFormState<IssueFormData>({
+    subscription: { values: true },
+  });
 
   const hasDetails =
     Boolean(

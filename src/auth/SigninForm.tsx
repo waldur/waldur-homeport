@@ -58,7 +58,7 @@ const renderError = (error) => {
   return renderedError;
 };
 
-const initialValues = { signin_by: 'username' };
+const initialValues: Partial<FormData> = { signin_by: 'username' };
 
 /**
  * The second-factor step.

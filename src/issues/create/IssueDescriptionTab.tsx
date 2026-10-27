@@ -23,7 +23,9 @@ export const IssueDescriptionTab = ({
   context?: IssueCreateButtonProps;
 }) => {
   const form = useForm();
-  const { values, submitting } = useFormState();
+  const { values, submitting } = useFormState({
+    subscription: { values: true, submitting: true },
+  });
   const issueType = values.type;
   const issueTemplate = values.template;
 

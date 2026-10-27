@@ -31,7 +31,9 @@ export const IssueDetailsTab = ({
   context: IssueDetailsTabContext;
 }) => {
   const { change } = useForm();
-  const { values, submitting } = useFormState();
+  const { values, submitting } = useFormState({
+    subscription: { values: true, submitting: true },
+  });
   const standaloneIssue = values.standaloneIssue;
   const type = values.type;
 

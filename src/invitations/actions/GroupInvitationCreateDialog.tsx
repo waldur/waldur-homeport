@@ -30,8 +30,6 @@ interface OwnProps {
   resolve: { refetch(): void; roles: Role[] };
 }
 
-const initialValues = { type: 'private' };
-
 interface GroupInvitationCreateFormData {
   type: GroupInvitationType;
   role: Role;
@@ -45,6 +43,10 @@ interface GroupInvitationCreateFormData {
   user_email_patterns: Array<string>;
   custom_text: string;
 }
+
+const initialValues: Partial<GroupInvitationCreateFormData> = {
+  type: 'private',
+};
 
 export const GroupInvitationCreateDialog = ({
   resolve: { refetch, roles },

@@ -320,7 +320,6 @@ export const QuestionVisibilityForm = ({
     <FieldArray
       name="conditions"
       component={FieldsListGroup}
-      rerenderOnEveryChange
       questions={data.filter((q) => q.uuid !== question?.uuid)}
     />
   );

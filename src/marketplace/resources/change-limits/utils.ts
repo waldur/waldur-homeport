@@ -87,7 +87,7 @@ export interface FetchedData {
   limitSerializer: LimitParser;
   usages: Limits;
   limits: Limits;
-  initialValues: { limits: Limits };
+  initialValues: { limits: Limits; attachment?: File | null };
   offeringLimits: OfferingLimits;
   concealBillingInfo: boolean;
 }

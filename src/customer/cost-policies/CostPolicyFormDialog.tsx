@@ -128,7 +128,6 @@ export const CostPolicyFormDialog: FC<CostPolicyFormDialogProps> = (props) => {
     <Form
       onSubmit={(values: any) => submitMutation.mutateAsync(values)}
       initialValues={initialValues}
-      enableReinitialize
       render={({ handleSubmit, submitting, invalid, dirty }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

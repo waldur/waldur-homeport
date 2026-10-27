@@ -104,7 +104,7 @@ const PolicyInfoDropdown: FC<{
   policyUuid?: string;
 }> = ({ offering, policyUuid }) => {
   const { openDialog } = useModal();
-  const formState = useFormState();
+  const formState = useFormState({ subscription: { values: true } });
 
   const planAllocations = useMemo(() => {
     if (!offering?.plans) return [];

@@ -83,6 +83,12 @@ const SiteWidePermissionGuard: FC = () => {
   return null;
 };
 
+// The schema types `permissions` as an object; the API takes and returns the
+// list of permission codes.
+type RoleFormValues = Omit<RoleModifyRequest, 'permissions'> & {
+  permissions: string[];
+};
+
 interface RoleFormDialogProps {
   resolve: {
     row?: RoleDetails;
@@ -146,12 +152,13 @@ export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
   });
 
   const onSubmit = useCallback(
-    async (formData: RoleModifyRequest) => {
+    async (formData: RoleFormValues) => {
+      const body = formData as unknown as RoleModifyRequest;
       try {
         if (isEdit) {
-          await rolesUpdate({ path: { uuid: row.uuid }, body: formData });
+          await rolesUpdate({ path: { uuid: row.uuid }, body });
         } else {
-          await rolesCreate({ body: formData });
+          await rolesCreate({ body });
         }
         ENV.roles = await getRoles();
         if (isEdit) {

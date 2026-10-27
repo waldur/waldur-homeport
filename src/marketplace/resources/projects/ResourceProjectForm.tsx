@@ -171,7 +171,7 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
   });
 
   return (
-    <Form
+    <Form<FormValues>
       onSubmit={(values) =>
         mutation.mutateAsync(values).catch(() => {
           /* error handled by useManagedMutation */

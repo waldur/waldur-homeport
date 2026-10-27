@@ -16,7 +16,7 @@ export type WizardStep = ProgressStep;
  * Props passed to each wizard step component.
  * Extends React Final Form's FormRenderProps for form integration.
  */
-export interface WizardStepProps extends FormRenderProps<any, any> {
+export interface WizardStepProps extends FormRenderProps<any> {
   /** Title displayed in the modal header */
   title: string;
   /** Optional subtitle displayed below the title */

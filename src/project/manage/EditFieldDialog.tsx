@@ -1,6 +1,6 @@
 import { pick } from 'es-toolkit/compat';
 import { Form } from 'react-final-form';
-import { projectsPartialUpdate } from 'waldur-js-client';
+import { Project, projectsPartialUpdate } from 'waldur-js-client';
 
 import { SubmitButton, MarkdownGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -36,7 +36,7 @@ const formatValue = (key, value) => {
 export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
   const setCurrentProject = useSetProject();
 
-  const updateMutation = useManagedMutation<any, any, FormData>({
+  const updateMutation = useManagedMutation<any, any, Partial<Project>>({
     mutationFn: (formData) =>
       projectsPartialUpdate({
         path: { uuid: resolve.project.uuid },
@@ -53,7 +53,9 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
 
   return (
     <Form
-      onSubmit={(values: FormData) => updateMutation.mutateAsync(values)}
+      onSubmit={(values: Partial<Project>) =>
+        updateMutation.mutateAsync(values)
+      }
       initialValues={pick(resolve.project, resolve.name)}
       subscription={{
         values: true,

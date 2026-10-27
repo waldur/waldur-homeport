@@ -93,7 +93,7 @@ const ResourcesTable: FC<TableProps & { projectDate }> = ({
 );
 
 const FormModalComponent: FC<
-  FormRenderProps<FormData, Partial<Project>> & { project: Project }
+  FormRenderProps<Partial<Project>> & { project: Project }
 > = ({ invalid, handleSubmit, submitting, project }) => {
   const value = useField('end_date');
   const valueDate = useMemo(() => {
@@ -305,7 +305,7 @@ export const EditEndDateDialog = ({
   ) as Resource[];
 
   const onSubmit = useCallback(
-    async (formData: FormData) => {
+    async (formData: Partial<Project>) => {
       try {
         const endDate = formData[resolve.name];
 

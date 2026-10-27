@@ -60,7 +60,6 @@ const renderComponent = ({
         limits: { storage: limit },
         storage_folder_manager: val,
       }}
-      enableReinitialize
     >
       {() => (
         <Field name="storage_folder_manager">

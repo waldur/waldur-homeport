@@ -8,7 +8,7 @@ import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
 
 export const AttachmentsGroup = () => {
-  const { submitting } = useFormState();
+  const { submitting } = useFormState({ subscription: { submitting: true } });
 
   return (
     <FormField className="mb-5">
