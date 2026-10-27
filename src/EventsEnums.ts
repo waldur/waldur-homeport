@@ -551,6 +551,7 @@ export const UsersEnum = {
   event_consumer_registered_with_broad_credential: 'event_consumer_registered_with_broad_credential',
   event_consumer_resync_requested: 'event_consumer_resync_requested',
   event_consumer_webhook_updated: 'event_consumer_webhook_updated',
+  feedback_survey_answered: 'feedback_survey_answered',
   freeipa_profile_created: 'freeipa_profile_created',
   freeipa_profile_deleted: 'freeipa_profile_deleted',
   freeipa_profile_disabled: 'freeipa_profile_disabled',

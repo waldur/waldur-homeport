@@ -151,7 +151,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
         order: formData.order,
       };
 
-      if (formData.question_type === 'number') {
+      if (['number', 'rating'].includes(formData.question_type)) {
         body.min_value = formData.min_value || null;
         body.max_value = formData.max_value || null;
       }

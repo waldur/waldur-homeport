@@ -77,7 +77,7 @@ export const QuestionGeneralForm = ({
       />
       {['single_select', 'multi_select'].includes(values.question_type) ? (
         <QuestionAnswerOptions />
-      ) : values.question_type === 'number' ? (
+      ) : ['number', 'rating'].includes(values.question_type) ? (
         <>
           <NumberGroup
             name="min_value"

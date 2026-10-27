@@ -34,7 +34,7 @@ interface LikertOption {
   label: string;
 }
 
-const getLikertOptions = (config: LikertConfig): LikertOption[] => {
+export const getLikertOptions = (config: LikertConfig): LikertOption[] => {
   const length = (config.likert_scale_length ?? 5) as LikertScaleLength;
   const low = config.likert_low_label?.trim() || DEFAULT_LOW_LABEL();
   const high = config.likert_high_label?.trim() || DEFAULT_HIGH_LABEL();

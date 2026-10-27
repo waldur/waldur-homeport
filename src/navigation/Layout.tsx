@@ -30,6 +30,7 @@ import { GRID_BREAKPOINTS } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { useIsFloatingDrawerOpen } from '@/drawer/actions';
+import { FeedbackPromptCheck } from '@/feedback/FeedbackPromptCheck';
 import { InvitationCheck } from '@/invitations/InvitationCheck';
 import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { GracePeriodWarningBar } from '@/project/GracePeriodWarningBar';
@@ -176,6 +177,7 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
         <InvitationCheck />
         <PermissionDataProvider>
           <ProfileCompletenessProvider>
+            <FeedbackPromptCheck />
             <div
               // Printing shows the page without its controls: every button in
               // it is hidden.
