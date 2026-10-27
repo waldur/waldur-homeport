@@ -4,6 +4,7 @@ import { Badge, BadgeVariant } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { AwardComparisonRow } from '@/proposals/awardedResources';
+import { MissingOptionsHint } from '@/proposals/MissingOptionsHint';
 import {
   getRequestableComponents,
   getRowLimits,
@@ -37,11 +38,16 @@ export const AwardChangeBadge: FC<{ change: AwardComparisonRow['change'] }> = ({
 );
 
 /**
- * The offering an item is awarded on and its plan, with what they were asked
- * for where they differ, and the change badge. One column rather than three,
+ * The offering an item is awarded on, its plan and the options it answers
+ * (a QoS), with what they were asked for where they differ, and the change
+ * badge. One column rather than three,
  * so the table fits beside the proposal's progress rail.
  */
-export const AwardOfferingCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
+export const AwardOfferingCell: FC<{
+  row: AwardComparisonRow;
+  /** Only where the award can be edited: elsewhere nobody can answer it. */
+  showMissingOptions?: boolean;
+}> = ({ row, showMissingOptions }) => {
   const offering = (row.awarded ?? row.requested).requested_offering;
   const requestedPlan = row.requested?.requested_offering.plan_details;
   const planName = row.awarded ? row.awarded.plan_name : requestedPlan?.name;
@@ -71,6 +77,18 @@ export const AwardOfferingCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
             : translate('Plan: {plan}', { plan: planName })}
         </span>
       )}
+      {(row.optionLines ?? []).map((line) => (
+        <span key={line.key} className="text-quaternary text-xs">
+          {'requested' in line
+            ? translate('{option}: {value} (requested {requested})', {
+                option: line.label,
+                value: line.value ?? translate('none'),
+                requested: line.requested ?? translate('none'),
+              })
+            : `${line.label}: ${line.value}`}
+        </span>
+      ))}
+      {showMissingOptions && <MissingOptionsHint item={row.awarded} />}
       {row.change === 'moved' && (
         <span className="text-quaternary text-xs">
           {translate('Requested on {offering}', {

@@ -23,6 +23,13 @@ import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 const PREPAID_MONTHS_FIELD = `attributes.${PREPAID_DURATION_MONTHS}`;
 
+// The stand-ins built from the call offering while the offering itself loads,
+// or when it cannot be retrieved. Told apart by reference: their shape is the
+// retrieved offering's, minus most of its plans.
+const FALLBACK_OFFERINGS = new WeakSet<object>();
+const isFallback = (offering: unknown) =>
+  Boolean(offering) && FALLBACK_OFFERINGS.has(offering as object);
+
 export const ResourceRequestWizardFormSecondPage: FunctionComponent<
   WizardFormStepProps
 > = (props) => {
@@ -83,13 +90,18 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
   const offeringDetails = useMemo(() => {
     if (queryData.data) return queryData.data;
     if (!offering) return undefined;
-    return {
+    const fallback = {
       uuid: offering.offering_uuid || offering.uuid,
       name: offering.offering_name,
       category_title: offering.category_name,
       components: offering.components ?? [],
       plans: offering.plan_details ? [offering.plan_details] : [],
+      // A request being edited carries its offering's options; without them
+      // the options step would vanish whenever the retrieve fails.
+      options: offering.options,
     } as unknown as typeof queryData.data;
+    FALLBACK_OFFERINGS.add(fallback);
+    return fallback;
   }, [queryData.data, offering]);
 
   // Archived plans cannot be awarded; the backend refuses them.
@@ -98,9 +110,20 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
     [offeringDetails],
   );
 
-  // Store the main offering, so that we can access to it in other steps
+  // Store the main offering, so that we can access to it in other steps.
+  // Another offering replaces it, and the retrieved offering replaces the
+  // fallback: on a first open the fallback built above is stored while the
+  // retrieve is in flight, and the retrieved offering has the same uuid. Kept
+  // by uuid alone, the fallback stayed — without options, so a required one
+  // such as a QoS could be skipped, and with only the call's plan, so an
+  // award's plan URL never resolved. A refetch, or a rebuilt fallback,
+  // changes nothing.
   useEffect(() => {
-    if (offeringDetails && mainOffering?.uuid !== offeringDetails.uuid) {
+    if (
+      offeringDetails &&
+      (mainOffering?.uuid !== offeringDetails.uuid ||
+        (isFallback(mainOffering) && !isFallback(offeringDetails)))
+    ) {
       form.change('mainOffering', offeringDetails);
       // On edit mode, the plan field is an url, so we need to get the plan object from the main offering
       if (offeringDetails.plans) {

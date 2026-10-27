@@ -8,6 +8,7 @@ import {
   formatPrepaidMonths,
   getRequestedPrepaidMonths,
 } from '@/proposals/prepaidDuration';
+import { getRequestOptionSummary } from '@/proposals/requestedResourceOptions';
 import { Proposal } from '@/proposals/types';
 import { formatProposalState } from '@/proposals/utils';
 
@@ -36,9 +37,10 @@ const heading = (text: string) => ({
   margin: [0, 12, 0, 6] as [number, number, number, number],
 });
 
-/** "Core hours: 2 400 000 h" per line. Grouped here but not in the CSV: this
- * is read, that is loaded into a spreadsheet. */
-const requestedAmounts = (resource: RequestedResource): string[] => {
+/** "Core hours: 2 400 000 h" per line, then the options the request answers
+ * ("QoS: parallel"). Grouped here but not in the CSV: this is read, that is
+ * loaded into a spreadsheet. */
+const requestedLines = (resource: RequestedResource): string[] => {
   const components = resource.requested_offering.components ?? [];
   const limits = resource.limits ?? {};
   const lines = Object.entries(limits)
@@ -50,6 +52,10 @@ const requestedAmounts = (resource: RequestedResource): string[] => {
         : '';
       return `${component?.name ?? type}: ${formatUsageValue(amount)}${unit}`;
     });
+  // A QoS or partition is as much a part of the request as its amounts.
+  getRequestOptionSummary(resource).forEach((item) =>
+    lines.push(`${item.label}: ${item.value}`),
+  );
   return lines.length ? lines : [EMPTY];
 };
 
@@ -126,7 +132,7 @@ export const buildProposalDocument = (
                 const months = getRequestedPrepaidMonths(resource);
                 return [
                   value(resource.requested_offering.offering_name),
-                  { stack: requestedAmounts(resource) },
+                  { stack: requestedLines(resource) },
                   months ? formatPrepaidMonths(months) : EMPTY,
                   value(resource.purchase_order_reference),
                 ];

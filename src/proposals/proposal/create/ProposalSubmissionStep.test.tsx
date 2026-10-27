@@ -23,10 +23,26 @@ const DirtyFields = () => {
   );
 };
 
+// Every request of the proposal, as the shared query returns them.
+const resourceRows = vi.hoisted(() => ({ current: undefined as any }));
+vi.mock('@/proposals/useProposalResourceRows', () => ({
+  useProposalResourceRows: () => ({ data: resourceRows.current }),
+}));
+
 // One stand-in step: fills resources_init through change(), the way the
-// resource table does, and has one real input for typed text.
+// resource table does, and has one real input for typed text. A second one
+// reports whether the resource requests count as complete.
 vi.mock('./steps', () => ({
   createProposalSteps: () => [
+    {
+      id: 'step-resource-requests',
+      label: 'Resource requests',
+      component: ({ params }) => (
+        <span data-testid="requests-complete">
+          {String(params.isCompleted)}
+        </span>
+      ),
+    },
     {
       id: 'step-project',
       label: 'Project details',
@@ -92,8 +108,51 @@ const renderStep = () => {
   return { refetchProposal };
 };
 
+const slurm = {
+  offering_type: 'Marketplace.Slurm',
+  components: [{ type: 'cpu_hours', name: 'CPU hours', billing_type: 'limit' }],
+  options: {
+    order: ['qos'],
+    options: { qos: { type: 'select_string', label: 'QoS', required: true } },
+  },
+};
+const requestRow = (uuid: string, attributes: Record<string, unknown>) => ({
+  uuid,
+  requested_offering: slurm,
+  limits: { cpu_hours: 1000 },
+  attributes,
+});
+
 describe('ProposalSubmissionStep', () => {
-  beforeEach(() => vi.clearAllMocks());
+  beforeEach(() => {
+    vi.clearAllMocks();
+    resourceRows.current = undefined;
+  });
+
+  // waldur/waldur-homeport#129 on GitHub: the step was ticked green while a
+  // request lacked its required QoS. Judged on every request — the table
+  // holds one page — so one on another page counts too.
+  it('is incomplete while any request lacks a required option', async () => {
+    resourceRows.current = [
+      requestRow('r1', { qos: 'parallel' }),
+      requestRow('r2', {}),
+    ];
+    renderStep();
+    expect(await screen.findByTestId('requests-complete')).toHaveTextContent(
+      'false',
+    );
+  });
+
+  it('is complete once every request answers its required options', async () => {
+    resourceRows.current = [
+      requestRow('r1', { qos: 'parallel' }),
+      requestRow('r2', { qos: 'long' }),
+    ];
+    renderStep();
+    expect(await screen.findByTestId('requests-complete')).toHaveTextContent(
+      'true',
+    );
+  });
 
   it('keeps the resource requests when the proposal is refetched', async () => {
     const { refetchProposal } = renderStep();

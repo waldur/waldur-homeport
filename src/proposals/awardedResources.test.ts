@@ -5,6 +5,7 @@ import {
   awardDiffers,
   canEditAward,
   compareAward,
+  getAwardOptionLines,
   hasReachedAllocationDecision,
   isAwardSectionShown,
   pickOfferingLimits,
@@ -89,6 +90,127 @@ describe('compareAward', () => {
       [award('a1', 'r1', hpc, { cpu_hours: 1000 }, 'plan-premium')],
     );
     expect(rows[0].change).toBe('changed');
+  });
+});
+
+// waldur/waldur-homeport#129 on GitHub: a QoS changed by the call manager
+// read as "As requested".
+describe('options in the award', () => {
+  const slurm = {
+    ...hpc,
+    options: {
+      order: ['qos'],
+      options: {
+        qos: {
+          type: 'select_string',
+          label: 'QoS',
+          required: true,
+          choices: ['parallel', 'balanced'],
+        },
+      },
+    },
+  };
+  const requested = {
+    ...request('r1', slurm, { cpu_hours: 1000 }),
+    attributes: { qos: 'parallel' },
+  };
+  const awarded = (qos?: string) => ({
+    ...award('a1', 'r1', slurm, { cpu_hours: 1000 }, 'plan-standard'),
+    attributes: qos === undefined ? {} : { qos },
+  });
+
+  it('reports a changed option as a change', () => {
+    const [row] = compareAward([requested], [awarded('balanced')]);
+    expect(row.change).toBe('changed');
+  });
+
+  it('reports the same option as unchanged', () => {
+    const [row] = compareAward([requested], [awarded('parallel')]);
+    expect(row.change).toBe('unchanged');
+  });
+
+  it('shows the awarded option, with what was requested where it differs', () => {
+    const [changed] = compareAward([requested], [awarded('balanced')]);
+    expect(getAwardOptionLines(changed)).toEqual([
+      { key: 'qos', label: 'QoS', value: 'balanced', requested: 'parallel' },
+    ]);
+    const [same] = compareAward([requested], [awarded('parallel')]);
+    expect(getAwardOptionLines(same)).toEqual([
+      { key: 'qos', label: 'QoS', value: 'parallel' },
+    ]);
+  });
+
+  it('does not take the same answer in another form as a change', () => {
+    const offering = {
+      ...slurm,
+      options: {
+        order: ['qos', 'nodes', 'notify', 'models'],
+        options: {
+          ...slurm.options.options,
+          nodes: { type: 'integer', label: 'Nodes' },
+          notify: { type: 'boolean', label: 'Notify' },
+          models: { type: 'select_string_multi', label: 'Models' },
+        },
+      },
+    };
+    const asked = {
+      ...request('r1', offering, { cpu_hours: 1000 }),
+      attributes: { qos: 'parallel', nodes: 4, models: ['a', 'b'] },
+    };
+    const given = {
+      ...award('a1', 'r1', offering, { cpu_hours: 1000 }, 'plan-standard'),
+      // A number read back as text, an unticked box, the same models in
+      // another order.
+      attributes: {
+        qos: 'parallel',
+        nodes: '4',
+        notify: false,
+        models: ['b', 'a'],
+      },
+    };
+    const [row] = compareAward([asked], [given]);
+    expect(row.change).toBe('unchanged');
+    expect(getAwardOptionLines(row).some((line) => 'requested' in line)).toBe(
+      false,
+    );
+  });
+
+  // An award form may store the same text with or without markup.
+  it('does not take a difference in markup alone as a change', () => {
+    const offering = {
+      ...slurm,
+      options: {
+        order: ['qos', 'notes', 'justification'],
+        options: {
+          ...slurm.options.options,
+          notes: { type: 'html_text', label: 'Notes' },
+          justification: { type: 'html_text', label: 'Justification' },
+        },
+      },
+    };
+    const asked = {
+      ...request('r1', offering, { cpu_hours: 1000 }),
+      attributes: { qos: 'parallel', notes: 'a', justification: '' },
+    };
+    const given = {
+      ...award('a1', 'r1', offering, { cpu_hours: 1000 }, 'plan-standard'),
+      attributes: {
+        qos: 'parallel',
+        notes: '<p>a</p>',
+        justification: '<p></p>',
+      },
+    };
+    const [row] = compareAward([asked], [given]);
+    expect(row.change).toBe('unchanged');
+    expect(row.optionLines.some((line) => 'requested' in line)).toBe(false);
+  });
+
+  it('shows an option the award dropped', () => {
+    const [row] = compareAward([requested], [awarded()]);
+    expect(row.change).toBe('changed');
+    expect(getAwardOptionLines(row)).toEqual([
+      { key: 'qos', label: 'QoS', value: null, requested: 'parallel' },
+    ]);
   });
 });
 

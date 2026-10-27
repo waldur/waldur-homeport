@@ -6,6 +6,7 @@ import { defaultCurrency } from '@/core/formatCurrency';
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { translate } from '@/i18n';
 import { isAllModels } from '@/marketplace/common/modelSelection';
+import { isEmptyOptionValue } from '@/marketplace/common/requiredOptions';
 
 // OpenStack tenant/instance selectors submit the backend_id string (or an
 // array of them). Legacy records may still hold the full option object, so
@@ -54,8 +55,58 @@ const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   multi_datacenter_k8s_config: (value) => JSON.stringify(value),
 };
 
-const isEmpty = (value) =>
-  value === '' || value === null || typeof value === 'undefined';
+// Ends of blocks and lines become spaces first, so "<p>Line one</p><p>Line
+// two</p>" reads "Line one Line two". DOMParser builds an inert document:
+// nothing in it runs or loads. textContent decodes the entities.
+const BLOCK_BOUNDARY = /<\/(p|div|li|h[1-6])\s*>|<br\s*\/?>/gi;
+
+const htmlToPlainText = (html: string) =>
+  (
+    new DOMParser().parseFromString(
+      html.replace(BLOCK_BOUNDARY, (boundary) => `${boundary} `),
+      'text/html',
+    ).body.textContent ?? ''
+  )
+    .replace(/\s+/g, ' ')
+    .trim();
+
+// Stored values do not always have the shape their option says.
+const MULTI_TYPES = [
+  'select_string_multi',
+  'select_multiple_openstack_tenants',
+  'select_multiple_openstack_instances',
+];
+
+/**
+ * The value as plain text, for places that cannot render markup: a one-line
+ * summary, a PDF. Null when there is nothing to show — an empty multiple
+ * choice included, which would otherwise read "None" in a summary.
+ */
+export const formatOptionValue = (
+  option: Pick<OptionField, 'type'> | null | undefined,
+  value,
+): string | null => {
+  if (
+    isEmptyOptionValue(value) ||
+    (Array.isArray(value) && value.length === 0)
+  ) {
+    return null;
+  }
+  if (option?.type === 'html_text') {
+    return htmlToPlainText(String(value)) || null;
+  }
+  if (MULTI_TYPES.includes(option?.type) && !Array.isArray(value)) {
+    value = [value];
+  }
+  const render = option?.type ? OptionValueRenders[option.type] : undefined;
+  const rendered = render ? render(value) : value;
+  if (isEmptyOptionValue(rendered)) {
+    return null;
+  }
+  return typeof rendered === 'object'
+    ? JSON.stringify(rendered)
+    : String(rendered);
+};
 
 export const OptionValue = ({
   option,
@@ -64,7 +115,7 @@ export const OptionValue = ({
   option: OptionField;
   value;
 }) => {
-  if (isEmpty(value)) {
+  if (isEmptyOptionValue(value)) {
     return 'N/A';
   }
   const Renderer = OptionValueRenders[option.type];
