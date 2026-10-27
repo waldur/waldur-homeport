@@ -8,6 +8,7 @@ import { FC, ReactNode } from 'react';
 import { FeaturedIcon, FeaturedIconVariant } from 'waldur-ui';
 
 import { formatDate, formatISODate, formatRelative } from '@/core/dateUtils';
+import { CostPolicyLinks } from '@/customer/cost-policies/CostPolicyLinks';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
 
@@ -94,6 +95,12 @@ export const CreditHorizon: FC<Props> = ({ events }) => (
                 <small className="text-quaternary">{metaLabel(event)}</small>
               </div>
               <div className="text-quaternary">{event.consequence}</div>
+              {event.costPolicy?.row ? (
+                <CostPolicyLinks
+                  row={event.costPolicy.row}
+                  type={event.costPolicy.type}
+                />
+              ) : null}
             </div>
           </div>
         );

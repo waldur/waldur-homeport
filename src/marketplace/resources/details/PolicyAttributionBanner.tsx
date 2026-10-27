@@ -4,11 +4,21 @@ import {
   PauseCircleIcon,
   XCircleIcon,
 } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Resource } from 'waldur-js-client';
+import {
+  marketplaceCustomerEstimatedCostPoliciesRetrieve,
+  marketplaceProjectEstimatedCostPoliciesRetrieve,
+  Resource,
+} from 'waldur-js-client';
 
 import { formatMediumDateTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
+import { getCostPolicySummary } from '@/customer/cost-policies/costPolicyDetails';
+import {
+  useCanFixCostPolicy,
+  useCostPolicyDialogs,
+} from '@/customer/cost-policies/CostPolicyLinks';
 import { translate } from '@/i18n';
 import { isAllTimeLimitReached } from '@/marketplace/common/spendingLimits';
 import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
@@ -96,6 +106,81 @@ const FLAGS: FlagConfig[] = [
   },
 ];
 
+const COST_POLICY_RETRIEVE = {
+  ProjectEstimatedCostPolicy: marketplaceProjectEstimatedCostPoliciesRetrieve,
+  CustomerEstimatedCostPolicy: marketplaceCustomerEstimatedCostPoliciesRetrieve,
+};
+
+/** The cost policy that set the flag, for a one-line reason on the bar and
+ * the details dialog behind it.
+ *
+ * Null while it loads, and when the user may not read it (an organization
+ * policy is not visible to project roles): the bar then keeps its generic
+ * recovery message and offers no details.
+ */
+const useAttributedCostPolicy = (attribution: PolicyAttribution) => {
+  const retrieve = COST_POLICY_RETRIEVE[attribution.policy_class];
+  const { data } = useQuery({
+    queryKey: [
+      'PolicyAttributionCostPolicy',
+      attribution.policy_class,
+      attribution.policy_uuid,
+    ],
+    queryFn: () =>
+      retrieve({ path: { uuid: attribution.policy_uuid } }).then(
+        (response) => response.data,
+      ),
+    enabled: Boolean(retrieve && attribution.policy_uuid),
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+  return data ?? null;
+};
+
+const CostPolicyFlagBar: FC<{
+  attribution: PolicyAttribution;
+  customerUuid: string;
+  icon: Icon;
+  label: string;
+  recoveryMessage: string;
+}> = ({ attribution, customerUuid, icon, label, recoveryMessage }) => {
+  const policy = useAttributedCostPolicy(attribution);
+  const type =
+    attribution.policy_class === 'CustomerEstimatedCostPolicy'
+      ? 'organization'
+      : 'project';
+  const canFix = useCanFixCostPolicy(policy, type, customerUuid);
+  const { openDetails, openFix } = useCostPolicyDialogs(
+    policy,
+    type,
+    customerUuid,
+  );
+  if (!policy) {
+    return (
+      <AnnouncementBar
+        icon={icon}
+        variant="danger"
+        label={label}
+        description={`${formatBannerDescription(attribution)}. ${recoveryMessage}`}
+        colored
+      />
+    );
+  }
+  return (
+    <AnnouncementBar
+      icon={icon}
+      variant="danger"
+      label={label}
+      description={getCostPolicySummary(policy)}
+      secondaryActionLabel={translate('Details')}
+      onSecondaryAction={openDetails}
+      actionLabel={canFix ? translate('Fix…') : undefined}
+      onAction={canFix ? openFix : undefined}
+      colored
+    />
+  );
+};
+
 // What lifts a usage-limit restriction, in the Usage tab's words, when the
 // spending limits say it: a reached all-time limit holds until it is raised or
 // cleared, and a reached calendar limit lifts when it resets. Otherwise (a
@@ -138,15 +223,14 @@ export const PolicyAttributionBanner: FC<{ resource: Resource }> = ({
           const attribution = getAttribution(resource, field);
 
           if (attribution) {
-            const policyDescription = formatBannerDescription(attribution);
             return (
-              <AnnouncementBar
+              <CostPolicyFlagBar
                 key={field}
+                attribution={attribution}
+                customerUuid={resource.customer_uuid}
                 icon={Icon}
-                variant="danger"
                 label={label}
-                description={`${policyDescription}. ${recoveryMessage}`}
-                colored
+                recoveryMessage={recoveryMessage}
               />
             );
           }

@@ -1,4 +1,8 @@
-import { PolicyGateEnum, PolicyTriggerStatus } from 'waldur-js-client';
+import {
+  PolicyCostBreakdown,
+  PolicyGateEnum,
+  PolicyTriggerStatus,
+} from 'waldur-js-client';
 
 import { BadgeVariant } from 'waldur-ui';
 
@@ -11,6 +15,7 @@ export interface TriggerStatusPolicy {
   has_fired?: boolean;
   current_cost?: string | number | null;
   limit_cost?: number;
+  cost_breakdown?: PolicyCostBreakdown | null;
 }
 
 export interface TriggerStatusView {
@@ -18,6 +23,11 @@ export interface TriggerStatusView {
   label: string;
   /** The full reason with its figures, for the badge's tooltip. */
   explanation: string;
+  /** What the cost is made of, from `cost_breakdown`. */
+  breakdown?: string;
+  /** The part of the cost from earlier months, which credit added now
+   * cannot pay, when there is one. */
+  earlier?: string;
   /** What happens next, shown after the reason in the tooltip. */
   note?: string;
   variant: BadgeVariant;
@@ -64,24 +74,27 @@ export const getTriggerStatusView = (
     // A gate this client does not know: no status rather than a wrong one.
     return null;
   }
+  const parts = {
+    explanation: reason,
+    ...getCostBreakdownText(policy.cost_breakdown, status.triggered),
+    held,
+  };
 
   if (status.triggered) {
     if (policy.has_fired) {
       return {
         label: translate('Limit reached'),
-        explanation: reason,
         variant: 'danger',
-        held,
+        ...parts,
       };
     }
     // The tooltip says the limit is reached; the badge only says what is
     // left to happen.
     return {
       label: translate('Actions pending'),
-      explanation: reason,
       note: translate('Its actions run at the next evaluation of the policy.'),
       variant: 'warning',
-      held,
+      ...parts,
     };
   }
 
@@ -89,12 +102,11 @@ export const getTriggerStatusView = (
     // Fired earlier, no longer over: the next evaluation resets its actions.
     return {
       label: translate('Resets at next evaluation'),
-      explanation: reason,
       note: translate(
         'The actions it ran are undone at the next evaluation of the policy.',
       ),
       variant: 'info',
-      held,
+      ...parts,
     };
   }
 
@@ -106,16 +118,59 @@ export const getTriggerStatusView = (
         status.gate === 'held_by_project_credit'
           ? translate('Waiting for project credit')
           : translate('Waiting for organization credit'),
-      explanation: reason,
       variant: 'warning',
-      held,
+      ...parts,
     };
   }
   return {
     label: translate('Below limit'),
-    explanation: reason,
     variant: 'success',
-    held,
+    ...parts,
+  };
+};
+
+const amount = (value: string | undefined) => {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : 0;
+};
+
+/** What `current_cost` is made of, worded for people.
+ *
+ * `breakdown` names the credit the cost is net of, and is left out when no
+ * credit was used. `earlier` names the part from earlier months: credit added
+ * now pays only the current month, so a policy over its limit on that part
+ * stays over it until those months are paid. It is left out when there is no
+ * such part, and for a policy below its limit, where it explains nothing.
+ */
+const getCostBreakdownText = (
+  breakdown: PolicyCostBreakdown | null | undefined,
+  triggered = true,
+): { breakdown?: string; earlier?: string } => {
+  if (!breakdown) {
+    return {};
+  }
+  const drawn = amount(breakdown.credit_drawn);
+  const pending = amount(breakdown.credit_pending);
+  const earlier = amount(breakdown.earlier_months);
+  return {
+    breakdown:
+      drawn || pending
+        ? translate(
+            'Cost {before}, less credit already used, {drawn}, and credit still to be used this month, {pending}.',
+            {
+              before: defaultCurrency(breakdown.cost_before_credit),
+              drawn: defaultCurrency(drawn),
+              pending: defaultCurrency(pending),
+            },
+          )
+        : undefined,
+    earlier:
+      triggered && earlier > 0
+        ? translate(
+            '{earlier} of it is from earlier months that credit did not cover. Credit added now pays only this month, so this part stays until those months are paid.',
+            { earlier: defaultCurrency(earlier) },
+          )
+        : undefined,
   };
 };
 
@@ -170,6 +225,11 @@ const getGateReason = (
     case 'cost_below_limit':
       return translate(
         'The cost after credit, {cost}, is at or below the limit, {limit}.',
+        { cost, limit },
+      );
+    case 'cost_over_limit':
+      return translate(
+        'The cost after credit, {cost}, is over the limit, {limit}.',
         { cost, limit },
       );
     case 'held_by_project_credit':

@@ -4,7 +4,35 @@ import { Badge } from 'waldur-ui';
 
 import { BooleanField } from '@/table/BooleanField';
 
-import { getTriggerStatusView, TriggerStatusPolicy } from './triggerStatus';
+import {
+  getTriggerStatusView,
+  TriggerStatusPolicy,
+  TriggerStatusView,
+} from './triggerStatus';
+
+/** The reason, then what the cost is made of, then what happens next. */
+const TriggerStatusTooltip: FC<{ status: TriggerStatusView }> = ({
+  status,
+}) => {
+  const lines = [
+    status.explanation,
+    status.breakdown,
+    status.earlier,
+    status.note,
+  ].filter(Boolean);
+  if (lines.length === 1) {
+    return <>{lines[0]}</>;
+  }
+  return (
+    <>
+      {lines.map((line, index) => (
+        <p key={index} className={index === lines.length - 1 ? 'mb-0' : 'mb-1'}>
+          {line}
+        </p>
+      ))}
+    </>
+  );
+};
 
 interface CostPolicyTriggerCellProps {
   row: TriggerStatusPolicy;
@@ -32,16 +60,7 @@ export const CostPolicyTriggerCell: FC<CostPolicyTriggerCellProps> = ({
           variant={status.variant}
           shape="pill"
           tone="outline"
-          tooltip={
-            status.note ? (
-              <>
-                <p className="mb-1">{status.explanation}</p>
-                <p className="mb-0">{status.note}</p>
-              </>
-            ) : (
-              status.explanation
-            )
-          }
+          tooltip={<TriggerStatusTooltip status={status} />}
           className="whitespace-nowrap"
           // Focusable, so the reason is reachable without a mouse.
           tabIndex={0}

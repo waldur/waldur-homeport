@@ -8,7 +8,7 @@ import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 
 import { finalCoveredMonth, writeOffDate } from './creditRunway';
-import { CreditEvent } from './types';
+import { CostPolicyRef, CreditEvent } from './types';
 
 interface ResourceEndDates {
   /** The date the resource is actually scheduled to terminate: the earliest of
@@ -53,6 +53,8 @@ export interface CreditEventInput {
     /** Over its cost limit, but a credit holds it back until the credit left
      *  falls to the limit (`trigger_status` gate `held_by_*`). */
     heldByCredit?: boolean;
+    /** The cost policy itself, for the row's details and fix. */
+    costPolicy?: CostPolicyRef;
   }[];
 }
 
@@ -343,6 +345,7 @@ export const buildCreditEvents = (
       tone: reached && stopsResources(policy) ? 'danger' : 'warning',
       isBinding: false,
       approximate: !reached,
+      costPolicy: policy.costPolicy,
     };
     events.push(event);
     if (stopsResources(policy)) {
