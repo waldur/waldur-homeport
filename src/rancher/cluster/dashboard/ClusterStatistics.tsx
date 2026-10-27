@@ -14,7 +14,7 @@ import { StatisticsCard } from './StatisticsCard';
 const StatisticPieChartItem = ({ title, unit, total, value, color }) => {
   const { theme } = useTheme();
   return (
-    <Stack direction="horizontal" gap={5}>
+    <Stack direction="horizontal" className="gap-4">
       <PieChart
         data={[
           {
@@ -101,7 +101,7 @@ export const ClusterStatistics: FC<{
           </Col>
           <Col xs="auto">
             <h4 className="font-medium mb-5.5">{translate('CPU')}</h4>
-            <Stack direction="horizontal" gap={10}>
+            <Stack direction="horizontal" className="gap-8">
               <StatisticPieChartItem
                 title={translate('Reserved')}
                 unit="cores"
@@ -120,7 +120,7 @@ export const ClusterStatistics: FC<{
           </Col>
           <Col xs="auto">
             <h4 className="font-medium mb-5.5">{translate('Memory')}</h4>
-            <Stack direction="horizontal" gap={10}>
+            <Stack direction="horizontal" className="gap-8">
               <StatisticPieChartItem
                 title={translate('Reserved')}
                 unit="GiB"

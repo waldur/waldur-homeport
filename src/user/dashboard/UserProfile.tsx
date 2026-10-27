@@ -59,8 +59,7 @@ export const UserProfile = ({
     >
       <Stack
         direction="horizontal"
-        className="flex-wrap text-quaternary leading-none"
-        gap={5}
+        className="gap-4 flex-wrap text-quaternary leading-none"
       >
         {user.job_title && (
           <span className="whitespace-nowrap">

@@ -42,7 +42,7 @@ export const ImpersonationBar = () => {
         'impersonation-bar flex items-center justify-between h-full gap-3',
       )}
     >
-      <Stack direction="horizontal" gap={4} className="font-medium">
+      <Stack direction="horizontal" className="gap-3 font-medium">
         <div className="icon">
           <WarningCircleIcon size={20} weight="bold" />
         </div>

@@ -52,7 +52,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
             <Field
               label={translate('Offering')}
               value={
-                <Stack direction="horizontal" gap={2}>
+                <Stack direction="horizontal" className="gap-1.5">
                   {props.offering.thumbnail ? (
                     <Image src={props.offering.thumbnail} size={24} circle />
                   ) : null}
@@ -120,7 +120,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
           <Field
             label={translate('Offering')}
             value={
-              <Stack direction="horizontal" gap={2}>
+              <Stack direction="horizontal" className="gap-1.5">
                 {props.offering.thumbnail ? (
                   <Image src={props.offering.thumbnail} size={24} circle />
                 ) : null}

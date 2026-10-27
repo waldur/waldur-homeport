@@ -71,7 +71,7 @@ const FieldsListGroup = ({
                 : undefined
             }
           >
-            <Stack direction="horizontal" gap={3}>
+            <Stack direction="horizontal" className="gap-2.5">
               <SelectGroup
                 name={`${name}.answer`}
                 options={getOptions(i)}

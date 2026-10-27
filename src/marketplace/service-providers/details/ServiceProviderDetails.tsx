@@ -70,11 +70,7 @@ const ProviderDetailsHero: FunctionComponent<ProviderDetailsProps> = (data) => {
       logoTooltip={data.provider.customer_name}
       logoCircle
       title={
-        <Stack
-          direction="horizontal"
-          gap={2}
-          className="gap-5 text-quaternary mb-1"
-        >
+        <Stack direction="horizontal" className="gap-5 text-quaternary mb-1">
           {data.provider.customer_country && (
             <CountryFlag countryCode={data.provider.customer_country} />
           )}

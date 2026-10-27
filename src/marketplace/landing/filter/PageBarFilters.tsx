@@ -51,8 +51,7 @@ const PageBarFilters = ({ withPicker = false }: { withPicker?: boolean }) => {
               <Stack
                 key={item.name}
                 direction="horizontal"
-                gap={2}
-                className="font-medium"
+                className="gap-1.5 font-medium"
               >
                 {item.label}
                 <Badge

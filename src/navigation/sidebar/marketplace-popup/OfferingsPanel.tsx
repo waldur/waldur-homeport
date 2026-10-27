@@ -79,7 +79,7 @@ const OfferingListItem: FunctionComponent<{
             item.state === 'Paused',
           )}
         >
-          <Stack direction="horizontal" gap={3}>
+          <Stack direction="horizontal" className="gap-2.5">
             {item.image ? (
               <div className="size-10 shrink-0 inline-flex items-center justify-center rounded-md overflow-hidden">
                 <img
