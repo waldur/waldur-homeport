@@ -18,6 +18,7 @@ export const checklistTypeOptions: Array<{ label; value: ChecklistTypeEnum }> =
       value: 'onboarding_customer',
     },
     { label: translate('Onboarding intent data'), value: 'onboarding_intent' },
+    { label: translate('Feedback survey'), value: 'feedback' },
   ];
 
 export const questionTypeOptions: Array<{ label; value: QuestionTypeEnum }> = [
@@ -35,6 +36,7 @@ export const questionTypeOptions: Array<{ label; value: QuestionTypeEnum }> = [
   { label: translate('URL'), value: 'url' },
   { label: translate('Year'), value: 'year' },
   { label: translate('Country'), value: 'country' },
+  { label: translate('Rating'), value: 'rating' },
   { label: translate('Likert scale'), value: 'likert' },
   { label: translate('Rich text'), value: 'rich_text' },
 ];

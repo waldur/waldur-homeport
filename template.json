@@ -706,6 +706,11 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "A checklist of the feedback survey type.": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "A client-accessible domain name override in case OpenStack is returning an internal domain. Leave empty to use the domain returned by OpenStack.": {
     "context": {
       "feature_area": "openstack"
@@ -4455,9 +4460,29 @@
       "feature_area": "proposal"
     }
   },
+  "Answer the required questions and fix the highlighted answers.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "feedback",
+      "action_type": "create"
+    }
+  },
+  "Answered": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "feedback"
+    }
+  },
+  "Answered at": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "feedback"
+    }
+  },
   "Answers": {
     "context": {
-      "feature_area": "offering-users"
+      "primary_ui_type": "title",
+      "feature_area": "feedback"
     }
   },
   "Answers of the orders": {},
@@ -5496,6 +5521,11 @@
         }
       },
       "feature_area": "support-users"
+    }
+  },
+  "Are you sure you want to delete the survey and all its answers?": {
+    "context": {
+      "feature_area": "feedback"
     }
   },
   "Are you sure you want to delete the template {template_name}?": {
@@ -6717,6 +6747,11 @@
       "feature_area": "anonymous"
     }
   },
+  "Ask all users": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "Ask for the end date of this resource to be changed. Someone who can change it will review your request.": {
     "context": {
       "feature_area": "request-end-date-change"
@@ -7202,6 +7237,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Audience": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "feedback"
     }
   },
   "Audio": {
@@ -10446,6 +10487,7 @@
       "feature_area": "resource-requests-step"
     }
   },
+  "Choose all users, organizations or offerings.": {},
   "Choose an organization from the dropdown above to view its projects.": {
     "context": {
       "feature_area": "project-detail"
@@ -10464,6 +10506,16 @@
   "Choose an organization role, a project role, or both.": {},
   "Choose at least one model, or All models.": {},
   "Choose at least one period customers can set a limit for.": {},
+  "Choose at least {min} stars.": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "feedback"
+    }
+  },
   "Choose date": {
     "context": {
       "feature_area": "DatePicker"
@@ -10868,7 +10920,7 @@
   "Closed": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "proposals"
+      "feature_area": "feedback"
     }
   },
   "Closed issues (this month)": {
@@ -13838,6 +13890,11 @@
       "feature_area": "create"
     }
   },
+  "Create survey": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "Create tag": {
     "context": {
       "feature_area": "admin"
@@ -15363,6 +15420,11 @@
   "Days an archived offering metric keeps its data before it is purged.": {},
   "Days given to reviewers to complete reviews": {},
   "Days of inactivity after which pseudonymous bookkeeping rows (SessionBinding, AnonymousChatBudget) are purged. Active blocks are always retained until they expire. Set to -1 to disable.": {},
+  "Days the prompt stays hidden after it is shown or postponed.": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "Days to keep Matrix room history exports, files included, before they are deleted. Each room's newest completed export is kept regardless of age. Set to 0 or less to keep them forever.": {},
   "Deactivate": {
     "context": {
@@ -17307,7 +17369,8 @@
   },
   "Dismissed": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "feedback"
     }
   },
   "Dismissing...": {
@@ -17396,6 +17459,11 @@
   "Distributed storage pool for cluster persistence": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "Distribution": {
+    "context": {
+      "primary_ui_type": "title"
     }
   },
   "Division by zero.": {
@@ -17532,6 +17600,11 @@
   "Domain name": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Don't ask again": {
+    "context": {
+      "feature_area": "feedback"
     }
   },
   "Done": {
@@ -18578,6 +18651,11 @@
       "feature_area": "rounds"
     }
   },
+  "Edit survey": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "Edit tags": {
     "context": {
       "feature_area": "overview"
@@ -19531,6 +19609,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "offerings"
+    }
+  },
+  "Ends at": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "feedback"
     }
   },
   "Ends in {n}d": {
@@ -22057,6 +22141,21 @@
       "feature_area": "hooks"
     }
   },
+  "Feedback logs": {
+    "context": {
+      "feature_area": "issues"
+    }
+  },
+  "Feedback survey": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Feedback surveys": {
+    "context": {
+      "feature_area": "administration"
+    }
+  },
   "Female": {
     "context": {
       "primary_ui_type": "label"
@@ -22310,6 +22409,11 @@
   "Fill in the details to create a new user account.": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "Fill in the required fields.": {
+    "context": {
+      "feature_area": "feedback"
     }
   },
   "Fill in the role details and select at least one permission.": {
@@ -24783,6 +24887,11 @@
       "feature_area": "invitations"
     }
   },
+  "How many times a user is prompted at most.": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "How new organizations are onboarded and how projects behave.": {
     "context": {
       "feature_area": "organizations-compliance"
@@ -26520,6 +26629,11 @@
       "feature_area": "reports"
     }
   },
+  "Intro": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "Invalid JSON format": {
     "context": {
       "feature_area": "single-import"
@@ -28059,6 +28173,11 @@
     }
   },
   "Late start": {},
+  "Later": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "Later, the call manager will assign specific proposals to you. At that time:": {
     "context": {
       "feature_area": "invitations"
@@ -30740,6 +30859,11 @@
       "feature_area": "rabbitmq"
     }
   },
+  "Max prompts": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "Max proposals per reviewer": {
     "context": {
       "primary_ui_type": "label"
@@ -31081,6 +31205,11 @@
   "Maximum wall time in minutes": {
     "context": {
       "feature_area": "qos"
+    }
+  },
+  "Mean": {
+    "context": {
+      "primary_ui_type": "title"
     }
   },
   "Measured in": {
@@ -34397,7 +34526,7 @@
   },
   "No offerings found": {
     "context": {
-      "feature_area": "steps"
+      "feature_area": "broadcasts"
     }
   },
   "No offerings have been added to this call yet.": {
@@ -34477,7 +34606,7 @@
   },
   "No organizations found": {
     "context": {
-      "feature_area": "steps"
+      "feature_area": "broadcasts"
     }
   },
   "No other offering of this service provider yet": {
@@ -40737,6 +40866,11 @@
       "feature_area": "questions"
     }
   },
+  "Please answer the required questions.": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "Please check the credentials again.": {
     "context": {
       "feature_area": "import"
@@ -43391,6 +43525,12 @@
       "feature_area": "reporting"
     }
   },
+  "Prompted": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "feedback"
+    }
+  },
   "Proof": {
     "context": {
       "primary_ui_type": "title",
@@ -44637,6 +44777,12 @@
       "feature_area": "checklists"
     }
   },
+  "Questionnaire": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "feedback"
+    }
+  },
   "Questions": {
     "context": {
       "primary_ui_type": "title",
@@ -44925,6 +45071,11 @@
   "Rate limiter rejections": {
     "context": {
       "feature_area": "pubsub"
+    }
+  },
+  "Rating": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Raw Usage Reset": {
@@ -48462,6 +48613,12 @@
       "feature_area": "canned-responses"
     }
   },
+  "Response rate": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "feedback"
+    }
+  },
   "Responses are generated by AI and may be inaccurate. Never share sensitive credentials (API keys, passwords, SSH keys). Verify suggestions before acting.": {
     "context": {
       "feature_area": "shared"
@@ -51846,7 +52003,7 @@
   },
   "Select offerings...": {
     "context": {
-      "feature_area": "steps"
+      "feature_area": "broadcasts"
     }
   },
   "Select one or more draft batches.": {
@@ -51932,7 +52089,7 @@
   },
   "Select organizations...": {
     "context": {
-      "feature_area": "steps"
+      "feature_area": "broadcasts"
     }
   },
   "Select partition...": {
@@ -52126,12 +52283,12 @@
   },
   "Select specific offerings to target": {
     "context": {
-      "feature_area": "steps"
+      "feature_area": "broadcasts"
     }
   },
   "Select specific organizations to target": {
     "context": {
-      "feature_area": "steps"
+      "feature_area": "broadcasts"
     }
   },
   "Select state...": {
@@ -54120,6 +54277,11 @@
       }
     }
   },
+  "Shown above the questions. Tell respondents that staff will see who answered.": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "Shown based on: {questions}": {
     "context": {
       "variables": {
@@ -54485,6 +54647,11 @@
     }
   },
   "Snapshots count": {},
+  "Snooze days": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "Social and economic geography": {
     "context": {
       "primary_ui_type": "label"
@@ -55154,6 +55321,12 @@
   "Starting…": {
     "context": {
       "feature_area": "reports"
+    }
+  },
+  "Starts at": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "feedback"
     }
   },
   "State": {
@@ -56057,6 +56230,30 @@
   "Supports pausing": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Survey": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "feedback"
+    }
+  },
+  "Survey has been created.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "feedback"
+    }
+  },
+  "Survey has been deleted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "feedback"
+    }
+  },
+  "Survey has been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "feedback"
     }
   },
   "Suspend": {
@@ -57272,6 +57469,12 @@
   "Text weight": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Thank you for your feedback.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "feedback"
     }
   },
   "Thank you for your response!": {
@@ -63209,6 +63412,12 @@
       "feature_area": "support-users"
     }
   },
+  "Unable to create survey.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "feedback"
+    }
+  },
   "Unable to create tag": {
     "context": {
       "primary_ui_type": "error_message",
@@ -63682,6 +63891,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "reviewer-discovery"
+    }
+  },
+  "Unable to delete survey.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "feedback"
     }
   },
   "Unable to delete tags.": {
@@ -65540,6 +65755,16 @@
       "feature_area": "sram"
     }
   },
+  "Unable to save your answers.": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
+  "Unable to save your choice.": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "Unable to schedule SCIM user synchronization.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -65836,6 +66061,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "usage"
+    }
+  },
+  "Unable to submit your feedback.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "feedback"
     }
   },
   "Unable to suggest mappings.": {
@@ -66738,6 +66969,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "support-users"
+    }
+  },
+  "Unable to update survey.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "feedback"
     }
   },
   "Unable to update tag.": {
@@ -69660,6 +69897,11 @@
       "feature_area": "providers"
     }
   },
+  "Users have been prompted, so the questionnaire can't be changed.": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "Users have been removed from project successfully.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -70505,6 +70747,11 @@
   "View response": {
     "context": {
       "feature_area": "orders"
+    }
+  },
+  "View results": {
+    "context": {
+      "feature_area": "feedback"
     }
   },
   "View revenue": {
@@ -71799,6 +72046,11 @@
   "WirtschaftsCompass API server URL": {},
   "WirtschaftsCompass API token": {},
   "With MATRIX_EXTERNAL_LOGIN_METHOD 'oidc': the registration method of the Waldur users who sign in to Waldur through the identity provider the homeserver's single sign-on uses, i.e. that identity provider's name in Waldur, such as 'keycloak'. Waldur gives a Matrix account only to those users, because the homeserver signs in any subject of that provider to the account its claim names. While blank, no user is given a Matrix account.": {},
+  "With both organizations and offerings selected, only users of those offerings in those organizations are asked.": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
   "With errors": {
     "context": {
       "primary_ui_type": "label",
@@ -72848,6 +73100,11 @@
   "Your account is not part of any organization. Your view will be restricted.": {
     "context": {
       "feature_area": "auth"
+    }
+  },
+  "Your answers are being submitted.": {
+    "context": {
+      "feature_area": "feedback"
     }
   },
   "Your application will be available in your dashboard with the relevant submitted information. If your application is rejected, it will remain available for 30 days so you can review the feedback. After this period, it will be automatically removed.": {
@@ -73920,6 +74177,16 @@
   "expertise keywords": {
     "context": {
       "feature_area": "team"
+    }
+  },
+  "feedback logs": {
+    "context": {
+      "feature_area": "feedback"
+    }
+  },
+  "feedback surveys": {
+    "context": {
+      "feature_area": "feedback"
     }
   },
   "field(s) changed": {

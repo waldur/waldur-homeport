@@ -215,6 +215,21 @@ export const states: StateDeclaration[] = [
     },
   },
   {
+    name: 'support-feedback-logs',
+    url: 'feedback-logs/?survey',
+    params: { survey: { dynamic: true } },
+    parent: 'support-logs',
+    component: lazyComponent(() =>
+      import('@/feedback/FeedbackLogsList').then((module) => ({
+        default: module.FeedbackLogsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Feedback logs'),
+      permissions: [isStaffOrSupport],
+    },
+  },
+  {
     name: 'support-ai-assistant-logs',
     url: 'ai-assistant-logs/?tab',
     params: { tab: { dynamic: true } },

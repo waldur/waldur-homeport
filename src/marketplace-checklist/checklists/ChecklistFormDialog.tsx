@@ -65,8 +65,8 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
     () =>
       showExperimentalUiComponents
         ? checklistTypeOptions
-        : checklistTypeOptions.filter(
-            (opt) => opt.value === 'project_metadata',
+        : checklistTypeOptions.filter((opt) =>
+            ['project_metadata', 'feedback'].includes(opt.value),
           ),
     [],
   );

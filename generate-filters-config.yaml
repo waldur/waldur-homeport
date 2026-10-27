@@ -370,6 +370,21 @@ overrides:
         'true': Active
         'false': Inactive
 
+  feedback_requests:
+    filters:
+      - survey_uuid
+      - state
+      - customer_uuid
+      - answered_after
+      - answered_before
+    survey_uuid:
+      label: Survey
+      operationId: feedback_surveys_list
+    customer_uuid:
+      label: Organization
+    answered_after:
+      rangeLabel: Answered
+
   support_feedbacks:
     filters:
       - evaluation
