@@ -7,7 +7,7 @@
   "main": "src/index.ts",
   "license": "MIT",
   "dependencies": {
-    "qs": "^6.14.2",
+    "qs": "^6.16.1",
     "waldur-api-client": "workspace:*",
     "waldur-telemetry": "workspace:*"
   },
