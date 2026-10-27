@@ -481,6 +481,18 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
           action: p.action,
           hasFired: p.hasFired,
           heldByCredit: isHeldGate(p.gate),
+          costPolicy:
+            p.policyKind === 'project-cost'
+              ? {
+                  row: projectPolicies.find((x) => x.uuid === p.policyUuid),
+                  type: 'project' as const,
+                }
+              : p.policyKind === 'customer-cost'
+                ? {
+                    row: customerPolicies.find((x) => x.uuid === p.policyUuid),
+                    type: 'organization' as const,
+                  }
+                : undefined,
         })),
       },
       today,

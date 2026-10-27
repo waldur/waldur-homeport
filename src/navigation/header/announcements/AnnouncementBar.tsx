@@ -27,6 +27,9 @@ interface AnnouncementBarProps {
   onShowMore?: () => void;
   actionLabel?: ReactNode;
   onAction?: () => void;
+  /** A second action, shown before the first. */
+  secondaryActionLabel?: ReactNode;
+  onSecondaryAction?: () => void;
   ellipsis?: boolean;
   colored?: boolean;
   hasColon?: boolean;
@@ -51,6 +54,8 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
   onShowMore,
   actionLabel,
   onAction,
+  secondaryActionLabel,
+  onSecondaryAction,
   icon,
   variant,
   ellipsis,
@@ -114,11 +119,23 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
             data-testid="announcement-description"
           />
         </div>
-        {onAction && actionLabel ? (
+        {onSecondaryAction && secondaryActionLabel ? (
           <BaseButton
             variant="tertiary"
             size="sm"
             className="ms-auto shrink-0"
+            onClick={onSecondaryAction}
+            label={secondaryActionLabel}
+          />
+        ) : null}
+        {onAction && actionLabel ? (
+          <BaseButton
+            variant="tertiary"
+            size="sm"
+            className={classNames(
+              'shrink-0',
+              !(onSecondaryAction && secondaryActionLabel) && 'ms-auto',
+            )}
             onClick={onAction}
             label={actionLabel}
           />

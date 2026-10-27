@@ -1463,6 +1463,7 @@
   },
   "Access restricted": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "join-organization",
       "action_type": "create"
     }
@@ -1858,6 +1859,12 @@
   "Actions pending": {
     "context": {
       "primary_ui_type": "label",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Actions reset": {
+    "context": {
+      "primary_ui_type": "title",
       "feature_area": "cost-policies"
     }
   },
@@ -2283,6 +2290,7 @@
       "feature_area": "questions"
     }
   },
+  "Add credit": {},
   "Add criteria": {
     "context": {
       "feature_area": "workflow-steps"
@@ -2534,7 +2542,8 @@
   },
   "Add project credit": {
     "context": {
-      "feature_area": "credits"
+      "primary_ui_type": "title",
+      "feature_area": "cost-policies"
     }
   },
   "Add project role": {
@@ -2734,6 +2743,16 @@
   "Add your notes here": {
     "context": {
       "feature_area": "create-review"
+    }
+  },
+  "Add {amount} of credit for this month": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      },
+      "feature_area": "cost-policies"
     }
   },
   "Add {offering}": {
@@ -3122,6 +3141,16 @@
   "Affected resources": {
     "context": {
       "feature_area": "changelog"
+    }
+  },
+  "Affected resources ({count})": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "cost-policies"
     }
   },
   "Affected users": {
@@ -4359,6 +4388,11 @@
       "feature_area": "streaming"
     }
   },
+  "An update is in progress.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Analysis of reviewer workload and review completion timelines": {
     "context": {
       "feature_area": "reporting"
@@ -4457,6 +4491,11 @@
     }
   },
   "Anonymous users can list invitation links. Only available for staff users.": {},
+  "Another policy": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Answer": {
     "context": {
       "primary_ui_type": "title",
@@ -7584,6 +7623,16 @@
       "feature_area": "coi-settings"
     }
   },
+  "Automatically, at the next evaluation of the policy, once the cost after credit is at or below the limit. Now it is {over} over it. Each change below lowers the cost; the last column says whether that is enough.": {
+    "context": {
+      "variables": {
+        "over": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
   "Automation": {
     "context": {
       "primary_ui_type": "label",
@@ -7952,6 +8001,11 @@
   "Back to all sign-in options": {
     "context": {
       "feature_area": "auth"
+    }
+  },
+  "Back to details": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Back to login": {
@@ -8695,6 +8749,11 @@
   "Both roles carry exactly the same permissions.": {
     "context": {
       "feature_area": "roles"
+    }
+  },
+  "Both: credit for this month and pay the earlier months": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Bottom Sheet": {
@@ -9990,7 +10049,7 @@
   "Change": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "form"
+      "feature_area": "cost-policies"
     }
   },
   "Change \"{offeringName}\" from {currentLabel} to {targetLabel}. Existing components, plans, resources, orders, and offering users are preserved.": {
@@ -10126,6 +10185,11 @@
   "Change storage mode": {
     "context": {
       "feature_area": "update"
+    }
+  },
+  "Change the period to one month. Earlier months then stop counting, paid or not.": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Change the settings and preview what they do before applying them. Nothing is saved until you apply.": {
@@ -11493,7 +11557,8 @@
   },
   "Compensation": {
     "context": {
-      "feature_area": "dashboard"
+      "primary_ui_type": "title",
+      "feature_area": "cost-policies"
     }
   },
   "Compensation for {name}": {
@@ -11515,6 +11580,23 @@
   "Compensation items are created for any discrepancies": {
     "context": {
       "feature_area": "settings"
+    }
+  },
+  "Compensation policy": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
+  "Compensation policy could not be saved.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "credits"
+    }
+  },
+  "Compensation policy has been saved.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "credits"
     }
   },
   "Compensation stopped when the credit expired, so there is no draw left to keep pace with. Costs land on the invoice in full.": {
@@ -13015,6 +13097,45 @@
       }
     }
   },
+  "Cost after credit": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
+  "Cost after credit stays {cost}": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "Cost after credit then": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Cost after credit {from} → {to}": {
+    "context": {
+      "variables": {
+        "from": {
+          "type": "unknown"
+        },
+        "to": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "Cost against the limit": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Cost and usage policies": {
     "context": {
       "primary_ui_type": "title"
@@ -13030,6 +13151,12 @@
   "Cost change": {
     "context": {
       "feature_area": "type-based"
+    }
+  },
+  "Cost credit could pay": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "manage"
     }
   },
   "Cost estimation": {
@@ -13049,9 +13176,41 @@
       "feature_area": "type-based"
     }
   },
+  "Cost in the period {before}, less credit already used {drawn} and credit still to be used this month {pending}.": {
+    "context": {
+      "variables": {
+        "before": {
+          "type": "unknown"
+        },
+        "drawn": {
+          "type": "unknown"
+        },
+        "pending": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "Cost in the period, before credit": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
+  "Cost item": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "cost-policies"
+    }
+  },
   "Cost metrics per offering": {
     "context": {
       "feature_area": "reporting"
+    }
+  },
+  "Cost of closed months that credit did not cover. Credit added now pays only the current month, so a cost policy for the total period keeps counting this cost until it is paid.": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Cost policies": {
@@ -13060,13 +13219,35 @@
       "feature_area": "organizations"
     }
   },
+  "Cost policies this credit affects": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "Cost policy": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "offerings"
     }
   },
+  "Cost policy could not be updated.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Cost policy details": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Cost policy has been deleted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Cost policy has been updated.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "cost-policies"
@@ -13076,6 +13257,32 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "organizations"
+    }
+  },
+  "Cost {before}, less credit already used, {drawn}, and credit still to be used this month, {pending}.": {
+    "context": {
+      "variables": {
+        "before": {
+          "type": "unknown"
+        },
+        "drawn": {
+          "type": "unknown"
+        },
+        "pending": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "Cost {cost}": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
     }
   },
   "Cost: {cost}": {
@@ -13281,6 +13488,12 @@
       "feature_area": "tos"
     }
   },
+  "Count only the current month": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "cost-policies"
+    }
+  },
   "Count terminated resources": {
     "context": {
       "feature_area": "integration"
@@ -13289,6 +13502,11 @@
   "Counted from the day the resource is granted.": {
     "context": {
       "feature_area": "plan"
+    }
+  },
+  "Counted period:": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Counter": {
@@ -13375,6 +13593,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "issues"
+    }
+  },
+  "Covered by credit": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Create": {
@@ -14142,6 +14365,11 @@
       "feature_area": "organizations"
     }
   },
+  "Credit added now pays only this month, and the earlier months alone are over the limit.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Credit allocated to organizations and the policies applied when their estimated cost reaches a limit.": {
     "context": {
       "feature_area": "organizations-compliance"
@@ -14156,6 +14384,11 @@
         }
       },
       "feature_area": "details"
+    }
+  },
+  "Credit already used": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Credit balance is empty": {
@@ -14182,6 +14415,16 @@
   "Credit consumption": {
     "context": {
       "primary_ui_type": "title"
+    }
+  },
+  "Credit covered every month, so the policy counts nothing against its {limit} limit.": {
+    "context": {
+      "variables": {
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
     }
   },
   "Credit deleted successfully.": {
@@ -14253,6 +14496,11 @@
   "Credit still available to this project. It is drawn down as usage is compensated each month, and set to zero if the credit reaches its end date.": {
     "context": {
       "feature_area": "views"
+    }
+  },
+  "Credit still to be used this month": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Credit transactions": {
@@ -14574,6 +14822,7 @@
   },
   "Current month": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "cost-policies"
     }
   },
@@ -18117,6 +18366,41 @@
       "feature_area": "usage"
     }
   },
+  "Earlier invoices": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
+  "Earlier invoices are paid from the project credit.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Earlier invoices could not be paid.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Earlier invoices from": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "manage"
+    }
+  },
+  "Earlier invoices until": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "manage"
+    }
+  },
+  "Earlier months, not covered": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
+    }
+  },
   "Earliest approve": {
     "context": {
       "feature_area": "managed-projects"
@@ -18299,6 +18583,11 @@
   "Edit comment": {
     "context": {
       "feature_area": "service-providers"
+    }
+  },
+  "Edit compensation policy": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Edit component": {
@@ -22739,6 +23028,16 @@
   },
   "Finished early": {},
   "Finland": {},
+  "Fired on {date}": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
   "Fires if the current usage trend holds.": {
     "context": {
       "feature_area": "policy-watch"
@@ -22770,6 +23069,11 @@
     }
   },
   "First day of billing month (date)": {},
+  "First month to pay. Empty: from the first invoice.": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
   "First name": {
     "context": {
       "primary_ui_type": "title",
@@ -22784,6 +23088,11 @@
   "Fix": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Fix cost policy": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Fixed": {
@@ -22866,6 +23175,11 @@
   "Fixed-price contract": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Fix…": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Flag": {},
@@ -25469,6 +25783,12 @@
   "Idle in transaction": {
     "context": {
       "feature_area": "database-stats"
+    }
+  },
+  "If": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "cost-policies"
     }
   },
   "If Helm or Docker Compose still set up Matrix on this installation, do not run Setup. It replaces the tokens the deployment supplies, and the next deploy then fails: \"Constance holds appservice tokens that were not seeded by the deployment and differ from the supplied ones\". Rotate the tokens where the deployment keeps them and redeploy instead.": {
@@ -28204,6 +28524,11 @@
       "feature_area": "views"
     }
   },
+  "Last month to pay. Empty: up to the last closed invoice.": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
   "Last name": {
     "context": {
       "primary_ui_type": "title",
@@ -28760,6 +29085,16 @@
         }
       },
       "feature_area": "update"
+    }
+  },
+  "Limit {limit}": {
+    "context": {
+      "variables": {
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
     }
   },
   "Limit-based": {
@@ -29871,6 +30206,11 @@
       "feature_area": "metrics"
     }
   },
+  "Lowering the cost takes two steps here: adding credit for this month and paying the earlier invoices. Either alone is not enough; raising the limit is the one option that resets the actions by itself.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Luxembourg": {},
   "MAC address": {
     "context": {
@@ -30447,6 +30787,11 @@
   "Manually assign proposals to a reviewer. A draft batch will be created which can then be sent.": {
     "context": {
       "feature_area": "assignments"
+    }
+  },
+  "Manually or a usage limit": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Manually set": {
@@ -32305,6 +32650,11 @@
       "feature_area": "credits"
     }
   },
+  "Month the cost was incurred": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Month-over-month": {
     "context": {
       "primary_ui_type": "label",
@@ -34140,6 +34490,11 @@
       "feature_area": "offering-costs"
     }
   },
+  "No cost policy takes this credit into account.": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "No creation date provided.": {
     "context": {
       "feature_area": "managed-projects"
@@ -35779,6 +36134,12 @@
       "feature_area": "site-agents"
     }
   },
+  "Not covered": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "manage"
+    }
+  },
   "Not delivering": {
     "context": {
       "feature_area": "pubsub"
@@ -35787,6 +36148,11 @@
   "Not encrypted": {
     "context": {
       "feature_area": "livekit"
+    }
+  },
+  "Not enough on its own": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Not equal to": {
@@ -35863,6 +36229,11 @@
   "Not owned by a site agent": {
     "context": {
       "feature_area": "rabbitmq"
+    }
+  },
+  "Not paid by this credit": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Not provided": {
@@ -36077,6 +36448,11 @@
       "feature_area": "policy-watch"
     }
   },
+  "Nothing is paid now: there is no uncovered cost in these months, or this month’s cost uses all of the credit left. What can be paid later is paid at the end of the month.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Nothing is scheduled to end: the credit has no expiry date, and neither the project nor its resources have an end date.": {
     "context": {
       "feature_area": "policy-watch"
@@ -36271,6 +36647,16 @@
   "Notify the current provider that the ticket has been withdrawn.": {
     "context": {
       "feature_area": "issues"
+    }
+  },
+  "Now {value}.": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
     }
   },
   "Number": {
@@ -37191,6 +37577,8 @@
       "feature_area": "credits"
     }
   },
+  "On the invoice open when it is paid. Earlier invoices stay as they were issued.": {},
+  "On the paid month’s own invoice. This changes the total of an invoice already issued, and possibly paid.": {},
   "On the scheduled day, the system collects data for each project in the organization.": {
     "context": {
       "feature_area": "project-digest"
@@ -37312,6 +37700,15 @@
         }
       },
       "feature_area": "accounts"
+    }
+  },
+  "One month: {month} only.": {
+    "context": {
+      "variables": {
+        "month": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "One point or a list per request.": {
@@ -37565,6 +37962,11 @@
   "Only the member who asked for this draft can send it.": {
     "context": {
       "feature_area": "ticketDraft"
+    }
+  },
+  "Only the new month counts, from nothing.": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Only then can keys be limited per day, week, quarter or year, where a component offers those periods; otherwise keys are limited per month, and all-time where a component offers it. Turn on only if the site agent reports each key’s usage per day, or those limits are never reached.": {
@@ -38608,6 +39010,11 @@
       "feature_area": "organization-create"
     }
   },
+  "Organization credit": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Organization credit could not be updated.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -38754,6 +39161,11 @@
         }
       },
       "feature_area": "onboarding-setup"
+    }
+  },
+  "Organization owners and support can change this policy or the project credit.": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Organization performance comparison": {
@@ -39481,6 +39893,17 @@
       "feature_area": "growth"
     }
   },
+  "Paid by credit": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "manage"
+    }
+  },
+  "Paid now": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Panel chair has been set.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -39835,6 +40258,28 @@
       "feature_area": "details"
     }
   },
+  "Pay earlier invoices": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Pay earlier invoices from the project credit": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Pay the earlier months, {earlier}": {
+    "context": {
+      "variables": {
+        "earlier": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
   "Payload filters": {
     "context": {
       "feature_area": "pubsub"
@@ -39913,6 +40358,17 @@
   "Payments list": {
     "context": {
       "feature_area": "customer"
+    }
+  },
+  "Pays": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Pays earlier invoices": {
+    "context": {
+      "feature_area": "credits"
     }
   },
   "Peak month": {
@@ -41530,7 +41986,7 @@
   "Policy": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "customer"
+      "feature_area": "credits"
     }
   },
   "Policy Actions": {
@@ -42945,7 +43401,7 @@
   "Project credit could not be updated.": {
     "context": {
       "primary_ui_type": "error_message",
-      "feature_area": "manage"
+      "feature_area": "cost-policies"
     }
   },
   "Project credit has been created.": {
@@ -42957,7 +43413,7 @@
   "Project credit has been updated.": {
     "context": {
       "primary_ui_type": "success_message",
-      "feature_area": "credits"
+      "feature_area": "cost-policies"
     }
   },
   "Project dashboard": {
@@ -45214,6 +45670,35 @@
   "RabbitMQ version": {
     "context": {
       "feature_area": "rabbitmq"
+    }
+  },
+  "Raise the limit": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Raise the limit above {cost}": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "Raise the project's allocation by {amount}. Credit added now pays only this month's cost, up to {thisMonth}.": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        },
+        "thisMonth": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
     }
   },
   "Rancher Server": {
@@ -47896,6 +48381,11 @@
     }
   },
   "Resets shortly": {},
+  "Resets the actions": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Resets {relative}, on {date}": {
     "context": {
       "variables": {
@@ -51000,6 +51490,11 @@
       "feature_area": "integration"
     }
   },
+  "Saving pays now": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "Saving...": {
     "context": {
       "feature_area": "core"
@@ -52194,6 +52689,11 @@
   "Select month": {
     "context": {
       "feature_area": "import-usage"
+    }
+  },
+  "Select month...": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Select multiple OpenStack instances": {
@@ -53493,6 +53993,16 @@
       "feature_area": "actions"
     }
   },
+  "Set a limit above {cost}, or change what the policy does.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
   "Set a maintenance window that ends after it starts.": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -53624,6 +54134,12 @@
   "Set both the minimum and maximum, or neither.": {
     "context": {
       "feature_area": "posix-id-pools"
+    }
+  },
+  "Set by": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "cost-policies"
     }
   },
   "Set by the deployment on every deploy. Change it there and redeploy.": {
@@ -54654,6 +55170,12 @@
   "Simulate how review deadlines and reviewer pool size affect completion rates": {},
   "Simulate how thresholds and reviewer settings change outcomes": {},
   "Simulate user growth scenarios and federation adoption projections": {},
+  "Since": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "cost-policies"
+    }
+  },
   "Singapore": {},
   "Single Sign-On": {
     "context": {
@@ -56398,6 +56920,11 @@
       "feature_area": "dashboard"
     }
   },
+  "Support can change an organization policy.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Support feedback": {
     "context": {
       "feature_area": "administration"
@@ -56538,6 +57065,11 @@
   "Switch to light mode": {
     "context": {
       "feature_area": "header"
+    }
+  },
+  "Switch to one month": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "Switching from limit-based to usage-based billing. The fee of \"{current}\" is charged for its current billing period: a monthly plan keeps this month's fee, a daily plan is charged for the days used. From then on you are billed for actual consumption at the rates of \"{target}\"; nothing is charged in advance. Your quotas stay unchanged and now cap usage instead of being billed.": {
@@ -58076,6 +58608,22 @@
     }
   },
   "The conversation is still loading. Try again shortly.": {},
+  "The cost after credit is at or below the limit, so its actions do not run.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost after credit is at or below the limit, so the actions it ran are reset at the next evaluation of the policy.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost after credit is back at or below the limit, so its actions are reset at the next evaluation of the policy.": {},
+  "The cost after credit is now at or below the limit: the actions are reset at the next evaluation of the policy.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "The cost after credit, {cost}, is at or below the limit, {limit}.": {
     "context": {
       "variables": {
@@ -58177,6 +58725,43 @@
       },
       "feature_area": "cost-policies",
       "action_type": "update"
+    }
+  },
+  "The cost after credit, {cost}, is over the limit, {limit}.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost after credit, {cost}, is over the {limit} limit, and earlier months that credit did not cover keep it there: adding credit does not reset it.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "The cost after credit, {cost}, is over the {limit} limit.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "The cost is already over this limit, but the credit covers it. Fires once the credit left falls to the limit.": {
@@ -58423,6 +59008,11 @@
       "feature_area": "transfer"
     }
   },
+  "The first invoice": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
   "The following VM snapshots will also be deleted: {backups}.": {
     "context": {
       "variables": {
@@ -58610,6 +59200,11 @@
       "feature_area": "list"
     }
   },
+  "The invoices of the months paid change: their totals go down by the compensation, including invoices already sent or paid.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "The issue template has been updated.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -58647,6 +59242,11 @@
   "The key will not be able to call any model.": {
     "context": {
       "feature_area": "api-keys"
+    }
+  },
+  "The last closed invoice": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "The last operation on this resource failed.": {},
@@ -58908,6 +59508,16 @@
       "feature_area": "mass-actions"
     }
   },
+  "The new month starts, on {date}": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
   "The new plan is billed by usage: the current plan is charged for its current billing period and consumption is invoiced from the switch. Quotas are unchanged by a plan switch.": {
     "context": {
       "feature_area": "resource-pending"
@@ -59084,6 +59694,11 @@
       "feature_area": "sram"
     }
   },
+  "The payment could not be previewed.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "The plan has been created, but its prices could not be saved. Set them with the Edit prices action.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -59095,6 +59710,178 @@
       "feature_area": "import"
     }
   },
+  "The policy adds up what credit did not cover: {earlier} in earlier months and {thisMonth} this month = {total}, at or below the {limit} limit.": {
+    "context": {
+      "variables": {
+        "earlier": {
+          "type": "unknown"
+        },
+        "thisMonth": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The policy adds up what credit did not cover: {earlier} in earlier months and {thisMonth} this month = {total}, over the {limit} limit.": {
+    "context": {
+      "variables": {
+        "earlier": {
+          "type": "unknown"
+        },
+        "thisMonth": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The policy adds up what credit did not cover: {parts} = {total}, at or below the {limit} limit.": {
+    "context": {
+      "variables": {
+        "parts": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The policy adds up what credit did not cover: {parts} = {total}, over the {limit} limit.": {
+    "context": {
+      "variables": {
+        "parts": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The policy counts what credit did not cover: {total} in earlier months, at or below the {limit} limit.": {
+    "context": {
+      "variables": {
+        "total": {
+          "type": "number"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The policy counts what credit did not cover: {total} in earlier months, over the {limit} limit.": {
+    "context": {
+      "variables": {
+        "total": {
+          "type": "number"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The policy counts what credit did not cover: {total} in {month}, at or below the {limit} limit.": {
+    "context": {
+      "variables": {
+        "total": {
+          "type": "number"
+        },
+        "month": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The policy counts what credit did not cover: {total} in {month}, over the {limit} limit.": {
+    "context": {
+      "variables": {
+        "total": {
+          "type": "number"
+        },
+        "month": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The policy counts what credit did not cover: {total} this month, at or below the {limit} limit.": {
+    "context": {
+      "variables": {
+        "total": {
+          "type": "number"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The policy counts what credit did not cover: {total} this month, over the {limit} limit.": {
+    "context": {
+      "variables": {
+        "total": {
+          "type": "number"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The policy keeps counting earlier months.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
+  "The policy resets its actions at its next evaluation once the cost after credit, now {cost}, is at or below the limit, {limit}. Each option says what it leaves.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
   "The pools of one service provider must not overlap: UIDs against UIDs, GIDs against GIDs. A UID and a GID may share a number, so the same range can serve both.": {
     "context": {
       "feature_area": "posix-id-pools"
@@ -59103,6 +59890,29 @@
   "The preview counts what moves, lists what blocks the merge and what needs your acknowledgement. Changing a mapping discards it.": {
     "context": {
       "feature_area": "wizard"
+    }
+  },
+  "The project credit pays the {earlier} of earlier months that no credit covered as credit becomes available. This month's cost uses all of the credit left now, so nothing is paid today.": {
+    "context": {
+      "variables": {
+        "earlier": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The project credit pays the {earlier} of earlier months that no credit covered: {payable} now, from the credit left, and the rest as credit becomes available. Payments are not undone when this is turned off.": {
+    "context": {
+      "variables": {
+        "earlier": {
+          "type": "unknown"
+        },
+        "payable": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
     }
   },
   "The project falls back to the offering's default goal.": {
@@ -60114,6 +60924,11 @@
       "feature_area": "team"
     }
   },
+  "This also turns on “Pay earlier invoices” for the project credit, so what is still not covered is paid at the end of each month. Payments are not undone when it is turned off.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "This amount is too large.": {},
   "This assignment item is blocked due to a conflict of interest. Forcing an unblock will allow the reviewer to proceed with reviewing the proposal \"{proposal}\". A reason is required for audit purposes.": {
     "context": {
@@ -60262,6 +61077,29 @@
   "This creates a maintenance announcement visible to all users, informing them about the scheduled upgrade window.": {
     "context": {
       "feature_area": "changelog"
+    }
+  },
+  "This credit pays earlier invoices: {uncovered} is not covered yet, and {payable} of it can be paid from the credit left now. The rest is paid as credit becomes available.": {
+    "context": {
+      "variables": {
+        "uncovered": {
+          "type": "unknown"
+        },
+        "payable": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
+  "This credit pays earlier invoices: {uncovered} is not covered yet. This month’s cost uses all of the credit left now, so it is paid as credit becomes available.": {
+    "context": {
+      "variables": {
+        "uncovered": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "manage"
     }
   },
   "This date is not available.": {
@@ -60550,9 +61388,20 @@
       "feature_area": "details"
     }
   },
+  "This month alone is over the limit.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "This month's credit consumption": {
     "context": {
       "feature_area": "views"
+    }
+  },
+  "This month, not covered": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
     }
   },
   "This name will be visible in accounting data.": {
@@ -60727,6 +61576,11 @@
   "This plan is free": {
     "context": {
       "feature_area": "plans"
+    }
+  },
+  "This policy": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "This port belongs to a load balancer. Deleting it may break the load balancer; manage it through the load balancer instead.": {
@@ -62262,6 +63116,21 @@
   "Total:": {
     "context": {
       "feature_area": "reallocate-limits"
+    }
+  },
+  "Total: every month since the project started, this one included.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
+  "Total: every month since {month}, this one included.": {
+    "context": {
+      "variables": {
+        "month": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
     }
   },
   "Total: {count}": {
@@ -68030,6 +68899,11 @@
       "feature_area": "roles"
     }
   },
+  "Update credit": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Update customer": {
     "context": {
       "primary_ui_type": "label",
@@ -71830,6 +72704,11 @@
     }
   },
   "What do you want to achieve by using Waldur? Please describe your main objectives or expected outcomes.": {},
+  "What happened": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "What happens": {
     "context": {
       "primary_ui_type": "title",
@@ -71870,6 +72749,11 @@
   "What is a service profile?": {
     "context": {
       "feature_area": "profiles"
+    }
+  },
+  "What is left of the allocation also pays the cost of the project's closed invoices that no credit covered, oldest month first: at once when saved, and at the end of every month. Payments are not undone when this is turned off.": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "What it grants": {
@@ -72153,6 +73037,11 @@
   "When set, resources are automatically paused or downscaled once reported usage in the current period reaches a limit-based component’s limit, and the restriction is lifted when usage drops below it again. Leave empty to disable.": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "When the actions are reset": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "When the round is completed": {
@@ -72605,6 +73494,18 @@
       "feature_area": "tos"
     }
   },
+  "Write the compensation on": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
+    }
+  },
+  "Written on": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "cost-policies"
+    }
+  },
   "Wrong or inaccurate": {
     "context": {
       "primary_ui_type": "label"
@@ -72693,6 +73594,22 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "administration"
+    }
+  },
+  "Yes, from {from} to {until}, written on: {where}": {
+    "context": {
+      "variables": {
+        "from": {
+          "type": "unknown"
+        },
+        "until": {
+          "type": "unknown"
+        },
+        "where": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "credits"
     }
   },
   "Yes/No": {
@@ -73802,6 +74719,11 @@
       "feature_area": "chat"
     }
   },
+  "affected resources": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "affected rows": {
     "context": {
       "feature_area": "offering-merges"
@@ -74011,6 +74933,11 @@
       "feature_area": "changelog"
     }
   },
+  "changes": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "claims ({claims})": {
     "context": {
       "variables": {
@@ -74024,6 +74951,11 @@
   "comments": {
     "context": {
       "feature_area": "support-users"
+    }
+  },
+  "compensations": {
+    "context": {
+      "feature_area": "cost-policies"
     }
   },
   "components": {
@@ -74059,6 +74991,11 @@
   "cost limit": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "cost policies": {
+    "context": {
+      "feature_area": "credits"
     }
   },
   "countries": {
@@ -75605,6 +76542,16 @@
       "feature_area": "views"
     }
   },
+  "the first invoice": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
+  "the last closed invoice": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "the organization": {
     "context": {
       "feature_area": "policy-watch"
@@ -76015,6 +76962,16 @@
         }
       },
       "feature_area": "usage"
+    }
+  },
+  "{amount} not covered": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      },
+      "feature_area": "cost-policies"
     }
   },
   "{amount} {unit} included": {
@@ -76606,6 +77563,21 @@
         }
       },
       "feature_area": "renew-allocation"
+    }
+  },
+  "{count} months: {from} to {to}.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "from": {
+          "type": "unknown"
+        },
+        "to": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "{count} need vacuum": {
@@ -77618,6 +78590,16 @@
       "feature_area": "wizard"
     }
   },
+  "{earlier} of it is from earlier months that credit did not cover. Credit added now pays only this month, so this part stays until those months are paid.": {
+    "context": {
+      "variables": {
+        "earlier": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
   "{enabled} of {total}": {
     "context": {
       "variables": {
@@ -77940,6 +78922,16 @@
       "feature_area": "chat"
     }
   },
+  "{month} invoice": {
+    "context": {
+      "variables": {
+        "month": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
   "{month} is the last month this credit compensates, and it waives the grace coefficient — the minimum draw is the full expected consumption. Nothing spent after that is compensated, and whatever is left is written off at the month-end run on {writtenOff}. Resources are not left running: a cost policy has reached its threshold, and its action applies to them.": {
     "context": {
       "variables": {
@@ -77975,6 +78967,17 @@
         }
       },
       "feature_area": "usage"
+    }
+  },
+  "{month} so far": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "month": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
     }
   },
   "{month} was the last month this credit compensated. Nothing spent since has been drawn against it, and the {balance} still shown is written off at the month-end run on {writtenOff}. Resources are not left running: a cost policy has reached its threshold, and its action applies to them.": {
@@ -78092,6 +79095,16 @@
         }
       },
       "feature_area": "sram"
+    }
+  },
+  "{name} (organization)": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "credits"
     }
   },
   "{name} (quota exhausted)": {
@@ -78881,6 +79894,16 @@
       "feature_area": "proposal"
     }
   },
+  "{outside} is in months outside “Earlier invoices from” and “Earlier invoices until”, which this credit does not pay.": {
+    "context": {
+      "variables": {
+        "outside": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
   "{page} is not available yet.": {
     "context": {
       "variables": {
@@ -79113,6 +80136,16 @@
         }
       },
       "feature_area": "project-groups"
+    }
+  },
+  "{project}: whether this credit also pays earlier invoices that no credit covered.": {
+    "context": {
+      "variables": {
+        "project": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "credits"
     }
   },
   "{ready} ready, {skipped} skipped, {errors} errors": {
@@ -79810,6 +80843,50 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "{uncovered} is not covered. Support can let this credit pay earlier invoices, but this month’s cost uses all of the credit left now, so the allocation has to be raised first.": {
+    "context": {
+      "variables": {
+        "uncovered": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "{uncovered} is not covered. Support can let this credit pay earlier invoices; {payable} of it could be paid from the credit left now.": {
+    "context": {
+      "variables": {
+        "uncovered": {
+          "type": "unknown"
+        },
+        "payable": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "{uncovered} is not covered. This month’s cost uses all of the credit left now, so raise the allocation before turning on “Pay earlier invoices”, or it pays at the end of the month from what is left.": {
+    "context": {
+      "variables": {
+        "uncovered": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
+  "{uncovered} is not covered. Turning on “Pay earlier invoices” pays {payable} of it now, from the credit left.": {
+    "context": {
+      "variables": {
+        "uncovered": {
+          "type": "unknown"
+        },
+        "payable": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "manage"
     }
   },
   "{units} in total": {

@@ -23,6 +23,7 @@ import { useCustomer } from '@/workspace/hooks';
 
 import { CostPolicyActions } from './CostPolicyActions';
 import { CostPolicyCreateButton } from './CostPolicyCreateButton';
+import { CostPolicyExpandableRow } from './CostPolicyExpandableRow';
 import { CostPolicyTriggerCell } from './CostPolicyTriggerCell';
 import { getCostPolicyActionOptions, policyPeriodOptions } from './utils';
 
@@ -163,6 +164,7 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
           refetch={tableProps.fetch}
         />
       )}
+      expandableRow={CostPolicyExpandableRow}
       hasQuery={true}
       showPageSizeSelector={true}
       tableActions={

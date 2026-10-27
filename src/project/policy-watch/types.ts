@@ -108,6 +108,14 @@ export interface CreditEvent {
   /** Shown instead of the calendar-derived relative label when the date is an
    *  estimate rather than a scheduled one — a policy ETA, for instance. */
   approximate?: boolean;
+  /** The cost policy behind a policy event, so the row can open its details
+   *  and, for those who may, its fix. */
+  costPolicy?: CostPolicyRef;
+}
+
+export interface CostPolicyRef {
+  row;
+  type: 'project' | 'organization';
 }
 
 export interface CreditRunway {

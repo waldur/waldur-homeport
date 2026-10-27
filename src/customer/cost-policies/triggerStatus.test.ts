@@ -20,6 +20,63 @@ const policy = (
   ...overrides,
 });
 
+const breakdown = {
+  cost_before_credit: '9024.00',
+  credit_drawn: '0.00',
+  credit_pending: '2300.00',
+  earlier_months: '2871.00',
+};
+
+describe('getTriggerStatusView on the single cost check', () => {
+  it('explains a fired policy over its limit', () => {
+    const view = getTriggerStatusView(
+      policy('cost_over_limit', true, null, {
+        has_fired: true,
+        current_cost: '6724.00',
+        limit_cost: 5615,
+      }),
+    );
+    expect(view.label).toBe('Limit reached');
+    expect(view.explanation).toBe(
+      'The cost after credit, €6,724.00, is over the limit, €5,615.00.',
+    );
+  });
+
+  it('names the credit the cost is net of and the earlier months', () => {
+    const view = getTriggerStatusView(
+      policy('cost_over_limit', true, null, {
+        has_fired: true,
+        cost_breakdown: breakdown,
+      }),
+    );
+    expect(view.breakdown).toBe(
+      'Cost €9,024.00, less credit already used, €0.00, and credit still to be used this month, €2,300.00.',
+    );
+    expect(view.earlier).toContain('€2,871.00 of it is from earlier months');
+  });
+
+  it('leaves the earlier months out of a policy below its limit', () => {
+    const view = getTriggerStatusView(
+      policy('cost_below_limit', false, null, { cost_breakdown: breakdown }),
+    );
+    expect(view.earlier).toBeUndefined();
+  });
+
+  it('leaves the credit out when none was used', () => {
+    const view = getTriggerStatusView(
+      policy('credit_ignored', true, null, {
+        cost_breakdown: {
+          ...breakdown,
+          credit_pending: '0.00',
+          earlier_months: '0.00',
+        },
+      }),
+    );
+    expect(view.breakdown).toBeUndefined();
+    expect(view.earlier).toBeUndefined();
+  });
+});
+
 describe('getTriggerStatusView', () => {
   it('shows nothing when the backend sends no trigger_status', () => {
     expect(getTriggerStatusView({ has_fired: false, limit_cost: 100 })).toBe(
