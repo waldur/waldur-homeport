@@ -21,7 +21,6 @@ describe('no-bootstrap-modal', () => {
       {
         code: 'import { ModalDialog, ModalShell } from \'waldur-ui\'; const A = () => <ModalShell open onHide={f}><ModalDialog title="T" /></ModalShell>;',
       },
-      { code: "import { Card } from 'react-bootstrap';" },
       {
         code: "openDialog(D, { size: 'lg', dialogClassName: 'role-dialog' });",
       },
@@ -32,22 +31,6 @@ describe('no-bootstrap-modal', () => {
       { code: 'const A = () => <div className="modal-passthrough:flex" />;' },
     ],
     invalid: [
-      {
-        code: "import { Modal } from 'react-bootstrap';",
-        errors: [{ messageId: 'noModalImport' }],
-      },
-      {
-        code: "import { Card, CloseButton } from 'react-bootstrap';",
-        errors: [{ messageId: 'noModalImport' }],
-      },
-      {
-        code: "import BootstrapModalContext from 'react-bootstrap/ModalContext';",
-        errors: [{ messageId: 'noModalImport' }],
-      },
-      {
-        code: "import ModalHeader from 'react-bootstrap/ModalHeader';",
-        errors: [{ messageId: 'noModalImport' }],
-      },
       {
         code: 'const A = () => <div className="modal-body"><h5 className="modal-title" /></div>;',
         errors: [{ messageId: 'noModalClass' }, { messageId: 'noModalClass' }],

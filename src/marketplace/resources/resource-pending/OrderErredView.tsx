@@ -7,7 +7,6 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   marketplaceOrdersCreate,
   OrderCreateRequest,
@@ -172,8 +171,8 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
   const steps = getSteps(resource);
   return (
     <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-5')}>
-      <Card className="card-bordered overflow-hidden">
-        <Card.Body className="flex flex-col sm:flex-row items-center gap-3">
+      <div className="card card-bordered overflow-hidden">
+        <div className="card-body flex flex-col sm:flex-row items-center gap-3">
           {/* A phone is too narrow to lay the steps side by side: their labels
               and dates run into each other, so list them top to bottom. */}
           <div className="w-full sm:hidden">
@@ -207,8 +206,8 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
             </OrderDetailsLink>
             <ShowErrorButton resource={resource} />
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

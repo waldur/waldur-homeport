@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   marketplaceServiceProvidersGlauthTreeRetrieve,
   marketplaceServiceProvidersGlauthUsersConfigRetrieve,
@@ -90,11 +89,11 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
   const tree = treeQuery.data;
   const config = configQuery.data;
   return (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header">
+        <div className="card-title">
           <h3>{translate('GLAuth directory')}</h3>
-        </Card.Title>
+        </div>
         {view === 'toml' && config && (
           <div className="card-toolbar grow justify-end">
             <CopyToClipboard
@@ -104,8 +103,8 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
             />
           </div>
         )}
-      </Card.Header>
-      <Card.Body>
+      </div>
+      <div className="card-body">
         {tree.offerings.length === 0 ? (
           <p className="text-quaternary mb-0">
             {translate(
@@ -161,7 +160,7 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
             </Tabs>
           </>
         )}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

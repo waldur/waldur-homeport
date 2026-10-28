@@ -1,6 +1,5 @@
 import { get } from 'es-toolkit/compat';
 import React from 'react';
-import { Card } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 
 import { translate } from '@/i18n';
@@ -103,8 +102,8 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
       ) : (
         <p>{translate('Resource does not have any plan.')}</p>
       )}
-      <Card className="card-table card-bordered full-width">
-        <Card.Body className="p-0">
+      <div className="card card-table card-bordered full-width">
+        <div className="card-body p-0">
           <div className="table-responsive">
             <div className="table-container">
               <table className="table table-row-bordered align-middle">
@@ -147,8 +146,8 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
               </table>
             </div>
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import { FC, PropsWithChildren } from 'react';
-import { Card } from 'react-bootstrap';
 import { PublicInvitation } from 'waldur-js-client';
 
 import { formatDate, formatDateTime, formatRelative } from '@/core/dateUtils';
@@ -18,13 +17,13 @@ const DetailRow: FC<PropsWithChildren<{ label: string }>> = ({
 export const InvitationDetailsCard: FC<{ invitation: PublicInvitation }> = ({
   invitation,
 }) => (
-  <Card className="card-bordered mb-5">
-    <Card.Header>
-      <Card.Title>
+  <div className="card card-bordered mb-5">
+    <div className="card-header">
+      <div className="card-title">
         <h3>{translate('Invitation details')}</h3>
-      </Card.Title>
-    </Card.Header>
-    <Card.Body>
+      </div>
+    </div>
+    <div className="card-body">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-2.5">
         <div className="flex flex-col gap-2.5">
           <DetailRow label={translate('Call name:')}>
@@ -55,6 +54,6 @@ export const InvitationDetailsCard: FC<{ invitation: PublicInvitation }> = ({
           )}
         </div>
       </div>
-    </Card.Body>
-  </Card>
+    </div>
+  </div>
 );

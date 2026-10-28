@@ -1,6 +1,5 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Tooltip } from 'waldur-ui';
 
@@ -38,8 +37,8 @@ export const NotificationExpandableRow: FunctionComponent<{
               formatHeader(template.path)
             ),
             content: (
-              <Card className="card-bordered card-solid">
-                <Card.Header className="min-h-auto">
+              <div className="card card-bordered card-solid">
+                <div className="card-header min-h-auto">
                   <h6 className="mb-0 font-medium">
                     {translate('Notification template')}
                   </h6>
@@ -50,13 +49,13 @@ export const NotificationExpandableRow: FunctionComponent<{
                     rightIcon
                     className="my-1.5 hover:text-brand"
                   />
-                </Card.Header>
-                <Card.Body className="p-6">
+                </div>
+                <div className="card-body p-6">
                   <pre className="text-secondary text-sm mb-0">
                     {template.content}
                   </pre>
-                </Card.Body>
-              </Card>
+                </div>
+              </div>
             ),
           }))}
         />

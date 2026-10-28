@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import { Offering, Resource } from 'waldur-js-client';
 
 import { HelpIcon } from 'waldur-ui';
@@ -117,8 +116,8 @@ export const ResourceLimitChangeInfo = ({
           </p>
         ) : null)}
 
-      <Card className="card-table card-bordered mt-5 mb-5">
-        <Card.Body className="p-0">
+      <div className="card card-table card-bordered mt-5 mb-5">
+        <div className="card-body p-0">
           <div className="table-responsive">
             <div className="table-container">
               <table className="table table-row-bordered align-middle">
@@ -202,8 +201,8 @@ export const ResourceLimitChangeInfo = ({
               </table>
             </div>
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
       <CostEstimatedChangeView
         order={order}

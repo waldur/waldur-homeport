@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { capitalize } from 'es-toolkit/compat';
 import { useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
@@ -120,8 +119,8 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
   return (
     // Cards in a row share its height; the menu sits at the bottom so the
     // buttons line up however long the description is.
-    <Card className="bg-tertiary dark:bg-quaternary min-h-[150px] h-full border-[1px] border-transparent hover:border-secondary cursor-pointer">
-      <Card.Body className="pe-4 flex">
+    <div className="card bg-tertiary dark:bg-quaternary min-h-[150px] h-full border-[1px] border-transparent hover:border-secondary cursor-pointer">
+      <div className="card-body pe-4 flex">
         <div className="flex grow">
           <div className="flex flex-row justify-between grow">
             <div
@@ -189,8 +188,8 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
             </div>
           </div>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };
 
@@ -257,13 +256,13 @@ export const AdministrationServiceDesk = () => {
       loadData={refetch}
     />
   ) : data ? (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header">
+        <div className="card-title">
           <h3>{translate('Service desk integration')}</h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
+        </div>
+      </div>
+      <div className="card-body">
         <Tabs mount="active" value={activeKey} onValueChange={handleSelect}>
           <TabsList className="mb-4">
             {tabs.map((tab) => (
@@ -295,7 +294,7 @@ export const AdministrationServiceDesk = () => {
             )}
           </>
         </Tabs>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   ) : null;
 };

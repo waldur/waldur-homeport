@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
@@ -48,8 +47,8 @@ export const AdvancedIntegrationSection: FC<OfferingEditPanelProps> = (
   }
 
   return (
-    <Card className="card-bordered">
-      <Card.Body>
+    <div className="card card-bordered">
+      <div className="card-body">
         <Tabs mount="active" value={activeKey} onValueChange={handleSelect}>
           <TabsList className="mb-4">
             {tabs.map((tab) => (
@@ -71,7 +70,7 @@ export const AdvancedIntegrationSection: FC<OfferingEditPanelProps> = (
             )}
           </>
         </Tabs>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

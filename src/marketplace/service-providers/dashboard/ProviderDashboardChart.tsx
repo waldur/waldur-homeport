@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 import { ServiceProvider } from 'waldur-js-client';
 
 import { EChart } from '@/core/EChart';
@@ -25,8 +24,8 @@ export const ProviderDashboardChart: FunctionComponent<
   }
   if (Array.isArray(value) && value[0]) {
     return (
-      <Card className="card-bordered min-h-[225px] mb-4">
-        <Card.Body>
+      <div className="card card-bordered min-h-[225px] mb-4">
+        <div className="card-body">
           <div className="grid grid-cols-12 gap-x-5">
             <div className="col-span-7">
               <EChart options={value[0].options} height="100px" />
@@ -43,8 +42,8 @@ export const ProviderDashboardChart: FunctionComponent<
               />
             </div>
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
   return null;

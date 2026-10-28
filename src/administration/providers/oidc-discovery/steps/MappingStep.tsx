@@ -1,5 +1,4 @@
 import { FC, useEffect, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
 import { Badge, FormField, FormLabel, NativeSelect } from 'waldur-ui';
@@ -261,8 +260,8 @@ export const MappingStep: FC<WizardStepProps> = (props) => {
         </Badge>
       </div>
 
-      <Card className="mb-3">
-        <Card.Body>
+      <div className="card mb-3">
+        <div className="card-body">
           {enabledFields.length === 0 ? (
             <p className="text-quaternary mb-0">
               {translate(
@@ -280,8 +279,8 @@ export const MappingStep: FC<WizardStepProps> = (props) => {
               />
             ))
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </WizardModal>
   );
 };

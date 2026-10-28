@@ -20,7 +20,6 @@ import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { DateTime } from 'luxon';
 import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import type { ProjectAccountingSummary } from 'waldur-js-client';
 import {
   openportalAccountingSummaryList,
@@ -630,6 +629,12 @@ interface StatCardProps {
   variant?: 'default' | 'success' | 'warning' | 'danger';
 }
 
+const BORDER_CLASSES: Record<string, string> = {
+  success: 'border-success',
+  warning: 'border-warning',
+  danger: 'border-danger',
+};
+
 const StatCard: FC<StatCardProps> = ({ label, value, variant = 'default' }) => {
   const textClass =
     variant === 'success'
@@ -641,12 +646,11 @@ const StatCard: FC<StatCardProps> = ({ label, value, variant = 'default' }) => {
           : '';
 
   return (
-    <Card
-      className="flex-1"
-      border={variant !== 'default' ? variant : undefined}
+    <div
+      className={classNames('card flex-1', BORDER_CLASSES[variant])}
       style={{ minWidth: 180 }}
     >
-      <Card.Body className="py-2.5">
+      <div className="card-body py-2.5">
         <div className="text-quaternary small mb-1">{label}</div>
         <div className={`text-base font-medium ${textClass}`}>
           {(variant === 'warning' || variant === 'danger') && (
@@ -654,8 +658,8 @@ const StatCard: FC<StatCardProps> = ({ label, value, variant = 'default' }) => {
           )}
           {value}
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };
 
@@ -1138,8 +1142,8 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* Load prompt — shown before the user triggers the fetch */}
       {showLoadPrompt && !loadTriggered && (
-        <Card className="mb-3">
-          <Card.Body>
+        <div className="card mb-3">
+          <div className="card-body">
             <p className="mb-1">
               {translate('Allocation data not yet loaded')}
             </p>
@@ -1201,8 +1205,8 @@ export const OrganisationAllocationTab: FC = () => {
               }}
               label={translate('Load data')}
             />
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       )}
 
       {/* Progress bar while summaries are being fetched */}
@@ -1295,8 +1299,8 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* ── Burn-down chart ─────────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <Card className="mb-3">
-          <Card.Header className="flex items-center gap-2.5">
+        <div className="card mb-3">
+          <div className="card-header flex items-center gap-2.5">
             <span>{translate('Predicted allocation burn-down')}</span>
 
             {chartOptions && (
@@ -1336,8 +1340,8 @@ export const OrganisationAllocationTab: FC = () => {
                 })}
               </span>
             )}
-          </Card.Header>
-          <Card.Body>
+          </div>
+          <div className="card-body">
             {chartOptions ? (
               <EChart options={chartOptions} height="420px" />
             ) : (
@@ -1347,14 +1351,14 @@ export const OrganisationAllocationTab: FC = () => {
                 )}
               </p>
             )}
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       )}
 
       {/* ── Consumption chart ───────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <Card className="mb-3">
-          <Card.Header className="flex items-center gap-2.5">
+        <div className="card mb-3">
+          <div className="card-header flex items-center gap-2.5">
             <span>{translate('Predicted daily consumption')}</span>
 
             {consumptionOptions && (
@@ -1397,8 +1401,8 @@ export const OrganisationAllocationTab: FC = () => {
                 })}
               </span>
             )}
-          </Card.Header>
-          <Card.Body>
+          </div>
+          <div className="card-body">
             {consumptionOptions ? (
               <EChart options={consumptionOptions} height="420px" />
             ) : (
@@ -1408,8 +1412,8 @@ export const OrganisationAllocationTab: FC = () => {
                 )}
               </p>
             )}
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       )}
 
       {/* ── Warning: projects without end dates ─────────────────────────── */}
@@ -1475,8 +1479,8 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* ── Concerning projects ─────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <Card className="mb-3">
-          <Card.Header className="flex items-center gap-1.5">
+        <div className="card mb-3">
+          <div className="card-header flex items-center gap-1.5">
             <span>{translate('Concerning Projects')}</span>
             {slowStart.length +
               inactive.length +
@@ -1509,9 +1513,9 @@ export const OrganisationAllocationTab: FC = () => {
               onClick={() => setShowThresholds((v: boolean) => !v)}
               label={translate('Thresholds')}
             />
-          </Card.Header>
+          </div>
 
-          <Card.Body>
+          <div className="card-body">
             {/* ── Threshold controls ──────────────────────────────────── */}
             {showThresholds && (
               <div className="p-2.5 mb-2.5 bg-tertiary dark:bg-quaternary rounded small">
@@ -1996,8 +2000,8 @@ export const OrganisationAllocationTab: FC = () => {
                 </div>
               </Tabs>
             )}
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       )}
     </div>
   );

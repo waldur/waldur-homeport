@@ -1,5 +1,4 @@
 import { Fragment, FunctionComponent } from 'react';
-import { Table } from 'react-bootstrap';
 import { OpenStackSecurityGroup } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -24,51 +23,55 @@ export const OpenStackSecurityGroupsTable: FunctionComponent<{
   >[];
 }> = ({ securityGroups }) => {
   return (
-    <Table responsive className="table-row-bordered">
-      <thead>
-        <tr>
-          <th />
-          <SecurityGroupRuleHeader />
-        </tr>
-      </thead>
-      <tbody>
-        {securityGroups.map((securityGroup, i) => (
-          <Fragment key={i}>
-            {securityGroup.rules.length === 0 ? (
-              <tr>
-                <td>
-                  <strong>{securityGroup.name.toUpperCase()}</strong>
-                  {securityGroup.description && (
-                    <div>{securityGroup.description}</div>
-                  )}
-                </td>
-              </tr>
-            ) : (
-              securityGroup.rules.map((rule, index) => (
-                <tr key={index}>
-                  {index === 0 ? (
-                    <td
-                      rowSpan={securityGroup.rules.length}
-                      className={
-                        i === securityGroups.length - 1 ? 'border-0' : undefined
-                      }
-                    >
-                      <strong>{securityGroup.name.toUpperCase()}</strong>
-                      {securityGroup.description && (
-                        <div>{securityGroup.description}</div>
-                      )}
-                    </td>
-                  ) : (
-                    <td className="hidden" />
-                  )}
-                  <SecurityGroupRuleCell rule={rule as any} />
+    <div className="table-responsive">
+      <table className="table table-row-bordered">
+        <thead>
+          <tr>
+            <th />
+            <SecurityGroupRuleHeader />
+          </tr>
+        </thead>
+        <tbody>
+          {securityGroups.map((securityGroup, i) => (
+            <Fragment key={i}>
+              {securityGroup.rules.length === 0 ? (
+                <tr>
+                  <td>
+                    <strong>{securityGroup.name.toUpperCase()}</strong>
+                    {securityGroup.description && (
+                      <div>{securityGroup.description}</div>
+                    )}
+                  </td>
                 </tr>
-              ))
-            )}
-          </Fragment>
-        ))}
-      </tbody>
-    </Table>
+              ) : (
+                securityGroup.rules.map((rule, index) => (
+                  <tr key={index}>
+                    {index === 0 ? (
+                      <td
+                        rowSpan={securityGroup.rules.length}
+                        className={
+                          i === securityGroups.length - 1
+                            ? 'border-0'
+                            : undefined
+                        }
+                      >
+                        <strong>{securityGroup.name.toUpperCase()}</strong>
+                        {securityGroup.description && (
+                          <div>{securityGroup.description}</div>
+                        )}
+                      </td>
+                    ) : (
+                      <td className="hidden" />
+                    )}
+                    <SecurityGroupRuleCell rule={rule as any} />
+                  </tr>
+                ))
+              )}
+            </Fragment>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

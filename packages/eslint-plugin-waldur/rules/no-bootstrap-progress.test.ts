@@ -21,25 +21,12 @@ describe('no-bootstrap-progress', () => {
       {
         code: "import { Progress } from 'waldur-ui'; const A = () => <Progress value={1} />;",
       },
-      { code: "import { Card } from 'react-bootstrap';" },
       // Lookalike class names that are not the Bootstrap classes.
       { code: 'const A = () => <div className="call-in-progress-banner" />;' },
       { code: 'const A = () => <span className="aui-ask-user-progress" />;' },
       { code: 'const A = () => <div className="progress-steps-view" />;' },
     ],
     invalid: [
-      {
-        code: "import { ProgressBar } from 'react-bootstrap';",
-        errors: [{ messageId: 'noProgressImport' }],
-      },
-      {
-        code: "import { Card, ProgressBar } from 'react-bootstrap';",
-        errors: [{ messageId: 'noProgressImport' }],
-      },
-      {
-        code: "import ProgressBar from 'react-bootstrap/ProgressBar';",
-        errors: [{ messageId: 'noProgressImport' }],
-      },
       {
         code: 'const A = () => <div className="progress h-6px"><div className="progress-bar bg-primary" /></div>;',
         errors: [

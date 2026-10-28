@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard, AlertItem, Badge } from 'waldur-ui';
 
@@ -108,37 +107,39 @@ export const ServiceProviderAccessSection: FC<
                 <div className="mb-1.5">
                   {translate('Provider team members')}
                 </div>
-                <Table responsive hover size="sm" className="mb-0">
-                  <thead>
-                    <tr>
-                      <th>{translate('User')}</th>
-                      <th>{translate('Role')}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {provider.provider_team.map((user) => (
-                      <tr key={user.user_uuid}>
-                        <td>
-                          <Link
-                            state="support-user-manage"
-                            params={{ user_uuid: user.user_uuid }}
-                          >
-                            {user.full_name || user.username}
-                          </Link>
-                        </td>
-                        <td>
-                          {user.role ? (
-                            <Badge variant="info" shape="pill" tone="outline">
-                              {user.role}
-                            </Badge>
-                          ) : (
-                            <span className="text-quaternary">-</span>
-                          )}
-                        </td>
+                <div className="table-responsive">
+                  <table className="table table-sm table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th>{translate('User')}</th>
+                        <th>{translate('Role')}</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </Table>
+                    </thead>
+                    <tbody>
+                      {provider.provider_team.map((user) => (
+                        <tr key={user.user_uuid}>
+                          <td>
+                            <Link
+                              state="support-user-manage"
+                              params={{ user_uuid: user.user_uuid }}
+                            >
+                              {user.full_name || user.username}
+                            </Link>
+                          </td>
+                          <td>
+                            {user.role ? (
+                              <Badge variant="info" shape="pill" tone="outline">
+                                {user.role}
+                              </Badge>
+                            ) : (
+                              <span className="text-quaternary">-</span>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
         </AccordionCard>

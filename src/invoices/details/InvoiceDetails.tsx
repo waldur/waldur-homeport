@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
@@ -28,8 +27,8 @@ export const InvoiceDetails = ({
 
   return (
     <>
-      <Card className="card-bordered mb-4">
-        <Card.Body className="flex">
+      <div className="card card-bordered mb-4">
+        <div className="card-body flex">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 grow">
             {invoice.customer_details && (
               <div>
@@ -56,8 +55,8 @@ export const InvoiceDetails = ({
             <strong>{translate('Due date')}: </strong>
             {renderFieldOrDash(invoice.due_date)}
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
       <InvoiceItemsTable
         invoice={invoice}
         invoiceView

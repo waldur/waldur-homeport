@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   marketplaceSlurmPeriodicUsagePoliciesEvaluationLogsList,
   SlurmPolicyEvaluationLog,
@@ -39,13 +38,13 @@ export const SlurmPolicyStatusSummary: FC<SlurmPolicyStatusSummaryProps> = ({
 
   if (!data || data.length === 0) {
     return (
-      <Card className="mb-3 border-dashed border-divider-medium">
-        <Card.Body className="py-2.5">
+      <div className="card mb-3 border-dashed border-divider-medium">
+        <div className="card-body py-2.5">
           <div className="text-quaternary text-center">
             {translate('No evaluations recorded yet.')}
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
 
@@ -87,8 +86,8 @@ export const SlurmPolicyStatusSummary: FC<SlurmPolicyStatusSummaryProps> = ({
   };
 
   return (
-    <Card className="mb-3">
-      <Card.Body className="py-2.5">
+    <div className="card mb-3">
+      <div className="card-body py-2.5">
         <div className="flex flex-wrap gap-3 items-center">
           <div>
             <span className="text-quaternary small">
@@ -117,7 +116,7 @@ export const SlurmPolicyStatusSummary: FC<SlurmPolicyStatusSummaryProps> = ({
             <div>{getAgentStatusBadge()}</div>
           </div>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

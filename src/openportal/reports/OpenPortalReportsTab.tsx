@@ -8,7 +8,6 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   CachedProjectStorageReport as StorageReportApiItem,
   CachedProjectUsageReport as UsageReportApiItem,
@@ -202,8 +201,8 @@ export const OpenPortalReportsTab: FC = () => {
     !isLoading && project ? getCacheAge(`project-usage-${project.uuid}`) : null;
 
   return (
-    <Card className="card-bordered">
-      <Card.Header className="border-b-[1px] border-b-secondary">
+    <div className="card card-bordered">
+      <div className="card-header border-b-[1px] border-b-secondary">
         <div className="flex items-center gap-2.5 flex-wrap w-full">
           <div className="flex items-center me-1.5">
             <span className="h3 mb-0">{translate('Usage Report')}</span>
@@ -270,8 +269,8 @@ export const OpenPortalReportsTab: FC = () => {
             </span>
           )}
         </div>
-      </Card.Header>
-      <Card.Body>
+      </div>
+      <div className="card-body">
         {isLoading && <LoadingSpinner />}
 
         {usageError && (
@@ -324,7 +323,7 @@ export const OpenPortalReportsTab: FC = () => {
             />
           </div>
         )}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

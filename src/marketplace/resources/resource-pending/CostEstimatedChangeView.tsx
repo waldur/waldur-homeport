@@ -1,5 +1,4 @@
 import { ArrowRightIcon, InfoIcon } from '@phosphor-icons/react';
-import { Card } from 'react-bootstrap';
 import { OrderDetails } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -12,8 +11,8 @@ export const CostEstimatedChangeView = ({
   order: OrderDetails;
   message: string;
 }) => (
-  <Card className="card-bordered">
-    <Card.Body className="flex items-center font-medium p-4">
+  <div className="card card-bordered">
+    <div className="card-body flex items-center font-medium p-4">
       <div className="icon-square me-4">
         <InfoIcon weight="bold" />
       </div>
@@ -25,6 +24,6 @@ export const CostEstimatedChangeView = ({
         {defaultCurrency(order.new_cost_estimate)}{' '}
         {translate('(VAT is not included)')}
       </p>
-    </Card.Body>
-  </Card>
+    </div>
+  </div>
 );

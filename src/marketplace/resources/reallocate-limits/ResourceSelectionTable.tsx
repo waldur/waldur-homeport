@@ -1,5 +1,4 @@
 import { FC, FocusEvent, useState, useEffect } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { Badge, NumberInput, Tooltip } from 'waldur-ui';
 
@@ -205,7 +204,7 @@ export const ResourceSelectionTable: FC<ResourceSelectionTableProps> = ({
       </div>
 
       <div className="table-responsive">
-        <Table className="table-row-bordered table-expandable align-middle table-rounded border-[1px] border-divider">
+        <table className="table table-row-bordered table-expandable align-middle table-rounded border-[1px] border-divider">
           <thead>
             <tr>
               <th>{translate('Resource name')}</th>
@@ -256,7 +255,7 @@ export const ResourceSelectionTable: FC<ResourceSelectionTableProps> = ({
               })
             )}
           </tbody>
-        </Table>
+        </table>
       </div>
     </div>
   );

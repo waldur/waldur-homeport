@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import { FC, ReactNode, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
@@ -104,20 +103,20 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
   }
 
   return (
-    <Card className={classNames('card-bordered', className)}>
+    <div className={classNames('card card-bordered', className)}>
       {title && (
-        <Card.Header>
+        <div className="card-header">
           <div className="flex flex-col">
-            <Card.Title className="mb-0">
+            <div className="card-title mb-0">
               <h3>{title}</h3>
-            </Card.Title>
+            </div>
           </div>
           <div className="card-toolbar flex-nowrap">
             <TableQuery query={query} setQuery={setQuery} />
           </div>
-        </Card.Header>
+        </div>
       )}
-      <Card.Body>
+      <div className="card-body">
         <Tabs mount="active" value={activeKey} onValueChange={handleSelect}>
           <TabsList className="mb-4">
             {tabs.map((tab) => {
@@ -163,7 +162,7 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
             ))}
           </>
         </Tabs>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

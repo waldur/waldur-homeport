@@ -1,7 +1,6 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import arrayMutators from 'final-form-arrays';
 import React, { FC, useMemo } from 'react';
-import { Table } from 'react-bootstrap';
 import { Form, Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import {
@@ -101,30 +100,27 @@ const PairAddButton = ({ onClick }: { onClick: () => void }) => (
 const PairsTable: React.FC<{ fields: PairsFields }> = ({ fields }) =>
   fields.length > 0 ? (
     <>
-      <Table
-        responsive={true}
-        bordered={true}
-        striped={true}
-        className="mt-2.5"
-      >
-        <thead>
-          <tr>
-            <th>{translate('Internal network mask (CIDR)')}</th>
-            <th>{translate('MAC address (optional)')}</th>
-            <th>{translate('Actions')}</th>
-          </tr>
-        </thead>
+      <div className="table-responsive">
+        <table className="table table-bordered table-striped mt-2.5">
+          <thead>
+            <tr>
+              <th>{translate('Internal network mask (CIDR)')}</th>
+              <th>{translate('MAC address (optional)')}</th>
+              <th>{translate('Actions')}</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {fields.map((pair, index) => (
-            <PairRow
-              key={pair}
-              pair={pair}
-              onRemove={() => fields.remove(index)}
-            />
-          ))}
-        </tbody>
-      </Table>
+          <tbody>
+            {fields.map((pair, index) => (
+              <PairRow
+                key={pair}
+                pair={pair}
+                onRemove={() => fields.remove(index)}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
       <PairAddButton onClick={() => fields.push({ ip_address: '' })} />
     </>
   ) : (

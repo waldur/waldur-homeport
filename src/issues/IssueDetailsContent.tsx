@@ -1,5 +1,4 @@
 import { FunctionComponent, ReactNode } from 'react';
-import { Card } from 'react-bootstrap';
 import { Issue } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -157,18 +156,18 @@ export const IssueDetailsContent: FunctionComponent<
         <ProviderRoutingInfo issue={issue} />
       )}
 
-      <Card className="card-bordered mb-4">
-        <Card.Header>
-          <Card.Title>{translate('Description')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
+      <div className="card card-bordered mb-4">
+        <div className="card-header">
+          <div className="card-title">{translate('Description')}</div>
+        </div>
+        <div className="card-body">
           {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'atlassian' ? (
             <FormattedJira text={linkify(issue?.description)} />
           ) : (
             <FormattedHtml html={linkify(withLineBreaks(issue?.description))} />
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
       <IssueCommentsContainer issue={issue} />
       <IssueAttachmentsContainer issue={issue} />

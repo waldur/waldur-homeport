@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import { Resource, Offering } from 'waldur-js-client';
 
 import { CodePreview } from '@/core/CodePreview';
@@ -20,16 +19,16 @@ export const GettingStartedCard = ({
   );
 
   return offering.getting_started || endpoints.length > 0 ? (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header">
+        <div className="card-title">
           <h3>{translate('Getting started')}</h3>
-        </Card.Title>
+        </div>
         <div className="card-toolbar">
           <ResourceAccessButton resource={resource} offering={offering} />
         </div>
-      </Card.Header>
-      <Card.Body>
+      </div>
+      <div className="card-body">
         {offering.getting_started ? (
           <CodePreview
             template={offering.getting_started}
@@ -59,7 +58,7 @@ export const GettingStartedCard = ({
             )}
           </p>
         )}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   ) : null;
 };

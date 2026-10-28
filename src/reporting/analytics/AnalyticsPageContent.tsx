@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 
@@ -36,8 +35,8 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
       value={activeMode}
       onValueChange={(k) => setActiveMode(k as AnalyticsMode)}
     >
-      <Card className="card-bordered">
-        <Card.Header className="border-b-0">
+      <div className="card card-bordered">
+        <div className="card-header border-b-0">
           <TabsList scrollable>
             {capability.supportedModes.map((mode) => (
               <TabsTrigger
@@ -49,9 +48,9 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
               </TabsTrigger>
             ))}
           </TabsList>
-        </Card.Header>
+        </div>
 
-        <Card.Body>
+        <div className="card-body">
           <TabsContent value={activeMode}>
             {activeMode === 'what-if' &&
               supportsWhatIf &&
@@ -84,8 +83,8 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
                 />
               )}
           </TabsContent>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </Tabs>
   );
 };

@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard } from 'waldur-ui';
 
@@ -35,7 +34,7 @@ export const EventSubscriptionQueuesCard: FC = () => {
           <LoadingSpinner />
         </div>
       ) : data && data.length > 0 ? (
-        <Table size="sm" borderless className="mb-0">
+        <table className="table table-sm table-borderless mb-0">
           <thead>
             <tr>
               <th className="text-quaternary">{translate('Object type')}</th>
@@ -66,7 +65,7 @@ export const EventSubscriptionQueuesCard: FC = () => {
               </tr>
             ))}
           </tbody>
-        </Table>
+        </table>
       ) : (
         <p className="text-quaternary mb-0">
           {translate('No event subscription queues found.')}

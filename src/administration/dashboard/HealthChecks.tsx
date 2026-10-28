@@ -3,7 +3,6 @@ import {
   XCircleIcon,
   WarningCircleIcon,
 } from '@phosphor-icons/react';
-import { Card } from 'react-bootstrap';
 
 import { Tooltip } from 'waldur-ui';
 
@@ -104,8 +103,8 @@ export const HealthChecks = ({ healthInfoItems }: HealthChecksProps) => {
   const allWorking = workingCount === totalCount;
 
   return (
-    <Card className="card-bordered mb-4">
-      <Card.Body>
+    <div className="card card-bordered mb-4">
+      <div className="card-body">
         <div className="flex justify-between items-center mb-3">
           <h3 className="mb-0">{translate('Health checks')}</h3>
           <div className="flex items-center">
@@ -132,7 +131,7 @@ export const HealthChecks = ({ healthInfoItems }: HealthChecksProps) => {
             <HealthInfoItem key={key} title={key} status={value} />
           ))}
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

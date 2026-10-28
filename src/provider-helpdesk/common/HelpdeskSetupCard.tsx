@@ -1,6 +1,5 @@
 import { LifebuoyIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { BaseButton } from 'waldur-ui';
 
@@ -40,8 +39,8 @@ export const HelpdeskSetupCard: FC = () => {
   }
 
   return (
-    <Card className="mb-5">
-      <Card.Body className="flex flex-wrap items-center gap-3">
+    <div className="card mb-5">
+      <div className="card-body flex flex-wrap items-center gap-3">
         <div className="icon-square icon-lg bg-brand-subtle text-brand">
           <LifebuoyIcon weight="bold" size={24} />
         </div>
@@ -66,7 +65,7 @@ export const HelpdeskSetupCard: FC = () => {
           }
           size="lg"
         />
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

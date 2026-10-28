@@ -1,5 +1,4 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Table as BootstrapTable } from 'react-bootstrap';
 
 import { Badge } from 'waldur-ui';
 
@@ -56,7 +55,7 @@ const ResourceDemandExpandableRow: FC<{ row: ResourceDemandStat }> = ({
         {translate('approved')} / {row.approved_count + row.pending_count}{' '}
         {translate('reviewed')})
       </p>
-      <BootstrapTable className="table-row-bordered table-expandable table-rounded border-[1px] border-divider overflow-hidden">
+      <table className="table table-row-bordered table-expandable table-rounded border-[1px] border-divider overflow-hidden">
         <thead className="align-middle">
           <tr>
             <th className="bg-tertiary">{translate('Metric')}</th>
@@ -75,7 +74,7 @@ const ResourceDemandExpandableRow: FC<{ row: ResourceDemandStat }> = ({
             </tr>
           ))}
         </tbody>
-      </BootstrapTable>
+      </table>
     </ExpandableContainer>
   );
 };

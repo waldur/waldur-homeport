@@ -1,7 +1,6 @@
 import { ProhibitIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { Radio, Tooltip } from 'waldur-ui';
 
@@ -26,7 +25,7 @@ export const ChoicesTable: FC<ChoicesTableProps> = ({
   ...props
 }) => (
   <div className="table-responsive choices-table">
-    <Table bsPrefix="table">
+    <table className="table">
       <thead>
         <tr>
           {enableSelect && <th />}
@@ -86,6 +85,6 @@ export const ChoicesTable: FC<ChoicesTableProps> = ({
           </tr>
         ))}
       </tbody>
-    </Table>
+    </table>
   </div>
 );

@@ -1,11 +1,11 @@
 /**
  * ESLint rule steering hand-rolled tables towards Waldur's Table.
  *
- * A react-bootstrap <Table>, or raw <table> markup, silently loses the header
- * styling, sort carets, column sizing, hover and selection, loading skeletons
- * and the shared NoResult empty state — so it looks visibly foreign next to
- * every other list in the app. This applies to small lists too: ones nested in
- * an expandable row, a tab or a modal.
+ * Raw <table> markup silently loses the header styling, sort carets, column
+ * sizing, hover and selection, loading skeletons and the shared NoResult empty
+ * state — so it looks visibly foreign next to every other list in the app.
+ * This applies to small lists too: ones nested in an expandable row, a tab or
+ * a modal.
  *
  * For data already in memory, `fetchData` may resolve rows directly rather than
  * using createFetcher — see docs/table/getting-started.md.
@@ -45,20 +45,13 @@ export default {
   meta: {
     type: 'suggestion',
     docs: {
-      description:
-        'Prefer @/table/Table over react-bootstrap Table or raw <table> markup',
+      description: 'Prefer @/table/Table over raw <table> markup',
       category: 'Best Practices',
       recommended: true,
     },
     fixable: null,
     schema: [],
     messages: {
-      noBootstrapTable:
-        "Prefer Table from '@/table/Table' with useTable over react-bootstrap's Table.\n" +
-        '  A hand-rolled table loses header styling, sort carets, column sizing,\n' +
-        '  hover and selection, loading skeletons and the shared empty state.\n' +
-        '  For in-memory rows, fetchData may resolve them directly:\n' +
-        '    fetchData: () => Promise.resolve({ rows, resultCount: rows.length })',
       noRawTable:
         "Prefer Table from '@/table/Table' over raw <table> markup.\n" +
         '  See docs/table/getting-started.md. If this is genuinely not a data\n' +
@@ -74,21 +67,6 @@ export default {
     }
 
     return {
-      ImportDeclaration(node) {
-        if (node.source.value !== 'react-bootstrap') {
-          return;
-        }
-        const tableImport = node.specifiers.find(
-          (specifier) =>
-            specifier.type === 'ImportSpecifier' &&
-            specifier.imported &&
-            specifier.imported.name === 'Table',
-        );
-        if (tableImport) {
-          context.report({ node: tableImport, messageId: 'noBootstrapTable' });
-        }
-      },
-
       // Raw markup is reported on the opening element rather than the import,
       // since there is nothing imported to point at.
       JSXOpeningElement(node) {

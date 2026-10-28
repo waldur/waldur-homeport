@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard, Badge } from 'waldur-ui';
 
@@ -38,41 +37,43 @@ export const AdministrativeAccessSection: FC<
     )}
 
     {isViewerStaffOrSupport && data.users && data.users.length > 0 && (
-      <Table responsive hover className="mb-0">
-        <thead>
-          <tr>
-            <th>{translate('User')}</th>
-            <th>{translate('Access type')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.users.map((user) => (
-            <tr key={user.user_uuid}>
-              <td>
-                <Link
-                  state="support-user-manage"
-                  params={{ user_uuid: user.user_uuid }}
-                >
-                  {user.full_name || user.username}
-                </Link>
-              </td>
-              <td>
-                {user.access_type && (
-                  <Badge
-                    variant={getAccessTypeBadgeVariant(
-                      user.access_type as AccessType,
-                    )}
-                    shape="pill"
-                    tone="outline"
-                  >
-                    {formatAccessType(user.access_type as AccessType)}
-                  </Badge>
-                )}
-              </td>
+      <div className="table-responsive">
+        <table className="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th>{translate('User')}</th>
+              <th>{translate('Access type')}</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {data.users.map((user) => (
+              <tr key={user.user_uuid}>
+                <td>
+                  <Link
+                    state="support-user-manage"
+                    params={{ user_uuid: user.user_uuid }}
+                  >
+                    {user.full_name || user.username}
+                  </Link>
+                </td>
+                <td>
+                  {user.access_type && (
+                    <Badge
+                      variant={getAccessTypeBadgeVariant(
+                        user.access_type as AccessType,
+                      )}
+                      shape="pill"
+                      tone="outline"
+                    >
+                      {formatAccessType(user.access_type as AccessType)}
+                    </Badge>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     )}
   </AccordionCard>
 );

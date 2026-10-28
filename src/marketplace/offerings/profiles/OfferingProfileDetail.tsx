@@ -2,7 +2,6 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import {
   marketplaceOfferingProfilesAddRole,
@@ -47,8 +46,8 @@ export const OfferingProfileDetail: FC = () => {
 
   return (
     <div>
-      <Card className="mb-2.5">
-        <Card.Body>
+      <div className="card mb-2.5">
+        <div className="card-body">
           <h3 className="mb-1.5">{profile.name}</h3>
           <p className="text-quaternary mb-2.5">
             {renderFieldOrDash(profile.description)}
@@ -58,11 +57,11 @@ export const OfferingProfileDetail: FC = () => {
               n: profile.offerings_count ?? 0,
             })}
           </p>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
-      <Card>
-        <Card.Header className="flex items-center justify-between">
+      <div className="card">
+        <div className="card-header flex items-center justify-between">
           <h5 className="mb-0">{translate('Role catalog')}</h5>
           {isStaff && (
             <BaseButton
@@ -77,8 +76,8 @@ export const OfferingProfileDetail: FC = () => {
               size="lg"
             />
           )}
-        </Card.Header>
-        <Card.Body>
+        </div>
+        <div className="card-body">
           <p className="text-quaternary">
             {translate(
               'These roles can be assigned on every offering bound to this profile, at the scope shown. Adding or removing a role updates the bound offerings in the background.',
@@ -123,8 +122,8 @@ export const OfferingProfileDetail: FC = () => {
               </tbody>
             </table>
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

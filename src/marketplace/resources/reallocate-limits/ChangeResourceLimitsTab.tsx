@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 
 import { translate } from '@/i18n';
@@ -105,7 +104,7 @@ export const ChangeResourceLimitsTab: FC<ChangeResourceLimitsTabProps> = ({
         {freedCapacitySummary && ` - ${freedCapacitySummary}`}
       </p>
       <div className="table-responsive">
-        <Table className="table-row-bordered table-expandable align-middle table-rounded border-[1px] border-divider">
+        <table className="table table-row-bordered table-expandable align-middle table-rounded border-[1px] border-divider">
           <thead>
             <tr>
               <th>{translate('Component')}</th>
@@ -133,7 +132,7 @@ export const ChangeResourceLimitsTab: FC<ChangeResourceLimitsTabProps> = ({
               secondaryMultiplier={secondaryMultiplier}
             />
           </tbody>
-        </Table>
+        </table>
       </div>
     </div>
   );

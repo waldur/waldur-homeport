@@ -1,6 +1,5 @@
 import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { projectsPartialUpdate } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
@@ -39,13 +38,13 @@ export const ProjectAvatar = ({ project }: { project: Project }) => {
       onSubmit={(values: FormData) => avatarMutation.mutateAsync(values)}
       initialValues={{ image: project.image }}
       render={({ handleSubmit, submitting }) => (
-        <Card as="form" onSubmit={handleSubmit} className="card-bordered mb-4">
-          <Card.Header>
-            <Card.Title>
+        <form onSubmit={handleSubmit} className="card card-bordered mb-4">
+          <div className="card-header">
+            <div className="card-title">
               <h3>{translate('Avatar')}</h3>
-            </Card.Title>
-          </Card.Header>
-          <Card.Body>
+            </div>
+          </div>
+          <div className="card-body">
             <Field
               name="image"
               component={(fieldProps) => (
@@ -70,8 +69,8 @@ export const ProjectAvatar = ({ project }: { project: Project }) => {
                 />
               )}
             />
-          </Card.Body>
-        </Card>
+          </div>
+        </form>
       )}
     />
   );

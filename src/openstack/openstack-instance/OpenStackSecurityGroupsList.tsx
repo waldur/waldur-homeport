@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import { OpenStackInstance, openstackPortsRetrieve } from 'waldur-js-client';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
@@ -87,15 +86,15 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
   });
 
   return (
-    <Card className="card card-table card-bordered">
-      <Card.Header>
-        <Card.Title>
+    <div className="card card card-table card-bordered">
+      <div className="card-header">
+        <div className="card-title">
           <span className="me-1.5">{translate('Security groups details')}</span>
           <RefreshButton
             refetch={activeKey === 'resource' ? props.refetch : refetchPort}
             loading={props.isLoading || isRefetchingPort}
           />
-        </Card.Title>
+        </div>
         <div className="card-toolbar">
           {activeKey === 'resource' ? (
             <UpdateSecurityGroupsButton
@@ -114,8 +113,8 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
 
           <ManageSecurityGroupsButton resource={props.resource} />
         </div>
-      </Card.Header>
-      <Card.Body className="min-h-[300px]">
+      </div>
+      <div className="card-body min-h-[300px]">
         <Tabs value={activeKey} onValueChange={setActiveKey}>
           {ports?.length > 0 && (
             <TabsList scrollable>
@@ -171,7 +170,7 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
             )}
           </TabsContent>
         </Tabs>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { ArrowLicense } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
@@ -43,16 +42,16 @@ const ArrowLicensesTable: FC<ArrowLicensesListProps> = ({ licenses }) => (
 );
 
 export const ArrowLicensesList: FC<ArrowLicensesListProps> = ({ licenses }) => (
-  <Card>
-    <Card.Header>
+  <div className="card">
+    <div className="card-header">
       <h5 className="mb-0">
         {translate('Arrow Licenses')}
         <Badge variant="neutral" tone="outline" className="ms-1.5">
           {licenses?.length || 0}
         </Badge>
       </h5>
-    </Card.Header>
-    <Card.Body className="p-0">
+    </div>
+    <div className="card-body p-0">
       {!licenses || licenses.length === 0 ? (
         <div className="text-center text-quaternary py-5">
           {translate('No licenses found in Arrow billing export')}
@@ -60,6 +59,6 @@ export const ArrowLicensesList: FC<ArrowLicensesListProps> = ({ licenses }) => (
       ) : (
         <ArrowLicensesTable licenses={licenses} />
       )}
-    </Card.Body>
-  </Card>
+    </div>
+  </div>
 );

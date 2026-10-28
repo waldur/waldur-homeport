@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard } from 'waldur-ui';
 
@@ -38,7 +37,7 @@ export const PubSubTopQueuesCard: FC = () => {
           <LoadingSpinner />
         </div>
       ) : data && data.top_queues_by_messages.length > 0 ? (
-        <Table size="sm" borderless className="mb-0">
+        <table className="table table-sm table-borderless mb-0">
           <thead>
             <tr>
               <th className="text-quaternary">{translate('Vhost')}</th>
@@ -67,7 +66,7 @@ export const PubSubTopQueuesCard: FC = () => {
               </tr>
             ))}
           </tbody>
-        </Table>
+        </table>
       ) : (
         <p className="text-quaternary mb-0">{translate('No queues found.')}</p>
       )}

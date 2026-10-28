@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { ReactNode, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { IdentityProvider, overrideSettingsRetrieve } from 'waldur-js-client';
 
@@ -284,13 +283,13 @@ export const IdentityProvidersList = () => {
   if (!providersData || !settingsData) return null;
 
   return (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header">
+        <div className="card-title">
           <h3>{translate('Identity & Authentication')}</h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
+        </div>
+      </div>
+      <div className="card-body">
         <Tabs mount="all" value={activeKey} onValueChange={handleSelect}>
           <TabsList className="mb-4">
             {tabs.map((tab) => (
@@ -350,7 +349,7 @@ export const IdentityProvidersList = () => {
             ))}
           </>
         </Tabs>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

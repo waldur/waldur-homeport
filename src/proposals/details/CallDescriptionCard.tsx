@@ -1,5 +1,4 @@
 import Markdown from 'markdown-to-jsx';
-import { Card } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 
@@ -12,13 +11,13 @@ interface CallDescriptionCardProps {
 }
 
 export const CallDescriptionCard = ({ call }: CallDescriptionCardProps) => (
-  <Card className="card-bordered">
-    <Card.Header>
-      <Card.Title>
+  <div className="card card-bordered">
+    <div className="card-header">
+      <div className="card-title">
         <h3>{translate('Description')}</h3>
-      </Card.Title>
-    </Card.Header>
-    <Card.Body>
+      </div>
+    </div>
+    <div className="card-body">
       <Markdown
         options={{
           overrides: {
@@ -30,6 +29,6 @@ export const CallDescriptionCard = ({ call }: CallDescriptionCardProps) => (
       >
         {call.description || '<CallDetailsFields></CallDetailsFields>'}
       </Markdown>
-    </Card.Body>
-  </Card>
+    </div>
+  </div>
 );

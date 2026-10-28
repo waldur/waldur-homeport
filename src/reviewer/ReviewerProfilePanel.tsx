@@ -1,7 +1,6 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   ReviewerProfile,
   reviewerProfilesPublish,
@@ -131,8 +130,8 @@ export const ReviewerProfilePanel = ({
 
   return (
     <Tabs value={activeTab} onValueChange={(key) => onTabChange(key as TabKey)}>
-      <Card className="card-bordered">
-        <Card.Header className="border-b-0 pt-3">
+      <div className="card card-bordered">
+        <div className="card-header border-b-0 pt-3">
           <div className="flex flex-col lg:flex-row w-full gap-3">
             {/* Left side: Title, refresh, and status badges */}
             <div className="flex flex-col">
@@ -194,9 +193,9 @@ export const ReviewerProfilePanel = ({
               )}
             </div>
           </div>
-        </Card.Header>
+        </div>
         {/* Tabs navigation */}
-        <Card.Header className="border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto">
+        <div className="card-header border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto">
           <TabsList scrollable scrollClassName="grow pt-3" bordered={false}>
             {tabs.map((tab) => (
               <TabsTrigger key={tab.key} value={tab.key}>
@@ -204,11 +203,13 @@ export const ReviewerProfilePanel = ({
               </TabsTrigger>
             ))}
           </TabsList>
-        </Card.Header>
-        <Card.Body className={activeTab === 'info' ? 'pt-3' : 'pt-0 pb-0'}>
+        </div>
+        <div
+          className={`card-body ${activeTab === 'info' ? 'pt-3' : 'pt-0 pb-0'}`}
+        >
           <TabsContent value={activeTab}>{children}</TabsContent>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </Tabs>
   );
 };

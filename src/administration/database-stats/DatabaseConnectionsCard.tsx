@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard, Progress } from 'waldur-ui';
 
@@ -40,7 +39,7 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
           <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Connection breakdown')}
           </h6>
-          <Table size="sm" borderless className="mb-0">
+          <table className="table table-sm table-borderless mb-0">
             <tbody>
               <tr>
                 <td className="text-quaternary">{translate('Active')}</td>
@@ -69,7 +68,7 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
                 </td>
               </tr>
             </tbody>
-          </Table>
+          </table>
         </div>
         <div>
           <h6 className="uppercase text-quaternary mb-2.5">

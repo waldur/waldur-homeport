@@ -1,6 +1,5 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { OpenStackFixedIp } from 'waldur-js-client';
 
@@ -87,31 +86,28 @@ export const StaticRoutesTable: FC<{
     <>
       {fields.length > 0 ? (
         <>
-          <Table
-            responsive={true}
-            bordered={true}
-            striped={true}
-            className="mt-2.5"
-          >
-            <thead>
-              <tr>
-                <th>{translate('Destination (CIDR)')}</th>
-                <th>{translate('Next hop (IP)')}</th>
-                <th>{translate('Actions')}</th>
-              </tr>
-            </thead>
+          <div className="table-responsive">
+            <table className="table table-bordered table-striped mt-2.5">
+              <thead>
+                <tr>
+                  <th>{translate('Destination (CIDR)')}</th>
+                  <th>{translate('Next hop (IP)')}</th>
+                  <th>{translate('Actions')}</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              {fields.map((route, index) => (
-                <StaticRouteRow
-                  key={route}
-                  route={route}
-                  nexthopValidator={nexthopValidator}
-                  onRemove={() => fields.remove(index)}
-                />
-              ))}
-            </tbody>
-          </Table>
+              <tbody>
+                {fields.map((route, index) => (
+                  <StaticRouteRow
+                    key={route}
+                    route={route}
+                    nexthopValidator={nexthopValidator}
+                    onRemove={() => fields.remove(index)}
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
           <StaticRouteAddButton onClick={() => fields.push({})} />
         </>
       ) : (

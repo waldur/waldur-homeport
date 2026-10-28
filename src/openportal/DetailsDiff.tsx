@@ -1,5 +1,4 @@
 import { FC, ReactNode } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
@@ -62,10 +61,8 @@ export const DetailsDiff: FC<DetailsDiffProps> = ({
 
   return (
     <div className="table-responsive">
-      <Table
-        bordered
-        size="sm"
-        className="mb-0 text-xs align-middle"
+      <table
+        className="table table-sm table-bordered mb-0 text-xs align-middle"
         data-testid="details-diff-table"
       >
         <thead>
@@ -96,7 +93,7 @@ export const DetailsDiff: FC<DetailsDiffProps> = ({
             );
           })}
         </tbody>
-      </Table>
+      </table>
     </div>
   );
 };

@@ -6,7 +6,6 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { Card } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { BlankEnum, ValidationMethodEnum } from 'waldur-js-client';
 
@@ -106,8 +105,8 @@ export const OrganizationCreateStep1: FunctionComponent<
 
   return (
     <div className="flex flex-col gap-4">
-      <Card className="border-0 shadow-sm">
-        <Card.Body className="p-6">
+      <div className="card border-0 shadow-sm">
+        <div className="card-body p-6">
           <h4 className="mb-3">{translate('Select verification method')}</h4>
           <p className="text-secondary mb-5">
             {translate(
@@ -144,8 +143,8 @@ export const OrganizationCreateStep1: FunctionComponent<
               const methodInfo = getValidationMethodInfo(validationMethod);
 
               return (
-                <Card className="card-bordered">
-                  <Card.Body className="flex gap-2.5">
+                <div className="card card-bordered">
+                  <div className="card-body flex gap-2.5">
                     <div className="shrink-0">
                       <InfoIcon size={24} weight="duotone" />
                     </div>
@@ -157,12 +156,12 @@ export const OrganizationCreateStep1: FunctionComponent<
                         {methodInfo.description}
                       </div>
                     </div>
-                  </Card.Body>
-                </Card>
+                  </div>
+                </div>
               );
             })()}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

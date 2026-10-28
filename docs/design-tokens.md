@@ -391,10 +391,7 @@ Tailwind step (`SPACER_TO_TAILWIND` in `packages/eslint-plugin-waldur/rules/boot
 - **No arbitrary `[6.5px]`** to reproduce a Bootstrap step: use the nearest Tailwind step.
 - **No runtime class names.** Tailwind generates only the names it finds in source, so
   `` `mb-${space}` `` styles nothing. Look the class up in a map of literals, as `FormGroup`'s
-  `space` does (`SPACE_CLASSES` in `waldur-form`; `space` is a Tailwind step). react-bootstrap's
-  `Stack` builds one from its `gap` prop (`gap={4}` renders `gap-4`, Tailwind's 16px, and
-  `gap={10}` rendered no gap), so write the gap in `className` instead: `className="gap-3"`
-  (`no-bootstrap-stack-gap`, which autofixes).
+  `space` does (`SPACE_CLASSES` in `waldur-form`; `space` is a Tailwind step).
 - **Mobile:** below `md` the root drops to 12px, so Bootstrap's rem steps shrank by about 8% there;
   Tailwind's px steps do not. Spacing follows the tokens: the difference is at most about 2.5px.
 - **A spacing class now loses where Bootstrap's `!important` used to win**: to an unlayered

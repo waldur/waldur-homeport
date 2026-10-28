@@ -1,7 +1,6 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { ComponentType, useCallback } from 'react';
-import { Card } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import {
@@ -146,8 +145,8 @@ export const FieldsListGroup = ({
         );
 
         return (
-          <Card key={name} className="card-bordered bg-secondary mb-2.5">
-            <Card.Header className="mx-3 min-h-auto">
+          <div key={name} className="card card-bordered bg-secondary mb-2.5">
+            <div className="card-header mx-3 min-h-auto">
               <h6 className="mb-0 text-tertiary">
                 {translate('Condition {index}', { index: i + 1 })}
               </h6>
@@ -160,8 +159,8 @@ export const FieldsListGroup = ({
                   size="lg"
                 />
               </div>
-            </Card.Header>
-            <Card.Body key={name + i} className="px-3">
+            </div>
+            <div key={name + i} className="card-body px-3">
               <FormGroup
                 label={translate('Depends on question')}
                 description={translate(
@@ -260,8 +259,8 @@ export const FieldsListGroup = ({
                   />
                 );
               })()}
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         );
       })}
       <div>

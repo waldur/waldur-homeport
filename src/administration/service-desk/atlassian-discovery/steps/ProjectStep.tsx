@@ -1,6 +1,5 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useState, useEffect } from 'react';
-import { Card } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverProjects } from 'waldur-js-client';
 
@@ -128,15 +127,16 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 mb-5">
         {values.projects.map((project) => (
           <div key={project.id}>
-            <Card
-              className={`cursor-pointer h-full ${
+            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+            <div
+              className={`card cursor-pointer h-full ${
                 values.selectedProjectId === project.id
                   ? 'border-brand border-2'
                   : 'border-secondary'
               }`}
               onClick={() => form.change('selectedProjectId', project.id)}
             >
-              <Card.Body>
+              <div className="card-body">
                 <div className="flex items-start">
                   <Radio
                     className="me-2.5"
@@ -158,8 +158,8 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
                     )}
                   </div>
                 </div>
-              </Card.Body>
-            </Card>
+              </div>
+            </div>
           </div>
         ))}
       </div>

@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { SafeMarkdown } from '@/core/SafeMarkdown';
@@ -20,14 +19,14 @@ export const PublicCallExpandableRow: FunctionComponent<{
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-5">
         <div className="col-span-full text-primary mb-1.5">
           {row.description ? (
-            <Card className="card-bordered card-solid">
-              <Card.Header>
+            <div className="card card-bordered card-solid">
+              <div className="card-header">
                 <h6 className="mb-0 font-medium">{translate('Description')}</h6>
-              </Card.Header>
-              <Card.Body>
+              </div>
+              <div className="card-body">
                 <SafeMarkdown text={row.description} smallTitles />
-              </Card.Body>
-            </Card>
+              </div>
+            </div>
           ) : (
             <p className="text-quaternary italic text-xs mb-0">
               {translate('No description')}

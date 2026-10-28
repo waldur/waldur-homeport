@@ -1,5 +1,3 @@
-import { Card } from 'react-bootstrap';
-
 import { Badge } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -15,11 +13,11 @@ export const BillingSyncStatusCard = () => {
 
   if (settingsLoading || statusLoading) {
     return (
-      <Card>
-        <Card.Body className="text-center py-5">
+      <div className="card">
+        <div className="card-body text-center py-5">
           <LoadingSpinner />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
 
@@ -28,8 +26,8 @@ export const BillingSyncStatusCard = () => {
   }
 
   return (
-    <Card>
-      <Card.Body>
+    <div className="card">
+      <div className="card-body">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-x-5">
           <div>
             <div className="text-quaternary small mb-1">
@@ -70,7 +68,7 @@ export const BillingSyncStatusCard = () => {
             </span>
           </div>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

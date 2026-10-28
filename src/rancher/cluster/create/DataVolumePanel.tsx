@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { isFeatureVisible } from '@/features/connect';
 import { RancherFeatures } from '@/FeaturesEnums';
@@ -19,8 +18,8 @@ interface OwnProps {
 }
 
 export const DataVolumePanel: FunctionComponent<OwnProps> = (props) => (
-  <Card className="card-bordered">
-    <Card.Header>
+  <div className="card card-bordered">
+    <div className="card-header">
       <h4>
         {translate('Data volume #{index}', { index: props.volumeIndex + 1 })}
       </h4>
@@ -28,8 +27,8 @@ export const DataVolumePanel: FunctionComponent<OwnProps> = (props) => (
         onClick={() => props.onRemove(props.volumeIndex)}
         className="self-center"
       />
-    </Card.Header>
-    <Card.Body>
+    </div>
+    <div className="card-body">
       {isFeatureVisible(RancherFeatures.volume_mount_point) && (
         <VolumeMountPointGroup
           nodeIndex={props.nodeIndex}
@@ -41,6 +40,6 @@ export const DataVolumePanel: FunctionComponent<OwnProps> = (props) => (
         name={`${props.volumePath}.volume_type`}
         volumeTypes={props.volumeTypes}
       />
-    </Card.Body>
-  </Card>
+    </div>
+  </div>
 );

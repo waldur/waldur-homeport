@@ -1,6 +1,5 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card, Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { supportSettingsAtlassianSaveSettings } from 'waldur-js-client';
 
@@ -94,12 +93,12 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
         )}
       </p>
 
-      <Card className="mb-3">
-        <Card.Header>
+      <div className="card mb-3">
+        <div className="card-header">
           <h5 className="mb-0">{translate('Connection')}</h5>
-        </Card.Header>
-        <Card.Body>
-          <Table borderless size="sm">
+        </div>
+        <div className="card-body">
+          <table className="table table-sm table-borderless">
             <tbody>
               <tr>
                 <td className="text-quaternary" style={{ width: '40%' }}>
@@ -124,16 +123,16 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 </tr>
               )}
             </tbody>
-          </Table>
-        </Card.Body>
-      </Card>
+          </table>
+        </div>
+      </div>
 
-      <Card className="mb-3">
-        <Card.Header>
+      <div className="card mb-3">
+        <div className="card-header">
           <h5 className="mb-0">{translate('Project')}</h5>
-        </Card.Header>
-        <Card.Body>
-          <Table borderless size="sm">
+        </div>
+        <div className="card-body">
+          <table className="table table-sm table-borderless">
             <tbody>
               <tr>
                 <td className="text-quaternary" style={{ width: '40%' }}>
@@ -153,17 +152,17 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 </td>
               </tr>
             </tbody>
-          </Table>
-        </Card.Body>
-      </Card>
+          </table>
+        </div>
+      </div>
 
-      <Card className="mb-3">
-        <Card.Header>
+      <div className="card mb-3">
+        <div className="card-header">
           <h5 className="mb-0">{translate('Request Types')}</h5>
-        </Card.Header>
-        <Card.Body>
+        </div>
+        <div className="card-body">
           {selectedRequestTypes.length > 0 ? (
-            <Table borderless size="sm">
+            <table className="table table-sm table-borderless">
               <thead>
                 <tr>
                   <th>{translate('Name')}</th>
@@ -180,21 +179,21 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                   </tr>
                 ))}
               </tbody>
-            </Table>
+            </table>
           ) : (
             <span className="text-quaternary">
               {translate('No request types selected')}
             </span>
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
-      <Card className="mb-3">
-        <Card.Header>
+      <div className="card mb-3">
+        <div className="card-header">
           <h5 className="mb-0">{translate('Field Mappings')}</h5>
-        </Card.Header>
-        <Card.Body>
-          <Table borderless size="sm">
+        </div>
+        <div className="card-body">
+          <table className="table table-sm table-borderless">
             <tbody>
               <tr>
                 <td className="text-quaternary" style={{ width: '40%' }}>
@@ -337,9 +336,9 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 </td>
               </tr>
             </tbody>
-          </Table>
-        </Card.Body>
-      </Card>
+          </table>
+        </div>
+      </div>
 
       <AlertItem
         type="floating"

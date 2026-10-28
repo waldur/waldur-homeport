@@ -1,6 +1,5 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import React, { useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { keysCreate, SshKeyRequest } from 'waldur-js-client';
 
@@ -46,8 +45,8 @@ const SshKeyRestrictionsBanner = () => {
   }
 
   return (
-    <Card className="card-bordered bg-info-subtle mb-3">
-      <Card.Body className="flex items-center gap-2.5 p-3">
+    <div className="card card-bordered bg-info-subtle mb-3">
+      <div className="card-body flex items-center gap-2.5 p-3">
         <FeaturedIcon icon={<InfoIcon weight="bold" />} variant="info" />
         <div>
           {allowedTypes.length > 0 && (
@@ -65,8 +64,8 @@ const SshKeyRestrictionsBanner = () => {
             </div>
           )}
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };
 

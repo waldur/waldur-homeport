@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import { OptionField, StorageFolderConfig } from 'waldur-js-client';
 
 import { FormField, FormLabel, FormText, HelpIcon } from 'waldur-ui';
@@ -346,11 +345,11 @@ const QuotaSummaryCard = ({
   );
 
   return (
-    <Card className="mt-2.5 bg-tertiary dark:bg-quaternary">
-      <Card.Header>
+    <div className="card mt-2.5 bg-tertiary dark:bg-quaternary">
+      <div className="card-header">
         <h6>{translate('Calculated Quotas')}</h6>
-      </Card.Header>
-      <Card.Body>
+      </div>
+      <div className="card-body">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
           <div>
             <strong>{translate('Space Quotas')}</strong>
@@ -376,7 +375,7 @@ const QuotaSummaryCard = ({
             </div>
           </div>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

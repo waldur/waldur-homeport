@@ -1,6 +1,5 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard } from 'waldur-ui';
 
@@ -40,7 +39,7 @@ export const DatabaseMaintenanceCard: FC<DatabaseMaintenanceCardProps> = ({
           <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Tuple statistics')}
           </h6>
-          <Table size="sm" borderless className="mb-0">
+          <table className="table table-sm table-borderless mb-0">
             <tbody>
               <tr>
                 <td className="text-quaternary">{translate('Live tuples')}</td>
@@ -65,13 +64,13 @@ export const DatabaseMaintenanceCard: FC<DatabaseMaintenanceCardProps> = ({
                 </td>
               </tr>
             </tbody>
-          </Table>
+          </table>
         </div>
         <div>
           <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Vacuum status')}
           </h6>
-          <Table size="sm" borderless className="mb-0">
+          <table className="table table-sm table-borderless mb-0">
             <tbody>
               <tr>
                 <td className="text-quaternary">
@@ -105,7 +104,7 @@ export const DatabaseMaintenanceCard: FC<DatabaseMaintenanceCardProps> = ({
                 </td>
               </tr>
             </tbody>
-          </Table>
+          </table>
           {hasTransactionAgeWarning && (
             <small className="text-danger mt-1.5 block">
               {translate(

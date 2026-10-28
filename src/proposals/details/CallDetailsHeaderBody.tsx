@@ -1,5 +1,3 @@
-import { Table } from 'react-bootstrap';
-
 import { formatDateTime } from '@/core/dateUtils';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -21,7 +19,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
   return (
     <>
       {nextRound.status.label === 'Open' && (
-        <Table className="mb-0 px-0 h-auto w-auto">
+        <table className="table mb-0 px-0 h-auto w-auto">
           <tbody>
             <tr>
               <th className="font-medium w-[125px] p-0 pe-2.5 pb-1 whitespace-nowrap">
@@ -48,7 +46,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
               </td>
             </tr>
           </tbody>
-        </Table>
+        </table>
       )}
       {nextRound.status.label === 'Ended' && (
         <p className="text-danger">
@@ -56,7 +54,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
         </p>
       )}
       {nextRound.status.label === 'Scheduled' && (
-        <Table className="mb-0 px-0 h-auto w-auto">
+        <table className="table mb-0 px-0 h-auto w-auto">
           <tbody>
             <tr>
               <th className="font-medium w-[125px] p-0 pe-2.5 pb-1 whitespace-nowrap">
@@ -83,7 +81,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
               </td>
             </tr>
           </tbody>
-        </Table>
+        </table>
       )}
     </>
   );

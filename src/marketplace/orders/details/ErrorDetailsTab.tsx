@@ -1,18 +1,16 @@
-import { Card } from 'react-bootstrap';
-
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
 export const ErrorDetailsTab = ({ order }) => {
   return (
-    <Card className="card-bordered">
-      <Card.Header className="custom-card-header custom-padding-zero">
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header custom-card-header custom-padding-zero">
+        <div className="card-title">
           <h3>{translate('Error details')}</h3>
-        </Card.Title>
-      </Card.Header>
+        </div>
+      </div>
       {order.error_message ? (
-        <Card.Body>
+        <div className="card-body">
           <div>
             <p>{translate('Error details')}:</p>
             <pre>{order.error_message}</pre>
@@ -21,7 +19,7 @@ export const ErrorDetailsTab = ({ order }) => {
             <p>{translate('Error trace')}:</p>
             <pre>{order.error_traceback}</pre>
           </div>
-        </Card.Body>
+        </div>
       ) : (
         <NoResult
           title={translate('No errors found for this order')}
@@ -29,6 +27,6 @@ export const ErrorDetailsTab = ({ order }) => {
           noAction
         />
       )}
-    </Card>
+    </div>
   );
 };

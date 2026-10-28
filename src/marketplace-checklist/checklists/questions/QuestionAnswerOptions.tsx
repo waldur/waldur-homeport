@@ -16,7 +16,6 @@ import {
   PlusIcon,
   TrashIcon,
 } from '@phosphor-icons/react';
-import { Card } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
@@ -104,9 +103,9 @@ const DraggableFieldsListGroup = ({
   };
 
   return (
-    <Card
+    <div
       id="question-answer-options"
-      className="card-bordered bg-secondary py-2.5"
+      className="card card-bordered bg-secondary py-2.5"
     >
       <FormField>
         <DndContext
@@ -150,7 +149,7 @@ const DraggableFieldsListGroup = ({
           </table>
         </DndContext>
       </FormField>
-    </Card>
+    </div>
   );
 };
 

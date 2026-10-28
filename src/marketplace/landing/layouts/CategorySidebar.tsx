@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { CategoryGroup } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
@@ -41,21 +40,21 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
 
   if (categories.isLoading) {
     return (
-      <Card className={cardClassName}>
-        <Card.Body className="flex justify-center items-center py-8">
+      <div className={classNames('card', cardClassName)}>
+        <div className="card-body flex justify-center items-center py-8">
           <LoadingSpinner />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   if (categories.isError || !categories.data) {
     return (
-      <Card className={cardClassName}>
-        <Card.Body>
+      <div className={classNames('card', cardClassName)}>
+        <div className="card-body">
           <LoadingErred loadData={categories.refetch} />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
 
@@ -93,12 +92,12 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
   };
 
   return (
-    <Card className={cardClassName}>
-      <Card.Header className="border-b-[1px] border-b-secondary">
-        <Card.Title>
+    <div className={classNames('card', cardClassName)}>
+      <div className="card-header border-b-[1px] border-b-secondary">
+        <div className="card-title">
           <span className="h3">{translate('Categories')}</span>
-        </Card.Title>
-      </Card.Header>
+        </div>
+      </div>
       <nav
         aria-label={translate('Categories')}
         className="min-h-0 overflow-y-auto"
@@ -160,6 +159,6 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
           return renderItem(item as Category);
         })}
       </nav>
-    </Card>
+    </div>
   );
 };

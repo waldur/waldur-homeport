@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { PlanUsageResponse } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -42,14 +41,14 @@ const PlanGroup = ({ plan }: { plan: PlanUsageResponse }) => (
 
 export const PlanUsageList: FC<OwnProps> = (props) => {
   return (
-    <Card
-      className={classNames('card-bordered', props.className)}
+    <div
+      className={classNames('card card-bordered', props.className)}
       id={props.id}
     >
-      <Card.Header>
-        <Card.Title>{translate('Plans')}</Card.Title>
-      </Card.Header>
-      <Card.Body>
+      <div className="card-header">
+        <div className="card-title">{translate('Plans')}</div>
+      </div>
+      <div className="card-body">
         {!props.plansUsage?.length && (
           <div className="text-quaternary">
             {translate('There are no plans')}
@@ -59,7 +58,7 @@ export const PlanUsageList: FC<OwnProps> = (props) => {
           props.plansUsage.map((plan) => (
             <PlanGroup key={plan.plan_uuid} plan={plan} />
           ))}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { FC, useMemo, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import { marketplaceComponentUsageMonthlyList } from 'waldur-js-client';
 
 import { SegmentedControl } from 'waldur-ui';
@@ -124,8 +123,8 @@ export const OfferingComponentUsageExpandableRow: FC<
           />
         </div>
         <div className="border-sm-start md:ps-7.5">
-          <Card className="card-bordered">
-            <Card.Body className="p-3">
+          <div className="card card-bordered">
+            <div className="card-body p-3">
               <div className="flex items-center justify-between gap-1.5 whitespace-nowrap flex-wrap mb-3">
                 <SegmentedControl<number>
                   aria-label={translate('Time period')}
@@ -175,8 +174,8 @@ export const OfferingComponentUsageExpandableRow: FC<
                   </p>
                 )}
               </div>
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </ExpandableContainer>

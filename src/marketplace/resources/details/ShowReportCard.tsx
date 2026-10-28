@@ -1,18 +1,16 @@
-import { Card } from 'react-bootstrap';
-
 import { translate } from '@/i18n';
 
 import { ShowReportComponent } from '../report/ShowReportComponent';
 
 export const ShowReportCard = ({ resource }) => {
   return (
-    <Card>
-      <Card.Header>
-        <Card.Title>{translate('Report')}</Card.Title>
-      </Card.Header>
-      <Card.Body>
+    <div className="card">
+      <div className="card-header">
+        <div className="card-title">{translate('Report')}</div>
+      </div>
+      <div className="card-body">
         <ShowReportComponent report={resource.report} />
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

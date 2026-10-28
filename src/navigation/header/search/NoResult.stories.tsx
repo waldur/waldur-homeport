@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Card } from 'react-bootstrap';
 
 import { NoResult } from './NoResult';
 
@@ -9,11 +8,11 @@ const meta: Meta<typeof NoResult> = {
   decorators: [
     (Story) => (
       <div className="p-5 bg-primary" style={{ minWidth: 600 }}>
-        <Card className="card-bordered">
-          <Card.Body>
+        <div className="card card-bordered">
+          <div className="card-body">
             <Story />
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
     ),
   ],

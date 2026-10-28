@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
-import { Card, Table } from 'react-bootstrap';
 
 import {
   FieldScope,
@@ -151,24 +150,24 @@ type FormTableCardProps = FC<
 
 const FormTableCard: FormTableCardProps = (props) => {
   return (
-    <Card className={classNames('form-table-card', props.className)}>
+    <div className={classNames('card form-table-card', props.className)}>
       {props.title && (
-        <Card.Header className={props.headerClassName}>
-          <Card.Title>
+        <div className={classNames('card-header', props.headerClassName)}>
+          <div className="card-title">
             <h3>{props.title}</h3>
             {props.refetch && (
               <RefreshButton refetch={props.refetch} loading={props.loading} />
             )}
-          </Card.Title>
+          </div>
           {props.actions && (
             <div className="card-toolbar grow justify-end gap-2.5">
               {props.actions}
             </div>
           )}
-        </Card.Header>
+        </div>
       )}
-      <Card.Body>{props.children}</Card.Body>
-    </Card>
+      <div className="card-body">{props.children}</div>
+    </div>
   );
 };
 
@@ -185,18 +184,19 @@ const FormTable: FC<PropsWithChildren<FormTableProps>> & {
   Card: FormTableCardProps;
 } = (props) => {
   return (
-    <Table
-      responsive={true}
-      className={classNames(
-        'form-table',
-        props.hideActions && 'hide-actions',
-        props.detailsMode && 'details-mode',
-        props.alignTop && 'align-top',
-        props.className,
-      )}
-    >
-      <tbody>{props.children}</tbody>
-    </Table>
+    <div className="table-responsive">
+      <table
+        className={classNames(
+          'table form-table',
+          props.hideActions && 'hide-actions',
+          props.detailsMode && 'details-mode',
+          props.alignTop && 'align-top',
+          props.className,
+        )}
+      >
+        <tbody>{props.children}</tbody>
+      </table>
+    </div>
   );
 };
 

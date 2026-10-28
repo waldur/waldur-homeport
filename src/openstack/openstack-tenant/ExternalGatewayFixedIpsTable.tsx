@@ -1,6 +1,5 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { AvailableExternalNetworkSubnet } from 'waldur-js-client';
 
@@ -75,25 +74,27 @@ export const ExternalGatewayFixedIpsTable: FC<{
   return (
     <>
       {fields.length > 0 && (
-        <Table responsive bordered striped className="mt-2.5">
-          <thead>
-            <tr>
-              <th>{translate('IP address')}</th>
-              <th>{translate('Subnet')}</th>
-              <th>{translate('Actions')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {fields.map((prefix, index) => (
-              <FixedIpRow
-                key={prefix}
-                prefix={prefix}
-                subnetOptions={subnetOptions}
-                onRemove={() => fields.remove(index)}
-              />
-            ))}
-          </tbody>
-        </Table>
+        <div className="table-responsive">
+          <table className="table table-bordered table-striped mt-2.5">
+            <thead>
+              <tr>
+                <th>{translate('IP address')}</th>
+                <th>{translate('Subnet')}</th>
+                <th>{translate('Actions')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {fields.map((prefix, index) => (
+                <FixedIpRow
+                  key={prefix}
+                  prefix={prefix}
+                  subnetOptions={subnetOptions}
+                  onRemove={() => fields.remove(index)}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
       <AddButton onClick={() => fields.push({})} />
     </>

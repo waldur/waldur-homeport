@@ -16,7 +16,7 @@ describe('bootstrapCssUsage', () => {
   describe('tokenizeContent', () => {
     it('extracts tokens from JSX/HTML source', () => {
       const code = `
-        import { Button } from 'react-bootstrap';
+        import { Button } from 'waldur-ui';
         export const MyComp = () => (
           <div className="card text-center d-flex p-3">
             <span className="badge badge-light">Hello</span>

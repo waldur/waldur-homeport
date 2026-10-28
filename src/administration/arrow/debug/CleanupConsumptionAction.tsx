@@ -1,4 +1,3 @@
-import { Card } from 'react-bootstrap';
 import { adminArrowBillingSyncsCleanupConsumption } from 'waldur-js-client';
 
 import { AlertItem } from 'waldur-ui';
@@ -29,8 +28,8 @@ export const CleanupConsumptionAction = () => {
   } = useCleanupConsumption();
 
   return (
-    <Card className="h-full">
-      <Card.Body>
+    <div className="card h-full">
+      <div className="card-body">
         <h6>{translate('Cleanup Consumption Data')}</h6>
         <p className="text-quaternary small mb-2.5">
           {translate('Remove orphaned or stale consumption records.')}
@@ -53,7 +52,7 @@ export const CleanupConsumptionAction = () => {
             }
           />
         )}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

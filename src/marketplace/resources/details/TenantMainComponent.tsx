@@ -1,19 +1,17 @@
-import { Card } from 'react-bootstrap';
-
 import { translate } from '@/i18n';
 import { QuotasTable } from '@/quotas/QuotasTable';
 
 export const TenantMainComponent = ({ resourceScope }) => {
   return resourceScope ? (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header">
+        <div className="card-title">
           <h3>{translate('Quotas')}</h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
+        </div>
+      </div>
+      <div className="card-body">
         <QuotasTable resource={resourceScope} />
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   ) : null;
 };

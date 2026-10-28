@@ -1,5 +1,4 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   marketplaceStatsUserAffiliationDetailsList,
   UserAffiliationCount,
@@ -254,11 +253,11 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
   return (
     <>
       {/* Filters */}
-      <Card className="mb-5">
-        <Card.Header>
-          <Card.Title>{translate('Filters')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
+      <div className="card mb-5">
+        <div className="card-header">
+          <div className="card-title">{translate('Filters')}</div>
+        </div>
+        <div className="card-body">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
             <div>
               <Select
@@ -303,8 +302,8 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
               />
             </div>
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
       <SummaryWidget
         stats={[

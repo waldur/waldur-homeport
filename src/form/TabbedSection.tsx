@@ -1,5 +1,4 @@
 import React, { FC, ReactNode, useEffect, useMemo, useState } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 
@@ -94,22 +93,22 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
   }, [hasQuery, activeKey, processedTabs, handleSelect]);
 
   return (
-    <Card className="card-bordered">
+    <div className="card card-bordered">
       {(title || actions) && (
-        <Card.Header>
+        <div className="card-header">
           {title && (
-            <Card.Title>
+            <div className="card-title">
               <h3>{title}</h3>
-            </Card.Title>
+            </div>
           )}
           {actions && (
             <div className="card-toolbar grow justify-end gap-2.5">
               {actions}
             </div>
           )}
-        </Card.Header>
+        </div>
       )}
-      <Card.Body>
+      <div className="card-body">
         <Tabs value={activeKey} onValueChange={handleSelect} mount="active">
           {enableSearch && (
             <div className="flex justify-end mb-2.5">
@@ -149,8 +148,8 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
             </TabsContent>
           ))}
         </Tabs>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };
 

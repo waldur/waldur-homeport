@@ -1,6 +1,5 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard } from 'waldur-ui';
 
@@ -30,10 +29,8 @@ export const DatabaseTransactionsCard: FC<DatabaseTransactionsCardProps> = ({
       defaultOpen={rollbackHealth !== 'success' || hasDeadlocks}
       className="mb-5"
     >
-      <Table
-        size="sm"
-        borderless
-        className="mb-0"
+      <table
+        className="table table-sm table-borderless mb-0"
         style={{ maxWidth: '400px' }}
       >
         <tbody>
@@ -73,7 +70,7 @@ export const DatabaseTransactionsCard: FC<DatabaseTransactionsCardProps> = ({
             </td>
           </tr>
         </tbody>
-      </Table>
+      </table>
       {hasDeadlocks && (
         <small className="text-danger mt-2.5 block">
           {translate(

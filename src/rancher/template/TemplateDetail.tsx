@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { rancherAppsCreate } from 'waldur-js-client';
 
@@ -79,12 +78,12 @@ export const TemplateDetail: FunctionComponent = () => {
           >
             {state.data!.version.readme && (
               <div>
-                <Card.Header>
-                  <Card.Title>{translate('Summary')}</Card.Title>
-                </Card.Header>
-                <Card.Body>
+                <div className="card-header">
+                  <div className="card-title">{translate('Summary')}</div>
+                </div>
+                <div className="card-body">
                   <SafeMarkdown text={state.data!.version.readme} />
-                </Card.Body>
+                </div>
               </div>
             )}
             <div
@@ -94,10 +93,10 @@ export const TemplateDetail: FunctionComponent = () => {
                   : undefined
               }
             >
-              <Card.Header>
-                <Card.Title>{translate('Configuration')}</Card.Title>
-              </Card.Header>
-              <Card.Body>
+              <div className="card-header">
+                <div className="card-title">{translate('Configuration')}</div>
+              </div>
+              <div className="card-body">
                 {(() => {
                   const project = values.project;
                   const answers = values.answers;
@@ -118,7 +117,7 @@ export const TemplateDetail: FunctionComponent = () => {
                     />
                   );
                 })()}
-              </Card.Body>
+              </div>
             </div>
           </div>
         </form>

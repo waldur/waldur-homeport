@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard, Badge } from 'waldur-ui';
 
@@ -65,7 +64,7 @@ const RabbitMQClusterOverviewContent: FC<
         <h6 className="uppercase text-quaternary mb-2.5">
           {translate('Object totals')}
         </h6>
-        <Table size="sm" borderless className="mb-0">
+        <table className="table table-sm table-borderless mb-0">
           <tbody>
             <tr>
               <td className="text-quaternary">{translate('Connections')}</td>
@@ -98,14 +97,14 @@ const RabbitMQClusterOverviewContent: FC<
               </td>
             </tr>
           </tbody>
-        </Table>
+        </table>
       </div>
 
       <div>
         <h6 className="uppercase text-quaternary mb-2.5">
           {translate('Queue totals')}
         </h6>
-        <Table size="sm" borderless className="mb-0">
+        <table className="table table-sm table-borderless mb-0">
           <tbody>
             <tr>
               <td className="text-quaternary">{translate('Total messages')}</td>
@@ -126,7 +125,7 @@ const RabbitMQClusterOverviewContent: FC<
               </td>
             </tr>
           </tbody>
-        </Table>
+        </table>
 
         {data.listeners && data.listeners.length > 0 && (
           <>

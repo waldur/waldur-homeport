@@ -1,6 +1,5 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -52,8 +51,8 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 mb-5">
       <div>
-        <Card className="card-bordered mb-4">
-          <Card.Body>
+        <div className="card card-bordered mb-4">
+          <div className="card-body">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <strong
@@ -77,13 +76,13 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
             <strong className="block">
               {translate('Connection utilization')}
             </strong>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
 
       <div>
-        <Card className="card-bordered mb-4">
-          <Card.Body>
+        <div className="card card-bordered mb-4">
+          <div className="card-body">
             <div className="flex items-center">
               <strong className={`display-4 ${getTextClass(cacheHealth)}`}>
                 {formatPercent(data.cache_performance.buffer_cache_hit_ratio)}
@@ -97,13 +96,13 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
               )}
             </div>
             <strong className="block">{translate('Cache hit ratio')}</strong>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
 
       <div>
-        <Card className="card-bordered mb-4">
-          <Card.Body>
+        <div className="card card-bordered mb-4">
+          <div className="card-body">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <strong
@@ -128,13 +127,13 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
               )}
             </div>
             <strong className="block">{translate('Dead tuple ratio')}</strong>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
 
       <div>
-        <Card className="card-bordered mb-4">
-          <Card.Body>
+        <div className="card card-bordered mb-4">
+          <div className="card-body">
             <div className="flex items-center">
               <strong className={`display-4 ${getTextClass(locksHealth)}`}>
                 {data.locks.waiting_locks}
@@ -148,13 +147,13 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
               )}
             </div>
             <strong className="block">{translate('Waiting locks')}</strong>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
 
       <div>
-        <Card className="card-bordered mb-4">
-          <Card.Body>
+        <div className="card card-bordered mb-4">
+          <div className="card-body">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <strong className={`display-4 ${getTextClass(queryHealth)}`}>
@@ -179,13 +178,13 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
               )}
             </div>
             <strong className="block">{translate('Active queries')}</strong>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
 
       <div>
-        <Card className="card-bordered mb-4">
-          <Card.Body>
+        <div className="card card-bordered mb-4">
+          <div className="card-body">
             <div className="flex items-center justify-between">
               <strong className="display-4 text-info">
                 {formatFilesize(data.database_size.total_size_bytes, 'B')}
@@ -195,8 +194,8 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
               </span>
             </div>
             <strong className="block">{translate('Database size')}</strong>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

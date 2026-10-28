@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { FunctionComponent, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import { Form, useFormState } from 'react-final-form';
 import {
   marketplaceProviderOfferingsCostsList,
@@ -76,19 +75,21 @@ export const OfferingCostsChart: FunctionComponent<OfferingCostChartProps> = ({
       initialValues={initialValues}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-          <Card className="card-bordered mb-8">
-            <Card.Header>
-              <Card.Title>{translate('Offering cost chart')}</Card.Title>
+          <div className="card card-bordered mb-8">
+            <div className="card-header">
+              <div className="card-title">
+                {translate('Offering cost chart')}
+              </div>
               <div className="card-toolbar">
                 <div className="min-w-[200px]">
                   <AccountingRunningField />
                 </div>
               </div>
-            </Card.Header>
-            <Card.Body className="mt-2.5">
+            </div>
+            <div className="card-body mt-2.5">
               <ChartBody offering={offering} />
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         </form>
       )}
     />

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
@@ -49,13 +48,13 @@ export const K8sTotalResourcesCard: React.FC<K8sTotalResourcesCardProps> = ({
   loadBalancerTooltip,
 }) => {
   return (
-    <Card className="card-bordered card-sm bg-secondary">
-      <Card.Header>
-        <Card.Title as="h6" className="text-sm text-secondary">
+    <div className="card card-bordered card-sm bg-secondary">
+      <div className="card-header">
+        <h6 className="card-title text-sm text-secondary">
           {translate('Total cluster resources')}
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
+        </h6>
+      </div>
+      <div className="card-body">
         <div className="flex flex-wrap gap-3">
           <TotalClusterResourceItem
             label={translate('Controllers')}
@@ -104,7 +103,7 @@ export const K8sTotalResourcesCard: React.FC<K8sTotalResourcesCardProps> = ({
             value={datacenterCount}
           />
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

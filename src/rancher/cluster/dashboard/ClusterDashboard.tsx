@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { RancherCluster } from 'waldur-js-client';
 
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
@@ -14,18 +13,18 @@ export const ClusterDashboard: FC<{
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   return (
     <>
-      <Card className="card-bordered mb-5">
-        <Card.Body>
+      <div className="card card-bordered mb-5">
+        <div className="card-body">
           <ClusterSummary resourceScope={nestedScope} refetch={refetch} />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
       {showExperimentalUiComponents && (
-        <Card className="card-bordered">
-          <Card.Body>
+        <div className="card card-bordered">
+          <div className="card-body">
             <ClusterStatistics resourceScope={nestedScope} />
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       )}
     </>
   );

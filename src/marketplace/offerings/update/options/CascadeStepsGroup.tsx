@@ -1,6 +1,5 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Card } from 'react-bootstrap';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { BaseButton } from 'waldur-ui';
@@ -67,8 +66,8 @@ export const CascadeStepsGroup = ({
         const hasChoicesMap = fields.value?.[index]?.depends_on;
 
         return (
-          <Card key={name} className="card-bordered bg-secondary mb-2.5">
-            <Card.Header className="mx-3 min-h-auto">
+          <div key={name} className="card card-bordered bg-secondary mb-2.5">
+            <div className="card-header mx-3 min-h-auto">
               <h6 className="mb-0 text-tertiary">
                 {translate('Step {index}', { index: index + 1 })}
               </h6>
@@ -83,8 +82,8 @@ export const CascadeStepsGroup = ({
                   disabledReason={translate('At least one step is required')}
                 />
               </div>
-            </Card.Header>
-            <Card.Body className="px-3">
+            </div>
+            <div className="card-body px-3">
               <StringGroup
                 label={translate('Name')}
                 required={true}
@@ -158,8 +157,8 @@ export const CascadeStepsGroup = ({
                   )}
                 />
               )}
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         );
       })}
       <div>

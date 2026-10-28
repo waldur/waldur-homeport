@@ -1,7 +1,6 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   bookingResourcesList,
   BookingResourcesListData,
@@ -71,9 +70,9 @@ export const OfferingBookingResourcesCalendarContainer: FunctionComponent<
   }
 
   return (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header">
+        <div className="card-title">
           <span className="me-1.5">{translate('Bookings')}</span>
           {isRefetching ? (
             <LoadingSpinner />
@@ -85,14 +84,14 @@ export const OfferingBookingResourcesCalendarContainer: FunctionComponent<
               iconNode={<ArrowsClockwiseIcon weight="bold" />}
             />
           )}
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
+        </div>
+      </div>
+      <div className="card-body">
         <BookingResourcesCalendar
           bookingResources={calendarEvents}
           refetch={refetch}
         />
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

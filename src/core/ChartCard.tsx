@@ -1,5 +1,4 @@
 import React, { useCallback, useRef } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -57,16 +56,16 @@ export const ChartCard: React.FC<ChartCardProps> = ({
   );
 
   return (
-    <Card className="h-full card-bordered">
-      <Card.Header className="items-center border-0 pt-4 pb-1.5 min-h-[60px]">
-        <Card.Title className="items-start flex-col m-0">
+    <div className="card h-full card-bordered">
+      <div className="card-header items-center border-0 pt-4 pb-1.5 min-h-[60px]">
+        <div className="card-title items-start flex-col m-0">
           <span className="card-label font-medium text-primary">{title}</span>
           {summary && (
             <span className="text-quaternary text-xs font-normal">
               {summary}
             </span>
           )}
-        </Card.Title>
+        </div>
         <div className="card-toolbar flex gap-3 m-0">
           {actions}
           <ChartExportDropdown
@@ -81,8 +80,8 @@ export const ChartCard: React.FC<ChartCardProps> = ({
             }
           />
         </div>
-      </Card.Header>
-      <Card.Body className="pt-1.5">
+      </div>
+      <div className="card-body pt-1.5">
         {isEmpty ? (
           <NoResult
             // Filter-agnostic: this card is used on unfiltered overviews too,
@@ -98,7 +97,7 @@ export const ChartCard: React.FC<ChartCardProps> = ({
         ) : (
           children(chartRef)
         )}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

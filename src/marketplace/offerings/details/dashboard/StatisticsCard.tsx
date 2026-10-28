@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Progress, Tooltip } from 'waldur-ui';
 
@@ -30,8 +29,8 @@ export const StatisticsCard: FC<StatisticsCardProps> = ({
         ? 'warning'
         : 'danger';
   return (
-    <Card className="card-bordered mb-4">
-      <Card.Body>
+    <div className="card card-bordered mb-4">
+      <div className="card-body">
         <p className="text-sm font-medium text-quaternary mb-1">{title}</p>
         <div className="flex justify-between items-end">
           <h1 className="display-6 mb-0">
@@ -58,7 +57,7 @@ export const StatisticsCard: FC<StatisticsCardProps> = ({
             </div>
           ) : null}
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

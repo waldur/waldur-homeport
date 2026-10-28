@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
 
 import { AlertItem, Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
@@ -72,13 +71,13 @@ export const DataAccessTab: FC<DataAccessTabProps> = ({ user }) => {
     <>
       <DataAccessSummaryCards summary={data.summary} />
 
-      <Card className="card-bordered">
-        <Card.Header className="border-b-[1px] border-b-secondary">
-          <Card.Title>
+      <div className="card card-bordered">
+        <div className="card-header border-b-[1px] border-b-secondary">
+          <div className="card-title">
             <h3>{translate('Data access')}</h3>
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
+          </div>
+        </div>
+        <div className="card-body">
           <Tabs
             mount="all"
             value={activeKey}
@@ -112,8 +111,8 @@ export const DataAccessTab: FC<DataAccessTabProps> = ({ user }) => {
               </TabsContent>
             </>
           </Tabs>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </>
   );
 };

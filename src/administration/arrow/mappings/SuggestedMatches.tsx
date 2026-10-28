@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   adminArrowCustomerMappingsLinkResource,
   LicenseSuggestion,
@@ -64,16 +63,16 @@ export const SuggestedMatches: FC<SuggestedMatchesProps> = ({
   }
 
   return (
-    <Card>
-      <Card.Header>
+    <div className="card">
+      <div className="card-header">
         <h5 className="mb-0">
           {translate('Suggested Matches')}
           <Badge variant="primary" className="ms-1.5">
             {suggestions.length}
           </Badge>
         </h5>
-      </Card.Header>
-      <Card.Body className="p-0">
+      </div>
+      <div className="card-body p-0">
         <SimpleTable<LicenseSuggestion>
           columns={[
             {
@@ -134,7 +133,7 @@ export const SuggestedMatches: FC<SuggestedMatchesProps> = ({
           rows={suggestions}
           rowKey="license_reference"
         />
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

@@ -1,7 +1,6 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
@@ -79,50 +78,52 @@ const FieldRows: FC<{
           />
         </div>
         {fields.length ? (
-          <Table bordered responsive className="mb-0">
-            <thead>
-              <tr>
-                {columns.map((column) => (
-                  <th key={column.field}>{column.label}</th>
-                ))}
-                <th className="w-1" />
-              </tr>
-            </thead>
-            <tbody>
-              {fields.map((row, index) => (
-                <tr key={row}>
+          <div className="table-responsive">
+            <table className="table table-bordered mb-0">
+              <thead>
+                <tr>
                   {columns.map((column) => (
-                    <td key={column.field}>
-                      <Field
-                        name={`${row}.${column.field}`}
-                        validate={column.required ? required : undefined}
-                      >
-                        {({ input, meta }) => (
-                          <>
-                            <StringField
-                              input={input}
-                              meta={meta}
-                              aria-label={column.label}
-                            />
-                            <FieldError error={meta.touched && meta.error} />
-                          </>
-                        )}
-                      </Field>
-                    </td>
+                    <th key={column.field}>{column.label}</th>
                   ))}
-                  <td className="row-actions">
-                    <BaseButton
-                      label={translate('Remove')}
-                      onClick={() => fields.remove(index)}
-                      iconNode={<TrashIcon weight="bold" />}
-                      variant="text-secondary"
-                      size="sm"
-                    />
-                  </td>
+                  <th className="w-1" />
                 </tr>
-              ))}
-            </tbody>
-          </Table>
+              </thead>
+              <tbody>
+                {fields.map((row, index) => (
+                  <tr key={row}>
+                    {columns.map((column) => (
+                      <td key={column.field}>
+                        <Field
+                          name={`${row}.${column.field}`}
+                          validate={column.required ? required : undefined}
+                        >
+                          {({ input, meta }) => (
+                            <>
+                              <StringField
+                                input={input}
+                                meta={meta}
+                                aria-label={column.label}
+                              />
+                              <FieldError error={meta.touched && meta.error} />
+                            </>
+                          )}
+                        </Field>
+                      </td>
+                    ))}
+                    <td className="row-actions">
+                      <BaseButton
+                        label={translate('Remove')}
+                        onClick={() => fields.remove(index)}
+                        iconNode={<TrashIcon weight="bold" />}
+                        variant="text-secondary"
+                        size="sm"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : (
           <p className="text-quaternary mb-0">{translate('None yet.')}</p>
         )}

@@ -1,5 +1,3 @@
-import { Card } from 'react-bootstrap';
-
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 
@@ -10,13 +8,13 @@ export const InstanceMainComponent = ({ resourceScope }) => {
     return null;
   }
   return (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header">
+        <div className="card-title">
           <h3>{translate('Details')}</h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
+        </div>
+      </div>
+      <div className="card-body">
         <Field
           label={translate('Image')}
           value={<ResourceImageField scope={resourceScope} />}
@@ -54,7 +52,7 @@ export const InstanceMainComponent = ({ resourceScope }) => {
           value={resourceScope.external_address.join(', ')}
           hasCopy
         />
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

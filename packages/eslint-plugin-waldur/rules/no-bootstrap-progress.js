@@ -3,11 +3,10 @@
  *
  * Every progress bar is now a waldur-ui `Progress` (or `PercentProgress`,
  * which wraps it), and the Bootstrap/Metronic `.progress` stylesheet they used
- * to need has been deleted. So both ways back to the old look are reported:
+ * to need has been deleted.
  *
- * - react-bootstrap's `ProgressBar`, by name or by deep path;
- * - a `progress`, `progress-bar*` or `progress-themed` class token on any
- *   element, which now styles nothing.
+ * A `progress`, `progress-bar*` or `progress-themed` class token on any
+ * element is reported, which now styles nothing.
  */
 
 import {
@@ -27,15 +26,13 @@ export default {
   meta: {
     type: 'problem',
     docs: {
-      description:
-        'Prevent react-bootstrap ProgressBar and progress classes; use waldur-ui Progress',
+      description: 'Prevent progress classes; use waldur-ui Progress',
       category: 'Best Practices',
       recommended: true,
     },
     fixable: null,
     schema: [],
     messages: {
-      noProgressImport: "Avoid react-bootstrap's ProgressBar.\n" + REPLACEMENT,
       noProgressClass:
         'The "{{ token }}" class no longer has any styles.\n' + REPLACEMENT,
     },
@@ -43,25 +40,6 @@ export default {
 
   create(context) {
     return {
-      ImportDeclaration(node) {
-        const source = node.source.value;
-        if (source === 'react-bootstrap/ProgressBar') {
-          context.report({ node, messageId: 'noProgressImport' });
-          return;
-        }
-        if (source !== 'react-bootstrap') {
-          return;
-        }
-        for (const specifier of node.specifiers) {
-          if (
-            specifier.type === 'ImportSpecifier' &&
-            specifier.imported.name === 'ProgressBar'
-          ) {
-            context.report({ node: specifier, messageId: 'noProgressImport' });
-          }
-        }
-      },
-
       JSXOpeningElement(node) {
         for (const token of getClassNameTokens(node)) {
           if (LEGACY_CLASS.test(token)) {

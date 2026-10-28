@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Card, Table as BsTable } from 'react-bootstrap';
 import {
   AccessSubnet,
   Offering,
@@ -50,31 +49,33 @@ export const ResourceAccessSubnetsCard: FunctionComponent<
   return (
     <>
       {defaults.length > 0 && (
-        <Card className="card-bordered mb-4">
-          <Card.Header>
-            <Card.Title className="h5">
+        <div className="card card-bordered mb-4">
+          <div className="card-header">
+            <div className="card-title h5">
               {translate('Default allowed (from provider)')}
-            </Card.Title>
-          </Card.Header>
-          <Card.Body>
-            <BsTable bordered={true} hover={true} responsive={true}>
-              <thead>
-                <tr>
-                  <th>{translate('CIDR')}</th>
-                  <th>{translate('Description')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {defaults.map((row) => (
-                  <tr key={row.uuid}>
-                    <td>{row.inet}</td>
-                    <td>{row.description}</td>
+            </div>
+          </div>
+          <div className="card-body">
+            <div className="table-responsive">
+              <table className="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>{translate('CIDR')}</th>
+                    <th>{translate('Description')}</th>
                   </tr>
-                ))}
-              </tbody>
-            </BsTable>
-          </Card.Body>
-        </Card>
+                </thead>
+                <tbody>
+                  {defaults.map((row) => (
+                    <tr key={row.uuid}>
+                      <td>{row.inet}</td>
+                      <td>{row.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       )}
 
       <Table<AccessSubnet>

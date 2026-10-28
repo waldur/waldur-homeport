@@ -1,6 +1,5 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { InvitationCoiConfiguration } from 'waldur-js-client';
 
 import { FeaturedIcon } from 'waldur-ui';
@@ -25,8 +24,8 @@ export const COIPolicyCard: FC<COIPolicyCardProps> = ({ config }) => {
   }
 
   return (
-    <Card className="card-bordered mb-5">
-      <Card.Body className="flex gap-3">
+    <div className="card card-bordered mb-5">
+      <div className="card-body flex gap-3">
         <FeaturedIcon
           icon={<InfoIcon weight="bold" />}
           variant="neutral"
@@ -41,7 +40,7 @@ export const COIPolicyCard: FC<COIPolicyCardProps> = ({ config }) => {
             )}
           </p>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

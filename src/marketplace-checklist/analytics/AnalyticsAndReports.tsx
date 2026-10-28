@@ -1,6 +1,5 @@
 import { ExportIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { BaseButton, SegmentedControl } from 'waldur-ui';
 
@@ -48,8 +47,8 @@ export const AnalyticsAndReports = () => {
   );
 
   return (
-    <Card>
-      <Card.Header className="mx-0 border-0">
+    <div className="card">
+      <div className="card-header mx-0 border-0">
         <div className="card-toolbar gap-3">
           {periodOptions.length > 1 && (
             <SegmentedControl<number>
@@ -67,8 +66,8 @@ export const AnalyticsAndReports = () => {
             size="lg"
           />
         </div>
-      </Card.Header>
-      <Card.Body className="p-0 overflow-hidden">
+      </div>
+      <div className="card-body p-0 overflow-hidden">
         {/* Stat cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 mb-4 gap-4">
           {topCards.map((card) => (
@@ -91,7 +90,7 @@ export const AnalyticsAndReports = () => {
 
         {/* Organization Performance Comparison Table */}
         <OrgPerformanceTable />
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

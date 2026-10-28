@@ -2,7 +2,6 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
 import { FC, useMemo } from 'react';
-import { Table } from 'react-bootstrap';
 import { Offering } from 'waldur-js-client';
 
 import { TabNav } from 'waldur-ui';
@@ -230,7 +229,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 backend the offering is wired to, not anything a prospective
                 customer can act on. Keep it to the provider/staff view. */}
             {!props.isPublic && (
-              <Table className="mb-0 px-0 h-auto text-xs w-auto mt-1">
+              <table className="table mb-0 px-0 h-auto text-xs w-auto mt-1">
                 <tbody>
                   <tr>
                     <th className="font-medium w-[150px] p-0 pe-2.5">
@@ -253,7 +252,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                     </td>
                   </tr>
                 </tbody>
-              </Table>
+              </table>
             )}
           </div>
         }

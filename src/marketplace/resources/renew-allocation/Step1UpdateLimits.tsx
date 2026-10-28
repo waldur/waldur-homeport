@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
@@ -64,8 +63,8 @@ const OneTimeComponentsSummary: FC<{
       ) : (
         <p>{translate('Resource does not have any plan.')}</p>
       )}
-      <Card className="card-table card-bordered">
-        <Card.Body className="p-0">
+      <div className="card card-table card-bordered">
+        <div className="card-body p-0">
           <div className="table-responsive">
             <table className="table table-row-bordered align-middle mb-0">
               <thead>
@@ -108,8 +107,8 @@ const OneTimeComponentsSummary: FC<{
               </tbody>
             </table>
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
       <p className="text-quaternary mt-2.5">
         {translate(
           'The renewal cost will be calculated based on the extension period selected in the next step.',

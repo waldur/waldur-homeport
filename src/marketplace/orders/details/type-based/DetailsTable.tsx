@@ -1,6 +1,5 @@
 import { ArrowUpIcon, ArrowDownIcon } from '@phosphor-icons/react';
 import { createElement, ReactNode } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Badge } from 'waldur-ui';
 
@@ -58,8 +57,8 @@ export const DetailsTable = <RowType,>({
     typeof totalRow === 'function' ? totalRow(columnCount) : totalRow;
 
   return (
-    <Card className="card-table card-bordered">
-      <Card.Body className="p-0">
+    <div className="card card-table card-bordered">
+      <div className="card-body p-0">
         <div className="table-responsive">
           <div className="table-container">
             <table className="table table-row-bordered align-middle">
@@ -85,7 +84,7 @@ export const DetailsTable = <RowType,>({
             </table>
           </div>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };
