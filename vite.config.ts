@@ -29,6 +29,14 @@ const plugins: PluginOption[] = [
   waldurBootSplash({ defaultName: 'Waldur' }),
 ];
 
+// Worktrees nested under this checkout hold full copies of the repo; only
+// paths below this checkout are tested, so a server started from inside a
+// worktree still watches its own files. Same rule as .storybook/main.ts.
+const ROOT = import.meta.dirname;
+const WORKTREES = `${path.sep}.claude${path.sep}worktrees${path.sep}`;
+const isNestedWorktree = (file: string) =>
+  file.startsWith(ROOT) && file.slice(ROOT.length).includes(WORKTREES);
+
 export default defineConfig({
   resolve: {
     alias: {
@@ -38,8 +46,10 @@ export default defineConfig({
   server: {
     watch: {
       // Agent worktrees are full checkouts (node_modules, .yarn cache);
-      // watching them exhausts the inotify limit (ENOSPC).
-      ignored: ['**/.claude/worktrees/**'],
+      // watching them exhausts the inotify limit (ENOSPC). A
+      // `**/.claude/worktrees/**` glob also matched every file of a server
+      // started inside a worktree, so its edits never reached the browser.
+      ignored: [isNestedWorktree],
     },
     proxy: {
       '/api': {
