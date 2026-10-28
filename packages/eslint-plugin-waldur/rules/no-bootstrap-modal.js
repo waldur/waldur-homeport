@@ -3,14 +3,11 @@
  *
  * Every dialog now renders through waldur-ui's ModalShell and ModalDialog
  * (re-exported by src/modal), and the Bootstrap/Metronic modal and close
- * button stylesheets are deleted. So every way back to the old markup is
- * reported:
+ * button stylesheets are deleted.
  *
- * - react-bootstrap's `Modal` (and its parts), `CloseButton` and
- *   `ModalContext`, by name or by deep path;
- * - a `modal`, `modal-*` or `btn-close` class token, on an element or in a
- *   `className`/`dialogClassName`/`backdropClassName` string passed to a
- *   dialog, which now styles nothing.
+ * A `modal`, `modal-*` or `btn-close` class token, on an element or in a
+ * `className`/`dialogClassName`/`backdropClassName` string passed to a
+ * dialog is reported, which now styles nothing.
  */
 
 import {
@@ -19,11 +16,6 @@ import {
 } from './class-name-tokens.js';
 
 const LEGACY_CLASS = /^(modal|modal-(?!passthrough:).+|btn-close(-white)?)$/;
-
-const LEGACY_IMPORTS = new Set(['Modal', 'CloseButton', 'ModalContext']);
-
-const LEGACY_DEEP_IMPORT =
-  /^react-bootstrap\/(Modal\w*|CloseButton|ModalContext)$/;
 
 // Props whose string value is a class list for a dialog (openDialog's
 // options, ModalShell's props).
@@ -52,15 +44,13 @@ export default {
   meta: {
     type: 'problem',
     docs: {
-      description:
-        'Prevent react-bootstrap Modal and modal/btn-close classes; use waldur-ui Modal',
+      description: 'Prevent modal/btn-close classes; use waldur-ui Modal',
       category: 'Best Practices',
       recommended: true,
     },
     fixable: null,
     schema: [],
     messages: {
-      noModalImport: "Avoid react-bootstrap's {{ name }}.\n" + REPLACEMENT,
       noModalClass:
         'The "{{ token }}" class no longer has any styles.\n' + REPLACEMENT,
     },
@@ -68,33 +58,6 @@ export default {
 
   create(context) {
     return {
-      ImportDeclaration(node) {
-        const source = node.source.value;
-        if (LEGACY_DEEP_IMPORT.test(source)) {
-          context.report({
-            node,
-            messageId: 'noModalImport',
-            data: { name: source.slice('react-bootstrap/'.length) },
-          });
-          return;
-        }
-        if (source !== 'react-bootstrap') {
-          return;
-        }
-        for (const specifier of node.specifiers) {
-          if (
-            specifier.type === 'ImportSpecifier' &&
-            LEGACY_IMPORTS.has(specifier.imported.name)
-          ) {
-            context.report({
-              node: specifier,
-              messageId: 'noModalImport',
-              data: { name: specifier.imported.name },
-            });
-          }
-        }
-      },
-
       JSXOpeningElement(node) {
         for (const token of getClassNameTokens(node)) {
           if (LEGACY_CLASS.test(token)) {

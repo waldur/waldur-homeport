@@ -24,31 +24,10 @@ describe('no-bootstrap-breadcrumb', () => {
       {
         code: "import { BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from 'waldur-ui';",
       },
-      { code: "import { Card } from 'react-bootstrap';" },
       // Layout classes that are permitted
       { code: 'const A = () => <div className="breadcrumb-mobile" />;' },
     ],
     invalid: [
-      {
-        code: "import { Breadcrumb } from 'react-bootstrap';",
-        errors: [{ messageId: 'noBreadcrumbImport' }],
-      },
-      {
-        code: "import { BreadcrumbItem } from 'react-bootstrap';",
-        errors: [{ messageId: 'noBreadcrumbImport' }],
-      },
-      {
-        code: "import { Card, Breadcrumb } from 'react-bootstrap';",
-        errors: [{ messageId: 'noBreadcrumbImport' }],
-      },
-      {
-        code: "import Breadcrumb from 'react-bootstrap/Breadcrumb';",
-        errors: [{ messageId: 'noBreadcrumbImport' }],
-      },
-      {
-        code: "import BreadcrumbItem from 'react-bootstrap/BreadcrumbItem';",
-        errors: [{ messageId: 'noBreadcrumbImport' }],
-      },
       {
         code: 'const A = () => <ol className="breadcrumb"><li className="breadcrumb-item">Test</li></ol>;',
         errors: [

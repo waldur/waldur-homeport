@@ -136,9 +136,6 @@ export default tseslint
         // Zero instances remain: every progress bar is a waldur-ui Progress and
         // the .progress styles are deleted.
         'waldur-custom/no-bootstrap-progress': 'error',
-        // react-bootstrap's Stack renders gap={N} as a runtime gap-N class:
-        // Tailwind's step, or nothing when no source spells that name.
-        'waldur-custom/no-bootstrap-stack-gap': 'error',
         // Zero instances remain: every dialog is waldur-ui's Modal and the
         // .modal / .btn-close styles are deleted.
         'waldur-custom/no-bootstrap-modal': 'error',

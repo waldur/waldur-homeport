@@ -18,7 +18,6 @@ const ruleTester = new RuleTester({
 describe('no-bootstrap-grid', () => {
   ruleTester.run('no-bootstrap-grid', noBootstrapGrid as any, {
     valid: [
-      { code: "import { Card } from 'react-bootstrap';" },
       {
         code: 'const A = () => <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5" />;',
       },
@@ -41,21 +40,6 @@ describe('no-bootstrap-grid', () => {
       { code: 'const A = () => <div role="row" data-kind="col" />;' },
     ],
     invalid: [
-      {
-        code: "import { Card, Col, Row } from 'react-bootstrap';",
-        errors: [
-          { messageId: 'noGridImport', data: { name: 'Col' } },
-          { messageId: 'noGridImport', data: { name: 'Row' } },
-        ],
-      },
-      {
-        code: "import type { ColProps } from 'react-bootstrap';",
-        errors: [{ messageId: 'noGridImport', data: { name: 'ColProps' } }],
-      },
-      {
-        code: "import Row from 'react-bootstrap/Row';",
-        errors: [{ messageId: 'noGridImport', data: { name: 'Row' } }],
-      },
       ...[
         'row',
         'col',

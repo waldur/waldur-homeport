@@ -24,7 +24,6 @@ import noBootstrapGrid from './rules/no-bootstrap-grid.js';
 import noBootstrapLayoutUtility from './rules/no-bootstrap-layout-utility.js';
 import noBootstrapModal from './rules/no-bootstrap-modal.js';
 import noBootstrapProgress from './rules/no-bootstrap-progress.js';
-import noBootstrapStackGap from './rules/no-bootstrap-stack-gap.js';
 import noBootstrapTabs from './rules/no-bootstrap-tabs.js';
 import noDirectClientUsage from './rules/no-direct-client-usage.js';
 import noDirectFieldAdapter from './rules/no-direct-field-adapter.js';
@@ -68,7 +67,6 @@ export default {
     'no-bootstrap-form-check': noBootstrapFormCheck,
     'no-bootstrap-layout-utility': noBootstrapLayoutUtility,
     'no-bootstrap-progress': noBootstrapProgress,
-    'no-bootstrap-stack-gap': noBootstrapStackGap,
     'no-bootstrap-border-with-tailwind-color':
       noBootstrapBorderWithTailwindColor,
     'no-raw-status-ramp': noRawStatusRamp,

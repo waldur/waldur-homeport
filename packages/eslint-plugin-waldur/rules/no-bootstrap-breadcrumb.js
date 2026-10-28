@@ -3,20 +3,17 @@
  *
  * Every breadcrumb trail is now built using waldur-ui's `Breadcrumb` primitives
  * (or the application header Breadcrumbs component), and the Bootstrap/Metronic
- * `.breadcrumb` stylesheet has been deleted. Both legacy avenues are reported:
+ * `.breadcrumb` stylesheet has been deleted.
  *
- * - react-bootstrap's `Breadcrumb` or `BreadcrumbItem`, by named or deep-path import;
- * - a `breadcrumb`, `breadcrumb-container`, `breadcrumb-item`, `breadcrumb-item-static`,
- *   `breadcrumb-item-static-label`, `breadcrumb-text` or `breadcrumb-back` class token
- *   on any element, which now styles nothing.
+ * A `breadcrumb`, `breadcrumb-container`, `breadcrumb-item`, `breadcrumb-item-static`,
+ * `breadcrumb-item-static-label`, `breadcrumb-text` or `breadcrumb-back` class token
+ * on any element is reported, which now styles nothing.
  */
 
 import {
   getClassNameAttribute,
   getClassNameTokens,
 } from './class-name-tokens.js';
-
-const LEGACY_IMPORTS = new Set(['Breadcrumb', 'BreadcrumbItem']);
 
 const LEGACY_CLASS =
   /^(breadcrumb|breadcrumb-container|breadcrumb-item(-static(-label)?)?|breadcrumb-text|breadcrumb-back)$/;
@@ -32,14 +29,13 @@ export default {
     type: 'problem',
     docs: {
       description:
-        'Prevent react-bootstrap Breadcrumb and legacy breadcrumb classes; use waldur-ui Breadcrumb',
+        'Prevent legacy breadcrumb classes; use waldur-ui Breadcrumb',
       category: 'Best Practices',
       recommended: true,
     },
     fixable: null,
     schema: [],
     messages: {
-      noBreadcrumbImport: "Avoid react-bootstrap's {{ name }}.\n" + REPLACEMENT,
       noBreadcrumbClass:
         'The "{{ token }}" class no longer has any styles.\n' + REPLACEMENT,
     },
@@ -47,39 +43,6 @@ export default {
 
   create(context) {
     return {
-      ImportDeclaration(node) {
-        const source = node.source.value;
-        if (typeof source !== 'string') {
-          return;
-        }
-        const deep = source.match(/^react-bootstrap\/(\w+)$/);
-        if (deep) {
-          if (LEGACY_IMPORTS.has(deep[1])) {
-            context.report({
-              node,
-              messageId: 'noBreadcrumbImport',
-              data: { name: deep[1] },
-            });
-          }
-          return;
-        }
-        if (source !== 'react-bootstrap') {
-          return;
-        }
-        for (const specifier of node.specifiers) {
-          if (
-            specifier.type === 'ImportSpecifier' &&
-            LEGACY_IMPORTS.has(specifier.imported.name)
-          ) {
-            context.report({
-              node: specifier,
-              messageId: 'noBreadcrumbImport',
-              data: { name: specifier.imported.name },
-            });
-          }
-        }
-      },
-
       JSXOpeningElement(node) {
         for (const token of getClassNameTokens(node)) {
           if (LEGACY_CLASS.test(token)) {

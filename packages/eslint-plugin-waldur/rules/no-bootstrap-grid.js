@@ -5,24 +5,20 @@
  * Metronic table gutters (`.table.gs-*` …) are no longer compiled. Layouts are
  * Tailwind grid or flex: `grid md:grid-cols-2 gap-5`, a 12-column
  * `grid md:grid-cols-12` with `md:col-span-8` children for mixed widths, or
- * `flex` with `flex-1` / `flex-none` children. So both ways back are reported:
+ * `flex` with `flex-1` / `flex-none` children.
  *
- * - react-bootstrap's `Row`, `Col` (and their `RowProps`/`ColProps` types), by
- *   named or deep-path import;
- * - a `row`, `col`, `col-*`, `offset-*`, `row-cols-*`, `g-*`, `gx-*`, `gy-*`
- *   or `gs-*` class token in a `className`, `*ClassName` or `*Class` attribute
- *   (`labelClass`, `valueClass`) or in such a prop's default value, which now
- *   styles nothing. Tokens with a variant prefix (`md:col-span-2`) are
- *   Tailwind's and left alone. Unprefixed `col-<n>` and `col-auto` are
- *   reported too, though Tailwind does generate them (`grid-column: <n>`):
- *   in this codebase they are nearly always a Bootstrap column left behind,
- *   so the message says what each one means here instead of claiming it
- *   styles nothing.
+ * A `row`, `col`, `col-*`, `offset-*`, `row-cols-*`, `g-*`, `gx-*`, `gy-*`
+ * or `gs-*` class token in a `className`, `*ClassName` or `*Class` attribute
+ * (`labelClass`, `valueClass`) or in such a prop's default value is reported, which now
+ * styles nothing. Tokens with a variant prefix (`md:col-span-2`) are
+ * Tailwind's and left alone. Unprefixed `col-<n>` and `col-auto` are
+ * reported too, though Tailwind does generate them (`grid-column: <n>`):
+ * in this codebase they are nearly always a Bootstrap column left behind,
+ * so the message says what each one means here instead of claiming it
+ * styles nothing.
  */
 
 import { getExpressionTokens } from './class-name-tokens.js';
-
-const LEGACY_IMPORTS = new Set(['Row', 'Col', 'RowProps', 'ColProps']);
 
 const BP = '(?:xs|sm|md|lg|xl|xxl)';
 
@@ -59,15 +55,13 @@ export default {
   meta: {
     type: 'problem',
     docs: {
-      description:
-        "Prevent react-bootstrap's Row/Col and Bootstrap grid classes; use Tailwind grid or flex",
+      description: 'Prevent Bootstrap grid classes; use Tailwind grid or flex',
       category: 'Best Practices',
       recommended: true,
     },
     fixable: null,
     schema: [],
     messages: {
-      noGridImport: "Avoid react-bootstrap's {{ name }}.\n" + REPLACEMENT,
       noGridClass:
         'The "{{ token }}" class is Bootstrap\'s grid, which is no longer compiled.\n' +
         REPLACEMENT,
@@ -94,39 +88,6 @@ export default {
     };
 
     return {
-      ImportDeclaration(node) {
-        const source = node.source.value;
-        if (typeof source !== 'string') {
-          return;
-        }
-        const deep = source.match(/^react-bootstrap\/(\w+)$/);
-        if (deep) {
-          if (LEGACY_IMPORTS.has(deep[1])) {
-            context.report({
-              node,
-              messageId: 'noGridImport',
-              data: { name: deep[1] },
-            });
-          }
-          return;
-        }
-        if (source !== 'react-bootstrap') {
-          return;
-        }
-        for (const specifier of node.specifiers) {
-          if (
-            specifier.type === 'ImportSpecifier' &&
-            LEGACY_IMPORTS.has(specifier.imported.name)
-          ) {
-            context.report({
-              node: specifier,
-              messageId: 'noGridImport',
-              data: { name: specifier.imported.name },
-            });
-          }
-        }
-      },
-
       JSXOpeningElement(node) {
         for (const attribute of node.attributes.filter(isClassAttribute)) {
           check(attribute, attribute.value);
