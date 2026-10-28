@@ -17,7 +17,7 @@ import { OfferingsPanel } from './OfferingsPanel';
 import { fetchCategories, fetchLastNOfferings } from './utils';
 
 const MESSAGE_WRAPPER_CLASSES =
-  'flex items-center justify-center min-w-1/2 max-lg:w-full h-[calc(100vh-270px)] min-h-[230px] max-h-[356px] max-lg:max-h-[380px]';
+  'flex items-center justify-center min-w-1/2 max-lg:w-full h-full';
 
 export const DataLoader = ({
   filter,
@@ -125,7 +125,7 @@ export const DataLoader = ({
   }, [categoryUuid, categories, selectCategory]);
 
   return (
-    <div className="flex flex-col lg:flex-row h-full">
+    <div className="flex flex-col lg:flex-row h-80 max-h-[calc(100dvh-17rem)] min-h-56">
       {loadingCategories || loadingGroups ? (
         <div className={classNames(MESSAGE_WRAPPER_CLASSES, 'p-3')}>
           <LoadingSpinner />

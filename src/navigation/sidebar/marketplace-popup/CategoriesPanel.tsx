@@ -13,7 +13,7 @@ import { BaseList } from './BaseList';
 import { getSelectableRowProps } from './utils';
 
 const EmptyCategoryListPlaceholder: FunctionComponent = () => (
-  <div className="flex items-center justify-center min-w-1/2 max-lg:w-full h-[calc(100vh-270px)] min-h-[230px] max-h-[356px] max-lg:max-h-[380px] ellipsis">
+  <div className="flex items-center justify-center min-w-1/2 max-lg:w-full h-full text-secondary ellipsis">
     {translate('There are no categories.')}
   </div>
 );
@@ -54,8 +54,8 @@ const CategoryListItem: FunctionComponent<
       // (docs/e2e-locators.md).
       data-testid="category-item"
       className={classNames(
-        'list-group-item relative block cursor-pointer py-[1.05rem] border-0 text-primary transition-colors',
-        className || 'ps-7 pe-6',
+        'list-group-item relative block cursor-pointer py-4 border-0 text-primary transition-colors',
+        className || 'px-6',
         bgClass,
       )}
       {...getSelectableRowProps(() => onClick(item))}
@@ -123,7 +123,7 @@ const CategoryGroupListItem: FunctionComponent<{
             item={category}
             onClick={onClick}
             selectedItem={selectedItem}
-            className="ps-5.5 pe-11.5"
+            className="ps-10 pe-6"
           />
         ))}
       </CollapsibleContent>
@@ -150,11 +150,11 @@ export const CategoriesPanel: FunctionComponent<{
       // (docs/e2e-locators.md).
       data-testid="category-listing"
       className={classNames(
-        'category-listing w-full lg:w-1/2 lg:basis-1/2 lg:border-r lg:border-secondary',
+        'category-listing w-full lg:w-1/2 lg:basis-1/2 lg:border-r lg:border-secondary flex flex-col h-full',
         selectedCategory && 'max-lg:hidden',
       )}
     >
-      <div className="flex items-center ms-5.5 mt-1.5">
+      <div className="flex items-center ms-6 mt-1.5 shrink-0">
         <h6 className="text-secondary font-medium my-1.5 me-3">
           {translate('Categories')}
         </h6>
@@ -164,17 +164,19 @@ export const CategoriesPanel: FunctionComponent<{
           </span>
         )}
       </div>
-      {categories?.length > 0 ? (
-        <BaseList
-          items={categories}
-          selectedItem={selectedCategory}
-          selectItem={selectCategory}
-          EmptyPlaceholder={EmptyCategoryListPlaceholder}
-          ItemComponent={CategoryGroupListItem}
-        />
-      ) : (
-        <EmptyCategoryListPlaceholder />
-      )}
+      <div className="flex-1 min-h-0">
+        {categories?.length > 0 ? (
+          <BaseList
+            items={categories}
+            selectedItem={selectedCategory}
+            selectItem={selectCategory}
+            EmptyPlaceholder={EmptyCategoryListPlaceholder}
+            ItemComponent={CategoryGroupListItem}
+          />
+        ) : (
+          <EmptyCategoryListPlaceholder />
+        )}
+      </div>
     </div>
   );
 };

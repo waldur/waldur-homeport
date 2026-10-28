@@ -79,7 +79,7 @@ const MarketplacePopupForm: FC<{ categoryUuid?: string }> = ({
       headerClassName="pb-3"
       bodyClassName="p-0 pb-3"
     >
-      <div className="px-5.5">
+      <div className="px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 mb-3">
           <div className="mb-3 lg:mb-0">
             <OrganizationAutocomplete
@@ -104,7 +104,7 @@ const MarketplacePopupForm: FC<{ categoryUuid?: string }> = ({
           />
         </div>
       </div>
-      <div className="border-b-[1px] border-b-secondary mx-5.5" />
+      <div className="border-b border-secondary mx-6" />
       <DataLoader
         filter={filter}
         customer={values?.organization}

@@ -153,7 +153,7 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
         ) : step === 2 ? (
           // STEP 2
           <>
-            <div className="px-5.5">
+            <div className="px-6">
               <div className="mb-3">
                 <FilterBox
                   id="import-resource-search-box"
@@ -164,7 +164,7 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
                 />
               </div>
             </div>
-            <div className="border-b-[1px] border-b-secondary mx-5.5" />
+            <div className="border-b border-secondary mx-6" />
             <DataLoader
               filter={filter}
               customer={organization}

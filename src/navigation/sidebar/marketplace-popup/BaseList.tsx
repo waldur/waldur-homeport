@@ -16,7 +16,7 @@ export const BaseList: FunctionComponent<{
   linkState,
 }) => {
   return (
-    <div className="h-[calc(100vh-270px)] min-h-[200px] max-h-[320px] max-lg:max-h-[346px] overflow-y-auto">
+    <div className="h-full overflow-y-auto">
       <div className="flex flex-col pb-8">
         {items.length === 0 ? (
           <EmptyPlaceholder />

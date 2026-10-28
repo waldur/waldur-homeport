@@ -1,8 +1,8 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import { useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import {
-  CSSProperties,
   FunctionComponent,
   useCallback,
   useEffect,
@@ -10,8 +10,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { FixedSizeList as List } from 'react-window';
-import InfiniteLoader from 'react-window-infinite-loader';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
@@ -26,40 +24,28 @@ import { RECENTLY_ADDED_OFFERINGS_UUID } from './constants';
 import { fetchOfferingsByPage, getSelectableRowProps } from './utils';
 
 const VIRTUALIZED_SELECTOR_PAGE_SIZE = 20;
-// Fallback height (px) used until the viewport is measured. Matches the
-// `max-height` of `.offering-listing-viewport` so the first paint never
-// over-renders. The real height is measured at runtime (see below) because
-// the pane height is responsive (`calc(100vh - 270px)`, clamped) and
-// react-window needs the actual pixel height to virtualize and scroll
-// correctly — a hardcoded value disagreed with the CSS-clamped box.
-const FALLBACK_LIST_HEIGHT = 320;
-const ITEM_SIZE = 68;
 
 type ProviderOfferingResponse = Awaited<
   ReturnType<typeof fetchOfferingsByPage>
 >['pageElements'];
 
 const EmptyOfferingListPlaceholder: FunctionComponent = () => (
-  <div className="flex items-center justify-center min-w-1/2 max-lg:w-full h-[calc(100vh-270px)] min-h-[230px] max-h-[356px] max-lg:max-h-[380px] ellipsis">
+  <div className="flex items-center justify-center min-w-1/2 max-lg:w-full h-full text-secondary ellipsis">
     {translate('There are no offerings.')}
   </div>
 );
 
-const LoadingRow: FunctionComponent<{ style: CSSProperties }> = ({ style }) => (
-  <div
-    className="relative block py-[1.05rem] ps-7 pe-6 text-center"
-    style={style}
-  >
+const LoadingRow: FunctionComponent = () => (
+  <div className="relative block py-4 px-6 text-center">
     <span className="text-quaternary">{translate('Fetching')}</span>
   </div>
 );
 
 const OfferingListItem: FunctionComponent<{
-  style: CSSProperties;
   item: ProviderOfferingResponse[0];
   onClick: (item: ProviderOfferingResponse[0]) => void;
   selectedItem?: ProviderOfferingResponse[0];
-}> = ({ item, onClick, selectedItem, style }) => {
+}> = ({ item, onClick, selectedItem }) => {
   const abbreviation = useMemo(() => getItemAbbreviation(item), [item]);
   const isPaused = item.state === 'Paused';
   const isSelected = selectedItem && item.uuid === selectedItem.uuid;
@@ -73,14 +59,13 @@ const OfferingListItem: FunctionComponent<{
           // (docs/e2e-locators.md).
           data-testid="offering-item"
           className={classNames(
-            'list-group-item relative block py-[1.05rem] ps-7 pe-6 border-0 transition-colors',
+            'list-group-item relative block py-4 px-6 border-0 transition-colors',
             isPaused
               ? 'bg-secondary opacity-50 cursor-not-allowed'
               : isSelected
                 ? 'cursor-pointer bg-tertiary'
                 : 'cursor-pointer bg-primary hover:bg-secondary',
           )}
-          style={style}
           {...getSelectableRowProps(() => onClick(item), isPaused)}
         >
           <div className="flex items-center self-stretch gap-2.5">
@@ -108,7 +93,7 @@ const OfferingListItem: FunctionComponent<{
                   isPaused ? 'text-quinary' : 'text-primary',
                 )}
               >
-                {truncate(item.name, 40)}
+                {item.name}
               </h5>
               <p className="ellipsis text-xs mb-0 text-quaternary">
                 <TextWithoutFormatting html={truncate(item.description, 120)} />
@@ -130,7 +115,7 @@ interface OfferingsPanelProps {
   goBack;
   importable?: boolean;
   selectable?: boolean;
-  onSelect?(offering: Offering): void;
+  onSelect?: (offering: Offering) => void;
 }
 
 export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
@@ -146,23 +131,7 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
 }) => {
   const [selectedOffering, selectOffering] = useState<Offering>();
   const router = useRouter();
-
-  // Measure the scroll viewport so react-window's `height` matches the actual
-  // CSS-clamped box (`.offering-listing-viewport`). A callback ref keeps the
-  // ResizeObserver in sync as the node mounts/unmounts and the viewport
-  // resizes (responsive height + window resize).
-  const [listHeight, setListHeight] = useState(FALLBACK_LIST_HEIGHT);
-  const resizeObserverRef = useRef<ResizeObserver | null>(null);
-  const viewportRef = useCallback((node: HTMLDivElement | null) => {
-    resizeObserverRef.current?.disconnect();
-    if (node && typeof ResizeObserver !== 'undefined') {
-      const measure = () =>
-        setListHeight(node.clientHeight || FALLBACK_LIST_HEIGHT);
-      measure();
-      resizeObserverRef.current = new ResizeObserver(measure);
-      resizeObserverRef.current.observe(node);
-    }
-  }, []);
+  const parentRef = useRef<HTMLDivElement>(null);
 
   const handleOfferingClick = useCallback(
     (offering: Offering) => {
@@ -185,9 +154,7 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
   );
   const [itemCount, setItemCount] = useState<number | null>(null);
   // Pages that are currently fetching OR already settled. Tracked outside
-  // React state because we read it inside `loadMoreItems` synchronously to
-  // dedupe overlapping calls — InfiniteLoader can call us multiple times
-  // for the same range before the first promise resolves.
+  // React state because we read it inside `loadPage` synchronously to dedupe.
   const inFlightPages = useRef<Set<number>>(new Set());
 
   const fetchPage = useCallback(
@@ -226,7 +193,7 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
       setItemCount(total);
       setItems((prev) => {
         // The first page tells us how many total items exist; grow `items`
-        // to that length so InfiniteLoader can compute holes against the
+        // to that length so virtualizer can compute holes against the
         // real size, not just what we've loaded so far.
         const next =
           prev.length < total
@@ -242,103 +209,102 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
     [fetchPage],
   );
 
-  // Reset pagination state when the dataset identity changes. This replaces
-  // the old `key=...` remount trick — using state reset keeps the wrapper
-  // mounted (so scroll position resets cleanly via FixedSizeList's own
-  // mechanics rather than via remount).
+  // Reset pagination state when the dataset identity changes.
   const datasetKey = `${filter}-${customer?.uuid}-${project?.uuid}-${category?.uuid}`;
   useEffect(() => {
     inFlightPages.current = new Set();
     setItems([]);
     setItemCount(null);
-    // Kick off the first page eagerly — InfiniteLoader only fires
-    // loadMoreItems on scroll, which would otherwise leave the list empty
-    // on initial render.
+    parentRef.current?.scrollTo({ top: 0 });
     void loadPage(0);
   }, [datasetKey, loadPage]);
 
-  const isItemLoaded = useCallback(
-    (index: number) => items[index] !== undefined,
-    [items],
-  );
+  const count = itemCount ?? items.length;
 
-  const loadMoreItems = useCallback(
-    (startIndex: number, stopIndex: number) => {
-      const pages = new Set<number>();
-      for (let i = startIndex; i <= stopIndex; i++) {
-        pages.add(Math.floor(i / VIRTUALIZED_SELECTOR_PAGE_SIZE));
+  const virtualizer = useVirtualizer({
+    count,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 72,
+    overscan: 5,
+  });
+
+  const virtualItems = virtualizer.getVirtualItems();
+
+  useEffect(() => {
+    const unrenderedPages = new Set<number>();
+    for (const virtualItem of virtualItems) {
+      if (!items[virtualItem.index]) {
+        unrenderedPages.add(
+          Math.floor(virtualItem.index / VIRTUALIZED_SELECTOR_PAGE_SIZE),
+        );
       }
-      return Promise.all([...pages].map((p) => loadPage(p))).then(
-        () => undefined,
-      );
-    },
-    [loadPage],
-  );
-
-  const rowRenderer = useCallback(
-    ({ index, style }: { index: number; style: CSSProperties }) => {
-      const item = items[index];
-      if (!item) return <LoadingRow style={style} />;
-      return (
-        <OfferingListItem
-          style={style}
-          item={item}
-          selectedItem={selectedOffering}
-          onClick={handleOfferingClick}
-        />
-      );
-    },
-    [items, selectedOffering, handleOfferingClick],
-  );
+    }
+    for (const page of unrenderedPages) {
+      void loadPage(page);
+    }
+  }, [virtualItems, items, loadPage]);
 
   return (
     <div
       // The waldur-integration-testing suite scopes offerings by this
       // (docs/e2e-locators.md).
       data-testid="offering-listing"
-      className="offering-listing w-full lg:w-1/2 lg:basis-1/2"
+      className="offering-listing w-full lg:w-1/2 lg:basis-1/2 flex flex-col h-full"
     >
       <button
         type="button"
-        className="flex lg:hidden items-center gap-2 text-anchor font-medium p-1.5 ms-4 my-1.5"
+        className="flex lg:hidden items-center gap-2 text-anchor font-medium p-1.5 ms-4 my-1.5 shrink-0"
         onClick={goBack}
       >
         <CaretLeftIcon size={14} weight="bold" />
         {translate('Go back to categories')}
       </button>
-      <div className="block lg:hidden border-b-[1px] border-b-secondary mx-5.5" />
-      <h6 className="text-secondary font-medium mt-3 mb-1.5 ms-5.5">
+      <div className="block lg:hidden border-b border-secondary mx-6 shrink-0" />
+      <h6 className="text-secondary font-medium mt-3 mb-1.5 ms-6 shrink-0">
         {translate('Offerings')}
       </h6>
       {itemCount === 0 ? (
         <EmptyOfferingListPlaceholder />
       ) : (
         <div
-          className="h-[calc(100vh-270px)] min-h-[200px] max-h-[320px] max-lg:max-h-[303px] overflow-hidden"
-          ref={viewportRef}
+          ref={parentRef}
+          className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden"
         >
-          {/* @ts-ignore */}
-          <InfiniteLoader
-            isItemLoaded={isItemLoaded}
-            itemCount={itemCount ?? VIRTUALIZED_SELECTOR_PAGE_SIZE}
-            loadMoreItems={loadMoreItems}
-            minimumBatchSize={VIRTUALIZED_SELECTOR_PAGE_SIZE}
+          <div
+            style={{
+              height: `${virtualizer.getTotalSize()}px`,
+              width: '100%',
+              position: 'relative',
+            }}
           >
-            {({ onItemsRendered, ref }) => (
-              // @ts-ignore
-              <List
-                ref={ref}
-                onItemsRendered={onItemsRendered}
-                height={listHeight}
-                itemSize={ITEM_SIZE}
-                itemCount={itemCount ?? VIRTUALIZED_SELECTOR_PAGE_SIZE}
-                width="100%"
-                className="overflow-y-auto overflow-x-hidden"
-              >
-                {rowRenderer}
-              </List>
-            )}
-          </InfiniteLoader>
+            {virtualItems.map((virtualItem) => {
+              const item = items[virtualItem.index];
+              return (
+                <div
+                  key={virtualItem.key}
+                  data-index={virtualItem.index}
+                  ref={virtualizer.measureElement}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    transform: `translateY(${virtualItem.start}px)`,
+                  }}
+                >
+                  {item ? (
+                    <OfferingListItem
+                      item={item}
+                      selectedItem={selectedOffering}
+                      onClick={handleOfferingClick}
+                    />
+                  ) : (
+                    <LoadingRow />
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
