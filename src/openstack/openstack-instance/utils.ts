@@ -1,6 +1,8 @@
+import { partition } from 'es-toolkit';
 import { OpenStackNestedPort, OpenStackVolumeType } from 'waldur-js-client';
 import { OpenStackFloatingIp } from 'waldur-js-client';
 
+import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
 import { formatFlavor } from '@/resource/utils';
 import { renderFieldOrDash } from '@/table/utils';
@@ -137,6 +139,39 @@ export function formatSubnetName(subnet) {
 export function formatSubnet(subnet) {
   return subnet.name ? `${subnet.name} (${subnet.cidr})` : subnet.cidr;
 }
+
+// Who shares a subnet the tenant reaches through a share; undefined for the
+// tenant's own. A provider network usually carries both its floating-IP pool
+// and a public range, so its subnets need telling apart by more than a name.
+export function formatSubnetOwner(
+  subnet: {
+    tenant?: string;
+    tenant_name?: string;
+    tenant_is_managed?: boolean;
+  },
+  tenantUuid: string,
+): string | undefined {
+  if (!subnet.tenant || getUUID(subnet.tenant) === tenantUuid) {
+    return undefined;
+  }
+  return subnet.tenant_is_managed === false
+    ? translate('shared by provider')
+    : translate('shared by {tenant}', { tenant: subnet.tenant_name });
+}
+
+// The first port is the instance's first interface, the one cloud-init looks
+// for DHCP and the metadata service on, so the tenant's own subnets come before
+// the ones shared with it.
+export const ownSubnetsFirst = <T extends { tenant?: string }>(
+  subnets: T[],
+  tenantUuid: string,
+): T[] => {
+  const [own, shared] = partition(
+    subnets,
+    (subnet) => getUUID(subnet.tenant) === tenantUuid,
+  );
+  return [...own, ...shared];
+};
 
 export function flavorValidator(model, choice) {
   if (!model.image) {
