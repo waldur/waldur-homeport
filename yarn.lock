@@ -5470,6 +5470,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/react-virtual@npm:^3.14.23":
+  version: 3.14.23
+  resolution: "@tanstack/react-virtual@npm:3.14.23"
+  dependencies:
+    "@tanstack/virtual-core": "npm:3.19.8"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/cd39e337ba5d450be5cade885dd0a043ef9149abd95331c533b588a626573af4a48b0d4e78d2bcf36b4ffa1267921dfae7203dec8aa8aa7f128014accd2e4ff5
+  languageName: node
+  linkType: hard
+
+"@tanstack/virtual-core@npm:3.19.8":
+  version: 3.19.8
+  resolution: "@tanstack/virtual-core@npm:3.19.8"
+  checksum: 10c0/eac7a1edd843d8c0f1b07343a7804ac393fb152cb046581331c1c912b7dc518f484c5bca69cae2637739f447cffc86f779b3f4ca7b227872ed7cd5dc8fe5d28b
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^10.4.0, @testing-library/dom@npm:^10.4.1":
   version: 10.4.1
   resolution: "@testing-library/dom@npm:10.4.1"
@@ -6078,16 +6097,6 @@ __metadata:
   peerDependencies:
     "@types/react": "*"
   checksum: 10c0/0441b8b47c69312c89ec0760ba477ba1a0808a10ceef8dc1c64b1013ed78517332c30f18681b0ec0b53542731f1ed015169fed1d127cc91222638ed955478ec7
-  languageName: node
-  linkType: hard
-
-"@types/react-window-infinite-loader@npm:^1.0.9":
-  version: 1.0.9
-  resolution: "@types/react-window-infinite-loader@npm:1.0.9"
-  dependencies:
-    "@types/react": "npm:*"
-    "@types/react-window": "npm:*"
-  checksum: 10c0/d4f0b1c36cbca7d01c50740c942275f3e6dadb13b0aa563c266e8ecdfbaa338fdb623cc59635fcbb7e37938dc295cb6d2949e9f9aff6098faf2089d2e3752da6
   languageName: node
   linkType: hard
 
@@ -14097,16 +14106,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-window-infinite-loader@npm:^1.0.10":
-  version: 1.0.10
-  resolution: "react-window-infinite-loader@npm:1.0.10"
-  peerDependencies:
-    react: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0 || ^19.0.0
-    react-dom: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/26283f0c4ac347d355948d54fba8629935563560f4d114ee701555a7d6251f80271edbcfa994bcc16f15f56637141c503963662f5cdbe51fad946793d2645a76
-  languageName: node
-  linkType: hard
-
 "react-window@npm:^1.8.11":
   version: 1.8.11
   resolution: "react-window@npm:1.8.11"
@@ -16449,6 +16448,7 @@ __metadata:
     "@tailwindcss/node": "npm:^4.3.3"
     "@tailwindcss/vite": "npm:^4.3.3"
     "@tanstack/react-query": "npm:^5.80.6"
+    "@tanstack/react-virtual": "npm:^3.14.23"
     "@testing-library/dom": "npm:^10.4.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.0.1"
@@ -16463,7 +16463,6 @@ __metadata:
     "@types/react": "npm:^18.3.0"
     "@types/react-dom": "npm:^18.3.0"
     "@types/react-window": "npm:^1.8.8"
-    "@types/react-window-infinite-loader": "npm:^1.0.9"
     "@typescript/native-preview": "npm:^7.0.0-dev.20260421.2"
     "@uirouter/core": "npm:^6.1.2"
     "@uirouter/react": "npm:^1.0.7"
@@ -16530,7 +16529,6 @@ __metadata:
     react-select: "npm:^5.10.0"
     react-use: "npm:^17.6.0"
     react-window: "npm:^1.8.11"
-    react-window-infinite-loader: "npm:^1.0.10"
     read-excel-file: "npm:^7.0.1"
     redux: "npm:^4.2.1"
     redux-mock-store: "npm:^1.2.3"

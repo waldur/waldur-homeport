@@ -16,12 +16,10 @@ export const BaseList: FunctionComponent<{
   linkState,
 }) => {
   return (
-    <div className="scrollbar">
-      <div className="list-group">
+    <div className="h-full overflow-y-auto">
+      <div className="flex flex-col pb-8">
         {items.length === 0 ? (
-          <div className="list-group-item">
-            <EmptyPlaceholder />
-          </div>
+          <EmptyPlaceholder />
         ) : (
           items.map((item) => (
             <ItemComponent

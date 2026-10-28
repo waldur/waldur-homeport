@@ -149,10 +149,6 @@ export const PARTIALS = [
     scss: "@import 'config'; @import 'custom/landing';",
   },
   {
-    name: 'custom/marketplaces-selector',
-    scss: "@import 'config'; @import 'custom/marketplaces-selector';",
-  },
-  {
     name: 'custom/table',
     scss: "@import 'config'; @import 'custom/table';",
   },
