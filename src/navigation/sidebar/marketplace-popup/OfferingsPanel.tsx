@@ -70,7 +70,7 @@ const OfferingListItem: FunctionComponent<{
         <div
           data-uuid={item.uuid}
           className={classNames(
-            'relative block py-[1.05rem] ps-7 pe-6 border-0 transition-colors',
+            'list-group-item relative block py-[1.05rem] ps-7 pe-6 border-0 transition-colors',
             isPaused
               ? 'bg-secondary opacity-50 cursor-not-allowed'
               : isSelected
@@ -289,7 +289,7 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
   );
 
   return (
-    <div className="w-full lg:w-1/2 lg:basis-1/2">
+    <div className="offering-listing w-full lg:w-1/2 lg:basis-1/2">
       <button
         type="button"
         className="flex lg:hidden items-center gap-2 text-anchor font-medium p-1.5 ms-4 my-1.5"

@@ -212,6 +212,8 @@ const UNKNOWN_CLASS_HOOKS = [
   // react-select's BEM names, kept by waldur-ui's Select (tailwindStyles.ts)
   // for tests/components/select.py and a few stylesheets.
   '^metronic-select(?:-container|__[\\w-]+)$',
+  // Add Resource dialog selectors in waldur-integration-testing (tests/pages/resources/add_resource_dialog.py)
+  '^(?:category-listing|offering-listing|category-group|list-group-item)$',
 ];
 
 export default tseslint

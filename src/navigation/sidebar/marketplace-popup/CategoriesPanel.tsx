@@ -51,7 +51,7 @@ const CategoryListItem: FunctionComponent<
     <div
       data-uuid={item.uuid}
       className={classNames(
-        'relative block cursor-pointer py-[1.05rem] border-0 text-primary transition-colors',
+        'list-group-item relative block cursor-pointer py-[1.05rem] border-0 text-primary transition-colors',
         className || 'ps-7 pe-6',
         bgClass,
       )}
@@ -94,7 +94,7 @@ const CategoryGroupListItem: FunctionComponent<{
   const [open, setOpen] = useState(false);
 
   return item.categories ? (
-    <Collapsible open={open} onOpenChange={setOpen}>
+    <Collapsible open={open} onOpenChange={setOpen} className="category-group">
       <CategoryListItem
         item={item}
         onClick={() => setOpen(!open)}
@@ -137,7 +137,7 @@ export const CategoriesPanel: FunctionComponent<{
   return (
     <div
       className={classNames(
-        'w-full lg:w-1/2 lg:basis-1/2 lg:border-r lg:border-secondary',
+        'category-listing w-full lg:w-1/2 lg:basis-1/2 lg:border-r lg:border-secondary',
         selectedCategory && 'max-lg:hidden',
       )}
     >
