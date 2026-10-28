@@ -48,7 +48,9 @@ import { VStepperFormStepCard } from '@/wizard';
 import {
   formatSubnet,
   formatSubnetName,
+  formatSubnetOwner,
   getDefaultFloatingIps,
+  ownSubnetsFirst,
 } from '../utils';
 
 import { FormSecurityGroupsField } from './FormSecurityGroupsField';
@@ -191,6 +193,24 @@ export const SubnetValueContainer = (props) => {
   );
 };
 
+// The selected subnet shows its name (its CIDR is in the tooltip beside it),
+// the menu its CIDR as well. Who shares a subnet stays in view when a long name
+// is cut short.
+const renderSubnetOption =
+  (tenantUuid: string) =>
+  (subnet, { context }: { context: 'menu' | 'value' }) => {
+    const label =
+      context === 'menu' ? formatSubnet(subnet) : formatSubnetName(subnet);
+    const owner = formatSubnetOwner(subnet, tenantUuid);
+    if (!owner) return label;
+    return (
+      <span className="flex min-w-0 items-baseline gap-2">
+        <span className="truncate">{label}</span>
+        <span className="shrink-0 text-sm text-tertiary">{owner}</span>
+      </span>
+    );
+  };
+
 // Why no floating IP, new or existing, can go on a subnet; undefined when one
 // can. Both cases are refused by the API.
 const getFloatingIpRestriction = (subnet) => {
@@ -224,6 +244,7 @@ const renderNetworkRows = ({
   floatingIps,
   hasCustomIp,
   fipQuotaExhausted,
+  tenantUuid,
 }: any) => {
   const form = useForm();
   const availableNetworkItemsFilter = useCallback(
@@ -356,7 +377,8 @@ const renderNetworkRows = ({
                     required={true}
                     placeholder={translate('Select subnet')}
                     getOptionValue={(option) => option.url}
-                    getOptionLabel={formatSubnetName}
+                    getOptionLabel={formatSubnet}
+                    formatOptionLabel={renderSubnetOption(tenantUuid)}
                     noUpdateOnBlur
                     spaceless
                     components={{ ValueContainer: SubnetValueContainer }}
@@ -496,7 +518,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
           }),
         ),
       ]).then(([subnets, floatingIps]) => ({
-        subnets,
+        subnets: ownSubnetsFirst(subnets, props.offering.scope_uuid),
         floatingIps,
       }));
     },
@@ -595,6 +617,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
           component={renderNetworkRows}
           hasCustomIp={customIpEnabled}
           fipQuotaExhausted={fipQuotaExhausted}
+          tenantUuid={props.offering.scope_uuid}
           {...data}
         />
       </FormField>

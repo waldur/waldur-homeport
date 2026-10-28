@@ -76431,6 +76431,16 @@
       "feature_area": "lifecycle"
     }
   },
+  "shared by provider": {},
+  "shared by {tenant}": {
+    "context": {
+      "variables": {
+        "tenant": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "single {brace}": {
     "context": {
       "variables": {

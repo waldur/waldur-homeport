@@ -4,6 +4,8 @@ import {
   formatAddressList,
   formatSubnet,
   formatSubnetName,
+  formatSubnetOwner,
+  ownSubnetsFirst,
   validateOpenstackInstanceName,
 } from './utils';
 
@@ -89,6 +91,59 @@ describe('formatSubnet', () => {
 
   it('shows only the CIDR of a nameless subnet', () => {
     expect(formatSubnet({ name: '', cidr: '10.0.0.0/24' })).toBe('10.0.0.0/24');
+  });
+});
+
+describe('formatSubnetOwner', () => {
+  const tenantUrl = (uuid: string) =>
+    `https://example.com/api/openstack-tenants/${uuid}/`;
+
+  it('says nothing for a subnet of the tenant itself', () => {
+    expect(
+      formatSubnetOwner(
+        { tenant: tenantUrl('t1'), tenant_is_managed: true },
+        't1',
+      ),
+    ).toBeUndefined();
+  });
+
+  it('names the provider for a subnet of a network it shares', () => {
+    expect(
+      formatSubnetOwner(
+        { tenant: tenantUrl('admin'), tenant_is_managed: false },
+        't1',
+      ),
+    ).toBe('shared by provider');
+  });
+
+  it('names the tenant that shares the subnet', () => {
+    expect(
+      formatSubnetOwner(
+        {
+          tenant: tenantUrl('t2'),
+          tenant_name: 'research',
+          tenant_is_managed: true,
+        },
+        't1',
+      ),
+    ).toBe('shared by research');
+  });
+});
+
+describe('ownSubnetsFirst', () => {
+  const tenantUrl = (uuid: string) =>
+    `https://example.com/api/openstack-tenants/${uuid}/`;
+
+  it('lists the tenant own subnets first, each group in its own order', () => {
+    const sharedA = { name: 'shared-a', tenant: tenantUrl('provider') };
+    const own = { name: 'own', tenant: tenantUrl('t1') };
+    const sharedB = { name: 'shared-b', tenant: tenantUrl('other') };
+
+    expect(ownSubnetsFirst([sharedA, own, sharedB], 't1')).toEqual([
+      own,
+      sharedA,
+      sharedB,
+    ]);
   });
 });
 

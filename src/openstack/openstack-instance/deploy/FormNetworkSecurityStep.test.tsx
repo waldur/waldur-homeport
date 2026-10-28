@@ -11,6 +11,8 @@ import {
 import { renderWithProviders } from '@/test/harness';
 import { mockListResponse } from '@/test/utils';
 
+import { formatSubnet } from '../utils';
+
 import { FormNetworkSecurityStep } from './FormNetworkSecurityStep';
 
 vi.mock('./utils', () => ({
@@ -129,6 +131,61 @@ describe('FormNetworkSecurityStep — auto-seed first network row', () => {
     });
 
     expect(screen.getByText(SUBNET.name)).toBeInTheDocument();
+  });
+
+  // The first row is the instance's first interface; a provider network
+  // imported after the tenant's own subnet is listed before it.
+  it('seeds the tenant own subnet before one shared by the provider', async () => {
+    const shared = {
+      ...SUBNET_V6,
+      tenant: 'https://example.com/api/openstack-tenants/provider/',
+      tenant_is_managed: false,
+    };
+    const own = {
+      ...SUBNET,
+      tenant: 'https://example.com/api/openstack-tenants/tenant-1/',
+      tenant_is_managed: true,
+    };
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([shared, own]),
+    );
+
+    const { getValues } = renderStep();
+
+    await waitFor(() => {
+      expect(getValues()?.attributes?.networks?.[0]?.subnet?.uuid).toBe(
+        own.uuid,
+      );
+    });
+  });
+
+  it('marks a subnet the provider shares in the subnet menu', async () => {
+    const shared = {
+      ...SUBNET_V6,
+      tenant: 'https://example.com/api/openstack-tenants/provider/',
+      tenant_is_managed: false,
+    };
+    const own = {
+      ...SUBNET,
+      tenant: 'https://example.com/api/openstack-tenants/tenant-1/',
+      tenant_is_managed: true,
+    };
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([own, shared]),
+    );
+    const user = userEvent.setup();
+    renderStep();
+
+    await screen.findByText(own.name);
+    await user.click(screen.getByRole('combobox', { name: /Subnet/ }));
+
+    const option = await waitFor(() => {
+      const found = findOption(/subnet-v6/);
+      expect(found).toBeDefined();
+      return found;
+    });
+    expect(option.textContent).toContain(formatSubnet(shared));
+    expect(option.textContent).toContain('shared by provider');
   });
 
   it('does not seed when the tenant has no subnets', async () => {
@@ -302,7 +359,7 @@ describe('FormNetworkSecurityStep — auto-seed first network row', () => {
     await screen.findByText(SUBNET.name);
 
     await user.click(screen.getByRole('combobox', { name: /Subnet/ }));
-    await user.click(await screen.findByText(SUBNET_UNROUTED.name));
+    await user.click(await screen.findByText(formatSubnet(SUBNET_UNROUTED)));
 
     await waitFor(() => {
       const [row] = getValues().attributes.networks;
