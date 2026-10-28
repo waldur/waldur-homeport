@@ -33,6 +33,11 @@ Removing or renaming a hook below breaks that suite without failing anything in 
 | A role picker option                       | `get_by_role("option", name=…)`, on the page, not scoped to the row                                        |
 | Sign-in callback error                     | the `"Login failed"` heading and its parent                                                                |
 | Provider offering page body                | `[data-testid="provider-offering"]`                                                                        |
+| Marketplace dialog: category listing       | `[data-testid="category-listing"]`                                                                         |
+| Marketplace dialog: category item          | `[data-testid="category-item"]`                                                                            |
+| Marketplace dialog: category group         | `[data-testid="category-group"]`                                                                           |
+| Marketplace dialog: offering listing       | `[data-testid="offering-listing"]`                                                                         |
+| Marketplace dialog: offering item          | `[data-testid="offering-item"]`                                                                            |
 | Team chat: the open conversation           | `[data-testid="team-chat-conversation"]`                                                                   |
 | A toast                                    | `[data-slot="toast"][data-variant="{status}"]`                                                             |
 | A date field                               | `[data-slot="date-picker-input"]` (`DATE_INPUT`)                                                           |

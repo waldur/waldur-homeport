@@ -36,6 +36,12 @@ describe('CategoriesPanel', () => {
     expect(screen.getByRole('button', { name: /Storage/ })).toHaveFocus();
   });
 
+  it('renders test IDs for integration tests', () => {
+    renderPanel();
+    expect(screen.getByTestId('category-listing')).toBeInTheDocument();
+    expect(screen.getAllByTestId('category-item')).toHaveLength(2);
+  });
+
   it.each(['{Enter}', ' '])('selects a category with %s', async (key) => {
     const user = userEvent.setup();
     const { selectCategory } = renderPanel();
