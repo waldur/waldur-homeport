@@ -7,12 +7,14 @@
 # not outlive its premise.
 
 [[IgnoredVulns]]
-id = "GHSA-vfj7-8cjw-p6xm"
-# braces stack-exhaustion DoS via deeply nested patterns. The advisory affects
-# every version through 3.0.3 (last_affected, no fixed version) and 3.0.3 is the
-# latest published release as of 2026-10. The only occurrence is braces@3.0.3
-# via micromatch@4.0.8, pulled in solely by stylelint (directly and through
-# fast-glob/globby) — dev lint tooling that only expands glob patterns from
-# repo config, never untrusted input, and is not shipped in the bundle.
-# Re-evaluate once braces publishes a patched release.
-reason = "No fixed braces release exists (<=3.0.3 affected). Only via micromatch in stylelint dev tooling; globs come from repo config, never untrusted input. Re-evaluate when braces ships a fix."
+id = "GHSA-gcqx-w48m-w2h4"
+# deepmerge prototype poisoning in mergeObject(). The advisory affects 4.2.0
+# through 4.3.1 (last_affected, no fixed version) and 4.3.1 is the latest
+# published release as of 2026-10. The only occurrence is deepmerge@4.3.1 as a
+# declared dependency of @svgr/plugin-svgo@8.1.0 (latest), the build-time SVG
+# optimizer behind vite-plugin-svgr. That package never imports it: its
+# dist/index.js requires only svgo and cosmiconfig, so the vulnerable code is
+# never loaded, and nothing from it reaches the bundle.
+# Re-evaluate when deepmerge publishes a patched release, or if anything starts
+# importing deepmerge (`yarn why deepmerge` lists more than @svgr/plugin-svgo).
+reason = "No fixed deepmerge release exists (4.2.0-4.3.1 affected). Only a declared but never-imported dependency of @svgr/plugin-svgo build tooling; not loaded, not bundled. Re-evaluate when deepmerge ships a fix or gains another dependent."
