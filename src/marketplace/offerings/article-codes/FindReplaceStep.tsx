@@ -84,8 +84,8 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
-      <div className="row">
-        <div className="col-sm-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
+        <div>
           <StringGroup
             name="search"
             placeholder={translate('Substring to find...')}
@@ -94,7 +94,7 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
             required
           />
         </div>
-        <div className="col-sm-6">
+        <div>
           <StringGroup
             name="replace"
             placeholder={translate('Replacement...')}
@@ -120,8 +120,8 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
         getOptionValue={(option) => option.uuid}
         isClearable
       />
-      <div className="row">
-        <div className="col-sm-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
+        <div>
           <SelectGroup
             label={translate('Offering state')}
             placeholder={translate('All states')}
@@ -132,7 +132,7 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
             isClearable
           />
         </div>
-        <div className="col-sm-6">
+        <div>
           <StringGroup
             name="offering_name"
             placeholder={translate('Filter by name...')}

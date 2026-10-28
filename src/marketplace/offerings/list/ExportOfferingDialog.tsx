@@ -51,8 +51,8 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
               )}
             </p>
 
-            <div className="row">
-              <div className="col-md-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+              <div>
                 <h6>{translate('Core Components')}</h6>
 
                 <BooleanGroup
@@ -100,7 +100,7 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
                 />
               </div>
 
-              <div className="col-md-6">
+              <div>
                 <h6>{translate('Advanced Options')}</h6>
 
                 <BooleanGroup

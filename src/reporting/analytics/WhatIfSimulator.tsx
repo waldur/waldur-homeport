@@ -7,7 +7,6 @@ import {
 } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useCallback } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import {
   BaseButton,
@@ -155,9 +154,9 @@ const ResultRow: FC<{ result: SimulationResult }> = ({ result }) => {
   const isNegative = result.change < 0;
 
   return (
-    <div className="row items-center py-2.5">
+    <div className="grid grid-cols-12 gap-x-5 items-center py-2.5">
       {/* Column 1: Label */}
-      <div className="col-4">
+      <div className="col-span-4">
         <span>{result.label}</span>
         {result.unit && (
           <span className="text-quaternary ms-1">({result.unit})</span>
@@ -165,7 +164,7 @@ const ResultRow: FC<{ result: SimulationResult }> = ({ result }) => {
       </div>
 
       {/* Column 2: Values */}
-      <div className="col-5 flex items-center gap-1.5 text-quaternary">
+      <div className="col-span-5 flex items-center gap-1.5 text-quaternary">
         <span>{result.originalValue.toLocaleString()}</span>
         <span>&rarr;</span>
         <span className="text-primary">
@@ -174,7 +173,7 @@ const ResultRow: FC<{ result: SimulationResult }> = ({ result }) => {
       </div>
 
       {/* Column 3: Change */}
-      <div className="col-3 text-end">
+      <div className="col-span-3 text-end">
         {(isPositive || isNegative) && (
           <span
             className={classNames(
@@ -226,8 +225,8 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
         </h6>
       </div>
 
-      <Row>
-        <Col>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div>
           {/* Parameter inputs */}
           {params.map((param) => (
             <FormField key={param.id} className="mb-2.5">
@@ -242,8 +241,8 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
               />
             </FormField>
           ))}
-        </Col>
-        <Col>
+        </div>
+        <div>
           {/* Results */}
           {results.length > 0 && (
             <>
@@ -261,8 +260,8 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
               noAction
             />
           )}
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 };

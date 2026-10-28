@@ -89,8 +89,7 @@ export const UserPendingActionsList: FC<OwnProps> = () => {
       verboseName={translate('Pending actions')}
       fullWidth
       gridItem={GridItemWithRefetch}
-      gridSize={{ xs: 12 }}
-      gridSpace={0}
+      gridClassName="gap-0"
       initialMode="grid"
       bodyClassName="pt-0"
       minHeight="auto"

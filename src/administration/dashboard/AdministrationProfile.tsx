@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { usersList, versionRetrieve } from 'waldur-js-client';
 
 import { FormField, FormLabel } from 'waldur-ui';
@@ -102,8 +102,8 @@ export const AdministrationProfile = ({
   return (
     <Card className="card-bordered mb-4">
       <Card.Body>
-        <Row>
-          <Col xs="auto" className="mb-3">
+        <div className="flex flex-wrap gap-x-5">
+          <div className="flex-none mb-3">
             <DashboardHeroLogo
               logo={image}
               logoAlt={ENV.plugins.WALDUR_CORE.SITE_NAME}
@@ -112,64 +112,61 @@ export const AdministrationProfile = ({
               logoTopClass={healthStatus.className}
               logoBottomClass="bg-neutral-subtle text-neutral"
             />
-          </Col>
-          <Col>
-            <Row className="my-5 md:mt-0">
-              <Col>
-                <h2>{ENV.plugins.WALDUR_CORE.SITE_NAME}</h2>
-                <div className="flex items-center self-stretch gap-5 text-quaternary">
-                  {version?.version && (
-                    <span>
-                      {translate('Version')}&nbsp;{version.version}
-                    </span>
-                  )}
-                  {!supportOnly && website && <span>{website}</span>}
-                  {supportOnly && email && <span>{email}</span>}
-                  {supportOnly && phone && <span>{phone}</span>}
-                </div>
-              </Col>
-              <Col xs="auto" />
-            </Row>
-            <Row>
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="my-5 md:mt-0">
+              <h2>{ENV.plugins.WALDUR_CORE.SITE_NAME}</h2>
+              <div className="flex items-center self-stretch gap-5 text-quaternary">
+                {version?.version && (
+                  <span>
+                    {translate('Version')}&nbsp;{version.version}
+                  </span>
+                )}
+                {!supportOnly && website && <span>{website}</span>}
+                {supportOnly && email && <span>{email}</span>}
+                {supportOnly && phone && <span>{phone}</span>}
+              </div>
+            </div>
+            <div>
               {loading ? (
                 <LoadingSpinner />
               ) : (
-                <Col xs={12}>
+                <div>
                   {!supportOnly && staff.options.length ? (
-                    <FormField as={Row} className="mb-1">
-                      <FormLabel className="col-auto mb-0 py-[10px]">
+                    <FormField className="flex flex-wrap gap-x-5 mb-1">
+                      <FormLabel className="flex-none mb-0 py-[10px]">
                         {translate('Staff')}:
                       </FormLabel>
-                      <Col>
+                      <div className="flex-1 min-w-0">
                         <SymbolsGroup
                           items={staff.options}
                           max={6}
                           length={staff.totalItems}
                           onClick={() => goToUsers(true)}
                         />
-                      </Col>
+                      </div>
                     </FormField>
                   ) : null}
                   {supports.options.length ? (
-                    <FormField as={Row} className="mb-1">
-                      <FormLabel className="col-auto mb-0 py-[10px]">
+                    <FormField className="flex flex-wrap gap-x-5 mb-1">
+                      <FormLabel className="flex-none mb-0 py-[10px]">
                         {translate('Support')}:
                       </FormLabel>
-                      <Col>
+                      <div className="flex-1 min-w-0">
                         <SymbolsGroup
                           items={supports.options}
                           max={6}
                           length={supports.totalItems}
                           onClick={() => goToUsers(false, true)}
                         />
-                      </Col>
+                      </div>
                     </FormField>
                   ) : null}
-                </Col>
+                </div>
               )}
-            </Row>
-          </Col>
-        </Row>
+            </div>
+          </div>
+        </div>
       </Card.Body>
     </Card>
   );

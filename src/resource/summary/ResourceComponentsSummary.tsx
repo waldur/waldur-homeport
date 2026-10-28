@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import {
   marketplaceProviderOfferingsRetrieve,
   marketplaceResourcesOfferingRetrieve,
@@ -73,15 +72,15 @@ export const ResourceComponentsSummary: FC<ResourceComponentsSummaryProps> = ({
   }
 
   return (
-    <Row className="field-row mb-1">
+    <div className="field-row grid grid-cols-6 gap-x-5 mb-1">
       {resolvePlanComponents(
         offering.components,
         findResourcePlan(offering.plans, resource.plan_uuid),
       ).map((component) => (
-        <Col key={component.type} xs={2}>
+        <div key={component.type}>
           <ResourceComponentItem resource={resource} component={component} />
-        </Col>
+        </div>
       ))}
-    </Row>
+    </div>
   );
 };

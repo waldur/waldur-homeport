@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 
@@ -18,7 +17,10 @@ export const QuestionGroup: React.FC<{
     <>
       <GroupHeader title={title || translate('Configuration options')} />
       {groups.map((group, groupIndex) => (
-        <Row key={groupIndex}>
+        <div
+          key={groupIndex}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-x-5"
+        >
           {group.map((question) => (
             <QuestionItem
               key={question.variable}
@@ -26,7 +28,7 @@ export const QuestionGroup: React.FC<{
               parentName={parentName}
             />
           ))}
-        </Row>
+        </div>
       ))}
     </>
   );

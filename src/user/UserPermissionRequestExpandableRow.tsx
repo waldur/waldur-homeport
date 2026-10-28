@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -12,8 +11,8 @@ export const UserPermissionRequestExpandableRow: FC<{
   row;
 }> = ({ row: permissionRequest }) => (
   <ExpandableContainer>
-    <Row>
-      <Col md={7} lg={12} xl={7} xxl={6}>
+    <div className="grid grid-cols-12 gap-x-5">
+      <div className="col-span-12 md:col-span-7 lg:col-span-12 xl:col-span-7 2xl:col-span-6">
         <Field
           label={translate('Role')}
           value={<RoleField row={permissionRequest} />}
@@ -55,8 +54,8 @@ export const UserPermissionRequestExpandableRow: FC<{
             valueCol={7}
           />
         )}
-      </Col>
-      <Col md={5} lg={12} xl={5} xxl={6}>
+      </div>
+      <div className="col-span-12 md:col-span-5 lg:col-span-12 xl:col-span-5 2xl:col-span-6">
         <Field
           label={translate('Reviewed at')}
           value={
@@ -79,7 +78,7 @@ export const UserPermissionRequestExpandableRow: FC<{
           labelCol={4}
           valueCol={8}
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   </ExpandableContainer>
 );

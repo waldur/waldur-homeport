@@ -182,7 +182,7 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = ({
       columns={CallColumns}
       initialMode={props.initialMode ? props.initialMode : 'table'}
       gridItem={({ row }) => <CallCard call={row} />}
-      gridSize={{ lg: 6, xl: 4 }}
+      gridClassName="lg:grid-cols-2 xl:grid-cols-3"
       hoverShadow={{ grid: false }}
       verboseName={translate('Public calls')}
       initialSorting={{ field: 'name', mode: 'desc' }}

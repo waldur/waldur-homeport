@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { capitalize } from 'es-toolkit/compat';
 import { useMemo } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
@@ -206,16 +206,16 @@ const ConfigurationTab = ({ data }) =>
   ) : null;
 
 const CredentialsTab = ({ data }) => (
-  <Row>
+  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-5">
     {SERVICE_DESK_PROVIDERS.map((serviceDeskProvider) => (
-      <Col key={serviceDeskProvider} xs={12} md={6} xl={4} className="mb-5">
+      <div key={serviceDeskProvider} className="mb-5">
         <ServiceDeskProviderCard
           serviceDeskProvider={serviceDeskProvider}
           initialValues={data}
         />
-      </Col>
+      </div>
     ))}
-  </Row>
+  </div>
 );
 
 export const AdministrationServiceDesk = () => {

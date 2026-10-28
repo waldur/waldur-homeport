@@ -1,7 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
 import { FC, useCallback, useEffect } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Field, Form, useForm, useFormState } from 'react-final-form';
 import {
   rolesCreate,
@@ -242,7 +241,7 @@ export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
               </>
             }
           >
-            <Row className="role-form__fields">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5 role-form__fields">
               {/*
                 Three fields across, each with a help icon, per the design.
                 The human-readable label lives in `description`; `name` is the
@@ -254,7 +253,7 @@ export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
                 be overwritten. Editing goes through the dedicated per-language
                 dialog instead.
               */}
-              <Col md={4}>
+              <div>
                 {isEdit ? (
                   <StringGroup
                     name="description"
@@ -281,8 +280,8 @@ export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
                     required
                   />
                 )}
-              </Col>
-              <Col md={4}>
+              </div>
+              <div>
                 <StringGroup
                   name="name"
                   label={translate('Code')}
@@ -299,8 +298,8 @@ export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
                   }
                   required
                 />
-              </Col>
-              <Col md={4}>
+              </div>
+              <div>
                 <SelectGroup
                   name="content_type"
                   validate={required}
@@ -311,8 +310,8 @@ export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
                   required
                   spaceless
                 />
-              </Col>
-            </Row>
+              </div>
+            </div>
             <SiteWidePermissionGuard />
             {values.content_type === 'global' && (
               <FormText className="mb-3">

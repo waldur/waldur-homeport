@@ -22,8 +22,8 @@ export const QuestionLikertFields: FC = () => (
       defaultValue={5}
       space={4}
     />
-    <div className="row">
-      <div className="col-sm-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
+      <div>
         <StringGroup
           name="likert_low_label"
           placeholder={translate('Strongly disagree')}
@@ -33,7 +33,7 @@ export const QuestionLikertFields: FC = () => (
           space={4}
         />
       </div>
-      <div className="col-sm-6">
+      <div>
         <StringGroup
           name="likert_high_label"
           placeholder={translate('Strongly agree')}

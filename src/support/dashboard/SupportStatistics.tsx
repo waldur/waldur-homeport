@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { Col, Row } from 'react-bootstrap';
 import { supportStatisticsRetrieve } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
@@ -30,44 +29,44 @@ export const SupportStatistics = () => {
   });
 
   return (
-    <Row>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5">
       {error && (
         <LoadingErred
           message={translate('Unable to load statistics data')}
           loadData={refetch}
-          className="mb-3"
+          className="col-span-full mb-3"
         />
       )}
       {data && (
         <>
-          <Col md={6} lg={4}>
+          <div>
             <StatisticsCard
               title={translate('Open issues')}
               value={data.open_issues_count}
               to={getIssueState(true)}
             />
-          </Col>
-          <Col md={6} lg={4}>
+          </div>
+          <div>
             <StatisticsCard
               title={translate('Closed issues (this month)')}
               value={data.closed_this_month_count}
               to={getIssueState(false)}
             />
-          </Col>
-          <Col md={6} lg={4}>
+          </div>
+          <div>
             <StatisticsCard
               title={translate('Recent broadcasts (this month)')}
               value={data.recent_broadcasts_count}
               to={{ state: 'support-broadcast' }}
             />
-          </Col>
+          </div>
         </>
       )}
       {isLoading && (
-        <Col md={6} lg={4}>
+        <div>
           <LoadingSpinner />
-        </Col>
+        </div>
       )}
-    </Row>
+    </div>
   );
 };

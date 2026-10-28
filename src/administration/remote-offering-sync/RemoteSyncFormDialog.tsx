@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Form, FormRenderProps } from 'react-final-form';
 import {
   marketplaceRemoteSynchronisationsCreate,
@@ -253,8 +252,8 @@ const RemoteSyncRenderer = ({
             className="overflow-auto max-h-[200px]"
           />
         ) : null}
-        <Row>
-          <Col xs={6}>
+        <div className="grid grid-cols-2 gap-x-5">
+          <div>
             <SelectGroup
               name="remote_organization"
               options={remoteCustomers}
@@ -265,8 +264,8 @@ const RemoteSyncRenderer = ({
               label={translate('Remote organization')}
               required
             />
-          </Col>
-          <Col xs={6}>
+          </div>
+          <div>
             <AsyncSelectGroup
               name="local_service_provider"
               label={translate('Local service provider')}
@@ -278,8 +277,8 @@ const RemoteSyncRenderer = ({
               getOptionLabel={(option) => option.customer_name}
               noOptionsMessage={() => translate('No providers')}
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
         <FormGroup label={translate('Category mapping rules')} required>
           <CategoryMappingRulesField remoteCategories={remoteCategories} />
         </FormGroup>

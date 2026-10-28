@@ -89,3 +89,75 @@ export const Default: Story = {
     </div>
   ),
 };
+
+export const Compact: Story = {
+  render: () => (
+    <div className="p-5 bg-[var(--page-bg)]">
+      <div className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] overflow-hidden">
+        <Table density="compact">
+          <TableHeader>
+            <TableRow>
+              <TableHead>Instance</TableHead>
+              <TableHead>Provider</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-right">Monthly Cost</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell className="font-medium">gpu-worker-node-01</TableCell>
+              <TableCell>OpenStack Cloud</TableCell>
+              <TableCell>
+                <Badge variant="success" size="sm" shape="pill" tone="outline">
+                  Active
+                </Badge>
+              </TableCell>
+              <TableCell className="text-right">85.00 EUR</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">database-primary</TableCell>
+              <TableCell>PostgreSQL Cluster</TableCell>
+              <TableCell>
+                <Badge variant="neutral" size="sm" shape="pill" tone="outline">
+                  Running
+                </Badge>
+              </TableCell>
+              <TableCell className="text-right">120.00 EUR</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+    </div>
+  ),
+};
+
+export const Spacious: Story = {
+  render: () => (
+    <div className="p-5 bg-[var(--page-bg)]">
+      <div className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] overflow-hidden">
+        <Table density="spacious">
+          <TableHeader>
+            <TableRow>
+              <TableHead>Instance</TableHead>
+              <TableHead>Provider</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-right">Monthly Cost</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell className="font-medium">gpu-worker-node-01</TableCell>
+              <TableCell>OpenStack Cloud</TableCell>
+              <TableCell>
+                <Badge variant="success" shape="pill" tone="outline">
+                  Active
+                </Badge>
+              </TableCell>
+              <TableCell className="text-right">85.00 EUR</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+    </div>
+  ),
+};

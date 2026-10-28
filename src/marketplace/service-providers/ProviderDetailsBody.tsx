@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 import { OfferingGrid } from '@/marketplace/common/OfferingGrid';
@@ -14,8 +13,8 @@ export const ProviderDetailsBody: FunctionComponent<{
   provider;
   offerings;
 }> = ({ provider, offerings }) => (
-  <Row>
-    <Col md={3}>
+  <div className="grid grid-cols-1 md:grid-cols-12 gap-x-5">
+    <div className="md:col-span-3">
       {provider.customer_image && (
         <div className="provider-description">
           <div className="provider-description__logo">
@@ -23,10 +22,10 @@ export const ProviderDetailsBody: FunctionComponent<{
           </div>
         </div>
       )}
-    </Col>
-    <Col md={9}>
+    </div>
+    <div className="md:col-span-9">
       <h2 className="font-bold mb-3">{provider.customer_name}</h2>
-      <Col sm={12}>
+      <div>
         <div className={PAGE_CONTAINER_BOUNDED_CLASSNAME}>
           {provider.customer_native_name && (
             <Field
@@ -41,11 +40,11 @@ export const ProviderDetailsBody: FunctionComponent<{
             />
           )}
         </div>
-      </Col>
+      </div>
 
       <hr />
       <h3 className="font-bold mb-2.5">{translate('Offerings')}:</h3>
       <OfferingGrid width={4} loading={false} loaded={true} items={offerings} />
-    </Col>
-  </Row>
+    </div>
+  </div>
 );

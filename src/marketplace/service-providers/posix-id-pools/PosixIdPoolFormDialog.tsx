@@ -202,8 +202,8 @@ const GroupRangeFields: FC<{ pool?: PosixIdPool; submitting: boolean }> = ({
         'Optional. Reserves GIDs for the one POSIX group each project gets at this service provider. Without it, project groups take GIDs from the GID range shared with users’ primary groups. Set it before enabling project groups in the account settings.',
       )}
     </p>
-    <div className="row">
-      <div className="col-sm-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
+      <div>
         <NumberGroup
           name="min_group_gid"
           label={translate('Minimum project group GID')}
@@ -211,7 +211,7 @@ const GroupRangeFields: FC<{ pool?: PosixIdPool; submitting: boolean }> = ({
           disabled={submitting}
         />
       </div>
-      <div className="col-sm-6">
+      <div>
         <NumberGroup
           name="max_group_gid"
           label={translate('Maximum project group GID')}
@@ -381,8 +381,8 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
                   'Define at least one range. Leave a range empty to source it externally — for example UIDs from an OIDC claim while GIDs are allocated by Waldur.',
                 )}
               </p>
-              <div className="row">
-                <div className="col-sm-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
+                <div>
                   <NumberGroup
                     name="min_uid"
                     label={translate('Minimum UID')}
@@ -392,7 +392,7 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
                     disabled={submitting}
                   />
                 </div>
-                <div className="col-sm-6">
+                <div>
                   <NumberGroup
                     name="max_uid"
                     label={translate('Maximum UID')}
@@ -401,8 +401,8 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
                   />
                 </div>
               </div>
-              <div className="row">
-                <div className="col-sm-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
+                <div>
                   <NumberGroup
                     name="min_gid"
                     label={translate('Minimum GID')}
@@ -412,7 +412,7 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
                     disabled={submitting}
                   />
                 </div>
-                <div className="col-sm-6">
+                <div>
                   <NumberGroup
                     name="max_gid"
                     label={translate('Maximum GID')}

@@ -72,10 +72,15 @@ node scripts/theme-snapshots.mjs capture storybook-static /tmp/vt/head
 node scripts/theme-snapshots.mjs compare /tmp/vt/base /tmp/vt/head /tmp/vt/report
 ```
 
-- `capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>]` writes
-  `<story-id>.<theme>.png`, full page, at a 1280×900 viewport. `--filter` matches story ids
+- `capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>] [--widths <px,…>] [--themes <light,dark>]`
+  writes `<story-id>.<theme>.png`, full page, at a 1280×900 viewport. `--filter` matches story ids
   (`--filter '^actions-'`). `--font` forces one font family everywhere, for comparing two builds
   that load different web fonts: the text then cannot differ, so colour changes stand out.
+- `--widths` captures each story once per viewport width instead, as
+  `<story-id>.<theme>.w<px>.png`. Use it for any layout change: `576,768,992,1200` are the `sm`,
+  `md`, `lg` and `xl` breakpoints, and a width below `sm` (`375`) is a phone. A layout that
+  breaks only at one breakpoint (a column that stops wrapping, a row squeezed on a phone) looks
+  fine at 1280px. `--themes light` skips the dark captures when the change cannot touch colour.
 - `compare <base-dir> <head-dir> <report-dir>` writes `report.json` (every pair: `same`,
   `changed` with `changedPixels`, `ratio` and `sizeChanged`, or `missing in head` / `new in head`)
   and, for each changed pair, a `base | head | changed pixels in red` PNG. It prints the changed

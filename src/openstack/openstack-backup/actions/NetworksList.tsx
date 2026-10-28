@@ -97,7 +97,7 @@ export const NetworksList: FC<NetworkChoices & { fields; values }> = ({
         <tbody>
           {fields.map((name, index) => (
             <tr key={name}>
-              <td className="ps-0 col-md-6">
+              <td className="ps-0 md:w-6/12">
                 <SubnetField
                   name={name}
                   subnets={subnets}
@@ -105,7 +105,7 @@ export const NetworksList: FC<NetworkChoices & { fields; values }> = ({
                   network={networks[index]}
                 />
               </td>
-              <td className="col-md-5">
+              <td className="md:w-5/12">
                 <FloatingIpField
                   name={name}
                   floatingIps={floatingIps}

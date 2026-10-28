@@ -29,7 +29,7 @@ import { useUser } from '@/workspace/hooks';
 import { CardStyleType } from '../common/cards/index';
 import { OfferingCard } from '../common/OfferingCard';
 import { useCardStyle } from '../landing/CardStyleContext';
-import { getOfferingGridSize } from '../landing/utils';
+import { getOfferingGridClassName } from '../landing/utils';
 import { buildOfferingsFilter } from '../offerings/admin/AdminOfferingsList';
 import { OFFERINGS_FILTER_FORM_ID } from '../offerings/constants';
 import { OfferingsListFilter } from '../offerings/list/OfferingsListFilter';
@@ -227,7 +227,7 @@ export const PublicOfferingsList: FunctionComponent<{
       columns={columns}
       verboseName={translate('offerings')}
       hasQuery={true}
-      gridSize={getOfferingGridSize(resolvedVariant)}
+      gridClassName={getOfferingGridClassName(resolvedVariant)}
       gridItem={({ row }) => (
         <OfferingCard
           offering={row}

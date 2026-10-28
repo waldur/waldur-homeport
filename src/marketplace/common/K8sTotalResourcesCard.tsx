@@ -38,7 +38,7 @@ const TotalClusterResourceItem = ({
     value={value}
     tooltip={tooltip}
     labelCol={12}
-    className="gy-8px w-[110px]"
+    className="gap-y-2 w-[110px]"
   />
 );
 

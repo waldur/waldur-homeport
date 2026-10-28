@@ -1,6 +1,14 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { formatCurrency } from '@/core/formatCurrency';
@@ -35,23 +43,29 @@ export const TotalLimitComponentsTable: FunctionComponent<
   );
 
   return (
-    <div className="table-responsive mb-3">
-      <Table className="table align-middle table-row-bordered text-sm gy-4">
-        <thead>
-          <tr className="align-middle">
-            <th className="col-sm-1">{translate('Component name')}</th>
-            <th className="col-sm-1">{translate('Unit')}</th>
-            <th className="col-md-2 col-sm-3">{translate('Quantity')}</th>
+    <div className="mb-3">
+      <Table density="normal">
+        <TableHeader>
+          <TableRow>
+            <TableHead className="sm:w-1/12">
+              {translate('Component name')}
+            </TableHead>
+            <TableHead className="sm:w-1/12">{translate('Unit')}</TableHead>
+            <TableHead className="sm:w-3/12 md:w-2/12">
+              {translate('Quantity')}
+            </TableHead>
             {!shouldConcealPrices && !props.hidePrices && (
-              <th>
+              <TableHead>
                 {translate('Price per unit')}
                 <PriceTooltip />
-              </th>
+              </TableHead>
             )}
-            {!props.hidePrices && <th>{translate('Subtotal')}</th>}
-          </tr>
-        </thead>
-        <tbody>
+            {!props.hidePrices && (
+              <TableHead>{translate('Subtotal')}</TableHead>
+            )}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {props.components.map((component, index) => {
             const validate = useMemo(
               () => getOfferingComponentValidator(component),
@@ -60,10 +74,14 @@ export const TotalLimitComponentsTable: FunctionComponent<
             const validateValue = composeValidators(...validate);
 
             return (
-              <tr key={index}>
-                <td>{component.name}</td>
-                <td>{renderFieldOrDash(component.measured_unit)}</td>
-                <td>
+              <TableRow key={index}>
+                <TableCell className="font-medium text-primary">
+                  {component.name}
+                </TableCell>
+                <TableCell>
+                  {renderFieldOrDash(component.measured_unit)}
+                </TableCell>
+                <TableCell>
                   {props.viewMode ? (
                     component.amount
                   ) : (
@@ -84,41 +102,43 @@ export const TotalLimitComponentsTable: FunctionComponent<
                       )}
                     </Field>
                   )}
-                </td>
+                </TableCell>
                 {!shouldConcealPrices && !props.hidePrices && (
-                  <td>
+                  <TableCell>
                     {formatCurrency(
                       component.price,
                       ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
                       4,
                     )}
-                  </td>
+                  </TableCell>
                 )}
                 {!props.hidePrices && (
-                  <td>
+                  <TableCell>
                     {formatCurrency(
                       component.subTotal,
                       ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
                       4,
                     )}
-                  </td>
+                  </TableCell>
                 )}
-              </tr>
+              </TableRow>
             );
           })}
           {!props.hidePrices && (
-            <tr>
-              <td colSpan={3}>{translate('Total')}</td>
-              <td>
+            <TableRow>
+              <TableCell colSpan={3} className="font-bold">
+                {translate('Total')}
+              </TableCell>
+              <TableCell className="font-bold">
                 {formatCurrency(
                   props.total,
                   ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
                   4,
                 )}
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           )}
-        </tbody>
+        </TableBody>
       </Table>
     </div>
   );

@@ -2,7 +2,16 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { marketplaceSlurmPeriodicUsagePoliciesPreviewImpact } from 'waldur-js-client';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -162,37 +171,30 @@ const PreviewCommands: FC<{ config: SlurmPolicyConfig }> = ({ config }) => {
   }
 
   return (
-    <div className="table-responsive">
-      <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
-        <thead>
-          <tr className="text-start text-quaternary font-medium text-xs uppercase">
-            <th>{translate('Type')}</th>
-            <th>{translate('Description')}</th>
-            <th>{translate('Shell command')}</th>
-          </tr>
-        </thead>
-        <tbody className="text-tertiary">
-          {data.preview_commands.map((cmd, idx) => (
-            <tr key={idx}>
-              <td>
-                <Badge
-                  variant="secondary"
-                  size="sm"
-                  shape="pill"
-                  tone="outline"
-                >
-                  {cmd.type}
-                </Badge>
-              </td>
-              <td>{cmd.description}</td>
-              <td>
-                <code className="text-xs">{cmd.command}</code>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <Table density="normal">
+      <TableHeader>
+        <TableRow>
+          <TableHead>{translate('Type')}</TableHead>
+          <TableHead>{translate('Description')}</TableHead>
+          <TableHead>{translate('Shell command')}</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {data.preview_commands.map((cmd, idx) => (
+          <TableRow key={idx}>
+            <TableCell>
+              <Badge variant="secondary" size="sm" shape="pill" tone="outline">
+                {cmd.type}
+              </Badge>
+            </TableCell>
+            <TableCell className="text-tertiary">{cmd.description}</TableCell>
+            <TableCell>
+              <code className="text-xs">{cmd.command}</code>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 };
 
@@ -318,41 +320,41 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
             )}
           </p>
           {planAllocations.length > 0 ? (
-            <div className="table-responsive">
-              <table className="table align-middle table-row-bordered text-xs gy-3 gx-5">
-                <thead>
-                  <tr className="text-start text-quaternary font-medium text-xs uppercase">
-                    <th>{translate('Plan')}</th>
-                    <th>{translate('Component')}</th>
-                    <th>{translate('Type')}</th>
-                    <th>{translate('Amount')}</th>
-                  </tr>
-                </thead>
-                <tbody className="text-tertiary">
-                  {planAllocations.flatMap((plan) =>
-                    plan.components.map((comp, idx) => (
-                      <tr key={`${plan.planName}-${idx}`}>
-                        {idx === 0 ? (
-                          <td
-                            className="font-medium text-primary"
-                            rowSpan={plan.components.length}
-                          >
-                            {plan.planName}
-                          </td>
-                        ) : null}
-                        <td>{comp.name}</td>
-                        <td>
-                          <code className="text-xs">{comp.type}</code>
-                        </td>
-                        <td>
-                          {comp.amount.toLocaleString()} {comp.measuredUnit}
-                        </td>
-                      </tr>
-                    )),
-                  )}
-                </tbody>
-              </table>
-            </div>
+            <Table density="compact">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{translate('Plan')}</TableHead>
+                  <TableHead>{translate('Component')}</TableHead>
+                  <TableHead>{translate('Type')}</TableHead>
+                  <TableHead>{translate('Amount')}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {planAllocations.flatMap((plan) =>
+                  plan.components.map((comp, idx) => (
+                    <TableRow key={`${plan.planName}-${idx}`}>
+                      {idx === 0 ? (
+                        <TableCell
+                          className="font-medium"
+                          rowSpan={plan.components.length}
+                        >
+                          {plan.planName}
+                        </TableCell>
+                      ) : null}
+                      <TableCell className="text-tertiary">
+                        {comp.name}
+                      </TableCell>
+                      <TableCell>
+                        <code className="text-xs">{comp.type}</code>
+                      </TableCell>
+                      <TableCell className="text-tertiary">
+                        {comp.amount.toLocaleString()} {comp.measuredUnit}
+                      </TableCell>
+                    </TableRow>
+                  )),
+                )}
+              </TableBody>
+            </Table>
           ) : (
             <p className="text-quaternary italic">
               {translate('No plans with components found for this offering.')}
@@ -404,90 +406,87 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
               },
             )}
           </p>
-          <div className="table-responsive">
-            <table className="table align-middle table-row-bordered text-xs gy-3 gx-5">
-              <tbody className="text-tertiary">
-                <tr>
-                  <td className="font-medium text-primary w-[250px]">
-                    {translate('Unused from previous period')}
-                  </td>
-                  <td>
-                    <code>
-                      max(0, {exBase} - {exPrevUsage}) = {exUnused.toFixed(0)}{' '}
-                      Nh
-                    </code>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('Carryover cap')}
-                  </td>
-                  <td>
-                    <code>
-                      {carryoverPct}% &times; {exBase} = {exCap.toFixed(0)} Nh
-                    </code>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('Carryover')}
-                  </td>
-                  <td>
-                    <code>
-                      min({exUnused.toFixed(0)}, {exCap.toFixed(0)}) ={' '}
-                      {exCarryover.toFixed(0)} Nh
-                    </code>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('Total allocation')}
-                  </td>
-                  <td>
-                    <code>
-                      {exBase} + {exCarryover.toFixed(0)} = {exTotal.toFixed(0)}{' '}
-                      Nh
-                    </code>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('Usage percentage')}
-                  </td>
-                  <td>
-                    <code>
-                      {exCurrentUsage} / {exTotal.toFixed(0)} &times; 100 ={' '}
-                      {exUsagePercent.toFixed(1)}%
-                    </code>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('Result')}
-                  </td>
-                  <td>
-                    {exUsagePercent < 80 ? (
-                      <Badge variant="success" shape="pill" tone="outline">
-                        {translate('No action')}
-                      </Badge>
-                    ) : exUsagePercent < 100 ? (
-                      <Badge variant="warning" shape="pill" tone="outline">
-                        {translate('Notification threshold')}
-                      </Badge>
-                    ) : exUsagePercent < gracePercent ? (
-                      <Badge variant="danger" shape="pill" tone="outline">
-                        {translate('Downscale threshold')}
-                      </Badge>
-                    ) : (
-                      <Badge variant="danger" shape="pill" tone="outline">
-                        {translate('Pause threshold')}
-                      </Badge>
-                    )}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <Table density="compact">
+            <TableBody>
+              <TableRow>
+                <TableCell className="font-medium w-[250px]">
+                  {translate('Unused from previous period')}
+                </TableCell>
+                <TableCell>
+                  <code>
+                    max(0, {exBase} - {exPrevUsage}) = {exUnused.toFixed(0)} Nh
+                  </code>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">
+                  {translate('Carryover cap')}
+                </TableCell>
+                <TableCell>
+                  <code>
+                    {carryoverPct}% &times; {exBase} = {exCap.toFixed(0)} Nh
+                  </code>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">
+                  {translate('Carryover')}
+                </TableCell>
+                <TableCell>
+                  <code>
+                    min({exUnused.toFixed(0)}, {exCap.toFixed(0)}) ={' '}
+                    {exCarryover.toFixed(0)} Nh
+                  </code>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">
+                  {translate('Total allocation')}
+                </TableCell>
+                <TableCell>
+                  <code>
+                    {exBase} + {exCarryover.toFixed(0)} = {exTotal.toFixed(0)}{' '}
+                    Nh
+                  </code>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">
+                  {translate('Usage percentage')}
+                </TableCell>
+                <TableCell>
+                  <code>
+                    {exCurrentUsage} / {exTotal.toFixed(0)} &times; 100 ={' '}
+                    {exUsagePercent.toFixed(1)}%
+                  </code>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">
+                  {translate('Result')}
+                </TableCell>
+                <TableCell>
+                  {exUsagePercent < 80 ? (
+                    <Badge variant="success" shape="pill" tone="outline">
+                      {translate('No action')}
+                    </Badge>
+                  ) : exUsagePercent < 100 ? (
+                    <Badge variant="warning" shape="pill" tone="outline">
+                      {translate('Notification threshold')}
+                    </Badge>
+                  ) : exUsagePercent < gracePercent ? (
+                    <Badge variant="danger" shape="pill" tone="outline">
+                      {translate('Downscale threshold')}
+                    </Badge>
+                  ) : (
+                    <Badge variant="danger" shape="pill" tone="outline">
+                      {translate('Pause threshold')}
+                    </Badge>
+                  )}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </section>
 
         {/* Section 4: Action thresholds */}
@@ -526,44 +525,46 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
               </>
             }
           />
-          <div className="table-responsive">
-            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
-              <thead>
-                <tr className="text-start text-quaternary font-medium text-xs uppercase">
-                  <th>{translate('Threshold')}</th>
-                  <th>{translate('Condition')}</th>
-                  <th>{translate('Action')}</th>
-                  <th>{translate('Status')}</th>
-                </tr>
-              </thead>
-              <tbody className="text-tertiary">
-                {thresholds.map((row) => {
-                  const isEnabled =
-                    row.setting === null || actions.includes(row.setting);
-                  return (
-                    <tr key={row.threshold}>
-                      <td className="font-medium text-primary">
-                        {row.threshold}
-                      </td>
-                      <td>{row.condition}</td>
-                      <td>{row.action}</td>
-                      <td>
-                        <Badge
-                          variant={isEnabled ? 'success' : 'secondary'}
-                          shape="pill"
-                          tone="outline"
-                        >
-                          {isEnabled
-                            ? translate('Enabled')
-                            : translate('Disabled')}
-                        </Badge>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          <Table density="normal">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Threshold')}</TableHead>
+                <TableHead>{translate('Condition')}</TableHead>
+                <TableHead>{translate('Action')}</TableHead>
+                <TableHead>{translate('Status')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {thresholds.map((row) => {
+                const isEnabled =
+                  row.setting === null || actions.includes(row.setting);
+                return (
+                  <TableRow key={row.threshold}>
+                    <TableCell className="font-medium">
+                      {row.threshold}
+                    </TableCell>
+                    <TableCell className="text-tertiary">
+                      {row.condition}
+                    </TableCell>
+                    <TableCell className="text-tertiary">
+                      {row.action}
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={isEnabled ? 'success' : 'secondary'}
+                        shape="pill"
+                        tone="outline"
+                      >
+                        {isEnabled
+                          ? translate('Enabled')
+                          : translate('Disabled')}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
         </section>
 
         {/* Section 5: SLURM commands generated */}
@@ -603,90 +604,86 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
               'When multiple Waldur offerings target the same SLURM cluster, each offering maps to a separate SLURM account. SLURM uses a hierarchical Fair Tree algorithm where usage propagates up the account tree.',
             )}
           </p>
-          <div className="table-responsive">
-            <table className="table align-middle table-row-bordered text-xs gy-3 gx-5">
-              <thead>
-                <tr className="text-start text-quaternary font-medium text-xs uppercase">
-                  <th>{translate('Aspect')}</th>
-                  <th>{translate('Behavior')}</th>
-                </tr>
-              </thead>
-              <tbody className="text-tertiary">
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('Fairshare')}
-                  </td>
-                  <td>
-                    {translate(
-                      'Each offering sets fairshare independently per account. SLURM calculates level_fs = shares_norm / usage_efctv within sibling accounts under the same parent.',
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('TRES limits')}
-                  </td>
-                  <td>
-                    {translate(
-                      '{limitType} is enforced per account at job submission time. Each offering controls its own account limits independently.',
-                      { limitType },
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('QoS')}
-                  </td>
-                  <td>
-                    {translate(
-                      'QoS levels (normal/slowdown/blocked) are set per account. Different offerings can have different QoS states simultaneously.',
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('Usage tracking')}
-                  </td>
-                  <td>
-                    {translate(
-                      'SLURM raw usage is per-account but propagates to parent accounts. RawUsage=0 resets only the target account.',
-                    )}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <Table density="compact">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Aspect')}</TableHead>
+                <TableHead>{translate('Behavior')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell className="font-medium">
+                  {translate('Fairshare')}
+                </TableCell>
+                <TableCell className="text-tertiary">
+                  {translate(
+                    'Each offering sets fairshare independently per account. SLURM calculates level_fs = shares_norm / usage_efctv within sibling accounts under the same parent.',
+                  )}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">
+                  {translate('TRES limits')}
+                </TableCell>
+                <TableCell className="text-tertiary">
+                  {translate(
+                    '{limitType} is enforced per account at job submission time. Each offering controls its own account limits independently.',
+                    { limitType },
+                  )}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">
+                  {translate('QoS')}
+                </TableCell>
+                <TableCell className="text-tertiary">
+                  {translate(
+                    'QoS levels (normal/slowdown/blocked) are set per account. Different offerings can have different QoS states simultaneously.',
+                  )}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">
+                  {translate('Usage tracking')}
+                </TableCell>
+                <TableCell className="text-tertiary">
+                  {translate(
+                    'SLURM raw usage is per-account but propagates to parent accounts. RawUsage=0 resets only the target account.',
+                  )}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </section>
 
         {/* Section 8: Current configuration summary */}
         <section>
           <h4 className="mb-3">{translate('Current configuration summary')}</h4>
-          <div className="table-responsive">
-            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
-              <tbody className="text-tertiary">
-                {configSummary.map((row) => (
-                  <tr key={row.label}>
-                    <td className="font-medium text-primary w-[200px]">
-                      {row.label}
-                    </td>
-                    <td>
-                      {'enabled' in row ? (
-                        <Badge
-                          variant={row.enabled ? 'success' : 'secondary'}
-                          shape="pill"
-                          tone="outline"
-                        >
-                          {row.value}
-                        </Badge>
-                      ) : (
-                        row.value
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Table density="normal">
+            <TableBody>
+              {configSummary.map((row) => (
+                <TableRow key={row.label}>
+                  <TableCell className="font-medium w-[200px]">
+                    {row.label}
+                  </TableCell>
+                  <TableCell className="text-tertiary">
+                    {'enabled' in row ? (
+                      <Badge
+                        variant={row.enabled ? 'success' : 'secondary'}
+                        shape="pill"
+                        tone="outline"
+                      >
+                        {row.value}
+                      </Badge>
+                    ) : (
+                      row.value
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </section>
       </div>
     </ModalDialog>

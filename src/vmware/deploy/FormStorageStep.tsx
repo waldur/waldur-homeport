@@ -42,8 +42,8 @@ const StaticDiskField = (props) => {
             <StaticField
               label={translate('Storage size in GiB')}
               value={fieldProps.input.value}
-              labelClass="col-sm-3"
-              controlClass="col-sm-9"
+              labelClass="sm:w-3/12"
+              controlClass="sm:w-9/12"
             />
 
             <FieldError error={fieldProps.meta.error} />

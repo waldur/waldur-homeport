@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { NestedQoS, Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -23,8 +22,8 @@ export const PublicOfferingQoS: FunctionComponent<PublicOfferingQoSProps> = ({
   });
 
   return (
-    <Row className="mb-8" id="qos-profiles">
-      <Col sm={12} md>
+    <div className="mb-8" id="qos-profiles">
+      <div>
         <Table<NestedQoS>
           {...tableProps}
           columns={[
@@ -50,7 +49,7 @@ export const PublicOfferingQoS: FunctionComponent<PublicOfferingQoSProps> = ({
           enableExport={false}
           expandableRow={OfferingQoSExpandableRow}
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

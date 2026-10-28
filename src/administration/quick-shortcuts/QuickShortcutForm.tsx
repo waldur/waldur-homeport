@@ -1,4 +1,3 @@
-import { Col, Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import {
   externalLinksCreate,
@@ -93,8 +92,8 @@ export const QuickShortcutForm = ({ resolve }) => {
               description={translate('Minimum image size of 250x250 pixels')}
             />
 
-            <Row>
-              <Col md={6}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+              <div>
                 <StringGroup
                   name="name"
                   label={translate('Name')}
@@ -102,8 +101,8 @@ export const QuickShortcutForm = ({ resolve }) => {
                   validate={required}
                   placeholder={translate('Type a name')}
                 />
-              </Col>
-              <Col md={6}>
+              </div>
+              <div>
                 <StringGroup
                   name="link"
                   label={translate('Link')}
@@ -111,8 +110,8 @@ export const QuickShortcutForm = ({ resolve }) => {
                   validate={composeValidators(required, url)}
                   placeholder={translate('Add a link')}
                 />
-              </Col>
-            </Row>
+              </div>
+            </div>
             <TextGroup
               name="description"
               placeholder={translate('Enter a description')}

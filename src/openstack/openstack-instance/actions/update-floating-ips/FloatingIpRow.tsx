@@ -23,14 +23,14 @@ export const FloatingIpRow = ({ name, subnets, floatingIps, onRemove }) => {
   }, []);
   return (
     <tr>
-      <td className="col-md-6 ps-0">
+      <td className="md:w-6/12 ps-0">
         {pair.address ? (
           <div className="btn-text-align">{pair.subnet_name}</div>
         ) : (
           <SelectField name={`${name}.subnet`} options={subnets} />
         )}
       </td>
-      <td className="col-md-5">
+      <td className="md:w-5/12">
         {pair.address ? (
           <div className="btn-text-align">
             <button

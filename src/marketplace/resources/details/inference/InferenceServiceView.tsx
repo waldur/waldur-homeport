@@ -164,11 +164,11 @@ export const InferenceServiceView = ({
     );
   }
   return (
-    <div className="row">
-      <div className="col-lg-5 mb-5">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-5">
+      <div className="lg:col-span-5 mb-5">
         <EndpointCard endpoint={endpoint} />
       </div>
-      <div className="col-lg-7 mb-5">
+      <div className="lg:col-span-7 mb-5">
         <PlaygroundCard
           endpoint={endpoint}
           activeKey={activeKey}

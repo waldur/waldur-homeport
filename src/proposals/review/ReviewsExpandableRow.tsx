@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { Col, Row } from 'react-bootstrap';
 import {
   proposalProposalsResourcesList,
   proposalProposalsRetrieve,
@@ -43,8 +42,8 @@ export const ReviewsExpandableRow = ({ row }: { row: ProposalReview }) => {
 
   return (
     <ExpandableContainer>
-      <Row>
-        <Col xs={12} md={6}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+        <div>
           <Field
             label={translate('Applicant name')}
             value={data.proposal.created_by_name}
@@ -65,14 +64,14 @@ export const ReviewsExpandableRow = ({ row }: { row: ProposalReview }) => {
             label={translate('Offering')}
             value={data.offeringNames.join(', ')}
           />
-        </Col>
-        <Col xs={12} md={6}>
+        </div>
+        <div>
           <Field
             label={translate('Project summary')}
             value={data.proposal.project_summary}
           />
-        </Col>
-      </Row>
+        </div>
+      </div>
     </ExpandableContainer>
   );
 };

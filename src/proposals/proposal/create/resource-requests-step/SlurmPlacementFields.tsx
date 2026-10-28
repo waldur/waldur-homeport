@@ -1,5 +1,3 @@
-import { Col } from 'react-bootstrap';
-
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 
@@ -16,24 +14,24 @@ export const SlurmPlacementFields = ({
 }) => (
   <>
     {attributes?.qos ? (
-      <Col sm={6}>
+      <div>
         <Field
           label={translate('QoS')}
           value={String(attributes.qos)}
           labelCol={5}
           valueCol={7}
         />
-      </Col>
+      </div>
     ) : null}
     {attributes?.partition ? (
-      <Col sm={6}>
+      <div>
         <Field
           label={translate('Partition')}
           value={String(attributes.partition)}
           labelCol={5}
           valueCol={7}
         />
-      </Col>
+      </div>
     ) : null}
   </>
 );

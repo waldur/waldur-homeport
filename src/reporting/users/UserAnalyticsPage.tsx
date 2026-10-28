@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { FC, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { ChartCard } from '@/core/ChartCard';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -83,9 +82,15 @@ export const UserAnalyticsPage: FC = () => {
       <ReportingTitle reportKey="user-analytics" />
       <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'pb-5')}>
         {(showNationality || showCountry) && (
-          <Row className="mb-4 g-5">
+          <div
+            className={
+              showNationality && showCountry
+                ? 'grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'
+                : 'grid grid-cols-1 gap-4 mb-4'
+            }
+          >
             {showNationality && (
-              <Col md={showCountry ? 6 : 12}>
+              <div>
                 <ChartCard
                   title={translate('Users by nationality')}
                   getExportData={() =>
@@ -98,10 +103,10 @@ export const UserAnalyticsPage: FC = () => {
                 >
                   {(ref) => <BarChart ref={ref} data={nationalityChartData} />}
                 </ChartCard>
-              </Col>
+              </div>
             )}
             {showCountry && (
-              <Col md={showNationality ? 6 : 12}>
+              <div>
                 <ChartCard
                   title={translate('Users by country')}
                   getExportData={() =>
@@ -111,14 +116,20 @@ export const UserAnalyticsPage: FC = () => {
                 >
                   {(ref) => <BarChart ref={ref} data={countryChartData} />}
                 </ChartCard>
-              </Col>
+              </div>
             )}
-          </Row>
+          </div>
         )}
         {(showOrgType || showJobTitle) && (
-          <Row className="g-5">
+          <div
+            className={
+              showOrgType && showJobTitle
+                ? 'grid grid-cols-1 md:grid-cols-2 gap-4'
+                : 'grid grid-cols-1 gap-4'
+            }
+          >
             {showOrgType && (
-              <Col md={showJobTitle ? 6 : 12}>
+              <div>
                 <ChartCard
                   title={translate('Users by organization type')}
                   getExportData={() =>
@@ -131,10 +142,10 @@ export const UserAnalyticsPage: FC = () => {
                 >
                   {(ref) => <DonutChart ref={ref} data={orgTypeChartData} />}
                 </ChartCard>
-              </Col>
+              </div>
             )}
             {showJobTitle && (
-              <Col md={showOrgType ? 6 : 12}>
+              <div>
                 <ChartCard
                   title={translate('Users by job position')}
                   getExportData={() =>
@@ -149,9 +160,9 @@ export const UserAnalyticsPage: FC = () => {
                     <DonutChart ref={ref} data={jobPositionChartData} />
                   )}
                 </ChartCard>
-              </Col>
+              </div>
             )}
-          </Row>
+          </div>
         )}
       </div>
     </>

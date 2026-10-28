@@ -16,7 +16,6 @@ export const StartDateGroup = ({ create }: { create?: boolean }) => {
       name="start_date"
       minDate={DateTime.now().toISO()}
       maxDate={values?.end_date || undefined}
-      containerClassName="col-lg"
       validate={
         isFeatureVisible(ProjectFeatures.mandatory_start_date)
           ? composeValidators(required, startBeforeEnd)

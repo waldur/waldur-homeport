@@ -31,7 +31,7 @@ export const CallsAvailableOfferingsList: FC = () => {
     <Table
       {...tableProps}
       gridItem={({ row }) => <AvailableOfferingCard availableOffering={row} />}
-      gridSize={{ lg: 6, xl: 4 }}
+      gridClassName="lg:grid-cols-2 xl:grid-cols-3"
       hoverShadow={{ grid: false }}
       mode="grid"
       title={translate('Available offerings')}

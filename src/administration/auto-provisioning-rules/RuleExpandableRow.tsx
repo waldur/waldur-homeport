@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Rule } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -13,9 +12,9 @@ interface RuleExpandableRowProps {
 
 export const RuleExpandableRow: FC<RuleExpandableRowProps> = ({ row }) => (
   <ExpandableContainer>
-    <Row className="g-4">
+    <div className="grid grid-cols-12 gap-3">
       {Boolean(row.plan) && (
-        <Col md={5} xxl={4}>
+        <div className="col-span-12 md:col-span-5 2xl:col-span-4">
           <h6 className="text-secondary mb-2.5">
             {translate('Resource template')}
           </h6>
@@ -30,9 +29,9 @@ export const RuleExpandableRow: FC<RuleExpandableRowProps> = ({ row }) => (
             space={1.5}
           />
           <Field label={translate('Plan')} value={row.plan_name} space={1.5} />
-        </Col>
+        </div>
       )}
-      <Col xs={6}>
+      <div className="col-span-6">
         <h6 className="text-secondary mb-2.5">{translate('Attributes')}</h6>
         <Field
           label={translate('Email patterns')}
@@ -102,7 +101,7 @@ export const RuleExpandableRow: FC<RuleExpandableRowProps> = ({ row }) => (
           value={row.revoke_when_unmatched ? translate('Yes') : translate('No')}
           space={1.5}
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   </ExpandableContainer>
 );

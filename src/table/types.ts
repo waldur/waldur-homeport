@@ -7,13 +7,6 @@ import { TableFiltersGroup } from './TableFilterService';
 
 export type { Fetcher, FetcherOptions, TableRequest };
 
-/** How many of 12 columns a grid-mode card spans, from each breakpoint up
- * (`true`: share the row equally). Rendered as the Bootstrap grid's `col-*`
- * classes. */
-export type GridSize = Partial<
-  Record<'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl', number | 'auto' | true>
->;
-
 /** Every table's state, keyed by table id. */
 export type TablesState = Record<string, TableState>;
 
@@ -208,8 +201,9 @@ export interface TableProps<RowType = any> extends TableState {
   columns?: Array<Column<RowType>>;
   setDisplayMode?: (mode: DisplayMode) => void;
   gridItem?: React.ComponentType<{ row: RowType }>;
-  gridSize?: GridSize;
-  gridSpace?: number;
+  /** Tailwind classes for the grid container: columns per breakpoint
+   * ("md:grid-cols-2 xl:grid-cols-3") and, optionally, a gap overriding gap-5. */
+  gridClassName?: string;
   gridFixedWidth?: boolean;
   /** Opens the narrow-viewport filter panel; `BaseTable` supplies its own. */
   openFiltersDrawer?: (filters: React.ReactNode, formId?: string) => void;

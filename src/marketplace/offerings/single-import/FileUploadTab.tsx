@@ -1,5 +1,4 @@
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 
 import { LoadingSpinner } from 'waldur-ui';
@@ -87,8 +86,8 @@ export const FileUploadTab: FunctionComponent = () => {
   );
 
   return (
-    <Row>
-      <Col md={12}>
+    <div>
+      <div>
         <Field
           name="importFile"
           validate={validateFileField}
@@ -137,7 +136,7 @@ export const FileUploadTab: FunctionComponent = () => {
             error={validationResult.error}
           />
         )}
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

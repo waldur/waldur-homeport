@@ -51,8 +51,8 @@ export const ComponentFormulaConfiguration = ({
               {fields.map((field, index) => (
                 // A fixed grid, so that the columns line up whatever each
                 // row's selected component is called.
-                <div key={field} className="row g-2 items-start">
-                  <div className="col-6">
+                <div key={field} className="flex gap-2 items-start">
+                  <div className="w-1/2">
                     <SelectGroup
                       name={`${field}.component_type`}
                       label={translate('Component')}
@@ -63,7 +63,7 @@ export const ComponentFormulaConfiguration = ({
                       simpleValue
                     />
                   </div>
-                  <div className="col">
+                  <div className="flex-1 min-w-0">
                     <StringGroup
                       name={`${field}.formula`}
                       label={translate('Formula')}
@@ -71,7 +71,7 @@ export const ComponentFormulaConfiguration = ({
                       placeholder="input * 2"
                     />
                   </div>
-                  <div className="col-auto">
+                  <div className="shrink-0">
                     <BaseButton
                       variant="danger"
                       onClick={() => fields.remove(index)}

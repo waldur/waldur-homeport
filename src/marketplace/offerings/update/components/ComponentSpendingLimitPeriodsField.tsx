@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
 
 import { Checkbox } from 'waldur-ui';
@@ -89,36 +88,32 @@ const PeriodRow: FC<{ period: SpendingLimitPeriod; enabled: boolean }> = ({
       )}
     />
     {enabled && (
-      <Row className="g-5 mt-0 ps-6">
-        <Col xs={6}>
-          <NumberGroup
-            name={`spending_limit_periods.${period}.default`}
-            label={translate('Default')}
-            description={translate('What the order form starts from.')}
-            min={0}
-            step="0.01"
-            showSteppers={false}
-            validate={validateDefault(period)}
-            // Errors may come from another field (the maximum, a longer
-            // period's default), so they show without this one being touched.
-            forceTouched
-            spaceless
-          />
-        </Col>
-        <Col xs={6}>
-          <NumberGroup
-            name={`spending_limit_periods.${period}.maximum`}
-            label={translate('Maximum')}
-            description={translate('The highest limit a customer may set.')}
-            min={0}
-            step="0.01"
-            showSteppers={false}
-            validate={validateMaximum}
-            forceTouched
-            spaceless
-          />
-        </Col>
-      </Row>
+      <div className="grid grid-cols-2 gap-5 mt-0 ps-6">
+        <NumberGroup
+          name={`spending_limit_periods.${period}.default`}
+          label={translate('Default')}
+          description={translate('What the order form starts from.')}
+          min={0}
+          step="0.01"
+          showSteppers={false}
+          validate={validateDefault(period)}
+          // Errors may come from another field (the maximum, a longer
+          // period's default), so they show without this one being touched.
+          forceTouched
+          spaceless
+        />
+        <NumberGroup
+          name={`spending_limit_periods.${period}.maximum`}
+          label={translate('Maximum')}
+          description={translate('The highest limit a customer may set.')}
+          min={0}
+          step="0.01"
+          showSteppers={false}
+          validate={validateMaximum}
+          forceTouched
+          spaceless
+        />
+      </div>
     )}
   </div>
 );

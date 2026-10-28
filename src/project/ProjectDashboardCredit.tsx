@@ -4,7 +4,6 @@ import {
   WarningOctagonIcon,
 } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
-import { Col } from 'react-bootstrap';
 import { Project } from 'waldur-js-client';
 
 import { WarningTip } from 'waldur-ui';
@@ -66,20 +65,26 @@ export const ProjectDashboardCredit = ({
   };
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return (
+      <div className="md:col-span-2">
+        <LoadingSpinner />
+      </div>
+    );
   } else if (error) {
     return (
-      <LoadingErred
-        message={translate('Unable to load data.')}
-        loadData={refetch}
-      />
+      <div className="md:col-span-2">
+        <LoadingErred
+          message={translate('Unable to load data.')}
+          loadData={refetch}
+        />
+      </div>
     );
   }
   if (!credit) {
     return null;
   }
   return (
-    <Col md={6} sm={12} className={className} style={COMMON_WIDGET_HEIGHT}>
+    <div className={className} style={COMMON_WIDGET_HEIGHT}>
       <WidgetCard
         cardTitle={
           <>
@@ -126,6 +131,6 @@ export const ProjectDashboardCredit = ({
       >
         <EChart options={options} height="130px" />
       </WidgetCard>
-    </Col>
+    </div>
   );
 };

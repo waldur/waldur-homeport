@@ -165,8 +165,8 @@ export const AccountOptionsPreviewDialog: FC<
                   'Change the settings and preview what they do before applying them. Nothing is saved until you apply.',
                 )}
               </p>
-              <div className="row">
-                <div className="col-md-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+                <div>
                   <SelectGroup
                     name="account_scope"
                     label={translate('Account scope')}
@@ -189,7 +189,7 @@ export const AccountOptionsPreviewDialog: FC<
                     required={false}
                   />
                 </div>
-                <div className="col-md-6">
+                <div>
                   <StringGroup
                     name="homedir_prefix"
                     label={translate('Home directory prefix')}

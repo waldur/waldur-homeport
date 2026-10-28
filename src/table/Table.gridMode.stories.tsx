@@ -25,26 +25,24 @@ export default meta;
 type Story = StoryObj<typeof Table<TableStoryRow>>;
 
 /** The responsive breakpoint pattern real `gridItem` call sites actually
- * use (`{ md: 6, xl: 4 }` — `ProjectsList.tsx`/`OrganizationsList.tsx`/
- * `ProviderDashboardTab.tsx` and others all set this same pair). Bootstrap's
- * default equal-width columns with no `gridSize` at all isn't a pattern
- * any real call site actually uses. */
+ * use (`md:grid-cols-2 xl:grid-cols-3` — `ProjectsList.tsx`/
+ * `OrganizationsList.tsx` and others set this same pair). */
 export const GridMode: Story = {
   render: () => (
     <Table
       {...tableStoryBaseProps}
       mode="grid"
       gridItem={TableStoryGridItem}
-      gridSize={{ md: 6, xl: 4 }}
+      gridClassName="md:grid-cols-2 xl:grid-cols-3"
     />
   ),
 };
 
 /** `gridFixedWidth` — the CSS Grid layout variant (`Table.scss`'s
  * `.grid-fixed-width`, `repeat(auto-fill, minmax(400px, 1fr))`) instead of
- * the default Bootstrap `Row`/`Col` grid, matching `ProjectsList.tsx`. Card
+ * the default responsive grid, matching `ProjectsList.tsx`. Card
  * count and container width together decide the column count here, not
- * `gridSize` (ignored by `GridBody.tsx` whenever `gridFixedWidth` is set). */
+ * `gridClassName` (ignored by `GridBody.tsx` whenever `gridFixedWidth` is set). */
 export const GridModeFixedWidth: Story = {
   render: () => (
     <Table
@@ -56,7 +54,7 @@ export const GridModeFixedWidth: Story = {
   ),
 };
 
-/** Full-width, no-gutter cards (`gridSize={{ xs: 12 }} gridSpace={0}`) —
+/** Full-width, no-gutter cards (`gridClassName="gap-0"`) —
  * `UserPendingActionsList`'s dashboard pattern, and the other real
  * `gridItem` shape besides `ModelCard1`: `AlertItem`
  * (`TableStoryCompactGridItem`, simplified from `PendingActionAlertItem.tsx`
@@ -67,8 +65,7 @@ export const GridModeCompact: Story = {
       {...tableStoryBaseProps}
       mode="grid"
       gridItem={TableStoryCompactGridItem}
-      gridSize={{ xs: 12 }}
-      gridSpace={0}
+      gridClassName="gap-0"
     />
   ),
 };
@@ -86,7 +83,7 @@ export const GridModeRefetching: Story = {
       loading={true}
       mode="grid"
       gridItem={TableStoryGridItem}
-      gridSize={{ md: 6, xl: 4 }}
+      gridClassName="md:grid-cols-2 xl:grid-cols-3"
     />
   ),
 };

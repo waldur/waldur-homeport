@@ -3,13 +3,7 @@
 @import 'bootstrap/scss/reboot';
 @import 'bootstrap/scss/type';
 @import 'bootstrap/scss/images';
-// containers: nothing uses container-{sm,md,lg,xl}; empty $container-max-widths
-// generates .container and .container-fluid only.
-$_container-max-widths: $container-max-widths;
-$container-max-widths: ();
-@import 'bootstrap/scss/containers';
-$container-max-widths: $_container-max-widths;
-@import 'bootstrap/scss/grid';
+// No containers or grid: layouts are Tailwind grid/flex (no-bootstrap-grid).
 // tables: nothing uses table-responsive-{sm,md,lg,xl,xxl}; (xs: 0) generates
 // base .table-responsive only.
 $_grid-breakpoints: $grid-breakpoints;

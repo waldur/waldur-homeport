@@ -167,9 +167,9 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
           <p className="text-quaternary mb-3">
             {translate('Select the external network for the offering.')}
           </p>
-          <div className="row g-3 mb-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 mb-5">
             {values.externalNetworks.map((network) => (
-              <div key={network.id} className="col-md-6">
+              <div key={network.id}>
                 <Card
                   className={`cursor-pointer h-full ${
                     values.selectedExternalNetworkId === network.id
@@ -228,8 +228,8 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
       )}
 
       {/* Availability Zones */}
-      <div className="row mb-5">
-        <div className="col-sm-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 mb-5">
+        <div>
           <FormGroup label={translate('Instance availability zone')}>
             {errors.instanceAZs ? (
               <AlertItem
@@ -257,7 +257,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
             )}
           </FormGroup>
         </div>
-        <div className="col-sm-6">
+        <div>
           <FormGroup label={translate('Volume availability zone')}>
             {errors.volumeAZs ? (
               <AlertItem

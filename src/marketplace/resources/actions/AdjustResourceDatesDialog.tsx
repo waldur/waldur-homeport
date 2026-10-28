@@ -105,8 +105,8 @@ export const AdjustResourceDatesDialog: FunctionComponent<
               )}
               className="mb-4"
             />
-            <div className="row">
-              <div className="col-sm-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
+              <div>
                 <div>
                   <DateGroup
                     name="start_date"
@@ -115,7 +115,7 @@ export const AdjustResourceDatesDialog: FunctionComponent<
                   />
                 </div>
               </div>
-              <div className="col-sm-6">
+              <div>
                 <div>
                   <DateGroup
                     name="end_date"

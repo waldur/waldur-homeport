@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { LoadingSpinner } from 'waldur-ui';
 
@@ -89,8 +88,8 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
             {person_identifier_fields.description}
           </p>
         )}
-        <Row className="g-4">
-          <Col md={6}>
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+          <div>
             <StringGroup
               name={fieldName}
               label={person_identifier_fields.label}
@@ -99,8 +98,8 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
               description={person_identifier_fields.help_text}
               placeholder={person_identifier_fields.example}
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
     );
   }
@@ -121,7 +120,7 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
             {person_identifier_fields.description}
           </p>
         )}
-        <Row className="g-4">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
           {fieldEntries.map(([fieldKey, fieldSpec], index) => {
             const fieldName = `person_identifier_${fieldKey}`;
             const validate = fieldSpec.required ? required : undefined;
@@ -129,7 +128,10 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
               totalFields % 2 !== 0 && index === totalFields - 1;
 
             return (
-              <Col md={isLastOdd ? 12 : 6} key={fieldKey}>
+              <div
+                className={isLastOdd ? 'md:col-span-2' : undefined}
+                key={fieldKey}
+              >
                 {fieldSpec.type === 'date' ? (
                   <DateGroup
                     name={fieldName}
@@ -152,10 +154,10 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
                     spaceless
                   />
                 )}
-              </Col>
+              </div>
             );
           })}
-        </Row>
+        </div>
       </div>
     );
   }

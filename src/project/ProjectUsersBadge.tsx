@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { projectsListUsersList } from 'waldur-js-client';
 
 import { getAllPages } from '@/core/api';
@@ -33,9 +32,7 @@ const LayoutWrapper: FC<PropsWithChildren<OwnProps>> = (props) =>
       {props.children}
     </div>
   ) : (
-    <Row className={props.className}>
-      <Col xs={12}>{props.children}</Col>
-    </Row>
+    <div className={props.className}>{props.children}</div>
   );
 
 export const ProjectUsersBadge = (props: OwnProps) => {

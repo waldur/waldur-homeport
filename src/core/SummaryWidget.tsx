@@ -1,8 +1,18 @@
 import classNames from 'classnames';
 import { ReactNode } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { StatsCard } from './StatsCard';
+
+// Up to five tiles share one row from `sm` up (full width below), and six or
+// more wrap six to a row.
+const getLayoutClassName = (count: number) => {
+  if (count <= 1) return 'grid grid-cols-1';
+  if (count === 2) return 'grid grid-cols-1 sm:grid-cols-2';
+  if (count === 3) return 'grid grid-cols-1 sm:grid-cols-3';
+  if (count === 4) return 'grid grid-cols-1 sm:grid-cols-4';
+  if (count === 5) return 'grid grid-cols-1 sm:grid-cols-5';
+  return 'grid grid-cols-1 sm:grid-cols-6';
+};
 
 export const SummaryWidget = ({
   stats,
@@ -10,9 +20,6 @@ export const SummaryWidget = ({
   spaceless,
 }: {
   stats: Array<{ label: ReactNode; value: ReactNode; footer?: ReactNode }>;
-  // Callers outside a padded container (e.g. a TableWithTabs pane) pass `mx-0`
-  // to cancel the row's negative gutter margins, which would otherwise bleed
-  // past the pane and get clipped by its overflow.
   className?: string;
   /**
    * Drops the default bottom margin, for when whatever follows brings its own
@@ -22,22 +29,23 @@ export const SummaryWidget = ({
    */
   spaceless?: boolean;
 }) => {
-  const colWidth =
-    stats.length === 5
-      ? null
-      : Math.max(2, Math.floor(12 / Math.min(stats.length, 6)));
-
   return (
-    <Row className={classNames('g-4', !spaceless && 'mb-4', className)}>
+    <div
+      className={classNames(
+        'gap-3',
+        getLayoutClassName(stats.length),
+        !spaceless && 'mb-4',
+        className,
+      )}
+    >
       {stats.map((stat, index) => (
-        <Col key={index} sm={colWidth}>
-          <StatsCard
-            label={stat.label}
-            value={stat.value}
-            footer={stat.footer}
-          />
-        </Col>
+        <StatsCard
+          key={index}
+          label={stat.label}
+          value={stat.value}
+          footer={stat.footer}
+        />
       ))}
-    </Row>
+    </div>
   );
 };

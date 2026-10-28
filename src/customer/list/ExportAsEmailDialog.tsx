@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { DateTime } from 'luxon';
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Field, Form as FinalForm } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
@@ -105,8 +104,8 @@ export const ExportAsEmailDialog: FC = () => {
               />
             }
           >
-            <Row>
-              <Col md={12} lg={8} className="flex flex-col">
+            <div className="grid grid-cols-1 gap-x-5 lg:grid-cols-12">
+              <div className="flex flex-col lg:col-span-8">
                 <FormFieldset>
                   <FormLegend>{translate('Emails')}</FormLegend>
                   <FieldArray name="emails" component={renderEmails} />
@@ -121,8 +120,8 @@ export const ExportAsEmailDialog: FC = () => {
                 </div>
 
                 <div className="mt-3" />
-              </Col>
-            </Row>
+              </div>
+            </div>
           </ModalDialog>
         </form>
       )}
@@ -133,8 +132,11 @@ export const ExportAsEmailDialog: FC = () => {
 const renderEmails = ({ fields }: any) => (
   <>
     {fields.map((emailName: any, index: number) => (
-      <Row key={emailName} className="mb-2.5">
-        <Col md={10}>
+      <div
+        key={emailName}
+        className="grid grid-cols-1 gap-x-5 mb-2.5 md:grid-cols-12"
+      >
+        <div className="md:col-span-10">
           <Field
             name={emailName}
             type="email"
@@ -149,27 +151,25 @@ const renderEmails = ({ fields }: any) => (
               />
             )}
           </Field>
-        </Col>
-        <Col sm={2}>
+        </div>
+        <div className="md:col-span-2">
           <BaseButton
             tooltip={translate('Remove')}
             variant="danger"
             onClick={() => fields.remove(index)}
             iconNode={<TrashIcon weight="bold" />}
           />
-        </Col>
-      </Row>
+        </div>
+      </div>
     ))}
-    <Row>
-      <Col>
-        <BaseButton
-          label={translate('Add email')}
-          onClick={() => fields.push(undefined)}
-          iconNode={<PlusCircleIcon weight="bold" />}
-          variant="primary"
-          size="lg"
-        />
-      </Col>
-    </Row>
+    <div>
+      <BaseButton
+        label={translate('Add email')}
+        onClick={() => fields.push(undefined)}
+        iconNode={<PlusCircleIcon weight="bold" />}
+        variant="primary"
+        size="lg"
+      />
+    </div>
   </>
 );

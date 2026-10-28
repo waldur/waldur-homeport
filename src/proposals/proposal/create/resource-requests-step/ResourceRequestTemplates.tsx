@@ -1,7 +1,6 @@
 import { CheckCircleIcon, CubeIcon, QuestionIcon } from '@phosphor-icons/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Form, useField } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -61,17 +60,17 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
       {/* Off the table: the plan is a property of the template rather than
           something to compare rows by, and the column it held was pushing the
           cost and the purchase order behind a sideways scroll. */}
-      <Row className="text-sm mb-3">
-        <Col sm={6}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 text-sm mb-3">
+        <div>
           <Field
             label={translate('Plan')}
             value={renderFieldOrDash(row.requested_offering_plan?.name)}
             labelCol={5}
             valueCol={7}
           />
-        </Col>
+        </div>
         <SlurmPlacementFields attributes={row.attributes} />
-      </Row>
+      </div>
       {!keyValues.length ? (
         hasSlurmPlacement(row.attributes) ? null : (
           <span>{translate('This resource request has no attributes.')}</span>

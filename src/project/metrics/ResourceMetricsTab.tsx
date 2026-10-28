@@ -1,7 +1,6 @@
 import { FlagIcon } from '@phosphor-icons/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { marketplaceResourceMetricsList, Resource } from 'waldur-js-client';
 
 import { HelpIcon, Menu, SegmentedControl } from 'waldur-ui';
@@ -138,9 +137,9 @@ export const ResourceMetricsTab: FC<{ resource: Resource }> = ({
     );
   } else {
     body = (
-      <Row className="g-6">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         {data.map((item) => (
-          <Col key={item.offering_metric.uuid} xs={12} lg={6}>
+          <div key={item.offering_metric.uuid}>
             <MetricCard
               item={item}
               resourceUuid={resource.uuid}
@@ -148,9 +147,9 @@ export const ResourceMetricsTab: FC<{ resource: Resource }> = ({
               anchor={anchor}
               refetch={refetch}
             />
-          </Col>
+          </div>
         ))}
-      </Row>
+      </div>
     );
   }
 

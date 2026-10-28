@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Offering } from 'waldur-js-client';
 
 import { PublicOfferingComponentsTable } from './PublicOfferingComponentsTable';
@@ -12,10 +11,10 @@ export const PublicOfferingComponents: FunctionComponent<
   PublicOfferingComponentsProps
 > = ({ offering }) => {
   return (
-    <Row className="mb-8" id="components">
-      <Col sm={12} md>
+    <div className="mb-8" id="components">
+      <div>
         <PublicOfferingComponentsTable offering={offering} />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

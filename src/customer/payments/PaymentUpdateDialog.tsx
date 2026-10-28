@@ -107,10 +107,8 @@ export const PaymentUpdateDialog: FunctionComponent<
 
               {props.resolve.invoice_uuid && props.resolve.invoice_period ? (
                 <FormField>
-                  <FormLabel className="col-sm-2">
-                    {translate('Invoice')}
-                  </FormLabel>
-                  <div className="col-sm-8" style={{ marginTop: '8px' }}>
+                  <FormLabel>{translate('Invoice')}</FormLabel>
+                  <div style={{ marginTop: '8px' }}>
                     <Link
                       state="billingDetails"
                       params={{

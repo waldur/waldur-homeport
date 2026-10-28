@@ -128,7 +128,7 @@ export const ResourceLimitChangeInfo = ({
                     <th>{translate('Current limit')}</th>
                     <th>{translate('Requested limit')}</th>
                     <th>{translate('Change')}</th>
-                    <th className="col-sm-2 icon-align">
+                    <th className="sm:w-2/12 icon-align">
                       {translate('Impact')}
                       <PriceTooltip />
                     </th>

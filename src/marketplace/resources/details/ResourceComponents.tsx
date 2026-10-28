@@ -1,4 +1,3 @@
-import { Col, Row } from 'react-bootstrap';
 import { Resource, OfferingComponent } from 'waldur-js-client';
 
 import { ResourceDisplayLimits } from '../types';
@@ -24,9 +23,15 @@ export const ResourceComponents = ({
   const entries = getResourceComponentEntries(resource, components);
   if (entries.length <= 2) {
     return (
-      <Row className="gy-4">
+      <div
+        className={
+          entries.length === 2
+            ? 'grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3'
+            : 'grid grid-cols-1 gap-x-5 gap-y-3'
+        }
+      >
         {entries.map((entry) => (
-          <Col key={entry.key} xs={12} sm={12 / entries.length}>
+          <div key={entry.key}>
             <ResourceComponentItem
               expanded
               stacked={entries.length === 2}
@@ -36,17 +41,17 @@ export const ResourceComponents = ({
               thisMonth={entry.thisMonth}
               noUsageThisMonth={entry.noUsageThisMonth}
             />
-          </Col>
+          </div>
         ))}
-      </Row>
+      </div>
     );
   }
 
   return (
     <>
-      <Row>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2 gap-x-5">
         {entries.slice(0, 4).map((entry) => (
-          <Col key={entry.key} xs={12} sm={6} md={12} xl={6}>
+          <div key={entry.key}>
             <ResourceComponentItem
               resource={resource}
               component={entry.component}
@@ -54,9 +59,9 @@ export const ResourceComponents = ({
               thisMonth={entry.thisMonth}
               noUsageThisMonth={entry.noUsageThisMonth}
             />
-          </Col>
+          </div>
         ))}
-      </Row>
+      </div>
       {entries.length > 4 && (
         <div className="grow flex items-end mt-4">
           <ResourceShowMoreComponents

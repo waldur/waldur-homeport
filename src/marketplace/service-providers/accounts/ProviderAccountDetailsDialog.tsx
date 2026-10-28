@@ -95,7 +95,7 @@ export const ProviderAccountDetailsDialog: FC<
           loadData={refetch}
         />
       ) : (
-        <FormTable hideActions detailsMode className="gy-5">
+        <FormTable hideActions detailsMode>
           {exposedUserAttributes.length ? (
             exposedUserAttributes.map((attr) => (
               <FormTable.Item

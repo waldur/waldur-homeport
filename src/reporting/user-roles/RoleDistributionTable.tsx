@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { CustomerMemberCount } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
@@ -48,22 +47,20 @@ export const RoleDistributionTable: FC<RoleDistributionTableProps> = ({
   );
 
   return (
-    <Row>
-      <Col>
-        <ChartCard
-          title={translate('Organization member counts')}
-          getExportData={() => getSimpleExportData(columns, sortedData)}
-          showPNG={false}
-          isEmpty={!sortedData || sortedData.length === 0}
-        >
-          {() => (
-            <SimpleTable<CustomerMemberCount>
-              columns={columns}
-              rows={sortedData}
-            />
-          )}
-        </ChartCard>
-      </Col>
-    </Row>
+    <div>
+      <ChartCard
+        title={translate('Organization member counts')}
+        getExportData={() => getSimpleExportData(columns, sortedData)}
+        showPNG={false}
+        isEmpty={!sortedData || sortedData.length === 0}
+      >
+        {() => (
+          <SimpleTable<CustomerMemberCount>
+            columns={columns}
+            rows={sortedData}
+          />
+        )}
+      </ChartCard>
+    </div>
   );
 };

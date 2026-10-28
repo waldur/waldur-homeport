@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Col, Row, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 import { AccordionCard, Progress } from 'waldur-ui';
 
@@ -35,8 +35,8 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
       defaultOpen={health !== 'success'}
       className="mb-5"
     >
-      <Row>
-        <Col lg={6}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
+        <div>
           <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Connection breakdown')}
           </h6>
@@ -70,8 +70,8 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
               </tr>
             </tbody>
           </Table>
-        </Col>
-        <Col lg={6}>
+        </div>
+        <div>
           <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Utilization')}
           </h6>
@@ -90,8 +90,8 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
           <small className="text-quaternary">
             {translate('Max connections: {max}', { max: data.max_connections })}
           </small>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </AccordionCard>
   );
 };

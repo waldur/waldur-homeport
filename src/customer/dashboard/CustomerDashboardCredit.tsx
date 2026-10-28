@@ -1,6 +1,5 @@
 import { EyeIcon, WarningOctagonIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
-import { Col } from 'react-bootstrap';
 
 import { WarningTip } from 'waldur-ui';
 
@@ -60,7 +59,7 @@ export const CustomerDashboardCredit = ({
   }
 
   return (
-    <Col md={12} sm={12} className={className} style={COMMON_WIDGET_HEIGHT}>
+    <div className={className} style={COMMON_WIDGET_HEIGHT}>
       <WidgetCard
         cardTitle={
           <>
@@ -92,6 +91,6 @@ export const CustomerDashboardCredit = ({
       >
         <EChart options={options} height="130px" />
       </WidgetCard>
-    </Col>
+    </div>
   );
 };

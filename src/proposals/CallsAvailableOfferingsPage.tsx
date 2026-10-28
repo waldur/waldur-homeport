@@ -80,7 +80,7 @@ const CallsAvailableOfferingsTable: FunctionComponent = () => {
         },
       ]}
       gridItem={({ row }) => <AvailableOfferingCard availableOffering={row} />}
-      gridSize={{ lg: 6, xl: 4 }}
+      gridClassName="lg:grid-cols-2 xl:grid-cols-3"
       hoverShadow={{ grid: false }}
       verboseName={translate('Available offerings')}
       initialSorting={{ field: 'name', mode: 'desc' }}

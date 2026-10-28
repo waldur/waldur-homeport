@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { overrideSettings } from 'waldur-js-client';
 
@@ -146,9 +145,9 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
             <div className="mb-3">
               <TableQuery query={query} setQuery={setQuery} />
             </div>
-            <Row className="-mb-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-5 -mb-1">
               {filteredCountries.map((country) => (
-                <Col key={country.value} sm={6} md={4}>
+                <div key={country.value}>
                   <div className="border-b-[1px] border-b-secondary py-4">
                     <BooleanGroup
                       data-testid={`country_${country.value}`}
@@ -175,9 +174,9 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
                       }
                     />
                   </div>
-                </Col>
+                </div>
               ))}
-            </Row>
+            </div>
           </div>
         </ModalDialog>
       )}

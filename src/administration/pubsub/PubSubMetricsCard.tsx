@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Col, Row, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 import { AccordionCard } from 'waldur-ui';
 
@@ -31,8 +31,8 @@ export const PubSubMetricsCard: FC = () => {
           <LoadingSpinner />
         </div>
       ) : data ? (
-        <Row>
-          <Col lg={6}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
+          <div>
             <h6 className="uppercase text-quaternary mb-2.5">
               {translate('Message counts')}
             </h6>
@@ -76,8 +76,8 @@ export const PubSubMetricsCard: FC = () => {
                 </tr>
               </tbody>
             </Table>
-          </Col>
-          <Col lg={6}>
+          </div>
+          <div>
             <h6 className="uppercase text-quaternary mb-2.5">
               {translate('Additional metrics')}
             </h6>
@@ -119,8 +119,8 @@ export const PubSubMetricsCard: FC = () => {
                 </tr>
               </tbody>
             </Table>
-          </Col>
-        </Row>
+          </div>
+        </div>
       ) : (
         <p className="text-quaternary mb-0">
           {translate('Failed to load metrics.')}

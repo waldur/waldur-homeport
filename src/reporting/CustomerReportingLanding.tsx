@@ -1,6 +1,6 @@
 import { BuildingsIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -51,13 +51,13 @@ export const CustomerReportingLanding: FC = () => {
       </Card.Header>
       <Card.Body>
         {organization ? (
-          <Row className="g-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
             {reports.map((report) => (
-              <Col key={report.key} sm={6} xl={3}>
+              <div key={report.key}>
                 <ReportCard report={report} />
-              </Col>
+              </div>
             ))}
-          </Row>
+          </div>
         ) : (
           <NoResult
             icon={<BuildingsIcon weight="bold" size={24} />}

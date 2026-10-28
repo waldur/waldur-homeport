@@ -95,7 +95,6 @@ export const FeedbackLogsStats: FC<{ filter: RequestsQuery }> = ({
     : 0;
   return (
     <SummaryWidget
-      className="mx-0"
       stats={[
         { label: translate('Response rate'), value: `${rate}%` },
         { label: translate('Prompted'), value: data.total },

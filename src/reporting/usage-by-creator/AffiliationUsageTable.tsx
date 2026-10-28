@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { ChartCard } from '@/core/ChartCard';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -60,22 +59,17 @@ export const AffiliationUsageTable: FC<Props> = ({ data, componentTypes }) => {
   }, [componentTypes]);
 
   return (
-    <Row>
-      <Col>
-        <ChartCard
-          title={translate('Usage by affiliation')}
-          getExportData={() => getSimpleExportData(columns, data)}
-          showPNG={false}
-          isEmpty={!data || data.length === 0}
-        >
-          {() => (
-            <SimpleTable<AffiliationAggregation>
-              columns={columns}
-              rows={data}
-            />
-          )}
-        </ChartCard>
-      </Col>
-    </Row>
+    <div>
+      <ChartCard
+        title={translate('Usage by affiliation')}
+        getExportData={() => getSimpleExportData(columns, data)}
+        showPNG={false}
+        isEmpty={!data || data.length === 0}
+      >
+        {() => (
+          <SimpleTable<AffiliationAggregation> columns={columns} rows={data} />
+        )}
+      </ChartCard>
+    </div>
   );
 };

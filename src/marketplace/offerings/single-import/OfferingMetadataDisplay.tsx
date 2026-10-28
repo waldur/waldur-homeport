@@ -1,6 +1,6 @@
 import { CheckIcon, ClockIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { AlertItem, Badge } from 'waldur-ui';
 
@@ -65,8 +65,8 @@ export const OfferingMetadataDisplay: FunctionComponent<
         <strong>{translate('Valid offering export file')}</strong>
       </Card.Header>
       <Card.Body>
-        <Row>
-          <Col md={6}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+          <div>
             <h6>{translate('Offering Information')}</h6>
             <p>
               <strong>{translate('Name:')}</strong>{' '}
@@ -98,8 +98,8 @@ export const OfferingMetadataDisplay: FunctionComponent<
                 </span>
               </p>
             )}
-          </Col>
-          <Col md={6}>
+          </div>
+          <div>
             <h6>{translate('File Details')}</h6>
             <p>
               <ClockIcon size={16} className="me-1" weight="bold" />
@@ -108,8 +108,8 @@ export const OfferingMetadataDisplay: FunctionComponent<
                 {formatDateTime(metadata.export_timestamp)}
               </span>
             </p>
-          </Col>
-        </Row>
+          </div>
+        </div>
 
         <div className="mt-2.5">
           <h6>{translate('Included Components')}</h6>

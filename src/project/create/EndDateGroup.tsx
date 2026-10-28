@@ -21,7 +21,6 @@ export const EndDateGroup = ({ create }: { create?: boolean }) => {
     <DateGroup
       name="end_date"
       minDate={startDate && startDate > tomorrow ? startDate : tomorrow}
-      containerClassName="col-lg"
       validate={
         isMandatoryFromBackend
           ? composeValidators(required, endAfterStart)

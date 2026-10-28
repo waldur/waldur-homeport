@@ -1,6 +1,6 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 
@@ -39,8 +39,8 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
   const failureRateLevel = getSuccessRateLevel(data.metrics.failure_rate);
 
   return (
-    <Row className="mb-5">
-      <Col md={6} lg={3}>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 mb-5">
+      <div>
         <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center">
@@ -58,9 +58,9 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
             <strong className="block">{translate('Health status')}</strong>
           </Card.Body>
         </Card>
-      </Col>
+      </div>
 
-      <Col md={6} lg={3}>
+      <div>
         <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center">
@@ -82,9 +82,9 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
             </strong>
           </Card.Body>
         </Card>
-      </Col>
+      </div>
 
-      <Col md={6} lg={3}>
+      <div>
         <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center justify-between">
@@ -109,9 +109,9 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
             <strong className="block">{translate('Failure rate')}</strong>
           </Card.Body>
         </Card>
-      </Col>
+      </div>
 
-      <Col md={6} lg={3}>
+      <div>
         <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center justify-between">
@@ -125,7 +125,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
             <strong className="block">{translate('Messages failed')}</strong>
           </Card.Body>
         </Card>
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

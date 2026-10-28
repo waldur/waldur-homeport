@@ -1,24 +1,29 @@
 import { FunctionComponent } from 'react';
-import { Table } from 'react-bootstrap';
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
 export const KeyValueTable: FunctionComponent<any> = (props) => (
-  <Table
-    bordered={true}
-    className="table align-middle table-row-bordered text-sm gy-4"
-  >
-    <thead>
-      <tr className="align-middle">
-        <th>{translate('Key')}</th>
-        <th>{translate('Value')}</th>
-      </tr>
-    </thead>
-    <tbody>
+  <Table density="normal">
+    <TableHeader>
+      <TableRow>
+        <TableHead>{translate('Key')}</TableHead>
+        <TableHead>{translate('Value')}</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
       {Object.keys(props.items).map((key) => (
-        <tr key={key}>
-          <td>{key}</td>
-          <td>
+        <TableRow key={key}>
+          <TableCell className="font-medium text-primary">{key}</TableCell>
+          <TableCell>
             {typeof props.items[key] === 'object' &&
             props.items[key] !== null ? (
               <pre>{JSON.stringify(props.items[key], null, 2)}</pre>
@@ -31,9 +36,9 @@ export const KeyValueTable: FunctionComponent<any> = (props) => (
             ) : (
               props.items[key]
             )}
-          </td>
-        </tr>
+          </TableCell>
+        </TableRow>
       ))}
-    </tbody>
+    </TableBody>
   </Table>
 );

@@ -53,8 +53,8 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
   return (
     <div className={classNames('card-table card-bordered', className, 'card')}>
       <div className={classNames(headerClassName, 'card-header')}>
-        <div className="card-toolbar g-0 gap-3 w-full row">
-          <div className="col">
+        <div className="card-toolbar flex flex-wrap gap-3 w-full">
+          <div className="flex-1 min-w-0">
             <div ref={setTitleNode} className="card-title h5">
               <div className="me-1.5">
                 <h3>{title}</h3>
@@ -67,7 +67,7 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
             </div>
             {/* Portal destination */}
           </div>
-          <div className="ms-auto max-w-full flex gap-3 max-sm:flex-wrap whitespace-nowrap col-sm-auto">
+          <div className="w-full sm:w-auto sm:flex-none ms-auto max-w-full flex gap-3 max-sm:flex-wrap whitespace-nowrap">
             {headerActions}
             <div
               ref={setToolbarNode}

@@ -1,6 +1,6 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import React, { useMemo, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
@@ -107,13 +107,13 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
   return (
     <Card className="card-bordered mb-5">
       <Card.Header>
-        <Row className="card-toolbar g-0 gap-3 w-full">
-          <Col xs className="order-0 sm:max-w-1/4">
+        <div className="card-toolbar flex flex-wrap gap-3 w-full">
+          <div className="flex-1 min-w-0 order-0 sm:max-w-1/4">
             <Card.Title>
               <span className="h3 me-1.5">{translate('API token')}</span>
             </Card.Title>
-          </Col>
-          <Col sm="auto" className="order-1 sm:order-2 min-w-1/4 ms-auto">
+          </div>
+          <div className="w-full sm:w-auto sm:flex-none order-1 sm:order-2 min-w-1/4 ms-auto">
             <div className="flex sm:justify-end max-sm:flex-wrap whitespace-nowrap gap-2.5">
               <SubmitButton
                 variant="primary"
@@ -125,8 +125,8 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
                 label={translate('Save changes')}
               />
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Card.Header>
       <Card.Body>
         <FormGroup label={translate('API token')}>

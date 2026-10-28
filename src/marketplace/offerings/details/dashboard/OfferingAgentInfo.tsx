@@ -56,7 +56,7 @@ export const OfferingAgentInfo: FC<OwnProps> = ({
         />
       }
     >
-      <FormTable detailsMode className="gy-5">
+      <FormTable detailsMode>
         {!agentIdentity || empty ? (
           <tr>
             <td colSpan={3} className="text-quaternary text-center">

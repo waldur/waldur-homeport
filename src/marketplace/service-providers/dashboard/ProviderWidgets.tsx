@@ -10,7 +10,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import {
   marketplaceServiceProvidersStatRetrieve,
   ServiceProviderStatistics,
@@ -173,18 +173,20 @@ export const ProviderWidgets = ({ provider }) => {
   });
 
   return (
-    <Row>
+    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 2xl:grid-cols-4 gap-x-5">
       {loading ? (
-        <LoadingSpinner />
+        <div className="col-span-full">
+          <LoadingSpinner />
+        </div>
       ) : error ? (
-        <>{translate('Unable to load data')}</>
+        <div className="col-span-full">{translate('Unable to load data')}</div>
       ) : (
         (value as ProviderWidget[]).map((item, i) => (
-          <Col key={i} xs={6} md={3} lg={6} xxl={3} className="mb-4">
+          <div key={i} className="mb-4">
             <WidgetItem item={item} />
-          </Col>
+          </div>
         ))
       )}
-    </Row>
+    </div>
   );
 };

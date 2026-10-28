@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { Col } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 
 import { UI_STALE_TIME } from '@/core/constants';
@@ -27,8 +26,8 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
 
   return (
     <WizardForm {...props}>
-      <div className="row">
-        <Col lg={4} className="mb-5.5">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-5">
+        <div className="lg:col-span-4 mb-5.5">
           <Field name="category_uuid">
             {({ input, meta }) => (
               <SelectField
@@ -45,8 +44,8 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
               />
             )}
           </Field>
-        </Col>
-        <Col lg={8}>
+        </div>
+        <div className="lg:col-span-8">
           <OfferingAutocomplete
             offeringFilter={{
               category_uuid,
@@ -60,14 +59,14 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
               }
             }}
           />
-        </Col>
+        </div>
         {offering && (
-          <Col sx={12}>
+          <div className="col-span-full">
             <p>
               <strong>{translate('Service provider')}: </strong>
               {offering.customer_name}
             </p>
-          </Col>
+          </div>
         )}
       </div>
     </WizardForm>

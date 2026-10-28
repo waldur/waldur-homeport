@@ -1,6 +1,6 @@
 import { ExportIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { BaseButton, SegmentedControl } from 'waldur-ui';
 
@@ -70,24 +70,24 @@ export const AnalyticsAndReports = () => {
       </Card.Header>
       <Card.Body className="p-0 overflow-hidden">
         {/* Stat cards */}
-        <Row className="mb-4 g-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 mb-4 gap-4">
           {topCards.map((card) => (
-            <Col key={card.label} xs={12} sm={6} md={3} lg={6} xl={3}>
+            <div key={card.label}>
               <StatWidgetCard
                 label={card.label}
                 value={card.value}
                 changes={card.trend}
               />
-            </Col>
+            </div>
           ))}
-        </Row>
+        </div>
 
         {/* Compliance & Checklist Usage Analytics */}
-        <Row className="mb-4 g-5">
-          <Col md={6} xs={12}>
+        <div className="grid grid-cols-1 md:grid-cols-2 mb-4 gap-4">
+          <div>
             <ChecklistUsageAnalyticsTable />
-          </Col>
-        </Row>
+          </div>
+        </div>
 
         {/* Organization Performance Comparison Table */}
         <OrgPerformanceTable />

@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon';
 import { FC, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -46,14 +45,14 @@ export const UsageTrendsPage: FC = () => {
         <>
           <GrowthSummaryCards stats={growthStats} year={year} />
 
-          <Row className="g-5 mb-4">
-            <Col xs={12} lg={6}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+            <div>
               <UsageTrendChart monthlyData={currentYearData} year={year} />
-            </Col>
-            <Col xs={12} lg={6}>
+            </div>
+            <div>
               <YearOverYearChart comparison={comparison} year={year} />
-            </Col>
-          </Row>
+            </div>
+          </div>
         </>
       )}
     </>

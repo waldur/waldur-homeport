@@ -1,6 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import {
   adminAnnouncementsCreate,
@@ -96,30 +95,22 @@ export const ScheduleUpgradeDialog: FC<ScheduleUpgradeDialogProps> = ({
               )}
             </p>
 
-            <Row>
-              <FormGroup
-                label={translate('Maintenance window start')}
-                required
-                className="col-md-6"
-              >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+              <FormGroup label={translate('Maintenance window start')} required>
                 <Field
                   component={DateTimeField as any}
                   name="active_from"
                   validate={required}
                 />
               </FormGroup>
-              <FormGroup
-                label={translate('Maintenance window end')}
-                required
-                className="col-md-6"
-              >
+              <FormGroup label={translate('Maintenance window end')} required>
                 <Field
                   component={DateTimeField as any}
                   name="active_to"
                   validate={required}
                 />
               </FormGroup>
-            </Row>
+            </div>
 
             <TextGroup
               name="description"

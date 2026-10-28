@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import {
   CustomerOecdCodeStats,
   ProjectsLimitsGroupedByOecd,
@@ -21,13 +20,13 @@ export const OecdUsageTab: FC<OecdUsageTabProps> = ({
   projectCounts,
 }) => {
   return (
-    <Row className="g-5 mb-4">
-      <Col xs={6}>
+    <div className="grid grid-cols-2 gap-4 mb-4">
+      <div>
         <OecdUsageChart projectCounts={projectCounts} />
-      </Col>
-      <Col xs={6}>
+      </div>
+      <div>
         <OecdUsageTable usages={usages} limits={limits} />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

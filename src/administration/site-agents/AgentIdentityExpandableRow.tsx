@@ -90,13 +90,11 @@ export const AgentIdentityExpandableRow: FC<
 > = ({ row }) => {
   return (
     <ExpandableContainer>
-      <div className="row mb-3">
-        <div className="col-12">
-          <EventDeliverySection agentUuid={row.uuid} />
-        </div>
+      <div className="mb-3">
+        <EventDeliverySection agentUuid={row.uuid} />
       </div>
-      <div className="row">
-        <div className="col-md-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+        <div>
           <h6 className="mb-2.5">{translate('Configuration')}</h6>
           {row.config_file_content ? (
             <pre
@@ -134,7 +132,7 @@ export const AgentIdentityExpandableRow: FC<
               </>
             )}
         </div>
-        <div className="col-md-6">
+        <div>
           <h6 className="mb-2.5">{translate('Services')}</h6>
           {row.services && row.services.length > 0 ? (
             <div className="table-responsive">

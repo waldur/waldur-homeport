@@ -1,5 +1,4 @@
 import { FC, useCallback, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
@@ -70,8 +69,8 @@ export const Step1UploadFile: FC<Step1Props> = (props) => {
         <h6 className="font-medium mb-4">
           1. {translate('Select billing period')}
         </h6>
-        <Row className="mb-5">
-          <Col md={6}>
+        <div className="grid grid-cols-1 gap-x-5 mb-5 md:grid-cols-2">
+          <div>
             <Field name="year" validate={required}>
               {({ input, meta }) => (
                 <SelectField
@@ -83,8 +82,8 @@ export const Step1UploadFile: FC<Step1Props> = (props) => {
                 />
               )}
             </Field>
-          </Col>
-          <Col md={6}>
+          </div>
+          <div>
             <Field name="month" validate={required}>
               {({ input, meta }) => (
                 <SelectField
@@ -96,8 +95,8 @@ export const Step1UploadFile: FC<Step1Props> = (props) => {
                 />
               )}
             </Field>
-          </Col>
-        </Row>
+          </div>
+        </div>
 
         <hr />
 

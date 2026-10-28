@@ -148,8 +148,8 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           'Map Waldur fields to Atlassian custom fields. These mappings allow Waldur to automatically populate issue fields.',
         )}
       </p>
-      <div className="row">
-        <div className="col-md-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+        <div>
           <SelectGroup
             name="fieldMappings.reporter_field"
             options={fieldOptions}
@@ -161,7 +161,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           />
         </div>
 
-        <div className="col-md-6">
+        <div>
           <SelectGroup
             name="fieldMappings.impact_field"
             options={fieldOptions}
@@ -171,7 +171,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           />
         </div>
 
-        <div className="col-md-6">
+        <div>
           <SelectGroup
             name="fieldMappings.organisation_field"
             options={fieldOptions}
@@ -183,7 +183,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           />
         </div>
 
-        <div className="col-md-6">
+        <div>
           <SelectGroup
             name="fieldMappings.project_field"
             options={fieldOptions}
@@ -193,7 +193,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           />
         </div>
 
-        <div className="col-md-6">
+        <div>
           <SelectGroup
             name="fieldMappings.affected_resource_field"
             options={fieldOptions}
@@ -205,7 +205,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           />
         </div>
 
-        <div className="col-md-6">
+        <div>
           <SelectGroup
             name="fieldMappings.caller_field"
             options={fieldOptions}
@@ -215,7 +215,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           />
         </div>
 
-        <div className="col-md-6">
+        <div>
           <SelectGroup
             name="fieldMappings.template_field"
             options={fieldOptions}
@@ -227,7 +227,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           />
         </div>
 
-        <div className="col-md-6">
+        <div>
           <SelectGroup
             name="fieldMappings.waldur_backend_id_field"
             options={fieldOptions}
@@ -239,7 +239,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           />
         </div>
 
-        <div className="col-md-6">
+        <div>
           <SelectGroup
             name="fieldMappings.default_priority"
             options={priorityOptions}
@@ -251,7 +251,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           />
         </div>
 
-        <div className="col-md-6">
+        <div>
           <SelectGroup
             name="fieldMappings.default_offering_issue_type"
             options={requestTypeOptions}

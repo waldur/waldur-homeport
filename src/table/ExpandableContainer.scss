@@ -118,21 +118,6 @@ table .expandable-container {
       width: 100%;
     }
   }
-
-  // Keep the pagination on a single row inside the narrower expanded view
-  // (it shouldn't wrap into multiple rows). The default Bootstrap columns
-  // already lay it out like a regular pagination — page-size selector left
-  // (.col-sm-auto), page numbers in the growing middle (.col-sm), count +
-  // prev/next right (.col-sm-auto) — so we only stop it wrapping and center
-  // the page numbers within their column.
-  .table-pagination > .row {
-    flex-wrap: nowrap;
-
-    > .col-sm {
-      display: flex;
-      justify-content: center;
-    }
-  }
 }
 
 // A `full-width` table moves its card padding onto the first cell, and the

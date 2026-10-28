@@ -83,7 +83,7 @@ export const SecurityGroupsList: FunctionComponent<{ resourceScope }> = ({
         {
           title: translate('State'),
           render: ({ row }) => <ResourceState resource={row} />,
-          className: 'col-sm-2',
+          className: 'sm:w-2/12',
           export: false,
         },
       ]}

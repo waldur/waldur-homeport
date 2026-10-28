@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
 
@@ -88,7 +87,7 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
 
   return (
     <WizardForm {...props}>
-      <Row>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
         <SelectGroup
           name="category"
           label={translate('Category')}
@@ -97,7 +96,6 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
           getOptionValue={(option) => option.url}
           getOptionLabel={(option) => option.title}
           isLoading={categoriesQuery.isLoading}
-          containerClassName="col-md-6"
           onChange={(v) => {
             if (v.uuid !== category?.uuid) {
               form.change('offering', null);
@@ -115,7 +113,6 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
           getOptionLabel={(option) => option.name}
           isLoading={offeringQuery.isRefetching}
           isDisabled={!category}
-          containerClassName="col-md-6"
           onChange={(v) => {
             if (v.uuid !== offering?.uuid) {
               form.change('plan', null);
@@ -132,16 +129,18 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
           disabled={submitting}
         />
         {offeringError && !offeringQuery.isRefetching ? (
-          <LoadingErred
-            loadData={offeringQuery.refetch}
-            message={
-              offeringError?.detail
-                ? offeringError.detail
-                : format(offeringError)
-            }
-          />
+          <div className="md:col-span-2">
+            <LoadingErred
+              loadData={offeringQuery.refetch}
+              message={
+                offeringError?.detail
+                  ? offeringError.detail
+                  : format(offeringError)
+              }
+            />
+          </div>
         ) : null}
-        <Col>
+        <div className="md:col-span-2">
           <FormField>
             <FormLabel>{translate('Plan')}</FormLabel>
             <div className="flex gap-5 pb-5 border-b-[1px] border-b-secondary mb-5.5">
@@ -164,8 +163,8 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
               />
             )}
           </FormField>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </WizardForm>
   );
 };

@@ -53,8 +53,8 @@ export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
             <tbody>
               {props.offering.endpoints.map((endpoint) => (
                 <tr key={endpoint.uuid}>
-                  <td className="col-md-3">{endpoint.name}</td>
-                  <td className="col-md-9">{endpoint.url}</td>
+                  <td className="md:w-3/12">{endpoint.name}</td>
+                  <td className="md:w-9/12">{endpoint.url}</td>
                   {(canUpdate || canDelete) && (
                     <td className="row-actions">
                       <div className="flex gap-1.5">

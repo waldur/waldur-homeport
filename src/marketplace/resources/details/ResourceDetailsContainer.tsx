@@ -480,7 +480,7 @@ export const ResourceDetailsContainer: FunctionComponent<
         compact
         max={3}
         className={classNames(
-          'col-auto items-center me-8',
+          'flex-none items-center me-8',
           data?.offering?.state === 'Unavailable' && 'disabled-view',
         )}
         onClick={openTeamModal}

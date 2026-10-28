@@ -84,8 +84,8 @@
   // On a narrow pane the toolbar would otherwise overflow (nowrap) and clip the
   // right-aligned Create button. Clear the min-width floors down the flex chain
   // so the search compresses to fit instead, keeping everything on one row.
-  .card-header .col,
-  .card-header .col > div {
+  .card-header .card-toolbar > div,
+  .card-header .card-toolbar > div > div {
     min-width: 0;
   }
 

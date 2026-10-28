@@ -1,6 +1,6 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -50,8 +50,8 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
   );
 
   return (
-    <Row className="mb-5">
-      <Col md={6} lg={4}>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 mb-5">
+      <div>
         <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center justify-between">
@@ -79,9 +79,9 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
             </strong>
           </Card.Body>
         </Card>
-      </Col>
+      </div>
 
-      <Col md={6} lg={4}>
+      <div>
         <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center">
@@ -99,9 +99,9 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
             <strong className="block">{translate('Cache hit ratio')}</strong>
           </Card.Body>
         </Card>
-      </Col>
+      </div>
 
-      <Col md={6} lg={4}>
+      <div>
         <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center justify-between">
@@ -130,9 +130,9 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
             <strong className="block">{translate('Dead tuple ratio')}</strong>
           </Card.Body>
         </Card>
-      </Col>
+      </div>
 
-      <Col md={6} lg={4}>
+      <div>
         <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center">
@@ -150,9 +150,9 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
             <strong className="block">{translate('Waiting locks')}</strong>
           </Card.Body>
         </Card>
-      </Col>
+      </div>
 
-      <Col md={6} lg={4}>
+      <div>
         <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center justify-between">
@@ -181,9 +181,9 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
             <strong className="block">{translate('Active queries')}</strong>
           </Card.Body>
         </Card>
-      </Col>
+      </div>
 
-      <Col md={6} lg={4}>
+      <div>
         <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center justify-between">
@@ -197,7 +197,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
             <strong className="block">{translate('Database size')}</strong>
           </Card.Body>
         </Card>
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

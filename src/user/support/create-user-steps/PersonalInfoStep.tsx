@@ -10,15 +10,15 @@ import { lockedProps } from './lockedFields';
 export const PersonalInfoStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props}>
-      <div className="row">
-        <div className="col-sm-6">
+      <div className="grid grid-cols-1 gap-x-5 sm:grid-cols-2">
+        <div>
           <StringGroup
             name="first_name"
             label={translate('First name')}
             {...lockedProps(props.data, 'first_name')}
           />
         </div>
-        <div className="col-sm-6">
+        <div>
           <StringGroup
             name="last_name"
             label={translate('Last name')}

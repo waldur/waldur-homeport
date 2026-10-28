@@ -434,10 +434,10 @@ export const AnonymousChatPanel: FunctionComponent = () => {
     <div className="pt-4">
       {kpi && (
         <>
-          <SummaryWidget stats={stats} className="mx-0" />
+          <SummaryWidget stats={stats} />
           {/* Scope stated once: the judge row is narrowed by the same query, so
               repeating the caption would just be noise. */}
-          <SummaryWidget stats={reviewStats} className="mx-0" />
+          <SummaryWidget stats={reviewStats} />
         </>
       )}
       <Table<AnonymousChatConversation>

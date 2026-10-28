@@ -1,6 +1,15 @@
 import { FC } from 'react';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { MermaidChart } from '@/core/MermaidChart';
 import { translate } from '@/i18n';
@@ -237,39 +246,39 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
         {/* Scoring Methods */}
         <section>
           <h4 className="mb-3">{translate('Scoring methods')}</h4>
-          <div className="table-responsive">
-            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
-              <thead>
-                <tr className="text-start text-quaternary font-medium text-xs uppercase">
-                  <th>{translate('Method')}</th>
-                  <th>{translate('Description')}</th>
-                  <th>{translate('Formula')}</th>
-                </tr>
-              </thead>
-              <tbody className="text-tertiary">
-                {SCORING_METHODS.map((method) => (
-                  <tr key={method.method}>
-                    <td className="font-medium text-primary">
-                      {method.label}
-                      {method.method === currentMethod && (
-                        <Badge
-                          variant="success"
-                          tone="outline"
-                          className="ms-1.5"
-                        >
-                          {translate('Active')}
-                        </Badge>
-                      )}
-                    </td>
-                    <td>{method.description}</td>
-                    <td>
-                      <code className="text-brand">{method.formula}</code>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Table density="normal">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Method')}</TableHead>
+                <TableHead>{translate('Description')}</TableHead>
+                <TableHead>{translate('Formula')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {SCORING_METHODS.map((method) => (
+                <TableRow key={method.method}>
+                  <TableCell className="font-medium text-primary">
+                    {method.label}
+                    {method.method === currentMethod && (
+                      <Badge
+                        variant="success"
+                        tone="outline"
+                        className="ms-1.5"
+                      >
+                        {translate('Active')}
+                      </Badge>
+                    )}
+                  </TableCell>
+                  <TableCell className="text-tertiary">
+                    {method.description}
+                  </TableCell>
+                  <TableCell>
+                    <code className="text-brand">{method.formula}</code>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </section>
 
         {/* Data Sources */}

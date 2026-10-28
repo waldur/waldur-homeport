@@ -4,6 +4,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableDensity,
   TableHead,
   TableHeader,
   TableRow,
@@ -34,6 +35,7 @@ export interface DataTableProps<T> {
   rows: T[];
   rowKey: (row: T) => string;
   className?: string;
+  density?: TableDensity;
 }
 
 export function DataTable<T>({
@@ -41,9 +43,10 @@ export function DataTable<T>({
   rows,
   rowKey,
   className,
+  density,
 }: DataTableProps<T>) {
   return (
-    <Table className={className}>
+    <Table className={className} density={density}>
       <TableHeader>
         <TableRow>
           {columns.map((col) => (

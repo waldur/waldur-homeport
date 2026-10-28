@@ -216,9 +216,9 @@ const PresetSelector: FC = () => {
         <LightningIcon weight="bold" className="text-brand" />
         <span>{translate('Quick Configuration')}</span>
       </div>
-      <div className="row g-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5">
         {policyPresets.map((preset) => (
-          <div key={preset.key} className="col-md-6 col-lg-3">
+          <div key={preset.key}>
             <Card
               className={`h-full cursor-pointer border-2 ${
                 selectedPreset === preset.key

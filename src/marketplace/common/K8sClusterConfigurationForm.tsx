@@ -229,8 +229,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
             </>
           }
           labelCol={4}
-          valueCol={7}
-          valueClass="offset-sm-1"
+          valueCol={8}
           space={4}
         />
       )}
@@ -274,8 +273,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
             </>
           }
           labelCol={4}
-          valueCol={7}
-          valueClass="offset-sm-1"
+          valueCol={8}
           space={datacenter?.openstack_infrastructure ? 4 : 0}
         />
       )}
@@ -296,11 +294,11 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
               />
             }
             labelCol={4}
-            valueCol={7}
-            labelClass="col"
-            valueClass="offset-sm-1 col-auto"
+            valueCol={8}
+            labelClass="flex-1 sm:flex-none"
+            valueClass="max-sm:w-auto max-sm:flex-none"
             space={4}
-            className="gy-2 items-center"
+            className="gap-y-1.5 items-center"
           />
 
           {datacenter.node_groups.length === 0 && (

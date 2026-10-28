@@ -1,6 +1,14 @@
 import { FC } from 'react';
 
-import { AlertItem } from 'waldur-ui';
+import {
+  AlertItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { MermaidChart } from '@/core/MermaidChart';
 import { formatJsxTemplate, translate } from '@/i18n';
@@ -288,26 +296,26 @@ export const MatrixHowItWorksDialog: FC = () => {
               'The Waldur bot responds to commands posted in project chat rooms. Type a command in the room and the bot will reply with the relevant information.',
             )}
           </p>
-          <div className="table-responsive">
-            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
-              <thead>
-                <tr className="text-start text-quaternary font-medium text-xs uppercase">
-                  <th style={{ width: '20%' }}>{translate('Command')}</th>
-                  <th>{translate('Description')}</th>
-                </tr>
-              </thead>
-              <tbody className="text-tertiary">
-                {BOT_COMMANDS.map((cmd) => (
-                  <tr key={cmd.command}>
-                    <td>
-                      <code className="font-medium">{cmd.command}</code>
-                    </td>
-                    <td>{cmd.description}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Table density="normal">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-1/5">{translate('Command')}</TableHead>
+                <TableHead>{translate('Description')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {BOT_COMMANDS.map((cmd) => (
+                <TableRow key={cmd.command}>
+                  <TableCell>
+                    <code className="font-medium">{cmd.command}</code>
+                  </TableCell>
+                  <TableCell className="text-tertiary">
+                    {cmd.description}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </section>
 
         {/* Export Flow */}

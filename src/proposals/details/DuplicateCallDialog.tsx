@@ -1,6 +1,5 @@
 import { useRouter } from '@uirouter/react';
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { proposalProtectedCallsDuplicate } from 'waldur-js-client';
 
@@ -112,8 +111,8 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
             />
 
             <h5 className="mb-3">{translate('Copy options')}</h5>
-            <Row>
-              <Col md={6}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+              <div>
                 <BooleanGroup
                   name="copy_documents"
                   label={translate('Documents')}
@@ -149,8 +148,8 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                     'Copy resource-request templates. Skipped automatically if "Offerings" is unchecked.',
                   )}
                 />
-              </Col>
-              <Col md={6}>
+              </div>
+              <div>
                 <BooleanGroup
                   name="copy_role_mappings"
                   label={translate('Role mappings')}
@@ -186,8 +185,8 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                     'Copy reviewer assignment automation settings.',
                   )}
                 />
-              </Col>
-            </Row>
+              </div>
+            </div>
           </ModalDialog>
         </form>
       )}

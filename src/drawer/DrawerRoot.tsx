@@ -213,7 +213,7 @@ export const DrawerRoot: FunctionComponent = () => {
           <div
             data-slot="drawer-body"
             className={classNames(
-              'relative flex-[1_1_auto]',
+              'relative flex-auto',
               chat
                 ? // The chats scroll inside themselves.
                   'flex flex-col overflow-y-hidden'

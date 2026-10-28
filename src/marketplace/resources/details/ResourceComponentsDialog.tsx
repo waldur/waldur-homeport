@@ -1,4 +1,3 @@
-import { Col, Row } from 'react-bootstrap';
 import { Resource, OfferingComponent } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -39,10 +38,10 @@ export const ResourceComponentsDialog: React.FC<
       }
       footer={<CloseDialogButton label={translate('Done')} />}
     >
-      <Row>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5">
         {getResourceComponentEntries(resolve.resource, resolve.components).map(
           (entry) => (
-            <Col key={entry.key} xs={12} sm={6} md={4} lg={3}>
+            <div key={entry.key}>
               <ResourceComponentItem
                 resource={resolve.resource as any}
                 component={entry.component}
@@ -50,10 +49,10 @@ export const ResourceComponentsDialog: React.FC<
                 thisMonth={entry.thisMonth}
                 noUsageThisMonth={entry.noUsageThisMonth}
               />
-            </Col>
+            </div>
           ),
         )}
-      </Row>
+      </div>
     </ModalDialog>
   );
 };

@@ -112,8 +112,7 @@ interface TableDisplay {
   id?: string;
   rowClass?: (({ row }: { row: any }) => string) | string;
   rowValidate?: TableProps['rowValidate'];
-  gridSize?: TableProps['gridSize'];
-  gridSpace?: number;
+  gridClassName?: string;
   gridFixedWidth?: boolean;
 }
 

@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { OrderStatsResponse } from 'waldur-js-client';
 
 import { OrdersDailyCostChart } from './OrdersDailyCostChart';
@@ -18,32 +17,26 @@ export const OrdersContent: FC<OrdersContentProps> = ({ data }) => {
     <>
       <OrdersSummaryCards stats={data.summary} />
 
-      <Row className="g-4 mb-5">
-        <Col xs={12}>
-          <OrdersTrendChart dailyStats={data.daily} />
-        </Col>
-      </Row>
+      <div className="mb-5">
+        <OrdersTrendChart dailyStats={data.daily} />
+      </div>
 
-      <Row className="g-4 mb-5">
-        <Col xs={12}>
-          <OrdersDailyCostChart dailyStats={data.daily} />
-        </Col>
-      </Row>
+      <div className="mb-5">
+        <OrdersDailyCostChart dailyStats={data.daily} />
+      </div>
 
-      <Row className="g-4 mb-5">
-        <Col xs={12}>
-          <OrdersDailyTypeChart dailyStats={data.daily} />
-        </Col>
-      </Row>
+      <div className="mb-5">
+        <OrdersDailyTypeChart dailyStats={data.daily} />
+      </div>
 
-      <Row className="g-4">
-        <Col xs={12} lg={6}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+        <div>
           <OrdersStateChart stateStats={data.by_state} />
-        </Col>
-        <Col xs={12} lg={6}>
+        </div>
+        <div>
           <OrdersTypeChart typeStats={data.by_type} />
-        </Col>
-      </Row>
+        </div>
+      </div>
     </>
   );
 };

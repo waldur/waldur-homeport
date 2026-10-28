@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { projectCreditsList } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -48,10 +47,8 @@ const CreditHealth: FC<Props> = ({ project }) => {
   }
 
   return (
-    <Row className="mt-2.5">
-      <Col xs={12} className="mb-2.5">
-        <HealthView data={data} />
-      </Col>
-    </Row>
+    <div className="mt-2.5 mb-2.5">
+      <HealthView data={data} />
+    </div>
   );
 };

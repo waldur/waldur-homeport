@@ -388,8 +388,8 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
 
             {showReviewExtras && (
               <>
-                <div className="row">
-                  <div className="col-sm-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
+                  <div>
                     <NumberGroup
                       name="min_reviewers"
                       label={translate('Minimum reviewers')}
@@ -399,7 +399,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
                       min={1}
                     />
                   </div>
-                  <div className="col-sm-6">
+                  <div>
                     <NumberGroup
                       name="min_score_threshold"
                       label={translate('Minimum score threshold')}

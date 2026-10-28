@@ -1,3 +1,12 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { formatCurrency } from '@/core/formatCurrency';
 import { isFeatureVisible } from '@/features/connect';
@@ -17,44 +26,40 @@ export const LimitlessComponentsTable = ({
   const shouldConcealPrices =
     isFeatureVisible(MarketplaceFeatures.conceal_prices) || concealBillingInfo;
   return (
-    <div className="table-responsive mb-3">
-      <table className="table align-middle table-row-bordered text-sm gy-4">
-        <thead>
-          <tr className="align-middle">
-            <th>{translate('Component name')}</th>
-            <th>{translate('Unit')}</th>
+    <div className="mb-3">
+      <Table density="normal">
+        <TableHeader>
+          <TableRow>
+            <TableHead>{translate('Component name')}</TableHead>
+            <TableHead>{translate('Unit')}</TableHead>
             {!shouldConcealPrices && (
-              <th>
+              <TableHead>
                 {translate('Price per unit')}
                 <PriceTooltip />
-              </th>
+              </TableHead>
             )}
-          </tr>
-        </thead>
-        <tbody>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {components.map((component, index) => (
-            <tr key={index}>
-              <td>
-                <p>{component.name}</p>
-              </td>
-              <td>
-                <p>{component.measured_unit}</p>
-              </td>
+            <TableRow key={index}>
+              <TableCell className="font-medium text-primary">
+                {component.name}
+              </TableCell>
+              <TableCell>{component.measured_unit}</TableCell>
               {!shouldConcealPrices && (
-                <td>
-                  <p>
-                    {formatCurrency(
-                      component.price,
-                      ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-                      4,
-                    )}
-                  </p>
-                </td>
+                <TableCell>
+                  {formatCurrency(
+                    component.price,
+                    ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+                    4,
+                  )}
+                </TableCell>
               )}
-            </tr>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { NestedPartition } from 'waldur-js-client';
 
 import { CheckOrX } from '@/core/CheckOrX';
@@ -14,8 +13,8 @@ interface OwnProps {
 
 export const OfferingPartitionExpandableRow: FC<OwnProps> = ({ row }) => (
   <ExpandableContainer asTable>
-    <Row>
-      <Col lg={6}>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
+      <div>
         <Field
           label={translate('CPU architecture')}
           value={renderFieldOrDash(row.cpu_arch)}
@@ -71,8 +70,8 @@ export const OfferingPartitionExpandableRow: FC<OwnProps> = ({ row }) => (
           value={row.max_mem_per_node}
           space={1.5}
         />
-      </Col>
-      <Col lg={6}>
+      </div>
+      <div>
         <Field
           label={translate('Preemption grace time in seconds')}
           value={row.grace_time}
@@ -123,7 +122,7 @@ export const OfferingPartitionExpandableRow: FC<OwnProps> = ({ row }) => (
           value={<CheckOrX value={row.req_resv} />}
           space={1.5}
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   </ExpandableContainer>
 );

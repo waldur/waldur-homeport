@@ -196,7 +196,7 @@ export const SpendingLimitFields: FC<{
             {component.name}
           </h6>
         )}
-        <FormTable className="gy-3">
+        <FormTable>
           {getOfferedPeriods(component).map((period) => {
             const { maximum, heldOnly } = getPeriodBounds(component, period);
             return (

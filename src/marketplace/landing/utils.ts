@@ -5,7 +5,6 @@ import { MarketplacePublicOfferingsListData } from 'waldur-js-client';
 
 import { CardStyleType } from '@/marketplace/common/cards';
 import { RootState } from '@/store/reducers';
-import { GridSize } from '@/table/types';
 import { getCustomer, getProject } from '@/workspace/selectors';
 
 import {
@@ -75,9 +74,9 @@ export const useOfferingListFilter = (
   );
 };
 
-export const getOfferingGridSize = (cardStyle: CardStyleType): GridSize =>
+export const getOfferingGridClassName = (cardStyle: CardStyleType): string =>
   cardStyle === 'list'
-    ? { xs: 12 }
+    ? ''
     : cardStyle === 'compact'
-      ? { xs: 6, sm: 4, md: 4, lg: 3 }
-      : { lg: 6, xl: 4 };
+      ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
+      : 'lg:grid-cols-2 xl:grid-cols-3';

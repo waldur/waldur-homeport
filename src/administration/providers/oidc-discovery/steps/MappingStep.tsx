@@ -74,12 +74,12 @@ const FieldMappingRow: FC<FieldMappingRowProps> = ({
   const availableSet = new Set(field.available_claims);
 
   return (
-    <FormField className="row mb-3 items-start">
-      <div className="col-md-4">
+    <FormField className="grid grid-cols-1 md:grid-cols-12 gap-x-5 mb-3 items-start">
+      <div className="md:col-span-4">
         <FormLabel>{field.field}</FormLabel>
         <small className="block text-quaternary">{field.description}</small>
       </div>
-      <div className="col-md-8">
+      <div className="md:col-span-8">
         <NativeSelect
           value={selectedValue}
           onChange={(e) => handleSelectChange(e.target.value)}

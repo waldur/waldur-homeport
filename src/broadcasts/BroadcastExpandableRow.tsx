@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { BroadcastMessage } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -15,12 +14,12 @@ export const BroadcastExpandableRow: FunctionComponent<{
   row: BroadcastMessage;
 }> = ({ row }) => (
   <ExpandableContainer>
-    <Row>
-      <Col sm={8} style={{ whiteSpace: 'pre-line' }}>
+    <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-5">
+      <div className="sm:col-span-8" style={{ whiteSpace: 'pre-line' }}>
         <p>{row.body}</p>
         <p>{ENV.plugins.WALDUR_CORE.COMMON_FOOTER_TEXT}</p>
-      </Col>
-      <Col sm={4}>
+      </div>
+      <div className="sm:col-span-4">
         <OptionsList
           label={translate('Organizations')}
           list={row.query['customers']}
@@ -41,7 +40,7 @@ export const BroadcastExpandableRow: FunctionComponent<{
             valueCol={7}
           />
         )}
-      </Col>
-    </Row>
+      </div>
+    </div>
   </ExpandableContainer>
 );

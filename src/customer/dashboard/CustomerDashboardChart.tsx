@@ -1,6 +1,5 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { Col } from 'react-bootstrap';
 import { customersUsersList } from 'waldur-js-client';
 
 import { parseSelectData } from '@/core/api';
@@ -40,22 +39,28 @@ export const CustomerDashboardChart: FunctionComponent<
   });
 
   if (costChart.isLoading || teamChart.isLoading) {
-    return <LoadingSpinner />;
+    return (
+      <div className="md:col-span-2">
+        <LoadingSpinner />
+      </div>
+    );
   } else if (costChart.error || teamChart.error) {
     return (
-      <LoadingErred
-        loadData={() => {
-          costChart.refetch();
-          teamChart.refetch();
-        }}
-      />
+      <div className="md:col-span-2">
+        <LoadingErred
+          loadData={() => {
+            costChart.refetch();
+            teamChart.refetch();
+          }}
+        />
+      </div>
     );
   }
   if (costChart.chart || teamChart.chart) {
     return (
       <>
         {Boolean(costChart.chart) && (
-          <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
+          <div className="mb-4" style={COMMON_WIDGET_HEIGHT}>
             <WidgetCard
               cardTitle={
                 <>
@@ -70,10 +75,10 @@ export const CustomerDashboardChart: FunctionComponent<
             >
               <EChart options={costChart.options} />
             </WidgetCard>
-          </Col>
+          </div>
         )}
         {Boolean(teamChart.chart) && (
-          <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
+          <div className="mb-4" style={COMMON_WIDGET_HEIGHT}>
             <TeamWidget
               api={() =>
                 customersUsersList({
@@ -93,7 +98,7 @@ export const CustomerDashboardChart: FunctionComponent<
               loadingAdd={loadingProjects}
               className="h-full"
             />
-          </Col>
+          </div>
         )}
       </>
     );

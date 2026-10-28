@@ -10,8 +10,8 @@ interface AttributeRowProps {
 
 export const AttributeRow: FunctionComponent<AttributeRowProps> = (props) => (
   <tr>
-    <td className="col-md-3">{props.attribute.title}</td>
-    <td className="col-md-9">
+    <td className="md:w-3/12">{props.attribute.title}</td>
+    <td className="md:w-9/12">
       <AttributeCell attr={props.attribute} value={props.value} />
     </td>
   </tr>

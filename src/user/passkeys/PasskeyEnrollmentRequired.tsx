@@ -1,7 +1,7 @@
 import { FingerprintIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { BaseButton } from 'waldur-ui';
 
@@ -111,8 +111,8 @@ export const PasskeyEnrollmentRequired: FunctionComponent = () => {
 
   return (
     <div className={classNames(PAGE_CONTAINER_BOUNDED_CLASSNAME, 'py-8')}>
-      <Row className="justify-center">
-        <Col md={7} lg={6}>
+      <div className="flex flex-wrap justify-center">
+        <div className="w-full md:w-7/12 lg:w-6/12">
           <Card>
             <Card.Body className="text-center p-8">
               <div className="mb-4 flex justify-center">
@@ -146,8 +146,8 @@ export const PasskeyEnrollmentRequired: FunctionComponent = () => {
               )}
             </Card.Body>
           </Card>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 };

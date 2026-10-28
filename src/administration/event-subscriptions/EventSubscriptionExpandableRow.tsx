@@ -16,8 +16,8 @@ export const EventSubscriptionExpandableRow: FC<
 
   return (
     <ExpandableContainer>
-      <div className="row">
-        <div className="col-md-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+        <div>
           <h6 className="mb-2.5">{translate('Subscription details')}</h6>
           <table className="table table-sm">
             <tbody>
@@ -50,7 +50,7 @@ export const EventSubscriptionExpandableRow: FC<
             </tbody>
           </table>
         </div>
-        <div className="col-md-6">
+        <div>
           <h6 className="mb-2.5">{translate('Observable objects')}</h6>
           {observableObjects && observableObjects.length > 0 ? (
             <div className="table-responsive">

@@ -1,5 +1,5 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { BaseButton } from 'waldur-ui';
@@ -33,8 +33,8 @@ export const StorageDataTypeArrayField = ({
           </div>
         </Card.Header>
         <Card.Body className="px-3">
-          <Row>
-            <Col md={6}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+            <div>
               <StringGroup
                 name={`${member}.key`}
                 label={translate('Key')}
@@ -45,8 +45,8 @@ export const StorageDataTypeArrayField = ({
                 placeholder={translate('Key')}
                 validate={required}
               />
-            </Col>
-            <Col md={6}>
+            </div>
+            <div>
               <StringGroup
                 name={`${member}.label`}
                 label={translate('Display Label')}
@@ -55,8 +55,8 @@ export const StorageDataTypeArrayField = ({
                 placeholder={translate('Display Label')}
                 validate={required}
               />
-            </Col>
-          </Row>
+            </div>
+          </div>
         </Card.Body>
       </Card>
     ))}

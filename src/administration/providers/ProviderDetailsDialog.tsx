@@ -63,7 +63,7 @@ export const ProviderDetailsDialog = (props) => {
           title={translate('Edit user agreement')}
           footer={<CloseDialogButton label={translate('OK')} />}
         >
-          <FormTable detailsMode className="gy-3">
+          <FormTable detailsMode>
             {data[neededProvider] && (
               <>
                 {renderUrlItem('discovery_url', 'Discovery URL')}

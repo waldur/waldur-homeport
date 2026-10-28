@@ -1,5 +1,4 @@
 import { FunctionComponent, useEffect, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { marketplaceCategoriesList } from 'waldur-js-client';
 
@@ -40,8 +39,8 @@ export const ImportConfigurationTab: FunctionComponent = () => {
 
   return (
     <>
-      <Row className="mb-5.5">
-        <Col md={12}>
+      <div className="mb-5.5">
+        <div>
           <AsyncSelectGroup
             name="category"
             placeholder={translate('Select category...')}
@@ -56,15 +55,15 @@ export const ImportConfigurationTab: FunctionComponent = () => {
             )}
             spaceless
           />
-        </Col>
-      </Row>
-      <Row>
-        <Col md={12}>
+        </div>
+      </div>
+      <div>
+        <div>
           <h5>{translate('Import options')}</h5>
-        </Col>
-      </Row>
-      <Row>
-        <Col md={6}>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+        <div>
           <BooleanGroup
             name="import_components"
             label={translate('Import components')}
@@ -96,8 +95,8 @@ export const ImportConfigurationTab: FunctionComponent = () => {
             label={translate('Import access endpoints')}
             description={translate('Include access endpoint configurations')}
           />
-        </Col>
-        <Col md={6}>
+        </div>
+        <div>
           <BooleanGroup
             name="import_organization_groups"
             label={translate('Import organization groups')}
@@ -141,8 +140,8 @@ export const ImportConfigurationTab: FunctionComponent = () => {
               "Preserve offering state from export, otherwise set to 'Draft'",
             )}
           />
-        </Col>
-      </Row>
+        </div>
+      </div>
     </>
   );
 };

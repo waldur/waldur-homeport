@@ -1,5 +1,3 @@
-import { Col, Row } from 'react-bootstrap';
-
 import { translate } from '@/i18n';
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
 import { getRequestedPrepaidMonths } from '@/proposals/prepaidDuration';
@@ -17,10 +15,10 @@ const UserInputs = ({ callOffering, optionsValues }) => (
       <tbody>
         {callOffering.options?.order?.map((key) => (
           <tr key={key}>
-            <th className="col-md-4">
+            <th className="md:w-4/12">
               {callOffering.options.options[key]?.label}:
             </th>
-            <td className="col-md-8">
+            <td className="md:w-8/12">
               {typeof optionsValues[key] === 'boolean' ? (
                 <BooleanField value={optionsValues[key]} />
               ) : typeof optionsValues[key] === 'object' ? (
@@ -66,25 +64,25 @@ export const ResourceRequestExpandableRow = ({
           what a reviewer is actually here for — behind a sideways scroll.
           Laid out with the same Field the details overview above uses, so the
           two blocks on one page read as the same kind of thing. */}
-      <Row className="text-sm mb-3">
-        <Col sm={6}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 text-sm mb-3">
+        <div>
           <Field
             label={translate('Provider')}
             value={renderFieldOrDash(row.requested_offering.provider_name)}
             labelCol={5}
             valueCol={7}
           />
-        </Col>
-        <Col sm={6}>
+        </div>
+        <div>
           <Field
             label={translate('Category')}
             value={renderFieldOrDash(row.requested_offering.category_name)}
             labelCol={5}
             valueCol={7}
           />
-        </Col>
+        </div>
         <SlurmPlacementFields attributes={row.attributes} />
-      </Row>
+      </div>
       <TabbedPlanComponents
         offering={row.requested_offering as any}
         plan={row.requested_offering.plan_details}

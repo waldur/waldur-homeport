@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { invoicesList } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
@@ -59,21 +58,21 @@ export const OverviewLastMonths: FunctionComponent = () => {
   }
 
   return (
-    <Row className="mb-4">
+    <div className="grid grid-cols-1 gap-x-5 mb-4 md:grid-cols-2">
       {value[0] && (
-        <Col sm={12} md={6} className="sm:mb-4 md:mb-0">
+        <div className="sm:mb-4 md:mb-0">
           <MonthOverview
             invoice={value[0]}
             customer={customer}
             costTrend={lastMonthTotalCompare}
           />
-        </Col>
+        </div>
       )}
       {value[1] && (
-        <Col sm={12} md={6}>
+        <div>
           <MonthOverview invoice={value[1]} customer={customer} />
-        </Col>
+        </div>
       )}
-    </Row>
+    </div>
   );
 };

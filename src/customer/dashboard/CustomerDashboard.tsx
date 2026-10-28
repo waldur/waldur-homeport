@@ -1,6 +1,5 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { customersStatsRetrieve } from 'waldur-js-client';
 
 import { Switch } from 'waldur-ui';
@@ -107,15 +106,12 @@ export const CustomerDashboard: FunctionComponent = () => {
   if (!customer || isServiceManagerOnly) return null;
 
   return (
-    <Row>
+    <div className="grid grid-cols-1 gap-x-5 md:grid-cols-2">
       {canSeeCharts && (
         <CustomerDashboardChart customer={customer} user={user} />
       )}
       {showTerminatedSwitch && (
-        <Col
-          xs={12}
-          className="flex flex-wrap items-center justify-end gap-2.5 mb-4"
-        >
+        <div className="flex flex-wrap items-center justify-end gap-2.5 mb-4 md:col-span-2">
           {includeTerminated && (
             <span className="text-quaternary text-xs">
               {translate(
@@ -129,10 +125,10 @@ export const CustomerDashboard: FunctionComponent = () => {
             size="sm"
             label={translate('Include terminated resources')}
           />
-        </Col>
+        </div>
       )}
       {shouldShowCurrentMonthWidget && (
-        <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
+        <div className="mb-4" style={COMMON_WIDGET_HEIGHT}>
           <AggregateLimitWidget
             customer={customer}
             data={currentMonthFilteredData}
@@ -142,10 +138,10 @@ export const CustomerDashboard: FunctionComponent = () => {
             type="monthly"
             includeTerminated={includeTerminated}
           />
-        </Col>
+        </div>
       )}
       {shouldShowAggregateLimitWidget && (
-        <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
+        <div className="mb-4" style={COMMON_WIDGET_HEIGHT}>
           <AggregateLimitWidget
             customer={customer}
             data={aggregateLimitData}
@@ -154,22 +150,22 @@ export const CustomerDashboard: FunctionComponent = () => {
             refetch={aggregateLimitRefetch}
             includeTerminated={includeTerminated}
           />
-        </Col>
+        </div>
       )}
       {Boolean(customer.credit) && (
-        <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
+        <div className="mb-4" style={COMMON_WIDGET_HEIGHT}>
           <CustomerDashboardCredit customer={customer} />
-        </Col>
+        </div>
       )}
-      <Col xs={12}>
+      <div className="md:col-span-2">
         <UsageViewsSection
           customer={customer}
           includeTerminated={includeTerminated}
         />
-      </Col>
-      <Col xs={12}>
+      </div>
+      <div className="md:col-span-2">
         <ProjectsList customer={customer} />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

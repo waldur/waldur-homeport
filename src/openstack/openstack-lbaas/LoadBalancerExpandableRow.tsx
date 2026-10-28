@@ -296,11 +296,11 @@ const VipPortDetails: FC<{
 
   return (
     <div className="mt-3 border-t-[1px] border-t-secondary pt-3">
-      <div className="row mb-1.5">
-        <div className="col-sm-3 font-medium text-quaternary">
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-5 mb-1.5">
+        <div className="sm:col-span-3 font-medium text-quaternary">
           {translate('VIP port')}
         </div>
-        <div className="col-sm-9">
+        <div className="sm:col-span-9">
           {tenantMarketplaceUuid ? (
             <Link
               state="marketplace-resource-details"
@@ -317,27 +317,27 @@ const VipPortDetails: FC<{
         </div>
       </div>
       {ipAddresses && (
-        <div className="row mb-1.5">
-          <div className="col-sm-3 font-medium text-quaternary">
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-5 mb-1.5">
+          <div className="sm:col-span-3 font-medium text-quaternary">
             {translate('VIP port IPs')}
           </div>
-          <div className="col-sm-9">{ipAddresses}</div>
+          <div className="sm:col-span-9">{ipAddresses}</div>
         </div>
       )}
       {port?.mac_address && (
-        <div className="row mb-1.5">
-          <div className="col-sm-3 font-medium text-quaternary">
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-5 mb-1.5">
+          <div className="sm:col-span-3 font-medium text-quaternary">
             {translate('MAC address')}
           </div>
-          <div className="col-sm-9">{port.mac_address}</div>
+          <div className="sm:col-span-9">{port.mac_address}</div>
         </div>
       )}
       {port?.network_name && (
-        <div className="row mb-1.5">
-          <div className="col-sm-3 font-medium text-quaternary">
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-5 mb-1.5">
+          <div className="sm:col-span-3 font-medium text-quaternary">
             {translate('Network')}
           </div>
-          <div className="col-sm-9">{port.network_name}</div>
+          <div className="sm:col-span-9">{port.network_name}</div>
         </div>
       )}
     </div>
@@ -365,11 +365,11 @@ const FloatingIpDetails: FC<{ floatingIpUrl?: string | null }> = ({
 
   return (
     <div className="mt-3 border-t-[1px] border-t-secondary pt-3">
-      <div className="row mb-1.5">
-        <div className="col-sm-3 font-medium text-quaternary">
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-5 mb-1.5">
+        <div className="sm:col-span-3 font-medium text-quaternary">
           {translate('Floating IP')}
         </div>
-        <div className="col-sm-9">
+        <div className="sm:col-span-9">
           {floatingIp?.address ? floatingIp.address : renderFieldOrDash(null)}
           {floatingIp?.name && (
             <span className="text-quaternary ms-1.5">({floatingIp.name})</span>

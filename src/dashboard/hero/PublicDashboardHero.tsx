@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { Tooltip } from 'waldur-ui';
 
@@ -31,19 +31,18 @@ interface PublicDashboardHeroProps {
 export const PublicDashboardHero: FC<
   PropsWithChildren<PublicDashboardHeroProps>
 > = (props) => {
-  const BodyElement = props.hideQuickSection ? 'div' : Row;
   return (
     <div
       className={classNames('public-dashboard-hero', props.containerClassName)}
     >
-      <BodyElement
-        className={classNames('public-dashboard-hero-body', props.className)}
+      <div
+        className={classNames(
+          'public-dashboard-hero-body',
+          !props.hideQuickSection && 'grid grid-cols-1 md:grid-cols-2 gap-x-5',
+          props.className,
+        )}
       >
-        <Col
-          md={props.hideQuickSection ? undefined : 6}
-          sm={props.hideQuickSection ? undefined : 12}
-          className="flex"
-        >
+        <div className="flex">
           <Card
             className={classNames(
               'w-full md:mb-0 mb-3',
@@ -103,10 +102,10 @@ export const PublicDashboardHero: FC<
               </div>
             </Card.Body>
           </Card>
-        </Col>
+        </div>
 
         {!props.hideQuickSection && (
-          <Col md={6} sm={12} className="flex">
+          <div className="flex">
             <Card
               className={classNames(
                 'grow',
@@ -114,13 +113,13 @@ export const PublicDashboardHero: FC<
               )}
             >
               <Card.Body className="flex flex-col">
-                <Row>
-                  <Col xs>{props.quickBody}</Col>
+                <div className="flex flex-wrap gap-x-5">
+                  <div className="flex-1 min-w-0">{props.quickBody}</div>
                   {/* Quick actions */}
                   {props.quickActions && (
-                    <Col xs="auto">{props.quickActions}</Col>
+                    <div className="flex-none">{props.quickActions}</div>
                   )}
-                </Row>
+                </div>
                 {props.quickFooter && (
                   <div
                     className={classNames(
@@ -134,9 +133,9 @@ export const PublicDashboardHero: FC<
                 )}
               </Card.Body>
             </Card>
-          </Col>
+          </div>
         )}
-      </BodyElement>
+      </div>
     </div>
   );
 };

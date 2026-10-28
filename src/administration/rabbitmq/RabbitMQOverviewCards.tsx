@@ -1,6 +1,6 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 import { formatJsxTemplate } from '@/i18n/translate';
@@ -29,8 +29,8 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
   ).length;
 
   return (
-    <Row className="mb-5">
-      <Col md={6} lg={4}>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 mb-5">
+      <div>
         <Card className="card-bordered mb-4">
           <Card.Body>
             <div className="flex items-center">
@@ -59,8 +59,8 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
             )}
           </Card.Body>
         </Card>
-      </Col>
-      <Col md={6} lg={4}>
+      </div>
+      <div>
         <Card className="card-bordered mb-4">
           <Card.Body>
             <strong className="block display-4 text-success">
@@ -71,8 +71,8 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
             </strong>
           </Card.Body>
         </Card>
-      </Col>
-      <Col md={6} lg={4}>
+      </div>
+      <div>
         <Card className="card-bordered mb-4">
           <Card.Body>
             <strong
@@ -85,7 +85,7 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
             </strong>
           </Card.Body>
         </Card>
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

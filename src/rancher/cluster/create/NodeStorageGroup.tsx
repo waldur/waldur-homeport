@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Col } from 'react-bootstrap';
 import { FieldArray } from 'react-final-form-arrays';
 
 import { FormField } from 'waldur-ui';
@@ -20,7 +19,7 @@ export const NodeStorageGroup: FunctionComponent<any> = (props) => (
         name="data_volumes"
         component={({ fields }) => (
           <FormField>
-            <Col sm={{ span: 9, offset: 3 }}>
+            <div>
               {fields.map((volume, index) => (
                 <DataVolumePanel
                   key={index}
@@ -39,7 +38,7 @@ export const NodeStorageGroup: FunctionComponent<any> = (props) => (
                   })
                 }
               />
-            </Col>
+            </div>
           </FormField>
         )}
       />

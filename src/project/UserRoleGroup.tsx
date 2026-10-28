@@ -1,5 +1,5 @@
+import classNames from 'classnames';
 import { useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { FormField, FormLabel } from 'waldur-ui';
 
@@ -47,13 +47,13 @@ export const UserRoleGroup = ({
   }
 
   return (
-    <FormField as={Row} className={className}>
-      <FormLabel className="col-auto mb-0 py-[10px]">
+    <FormField className={classNames('flex flex-wrap gap-x-5', className)}>
+      <FormLabel className="flex-none mb-0 py-[10px]">
         {altLabel || role?.description || role?.name}:
       </FormLabel>
-      <Col xs={12} sm>
+      <div className="w-full sm:flex-1 sm:min-w-0">
         <SymbolsGroup items={items} max={max || 6} onClick={onClick} />
-      </Col>
+      </div>
     </FormField>
   );
 };

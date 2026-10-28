@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Col, Row, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 import { AccordionCard, Progress } from 'waldur-ui';
 
@@ -32,8 +32,8 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
       defaultOpen={bufferHealth !== 'success' || indexHealth !== 'success'}
       className="mb-5"
     >
-      <Row>
-        <Col lg={6}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
+        <div>
           <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Hit ratios')}
           </h6>
@@ -59,8 +59,8 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
               label={translate('Index cache')}
             />
           </div>
-        </Col>
-        <Col lg={6}>
+        </div>
+        <div>
           <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Memory settings')}
           </h6>
@@ -87,8 +87,8 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
           <small className="text-quaternary mt-2.5 block">
             {translate('Values are in 8KB pages')}
           </small>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </AccordionCard>
   );
 };

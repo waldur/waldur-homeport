@@ -295,6 +295,9 @@ export default tseslint
         // .modal / .btn-close styles are deleted.
         'waldur-custom/no-bootstrap-modal': 'error',
         'waldur-custom/no-bootstrap-tabs': 'error',
+        // Zero instances remain: layouts are Tailwind grid/flex, and Bootstrap's
+        // grid and the .table gutter utilities are no longer compiled.
+        'waldur-custom/no-bootstrap-grid': 'error',
         'waldur-custom/no-bootstrap-breadcrumb': 'error',
         // A FormLabel outside a FormField names no control: use FormFieldset +
         // FormLegend for a group, FormHeading for a caption.

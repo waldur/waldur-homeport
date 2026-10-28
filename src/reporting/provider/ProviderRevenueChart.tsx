@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
-import { Row } from 'react-bootstrap';
 import { ServiceProviderRevenues } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
@@ -45,7 +44,7 @@ export const ProviderRevenueChart: FC<ProviderRevenueChartProps> = ({
   );
 
   return (
-    <Row>
+    <div>
       <ChartCard
         title={translate('Revenue trend (12 months)')}
         getExportData={getExportData}
@@ -61,6 +60,6 @@ export const ProviderRevenueChart: FC<ProviderRevenueChartProps> = ({
           />
         )}
       </ChartCard>
-    </Row>
+    </div>
   );
 };

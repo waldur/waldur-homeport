@@ -304,8 +304,8 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
           <form className="mt-5" onSubmit={handleSubmit}>
             <h5 className="mb-2.5">{translate('Set new limits')}</h5>
 
-            <div className="row">
-              <div className="col-md-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5">
+              <div>
                 <NumberGroup
                   name="daily_limit"
                   placeholder={systemDefaultPlaceholder.daily}
@@ -318,7 +318,7 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
                   )}
                 />
               </div>
-              <div className="col-md-4">
+              <div>
                 <NumberGroup
                   name="weekly_limit"
                   placeholder={systemDefaultPlaceholder.weekly}
@@ -331,7 +331,7 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
                   )}
                 />
               </div>
-              <div className="col-md-4">
+              <div>
                 <NumberGroup
                   name="monthly_limit"
                   placeholder={systemDefaultPlaceholder.monthly}

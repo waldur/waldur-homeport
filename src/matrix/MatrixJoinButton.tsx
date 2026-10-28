@@ -187,7 +187,7 @@ const CredentialsContent: FC<{
   // Sign-in details first, in the order a client asks for them; the room
   // last, next to the footer button that opens it.
   return (
-    <FormTable hideActions detailsMode className="gy-5">
+    <FormTable hideActions detailsMode>
       <FormTable.Item
         label={translate('Homeserver')}
         value={<FieldWithCopy value={credentials.homeserver_url} />}

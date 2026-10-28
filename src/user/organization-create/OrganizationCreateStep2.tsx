@@ -5,7 +5,7 @@ import {
 } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
 import { BaseButton, FormField, FormLabel } from 'waldur-ui';
@@ -184,22 +184,25 @@ export const OrganizationCreateStep2: FunctionComponent<
     if (checklistQuestions.length === 0) return null;
 
     return (
-      <Row className="g-4 pt-3">
+      <div className="grid grid-cols-1 gap-3 pt-3 md:grid-cols-2">
         {checklistQuestions.map((question, index) => {
           const isLastOdd =
             checklistQuestions.length % 2 !== 0 &&
             index === checklistQuestions.length - 1;
           return (
-            <Col md={isLastOdd ? 12 : 6} key={question.uuid}>
+            <div
+              className={isLastOdd ? 'md:col-span-2' : undefined}
+              key={question.uuid}
+            >
               <ChecklistQuestionField
                 question={question}
                 allQuestions={checklistQuestions}
                 formValues={allFormValues}
               />
-            </Col>
+            </div>
           );
         })}
-      </Row>
+      </div>
     );
   };
 
@@ -408,8 +411,8 @@ export const OrganizationCreateStep2: FunctionComponent<
                 )}
               </p>
 
-              <Row className="g-6">
-                <Col md={6}>
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                <div>
                   <StringGroup
                     name="name"
                     label={translate('Organization name')}
@@ -418,15 +421,15 @@ export const OrganizationCreateStep2: FunctionComponent<
                     validate={composeValidators(...getNameFieldValidators())}
                     required={true}
                   />
-                </Col>
-                <Col md={6}>
+                </div>
+                <div>
                   <StringGroup
                     name="registration_code"
                     label={translate('Registration code')}
                     placeholder={translate('12345678')}
                   />
-                </Col>
-              </Row>
+                </div>
+              </div>
 
               {renderChecklistQuestions()}
 

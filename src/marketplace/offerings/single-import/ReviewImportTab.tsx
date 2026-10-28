@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 
 import { AlertItem } from 'waldur-ui';
@@ -30,8 +29,8 @@ export const ReviewImportTab: FunctionComponent = () => {
 
   return (
     <div>
-      <Row>
-        <Col md={12}>
+      <div>
+        <div>
           <h5>{translate('Import summary')}</h5>
 
           <p>
@@ -83,8 +82,8 @@ export const ReviewImportTab: FunctionComponent = () => {
               )}
             />
           )}
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 };

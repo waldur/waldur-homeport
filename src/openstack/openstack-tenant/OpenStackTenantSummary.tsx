@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { Badge } from 'waldur-ui';
 
@@ -166,14 +165,14 @@ export const OpenStackTenantSummary: FunctionComponent<
 
   return (
     <>
-      <Row>
-        <Col>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div>
           <ResourceSummaryBase resource={resource} hideBaseInfo />
           <Field label={translate('Access')} value={formatAccess(props)} />
           <Field label={translate('Username')} value={formatUsername(props)} />
           <Field label={translate('Password')} value={formatPassword(props)} />
-        </Col>
-        <Col>
+        </div>
+        <div>
           {formattedQuotas.map((quotaItem) => {
             return (
               <Field
@@ -183,18 +182,16 @@ export const OpenStackTenantSummary: FunctionComponent<
               />
             );
           })}
-        </Col>
-      </Row>
+        </div>
+      </div>
       {quotas.length > 0 && (
-        <Row className="mt-3">
-          <Col>
-            <Field
-              label={translate('Quotas')}
-              value={<QuotaBadges quotas={quotas} />}
-              isStuck
-            />
-          </Col>
-        </Row>
+        <div className="mt-3">
+          <Field
+            label={translate('Quotas')}
+            value={<QuotaBadges quotas={quotas} />}
+            isStuck
+          />
+        </div>
       )}
     </>
   );

@@ -81,8 +81,8 @@ const PrepaidFormContent = ({
 
       {isCustomRange ? (
         <div className="mb-3">
-          <div className="row">
-            <div className="col-md-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+            <div>
               <FormField>
                 <FormLabel>{translate('From')}</FormLabel>
                 <BaseInputField
@@ -92,7 +92,7 @@ const PrepaidFormContent = ({
                 />
               </FormField>
             </div>
-            <div className="col-md-6">
+            <div>
               <DateGroup
                 name="end_date"
                 label={translate('To')}

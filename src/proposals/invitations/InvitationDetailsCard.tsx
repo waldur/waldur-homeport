@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { PublicInvitation } from 'waldur-js-client';
 
 import { formatDate, formatDateTime, formatRelative } from '@/core/dateUtils';
@@ -25,8 +25,8 @@ export const InvitationDetailsCard: FC<{ invitation: PublicInvitation }> = ({
       </Card.Title>
     </Card.Header>
     <Card.Body>
-      <Row className="gy-3">
-        <Col md={6} className="flex flex-col gap-2.5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-2.5">
+        <div className="flex flex-col gap-2.5">
           <DetailRow label={translate('Call name:')}>
             {invitation.call_name}
           </DetailRow>
@@ -40,8 +40,8 @@ export const InvitationDetailsCard: FC<{ invitation: PublicInvitation }> = ({
               {invitation.max_assignments}
             </DetailRow>
           )}
-        </Col>
-        <Col md={6} className="flex flex-col gap-2.5">
+        </div>
+        <div className="flex flex-col gap-2.5">
           {invitation.invited_at && (
             <DetailRow label={translate('Invited on:')}>
               {formatDateTime(invitation.invited_at)}
@@ -53,8 +53,8 @@ export const InvitationDetailsCard: FC<{ invitation: PublicInvitation }> = ({
               {formatRelative(invitation.expires_at)}
             </DetailRow>
           )}
-        </Col>
-      </Row>
+        </div>
+      </div>
     </Card.Body>
   </Card>
 );

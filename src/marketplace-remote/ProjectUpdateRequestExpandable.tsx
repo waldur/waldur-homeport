@@ -8,8 +8,8 @@ export const ProjectUpdateRequestExpandable = ({ row }) => (
     <thead>
       <tr>
         <th>{translate('Field')}</th>
-        <th className="col-sm-6">{translate('Old value')}</th>
-        <th className="col-sm-6">{translate('New value')}</th>
+        <th className="sm:w-6/12">{translate('Old value')}</th>
+        <th className="sm:w-6/12">{translate('New value')}</th>
       </tr>
     </thead>
     <tbody>

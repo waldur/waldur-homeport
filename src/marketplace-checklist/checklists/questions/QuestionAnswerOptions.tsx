@@ -114,7 +114,7 @@ const DraggableFieldsListGroup = ({
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
         >
-          <table className="table g-1 mb-0 align-middle">
+          <table className="table table-row-py-1 table-col-gap-1 mb-0 align-middle">
             <tbody>
               <SortableContext
                 items={fields.map((_, index) => String(index))}

@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { Col, Row } from 'react-bootstrap';
 
 import { STALE_TIME } from '@/core/constants';
 import { Image } from '@/core/Image';
@@ -47,8 +46,8 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
           />
         }
       >
-        <Row className="text-sm">
-          <Col sm={6}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 text-sm gap-x-5">
+          <div>
             <Field
               label={translate('Offering')}
               value={
@@ -62,31 +61,31 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
               labelClass="me-1.5"
               isStuck
             />
-          </Col>
-          <Col sm={6}>
+          </div>
+          <div>
             <Field
               label={translate('Service provider')}
               value={renderFieldOrDash(provider?.customer_name)}
               labelClass="me-1.5"
               isStuck
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
 
-        <Row className="items-end">
-          <Col sm={6}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 items-end gap-x-5">
+          <div>
             <CustomerField
               organizationGroups={props.offering.organization_groups}
               offering={props.offering}
             />
-          </Col>
-          <Col sm={6}>
+          </div>
+          <div>
             <ProjectField
               previewMode={props.previewMode}
               offering={props.offering}
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
       </VStepperFormStepCard>
     );
   }
@@ -99,24 +98,24 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
         <DetailsOverviewButton offering={props.offering} className="ms-auto" />
       }
     >
-      <Row className="text-sm">
-        <Col sm={6}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 text-sm gap-x-5">
+        <div>
           <Field
             label={translate('Organization')}
             value={props.offering.customer_name}
             labelCol={5}
             valueCol={7}
           />
-        </Col>
-        <Col sm={6}>
+        </div>
+        <div>
           <Field
             label={translate('Project')}
             value={props.offering.project_name}
             labelCol={5}
             valueCol={7}
           />
-        </Col>
-        <Col sm={6}>
+        </div>
+        <div>
           <Field
             label={translate('Offering')}
             value={
@@ -130,16 +129,16 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
             labelCol={5}
             valueCol={7}
           />
-        </Col>
-        <Col sm={6}>
+        </div>
+        <div>
           <Field
             label={translate('Service provider')}
             value={renderFieldOrDash(provider?.customer_name)}
             labelCol={5}
             valueCol={7}
           />
-        </Col>
-      </Row>
+        </div>
+      </div>
     </VStepperFormStepCard>
   );
 };

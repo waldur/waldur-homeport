@@ -91,8 +91,8 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
 
   if (!resourceOptions?.order?.length) {
     return (
-      <div className="justify-center row">
-        <div className="col-sm-4">
+      <div className="flex flex-wrap justify-center">
+        <div className="w-full sm:w-4/12">
           <p className="text-center">
             {translate("Resource doesn't have options.")}
           </p>

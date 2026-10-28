@@ -56,7 +56,7 @@ describe('ProposalDetailsOverviewStep', () => {
     expect(screen.queryByText(/Created by/)).not.toBeInTheDocument();
     // The grid columns carry no role to query them by.
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const columns = Array.from(container.querySelectorAll('.row > .col-sm-6'));
+    const columns = Array.from(container.querySelectorAll('.grid > div'));
     expect(columns.length).toBeGreaterThan(0);
     columns.forEach((column) => expect(column).not.toBeEmptyDOMElement());
   });

@@ -1,6 +1,15 @@
 import { FC } from 'react';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { MermaidChart } from '@/core/MermaidChart';
 import { translate } from '@/i18n';
@@ -160,28 +169,28 @@ export const PoolSummaryDialog: FC = () => {
               className="text-center"
             />
           </div>
-          <div className="table-responsive">
-            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
-              <thead>
-                <tr className="text-start text-quaternary font-medium text-xs uppercase">
-                  <th>{translate('Status')}</th>
-                  <th>{translate('Description')}</th>
-                </tr>
-              </thead>
-              <tbody className="text-tertiary">
-                {INVITATION_STATUSES.map((item) => (
-                  <tr key={item.status}>
-                    <td>
-                      <Badge variant={item.variant} shape="pill" tone="outline">
-                        {item.label}
-                      </Badge>
-                    </td>
-                    <td>{item.description}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Table density="normal">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Status')}</TableHead>
+                <TableHead>{translate('Description')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {INVITATION_STATUSES.map((item) => (
+                <TableRow key={item.status}>
+                  <TableCell>
+                    <Badge variant={item.variant} shape="pill" tone="outline">
+                      {item.label}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="text-tertiary">
+                    {item.description}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </section>
 
         {/* Tab Overview */}
@@ -192,24 +201,26 @@ export const PoolSummaryDialog: FC = () => {
               'Use these tabs to manage different aspects of the reviewer pool:',
             )}
           </p>
-          <div className="table-responsive">
-            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
-              <thead>
-                <tr className="text-start text-quaternary font-medium text-xs uppercase">
-                  <th>{translate('Tab')}</th>
-                  <th>{translate('Purpose')}</th>
-                </tr>
-              </thead>
-              <tbody className="text-tertiary">
-                {POOL_TABS.map((item) => (
-                  <tr key={item.tab}>
-                    <td className="font-medium text-primary">{item.tab}</td>
-                    <td>{item.description}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Table density="normal">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Tab')}</TableHead>
+                <TableHead>{translate('Purpose')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {POOL_TABS.map((item) => (
+                <TableRow key={item.tab}>
+                  <TableCell className="font-medium text-primary">
+                    {item.tab}
+                  </TableCell>
+                  <TableCell className="text-tertiary">
+                    {item.description}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </section>
 
         {/* Finding Reviewers */}
@@ -218,8 +229,8 @@ export const PoolSummaryDialog: FC = () => {
           <p className="text-quaternary mb-3">
             {translate('There are two ways to add reviewers to your pool:')}
           </p>
-          <div className="row g-4">
-            <div className="col-md-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
               <div className="card card-bordered h-full">
                 <div className="card-body">
                   <h5 className="card-title">
@@ -238,7 +249,7 @@ export const PoolSummaryDialog: FC = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div>
               <div className="card card-bordered h-full">
                 <div className="card-body">
                   <h5 className="card-title">{translate('Direct invite')}</h5>

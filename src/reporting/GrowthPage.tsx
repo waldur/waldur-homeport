@@ -1,7 +1,6 @@
 import { TrendUpIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { FC, useContext } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { Badge } from 'waldur-ui';
 
@@ -119,36 +118,36 @@ export const GrowthPage: FC = () => {
         ]}
       />
 
-      <Row className="g-5 mb-4">
-        <Col lg={6}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+        <div>
           <UsersOverTimeChart data={sliceTotal(data?.userTrends, 'month')} />
-        </Col>
-        <Col lg={6}>
+        </div>
+        <div>
           <ProjectsOverTimeChart
             data={sliceTotal(data?.projectTrends, 'month')}
           />
-        </Col>
-      </Row>
+        </div>
+      </div>
 
-      <Row className="g-5 mb-4">
-        <Col lg={6}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+        <div>
           <ResourcesOverTimeChart
             data={slice(data?.resourceTrends, 'period')}
           />
-        </Col>
-        <Col lg={6}>
+        </div>
+        <div>
           <ActiveUsersByProviderChart data={data?.activeUsers} />
-        </Col>
-      </Row>
+        </div>
+      </div>
 
-      <Row className="g-5 mb-4">
-        <Col lg={6}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+        <div>
           <TopProvidersTable data={data?.topProviders} />
-        </Col>
-        <Col lg={6}>
+        </div>
+        <div>
           <TopOfferingsTable data={data?.topOfferings} />
-        </Col>
-      </Row>
+        </div>
+      </div>
     </>
   );
 };

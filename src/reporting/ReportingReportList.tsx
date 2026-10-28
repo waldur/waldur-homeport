@@ -1,6 +1,6 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { Tooltip } from 'waldur-ui';
@@ -84,9 +84,9 @@ export const ReportingReportList: FC<ReportingReportListProps> = ({
   }
 
   return (
-    <Row className="g-5">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
       {filteredReports.map((report) => (
-        <Col key={report.key} md={6} xl={4}>
+        <div key={report.key}>
           <Link state={report.state}>
             <Card className="card-bordered card-solid h-full p-4 flex hover:border-brand cursor-pointer">
               <p className="text-primary font-medium text-base mb-1">
@@ -98,8 +98,8 @@ export const ReportingReportList: FC<ReportingReportListProps> = ({
               <AnalyticsColumn report={report} />
             </Card>
           </Link>
-        </Col>
+        </div>
       ))}
-    </Row>
+    </div>
   );
 };

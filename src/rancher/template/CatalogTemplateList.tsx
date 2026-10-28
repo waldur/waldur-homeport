@@ -33,7 +33,7 @@ export const CatalogTemplatesList: FC<OwnProps> = (props) => {
       columns={[
         {
           title: translate('Icon'),
-          className: 'col-sm-1',
+          className: 'sm:w-1/12',
           render: ({ row }) => (
             <OfferingLogo
               src={row.icon}

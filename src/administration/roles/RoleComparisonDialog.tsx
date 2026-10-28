@@ -144,8 +144,8 @@ export const RoleComparisonDialog: FC<{
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       {/* Half width: the longest option is a role's human name. */}
-      <div className="row">
-        <div className="col-sm-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
+        <div>
           <FormGroup
             label={translate('Compare with')}
             description={translate(

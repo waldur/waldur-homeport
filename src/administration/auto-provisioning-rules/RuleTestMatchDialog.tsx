@@ -220,31 +220,37 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
       )}
 
       <h6 className="mt-3 mb-1.5">{translate('User attributes')}</h6>
-      <dl className="row mb-0 small">
-        <dt className="col-sm-4">{translate('Username')}</dt>
-        <dd className="col-sm-8">{renderFieldOrDash(result.user_username)}</dd>
-        <dt className="col-sm-4">{translate('Email')}</dt>
-        <dd className="col-sm-8">{renderFieldOrDash(result.user_email)}</dd>
-        <dt className="col-sm-4">{translate('Organization (from IdP)')}</dt>
-        <dd className="col-sm-8">
+      <dl className="grid grid-cols-1 sm:grid-cols-12 gap-x-5 mb-0 small">
+        <dt className="sm:col-span-4">{translate('Username')}</dt>
+        <dd className="sm:col-span-8">
+          {renderFieldOrDash(result.user_username)}
+        </dd>
+        <dt className="sm:col-span-4">{translate('Email')}</dt>
+        <dd className="sm:col-span-8">
+          {renderFieldOrDash(result.user_email)}
+        </dd>
+        <dt className="sm:col-span-4">
+          {translate('Organization (from IdP)')}
+        </dt>
+        <dd className="sm:col-span-8">
           {renderFieldOrDash(result.user_organization)}
         </dd>
-        <dt className="col-sm-4">{translate('Registration method')}</dt>
-        <dd className="col-sm-8">
+        <dt className="sm:col-span-4">{translate('Registration method')}</dt>
+        <dd className="sm:col-span-8">
           {renderFieldOrDash(result.user_registration_method)}
         </dd>
-        <dt className="col-sm-4">{translate('Identity source')}</dt>
-        <dd className="col-sm-8">
+        <dt className="sm:col-span-4">{translate('Identity source')}</dt>
+        <dd className="sm:col-span-8">
           {renderFieldOrDash(result.user_identity_source)}
         </dd>
-        <dt className="col-sm-4">{translate('Affiliations')}</dt>
-        <dd className="col-sm-8">
+        <dt className="sm:col-span-4">{translate('Affiliations')}</dt>
+        <dd className="sm:col-span-8">
           {renderFieldOrDash(result.user_affiliations.join(', '))}
         </dd>
         {Object.keys(result.user_claims ?? {}).length > 0 && (
           <>
-            <dt className="col-sm-4">{translate('Claims')}</dt>
-            <dd className="col-sm-8">
+            <dt className="sm:col-span-4">{translate('Claims')}</dt>
+            <dd className="sm:col-span-8">
               {Object.entries(result.user_claims).map(([claim, values]) => (
                 <div key={claim}>
                   <span>{claim}</span>:{' '}
@@ -254,8 +260,8 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
             </dd>
           </>
         )}
-        <dt className="col-sm-4">{translate('Details protected')}</dt>
-        <dd className="col-sm-8">
+        <dt className="sm:col-span-4">{translate('Details protected')}</dt>
+        <dd className="sm:col-span-8">
           {result.user_is_protected ? (
             <Badge variant="purple" tone="outline">
               {translate('Yes')}

@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { NestedScreenshot } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
@@ -13,9 +12,9 @@ interface ImagesTabProps {
 export const ImagesTab: FunctionComponent<ImagesTabProps> = (props) => {
   const { openDialog } = useModal();
   return (
-    <Row>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5">
       {props.images.map((item, index) => (
-        <Col key={index} md={4} className="text-center">
+        <div key={index} className="text-center">
           <img
             src={item.thumbnail}
             alt="thumb"
@@ -31,8 +30,8 @@ export const ImagesTab: FunctionComponent<ImagesTabProps> = (props) => {
 
           <h4 className="mt-2.5">{item.name}</h4>
           <p>{item.description}</p>
-        </Col>
+        </div>
       ))}
-    </Row>
+    </div>
   );
 };

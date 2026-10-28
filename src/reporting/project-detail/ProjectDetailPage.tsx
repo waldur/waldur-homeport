@@ -1,7 +1,6 @@
 import { BuildingsIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useState, useMemo, useEffect } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { projectsRetrieve } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -266,24 +265,24 @@ export const ProjectDetailPage: FC = () => {
     }
 
     return (
-      <Row className="g-4">
-        <Col xs={12} lg={6}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+        <div>
           <ResourceLimitsHistoryChart
             data={limitsHistory || []}
             componentType={selectedType?.value}
             labelMap={labelMap}
             isLoading={limitsLoading}
           />
-        </Col>
-        <Col xs={12} lg={6}>
+        </div>
+        <div>
           <ResourceUsageHistoryChart
             data={usageHistory || []}
             componentType={selectedType?.value}
             labelMap={labelMap}
             isLoading={usageLoading}
           />
-        </Col>
-      </Row>
+        </div>
+      </div>
     );
   };
 

@@ -13,7 +13,7 @@ import { OfferingCard } from '../common/OfferingCard';
 import { useCardStyle } from './CardStyleContext';
 import {
   OFFERING_CARD_MANDATORY_FIELDS,
-  getOfferingGridSize,
+  getOfferingGridClassName,
   useOfferingListFilter,
 } from './utils';
 
@@ -42,7 +42,7 @@ export const OfferingsGroup: FC<OfferingsGroupProps> = ({ onTagClick }) => {
           onTagClick={onTagClick}
         />
       )}
-      gridSize={getOfferingGridSize(cardStyle)}
+      gridClassName={getOfferingGridClassName(cardStyle)}
       hoverShadow={{ grid: false }}
       mode="grid"
       title={translate('Latest offerings')}

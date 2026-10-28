@@ -111,8 +111,7 @@ export function TableContent() {
           <GridBody
             rows={rows}
             gridItem={slots.gridItem}
-            gridSize={display.gridSize}
-            gridSpace={display.gridSpace}
+            gridClassName={display.gridClassName}
             gridFixedWidth={display.gridFixedWidth}
           />
         </div>

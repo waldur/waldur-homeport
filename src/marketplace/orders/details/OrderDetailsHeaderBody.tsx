@@ -1,5 +1,4 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
-import { Col, Row } from 'react-bootstrap';
 
 import { Badge } from 'waldur-ui';
 
@@ -64,8 +63,8 @@ export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
     offering?.plugin_options?.require_purchase_order_upload;
 
   return (
-    <Row>
-      <Col sm="auto">
+    <div className="flex flex-wrap gap-x-5">
+      <div className="w-full sm:w-auto sm:flex-none">
         <Field
           label={translate('Organization')}
           value={order.customer_name}
@@ -80,8 +79,8 @@ export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
           labelCol="auto"
           valueCol="auto"
         />
-      </Col>
-      <Col sm="auto">
+      </div>
+      <div className="w-full sm:w-auto sm:flex-none">
         <Field
           label={translate('Resource')}
           value={
@@ -125,9 +124,9 @@ export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
           labelCol="auto"
           valueCol="auto"
         />
-      </Col>
+      </div>
       {showPurchaseOrder && (
-        <Col sm="auto">
+        <div className="w-full sm:w-auto sm:flex-none">
           <Field
             label={translate('Purchase order')}
             value={<PurchaseOrderBadge order={order} offering={offering} />}
@@ -135,8 +134,8 @@ export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
             labelCol="auto"
             valueCol="auto"
           />
-        </Col>
+        </div>
       )}
-    </Row>
+    </div>
   );
 };

@@ -127,7 +127,7 @@ export const DetailsOverviewDialog: FC<{
           <div className="tab-content">
             {customer.data ? (
               <TabsContent value="organization">
-                <FormTable hideActions alignTop className="gy-5">
+                <FormTable hideActions alignTop>
                   <FormTable.Item
                     label={translate('Name')}
                     value={withCopy(customer.data.name)}
@@ -149,7 +149,7 @@ export const DetailsOverviewDialog: FC<{
             ) : null}
             {project.data ? (
               <TabsContent value="project">
-                <FormTable hideActions alignTop className="gy-5">
+                <FormTable hideActions alignTop>
                   <FormTable.Item
                     label={translate('Name')}
                     value={withCopy(project.data.data.name)}
@@ -168,7 +168,7 @@ export const DetailsOverviewDialog: FC<{
             ) : null}
             {props.offering && (
               <TabsContent value="offering">
-                <FormTable hideActions alignTop className="gy-5">
+                <FormTable hideActions alignTop>
                   <FormTable.Item
                     label={translate('Name')}
                     value={withCopy(props.offering.name)}
@@ -190,7 +190,7 @@ export const DetailsOverviewDialog: FC<{
             )}
             {provider.data ? (
               <TabsContent value="service-provider">
-                <FormTable hideActions alignTop className="gy-5">
+                <FormTable hideActions alignTop>
                   <FormTable.Item
                     label={translate('Name')}
                     value={withCopy(provider.data.customer_name)}

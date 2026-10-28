@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { FC, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import {
   marketplaceProviderOfferingsComponentStatsList,
   Offering,
@@ -142,17 +141,17 @@ export const ComponentsUsage: FC<OwnProps> = ({ offering }) => {
   }
 
   return (
-    <Row>
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-5">
       {statistics.map((stat) => (
-        <Col key={stat.type} xl={3} sm={6}>
+        <div key={stat.type}>
           <StatisticsCard
             title={stat.name}
             value={stat.value}
             unit={stat.unit}
             changes={stat.changes}
           />
-        </Col>
+        </div>
       ))}
-    </Row>
+    </div>
   );
 };

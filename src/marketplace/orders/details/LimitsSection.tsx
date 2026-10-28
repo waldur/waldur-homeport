@@ -7,7 +7,17 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
-import { BaseButton, Checkbox, Menu } from 'waldur-ui';
+import {
+  BaseButton,
+  Checkbox,
+  Menu,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { EditAction } from '@/form/EditAction';
 import { translate } from '@/i18n';
@@ -145,11 +155,11 @@ export const LimitsSection = ({
         )}
       </Card.Header>
       <Card.Body>
-        <table className="table align-middle table-row-bordered text-sm gy-4">
-          <thead>
-            <tr className="align-middle">
+        <Table density="normal">
+          <TableHeader>
+            <TableRow>
               {editable && (
-                <th
+                <TableHead
                   style={{
                     width: '10px',
                     paddingLeft: '16px',
@@ -163,51 +173,57 @@ export const LimitsSection = ({
                     checked={isAllSelected}
                     onChange={toggleAll}
                   />
-                </th>
+                </TableHead>
               )}
-              <th>{translate('Name')}</th>
-              <th>{translate('Measured unit')}</th>
-              <th>{translate('Limit')}</th>
+              <TableHead>{translate('Name')}</TableHead>
+              <TableHead>{translate('Measured unit')}</TableHead>
+              <TableHead>{translate('Limit')}</TableHead>
               {editable && (
-                <th className="header-actions">{translate('Actions')}</th>
+                <TableHead className="header-actions">
+                  {translate('Actions')}
+                </TableHead>
               )}
-            </tr>
-          </thead>
+            </TableRow>
+          </TableHeader>
 
-          <tbody>
+          <TableBody>
             {components.map((component, id) => (
-              <tr key={id}>
+              <TableRow key={id}>
                 {editable && (
-                  <td style={{ paddingLeft: '16px', paddingRight: 0 }}>
+                  <TableCell style={{ paddingLeft: '16px', paddingRight: 0 }}>
                     <Checkbox
                       aria-label={component.name}
                       checked={selected.includes(component.type)}
                       onChange={() => toggleOne(component.type)}
                     />
-                  </td>
+                  </TableCell>
                 )}
-                <td className="capitalize">{component.name}</td>
-                <td className="capitalize">{component.measured_unit}</td>
-                <td className="capitalize">
+                <TableCell className="capitalize font-medium text-primary">
+                  {component.name}
+                </TableCell>
+                <TableCell className="capitalize">
+                  {component.measured_unit}
+                </TableCell>
+                <TableCell className="capitalize">
                   {component.is_boolean
                     ? limits[component.type]
                       ? translate('Enabled')
                       : translate('Disabled')
                     : limits[component.type]}
-                </td>
+                </TableCell>
                 {editable && (
-                  <td>
+                  <TableCell>
                     <ActionsDropdown size="sm">
                       <EditAction
                         action={() => openSingleEditDialog(component.type)}
                       />
                     </ActionsDropdown>
-                  </td>
+                  </TableCell>
                 )}
-              </tr>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </Card.Body>
     </Card>
   );

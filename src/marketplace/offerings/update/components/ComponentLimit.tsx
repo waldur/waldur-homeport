@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { BillingTypeEnum, ProviderOfferingDetails } from 'waldur-js-client';
 
@@ -49,26 +48,26 @@ export const ComponentLimit: FC<{
               carries a description and may carry a warning. Splitting them
               over two rows stops the description wrapping to four lines in a
               column sized for a two-digit number. */}
-          <Row className="g-5">
-            <Col xs>
+          <div className="grid grid-cols-4 gap-4">
+            <div>
               <ComponentMinValueField />
-            </Col>
-            <Col xs>
+            </div>
+            <div>
               <ComponentMaxValueField />
-            </Col>
-            <Col xs={6}>
+            </div>
+            <div className="col-span-2">
               <ComponentLimitPeriodField
                 limitPeriod={values.limit_period}
                 readOnly={props.readOnly}
                 spaceless
               />
-            </Col>
-          </Row>
-          <Row className="g-5 mt-1">
-            <Col xs={12}>
+            </div>
+          </div>
+          <div className="mt-1">
+            <div>
               <ComponentDecimalPlacesField offering={props.offering} />
-            </Col>
-          </Row>
+            </div>
+          </div>
         </ComponentAccountingTypeWrapper>
       );
     }

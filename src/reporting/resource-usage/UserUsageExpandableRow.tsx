@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { useEffect, useMemo, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import {
   ComponentUsage,
   ComponentUserUsage,
@@ -151,15 +151,15 @@ export const UsageExpandableRow = ({
 
   return (
     <ExpandableContainer>
-      <Row className="gy-4">
-        <Col sm={6}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
+        <div>
           <Field label={translate('Resource')} value={row.resource_uuid} />
           <Field
             label={translate('Comment')}
             value={renderFieldOrDash(row.description)}
           />
-        </Col>
-        <Col sm={6} className="border-sm-start md:ps-7.5">
+        </div>
+        <div className="border-sm-start md:ps-7.5">
           <Card className="card-bordered">
             <Card.Body className="p-3">
               <div className="flex items-center justify-between gap-1.5 whitespace-nowrap flex-wrap">
@@ -215,8 +215,8 @@ export const UsageExpandableRow = ({
               </div>
             </Card.Body>
           </Card>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </ExpandableContainer>
   );
 };

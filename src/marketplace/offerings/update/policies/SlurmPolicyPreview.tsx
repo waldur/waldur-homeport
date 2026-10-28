@@ -147,8 +147,8 @@ const CarryoverDetails: FC<CarryoverDetailsProps> = ({
         {translate('Carryover Calculation')}
       </h6>
       <div className="border rounded p-2.5">
-        <div className="row">
-          <div className="col-md-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+          <div>
             <div className="mb-1.5">
               <span className="text-quaternary">
                 {translate('Previous Usage')}:{' '}
@@ -162,7 +162,7 @@ const CarryoverDetails: FC<CarryoverDetailsProps> = ({
               <strong>{carryoverFactor}%</strong>
             </div>
           </div>
-          <div className="col-md-6">
+          <div>
             <div className="mb-1.5">
               <span className="text-quaternary">{translate('Unused')}: </span>
               <strong>{unused.toLocaleString()}</strong>

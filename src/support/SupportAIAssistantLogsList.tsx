@@ -218,7 +218,7 @@ export const SupportAIAssistantLogsList: FunctionComponent = () => {
 
   return (
     <div className="pt-4">
-      {threadStats && <SummaryWidget stats={stats} className="mx-0" />}
+      {threadStats && <SummaryWidget stats={stats} />}
       <Table<ThreadSession>
         {...tableProps}
         fetch={handleRefresh}

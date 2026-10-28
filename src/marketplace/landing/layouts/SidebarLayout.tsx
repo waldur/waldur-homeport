@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { FC, useMemo, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
@@ -11,7 +10,7 @@ import { OfferingCard } from '@/marketplace/common/OfferingCard';
 import { useCardStyle } from '@/marketplace/landing/CardStyleContext';
 import {
   OFFERING_CARD_MANDATORY_FIELDS,
-  getOfferingGridSize,
+  getOfferingGridClassName,
   useOfferingListFilter,
 } from '@/marketplace/landing/utils';
 import { getMarketplaceTitle } from '@/marketplace/title';
@@ -65,14 +64,14 @@ export const SidebarLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <Row className="g-6">
-          <Col xs={12} lg={4} xl={3} className="mb-3 lg:mb-0">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
+          <div className="mb-3 lg:mb-0 lg:col-span-4 xl:col-span-3">
             <CategorySidebar
               selectedCategory={selectedCategory}
               onCategorySelect={setSelectedCategory}
             />
-          </Col>
-          <Col xs={12} lg={8} xl={9}>
+          </div>
+          <div className="lg:col-span-8 xl:col-span-9">
             <Table
               {...tableProps}
               gridItem={({ row }) => (
@@ -82,8 +81,10 @@ export const SidebarLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
                   onTagClick={onTagClick}
                 />
               )}
-              gridSize={getOfferingGridSize(cardStyle)}
-              gridSpace={4}
+              gridClassName={classNames(
+                getOfferingGridClassName(cardStyle),
+                'gap-3',
+              )}
               hoverShadow={{ grid: false }}
               mode="grid"
               title={translate('Offerings')}
@@ -91,8 +92,8 @@ export const SidebarLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
               initialSorting={{ field: 'created', mode: 'desc' }}
               hasQuery={false}
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { Col, Row } from 'react-bootstrap';
 import { marketplaceOfferingPermissionsList } from 'waldur-js-client';
 
 import { FormField, FormLabel } from 'waldur-ui';
@@ -37,18 +36,18 @@ export const ProviderOfferingPermissions = ({
   ) : (
     offeringPermissions &&
     offeringPermissions.length > 0 && (
-      <FormField as={Row}>
-        <FormLabel className="col-auto mb-0 py-[10px]">
+      <FormField className="flex flex-wrap gap-x-5">
+        <FormLabel className="flex-none mb-0 py-[10px]">
           {translate('Offering managers:')}
         </FormLabel>
-        <Col>
+        <div className="flex-1 min-w-0">
           <SymbolsGroup
             items={offeringPermissions}
             max={6}
             nameKey="user_full_name"
             emailKey="user_email"
           />
-        </Col>
+        </div>
       </FormField>
     )
   );

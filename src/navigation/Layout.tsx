@@ -190,7 +190,7 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
                   <ImpersonationBar />
                 </OutstandingBar>
               )}
-              <div className="flex flex-row flex-[1_0_auto]">
+              <div className="flex flex-row grow shrink-0">
                 <UnifiedSidebar />
                 <div className="flex flex-col flex-auto min-w-0">
                   <CookiesConsent />
@@ -234,7 +234,7 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
                     {hasHero && pageTabs}
                     <div
                       className={classNames(
-                        'w-full flex flex-[1_0_auto]',
+                        'w-full flex grow shrink-0',
                         hasHero && !fullPage && 'py-[1.24rem]',
                       )}
                     >

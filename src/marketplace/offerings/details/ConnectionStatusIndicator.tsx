@@ -1,5 +1,4 @@
 import { CircleIcon } from '@phosphor-icons/react';
-import { Col, Row } from 'react-bootstrap';
 
 import { FormField, FormLabel, Tooltip } from 'waldur-ui';
 
@@ -21,11 +20,11 @@ export const ConnectionStatusIndicator = ({ status }) => {
   };
 
   return (
-    <FormField as={Row} className="col-auto items-center">
-      <FormLabel className="col-auto mb-0 py-[10px]">
+    <FormField className="flex flex-none flex-wrap items-center gap-x-5">
+      <FormLabel className="flex-none mb-0 py-[10px]">
         {translate('Status')}
       </FormLabel>
-      <Col>
+      <div className="flex-1 min-w-0">
         {Array.from({ length: status.length }).map((_, i) => (
           <Tooltip
             key={i}
@@ -41,7 +40,7 @@ export const ConnectionStatusIndicator = ({ status }) => {
             />
           </Tooltip>
         ))}
-      </Col>
+      </div>
     </FormField>
   );
 };

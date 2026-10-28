@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -48,11 +47,9 @@ export const OfferingCostsPage: FC = () => {
     <>
       <ReportingTitle reportKey="offering-costs" />
       <OfferingCostsSummaryCards summary={summary} />
-      <Row className="mb-5">
-        <Col xs={12}>
-          <OfferingCostsChart data={data.offerings} />
-        </Col>
-      </Row>
+      <div className="mb-5">
+        <OfferingCostsChart data={data.offerings} />
+      </div>
       <OfferingCostsTable />
     </>
   );

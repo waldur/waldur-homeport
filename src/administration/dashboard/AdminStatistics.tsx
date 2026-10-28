@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { Col, Row } from 'react-bootstrap';
 import {
   customersCount,
   marketplaceCategoriesCount,
@@ -62,65 +61,65 @@ export const AdminStatistics = () => {
   });
 
   return (
-    <Row>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5">
       {error && (
         <LoadingErred
           message={translate('Unable to load statistics data')}
           loadData={refetch}
-          className="mb-3"
+          className="mb-3 col-span-full"
         />
       )}
       {data && (
         <>
-          <Col md={6} lg={4}>
+          <div>
             <StatisticsCard
               title={translate('Organizations')}
               value={data.organizations}
               to={{ state: 'organizations' }}
             />
-          </Col>
-          <Col md={6} lg={4}>
+          </div>
+          <div>
             <StatisticsCard
               title={translate('Projects')}
               value={data.projects}
               to={{ state: 'projects' }}
             />
-          </Col>
-          <Col md={6} lg={4}>
+          </div>
+          <div>
             <StatisticsCard
               title={translate('Users')}
               value={data.users}
               to={{ state: 'support-users' }}
             />
-          </Col>
-          <Col md={6} lg={4}>
+          </div>
+          <div>
             <StatisticsCard
               title={translate('Categories')}
               value={data.categories}
               to={{ state: 'admin-marketplace-categories' }}
             />
-          </Col>
-          <Col md={6} lg={4}>
+          </div>
+          <div>
             <StatisticsCard
               title={translate('Offerings')}
               value={data.providerOfferings}
               to={{ state: 'admin-marketplace-offerings' }}
             />
-          </Col>
-          <Col md={6} lg={4}>
+          </div>
+          <div>
             <StatisticsCard
               title={translate('Resources')}
               value={data.resources}
               to={{ state: 'all-resources' }}
             />
-          </Col>
+          </div>
         </>
       )}
       {isLoading && (
-        <Col md={6} lg={4}>
+        <div>
           <LoadingSpinner />
-        </Col>
+        </div>
       )}
-    </Row>
+    </div>
   );
 };

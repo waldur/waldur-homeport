@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { callManagingOrganisationsStatsRetrieve } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
@@ -18,10 +18,10 @@ import { useCustomer } from '@/workspace/hooks';
 
 const FlatStatistics = ({ count, title }) => {
   return (
-    <Col className="md:text-center mb-3">
+    <div className="flex-1 md:text-center mb-3">
       <strong className="block text-xl">{count}</strong>
       <strong className="health-title">{title}</strong>
-    </Col>
+    </div>
   );
 };
 
@@ -70,50 +70,52 @@ export const CallManagementDashboard = () => {
     staleTime: STALE_TIME,
   });
 
+  const callOnly = isFeatureVisible(MarketplaceFeatures.call_only);
+
   return (
-    <Row>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5">
       {error && (
         <LoadingErred
           message={translate('Unable to load statistics data')}
           loadData={refetch}
-          className="mb-3"
+          className="mb-3 col-span-full"
         />
       )}
       {data && (
         <>
-          <Col md={6} lg={3}>
+          <div>
             <StatisticsCard
               title={translate('Open calls')}
               value={data.open_calls}
               to={getCallState('active')}
             />
-          </Col>
-          {isFeatureVisible(MarketplaceFeatures.call_only) ? null : (
+          </div>
+          {callOnly ? null : (
             <>
-              <Col md={6} lg={3}>
+              <div>
                 <StatisticsCard
                   title={translate('Accepted proposals')}
                   value={data.accepted_proposals}
                   to={getProposalState(['accepted'])}
                 />
-              </Col>
-              <Col md={6} lg={3}>
+              </div>
+              <div>
                 <StatisticsCard
                   title={translate('Pending proposals')}
                   value={data.pending_proposals}
                   to={getProposalState(['in_review', 'submitted'])}
                 />
-              </Col>
-              <Col md={6} lg={3}>
+              </div>
+              <div>
                 <StatisticsCard
                   title={translate('Pending reviews')}
                   value={data.pending_review}
                   to={getReviewState(['submitted'])}
                 />
-              </Col>
+              </div>
             </>
           )}
-          <Col>
+          <div className={callOnly ? 'lg:col-span-3' : 'col-span-full'}>
             <Card className="card-bordered mb-5">
               <Card.Body>
                 <div className="flex justify-start lg:justify-between flex-wrap">
@@ -139,14 +141,14 @@ export const CallManagementDashboard = () => {
                 </div>
               </Card.Body>
             </Card>
-          </Col>
+          </div>
         </>
       )}
       {isLoading && (
-        <Col md={6} lg={4}>
+        <div>
           <LoadingSpinner />
-        </Col>
+        </div>
       )}
-    </Row>
+    </div>
   );
 };

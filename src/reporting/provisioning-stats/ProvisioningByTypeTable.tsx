@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { ChartCard } from '@/core/ChartCard';
 import { translate } from '@/i18n';
@@ -45,17 +44,15 @@ export const ProvisioningByTypeTable: FC<ProvisioningByTypeTableProps> = ({
   }, [byType]);
 
   return (
-    <Row>
-      <Col>
-        <ChartCard
-          title={translate('Orders by type')}
-          getExportData={() => getSimpleExportData(columns, tableData)}
-          showPNG={false}
-          isEmpty={!tableData || tableData.length === 0}
-        >
-          {() => <SimpleTable columns={columns} rows={tableData} />}
-        </ChartCard>
-      </Col>
-    </Row>
+    <div>
+      <ChartCard
+        title={translate('Orders by type')}
+        getExportData={() => getSimpleExportData(columns, tableData)}
+        showPNG={false}
+        isEmpty={!tableData || tableData.length === 0}
+      >
+        {() => <SimpleTable columns={columns} rows={tableData} />}
+      </ChartCard>
+    </div>
   );
 };

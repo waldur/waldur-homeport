@@ -4,7 +4,7 @@
 // change moves no pixel it shouldn't, in both themes, by capturing a build of
 // the base branch and a build of the change and diffing them.
 //
-//   node scripts/theme-snapshots.mjs capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>]
+//   node scripts/theme-snapshots.mjs capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>] [--widths <px,px,...>] [--themes <light,dark>]
 //   node scripts/theme-snapshots.mjs compare <base-dir> <head-dir> <report-dir>
 //
 // capture serves the static Storybook itself, opens each story's iframe with
@@ -12,7 +12,10 @@
 // Metronic light/dark stylesheet), waits for that stylesheet and the fonts,
 // freezes animations, and writes <story-id>.<theme>.png. --font forces one
 // font family everywhere, for comparing two builds that load different web
-// fonts: the text then can't differ, so colour changes stand out.
+// fonts: the text then can't differ, so colour changes stand out. --widths
+// captures each story once per viewport width (<story-id>.<theme>.w<px>.png),
+// for layout changes that differ per breakpoint: 576,768,992,1200 are the
+// sm, md, lg and xl breakpoints. --themes limits the themes captured.
 //
 // compare writes report.json and, for every pair that differs, a
 // base | head | changed-pixels-in-red PNG. Exit code 1 when anything differs.
@@ -73,7 +76,7 @@ function serve(root) {
   );
 }
 
-async function capture(staticDir, outDir, filter, font) {
+async function capture(staticDir, outDir, filter, font, widths, themes) {
   const root = path.resolve(staticDir);
   const index = JSON.parse(readFileSync(path.join(root, 'index.json'), 'utf8'));
   const stories = Object.values(index.entries).filter(
@@ -86,10 +89,16 @@ async function capture(staticDir, outDir, filter, font) {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: VIEWPORT });
   const failed = [];
+  const shots = (widths ?? [null]).flatMap((width) =>
+    themes.map((theme) => ({ theme, width })),
+  );
 
   for (const story of stories) {
-    for (const theme of THEMES) {
-      const name = `${story.id}.${theme}.png`;
+    for (const { theme, width } of shots) {
+      const name = `${story.id}.${theme}${width ? `.w${width}` : ''}.png`;
+      await page.setViewportSize(
+        width ? { width, height: VIEWPORT.height } : VIEWPORT,
+      );
       try {
         await page.goto(
           `${base}/iframe.html?id=${story.id}&viewMode=story&globals=theme:${theme}`,
@@ -102,7 +111,8 @@ async function capture(staticDir, outDir, filter, font) {
           (t) =>
             document.documentElement.getAttribute('data-theme') === t &&
             [...document.styleSheets].some((s) =>
-              /\/style[-.][^/]*\.(s?css)/.test(s.href || ''),
+              // styles/bootstrap/index.scss (style.scss before #471).
+              /\/(index|style)[-.][^/]*\.(s?css)/.test(s.href || ''),
             ),
           theme,
           { timeout: 15000 },
@@ -113,6 +123,9 @@ async function capture(staticDir, outDir, filter, font) {
             '*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}' +
             (font ? `*,*::before,*::after{font-family:${font}!important}` : ''),
         });
+        // Park the pointer: it keeps its spot across stories and widths, and
+        // whatever lands under it would show its hover state.
+        await page.mouse.move(0, 0);
         await page.waitForTimeout(150);
         await page.screenshot({
           path: path.join(outDir, name),
@@ -127,7 +140,7 @@ async function capture(staticDir, outDir, filter, font) {
   await browser.close();
   server.close();
   console.log(
-    `Captured ${stories.length * THEMES.length - failed.length} screenshots of ${stories.length} stories to ${outDir}`,
+    `Captured ${stories.length * shots.length - failed.length} screenshots of ${stories.length} stories to ${outDir}`,
   );
   if (failed.length) {
     console.log(
@@ -204,7 +217,10 @@ function compare(baseDir, headDir, reportDir) {
   );
   const changed = results.filter((r) => r.status !== 'same');
   for (const theme of THEMES) {
-    const ofTheme = results.filter((r) => r.name.endsWith(`.${theme}.png`));
+    const ofTheme = results.filter((r) =>
+      new RegExp(`\\.${theme}(\\.w\\d+)?\\.png$`).test(r.name),
+    );
+    if (!ofTheme.length) continue;
     const diffs = ofTheme.filter((r) => r.status !== 'same');
     console.log(
       `${theme}: ${ofTheme.length - diffs.length} same, ${diffs.length} changed`,
@@ -225,17 +241,21 @@ if (command === 'capture' && args.length >= 2) {
     return i >= 0 ? args[i + 1] : null;
   };
   const filter = option('--filter');
+  const widths = option('--widths');
+  const themes = option('--themes');
   await capture(
     args[0],
     args[1],
     filter ? new RegExp(filter) : null,
     option('--font'),
+    widths ? widths.split(',').map(Number) : null,
+    themes ? themes.split(',') : THEMES,
   );
 } else if (command === 'compare' && args.length === 3) {
   process.exit(compare(args[0], args[1], args[2]) ? 0 : 1);
 } else {
   console.error(
-    'Usage:\n  theme-snapshots.mjs capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>]\n  theme-snapshots.mjs compare <base-dir> <head-dir> <report-dir>',
+    'Usage:\n  theme-snapshots.mjs capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>] [--widths <px,px,...>] [--themes <light,dark>]\n  theme-snapshots.mjs compare <base-dir> <head-dir> <report-dir>',
   );
   process.exit(2);
 }

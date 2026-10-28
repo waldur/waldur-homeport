@@ -28,6 +28,26 @@
 @source '../index.html';
 @source '../.storybook';
 
+/* Space between a table's columns, in place of Metronic's .table.gx-*:
+   `table-col-gap-4` pads each cell's inner sides only, so the first and last
+   cells keep the edge padding custom/_table.scss gives them. */
+@utility table-col-gap-* {
+  :is(th, td):not(:first-child) {
+    padding-inline-start: --spacing(--value(number));
+  }
+  :is(th, td):not(:last-child) {
+    padding-inline-end: --spacing(--value(number));
+  }
+}
+
+/* Vertical cell padding, in place of Metronic's .table.gy-*:
+   Pads header and body cells, replacing arbitrary `[&_td]:py-* [&_th]:py-*`. */
+@utility table-row-py-* {
+  :is(th, td) {
+    padding-block: --spacing(--value(number));
+  }
+}
+
 /* The app's one focus ring, for everything that doesn't style its own —
    links, breadcrumbs, sidebar rows, anything with tabindex. In `base`, so
    Metronic's .btn ring (bootstrap layer) and the BaseButton variants
