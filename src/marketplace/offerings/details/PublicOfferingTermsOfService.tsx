@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   marketplaceOfferingTermsOfServiceList,
   ProviderOfferingDetails as Offering,
@@ -39,27 +38,27 @@ export const PublicOfferingTermsOfService: FunctionComponent<
 
   if (isLoading) {
     return (
-      <Card className="card-bordered mb-8">
-        <Card.Body>
+      <div className="card card-bordered mb-8">
+        <div className="card-body">
           <div className="text-center py-4">
             <LoadingSpinner />
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   if (!activeTos) {
     return (
-      <Card className="card-bordered mb-8">
-        <Card.Body>
+      <div className="card card-bordered mb-8">
+        <div className="card-body">
           <div className="text-center py-2.5">
             <p className="text-quaternary">
               {translate('No Terms of Service available.')}
             </p>
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
 
@@ -67,8 +66,8 @@ export const PublicOfferingTermsOfService: FunctionComponent<
   const hasExternalLink = activeTos.terms_of_service_link;
 
   return (
-    <Card className="card-bordered mb-8">
-      <Card.Body>
+    <div className="card card-bordered mb-8">
+      <div className="card-body">
         <PublicOfferingCardTitle>
           {translate('Terms of Service')}
         </PublicOfferingCardTitle>
@@ -99,7 +98,7 @@ export const PublicOfferingTermsOfService: FunctionComponent<
             </p>
           </div>
         )}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

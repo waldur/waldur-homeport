@@ -1,6 +1,5 @@
 import { ArrowDownIcon, ArrowUpIcon, MinusIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { ENV } from '@/core/config';
 import { parseDate } from '@/core/dateUtils';
@@ -79,8 +78,8 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
   }
 
   return (
-    <Card className="card-bordered h-full">
-      <Card.Body>
+    <div className="card card-bordered h-full">
+      <div className="card-body">
         <div className="grid grid-cols-2 gap-x-5 h-full">
           <div>
             {isCurrentMonth && !isAccountingMode ? (
@@ -155,7 +154,7 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
             </div>
           </div>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

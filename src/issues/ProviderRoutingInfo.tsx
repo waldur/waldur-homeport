@@ -1,5 +1,4 @@
 import { FC, ReactNode } from 'react';
-import { Card } from 'react-bootstrap';
 import { Issue } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
@@ -59,11 +58,11 @@ export const ProviderRoutingInfo: FC<{ issue: Issue }> = ({ issue }) => {
   ];
 
   return (
-    <Card className="card-bordered mb-4">
-      <Card.Header>
-        <Card.Title>{translate('Provider routing')}</Card.Title>
-      </Card.Header>
-      <Card.Body>
+    <div className="card card-bordered mb-4">
+      <div className="card-header">
+        <div className="card-title">{translate('Provider routing')}</div>
+      </div>
+      <div className="card-body">
         <div className="flex flex-wrap gap-1.5 mb-2.5">
           <Badge variant="info" shape="pill" tone="outline">
             {translate('Routed')}
@@ -97,7 +96,7 @@ export const ProviderRoutingInfo: FC<{ issue: Issue }> = ({ issue }) => {
               className="text-sm"
             />
           ))}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Card, Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 
 import { AlertItem, Badge } from 'waldur-ui';
@@ -40,12 +39,12 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
       </p>
 
       {/* Connection Card */}
-      <Card className="mb-3">
-        <Card.Header>
+      <div className="card mb-3">
+        <div className="card-header">
           <h5 className="mb-0">{translate('Connection')}</h5>
-        </Card.Header>
-        <Card.Body>
-          <Table borderless size="sm">
+        </div>
+        <div className="card-body">
+          <table className="table table-sm table-borderless">
             <tbody>
               <tr>
                 <td className="text-quaternary" style={{ width: '40%' }}>
@@ -78,18 +77,18 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 </td>
               </tr>
             </tbody>
-          </Table>
-        </Card.Body>
-      </Card>
+          </table>
+        </div>
+      </div>
 
       {/* Attribute Mappings Card */}
-      <Card className="mb-3">
-        <Card.Header>
+      <div className="card mb-3">
+        <div className="card-header">
           <h5 className="mb-0">{translate('Attribute Mappings')}</h5>
-        </Card.Header>
-        <Card.Body>
+        </div>
+        <div className="card-body">
           {mappedFields.length > 0 ? (
-            <Table borderless size="sm">
+            <table className="table table-sm table-borderless">
               <thead>
                 <tr>
                   <th style={{ width: '40%' }}>{translate('Waldur Field')}</th>
@@ -108,22 +107,22 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                   </tr>
                 ))}
               </tbody>
-            </Table>
+            </table>
           ) : (
             <span className="text-quaternary">
               {translate('No attribute mappings configured')}
             </span>
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
       {/* Configuration Card */}
-      <Card className="mb-3">
-        <Card.Header>
+      <div className="card mb-3">
+        <div className="card-header">
           <h5 className="mb-0">{translate('Configuration')}</h5>
-        </Card.Header>
-        <Card.Body>
-          <Table borderless size="sm">
+        </div>
+        <div className="card-body">
+          <table className="table table-sm table-borderless">
             <tbody>
               <tr>
                 <td className="text-quaternary" style={{ width: '40%' }}>
@@ -248,9 +247,9 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 </td>
               </tr>
             </tbody>
-          </Table>
-        </Card.Body>
-      </Card>
+          </table>
+        </div>
+      </div>
 
       <AlertItem
         variant="info"

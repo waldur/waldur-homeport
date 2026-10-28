@@ -1,7 +1,6 @@
 import { InfoIcon, WarningIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { PublicOfferingDetails, Resource } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
@@ -271,8 +270,8 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
   const hasLimitChangeRequest = hasResourceLimitChangeRequest(resource);
   return (
     <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-5')}>
-      <Card className="card-bordered border-divider-medium border-dashed border-1 overflow-hidden">
-        <Card.Body className="flex flex-col sm:flex-row items-center gap-3">
+      <div className="card card-bordered border-divider-medium border-dashed border-1 overflow-hidden">
+        <div className="card-body flex flex-col sm:flex-row items-center gap-3">
           {/* A phone is too narrow to lay the steps side by side: their labels
               and dates run into each other, so list them top to bottom. */}
           <div className="w-full sm:hidden">
@@ -310,8 +309,8 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
               providerView={providerView}
             />
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

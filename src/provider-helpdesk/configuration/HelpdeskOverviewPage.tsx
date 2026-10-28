@@ -1,6 +1,5 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Badge, BaseButton } from 'waldur-ui';
 
@@ -81,9 +80,9 @@ export const HelpdeskOverviewPage: FC = () => {
   ];
 
   return (
-    <Card className="card-bordered">
-      <Card.Header className="flex justify-between items-center">
-        <Card.Title>{translate('Helpdesk overview')}</Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header flex justify-between items-center">
+        <div className="card-title">{translate('Helpdesk overview')}</div>
         <BaseButton
           label={translate('Validate')}
           iconNode={<ArrowsClockwiseIcon weight="bold" />}
@@ -91,8 +90,8 @@ export const HelpdeskOverviewPage: FC = () => {
           onClick={() => validateMutation.mutate({ uuid: helpdesk.uuid })}
           size="lg"
         />
-      </Card.Header>
-      <Card.Body>
+      </div>
+      <div className="card-body">
         {rows.map(([label, value]) => (
           <Field
             key={label}
@@ -103,7 +102,7 @@ export const HelpdeskOverviewPage: FC = () => {
             className="text-sm"
           />
         ))}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

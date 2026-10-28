@@ -1,20 +1,18 @@
-import { Card } from 'react-bootstrap';
-
 import { BookingResourcesCalendar } from '@/booking/offering/BookingResourcesCalendar';
 import { translate } from '@/i18n';
 
 export const BookingMainComponent = ({ resource, refetch }) => {
   return (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>{translate('Bookings')}</Card.Title>
-      </Card.Header>
-      <Card.Body>
+    <div className="card card-bordered">
+      <div className="card-header">
+        <div className="card-title">{translate('Bookings')}</div>
+      </div>
+      <div className="card-body">
         <BookingResourcesCalendar
           bookingResources={[resource]}
           refetch={refetch}
         />
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

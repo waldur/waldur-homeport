@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard } from 'waldur-ui';
 
@@ -36,7 +35,7 @@ export const PubSubMetricsCard: FC = () => {
             <h6 className="uppercase text-quaternary mb-2.5">
               {translate('Message counts')}
             </h6>
-            <Table size="sm" borderless className="mb-0">
+            <table className="table table-sm table-borderless mb-0">
               <tbody>
                 <tr>
                   <td className="text-quaternary">
@@ -75,13 +74,13 @@ export const PubSubMetricsCard: FC = () => {
                   </td>
                 </tr>
               </tbody>
-            </Table>
+            </table>
           </div>
           <div>
             <h6 className="uppercase text-quaternary mb-2.5">
               {translate('Additional metrics')}
             </h6>
-            <Table size="sm" borderless className="mb-0">
+            <table className="table table-sm table-borderless mb-0">
               <tbody>
                 <tr>
                   <td className="text-quaternary">
@@ -118,7 +117,7 @@ export const PubSubMetricsCard: FC = () => {
                   </td>
                 </tr>
               </tbody>
-            </Table>
+            </table>
           </div>
         </div>
       ) : (

@@ -1,6 +1,5 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 import { customersDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -51,13 +50,13 @@ export const CustomerRemovePanel: FunctionComponent = () => {
   };
 
   return canDeleteCustomer ? (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header">
+        <div className="card-title">
           <h3 className="text-danger">{translate('Remove organization')}</h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body className="flex justify-between">
+        </div>
+      </div>
+      <div className="card-body flex justify-between">
         <ul>
           <li>
             {translate(
@@ -77,7 +76,7 @@ export const CustomerRemovePanel: FunctionComponent = () => {
             title={translate('Remove organization')}
           />
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   ) : null;
 };

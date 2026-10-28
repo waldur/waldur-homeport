@@ -1,6 +1,5 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard } from 'waldur-ui';
 
@@ -40,7 +39,7 @@ export const DatabaseQueryPerformanceCard: FC<
           <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Scan statistics')}
           </h6>
-          <Table size="sm" borderless className="mb-0">
+          <table className="table table-sm table-borderless mb-0">
             <tbody>
               <tr>
                 <td className="text-quaternary">
@@ -75,7 +74,7 @@ export const DatabaseQueryPerformanceCard: FC<
                 </td>
               </tr>
             </tbody>
-          </Table>
+          </table>
           {hasHighSeqScans && (
             <small className="text-warning mt-1.5 block">
               {translate(
@@ -89,7 +88,7 @@ export const DatabaseQueryPerformanceCard: FC<
           <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Temporary files')}
           </h6>
-          <Table size="sm" borderless className="mb-0">
+          <table className="table table-sm table-borderless mb-0">
             <tbody>
               <tr>
                 <td className="text-quaternary">
@@ -119,7 +118,7 @@ export const DatabaseQueryPerformanceCard: FC<
                 </td>
               </tr>
             </tbody>
-          </Table>
+          </table>
           {hasTempFilesWarning && (
             <small className="text-danger mt-1.5 block">
               {translate(

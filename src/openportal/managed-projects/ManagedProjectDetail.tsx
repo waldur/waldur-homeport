@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { Card } from 'react-bootstrap';
 import { openportalManagedProjectsRetrieveGet } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
@@ -92,8 +91,8 @@ export const ManagedProjectDetail = () => {
 
   return (
     <>
-      <Card className="mb-3">
-        <Card.Body>
+      <div className="card mb-3">
+        <div className="card-body">
           <div className="flex justify-between items-start mb-2.5">
             <h3 className="mb-0">
               {details?.name || row.identifier || translate('Unnamed project')}
@@ -188,14 +187,14 @@ export const ManagedProjectDetail = () => {
             label={translate('Created')}
             value={row.created ? formatDateTime(row.created) : undefined}
           />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
-      <Card className="mb-3">
-        <Card.Header>
-          <Card.Title className="mb-0">{translate('Members')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
+      <div className="card mb-3">
+        <div className="card-header">
+          <div className="card-title mb-0">{translate('Members')}</div>
+        </div>
+        <div className="card-body">
           {details?.members && Object.keys(details.members).length > 0 ? (
             <div className="flex flex-col gap-1">
               {Object.entries(details.members).map(([email, role]) => (
@@ -207,14 +206,14 @@ export const ManagedProjectDetail = () => {
               {translate('No members assigned.')}
             </span>
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
-      <Card className="mb-3">
-        <Card.Header>
-          <Card.Title className="mb-0">{translate('Links')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
+      <div className="card mb-3">
+        <div className="card-header">
+          <div className="card-title mb-0">{translate('Links')}</div>
+        </div>
+        <div className="card-body">
           <LinkField label={translate('Award')} link={details?.award} />
           <LinkField label={translate('Funding call')} link={details?.call} />
           <LinkField
@@ -222,16 +221,14 @@ export const ManagedProjectDetail = () => {
             link={details?.project_link}
           />
           <LinkField label={translate('Renewal')} link={details?.renewal} />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
-      <Card className="mb-3">
-        <Card.Header>
-          <Card.Title className="mb-0">
-            {translate('Access control')}
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
+      <div className="card mb-3">
+        <div className="card-header">
+          <div className="card-title mb-0">{translate('Access control')}</div>
+        </div>
+        <div className="card-body">
           <Field
             label={translate('Membership control')}
             value={
@@ -249,14 +246,14 @@ export const ManagedProjectDetail = () => {
                 : translate('All domains allowed')
             }
           />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
-      <Card className="mb-3">
-        <Card.Header>
-          <Card.Title className="mb-0">{translate('Notes')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
+      <div className="card mb-3">
+        <div className="card-header">
+          <div className="card-title mb-0">{translate('Notes')}</div>
+        </div>
+        <div className="card-body">
           {details?.notes && details.notes.length > 0 ? (
             <div className="flex flex-col gap-1.5">
               {details.notes.map((note, index) => (
@@ -276,8 +273,8 @@ export const ManagedProjectDetail = () => {
               {translate('No notes yet.')}
             </span>
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
       <ManagedProjectAuditLog
         identifier={row.identifier}

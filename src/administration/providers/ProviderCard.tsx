@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Badge, Menu } from 'waldur-ui';
 
@@ -177,8 +176,8 @@ export const ProviderCard: FC<ProviderCardProps> = ({
   };
 
   return (
-    <Card className="bg-tertiary dark:bg-quaternary min-h-[150px] border-[1px] border-transparent hover:border-secondary cursor-pointer">
-      <Card.Body className="pe-4">
+    <div className="card bg-tertiary dark:bg-quaternary min-h-[150px] border-[1px] border-transparent hover:border-secondary cursor-pointer">
+      <div className="card-body pe-4">
         <div className="flex items-center h-full">
           <div className="flex flex-row justify-between h-full grow">
             <div
@@ -210,7 +209,7 @@ export const ProviderCard: FC<ProviderCardProps> = ({
             </div>
           </div>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

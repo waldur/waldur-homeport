@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { Card } from 'react-bootstrap';
 import type { ArrowSettings } from 'waldur-js-client';
 
 import { Badge, BaseButton } from 'waldur-ui';
@@ -68,8 +67,8 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
 
   if (!currentSettings) {
     return (
-      <Card>
-        <Card.Body className="text-center py-8">
+      <div className="card">
+        <div className="card-body text-center py-8">
           <h4 className="mb-3">
             {translate('Arrow Integration Not Configured')}
           </h4>
@@ -82,24 +81,24 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
             <ArrowSetupButton />
             <ArrowHowItWorksButton />
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   return (
     <div className="flex flex-col gap-5">
-      <Card>
-        <Card.Header className="flex justify-between items-center">
-          <Card.Title>
+      <div className="card">
+        <div className="card-header flex justify-between items-center">
+          <div className="card-title">
             <h4 className="mb-0">{translate('Connection Settings')}</h4>
-          </Card.Title>
+          </div>
           <div className="flex gap-1.5 items-center">
             <ArrowHowItWorksButton />
             <ArrowSettingsActions settings={currentSettings} />
           </div>
-        </Card.Header>
-        <Card.Body>
+        </div>
+        <div className="card-body">
           <FormTable>
             <FormTable.Item
               label={translate('API URL')}
@@ -193,8 +192,8 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
               value={formatDateTime(currentSettings.created)}
             />
           </FormTable>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

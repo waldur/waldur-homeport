@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { CodePreview } from '@/core/CodePreview';
@@ -14,12 +13,12 @@ interface PublicOfferingGettingStartedProps {
 export const PublicOfferingGettingStarted: FunctionComponent<
   PublicOfferingGettingStartedProps
 > = ({ offering }) => (
-  <Card className="card-bordered mb-8" id="getting-started">
-    <Card.Body>
+  <div className="card card-bordered mb-8" id="getting-started">
+    <div className="card-body">
       <PublicOfferingCardTitle>
         {translate('Getting started')}
       </PublicOfferingCardTitle>
       <CodePreview template={offering.getting_started} context={{}} />
-    </Card.Body>
-  </Card>
+    </div>
+  </div>
 );

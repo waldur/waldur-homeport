@@ -1,6 +1,5 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { BaseButton } from 'waldur-ui';
@@ -53,7 +52,7 @@ export const ColumnsList: FC<ColumnsListProps> = ({
   category,
 }) => (
   <>
-    <Table bordered>
+    <table className="table table-bordered">
       {fields.length === 0 && CategoryColumns.length === 0 ? (
         <tbody>
           <CategoryColumnsPlaceholder category={category} />
@@ -76,7 +75,7 @@ export const ColumnsList: FC<ColumnsListProps> = ({
           </tbody>
         </>
       )}
-    </Table>
+    </table>
     <ColumnAddButton fields={fields} />
   </>
 );

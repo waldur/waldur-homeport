@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useRef, useMemo } from 'react';
-import { Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import {
   invoiceItemsCustomerCostsForPeriodRetrieve,
@@ -238,7 +237,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
         simpleValue
       />
       {costsData && costsData.length !== 0 && (
-        <Table bordered>
+        <table className="table table-bordered">
           <thead>
             <tr>
               <th>
@@ -263,7 +262,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
               </tr>
             ))}
           </tbody>
-        </Table>
+        </table>
       )}
       {singleProject && (
         <AsyncSelectGroup

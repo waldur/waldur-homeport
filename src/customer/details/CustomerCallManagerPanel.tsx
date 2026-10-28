@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   callManagingOrganisationsCreate,
   callManagingOrganisationsDestroy,
@@ -76,14 +75,14 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
     });
 
   return (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header">
+        <div className="card-title">
           <h3 className="me-1.5">{translate('Call manager')}</h3>
           {loadingToggle && <LoadingSpinner />}
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
+        </div>
+      </div>
+      <div className="card-body">
         {errorInfo && <LoadingErred loadData={refetch} />}
         <Switch
           label={translate('Enable call manager')}
@@ -91,7 +90,7 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
           onCheckedChange={toggleCallManager}
           disabled={loadingToggle}
         />
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

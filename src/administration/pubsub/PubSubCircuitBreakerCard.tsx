@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard, Badge } from 'waldur-ui';
 
@@ -56,7 +55,7 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
             <h6 className="uppercase text-quaternary mb-2.5">
               {translate('Current state')}
             </h6>
-            <Table size="sm" borderless className="mb-0">
+            <table className="table table-sm table-borderless mb-0">
               <tbody>
                 <tr>
                   <td className="text-quaternary">{translate('State')}</td>
@@ -107,14 +106,14 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                   <td className="text-end">{data.config.recovery_timeout}s</td>
                 </tr>
               </tbody>
-            </Table>
+            </table>
           </div>
           <div>
             <h6 className="uppercase text-quaternary mb-2.5">
               {translate('State history')}
             </h6>
             {data.state_history && data.state_history.length > 0 ? (
-              <Table size="sm" borderless className="mb-0">
+              <table className="table table-sm table-borderless mb-0">
                 <thead>
                   <tr>
                     <th className="text-quaternary">{translate('Time')}</th>
@@ -158,7 +157,7 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                     </tr>
                   ))}
                 </tbody>
-              </Table>
+              </table>
             ) : (
               <p className="text-quaternary mb-0">
                 {translate('No state transitions recorded.')}

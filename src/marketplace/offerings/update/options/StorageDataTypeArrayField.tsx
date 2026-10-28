@@ -1,5 +1,4 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
-import { Card } from 'react-bootstrap';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { BaseButton } from 'waldur-ui';
@@ -17,8 +16,8 @@ export const StorageDataTypeArrayField = ({
 }: FieldArrayRenderProps<any, HTMLElement>) => (
   <div>
     {fields.map((member, index) => (
-      <Card key={index} className="card-bordered bg-secondary mb-2.5">
-        <Card.Header className="mx-3 min-h-auto">
+      <div key={index} className="card card-bordered bg-secondary mb-2.5">
+        <div className="card-header mx-3 min-h-auto">
           <h6 className="mb-0 text-tertiary">
             {translate('Storage Data Type {index}', { index: index + 1 })}
           </h6>
@@ -31,8 +30,8 @@ export const StorageDataTypeArrayField = ({
               variant="text-danger"
             />
           </div>
-        </Card.Header>
-        <Card.Body className="px-3">
+        </div>
+        <div className="card-body px-3">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
             <div>
               <StringGroup
@@ -57,8 +56,8 @@ export const StorageDataTypeArrayField = ({
               />
             </div>
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     ))}
     <div>
       <BaseButton

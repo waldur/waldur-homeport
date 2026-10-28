@@ -1,4 +1,3 @@
-import { Card } from 'react-bootstrap';
 import { Issue } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -27,14 +26,14 @@ export const IssueAttachmentsContainer: React.FC<
 
   return (
     <IssueAttachmentsContext.Provider value={issue}>
-      <Card className="card-bordered">
-        <Card.Header>
-          <Card.Title>
+      <div className="card card-bordered">
+        <div className="card-header">
+          <div className="card-title">
             <span className="me-1.5">{translate('Attachments')}</span>
             <RefreshButton refetch={refetch} loading={isLoading} />
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
+          </div>
+        </div>
+        <div className="card-body">
           {issue.add_attachment_is_available ? (
             <UploadContainer
               onDrop={onDrop}
@@ -52,8 +51,8 @@ export const IssueAttachmentsContainer: React.FC<
               onCancel={cancel}
             />
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </IssueAttachmentsContext.Provider>
   );
 };

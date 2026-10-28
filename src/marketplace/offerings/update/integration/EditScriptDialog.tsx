@@ -1,5 +1,4 @@
 import { useCallback, useMemo, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import { Form, Field } from 'react-final-form';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
@@ -310,11 +309,11 @@ export const EditScriptDialog = ({
                 </div>
               }
             >
-              <Card className="card-bordered card-solid">
-                <Card.Header>
+              <div className="card card-bordered card-solid">
+                <div className="card-header">
                   <h6 className="mb-0">{translate('Code editor')}</h6>
-                </Card.Header>
-                <Card.Body className="p-0">
+                </div>
+                <div className="card-body p-0">
                   <Field
                     key={scriptOption.type}
                     name="script"
@@ -328,8 +327,8 @@ export const EditScriptDialog = ({
                       />
                     )}
                   </Field>
-                </Card.Body>
-              </Card>
+                </div>
+              </div>
             </ModalDialog>
           </form>
         );

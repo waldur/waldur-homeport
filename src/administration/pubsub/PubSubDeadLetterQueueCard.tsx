@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard, Badge } from 'waldur-ui';
 
@@ -40,10 +39,8 @@ export const PubSubDeadLetterQueueCard: FC = () => {
         </div>
       ) : data ? (
         <>
-          <Table
-            size="sm"
-            borderless
-            className="mb-0"
+          <table
+            className="table table-sm table-borderless mb-0"
             style={{ maxWidth: '400px' }}
           >
             <tbody>
@@ -70,13 +67,13 @@ export const PubSubDeadLetterQueueCard: FC = () => {
                 <td className="text-end">{data.dlq_count}</td>
               </tr>
             </tbody>
-          </Table>
+          </table>
           {data.dlq_queues && data.dlq_queues.length > 0 && (
             <>
               <h6 className="uppercase text-quaternary mt-3 mb-2.5">
                 {translate('DLQ queues')}
               </h6>
-              <Table size="sm" borderless className="mb-0">
+              <table className="table table-sm table-borderless mb-0">
                 <thead>
                   <tr>
                     <th className="text-quaternary">{translate('Vhost')}</th>
@@ -105,7 +102,7 @@ export const PubSubDeadLetterQueueCard: FC = () => {
                     </tr>
                   ))}
                 </tbody>
-              </Table>
+              </table>
             </>
           )}
           {data.note && (

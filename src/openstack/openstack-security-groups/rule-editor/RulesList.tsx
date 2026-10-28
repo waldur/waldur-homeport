@@ -1,6 +1,5 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import { OpenStackSecurityGroup } from 'waldur-js-client';
 
@@ -26,7 +25,7 @@ export const RulesList: FC<{
   <FieldArray name="rules">
     {({ fields }: FieldArrayRenderProps<Rule, any>) => (
       <>
-        <Table bordered>
+        <table className="table table-bordered">
           <thead>
             <tr>
               <HeaderWithTooltip
@@ -87,7 +86,7 @@ export const RulesList: FC<{
               ))
             )}
           </tbody>
-        </Table>
+        </table>
         <BaseButton
           onClick={() => fields.push(DEFAULT_RULE)}
           label={translate('Add rule')}

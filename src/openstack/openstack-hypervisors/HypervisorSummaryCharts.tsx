@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { EChartsOption, PieSeriesOption } from 'echarts';
 import { FC, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   openstackHypervisorsSummaryRetrieve,
   OpenstackHypervisorsListData,
@@ -189,13 +188,13 @@ export const HypervisorSummaryCharts: FC<{
   const disk = computeUsage(usedDisk, totalDisk);
 
   return (
-    <Card className="mb-5 card-bordered">
-      <Card.Header className="border-b-[1px] border-b-secondary">
-        <Card.Title>
+    <div className="card mb-5 card-bordered">
+      <div className="card-header border-b-[1px] border-b-secondary">
+        <div className="card-title">
           <span className="h3">{translate('Hypervisor summary')}</span>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body className="p-5">
+        </div>
+      </div>
+      <div className="card-body p-5">
         <div className="flex items-center self-stretch gap-8 flex-wrap">
           <ChartItem
             used={usedVcpus}
@@ -253,7 +252,7 @@ export const HypervisorSummaryCharts: FC<{
             }
           />
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

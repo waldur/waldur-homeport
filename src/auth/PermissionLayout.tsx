@@ -8,7 +8,6 @@ import {
   useState,
   PropsWithChildren,
 } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -85,8 +84,8 @@ const PermissionDataProvider: FC<PropsWithChildren> = ({ children }) => {
 const RestrictedView = () => {
   const { pageMessage } = useContext(PermissionContext);
   return (
-    <Card className="card-bordered">
-      <Card.Body>
+    <div className="card card-bordered">
+      <div className="card-body">
         <div className="flex flex-col items-center justify-center my-8 xl:my-16 min-h-[150px]">
           <ShieldWarningIcon
             size={65}
@@ -101,8 +100,8 @@ const RestrictedView = () => {
             {translate('Go to profile')}
           </Link>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };
 

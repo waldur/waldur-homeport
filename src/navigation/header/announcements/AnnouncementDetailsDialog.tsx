@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 import {
   AdminAnnouncement,
   PublicMaintenanceAnnouncement,
@@ -174,7 +173,7 @@ export const AnnouncementDetailsDialog: FC<{
       <div className="mt-3">
         <h6>{translate('Affected Offerings')}:</h6>
         <div className="table-responsive mt-1.5">
-          <Table size="sm">
+          <table className="table table-sm">
             <thead>
               <tr>
                 <th>{translate('Offering Name')}</th>
@@ -195,7 +194,7 @@ export const AnnouncementDetailsDialog: FC<{
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </table>
         </div>
       </div>
     );

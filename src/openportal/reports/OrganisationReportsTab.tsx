@@ -6,7 +6,6 @@
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import { projectsList } from 'waldur-js-client';
 
 import {
@@ -879,8 +878,8 @@ export const OrganisationReportsTab: FC = () => {
 
       {/* ── Load prompt ──────────────────────────────────────────────── */}
       {showLoadPrompt && !projectsLoading && !reportsLoading && (
-        <Card className="mb-3">
-          <Card.Body>
+        <div className="card mb-3">
+          <div className="card-body">
             <p className="mb-1.5">
               {translate('Usage reports not yet loaded')}
             </p>
@@ -971,8 +970,8 @@ export const OrganisationReportsTab: FC = () => {
               }}
               label={translate('Load reports')}
             />
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       )}
 
       {/* ── Progress bar ─────────────────────────────────────────────── */}
@@ -1088,31 +1087,31 @@ export const OrganisationReportsTab: FC = () => {
 
       {/* ── Charts ───────────────────────────────────────────────────── */}
       {activeUsage.length > 0 && nameMaps !== undefined && !showLoadPrompt && (
-        <Card className="mb-3">
-          <Card.Header>{translate('Usage')}</Card.Header>
-          <Card.Body>
+        <div className="card mb-3">
+          <div className="card-header">{translate('Usage')}</div>
+          <div className="card-body">
             <UsageReportVis
               reports={activeUsage}
               height="400px"
               nameMaps={nameMaps}
             />
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       )}
 
       {activeStorage.length > 0 &&
         nameMaps !== undefined &&
         !showLoadPrompt && (
-          <Card className="mb-3">
-            <Card.Header>{translate('Storage')}</Card.Header>
-            <Card.Body>
+          <div className="card mb-3">
+            <div className="card-header">{translate('Storage')}</div>
+            <div className="card-body">
               <StorageReportVis
                 reports={activeStorage}
                 height="360px"
                 nameMaps={nameMaps}
               />
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         )}
     </div>
   );

@@ -1,7 +1,6 @@
 import { CaretDownIcon, FunnelSimpleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import { Form, useForm } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
@@ -156,21 +155,20 @@ export const MarketplaceLandingFilter = ({
             // panel is positioned, see waldur-design-tokens/animations.css).
             className="z-dropdown-menu w-[min(400px,calc(100vw-30px))] border-0 animate-[waldur-menu-enter-up_0.3s_ease] motion-reduce:animate-none"
           >
-            <Card className="text-base shadow-sm m-0">
-              <Card.Body
-                as="form"
+            <div className="card text-base shadow-sm m-0">
+              <form
                 onSubmit={handleSubmit}
-                className="flex flex-col gap-6"
+                className="card-body flex flex-col gap-6"
               >
                 <div>
-                  <Card.Title as="div" className="h3 mb-4">
+                  <div className="card-title h3 mb-4">
                     {translate('Filter by organization/project')}
-                  </Card.Title>
-                  <Card.Subtitle className="font-normal text-quaternary">
+                  </div>
+                  <div className="card-subtitle font-normal text-quaternary">
                     {translate(
                       'Filter results by chosen organization and project',
                     )}
-                  </Card.Subtitle>
+                  </div>
                 </div>
                 <LandingFilterFields values={values} />
 
@@ -188,8 +186,8 @@ export const MarketplaceLandingFilter = ({
                     label={translate('Apply')}
                   />
                 </div>
-              </Card.Body>
-            </Card>
+              </form>
+            </div>
           </PopoverContent>
         </Popover>
       )}

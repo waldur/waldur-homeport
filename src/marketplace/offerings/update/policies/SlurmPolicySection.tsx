@@ -8,7 +8,6 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC, useState, useEffect, useMemo, useCallback } from 'react';
-import { Card } from 'react-bootstrap';
 import { Field, Form, useFormState, useForm } from 'react-final-form';
 import { components } from 'react-select';
 import {
@@ -219,8 +218,9 @@ const PresetSelector: FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5">
         {policyPresets.map((preset) => (
           <div key={preset.key}>
-            <Card
-              className={`h-full cursor-pointer border-2 ${
+            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+            <div
+              className={`card h-full cursor-pointer border-2 ${
                 selectedPreset === preset.key
                   ? 'border-brand bg-brand-subtle'
                   : 'border-secondary'
@@ -228,15 +228,15 @@ const PresetSelector: FC = () => {
               onClick={() => applyPreset(preset)}
               style={{ cursor: 'pointer' }}
             >
-              <Card.Body className="p-2.5">
-                <Card.Title className="text-xs font-medium mb-1.5">
+              <div className="card-body p-2.5">
+                <div className="card-title text-xs font-medium mb-1.5">
                   {preset.label}
-                </Card.Title>
-                <Card.Text className="text-xs text-tertiary mb-0">
+                </div>
+                <p className="card-text text-xs text-tertiary mb-0">
                   {preset.description}
-                </Card.Text>
-              </Card.Body>
-            </Card>
+                </p>
+              </div>
+            </div>
           </div>
         ))}
       </div>

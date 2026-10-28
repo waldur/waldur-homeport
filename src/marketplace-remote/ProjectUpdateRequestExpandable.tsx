@@ -1,10 +1,8 @@
-import { Table } from 'react-bootstrap';
-
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 
 export const ProjectUpdateRequestExpandable = ({ row }) => (
-  <Table>
+  <table className="table">
     <thead>
       <tr>
         <th>{translate('Field')}</th>
@@ -60,5 +58,5 @@ export const ProjectUpdateRequestExpandable = ({ row }) => (
         </tr>
       ) : null}
     </tbody>
-  </Table>
+  </table>
 );

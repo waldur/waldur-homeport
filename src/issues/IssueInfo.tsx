@@ -2,7 +2,6 @@ import {
   ClockCounterClockwiseIcon,
   CloudArrowDownIcon,
 } from '@phosphor-icons/react';
-import { Table } from 'react-bootstrap';
 import { Issue, supportIssuesSync } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
@@ -34,32 +33,34 @@ const IssueLogDialog = ({ issue }: { issue: Issue }) => {
   return (
     <ModalDialog title={translate('Processing log')} bodyClassName="p-0">
       {processingLog && processingLog.length > 0 ? (
-        <Table responsive striped className="mb-0">
-          <thead>
-            <tr>
-              <th>{translate('Timestamp')}</th>
-              <th>{translate('Event')}</th>
-              <th>{translate('Details')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {processingLog.map((entry, index) => (
-              <tr key={index}>
-                <td className="whitespace-nowrap">
-                  {formatDateTime(entry.timestamp)}
-                </td>
-                <td className="whitespace-nowrap">
-                  {formatEventName(entry.event)}
-                </td>
-                <td>
-                  <code className="small">
-                    {JSON.stringify(entry.details, null, 2)}
-                  </code>
-                </td>
+        <div className="table-responsive">
+          <table className="table table-striped mb-0">
+            <thead>
+              <tr>
+                <th>{translate('Timestamp')}</th>
+                <th>{translate('Event')}</th>
+                <th>{translate('Details')}</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {processingLog.map((entry, index) => (
+                <tr key={index}>
+                  <td className="whitespace-nowrap">
+                    {formatDateTime(entry.timestamp)}
+                  </td>
+                  <td className="whitespace-nowrap">
+                    {formatEventName(entry.event)}
+                  </td>
+                  <td>
+                    <code className="small">
+                      {JSON.stringify(entry.details, null, 2)}
+                    </code>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
         <div className="p-5 text-quaternary text-center">
           {translate('No processing log entries.')}

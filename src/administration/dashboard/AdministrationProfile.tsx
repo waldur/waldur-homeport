@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
-import { Card } from 'react-bootstrap';
 import { usersList, versionRetrieve } from 'waldur-js-client';
 
 import { FormField, FormLabel } from 'waldur-ui';
@@ -100,8 +99,8 @@ export const AdministrationProfile = ({
   );
 
   return (
-    <Card className="card-bordered mb-4">
-      <Card.Body>
+    <div className="card card-bordered mb-4">
+      <div className="card-body">
         <div className="flex flex-wrap gap-x-5">
           <div className="flex-none mb-3">
             <DashboardHeroLogo
@@ -167,7 +166,7 @@ export const AdministrationProfile = ({
             </div>
           </div>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

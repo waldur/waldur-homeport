@@ -5,7 +5,6 @@ import {
 } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
 import { BaseButton, FormField, FormLabel } from 'waldur-ui';
@@ -274,8 +273,8 @@ export const OrganizationCreateStep2: FunctionComponent<
 
   return (
     <div className="flex flex-col gap-4">
-      <Card className="border-0 shadow-sm">
-        <Card.Body className="p-6">
+      <div className="card border-0 shadow-sm">
+        <div className="card-body p-6">
           {!isManual &&
             (() => {
               const methodInfo = getAuthMethodInfo(validationMethod);
@@ -284,8 +283,8 @@ export const OrganizationCreateStep2: FunctionComponent<
                 <>
                   <p className="mb-2.5">{methodInfo.title}</p>
                   {hasRequiredFields() ? (
-                    <Card className="card-bordered mb-5">
-                      <Card.Body className="flex gap-2.5">
+                    <div className="card card-bordered mb-5">
+                      <div className="card-body flex gap-2.5">
                         <div className="shrink-0">
                           <CheckCircleIcon
                             size={24}
@@ -304,11 +303,11 @@ export const OrganizationCreateStep2: FunctionComponent<
                             )}
                           </div>
                         </div>
-                      </Card.Body>
-                    </Card>
+                      </div>
+                    </div>
                   ) : blockForIncompleteProfile ? (
-                    <Card className="card-bordered mb-3">
-                      <Card.Body className="flex gap-2.5">
+                    <div className="card card-bordered mb-3">
+                      <div className="card-body flex gap-2.5">
                         <div className="shrink-0">
                           <InfoIcon size={24} weight="duotone" />
                         </div>
@@ -335,12 +334,12 @@ export const OrganizationCreateStep2: FunctionComponent<
                             label={translate('Complete profile')}
                           />
                         </div>
-                      </Card.Body>
-                    </Card>
+                      </div>
+                    </div>
                   ) : (
                     <>
-                      <Card className="card-bordered mb-3">
-                        <Card.Body className="flex gap-2.5">
+                      <div className="card card-bordered mb-3">
+                        <div className="card-body flex gap-2.5">
                           <div className="shrink-0">
                             <InfoIcon size={24} weight="duotone" />
                           </div>
@@ -352,8 +351,8 @@ export const OrganizationCreateStep2: FunctionComponent<
                               {methodInfo.description}
                             </div>
                           </div>
-                        </Card.Body>
-                      </Card>
+                        </div>
+                      </div>
 
                       {fieldConfig && (
                         <PersonIdentifierFieldsRenderer
@@ -364,8 +363,8 @@ export const OrganizationCreateStep2: FunctionComponent<
                     </>
                   )}
                   {identityReview && (
-                    <Card className="card-bordered mb-3">
-                      <Card.Body className="flex gap-2.5">
+                    <div className="card card-bordered mb-3">
+                      <div className="card-body flex gap-2.5">
                         <div className="shrink-0">
                           <ClockCountdownIcon size={24} weight="duotone" />
                         </div>
@@ -381,8 +380,8 @@ export const OrganizationCreateStep2: FunctionComponent<
                             )}
                           </div>
                         </div>
-                      </Card.Body>
-                    </Card>
+                      </div>
+                    </div>
                   )}
                   {/* Registration code field for automatic validation */}
                   <div className="mt-5">
@@ -436,8 +435,8 @@ export const OrganizationCreateStep2: FunctionComponent<
               {renderDocumentUpload()}
             </div>
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

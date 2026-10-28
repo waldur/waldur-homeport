@@ -1,6 +1,5 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { OpenStackSubNet } from 'waldur-js-client';
 
@@ -64,31 +63,28 @@ export const SubnetsTable: FC<{ fields; sourceSubnets }> = ({
     <>
       {fields.length > 0 ? (
         <>
-          <Table
-            responsive={true}
-            bordered={true}
-            striped={true}
-            className="mt-2.5"
-          >
-            <thead>
-              <tr>
-                <th>{translate('Source')}</th>
-                <th>{translate('Destination')}</th>
-                <th>{translate('Actions')}</th>
-              </tr>
-            </thead>
+          <div className="table-responsive">
+            <table className="table table-bordered table-striped mt-2.5">
+              <thead>
+                <tr>
+                  <th>{translate('Source')}</th>
+                  <th>{translate('Destination')}</th>
+                  <th>{translate('Actions')}</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              {fields.map((subnet, index) => (
-                <SubNetRow
-                  key={subnet}
-                  SubNet={subnet}
-                  sourceSubnets={sourceSubnets}
-                  onRemove={() => fields.remove(index)}
-                />
-              ))}
-            </tbody>
-          </Table>
+              <tbody>
+                {fields.map((subnet, index) => (
+                  <SubNetRow
+                    key={subnet}
+                    SubNet={subnet}
+                    sourceSubnets={sourceSubnets}
+                    onRemove={() => fields.remove(index)}
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
           <SubNetAddButton onClick={() => fields.push({})} />
         </>
       ) : (

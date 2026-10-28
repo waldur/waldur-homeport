@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { Card } from 'react-bootstrap';
 import { openportalRemoteProjectsRetrieve } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
@@ -92,8 +91,8 @@ export const RemoteProjectDetail = () => {
 
   return (
     <>
-      <Card className="mb-3">
-        <Card.Body>
+      <div className="card mb-3">
+        <div className="card-body">
           <div className="flex justify-between items-start mb-2.5">
             <h3 className="mb-0">
               {row.current_project_name || translate('Unnamed project')}
@@ -166,14 +165,14 @@ export const RemoteProjectDetail = () => {
             label={translate('Created')}
             value={row.created ? formatDateTime(row.created) : undefined}
           />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
-      <Card className="mb-3">
-        <Card.Header>
-          <Card.Title className="mb-0">{translate('Links')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
+      <div className="card mb-3">
+        <div className="card-header">
+          <div className="card-title mb-0">{translate('Links')}</div>
+        </div>
+        <div className="card-body">
           <LinkField label={translate('Award')} link={row.link_award} />
           <LinkField label={translate('Funding call')} link={row.link_call} />
           <LinkField
@@ -181,12 +180,12 @@ export const RemoteProjectDetail = () => {
             link={row.link_project}
           />
           <LinkField label={translate('Renewal')} link={row.link_renewal} />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
       {(row.last_sent_details || row.last_confirmed_details) && (
-        <Card className="mb-3">
-          <Card.Body>
+        <div className="card mb-3">
+          <div className="card-body">
             <details>
               <summary className="cursor-pointer">
                 {translate('Sync details')}
@@ -210,13 +209,13 @@ export const RemoteProjectDetail = () => {
                 />
               </div>
             </details>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       )}
 
       {row.pending_details && (
-        <Card className="mb-3">
-          <Card.Body>
+        <div className="card mb-3">
+          <div className="card-body">
             <details>
               <summary className="cursor-pointer">
                 {translate('Pending sync')}
@@ -238,15 +237,15 @@ export const RemoteProjectDetail = () => {
                 />
               </div>
             </details>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       )}
 
-      <Card className="mb-3">
-        <Card.Header>
-          <Card.Title className="mb-0">{translate('Notes')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
+      <div className="card mb-3">
+        <div className="card-header">
+          <div className="card-title mb-0">{translate('Notes')}</div>
+        </div>
+        <div className="card-body">
           {row.notes && row.notes.length > 0 ? (
             <div className="flex flex-col gap-1.5">
               {row.notes.map((note, index) => (
@@ -266,8 +265,8 @@ export const RemoteProjectDetail = () => {
               {translate('No notes yet.')}
             </span>
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
       <RemoteProjectAuditLog remoteProjectUuid={row.uuid} hideTitle />
     </>

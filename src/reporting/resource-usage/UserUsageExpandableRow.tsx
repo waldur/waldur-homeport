@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { useEffect, useMemo, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   ComponentUsage,
   ComponentUserUsage,
@@ -160,8 +159,8 @@ export const UsageExpandableRow = ({
           />
         </div>
         <div className="border-sm-start md:ps-7.5">
-          <Card className="card-bordered">
-            <Card.Body className="p-3">
+          <div className="card card-bordered">
+            <div className="card-body p-3">
               <div className="flex items-center justify-between gap-1.5 whitespace-nowrap flex-wrap">
                 <div>
                   {periodOptions.length > 1 && (
@@ -213,8 +212,8 @@ export const UsageExpandableRow = ({
                   </p>
                 )}
               </div>
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </ExpandableContainer>

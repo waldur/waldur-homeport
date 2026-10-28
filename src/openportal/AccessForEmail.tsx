@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   AccessResponse,
   AccessProject,
@@ -31,15 +30,15 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
   index = null,
 }) => {
   return (
-    <Card className="mb-2.5">
-      <Card.Header>
-        <Card.Title className="mb-0">
+    <div className="card mb-2.5">
+      <div className="card-header">
+        <div className="card-title mb-0">
           {index !== null
             ? translate('User Information - User {index}', { index: index + 1 })
             : translate('User Information')}
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
+        </div>
+      </div>
+      <div className="card-body">
         <div className="text-sm">
           <Field
             label={translate('Email')}
@@ -97,8 +96,8 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
             />
           )}
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };
 
@@ -110,26 +109,26 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
     Object.keys(projects).length === 0
   ) {
     return (
-      <Card>
-        <Card.Body>
+      <div className="card">
+        <div className="card-body">
           <div className="text-center text-quaternary py-3">
             {translate('No projects found for this user')}
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Card>
-      <Card.Header>
-        <Card.Title className="mb-0">
+    <div className="card">
+      <div className="card-header">
+        <div className="card-title mb-0">
           {translate('Projects ({count})', {
             count: Object.keys(projects).length,
           })}
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
+        </div>
+      </div>
+      <div className="card-body">
         <div className="flex flex-col gap-3">
           {Object.entries(projects).map(([projectId, project]) => (
             <div key={projectId} className="border rounded p-2.5">
@@ -186,8 +185,8 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
             </div>
           ))}
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };
 export const AccessForEmail: FunctionComponent<{}> = () => {
@@ -214,13 +213,11 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
   };
 
   return (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title className="mb-0">
-          {translate('Check user access')}
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
+    <div className="card card-bordered">
+      <div className="card-header">
+        <div className="card-title mb-0">{translate('Check user access')}</div>
+      </div>
+      <div className="card-body">
         <div className="mb-2.5">
           <p className="text-quaternary mb-2.5">
             {translate(
@@ -310,7 +307,7 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
             title={translate('No results found')}
           />
         )}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

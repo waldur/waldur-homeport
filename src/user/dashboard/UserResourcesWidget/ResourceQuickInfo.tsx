@@ -6,7 +6,6 @@ import {
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   marketplaceResourcesOfferingRetrieve,
   Resource,
@@ -91,8 +90,8 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
   const hasGettingStarted = offering?.getting_started || endpoints.length > 0;
 
   return (
-    <Card className="card-bordered mb-2.5">
-      <Card.Body className="py-3">
+    <div className="card card-bordered mb-2.5">
+      <div className="card-body py-3">
         {/* Header */}
         <div className="flex justify-between items-start mb-1.5">
           <div className="grow">
@@ -231,7 +230,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
             <ArrowRightIcon size={16} weight="bold" className="ms-1" />
           </Link>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

@@ -4,7 +4,6 @@ import {
   WarningCircleIcon,
 } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 import { OnboardingVerification } from 'waldur-js-client';
 
 import { RadialBackground } from 'waldur-ui';
@@ -142,8 +141,8 @@ export const OrganizationCreateStep3: FunctionComponent<
 
   return (
     <div className="flex flex-col gap-4">
-      <Card className="border-0 shadow-sm">
-        <Card.Body className="text-center relative overflow-hidden organization-validation-result">
+      <div className="card border-0 shadow-sm">
+        <div className="card-body text-center relative overflow-hidden organization-validation-result">
           <RadialBackground className="icon-background" />
           {validationLoading ? (
             <>
@@ -170,8 +169,8 @@ export const OrganizationCreateStep3: FunctionComponent<
               {translate('No validation results available.')}
             </p>
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

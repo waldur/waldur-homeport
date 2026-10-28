@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   marketplaceComponentUsageMonthlyList,
   ProviderOfferingDetails as Offering,
@@ -47,14 +46,14 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
   });
 
   return (
-    <Card className="card-bordered mb-8">
-      <Card.Header>
-        <Card.Title className="h5">
+    <div className="card card-bordered mb-8">
+      <div className="card-header">
+        <div className="card-title h5">
           {translate('Component usage chart')}
-        </Card.Title>
-      </Card.Header>
-      <Card.Body
-        className="mt-2.5"
+        </div>
+      </div>
+      <div
+        className="card-body mt-2.5"
         style={{ maxWidth: '500px', minWidth: '100%' }}
       >
         {loading ? (
@@ -73,7 +72,7 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
             })}
           />
         )}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

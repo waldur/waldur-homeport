@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Image } from './Image';
 import { ImagePlaceholder } from './ImagePlaceholder';
@@ -25,9 +24,10 @@ export const ModelCard1: FC<ModelCard1Props> = ({
   ellipsisLines = 1,
   ...props
 }) => (
-  <Card
+  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+  <div
     className={classNames(
-      'model-card-1 card-bordered h-full overflow-hidden',
+      'card model-card-1 card-bordered h-full overflow-hidden',
       props.clickable && 'cursor-pointer border-hover-brand',
     )}
     onClick={props.onClick}
@@ -49,7 +49,7 @@ export const ModelCard1: FC<ModelCard1Props> = ({
         )}
       </div>
     )}
-    <Card.Body className="p-4 flex flex-col">
+    <div className="card-body p-4 flex flex-col">
       <div
         className={classNames('flex items-center gap-3', props.body && 'mb-5')}
       >
@@ -67,20 +67,20 @@ export const ModelCard1: FC<ModelCard1Props> = ({
             'model-card-title-container',
           )}
         >
-          <Card.Title
+          <div
             className={classNames(
-              'text-base font-medium',
+              'card-title text-base font-medium',
               'ellipsis-lines-' + ellipsisLines,
               'model-card-title',
               !props.subtitle && 'mb-0',
             )}
           >
             {props.titleNode || props.title}
-          </Card.Title>
+          </div>
           {props.subtitle && (
-            <Card.Subtitle className="text-tertiary font-medium ellipsis">
+            <div className="card-subtitle text-tertiary font-medium ellipsis">
               {props.subtitle}
-            </Card.Subtitle>
+            </div>
           )}
         </div>
       </div>
@@ -88,13 +88,13 @@ export const ModelCard1: FC<ModelCard1Props> = ({
         (typeof props.body === 'object' ? (
           props.body
         ) : (
-          <Card.Text className="text-quaternary text-sm grow shrink-0 ellipsis-lines-3">
+          <p className="card-text text-quaternary text-sm grow shrink-0 ellipsis-lines-3">
             {props.body}
-          </Card.Text>
+          </p>
         ))}
-    </Card.Body>
+    </div>
     {props.footer && (
-      <Card.Footer className="py-3 px-4">{props.footer}</Card.Footer>
+      <div className="card-footer py-3 px-4">{props.footer}</div>
     )}
-  </Card>
+  </div>
 );

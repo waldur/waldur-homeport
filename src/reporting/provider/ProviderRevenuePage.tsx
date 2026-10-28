@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { marketplaceServiceProvidersRevenueList } from 'waldur-js-client';
 
@@ -58,16 +57,16 @@ const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
   if (error) return <LoadingErred loadData={refetch} />;
   if (!data || data.length === 0) {
     return (
-      <Card>
-        <Card.Body>
+      <div className="card">
+        <div className="card-body">
           <NoResult
             title={translate('No data available')}
             message={translate('No revenue data available for this provider.')}
             callback={refetch}
             buttonTitle={translate('Retry')}
           />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
 

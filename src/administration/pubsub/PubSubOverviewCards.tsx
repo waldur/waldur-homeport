@@ -1,6 +1,5 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 
@@ -41,8 +40,8 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 mb-5">
       <div>
-        <Card className="card-bordered mb-4">
-          <Card.Body>
+        <div className="card card-bordered mb-4">
+          <div className="card-body">
             <div className="flex items-center">
               <strong className={`display-4 ${getTextClass(healthLevel)}`}>
                 {getStatusLabel(data.health_status)}
@@ -56,13 +55,13 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
               )}
             </div>
             <strong className="block">{translate('Health status')}</strong>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
 
       <div>
-        <Card className="card-bordered mb-4">
-          <Card.Body>
+        <div className="card card-bordered mb-4">
+          <div className="card-body">
             <div className="flex items-center">
               <strong
                 className={`display-4 ${getTextClass(circuitBreakerLevel)}`}
@@ -80,13 +79,13 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
             <strong className="block">
               {translate('Circuit breaker state')}
             </strong>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
 
       <div>
-        <Card className="card-bordered mb-4">
-          <Card.Body>
+        <div className="card card-bordered mb-4">
+          <div className="card-body">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <strong
@@ -107,13 +106,13 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
               </span>
             </div>
             <strong className="block">{translate('Failure rate')}</strong>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
 
       <div>
-        <Card className="card-bordered mb-4">
-          <Card.Body>
+        <div className="card card-bordered mb-4">
+          <div className="card-body">
             <div className="flex items-center justify-between">
               <strong className="display-4 text-info">
                 {formatNumber(data.metrics.messages_failed)}
@@ -123,8 +122,8 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
               </span>
             </div>
             <strong className="block">{translate('Messages failed')}</strong>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

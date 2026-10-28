@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import {
   marketplaceResourcesReallocateLimits,
@@ -96,7 +95,7 @@ export const ReviewAndConfirmTab: FC<ReviewAndConfirmTabProps> = ({
       </div>
 
       <div className="table-responsive">
-        <Table className="table-row-bordered table-rounded border-[1px] border-divider">
+        <table className="table table-row-bordered table-rounded border-[1px] border-divider">
           <thead>
             <tr>
               <th>{translate('Resource name')}</th>
@@ -136,7 +135,7 @@ export const ReviewAndConfirmTab: FC<ReviewAndConfirmTabProps> = ({
               </tr>
             ))}
           </tbody>
-        </Table>
+        </table>
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import {
   Resource,
@@ -227,8 +226,8 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                         'Optional per-component caps for this project.',
                       )}
                 </FormText>
-                <Card className="card-table card-bordered full-width">
-                  <Card.Body className="p-0">
+                <div className="card card-table card-bordered full-width">
+                  <div className="card-body p-0">
                     <table className="table table-row-bordered align-middle mb-0">
                       <thead>
                         <tr>
@@ -310,8 +309,8 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                         })}
                       </tbody>
                     </table>
-                  </Card.Body>
-                </Card>
+                  </div>
+                </div>
               </FormFieldset>
             )}
           </ModalDialog>

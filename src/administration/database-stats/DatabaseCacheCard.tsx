@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard, Progress } from 'waldur-ui';
 
@@ -64,7 +63,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
           <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Memory settings')}
           </h6>
-          <Table size="sm" borderless className="mb-0">
+          <table className="table table-sm table-borderless mb-0">
             <tbody>
               <tr>
                 <td className="text-quaternary">
@@ -83,7 +82,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
                 </td>
               </tr>
             </tbody>
-          </Table>
+          </table>
           <small className="text-quaternary mt-2.5 block">
             {translate('Values are in 8KB pages')}
           </small>

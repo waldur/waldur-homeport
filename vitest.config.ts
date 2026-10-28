@@ -76,12 +76,7 @@ export default mergeConfig(
           // pointed at the setup file didn't get esbuild's static scanner
           // to trace through it either (tried, reverted).
           optimizeDeps: {
-            include: [
-              'aria-query',
-              'lz-string',
-              'pretty-format',
-              'react-bootstrap/esm/FormCheckInput',
-            ],
+            include: ['aria-query', 'lz-string', 'pretty-format'],
           },
           test: {
             name: 'storybook',

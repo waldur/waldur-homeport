@@ -1,7 +1,6 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   marketplaceOfferingMergesCreate,
   marketplaceOfferingMergesPartialUpdate,
@@ -449,18 +448,18 @@ export const OfferingMergeWizard: FC = () => {
   };
 
   return (
-    <Card>
-      <Card.Header>
-        <Card.Title>
+    <div className="card">
+      <div className="card-header">
+        <div className="card-title">
           {merge
             ? translate('Merge into {target} ({state})', {
                 target: merge.target_offering?.name,
                 state: getMergeStateLabel(merge.state),
               })
             : translate('New offering merge')}
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
+        </div>
+      </div>
+      <div className="card-body">
         <div className="wizard wizard-vertical flex flex-col lg:flex-row gap-5.5">
           <div className="shrink-0" style={{ width: '280px' }}>
             <VerticalProgressSteps
@@ -523,7 +522,7 @@ export const OfferingMergeWizard: FC = () => {
             </div>
           </div>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

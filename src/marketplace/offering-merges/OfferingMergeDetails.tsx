@@ -1,7 +1,6 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import { OfferingMergeRefusal } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
@@ -73,8 +72,8 @@ export const OfferingMergeDetails: FC = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <Card>
-        <Card.Body className="flex flex-col gap-3">
+      <div className="card">
+        <div className="card-body flex flex-col gap-3">
           <div className="flex flex-wrap justify-between items-start gap-2.5">
             <div>
               <h2 className="mb-1">
@@ -142,31 +141,31 @@ export const OfferingMergeDetails: FC = () => {
             refusal={refusal}
           />
           <MergeProgress merge={merge} />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
       <MergeVerification merge={merge} />
 
-      <Card>
-        <Card.Header>
-          <Card.Title className="flex items-center gap-1.5">
+      <div className="card">
+        <div className="card-header">
+          <div className="card-title flex items-center gap-1.5">
             {translate('Mappings')}
             <HelpTip label={getMappingsHelp()} />
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
+          </div>
+        </div>
+        <div className="card-body">
           <MergeMappingsView merge={merge} offerings={offerings} />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
-      <Card>
-        <Card.Header>
-          <Card.Title className="flex items-center gap-1.5">
+      <div className="card">
+        <div className="card-header">
+          <div className="card-title flex items-center gap-1.5">
             {translate('Preview')}
             <HelpTip label={getChangesHelp()} />
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
+          </div>
+        </div>
+        <div className="card-body">
           {merge.preview ? (
             <MergePreviewView
               preview={merge.preview}
@@ -182,8 +181,8 @@ export const OfferingMergeDetails: FC = () => {
               )}
             </p>
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

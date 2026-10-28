@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   EffectiveRoute,
   EffectiveRoutesResponse,
@@ -166,14 +165,12 @@ export const EffectiveRoutesCard: FC<Props> = ({ routerUuid }) => {
   }));
 
   return (
-    <Card className="mt-3">
-      <Card.Header className="flex justify-between items-center">
-        <Card.Title className="mb-0">
-          {translate('Effective routes')}
-        </Card.Title>
+    <div className="card mt-3">
+      <div className="card-header flex justify-between items-center">
+        <div className="card-title mb-0">{translate('Effective routes')}</div>
         <SnatBadge snat={data.snat} hasGateway={data.has_external_gateway} />
-      </Card.Header>
-      <Card.Body>
+      </div>
+      <div className="card-body">
         {rows.length === 0 ? (
           <div className="text-quaternary">
             {translate(
@@ -183,7 +180,7 @@ export const EffectiveRoutesCard: FC<Props> = ({ routerUuid }) => {
         ) : (
           <SimpleTable<EffectiveRoute> columns={ROUTE_COLUMNS} rows={rows} />
         )}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

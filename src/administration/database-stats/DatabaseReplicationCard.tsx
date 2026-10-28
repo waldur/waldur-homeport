@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard, Badge } from 'waldur-ui';
 
@@ -32,10 +31,8 @@ export const DatabaseReplicationCard: FC<DatabaseReplicationCardProps> = ({
       defaultOpen={hasReplicationLag}
       className="mb-5"
     >
-      <Table
-        size="sm"
-        borderless
-        className="mb-0"
+      <table
+        className="table table-sm table-borderless mb-0"
         style={{ maxWidth: '400px' }}
       >
         <tbody>
@@ -74,7 +71,7 @@ export const DatabaseReplicationCard: FC<DatabaseReplicationCardProps> = ({
             </tr>
           )}
         </tbody>
-      </Table>
+      </table>
       {hasReplicationLag && (
         <small className="text-warning mt-2.5 block">
           {translate(

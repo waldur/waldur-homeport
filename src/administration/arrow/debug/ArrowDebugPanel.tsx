@@ -1,5 +1,3 @@
-import { Card } from 'react-bootstrap';
-
 import { AlertItem } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -35,13 +33,13 @@ export const ArrowDebugPanel = ({ settings }: ArrowDebugPanelProps) => {
 
   return (
     <div className="flex flex-col gap-5">
-      <Card>
-        <Card.Header>
-          <Card.Title>
+      <div className="card">
+        <div className="card-header">
+          <div className="card-title">
             <h5 className="mb-0">{translate('Debug Actions')}</h5>
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
+          </div>
+        </div>
+        <div className="card-body">
           <AlertItem
             type="floating"
             variant="warning"
@@ -60,8 +58,8 @@ export const ArrowDebugPanel = ({ settings }: ArrowDebugPanelProps) => {
               <CleanupConsumptionAction />
             </div>
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

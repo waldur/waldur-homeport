@@ -1,5 +1,4 @@
 import { FunctionComponent, useEffect, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -68,8 +67,8 @@ export const OrganizationCreateStep4: FunctionComponent<
 
   return (
     <div className="flex flex-col gap-4">
-      <Card className="border-0 shadow-sm">
-        <Card.Body className="p-6">
+      <div className="card border-0 shadow-sm">
+        <div className="card-body p-6">
           <h5 className="mb-3 font-semibold">{translate('Your Intent')}</h5>
           <p className="text-quaternary mb-5">
             {translate(
@@ -91,8 +90,8 @@ export const OrganizationCreateStep4: FunctionComponent<
               ))}
             </div>
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

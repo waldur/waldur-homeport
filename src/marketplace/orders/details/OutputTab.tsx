@@ -1,21 +1,19 @@
-import { Card } from 'react-bootstrap';
-
 import { CodeBlockPreview } from '@/core/CodeBlockPreview';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
 export const OutputTab = ({ order }) => {
   return (
-    <Card className="card-bordered">
-      <Card.Header className="custom-card-header custom-padding-zero">
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header custom-card-header custom-padding-zero">
+        <div className="card-title">
           <h3>{translate('Output')}</h3>
-        </Card.Title>
-      </Card.Header>
+        </div>
+      </div>
       {order.output ? (
-        <Card.Body>
+        <div className="card-body">
           <CodeBlockPreview code={order.output} />
-        </Card.Body>
+        </div>
       ) : (
         <NoResult
           title={translate('No outputs found for this order')}
@@ -23,6 +21,6 @@ export const OutputTab = ({ order }) => {
           noAction
         />
       )}
-    </Card>
+    </div>
   );
 };

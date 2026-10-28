@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { useBreakpointDown } from 'waldur-ui';
 
@@ -74,16 +73,16 @@ const Sidebar: FC<
         isVMode ? props.hideOnVertical && 'hidden' : sideColumnClassName,
       )}
     >
-      <Card className="card-bordered w-full">
+      <div className="card card-bordered w-full">
         {props.title ? (
-          <Card.Header>
+          <div className="card-header">
             <div className="me-1.5">
               <h4 className="mb-0">{props.title}</h4>
             </div>
-          </Card.Header>
+          </div>
         ) : null}
-        <Card.Body>{props.children}</Card.Body>
-      </Card>
+        <div className="card-body">{props.children}</div>
+      </div>
     </div>
   ) : (
     <div

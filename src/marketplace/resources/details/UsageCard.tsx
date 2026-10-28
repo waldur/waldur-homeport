@@ -1,7 +1,6 @@
 import { ChartBarIcon, TableIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import { marketplaceResourcesTeamList, Resource } from 'waldur-js-client';
 
 import { BaseButton, SegmentedControl } from 'waldur-ui';
@@ -85,8 +84,8 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
   }
   if (resource.state === 'Creating') {
     return (
-      <Card className="card-bordered">
-        <Card.Body>
+      <div className="card card-bordered">
+        <div className="card-body">
           <NoResult
             title={translate('No usage yet')}
             message={translate(
@@ -94,17 +93,17 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
             )}
             noAction
           />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header">
+        <div className="card-title">
           <h3>{translate('Usage history')}</h3>
-        </Card.Title>
+        </div>
         <div className="card-toolbar gap-3">
           {teamError ? (
             <LoadingErred message={translate('Error')} loadData={refetchTeam} />
@@ -163,8 +162,8 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
             size="lg"
           />
         </div>
-      </Card.Header>
-      <Card.Body>
+      </div>
+      <div className="card-body">
         {loading ? (
           <LoadingSpinner />
         ) : error ? (
@@ -187,7 +186,7 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
             users={users}
           />
         )}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

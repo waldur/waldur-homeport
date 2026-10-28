@@ -1,6 +1,5 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import {
   adminArrowSettingsSaveSettings,
@@ -171,11 +170,11 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
         )}
       </p>
 
-      <Card className="mb-3">
-        <Card.Header>
+      <div className="card mb-3">
+        <div className="card-header">
           <h5 className="mb-0">{translate('Connection')}</h5>
-        </Card.Header>
-        <Card.Body>
+        </div>
+        <div className="card-body">
           <Field
             label={translate('API URL')}
             value={<ExternalLink url={values.api_url} label={values.api_url} />}
@@ -188,14 +187,14 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
             label={translate('Partner Reference')}
             value={partnerInfo?.reference as string}
           />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
-      <Card className="mb-3">
-        <Card.Header>
+      <div className="card mb-3">
+        <div className="card-header">
           <h5 className="mb-0">{translate('Customer Mappings')}</h5>
-        </Card.Header>
-        <Card.Body>
+        </div>
+        <div className="card-body">
           {mappingCount > 0 ? (
             <SimpleTable
               columns={getMappingColumns()}
@@ -207,15 +206,15 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
               {translate('No customer mappings configured')}
             </span>
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
       {values.exportTypes.length > 0 && (
-        <Card className="mb-3">
-          <Card.Header>
+        <div className="card mb-3">
+          <div className="card-header">
             <h5 className="mb-0">{translate('Available Export Types')}</h5>
-          </Card.Header>
-          <Card.Body>
+          </div>
+          <div className="card-body">
             <p className="text-quaternary small mb-2.5">
               {translate(
                 'These billing export types are available from your Arrow account. Compatible types have all required fields.',
@@ -226,8 +225,8 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
               rows={values.exportTypes}
               rowKey="reference"
             />
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       )}
 
       <AlertItem

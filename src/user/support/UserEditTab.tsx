@@ -1,4 +1,3 @@
-import { Card } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
 
 import { LOCAL_IDP } from '@/auth/providers/constants';
@@ -35,13 +34,13 @@ export const UserEditTab: React.FC<UserEditTabProps> = ({ user }) => {
         <AcceptTosWarning isSelf={canAcceptTerms} userName={user.full_name} />
       )}
       {canAcceptTerms && !user.agreement_date && (
-        <Card className="card-bordered mb-5.5">
-          <Card.Body>
+        <div className="card card-bordered mb-5.5">
+          <div className="card-body">
             <FormTable>
               <FormTable.Item value={<TermsOfServiceCheckbox user={user} />} />
             </FormTable>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       )}
       <UserProfileTabs
         user={user}

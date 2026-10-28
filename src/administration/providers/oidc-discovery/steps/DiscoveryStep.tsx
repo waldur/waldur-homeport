@@ -1,7 +1,6 @@
 import { XIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useState } from 'react';
-import { Card, Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { identityProvidersDiscoverMetadata } from 'waldur-js-client';
 
@@ -150,12 +149,12 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
         )}
       </p>
       {/* Endpoints Card */}
-      <Card className="mb-3">
-        <Card.Header>
+      <div className="card mb-3">
+        <div className="card-header">
           <h5 className="mb-0">{translate('Discovered Endpoints')}</h5>
-        </Card.Header>
-        <Card.Body>
-          <Table borderless size="sm">
+        </div>
+        <div className="card-body">
+          <table className="table table-sm table-borderless">
             <tbody>
               {Object.entries(discoveryResult.endpoints || {}).map(
                 ([key, value]) => (
@@ -170,15 +169,15 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                 ),
               )}
             </tbody>
-          </Table>
-        </Card.Body>
-      </Card>
+          </table>
+        </div>
+      </div>
       {/* Claims Card */}
-      <Card className="mb-3">
-        <Card.Header>
+      <div className="card mb-3">
+        <div className="card-header">
           <h5 className="mb-0">{translate('Supported Claims')}</h5>
-        </Card.Header>
-        <Card.Body>
+        </div>
+        <div className="card-body">
           {claimsNotExposed && (
             <AlertItem
               type="floating"
@@ -240,16 +239,16 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
               label={translate('Add Claim')}
             />
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
       {/* Suggested Scopes Card */}
       {discoveryResult.suggested_scopes &&
         discoveryResult.suggested_scopes.length > 0 && (
-          <Card className="mb-3">
-            <Card.Header>
+          <div className="card mb-3">
+            <div className="card-header">
               <h5 className="mb-0">{translate('Suggested Scopes')}</h5>
-            </Card.Header>
-            <Card.Body>
+            </div>
+            <div className="card-body">
               <p className="text-quaternary mb-1.5">
                 {translate(
                   'These scopes are recommended based on the discovered claim mappings.',
@@ -262,24 +261,24 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                   </Badge>
                 ))}
               </div>
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         )}
       {/* Waldur Fields Card */}
       {discoveryResult.waldur_fields &&
         discoveryResult.waldur_fields.length > 0 && (
-          <Card className="mb-3">
-            <Card.Header>
+          <div className="card mb-3">
+            <div className="card-header">
               <h5 className="mb-0">{translate('Mappable User Fields')}</h5>
-            </Card.Header>
-            <Card.Body>
+            </div>
+            <div className="card-body">
               <p className="text-quaternary mb-1.5">
                 {translate(
                   '{count} Waldur user fields can be mapped to OIDC claims.',
                   { count: discoveryResult.waldur_fields.length },
                 )}
               </p>
-              <Table size="sm" className="mb-0">
+              <table className="table table-sm mb-0">
                 <thead>
                   <tr>
                     <th>{translate('Field')}</th>
@@ -310,7 +309,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                     </tr>
                   ))}
                 </tbody>
-              </Table>
+              </table>
               {discoveryResult.waldur_fields.length > 5 && (
                 <p className="text-quaternary mt-1.5 mb-0">
                   {translate('...and {count} more fields', {
@@ -318,8 +317,8 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                   })}
                 </p>
               )}
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         )}
     </WizardModal>
   );

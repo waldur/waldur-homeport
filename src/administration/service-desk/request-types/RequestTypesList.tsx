@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { supportRequestTypesAdminList } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
@@ -74,8 +73,8 @@ export const RequestTypesList: FC = () => {
   ];
 
   return (
-    <Card className="card-bordered">
-      <Card.Body>
+    <div className="card card-bordered">
+      <div className="card-body">
         <Table
           {...tableProps}
           columns={columns}
@@ -89,7 +88,7 @@ export const RequestTypesList: FC = () => {
             <RequestTypeRowActions row={row} refetch={tableProps.fetch} />
           )}
         />
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

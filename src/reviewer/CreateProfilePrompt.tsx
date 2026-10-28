@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { reviewerProfilesMe } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
@@ -16,8 +15,8 @@ export const CreateProfilePrompt: FC = () => {
   });
 
   return (
-    <Card className="card-bordered">
-      <Card.Body className="text-center py-8">
+    <div className="card card-bordered">
+      <div className="card-body text-center py-8">
         <h3 className="mb-4">
           {translate('You do not have a reviewer profile yet.')}
         </h3>
@@ -37,7 +36,7 @@ export const CreateProfilePrompt: FC = () => {
               : translate('Create reviewer profile')
           }
         />
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

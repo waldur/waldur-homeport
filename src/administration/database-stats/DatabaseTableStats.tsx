@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard } from 'waldur-ui';
 
@@ -21,7 +20,7 @@ export const DatabaseTableStats: FC<DatabaseTableStatsProps> = ({ data }) => {
       defaultOpen
       className="mb-5"
     >
-      <Table hover className="table-row-bordered align-middle mb-0">
+      <table className="table table-hover table-row-bordered align-middle mb-0">
         <thead>
           <tr>
             <th>{translate('Table')}</th>
@@ -46,7 +45,7 @@ export const DatabaseTableStats: FC<DatabaseTableStatsProps> = ({ data }) => {
             </tr>
           ))}
         </tbody>
-      </Table>
+      </table>
     </AccordionCard>
   );
 };

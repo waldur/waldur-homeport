@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { BaseButton, Tooltip } from 'waldur-ui';
 
@@ -48,8 +47,8 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
           })}
           disabled={!isAllowed}
         >
-          <Card className="card-bordered h-full cursor-pointer border-hover-brand">
-            <Card.Body className="p-3 flex items-center gap-2.5">
+          <div className="card card-bordered h-full cursor-pointer border-hover-brand">
+            <div className="card-body p-3 flex items-center gap-2.5">
               {offering.thumbnail ? (
                 <Image src={offering.thumbnail} size={48} isContain circle />
               ) : (
@@ -70,8 +69,8 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
                   label={translate('View')}
                 />
               </div>
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         </OfferingDetailsLink>
       </span>
     </Tooltip>

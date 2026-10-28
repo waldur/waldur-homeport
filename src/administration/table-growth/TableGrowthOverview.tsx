@@ -1,6 +1,5 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 
@@ -18,15 +17,15 @@ const StatCard: FC<{
   valueClass?: string;
   extra?: ReactNode;
 }> = ({ value, label, valueClass = '', extra }) => (
-  <Card className="card-bordered mb-4 h-full">
-    <Card.Body>
+  <div className="card card-bordered mb-4 h-full">
+    <div className="card-body">
       <div className="flex items-center">
         <strong className={`text-2xl ${valueClass}`}>{value}</strong>
         {extra}
       </div>
       <strong className="block text-quaternary">{label}</strong>
-    </Card.Body>
-  </Card>
+    </div>
+  </div>
 );
 
 export const TableGrowthOverview: FC<TableGrowthOverviewProps> = ({

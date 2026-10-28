@@ -1,7 +1,6 @@
 import { ArrowRightIcon, UserIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { reviewerProfilesMeRetrieve } from 'waldur-js-client';
 
 import { Avatar, Badge, BaseButton } from 'waldur-ui';
@@ -48,19 +47,19 @@ export const ReviewerProfileSummaryCard: FC<
 
   if (isLoading) {
     return (
-      <Card className="card-bordered">
-        <Card.Body className="flex items-center justify-center py-5">
+      <div className="card card-bordered">
+        <div className="card-body flex items-center justify-center py-5">
           <LoadingSpinner />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   // No profile exists - show create prompt
   if (!profile) {
     return (
-      <Card className="card-bordered bg-warning-subtle">
-        <Card.Body>
+      <div className="card card-bordered bg-warning-subtle">
+        <div className="card-body">
           <div className="flex items-center gap-3">
             <div
               className="flex items-center justify-center rounded-full bg-warning text-white"
@@ -85,14 +84,14 @@ export const ReviewerProfileSummaryCard: FC<
               size="lg"
             />
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Card className="card-bordered">
-      <Card.Body>
+    <div className="card card-bordered">
+      <div className="card-body">
         <div className="flex items-center gap-3">
           {/* Avatar */}
           <Avatar
@@ -163,7 +162,7 @@ export const ReviewerProfileSummaryCard: FC<
             size="lg"
           />
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

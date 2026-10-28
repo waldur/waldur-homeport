@@ -1,5 +1,4 @@
 import { FC, ReactNode } from 'react';
-import { Card } from 'react-bootstrap';
 
 interface DashboardCardProps {
   title: string;
@@ -23,8 +22,9 @@ export const DashboardCard: FC<DashboardCardProps> = ({
   const isClickable = !isLoading && hasItems;
 
   return (
-    <Card
-      className={`card-bordered ${
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <div
+      className={`card card-bordered ${
         isClickable ? 'hover:border-brand cursor-pointer' : 'opacity-50'
       }`}
       onClick={isClickable ? onClick : undefined}
@@ -33,7 +33,7 @@ export const DashboardCard: FC<DashboardCardProps> = ({
         minHeight: '120px',
       }}
     >
-      <Card.Body className="flex items-center">
+      <div className="card-body flex items-center">
         <div
           className={`size-[50px] me-3 shrink-0 rounded-md flex items-center justify-center ${
             isClickable ? backgroundColor : 'bg-gray-300 dark:bg-gray-dark-600'
@@ -42,10 +42,10 @@ export const DashboardCard: FC<DashboardCardProps> = ({
           {icon}
         </div>
         <div className="grow">
-          <Card.Title className="mb-1 h5">{title}</Card.Title>
+          <div className="card-title mb-1 h5">{title}</div>
           <p className="text-quaternary mb-0 text-xs">{message}</p>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

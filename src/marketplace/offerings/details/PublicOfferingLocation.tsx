@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -19,8 +18,8 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   return (
-    <Card className="card-bordered mb-8">
-      <Card.Body>
+    <div className="card card-bordered mb-8">
+      <div className="card-body">
         <PublicOfferingCardTitle>
           {translate('Location')}
         </PublicOfferingCardTitle>
@@ -58,7 +57,7 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
             </div>
           )}
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

@@ -1,6 +1,5 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useState } from 'react';
-import { Card, Table } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 import {
   openstackDiscoveryDiscoverExternalNetworks,
@@ -170,8 +169,9 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 mb-5">
             {values.externalNetworks.map((network) => (
               <div key={network.id}>
-                <Card
-                  className={`cursor-pointer h-full ${
+                {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+                <div
+                  className={`card cursor-pointer h-full ${
                     values.selectedExternalNetworkId === network.id
                       ? 'border-brand border-2'
                       : 'border-secondary'
@@ -180,7 +180,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                     form.change('selectedExternalNetworkId', network.id)
                   }
                 >
-                  <Card.Body>
+                  <div className="card-body">
                     <div className="flex items-start">
                       <Radio
                         className="me-2.5"
@@ -219,8 +219,8 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                         )}
                       </div>
                     </div>
-                  </Card.Body>
-                </Card>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -291,7 +291,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
       {!errors.volumeTypes && values.volumeTypes.length > 0 && (
         <div className="mb-5">
           <h5 className="mb-2.5">{translate('Volume Types')}</h5>
-          <Table bordered size="sm">
+          <table className="table table-sm table-bordered">
             <thead>
               <tr>
                 <th>{translate('Name')}</th>
@@ -308,7 +308,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </table>
         </div>
       )}
 
@@ -316,7 +316,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
       {!errors.flavors && values.flavors.length > 0 && (
         <div className="mb-5">
           <h5 className="mb-2.5">{translate('Flavors')}</h5>
-          <Table bordered size="sm">
+          <table className="table table-sm table-bordered">
             <thead>
               <tr>
                 <th>{translate('Name')}</th>
@@ -335,7 +335,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </table>
         </div>
       )}
     </WizardModal>

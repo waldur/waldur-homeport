@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Tooltip } from 'waldur-ui';
 
@@ -35,7 +34,7 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
       })}
       disabled={!isAllowed}
     >
-      <Card className="card-bordered h-full overflow-hidden cursor-pointer border-hover-brand">
+      <div className="card card-bordered h-full overflow-hidden cursor-pointer border-hover-brand">
         {/* Image header */}
         <div className="image-card-header">
           {image ? (
@@ -54,7 +53,7 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
         </div>
 
         {/* Content: avatar + title */}
-        <Card.Body className="p-3 flex items-center gap-2.5">
+        <div className="card-body p-3 flex items-center gap-2.5">
           {offering.thumbnail ? (
             <Image src={offering.thumbnail} size={48} isContain circle />
           ) : (
@@ -68,10 +67,10 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
               {offering.customer_name}
             </div>
           </div>
-        </Card.Body>
+        </div>
 
         {/* Footer */}
-        <Card.Footer className="py-3 px-4 flex justify-end gap-3">
+        <div className="card-footer py-3 px-4 flex justify-end gap-3">
           <CardRequestAccessButton
             offering={offering}
             orderDisabledReason={isDisabled ? disabledButtonTooltip : undefined}
@@ -81,8 +80,8 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
             disabled={isDisabled}
             disabledReason={disabledButtonTooltip}
           />
-        </Card.Footer>
-      </Card>
+        </div>
+      </div>
     </OfferingDetailsLink>
   );
 

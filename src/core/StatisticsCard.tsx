@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -15,8 +14,8 @@ export const StatisticsCard: React.FC<StatisticsCardProps> = ({
   value,
   to,
 }) => (
-  <Card className="card-bordered mb-4">
-    <Card.Body className="flex md:block justify-between items-center">
+  <div className="card card-bordered mb-4">
+    <div className="card-body flex md:block justify-between items-center">
       {to && (
         <div className="text-end order-2">
           <Link state={to.state} params={to.params} buttonVariant="tertiary">
@@ -28,6 +27,6 @@ export const StatisticsCard: React.FC<StatisticsCardProps> = ({
         <strong className="block display-4 text-success">{value}</strong>
         <strong className="block mb-1.5">{title}</strong>
       </div>
-    </Card.Body>
-  </Card>
+    </div>
+  </div>
 );

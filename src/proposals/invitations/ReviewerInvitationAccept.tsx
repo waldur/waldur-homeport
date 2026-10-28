@@ -3,7 +3,6 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
 import { FC, useCallback } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   reviewerInvitationsRetrieve,
   reviewerInvitationsAccept,
@@ -188,8 +187,8 @@ export const ReviewerInvitationAccept: FC = () => {
   if (invitationError) {
     return (
       <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-8')}>
-        <Card className="card-bordered">
-          <Card.Body className="text-center py-8">
+        <div className="card card-bordered">
+          <div className="card-body text-center py-8">
             <h3 className="text-danger mb-3">
               {translate('Invalid invitation')}
             </h3>
@@ -198,8 +197,8 @@ export const ReviewerInvitationAccept: FC = () => {
                 'This invitation link is invalid or has expired. Please contact the call manager for a new invitation.',
               )}
             </p>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
     );
   }
@@ -212,8 +211,8 @@ export const ReviewerInvitationAccept: FC = () => {
   if (invitation.invitation_status !== 'pending') {
     return (
       <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-8')}>
-        <Card className="card-bordered">
-          <Card.Body className="text-center py-8">
+        <div className="card card-bordered">
+          <div className="card-body text-center py-8">
             <h3 className="mb-3">
               {translate('Invitation already processed')}
             </h3>
@@ -222,8 +221,8 @@ export const ReviewerInvitationAccept: FC = () => {
                 ? translate('You have already accepted this invitation.')
                 : translate('This invitation has been declined or expired.')}
             </p>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
     );
   }

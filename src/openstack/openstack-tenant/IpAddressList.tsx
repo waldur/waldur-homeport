@@ -1,6 +1,5 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
 import { BaseButton } from 'waldur-ui';
@@ -54,30 +53,27 @@ export const IpAddressList: React.FC<any> = ({
   <>
     {fields.length > 0 ? (
       <>
-        <Table
-          responsive={true}
-          bordered={true}
-          striped={true}
-          className="mt-2.5"
-        >
-          <thead>
-            <tr>
-              <th>{translate('IP address')}</th>
-              <th>{translate('Actions')}</th>
-            </tr>
-          </thead>
+        <div className="table-responsive">
+          <table className="table table-bordered table-striped mt-2.5">
+            <thead>
+              <tr>
+                <th>{translate('IP address')}</th>
+                <th>{translate('Actions')}</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            {fields.map((address, index) => (
-              <IPAddressRow
-                key={address}
-                address={address}
-                validateAddress={validateAddress}
-                onRemove={() => fields.remove(index)}
-              />
-            ))}
-          </tbody>
-        </Table>
+            <tbody>
+              {fields.map((address, index) => (
+                <IPAddressRow
+                  key={address}
+                  address={address}
+                  validateAddress={validateAddress}
+                  onRemove={() => fields.remove(index)}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
         <IPAddressAddButton onClick={() => fields.push('')} />
       </>
     ) : (

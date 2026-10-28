@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { Issue, supportCommentsList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -37,24 +36,24 @@ export const IssueCommentsContainer: FC<IssueCommentsContainerProps> = ({
 
   return (
     <IssueCommentsContext.Provider value={issue}>
-      <Card className="card-bordered mb-4">
-        <Card.Header>
-          <Card.Title>
+      <div className="card card-bordered mb-4">
+        <div className="card-header">
+          <div className="card-title">
             <span className="me-1.5">{translate('Comments')}</span>
             <RefreshButton refetch={refetch} loading={isLoading} />
-          </Card.Title>
+          </div>
           <div className="card-toolbar">
             <IssueCommentButton />
           </div>
-        </Card.Header>
-        <Card.Body>
+        </div>
+        <div className="card-body">
           {isLoading && comments.length === 0 ? (
             <LoadingSpinner />
           ) : (
             <IssueCommentsList comments={comments} />
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </IssueCommentsContext.Provider>
   );
 };

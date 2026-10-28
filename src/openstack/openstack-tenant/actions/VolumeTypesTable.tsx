@@ -1,6 +1,5 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
 import { BaseButton } from 'waldur-ui';
@@ -66,31 +65,28 @@ export const VolumeTypesTable: FC<{ fields; options }> = ({
     <>
       {fields.length > 0 ? (
         <>
-          <Table
-            responsive={true}
-            bordered={true}
-            striped={true}
-            className="mt-2.5"
-          >
-            <thead>
-              <tr>
-                <th>{translate('Source')}</th>
-                <th>{translate('Destination')}</th>
-                <th>{translate('Actions')}</th>
-              </tr>
-            </thead>
+          <div className="table-responsive">
+            <table className="table table-bordered table-striped mt-2.5">
+              <thead>
+                <tr>
+                  <th>{translate('Source')}</th>
+                  <th>{translate('Destination')}</th>
+                  <th>{translate('Actions')}</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              {fields.map((volumeType, index) => (
-                <VolumeTypeRow
-                  key={volumeType}
-                  volumeType={volumeType}
-                  options={options}
-                  onRemove={() => fields.remove(index)}
-                />
-              ))}
-            </tbody>
-          </Table>
+              <tbody>
+                {fields.map((volumeType, index) => (
+                  <VolumeTypeRow
+                    key={volumeType}
+                    volumeType={volumeType}
+                    options={options}
+                    onRemove={() => fields.remove(index)}
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
           <VolumeTypeAddButton onClick={() => fields.push({})} />
         </>
       ) : (

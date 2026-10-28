@@ -1,6 +1,5 @@
 import { PencilSimpleIcon, XIcon } from '@phosphor-icons/react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   OrderDetails,
   PublicOfferingDetails,
@@ -100,29 +99,29 @@ export const LimitsSection = ({
 
   if (components.length === 0 || !Object.keys(limits ?? {}).length) {
     return (
-      <Card className="card-bordered">
-        <Card.Header className="custom-card-header custom-padding-zero">
-          <Card.Title>
+      <div className="card card-bordered">
+        <div className="card-header custom-card-header custom-padding-zero">
+          <div className="card-title">
             <h3>{translate('Limits')}</h3>
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
+          </div>
+        </div>
+        <div className="card-body">
           <NoResult
             title={translate('No limits found for this order')}
             buttonTitle={null}
             message={null}
             noAction
           />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     );
   }
   return (
-    <Card className="card-bordered">
-      <Card.Header className="custom-card-header custom-padding-zero">
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header custom-card-header custom-padding-zero">
+        <div className="card-title">
           <h3>{translate('Limits')}</h3>
-        </Card.Title>
+        </div>
         {editable && hasSelection && (
           <div className="card-toolbar flex items-center gap-2.5">
             <div className="flex items-center self-stretch font-normal text-primary">
@@ -153,8 +152,8 @@ export const LimitsSection = ({
             </Menu>
           </div>
         )}
-      </Card.Header>
-      <Card.Body>
+      </div>
+      <div className="card-body">
         <Table density="normal">
           <TableHeader>
             <TableRow>
@@ -224,7 +223,7 @@ export const LimitsSection = ({
             ))}
           </TableBody>
         </Table>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

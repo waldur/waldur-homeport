@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Tooltip } from 'waldur-ui';
 
@@ -43,20 +42,21 @@ export const PublicDashboardHero: FC<
         )}
       >
         <div className="flex">
-          <Card
+          <div
             className={classNames(
-              'w-full md:mb-0 mb-3',
+              'card w-full md:mb-0 mb-3',
               props.cardBordered && 'card-bordered',
             )}
           >
             {props.backgroundImage && (
-              <Card.Img
-                variant="top"
+              <img
+                alt=""
+                className="card-img-top"
                 src={props.backgroundImage}
                 style={{ height: 160, objectFit: 'cover' }}
               />
             )}
-            <Card.Body className="flex flex-col sm:flex-row items-stretch grow">
+            <div className="card-body flex flex-col sm:flex-row items-stretch grow">
               {props.logo || props.logoAlt ? (
                 <Tooltip label={props.logoTooltip}>
                   <span>
@@ -100,19 +100,19 @@ export const PublicDashboardHero: FC<
                   </div>
                 )}
               </div>
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         </div>
 
         {!props.hideQuickSection && (
           <div className="flex">
-            <Card
+            <div
               className={classNames(
-                'grow',
+                'card grow',
                 props.cardBordered && 'card-bordered',
               )}
             >
-              <Card.Body className="flex flex-col">
+              <div className="card-body flex flex-col">
                 <div className="flex flex-wrap gap-x-5">
                   <div className="flex-1 min-w-0">{props.quickBody}</div>
                   {/* Quick actions */}
@@ -131,8 +131,8 @@ export const PublicDashboardHero: FC<
                     {props.quickFooter}
                   </div>
                 )}
-              </Card.Body>
-            </Card>
+              </div>
+            </div>
           </div>
         )}
       </div>

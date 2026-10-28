@@ -1,7 +1,6 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { proposalProtectedCallsMatchingConfigurationRetrieve } from 'waldur-js-client';
 
 import {
@@ -196,9 +195,9 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
   };
 
   return (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header">
+        <div className="card-title">
           <h3>
             {translate('Matching settings')}{' '}
             <Tooltip
@@ -211,12 +210,12 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
               <InfoIcon weight="bold" className="text-quaternary" />
             </Tooltip>
           </h3>
-        </Card.Title>
+        </div>
         <div className="card-toolbar">
           <MatchingSummaryButton config={config || DEFAULT_CONFIG} />
         </div>
-      </Card.Header>
-      <Card.Body>
+      </div>
+      <div className="card-body">
         <Tabs mount="active" value={activeTab} onValueChange={handleTabSelect}>
           <TabsList className="mb-4">
             {tabs.map((tab) => (
@@ -287,7 +286,7 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
             </TabsContent>
           </>
         </Tabs>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

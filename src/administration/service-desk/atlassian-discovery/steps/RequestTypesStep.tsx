@@ -1,6 +1,5 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useState, useEffect } from 'react';
-import { Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverRequestTypes } from 'waldur-js-client';
 
@@ -145,7 +144,7 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
         )}
       </p>
 
-      <Table hover className="mb-5">
+      <table className="table table-hover mb-5">
         <thead>
           <tr>
             <th style={{ width: 40 }}>
@@ -189,7 +188,7 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
             </tr>
           ))}
         </tbody>
-      </Table>
+      </table>
 
       <div className="flex justify-between">
         <span className="text-quaternary">

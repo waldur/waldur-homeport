@@ -1,6 +1,5 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useState } from 'react';
-import { Card, Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
@@ -193,12 +192,12 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
         )}
       </p>
 
-      <Card className="mb-3">
-        <Card.Header>
+      <div className="card mb-3">
+        <div className="card-header">
           <h5 className="mb-0">{translate('Connection')}</h5>
-        </Card.Header>
-        <Card.Body>
-          <Table borderless size="sm">
+        </div>
+        <div className="card-body">
+          <table className="table table-sm table-borderless">
             <tbody>
               <tr>
                 <td className="text-quaternary" style={{ width: '40%' }}>
@@ -221,16 +220,16 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 <td>{values.project_name}</td>
               </tr>
             </tbody>
-          </Table>
-        </Card.Body>
-      </Card>
+          </table>
+        </div>
+      </div>
 
-      <Card className="mb-3">
-        <Card.Header>
+      <div className="card mb-3">
+        <div className="card-header">
           <h5 className="mb-0">{translate('Selected Infrastructure')}</h5>
-        </Card.Header>
-        <Card.Body>
-          <Table borderless size="sm">
+        </div>
+        <div className="card-body">
+          <table className="table table-sm table-borderless">
             <tbody>
               <tr>
                 <td className="text-quaternary" style={{ width: '40%' }}>
@@ -251,9 +250,9 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 <td>{renderFieldOrDash(values.selectedVolumeAZ)}</td>
               </tr>
             </tbody>
-          </Table>
-        </Card.Body>
-      </Card>
+          </table>
+        </div>
+      </div>
 
       {(values.flavor_exclude_regex ||
         values.volume_type_blacklist ||
@@ -265,12 +264,12 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
         values.max_concurrent_provision_instance != null ||
         values.max_concurrent_provision_volume != null ||
         values.max_concurrent_provision_snapshot != null) && (
-        <Card className="mb-3">
-          <Card.Header>
+        <div className="card mb-3">
+          <div className="card-header">
             <h5 className="mb-0">{translate('Provisioning')}</h5>
-          </Card.Header>
-          <Card.Body>
-            <Table borderless size="sm">
+          </div>
+          <div className="card-body">
+            <table className="table table-sm table-borderless">
               <tbody>
                 {values.flavor_exclude_regex && (
                   <tr>
@@ -355,21 +354,21 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                   </tr>
                 )}
               </tbody>
-            </Table>
-          </Card.Body>
-        </Card>
+            </table>
+          </div>
+        </div>
       )}
 
       {(values.default_internal_network_mtu != null ||
         values.snapshot_size_limit_gb != null ||
         values.max_instances != null ||
         values.max_volumes != null) && (
-        <Card className="mb-3">
-          <Card.Header>
+        <div className="card mb-3">
+          <div className="card-header">
             <h5 className="mb-0">{translate('Limits')}</h5>
-          </Card.Header>
-          <Card.Body>
-            <Table borderless size="sm">
+          </div>
+          <div className="card-body">
+            <table className="table table-sm table-borderless">
               <tbody>
                 {values.default_internal_network_mtu != null && (
                   <tr>
@@ -404,19 +403,19 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                   </tr>
                 )}
               </tbody>
-            </Table>
-          </Card.Body>
-        </Card>
+            </table>
+          </div>
+        </div>
       )}
 
       {values.previewResult && (
         <>
-          <Card className="mb-3">
-            <Card.Header>
+          <div className="card mb-3">
+            <div className="card-header">
               <h5 className="mb-0">{translate('Service Attributes')}</h5>
-            </Card.Header>
-            <Card.Body>
-              <Table borderless size="sm">
+            </div>
+            <div className="card-body">
+              <table className="table table-sm table-borderless">
                 <tbody>
                   {Object.entries(values.previewResult.service_attributes).map(
                     ([key, value]) => (
@@ -438,17 +437,17 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                     ),
                   )}
                 </tbody>
-              </Table>
-            </Card.Body>
-          </Card>
+              </table>
+            </div>
+          </div>
 
-          <Card className="mb-3">
-            <Card.Header>
+          <div className="card mb-3">
+            <div className="card-header">
               <h5 className="mb-0">{translate('Plugin Options')}</h5>
-            </Card.Header>
-            <Card.Body>
+            </div>
+            <div className="card-body">
               {Object.keys(values.previewResult.plugin_options).length > 0 ? (
-                <Table borderless size="sm">
+                <table className="table table-sm table-borderless">
                   <tbody>
                     {Object.entries(values.previewResult.plugin_options).map(
                       ([key, value]) => (
@@ -473,14 +472,14 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                       ),
                     )}
                   </tbody>
-                </Table>
+                </table>
               ) : (
                 <span className="text-quaternary">
                   {translate('No plugin options')}
                 </span>
               )}
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         </>
       )}
     </WizardModal>

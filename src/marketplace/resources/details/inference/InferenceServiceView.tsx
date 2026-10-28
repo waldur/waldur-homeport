@@ -1,6 +1,5 @@
 import { CaretDownIcon, CaretUpIcon } from '@phosphor-icons/react';
 import { FC, ReactNode, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import { Offering, Resource, ResourceApiKeyStatus } from 'waldur-js-client';
 
 import { BaseButton, Collapsible, CollapsibleContent } from 'waldur-ui';
@@ -37,13 +36,13 @@ const CredentialRow: FC<{ label: string; children: ReactNode }> = ({
 );
 
 const EndpointCard: FC<{ endpoint: string }> = ({ endpoint }) => (
-  <Card className="card-bordered mb-5">
-    <Card.Header>
-      <Card.Title>
+  <div className="card card-bordered mb-5">
+    <div className="card-header">
+      <div className="card-title">
         <h3>{translate('Endpoint')}</h3>
-      </Card.Title>
-    </Card.Header>
-    <Card.Body>
+      </div>
+    </div>
+    <div className="card-body">
       <CredentialRow label={translate('Endpoint')}>
         <div className="flex items-center gap-1">
           <span className="wrap-anywhere">{endpoint}</span>
@@ -56,8 +55,8 @@ const EndpointCard: FC<{ endpoint: string }> = ({ endpoint }) => (
       <CredentialRow label={translate('Compatibility')}>
         {translate('OpenAI v1')}
       </CredentialRow>
-    </Card.Body>
-  </Card>
+    </div>
+  </div>
 );
 
 // The playground authenticates with the first active key, revealed on open.
@@ -73,11 +72,11 @@ const PlaygroundCard: FC<{
     setOpen((value) => !value);
   };
   return (
-    <Card className="card-bordered">
-      <Card.Header className="flex justify-between items-center">
-        <Card.Title>
+    <div className="card card-bordered">
+      <div className="card-header flex justify-between items-center">
+        <div className="card-title">
           <h3>{translate('Playground')}</h3>
-        </Card.Title>
+        </div>
         <div className="flex items-center gap-1.5">
           {open && (
             <ModelSelect
@@ -105,10 +104,10 @@ const PlaygroundCard: FC<{
             }
           />
         </div>
-      </Card.Header>
+      </div>
       <Collapsible open={open} onOpenChange={setOpen}>
         <CollapsibleContent>
-          <Card.Body>
+          <div className="card-body">
             <InferencePlayground
               endpoint={endpoint}
               model={modelState.model}
@@ -116,10 +115,10 @@ const PlaygroundCard: FC<{
               error={modelState.error}
               height="55vh"
             />
-          </Card.Body>
+          </div>
         </CollapsibleContent>
       </Collapsible>
-    </Card>
+    </div>
   );
 };
 

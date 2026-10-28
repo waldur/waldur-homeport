@@ -10,7 +10,6 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   marketplaceServiceProvidersStatRetrieve,
   ServiceProviderStatistics,
@@ -119,13 +118,12 @@ const generateWidgetsData = (statistics: ServiceProviderStatistics) => [
 ];
 
 const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
-  <Card
-    as={Link}
+  <Link
     state={item.to.state}
     params={item.to.params}
-    className="card-bordered grow min-h-[225px] hover:border-[var(--border-brand)]"
+    className="card card-bordered grow min-h-[225px] hover:border-[var(--border-brand)]"
   >
-    <Card.Body className="py-8 px-5">
+    <div className="card-body py-8 px-5">
       {item.iconNode && (
         <span
           className={classNames(
@@ -141,8 +139,8 @@ const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
         {item.title}
       </p>
       <ChangesAmountBadge changes={item.changes} />
-    </Card.Body>
-  </Card>
+    </div>
+  </Link>
 );
 
 export const ProviderWidgets = ({ provider }) => {

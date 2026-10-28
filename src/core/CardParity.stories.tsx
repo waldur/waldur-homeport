@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Card as CardBs } from 'react-bootstrap';
 
 import {
   Card,
@@ -13,7 +12,7 @@ type CaseId = 'basic' | 'with-footer' | 'body-only' | 'bordered';
 const CASES: CaseId[] = ['basic', 'with-footer', 'body-only', 'bordered'];
 
 /**
- * Renders old (React-Bootstrap) Card and new (waldur-ui) Card side by side
+ * Renders old (Bootstrap CSS classes) Card and new (waldur-ui) Card side by side
  * with data-pair and data-role attributes for automated pixel-diff parity
  * verification.
  */
@@ -25,23 +24,23 @@ const Pair = ({ caseId }: { caseId: CaseId }) => {
   return (
     <div className="flex items-start gap-3 bg-white p-3 dark:bg-neutral-950">
       <div className="w-[360px]" data-pair={caseId} data-role="old">
-        <CardBs className={isBordered ? 'card-bordered' : undefined}>
+        <div className={isBordered ? 'card card-bordered' : 'card'}>
           {hasHeader && (
-            <CardBs.Header>
-              <CardBs.Title>Card title</CardBs.Title>
-            </CardBs.Header>
+            <div className="card-header">
+              <h5 className="card-title">Card title</h5>
+            </div>
           )}
-          <CardBs.Body>
+          <div className="card-body">
             <p className="m-0 text-sm">
               Standard card content demonstrating padding and layout parity.
             </p>
-          </CardBs.Body>
+          </div>
           {hasFooter && (
-            <CardBs.Footer>
+            <div className="card-footer">
               <span className="text-xs text-quaternary">Card footer note</span>
-            </CardBs.Footer>
+            </div>
           )}
-        </CardBs>
+        </div>
       </div>
       <div className="w-[360px]" data-pair={caseId} data-role="new">
         <Card

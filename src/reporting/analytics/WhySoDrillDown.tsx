@@ -5,7 +5,6 @@ import {
 } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Card, Table } from 'react-bootstrap';
 
 import { Badge } from 'waldur-ui';
 
@@ -269,63 +268,63 @@ const WhySoDrillDownTable: FC<{
 
   return (
     <div className="expandable-container py-2.5">
-      <Table
-        hover
-        responsive={isRoot}
-        className={classNames(
-          'table-row-bordered table-rounded border mb-0',
-          !isRoot && 'text-xs',
-        )}
-      >
-        <thead>
-          <tr className="text-quaternary text-xs uppercase font-medium border-b-[1px] border-b-secondary">
-            <th
-              className={classNames(
-                'border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap',
-              )}
-              onClick={() => toggleSort('label')}
-            >
-              {dimension}
-              <HeaderSort column="label" />
-            </th>
-            <th
-              className="text-end border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap"
-              onClick={() => toggleSort('value')}
-            >
-              {resolvedValueLabel}
-              <HeaderSort column="value" />
-            </th>
-            <th
-              className="text-end border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap"
-              onClick={() => toggleSort('share')}
-            >
-              {translate('Share')}
-              <HeaderSort column="share" />
-            </th>
-            {hasChanges && (
+      <div className={isRoot ? 'table-responsive' : undefined}>
+        <table
+          className={classNames(
+            'table table-hover table-row-bordered table-rounded border mb-0',
+            !isRoot && 'text-xs',
+          )}
+        >
+          <thead>
+            <tr className="text-quaternary text-xs uppercase font-medium border-b-[1px] border-b-secondary">
+              <th
+                className={classNames(
+                  'border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap',
+                )}
+                onClick={() => toggleSort('label')}
+              >
+                {dimension}
+                <HeaderSort column="label" />
+              </th>
               <th
                 className="text-end border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap"
-                onClick={() => toggleSort('change')}
+                onClick={() => toggleSort('value')}
               >
-                {translate('Change')}
-                <HeaderSort column="change" />
+                {resolvedValueLabel}
+                <HeaderSort column="value" />
               </th>
-            )}
-          </tr>
-        </thead>
-        <tbody className="border-0">
-          {sortedData.map((item) => (
-            <DrillDownRow
-              key={item.id}
-              item={item}
-              dimension={dimension}
-              onDrillDown={onDrillDown}
-              showChange={hasChanges}
-              valueLabel={valueLabel}
-            />
-          ))}
-        </tbody>
-      </Table>
+              <th
+                className="text-end border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap"
+                onClick={() => toggleSort('share')}
+              >
+                {translate('Share')}
+                <HeaderSort column="share" />
+              </th>
+              {hasChanges && (
+                <th
+                  className="text-end border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap"
+                  onClick={() => toggleSort('change')}
+                >
+                  {translate('Change')}
+                  <HeaderSort column="change" />
+                </th>
+              )}
+            </tr>
+          </thead>
+          <tbody className="border-0">
+            {sortedData.map((item) => (
+              <DrillDownRow
+                key={item.id}
+                item={item}
+                dimension={dimension}
+                onDrillDown={onDrillDown}
+                showChange={hasChanges}
+                valueLabel={valueLabel}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
@@ -346,7 +345,7 @@ export const WhySoDrillDown: FC<WhySoDrillDownProps> = ({
       <div className="flex justify-between items-center mb-3" />
 
       <div className="mb-3">
-        <Card className="card-bordered overflow-hidden">
+        <div className="card card-bordered overflow-hidden">
           <WhySoDrillDownTable
             data={initialData}
             dimension={initialDimension}
@@ -354,7 +353,7 @@ export const WhySoDrillDown: FC<WhySoDrillDownProps> = ({
             isRoot
             valueLabel={initialValueLabel}
           />
-        </Card>
+        </div>
       </div>
     </div>
   );

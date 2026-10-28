@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
@@ -48,7 +47,7 @@ const LimitChangesSummary: FC<{
   return (
     <div className="mb-3">
       <h6 className="mb-1.5">{translate('Limit changes')}</h6>
-      <Table size="sm" borderless className="mb-0">
+      <table className="table table-sm table-borderless mb-0">
         <thead>
           <tr className="border-b-[1px] border-b-secondary">
             <th>{translate('Component')}</th>
@@ -71,7 +70,7 @@ const LimitChangesSummary: FC<{
             </tr>
           ))}
         </tbody>
-      </Table>
+      </table>
     </div>
   );
 };

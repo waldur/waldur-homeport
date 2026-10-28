@@ -1,6 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { FC, ReactNode, useCallback, useMemo, useRef } from 'react';
-import { Card } from 'react-bootstrap';
 import {
   proposalProposalsListUsersList,
   proposalProtectedCallsListUsersList,
@@ -136,11 +135,11 @@ export const TeamSection: FC<
     !props.readOnlyMode && (!rules || rules.canManageTeam);
 
   return (
-    <Card className="card-bordered" id={props.id}>
-      <Card.Header className="pt-3 pb-1.5">
-        <Card.Title>
+    <div className="card card-bordered" id={props.id}>
+      <div className="card-header pt-3 pb-1.5">
+        <div className="card-title">
           <h3>{props.title}</h3>
-        </Card.Title>
+        </div>
         <div className="card-toolbar gap-3">
           {showTeamActions ? (
             <TeamDropdownActions
@@ -161,10 +160,10 @@ export const TeamSection: FC<
             />
           ) : null}
         </div>
-      </Card.Header>
+      </div>
       {props.hasTeamTabs &&
         !isFeatureVisible(MarketplaceFeatures.call_only) && (
-          <Card.Header className="table-tabs border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto">
+          <div className="card-header table-tabs border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto">
             <TableNav
               tabs={[
                 {
@@ -181,9 +180,9 @@ export const TeamSection: FC<
                 },
               ]}
             />
-          </Card.Header>
+          </div>
         )}
-      <Card.Body className="pt-0">
+      <div className="card-body pt-0">
         {/* Invitations and the permissions log are management surfaces the
             backend denies to reviewers; in read-only (review) mode we show
             only the team roster so the info matches the viewer's role. */}
@@ -262,7 +261,7 @@ export const TeamSection: FC<
           fieldName="comment_team"
           space={0}
         />
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };

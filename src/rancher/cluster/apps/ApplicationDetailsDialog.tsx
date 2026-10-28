@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Table } from 'react-bootstrap';
 
 import {
   Accordion,
@@ -14,59 +13,65 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
 const ApplicationDetailsTable = ({ application }) => (
-  <Table bordered responsive>
-    <thead>
-      <tr>
-        <th>{translate('Key')}</th>
-        <th>{translate('Value')}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{translate('Version')}</td>
-        <td>{application.version}</td>
-      </tr>
-      <tr>
-        <td>{translate('Template')}</td>
-        <td>{application.template_name}</td>
-      </tr>
-      <tr>
-        <td>{translate('Catalog')}</td>
-        <td>{application.catalog_name}</td>
-      </tr>
-      <tr>
-        <td>{translate('Link')}</td>
-        <td>
-          <ExternalLink
-            url={application.external_url}
-            label={translate('Open')}
-          />
-        </td>
-      </tr>
-    </tbody>
-  </Table>
+  <div className="table-responsive">
+    <table className="table table-bordered">
+      <thead>
+        <tr>
+          <th>{translate('Key')}</th>
+          <th>{translate('Value')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{translate('Version')}</td>
+          <td>{application.version}</td>
+        </tr>
+        <tr>
+          <td>{translate('Template')}</td>
+          <td>{application.template_name}</td>
+        </tr>
+        <tr>
+          <td>{translate('Catalog')}</td>
+          <td>{application.catalog_name}</td>
+        </tr>
+        <tr>
+          <td>{translate('Link')}</td>
+          <td>
+            <ExternalLink
+              url={application.external_url}
+              label={translate('Open')}
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 );
 
 const ApplicationAnswersTable = ({ application }) => (
-  <Table bordered responsive>
-    <thead>
-      <tr>
-        <th>{translate('Question')}</th>
-        <th>{translate('Answer')}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {Object.keys(application.answers).map((key) => {
-        const value = application.answers[key];
-        return (
-          <tr key={key}>
-            <td className="ellipsis">{key}</td>
-            <td>{typeof value === 'object' ? JSON.stringify(value) : value}</td>
-          </tr>
-        );
-      })}
-    </tbody>
-  </Table>
+  <div className="table-responsive">
+    <table className="table table-bordered">
+      <thead>
+        <tr>
+          <th>{translate('Question')}</th>
+          <th>{translate('Answer')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Object.keys(application.answers).map((key) => {
+          const value = application.answers[key];
+          return (
+            <tr key={key}>
+              <td className="ellipsis">{key}</td>
+              <td>
+                {typeof value === 'object' ? JSON.stringify(value) : value}
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
 );
 
 export const ApplicationDetailsDialog: FunctionComponent<{

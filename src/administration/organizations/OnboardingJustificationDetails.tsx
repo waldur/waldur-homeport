@@ -1,6 +1,5 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { Field as FormField, Form } from 'react-final-form';
 import {
   OnboardingJustification,
@@ -100,8 +99,8 @@ export const OnboardingJustificationDetails: FC<
             )}
           </div>
 
-          <Card className="mb-3">
-            <Card.Body>
+          <div className="card mb-3">
+            <div className="card-body">
               {verification?.user_submitted_customer_data &&
                 Object.keys(verification.user_submitted_customer_data).length >
                   0 && (
@@ -212,8 +211,8 @@ export const OnboardingJustificationDetails: FC<
                   </div>
                 </>
               )}
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         </form>
       )}
     />

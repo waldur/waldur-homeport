@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import {
   marketplaceResourcesEstimateRenewal,
@@ -123,7 +122,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
   return (
     <div className="mt-3">
       <h6 className="mb-2.5">{translate('Estimated cost breakdown')}</h6>
-      <Table size="sm" borderless>
+      <table className="table table-sm table-borderless">
         <thead>
           <tr className="border-b-[1px] border-b-secondary">
             <th>{translate('Component')}</th>
@@ -169,7 +168,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
             </td>
           </tr>
         </tfoot>
-      </Table>
+      </table>
     </div>
   );
 };

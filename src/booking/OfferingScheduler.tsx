@@ -7,7 +7,6 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { Card } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { type FieldArrayRenderProps } from 'react-final-form-arrays';
 import { usePrevious } from 'react-use';
@@ -133,13 +132,13 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = ({
 
   return (
     <>
-      <Card className="card-bordered">
-        <Card.Header>
-          <Card.Title>
+      <div className="card card-bordered">
+        <div className="card-header">
+          <div className="card-title">
             <h3>{translate('Availability')}</h3>
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
+          </div>
+        </div>
+        <div className="card-body">
           <BusinessHoursGroup
             startTime={startTime}
             endTime={endTime}
@@ -159,8 +158,8 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = ({
           />
 
           <TimeZoneGroup timeZone={timeZone} setTimeZone={setTimeZone} />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
       <>
         {fields.map((schedule, index) => (
           <div key={index} className="mb-5">

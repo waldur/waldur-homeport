@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Table as BsTable } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
@@ -133,7 +132,7 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               })}
             </p>
             <div className="table-responsive">
-              <BsTable bordered hover size="sm">
+              <table className="table table-sm table-bordered table-hover">
                 <thead className="bg-tertiary dark:bg-quaternary">
                   <tr>
                     <th>{translate('Customer')}</th>
@@ -174,7 +173,7 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
                     </tr>
                   ))}
                 </tbody>
-              </BsTable>
+              </table>
             </div>
           </>
         )}

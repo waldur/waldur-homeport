@@ -1,8 +1,19 @@
 import { CheckIcon, CircleIcon } from '@phosphor-icons/react';
 import { FC, PropsWithChildren, ReactNode } from 'react';
-import { Variant } from 'react-bootstrap/esm/types';
 
 import { cn } from 'waldur-ui';
+
+export type StepVariant =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'danger'
+  | 'warning'
+  | 'info'
+  | 'light'
+  | 'dark';
+
+type Variant = StepVariant;
 
 const DEFAULT_VARIANT = 'primary';
 // The current (or completed) step's fill and title colour for a non-default

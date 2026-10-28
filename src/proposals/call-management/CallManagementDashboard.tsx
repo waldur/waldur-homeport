@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { Card } from 'react-bootstrap';
 import { callManagingOrganisationsStatsRetrieve } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
@@ -116,8 +115,8 @@ export const CallManagementDashboard = () => {
             </>
           )}
           <div className={callOnly ? 'lg:col-span-3' : 'col-span-full'}>
-            <Card className="card-bordered mb-5">
-              <Card.Body>
+            <div className="card card-bordered mb-5">
+              <div className="card-body">
                 <div className="flex justify-start lg:justify-between flex-wrap">
                   <FlatStatistics
                     title={translate('Active rounds')}
@@ -139,8 +138,8 @@ export const CallManagementDashboard = () => {
                     count={data.offering_requests_pending}
                   />
                 </div>
-              </Card.Body>
-            </Card>
+              </div>
+            </div>
           </div>
         </>
       )}

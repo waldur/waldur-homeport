@@ -1,6 +1,5 @@
 import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { Card } from 'react-bootstrap';
 import { Form, Field } from 'react-final-form';
 
 import { SubmitButton } from '@/form';
@@ -59,13 +58,13 @@ export const CustomerMediaPanel = (props: CustomerMediaPanelOwnProps) => {
   }
 
   return (
-    <Card className="card-bordered mb-4">
-      <Card.Header>
-        <Card.Title>
+    <div className="card card-bordered mb-4">
+      <div className="card-header">
+        <div className="card-title">
           <h3>{translate('Logo')}</h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>{content}</Card.Body>
-    </Card>
+        </div>
+      </div>
+      <div className="card-body">{content}</div>
+    </div>
   );
 };

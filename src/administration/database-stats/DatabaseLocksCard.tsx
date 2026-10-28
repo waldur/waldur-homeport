@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Table } from 'react-bootstrap';
 
 import { AccordionCard, Badge } from 'waldur-ui';
 
@@ -27,10 +26,8 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
       defaultOpen={health !== 'success' || hasExclusiveLocks}
       className="mb-5"
     >
-      <Table
-        size="sm"
-        borderless
-        className="mb-0"
+      <table
+        className="table table-sm table-borderless mb-0"
         style={{ maxWidth: '400px' }}
       >
         <tbody>
@@ -69,7 +66,7 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
             </td>
           </tr>
         </tbody>
-      </Table>
+      </table>
       {hasExclusiveLocks && (
         <small className="text-warning mt-2.5 block">
           {translate(

@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 
@@ -49,13 +48,13 @@ export const AccessControlTabsContainer: FC<CustomerEditPanelProps> = ({
 
   return (
     <Tabs value={activeKey} onValueChange={(k) => setActiveKey(k as SubTabKey)}>
-      <Card className="card-bordered">
-        <Card.Header className="border-b-[1px] border-b-secondary">
-          <Card.Title>
+      <div className="card card-bordered">
+        <div className="card-header border-b-[1px] border-b-secondary">
+          <div className="card-title">
             <h3>{translate('Access control')}</h3>
-          </Card.Title>
-        </Card.Header>
-        <Card.Header className="border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto">
+          </div>
+        </div>
+        <div className="card-header border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto">
           <TabsList scrollable scrollClassName="grow pt-3" bordered={false}>
             {getSubTabs().map((tab) => (
               <TabsTrigger key={tab.key} value={tab.key} hint={tab.tooltip}>
@@ -63,16 +62,16 @@ export const AccessControlTabsContainer: FC<CustomerEditPanelProps> = ({
               </TabsTrigger>
             ))}
           </TabsList>
-        </Card.Header>
-        <Card.Body className="p-0">
+        </div>
+        <div className="card-body p-0">
           <TabsContent value="subnets">
             <AccessSubnetMatrix customer={customer} canManage={canManage} />
           </TabsContent>
           <TabsContent value="restrictions">
             <CustomerMembershipRestrictionsPanel customer={customer} />
           </TabsContent>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </Tabs>
   );
 };

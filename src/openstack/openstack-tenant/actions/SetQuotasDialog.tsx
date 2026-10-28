@@ -1,5 +1,4 @@
 import React, { FC, ReactNode } from 'react';
-import { Card } from 'react-bootstrap';
 import { Field, Form, useFormState } from 'react-final-form';
 import {
   openstackTenantsSetQuotas,
@@ -443,8 +442,8 @@ export const SetQuotasDialog: FC<SetQuotasDialogProps> = ({
               </>
             }
           >
-            <Card className="card-table card-bordered full-width">
-              <Card.Body className="p-0">
+            <div className="card card-table card-bordered full-width">
+              <div className="card-body p-0">
                 <div className="table-responsive">
                   <div className="table-container">
                     <table className="table table-row-bordered align-middle">
@@ -477,8 +476,8 @@ export const SetQuotasDialog: FC<SetQuotasDialogProps> = ({
                     </table>
                   </div>
                 </div>
-              </Card.Body>
-            </Card>
+              </div>
+            </div>
           </ModalDialog>
         </form>
       )}

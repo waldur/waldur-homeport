@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 import { BroadcastMessage } from 'waldur-js-client';
 
 import { SafeMarkdown } from '@/core/SafeMarkdown';
@@ -12,13 +11,13 @@ export const BroadcastTemplateExpandableRow: FunctionComponent<{
   row: BroadcastMessage;
 }> = ({ row }) => (
   <ExpandableContainer>
-    <Card className="broadcast-template card-bordered card-solid">
-      <Card.Header>
+    <div className="card broadcast-template card-bordered card-solid">
+      <div className="card-header">
         <h6 className="mb-0 font-medium">{translate('Body')}</h6>
-      </Card.Header>
-      <Card.Body>
+      </div>
+      <div className="card-body">
         <SafeMarkdown text={row.body} smallTitles />
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   </ExpandableContainer>
 );

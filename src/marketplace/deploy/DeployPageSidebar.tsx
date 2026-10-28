@@ -1,4 +1,3 @@
-import { Card } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { OrderDetails, Offering } from 'waldur-js-client';
 
@@ -25,19 +24,19 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
 
   return (
     <>
-      <Card className="card-bordered w-full mb-4 lg:mb-5.5">
-        <Card.Header>
+      <div className="card card-bordered w-full mb-4 lg:mb-5.5">
+        <div className="card-header">
           <h3 className="mb-0">{translate('Progress')}</h3>
-        </Card.Header>
-        <Card.Body>
+        </div>
+        <div className="card-body">
           <FormSteps
             steps={props.steps}
             completedSteps={props.completedSteps}
             disabledSteps={props.disabledSteps}
             errors={{ ...errors, ...submitErrors }}
           />
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
       <CheckoutSummaryComponent
         offering={
           props.updateMode

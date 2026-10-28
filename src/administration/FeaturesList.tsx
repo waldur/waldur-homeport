@@ -9,7 +9,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Card } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { featureValues } from 'waldur-js-client';
 
@@ -251,12 +250,12 @@ export const FeaturesList = () => {
       initialValues={ENV.FEATURES}
       render={({ handleSubmit, submitting, dirty }) => (
         <form onSubmit={handleSubmit}>
-          <Card className="card-bordered">
-            <Card.Header>
+          <div className="card card-bordered">
+            <div className="card-header">
               <div className="flex flex-col">
-                <Card.Title className="mb-0">
+                <div className="card-title mb-0">
                   <h3>{translate('Features')}</h3>
-                </Card.Title>
+                </div>
               </div>
               <div className="card-toolbar flex items-center gap-3 flex-nowrap">
                 <TableQuery
@@ -273,8 +272,8 @@ export const FeaturesList = () => {
                   />
                 )}
               </div>
-            </Card.Header>
-            <Card.Body style={{ paddingTop: 8 }}>
+            </div>
+            <div className="card-body" style={{ paddingTop: 8 }}>
               <Tabs mount="all" value={activeKey} onValueChange={handleSelect}>
                 <div
                   className="flex items-end gap-1"
@@ -469,8 +468,8 @@ export const FeaturesList = () => {
                   </>
                 )}
               </Tabs>
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         </form>
       )}
     />

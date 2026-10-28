@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
-import { Card } from 'react-bootstrap';
 
 interface PanelProps {
   title?: React.ReactNode;
@@ -26,29 +25,32 @@ export const Panel: React.FC<PropsWithChildren<PanelProps>> = ({
   cardBordered,
   actions,
 }) => (
-  <Card
-    className={classNames(cardBordered && 'card-bordered', className)}
+  <div
+    className={classNames('card', cardBordered && 'card-bordered', className)}
     id={id}
   >
     {title && (
-      <Card.Header>
+      <div className="card-header">
         <div className="flex flex-col">
-          <Card.Title className="mb-0">
+          <div className="card-title mb-0">
             <h3 className={titleClassName}>{title}</h3>
-          </Card.Title>
+          </div>
           {subtitle && (
-            <Card.Subtitle
-              className={classNames('text-quaternary mt-1', subtitleClassName)}
+            <div
+              className={classNames(
+                'card-subtitle text-quaternary mt-1',
+                subtitleClassName,
+              )}
             >
               <p className="text-sm mb-0">{subtitle}</p>
-            </Card.Subtitle>
+            </div>
           )}
         </div>
         {/* Never wider than the header, so a wide toolbar (e.g. a scrollable
             tab strip) wraps or scrolls instead of overflowing the card. */}
         <div className="card-toolbar max-w-full">{actions}</div>
-      </Card.Header>
+      </div>
     )}
-    <Card.Body className={bodyClassName}>{children}</Card.Body>
-  </Card>
+    <div className={classNames('card-body', bodyClassName)}>{children}</div>
+  </div>
 );
