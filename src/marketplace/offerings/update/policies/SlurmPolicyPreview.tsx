@@ -67,13 +67,8 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
         />
         {currentUsagePct !== undefined && (
           <div
-            className="absolute top-0 bottom-0"
-            style={{
-              left: `${currentUsagePct}%`,
-              width: '3px',
-              backgroundColor: '#000',
-              zIndex: 10,
-            }}
+            className="absolute top-0 bottom-0 w-[3px] z-10 bg-current text-primary"
+            style={{ left: `${currentUsagePct}%` }}
             title={translate('Current usage: {usage}', {
               usage: currentUsage?.toLocaleString(),
             })}

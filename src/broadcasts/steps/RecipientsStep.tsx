@@ -16,13 +16,7 @@ const RecipientsListQuery = () => {
 export const RecipientsStep: FC<WizardStepProps> = (props) => (
   <WizardModal {...props}>
     <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-5">
-      <div
-        className="sm:col-span-4"
-        style={{
-          borderRight: '2px solid #eff2f5',
-          paddingRight: 20,
-        }}
-      >
+      <div className="sm:col-span-4 border-r-[2px] border-r-secondary pr-5">
         <AudienceFields
           allUsersLabel={translate('Send message to all users')}
         />

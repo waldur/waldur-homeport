@@ -166,6 +166,7 @@ export const LimitHorizonView: FC<Props> = ({
 
   const todayMs = Date.now();
   const tc = getChartThemeColors();
+  const saturation = getSaturationRamp();
   const hasTerminated = rows.some((r) => r.terminated > 0);
   const banner = (
     <MixBanner
@@ -295,7 +296,7 @@ export const LimitHorizonView: FC<Props> = ({
           height,
           r: 3,
         },
-        style: { fill: '#d92d20', opacity: 0.7 },
+        style: { fill: tc.danger, opacity: 0.7 },
       });
     }
 
@@ -480,21 +481,21 @@ export const LimitHorizonView: FC<Props> = ({
         <span className="inline-flex items-center gap-1">
           <span
             className="inline-block size-[10px] rounded-xs"
-            style={{ background: '#fdb022' }}
+            style={{ background: saturation.notice }}
           />
           {translate('70–90%')}
         </span>
         <span className="inline-flex items-center gap-1">
           <span
             className="inline-block size-[10px] rounded-xs"
-            style={{ background: '#dc6803' }}
+            style={{ background: saturation.warning }}
           />
           {translate('90–100%')}
         </span>
         <span className="inline-flex items-center gap-1">
           <span
             className="inline-block size-[10px] rounded-xs"
-            style={{ background: '#d92d20' }}
+            style={{ background: saturation.danger }}
           />
           {translate('Over cap')}
         </span>
