@@ -54,7 +54,7 @@ const CategoryListItem: FunctionComponent<
       // (docs/e2e-locators.md).
       data-testid="category-item"
       className={classNames(
-        'list-group-item relative block cursor-pointer py-4 border-0 text-primary transition-colors',
+        'relative block cursor-pointer py-4 border-0 text-primary transition-colors',
         className || 'px-6',
         bgClass,
       )}
@@ -100,7 +100,6 @@ const CategoryGroupListItem: FunctionComponent<{
     <Collapsible
       open={open}
       onOpenChange={setOpen}
-      className="category-group"
       // The waldur-integration-testing suite selects catalog groups by this
       // (docs/e2e-locators.md).
       data-testid="category-group"
@@ -150,7 +149,7 @@ export const CategoriesPanel: FunctionComponent<{
       // (docs/e2e-locators.md).
       data-testid="category-listing"
       className={classNames(
-        'category-listing w-full lg:w-1/2 lg:basis-1/2 lg:border-r lg:border-secondary flex flex-col h-full',
+        'w-full lg:w-1/2 lg:basis-1/2 lg:border-r lg:border-secondary flex flex-col h-full',
         selectedCategory && 'max-lg:hidden',
       )}
     >

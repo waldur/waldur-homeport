@@ -59,7 +59,7 @@ const OfferingListItem: FunctionComponent<{
           // (docs/e2e-locators.md).
           data-testid="offering-item"
           className={classNames(
-            'list-group-item relative block py-4 px-6 border-0 transition-colors',
+            'relative block py-4 px-6 border-0 transition-colors',
             isPaused
               ? 'bg-secondary opacity-50 cursor-not-allowed'
               : isSelected
@@ -249,7 +249,7 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
       // The waldur-integration-testing suite scopes offerings by this
       // (docs/e2e-locators.md).
       data-testid="offering-listing"
-      className="offering-listing w-full lg:w-1/2 lg:basis-1/2 flex flex-col h-full"
+      className="w-full lg:w-1/2 lg:basis-1/2 flex flex-col h-full"
     >
       <button
         type="button"
