@@ -8,6 +8,7 @@
     min-height: 77px;
   }
 
+  .category-nav-item,
   .list-group-item {
     border-left: 2px solid transparent;
     transition:
@@ -20,6 +21,9 @@
     border-top: none;
     border-bottom: none;
     border-right: none;
+    background-color: transparent;
+    width: 100%;
+    text-align: left;
 
     &:hover:not(.active) {
       background-color: transparent;

@@ -19,7 +19,13 @@
 import { FileArrowDownIcon, FileXlsIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Badge, NativeSelect, SegmentedControl, Tooltip } from 'waldur-ui';
+import {
+  Badge,
+  LoadingSpinner,
+  NativeSelect,
+  SegmentedControl,
+  Tooltip,
+} from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { translate } from '@/i18n';
@@ -380,12 +386,13 @@ export const UsageReportVis: FC<Props> = ({
       {/* Updating indicator */}
       {isUpdating && (
         <div
-          className="text-quaternary small mb-1"
+          className="text-quaternary small mb-1 flex items-center"
           style={{ minHeight: '1.2em' }}
         >
-          <span
-            className="spinner-border spinner-border-sm me-1"
-            style={{ width: '0.75rem', height: '0.75rem' }}
+          <LoadingSpinner
+            size={12}
+            className="me-1"
+            aria-label={translate('Updating...')}
           />
           {translate('Updating...')}
         </div>

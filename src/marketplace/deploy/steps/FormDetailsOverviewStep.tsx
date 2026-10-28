@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Col, Row, Stack } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import { STALE_TIME } from '@/core/constants';
 import { Image } from '@/core/Image';
@@ -52,12 +52,12 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
             <Field
               label={translate('Offering')}
               value={
-                <Stack direction="horizontal" className="gap-1.5">
+                <div className="flex items-center self-stretch gap-1.5">
                   {props.offering.thumbnail ? (
                     <Image src={props.offering.thumbnail} size={24} circle />
                   ) : null}
                   {props.offering.name}
-                </Stack>
+                </div>
               }
               labelClass="me-1.5"
               isStuck
@@ -120,12 +120,12 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
           <Field
             label={translate('Offering')}
             value={
-              <Stack direction="horizontal" className="gap-1.5">
+              <div className="flex items-center self-stretch gap-1.5">
                 {props.offering.thumbnail ? (
                   <Image src={props.offering.thumbnail} size={24} circle />
                 ) : null}
                 {props.offering.name}
-              </Stack>
+              </div>
             }
             labelCol={5}
             valueCol={7}

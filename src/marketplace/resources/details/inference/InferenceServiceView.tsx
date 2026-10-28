@@ -1,9 +1,9 @@
 import { CaretDownIcon, CaretUpIcon } from '@phosphor-icons/react';
 import { FC, ReactNode, useState } from 'react';
-import { Card, Collapse } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Offering, Resource, ResourceApiKeyStatus } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Collapsible, CollapsibleContent } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
@@ -106,8 +106,8 @@ const PlaygroundCard: FC<{
           />
         </div>
       </Card.Header>
-      <Collapse in={open} mountOnEnter unmountOnExit>
-        <div>
+      <Collapsible open={open} onOpenChange={setOpen}>
+        <CollapsibleContent>
           <Card.Body>
             <InferencePlayground
               endpoint={endpoint}
@@ -117,8 +117,8 @@ const PlaygroundCard: FC<{
               height="55vh"
             />
           </Card.Body>
-        </div>
-      </Collapse>
+        </CollapsibleContent>
+      </Collapsible>
     </Card>
   );
 };

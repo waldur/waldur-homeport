@@ -10,7 +10,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { ListGroupItem, Stack } from 'react-bootstrap';
 import { FixedSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
@@ -47,9 +46,9 @@ const EmptyOfferingListPlaceholder: FunctionComponent = () => (
 );
 
 const LoadingRow: FunctionComponent<{ style: CSSProperties }> = ({ style }) => (
-  <ListGroupItem className="text-center" style={style}>
+  <div className="list-group-item text-center" style={style}>
     <span className="text-quaternary">{translate('Fetching')}</span>
-  </ListGroupItem>
+  </div>
 );
 
 const OfferingListItem: FunctionComponent<{
@@ -67,19 +66,19 @@ const OfferingListItem: FunctionComponent<{
       }
     >
       <span>
-        <ListGroupItem
+        <div
           data-uuid={item.uuid}
-          className={classNames({
+          className={classNames('list-group-item', {
             active: selectedItem && item.uuid === selectedItem.uuid,
+            disabled: item.state === 'Paused',
           })}
           style={style}
-          disabled={item.state === 'Paused'}
           {...getSelectableRowProps(
             () => onClick(item),
             item.state === 'Paused',
           )}
         >
-          <Stack direction="horizontal" className="gap-2.5">
+          <div className="flex items-center self-stretch gap-2.5">
             {item.image ? (
               <div className="size-10 shrink-0 inline-flex items-center justify-center rounded-md overflow-hidden">
                 <img
@@ -103,8 +102,8 @@ const OfferingListItem: FunctionComponent<{
                 <TextWithoutFormatting html={truncate(item.description, 120)} />
               </p>
             </div>
-          </Stack>
-        </ListGroupItem>
+          </div>
+        </div>
       </span>
     </Tooltip>
   );

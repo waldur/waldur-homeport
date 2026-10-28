@@ -70,6 +70,8 @@ export const RETIRED_UTILITY_PATTERNS = [
     /^timeline(?:-(?:item|line|icon|content|border-dashed))?$/,
     'waldur-ui Timeline primitive (<Timeline>, <TimelineItem>, <TimelineConnector>, <TimelineIcon>, <TimelineContent>) or Tailwind flex layout',
   ],
+  // spinners retired in #474; use waldur-ui LoadingSpinner component.
+  [/^spinner-(?:border|grow)(?:-sm)?$/, "waldur-ui's LoadingSpinner component"],
 ];
 
 /**

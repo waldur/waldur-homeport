@@ -1,6 +1,5 @@
 import { XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { Badge, BaseButton, useBreakpointUp } from 'waldur-ui';
@@ -48,10 +47,9 @@ const PageBarFilters = ({ withPicker = false }: { withPicker?: boolean }) => {
           <>
             <span className="font-medium">{translate('Filtered by')}:</span>
             {filters.map((item) => (
-              <Stack
+              <div
                 key={item.name}
-                direction="horizontal"
-                className="gap-1.5 font-medium"
+                className="hstack flex items-center self-stretch gap-1.5 font-medium"
               >
                 {item.label}
                 <Badge
@@ -66,7 +64,7 @@ const PageBarFilters = ({ withPicker = false }: { withPicker?: boolean }) => {
                 >
                   {getFilterValueLabel(item)}
                 </Badge>
-              </Stack>
+              </div>
             ))}
             <BaseButton
               variant="text-secondary"

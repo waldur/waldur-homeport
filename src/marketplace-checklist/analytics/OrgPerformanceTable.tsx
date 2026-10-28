@@ -1,5 +1,3 @@
-import { Stack } from 'react-bootstrap';
-
 import { Progress } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -45,12 +43,12 @@ export const OrgPerformanceTable = () => {
         {
           title: translate('Compliance rate'),
           render: ({ row }) => (
-            <Stack>
+            <div className="flex flex-col flex-auto self-stretch">
               <Progress value={row.compliance} className="mt-1" />
               <small className="block text-end font-semibold">
                 {row.compliance}%
               </small>
-            </Stack>
+            </div>
           ),
         },
         {

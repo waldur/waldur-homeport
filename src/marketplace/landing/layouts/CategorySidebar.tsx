@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Card, ListGroup } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { CategoryGroup } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
@@ -64,12 +64,13 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
     const isActive = selectedCategory?.uuid === uuid;
 
     return (
-      <ListGroup.Item
+      <button
         key={uuid}
-        action
-        active={isActive}
+        type="button"
         onClick={() => onCategorySelect(isActive ? null : { uuid, isGroup })}
-        className="flex items-center gap-2.5"
+        className={classNames('category-nav-item flex items-center gap-2.5', {
+          active: isActive,
+        })}
       >
         <div className="category-icon shrink-0">
           <CategoryThumbnail
@@ -87,7 +88,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
             {item.offering_count}
           </Badge>
         )}
-      </ListGroup.Item>
+      </button>
     );
   };
 
@@ -98,28 +99,31 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
           <span className="h3">{translate('Categories')}</span>
         </Card.Title>
       </Card.Header>
-      <ListGroup variant="flush" className="min-h-0 overflow-y-auto">
-        <ListGroup.Item
-          action
-          active={!selectedCategory}
+      <nav
+        aria-label={translate('Categories')}
+        className="min-h-0 overflow-y-auto"
+      >
+        <button
+          type="button"
           onClick={() => onCategorySelect(null)}
-          className="flex items-center gap-2.5"
+          className={classNames('category-nav-item flex items-center gap-2.5', {
+            active: !selectedCategory,
+          })}
         >
           <div className="category-icon shrink-0">
             <CategoryThumbnail title="" size={24} />
           </div>
           <span className="grow">{translate('All categories')}</span>
-        </ListGroup.Item>
+        </button>
         {categories.data.map((item) => {
           if ('categories' in item && item.categories) {
             return (
               <div key={item.uuid}>
                 {renderItem(item, true)}
                 {item.categories.map((cat) => (
-                  <ListGroup.Item
+                  <button
                     key={cat.uuid}
-                    action
-                    active={selectedCategory?.uuid === cat.uuid}
+                    type="button"
                     onClick={() =>
                       onCategorySelect(
                         selectedCategory?.uuid === cat.uuid
@@ -127,7 +131,12 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
                           : { uuid: cat.uuid, isGroup: false },
                       )
                     }
-                    className="flex items-center gap-2.5 ps-4"
+                    className={classNames(
+                      'category-nav-item flex items-center gap-2.5 ps-4',
+                      {
+                        active: selectedCategory?.uuid === cat.uuid,
+                      },
+                    )}
                   >
                     <div className="category-icon shrink-0">
                       <CategoryThumbnail
@@ -143,14 +152,14 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
                         {cat.offering_count}
                       </Badge>
                     )}
-                  </ListGroup.Item>
+                  </button>
                 ))}
               </div>
             );
           }
           return renderItem(item as Category);
         })}
-      </ListGroup>
+      </nav>
     </Card>
   );
 };

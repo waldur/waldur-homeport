@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import React, { FunctionComponent } from 'react';
 import { Form } from 'react-final-form';
 
+import { LoadingSpinner } from 'waldur-ui';
+
 import { STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -106,9 +108,11 @@ export const ReallocateLimitsDialog: FunctionComponent<
     return (
       <ModalDialog title={translate('Reallocate resource limits')}>
         <div className="text-center p-4">
-          <div className="spinner-border" role="status">
-            <span className="visually-hidden">{translate('Loading...')}</span>
-          </div>
+          <LoadingSpinner
+            size={32}
+            className="text-brand"
+            aria-label={translate('Loading...')}
+          />
         </div>
       </ModalDialog>
     );

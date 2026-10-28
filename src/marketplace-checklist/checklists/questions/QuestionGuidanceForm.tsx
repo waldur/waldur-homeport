@@ -1,6 +1,5 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Stack } from 'react-bootstrap';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { AlertItem, BaseButton, FormField } from 'waldur-ui';
@@ -71,7 +70,7 @@ const FieldsListGroup = ({
                 : undefined
             }
           >
-            <Stack direction="horizontal" className="gap-2.5">
+            <div className="flex items-center self-stretch gap-2.5">
               <SelectGroup
                 name={`${name}.answer`}
                 options={getOptions(i)}
@@ -89,7 +88,7 @@ const FieldsListGroup = ({
                 className="mt-1"
                 size="lg"
               />
-            </Stack>
+            </div>
             <TextGroup
               name={`${name}.solution`}
               placeholder={translate(

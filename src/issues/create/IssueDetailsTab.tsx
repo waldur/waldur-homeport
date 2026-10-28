@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Stack } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
 import { AlertItem } from 'waldur-ui';
@@ -159,7 +158,7 @@ export const IssueDetailsTab = ({
         )}
         space={4}
       />
-      <Stack direction="horizontal" className="gap-2.5">
+      <div className="flex items-center self-stretch gap-2.5">
         <OrganizationGroup
           disabled={
             standaloneIssue ||
@@ -173,7 +172,7 @@ export const IssueDetailsTab = ({
             ['project', 'resource'].includes(context.scopeType)
           }
         />
-      </Stack>
+      </div>
       <ResourceGroup
         disabled={standaloneIssue || context.scopeType === 'resource'}
       />

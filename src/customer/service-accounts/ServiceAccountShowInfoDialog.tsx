@@ -1,5 +1,3 @@
-import { Stack } from 'react-bootstrap';
-
 import { FormField, FormLabel, FormText } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -24,7 +22,7 @@ export const ServiceAccountShowInfoDialog = ({ resolve }: OwnProps) => {
       </FormField>
       <FormField className="mb-5.5">
         <FormLabel>{translate('API token')}</FormLabel>
-        <Stack className="gap-1.5" direction="horizontal">
+        <div className="flex items-center self-stretch gap-1.5">
           <BaseSecretField value={resolve.token} disabled className="grow" />
 
           <CopyToClipboardButton
@@ -33,7 +31,7 @@ export const ServiceAccountShowInfoDialog = ({ resolve }: OwnProps) => {
             buttonVariant="text-secondary"
             onlyButton
           />
-        </Stack>
+        </div>
         <FormText variant="muted">
           {translate(
             "This token won't be shown again, but you can regenerate it later.",

@@ -1,5 +1,5 @@
 import { FC, useMemo, useState } from 'react';
-import { Col, Row, Stack } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { RancherCluster } from 'waldur-js-client';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
@@ -14,7 +14,7 @@ import { StatisticsCard } from './StatisticsCard';
 const StatisticPieChartItem = ({ title, unit, total, value, color }) => {
   const { theme } = useTheme();
   return (
-    <Stack direction="horizontal" className="gap-4">
+    <div className="flex items-center self-stretch gap-4">
       <PieChart
         data={[
           {
@@ -37,7 +37,7 @@ const StatisticPieChartItem = ({ title, unit, total, value, color }) => {
           {total ? Number((value / total) * 100).toFixed(1) : 0}%
         </span>
       </div>
-    </Stack>
+    </div>
   );
 };
 
@@ -101,7 +101,7 @@ export const ClusterStatistics: FC<{
           </Col>
           <Col xs="auto">
             <h4 className="font-medium mb-5.5">{translate('CPU')}</h4>
-            <Stack direction="horizontal" className="gap-8">
+            <div className="flex items-center self-stretch gap-8">
               <StatisticPieChartItem
                 title={translate('Reserved')}
                 unit="cores"
@@ -116,11 +116,11 @@ export const ClusterStatistics: FC<{
                 value={0.3}
                 color="#12B76A"
               />
-            </Stack>
+            </div>
           </Col>
           <Col xs="auto">
             <h4 className="font-medium mb-5.5">{translate('Memory')}</h4>
-            <Stack direction="horizontal" className="gap-8">
+            <div className="flex items-center self-stretch gap-8">
               <StatisticPieChartItem
                 title={translate('Reserved')}
                 unit="GiB"
@@ -135,7 +135,7 @@ export const ClusterStatistics: FC<{
                 value={4.46}
                 color="#12B76A"
               />
-            </Stack>
+            </div>
           </Col>
         </Row>
 

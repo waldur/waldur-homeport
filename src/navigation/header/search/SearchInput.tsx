@@ -1,7 +1,7 @@
 import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react';
 import { KeyboardEvent, useMemo } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, LoadingSpinner } from 'waldur-ui';
 
 import { BaseStringField } from '@/form';
 import { translate } from '@/i18n';
@@ -79,7 +79,7 @@ export const SearchInput = ({
         {/* Loading */}
         {show && isLoading ? (
           <span className="absolute end-0 top-1/2 -translate-y-1/2 leading-none me-[0.924rem] z-[5]">
-            <span className="spinner-border size-[15px] align-middle text-quinary" />
+            <LoadingSpinner size={15} className="align-middle text-quinary" />
           </span>
         ) : null}
         {/* Clear button */}

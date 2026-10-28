@@ -183,11 +183,11 @@ const AddRoleToProfileDialog: FC<{
       {roles.length === 0 ? (
         <p>{translate('No eligible roles found.')}</p>
       ) : (
-        <ul className="list-group">
+        <ul className="border-[1px] border-secondary rounded divide-y divide-secondary">
           {roles.map((r: any) => (
             <li
               key={r.uuid}
-              className="list-group-item flex justify-between items-center"
+              className="px-4 py-2 flex justify-between items-center"
             >
               <span>
                 {r.name}

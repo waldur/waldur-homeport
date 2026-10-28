@@ -1,7 +1,6 @@
 import { EyeSlashIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import classNames from 'classnames';
-import { Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { BaseButton } from 'waldur-ui';
@@ -42,7 +41,7 @@ export const ImpersonationBar = () => {
         'impersonation-bar flex items-center justify-between h-full gap-3',
       )}
     >
-      <Stack direction="horizontal" className="gap-3 font-medium">
+      <div className="flex items-center self-stretch gap-3 font-medium">
         <div className="icon">
           <WarningCircleIcon size={20} weight="bold" />
         </div>
@@ -55,7 +54,7 @@ export const ImpersonationBar = () => {
               : impersonatorUser.full_name,
           },
         )}
-      </Stack>
+      </div>
       <BaseButton
         variant="secondary"
         onClick={() => stop()}

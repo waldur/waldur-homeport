@@ -25,21 +25,10 @@ $grid-breakpoints: $_grid-breakpoints;
 // styled from waldur-design-tokens and Tailwind).
 @import 'bootstrap/scss/transitions';
 @import 'bootstrap/scss/card';
-// list-group and helpers generate a .list-group-item-{color} and a
-// .link-{color} for every $theme-colors key, in compile-time (and, in dark
-// mode, theme-inverted) colours. Nothing uses them: colour comes from the
-// design tokens. Import both with no theme colours so only the structural
-// rules remain. Emptying $grid-breakpoints trims list-group-horizontal*.
-$_theme-colors: $theme-colors;
-$theme-colors: ();
-$grid-breakpoints: ();
-@import 'bootstrap/scss/list-group';
-$grid-breakpoints: $_grid-breakpoints;
-$theme-colors: $_theme-colors;
-@import 'bootstrap/scss/spinners';
 
 // Bootstrap helpers: ratio-* and sticky-{sm,md,lg,xl,xxl}-top are trimmed
 // via $aspect-ratios and $grid-breakpoints.
+$_theme-colors: $theme-colors;
 $theme-colors: ();
 $_aspect-ratios: $aspect-ratios;
 $aspect-ratios: ();

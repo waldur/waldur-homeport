@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 export const BaseList: FunctionComponent<{
   items;
@@ -18,11 +17,11 @@ export const BaseList: FunctionComponent<{
 }) => {
   return (
     <div className="scrollbar">
-      <ListGroup>
+      <div className="list-group">
         {items.length === 0 ? (
-          <ListGroupItem>
+          <div className="list-group-item">
             <EmptyPlaceholder />
-          </ListGroupItem>
+          </div>
         ) : (
           items.map((item) => (
             <ItemComponent
@@ -34,7 +33,7 @@ export const BaseList: FunctionComponent<{
             />
           ))
         )}
-      </ListGroup>
+      </div>
     </div>
   );
 };

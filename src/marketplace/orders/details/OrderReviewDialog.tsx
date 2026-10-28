@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-import { Stack } from 'react-bootstrap';
 import {
   marketplaceOrdersApproveByProvider,
   marketplaceOrdersRejectByProvider,
@@ -85,10 +84,10 @@ export const OrderReviewDialog = ({ order, loadData }) => {
         </>
       }
     >
-      <Stack>
+      <div className="flex flex-col flex-auto self-stretch">
         <strong>{translate('PO reference')}</strong>
         {order.request_comment}
-      </Stack>
+      </div>
       {translate('Purchase order')}
       <FileDownloader url={order.attachment} name={translate('PDF file')} />
     </ModalDialog>

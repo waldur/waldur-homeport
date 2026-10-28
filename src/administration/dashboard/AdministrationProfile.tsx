@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
-import { Card, Col, Row, Stack } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { usersList, versionRetrieve } from 'waldur-js-client';
 
 import { FormField, FormLabel } from 'waldur-ui';
@@ -117,7 +117,7 @@ export const AdministrationProfile = ({
             <Row className="my-5 md:mt-0">
               <Col>
                 <h2>{ENV.plugins.WALDUR_CORE.SITE_NAME}</h2>
-                <Stack direction="horizontal" className="gap-5 text-quaternary">
+                <div className="flex items-center self-stretch gap-5 text-quaternary">
                   {version?.version && (
                     <span>
                       {translate('Version')}&nbsp;{version.version}
@@ -126,7 +126,7 @@ export const AdministrationProfile = ({
                   {!supportOnly && website && <span>{website}</span>}
                   {supportOnly && email && <span>{email}</span>}
                   {supportOnly && phone && <span>{phone}</span>}
-                </Stack>
+                </div>
               </Col>
               <Col xs="auto" />
             </Row>

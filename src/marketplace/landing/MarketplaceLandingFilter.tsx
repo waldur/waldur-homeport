@@ -1,7 +1,7 @@
 import { CaretDownIcon, FunnelSimpleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Card, Stack } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Form, useForm } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
@@ -174,7 +174,7 @@ export const MarketplaceLandingFilter = ({
                 </div>
                 <LandingFilterFields values={values} />
 
-                <Stack direction="horizontal" className="gap-3">
+                <div className="flex items-center self-stretch gap-3">
                   <BaseButton
                     variant="tertiary"
                     className="flex-1"
@@ -187,7 +187,7 @@ export const MarketplaceLandingFilter = ({
                     className="flex-1"
                     label={translate('Apply')}
                   />
-                </Stack>
+                </div>
               </Card.Body>
             </Card>
           </PopoverContent>

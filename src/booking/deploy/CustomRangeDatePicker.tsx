@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon';
 import { useCallback, useMemo, useState } from 'react';
-import { ListGroup } from 'react-bootstrap';
 
 import {
   Calendar,
@@ -297,23 +296,30 @@ export const CustomRangeDatePicker = (props: CustomRangeDatePickerProps) => {
                 </span>
               )}
             </div>
-            <ListGroup>
+            <div
+              className="time-options-list"
+              role="group"
+              aria-label={translate('Start time')}
+            >
               {getTimeOptions(props.options.timeStep)
                 .slice(0, -1)
-                .map((time, i) => (
-                  <ListGroup.Item
-                    key={i}
-                    type="button"
-                    action
-                    variant=""
-                    active={startTime.h === time.h && startTime.m === time.m}
-                    disabled={isTimeOfStartDisabled(time)}
-                    onClick={() => onChange(null, null, time, null)}
-                  >
-                    {time.h}:{time.m}
-                  </ListGroup.Item>
-                ))}
-            </ListGroup>
+                .map((time, i) => {
+                  const active =
+                    startTime.h === time.h && startTime.m === time.m;
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      aria-pressed={active}
+                      className={`time-option-item${active ? ' active' : ''}`}
+                      disabled={isTimeOfStartDisabled(time)}
+                      onClick={() => onChange(null, null, time, null)}
+                    >
+                      {time.h}:{time.m}
+                    </button>
+                  );
+                })}
+            </div>
           </div>
           <div className="booking-range-picker-time-list">
             <div className="title">
@@ -324,23 +330,29 @@ export const CustomRangeDatePicker = (props: CustomRangeDatePickerProps) => {
                 </span>
               )}
             </div>
-            <ListGroup>
+            <div
+              className="time-options-list"
+              role="group"
+              aria-label={translate('End time')}
+            >
               {getTimeOptions(props.options.timeStep)
                 .slice(1)
-                .map((time, i) => (
-                  <ListGroup.Item
-                    key={i}
-                    type="button"
-                    action
-                    variant=""
-                    active={endTime.h === time.h && endTime.m === time.m}
-                    disabled={isTimeOfEndDisabled(time)}
-                    onClick={() => onChange(null, null, null, time)}
-                  >
-                    {time.h}:{time.m}
-                  </ListGroup.Item>
-                ))}
-            </ListGroup>
+                .map((time, i) => {
+                  const active = endTime.h === time.h && endTime.m === time.m;
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      aria-pressed={active}
+                      className={`time-option-item${active ? ' active' : ''}`}
+                      disabled={isTimeOfEndDisabled(time)}
+                      onClick={() => onChange(null, null, null, time)}
+                    >
+                      {time.h}:{time.m}
+                    </button>
+                  );
+                })}
+            </div>
           </div>
         </div>
       )}

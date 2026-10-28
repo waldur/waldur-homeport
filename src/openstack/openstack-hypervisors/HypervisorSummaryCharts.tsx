@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { EChartsOption, PieSeriesOption } from 'echarts';
 import { FC, useMemo } from 'react';
-import { Card, Stack } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import {
   openstackHypervisorsSummaryRetrieve,
   OpenstackHypervisorsListData,
@@ -104,7 +104,7 @@ const ChartItem: FC<ChartItemProps> = ({
   ]);
 
   return (
-    <Stack direction="horizontal" className="gap-3">
+    <div className="flex items-center self-stretch gap-3">
       <DonutChart data={data} />
       <div className="flex flex-col gap-1">
         <span className="flex items-center gap-1.5 text-xs">
@@ -139,7 +139,7 @@ const ChartItem: FC<ChartItemProps> = ({
           {totalLabel}
         </span>
       </div>
-    </Stack>
+    </div>
   );
 };
 
@@ -196,7 +196,7 @@ export const HypervisorSummaryCharts: FC<{
         </Card.Title>
       </Card.Header>
       <Card.Body className="p-5">
-        <Stack direction="horizontal" className="gap-8 flex-wrap">
+        <div className="flex items-center self-stretch gap-8 flex-wrap">
           <ChartItem
             used={usedVcpus}
             total={totalVcpus}
@@ -252,7 +252,7 @@ export const HypervisorSummaryCharts: FC<{
                 : undefined
             }
           />
-        </Stack>
+        </div>
       </Card.Body>
     </Card>
   );

@@ -190,6 +190,39 @@ describe('no-retired-bootstrap-utility', () => {
           },
         ],
       },
+      {
+        code: 'const A = () => <div className="spinner-border spinner-border-sm spinner-grow spinner-grow-sm" />;',
+        errors: [
+          {
+            messageId: 'retired',
+            data: {
+              token: 'spinner-border',
+              hint: "waldur-ui's LoadingSpinner component",
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'spinner-border-sm',
+              hint: "waldur-ui's LoadingSpinner component",
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'spinner-grow',
+              hint: "waldur-ui's LoadingSpinner component",
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'spinner-grow-sm',
+              hint: "waldur-ui's LoadingSpinner component",
+            },
+          },
+        ],
+      },
     ],
   });
 });

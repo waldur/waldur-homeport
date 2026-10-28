@@ -7,7 +7,7 @@ import {
   openportalAccessForEmailList,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, BaseButton } from 'waldur-ui';
+import { AlertItem, Badge, BaseButton, LoadingSpinner } from 'waldur-ui';
 
 import { useDebouncedValue } from '@/core/useDebouncedValue';
 import { FilterBox } from '@/form/FilterBox';
@@ -254,9 +254,11 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
 
         {isFetching && (
           <div className="text-center py-3">
-            <div className="spinner-border text-brand" role="status">
-              <span className="visually-hidden">{translate('Loading...')}</span>
-            </div>
+            <LoadingSpinner
+              size={32}
+              className="text-brand"
+              aria-label={translate('Loading...')}
+            />
           </div>
         )}
 

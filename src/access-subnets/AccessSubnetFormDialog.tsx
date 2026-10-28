@@ -1,5 +1,4 @@
 import { ReactNode, useState } from 'react';
-import { Form } from 'react-bootstrap';
 
 import { FormField, FormLabel } from 'waldur-ui';
 
@@ -153,7 +152,7 @@ export const AccessSubnetFormDialog = ({
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <ModalDialog
         title={isEditMode ? config.titleEdit : config.titleCreate}
         footer={
@@ -191,6 +190,6 @@ export const AccessSubnetFormDialog = ({
           />
         </FormField>
       </ModalDialog>
-    </Form>
+    </form>
   );
 };

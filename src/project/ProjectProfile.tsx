@@ -5,7 +5,6 @@ import {
   GraduationCapIcon,
 } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { Stack } from 'react-bootstrap';
 import { Project } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
@@ -178,7 +177,7 @@ export const ProjectProfile = ({ project }: ProjectProfileProps) => {
       }
       actions={<ProjectActions project={project} />}
     >
-      <Stack direction="horizontal" className="gap-5 mb-1">
+      <div className="flex items-center self-stretch gap-5 mb-1">
         {project.oecd_fos_2007_code && (
           <span>{`${project.oecd_fos_2007_code}. ${project.oecd_fos_2007_label}`}</span>
         )}
@@ -189,7 +188,7 @@ export const ProjectProfile = ({ project }: ProjectProfileProps) => {
           </span>
         )}
         {project.end_date && <ProjectEndDate project={project} />}
-      </Stack>
+      </div>
     </PublicDashboardHero>
   );
 };

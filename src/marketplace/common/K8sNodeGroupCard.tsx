@@ -1,5 +1,5 @@
 import { TrashIcon } from '@phosphor-icons/react';
-import { Col, Row, Stack } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import { Badge, BaseButton } from 'waldur-ui';
 
@@ -92,7 +92,7 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
         index > 0 ? 'pt-4 border-t-[1px] border-t-secondary' : undefined
       }
     >
-      <Stack direction="horizontal" className="gap-3 h-[32px] mb-4">
+      <div className="flex items-center self-stretch gap-3 h-[32px] mb-4">
         <h6 className="text-secondary mb-0">
           {translate('Node group #{n}', { n: index + 1 })}
         </h6>
@@ -113,7 +113,7 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
             size="sm"
           />
         )}
-      </Stack>
+      </div>
 
       <Row>
         {/* Node Group Profile Selection */}

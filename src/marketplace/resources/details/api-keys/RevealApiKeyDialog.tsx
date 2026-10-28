@@ -1,6 +1,5 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
-import { Stack } from 'react-bootstrap';
 
 import { BaseButton, FormField, FormLabel, FormText } from 'waldur-ui';
 
@@ -83,7 +82,7 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
       <FormField className="mb-1.5">
         <FormLabel>{translate('Key')}</FormLabel>
         {ready ? (
-          <Stack className="gap-1.5" direction="horizontal">
+          <div className="flex items-center self-stretch gap-1.5">
             {/* readOnly, not disabled: a disabled input renders its text muted
                 and cannot be selected, so the key is both hard to read and
                 impossible to copy by hand. */}
@@ -94,7 +93,7 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
               buttonVariant="text-secondary"
               onlyButton
             />
-          </Stack>
+          </div>
         ) : status === 'error' ? (
           <div className="text-danger">
             {translate('Unable to reveal the API key.')}

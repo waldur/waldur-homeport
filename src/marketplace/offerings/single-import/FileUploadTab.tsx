@@ -2,6 +2,8 @@ import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 
+import { LoadingSpinner } from 'waldur-ui';
+
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
@@ -119,9 +121,11 @@ export const FileUploadTab: FunctionComponent = () => {
 
         {isValidating && (
           <div className="flex items-center justify-center p-3">
-            <div className="spinner-border text-brand me-1.5" role="status">
-              <span className="visually-hidden">{translate('Loading...')}</span>
-            </div>
+            <LoadingSpinner
+              size={16}
+              className="text-brand me-1.5"
+              aria-label={translate('Loading...')}
+            />
             <span>{translate('Validating file...')}</span>
           </div>
         )}

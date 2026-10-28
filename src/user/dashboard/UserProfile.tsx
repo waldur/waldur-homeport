@@ -5,7 +5,6 @@ import {
   UserSquareIcon,
 } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { Stack } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
 
 import { StateIndicator } from '@/core/StateIndicator';
@@ -57,10 +56,7 @@ export const UserProfile = ({
       }
       actions={<UserActions user={user} />}
     >
-      <Stack
-        direction="horizontal"
-        className="gap-4 flex-wrap text-quaternary leading-none"
-      >
+      <div className="flex items-center self-stretch gap-4 flex-wrap text-quaternary leading-none">
         {user.job_title && (
           <span className="whitespace-nowrap">
             <UserSquareIcon size={18} weight="duotone" className="me-1" />
@@ -85,7 +81,7 @@ export const UserProfile = ({
             {formatPhoneNumber(user.phone_number)}
           </span>
         )}
-      </Stack>
+      </div>
     </PublicDashboardHero>
   );
 };

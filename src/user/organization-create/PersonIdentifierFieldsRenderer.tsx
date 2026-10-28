@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
+import { LoadingSpinner } from 'waldur-ui';
+
 import { composeValidators, required } from '@/core/validators';
 import { StringGroup, DateGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -47,9 +49,11 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
   if (loading) {
     return (
       <div className="text-center py-3">
-        <div className="spinner-border text-brand" role="status">
-          <span className="visually-hidden">{translate('Loading...')}</span>
-        </div>
+        <LoadingSpinner
+          size={32}
+          className="text-brand"
+          aria-label={translate('Loading...')}
+        />
       </div>
     );
   }
