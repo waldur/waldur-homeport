@@ -130,66 +130,64 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
           </>
         }
       >
-        <div id="marketplaces-selector">
-          {step === 1 ? (
-            // STEP 1
-            <div className="px-5.5">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 mb-3">
-                <div className="mb-3 lg:mb-0">
-                  <OrganizationAutocomplete
-                    placeholder={translate('Select an organization')}
-                    validator={required}
-                  />
-                </div>
-                <div>
-                  <ProjectAutocomplete
-                    customer_uuid={organization?.uuid}
-                    isDisabled={!organization?.uuid}
-                    placeholder={translate('Select a project')}
-                    validator={required}
-                  />
-                </div>
-              </div>
-            </div>
-          ) : step === 2 ? (
-            // STEP 2
-            <>
-              <div className="px-5.5">
-                <div className="mb-3">
-                  <FilterBox
-                    id="import-resource-search-box"
-                    type="search"
-                    placeholder={translate('Search an offering')}
-                    onChange={(e) => applyQuery(e.target.value)}
-                    autoFocus
-                  />
-                </div>
-              </div>
-              <div className="border-b-[1px] border-b-secondary mx-5.5" />
-              <DataLoader
-                filter={filter}
-                customer={organization}
-                project={project}
-                categoryUuid={categoryUuid}
-                onSelectOffering={selectOffering}
-                showRecentlyAddedOfferings={false}
-                importableOfferings
-              />
-            </>
-          ) : (
-            // STEP 3
-            <div className="px-5.5">
-              {Boolean(offering) && (
-                <ResourcesList
-                  offering={offering}
-                  plans={plans}
-                  assignPlan={assignPlan}
-                  categoryUuid={categoryUuid}
+        {step === 1 ? (
+          // STEP 1
+          <div className="px-5.5">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 mb-3">
+              <div className="mb-3 lg:mb-0">
+                <OrganizationAutocomplete
+                  placeholder={translate('Select an organization')}
+                  validator={required}
                 />
-              )}
+              </div>
+              <div>
+                <ProjectAutocomplete
+                  customer_uuid={organization?.uuid}
+                  isDisabled={!organization?.uuid}
+                  placeholder={translate('Select a project')}
+                  validator={required}
+                />
+              </div>
             </div>
-          )}
-        </div>
+          </div>
+        ) : step === 2 ? (
+          // STEP 2
+          <>
+            <div className="px-5.5">
+              <div className="mb-3">
+                <FilterBox
+                  id="import-resource-search-box"
+                  type="search"
+                  placeholder={translate('Search an offering')}
+                  onChange={(e) => applyQuery(e.target.value)}
+                  autoFocus
+                />
+              </div>
+            </div>
+            <div className="border-b-[1px] border-b-secondary mx-5.5" />
+            <DataLoader
+              filter={filter}
+              customer={organization}
+              project={project}
+              categoryUuid={categoryUuid}
+              onSelectOffering={selectOffering}
+              showRecentlyAddedOfferings={false}
+              importableOfferings
+            />
+          </>
+        ) : (
+          // STEP 3
+          <div className="px-5.5">
+            {Boolean(offering) && (
+              <ResourcesList
+                offering={offering}
+                plans={plans}
+                assignPlan={assignPlan}
+                categoryUuid={categoryUuid}
+              />
+            )}
+          </div>
+        )}
       </ModalDialog>
     </form>
   );

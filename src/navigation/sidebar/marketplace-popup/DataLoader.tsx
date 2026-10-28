@@ -16,6 +16,9 @@ import { RECENTLY_ADDED_OFFERINGS_UUID } from './constants';
 import { OfferingsPanel } from './OfferingsPanel';
 import { fetchCategories, fetchLastNOfferings } from './utils';
 
+const MESSAGE_WRAPPER_CLASSES =
+  'flex items-center justify-center min-w-1/2 max-lg:w-full h-[calc(100vh-270px)] min-h-[230px] max-h-[356px] max-lg:max-h-[380px]';
+
 export const DataLoader = ({
   filter,
   customer,
@@ -122,18 +125,13 @@ export const DataLoader = ({
   }, [categoryUuid, categories, selectCategory]);
 
   return (
-    <div
-      className={classNames(
-        'flex flex-col lg:flex-row h-full',
-        selectedCategory && 'category-selected',
-      )}
-    >
+    <div className="flex flex-col lg:flex-row h-full">
       {loadingCategories || loadingGroups ? (
-        <div className="message-wrapper p-3">
+        <div className={classNames(MESSAGE_WRAPPER_CLASSES, 'p-3')}>
           <LoadingSpinner />
         </div>
       ) : errorCategories || errorGroups ? (
-        <div className="message-wrapper">
+        <div className={MESSAGE_WRAPPER_CLASSES}>
           <LoadingErred
             message={translate('Unable to load categories')}
             loadData={() => loadCategoryGroups() && loadCategories()}

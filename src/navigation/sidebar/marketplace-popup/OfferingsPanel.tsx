@@ -40,13 +40,16 @@ type ProviderOfferingResponse = Awaited<
 >['pageElements'];
 
 const EmptyOfferingListPlaceholder: FunctionComponent = () => (
-  <div className="message-wrapper ellipsis">
+  <div className="flex items-center justify-center min-w-1/2 max-lg:w-full h-[calc(100vh-270px)] min-h-[230px] max-h-[356px] max-lg:max-h-[380px] ellipsis">
     {translate('There are no offerings.')}
   </div>
 );
 
 const LoadingRow: FunctionComponent<{ style: CSSProperties }> = ({ style }) => (
-  <div className="list-group-item text-center" style={style}>
+  <div
+    className="relative block py-[1.05rem] ps-7 pe-6 text-center"
+    style={style}
+  >
     <span className="text-quaternary">{translate('Fetching')}</span>
   </div>
 );
@@ -58,25 +61,24 @@ const OfferingListItem: FunctionComponent<{
   selectedItem?: ProviderOfferingResponse[0];
 }> = ({ item, onClick, selectedItem, style }) => {
   const abbreviation = useMemo(() => getItemAbbreviation(item), [item]);
+  const isPaused = item.state === 'Paused';
+  const isSelected = selectedItem && item.uuid === selectedItem.uuid;
 
   return (
-    <Tooltip
-      label={
-        item.state === 'Paused' ? item.paused_reason || item.state : undefined
-      }
-    >
+    <Tooltip label={isPaused ? item.paused_reason || item.state : undefined}>
       <span>
         <div
           data-uuid={item.uuid}
-          className={classNames('list-group-item', {
-            active: selectedItem && item.uuid === selectedItem.uuid,
-            disabled: item.state === 'Paused',
-          })}
-          style={style}
-          {...getSelectableRowProps(
-            () => onClick(item),
-            item.state === 'Paused',
+          className={classNames(
+            'relative block py-[1.05rem] ps-7 pe-6 border-0 transition-colors',
+            isPaused
+              ? 'bg-secondary opacity-50 cursor-not-allowed'
+              : isSelected
+                ? 'cursor-pointer bg-tertiary'
+                : 'cursor-pointer bg-primary hover:bg-secondary',
           )}
+          style={style}
+          {...getSelectableRowProps(() => onClick(item), isPaused)}
         >
           <div className="flex items-center self-stretch gap-2.5">
             {item.image ? (
@@ -97,8 +99,15 @@ const OfferingListItem: FunctionComponent<{
             {/* A flex child keeps its content width unless min-width is 0,
                 which would stop `ellipsis` from truncating long text. */}
             <div className="min-w-0">
-              <h5 className="title ellipsis mb-1">{truncate(item.name, 40)}</h5>
-              <p className="description ellipsis text-xs mb-0">
+              <h5
+                className={classNames(
+                  'ellipsis mb-1',
+                  isPaused ? 'text-quinary' : 'text-primary',
+                )}
+              >
+                {truncate(item.name, 40)}
+              </h5>
+              <p className="ellipsis text-xs mb-0 text-quaternary">
                 <TextWithoutFormatting html={truncate(item.description, 120)} />
               </p>
             </div>
@@ -280,23 +289,26 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
   );
 
   return (
-    <div className="offering-listing">
+    <div className="w-full lg:w-1/2 lg:basis-1/2">
       <button
         type="button"
-        className="btn-back text-anchor font-medium p-1.5 ms-4 my-1.5"
+        className="flex lg:hidden items-center gap-2 text-anchor font-medium p-1.5 ms-4 my-1.5"
         onClick={goBack}
       >
         <CaretLeftIcon size={14} weight="bold" />
         {translate('Go back to categories')}
       </button>
-      <div className="divider border-b-[1px] border-b-secondary mx-5.5" />
+      <div className="block lg:hidden border-b-[1px] border-b-secondary mx-5.5" />
       <h6 className="text-secondary font-medium mt-3 mb-1.5 ms-5.5">
         {translate('Offerings')}
       </h6>
       {itemCount === 0 ? (
         <EmptyOfferingListPlaceholder />
       ) : (
-        <div className="offering-listing-viewport" ref={viewportRef}>
+        <div
+          className="h-[calc(100vh-270px)] min-h-[200px] max-h-[320px] max-lg:max-h-[303px] overflow-hidden"
+          ref={viewportRef}
+        >
           {/* @ts-ignore */}
           <InfiniteLoader
             isItemLoaded={isItemLoaded}
@@ -313,7 +325,7 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
                 itemSize={ITEM_SIZE}
                 itemCount={itemCount ?? VIRTUALIZED_SELECTOR_PAGE_SIZE}
                 width="100%"
-                className="scrollbar-view"
+                className="overflow-y-auto overflow-x-hidden"
               >
                 {rowRenderer}
               </List>

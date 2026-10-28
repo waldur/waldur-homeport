@@ -79,40 +79,38 @@ const MarketplacePopupForm: FC<{ categoryUuid?: string }> = ({
       headerClassName="pb-3"
       bodyClassName="p-0 pb-3"
     >
-      <div id="marketplaces-selector">
-        <div className="px-5.5">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 mb-3">
-            <div className="mb-3 lg:mb-0">
-              <OrganizationAutocomplete
-                placeholder={translate('Select an organization')}
-              />
-            </div>
-            <div>
-              <ProjectAutocomplete
-                customer_uuid={values?.organization?.uuid}
-                isDisabled={!values?.organization?.uuid}
-                placeholder={translate('Select a project')}
-              />
-            </div>
+      <div className="px-5.5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 mb-3">
+          <div className="mb-3 lg:mb-0">
+            <OrganizationAutocomplete
+              placeholder={translate('Select an organization')}
+            />
           </div>
-          <div className="mb-3">
-            <FilterBox
-              id="marketplaces-selector-search-box"
-              type="search"
-              placeholder={translate('Search an offering')}
-              onChange={(e) => applyQuery(e.target.value)}
-              autoFocus
+          <div>
+            <ProjectAutocomplete
+              customer_uuid={values?.organization?.uuid}
+              isDisabled={!values?.organization?.uuid}
+              placeholder={translate('Select a project')}
             />
           </div>
         </div>
-        <div className="border-b-[1px] border-b-secondary mx-5.5" />
-        <DataLoader
-          filter={filter}
-          customer={values?.organization}
-          project={values?.project}
-          categoryUuid={categoryUuid}
-        />
+        <div className="mb-3">
+          <FilterBox
+            id="marketplaces-selector-search-box"
+            type="search"
+            placeholder={translate('Search an offering')}
+            onChange={(e) => applyQuery(e.target.value)}
+            autoFocus
+          />
+        </div>
       </div>
+      <div className="border-b-[1px] border-b-secondary mx-5.5" />
+      <DataLoader
+        filter={filter}
+        customer={values?.organization}
+        project={values?.project}
+        categoryUuid={categoryUuid}
+      />
     </ModalDialog>
   );
 };
