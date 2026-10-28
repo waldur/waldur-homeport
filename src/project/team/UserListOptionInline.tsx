@@ -44,10 +44,10 @@ export const UserListOptionInline: FC<UserListOptionInlineProps> = (props) => (
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <span>
           {props.data.full_name}{' '}
-          <span style={{ color: '#666' }}>@{props.data.username}</span>
+          <span className="text-quaternary">@{props.data.username}</span>
         </span>
         {props.data.email && (
-          <small style={{ color: '#666' }}>{props.data.email}</small>
+          <small className="text-quaternary">{props.data.email}</small>
         )}
       </div>
 

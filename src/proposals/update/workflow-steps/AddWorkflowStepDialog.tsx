@@ -278,7 +278,7 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
                 placeholder={translate('Select...')}
               />
 
-              <div style={{ maxWidth: '18rem' }}>
+              <div className="max-w-[18rem]">
                 <NumberGroup
                   name="duration_in_days"
                   label={translate('Estimated duration (days)')}
@@ -309,7 +309,7 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
 
               {showExpertReviewExtras && (
                 <>
-                  <div style={{ maxWidth: '18rem' }}>
+                  <div className="max-w-[18rem]">
                     <NumberGroup
                       name="min_reviewers"
                       label={translate('Minimal amount of reviews')}

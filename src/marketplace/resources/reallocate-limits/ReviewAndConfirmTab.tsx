@@ -120,9 +120,9 @@ export const ReviewAndConfirmTab: FC<ReviewAndConfirmTabProps> = ({
                     <td key={component.type}>
                       {change !== 0 ? (
                         <span
-                          style={{
-                            color: change > 0 ? 'green' : 'red',
-                          }}
+                          className={
+                            change > 0 ? 'text-success' : 'text-danger'
+                          }
                         >
                           {change > 0 ? '+' : ''}
                           {change}

@@ -75,8 +75,7 @@ export const AgreementInfo: FunctionComponent<AgreementInfoProps> = (props) => {
                 {' '}
                 {translate('Total paid')}{' '}
                 <span
-                  className={paidMismatch ? 'font-bold' : undefined}
-                  style={paidMismatch ? { color: 'red' } : undefined}
+                  className={paidMismatch ? 'font-bold text-danger' : undefined}
                 >
                   {defaultCurrency(totalOfSumPaid)}
                 </span>
