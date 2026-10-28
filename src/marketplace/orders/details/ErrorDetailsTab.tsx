@@ -1,4 +1,4 @@
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -13,18 +13,14 @@ export const ErrorDetailsTab = ({ order }) => {
       </Card.Header>
       {order.error_message ? (
         <Card.Body>
-          <Row>
-            <Col>
-              <p>{translate('Error details')}:</p>
-              <pre>{order.error_message}</pre>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <p>{translate('Error trace')}:</p>
-              <pre>{order.error_traceback}</pre>
-            </Col>
-          </Row>
+          <div>
+            <p>{translate('Error details')}:</p>
+            <pre>{order.error_message}</pre>
+          </div>
+          <div>
+            <p>{translate('Error trace')}:</p>
+            <pre>{order.error_traceback}</pre>
+          </div>
         </Card.Body>
       ) : (
         <NoResult

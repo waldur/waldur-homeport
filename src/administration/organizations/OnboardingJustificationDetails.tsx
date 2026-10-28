@@ -1,6 +1,6 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Field as FormField, Form } from 'react-final-form';
 import {
   OnboardingJustification,
@@ -154,20 +154,20 @@ export const OnboardingJustificationDetails: FC<
                     <h4 className="font-medium mb-2.5">
                       {translate('Attached documents')}
                     </h4>
-                    <Row className="mb-2.5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 mb-2.5">
                       {justification.supporting_documentation.map(
                         (doc, index) => (
-                          <Col key={index} xs={12} md={6}>
+                          <div key={index}>
                             <AttachmentsList
                               attachments={[doc]}
                               ItemComponent={({ attachment }) => (
                                 <AttachmentItem attachment={attachment} />
                               )}
                             />
-                          </Col>
+                          </div>
                         ),
                       )}
-                    </Row>
+                    </div>
                   </>
                 )}
 
@@ -194,8 +194,8 @@ export const OnboardingJustificationDetails: FC<
                   <hr className="my-3" />
 
                   <h4 className="font-medium mb-2.5">{translate('Notes')}</h4>
-                  <Row className="mb-2.5">
-                    <Col xs={12} md={6}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 mb-2.5">
+                    <div>
                       <FormField name="staff_notes">
                         {({ input }) => (
                           <BaseTextField
@@ -208,8 +208,8 @@ export const OnboardingJustificationDetails: FC<
                           />
                         )}
                       </FormField>
-                    </Col>
-                  </Row>
+                    </div>
+                  </div>
                 </>
               )}
             </Card.Body>

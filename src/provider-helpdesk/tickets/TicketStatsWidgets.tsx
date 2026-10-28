@@ -9,12 +9,10 @@ const StatCard: FC<{ label: string; value: ReactNode }> = ({
   label,
   value,
 }) => (
-  <div className="col-6 col-md">
-    <div className="card card-bordered h-full">
-      <div className="card-body py-2.5 text-center">
-        <div className="text-lg font-medium">{value}</div>
-        <div className="text-quaternary small">{label}</div>
-      </div>
+  <div className="card card-bordered h-full">
+    <div className="card-body py-2.5 text-center">
+      <div className="text-lg font-medium">{value}</div>
+      <div className="text-quaternary small">{label}</div>
     </div>
   </div>
 );
@@ -28,7 +26,7 @@ export const TicketStatsWidgets: FC<{ helpdeskUuid?: string }> = ({
     return null;
   }
   return (
-    <div className="row g-3 mb-3">
+    <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 mb-3">
       <StatCard label={translate('Open')} value={stats.total_open} />
       <StatCard label={translate('Resolved')} value={stats.total_resolved} />
       <StatCard label={translate('Escalated')} value={stats.total_escalated} />

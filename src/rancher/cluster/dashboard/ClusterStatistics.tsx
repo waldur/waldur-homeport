@@ -1,5 +1,4 @@
 import { FC, useMemo, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { RancherCluster } from 'waldur-js-client';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
@@ -70,26 +69,26 @@ export const ClusterStatistics: FC<{
       </TabsList>
       {/* Both tabs show the same figures until WAL-8880 splits them. */}
       <TabsContent value={activeKey} className="pt-8">
-        <Row className="g-5 mb-8">
-          <Col sm={4}>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <div>
             <StatisticsCard
               title={translate('Total resources')}
               value={resourcesCount}
             />
-          </Col>
-          <Col sm={4}>
+          </div>
+          <div>
             <StatisticsCard title={translate('Nodes')} value={nodesCount} />
-          </Col>
-          <Col sm={4}>
+          </div>
+          <div>
             <StatisticsCard
               title={translate('Workloads')}
               value={workloadsCount}
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
 
-        <Row className="mb-8 g-10">
-          <Col xs="auto">
+        <div className="flex flex-wrap gap-8 mb-8">
+          <div className="flex-none">
             <h4 className="font-medium mb-5.5">{translate('Pods')}</h4>
             <StatisticPieChartItem
               title={translate('Used')}
@@ -98,8 +97,8 @@ export const ClusterStatistics: FC<{
               value={7}
               color="#12B76A"
             />
-          </Col>
-          <Col xs="auto">
+          </div>
+          <div className="flex-none">
             <h4 className="font-medium mb-5.5">{translate('CPU')}</h4>
             <div className="flex items-center self-stretch gap-8">
               <StatisticPieChartItem
@@ -117,8 +116,8 @@ export const ClusterStatistics: FC<{
                 color="#12B76A"
               />
             </div>
-          </Col>
-          <Col xs="auto">
+          </div>
+          <div className="flex-none">
             <h4 className="font-medium mb-5.5">{translate('Memory')}</h4>
             <div className="flex items-center self-stretch gap-8">
               <StatisticPieChartItem
@@ -136,28 +135,28 @@ export const ClusterStatistics: FC<{
                 color="#12B76A"
               />
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
 
         <h4 className="font-medium mb-5.5">{translate('Network')}</h4>
-        <Row className="g-5 mb-8">
-          <Col sm={4}>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <div>
             <NetworkStatisticsCard
               isIncrease
               title="Ingress"
               change={100}
               value={2.4}
             />
-          </Col>
-          <Col sm={4}>
+          </div>
+          <div>
             <NetworkStatisticsCard
               isIncrease={false}
               title="Egress"
               change={20}
               value={1.8}
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
       </TabsContent>
     </Tabs>
   );

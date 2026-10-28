@@ -1,5 +1,4 @@
 import { ClipboardTextIcon, EyeIcon } from '@phosphor-icons/react';
-import { Col, Row } from 'react-bootstrap';
 
 import { BaseButton } from 'waldur-ui';
 
@@ -87,18 +86,18 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
         </div>
       }
     >
-      <Row className="text-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 text-sm">
         {showsCallContext() && (
-          <Col sm={6}>
+          <div>
             <Field
               label={translate('Call name')}
               value={proposal.call_name}
               labelCol={5}
               valueCol={7}
             />
-          </Col>
+          </div>
         )}
-        <Col sm={6}>
+        <div>
           <Field
             label={
               showsCallContext()
@@ -111,35 +110,35 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
             labelCol={5}
             valueCol={7}
           />
-        </Col>
+        </div>
         {showsCallContext() && (
-          <Col sm={6}>
+          <div>
             <Field
               label={translate('Round reference')}
               value={renderFieldOrDash(proposal.round?.name)}
               labelCol={5}
               valueCol={7}
             />
-          </Col>
+          </div>
         )}
         {projectDuration && (
-          <Col sm={6}>
+          <div>
             <ProjectDurationNote duration={projectDuration} />
-          </Col>
+          </div>
         )}
         {/* The applicant's name is withheld from evaluators when the call
             conceals it; leave the row out rather than show an empty cell. */}
         {proposal.created_by_name && (
-          <Col sm={6}>
+          <div>
             <Field
               label={translate('Created by')}
               value={proposal.created_by_name}
               labelCol={5}
               valueCol={7}
             />
-          </Col>
+          </div>
         )}
-      </Row>
+      </div>
     </VStepperFormStepCard>
   );
 };

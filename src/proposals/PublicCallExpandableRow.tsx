@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { SafeMarkdown } from '@/core/SafeMarkdown';
@@ -17,8 +17,8 @@ export const PublicCallExpandableRow: FunctionComponent<{
 
   return (
     <ExpandableContainer>
-      <Row>
-        <Col xs={12} className="text-primary mb-1.5">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-5">
+        <div className="col-span-full text-primary mb-1.5">
           {row.description ? (
             <Card className="card-bordered card-solid">
               <Card.Header>
@@ -33,25 +33,25 @@ export const PublicCallExpandableRow: FunctionComponent<{
               {translate('No description')}
             </p>
           )}
-        </Col>
+        </div>
 
         {activeRound ? (
-          <Col lg={12} xl={6}>
+          <div>
             <Field
               label={translate('Next cutoff')}
               value={formatDateTime(activeRound.cutoff_time)}
               labelCol={4}
               valueCol={8}
             />
-          </Col>
+          </div>
         ) : (
-          <Col xs={12}>
+          <div className="col-span-full">
             <p className="text-quaternary italic text-xs mb-0">
               {translate('No active round')}
             </p>
-          </Col>
+          </div>
         )}
-      </Row>
+      </div>
     </ExpandableContainer>
   );
 };

@@ -3,7 +3,7 @@ import {
   XCircleIcon,
   WarningCircleIcon,
 } from '@phosphor-icons/react';
-import { Card, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { Tooltip } from 'waldur-ui';
 
@@ -66,7 +66,7 @@ const HealthInfoItem = ({
 
   if (hasError) {
     return (
-      <Col xs={12} md={6} lg={4} xl={3} className="mb-3">
+      <div className="mb-3">
         <Tooltip
           label={
             <>
@@ -78,16 +78,16 @@ const HealthInfoItem = ({
             {statusContent}
           </div>
         </Tooltip>
-      </Col>
+      </div>
     );
   }
 
   return (
-    <Col xs={12} md={6} lg={4} xl={3} className="mb-3">
+    <div className="mb-3">
       <div className="p-2.5 border rounded bg-success-subtle h-full">
         {statusContent}
       </div>
-    </Col>
+    </div>
   );
 };
 
@@ -127,7 +127,7 @@ export const HealthChecks = ({ healthInfoItems }: HealthChecksProps) => {
             </span>
           </div>
         </div>
-        <div className="row">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5">
           {healthEntries.map(([key, value]) => (
             <HealthInfoItem key={key} title={key} status={value} />
           ))}

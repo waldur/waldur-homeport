@@ -1,8 +1,5 @@
 // Table
 
-@use 'sass:map';
-
-// Table
 .table {
   // Fix for BS 5.1.2 update
   & > :not(:first-child) {
@@ -88,38 +85,22 @@
   }
 }
 
-// Cell gutters, at the base size only: Metronic generated every $gutters value
-// at every breakpoint, and tables only ever use the base classes
-// (.table.gy-4.gx-5). A Bootstrap grid .row keeps its own responsive gutters.
-// No DataTables fixes either: DataTables is not a dependency.
-// The keys are unquoted: $gutters is keyed by numbers (0, 8px), and a quoted
-// '0' finds nothing, so map.get() returns null and the rule compiles away.
-@each $name in (1) {
-  .table.g-#{$name} {
-    th,
-    td {
-      padding: map.get($gutters, $name);
-    }
+// Cell padding of the list table (TableView) and of FormTable, in place of
+// Metronic's .gy-*/.gx-* gutter classes. Kept in this layer, at their
+// specificity, so custom/_table.scss's first/last-cell edges and expanded-row
+// padding still win.
+.table.table-list {
+  th,
+  td {
+    padding: 0 8px;
   }
 }
 
-@each $name in (0, 2, 3, 4, 5) {
-  .table.gy-#{$name} {
-    th,
-    td {
-      padding-top: map.get($gutters, $name);
-      padding-bottom: map.get($gutters, $name);
-    }
-  }
-}
-
-@each $name in (4, 5, 8px) {
-  .table.gx-#{$name} {
-    th,
-    td {
-      padding-left: map.get($gutters, $name);
-      padding-right: map.get($gutters, $name);
-    }
+.table.form-table {
+  th,
+  td {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 }
 

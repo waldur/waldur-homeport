@@ -1,5 +1,4 @@
 import { FC, useMemo, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -52,14 +51,14 @@ export const ProvisioningStatsPage: FC = () => {
 
       <ProvisioningSummaryCards summary={summary} />
 
-      <Row className="g-5 mb-4">
-        <Col xs={12} lg={6}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+        <div>
           <ProvisioningByStateChart byState={data.by_state || {}} />
-        </Col>
-        <Col xs={12} lg={6}>
+        </div>
+        <div>
           <ProvisioningTrendChart daily={data.daily || []} />
-        </Col>
-      </Row>
+        </div>
+      </div>
 
       <ProvisioningByTypeTable byType={data.by_type || {}} />
     </>

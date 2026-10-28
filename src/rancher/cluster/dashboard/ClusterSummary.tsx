@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { RancherCluster } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -12,8 +11,8 @@ export const ClusterSummary: FC<{
   refetch: any;
 }> = ({ resourceScope }) => {
   return (
-    <Row className="text-sm">
-      <Col xl={6} xxl={4}>
+    <div className="text-sm">
+      <div className="xl:w-6/12 2xl:w-4/12">
         <Field
           className="mb-1.5"
           label={translate('Kubernetes version')}
@@ -56,7 +55,7 @@ export const ClusterSummary: FC<{
           valueCol={6}
           value={<BooleanField value={resourceScope?.install_longhorn} />}
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

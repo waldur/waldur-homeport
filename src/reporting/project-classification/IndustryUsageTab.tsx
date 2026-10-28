@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import {
   ProjectsLimitsGroupedByIndustryFlag,
   ProjectsUsagesGroupedByIndustryFlag,
@@ -20,13 +19,13 @@ export const IndustryUsageTab: FC<IndustryUsageTabProps> = ({
   projectCounts,
 }) => {
   return (
-    <Row className="g-5 mb-4">
-      <Col xs={6}>
+    <div className="grid grid-cols-2 gap-4 mb-4">
+      <div>
         <IndustryUsageChart projectCounts={projectCounts} />
-      </Col>
-      <Col xs={6}>
+      </div>
+      <div>
         <IndustryUsageTable usages={usages} limits={limits} />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

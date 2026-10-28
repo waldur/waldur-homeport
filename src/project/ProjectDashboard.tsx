@@ -2,7 +2,6 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { projectsListUsersList, projectsStatsRetrieve } from 'waldur-js-client';
 
 import { Badge, BaseButton } from 'waldur-ui';
@@ -184,11 +183,10 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
   return (
     <>
       {(project.description || project.staff_notes) && (
-        <Row>
+        <div className="grid grid-cols-1 gap-x-5 md:grid-cols-2">
           {project.description && (
-            <Col
-              md={project.staff_notes ? 6 : 12}
-              className="mb-4"
+            <div
+              className={project.staff_notes ? 'mb-4' : 'mb-4 md:col-span-2'}
               style={COMMON_WIDGET_HEIGHT}
             >
               <Panel
@@ -215,12 +213,11 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
                   maxHeight={120}
                 />
               </Panel>
-            </Col>
+            </div>
           )}
           {project.staff_notes && (user.is_staff || user.is_support) && (
-            <Col
-              md={project.description ? 6 : 12}
-              className="mb-4"
+            <div
+              className={project.description ? 'mb-4' : 'mb-4 md:col-span-2'}
               style={COMMON_WIDGET_HEIGHT}
             >
               <Panel
@@ -255,23 +252,23 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
                   showInternalBadge={true}
                 />
               </Panel>
-            </Col>
+            </div>
           )}
-        </Row>
+        </div>
       )}
       {shouldShowLimitBasedResources && (
         <ProjectLimitUsageBasedResources
           showCost={!shouldConcealPrices && showBillingInfo}
         />
       )}
-      <Row>
+      <div className="grid grid-cols-1 gap-x-5 md:grid-cols-2">
         {!shouldConcealPrices && showBillingInfo && (
-          <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
+          <div className="mb-4" style={COMMON_WIDGET_HEIGHT}>
             <ProjectDashboardCostLimits project={project} />
-          </Col>
+          </div>
         )}
         {showTeam && (
-          <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
+          <div className="mb-4" style={COMMON_WIDGET_HEIGHT}>
             <TeamWidget
               api={() =>
                 projectsListUsersList({
@@ -301,10 +298,10 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
               emailKey="user_email"
               imageKey="user_image"
             />
-          </Col>
+          </div>
         )}
         {shouldShowCurrentMonthWidget && (
-          <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
+          <div className="mb-4" style={COMMON_WIDGET_HEIGHT}>
             <AggregateLimitWidget
               project={project}
               data={currentMonthFilteredData}
@@ -314,10 +311,10 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
               type="monthly"
               includeTerminated={includeTerminated}
             />
-          </Col>
+          </div>
         )}
         {shouldShowAggregateLimitWidget && (
-          <Col md={6} sm={12} className="mb-4" style={COMMON_WIDGET_HEIGHT}>
+          <div className="mb-4" style={COMMON_WIDGET_HEIGHT}>
             <AggregateLimitWidget
               project={project}
               data={aggregateLimitData}
@@ -326,12 +323,12 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
               refetch={aggregateLimitRefetch}
               includeTerminated={includeTerminated}
             />
-          </Col>
+          </div>
         )}
         {showBillingInfo && (
           <ProjectDashboardCredit project={project} className="mb-4" />
         )}
-      </Row>
+      </div>
       {/* The Health block is for projects with a credit allocation and gates
           itself on one — it renders nothing without. The usage views are about
           quota rather than credit, so they are not tied to an allocation; each

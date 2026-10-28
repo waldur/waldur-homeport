@@ -35,8 +35,6 @@ export const ALLOWLIST = {
   '--font-sans':
     'Tailwind root font-family token bridging runtime --font-family into Tailwind theme utilities and base styling',
   // Root Tailwind theme overrides implicitly consumed by Tailwind engine/preflight
-  '--spacing':
-    'Tailwind root spacing unit override (4px) implicitly consumed by all spacing utilities',
   '--text-xs--line-height':
     'Tailwind implicit line-height modifier for text-xs',
   '--text-sm--line-height':

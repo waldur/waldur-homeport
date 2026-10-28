@@ -1,6 +1,6 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Col, Row, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 import { AccordionCard } from 'waldur-ui';
 
@@ -35,8 +35,8 @@ export const DatabaseQueryPerformanceCard: FC<
       defaultOpen={hasTempFilesWarning || hasHighSeqScans}
       className="mb-5"
     >
-      <Row>
-        <Col lg={6}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
+        <div>
           <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Scan statistics')}
           </h6>
@@ -84,8 +84,8 @@ export const DatabaseQueryPerformanceCard: FC<
               )}
             </small>
           )}
-        </Col>
-        <Col lg={6}>
+        </div>
+        <div>
           <h6 className="uppercase text-quaternary mb-2.5">
             {translate('Temporary files')}
           </h6>
@@ -127,8 +127,8 @@ export const DatabaseQueryPerformanceCard: FC<
               )}
             </small>
           )}
-        </Col>
-      </Row>
+        </div>
+      </div>
     </AccordionCard>
   );
 };

@@ -45,7 +45,7 @@ export const OfferingComponentUsagePanel: FC<
       className="card-bordered mb-4"
       headerClassName="min-h-[60px]"
     >
-      <FormTable detailsMode className="gy-5">
+      <FormTable detailsMode>
         {isLoading || error ? (
           <tr>
             <td colSpan={3}>

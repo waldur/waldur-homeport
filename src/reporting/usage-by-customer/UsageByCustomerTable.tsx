@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { ResourceUsageByCustomer } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
@@ -98,22 +97,17 @@ export const UsageByCustomerTable: FC<Props> = ({
   }, [componentTypes, limitNames]);
 
   return (
-    <Row>
-      <Col>
-        <ChartCard
-          title={translate('Usage by organization')}
-          getExportData={() => getSimpleExportData(columns, data)}
-          showPNG={false}
-          isEmpty={!data || data.length === 0}
-        >
-          {() => (
-            <SimpleTable<ResourceUsageByCustomer>
-              columns={columns}
-              rows={data}
-            />
-          )}
-        </ChartCard>
-      </Col>
-    </Row>
+    <div>
+      <ChartCard
+        title={translate('Usage by organization')}
+        getExportData={() => getSimpleExportData(columns, data)}
+        showPNG={false}
+        isEmpty={!data || data.length === 0}
+      >
+        {() => (
+          <SimpleTable<ResourceUsageByCustomer> columns={columns} rows={data} />
+        )}
+      </ChartCard>
+    </div>
   );
 };

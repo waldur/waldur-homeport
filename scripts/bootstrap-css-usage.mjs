@@ -57,14 +57,6 @@ export const PARTIALS = [
     scss: "@import 'config'; @import 'bootstrap/scss/images';",
   },
   {
-    name: 'bootstrap/scss/containers',
-    scss: "@import 'config'; $container-max-widths: (); @import 'bootstrap/scss/containers';",
-  },
-  {
-    name: 'bootstrap/scss/grid',
-    scss: "@import 'config'; @import 'bootstrap/scss/grid';",
-  },
-  {
     name: 'bootstrap/scss/tables',
     scss: "@import 'config'; $grid-breakpoints: (xs: 0); @import 'bootstrap/scss/tables';",
   },

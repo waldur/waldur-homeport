@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import {
   marketplaceResourcesList,
   projectsListUsersList,
@@ -258,8 +257,14 @@ const AllocationOutcome: FC<{
       }
       defaultOpen
     >
-      <Row className="text-sm mb-3">
-        <Col sm={project ? 6 : 12}>
+      <div
+        className={
+          project
+            ? 'grid grid-cols-1 sm:grid-cols-2 gap-x-5 text-sm mb-3'
+            : 'grid grid-cols-1 gap-x-5 text-sm mb-3'
+        }
+      >
+        <div>
           <Field
             label={translate('Project')}
             labelCol={project ? 5 : 2}
@@ -278,18 +283,18 @@ const AllocationOutcome: FC<{
               </ProjectLink>
             }
           />
-        </Col>
+        </div>
         {project && (
-          <Col sm={6}>
+          <div>
             <Field
               label={translate('Organization')}
               labelCol={5}
               valueCol={7}
               value={renderFieldOrDash(project.customer_name)}
             />
-          </Col>
+          </div>
         )}
-      </Row>
+      </div>
 
       <h6 className="text-secondary font-medium mb-2.5">
         {translate('Resources:')}

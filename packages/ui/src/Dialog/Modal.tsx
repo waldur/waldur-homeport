@@ -369,7 +369,7 @@ export const ModalBody = forwardRef<HTMLDivElement, ComponentProps<'div'>>(
       ref={ref}
       data-slot="modal-body"
       className={cn(
-        'relative flex-[1_1_auto] p-[24px] group-data-[scrollable]/modal:overflow-y-auto [&>:last-child]:mb-0! [&>div>:last-child]:mb-0!',
+        'relative flex-auto p-[24px] group-data-[scrollable]/modal:overflow-y-auto [&>:last-child]:mb-0! [&>div>:last-child]:mb-0!',
         className,
       )}
       {...props}

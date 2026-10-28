@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { marketplaceSiteAgentIdentitiesList, Offering } from 'waldur-js-client';
 
 import { useBreakpointDown } from 'waldur-ui';
@@ -107,8 +106,8 @@ export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
           )}
         </>
       ) : (
-        <Row>
-          <Col md={6}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+          <div>
             {showAgentData && (
               <OfferingAgentInfo
                 agentIdentities={agentIdentities}
@@ -122,15 +121,15 @@ export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
             {showExperimentalUiComponents && (
               <OfferingComponentUsagePanel offering={offering} />
             )}
-          </Col>
-          <Col md={6}>
+          </div>
+          <div>
             {showAgentData ? (
               <OfferingServices agentIdentity={agentIdentity} />
             ) : (
               isAgentDataEmpty && <OfferingAgentInfo empty />
             )}
-          </Col>
-        </Row>
+          </div>
+        </div>
       )}
       <OfferingAlerts offering={offering} />
     </>

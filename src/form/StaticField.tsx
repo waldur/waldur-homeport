@@ -12,8 +12,8 @@ interface StaticFieldProps {
 export const StaticField: React.FC<StaticFieldProps> = ({
   label,
   value,
-  labelClass = 'col-sm-3 col-md-4 col-lg-3',
-  controlClass = 'col-sm-9 col-md-8',
+  labelClass = 'sm:w-3/12 md:w-4/12 lg:w-3/12',
+  controlClass = 'sm:w-9/12 md:w-8/12',
 }) => (
   <FormField>
     <FormLabel className={labelClass}>{label}</FormLabel>

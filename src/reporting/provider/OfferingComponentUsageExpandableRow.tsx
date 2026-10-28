@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { FC, useMemo, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { marketplaceComponentUsageMonthlyList } from 'waldur-js-client';
 
 import { SegmentedControl } from 'waldur-ui';
@@ -99,8 +99,8 @@ export const OfferingComponentUsageExpandableRow: FC<
 
   return (
     <ExpandableContainer>
-      <Row className="gy-4">
-        <Col sm={6}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
+        <div>
           <Field
             label={translate('Service provider')}
             value={row.service_provider_name}
@@ -122,8 +122,8 @@ export const OfferingComponentUsageExpandableRow: FC<
             label={translate('Integration type')}
             value={integrationTypeLabel}
           />
-        </Col>
-        <Col sm={6} className="border-sm-start md:ps-7.5">
+        </div>
+        <div className="border-sm-start md:ps-7.5">
           <Card className="card-bordered">
             <Card.Body className="p-3">
               <div className="flex items-center justify-between gap-1.5 whitespace-nowrap flex-wrap mb-3">
@@ -177,8 +177,8 @@ export const OfferingComponentUsageExpandableRow: FC<
               </div>
             </Card.Body>
           </Card>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </ExpandableContainer>
   );
 };

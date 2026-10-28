@@ -1,4 +1,3 @@
-import { Col, Row } from 'react-bootstrap';
 import { CeleryStatsResponse } from 'waldur-js-client';
 
 import { StatisticsCard } from '@/core/StatisticsCard';
@@ -32,30 +31,30 @@ export const CeleryOverviewCards = ({ data }: CeleryOverviewCardsProps) => {
   const totalProcessed = countTotalProcessed(data.stats);
 
   return (
-    <Row className="mb-5">
-      <Col md={6} lg={3}>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 mb-5">
+      <div>
         <StatisticsCard title={translate('Active tasks')} value={activeCount} />
-      </Col>
-      <Col md={6} lg={3}>
+      </div>
+      <div>
         <StatisticsCard
           title={translate('Reserved tasks')}
           value={reservedCount}
         />
-      </Col>
-      <Col md={6} lg={3}>
+      </div>
+      <div>
         <StatisticsCard
           title={translate('Scheduled tasks')}
           value={scheduledCount}
         />
-      </Col>
+      </div>
       {totalProcessed !== undefined && (
-        <Col md={6} lg={3}>
+        <div>
           <StatisticsCard
             title={translate('Total processed')}
             value={totalProcessed}
           />
-        </Col>
+        </div>
       )}
-    </Row>
+    </div>
   );
 };

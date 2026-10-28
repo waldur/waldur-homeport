@@ -144,8 +144,8 @@ export const AggregateLimitDetailsDialog = ({
         />
       }
     >
-      <div className="row flex justify-end">
-        <div className="col-md-4">
+      <div className="flex flex-wrap justify-end">
+        <div className="w-full md:w-4/12">
           <Select
             placeholder={translate('Select component')}
             className="mb-1.5 w-full"

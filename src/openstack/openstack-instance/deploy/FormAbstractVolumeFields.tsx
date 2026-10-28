@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { get } from 'es-toolkit/compat';
 import { useCallback, useEffect, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { useForm } from 'react-final-form';
 
 import { Switch } from 'waldur-ui';
@@ -265,9 +264,14 @@ export const FormAbstractVolumeFields = (
     data?.volumeTypeChoices?.length > 0 && !hideVolumeTypeSelector;
 
   return (
-    <Row>
+    <div
+      className={classNames(
+        'grid grid-cols-1 gap-x-5',
+        showTypeField && 'sm:grid-cols-2',
+      )}
+    >
       {showTypeField && (
-        <Col sm={6}>
+        <div>
           <SelectGroup
             name={props.typeField}
             validate={props.optional ? undefined : required}
@@ -291,9 +295,9 @@ export const FormAbstractVolumeFields = (
             isDisabled={!fieldsEnabled}
             isLoading={isLoading}
           />
-        </Col>
+        </div>
       )}
-      <Col xs>
+      <div>
         <CreatableSelectGroup
           name={props.sizeField}
           label={props.sizeTitle}
@@ -328,7 +332,7 @@ export const FormAbstractVolumeFields = (
           options={extendedSizeOptions}
           isDisabled={!fieldsEnabled}
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

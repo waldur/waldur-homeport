@@ -213,7 +213,7 @@ export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
           loadData={refetch}
         />
       ) : offeringUser ? (
-        <FormTable hideActions detailsMode className="gy-5">
+        <FormTable hideActions detailsMode>
           {/* Exposed user attributes from config */}
           {exposedUserAttributes.map((attr) => (
             <FormTable.Item

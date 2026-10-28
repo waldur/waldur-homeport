@@ -1,5 +1,3 @@
-import { Col, Row } from 'react-bootstrap';
-
 import { PermissionEnum } from '@/permissions/enums';
 import { HelpdeskSetupCard } from '@/provider-helpdesk/common/HelpdeskSetupCard';
 import { useUser } from '@/workspace/hooks';
@@ -29,18 +27,18 @@ export const ProviderDashboard = ({ provider }) => {
   return (
     <>
       <HelpdeskSetupCard />
-      <Row>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
         {canSeeRevenue && (
-          <Col md={12} lg={6}>
+          <div>
             <ProviderDashboardChart provider={provider} />
-          </Col>
+          </div>
         )}
         {canSeeStatistics && (
-          <Col md={12} lg={6}>
+          <div>
             <ProviderWidgets provider={provider} />
-          </Col>
+          </div>
         )}
-      </Row>
+      </div>
     </>
   );
 };

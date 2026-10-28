@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
 
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
@@ -31,7 +30,7 @@ export const ApplicationConfiguration: React.FC<
 > = (props) => (
   <>
     <GroupHeader title={translate('Application configuration')} />
-    <Row>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
       <StringField
         required={true}
         label={translate('Name')}
@@ -57,6 +56,6 @@ export const ApplicationConfiguration: React.FC<
       />
 
       <NamespaceField options={props.namespaces} />
-    </Row>
+    </div>
   </>
 );

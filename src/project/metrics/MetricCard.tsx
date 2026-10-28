@@ -5,7 +5,6 @@ import {
   ListBulletsIcon,
 } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Col } from 'react-bootstrap';
 import { ProjectMetric, ResourceMetric } from 'waldur-js-client';
 
 import { getCssVar } from 'waldur-design-tokens';
@@ -404,7 +403,7 @@ export const MetricCard: FC<{
       }
       right={
         hasChange ? (
-          <Col xs="auto" className="self-center">
+          <div className="flex-none self-center">
             <Tooltip label={getChangeLabel(item.period)}>
               <span>
                 <ChangesAmountBadge
@@ -416,7 +415,7 @@ export const MetricCard: FC<{
                 />
               </span>
             </Tooltip>
-          </Col>
+          </div>
         ) : undefined
       }
       actions={[

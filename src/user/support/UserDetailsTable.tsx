@@ -31,7 +31,7 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
   const isVisible = checkIsStaffOrSupport(user);
 
   return (
-    <FormTable hideActions alignTop detailsMode className="gy-5">
+    <FormTable hideActions alignTop detailsMode>
       <FormTable.Item
         label={translate('Full name')}
         value={<FieldWithCopy value={props.user.full_name} />}

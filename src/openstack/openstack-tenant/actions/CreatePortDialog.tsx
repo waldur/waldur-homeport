@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { useToggle } from 'react-use';
 import {
@@ -100,8 +99,8 @@ export const FixedIPsField: FC<{
         />
       </div>
       <div className="border-rows mb-3">
-        <Row className="g-4">
-          <Col xs={12}>
+        <div className="grid grid-cols-1 gap-3">
+          <div>
             <SelectGroup
               name="fixed_ips.subnet"
               label={translate('Subnet')}
@@ -113,13 +112,13 @@ export const FixedIPsField: FC<{
               spaceless
               components={{ ValueContainer: SubnetValueContainer }}
             />
-          </Col>
+          </div>
           {customIpEnabled && fixedIps && (
-            <Col xs={12}>
+            <div>
               <CustomIpField parentName="fixed_ips" data={fixedIps} autoFocus />
-            </Col>
+            </div>
           )}
-        </Row>
+        </div>
       </div>
     </FormField>
   );

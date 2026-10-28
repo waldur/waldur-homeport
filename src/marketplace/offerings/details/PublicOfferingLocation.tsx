@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -24,8 +24,8 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
         <PublicOfferingCardTitle>
           {translate('Location')}
         </PublicOfferingCardTitle>
-        <Row>
-          <Col xs={12} lg className="mb-4 lg:mb-0">
+        <div className="flex flex-col lg:flex-row gap-x-5">
+          <div className="mb-4 lg:mb-0 lg:flex-1 min-w-0">
             <div className="bg-gray-300 dark:bg-gray-dark-600 w-full h-full min-h-[300px]">
               {offering.latitude && offering.longitude ? (
                 <LeafletMap
@@ -38,9 +38,9 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
                 </div>
               )}
             </div>
-          </Col>
+          </div>
           {showExperimentalUiComponents && (
-            <Col xs={12} lg={4}>
+            <div className="lg:w-4/12 lg:flex-none">
               <div className="bg-tertiary p-8 h-full">
                 <PublicOfferingCardTitle>
                   {translate('Availability:')}
@@ -55,9 +55,9 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
                   ))}
                 </ul>
               </div>
-            </Col>
+            </div>
           )}
-        </Row>
+        </div>
       </Card.Body>
     </Card>
   );

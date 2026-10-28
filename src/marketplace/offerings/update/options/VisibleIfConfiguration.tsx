@@ -133,11 +133,8 @@ export const VisibleIfConfiguration: FC<VisibleIfConfigurationProps> = ({
       }
     >
       {rule ? (
-        // Grid, not flex-grow: the value picker only renders once an option is
-        // chosen, and free-space distribution made the first select resize
-        // when it appeared.
-        <div className="row g-2 items-start">
-          <div className="col">
+        <div className="flex gap-2 items-start">
+          <div className="flex-1 min-w-0">
             <Field
               name="visible_if.field"
               render={({ input }) => (
@@ -162,11 +159,11 @@ export const VisibleIfConfiguration: FC<VisibleIfConfigurationProps> = ({
             />
             <RuleError name="visible_if.field" />
           </div>
-          <div className="col">
+          <div className="flex-1 min-w-0">
             {parent ? <ValuesField parent={parent} /> : null}
             {parent ? <RuleError name="visible_if.values" /> : null}
           </div>
-          <div className="col-auto">
+          <div className="shrink-0">
             <RemovalActionButton
               action={() => form.change('visible_if', undefined)}
               tooltip={translate('Remove rule')}

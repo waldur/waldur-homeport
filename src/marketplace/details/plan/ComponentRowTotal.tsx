@@ -33,10 +33,8 @@ export const ComponentRowTotal = (props: {
     <tr>
       {/* `!`: FormTable.scss's unlayered `.form-table th` sets 500, which
           outranks a plain utility; the total row is regular weight. */}
-      <th className="col-md title text-base font-normal!">
-        {translate('Total')}
-      </th>
-      <td colSpan={2} className="col-md-auto col-actions">
+      <th className="title text-base font-normal!">{translate('Total')}</th>
+      <td colSpan={2} className="col-actions">
         <div className="flex items-center justify-end gap-3">
           {props.period && props.setPeriod && (
             <Switch

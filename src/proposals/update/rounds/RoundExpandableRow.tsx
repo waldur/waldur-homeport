@@ -1,6 +1,5 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { ProtectedRound } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
@@ -63,8 +62,8 @@ const RoundResultsSection: FunctionComponent<RoundExpandableRowProps> = ({
   const showAdoption =
     row.adopted_at !== undefined && canViewRoundAdoption(row, call);
   return (
-    <Row className="mt-3">
-      <Col md={6}>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 mt-3">
+      <div>
         <SectionTitle title={translate('Evaluation and results')} />
         <Field label={translate('Stage')} value={lifecycle.label} />
         <Field
@@ -103,9 +102,9 @@ const RoundResultsSection: FunctionComponent<RoundExpandableRowProps> = ({
           label={translate('Closed')}
           value={formatTimestamp(row.closed_at)}
         />
-      </Col>
+      </div>
       {showAdoption ? (
-        <Col md={6} data-testid="round-adoption">
+        <div data-testid="round-adoption">
           <SectionTitle title={translate('Adoption')} />
           <Field
             label={translate('Adopted on')}
@@ -136,9 +135,9 @@ const RoundResultsSection: FunctionComponent<RoundExpandableRowProps> = ({
               )
             }
           />
-        </Col>
+        </div>
       ) : null}
-    </Row>
+    </div>
   );
 };
 
@@ -158,8 +157,8 @@ export const RoundExpandableRow: FunctionComponent<RoundExpandableRowProps> = ({
   const completionRule = call ? getEffectiveCompletionRule(row, call) : null;
   return (
     <ExpandableContainer>
-      <Row>
-        <Col md={6}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+        <div>
           <SectionTitle title={translate('Submission settings')} />
           <Field
             label={translate('Start time')}
@@ -174,8 +173,8 @@ export const RoundExpandableRow: FunctionComponent<RoundExpandableRowProps> = ({
             label={translate('Review duration in days')}
             value={renderFieldOrDash(row.review_duration_in_days)}
           />
-        </Col>
-        <Col md={6}>
+        </div>
+        <div>
           <SectionTitle title={translate('Allocation settings')} />
           <Field
             label={translate('Allocation date')}
@@ -196,8 +195,8 @@ export const RoundExpandableRow: FunctionComponent<RoundExpandableRowProps> = ({
               })}
             />
           ) : null}
-        </Col>
-      </Row>
+        </div>
+      </div>
       <RoundResultsSection row={row} call={call} />
     </ExpandableContainer>
   );

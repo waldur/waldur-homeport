@@ -1,6 +1,5 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { AlertItem, Tooltip } from 'waldur-ui';
 
@@ -201,13 +200,19 @@ const CreditMetrics: FC<{ data: PolicyWatchData }> = ({ data }) => {
 
   return (
     <>
-      <Row className="g-4 mb-4">
+      <div
+        className={
+          stats.length > 2
+            ? 'grid grid-cols-1 gap-3 mb-4 md:grid-cols-3'
+            : 'grid grid-cols-1 gap-3 mb-4 md:grid-cols-2'
+        }
+      >
         {stats.map((stat, index) => (
-          <Col md={stats.length > 2 ? 4 : 6} key={index}>
+          <div key={index}>
             <StatsCard label={stat.label} value={stat.value} icon={stat.icon} />
-          </Col>
+          </div>
         ))}
-      </Row>
+      </div>
       {isBlockedByOrganization && (
         <AlertItem
           variant="error"

@@ -1,6 +1,14 @@
 import { FC } from 'react';
 
-import { AlertItem } from 'waldur-ui';
+import {
+  AlertItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -60,94 +68,90 @@ export const ProjectDigestSummaryDialog: FC = () => {
               'The digest can include the following sections, depending on which plugins are installed:',
             )}
           </p>
-          <div className="table-responsive">
-            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
-              <thead>
-                <tr className="text-start text-quaternary font-medium text-xs uppercase">
-                  <th>{translate('Section')}</th>
-                  <th>{translate('Description')}</th>
-                </tr>
-              </thead>
-              <tbody className="text-tertiary">
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('Resource Usage')}
-                  </td>
-                  <td>
-                    {translate(
-                      'Lists active resources in the project with their type and current state.',
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('Project Timeline')}
-                  </td>
-                  <td>
-                    {translate(
-                      'Shows the project end date, days remaining, and grace period status.',
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('Team')}
-                  </td>
-                  <td>
-                    {translate(
-                      'Summarizes the number of project members grouped by role.',
-                    )}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <Table density="normal">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Section')}</TableHead>
+                <TableHead>{translate('Description')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell className="font-medium text-primary">
+                  {translate('Resource Usage')}
+                </TableCell>
+                <TableCell className="text-tertiary">
+                  {translate(
+                    'Lists active resources in the project with their type and current state.',
+                  )}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium text-primary">
+                  {translate('Project Timeline')}
+                </TableCell>
+                <TableCell className="text-tertiary">
+                  {translate(
+                    'Shows the project end date, days remaining, and grace period status.',
+                  )}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium text-primary">
+                  {translate('Team')}
+                </TableCell>
+                <TableCell className="text-tertiary">
+                  {translate(
+                    'Summarizes the number of project members grouped by role.',
+                  )}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </section>
 
         <section>
           <h4 className="mb-3">{translate('Frequency options')}</h4>
-          <div className="table-responsive">
-            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
-              <thead>
-                <tr className="text-start text-quaternary font-medium text-xs uppercase">
-                  <th>{translate('Frequency')}</th>
-                  <th>{translate('Description')}</th>
-                </tr>
-              </thead>
-              <tbody className="text-tertiary">
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('Weekly')}
-                  </td>
-                  <td>
-                    {translate(
-                      'Sent once a week on the selected day of the week.',
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('Bi-weekly')}
-                  </td>
-                  <td>
-                    {translate(
-                      'Sent every two weeks on the selected day of the week.',
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-medium text-primary">
-                    {translate('Monthly')}
-                  </td>
-                  <td>
-                    {translate(
-                      'Sent once a month on the selected day of the month (1-28).',
-                    )}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <Table density="normal">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Frequency')}</TableHead>
+                <TableHead>{translate('Description')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell className="font-medium text-primary">
+                  {translate('Weekly')}
+                </TableCell>
+                <TableCell className="text-tertiary">
+                  {translate(
+                    'Sent once a week on the selected day of the week.',
+                  )}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium text-primary">
+                  {translate('Bi-weekly')}
+                </TableCell>
+                <TableCell className="text-tertiary">
+                  {translate(
+                    'Sent every two weeks on the selected day of the week.',
+                  )}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium text-primary">
+                  {translate('Monthly')}
+                </TableCell>
+                <TableCell className="text-tertiary">
+                  {translate(
+                    'Sent once a month on the selected day of the month (1-28).',
+                  )}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </section>
 
         <section>

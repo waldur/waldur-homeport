@@ -119,8 +119,8 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
           {translate('Add a new mapping:')}
         </div>
 
-        <div className="row mb-2.5 items-end">
-          <FormField className="col-md-5">
+        <div className="grid grid-cols-1 gap-x-5 mb-2.5 items-end md:grid-cols-12">
+          <FormField className="md:col-span-5">
             <FormLabel className="sr-only">
               {translate('Remote Role Name')}
             </FormLabel>
@@ -138,7 +138,7 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
               aria-label={translate('Enter remote role name')}
             />
           </FormField>
-          <FormField className="col-md-5">
+          <FormField className="md:col-span-5">
             <FormLabel className="sr-only">{translate('Local Role')}</FormLabel>
             <AsyncSelect
               value={localRole}
@@ -155,7 +155,7 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
               isClearable={true}
             />
           </FormField>
-          <div className="col-md-2">
+          <div className="md:col-span-2">
             <BaseButton
               type="button"
               size="sm"

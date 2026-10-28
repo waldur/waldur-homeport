@@ -52,7 +52,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
   const rows = (groupValues ? (value as any[]) : [value]).map((row, i) => (
     <tr key={i} className={props.className} data-testid={props['data-testid']}>
       {i === 0 && props.description ? (
-        <th className={row ? 'col-md-4' : 'col-md-auto'} rowSpan={titleRowSpan}>
+        <th className={row ? 'md:w-4/12' : 'md:w-auto'} rowSpan={titleRowSpan}>
           <div className="flex items-center">
             <ItemLabel className="title mb-0">
               {props.label}
@@ -93,7 +93,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
           )}
         </th>
       ) : i === 0 && props.label ? (
-        <th className="title col-md-3" rowSpan={titleRowSpan}>
+        <th className="title md:w-3/12" rowSpan={titleRowSpan}>
           <div className="flex items-center">
             <ItemLabel className="mb-0">
               {props.label}
@@ -115,17 +115,17 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
       ) : null}
       {row || [false, 0].includes(row) ? (
         <td
-          className={classNames('value col-md', props.valueClass)}
+          className={classNames('value', props.valueClass)}
           colSpan={props.label ? undefined : 2}
         >
           {row}
         </td>
       ) : (
-        <td className="value col-md" />
+        <td className="value" />
       )}
       <td
         className={classNames(
-          'col-md-auto col-actions text-end',
+          'md:w-auto col-actions text-end',
           props.actionsClass,
         )}
       >
@@ -180,9 +180,6 @@ interface FormTableProps {
   className?: string;
 }
 
-const TABLE_GY_SPACE_REGEX = /(?<=\s|^)(g[y]?-([1-9]\d*))( ?)(?=\s|$)/;
-const TABLE_GX_SPACE_REGEX = /(?<=\s|^)(g[x]?-([1-9]\d*))( ?)(?=\s|$)/;
-
 const FormTable: FC<PropsWithChildren<FormTableProps>> & {
   Item: FC<PropsWithChildren<FormTableItemProps>>;
   Card: FormTableCardProps;
@@ -195,8 +192,6 @@ const FormTable: FC<PropsWithChildren<FormTableProps>> & {
         props.hideActions && 'hide-actions',
         props.detailsMode && 'details-mode',
         props.alignTop && 'align-top',
-        !TABLE_GY_SPACE_REGEX.test(props.className) && 'gy-base',
-        !TABLE_GX_SPACE_REGEX.test(props.className) && 'gx-5',
         props.className,
       )}
     >

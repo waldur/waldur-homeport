@@ -1,4 +1,4 @@
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 
@@ -12,20 +12,16 @@ export const RejectionDetailsTab = ({ order }) => {
       </Card.Header>
       <Card.Body>
         {order.consumer_rejection_comment && (
-          <Row>
-            <Col>
-              <p>{translate('Consumer rejection reason')}:</p>
-              <pre>{order.consumer_rejection_comment}</pre>
-            </Col>
-          </Row>
+          <div>
+            <p>{translate('Consumer rejection reason')}:</p>
+            <pre>{order.consumer_rejection_comment}</pre>
+          </div>
         )}
         {order.provider_rejection_comment && (
-          <Row>
-            <Col>
-              <p>{translate('Provider rejection reason')}:</p>
-              <pre>{order.provider_rejection_comment}</pre>
-            </Col>
-          </Row>
+          <div>
+            <p>{translate('Provider rejection reason')}:</p>
+            <pre>{order.provider_rejection_comment}</pre>
+          </div>
         )}
       </Card.Body>
     </Card>

@@ -1,6 +1,5 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { BaseButton } from 'waldur-ui';
 
@@ -25,8 +24,8 @@ const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (props) => {
   }
   return (
     <div style={{ maxHeight: 200, maxWidth: 200 }}>
-      <Row>
-        <Col md={5}>
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-x-5">
+        <div className="md:col-span-5">
           <div>
             <img
               src={getImageUrl(props.input.value)}
@@ -38,8 +37,8 @@ const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (props) => {
               }}
             />
           </div>
-        </Col>
-        <Col md={7}>
+        </div>
+        <div className="md:col-span-7">
           <div>
             <FileUploadField
               variant="primary"
@@ -58,8 +57,8 @@ const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (props) => {
               iconNode={<TrashIcon weight="bold" />}
             />
           )}
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 };

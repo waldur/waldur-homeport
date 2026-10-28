@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { OptionField, StorageFolderConfig } from 'waldur-js-client';
 
 import { FormField, FormLabel, FormText, HelpIcon } from 'waldur-ui';
@@ -255,8 +255,8 @@ const StorageTypeAndPermissions = ({
   currentValue,
   onFieldChange,
 }: StorageTypeAndPermissionsProps) => (
-  <Row>
-    <Col md={6}>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+    <div>
       <FormField>
         <FormLabel>{translate('Storage Data Type')}</FormLabel>
         <Select
@@ -276,8 +276,8 @@ const StorageTypeAndPermissions = ({
           required
         />
       </FormField>
-    </Col>
-    <Col md={6}>
+    </div>
+    <div>
       <FormField>
         <FormLabel>{translate('Permissions')}</FormLabel>
         <Select
@@ -297,8 +297,8 @@ const StorageTypeAndPermissions = ({
           required
         />
       </FormField>
-    </Col>
-  </Row>
+    </div>
+  </div>
 );
 
 interface HardQuotaOverrideProps {
@@ -314,8 +314,8 @@ const HardQuotaOverride = ({
   hardQuotaError,
   onFieldChange,
 }: HardQuotaOverrideProps) => (
-  <Row className="mt-2.5">
-    <Col md={6}>
+  <div className="grid grid-cols-1 md:grid-cols-2 mt-2.5 gap-x-5">
+    <div>
       <FormField>
         <FormLabel>{translate('Hard Quota Override (TB)')}</FormLabel>
         <BaseInputField
@@ -332,8 +332,8 @@ const HardQuotaOverride = ({
         </FormText>
         <FieldError error={hardQuotaError} />
       </FormField>
-    </Col>
-  </Row>
+    </div>
+  </div>
 );
 
 const QuotaSummaryCard = ({
@@ -351,8 +351,8 @@ const QuotaSummaryCard = ({
         <h6>{translate('Calculated Quotas')}</h6>
       </Card.Header>
       <Card.Body>
-        <Row>
-          <Col md={6}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+          <div>
             <strong>{translate('Space Quotas')}</strong>
             <div>
               {translate('Soft')}: {calculatedQuotas.softQuota.toFixed(1)} TB
@@ -360,8 +360,8 @@ const QuotaSummaryCard = ({
             <div>
               {translate('Hard')}: {calculatedQuotas.hardQuota.toFixed(1)} TB
             </div>
-          </Col>
-          <Col md={6}>
+          </div>
+          <div>
             <strong>
               {translate('File/Directory Quotas (Inodes)')}{' '}
               <HelpIcon label={inodeTooltip} />
@@ -374,8 +374,8 @@ const QuotaSummaryCard = ({
               {translate('Hard')}:{' '}
               {calculatedQuotas.hardInodes.toLocaleString()} files
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Card.Body>
     </Card>
   );

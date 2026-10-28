@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Col, Row, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 import { AccordionCard, Badge } from 'waldur-ui';
 
@@ -51,8 +51,8 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
           <LoadingSpinner />
         </div>
       ) : data ? (
-        <Row>
-          <Col lg={6}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
+          <div>
             <h6 className="uppercase text-quaternary mb-2.5">
               {translate('Current state')}
             </h6>
@@ -108,8 +108,8 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                 </tr>
               </tbody>
             </Table>
-          </Col>
-          <Col lg={6}>
+          </div>
+          <div>
             <h6 className="uppercase text-quaternary mb-2.5">
               {translate('State history')}
             </h6>
@@ -164,8 +164,8 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                 {translate('No state transitions recorded.')}
               </p>
             )}
-          </Col>
-        </Row>
+          </div>
+        </div>
       ) : (
         <p className="text-quaternary mb-0">
           {translate('Failed to load circuit breaker details.')}

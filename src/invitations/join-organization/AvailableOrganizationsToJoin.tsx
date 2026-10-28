@@ -98,7 +98,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
             )}
             verboseName={translate('Group')}
             hasQuery
-            gridSize={{ sm: 6, xl: 4 }}
+            gridClassName="sm:grid-cols-2 xl:grid-cols-3"
             gridItem={GroupInvitationCard}
             hoverShadow={{ grid: false }}
             initialMode="grid"

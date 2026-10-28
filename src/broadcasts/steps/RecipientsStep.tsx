@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 
 import { translate } from '@/i18n';
@@ -16,22 +15,21 @@ const RecipientsListQuery = () => {
 
 export const RecipientsStep: FC<WizardStepProps> = (props) => (
   <WizardModal {...props}>
-    <Row>
-      <Col
-        sm={4}
+    <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-5">
+      <div
+        className="sm:col-span-4"
         style={{
           borderRight: '2px solid #eff2f5',
           paddingRight: 20,
-          marginRight: 20,
         }}
       >
         <AudienceFields
           allUsersLabel={translate('Send message to all users')}
         />
-      </Col>
-      <Col sm={7}>
+      </div>
+      <div className="sm:col-span-7">
         <RecipientsListQuery />
-      </Col>
-    </Row>
+      </div>
+    </div>
   </WizardModal>
 );

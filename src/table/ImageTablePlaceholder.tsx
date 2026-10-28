@@ -10,8 +10,8 @@ interface ImageTablePlaceholderProps {
 export const ImageTablePlaceholder: React.FC<ImageTablePlaceholderProps> = (
   props,
 ) => (
-  <div style={{ clear: 'both' }} className="justify-center row">
-    <div className="col-sm-4">
+  <div className="flex flex-wrap justify-center" style={{ clear: 'both' }}>
+    <div className="w-full sm:w-4/12">
       <div style={{ width: '100%' }}>{props.illustration}</div>
       <div className="text-center">
         <h2>{props.title}</h2>

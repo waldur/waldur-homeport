@@ -1,6 +1,5 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 
@@ -44,8 +43,8 @@ export const EditGettingStartedDialog: FC<{
             title={translate('Getting started instructions')}
             footer={<FormFooter submitLabel={translate('Update')} />}
           >
-            <Row>
-              <Col md={12} lg={8} className="flex flex-col">
+            <div className="flex flex-wrap">
+              <div className="w-full lg:w-8/12 flex flex-col">
                 <div className="grow min-h-[225px]">
                   <div>
                     <TextGroup
@@ -71,13 +70,10 @@ export const EditGettingStartedDialog: FC<{
                     />
                   </div>
                 </div>
-              </Col>
-              <Col
-                xs="auto"
-                className="border-e-2 border-divider-medium mx-4 p-0"
-              />
+              </div>
+              <div className="flex-none border-e-2 border-divider-medium mx-4 p-0" />
 
-              <Col className="pb-16">
+              <div className="flex-1 min-w-0 pb-16">
                 <FormHeading as="p">{translate('Preview')}</FormHeading>
                 <CodePreview
                   template={values.template}
@@ -89,8 +85,8 @@ export const EditGettingStartedDialog: FC<{
                     backend_metadata_key: 'BACKEND_METADATA_VALUE',
                   }}
                 />
-              </Col>
-            </Row>
+              </div>
+            </div>
           </ModalDialog>
         </form>
       )}

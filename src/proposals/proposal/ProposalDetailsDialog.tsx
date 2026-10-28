@@ -95,7 +95,7 @@ export const ProposalDetailsDialog: FC<ProposalDetailsDialogProps> = ({
           <div className="tab-content">
             {call && showsCallContext() ? (
               <TabsContent value="call">
-                <FormTable hideActions alignTop className="gy-5">
+                <FormTable hideActions alignTop>
                   <FormTable.Item
                     label={translate('Name')}
                     value={<FieldWithCopy value={call.name} />}
@@ -112,7 +112,7 @@ export const ProposalDetailsDialog: FC<ProposalDetailsDialogProps> = ({
             ) : null}
             {showsCallContext() ? (
               <TabsContent value="round">
-                <FormTable hideActions alignTop className="gy-5">
+                <FormTable hideActions alignTop>
                   <FormTable.Item
                     label={translate('Cutoff date')}
                     value={

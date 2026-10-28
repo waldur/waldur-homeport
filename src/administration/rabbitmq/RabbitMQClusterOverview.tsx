@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Col, Row, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 import { AccordionCard, Badge } from 'waldur-ui';
 
@@ -38,8 +38,8 @@ const RabbitMQClusterOverviewContent: FC<
   const queueTotals: Partial<RmqQueueTotals> = data.queue_totals || {};
 
   return (
-    <Row>
-      <Col md={4}>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5">
+      <div>
         <h6 className="uppercase text-quaternary mb-2.5">
           {translate('Cluster info')}
         </h6>
@@ -59,9 +59,9 @@ const RabbitMQClusterOverviewContent: FC<
           label={translate('Node')}
           value={renderFieldOrDash(data.node)}
         />
-      </Col>
+      </div>
 
-      <Col md={4}>
+      <div>
         <h6 className="uppercase text-quaternary mb-2.5">
           {translate('Object totals')}
         </h6>
@@ -99,9 +99,9 @@ const RabbitMQClusterOverviewContent: FC<
             </tr>
           </tbody>
         </Table>
-      </Col>
+      </div>
 
-      <Col md={4}>
+      <div>
         <h6 className="uppercase text-quaternary mb-2.5">
           {translate('Queue totals')}
         </h6>
@@ -142,8 +142,8 @@ const RabbitMQClusterOverviewContent: FC<
             </div>
           </>
         )}
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 

@@ -196,6 +196,8 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
 
 - Dialogs are waldur-ui's Modal: `openDialog` with `ModalDialog` (`@/modal/ModalDialog`), `ModalShell` for one rendered in place, the `ModalHeader`/`ModalBody`/`ModalFooter` parts for a custom layout — never react-bootstrap `Modal`/`CloseButton` or `modal-*`/`btn-close` classes; style a part through its `data-slot`. Linter enforces this (`no-bootstrap-modal`); see `docs/modals.md`
 
+- Lay out with Tailwind grid or flex (`grid grid-cols-1 md:grid-cols-2 gap-x-5`, or `md:grid-cols-12` with `md:col-span-*` children for mixed widths) — never react-bootstrap `Row`/`Col`/`ColProps` or `row`/`col-*`/`g-*`/`gx-*`/`gy-*` classes; Bootstrap's grid is not compiled. Linter enforces this (`no-bootstrap-grid`); see `docs/tailwind-shadcn-migration-notes.md` → "Grid Layouts"
+
 - Use `waldur-ui`'s `Tabs` (state-driven panels) or `TabNav` (router-driven: `items` with `link: <Link … />`), and `EmbeddedTabs` (`@/table/EmbeddedTabs`) for tabs inside an expandable row or card section — never react-bootstrap `Tab`/`Tabs`/`Nav` or `nav-*` classes. Linter enforces this (`no-bootstrap-tabs`); see `docs/tabs.md`
 
 - Use the `waldur-ui` pickers (`DatePicker`, `DateRangePicker`, `MonthPicker`; `DateField`/`DateGroup` in forms) — never a native `<input type="date">`, `datetime-local`, `time`, `month` or `week`. Linter enforces this; see `docs/forms.md` → "Date & Time Pickers"
@@ -405,18 +407,14 @@ import { FormGroup } from '@/form';
   />
 </FormGroup>
 
-// Side-by-side fields use Bootstrap grid
-<div className="row">
-  <div className="col-sm-6">
-    <FormGroup label={translate('Start date')} required>
-      <Field name="start_date" component={DateField} validate={required} />
-    </FormGroup>
-  </div>
-  <div className="col-sm-6">
-    <FormGroup label={translate('End date')} required>
-      <Field name="end_date" component={DateField} validate={required} />
-    </FormGroup>
-  </div>
+// Side-by-side fields use a Tailwind grid
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
+  <FormGroup label={translate('Start date')} required>
+    <Field name="start_date" component={DateField} validate={required} />
+  </FormGroup>
+  <FormGroup label={translate('End date')} required>
+    <Field name="end_date" component={DateField} validate={required} />
+  </FormGroup>
 </div>
 ```
 

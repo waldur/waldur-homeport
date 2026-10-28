@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import {
   Project,
   marketplaceCustomerUsageComponentsUsageRetrieve,
@@ -144,8 +143,8 @@ const UsageViews: FC<Props & { variants: VariantInfo[] }> = ({
   const activeVariant = variants.find((v) => v.key === variant) ?? variants[0];
 
   return (
-    <Row className="mt-2.5">
-      <Col xs={12} className="mb-4">
+    <div className="mt-2.5">
+      <div className="mb-4">
         <Tabs
           value={activeVariant.key}
           onValueChange={(k) => setVariant(k as Variant)}
@@ -216,7 +215,7 @@ const UsageViews: FC<Props & { variants: VariantInfo[] }> = ({
             </TabsContent>
           </Panel>
         </Tabs>
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

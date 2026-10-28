@@ -8,7 +8,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { components } from 'react-select';
@@ -367,8 +366,8 @@ const renderNetworkRows = ({
               : undefined);
           return (
             <Fragment key={index}>
-              <Row className="g-4">
-                <Col sm={6}>
+              <div className="flex flex-wrap gap-3">
+                <div className="w-full sm:w-6/12 min-w-0">
                   <SelectGroup
                     name={`${network}.subnet`}
                     label={translate('Subnet')}
@@ -383,8 +382,8 @@ const renderNetworkRows = ({
                     spaceless
                     components={{ ValueContainer: SubnetValueContainer }}
                   />
-                </Col>
-                <Col sm>
+                </div>
+                <div className="w-full sm:flex-1 sm:min-w-0">
                   <SelectGroup
                     name={`${network}.floatingIp`}
                     label={
@@ -411,8 +410,8 @@ const renderNetworkRows = ({
                     noUpdateOnBlur
                     spaceless
                   />
-                </Col>
-                <Col xs="auto" className="self-end">
+                </div>
+                <div className="flex-none self-end">
                   <BaseButton
                     tooltip={translate('Remove')}
                     onClick={() => fields.remove(index)}
@@ -420,19 +419,19 @@ const renderNetworkRows = ({
                     variant="text-danger"
                     size="lg"
                   />
-                </Col>
+                </div>
                 {hasCustomIp && (
-                  <Col xs={12}>
-                    <Col sm={6}>
+                  <div className="w-full">
+                    <div className="sm:w-6/12">
                       <CustomIpField
                         parentName={network}
                         data={fields.value[index]}
                         hasAutoOption
                       />
-                    </Col>
-                  </Col>
+                    </div>
+                  </div>
                 )}
-              </Row>
+              </div>
             </Fragment>
           );
         })}

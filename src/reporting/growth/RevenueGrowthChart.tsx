@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { EChartsOption } from 'echarts';
 import { DateTime } from 'luxon';
 import { FC, useMemo, useState, useCallback } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { invoicesGrowthRetrieve } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
@@ -162,27 +161,25 @@ export const RevenueGrowthChart: FC = () => {
   );
 
   return (
-    <Row>
-      <Col>
-        <ChartCard
-          title={translate('Revenue growth')}
-          getExportData={getExportData}
-          isEmpty={!growthData || growthData.periods.length === 0}
-          actions={actions}
-        >
-          {(ref) => (
-            <>
-              {isLoading ? (
-                <LoadingSpinner />
-              ) : error ? (
-                <LoadingErred loadData={refetch} />
-              ) : (
-                <EChart ref={ref} options={chartOptions} height="400px" />
-              )}
-            </>
-          )}
-        </ChartCard>
-      </Col>
-    </Row>
+    <div>
+      <ChartCard
+        title={translate('Revenue growth')}
+        getExportData={getExportData}
+        isEmpty={!growthData || growthData.periods.length === 0}
+        actions={actions}
+      >
+        {(ref) => (
+          <>
+            {isLoading ? (
+              <LoadingSpinner />
+            ) : error ? (
+              <LoadingErred loadData={refetch} />
+            ) : (
+              <EChart ref={ref} options={chartOptions} height="400px" />
+            )}
+          </>
+        )}
+      </ChartCard>
+    </div>
   );
 };

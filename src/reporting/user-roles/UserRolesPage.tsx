@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -44,11 +43,9 @@ export const UserRolesPage: FC = () => {
       <ReportingTitle reportKey="user-roles" />
       <UserRolesSummaryCards summary={summary} />
 
-      <Row className="g-5 mb-4">
-        <Col xs={12}>
-          <RoleDistributionChart data={data.memberCounts} />
-        </Col>
-      </Row>
+      <div className="mb-4">
+        <RoleDistributionChart data={data.memberCounts} />
+      </div>
 
       <RoleDistributionTable data={data.memberCounts} />
     </>

@@ -6,7 +6,6 @@ import {
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import {
   marketplaceGlobalCategoriesRetrieve,
   marketplacePublicOfferingsList,
@@ -187,9 +186,9 @@ export const UserDashboard: FC = () => {
   return (
     <>
       {(hasResources || showOtherWidgets) && (
-        <Row className="mb-4 gy-4">
+        <div className="grid grid-cols-1 gap-x-5 gap-y-3 mb-4 md:grid-cols-3">
           {hasResources && (
-            <Col md={4}>
+            <div>
               <DashboardCard
                 title={translate('Your resources')}
                 message={translate(
@@ -204,10 +203,10 @@ export const UserDashboard: FC = () => {
                 backgroundColor="bg-info-600"
                 onClick={openResourcesDialog}
               />
-            </Col>
+            </div>
           )}
           {showDashboardWidgets && hasActiveInvitations && (
-            <Col md={4}>
+            <div>
               <DashboardCard
                 title={translate('Pending invitations')}
                 message={translate(
@@ -220,12 +219,12 @@ export const UserDashboard: FC = () => {
                 backgroundColor="bg-success"
                 onClick={openActiveInvitations}
               />
-            </Col>
+            </div>
           )}
           {showDashboardWidgets &&
             showOnboardingWidgets &&
             hasEscalatedVerifications && (
-              <Col md={4}>
+              <div>
                 <DashboardCard
                   title={translate('Pending onboarding applications')}
                   message={translate(
@@ -238,10 +237,10 @@ export const UserDashboard: FC = () => {
                   backgroundColor="bg-warning"
                   onClick={goToOnboardingApplications}
                 />
-              </Col>
+              </div>
             )}
           {showTosWidget && hasPendingConsents && (
-            <Col md={4}>
+            <div>
               <DashboardCard
                 title={translate('Pending terms of service')}
                 message={translate(
@@ -254,9 +253,9 @@ export const UserDashboard: FC = () => {
                 backgroundColor="bg-danger"
                 onClick={goToTosManagement}
               />
-            </Col>
+            </div>
           )}
-        </Row>
+        </div>
       )}
 
       {isFeatureVisible(UserFeatures.pending_user_actions) && (

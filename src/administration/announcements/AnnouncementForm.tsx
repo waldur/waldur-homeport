@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import {
   AdminAnnouncementRequest,
@@ -81,7 +80,7 @@ export const AnnouncementForm: FC<AnnouncementFormProps> = ({ resolve }) => {
               />
             }
           >
-            <Row>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
               <SelectGroup
                 name="type"
                 options={AnnouncementTypeOptions}
@@ -90,24 +89,21 @@ export const AnnouncementForm: FC<AnnouncementFormProps> = ({ resolve }) => {
                 simpleValue
                 label={translate('Type')}
                 required
-                className="col-md-6"
               />
-            </Row>
+            </div>
 
-            <Row>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
               <DateTimeGroup
                 label={translate('Active from')}
                 required
-                className="col-md-6"
                 name="active_from"
               />
               <DateTimeGroup
                 label={translate('Active to')}
                 required
-                className="col-md-6"
                 name="active_to"
               />
-            </Row>
+            </div>
 
             <MarkdownGroup
               name="description"

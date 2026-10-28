@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
@@ -30,24 +30,24 @@ export const InvoiceDetails = ({
     <>
       <Card className="card-bordered mb-4">
         <Card.Body className="flex">
-          <Row>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 grow">
             {invoice.customer_details && (
-              <Col>
+              <div>
                 <div className="text-base mb-2.5 uppercase">
                   {translate('Invoice to')}
                 </div>
                 <CustomerDetails customer={invoice.customer_details} />
-              </Col>
+              </div>
             )}
             {invoice.issuer_details && (
-              <Col>
+              <div>
                 <div className="text-base mb-2.5 uppercase">
                   {translate('Invoice from')}
                 </div>
                 <CustomerDetails customer={invoice.issuer_details} />
-              </Col>
+              </div>
             )}
-          </Row>
+          </div>
 
           <div className="ms-auto">
             <strong>{translate('Invoice date')}: </strong>

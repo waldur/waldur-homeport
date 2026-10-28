@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -42,39 +41,51 @@ export const UserDemographicsPage: FC = () => {
       <ReportingTitle reportKey="user-demographics" />
       <SummaryCards summary={summary} />
 
-      <Row className="mb-4 g-5">
-        <Col xs={12} lg={showIdentitySource ? 6 : 12}>
+      <div
+        className={
+          showIdentitySource
+            ? 'grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4'
+            : 'grid grid-cols-1 gap-4 mb-4'
+        }
+      >
+        <div>
           <AuthMethodsChart data={data.authMethods} />
-        </Col>
+        </div>
         {showIdentitySource && (
-          <Col xs={12} lg={6}>
+          <div>
             <IdentitySourcesChart data={data.identitySources} />
-          </Col>
+          </div>
         )}
-      </Row>
+      </div>
 
-      <Row className="mb-4 g-5">
-        <Col xs={12} lg={6}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+        <div>
           <ActiveStatusChart data={data.activeStatus} />
-        </Col>
-        <Col xs={12} lg={6}>
+        </div>
+        <div>
           <LanguagesChart data={data.languages} />
-        </Col>
-      </Row>
+        </div>
+      </div>
 
       {(showOrganizationType || showJobTitle) && (
-        <Row className="mb-4 g-5">
+        <div
+          className={
+            showOrganizationType && showJobTitle
+              ? 'grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4'
+              : 'grid grid-cols-1 gap-4 mb-4'
+          }
+        >
           {showOrganizationType && (
-            <Col xs={12} lg={showJobTitle ? 6 : 12}>
+            <div>
               <OrganizationTypesChart data={data.organizationTypes} />
-            </Col>
+            </div>
           )}
           {showJobTitle && (
-            <Col xs={12} lg={showOrganizationType ? 6 : 12}>
+            <div>
               <JobPositionsChart data={data.jobTitles} />
-            </Col>
+            </div>
           )}
-        </Row>
+        </div>
       )}
     </>
   );

@@ -79,7 +79,7 @@ export const ProviderUserDetailsDialog: FC<ProviderUserDetailsDialogProps> = ({
       iconColor="success"
       footer={<CloseDialogButton />}
     >
-      <FormTable hideActions detailsMode className="gy-5">
+      <FormTable hideActions detailsMode>
         {SP_USER_FIELDS.map(({ key, label }) => (
           <FormTable.Item
             key={key}

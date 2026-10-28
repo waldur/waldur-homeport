@@ -1,6 +1,5 @@
 import { debounce } from 'es-toolkit';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Form, useForm, useFormState } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
@@ -82,31 +81,29 @@ const MarketplacePopupForm: FC<{ categoryUuid?: string }> = ({
     >
       <div id="marketplaces-selector">
         <div className="px-5.5">
-          <Row className="gx-4 mb-3">
-            <Col lg={6} className="mb-3 lg:mb-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 mb-3">
+            <div className="mb-3 lg:mb-0">
               <OrganizationAutocomplete
                 placeholder={translate('Select an organization')}
               />
-            </Col>
-            <Col lg={6}>
+            </div>
+            <div>
               <ProjectAutocomplete
                 customer_uuid={values?.organization?.uuid}
                 isDisabled={!values?.organization?.uuid}
                 placeholder={translate('Select a project')}
               />
-            </Col>
-          </Row>
-          <Row className="mb-3">
-            <Col xs={12}>
-              <FilterBox
-                id="marketplaces-selector-search-box"
-                type="search"
-                placeholder={translate('Search an offering')}
-                onChange={(e) => applyQuery(e.target.value)}
-                autoFocus
-              />
-            </Col>
-          </Row>
+            </div>
+          </div>
+          <div className="mb-3">
+            <FilterBox
+              id="marketplaces-selector-search-box"
+              type="search"
+              placeholder={translate('Search an offering')}
+              onChange={(e) => applyQuery(e.target.value)}
+              autoFocus
+            />
+          </div>
         </div>
         <div className="border-b-[1px] border-b-secondary mx-5.5" />
         <DataLoader

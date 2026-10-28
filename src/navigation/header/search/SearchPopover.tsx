@@ -2,7 +2,6 @@ import { LockIcon, PlusIcon, XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { groupBy } from 'es-toolkit';
 import { Fragment, useCallback } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import {
   BaseButton,
@@ -73,8 +72,8 @@ const AllResultsTabContent = ({
   close,
 }: TabContentProps) => {
   return (
-    <Row className="mx-0">
-      <Col md={12} lg={6} className="py-4 px-0">
+    <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div className="py-4">
         {Boolean(recentSearchItems?.length) && (
           <div className="mb-2.5">
             <div className="flex items-center justify-between mx-4 mb-2.5">
@@ -125,8 +124,8 @@ const AllResultsTabContent = ({
             />
           )}
         </div>
-      </Col>
-      <Col md={12} lg={6} className="bg-secondary pb-4 px-0">
+      </div>
+      <div className="bg-secondary pb-4">
         {result.data?.resultsCount ? (
           <>
             <div className="mb-2.5 mt-4">
@@ -219,8 +218,8 @@ const AllResultsTabContent = ({
           isVisible={!result.data?.resultsCount && result.status !== 'pending'}
           callback={clearSearch}
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 

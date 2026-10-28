@@ -1,7 +1,7 @@
 import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { BaseButton, Menu } from 'waldur-ui';
 
@@ -91,26 +91,26 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
             )}
           </div>
           {(title || meta || right) && (
-            <Row className="items-end justify-between mt-auto gap-3 g-2">
+            // pt-1.5 and the extra 1.5 in gap-y: the space Bootstrap's g-2 gutter
+            // put above each line of the row, which mt-auto kept from being
+            // cancelled.
+            <div className="flex flex-wrap items-end justify-between mt-auto pt-1.5 gap-x-3 gap-y-4.5">
               {(title || meta) && (
-                <Col>
-                  <Row className="items-center gap-3 mb-1.5">
-                    <h1 className="mb-0 whitespace-nowrap text-2xl col col-sm-12 col-md col-xxl-12">
+                <div className="flex-1 max-w-full">
+                  <div className="flex flex-wrap items-center gap-3 mb-1.5">
+                    <h1 className="mb-0 whitespace-nowrap text-2xl flex-1 max-w-full sm:basis-full md:flex-1 2xl:basis-full">
                       {title}
                     </h1>
                     {meta && (
-                      <Col
-                        xs="auto"
-                        className="text-secondary whitespace-nowrap text-sm"
-                      >
+                      <div className="flex-none text-secondary whitespace-nowrap text-sm">
                         {meta}
-                      </Col>
+                      </div>
                     )}
-                  </Row>
-                </Col>
+                  </div>
+                </div>
               )}
               {right}
-            </Row>
+            </div>
           )}
           {children}
         </div>

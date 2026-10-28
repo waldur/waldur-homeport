@@ -58,7 +58,7 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
 
   return (
     <WizardForm {...props}>
-      <div className="row">
+      <div>
         {isLoading ? (
           <LoadingSpinner />
         ) : error ? (

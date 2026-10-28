@@ -1,5 +1,4 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
 import { Field, FieldRenderProps } from 'react-final-form';
 
 import { FormField, FormLabel, FormText } from 'waldur-ui';
@@ -17,7 +16,7 @@ interface OwnProps extends FieldProps {
 }
 
 export const DecoratedField: React.FC<OwnProps> = (props) => (
-  <Col sm={6}>
+  <div>
     <FormField controlId={props.variable}>
       {props.action ? (
         <div className="float-right">
@@ -43,5 +42,5 @@ export const DecoratedField: React.FC<OwnProps> = (props) => (
 
       <FormText variant="muted">{props.description}</FormText>
     </FormField>
-  </Col>
+  </div>
 );

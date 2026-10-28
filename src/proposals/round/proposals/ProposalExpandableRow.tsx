@@ -150,7 +150,7 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
         <Field
           label={translate('Project summary')}
           value={row.project_summary}
-          className="col-md-12 mb-2.5"
+          className="mb-2.5"
         />
       )}
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
 import { Checkbox, FormField } from 'waldur-ui';
@@ -19,7 +18,7 @@ const renderControl = (props) => (
 );
 
 export const BooleanField: React.FC<FieldProps> = (props) => (
-  <Col sm={6}>
+  <div>
     <FormField>
       <Field
         name={props.variable}
@@ -31,5 +30,5 @@ export const BooleanField: React.FC<FieldProps> = (props) => (
 
       {props.description && <p>{props.description}</p>}
     </FormField>
-  </Col>
+  </div>
 );

@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { NestedPartition, Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -23,8 +22,8 @@ export const PublicOfferingPartitions: FunctionComponent<
   });
 
   return (
-    <Row className="mb-8" id="partitions">
-      <Col sm={12} md>
+    <div className="mb-8" id="partitions">
+      <div>
         <Table<NestedPartition>
           {...tableProps}
           columns={[
@@ -63,7 +62,7 @@ export const PublicOfferingPartitions: FunctionComponent<
           enableExport={false}
           expandableRow={OfferingPartitionExpandableRow}
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

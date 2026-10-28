@@ -4,7 +4,6 @@ import {
   HexagonIcon,
   HashIcon,
 } from '@phosphor-icons/react';
-import { Col, Row } from 'react-bootstrap';
 
 import { formatPhoneNumber } from '@/core/utils';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
@@ -76,11 +75,9 @@ export const CustomerProfile = ({
     actions={<CustomerActions customer={customer} />}
   >
     {fromServiceProvider ? (
-      <Row>
-        <Col xs={12}>
-          <ProviderOfferingPermissions customer={customer} />
-        </Col>
-      </Row>
+      <div>
+        <ProviderOfferingPermissions customer={customer} />
+      </div>
     ) : null}
   </PublicDashboardHero>
 );

@@ -1,5 +1,3 @@
-import { Col, Row } from 'react-bootstrap';
-
 import { formatUsageValue } from '@/core/formatNumber';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
@@ -70,16 +68,16 @@ export const QuotaSingleView = ({
           ))}
         </div>
       ) : (
-        <Row className="mt-2.5">
+        <div className="flex flex-wrap *:flex-1 mt-2.5 gap-x-5">
           {details.map((detail) => (
-            <Col key={detail.label}>
+            <div key={detail.label}>
               <span className="text-secondary font-medium block mb-1">
                 {detail.label}:
               </span>
               <span className="text-quaternary">{detail.value}</span>
-            </Col>
+            </div>
           ))}
-        </Row>
+        </div>
       )}
     </div>
   );

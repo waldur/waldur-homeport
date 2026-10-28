@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { OpenStackInstance } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -9,9 +8,9 @@ import { getStorageTitle } from '../storageTitle';
 
 const ResourceComponentItem = ({ title, usage, units }) => {
   return (
-    <Col xs={12} sm={6} md={12} xl={6}>
+    <div>
       <QuotaCell usage={usage} title={title} units={units} />
-    </Col>
+    </div>
   );
 };
 
@@ -32,7 +31,7 @@ export const InstanceComponents = ({
   }, [volumes]);
 
   return (
-    <Row>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2 gap-x-5">
       <ResourceComponentItem
         title={translate('vCPU')}
         usage={resource.cores}
@@ -55,6 +54,6 @@ export const InstanceComponents = ({
             units="GB"
           />
         ))}
-    </Row>
+    </div>
   );
 };

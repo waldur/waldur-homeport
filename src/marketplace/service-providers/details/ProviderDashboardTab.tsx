@@ -65,7 +65,7 @@ export const ProviderOfferingsList = (props) => {
       initialMode={props.initialMode}
       columns={columns}
       title={translate('Offerings')}
-      gridSize={{ lg: 6, xl: 4 }}
+      gridClassName="lg:grid-cols-2 xl:grid-cols-3"
       gridItem={({ row }) => <OfferingCard offering={row} />}
       hoverShadow={{ grid: false }}
     />

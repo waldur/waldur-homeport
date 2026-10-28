@@ -1,7 +1,6 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Col } from 'react-bootstrap';
 
 import { BaseButton } from 'waldur-ui';
 
@@ -86,7 +85,7 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
           : null
       }
       right={
-        <Col xs="auto" className="flex items-center gap-1.5">
+        <div className="flex-none flex items-center gap-1.5">
           {isLoading ? (
             <LoadingSpinner />
           ) : error ? (
@@ -119,7 +118,7 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
                 size="lg"
               />
             ))}
-        </Col>
+        </div>
       }
     >
       {showChart && Boolean(chartData) && (

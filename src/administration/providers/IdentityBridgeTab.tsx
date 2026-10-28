@@ -141,7 +141,7 @@ export const IdentityBridgeTab: FC = () => {
       {/* Summary Metrics */}
       <div>
         <h5 className="mb-3">{translate('Summary')}</h5>
-        <FormTable hideActions detailsMode className="gy-5">
+        <FormTable hideActions detailsMode>
           <FormTable.Item
             label={translate('Total federated users')}
             value={String(stats.total_federated_users ?? 0)}

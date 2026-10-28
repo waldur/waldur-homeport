@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
 import { useField } from 'react-final-form';
 import { LoadBalancerModeEnum, TopologyModeEnum } from 'waldur-js-client';
 
@@ -106,8 +105,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         title={translate('Controller Node Defaults')}
         topSeparator
       >
-        <Row>
-          <Col md={6}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+          <div>
             <NumberGroup
               space={4}
               label={translate('vCPUs per Controller')}
@@ -121,8 +120,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               max="16"
               parse={(value) => (value ? parseInt(value, 10) : undefined)}
             />
-          </Col>
-          <Col md={6}>
+          </div>
+          <div>
             <NumberGroup
               space={4}
               label={translate('RAM per Controller (GB)')}
@@ -136,11 +135,11 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               max="64"
               parse={(value) => (value ? parseInt(value, 10) : undefined)}
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
 
-        <Row>
-          <Col md={6}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+          <div>
             <NumberGroup
               space={4}
               label={translate('System Disk per Controller (GB)')}
@@ -154,8 +153,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               max="500"
               parse={(value) => (value ? parseInt(value, 10) : undefined)}
             />
-          </Col>
-          <Col md={6}>
+          </div>
+          <div>
             <NumberGroup
               space={4}
               label={translate('Data Disk per Controller (GB)')}
@@ -169,8 +168,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               max="1000"
               parse={(value) => (value ? parseInt(value, 10) : undefined)}
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
       </K8sFormSection>
 
       <K8sFormSection title={translate('Load Balancer Defaults')} topSeparator>
@@ -188,8 +187,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         />
         {loadBalancerMode !== 'disabled' && (
           <>
-            <Row>
-              <Col md={6}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+              <div>
                 <NumberGroup
                   space={4}
                   label={translate('vCPUs per Load Balancer')}
@@ -203,8 +202,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
                   max="16"
                   parse={(value) => (value ? parseInt(value, 10) : undefined)}
                 />
-              </Col>
-              <Col md={6}>
+              </div>
+              <div>
                 <NumberGroup
                   space={4}
                   label={translate('RAM per Load Balancer (GB)')}
@@ -218,11 +217,11 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
                   max="64"
                   parse={(value) => (value ? parseInt(value, 10) : undefined)}
                 />
-              </Col>
-            </Row>
+              </div>
+            </div>
 
-            <Row>
-              <Col md={6}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+              <div>
                 <NumberGroup
                   space={4}
                   label={translate('System Disk per Load Balancer (GB)')}
@@ -236,8 +235,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
                   max="500"
                   parse={(value) => (value ? parseInt(value, 10) : undefined)}
                 />
-              </Col>
-              <Col md={6}>
+              </div>
+              <div>
                 <NumberGroup
                   space={4}
                   label={translate('Data Disk per Load Balancer (GB)')}
@@ -251,8 +250,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
                   max="1000"
                   parse={(value) => (value ? parseInt(value, 10) : undefined)}
                 />
-              </Col>
-            </Row>
+              </div>
+            </div>
           </>
         )}
       </K8sFormSection>
@@ -261,8 +260,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         title={translate('Worker Node Requirements')}
         topSeparator
       >
-        <Row>
-          <Col md={6}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+          <div>
             <NumberGroup
               space={4}
               label={translate('Minimal vCPUs per Worker')}
@@ -276,8 +275,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               max="16"
               parse={(value) => (value ? parseInt(value, 10) : undefined)}
             />
-          </Col>
-          <Col md={6}>
+          </div>
+          <div>
             <NumberGroup
               space={4}
               label={translate('Minimal RAM per Worker (GB)')}
@@ -291,13 +290,13 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               max="64"
               parse={(value) => (value ? parseInt(value, 10) : undefined)}
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
       </K8sFormSection>
 
       <K8sFormSection title={translate('Default Volume Sizes')} topSeparator>
-        <Row>
-          <Col md={4}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5">
+          <div>
             <NumberGroup
               space={4}
               label={translate('Worker Data Disk (GB)')}
@@ -309,8 +308,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               max="10000"
               parse={(value) => (value ? parseInt(value, 10) : undefined)}
             />
-          </Col>
-          <Col md={4}>
+          </div>
+          <div>
             <NumberGroup
               space={4}
               label={translate('Storage Data Disk (GB)')}
@@ -322,8 +321,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               max="10000"
               parse={(value) => (value ? parseInt(value, 10) : undefined)}
             />
-          </Col>
-          <Col md={4}>
+          </div>
+          <div>
             <NumberGroup
               space={4}
               label={translate('Storage SAN Disk (GB)')}
@@ -337,16 +336,16 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               max="50000"
               parse={(value) => (value ? parseInt(value, 10) : undefined)}
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
       </K8sFormSection>
 
       <K8sFormSection
         title={translate('Kubernetes Version Configuration')}
         topSeparator
       >
-        <Row>
-          <Col md={12}>
+        <div>
+          <div>
             <StringGroup
               space={4}
               required
@@ -364,8 +363,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               name={`${name}.available_kubernetes_versions`}
               placeholder="1.32.0,1.33.0,1.34.0"
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
       </K8sFormSection>
     </>
   );

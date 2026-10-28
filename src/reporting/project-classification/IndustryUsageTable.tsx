@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import {
   ProjectsLimitsGroupedByIndustryFlag,
   ProjectsUsagesGroupedByIndustryFlag,
@@ -79,22 +78,20 @@ export const IndustryUsageTable: FC<IndustryUsageTableProps> = ({
   );
 
   return (
-    <Row>
-      <Col>
-        <ChartCard
-          title={translate('Usage by industry classification')}
-          getExportData={() => getSimpleExportData(tableColumns, tableData)}
-          showPNG={false}
-          isEmpty={!tableData || tableData.length === 0}
-        >
-          {() => (
-            <SimpleTable<ClassificationUsageRow>
-              columns={tableColumns}
-              rows={tableData}
-            />
-          )}
-        </ChartCard>
-      </Col>
-    </Row>
+    <div>
+      <ChartCard
+        title={translate('Usage by industry classification')}
+        getExportData={() => getSimpleExportData(tableColumns, tableData)}
+        showPNG={false}
+        isEmpty={!tableData || tableData.length === 0}
+      >
+        {() => (
+          <SimpleTable<ClassificationUsageRow>
+            columns={tableColumns}
+            rows={tableData}
+          />
+        )}
+      </ChartCard>
+    </div>
   );
 };

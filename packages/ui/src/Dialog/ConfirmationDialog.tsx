@@ -42,7 +42,7 @@ interface ConfirmationDialogProps {
 }
 
 // The pair of footer buttons share the row equally (formerly Metronic's .flex-equal).
-const EQUAL_BUTTON = 'flex-[1_0_0] px-[10.5px]';
+const EQUAL_BUTTON = 'flex-1 px-[10.5px]';
 
 /**
  * What `confirm()` opens: a yes/no question, optionally with a text input

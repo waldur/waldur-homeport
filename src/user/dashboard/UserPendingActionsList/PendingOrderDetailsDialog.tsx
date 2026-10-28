@@ -1,7 +1,6 @@
 import { ClipboardTextIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import {
   marketplaceOrdersApproveByConsumer,
   marketplaceOrdersRejectByConsumer,
@@ -56,22 +55,22 @@ const OrderSummaryTab: FC<{ order: OrderDetails }> = ({ order }) => {
   const typeBadge = useMemo(() => getOrderType(order), [order]);
 
   return (
-    <Row className="g-3">
-      <Col xs={12} sm={6}>
+    <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+      <div>
         <Field
           label={translate('Organization')}
           value={order.customer_name}
           labelClass="w-[100px]"
         />
-      </Col>
-      <Col xs={12} sm={6}>
+      </div>
+      <div>
         <Field
           label={translate('Project')}
           value={order.project_name}
           labelClass="w-[100px]"
         />
-      </Col>
-      <Col xs={12} sm={6}>
+      </div>
+      <div>
         <Field
           label={translate('Resource')}
           value={
@@ -86,15 +85,15 @@ const OrderSummaryTab: FC<{ order: OrderDetails }> = ({ order }) => {
           }
           labelClass="w-[100px]"
         />
-      </Col>
-      <Col xs={12} sm={6}>
+      </div>
+      <div>
         <Field
           label={translate('Offering')}
           value={order.offering_name}
           labelClass="w-[100px]"
         />
-      </Col>
-      <Col xs={12} sm={6}>
+      </div>
+      <div>
         <Field
           label={translate('Type')}
           value={
@@ -109,8 +108,8 @@ const OrderSummaryTab: FC<{ order: OrderDetails }> = ({ order }) => {
           }
           labelClass="w-[100px]"
         />
-      </Col>
-      <Col xs={12} sm={6}>
+      </div>
+      <div>
         <Field
           label={translate('Created by')}
           value={
@@ -120,22 +119,22 @@ const OrderSummaryTab: FC<{ order: OrderDetails }> = ({ order }) => {
           }
           labelClass="w-[100px]"
         />
-      </Col>
-      <Col xs={12} sm={6}>
+      </div>
+      <div>
         <Field
           label={translate('Created at')}
           value={formatDateTime(order.created)}
           labelClass="w-[100px]"
         />
-      </Col>
-      <Col xs={12} sm={6}>
+      </div>
+      <div>
         <Field
           label={translate('Provider')}
           value={order.provider_name}
           labelClass="w-[100px]"
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 

@@ -1,5 +1,4 @@
 import { TrashIcon } from '@phosphor-icons/react';
-import { Col, Row } from 'react-bootstrap';
 
 import { Badge, BaseButton } from 'waldur-ui';
 
@@ -115,9 +114,9 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
         )}
       </div>
 
-      <Row>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-5">
         {/* Node Group Profile Selection */}
-        <Col sm={12} md={4}>
+        <div className="sm:col-span-2 md:col-span-1">
           <FormGroup
             label={translate('Node group profile')}
             required
@@ -139,10 +138,10 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
               simpleValue
             />
           </FormGroup>
-        </Col>
+        </div>
 
         {/* OpenStack Flavor Selection */}
-        <Col sm={6} md={4}>
+        <div>
           <FormGroup label={translate('OpenStack flavor')} required space={4}>
             <K8sFlavorSelectionTable
               offeringUuid={offeringUuid}
@@ -153,10 +152,10 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
               minimalSettings={defaultConfigs}
             />
           </FormGroup>
-        </Col>
+        </div>
 
         {/* Node Count */}
-        <Col sm={6} md={4}>
+        <div>
           <FormGroup
             label={translate('Number of nodes')}
             required
@@ -173,12 +172,12 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
               max={20}
             />
           </FormGroup>
-        </Col>
-      </Row>
+        </div>
+      </div>
 
       {/* Disk Configuration */}
-      <Row>
-        <Col sm={6} md={4}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-5">
+        <div>
           <FormGroup
             label={translate('System disk')}
             help={translate('Operating system and kubernetes components')}
@@ -192,9 +191,9 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
               readOnly
             />
           </FormGroup>
-        </Col>
+        </div>
 
-        <Col sm={6} md={4}>
+        <div>
           <FormGroup
             label={translate('Data disk')}
             help={
@@ -216,11 +215,11 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
               max={10000}
             />
           </FormGroup>
-        </Col>
+        </div>
 
         {/* Virtual SAN Disk (only for storage groups) */}
         {isStorageGroup && (
-          <Col sm={6} md={4}>
+          <div>
             <FormGroup
               label={translate('Virtual SAN Disk')}
               help={translate(
@@ -243,9 +242,9 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
                 max={50000}
               />
             </FormGroup>
-          </Col>
+          </div>
         )}
-      </Row>
+      </div>
     </div>
   );
 };

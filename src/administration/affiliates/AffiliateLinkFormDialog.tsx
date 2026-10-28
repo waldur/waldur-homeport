@@ -257,15 +257,15 @@ export const AffiliateLinkFormDialog: FC<OwnProps> = ({
                 disabled={submitting}
               />
 
-              <div className="row">
-                <div className="col-sm-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
+                <div>
                   <DateGroup
                     name="start_date"
                     label={translate('Start date')}
                     disabled={submitting}
                   />
                 </div>
-                <div className="col-sm-6">
+                <div>
                   <DateGroup
                     name="end_date"
                     label={translate('End date')}

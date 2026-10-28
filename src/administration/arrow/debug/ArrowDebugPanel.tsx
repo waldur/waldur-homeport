@@ -1,4 +1,4 @@
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { AlertItem } from 'waldur-ui';
 
@@ -51,15 +51,15 @@ export const ArrowDebugPanel = ({ settings }: ArrowDebugPanelProps) => {
             )}
           />
 
-          <Row className="g-4">
-            <Col md={6}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
               <TriggerConsumptionSyncAction />
-            </Col>
+            </div>
 
-            <Col md={6}>
+            <div>
               <CleanupConsumptionAction />
-            </Col>
-          </Row>
+            </div>
+          </div>
         </Card.Body>
       </Card>
     </div>

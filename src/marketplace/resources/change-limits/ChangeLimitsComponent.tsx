@@ -116,7 +116,7 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
                     <th>{translate('New limit')}</th>
                     <th>{translate('Difference')}</th>
                     {limitChangeData.shouldConcealPrices ? null : (
-                      <th className="col-sm-2">
+                      <th className="sm:w-2/12">
                         {translate('Price')}
                         <PriceTooltip />
                       </th>

@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import {
   checklistsAdminList,
@@ -182,29 +181,27 @@ export const FeedbackSurveyFormDialog: FC<FeedbackSurveyFormDialogProps> = ({
               required
               validate={required}
             />
-            <Row>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
               <DateTimeGroup
                 name="starts_at"
                 label={translate('Starts at')}
                 required
                 validate={required}
-                className="col-md-6"
               />
               <DateTimeGroup
                 name="ends_at"
                 label={translate('Ends at')}
                 required
                 validate={required}
-                className="col-md-6"
               />
-            </Row>
+            </div>
             <AudienceFields
               allUsersLabel={translate('Ask all users')}
               hint={translate(
                 'With both organizations and offerings selected, only users of those offerings in those organizations are asked.',
               )}
             />
-            <Row>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
               <NumberGroup
                 name="max_prompts"
                 required
@@ -214,7 +211,6 @@ export const FeedbackSurveyFormDialog: FC<FeedbackSurveyFormDialogProps> = ({
                   'How many times a user is prompted at most.',
                 )}
                 min={1}
-                className="col-md-6"
               />
               <NumberGroup
                 name="snooze_days"
@@ -225,9 +221,8 @@ export const FeedbackSurveyFormDialog: FC<FeedbackSurveyFormDialogProps> = ({
                   'Days the prompt stays hidden after it is shown or postponed.',
                 )}
                 min={1}
-                className="col-md-6"
               />
-            </Row>
+            </div>
             <BooleanGroup
               name="is_active"
               label={translate('Active')}

@@ -36,4 +36,19 @@ describe('Field', () => {
       expect(container).toBeEmptyDOMElement();
     },
   );
+
+  // Stuck value shares the row beside the label instead of wrapping under it.
+  it('keeps a stuck value beside its label', () => {
+    render(<Field label="State" value="OK" isStuck />);
+
+    expect(screen.getByText('OK')).toHaveClass('flex-1');
+    expect(screen.getByText('OK')).not.toHaveClass('w-full');
+  });
+
+  it('gives label and value their twelfths from sm up', () => {
+    render(<Field label="State" value="OK" labelCol={4} valueCol={8} />);
+
+    expect(screen.getByText('State:')).toHaveClass('w-full', 'sm:w-4/12');
+    expect(screen.getByText('OK')).toHaveClass('w-full', 'sm:w-8/12');
+  });
 });

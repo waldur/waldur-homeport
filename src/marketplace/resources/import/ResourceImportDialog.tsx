@@ -1,6 +1,5 @@
 import { debounce } from 'es-toolkit';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Form, useForm, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 
@@ -135,38 +134,36 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
           {step === 1 ? (
             // STEP 1
             <div className="px-5.5">
-              <Row className="gx-4 mb-3">
-                <Col lg={6} className="mb-3 lg:mb-0">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 mb-3">
+                <div className="mb-3 lg:mb-0">
                   <OrganizationAutocomplete
                     placeholder={translate('Select an organization')}
                     validator={required}
                   />
-                </Col>
-                <Col lg={6}>
+                </div>
+                <div>
                   <ProjectAutocomplete
                     customer_uuid={organization?.uuid}
                     isDisabled={!organization?.uuid}
                     placeholder={translate('Select a project')}
                     validator={required}
                   />
-                </Col>
-              </Row>
+                </div>
+              </div>
             </div>
           ) : step === 2 ? (
             // STEP 2
             <>
               <div className="px-5.5">
-                <Row className="mb-3">
-                  <Col xs={12}>
-                    <FilterBox
-                      id="import-resource-search-box"
-                      type="search"
-                      placeholder={translate('Search an offering')}
-                      onChange={(e) => applyQuery(e.target.value)}
-                      autoFocus
-                    />
-                  </Col>
-                </Row>
+                <div className="mb-3">
+                  <FilterBox
+                    id="import-resource-search-box"
+                    type="search"
+                    placeholder={translate('Search an offering')}
+                    onChange={(e) => applyQuery(e.target.value)}
+                    autoFocus
+                  />
+                </div>
               </div>
               <div className="border-b-[1px] border-b-secondary mx-5.5" />
               <DataLoader

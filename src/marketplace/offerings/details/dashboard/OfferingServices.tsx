@@ -61,7 +61,7 @@ export const OfferingServices: FC<OwnProps> = ({ agentIdentity }) => {
       className="card-bordered mb-4"
       headerClassName="min-h-[60px]"
     >
-      <FormTable detailsMode className="gy-5">
+      <FormTable detailsMode>
         {!services?.length ? (
           <tr>
             <td colSpan={3} className="text-quaternary text-center">

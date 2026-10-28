@@ -1,6 +1,5 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment, useCallback, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { BaseButton } from 'waldur-ui';
 
@@ -44,8 +43,8 @@ export const PortRows = ({ fields, subnets, hasCustomIp }: any) => {
       <div className="border-rows mb-3">
         {fields.map((port, index) => (
           <Fragment key={index}>
-            <Row className="g-4">
-              <Col sm>
+            <div className="flex flex-wrap gap-3">
+              <div className="w-full sm:flex-1 sm:min-w-0">
                 <SelectGroup
                   name={`${port}.subnet`}
                   label={translate('Subnet')}
@@ -60,8 +59,8 @@ export const PortRows = ({ fields, subnets, hasCustomIp }: any) => {
                     ValueContainer: SubnetValueContainer,
                   }}
                 />
-              </Col>
-              <Col xs="auto" className="self-end">
+              </div>
+              <div className="flex-none self-end">
                 <BaseButton
                   onClick={() => fields.remove(index)}
                   iconNode={<TrashIcon weight="bold" />}
@@ -69,19 +68,19 @@ export const PortRows = ({ fields, subnets, hasCustomIp }: any) => {
                   tooltip={translate('Remove')}
                   size="lg"
                 />
-              </Col>
+              </div>
               {hasCustomIp && (
-                <Col xs={12}>
-                  <Col sm={6}>
+                <div className="w-full">
+                  <div className="sm:w-6/12">
                     <CustomIpFieldFinal
                       parentName={port}
                       data={fields.value[index]}
                       hasAutoOption
                     />
-                  </Col>
-                </Col>
+                  </div>
+                </div>
               )}
-            </Row>
+            </div>
           </Fragment>
         ))}
       </div>

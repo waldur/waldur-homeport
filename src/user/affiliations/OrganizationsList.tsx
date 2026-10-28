@@ -304,7 +304,7 @@ export const OrganizationsList: FunctionComponent = () => {
       columns={columns}
       verboseName={translate('organizations')}
       title={translate('Organizations')}
-      gridSize={{ md: 6, xl: 4 }}
+      gridClassName="md:grid-cols-2 xl:grid-cols-3"
       initialModeResolver={initialModeResolver}
       gridItem={({ row }) => (
         <OrganizationCard

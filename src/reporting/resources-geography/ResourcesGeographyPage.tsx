@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -50,20 +49,18 @@ export const ResourcesGeographyPage: FC = () => {
 
       <ResourcesGeographySummaryCards summary={summary} />
 
-      <Row className="g-5 mb-4">
-        <Col xs={12} lg={6}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+        <div>
           <ResourcesByCountryChart data={data.byCountry} />
-        </Col>
-        <Col xs={12} lg={6}>
+        </div>
+        <div>
           <ResourcesByOrgGroupChart data={data.byOrgGroup} />
-        </Col>
-      </Row>
+        </div>
+      </div>
 
-      <Row>
-        <Col>
-          <ResourcesByOfferingTable />
-        </Col>
-      </Row>
+      <div>
+        <ResourcesByOfferingTable />
+      </div>
     </>
   );
 };

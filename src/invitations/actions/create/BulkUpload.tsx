@@ -6,7 +6,6 @@ import {
 } from '@phosphor-icons/react';
 import Papa from 'papaparse';
 import { FC, useCallback, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { BaseButton } from 'waldur-ui';
 
@@ -92,11 +91,11 @@ export const BulkUpload: FC<OwnProps> = (props) => {
 
   return file ? (
     <div className="border rounded px-1.5 mb-5.5">
-      <Row className="h-[60px] items-center gx-5 text-sm">
-        <Col xs="auto" className="ps-5">
+      <div className="flex flex-wrap h-[60px] items-center gap-x-4 text-sm">
+        <div className="flex-none ps-5">
           <FileIcon weight="bold" size={22} className="text-quaternary" />
-        </Col>
-        <Col>
+        </div>
+        <div className="flex-1 min-w-0">
           <div className="flex items-center self-stretch gap-1.5 font-medium">
             <span className="font-medium">{file.name}</span>
             <CheckCircleIcon size={16} weight="fill" className="text-success" />
@@ -106,8 +105,8 @@ export const BulkUpload: FC<OwnProps> = (props) => {
             {' - '}
             {translate('{percentage}% uploaded', { percentage: 100 })}
           </p>
-        </Col>
-        <Col xs="auto">
+        </div>
+        <div className="flex-none">
           <BaseButton
             tooltip={translate('Remove')}
             variant="text-danger"
@@ -115,12 +114,12 @@ export const BulkUpload: FC<OwnProps> = (props) => {
             iconNode={<TrashIcon weight="bold" />}
             size="lg"
           />
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   ) : (
-    <Row className="border-t-[1px] border-t-secondary border-b-[1px] border-b-secondary h-[60px] items-center mb-5.5 text-sm">
-      <Col>
+    <div className="flex flex-wrap gap-x-5 border-t-[1px] border-t-secondary border-b-[1px] border-b-secondary h-[60px] items-center mb-5.5 text-sm">
+      <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-secondary mb-0">
           {translate('Bulk import contacts')}
         </p>
@@ -141,8 +140,8 @@ export const BulkUpload: FC<OwnProps> = (props) => {
             formatJsxTemplate,
           )}
         </p>
-      </Col>
-      <Col xs="auto">
+      </div>
+      <div className="flex-none">
         <FileUploadField
           input={{ onChange: (file) => parseCsvFile([file]) } as any}
           accept=".csv"
@@ -151,7 +150,7 @@ export const BulkUpload: FC<OwnProps> = (props) => {
           variant="secondary"
           size="md"
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

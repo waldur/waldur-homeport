@@ -1,6 +1,14 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
-import { Table } from 'react-bootstrap';
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -23,24 +31,18 @@ const HeaderRow = (props: {
   periods?: string[];
   concealBillingInfo?: boolean;
 }) => (
-  <tr className="align-middle">
-    <th className="col-sm-1" style={{ width: '5%' }}>
-      {translate('Component name')}
-    </th>
-    <th className="col-sm-1" style={{ width: '5%' }}>
-      {translate('Quantity')}
-    </th>
-    <th className="col-sm-1" style={{ width: '5%' }}>
-      {translate('Unit')}
-    </th>
+  <TableRow>
+    <TableHead style={{ width: '5%' }}>{translate('Component name')}</TableHead>
+    <TableHead style={{ width: '5%' }}>{translate('Quantity')}</TableHead>
+    <TableHead style={{ width: '5%' }}>{translate('Unit')}</TableHead>
     {!props.concealBillingInfo &&
       props.periods.map((period, index) => (
-        <th className="col-sm-1" key={index}>
+        <TableHead className="sm:w-1/12" key={index}>
           {period}
           <PriceTooltip />
-        </th>
+        </TableHead>
       ))}
-  </tr>
+  </TableRow>
 );
 
 const FixedRows = (props: {
@@ -128,15 +130,15 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
     <div className={props.formGroupClassName}>
       <div className={props.columnClassName}>
         {hasExtraRows && (
-          <div className="table-responsive mb-3">
-            <Table className="table align-middle table-row-bordered text-sm gy-4">
-              <thead>
+          <div className="mb-3">
+            <Table density="normal">
+              <TableHeader>
                 <HeaderRow
                   periods={!activeFixedPriceProfile ? props.periods : []}
                   concealBillingInfo={props.concealBillingInfo}
                 />
-              </thead>
-              <tbody>
+              </TableHeader>
+              <TableBody>
                 {fixedRows.length > 0 && (
                   <FixedRows
                     components={fixedRows}
@@ -146,13 +148,13 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                 {!props.viewMode &&
                   otherLimitedRows.length > 0 &&
                   fixedRows.length > 0 && (
-                    <tr className="text-center">
-                      <td colSpan={3 + props.periods.length}>
+                    <TableRow className="text-center">
+                      <TableCell colSpan={3 + props.periods.length}>
                         {translate(
                           'Please enter desired values in the rows below:',
                         )}
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   )}
                 {otherLimitedRows.length > 0 && (
                   <UsageRows
@@ -162,14 +164,18 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                   />
                 )}
                 {!activeFixedPriceProfile && !props.concealBillingInfo ? (
-                  <tr>
-                    <td colSpan={3}>{translate('Total')}</td>
+                  <TableRow>
+                    <TableCell colSpan={3} className="font-bold">
+                      {translate('Total')}
+                    </TableCell>
                     {props.totalPeriods.map((price, index) => (
-                      <td key={index}>{defaultCurrency(price)}</td>
+                      <TableCell key={index} className="font-bold">
+                        {defaultCurrency(price)}
+                      </TableCell>
                     ))}
-                  </tr>
+                  </TableRow>
                 ) : null}
-              </tbody>
+              </TableBody>
             </Table>
           </div>
         )}

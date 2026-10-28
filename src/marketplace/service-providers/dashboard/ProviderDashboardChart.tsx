@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { ServiceProvider } from 'waldur-js-client';
 
 import { EChart } from '@/core/EChart';
@@ -27,11 +27,11 @@ export const ProviderDashboardChart: FunctionComponent<
     return (
       <Card className="card-bordered min-h-[225px] mb-4">
         <Card.Body>
-          <Row>
-            <Col xs={7}>
+          <div className="grid grid-cols-12 gap-x-5">
+            <div className="col-span-7">
               <EChart options={value[0].options} height="100px" />
-            </Col>
-            <Col>
+            </div>
+            <div className="col-span-5">
               <h1 className="font-medium">{value[0].chart.current}</h1>
               <h5 className="font-medium uppercase mb-4">
                 {value[0].chart.title}
@@ -41,8 +41,8 @@ export const ProviderDashboardChart: FunctionComponent<
                 showOnInfinity
                 showOnZero
               />
-            </Col>
-          </Row>
+            </div>
+          </div>
         </Card.Body>
       </Card>
     );

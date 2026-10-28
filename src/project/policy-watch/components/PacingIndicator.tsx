@@ -4,7 +4,6 @@ import {
   TrendUpIcon,
 } from '@phosphor-icons/react';
 import { CSSProperties, FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { AlertItem, Badge, BadgeVariant } from 'waldur-ui';
 
@@ -169,22 +168,22 @@ export const PacingIndicator: FC<Props> = ({
 
   return (
     <>
-      <Row className="g-4 mb-4">
-        <Col md={4}>
+      <div className="grid grid-cols-1 gap-3 mb-4 md:grid-cols-3">
+        <div>
           <StatsCard
             label={translate('Drawn so far')}
             value={defaultCurrency(creditableCost)}
             footer={shareOfExpected(usageFraction)}
           />
-        </Col>
-        <Col md={4}>
+        </div>
+        <div>
           <StatsCard
             label={translate('Projected month-end')}
             value={defaultCurrency(projected)}
             footer={shareOfExpected(projectedFraction)}
           />
-        </Col>
-        <Col md={4}>
+        </div>
+        <div>
           <StatsCard
             label={translate('Last month drew')}
             value={defaultCurrency(creditTerms?.consumptionLastMonth || 0)}
@@ -196,8 +195,8 @@ export const PacingIndicator: FC<Props> = ({
                 : undefined
             }
           />
-        </Col>
-      </Row>
+        </div>
+      </div>
 
       <div className="flex flex-wrap justify-between items-center gap-1.5 mb-1.5">
         <div className="flex items-center gap-1.5">

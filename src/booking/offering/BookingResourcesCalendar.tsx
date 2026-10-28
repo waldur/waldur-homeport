@@ -1,7 +1,6 @@
 import { CalendarIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { FunctionComponent, useMemo, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { Calendar, useCalendarLocale } from 'waldur-ui';
 
@@ -65,8 +64,8 @@ export const BookingResourcesCalendar: FunctionComponent<
   };
 
   return (
-    <Row className="booking-resource-items-calendar mb-8">
-      <Col md="auto">
+    <div className="booking-resource-items-calendar flex flex-wrap gap-x-5 mb-8">
+      <div className="w-full md:w-auto md:flex-none">
         <Calendar
           mode="single"
           required
@@ -78,9 +77,9 @@ export const BookingResourcesCalendar: FunctionComponent<
           locale={locale}
           disabled={isUnbooked}
         />
-      </Col>
+      </div>
       {dates && dates[0] ? (
-        <Col className="p-3 flex flex-col">
+        <div className="w-full md:flex-1 md:min-w-0 p-3 flex flex-col">
           <h2 className="font-medium">
             {parseDate(dates[0]).toFormat('dd LLLL yyyy')}
           </h2>
@@ -108,9 +107,9 @@ export const BookingResourcesCalendar: FunctionComponent<
               ))}
             </div>
           </div>
-        </Col>
+        </div>
       ) : (
-        <Col className="p-3 text-center">
+        <div className="w-full md:flex-1 md:min-w-0 p-3 text-center">
           <div className="pt-8 pb-4">
             <CalendarIcon className="display-5" weight="bold" />
           </div>
@@ -119,8 +118,8 @@ export const BookingResourcesCalendar: FunctionComponent<
               {translate('Select a date')}
             </h3>
           </div>
-        </Col>
+        </div>
       )}
-    </Row>
+    </div>
   );
 };

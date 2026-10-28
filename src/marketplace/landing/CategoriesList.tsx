@@ -1,6 +1,6 @@
 import { CaretCircleDownIcon, CaretCircleUpIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FC, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { BaseButton } from 'waldur-ui';
 
@@ -45,16 +45,22 @@ export const CategoriesList: FC = () => {
 
   return (
     <div className={!showMoreButton ? 'my-8' : 'mt-8'}>
-      <Row className="justify-center g-5">
+      <div className="flex flex-wrap justify-center gap-4">
         {items.map((item, index) => (
-          <Col key={index} xl={showAll ? 2 : true} lg={4} md={4} sm={6}>
+          <div
+            key={index}
+            className={classNames(
+              'w-full sm:w-[calc(50%-8px)] md:w-[calc((100%-32px)/3)]',
+              showAll ? 'xl:w-[calc((100%-80px)/6)]' : 'xl:flex-1',
+            )}
+          >
             <CategoryCard
               item={item}
               as={item.categories ? CategoryGroupLink : CategoryLink}
             />
-          </Col>
+          </div>
         ))}
-      </Row>
+      </div>
       {showMoreButton ? (
         <div className="text-center my-2.5">
           <BaseButton

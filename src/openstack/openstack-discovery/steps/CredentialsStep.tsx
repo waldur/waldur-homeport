@@ -119,8 +119,8 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
           required
         />
 
-        <div className="row">
-          <div className="col-sm-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
+          <div>
             <StringGroup
               name="user_domain_name"
               placeholder="Default"
@@ -128,7 +128,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
               description={translate('Default: "Default"')}
             />
           </div>
-          <div className="col-sm-6">
+          <div>
             <StringGroup
               name="project_domain_name"
               placeholder="Default"

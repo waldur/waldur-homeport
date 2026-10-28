@@ -1,6 +1,5 @@
 import { PaperPlaneTiltIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { Customer, Offering, Project } from 'waldur-js-client';
 
@@ -193,20 +192,20 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
                         'The resource is created in the project you pick.',
                       )}
                     </div>
-                    <Row className="items-end">
-                      <Col sm={6}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 items-end">
+                      <div>
                         <CustomerField
                           organizationGroups={offering.organization_groups}
                           offering={offering}
                         />
-                      </Col>
-                      <Col sm={6}>
+                      </div>
+                      <div>
                         <ProjectField
                           offering={offering}
                           setCurrentProjectOnChange={false}
                         />
-                      </Col>
-                    </Row>
+                      </div>
+                    </div>
                   </div>
                 ) : null}
 

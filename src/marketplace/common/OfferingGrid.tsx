@@ -1,11 +1,20 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Offering } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 
 import { OfferingCard } from './OfferingCard';
+
+// Literal class names so Tailwind generates them: `width` is the old Bootstrap
+// column span (out of 12) from `xl` up.
+const XL_COLUMNS: Record<number, string> = {
+  2: 'xl:grid-cols-6',
+  3: 'xl:grid-cols-4',
+  4: 'xl:grid-cols-3',
+  6: 'xl:grid-cols-2',
+  12: 'xl:grid-cols-1',
+};
 
 interface OfferingGridProps {
   width?: number;
@@ -37,12 +46,14 @@ export const OfferingGrid: FC<OfferingGridProps> = ({
   }
 
   return (
-    <Row>
+    <div
+      className={`grid grid-cols-1 lg:grid-cols-2 ${XL_COLUMNS[width] ?? ''} gap-x-5`}
+    >
       {props.items.map((offering) => (
-        <Col key={offering.uuid} lg={6} xl={width} className="mb-2.5">
+        <div key={offering.uuid} className="mb-2.5">
           <OfferingCard offering={offering} />
-        </Col>
+        </div>
       ))}
-    </Row>
+    </div>
   );
 };

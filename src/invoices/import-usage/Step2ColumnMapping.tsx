@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { Col, Row, Table as BsTable } from 'react-bootstrap';
+import { Table as BsTable } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
@@ -51,8 +51,8 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
           )}
         </p>
 
-        <Row className="mb-3">
-          <Col md={6} className="mb-2.5">
+        <div className="grid grid-cols-1 gap-x-5 mb-3 md:grid-cols-2">
+          <div className="mb-2.5">
             <SelectGroup
               name="customerColumn"
               label={translate('Customer name')}
@@ -62,8 +62,8 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               placeholder={translate('Select column')}
               isClearable={false}
             />
-          </Col>
-          <Col md={6} className="mb-2.5">
+          </div>
+          <div className="mb-2.5">
             <SelectGroup
               name="itemNameColumn"
               label={translate('Item name')}
@@ -73,8 +73,8 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               placeholder={translate('Select column')}
               isClearable={false}
             />
-          </Col>
-          <Col md={6} className="mb-2.5">
+          </div>
+          <div className="mb-2.5">
             <SelectGroup
               name="amountColumn"
               label={translate('Amount')}
@@ -84,8 +84,8 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               placeholder={translate('Select column')}
               isClearable={false}
             />
-          </Col>
-          <Col md={6} className="mb-2.5">
+          </div>
+          <div className="mb-2.5">
             <SelectGroup
               name="articleCodeColumn"
               label={translate('Article code')}
@@ -93,8 +93,8 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               placeholder={translate('Select column')}
               isClearable
             />
-          </Col>
-          <Col md={6} className="mb-2.5">
+          </div>
+          <div className="mb-2.5">
             <SelectGroup
               name="serviceProviderColumn"
               label={translate('Service provider')}
@@ -102,8 +102,8 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               placeholder={translate('Select column')}
               isClearable
             />
-          </Col>
-          <Col md={6} className="mb-2.5">
+          </div>
+          <div className="mb-2.5">
             <SelectGroup
               name="offeringColumn"
               label={translate('Offering')}
@@ -111,8 +111,8 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               placeholder={translate('Select column')}
               isClearable
             />
-          </Col>
-          <Col md={6} className="mb-2.5">
+          </div>
+          <div className="mb-2.5">
             <SelectGroup
               name="planColumn"
               label={translate('Plan')}
@@ -120,8 +120,8 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
               placeholder={translate('Select column')}
               isClearable
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
 
         {previewRows.length > 0 && (
           <>

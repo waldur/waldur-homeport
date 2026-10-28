@@ -1,16 +1,15 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { OfferingLogo } from '@/marketplace/common/OfferingLogo';
 
 export const TemplateHeader: FunctionComponent<any> = (props) => (
-  <Row>
-    <Col md={3}>
+  <div className="grid grid-cols-1 md:grid-cols-12 gap-x-5">
+    <div className="md:col-span-3">
       <OfferingLogo src={props.template.icon} />
-    </Col>
-    <Col md={9}>
+    </div>
+    <div className="md:col-span-9">
       <SafeMarkdown text={props.version.app_readme} />
-    </Col>
-  </Row>
+    </div>
+  </div>
 );

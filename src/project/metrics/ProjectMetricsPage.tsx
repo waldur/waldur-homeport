@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { marketplaceProjectMetricsList } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -37,12 +36,12 @@ export const ProjectMetricsPage: FC = () => {
     );
   }
   return (
-    <Row className="g-6">
+    <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
       {data.map((item) => (
-        <Col key={item.offering_metric.uuid} xs={12} lg={6}>
+        <div key={item.offering_metric.uuid}>
           <MetricCard item={item} project={project} refetch={refetch} />
-        </Col>
+        </div>
       ))}
-    </Row>
+    </div>
   );
 };

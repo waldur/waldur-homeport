@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsList,
@@ -160,14 +159,14 @@ const ProviderOfferingsSummary: FC<{ providerUuid: string }> = ({
         ]}
       />
 
-      <Row className="g-4 mb-5">
-        <Col xs={12} lg={6}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-5">
+        <div>
           <TopOfferingsByResourcesChart offerings={offerings} />
-        </Col>
-        <Col xs={12} lg={6}>
+        </div>
+        <div>
           <TopOfferingsByRevenueChart offerings={offerings} />
-        </Col>
-      </Row>
+        </div>
+      </div>
     </>
   );
 };

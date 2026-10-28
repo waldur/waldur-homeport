@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import {
   callReviewerPoolsList,
   proposalProposalsList,
@@ -68,35 +67,35 @@ export const CallDashboard: FC<CallDashboardProps> = ({ call }) => {
 
   return (
     <>
-      <Row className="mb-5">
-        <Col md={6} lg={3}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 mb-5">
+        <div>
           <StatisticsCard
             title={translate('Rounds')}
             value={call.rounds?.length || 0}
           />
-        </Col>
-        <Col md={6} lg={3}>
+        </div>
+        <div>
           <StatisticsCard
             title={translate('Offerings')}
             value={call.offerings?.length || 0}
           />
-        </Col>
-        <Col md={6} lg={3}>
+        </div>
+        <div>
           <StatisticsCard
             title={translate('Reviewer pool')}
             value={reviewerPoolCount}
           />
-        </Col>
-        <Col md={6} lg={3}>
+        </div>
+        <div>
           <StatisticsCard
             title={translate('Proposals')}
             value={proposalsCount}
           />
-        </Col>
-        <Col md={6} lg={3}>
+        </div>
+        <div>
           <StatisticsCard title={translate('Reviews')} value={reviewsCount} />
-        </Col>
-      </Row>
+        </div>
+      </div>
       <WorkflowStepsSection call={call} viewOnly />
     </>
   );

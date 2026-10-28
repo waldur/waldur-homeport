@@ -147,7 +147,7 @@ const ALERT_VARIANT: Record<
 /**
  * The other real `gridItem` shape besides `ModelCard1` — `AlertItem`, used
  * by `PendingActionAlertItem.tsx` for the dashboard's full-width, no-gutter
- * grid (`gridSize={{ xs: 12 }} gridSpace={0}`, see `UserPendingActionsList`
+ * grid (`gridClassName="gap-0"`, see `UserPendingActionsList`
  * — the `GridModeCompact` story below). Simplified from that real
  * component: no `ActionsDropdown`/`usePendingActionActions`, just a plain
  * button, since those pull in the same router/action-menu machinery this

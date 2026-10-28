@@ -1,6 +1,6 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 
@@ -34,19 +34,19 @@ export const TableGrowthOverview: FC<TableGrowthOverviewProps> = ({
   alerts,
 }) => {
   return (
-    <Row className="mb-5">
-      <Col md={6} lg={3}>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 mb-5">
+      <div>
         <StatCard value={data.date} label={translate('Date')} />
-      </Col>
+      </div>
 
-      <Col md={6} lg={3}>
+      <div>
         <StatCard
           value={data.tables.length}
           label={translate('Tables monitored')}
         />
-      </Col>
+      </div>
 
-      <Col md={6} lg={3}>
+      <div>
         <StatCard
           value={alerts.length}
           label={translate('Active alerts')}
@@ -61,14 +61,14 @@ export const TableGrowthOverview: FC<TableGrowthOverviewProps> = ({
             ) : null
           }
         />
-      </Col>
+      </div>
 
-      <Col md={6} lg={3}>
+      <div>
         <StatCard
           value={`${data.weekly_threshold_percent}% / ${data.monthly_threshold_percent}%`}
           label={translate('Thresholds (weekly / monthly)')}
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };

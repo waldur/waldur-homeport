@@ -1,6 +1,5 @@
 import { EChartsOption } from 'echarts';
 import { useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { ENV } from '@/core/config';
 import { EChart } from '@/core/EChart';
@@ -122,38 +121,34 @@ export const QuotasTable = ({ resource }: { resource: Resource }) => {
   }, [resource]);
 
   return resource.quotas.length === 0 ? (
-    <div className="row text-center">
-      {translate('You have no quotas yet.')}
-    </div>
+    <div className="text-center">{translate('You have no quotas yet.')}</div>
   ) : (
     <div>
       {quotaCategories.categories.map((group) => (
         <div className="my-5" key={group.key}>
           <h5 className="font-medium mb-5">{group.label}</h5>
-          <Row>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5">
             {group.quotas.map((quota) => (
-              <Col xs={6} md={4} lg={3} key={quota.name}>
-                <ResourceQuotaItem quota={quota} />
-              </Col>
+              <ResourceQuotaItem key={quota.name} quota={quota} />
             ))}
-          </Row>
+          </div>
         </div>
       ))}
       {quotaCategories.additional.length > 0 && (
         <div>
           <h5 className="font-medium mb-5">{translate('Additional quotas')}</h5>
           {quotaCategories.additional.map((quota) => (
-            <Row key={quota.name} className="mb-1.5">
-              <Col sm={4} xs={6}>
+            <div key={quota.name} className="grid grid-cols-12 gap-x-5 mb-1.5">
+              <div className="col-span-6 sm:col-span-4">
                 {formatQuotaName(quota.name)}:
-              </Col>
-              <Col sm={8} xs={6}>
+              </div>
+              <div className="col-span-6 sm:col-span-8">
                 {translate('{usage} of {limit}', {
                   usage: formatQuotaValue(quota.usage, quota.name),
                   limit: formatQuotaValue(quota.limit, quota.name),
                 })}
-              </Col>
-            </Row>
+              </div>
+            </div>
           ))}
         </div>
       )}

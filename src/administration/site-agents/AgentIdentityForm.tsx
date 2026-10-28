@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import {
   AgentIdentity,
@@ -137,8 +136,8 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
               </>
             }
           >
-            <Row>
-              <Col md={6}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+              <div>
                 <StringGroup
                   name="name"
                   label={translate('Name')}
@@ -146,15 +145,15 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
                   validate={required}
                   placeholder={translate('Enter agent name')}
                 />
-              </Col>
-              <Col md={6}>
+              </div>
+              <div>
                 <StringGroup
                   name="version"
                   placeholder={translate('e.g., 1.0.0')}
                   label={translate('Version')}
                 />
-              </Col>
-            </Row>
+              </div>
+            </div>
 
             <AsyncSelectGroup
               name="offering"

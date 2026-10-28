@@ -20,7 +20,7 @@ import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { DateTime } from 'luxon';
 import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import type { ProjectAccountingSummary } from 'waldur-js-client';
 import {
   openportalAccountingSummaryList,
@@ -504,8 +504,8 @@ const ProjectAutocompleteDialog: FC<{
         </>
       }
     >
-      <Row className="g-2 mb-2.5">
-        <Col xs={12} md={4}>
+      <div className="grid grid-cols-12 gap-1.5 mb-2.5">
+        <div className="col-span-12 md:col-span-4">
           <FormField>
             <FormLabel className="small mb-1">{translate('Search')}</FormLabel>
             <BaseInputField
@@ -518,8 +518,8 @@ const ProjectAutocompleteDialog: FC<{
               }
             />
           </FormField>
-        </Col>
-        <Col xs={6} md={4}>
+        </div>
+        <div className="col-span-6 md:col-span-4">
           <FormField>
             <FormLabel className="small mb-1">
               {translate('Start date — after')}
@@ -530,8 +530,8 @@ const ProjectAutocompleteDialog: FC<{
               onChange={(date) => setStartAfter(toIsoDate(date))}
             />
           </FormField>
-        </Col>
-        <Col xs={6} md={4}>
+        </div>
+        <div className="col-span-6 md:col-span-4">
           <FormField>
             <FormLabel className="small mb-1">
               {translate('End date — before')}
@@ -542,8 +542,8 @@ const ProjectAutocompleteDialog: FC<{
               onChange={(date) => setEndBefore(toIsoDate(date))}
             />
           </FormField>
-        </Col>
-      </Row>
+        </div>
+      </div>
 
       <div className="flex items-center gap-1.5 mb-1.5">
         <Checkbox
@@ -1150,8 +1150,8 @@ export const OrganisationAllocationTab: FC = () => {
             </p>
 
             {/* Project pre-filters */}
-            <Row className="g-2 mb-2.5">
-              <Col xs={12} md={4}>
+            <div className="grid grid-cols-1 gap-1.5 mb-2.5 md:grid-cols-3">
+              <div>
                 <FormField>
                   <FormLabel className="small mb-1">
                     {translate('Project search')}
@@ -1167,8 +1167,8 @@ export const OrganisationAllocationTab: FC = () => {
                     }
                   />
                 </FormField>
-              </Col>
-              <Col xs={12} md={4}>
+              </div>
+              <div>
                 <FormField>
                   <FormLabel className="small mb-1">
                     {translate('Project period')}
@@ -1189,8 +1189,8 @@ export const OrganisationAllocationTab: FC = () => {
                     clearable
                   />
                 </FormField>
-              </Col>
-            </Row>
+              </div>
+            </div>
 
             <BaseButton
               variant="primary"
@@ -1515,8 +1515,8 @@ export const OrganisationAllocationTab: FC = () => {
             {/* ── Threshold controls ──────────────────────────────────── */}
             {showThresholds && (
               <div className="p-2.5 mb-2.5 bg-tertiary dark:bg-quaternary rounded small">
-                <Row className="g-2">
-                  <Col xs={12} className="flex items-center gap-1.5 flex-wrap">
+                <div className="grid grid-cols-1 gap-1.5">
+                  <div className="flex items-center gap-1.5 flex-wrap">
                     <span style={{ minWidth: 120 }}>
                       {translate('Slow start')}:
                     </span>
@@ -1548,8 +1548,8 @@ export const OrganisationAllocationTab: FC = () => {
                       },
                       formatJsxTemplate,
                     )}
-                  </Col>
-                  <Col xs={12} className="flex items-center gap-1.5 flex-wrap">
+                  </div>
+                  <div className="flex items-center gap-1.5 flex-wrap">
                     <span style={{ minWidth: 120 }}>
                       {translate('Inactive')}:
                     </span>
@@ -1595,8 +1595,8 @@ export const OrganisationAllocationTab: FC = () => {
                       },
                       formatJsxTemplate,
                     )}
-                  </Col>
-                  <Col xs={12} className="flex items-center gap-1.5 flex-wrap">
+                  </div>
+                  <div className="flex items-center gap-1.5 flex-wrap">
                     <span style={{ minWidth: 120 }}>
                       {translate('Nearly depleted')}:
                     </span>
@@ -1634,8 +1634,8 @@ export const OrganisationAllocationTab: FC = () => {
                       },
                       formatJsxTemplate,
                     )}
-                  </Col>
-                  <Col xs={12} className="flex items-center gap-1.5 flex-wrap">
+                  </div>
+                  <div className="flex items-center gap-1.5 flex-wrap">
                     <span style={{ minWidth: 120 }}>
                       {translate('Off track')}:
                     </span>
@@ -1667,8 +1667,8 @@ export const OrganisationAllocationTab: FC = () => {
                       },
                       formatJsxTemplate,
                     )}
-                  </Col>
-                </Row>
+                  </div>
+                </div>
               </div>
             )}
 

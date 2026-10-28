@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { overrideSettings } from 'waldur-js-client';
 
 import { Switch } from 'waldur-ui';
@@ -120,9 +119,9 @@ export const AdministrationLanguages: FunctionComponent = () => {
         </div>
       }
     >
-      <Row className="-mb-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-5 -mb-1">
         {filteredLanguages.map((language: { code: string; label: string }) => (
-          <Col key={language.code} sm={6} md={4}>
+          <div key={language.code}>
             <div className="border-b-[1px] border-b-secondary py-4">
               {canEdit ? (
                 <Switch
@@ -158,9 +157,9 @@ export const AdministrationLanguages: FunctionComponent = () => {
                 </div>
               )}
             </div>
-          </Col>
+          </div>
         ))}
-      </Row>
+      </div>
     </Panel>
   );
 };

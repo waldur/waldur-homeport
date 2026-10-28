@@ -14,24 +14,22 @@ export const TeamWorkload: FC<{ helpdeskUuid: string }> = ({
   const { data: workload = [] } = useTeamWorkload(helpdeskUuid);
   if (!workload.length) return null;
   return (
-    <div className="row g-3 mb-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 mb-3">
       {workload.map((member) => (
-        <div className="col-sm-6 col-lg-3" key={member.uuid}>
-          <div className="card card-bordered h-full">
-            <div className="card-body">
-              <div className="flex justify-between items-center mb-1.5">
-                <strong className="truncate">{member.user_full_name}</strong>
-                {!member.has_capacity && (
-                  <Badge variant="danger" shape="pill" tone="outline">
-                    {translate('At capacity')}
-                  </Badge>
-                )}
-              </div>
-              <CapacityIndicator
-                open={member.open_ticket_count}
-                max={member.max_open_tickets}
-              />
+        <div className="card card-bordered h-full" key={member.uuid}>
+          <div className="card-body">
+            <div className="flex justify-between items-center mb-1.5">
+              <strong className="truncate">{member.user_full_name}</strong>
+              {!member.has_capacity && (
+                <Badge variant="danger" shape="pill" tone="outline">
+                  {translate('At capacity')}
+                </Badge>
+              )}
             </div>
+            <CapacityIndicator
+              open={member.open_ticket_count}
+              max={member.max_open_tickets}
+            />
           </div>
         </div>
       ))}

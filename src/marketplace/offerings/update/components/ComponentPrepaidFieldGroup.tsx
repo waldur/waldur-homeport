@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import {
   BillingTypeEnum,
@@ -31,14 +30,14 @@ export const ComponentPrepaidFieldGroup: FC<{
 
   return billingType == 'one' ? (
     <ComponentAccountingTypeWrapper>
-      <Row className="g-5 mb-4">
-        <Col xs>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+        <div>
           <ComponentMinValueField />
-        </Col>
-        <Col xs>
+        </div>
+        <div>
           <ComponentMaxValueField />
-        </Col>
-      </Row>
+        </div>
+      </div>
       <BooleanGroup
         name="is_prepaid"
         label={translate('Pre-paid component')}
@@ -47,52 +46,52 @@ export const ComponentPrepaidFieldGroup: FC<{
       />
       {isPrepaid ? (
         <>
-          <Row className="g-5 mb-4 items-end">
-            <Col xs>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 items-end">
+            <div>
               <NumberGroup
                 name="min_prepaid_duration"
                 label={translate('Min duration')}
                 spaceless
               />
-            </Col>
-            <Col xs>
+            </div>
+            <div>
               <NumberGroup
                 name="max_prepaid_duration"
                 label={translate('Max duration')}
                 spaceless
               />
-            </Col>
-            <Col xs>
+            </div>
+            <div>
               <NumberGroup
                 name="prepaid_duration_step"
                 label={translate('Duration step')}
                 spaceless
               />
-            </Col>
-          </Row>
-          <Row className="g-5 mb-4 items-end">
-            <Col xs>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 items-end">
+            <div>
               <NumberGroup
                 name="min_renewal_duration"
                 label={translate('Min renewal duration')}
                 spaceless
               />
-            </Col>
-            <Col xs>
+            </div>
+            <div>
               <NumberGroup
                 name="max_renewal_duration"
                 label={translate('Max renewal duration')}
                 spaceless
               />
-            </Col>
-            <Col xs>
+            </div>
+            <div>
               <NumberGroup
                 name="renewal_duration_step"
                 label={translate('Renewal duration step')}
                 spaceless
               />
-            </Col>
-          </Row>
+            </div>
+          </div>
           <SelectGroup
             name="overage_component"
             options={props.offering.components.filter(

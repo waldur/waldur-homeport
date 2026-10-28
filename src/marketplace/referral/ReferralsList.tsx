@@ -23,7 +23,7 @@ export const ReferralsList: FunctionComponent<{ offering }> = ({
   const columns = [
     {
       title: translate('Title'),
-      className: 'col-sm-6',
+      className: 'sm:w-6/12',
       render: ({ row }) => (
         <>
           <ReferralTypeIcon resourceType={row.resource_type} />

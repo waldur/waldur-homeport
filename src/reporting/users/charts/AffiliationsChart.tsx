@@ -1,5 +1,5 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import {
   marketplaceStatsUserAffiliationDetailsList,
   UserAffiliationCount,
@@ -259,8 +259,8 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
           <Card.Title>{translate('Filters')}</Card.Title>
         </Card.Header>
         <Card.Body>
-          <Row className="g-3">
-            <Col xs={12} sm={6} md={3}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
+            <div>
               <Select
                 placeholder={translate('View mode')}
                 value={viewModeOptions.find((o) => o.value === viewMode)}
@@ -270,8 +270,8 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
                 options={viewModeOptions}
                 isClearable={false}
               />
-            </Col>
-            <Col xs={12} sm={6} md={3}>
+            </div>
+            <div>
               <Select
                 placeholder={translate('All countries')}
                 value={countryOptions.find((o) => o.value === countryFilter)}
@@ -279,8 +279,8 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
                 options={countryOptions}
                 isClearable
               />
-            </Col>
-            <Col xs={12} sm={6} md={3}>
+            </div>
+            <div>
               <Select
                 placeholder={translate('All categories')}
                 value={categoryOptions.find((o) => o.value === categoryFilter)}
@@ -292,8 +292,8 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
                 options={categoryOptions}
                 isClearable
               />
-            </Col>
-            <Col xs={12} sm={6} md={3}>
+            </div>
+            <div>
               <Select
                 placeholder={translate('All organizations')}
                 value={orgOptions.find((o) => o.value === orgFilter)}
@@ -301,8 +301,8 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
                 options={orgOptions}
                 isClearable
               />
-            </Col>
-          </Row>
+            </div>
+          </div>
         </Card.Body>
       </Card>
 
@@ -318,57 +318,53 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
         ]}
       />
 
-      <Row className="mb-2.5">
-        <Col>
-          <ChartCard
-            title={
-              viewMode === 'organization'
-                ? translate('Users by organization')
-                : viewMode === 'country'
-                  ? translate('Users by country')
-                  : translate('Users by category')
-            }
-            getExportData={getExportData}
-            isEmpty={aggregatedData.length === 0}
-          >
-            {(ref) => (
-              <BarChart
-                ref={ref}
-                data={chartData}
-                horizontal={true}
-                height={`${chartHeight}px`}
-                showValueLabel={true}
-                isSorted={false}
-                labelFormatter={(params: any) => {
-                  const percent =
-                    total > 0 ? ((params.value / total) * 100).toFixed(1) : 0;
-                  return `${percent}%`;
-                }}
-                tooltipFormatter={(params: any) => {
-                  const param = params[0];
-                  const percent =
-                    total > 0 ? ((param.value / total) * 100).toFixed(1) : 0;
-                  return `${param.name}: ${param.value.toLocaleString()} (${percent}%)`;
-                }}
-              />
-            )}
-          </ChartCard>
-        </Col>
-      </Row>
+      <div className="mb-2.5">
+        <ChartCard
+          title={
+            viewMode === 'organization'
+              ? translate('Users by organization')
+              : viewMode === 'country'
+                ? translate('Users by country')
+                : translate('Users by category')
+          }
+          getExportData={getExportData}
+          isEmpty={aggregatedData.length === 0}
+        >
+          {(ref) => (
+            <BarChart
+              ref={ref}
+              data={chartData}
+              horizontal={true}
+              height={`${chartHeight}px`}
+              showValueLabel={true}
+              isSorted={false}
+              labelFormatter={(params: any) => {
+                const percent =
+                  total > 0 ? ((params.value / total) * 100).toFixed(1) : 0;
+                return `${percent}%`;
+              }}
+              tooltipFormatter={(params: any) => {
+                const param = params[0];
+                const percent =
+                  total > 0 ? ((param.value / total) * 100).toFixed(1) : 0;
+                return `${param.name}: ${param.value.toLocaleString()} (${percent}%)`;
+              }}
+            />
+          )}
+        </ChartCard>
+      </div>
 
-      <Row>
-        <Col>
-          <Table<UserAffiliationDetail>
-            {...detailsTableProps}
-            columns={detailsTableColumns}
-            title={translate('Affiliation details')}
-            verboseName={translate('affiliations')}
-            hasQuery={false}
-            showPageSizeSelector
-            enableExport
-          />
-        </Col>
-      </Row>
+      <div>
+        <Table<UserAffiliationDetail>
+          {...detailsTableProps}
+          columns={detailsTableColumns}
+          title={translate('Affiliation details')}
+          verboseName={translate('affiliations')}
+          hasQuery={false}
+          showPageSizeSelector
+          enableExport
+        />
+      </div>
     </>
   );
 };

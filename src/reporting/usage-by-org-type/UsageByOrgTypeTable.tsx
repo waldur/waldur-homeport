@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 import { ChartCard } from '@/core/ChartCard';
 import { translate } from '@/i18n';
@@ -56,19 +55,17 @@ export const UsageByOrgTypeTable: FC<Props> = ({ data, componentTypes }) => {
   }, [componentTypes]);
 
   return (
-    <Row>
-      <Col>
-        <ChartCard
-          title={translate('Usage by organization type')}
-          getExportData={() => getSimpleExportData(columns, data)}
-          showPNG={false}
-          isEmpty={!data || data.length === 0}
-        >
-          {() => (
-            <SimpleTable<OrgTypeAggregation> columns={columns} rows={data} />
-          )}
-        </ChartCard>
-      </Col>
-    </Row>
+    <div>
+      <ChartCard
+        title={translate('Usage by organization type')}
+        getExportData={() => getSimpleExportData(columns, data)}
+        showPNG={false}
+        isEmpty={!data || data.length === 0}
+      >
+        {() => (
+          <SimpleTable<OrgTypeAggregation> columns={columns} rows={data} />
+        )}
+      </ChartCard>
+    </div>
   );
 };

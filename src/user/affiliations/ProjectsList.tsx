@@ -333,7 +333,7 @@ export const ProjectsList = () => {
       formId={FILTER_FORM_ID}
       verboseName={translate('projects')}
       title={translate('Projects')}
-      gridSize={{ md: 6, xl: 4 }}
+      gridClassName="md:grid-cols-2 xl:grid-cols-3"
       initialModeResolver={initialModeResolver}
       gridFixedWidth={true}
       gridItem={({ row }) => (

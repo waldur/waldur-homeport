@@ -266,8 +266,8 @@ export const SramRuleFormDialog: FC<SramRuleFormDialogProps> = ({
             <GroupPatternsField />
 
             <h6 className="mt-5 mb-3">{translate('Which projects')}</h6>
-            <div className="row">
-              <div className="col-sm-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
+              <div>
                 <SelectGroup
                   name="project_field"
                   label={translate('Project field')}
@@ -278,7 +278,7 @@ export const SramRuleFormDialog: FC<SramRuleFormDialogProps> = ({
                   validate={required}
                 />
               </div>
-              <div className="col-sm-6">
+              <div>
                 <SelectGroup
                   name="project_match"
                   label={translate('Match')}

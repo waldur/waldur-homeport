@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { NestedQoS } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -13,8 +12,8 @@ interface OwnProps {
 
 export const OfferingQoSExpandableRow: FC<OwnProps> = ({ row }) => (
   <ExpandableContainer asTable>
-    <Row>
-      <Col lg={6}>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
+      <div>
         <Field
           label={translate('Description')}
           value={renderFieldOrDash(row.description)}
@@ -40,8 +39,8 @@ export const OfferingQoSExpandableRow: FC<OwnProps> = ({ row }) => (
           value={renderFieldOrDash(row.priority)}
           space={1.5}
         />
-      </Col>
-      <Col lg={6}>
+      </div>
+      <div>
         <Field
           label={translate('Aggregate TRES (GrpTRES)')}
           value={renderFieldOrDash(row.grp_tres)}
@@ -72,7 +71,7 @@ export const OfferingQoSExpandableRow: FC<OwnProps> = ({ row }) => (
           value={renderFieldOrDash(row.flags)}
           space={1.5}
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   </ExpandableContainer>
 );

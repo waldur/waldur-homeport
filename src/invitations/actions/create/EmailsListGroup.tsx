@@ -272,7 +272,7 @@ export const EmailsListGroup = ({
       <div id="emails-list-group">
         {fields.length > 0 && (
           <FormField>
-            <table className="table h-auto table-fixed align-top px-0 gy-2 mb-0">
+            <table className="table h-auto table-fixed align-top px-0 table-row-py-1.5 mb-0">
               <thead>
                 <tr className="text-sm font-medium">
                   {/* Fixed-layout table: one column without a width takes

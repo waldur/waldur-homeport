@@ -173,7 +173,7 @@ const IdentityManagerSettings: FC<{ user: User }> = ({ user }) => {
   };
 
   return (
-    <FormTable detailsMode className="gy-5">
+    <FormTable detailsMode>
       <FormTable.Item
         label={translate('Identity manager')}
         value={
@@ -241,7 +241,7 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
       </div>
 
       {/* Section A: Status Summary */}
-      <FormTable hideActions detailsMode className="gy-5">
+      <FormTable hideActions detailsMode>
         <FormTable.Item
           label={translate('Federation status')}
           value={

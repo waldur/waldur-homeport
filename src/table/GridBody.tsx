@@ -1,33 +1,18 @@
 import { FC, createElement } from 'react';
 
-import { GridSize, TableProps } from './types';
+import { cn } from 'waldur-ui';
 
-// Largest first, the order react-bootstrap's Col wrote them in.
-const BREAKPOINTS = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'] as const;
-
-/** The Bootstrap grid column classes for `size`: `col-md-6 col-12`, or `col`. */
-const gridColumnClassName = (size: GridSize = {}) => {
-  const classes = BREAKPOINTS.flatMap((breakpoint) => {
-    const span = size[breakpoint];
-    if (!span) {
-      return [];
-    }
-    const infix = breakpoint === 'xs' ? '' : `-${breakpoint}`;
-    return [span === true ? `col${infix}` : `col${infix}-${span}`];
-  });
-  return classes.length ? classes.join(' ') : 'col';
-};
+import { TableProps } from './types';
 
 type GridBodyProps = Pick<
   TableProps,
-  'rows' | 'gridItem' | 'gridSize' | 'gridSpace' | 'gridFixedWidth'
+  'rows' | 'gridItem' | 'gridClassName' | 'gridFixedWidth'
 >;
 
 export const GridBody: FC<GridBodyProps> = ({
   rows,
   gridItem,
-  gridSize,
-  gridSpace = 6,
+  gridClassName,
   gridFixedWidth,
 }) => {
   // If fixed width is enabled, use CSS Grid layout with fixed card width
@@ -43,12 +28,12 @@ export const GridBody: FC<GridBodyProps> = ({
     );
   }
 
-  // Default responsive Bootstrap grid
-  const columnClassName = gridColumnClassName(gridSize);
+  // Default responsive grid: one column, widened by gridClassName
+  // (e.g. "md:grid-cols-2 xl:grid-cols-3"), which may also override the gap.
   return (
-    <div className={`g-${gridSpace} row`}>
+    <div className={cn('grid grid-cols-1 gap-5', gridClassName)}>
       {rows.map((row, rowIndex) => (
-        <div key={rowIndex} className={columnClassName}>
+        <div key={rowIndex} className="min-w-0">
           {createElement(gridItem, { row })}
         </div>
       ))}

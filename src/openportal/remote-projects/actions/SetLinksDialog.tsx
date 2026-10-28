@@ -40,15 +40,15 @@ const LinkFields = ({
 }) => (
   <div className="mb-2.5">
     <div className="mb-1">{label}</div>
-    <div className="row g-2">
-      <div className="col-sm-5">
+    <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-12">
+      <div className="sm:col-span-5">
         <StringGroup
           name={`${name}.id`}
           placeholder={translate('Identifier, e.g. EP/X000000/1')}
           spaceless
         />
       </div>
-      <div className="col-sm-7">
+      <div className="sm:col-span-7">
         <StringGroup
           name={`${name}.url`}
           placeholder={translate('URL')}

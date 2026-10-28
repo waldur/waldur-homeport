@@ -23,8 +23,7 @@ Apply standard CSS class strings to target table wrapper elements:
 Tables can alternate between lists and grid cards. In grid mode, data is displayed as cards in a responsive grid layout.
 
 - **`gridItem`**: React component class used to render each grid cell card.
-- **`gridSize`**: Responsive grid column sizes config object (e.g. `gridSize={{ sm: 6, md: 4 }}`).
-- **`gridSpace`**: Spacing level (0 to 6) between cards, mapped to the Bootstrap row gutter class `g-{gridSpace}` (defaults to `6`).
+- **`gridClassName`**: Tailwind classes for the grid container, which is `grid grid-cols-1 gap-5` by default: columns per breakpoint (e.g. `"sm:grid-cols-2 md:grid-cols-3"`) and, optionally, a gap that replaces `gap-5` (e.g. `"gap-0"`). Write the classes literally so Tailwind generates them.
 - **`gridFixedWidth`**: Boolean. When enabled, renders grid items inside a fixed CSS Grid container (`className="grid-fixed-width"`) with a fixed card size instead of responsive columns.
 - **`initialMode`**: Default display mode on load (`'table'` or `'grid'`, defaults to `'table'`).
 
@@ -46,8 +45,7 @@ export const GridList = () => {
     <Table
       {...tableProps}
       gridItem={GridListItem}
-      gridSize={{ sm: 6, md: 4 }}
-      gridSpace={4}
+      gridClassName="sm:grid-cols-2 md:grid-cols-3 gap-3"
       initialMode="grid"
     />
   );

@@ -1,4 +1,4 @@
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { Badge } from 'waldur-ui';
 
@@ -30,8 +30,8 @@ export const BillingSyncStatusCard = () => {
   return (
     <Card>
       <Card.Body>
-        <Row>
-          <Col md={3}>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-x-5">
+          <div>
             <div className="text-quaternary small mb-1">
               {translate('Sync Status')}
             </div>
@@ -44,32 +44,32 @@ export const BillingSyncStatusCard = () => {
                 ? translate('Enabled')
                 : translate('Paused')}
             </Badge>
-          </Col>
-          <Col md={3}>
+          </div>
+          <div>
             <div className="text-quaternary small mb-1">
               {translate('Pending Records')}
             </div>
             <span className="font-medium">
               {renderFieldOrDash((status as any)?.pending_count)}
             </span>
-          </Col>
-          <Col md={3}>
+          </div>
+          <div>
             <div className="text-quaternary small mb-1">
               {translate('Synced Records')}
             </div>
             <span className="font-medium">
               {renderFieldOrDash((status as any)?.synced_count)}
             </span>
-          </Col>
-          <Col md={3}>
+          </div>
+          <div>
             <div className="text-quaternary small mb-1">
               {translate('Failed Records')}
             </div>
             <span className="font-medium text-danger">
               {renderFieldOrDash((status as any)?.failed_count)}
             </span>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Card.Body>
     </Card>
   );

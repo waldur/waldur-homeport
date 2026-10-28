@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { ReactNode, useMemo } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { IdentityProvider, overrideSettingsRetrieve } from 'waldur-js-client';
 
@@ -125,8 +125,8 @@ const ProvidersTabContent = ({
   refetchProviders: () => void;
   refetchSettings: () => void;
 }) => (
-  <Row>
-    <Col xs={12} md={6} xl={4} className="mb-5">
+  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-5">
+    <div className="mb-5">
       <ProviderCard
         title="Keycloak"
         description={translate(
@@ -136,8 +136,8 @@ const ProvidersTabContent = ({
         type={KEYCLOAK_IDP}
         refetch={refetchProviders}
       />
-    </Col>
-    <Col xs={12} md={6} xl={4} className="mb-5">
+    </div>
+    <div className="mb-5">
       <ProviderCard
         title="TARA"
         description={translate('Identity service of the Republic of Estonia')}
@@ -145,8 +145,8 @@ const ProvidersTabContent = ({
         type={TARA_IDP}
         refetch={refetchProviders}
       />
-    </Col>
-    <Col xs={12} md={6} xl={4} className="mb-5">
+    </div>
+    <div className="mb-5">
       <ProviderCard
         title="MyAccessID"
         description={translate(
@@ -156,8 +156,8 @@ const ProvidersTabContent = ({
         type={EDUTEAMS_IDP}
         refetch={refetchProviders}
       />
-    </Col>
-    <Col xs={12} md={6} xl={4} className="mb-5">
+    </div>
+    <div className="mb-5">
       <ProviderCard
         title={translate('Local identity provider')}
         description={translate('Digital identity is managed by Waldur itself.')}
@@ -171,8 +171,8 @@ const ProvidersTabContent = ({
         refetch={refetchProviders}
         editable={false}
       />
-    </Col>
-    <Col xs={12} md={6} xl={4} className="mb-5">
+    </div>
+    <div className="mb-5">
       <ProviderCard
         title="SAML2"
         description={translate(
@@ -186,8 +186,8 @@ const ProvidersTabContent = ({
         refetch={refetchProviders}
         editable={false}
       />
-    </Col>
-    <Col xs={12} md={6} xl={4} className="mb-5">
+    </div>
+    <div className="mb-5">
       <ProviderCard
         title="FreeIPA"
         description={translate(
@@ -210,8 +210,8 @@ const ProvidersTabContent = ({
         type={FREEIPA_IDP}
         refetch={refetchSettings}
       />
-    </Col>
-  </Row>
+    </div>
+  </div>
 );
 
 export const IdentityProvidersList = () => {

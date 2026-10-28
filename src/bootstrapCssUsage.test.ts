@@ -307,13 +307,16 @@ describe('bootstrapCssUsage', () => {
     };
 
     it.each([
-      ['.table.g-1 td', { padding: '0.25rem' }],
-      ['.table.gy-0 td', { 'padding-top': '0rem', 'padding-bottom': '0rem' }],
+      ['.table.table-list td', { padding: '0 8px' }],
+      ['.table.table-list th', { padding: '0 8px' }],
       [
-        '.table.gx-8px td',
-        { 'padding-left': '0.616rem', 'padding-right': '0.616rem' },
+        '.table.form-table td',
+        { 'padding-left': '1.25rem', 'padding-right': '1.25rem' },
       ],
-      ['.table.gx-5 th', { 'padding-left': '1.25rem' }],
+      [
+        '.table.form-table th',
+        { 'padding-left': '1.25rem', 'padding-right': '1.25rem' },
+      ],
     ])('pads %s', (selector, expected) => {
       expect(declarations(selector)).toMatchObject(expected);
     });

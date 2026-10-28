@@ -1,7 +1,15 @@
 import { FC } from 'react';
 import { CallCoiConfiguration, CoiTypeEnum } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import {
+  Badge,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { MermaidChart } from '@/core/MermaidChart';
 import { translate } from '@/i18n';
@@ -266,48 +274,50 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
               'Each conflict type has a severity level and a handling action based on your configuration.',
             )}
           </p>
-          <div className="table-responsive">
-            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
-              <thead>
-                <tr className="text-start text-quaternary font-medium text-xs uppercase">
-                  <th>{translate('Type')}</th>
-                  <th>{translate('Description')}</th>
-                  <th>{translate('Severity')}</th>
-                  <th>{translate('Handling')}</th>
-                </tr>
-              </thead>
-              <tbody className="text-tertiary">
-                {allTypes.map((type) => {
-                  const info = COI_TYPE_INFO[type];
-                  const handling = getHandlingLabel(type, config);
-                  return (
-                    <tr key={type}>
-                      <td className="font-medium text-primary">{info.label}</td>
-                      <td>{info.description}</td>
-                      <td>
-                        <Badge
-                          variant={getSeverityVariant(info.severity)}
-                          shape="pill"
-                          tone="outline"
-                        >
-                          {info.severity}
-                        </Badge>
-                      </td>
-                      <td>
-                        <Badge
-                          variant={handling.variant}
-                          shape="pill"
-                          tone="outline"
-                        >
-                          {handling.label}
-                        </Badge>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          <Table density="normal">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Type')}</TableHead>
+                <TableHead>{translate('Description')}</TableHead>
+                <TableHead>{translate('Severity')}</TableHead>
+                <TableHead>{translate('Handling')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {allTypes.map((type) => {
+                const info = COI_TYPE_INFO[type];
+                const handling = getHandlingLabel(type, config);
+                return (
+                  <TableRow key={type}>
+                    <TableCell className="font-medium text-primary">
+                      {info.label}
+                    </TableCell>
+                    <TableCell className="text-tertiary">
+                      {info.description}
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={getSeverityVariant(info.severity)}
+                        shape="pill"
+                        tone="outline"
+                      >
+                        {info.severity}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={handling.variant}
+                        shape="pill"
+                        tone="outline"
+                      >
+                        {handling.label}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
         </section>
 
         {/* Status Workflow */}

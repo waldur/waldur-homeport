@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useEffectOnce } from 'react-use';
 import { freeipaProfilesList } from 'waldur-js-client';
 
@@ -47,23 +47,23 @@ export const FreeIpaAccount = () => {
   return (
     <Card className="card-bordered">
       <Card.Header>
-        <Row className="card-toolbar g-0 gap-3 w-full">
-          <Col xs className="order-0 sm:max-w-1/4">
+        <div className="card-toolbar flex flex-wrap gap-3 w-full">
+          <div className="flex-1 min-w-0 order-0 sm:max-w-1/4">
             <Card.Title>
               <span className="h3 me-1.5">{translate('FreeIPA account')}</span>
             </Card.Title>
-          </Col>
+          </div>
           {profile && (
-            <Col sm="auto" className="order-1 sm:order-2 min-w-1/4 ms-auto">
+            <div className="w-full sm:w-auto sm:flex-none order-1 sm:order-2 min-w-1/4 ms-auto">
               <div className="flex sm:justify-end max-sm:flex-wrap whitespace-nowrap gap-2.5">
                 <SyncProfile
                   profile={profile}
                   refreshProfile={refreshProfile}
                 />
               </div>
-            </Col>
+            </div>
           )}
-        </Row>
+        </div>
       </Card.Header>
       <Card.Body>
         {profile ? (

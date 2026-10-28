@@ -125,9 +125,9 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
         )}
       </p>
 
-      <div className="row g-3 mb-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 mb-5">
         {values.projects.map((project) => (
-          <div key={project.id} className="col-md-6">
+          <div key={project.id}>
             <Card
               className={`cursor-pointer h-full ${
                 values.selectedProjectId === project.id

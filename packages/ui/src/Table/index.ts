@@ -5,7 +5,9 @@ export {
   TableHead,
   TableHeader,
   TableRow,
+  useTableContext,
 } from './Table';
+export type { TableDensity, TableProps } from './Table';
 
 export { DataTable } from './DataTable';
 export type { DataTableColumn, DataTableProps } from './DataTable';

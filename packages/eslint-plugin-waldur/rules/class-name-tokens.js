@@ -98,7 +98,8 @@ const collectTokens = (node, tokens) => {
       if (
         calleeName === 'classNames' ||
         calleeName === 'classnames' ||
-        calleeName === 'clsx'
+        calleeName === 'clsx' ||
+        calleeName === 'cn'
       ) {
         for (const argument of node.arguments) {
           collectTokens(argument, tokens);
@@ -124,6 +125,13 @@ export const getClassNameTokens = (node) => {
   if (attribute) {
     collectTokens(attribute.value, tokens);
   }
+  return tokens;
+};
+
+/** Static class tokens of one expression: an attribute value, a default. */
+export const getExpressionTokens = (node) => {
+  const tokens = new Set();
+  collectTokens(node, tokens);
   return tokens;
 };
 

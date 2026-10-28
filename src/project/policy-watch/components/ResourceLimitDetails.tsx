@@ -29,20 +29,17 @@ const ResourceHealthDetails: FC<{ row: ResourceHealth }> = ({ row }) => {
     : null;
 
   return (
-    <div className="row g-4">
-      <div className="col-md-6">
+    <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+      <div>
         <h6>{translate('Consumption by component')}</h6>
         {componentTypes.length ? (
-          <dl className="row mb-0">
+          <dl className="grid grid-cols-2 gap-x-5 mb-0">
             {componentTypes.map((type) => (
               <>
-                <dt
-                  className="col-6 font-normal text-quaternary"
-                  key={`${type}-t`}
-                >
+                <dt className="font-normal text-quaternary" key={`${type}-t`}>
                   {type}
                 </dt>
-                <dd className="col-6 mb-1" key={`${type}-v`}>
+                <dd className="mb-1" key={`${type}-v`}>
                   {formatAmount(usage[type] || 0)} /{' '}
                   {formatAmount(limits[type])}
                 </dd>
@@ -55,24 +52,24 @@ const ResourceHealthDetails: FC<{ row: ResourceHealth }> = ({ row }) => {
           </p>
         )}
       </div>
-      <div className="col-md-6">
+      <div>
         <h6>{translate('Policy')}</h6>
         {matchedPolicy ? (
-          <dl className="row mb-0">
-            <dt className="col-6 font-normal text-quaternary">
+          <dl className="grid grid-cols-2 gap-x-5 mb-0">
+            <dt className="font-normal text-quaternary">
               {translate('Threshold')}
             </dt>
-            <dd className="col-6 mb-1">{matchedPolicy.thresholdLabel}</dd>
-            <dt className="col-6 font-normal text-quaternary">
+            <dd className="mb-1">{matchedPolicy.thresholdLabel}</dd>
+            <dt className="font-normal text-quaternary">
               {translate('Action')}
             </dt>
-            <dd className="col-6 mb-1">{matchedPolicy.actionLabel}</dd>
+            <dd className="mb-1">{matchedPolicy.actionLabel}</dd>
             {matchedPolicy.etaDays !== null && (
               <>
-                <dt className="col-6 font-normal text-quaternary">
+                <dt className="font-normal text-quaternary">
                   {translate('Fires in')}
                 </dt>
-                <dd className="col-6 mb-1">
+                <dd className="mb-1">
                   {matchedPolicy.etaDays === 0
                     ? translate('Threshold reached')
                     : translate('~{days} days', {

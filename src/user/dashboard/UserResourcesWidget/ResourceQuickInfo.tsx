@@ -6,7 +6,7 @@ import {
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import {
   marketplaceResourcesOfferingRetrieve,
   Resource,
@@ -129,11 +129,11 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
               <div className="text-quaternary text-xs font-medium mb-1.5">
                 {translate('Components')}
               </div>
-              <Row className="g-2">
+              <div className="grid grid-cols-2 gap-1.5 md:grid-cols-4">
                 {components
                   .slice(0, MAX_COMPONENTS_DISPLAY)
                   .map((component) => (
-                    <Col key={component.type} xs={6} md={3}>
+                    <div key={component.type}>
                       <div className="border rounded p-1.5 text-center">
                         <div className="font-medium">
                           {component.limit
@@ -146,9 +146,9 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                           {component.title}
                         </div>
                       </div>
-                    </Col>
+                    </div>
                   ))}
-              </Row>
+              </div>
               {components.length > MAX_COMPONENTS_DISPLAY && (
                 <div className="text-quaternary text-xs mt-1">
                   {translate('+{count} more', {
