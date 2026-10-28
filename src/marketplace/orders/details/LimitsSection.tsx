@@ -1,6 +1,6 @@
 import { PencilSimpleIcon, XIcon } from '@phosphor-icons/react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Card, Stack } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import {
   OrderDetails,
   PublicOfferingDetails,
@@ -115,7 +115,7 @@ export const LimitsSection = ({
         </Card.Title>
         {editable && hasSelection && (
           <div className="card-toolbar flex items-center gap-2.5">
-            <Stack direction="horizontal" className="font-normal text-primary">
+            <div className="flex items-center self-stretch font-normal text-primary">
               <BaseButton
                 iconNode={<XIcon weight="bold" />}
                 tooltip={translate('Clear selection')}
@@ -127,7 +127,7 @@ export const LimitsSection = ({
               <span>
                 ({selectedRows.length}) {translate('Selected')}
               </span>
-            </Stack>
+            </div>
             <Menu>
               <Menu.TriggerButton variant="primary">
                 {translate('All actions')}

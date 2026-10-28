@@ -1,6 +1,6 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useState, useEffect } from 'react';
-import { Spinner, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverRequestTypes } from 'waldur-js-client';
 
@@ -10,7 +10,7 @@ import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { renderFieldOrDash } from '@/table/utils';
-import { WizardModal, WizardStepProps } from '@/wizard';
+import { StepLoading, WizardModal, WizardStepProps } from '@/wizard';
 
 import { AtlassianFormValues, extractCredentials } from '../types';
 
@@ -109,10 +109,7 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
   if (loading) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <div className="text-center py-8">
-          <Spinner animation="border" />
-          <p className="mt-3">{translate('Loading request types...')}</p>
-        </div>
+        <StepLoading message={translate('Loading request types...')} />
       </WizardModal>
     );
   }

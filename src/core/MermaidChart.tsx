@@ -2,7 +2,7 @@ import mermaid from 'mermaid';
 import { FC, useEffect, useId, useState } from 'react';
 
 import { isDarkTheme } from 'waldur-design-tokens';
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, LoadingSpinner } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useTheme } from '@/theme/useTheme';
@@ -102,9 +102,11 @@ export const MermaidChart: FC<MermaidChartProps> = ({ code, className }) => {
     return (
       <div className={className} style={{ minHeight: '200px' }}>
         <div className="flex justify-center items-center h-full">
-          <div className="spinner-border text-brand" role="status">
-            <span className="visually-hidden">{translate('Loading...')}</span>
-          </div>
+          <LoadingSpinner
+            size={32}
+            className="text-brand"
+            aria-label={translate('Loading...')}
+          />
         </div>
       </div>
     );

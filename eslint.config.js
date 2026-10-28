@@ -122,6 +122,64 @@ const RESTRICTED_IMPORTS = [
     message:
       'Use TablePagination or Pagination from "waldur-ui" instead of react-bootstrap/PageItem.',
   },
+  {
+    name: 'react-bootstrap',
+    importNames: ['Stack'],
+    message:
+      'Use a flex div with Tailwind utilities instead of react-bootstrap/Stack.',
+  },
+  {
+    name: 'react-bootstrap/Stack',
+    message:
+      'Use a flex div with Tailwind utilities instead of react-bootstrap/Stack.',
+  },
+  {
+    name: 'react-bootstrap',
+    importNames: ['Spinner'],
+    message:
+      'Use LoadingSpinner from "waldur-ui" (or StepLoading from "@/wizard" in wizards) instead of react-bootstrap/Spinner.',
+  },
+  {
+    name: 'react-bootstrap/Spinner',
+    message:
+      'Use LoadingSpinner from "waldur-ui" (or StepLoading from "@/wizard" in wizards) instead of react-bootstrap/Spinner.',
+  },
+  {
+    name: 'react-bootstrap',
+    importNames: ['ListGroup', 'ListGroupItem'],
+    message:
+      'Use Tailwind lists or specific UI primitives (such as FormTable) instead of react-bootstrap/ListGroup.',
+  },
+  {
+    name: 'react-bootstrap/ListGroup',
+    message:
+      'Use Tailwind lists or specific UI primitives (such as FormTable) instead of react-bootstrap/ListGroup.',
+  },
+  {
+    name: 'react-bootstrap/ListGroupItem',
+    message:
+      'Use Tailwind lists or specific UI primitives (such as FormTable) instead of react-bootstrap/ListGroupItem.',
+  },
+  {
+    name: 'react-bootstrap',
+    importNames: ['Collapse'],
+    message:
+      'Use Collapsible from "waldur-ui" instead of react-bootstrap/Collapse.',
+  },
+  {
+    name: 'react-bootstrap/Collapse',
+    message:
+      'Use Collapsible from "waldur-ui" instead of react-bootstrap/Collapse.',
+  },
+  {
+    name: 'react-bootstrap',
+    importNames: ['Form'],
+    message: 'Use native <form> instead of react-bootstrap/Form.',
+  },
+  {
+    name: 'react-bootstrap/Form',
+    message: 'Use native <form> instead of react-bootstrap/Form.',
+  },
   // lodash-es is retired (#455); es-toolkit replaced it.
   {
     name: 'lodash-es',

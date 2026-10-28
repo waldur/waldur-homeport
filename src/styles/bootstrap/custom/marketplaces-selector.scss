@@ -1,9 +1,12 @@
 #marketplaces-selector {
   .list-group {
-    border-radius: unset;
+    display: flex;
+    flex-direction: column;
     padding-bottom: 2rem;
   }
   .list-group-item {
+    position: relative;
+    display: block;
     padding: 1.05rem 1.5rem 1.05rem 1.75rem;
     cursor: pointer;
 

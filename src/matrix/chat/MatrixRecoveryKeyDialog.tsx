@@ -1,6 +1,5 @@
 import { EyeIcon, EyeSlashIcon, KeyIcon } from '@phosphor-icons/react';
 import { FC, FormEvent, useState } from 'react';
-import { Form, Stack } from 'react-bootstrap';
 
 import { BaseButton, FormField, FormLabel, FormText } from 'waldur-ui';
 
@@ -104,10 +103,10 @@ export const MatrixRecoveryKeyDialog: FC<MatrixRecoveryKeyDialogProps> = ({
         </>
       }
     >
-      <Form id={FORM_ID} onSubmit={submit} noValidate>
+      <form id={FORM_ID} onSubmit={submit} noValidate>
         <FormField>
           <FormLabel>{translate('Recovery key')}</FormLabel>
-          <Stack className="gap-1.5" direction="horizontal">
+          <div className="flex items-center self-stretch gap-1.5">
             <MaskedKeyInput
               value={recoveryKey}
               onChange={setRecoveryKey}
@@ -139,7 +138,7 @@ export const MatrixRecoveryKeyDialog: FC<MatrixRecoveryKeyDialogProps> = ({
               buttonVariant="text-secondary"
               onlyButton
             />
-          </Stack>
+          </div>
           {failure && (
             <FormText variant="danger" role="alert">
               {failure}
@@ -151,7 +150,7 @@ export const MatrixRecoveryKeyDialog: FC<MatrixRecoveryKeyDialogProps> = ({
             )}
           </FormText>
         </FormField>
-      </Form>
+      </form>
     </ModalDialog>
   );
 };

@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Stack } from 'react-bootstrap';
 import {
   Hypervisor,
   openstackHypervisorsList,
@@ -21,13 +20,16 @@ const UsageCell: FC<{ used: number; total: number; unit?: string }> = ({
   total,
   unit,
 }) => (
-  <Stack style={{ minWidth: 120 }}>
+  <div
+    className="flex flex-col flex-auto self-stretch"
+    style={{ minWidth: 120 }}
+  >
     <Progress value={used} max={total} variant="indigo" />
     <span className="text-end text-xs text-secondary mt-1">
       {used}/{total}
       {unit ? ` ${unit}` : ''}
     </span>
-  </Stack>
+  </div>
 );
 
 export const HypervisorsList: FC<{

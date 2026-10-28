@@ -1,7 +1,6 @@
 import { ArrowsClockwiseIcon, CaretRightIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent, PropsWithChildren, useState } from 'react';
-import { ListGroupItem, Stack } from 'react-bootstrap';
 
 import { Collapsible, CollapsibleContent } from 'waldur-ui';
 
@@ -41,17 +40,18 @@ const CategoryListItem: FunctionComponent<
   children,
 }) => {
   return (
-    <ListGroupItem
+    <div
       data-uuid={item.uuid}
-      className={classNames(className, {
+      className={classNames('list-group-item', className, {
         active: (selectedItem && item.uuid === selectedItem.uuid) || active,
       })}
       {...getSelectableRowProps(() => onClick(item))}
       aria-expanded={expanded}
     >
-      <Stack
-        direction="horizontal"
-        className={classNames('gap-2.5', { active })}
+      <div
+        className={classNames('flex items-center self-stretch gap-2.5', {
+          active,
+        })}
       >
         {item.icon ? (
           <div className="size-10 shrink-0 inline-flex items-center justify-center rounded-md overflow-hidden">
@@ -75,8 +75,8 @@ const CategoryListItem: FunctionComponent<
           </span>
         )}
         {children}
-      </Stack>
-    </ListGroupItem>
+      </div>
+    </div>
   );
 };
 

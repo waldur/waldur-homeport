@@ -4,7 +4,7 @@ import {
   HexagonIcon,
   HashIcon,
 } from '@phosphor-icons/react';
-import { Col, Row, Stack } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import { formatPhoneNumber } from '@/core/utils';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
@@ -32,7 +32,7 @@ export const CustomerProfile = ({
     cardBordered
     title={
       <div>
-        <Stack direction="horizontal" className="gap-3 text-quaternary mb-2.5">
+        <div className="flex items-center self-stretch gap-3 text-quaternary mb-2.5">
           {customer.country && (
             <CountryFlag
               countryCode={customer.country}
@@ -41,11 +41,8 @@ export const CustomerProfile = ({
             />
           )}
           <h3 className="mb-0">{customer.name}</h3>
-        </Stack>
-        <Stack
-          direction="horizontal"
-          className="gap-4 flex-wrap text-quaternary leading-none"
-        >
+        </div>
+        <div className="flex items-center self-stretch gap-4 flex-wrap text-quaternary leading-none">
           {customer.organization_groups?.length > 0 && (
             <span className="whitespace-nowrap">
               <HexagonIcon size={18} weight="duotone" className="me-1" />
@@ -73,7 +70,7 @@ export const CustomerProfile = ({
                 {customer.registration_code}
               </span>
             )}
-        </Stack>
+        </div>
       </div>
     }
     actions={<CustomerActions customer={customer} />}

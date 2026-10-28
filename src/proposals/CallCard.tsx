@@ -1,6 +1,5 @@
 import { LockIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Stack } from 'react-bootstrap';
 
 import { Badge } from 'waldur-ui';
 
@@ -37,7 +36,7 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
         clickable
         footer={
           <div className="flex justify-between items-center">
-            <Stack direction="horizontal" className="gap-1">
+            <div className="flex items-center self-stretch gap-1">
               {/* An archived call keeps its rounds for the record; their
                   dates would read as an open call. */}
               {call.state === 'archived' ? (
@@ -82,8 +81,8 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
                   +1
                 </Badge>
               )}
-            </Stack>
-            <Stack direction="horizontal" className="gap-1.5">
+            </div>
+            <div className="flex items-center self-stretch gap-1.5">
               <PublicCallApplyButton
                 call={call}
                 title={translate('Apply to call')}
@@ -94,7 +93,7 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
               <CallLink call={call} asButton>
                 {translate('Details')}
               </CallLink>
-            </Stack>
+            </div>
           </div>
         }
       />

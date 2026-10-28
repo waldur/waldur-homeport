@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { ListGroup } from 'react-bootstrap';
 
 import { getIdentityProviders } from '@/administration/api';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -29,18 +29,20 @@ export const ProviderDetailsDialog = (props) => {
     const url = data[neededProvider][urlKey];
     return (
       url && (
-        <ListGroup.Item key={urlKey}>
-          <div className="ms-1.5 me-auto">
-            <div className="font-medium">{label}</div>
-            <div className="copy-to-clipboard-container">
-              {url}
+        <FormTable.Item
+          key={urlKey}
+          label={label}
+          value={
+            <div className="flex items-center gap-2">
+              <span className="wrap-anywhere">{url}</span>
               <CopyToClipboardButton
-                className="mx-1.5 hover:text-brand cursor-pointer inline z-1"
+                className="hover:text-brand cursor-pointer"
                 value={url}
+                size={16}
               />
             </div>
-          </div>
-        </ListGroup.Item>
+          }
+        />
       )
     );
   };
@@ -61,7 +63,7 @@ export const ProviderDetailsDialog = (props) => {
           title={translate('Edit user agreement')}
           footer={<CloseDialogButton label={translate('OK')} />}
         >
-          <ListGroup>
+          <FormTable detailsMode className="gy-3">
             {data[neededProvider] && (
               <>
                 {renderUrlItem('discovery_url', 'Discovery URL')}
@@ -72,7 +74,7 @@ export const ProviderDetailsDialog = (props) => {
                 {renderUrlItem('management_url', 'Management URL')}
               </>
             )}
-          </ListGroup>
+          </FormTable>
         </ModalDialog>
       ) : null}
     </>

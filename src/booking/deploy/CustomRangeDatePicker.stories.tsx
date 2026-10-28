@@ -153,6 +153,16 @@ export const WithAvailabilityAndTimes: Story = {
     await userEvent.click(
       within(endList).getByRole('button', { name: '15:00' }),
     );
+    const chosenStart = within(startList).getByRole('button', {
+      name: '10:00',
+    });
+    await expect(chosenStart).toHaveAttribute('aria-pressed', 'true');
+    await expect(chosenStart).toHaveClass('active');
+
+    const chosenEnd = within(endList).getByRole('button', { name: '15:00' });
+    await expect(chosenEnd).toHaveAttribute('aria-pressed', 'true');
+    await expect(chosenEnd).toHaveClass('active');
+
     await waitFor(() =>
       expect(readFormValue(canvasElement)).toEqual([
         `${iso(dayA)}T10:00`,

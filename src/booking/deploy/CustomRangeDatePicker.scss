@@ -51,15 +51,39 @@
       }
     }
 
-    .list-group {
+    .time-options-list {
       flex-grow: 1;
       overflow: hidden auto;
-      border-radius: 0;
+      display: flex;
+      flex-direction: column;
 
-      .list-group-item {
+      .time-option-item {
         border: unset;
         border-radius: unset;
         background-color: transparent;
+        text-align: left;
+        padding: 0.5rem 1rem;
+        font-size: var(--text-sm);
+        color: var(--text-secondary);
+        transition:
+          background-color 0.15s ease-in-out,
+          color 0.15s ease-in-out;
+
+        &:hover:not(:disabled) {
+          background-color: var(--bg-tertiary);
+          color: var(--text-primary);
+        }
+
+        &.active,
+        &[aria-pressed='true'] {
+          background-color: var(--bg-brand-solid);
+          color: var(--text-primary-on-brand);
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
       }
     }
   }

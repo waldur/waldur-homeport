@@ -1,6 +1,6 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useState, useEffect } from 'react';
-import { Card, Spinner } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverProjects } from 'waldur-js-client';
 
@@ -9,7 +9,7 @@ import { AlertItem, BaseButton, Radio } from 'waldur-ui';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { WizardModal, WizardStepProps } from '@/wizard';
+import { StepLoading, WizardModal, WizardStepProps } from '@/wizard';
 
 import { AtlassianFormValues, extractCredentials } from '../types';
 
@@ -87,12 +87,9 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
   if (loading) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <div className="text-center py-8">
-          <Spinner animation="border" />
-          <p className="mt-3">
-            {translate('Discovering Service Desk projects...')}
-          </p>
-        </div>
+        <StepLoading
+          message={translate('Discovering Service Desk projects...')}
+        />
       </WizardModal>
     );
   }

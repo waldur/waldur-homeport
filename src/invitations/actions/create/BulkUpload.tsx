@@ -6,7 +6,7 @@ import {
 } from '@phosphor-icons/react';
 import Papa from 'papaparse';
 import { FC, useCallback, useState } from 'react';
-import { Col, Row, Stack } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import { BaseButton } from 'waldur-ui';
 
@@ -97,13 +97,10 @@ export const BulkUpload: FC<OwnProps> = (props) => {
           <FileIcon weight="bold" size={22} className="text-quaternary" />
         </Col>
         <Col>
-          <Stack
-            direction="horizontal"
-            className="gap-1.5 items-center font-medium"
-          >
+          <div className="flex items-center self-stretch gap-1.5 font-medium">
             <span className="font-medium">{file.name}</span>
             <CheckCircleIcon size={16} weight="fill" className="text-success" />
-          </Stack>
+          </div>
           <p className="text-quaternary mb-0">
             {translate('{count} users', { count: importedUsersCount })}
             {' - '}

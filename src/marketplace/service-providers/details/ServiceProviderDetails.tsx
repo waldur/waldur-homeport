@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
-import { Stack } from 'react-bootstrap';
 import { ServiceProvider } from 'waldur-js-client';
 
 import { useBreadcrumbs } from 'waldur-ui';
@@ -70,12 +69,12 @@ const ProviderDetailsHero: FunctionComponent<ProviderDetailsProps> = (data) => {
       logoTooltip={data.provider.customer_name}
       logoCircle
       title={
-        <Stack direction="horizontal" className="gap-5 text-quaternary mb-1">
+        <div className="flex items-center self-stretch gap-5 text-quaternary mb-1">
           {data.provider.customer_country && (
             <CountryFlag countryCode={data.provider.customer_country} />
           )}
           <h2 className="mb-0">{data.provider.customer_name}</h2>
-        </Stack>
+        </div>
       }
     >
       <Field

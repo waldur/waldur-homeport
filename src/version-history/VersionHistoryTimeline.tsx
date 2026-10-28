@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { VersionHistory } from 'waldur-js-client';
 
-import { Timeline } from 'waldur-ui';
+import { LoadingSpinner, Timeline } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -23,8 +23,9 @@ export const VersionHistoryTimeline: FunctionComponent<
         className="flex justify-center items-center py-8 text-quaternary text-sm"
         role="status"
       >
-        <span
-          className="spinner-border spinner-border-sm text-brand me-2.5"
+        <LoadingSpinner
+          size={16}
+          className="text-brand me-2.5"
           aria-hidden="true"
         />
         {translate('Loading history...')}

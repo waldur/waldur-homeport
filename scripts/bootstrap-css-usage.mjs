@@ -77,14 +77,6 @@ export const PARTIALS = [
     scss: "@import 'config'; @import 'bootstrap/scss/card';",
   },
   {
-    name: 'bootstrap/scss/list-group',
-    scss: "@import 'config'; $theme-colors: (); $grid-breakpoints: (); @import 'bootstrap/scss/list-group';",
-  },
-  {
-    name: 'bootstrap/scss/spinners',
-    scss: "@import 'config'; @import 'bootstrap/scss/spinners';",
-  },
-  {
     name: 'bootstrap/scss/helpers',
     scss: "@import 'config'; $theme-colors: (); $aspect-ratios: (); $grid-breakpoints: (xs: 0); @import 'bootstrap/scss/helpers';",
   },

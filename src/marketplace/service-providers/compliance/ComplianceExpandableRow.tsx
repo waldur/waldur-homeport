@@ -1,5 +1,4 @@
 import { FC, useEffect } from 'react';
-import { Stack } from 'react-bootstrap';
 import { ServiceProviderComplianceOverview } from 'waldur-js-client';
 
 import { Badge, Progress } from 'waldur-ui';
@@ -43,12 +42,12 @@ export const ComplianceExpandableRow: FC<{
           {
             title: translate('Overall score'),
             render: ({ row }) => (
-              <Stack>
+              <div className="flex flex-col flex-auto self-stretch">
                 <Progress value={row.overall_score} className="mt-1" />
                 <small className="block text-end text-secondary">
                   {row.overall_score}%
                 </small>
-              </Stack>
+              </div>
             ),
           },
           {

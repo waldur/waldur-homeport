@@ -1,6 +1,6 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useState } from 'react';
-import { Card, Spinner, Table } from 'react-bootstrap';
+import { Card, Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
@@ -16,7 +16,7 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { renderFieldOrDash } from '@/table/utils';
-import { WizardModal, WizardStepProps } from '@/wizard';
+import { StepLoading, WizardModal, WizardStepProps } from '@/wizard';
 
 import { extractCredentials, OpenStackDiscoveryFormValues } from '../types';
 
@@ -162,12 +162,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
   if (loading) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <div className="text-center py-8">
-          <Spinner animation="border" />
-          <p className="mt-3">
-            {translate('Generating service attributes...')}
-          </p>
-        </div>
+        <StepLoading message={translate('Generating service attributes...')} />
       </WizardModal>
     );
   }

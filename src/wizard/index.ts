@@ -5,6 +5,7 @@ export { WizardFormContainer } from './WizardFormContainer';
 
 // Layout components
 export { WizardModal } from './WizardModal';
+export { StepLoading } from './StepLoading';
 export { WizardStepIndicator } from './WizardStepIndicator';
 export { WizardTabs } from './WizardTabs';
 export { WizardButtons } from './WizardButtons';
