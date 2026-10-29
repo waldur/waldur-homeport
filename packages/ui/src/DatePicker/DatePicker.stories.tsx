@@ -174,6 +174,28 @@ export const DismissWithoutPicking: Story = {
   },
 };
 
+/**
+ * Focusing the text input shows the calendar at once, and focus stays in the
+ * input so the date can still be typed; Escape closes it.
+ */
+export const OpensOnInputFocus: Story = {
+  render: () => <Harness />,
+  play: async ({ canvasElement }) => {
+    const [input] = getInputs(fieldContainer(canvasElement));
+    await expect(isCalendarOpen()).toBe(false);
+    await userEvent.click(input);
+    await waitFor(() => expect(isCalendarOpen()).toBe(true));
+    await expect(input).toHaveFocus();
+    await userEvent.type(input, '20260615{Enter}');
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toBe('2026-06-15T00:00'),
+    );
+    await expect(input).toHaveValue('2026-06-15');
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => expect(isCalendarOpen()).toBe(false));
+  },
+};
+
 // ── Bounds and availability ─────────────────────────────
 
 /** ISO-date bounds: inclusive on both ends; out-of-range clicks do nothing. */
@@ -481,7 +503,8 @@ export const InAModalDialog: Story = {
 
 /**
  * The input is the primary control: digits typed are laid out as
- * `yyyy-MM-dd` and committed on Enter, without the calendar ever opening.
+ * `yyyy-MM-dd` and committed on Enter; typing does not close the calendar
+ * that focusing the input showed, and does not steal focus from the input.
  * Without a `placeholder` the empty input shows the format; screen readers
  * get it as the input's description either way.
  */
@@ -499,18 +522,18 @@ export const TypeADate: Story = {
     await expect(input).toHaveAccessibleDescription('Format: YYYY-MM-DD');
     await userEvent.type(input, '20260615');
     await expect(input).toHaveValue('2026-06-15');
-    await expect(isCalendarOpen()).toBe(false);
+    await expect(input).toHaveFocus();
     await userEvent.keyboard('{Enter}');
     await waitFor(() =>
       expect(readFormValue(canvasElement)).toBe('2026-06-15T00:00'),
     );
-    await expect(isCalendarOpen()).toBe(false);
   },
 };
 
 /**
  * Leaving the input commits it too. Moving on to the field's own buttons is
- * not leaving the field; tabbing past them reports onClose (the blur).
+ * not leaving the field. The calendar focusing the input showed is still
+ * open, so onClose (the blur) is reported once it is dismissed.
  */
 export const TypeAndTabAway: Story = {
   render: () => <Harness initial={june15} />,
@@ -524,7 +547,10 @@ export const TypeAndTabAway: Story = {
     await expect(getTrigger(field)).not.toHaveFocus();
     await userEvent.tab();
     await expect(getTrigger(field)).toHaveFocus();
-    await userEvent.tab();
+    await expect(isCalendarOpen()).toBe(true);
+    // The first Escape dismisses the button's tooltip, the second the calendar.
+    await userEvent.keyboard('{Escape}{Escape}');
+    await waitFor(() => expect(isCalendarOpen()).toBe(false));
     await waitFor(() =>
       expect(readFormValue(canvasElement, 'closed-count')).toBe(1),
     );
@@ -662,9 +688,11 @@ export const KeyboardOnlyInAModalDialog: Story = {
     await waitFor(() =>
       expect(readFormValue(document.body)).toBe('2026-06-15T00:00'),
     );
-    await userEvent.tab();
-    await userEvent.tab();
-    await expect(getTrigger(field)).toHaveFocus();
+    // Focusing the input showed the calendar; Escape closes just that.
+    await waitFor(() => expect(isCalendarOpen()).toBe(true));
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => expect(isCalendarOpen()).toBe(false));
+    await waitFor(() => expect(getTrigger(field)).toHaveFocus());
     await expect(getTrigger(field)).toHaveAccessibleName('Choose date');
     await expect(getTrigger(field)).toHaveAttribute('aria-haspopup', 'dialog');
     await userEvent.keyboard('{Enter}');

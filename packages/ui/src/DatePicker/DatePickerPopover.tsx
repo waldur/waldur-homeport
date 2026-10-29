@@ -25,6 +25,7 @@ import {
 } from '../Popover';
 
 import type { EntryResult } from './dateEntry';
+import { KeepInputFocusContext } from './keepInputFocus';
 import {
   DateMask,
   MASK_HINTS,
@@ -349,6 +350,26 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const fieldRef = useRef<HTMLDivElement>(null);
+  // Set while the popup was opened by focusing an input: focus then stays in
+  // the input, so the user can keep typing with the calendar showing.
+  const [keepInputFocus, setKeepInputFocus] = useState(false);
+
+  const handleOpenChange = (next: boolean) => {
+    if (!next) setKeepInputFocus(false);
+    onOpenChange(next);
+  };
+
+  const handleFocus = (event: FocusEvent<HTMLDivElement>) => {
+    if (
+      open ||
+      disabled ||
+      !(event.target as Element).matches('[data-slot="date-picker-input"]')
+    ) {
+      return;
+    }
+    setKeepInputFocus(true);
+    onOpenChange(true);
+  };
 
   // The remove button disappears with the value, so focus would fall to the
   // page (and read as leaving the field). Move it to the first input first.
@@ -373,11 +394,12 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
   };
 
   return (
-    <Popover open={open} onOpenChange={onOpenChange}>
+    <Popover open={open} onOpenChange={handleOpenChange}>
       <div
         data-slot="date-picker"
         className="w-full"
         style={style}
+        onFocus={handleFocus}
         onBlur={handleBlur}
       >
         <PopoverAnchor asChild>
@@ -456,6 +478,12 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
         // Scrolls inside the space Radix measures rather than growing
         // past the bottom of the screen.
         className="z-picker-popover max-h-(--radix-popover-content-available-height) overflow-y-auto"
+        // Clicking or tabbing between the field's own inputs is not leaving.
+        onInteractOutside={(event) => {
+          if (fieldRef.current?.contains(event.target as Node)) {
+            event.preventDefault();
+          }
+        }}
         // Escape in a caption dropdown's option grid closes just the grid.
         onEscapeKeyDown={(event) => {
           if (
@@ -474,12 +502,15 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
         // this once the scope is in place.
         onOpenAutoFocus={(event) => {
           event.preventDefault();
+          if (keepInputFocus) return;
           (event.currentTarget as HTMLElement)
             .querySelector<HTMLElement>('[data-focused="true"] button')
             ?.focus();
         }}
       >
-        {children}
+        <KeepInputFocusContext.Provider value={keepInputFocus}>
+          {children}
+        </KeepInputFocusContext.Provider>
       </PopoverContent>
     </Popover>
   );

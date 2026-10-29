@@ -143,7 +143,8 @@ export const TypeAMonth: Story = {
     await waitFor(() =>
       expect(readFormValue(canvasElement)).toBe('2026-06-01T00:00'),
     );
-    await expect(isCalendarOpen()).toBe(false);
+    // Focusing the input showed the calendar; typing leaves it open.
+    await expect(isCalendarOpen()).toBe(true);
     await typeDate(field, '202602');
     await expect(entryErrors(field)).toEqual([
       'Enter a month on or after 2026-03.',
