@@ -10,7 +10,10 @@ import { translate } from '@/i18n';
 import { Category, CategoryGroup } from '@/marketplace/types';
 
 import { BaseList } from './BaseList';
-import { getSelectableRowProps } from './utils';
+import {
+  getSelectableRowProps,
+  SELECTABLE_ROW_FOCUS_RING_CLASSNAME,
+} from './utils';
 
 const EmptyCategoryListPlaceholder: FunctionComponent = () => (
   <div className="flex items-center justify-center min-w-1/2 max-lg:w-full h-full text-secondary ellipsis">
@@ -57,6 +60,7 @@ const CategoryListItem: FunctionComponent<
         'relative block cursor-pointer py-4 border-0 text-primary transition-colors',
         className || 'px-6',
         bgClass,
+        SELECTABLE_ROW_FOCUS_RING_CLASSNAME,
       )}
       {...getSelectableRowProps(() => onClick(item))}
       aria-expanded={expanded}

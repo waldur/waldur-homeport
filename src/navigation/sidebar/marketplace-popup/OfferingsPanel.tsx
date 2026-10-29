@@ -21,7 +21,11 @@ import { translate } from '@/i18n';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
 
 import { RECENTLY_ADDED_OFFERINGS_UUID } from './constants';
-import { fetchOfferingsByPage, getSelectableRowProps } from './utils';
+import {
+  fetchOfferingsByPage,
+  getSelectableRowProps,
+  SELECTABLE_ROW_FOCUS_RING_CLASSNAME,
+} from './utils';
 
 const VIRTUALIZED_SELECTOR_PAGE_SIZE = 20;
 
@@ -60,6 +64,7 @@ const OfferingListItem: FunctionComponent<{
           data-testid="offering-item"
           className={classNames(
             'relative block py-4 px-6 border-0 transition-colors',
+            SELECTABLE_ROW_FOCUS_RING_CLASSNAME,
             isPaused
               ? 'bg-secondary opacity-50 cursor-not-allowed'
               : isSelected
