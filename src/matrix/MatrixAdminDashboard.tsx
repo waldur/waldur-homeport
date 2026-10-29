@@ -49,10 +49,12 @@ const SETTINGS_TAB = {
   ),
 };
 
+export const MATRIX_STAFF_TABS = [ROOMS_TAB, CALLS_TAB, SETTINGS_TAB];
+
 export const MatrixAdminDashboard = () => {
   const { openDialog } = useModal();
   const staff = useSelector(isStaffSelector);
-  const tabs = staff ? [ROOMS_TAB, CALLS_TAB, SETTINGS_TAB] : [ROOMS_TAB];
+  const tabs = staff ? MATRIX_STAFF_TABS : [ROOMS_TAB];
   // The dashboard stays reachable while Matrix is off so staff can toggle
   // MATRIX_ENABLED in the Settings tab; the appservice setup only makes sense
   // once the integration is on, so disable it with an explanatory tooltip.

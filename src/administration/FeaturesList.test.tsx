@@ -70,6 +70,20 @@ describe('FeaturesList', () => {
     expect(screen.getByText('No')).toBeInTheDocument();
   });
 
+  it('anchors and highlights the feature linked with ?setting=', () => {
+    vi.mocked(useCurrentStateAndParams).mockReturnValue({
+      state: { name: 'admin-features' } as any,
+      params: { setting: 'billing.enabled' },
+    });
+    render(<FeaturesList />);
+
+    const row = screen.getByRole('row', {
+      name: /Enable billing functionality/,
+    });
+    expect(row).toHaveAttribute('id', 'feature-billing.enabled');
+    expect(row).toHaveClass('bg-warning-subtle');
+  });
+
   it('renders all feature sections', () => {
     render(<FeaturesList />);
 

@@ -2,7 +2,7 @@ import { translate } from '@/i18n';
 
 import { SettingsTab, SettingsWithTabs } from '../settings/SettingsWithTabs';
 
-const CALL_MANAGEMENT_TABS: SettingsTab[] = [
+export const CALL_MANAGEMENT_TABS: SettingsTab[] = [
   {
     key: 'proposal',
     title: translate('Proposal'),

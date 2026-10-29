@@ -1,5 +1,5 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   customersList,
   marketplaceResourcesList,
@@ -7,8 +7,13 @@ import {
   usersList,
 } from 'waldur-js-client';
 
+import {
+  SearchableAdminItem,
+  searchAdminRegistry,
+} from '@/administration/settings/registry';
 import { fetchResultCount } from '@/core/api';
 import { SHORT_STALE_TIME } from '@/core/constants';
+import { RootState } from '@/store/reducers';
 import { useUser } from '@/workspace/hooks';
 
 const queryFn =
@@ -81,7 +86,15 @@ export const useSearch = () => {
 
   const [activeTab, setActiveTab] = useState('all');
   const user = useUser();
-  const isStaffOrSupportUser = user?.is_staff || user?.is_support;
+  const isStaffOrSupportUser = Boolean(user?.is_staff || user?.is_support);
+
+  const adminResults = useMemo<SearchableAdminItem[]>(() => {
+    if (!show || !isStaffOrSupportUser || !query.trim()) {
+      return [];
+    }
+    const state = { workspace: { user } } as unknown as RootState;
+    return searchAdminRegistry(query, state);
+  }, [show, isStaffOrSupportUser, query, user]);
 
   const handleClickOutside = useCallback(
     (e) => {
@@ -147,6 +160,7 @@ export const useSearch = () => {
     setQuery,
     result,
     usersResult,
+    adminResults,
     show,
     setShow,
     activeTab,

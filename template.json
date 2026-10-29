@@ -970,7 +970,11 @@
       "feature_area": "issues"
     }
   },
-  "AI assistant settings": {},
+  "AI assistant settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "AI assistant token usage for": {
     "context": {
       "feature_area": "ai-assistant"
@@ -1018,7 +1022,8 @@
   },
   "API authentication": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "API key": {
@@ -1113,7 +1118,11 @@
       "primary_ui_type": "label"
     }
   },
-  "API token authentication": {},
+  "API token authentication": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "API tokens and secrets": {
     "context": {
       "feature_area": "ai-assistant"
@@ -1143,7 +1152,8 @@
   },
   "About us page": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "About {count} days after the deadline": {
@@ -3222,7 +3232,8 @@
   },
   "Affiliates": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "Affiliation": {
@@ -3590,7 +3601,8 @@
   },
   "All categories": {
     "context": {
-      "feature_area": "layouts"
+      "primary_ui_type": "label",
+      "feature_area": "settings"
     }
   },
   "All citizenships": {},
@@ -3768,6 +3780,11 @@
   "All selected orders require a purchase order upload and must be approved individually.": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "All settings": {
+    "context": {
+      "feature_area": "administration"
     }
   },
   "All states": {
@@ -7146,7 +7163,11 @@
     }
   },
   "Atlassian Service Desk": {},
-  "Atlassian settings": {},
+  "Atlassian settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Atlassian settings saved successfully": {
     "context": {
       "primary_ui_type": "success_message",
@@ -7380,7 +7401,8 @@
   },
   "Authentication": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "Authentication Method": {
@@ -7410,7 +7432,11 @@
       "feature_area": "offerings"
     }
   },
-  "Authentication settings": {},
+  "Authentication settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Authentication token": {
     "context": {
       "feature_area": "remote-offering-sync"
@@ -10863,7 +10889,7 @@
   },
   "Clear filters": {
     "context": {
-      "feature_area": "filter"
+      "feature_area": "settings"
     }
   },
   "Clear limit": {
@@ -14362,7 +14388,7 @@
   "Credentials": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "service-desk"
+      "feature_area": "settings"
     }
   },
   "Credit": {
@@ -15021,7 +15047,11 @@
       "feature_area": "update-internal-ips"
     }
   },
-  "Custom Metrics": {},
+  "Custom Metrics": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Custom Scripts": {
     "context": {
       "feature_area": "custom-scripts"
@@ -15100,7 +15130,7 @@
   "Custom metrics": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "marketplace"
+      "feature_area": "settings"
     }
   },
   "Custom metrics this offering reports for the projects that use it.": {
@@ -15522,10 +15552,15 @@
   "Data is being fetched from Arrow and processed": {},
   "Data privacy": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
-  "Data privacy settings": {},
+  "Data privacy settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Data size": {
     "context": {
       "primary_ui_type": "title",
@@ -16236,6 +16271,16 @@
   "Default: \"admin\"": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "Default: {default}": {
+    "context": {
+      "variables": {
+        "default": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "settings"
     }
   },
   "Define IP range that will be used for automatic assignment to instances.": {},
@@ -17248,7 +17293,8 @@
   },
   "Development": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "Device": {
@@ -19305,7 +19351,7 @@
   },
   "Empty": {
     "context": {
-      "feature_area": "reports"
+      "feature_area": "settings"
     }
   },
   "Empty = system default, -1 = unlimited": {
@@ -23647,7 +23693,11 @@
       "feature_area": "providers"
     }
   },
-  "FreeIPA settings": {},
+  "FreeIPA settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "FreeIPA users": {
     "context": {
       "feature_area": "issues"
@@ -24551,7 +24601,8 @@
   },
   "Growth settings": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "Growth source": {
@@ -25970,7 +26021,7 @@
   "Images": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "details"
+      "feature_area": "settings"
     }
   },
   "Impact": {
@@ -27368,7 +27419,11 @@
     }
   },
   "Invitation sent, waiting for reviewer to respond. Check expiry date.": {},
-  "Invitation settings": {},
+  "Invitation settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Invitation statuses": {
     "context": {
       "feature_area": "reviewer-pool"
@@ -27382,7 +27437,7 @@
   "Invitations": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "customer"
+      "feature_area": "settings"
     }
   },
   "Invitations have been canceled.": {
@@ -27777,7 +27832,7 @@
   "Issue status mapping": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "service-desk"
+      "feature_area": "issue-statuses"
     }
   },
   "Issue synchronized successfully.": {
@@ -29397,7 +29452,7 @@
   "Links": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "overview"
+      "feature_area": "settings"
     }
   },
   "Links Arrow billing export lines to Waldur InvoiceItems.": {
@@ -29986,7 +30041,11 @@
     }
   },
   "Local users": {},
-  "Localization": {},
+  "Localization": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Localpart for the appservice bot user (default: waldur-bot).": {
     "context": {
       "feature_area": "matrix"
@@ -30106,7 +30165,8 @@
   },
   "Login page": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "Login page layout style.": {},
@@ -30237,7 +30297,11 @@
       "feature_area": "openstack-instance"
     }
   },
-  "MCP server": {},
+  "MCP server": {
+    "context": {
+      "feature_area": "personal-access-tokens"
+    }
+  },
   "MTU": {
     "context": {
       "primary_ui_type": "label",
@@ -31014,9 +31078,17 @@
       "feature_area": "summary"
     }
   },
-  "Marketplace development": {},
+  "Marketplace development": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Marketplace landing page title.": {},
-  "Marketplace notifications": {},
+  "Marketplace notifications": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Marketplace offering": {},
   "Marketplace offering prices": {
     "context": {
@@ -31041,7 +31113,11 @@
       "feature_area": "marketplace"
     }
   },
-  "Marketplace visibility & access": {},
+  "Marketplace visibility & access": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Marking an order as erred is expected to be done by the Waldur site agent. Doing it manually can lead to a broken state.": {
     "context": {
       "feature_area": "actions"
@@ -32604,6 +32680,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "event-subscriptions"
+    }
+  },
+  "Modified only": {
+    "context": {
+      "feature_area": "settings"
     }
   },
   "Modified pairs ({count})": {
@@ -34966,6 +35047,11 @@
       "feature_area": "form"
     }
   },
+  "No matching settings found": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "No matching settings in this section.": {
     "context": {
       "feature_area": "settings"
@@ -36604,7 +36690,7 @@
   "Notifications": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "issues"
+      "feature_area": "settings"
     }
   },
   "Notify addresses about new orders": {
@@ -36890,10 +36976,15 @@
   },
   "ORCID integration": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
-  "ORCID integration settings": {},
+  "ORCID integration settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "OS": {
     "context": {
       "feature_area": "blocks"
@@ -37420,10 +37511,15 @@
   },
   "Offerings & Orders": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
-  "Offerings & orders": {},
+  "Offerings & orders": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Offerings and resource templates": {},
   "Offerings count": {
     "context": {
@@ -39347,6 +39443,7 @@
   },
   "Organizations & compliance": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "administration"
     }
   },
@@ -39778,6 +39875,7 @@
   },
   "POSIX ID pools": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "administration"
     }
   },
@@ -39853,6 +39951,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "marketplace"
+    }
+  },
+  "Page": {
+    "context": {
+      "feature_area": "search"
     }
   },
   "Page faults (major)": {
@@ -41986,7 +42089,8 @@
   },
   "Plugins": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "Pods": {
@@ -43494,7 +43598,7 @@
   "Project digest": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "details"
+      "feature_area": "settings"
     }
   },
   "Project digest emails": {
@@ -44225,7 +44329,7 @@
   "Proposal": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "assignments"
+      "feature_area": "settings"
     }
   },
   "Proposal ID": {
@@ -44306,7 +44410,11 @@
       "feature_area": "role-mapping"
     }
   },
-  "Proposal settings": {},
+  "Proposal settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Proposal slug": {
     "context": {
       "primary_ui_type": "title",
@@ -44803,7 +44911,8 @@
   },
   "Providers": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "Providers/staff visible only": {
@@ -44942,10 +45051,15 @@
   },
   "Publication API": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
-  "Publication API settings": {},
+  "Publication API settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Publication date": {
     "context": {
       "feature_area": "details"
@@ -48364,6 +48478,11 @@
       "feature_area": "table"
     }
   },
+  "Reset to default": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Reset to defaults": {
     "context": {
       "feature_area": "analytics"
@@ -51098,7 +51217,8 @@
   },
   "SCIM": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "SCIM API key for X-API-Key header.": {},
@@ -51177,7 +51297,11 @@
     }
   },
   "SLURM Periodic Usage Policy": {},
-  "SLURM Policy": {},
+  "SLURM Policy": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "SLURM commands generated": {
     "context": {
       "feature_area": "policies"
@@ -51186,7 +51310,7 @@
   "SLURM policy": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "offerings"
+      "feature_area": "settings"
     }
   },
   "SLURM policy has been created successfully.": {
@@ -51219,7 +51343,11 @@
   },
   "SMAX": {},
   "SMAX API server URL. For example <https://localhost:8080/>": {},
-  "SMAX settings": {},
+  "SMAX settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "SNAT default": {
     "context": {
       "feature_area": "openstack-tenant"
@@ -51336,7 +51464,7 @@
   "SSH keys": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "ssh-keys"
+      "feature_area": "settings"
     }
   },
   "SSH keys being added or removed.": {},
@@ -53781,7 +53909,11 @@
       "feature_area": "service-desk"
     }
   },
-  "Service desk integration settings": {},
+  "Service desk integration settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Service desk settings": {
     "context": {
       "feature_area": "administration"
@@ -55229,7 +55361,11 @@
       "feature_area": "site-agent"
     }
   },
-  "Site Agent Logs": {},
+  "Site Agent Logs": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Site URL": {
     "context": {
       "feature_area": "steps"
@@ -55450,9 +55586,21 @@
       "feature_area": "marketplace"
     }
   },
-  "Software catalog EESSI": {},
-  "Software catalog Spack": {},
-  "Software catalog general": {},
+  "Software catalog EESSI": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
+  "Software catalog Spack": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
+  "Software catalog general": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Software catalog has been added.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -56969,8 +57117,7 @@
   },
   "Support users": {
     "context": {
-      "primary_ui_type": "title",
-      "feature_area": "service-desk"
+      "primary_ui_type": "title"
     }
   },
   "Support workspace": {},
@@ -57212,6 +57359,12 @@
       "feature_area": "settings"
     }
   },
+  "Sync settings": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "settings"
+    }
+  },
   "Sync state": {
     "context": {
       "primary_ui_type": "label",
@@ -57341,7 +57494,7 @@
   },
   "System Logging": {
     "context": {
-      "feature_area": "system-logging"
+      "feature_area": "settings"
     }
   },
   "System Usage Report": {
@@ -57377,7 +57530,8 @@
   },
   "System logging": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "System logs": {
@@ -57387,6 +57541,7 @@
   },
   "System management": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "administration"
     }
   },
@@ -57502,7 +57657,7 @@
   },
   "Table Growth Monitoring": {
     "context": {
-      "feature_area": "table-growth"
+      "feature_area": "settings"
     }
   },
   "Table growth": {
@@ -57535,7 +57690,8 @@
   },
   "Table settings": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "Table size sampling has been scheduled.": {
@@ -57806,7 +57962,7 @@
   "Telemetry": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "telemetry"
+      "feature_area": "settings"
     }
   },
   "Telemetry sending has been disabled.": {
@@ -60510,7 +60666,8 @@
   },
   "Theme": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "Then": {
@@ -63245,6 +63402,11 @@
       "feature_area": "charts"
     }
   },
+  "Try adjusting your search query or clearing the filters.": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Try again": {
     "context": {
       "feature_area": "upload"
@@ -65410,6 +65572,11 @@
   "Unable to load AI Assistant configuration.": {
     "context": {
       "feature_area": "ai-assistant"
+    }
+  },
+  "Unable to load Arrow sync settings.": {
+    "context": {
+      "feature_area": "settings"
     }
   },
   "Unable to load CPU targets.": {
@@ -69583,7 +69750,11 @@
       "feature_area": "views"
     }
   },
-  "Usage Polling": {},
+  "Usage Polling": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Usage Report": {
     "context": {
       "feature_area": "reports"
@@ -69766,6 +69937,12 @@
     }
   },
   "Usage policy components": {},
+  "Usage polling": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "settings"
+    }
+  },
   "Usage polling state": {},
   "Usage records": {},
   "Usage records, billing periods and quotas of past months. They follow the resources so history stays with them.": {},
@@ -70124,7 +70301,7 @@
   },
   "User Actions": {
     "context": {
-      "feature_area": "user-actions"
+      "feature_area": "settings"
     }
   },
   "User CPU time": {
@@ -70157,7 +70334,11 @@
       "feature_area": "openportal"
     }
   },
-  "User Revision History": {},
+  "User Revision History": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "User SSH keys": {},
   "User UUID": {
     "context": {
@@ -70447,6 +70628,7 @@
   },
   "User interface": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "administration"
     }
   },
@@ -70531,11 +70713,15 @@
   "User profile": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "user"
+      "feature_area": "settings"
     }
   },
   "User profile changes": {},
-  "User profile settings": {},
+  "User profile settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "User roles will need to be manually reassigned": {
     "context": {
       "feature_area": "project"
@@ -71206,7 +71392,7 @@
   "VAT": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "details"
+      "feature_area": "settings"
     }
   },
   "VAT code": {
@@ -72052,7 +72238,8 @@
   },
   "Visibility & Access": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "Visible columns": {
@@ -74675,7 +74862,11 @@
     }
   },
   "Zammad API server URL. For example <https://localhost:8080/>": {},
-  "Zammad settings": {},
+  "Zammad settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Zero": {
     "context": {
       "feature_area": "policy-watch"

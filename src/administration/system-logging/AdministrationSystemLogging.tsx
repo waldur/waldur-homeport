@@ -25,7 +25,11 @@ export const AdministrationSystemLogging = () => {
   return data ? (
     <div className="pt-4">
       <SettingsCard
-        groupNames={[translate('System Logging')]}
+        groupNames={[
+          translate('System Logging'),
+          translate('Site Agent Logs'),
+          translate('User Revision History'),
+        ]}
         settingsSource={data}
       />
     </div>

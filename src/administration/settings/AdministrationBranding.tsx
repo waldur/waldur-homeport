@@ -19,7 +19,7 @@ const LoginPageListEditDialog = lazyComponent(() =>
   })),
 );
 
-const BRANDING_TABS: SettingsTab[] = [
+export const BRANDING_TABS: SettingsTab[] = [
   {
     key: 'branding',
     title: translate('Branding'),

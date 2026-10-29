@@ -32,7 +32,7 @@ import { IdentityBridgeTab } from './IdentityBridgeTab';
 import { ProviderCard } from './ProviderCard';
 import { ScimSyncButton } from './ScimSyncButton';
 
-const IDENTITY_TABS = [
+export const IDENTITY_TABS = [
   {
     key: 'authentication',
     title: translate('Authentication'),
@@ -69,6 +69,12 @@ const IDENTITY_TABS = [
     groupName: null, // Custom tab, not from SettingsDescription
   },
 ];
+
+export const IDENTITY_BRIDGE_TAB = {
+  key: 'identity-bridge',
+  title: translate('Identity Bridge'),
+  groupName: null,
+};
 
 const SettingsTabContent = ({
   groupName,
@@ -218,11 +224,7 @@ export const IdentityProvidersList = () => {
   const tabs = useMemo(() => {
     const result = [...IDENTITY_TABS];
     if (isFeatureVisible(UserFeatures.show_identity_bridge)) {
-      result.push({
-        key: 'identity-bridge',
-        title: translate('Identity Bridge'),
-        groupName: null,
-      });
+      result.push(IDENTITY_BRIDGE_TAB);
     }
     return result;
   }, []);

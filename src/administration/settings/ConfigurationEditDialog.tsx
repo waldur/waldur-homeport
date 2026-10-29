@@ -3,7 +3,7 @@ import { Field, Form } from 'react-final-form';
 import { overrideSettings } from 'waldur-js-client';
 
 import { DEFAULT_PRIMARY_COLORS } from 'waldur-design-tokens';
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { VisualLayoutSelector } from '@/auth/VisualLayoutSelector';
 import { formDataOptions } from '@/core/api';
@@ -24,8 +24,10 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
 
 import {
+  formatDefaultValue,
   formatListFieldValue,
   getKeyTitle,
+  isSettingModified,
   SIDEBAR_STYLE_PRIMARY,
 } from './utils';
 
@@ -72,6 +74,7 @@ interface ConfigurationEditDialogProps {
       key;
       description;
       type;
+      default?: any;
       options?: Array<{ value: string; label: string }>;
     };
     initialValues?: any;
@@ -128,140 +131,182 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
     <Form
       onSubmit={onSubmit}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, invalid, dirty, values }) => (
-        <form onSubmit={handleSubmit}>
-          <ModalDialog
-            title={getKeyTitle(item.key)}
-            footer={
-              <>
-                <CloseDialogButton className="flex-1" />
-                <SubmitButton
-                  disabled={invalid || !dirty}
-                  submitting={submitting}
-                  label={translate('Confirm')}
-                  variant="primary"
-                  className="flex-1"
-                />
-              </>
-            }
-          >
-            <FormGroup
-              label={item.type !== 'boolean' && item.description}
-              spaceless
-            >
-              {item.key === 'LOGIN_PAGE_LAYOUT' ? (
-                <Field component={VisualLayoutSelectorField} name="value" />
-              ) : item.type === 'html_field' ? (
-                <Field name="value">
-                  {({ input }) => (
-                    <MonacoField input={input} language="html" height={100} />
-                  )}
-                </Field>
-              ) : item.type === 'dict_field' ? (
-                <Field
-                  name="value"
-                  format={(value) => {
-                    if (!value) return '';
-                    if (typeof value === 'object') {
-                      try {
-                        return JSON.stringify(value, null, 2);
-                      } catch {
-                        return '';
-                      }
-                    }
-                    return value;
-                  }}
-                >
-                  {({ input }) => (
-                    <MonacoField input={input} language="json" height={100} />
-                  )}
-                </Field>
-              ) : item.type === 'markdown_field' ? (
-                <Field name="value">
-                  {({ input }) => <MarkdownEditor input={input} showImages />}
-                </Field>
-              ) : item.type === 'text_field' ? (
-                <Field name="value">
-                  {({ input, meta }) => <TextField input={input} meta={meta} />}
-                </Field>
-              ) : (item.type === 'choice_field' ||
-                  item.type === 'select' ||
-                  item.options) &&
-                item.type !== 'multiple_choice_field' ? (
+      render={({ handleSubmit, submitting, invalid, dirty, values, form }) => {
+        const canResetToDefault =
+          item.default !== undefined &&
+          item.type !== 'image_field' &&
+          isSettingModified(item, values.value);
+
+        const showDefault =
+          item.default !== undefined &&
+          item.default !== null &&
+          item.default !== '' &&
+          item.type !== 'image_field';
+
+        const handleResetToDefault = () => {
+          const defaultVal =
+            item.type === 'list_field' && Array.isArray(item.default)
+              ? formatListFieldValue(item.default)
+              : item.default;
+          form.change('value', defaultVal);
+        };
+
+        return (
+          <form onSubmit={handleSubmit}>
+            <ModalDialog
+              title={getKeyTitle(item.key)}
+              footer={
                 <>
+                  <CloseDialogButton className="flex-1" />
+                  {canResetToDefault && (
+                    <BaseButton
+                      type="button"
+                      variant="tertiary"
+                      className="flex-1"
+                      onClick={handleResetToDefault}
+                      label={translate('Reset to default')}
+                      tooltip={translate('Default: {default}', {
+                        default: formatDefaultValue(item),
+                      })}
+                    />
+                  )}
+                  <SubmitButton
+                    disabled={invalid || !dirty}
+                    submitting={submitting}
+                    label={translate('Confirm')}
+                    variant="primary"
+                    className="flex-1"
+                  />
+                </>
+              }
+            >
+              <FormGroup
+                label={item.type !== 'boolean' && item.description}
+                description={
+                  showDefault
+                    ? translate('Default: {default}', {
+                        default: formatDefaultValue(item),
+                      })
+                    : undefined
+                }
+                spaceless
+              >
+                {item.key === 'LOGIN_PAGE_LAYOUT' ? (
+                  <Field component={VisualLayoutSelectorField} name="value" />
+                ) : item.type === 'html_field' ? (
+                  <Field name="value">
+                    {({ input }) => (
+                      <MonacoField input={input} language="html" height={100} />
+                    )}
+                  </Field>
+                ) : item.type === 'dict_field' ? (
+                  <Field
+                    name="value"
+                    format={(value) => {
+                      if (!value) return '';
+                      if (typeof value === 'object') {
+                        try {
+                          return JSON.stringify(value, null, 2);
+                        } catch {
+                          return '';
+                        }
+                      }
+                      return value;
+                    }}
+                  >
+                    {({ input }) => (
+                      <MonacoField input={input} language="json" height={100} />
+                    )}
+                  </Field>
+                ) : item.type === 'markdown_field' ? (
+                  <Field name="value">
+                    {({ input }) => <MarkdownEditor input={input} showImages />}
+                  </Field>
+                ) : item.type === 'text_field' ? (
+                  <Field name="value">
+                    {({ input, meta }) => (
+                      <TextField input={input} meta={meta} />
+                    )}
+                  </Field>
+                ) : (item.type === 'choice_field' ||
+                    item.type === 'select' ||
+                    item.options) &&
+                  item.type !== 'multiple_choice_field' ? (
+                  <>
+                    <Field name="value">
+                      {({ input, meta }) => (
+                        <SelectField
+                          input={input}
+                          meta={meta}
+                          options={item.options}
+                          simpleValue
+                        />
+                      )}
+                    </Field>
+                    {item.key === 'SIDEBAR_STYLE' &&
+                      values.value === SIDEBAR_STYLE_PRIMARY && (
+                        <div className="mt-2.5">
+                          <AlertItem
+                            type="floating"
+                            variant="warning"
+                            role="alert"
+                            title={translate('Warning')}
+                            body={translate(
+                              'Using the primary color as a sidebar color might affect contrast and usability.',
+                            )}
+                          />
+                        </div>
+                      )}
+                  </>
+                ) : item.type === 'multiple_choice_field' && item.options ? (
                   <Field name="value">
                     {({ input, meta }) => (
                       <SelectField
                         input={input}
                         meta={meta}
                         options={item.options}
+                        isMulti
                         simpleValue
                       />
                     )}
                   </Field>
-                  {item.key === 'SIDEBAR_STYLE' &&
-                    values.value === SIDEBAR_STYLE_PRIMARY && (
-                      <div className="mt-2.5">
-                        <AlertItem
-                          type="floating"
-                          variant="warning"
-                          role="alert"
-                          title={translate('Warning')}
-                          body={translate(
-                            'Using the primary color as a sidebar color might affect contrast and usability.',
-                          )}
-                        />
-                      </div>
+                ) : item.type === 'color_field' ? (
+                  <Field component={ColorField} name="value" />
+                ) : item.type === 'boolean' ? (
+                  <Field name="value" type="checkbox">
+                    {({ input }) => (
+                      <SwitchField input={input} label={item.description} />
                     )}
-                </>
-              ) : item.type === 'multiple_choice_field' && item.options ? (
-                <Field name="value">
-                  {({ input, meta }) => (
-                    <SelectField
-                      input={input}
-                      meta={meta}
-                      options={item.options}
-                      isMulti
-                      simpleValue
-                    />
-                  )}
-                </Field>
-              ) : item.type === 'color_field' ? (
-                <Field component={ColorField} name="value" />
-              ) : item.type === 'boolean' ? (
-                <Field name="value" type="checkbox">
-                  {({ input }) => (
-                    <SwitchField input={input} label={item.description} />
-                  )}
-                </Field>
-              ) : item.type === 'image_field' ? (
-                <Field
-                  component={WideImageField}
-                  name="value"
-                  initialValue={initialValues.value}
-                />
-              ) : item.type === 'list_field' ? (
-                <Field name="value">
-                  {({ input, meta }) => (
-                    <CommaSeparatedListField
-                      input={input}
-                      meta={meta}
-                      placeholder={translate('Enter comma-separated values')}
-                      height={100}
-                    />
-                  )}
-                </Field>
-              ) : (
-                <Field name="value">
-                  {({ input, meta }) => (
-                    <StringField input={input} meta={meta} />
-                  )}
-                </Field>
-              )}
-            </FormGroup>
-          </ModalDialog>
-        </form>
-      )}
+                  </Field>
+                ) : item.type === 'image_field' ? (
+                  <Field
+                    component={WideImageField}
+                    name="value"
+                    initialValue={initialValues.value}
+                  />
+                ) : item.type === 'list_field' ? (
+                  <Field name="value">
+                    {({ input, meta }) => (
+                      <CommaSeparatedListField
+                        input={input}
+                        meta={meta}
+                        placeholder={translate('Enter comma-separated values')}
+                        height={100}
+                      />
+                    )}
+                  </Field>
+                ) : (
+                  <Field name="value">
+                    {({ input, meta }) => (
+                      <StringField input={input} meta={meta} />
+                    )}
+                  </Field>
+                )}
+              </FormGroup>
+            </ModalDialog>
+          </form>
+        );
+      }}
     />
   );
 };

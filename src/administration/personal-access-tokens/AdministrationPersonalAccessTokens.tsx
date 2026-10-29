@@ -24,7 +24,10 @@ export const AdministrationPersonalAccessTokens = () => {
 
   return data ? (
     <SettingsCard
-      groupNames={[translate('Personal Access Tokens')]}
+      groupNames={[
+        translate('Personal Access Tokens'),
+        translate('MCP server'),
+      ]}
       settingsSource={data}
     />
   ) : null;

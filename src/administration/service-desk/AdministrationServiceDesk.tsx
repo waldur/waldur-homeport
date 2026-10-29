@@ -217,6 +217,16 @@ const CredentialsTab = ({ data }) => (
   </div>
 );
 
+export const SERVICE_DESK_TABS = {
+  configuration: { key: 'configuration', title: translate('Configuration') },
+  credentials: { key: 'credentials', title: translate('Credentials') },
+  issueStatuses: {
+    key: 'issue-statuses',
+    title: translate('Issue status mapping'),
+  },
+  supportUsers: { key: 'support-users', title: translate('Support users') },
+};
+
 export const AdministrationServiceDesk = () => {
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ['AdministrationServiceDesk'],
@@ -230,19 +240,10 @@ export const AdministrationServiceDesk = () => {
   const showIssueStatuses = supportEnabled && isStaff;
   const tabs = useMemo(
     () => [
-      { key: 'configuration', title: translate('Configuration') },
-      { key: 'credentials', title: translate('Credentials') },
-      ...(showIssueStatuses
-        ? [
-            {
-              key: 'issue-statuses',
-              title: translate('Issue status mapping'),
-            },
-          ]
-        : []),
-      ...(supportEnabled
-        ? [{ key: 'support-users', title: translate('Support users') }]
-        : []),
+      SERVICE_DESK_TABS.configuration,
+      SERVICE_DESK_TABS.credentials,
+      ...(showIssueStatuses ? [SERVICE_DESK_TABS.issueStatuses] : []),
+      ...(supportEnabled ? [SERVICE_DESK_TABS.supportUsers] : []),
     ],
     [supportEnabled, showIssueStatuses],
   );

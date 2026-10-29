@@ -44,5 +44,6 @@ export const ARROW_TAB_KEYS = {
   billing: 'billing',
   consumption: 'consumption',
   resources: 'resources',
+  settings: 'settings',
   debug: 'debug',
 } as const;

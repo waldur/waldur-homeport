@@ -1,4 +1,4 @@
-import { Badge } from 'waldur-ui';
+import { Badge, Tooltip } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { TruncatedMarkdown } from '@/core/TruncatedMarkdown';
@@ -11,7 +11,8 @@ import { useUser } from '@/workspace/hooks';
 import { ConfigurationEditButton } from './ConfigurationEditButton';
 import { CountryListField } from './CountryListField';
 import { MultilingualImageEditButton } from './MultilingualImageEditButton';
-import { getKeyTitle } from './utils';
+import { useHighlightSettingRow } from './useHighlightSettingRow';
+import { formatDefaultValue, getKeyTitle, isSettingModified } from './utils';
 
 const ColorField = ({ value }) => (
   <div
@@ -116,7 +117,11 @@ export const FieldRow = ({
   editDisabledReason,
 }: FieldRowProps) => {
   const canEdit = Boolean(useUser()?.is_staff);
-  const editLabel = translate('Edit {name}', { name: getKeyTitle(item.key) });
+  const isHighlighted = useHighlightSettingRow(item.key, 'setting-');
+  const isModified =
+    !isLoading && isSettingModified(item, value, { secretsRedacted: !canEdit });
+  const title = getKeyTitle(item.key);
+  const editLabel = translate('Edit {name}', { name: title });
   const actions = !canEdit ? undefined : item.type === 'country_list_field' ? (
     <CountryListEditButton onEdit={onEdit} tooltip={editLabel} />
   ) : item.type === 'multilingual_image_field' ? (
@@ -139,7 +144,26 @@ export const FieldRow = ({
   return (
     <FormTable.Item
       key={item.key}
-      label={getKeyTitle(item.key)}
+      id={`setting-${item.key}`}
+      className={isHighlighted ? 'bg-warning-subtle' : undefined}
+      label={
+        isModified ? (
+          <span className="inline-flex items-center gap-2">
+            <span>{title}</span>
+            <Tooltip
+              label={translate('Default: {default}', {
+                default: formatDefaultValue(item),
+              })}
+            >
+              <Badge variant="warning" size="sm" tone="outline">
+                {translate('Modified')}
+              </Badge>
+            </Tooltip>
+          </span>
+        ) : (
+          title
+        )
+      }
       description={item.description}
       descriptionClassName="text-tertiary"
       value={
