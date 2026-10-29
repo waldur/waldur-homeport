@@ -16,6 +16,7 @@ import { FormField, FormLabel, Switch } from 'waldur-ui';
 import { getAllPages } from '@/core/api';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { ownSubnetsFirst } from '@/openstack/openstack-instance/utils';
 import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
 
 import { PortRows } from './PortRows';
@@ -45,11 +46,14 @@ export const UpdateInternalIpsDialog: FC<UpdateInternalIpsDialogProps> = ({
     error,
   } = useQuery({
     queryKey: ['UpdateInternalIpsDialog', resource.tenant_uuid],
-    queryFn: () =>
-      getAllPages((page) =>
-        openstackSubnetsList({
-          query: { page, tenant_uuid: resource.tenant_uuid },
-        }),
+    queryFn: async () =>
+      ownSubnetsFirst(
+        await getAllPages((page) =>
+          openstackSubnetsList({
+            query: { page, tenant_uuid: resource.tenant_uuid },
+          }),
+        ),
+        resource.tenant_uuid,
       ),
   });
 
@@ -136,6 +140,7 @@ export const UpdateInternalIpsDialog: FC<UpdateInternalIpsDialogProps> = ({
                   component={PortRows}
                   subnets={subnets}
                   hasCustomIp={hasCustomIp}
+                  tenantUuid={resource.tenant_uuid}
                 />
               </FormField>
             ) : null}

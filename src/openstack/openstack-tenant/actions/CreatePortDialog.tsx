@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useMemo } from 'react';
-import { useFormState } from 'react-final-form';
+import { FC, useEffect, useMemo, useRef } from 'react';
+import { useForm, useFormState } from 'react-final-form';
 import { useToggle } from 'react-use';
 import {
   openstackNetworksList,
@@ -12,14 +12,22 @@ import { FormField, FormLabel, Switch } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
 import { SHORT_STALE_TIME } from '@/core/constants';
+import { getUUID } from '@/core/utils';
 import { isMatchPattern, required } from '@/core/validators';
-import { SelectGroup } from '@/form';
+import { BooleanGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { CustomIpFieldFinal as CustomIpField } from '@/openstack/openstack-instance/actions/update-internal-ips/CustomIpFieldFinal';
-import { SubnetValueContainer } from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
-import { formatSubnetName } from '@/openstack/openstack-instance/utils';
+import {
+  renderSubnetOption,
+  SubnetValueContainer,
+} from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
+import { SharedByLabel } from '@/openstack/openstack-instance/SharedByLabel';
+import {
+  formatSharedBy,
+  formatSubnet,
+} from '@/openstack/openstack-instance/utils';
 import {
   createDescriptionField,
   createLatinNameField,
@@ -43,12 +51,14 @@ export const FixedIPsField: FC<{
   resource?: any;
   subnets?: any[];
   customIp?: boolean;
+  tenantUuid: string;
   change;
 }> = ({
   networks,
   resource,
   subnets: subnetsProp,
   customIp = false,
+  tenantUuid,
   change,
 }) => {
   const [customIpEnabled, setCustomIpEnabled] = useToggle(customIp);
@@ -107,7 +117,8 @@ export const FixedIPsField: FC<{
               options={subnets || []}
               placeholder={translate('Select subnet')}
               getOptionValue={(option) => option.url}
-              getOptionLabel={formatSubnetName}
+              getOptionLabel={formatSubnet}
+              formatOptionLabel={renderSubnetOption(tenantUuid)}
               noUpdateOnBlur
               spaceless
               components={{ ValueContainer: SubnetValueContainer }}
@@ -121,6 +132,76 @@ export const FixedIPsField: FC<{
         </div>
       </div>
     </FormField>
+  );
+};
+
+const NetworkField: FC<{
+  name: string;
+  options: any[];
+  tenantUuid: string;
+  change;
+  [key: string]: any;
+}> = ({ options, tenantUuid, ...props }) => {
+  // The dialog passes every field the form's change function; a select has no use for it.
+  const { change: _change, ...selectProps } = props;
+  return (
+    <SelectGroup
+      {...selectProps}
+      options={options}
+      simpleValue={true}
+      formatOptionLabel={(option) => (
+        <SharedByLabel
+          label={option.label}
+          sharedBy={formatSharedBy(option, tenantUuid)}
+        />
+      )}
+    />
+  );
+};
+
+// Only the owner of a network shared with the tenant may turn port security
+// off on it, so a port on such a network starts with it on. Back on a network
+// of the tenant's own, the default returns unless it was the user's choice.
+const PortSecurityField: FC<{
+  name: string;
+  networks?: any[];
+  tenantUuid: string;
+  change;
+  [key: string]: any;
+}> = ({ networks, tenantUuid, change, ...props }) => {
+  const form = useForm();
+  const { values } = useFormState();
+  const network = networks?.find((item) => item.url === values.network);
+  const isShared = Boolean(
+    network?.tenant && getUUID(network.tenant) !== tenantUuid,
+  );
+  const ticked = useRef(false);
+
+  useEffect(() => {
+    const enabled = form.getFieldState('port_security_enabled')?.value;
+    if (isShared && !enabled) {
+      change('port_security_enabled', true);
+      ticked.current = true;
+    } else if (!isShared && ticked.current) {
+      if (enabled) {
+        change('port_security_enabled', false);
+      }
+      ticked.current = false;
+    }
+  }, [isShared, change, form]);
+
+  return (
+    <BooleanGroup
+      {...props}
+      hideLabel={true}
+      description={
+        isShared
+          ? translate(
+              'Only the owner of a shared network can turn port security off on it.',
+            )
+          : undefined
+      }
+    />
   );
 };
 
@@ -141,7 +222,14 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
           query: {
             page,
             tenant_uuid: resource.uuid,
-            field: ['name', 'uuid', 'url'],
+            field: [
+              'name',
+              'uuid',
+              'url',
+              'tenant',
+              'tenant_name',
+              'tenant_is_managed',
+            ],
           },
         }),
       ),
@@ -155,6 +243,9 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
         ? networks.map((network) => ({
             label: network.name,
             value: network.url,
+            tenant: network.tenant,
+            tenant_name: network.tenant_name,
+            tenant_is_managed: network.tenant_is_managed,
           }))
         : [],
     [networks],
@@ -213,15 +304,15 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
         {
           name: 'network',
           label: translate('Network'),
-          type: 'select',
-          options: networkOptions,
+          component: NetworkField,
+          extraProps: { options: networkOptions, tenantUuid: resource.uuid },
           validate: [required],
           required: true,
         },
         {
           name: 'fixed_ips',
           component: FixedIPsField,
-          extraProps: { networks, resource },
+          extraProps: { networks, resource, tenantUuid: resource.uuid },
         },
         {
           name: 'mac_address',
@@ -232,7 +323,8 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
         {
           name: 'port_security_enabled',
           label: translate('Port security enabled'),
-          type: 'boolean',
+          component: PortSecurityField,
+          extraProps: { networks, tenantUuid: resource.uuid },
         },
       ]}
     />

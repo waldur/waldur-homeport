@@ -6,12 +6,15 @@ import { BaseButton } from 'waldur-ui';
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
-import { SubnetValueContainer } from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
+import {
+  renderSubnetOption,
+  SubnetValueContainer,
+} from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
 import { formatSubnet } from '@/openstack/openstack-instance/utils';
 
 import { CustomIpFieldFinal } from './CustomIpFieldFinal';
 
-export const PortRows = ({ fields, subnets, hasCustomIp }: any) => {
+export const PortRows = ({ fields, subnets, hasCustomIp, tenantUuid }: any) => {
   const availableSubnetsFilter = useCallback(
     (item) => {
       for (let i = 0; i < fields.length; i++) {
@@ -53,7 +56,8 @@ export const PortRows = ({ fields, subnets, hasCustomIp }: any) => {
                   options={freeSubnets}
                   placeholder={translate('Select subnet')}
                   getOptionValue={(option) => option.url}
-                  getOptionLabel={(option) => option.name}
+                  getOptionLabel={formatSubnet}
+                  formatOptionLabel={renderSubnetOption(tenantUuid)}
                   spaceless
                   components={{
                     ValueContainer: SubnetValueContainer,
