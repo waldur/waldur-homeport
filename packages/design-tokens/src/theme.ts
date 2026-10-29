@@ -34,11 +34,9 @@ export function setStoredTheme(theme: ThemeName) {
 
 /**
  * Mirrors `theme` onto `target`'s data-theme attribute — the same signal
- * the main app's loadTheme() sets on <html> (see src/theme/utils.ts),
+ * the main app's applyTheme() sets on <html> (see src/theme/utils.ts),
  * which colors.css and the other token files already key off via
- * `:root[data-theme='dark']`. Unlike loadTheme(), there's no separate
- * Metronic stylesheet to swap here — Tailwind's tokens read this
- * attribute directly, no JS-driven CSS swap needed.
+ * `:root[data-theme='dark']`.
  */
 export function applyTheme(
   theme: ThemeName,

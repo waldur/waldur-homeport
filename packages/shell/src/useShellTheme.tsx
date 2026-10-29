@@ -28,7 +28,7 @@ const ShellThemeContext = createContext<ShellThemeValue | undefined>(undefined);
  * dark toggle every micro-app's UserMenu wires up reads/writes the same
  * shared `waldur/theme/name` localStorage key and data-theme attribute the
  * main app's own src/theme/ThemeStorage.ts and src/theme/utils.ts's
- * loadTheme() use (so a theme choice made in either app carries over to the
+ * applyTheme() use (so a theme choice made in either app carries over to the
  * other), and needs no app-specific input to do that — there was never a
  * reason for the app to compute this itself and hand it down as props.
  */

@@ -8,8 +8,8 @@
 //   node scripts/theme-snapshots.mjs compare <base-dir> <head-dir> <report-dir>
 //
 // capture serves the static Storybook itself, opens each story's iframe with
-// the `theme` global (the same switch as the toolbar, which swaps the real
-// Metronic light/dark stylesheet), waits for that stylesheet and the fonts,
+// the `theme` global (the same switch as the toolbar, which sets data-theme
+// for the Bootstrap stylesheet and Tailwind alike), waits for it and the fonts,
 // freezes animations, and writes <story-id>.<theme>.png. --font forces one
 // font family everywhere, for comparing two builds that load different web
 // fonts: the text then can't differ, so colour changes stand out. --widths
@@ -104,16 +104,11 @@ async function capture(staticDir, outDir, filter, font, widths, themes) {
           `${base}/iframe.html?id=${story.id}&viewMode=story&globals=theme:${theme}`,
           { waitUntil: 'networkidle' },
         );
-        // The theme decorator sets data-theme and injects the Metronic
-        // stylesheet (one for both themes); wait until it has loaded, then
-        // for fonts.
+        // The stylesheets are static imports of the Storybook preview, loaded
+        // before the story renders; wait for the theme decorator to set
+        // data-theme, then for fonts.
         await page.waitForFunction(
-          (t) =>
-            document.documentElement.getAttribute('data-theme') === t &&
-            [...document.styleSheets].some((s) =>
-              // styles/bootstrap/index.scss (style.scss before #471).
-              /\/(index|style)[-.][^/]*\.(s?css)/.test(s.href || ''),
-            ),
+          (t) => document.documentElement.getAttribute('data-theme') === t,
           theme,
           { timeout: 15000 },
         );
