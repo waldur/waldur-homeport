@@ -11,6 +11,7 @@ export const UserRoleGroup = ({
   users,
   altLabel,
   max,
+  inline,
   className,
   onClick,
 }: {
@@ -23,6 +24,12 @@ export const UserRoleGroup = ({
   >[];
   altLabel?: string;
   max?: number;
+  /**
+   * Keeps the label and the avatars on one row at every width, for a strip
+   * of fixed height such as the page-tab toolbar; on a phone the label is
+   * left to screen readers so the tabs keep their room.
+   */
+  inline?: boolean;
   className?: string;
   onClick?(): any;
 }) => {
@@ -47,11 +54,22 @@ export const UserRoleGroup = ({
   }
 
   return (
-    <FormField className={classNames('flex flex-wrap gap-x-5', className)}>
-      <FormLabel className="flex-none mb-0 py-[10px]">
+    <FormField
+      className={classNames(
+        'flex',
+        inline ? 'flex-nowrap items-center gap-x-3' : 'flex-wrap gap-x-5',
+        className,
+      )}
+    >
+      <FormLabel
+        className={classNames(
+          'flex-none mb-0',
+          inline ? 'max-sm:sr-only' : 'py-[10px]',
+        )}
+      >
         {altLabel || role?.description || role?.name}:
       </FormLabel>
-      <div className="w-full sm:flex-1 sm:min-w-0">
+      <div className={inline ? 'flex-none' : 'w-full sm:flex-1 sm:min-w-0'}>
         <SymbolsGroup items={items} max={max || 6} onClick={onClick} />
       </div>
     </FormField>
