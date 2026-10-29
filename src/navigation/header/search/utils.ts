@@ -46,3 +46,14 @@ export const getResourceFilterFromSearchItem = (item: {
   }
   return filter;
 };
+
+const isMac = () => {
+  if (typeof navigator === 'undefined') return false;
+  const platform =
+    (navigator as any).userAgentData?.platform || navigator.platform || '';
+  return /Mac|iPhone|iPad|iPod/i.test(platform);
+};
+
+export const getShortcutHint = (key = 'K') => {
+  return isMac() ? `⌘${key}` : `Ctrl+${key}`;
+};

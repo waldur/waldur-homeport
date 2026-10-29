@@ -23,7 +23,10 @@ import { SdkFunction } from '@/table/api';
 
 import { useFavoritePages } from '../favorite-pages/FavoritePageService';
 import { HeaderButtonBullet } from '../HeaderButtonBullet';
-import { getResourceFilterFromSearchItem } from '../search/utils';
+import {
+  getResourceFilterFromSearchItem,
+  getShortcutHint,
+} from '../search/utils';
 
 import { BreadcrumbItem, BreadcrumbSearchItem } from './BreadcrumbSearchItem';
 import { FilterSelect } from './FilterSelect';
@@ -42,12 +45,7 @@ interface BreadcrumbDropdownProps<
   close?: () => void;
 }
 
-// As SearchInput.tsx names its own shortcut.
-const FAVORITE_SHORTCUT =
-  typeof navigator !== 'undefined' &&
-  /Mac|iPhone|iPad|iPod/.test(navigator.platform)
-    ? '⌘D'
-    : 'Ctrl+D';
+const FAVORITE_SHORTCUT = getShortcutHint('D');
 
 const itemToString = (item: BreadcrumbItem) =>
   `${item.title} ${item.subtitle || ''}`.trim();
