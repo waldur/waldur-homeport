@@ -9,7 +9,7 @@ exports[`menu looks > keeps the action menu panel and rows 1`] = `
   "min-w-[130px]",
   "py-[6.5px]",
   "rounded-lg",
-  "shadow-[var(--dropdown-shadow)]",
+  "shadow-[var(--menu-shadow)]",
   "text-sm",
   "text-start",
   "z-dropdown-menu",
@@ -79,7 +79,7 @@ exports[`menu looks > keeps the nav panels 1`] = `
   "overflow-y-auto",
   "p-[0px]",
   "rounded-lg",
-  "shadow-[var(--dropdown-shadow)]",
+  "shadow-[var(--menu-shadow)]",
   "z-nav-menu",
 ]
 `;
@@ -97,7 +97,7 @@ exports[`menu looks > keeps the nav panels 2`] = `
   "motion-reduce:animate-none",
   "p-[0px]",
   "rounded-lg",
-  "shadow-[var(--dropdown-shadow)]",
+  "shadow-[var(--menu-shadow)]",
   "z-nav-menu",
 ]
 `;
@@ -118,7 +118,7 @@ exports[`menu looks > keeps the nav panels 3`] = `
   "overflow-y-auto",
   "p-[0px]",
   "rounded-lg",
-  "shadow-[var(--dropdown-shadow)]",
+  "shadow-[var(--menu-shadow)]",
   "z-nav-menu",
 ]
 `;

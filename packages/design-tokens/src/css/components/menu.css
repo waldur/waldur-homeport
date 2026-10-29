@@ -23,4 +23,11 @@
   --menu-item-disabled-text: var(--text-quinary);
   /* Action menus' disabled row: Bootstrap's $dropdown-link-disabled-color. */
   --menu-item-muted-text: var(--text-quaternary);
+  --menu-shadow: var(--dropdown-shadow);
+}
+
+:root[data-theme='dark'] {
+  /* The shadow doesn't show on the dark page, so a 1px ring outlines the
+     panel instead. */
+  --menu-shadow: 0 0 0 1px var(--border-secondary), var(--dropdown-shadow);
 }
