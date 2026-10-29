@@ -25,18 +25,23 @@ const expectFillsForm = async (input: HTMLElement) => {
   );
 };
 
-const result = { isLoading: false, isRefetching: false } as any;
-
-const Harness = ({ initial = '' }: { initial?: string }) => {
+const Harness = ({
+  initial = '',
+  isLoading = false,
+  showShortcut = true,
+}: {
+  initial?: string;
+  isLoading?: boolean;
+  showShortcut?: boolean;
+}) => {
   const [query, setQuery] = useState(initial);
   return (
     <div style={{ width: '100%', maxWidth: 640 }}>
       <SearchInput
-        result={result}
         query={query}
         setQuery={setQuery}
-        show
-        showShortcut
+        isLoading={isLoading}
+        showShortcut={showShortcut}
       />
     </div>
   );
@@ -59,4 +64,12 @@ export const WithQuery: Story = {
     const input = within(canvasElement).getByPlaceholderText('Search...');
     await expectFillsForm(input);
   },
+};
+
+export const Loading: Story = {
+  render: () => <Harness initial="openstack" isLoading />,
+};
+
+export const WithoutShortcut: Story = {
+  render: () => <Harness showShortcut={false} />,
 };

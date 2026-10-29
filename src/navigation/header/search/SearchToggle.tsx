@@ -121,10 +121,9 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
           ) : (
             <>
               <SearchInput
-                result={result}
                 query={query}
                 setQuery={setQuery}
-                show={show}
+                isLoading={show && (result.isLoading || result.isRefetching)}
                 className="hidden lg:block w-[325px]"
                 showShortcut={!show}
                 onOpen={() => setShow(true)}

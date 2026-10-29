@@ -28,7 +28,7 @@ interface SearchPopoverProps {
   result: SearchResult;
   usersResult: UsersSearchResult;
   query: string;
-  show: boolean;
+  show?: boolean;
   setQuery;
   activeTab: string;
   setActiveTab: (tab: string) => void;
@@ -445,7 +445,6 @@ export const SearchPopover = ({
   result,
   usersResult,
   query,
-  show,
   setQuery,
   activeTab,
   setActiveTab,
@@ -471,10 +470,9 @@ export const SearchPopover = ({
   return (
     <div className="pt-4">
       <SearchInput
-        result={result}
         query={query}
-        show={show}
         setQuery={setQuery}
+        isLoading={result.isLoading || result.isRefetching}
         className="px-4 mb-5"
       />
 
