@@ -20310,6 +20310,7 @@
       "feature_area": "actions"
     }
   },
+  "Enter comma-separated TRES limits such as 'cpu=512,mem=64G,gres/gpu=8'.": {},
   "Enter comma-separated affiliation identifiers": {
     "context": {
       "feature_area": "auto-provisioning-rules"
@@ -31338,6 +31339,16 @@
     }
   },
   "Max TRES per user (MaxTRESPerUser)": {
+    "context": {
+      "feature_area": "qos"
+    }
+  },
+  "Max TRES-minutes per job": {
+    "context": {
+      "feature_area": "qos"
+    }
+  },
+  "Max TRES-minutes per job (MaxTRESMinsPerJob)": {
     "context": {
       "feature_area": "qos"
     }
