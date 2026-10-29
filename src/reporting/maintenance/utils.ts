@@ -2,6 +2,7 @@ import { escape } from 'es-toolkit/compat';
 import { DateTime } from 'luxon';
 import { MaintenanceAnnouncement } from 'waldur-js-client';
 
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
@@ -11,30 +12,34 @@ import {
   TimingBucket,
 } from './types';
 
-// State colors matching the existing getMaintenanceState pattern
-const STATE_COLORS: Record<string, string> = {
-  Draft: '#7e8299',
-  Scheduled: '#ffc700',
-  'In progress': '#009ef7',
-  Completed: '#50cd89',
-  Cancelled: '#f1416c',
-};
-
-// Impact level colors (1=No impact, 2=Degraded, 3=Partial outage, 4=Full outage)
-const IMPACT_COLORS: Record<number, string> = {
-  1: '#50cd89', // No impact - Green
-  2: '#ffc700', // Degraded - Yellow
-  3: '#ffa800', // Partial outage - Orange
-  4: '#f1416c', // Full outage - Red
-};
-
-// Timing bucket colors — matches the documented palette in the plan
-const TIMING_COLORS: Record<TimingBucket, string> = {
-  on_time: '#50cd89',
-  late_start: '#ffa800',
-  overrun: '#f1416c',
-  early: '#009ef7',
-  pending: '#7e8299',
+// Colours per state, impact level and timing bucket, from the chart roles so
+// they follow the theme (read when a chart is built).
+const getTimelineColors = () => {
+  const tc = getChartThemeColors();
+  return {
+    state: {
+      Draft: tc.muted,
+      Scheduled: tc.notice,
+      'In progress': tc.progress,
+      Completed: tc.success,
+      Cancelled: tc.danger,
+    } as Record<string, string>,
+    // 1=No impact, 2=Degraded, 3=Partial outage, 4=Full outage
+    impact: {
+      1: tc.success,
+      2: tc.notice,
+      3: tc.warning,
+      4: tc.danger,
+    } as Record<number, string>,
+    timing: {
+      on_time: tc.success,
+      late_start: tc.warning,
+      overrun: tc.danger,
+      early: tc.progress,
+      pending: tc.muted,
+    } as Record<TimingBucket, string>,
+    fallback: tc.muted,
+  };
 };
 
 export const IMPACT_LABELS: Record<number, string> = {
@@ -166,6 +171,7 @@ export function formatTimelineChart(
   if (items.length === 0) {
     return {};
   }
+  const colors = getTimelineColors();
 
   // Group items
   const categories: string[] = [];
@@ -208,7 +214,7 @@ export function formatTimelineChart(
       const categoryIndex = categoryMap.get(categoryKey)!;
 
       if (isTiming) {
-        const timingColor = TIMING_COLORS[item.timingBucket];
+        const timingColor = colors.timing[item.timingBucket];
         // Scheduled bar — outline, upper half of the band.
         data.push({
           value: [
@@ -245,8 +251,8 @@ export function formatTimelineChart(
       } else {
         const color =
           colorBy === 'state'
-            ? STATE_COLORS[item.state] || '#7e8299'
-            : IMPACT_COLORS[item.maxImpactLevel] || '#7e8299';
+            ? colors.state[item.state] || colors.fallback
+            : colors.impact[item.maxImpactLevel] || colors.fallback;
 
         // Scheduled period (bar)
         data.push({

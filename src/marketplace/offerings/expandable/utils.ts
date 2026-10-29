@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 import { ProviderOfferingCosts } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 
 export const formatOfferingCostsChart = (
@@ -24,7 +25,7 @@ export const formatOfferingCostsChart = (
       axisPointer: {
         type: 'cross',
         crossStyle: {
-          color: '#999',
+          color: getChartThemeColors().muted,
         },
       },
     },

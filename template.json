@@ -58161,7 +58161,8 @@
   },
   "Terminated": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "provider"
     }
   },
   "Terminated resources": {},
@@ -58172,7 +58173,8 @@
   },
   "Terminating": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "provider"
     }
   },
   "Termination": {},

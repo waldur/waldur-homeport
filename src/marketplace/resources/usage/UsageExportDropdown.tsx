@@ -3,6 +3,7 @@ import { useCallback, useRef } from 'react';
 import { ProjectUser, OfferingComponent } from 'waldur-js-client';
 
 import { ChartExportDropdown } from '@/core/ChartExportDropdown';
+import { saveChartPng } from '@/core/chartPng';
 import { getBrandColor } from '@/core/utils';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
@@ -92,17 +93,11 @@ const exportAsPng = (props: UsageExportDropdownProps) => {
     const chartInstance = init(container);
     chartInstance.setOption(options);
 
-    const dataURL = chartInstance.getDataURL({
-      type: 'png',
-      backgroundColor: '#fff',
-      pixelRatio: 2,
-      excludeComponents: ['toolbox'],
-    });
-
-    const link = document.createElement('a');
-    link.href = dataURL;
-    link.download = `usage-${component.name}-${index + 1}-${new Date().toISOString()}.png`;
-    link.click();
+    saveChartPng(
+      chartInstance,
+      `usage-${component.name}-${index + 1}-${new Date().toISOString()}`,
+      '#fff',
+    );
 
     chartInstance.dispose();
     document.body.removeChild(container);

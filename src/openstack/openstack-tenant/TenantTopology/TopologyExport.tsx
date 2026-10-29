@@ -5,6 +5,7 @@ import {
 } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 
+import { getCssVar } from 'waldur-design-tokens';
 import { Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -200,7 +201,7 @@ const rasterise = async (svg: SVGElement, dpr = 2): Promise<Blob> => {
     ctx.scale(dpr, dpr);
     // Background matches Waldur's dark panel so dark-mode diagrams stay
     // legible when pasted into other tools.
-    ctx.fillStyle = '#0c111d';
+    ctx.fillStyle = getCssVar('--color-gray-dark-950');
     ctx.fillRect(0, 0, width, height);
     ctx.drawImage(img, 0, 0, width, height);
     const blob: Blob | null = await new Promise((resolve) =>

@@ -141,7 +141,7 @@ export function useAggregateLimitChart(
         axisPointer: {
           type: 'shadow',
           crossStyle: {
-            color: '#999',
+            color: getChartThemeColors().muted,
           },
         },
         formatter: function (params) {
@@ -185,9 +185,9 @@ export function useAggregateLimitChart(
         icon: 'circle',
         itemWidth: 8,
         itemHeight: 8,
+        // Colour from the theme's legend text (echarts/themes.ts).
         textStyle: {
           fontSize: 12,
-          color: '#555',
         },
         itemGap: 8,
         top: 0,
@@ -292,7 +292,7 @@ export function useAggregateLimitChart(
             borderRadius: [CHART_BAR_ROUNDING, CHART_BAR_ROUNDING, 0, 0],
           },
           data: remainingData,
-          color: '#d0d5dd', // gray-300
+          color: getChartThemeColors().neutral,
         },
       ],
     };

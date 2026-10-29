@@ -2,7 +2,10 @@ import { EChartsOption } from 'echarts';
 import React, { useMemo } from 'react';
 
 import { EChart } from '@/core/EChart';
-import { getCategoricalColors } from '@/dashboard/chartColors';
+import {
+  getCategoricalColors,
+  useChartThemeColors,
+} from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 
 interface DonutChartItem {
@@ -73,6 +76,7 @@ export const DonutChart = React.forwardRef<any, DonutChartProps>(
     const chartData = useMemo(() => prepareChartData(data), [data]);
 
     const palette = useMemo(() => getCategoricalColors(), []);
+    const tc = useChartThemeColors();
 
     const options = useMemo<EChartsOption>(
       () => ({
@@ -106,14 +110,14 @@ export const DonutChart = React.forwardRef<any, DonutChartProps>(
                       item.name,
                     )}</td>
                     <td style="padding:2px 0; text-align:right; font-variant-numeric: tabular-nums;">${item.value.toLocaleString()}</td>
-                    <td style="padding:2px 0 2px 8px; text-align:right; color:#A1A5B7; font-variant-numeric: tabular-nums;">${itemPercent}%</td>
+                    <td style="padding:2px 0 2px 8px; text-align:right; font-variant-numeric: tabular-nums;" class="text-quaternary">${itemPercent}%</td>
                   </tr>`;
               })
               .join('');
 
             const footer =
               remaining > 0
-                ? `<div style="margin-top:4px; color:#A1A5B7; font-size:11px;">${escapeHtml(
+                ? `<div style="margin-top:4px; font-size:11px;" class="text-quaternary">${escapeHtml(
                     translate('… and {count} more', { count: remaining }),
                   )}</div>`
                 : '';
@@ -135,7 +139,7 @@ export const DonutChart = React.forwardRef<any, DonutChartProps>(
             avoidLabelOverlap: false,
             itemStyle: {
               borderRadius: 4,
-              borderColor: '#fff',
+              borderColor: tc.surface,
               borderWidth: 2,
             },
             label: showTotal
@@ -148,12 +152,12 @@ export const DonutChart = React.forwardRef<any, DonutChartProps>(
                     total: {
                       fontSize: 24,
                       fontWeight: 'bold',
-                      color: '#181C32',
+                      color: tc.text,
                       lineHeight: 32,
                     },
                     label: {
                       fontSize: 12,
-                      color: '#A1A5B7',
+                      color: tc.textQuaternary,
                       lineHeight: 20,
                     },
                   },
@@ -171,7 +175,7 @@ export const DonutChart = React.forwardRef<any, DonutChartProps>(
           },
         ],
       }),
-      [chartData, total, showTotal],
+      [chartData, total, showTotal, palette, tc],
     );
 
     return <EChart ref={ref} options={options} height={height} />;

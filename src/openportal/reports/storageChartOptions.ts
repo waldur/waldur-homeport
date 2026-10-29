@@ -9,6 +9,10 @@
 
 import type { EChartsOption } from 'echarts';
 
+import {
+  getCategoricalColors,
+  getChartThemeColors,
+} from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 
 import { ProjectStorageReport, Quota } from './ProjectStorageReport';
@@ -23,18 +27,14 @@ import {
   truncateMiddle,
 } from './usageChartOptions';
 
-const PALETTE = [
-  '#003366',
-  '#006699',
-  '#23c6c8',
-  '#1c84c6',
-  '#2ecc71',
-  '#e74c3c',
-  '#e67e22',
-  '#f1c40f',
-  '#9b59b6',
-  '#1abc9c',
-];
+/** Series colours: the chart roles' categorical palette (chartColors.ts). */
+const getPalette = () => getCategoricalColors(10);
+
+/** The palette colour for the i-th series, wrapping round. */
+const paletteColor = (i: number) => {
+  const palette = getPalette();
+  return palette[i % palette.length];
+};
 
 const TOP_N_USERS = 20;
 const TOP_N_PROJECTS = 15;
@@ -165,7 +165,7 @@ export function buildStorageBarOptions(
   // ── Project-level volume series ──────────────────────────────────────────
   visibleProjectVols.forEach((vol, vi) => {
     const q: Quota | undefined = projectQuotas[vol];
-    const color = PALETTE[vi % PALETTE.length];
+    const color = paletteColor(vi);
     const rowIndex = vi; // project rows are at the top
 
     legendItems.push(vol);
@@ -195,7 +195,7 @@ export function buildStorageBarOptions(
 
   // ── Per-user volume series ────────────────────────────────────────────────
   visibleUserVols.forEach((vol, vi) => {
-    const color = PALETTE[(visibleProjectVols.length + vi) % PALETTE.length];
+    const color = paletteColor(visibleProjectVols.length + vi);
 
     // Data array: zeros for project rows, then one value per top user row, then optional Others row
     const othersUsed = hiddenUids.reduce((s, u) => {
@@ -246,7 +246,7 @@ export function buildStorageBarOptions(
   });
 
   return {
-    color: PALETTE,
+    color: getPalette(),
     tooltip: {
       trigger: 'axis',
       axisPointer: { type: 'shadow' },
@@ -318,7 +318,10 @@ export function buildStorageBarOptions(
         // Visually distinguish project rows with a different style
         formatter: (v: string) => v,
         rich: {
-          project: { fontWeight: 'bold', color: '#555' },
+          project: {
+            fontWeight: 'bold',
+            color: getChartThemeColors().textSecondary,
+          },
         },
       },
     },
@@ -414,7 +417,7 @@ export function buildStorageTimeseriesOptions(
     name: translate('Project · {volume}', { volume: vol }),
     type: 'line' as const,
     emphasis: { focus: 'series' as const },
-    itemStyle: { color: PALETTE[vi % PALETTE.length] },
+    itemStyle: { color: paletteColor(vi) },
     data: dates.map((date) => {
       const daily = report.getReport(date);
       return daily ? toUnit(daily.projectQuotas[vol]?.usageBytes ?? 0) : 0;
@@ -427,7 +430,7 @@ export function buildStorageTimeseriesOptions(
     type: 'bar' as const,
     stack: 'users',
     emphasis: { focus: 'series' as const },
-    itemStyle: { color: PALETTE[(projectVols.length + i) % PALETTE.length] },
+    itemStyle: { color: paletteColor(projectVols.length + i) },
     data: dates.map((date) => {
       const daily = report.getReport(date);
       if (!daily) return 0;
@@ -448,7 +451,7 @@ export function buildStorageTimeseriesOptions(
             type: 'bar' as const,
             stack: 'users',
             emphasis: { focus: 'series' as const },
-            itemStyle: { color: '#bbb' },
+            itemStyle: { color: getChartThemeColors().neutral },
             data: dates.map((date) => {
               const daily = report.getReport(date);
               if (!daily) return 0;
@@ -483,7 +486,7 @@ export function buildStorageTimeseriesOptions(
   const zoom = computeDataZoomRange(labels, allSeriesData);
 
   return {
-    color: PALETTE,
+    color: getPalette(),
     tooltip: {
       trigger: 'axis',
       axisPointer: { type: 'cross' },
@@ -602,7 +605,7 @@ export function buildStorageProjectBarOptions(
   const { unitLabel, toUnit } = getStorageUnit(maxBytes);
 
   return {
-    color: PALETTE,
+    color: getPalette(),
     tooltip: {
       trigger: 'axis',
       confine: true,
@@ -637,7 +640,10 @@ export function buildStorageProjectBarOptions(
         data: barValues.map(({ value, idx }) => ({
           value: toUnit(value),
           itemStyle: {
-            color: idx < topN.length ? PALETTE[idx % PALETTE.length] : '#bbb',
+            color:
+              idx < topN.length
+                ? paletteColor(idx)
+                : getChartThemeColors().neutral,
           },
         })),
         emphasis: { focus: 'series' as const },
@@ -736,7 +742,7 @@ export function buildStorageProjectTimeseriesOptions(
     type: 'bar' as const,
     stack: 'projects',
     emphasis: { focus: 'series' as const },
-    itemStyle: { color: PALETTE[i % PALETTE.length] },
+    itemStyle: { color: paletteColor(i) },
     data: dates.map((date) => getDateTotal(r, date)),
   }));
 
@@ -748,7 +754,7 @@ export function buildStorageProjectTimeseriesOptions(
             type: 'bar' as const,
             stack: 'projects',
             emphasis: { focus: 'series' as const },
-            itemStyle: { color: '#bbb' },
+            itemStyle: { color: getChartThemeColors().neutral },
             data: dates.map((date) =>
               hidden.reduce((s, { r }) => s + getDateTotal(r, date), 0),
             ),
@@ -769,7 +775,7 @@ export function buildStorageProjectTimeseriesOptions(
   );
 
   return {
-    color: PALETTE,
+    color: getPalette(),
     tooltip: {
       trigger: 'axis',
       confine: true,

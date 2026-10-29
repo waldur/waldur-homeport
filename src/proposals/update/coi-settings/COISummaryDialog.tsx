@@ -218,9 +218,9 @@ flowchart TB
         I -->|Disclosure types| L["Disclosure Only"]
     end
 
-    style E1 fill:${namedEnabled ? '#d4edda' : '#f8d7da'},color:#000
-    style F1 fill:${instEnabled ? '#d4edda' : '#f8d7da'},color:#000
-    style G1 fill:${coauthEnabled ? '#d4edda' : '#f8d7da'},color:#000
+    style E1 fill:${namedEnabled ? 'var(--status-success-bg-strong)' : 'var(--status-danger-bg-strong)'},color:var(--text-primary)
+    style F1 fill:${instEnabled ? 'var(--status-success-bg-strong)' : 'var(--status-danger-bg-strong)'},color:var(--text-primary)
+    style G1 fill:${coauthEnabled ? 'var(--status-success-bg-strong)' : 'var(--status-danger-bg-strong)'},color:var(--text-primary)
 `;
 };
 

@@ -196,7 +196,11 @@ export const UserDashboard: FC = () => {
                   { count: resourcesCount },
                 )}
                 icon={
-                  <RocketLaunchIcon size={32} color="white" weight="bold" />
+                  <RocketLaunchIcon
+                    size={32}
+                    className="text-[var(--fg-white)]"
+                    weight="bold"
+                  />
                 }
                 isLoading={false}
                 hasItems={true}
@@ -213,7 +217,13 @@ export const UserDashboard: FC = () => {
                   'See pending invites sent to your email {email} ({count})',
                   { email: user.email, count: invitationsCount },
                 )}
-                icon={<SignInIcon size={32} color="white" weight="bold" />}
+                icon={
+                  <SignInIcon
+                    size={32}
+                    className="text-[var(--fg-white)]"
+                    weight="bold"
+                  />
+                }
                 isLoading={false}
                 hasItems={true}
                 backgroundColor="bg-success"
@@ -231,7 +241,13 @@ export const UserDashboard: FC = () => {
                     'You have {count} pending organization onboarding application(s)',
                     { count: escalatedVerificationsCount },
                   )}
-                  icon={<BuildingsIcon size={32} color="white" weight="bold" />}
+                  icon={
+                    <BuildingsIcon
+                      size={32}
+                      className="text-[var(--fg-white)]"
+                      weight="bold"
+                    />
+                  }
                   isLoading={false}
                   hasItems={true}
                   backgroundColor="bg-warning"
@@ -247,7 +263,13 @@ export const UserDashboard: FC = () => {
                   'You have {count} offering(s) with unaccepted terms of service',
                   { count: pendingConsentsCount },
                 )}
-                icon={<CertificateIcon size={32} color="white" weight="bold" />}
+                icon={
+                  <CertificateIcon
+                    size={32}
+                    className="text-[var(--fg-white)]"
+                    weight="bold"
+                  />
+                }
                 isLoading={false}
                 hasItems={true}
                 backgroundColor="bg-danger"

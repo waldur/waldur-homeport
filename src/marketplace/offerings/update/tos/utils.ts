@@ -91,7 +91,7 @@ export const formatConsentStatusChart = (stats: {
         avoidLabelOverlap: false,
         itemStyle: {
           borderRadius: 10,
-          borderColor: '#fff',
+          borderColor: getChartThemeColors().surface,
           borderWidth: 2,
         },
         label: {
@@ -201,13 +201,13 @@ export const formatRevokedTrendChart = (
         smooth: true,
         data: data.map((d) => d.count),
         itemStyle: {
-          color: '#F1416C',
+          color: getChartThemeColors().danger,
         },
         lineStyle: {
-          color: '#F1416C',
+          color: getChartThemeColors().danger,
         },
         areaStyle: {
-          color: '#F1416C',
+          color: getChartThemeColors().danger,
           opacity: 0.3,
         },
       },

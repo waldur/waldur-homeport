@@ -1,16 +1,16 @@
 .impersonation-bar {
-  background-color: #dc6803;
-  color: white;
+  background-color: var(--color-warning-600);
+  color: var(--fg-white);
 
   .icon {
-    background: #ff8e00 !important;
+    background: var(--color-warning-500) !important;
     border-radius: var(--radius-lg);
     padding: 10px;
   }
 
   button {
-    background-color: #fef0c7;
-    color: #dc6803;
+    background-color: var(--color-warning-100);
+    color: var(--color-warning-600);
     text-wrap: nowrap;
     padding-left: 1rem !important;
     padding-right: 1rem !important;

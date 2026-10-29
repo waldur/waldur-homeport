@@ -9,6 +9,7 @@ import { saveFile } from '@/table/exporters/saveFile';
 import { ExportData } from '@/table/exporters/types';
 
 import { ChartExportDropdown } from './ChartExportDropdown';
+import { getChartPngDataUrl, saveChartPng } from './chartPng';
 
 interface EChartActionsProps {
   chartInstance: any;
@@ -18,14 +19,6 @@ interface EChartActionsProps {
   exportPng?: boolean;
   exportTitle?: string;
 }
-
-const getChartPng = (chartInstance) =>
-  chartInstance.getDataURL({
-    pixelRatio: 2,
-    backgroundColor: '#fff',
-    type: 'png',
-    excludeComponents: ['toolbox'],
-  });
 
 export const EChartActions: FC<EChartActionsProps> = ({
   chartInstance,
@@ -40,7 +33,7 @@ export const EChartActions: FC<EChartActionsProps> = ({
     if (!chartInstance || rendering.current) return;
     rendering.current = true;
     try {
-      const image = getChartPng(chartInstance).split(',')[1];
+      const image = getChartPngDataUrl(chartInstance).split(',')[1];
       const { data: pdf } = await renderPdf({
         body: { title: getPdfTitle(props.exportTitle), image },
       });
@@ -90,11 +83,7 @@ export const EChartActions: FC<EChartActionsProps> = ({
 
   const handleExportPng = useCallback(() => {
     if (!chartInstance) return;
-    const url = getChartPng(chartInstance);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${props.exportTitle || 'chart'}.png`;
-    link.click();
+    saveChartPng(chartInstance, props.exportTitle || 'chart');
   }, [chartInstance, props.exportTitle]);
 
   const hasExport =

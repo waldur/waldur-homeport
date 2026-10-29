@@ -17,14 +17,14 @@
     }
 
     .code-block-pre {
-      border-right: 1px solid #ccc;
+      border-right: 1px solid var(--border-primary);
       padding: 0 10px;
       margin-right: 10px;
       pointer-events: none;
     }
 
     .code-block-post {
-      border-left: 1px solid #ccc;
+      border-left: 1px solid var(--border-primary);
       padding: 0 10px;
       margin-left: 10px;
     }

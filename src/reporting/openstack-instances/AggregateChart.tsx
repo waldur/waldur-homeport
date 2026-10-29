@@ -4,6 +4,7 @@ import { OpenStackInstanceAggregate } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
 import { EChart } from '@/core/EChart';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -12,8 +13,9 @@ interface AggregateChartProps {
 }
 
 export const AggregateChart: FC<AggregateChartProps> = ({ data }) => {
-  const options = useMemo<EChartsOption>(
-    () => ({
+  const options = useMemo<EChartsOption>(() => {
+    const tc = getChartThemeColors();
+    return {
       tooltip: {
         trigger: 'axis',
         axisPointer: { type: 'shadow' },
@@ -52,19 +54,18 @@ export const AggregateChart: FC<AggregateChartProps> = ({ data }) => {
           name: translate('Instance count'),
           type: 'bar',
           data: (data || []).map((d) => d.instance_count),
-          itemStyle: { color: '#009ef7' },
+          itemStyle: { color: tc.progress },
         },
         {
           name: translate('Total cores'),
           type: 'bar',
           yAxisIndex: 1,
           data: (data || []).map((d) => d.total_cores),
-          itemStyle: { color: '#50cd89' },
+          itemStyle: { color: tc.success },
         },
       ],
-    }),
-    [data],
-  );
+    };
+  }, [data]);
 
   const getExportData = useCallback(
     () => ({

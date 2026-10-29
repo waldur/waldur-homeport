@@ -1,7 +1,7 @@
 import mermaid from 'mermaid';
 import { FC, useEffect, useId, useState } from 'react';
 
-import { isDarkTheme } from 'waldur-design-tokens';
+import { getCssVar, isDarkTheme } from 'waldur-design-tokens';
 import { AlertItem, LoadingSpinner } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -34,6 +34,16 @@ const configureMermaid = () => {
   });
 };
 
+/**
+ * Replaces each `var(--token)` in the diagram source with the token's value in
+ * the current theme. Mermaid's grammar takes no `var()` in a `style` or
+ * `classDef` line, so a diagram writes `style A fill:var(--status-success-bg-strong)`
+ * and gets the colour that theme resolves to; the chart re-renders on a theme
+ * switch, so it follows the theme like the rest of the page.
+ */
+export const resolveTokens = (code: string) =>
+  code.replace(/var\((--[\w-]+)\)/g, (match, name) => getCssVar(name) || match);
+
 export const MermaidChart: FC<MermaidChartProps> = ({ code, className }) => {
   const id = useId();
   const [svgContent, setSvgContent] = useState<string | null>(null);
@@ -55,8 +65,9 @@ export const MermaidChart: FC<MermaidChartProps> = ({ code, className }) => {
       setSvgContent(null);
 
       try {
+        const source = resolveTokens(code);
         // Validate the diagram first
-        const isValid = await mermaid.parse(code, { suppressErrors: true });
+        const isValid = await mermaid.parse(source, { suppressErrors: true });
         if (isValid === false) {
           throw new Error('Invalid Mermaid syntax');
         }
@@ -65,7 +76,7 @@ export const MermaidChart: FC<MermaidChartProps> = ({ code, className }) => {
         const mermaidId = `mermaid-${id.replace(/:/g, '-')}-${Date.now()}`;
 
         // Render the diagram
-        const { svg } = await mermaid.render(mermaidId, code);
+        const { svg } = await mermaid.render(mermaidId, source);
 
         // Check for rendering errors
         if (svg.includes('NaN') || svg.includes('Syntax error')) {

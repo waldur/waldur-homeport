@@ -4,9 +4,10 @@ import { FC, useCallback, useMemo } from 'react';
 
 import { ChartCard } from '@/core/ChartCard';
 import { EChart } from '@/core/EChart';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 
-import { DailyOrderStats, ORDER_TYPES, TYPE_COLORS } from './types';
+import { DailyOrderStats, ORDER_TYPES, getTypeColors } from './types';
 
 interface OrdersDailyTypeChartProps {
   dailyStats: DailyOrderStats[];
@@ -21,12 +22,13 @@ export const OrdersDailyTypeChart: FC<OrdersDailyTypeChartProps> = ({
     );
 
     const types = Object.keys(ORDER_TYPES);
+    const colors = getTypeColors();
     const series = types.map((type) => ({
       name: ORDER_TYPES[type] || type,
       type: 'bar' as const,
       stack: 'total',
       data: dailyStats.map((d) => d.by_type?.[type] || 0),
-      itemStyle: { color: TYPE_COLORS[type] || '#7e8299' },
+      itemStyle: { color: colors[type] || getChartThemeColors().muted },
     }));
 
     return {

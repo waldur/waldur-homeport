@@ -669,6 +669,8 @@ export const DUPLICATE_BASELINE = {
     'A strong divider line and the faintest text step, both gray-400 today',
   '--border-divider-medium = --text-senary':
     'A line that must show on any surface and the disabled text mark, both gray-300 today',
+  '--border-secondary = --status-neutral-bg-strong':
+    'A card hairline and the neutral diagram-node tint, both gray-200 / gray-dark-800 today',
 };
 
 /** The baseline key for a duplicate group. */

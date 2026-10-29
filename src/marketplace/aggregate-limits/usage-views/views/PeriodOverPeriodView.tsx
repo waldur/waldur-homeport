@@ -216,7 +216,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
         type: 'line',
         markLine: {
           symbol: 'none',
-          lineStyle: { type: 'dashed', color: '#d92d20' },
+          lineStyle: { type: 'dashed', color: tc.danger },
           data: [
             {
               yAxis: current.limit,

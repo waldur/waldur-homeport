@@ -2,18 +2,22 @@ import { FC, useCallback, useMemo } from 'react';
 import { ResourceState } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 import { DonutChart } from '@/reporting/users/charts/DonutChart';
 
-const STATE_MAPPING: Partial<
+const getStateMapping = (): Partial<
   Record<ResourceState, { label: string; color: string }>
-> = {
-  Creating: { label: translate('Creating'), color: '#009ef7' },
-  OK: { label: translate('OK'), color: '#50cd89' },
-  Erred: { label: translate('Erred'), color: '#f1416c' },
-  Updating: { label: translate('Updating'), color: '#ffc700' },
-  Terminating: { label: translate('Terminating'), color: '#7e8299' },
-  Terminated: { label: translate('Terminated'), color: '#7e8299' },
+> => {
+  const tc = getChartThemeColors();
+  return {
+    Creating: { label: translate('Creating'), color: tc.progress },
+    OK: { label: translate('OK'), color: tc.success },
+    Erred: { label: translate('Erred'), color: tc.danger },
+    Updating: { label: translate('Updating'), color: tc.notice },
+    Terminating: { label: translate('Terminating'), color: tc.muted },
+    Terminated: { label: translate('Terminated'), color: tc.muted },
+  };
 };
 
 interface ResourcesByStateChartProps {
@@ -24,12 +28,13 @@ export const ResourcesByStateChart: FC<ResourcesByStateChartProps> = ({
   byState,
 }) => {
   const chartData = useMemo(() => {
+    const stateMapping = getStateMapping();
     return Object.entries(byState || {})
       .filter(([, value]) => value > 0)
       .map(([state, value]) => {
-        const mapping = STATE_MAPPING[state] || {
+        const mapping = stateMapping[state] || {
           label: state,
-          color: '#7e8299',
+          color: getChartThemeColors().muted,
         };
         return {
           name: mapping.label,
@@ -43,7 +48,7 @@ export const ResourcesByStateChart: FC<ResourcesByStateChartProps> = ({
     () => ({
       fields: [translate('State'), translate('Count')],
       data: Object.entries(byState || {}).map(([state, count]) => [
-        STATE_MAPPING[state]?.label || state,
+        getStateMapping()[state]?.label || state,
         count,
       ]),
     }),

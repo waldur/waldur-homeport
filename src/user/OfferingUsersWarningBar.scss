@@ -3,12 +3,12 @@
   text-align: center;
   display: grid;
   place-items: center;
-  background-color: #f7e3c5;
-  border: 1px solid #f1cfa1;
+  background-color: var(--status-warning-bg);
+  border: 1px solid var(--status-warning-border);
   margin-bottom: 0.5rem;
 
   .flex {
-    color: #975e06;
+    color: var(--status-warning-fg);
   }
 }
 

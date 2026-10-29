@@ -80,9 +80,9 @@ flowchart TB
         I --> I3["text_score"]
     end
 
-    style F fill:#e8f5e9,color:#000
-    style G fill:#e3f2fd,color:#000
-    style H fill:#fff3e0,color:#000
+    style F fill:var(--status-success-bg-strong),color:var(--text-primary)
+    style G fill:var(--status-info-bg-strong),color:var(--text-primary)
+    style H fill:var(--status-warning-bg-strong),color:var(--text-primary)
 `;
 };
 
@@ -110,8 +110,8 @@ flowchart LR
         F --> G["Reviewer ↔ Proposal<br/>assignments"]
     end
 
-    style B fill:#fff3e0,color:#000
-    style F fill:#e8f5e9,color:#000
+    style B fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style F fill:var(--status-success-bg-strong),color:var(--text-primary)
 `;
 };
 

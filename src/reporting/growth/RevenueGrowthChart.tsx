@@ -9,6 +9,7 @@ import { ENV } from '@/core/config';
 import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { getChartBrandColor } from '@/dashboard/constants';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
@@ -32,7 +33,7 @@ const formatGrowthChart = (growthChartData?): EChartsOption => {
       trigger: 'axis',
       axisPointer: {
         type: 'cross',
-        crossStyle: { color: '#999' },
+        crossStyle: { color: getChartThemeColors().muted },
       },
     },
     xAxis: [

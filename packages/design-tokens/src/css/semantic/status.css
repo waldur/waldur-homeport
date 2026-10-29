@@ -6,6 +6,10 @@
  *
  * Slots, per intent:
  *   -bg      tinted surface (a pill, a banner, a highlighted row)
+ *   -bg-strong  a tint that marks one small shape among plain ones (a
+ *            diagram node). In light, -bg is the 50 step and nearly
+ *            vanishes at that size, so this is the 100 step (200 for info,
+ *            whose ramp has no 100); in dark it is the -bg step.
  *   -border  subtle border, on a neutral or a tinted surface
  *   -solid   saturated fill or ring (a focus ring on an invalid control)
  *   -fg      text, icons and dots, on a neutral surface AND on -bg. One slot
@@ -13,7 +17,7 @@
  *            card, the page and its own -bg in each theme, which
  *            statusContrast.test.ts enforces.
  *
- * `info` and `neutral` have only -bg and -fg.
+ * `info` and `neutral` have only -bg, -bg-strong and -fg.
  *
  * `danger`, not `error`: roles are named by intent, like the button and
  * ActionItem variants; `error` is only the name of the red ramp.
@@ -32,47 +36,57 @@
 
 :root {
   --status-success-bg: var(--color-success-50);
+  --status-success-bg-strong: var(--color-success-100);
   --status-success-border: var(--color-success-300);
   --status-success-solid: var(--color-success-600);
   --status-success-fg: var(--color-success-700);
 
   --status-warning-bg: var(--color-warning-50);
+  --status-warning-bg-strong: var(--color-warning-100);
   --status-warning-border: var(--color-warning-300);
   --status-warning-solid: var(--color-warning-600);
   --status-warning-fg: var(--color-warning-700);
 
   --status-danger-bg: var(--color-error-50);
+  --status-danger-bg-strong: var(--color-error-100);
   --status-danger-border: var(--color-error-300);
   --status-danger-solid: var(--color-error-600);
   --status-danger-fg: var(--color-error-700);
 
   --status-info-bg: var(--color-info-50);
+  --status-info-bg-strong: var(--color-info-200);
   --status-info-fg: var(--color-info-600);
 
   --status-neutral-bg: var(--color-gray-100);
+  --status-neutral-bg-strong: var(--color-gray-200);
   --status-neutral-fg: var(--color-gray-600);
 }
 
 :root[data-theme='dark'] {
   --status-success-bg: var(--color-success-900);
+  --status-success-bg-strong: var(--color-success-900);
   --status-success-border: var(--color-success-400);
   --status-success-solid: var(--color-success-500);
   --status-success-fg: var(--color-success-400);
 
   --status-warning-bg: var(--color-warning-900);
+  --status-warning-bg-strong: var(--color-warning-900);
   --status-warning-border: var(--color-warning-400);
   --status-warning-solid: var(--color-warning-500);
   --status-warning-fg: var(--color-warning-400);
 
   --status-danger-bg: var(--color-error-900);
+  --status-danger-bg-strong: var(--color-error-900);
   --status-danger-border: var(--color-error-400);
   --status-danger-solid: var(--color-error-500);
   /* 300, not 400 like the others: error-400 on error-900 is 3.5:1. */
   --status-danger-fg: var(--color-error-300);
 
   --status-info-bg: var(--color-info-900);
+  --status-info-bg-strong: var(--color-info-900);
   --status-info-fg: var(--color-info-300);
 
   --status-neutral-bg: var(--color-gray-dark-800);
+  --status-neutral-bg-strong: var(--color-gray-dark-800);
   --status-neutral-fg: var(--color-gray-dark-400);
 }

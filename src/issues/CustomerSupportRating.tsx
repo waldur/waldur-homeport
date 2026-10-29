@@ -41,6 +41,8 @@ export const CustomerSupportRating: FunctionComponent = () => {
     queryKey: ['CustomerSupportRating'],
     queryFn: loadData,
   });
+  // The average report is a plain JSON number (9.5), never a Number object;
+  // anything that is not a finite number hides the panel.
   return loading ? (
     <LoadingSpinner />
   ) : error ? (
@@ -49,7 +51,7 @@ export const CustomerSupportRating: FunctionComponent = () => {
         'Unable to load customer support satisfaction overall rating.',
       )}
     </>
-  ) : value.averageFeedback instanceof Number ? (
+  ) : Number.isFinite(value.averageFeedback) ? (
     <Panel
       title={translate('Customer support satisfaction overall rating')}
       className="customer-support-rating-container"

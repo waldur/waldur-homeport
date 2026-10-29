@@ -14,6 +14,7 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { parseDate } from '@/core/dateUtils';
 import { formatUsageValue } from '@/core/formatNumber';
 import { lazyComponent } from '@/core/lazyComponent';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 import { getBillingTypes } from '@/marketplace/common/billingTypes';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -48,7 +49,7 @@ const formatChart = (
       axisPointer: {
         type: 'cross',
         crossStyle: {
-          color: '#999',
+          color: getChartThemeColors().muted,
         },
       },
       enterable: true,
@@ -148,7 +149,7 @@ const formatChart = (
               type: 'bar',
               name: limitSeriesName,
               data: limits,
-              color: '#e0e0e0', // Light gray for limit bars
+              color: getChartThemeColors().neutral,
               barMaxWidth: 50,
             },
           ]

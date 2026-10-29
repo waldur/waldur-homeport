@@ -122,7 +122,9 @@ export const RateStars: FC<RateStarsProps> = ({
           tabIndex={edit ? (i === focusableStar ? 0 : -1) : undefined}
           style={{ cursor: edit ? 'pointer' : 'default' }}
         >
-          <StarComponent weight="fill" size={size} color={color} />
+          {/* Through CSS `color`: the fill is currentColor, and a var()
+              resolves there in every browser. */}
+          <StarComponent weight="fill" size={size} style={{ color }} />
         </span>,
       );
     }
