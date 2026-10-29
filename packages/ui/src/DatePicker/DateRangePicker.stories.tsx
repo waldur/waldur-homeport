@@ -394,7 +394,7 @@ export const SameDayTimeOrderEnforced: Story = {
 /**
  * Two inputs, start and end, in one group named by the field (here its
  * placeholder). A typed start alone is a partial start, like a first click;
- * typing the end commits the range — no calendar involved.
+ * typing the end commits the range, with the calendar left as it was.
  */
 export const TypeRange: Story = {
   render: () => <Harness />,
@@ -419,7 +419,8 @@ export const TypeRange: Story = {
       ]),
     );
     await expect(partialOf(canvasElement)).toBeNull();
-    await expect(isCalendarOpen()).toBe(false);
+    // Focusing an input showed the calendar; typing leaves it open.
+    await expect(isCalendarOpen()).toBe(true);
   },
 };
 

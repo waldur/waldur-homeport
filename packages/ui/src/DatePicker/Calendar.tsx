@@ -22,6 +22,8 @@ import {
 
 import { cn } from '../cn';
 
+import { useKeepInputFocus } from './keepInputFocus';
+
 /**
  * shadcn's Calendar recipe (https://ui.shadcn.com/docs/components/calendar)
  * over react-day-picker, styled to match the Metronic theme: a 328px panel
@@ -58,6 +60,7 @@ export function Calendar({
   ...props
 }: ComponentProps<typeof DayPicker>) {
   const defaults = getDefaultClassNames();
+  const keepInputFocus = useKeepInputFocus();
 
   return (
     <DayPicker
@@ -169,6 +172,7 @@ export function Calendar({
         ...components,
       }}
       {...props}
+      autoFocus={keepInputFocus ? false : props.autoFocus}
     />
   );
 }
