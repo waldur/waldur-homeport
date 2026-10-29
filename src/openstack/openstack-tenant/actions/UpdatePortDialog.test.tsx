@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -124,5 +124,35 @@ describe('UpdatePortDialog', () => {
         }),
       );
     });
+  });
+
+  it('marks a subnet the provider shares', async () => {
+    const user = userEvent.setup();
+    const tenantUrl = (uuid: string) => `http://api/openstack-tenants/${uuid}/`;
+    vi.mocked(openstackSubnetsList).mockResolvedValue({
+      data: [
+        { ...mockSubnets[0], tenant: tenantUrl('tenant-uuid') },
+        {
+          ...mockSubnets[1],
+          tenant: tenantUrl('admin-uuid'),
+          tenant_is_managed: false,
+        },
+      ],
+    } as any);
+    renderDialog();
+
+    // The port's subnet is the tenant's own: no mark beside it.
+    expect(await screen.findByText('Subnet-One')).toBeInTheDocument();
+    expect(screen.queryByText('shared by provider')).toBeNull();
+
+    await user.click(await screen.findByLabelText('Subnet'));
+    const shared = await screen.findByRole('option', {
+      name: /^Subnet-Two \(10\.0\.1\.0\/24\)/,
+    });
+    expect(within(shared).getByText('shared by provider')).toBeInTheDocument();
+    const own = screen.getByRole('option', {
+      name: 'Subnet-One (10.0.0.0/24)',
+    });
+    expect(within(own).queryByText('shared by provider')).toBeNull();
   });
 });

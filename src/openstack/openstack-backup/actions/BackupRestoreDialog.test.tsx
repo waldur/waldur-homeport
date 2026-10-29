@@ -155,7 +155,14 @@ describe('BackupRestoreDialog', () => {
       query: {
         page: 1,
         tenant_uuid: fakeBackup.tenant_uuid,
-        field: ['url', 'name', 'cidr'],
+        field: [
+          'url',
+          'name',
+          'cidr',
+          'tenant',
+          'tenant_name',
+          'tenant_is_managed',
+        ],
       },
     });
   });
@@ -393,5 +400,31 @@ describe('BackupRestoreDialog', () => {
     await user.click(screen.getByRole('button', { name: /Submit/i }));
 
     expect(refetch).toHaveBeenCalled();
+  });
+
+  it('lists subnets of the tenant first and marks the shared ones', async () => {
+    const tenantUrl = (uuid: string) => `/api/openstack-tenants/${uuid}/`;
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([
+        {
+          ...freeSubnet,
+          name: 'public',
+          cidr: '2001:db8::/64',
+          tenant: tenantUrl('admin-uuid'),
+          tenant_is_managed: false,
+        },
+        { ...fakeSubnet, tenant: tenantUrl(fakeBackup.tenant_uuid) },
+      ]),
+    );
+    await renderDialog();
+
+    const options = within(screen.getByLabelText('Subnet')).getAllByRole(
+      'option',
+    );
+    expect(options.map((option) => option.textContent)).toEqual([
+      'Select connected subnet',
+      'p60347-sub-net (192.168.42.0/24)',
+      'public (2001:db8::/64) — shared by provider',
+    ]);
   });
 });

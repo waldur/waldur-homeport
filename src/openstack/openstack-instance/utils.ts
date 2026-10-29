@@ -140,24 +140,37 @@ export function formatSubnet(subnet) {
   return subnet.name ? `${subnet.name} (${subnet.cidr})` : subnet.cidr;
 }
 
-// Who shares a subnet the tenant reaches through a share; undefined for the
-// tenant's own. A provider network usually carries both its floating-IP pool
-// and a public range, so its subnets need telling apart by more than a name.
-export function formatSubnetOwner(
-  subnet: {
-    tenant?: string;
-    tenant_name?: string;
-    tenant_is_managed?: boolean;
-  },
+interface SharedItem {
+  tenant?: string;
+  tenant_name?: string;
+  tenant_is_managed?: boolean;
+}
+
+// Who shares a network or subnet the tenant reaches through a share; undefined
+// for the tenant's own. A provider network usually carries both its
+// floating-IP pool and a public range, so its subnets need telling apart by
+// more than a name.
+export function formatSharedBy(
+  item: SharedItem,
   tenantUuid: string,
 ): string | undefined {
-  if (!subnet.tenant || getUUID(subnet.tenant) === tenantUuid) {
+  if (!item.tenant || getUUID(item.tenant) === tenantUuid) {
     return undefined;
   }
-  return subnet.tenant_is_managed === false
+  return item.tenant_is_managed === false
     ? translate('shared by provider')
-    : translate('shared by {tenant}', { tenant: subnet.tenant_name });
+    : translate('shared by {tenant}', { tenant: item.tenant_name });
 }
+
+// The same for an option that is plain text, such as one of a native select.
+export const labelWithSharedBy = (
+  label: string,
+  item: SharedItem,
+  tenantUuid: string,
+): string => {
+  const sharedBy = formatSharedBy(item, tenantUuid);
+  return sharedBy ? `${label} — ${sharedBy}` : label;
+};
 
 // The first port is the instance's first interface, the one cloud-init looks
 // for DHCP and the metadata service on, so the tenant's own subnets come before

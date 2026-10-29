@@ -99,6 +99,7 @@ export const UpdatePortDialog: FC<ActionDialogProps<OpenStackPort>> = ({
           extraProps: {
             subnets,
             customIp: !!resource.fixed_ips?.[0]?.ip_address,
+            tenantUuid: resource.tenant_uuid,
           },
         },
       ]}

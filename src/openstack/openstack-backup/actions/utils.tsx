@@ -13,6 +13,8 @@ import { Option } from '@/marketplace/common/registry';
 import {
   formatFlavorTitle,
   formatSubnet,
+  labelWithSharedBy,
+  ownSubnetsFirst,
 } from '@/openstack/openstack-instance/utils';
 
 const AUTO_ASSIGN_FLOATING_IP = 'AUTO_ASSIGN_FLOATING_IP';
@@ -74,7 +76,14 @@ export const loadData = async (
         query: {
           page,
           tenant_uuid: resource.tenant_uuid,
-          field: ['url', 'name', 'cidr'],
+          field: [
+            'url',
+            'name',
+            'cidr',
+            'tenant',
+            'tenant_name',
+            'tenant_is_managed',
+          ],
         },
       }),
     ),
@@ -94,8 +103,12 @@ export const loadData = async (
         label: translate('Select connected subnet'),
         value: '',
       },
-      ...subnets.map((subnet) => ({
-        label: formatSubnet(subnet),
+      ...ownSubnetsFirst(subnets, resource.tenant_uuid).map((subnet) => ({
+        label: labelWithSharedBy(
+          formatSubnet(subnet),
+          subnet,
+          resource.tenant_uuid,
+        ),
         value: subnet.url,
       })),
     ],

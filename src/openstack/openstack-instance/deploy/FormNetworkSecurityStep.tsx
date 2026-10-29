@@ -44,10 +44,11 @@ import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
 import { VStepperFormStepCard } from '@/wizard';
 
+import { SharedByLabel } from '../SharedByLabel';
 import {
   formatSubnet,
   formatSubnetName,
-  formatSubnetOwner,
+  formatSharedBy,
   getDefaultFloatingIps,
   ownSubnetsFirst,
 } from '../utils';
@@ -193,20 +194,17 @@ export const SubnetValueContainer = (props) => {
 };
 
 // The selected subnet shows its name (its CIDR is in the tooltip beside it),
-// the menu its CIDR as well. Who shares a subnet stays in view when a long name
-// is cut short.
-const renderSubnetOption =
+// the menu its CIDR as well.
+export const renderSubnetOption =
   (tenantUuid: string) =>
   (subnet, { context }: { context: 'menu' | 'value' }) => {
     const label =
       context === 'menu' ? formatSubnet(subnet) : formatSubnetName(subnet);
-    const owner = formatSubnetOwner(subnet, tenantUuid);
-    if (!owner) return label;
     return (
-      <span className="flex min-w-0 items-baseline gap-2">
-        <span className="truncate">{label}</span>
-        <span className="shrink-0 text-sm text-tertiary">{owner}</span>
-      </span>
+      <SharedByLabel
+        label={label}
+        sharedBy={formatSharedBy(subnet, tenantUuid)}
+      />
     );
   };
 

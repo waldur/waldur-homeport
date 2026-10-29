@@ -4,7 +4,8 @@ import {
   formatAddressList,
   formatSubnet,
   formatSubnetName,
-  formatSubnetOwner,
+  formatSharedBy,
+  labelWithSharedBy,
   ownSubnetsFirst,
   validateOpenstackInstanceName,
 } from './utils';
@@ -94,13 +95,13 @@ describe('formatSubnet', () => {
   });
 });
 
-describe('formatSubnetOwner', () => {
+describe('formatSharedBy', () => {
   const tenantUrl = (uuid: string) =>
     `https://example.com/api/openstack-tenants/${uuid}/`;
 
   it('says nothing for a subnet of the tenant itself', () => {
     expect(
-      formatSubnetOwner(
+      formatSharedBy(
         { tenant: tenantUrl('t1'), tenant_is_managed: true },
         't1',
       ),
@@ -109,7 +110,7 @@ describe('formatSubnetOwner', () => {
 
   it('names the provider for a subnet of a network it shares', () => {
     expect(
-      formatSubnetOwner(
+      formatSharedBy(
         { tenant: tenantUrl('admin'), tenant_is_managed: false },
         't1',
       ),
@@ -118,7 +119,7 @@ describe('formatSubnetOwner', () => {
 
   it('names the tenant that shares the subnet', () => {
     expect(
-      formatSubnetOwner(
+      formatSharedBy(
         {
           tenant: tenantUrl('t2'),
           tenant_name: 'research',
@@ -127,6 +128,31 @@ describe('formatSubnetOwner', () => {
         't1',
       ),
     ).toBe('shared by research');
+  });
+});
+
+describe('labelWithSharedBy', () => {
+  const tenantUrl = (uuid: string) =>
+    `https://example.com/api/openstack-tenants/${uuid}/`;
+
+  it('leaves the label of an own subnet as it is', () => {
+    expect(
+      labelWithSharedBy(
+        'lan (10.0.0.0/24)',
+        { tenant: tenantUrl('t1'), tenant_is_managed: true },
+        't1',
+      ),
+    ).toBe('lan (10.0.0.0/24)');
+  });
+
+  it('adds who shares the subnet', () => {
+    expect(
+      labelWithSharedBy(
+        'public (2001:db8::/64)',
+        { tenant: tenantUrl('admin'), tenant_is_managed: false },
+        't1',
+      ),
+    ).toBe('public (2001:db8::/64) — shared by provider');
   });
 });
 

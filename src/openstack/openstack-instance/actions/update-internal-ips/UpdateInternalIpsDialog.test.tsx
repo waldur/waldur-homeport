@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -540,6 +540,64 @@ describe('UpdateInternalIpsDialog', () => {
           screen.getByText('IPs is outside the allocation pool'),
         ).toBeInTheDocument();
       });
+    });
+  });
+
+  describe('with a subnet the provider shares', () => {
+    const tenantUrl = (uuid: string) => `http://api/openstack-tenants/${uuid}/`;
+    const providerSubnet = {
+      uuid: 'subnet-public',
+      url: 'http://api/subnets/subnet-public/',
+      name: 'public',
+      cidr: '2001:db8::/64',
+      backend_id: 'backend-public',
+      allocation_pools: [],
+      tenant: tenantUrl('admin-uuid'),
+      tenant_is_managed: false,
+    };
+
+    beforeEach(() => {
+      // Listed first, as the API may well return it.
+      vi.mocked(openstackSubnetsList).mockResolvedValue(
+        mockListResponse([
+          providerSubnet,
+          ...subnetsResponse.map((subnet) => ({
+            ...subnet,
+            tenant: tenantUrl('tenant-uuid'),
+            tenant_is_managed: true,
+          })),
+        ]),
+      );
+    });
+
+    it('adds a subnet of the tenant before it', async () => {
+      const user = userEvent.setup();
+      renderDialog();
+
+      await user.click(
+        await screen.findByRole('button', { name: /Add subnet/i }),
+      );
+
+      expect(await screen.findByText('subnet-beta')).toBeInTheDocument();
+      expect(screen.queryByText('public')).not.toBeInTheDocument();
+    });
+
+    it('marks it in the list of subnets', async () => {
+      const user = userEvent.setup();
+      renderDialog();
+
+      await user.click(await screen.findByLabelText('Subnet'));
+
+      const shared = await screen.findByRole('option', {
+        name: /^public \(2001:db8::\/64\)/,
+      });
+      expect(
+        within(shared).getByText('shared by provider'),
+      ).toBeInTheDocument();
+      const own = screen.getByRole('option', {
+        name: /^subnet-beta \(10\.0\.1\.0\/24\)/,
+      });
+      expect(within(own).queryByText('shared by provider')).toBeNull();
     });
   });
 });
