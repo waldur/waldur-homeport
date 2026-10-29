@@ -2426,6 +2426,12 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
+      {
+        key: 'MCP_RESOURCE_URLS',
+        description: translate('Public URL(s) of the MCP endpoint, space-separated (e.g. https://api.example.com/mcp). OAuth tokens are issued only for these resources, and for the first one when a client names none; while empty, no OAuth token is issued.'),
+        default: '',
+        type: 'string',
+      },
     ],
   },
   {
