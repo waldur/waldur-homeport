@@ -116,6 +116,30 @@ export const checkIsServiceManagerOnly = (
 export const isServiceManagerOnly = (state: RootState): boolean =>
   checkIsServiceManagerOnly(getCustomer(state));
 
+/**
+ * May the user manage the resources of the project: staff, an owner of its
+ * organization, or its admin or manager? Mastermind asks the same of anyone
+ * creating a port in one of the project's tenants.
+ */
+export const checkCanManageProject = (
+  user: User,
+  project: { uuid: string; customerUuid: string },
+): boolean => {
+  if (!user) {
+    return false;
+  }
+  if (user.is_staff || checkIsOwner({ uuid: project.customerUuid }, user)) {
+    return true;
+  }
+  return !!user.permissions?.some(
+    (permission) =>
+      permission.scope_type === 'project' &&
+      permission.scope_uuid === project.uuid &&
+      (isRoleOrClone(permission.role_name, RoleEnum.PROJECT_ADMIN) ||
+        isRoleOrClone(permission.role_name, RoleEnum.PROJECT_MANAGER)),
+  );
+};
+
 export const checkIsOwnerOrStaff = (
   customer: AtLeast<Customer, 'uuid'>,
   user: User,
