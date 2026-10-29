@@ -34,10 +34,11 @@ export type SurfaceContainer = 'menu' | 'popover' | 'disclosure';
 // browser's). A caller's `py-*` or `my-*` still wins: Tailwind orders the
 // shorthand before it.
 
-// No border, the page body's background, an 8px radius and z-index 105.
+// No border (a 1px ring in dark), the page body's background, an 8px
+// radius and z-index 105.
 // Like Metronic, it sets no text colour; only rows are gray-600.
 const navSurface = cva(
-  `z-nav-menu m-[0px] flex list-none flex-col p-[0px] rounded-lg shadow-[var(--dropdown-shadow)] bg-[var(--menu-bg)] ${MENU_PANEL_MOTION_CLASSNAME}`,
+  `z-nav-menu m-[0px] flex list-none flex-col p-[0px] rounded-lg shadow-[var(--menu-shadow)] bg-[var(--menu-bg)] ${MENU_PANEL_MOTION_CLASSNAME}`,
   {
     variants: {
       container: {
@@ -65,7 +66,7 @@ const navSurface = cva(
 // 1100, and no entrance motion, as Bootstrap's. Scrolling is left to the
 // panel (Menu.Content adds it; ActionsMenu's popover adds its own).
 const ACTIONS_SURFACE_CLASSNAME =
-  'z-dropdown-menu m-[0px] block min-w-[130px] list-none rounded-lg bg-[var(--menu-bg)] py-[6.5px] text-start text-sm shadow-[var(--dropdown-shadow)]';
+  'z-dropdown-menu m-[0px] block min-w-[130px] list-none rounded-lg bg-[var(--menu-bg)] py-[6.5px] text-start text-sm shadow-[var(--menu-shadow)]';
 
 /** A menu or popover panel in the given look. `container` only shapes the
  * nav look. */
