@@ -10,6 +10,7 @@ import {
   canAccessServiceProviderWorkspace,
   canViewServiceProviderTeam,
   checkCanAccessServiceProvider,
+  checkCanManageProject,
   checkHasServiceProviderRole,
   checkServiceProviderPermission,
   hasServiceProviderPermission,
@@ -742,5 +743,103 @@ describe('isStaffOrSupportOrImpersonating', () => {
   it('is true while staff impersonates a regular user', () => {
     vi.mocked(ImpersonationStorage.get).mockReturnValue('impersonated-uuid');
     expect(isStaffOrSupportOrImpersonating(state(regularUser))).toBe(true);
+  });
+});
+
+describe('checkCanManageProject', () => {
+  const ADMIN_CLONE = 'PROJECT.acme.ADMIN';
+  const MANAGER_CLONE = 'PROJECT.acme.MANAGER';
+  const OWNER_CLONE = 'CUSTOMER.acme.OWNER';
+  const MEMBER_CLONE = 'PROJECT.acme.MEMBER';
+  let originalRoles;
+
+  beforeEach(() => {
+    originalRoles = ENV.roles;
+    ENV.roles = [
+      ...originalRoles,
+      {
+        name: ADMIN_CLONE,
+        template_name: RoleEnum.PROJECT_ADMIN,
+        permissions: [],
+      },
+      {
+        name: MANAGER_CLONE,
+        template_name: RoleEnum.PROJECT_MANAGER,
+        permissions: [],
+      },
+      {
+        name: OWNER_CLONE,
+        template_name: RoleEnum.CUSTOMER_OWNER,
+        permissions: [],
+      },
+      {
+        name: MEMBER_CLONE,
+        template_name: RoleEnum.PROJECT_MEMBER,
+        permissions: [],
+      },
+    ] as any;
+  });
+
+  afterEach(() => {
+    ENV.roles = originalRoles;
+  });
+
+  const project = { uuid: 'project-uuid', customerUuid: 'acme' };
+  const userWith = (
+    scope_type: string,
+    scope_uuid: string,
+    role_name: string,
+  ) =>
+    ({
+      is_staff: false,
+      is_support: false,
+      permissions: [{ scope_type, scope_uuid, role_name }],
+    }) as any;
+
+  it.each([
+    ['staff', { is_staff: true, permissions: [] }],
+    ['an owner', userWith('customer', 'acme', RoleEnum.CUSTOMER_OWNER)],
+    ['a clone of the owner', userWith('customer', 'acme', OWNER_CLONE)],
+    ['the admin', userWith('project', 'project-uuid', RoleEnum.PROJECT_ADMIN)],
+    ['a clone of the admin', userWith('project', 'project-uuid', ADMIN_CLONE)],
+    [
+      'the manager',
+      userWith('project', 'project-uuid', RoleEnum.PROJECT_MANAGER),
+    ],
+    [
+      'a clone of the manager',
+      userWith('project', 'project-uuid', MANAGER_CLONE),
+    ],
+  ])('lets %s manage the project', (_, user) => {
+    expect(checkCanManageProject(user as any, project)).toBe(true);
+  });
+
+  it.each([
+    ['nobody signed in', undefined],
+    ['a member', userWith('project', 'project-uuid', RoleEnum.PROJECT_MEMBER)],
+    [
+      'a clone of the member',
+      userWith('project', 'project-uuid', MEMBER_CLONE),
+    ],
+    [
+      'customer support',
+      userWith('customer', 'acme', RoleEnum.CUSTOMER_SUPPORT),
+    ],
+    ['global support', { is_staff: false, is_support: true, permissions: [] }],
+    [
+      'the admin of another project',
+      userWith('project', 'other', RoleEnum.PROJECT_ADMIN),
+    ],
+    [
+      'an owner of another organization',
+      userWith('customer', 'other', RoleEnum.CUSTOMER_OWNER),
+    ],
+    // A role named like a project's, granted on an organization of that name.
+    [
+      'an admin role on a customer',
+      userWith('customer', 'project-uuid', RoleEnum.PROJECT_ADMIN),
+    ],
+  ])('does not let %s manage the project', (_, user) => {
+    expect(checkCanManageProject(user as any, project)).toBe(false);
   });
 });
