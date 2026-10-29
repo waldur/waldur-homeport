@@ -38,48 +38,68 @@ import { ActionsMenu } from '@/table/ActionsDropdown';
 import { TableQuery } from '@/table/TableQuery';
 import { useUser } from '@/workspace/hooks';
 
-// Plugin sections that will be grouped into a single "Plugins" tab
-const PLUGIN_SECTION_KEYS = ['openstack', 'rancher'];
+import { FEATURE_PLUGIN_SECTION_KEYS } from './settings/registry';
+import { useHighlightSettingRow } from './settings/useHighlightSettingRow';
+
+const FeatureRow = ({
+  sectionKey,
+  item,
+  canEdit,
+}: {
+  sectionKey: string;
+  item: FeatureSection['items'][number];
+  canEdit: boolean;
+}) => {
+  const featureKey = `${sectionKey}.${item.key}`;
+  const isHighlighted = useHighlightSettingRow(featureKey, 'feature-');
+
+  return (
+    <FormTable.Item
+      id={`feature-${featureKey}`}
+      className={isHighlighted ? 'bg-warning-subtle' : undefined}
+      description={
+        <>
+          {item.description}
+          {featureKey === DeploymentFeatures.send_metrics ? (
+            <div>
+              <TelemetryExampleButton />
+            </div>
+          ) : null}
+        </>
+      }
+      actions={
+        canEdit ? (
+          <Field name={featureKey} type="checkbox">
+            {({ input }) => (
+              <SwitchField
+                input={input}
+                aria-label={item.description}
+                data-testid={featureKey}
+              />
+            )}
+          </Field>
+        ) : (
+          <Field name={featureKey}>
+            {({ input }) => (
+              <span>{input.value ? translate('Yes') : translate('No')}</span>
+            )}
+          </Field>
+        )
+      }
+    />
+  );
+};
 
 const FeatureSectionContent = ({ section }: { section: FeatureSection }) => {
   const canEdit = Boolean(useUser()?.is_staff);
   return (
     <FormTable>
       {section.items.map((item) => (
-        <FormTable.Item
+        <FeatureRow
           key={item.key}
-          description={
-            <>
-              {item.description}
-              {`${section.key}.${item.key}` ===
-              DeploymentFeatures.send_metrics ? (
-                <div>
-                  <TelemetryExampleButton />
-                </div>
-              ) : null}
-            </>
-          }
-          actions={
-            canEdit ? (
-              <Field name={`${section.key}.${item.key}`} type="checkbox">
-                {({ input }) => (
-                  <SwitchField
-                    input={input}
-                    aria-label={item.description}
-                    data-testid={`${section.key}.${item.key}`}
-                  />
-                )}
-              </Field>
-            ) : (
-              <Field name={`${section.key}.${item.key}`}>
-                {({ input }) => (
-                  <span>
-                    {input.value ? translate('Yes') : translate('No')}
-                  </span>
-                )}
-              </Field>
-            )
-          }
+          sectionKey={section.key}
+          item={item}
+          canEdit={canEdit}
         />
       ))}
     </FormTable>
@@ -111,7 +131,7 @@ const FeatureSectionPanel = ({
 // Build tabs: regular sections + grouped Plugins tab, sorted alphabetically
 const FEATURES_TABS = [
   ...FeaturesDescription.filter(
-    (section) => !PLUGIN_SECTION_KEYS.includes(section.key),
+    (section) => !FEATURE_PLUGIN_SECTION_KEYS.includes(section.key),
   ).map((section) => ({
     key: section.key,
     title: section.description,
@@ -222,7 +242,7 @@ export const FeaturesList = () => {
   const getFilteredCount = (tabKey: string) => {
     if (tabKey === 'plugins') {
       return filteredSections
-        .filter((s) => PLUGIN_SECTION_KEYS.includes(s.key))
+        .filter((s) => FEATURE_PLUGIN_SECTION_KEYS.includes(s.key))
         .reduce((sum, s) => sum + s.items.length, 0);
     }
     const section = filteredSections.find((s) => s.key === tabKey);
@@ -230,7 +250,7 @@ export const FeaturesList = () => {
   };
 
   const pluginSections = filteredSections.filter((s) =>
-    PLUGIN_SECTION_KEYS.includes(s.key),
+    FEATURE_PLUGIN_SECTION_KEYS.includes(s.key),
   );
 
   // Compute total search results and tabs with matches for search summary

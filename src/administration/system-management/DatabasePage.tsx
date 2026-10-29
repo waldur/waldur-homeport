@@ -2,7 +2,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { TableWithTabs } from '@/table/TableWithTabs';
 
-const TABS = [
+export const DATABASE_TABS = [
   {
     key: 'statistics',
     title: translate('Statistics'),
@@ -40,7 +40,7 @@ export const DatabasePage = () => (
     subtitle={translate(
       'Database health, table growth monitoring and its settings.',
     )}
-    tabs={TABS}
+    tabs={DATABASE_TABS}
     syncWithUrlKey="tab"
   />
 );

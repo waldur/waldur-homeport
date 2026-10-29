@@ -22,6 +22,7 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
     setQuery,
     result,
     usersResult,
+    adminResults,
     show,
     setShow,
     activeTab,
@@ -156,6 +157,7 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
         <SearchPopover
           result={result}
           usersResult={usersResult}
+          adminResults={adminResults}
           query={query}
           show={show}
           setQuery={setQuery}

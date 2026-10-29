@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
-import { formatListFieldValue, parseListFieldValue } from './utils';
+import {
+  formatDefaultValue,
+  formatListFieldValue,
+  isSettingModified,
+  parseListFieldValue,
+} from './utils';
 
 describe('parseListFieldValue', () => {
   it('parses comma-separated numbers into array of numbers', () => {
@@ -81,5 +86,80 @@ describe('formatListFieldValue', () => {
   it('handles single element array', () => {
     expect(formatListFieldValue([30])).toBe('30');
     expect(formatListFieldValue(['root'])).toBe('root');
+  });
+});
+
+describe('isSettingModified', () => {
+  it('returns false when value matches default across types', () => {
+    expect(
+      isSettingModified({ default: 'Waldur', type: 'string' }, 'Waldur'),
+    ).toBe(false);
+    expect(isSettingModified({ default: '', type: 'string' }, ' ')).toBe(false);
+    expect(isSettingModified({ default: true, type: 'boolean' }, true)).toBe(
+      false,
+    );
+    expect(isSettingModified({ default: 90, type: 'integer' }, 90)).toBe(false);
+    expect(
+      isSettingModified({ default: ['EE', 'FI'], type: 'country_list_field' }, [
+        'EE',
+        'FI',
+      ]),
+    ).toBe(false);
+  });
+
+  it('returns true when value differs from default', () => {
+    expect(
+      isSettingModified({ default: 'Waldur', type: 'string' }, 'My Cloud'),
+    ).toBe(true);
+    expect(isSettingModified({ default: false, type: 'boolean' }, true)).toBe(
+      true,
+    );
+    expect(isSettingModified({ default: 90, type: 'integer' }, 80)).toBe(true);
+    expect(
+      isSettingModified({ default: ['EE'], type: 'country_list_field' }, [
+        'EE',
+        'FI',
+      ]),
+    ).toBe(true);
+  });
+
+  it('compares a list edited as comma-separated text with its default', () => {
+    expect(isSettingModified({ default: [], type: 'list_field' }, '')).toBe(
+      false,
+    );
+    expect(
+      isSettingModified({ default: [30, 14], type: 'list_field' }, '30, 14'),
+    ).toBe(false);
+    expect(
+      isSettingModified({ default: ['root'], type: 'list_field' }, 'root, ec2'),
+    ).toBe(true);
+  });
+
+  it('ignores secrets that were blanked for a non-staff viewer', () => {
+    const item = { default: 'secret', type: 'secret_field' };
+    expect(isSettingModified(item, '', { secretsRedacted: true })).toBe(false);
+    expect(isSettingModified(item, '')).toBe(true);
+    expect(isSettingModified(item, 'secret')).toBe(false);
+  });
+
+  it('returns false when value or default is undefined/null', () => {
+    expect(isSettingModified({ default: 'Waldur' }, undefined)).toBe(false);
+    expect(isSettingModified({ default: 'Waldur' }, null)).toBe(false);
+    expect(isSettingModified({}, 'Waldur')).toBe(false);
+  });
+});
+
+describe('formatDefaultValue', () => {
+  it('formats boolean, choice, string, and empty defaults', () => {
+    expect(formatDefaultValue({ default: true, type: 'boolean' })).toBe('Yes');
+    expect(formatDefaultValue({ default: false, type: 'boolean' })).toBe('No');
+    expect(formatDefaultValue({ default: '', type: 'string' })).toBe('Empty');
+    expect(
+      formatDefaultValue({
+        default: 'classic',
+        type: 'choice_field',
+        options: [{ value: 'classic', label: 'Classic' }],
+      }),
+    ).toBe('Classic');
   });
 });

@@ -5,7 +5,7 @@ import { TableWithTabs } from '@/table/TableWithTabs';
 import { useArrowSettings } from './api';
 import { ARROW_TAB_KEYS } from './constants';
 
-const tabs = [
+export const ARROW_TABS = [
   {
     key: ARROW_TAB_KEYS.overview,
     title: translate('Overview'),
@@ -61,6 +61,15 @@ const tabs = [
     ),
   },
   {
+    key: ARROW_TAB_KEYS.settings,
+    title: translate('Sync settings'),
+    component: lazyComponent(() =>
+      import('./settings/ArrowSyncSettings').then((module) => ({
+        default: module.ArrowSyncSettings,
+      })),
+    ),
+  },
+  {
     key: ARROW_TAB_KEYS.debug,
     title: translate('Debug'),
     component: lazyComponent(() =>
@@ -80,7 +89,7 @@ export const ArrowDashboard = () => {
       subtitle={translate(
         'Manage Arrow (ArrowSphere) cloud distribution platform integration for billing synchronization.',
       )}
-      tabs={tabs}
+      tabs={ARROW_TABS}
       data={{ settings }}
       syncWithUrlKey="tab"
     />

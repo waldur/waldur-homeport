@@ -12,7 +12,7 @@ const MAX_ALLOWED_ITEMS = 5;
 interface RecentSearchItem {
   id: string;
   title: string;
-  type: 'organization' | 'project' | 'resource' | 'user';
+  type: 'organization' | 'project' | 'resource' | 'user' | 'admin';
   to: string;
   params?: { [key: string]: string };
 }

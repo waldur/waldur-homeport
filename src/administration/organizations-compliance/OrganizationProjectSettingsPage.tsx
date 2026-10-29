@@ -18,7 +18,7 @@ const ProjectDigestTab = () => (
 
 // The onboarding tab replaces the standalone page's `show_onboarding` feature
 // gate; the project settings have none.
-const ONBOARDING_TAB = {
+export const ONBOARDING_TAB = {
   key: 'onboarding',
   title: translate('Onboarding'),
   component: lazyComponent(() =>
@@ -28,7 +28,7 @@ const ONBOARDING_TAB = {
   ),
 };
 
-const PROJECT_TABS = [
+export const PROJECT_TABS = [
   { key: 'project', title: translate('Project'), component: ProjectTab },
   {
     key: 'project-digest',

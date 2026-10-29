@@ -14,6 +14,7 @@ import { RefreshButton } from '@/marketplace/offerings/update/components/Refresh
 import './FormTable.scss';
 
 export interface FormTableItemProps {
+  id?: string;
   label?: ReactNode;
   colon?: boolean;
   description?: ReactNode;
@@ -49,7 +50,12 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
   const groupValues = props.group && Array.isArray(value);
   const titleRowSpan = groupValues ? (value as any[]).length : 1;
   const rows = (groupValues ? (value as any[]) : [value]).map((row, i) => (
-    <tr key={i} className={props.className} data-testid={props['data-testid']}>
+    <tr
+      key={i}
+      id={i === 0 ? props.id : undefined}
+      className={props.className}
+      data-testid={props['data-testid']}
+    >
       {i === 0 && props.description ? (
         <th className={row ? 'md:w-4/12' : 'md:w-auto'} rowSpan={titleRowSpan}>
           <div className="flex items-center">

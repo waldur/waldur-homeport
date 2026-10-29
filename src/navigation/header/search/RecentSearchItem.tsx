@@ -2,6 +2,7 @@ import {
   ArrowClockwiseIcon,
   BuildingsIcon,
   ClipboardTextIcon,
+  GearSixIcon,
   SquaresFourIcon,
   UserIcon,
 } from '@phosphor-icons/react';
@@ -43,6 +44,8 @@ export const RecentSearchItem = ({ item }) => {
         />
       ) : item.type === 'user' ? (
         <UserIcon size={22} weight="bold" className="text-secondary me-3" />
+      ) : item.type === 'admin' ? (
+        <GearSixIcon size={22} weight="bold" className="text-secondary me-3" />
       ) : (
         <SquaresFourIcon
           size={22}

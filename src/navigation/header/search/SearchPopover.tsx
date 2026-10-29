@@ -4,6 +4,7 @@ import { groupBy } from 'es-toolkit';
 import { Fragment, useCallback } from 'react';
 
 import {
+  Badge,
   BaseButton,
   Tabs,
   TabsList,
@@ -11,6 +12,10 @@ import {
   TabsContent,
 } from 'waldur-ui';
 
+import {
+  formatAdminLocationBreadcrumb,
+  SearchableAdminItem,
+} from '@/administration/settings/registry';
 import { formatPhoneNumber } from '@/core/utils';
 import { translate } from '@/i18n';
 
@@ -27,6 +32,7 @@ import { SearchResult, UsersSearchResult } from './useSearch';
 interface SearchPopoverProps {
   result: SearchResult;
   usersResult: UsersSearchResult;
+  adminResults: SearchableAdminItem[];
   query: string;
   show: boolean;
   setQuery;
@@ -41,6 +47,8 @@ interface TabContentProps
     Partial<ReturnType<typeof useFavoritePages>>,
     Partial<ReturnType<typeof useRecentSearch>> {
   result: SearchResult;
+  adminResults?: SearchableAdminItem[];
+  isStaffOrSupportUser?: boolean;
   clearSearch(): void;
   close(): void;
 }
@@ -57,8 +65,60 @@ const SectionNoResult = () => (
   <p className="text-quaternary mb-4 mx-4">{translate('No result found')}</p>
 );
 
+const formatAdminItemSubtitle = (item: SearchableAdminItem) => {
+  const breadcrumb = formatAdminLocationBreadcrumb(item.location);
+  if (item.kind === 'page' || !item.description) {
+    return breadcrumb;
+  }
+  return `${breadcrumb} • ${item.description}`;
+};
+
+const AdminSearchResultItem = ({
+  item,
+  isFavorite,
+  addFavoritePage,
+  removeFavorite,
+  addRecentSearch,
+  close,
+}: {
+  item: SearchableAdminItem;
+  isFavorite?: ReturnType<typeof useFavoritePages>['isFavorite'];
+  addFavoritePage?: ReturnType<typeof useFavoritePages>['addFavoritePage'];
+  removeFavorite?: ReturnType<typeof useFavoritePages>['removeFavorite'];
+  addRecentSearch?: ReturnType<typeof useRecentSearch>['addRecentSearch'];
+  close(): void;
+}) => (
+  <SearchItem
+    key={item.id}
+    to={item.location.state}
+    params={item.location.params}
+    title={item.title}
+    subtitle={formatAdminItemSubtitle(item)}
+    badge={
+      item.key ? (
+        <Badge variant="neutral" size="sm" tone="outline">
+          {item.key}
+        </Badge>
+      ) : (
+        <Badge variant="secondary" size="sm" tone="outline">
+          {translate('Page')}
+        </Badge>
+      )
+    }
+    isFavorite={isFavorite}
+    addFavoritePage={addFavoritePage}
+    removeFavorite={removeFavorite}
+    onClick={(searchItem) => {
+      addRecentSearch?.(searchItem, 'admin');
+      close();
+    }}
+  />
+);
+
 const AllResultsTabContent = ({
   result,
+  adminResults,
+  isStaffOrSupportUser,
   clearSearch,
   favPages,
   addCurrentPageFavorite,
@@ -71,6 +131,9 @@ const AllResultsTabContent = ({
   clearRecentSearches,
   close,
 }: TabContentProps) => {
+  const hasAnyResults = Boolean(
+    result.data?.resultsCount || adminResults?.length,
+  );
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2">
       <div className="py-4">
@@ -126,7 +189,7 @@ const AllResultsTabContent = ({
         </div>
       </div>
       <div className="bg-secondary pb-4">
-        {result.data?.resultsCount ? (
+        {hasAnyResults ? (
           <>
             <div className="mb-2.5 mt-4">
               <SectionTitle title={translate('Organizations')} />
@@ -180,7 +243,7 @@ const AllResultsTabContent = ({
                 <SectionNoResult />
               )}
             </div>
-            <div>
+            <div className="mb-2.5">
               <SectionTitle title={translate('Resources')} />
               {result.data?.resourcesCount ? (
                 result.data.resources
@@ -212,10 +275,26 @@ const AllResultsTabContent = ({
                 <SectionNoResult />
               )}
             </div>
+            {isStaffOrSupportUser && Boolean(adminResults?.length) && (
+              <div>
+                <SectionTitle title={translate('Administration')} />
+                {adminResults.slice(0, 3).map((item) => (
+                  <AdminSearchResultItem
+                    key={item.id}
+                    item={item}
+                    isFavorite={isFavorite}
+                    addFavoritePage={addFavoritePage}
+                    removeFavorite={removeFavorite}
+                    addRecentSearch={addRecentSearch}
+                    close={close}
+                  />
+                ))}
+              </div>
+            )}
           </>
         ) : null}
         <NoResult
-          isVisible={!result.data?.resultsCount && result.status !== 'pending'}
+          isVisible={!hasAnyResults && result.status !== 'pending'}
           callback={clearSearch}
         />
       </div>
@@ -441,9 +520,54 @@ const UsersTabContent = ({
   );
 };
 
+const AdminTabContent = ({
+  adminResults,
+  query,
+  clearSearch,
+  isFavorite,
+  addFavoritePage,
+  removeFavorite,
+  addRecentSearch,
+  close,
+}: {
+  adminResults: SearchableAdminItem[];
+  query: string;
+  clearSearch(): void;
+  isFavorite: ReturnType<typeof useFavoritePages>['isFavorite'];
+  addFavoritePage: ReturnType<typeof useFavoritePages>['addFavoritePage'];
+  removeFavorite: ReturnType<typeof useFavoritePages>['removeFavorite'];
+  addRecentSearch: ReturnType<typeof useRecentSearch>['addRecentSearch'];
+  close(): void;
+}) => {
+  return (
+    <>
+      {adminResults?.length ? (
+        <div className="py-4">
+          {adminResults.map((item) => (
+            <AdminSearchResultItem
+              key={item.id}
+              item={item}
+              isFavorite={isFavorite}
+              addFavoritePage={addFavoritePage}
+              removeFavorite={removeFavorite}
+              addRecentSearch={addRecentSearch}
+              close={close}
+            />
+          ))}
+        </div>
+      ) : null}
+      <NoResult
+        isVisible={!adminResults?.length && Boolean(query?.trim())}
+        callback={clearSearch}
+      />
+    </>
+  );
+};
+
 export const SearchPopover = ({
   result,
   usersResult,
+  adminResults,
   query,
   show,
   setQuery,
@@ -468,6 +592,13 @@ export const SearchPopover = ({
   const { recentSearchItems, addRecentSearch, clearRecentSearches } =
     useRecentSearch();
 
+  const totalResultsCount =
+    result.data?.resultsCount !== undefined
+      ? result.data.resultsCount + adminResults.length
+      : adminResults.length > 0
+        ? adminResults.length
+        : undefined;
+
   return (
     <div className="pt-4">
       <SearchInput
@@ -484,11 +615,7 @@ export const SearchPopover = ({
         onValueChange={(key) => setActiveTab(key)}
       >
         <TabsList scrollable>
-          <TabsTrigger
-            className="ms-4"
-            value="all"
-            count={result.data?.resultsCount}
-          >
+          <TabsTrigger className="ms-4" value="all" count={totalResultsCount}>
             {translate('All results')}
           </TabsTrigger>
           <TabsTrigger
@@ -508,20 +635,28 @@ export const SearchPopover = ({
             {translate('Resources')}
           </TabsTrigger>
           {isStaffOrSupportUser && (
-            <TabsTrigger
-              className="me-4"
-              value="users"
-              count={usersResult?.data?.usersCount}
-            >
-              <LockIcon size={14} className="me-1" weight="bold" />
-              {translate('Users')}
-            </TabsTrigger>
+            <>
+              <TabsTrigger value="users" count={usersResult?.data?.usersCount}>
+                <LockIcon size={14} className="me-1" weight="bold" />
+                {translate('Users')}
+              </TabsTrigger>
+              <TabsTrigger
+                className="me-4"
+                value="admin"
+                count={query?.trim() ? adminResults.length : undefined}
+              >
+                <LockIcon size={14} className="me-1" weight="bold" />
+                {translate('Administration')}
+              </TabsTrigger>
+            </>
           )}
         </TabsList>
         <div className="tab-content overflow-auto min-h-[200px]">
           <TabsContent value="all">
             <AllResultsTabContent
               result={result}
+              adminResults={adminResults}
+              isStaffOrSupportUser={isStaffOrSupportUser}
               clearSearch={clearSearch}
               recentSearchItems={recentSearchItems}
               addRecentSearch={addRecentSearch}
@@ -569,14 +704,28 @@ export const SearchPopover = ({
             />
           </TabsContent>
           {isStaffOrSupportUser && (
-            <TabsContent value="users">
-              <UsersTabContent
-                usersResult={usersResult}
-                clearSearch={clearSearch}
-                addRecentSearch={addRecentSearch}
-                close={close}
-              />
-            </TabsContent>
+            <>
+              <TabsContent value="users">
+                <UsersTabContent
+                  usersResult={usersResult}
+                  clearSearch={clearSearch}
+                  addRecentSearch={addRecentSearch}
+                  close={close}
+                />
+              </TabsContent>
+              <TabsContent value="admin">
+                <AdminTabContent
+                  adminResults={adminResults}
+                  query={query}
+                  clearSearch={clearSearch}
+                  isFavorite={isFavorite}
+                  addFavoritePage={addFavoritePage}
+                  removeFavorite={removeFavorite}
+                  addRecentSearch={addRecentSearch}
+                  close={close}
+                />
+              </TabsContent>
+            </>
           )}
         </div>
       </Tabs>

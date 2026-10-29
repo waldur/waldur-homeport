@@ -2,7 +2,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { TableWithTabs } from '@/table/TableWithTabs';
 
-const TABS = [
+export const LOGGING_TELEMETRY_TABS = [
   {
     key: 'system-logging',
     title: translate('System logging'),
@@ -29,7 +29,7 @@ export const LoggingTelemetryPage = () => (
   <TableWithTabs
     title={translate('Logging & telemetry')}
     subtitle={translate('System log collection and telemetry reporting.')}
-    tabs={TABS}
+    tabs={LOGGING_TELEMETRY_TABS}
     syncWithUrlKey="tab"
   />
 );

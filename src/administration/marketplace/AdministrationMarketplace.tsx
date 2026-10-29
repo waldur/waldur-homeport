@@ -2,7 +2,7 @@ import { translate } from '@/i18n';
 
 import { SettingsTab, SettingsWithTabs } from '../settings/SettingsWithTabs';
 
-const MARKETPLACE_TABS: SettingsTab[] = [
+export const MARKETPLACE_TABS: SettingsTab[] = [
   {
     key: 'visibility',
     title: translate('Visibility & Access'),
@@ -42,6 +42,16 @@ const MARKETPLACE_TABS: SettingsTab[] = [
     key: 'custom-metrics',
     title: translate('Custom metrics'),
     groupName: translate('Custom Metrics'),
+  },
+  {
+    key: 'usage-polling',
+    title: translate('Usage polling'),
+    groupName: translate('Usage Polling'),
+  },
+  {
+    key: 'posix-id-pools',
+    title: translate('POSIX ID pools'),
+    groupName: translate('POSIX ID pools'),
   },
 ];
 
