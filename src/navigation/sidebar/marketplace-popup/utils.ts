@@ -128,6 +128,12 @@ export const fetchLastNOfferings = async (
   return offerings;
 };
 
+// The app's focus ring (src/tailwind.css) is drawn outside its element, and
+// the scrolling panels clip what overflows them, so a full-width row lost
+// most of its ring. Rows draw it inset instead, as menu rows do.
+export const SELECTABLE_ROW_FOCUS_RING_CLASSNAME =
+  'focus-visible:outline-offset-[calc(var(--focus-ring-width)*-1)]';
+
 /** A react-bootstrap ListGroupItem with only an onClick renders a plain <li>:
  * clickable, but the keyboard can neither reach nor activate it. These props
  * make the row a control without changing a class, so the list looks the same.
