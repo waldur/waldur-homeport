@@ -81,6 +81,7 @@ export const ProjectUsersBadge = (props: OwnProps) => {
       altLabel={translate('Team')}
       users={users}
       max={props.max}
+      inline
       className={props.className}
       onClick={props.onClick}
     />
