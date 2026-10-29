@@ -27,11 +27,12 @@ differences to the merge request.
 
 ## Ground rules
 
-- **Storybook renders with the app's stylesheet.** The theme decorator in `.storybook/preview.tsx`
-  calls `loadTheme()`, which injects the compiled Bootstrap/Metronic stylesheet and sets
-  `data-theme`. A story therefore shows the same cascade the app does, including Bootstrap's
-  `!important` utilities. Every tool here waits for that stylesheet (a `link` whose URL matches
-  `/style[-.]/`) before capturing; a capture taken earlier shows unstyled markup.
+- **Storybook renders with the app's stylesheet.** `.storybook/preview.tsx` imports
+  `src/tailwind.css` and then `src/styles/bootstrap/index.scss`, in the same order as
+  `src/index.tsx`, and its theme decorator calls `applyTheme()` to set `data-theme`. A story
+  therefore shows the same cascade the app does, including Bootstrap's `!important` utilities.
+  The stylesheets load before the story renders, so every tool here waits only for `data-theme`
+  before capturing.
 - **Freeze before capturing.** Wait for `document.fonts.ready` (a capture in the fallback font
   differs on every text pixel), and inject
   `*, *::before, *::after { transition: none !important; animation: none !important; }`.

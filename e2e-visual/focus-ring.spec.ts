@@ -77,8 +77,7 @@ async function setUpFixtures(page: Page, theme: 'light' | 'dark') {
   await page.goto(`${STORYBOOK_URL}${STORY}${theme}`, {
     waitUntil: 'networkidle',
   });
-  // The theme decorator swaps the compiled Metronic stylesheet asynchronously.
-  await page.waitForTimeout(1500);
+  await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
   await page.evaluate(
     ({ fixtures, override }) => {
       const style = document.createElement('style');

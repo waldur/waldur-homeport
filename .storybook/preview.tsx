@@ -6,9 +6,11 @@ import { initBrandTokens } from 'waldur-design-tokens';
 
 import { ENV } from '@/core/config';
 import { getBrandColor } from '@/core/utils';
-import { loadTheme } from '@/theme/utils';
+import { applyTheme } from '@/theme/utils';
 
+// Same order as src/index.tsx: tailwind.css declares the layer order first.
 import '../src/tailwind.css';
+import '../src/styles/bootstrap/index.scss';
 
 // Redirects @/core/api to src/core/__mocks__/api.ts: same API, fixture icons.
 sb.mock(import('../src/core/api.ts'));
@@ -34,18 +36,16 @@ function seedBrandVars() {
 }
 
 /**
- * loadTheme() (src/theme/utils.ts) both swaps the compiled Metronic
- * stylesheet AND sets data-theme on <html> — reusing it directly, rather
- * than reimplementing a Tailwind-only data-theme toggle, means BaseButton
- * (old) stories get correctly-themed Bootstrap CSS too, not just
- * BaseButtonTw's Tailwind dark: variant.
+ * applyTheme() (src/theme/utils.ts) sets data-theme on <html>, which both
+ * the Bootstrap stylesheet imported above and Tailwind's dark: variant key
+ * off — the same switch the real app uses.
  */
 const withTheme = (Story, context) => {
   useEffect(() => {
     seedBrandVars();
   }, []);
   useEffect(() => {
-    loadTheme(context.globals.theme ?? 'light');
+    applyTheme(context.globals.theme ?? 'light');
   }, [context.globals.theme]);
   return <Story />;
 };
@@ -178,7 +178,7 @@ const preview: Preview = {
   },
   globalTypes: {
     theme: {
-      description: "Theme (mirrors the real app's light/dark stylesheet swap)",
+      description: "Theme (mirrors the real app's light/dark switch)",
       toolbar: {
         title: 'Theme',
         icon: 'circlehollow',

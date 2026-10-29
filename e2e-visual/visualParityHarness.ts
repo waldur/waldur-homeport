@@ -138,9 +138,7 @@ function expectDominantColorParity(
 export interface ParityHarness {
   /**
    * Navigates to the parity story (old and new component rendered side by
-   * side) in the given theme, waits for the old component's compiled
-   * Metronic stylesheet to actually be swapped in (loadTheme() is async —
-   * screenshotting too early captures unstyled UA-default markup), and
+   * side) in the given theme, waits for the theme decorator to apply it, and
    * disables page-wide transitions/animations so screenshots aren't caught
    * mid-transition.
    */
@@ -173,30 +171,15 @@ export function createParityHarness(
       `${STORYBOOK_URL}/iframe.html?id=${storyId}&viewMode=story&globals=theme:${theme}`,
     );
 
-    // The Metronic stylesheet is one file for both themes (loadTheme() in
-    // src/theme/utils.ts switches only data-theme, checked below), so this
-    // waits for that file, not for a per-theme one. Found by name: it is not
-    // the first stylesheet — a built Storybook links its own iframe CSS
-    // first. `style.scss` in dev, `assets/style-<hash>.css` once built.
-    await page.waitForFunction(
-      () => {
-        const link = Array.from(
-          document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'),
-        ).find((candidate) => /\/style[-.]/.test(candidate.href));
-        if (!link) return false;
-        try {
-          return (link.sheet?.cssRules.length ?? 0) > 0;
-        } catch {
-          return false;
-        }
-      },
-      undefined,
-      // 15s wasn't enough margin: a cold Storybook server (first request of
-      // the run, triggering on-demand story-chunk compilation) measured
-      // 17.5s here after a fresh `yarn install` invalidated Vite's dep-cache.
-      { timeout: 30000 },
-    );
-    await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+    // The Bootstrap stylesheet is a static import of .storybook/preview.tsx,
+    // so it is in place before any story renders; data-theme, set by the
+    // theme decorator's effect, is the last thing to wait for.
+    // 15s wasn't enough margin: a cold Storybook server (first request of
+    // the run, triggering on-demand story-chunk compilation) measured 17.5s
+    // after a fresh `yarn install` invalidated Vite's dep-cache.
+    await expect(page.locator('html')).toHaveAttribute('data-theme', theme, {
+      timeout: 30000,
+    });
 
     await page.addStyleTag({
       content:

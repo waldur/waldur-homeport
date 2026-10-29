@@ -86,7 +86,7 @@ const main = async (argv) => {
   const split = argv.indexOf('--');
   const families = split === -1 ? argv : argv.slice(0, split);
   // Where the class lists render with Bootstrap loaded: the app and
-  // Storybook (loadTheme). waldur-shell's chrome and the micro-apps never
+  // Storybook (both import styles/bootstrap/index.scss). waldur-shell's chrome and the micro-apps never
   // load it, so their names are already Tailwind's.
   const paths =
     split === -1
