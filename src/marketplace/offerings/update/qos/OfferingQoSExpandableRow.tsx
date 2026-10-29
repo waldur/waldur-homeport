@@ -67,6 +67,11 @@ export const OfferingQoSExpandableRow: FC<OwnProps> = ({ row }) => (
           space={1.5}
         />
         <Field
+          label={translate('Max TRES-minutes per job')}
+          value={renderFieldOrDash(row.max_tres_mins_per_job)}
+          space={1.5}
+        />
+        <Field
           label={translate('Flags')}
           value={renderFieldOrDash(row.flags)}
           space={1.5}
