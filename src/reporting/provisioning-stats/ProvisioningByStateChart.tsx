@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 import { OrderState } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 import { DonutChart } from '@/reporting/users/charts/DonutChart';
 import { ExportData } from '@/table/exporters/types';
@@ -10,13 +11,21 @@ interface ProvisioningByStateChartProps {
   byState: { [key: string]: number };
 }
 
-const STATE_COLORS: { [key: string]: string } = {
-  done: '#50cd89',
-  erred: '#f1416c',
-  canceled: '#a1a5b7',
-  rejected: '#ffa800',
-  pending: '#ffc700',
-  executing: '#009ef7',
+const getStateColors = (): { [key: string]: string } => {
+  const tc = getChartThemeColors();
+  return {
+    done: tc.success,
+    erred: tc.danger,
+    canceled: tc.muted,
+    rejected: tc.warning,
+    // The pending states match the Orders report (reporting/orders/types.ts).
+    pending: tc.notice,
+    'pending-project': tc.notice,
+    'pending-start-date': tc.notice,
+    'pending-consumer': tc.notice,
+    'pending-provider': tc.warning,
+    executing: tc.progress,
+  };
 };
 
 const STATE_LABELS: { [key in OrderState]: string } = {
@@ -42,12 +51,13 @@ export const ProvisioningByStateChart: FC<ProvisioningByStateChartProps> = ({
   byState,
 }) => {
   const chartData = useMemo(() => {
+    const colors = getStateColors();
     return Object.entries(byState)
       .filter(([, count]) => (count as number) > 0)
       .map(([state, count]) => ({
         name: STATE_LABELS[state] || state,
         value: count as number,
-        itemStyle: { color: STATE_COLORS[state] || '#a1a5b7' },
+        itemStyle: { color: colors[state] || colors.canceled },
       }));
   }, [byState]);
 

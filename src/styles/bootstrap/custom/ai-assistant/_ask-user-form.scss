@@ -135,7 +135,7 @@
   }
 
   .aui-ask-user-pill[data-picked='1'] .aui-ask-user-check {
-    color: #fff;
+    color: var(--text-primary-on-brand);
     background-color: var(--bg-brand-solid);
     border-color: var(--border-brand-solid);
   }

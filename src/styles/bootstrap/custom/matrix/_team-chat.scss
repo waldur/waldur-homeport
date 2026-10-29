@@ -792,8 +792,8 @@
     border: 1px solid var(--border-primary);
     border-radius: 99px;
     box-shadow:
-      0 4px 14px rgba(0, 0, 0, 0.08),
-      0 1px 3px rgba(0, 0, 0, 0.04);
+      0 4px 14px color-mix(in srgb, var(--shadow-color) 8%, transparent),
+      0 1px 3px color-mix(in srgb, var(--shadow-color) 4%, transparent);
     width: fit-content;
     opacity: 0;
     visibility: hidden;
@@ -935,8 +935,8 @@
     max-height: 220px;
     overflow: hidden;
     box-shadow:
-      0 6px 18px rgba(0, 0, 0, 0.1),
-      0 1px 3px rgba(0, 0, 0, 0.04);
+      0 6px 18px color-mix(in srgb, var(--shadow-color) 10%, transparent),
+      0 1px 3px color-mix(in srgb, var(--shadow-color) 4%, transparent);
     border-radius: $border-radius-lg;
 
     //noinspection CssInvalidHtmlTagReference
@@ -1134,7 +1134,7 @@
       color: var(--text-primary-on-brand);
 
       .tc-mention-item__avatar {
-        background: rgba(0, 0, 0, 0.15);
+        background: color-mix(in srgb, var(--shadow-color) 15%, transparent);
         color: var(--text-primary-on-brand);
       }
     }
@@ -1300,8 +1300,8 @@
   border: 2px dashed var(--text-brand-primary);
   border-radius: $border-radius-lg;
   box-shadow:
-    0 6px 18px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.04);
+    0 6px 18px color-mix(in srgb, var(--shadow-color) 10%, transparent),
+    0 1px 3px color-mix(in srgb, var(--shadow-color) 4%, transparent);
   color: var(--text-brand-primary);
   font-weight: var(--font-weight-semibold);
 }

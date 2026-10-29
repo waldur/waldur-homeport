@@ -40,9 +40,9 @@ flowchart TB
         L --> M["Reviewer receives<br/>specific proposals"]
     end
 
-    style C fill:#e3f2fd,color:#000
-    style H fill:#d4edda,color:#000
-    style I fill:#f8d7da,color:#000
+    style C fill:var(--status-info-bg-strong),color:var(--text-primary)
+    style H fill:var(--status-success-bg-strong),color:var(--text-primary)
+    style I fill:var(--status-danger-bg-strong),color:var(--text-primary)
 `;
 
 const generateInvitationStatusDiagram = (): string => `

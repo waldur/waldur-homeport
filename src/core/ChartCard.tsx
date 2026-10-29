@@ -6,6 +6,7 @@ import exportAs from '@/table/exporters';
 import { ExportData } from '@/table/exporters/types';
 
 import { ChartExportDropdown } from './ChartExportDropdown';
+import { saveChartPng } from './chartPng';
 
 interface ChartCardProps {
   title: string;
@@ -33,17 +34,7 @@ export const ChartCard: React.FC<ChartCardProps> = ({
   const chartRef = useRef<any>(null);
 
   const handleExportPNG = useCallback(() => {
-    if (chartRef.current) {
-      const url = chartRef.current.getDataURL({
-        pixelRatio: 2,
-        backgroundColor: '#fff',
-        type: 'png',
-      });
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `${title}.png`;
-      link.click();
-    }
+    if (chartRef.current) saveChartPng(chartRef.current, title);
   }, [title]);
 
   const handleExportData = useCallback(

@@ -96,7 +96,7 @@ flowchart TB
         P --> Q[Report result back to Waldur]
     end
 
-    style E fill:${carryoverEnabled ? '#d4edda' : '#f8d7da'},color:#000
+    style E fill:${carryoverEnabled ? 'var(--status-success-bg-strong)' : 'var(--status-danger-bg-strong)'},color:var(--text-primary)
 `;
 };
 
@@ -114,7 +114,7 @@ flowchart LR
     B -->|Disabled| F
     F --> G["Usage % = current_usage / total &times; 100"]
 
-    style B fill:${carryoverEnabled ? '#d4edda' : '#f8d7da'},color:#000
+    style B fill:${carryoverEnabled ? 'var(--status-success-bg-strong)' : 'var(--status-danger-bg-strong)'},color:var(--text-primary)
 `;
 };
 

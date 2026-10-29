@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { generateBrandColors, getCssVar } from 'waldur-design-tokens';
+import { generateBrandColors, getCssVar, hexToRgb } from 'waldur-design-tokens';
 
 import { getBrandColor } from '@/core/utils';
 import { useTheme } from '@/theme/useTheme';
@@ -43,37 +43,63 @@ export const getChartThemeColors = () => {
     brand600: brand[600],
     /** Secondary / remaining / inactive series (gray-300). */
     neutral: ramp('gray', 300),
+    /** The darker partner of `neutral` in a paired series (gray-400). */
+    neutralStrong: ramp('gray', 400),
     /** Track / background fill (gray-200). */
     track: ramp('gray', 200),
+    /** The unused part of a gauge or pie (--bg-quaternary), theme-aware unlike `track`. */
+    remaining: getCssVar('--bg-quaternary', ramp('gray', 200)),
     /** Axis / muted label text (gray-500). */
     muted: ramp('gray', 500),
     /** Strong body text (--text-primary: gray-900, gray-dark-25 in dark). */
     text: getCssVar('--text-primary', ramp('gray', 900)),
+    /** Label text a step down from `text` (--text-secondary). */
+    textSecondary: getCssVar('--text-secondary', ramp('gray', 700)),
+    /** Supporting label text (--text-quaternary), theme-aware unlike `muted`. */
+    textQuaternary: getCssVar('--text-quaternary', ramp('gray', 500)),
     /** Card / canvas background, for gaps and borders drawn inside a chart. */
     surface: getCssVar('--card-bg'),
     /** Divider between chart elements. */
     border: getCssVar('--border-secondary', ramp('gray', 200)),
     /** success-600 */
     success: ramp('success', 600),
+    /** warning-400: an early notice, or a state waiting on someone. */
+    notice: ramp('warning', 400),
     /** warning-600 */
     warning: ramp('warning', 600),
     /** error-600 (the `danger` of the SCSS variables) */
     danger: ramp('error', 600),
     /** info-600 */
     info: ramp('info', 600),
+    /** --shadow-color at an opacity, resolved for a canvas (no color-mix there). */
+    shadow: (alpha: number) =>
+      `rgba(${hexToRgb(getCssVar('--shadow-color')) ?? '0, 0, 0'}, ${alpha})`,
+    /** Text and markers in the info hue (--status-info-fg). */
+    infoFg: getCssVar('--status-info-fg', ramp('info', 600)),
+    /** A tinted chip behind `infoFg` text (--status-info-bg). */
+    infoBg: getCssVar('--status-info-bg', ramp('info', 50)),
+    /** Work under way: an executing order, a maintenance in progress. */
+    progress: ramp('blue', 500),
   };
 };
 
+const ACCENT_HUES = ['blue', 'teal', 'info', 'pink', 'indigo', 'moss', 'rose'];
+
 /**
- * Eight series colours for a chart that needs many: the brand's 300 first, then
- * the 300 step of each accent hue.
+ * Series colours for a chart that needs many: the brand's 300 first, then the
+ * 300 step of each accent hue (eight in all). Past eight, the same hues repeat
+ * at the 500 step, so `count` up to sixteen stays distinct.
  */
-export const getCategoricalColors = () => [
-  getChartThemeColors().brand300,
-  ...['blue', 'teal', 'info', 'pink', 'indigo', 'moss', 'rose'].map((hue) =>
-    ramp(hue, 300),
-  ),
-];
+export const getCategoricalColors = (count = 8) => {
+  const brand = getChartThemeColors();
+  const steps = [
+    brand.brand300,
+    ...ACCENT_HUES.map((hue) => ramp(hue, 300)),
+    brand.brand500,
+    ...ACCENT_HUES.map((hue) => ramp(hue, 500)),
+  ];
+  return steps.slice(0, Math.min(count, steps.length));
+};
 
 /**
  * Four-step usage-saturation ramp (healthy → danger), all drawn from the
@@ -83,7 +109,7 @@ export const getSaturationRamp = () => {
   const c = getChartThemeColors();
   return {
     ok: c.brand500, // green — healthy
-    notice: ramp('warning', 400), // early notice
+    notice: c.notice, // warning-400 — early notice
     warning: c.warning, // warning-600 — approaching
     danger: c.danger, // error-600 — over
   };

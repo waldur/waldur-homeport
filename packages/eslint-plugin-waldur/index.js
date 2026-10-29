@@ -31,6 +31,7 @@ import noEditButtonSizeOverride from './rules/no-edit-button-size-override.js';
 import noHandRolledModalFooter from './rules/no-hand-rolled-modal-footer.js';
 import noHandRolledTable from './rules/no-hand-rolled-table.js';
 import noInteractiveInTabTrigger from './rules/no-interactive-in-tab-trigger.js';
+import noLiteralColor from './rules/no-literal-color.js';
 import noManualIconColorsInBadges from './rules/no-manual-icon-colors-in-badges.js';
 import noNativeDateInput from './rules/no-native-date-input.js';
 import noOrphanFormLabel from './rules/no-orphan-form-label.js';
@@ -53,6 +54,7 @@ export default {
     'enforce-actions-dropdown-in-tables': enforceActionsDropdownInTables,
     'enforce-badge-icon-patterns': enforceBadgeIconPatterns,
     'enforce-badge-props-consistency': enforceBadgePropsConsistency,
+    'no-literal-color': noLiteralColor,
     'no-manual-icon-colors-in-badges': noManualIconColorsInBadges,
     'enforce-badge-right-icon-pattern': enforceBadgeRightIconPattern,
     'enforce-dialog-button-order': enforceDialogButtonOrder,

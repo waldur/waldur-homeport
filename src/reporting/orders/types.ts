@@ -1,3 +1,5 @@
+import { getChartThemeColors } from '@/dashboard/chartColors';
+
 // Re-export types from SDK
 export type { DailyOrderStats } from 'waldur-js-client';
 
@@ -18,20 +20,26 @@ export const ORDER_TYPES: Record<string, string> = {
   Terminate: 'Terminate',
 };
 
-// State colors for charts
-export const STATE_COLORS: Record<string, string> = {
-  done: '#50cd89', // success/green
-  'pending-consumer': '#ffc700', // warning/yellow
-  'pending-provider': '#ffa800', // warning/orange
-  executing: '#009ef7', // primary/blue
-  erred: '#f1416c', // danger/red
-  canceled: '#7e8299', // gray
-  rejected: '#f1416c', // danger/red
+// State colours for charts, from the chart roles.
+export const getStateColors = (): Record<string, string> => {
+  const tc = getChartThemeColors();
+  return {
+    done: tc.success,
+    'pending-consumer': tc.notice,
+    'pending-provider': tc.warning,
+    executing: tc.progress,
+    erred: tc.danger,
+    canceled: tc.muted,
+    rejected: tc.danger,
+  };
 };
 
-// Type colors for charts
-export const TYPE_COLORS: Record<string, string> = {
-  Create: '#50cd89', // success/green
-  Update: '#009ef7', // primary/blue
-  Terminate: '#f1416c', // danger/red
+// Type colours for charts, from the chart roles.
+export const getTypeColors = (): Record<string, string> => {
+  const tc = getChartThemeColors();
+  return {
+    Create: tc.success,
+    Update: tc.progress,
+    Terminate: tc.danger,
+  };
 };

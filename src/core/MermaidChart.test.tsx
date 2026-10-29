@@ -13,7 +13,7 @@ vi.mock('@/theme/useTheme', () => ({
   useTheme: () => ({ theme: theme.current, toggleTheme: () => {} }),
 }));
 
-import { MermaidChart } from './MermaidChart';
+import { MermaidChart, resolveTokens } from './MermaidChart';
 
 const setTheme = (name: 'light' | 'dark') => {
   theme.current = name;
@@ -28,6 +28,29 @@ afterEach(() => {
   vi.clearAllMocks();
   setTheme('light');
   document.documentElement.removeAttribute('data-theme');
+});
+
+describe('resolveTokens', () => {
+  afterEach(() => document.documentElement.removeAttribute('style'));
+
+  it('replaces var(--token) with the value the theme gives it', () => {
+    document.documentElement.style.setProperty(
+      '--status-success-bg',
+      '#ecfdf3',
+    );
+    document.documentElement.style.setProperty('--text-primary', '#101828');
+    expect(
+      resolveTokens(
+        'style I fill:var(--status-success-bg),color:var(--text-primary)',
+      ),
+    ).toBe('style I fill:#ecfdf3,color:#101828');
+  });
+
+  it('leaves an undefined token as written', () => {
+    expect(resolveTokens('fill:var(--no-such-token)')).toBe(
+      'fill:var(--no-such-token)',
+    );
+  });
 });
 
 describe('MermaidChart', () => {

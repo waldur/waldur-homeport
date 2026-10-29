@@ -151,15 +151,18 @@ Every colour that signals a state — badges, banners, alerts, health indicators
 errors, destructive menu items, status dots, focus rings on an invalid control — reads one
 matrix:
 
-| Slot      | success / warning | danger        | Use                                      |
-| --------- | ----------------- | ------------- | ---------------------------------------- |
-| `-bg`     | 50 / 900          | 50 / 900      | Tinted surface (pill, banner, row)       |
-| `-border` | 300 / 400         | 300 / 400     | Subtle border, neutral or tinted surface |
-| `-solid`  | 600 / 500         | 600 / 500     | Saturated fill or ring                   |
-| `-fg`     | 700 / 400         | 700 / **300** | Text, icons and dots                     |
+| Slot         | success / warning | danger        | Use                                      |
+| ------------ | ----------------- | ------------- | ---------------------------------------- |
+| `-bg`        | 50 / 900          | 50 / 900      | Tinted surface (pill, banner, row)       |
+| `-bg-strong` | 100 / 900         | 100 / 900     | Tint on one small shape (diagram node)   |
+| `-border`    | 300 / 400         | 300 / 400     | Subtle border, neutral or tinted surface |
+| `-solid`     | 600 / 500         | 600 / 500     | Saturated fill or ring                   |
+| `-fg`        | 700 / 400         | 700 / **300** | Text, icons and dots                     |
 
-as `--status-{success,warning,danger}-{bg,border,solid,fg}`, plus `-bg` and `-fg` only for
-`info` (50 / 900 and 600 / 300) and `neutral`. Steps refer to the intent's ramp (`danger` reads `error-*`).
+as `--status-{success,warning,danger}-{bg,bg-strong,border,solid,fg}`, plus `-bg`, `-bg-strong`
+and `-fg` only for `info` (50 / 900, 200 / 900 and 600 / 300) and `neutral`. `-bg-strong` has no
+utility: it is for Mermaid node fills (`style A fill:var(--status-success-bg-strong)`), where the
+50-step `-bg` nearly vanishes against plain nodes. Steps refer to the intent's ramp (`danger` reads `error-*`).
 
 Each slot has a Tailwind utility (`tailwind/theme.css`), named like Bootstrap 5.3's:
 
@@ -451,13 +454,15 @@ to prevent fractional `rem` compression under Waldur's forced 13px root font siz
 | Bootstrap emits no `fw-*`; Tailwind exactly the scale   | `src/tailwindBootstrapColors.test.ts`                                       |
 | Every physical colour has a `dark:` counterpart         | `waldur-custom/require-dark-pair`                                           |
 | No `--bs-*` reads                                       | `waldur-custom/no-bootstrap-css-vars`, stylelint                            |
+| Hard-coded colours (hex, `rgb()`, named) only go down   | `no-literal-color` (ESLint and stylelint), `yarn colors:check`              |
 
 **Duplicate roles.** Two semantic tokens with the same value in both themes are one role with
 two names until shown otherwise. The audit fails on any such group not listed in
 `DUPLICATE_BASELINE`, and on a listed group that is no longer a duplicate (prune it). Either
 merge the tokens, or add the group with the reason the roles must stay separate — today: a
 surface and a hairline that share gray-100, a surface and a drawn line at gray-200, the brand
-border/icon/focus ring, and the strong divider and `--text-quinary`.
+border/icon/focus ring, the strong divider and `--text-quinary`, and the card hairline and the
+neutral diagram-node tint (`--border-secondary`, `--status-neutral-bg-strong`).
 
 **Dark pairs.** A ramp step, `white`/`black`, a hex or a raw `var(--color-*-N)` /
 `var(--brand-N)` is the same colour in both themes. `require-dark-pair` reports one that has no
@@ -467,6 +472,31 @@ the message names (`bg-primary`, `bg-brand-subtle`, `text-brand`, `text-danger`,
 physical step only with its dark mirror (`ring-brand-50 dark:ring-brand-900`). A solid fill
 (`bg-*` at 400 or stronger) and white or black text on one read the same in both themes and
 pass. Tests are exempt: they assert class names, nothing renders.
+
+**Hard-coded colours.** A hex value, an `rgb()`/`hsl()` call or a named colour in a string,
+a style object, an SVG attribute, chart options or a stylesheet is the same colour in both
+themes and ignores the brand. `scripts/color-literals.mjs` counts them per file against
+`scripts/color-literals.baseline.json`, and `yarn colors:check` (in CI) fails when a file gains
+one, and when a file loses one until `yarn colors:save` lowers its count. `yarn colors:report
+[path…]` lists each literal with the ramp step it equals (`=`) or is closest to (`≈`). Replace
+one with a utility, `getChartThemeColors()` for canvas charts, or `currentColor` plus a `text-*`
+class for SVG.
+The chart roles (`src/dashboard/chartColors.ts`) cover the usual needs: `success`, `notice`
+(warning-400), `warning`, `danger` and `progress` (blue-500) for states; `muted`, `neutral` and
+`track` for secondary series, `neutralStrong` for its paired series and `remaining` for the
+unused part of a gauge; `text`, `textSecondary` and `textQuaternary` for labels; `infoFg`/`infoBg`
+for an accent chip; `shadow(alpha)` for a canvas shadow; `getCategoricalColors(n)` (up to 16)
+for series. Chart tooltips use the card surface (`src/echarts/themes.ts`), so tooltip HTML takes
+the text utilities (`class="text-quaternary"`). A shadow or darkening tint in a stylesheet is
+`color-mix(in srgb, var(--shadow-color) 8%, transparent)` (`semantic/elevation.css`). Files where the literal is the point are listed with
+their reason in `ALLOWED`: token sources and the boot splash, the login-page layout artwork,
+masks, output rendered outside the app's stylesheet (PDF, email preview, data-URI images,
+off-screen exports) and third-party or generated colours. Tests, stories and mocks are skipped.
+`waldur-custom/no-literal-color` (ESLint, scripts) and `waldur/no-literal-color` (stylelint,
+stylesheets) run the same detector against the same baseline, so the editor flags a literal as
+soon as a file has more than its count, each with its nearest ramp step. The detector and `ALLOWED` are in `packages/design-tokens/scripts/color-literals.mjs`. A short all-digit hex counts only where a
+colour goes (first in its string, after `:`, `,`, a function's `(`, a length or a border style),
+so an issue number such as `(#455)` in a message is not one.
 
 ## Reading a token in code
 

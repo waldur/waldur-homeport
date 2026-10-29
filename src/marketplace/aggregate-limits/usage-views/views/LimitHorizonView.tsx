@@ -8,8 +8,8 @@ import {
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { EChart } from '@/core/EChart';
 import {
-  getChartThemeColors,
   getSaturationRamp,
+  useChartThemeColors,
 } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 import { getUserLocale } from '@/i18n/LanguageUtilsService';
@@ -165,7 +165,7 @@ export const LimitHorizonView: FC<Props> = ({
   }, [byProjectQueries]);
 
   const todayMs = Date.now();
-  const tc = getChartThemeColors();
+  const tc = useChartThemeColors();
   const saturation = getSaturationRamp();
   const hasTerminated = rows.some((r) => r.terminated > 0);
   const banner = (
@@ -251,7 +251,7 @@ export const LimitHorizonView: FC<Props> = ({
       {
         type: 'rect',
         shape: { x, y: yCenter - height / 2, width: w, height, r: 3 },
-        style: { fill: '#f3f4f6', stroke: '#d0d5dd', lineWidth: 1 },
+        style: { fill: tc.track, stroke: tc.neutral, lineWidth: 1 },
       },
       // Used portion
       {
@@ -304,7 +304,7 @@ export const LimitHorizonView: FC<Props> = ({
     children.push({
       type: 'circle',
       shape: { cx: x + w, cy: yCenter, r: 4 },
-      style: { fill: '#6938ef' },
+      style: { fill: tc.infoFg },
     });
 
     return { type: 'group', children };
@@ -324,7 +324,7 @@ export const LimitHorizonView: FC<Props> = ({
           : '';
         const headerLines = [
           `<strong>${r.offeringName} · ${r.componentName}</strong>`,
-          `<small style="color:#667085">${translate('Type')}: <code>${r.componentType}</code> · ${
+          `<small class="text-quaternary">${translate('Type')}: <code>${r.componentType}</code> · ${
             r.billingType === 'limit'
               ? translate('Limit-based')
               : translate('Usage-based')
@@ -335,7 +335,7 @@ export const LimitHorizonView: FC<Props> = ({
           r.terminated > 0
             ? `${TERMINATED_SERIES_NAME()}: <strong>${r.terminated.toLocaleString()}</strong> ${r.measuredUnit}`
             : '',
-          `<small style="color:#6938ef">↻ ${translate('Next reset')}: ${formatDate(r.end)}</small>`,
+          `<small class="text-info">↻ ${translate('Next reset')}: ${formatDate(r.end)}</small>`,
         ];
 
         // Per-project breakdown (customer scope only).
@@ -343,7 +343,7 @@ export const LimitHorizonView: FC<Props> = ({
         if (!isProject) {
           if (byProjectQueries[idx]?.isLoading) {
             headerLines.push(
-              `<hr style="margin:6px 0;border-color:#e4e7ec"/><small>${translate('Loading per-project split…')}</small>`,
+              `<hr class="my-1.5 border-secondary"/><small>${translate('Loading per-project split…')}</small>`,
             );
           } else if (breakdown && breakdown.length) {
             const top = breakdown.slice(0, 5);
@@ -353,22 +353,22 @@ export const LimitHorizonView: FC<Props> = ({
               .map((p) => {
                 const share = Math.round((p.usage / total) * 100);
                 const name = p.isRemoved
-                  ? `${p.name} <small style="color:#667085">${translate('(removed)')}</small>`
+                  ? `${p.name} <small class="text-quaternary">${translate('(removed)')}</small>`
                   : p.name;
                 return `<div style="display:flex;justify-content:space-between;gap:8px"><span>${name}</span><span><strong>${p.usage.toLocaleString()}</strong> ${r.measuredUnit} <small>(${share}%)</small></span></div>`;
               })
               .join('');
             headerLines.push(
-              `<hr style="margin:6px 0;border-color:#e4e7ec"/>` +
-                `<small style="color:#667085">${translate('Per-project split')} (${breakdown.length} ${translate('projects')})</small>` +
+              `<hr class="my-1.5 border-secondary"/>` +
+                `<small class="text-quaternary">${translate('Per-project split')} (${breakdown.length} ${translate('projects')})</small>` +
                 rows2 +
                 (rest > 0
-                  ? `<small style="color:#667085">+ ${rest} ${translate('more…')}</small>`
+                  ? `<small class="text-quaternary">+ ${rest} ${translate('more…')}</small>`
                   : ''),
             );
           } else if (breakdown && !breakdown.length) {
             headerLines.push(
-              `<hr style="margin:6px 0;border-color:#e4e7ec"/><small style="color:#667085">${translate('No per-project usage reported.')}</small>`,
+              `<hr class="my-1.5 border-secondary"/><small class="text-quaternary">${translate('No per-project usage reported.')}</small>`,
             );
           }
         }
@@ -402,19 +402,19 @@ export const LimitHorizonView: FC<Props> = ({
         },
         rich: {
           name: {
-            color: '#344054',
+            color: tc.textSecondary,
             fontWeight: 500,
             fontSize: 12,
             lineHeight: 16,
           },
           sub: {
-            color: '#667085',
+            color: tc.textQuaternary,
             fontSize: 11,
             lineHeight: 14,
           },
           type: {
-            color: '#6938ef',
-            backgroundColor: '#f4f3ff',
+            color: tc.infoFg,
+            backgroundColor: tc.infoBg,
             padding: [1, 4, 1, 4],
             borderRadius: 3,
             fontSize: 10,
@@ -509,7 +509,7 @@ export const LimitHorizonView: FC<Props> = ({
         <span className="inline-flex items-center gap-1">
           <span
             className="inline-block size-2 rounded-full"
-            style={{ background: '#6938ef' }}
+            style={{ background: tc.infoFg }}
           />
           {translate('Next reset')}
         </span>

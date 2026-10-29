@@ -174,8 +174,9 @@ export const getBookedSlots = (bookedItems: BookedItem[]) =>
     extendedProps: {
       type: 'Schedule',
     },
-    backgroundColor: '#333',
-    borderColor: '#333',
-    textColor: '#c6c7cb',
+    // A dark slot with light text in both themes.
+    backgroundColor: 'var(--color-gray-700)',
+    borderColor: 'var(--color-gray-700)',
+    textColor: 'var(--color-gray-300)',
     classNames: 'booking booking-Schedule',
   }));

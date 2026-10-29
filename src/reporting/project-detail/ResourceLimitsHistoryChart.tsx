@@ -4,6 +4,7 @@ import { FC, useMemo, useCallback } from 'react';
 import { ChartCard } from '@/core/ChartCard';
 import { EChart } from '@/core/EChart';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 import { ExportData } from '@/table/exporters/types';
 import { renderFieldOrDash } from '@/table/utils';
@@ -18,10 +19,14 @@ interface ResourceLimitsHistoryChartProps {
   isLoading?: boolean;
 }
 
-const CHART_COLORS: Record<string, string> = {
-  cpu_k_hours: '#009ef7',
-  gpu_hours: '#50cd89',
-  gb_k_hours: '#ffc700',
+// One colour per component, from the chart roles; anything else is muted.
+const getComponentColor = (type: string): string => {
+  const tc = getChartThemeColors();
+  return (
+    { cpu_k_hours: tc.progress, gpu_hours: tc.success, gb_k_hours: tc.notice }[
+      type
+    ] ?? tc.muted
+  );
 };
 
 // Helper to get label from map or format type as fallback
@@ -82,7 +87,7 @@ export const ResourceLimitsHistoryChart: FC<
         type: 'line',
         step: 'end',
         data: expandedPoints.map((p) => [p.date, p.value]),
-        itemStyle: { color: CHART_COLORS[type] || '#7e8299' },
+        itemStyle: { color: getComponentColor(type) },
         lineStyle: { width: 2 },
         showSymbol: true,
         symbolSize: 6,

@@ -1,5 +1,5 @@
-export const RATING_STAR_ACTIVE_COLOR = '#f79009'; // warning-500
-export const RATING_STAR_INACTIVE_COLOR = '#98a2b3'; // gray-400
+export const RATING_STAR_ACTIVE_COLOR = 'var(--color-warning-500)';
+export const RATING_STAR_INACTIVE_COLOR = 'var(--text-quinary)';
 
 export const GRID_BREAKPOINTS = {
   xs: 0,

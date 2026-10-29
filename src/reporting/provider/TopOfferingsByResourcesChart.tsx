@@ -3,6 +3,7 @@ import { FC, useCallback, useMemo } from 'react';
 
 import { ChartCard } from '@/core/ChartCard';
 import { EChart } from '@/core/EChart';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 
 interface OfferingStatsData {
@@ -42,7 +43,7 @@ export const TopOfferingsByResourcesChart: FC<
           name: translate('Resources'),
           type: 'bar',
           data: data.map((o) => o.resource_count),
-          itemStyle: { color: '#009ef7' },
+          itemStyle: { color: getChartThemeColors().progress },
         },
       ],
     };

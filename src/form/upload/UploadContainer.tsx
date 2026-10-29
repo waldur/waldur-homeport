@@ -4,7 +4,6 @@ import { useRef } from 'react';
 import Dropzone, { DropzoneOptions, DropzoneRef } from 'react-dropzone';
 
 import { formatJsx, translate } from '@/i18n';
-import { useTheme } from '@/theme/useTheme';
 
 import './UploadContainer.scss';
 
@@ -16,20 +15,13 @@ interface UploadContainerProps extends DropzoneOptions {
   disabled?: boolean;
 }
 
-const rejectStyleLight = {
-  borderColor: '#fda29b',
-};
-
-const rejectStyleDark = {
-  borderColor: '#f97066',
+const rejectStyle = {
+  borderColor: 'var(--status-danger-border)',
 };
 
 export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
   const { message, className, inputLabel, ...rest } = props;
   const dropzoneNode = useRef<DropzoneRef>(null);
-
-  const { theme } = useTheme();
-  const rejectStyle = theme === 'dark' ? rejectStyleDark : rejectStyleLight;
 
   const chooseFile = () => {
     if (dropzoneNode.current) {

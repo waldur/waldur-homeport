@@ -3,6 +3,7 @@ import { EChartsOption, graphic } from 'echarts';
 import { hexToRgb } from 'waldur-design-tokens';
 
 import { formatUsageValue } from '@/core/formatNumber';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { getChartBrandColor } from '@/dashboard/constants';
 import { translate } from '@/i18n';
 
@@ -49,7 +50,7 @@ export const getUsageLineChartOptions = (
       type: 'line',
       name: translate('Limit'),
       data: limitValues,
-      color: '#e0e0e0', // Light gray for limit
+      color: getChartThemeColors().neutral,
       smooth: true,
       showSymbol: false,
       lineStyle: {

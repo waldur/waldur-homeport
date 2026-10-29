@@ -5,26 +5,24 @@
 
 import type { EChartsOption } from 'echarts';
 
+import {
+  getCategoricalColors,
+  getChartThemeColors,
+} from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 
 import { ProjectUsageReport } from './ProjectUsageReport';
 import { secondsToHours } from './storage';
 
 /** Colour palette */
-const PALETTE = [
-  '#003366',
-  '#006699',
-  '#23c6c8',
-  '#1c84c6',
-  '#2ecc71',
-  '#e74c3c',
-  '#e67e22',
-  '#f1c40f',
-  '#9b59b6',
-  '#1abc9c',
-  '#e91e63',
-  '#ff5722',
-];
+/** Series colours: the chart roles' categorical palette (chartColors.ts). */
+const getPalette = () => getCategoricalColors(12);
+
+/** The palette colour for the i-th series, wrapping round. */
+const paletteColor = (i: number) => {
+  const palette = getPalette();
+  return palette[i % palette.length];
+};
 
 export type UsageMetric = 'usage' | 'jobs' | 'avg_wait';
 export type UsageComponent = 'total' | string;
@@ -122,7 +120,7 @@ export function buildTooltipRows(
     ),
     ...(rest.length > 0
       ? [
-          `<i style="color:#888">…${rest.length} others: <b>${fmtVal(othersTotal)}</b></i>`,
+          `<i class="text-quaternary">…${rest.length} others: <b>${fmtVal(othersTotal)}</b></i>`,
         ]
       : []),
   ];
@@ -175,7 +173,7 @@ function topNPieData(
     {
       name: label,
       value: rest.reduce((s, d) => s + d.value, 0),
-      itemStyle: { color: '#bbb' },
+      itemStyle: { color: getChartThemeColors().neutral },
     },
   ];
 }
@@ -421,7 +419,7 @@ export function buildTimeseriesOptions(
   const base = baseTimeseriesConfig(labels, groupBy, yLabel, '{value} h', zoom);
 
   return {
-    color: PALETTE,
+    color: getPalette(),
     tooltip: {
       trigger: 'axis',
       axisPointer: { type: 'cross' },
@@ -443,7 +441,7 @@ export function buildTimeseriesOptions(
         type: 'bar' as const,
         stack: 'usage',
         emphasis: { focus: 'series' as const },
-        itemStyle: { color: PALETTE[i % PALETTE.length] },
+        itemStyle: { color: paletteColor(i) },
         data: info.data,
       })),
       ...(otherData
@@ -455,7 +453,7 @@ export function buildTimeseriesOptions(
               type: 'bar' as const,
               stack: 'usage',
               emphasis: { focus: 'series' as const },
-              itemStyle: { color: '#bbb' },
+              itemStyle: { color: getChartThemeColors().neutral },
               data: otherData,
             },
           ]
@@ -483,7 +481,7 @@ export function buildPieOptions(
       return {
         name: resolveUserName(user, report, fullNames, nameMaps),
         value: hours,
-        itemStyle: { color: PALETTE[i % PALETTE.length] },
+        itemStyle: { color: paletteColor(i) },
       };
     })
     .filter((d) => d.value > 0);
@@ -510,14 +508,18 @@ export function buildPieOptions(
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: true,
-        itemStyle: { borderRadius: 4, borderWidth: 2, borderColor: '#fff' },
+        itemStyle: {
+          borderRadius: 4,
+          borderWidth: 2,
+          borderColor: getChartThemeColors().surface,
+        },
         label: { show: true, formatter: '{b}\n{d}%' },
         emphasis: {
           label: { show: true, fontWeight: 'bold' },
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
-            shadowColor: 'rgba(0,0,0,0.3)',
+            shadowColor: getChartThemeColors().shadow(0.3),
           },
         },
         data,
@@ -575,7 +577,7 @@ export function buildProjectTimeseriesOptions(
   );
 
   return {
-    color: PALETTE,
+    color: getPalette(),
     tooltip: {
       trigger: 'axis',
       confine: true,
@@ -597,7 +599,7 @@ export function buildProjectTimeseriesOptions(
       type: 'bar' as const,
       stack: 'usage',
       emphasis: { focus: 'series' as const },
-      itemStyle: { color: PALETTE[i % PALETTE.length] },
+      itemStyle: { color: paletteColor(i) },
       data: seriesData[i],
     })) as EChartsOption['series'],
   };
@@ -613,7 +615,7 @@ export function buildProjectPieOptions(
     .map((r, i) => ({
       name: resolveProjectName(r.project, nameMaps),
       value: r.totalUsageHours(),
-      itemStyle: { color: PALETTE[i % PALETTE.length] },
+      itemStyle: { color: paletteColor(i) },
     }))
     .filter((d) => d.value > 0);
 
@@ -636,14 +638,18 @@ export function buildProjectPieOptions(
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: true,
-        itemStyle: { borderRadius: 4, borderWidth: 2, borderColor: '#fff' },
+        itemStyle: {
+          borderRadius: 4,
+          borderWidth: 2,
+          borderColor: getChartThemeColors().surface,
+        },
         label: { show: true, formatter: '{b}\n{d}%' },
         emphasis: {
           label: { show: true, fontWeight: 'bold' },
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
-            shadowColor: 'rgba(0,0,0,0.3)',
+            shadowColor: getChartThemeColors().shadow(0.3),
           },
         },
         data,
@@ -716,7 +722,7 @@ export function buildJobsTimeseriesOptions(
   );
 
   return {
-    color: PALETTE,
+    color: getPalette(),
     tooltip: {
       trigger: 'axis',
       axisPointer: { type: 'cross' },
@@ -738,7 +744,7 @@ export function buildJobsTimeseriesOptions(
         type: 'bar' as const,
         stack: 'jobs',
         emphasis: { focus: 'series' as const },
-        itemStyle: { color: PALETTE[i % PALETTE.length] },
+        itemStyle: { color: paletteColor(i) },
         data: info.data,
       })),
       ...(otherData
@@ -750,7 +756,7 @@ export function buildJobsTimeseriesOptions(
               type: 'bar' as const,
               stack: 'jobs',
               emphasis: { focus: 'series' as const },
-              itemStyle: { color: '#bbb' },
+              itemStyle: { color: getChartThemeColors().neutral },
               data: otherData,
             },
           ]
@@ -774,7 +780,7 @@ export function buildJobsPieOptions(
       return {
         name: resolveUserName(user, report, fullNames, nameMaps),
         value: total,
-        itemStyle: { color: PALETTE[i % PALETTE.length] },
+        itemStyle: { color: paletteColor(i) },
       };
     })
     .filter((d) => d.value > 0);
@@ -798,14 +804,18 @@ export function buildJobsPieOptions(
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: true,
-        itemStyle: { borderRadius: 4, borderWidth: 2, borderColor: '#fff' },
+        itemStyle: {
+          borderRadius: 4,
+          borderWidth: 2,
+          borderColor: getChartThemeColors().surface,
+        },
         label: { show: true, formatter: '{b}\n{d}%' },
         emphasis: {
           label: { show: true, fontWeight: 'bold' },
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
-            shadowColor: 'rgba(0,0,0,0.3)',
+            shadowColor: getChartThemeColors().shadow(0.3),
           },
         },
         data,
@@ -848,7 +858,7 @@ export function buildProjectJobsTimeseriesOptions(
   );
 
   return {
-    color: PALETTE,
+    color: getPalette(),
     tooltip: {
       trigger: 'axis',
       confine: true,
@@ -870,7 +880,7 @@ export function buildProjectJobsTimeseriesOptions(
       type: 'bar' as const,
       stack: 'jobs',
       emphasis: { focus: 'series' as const },
-      itemStyle: { color: PALETTE[i % PALETTE.length] },
+      itemStyle: { color: paletteColor(i) },
       data: seriesData[i],
     })) as EChartsOption['series'],
   };
@@ -886,7 +896,7 @@ export function buildProjectJobsPieOptions(
     .map((r, i) => ({
       name: resolveProjectName(r.project, nameMaps),
       value: r.dailyReports().reduce((s, d) => s + d.numJobs, 0),
-      itemStyle: { color: PALETTE[i % PALETTE.length] },
+      itemStyle: { color: paletteColor(i) },
     }))
     .filter((d) => d.value > 0);
 
@@ -909,14 +919,18 @@ export function buildProjectJobsPieOptions(
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: true,
-        itemStyle: { borderRadius: 4, borderWidth: 2, borderColor: '#fff' },
+        itemStyle: {
+          borderRadius: 4,
+          borderWidth: 2,
+          borderColor: getChartThemeColors().surface,
+        },
         label: { show: true, formatter: '{b}\n{d}%' },
         emphasis: {
           label: { show: true, fontWeight: 'bold' },
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
-            shadowColor: 'rgba(0,0,0,0.3)',
+            shadowColor: getChartThemeColors().shadow(0.3),
           },
         },
         data,
@@ -987,7 +1001,7 @@ export function buildAvgWaitTimeseriesOptions(
     type: 'line' as const,
     connectNulls: false,
     emphasis: { focus: 'series' as const },
-    itemStyle: { color: PALETTE[i % PALETTE.length] },
+    itemStyle: { color: paletteColor(i) },
     data: userSeriesData[i],
   }));
 
@@ -995,13 +1009,13 @@ export function buildAvgWaitTimeseriesOptions(
     name: translate('Total avg'),
     type: 'line' as const,
     lineStyle: { type: 'dashed' as const, width: 2 },
-    itemStyle: { color: '#999' },
+    itemStyle: { color: getChartThemeColors().muted },
     connectNulls: false,
     data: totalSeriesData,
   };
 
   return {
-    color: PALETTE,
+    color: getPalette(),
     tooltip: {
       trigger: 'axis',
       axisPointer: { type: 'cross' },
@@ -1021,7 +1035,7 @@ export function buildAvgWaitTimeseriesOptions(
           ),
           ...(rest.length > 0
             ? [
-                `<i style="color:#888">${translate('…{count} others', { count: rest.length })}</i>`,
+                `<i class="text-quaternary">${translate('…{count} others', { count: rest.length })}</i>`,
               ]
             : []),
         ];
@@ -1070,7 +1084,7 @@ export function buildAvgWaitPieOptions(
       return {
         name: resolveUserName(user, report, fullNames, nameMaps),
         value: Math.round(totalWait / totalJobs / 60),
-        itemStyle: { color: PALETTE[i % PALETTE.length] },
+        itemStyle: { color: paletteColor(i) },
       };
     })
     .filter((d): d is NonNullable<typeof d> => d !== null && d.value > 0);
@@ -1099,7 +1113,11 @@ export function buildAvgWaitPieOptions(
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: true,
-        itemStyle: { borderRadius: 4, borderWidth: 2, borderColor: '#fff' },
+        itemStyle: {
+          borderRadius: 4,
+          borderWidth: 2,
+          borderColor: getChartThemeColors().surface,
+        },
         label: {
           show: true,
           formatter: translate('{name}\n{value} min', {
@@ -1112,7 +1130,7 @@ export function buildAvgWaitPieOptions(
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
-            shadowColor: 'rgba(0,0,0,0.3)',
+            shadowColor: getChartThemeColors().shadow(0.3),
           },
         },
         data,
@@ -1163,12 +1181,12 @@ export function buildProjectAvgWaitTimeseriesOptions(
     type: 'line' as const,
     connectNulls: false,
     emphasis: { focus: 'series' as const },
-    itemStyle: { color: PALETTE[i % PALETTE.length] },
+    itemStyle: { color: paletteColor(i) },
     data: seriesData[i],
   }));
 
   return {
-    color: PALETTE,
+    color: getPalette(),
     tooltip: {
       trigger: 'axis',
       confine: true,
@@ -1188,7 +1206,7 @@ export function buildProjectAvgWaitTimeseriesOptions(
               `${tooltipDot(p.color)}${p.seriesName}: <b>${p.value} min</b>`,
           ),
           ...(rest.length > 0
-            ? [`<i style="color:#888">…${rest.length} others</i>`]
+            ? [`<i class="text-quaternary">…${rest.length} others</i>`]
             : []),
         ];
         return `<b>${label}</b><br/>${rowLines.join('<br/>')}`;
@@ -1223,7 +1241,7 @@ export function buildProjectAvgWaitPieOptions(
       return {
         name: resolveProjectName(r.project, nameMaps),
         value: Math.round(totalWait / totalJobs / 60),
-        itemStyle: { color: PALETTE[i % PALETTE.length] },
+        itemStyle: { color: paletteColor(i) },
       };
     })
     .filter((d): d is NonNullable<typeof d> => d !== null && d.value > 0);
@@ -1253,7 +1271,11 @@ export function buildProjectAvgWaitPieOptions(
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: true,
-        itemStyle: { borderRadius: 4, borderWidth: 2, borderColor: '#fff' },
+        itemStyle: {
+          borderRadius: 4,
+          borderWidth: 2,
+          borderColor: getChartThemeColors().surface,
+        },
         label: {
           show: true,
           formatter: translate('{name}\n{value} min', {
@@ -1266,7 +1288,7 @@ export function buildProjectAvgWaitPieOptions(
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
-            shadowColor: 'rgba(0,0,0,0.3)',
+            shadowColor: getChartThemeColors().shadow(0.3),
           },
         },
         data,

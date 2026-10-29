@@ -171,6 +171,8 @@ Run style and dependency checks:
   <<: *linter-rules
   script:
     - yarn style:check
+    # Hard-coded colours may only go down (scripts/color-literals.mjs).
+    - yarn colors:check
     - yarn deps:unused
     - yarn deps:circular
     - yarn deps:dedupe

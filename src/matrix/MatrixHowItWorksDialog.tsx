@@ -35,9 +35,9 @@ flowchart TB
         J --> E
     end
 
-    style E fill:#fff3e0,color:#000
-    style H fill:#fff3e0,color:#000
-    style I fill:#e8f5e9,color:#000
+    style E fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style H fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style I fill:var(--status-success-bg-strong),color:var(--text-primary)
 `;
 
 const ROOM_LIFECYCLE_DIAGRAM = `
@@ -67,10 +67,10 @@ flowchart TB
         H --> P["Room archived on project deletion"]
     end
 
-    style H fill:#e8f5e9,color:#000
-    style N fill:#e0e0e0,color:#000
-    style M fill:#fff3e0,color:#000
-    style P fill:#fff3e0,color:#000
+    style H fill:var(--status-success-bg-strong),color:var(--text-primary)
+    style N fill:var(--status-neutral-bg-strong),color:var(--text-primary)
+    style M fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style P fill:var(--status-warning-bg-strong),color:var(--text-primary)
 `;
 
 const WEBHOOK_FLOW_DIAGRAM = `
@@ -95,9 +95,9 @@ flowchart LR
         I -->|No| K["Ignore event"]
     end
 
-    style C fill:#fff3e0,color:#000
-    style E fill:#fff3e0,color:#000
-    style J fill:#e8f5e9,color:#000
+    style C fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style E fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style J fill:var(--status-success-bg-strong),color:var(--text-primary)
 `;
 
 const EXPORT_FLOW_DIAGRAM = `
@@ -124,8 +124,8 @@ flowchart TB
         J --> K["Available for download"]
     end
 
-    style E fill:#fff3e0,color:#000
-    style K fill:#e8f5e9,color:#000
+    style E fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style K fill:var(--status-success-bg-strong),color:var(--text-primary)
 `;
 
 const BOT_COMMANDS = [

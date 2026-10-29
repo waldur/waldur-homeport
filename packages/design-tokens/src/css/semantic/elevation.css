@@ -3,6 +3,10 @@
  *
  *   --dropdown-shadow   dropdowns, menus and popovers
  *   --overlay-shadow    dialogs and toasts
+ *   --shadow-color      what any other shadow or darkening tint is mixed
+ *                       from: color-mix(in srgb, var(--shadow-color) 8%,
+ *                       transparent). Black in both themes, as the
+ *                       rgba(0, 0, 0, …) shadows it replaced.
  *
  * --dropdown-shadow is the custom dropdown shadow Metronic's
  * $dropdown-box-shadow used to be overridden with (_variables.custom.scss, now
@@ -20,6 +24,7 @@
  * Both themes are defined in this file.
  */
 :root {
+  --shadow-color: #000000;
   --dropdown-shadow:
     0 12px 16px -4px rgba(16, 24, 40, 0.1),
     0 4px 6px -2px rgba(16, 24, 40, 0.0005);

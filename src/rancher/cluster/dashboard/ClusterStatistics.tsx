@@ -3,15 +3,15 @@ import { RancherCluster } from 'waldur-js-client';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 
+import { useChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
-import { useTheme } from '@/theme/useTheme';
 
 import { NetworkStatisticsCard } from './NetworkStatisticsCard';
 import { PieChart } from './PieChart';
 import { StatisticsCard } from './StatisticsCard';
 
 const StatisticPieChartItem = ({ title, unit, total, value, color }) => {
-  const { theme } = useTheme();
+  const tc = useChartThemeColors();
   return (
     <div className="flex items-center self-stretch gap-4">
       <PieChart
@@ -23,7 +23,7 @@ const StatisticPieChartItem = ({ title, unit, total, value, color }) => {
           },
           {
             value: total - value,
-            itemStyle: { color: theme === 'dark' ? '#333741' : '#E4E7EC' },
+            itemStyle: { color: tc.remaining },
           },
         ]}
       />
@@ -44,6 +44,7 @@ export const ClusterStatistics: FC<{
   resourceScope: RancherCluster;
 }> = ({ resourceScope }) => {
   const [activeKey, setActiveKey] = useState('capacity');
+  const tc = useChartThemeColors();
 
   const nodesCount = useMemo(
     () => resourceScope?.nodes.length || 0,
@@ -95,7 +96,7 @@ export const ClusterStatistics: FC<{
               unit="cores"
               total={110}
               value={7}
-              color="#12B76A"
+              color={tc.success}
             />
           </div>
           <div className="flex-none">
@@ -106,14 +107,14 @@ export const ClusterStatistics: FC<{
                 unit="cores"
                 total={4}
                 value={1.53}
-                color="#F79009"
+                color={tc.warning}
               />
               <StatisticPieChartItem
                 title={translate('Used')}
                 unit="cores"
                 total={4}
                 value={0.3}
-                color="#12B76A"
+                color={tc.success}
               />
             </div>
           </div>
@@ -125,14 +126,14 @@ export const ClusterStatistics: FC<{
                 unit="GiB"
                 total={7.76}
                 value={2.56}
-                color="#F79009"
+                color={tc.warning}
               />
               <StatisticPieChartItem
                 title={translate('Used')}
                 unit="GiB"
                 total={7.76}
                 value={4.46}
-                color="#12B76A"
+                color={tc.success}
               />
             </div>
           </div>

@@ -31,8 +31,8 @@ flowchart TB
         I --> J["Billing sync can begin"]
     end
 
-    style D fill:#fff3e0,color:#000
-    style I fill:#e8f5e9,color:#000
+    style D fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style I fill:var(--status-success-bg-strong),color:var(--text-primary)
 `;
 
 const DATA_FLOW_DIAGRAM = `
@@ -60,8 +60,8 @@ flowchart LR
     W3 -->|"resource"| R["Resource"]
     W4 -->|"invoice_item"| I["InvoiceItem"]
 
-    style arrow fill:#e3f2fd,color:#000
-    style waldur fill:#e8f5e9,color:#000
+    style arrow fill:var(--status-info-bg-strong),color:var(--text-primary)
+    style waldur fill:var(--status-success-bg-strong),color:var(--text-primary)
 `;
 
 const BILLING_SYNC_DIAGRAM = `
@@ -92,7 +92,7 @@ flowchart TB
         J --> K["Mark ArrowBillingSync as 'synced'"]
     end
 
-    style K fill:#e8f5e9,color:#000
+    style K fill:var(--status-success-bg-strong),color:var(--text-primary)
 `;
 
 const getReconciliationDiagram = (priceLabel: string) => `
@@ -117,9 +117,9 @@ flowchart TB
         K --> I
     end
 
-    style D fill:#fff3e0,color:#000
-    style H fill:#fff3e0,color:#000
-    style I fill:#e8f5e9,color:#000
+    style D fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style H fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style I fill:var(--status-success-bg-strong),color:var(--text-primary)
 `;
 
 const CONSUMPTION_FLOW_DIAGRAM = `
@@ -147,8 +147,8 @@ flowchart TB
         I --> J["Mark as finalized at period end"]
     end
 
-    style F fill:#fff3e0,color:#000
-    style J fill:#e8f5e9,color:#000
+    style F fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style J fill:var(--status-success-bg-strong),color:var(--text-primary)
 `;
 
 const SYNC_STATES = [
@@ -247,8 +247,8 @@ flowchart TB
         K --> L["Ready for consumption sync"]
     end
 
-    style J fill:#e8f5e9,color:#000
-    style L fill:#e8f5e9,color:#000
+    style J fill:var(--status-success-bg-strong),color:var(--text-primary)
+    style L fill:var(--status-success-bg-strong),color:var(--text-primary)
 `;
 
 const CONSUMPTION_SYNC_DIAGRAM = `
@@ -273,8 +273,8 @@ flowchart LR
         J --> K["Invoice item created"]
     end
 
-    style F fill:#fff3e0,color:#000
-    style K fill:#e8f5e9,color:#000
+    style F fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style K fill:var(--status-success-bg-strong),color:var(--text-primary)
 `;
 
 // Invoice Item creation types

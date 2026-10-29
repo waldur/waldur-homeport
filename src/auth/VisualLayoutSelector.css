@@ -65,7 +65,7 @@
   top: 6px;
   right: 6px;
   background: var(--brand-color);
-  color: white;
+  color: var(--text-primary-on-brand);
   width: 20px;
   height: 20px;
   border-radius: 50%;

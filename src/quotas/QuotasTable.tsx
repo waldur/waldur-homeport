@@ -1,11 +1,10 @@
 import { EChartsOption } from 'echarts';
 import { useMemo } from 'react';
 
-import { ENV } from '@/core/config';
 import { EChart } from '@/core/EChart';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { useChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
-import { useTheme } from '@/theme/useTheme';
 
 import { QUOTA_CATEGORIES } from './constants';
 import { Quota } from './types';
@@ -18,12 +17,11 @@ interface Resource {
 const ResourceQuotaChart = ({ value, max }) => {
   const empty = Math.max(max - value, 0);
 
-  let color = ENV.plugins?.WALDUR_CORE?.BRAND_COLOR || '#108F10';
+  const tc = useChartThemeColors();
+  let color = tc.brand600;
   const percentage = (value / max) * 100;
-  if (percentage > 95) color = '#CC0808';
-  else if (percentage > 60) color = '#FCCF5C';
-
-  const { theme } = useTheme();
+  if (percentage > 95) color = tc.danger;
+  else if (percentage > 60) color = tc.notice;
 
   const chartOptions: EChartsOption = {
     tooltip: {
@@ -40,9 +38,9 @@ const ResourceQuotaChart = ({ value, max }) => {
           {
             value: empty,
             name: translate('Free'),
-            itemStyle: { color: theme === 'light' ? '#f5f8fa' : '#1a261d' },
+            itemStyle: { color: tc.remaining },
             emphasis: {
-              itemStyle: { color: theme === 'light' ? '#f5f8fa' : '#1a261d' },
+              itemStyle: { color: tc.remaining },
             },
           },
         ],
@@ -50,7 +48,7 @@ const ResourceQuotaChart = ({ value, max }) => {
         animation: false,
         emphasis: {
           itemStyle: {
-            shadowColor: 'rgba(0, 0, 0, 0.5)',
+            shadowColor: tc.shadow(0.5),
           },
           scaleSize: 2,
         },

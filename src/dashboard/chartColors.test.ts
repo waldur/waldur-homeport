@@ -15,6 +15,7 @@ const root = document.documentElement;
 const RAMP_VARS: Record<string, string> = {
   '--color-gray-200': '#000200',
   '--color-gray-300': '#000300',
+  '--color-gray-400': '#000400',
   '--color-gray-500': '#000500',
   '--color-gray-900': '#000900',
   '--color-success-600': '#016000',
@@ -29,6 +30,8 @@ const RAMP_VARS: Record<string, string> = {
   '--color-indigo-300': '#140300',
   '--color-moss-300': '#150300',
   '--color-rose-300': '#160300',
+  '--color-blue-500': '#100500',
+  '--color-teal-500': '#110500',
 };
 
 const setRamps = () =>
@@ -46,10 +49,37 @@ describe('getChartThemeColors', () => {
     expect(colors.info).toBe('#046000');
   });
 
+  it('takes the notice from warning-400 and progress from blue-500', () => {
+    setRamps();
+    const colors = getChartThemeColors();
+    expect(colors.notice).toBe('#024000');
+    expect(colors.progress).toBe('#100500');
+  });
+
+  it('reads label and info colours from the theme tokens', () => {
+    root.style.setProperty('--text-secondary', '#700700');
+    root.style.setProperty('--text-quaternary', '#500500');
+    root.style.setProperty('--status-info-fg', '#600600');
+    root.style.setProperty('--status-info-bg', '#050050');
+    root.style.setProperty('--bg-quaternary', '#020020');
+    const colors = getChartThemeColors();
+    expect(colors.textSecondary).toBe('#700700');
+    expect(colors.textQuaternary).toBe('#500500');
+    expect(colors.infoFg).toBe('#600600');
+    expect(colors.infoBg).toBe('#050050');
+    expect(colors.remaining).toBe('#020020');
+  });
+
+  it('mixes the shadow from --shadow-color at the given opacity', () => {
+    root.style.setProperty('--shadow-color', '#102030');
+    expect(getChartThemeColors().shadow(0.3)).toBe('rgba(16, 32, 48, 0.3)');
+  });
+
   it('falls back to the gray ramp when a surface token is missing', () => {
     setRamps();
     const colors = getChartThemeColors();
     expect(colors.neutral).toBe('#000300');
+    expect(colors.neutralStrong).toBe('#000400');
     expect(colors.track).toBe('#000200');
     expect(colors.muted).toBe('#000500');
     expect(colors.text).toBe('#000900');
@@ -88,6 +118,17 @@ describe('getCategoricalColors', () => {
       '#140300',
       '#150300',
       '#160300',
+    ]);
+  });
+
+  it('repeats the hues at the 500 step past eight', () => {
+    setRamps();
+    const colors = getCategoricalColors(11);
+    expect(colors).toHaveLength(11);
+    expect(colors.slice(8)).toEqual([
+      DEFAULT_PRIMARY_COLORS[500],
+      '#100500',
+      '#110500',
     ]);
   });
 });

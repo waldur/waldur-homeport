@@ -4,26 +4,25 @@ import { ChartCard } from '@/core/ChartCard';
 import { translate } from '@/i18n';
 import { DonutChart } from '@/reporting/users/charts/DonutChart';
 
-import { ORDER_STATES, STATE_COLORS } from './types';
+import { ORDER_STATES, getStateColors } from './types';
 
 interface OrdersStateChartProps {
   stateStats: Record<string, number>;
 }
 
 export const OrdersStateChart: FC<OrdersStateChartProps> = ({ stateStats }) => {
-  const chartData = useMemo(
-    () =>
-      Object.entries(stateStats)
-        .filter(([, value]) => value > 0)
-        .map(([state, value]) => ({
-          name: ORDER_STATES[state] || state,
-          value,
-          itemStyle: {
-            color: STATE_COLORS[state] || '#7e8299',
-          },
-        })),
-    [stateStats],
-  );
+  const chartData = useMemo(() => {
+    const colors = getStateColors();
+    return Object.entries(stateStats)
+      .filter(([, value]) => value > 0)
+      .map(([state, value]) => ({
+        name: ORDER_STATES[state] || state,
+        value,
+        itemStyle: {
+          color: colors[state] || colors.canceled,
+        },
+      }));
+  }, [stateStats]);
 
   const getExportData = useCallback(
     () => ({

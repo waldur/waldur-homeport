@@ -4,6 +4,7 @@ import { DailyOrderStats } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
 import { EChart } from '@/core/EChart';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 import { ExportData } from '@/table/exporters/types';
 
@@ -99,7 +100,7 @@ export const ProvisioningTrendChart: FC<ProvisioningTrendChartProps> = ({
             opacity: 0.3,
           },
           itemStyle: {
-            color: '#50cd89',
+            color: getChartThemeColors().success,
           },
           lineStyle: {
             width: 2,
@@ -109,12 +110,18 @@ export const ProvisioningTrendChart: FC<ProvisioningTrendChartProps> = ({
             data: [
               {
                 yAxis: 95,
-                lineStyle: { color: '#50cd89', type: 'dashed' },
+                lineStyle: {
+                  color: getChartThemeColors().success,
+                  type: 'dashed',
+                },
                 label: { formatter: '95%' },
               },
               {
                 yAxis: 80,
-                lineStyle: { color: '#ffc700', type: 'dashed' },
+                lineStyle: {
+                  color: getChartThemeColors().notice,
+                  type: 'dashed',
+                },
                 label: { formatter: '80%' },
               },
             ],

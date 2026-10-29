@@ -14,6 +14,7 @@ import {
   getCostWidgetChartOptions,
   getCreditWidgetChartOptions,
 } from './chart';
+import { getChartThemeColors } from './chartColors';
 import { Chart, ChartData, CostChart, CreditChart, Scope } from './types';
 
 export interface DateValuePair {
@@ -284,7 +285,7 @@ export const getCostChartAndOptions = (
       data: Array.from({ length: chart.incurred.length - 1 }).concat(
         chart.incurred[chart.incurred.length - 1],
       ),
-      color: '#d0d5dd', // gray-300
+      color: getChartThemeColors().neutral,
     },
     hasCompensations && {
       name: translate('Estimated compensation'),
@@ -293,7 +294,8 @@ export const getCostChartAndOptions = (
       data: Array.from({ length: chart.compensation.length - 1 }).concat(
         chart.compensation[chart.compensation.length - 1],
       ),
-      color: '#98a2b3', // gray-400 — same darker step as the actual pair
+      // The same darker step as the actual pair.
+      color: getChartThemeColors().neutralStrong,
     },
   ].filter(Boolean) as SeriesOption[];
 

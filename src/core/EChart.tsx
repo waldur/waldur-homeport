@@ -26,8 +26,18 @@ export const EChart = React.forwardRef<any, ChartProps>(
     const [loading, setLoading] = useState(false);
     const { theme } = useTheme();
     const previousThemeRef = useRef(theme);
+    // The live ECharts instance, also in state: a theme switch disposes it and
+    // creates another inside an async import, after the last render, so the
+    // forwarded ref and EChartActions must re-render to see the new one.
+    // Otherwise they keep the disposed instance, whose getDataURL() returns
+    // undefined (and a PNG export then saved the page as HTML).
+    const [instance, setInstance] = useState<any>(null);
+    const attach = (chart) => {
+      chartRef.current = chart;
+      setInstance(chart);
+    };
 
-    React.useImperativeHandle(ref, () => chartRef.current);
+    React.useImperativeHandle(ref, () => instance, [instance]);
 
     useEffect(() => {
       drawChart();
@@ -61,10 +71,7 @@ export const EChart = React.forwardRef<any, ChartProps>(
 
         if (chartRef.current) {
           chartRef.current.dispose();
-          chartRef.current = echarts.init(
-            containerRef.current,
-            `${theme}-metronic`,
-          );
+          attach(echarts.init(containerRef.current, `${theme}-metronic`));
           renderChart();
         } else {
           drawChart();
@@ -90,10 +97,7 @@ export const EChart = React.forwardRef<any, ChartProps>(
         const echarts = module.default;
         const chart = echarts.getInstanceByDom(containerRef.current);
         if (!chart) {
-          chartRef.current = echarts.init(
-            containerRef.current,
-            `${theme}-metronic`,
-          );
+          attach(echarts.init(containerRef.current, `${theme}-metronic`));
         }
         renderChart();
         if (!resizeObserverRef.current) {
@@ -125,14 +129,14 @@ export const EChart = React.forwardRef<any, ChartProps>(
 
       window.addEventListener('resize', handleResize);
       return () => window.removeEventListener('resize', handleResize);
-    }, [chartRef.current]);
+    }, [instance]);
 
     const style = { width, height };
 
     return (
       <div className={className} style={style}>
         {loading && <LoadingSpinner />}
-        <EChartActions chartInstance={chartRef.current} {...props} />
+        <EChartActions chartInstance={instance} {...props} />
         <div
           className={classNames({ hidden: loading })}
           style={style}

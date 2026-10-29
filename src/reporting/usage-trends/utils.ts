@@ -4,6 +4,7 @@ import { DateTime } from 'luxon';
 import { generateBrandColors } from 'waldur-design-tokens';
 
 import { getBrandColor } from '@/core/utils';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { getChartBrandColor } from '@/dashboard/constants';
 import { translate } from '@/i18n';
 
@@ -243,7 +244,7 @@ export const formatUsageTrendChart = (
         data: resourceCounts,
         smooth: true,
         itemStyle: {
-          color: '#50cd89',
+          color: getChartThemeColors().success,
         },
       },
     ],

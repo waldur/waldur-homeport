@@ -8,7 +8,7 @@ code:not([class*='language-']) {
   background-color: $code-bg;
 
   @include dark-theme {
-    color: #e493c6;
+    color: var(--color-rose-300);
     background-color: var(--bg-quaternary);
   }
   padding: $code-padding;
@@ -20,7 +20,7 @@ code:not([class*='language-']) {
 // Bootstrap's reboot colours every code element with $code-color.
 code {
   @include dark-theme {
-    color: #e493c6;
+    color: var(--color-rose-300);
   }
 }
 

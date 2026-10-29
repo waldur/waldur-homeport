@@ -4,6 +4,7 @@ import { FC, useMemo, useCallback } from 'react';
 import { ChartCard } from '@/core/ChartCard';
 import { EChart } from '@/core/EChart';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 import { ExportData } from '@/table/exporters/types';
 import { renderFieldOrDash } from '@/table/utils';
@@ -28,10 +29,14 @@ const getTypeLabel = (type: string, labelMap?: ComponentLabelMap): string => {
     .join(' ');
 };
 
-const CHART_COLORS: Record<string, string> = {
-  cpu_k_hours: '#009ef7',
-  gpu_hours: '#50cd89',
-  gb_k_hours: '#ffc700',
+// One colour per component, from the chart roles; anything else is muted.
+const getComponentColor = (type: string): string => {
+  const tc = getChartThemeColors();
+  return (
+    { cpu_k_hours: tc.progress, gpu_hours: tc.success, gb_k_hours: tc.notice }[
+      type
+    ] ?? tc.muted
+  );
 };
 
 export const ResourceUsageHistoryChart: FC<ResourceUsageHistoryChartProps> = ({
@@ -65,7 +70,7 @@ export const ResourceUsageHistoryChart: FC<ResourceUsageHistoryChartProps> = ({
       name: getTypeLabel(type, labelMap),
       type: 'line',
       data: points.map((p) => [p.date, p.cumulative]),
-      itemStyle: { color: CHART_COLORS[type] || '#7e8299' },
+      itemStyle: { color: getComponentColor(type) },
       areaStyle: {
         color: {
           type: 'linear',
@@ -74,8 +79,8 @@ export const ResourceUsageHistoryChart: FC<ResourceUsageHistoryChartProps> = ({
           x2: 0,
           y2: 1,
           colorStops: [
-            { offset: 0, color: (CHART_COLORS[type] || '#7e8299') + '40' },
-            { offset: 1, color: (CHART_COLORS[type] || '#7e8299') + '05' },
+            { offset: 0, color: getComponentColor(type) + '40' },
+            { offset: 1, color: getComponentColor(type) + '05' },
           ],
         },
       },

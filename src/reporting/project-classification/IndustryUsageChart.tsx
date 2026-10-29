@@ -1,6 +1,7 @@
 import { FC, useCallback, useMemo } from 'react';
 
 import { ChartCard } from '@/core/ChartCard';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 import { DonutChart } from '@/reporting/users/charts/DonutChart';
 
@@ -21,16 +22,17 @@ export const IndustryUsageChart: FC<IndustryUsageChartProps> = ({
         academicCount += item.count;
       }
     });
+    const tc = getChartThemeColors();
     return [
       {
         name: translate('Academic'),
         value: academicCount,
-        itemStyle: { color: '#50cd89' },
+        itemStyle: { color: tc.success },
       },
       {
         name: translate('Industry'),
         value: industryCount,
-        itemStyle: { color: '#7239ea' },
+        itemStyle: { color: tc.info },
       },
     ];
   }, [projectCounts]);
