@@ -45008,6 +45008,7 @@
     }
   },
   "Public LiveKit signaling URL that browsers connect to for calls, e.g. wss://matrix.example.org. Waldur issues call tokens only when this and the LiveKit key and secret are set.": {},
+  "Public URL(s) of the MCP endpoint, space-separated (e.g. https://api.example.com/mcp). OAuth tokens are issued only for these resources, and for the first one when a client names none; while empty, no OAuth token is issued.": {},
   "Public access": {
     "context": {
       "feature_area": "common"

@@ -306,6 +306,9 @@ export const DateGroupWiresAria: Story = {
     );
     await expect(input).not.toHaveAttribute('aria-invalid');
     await userEvent.click(input);
+    // Focusing the input opens the calendar, so leaving the field is Escape
+    // and then Tab — the way a keyboard user gets past an open picker.
+    await userEvent.keyboard('{Escape}');
     await userEvent.tab();
     await userEvent.tab();
     await waitFor(() => expect(input).toHaveAttribute('aria-invalid', 'true'));
