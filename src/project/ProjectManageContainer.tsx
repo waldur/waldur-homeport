@@ -121,7 +121,8 @@ export const ProjectManageContainer = () => {
           component: ProjectMembershipRestrictions,
           title: translate('Membership restrictions'),
         },
-        // Credit has no permission of its own. It follows project update.
+        // Credit has no permission of its own. Whoever can update the project
+        // reads it here; only owners and staff can edit it.
         canReadProject &&
           (project.project_credit || project.project_credit === 0) && {
             key: 'credit',

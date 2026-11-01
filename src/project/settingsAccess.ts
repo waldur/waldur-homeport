@@ -16,7 +16,7 @@ type SettingsUser = Pick<User, 'is_staff' | 'is_support' | 'permissions'>;
 type SettingsProject = Pick<Project, 'uuid' | 'customer_uuid' | 'is_removed'>;
 
 export interface ProjectSettingsAccess {
-  /** General, membership restrictions, credit, and end-date review. */
+  /** General, membership restrictions, and end-date review; reads credit. */
   updateProject: boolean;
   /** Checklist answers on the metadata tab. */
   updateMetadata: boolean;
