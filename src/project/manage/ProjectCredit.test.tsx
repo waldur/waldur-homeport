@@ -17,6 +17,19 @@ const project = {
 
 const support = { is_staff: false, is_support: true, permissions: [] } as any;
 
+const manager = {
+  is_staff: false,
+  is_support: false,
+  permissions: [
+    {
+      scope_type: 'project',
+      scope_uuid: project.uuid,
+      role_name: 'PROJECT.MANAGER',
+      customer_uuid: project.customer_uuid,
+    },
+  ],
+} as any;
+
 const owner = {
   is_staff: false,
   is_support: false,
@@ -37,6 +50,7 @@ describe('ProjectCredit edit controls', () => {
     savedRoles = ENV.roles;
     ENV.roles = [
       { name: 'CUSTOMER.OWNER', permissions: [PermissionEnum.UPDATE_PROJECT] },
+      { name: 'PROJECT.MANAGER', permissions: [PermissionEnum.UPDATE_PROJECT] },
     ] as any;
     vi.mocked(projectCreditsList).mockResolvedValue({
       data: [{ uuid: 'credit-uuid', value: '100.00' }],
@@ -52,6 +66,33 @@ describe('ProjectCredit edit controls', () => {
     renderWithProviders(<ProjectCredit project={project} />);
     const table = (await screen.findAllByRole('table'))[0];
     expect(table).not.toHaveClass('hide-actions');
+  });
+
+  it('keeps the actions for staff', async () => {
+    vi.mocked(useUser).mockReturnValue({
+      is_staff: true,
+      is_support: false,
+      permissions: [],
+    } as any);
+    renderWithProviders(<ProjectCredit project={project} />);
+    const table = (await screen.findAllByRole('table'))[0];
+    expect(table).not.toHaveClass('hide-actions');
+  });
+
+  it('offers no edits when the API returns no credit to edit', async () => {
+    vi.mocked(projectCreditsList).mockResolvedValue({ data: [] } as any);
+    vi.mocked(useUser).mockReturnValue(owner);
+    renderWithProviders(<ProjectCredit project={project} />);
+    const table = (await screen.findAllByRole('table'))[0];
+    expect(table).toHaveClass('hide-actions');
+  });
+
+  // Credit writes need an owner: PROJECT.UPDATE alone gets a 403 from the API.
+  it('shows a project manager the credit read-only', async () => {
+    vi.mocked(useUser).mockReturnValue(manager);
+    renderWithProviders(<ProjectCredit project={project} />);
+    const table = (await screen.findAllByRole('table'))[0];
+    expect(table).toHaveClass('hide-actions');
   });
 
   it('shows support the credit read-only', async () => {

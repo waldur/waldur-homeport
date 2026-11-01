@@ -17,8 +17,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
-
-import { getProjectSettingsAccess } from '../settingsAccess';
+import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
 import { CreditFieldEditButton } from './CreditFieldEditButton';
 import { EarlierInvoices } from './EarlierInvoices';
@@ -40,10 +39,8 @@ interface ProjectCreditProps {
 export const ProjectCredit: React.FC<ProjectCreditProps> = ({ project }) => {
   const user = useUser();
   const { openDialog } = useModal();
-  const { updateProject: canUpdateProject } = getProjectSettingsAccess(
-    user,
-    project,
-  );
+  // Mirrors the API, which lets only owners and staff write project credits.
+  const canEdit = checkIsOwnerOrStaff({ uuid: project.customer_uuid }, user);
   const {
     data: creditData,
     isLoading,
@@ -144,7 +141,7 @@ export const ProjectCredit: React.FC<ProjectCreditProps> = ({ project }) => {
         <LoadingErred loadData={refetch} />
       ) : (
         <>
-          <FormTable hideActions={!canUpdateProject}>
+          <FormTable hideActions={!canEdit || !creditData}>
             {rows.map((row) => (
               <FormTable.Item
                 key={row.key}
