@@ -28,6 +28,7 @@ const mandatoryFields: MarketplaceResourcesListData['query']['field'] = [
   'created',
   'state',
   'backend_metadata',
+  'terminated_at', // Resource details popup
 ];
 
 interface OwnProps {

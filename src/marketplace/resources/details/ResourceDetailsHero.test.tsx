@@ -33,6 +33,11 @@ const baseResource = {
   current_usages: {},
 };
 
+const conflictingDates = {
+  end_date: '2030-06-01',
+  resource_effective_end_date: '2030-01-01',
+};
+
 // Every consumer endpoint keyed by the resource; none may be used here.
 const consumerCalls = () =>
   Object.entries(sdk)
@@ -125,6 +130,21 @@ describe('ResourceDetailsHero in the provider workspace', () => {
     );
     expect(consumerCalls()).toEqual([]);
   });
+
+  it('warns of a date conflict on a live resource', () => {
+    renderHero({ ...baseResource, ...conflictingDates });
+
+    expect(screen.getByText(/Date conflict/)).toBeInTheDocument();
+  });
+
+  it.each(['Terminated', 'Terminating'])(
+    'shows no date conflict when %s',
+    (state) => {
+      renderHero({ ...baseResource, ...conflictingDates, state });
+
+      expect(screen.queryByText(/Date conflict/)).not.toBeInTheDocument();
+    },
+  );
 
   it('does not offer the details popup on the details page', async () => {
     const user = userEvent.setup();

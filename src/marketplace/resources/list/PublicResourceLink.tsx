@@ -44,7 +44,10 @@ export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
       )}
 
       <BackendIdTip backendId={row.backend_id} />
-      <EndDateTooltip end_date={row.resource_effective_end_date} />
+      <EndDateTooltip
+        end_date={row.resource_effective_end_date}
+        state={row.state}
+      />
     </>
   );
 };

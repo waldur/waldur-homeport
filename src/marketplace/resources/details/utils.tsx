@@ -8,6 +8,7 @@ import { formatResourceType } from '@/resource/utils';
 import { KeyValueButton } from '../KeyValueButton';
 import { ResourceStateField } from '../list/ResourceStateField';
 
+import { formatTerminatedAt, getTerminatedAt } from './getTerminatedAt';
 import { PlanDetailsField } from './PlanDetailsField';
 
 export const getResourceSummaryFields = ({
@@ -21,6 +22,7 @@ export const getResourceSummaryFields = ({
   include?: string[];
   exclude?: string[];
 }) => {
+  const terminatedAt = getTerminatedAt(resource);
   return [
     {
       name: 'name',
@@ -91,7 +93,10 @@ export const getResourceSummaryFields = ({
     {
       name: 'end_date',
       label: translate('Termination date'),
-      value: resource.end_date ? formatDate(resource.end_date) : null,
+      value:
+        resource.end_date && !terminatedAt
+          ? formatDate(resource.end_date)
+          : null,
       tooltip:
         resource.end_date &&
         resource.resource_effective_end_date &&
@@ -108,9 +113,10 @@ export const getResourceSummaryFields = ({
       label: translate('Scheduled termination'),
       // Backend-computed: the earliest of the resource's own end date and the
       // project-driven termination date, already grace-aware.
-      value: resource.resource_effective_end_date
-        ? formatDate(resource.resource_effective_end_date)
-        : null,
+      value:
+        resource.resource_effective_end_date && !terminatedAt
+          ? formatDate(resource.resource_effective_end_date)
+          : null,
       tooltip:
         !resource.end_date && resource.resource_effective_end_date
           ? translate(
@@ -118,6 +124,11 @@ export const getResourceSummaryFields = ({
               { date: formatDate(resource.resource_effective_end_date) },
             )
           : undefined,
+    },
+    {
+      name: 'terminated_at',
+      label: translate('Terminated at'),
+      value: terminatedAt ? formatTerminatedAt(terminatedAt) : null,
     },
     {
       name: 'project_end_date',
