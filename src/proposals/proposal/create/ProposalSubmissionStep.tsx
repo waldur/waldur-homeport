@@ -410,7 +410,14 @@ export const ProposalSubmissionStep: FC<{
       // (after Save as draft, or on a revisit). Without this the reset drops
       // unsaved input and empties the lists the steps tick against.
       keepDirtyOnReinitialize
-      render={({ handleSubmit, submitting, form, values, dirtyFields }) => {
+      render={({
+        handleSubmit,
+        submitting,
+        form,
+        values,
+        dirtyFields,
+        hasValidationErrors,
+      }) => {
         // Store form reference for use in effects
         formRef.current = form;
 
@@ -495,6 +502,7 @@ export const ProposalSubmissionStep: FC<{
                   editable={proposal.state === 'draft'}
                   submitting={submitting}
                   completedSteps={completedSteps}
+                  hasValidationErrors={hasValidationErrors}
                   canSubmit={canSubmit}
                   canSubmitProposal={canSubmitProposal}
                 />

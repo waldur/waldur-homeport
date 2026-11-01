@@ -54728,6 +54728,11 @@
       "feature_area": "create"
     }
   },
+  "Shorten the fields that are over their character limit.": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "Shortly": {},
   "Shortname": {
     "context": {
@@ -77470,6 +77475,16 @@
         }
       },
       "feature_area": "metadata"
+    }
+  },
+  "{count} characters": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "form"
     }
   },
   "{count} clicks": {

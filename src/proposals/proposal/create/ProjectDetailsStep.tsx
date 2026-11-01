@@ -1,9 +1,11 @@
+import { FieldValidator } from 'final-form';
 import { useMemo } from 'react';
 import { Field } from 'react-final-form';
 
 import { AccordionCard } from 'waldur-ui';
 
 import { isEmpty } from '@/core/utils';
+import { validateMaxLength } from '@/core/validators';
 import { StringGroup, TextGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -18,9 +20,23 @@ import {
   getTrackedFields,
   isFieldRequired,
   isFieldVisible,
+  PROPOSAL_DESCRIPTION_MAX_LENGTH,
+  PROPOSAL_SUMMARY_MAX_LENGTH,
 } from './proposalFields';
 import { StepHeaderContent } from './StepHeaderContent';
 import { UploadDocumentationFiles } from './UploadDocumentationFiles';
+
+// Module-level so each field keeps one validator across renders: a new
+// function each render re-registers the field and re-validates.
+//
+// The summary mirrors the backend's grandfather rule: a value stored over the
+// limit before it existed is accepted as long as it is left as it was loaded,
+// and its counter stays grey. Only an edited value has to fit.
+const validateSummary: FieldValidator<string> = (value, _allValues, meta) =>
+  meta?.initial !== undefined && value === meta.initial
+    ? undefined
+    : validateMaxLength(PROPOSAL_SUMMARY_MAX_LENGTH)(value);
+const validateDescription = validateMaxLength(PROPOSAL_DESCRIPTION_MAX_LENGTH);
 
 export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
   const reviews: ProposalReview[] = props.params?.reviews;
@@ -84,7 +100,8 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
           <TextGroup
             name="project_summary"
             placeholder={translate('Enter a summary...')}
-            maxLength={1000}
+            maxCharacters={PROPOSAL_SUMMARY_MAX_LENGTH}
+            validate={validateSummary}
             label={translate('Summary')}
             required={isFieldRequired(fieldStates, 'project_summary')}
           />
@@ -99,7 +116,8 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
           <TextGroup
             name="description"
             placeholder={translate('Enter a description...')}
-            maxLength={1000}
+            maxCharacters={PROPOSAL_DESCRIPTION_MAX_LENGTH}
+            validate={validateDescription}
             label={translate('Description')}
             required={isFieldRequired(fieldStates, 'description')}
           />
