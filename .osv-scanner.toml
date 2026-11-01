@@ -18,3 +18,22 @@ id = "GHSA-gcqx-w48m-w2h4"
 # Re-evaluate when deepmerge publishes a patched release, or if anything starts
 # importing deepmerge (`yarn why deepmerge` lists more than @svgr/plugin-svgo).
 reason = "No fixed deepmerge release exists (4.2.0-4.3.1 affected). Only a declared but never-imported dependency of @svgr/plugin-svgo build tooling; not loaded, not bundled. Re-evaluate when deepmerge ships a fix or gains another dependent."
+
+[[IgnoredVulns]]
+id = "GHSA-g3hv-75wg-m249"
+# minimatch globParts amplification in firstPhasePreProcess() at
+# optimizationLevel >= 2. The advisory lists every version below 11.0.1, but
+# minimatch@3.1.5, the latest 3.x as of 2026-11, has neither firstPhasePreProcess
+# nor optimizationLevel, so it does not contain the vulnerable code. It cannot
+# move to 11 either: eslint-plugin-import, eslint-plugin-jsx-a11y and
+# eslint-plugin-react (all latest, ^3.1.2) call the package itself as a function,
+# and 11 has no callable or default export. They and eslint 9, the other 3.x
+# consumer, are dev lint tooling that only reads patterns from repo config, and
+# nothing from them reaches the bundle.
+# The 10.x line is affected and is moved to 11 by the "minimatch@^10.2.2"
+# resolution in package.json, which matches that exact range only.
+# This entry hides the advisory for every version, so re-evaluate if `yarn why
+# minimatch` lists anything other than 3.1.5 and >=11.0.1. Delete it when
+# github/advisory-database#10807 lands, which raises the advisory's lower bound
+# to 7.0.0, or when eslint and its plugins leave 3.x.
+reason ="False positive for minimatch 3.1.5: the advisory's firstPhasePreProcess/optimizationLevel code does not exist in 3.x, and the eslint dev-tooling plugins that need 3.x call its function export, which 11.x lacks. 10.x is resolved to >=11.0.1. Re-evaluate if yarn why minimatch lists anything but 3.1.5 and >=11.0.1. Remove when the advisory range is narrowed (github/advisory-database#10807) or eslint and its plugins leave 3.x."
