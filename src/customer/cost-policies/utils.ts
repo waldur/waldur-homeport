@@ -2,6 +2,12 @@ import { translate } from '@/i18n';
 
 import { CostPolicyType } from './types';
 
+/** A project policy with "Account for available credit" off: it counts the
+ * full cost, and no credit lowers it. Organization policies have no such
+ * setting, so only an explicit false counts. */
+export const ignoresCredit = (policy: { use_credit?: boolean }) =>
+  policy.use_credit === false;
+
 export const getCostPolicyActionOptions = (
   type: CostPolicyType = 'project',
   isResourceScoped = false,

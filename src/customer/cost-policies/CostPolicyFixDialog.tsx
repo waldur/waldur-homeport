@@ -63,20 +63,34 @@ const BUTTON_LABELS: Record<FixOption['key'], () => string> = {
   edit_policy: () => translate('Edit policy'),
 };
 
-const Impact: FC<{ option: FixOption; current: number }> = ({
-  option,
-  current,
-}) => (
+const getImpactText = (
+  option: FixOption,
+  current: number,
+  ignoresCredit: boolean,
+) => {
+  if (option.costAfter === null) {
+    const cost = defaultCurrency(current);
+    return ignoresCredit
+      ? translate('Cost stays {cost}', { cost })
+      : translate('Cost after credit stays {cost}', { cost });
+  }
+  const values = {
+    from: defaultCurrency(current),
+    to: defaultCurrency(option.costAfter),
+  };
+  return ignoresCredit
+    ? translate('Cost {from} → {to}', values)
+    : translate('Cost after credit {from} → {to}', values);
+};
+
+const Impact: FC<{
+  option: FixOption;
+  current: number;
+  ignoresCredit: boolean;
+}> = ({ option, current, ignoresCredit }) => (
   <div className="flex flex-wrap items-center gap-2 text-sm">
     <span className="text-secondary">
-      {option.costAfter === null
-        ? translate('Cost after credit stays {cost}', {
-            cost: defaultCurrency(current),
-          })
-        : translate('Cost after credit {from} → {to}', {
-            from: defaultCurrency(current),
-            to: defaultCurrency(option.costAfter),
-          })}
+      {getImpactText(option, current, ignoresCredit)}
     </span>
     <Badge
       variant={option.resets ? 'success' : 'warning'}
@@ -273,21 +287,35 @@ export const CostPolicyFixDialog: FC<CostPolicyFixDialogProps> = ({
       </p>
       {triggered ? (
         <p className="mb-4">
-          {translate(
-            'The policy resets its actions at its next evaluation once the cost after credit, now {cost}, is at or below the limit, {limit}. Each option says what it leaves.',
-            {
-              cost: defaultCurrency(figures.current),
-              limit: defaultCurrency(figures.limit),
-            },
-          )}
+          {figures.ignoresCredit
+            ? translate(
+                'The policy resets its actions at its next evaluation once the cost, now {cost}, is at or below the limit, {limit}. It does not take credit into account, so credit does not lower the cost. Each option says what it leaves.',
+                {
+                  cost: defaultCurrency(figures.current),
+                  limit: defaultCurrency(figures.limit),
+                },
+              )
+            : translate(
+                'The policy resets its actions at its next evaluation once the cost after credit, now {cost}, is at or below the limit, {limit}. Each option says what it leaves.',
+                {
+                  cost: defaultCurrency(figures.current),
+                  limit: defaultCurrency(figures.limit),
+                },
+              )}
         </p>
       ) : (
         <AlertItem
           variant="success"
           className="mb-4"
-          title={translate(
-            'The cost after credit is now at or below the limit: the actions are reset at the next evaluation of the policy.',
-          )}
+          title={
+            figures.ignoresCredit
+              ? translate(
+                  'The cost is now at or below the limit: the actions are reset at the next evaluation of the policy.',
+                )
+              : translate(
+                  'The cost after credit is now at or below the limit: the actions are reset at the next evaluation of the policy.',
+                )
+          }
         />
       )}
       {needsBoth ? (
@@ -313,7 +341,11 @@ export const CostPolicyFixDialog: FC<CostPolicyFixDialogProps> = ({
                   {option.audience === 'staff' ? <StaffOnlyIndicator /> : null}
                 </div>
                 <div className="text-secondary">{option.description}</div>
-                <Impact option={option} current={figures.current} />
+                <Impact
+                  option={option}
+                  current={figures.current}
+                  ignoresCredit={figures.ignoresCredit}
+                />
               </div>
               <BaseButton
                 variant="tertiary"

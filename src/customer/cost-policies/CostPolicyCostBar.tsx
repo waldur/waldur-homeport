@@ -27,7 +27,9 @@ export const CostPolicyCostBar: FC<{ figures: CostPolicyFigures }> = ({
       ? [
           {
             key: 'earlier',
-            label: translate('Earlier months, not covered'),
+            label: figures.ignoresCredit
+              ? translate('Earlier months')
+              : translate('Earlier months, not covered'),
             value: figures.earlier,
             color: EARLIER_COLOR,
           },
@@ -37,7 +39,9 @@ export const CostPolicyCostBar: FC<{ figures: CostPolicyFigures }> = ({
       ? [
           {
             key: 'this-month',
-            label: translate('This month, not covered'),
+            label: figures.ignoresCredit
+              ? translate('This month')
+              : translate('This month, not covered'),
             value: figures.thisMonth,
             color: THIS_MONTH_COLOR,
           },

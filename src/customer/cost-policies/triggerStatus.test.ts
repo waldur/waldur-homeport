@@ -75,6 +75,54 @@ describe('getTriggerStatusView on the single cost check', () => {
     expect(view.breakdown).toBeUndefined();
     expect(view.earlier).toBeUndefined();
   });
+
+  describe('for a policy that ignores credit', () => {
+    // The earlier months count in full, whatever credit paid of them.
+    const figures = {
+      has_fired: true,
+      current_cost: '1100.00',
+      limit_cost: 300,
+      cost_breakdown: {
+        cost_before_credit: '1100.00',
+        credit_drawn: '0.00',
+        credit_pending: '0.00',
+        earlier_months: '1000.00',
+      },
+    };
+
+    it('does not call the earlier months uncovered', () => {
+      const view = getTriggerStatusView(
+        policy('credit_ignored', true, null, {
+          ...figures,
+          use_credit: false,
+        }),
+      );
+      expect(view.explanation).toBe(
+        'The cost, €1,100.00, is over the limit, €300.00; this policy does not take credit into account.',
+      );
+      expect(view.earlier).toBeUndefined();
+      expect(view.breakdown).toBeUndefined();
+    });
+
+    it('still explains them for a policy that takes credit into account', () => {
+      const view = getTriggerStatusView(
+        policy('cost_over_limit', true, null, {
+          ...figures,
+          use_credit: true,
+        }),
+      );
+      expect(view.earlier).toContain('€1,000.00 of it is from earlier months');
+    });
+
+    it('does not say the cost is after credit when it is below the limit', () => {
+      const view = getTriggerStatusView(
+        policy('cost_below_limit', false, null, { use_credit: false }),
+      );
+      expect(view.explanation).toBe(
+        'The cost, €7,701.67, is at or below the limit, €100.00.',
+      );
+    });
+  });
 });
 
 describe('getTriggerStatusView', () => {

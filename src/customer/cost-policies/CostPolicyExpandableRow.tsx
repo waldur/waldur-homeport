@@ -42,16 +42,18 @@ export const CostPolicyExpandableRow: FC<{
           figures={figures}
           months={earlierInvoices?.months}
         />
-        <p className="mt-2 mb-0 text-quaternary text-sm">
-          {translate(
-            'Cost in the period {before}, less credit already used {drawn} and credit still to be used this month {pending}.',
-            {
-              before: defaultCurrency(figures.beforeCredit),
-              drawn: defaultCurrency(figures.drawn),
-              pending: defaultCurrency(figures.pending),
-            },
-          )}
-        </p>
+        {figures.ignoresCredit ? null : (
+          <p className="mt-2 mb-0 text-quaternary text-sm">
+            {translate(
+              'Cost in the period {before}, less credit already used {drawn} and credit still to be used this month {pending}.',
+              {
+                before: defaultCurrency(figures.beforeCredit),
+                drawn: defaultCurrency(figures.drawn),
+                pending: defaultCurrency(figures.pending),
+              },
+            )}
+          </p>
+        )}
       </Block>
 
       {triggered ? (
@@ -59,6 +61,7 @@ export const CostPolicyExpandableRow: FC<{
           <CostPolicyResetTable
             policyUuid={policy.uuid}
             scenarios={getResetScenarios(policy)}
+            ignoresCredit={figures.ignoresCredit}
           />
         </Block>
       ) : null}

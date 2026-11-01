@@ -14,7 +14,8 @@ import { ResetScenario } from './costPolicyDetails';
 export const CostPolicyResetTable: FC<{
   policyUuid: string;
   scenarios: ResetScenario[];
-}> = ({ policyUuid, scenarios }) => {
+  ignoresCredit?: boolean;
+}> = ({ policyUuid, scenarios, ignoresCredit }) => {
   const tableProps = useTable({
     table: `cost-policy-reset-scenarios-${policyUuid}`,
     fetchData: () =>
@@ -40,7 +41,9 @@ export const CostPolicyResetTable: FC<{
           ),
         },
         {
-          title: translate('Cost after credit then'),
+          title: ignoresCredit
+            ? translate('Cost then')
+            : translate('Cost after credit then'),
           render: ({ row }) => (
             <>{row.costAfter === null ? '—' : defaultCurrency(row.costAfter)}</>
           ),

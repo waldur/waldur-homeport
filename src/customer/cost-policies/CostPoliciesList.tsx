@@ -138,7 +138,7 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
               {translate('Current cost')}{' '}
               <HelpIcon
                 label={translate(
-                  'The cost this policy compares with its threshold: the cost in the policy period, less what credit pays.',
+                  'The cost this policy compares with its threshold: the cost in the policy period, less what credit pays if the policy takes credit into account.',
                 )}
                 size={18}
               />

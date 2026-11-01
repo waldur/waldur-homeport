@@ -14,7 +14,10 @@ import { BadgeVariant } from 'waldur-ui';
 
 import { SHORT_STALE_TIME, STALE_TIME } from '@/core/constants';
 import { defaultCurrency } from '@/core/formatCurrency';
-import { getCostPolicyActionOptions } from '@/customer/cost-policies/utils';
+import {
+  getCostPolicyActionOptions,
+  ignoresCredit,
+} from '@/customer/cost-policies/utils';
 import { getLineChartOptions } from '@/dashboard/chart';
 import {
   formatProjectCostChart,
@@ -70,11 +73,11 @@ export function useProjectCostChart(project: Project) {
 
     const hlines = (data.costPolicies || []).map((item) => {
       const limitCost = defaultCurrency(item.limit_cost);
-      const projectCredit = item.project_credit
-        ? defaultCurrency(item.project_credit)
-        : null;
+      // A policy that ignores credit fires at its limit, whatever the credit.
+      const credit = ignoresCredit(item) ? null : item.project_credit;
+      const projectCredit = credit ? defaultCurrency(credit) : null;
 
-      const totalCost = item.limit_cost + (Number(item.project_credit) || 0);
+      const totalCost = item.limit_cost + (Number(credit) || 0);
       const totalCostFormatted = defaultCurrency(totalCost);
       const action = getCostPolicyActionOptions().find(
         (option) => option.value === item.actions,

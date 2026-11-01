@@ -6,7 +6,11 @@ import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 
 import { CostPolicyType } from './types';
-import { getCostPolicyActionOptions, policyPeriodOptions } from './utils';
+import {
+  getCostPolicyActionOptions,
+  ignoresCredit,
+  policyPeriodOptions,
+} from './utils';
 
 /** The fields of an estimated-cost policy its details are built from. */
 export interface CostPolicyDetailsPolicy {
@@ -14,6 +18,7 @@ export interface CostPolicyDetailsPolicy {
   limit_cost?: number;
   period?: number;
   has_fired?: boolean;
+  use_credit?: boolean;
   trigger_status?: PolicyTriggerStatus | null;
   cost_breakdown?: PolicyCostBreakdown | null;
 }
@@ -51,6 +56,9 @@ export interface CostPolicyFigures {
   thisMonth: number;
   /** `current - limit`: positive when the policy is over its limit. */
   overBy: number;
+  /** The policy does not take credit into account, so `current` is the full
+   * cost, what credit paid included, and credit cannot lower it. */
+  ignoresCredit: boolean;
 }
 
 export const getCostPolicyFigures = (
@@ -69,6 +77,7 @@ export const getCostPolicyFigures = (
     earlier,
     thisMonth: Math.max(0, current - earlier),
     overBy: current - limit,
+    ignoresCredit: ignoresCredit(policy),
   };
 };
 
@@ -127,6 +136,13 @@ export const getCostPolicySummary = (
     cost: defaultCurrency(figures.current),
     limit: defaultCurrency(figures.limit),
   };
+  if (figures.ignoresCredit) {
+    return policy.trigger_status?.triggered
+      ? translate('The cost, {cost}, is over the {limit} limit.', values)
+      : translate(
+          'The cost is back at or below the limit, so its actions are reset at the next evaluation of the policy.',
+        );
+  }
   if (!policy.trigger_status?.triggered) {
     return translate(
       'The cost after credit is back at or below the limit, so its actions are reset at the next evaluation of the policy.',
@@ -157,23 +173,9 @@ export interface ResetScenario {
   note?: string;
 }
 
-/** What would bring the policy back to its limit, one change per row, then
- * the two together when neither is enough alone.
- *
- * The policy resets its actions itself, at its next evaluation, once the cost
- * after credit is at or below the limit; each row says whether its change
- * gets the cost there. Empty for a policy at or below its limit.
- */
-export const getResetScenarios = (
-  policy: CostPolicyDetailsPolicy,
-  today: DateTime = DateTime.now(),
-): ResetScenario[] => {
-  const f = getCostPolicyFigures(policy);
-  if (!policy.trigger_status?.triggered) {
-    return [];
-  }
-  const nextMonth = formatDate(today.plus({ months: 1 }).startOf('month'));
-  const oneMonth = policy.period === policyPeriodOptions.oneMonth.value;
+/** The changes that work through credit: credit for this month, paying the
+ * earlier months, then the two together when neither is enough alone. */
+const getCreditScenarios = (f: CostPolicyFigures): ResetScenario[] => {
   const scenarios: ResetScenario[] = [];
 
   if (f.thisMonth > 0) {
@@ -220,6 +222,40 @@ export const getResetScenarios = (
       ),
       costAfter: 0,
       resets: true,
+    });
+  }
+  return scenarios;
+};
+
+/** What would bring the policy back to its limit, one change per row.
+ *
+ * The policy resets its actions itself, at its next evaluation, once the cost
+ * after credit is at or below the limit; each row says whether its change
+ * gets the cost there. Empty for a policy at or below its limit.
+ *
+ * Credit cannot lower the cost of a policy that ignores it, so its only way
+ * down is to stop counting the earlier months.
+ */
+export const getResetScenarios = (
+  policy: CostPolicyDetailsPolicy,
+  today: DateTime = DateTime.now(),
+): ResetScenario[] => {
+  const f = getCostPolicyFigures(policy);
+  if (!policy.trigger_status?.triggered) {
+    return [];
+  }
+  const nextMonth = formatDate(today.plus({ months: 1 }).startOf('month'));
+  const oneMonth = policy.period === policyPeriodOptions.oneMonth.value;
+  const scenarios: ResetScenario[] = [];
+
+  if (!f.ignoresCredit) {
+    scenarios.push(...getCreditScenarios(f));
+  } else if (!oneMonth && f.earlier > 0) {
+    scenarios.push({
+      key: 'one_month',
+      change: translate('Count only the current month'),
+      costAfter: f.thisMonth,
+      resets: f.thisMonth <= f.limit,
     });
   }
   scenarios.push({
@@ -299,8 +335,11 @@ export const getFixOptions = (
     context.isOwnerOrStaff,
   );
   const options: FixOption[] = [];
+  // Neither adding credit nor paying with it moves a policy that ignores it,
+  // and a payment is not undone.
+  const credit = f.ignoresCredit ? null : context.credit;
 
-  if (isProject && context.credit && f.thisMonth > 0) {
+  if (isProject && credit && f.thisMonth > 0) {
     const needed = isHeldByEarlierMonths(f) ? f.thisMonth : f.overBy;
     const costAfter = f.current - needed;
     options.push({
@@ -320,12 +359,7 @@ export const getFixOptions = (
     });
   }
 
-  if (
-    isProject &&
-    context.credit &&
-    f.earlier > 0 &&
-    !context.credit.pay_earlier_invoices
-  ) {
+  if (isProject && credit && f.earlier > 0 && !credit.pay_earlier_invoices) {
     const payable = Math.min(f.earlier, Math.max(0, context.payableNow ?? 0));
     const costAfter = f.current - payable;
     options.push({

@@ -7662,6 +7662,16 @@
       "feature_area": "cost-policies"
     }
   },
+  "Automatically, at the next evaluation of the policy, once the cost is at or below the limit. Now it is {over} over it. This policy does not take credit into account, so credit does not lower the cost; the last column says which change is enough.": {
+    "context": {
+      "variables": {
+        "over": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
   "Automation": {
     "context": {
       "primary_ui_type": "label",
@@ -13159,8 +13169,7 @@
         "to": {
           "type": "unknown"
         }
-      },
-      "feature_area": "cost-policies"
+      }
     }
   },
   "Cost against the limit": {
@@ -13208,6 +13217,11 @@
       "feature_area": "type-based"
     }
   },
+  "Cost in the period": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "Cost in the period {before}, less credit already used {drawn} and credit still to be used this month {pending}.": {
     "context": {
       "variables": {
@@ -13240,7 +13254,7 @@
       "feature_area": "reporting"
     }
   },
-  "Cost of closed months that credit did not cover. Credit added now pays only the current month, so a cost policy for the total period keeps counting this cost until it is paid.": {
+  "Cost of closed months that credit did not cover. Credit added now pays only the current month, so a cost policy for the total period that takes credit into account keeps counting this cost until it is paid.": {
     "context": {
       "feature_area": "manage"
     }
@@ -13285,6 +13299,22 @@
       "feature_area": "cost-policies"
     }
   },
+  "Cost stays {cost}": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "Cost then": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "cost-policies"
+    }
+  },
   "Cost threshold": {
     "context": {
       "primary_ui_type": "title",
@@ -13315,6 +13345,18 @@
         }
       },
       "feature_area": "cost-policies"
+    }
+  },
+  "Cost {from} → {to}": {
+    "context": {
+      "variables": {
+        "from": {
+          "type": "unknown"
+        },
+        "to": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Cost: {cost}": {
@@ -18448,6 +18490,12 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "manage"
+    }
+  },
+  "Earlier months": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "cost-policies"
     }
   },
   "Earlier months, not covered": {
@@ -39291,11 +39339,8 @@
       "feature_area": "onboarding-setup"
     }
   },
-  "Organization owners and support can change this policy or the project credit.": {
-    "context": {
-      "feature_area": "cost-policies"
-    }
-  },
+  "Organization owners and support can change this policy or the project credit.": {},
+  "Organization owners and support can change this policy.": {},
   "Organization performance comparison": {
     "context": {
       "feature_area": "analytics"
@@ -57094,11 +57139,7 @@
       "feature_area": "dashboard"
     }
   },
-  "Support can change an organization policy.": {
-    "context": {
-      "feature_area": "cost-policies"
-    }
-  },
+  "Support can change an organization policy.": {},
   "Support feedback": {
     "context": {
       "feature_area": "administration"
@@ -58798,16 +58839,8 @@
     }
   },
   "The conversation is still loading. Try again shortly.": {},
-  "The cost after credit is at or below the limit, so its actions do not run.": {
-    "context": {
-      "feature_area": "cost-policies"
-    }
-  },
-  "The cost after credit is at or below the limit, so the actions it ran are reset at the next evaluation of the policy.": {
-    "context": {
-      "feature_area": "cost-policies"
-    }
-  },
+  "The cost after credit is at or below the limit, so its actions do not run.": {},
+  "The cost after credit is at or below the limit, so the actions it ran are reset at the next evaluation of the policy.": {},
   "The cost after credit is back at or below the limit, so its actions are reset at the next evaluation of the policy.": {},
   "The cost after credit is now at or below the limit: the actions are reset at the next evaluation of the policy.": {
     "context": {
@@ -58959,9 +58992,47 @@
       "feature_area": "policy-watch"
     }
   },
+  "The cost is at or below the limit, so its actions do not run.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost is at or below the limit, so the actions it ran are reset at the next evaluation of the policy.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost is back at or below the limit, so its actions are reset at the next evaluation of the policy.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost is now at or below the limit: the actions are reset at the next evaluation of the policy.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost this policy compares with its threshold: the cost in the policy period, less what credit pays if the policy takes credit into account.": {
+    "context": {
+      "feature_area": "cost-policies"
+    }
+  },
   "The cost this policy compares with its threshold: the cost in the policy period, less what credit pays.": {
     "context": {
       "feature_area": "organizations"
+    }
+  },
+  "The cost, {cost}, is at or below the limit, {limit}.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
     }
   },
   "The cost, {cost}, is over the limit, {limit}, and there is no credit.": {
@@ -58978,6 +59049,19 @@
     }
   },
   "The cost, {cost}, is over the limit, {limit}; this policy does not take credit into account.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The cost, {cost}, is over the {limit} limit.": {
     "context": {
       "variables": {
         "cost": {
@@ -59970,6 +60054,32 @@
       "feature_area": "cost-policies"
     }
   },
+  "The policy counts the full cost, whatever credit paid: {total}, at or below the {limit} limit.": {
+    "context": {
+      "variables": {
+        "total": {
+          "type": "number"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The policy counts the full cost, whatever credit paid: {total}, over the {limit} limit.": {
+    "context": {
+      "variables": {
+        "total": {
+          "type": "number"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
   "The policy counts what credit did not cover: {total} in earlier months, at or below the {limit} limit.": {
     "context": {
       "variables": {
@@ -60060,6 +60170,19 @@
     }
   },
   "The policy resets its actions at its next evaluation once the cost after credit, now {cost}, is at or below the limit, {limit}. Each option says what it leaves.": {
+    "context": {
+      "variables": {
+        "cost": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "cost-policies"
+    }
+  },
+  "The policy resets its actions at its next evaluation once the cost, now {cost}, is at or below the limit, {limit}. It does not take credit into account, so credit does not lower the cost. Each option says what it leaves.": {
     "context": {
       "variables": {
         "cost": {
@@ -61576,7 +61699,7 @@
   "This month": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "details"
+      "feature_area": "cost-policies"
     }
   },
   "This month alone is over the limit.": {

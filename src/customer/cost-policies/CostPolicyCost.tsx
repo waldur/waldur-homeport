@@ -35,14 +35,20 @@ const monthsInPeriod = (
 
 /** The cost the policy compares with its limit, month by month when the
  * viewer may see the earlier invoices and they account for the earlier part;
- * otherwise as one bar of the earlier months and this month. */
+ * otherwise as one bar of the earlier months and this month.
+ *
+ * The months say what credit did not cover, which is not what a policy that
+ * ignores credit counts, even where the two figures happen to match. */
 export const CostPolicyCost: FC<{
   policy;
   figures: CostPolicyFigures;
   months?: EarlierInvoiceMonth[] | null;
   today?: DateTime;
 }> = ({ policy, figures, months, today = DateTime.now() }) => {
-  const counted = months ? monthsInPeriod(months, policy.period, today) : null;
+  const counted =
+    months && !figures.ignoresCredit
+      ? monthsInPeriod(months, policy.period, today)
+      : null;
   const countedUncovered = (counted ?? []).reduce(
     (sum, month) => sum + Number(month.uncovered),
     0,
@@ -72,6 +78,17 @@ const getCostSumText = (figures: CostPolicyFigures) => {
     limit: defaultCurrency(figures.limit),
   };
   const over = figures.current > figures.limit;
+  if (figures.ignoresCredit) {
+    return over
+      ? translate(
+          'The policy counts the full cost, whatever credit paid: {total}, over the {limit} limit.',
+          values,
+        )
+      : translate(
+          'The policy counts the full cost, whatever credit paid: {total}, at or below the {limit} limit.',
+          values,
+        );
+  }
   if (figures.earlier > 0 && figures.thisMonth > 0) {
     return over
       ? translate(
