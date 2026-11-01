@@ -127,6 +127,9 @@ const LifecycleBadge = ({
 
 const TERMINAL_STATES = new Set(['Terminated', 'Terminating']);
 
+export const isResourceTerminal = (state?: string) =>
+  TERMINAL_STATES.has(state as string);
+
 export const ResourceFlags = ({ resource }: { resource: Resource }) => {
   const pluginOptions = resource.offering_plugin_options as any;
   const supportsPausing = pluginOptions?.supports_pausing === true;
@@ -143,13 +146,20 @@ export const ResourceFlags = ({ resource }: { resource: Resource }) => {
     ? new Date(resource.resource_effective_end_date)
     : null;
   const resourceEnd = resource.end_date ? new Date(resource.end_date) : null;
-  const isTerminal = TERMINAL_STATES.has(resource.state as string);
+  const isTerminal = isResourceTerminal(resource.state);
 
-  const showInGrace = resource.project_is_in_grace_period === true;
+  const showInGrace =
+    resource.project_is_in_grace_period === true && !isTerminal;
   const showExpired =
-    !showInGrace && projectEffectiveEnd && projectEffectiveEnd < today;
+    !showInGrace &&
+    !isTerminal &&
+    projectEffectiveEnd &&
+    projectEffectiveEnd < today;
   const showConflict =
-    resourceEnd && resourceEffectiveEnd && resourceEnd > resourceEffectiveEnd;
+    !isTerminal &&
+    resourceEnd &&
+    resourceEffectiveEnd &&
+    resourceEnd > resourceEffectiveEnd;
   const showOverdue = resourceEnd && resourceEnd < today && !isTerminal;
 
   return (

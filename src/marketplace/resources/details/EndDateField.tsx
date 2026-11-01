@@ -4,7 +4,20 @@ import { formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 
+import { formatTerminatedAt, getTerminatedAt } from './getTerminatedAt';
+
 export const EndDateField = ({ resource }) => {
+  // What happened replaces what was planned, which may be a date still ahead.
+  const terminatedAt = getTerminatedAt(resource);
+  if (terminatedAt) {
+    return (
+      <Field
+        label={translate('Terminated at')}
+        value={formatTerminatedAt(terminatedAt)}
+      />
+    );
+  }
+
   const ownEndDate = resource.end_date;
   const projectEndDate = resource.project_end_date;
   // Backend-computed: the earliest of the resource's own end date and the

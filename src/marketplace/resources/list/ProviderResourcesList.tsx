@@ -81,7 +81,10 @@ const ResourceField = ({ row }) => {
         size="lg"
       />
       <BackendIdTip backendId={row.backend_id} />
-      <EndDateTooltip end_date={row.resource_effective_end_date} />
+      <EndDateTooltip
+        end_date={row.resource_effective_end_date}
+        state={row.state}
+      />
       <ResourceFlags resource={row} />
     </div>
   );
@@ -316,6 +319,7 @@ const mandatoryFields: MarketplaceProviderResourcesListData['query']['field'] =
     'resource_effective_end_date', // Termination date column (grace-aware)
     'project_end_date', // Resource details popup
     'project_effective_end_date', // Resource details popup (grace period display)
+    'terminated_at', // Resource details popup
     'resource_type', // TerminateAction
     'paused', // ResourceFlags inline badge
     'downscaled', // ResourceFlags inline badge

@@ -103,6 +103,7 @@ export const resourcesListRequiredFields = (hasExpandableView = true) =>
 
     'project_uuid', // rowActions permissions check
     'state', // ResourceFlags overdue badge skips terminating/terminated
+    'terminated_at', // Resource details popup
   ].filter(Boolean);
 
 export const getResourceAllListColumns = (

@@ -58187,6 +58187,12 @@
       "feature_area": "provider"
     }
   },
+  "Terminated at": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "details"
+    }
+  },
   "Terminated resources": {},
   "Terminated resources' usage is shown separately and does not count against limits: for the current month in the usage widgets, and for each offering's limit period in the per-offering views.": {
     "context": {

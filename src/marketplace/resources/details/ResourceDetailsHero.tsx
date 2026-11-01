@@ -25,6 +25,7 @@ import { ResourceComponents } from './ResourceComponents';
 import { ResourceDetailsHeaderBody } from './ResourceDetailsHeaderBody';
 import { ResourceDetailsHeaderTitle } from './ResourceDetailsHeaderTitle';
 import { ResourceEndDateConflictBar } from './ResourceEndDateConflictBar';
+import { isResourceTerminal } from './ResourceFlags';
 import { useIsResourceProjectOnlyViewer } from './useIsResourceProjectOnlyViewer';
 import { VolumeComponents } from './VolumeComponents';
 
@@ -61,7 +62,8 @@ export const ResourceDetailsHero = ({
             : undefined
         }
       >
-        {resource.end_date &&
+        {!isResourceTerminal(resource.state) &&
+          resource.end_date &&
           resource.resource_effective_end_date &&
           resource.end_date > resource.resource_effective_end_date && (
             <ResourceEndDateConflictBar />

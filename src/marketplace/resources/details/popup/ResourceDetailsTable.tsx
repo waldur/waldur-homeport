@@ -4,6 +4,7 @@ import { Resource } from 'waldur-js-client';
 import { FieldWithCopy } from '@/core/FieldWithCopy';
 import FormTable from '@/form/FormTable';
 
+import { getTerminatedAt } from '../getTerminatedAt';
 import { getResourceSummaryFields } from '../utils';
 
 interface OwnProps {
@@ -23,7 +24,8 @@ export const ResourceDetailsTable: FC<OwnProps> = ({ resource }) => {
           'status',
           'created',
           'project_end_date',
-          'effective_termination',
+          // The table shows empty rows too, so only the one that applies.
+          getTerminatedAt(resource) ? 'terminated_at' : 'effective_termination',
         ],
       }),
     [resource],
