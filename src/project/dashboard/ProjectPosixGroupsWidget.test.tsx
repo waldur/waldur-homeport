@@ -1,10 +1,13 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceProjectPosixGroupsList } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { isFeatureVisible } from '@/features/connect';
+import { PermissionEnum, RoleEnum } from '@/permissions/enums';
 import { renderWithProviders } from '@/test/harness';
+import { useUser } from '@/workspace/hooks';
 
 import { ProjectPosixGroupsWidget } from './ProjectPosixGroupsWidget';
 
@@ -26,7 +29,24 @@ const providerGroup = {
   group_name: 'my-project',
 };
 
-const project = { uuid: 'project-uuid' } as any;
+const project = {
+  uuid: 'project-uuid',
+  customer_uuid: 'customer-uuid',
+} as any;
+
+const manager = {
+  is_staff: false,
+  permissions: [
+    {
+      scope_type: 'project',
+      scope_uuid: project.uuid,
+      role_name: RoleEnum.PROJECT_MANAGER,
+      customer_uuid: project.customer_uuid,
+    },
+  ],
+};
+
+let savedRoles;
 
 const mockGroups = (groups: object[]) =>
   vi.mocked(marketplaceProjectPosixGroupsList).mockResolvedValue({
@@ -37,6 +57,18 @@ describe('ProjectPosixGroupsWidget', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(isFeatureVisible).mockReturnValue(true);
+    savedRoles = ENV.roles;
+    ENV.roles = [
+      {
+        name: RoleEnum.PROJECT_MANAGER,
+        permissions: [PermissionEnum.UPDATE_PROJECT],
+      },
+    ] as any;
+    vi.mocked(useUser).mockReturnValue(manager as any);
+  });
+
+  afterEach(() => {
+    ENV.roles = savedRoles;
   });
 
   it('shows the project’s provider groups on the overview with a link to the details', async () => {
@@ -51,6 +83,54 @@ describe('ProjectPosixGroupsWidget', () => {
       ),
     ).toBeInTheDocument();
     expect(screen.getByTestId('details-link')).toHaveAttribute(
+      'href',
+      '#posix-identities',
+    );
+  });
+
+  it('hides the details link from someone who cannot edit the project', async () => {
+    vi.mocked(useUser).mockReturnValue({
+      is_staff: false,
+      permissions: [],
+    } as any);
+    vi.mocked(marketplaceProjectPosixGroupsList).mockResolvedValue({
+      data: [providerGroup],
+    } as any);
+    renderWithProviders(<ProjectPosixGroupsWidget project={project} />);
+
+    expect(
+      await screen.findByText(
+        'Files and cluster access at HPC Centre use group my-project, GID 20003.',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.queryByTestId('details-link')).not.toBeInTheDocument();
+  });
+
+  it('links to details for someone who can open settings without editing the project', async () => {
+    ENV.roles = [
+      {
+        name: 'ORDER.APPROVER',
+        permissions: [PermissionEnum.APPROVE_ORDER],
+      },
+    ] as any;
+    vi.mocked(useUser).mockReturnValue({
+      is_staff: false,
+      is_support: false,
+      permissions: [
+        {
+          scope_type: 'project',
+          scope_uuid: project.uuid,
+          role_name: 'ORDER.APPROVER',
+          customer_uuid: project.customer_uuid,
+        },
+      ],
+    } as any);
+    vi.mocked(marketplaceProjectPosixGroupsList).mockResolvedValue({
+      data: [providerGroup],
+    } as any);
+    renderWithProviders(<ProjectPosixGroupsWidget project={project} />);
+
+    expect(await screen.findByTestId('details-link')).toHaveAttribute(
       'href',
       '#posix-identities',
     );

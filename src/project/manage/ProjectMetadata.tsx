@@ -21,14 +21,13 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
 import { useModal } from '@/modal/actions';
-import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
 import { renderFieldOrDash } from '@/table/utils';
 import { useSetProject, useUser } from '@/workspace/hooks';
 
 import { ParsedAnswer } from '../metadata/ParsedAnswer';
 import { OECD_FOS_2007_CODES } from '../OECD_FOS_2007_CODES';
+import { getProjectSettingsAccess } from '../settingsAccess';
 
 import { EditScienceDomainDialog } from './EditScienceDomainDialog';
 import { MetadataEditButton } from './MetadataEditButton';
@@ -68,19 +67,12 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
     retry: false,
   });
 
-  const canUpdateMetadata = hasPermission(user, {
-    permission: PermissionEnum.UPDATE_PROJECT_METADATA,
-    customerId: project.customer_uuid,
-    projectId: project.uuid,
-  });
-
-  const canUpdateProject =
-    user.is_staff ||
-    hasPermission(user, {
-      permission: PermissionEnum.UPDATE_PROJECT,
-      customerId: project.customer_uuid,
-      projectId: project.uuid,
-    });
+  const { updateProject: canUpdateProject, updateMetadata: canUpdateMetadata } =
+    getProjectSettingsAccess(user, project);
+  const checklistFailed =
+    Boolean(error) &&
+    (error as { detail?: string })?.detail !== CHECKLIST_NO_CONFIGURED_MSG &&
+    !isLoading;
 
   const affiliation = project.affiliation;
   const affiliationDisplay = affiliation
@@ -178,42 +170,43 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
               />
             }
           />
-
-          {error &&
-          (error as any)?.detail !== CHECKLIST_NO_CONFIGURED_MSG &&
-          !isLoading ? (
-            <FormTable.Item
-              value={
-                <LoadingErred
-                  message={getMetadataLoadErrorMsg()}
-                  loadData={refetch}
-                />
-              }
-            />
-          ) : data?.questions?.length ? (
-            data.questions.map((question) => (
+        </FormTable>
+        {checklistFailed || data?.questions?.length ? (
+          <FormTable>
+            {checklistFailed ? (
               <FormTable.Item
-                key={question.uuid}
-                label={question.description}
                 value={
-                  <ParsedAnswer
-                    question={question as any}
-                    answer={question.existing_answer as any}
+                  <LoadingErred
+                    message={getMetadataLoadErrorMsg()}
+                    loadData={refetch}
                   />
                 }
-                actions={
-                  canUpdateMetadata && (
-                    <MetadataEditButton
-                      project={project}
-                      question={question}
-                      refetch={refetch}
-                    />
-                  )
-                }
               />
-            ))
-          ) : null}
-        </FormTable>
+            ) : (
+              (data?.questions ?? []).map((question) => (
+                <FormTable.Item
+                  key={question.uuid}
+                  label={question.description}
+                  value={
+                    <ParsedAnswer
+                      question={question as any}
+                      answer={question.existing_answer as any}
+                    />
+                  }
+                  actions={
+                    canUpdateMetadata && (
+                      <MetadataEditButton
+                        project={project}
+                        question={question}
+                        refetch={refetch}
+                      />
+                    )
+                  }
+                />
+              ))
+            )}
+          </FormTable>
+        ) : null}
       </FormTable.Card>
     </EditFieldProvider>
   );

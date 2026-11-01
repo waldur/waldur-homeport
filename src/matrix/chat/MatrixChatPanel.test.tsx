@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { FC, useEffect } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -29,7 +30,11 @@ vi.mock('./call/useMatrixCall', () => ({
 }));
 
 vi.mock('./MatrixRoomList', () => ({
-  MatrixRoomList: () => <div data-testid="room-list" />,
+  MatrixRoomList: ({ onSelect }: { onSelect(uuid: string): void }) => (
+    <div data-testid="room-list">
+      <button onClick={() => onSelect('room-B')}>Pick room-B</button>
+    </div>
+  ),
 }));
 
 vi.mock('./MatrixChatDrawer', () => {
@@ -98,6 +103,48 @@ describe('MatrixChatPanel — deep-link does not fight manual navigation', () =>
     rerender(<MatrixChatPanel defaultRoomUuid="room-A" />);
 
     expect(h.matrixClient.connect).not.toHaveBeenCalledWith('room-A');
+  });
+
+  // The header shows the picked room and messages go to the active one, so
+  // connecting the deep link here would send them to the wrong room.
+  it('does not open the deep-linked room over one picked while connecting', async () => {
+    h.matrixClient = {
+      connect: vi.fn(),
+      connectionState: 'connecting',
+      activeRoomUuid: null,
+      error: null,
+    };
+    h.rooms = {
+      rooms: [
+        { uuid: 'room-A', state: 'active', room_name: 'A', room_alias: '#a:s' },
+        { uuid: 'room-B', state: 'active', room_name: 'B', room_alias: '#b:s' },
+      ],
+      totalUnread: 0,
+      isLoading: false,
+    };
+    const { rerender } = render(<MatrixChatPanel defaultRoomUuid="room-A" />);
+
+    await userEvent.click(screen.getByText('Pick room-B'));
+    h.matrixClient.connectionState = 'connected';
+    rerender(<MatrixChatPanel defaultRoomUuid="room-A" />);
+
+    expect(h.matrixClient.connect).toHaveBeenCalledWith('room-B');
+    expect(h.matrixClient.connect).not.toHaveBeenCalledWith('room-A');
+  });
+
+  it('opens the deep-linked room once connected when nothing was picked', () => {
+    h.matrixClient = {
+      connect: vi.fn(),
+      connectionState: 'connecting',
+      activeRoomUuid: null,
+      error: null,
+    };
+    const { rerender } = render(<MatrixChatPanel defaultRoomUuid="room-1" />);
+
+    h.matrixClient.connectionState = 'connected';
+    rerender(<MatrixChatPanel defaultRoomUuid="room-1" />);
+
+    expect(h.matrixClient.connect).toHaveBeenCalledWith('room-1');
   });
 });
 

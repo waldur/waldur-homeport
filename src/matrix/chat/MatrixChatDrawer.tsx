@@ -321,6 +321,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
             {showChat && !showConnectionError && (
               <div className="tc-composer-dock">
                 <MatrixMessageInput
+                  roomUuid={roomUuid}
                   uploadFile={uploadFile}
                   uploading={uploading}
                   pendingFiles={pendingFiles}

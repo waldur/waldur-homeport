@@ -12,8 +12,6 @@ import {
 import { isMatrixChatEnabled } from '@/matrix/utils';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
-import { PermissionEnum } from '@/permissions/enums';
-import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { useUser, useProject } from '@/workspace/hooks';
 import { isOwnerOrStaff } from '@/workspace/selectors';
 
@@ -21,6 +19,7 @@ import {
   isProjectPosixGroupsVisible,
   useProjectPosixGroups,
 } from './manage/useProjectPosixGroups';
+import { getProjectSettingsAccess } from './settingsAccess';
 
 const ProjectGeneral = lazyComponent(() =>
   import('./manage/ProjectGeneral').then((module) => ({
@@ -95,66 +94,67 @@ export const ProjectManageContainer = () => {
     (Boolean(posixGroups?.length) ||
       (posixTabOpen && (posixGroupsLoading || posixGroupsFailed)));
 
-  const canSeeOrderApproval = useMemo(() => {
-    if (!project) return false;
-    return (
-      user.is_staff ||
-      user.is_support ||
-      hasConsumerPermission(user, {
-        permission: PermissionEnum.APPROVE_ORDER,
-        projectId: project.uuid,
-        customerId: project.customer_uuid,
-      })
-    );
-  }, [user, project]);
+  const access = useMemo(
+    () => getProjectSettingsAccess(user, project),
+    [user, project],
+  );
+  // Each of these tabs hides the controls of whoever cannot use them.
+  const canReadProject = access.updateProject || access.readOnlyView;
 
   const tabs = useMemo<PageBarTab[]>(
     () =>
       [
-        {
+        canReadProject && {
           key: 'general',
           component: ProjectGeneral,
           title: translate('General'),
         },
-        {
+        (canReadProject || access.updateMetadata) && {
           key: 'metadata',
           component: ProjectMetadata,
           title: translate('Metadata'),
         },
-        {
+        // Saving also needs PROJECT.CREATE on the organization, which the tab
+        // checks. A project manager reads the rules their invitations must meet.
+        canReadProject && {
           key: 'membership-restrictions',
           component: ProjectMembershipRestrictions,
           title: translate('Membership restrictions'),
         },
-        (project.project_credit || project.project_credit === 0) && {
-          key: 'credit',
-          component: ProjectCredit,
-          title: translate('Credit management'),
-        },
-        canSeeOrderApproval && {
+        // Credit has no permission of its own. It follows project update.
+        canReadProject &&
+          (project.project_credit || project.project_credit === 0) && {
+            key: 'credit',
+            component: ProjectCredit,
+            title: translate('Credit management'),
+          },
+        access.orderApproval && {
           key: 'order-approval',
           component: ProjectOrderAutoApproval,
           title: translate('Order approval'),
         },
-        !project?.is_removed && {
-          key: 'end-date-change-requests',
-          component: ProjectEndDateChangeRequests,
-          title: translate('End date change requests'),
-        },
+        canReadProject &&
+          !project?.is_removed && {
+            key: 'end-date-change-requests',
+            component: ProjectEndDateChangeRequests,
+            title: translate('End date change requests'),
+          },
+        // Read-only. It does not grant entry; it shows once the page is open.
         hasPosixGroups && {
           key: 'posix-identities',
           component: ProjectPosixGroups,
           title: translate('POSIX identities'),
         },
         // Owners and staff need the tab before a room exists: its empty state
-        // is where they create one.
+        // is where they create one. An existing room stays visible for anyone
+        // already on the page.
         isMatrixChatEnabled() &&
           (canManageRoom || hasActiveRoom) && {
             key: 'chat',
             component: ProjectMatrixChat,
             title: translate('Chat'),
           },
-        !project?.is_removed && {
+        access.deleteProject && {
           key: 'remove',
           component: ProjectDelete,
           title: translate('Remove'),
@@ -162,7 +162,8 @@ export const ProjectManageContainer = () => {
       ].filter(Boolean),
     [
       project,
-      canSeeOrderApproval,
+      access,
+      canReadProject,
       canManageRoom,
       hasActiveRoom,
       hasPosixGroups,

@@ -18,6 +18,8 @@ import { useModal } from '@/modal/actions';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
+import { getProjectSettingsAccess } from '../settingsAccess';
+
 import { CreditFieldEditButton } from './CreditFieldEditButton';
 import { EarlierInvoices } from './EarlierInvoices';
 import { formatCompensateIn } from './EarlierInvoicesField';
@@ -38,6 +40,10 @@ interface ProjectCreditProps {
 export const ProjectCredit: React.FC<ProjectCreditProps> = ({ project }) => {
   const user = useUser();
   const { openDialog } = useModal();
+  const { updateProject: canUpdateProject } = getProjectSettingsAccess(
+    user,
+    project,
+  );
   const {
     data: creditData,
     isLoading,
@@ -138,7 +144,7 @@ export const ProjectCredit: React.FC<ProjectCreditProps> = ({ project }) => {
         <LoadingErred loadData={refetch} />
       ) : (
         <>
-          <FormTable>
+          <FormTable hideActions={!canUpdateProject}>
             {rows.map((row) => (
               <FormTable.Item
                 key={row.key}

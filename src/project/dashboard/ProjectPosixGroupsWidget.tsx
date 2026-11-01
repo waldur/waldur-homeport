@@ -13,6 +13,9 @@ import {
   isProjectPosixGroupsVisible,
   useProjectPosixGroups,
 } from '@/project/manage/useProjectPosixGroups';
+import { useUser } from '@/workspace/hooks';
+
+import { canOpenProjectSettings } from '../settingsAccess';
 
 /**
  * Which group and GID the project has at each service provider, on the
@@ -21,6 +24,8 @@ import {
 export const ProjectPosixGroupsWidget: FC<{ project: Project }> = ({
   project,
 }) => {
+  const user = useUser();
+  const canOpenSettings = canOpenProjectSettings(user, project);
   const { data, isError, refetch } = useProjectPosixGroups(project.uuid);
   // Hidden where POSIX identities are off, groups or not.
   if (!isProjectPosixGroupsVisible()) {
@@ -35,13 +40,15 @@ export const ProjectPosixGroupsWidget: FC<{ project: Project }> = ({
       cardBordered
       className="mb-4"
       actions={
-        <Link
-          state="project-manage"
-          params={{ uuid: project.uuid, tab: 'posix-identities' }}
-          label={translate('Show details')}
-          buttonVariant="text-primary"
-          buttonSize="sm"
-        />
+        canOpenSettings ? (
+          <Link
+            state="project-manage"
+            params={{ uuid: project.uuid, tab: 'posix-identities' }}
+            label={translate('Show details')}
+            buttonVariant="text-primary"
+            buttonSize="sm"
+          />
+        ) : undefined
       }
     >
       {isError ? (

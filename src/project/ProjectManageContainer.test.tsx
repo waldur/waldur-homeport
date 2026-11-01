@@ -191,3 +191,125 @@ describe('ProjectManageContainer POSIX identities tab', () => {
     expect(renderTabs(MANAGER)).not.toContain('posix-identities');
   });
 });
+
+describe('ProjectManageContainer permission tabs', () => {
+  const saved = { roles: undefined as unknown };
+
+  const withRole = (roleName: string) => ({
+    is_staff: false,
+    is_support: false,
+    permissions: [
+      {
+        scope_type: 'project' as const,
+        scope_uuid: 'project-uuid',
+        role_name: roleName,
+        customer_uuid: 'customer-uuid',
+      },
+    ],
+  });
+
+  const withCustomerRole = (roleName: string) => ({
+    is_staff: false,
+    is_support: false,
+    permissions: [
+      {
+        scope_type: 'customer' as const,
+        scope_uuid: 'customer-uuid',
+        role_name: roleName,
+        customer_uuid: 'customer-uuid',
+      },
+    ],
+  });
+
+  beforeEach(() => {
+    h.rooms = [];
+    h.posixGroups = { data: [] };
+    h.posixVisible = true;
+    saved.roles = ENV.roles;
+    ENV.roles = [
+      {
+        name: 'ORDER.APPROVER',
+        permissions: [PermissionEnum.APPROVE_ORDER],
+      },
+      {
+        name: 'METADATA.EDITOR',
+        permissions: [PermissionEnum.UPDATE_PROJECT_METADATA],
+      },
+      {
+        name: RoleEnum.PROJECT_MANAGER,
+        permissions: [PermissionEnum.UPDATE_PROJECT],
+      },
+      {
+        name: 'PROJECT.REMOVER',
+        permissions: [PermissionEnum.DELETE_PROJECT],
+      },
+      {
+        name: 'PROJECT.CREATOR',
+        permissions: [PermissionEnum.CREATE_PROJECT],
+      },
+    ] as any;
+  });
+
+  afterEach(() => {
+    ENV.roles = saved.roles as any;
+    vi.restoreAllMocks();
+  });
+
+  it('shows order approval and hides the edit tabs for an approver', () => {
+    const tabs = renderTabs(withRole('ORDER.APPROVER'));
+    expect(tabs).toContain('order-approval');
+    expect(tabs).not.toContain('general');
+    expect(tabs).not.toContain('metadata');
+    expect(tabs).not.toContain('remove');
+    expect(tabs).not.toContain('membership-restrictions');
+  });
+
+  it('shows support what it can read, and never Remove', () => {
+    const tabs = renderTabs(
+      { is_staff: false, is_support: true, permissions: [] },
+      { project_credit: 5 },
+    );
+    expect(tabs).toEqual([
+      'general',
+      'metadata',
+      'membership-restrictions',
+      'credit',
+      'order-approval',
+      'end-date-change-requests',
+    ]);
+  });
+
+  it('shows metadata and hides general for a metadata editor', () => {
+    const tabs = renderTabs(withRole('METADATA.EDITOR'));
+    expect(tabs).toContain('metadata');
+    expect(tabs).not.toContain('general');
+    expect(tabs).not.toContain('order-approval');
+  });
+
+  it('shows the edit tabs and hides order approval for a project updater', () => {
+    const tabs = renderTabs(withRole(RoleEnum.PROJECT_MANAGER), {
+      project_credit: 5,
+    });
+    expect(tabs).toEqual([
+      'general',
+      'metadata',
+      'membership-restrictions',
+      'credit',
+      'end-date-change-requests',
+    ]);
+  });
+
+  it('shows remove only for someone who can delete on the organization', () => {
+    const remover = withCustomerRole('PROJECT.REMOVER');
+    expect(renderTabs(remover)).toContain('remove');
+    expect(renderTabs(remover, { is_removed: true })).not.toContain('remove');
+  });
+
+  it('hides remove from a grant on the project, which the API refuses', () => {
+    expect(renderTabs(withRole('PROJECT.REMOVER'))).not.toContain('remove');
+  });
+
+  it('hides membership restrictions from someone who only creates projects', () => {
+    expect(renderTabs(withCustomerRole('PROJECT.CREATOR'))).toEqual([]);
+  });
+});

@@ -16,6 +16,7 @@ import { canViewProjectTeam } from '@/permissions/teamVisibility';
 import { getProject, isStaffOrSupport } from '@/workspace/selectors';
 
 import { loadProject } from './resolve';
+import { canManageProject } from './settingsAccess';
 
 export const states: StateDeclaration[] = [
   {
@@ -99,6 +100,8 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Settings'),
       skipBreadcrumb: true,
+      // Any permission a tab on this page is for. A direct URL still has to pass.
+      permissions: [canManageProject],
     },
   },
 
