@@ -4381,7 +4381,7 @@
   "Unable to delete resource.": "Ressursi ei saa kustutada.",
   "Unable to delete rule.": "Reeglit ei saa kustutada.",
   "Unable to delete service account.": "Teenusekontot ei saa kustutada.",
-  "Unable to delete team member.": "Tiimi liiget ei saa kustutada.",
+  "Unable to delete team member.": "Meeskonnaliiget ei saa kustutada.",
   "Unable to delete the user agreement.": "Kasutajalepingut ei saa kustutada.",
   "Unable to delete user.": "Kasutajat ei saa kustutada.",
   "Unable to delete {resourceType}.": "Ei saa kustutada {resourceType}.",

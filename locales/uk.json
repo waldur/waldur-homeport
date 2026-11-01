@@ -854,7 +854,7 @@
   "Notification method": "Спосіб сповіщення",
   "Notifications": "Сповіщення",
   "Notify organization owners": "Повідомити власників організації",
-  "Notify project team": "Повідомте групу проєкту",
+  "Notify project team": "Повідомте команду проєкту",
   "Number of CPU cores per socket": "Кількість ядер ЦП на сокет",
   "Number of CPU cores should be multiple of cores per socket.": "Кількість ядер ЦП має бути кратною кількості ядер на сокет.",
   "Number of cores in a VM": "Кількість ядер у віртуальній машині",
