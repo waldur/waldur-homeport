@@ -53,6 +53,8 @@ import { useRoomMemberNames } from './useRoomMemberNames';
 import { getSenderName } from './utils';
 
 interface MatrixMessageInputProps {
+  /** The room on screen. Sending waits until it is the client's active room. */
+  roomUuid: string;
   uploadFile: (
     file: File,
     buildContent?: undefined,
@@ -177,6 +179,7 @@ const PendingAttachments: FC<{
 };
 
 export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
+  roomUuid,
   uploadFile,
   uploading,
   pendingFiles,
@@ -443,6 +446,7 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
         (!text && files.length === 0) ||
         !client ||
         !activeRoomId ||
+        activeRoomUuid !== roomUuid ||
         sending ||
         uploading
       )
@@ -515,6 +519,8 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
       pendingFiles,
       client,
       activeRoomId,
+      activeRoomUuid,
+      roomUuid,
       sending,
       uploading,
       sendTypingIndicator,
@@ -633,7 +639,8 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
     }
   }, [updateMentionState]);
 
-  const disabled = connectionState !== 'connected';
+  const disabled =
+    connectionState !== 'connected' || activeRoomUuid !== roomUuid;
   const busy = sending || uploading;
   const canSend = Boolean(message.trim()) || pendingFiles.length > 0;
 

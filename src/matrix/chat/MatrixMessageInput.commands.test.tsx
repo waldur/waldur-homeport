@@ -98,6 +98,7 @@ const composer = (
   props: Partial<ComponentProps<typeof MatrixMessageInput>> = {},
 ) => (
   <MatrixMessageInput
+    roomUuid="uuid-1"
     uploadFile={vi.fn()}
     uploading={false}
     pendingFiles={[]}

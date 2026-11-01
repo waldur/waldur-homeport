@@ -5,8 +5,6 @@ import { Project } from 'waldur-js-client';
 import { getCustomer as getCustomerApi } from '@/customer/utils';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
 import {
   useUser,
@@ -14,6 +12,8 @@ import {
   useSetProject,
   useSetCustomer,
 } from '@/workspace/hooks';
+
+import { getProjectSettingsAccess } from './settingsAccess';
 
 export const useProjectDelete = ({
   project,
@@ -34,16 +34,7 @@ export const useProjectDelete = ({
   const currentProject = useProject();
 
   const isCurrentProject = project.uuid === currentProject?.uuid;
-  const canDelete =
-    !project.is_removed &&
-    (hasPermission(user, {
-      permission: PermissionEnum.DELETE_PROJECT,
-      customerId: project.customer_uuid,
-    }) ||
-      hasPermission(user, {
-        permission: PermissionEnum.DELETE_PROJECT,
-        projectId: project.uuid,
-      }));
+  const canDelete = getProjectSettingsAccess(user, project).deleteProject;
 
   const callback = async () => {
     try {

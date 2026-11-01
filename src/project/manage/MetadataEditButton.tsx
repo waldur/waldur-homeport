@@ -40,6 +40,7 @@ export const MetadataEditButton = ({
       onClick={callback}
       variant="secondary"
       fieldName={question.description}
+      data-testid={`edit-checklist-${question.uuid}`}
     />
   );
 };

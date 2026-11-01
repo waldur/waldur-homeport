@@ -151,6 +151,8 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
   }, [connectionState]);
   const [activeRoomId, setActiveRoomId] = useState<string | null>(null);
   const [activeRoomUuid, setActiveRoomUuid] = useState<string | null>(null);
+  // The room last asked for while the client was connecting.
+  const pendingRoomUuidRef = useRef<string | null>(null);
   // Read by the sign-out handler, which outlives the render that set it up.
   const activeRoomUuidRef = useRef<string | null>(null);
   useEffect(() => {
@@ -230,6 +232,7 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const disconnect = useCallback(() => {
     releaseClient();
+    pendingRoomUuidRef.current = null;
     setConnectionState('disconnected');
     setActiveRoomId(null);
     setActiveRoomUuid(null);
@@ -313,18 +316,24 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
               ),
             );
           }
+        } else {
+          // Still connecting: opened once connectionState flips to 'connected'.
+          pendingRoomUuidRef.current = roomUuid;
         }
-        // Still connecting: the consumer's own effect re-runs connect() once
-        // connectionState flips to 'connected', and the switch happens then.
         return;
       }
 
       // A connect() is already in flight but hasn't assigned clientRef yet.
       // Bail synchronously so a concurrent caller can't create a second
       // client (which would stopClient() the first and strand the panel on a
-      // dead, never-syncing client).
-      if (connectingRef.current) return;
+      // dead, never-syncing client). The room still opens once connected: the
+      // app-level bootstrap usually starts first, and focuses no room.
+      if (connectingRef.current) {
+        if (activate) pendingRoomUuidRef.current = roomUuid;
+        return;
+      }
       connectingRef.current = true;
+      pendingRoomUuidRef.current = null;
 
       setConnectionState('connecting');
       setError(null);
@@ -332,7 +341,8 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
       // Replace the client with one on a new Waldur session, keeping the room
       // the user had open.
       const restartSession = (fallbackRoomUuid: string) => {
-        const openRoomUuid = activeRoomUuidRef.current;
+        const openRoomUuid =
+          pendingRoomUuidRef.current ?? activeRoomUuidRef.current;
         releaseClient();
         setActiveRoomId(null);
         void connect(openRoomUuid ?? fallbackRoomUuid, {
@@ -620,6 +630,13 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
     // referentially stable.
     [endSession, releaseClient],
   );
+
+  useEffect(() => {
+    if (connectionState !== 'connected') return;
+    const roomUuid = pendingRoomUuidRef.current;
+    pendingRoomUuidRef.current = null;
+    if (roomUuid && roomUuid !== activeRoomUuidRef.current) connect(roomUuid);
+  }, [connectionState, connect]);
 
   // Replace an identity Waldur can't unlock, on the user's explicit request.
   const resetCryptoIdentity = useCallback(async () => {

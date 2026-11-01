@@ -1,5 +1,5 @@
 import { act, render, waitFor } from '@testing-library/react';
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   matrixCredentialsRetrieve,
@@ -317,6 +317,121 @@ describe('MatrixChatProvider', () => {
     expect(ctx.connectionState).toBe('error');
     expect(vi.mocked(matrixSession)).not.toHaveBeenCalled();
     expect(h.createClient).not.toHaveBeenCalled();
+  });
+
+  describe('a room asked for while the client connects', () => {
+    const bootstrap = () =>
+      act(() => {
+        ctx.connect('bootstrap-uuid', { activate: false });
+      });
+    const finishConnecting = async () => {
+      await waitFor(() => expect(h.client.handlers.sync).toBeDefined());
+      await act(() => h.client.handlers.sync('PREPARED'));
+    };
+
+    it('opens once connected, when the background sync started first', async () => {
+      renderProvider();
+      await bootstrap();
+
+      await act(() => ctx.connect('room-uuid'));
+      await finishConnecting();
+
+      await waitFor(() => expect(ctx.activeRoomUuid).toBe('room-uuid'));
+    });
+
+    it('opens the room asked for last', async () => {
+      renderProvider();
+      await bootstrap();
+
+      await act(() => ctx.connect('first-uuid'));
+      await act(() => ctx.connect('second-uuid'));
+      await finishConnecting();
+
+      await waitFor(() => expect(ctx.activeRoomUuid).toBe('second-uuid'));
+      expect(vi.mocked(matrixRoomsOpen)).not.toHaveBeenCalledWith({
+        path: { uuid: 'first-uuid' },
+      });
+    });
+
+    it('opens when asked for from an effect that sees the client connect', async () => {
+      const OpensRoomOnceConnected: FC = () => {
+        const { connect, connectionState } = useContext(MatrixChatContext);
+        useEffect(() => {
+          if (connectionState === 'connected') connect('room-uuid');
+        }, [connectionState, connect]);
+        return null;
+      };
+      render(
+        <MatrixChatProvider>
+          <Probe />
+          <OpensRoomOnceConnected />
+        </MatrixChatProvider>,
+      );
+      await bootstrap();
+
+      await finishConnecting();
+
+      await waitFor(() => expect(ctx.activeRoomUuid).toBe('room-uuid'));
+    });
+
+    it('does not open again the room the client is already opening', async () => {
+      renderProvider();
+
+      const opening = act(() => ctx.connect('room-uuid'));
+      await act(() => ctx.connect('room-uuid'));
+      await opening;
+      await finishConnecting();
+
+      expect(vi.mocked(matrixRoomsOpen)).toHaveBeenCalledTimes(1);
+    });
+
+    it('keeps the room asked for when the session has to restart', async () => {
+      renderProvider();
+      await act(() => ctx.connect('room-uuid'));
+      await act(() => h.client.handlers.sync('PREPARED'));
+      await act(() => h.client.handlers.sync('ERROR'));
+      vi.mocked(matrixRoomsOpen).mockResolvedValue({
+        data: { room_id: '!other:example.com' },
+      } as any);
+      await act(() => ctx.connect('other-uuid'));
+      const signedOut = h.client;
+      h.client = makeClient();
+      h.createClient.mockReturnValue(h.client);
+
+      await signOut(signedOut);
+
+      await waitFor(() => expect(h.createClient).toHaveBeenCalledTimes(2));
+      await waitFor(() => expect(ctx.activeRoomUuid).toBe('other-uuid'));
+    });
+
+    it('forgets the room when the Waldur user changes', async () => {
+      const { rerender } = renderProvider();
+      await bootstrap();
+      await act(() => ctx.connect('room-uuid'));
+      vi.mocked(useUser).mockReturnValue({ uuid: 'user-2' } as any);
+
+      rerender(
+        <MatrixChatProvider>
+          <Probe />
+        </MatrixChatProvider>,
+      );
+      await waitFor(() => expect(ctx.connectionState).toBe('disconnected'));
+      await act(async () => {
+        await h.client.handlers.sync?.('PREPARED');
+      });
+
+      expect(vi.mocked(matrixRoomsOpen)).not.toHaveBeenCalled();
+    });
+
+    it('leaves a bootstrap unfocused when nothing was asked for', async () => {
+      renderProvider();
+      await bootstrap();
+
+      await finishConnecting();
+
+      expect(vi.mocked(matrixRoomsOpen)).not.toHaveBeenCalled();
+      expect(ctx.activeRoomUuid).toBeNull();
+    });
   });
 
   it('bootstraps without opening or focusing a room', async () => {

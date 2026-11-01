@@ -22,6 +22,7 @@ import { useNotify } from '@/store/notify';
 import { renderFieldOrDash } from '@/table/utils';
 import { useSetProject, useUser } from '@/workspace/hooks';
 
+import { getProjectSettingsAccess } from '../settingsAccess';
 import { projectKindOptions } from '../utils';
 import { validateProjectName } from '../validators';
 
@@ -37,6 +38,10 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
   const setProject = useSetProject();
   const { openDialog } = useModal();
   const { showErrorResponse } = useNotify();
+  const { updateProject: canUpdateProject } = getProjectSettingsAccess(
+    user,
+    project,
+  );
 
   // Mirrors the backend, which guards writes to end_date with PROJECT.DELETE on
   // the customer. Gating on is_staff hid the edit from organization owners, who
@@ -62,10 +67,10 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
 
   return (
     <EditFieldProvider scope={project} callback={updateProject}>
-      <ProjectAvatar project={project} />
+      {canUpdateProject && <ProjectAvatar project={project} />}
 
       <FormTable.Card title={translate('Details')} className="card-bordered">
-        <FormTable>
+        <FormTable hideActions={!canUpdateProject}>
           <StringEditField
             name="name"
             label={translate('Name')}

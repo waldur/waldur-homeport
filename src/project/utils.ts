@@ -178,7 +178,10 @@ export const getProjectTeamChart = async (project: Project) => {
   return null;
 };
 
-export const canEditProject = (user: User, context: { customer?; project? }) =>
+export const canEditProject = (
+  user: Pick<User, 'is_staff' | 'permissions'>,
+  context: { customer?; project? },
+) =>
   hasPermission(user, {
     permission: PermissionEnum.UPDATE_PROJECT,
     customerId: context?.customer?.uuid,

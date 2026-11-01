@@ -45,6 +45,28 @@ beforeEach(() => {
   h.client.getRoom.mockReset().mockReturnValue(null);
 });
 
+describe('MatrixMessageInput room', () => {
+  // The header names the room on screen and messages go to the active one, so
+  // a mismatch would post to a room the user is not looking at.
+  it('stays disabled while another room is active', () => {
+    render(
+      <MatrixMessageInput
+        roomUuid="another-room"
+        uploadFile={vi.fn()}
+        uploading={false}
+        pendingFiles={[]}
+        addFiles={vi.fn()}
+        removePending={vi.fn()}
+        setPending={vi.fn()}
+        clearPending={vi.fn()}
+      />,
+      { wrapper },
+    );
+
+    expect(screen.getByRole('textbox', { name: 'Message' })).toBeDisabled();
+  });
+});
+
 describe('MatrixMessageInput partial upload failure', () => {
   it('keeps the failed file staged and does not send the text', async () => {
     const user = userEvent.setup();
@@ -58,6 +80,7 @@ describe('MatrixMessageInput partial upload failure', () => {
 
     render(
       <MatrixMessageInput
+        roomUuid="uuid-1"
         uploadFile={uploadFile}
         uploading={false}
         pendingFiles={[fileA, fileB]}
@@ -89,6 +112,7 @@ describe('MatrixMessageInput partial upload failure', () => {
 
     render(
       <MatrixMessageInput
+        roomUuid="uuid-1"
         uploadFile={uploadFile}
         uploading={false}
         pendingFiles={[fileA]}
@@ -122,6 +146,7 @@ describe('PendingAttachments object-URL lifecycle', () => {
     const fileA = new File(['a'], 'a.png', { type: 'image/png' });
     const fileB = new File(['b'], 'b.png', { type: 'image/png' });
     const baseProps = {
+      roomUuid: 'uuid-1',
       uploadFile: vi.fn(),
       uploading: false,
       addFiles: vi.fn(),
@@ -184,6 +209,7 @@ describe('MatrixMessageInput replies', () => {
     render(
       <MatrixMessageActionsProvider value={value}>
         <MatrixMessageInput
+          roomUuid="uuid-1"
           uploadFile={uploadFile}
           uploading={false}
           pendingFiles={pendingFiles}
@@ -283,6 +309,7 @@ describe('MatrixMessageInput mention list', () => {
     const user = userEvent.setup();
     render(
       <MatrixMessageInput
+        roomUuid="uuid-1"
         uploadFile={vi.fn()}
         uploading={false}
         pendingFiles={[]}

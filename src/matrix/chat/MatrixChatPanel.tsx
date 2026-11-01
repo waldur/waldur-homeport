@@ -138,12 +138,14 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
 
   const handleRoomSelect = useCallback(
     (uuid: string) => {
+      // Picking a room settles the deep link, even one not yet opened.
+      appliedDefaultRoomRef.current = defaultRoomUuid ?? null;
       setSelectedRoomUuid(uuid);
       setChatDrawerPreference('lastRoomUuid', uuid);
       changeCompactView('detail');
       connect(uuid);
     },
-    [connect, changeCompactView],
+    [connect, changeCompactView, defaultRoomUuid],
   );
 
   // Floating widget / cross-room banner ask the panel to switch back to the
