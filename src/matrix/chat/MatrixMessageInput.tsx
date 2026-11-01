@@ -792,7 +792,7 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
                 type="button"
                 className="tc-composer-button send"
                 onClick={onSendVoice}
-                disabled={sendingVoice}
+                disabled={sendingVoice || activeRoomUuid !== roomUuid}
                 title={translate('Send voice message')}
               >
                 <PaperPlaneRightIcon weight="bold" />

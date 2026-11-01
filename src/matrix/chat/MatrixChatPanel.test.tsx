@@ -73,6 +73,7 @@ beforeEach(() => {
   h.drawerMountCount = 0;
   h.matrixClient = {
     connect: vi.fn(),
+    deniedRoomUuids: new Set(),
     connectionState: 'connected',
     userId: '@me:s',
     error: null,
@@ -93,7 +94,7 @@ describe('MatrixChatPanel — deep-link does not fight manual navigation', () =>
       connectionState: 'connected',
       userId: '@me:s',
       activeRoomUuid: 'room-A',
-      roomAccessDenied: false,
+      deniedRoomUuids: new Set(),
       error: null,
     };
     h.rooms = {
@@ -120,6 +121,7 @@ describe('MatrixChatPanel — deep-link does not fight manual navigation', () =>
   it('does not open the deep-linked room over one picked while connecting', async () => {
     h.matrixClient = {
       connect: vi.fn(),
+      deniedRoomUuids: new Set(),
       connectionState: 'connecting',
       activeRoomUuid: null,
       error: null,
@@ -145,6 +147,7 @@ describe('MatrixChatPanel — deep-link does not fight manual navigation', () =>
   it('opens the deep-linked room once connected when nothing was picked', () => {
     h.matrixClient = {
       connect: vi.fn(),
+      deniedRoomUuids: new Set(),
       connectionState: 'connecting',
       activeRoomUuid: null,
       error: null,
@@ -184,6 +187,36 @@ describe('MatrixChatPanel — a room missing from the list', () => {
     h.lastRoomUuid = 'room-1';
     renderShowingRoom({}, {});
     expect(screen.queryByTestId('chat-drawer')).not.toBeInTheDocument();
+  });
+});
+
+describe('MatrixChatPanel — a refused room', () => {
+  const renderWithDenied = (deniedRoomUuid: string) => {
+    h.matrixClient = {
+      connect: vi.fn(),
+      connectionState: 'connected',
+      activeRoomUuid: 'room-A',
+      deniedRoomUuids: new Set([deniedRoomUuid]),
+      error: null,
+    };
+    h.rooms = {
+      rooms: [{ uuid: 'room-A', state: 'active', room_name: 'A' }],
+      totalUnread: 0,
+      isLoading: false,
+    };
+    render(<MatrixChatPanel defaultRoomUuid="room-A" />);
+  };
+
+  it('says so for the room on screen', () => {
+    renderWithDenied('room-A');
+    expect(
+      screen.getByText('You are not a member of this conversation'),
+    ).toBeInTheDocument();
+  });
+
+  it('keeps showing a room when another one was refused', () => {
+    renderWithDenied('room-B');
+    expect(screen.getByTestId('chat-drawer')).toBeInTheDocument();
   });
 });
 

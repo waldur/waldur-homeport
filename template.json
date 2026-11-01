@@ -58791,6 +58791,12 @@
       "feature_area": "service-providers"
     }
   },
+  "The conversation is not open yet.": {
+    "context": {
+      "feature_area": "call",
+      "action_type": "read"
+    }
+  },
   "The conversation is still loading. Try again shortly.": {},
   "The cost after credit is at or below the limit, so its actions do not run.": {
     "context": {

@@ -59,8 +59,19 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
   roomName,
   onBack,
 }) => {
-  const { connect, connectionState, userId, error, activeRoomId } =
-    useMatrixClient();
+  const {
+    connect,
+    connectionState,
+    userId,
+    error,
+    activeRoomId,
+    activeRoomUuid,
+    failedRoomUuid,
+    registerRoomView,
+  } = useMatrixClient();
+  // The timeline, typing, calls and uploads follow the active room, so until
+  // this room is the active one they belong to another room than the header.
+  const roomNotOpen = activeRoomUuid !== roomUuid;
   const { callState, callRoomId, callRoomUuid } = useMatrixCall();
   const { requestReturnToCall } = useContext(MatrixCallPortalContext);
   const { rooms: allRooms } = useAllMatrixRooms();
@@ -107,6 +118,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
   const messageActions = useMatrixMessageActionsValue(messages);
 
   const sendVoiceMessage = useCallback(async () => {
+    if (roomNotOpen) return;
     // A reply being written goes with the voice message.
     const { replyTo, cancelReply } = messageActions;
     setSendingVoice(true);
@@ -133,12 +145,14 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
     } finally {
       setSendingVoice(false);
     }
-  }, [recorder, uploadFile, messageActions, userId]);
+  }, [roomNotOpen, recorder, uploadFile, messageActions, userId]);
 
   // Connect on mount
   useEffect(() => {
     connect(roomUuid);
   }, [roomUuid]);
+
+  useEffect(() => registerRoomView(roomUuid), [registerRoomView, roomUuid]);
 
   // 'discovering' is included so the drawer reserves the call pane the moment
   // a room is claimed — otherwise MatrixCallHost falls back to the floating
@@ -151,7 +165,8 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
   // rather than detaching into the floating widget. The cross-room banner stays
   // tied to live calls only — a failed call elsewhere is nothing to return to.
   const callAnchored = callLive || callState === 'error';
-  const showCallView = callAnchored && callRoomId === activeRoomId;
+  const showCallView =
+    callAnchored && callRoomId === activeRoomId && !roomNotOpen;
   const showCrossRoomBanner =
     callLive && callRoomId !== null && callRoomId !== activeRoomId;
   const callRoom = callRoomUuid
@@ -173,14 +188,17 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
   const sessionEnded = connectionState === 'ended';
   const showConnectionError =
     sessionEnded ||
-    (connectionState === 'error' && messages.length === 0 && !showCallView);
+    (connectionState === 'error' && messages.length === 0 && !showCallView) ||
+    (connectionState === 'connected' &&
+      failedRoomUuid === roomUuid &&
+      roomNotOpen);
 
   return (
     <MatrixMessageActionsProvider value={messageActions}>
       <Dropzone
         noClick
         noKeyboard
-        disabled={connectionState !== 'connected'}
+        disabled={connectionState !== 'connected' || roomNotOpen}
         onDrop={(files) => addFiles(files)}
       >
         {({ getRootProps, getInputProps, isDragActive }) => (
@@ -217,7 +235,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
               <MatrixSyncStatus state={connectionState} error={error} />
             )}
 
-            <CallInProgressBanner />
+            {!roomNotOpen && <CallInProgressBanner />}
 
             {showCrossRoomBanner && (
               <div className="flex items-center gap-1.5 px-3 py-1.5 bg-success-subtle border-b-[1px] border-b-secondary">
@@ -302,7 +320,9 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
                     userId={userId}
                     memberNames={resolvedMemberNames}
                     memberImages={memberImages}
-                    loading={loading || connectionState === 'connecting'}
+                    loading={
+                      loading || connectionState === 'connecting' || roomNotOpen
+                    }
                     loadingOlder={loadingOlder}
                     hasOlderMessages={hasOlderMessages}
                     onLoadOlder={loadOlderMessages}
@@ -312,7 +332,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
               )}
             </div>
 
-            {showChat && !showConnectionError && (
+            {showChat && !showConnectionError && !roomNotOpen && (
               <MatrixTypingIndicator
                 typingUsers={typingUsers}
                 memberImages={memberImages}

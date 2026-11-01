@@ -14,6 +14,7 @@ const h = vi.hoisted(() => ({
   rooms: [] as any[],
   memberNames: new Map<string, string>(),
   cancelRecording: vi.fn(),
+  registerRoomView: vi.fn(),
 }));
 
 vi.mock('./useMatrixClient', () => ({
@@ -47,7 +48,9 @@ vi.mock('./call/MatrixCallDockSlot', () => ({
 }));
 
 vi.mock('./MatrixMessageList', () => ({
-  MatrixMessageList: () => <div data-testid="message-list" />,
+  MatrixMessageList: ({ loading }: { loading: boolean }) => (
+    <div data-testid="message-list" data-loading={String(loading)} />
+  ),
 }));
 
 vi.mock('./MatrixMessageInput', () => ({
@@ -55,7 +58,7 @@ vi.mock('./MatrixMessageInput', () => ({
 }));
 
 vi.mock('./MatrixTypingIndicator', () => ({
-  MatrixTypingIndicator: () => null,
+  MatrixTypingIndicator: () => <div data-testid="typing-indicator" />,
 }));
 
 vi.mock('./MatrixSyncStatus', () => ({
@@ -78,7 +81,7 @@ vi.mock('./voice/useVoiceRecorder', () => ({
 }));
 
 vi.mock('./call/CallInProgressBanner', () => ({
-  CallInProgressBanner: () => null,
+  CallInProgressBanner: () => <div data-testid="call-banner" />,
 }));
 
 import { MatrixChatDrawer } from './MatrixChatDrawer';
@@ -94,6 +97,8 @@ beforeEach(() => {
     userId: '@me:s',
     error: null,
     activeRoomId: '!room1:s',
+    activeRoomUuid: 'room-1',
+    registerRoomView: h.registerRoomView,
   };
   h.room = {
     messages: [],
@@ -107,6 +112,89 @@ beforeEach(() => {
   h.rooms = [];
   h.memberNames = new Map();
   h.cancelRecording.mockClear();
+  h.registerRoomView.mockReset();
+});
+
+describe('MatrixChatDrawer — the room on screen', () => {
+  it('registers as a view on the room and unregisters on unmount', () => {
+    const unregister = vi.fn();
+    h.registerRoomView.mockReturnValue(unregister);
+
+    const { unmount } = render(<MatrixChatDrawer roomUuid="room-1" />);
+
+    expect(h.registerRoomView).toHaveBeenCalledWith('room-1');
+    unmount();
+    expect(unregister).toHaveBeenCalled();
+  });
+
+  it('shows a retry when the switch to this room failed', () => {
+    h.matrixClient.activeRoomUuid = 'other-room';
+    h.matrixClient.failedRoomUuid = 'room-1';
+    h.matrixClient.error = 'Could not open the conversation.';
+
+    render(<MatrixChatDrawer roomUuid="room-1" />);
+
+    expect(
+      screen.getByText('Could not open the conversation.'),
+    ).toBeInTheDocument();
+    expect(screen.queryByTestId('message-list')).not.toBeInTheDocument();
+  });
+
+  it('offers no join for a call in another room', () => {
+    h.matrixClient.activeRoomUuid = 'other-room';
+
+    render(<MatrixChatDrawer roomUuid="room-1" />);
+
+    expect(screen.queryByTestId('call-banner')).not.toBeInTheDocument();
+  });
+
+  it('shows no retry over a room that opened after all', () => {
+    h.matrixClient.failedRoomUuid = 'room-1';
+    h.matrixClient.error = 'Could not open the conversation.';
+
+    render(<MatrixChatDrawer roomUuid="room-1" />);
+
+    expect(screen.getByTestId('message-list')).toBeInTheDocument();
+  });
+
+  it('shows no retry for an error about something else', () => {
+    h.matrixClient.activeRoomUuid = 'other-room';
+    h.matrixClient.failedRoomUuid = 'other-room';
+    h.matrixClient.error = 'Connection lost, reconnecting...';
+
+    render(<MatrixChatDrawer roomUuid="room-1" />);
+
+    expect(screen.getByTestId('message-list')).toBeInTheDocument();
+  });
+
+  it('docks no call while another room is the active one', () => {
+    h.matrixClient.activeRoomUuid = 'other-room';
+    h.callState = 'connected';
+    h.callRoomId = '!room1:s';
+
+    render(<MatrixChatDrawer roomUuid="room-1" />);
+
+    expect(screen.queryByTestId('dock-slot')).not.toBeInTheDocument();
+  });
+
+  it('shows no typing from another room', () => {
+    h.matrixClient.activeRoomUuid = 'other-room';
+
+    render(<MatrixChatDrawer roomUuid="room-1" />);
+
+    expect(screen.queryByTestId('typing-indicator')).not.toBeInTheDocument();
+  });
+
+  it("loads rather than show another room's messages", () => {
+    h.matrixClient.activeRoomUuid = 'other-room';
+
+    render(<MatrixChatDrawer roomUuid="room-1" />);
+
+    expect(screen.getByTestId('message-list')).toHaveAttribute(
+      'data-loading',
+      'true',
+    );
+  });
 });
 
 describe('MatrixChatDrawer — dock slot + chat layout', () => {

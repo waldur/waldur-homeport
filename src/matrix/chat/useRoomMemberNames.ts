@@ -2,6 +2,8 @@ import { useQueries } from '@tanstack/react-query';
 import { useMemo, useRef } from 'react';
 import { MatrixRoomMember, matrixRoomsMembersList } from 'waldur-js-client';
 
+import { OWN_ERROR_STATE } from '@/core/queryRetry';
+
 /** Merge per-room member queries into one Matrix user ID -> Waldur full name map. */
 export function buildMemberNameMap(
   results: Array<{ data?: MatrixRoomMember[] }>,
@@ -38,6 +40,9 @@ function useRoomMembersData(roomUuids: string[], staleTime?: number) {
     queries: roomUuids.map((uuid) => ({
       queryKey: ['matrixRoomMembers', uuid],
       staleTime,
+      // A roster only adds names. A room the user has since lost must not take
+      // them to an error page.
+      meta: OWN_ERROR_STATE,
       queryFn: () =>
         matrixRoomsMembersList({
           path: { uuid },

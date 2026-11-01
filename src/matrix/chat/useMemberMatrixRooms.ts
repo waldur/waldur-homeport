@@ -24,7 +24,7 @@ export function useMemberMatrixRooms() {
         }),
       ),
     // This list loads behind every page, so losing it must not take the user
-    // to an error page: the chat surfaces show the failure themselves.
+    // to an error page.
     meta: OWN_ERROR_STATE,
     // Gate on an authenticated user. Without it an observer keeps the query
     // enabled during the OIDC login transition, so an anonymous /matrix/rooms/

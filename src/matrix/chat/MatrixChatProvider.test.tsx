@@ -135,7 +135,7 @@ describe('MatrixChatProvider', () => {
     const { matrixRTC } = h.createClient.mock.results[0].value;
     expect(vi.isMockFunction(matrixRTC.start)).toBe(false);
     expect(ctx.activeRoomId).toBe('!room:example.com');
-    expect(ctx.roomAccessDenied).toBe(false);
+    expect(ctx.deniedRoomUuids.size).toBe(0);
   });
 
   it('marks the room inaccessible when the caller is not a member', async () => {
@@ -147,7 +147,7 @@ describe('MatrixChatProvider', () => {
 
     await act(() => ctx.connect('room-uuid'));
 
-    expect(ctx.roomAccessDenied).toBe(true);
+    expect(ctx.deniedRoomUuids).toEqual(new Set(['room-uuid']));
     expect(ctx.activeRoomId).toBeNull();
   });
 
@@ -317,6 +317,298 @@ describe('MatrixChatProvider', () => {
     expect(ctx.connectionState).toBe('error');
     expect(vi.mocked(matrixSession)).not.toHaveBeenCalled();
     expect(h.createClient).not.toHaveBeenCalled();
+  });
+
+  describe('the room on screen', () => {
+    const opened = (uuid: string) =>
+      ({ data: { room_id: `!${uuid}:s` } }) as any;
+    const flushMicrotasks = () => act(() => Promise.resolve());
+    const answer = (send: () => void) =>
+      act(() => {
+        send();
+        return Promise.resolve();
+      });
+
+    // A deferred answer per room, so a test decides the order they arrive in.
+    const deferOpens = () => {
+      const answers: Record<string, (value?: unknown) => void> = {};
+      vi.mocked(matrixRoomsOpen).mockImplementation(
+        ({ path }: any) =>
+          new Promise((resolve, reject) => {
+            answers[path.uuid] = (failure) =>
+              failure ? reject(failure) : resolve(opened(path.uuid));
+          }) as any,
+      );
+      return answers;
+    };
+
+    const connected = async (roomUuid: string) => {
+      vi.mocked(matrixRoomsOpen).mockImplementation(
+        ({ path }: any) => Promise.resolve(opened(path.uuid)) as any,
+      );
+      renderProvider();
+      await act(() => ctx.connect(roomUuid));
+      await act(() => h.client.handlers.sync('PREPARED'));
+    };
+
+    it('reopens the room beneath when the view on top closes', async () => {
+      await connected('page-room');
+      ctx.registerRoomView('page-room');
+      const closeDrawer = ctx.registerRoomView('drawer-room');
+      await act(() => ctx.connect('drawer-room'));
+      expect(ctx.activeRoomUuid).toBe('drawer-room');
+
+      closeDrawer();
+      await flushMicrotasks();
+
+      await waitFor(() => expect(ctx.activeRoomUuid).toBe('page-room'));
+    });
+
+    it('leaves the room alone when no view is beneath', async () => {
+      await connected('drawer-room');
+      const closeDrawer = ctx.registerRoomView('drawer-room');
+      vi.mocked(matrixRoomsOpen).mockClear();
+
+      closeDrawer();
+      await flushMicrotasks();
+
+      expect(ctx.activeRoomUuid).toBe('drawer-room');
+      expect(vi.mocked(matrixRoomsOpen)).not.toHaveBeenCalled();
+    });
+
+    it('leaves the room alone when a view beneath closes', async () => {
+      await connected('page-room');
+      const closePage = ctx.registerRoomView('page-room');
+      ctx.registerRoomView('drawer-room');
+      await act(() => ctx.connect('drawer-room'));
+      vi.mocked(matrixRoomsOpen).mockClear();
+
+      closePage();
+      await flushMicrotasks();
+
+      expect(ctx.activeRoomUuid).toBe('drawer-room');
+      expect(vi.mocked(matrixRoomsOpen)).not.toHaveBeenCalled();
+    });
+
+    it('does not fight a view that replaces the one on top', async () => {
+      await connected('page-room');
+      ctx.registerRoomView('page-room');
+      const closeFirst = ctx.registerRoomView('first-room');
+      await act(() => ctx.connect('first-room'));
+      vi.mocked(matrixRoomsOpen).mockClear();
+
+      // As React does on a keyed remount: one commit, cleanup first.
+      await answer(() => {
+        closeFirst();
+        ctx.registerRoomView('second-room');
+        ctx.connect('second-room');
+      });
+
+      expect(ctx.activeRoomUuid).toBe('second-room');
+      expect(vi.mocked(matrixRoomsOpen)).toHaveBeenCalledTimes(1);
+    });
+
+    it('takes the latest pick when answers arrive out of order', async () => {
+      await connected('first-room');
+      const answers = deferOpens();
+
+      act(() => {
+        ctx.connect('older-pick');
+        ctx.connect('latest-pick');
+      });
+      await answer(() => answers['latest-pick']());
+      await answer(() => answers['older-pick']());
+
+      expect(ctx.activeRoomUuid).toBe('latest-pick');
+    });
+
+    it('ignores a failure of an older pick', async () => {
+      await connected('first-room');
+      const answers = deferOpens();
+
+      act(() => {
+        ctx.connect('older-pick');
+        ctx.connect('latest-pick');
+      });
+      await answer(() => answers['latest-pick']());
+      await answer(() => answers['older-pick']({ response: { status: 500 } }));
+
+      expect(ctx.activeRoomUuid).toBe('latest-pick');
+      expect(ctx.error).toBeNull();
+    });
+
+    it('drops the request of a view that closed before its answer', async () => {
+      await connected('page-room');
+      ctx.registerRoomView('page-room');
+      const closeDrawer = ctx.registerRoomView('drawer-room');
+      const answers = deferOpens();
+
+      act(() => {
+        ctx.connect('drawer-room');
+      });
+      closeDrawer();
+      await flushMicrotasks();
+      await answer(() => answers['page-room']());
+      await answer(() => answers['drawer-room']());
+
+      expect(ctx.activeRoomUuid).toBe('page-room');
+    });
+
+    it('reopens a pick still unanswered when the session restarts', async () => {
+      await connected('first-room');
+      const answers = deferOpens();
+      act(() => {
+        ctx.connect('picked-room');
+      });
+      vi.mocked(matrixRoomsOpen).mockImplementation(
+        ({ path }: any) => Promise.resolve(opened(path.uuid)) as any,
+      );
+
+      await signOut();
+      await answer(() => answers['picked-room']());
+      await act(() => h.client.handlers.sync('PREPARED'));
+
+      await waitFor(() => expect(ctx.activeRoomUuid).toBe('picked-room'));
+    });
+
+    it('gives the newest view its room once connected', async () => {
+      renderProvider();
+      act(() => {
+        ctx.connect('bootstrap-uuid', { activate: false });
+      });
+      ctx.registerRoomView('page-room');
+      ctx.registerRoomView('drawer-room');
+      act(() => {
+        ctx.connect('drawer-room');
+        // The page's late deep link, which runs as the client connects.
+        ctx.connect('page-room');
+      });
+      await waitFor(() => expect(h.client.handlers.sync).toBeDefined());
+
+      await act(() => h.client.handlers.sync('PREPARED'));
+
+      await waitFor(() => expect(ctx.activeRoomUuid).toBe('drawer-room'));
+    });
+
+    it('marks only the refused room as denied', async () => {
+      await connected('page-room');
+      vi.mocked(matrixRoomsOpen).mockRejectedValueOnce({
+        detail: 'You are not a member of this room.',
+        response: { status: 403 },
+      });
+
+      await act(() => ctx.connect('other-room'));
+      expect(ctx.deniedRoomUuids).toEqual(new Set(['other-room']));
+
+      await act(() => ctx.connect('page-room'));
+      expect(ctx.deniedRoomUuids).toEqual(new Set(['other-room']));
+    });
+
+    it('keeps every refused room denied', async () => {
+      await connected('page-room');
+      const refusal = {
+        detail: 'You are not a member of this room.',
+        response: { status: 403 },
+      };
+      vi.mocked(matrixRoomsOpen)
+        .mockRejectedValueOnce(refusal)
+        .mockRejectedValueOnce(refusal);
+
+      await act(() => ctx.connect('first-room'));
+      await act(() => ctx.connect('second-room'));
+
+      expect(ctx.deniedRoomUuids).toEqual(
+        new Set(['first-room', 'second-room']),
+      );
+    });
+
+    it('restarts on the newest view, not on a room it was refused', async () => {
+      await connected('page-room');
+      ctx.registerRoomView('page-room');
+      vi.mocked(matrixRoomsOpen).mockRejectedValueOnce({
+        detail: 'You are not a member of this room.',
+        response: { status: 403 },
+      });
+      await act(() => ctx.connect('refused-room'));
+      vi.mocked(matrixRoomsOpen).mockClear();
+
+      await signOut();
+
+      expect(vi.mocked(matrixRoomsOpen)).toHaveBeenCalledWith({
+        path: { uuid: 'page-room' },
+      });
+      expect(vi.mocked(matrixRoomsOpen)).not.toHaveBeenCalledWith({
+        path: { uuid: 'refused-room' },
+      });
+    });
+
+    it('forgets a failure once that room opens', async () => {
+      await connected('first-room');
+      let fail: (reason: unknown) => void;
+      let succeed: (value: unknown) => void;
+      vi.mocked(matrixRoomsOpen)
+        .mockImplementationOnce(
+          () => new Promise((_, reject) => (fail = reject)) as any,
+        )
+        .mockImplementationOnce(
+          () => new Promise((resolve) => (succeed = resolve)) as any,
+        );
+      act(() => {
+        ctx.connect('flaky-room');
+        ctx.connect('flaky-room');
+      });
+
+      await answer(() => fail({ response: { status: 500 } }));
+      expect(ctx.failedRoomUuid).toBe('flaky-room');
+      await answer(() => succeed(opened('flaky-room')));
+
+      expect(ctx.activeRoomUuid).toBe('flaky-room');
+      expect(ctx.failedRoomUuid).toBeNull();
+    });
+
+    it('clears the denial once that room opens', async () => {
+      await connected('page-room');
+      vi.mocked(matrixRoomsOpen).mockRejectedValueOnce({
+        detail: 'You are not a member of this room.',
+        response: { status: 403 },
+      });
+      await act(() => ctx.connect('other-room'));
+
+      await act(() => ctx.connect('other-room'));
+
+      expect(ctx.deniedRoomUuids.size).toBe(0);
+    });
+
+    it('reports a refused switch and keeps the active room', async () => {
+      await connected('first-room');
+      vi.mocked(matrixRoomsOpen).mockRejectedValueOnce({
+        response: { status: 500 },
+      });
+
+      await act(() => ctx.connect('refused-room'));
+
+      expect(ctx.activeRoomUuid).toBe('first-room');
+      expect(ctx.error).toBeTruthy();
+      expect(ctx.failedRoomUuid).toBe('refused-room');
+    });
+
+    it('clears the error as soon as the switch is retried', async () => {
+      await connected('first-room');
+      vi.mocked(matrixRoomsOpen).mockRejectedValueOnce({
+        response: { status: 500 },
+      });
+      await act(() => ctx.connect('refused-room'));
+      const answers = deferOpens();
+
+      act(() => {
+        ctx.connect('refused-room');
+      });
+
+      expect(ctx.error).toBeNull();
+      expect(ctx.failedRoomUuid).toBeNull();
+      await answer(() => answers['refused-room']());
+      expect(ctx.activeRoomUuid).toBe('refused-room');
+    });
   });
 
   describe('a room asked for while the client connects', () => {
