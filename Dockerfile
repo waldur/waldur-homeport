@@ -1,5 +1,11 @@
 ARG DOCKER_REGISTRY=docker.io/
 
+# Node is pinned rather than following the `lts` tag: the build needs Corepack
+# for the Yarn version in package.json, and Node stopped bundling it in v25. When
+# `lts` reached Node 26 this build failed with "corepack: not found" on every
+# branch. Moving past 24 means installing Corepack first (npm install -g corepack).
+ARG NODE_IMAGE_TAG=24-alpine
+
 # Extracts just the workspace manifests (each package.json under packages/
 # and apps/) into their original relative paths, discarding everything
 # else. `yarn install --immutable` only needs these to resolve
@@ -10,7 +16,7 @@ ARG DOCKER_REGISTRY=docker.io/
 # Dockerfile changes, unlike the hand-maintained COPY list this replaced
 # (see git history — that list broke CI the first time a package's
 # package.json was forgotten here).
-FROM ${DOCKER_REGISTRY}node:lts-alpine AS manifests
+FROM ${DOCKER_REGISTRY}node:${NODE_IMAGE_TAG} AS manifests
 WORKDIR /src
 COPY packages ./packages
 COPY apps ./apps
@@ -18,7 +24,7 @@ RUN find packages apps -name package.json -exec sh -c \
       'mkdir -p "/manifests/$(dirname "$1")" && cp "$1" "/manifests/$1"' _ {} \;
 
 # build environment
-FROM ${DOCKER_REGISTRY}node:lts-alpine AS build
+FROM ${DOCKER_REGISTRY}node:${NODE_IMAGE_TAG} AS build
 WORKDIR /app
 ENV PATH=/app/node_modules/.bin:$PATH
 COPY package.json yarn.lock .yarnrc.yml /app/
