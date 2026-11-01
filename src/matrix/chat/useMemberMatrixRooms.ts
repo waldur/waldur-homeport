@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { matrixRoomsList } from 'waldur-js-client';
 
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { OWN_ERROR_STATE } from '@/core/queryRetry';
 import { isMatrixChatEnabled } from '@/matrix/utils';
 import { useUser } from '@/workspace/hooks';
 
@@ -16,7 +18,14 @@ export function useMemberMatrixRooms() {
     // view, the chat list is personal — staff/support must not see rooms they
     // are not a member of.
     queryFn: () =>
-      matrixRoomsList({ query: { member: true } as any }).then((r) => r.data),
+      getAllPages((page) =>
+        matrixRoomsList({
+          query: { member: true, page, page_size: MAX_PAGE_SIZE },
+        }),
+      ),
+    // This list loads behind every page, so losing it must not take the user
+    // to an error page: the chat surfaces show the failure themselves.
+    meta: OWN_ERROR_STATE,
     // Gate on an authenticated user. Without it an observer keeps the query
     // enabled during the OIDC login transition, so an anonymous /matrix/rooms/
     // request fires; its 401 lands after the exchanged token is stored and the

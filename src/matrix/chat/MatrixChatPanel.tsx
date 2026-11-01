@@ -49,7 +49,9 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
   hideRoomList,
 }) => {
   const { connect, connectionState, roomAccessDenied } = useMatrixClient();
-  const { rooms, totalUnread, isLoading } = useAllMatrixRooms();
+  const { rooms, totalUnread, isLoading, error } = useAllMatrixRooms({
+    resolveSenders: true,
+  });
 
   // The conversation-list sidebar shows only in the expanded ("full screen")
   // drawer or the standalone Communication page — matching the AI history
@@ -124,12 +126,15 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
   // A remembered room may have been left or deleted since the last session;
   // drop it once rooms have loaded so the dock falls back cleanly.
   useEffect(() => {
-    if (isLoading || !selectedRoomUuid) return;
+    if (isLoading || error || !selectedRoomUuid) return;
+    // A room the page asked for is not a preference to forget: if the user
+    // cannot open it, the connection says so.
+    if (selectedRoomUuid === defaultRoomUuid) return;
     if (!activeRooms.some((r) => r.uuid === selectedRoomUuid)) {
       setSelectedRoomUuid(null);
       setChatDrawerPreference('lastRoomUuid', null);
     }
-  }, [isLoading, activeRooms, selectedRoomUuid]);
+  }, [isLoading, error, activeRooms, selectedRoomUuid, defaultRoomUuid]);
 
   const changeCompactView = useCallback((view: 'list' | 'detail') => {
     setCompactView(view);

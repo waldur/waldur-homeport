@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import { STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
@@ -148,7 +149,13 @@ export function readRoomLiveState(
   };
 }
 
-export function useAllMatrixRooms() {
+/**
+ * The user's rooms with their live state. `resolveSenders` also fetches the
+ * full roster of every large room, one request per room, so it is left to the
+ * conversation list: this hook runs on every page for the call host, whether
+ * or not chat is ever opened.
+ */
+export function useAllMatrixRooms({ resolveSenders = false } = {}) {
   const { client, connectionState } = useMatrixClient();
   const currentUser = useUser();
   const [liveMap, setLiveMap] = useState<RoomLiveMap>({});
@@ -173,12 +180,14 @@ export function useAllMatrixRooms() {
 
   const bigRoomUuids = useMemo(
     () =>
-      (query.data ?? [])
-        .filter((r) => r.members_count > EMBEDDED_MEMBER_CAP)
-        .map((r) => r.uuid),
-    [query.data],
+      resolveSenders
+        ? (query.data ?? [])
+            .filter((r) => r.members_count > EMBEDDED_MEMBER_CAP)
+            .map((r) => r.uuid)
+        : [],
+    [query.data, resolveSenders],
   );
-  const fetchedNames = useAllRoomMemberNames(bigRoomUuids);
+  const fetchedNames = useAllRoomMemberNames(bigRoomUuids, STALE_TIME);
 
   const memberNames = useMemo(() => {
     if (fetchedNames.size === 0) return embeddedNames;

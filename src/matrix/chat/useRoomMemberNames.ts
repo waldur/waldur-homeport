@@ -33,10 +33,11 @@ function buildMemberImageMap(
 }
 
 /** Shared per-room member queries; deduped by React Query across all consumers. */
-function useRoomMembersData(roomUuids: string[]) {
+function useRoomMembersData(roomUuids: string[], staleTime?: number) {
   return useQueries({
     queries: roomUuids.map((uuid) => ({
       queryKey: ['matrixRoomMembers', uuid],
+      staleTime,
       queryFn: () =>
         matrixRoomsMembersList({
           path: { uuid },
@@ -56,11 +57,15 @@ function useRoomMembersData(roomUuids: string[]) {
  * timestamp, so the memo only invalidates when actual data lands. The ref
  * lets the memo read the latest results without listing `results` (a fresh
  * array every render) in its deps, which would defeat the memoisation.
+ *
+ * `staleTime` is for callers that span many rooms, where refetching each one
+ * on every focus would be a burst of requests.
  */
 export function useAllRoomMemberNames(
   roomUuids: string[],
+  staleTime?: number,
 ): Map<string, string> {
-  const results = useRoomMembersData(roomUuids);
+  const results = useRoomMembersData(roomUuids, staleTime);
   const updatedAtKey = results.map((r) => r.dataUpdatedAt ?? 0).join('|');
   const resultsRef = useRef(results);
   resultsRef.current = results;
