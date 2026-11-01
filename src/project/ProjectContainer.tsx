@@ -29,7 +29,12 @@ const PageHero = ({ project }) => {
       {canEdit && (
         <TabNav
           aria-label={translate('Project views')}
-          activeKey={state.name}
+          // Every project page but Edit is one of View's tabs.
+          activeKey={
+            state.name === 'project-manage'
+              ? 'project-manage'
+              : 'project.dashboard'
+          }
           listClassName="mb-3"
           items={[
             {

@@ -100,7 +100,9 @@ import { TabNav } from 'waldur-ui';
 import { Link } from '@/core/Link';
 
 <TabNav
-  activeKey={state.name}
+  activeKey={
+    state.name === 'project-manage' ? 'project-manage' : 'project.dashboard'
+  }
   listClassName="mb-4"
   items={[
     {
@@ -118,6 +120,8 @@ import { Link } from '@/core/Link';
   ]}
 />;
 ```
+
+`activeKey={state.name}` is enough only when every page under the bar is the state of one of its tabs. Here View stands for every project page but Edit, so the key comes from the one state that isn't View's: with `state.name`, neither tab would be active on Resources or Audit logs.
 
 | Item field          | Notes                                                                                                                                                    |
 | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
