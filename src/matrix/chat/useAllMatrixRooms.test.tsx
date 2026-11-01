@@ -2,10 +2,17 @@ import { waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { matrixRoomsList } from 'waldur-js-client';
 
+import { STALE_TIME } from '@/core/constants';
 import { renderHookWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { readRoomLiveState, useAllMatrixRooms } from './useAllMatrixRooms';
+
+const h = vi.hoisted(() => ({
+  useAllRoomMemberNames: vi.fn<(...args: unknown[]) => Map<string, string>>(
+    () => new Map(),
+  ),
+}));
 
 // waldur-js-client is auto-mocked globally (test/mocks/modal.js); just give the
 // shared list call a resolved value here.
@@ -17,7 +24,7 @@ vi.mock('./call/useAllRoomCallStates', () => ({
   useAllRoomCallStates: () => new Map(),
 }));
 vi.mock('./useRoomMemberNames', () => ({
-  useAllRoomMemberNames: () => new Map(),
+  useAllRoomMemberNames: h.useAllRoomMemberNames,
 }));
 
 describe('useAllMatrixRooms — authentication gate', () => {
@@ -49,6 +56,43 @@ describe('useAllMatrixRooms — authentication gate', () => {
     renderHookWithProviders(() => useAllMatrixRooms());
 
     await waitFor(() => expect(matrixRoomsList).toHaveBeenCalled());
+  });
+});
+
+describe('useAllMatrixRooms — rosters of large rooms', () => {
+  beforeEach(() => {
+    vi.mocked(useUser).mockReturnValue({ uuid: 'user-1' } as any);
+    h.useAllRoomMemberNames.mockClear();
+    vi.mocked(matrixRoomsList).mockResolvedValue({
+      data: [
+        { uuid: 'large', members_count: 11 },
+        { uuid: 'small', members_count: 10 },
+      ],
+      response: { headers: new Headers() },
+    } as any);
+  });
+
+  afterEach(() => {
+    vi.mocked(matrixRoomsList).mockReset();
+  });
+
+  it('fetches none by default, as the call host runs on every page', async () => {
+    const { result } = renderHookWithProviders(() => useAllMatrixRooms());
+
+    await waitFor(() => expect(result.current.rooms).toHaveLength(2));
+    expect(h.useAllRoomMemberNames).toHaveBeenLastCalledWith([], STALE_TIME);
+  });
+
+  it('fetches the rooms beyond the embedded members when asked to', async () => {
+    const { result } = renderHookWithProviders(() =>
+      useAllMatrixRooms({ resolveSenders: true }),
+    );
+
+    await waitFor(() => expect(result.current.rooms).toHaveLength(2));
+    expect(h.useAllRoomMemberNames).toHaveBeenLastCalledWith(
+      ['large'],
+      STALE_TIME,
+    );
   });
 });
 

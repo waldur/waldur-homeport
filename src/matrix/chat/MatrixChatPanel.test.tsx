@@ -11,6 +11,8 @@ const h = vi.hoisted(() => ({
   rooms: {} as any,
   call: {} as any,
   drawerExpanded: false,
+  lastRoomUuid: null as string | null,
+  roomOptions: {} as object,
 }));
 
 vi.mock('@/drawer/useDrawerExpanded', () => ({
@@ -22,7 +24,10 @@ vi.mock('./useMatrixClient', () => ({
 }));
 
 vi.mock('./useAllMatrixRooms', () => ({
-  useAllMatrixRooms: () => h.rooms,
+  useAllMatrixRooms: (options: object) => {
+    h.roomOptions = options;
+    return h.rooms;
+  },
 }));
 
 vi.mock('./call/useMatrixCall', () => ({
@@ -49,7 +54,11 @@ vi.mock('./MatrixChatDrawer', () => {
 
 vi.mock('@/chat/chatDrawerPreferences', () => ({
   getChatDrawerPreference: (k: string) =>
-    k === 'matrixCompactView' ? 'detail' : null,
+    k === 'matrixCompactView'
+      ? 'detail'
+      : k === 'lastRoomUuid'
+        ? h.lastRoomUuid
+        : null,
   setChatDrawerPreference: vi.fn(),
   useChatDrawerPreference: () => [false, vi.fn()],
 }));
@@ -70,6 +79,7 @@ beforeEach(() => {
   };
   h.rooms = { rooms: ROOMS, totalUnread: 0, isLoading: false };
   h.drawerExpanded = false;
+  h.lastRoomUuid = null;
 });
 
 describe('MatrixChatPanel — deep-link does not fight manual navigation', () => {
@@ -145,6 +155,35 @@ describe('MatrixChatPanel — deep-link does not fight manual navigation', () =>
     rerender(<MatrixChatPanel defaultRoomUuid="room-1" />);
 
     expect(h.matrixClient.connect).toHaveBeenCalledWith('room-1');
+  });
+});
+
+describe('MatrixChatPanel — a room missing from the list', () => {
+  const renderShowingRoom = (props: object, rooms: object) => {
+    h.rooms = { rooms: [], totalUnread: 0, isLoading: false, ...rooms };
+    render(<MatrixChatPanel {...props} />);
+  };
+
+  it('asks for the sender names its previews show', () => {
+    renderShowingRoom({}, {});
+    expect(h.roomOptions).toEqual({ resolveSenders: true });
+  });
+
+  it('keeps a deep-linked room the list does not hold', () => {
+    renderShowingRoom({ defaultRoomUuid: 'room-1' }, {});
+    expect(screen.getByTestId('chat-drawer')).toBeInTheDocument();
+  });
+
+  it('keeps a remembered room when the list failed to load', () => {
+    h.lastRoomUuid = 'room-1';
+    renderShowingRoom({}, { error: new Error('Server error') });
+    expect(screen.getByTestId('chat-drawer')).toBeInTheDocument();
+  });
+
+  it('drops a remembered room the loaded list does not hold', () => {
+    h.lastRoomUuid = 'room-1';
+    renderShowingRoom({}, {});
+    expect(screen.queryByTestId('chat-drawer')).not.toBeInTheDocument();
   });
 });
 
