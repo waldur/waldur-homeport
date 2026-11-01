@@ -4,13 +4,16 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useCallAvailability } from './useCallAvailability';
 
 const h = vi.hoisted(() => ({
+  canEncrypt: false,
   stateEvent: false,
   cryptoRemembers: false,
   client: null as any,
   activeRoomUuid: 'room-1' as string | null,
 }));
 
-vi.mock('./callEncryption', () => ({ canEncryptCallMedia: () => false }));
+vi.mock('./callEncryption', () => ({
+  canEncryptCallMedia: () => h.canEncrypt,
+}));
 vi.mock('./useMatrixCall', () => ({
   useMatrixCall: () => ({
     rtcAvailable: true,
@@ -30,6 +33,7 @@ const ENCRYPTED_REASON = "This browser can't take part in encrypted calls.";
 
 describe('useCallAvailability', () => {
   beforeEach(() => {
+    h.canEncrypt = false;
     h.stateEvent = false;
     h.cryptoRemembers = false;
     h.activeRoomUuid = 'room-1';
@@ -54,6 +58,13 @@ describe('useCallAvailability', () => {
     const { result } = renderHook(() => useCallAvailability());
     await waitFor(() => expect(result.current.reason).toBe(ENCRYPTED_REASON));
     expect(result.current.canStart).toBe(false);
+  });
+
+  it('offers no start in a room that is not the active one', () => {
+    h.canEncrypt = true;
+    const { result } = renderHook(() => useCallAvailability('other-room'));
+    expect(result.current.canStart).toBe(false);
+    expect(result.current.reason).toBe('The conversation is not open yet.');
   });
 
   it('allows a call in a room that is not encrypted', async () => {

@@ -41,7 +41,7 @@ const CALL_COMMAND = 'call';
  *   hide it, as it doesn't hide the header action.
  */
 export function useComposerCommands() {
-  const { client, connectionState, activeRoomUuid, roomAccessDenied, userId } =
+  const { client, connectionState, activeRoomUuid, deniedRoomUuids, userId } =
     useMatrixClient();
   const { callMembers, callRoomUuid, startCall } = useMatrixCall();
   const call = useCallAvailability();
@@ -50,7 +50,7 @@ export function useComposerCommands() {
     isMatrixChatEnabled() &&
     connectionState === 'connected' &&
     !!activeRoomUuid &&
-    !roomAccessDenied;
+    !deniedRoomUuids.has(activeRoomUuid);
 
   const { data: botCommands } = useQuery({
     // Per user: a switch of user (impersonation) must not reuse the list.

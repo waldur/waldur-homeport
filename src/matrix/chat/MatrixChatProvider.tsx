@@ -153,6 +153,12 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
   const [activeRoomUuid, setActiveRoomUuid] = useState<string | null>(null);
   // The room last asked for while the client was connecting.
   const pendingRoomUuidRef = useRef<string | null>(null);
+  // The room last asked for at any time. Answers to a room switch can arrive
+  // out of order, and only this room's may take effect.
+  const requestedRoomUuidRef = useRef<string | null>(null);
+  // The chat views on screen, oldest first. They share one active room, which
+  // belongs to the newest.
+  const roomViewsRef = useRef<{ roomUuid: string }[]>([]);
   // Read by the sign-out handler, which outlives the render that set it up.
   const activeRoomUuidRef = useRef<string | null>(null);
   useEffect(() => {
@@ -161,7 +167,10 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
   const lastSignOutReconnectRef = useRef(0);
   const [userId, setUserId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [roomAccessDenied, setRoomAccessDenied] = useState(false);
+  const [deniedRoomUuids, setDeniedRoomUuids] = useState<ReadonlySet<string>>(
+    new Set(),
+  );
+  const [failedRoomUuid, setFailedRoomUuid] = useState<string | null>(null);
   const [cryptoState, setCryptoState] = useState<CryptoState>('off');
   // The client's secret-storage key, and its encryption setup while in flight.
   const keyHolderRef = useRef<SecretStorageKeyHolder | null>(null);
@@ -233,12 +242,14 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
   const disconnect = useCallback(() => {
     releaseClient();
     pendingRoomUuidRef.current = null;
+    requestedRoomUuidRef.current = null;
     setConnectionState('disconnected');
     setActiveRoomId(null);
     setActiveRoomUuid(null);
     setUserId(null);
     setError(null);
-    setRoomAccessDenied(false);
+    setDeniedRoomUuids(new Set());
+    setFailedRoomUuid(null);
     lastSignOutReconnectRef.current = 0;
   }, [releaseClient]);
 
@@ -249,6 +260,7 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
     setConnectionState('ended');
     setActiveRoomId(null);
     setError(null);
+    setFailedRoomUuid(null);
   }, [releaseClient]);
 
   // Tear down on Waldur logout / user switch. AuthService.clearAuthCache
@@ -275,6 +287,22 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
     }
   }, [user?.uuid, disconnect]);
 
+  // A refusal stands until that room opens. Held per room, as with one slot a
+  // view's refusal would end another view's, which would then ask again, and
+  // the two would go on refusing each other. Opening another room, as a view
+  // beneath gets its room back, must not make a refused view ask again either.
+  const addDenied = useCallback((roomUuid: string) => {
+    setDeniedRoomUuids((denied) => new Set(denied).add(roomUuid));
+  }, []);
+  const clearDenied = useCallback((roomUuid: string) => {
+    setDeniedRoomUuids((denied) => {
+      if (!denied.has(roomUuid)) return denied;
+      const remaining = new Set(denied);
+      remaining.delete(roomUuid);
+      return remaining;
+    });
+  }, []);
+
   const connect = useCallback(
     async (roomUuid: string, options?: { activate?: boolean }) => {
       // `activate: false` bootstraps the synced client for app-wide unread
@@ -283,6 +311,7 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
       // must NOT set the active room — otherwise opening the drawer later
       // would mark a room the user never selected as read.
       const activate = options?.activate !== false;
+      if (activate) requestedRoomUuidRef.current = roomUuid;
 
       // A client already exists (still doing its initial sync, or fully
       // connected). Never create a second one — both the global chat drawer
@@ -294,21 +323,27 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
         if (!activate) return;
         if (connectionStateRef.current === 'connected') {
           // Lightweight room switch on the live client.
+          setError(null);
+          setFailedRoomUuid(null);
           try {
             const roomId = await openRoom(roomUuid);
+            if (requestedRoomUuidRef.current !== roomUuid) return;
             if (roomId) {
               // Flip both together so consumers never see the id and uuid
               // disagree mid-switch.
               setActiveRoomId(roomId);
               setActiveRoomUuid(roomUuid);
-              setRoomAccessDenied(false);
+              clearDenied(roomUuid);
+              setFailedRoomUuid(null);
               setError(null);
             } else {
               // Room resolved but the backend withheld conversation access:
               // the caller can see/manage the room but is not a member.
-              setRoomAccessDenied(true);
+              addDenied(roomUuid);
             }
           } catch (e) {
+            if (requestedRoomUuidRef.current !== roomUuid) return;
+            setFailedRoomUuid(roomUuid);
             setError(
               getMatrixErrorMessage(
                 e,
@@ -337,12 +372,15 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
 
       setConnectionState('connecting');
       setError(null);
+      setFailedRoomUuid(null);
 
       // Replace the client with one on a new Waldur session, keeping the room
-      // the user had open.
+      // on screen, or else the room the user had open or was opening.
       const restartSession = (fallbackRoomUuid: string) => {
         const openRoomUuid =
-          pendingRoomUuidRef.current ?? activeRoomUuidRef.current;
+          roomViewsRef.current.at(-1)?.roomUuid ??
+          requestedRoomUuidRef.current ??
+          activeRoomUuidRef.current;
         releaseClient();
         setActiveRoomId(null);
         void connect(openRoomUuid ?? fallbackRoomUuid, {
@@ -442,12 +480,12 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
           if (roomId) {
             setActiveRoomId(roomId);
             setActiveRoomUuid(roomUuid);
-            setRoomAccessDenied(false);
+            clearDenied(roomUuid);
           } else {
             // Room resolved but no conversation access — the user can
             // see/manage the room but is not a member of the chat (e.g. staff,
             // non-member owner). The panel surfaces a "not a member" state.
-            setRoomAccessDenied(true);
+            addDenied(roomUuid);
           }
         }
 
@@ -628,15 +666,41 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
     // releaseClient never change, so this callback identity is stable across
     // state transitions. Consumers can safely treat `connect` as
     // referentially stable.
-    [endSession, releaseClient],
+    [addDenied, clearDenied, endSession, releaseClient],
   );
 
   useEffect(() => {
     if (connectionState !== 'connected') return;
-    const roomUuid = pendingRoomUuidRef.current;
+    const roomUuid =
+      roomViewsRef.current.at(-1)?.roomUuid ?? pendingRoomUuidRef.current;
     pendingRoomUuidRef.current = null;
     if (roomUuid && roomUuid !== activeRoomUuidRef.current) connect(roomUuid);
   }, [connectionState, connect]);
+
+  const registerRoomView = useCallback(
+    (roomUuid: string) => {
+      const view = { roomUuid };
+      const views = roomViewsRef.current;
+      views.push(view);
+      return () => {
+        const wasNewest = views.at(-1) === view;
+        views.splice(views.indexOf(view), 1);
+        if (!wasNewest) return;
+        // Deferred, as a view replacing this one in the same commit (a room
+        // picked in the list) registers after this cleanup runs.
+        queueMicrotask(() => {
+          const newest = views.at(-1);
+          if (!newest || newest.roomUuid === requestedRoomUuidRef.current) {
+            return;
+          }
+          if (clientRef.current || connectingRef.current) {
+            connect(newest.roomUuid);
+          }
+        });
+      };
+    },
+    [connect],
+  );
 
   // Replace an identity Waldur can't unlock, on the user's explicit request.
   const resetCryptoIdentity = useCallback(async () => {
@@ -692,8 +756,10 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
       userId,
       connect,
       disconnect,
+      registerRoomView,
       error,
-      roomAccessDenied,
+      deniedRoomUuids,
+      failedRoomUuid,
       cryptoState,
       resetCryptoIdentity,
       importCryptoRecoveryKey,
@@ -705,8 +771,10 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
       userId,
       connect,
       disconnect,
+      registerRoomView,
       error,
-      roomAccessDenied,
+      deniedRoomUuids,
+      failedRoomUuid,
       cryptoState,
       resetCryptoIdentity,
       importCryptoRecoveryKey,

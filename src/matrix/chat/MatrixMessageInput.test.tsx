@@ -294,6 +294,36 @@ describe('MatrixMessageInput replies', () => {
   });
 });
 
+describe('MatrixMessageInput voice message', () => {
+  const renderRecording = (roomUuid: string) => {
+    const onSendVoice = vi.fn();
+    render(
+      <MatrixMessageInput
+        roomUuid={roomUuid}
+        uploadFile={vi.fn()}
+        uploading={false}
+        pendingFiles={[]}
+        addFiles={vi.fn()}
+        removePending={vi.fn()}
+        setPending={vi.fn()}
+        clearPending={vi.fn()}
+        recording
+        onSendVoice={onSendVoice}
+      />,
+      { wrapper },
+    );
+    return screen.getByTitle('Send voice message');
+  };
+
+  it('can be sent in the active room', () => {
+    expect(renderRecording('uuid-1')).toBeEnabled();
+  });
+
+  it('cannot be sent while another room is the active one', () => {
+    expect(renderRecording('uuid-2')).toBeDisabled();
+  });
+});
+
 describe('MatrixMessageInput mention list', () => {
   it('scrolls the active member into view as the arrows move', async () => {
     const scrollIntoView = vi.fn();

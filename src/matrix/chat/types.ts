@@ -97,14 +97,25 @@ export interface MatrixChatContextValue {
     options?: { activate?: boolean },
   ) => Promise<void>;
   disconnect: () => void;
+  /**
+   * Announce a chat view showing a room, returning the call that removes it.
+   * When the newest view goes, the one beneath gets its room back, so a page
+   * under a closed drawer is not left showing the drawer's room.
+   */
+  registerRoomView: (roomUuid: string) => () => void;
   error: string | null;
   /**
-   * True when the open endpoint refused the most recently requested room
-   * (403/404): the user can see or manage the room but is not a member of the
-   * conversation (e.g. staff or a non-member owner). Lets the UI show a clear
-   * "not a member" state instead of an empty placeholder.
+   * The rooms the open endpoint refused (403/404): the user can see or manage
+   * them but is not a member of the conversation (e.g. staff or a non-member
+   * owner). Lets the UI show a clear "not a member" state on such a room
+   * instead of an empty placeholder. A room leaves the set once it opens.
    */
-  roomAccessDenied: boolean;
+  deniedRoomUuids: ReadonlySet<string>;
+  /**
+   * The room a switch to it failed for any other reason, whose view offers a
+   * retry with `error`.
+   */
+  failedRoomUuid: string | null;
   /** End-to-end encryption of the current client; see `./crypto`. */
   cryptoState: CryptoState;
   /**

@@ -13,6 +13,8 @@ interface CallAvailabilityInput {
   roomUuid: string | null;
   /** The room is end-to-end encrypted, so its calls are too. */
   roomEncrypted: boolean;
+  /** The room is the active one: a call always starts in the active room. */
+  roomOpen?: boolean;
 }
 
 export interface CallAvailability {
@@ -37,6 +39,7 @@ export function getCallAvailability({
   callRoomUuid,
   roomUuid,
   roomEncrypted,
+  roomOpen = true,
 }: CallAvailabilityInput): CallAvailability {
   const inCall = callState === 'connecting' || callState === 'connected';
   const inThisRoomsCall = inCall && !!roomUuid && callRoomUuid === roomUuid;
@@ -51,6 +54,8 @@ export function getCallAvailability({
     );
   } else if (roomEncrypted && !canEncryptCallMedia()) {
     reason = translate("This browser can't take part in encrypted calls.");
+  } else if (!roomOpen && !inThisRoomsCall) {
+    reason = translate('The conversation is not open yet.');
   } else if (busy) {
     reason = translate('The call is connecting.');
   } else if (inThisRoomsCall) {

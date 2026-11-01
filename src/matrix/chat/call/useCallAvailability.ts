@@ -53,5 +53,6 @@ export function useCallAvailability(
     callRoomUuid,
     roomUuid: targetUuid,
     roomEncrypted,
+    roomOpen: targetUuid === activeRoomUuid,
   });
 }

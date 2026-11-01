@@ -48,7 +48,7 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
   forceDock,
   hideRoomList,
 }) => {
-  const { connect, connectionState, roomAccessDenied } = useMatrixClient();
+  const { connect, connectionState, deniedRoomUuids } = useMatrixClient();
   const { rooms, totalUnread, isLoading, error } = useAllMatrixRooms({
     resolveSenders: true,
   });
@@ -217,7 +217,7 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
   const renderDetailContent = () => {
     if (!detailRoomUuid)
       return hideRoomList ? accessDeniedContent : noRoomSelectedContent;
-    if (roomAccessDenied) return accessDeniedContent;
+    if (deniedRoomUuids.has(detailRoomUuid)) return accessDeniedContent;
     return (
       <>
         <MatrixEncryptionNotice />

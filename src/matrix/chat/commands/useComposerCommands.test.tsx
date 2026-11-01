@@ -11,7 +11,7 @@ const h = vi.hoisted(() => ({
   client: {
     connectionState: 'connected',
     activeRoomUuid: 'room-1',
-    roomAccessDenied: false,
+    deniedRoomUuids: new Set(),
     userId: '@me:s',
   } as any,
   call: {
@@ -58,7 +58,7 @@ describe('useComposerCommands', () => {
     h.client = {
       connectionState: 'connected',
       activeRoomUuid: 'room-1',
-      roomAccessDenied: false,
+      deniedRoomUuids: new Set(),
       userId: '@me:s',
       client: { getDeviceId: () => 'MYDEVICE' },
     };
@@ -186,7 +186,10 @@ describe('useComposerCommands', () => {
     ['chat is disabled', () => (h.chatEnabled = false)],
     ['the client is not connected', () => (h.client.connectionState = 'error')],
     ['no room is open', () => (h.client.activeRoomUuid = null)],
-    ['the user is not a member', () => (h.client.roomAccessDenied = true)],
+    [
+      'the user is not a member',
+      () => (h.client.deniedRoomUuids = new Set(['room-1'])),
+    ],
   ])('offers nothing when %s', async (_name, gate) => {
     gate();
     const { result } = renderHookWithProviders(() => useComposerCommands());
