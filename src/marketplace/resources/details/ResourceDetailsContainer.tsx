@@ -134,7 +134,10 @@ export const ResourceDetailsContainer: FunctionComponent<
     isRefetching: isRefetchingData,
     error: errorData,
   } = useQuery({
-    queryKey: ['resource-details-page', resource?.uuid, view],
+    // A new resource gets its scope while the order is processed. The key is
+    // what loads the page data from a resource that has it: a refetch started
+    // alongside the resource's own still closes over the one without.
+    queryKey: ['resource-details-page', resource?.uuid, view, resource?.scope],
     enabled: !belongsToOtherProvider,
     queryFn: () =>
       resource?.uuid
@@ -144,6 +147,10 @@ export const ResourceDetailsContainer: FunctionComponent<
         : null,
     refetchOnWindowFocus: false,
     staleTime: UI_STALE_TIME,
+    // The scope arrives on a background poll, so the page stays in view while
+    // it loads.
+    placeholderData: (previous, previousQuery) =>
+      previousQuery?.queryKey[1] === resource?.uuid ? previous : undefined,
   });
 
   const isLoading = useMemo(
@@ -176,6 +183,7 @@ export const ResourceDetailsContainer: FunctionComponent<
             query: {
               field: [
                 'state',
+                'scope',
                 'order_in_progress',
                 // Messaging fields are Order fields, not Resource fields,
                 // but the backend field filter also applies to the nested
@@ -193,11 +201,12 @@ export const ResourceDetailsContainer: FunctionComponent<
     enabled:
       !!resource && (!!resource.order_in_progress || resource.state !== 'OK'),
   });
-  // Check if resource state or order details changed
+  // Check if resource state, scope or order details changed
   useEffect(() => {
     if (!resourceState || !resource) return;
     if (
       resourceState.state !== resource.state ||
+      resourceState.scope !== resource.scope ||
       resourceState.order_in_progress?.state !==
         resource.order_in_progress?.state ||
       resourceState.order_in_progress?.provider_message !==
