@@ -128,9 +128,11 @@ const ColumnsPopover = ({
     () =>
       columnPositions.filter(
         (id) =>
-          (columnMap[id].keys && !query) ||
-          typeof columnMap[id].title !== 'string' ||
-          columnMap[id].title.toLowerCase().includes(query.toLowerCase()),
+          // A column kept for the export alone has nothing here to show or hide.
+          (columnMap[id].visible ?? true) &&
+          ((columnMap[id].keys && !query) ||
+            typeof columnMap[id].title !== 'string' ||
+            columnMap[id].title.toLowerCase().includes(query.toLowerCase())),
       ),
     [columnMap, query],
   );

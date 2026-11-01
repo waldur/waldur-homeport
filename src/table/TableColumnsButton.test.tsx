@@ -52,6 +52,22 @@ describe('TableColumnsButton', () => {
     ).toBeInTheDocument();
   });
 
+  it('leaves export-only columns out of the list', async () => {
+    const user = userEvent.setup();
+    renderComponent({
+      columns: [...testColumns, { id: 'uuid', title: 'UUID', visible: false }],
+      columnPositions: ['name', 'status', 'region', 'plan', 'uuid'],
+    });
+
+    await user.click(
+      screen.getByRole('button', { name: 'Toggle visible columns' }),
+    );
+
+    await screen.findByRole('list', { name: 'Columns' });
+    expect(screen.getByText('Region')).toBeInTheDocument();
+    expect(screen.queryByText('UUID')).not.toBeInTheDocument();
+  });
+
   it('opens popover dialog with accessible name and list of columns', async () => {
     const user = userEvent.setup();
     renderComponent();

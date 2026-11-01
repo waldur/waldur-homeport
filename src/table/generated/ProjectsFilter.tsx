@@ -1,10 +1,11 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { ProjectsListData } from 'waldur-js-client';
+import { ProjectsListData, User, usersList } from 'waldur-js-client';
 
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { BooleanFilter, SelectFilter } from '@/table';
+import { AsyncSelectFilter, BooleanFilter, SelectFilter } from '@/table';
 
 export const IsRemovedOptions: IsRemovedOption[] = [
   {
@@ -27,6 +28,23 @@ export interface IsRemovedOption {
 
 export const ProjectsFilter: FunctionComponent<{}> = () => (
   <>
+    <AsyncSelectFilter
+      title={translate('Project administrator')}
+      name="administrator"
+      getValueLabel={(value: User) =>
+        value?.full_name || value?.username || value?.email
+      }
+      loadOptions={createLoadOptions(usersList, 'full_name', {
+        o: ['full_name'],
+      })}
+      defaultOptions
+      getOptionValue={(option: User) => String(option.uuid || '')}
+      getOptionLabel={(option: User) =>
+        String(option.full_name || option.username || option.email || '')
+      }
+      isClearable={true}
+      placeholder={translate('Project administrator')}
+    />
     <BooleanFilter
       title={translate('Conceal finished projects')}
       name="conceal_finished_projects"
@@ -57,6 +75,7 @@ export const ProjectsFilter: FunctionComponent<{}> = () => (
 export const ProjectsFilterFormId = 'ProjectsFilter';
 
 export interface ProjectsFilterFormData {
+  administrator: User;
   conceal_finished_projects: boolean;
   include_terminated: boolean;
   is_removed: IsRemovedOption;
@@ -69,6 +88,9 @@ export const selectProjectsFilter = (
 ): ProjectsFilterQuery => {
   const filter: ProjectsFilterQuery = {} as any;
   if (values) {
+    if (values.administrator) {
+      filter.user_uuid_with_active_role = values.administrator.uuid;
+    }
     if (values.conceal_finished_projects) {
       filter.conceal_finished_projects = values.conceal_finished_projects;
     }
