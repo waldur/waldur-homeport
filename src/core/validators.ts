@@ -165,11 +165,18 @@ export const max = (length) => (value) =>
     : undefined;
 
 /**
+ * The length the backend sees: Python's len() counts code points, while
+ * String.length counts UTF-16 units and charges two for an emoji.
+ */
+export const countCharacters = (value: string | undefined) =>
+  value ? Array.from(value).length : 0;
+
+/**
  * Validates that a string value does not exceed the specified maximum length.
  * Alias for max() with clearer naming convention.
  */
 export const validateMaxLength = (maxLength: number) => (value: string) =>
-  value && value.length > maxLength
+  countCharacters(value) > maxLength
     ? translate('Must be {max} characters or less.', { max: maxLength })
     : undefined;
 

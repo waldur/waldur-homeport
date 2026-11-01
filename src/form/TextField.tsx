@@ -3,6 +3,8 @@ import { FieldRenderProps } from 'react-final-form';
 
 import { InputGroup, Textarea, TextareaProps } from 'waldur-ui';
 
+import { CharacterCount } from './CharacterCount';
+
 // ── Base (Pure UI) ──────────────────────────────────────
 
 interface BaseTextFieldProps extends Omit<TextareaProps, 'invalid'> {
@@ -36,12 +38,33 @@ export interface TextFieldProps extends Omit<
 > {
   input: FieldRenderProps<any>['input'];
   meta: FieldRenderProps<any>['meta'];
+  /** Shows `n / max` under the control. Unlike the native `maxLength`, it does
+   * not cut the text: pair it with a validator so an overlong value is
+   * refused in the open rather than truncated. */
+  maxCharacters?: number;
+  /** Shows the length alone, for a field with no limit. */
+  showCharacterCount?: boolean;
 }
 
-export const TextField: FC<TextFieldProps> = ({ input, meta, ...rest }) => (
-  <BaseTextField
-    isInvalid={meta.touched && !!meta.error}
-    {...rest}
-    {...input}
-  />
+export const TextField: FC<TextFieldProps> = ({
+  input,
+  meta,
+  maxCharacters,
+  showCharacterCount,
+  ...rest
+}) => (
+  <>
+    <BaseTextField
+      isInvalid={meta.touched && !!meta.error}
+      {...rest}
+      {...input}
+    />
+    {(maxCharacters !== undefined || showCharacterCount) && (
+      <CharacterCount
+        value={input.value}
+        max={maxCharacters}
+        pristine={meta.pristine}
+      />
+    )}
+  </>
 );

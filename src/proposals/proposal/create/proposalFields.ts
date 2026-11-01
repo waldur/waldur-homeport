@@ -6,6 +6,14 @@ import {
   ProposalFieldState,
 } from '@/proposals/types';
 
+/**
+ * Mirror the backend: DESCRIPTION_LENGTH (waldur_core.core.models) is the
+ * description column's size, PROJECT_SUMMARY_LENGTH (proposal.models)
+ * the summary's. The serializers refuse anything longer.
+ */
+export const PROPOSAL_DESCRIPTION_MAX_LENGTH = 4096;
+export const PROPOSAL_SUMMARY_MAX_LENGTH = 1000;
+
 /** Fields the call can configure, in the order the form renders them. */
 const CONFIGURABLE_FIELDS: ProposalFieldName[] = [
   'project_summary',

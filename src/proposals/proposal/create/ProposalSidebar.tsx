@@ -30,6 +30,11 @@ interface CompletionPageSidebarProps extends SidebarProps {
    * after the applicant has already pressed the button.
    */
   canSubmit?: ProposalCanSubmitResponse;
+  /** A field holds a value its validator refuses (a summary or description
+   * over its limit). handleSubmit would only mark the fields and stop; the
+   * button says so instead. The only validators on this form are the length
+   * ones, whose counters go red at once, so the reason names them. */
+  hasValidationErrors?: boolean;
   /** Whether the viewer may submit the proposal. A proposal administrator
    * edits it but leaves submitting to a proposal manager. */
   canSubmitProposal?: boolean;
@@ -60,11 +65,21 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
         }),
       );
     }
+    if (props.hasValidationErrors) {
+      reasons.push(
+        translate('Shorten the fields that are over their character limit.'),
+      );
+    }
     if (serverRefusal) {
       reasons.push(serverRefusal);
     }
     return reasons.length ? reasons : undefined;
-  }, [hasIncompleteSteps, incompleteRequiredSteps, serverRefusal]);
+  }, [
+    hasIncompleteSteps,
+    incompleteRequiredSteps,
+    props.hasValidationErrors,
+    serverRefusal,
+  ]);
 
   return (
     <>
@@ -96,7 +111,10 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
               label={translate('Submit')}
               variant="primary"
               disabled={
-                props.isSaving || hasIncompleteSteps || Boolean(serverRefusal)
+                props.isSaving ||
+                hasIncompleteSteps ||
+                props.hasValidationErrors ||
+                Boolean(serverRefusal)
               }
               errors={submitErrors}
             />
