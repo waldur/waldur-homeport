@@ -3025,6 +3025,11 @@
       "feature_area": "support"
     }
   },
+  "Administrators": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Adopt": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -43517,6 +43522,11 @@
   "Project access:": {
     "context": {
       "feature_area": "proposal"
+    }
+  },
+  "Project administrator": {
+    "context": {
+      "feature_area": "generated"
     }
   },
   "Project and organization dashboards": {},

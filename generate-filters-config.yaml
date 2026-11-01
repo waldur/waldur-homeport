@@ -1263,9 +1263,17 @@ overrides:
 
   projects:
     filters:
+      - user_uuid_with_active_role
       - conceal_finished_projects
       - include_terminated
       - is_removed
+    user_uuid_with_active_role:
+      label: Project administrator
+      name: administrator
+      operationId: users_list
+      searchParam: full_name
+      extraQuery:
+        o: ['full_name']
     conceal_finished_projects:
       label: Conceal finished projects
       badgeLabels:

@@ -1,14 +1,13 @@
 import { FC, useMemo } from 'react';
-import { projectsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures, ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { RoleEnum } from '@/permissions/enums';
 import { CUSTOMER_PROJECTS_LIST } from '@/project/constants';
 import { ProjectEndDateField } from '@/project/ProjectEndDateField';
 import { ProjectsListActions } from '@/project/ProjectsListActions';
-import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import {
   ProjectsFilter,
@@ -19,16 +18,71 @@ import Table from '@/table/Table';
 import { Column, TableProps } from '@/table/types';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
-import { formatLongText } from '@/table/utils';
+import { formatLongText, renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 import { BatchProjectActions } from './BatchProjectActions';
+import {
+  ADMINISTRATORS_FIELD,
+  fetchProjectsWithAdministrators,
+} from './fetchProjectsWithAdministrators';
 import { ProjectCostField } from './ProjectCostField';
 import { ProjectKindField } from './ProjectKindField';
 import { ProjectLink } from './ProjectLink';
 import { ProjectResourcesExpandableRow } from './ProjectResourcesExpandableRow';
 import { ProjectsTableActions } from './ProjectsTableActions';
+
+const getAdministratorName = (admin) =>
+  admin.user_full_name || admin.user_email || admin.user_username;
+
+// Only ProjectsList fetches what these need; the provider tables built on
+// ProjectsListTable get their rows from endpoints of their own.
+const getOrganizationProjectColumns = (): Column[] => [
+  {
+    title: translate('Administrators'),
+    render: ({ row }) => (
+      <>
+        {renderFieldOrDash(
+          row.administrators?.map(getAdministratorName).join(', '),
+        )}
+      </>
+    ),
+    export: (row) =>
+      row.administrators
+        ?.map((admin) =>
+          admin.user_full_name && admin.user_email
+            ? `${admin.user_full_name} <${admin.user_email}>`
+            : getAdministratorName(admin),
+        )
+        .join('; '),
+    id: 'administrators',
+    keys: ['uuid', ADMINISTRATORS_FIELD],
+  },
+  {
+    visible: false,
+    title: translate('UUID'),
+    render: null,
+    id: 'uuid',
+    export: 'uuid',
+  },
+  {
+    visible: false,
+    title: translate('Organization'),
+    render: null,
+    id: 'customer_name',
+    export: 'customer_name',
+  },
+  {
+    visible: false,
+    title: translate('Status'),
+    render: null,
+    id: 'status',
+    export: (row) =>
+      row.is_removed ? translate('Removed') : translate('Active'),
+    exportKeys: ['is_removed'],
+  },
+];
 
 const mandatoryFields = [
   'uuid',
@@ -43,11 +97,13 @@ const mandatoryFields = [
 interface ProjectsListProps extends Partial<TableProps> {
   customer?: Customer;
   optionalColumns?: ('description' | 'created')[];
+  extraColumns?: Column[];
 }
 
 export const ProjectsListTable: FC<TableProps & ProjectsListProps> = ({
   customer,
   optionalColumns = [],
+  extraColumns = [],
   ...props
 }) => {
   const columns: Column[] = [
@@ -103,6 +159,7 @@ export const ProjectsListTable: FC<TableProps & ProjectsListProps> = ({
         'effective_end_date',
       ],
     },
+    ...extraColumns,
   ];
 
   if (
@@ -164,12 +221,15 @@ export const ProjectsList: FC<ProjectsListProps> = ({
       customer: customer ? customer.uuid : currentCustomer?.uuid,
       o: 'name',
       ...selectProjectsFilter(filterValues),
+      ...(filterValues?.administrator && {
+        user_role: RoleEnum.PROJECT_ADMIN,
+      }),
     }),
     [currentCustomer, customer, filterValues],
   );
   const tableProps = useTable({
     table,
-    fetchData: createFetcher(projectsList),
+    fetchData: fetchProjectsWithAdministrators,
     queryField: 'query',
     filter,
     mandatoryFields,
@@ -185,6 +245,7 @@ export const ProjectsList: FC<ProjectsListProps> = ({
       {...props}
       customer={customer || currentCustomer}
       optionalColumns={optionalColumns}
+      extraColumns={getOrganizationProjectColumns()}
     />
   );
 };
