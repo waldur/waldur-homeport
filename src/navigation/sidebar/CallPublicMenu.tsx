@@ -10,6 +10,7 @@ import { translate } from '@/i18n';
 import { getServiceAccessMode } from '@/marketplace/serviceAccessMode';
 import { MenuItem } from '@/navigation/sidebar/MenuItem';
 import { RoleEnum } from '@/permissions/enums';
+import { useReviewerProfile } from '@/reviewer/useReviewerProfile';
 import { useUser } from '@/workspace/hooks';
 
 import { isDescendantOf } from '../useTabs';
@@ -79,9 +80,12 @@ export const canManageCalls = (user): boolean =>
   getCallManagerCustomerUuids(user).length > 0;
 
 /**
- * Anyone with work to do on a call — managing it, reviewing for it, sitting on
- * its panel. Used to keep the operator surface reachable in marketplace mode,
- * where applicants get no calls section at all.
+ * Anyone holding a role on a call — managing it, sitting on its panel, or the
+ * API-only CALL.REVIEWER. Used to keep the operator surface reachable in
+ * marketplace mode, where applicants get no calls section at all.
+ *
+ * Reviewers assigned through the pool hold no call role and are not caught
+ * here; they reach their reviews through their reviewer profile instead.
  */
 const hasCallRole = (user) =>
   user?.permissions?.some(
@@ -116,6 +120,14 @@ export const CallPublicMenu: FC<CallPublicMenuProps> = ({
   const mode = getServiceAccessMode();
 
   const isOperator = user?.is_staff || user?.is_support || hasCallRole(user);
+  const showCallManagement = isFeatureVisible(
+    MarketplaceFeatures.show_call_management_functionality,
+  );
+  // A reviewer-pool member holds no call role, so in marketplace mode the
+  // reviewer profile is the only sign they have reviews to reach.
+  const { profile: reviewerProfile } = useReviewerProfile({
+    enabled: mode === 'marketplace' && !isOperator && showCallManagement,
+  });
   // Managers get their own calls; everyone else gets the catalogue, named as
   // the browsing surface it is rather than as management they cannot do.
   const showManageCalls = canManageCalls(user);
@@ -151,13 +163,31 @@ export const CallPublicMenu: FC<CallPublicMenuProps> = ({
   // Operators still do. Whether a deployment runs calls at all is
   // show_call_management_functionality, a separate axis from how applicants
   // browse — a marketplace-only portal can still be backed by calls, and the
-  // people running them need somewhere to stand.
+  // people running them need somewhere to stand. Pool reviewers, who hold no
+  // call role, get just a "My reviews" link.
   if (mode === 'marketplace') {
-    if (
-      !isOperator ||
-      !isFeatureVisible(MarketplaceFeatures.show_call_management_functionality)
-    ) {
+    if (!showCallManagement) {
       return null;
+    }
+    if (!isOperator) {
+      if (!reviewerProfile) {
+        return null;
+      }
+      return (
+        <>
+          <SidebarMenuSeparator />
+          <MenuItem
+            title={translate('My reviews')}
+            state="reviews-all-reviews"
+            icon={<ChatTeardropTextIcon weight="bold" />}
+            disabled={disabled}
+            disabledTooltip={disabledTooltip}
+            activeState={
+              isDescendantOf('reviews', state) ? state.name : undefined
+            }
+          />
+        </>
+      );
     }
     // Titled by the job, not by the object: a marketplace-only deployment does
     // not present itself as running calls for proposals, but the items below
@@ -220,9 +250,7 @@ export const CallPublicMenu: FC<CallPublicMenuProps> = ({
 
   // 'both' from here: the calls section sits beside the marketplace. Whether
   // it carries the management items is a separate question from the mode.
-  if (
-    !isFeatureVisible(MarketplaceFeatures.show_call_management_functionality)
-  ) {
+  if (!showCallManagement) {
     return (
       <SidebarMenuAccordion
         title={translate('Proposals')}

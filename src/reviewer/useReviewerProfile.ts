@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { reviewerProfilesMeRetrieve } from 'waldur-js-client';
 
-export const useReviewerProfile = () => {
+export const useReviewerProfile = ({ enabled = true } = {}) => {
   const {
     data: profile,
     isLoading,
@@ -21,6 +21,7 @@ export const useReviewerProfile = () => {
       }
     },
     retry: false,
+    enabled,
   });
 
   return {
