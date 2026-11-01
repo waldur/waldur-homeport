@@ -121,6 +121,7 @@ export const CostPolicyFormDialog: FC<CostPolicyFormDialogProps> = (props) => {
     errorMessage: isEdit
       ? translate('Unable to update policy.')
       : translate('Unable to create policy.'),
+    invalidateQueries: [{ queryKey: ['CostPolicyDetails'] }],
     refetch,
   });
 

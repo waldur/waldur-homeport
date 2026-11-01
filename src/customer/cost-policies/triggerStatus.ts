@@ -9,10 +9,13 @@ import { BadgeVariant } from 'waldur-ui';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 
+import { ignoresCredit } from './utils';
+
 /** The fields of an estimated-cost policy the status is worded from. */
 export interface TriggerStatusPolicy {
   trigger_status?: PolicyTriggerStatus | null;
   has_fired?: boolean;
+  use_credit?: boolean;
   current_cost?: string | number | null;
   limit_cost?: number;
   cost_breakdown?: PolicyCostBreakdown | null;
@@ -68,15 +71,20 @@ export const getTriggerStatusView = (
       ? defaultCurrency(status.credit_value_compared)
       : null;
   const held = isHeldGate(status.gate);
+  const creditIgnored = ignoresCredit(policy);
 
-  const reason = getGateReason(status.gate, cost, limit, credit);
+  const reason = getGateReason(status.gate, cost, limit, credit, creditIgnored);
   if (!reason) {
     // A gate this client does not know: no status rather than a wrong one.
     return null;
   }
   const parts = {
     explanation: reason,
-    ...getCostBreakdownText(policy.cost_breakdown, status.triggered),
+    // The breakdown names what credit paid and did not, which is not what
+    // such a policy counts.
+    ...(creditIgnored
+      ? {}
+      : getCostBreakdownText(policy.cost_breakdown, status.triggered)),
     held,
   };
 
@@ -220,13 +228,19 @@ const getGateReason = (
   cost: string,
   limit: string,
   credit: string | null,
+  creditIgnored: boolean,
 ): string => {
   switch (gate) {
     case 'cost_below_limit':
-      return translate(
-        'The cost after credit, {cost}, is at or below the limit, {limit}.',
-        { cost, limit },
-      );
+      return creditIgnored
+        ? translate('The cost, {cost}, is at or below the limit, {limit}.', {
+            cost,
+            limit,
+          })
+        : translate(
+            'The cost after credit, {cost}, is at or below the limit, {limit}.',
+            { cost, limit },
+          );
     case 'cost_over_limit':
       return translate(
         'The cost after credit, {cost}, is over the limit, {limit}.',

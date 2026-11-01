@@ -195,7 +195,7 @@ export const EarlierInvoices: FC<{
       </h3>
       <p className="text-secondary mb-2">
         {translate(
-          'Cost of closed months that credit did not cover. Credit added now pays only the current month, so a cost policy for the total period keeps counting this cost until it is paid.',
+          'Cost of closed months that credit did not cover. Credit added now pays only the current month, so a cost policy for the total period that takes credit into account keeps counting this cost until it is paid.',
         )}
       </p>
       {uncovered > 0 && !hideAdvice ? (

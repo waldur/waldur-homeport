@@ -13,6 +13,7 @@ import { CostPolicyFixButton } from '@/customer/cost-policies/CostPolicyFixButto
 import { CostPolicyTriggerCell } from '@/customer/cost-policies/CostPolicyTriggerCell';
 import {
   getCostPolicyActionOptions,
+  ignoresCredit,
   policyPeriodOptions,
 } from '@/customer/cost-policies/utils';
 import { translate } from '@/i18n';
@@ -52,7 +53,7 @@ const fetchPolicies = async (
   ]);
   return [
     ...projectPolicies
-      .filter((policy) => policy.use_credit !== false)
+      .filter((policy) => !ignoresCredit(policy))
       .map((row) => ({ row, type: 'project' as const })),
     ...organizationPolicies.map((row) => ({
       row,

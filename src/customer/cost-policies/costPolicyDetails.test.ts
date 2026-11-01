@@ -180,6 +180,84 @@ describe('getFixOptions', () => {
   });
 });
 
+describe('a policy that ignores credit', () => {
+  // The API's figures for September 1 000, 600 of it paid by credit, and
+  // October 100: the earlier months count in full, though 400 went uncovered.
+  const ignoringCredit = (overrides: Partial<CostPolicyDetailsPolicy> = {}) =>
+    policy(300, {
+      use_credit: false,
+      current_cost: '1100.00',
+      trigger_status: {
+        gate: 'credit_ignored',
+        triggered: true,
+        credit_value_compared: null,
+      },
+      cost_breakdown: {
+        cost_before_credit: '1100.00',
+        credit_drawn: '0.00',
+        credit_pending: '0.00',
+        earlier_months: '1000.00',
+      },
+      ...overrides,
+    });
+  const staff = { ...owner, isStaff: true, payableNow: 400 };
+
+  it('offers only what lowers the cost as a way back', () => {
+    const rows = byKey(getResetScenarios(ignoringCredit(), today));
+    expect(Object.keys(rows)).toEqual(['one_month', 'new_month', 'limit']);
+    expect(rows.one_month.costAfter).toBe(100);
+    expect(rows.one_month.resets).toBe(true);
+  });
+
+  it('has nothing to stop counting in a one-month period', () => {
+    const rows = byKey(getResetScenarios(ignoringCredit({ period: 2 }), today));
+    expect(Object.keys(rows)).toEqual(['new_month', 'limit']);
+  });
+
+  it('offers no fix that spends or adds credit', () => {
+    const options = getFixOptions(ignoringCredit(), staff);
+    expect(options.map((option) => option.key)).toEqual([
+      'count_one_month',
+      'edit_policy',
+    ]);
+  });
+
+  it.each([
+    ['takes credit into account', true],
+    ['has no such setting', undefined],
+  ])('keeps the credit fixes for a policy that %s', (_, use_credit) => {
+    const updated = ignoringCredit({ use_credit });
+    expect(getFixOptions(updated, staff).map((option) => option.key)).toEqual([
+      'add_credit',
+      'pay_earlier_invoices',
+      'count_one_month',
+      'edit_policy',
+    ]);
+    expect(
+      getResetScenarios(updated, today).map((scenario) => scenario.key),
+    ).toEqual(['credit', 'earlier', 'new_month', 'limit']);
+  });
+
+  it('sums it up without credit', () => {
+    expect(getCostPolicySummary(ignoringCredit())).toBe(
+      'The cost, €1,100.00, is over the €300.00 limit.',
+    );
+    expect(
+      getCostPolicySummary(
+        ignoringCredit({
+          trigger_status: {
+            gate: 'cost_below_limit',
+            triggered: false,
+            credit_value_compared: null,
+          },
+        }),
+      ),
+    ).toBe(
+      'The cost is back at or below the limit, so its actions are reset at the next evaluation of the policy.',
+    );
+  });
+});
+
 describe('canFixCostPolicy', () => {
   it('lets owners fix project policies and only staff fix organization ones', () => {
     expect(canFixCostPolicy('project', false, true)).toBe(true);

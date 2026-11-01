@@ -15,6 +15,7 @@ import { EarlierInvoices } from '@/project/manage/EarlierInvoices';
 import { CostPolicyAffectedResources } from './CostPolicyAffectedResources';
 import { CostPolicyCost } from './CostPolicyCost';
 import {
+  CostPolicyFigures,
   getPolicyPeriodText,
   getPolicySubtitle,
   getResetScenarios,
@@ -49,6 +50,36 @@ interface CostPolicyDetailsDialogProps {
     customerUuid?: string;
   };
 }
+
+const getBelowLimitText = (figures: CostPolicyFigures, hasFired: boolean) => {
+  if (figures.ignoresCredit) {
+    return hasFired
+      ? translate(
+          'The cost is at or below the limit, so the actions it ran are reset at the next evaluation of the policy.',
+        )
+      : translate(
+          'The cost is at or below the limit, so its actions do not run.',
+        );
+  }
+  return hasFired
+    ? translate(
+        'The cost after credit is at or below the limit, so the actions it ran are reset at the next evaluation of the policy.',
+      )
+    : translate(
+        'The cost after credit is at or below the limit, so its actions do not run.',
+      );
+};
+
+const getWhoCanChangeText = (type: CostPolicyType, ignoresCredit: boolean) => {
+  if (type !== 'project') {
+    return translate('Support can change an organization policy.');
+  }
+  return ignoresCredit
+    ? translate('Organization owners and support can change this policy.')
+    : translate(
+        'Organization owners and support can change this policy or the project credit.',
+      );
+};
 
 /** What happened: why the policy fires or not, what it counts, what it
  * changed, and what would reset its actions. Read-only, for everyone who may
@@ -118,20 +149,28 @@ export const CostPolicyDetailsDialog: FC<CostPolicyDetailsDialogProps> = ({
           months={earlierInvoices?.months}
         />
         <FormTable className="mt-4">
+          {figures.ignoresCredit ? null : (
+            <>
+              <FormTable.Item
+                label={translate('Cost in the period, before credit')}
+                value={defaultCurrency(figures.beforeCredit)}
+              />
+              <FormTable.Item
+                label={translate('Credit already used')}
+                value={defaultCurrency(-figures.drawn)}
+              />
+              <FormTable.Item
+                label={translate('Credit still to be used this month')}
+                value={defaultCurrency(-figures.pending)}
+              />
+            </>
+          )}
           <FormTable.Item
-            label={translate('Cost in the period, before credit')}
-            value={defaultCurrency(figures.beforeCredit)}
-          />
-          <FormTable.Item
-            label={translate('Credit already used')}
-            value={defaultCurrency(-figures.drawn)}
-          />
-          <FormTable.Item
-            label={translate('Credit still to be used this month')}
-            value={defaultCurrency(-figures.pending)}
-          />
-          <FormTable.Item
-            label={translate('Cost after credit')}
+            label={
+              figures.ignoresCredit
+                ? translate('Cost in the period')
+                : translate('Cost after credit')
+            }
             value={
               <span className="font-semibold">
                 {defaultCurrency(figures.current)}
@@ -159,40 +198,34 @@ export const CostPolicyDetailsDialog: FC<CostPolicyDetailsDialogProps> = ({
         {triggered ? (
           <>
             <p className="mb-3">
-              {translate(
-                'Automatically, at the next evaluation of the policy, once the cost after credit is at or below the limit. Now it is {over} over it. Each change below lowers the cost; the last column says whether that is enough.',
-                { over: defaultCurrency(figures.overBy) },
-              )}
+              {figures.ignoresCredit
+                ? translate(
+                    'Automatically, at the next evaluation of the policy, once the cost is at or below the limit. Now it is {over} over it. This policy does not take credit into account, so credit does not lower the cost; the last column says which change is enough.',
+                    { over: defaultCurrency(figures.overBy) },
+                  )
+                : translate(
+                    'Automatically, at the next evaluation of the policy, once the cost after credit is at or below the limit. Now it is {over} over it. Each change below lowers the cost; the last column says whether that is enough.',
+                    { over: defaultCurrency(figures.overBy) },
+                  )}
             </p>
             <CostPolicyResetTable
               policyUuid={policy.uuid}
               scenarios={scenarios}
+              ignoresCredit={figures.ignoresCredit}
             />
           </>
         ) : (
-          <p className="mb-0">
-            {policy.has_fired
-              ? translate(
-                  'The cost after credit is at or below the limit, so the actions it ran are reset at the next evaluation of the policy.',
-                )
-              : translate(
-                  'The cost after credit is at or below the limit, so its actions do not run.',
-                )}
-          </p>
+          <p className="mb-0">{getBelowLimitText(figures, policy.has_fired)}</p>
         )}
       </Section>
 
-      {credit && figures.earlier > 0 ? (
+      {credit && figures.earlier > 0 && !figures.ignoresCredit ? (
         <EarlierInvoices credit={credit} hideAdvice />
       ) : null}
 
       {triggered && !canFix ? (
         <p className="mb-0 text-quaternary">
-          {type === 'project'
-            ? translate(
-                'Organization owners and support can change this policy or the project credit.',
-              )
-            : translate('Support can change an organization policy.')}
+          {getWhoCanChangeText(type, figures.ignoresCredit)}
         </p>
       ) : null}
     </ModalDialog>
