@@ -57,6 +57,10 @@ describe('EChart', () => {
     // Before, the ref kept the disposed instance, whose getDataURL() returns
     // undefined, so a PNG export after a theme switch saved nothing usable.
     await waitFor(() => expect(ref.current).not.toBe(first));
+    // Let a second draw started on mount land on top of this one, however long
+    // its import takes.
+    await vi.dynamicImportSettled();
+    await new Promise((resolve) => setTimeout(resolve));
     expect(first.isDisposed()).toBe(true);
     expect(ref.current.isDisposed()).toBe(false);
     expect(echarts.init).toHaveBeenLastCalledWith(

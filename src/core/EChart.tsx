@@ -23,6 +23,9 @@ export const EChart = React.forwardRef<any, ChartProps>(
     const containerRef = useRef<HTMLDivElement | null>(null);
     const chartRef = useRef<any>(null);
     const resizeObserverRef = useRef<ResizeObserver | null>(null);
+    // `loading` is too late for this: both effects that draw run on mount,
+    // before the state set by the first can stop the second.
+    const drawingRef = useRef(false);
     const [loading, setLoading] = useState(false);
     const { theme } = useTheme();
     const previousThemeRef = useRef(theme);
@@ -88,30 +91,39 @@ export const EChart = React.forwardRef<any, ChartProps>(
     }, [options, loading]);
 
     const drawChart = () => {
+      if (drawingRef.current) return;
+      drawingRef.current = true;
       setLoading(true);
-      import('@/echarts').then((module) => {
-        setLoading(false);
-        if (!containerRef.current) {
-          return;
-        }
-        const echarts = module.default;
-        const chart = echarts.getInstanceByDom(containerRef.current);
-        if (!chart) {
-          attach(echarts.init(containerRef.current, `${theme}-metronic`));
-        }
-        renderChart();
-        if (!resizeObserverRef.current) {
-          resizeObserverRef.current = new ResizeObserver((entries) => {
-            entries.forEach(({ target }) => {
-              const instance = echarts.getInstanceByDom(target as HTMLElement);
-              if (instance) {
-                instance.resize();
-              }
+      import('@/echarts')
+        .then((module) => {
+          setLoading(false);
+          if (!containerRef.current) {
+            return;
+          }
+          const echarts = module.default;
+          const chart = echarts.getInstanceByDom(containerRef.current);
+          if (!chart) {
+            attach(echarts.init(containerRef.current, `${theme}-metronic`));
+          }
+          renderChart();
+          if (!resizeObserverRef.current) {
+            resizeObserverRef.current = new ResizeObserver((entries) => {
+              entries.forEach(({ target }) => {
+                const instance = echarts.getInstanceByDom(
+                  target as HTMLElement,
+                );
+                if (instance) {
+                  instance.resize();
+                }
+              });
             });
-          });
-        }
-        resizeObserverRef.current.observe(containerRef.current);
-      });
+          }
+          resizeObserverRef.current.observe(containerRef.current);
+        })
+        .finally(() => {
+          // Also after a failed import, so a theme switch can still draw.
+          drawingRef.current = false;
+        });
     };
 
     const renderChart = () => {
