@@ -43,6 +43,9 @@ export default mergeConfig(
             exclude: ['**/node_modules/**', '**/.claude/**', 'dist/**'],
             globals: true,
             environment: 'jsdom',
+            // Node 26 (now node:lts) defines its own empty localStorage, which
+            // hides jsdom's and breaks every test that touches storage.
+            execArgv: ['--no-experimental-webstorage'],
             setupFiles: ['./test/setupTests.js'],
             alias: [
               {
