@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsUpdateType,
-  OfferingTypeUpdateTypeEnum,
   ProviderOffering,
 } from 'waldur-js-client';
 
@@ -44,8 +43,7 @@ export const SetOfferingTypeDialog: FunctionComponent<
     mutationFn: () =>
       marketplaceProviderOfferingsUpdateType({
         path: { uuid: offering.uuid! },
-        // The pinned SDK predates the current site-agent type name.
-        body: { type: targetType as OfferingTypeUpdateTypeEnum },
+        body: { type: targetType },
       }),
     successMessage: translate('Offering type has been updated.'),
     errorMessage: translate('Unable to update offering type.'),
