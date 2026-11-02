@@ -1,8 +1,9 @@
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
 import { getRequestedPrepaidMonths } from '@/proposals/prepaidDuration';
 import { ProposalResource } from '@/proposals/types';
-import { Field } from '@/resource/summary';
 import { BooleanField } from '@/table/BooleanField';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { renderFieldOrDash } from '@/table/utils';
@@ -64,25 +65,23 @@ export const ResourceRequestExpandableRow = ({
           what a reviewer is actually here for — behind a sideways scroll.
           Laid out with the same Field the details overview above uses, so the
           two blocks on one page read as the same kind of thing. */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 text-sm mb-3">
-        <div>
-          <Field
-            label={translate('Provider')}
-            value={renderFieldOrDash(row.requested_offering.provider_name)}
-            labelCol={5}
-            valueCol={7}
-          />
-        </div>
-        <div>
-          <Field
-            label={translate('Category')}
-            value={renderFieldOrDash(row.requested_offering.category_name)}
-            labelCol={5}
-            valueCol={7}
-          />
-        </div>
+      <PropertyList
+        variant="summary"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 text-sm mb-3"
+        termWidth="md"
+      >
+        <PropertyItem
+          label={translate('Provider')}
+          value={row.requested_offering.provider_name}
+          hideIfEmpty={false}
+        />
+        <PropertyItem
+          label={translate('Category')}
+          value={row.requested_offering.category_name}
+          hideIfEmpty={false}
+        />
         <SlurmPlacementFields attributes={row.attributes} />
-      </div>
+      </PropertyList>
       <TabbedPlanComponents
         offering={row.requested_offering as any}
         plan={row.requested_offering.plan_details}

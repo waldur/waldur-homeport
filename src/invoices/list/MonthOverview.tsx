@@ -1,11 +1,14 @@
 import { ArrowDownIcon, ArrowUpIcon, MinusIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { parseDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { Customer } from '@/workspace/types';
 
 import { groupInvoiceItems } from '../details/utils';
@@ -117,25 +120,27 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
             <div className="flex flex-col justify-between items-end h-full">
               <div>
                 {showTotalSection && (
-                  <table className="font-medium text-xs w-3/4">
-                    <tbody>
-                      {!isAccountingMode && (
-                        <OverviewItemTr
-                          title={translate('VAT')}
-                          value={defaultCurrency(invoice.tax)}
-                        />
-                      )}
-                      <OverviewItemTr
-                        title={translate('Subtotal')}
-                        value={defaultCurrency(invoice.price)}
+                  <PropertyList
+                    variant="compact"
+                    className="font-medium text-xs w-3/4"
+                    labelClass="underline"
+                    valueClass="text-quaternary"
+                  >
+                    {!isAccountingMode && (
+                      <PropertyItem
+                        label={translate('VAT')}
+                        value={propVal.currency(invoice.tax)}
                       />
-
-                      <OverviewItemTr
-                        title={translate('Total')}
-                        value={defaultCurrency(invoice.total)}
-                      />
-                    </tbody>
-                  </table>
+                    )}
+                    <PropertyItem
+                      label={translate('Subtotal')}
+                      value={propVal.currency(invoice.price)}
+                    />
+                    <PropertyItem
+                      label={translate('Total')}
+                      value={propVal.currency(invoice.total)}
+                    />
+                  </PropertyList>
                 )}
               </div>
               <div>

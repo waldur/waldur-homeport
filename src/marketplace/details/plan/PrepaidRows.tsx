@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 import { Field } from 'react-final-form';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { composeValidators } from '@/core/validators';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import {
   formatComponentQuantity,
@@ -51,7 +52,7 @@ const PrepaidRow = ({
 
   return (
     <>
-      <FormTable.Item
+      <PropertyItem
         key={component.type}
         label={component.name}
         description={<ComponentCost component={component} />}
@@ -102,7 +103,7 @@ const PrepaidRow = ({
         }
       />
       {overageComponent && (
-        <FormTable.Item
+        <PropertyItem
           label={overageComponent.name}
           description={
             overageComponent.measured_unit

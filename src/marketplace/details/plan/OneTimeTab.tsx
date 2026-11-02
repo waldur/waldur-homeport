@@ -1,11 +1,12 @@
 import { useMemo } from 'react';
 import { Field } from 'react-final-form';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { DateField } from '@/form/DateField';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { useOrderStartDateBounds } from '@/marketplace/deploy/steps/useOrderStartDateBounds';
@@ -41,7 +42,7 @@ export const OneTimeTab = ({
 
   return (
     <section>
-      <FormTable>
+      <PropertyList>
         {/* One */}
         {oneTime.initialRows.length > 0 && (
           <FixedRows
@@ -80,7 +81,7 @@ export const OneTimeTab = ({
         )}
 
         {showStartDateHere && (
-          <FormTable.Item
+          <PropertyItem
             label={translate('Start date')}
             tooltip={translate(
               'If not set, the order is processed immediately after approval.',
@@ -115,7 +116,7 @@ export const OneTimeTab = ({
             }
           />
         )}
-      </FormTable>
+      </PropertyList>
     </section>
   );
 };

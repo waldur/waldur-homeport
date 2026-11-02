@@ -1,11 +1,10 @@
 import { useMemo } from 'react';
 import { useFormState } from 'react-final-form';
 
-import { Tooltip } from 'waldur-ui';
+import { PropertyList, Tooltip, PropertyItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 
 import { OfferingImportFormData } from './types';
 
@@ -30,19 +29,23 @@ export const ImportReviewTab = () => {
 
   return (
     <div className="flex flex-col gap-1">
-      <Field
-        label={translate('Organization')}
-        value={renderFieldOrDash(formData.customer.name)}
+      <PropertyList
+        variant="summary"
+        className="flex flex-col gap-1"
         labelClass="font-semibold"
-      />
+      >
+        <PropertyItem
+          label={translate('Organization')}
+          value={formData.customer.name}
+          hideIfEmpty={false}
+        />
 
-      <Field
-        label={translate('Offerings')}
-        value={renderFieldOrDash(
-          formData.offerings.map((o) => o.name).join(', '),
-        )}
-        labelClass="font-semibold"
-      />
+        <PropertyItem
+          label={translate('Offerings')}
+          value={propVal.list(formData.offerings.map((o) => o.name))}
+          hideIfEmpty={false}
+        />
+      </PropertyList>
 
       <div>
         <label className="field-label text-secondary font-semibold mb-3">

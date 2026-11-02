@@ -1,18 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, FunctionComponent } from 'react';
+import { FC } from 'react';
 import { proposalReviewsRetrieve, type ProposalReview } from 'waldur-js-client';
 
-import { formatDateTime } from '@/core/dateUtils';
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { RateStars } from '@/proposals/proposal/create-review/RateStars';
-import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
-import { renderFieldOrDash } from '@/table/utils';
 
 // Per-field review comments, in display order. Only non-empty ones are shown.
-const COMMENT_FIELDS: { key: keyof ProposalReview; label: string }[] = [
+const COMMENT_FIELDS: {
+  key: Extract<keyof ProposalReview, `comment_${string}`>;
+  label: string;
+}[] = [
   { key: 'comment_project_title', label: translate('Project title') },
   { key: 'comment_project_summary', label: translate('Project summary') },
   {
@@ -26,14 +29,6 @@ const COMMENT_FIELDS: { key: keyof ProposalReview; label: string }[] = [
   { key: 'comment_resource_requests', label: translate('Resource requests') },
   { key: 'comment_team', label: translate('Team') },
 ];
-
-const SectionHeader: FunctionComponent<{ title: string }> = ({ title }) => (
-  <div className="field-row mt-3">
-    <div className="border-b-[1px] border-b-secondary pb-1.5 mb-1.5">
-      <strong>{title}</strong>
-    </div>
-  </div>
-);
 
 // Shared expandable content for a proposal review: fetches the full review on
 // expand (list endpoints trim heavy fields) and shows the reviewer's score,
@@ -54,7 +49,7 @@ export const ReviewExpandableRow: FC<{
   });
 
   return (
-    <ExpandableContainer asTable>
+    <ExpandableContainer alignRows>
       {isLoading ? (
         <LoadingSpinner />
       ) : error || !data ? (
@@ -74,9 +69,9 @@ export const ReviewExpandableRow: FC<{
 export const ReviewDetails: FC<{ review: ProposalReview }> = ({ review }) => {
   const fieldComments = COMMENT_FIELDS.filter((field) => review[field.key]);
 
-  return (
+  const summaryItems = (
     <>
-      <Field
+      <PropertyItem
         label={translate('Score')}
         value={
           review.summary_score ? (
@@ -91,38 +86,49 @@ export const ReviewDetails: FC<{ review: ProposalReview }> = ({ review }) => {
           )
         }
       />
-      <Field
+      <PropertyItem
         label={translate('Public comment')}
-        value={renderFieldOrDash(review.summary_public_comment)}
+        value={review.summary_public_comment}
+        hideIfEmpty={false}
       />
-      <Field
+      <PropertyItem
         label={translate('Private comment')}
-        value={renderFieldOrDash(review.summary_private_comment)}
+        value={review.summary_private_comment}
+        hideIfEmpty={false}
       />
       {review.created && (
-        <Field
+        <PropertyItem
           label={translate('Created')}
-          value={formatDateTime(review.created)}
+          value={propVal.date(review.created, { precision: 'datetime' })}
         />
       )}
       {review.modified && review.modified !== review.created && (
-        <Field
+        <PropertyItem
           label={translate('Last modified')}
-          value={formatDateTime(review.modified)}
+          value={propVal.date(review.modified, { precision: 'datetime' })}
         />
       )}
-      {fieldComments.length > 0 && (
-        <>
-          <SectionHeader title={translate('Field comments')} />
+    </>
+  );
+
+  if (fieldComments.length > 0) {
+    return (
+      <PropertyList variant="summary" className="flex flex-col gap-6">
+        <PropertyList.Section title={translate('Summary')}>
+          {summaryItems}
+        </PropertyList.Section>
+        <PropertyList.Section title={translate('Field comments')}>
           {fieldComments.map((field) => (
-            <Field
+            <PropertyItem
               key={field.key}
               label={field.label}
               value={review[field.key]}
             />
           ))}
-        </>
-      )}
-    </>
-  );
+        </PropertyList.Section>
+      </PropertyList>
+    );
+  }
+
+  return <PropertyList variant="summary">{summaryItems}</PropertyList>;
 };

@@ -1,10 +1,10 @@
 import { Fragment, ReactNode, useCallback, useMemo } from 'react';
 import { User } from 'waldur-js-client';
 
-import { Badge, Tooltip } from 'waldur-ui';
+import { Badge, PropertyItem, Tooltip } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
-import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { formatDate } from '@/core/dateUtils';
 import { composeValidators, email, required } from '@/core/validators';
 import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
 import { isFeatureVisible } from '@/features/connect';
@@ -20,11 +20,12 @@ import {
   StringEditField,
   TextEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
+import { KeyValueButton } from '@/marketplace/resources/KeyValueButton';
 import { useModal } from '@/modal/actions';
+import { propVal } from '@/property/propertyFields';
 import { formatUserStatus } from '@/user/support/utils';
 import { useUser } from '@/workspace/hooks';
 
@@ -289,7 +290,7 @@ const buildBasicFields = ({
             {...emailProps}
           />
         ) : (
-          <FormTable.Item
+          <PropertyItem
             label={translate('Email')}
             value={
               emailProps.renderValue
@@ -791,9 +792,9 @@ const buildOrganizationFields = ({
       enabled: Array.isArray(user.affiliations) && user.affiliations.length > 0,
       value: user.affiliations,
       node: (
-        <FormTable.Item
+        <PropertyItem
           label={translate('Affiliations')}
-          value={(user.affiliations || []).join(', ')}
+          value={propVal.list(user.affiliations)}
           disabled={disabled}
         />
       ),
@@ -821,7 +822,7 @@ const buildSystemFields = ({
       enabled: true,
       value: user.username,
       node: (
-        <FormTable.Item
+        <PropertyItem
           label={translate('Username')}
           value={user.username}
           disabled={disabled}
@@ -834,7 +835,7 @@ const buildSystemFields = ({
       enabled: hasEdupersonAssurance,
       value: user.eduperson_assurance,
       node: (
-        <FormTable.Item
+        <PropertyItem
           label={translate('Assurance levels')}
           value={
             <span className="flex flex-wrap gap-1.5">
@@ -858,9 +859,9 @@ const buildSystemFields = ({
       enabled: true,
       value: user.date_joined,
       node: (
-        <FormTable.Item
+        <PropertyItem
           label={translate('Date joined')}
-          value={formatDateTime(user.date_joined)}
+          value={propVal.date(user.date_joined, { precision: 'datetime' })}
           disabled={disabled}
           description={translate('The date the user has joined')}
         />
@@ -871,7 +872,7 @@ const buildSystemFields = ({
       label: translate('User type'),
       enabled: Boolean(isVisibleStaffOrSupport),
       node: (
-        <FormTable.Item
+        <PropertyItem
           label={translate('User type')}
           value={formatUserStatus(user)}
           disabled={disabled}
@@ -884,7 +885,7 @@ const buildSystemFields = ({
       enabled: Boolean(user.civil_number),
       value: user.civil_number,
       node: (
-        <FormTable.Item
+        <PropertyItem
           label={translate('ID code')}
           value={user.civil_number}
           disabled={disabled}
@@ -898,9 +899,9 @@ const buildSystemFields = ({
         isProfileAttributeEnabled('uid_number') && user.uid_number != null,
       value: user.uid_number,
       node: (
-        <FormTable.Item
+        <PropertyItem
           label={translate('POSIX UID')}
-          value={String(user.uid_number)}
+          value={user.uid_number}
           disabled={disabled}
           description={translate(
             'POSIX UID supplied by the identity provider; used by offerings whose UID source is the user attribute.',
@@ -915,9 +916,9 @@ const buildSystemFields = ({
         isProfileAttributeEnabled('primary_gid') && user.primary_gid != null,
       value: user.primary_gid,
       node: (
-        <FormTable.Item
+        <PropertyItem
           label={translate('POSIX primary GID')}
-          value={String(user.primary_gid)}
+          value={user.primary_gid}
           disabled={disabled}
           description={translate(
             'POSIX primary GID supplied by the identity provider; used by offerings whose primary GID source is the user attribute.',
@@ -964,19 +965,13 @@ const buildStaffFields = ({
       enabled: claims.length > 0,
       value: user.details,
       node: (
-        <FormTable.Item
+        <PropertyItem
           label={translate('Identity provider claims')}
           value={
-            <div className="flex flex-col gap-1">
-              {claims.map(([claim, value]) => (
-                <div key={claim}>
-                  <span className="me-1.5">{claim}</span>
-                  <span className="text-quaternary">
-                    {Array.isArray(value) ? value.join(', ') : String(value)}
-                  </span>
-                </div>
-              ))}
-            </div>
+            <KeyValueButton
+              items={user.details}
+              title={translate('Identity provider claims')}
+            />
           }
           disabled={disabled}
         />

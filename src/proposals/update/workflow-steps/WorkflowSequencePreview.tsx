@@ -6,7 +6,8 @@ import {
   StepEnum,
 } from 'waldur-js-client';
 
-import FormTable from '@/form/FormTable';
+import { PropertyCard } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import {
   getStepDefinitions,
@@ -59,9 +60,9 @@ export const WorkflowSequencePreview: FC<WorkflowSequencePreviewProps> = ({
   }
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('Preview sequence')}
-      className="card-bordered"
       refetch={onReset}
     >
       <p className="text-quaternary text-xs mb-4">
@@ -87,7 +88,9 @@ export const WorkflowSequencePreview: FC<WorkflowSequencePreviewProps> = ({
                 className="text-quaternary block"
               />
             </span>
-            <div className="mt-2.5 small text-secondary">{definition.name}</div>
+            <div className="mt-2.5 text-xs text-secondary">
+              {definition.name}
+            </div>
             <div className="text-quaternary text-xs mt-1">
               {configured?.duration_in_days
                 ? translate('{count}d', {
@@ -111,6 +114,6 @@ export const WorkflowSequencePreview: FC<WorkflowSequencePreviewProps> = ({
           </div>
         ))}
       </div>
-    </FormTable.Card>
+    </PropertyCard>
   );
 };

@@ -116,8 +116,7 @@ describe('CustomerContactPanel', () => {
       vi.mocked(hasPermission).mockReturnValue(false);
       renderPanel();
 
-      const table = screen.getByRole('table');
-      expect(table).toHaveClass('hide-actions');
+      expect(screen.queryAllByRole('button')).toHaveLength(0);
     });
   });
 
@@ -129,7 +128,7 @@ describe('CustomerContactPanel', () => {
       vi.mocked(openDialog).mockClear();
       const labelElement = screen.getByText('Notification emails');
       // eslint-disable-next-line testing-library/no-node-access
-      const rowElement = labelElement.closest('tr');
+      const rowElement = labelElement.closest('[data-slot="property-item"]');
       const editButton = within(rowElement as HTMLElement).getByTestId(
         'edit-notification_emails',
       );
@@ -191,7 +190,7 @@ describe('CustomerContactPanel', () => {
 
       const labelElement = screen.getByText('Email');
       // eslint-disable-next-line testing-library/no-node-access
-      const rowElement = labelElement.closest('tr');
+      const rowElement = labelElement.closest('[data-slot="property-item"]');
       const editButton = within(rowElement as HTMLElement).getByTestId(
         'edit-email',
       );

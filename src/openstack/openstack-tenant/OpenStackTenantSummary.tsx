@@ -1,20 +1,15 @@
 import { FunctionComponent, useMemo, useState } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
-import { ExternalLink } from '@/core/ExternalLink';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import openstackIcon from '@/images/appstore/icon-openstack.png';
+import { propVal } from '@/property/propertyFields';
 import { QuotaBadge } from '@/quotas/QuotaBadge';
 import { Quota } from '@/quotas/types';
 import { formatQuota } from '@/quotas/utils';
-import {
-  Field,
-  ResourceSummaryBase,
-  ResourceSummaryProps,
-} from '@/resource/summary';
+import { ResourceSummaryBase, ResourceSummaryProps } from '@/resource/summary';
 import { UserPassword } from '@/resource/UserPassword';
 
 import { OpenStackTenant } from './types';
@@ -25,12 +20,9 @@ const formatAccess = (props: OpenStackTenantSummaryProps) => {
   if (!ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE) {
     return null;
   }
-  if (!props.resource.access_url) {
-    return translate('No access info.');
-  }
-  return (
-    <ExternalLink label={translate('Open')} url={props.resource.access_url} />
-  );
+  return props.resource.access_url
+    ? propVal.url(props.resource.access_url, { text: translate('Open') })
+    : translate('No access info.');
 };
 
 const formatUsername = (props: OpenStackTenantSummaryProps) =>
@@ -127,26 +119,19 @@ export const OpenStackTenantSummary: FunctionComponent<
   if (props.formTableItem) {
     return (
       <>
-        <ResourceSummaryBase
-          resource={resource}
-          hideBaseInfo
-          formTableItem={props.formTableItem}
-        />
-        <FormTable.Item
-          label={translate('Access')}
-          value={formatAccess(props)}
-        />
-        <FormTable.Item
+        <ResourceSummaryBase resource={resource} hideBaseInfo />
+        <PropertyItem label={translate('Access')} value={formatAccess(props)} />
+        <PropertyItem
           label={translate('Username')}
           value={formatUsername(props)}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Password')}
           value={formatPassword(props)}
         />
         {formattedQuotas.map((quotaItem) => {
           return (
-            <FormTable.Item
+            <PropertyItem
               key={quotaItem.name}
               label={quotaItem.name}
               value={`${quotaItem.data.usage}/${quotaItem.data.limit}`}
@@ -154,7 +139,7 @@ export const OpenStackTenantSummary: FunctionComponent<
           );
         })}
         {quotas.length > 0 && (
-          <FormTable.Item
+          <PropertyItem
             label={translate('Quotas')}
             value={<QuotaBadges quotas={quotas} />}
           />
@@ -168,29 +153,43 @@ export const OpenStackTenantSummary: FunctionComponent<
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
           <ResourceSummaryBase resource={resource} hideBaseInfo />
-          <Field label={translate('Access')} value={formatAccess(props)} />
-          <Field label={translate('Username')} value={formatUsername(props)} />
-          <Field label={translate('Password')} value={formatPassword(props)} />
+          <PropertyList variant="summary">
+            <PropertyItem
+              label={translate('Access')}
+              value={formatAccess(props)}
+            />
+            <PropertyItem
+              label={translate('Username')}
+              value={formatUsername(props)}
+            />
+            <PropertyItem
+              label={translate('Password')}
+              value={formatPassword(props)}
+            />
+          </PropertyList>
         </div>
         <div>
-          {formattedQuotas.map((quotaItem) => {
-            return (
-              <Field
-                key={quotaItem.name}
-                label={quotaItem.name}
-                value={`${quotaItem.data.usage}/${quotaItem.data.limit}`}
-              />
-            );
-          })}
+          <PropertyList variant="summary">
+            {formattedQuotas.map((quotaItem) => {
+              return (
+                <PropertyItem
+                  key={quotaItem.name}
+                  label={quotaItem.name}
+                  value={`${quotaItem.data.usage}/${quotaItem.data.limit}`}
+                />
+              );
+            })}
+          </PropertyList>
         </div>
       </div>
       {quotas.length > 0 && (
         <div className="mt-3">
-          <Field
-            label={translate('Quotas')}
-            value={<QuotaBadges quotas={quotas} />}
-            isStuck
-          />
+          <PropertyList variant="summary" termWidth="auto">
+            <PropertyItem
+              label={translate('Quotas')}
+              value={<QuotaBadges quotas={quotas} />}
+            />
+          </PropertyList>
         </div>
       )}
     </>

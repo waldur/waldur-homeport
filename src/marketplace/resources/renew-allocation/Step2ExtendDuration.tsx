@@ -3,12 +3,12 @@ import { FC, useCallback, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
-import { NativeSelect } from 'waldur-ui';
+import { NativeSelect, PropertyList, PropertyItem } from 'waldur-ui';
 
 import { formatDate, parseDate } from '@/core/dateUtils';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { RenewalCostBreakdown } from './RenewalCostBreakdown';
@@ -32,11 +32,6 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
   const isMulti = resources?.length > 1;
   const { values } = useFormState<RenewAllocationFormData>();
   const form = useForm();
-
-  const currentEndDate = useMemo(
-    () => (resources[0].end_date ? formatDate(resources[0].end_date) : 'N/A'),
-    [resources],
-  );
 
   const prepaidComponent = useMemo(
     () => resources[0].offering_components?.find((c) => c.is_prepaid),
@@ -80,17 +75,17 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      {!isMulti && (
-        <Field
-          label={translate('Current end date')}
-          value={currentEndDate}
-          labelCol="auto"
-          valueCol="auto"
-          valueClass="ms-auto"
-          className="mb-4"
-          xs="auto"
-        />
-      )}
+      <PropertyList variant="summary" termWidth="md">
+        {!isMulti && (
+          <PropertyItem
+            label={translate('Current end date')}
+            value={propVal.date(resources[0].end_date)}
+            placeholder="N/A"
+            hideIfEmpty={false}
+            className="mb-4"
+          />
+        )}
+      </PropertyList>
       <FormGroup
         label={translate('Extension period')}
         description={

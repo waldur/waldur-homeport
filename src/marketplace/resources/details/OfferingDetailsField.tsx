@@ -1,12 +1,11 @@
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { PropertyItem, Tooltip } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { Field } from '@/resource/summary';
 
 const OfferingDetailsDialog = lazyComponent(() =>
   import('@/marketplace/offerings/details/OfferingDetailsDialog').then(
@@ -25,7 +24,7 @@ export const OfferingDetailsField = ({
 }) => {
   const { openDialog } = useModal();
   return (
-    <Field
+    <PropertyItem
       label={translate('Offering name')}
       value={
         <>

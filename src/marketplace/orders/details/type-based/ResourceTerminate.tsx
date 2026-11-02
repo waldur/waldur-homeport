@@ -1,23 +1,26 @@
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { getLabel } from '@/marketplace/common/registry';
-import { Field } from '@/resource/summary';
 
-import { OrderTypeBasedProps, RequestedByField } from './OrderCommonFields';
+import {
+  ORDER_LIST_PROPS,
+  OrderTypeBasedProps,
+  RequestedByField,
+} from './OrderCommonFields';
 
 export const ResourceTerminate = ({ order }: OrderTypeBasedProps) => {
   return (
-    <>
+    <PropertyList {...ORDER_LIST_PROPS}>
       <RequestedByField order={order} />
-      <Field
+      <PropertyItem
         label={translate('Request to delete')}
-        labelWidth={200}
         value={getLabel(order.offering_type) + ' • ' + order.resource_name}
       />
-      <Field
+      <PropertyItem
         label={[translate('Project'), '/', translate('Organization')].join(' ')}
-        labelWidth={200}
         value={order.project_name + ' • ' + order.customer_name}
       />
-    </>
+    </PropertyList>
   );
 };

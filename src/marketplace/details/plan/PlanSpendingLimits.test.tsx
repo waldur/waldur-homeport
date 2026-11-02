@@ -127,7 +127,7 @@ describe('PlanSpendingLimits', () => {
     await user.clear(day);
     await user.type(day, '150');
     expect(day).toHaveAttribute('aria-invalid', 'true');
-    expect(day).toHaveAccessibleDescription('Must not exceed 100.');
+    expect(day).toHaveAccessibleDescription(/Must not exceed 100\./);
     expect(screen.getByRole('button', { name: 'Submit' })).toBeDisabled();
   });
 
@@ -136,7 +136,7 @@ describe('PlanSpendingLimits', () => {
     renderSection();
     const week = getInput('Weekly');
     await user.type(week, '30.125');
-    expect(week).toHaveAccessibleDescription('Use at most 2 decimal places.');
+    expect(week).toHaveAccessibleDescription(/Use at most 2 decimal places\./);
   });
 
   it('rejects a shorter period above a longer one', async () => {
@@ -149,7 +149,7 @@ describe('PlanSpendingLimits', () => {
       expect(screen.getByRole('button', { name: 'Submit' })).toBeDisabled(),
     );
     expect(getInput('Daily')).toHaveAccessibleDescription(
-      'Must not exceed the amount for the week (10).',
+      /Must not exceed the amount for the week \(10\)\./,
     );
   });
 

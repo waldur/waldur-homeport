@@ -1,8 +1,7 @@
-import { HelpIcon, WarningTip } from 'waldur-ui';
+import { HelpIcon, PropertyItem, WarningTip } from 'waldur-ui';
 
 import { formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 
 import { formatTerminatedAt, getTerminatedAt } from './getTerminatedAt';
 
@@ -11,7 +10,7 @@ export const EndDateField = ({ resource }) => {
   const terminatedAt = getTerminatedAt(resource);
   if (terminatedAt) {
     return (
-      <Field
+      <PropertyItem
         label={translate('Terminated at')}
         value={formatTerminatedAt(terminatedAt)}
       />
@@ -51,7 +50,7 @@ export const EndDateField = ({ resource }) => {
   );
 
   return (
-    <Field
+    <PropertyItem
       label={translate('Termination date')}
       value={
         <span className={isPastDate ? 'text-danger' : ''}>

@@ -11,8 +11,8 @@ import {
   RequestedResource,
 } from 'waldur-js-client';
 
-import { AlertItem, Tooltip, BaseButton } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { AlertItem, BaseButton, PropertyList, Tooltip } from 'waldur-ui';
+import { Badge, PropertyItem } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
@@ -27,7 +27,6 @@ import { PurchaseOrderCell } from '@/proposals/PurchaseOrderCell';
 import { getRequestedResourceCost } from '@/proposals/requestedResourceCost';
 import { RequestedResourceCostLabel } from '@/proposals/RequestedResourceCostLabel';
 import { ProposalReview } from '@/proposals/types';
-import { Field } from '@/resource/summary';
 import { selectAllRows } from '@/table/actions';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -35,7 +34,6 @@ import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { getTableState } from '@/table/selectors';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { renderFieldOrDash } from '@/table/utils';
 
 import { useSubmitProposalResourcesFromTemplates } from '../utils';
 
@@ -60,17 +58,18 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
       {/* Off the table: the plan is a property of the template rather than
           something to compare rows by, and the column it held was pushing the
           cost and the purchase order behind a sideways scroll. */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 text-sm mb-3">
-        <div>
-          <Field
-            label={translate('Plan')}
-            value={renderFieldOrDash(row.requested_offering_plan?.name)}
-            labelCol={5}
-            valueCol={7}
-          />
-        </div>
+      <PropertyList
+        variant="summary"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 text-sm mb-3"
+        termWidth="md"
+      >
+        <PropertyItem
+          label={translate('Plan')}
+          value={row.requested_offering_plan?.name}
+          hideIfEmpty={false}
+        />
         <SlurmPlacementFields attributes={row.attributes} />
-      </div>
+      </PropertyList>
       {!keyValues.length ? (
         hasSlurmPlacement(row.attributes) ? null : (
           <span>{translate('This resource request has no attributes.')}</span>

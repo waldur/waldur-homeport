@@ -4,8 +4,9 @@ import {
   MaintenanceAnnouncementOffering,
 } from 'waldur-js-client';
 
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -37,27 +38,26 @@ export const MaintenanceReportingExpandableRow: FC<{
 
   return (
     <ExpandableContainer>
-      {showInternalNotes && maintenance.internal_notes && (
-        <Field
-          label={
-            <>
-              {translate('Internal notes')}:
-              <span className="text-quaternary block">
-                {translate('Providers/staff visible only')}
-              </span>
-            </>
-          }
-          value={renderFieldOrDash(maintenance.internal_notes)}
-          space={4}
-        />
-      )}
-      {maintenance.message && (
-        <Field
+      <PropertyList variant="summary" space={4}>
+        {showInternalNotes && maintenance.internal_notes && (
+          <PropertyItem
+            label={
+              <>
+                {translate('Internal notes')}:
+                <span className="text-quaternary block">
+                  {translate('Providers/staff visible only')}
+                </span>
+              </>
+            }
+            value={maintenance.internal_notes}
+            hideIfEmpty={false}
+          />
+        )}
+        <PropertyItem
           label={translate('Message')}
           value={maintenance.message}
-          space={4}
         />
-      )}
+      </PropertyList>
       <Table<MaintenanceAnnouncementOffering>
         {...tableProps}
         columns={[

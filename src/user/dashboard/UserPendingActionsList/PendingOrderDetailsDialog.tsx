@@ -11,30 +11,25 @@ import {
 } from 'waldur-js-client';
 
 import {
-  Badge,
   BaseButton,
+  PropertyItem,
+  PropertyList,
   Tabs,
+  TabsContent,
   TabsList,
   TabsTrigger,
-  TabsContent,
 } from 'waldur-ui';
 
-import { formatDateTime } from '@/core/dateUtils';
-import { FieldWithCopy } from '@/core/FieldWithCopy';
-import { defaultCurrency } from '@/core/formatCurrency';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { getOrderType } from '@/marketplace/orders/utils';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ResourceLink } from '@/resource/ResourceLink';
-import { Field } from '@/resource/summary';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 
 const UploadPurchaseOrderDialog = lazyComponent(() =>
   import('@/marketplace/orders/actions/UploadPurchaseOrderDialog').then(
@@ -55,91 +50,52 @@ const OrderSummaryTab: FC<{ order: OrderDetails }> = ({ order }) => {
   const typeBadge = useMemo(() => getOrderType(order), [order]);
 
   return (
-    <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-      <div>
-        <Field
-          label={translate('Organization')}
-          value={order.customer_name}
-          labelClass="w-[100px]"
-        />
-      </div>
-      <div>
-        <Field
-          label={translate('Project')}
-          value={order.project_name}
-          labelClass="w-[100px]"
-        />
-      </div>
-      <div>
-        <Field
-          label={translate('Resource')}
-          value={
-            order.marketplace_resource_uuid ? (
-              <ResourceLink
-                uuid={order.marketplace_resource_uuid}
-                label={order.resource_name}
-              />
-            ) : (
-              renderFieldOrDash(order.resource_name)
-            )
-          }
-          labelClass="w-[100px]"
-        />
-      </div>
-      <div>
-        <Field
-          label={translate('Offering')}
-          value={order.offering_name}
-          labelClass="w-[100px]"
-        />
-      </div>
-      <div>
-        <Field
-          label={translate('Type')}
-          value={
-            <Badge
-              variant={typeBadge.variant}
-              size="sm"
-              shape="pill"
-              tone="outline"
-            >
-              {typeBadge.label}
-            </Badge>
-          }
-          labelClass="w-[100px]"
-        />
-      </div>
-      <div>
-        <Field
-          label={translate('Created by')}
-          value={
-            order.created_by_full_name
-              ? `${order.created_by_full_name} (${order.created_by_username})`
-              : order.created_by_username
-          }
-          labelClass="w-[100px]"
-        />
-      </div>
-      <div>
-        <Field
-          label={translate('Created at')}
-          value={formatDateTime(order.created)}
-          labelClass="w-[100px]"
-        />
-      </div>
-      <div>
-        <Field
-          label={translate('Provider')}
-          value={order.provider_name}
-          labelClass="w-[100px]"
-        />
-      </div>
-    </div>
+    <PropertyList
+      variant="summary"
+      className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"
+      labelClass="w-[100px]"
+    >
+      <PropertyItem
+        label={translate('Organization')}
+        value={order.customer_name}
+      />
+      <PropertyItem label={translate('Project')} value={order.project_name} />
+      <PropertyItem
+        label={translate('Resource')}
+        value={
+          order.marketplace_resource_uuid
+            ? propVal.link(order.resource_name, {
+                state: 'marketplace-resource-details',
+                params: { resource_uuid: order.marketplace_resource_uuid },
+              })
+            : order.resource_name
+        }
+      />
+      <PropertyItem label={translate('Offering')} value={order.offering_name} />
+      <PropertyItem
+        label={translate('Type')}
+        value={propVal.badge(typeBadge.label, {
+          variant: typeBadge.variant,
+        })}
+      />
+      <PropertyItem
+        label={translate('Created by')}
+        value={propVal.user({
+          full_name: order.created_by_full_name,
+          username: order.created_by_username,
+        })}
+      />
+      <PropertyItem
+        label={translate('Created at')}
+        value={propVal.date(order.created, { precision: 'datetime' })}
+      />
+      <PropertyItem label={translate('Provider')} value={order.provider_name} />
+    </PropertyList>
   );
 };
 
 // Human-readable labels for common order attribute keys
-const getAttributeLabel = (key: string): string => {
+export const getAttributeLabel = (key: string): string => {
   const labels: Record<string, string> = {
     new_end_date: translate('New end date'),
     old_end_date: translate('Previous end date'),
@@ -165,33 +121,69 @@ const getAttributeLabel = (key: string): string => {
   );
 };
 
-// Format attribute value for display
-const formatAttributeValue = (key: string, value: unknown): string => {
-  if (value === null || value === undefined) {
-    return '-';
-  }
+export interface OrderAttributePropertyProps {
+  name: string;
+  value: unknown;
+  label?: string;
+  hasCopy?: boolean;
+}
+
+export const OrderAttributeProperty: FC<OrderAttributePropertyProps> = ({
+  name,
+  value,
+  label = getAttributeLabel(name),
+  hasCopy = true,
+}) => {
   if (typeof value === 'boolean') {
-    return value ? translate('Yes') : translate('No');
+    return (
+      <PropertyItem
+        label={label}
+        value={propVal.boolean(value)}
+        hasCopy={hasCopy}
+      />
+    );
   }
-  // Format currency values
   if (
-    (key.includes('cost') || key.includes('price')) &&
+    (name.includes('cost') || name.includes('price')) &&
     typeof value === 'number'
   ) {
-    return defaultCurrency(value) || String(value);
+    return (
+      <PropertyItem
+        label={label}
+        value={propVal.currency(value)}
+        hasCopy={hasCopy}
+      />
+    );
   }
-  if (typeof value === 'object') {
-    return JSON.stringify(value, null, 2);
-  }
-  // Format date-like values
   if (
     typeof value === 'string' &&
-    (key.includes('date') || key.includes('_at')) &&
+    (name.includes('date') || name.includes('_at')) &&
     /^\d{4}-\d{2}-\d{2}/.test(value)
   ) {
-    return formatDateTime(value);
+    return (
+      <PropertyItem
+        label={label}
+        value={propVal.date(value, { precision: 'datetime' })}
+        hasCopy={hasCopy}
+      />
+    );
   }
-  return String(value);
+  if (typeof value === 'object' && value !== null) {
+    return (
+      <PropertyItem
+        label={label}
+        value={propVal.json(value)}
+        hasCopy={hasCopy}
+      />
+    );
+  }
+  return (
+    <PropertyItem
+      label={label}
+      value={value as string | number | null | undefined}
+      hasCopy={hasCopy}
+    />
+  );
 };
 
 const OrderAttributesTab: FC<{ order: OrderDetails }> = ({ order }) => {
@@ -207,15 +199,11 @@ const OrderAttributesTab: FC<{ order: OrderDetails }> = ({ order }) => {
   }
 
   return (
-    <FormTable detailsMode>
+    <PropertyList detailsMode>
       {entries.map(([key, value]) => (
-        <FormTable.Item
-          key={key}
-          label={getAttributeLabel(key)}
-          value={<FieldWithCopy value={formatAttributeValue(key, value)} />}
-        />
+        <OrderAttributeProperty key={key} name={key} value={value} />
       ))}
-    </FormTable>
+    </PropertyList>
   );
 };
 
@@ -224,61 +212,53 @@ const OrderMetadataTab: FC<{
   offering?: PublicOfferingDetails;
 }> = ({ order, offering }) => {
   return (
-    <FormTable detailsMode>
-      {order.backend_id && (
-        <FormTable.Item
-          label={translate('Backend ID')}
-          value={<FieldWithCopy value={order.backend_id} />}
-        />
-      )}
+    <PropertyList detailsMode hideIfEmpty>
+      <PropertyItem
+        label={translate('Backend ID')}
+        value={order.backend_id}
+        hasCopy
+      />
 
-      {order.category_title && (
-        <FormTable.Item
-          label={translate('Category')}
-          value={<FieldWithCopy value={order.category_title} />}
-        />
-      )}
+      <PropertyItem
+        label={translate('Category')}
+        value={order.category_title}
+        hasCopy
+      />
 
-      {offering?.components && offering.components.length > 0 && (
-        <FormTable.Item
-          label={translate('Components')}
-          value={
-            <FieldWithCopy
-              value={offering.components
-                .map((component) => component.type)
-                .join(', ')}
-            />
-          }
-        />
-      )}
+      <PropertyItem
+        label={translate('Components')}
+        value={propVal.list(
+          offering?.components?.map((component) => component.type),
+        )}
+        hasCopy
+      />
 
-      <FormTable.Item
+      <PropertyItem
         label={translate('Offering type')}
-        value={<FieldWithCopy value={order.offering_type} />}
+        value={order.offering_type}
+        hasCopy
       />
 
-      <FormTable.Item
+      <PropertyItem
         label={translate('Offering UUID')}
-        value={<FieldWithCopy value={order.offering_uuid} />}
+        value={order.offering_uuid}
+        hasCopy
       />
 
-      <FormTable.Item
-        label={translate('Order ID')}
-        value={<FieldWithCopy value={order.slug} />}
-      />
+      <PropertyItem label={translate('Order ID')} value={order.slug} hasCopy />
 
-      <FormTable.Item
+      <PropertyItem
         label={translate('Provider UUID')}
-        value={<FieldWithCopy value={order.provider_uuid} />}
+        value={order.provider_uuid}
+        hasCopy
       />
 
-      {order.marketplace_resource_uuid && (
-        <FormTable.Item
-          label={translate('Resource UUID')}
-          value={<FieldWithCopy value={order.marketplace_resource_uuid} />}
-        />
-      )}
-    </FormTable>
+      <PropertyItem
+        label={translate('Resource UUID')}
+        value={order.marketplace_resource_uuid}
+        hasCopy
+      />
+    </PropertyList>
   );
 };
 

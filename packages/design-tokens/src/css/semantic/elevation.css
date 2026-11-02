@@ -2,6 +2,9 @@
  * Shadows for floating layers.
  *
  *   --dropdown-shadow   dropdowns, menus and popovers
+ *   --dropdown-outline  a ring drawn under --dropdown-shadow: none in light,
+ *                       1px of --border-secondary in dark, where the shadow
+ *                       doesn't show on the page
  *   --overlay-shadow    dialogs and toasts
  *   --shadow-color      what any other shadow or darkening tint is mixed
  *                       from: color-mix(in srgb, var(--shadow-color) 8%,

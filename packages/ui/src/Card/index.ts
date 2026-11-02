@@ -6,3 +6,4 @@ export {
   CardHeader,
   CardTitle,
 } from './Card';
+export type { CardProps, CardTitleProps } from './Card';

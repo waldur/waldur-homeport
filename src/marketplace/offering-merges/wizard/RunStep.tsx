@@ -1,15 +1,15 @@
 import { FC, useEffect, useState } from 'react';
 import { OfferingMerge, OfferingMergeRefusal } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, PropertyCard, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 import { ExecuteMergeButton } from '../actions';
 import { DETAILS_STATE } from '../constants';
-import { InvoicePolicyLabel } from '../InvoicePolicy';
+import { getInvoicePolicyOptions } from '../InvoicePolicy';
 import { MergeRefusalAlert } from '../MergeRefusal';
 import { MergeProgress, MergeVerification } from '../MergeRunStatus';
 import { OfferingMergeStateBadge } from '../OfferingMergeStateBadge';
@@ -40,39 +40,42 @@ export const RunStep: FC<RunStepProps> = ({
   useEffect(() => setRefusal(null), [merge.state, previewKey]);
   return (
     <div className="flex flex-col gap-4">
-      <FormTable.Card>
-        <FormTable>
-          <FormTable.Item
+      <PropertyCard>
+        <PropertyList>
+          <PropertyItem
             label={translate('State')}
             value={<OfferingMergeStateBadge state={merge.state} />}
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Sources')}
-            value={merge.source_offerings
-              .map((offering) => offering.name)
-              .join(', ')}
+            value={propVal.list(
+              merge.source_offerings.map((offering) => offering.name),
+            )}
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Target')}
             value={merge.target_offering?.name}
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Resources to move')}
-            value={merge.preview?.counts?.[RESOURCE_COUNT_KEY] ?? 0}
+            value={propVal.count(merge.preview?.counts?.[RESOURCE_COUNT_KEY])}
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Invoice policy')}
-            value={<InvoicePolicyLabel policy={merge.invoice_policy} />}
-          />
-          <FormTable.Item
-            label={translate('Warnings acknowledged')}
-            value={translate('{done} of {total}', {
-              done: warnings.length - missing.length,
-              total: warnings.length,
+            value={propVal.enum(merge.invoice_policy ?? 'open_month', {
+              options: getInvoicePolicyOptions(),
             })}
           />
-        </FormTable>
-      </FormTable.Card>
+          <PropertyItem
+            label={translate('Warnings acknowledged')}
+            value={propVal.meter(
+              warnings.length - missing.length,
+              warnings.length,
+              { showPercent: true },
+            )}
+          />
+        </PropertyList>
+      </PropertyCard>
 
       {!settled && (
         <div className="flex flex-col gap-2.5 items-start">

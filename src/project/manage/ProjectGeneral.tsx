@@ -2,6 +2,8 @@ import { DateTime } from 'luxon';
 import React from 'react';
 import { projectsPartialUpdate, Project } from 'waldur-js-client';
 
+import { PropertyCard, PropertyList, PropertyItem } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { parseDate } from '@/core/dateUtils';
 import { CompactEditButton } from '@/form/CompactEditButton';
@@ -13,7 +15,6 @@ import {
   SelectEditField,
   StringEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
@@ -69,8 +70,8 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
     <EditFieldProvider scope={project} callback={updateProject}>
       {canUpdateProject && <ProjectAvatar project={project} />}
 
-      <FormTable.Card title={translate('Details')} className="card-bordered">
-        <FormTable hideActions={!canUpdateProject}>
+      <PropertyCard bordered title={translate('Details')}>
+        <PropertyList hideActions={!canUpdateProject}>
           <StringEditField
             name="name"
             label={translate('Name')}
@@ -94,9 +95,9 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
             isStaffOnly
           />
 
-          <FormTable.Item
+          <PropertyItem
             label={translate('Owner')}
-            value={renderFieldOrDash(project.customer_name)}
+            value={project.customer_name}
           />
 
           <DateEditField
@@ -113,12 +114,12 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
             minDate={DateTime.now().toISO()}
           />
 
-          <FormTable.Item
+          <PropertyItem
             label={translate('End date')}
             description={translate(
               'Date when termination orders are created; project is removed if resources are already terminated.',
             )}
-            value={renderFieldOrDash(project.end_date)}
+            value={project.end_date}
             actions={
               <>
                 {canSetEndDate && (
@@ -158,12 +159,12 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
           />
 
           {project.effective_end_date && project.grace_period_days > 0 && (
-            <FormTable.Item
+            <PropertyItem
               label={translate('Resource termination date')}
               description={translate(
                 'The actual date when resources will be terminated, including the grace period.',
               )}
-              value={renderFieldOrDash(project.effective_end_date)}
+              value={project.effective_end_date}
             />
           )}
 
@@ -193,8 +194,8 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
             min={0}
             isStaffOnly
           />
-        </FormTable>
-      </FormTable.Card>
+        </PropertyList>
+      </PropertyCard>
     </EditFieldProvider>
   );
 };

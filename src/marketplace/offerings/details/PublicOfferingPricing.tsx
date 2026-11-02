@@ -10,8 +10,6 @@ import { ExportFullPriceList } from './ExportFullPriceList';
 import { PlanComparison } from './PlanComparison';
 import { hasVariablePricing } from './planPricing';
 
-import './PublicOfferingPricing.scss';
-
 interface PublicOfferingPricingProps {
   offering: PublicOfferingDetails;
 }
@@ -43,7 +41,6 @@ export const PublicOfferingPricing: FC<PublicOfferingPricingProps> = ({
       actions={<ExportFullPriceList offering={offering} />}
       cardBordered
       id="pricing"
-      className="public-offering-pricing"
       // The table draws its own header row directly under the panel title.
       bodyClassName="pt-0"
     >

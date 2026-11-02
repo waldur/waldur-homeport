@@ -1,11 +1,10 @@
 import { FunctionComponent } from 'react';
 import { BroadcastMessage } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, PropertyItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { Field } from '@/resource/summary';
 
 import { RecipientsListDialog } from './RecipientsListDialog';
 
@@ -19,7 +18,7 @@ export const RecipientsField: FunctionComponent<{
       size: 'xl',
     });
   return (
-    <Field label={translate('Recipients')} labelCol={5} valueCol={7}>
+    <PropertyItem label={translate('Recipients')}>
       <p>
         <BaseButton
           variant="text-primary"
@@ -27,6 +26,6 @@ export const RecipientsField: FunctionComponent<{
           label={translate('Show recipients')}
         />
       </p>
-    </Field>
+    </PropertyItem>
   );
 };

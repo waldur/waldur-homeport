@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { ConflictOfInterest } from 'waldur-js-client';
 
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 
 import './COIConfirmationBody.scss';
 
@@ -29,8 +30,13 @@ export const COIConfirmationBody: FC<COIConfirmationBodyProps> = ({
         ))}
       </ul>
     </div>
-    <Field label={translate('Reviewer')} value={row.reviewer_name} />
-    <Field label={translate('Proposal')} value={row.proposal_name} />
-    <Field label={translate('Conflict type')} value={row.coi_type_display} />
+    <PropertyList variant="summary">
+      <PropertyItem label={translate('Reviewer')} value={row.reviewer_name} />
+      <PropertyItem label={translate('Proposal')} value={row.proposal_name} />
+      <PropertyItem
+        label={translate('Conflict type')}
+        value={row.coi_type_display}
+      />
+    </PropertyList>
   </div>
 );

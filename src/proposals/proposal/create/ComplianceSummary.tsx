@@ -2,11 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { proposalProposalsChecklistRetrieve } from 'waldur-js-client';
 
-import { AccordionCard } from 'waldur-ui';
+import { AccordionCard, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
 import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
@@ -130,9 +129,9 @@ export const ComplianceSummary: FC<ComplianceSummaryProps> = ({
       subtitle={complianceSubtitle()}
       defaultOpen={false}
     >
-      <FormTable>
+      <PropertyList>
         {checklistData.questions?.map((question) => (
-          <FormTable.Item
+          <PropertyItem
             key={question.uuid}
             label={question.description}
             value={
@@ -143,7 +142,7 @@ export const ComplianceSummary: FC<ComplianceSummaryProps> = ({
             }
           />
         ))}
-      </FormTable>
+      </PropertyList>
     </AccordionCard>
   );
 };

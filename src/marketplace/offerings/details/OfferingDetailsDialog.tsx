@@ -6,6 +6,8 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { getTabs } from '@/marketplace/details/OfferingTabs';
@@ -13,7 +15,6 @@ import { OfferingTabsComponent } from '@/marketplace/details/OfferingTabsCompone
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
-import { Field } from '@/resource/summary';
 
 interface OfferingDetailsDialogProps {
   resolve: { offering: PublicOfferingDetails; concealBillingInfo?: boolean };
@@ -72,21 +73,20 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
         <h3>{translate('Unable to load offering details.')}</h3>
       ) : (
         <>
-          <Field
-            label={translate('Name')}
-            value={value.offering.name}
-            valueClass="text-secondary"
-          />
-          <Field
-            label={translate('Service provider')}
-            value={value.offering.customer_name}
-            valueClass="text-secondary"
-          />
-          <Field
-            label={translate('Parent offering')}
-            value={value.offering.parent_name}
-            valueClass="text-secondary"
-          />
+          <PropertyList variant="summary" valueClass="text-secondary">
+            <PropertyItem
+              label={translate('Name')}
+              value={value.offering.name}
+            />
+            <PropertyItem
+              label={translate('Service provider')}
+              value={value.offering.customer_name}
+            />
+            <PropertyItem
+              label={translate('Parent offering')}
+              value={value.offering.parent_name}
+            />
+          </PropertyList>
           <OfferingTabsComponent tabs={value.tabs} />
         </>
       )}

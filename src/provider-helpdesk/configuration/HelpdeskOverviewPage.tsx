@@ -1,21 +1,18 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import { BaseButton, PropertyItem, PropertyList } from 'waldur-ui';
 
-import { formatDate } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
-import { BooleanField } from '@/table/BooleanField';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 import { useCustomer } from '@/workspace/hooks';
 
 import { useValidateHelpdesk } from '../api';
 import {
-  getBackendLabel,
-  getHealthMeta,
+  BACKEND_TYPE_STATES,
   getHelpdeskUrl,
+  HELPDESK_HEALTH_META,
 } from '../common/backend';
 import { useProviderHelpdesk } from '../common/useProviderHelpdesk';
 
@@ -39,45 +36,6 @@ export const HelpdeskOverviewPage: FC = () => {
   }
 
   const url = getHelpdeskUrl(helpdesk);
-  const health = getHealthMeta(helpdesk.health_status);
-
-  const rows: Array<[string, ReactNode]> = [
-    [
-      translate('Technology'),
-      <Badge variant="secondary" shape="pill" tone="outline">
-        {getBackendLabel(helpdesk.backend_type)}
-      </Badge>,
-    ],
-    [
-      translate('API URL'),
-      renderFieldOrDash(
-        url && (
-          <a href={url} target="_blank" rel="noopener noreferrer">
-            {url}
-          </a>
-        ),
-      ),
-    ],
-    [
-      translate('Health'),
-      <Badge variant={health.variant} shape="pill" tone="outline">
-        {health.label}
-      </Badge>,
-    ],
-    [
-      translate('Last health check'),
-      renderFieldOrDash(
-        helpdesk.last_health_check && formatDate(helpdesk.last_health_check),
-      ),
-    ],
-    [
-      translate('Notification email'),
-      renderFieldOrDash(helpdesk.notification_email),
-    ],
-    [translate('Active'), <BooleanField value={Boolean(helpdesk.is_active)} />],
-    [translate('Failed routings'), <>{helpdesk.failed_routing_count}</>],
-    [translate('Created'), formatDate(helpdesk.created)],
-  ];
 
   return (
     <div className="card card-bordered">
@@ -91,18 +49,66 @@ export const HelpdeskOverviewPage: FC = () => {
           size="lg"
         />
       </div>
-      <div className="card-body">
-        {rows.map(([label, value]) => (
-          <Field
-            key={label}
-            label={label}
-            value={value}
-            isStuck
-            labelClass="min-w-[150px]"
-            className="text-sm"
-          />
-        ))}
-      </div>
+      <PropertyList
+        variant="summary"
+        className="card-body"
+        termWidth="sm"
+        hideIfEmpty={false}
+      >
+        <PropertyItem
+          label={translate('Technology')}
+          value={propVal.state(helpdesk.backend_type, {
+            states: BACKEND_TYPE_STATES,
+          })}
+          className="text-sm"
+        />
+        <PropertyItem
+          label={translate('API URL')}
+          className="text-sm"
+          value={
+            url && (
+              <a href={url} target="_blank" rel="noopener noreferrer">
+                {url}
+              </a>
+            )
+          }
+        />
+        <PropertyItem
+          label={translate('Health')}
+          value={propVal.state(helpdesk.health_status, {
+            states: HELPDESK_HEALTH_META,
+          })}
+          className="text-sm"
+          placeholder={translate('Unknown')}
+        />
+        <PropertyItem
+          label={translate('Last health check')}
+          className="text-sm"
+          value={propVal.date(helpdesk.last_health_check)}
+        />
+        <PropertyItem
+          label={translate('Notification email')}
+          className="text-sm"
+          value={helpdesk.notification_email}
+        />
+        <PropertyItem
+          label={translate('Active')}
+          className="text-sm"
+          value={propVal.boolean(Boolean(helpdesk.is_active), {
+            display: 'badge',
+          })}
+        />
+        <PropertyItem
+          label={translate('Failed routings')}
+          className="text-sm"
+          value={propVal.number(helpdesk.failed_routing_count)}
+        />
+        <PropertyItem
+          label={translate('Created')}
+          className="text-sm"
+          value={propVal.date(helpdesk.created)}
+        />
+      </PropertyList>
     </div>
   );
 };

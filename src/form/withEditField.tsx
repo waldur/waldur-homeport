@@ -3,6 +3,8 @@ import { FieldValidator } from 'final-form';
 import { ComponentType, FC, ReactNode } from 'react';
 import { FieldProps } from 'react-final-form';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { CheckOrX } from '@/core/CheckOrX';
 import { StaffOnlyIndicator } from '@/core/StaffOnlyIndicator';
 import { TruncatedDescription } from '@/core/TruncatedDescription';
@@ -14,7 +16,6 @@ import { BoxNumberField } from './BoxNumberField';
 import { CommaSeparatedListField } from './CommaSeparatedListField';
 import { useEditFieldContext } from './EditFieldContext';
 import { FieldEditButton } from './FieldEditButton';
-import FormTable from './FormTable';
 import { NumberField } from './NumberField';
 import { SecretField as FormSecretField } from './SecretField';
 import { SwitchField } from './SwitchField';
@@ -68,7 +69,7 @@ interface WithEditFieldOptions {
 }
 
 /**
- * A Higher-Order Component that wraps a basic form input component with a FormTable.Item
+ * A Higher-Order Component that wraps a basic form input component with a PropertyItem
  * and a FieldEditButton. This creates a fully autonomous Edit Field component.
  *
  * Follows the same pattern as `withFormGroup` (form fields) and `withTableFilter` (table filters).
@@ -190,7 +191,7 @@ export function withEditField<P extends object>(
     );
 
     return (
-      <FormTable.Item
+      <PropertyItem
         label={label}
         description={descriptionInEditOnly ? undefined : description}
         value={displayValue}

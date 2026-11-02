@@ -19,8 +19,16 @@ export const BACKEND_OPTIONS = (
   Object.keys(BACKEND_TYPE_LABELS) as BackendTypeEnum[]
 ).map((value) => ({ value, label: BACKEND_TYPE_LABELS[value] }));
 
-export const getBackendLabel = (type?: BackendTypeEnum | string): string =>
-  (type && BACKEND_TYPE_LABELS[type as BackendTypeEnum]) || type || '';
+/** Each backend type as a badge, for a `State` row. */
+export const BACKEND_TYPE_STATES: Record<
+  BackendTypeEnum,
+  { label: string; variant: BadgeVariant }
+> = Object.fromEntries(
+  (Object.keys(BACKEND_TYPE_LABELS) as BackendTypeEnum[]).map((type) => [
+    type,
+    { label: BACKEND_TYPE_LABELS[type], variant: 'secondary' as BadgeVariant },
+  ]),
+) as Record<BackendTypeEnum, { label: string; variant: BadgeVariant }>;
 
 // A provider's settings dict overrides the operator's global backend config;
 // when set there, the API server URL lives under the backend-specific key.
@@ -30,7 +38,7 @@ const URL_SETTING_KEY: Partial<Record<BackendTypeEnum, string>> = {
   smax: 'SMAX_API_URL',
 };
 
-const HELPDESK_HEALTH_META: Record<
+export const HELPDESK_HEALTH_META: Record<
   string,
   { variant: BadgeVariant; label: string }
 > = {

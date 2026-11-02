@@ -1,5 +1,6 @@
+import { PropertyItem } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { getResourceBillingMode } from '@/marketplace/details/plan/billingMode';
 import { PlanBillingModeBadge } from '@/marketplace/details/plan/PlanBillingModeBadge';
@@ -14,7 +15,7 @@ const PlanDetailsDialog = lazyComponent(() =>
 export const PlanDetailsField = ({ resource }) => {
   const { openDialog } = useModal();
   return resource.plan_name ? (
-    <FormTable.Item
+    <PropertyItem
       label={translate('Plan')}
       value={
         <>

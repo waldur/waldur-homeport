@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { STALE_TIME } from '@/core/constants';
 import { Image } from '@/core/Image';
 import { translate } from '@/i18n';
 import { getServiceProviderByCustomer } from '@/marketplace/common/api';
 import { CustomerField } from '@/marketplace/details/CustomerField';
 import { ProjectField } from '@/marketplace/details/ProjectField';
-import { Field } from '@/resource/summary';
-import { renderFieldOrDash } from '@/table/utils';
 import { VStepperFormStepCard } from '@/wizard';
 
 import { DetailsOverviewButton } from '../DetailsOverviewButton';
@@ -46,31 +46,28 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
           />
         }
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 text-sm gap-x-5">
-          <div>
-            <Field
-              label={translate('Offering')}
-              value={
-                <div className="flex items-center self-stretch gap-1.5">
-                  {props.offering.thumbnail ? (
-                    <Image src={props.offering.thumbnail} size={24} circle />
-                  ) : null}
-                  {props.offering.name}
-                </div>
-              }
-              labelClass="me-1.5"
-              isStuck
-            />
-          </div>
-          <div>
-            <Field
-              label={translate('Service provider')}
-              value={renderFieldOrDash(provider?.customer_name)}
-              labelClass="me-1.5"
-              isStuck
-            />
-          </div>
-        </div>
+        <PropertyList
+          variant="summary"
+          className="grid grid-cols-1 sm:grid-cols-2 text-sm gap-x-5"
+          termWidth="sm"
+        >
+          <PropertyItem
+            label={translate('Offering')}
+            value={
+              <div className="flex items-center self-stretch gap-1.5">
+                {props.offering.thumbnail ? (
+                  <Image src={props.offering.thumbnail} size={24} circle />
+                ) : null}
+                {props.offering.name}
+              </div>
+            }
+          />
+          <PropertyItem
+            label={translate('Service provider')}
+            value={provider?.customer_name}
+            hideIfEmpty={false}
+          />
+        </PropertyList>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 items-end gap-x-5">
           <div>
@@ -98,47 +95,36 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
         <DetailsOverviewButton offering={props.offering} className="ms-auto" />
       }
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 text-sm gap-x-5">
-        <div>
-          <Field
-            label={translate('Organization')}
-            value={props.offering.customer_name}
-            labelCol={5}
-            valueCol={7}
-          />
-        </div>
-        <div>
-          <Field
-            label={translate('Project')}
-            value={props.offering.project_name}
-            labelCol={5}
-            valueCol={7}
-          />
-        </div>
-        <div>
-          <Field
-            label={translate('Offering')}
-            value={
-              <div className="flex items-center self-stretch gap-1.5">
-                {props.offering.thumbnail ? (
-                  <Image src={props.offering.thumbnail} size={24} circle />
-                ) : null}
-                {props.offering.name}
-              </div>
-            }
-            labelCol={5}
-            valueCol={7}
-          />
-        </div>
-        <div>
-          <Field
-            label={translate('Service provider')}
-            value={renderFieldOrDash(provider?.customer_name)}
-            labelCol={5}
-            valueCol={7}
-          />
-        </div>
-      </div>
+      <PropertyList
+        variant="summary"
+        className="grid grid-cols-1 sm:grid-cols-2 text-sm gap-x-5"
+        termWidth="md"
+      >
+        <PropertyItem
+          label={translate('Organization')}
+          value={props.offering.customer_name}
+        />
+        <PropertyItem
+          label={translate('Project')}
+          value={props.offering.project_name}
+        />
+        <PropertyItem
+          label={translate('Offering')}
+          value={
+            <div className="flex items-center self-stretch gap-1.5">
+              {props.offering.thumbnail ? (
+                <Image src={props.offering.thumbnail} size={24} circle />
+              ) : null}
+              {props.offering.name}
+            </div>
+          }
+        />
+        <PropertyItem
+          label={translate('Service provider')}
+          value={provider?.customer_name}
+          hideIfEmpty={false}
+        />
+      </PropertyList>
     </VStepperFormStepCard>
   );
 };

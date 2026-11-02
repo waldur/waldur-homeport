@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { featureValues } from 'waldur-js-client';
 
-import { Switch } from 'waldur-ui';
+import { HelpIcon, PropertyCard, Switch } from 'waldur-ui';
 
 import { TelemetryExampleButton } from '@/administration/TelemetryExampleButton';
 import { ENV } from '@/core/config';
 import { isFeatureVisible } from '@/features/connect';
 import { DeploymentFeatures } from '@/FeaturesEnums';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
@@ -42,34 +41,52 @@ export const TelemetrySendingCard = () => {
   };
 
   return (
-    <FormTable.Card title={translate('Sending')} className="card-bordered mb-4">
-      <FormTable>
-        <FormTable.Item
-          label={translate('Send telemetry metrics')}
-          description={translate(
-            'Send an anonymous daily usage report to the Waldur team.',
-          )}
-          tooltip={translate(
-            'Operators can force this off at deploy time with WALDUR_TELEMETRY_ENABLED=false, which overrides this setting.',
-          )}
-          descriptionClassName="text-tertiary"
-          value={<TelemetryExampleButton />}
-          actions={
-            canEdit ? (
-              <Switch
-                id="telemetry-send-metrics"
-                aria-label={translate('Send telemetry metrics')}
-                checked={enabled}
-                onCheckedChange={toggle}
-                disabled={submitting}
-                data-testid={DeploymentFeatures.send_metrics}
-              />
+    <PropertyCard bordered title={translate('Sending')} className="mb-4">
+      <div className="flex min-h-[52px] items-center justify-between gap-6 py-4">
+        <div className="min-w-0">
+          <div className="flex items-center gap-1.5 font-medium text-secondary">
+            {canEdit ? (
+              <label
+                htmlFor="telemetry-send-metrics"
+                className="mb-0 cursor-pointer"
+              >
+                {translate('Send telemetry metrics')}
+              </label>
             ) : (
-              <span>{enabled ? translate('Yes') : translate('No')}</span>
-            )
-          }
-        />
-      </FormTable>
-    </FormTable.Card>
+              <span>{translate('Send telemetry metrics')}</span>
+            )}
+            <HelpIcon
+              label={translate(
+                'Operators can force this off at deploy time with WALDUR_TELEMETRY_ENABLED=false, which overrides this setting.',
+              )}
+            />
+          </div>
+          <p className="text-xs text-tertiary mb-0 mt-0.5">
+            {translate(
+              'Send an anonymous daily usage report to the Waldur team.',
+            )}
+          </p>
+          <div className="mt-2">
+            <TelemetryExampleButton />
+          </div>
+        </div>
+        <div className="shrink-0">
+          {canEdit ? (
+            <Switch
+              id="telemetry-send-metrics"
+              aria-label={translate('Send telemetry metrics')}
+              checked={enabled}
+              onCheckedChange={toggle}
+              disabled={submitting}
+              data-testid={DeploymentFeatures.send_metrics}
+            />
+          ) : (
+            <span className="font-medium text-secondary">
+              {enabled ? translate('Yes') : translate('No')}
+            </span>
+          )}
+        </div>
+      </div>
+    </PropertyCard>
   );
 };

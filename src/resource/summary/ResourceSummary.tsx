@@ -1,6 +1,12 @@
 import { ComponentType, FunctionComponent, ReactNode } from 'react';
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
+import {
+  PropertyList,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import * as ResourceSummaryRegistry from '@/resource/summary/registry';
@@ -60,10 +66,12 @@ export const ResourceSummary: FunctionComponent<ResourceSummaryProps> = (
             </TabsList>
             <div className="overflow-auto">
               <TabsContent value="details">
-                <ResourceSummaryBase resource={props.resource} />
-                {SummaryComponent && (
-                  <SummaryComponent resource={props.resource} />
-                )}
+                <PropertyList variant="summary" hideIfEmpty={false}>
+                  <ResourceSummaryBase resource={props.resource} />
+                  {SummaryComponent && (
+                    <SummaryComponent resource={props.resource} />
+                  )}
+                </PropertyList>
               </TabsContent>
               {props.extraTabs &&
                 props.extraTabs.map((tab) => (

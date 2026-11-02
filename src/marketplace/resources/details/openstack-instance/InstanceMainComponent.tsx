@@ -1,9 +1,17 @@
+import { OpenStackInstance } from 'waldur-js-client';
+
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 
 import { ResourceImageField } from './ResourceImageField';
 
-export const InstanceMainComponent = ({ resourceScope }) => {
+export const InstanceMainComponent = ({
+  resourceScope,
+}: {
+  resourceScope: OpenStackInstance;
+}) => {
   if (!resourceScope) {
     return null;
   }
@@ -15,43 +23,45 @@ export const InstanceMainComponent = ({ resourceScope }) => {
         </div>
       </div>
       <div className="card-body">
-        <Field
-          label={translate('Image')}
-          value={<ResourceImageField scope={resourceScope} />}
-        />
-
-        <Field
-          label={translate('Flavor')}
-          value={resourceScope.flavor_name}
-          hasCopy
-        />
-
-        {resourceScope.server_group && (
-          <Field
-            label={translate('Server group')}
-            value={`${resourceScope.server_group.name} (${resourceScope.server_group.policy})`}
+        <PropertyList variant="summary">
+          <PropertyItem
+            label={translate('Image')}
+            value={<ResourceImageField scope={resourceScope} />}
           />
-        )}
 
-        <Field
-          label={translate('Fixed IPs')}
-          value={resourceScope.internal_ips.join(', ')}
-          hasCopy
-        />
+          <PropertyItem
+            label={translate('Flavor')}
+            value={resourceScope.flavor_name}
+            hasCopy
+          />
 
-        <Field
-          label={translate('Floating IPs')}
-          value={resourceScope.floating_ips
-            .map((item) => item.address)
-            .join(', ')}
-          hasCopy
-        />
+          {resourceScope.server_group && (
+            <PropertyItem
+              label={translate('Server group')}
+              value={`${resourceScope.server_group.name} (${resourceScope.server_group.policy})`}
+            />
+          )}
 
-        <Field
-          label={translate('External IPs')}
-          value={resourceScope.external_address.join(', ')}
-          hasCopy
-        />
+          <PropertyItem
+            label={translate('Fixed IPs')}
+            value={propVal.list(resourceScope.internal_ips)}
+            hasCopy
+          />
+
+          <PropertyItem
+            label={translate('Floating IPs')}
+            value={propVal.list(
+              resourceScope.floating_ips.map((item) => item.address),
+            )}
+            hasCopy
+          />
+
+          <PropertyItem
+            label={translate('External IPs')}
+            value={propVal.list(resourceScope.external_address)}
+            hasCopy
+          />
+        </PropertyList>
       </div>
     </div>
   );

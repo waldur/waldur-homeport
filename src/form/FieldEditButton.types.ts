@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { FieldRenderProps } from 'react-final-form';
 
-import { FormTableItemProps } from '@/form/FormTable';
+import { PropertyItemProps } from 'waldur-ui';
 
 export interface FieldEditButtonProps extends Partial<
-  Omit<FormTableItemProps, 'actions'>
+  Omit<PropertyItemProps, 'actions'>
 > {
   title?: string;
   scope: any;

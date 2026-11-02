@@ -34,12 +34,22 @@ import { cn } from '../cn';
  * Preserved in rem so responsive scaling (13px root font-size in Homeport)
  * remains exact and adapts across root font changes.
  */
-export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * Outline the card with a `--border-secondary` border instead of the
+   * theme-dependent shadow, in both themes (Metronic `.card-bordered`).
+   */
+  bordered?: boolean;
+}
+
+export function Card({ className, bordered, ...props }: CardProps) {
   return (
     <div
       className={cn(
-        'rounded-lg border-[1px] text-primary',
-        'border-[var(--card-border-color)] bg-[var(--card-bg)] shadow-[var(--card-shadow)]',
+        'rounded-lg border-[1px] bg-[var(--card-bg)] text-primary',
+        bordered
+          ? 'border-secondary shadow-none dark:bg-[var(--page-bg)]'
+          : 'border-[var(--card-border-color)] shadow-[var(--card-shadow)]',
         className,
       )}
       {...props}
@@ -63,15 +73,30 @@ export function CardHeader({
   );
 }
 
+export interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
+  /**
+   * - `md` (default): `.card-title` set directly on the heading
+   *   (1.275rem, medium).
+   * - `lg`: an `<h3>` nested in `.card-title` (Bootstrap reboot `h3`:
+   *   `$h3-font-size` 1.385rem, `$headings-font-weight` semibold), the
+   *   page-section card title used across Homeport.
+   */
+  size?: 'md' | 'lg';
+}
+
 export function CardTitle({
   className,
   children,
+  size = 'md',
   ...props
-}: HTMLAttributes<HTMLHeadingElement>) {
+}: CardTitleProps) {
   return (
     <h3
       className={cn(
-        'my-[0.5rem] mr-[0.5rem] ml-0 flex items-center text-[1.275rem] leading-[1.2] font-medium text-primary',
+        'my-[0.5rem] mr-[0.5rem] ml-0 flex items-center leading-[1.2] text-primary',
+        size === 'lg'
+          ? 'text-[1.385rem] font-semibold'
+          : 'text-[1.275rem] font-medium',
         className,
       )}
       {...props}

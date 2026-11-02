@@ -1,19 +1,11 @@
-import { AccordionCard } from 'waldur-ui';
+import { AccordionCard, PropertyList, PropertyItem } from 'waldur-ui';
 
-import { formatFilesize } from '@/core/utils';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 interface CeleryResourceUsageProps {
   rusage: Record<string, number>;
 }
-
-const formatCpuTime = (seconds: number): string => {
-  if (seconds < 60) return `${seconds.toFixed(2)}s`;
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = (seconds % 60).toFixed(2);
-  return `${minutes}m ${remainingSeconds}s`;
-};
 
 export const CeleryResourceUsage = ({ rusage }: CeleryResourceUsageProps) => {
   return (
@@ -22,52 +14,52 @@ export const CeleryResourceUsage = ({ rusage }: CeleryResourceUsageProps) => {
       className="mb-5"
       defaultOpen={false}
     >
-      <FormTable>
-        <FormTable.Item
+      <PropertyList>
+        <PropertyItem
           label={translate('User CPU time')}
-          value={formatCpuTime(rusage.utime)}
+          value={propVal.duration(rusage.utime)}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('System CPU time')}
-          value={formatCpuTime(rusage.stime)}
+          value={propVal.duration(rusage.stime)}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Max resident memory')}
-          value={formatFilesize(rusage.maxrss, 'B')}
+          value={propVal.fileSize(rusage.maxrss)}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Page faults (minor)')}
-          value={rusage.minflt.toLocaleString()}
+          value={propVal.count(rusage.minflt)}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Page faults (major)')}
-          value={rusage.majflt.toLocaleString()}
+          value={propVal.count(rusage.majflt)}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Block input operations')}
-          value={rusage.inblock.toLocaleString()}
+          value={propVal.count(rusage.inblock)}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Block output operations')}
-          value={rusage.oublock.toLocaleString()}
+          value={propVal.count(rusage.oublock)}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Messages sent')}
-          value={rusage.msgsnd.toLocaleString()}
+          value={propVal.count(rusage.msgsnd)}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Messages received')}
-          value={rusage.msgrcv.toLocaleString()}
+          value={propVal.count(rusage.msgrcv)}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Voluntary context switches')}
-          value={rusage.nvcsw.toLocaleString()}
+          value={propVal.count(rusage.nvcsw)}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Involuntary context switches')}
-          value={rusage.nivcsw.toLocaleString()}
+          value={propVal.count(rusage.nivcsw)}
         />
-      </FormTable>
+      </PropertyList>
     </AccordionCard>
   );
 };

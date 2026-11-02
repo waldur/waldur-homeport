@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { openstackVolumeTypesRetrieve } from 'waldur-js-client';
 
-import { formatFilesize, getUUID } from '@/core/utils';
-import FormTable from '@/form/FormTable';
+import { PropertyItem } from 'waldur-ui';
+
+import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
 import { OrderDetailsProps } from '@/marketplace/types';
+import { propVal } from '@/property/propertyFields';
 
 import { formatVolumeTypeLabel } from '../openstack-instance/utils';
 
@@ -22,18 +24,24 @@ export const OpenstackVolumeDetails = (props: OrderDetailsProps) => {
   });
   return (
     <>
-      <FormTable.Item label={translate('Size')}>
-        {formatFilesize(props.order.attributes['size'])}
-      </FormTable.Item>
+      <PropertyItem
+        label={translate('Size')}
+        value={propVal.fileSize(
+          props.order.attributes['size'] as number | string,
+          { unit: 'MB' },
+        )}
+        hideIfEmpty={false}
+      />
       {typeof order.attributes['availability_zone_name'] === 'string' && (
-        <FormTable.Item label={translate('Availability zone')}>
-          {order.attributes['availability_zone_name']}
-        </FormTable.Item>
+        <PropertyItem
+          label={translate('Availability zone')}
+          value={order.attributes['availability_zone_name']}
+        />
       )}
       {volumeType && (
-        <FormTable.Item label={translate('Volume type')}>
+        <PropertyItem label={translate('Volume type')}>
           {formatVolumeTypeLabel(volumeType)}
-        </FormTable.Item>
+        </PropertyItem>
       )}
     </>
   );

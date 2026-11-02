@@ -3,17 +3,15 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { OfferingMergeRefusal } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, PropertyItem, PropertyList } from 'waldur-ui';
 
-import { formatDateTime } from '@/core/dateUtils';
 import { HelpTip } from '@/core/HelpTip';
 import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 
 import { UndoMergeButton } from './actions';
 import { LIST_PARAMS, LIST_STATE, WIZARD_STATE } from './constants';
@@ -99,8 +97,8 @@ export const OfferingMergeDetails: FC = () => {
               <UndoMergeButton merge={merge} onRefused={setRefusal} />
             </div>
           </div>
-          <FormTable>
-            <FormTable.Item
+          <PropertyList>
+            <PropertyItem
               label={translate('Sources')}
               value={
                 <div className="flex flex-col">
@@ -116,26 +114,22 @@ export const OfferingMergeDetails: FC = () => {
                 </div>
               }
             />
-            <FormTable.Item
+            <PropertyItem
               label={translate('Target')}
-              value={
-                <Link
-                  state="admin-marketplace-offering-details"
-                  params={{ offering_uuid: merge.target }}
-                >
-                  {merge.target_offering?.name}
-                </Link>
-              }
+              value={propVal.link(merge.target_offering?.name, {
+                state: 'admin-marketplace-offering-details',
+                params: { offering_uuid: merge.target },
+              })}
             />
-            <FormTable.Item
+            <PropertyItem
               label={translate('Created')}
-              value={formatDateTime(merge.created)}
+              value={propVal.date(merge.created, { precision: 'datetime' })}
             />
-            <FormTable.Item
+            <PropertyItem
               label={translate('Created by')}
-              value={renderFieldOrDash(merge.created_by_full_name)}
+              value={merge.created_by_full_name}
             />
-          </FormTable>
+          </PropertyList>
           <MergeRefusalAlert
             title={translate('Undo was refused')}
             refusal={refusal}

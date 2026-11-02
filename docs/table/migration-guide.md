@@ -58,68 +58,85 @@ list from 4 to 3 later is a component swap plus `useTable`, not a rewrite.
 A details panel, an expandable-row summary or a "Connection" card: each row is
 one label and one value about a single object. This is not tabular data.
 
-There are exactly two ways to write one; do not hand-roll a third (a `<dl>`
-grid, a local `DetailRow` / `InfoRow`, a borderless `<table>`). Choose by what
-the rows do, not by where the block sits:
+Use `PropertyList`, `PropertyItem`, and `PropertyCard` from `waldur-ui` (which
+renders accessible `<dl>/<dt>/<dd>` markup across both Homeport and standalone
+micro-apps). Do not hand-roll raw `<dl>` grids, local `DetailRow` / `InfoRow`
+wrappers, or borderless `<table>` markup. Choose the variant by what the rows
+do, not by where the block sits:
 
 ```text
 Can the user act on a row (an edit button, an inline control, an action)?
-├─ Yes .................................................... FormTable
+├─ Yes .................................................... PropertyList (variant="divided") + PropertyItem / *EditField
 └─ No: read-only
    ├─ Must every property show, even when it has no value
    │  (a settings or configuration overview, where "not set" is information)?
-   │  └─ Yes ............................................... FormTable
-   └─ No: a summary that leaves out what is empty ......... Field
-      (always Field in an expandable row, inside ExpandableContainer asTable)
+   │  └─ Yes ............................................... PropertyList (variant="divided") + PropertyItem
+   └─ No: a summary that leaves out what is empty ......... PropertyList (variant="summary") + PropertyItem, or ExpandableContainer asTable
 ```
 
-|                  | `FormTable` + `FormTable.Item`                                                               | `Field` (+ `ExpandableContainer asTable`)                             |
-| :--------------- | :------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------- |
-| For              | Editable details and settings panels; read-only configuration overviews                      | Read-only summaries: expanded rows, detail dialogs, preview cards     |
-| Empty value      | Row stays; pass `renderFieldOrDash(value)` so it reads as a dash                             | Row is left out; pass the raw value                                   |
-| Row actions      | `actions` column; `*EditField` adds the edit button                                          | None                                                                  |
-| Controls in rows | Label is a `<label>` pointing at the row's control; `required`, `description`, `warnTooltip` | Not for controls                                                      |
-| Extras           | `FormTable.Card` (title, refresh, toolbar), grouped rows, `detailsMode`                      | `hasCopy`, help `tooltip`, colon and long-label tooltip added for you |
-| In the app today | 118 files; 67 with edit or row actions; one in an expandable row                             | 128 files; 52 in expandable rows                                      |
+|                  | `PropertyList` (`variant="divided"`) + `PropertyItem`                                        | `PropertyItem` (`variant="summary"`, or inside `ExpandableContainer asTable`) |
+| :--------------- | :------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------- |
+| For              | Editable details and settings panels; read-only configuration overviews                      | Read-only summaries: expanded rows, detail dialogs, preview cards             |
+| Empty value      | Row stays; pass `renderFieldOrDash(value)` so it reads as a dash                             | Row is left out; pass the raw value                                           |
+| Row actions      | `actions` column; `*EditField` adds the edit button                                          | None                                                                          |
+| Controls in rows | Label is a `<label>` pointing at the row's control; `required`, `description`, `warnTooltip` | Not for controls                                                              |
+| Extras           | `PropertyCard` (title, refresh, toolbar), grouped rows, `detailsMode`                        | `hasCopy`, help `tooltip`, colon and long-label tooltip added for you         |
 
-When a block is half and half (read-only rows plus one editable row), it is
-`FormTable`: a single panel should not mix both components.
+When a block is half and half (read-only rows plus one editable row), wrap it in
+`<PropertyList>` (`variant="divided"`).
 
-**`FormTable`**, a page's settings panel with every property shown:
+Rows always sit in a list. A `PropertyItem` outside one wraps itself in its own
+`<dl>`, so loose rows read to a screen reader as a run of one-item lists, and a
+grid of `<div>` cells with one row each is as many lists as cells: make the
+`PropertyList` the grid instead (`className="grid sm:grid-cols-2 gap-x-5"`).
+`waldur-custom/property-item-in-list` flags rows that render inside another
+element before reaching a list. A component that returns only rows (a fragment
+of `PropertyItem`s) is fine: its caller holds the list.
+
+An expanded row whose rows sit in columns or sections of their own takes
+`<ExpandableContainer alignRows>` rather than `asTable`: it lines the labels up
+the same way, without wrapping the columns in a list, and each column holds its
+own `<PropertyList variant="summary">`.
+
+**`PropertyList`**, a page's settings panel with every property shown:
 
 ```tsx
-import FormTable from '@/form/FormTable';
+import { PropertyItem, PropertyList } from 'waldur-ui';
 
-<FormTable>
-  <FormTable.Item
+<PropertyList>
+  <PropertyItem
     label={translate('Partner Name')}
     value={renderFieldOrDash(settings.partner_name)}
   />
-  <FormTable.Item
+  <PropertyItem
     label={translate('Sync Enabled')}
     value={settings.sync_enabled ? translate('Yes') : translate('No')}
   />
-</FormTable>;
+</PropertyList>;
 ```
 
 With editable rows, use the `*EditField` exports inside an
-`EditFieldProvider` instead of `FormTable.Item` (`docs/forms.md` → Edit Field
+`EditFieldProvider` instead of `PropertyItem` (`docs/forms.md` → Edit Field
 Architecture). References: `src/administration/arrow/settings/ArrowSettingsCard.tsx`
 (read-only overview), `src/customer/details/CustomerDetailsPanel.tsx`
 (editable).
 
-**`Field`**, a read-only summary; in an expandable row, wrapped so labels and
-values line up in columns:
+**`PropertyItem` (summary mode)**, a read-only summary; in an expandable row,
+wrapped so labels and values line up in columns:
 
 ```tsx
-import { Field } from '@/resource/summary';
+import { PropertyItem } from 'waldur-ui';
+
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 const RecordDetail = ({ row }) => (
   <ExpandableContainer asTable>
-    <Field label={translate('Resource')} value={row.resource_name} />
-    <Field label={translate('Created')} value={formatDateTime(row.created)} />
-    <Field
+    <PropertyItem label={translate('Resource')} value={row.resource_name} />
+    <PropertyItem
+      label={translate('Created')}
+      value={formatDateTime(row.created)}
+    />
+    <PropertyItem
       label={translate('Final (Sell)')}
       value={row.final_sell ? defaultCurrency(row.final_sell) : null}
       valueClass="font-medium"
@@ -128,7 +145,7 @@ const RecordDetail = ({ row }) => (
 );
 ```
 
-In a dialog or card, list the `Field`s directly. References:
+In a dialog or card, list the `PropertyItem`s directly. References:
 `ConsumptionRecordDetail` in
 `src/administration/arrow/consumption/ConsumptionRecordsList.tsx` (expandable
 row), the header of

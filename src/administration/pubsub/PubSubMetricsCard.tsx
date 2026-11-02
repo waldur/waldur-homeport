@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 
-import { AccordionCard } from 'waldur-ui';
+import { AccordionCard, PropertyList, PropertyItem } from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 import { getPubSubMetrics } from './api';
-import { formatLatency, formatNumber, formatTimestamp } from './utils';
 
 export const PubSubMetricsCard: FC = () => {
   const { data, isLoading } = useQuery({
@@ -30,96 +30,60 @@ export const PubSubMetricsCard: FC = () => {
           <LoadingSpinner />
         </div>
       ) : data ? (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
-          <div>
-            <h6 className="uppercase text-quaternary mb-2.5">
-              {translate('Message counts')}
-            </h6>
-            <table className="table table-sm table-borderless mb-0">
-              <tbody>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Messages sent')}
-                  </td>
-                  <td className="text-end text-success">
-                    {formatNumber(data.messages_sent)}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Messages failed')}
-                  </td>
-                  <td
-                    className={`text-end ${data.messages_failed > 0 ? 'text-danger' : ''}`}
-                  >
-                    {formatNumber(data.messages_failed)}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Messages retried')}
-                  </td>
-                  <td
-                    className={`text-end ${data.messages_retried > 0 ? 'text-warning' : ''}`}
-                  >
-                    {formatNumber(data.messages_retried)}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Messages skipped')}
-                  </td>
-                  <td className="text-end">
-                    {formatNumber(data.messages_skipped)}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <h6 className="uppercase text-quaternary mb-2.5">
-              {translate('Additional metrics')}
-            </h6>
-            <table className="table table-sm table-borderless mb-0">
-              <tbody>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Circuit breaker trips')}
-                  </td>
-                  <td
-                    className={`text-end ${data.circuit_breaker_trips > 0 ? 'text-warning' : ''}`}
-                  >
-                    {formatNumber(data.circuit_breaker_trips)}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Rate limiter rejections')}
-                  </td>
-                  <td className="text-end">
-                    {formatNumber(data.rate_limiter_rejections)}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Average publish time')}
-                  </td>
-                  <td className="text-end">
-                    {formatLatency(data.avg_publish_time_ms)}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Last publish time')}
-                  </td>
-                  <td className="text-end">
-                    {formatTimestamp(data.last_publish_time)}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <PropertyList
+          variant="compact"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-x-5"
+        >
+          <PropertyList.Section title={translate('Message counts')}>
+            <PropertyItem
+              label={translate('Messages sent')}
+              value={propVal.count(data.messages_sent)}
+              valueClass="text-success"
+            />
+            <PropertyItem
+              label={translate('Messages failed')}
+              value={propVal.count(data.messages_failed)}
+              valueClass={data.messages_failed > 0 ? 'text-danger' : undefined}
+            />
+            <PropertyItem
+              label={translate('Messages retried')}
+              value={propVal.count(data.messages_retried)}
+              valueClass={
+                data.messages_retried > 0 ? 'text-warning' : undefined
+              }
+            />
+            <PropertyItem
+              label={translate('Messages skipped')}
+              value={propVal.count(data.messages_skipped)}
+            />
+          </PropertyList.Section>
+          <PropertyList.Section title={translate('Additional metrics')}>
+            <PropertyItem
+              label={translate('Circuit breaker trips')}
+              value={propVal.count(data.circuit_breaker_trips)}
+              valueClass={
+                data.circuit_breaker_trips > 0 ? 'text-warning' : undefined
+              }
+            />
+            <PropertyItem
+              label={translate('Rate limiter rejections')}
+              value={propVal.count(data.rate_limiter_rejections)}
+            />
+            <PropertyItem
+              label={translate('Average publish time')}
+              value={propVal.duration(data.avg_publish_time_ms, {
+                unit: 'ms',
+              })}
+            />
+            <PropertyItem
+              label={translate('Last publish time')}
+              value={propVal.date(data.last_publish_time, {
+                epoch: true,
+                precision: 'datetime',
+              })}
+            />
+          </PropertyList.Section>
+        </PropertyList>
       ) : (
         <p className="text-quaternary mb-0">
           {translate('Failed to load metrics.')}

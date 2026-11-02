@@ -14,6 +14,7 @@ export type {
   RmqOverview,
   RmqObjectTotals,
   RmqQueueTotals,
+  RmqMessageStats,
 } from 'waldur-js-client';
 
 // GET /api/rabbitmq-stats/ - View queue statistics

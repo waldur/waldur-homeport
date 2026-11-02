@@ -5,13 +5,14 @@ import {
   callReviewerPoolsPartialUpdate,
 } from 'waldur-js-client';
 
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { SubmitButton, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { Field } from '@/resource/summary';
 
 interface EditCapacityDialogProps {
   resolve: {
@@ -59,18 +60,20 @@ export const EditCapacityDialog: FC<EditCapacityDialogProps> = ({
             }
           >
             <div>
-              <Field
-                label={translate('Name')}
-                value={poolMember.reviewer_name}
-              />
-              <Field
-                label={translate('Email')}
-                value={poolMember.reviewer_email}
-              />
-              <Field
-                label={translate('Current assignments')}
-                value={String(poolMember.current_assignments)}
-              />
+              <PropertyList variant="summary">
+                <PropertyItem
+                  label={translate('Name')}
+                  value={poolMember.reviewer_name}
+                />
+                <PropertyItem
+                  label={translate('Email')}
+                  value={poolMember.reviewer_email}
+                />
+                <PropertyItem
+                  label={translate('Current assignments')}
+                  value={poolMember.current_assignments}
+                />
+              </PropertyList>
 
               <NumberGroup
                 name="max_assignments"

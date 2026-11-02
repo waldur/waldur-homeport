@@ -1,4 +1,7 @@
 import { FunctionComponent } from 'react';
+import { RequestedOffering } from 'waldur-js-client';
+
+import { PropertyItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import {
@@ -6,17 +9,16 @@ import {
   formatComponentQuantity,
   getComponentLabel,
 } from '@/marketplace/common/componentQuantity';
-import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
-import { renderFieldOrDash } from '@/table/utils';
 
-export const CallOfferingExpandableRow: FunctionComponent<{ row }> = ({
-  row,
-}) => (
+export const CallOfferingExpandableRow: FunctionComponent<{
+  row: RequestedOffering;
+}> = ({ row }) => (
   <ExpandableContainer asTable>
-    <Field
+    <PropertyItem
       label={translate('Plan')}
-      value={renderFieldOrDash(row.plan_details?.name)}
+      value={row.plan_details?.name}
+      hideIfEmpty={false}
     />
 
     {/* `typeof null` is also "object", and Object.entries(null) throws — an
@@ -27,7 +29,7 @@ export const CallOfferingExpandableRow: FunctionComponent<{ row }> = ({
         ([key, value]: [string, string]) => (
           // Limits are keyed by component type: name each one as the offering
           // does, and state the unit its amount is counted in.
-          <Field
+          <PropertyItem
             key={key}
             label={getComponentLabel(key, row.components)}
             value={formatComponentQuantity(

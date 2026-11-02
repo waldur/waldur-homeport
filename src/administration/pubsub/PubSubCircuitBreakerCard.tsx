@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 
-import { AccordionCard, Badge } from 'waldur-ui';
+import { AccordionCard, Badge, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 import { getCircuitBreaker } from './api';
 import {
@@ -52,61 +53,48 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
       ) : data ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
           <div>
-            <h6 className="uppercase text-quaternary mb-2.5">
-              {translate('Current state')}
-            </h6>
-            <table className="table table-sm table-borderless mb-0">
-              <tbody>
-                <tr>
-                  <td className="text-quaternary">{translate('State')}</td>
-                  <td className="text-end">
+            <PropertyList variant="compact">
+              <PropertyList.Section title={translate('Current state')}>
+                <PropertyItem
+                  label={translate('State')}
+                  value={
                     <Badge variant={getBadgeVariant(health)} tone="outline">
                       {formatCircuitBreakerState(data.state)}
                     </Badge>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Failure count')}
-                  </td>
-                  <td className="text-end">{data.failure_count}</td>
-                </tr>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Success count')}
-                  </td>
-                  <td className="text-end">{data.success_count}</td>
-                </tr>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Last failure')}
-                  </td>
-                  <td className="text-end">
-                    {formatTimestamp(data.last_failure_time)}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Last state change')}
-                  </td>
-                  <td className="text-end">
-                    {formatTimestamp(data.last_state_change)}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Failure threshold')}
-                  </td>
-                  <td className="text-end">{data.config.failure_threshold}</td>
-                </tr>
-                <tr>
-                  <td className="text-quaternary">
-                    {translate('Recovery timeout')}
-                  </td>
-                  <td className="text-end">{data.config.recovery_timeout}s</td>
-                </tr>
-              </tbody>
-            </table>
+                  }
+                />
+                <PropertyItem
+                  label={translate('Failure count')}
+                  value={propVal.number(data.failure_count)}
+                />
+                <PropertyItem
+                  label={translate('Success count')}
+                  value={propVal.number(data.success_count)}
+                />
+                <PropertyItem
+                  label={translate('Last failure')}
+                  value={propVal.date(data.last_failure_time, {
+                    epoch: true,
+                    precision: 'datetime',
+                  })}
+                />
+                <PropertyItem
+                  label={translate('Last state change')}
+                  value={propVal.date(data.last_state_change, {
+                    epoch: true,
+                    precision: 'datetime',
+                  })}
+                />
+                <PropertyItem
+                  label={translate('Failure threshold')}
+                  value={propVal.number(data.config.failure_threshold)}
+                />
+                <PropertyItem
+                  label={translate('Recovery timeout')}
+                  value={propVal.duration(data.config.recovery_timeout)}
+                />
+              </PropertyList.Section>
+            </PropertyList>
           </div>
           <div>
             <h6 className="uppercase text-quaternary mb-2.5">

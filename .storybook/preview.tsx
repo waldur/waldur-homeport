@@ -76,7 +76,7 @@ const preview: Preview = {
           'Forms',
           [
             'Layout',
-            ['FormGroup', 'FormTable'],
+            ['FormGroup'],
             'Text inputs',
             [
               'Input',

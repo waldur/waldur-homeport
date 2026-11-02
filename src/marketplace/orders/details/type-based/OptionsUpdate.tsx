@@ -1,13 +1,16 @@
 import { useMemo } from 'react';
 
+import { PropertyList } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { DetailsTable } from './DetailsTable';
 import {
-  OrderTypeBasedProps,
-  RequestedByField,
-  RequestCommentField,
   DescriptionField,
+  ORDER_LIST_PROPS,
+  OrderTypeBasedProps,
+  RequestCommentField,
+  RequestedByField,
   StartDateField,
 } from './OrderCommonFields';
 
@@ -42,12 +45,12 @@ export const OptionsUpdate = ({
   return (
     <>
       {tableOnly ? null : (
-        <>
+        <PropertyList {...ORDER_LIST_PROPS}>
           <RequestedByField order={order} />
           <RequestCommentField order={order} />
           <StartDateField order={order} />
           <DescriptionField order={order} offering={offering} />
-        </>
+        </PropertyList>
       )}
 
       <DetailsTable<(typeof tableData)[0]>

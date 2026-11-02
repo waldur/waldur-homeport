@@ -6,13 +6,20 @@ import {
   openportalAccessForEmailList,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, BaseButton, LoadingSpinner } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  BaseButton,
+  LoadingSpinner,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
 import { useDebouncedValue } from '@/core/useDebouncedValue';
 import { FilterBox } from '@/form/FilterBox';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
-import { Field } from '@/resource/summary/Field';
+import { propVal } from '@/property/propertyFields';
 
 // Type definitions
 interface UserInfoCardProps {
@@ -40,61 +47,42 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
       </div>
       <div className="card-body">
         <div className="text-sm">
-          <Field
-            label={translate('Email')}
-            value={userData.email}
-            space={1.5}
-            labelCol={4}
-            valueCol={8}
-            valueClass="wrap-anywhere"
-          />
-          <Field
-            label={translate('Status')}
-            value={
-              <Badge
-                variant={
-                  userData.status === 'active'
-                    ? 'success'
-                    : userData.status === 'invited'
-                      ? 'warning'
-                      : 'secondary'
-                }
-              >
-                {userData.status}
-              </Badge>
-            }
-            space={1.5}
-            labelCol={4}
-            valueCol={8}
-          />
-          {userData.short_name && (
-            <Field
-              label={translate('Short name')}
-              value={<code className="text-brand">{userData.short_name}</code>}
-              space={1.5}
-              labelCol={4}
-              valueCol={8}
-            />
-          )}
-          {userData.invited_by && (
-            <Field
-              label={translate('Invited by')}
-              value={userData.invited_by}
-              space={1.5}
-              labelCol={4}
-              valueCol={8}
+          <PropertyList variant="summary" termWidth="md" space={1.5}>
+            <PropertyItem
+              label={translate('Email')}
+              value={userData.email}
               valueClass="wrap-anywhere"
             />
-          )}
-          {userData.reason && (
-            <Field
-              label={translate('Reason')}
-              value={<span className="text-danger">{userData.reason}</span>}
-              space={1.5}
-              labelCol={4}
-              valueCol={8}
+            <PropertyItem
+              label={translate('Status')}
+              value={propVal.state(userData.status, {
+                states: {
+                  active: { label: translate('Active'), variant: 'success' },
+                  invited: { label: translate('Invited'), variant: 'warning' },
+                },
+              })}
             />
-          )}
+            {userData.short_name && (
+              <PropertyItem
+                label={translate('Short name')}
+                value={
+                  <code className="text-brand">{userData.short_name}</code>
+                }
+              />
+            )}
+            <PropertyItem
+              label={translate('Invited by')}
+              value={userData.invited_by}
+              valueClass="wrap-anywhere"
+            />
+            {userData.reason && (
+              <PropertyItem
+                label={translate('Reason')}
+                value={userData.reason}
+                valueClass="text-danger"
+              />
+            )}
+          </PropertyList>
         </div>
       </div>
     </div>

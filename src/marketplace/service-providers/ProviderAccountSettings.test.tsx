@@ -113,7 +113,9 @@ describe('ProviderAccountSettings', () => {
     vi.mocked(checkIsOwnerOrStaff).mockReturnValue(false);
     renderSection();
 
-    expect(screen.getByRole('table')).toHaveClass('hide-actions');
+    for (const btn of screen.getAllByTestId(/^edit-/)) {
+      expect(btn).not.toBeVisible();
+    }
   });
 
   it('saves a login shell as a single account option', async () => {

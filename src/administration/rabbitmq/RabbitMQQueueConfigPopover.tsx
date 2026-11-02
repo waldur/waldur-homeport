@@ -1,9 +1,10 @@
 import { GearIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { PropertyList, Tooltip, PropertyItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 import type { RmqQueueStats } from './api';
 
@@ -117,18 +118,16 @@ export const RabbitMQQueueConfigPopover: FC<
         {translate('Queue configuration')}
       </div>
       <div>
-        <table className="table table-sm table-borderless mb-0">
-          <tbody>
-            {configItems.map((item, index) => (
-              <tr key={index}>
-                <td className="text-quaternary pe-2.5">{item.label}</td>
-                <td>
-                  <code>{item.value}</code>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <PropertyList variant="compact">
+          {configItems.map((item, index) => (
+            <PropertyItem
+              key={index}
+              label={item.label}
+              value={propVal.code(item.value)}
+              labelClass="pe-2.5"
+            />
+          ))}
+        </PropertyList>
       </div>
     </>
   );

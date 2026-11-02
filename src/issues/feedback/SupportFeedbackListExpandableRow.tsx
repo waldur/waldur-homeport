@@ -1,13 +1,20 @@
-import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
-import { ExpandableContainer } from '@/table/ExpandableContainer';
-import { renderFieldOrDash } from '@/table/utils';
+import { Feedback } from 'waldur-js-client';
 
-export const SupportFeedbackListExpandableRow = ({ row }) => (
+import { PropertyItem } from 'waldur-ui';
+
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+
+export const SupportFeedbackListExpandableRow = ({
+  row,
+}: {
+  row: Feedback;
+}) => (
   <ExpandableContainer asTable>
-    <Field
+    <PropertyItem
       label={translate('Comment')}
-      value={renderFieldOrDash(row.comment)}
+      value={row.comment}
+      hideIfEmpty={false}
     />
   </ExpandableContainer>
 );

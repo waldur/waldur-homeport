@@ -1,18 +1,14 @@
 import { useCallback } from 'react';
 import type { ArrowSettings } from 'waldur-js-client';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import { BaseButton, PropertyItem, PropertyList } from 'waldur-ui';
 
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
-import { formatDateTime } from '@/core/dateUtils';
-import { ExternalLink } from '@/core/ExternalLink';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 
 import { useArrowSettings } from '../api';
 
@@ -86,6 +82,9 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
     );
   }
 
+  // What invoice items start with when no prefix is set, as the backend does.
+  const prefix = currentSettings.invoice_item_prefix || 'Arrow consumption';
+
   return (
     <div className="flex flex-col gap-5">
       <div className="card">
@@ -99,99 +98,61 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
           </div>
         </div>
         <div className="card-body">
-          <FormTable>
-            <FormTable.Item
+          <PropertyList>
+            <PropertyItem
+              value={propVal.url(currentSettings.api_url)}
               label={translate('API URL')}
-              value={
-                <ExternalLink
-                  url={currentSettings.api_url}
-                  label={currentSettings.api_url}
-                />
-              }
             />
-            <FormTable.Item
+            <PropertyItem
+              value={currentSettings.partner_name}
               label={translate('Partner Name')}
-              value={renderFieldOrDash(currentSettings.partner_name)}
             />
-            <FormTable.Item
+            <PropertyItem
+              value={propVal.code(currentSettings.partner_reference)}
               label={translate('Partner Reference')}
-              value={
-                currentSettings.partner_reference ? (
-                  <span className="flex items-center gap-1.5">
-                    {currentSettings.partner_reference}
-                    <CopyToClipboardButton
-                      value={currentSettings.partner_reference}
-                      onlyButton
-                    />
-                  </span>
-                ) : (
-                  renderFieldOrDash(null)
-                )
-              }
+              hasCopy
             />
-            <FormTable.Item
+            <PropertyItem
+              value={propVal.code(currentSettings.export_type_reference)}
               label={translate('Export Type Reference')}
-              value={
-                currentSettings.export_type_reference ? (
-                  <span className="flex items-center gap-1.5">
-                    {currentSettings.export_type_reference}
-                    <CopyToClipboardButton
-                      value={currentSettings.export_type_reference}
-                      onlyButton
-                    />
-                  </span>
-                ) : (
-                  renderFieldOrDash(null)
-                )
-              }
+              hasCopy
             />
-            <FormTable.Item
+            <PropertyItem
+              value={propVal.enum(currentSettings.invoice_price_source, {
+                labels: {
+                  buy: translate('Buy price'),
+                  sell: translate('Sell price'),
+                },
+              })}
               label={translate('Invoice Price Source')}
-              value={
-                currentSettings.invoice_price_source === 'buy'
-                  ? translate('Buy price')
-                  : translate('Sell price')
-              }
             />
-            <FormTable.Item
+            <PropertyItem
               label={translate('Invoice Item Prefix')}
               value={
                 <>
-                  <div>
-                    {currentSettings.invoice_item_prefix || 'Arrow consumption'}
-                  </div>
+                  <div>{prefix}</div>
                   <div className="text-quaternary small mt-1">
                     {translate(
                       'Consumption items appear as "{prefix}: {resource name}" and adjustments as "{prefix} adjustment: {resource name} (additional charge|credit)".',
-                      {
-                        prefix:
-                          currentSettings.invoice_item_prefix ||
-                          'Arrow consumption',
-                      },
+                      { prefix },
                     )}
                   </div>
                 </>
               }
             />
-            <FormTable.Item
+            <PropertyItem
+              value={propVal.boolean(currentSettings.sync_enabled, {
+                display: 'badge',
+              })}
               label={translate('Sync Enabled')}
-              value={
-                <Badge
-                  variant={currentSettings.sync_enabled ? 'success' : 'neutral'}
-                  shape="pill"
-                  tone="outline"
-                >
-                  {currentSettings.sync_enabled
-                    ? translate('Yes')
-                    : translate('No')}
-                </Badge>
-              }
             />
-            <FormTable.Item
+            <PropertyItem
+              value={propVal.date(currentSettings.created, {
+                precision: 'datetime',
+              })}
               label={translate('Created')}
-              value={formatDateTime(currentSettings.created)}
             />
-          </FormTable>
+          </PropertyList>
         </div>
       </div>
     </div>

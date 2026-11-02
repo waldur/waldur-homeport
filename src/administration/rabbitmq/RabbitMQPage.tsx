@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
 
 import { AlertItem } from 'waldur-ui';
@@ -21,11 +21,19 @@ import { RabbitMQVhostList } from './RabbitMQVhostList';
 export const RabbitMQPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
   const user = useUser();
   const isStaff = user?.is_staff;
+  const queryClient = useQueryClient();
   const { data, isLoading, error, refetch, isRefetching } = useQuery({
     queryKey: ['RabbitMQStats'],
     queryFn: getRabbitMQStats,
     refetchInterval: 30000, // Auto-refresh every 30 seconds
   });
+
+  const handleRefetch = async () => {
+    await Promise.all([
+      refetch(),
+      queryClient.invalidateQueries({ queryKey: ['RabbitMQOverview'] }),
+    ]);
+  };
 
   if (isLoading || !data) {
     return (
@@ -68,7 +76,7 @@ export const RabbitMQPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
 
   const panelActions = (
     <div className="flex items-center gap-3">
-      <RefreshButton refetch={refetch} isLoading={isRefetching} />
+      <RefreshButton refetch={handleRefetch} isLoading={isRefetching} />
       {isStaff && (
         <>
           <RabbitMQPurgeAllButton data={data} />

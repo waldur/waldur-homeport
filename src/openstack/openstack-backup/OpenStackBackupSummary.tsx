@@ -1,22 +1,17 @@
-import FormTable from '@/form/FormTable';
-import { translate } from '@/i18n';
-import { ResourceLink } from '@/resource/ResourceLink';
-import { Field, ResourceSummaryProps } from '@/resource/summary';
+import { PropertyItem } from 'waldur-ui';
 
-export const OpenStackBackupSummary = ({
-  resource,
-  formTableItem,
-}: ResourceSummaryProps) => {
-  const Component = formTableItem ? FormTable.Item : Field;
+import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
+import { ResourceSummaryProps } from '@/resource/summary';
+
+export const OpenStackBackupSummary = ({ resource }: ResourceSummaryProps) => {
   return (
-    <Component
+    <PropertyItem
       label={translate('Instance')}
-      value={
-        <ResourceLink
-          uuid={resource.instance_marketplace_uuid}
-          label={resource.instance_name}
-        />
-      }
+      value={propVal.link(resource.instance_name, {
+        state: 'marketplace-resource-details',
+        params: { resource_uuid: resource.instance_marketplace_uuid },
+      })}
     />
   );
 };

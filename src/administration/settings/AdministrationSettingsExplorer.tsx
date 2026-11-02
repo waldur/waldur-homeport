@@ -4,14 +4,22 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useCallback, useMemo } from 'react';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
-import { Switch, Tabs, TabsList, TabsTrigger } from 'waldur-ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Switch,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+} from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { getMarketplaceTitle } from '@/marketplace/title';
 import { useModal } from '@/modal/actions';
@@ -21,13 +29,13 @@ import { RootState } from '@/store/reducers';
 import { TableQuery } from '@/table/TableQuery';
 import { useUser } from '@/workspace/hooks';
 
-import { FieldRow } from './FieldRow';
 import {
   AdminRegistryLocation,
   formatAdminLocationBreadcrumb,
   getSettingGroupLocations,
   isAdminLocationAccessible,
 } from './registry';
+import { SettingsCard } from './SettingsCard';
 import { getKeyTitle, isSettingModified } from './utils';
 
 const CountrySelector = lazyComponent(() =>
@@ -236,14 +244,10 @@ export const AdministrationSettingsExplorer: FC = () => {
   }
 
   return (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="flex flex-col">
-          <div className="card-title mb-0">
-            <h3>{translate('All settings')}</h3>
-          </div>
-        </div>
-        <div className="card-toolbar flex items-center gap-4 flex-wrap">
+    <Card bordered>
+      <CardHeader>
+        <CardTitle size="lg">{translate('All settings')}</CardTitle>
+        <div className="my-[0.5rem] flex items-center gap-4 flex-wrap">
           <Switch
             size="sm"
             checked={onlyModified}
@@ -252,8 +256,8 @@ export const AdministrationSettingsExplorer: FC = () => {
           />
           <TableQuery query={query} setQuery={setQuery} />
         </div>
-      </div>
-      <div className="card-body">
+      </CardHeader>
+      <CardContent>
         <Tabs value={activeCategory} onValueChange={setCategory}>
           <TabsList scrollable className="mb-6">
             {categories.map((cat) => (
@@ -270,10 +274,14 @@ export const AdministrationSettingsExplorer: FC = () => {
 
         {visibleGroups.length > 0 ? (
           visibleGroups.map((group) => (
-            <FormTable.Card
+            <SettingsCard
+              bordered
               key={group.description}
-              title={group.description}
-              className="card-bordered mb-5"
+              group={group}
+              values={data}
+              getValue={resolveSettingValue}
+              onEdit={(item, values) => getItemOnEdit(item, values)?.()}
+              className="mb-5"
               actions={
                 <Link
                   state={group.location.state}
@@ -285,18 +293,7 @@ export const AdministrationSettingsExplorer: FC = () => {
                   {formatAdminLocationBreadcrumb(group.location)}
                 </Link>
               }
-            >
-              <FormTable>
-                {group.items.map((item) => (
-                  <FieldRow
-                    key={item.key}
-                    item={item}
-                    value={resolveSettingValue(item, data)}
-                    onEdit={getItemOnEdit(item, data)}
-                  />
-                ))}
-              </FormTable>
-            </FormTable.Card>
+            />
           ))
         ) : (
           <NoResult
@@ -314,7 +311,7 @@ export const AdministrationSettingsExplorer: FC = () => {
             buttonTitle={translate('Clear filters')}
           />
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

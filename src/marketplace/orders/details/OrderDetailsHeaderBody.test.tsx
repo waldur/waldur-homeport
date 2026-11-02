@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { OrderDetails } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { isFeatureVisible } from '@/features/connect';
@@ -33,7 +34,7 @@ const resourceHref = () =>
 
 const renderFor = (user) => {
   vi.mocked(useUser).mockReturnValue(user);
-  renderWithProviders(<OrderDetailsHeaderBody order={order} />);
+  renderWithProviders(<OrderDetailsHeaderBody order={order as OrderDetails} />);
 };
 
 describe('OrderDetailsHeaderBody resource link', () => {

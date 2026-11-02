@@ -4,6 +4,8 @@ import { ReactNode } from 'react';
 import { Form } from 'react-final-form';
 import { describe, expect, it, vi } from 'vitest';
 
+import { PropertyList } from 'waldur-ui';
+
 import { renderWithProviders } from '@/test/harness';
 
 import { ComponentEditRow, ComponentEditRow2 } from './ComponentEditRow';
@@ -17,7 +19,7 @@ const component = {
   prices: [],
 } as any;
 
-const renderRow = (row: ReactNode) =>
+const renderTableRow = (row: ReactNode) =>
   renderWithProviders(
     <Form onSubmit={vi.fn()}>
       {() => (
@@ -28,14 +30,19 @@ const renderRow = (row: ReactNode) =>
     </Form>,
   );
 
+const renderPropertyRow = (row: ReactNode) =>
+  renderWithProviders(
+    <Form onSubmit={vi.fn()}>{() => <PropertyList>{row}</PropertyList>}</Form>,
+  );
+
 describe('ComponentEditRow2', () => {
   it('associates the row label with the amount input', () => {
-    renderRow(<ComponentEditRow2 component={component} hidePrices />);
+    renderPropertyRow(<ComponentEditRow2 component={component} hidePrices />);
     expect(screen.getByLabelText('CPU Core Hours')).toHaveRole('spinbutton');
   });
 
   it('passes the field meta through so the limit error is shown', async () => {
-    renderRow(<ComponentEditRow2 component={component} hidePrices />);
+    renderPropertyRow(<ComponentEditRow2 component={component} hidePrices />);
     const input = screen.getByLabelText('CPU Core Hours');
     await userEvent.type(input, '10');
     expect(input).toHaveAttribute('aria-invalid', 'true');
@@ -47,7 +54,7 @@ describe('ComponentEditRow2', () => {
 
 describe('ComponentEditRow', () => {
   it('marks an out-of-range amount invalid and describes it', async () => {
-    renderRow(<ComponentEditRow component={component} hidePrices />);
+    renderTableRow(<ComponentEditRow component={component} hidePrices />);
     const input = screen.getByRole('spinbutton');
     expect(input).toHaveAttribute('aria-invalid', 'false');
     expect(input).not.toHaveAttribute('aria-describedby');

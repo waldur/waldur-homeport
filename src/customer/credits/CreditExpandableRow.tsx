@@ -1,14 +1,14 @@
-import { startCase } from 'es-toolkit/compat';
 import { CustomerCredit, ProjectCredit } from 'waldur-js-client';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { formatMonth } from '@/core/dateUtils';
-import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { formatCompensateIn } from '@/project/manage/EarlierInvoicesField';
-import { Field } from '@/resource/summary';
-import { BooleanField } from '@/table/BooleanField';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
+import { minimalConsumptionLogicOptions } from './constants';
 import { CreditCostPolicies } from './CreditCostPolicies';
 
 export const CreditExpandableRow = ({
@@ -17,33 +17,37 @@ export const CreditExpandableRow = ({
   row: CustomerCredit | ProjectCredit;
 }) => (
   <ExpandableContainer asTable>
-    <Field
+    <PropertyItem
       label={translate('Minimal consumption logic')}
-      value={startCase(row.minimal_consumption_logic)}
+      value={propVal.enum(row.minimal_consumption_logic, {
+        options: minimalConsumptionLogicOptions,
+      })}
     />
 
-    <Field
+    <PropertyItem
       label={translate('Minimal consumption')}
-      value={defaultCurrency(row.minimal_consumption)}
+      value={propVal.currency(row.minimal_consumption)}
     />
 
-    <Field
+    <PropertyItem
       label={translate('Expected consumption')}
-      value={defaultCurrency(row.expected_consumption)}
+      value={propVal.currency(row.expected_consumption)}
     />
 
-    <Field
+    <PropertyItem
       label={translate('Grace coefficient')}
       value={row.grace_coefficient}
     />
 
-    <Field
+    <PropertyItem
       label={translate('Apply as minimal consumption')}
-      value={<BooleanField value={row.apply_as_minimal_consumption} />}
+      value={propVal.boolean(row.apply_as_minimal_consumption, {
+        display: 'badge',
+      })}
     />
 
     {'pay_earlier_invoices' in row ? (
-      <Field
+      <PropertyItem
         label={translate('Pays earlier invoices')}
         value={
           row.pay_earlier_invoices

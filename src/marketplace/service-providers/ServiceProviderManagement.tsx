@@ -5,18 +5,18 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import {
   CommaSeparatedListEditField,
   EditFieldProvider,
   TextEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { useNotify } from '@/store/notify';
 import { useCustomer } from '@/workspace/hooks';
-
-import { SecretValueField } from '../SecretValueField';
 
 import { RegenerateSecretCodeButton } from './RegenerateSecretCodeButton';
 import { useServiceProviderUpdate } from './useServiceProviderUpdate';
@@ -61,18 +61,13 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
   if (customer && serviceProvider) {
     return (
       <EditFieldProvider scope={serviceProvider} callback={update}>
-        <FormTable>
-          <FormTable.Item
+        <PropertyList>
+          <PropertyItem
             label={translate('API secret code')}
             description={`${translate('Registered at:')} ${formatDateTime(
               serviceProvider.created,
             )}`}
-            value={
-              <SecretValueField
-                value={secretCode?.api_secret_code}
-                className="max-w-[300px]"
-              />
-            }
+            value={propVal.secret(secretCode?.api_secret_code)}
             actions={
               <RegenerateSecretCodeButton serviceProvider={serviceProvider} />
             }
@@ -89,7 +84,7 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
             )}
             isStaffOnly
           />
-        </FormTable>
+        </PropertyList>
       </EditFieldProvider>
     );
   }

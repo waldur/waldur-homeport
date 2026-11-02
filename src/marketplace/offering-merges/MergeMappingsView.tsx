@@ -1,11 +1,13 @@
 import { FC } from 'react';
 import { OfferingMerge, ProviderOfferingDetails } from 'waldur-js-client';
 
-import FormTable from '@/form/FormTable';
+import { PropertyCard, PropertyList, PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { renderFieldOrDash } from '@/table/utils';
 
-import { InvoicePolicyLabel } from './InvoicePolicy';
+import { getInvoicePolicyOptions } from './InvoicePolicy';
 import { StaticTable } from './StaticTable';
 
 /** What the mapping section is for, shown on every heading that names it. */
@@ -135,14 +137,16 @@ export const MergeMappingsView: FC<{
         rows={answerRows}
         columns={columns(translate('Old key'), translate('New key'), false)}
       />
-      <FormTable.Card title={translate('Invoices')}>
-        <FormTable>
-          <FormTable.Item
+      <PropertyCard title={translate('Invoices')}>
+        <PropertyList>
+          <PropertyItem
             label={translate('Invoice policy')}
-            value={<InvoicePolicyLabel policy={merge.invoice_policy} />}
+            value={propVal.enum(merge.invoice_policy ?? 'open_month', {
+              options: getInvoicePolicyOptions(),
+            })}
           />
-        </FormTable>
-      </FormTable.Card>
+        </PropertyList>
+      </PropertyCard>
     </div>
   );
 };

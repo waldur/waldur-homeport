@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { AccountSetting, OfferingAccountSettings } from 'waldur-js-client';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { CheckOrX } from '@/core/CheckOrX';
 import { Link } from '@/core/Link';
 import { required } from '@/core/validators';
@@ -13,7 +15,6 @@ import {
   SelectEditField,
   StringEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
 import {
@@ -277,7 +278,7 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
           />
           {isFeatureVisible(MarketplaceFeatures.show_provider_accounts) &&
             context.sharingOfferings !== undefined && (
-              <FormTable.Item
+              <PropertyItem
                 label={translate('Shared with')}
                 description={translate(
                   'Other offerings of this service provider where a person has the same account: username, POSIX UID and home directory.',
@@ -348,7 +349,7 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
             renderValue={(value) => <CheckOrX value={value !== false} />}
           />
           {posixEnabled && context.pool !== undefined && (
-            <FormTable.Item
+            <PropertyItem
               label={translate('POSIX ID pool')}
               description={translate(
                 'Where UIDs and GIDs are allocated from when their source is the POSIX ID pool.',

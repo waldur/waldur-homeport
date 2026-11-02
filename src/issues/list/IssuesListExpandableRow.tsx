@@ -1,44 +1,19 @@
-import { FunctionComponent, ReactNode } from 'react';
+import { FunctionComponent } from 'react';
+import { Issue } from 'waldur-js-client';
+
+import { PropertyItem, PropertyList } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
-import { formatDate } from '@/core/dateUtils';
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { FormattedJira } from '@/core/FormattedJira';
 import { translate } from '@/i18n';
 import { linkify, withLineBreaks } from '@/issues/utils';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
-import { renderFieldOrDash } from '@/table/utils';
-
-const FieldGrid: FunctionComponent<{ children: ReactNode }> = ({
-  children,
-}) => (
-  <div
-    style={{
-      display: 'grid',
-      gridTemplateColumns: 'auto auto',
-      columnGap: 12,
-      rowGap: 4,
-      alignContent: 'start',
-    }}
-  >
-    {children}
-  </div>
-);
-
-const GridField: FunctionComponent<{ label: string; children: ReactNode }> = ({
-  label,
-  children,
-}) => (
-  <>
-    <div className="text-secondary font-medium">{label}:</div>
-    <div className="text-quaternary">{children}</div>
-  </>
-);
 
 export const IssuesListExpandableRow: FunctionComponent<{
-  row;
-  supportOrStaff;
+  row: Issue;
+  supportOrStaff: boolean;
 }> = ({ row, supportOrStaff }) => (
   <ExpandableContainer
     style={{
@@ -49,57 +24,49 @@ export const IssuesListExpandableRow: FunctionComponent<{
       left: 'auto',
     }}
   >
-    <div
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        columnGap: 64,
-        rowGap: 12,
-      }}
-    >
-      <FieldGrid>
-        <GridField label={translate('Reporter')}>
-          {renderFieldOrDash(row.reporter_name)}
-        </GridField>
-        <GridField label={translate('Organization')}>
-          {renderFieldOrDash(row.customer_name)}
-        </GridField>
-        <GridField label={translate('Project')}>
-          {renderFieldOrDash(row.project_name)}
-        </GridField>
-      </FieldGrid>
-      <FieldGrid>
-        <GridField label={translate('Service type')}>
-          {renderFieldOrDash(row.resource_type)}
-        </GridField>
-        <GridField label={translate('Created')}>
-          {formatDate(row.created)}
-        </GridField>
+    {/* Two columns of facts about the issue, each row keeping its place even
+        when the issue has no value for it. */}
+    <div className="flex flex-wrap gap-x-16 gap-y-3">
+      <PropertyList variant="summary" termWidth="100px" hideIfEmpty={false}>
+        <PropertyItem label={translate('Reporter')} value={row.reporter_name} />
+        <PropertyItem
+          label={translate('Organization')}
+          value={row.customer_name}
+        />
+        <PropertyItem label={translate('Project')} value={row.project_name} />
+      </PropertyList>
+      <PropertyList variant="summary" termWidth="100px" hideIfEmpty={false}>
+        <PropertyItem
+          label={translate('Service type')}
+          value={row.resource_type}
+        />
+        <PropertyItem
+          label={translate('Created')}
+          value={propVal.date(row.created)}
+        />
         {supportOrStaff && (
-          <GridField label={translate('Assigned to')}>
-            {renderFieldOrDash(row.assignee_name)}
-          </GridField>
+          <PropertyItem
+            label={translate('Assigned to')}
+            value={row.assignee_name}
+          />
         )}
-        <GridField label={translate('Type')}>
-          {renderFieldOrDash(row.type)}
-        </GridField>
-      </FieldGrid>
+        <PropertyItem label={translate('Type')} value={row.type} />
+      </PropertyList>
     </div>
-    <div style={{ marginTop: 4 }}>
-      <Field
-        label={translate('Description')}
-        labelCol={12}
-        valueCol={12}
-        space={0}
-      >
-        <div style={{ overflowWrap: 'anywhere' }}>
+    {row.description && (
+      <div className="mt-3">
+        {/* The backend decides the markup the description arrives in. */}
+        <div className="text-secondary font-medium mb-1">
+          {translate('Description')}:
+        </div>
+        <div className="wrap-anywhere">
           {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'atlassian' ? (
             <FormattedJira text={linkify(row.description)} />
           ) : (
             <FormattedHtml html={linkify(withLineBreaks(row.description))} />
           )}
         </div>
-      </Field>
-    </div>
+      </div>
+    )}
   </ExpandableContainer>
 );

@@ -10,7 +10,12 @@ import {
   UserRoleDetails,
 } from 'waldur-js-client';
 
-import { AccordionCard, AlertItem } from 'waldur-ui';
+import {
+  AccordionCard,
+  AlertItem,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
@@ -23,7 +28,6 @@ import { AwardComparisonRow } from '@/proposals/awardedResources';
 import { usesCallVocabulary } from '@/proposals/presentation';
 import { Proposal } from '@/proposals/types';
 import { ResourceLink } from '@/resource/ResourceLink';
-import { Field } from '@/resource/summary';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -257,44 +261,39 @@ const AllocationOutcome: FC<{
       }
       defaultOpen
     >
-      <div
+      <PropertyList
+        variant="summary"
+        termWidth="sm"
         className={
           project
             ? 'grid grid-cols-1 sm:grid-cols-2 gap-x-5 text-sm mb-3'
             : 'grid grid-cols-1 gap-x-5 text-sm mb-3'
         }
       >
-        <div>
-          <Field
-            label={translate('Project')}
-            labelCol={project ? 5 : 2}
-            valueCol={project ? 7 : 10}
-            value={
-              // As children, not row.name: ProjectLink only truncates when it
-              // has no children, and the generated name is long.
-              <ProjectLink
-                row={{
-                  uuid: projectUuid,
-                  name: project?.name || proposal.project_name,
-                  customer_uuid: project?.customer_uuid,
-                }}
-              >
-                {project?.name || proposal.project_name}
-              </ProjectLink>
-            }
-          />
-        </div>
+        <PropertyItem
+          label={translate('Project')}
+          value={
+            // As children, not row.name: ProjectLink only truncates when it
+            // has no children, and the generated name is long.
+            <ProjectLink
+              row={{
+                uuid: projectUuid,
+                name: project?.name || proposal.project_name,
+                customer_uuid: project?.customer_uuid,
+              }}
+            >
+              {project?.name || proposal.project_name}
+            </ProjectLink>
+          }
+        />
         {project && (
-          <div>
-            <Field
-              label={translate('Organization')}
-              labelCol={5}
-              valueCol={7}
-              value={renderFieldOrDash(project.customer_name)}
-            />
-          </div>
+          <PropertyItem
+            label={translate('Organization')}
+            value={project.customer_name}
+            hideIfEmpty={false}
+          />
         )}
-      </div>
+      </PropertyList>
 
       <h6 className="text-secondary font-medium mb-2.5">
         {translate('Resources:')}

@@ -2,9 +2,8 @@ import { ArrowRightIcon, InfoIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Resource, Offering } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { PropertyCard, PropertyItem, PropertyList, Tooltip } from 'waldur-ui';
 
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
 import { getDerivedLimitInputs } from '../../common/derivedLimits';
@@ -113,11 +112,11 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
   );
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={title}
       refetch={props.refetch}
       loading={props.isLoading}
-      className="card-bordered"
       actions={
         props.resource.state === 'OK' &&
         // Formula inputs are left out of editing several options at once.
@@ -132,7 +131,7 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
         )
       }
     >
-      <FormTable>
+      <PropertyList>
         {resourceOptions.order?.map((key) => {
           // Options hidden by the resource's current values have no value
           // and cannot be edited on their own; the full options dialog shows
@@ -153,7 +152,7 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
               : props.resource.options && props.resource.options[key];
 
           return (
-            <FormTable.Item
+            <PropertyItem
               key={key}
               label={option.label}
               value={
@@ -180,7 +179,7 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
             />
           );
         })}
-      </FormTable>
-    </FormTable.Card>
+      </PropertyList>
+    </PropertyCard>
   );
 };

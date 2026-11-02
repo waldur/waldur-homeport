@@ -1,9 +1,8 @@
 import { useMemo } from 'react';
 import { Offering, Resource } from 'waldur-js-client';
 
-import { HelpIcon } from 'waldur-ui';
+import { HelpIcon, PropertyItem, PropertyList } from 'waldur-ui';
 
-import { formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { getFormLimitParser } from '@/marketplace/common/registry';
@@ -11,7 +10,7 @@ import { OrderDetailsQuickBody } from '@/marketplace/orders/details/OrderDetails
 import { OrderStateField } from '@/marketplace/orders/details/OrderStateField';
 import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
 import { PriceTooltip } from '@/price/PriceTooltip';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { useUser } from '@/workspace/hooks';
 
@@ -82,24 +81,28 @@ export const ResourceLimitChangeInfo = ({
 
   return (
     <>
-      <Field
-        label={translate('Requestor')}
-        value={order.created_by_full_name + ` (${order.created_by_username})`}
-        space={1.5}
-      />
-      <Field
-        label={translate('Requested at')}
-        value={formatDate(order.created)}
-        space={1.5}
-      />
-      <OrderDetailsQuickBody order={order} space={1.5} />
-      {userIsRequestor && (
-        <Field
-          label={translate('Status')}
-          value={<OrderStateField order={order} shape="pill" tone="outline" />}
-          space={1.5}
+      <PropertyList variant="summary" space={1.5}>
+        <PropertyItem
+          label={translate('Requestor')}
+          value={propVal.user({
+            full_name: order.created_by_full_name,
+            username: order.created_by_username,
+          })}
         />
-      )}
+        <PropertyItem
+          label={translate('Requested at')}
+          value={propVal.date(order.created)}
+        />
+        <OrderDetailsQuickBody order={order} space={1.5} />
+        {userIsRequestor && (
+          <PropertyItem
+            label={translate('Status')}
+            value={
+              <OrderStateField order={order} shape="pill" tone="outline" />
+            }
+          />
+        )}
+      </PropertyList>
 
       {userIsRequestor &&
         (order.state === 'pending-consumer' ? (

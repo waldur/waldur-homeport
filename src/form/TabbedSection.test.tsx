@@ -232,7 +232,7 @@ describe('TabbedSection', () => {
     });
   });
 
-  it('passes hideActions to FormTable', () => {
+  it('passes hideActions to PropertyList', () => {
     render(
       <TabbedSection hideActions>
         <TabbedSection.Tab id="tab1" title="Tab 1">

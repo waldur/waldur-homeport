@@ -19,9 +19,9 @@ const renderSection = (
 const KEY_LIMITS = 'Let users limit API keys';
 const DAILY_USAGE = 'Site agent reports API key usage per day';
 
-// The row of an edit field: its label, description and value.
+// The value definition of an edit field, associated with its label term.
 const shownValue = (label: string) =>
-  screen.getByRole('row', { name: new RegExp(`^${label}`) });
+  screen.getByRole('definition', { name: new RegExp(`^${label}`) });
 
 describe('ResourceDisplayOptionsSection', () => {
   // Per-key governance is a site-agent option; the agent carries out the

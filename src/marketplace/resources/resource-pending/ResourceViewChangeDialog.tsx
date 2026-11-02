@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Offering, Resource } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, PropertyList, PropertyItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { OrderConsumerActions } from '@/marketplace/orders/actions/OrderConsumerActions';
@@ -9,7 +9,6 @@ import { OrderProviderActions } from '@/marketplace/orders/actions/OrderProvider
 import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
-import { Field } from '@/resource/summary';
 
 import { ResourceLimitChangeInfo } from './ResourceLimitChangeInfo';
 import { ResourcePlanChangeInfo } from './ResourcePlanChangeInfo';
@@ -74,7 +73,9 @@ export const ResourceViewChangeDialog: FC<ResourceViewChangeDialogProps> = ({
         </>
       }
     >
-      <Field label={translate('Order UUID')} value={order.uuid} space={1.5} />
+      <PropertyList variant="summary" space={1.5}>
+        <PropertyItem label={translate('Order UUID')} value={order.uuid} />
+      </PropertyList>
 
       {hasChangePlanRequest && <ResourcePlanChangeInfo resource={resource} />}
       {hasChangePlanRequest && hasLimitChangeRequest && <hr />}

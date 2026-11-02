@@ -10,17 +10,17 @@ import { EditFieldProvider } from './EditFieldContext';
 import { NumberField } from './NumberField';
 import { withEditField } from './withEditField';
 
-// Mock FormTable.Item to easily inspect what props it received
-vi.mock('./FormTable', () => {
+// Mock PropertyItem from waldur-ui to easily inspect what props it received
+vi.mock('waldur-ui', async () => {
+  const actual = await vi.importActual<any>('waldur-ui');
   return {
-    default: {
-      Item: (props: any) => (
-        <div data-testid="form-table-item">
-          <span data-testid="fti-value">{props.value}</span>
-          <div data-testid="fti-actions">{props.actions}</div>
-        </div>
-      ),
-    },
+    ...actual,
+    PropertyItem: (props: any) => (
+      <div data-testid="property-item">
+        <span data-testid="fti-value">{props.value}</span>
+        <div data-testid="fti-actions">{props.actions}</div>
+      </div>
+    ),
   };
 });
 
@@ -69,7 +69,7 @@ describe('withEditField', () => {
       </EditFieldProvider>,
     );
 
-    expect(screen.getByTestId('form-table-item')).toBeInTheDocument();
+    expect(screen.getByTestId('property-item')).toBeInTheDocument();
 
     const editBtn = screen.getByTestId('field-edit-button');
     expect(editBtn).toHaveAttribute('data-tooltip', 'Custom Tooltip');

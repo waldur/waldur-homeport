@@ -67,5 +67,3 @@ export const formatSummary = (resource) => {
   const summary = parts.join(', ');
   return summary;
 };
-
-export const formatDefault = (value) => value || <>&mdash;</>;

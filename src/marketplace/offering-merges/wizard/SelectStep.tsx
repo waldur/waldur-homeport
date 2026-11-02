@@ -1,9 +1,11 @@
 import { FC } from 'react';
 import { OfferingMerge, OfferingState } from 'waldur-js-client';
 
+import { PropertyCard, PropertyList, PropertyItem } from 'waldur-ui';
+
 import { FormGroup } from '@/form';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 import {
   MergeOfferingOption,
@@ -50,20 +52,20 @@ export const SelectStep: FC<SelectStepProps> = ({
             'The offerings are fixed once the draft exists. Delete the draft and start a new merge to pick others.',
           )}
         </p>
-        <FormTable.Card>
-          <FormTable>
-            <FormTable.Item
+        <PropertyCard>
+          <PropertyList>
+            <PropertyItem
               label={translate('Sources')}
-              value={merge.source_offerings
-                .map((offering) => offering.name)
-                .join(', ')}
+              value={propVal.list(
+                merge.source_offerings.map((offering) => offering.name),
+              )}
             />
-            <FormTable.Item
+            <PropertyItem
               label={translate('Target')}
               value={merge.target_offering?.name}
             />
-          </FormTable>
-        </FormTable.Card>
+          </PropertyList>
+        </PropertyCard>
       </div>
     );
   }

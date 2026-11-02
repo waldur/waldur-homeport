@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { callManagingOrganisationsList } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, PropertyList, PropertyItem } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -10,7 +10,6 @@ import { required } from '@/core/validators';
 import { AsyncSelectGroup, DateGroup, SelectGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
-import { Field } from '@/resource/summary';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 const loadOrganizations = organizationAutocomplete({
@@ -63,13 +62,9 @@ export const OfferViaCallDetailsStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      <Field
-        label={translate('Offering')}
-        value={offering.name}
-        labelCol={4}
-        valueCol={8}
-        space={1.5}
-      />
+      <PropertyList variant="summary" termWidth="md" space={1.5}>
+        <PropertyItem label={translate('Offering')} value={offering.name} />
+      </PropertyList>
       <div className="mt-5.5">
         <StringGroup
           name="name"

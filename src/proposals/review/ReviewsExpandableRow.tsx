@@ -5,10 +5,11 @@ import {
   ProposalReview,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@/core/dateUtils';
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 const loadProposalData = async (proposal_uuid: string) => {
@@ -44,32 +45,38 @@ export const ReviewsExpandableRow = ({ row }: { row: ProposalReview }) => {
     <ExpandableContainer>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
         <div>
-          <Field
-            label={translate('Applicant name')}
-            value={data.proposal.created_by_name}
-          />
-
-          <Field
-            label={translate('Submission date')}
-            value={formatDateTime(data.proposal.created)}
-          />
-
-          {data.proposal.project && (
-            <Field
-              label={translate('Project')}
-              value={data.proposal.project_name}
+          <PropertyList variant="summary">
+            <PropertyItem
+              label={translate('Applicant name')}
+              value={data.proposal.created_by_name}
             />
-          )}
-          <Field
-            label={translate('Offering')}
-            value={data.offeringNames.join(', ')}
-          />
+
+            <PropertyItem
+              label={translate('Submission date')}
+              value={propVal.date(data.proposal.created, {
+                precision: 'datetime',
+              })}
+            />
+
+            {data.proposal.project && (
+              <PropertyItem
+                label={translate('Project')}
+                value={data.proposal.project_name}
+              />
+            )}
+            <PropertyItem
+              label={translate('Offering')}
+              value={propVal.list(data.offeringNames)}
+            />
+          </PropertyList>
         </div>
         <div>
-          <Field
-            label={translate('Project summary')}
-            value={data.proposal.project_summary}
-          />
+          <PropertyList variant="summary">
+            <PropertyItem
+              label={translate('Project summary')}
+              value={data.proposal.project_summary}
+            />
+          </PropertyList>
         </div>
       </div>
     </ExpandableContainer>

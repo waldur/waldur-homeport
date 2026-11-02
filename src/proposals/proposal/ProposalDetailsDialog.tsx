@@ -5,13 +5,18 @@ import {
   type ProposalReview,
 } from 'waldur-js-client';
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
+import {
+  PropertyItem,
+  PropertyList,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
-import { FieldWithCopy } from '@/core/FieldWithCopy';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { usesCallVocabulary, showsCallContext } from '@/proposals/presentation';
@@ -95,38 +100,35 @@ export const ProposalDetailsDialog: FC<ProposalDetailsDialogProps> = ({
           <div className="tab-content">
             {call && showsCallContext() ? (
               <TabsContent value="call">
-                <FormTable hideActions alignTop>
-                  <FormTable.Item
+                <PropertyList hideActions alignTop>
+                  <PropertyItem
                     label={translate('Name')}
-                    value={<FieldWithCopy value={call.name} />}
+                    value={call.name}
+                    hasCopy
                   />
 
-                  <FormTable.Item
+                  <PropertyItem
                     label={translate('Reference code')}
-                    value={
-                      <FieldWithCopy value={(call as any).reference_code} />
-                    }
+                    value={(call as any).reference_code}
+                    hasCopy
                   />
-                </FormTable>
+                </PropertyList>
               </TabsContent>
             ) : null}
             {showsCallContext() ? (
               <TabsContent value="round">
-                <FormTable hideActions alignTop>
-                  <FormTable.Item
+                <PropertyList hideActions alignTop>
+                  <PropertyItem
                     label={translate('Cutoff date')}
                     value={
-                      <FieldWithCopy
-                        value={
-                          <EndingField
-                            endDate={proposal.round.cutoff_time}
-                            dateFirst
-                          />
-                        }
+                      <EndingField
+                        endDate={proposal.round.cutoff_time}
+                        dateFirst
                       />
                     }
+                    copyable={proposal.round.cutoff_time}
                   />
-                </FormTable>
+                </PropertyList>
               </TabsContent>
             ) : null}
             {(reviews ?? []).map((review) => (

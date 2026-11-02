@@ -1,17 +1,16 @@
 import { FunctionComponent } from 'react';
 
-import FormTable from '@/form/FormTable';
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { IPList } from '@/resource/IPList';
-import { Field, ResourceSummaryProps } from '@/resource/summary';
+import { ResourceSummaryProps } from '@/resource/summary';
 
 import { EffectiveRoutesCard } from './EffectiveRoutesCard';
 
 export const OpenStackRouterSummary: FunctionComponent<ResourceSummaryProps> = (
   props,
 ) => {
-  const Component = props.formTableItem ? FormTable.Item : Field;
-
   const fixedIps: string[] = props.resource.fixed_ips ?? [];
   const externalFixedIps: string[] = (props.resource.external_fixed_ips ?? [])
     .map((ip: { ip_address?: string }) => ip?.ip_address)
@@ -28,7 +27,7 @@ export const OpenStackRouterSummary: FunctionComponent<ResourceSummaryProps> = (
 
   return (
     <>
-      <Component
+      <PropertyItem
         label={translate('Fixed IPs')}
         value={
           interfaceFixedIps.length ? (
@@ -40,7 +39,7 @@ export const OpenStackRouterSummary: FunctionComponent<ResourceSummaryProps> = (
       />
 
       {props.resource.has_external_gateway ? (
-        <Component
+        <PropertyItem
           label={translate('External IPs')}
           value={
             externalFixedIps.length ? (
@@ -53,7 +52,7 @@ export const OpenStackRouterSummary: FunctionComponent<ResourceSummaryProps> = (
       ) : null}
 
       {mappedExternalIps.length ? (
-        <Component
+        <PropertyItem
           label={translate('Mapped public IPs')}
           value={<IPList value={mappedExternalIps} />}
         />

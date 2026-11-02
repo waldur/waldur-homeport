@@ -1,8 +1,9 @@
 import { FC } from 'react';
 
-import { AccordionCard, Progress } from 'waldur-ui';
+import { AccordionCard, PropertyList, PropertyItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 import type { CachePerformance } from './api';
 import { formatPercent, getCacheHealth } from './utils';
@@ -15,12 +16,6 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
   const bufferHealth = getCacheHealth(data.buffer_cache_hit_ratio);
   const indexHealth = getCacheHealth(data.index_hit_ratio);
 
-  const getProgressVariant = (health: string) => {
-    if (health === 'danger') return 'danger';
-    if (health === 'warning') return 'warning';
-    return 'success';
-  };
-
   return (
     <AccordionCard
       id="database-cache"
@@ -31,63 +26,46 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
       defaultOpen={bufferHealth !== 'success' || indexHealth !== 'success'}
       className="mb-5"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
-        <div>
-          <h6 className="uppercase text-quaternary mb-2.5">
-            {translate('Hit ratios')}
-          </h6>
-          <div className="mb-3">
-            <div className="flex justify-between mb-1">
-              <span>{translate('Buffer cache')}</span>
-              <span>{formatPercent(data.buffer_cache_hit_ratio)}</span>
-            </div>
-            <Progress
-              value={data.buffer_cache_hit_ratio ?? 0}
-              variant={getProgressVariant(bufferHealth)}
-              label={translate('Buffer cache')}
-            />
-          </div>
-          <div>
-            <div className="flex justify-between mb-1">
-              <span>{translate('Index cache')}</span>
-              <span>{formatPercent(data.index_hit_ratio)}</span>
-            </div>
-            <Progress
-              value={data.index_hit_ratio ?? 0}
-              variant={getProgressVariant(indexHealth)}
-              label={translate('Index cache')}
-            />
-          </div>
-        </div>
-        <div>
-          <h6 className="uppercase text-quaternary mb-2.5">
-            {translate('Memory settings')}
-          </h6>
-          <table className="table table-sm table-borderless mb-0">
-            <tbody>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Shared buffers')}
-                </td>
-                <td className="text-end">
-                  <code>{data.shared_buffers}</code>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Effective cache size')}
-                </td>
-                <td className="text-end">
-                  <code>{data.effective_cache_size}</code>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <small className="text-quaternary mt-2.5 block">
-            {translate('Values are in 8KB pages')}
-          </small>
-        </div>
-      </div>
+      <PropertyList
+        variant="compact"
+        className="grid grid-cols-1 lg:grid-cols-2 gap-x-5"
+      >
+        <PropertyList.Section title={translate('Hit ratios')}>
+          <PropertyItem
+            label={translate('Buffer cache')}
+            value={propVal.meter(data.buffer_cache_hit_ratio, {
+              format: 'percent',
+              variant: { warning: 99, danger: 95 },
+              polarity: 'positive',
+              display: 'inline',
+              label: translate('Buffer cache'),
+            })}
+          />
+          <PropertyItem
+            label={translate('Index cache')}
+            value={propVal.meter(data.index_hit_ratio, {
+              format: 'percent',
+              variant: { warning: 99, danger: 95 },
+              polarity: 'positive',
+              display: 'inline',
+              label: translate('Index cache'),
+            })}
+          />
+        </PropertyList.Section>
+        <PropertyList.Section
+          title={translate('Memory settings')}
+          description={translate('Values are in 8KB pages')}
+        >
+          <PropertyItem
+            label={translate('Shared buffers')}
+            value={propVal.code(data.shared_buffers)}
+          />
+          <PropertyItem
+            label={translate('Effective cache size')}
+            value={propVal.code(data.effective_cache_size)}
+          />
+        </PropertyList.Section>
+      </PropertyList>
     </AccordionCard>
   );
 };

@@ -1,13 +1,12 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { AccordionCard } from 'waldur-ui';
+import { AccordionCard, PropertyList, PropertyItem } from 'waldur-ui';
 
-import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 import type { QueryPerformance } from './api';
-import { formatNumber } from './utils';
 
 interface DatabaseQueryPerformanceCardProps {
   data: QueryPerformance;
@@ -19,11 +18,9 @@ export const DatabaseQueryPerformanceCard: FC<
   DatabaseQueryPerformanceCardProps
 > = ({ data }) => {
   const hasTempFilesWarning = data.temp_files_bytes > TEMP_FILES_WARNING_BYTES;
+  const totalScans = data.seq_scan_count + data.index_scan_count;
   const seqScanRatio =
-    data.seq_scan_count + data.index_scan_count > 0
-      ? (data.seq_scan_count / (data.seq_scan_count + data.index_scan_count)) *
-        100
-      : 0;
+    totalScans > 0 ? (data.seq_scan_count / totalScans) * 100 : 0;
   const hasHighSeqScans = seqScanRatio > 50;
 
   return (
@@ -34,100 +31,81 @@ export const DatabaseQueryPerformanceCard: FC<
       defaultOpen={hasTempFilesWarning || hasHighSeqScans}
       className="mb-5"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
-        <div>
-          <h6 className="uppercase text-quaternary mb-2.5">
-            {translate('Scan statistics')}
-          </h6>
-          <table className="table table-sm table-borderless mb-0">
-            <tbody>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Sequential scans')}
-                </td>
-                <td
-                  className={`text-end ${hasHighSeqScans ? 'text-warning' : ''}`}
-                >
-                  {formatNumber(data.seq_scan_count)}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary ps-3">
-                  {translate('Rows fetched')}
-                </td>
-                <td className="text-end text-quaternary">
-                  {formatNumber(data.seq_scan_rows)}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Index scans')}</td>
-                <td className="text-end text-success">
-                  {formatNumber(data.index_scan_count)}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary ps-3">
-                  {translate('Rows fetched')}
-                </td>
-                <td className="text-end text-quaternary">
-                  {formatNumber(data.index_scan_rows)}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          {hasHighSeqScans && (
-            <small className="text-warning mt-1.5 block">
-              {translate(
-                'High sequential scan ratio ({ratio}%). Consider adding indexes.',
-                { ratio: seqScanRatio.toFixed(1) },
-              )}
-            </small>
-          )}
-        </div>
-        <div>
-          <h6 className="uppercase text-quaternary mb-2.5">
-            {translate('Temporary files')}
-          </h6>
-          <table className="table table-sm table-borderless mb-0">
-            <tbody>
-              <tr>
-                <td className="text-quaternary">
-                  <div className="flex items-center">
-                    {translate('Files created')}
-                    {data.temp_files_count > 0 && (
-                      <WarningCircleIcon
-                        size={16}
-                        weight="bold"
-                        className="text-warning ms-1.5"
-                      />
-                    )}
-                  </div>
-                </td>
-                <td
-                  className={`text-end ${data.temp_files_count > 0 ? 'text-warning' : ''}`}
-                >
-                  {formatNumber(data.temp_files_count)}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Total size')}</td>
-                <td
-                  className={`text-end ${hasTempFilesWarning ? 'text-danger' : ''}`}
-                >
-                  {formatFilesize(data.temp_files_bytes, 'B')}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          {hasTempFilesWarning && (
-            <small className="text-danger mt-1.5 block">
-              {translate(
-                'Large temp files indicate queries exceeding work_mem. Consider increasing it.',
-              )}
-            </small>
-          )}
-        </div>
-      </div>
+      <PropertyList
+        variant="compact"
+        className="grid grid-cols-1 lg:grid-cols-2 gap-x-5"
+      >
+        <PropertyList.Section
+          title={translate('Scan statistics')}
+          description={
+            hasHighSeqScans ? (
+              <span className="text-warning">
+                {translate(
+                  'High sequential scan ratio ({ratio}%). Consider adding indexes.',
+                  { ratio: seqScanRatio.toFixed(1) },
+                )}
+              </span>
+            ) : undefined
+          }
+        >
+          <PropertyItem
+            label={translate('Sequential scans')}
+            value={propVal.count(data.seq_scan_count)}
+            valueClass={hasHighSeqScans ? 'text-warning' : undefined}
+          />
+          <PropertyItem
+            label={translate('Rows fetched')}
+            labelClass="ps-3"
+            value={propVal.count(data.seq_scan_rows)}
+            valueClass="text-quaternary"
+          />
+          <PropertyItem
+            label={translate('Index scans')}
+            value={propVal.count(data.index_scan_count)}
+            valueClass="text-success"
+          />
+          <PropertyItem
+            label={translate('Rows fetched')}
+            labelClass="ps-3"
+            value={propVal.count(data.index_scan_rows)}
+            valueClass="text-quaternary"
+          />
+        </PropertyList.Section>
+        <PropertyList.Section
+          title={translate('Temporary files')}
+          description={
+            hasTempFilesWarning ? (
+              <span className="text-danger">
+                {translate(
+                  'Large temp files indicate queries exceeding work_mem. Consider increasing it.',
+                )}
+              </span>
+            ) : undefined
+          }
+        >
+          <PropertyItem
+            label={
+              <>
+                {translate('Files created')}
+                {data.temp_files_count > 0 && (
+                  <WarningCircleIcon
+                    size={16}
+                    weight="bold"
+                    className="text-warning ms-1.5"
+                  />
+                )}
+              </>
+            }
+            value={propVal.count(data.temp_files_count)}
+            valueClass={data.temp_files_count > 0 ? 'text-warning' : undefined}
+          />
+          <PropertyItem
+            label={translate('Total size')}
+            value={propVal.fileSize(data.temp_files_bytes)}
+            valueClass={hasTempFilesWarning ? 'text-danger' : undefined}
+          />
+        </PropertyList.Section>
+      </PropertyList>
     </AccordionCard>
   );
 };

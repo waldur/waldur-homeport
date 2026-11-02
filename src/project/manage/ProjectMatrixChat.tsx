@@ -3,12 +3,17 @@ import { FC, Fragment, useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { MatrixRoom } from 'waldur-js-client';
 
-import { BaseButton, Menu } from 'waldur-ui';
+import {
+  BaseButton,
+  Menu,
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StateIndicator } from '@/core/StateIndicator';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { canCreateMatrixRoom } from '@/matrix/canCreateMatrixRoom';
 import { canManageMatrixRoom } from '@/matrix/canManageMatrixRoom';
@@ -29,7 +34,6 @@ import { ROOM_STATE_VARIANT, stateLabel } from '@/matrix/MatrixRoomStateBadge';
 import { canOpenInExternalClient } from '@/matrix/utils';
 import { useModal } from '@/modal/actions';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import { renderFieldOrDash } from '@/table/utils';
 import {
   getProject,
   getUser,
@@ -128,9 +132,9 @@ const HistoryExportsCard: FC<{
     [refreshSlot, isActive],
   );
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('History exports')}
-      className="card-bordered"
       actions={
         <div className="flex items-center gap-1.5">
           {isActive ? (
@@ -158,7 +162,7 @@ const HistoryExportsCard: FC<{
         hasActionBar={false}
         portal={portal}
       />
-    </FormTable.Card>
+    </PropertyCard>
   );
 };
 
@@ -169,9 +173,10 @@ const RoomDetails: FC<{
   refetch(): void;
 }> = ({ room, canManage, staff, refetch }) => (
   <>
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('Chat room')}
-      className="card-bordered mb-5"
+      className="mb-5"
       actions={
         <RoomActions
           room={room}
@@ -181,9 +186,9 @@ const RoomDetails: FC<{
         />
       }
     >
-      <FormTable>
-        <FormTable.Item label={translate('Room name')} value={room.room_name} />
-        <FormTable.Item
+      <PropertyList>
+        <PropertyItem label={translate('Room name')} value={room.room_name} />
+        <PropertyItem
           label={translate('State')}
           value={
             <StateIndicator
@@ -196,21 +201,16 @@ const RoomDetails: FC<{
           }
         />
         {room.error_message && (
-          <FormTable.Item
+          <PropertyItem
             label={translate('Error')}
-            value={<span className="text-danger">{room.error_message}</span>}
+            value={room.error_message}
+            valueClass="text-danger"
           />
         )}
-        <FormTable.Item
-          label={translate('Room alias')}
-          value={renderFieldOrDash(room.room_alias)}
-        />
-        <FormTable.Item
-          label={translate('Members')}
-          value={room.members_count}
-        />
-      </FormTable>
-    </FormTable.Card>
+        <PropertyItem label={translate('Room alias')} value={room.room_alias} />
+        <PropertyItem label={translate('Members')} value={room.members_count} />
+      </PropertyList>
+    </PropertyCard>
 
     {/* The API lists exports only for those who manage the room. */}
     {canManage && <HistoryExportsCard room={room} refetch={refetch} />}

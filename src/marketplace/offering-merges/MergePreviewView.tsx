@@ -5,10 +5,16 @@ import {
   OfferingMergeStateEnum,
 } from 'waldur-js-client';
 
-import { AlertItem, Checkbox } from 'waldur-ui';
+import {
+  AlertItem,
+  Checkbox,
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { MergeEntriesView } from './MergeEntriesView';
@@ -175,29 +181,29 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
         tableId={tableId}
       />
 
-      <section>
-        <SectionHeading
-          title={translate('Invoices and usage summaries')}
-          help={translate(
-            'How many invoice lines the merge rewrites under the chosen policy, and which usage summaries it recomputes afterwards.',
-          )}
-          className="mb-2.5"
-        />
-        <FormTable.Card>
-          <FormTable>
-            <FormTable.Item
+      <PropertyCard>
+        <PropertyList>
+          <PropertyList.Section
+            title={translate('Invoices and usage summaries')}
+            description={translate(
+              'How many invoice lines the merge rewrites under the chosen policy, and which usage summaries it recomputes afterwards.',
+            )}
+          >
+            <PropertyItem
               label={translate('Invoice items rewritten')}
-              value={preview.invoice_items?.to_rewrite ?? 0}
+              value={propVal.count(preview.invoice_items?.to_rewrite)}
             />
-            <FormTable.Item
+            <PropertyItem
               label={translate('Items on closed invoices')}
-              value={preview.invoice_items?.on_closed_invoices ?? 0}
+              value={propVal.count(preview.invoice_items?.on_closed_invoices)}
             />
-            <FormTable.Item
+            <PropertyItem
               label={translate('Closed-invoice items kept as they are')}
-              value={preview.invoice_items?.kept_on_closed_invoices ?? 0}
+              value={propVal.count(
+                preview.invoice_items?.kept_on_closed_invoices,
+              )}
             />
-            <FormTable.Item
+            <PropertyItem
               label={translate('Usage summaries recomputed')}
               value={translate('{components} component(s) over {months}', {
                 components: preview.summaries_to_recompute?.components ?? 0,
@@ -206,9 +212,9 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
                 ),
               })}
             />
-          </FormTable>
-        </FormTable.Card>
-      </section>
+          </PropertyList.Section>
+        </PropertyList>
+      </PropertyCard>
     </div>
   );
 };

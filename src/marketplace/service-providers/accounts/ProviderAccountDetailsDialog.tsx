@@ -7,16 +7,13 @@ import {
   ServiceProviderAccount,
 } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
-import { FieldWithCopy } from '@/core/FieldWithCopy';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import {
-  formatValue,
-  getExposedUserAttributes,
-} from '@/marketplace/offerings/details/OfferingUserDetailsDialog';
+import { getExposedUserAttributes } from '@/marketplace/offerings/details/OfferingUserDetailsDialog';
 import { OfferingUserStateField } from '@/marketplace/OfferingUserStateField';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -95,30 +92,32 @@ export const ProviderAccountDetailsDialog: FC<
           loadData={refetch}
         />
       ) : (
-        <FormTable hideActions detailsMode>
+        <PropertyList termWidth="md">
           {exposedUserAttributes.length ? (
             exposedUserAttributes.map((attr) => (
-              <FormTable.Item
+              <PropertyItem
                 key={attr.key}
                 label={attr.label}
-                value={<FieldWithCopy value={attr.value} />}
+                value={attr.value}
+                copyable={attr.copyable}
               />
             ))
           ) : (
-            <FormTable.Item
+            <PropertyItem
               label={translate('Identity attributes')}
               value={translate('None exposed to this provider')}
             />
           )}
-          <FormTable.Item
+          <PropertyItem
             label={translate('Provider username')}
-            value={<FieldWithCopy value={formatValue(account.username)} />}
+            value={account.username}
+            copyable
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('State')}
             value={<OfferingUserStateField row={account} />}
           />
-        </FormTable>
+        </PropertyList>
       )}
     </ModalDialog>
   );

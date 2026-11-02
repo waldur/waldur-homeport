@@ -6,13 +6,18 @@ import {
   ExportTypeCompatibility,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, BaseButton } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  BaseButton,
+  PropertyList,
+  PropertyItem,
+} from 'waldur-ui';
 
-import { ExternalLink } from '@/core/ExternalLink';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { SimpleTable } from '@/table/SimpleTable';
 import { Column } from '@/table/types';
 import { WizardModal, WizardStepProps } from '@/wizard';
@@ -175,18 +180,20 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
           <h5 className="mb-0">{translate('Connection')}</h5>
         </div>
         <div className="card-body">
-          <Field
-            label={translate('API URL')}
-            value={<ExternalLink url={values.api_url} label={values.api_url} />}
-          />
-          <Field
-            label={translate('Partner Name')}
-            value={partnerInfo?.company_name as string}
-          />
-          <Field
-            label={translate('Partner Reference')}
-            value={partnerInfo?.reference as string}
-          />
+          <PropertyList variant="summary">
+            <PropertyItem
+              label={translate('API URL')}
+              value={propVal.url(values.api_url)}
+            />
+            <PropertyItem
+              label={translate('Partner Name')}
+              value={partnerInfo?.company_name as string}
+            />
+            <PropertyItem
+              label={translate('Partner Reference')}
+              value={partnerInfo?.reference as string}
+            />
+          </PropertyList>
         </div>
       </div>
 

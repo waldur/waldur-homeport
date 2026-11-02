@@ -14,13 +14,20 @@ import {
   Offering,
 } from 'waldur-js-client';
 
-import { Badge, Progress, type ProgressVariant } from 'waldur-ui';
+import {
+  Badge,
+  Progress,
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+  type ProgressVariant,
+} from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 interface OwnProps {
   offering: Offering;
@@ -69,52 +76,55 @@ const InfoRow = ({
   const max = statistics.reduce((acc, item) => acc + item.count, 0);
   return (
     <>
-      <FormTable.Item
+      <PropertyItem
         label={label}
         colon
-        value={max}
+        value={propVal.number(max)}
         className="border-0"
         valueClass="border-0"
         actionsClass="border-0"
       />
-      <tr>
-        <td className="pt-0 ps-0" colSpan={3}>
-          <Progress
-            className="mb-4"
-            max={max}
-            segments={statistics.map((stat) => ({
-              value: stat.count,
-              variant:
-                infoState.find((c) => c.states.includes(stat.state))?.variant ||
-                'neutral',
-            }))}
-          />
-          <div className="flex flex-wrap gap-1.5">
-            {statistics.map((stat) => {
-              const state = infoState.find((c) =>
-                c.states.includes(stat.state),
-              );
-              const Icon = state?.icon || WarningCircleIcon;
-              return (
-                <Badge
-                  key={stat.state}
-                  variant={state?.variant || 'neutral'}
-                  leftIcon={
-                    // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-                    <Icon weight="bold" />
-                  }
-                  shape="pill"
-                  tone="outline"
-                >
-                  {stat.state}
-                  {': '}
-                  {stat.count}
-                </Badge>
-              );
-            })}
-          </div>
-        </td>
-      </tr>
+      <PropertyItem
+        className="pt-0"
+        value={
+          <>
+            <Progress
+              className="mb-4"
+              max={max}
+              segments={statistics.map((stat) => ({
+                value: stat.count,
+                variant:
+                  infoState.find((c) => c.states.includes(stat.state))
+                    ?.variant || 'neutral',
+              }))}
+            />
+            <div className="flex flex-wrap gap-1.5">
+              {statistics.map((stat) => {
+                const state = infoState.find((c) =>
+                  c.states.includes(stat.state),
+                );
+                const Icon = state?.icon || WarningCircleIcon;
+                return (
+                  <Badge
+                    key={stat.state}
+                    variant={state?.variant || 'neutral'}
+                    leftIcon={
+                      // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
+                      <Icon weight="bold" />
+                    }
+                    shape="pill"
+                    tone="outline"
+                  >
+                    {stat.state}
+                    {': '}
+                    {stat.count}
+                  </Badge>
+                );
+              })}
+            </div>
+          </>
+        }
+      />
     </>
   );
 };
@@ -130,32 +140,25 @@ export const OfferingResourcesAndUsers: FC<OwnProps> = ({ offering }) => {
   });
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('Resources & users')}
-      className="card-bordered mb-4"
+      className="mb-4"
       headerClassName="min-h-[60px]"
     >
-      <FormTable detailsMode>
-        {isLoading || error ? (
-          <tr>
-            <td colSpan={3}>
-              {isLoading ? (
-                <LoadingSpinner />
-              ) : error ? (
-                <LoadingErred loadData={refetch} />
-              ) : null}
-            </td>
-          </tr>
-        ) : (
-          <>
-            <InfoRow
-              label={translate('Total resources')}
-              statistics={data.resources}
-            />
-            <InfoRow label={translate('Total users')} statistics={data.users} />
-          </>
-        )}
-      </FormTable>
-    </FormTable.Card>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : error ? (
+        <LoadingErred loadData={refetch} />
+      ) : (
+        <PropertyList detailsMode>
+          <InfoRow
+            label={translate('Total resources')}
+            statistics={data.resources}
+          />
+          <InfoRow label={translate('Total users')} statistics={data.users} />
+        </PropertyList>
+      )}
+    </PropertyCard>
   );
 };

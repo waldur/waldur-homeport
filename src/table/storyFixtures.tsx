@@ -1,9 +1,15 @@
 import { PencilSimpleIcon, TrashIcon } from '@phosphor-icons/react';
 
-import { AlertItem, Badge, BadgeVariant, BaseButton } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  BadgeVariant,
+  BaseButton,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
 import { ModelCard1 } from '@/core/ModelCard1';
-import { Field } from '@/resource/summary';
 
 import { ExpandableContainer } from './ExpandableContainer';
 import { BooleanFilter, SelectFilter, StringFilter } from './filters';
@@ -100,31 +106,18 @@ export const TableStoryGridItem = ({ row }: { row: TableStoryRow }) => (
     title={row.name}
     body={
       <div className="text-sm">
-        <Field
-          label="Status"
-          value={
-            <Badge variant={STATUS_VARIANT[row.status]} tone="outline">
-              {row.status}
-            </Badge>
-          }
-          space={1.5}
-          labelCol={6}
-          valueCol={6}
-        />
-        <Field
-          label="Owner"
-          value={row.owner}
-          space={1.5}
-          labelCol={6}
-          valueCol={6}
-        />
-        <Field
-          label="Created"
-          value={row.created}
-          space={1.5}
-          labelCol={6}
-          valueCol={6}
-        />
+        <PropertyList variant="summary" termWidth="sm" space={1.5}>
+          <PropertyItem
+            label="Status"
+            value={
+              <Badge variant={STATUS_VARIANT[row.status]} tone="outline">
+                {row.status}
+              </Badge>
+            }
+          />
+          <PropertyItem label="Owner" value={row.owner} />
+          <PropertyItem label="Created" value={row.created} />
+        </PropertyList>
       </div>
     }
     footer={
@@ -420,10 +413,10 @@ export const TableStoryExpandableRow = ({
   hasMultiSelect?: boolean;
 }) => (
   <ExpandableContainer asTable={asTable} hasMultiSelect={hasMultiSelect}>
-    <Field label="Region" value={row.region} />
-    <Field label="Plan" value={row.plan} />
-    <Field label="Monthly cost" value={row.monthlyCost} />
-    <Field label="Tags" value={row.tags} />
+    <PropertyItem label="Region" value={row.region} />
+    <PropertyItem label="Plan" value={row.plan} />
+    <PropertyItem label="Monthly cost" value={row.monthlyCost} />
+    <PropertyItem label="Tags" value={row.tags} />
   </ExpandableContainer>
 );
 

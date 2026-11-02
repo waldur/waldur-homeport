@@ -1,7 +1,8 @@
 import { EyeIcon, InfoIcon } from '@phosphor-icons/react';
 import { ProposalReview } from 'waldur-js-client';
 
-import FormTable from '@/form/FormTable';
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -21,56 +22,40 @@ const ShowReviewCommentsDialog = ({
       })}
       iconNode={<InfoIcon weight="bold" />}
     >
-      <FormTable hideActions alignTop detailsMode>
-        {review.summary_private_comment && (
-          <FormTable.Item
-            label={translate('Private comment')}
-            value={review.summary_private_comment}
-          />
-        )}
-        {review.summary_public_comment && (
-          <FormTable.Item
-            label={translate('Public comment')}
-            value={review.summary_public_comment}
-          />
-        )}
-        {review.comment_project_title && (
-          <FormTable.Item
-            label={translate('Project title')}
-            value={review.comment_project_title}
-          />
-        )}
-        {review.comment_project_summary && (
-          <FormTable.Item
-            label={translate('Project summary')}
-            value={review.comment_project_summary}
-          />
-        )}
-        {review.comment_project_description && (
-          <FormTable.Item
-            label={translate('Project description')}
-            value={review.comment_project_description}
-          />
-        )}
-        {review.comment_project_supporting_documentation && (
-          <FormTable.Item
-            label={translate('Project supporting documentation')}
-            value={review.comment_project_supporting_documentation}
-          />
-        )}
-        {review.comment_resource_requests && (
-          <FormTable.Item
-            label={translate('Resource requests')}
-            value={review.comment_resource_requests}
-          />
-        )}
-        {review.comment_team && (
-          <FormTable.Item
-            label={translate('Project team')}
-            value={review.comment_team}
-          />
-        )}
-      </FormTable>
+      <PropertyList hideActions alignTop detailsMode hideIfEmpty>
+        <PropertyItem
+          label={translate('Private comment')}
+          value={review.summary_private_comment}
+        />
+        <PropertyItem
+          label={translate('Public comment')}
+          value={review.summary_public_comment}
+        />
+        <PropertyItem
+          label={translate('Project title')}
+          value={review.comment_project_title}
+        />
+        <PropertyItem
+          label={translate('Project summary')}
+          value={review.comment_project_summary}
+        />
+        <PropertyItem
+          label={translate('Project description')}
+          value={review.comment_project_description}
+        />
+        <PropertyItem
+          label={translate('Project supporting documentation')}
+          value={review.comment_project_supporting_documentation}
+        />
+        <PropertyItem
+          label={translate('Resource requests')}
+          value={review.comment_resource_requests}
+        />
+        <PropertyItem
+          label={translate('Project team')}
+          value={review.comment_team}
+        />
+      </PropertyList>
     </ModalDialog>
   );
 };

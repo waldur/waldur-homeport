@@ -47,14 +47,19 @@ describe('ProjectGeneral edit controls', () => {
   it('leaves the fields and the avatar editable for a project editor', () => {
     vi.mocked(useUser).mockReturnValue(editor);
     renderWithProviders(<ProjectGeneral project={project} />);
-    expect(screen.getByRole('table')).not.toHaveClass('hide-actions');
+    expect(screen.getByTestId('property-list')).not.toHaveAttribute(
+      'data-hide-actions',
+    );
     expect(screen.getByText('Avatar')).toBeInTheDocument();
   });
 
   it('shows support the fields read-only, without the avatar upload', () => {
     vi.mocked(useUser).mockReturnValue(support);
     renderWithProviders(<ProjectGeneral project={project} />);
-    expect(screen.getByRole('table')).toHaveClass('hide-actions');
+    expect(screen.getByTestId('property-list')).toHaveAttribute(
+      'data-hide-actions',
+      'true',
+    );
     expect(screen.queryByText('Avatar')).not.toBeInTheDocument();
   });
 });

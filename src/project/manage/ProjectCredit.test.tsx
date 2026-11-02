@@ -64,8 +64,8 @@ describe('ProjectCredit edit controls', () => {
   it('keeps the actions for an owner', async () => {
     vi.mocked(useUser).mockReturnValue(owner);
     renderWithProviders(<ProjectCredit project={project} />);
-    const table = (await screen.findAllByRole('table'))[0];
-    expect(table).not.toHaveClass('hide-actions');
+    const list = (await screen.findAllByTestId('property-list'))[0];
+    expect(list).not.toHaveAttribute('data-hide-actions');
   });
 
   it('keeps the actions for staff', async () => {
@@ -75,30 +75,30 @@ describe('ProjectCredit edit controls', () => {
       permissions: [],
     } as any);
     renderWithProviders(<ProjectCredit project={project} />);
-    const table = (await screen.findAllByRole('table'))[0];
-    expect(table).not.toHaveClass('hide-actions');
+    const list = (await screen.findAllByTestId('property-list'))[0];
+    expect(list).not.toHaveAttribute('data-hide-actions');
   });
 
   it('offers no edits when the API returns no credit to edit', async () => {
     vi.mocked(projectCreditsList).mockResolvedValue({ data: [] } as any);
     vi.mocked(useUser).mockReturnValue(owner);
     renderWithProviders(<ProjectCredit project={project} />);
-    const table = (await screen.findAllByRole('table'))[0];
-    expect(table).toHaveClass('hide-actions');
+    const list = (await screen.findAllByTestId('property-list'))[0];
+    expect(list).toHaveAttribute('data-hide-actions', 'true');
   });
 
   // Credit writes need an owner: PROJECT.UPDATE alone gets a 403 from the API.
   it('shows a project manager the credit read-only', async () => {
     vi.mocked(useUser).mockReturnValue(manager);
     renderWithProviders(<ProjectCredit project={project} />);
-    const table = (await screen.findAllByRole('table'))[0];
-    expect(table).toHaveClass('hide-actions');
+    const list = (await screen.findAllByTestId('property-list'))[0];
+    expect(list).toHaveAttribute('data-hide-actions', 'true');
   });
 
   it('shows support the credit read-only', async () => {
     vi.mocked(useUser).mockReturnValue(support);
     renderWithProviders(<ProjectCredit project={project} />);
-    const table = (await screen.findAllByRole('table'))[0];
-    expect(table).toHaveClass('hide-actions');
+    const list = (await screen.findAllByTestId('property-list'))[0];
+    expect(list).toHaveAttribute('data-hide-actions', 'true');
   });
 });

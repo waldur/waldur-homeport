@@ -1,27 +1,14 @@
 import { CeleryWorkerStats } from 'waldur-js-client';
 
-import { AccordionCard, Badge } from 'waldur-ui';
+import { AccordionCard, Badge, PropertyItem, PropertyList } from 'waldur-ui';
 
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 interface CeleryWorkerInfoProps {
   workerName: string;
   stats: CeleryWorkerStats;
 }
-
-const formatUptime = (seconds: number): string => {
-  const days = Math.floor(seconds / 86400);
-  const hours = Math.floor((seconds % 86400) / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-
-  const parts: string[] = [];
-  if (days > 0) parts.push(`${days}d`);
-  if (hours > 0) parts.push(`${hours}h`);
-  if (minutes > 0 || parts.length === 0) parts.push(`${minutes}m`);
-
-  return parts.join(' ');
-};
 
 export const CeleryWorkerInfo = ({
   workerName,
@@ -42,35 +29,37 @@ export const CeleryWorkerInfo = ({
       className="mb-5"
       defaultOpen
     >
-      <FormTable>
-        <FormTable.Item label={translate('PID')} value={stats.pid} />
-        <FormTable.Item
+      <PropertyList>
+        <PropertyItem label={translate('PID')} value={stats.pid} />
+        <PropertyItem
           label={translate('Uptime')}
-          value={formatUptime(stats.uptime)}
+          value={propVal.duration(stats.uptime)}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Pool concurrency')}
-          value={`${pool.processes.length} / ${pool.max_concurrency}`}
+          value={propVal.meter(pool.processes.length, pool.max_concurrency, {
+            showPercent: true,
+          })}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Prefetch count')}
-          value={stats.prefetch_count}
+          value={propVal.number(stats.prefetch_count)}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Broker')}
           value={`${broker.transport}://${broker.hostname}:${broker.port}${broker.virtual_host}`}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Broker SSL')}
-          value={broker.ssl ? translate('Yes') : translate('No')}
+          value={propVal.boolean(broker.ssl)}
         />
         {writesTotal !== null && (
-          <FormTable.Item
+          <PropertyItem
             label={translate('Tasks written')}
-            value={writesTotal.toLocaleString()}
+            value={propVal.count(writesTotal)}
           />
         )}
-      </FormTable>
+      </PropertyList>
     </AccordionCard>
   );
 };

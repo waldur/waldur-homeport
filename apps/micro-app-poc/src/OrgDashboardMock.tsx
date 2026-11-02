@@ -13,6 +13,7 @@ import {
   ModalService,
   ModePickerDialog,
   OrgSwitcher,
+  PropertyList,
   SidebarModeCard,
   StatCard,
   WaldurLogo,
@@ -113,6 +114,7 @@ export const OrgDashboardMock = () => {
   const usersCount = data?.usersCount ?? '—';
   const invoiceTotal = data?.invoiceTotal ?? '—';
   const invoiceHint = data?.invoiceHint ?? '—';
+  const workspaceTitle = currentMode?.title ?? '—';
   /* eslint-enable waldur-custom/enforce-render-field-or-dash */
   const rows = data?.rows ?? [];
 
@@ -204,6 +206,44 @@ export const OrgDashboardMock = () => {
               rows={rows}
               rowKey={(row) => row.uuid}
             />
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="p-4 pb-0 text-sm font-semibold">
+            {translate('Organisation details')}
+          </CardHeader>
+          <CardContent className="p-4 pt-0">
+            <PropertyList detailsMode>
+              <PropertyList.Item
+                label={translate('Organisation')}
+                description={translate(
+                  'Legal entity name associated with the billing profile.',
+                )}
+                value={orgName}
+              />
+              {selectedUuid && (
+                <PropertyList.Item
+                  label={translate('UUID')}
+                  value={selectedUuid}
+                  copyValue={selectedUuid}
+                  copyLabel={translate('Copy')}
+                  copiedLabel={translate('Copied')}
+                />
+              )}
+              <PropertyList.Item
+                label={translate('Active workspace')}
+                value={workspaceTitle}
+                actions={
+                  <BaseButton
+                    variant="tertiary"
+                    size="sm"
+                    label={translate('Switch')}
+                    onClick={openPicker}
+                  />
+                }
+              />
+            </PropertyList>
           </CardContent>
         </Card>
 

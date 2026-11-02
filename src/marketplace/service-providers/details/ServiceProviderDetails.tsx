@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 import { ServiceProvider } from 'waldur-js-client';
 
-import { useBreadcrumbs } from 'waldur-ui';
+import { PropertyList, useBreadcrumbs, PropertyItem } from 'waldur-ui';
 
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { isFeatureVisible } from '@/features/connect';
@@ -14,7 +14,6 @@ import { LayoutSlot } from '@/navigation/slots';
 import { useTitle } from '@/navigation/title';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
-import { Field } from '@/resource/summary';
 
 import { getProviderBreadcrumbItems } from '../utils';
 
@@ -77,11 +76,12 @@ const ProviderDetailsHero: FunctionComponent<ProviderDetailsProps> = (data) => {
         </div>
       }
     >
-      <Field
-        label={translate('Description')}
-        value={data.provider.description}
-        isStuck={true}
-      />
+      <PropertyList variant="summary" termWidth="auto">
+        <PropertyItem
+          label={translate('Description')}
+          value={data.provider.description}
+        />
+      </PropertyList>
     </PublicDashboardHero>
   );
 };

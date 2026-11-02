@@ -2,7 +2,8 @@ import { render, screen } from '@testing-library/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import FormTable from '@/form/FormTable';
+import { PropertyList } from 'waldur-ui';
+
 import { useUser } from '@/workspace/hooks';
 
 import { FieldRow } from './FieldRow';
@@ -23,9 +24,9 @@ const freeipaPassword = {
 
 const renderRow = (item, value) =>
   render(
-    <FormTable>
+    <PropertyList>
       <FieldRow item={item} value={value} />
-    </FormTable>,
+    </PropertyList>,
   );
 
 describe('FieldRow', () => {
@@ -44,7 +45,7 @@ describe('FieldRow', () => {
     });
     renderRow(siteName, 'Waldur');
 
-    const row = screen.getByRole('row', { name: /Site name/ });
+    const row = screen.getByTestId('setting-SITE_NAME');
     expect(row).toHaveAttribute('id', 'setting-SITE_NAME');
     expect(row).toHaveClass('bg-warning-subtle');
   });
@@ -60,5 +61,18 @@ describe('FieldRow', () => {
     renderRow(freeipaPassword, '');
 
     expect(screen.queryByText('Modified')).not.toBeInTheDocument();
+  });
+
+  it('renders a dash for an empty multiple_choice_field', () => {
+    const multiChoice = {
+      key: 'DISABLED_OFFERING_TYPES',
+      description: 'Disabled offering types.',
+      default: [],
+      type: 'multiple_choice_field',
+      options: [{ value: 'support', label: 'Support' }],
+    };
+    renderRow(multiChoice, []);
+
+    expect(screen.getByText('—')).toBeInTheDocument();
   });
 });

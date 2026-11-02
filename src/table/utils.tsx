@@ -1,6 +1,7 @@
 import { translate } from 'waldur-i18n-runtime';
 import { Tooltip } from 'waldur-ui';
 
+import { isEmptyValue } from '@/core/isEmptyValue';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { ExportData } from '@/table/exporters/types';
 import { Column } from '@/table/types';
@@ -98,7 +99,15 @@ export const formatLongText = (value) =>
     value
   );
 
-export const renderFieldOrDash = (field) => (field ? field : DASH_ESCAPE_CODE);
+/**
+ * The field, or a dash when it is missing (see `isEmptyValue`). `0` shows.
+ * `false` and `NaN` read as missing too: `cond && value` and a failed parse
+ * produce them.
+ */
+export const renderFieldOrDash = (field) =>
+  isEmptyValue(field) || field === false || Number.isNaN(field)
+    ? DASH_ESCAPE_CODE
+    : field;
 
 export function getNoResultMessage({ query, verboseName, customEmpty = null }) {
   const context = {

@@ -1,6 +1,8 @@
 import { FC, useMemo } from 'react';
 import { proposalProtectedCallsAvailableComplianceChecklistsList } from 'waldur-js-client';
 
+import { PropertyCard, PropertyList } from 'waldur-ui';
+
 import {
   AsyncSelectEditField,
   BooleanEditField,
@@ -8,7 +10,6 @@ import {
   NumberEditField,
   SelectEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
 import { userAutocomplete } from '@/marketplace/common/autocompletes';
@@ -133,9 +134,10 @@ export const GeneralConfigurationSection: FC<
   );
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('General configuration')}
-      className="card-bordered mb-4"
+      className="mb-4"
     >
       <EditFieldProvider
         scope={props.call}
@@ -144,7 +146,7 @@ export const GeneralConfigurationSection: FC<
           props.isReadOnly ? getCallReadOnlyReason(props.call) : undefined
         }
       >
-        <FormTable>
+        <PropertyList>
           <NumberEditField
             name="fixed_duration_in_days"
             label={translate('Fixed duration for granted projects (in days)')}
@@ -303,8 +305,8 @@ export const GeneralConfigurationSection: FC<
               value ? translate('Yes') : translate('No')
             }
           />
-        </FormTable>
+        </PropertyList>
       </EditFieldProvider>
-    </FormTable.Card>
+    </PropertyCard>
   );
 };

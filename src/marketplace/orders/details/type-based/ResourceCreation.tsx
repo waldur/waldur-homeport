@@ -1,17 +1,19 @@
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { useShouldConcealPrices } from '@/marketplace/common/useShouldConcealPrices';
 import { PricesData } from '@/marketplace/details/plan/types';
 import { useOrderPrices } from '@/marketplace/details/plan/utils';
-import { Field } from '@/resource/summary';
 
 import { OrderFieldEditButton } from '../OrderFieldEditButton';
 
 import { ComponentsSection, useGroupedComponents } from './ComponentsSection';
 import {
+  ORDER_LIST_PROPS,
   OrderTypeBasedProps,
-  RequestedByField,
   RequestCommentField,
+  RequestedByField,
 } from './OrderCommonFields';
 
 const PureResourceCreation = ({
@@ -36,26 +38,27 @@ const PureResourceCreation = ({
 
   return (
     <>
-      <RequestedByField order={order} />
-      <RequestCommentField order={order} />
-      <Field
-        label={translate('Start date')}
-        labelWidth={200}
-        value={
-          <>
-            {order.start_date
-              ? formatDate(order.start_date)
-              : translate('Not set')}
-            {editable && (
-              <OrderFieldEditButton
-                order={order}
-                offering={offering}
-                name="start_date"
-              />
-            )}
-          </>
-        }
-      />
+      <PropertyList {...ORDER_LIST_PROPS}>
+        <RequestedByField order={order} />
+        <RequestCommentField order={order} />
+        <PropertyItem
+          label={translate('Start date')}
+          value={
+            <>
+              {order.start_date
+                ? formatDate(order.start_date)
+                : translate('Not set')}
+              {editable && (
+                <OrderFieldEditButton
+                  order={order}
+                  offering={offering}
+                  name="start_date"
+                />
+              )}
+            </>
+          }
+        />
+      </PropertyList>
 
       {hasPeriodicRows && (
         <ComponentsSection

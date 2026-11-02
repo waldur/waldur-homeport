@@ -7,15 +7,14 @@ import {
   OfferingUser,
 } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { UI_STALE_TIME } from '@/core/constants';
-import { formatDateTime } from '@/core/dateUtils';
-import { FieldWithCopy } from '@/core/FieldWithCopy';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { OfferingUserStateField } from '@/marketplace/OfferingUserStateField';
 import {
@@ -24,33 +23,37 @@ import {
 } from '@/marketplace/service-providers/accounts/ProviderAccountLink';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { propVal } from '@/property/propertyFields';
 import { formatGender } from '@/user/support/aai-constants';
-import { IsdBadges } from '@/user/support/IsdBadges';
+import { formatIsdName } from '@/user/support/IsdBadges';
 
 interface OfferingUserDetailsDialogProps {
   resolve: { offeringUserUuid: string; offeringUuid: string };
 }
 
+export interface FieldMappingEntry {
+  label: () => string;
+  getValue: (user: OfferingUser) => string | unknown;
+  copyable?: boolean;
+  format?: (value: any, user: OfferingUser) => any;
+}
+
 // Maps exposed_fields values to OfferingUser properties
-export const FIELD_MAPPING: Record<
-  string,
-  {
-    label: () => string;
-    getValue: (user: OfferingUser) => string | unknown;
-  }
-> = {
+export const FIELD_MAPPING: Record<string, FieldMappingEntry> = {
   full_name: {
     label: () => translate('Full name'),
     getValue: (user) => user.user_full_name,
+    copyable: true,
   },
   email: {
     label: () => translate('Email'),
     getValue: (user) => user.user_email,
+    copyable: true,
   },
   phone_number: {
     label: () => translate('Phone number'),
     getValue: (user) => user.user_phone_number,
+    copyable: true,
   },
   organization: {
     label: () => translate('Organization'),
@@ -63,6 +66,7 @@ export const FIELD_MAPPING: Record<
   affiliations: {
     label: () => translate('Affiliations'),
     getValue: (user) => user.user_affiliations,
+    format: (v) => propVal.list(v),
   },
   gender: {
     label: () => translate('Gender'),
@@ -87,6 +91,7 @@ export const FIELD_MAPPING: Record<
   nationalities: {
     label: () => translate('Nationalities'),
     getValue: (user) => user.user_nationalities,
+    format: (v) => propVal.list(v),
   },
   organization_country: {
     label: () => translate('Organization country'),
@@ -99,10 +104,12 @@ export const FIELD_MAPPING: Record<
   organization_registry_code: {
     label: () => translate('Organization registry code'),
     getValue: (user) => user.user_organization_registry_code,
+    copyable: true,
   },
   organization_vat_code: {
     label: () => translate('Organization VAT code'),
     getValue: (user) => user.user_organization_vat_code,
+    copyable: true,
   },
   organization_address: {
     label: () => translate('Organization address'),
@@ -115,10 +122,12 @@ export const FIELD_MAPPING: Record<
   civil_number: {
     label: () => translate('Civil number'),
     getValue: (user) => user.user_civil_number,
+    copyable: true,
   },
   birth_date: {
     label: () => translate('Birth date'),
     getValue: (user) => user.user_birth_date,
+    format: (v) => propVal.date(v),
   },
   identity_source: {
     label: () => translate('Registration method'),
@@ -126,15 +135,14 @@ export const FIELD_MAPPING: Record<
   },
 };
 
-export const formatValue = (value: unknown): string => {
-  if (value === null || value === undefined || value === '') {
-    return DASH_ESCAPE_CODE;
-  }
-  if (Array.isArray(value)) {
-    return value.length > 0 ? value.join(', ') : DASH_ESCAPE_CODE;
-  }
-  return String(value);
-};
+/** The labels of the profile attributes an offering user is missing. */
+export const getMissingAttributeLabels = (keys: string[]) =>
+  keys.map((key) => {
+    const mapping = FIELD_MAPPING[key];
+    return mapping
+      ? mapping.label()
+      : key.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
+  });
 
 /** The user attributes an offering's config exposes, labelled and formatted. */
 export const getExposedUserAttributes = (
@@ -144,11 +152,19 @@ export const getExposedUserAttributes = (
   if (!config?.exposed_fields || !offeringUser) return [];
   return config.exposed_fields
     .filter((field) => FIELD_MAPPING[field])
-    .map((field) => ({
-      key: field,
-      label: FIELD_MAPPING[field].label(),
-      value: formatValue(FIELD_MAPPING[field].getValue(offeringUser)),
-    }));
+    .map((field) => {
+      const mapping = FIELD_MAPPING[field];
+      const rawValue = mapping.getValue(offeringUser);
+      const value = mapping.format
+        ? mapping.format(rawValue, offeringUser)
+        : rawValue;
+      return {
+        key: field,
+        label: mapping.label(),
+        value,
+        copyable: mapping.copyable,
+      };
+    });
 };
 
 export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
@@ -213,23 +229,25 @@ export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
           loadData={refetch}
         />
       ) : offeringUser ? (
-        <FormTable hideActions detailsMode>
+        <PropertyList termWidth="md">
           {/* Exposed user attributes from config */}
           {exposedUserAttributes.map((attr) => (
-            <FormTable.Item
+            <PropertyItem
               key={attr.key}
               label={attr.label}
-              value={<FieldWithCopy value={attr.value} />}
+              value={attr.value}
+              copyable={attr.copyable}
             />
           ))}
 
           {/* Always show offering-specific fields */}
-          <FormTable.Item
+          <PropertyItem
             label={translate('Offering username')}
-            value={<FieldWithCopy value={formatValue(offeringUser.username)} />}
+            value={offeringUser.username}
+            copyable
           />
           {isProviderBacked(offeringUser) && (
-            <FormTable.Item
+            <PropertyItem
               label={translate('Provider account')}
               value={
                 <>
@@ -243,88 +261,77 @@ export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
               }
             />
           )}
-          <FormTable.Item
+          <PropertyItem
             label={translate('State')}
             value={<OfferingUserStateField row={offeringUser} />}
           />
-          {offeringUser.is_restricted !== undefined && (
-            <FormTable.Item
-              label={translate('Restricted')}
-              value={
-                offeringUser.is_restricted ? translate('Yes') : translate('No')
-              }
-            />
-          )}
+          <PropertyItem
+            label={translate('Restricted')}
+            value={propVal.boolean(offeringUser.is_restricted)}
+            hideIfEmpty
+          />
           {ENV.plugins.WALDUR_CORE
             .ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS && (
             <>
-              <FormTable.Item
+              <PropertyItem
                 label={translate('Profile complete')}
-                value={
-                  offeringUser.is_profile_complete
-                    ? translate('Yes')
-                    : translate('No')
-                }
+                value={propVal.boolean(offeringUser.is_profile_complete)}
               />
-              {offeringUser.is_profile_complete === false &&
-                offeringUser.missing_profile_attributes?.length > 0 && (
-                  <FormTable.Item
-                    label={translate('Missing attributes')}
-                    value={offeringUser.missing_profile_attributes
-                      .map((key) => {
-                        const mapping = FIELD_MAPPING[key];
-                        return mapping
-                          ? mapping.label()
-                          : key
-                              .replace(/_/g, ' ')
-                              .replace(/^\w/, (c) => c.toUpperCase());
-                      })
-                      .join(', ')}
-                  />
-                )}
+              <PropertyItem
+                label={translate('Missing attributes')}
+                value={
+                  offeringUser.is_profile_complete === false
+                    ? propVal.list(
+                        getMissingAttributeLabels(
+                          offeringUser.missing_profile_attributes,
+                        ),
+                      )
+                    : null
+                }
+                hideIfEmpty
+              />
             </>
           )}
-          {offeringUser.service_provider_comment && (
-            <FormTable.Item
-              label={translate('Service provider comment')}
-              value={
-                <FieldWithCopy value={offeringUser.service_provider_comment} />
-              }
-            />
-          )}
-          {offeringUser.service_provider_comment_url && (
-            <FormTable.Item
-              label={translate('Service provider comment URL')}
-              value={
-                <a
-                  href={offeringUser.service_provider_comment_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {offeringUser.service_provider_comment_url}
-                </a>
-              }
-            />
-          )}
-          <FormTable.Item
-            label={translate('Created')}
-            value={formatDateTime(offeringUser.created)}
+          <PropertyItem
+            label={translate('Service provider comment')}
+            value={offeringUser.service_provider_comment}
+            copyable
+            hideIfEmpty
           />
-          {offeringUser.modified && (
-            <FormTable.Item
-              label={translate('Modified')}
-              value={formatDateTime(offeringUser.modified)}
+          <PropertyItem
+            label={translate('Service provider comment URL')}
+            value={propVal.url(offeringUser.service_provider_comment_url)}
+            hideIfEmpty
+          />
+          <PropertyItem
+            label={translate('Created')}
+            value={propVal.date(offeringUser.created, {
+              precision: 'datetime',
+            })}
+          />
+          <PropertyItem
+            label={translate('Modified')}
+            value={propVal.date(offeringUser.modified, {
+              precision: 'datetime',
+            })}
+            hideIfEmpty
+          />
+          {isFeatureVisible(UserFeatures.show_identity_bridge) && (
+            <PropertyItem
+              label={translate('Active ISDs')}
+              value={propVal.badgeList(
+                Array.isArray(offeringUser.user_active_isds)
+                  ? (offeringUser.user_active_isds as string[]).map(
+                      formatIsdName,
+                    )
+                  : null,
+                { variant: 'primary', tone: 'outline' },
+              )}
+              copyable
+              hideIfEmpty
             />
           )}
-          {isFeatureVisible(UserFeatures.show_identity_bridge) &&
-            Array.isArray(offeringUser.user_active_isds) &&
-            offeringUser.user_active_isds.length > 0 && (
-              <FormTable.Item
-                label={translate('Active ISDs')}
-                value={<IsdBadges isds={offeringUser.user_active_isds} />}
-              />
-            )}
-        </FormTable>
+        </PropertyList>
       ) : null}
     </ModalDialog>
   );

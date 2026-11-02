@@ -1,46 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { ENV } from '@/core/config';
 
 import {
-  formatValue,
   ProviderUserDetailsDialog,
   SP_USER_FIELDS,
 } from './ProviderUserDetailsDialog';
 
 const renderDialog = (user: Record<string, unknown>) =>
   render(<ProviderUserDetailsDialog resolve={{ user: user as any }} />);
-
-describe('formatValue', () => {
-  it('returns mdash for null', () => {
-    expect(formatValue(null)).toBe(DASH_ESCAPE_CODE);
-  });
-
-  it('returns mdash for undefined', () => {
-    expect(formatValue(undefined)).toBe(DASH_ESCAPE_CODE);
-  });
-
-  it('returns mdash for empty string', () => {
-    expect(formatValue('')).toBe(DASH_ESCAPE_CODE);
-  });
-
-  it('returns mdash for empty array', () => {
-    expect(formatValue([])).toBe(DASH_ESCAPE_CODE);
-  });
-
-  it('joins non-empty array with commas', () => {
-    expect(formatValue(['a', 'b', 'c'])).toBe('a, b, c');
-  });
-
-  it('returns string as-is', () => {
-    expect(formatValue('hello')).toBe('hello');
-  });
-
-  it('converts number to string', () => {
-    expect(formatValue(42)).toBe('42');
-  });
-});
 
 describe('SP_USER_FIELDS', () => {
   it('contains expected field keys', () => {
@@ -91,5 +60,22 @@ describe('ProviderUserDetailsDialog', () => {
   it('renders active/inactive status', () => {
     renderDialog({ is_active: false });
     expect(screen.getByText('Inactive')).toBeInTheDocument();
+  });
+
+  it('formats birth_date and affiliations with propVal', () => {
+    renderDialog({
+      birth_date: '1995-12-25',
+      affiliations: ['Staff', 'Researcher'],
+    });
+    expect(screen.getByText('25 Dec 1995')).toBeInTheDocument();
+    expect(screen.getByText('Staff, Researcher')).toBeInTheDocument();
+  });
+
+  it('renders active ISDs when feature is enabled', () => {
+    ENV.FEATURES = { user: { show_identity_bridge: true } } as any;
+    renderDialog({ active_isds: ['isd:eduperson', 'isd:haka'] });
+    expect(screen.getByText('Active ISDs')).toBeInTheDocument();
+    expect(screen.getByText('Eduperson')).toBeInTheDocument();
+    expect(screen.getByText('Haka')).toBeInTheDocument();
   });
 });

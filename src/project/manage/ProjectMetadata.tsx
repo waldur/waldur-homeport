@@ -6,6 +6,8 @@ import {
   projectsPartialUpdate,
 } from 'waldur-js-client';
 
+import { PropertyCard, PropertyItem, PropertyList } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -17,7 +19,6 @@ import {
   SelectEditField,
   StringEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
 import { useModal } from '@/modal/actions';
@@ -107,8 +108,8 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
 
   return (
     <EditFieldProvider scope={project} callback={updateProject}>
-      <FormTable.Card className="card-bordered">
-        <FormTable hideActions={!canUpdateProject}>
+      <PropertyCard bordered>
+        <PropertyList hideActions={!canUpdateProject}>
           {isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) && (
             <SelectEditField
               name="oecd_fos_2007_code"
@@ -129,13 +130,13 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
           )}
 
           {isFeatureVisible(ProjectFeatures.science_domain) && (
-            <FormTable.Item
+            <PropertyItem
               label={translate('Science domain')}
-              value={renderFieldOrDash(
+              value={
                 project.science_domain_name && project.science_sub_domain_name
                   ? `${project.science_domain_name} > ${project.science_sub_domain_name}`
-                  : null,
-              )}
+                  : null
+              }
               actions={
                 <CompactEditButton
                   fieldName={translate('Science domain')}
@@ -154,9 +155,9 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
 
           <StringEditField name="slug" label={translate('Slug')} isStaffOnly />
 
-          <FormTable.Item
+          <PropertyItem
             label={translate('Affiliation')}
-            value={renderFieldOrDash(affiliationDisplay)}
+            value={affiliationDisplay}
             actions={
               <CompactEditButton
                 onClick={openAffiliationDialog}
@@ -170,11 +171,12 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
               />
             }
           />
-        </FormTable>
+        </PropertyList>
         {checklistFailed || data?.questions?.length ? (
-          <FormTable>
+          <PropertyList>
             {checklistFailed ? (
-              <FormTable.Item
+              <PropertyItem
+                label={translate('Checklist')}
                 value={
                   <LoadingErred
                     message={getMetadataLoadErrorMsg()}
@@ -184,7 +186,7 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
               />
             ) : (
               (data?.questions ?? []).map((question) => (
-                <FormTable.Item
+                <PropertyItem
                   key={question.uuid}
                   label={question.description}
                   value={
@@ -205,9 +207,9 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
                 />
               ))
             )}
-          </FormTable>
+          </PropertyList>
         ) : null}
-      </FormTable.Card>
+      </PropertyCard>
     </EditFieldProvider>
   );
 };

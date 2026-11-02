@@ -1,12 +1,17 @@
-import { FormField, FormLabel, FormText } from 'waldur-ui';
+import {
+  FormField,
+  FormLabel,
+  FormText,
+  PropertyList,
+  PropertyItem,
+} from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
-import { formatMediumDateTime } from '@/core/dateUtils';
 import { BaseSecretField } from '@/form';
 import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 
 interface OwnProps {
   resolve: { username; token; expiresAt };
@@ -38,11 +43,13 @@ export const ServiceAccountShowInfoDialog = ({ resolve }: OwnProps) => {
           )}
         </FormText>
       </FormField>
-      <Field
-        label={translate('Valid till')}
-        value={formatMediumDateTime(resolve.expiresAt)}
-        labelClass="font-semibold"
-      />
+      <PropertyList variant="summary">
+        <PropertyItem
+          label={translate('Valid till')}
+          value={propVal.date(resolve.expiresAt, { precision: 'long' })}
+          labelClass="font-semibold"
+        />
+      </PropertyList>
     </ModalDialog>
   );
 };

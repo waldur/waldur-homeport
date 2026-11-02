@@ -1,5 +1,6 @@
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 
 type Attributes = Record<string, unknown>;
 
@@ -14,24 +15,13 @@ export const SlurmPlacementFields = ({
 }) => (
   <>
     {attributes?.qos ? (
-      <div>
-        <Field
-          label={translate('QoS')}
-          value={String(attributes.qos)}
-          labelCol={5}
-          valueCol={7}
-        />
-      </div>
+      <PropertyItem label={translate('QoS')} value={String(attributes.qos)} />
     ) : null}
     {attributes?.partition ? (
-      <div>
-        <Field
-          label={translate('Partition')}
-          value={String(attributes.partition)}
-          labelCol={5}
-          valueCol={7}
-        />
-      </div>
+      <PropertyItem
+        label={translate('Partition')}
+        value={String(attributes.partition)}
+      />
     ) : null}
   </>
 );

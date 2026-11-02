@@ -1,15 +1,14 @@
-import { formatFilesize } from '@/core/utils';
-import FormTable from '@/form/FormTable';
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 
 export const VMwareDiskSummary = (props) => {
   const { resource } = props;
-  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
-    <Component
+    <PropertyItem
       label={translate('Size')}
-      value={formatFilesize(resource.size)}
+      value={propVal.fileSize(resource.size, { unit: 'MB' })}
     />
   );
 };

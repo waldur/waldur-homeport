@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { OfferingMetric } from 'waldur-js-client';
 
+import { PropertyCard, PropertyItem, PropertyList } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
 const apiRoot = () =>
@@ -54,7 +54,7 @@ const Item: FC<{ label: string; description: string; value: string }> = ({
   description,
   value,
 }) => (
-  <FormTable.Item
+  <PropertyItem
     label={label}
     description={description}
     value={
@@ -62,7 +62,7 @@ const Item: FC<{ label: string; description: string; value: string }> = ({
         {value}
       </pre>
     }
-    actions={<CopyToClipboardButton value={value} verbose={label} onlyButton />}
+    copyValue={value}
   />
 );
 
@@ -71,11 +71,8 @@ export const ReportingCard: FC<{ metrics: OfferingMetric[] }> = ({
 }) => {
   const root = apiRoot();
   return (
-    <FormTable.Card
-      title={translate('Reporting')}
-      className="card-bordered mt-4"
-    >
-      <FormTable alignTop>
+    <PropertyCard bordered title={translate('Reporting')} className="mt-4">
+      <PropertyList alignTop>
         <Item
           label={translate('Endpoint')}
           description={translate('One point or a list per request.')}
@@ -95,7 +92,7 @@ export const ReportingCard: FC<{ metrics: OfferingMetric[] }> = ({
           )}
           value={collectorExample(root)}
         />
-      </FormTable>
-    </FormTable.Card>
+      </PropertyList>
+    </PropertyCard>
   );
 };

@@ -1,20 +1,14 @@
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { CopyableValue } from 'waldur-ui';
+
+import { translate } from '@/i18n';
 
 export const IPList = ({ value }) => {
   if (Array.isArray(value) && value.filter(Boolean).length > 0) {
     const ips = value.filter(Boolean);
     return (
       <>
-        {ips.map((ip, idx) => (
-          <span key={ip} className="whitespace-nowrap">
-            {ip}
-            <CopyToClipboardButton
-              value={ip}
-              size={17}
-              className="mx-1.5 hover:text-brand cursor-pointer inline z-1 relative"
-            />
-            {idx < ips.length - 1 ? <span className="me-1.5">,</span> : null}
-          </span>
+        {ips.map((ip) => (
+          <CopyableValue key={ip} value={ip} name={translate('IP address')} />
         ))}
       </>
     );

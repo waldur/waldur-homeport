@@ -1,4 +1,4 @@
-import { ChatsCircleIcon, EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
+import { ChatsCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import {
@@ -8,19 +8,17 @@ import {
   matrixCredentialsRetrieve,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, PropertyItem, PropertyList } from 'waldur-ui';
 
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { ExternalLink } from '@/core/ExternalLink';
-import { FieldWithCopy } from '@/core/FieldWithCopy';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { OWN_ERROR_STATE } from '@/core/queryRetry';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { MaskedValue } from '@/property/propertyFields';
 
 import { getMatrixRoomUrl } from './utils';
 
@@ -29,38 +27,6 @@ interface MatrixCredentialsDialogProps {
     roomAlias: string;
   };
 }
-
-// Laid out like FieldWithCopy, which copies what it shows; here the copy must
-// not need revealing first. Reveal is for retyping by hand.
-const MaskedSecret: FC<{ value: string }> = ({ value }) => {
-  const [revealed, setRevealed] = useState(false);
-  return (
-    <div className="flex justify-between items-center">
-      <span className="wrap-anywhere">{revealed ? value : '•'.repeat(12)}</span>
-      <div className="flex items-center shrink-0">
-        <BaseButton
-          iconNode={
-            revealed ? (
-              <EyeSlashIcon weight="bold" />
-            ) : (
-              <EyeIcon weight="bold" />
-            )
-          }
-          tooltip={revealed ? translate('Hide') : translate('Reveal')}
-          onClick={() => setRevealed(!revealed)}
-          variant="text-secondary"
-          size="sm"
-        />
-        <CopyToClipboardButton
-          value={value}
-          size={20}
-          className="mb-0 mt-0"
-          buttonClassName="text-quaternary"
-        />
-      </div>
-    </div>
-  );
-};
 
 // Waldur keeps no Matrix password, so the user generates one and sees it only
 // here; generating again replaces it on the homeserver.
@@ -88,7 +54,11 @@ const GeneratedPassword: FC = () => {
       <div aria-live="polite">
         {password && (
           <>
-            <MaskedSecret key={generation} value={password} />
+            <MaskedValue
+              key={generation}
+              value={password}
+              name={translate('Password')}
+            />
             <small className="text-quaternary block">
               {translate('Copy it now: it will not be shown again.')}
             </small>
@@ -161,7 +131,7 @@ const RecoveryKey: FC = () => {
   }
   return (
     <>
-      <MaskedSecret value={recoveryKey} />
+      <MaskedValue value={recoveryKey} name={translate('Recovery key')} />
       <small className="text-quaternary block">
         {translate(
           'Enter it when your Matrix client asks for a recovery key or security key. Anyone who has it can read your encrypted messages, so do not share it.',
@@ -187,34 +157,33 @@ const CredentialsContent: FC<{
   // Sign-in details first, in the order a client asks for them; the room
   // last, next to the footer button that opens it.
   return (
-    <FormTable hideActions detailsMode>
-      <FormTable.Item
+    <PropertyList hideActions detailsMode>
+      <PropertyItem
         label={translate('Homeserver')}
-        value={<FieldWithCopy value={credentials.homeserver_url} />}
+        value={credentials.homeserver_url}
+        hasCopy
       />
       {credentials.method === 'password' && (
         <>
-          <FormTable.Item
+          <PropertyItem
             label={translate('Matrix user ID')}
-            value={<FieldWithCopy value={credentials.matrix_user_id} />}
+            value={credentials.matrix_user_id}
+            hasCopy
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Password')}
             value={<GeneratedPassword />}
           />
         </>
       )}
-      <FormTable.Item
-        label={translate('Recovery key')}
-        value={<RecoveryKey />}
+      <PropertyItem label={translate('Recovery key')} value={<RecoveryKey />} />
+      <PropertyItem
+        label={translate('Room alias')}
+        value={roomAlias}
+        hasCopy
+        hideIfEmpty
       />
-      {roomAlias && (
-        <FormTable.Item
-          label={translate('Room alias')}
-          value={<FieldWithCopy value={roomAlias} />}
-        />
-      )}
-    </FormTable>
+    </PropertyList>
   );
 };
 

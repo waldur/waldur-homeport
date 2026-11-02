@@ -1,30 +1,26 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
-import { AccordionCard, Badge } from 'waldur-ui';
+import {
+  AccordionCard,
+  AlertItem,
+  Badge,
+  BaseButton,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
-import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 
 import {
   getRabbitMQOverview,
-  type RmqOverview,
+  type RmqMessageStats,
   type RmqObjectTotals,
+  type RmqOverview,
   type RmqQueueTotals,
 } from './api';
-
-interface ClusterInfoRowProps {
-  label: string;
-  value: string | number;
-}
-
-const ClusterInfoRow: FC<ClusterInfoRowProps> = ({ label, value }) => (
-  <div className="flex justify-between py-1">
-    <span className="text-quaternary">{label}</span>
-    <span>{value}</span>
-  </div>
-);
 
 interface RabbitMQClusterOverviewContentProps {
   data: RmqOverview;
@@ -35,141 +31,214 @@ const RabbitMQClusterOverviewContent: FC<
 > = ({ data }) => {
   const objectTotals: Partial<RmqObjectTotals> = data.object_totals || {};
   const queueTotals: Partial<RmqQueueTotals> = data.queue_totals || {};
+  const messageStats: Partial<RmqMessageStats> = data.message_stats || {};
+  const unacknowledged = queueTotals.messages_unacknowledged ?? 0;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5">
-      <div>
-        <h6 className="uppercase text-quaternary mb-2.5">
-          {translate('Cluster info')}
-        </h6>
-        <ClusterInfoRow
+    <PropertyList
+      variant="compact"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+    >
+      <PropertyList.Section title={translate('Cluster & runtime')}>
+        <PropertyItem
           label={translate('Cluster name')}
-          value={renderFieldOrDash(data.cluster_name)}
+          value={data.cluster_name}
+          hasCopy
         />
-        <ClusterInfoRow
-          label={translate('RabbitMQ version')}
-          value={renderFieldOrDash(data.rabbitmq_version)}
-        />
-        <ClusterInfoRow
-          label={translate('Erlang version')}
-          value={renderFieldOrDash(data.erlang_version)}
-        />
-        <ClusterInfoRow
+        <PropertyItem
           label={translate('Node')}
-          value={renderFieldOrDash(data.node)}
+          value={propVal.code(data.node, { truncate: 'middle' })}
+          hasCopy
         />
-      </div>
-
-      <div>
-        <h6 className="uppercase text-quaternary mb-2.5">
-          {translate('Object totals')}
-        </h6>
-        <table className="table table-sm table-borderless mb-0">
-          <tbody>
-            <tr>
-              <td className="text-quaternary">{translate('Connections')}</td>
-              <td className="text-end">
-                {(objectTotals.connections ?? 0).toLocaleString()}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-quaternary">{translate('Channels')}</td>
-              <td className="text-end">
-                {(objectTotals.channels ?? 0).toLocaleString()}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-quaternary">{translate('Exchanges')}</td>
-              <td className="text-end">
-                {(objectTotals.exchanges ?? 0).toLocaleString()}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-quaternary">{translate('Queues')}</td>
-              <td className="text-end">
-                {(objectTotals.queues ?? 0).toLocaleString()}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-quaternary">{translate('Consumers')}</td>
-              <td className="text-end">
-                {(objectTotals.consumers ?? 0).toLocaleString()}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div>
-        <h6 className="uppercase text-quaternary mb-2.5">
-          {translate('Queue totals')}
-        </h6>
-        <table className="table table-sm table-borderless mb-0">
-          <tbody>
-            <tr>
-              <td className="text-quaternary">{translate('Total messages')}</td>
-              <td className="text-end">
-                {(queueTotals.messages ?? 0).toLocaleString()}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-quaternary">{translate('Ready')}</td>
-              <td className="text-end">
-                {(queueTotals.messages_ready ?? 0).toLocaleString()}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-quaternary">{translate('Unacknowledged')}</td>
-              <td className="text-end">
-                {(queueTotals.messages_unacknowledged ?? 0).toLocaleString()}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
+        <PropertyItem
+          label={translate('RabbitMQ version')}
+          value={data.rabbitmq_version}
+        />
+        <PropertyItem
+          label={translate('Erlang version')}
+          value={data.erlang_version}
+        />
         {data.listeners && data.listeners.length > 0 && (
-          <>
-            <h6 className="uppercase text-quaternary mb-2.5 mt-3">
-              {translate('Listeners')}
-            </h6>
-            <div className="flex flex-wrap gap-1.5">
-              {data.listeners.map((listener, index) => (
-                <Badge key={index} variant="neutral" tone="outline">
-                  {listener.protocol}:{listener.port}
-                </Badge>
-              ))}
-            </div>
-          </>
+          <PropertyItem
+            label={translate('Listeners')}
+            value={
+              <div className="flex flex-wrap gap-1 justify-end">
+                {data.listeners.map((listener, idx) => (
+                  <Badge
+                    key={`${listener.protocol}-${listener.port}-${idx}`}
+                    variant="neutral"
+                    tone="outline"
+                    className="font-mono text-xs"
+                  >
+                    {listener.protocol}:{listener.port}
+                  </Badge>
+                ))}
+              </div>
+            }
+          />
         )}
-      </div>
-    </div>
+      </PropertyList.Section>
+
+      <PropertyList.Section title={translate('Activity & throughput')}>
+        <PropertyItem
+          label={translate('Publish rate')}
+          value={propVal.number(messageStats.publish_rate ?? 0, {
+            fractionDigits: 1,
+            unit: '/s',
+          })}
+        />
+        <PropertyItem
+          label={translate('Deliver rate')}
+          value={propVal.number(messageStats.deliver_rate ?? 0, {
+            fractionDigits: 1,
+            unit: '/s',
+          })}
+        />
+        <PropertyItem
+          label={translate('Acknowledge rate')}
+          value={propVal.number(messageStats.ack_rate ?? 0, {
+            fractionDigits: 1,
+            unit: '/s',
+          })}
+        />
+        <PropertyItem
+          label={translate('Confirm rate')}
+          value={propVal.number(messageStats.confirm_rate ?? 0, {
+            fractionDigits: 1,
+            unit: '/s',
+          })}
+        />
+      </PropertyList.Section>
+
+      <PropertyList.Section title={translate('Object totals')}>
+        <PropertyItem
+          label={translate('Connections')}
+          value={propVal.count(objectTotals.connections)}
+        />
+        <PropertyItem
+          label={translate('Channels')}
+          value={propVal.count(objectTotals.channels)}
+        />
+        <PropertyItem
+          label={translate('Exchanges')}
+          value={propVal.count(objectTotals.exchanges)}
+        />
+        <PropertyItem
+          label={translate('Queues')}
+          value={propVal.count(objectTotals.queues)}
+        />
+        <PropertyItem
+          label={translate('Consumers')}
+          value={propVal.count(objectTotals.consumers)}
+        />
+      </PropertyList.Section>
+
+      <PropertyList.Section title={translate('Queue totals')}>
+        <PropertyItem
+          label={translate('Total messages')}
+          value={propVal.count(queueTotals.messages)}
+        />
+        <PropertyItem
+          label={translate('Ready')}
+          value={propVal.count(queueTotals.messages_ready)}
+        />
+        <PropertyItem
+          label={translate('Unacknowledged')}
+          value={
+            unacknowledged > 0 ? (
+              <span className="text-warning font-semibold">
+                {unacknowledged.toLocaleString()}
+              </span>
+            ) : (
+              0
+            )
+          }
+        />
+      </PropertyList.Section>
+    </PropertyList>
   );
 };
 
+const RabbitMQClusterOverviewSkeleton: FC = () => (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-pulse">
+    {[...Array(4)].map((_, i) => (
+      <div key={i} className="space-y-3">
+        <div className="h-4 bg-tertiary rounded w-1/2 mb-3" />
+        <div className="space-y-2">
+          <div className="h-3 bg-tertiary rounded w-full" />
+          <div className="h-3 bg-tertiary rounded w-3/4" />
+          <div className="h-3 bg-tertiary rounded w-5/6" />
+          <div className="h-3 bg-tertiary rounded w-2/3" />
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
 export const RabbitMQClusterOverview: FC = () => {
-  const { data, isLoading, error } = useQuery({
+  const [isOpen, setIsOpen] = useState(false);
+  const { data, isLoading, error, refetch, isRefetching } = useQuery({
     queryKey: ['RabbitMQOverview'],
     queryFn: getRabbitMQOverview,
-    refetchInterval: 30000, // Auto-refresh every 30 seconds
+    enabled: isOpen,
+    refetchInterval: isOpen ? 30000 : false,
   });
+
+  const is503 = error
+    ? (error instanceof Error ? error.message : String(error)).includes('503')
+    : false;
+
+  const cardActions = (
+    <div className="flex items-center gap-2">
+      {data && (
+        <Badge variant="neutral" tone="outline" className="font-mono text-xs">
+          RabbitMQ {data.rabbitmq_version}
+        </Badge>
+      )}
+      {isRefetching && (
+        <LoadingSpinnerSimple size={14} className="text-quaternary" />
+      )}
+    </div>
+  );
 
   return (
     <AccordionCard
       id="rabbitmq-cluster-overview"
       title={translate('Cluster overview')}
       subtitle={translate('RabbitMQ cluster health and configuration details')}
-      defaultOpen={false}
+      isOpen={isOpen}
+      onToggle={setIsOpen}
+      actions={cardActions}
       className="mb-5"
     >
-      {isLoading && (
-        <div className="text-center py-3">
-          <LoadingSpinner />
-        </div>
-      )}
+      {isLoading && <RabbitMQClusterOverviewSkeleton />}
       {error && (
-        <div className="text-danger">
-          {translate('Failed to load cluster overview')}
-        </div>
+        <AlertItem
+          variant="error"
+          type="floating"
+          title={
+            is503
+              ? translate('RabbitMQ service unavailable')
+              : translate('Failed to load cluster overview')
+          }
+          body={
+            is503
+              ? translate(
+                  'The RabbitMQ management API is not responding. Please check that RabbitMQ is running.',
+                )
+              : error instanceof Error
+                ? error.message
+                : String(error)
+          }
+          actions={
+            <BaseButton
+              variant="tertiary"
+              size="sm"
+              label={translate('Retry')}
+              onClick={() => refetch()}
+            />
+          }
+        />
       )}
       {data && <RabbitMQClusterOverviewContent data={data} />}
     </AccordionCard>

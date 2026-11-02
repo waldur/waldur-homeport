@@ -36,6 +36,7 @@ For detailed guidance, see `docs/` — full index with one-line descriptions in 
 - `component-library.md` - UI components, BaseDeployPage
 - `api-integration.md` - React Query, CRUD patterns
 - `forms.md` - React Final Form and VStepperForm patterns
+- `property-fields.md` - Read-only rows: typed property formatters (`propVal.date`, `propVal.currency`, …), `prefer-typed-property`
 - `tabs.md` - Tabs: `Tabs`, `TabNav`, `EmbeddedTabs`, mount modes, migrating off Bootstrap `Nav`/`Tab`
 - `menus.md` - Menus, dropdowns and popovers: `Menu`, `MenuPopover`, `ActionsMenu`, row actions
 - `modals.md` - Modals: `openDialog`, `ModalDialog`, `ModalShell`, waldur-ui Modal parts, `data-slot` styling hooks
@@ -82,14 +83,22 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
     reference list, review step) → `SimpleTable` (`@/table/SimpleTable`),
     which takes the same `Column<T>` definitions. Row count alone is not a
     reason for `Table`: cap a long one's height with a scroll container.
-  - **Label/value pairs about one object** → not a table, and never a `<dl>`
-    grid or a local `DetailRow`. `FormTable` (+ `FormTable.Item` /
+  - **Label/value pairs about one object** → not a table, and never a raw `<dl>`
+    grid or a local `DetailRow`. Use `PropertyList`, `PropertyItem`, and
+    `PropertyCard` from `waldur-ui` (`packages/ui/src/PropertyList`, which
+    renders `<dl>/<dt>/<dd>` with CSS subgrid and `FieldScope`). Wrap in
+    `<PropertyList>` (`variant="divided"` by default, with `<PropertyItem>` /
     `*EditField`) when a row can be edited or acted on, or every property
-    must show even when empty (settings overviews; pass
-    `renderFieldOrDash`). Otherwise `Field` (`@/resource/summary`) for a
-    read-only summary that leaves out empty rows (pass raw values; `0` shows),
-    always inside `ExpandableContainer asTable` in an expandable row. See the
-    guide's "Label/value block".
+    must show even when empty — a divided row shows a dash for an empty
+    value by itself, so pass raw values. Use `<PropertyList
+variant="summary">` (or `ExpandableContainer asTable`, which renders
+    one) for a read-only summary that leaves out empty rows (pass raw
+    values; `0` shows, and `renderFieldOrDash` keeps an empty row). Rows
+    always sit in a list: a `PropertyItem` on its own is a one-row `<dl>`
+    (linter: `property-item-in-list`; a component that returns only rows is
+    fine, its caller holds the list), and a `PropertyList` must not hold only
+    a single lone property item (linter: `no-lone-property-item-in-list`). See
+    the guide's "Label/value block".
   - **A grid of form inputs** → waldur-ui's `Table` primitives, with the file
     added to `no-hand-rolled-table`'s `ALLOWED_FILES` and a one-line reason.
 
@@ -221,6 +230,8 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   - Hide buttons when user permanently lacks permission; disable when temporary/fixable
   - Use `useManagedMutation` for all API mutation requests inside modals to cleanly encapsulate success/error notifications, table data reload (`refetch`), and automatic dialog closures. You can also pass `invalidateQueries: [{ queryKey: ['my-key'] }]` to automatically invalidate React Query cache upon success.
 
+- **Read-only rows format through typed property formatters** — a `PropertyItem` whose value is a date, amount, count, boolean, list, meter, … uses the typed formatter from `@/property/propertyFields` (`propVal.date()`, `propVal.currency()`, `propVal.boolean()`, `propVal.count()`, `propVal.meter()`, …), never `value={formatDateTime(x)}`, a Yes/No ternary or `renderFieldOrDash(x)` (the row draws the dash). Linter enforces this with a shrinking baseline (`prefer-typed-property`, `yarn lint:properties:baseline`); see `docs/property-fields.md`
+
 - **Edit Field Architecture** — for any read-only-with-edit row in a details/settings panel, use the pre-bound `*EditField` exports from `@/form/editFields` inside an `EditFieldProvider` (see `docs/forms.md`). Never write a monolithic switch-style `EditFieldDialog` — those have been removed.
 
   ```tsx
@@ -248,7 +259,7 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   - For marketplace plugin credentials, compose `BaseCredentialsSection` (`@/marketplace/offerings/update/integration/BaseCredentialsSection`) instead of redoing the layout — it provides the scope state badge and sync button.
   - For multi-section panels with URL-synced tabs, use `TabbedSection` from `@/form/TabbedSection`. Note: `enableSearch` filters by walking direct children only; if a tab's content is a composite subcomponent (e.g. `<BasicInfoTab/>`), the search will treat it as one opaque child. Flatten the fields directly under `<TabbedSection.Tab>` when search is needed.
   - `*EditField`'s `renderValue` may return `null`/`undefined` — the HOC substitutes `DASH_ESCAPE_CODE`, so no explicit dash fallback is needed.
-  - `isStaffOnly` on an `*EditField` swaps the edit button for a `StaffOnlyIndicator` for non-staff. For more complex gates, still use `hasPermission()` and wire `hideActions` on the enclosing `FormTable`/`TabbedSection`.
+  - `isStaffOnly` on an `*EditField` swaps the edit button for a `StaffOnlyIndicator` for non-staff. For more complex gates, still use `hasPermission()` and wire `hideActions` on the enclosing `PropertyList`/`TabbedSection`.
   - Canonical examples: `src/customer/details/CustomerDetailsPanel.tsx`, `src/openstack/OpenStackCredentialsSection.tsx`, `src/marketplace/offerings/update/integration/LifecyclePolicySection.tsx`.
 
 - **Page content in the layout chrome** (hero, page-tab actions, filter bar, announcement bars) goes through `<LayoutSlot name="…">` rendered in the page's own JSX, only when there is something to show; see `docs/architecture.md` → "Page Content in the Layout Chrome". Never store React elements in a context from an effect to render them elsewhere.

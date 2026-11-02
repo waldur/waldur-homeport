@@ -2,30 +2,42 @@ import { UserIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { MarketplaceServiceProviderUser } from 'waldur-js-client';
 
-import { FieldWithCopy } from '@/core/FieldWithCopy';
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { DASH_ESCAPE_CODE } from '@/table/constants';
-import { IsdBadges } from '@/user/support/IsdBadges';
+import { propVal } from '@/property/propertyFields';
+import { formatIsdName } from '@/user/support/IsdBadges';
 
 interface ProviderUserDetailsDialogProps {
   resolve: { user: MarketplaceServiceProviderUser };
 }
 
-export const SP_USER_FIELDS: Array<{
+export interface SpUserFieldDef {
   key: keyof MarketplaceServiceProviderUser;
   label: () => string;
-}> = [
-  { key: 'full_name', label: () => translate('Full name') },
-  { key: 'email', label: () => translate('Email') },
-  { key: 'phone_number', label: () => translate('Phone number') },
+  copyable?: boolean;
+  format?: (value: any, user: MarketplaceServiceProviderUser) => any;
+}
+
+export const SP_USER_FIELDS: SpUserFieldDef[] = [
+  { key: 'full_name', label: () => translate('Full name'), copyable: true },
+  { key: 'email', label: () => translate('Email'), copyable: true },
+  {
+    key: 'phone_number',
+    label: () => translate('Phone number'),
+    copyable: true,
+  },
   { key: 'organization', label: () => translate('Organization') },
   { key: 'job_title', label: () => translate('Job title') },
-  { key: 'affiliations', label: () => translate('Affiliations') },
+  {
+    key: 'affiliations',
+    label: () => translate('Affiliations'),
+    format: (v) => propVal.list(v),
+  },
   { key: 'gender', label: () => translate('Gender') },
   { key: 'personal_title', label: () => translate('Personal title') },
   { key: 'place_of_birth', label: () => translate('Place of birth') },
@@ -34,7 +46,11 @@ export const SP_USER_FIELDS: Array<{
     label: () => translate('Country of residence'),
   },
   { key: 'nationality', label: () => translate('Nationality') },
-  { key: 'nationalities', label: () => translate('Nationalities') },
+  {
+    key: 'nationalities',
+    label: () => translate('Nationalities'),
+    format: (v) => propVal.list(v),
+  },
   {
     key: 'organization_country',
     label: () => translate('Organization country'),
@@ -43,30 +59,30 @@ export const SP_USER_FIELDS: Array<{
   {
     key: 'organization_registry_code',
     label: () => translate('Organization registry code'),
+    copyable: true,
   },
   {
     key: 'organization_vat_code',
     label: () => translate('Organization VAT code'),
+    copyable: true,
   },
   {
     key: 'organization_address',
     label: () => translate('Organization address'),
   },
   { key: 'eduperson_assurance', label: () => translate('EduPerson assurance') },
-  { key: 'civil_number', label: () => translate('Civil number') },
-  { key: 'birth_date', label: () => translate('Birth date') },
+  {
+    key: 'civil_number',
+    label: () => translate('Civil number'),
+    copyable: true,
+  },
+  {
+    key: 'birth_date',
+    label: () => translate('Birth date'),
+    format: (v) => propVal.date(v),
+  },
   { key: 'identity_source', label: () => translate('Registration method') },
 ];
-
-export const formatValue = (value: unknown): string => {
-  if (value === null || value === undefined || value === '') {
-    return DASH_ESCAPE_CODE;
-  }
-  if (Array.isArray(value)) {
-    return value.length > 0 ? value.join(', ') : DASH_ESCAPE_CODE;
-  }
-  return String(value);
-};
 
 export const ProviderUserDetailsDialog: FC<ProviderUserDetailsDialogProps> = ({
   resolve: { user },
@@ -79,37 +95,48 @@ export const ProviderUserDetailsDialog: FC<ProviderUserDetailsDialogProps> = ({
       iconColor="success"
       footer={<CloseDialogButton />}
     >
-      <FormTable hideActions detailsMode>
-        {SP_USER_FIELDS.map(({ key, label }) => (
-          <FormTable.Item
-            key={key}
-            label={label()}
-            value={<FieldWithCopy value={formatValue(user[key])} />}
-          />
-        ))}
-        {user.projects_count !== undefined && (
-          <FormTable.Item
-            label={translate('Projects')}
-            value={translate('{count} projects', {
-              count: user.projects_count,
-            })}
-          />
-        )}
-        {user.is_active !== undefined && (
-          <FormTable.Item
-            label={translate('Status')}
-            value={user.is_active ? translate('Active') : translate('Inactive')}
-          />
-        )}
-        {isFeatureVisible(UserFeatures.show_identity_bridge) &&
-          Array.isArray(user.active_isds) &&
-          (user.active_isds as string[]).length > 0 && (
-            <FormTable.Item
-              label={translate('Active ISDs')}
-              value={<IsdBadges isds={user.active_isds as string[]} />}
+      <PropertyList termWidth="md">
+        {SP_USER_FIELDS.map(({ key, label, copyable, format }) => {
+          const rawValue = user[key];
+          const value = format ? format(rawValue, user) : rawValue;
+          return (
+            <PropertyItem
+              key={key}
+              label={label()}
+              value={value}
+              copyable={copyable}
             />
-          )}
-      </FormTable>
+          );
+        })}
+        <PropertyItem
+          label={translate('Projects')}
+          value={
+            user.projects_count !== undefined
+              ? translate('{count} projects', {
+                  count: user.projects_count,
+                })
+              : null
+          }
+          hideIfEmpty
+        />
+        <PropertyItem
+          label={translate('Status')}
+          value={propVal.boolean(user.is_active, { wording: 'active' })}
+          hideIfEmpty
+        />
+        {isFeatureVisible(UserFeatures.show_identity_bridge) && (
+          <PropertyItem
+            label={translate('Active ISDs')}
+            value={propVal.badgeList(
+              Array.isArray(user.active_isds)
+                ? (user.active_isds as string[]).map(formatIsdName)
+                : null,
+              { variant: 'primary', tone: 'outline' },
+            )}
+            copyable
+          />
+        )}
+      </PropertyList>
     </ModalDialog>
   );
 };

@@ -68,9 +68,9 @@ describe('ProjectMetadata edit controls', () => {
     expect(
       await screen.findByTestId('edit-checklist-question-uuid'),
     ).toBeInTheDocument();
-    const [fields, checklist] = screen.getAllByRole('table');
-    expect(fields).toHaveClass('hide-actions');
-    expect(checklist).not.toHaveClass('hide-actions');
+    const [fields, checklist] = screen.getAllByTestId('property-list');
+    expect(fields).toHaveAttribute('data-hide-actions', 'true');
+    expect(checklist).not.toHaveAttribute('data-hide-actions');
   });
 
   it('lets a project editor change project fields and hides checklist answers they cannot update', async () => {
@@ -81,6 +81,8 @@ describe('ProjectMetadata edit controls', () => {
     expect(
       screen.queryByTestId('edit-checklist-question-uuid'),
     ).not.toBeInTheDocument();
-    expect(screen.getAllByRole('table')[0]).not.toHaveClass('hide-actions');
+    expect(screen.getAllByTestId('property-list')[0]).not.toHaveAttribute(
+      'data-hide-actions',
+    );
   });
 });

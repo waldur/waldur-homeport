@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Badge, PropertyCard, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { formatDate } from '@/core/dateUtils';
@@ -13,7 +13,6 @@ import {
   NumberEditField,
   StringEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
 import { CustomerEditPanelProps } from './types';
@@ -94,11 +93,8 @@ const VatRateValue: FC<{ customer: CustomerEditPanelProps['customer'] }> = ({
 export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
   return (
     <EditFieldProvider scope={props.customer} callback={props.callback}>
-      <FormTable.Card
-        title={translate('Details')}
-        className="card-bordered mb-4"
-      >
-        <FormTable hideActions={!props.canUpdate}>
+      <PropertyCard bordered title={translate('Details')} className="mb-4">
+        <PropertyList hideActions={!props.canUpdate}>
           <DateEditField
             name="accounting_start_date"
             label={translate('Accounting start date')}
@@ -114,11 +110,11 @@ export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
               label={translate('Bank account')}
             />
           )}
-        </FormTable>
-      </FormTable.Card>
+        </PropertyList>
+      </PropertyCard>
 
-      <FormTable.Card title={translate('Tax')} className="card-bordered">
-        <FormTable hideActions={!props.canUpdate}>
+      <PropertyCard bordered title={translate('Tax')}>
+        <PropertyList hideActions={!props.canUpdate}>
           <StringEditField
             name="vat_code"
             label={translate('VAT code')}
@@ -148,7 +144,7 @@ export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
             isStaffOnly
           />
           {ENV.plugins.WALDUR_CORE?.VAT_TAXATION_ENABLED ? (
-            <FormTable.Item
+            <PropertyItem
               label={translate('Tax percentage')}
               description={translate(
                 'Calculated from EU VAT rules using the country, VAT code and private person setting. It cannot be changed manually.',
@@ -165,8 +161,8 @@ export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
               isStaffOnly
             />
           )}
-        </FormTable>
-      </FormTable.Card>
+        </PropertyList>
+      </PropertyCard>
     </EditFieldProvider>
   );
 };

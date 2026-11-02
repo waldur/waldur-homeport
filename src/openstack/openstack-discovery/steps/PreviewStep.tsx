@@ -7,14 +7,19 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import {
+  AlertItem,
+  BaseButton,
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 import { StepLoading, WizardModal, WizardStepProps } from '@/wizard';
 
 import { extractCredentials, OpenStackDiscoveryFormValues } from '../types';
@@ -192,67 +197,44 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
         )}
       </p>
 
-      <div className="card mb-3">
-        <div className="card-header">
-          <h5 className="mb-0">{translate('Connection')}</h5>
-        </div>
-        <div className="card-body">
-          <table className="table table-sm table-borderless">
-            <tbody>
-              <tr>
-                <td className="text-quaternary" style={{ width: '40%' }}>
-                  {translate('Auth URL')}
-                </td>
-                <td>
-                  <code>{values.auth_url}</code>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Username')}</td>
-                <td>{values.username}</td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('User domain')}</td>
-                <td>{values.user_domain_name}</td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Project')}</td>
-                <td>{values.project_name}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <PropertyCard bordered title={translate('Connection')} className="mb-3">
+        <PropertyList variant="summary" termWidth="md">
+          <PropertyItem
+            label={translate('Auth URL')}
+            value={propVal.code(values.auth_url)}
+          />
+          <PropertyItem label={translate('Username')} value={values.username} />
+          <PropertyItem
+            label={translate('User domain')}
+            value={values.user_domain_name}
+          />
+          <PropertyItem
+            label={translate('Project')}
+            value={values.project_name}
+          />
+        </PropertyList>
+      </PropertyCard>
 
-      <div className="card mb-3">
-        <div className="card-header">
-          <h5 className="mb-0">{translate('Selected Infrastructure')}</h5>
-        </div>
-        <div className="card-body">
-          <table className="table table-sm table-borderless">
-            <tbody>
-              <tr>
-                <td className="text-quaternary" style={{ width: '40%' }}>
-                  {translate('External network')}
-                </td>
-                <td>{renderFieldOrDash(selectedNetwork?.name)}</td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Instance availability zone')}
-                </td>
-                <td>{renderFieldOrDash(values.selectedInstanceAZ)}</td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Volume availability zone')}
-                </td>
-                <td>{renderFieldOrDash(values.selectedVolumeAZ)}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <PropertyCard
+        bordered
+        title={translate('Selected Infrastructure')}
+        className="mb-3"
+      >
+        <PropertyList variant="summary" termWidth="md" hideIfEmpty={false}>
+          <PropertyItem
+            label={translate('External network')}
+            value={selectedNetwork?.name}
+          />
+          <PropertyItem
+            label={translate('Instance availability zone')}
+            value={values.selectedInstanceAZ}
+          />
+          <PropertyItem
+            label={translate('Volume availability zone')}
+            value={values.selectedVolumeAZ}
+          />
+        </PropertyList>
+      </PropertyCard>
 
       {(values.flavor_exclude_regex ||
         values.volume_type_blacklist ||
@@ -264,222 +246,132 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
         values.max_concurrent_provision_instance != null ||
         values.max_concurrent_provision_volume != null ||
         values.max_concurrent_provision_snapshot != null) && (
-        <div className="card mb-3">
-          <div className="card-header">
-            <h5 className="mb-0">{translate('Provisioning')}</h5>
-          </div>
-          <div className="card-body">
-            <table className="table table-sm table-borderless">
-              <tbody>
-                {values.flavor_exclude_regex && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('Flavor exclude regex')}
-                    </td>
-                    <td>
-                      <code>{values.flavor_exclude_regex}</code>
-                    </td>
-                  </tr>
-                )}
-                {values.volume_type_blacklist && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('Blacklisted volume types')}
-                    </td>
-                    <td>{values.volume_type_blacklist}</td>
-                  </tr>
-                )}
-                {values.console_type && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('Console type')}
-                    </td>
-                    <td>{values.console_type}</td>
-                  </tr>
-                )}
-                {values.console_domain_override && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('Console domain override')}
-                    </td>
-                    <td>{values.console_domain_override}</td>
-                  </tr>
-                )}
-                {values.dns_nameservers?.length > 0 && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('DNS nameservers')}
-                    </td>
-                    <td>{values.dns_nameservers.join(', ')}</td>
-                  </tr>
-                )}
-                {values.create_ha_routers && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('HA routers')}
-                    </td>
-                    <td>{translate('Enabled')}</td>
-                  </tr>
-                )}
-                {values.live_resize_of_volumes_enabled && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('Live volume resize')}
-                    </td>
-                    <td>{translate('Enabled')}</td>
-                  </tr>
-                )}
-                {values.max_concurrent_provision_instance != null && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('Max concurrent (instances)')}
-                    </td>
-                    <td>{values.max_concurrent_provision_instance}</td>
-                  </tr>
-                )}
-                {values.max_concurrent_provision_volume != null && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('Max concurrent (volumes)')}
-                    </td>
-                    <td>{values.max_concurrent_provision_volume}</td>
-                  </tr>
-                )}
-                {values.max_concurrent_provision_snapshot != null && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('Max concurrent (snapshots)')}
-                    </td>
-                    <td>{values.max_concurrent_provision_snapshot}</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <PropertyCard
+          bordered
+          title={translate('Provisioning')}
+          className="mb-3"
+        >
+          <PropertyList variant="summary" termWidth="md">
+            <PropertyItem
+              label={translate('Flavor exclude regex')}
+              value={propVal.code(values.flavor_exclude_regex)}
+            />
+            <PropertyItem
+              label={translate('Blacklisted volume types')}
+              value={values.volume_type_blacklist}
+            />
+            <PropertyItem
+              label={translate('Console type')}
+              value={values.console_type}
+            />
+            <PropertyItem
+              label={translate('Console domain override')}
+              value={values.console_domain_override}
+            />
+            <PropertyItem
+              label={translate('DNS nameservers')}
+              value={propVal.list(values.dns_nameservers)}
+            />
+            <PropertyItem
+              label={translate('HA routers')}
+              value={values.create_ha_routers ? translate('Enabled') : null}
+            />
+            <PropertyItem
+              label={translate('Live volume resize')}
+              value={
+                values.live_resize_of_volumes_enabled
+                  ? translate('Enabled')
+                  : null
+              }
+            />
+            <PropertyItem
+              label={translate('Max concurrent (instances)')}
+              value={values.max_concurrent_provision_instance}
+            />
+            <PropertyItem
+              label={translate('Max concurrent (volumes)')}
+              value={values.max_concurrent_provision_volume}
+            />
+            <PropertyItem
+              label={translate('Max concurrent (snapshots)')}
+              value={values.max_concurrent_provision_snapshot}
+            />
+          </PropertyList>
+        </PropertyCard>
       )}
 
       {(values.default_internal_network_mtu != null ||
         values.snapshot_size_limit_gb != null ||
         values.max_instances != null ||
         values.max_volumes != null) && (
-        <div className="card mb-3">
-          <div className="card-header">
-            <h5 className="mb-0">{translate('Limits')}</h5>
-          </div>
-          <div className="card-body">
-            <table className="table table-sm table-borderless">
-              <tbody>
-                {values.default_internal_network_mtu != null && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('Default internal network MTU')}
-                    </td>
-                    <td>{values.default_internal_network_mtu}</td>
-                  </tr>
-                )}
-                {values.snapshot_size_limit_gb != null && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('Snapshot size limit')}
-                    </td>
-                    <td>{values.snapshot_size_limit_gb} GB</td>
-                  </tr>
-                )}
-                {values.max_instances != null && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('Max instances per tenant')}
-                    </td>
-                    <td>{values.max_instances}</td>
-                  </tr>
-                )}
-                {values.max_volumes != null && (
-                  <tr>
-                    <td className="text-quaternary" style={{ width: '40%' }}>
-                      {translate('Max volumes per tenant')}
-                    </td>
-                    <td>{values.max_volumes}</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <PropertyCard bordered title={translate('Limits')} className="mb-3">
+          <PropertyList variant="summary" termWidth="md">
+            <PropertyItem
+              label={translate('Default internal network MTU')}
+              value={values.default_internal_network_mtu}
+            />
+            <PropertyItem
+              label={translate('Snapshot size limit')}
+              value={propVal.number(values.snapshot_size_limit_gb, {
+                unit: 'GB',
+              })}
+            />
+            <PropertyItem
+              label={translate('Max instances per tenant')}
+              value={values.max_instances}
+            />
+            <PropertyItem
+              label={translate('Max volumes per tenant')}
+              value={values.max_volumes}
+            />
+          </PropertyList>
+        </PropertyCard>
       )}
 
       {values.previewResult && (
         <>
-          <div className="card mb-3">
-            <div className="card-header">
-              <h5 className="mb-0">{translate('Service Attributes')}</h5>
-            </div>
-            <div className="card-body">
-              <table className="table table-sm table-borderless">
-                <tbody>
-                  {Object.entries(values.previewResult.service_attributes).map(
-                    ([key, value]) => (
-                      <tr key={key}>
-                        <td
-                          className="text-quaternary"
-                          style={{ width: '40%' }}
-                        >
-                          <code>{key}</code>
-                        </td>
-                        <td>
-                          <code>
-                            {typeof value === 'object' && value !== null
-                              ? JSON.stringify(value, null, 2)
-                              : String(value)}
-                          </code>
-                        </td>
-                      </tr>
-                    ),
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div className="card mb-3">
-            <div className="card-header">
-              <h5 className="mb-0">{translate('Plugin Options')}</h5>
-            </div>
-            <div className="card-body">
-              {Object.keys(values.previewResult.plugin_options).length > 0 ? (
-                <table className="table table-sm table-borderless">
-                  <tbody>
-                    {Object.entries(values.previewResult.plugin_options).map(
-                      ([key, value]) => (
-                        <tr key={key}>
-                          <td
-                            className="text-quaternary"
-                            style={{ width: '40%' }}
-                          >
-                            <code>{key}</code>
-                          </td>
-                          <td>
-                            <div className="flex items-center gap-1">
-                              <code>{formatValue(value)}</code>
-                              <CopyToClipboardButton
-                                value={formatValue(value)}
-                                size={14}
-                                onlyButton
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                      ),
-                    )}
-                  </tbody>
-                </table>
-              ) : (
-                <span className="text-quaternary">
-                  {translate('No plugin options')}
-                </span>
+          <PropertyCard
+            bordered
+            title={translate('Service Attributes')}
+            className="mb-3"
+          >
+            <PropertyList variant="summary" termWidth="md">
+              {Object.entries(values.previewResult.service_attributes).map(
+                ([key, value]) => (
+                  <PropertyItem
+                    key={key}
+                    label={<code>{key}</code>}
+                    value={propVal.code(formatValue(value))}
+                  />
+                ),
               )}
-            </div>
-          </div>
+            </PropertyList>
+          </PropertyCard>
+
+          <PropertyCard
+            bordered
+            title={translate('Plugin Options')}
+            className="mb-3"
+          >
+            {Object.keys(values.previewResult.plugin_options).length > 0 ? (
+              <PropertyList variant="summary" termWidth="md">
+                {Object.entries(values.previewResult.plugin_options).map(
+                  ([key, value]) => (
+                    <PropertyItem
+                      key={key}
+                      label={<code>{key}</code>}
+                      value={propVal.code(formatValue(value))}
+                      hasCopy
+                    />
+                  ),
+                )}
+              </PropertyList>
+            ) : (
+              <span className="text-quaternary">
+                {translate('No plugin options')}
+              </span>
+            )}
+          </PropertyCard>
         </>
       )}
     </WizardModal>

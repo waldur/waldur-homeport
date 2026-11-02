@@ -16,9 +16,6 @@ vi.mock('./OrderCommonFields', async () => {
 vi.mock('@/price/PriceTooltip', () => ({
   PriceTooltip: () => null,
 }));
-vi.mock('@/resource/summary', () => ({
-  Field: ({ value }: { value: any }) => <div>{value}</div>,
-}));
 
 const buildOrder = () =>
   ({

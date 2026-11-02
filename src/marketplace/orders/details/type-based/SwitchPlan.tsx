@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 
-import { HelpIcon } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { Badge, HelpIcon, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
@@ -10,13 +9,13 @@ import { toPlanBilling } from '@/marketplace/details/plan/billingMode';
 import { PlanBillingModeBadge } from '@/marketplace/details/plan/PlanBillingModeBadge';
 import { getPlanSwitchData } from '@/marketplace/resources/change-plan/utils';
 import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
-import { Field } from '@/resource/summary';
 
 import { getPlanUnitAbbr } from '../../utils';
 
 import { DetailsTable } from './DetailsTable';
 import {
   CostChangeField,
+  ORDER_LIST_PROPS,
   OrderTypeBasedProps,
   RequestCommentField,
   RequestedByField,
@@ -35,42 +34,41 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
 
   return (
     <>
-      <RequestedByField order={order} />
-      <RequestCommentField order={order} />
-      <StartDateField order={order} />
-
-      <Field
-        label={translate('Plan old')}
-        labelWidth={200}
-        value={
-          <span className="inline-flex items-center gap-1.5">
-            <Badge variant="neutral" shape="pill" tone="outline">
-              {order.old_plan_name}
-            </Badge>
-            <PlanBillingModeBadge
-              mode={toPlanBilling(order.old_plan_billing_mode)}
-            />
-          </span>
-        }
-      />
-      <Field
-        label={translate('Plan new')}
-        labelWidth={200}
-        value={
-          <span className="inline-flex items-center gap-1.5">
-            <Badge variant="moss" shape="pill" tone="outline">
-              {order.new_plan_name}
-            </Badge>
-            <PlanBillingModeBadge
-              mode={toPlanBilling(order.new_plan_billing_mode)}
-            />
-          </span>
-        }
-      />
-      <CostChangeField
-        order={order}
-        shouldConcealPrices={shouldConcealPrices}
-      />
+      <PropertyList {...ORDER_LIST_PROPS}>
+        <RequestedByField order={order} />
+        <RequestCommentField order={order} />
+        <StartDateField order={order} />
+        <PropertyItem
+          label={translate('Plan old')}
+          value={
+            <span className="inline-flex items-center gap-1.5">
+              <Badge variant="neutral" shape="pill" tone="outline">
+                {order.old_plan_name}
+              </Badge>
+              <PlanBillingModeBadge
+                mode={toPlanBilling(order.old_plan_billing_mode)}
+              />
+            </span>
+          }
+        />
+        <PropertyItem
+          label={translate('Plan new')}
+          value={
+            <span className="inline-flex items-center gap-1.5">
+              <Badge variant="moss" shape="pill" tone="outline">
+                {order.new_plan_name}
+              </Badge>
+              <PlanBillingModeBadge
+                mode={toPlanBilling(order.new_plan_billing_mode)}
+              />
+            </span>
+          }
+        />
+        <CostChangeField
+          order={order}
+          shouldConcealPrices={shouldConcealPrices}
+        />
+      </PropertyList>
 
       <DetailsTable<(typeof data.components)[0]>
         rows={data.components}

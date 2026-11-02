@@ -8,6 +8,7 @@ import { AnonymousThreadProvider } from '@/ai-assistant/anonymous/AnonymousThrea
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
 import { ThreadRuntimeProvider } from '@/ai-assistant/logic/ThreadRuntimeProvider';
 import { BootSplashGate } from '@/BootSplashGate';
+import { AppCopyFeedback } from '@/core/CopyFeedback';
 import { BOOTSTRAP_QUERY_KEY, queryClient } from '@/core/queryClient';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { DrawerRoot } from '@/drawer/DrawerRoot';
@@ -40,30 +41,32 @@ const ApplicationInner: FunctionComponent = () => {
       <UIRouter router={router}>
         <Provider store={store}>
           <ThemeProvider>
-            {/* Drawer/Modal providers must wrap MatrixRoot: MatrixCallHost
+            <AppCopyFeedback>
+              {/* Drawer/Modal providers must wrap MatrixRoot: MatrixCallHost
                     (rendered inside MatrixRoot) opens the chat drawer from the
                     call widget via useDrawer, so it needs the same shared
                     DrawerProvider instance as the rest of the app. */}
-            <ModalProvider>
-              <DrawerProvider>
-                <MatrixRoot>
-                  <ThreadProvider>
-                    <ThreadRuntimeProvider>
-                      <AnonymousThreadProvider>
-                        <RouteLoadingBar />
-                        <RealtimeRoot />
-                        <NotificationContainer />
-                        <ModalRoot />
-                        <ConfirmModalRoot />
-                        <DrawerRoot />
-                        <UIView />
-                        <BootSplashGate />
-                      </AnonymousThreadProvider>
-                    </ThreadRuntimeProvider>
-                  </ThreadProvider>
-                </MatrixRoot>
-              </DrawerProvider>
-            </ModalProvider>
+              <ModalProvider>
+                <DrawerProvider>
+                  <MatrixRoot>
+                    <ThreadProvider>
+                      <ThreadRuntimeProvider>
+                        <AnonymousThreadProvider>
+                          <RouteLoadingBar />
+                          <RealtimeRoot />
+                          <NotificationContainer />
+                          <ModalRoot />
+                          <ConfirmModalRoot />
+                          <DrawerRoot />
+                          <UIView />
+                          <BootSplashGate />
+                        </AnonymousThreadProvider>
+                      </ThreadRuntimeProvider>
+                    </ThreadProvider>
+                  </MatrixRoot>
+                </DrawerProvider>
+              </ModalProvider>
+            </AppCopyFeedback>
           </ThemeProvider>
         </Provider>
       </UIRouter>

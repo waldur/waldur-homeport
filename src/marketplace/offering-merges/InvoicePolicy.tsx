@@ -5,7 +5,7 @@ import { RadioGroup } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
-const getInvoicePolicyOptions = (): {
+export const getInvoicePolicyOptions = (): {
   value: InvoicePolicyEnum;
   label: string;
   description: string;
@@ -25,15 +25,6 @@ const getInvoicePolicyOptions = (): {
     ),
   },
 ];
-
-export const InvoicePolicyLabel: FC<{ policy?: InvoicePolicyEnum }> = ({
-  policy = 'open_month',
-}) => (
-  <>
-    {getInvoicePolicyOptions().find((option) => option.value === policy)
-      ?.label ?? policy}
-  </>
-);
 
 export const InvoicePolicyChoice: FC<{
   value: InvoicePolicyEnum;

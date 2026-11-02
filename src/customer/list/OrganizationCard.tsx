@@ -1,7 +1,7 @@
 import { FunctionComponent, MouseEvent, useCallback } from 'react';
 
-import { formatDate } from '@/core/dateUtils';
-import { defaultCurrency } from '@/core/formatCurrency';
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { ModelCard1 } from '@/core/ModelCard1';
 import {
@@ -13,8 +13,7 @@ import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { Field } from '@/resource/summary';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
@@ -55,58 +54,46 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
       onClick={handleCardClick}
       body={
         <div className="text-sm">
-          <Field
-            label={translate('Email')}
-            value={renderFieldOrDash(organization.email)}
+          <PropertyList
+            variant="summary"
+            termWidth="sm"
             space={1.5}
-            labelCol={6}
-            valueCol={6}
-            valueClass="ellipsis"
-          />
+            emptyPlaceholder="dash"
+            hideIfEmpty={false}
+          >
+            <PropertyItem
+              label={translate('Email')}
+              value={organization.email}
+              valueClass="ellipsis"
+            />
 
-          <Field
-            label={translate('Projects')}
-            value={renderFieldOrDash(organization.projects_count)}
-            space={1.5}
-            labelCol={6}
-            valueCol={6}
-          />
+            <PropertyItem
+              label={translate('Projects')}
+              value={propVal.number(organization.projects_count)}
+            />
 
-          <Field
-            label={translate('Created')}
-            value={formatDate(organization.created)}
-            space={1.5}
-            labelCol={6}
-            valueCol={6}
-          />
+            <PropertyItem
+              label={translate('Created')}
+              value={propVal.date(organization.created)}
+            />
 
-          {!shouldConcealPrices && (
-            <>
-              <Field
-                label={translate('Cost estimation')}
-                value={defaultCurrency(
-                  (organization.billing_price_estimate &&
-                    organization.billing_price_estimate.total) ||
-                    0,
-                )}
-                space={1.5}
-                labelCol={6}
-                valueCol={6}
-              />
-
-              {organization.customer_credit != null && (
-                <Field
-                  label={translate('Remaining credit')}
-                  value={renderFieldOrDash(
-                    defaultCurrency(organization.customer_credit),
+            {!shouldConcealPrices && (
+              <>
+                <PropertyItem
+                  label={translate('Cost estimation')}
+                  value={propVal.currency(
+                    organization.billing_price_estimate?.total || 0,
                   )}
-                  space={1.5}
-                  labelCol={6}
-                  valueCol={6}
                 />
-              )}
-            </>
-          )}
+
+                <PropertyItem
+                  label={translate('Remaining credit')}
+                  value={propVal.currency(organization.customer_credit)}
+                  hideIfEmpty
+                />
+              </>
+            )}
+          </PropertyList>
         </div>
       }
       footer={

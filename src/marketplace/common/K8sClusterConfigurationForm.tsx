@@ -3,14 +3,20 @@ import { isEqual } from 'es-toolkit';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
-import { AccordionCard, AlertItem, Badge, BaseButton } from 'waldur-ui';
+import {
+  AccordionCard,
+  AlertItem,
+  Badge,
+  BaseButton,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
 import { MAX_PAGE_SIZE } from '@/core/api';
 import { SelectField } from '@/form';
 import { FormGroup } from '@/form';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 import { useCustomer } from '@/workspace/hooks';
 
 import { K8sFormSection } from './K8sFormSection';
@@ -191,115 +197,106 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
         />
       </FormGroup>
 
-      {/* Controller Nodes Information */}
-      {controllerNodes > 0 && (
-        <Field
-          label={
-            <>
-              {translate('Controller nodes (Mandatory)')}:
-              <span className="text-quaternary font-normal block">
-                {translate(
-                  'Kubernetes control plane components (API server, etcd, scheduler)',
-                )}
-              </span>
-            </>
-          }
-          value={
-            <>
-              <span className="block">
-                {controllerNodes}{' '}
-                {controllerNodes === 1 ? 'controller' : 'controllers'}
-              </span>
-              <span className="block">
-                {controllerNodes *
-                  (defaultConfigs?.default_controller_vcpus || 2)}{' '}
-                vCPU,{' '}
-                {controllerNodes *
-                  (defaultConfigs?.default_controller_ram_gb || 4)}
-                GB RAM
-              </span>
-              <span className="block">
-                {controllerNodes *
-                  (defaultConfigs?.default_controller_system_disk_gb || 20)}
-                GB system +{' '}
-                {controllerNodes *
-                  (defaultConfigs?.default_controller_etcd_disk_gb || 50)}
-                GB etcd
-              </span>
-            </>
-          }
-          labelCol={4}
-          valueCol={8}
-          space={4}
-        />
-      )}
+      {/* Controller & Load Balancer Nodes Information */}
+      <PropertyList variant="summary" termWidth="md">
+        {controllerNodes > 0 && (
+          <PropertyItem
+            space={4}
+            label={
+              <>
+                {translate('Controller nodes (Mandatory)')}:
+                <span className="text-quaternary font-normal block">
+                  {translate(
+                    'Kubernetes control plane components (API server, etcd, scheduler)',
+                  )}
+                </span>
+              </>
+            }
+            value={
+              <>
+                <span className="block">
+                  {controllerNodes}{' '}
+                  {controllerNodes === 1 ? 'controller' : 'controllers'}
+                </span>
+                <span className="block">
+                  {controllerNodes *
+                    (defaultConfigs?.default_controller_vcpus || 2)}{' '}
+                  vCPU,{' '}
+                  {controllerNodes *
+                    (defaultConfigs?.default_controller_ram_gb || 4)}
+                  GB RAM
+                </span>
+                <span className="block">
+                  {controllerNodes *
+                    (defaultConfigs?.default_controller_system_disk_gb || 20)}
+                  GB system +{' '}
+                  {controllerNodes *
+                    (defaultConfigs?.default_controller_etcd_disk_gb || 50)}
+                  GB etcd
+                </span>
+              </>
+            }
+          />
+        )}
 
-      {/* Load Balancer Nodes Information */}
-      {loadBalancerNodes > 0 && (
-        <Field
-          label={
-            <>
-              {loadBalancerRequired
-                ? translate('Load balancer nodes (Mandatory)')
-                : translate('Load balancer nodes')}
-              :
-              <span className="text-quaternary font-normal block">
-                {translate(
-                  'External load balancers for ingress and service exposure',
-                )}
-              </span>
-            </>
-          }
-          value={
-            <>
-              <span className="block">
-                {loadBalancerNodes} load{' '}
-                {loadBalancerNodes === 1 ? 'balancer' : 'balancers'}
-              </span>
-              <span className="block">
-                {loadBalancerNodes * (defaultConfigs?.default_lb_vcpus || 2)}{' '}
-                vCPU,{' '}
-                {loadBalancerNodes * (defaultConfigs?.default_lb_ram_gb || 8)}GB
-                RAM
-              </span>
-              <span className="block">
-                {loadBalancerNodes *
-                  (defaultConfigs?.default_lb_system_disk_gb || 20)}
-                GB system +{' '}
-                {loadBalancerNodes *
-                  (defaultConfigs?.default_lb_logs_disk_gb || 20)}
-                GB logs
-              </span>
-            </>
-          }
-          labelCol={4}
-          valueCol={8}
-          space={datacenter?.openstack_infrastructure ? 4 : 0}
-        />
-      )}
+        {loadBalancerNodes > 0 && (
+          <PropertyItem
+            space={datacenter?.openstack_infrastructure ? 4 : 0}
+            label={
+              <>
+                {loadBalancerRequired
+                  ? translate('Load balancer nodes (Mandatory)')
+                  : translate('Load balancer nodes')}
+                :
+                <span className="text-quaternary font-normal block">
+                  {translate(
+                    'External load balancers for ingress and service exposure',
+                  )}
+                </span>
+              </>
+            }
+            value={
+              <>
+                <span className="block">
+                  {loadBalancerNodes} load{' '}
+                  {loadBalancerNodes === 1 ? 'balancer' : 'balancers'}
+                </span>
+                <span className="block">
+                  {loadBalancerNodes * (defaultConfigs?.default_lb_vcpus || 2)}{' '}
+                  vCPU,{' '}
+                  {loadBalancerNodes * (defaultConfigs?.default_lb_ram_gb || 8)}
+                  GB RAM
+                </span>
+                <span className="block">
+                  {loadBalancerNodes *
+                    (defaultConfigs?.default_lb_system_disk_gb || 20)}
+                  GB system +{' '}
+                  {loadBalancerNodes *
+                    (defaultConfigs?.default_lb_logs_disk_gb || 20)}
+                  GB logs
+                </span>
+              </>
+            }
+          />
+        )}
+      </PropertyList>
 
       {/* Node Groups Configuration */}
       {datacenter.openstack_infrastructure && (
         <>
           {/* Add Group Button */}
-          <Field
-            label={translate('Node groups')}
-            value={
-              <BaseButton
-                variant="secondary"
-                onClick={addNodeGroup}
-                iconNode={<PlusCircleIcon weight="bold" />}
-                label={translate('Add node group')}
-                size="sm"
-              />
-            }
-            labelCol={4}
-            valueCol={8}
-            labelClass="flex-1 sm:flex-none"
-            valueClass="max-sm:w-auto max-sm:flex-none"
-            space={4}
-            className="gap-y-1.5 items-center"
-          />
+          <div className="flex items-center justify-between gap-4 py-2 mb-4">
+            <span className="font-medium text-secondary">
+              {translate('Node groups')}
+            </span>
+            <BaseButton
+              variant="secondary"
+              onClick={addNodeGroup}
+              iconNode={<PlusCircleIcon weight="bold" />}
+              label={translate('Add node group')}
+              size="sm"
+            />
+          </div>
 
           {datacenter.node_groups.length === 0 && (
             <AlertItem

@@ -1,11 +1,10 @@
 import { FC } from 'react';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
-import { AlertItem, HelpIcon } from 'waldur-ui';
+import { AlertItem, HelpIcon, PropertyCard, PropertyList } from 'waldur-ui';
 
 import { EligibilityRestrictionFormItems } from '@/core/restrictions';
 import { EditFieldProvider } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
@@ -45,7 +44,8 @@ export const CallEligibilitySection: FC<CallEligibilitySectionProps> = ({
   });
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={
         <>
           {translate('Applicant eligibility')}{' '}
@@ -56,7 +56,7 @@ export const CallEligibilitySection: FC<CallEligibilitySectionProps> = ({
           />
         </>
       }
-      className="card-bordered mb-4"
+      className="mb-4"
     >
       <AlertItem
         variant="info"
@@ -71,10 +71,10 @@ export const CallEligibilitySection: FC<CallEligibilitySectionProps> = ({
         callback={updateCall}
         readOnlyReason={isReadOnly ? getCallReadOnlyReason(call) : undefined}
       >
-        <FormTable>
+        <PropertyList>
           <EligibilityRestrictionFormItems disabled={isReadOnly} />
-        </FormTable>
+        </PropertyList>
       </EditFieldProvider>
-    </FormTable.Card>
+    </PropertyCard>
   );
 };

@@ -3,10 +3,9 @@ import { DateTime } from 'luxon';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
-import { NativeSelect } from 'waldur-ui';
+import { NativeSelect, PropertyItem } from 'waldur-ui';
 
 import { formatDate, formatISODate } from '@/core/dateUtils';
-import FormTable from '@/form/FormTable';
 import { SelectField } from '@/form/select/SelectField';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
@@ -123,7 +122,7 @@ const PrepaidEndDateSelector = ({
   }, [effectiveStartDate, endDate]);
 
   return (
-    <FormTable.Item
+    <PropertyItem
       label={translate('Subscription period')}
       value={
         <div>
@@ -243,7 +242,7 @@ const PrepaidMonthsSelector = ({
   );
 
   return (
-    <FormTable.Item
+    <PropertyItem
       // The unit is fixed, so it names the field rather than the value.
       label={translate('Subscription period (months)')}
       description={translate('Counted from the day the resource is granted.')}

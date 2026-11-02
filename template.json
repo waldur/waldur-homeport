@@ -1716,6 +1716,11 @@
       "feature_area": "affiliate-earnings"
     }
   },
+  "Acknowledge rate": {
+    "context": {
+      "feature_area": "rabbitmq"
+    }
+  },
   "Acknowledge the warnings: {codes}.": {
     "context": {
       "variables": {
@@ -2080,6 +2085,11 @@
   "Activity": {
     "context": {
       "primary_ui_type": "title"
+    }
+  },
+  "Activity & throughput": {
+    "context": {
+      "feature_area": "rabbitmq"
     }
   },
   "Actual": {
@@ -3074,11 +3084,7 @@
     }
   },
   "Adoption document": {},
-  "Advance immediately on completion": {
-    "context": {
-      "feature_area": "workflow"
-    }
-  },
+  "Advance immediately on completion": {},
   "Advance the proposal to the next workflow step?": {
     "context": {
       "feature_area": "proposal"
@@ -7386,6 +7392,7 @@
   },
   "Auth URL": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "steps"
     }
   },
@@ -8960,6 +8967,7 @@
   },
   "Buffer cache": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "database-stats"
     }
   },
@@ -11148,6 +11156,11 @@
       "feature_area": "openstack-instances"
     }
   },
+  "Cluster & runtime": {
+    "context": {
+      "feature_area": "rabbitmq"
+    }
+  },
   "Cluster IP": {
     "context": {
       "primary_ui_type": "title",
@@ -11157,11 +11170,6 @@
   "Cluster Tenants": {
     "context": {
       "feature_area": "create"
-    }
-  },
-  "Cluster info": {
-    "context": {
-      "feature_area": "rabbitmq"
     }
   },
   "Cluster name": {
@@ -12323,6 +12331,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "mappings"
+    }
+  },
+  "Confirm rate": {
+    "context": {
+      "feature_area": "rabbitmq"
     }
   },
   "Confirm with passkey": {
@@ -16934,6 +16947,11 @@
       "feature_area": "pubsub"
     }
   },
+  "Deliver rate": {
+    "context": {
+      "feature_area": "rabbitmq"
+    }
+  },
   "Delivering": {
     "context": {
       "primary_ui_type": "label",
@@ -17286,8 +17304,7 @@
         "provider": {
           "type": "unknown"
         }
-      },
-      "feature_area": "providers"
+      }
     }
   },
   "Details overview": {
@@ -17721,6 +17738,7 @@
   },
   "Discovery URL": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "providers"
     }
   },
@@ -18062,6 +18080,7 @@
   },
   "Download PDF": {
     "context": {
+      "primary_ui_type": "text_content",
       "feature_area": "details"
     }
   },
@@ -18082,6 +18101,7 @@
   },
   "Download document": {
     "context": {
+      "primary_ui_type": "text_content",
       "feature_area": "rounds"
     }
   },
@@ -25210,11 +25230,7 @@
       "feature_area": "database-stats"
     }
   },
-  "Hold for manual advance": {
-    "context": {
-      "feature_area": "workflow"
-    }
-  },
+  "Hold for manual advance": {},
   "Hold indefinitely": {
     "context": {
       "primary_ui_type": "title",
@@ -26735,6 +26751,7 @@
   },
   "Index cache": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "database-stats"
     }
   },
@@ -30251,6 +30268,11 @@
       "feature_area": "actions"
     }
   },
+  "Logout URL": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Logout failed": {
     "context": {
       "feature_area": "callbacks"
@@ -30846,6 +30868,7 @@
   },
   "Management URL": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "steps"
     }
   },
@@ -33322,7 +33345,7 @@
   "N/A": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "organizations"
+      "feature_area": "feedback"
     }
   },
   "NREN": {
@@ -36246,6 +36269,11 @@
     }
   },
   "Not allowed": {},
+  "Not applicable": {
+    "context": {
+      "feature_area": "PropertyList"
+    }
+  },
   "Not asked": {
     "context": {
       "feature_area": "configuration"
@@ -36468,6 +36496,7 @@
   },
   "Not set": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "mappings"
     }
   },
@@ -37343,11 +37372,7 @@
       "feature_area": "ai-assistant"
     }
   },
-  "Offering manager": {
-    "context": {
-      "feature_area": "workflow"
-    }
-  },
+  "Offering manager": {},
   "Offering managers": {
     "context": {
       "feature_area": "marketplace"
@@ -38243,6 +38268,7 @@
   },
   "Open in Service Desk": {
     "context": {
+      "primary_ui_type": "text_content",
       "feature_area": "issues"
     }
   },
@@ -38693,6 +38719,7 @@
   },
   "Optional": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "onboarding-setup"
     }
   },
@@ -40102,11 +40129,7 @@
       "feature_area": "team"
     }
   },
-  "Panel member": {
-    "context": {
-      "feature_area": "workflow"
-    }
-  },
+  "Panel member": {},
   "Panel review": {},
   "Parent": {
     "context": {
@@ -45183,6 +45206,11 @@
       "feature_area": "invitations"
     }
   },
+  "Publish rate": {
+    "context": {
+      "feature_area": "rabbitmq"
+    }
+  },
   "Publish results": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -47955,6 +47983,11 @@
     }
   },
   "Request detail": {},
+  "Request details": {
+    "context": {
+      "feature_area": "offering-requests"
+    }
+  },
   "Request details overview": {
     "context": {
       "feature_area": "proposal"
@@ -49819,7 +49852,7 @@
   "Retry": {
     "context": {
       "primary_ui_type": "submit_button",
-      "feature_area": "ai-assistant",
+      "feature_area": "rabbitmq",
       "action_type": "create"
     }
   },
@@ -58434,7 +58467,7 @@
   "Text": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "reviewer-discovery"
+      "feature_area": "core"
     }
   },
   "Text answers containing these keywords will be flagged for review": {
@@ -62813,6 +62846,11 @@
   "Token": {
     "context": {
       "feature_area": "marketplace-remote"
+    }
+  },
+  "Token URL": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Token for access user": {},
@@ -70787,6 +70825,11 @@
       "feature_area": "data-access"
     }
   },
+  "User info URL": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "User input": {
     "context": {
       "primary_ui_type": "title",
@@ -76378,6 +76421,11 @@
       "feature_area": "organizations"
     }
   },
+  "out of": {
+    "context": {
+      "feature_area": "formats"
+    }
+  },
   "over limit": {
     "context": {
       "feature_area": "api-keys"
@@ -76754,7 +76802,11 @@
     }
   },
   "running": {},
-  "seconds": {},
+  "seconds": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
   "security group": {
     "context": {
       "feature_area": "openstack-security-groups"
@@ -77297,32 +77349,6 @@
         }
       },
       "feature_area": "details"
-    }
-  },
-  "{allocated} / {total} MiB": {
-    "context": {
-      "variables": {
-        "allocated": {
-          "type": "unknown"
-        },
-        "total": {
-          "type": "number"
-        }
-      },
-      "feature_area": "node"
-    }
-  },
-  "{allocated} / {total} cores": {
-    "context": {
-      "variables": {
-        "allocated": {
-          "type": "unknown"
-        },
-        "total": {
-          "type": "number"
-        }
-      },
-      "feature_area": "node"
     }
   },
   "{amount} + usage": {
@@ -78592,16 +78618,6 @@
       "feature_area": "pubsub"
     }
   },
-  "{count} seconds": {
-    "context": {
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      },
-      "feature_area": "email"
-    }
-  },
   "{count} security fixes pending, {urgency} urgency.": {
     "context": {
       "variables": {
@@ -78971,19 +78987,6 @@
       "feature_area": "reports"
     }
   },
-  "{done} of {total}": {
-    "context": {
-      "variables": {
-        "done": {
-          "type": "unknown"
-        },
-        "total": {
-          "type": "number"
-        }
-      },
-      "feature_area": "wizard"
-    }
-  },
   "{earlier} of it is from earlier months that credit did not cover. Credit added now pays only this month, so this part stays until those months are paid.": {
     "context": {
       "variables": {
@@ -78992,19 +78995,6 @@
         }
       },
       "feature_area": "cost-policies"
-    }
-  },
-  "{enabled} of {total}": {
-    "context": {
-      "variables": {
-        "enabled": {
-          "type": "unknown"
-        },
-        "total": {
-          "type": "number"
-        }
-      },
-      "feature_area": "email"
     }
   },
   "{error} Since {date}.": {
@@ -81108,22 +81098,6 @@
         }
       },
       "feature_area": "DatePicker"
-    }
-  },
-  "{start} → {end} ({zone})": {
-    "context": {
-      "variables": {
-        "start": {
-          "type": "unknown"
-        },
-        "end": {
-          "type": "unknown"
-        },
-        "zone": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "create"
     }
   },
   "{successCount} permissions have been successfully revoked.": {

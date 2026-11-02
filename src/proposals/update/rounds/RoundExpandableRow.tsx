@@ -1,10 +1,10 @@
-import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { ProtectedRound } from 'waldur-js-client';
 
-import { formatDate, formatDateTime } from '@/core/dateUtils';
-import { FileDownloader } from '@/form/upload/FileDownloader';
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import {
   canViewRoundAdoption,
   getEffectiveCompletionRule,
@@ -12,9 +12,7 @@ import {
   undecidedAtCompletionLabel,
 } from '@/proposals/roundLifecycle';
 import { Call } from '@/proposals/types';
-import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
-import { renderFieldOrDash } from '@/table/utils';
 
 interface RoundExpandableRowProps {
   // The public call page passes the nested round, without the protected
@@ -35,9 +33,6 @@ interface RoundExpandableRowProps {
   /** Given on the call team's page, where the completion rule is shown. */
   call?: Pick<Call, 'undecided_at_round_completion' | 'publish_results'>;
 }
-
-const formatTimestamp = (value: string | null | undefined) =>
-  value ? formatDateTime(value) : renderFieldOrDash(null);
 
 /**
  * The adoption document is served through the media endpoint
@@ -62,93 +57,79 @@ const RoundResultsSection: FunctionComponent<RoundExpandableRowProps> = ({
   const showAdoption =
     row.adopted_at !== undefined && canViewRoundAdoption(row, call);
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 mt-3">
-      <div>
-        <SectionTitle title={translate('Evaluation and results')} />
-        <Field label={translate('Stage')} value={lifecycle.label} />
-        <Field
+    <PropertyList
+      variant="summary"
+      hideIfEmpty={false}
+      className="grid grid-cols-1 md:grid-cols-2 gap-x-5 mt-3"
+    >
+      <PropertyList.Section title={translate('Evaluation and results')}>
+        <PropertyItem label={translate('Stage')} value={lifecycle.label} />
+        <PropertyItem
           label={translate('Evaluation started')}
-          value={formatTimestamp(row.evaluation_started_at)}
+          value={propVal.date(row.evaluation_started_at, {
+            precision: 'datetime',
+          })}
         />
-        <Field
+        <PropertyItem
           label={translate('Decision started')}
-          value={formatTimestamp(row.deciding_started_at)}
+          value={propVal.date(row.deciding_started_at, {
+            precision: 'datetime',
+          })}
         />
-        <Field
+        <PropertyItem
           label={translate('Results published')}
-          value={formatTimestamp(row.results_published_at)}
+          value={propVal.date(row.results_published_at, {
+            precision: 'datetime',
+          })}
         />
         {row.results_published_by_name ? (
-          <Field
+          <PropertyItem
             label={translate('Published by')}
             value={row.results_published_by_name}
           />
         ) : null}
         {row.results_forced_reason ? (
-          <Field
+          <PropertyItem
             label={translate('Published before all decisions were made')}
             value={row.results_forced_reason}
           />
         ) : null}
         {row.held_decisions_count ? (
-          <Field
+          <PropertyItem
             label={translate('Held decisions')}
             value={translate('{count} decision(s) waiting to be released', {
               count: row.held_decisions_count,
             })}
           />
         ) : null}
-        <Field
+        <PropertyItem
           label={translate('Closed')}
-          value={formatTimestamp(row.closed_at)}
+          value={propVal.date(row.closed_at, { precision: 'datetime' })}
         />
-      </div>
+      </PropertyList.Section>
       {showAdoption ? (
-        <div data-testid="round-adoption">
-          <SectionTitle title={translate('Adoption')} />
-          <Field
+        <PropertyList.Section
+          title={translate('Adoption')}
+          data-testid="round-adoption"
+        >
+          <PropertyItem
             label={translate('Adopted on')}
-            value={
-              row.adopted_at
-                ? formatDate(row.adopted_at)
-                : translate('Not recorded')
-            }
+            value={propVal.date(row.adopted_at)}
+            placeholder={translate('Not recorded')}
           />
-          <Field
-            label={translate('Note')}
-            value={renderFieldOrDash(row.adoption_note)}
-          />
-          <Field
+          <PropertyItem label={translate('Note')} value={row.adoption_note} />
+          <PropertyItem
             label={translate('Document')}
-            value={
-              row.adoption_document ? (
-                <FileDownloader
-                  url={row.adoption_document}
-                  name={adoptionDocumentName(row.adoption_document)}
-                  className="text-btn hover:text-brand inline-flex items-center"
-                >
-                  <DownloadSimpleIcon weight="bold" className="me-1" />
-                  {translate('Download document')}
-                </FileDownloader>
-              ) : (
-                renderFieldOrDash(null)
-              )
-            }
+            value={propVal.file(row.adoption_document, {
+              fileName: adoptionDocumentName,
+              text: translate('Download document'),
+            })}
           />
-        </div>
+        </PropertyList.Section>
       ) : null}
-    </div>
+    </PropertyList>
   );
 };
-
-const SectionTitle: FunctionComponent<{
-  title: string;
-  className?: string;
-}> = ({ title, className }) => (
-  <div className={`font-medium text-quaternary mb-2.5 ${className || ''}`}>
-    {title}
-  </div>
-);
 
 export const RoundExpandableRow: FunctionComponent<RoundExpandableRowProps> = ({
   row,
@@ -157,35 +138,39 @@ export const RoundExpandableRow: FunctionComponent<RoundExpandableRowProps> = ({
   const completionRule = call ? getEffectiveCompletionRule(row, call) : null;
   return (
     <ExpandableContainer>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
-        <div>
-          <SectionTitle title={translate('Submission settings')} />
-          <Field
-            label={translate('Start time')}
-            value={formatDateTime(row.start_time)}
-          />
-          <Field
-            label={translate('Cutoff time')}
-            value={formatDateTime(row.cutoff_time)}
-          />
-          <SectionTitle title={translate('Review settings')} className="mt-3" />
-          <Field
-            label={translate('Review duration in days')}
-            value={renderFieldOrDash(row.review_duration_in_days)}
-          />
+      <PropertyList
+        variant="summary"
+        className="grid grid-cols-1 md:grid-cols-2 gap-x-5"
+      >
+        <div className="flex flex-col gap-6">
+          <PropertyList.Section title={translate('Submission settings')}>
+            <PropertyItem
+              label={translate('Start time')}
+              value={propVal.date(row.start_time, { precision: 'datetime' })}
+            />
+            <PropertyItem
+              label={translate('Cutoff time')}
+              value={propVal.date(row.cutoff_time, { precision: 'datetime' })}
+            />
+          </PropertyList.Section>
+          <PropertyList.Section title={translate('Review settings')}>
+            <PropertyItem
+              label={translate('Review duration in days')}
+              value={row.review_duration_in_days}
+              hideIfEmpty={false}
+            />
+          </PropertyList.Section>
         </div>
-        <div>
-          <SectionTitle title={translate('Allocation settings')} />
-          <Field
+        <PropertyList.Section title={translate('Allocation settings')}>
+          <PropertyItem
             label={translate('Allocation date')}
-            value={
-              row.allocation_date
-                ? formatDateTime(row.allocation_date)
-                : renderFieldOrDash(null)
-            }
+            value={propVal.date(row.allocation_date, {
+              precision: 'datetime',
+            })}
+            hideIfEmpty={false}
           />
           {completionRule ? (
-            <Field
+            <PropertyItem
               label={translate('Undecided proposals at completion')}
               value={translate('{rule} ({source})', {
                 rule: undecidedAtCompletionLabel(completionRule.rule),
@@ -195,8 +180,8 @@ export const RoundExpandableRow: FunctionComponent<RoundExpandableRowProps> = ({
               })}
             />
           ) : null}
-        </div>
-      </div>
+        </PropertyList.Section>
+      </PropertyList>
       <RoundResultsSection row={row} call={call} />
     </ExpandableContainer>
   );

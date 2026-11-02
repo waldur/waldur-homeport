@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
 
-import { HelpIcon } from 'waldur-ui';
+import { HelpIcon, PropertyItem, PropertyList } from 'waldur-ui';
 
-import { formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { getFormLimitParser } from '@/marketplace/common/registry';
@@ -13,11 +12,15 @@ import {
   getLimitChangeRequirements,
 } from '@/marketplace/resources/change-limits/utils';
 import { PriceTooltip } from '@/price/PriceTooltip';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { DetailsTable } from './DetailsTable';
-import { OrderTypeBasedProps, RequestCommentField } from './OrderCommonFields';
+import {
+  ORDER_LIST_PROPS,
+  OrderTypeBasedProps,
+  RequestCommentField,
+} from './OrderCommonFields';
 
 interface RenewalAttributes {
   action: 'renew';
@@ -76,29 +79,28 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
 
   return (
     <>
-      <Field
-        label={translate('Old end date')}
-        labelWidth={200}
-        value={formatDate(attributes.old_end_date)}
-      />
-      <Field
-        label={translate('New end date')}
-        labelWidth={200}
-        value={formatDate(attributes.new_end_date)}
-      />
-      <Field
-        label={translate('Extension')}
-        labelWidth={200}
-        value={
-          '+ ' +
-          (attributes.extension_months === 1
-            ? translate('1 month')
-            : translate('{count} months', {
-                count: attributes.extension_months,
-              }))
-        }
-      />
-      <RequestCommentField order={order} />
+      <PropertyList {...ORDER_LIST_PROPS}>
+        <PropertyItem
+          label={translate('Old end date')}
+          value={propVal.date(attributes.old_end_date)}
+        />
+        <PropertyItem
+          label={translate('New end date')}
+          value={propVal.date(attributes.new_end_date)}
+        />
+        <PropertyItem
+          label={translate('Extension')}
+          value={
+            '+ ' +
+            (attributes.extension_months === 1
+              ? translate('1 month')
+              : translate('{count} months', {
+                  count: attributes.extension_months,
+                }))
+          }
+        />
+        <RequestCommentField order={order} />
+      </PropertyList>
 
       <DetailsTable<(typeof data.components)[0]>
         rows={data.components}

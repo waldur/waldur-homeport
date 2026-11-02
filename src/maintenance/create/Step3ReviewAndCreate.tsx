@@ -2,9 +2,11 @@ import { DateTime } from 'luxon';
 import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { formatMediumDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { InternalNotes } from '../InternalNotesField';
@@ -22,46 +24,53 @@ export const Step3ReviewAndCreate: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      <Field label={translate('Name')} value={values.name} />
-      <Field
-        label={translate('Type')}
-        value={MAINTENANCE_TYPE[values.maintenance_type]}
-      />
-      <Field
-        label={translate('Window')}
-        value={
-          start && end
-            ? translate('{start} → {end} ({zone})', {
-                start: formatMediumDateTime(start),
-                end: formatMediumDateTime(end),
-                zone,
-              })
-            : '—'
-        }
-      />
-      <Field label={translate('Message')} value={values.message} />
-      {Boolean(values.external_reference_url) && (
-        <Field
+      <PropertyList variant="summary" termWidth="md">
+        <PropertyItem label={translate('Name')} value={values.name} />
+        <PropertyItem
+          label={translate('Type')}
+          value={propVal.enum(values.maintenance_type, {
+            labels: MAINTENANCE_TYPE,
+          })}
+        />
+        <PropertyItem
+          label={translate('Window')}
+          value={
+            start && end
+              ? propVal.annotated(
+                  propVal.pair(
+                    formatMediumDateTime(start),
+                    formatMediumDateTime(end),
+                    { separator: ' → ' },
+                  ),
+                  { hint: zone },
+                )
+              : null
+          }
+        />
+        <PropertyItem label={translate('Message')} value={values.message} />
+        <PropertyItem
           label={translate('External reference')}
           value={values.external_reference_url}
         />
-      )}
-      <InternalNotes maintenance={values} />
-      <Field label={translate('Impact')} valueCol={12} valueClass="mt-1.5">
+        <InternalNotes maintenance={values} />
+      </PropertyList>
+      <div className="mt-4">
+        <h6 className="text-secondary font-medium mb-2">
+          {translate('Impact')}
+        </h6>
         <ImpactSummary
           offerings={values.offerings}
           impactLevels={values.impact_level}
           provider={provider}
           compact
         />
-      </Field>
-      <Field
-        label={translate('Affected offerings')}
-        valueCol={12}
-        valueClass="mt-1.5"
-      >
+      </div>
+      <div className="mt-4">
+        <h6 className="text-secondary font-medium mb-2">
+          {translate('Affected offerings')}
+        </h6>
         <AffectedOfferingsTable values={values} />
-      </Field>
+      </div>
     </WizardModal>
   );
 };

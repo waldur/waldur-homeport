@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { Permission } from 'waldur-js-client';
 
-import { formatDate } from '@/core/dateUtils';
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { GrantSourceIndicator } from './GrantSourceIndicator';
@@ -21,29 +22,29 @@ export const UserAffiliationExpandableRow: FC<OwnProps> = ({ row }) => {
           when read next to the revocation fields below. That is a per-row
           question, so it lives here rather than taking a column in a table that
           is already wide. */}
-      <Field
-        label={translate('Granted by')}
-        value={<GrantSourceIndicator source={row.source} uuid={row.uuid} />}
-      />
-      <Field
-        label={translate('Start date')}
-        value={row.created ? formatDate(row.created) : undefined}
-      />
-      <Field
-        label={translate('End date')}
-        value={
-          row.expiration_time ? formatDate(row.expiration_time) : undefined
-        }
-      />
-      {!row.is_active && (
-        <>
-          <Field label={translate('Revoked by')} value={revokedBy} />
-          <Field
-            label={translate('Revoke access reason')}
-            value={row.revoke_reason || undefined}
-          />
-        </>
-      )}
+      <PropertyList variant="summary">
+        <PropertyItem
+          label={translate('Granted by')}
+          value={<GrantSourceIndicator source={row.source} uuid={row.uuid} />}
+        />
+        <PropertyItem
+          label={translate('Start date')}
+          value={propVal.date(row.created)}
+        />
+        <PropertyItem
+          label={translate('End date')}
+          value={propVal.date(row.expiration_time)}
+        />
+        {!row.is_active && (
+          <>
+            <PropertyItem label={translate('Revoked by')} value={revokedBy} />
+            <PropertyItem
+              label={translate('Revoke access reason')}
+              value={row.revoke_reason}
+            />
+          </>
+        )}
+      </PropertyList>
     </ExpandableContainer>
   );
 };

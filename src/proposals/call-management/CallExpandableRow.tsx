@@ -1,10 +1,10 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import { formatDateTime } from '@/core/dateUtils';
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { Call } from '@/proposals/types';
-import { Field } from '@/resource/summary';
-import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { getRoundsWithStatus } from '../utils';
@@ -25,18 +25,17 @@ export const CallExpandableRow: FunctionComponent<{
 
   return (
     <ExpandableContainer asTable>
-      <Field
+      <PropertyItem
         label={translate('Next cutoff')}
-        value={
-          activeRound
-            ? formatDateTime(activeRound.cutoff_time)
-            : DASH_ESCAPE_CODE
-        }
+        value={propVal.date(activeRound?.cutoff_time, {
+          precision: 'datetime',
+        })}
+        hideIfEmpty={false}
       />
 
-      <Field label={translate('Submissions')} value="0" />
-      <Field label={translate('Pending review')} value="0" />
-      <Field
+      <PropertyItem label={translate('Submissions')} value="0" />
+      <PropertyItem label={translate('Pending review')} value="0" />
+      <PropertyItem
         label={translate('Resource availability')}
         value="44.54/100 % (i)"
         className="whitespace-nowrap"

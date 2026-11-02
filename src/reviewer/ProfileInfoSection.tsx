@@ -5,6 +5,8 @@ import {
   ReviewerProfile,
 } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { OrcidLogo } from '@/core/OrcidLogo';
 import {
@@ -13,8 +15,8 @@ import {
   StringEditField,
   TextEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
@@ -112,7 +114,7 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
 
   return (
     <EditFieldProvider scope={profile} callback={updateProfileCallback}>
-      <FormTable>
+      <PropertyList>
         <StringEditField
           name="orcid_id"
           label={translate('ORCID iD')}
@@ -148,19 +150,19 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
             )
           }
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Reviews completed')}
-          value={profile.stats?.total_reviews_completed ?? 0}
+          value={propVal.count(profile.stats?.total_reviews_completed)}
         />
         {profile.stats?.average_review_time_days && (
-          <FormTable.Item
+          <PropertyItem
             label={translate('Average review time')}
             value={translate('{days} days', {
               days: profile.stats.average_review_time_days.toFixed(1),
             })}
           />
         )}
-      </FormTable>
+      </PropertyList>
     </EditFieldProvider>
   );
 };

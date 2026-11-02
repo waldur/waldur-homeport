@@ -1,13 +1,13 @@
 import { OpenStackNestedVolume } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { PropertyList, Tooltip } from 'waldur-ui';
+import { Badge, PropertyItem } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 import openstackIcon from '@/images/appstore/icon-openstack.png';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 
 interface VolumeBadgeProps {
   volume: OpenStackNestedVolume;
@@ -17,20 +17,24 @@ interface VolumeBadgeProps {
 const VolumeBadgeTipView = ({ volume, resourceName }: VolumeBadgeProps) => {
   return (
     <div className="text-start p-1.5">
-      <Field label={translate('Attached to')} value={resourceName} isStuck />
-      <Field
-        label={translate('Volume type')}
-        value={volume.type_name}
-        isStuck
-      />
+      <PropertyList variant="compact" hideIfEmpty>
+        <PropertyItem label={translate('Attached to')} value={resourceName} />
+        <PropertyItem
+          label={translate('Volume type')}
+          value={volume.type_name}
+        />
 
-      <Field
-        label={translate('Size')}
-        value={formatFilesize(volume.size)}
-        isStuck
-      />
+        <PropertyItem
+          label={translate('Size')}
+          value={propVal.fileSize(volume.size, { unit: 'MB' })}
+        />
 
-      <Field label={translate('Mount')} value={volume.device} isStuck hasCopy />
+        <PropertyItem
+          label={translate('Mount')}
+          value={volume.device}
+          hasCopy
+        />
+      </PropertyList>
       {volume.marketplace_resource_uuid && (
         <Link
           state="marketplace-resource-details"

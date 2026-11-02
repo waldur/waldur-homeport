@@ -1,12 +1,14 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useRef } from 'react';
 import { Form } from 'react-final-form';
+import type { PermissionRequest } from 'waldur-js-client';
 
-import { formatDateTime } from '@/core/dateUtils';
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 
 import {
   useApprovePermissionRequest,
@@ -15,7 +17,7 @@ import {
 
 interface OwnProps {
   resolve: {
-    permissionRequest;
+    permissionRequest: PermissionRequest;
     readOnly: boolean;
     refetch;
   };
@@ -82,66 +84,68 @@ export const PermissionRequestActionDialog: FunctionComponent<OwnProps> = (
             }
           >
             <div className="flex flex-col gap-3">
-              <Field
-                label={translate('Name')}
-                value={permissionRequest.created_by_full_name}
-              />
-              <Field
-                label={translate('Email')}
-                value={permissionRequest.created_by_email}
-              />
-              <Field
-                label={translate('Organization')}
-                value={permissionRequest.customer_name}
-              />
-              {permissionRequest.role_name.startsWith('PROJECT.') && (
-                <>
-                  <Field
-                    label={translate('Project')}
-                    value={permissionRequest.scope_name}
-                  />
-                  <Field
-                    label={translate('Project role')}
-                    value={
-                      permissionRequest.role_description ||
-                      permissionRequest.role_name
-                    }
-                  />
-                  <Field
-                    label={translate('Project name template')}
-                    value={permissionRequest.project_name_template}
-                    labelTooltipLen={false}
-                  />
-                  {permissionRequest.project_name && (
-                    <Field
+              <PropertyList variant="summary" className="flex flex-col gap-3">
+                <PropertyItem
+                  label={translate('Name')}
+                  value={permissionRequest.created_by_full_name}
+                />
+                <PropertyItem
+                  label={translate('Email')}
+                  value={permissionRequest.created_by_email}
+                />
+                <PropertyItem
+                  label={translate('Organization')}
+                  value={permissionRequest.customer_name}
+                />
+                {permissionRequest.role_name.startsWith('PROJECT.') && (
+                  <>
+                    <PropertyItem
+                      label={translate('Project')}
+                      value={permissionRequest.scope_name}
+                    />
+                    <PropertyItem
+                      label={translate('Project role')}
+                      value={
+                        permissionRequest.role_description ||
+                        permissionRequest.role_name
+                      }
+                    />
+                    <PropertyItem
+                      label={translate('Project name template')}
+                      value={permissionRequest.project_name_template}
+                      labelTooltipLen={false}
+                    />
+                    <PropertyItem
                       label={translate('Requested project name')}
                       value={permissionRequest.project_name}
                     />
-                  )}
-                  {permissionRequest.project_description && (
-                    <Field
+                    <PropertyItem
                       label={translate('Requested project description')}
                       value={permissionRequest.project_description}
                     />
-                  )}
-                </>
-              )}
-              <Field
-                label={translate('Date of request')}
-                value={formatDateTime(permissionRequest.created)}
-              />
-              {readOnly && (
-                <>
-                  <Field
-                    label={translate('Reviewed at')}
-                    value={formatDateTime(permissionRequest.reviewed_at)}
-                  />
-                  <Field
-                    label={translate('Review comment')}
-                    value={permissionRequest.review_comment}
-                  />
-                </>
-              )}
+                  </>
+                )}
+                <PropertyItem
+                  label={translate('Date of request')}
+                  value={propVal.date(permissionRequest.created, {
+                    precision: 'datetime',
+                  })}
+                />
+                {readOnly && (
+                  <>
+                    <PropertyItem
+                      label={translate('Reviewed at')}
+                      value={propVal.date(permissionRequest.reviewed_at, {
+                        precision: 'datetime',
+                      })}
+                    />
+                    <PropertyItem
+                      label={translate('Review comment')}
+                      value={permissionRequest.review_comment}
+                    />
+                  </>
+                )}
+              </PropertyList>
             </div>
             {!readOnly && <hr />}
             {!readOnly && (

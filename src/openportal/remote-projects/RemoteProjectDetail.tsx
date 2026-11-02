@@ -2,18 +2,17 @@ import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { openportalRemoteProjectsRetrieve } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
-import { ExternalLink } from '@/core/ExternalLink';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
 import { DetailsDiff } from '@/openportal/DetailsDiff';
-import { Field } from '@/resource/summary/Field';
-import { renderFieldOrDash } from '@/table/utils';
+import { getMembershipControlLabels } from '@/openportal/membershipControl';
+import { propVal } from '@/property/propertyFields';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
@@ -21,36 +20,21 @@ import { RemoteProjectActions } from './RemoteProjectActions';
 import { RemoteProjectAuditLog } from './RemoteProjectAuditLog';
 import { RemoteProjectStateField } from './RemoteProjectStateField';
 
-const membershipControlLabels: Record<string, string> = {
-  open: translate('Open'),
-  members_only: translate('Members only'),
-  roles_only: translate('Roles only'),
-  locked: translate('Locked'),
-};
-
 const LinkField = ({
   label,
   link,
 }: {
   label: string;
   link?: { id?: string; url?: string } | null;
-}) => {
-  if (!link || (!link.id && !link.url)) {
-    return <Field label={label} />;
-  }
-  return (
-    <Field
+}) =>
+  link?.url ? (
+    <PropertyItem
       label={label}
-      value={
-        link.url ? (
-          <ExternalLink url={link.url} label={link.id || link.url} />
-        ) : (
-          link.id
-        )
-      }
+      value={propVal.url(link.url, { text: link.id || link.url })}
     />
+  ) : (
+    <PropertyItem label={label} value={link?.id} />
   );
-};
 
 export const RemoteProjectDetail = () => {
   const {
@@ -100,71 +84,63 @@ export const RemoteProjectDetail = () => {
             {canEdit && <RemoteProjectActions row={row} refetch={refetch} />}
           </div>
 
-          <Field
-            label={translate('State')}
-            value={
-              row.error_message ? (
-                <span title={row.error_message}>
+          <PropertyList variant="summary" hideIfEmpty={false}>
+            <PropertyItem
+              label={translate('State')}
+              value={
+                row.error_message ? (
+                  <span title={row.error_message}>
+                    <RemoteProjectStateField project={row} />
+                  </span>
+                ) : (
                   <RemoteProjectStateField project={row} />
-                </span>
-              ) : (
-                <RemoteProjectStateField project={row} />
-              )
-            }
-          />
-          <Field
-            label={translate('Destination')}
-            value={renderFieldOrDash(row.destination)}
-          />
-          <Field
-            label={translate('Identifier')}
-            value={renderFieldOrDash(row.identifier)}
-          />
-          <Field
-            label={translate('Current allocation')}
-            value={renderFieldOrDash(row.current_allocation)}
-          />
-          <Field
-            label={translate('Pending allocation')}
-            value={renderFieldOrDash(row.pending_allocation)}
-          />
-          <Field
-            label={translate('Membership control')}
-            value={
-              row.membership_control
-                ? membershipControlLabels[row.membership_control] ||
-                  row.membership_control
-                : membershipControlLabels.open
-            }
-          />
-          <Field
-            label={translate('Allowed domains')}
-            value={
-              row.allowed_domains && row.allowed_domains.length > 0
-                ? row.allowed_domains.join(', ')
-                : translate('All domains allowed')
-            }
-          />
-          <Field
-            label={translate('Earliest approve')}
-            value={
-              row.earliest_approve
-                ? formatDateTime(row.earliest_approve)
-                : undefined
-            }
-          />
-          <Field
-            label={translate('Last contact')}
-            value={
-              row.last_contact_time
-                ? formatDateTime(row.last_contact_time)
-                : undefined
-            }
-          />
-          <Field
-            label={translate('Created')}
-            value={row.created ? formatDateTime(row.created) : undefined}
-          />
+                )
+              }
+            />
+            <PropertyItem
+              label={translate('Destination')}
+              value={row.destination}
+            />
+            <PropertyItem
+              label={translate('Identifier')}
+              value={row.identifier}
+            />
+            <PropertyItem
+              label={translate('Current allocation')}
+              value={row.current_allocation}
+            />
+            <PropertyItem
+              label={translate('Pending allocation')}
+              value={row.pending_allocation}
+            />
+            <PropertyItem
+              label={translate('Membership control')}
+              value={propVal.enum(row.membership_control || 'open', {
+                labels: getMembershipControlLabels(),
+              })}
+            />
+            <PropertyItem
+              label={translate('Allowed domains')}
+              value={propVal.list(row.allowed_domains)}
+              placeholder={translate('All domains allowed')}
+            />
+            <PropertyItem
+              label={translate('Earliest approve')}
+              value={propVal.date(row.earliest_approve, {
+                precision: 'datetime',
+              })}
+            />
+            <PropertyItem
+              label={translate('Last contact')}
+              value={propVal.date(row.last_contact_time, {
+                precision: 'datetime',
+              })}
+            />
+            <PropertyItem
+              label={translate('Created')}
+              value={propVal.date(row.created, { precision: 'datetime' })}
+            />
+          </PropertyList>
         </div>
       </div>
 
@@ -221,14 +197,14 @@ export const RemoteProjectDetail = () => {
                 {translate('Pending sync')}
               </summary>
               <div className="mt-2.5">
-                <Field
-                  label={translate('Pending since')}
-                  value={
-                    row.pending_since
-                      ? formatDateTime(row.pending_since)
-                      : undefined
-                  }
-                />
+                <PropertyList variant="summary">
+                  <PropertyItem
+                    label={translate('Pending since')}
+                    value={propVal.date(row.pending_since, {
+                      precision: 'datetime',
+                    })}
+                  />
+                </PropertyList>
                 <DetailsDiff
                   before={row.last_confirmed_details}
                   after={row.pending_details}

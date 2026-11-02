@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { Rule } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
-import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 interface RuleExpandableRowProps {
@@ -12,96 +13,82 @@ interface RuleExpandableRowProps {
 
 export const RuleExpandableRow: FC<RuleExpandableRowProps> = ({ row }) => (
   <ExpandableContainer>
-    <div className="grid grid-cols-12 gap-3">
+    <PropertyList
+      variant="summary"
+      space={1.5}
+      hideIfEmpty={false}
+      className="grid grid-cols-12 gap-6"
+    >
       {Boolean(row.plan) && (
-        <div className="col-span-12 md:col-span-5 2xl:col-span-4">
-          <h6 className="text-secondary mb-2.5">
-            {translate('Resource template')}
-          </h6>
-          <Field
+        <PropertyList.Section
+          title={translate('Resource template')}
+          className="col-span-12 md:col-span-5 2xl:col-span-4"
+        >
+          <PropertyItem
             label={translate('Category')}
             value={row.category_title}
-            space={1.5}
           />
-          <Field
+          <PropertyItem
             label={translate('Offering')}
             value={row.offering_name}
-            space={1.5}
           />
-          <Field label={translate('Plan')} value={row.plan_name} space={1.5} />
-        </div>
+          <PropertyItem label={translate('Plan')} value={row.plan_name} />
+        </PropertyList.Section>
       )}
-      <div className="col-span-6">
-        <h6 className="text-secondary mb-2.5">{translate('Attributes')}</h6>
-        <Field
+      <PropertyList.Section
+        title={translate('Attributes')}
+        className={
+          row.plan
+            ? 'col-span-12 md:col-span-7 2xl:col-span-8'
+            : 'col-span-12 md:col-span-6'
+        }
+      >
+        <PropertyItem
           label={translate('Email patterns')}
-          value={
-            row.user_email_patterns?.length
-              ? row.user_email_patterns.join(', ')
-              : DASH_ESCAPE_CODE
-          }
+          value={propVal.list(row.user_email_patterns)}
           valueClass="ellipsis"
-          space={1.5}
         />
-        <Field
+        <PropertyItem
           label={translate('Affiliations')}
-          value={
-            row.user_affiliations?.length
-              ? row.user_affiliations.join(', ')
-              : DASH_ESCAPE_CODE
-          }
+          value={propVal.list(row.user_affiliations)}
           valueClass="ellipsis"
-          space={1.5}
         />
-        <Field
+        <PropertyItem
           label={translate('Identity sources')}
-          value={
-            row.user_identity_sources?.length
-              ? row.user_identity_sources.join(', ')
-              : DASH_ESCAPE_CODE
-          }
+          value={propVal.list(row.user_identity_sources)}
           valueClass="ellipsis"
-          space={1.5}
         />
-        <Field
+        <PropertyItem
           label={translate('Claims')}
-          value={
-            Object.keys(row.user_claims ?? {}).length
-              ? Object.entries(row.user_claims)
-                  .map(
-                    ([claim, values]) =>
-                      `${claim}: ${(values as string[]).join(', ')}`,
-                  )
-                  .join(' · ')
-              : DASH_ESCAPE_CODE
-          }
+          value={Object.entries(row.user_claims ?? {})
+            .map(
+              ([claim, values]) =>
+                `${claim}: ${(values as string[]).join(', ')}`,
+            )
+            .join(' · ')}
           valueClass="ellipsis"
-          space={1.5}
         />
-        <Field
+        <PropertyItem
           label={translate('Organization role')}
-          value={row.customer_role_display_name || DASH_ESCAPE_CODE}
-          space={1.5}
+          value={row.customer_role_display_name}
         />
-        <Field
+        <PropertyItem
           label={translate('Creates project')}
-          value={row.create_project ? translate('Yes') : translate('No')}
-          space={1.5}
+          value={propVal.boolean(row.create_project)}
         />
         {row.create_project && (
-          <Field
+          <PropertyItem
             label={translate('Project name template')}
-            value={row.project_name_template || translate('Username')}
+            value={row.project_name_template}
+            placeholder={translate('Username')}
             valueClass="ellipsis"
-            space={1.5}
           />
         )}
-        <Field
+        <PropertyItem
           label={translate('Revokes when unmatched')}
-          value={row.revoke_when_unmatched ? translate('Yes') : translate('No')}
-          space={1.5}
+          value={propVal.boolean(row.revoke_when_unmatched)}
         />
-      </div>
-    </div>
+      </PropertyList.Section>
+    </PropertyList>
   </ExpandableContainer>
 );

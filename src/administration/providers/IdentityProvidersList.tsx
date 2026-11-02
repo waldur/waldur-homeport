@@ -3,7 +3,16 @@ import { ReactNode, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { IdentityProvider, overrideSettingsRetrieve } from 'waldur-js-client';
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from 'waldur-ui';
 
 import {
   EDUTEAMS_IDP,
@@ -19,14 +28,14 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useUrlTab } from '@/navigation/useUrlTab';
 import { SettingsDescription } from '@/SettingsDescription';
 import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { getIdentityProviders } from '../api';
-import { FieldRow } from '../settings/FieldRow';
+import { SettingsCard } from '../settings/SettingsCard';
+import { SettingsPropertyList } from '../settings/SettingsPropertyList';
 
 import { IdentityBridgeTab } from './IdentityBridgeTab';
 import { ProviderCard } from './ProviderCard';
@@ -92,31 +101,11 @@ const SettingsTabContent = ({
 
   if (actions || withCard) {
     return (
-      <FormTable.Card
-        title={groupName}
-        actions={actions}
-        className="card-bordered mb-4"
-      >
-        <FormTable>
-          {group.items.map((item) => (
-            <FieldRow
-              key={item.key}
-              item={item}
-              value={settingsData?.[item.key]}
-            />
-          ))}
-        </FormTable>
-      </FormTable.Card>
+      <SettingsCard group={group} values={settingsData} actions={actions} />
     );
   }
 
-  return (
-    <FormTable>
-      {group.items.map((item) => (
-        <FieldRow key={item.key} item={item} value={settingsData?.[item.key]} />
-      ))}
-    </FormTable>
-  );
+  return <SettingsPropertyList items={group.items} values={settingsData} />;
 };
 
 const ProvidersTabContent = ({
@@ -285,13 +274,13 @@ export const IdentityProvidersList = () => {
   if (!providersData || !settingsData) return null;
 
   return (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="card-title">
-          <h3>{translate('Identity & Authentication')}</h3>
-        </div>
-      </div>
-      <div className="card-body">
+    <Card bordered>
+      <CardHeader>
+        <CardTitle size="lg">
+          {translate('Identity & Authentication')}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
         <Tabs mount="all" value={activeKey} onValueChange={handleSelect}>
           <TabsList className="mb-4">
             {tabs.map((tab) => (
@@ -351,7 +340,7 @@ export const IdentityProvidersList = () => {
             ))}
           </>
         </Tabs>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

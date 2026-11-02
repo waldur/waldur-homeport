@@ -1,6 +1,7 @@
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { formatUsageValue } from '@/core/formatNumber';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 
 import { getUsagePercentOfLimitComponent } from './QuotaCell';
 import { QuotaProgressBar } from './QuotaProgressBar';
@@ -56,17 +57,15 @@ export const QuotaSingleView = ({
         label={typeof title === 'string' ? title : undefined}
       />
       {stacked ? (
-        <div className="mt-2.5">
+        <PropertyList variant="summary" className="mt-2.5" termWidth="sm">
           {details.map((detail) => (
-            <Field
+            <PropertyItem
               key={detail.label}
               label={detail.label}
               value={detail.value}
-              labelCol={6}
-              valueCol={6}
             />
           ))}
-        </div>
+        </PropertyList>
       ) : (
         <div className="flex flex-wrap *:flex-1 mt-2.5 gap-x-5">
           {details.map((detail) => (

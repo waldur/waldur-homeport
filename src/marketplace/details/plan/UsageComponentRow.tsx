@@ -1,12 +1,11 @@
 import { PlusMinusIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, PropertyItem } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { defaultCurrency, formatCurrency } from '@/core/formatCurrency';
 import { lazyComponent } from '@/core/lazyComponent';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
@@ -50,7 +49,7 @@ export const UsageComponentRow: FC<UsageComponentRowProps> = (props) => {
   const measuredUnit = props.offeringComponent.measured_unit;
 
   return (
-    <FormTable.Item
+    <PropertyItem
       label={props.offeringComponent.name}
       tooltip={
         limitAmount !== null && (

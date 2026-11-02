@@ -7,13 +7,15 @@ import {
   ReviewerPublication,
 } from 'waldur-js-client';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { ExternalLink } from '@/core/ExternalLink';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { OrcidLogo } from '@/core/OrcidLogo';
 import { translate } from '@/i18n';
 import { GenericPermission } from '@/permissions/types';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -209,7 +211,7 @@ export const ReviewerExpandableRow: FC<ReviewerExpandableRowProps> = ({
             title: translate('Profile'),
             content: (
               <>
-                <Field
+                <PropertyItem
                   label={translate('ORCID iD')}
                   value={
                     profile.orcid_id ? (
@@ -229,18 +231,18 @@ export const ReviewerExpandableRow: FC<ReviewerExpandableRowProps> = ({
                     )
                   }
                 />
-                <Field
+                <PropertyItem
                   label={translate('Reviews completed')}
-                  value={profile.stats?.total_reviews_completed ?? 0}
+                  value={propVal.count(profile.stats?.total_reviews_completed)}
                 />
-                <Field
+                <PropertyItem
                   label={translate('Biography')}
-                  value={
-                    profile.biography || (
-                      <span className="text-quaternary">
-                        {translate('Not provided')}
-                      </span>
-                    )
+                  value={profile.biography}
+                  hideIfEmpty={false}
+                  placeholder={
+                    <span className="text-quaternary">
+                      {translate('Not provided')}
+                    </span>
                   }
                 />
               </>

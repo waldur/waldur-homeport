@@ -1,10 +1,11 @@
 import { FunctionComponent } from 'react';
 import { BroadcastMessage } from 'waldur-js-client';
 
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
-import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { OptionsList } from './OptionsList';
@@ -20,26 +21,23 @@ export const BroadcastExpandableRow: FunctionComponent<{
         <p>{ENV.plugins.WALDUR_CORE.COMMON_FOOTER_TEXT}</p>
       </div>
       <div className="sm:col-span-4">
-        <OptionsList
-          label={translate('Organizations')}
-          list={row.query['customers']}
-        />
-
-        <OptionsList
-          label={translate('Offerings')}
-          list={row.query['offerings']}
-        />
-
-        <RecipientsField row={row} />
-
-        {row.send_at && (
-          <Field
-            label={translate('Send at')}
-            value={formatDateTime(row.send_at)}
-            labelCol={5}
-            valueCol={7}
+        {/* One list for the whole column: its rows come from here and from
+            OptionsList / RecipientsField, which take their layout from it. */}
+        <PropertyList variant="summary" termWidth="40%">
+          <OptionsList
+            label={translate('Organizations')}
+            list={row.query['customers']}
           />
-        )}
+          <OptionsList
+            label={translate('Offerings')}
+            list={row.query['offerings']}
+          />
+          <RecipientsField row={row} />
+          <PropertyItem
+            label={translate('Send at')}
+            value={propVal.date(row.send_at, { precision: 'datetime' })}
+          />
+        </PropertyList>
       </div>
     </div>
   </ExpandableContainer>

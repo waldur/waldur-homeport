@@ -27,6 +27,7 @@ export * from './MiddleTruncate';
 export * from './ModePicker';
 export * from './Popover';
 export * from './Progress';
+export * from './PropertyList';
 export * from './ScrollArea';
 export * from './ScrollSpy';
 export * from './SegmentedControl';

@@ -1,8 +1,11 @@
+import type { OpenStackVolume } from 'waldur-js-client';
+
+import { PropertyItem } from 'waldur-ui';
+
 import { formatFilesize } from '@/core/utils';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { ResourceLink } from '@/resource/ResourceLink';
-import { Field, ResourceSummaryProps } from '@/resource/summary';
+import { ResourceSummaryProps } from '@/resource/summary';
 
 const formatSize = (props) => {
   const filesize = formatFilesize(props.resource.size);
@@ -21,24 +24,28 @@ export const formatInstance = (resource) =>
     <>&ndash;</>
   );
 
-export const OpenStackVolumeSummary = (props: ResourceSummaryProps) => {
+export const OpenStackVolumeSummary = (
+  props: ResourceSummaryProps<OpenStackVolume>,
+) => {
   const { resource } = props;
-  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Component label={translate('Size')} value={formatSize(props)} />
-      <Component
+      <PropertyItem label={translate('Size')} value={formatSize(props)} />
+      <PropertyItem
         label={translate('Attached to')}
         value={formatInstance(props.resource)}
       />
 
-      <Component label={translate('Device')} value={resource.device} />
-      <Component
+      <PropertyItem label={translate('Device')} value={resource.device} />
+      <PropertyItem
         label={translate('Availability zone')}
         value={resource.availability_zone_name}
       />
 
-      <Component label={translate('Volume type')} value={resource.type_name} />
+      <PropertyItem
+        label={translate('Volume type')}
+        value={resource.type_name}
+      />
     </>
   );
 };

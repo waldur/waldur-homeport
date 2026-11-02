@@ -8,7 +8,7 @@ import {
   usersPartialUpdate,
 } from 'waldur-js-client';
 
-import { Badge, Switch } from 'waldur-ui';
+import { Badge, PropertyItem, PropertyList, Switch } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
@@ -16,12 +16,12 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton, StringGroup } from '@/form';
 import { CompactEditButton } from '@/form/CompactEditButton';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { propVal } from '@/property/propertyFields';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { formatIsdName, IsdBadges } from './IsdBadges';
@@ -173,31 +173,39 @@ const IdentityManagerSettings: FC<{ user: User }> = ({ user }) => {
   };
 
   return (
-    <FormTable detailsMode>
-      <FormTable.Item
-        label={translate('Identity manager')}
-        value={
-          <Switch
-            checked={isManager}
-            onCheckedChange={toggleIdentityManager}
-            label={isManager ? translate('Enabled') : translate('Disabled')}
-            disabled={toggleMutation.isPending}
-          />
-        }
-      />
-      {isManager && (
-        <FormTable.Item
-          label={translate('Managed ISDs')}
-          value={<IsdBadges isds={managedIsds} />}
-          actions={
-            <CompactEditButton
-              onClick={openEditIsdsDialog}
-              fieldName={translate('Managed ISDs')}
-            />
-          }
+    <div>
+      <div className="flex min-h-[52px] items-center justify-between gap-6 py-4 border-b border-secondary">
+        <div>
+          <label
+            htmlFor="identity-manager-toggle"
+            className="font-medium text-secondary mb-0 cursor-pointer"
+          >
+            {translate('Identity manager')}
+          </label>
+        </div>
+        <Switch
+          id="identity-manager-toggle"
+          checked={isManager}
+          onCheckedChange={toggleIdentityManager}
+          label={isManager ? translate('Enabled') : translate('Disabled')}
+          disabled={toggleMutation.isPending}
         />
+      </div>
+      {isManager && (
+        <PropertyList detailsMode>
+          <PropertyItem
+            label={translate('Managed ISDs')}
+            value={<IsdBadges isds={managedIsds} />}
+            actions={
+              <CompactEditButton
+                onClick={openEditIsdsDialog}
+                fieldName={translate('Managed ISDs')}
+              />
+            }
+          />
+        </PropertyList>
       )}
-    </FormTable>
+    </div>
   );
 };
 
@@ -241,32 +249,25 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
       </div>
 
       {/* Section A: Status Summary */}
-      <FormTable hideActions detailsMode>
-        <FormTable.Item
+      <PropertyList hideActions detailsMode>
+        <PropertyItem
           label={translate('Federation status')}
-          value={
-            status.is_federated ? (
-              <Badge variant="success" shape="pill" tone="outline">
-                {translate('Federated')}
-              </Badge>
-            ) : (
-              <Badge variant="secondary" shape="pill" tone="outline">
-                {translate('Local')}
-              </Badge>
-            )
-          }
+          value={propVal.boolean(status.is_federated, {
+            wording: [translate('Federated'), translate('Local')],
+            display: 'badge',
+          })}
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Connected ISDs')}
           value={<IsdBadges isds={status.active_isds} />}
         />
         {status.managed_isds?.length > 0 && (
-          <FormTable.Item
+          <PropertyItem
             label={translate('Managed ISDs')}
             value={<IsdBadges isds={status.managed_isds} />}
           />
         )}
-      </FormTable>
+      </PropertyList>
 
       {/* Section B: Attribute Provenance Table */}
       {attributeEntries.length > 0 && (

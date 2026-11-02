@@ -3,11 +3,11 @@ import { FunctionComponent } from 'react';
 import { marketplaceResourcesDetailsRetrieve } from 'waldur-js-client';
 import { Resource } from 'waldur-js-client';
 
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { PropertyItem } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { PlanDetailsLink } from '@/marketplace/details/plan/PlanDetailsLink';
-import { Field } from '@/resource/summary';
 import { ResourceComponentsSummary } from '@/resource/summary/ResourceComponentsSummary';
 import { ResourceSummary as ResourceSummaryResources } from '@/resource/summary/ResourceSummary';
 import {
@@ -18,7 +18,9 @@ import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { KeyValueButton } from '../KeyValueButton';
 
-const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
+const StaticResourceSummary: FunctionComponent<{ row: Resource }> = ({
+  row,
+}) => {
   const highlightedId = row.offering_plugin_options
     ?.require_effective_id_for_highlighted_display
     ? row.effective_id
@@ -26,30 +28,22 @@ const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
 
   // Use custom label if provided, otherwise default to "Backend ID"
   const backendIdLabel =
-    row.offering_plugin_options?.backend_id_display_label ||
+    (row.offering_plugin_options?.backend_id_display_label as string) ||
     translate('Backend ID');
 
   return (
     <ExpandableContainer hasMultiSelect asTable>
       {highlightedId &&
         row.offering_plugin_options?.highlight_backend_id_display && (
-          <Field
-            label={backendIdLabel}
-            value={
-              <span className="flex items-center gap-1.5">
-                <span>{highlightedId}</span>
-                <CopyToClipboardButton value={highlightedId} onlyButton />
-              </span>
-            }
-          />
+          <PropertyItem label={backendIdLabel} value={highlightedId} hasCopy />
         )}
 
-      <Field
+      <PropertyItem
         label={translate('Plan details')}
         value={row.plan_uuid && <PlanDetailsLink resource={row.uuid} />}
       />
 
-      <Field
+      <PropertyItem
         label={translate('Attributes')}
         value={
           row.attributes &&
@@ -62,7 +56,7 @@ const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
         }
       />
 
-      <Field
+      <PropertyItem
         label={translate('Options')}
         value={
           row.options &&

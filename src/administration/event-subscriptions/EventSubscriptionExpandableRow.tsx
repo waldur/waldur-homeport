@@ -1,9 +1,11 @@
 import { FC } from 'react';
 import { EventSubscription } from 'waldur-js-client';
 
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
-import { renderFieldOrDash } from '@/table/utils';
 
 interface EventSubscriptionExpandableRowProps {
   row: EventSubscription;
@@ -18,37 +20,30 @@ export const EventSubscriptionExpandableRow: FC<
     <ExpandableContainer>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
         <div>
-          <h6 className="mb-2.5">{translate('Subscription details')}</h6>
-          <table className="table table-sm">
-            <tbody>
-              <tr>
-                <td className="text-quaternary">{translate('UUID')}</td>
-                <td>
-                  <code>{row.uuid}</code>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('User UUID')}</td>
-                <td>
-                  <code>{row.user_uuid}</code>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Username')}</td>
-                <td>{row.user_username}</td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Full name')}</td>
-                <td>{renderFieldOrDash(row.user_full_name)}</td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Source IP')}</td>
-                <td>
-                  <code>{renderFieldOrDash(row.source_ip)}</code>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <PropertyList variant="summary" termWidth="md" hideIfEmpty={false}>
+            <PropertyList.Section title={translate('Subscription details')}>
+              <PropertyItem
+                label={translate('UUID')}
+                value={propVal.code(row.uuid)}
+              />
+              <PropertyItem
+                label={translate('User UUID')}
+                value={propVal.code(row.user_uuid)}
+              />
+              <PropertyItem
+                label={translate('Username')}
+                value={row.user_username}
+              />
+              <PropertyItem
+                label={translate('Full name')}
+                value={row.user_full_name}
+              />
+              <PropertyItem
+                label={translate('Source IP')}
+                value={propVal.code(row.source_ip)}
+              />
+            </PropertyList.Section>
+          </PropertyList>
         </div>
         <div>
           <h6 className="mb-2.5">{translate('Observable objects')}</h6>

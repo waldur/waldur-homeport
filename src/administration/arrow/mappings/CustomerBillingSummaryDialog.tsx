@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -9,7 +9,6 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { Field } from '@/resource/summary';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { SimpleTable } from '@/table/SimpleTable';
 
@@ -143,67 +142,51 @@ export const CustomerBillingSummaryDialog: FC<
               {/* Who the mapping links, beside what the period holds. */}
               <div className="grid grid-cols-1 gap-x-8 md:grid-cols-2">
                 <div>
-                  <Field
-                    label={translate('Arrow Reference')}
-                    value={data.arrow_reference}
-                    labelCol={6}
-                    valueCol={6}
-                    space={1.5}
-                  />
-                  <Field
-                    label={translate('Arrow Company')}
-                    value={data.arrow_company_name}
-                    labelCol={6}
-                    valueCol={6}
-                    space={1.5}
-                  />
-                  <Field
-                    label={translate('Waldur Organization')}
-                    value={data.waldur_customer_name}
-                    labelCol={6}
-                    valueCol={6}
-                    space={1.5}
-                  />
+                  <PropertyList variant="summary" termWidth="md" space={1.5}>
+                    <PropertyItem
+                      label={translate('Arrow Reference')}
+                      value={data.arrow_reference}
+                    />
+                    <PropertyItem
+                      label={translate('Arrow Company')}
+                      value={data.arrow_company_name}
+                    />
+                    <PropertyItem
+                      label={translate('Waldur Organization')}
+                      value={data.waldur_customer_name}
+                    />
+                  </PropertyList>
                 </div>
                 <div>
-                  <Field
-                    label={translate('Period')}
-                    value={<strong>{data.period}</strong>}
-                    labelCol={6}
-                    valueCol={6}
-                    space={1.5}
-                  />
-                  <Field
-                    label={translate('Total resources')}
-                    value={data.total_customer_resources}
-                    labelCol={6}
-                    valueCol={6}
-                    space={1.5}
-                  />
-                  <Field
-                    label={translate('With license ref (backend_id)')}
-                    value={data.resources_with_backend_id}
-                    labelCol={6}
-                    valueCol={6}
-                    space={1.5}
-                  />
-                  <Field
-                    label={translate('Consumption fetched')}
-                    value={
-                      <strong
-                        className={
-                          data.matched_resources > 0
-                            ? 'text-success'
-                            : 'text-quaternary'
-                        }
-                      >
-                        {data.matched_resources}
-                      </strong>
-                    }
-                    labelCol={6}
-                    valueCol={6}
-                    space={0}
-                  />
+                  <PropertyList variant="summary" termWidth="md" space={1.5}>
+                    <PropertyItem
+                      label={translate('Period')}
+                      value={<strong>{data.period}</strong>}
+                    />
+                    <PropertyItem
+                      label={translate('Total resources')}
+                      value={data.total_customer_resources}
+                    />
+                    <PropertyItem
+                      label={translate('With license ref (backend_id)')}
+                      value={data.resources_with_backend_id}
+                    />
+                    <PropertyItem
+                      label={translate('Consumption fetched')}
+                      value={
+                        <strong
+                          className={
+                            data.matched_resources > 0
+                              ? 'text-success'
+                              : 'text-quaternary'
+                          }
+                        >
+                          {data.matched_resources}
+                        </strong>
+                      }
+                      space={0}
+                    />
+                  </PropertyList>
                 </div>
               </div>
             </div>

@@ -1,12 +1,13 @@
 import { FC } from 'react';
 
+import { PropertyCard, PropertyList } from 'waldur-ui';
+
 import {
   BooleanEditField,
   EditFieldProvider,
   SelectEditField,
   StringEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
 import { OfferingEditPanelProps } from './types';
@@ -44,11 +45,12 @@ export const BackendIdRulesSection: FC<OfferingEditPanelProps> = (props) => {
   );
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('Backend ID rules')}
-      className="card-bordered mb-5.5"
+      className="mb-5.5"
     >
-      <FormTable>
+      <PropertyList>
         <EditFieldProvider scope={props.offering} callback={update}>
           <StringEditField
             name="backend_id_rules.format.regex"
@@ -84,7 +86,7 @@ export const BackendIdRulesSection: FC<OfferingEditPanelProps> = (props) => {
             )}
           />
         </EditFieldProvider>
-      </FormTable>
-    </FormTable.Card>
+      </PropertyList>
+    </PropertyCard>
   );
 };

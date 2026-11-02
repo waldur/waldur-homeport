@@ -2,7 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useMemo } from 'react';
 import { Project, projectCreditsList } from 'waldur-js-client';
 
-import { BaseButton, Switch } from 'waldur-ui';
+import {
+  BaseButton,
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -12,7 +17,6 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StaffOnlyIndicator } from '@/core/StaffOnlyIndicator';
 import { minimalConsumptionLogicOptions } from '@/customer/credits/constants';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { renderFieldOrDash } from '@/table/utils';
@@ -134,30 +138,24 @@ export const ProjectCredit: React.FC<ProjectCreditProps> = ({ project }) => {
   );
 
   return (
-    <FormTable.Card className="card-bordered">
+    <PropertyCard bordered>
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
         <LoadingErred loadData={refetch} />
       ) : (
         <>
-          <FormTable hideActions={!canEdit || !creditData}>
+          <PropertyList hideActions={!canEdit || !creditData}>
             {rows.map((row) => (
-              <FormTable.Item
+              <PropertyItem
                 key={row.key}
                 label={row.label}
                 value={
-                  SWITCH_ROWS.includes(row.key) ? (
-                    <Switch
-                      checked={!!row.value}
-                      label={
-                        row.value ? translate('Enabled') : translate('Disabled')
-                      }
-                      disabled
-                    />
-                  ) : (
-                    row.value
-                  )
+                  SWITCH_ROWS.includes(row.key)
+                    ? row.value
+                      ? translate('Enabled')
+                      : translate('Disabled')
+                    : row.value
                 }
                 actions={
                   // The compensation policy is edited as a whole, by staff,
@@ -172,7 +170,7 @@ export const ProjectCredit: React.FC<ProjectCreditProps> = ({ project }) => {
                 }
               />
             ))}
-          </FormTable>
+          </PropertyList>
           {creditData && user?.is_staff ? (
             <div className="mt-3 flex items-center gap-1">
               <BaseButton
@@ -192,6 +190,6 @@ export const ProjectCredit: React.FC<ProjectCreditProps> = ({ project }) => {
           {creditData ? <EarlierInvoices credit={creditData} /> : null}
         </>
       )}
-    </FormTable.Card>
+    </PropertyCard>
   );
 };

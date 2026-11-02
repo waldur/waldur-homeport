@@ -1,19 +1,17 @@
 import { FunctionComponent } from 'react';
 import { User } from 'waldur-js-client';
 
-import { HelpIcon, Tooltip } from 'waldur-ui';
+import { HelpIcon, PropertyItem, PropertyList, Tooltip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
-import { formatDate, formatDateTime } from '@/core/dateUtils';
-import { FieldWithCopy } from '@/core/FieldWithCopy';
 import { formatPhoneNumber } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { KeyValueButton } from '@/marketplace/resources/KeyValueButton';
+import { propVal } from '@/property/propertyFields';
 import { renderFieldOrDash } from '@/table/utils';
-import { formatUserIsActive, formatUserStatus } from '@/user/support/utils';
+import { formatUserStatus } from '@/user/support/utils';
 import { useUser } from '@/workspace/hooks';
 import { checkIsStaffOrSupport } from '@/workspace/selectors';
 
@@ -31,85 +29,82 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
   const isVisible = checkIsStaffOrSupport(user);
 
   return (
-    <FormTable hideActions alignTop detailsMode>
-      <FormTable.Item
+    <PropertyList hideActions alignTop detailsMode>
+      <PropertyItem
         label={translate('Full name')}
-        value={<FieldWithCopy value={props.user.full_name} />}
+        value={props.user.full_name}
+        hasCopy
       />
 
       {isProfileAttributeEnabled('native_name') && (
-        <FormTable.Item
+        <PropertyItem
           label={translate('Native name')}
-          value={<FieldWithCopy value={props.user.native_name} />}
+          value={props.user.native_name}
+          hasCopy
         />
       )}
-      <FormTable.Item
+      <PropertyItem
         label={translate('ID code')}
-        value={<FieldWithCopy value={props.user.civil_number} />}
+        value={props.user.civil_number}
+        hasCopy
       />
 
-      <FormTable.Item
+      <PropertyItem
         label={translate('Phone numbers')}
-        value={
-          <FieldWithCopy value={formatPhoneNumber(props.user.phone_number)} />
-        }
+        value={formatPhoneNumber(props.user.phone_number)}
+        hasCopy
       />
 
-      <FormTable.Item
+      <PropertyItem
         label={translate('Username')}
-        value={<FieldWithCopy value={props.user.username} />}
+        value={props.user.username}
+        hasCopy
       />
 
-      <FormTable.Item
+      <PropertyItem
         label={translate('Email')}
-        value={<FieldWithCopy value={props.user.email} />}
+        value={props.user.email}
+        hasCopy
       />
 
       {isFeatureVisible(UserFeatures.show_slug) && (
-        <FormTable.Item
+        <PropertyItem
           label={translate('Shortname')}
-          value={<FieldWithCopy value={props.user.slug} />}
+          value={props.user.slug}
+          hasCopy
         />
       )}
       {isFeatureVisible(UserFeatures.preferred_language) && (
-        <FormTable.Item
+        <PropertyItem
           label={translate('Preferred language')}
           value={props.user.preferred_language}
         />
       )}
-      <FormTable.Item
+      <PropertyItem
         label={translate('Registration method')}
         value={
-          <div className="flex justify-between items-center gap-1.5">
-            <div className="flex items-center gap-1.5">
-              {renderFieldOrDash(props.user.identity_provider_label)}
-              {props.user.should_protect_user_details && (
-                <Tooltip
-                  label={translate(
-                    'Profile fields (organization, name, email) are managed by the identity provider and cannot be edited in Waldur.',
-                  )}
-                >
-                  <Badge variant="purple" tone="outline">
-                    {translate('Details protected')}
-                  </Badge>
-                </Tooltip>
-              )}
-            </div>
-            {props.user.identity_provider_label && (
-              <CopyToClipboardButton
-                value={props.user.identity_provider_label}
-                size={20}
-                className="mb-0 mt-0"
-                buttonClassName="text-quaternary"
-              />
+          <div className="flex items-center gap-1.5">
+            {renderFieldOrDash(props.user.identity_provider_label)}
+            {props.user.should_protect_user_details && (
+              <Tooltip
+                label={translate(
+                  'Profile fields (organization, name, email) are managed by the identity provider and cannot be edited in Waldur.',
+                )}
+              >
+                <Badge variant="purple" tone="outline">
+                  {translate('Details protected')}
+                </Badge>
+              </Tooltip>
             )}
           </div>
         }
+        copyValue={props.user.identity_provider_label || undefined}
       />
 
-      <FormTable.Item
+      <PropertyItem
         label={translate('Identity source')}
-        value={<FieldWithCopy value={props.user.identity_source} />}
+        value={props.user.identity_source}
+        hasCopy
       />
 
       {/* Raw claims the identity provider asserted, for the claims listed in
@@ -118,58 +113,48 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
           rule fire for this user". Staff and support only — the backend omits
           the field entirely for everyone else. */}
       {isVisible && Object.keys(props.user.details ?? {}).length > 0 && (
-        <FormTable.Item
+        <PropertyItem
           label={translate('Identity provider claims')}
           value={
-            <div className="flex flex-col gap-1">
-              {Object.entries(props.user.details).map(([claim, value]) => (
-                <div key={claim}>
-                  <span className="me-1.5">{claim}</span>
-                  <FieldWithCopy
-                    value={
-                      Array.isArray(value) ? value.join(', ') : String(value)
-                    }
-                  />
-                </div>
-              ))}
-            </div>
+            <KeyValueButton
+              items={props.user.details}
+              title={translate('Identity provider claims')}
+            />
           }
         />
       )}
 
       {isProfileAttributeEnabled('uid_number') &&
         props.user.uid_number != null && (
-          <FormTable.Item
+          <PropertyItem
             label={translate('POSIX UID')}
-            value={<FieldWithCopy value={String(props.user.uid_number)} />}
+            value={props.user.uid_number}
+            hasCopy
           />
         )}
 
       {isProfileAttributeEnabled('primary_gid') &&
         props.user.primary_gid != null && (
-          <FormTable.Item
+          <PropertyItem
             label={translate('POSIX primary GID')}
-            value={<FieldWithCopy value={String(props.user.primary_gid)} />}
+            value={props.user.primary_gid}
+            hasCopy
           />
         )}
 
-      <FormTable.Item
+      <PropertyItem
         label={translate('Birth date')}
-        value={
-          <FieldWithCopy
-            value={
-              props.user.birth_date ? formatDate(props.user.birth_date) : null
-            }
-          />
-        }
+        value={propVal.date(props.user.birth_date)}
+        hasCopy
       />
 
-      <FormTable.Item
+      <PropertyItem
         label={translate('Date joined')}
-        value={<FieldWithCopy value={formatDateTime(props.user.date_joined)} />}
+        value={propVal.date(props.user.date_joined, { precision: 'datetime' })}
+        hasCopy
       />
 
-      <FormTable.Item
+      <PropertyItem
         label={
           <span className="inline-flex items-center gap-1">
             {translate('Organization')}
@@ -181,19 +166,22 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
             />
           </span>
         }
-        value={<FieldWithCopy value={props.user.organization} />}
+        value={props.user.organization}
+        hasCopy
       />
 
-      <FormTable.Item
+      <PropertyItem
         label={translate('Job position')}
-        value={<FieldWithCopy value={props.user.job_title} />}
+        value={props.user.job_title}
+        hasCopy
       />
 
       {Array.isArray(props.user.affiliations) &&
       props.user.affiliations.length > 0 ? (
-        <FormTable.Item
+        <PropertyItem
           label={translate('Affiliations')}
-          value={<FieldWithCopy value={props.user.affiliations.join(', ')} />}
+          value={propVal.list(props.user.affiliations)}
+          hasCopy
         />
       ) : null}
 
@@ -206,36 +194,40 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
           return null;
         }
         return (
-          <FormTable.Item
+          <PropertyItem
             key={field.attr}
             label={field.label()}
-            value={<FieldWithCopy value={value} />}
+            value={value}
+            hasCopy
           />
         );
       })}
 
       {isVisible && (
-        <FormTable.Item
+        <PropertyItem
           label={translate('User type')}
           value={formatUserStatus(props.user)}
         />
       )}
       {isVisible && (
-        <FormTable.Item
+        <PropertyItem
           label={translate('Account status')}
-          value={formatUserIsActive(props.user)}
+          value={propVal.boolean(props.user.is_active, {
+            wording: [translate('Active'), translate('Disabled')],
+          })}
         />
       )}
       {isVisible &&
         !props.user.is_active &&
         Boolean(props.user.deactivation_reason) && (
-          <FormTable.Item
+          <PropertyItem
             label={translate('Deactivation reason')}
-            value={<FieldWithCopy value={props.user.deactivation_reason} />}
+            value={props.user.deactivation_reason}
+            hasCopy
           />
         )}
       {isVisible && props.user.is_admin_deactivated && (
-        <FormTable.Item
+        <PropertyItem
           label={translate('Administrative status')}
           value={
             <div className="inline-flex items-center gap-1.5">
@@ -252,11 +244,12 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
         />
       )}
       {props.profile?.is_active && (
-        <FormTable.Item
+        <PropertyItem
           label={translate('FreeIPA')}
-          value={<FieldWithCopy value={props.profile?.username} />}
+          value={props.profile?.username}
+          hasCopy
         />
       )}
-    </FormTable>
+    </PropertyList>
   );
 };

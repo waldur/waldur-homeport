@@ -1,17 +1,17 @@
 import { FunctionComponent, ReactNode } from 'react';
 import { Issue } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { formatDateTime, formatRelative } from '@/core/dateUtils';
-import { ExternalLink } from '@/core/ExternalLink';
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { FormattedJira } from '@/core/FormattedJira';
-import { Link } from '@/core/Link';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { translate } from '@/i18n';
 import { linkify, withLineBreaks } from '@/issues/utils';
 import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { useUser } from '@/workspace/hooks';
 
 import { IssueAttachmentsContainer } from './attachments/IssueAttachmentsContainer';
@@ -92,63 +92,48 @@ export const IssueDetailsContent: FunctionComponent<
         }
       >
         <div className="max-w-[450px]">
-          <Field
-            label={translate('Caller')}
-            value={issue.caller_full_name}
-            isStuck
-            labelClass="min-w-[100px]"
-            className="text-sm"
-          />
-          <Field
-            label={translate('Created')}
-            value={translate('{relative} ago, {date}', {
-              relative: formatRelative(issue.created),
-              date: formatDateTime(issue.created),
-            })}
-            isStuck
-            labelClass="min-w-[100px]"
-            className="text-sm"
-          />
-          <Field
-            label={translate('Request type')}
-            value={issue.type}
-            isStuck
-            labelClass="min-w-[100px]"
-            className="text-sm"
-          />
-          {issue.link && staffOrSupport && (
-            <Field
-              label={translate('Link')}
-              value={
-                <ExternalLink
-                  label={translate('Open in Service Desk')}
-                  url={issue.link}
-                  iconless
-                  className="text-anchor"
-                />
-              }
-              isStuck
-              labelClass="min-w-[100px]"
+          <PropertyList variant="summary" termWidth="100px">
+            <PropertyItem
+              label={translate('Caller')}
+              value={issue.caller_full_name}
               className="text-sm"
             />
-          )}
-          {issue.order_uuid && (
-            <Field
-              label={translate('Order')}
-              value={
-                <Link
-                  state="marketplace-orders.details"
-                  params={{ order_uuid: issue.order_uuid }}
-                  className="text-link"
-                >
-                  {issue.order_resource_name || issue.order_uuid}
-                </Link>
-              }
-              isStuck
-              labelClass="min-w-[100px]"
+            <PropertyItem
+              label={translate('Created')}
+              value={translate('{relative} ago, {date}', {
+                relative: formatRelative(issue.created),
+                date: formatDateTime(issue.created),
+              })}
               className="text-sm"
             />
-          )}
+            <PropertyItem
+              label={translate('Request type')}
+              value={issue.type}
+              className="text-sm"
+            />
+            {issue.link && staffOrSupport && (
+              <PropertyItem
+                label={translate('Link')}
+                value={propVal.url(issue.link, {
+                  text: translate('Open in Service Desk'),
+                })}
+                className="text-sm"
+              />
+            )}
+            {issue.order_uuid && (
+              <PropertyItem
+                label={translate('Order')}
+                value={propVal.link(
+                  issue.order_resource_name || issue.order_uuid,
+                  {
+                    state: 'marketplace-orders.details',
+                    params: { order_uuid: issue.order_uuid },
+                  },
+                )}
+                className="text-sm"
+              />
+            )}
+          </PropertyList>
         </div>
       </PublicDashboardHero>
 

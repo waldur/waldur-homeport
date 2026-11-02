@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 
 interface ClusterResources {
   totalNodes: number;
@@ -23,24 +25,6 @@ interface K8sTotalResourcesCardProps {
   loadBalancerTooltip?: string;
 }
 
-const TotalClusterResourceItem = ({
-  label,
-  value,
-  tooltip,
-}: {
-  label: string;
-  value: React.ReactNode;
-  tooltip?: string;
-}) => (
-  <Field
-    label={label}
-    value={value}
-    tooltip={tooltip}
-    labelCol={12}
-    className="gap-y-2 w-[110px]"
-  />
-);
-
 export const K8sTotalResourcesCard: React.FC<K8sTotalResourcesCardProps> = ({
   totalResources,
   datacenterCount,
@@ -55,54 +39,67 @@ export const K8sTotalResourcesCard: React.FC<K8sTotalResourcesCardProps> = ({
         </h6>
       </div>
       <div className="card-body">
-        <div className="flex flex-wrap gap-3">
-          <TotalClusterResourceItem
+        {/* One list of totals, laid out as chips: each row is a fixed-width
+            column of label over value. */}
+        <PropertyList
+          variant="summary"
+          labelClass="w-full sm:w-full"
+          valueClass="w-full sm:w-full"
+          className="flex flex-wrap gap-3 [&>*]:w-[110px] [&>*]:gap-y-2"
+        >
+          <PropertyItem
             label={translate('Controllers')}
             value={totalResources.totalControllerNodes}
             tooltip={controllerTooltip}
           />
-          <TotalClusterResourceItem
+          <PropertyItem
             label={translate('Load balancers')}
             value={totalResources.totalLoadBalancerNodes}
             tooltip={loadBalancerTooltip}
           />
-          <TotalClusterResourceItem
+          <PropertyItem
             label={translate('Total nodes')}
             value={totalResources.totalNodes}
           />
-          <TotalClusterResourceItem
+          <PropertyItem
             label={translate('Total vCPUs')}
-            value={totalResources.totalVCpus + ' cores'}
+            value={propVal.number(totalResources.totalVCpus, { unit: 'cores' })}
           />
-          <TotalClusterResourceItem
+          <PropertyItem
             label={translate('Total RAM')}
-            value={totalResources.totalRam + ' GB'}
+            value={propVal.number(totalResources.totalRam, { unit: 'GB' })}
           />
-          <TotalClusterResourceItem
+          <PropertyItem
             label={translate('System + etcd')}
-            value={totalResources.totalSystemStorage + ' GB'}
+            value={propVal.number(totalResources.totalSystemStorage, {
+              unit: 'GB',
+            })}
           />
-          <TotalClusterResourceItem
+          <PropertyItem
             label={translate('Workers')}
             value={totalResources.totalWorkerNodes}
           />
-          <TotalClusterResourceItem
+          <PropertyItem
             label={translate('Storage')}
             value={totalResources.totalStorageNodes}
           />
-          <TotalClusterResourceItem
+          <PropertyItem
             label={translate('Data + logs')}
-            value={totalResources.totalDataStorage + ' GB'}
+            value={propVal.number(totalResources.totalDataStorage, {
+              unit: 'GB',
+            })}
           />
-          <TotalClusterResourceItem
+          <PropertyItem
             label={translate('SAN storage')}
-            value={totalResources.totalSanStorage + ' GB'}
+            value={propVal.number(totalResources.totalSanStorage, {
+              unit: 'GB',
+            })}
           />
-          <TotalClusterResourceItem
+          <PropertyItem
             label={translate('Datacenters')}
-            value={datacenterCount}
+            value={propVal.number(datacenterCount)}
           />
-        </div>
+        </PropertyList>
       </div>
     </div>
   );

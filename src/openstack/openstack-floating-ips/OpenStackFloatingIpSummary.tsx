@@ -1,29 +1,31 @@
-import FormTable from '@/form/FormTable';
-import { translate } from '@/i18n';
-import { Field, ResourceSummaryProps } from '@/resource/summary';
-import { renderFieldOrDash } from '@/table/utils';
+import type { OpenStackFloatingIp } from 'waldur-js-client';
 
-export const OpenStackFloatingIpSummary = (props: ResourceSummaryProps) => {
+import { PropertyItem } from 'waldur-ui';
+
+import { translate } from '@/i18n';
+import { ResourceSummaryProps } from '@/resource/summary';
+
+export const OpenStackFloatingIpSummary = (
+  props: ResourceSummaryProps<OpenStackFloatingIp>,
+) => {
   const { resource } = props;
-  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Component
+      <PropertyItem
         label={translate('Runtime state')}
         value={resource.runtime_state}
       />
-      <Component
+      <PropertyItem
         label={translate('Backend ID')}
-        value={renderFieldOrDash(resource.backend_id)}
-        hasCopy={!!resource.backend_id}
+        value={resource.backend_id}
+        hasCopy
       />
-      {resource.external_address && (
-        <Component
-          label={translate('Public IP')}
-          value={resource.external_address}
-          hasCopy
-        />
-      )}
+      <PropertyItem
+        label={translate('Public IP')}
+        value={resource.external_address}
+        hasCopy
+        hideIfEmpty
+      />
     </>
   );
 };

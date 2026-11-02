@@ -4,6 +4,8 @@ import {
   PublicMaintenanceAnnouncement,
 } from 'waldur-js-client';
 
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import {
   ANNOUNCEMENT_ICON,
   getAnnouncementTypeLabel,
@@ -12,7 +14,7 @@ import { formatDateTime } from '@/core/dateUtils';
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { renderFieldOrDash } from '@/table/utils';
 
 // MAINTENANCE_TYPE: Emergency = 2, Security = 3 map to the "danger" variant.
@@ -115,33 +117,6 @@ export const AnnouncementDetailsDialog: FC<{
     );
   };
 
-  const renderMaintenanceFields = () => {
-    if (!isMaintenance || hasStructuredContent) return null;
-
-    return (
-      <>
-        {view.serviceProvider && (
-          <Field
-            label={translate('Service Provider')}
-            value={view.serviceProvider}
-          />
-        )}
-        {view.scheduledStart && (
-          <Field
-            label={translate('Ongoing Since')}
-            value={formatDateTime(view.scheduledStart)}
-          />
-        )}
-        {view.scheduledEnd && (
-          <Field
-            label={translate('Expected Completion')}
-            value={formatDateTime(view.scheduledEnd)}
-          />
-        )}
-      </>
-    );
-  };
-
   const renderStructuredContent = () => {
     if (!hasStructuredContent) return null;
 
@@ -149,18 +124,6 @@ export const AnnouncementDetailsDialog: FC<{
       <div className="mb-3">
         <SafeMarkdown text={view.description} />
       </div>
-    );
-  };
-
-  const renderMessageField = () => {
-    // Only show message field for non-structured content
-    if (hasStructuredContent) return null;
-
-    return (
-      <Field
-        label={translate('Message')}
-        value={<SafeMarkdown text={view.description} />}
-      />
     );
   };
 
@@ -215,20 +178,53 @@ export const AnnouncementDetailsDialog: FC<{
     >
       {renderMaintenanceHeader()}
       {renderStructuredContent()}
-      {renderMaintenanceFields()}
-      {renderMessageField()}
+
+      {isMaintenance && !hasStructuredContent && (
+        <PropertyList variant="summary">
+          <PropertyItem
+            label={translate('Service Provider')}
+            value={view.serviceProvider}
+          />
+          {view.scheduledStart && (
+            <PropertyItem
+              label={translate('Ongoing Since')}
+              value={propVal.date(view.scheduledStart, {
+                precision: 'datetime',
+              })}
+            />
+          )}
+          {view.scheduledEnd && (
+            <PropertyItem
+              label={translate('Expected Completion')}
+              value={propVal.date(view.scheduledEnd, {
+                precision: 'datetime',
+              })}
+            />
+          )}
+          <PropertyItem
+            label={translate('Message')}
+            value={propVal.richText(view.description, { format: 'markdown' })}
+          />
+        </PropertyList>
+      )}
 
       {!isMaintenance && (
-        <>
-          <Field
+        <PropertyList variant="summary">
+          {!hasStructuredContent && (
+            <PropertyItem
+              label={translate('Message')}
+              value={propVal.richText(view.description, { format: 'markdown' })}
+            />
+          )}
+          <PropertyItem
             label={translate('Active from')}
-            value={formatDateTime(view.activeFrom)}
+            value={propVal.date(view.activeFrom, { precision: 'datetime' })}
           />
-          <Field
+          <PropertyItem
             label={translate('Active to')}
-            value={formatDateTime(view.activeTo)}
+            value={propVal.date(view.activeTo, { precision: 'datetime' })}
           />
-        </>
+        </PropertyList>
       )}
 
       {renderAffectedOfferings()}

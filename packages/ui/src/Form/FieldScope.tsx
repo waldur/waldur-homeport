@@ -28,8 +28,8 @@ const useIdList = () => {
 /**
  * The linking half of `FormField`, with no element of its own: controls inside
  * register with it and the labels inside point at the first. For a label and
- * its control that cannot share a wrapper, such as the two cells of a table
- * row (`FormTable.Item`). Draw the label with `FormLabel`, or read the target
+ * its control that cannot share a wrapper, such as the two cells of a
+ * property row (`PropertyItem`). Draw the label with `FormLabel`, or read the target
  * with `useFieldLabelFor` for a label of your own.
  */
 export const FieldScope = ({ controlId, group, children }: FieldScopeProps) => {

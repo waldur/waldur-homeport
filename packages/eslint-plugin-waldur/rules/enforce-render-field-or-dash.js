@@ -21,6 +21,7 @@ const SKIP_PROPERTIES = new Set([
 const EXCLUDED_FILE_PATTERNS = [
   /table\/utils/,
   /table\/constants/,
+  /property\//,
   /exporters?\//,
   /Export[^/]*\.tsx?$/,
   /ExportDropdown\.tsx?$/,

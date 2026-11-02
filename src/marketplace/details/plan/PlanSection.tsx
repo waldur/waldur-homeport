@@ -3,6 +3,8 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
 import { useShouldConcealPrices } from '@/marketplace/common/useShouldConcealPrices';
@@ -17,7 +19,6 @@ import {
   useGroupedComponents,
 } from '@/marketplace/orders/details/type-based/ComponentsSection';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import { Field } from '@/resource/summary';
 
 import { useOrderPrices } from './utils';
 
@@ -59,23 +60,23 @@ const PlanCard = ({
 
   return (
     <Panel title={title} cardBordered>
-      <Field
-        label={translate('Name')}
-        labelWidth={200}
-        value={
-          <span className="inline-flex items-center gap-1.5">
-            {renderValue(planName)}
-            <PlanBillingModeBadge mode={planBillingMode} />
-          </span>
-        }
-      />
-      {planDescription && (
-        <Field
-          label={translate('Description')}
-          labelWidth={200}
-          value={<PlanDescriptionButton planDescription={planDescription} />}
+      <PropertyList variant="summary" termWidth="md">
+        <PropertyItem
+          label={translate('Name')}
+          value={
+            <span className="inline-flex items-center gap-1.5">
+              {renderValue(planName)}
+              <PlanBillingModeBadge mode={planBillingMode} />
+            </span>
+          }
         />
-      )}
+        {planDescription && (
+          <PropertyItem
+            label={translate('Description')}
+            value={<PlanDescriptionButton planDescription={planDescription} />}
+          />
+        )}
+      </PropertyList>
 
       {hasPeriodicRows && (
         <ComponentsSection

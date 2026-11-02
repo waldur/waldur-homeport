@@ -6,6 +6,8 @@ import {
   marketplaceProviderOfferingsUpdateOverview,
 } from 'waldur-js-client';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { CheckOrX } from '@/core/CheckOrX';
 import { UI_STALE_TIME } from '@/core/constants';
 import { FormattedHtml } from '@/core/FormattedHtml';
@@ -17,12 +19,12 @@ import {
   MarkdownEditField,
   StringEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
 import { formatCoordinates } from '@/map/coordinates';
 import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { propVal } from '@/property/propertyFields';
 
 import { OfferingSectionProps } from '../types';
 
@@ -104,12 +106,14 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
             disabled={isRemote}
             tooltip={remoteTooltip}
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Getting started instructions')}
             description={translate(
               'Provide steps to help users begin using the offering.',
             )}
-            value={<CheckOrX value={props.offering.getting_started} />}
+            value={propVal.boolean(Boolean(props.offering.getting_started), {
+              wording: 'enabled',
+            })}
             actions={
               <EditGettingStartedButton
                 offering={props.offering}
@@ -159,12 +163,14 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
         </TabbedSection.Tab>
 
         <TabbedSection.Tab id="media" title={translate('Media')}>
-          <FormTable.Item
+          <PropertyItem
             label={translate('Logo')}
             description={translate(
               'Upload an image to represent the offering visually.',
             )}
-            value={<CheckOrX value={props.offering.thumbnail} />}
+            value={propVal.boolean(Boolean(props.offering.thumbnail), {
+              wording: 'enabled',
+            })}
             actions={
               <OfferingMediaButton
                 offering={props.offering}
@@ -173,12 +179,14 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
               />
             }
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Image')}
             description={translate(
               'Upload a background image for the offering.',
             )}
-            value={<CheckOrX value={props.offering.image} />}
+            value={propVal.boolean(Boolean(props.offering.image), {
+              wording: 'enabled',
+            })}
             actions={
               <OfferingMediaButton
                 offering={props.offering}
@@ -190,7 +198,7 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
         </TabbedSection.Tab>
 
         <TabbedSection.Tab id="access" title={translate('Access & Discovery')}>
-          <FormTable.Item
+          <PropertyItem
             label={translate('Location')}
             description={translate('Specify where the offering is hosted.')}
             value={
@@ -203,16 +211,12 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
               />
             }
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Tags')}
             description={translate(
               'Add tags to help users find this offering more easily.',
             )}
-            value={
-              props.offering.tags?.length > 0
-                ? props.offering.tags.map((tag) => tag.name).join(', ')
-                : 'N/A'
-            }
+            value={propVal.list(props.offering.tags?.map((tag) => tag.name))}
             actions={
               <EditTagsButton
                 offering={props.offering}
@@ -220,14 +224,14 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
               />
             }
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Service profile')}
             description={translate(
               'Bind to a profile to use a centrally-managed role catalog (staff-only).',
             )}
-            value={
-              (props.offering as any).profile_name || translate('— None —')
-            }
+            value={props.offering.profile_name}
+            placeholder={translate('— None —')}
+            hideIfEmpty={false}
             actions={
               <EditOfferingProfileButton
                 offering={props.offering}
@@ -238,18 +242,14 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
         </TabbedSection.Tab>
 
         <TabbedSection.Tab id="compliance" title={translate('Compliance')}>
-          <FormTable.Item
+          <PropertyItem
             label={translate('Access policies')}
             description={translate(
               'Define the organization groups that are allowed to access the offering.',
             )}
-            value={
-              props.offering.organization_groups?.length > 0
-                ? props.offering.organization_groups
-                    .map(({ name }) => name)
-                    .join(', ')
-                : 'N/A'
-            }
+            value={propVal.list(
+              props.offering.organization_groups?.map(({ name }) => name),
+            )}
             actions={
               <SetAccessPolicyButton
                 offering={props.offering}
@@ -257,12 +257,10 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
               />
             }
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Compliance checklist')}
             value={
-              !props.offering.has_compliance_requirements ? (
-                'N/A'
-              ) : (
+              !props.offering.has_compliance_requirements ? null : (
                 <>
                   {!checklistQuery.data && (
                     <CheckIcon weight="bold" className="text-info" />
@@ -300,10 +298,7 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
         </TabbedSection.Tab>
 
         <TabbedSection.Tab id="identifiers" title={translate('Identifiers')}>
-          <FormTable.Item
-            label={translate('UUID')}
-            value={props.offering.uuid}
-          />
+          <PropertyItem label={translate('UUID')} value={props.offering.uuid} />
           <StringEditField
             name="backend_id"
             label={translate('Backend ID')}

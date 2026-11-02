@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { customersPartialUpdate } from 'waldur-js-client';
 
+import { PropertyList } from 'waldur-ui';
+
 import { MembershipRestrictionFormItems } from '@/core/restrictions';
 import { EditFieldProvider } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
@@ -43,9 +44,9 @@ export const CustomerMembershipRestrictionsPanel: FC<
   return (
     <div className="p-5">
       <EditFieldProvider scope={customer} callback={updateCustomer}>
-        <FormTable hideActions={!canEdit}>
+        <PropertyList hideActions={!canEdit}>
           <MembershipRestrictionFormItems />
-        </FormTable>
+        </PropertyList>
       </EditFieldProvider>
     </div>
   );

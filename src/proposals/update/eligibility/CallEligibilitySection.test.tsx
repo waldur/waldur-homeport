@@ -82,7 +82,7 @@ describe('CallEligibilitySection', () => {
     const row = screen
       .getByText('User affiliations')
       // eslint-disable-next-line testing-library/no-node-access
-      .closest('tr') as HTMLElement;
+      .closest('[data-slot="property-item"]') as HTMLElement;
     await user.click(within(row).getByTestId('edit-user_affiliations'));
 
     const resolveProps = vi.mocked(openDialog).mock.calls[0][1].resolve;
@@ -116,7 +116,7 @@ describe('CallEligibilitySection', () => {
     const row = screen
       .getByText('User affiliations')
       // eslint-disable-next-line testing-library/no-node-access
-      .closest('tr') as HTMLElement;
+      .closest('[data-slot="property-item"]') as HTMLElement;
     await user.click(within(row).getByTestId('edit-user_affiliations'));
 
     const resolveProps = vi.mocked(openDialog).mock.calls[0][1].resolve;
@@ -180,7 +180,7 @@ describe('CallEligibilitySection', () => {
       const row = screen
         .getByText('Assurance levels')
         // eslint-disable-next-line testing-library/no-node-access
-        .closest('tr') as HTMLElement;
+        .closest('[data-slot="property-item"]') as HTMLElement;
       expect(row).toBeInTheDocument();
       expect(
         within(row).getByRole('button', { name: 'Warning' }),

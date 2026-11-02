@@ -7,7 +7,7 @@ import {
   projectsPartialUpdate,
 } from 'waldur-js-client';
 
-import { BaseButton, HelpIcon } from 'waldur-ui';
+import { BaseButton, HelpIcon, PropertyList } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -16,7 +16,6 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
 import { MembershipRestrictionFormItems } from '@/core/restrictions';
 import { EditFieldProvider } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -123,9 +122,9 @@ export const ProjectMembershipRestrictions: FC<
       }
     >
       <EditFieldProvider scope={project} callback={updateProject}>
-        <FormTable hideActions={!canEdit}>
+        <PropertyList hideActions={!canEdit}>
           <MembershipRestrictionFormItems />
-        </FormTable>
+        </PropertyList>
       </EditFieldProvider>
     </Panel>
   );
