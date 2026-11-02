@@ -88,7 +88,7 @@ export const MatrixCallHost: FC = () => {
     return rooms.find((r: any) => r.room_id === callRoomId) ?? null;
   }, [rooms, callRoomId]);
 
-  const roomName = (callRoom as any)?.room_name || translate('Call');
+  const roomName = (callRoom as any)?.room_name || translate('Video call');
 
   // Document PiP outranks in-page destinations. Otherwise pick dock vs widget.
   const destination = pipWindow

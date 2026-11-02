@@ -33,7 +33,7 @@ const ROOMS_TAB = {
 // is staff-gated alongside Settings; support sees only the rooms list.
 const CALLS_TAB = {
   key: 'calls',
-  title: translate('Calls'),
+  title: translate('Video calls'),
   component: lazyComponent(() => import('./admin/livekit/LiveKitCallsTab')),
 };
 

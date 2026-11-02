@@ -34388,12 +34388,6 @@
       "feature_area": "assignments"
     }
   },
-  "No association": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "auth"
-    }
-  },
   "No attachments.": {
     "context": {
       "primary_ui_type": "text_content",
@@ -35771,6 +35765,12 @@
   "No roles were granted on the project.": {
     "context": {
       "feature_area": "proposal"
+    }
+  },
+  "No roles yet": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "auth"
     }
   },
   "No rounds": {
@@ -72165,6 +72165,16 @@
     }
   },
   "Video URL for the video-background login page layout. Supports MP4 format. Leave empty to use default sample video.": {},
+  "Video call": {
+    "context": {
+      "feature_area": "call"
+    }
+  },
+  "Video calls": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "View": {
     "context": {
       "primary_ui_type": "title",
@@ -74567,6 +74577,8 @@
       "feature_area": "quotas"
     }
   },
+  "You have not been given access to an organization or project.": {},
+  "You have not been given access to an organization, project or call.": {},
   "You have one passkey. If you lose that device you will need an administrator to remove it before you can sign in again. A second passkey — on a phone, or a security key — avoids that.": {
     "context": {
       "feature_area": "passkeys"
@@ -74744,11 +74756,6 @@
   "Your account does not satisfy the applicant eligibility requirements of this call.": {
     "context": {
       "feature_area": "details"
-    }
-  },
-  "Your account is not part of any organization. Your view will be restricted.": {
-    "context": {
-      "feature_area": "auth"
     }
   },
   "Your answers are being submitted.": {
