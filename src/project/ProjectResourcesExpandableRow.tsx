@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 import {
   marketplacePublicOfferingsList,
@@ -10,13 +9,11 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { Popover, PopoverContent, PopoverTrigger } from 'waldur-ui';
-
 import { UI_STALE_TIME } from '@/core/constants';
 import { formatUsageValue } from '@/core/formatNumber';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { PercentProgress } from '@/core/PercentProgress';
 import { translate } from '@/i18n';
-import { QuotaProgressBar } from '@/marketplace/resources/details/QuotaProgressBar';
 import {
   formatQuotaUnits,
   getQuotaCellProps,
@@ -45,159 +42,122 @@ const mandatoryFields = resourcesListRequiredFields(false).concat([
 // while the offerings are not loaded.
 const NO_OFFERINGS: PublicOfferingDetails[] = [];
 
-// Components worth a usage/limit figure: the ones metered or capped per
-// resource. Fixed-price components carry no usage.
+// Components worth a usage figure: the ones metered or capped per resource.
+// Fixed-price components carry no usage.
 const isMeasuredComponent = (component: OfferingComponent) =>
   component.billing_type === 'limit' ||
   component.billing_type === 'usage' ||
   (component.billing_type === 'one' && component.is_prepaid);
 
-interface ComponentUsage {
+interface ComponentQuota {
   component: OfferingComponent;
   usage: string | number;
   limit: string | number | null;
-  displayUnit: string;
+  units: string;
   percent: number | null;
-  isTotal: boolean;
 }
 
-const getComponentUsage = (
+const getComponentQuota = (
   component: OfferingComponent,
   row: Resource,
-): ComponentUsage => {
+): ComponentQuota => {
   const { usage, limit, displayUnit, isTotal } = getQuotaCellProps(
     component,
     row,
   );
-  // getQuotaCellProps gives "0" for a limit the resource does not store, so
-  // only a positive limit counts; otherwise 0 / 0 would show as "NaN%".
-  const hasLimit = Number(limit) > 0;
-  const percent = hasLimit
-    ? Math.round((Number(usage) / Number(limit)) * 100)
-    : null;
+  // getQuotaCellProps gives "0" for a limit the resource does not store. Only
+  // a positive limit counts, or any usage at all would read as 100% of it.
+  const limitValue = Number(limit);
+  const percent =
+    limitValue > 0 ? Math.round((Number(usage) / limitValue) * 100) : null;
   return {
     component,
     usage,
-    limit: hasLimit ? limit : null,
-    displayUnit,
+    limit: limitValue > 0 ? limit : null,
+    units: formatQuotaUnits(displayUnit, isTotal),
     percent: Number.isFinite(percent) ? percent : null,
-    isTotal,
   };
 };
 
-const formatFigures = (item: ComponentUsage) => {
-  const units = formatQuotaUnits(item.displayUnit, item.isTotal);
-  return (
-    (item.limit !== null
-      ? `${formatUsageValue(item.usage)} / ${formatUsageValue(item.limit)}`
-      : formatUsageValue(item.usage)) + (units ? ` ${units}` : '')
-  );
-};
+type QuotaOfferings = Pick<PublicOfferingDetails, 'uuid' | 'components'>[];
 
-// Same thresholds as QuotaProgressBar, for figures shown without a bar.
-const getFiguresClassName = (percent: number | null) =>
-  percent === null || percent < 33
-    ? undefined
-    : percent < 66
-      ? 'text-warning'
-      : 'text-danger';
-
-const UsageLine: FC<{ item: ComponentUsage }> = ({ item }) => (
-  <>
-    <span className="text-tertiary truncate" title={item.component.name}>
-      {item.component.name}
-    </span>
-    {item.percent !== null ? (
-      <QuotaProgressBar
-        percent={Math.min(item.percent, 100)}
-        size="xs"
-        label={item.component.name}
-      />
-    ) : (
-      <span />
-    )}
-    <span className="whitespace-nowrap">
-      {formatFigures(item)}
-      {item.percent !== null && (
-        <span className="text-tertiary ms-1">({item.percent}%)</span>
-      )}
-    </span>
-  </>
-);
-
-// Fixed label and bar widths, so bars and figures line up across components
-// and across the resource rows, each of which renders its own grid.
-const usageGridClassName =
-  'grid grid-cols-[9rem_5rem_auto] items-center gap-x-3 gap-y-1 text-xs';
-
-// Two components fit on one line within the standard row height.
-const INLINE_COMPONENTS = 2;
-
-export const ResourceUsageLimits: FC<{
-  row: Resource;
-  offerings: Pick<PublicOfferingDetails, 'uuid' | 'components'>[];
-  isLoading: boolean;
-}> = ({ row, offerings, isLoading }) => {
-  if (isLoading) {
-    return <LoadingSpinnerSimple />;
-  }
-  // Closest to its limit first, so the inline summary shows what matters;
-  // components without a limit keep their offering order after them.
-  const items = (
+/**
+ * The component a row shows: the one closest to its limit, as on the project
+ * dashboard; one without a limit only when none has one. `count` is how many
+ * the offering measures, so the cell can name the one it picked.
+ */
+const getResourceQuota = (row: Resource, offerings: QuotaOfferings) => {
+  const quotas = (
     offerings.find((offering) => offering.uuid === row.offering_uuid)
       ?.components || []
   )
     .filter(isMeasuredComponent)
-    .map((component) => getComponentUsage(component, row))
-    .sort((a, b) => (b.percent ?? -1) - (a.percent ?? -1));
-  if (!items.length) {
+    .map((component) => getComponentQuota(component, row));
+  // A stable sort, so components without a limit keep their offering order.
+  const [quota] = [...quotas].sort(
+    (a, b) => (b.percent ?? -1) - (a.percent ?? -1),
+  );
+  return { quota, count: quotas.length };
+};
+
+// Same thresholds as the dashboard's usage bar.
+const getQuotaVariant = (percent: number) =>
+  percent > 66 ? 'danger' : percent > 33 ? 'warning' : undefined;
+
+interface QuotaCellProps {
+  row: Resource;
+  offerings: QuotaOfferings;
+  isLoading: boolean;
+}
+
+/** Used of total, or the usage alone where the resource stores no limit. */
+export const ResourceQuotaFigures: FC<QuotaCellProps> = ({
+  row,
+  offerings,
+  isLoading,
+}) => {
+  if (isLoading) {
+    return <LoadingSpinnerSimple />;
+  }
+  const { quota, count } = getResourceQuota(row, offerings);
+  if (!quota) {
     return <>{DASH_ESCAPE_CODE}</>;
   }
-  const hiddenCount = items.length - INLINE_COMPONENTS;
+  const figures =
+    quota.limit !== null
+      ? `${formatUsageValue(quota.usage)}/${formatUsageValue(quota.limit)}`
+      : formatUsageValue(quota.usage);
   return (
-    // Fixed name and minimum figure widths line the components up across rows.
-    <div className="flex items-center gap-1.5 text-xs whitespace-nowrap">
-      {items.slice(0, INLINE_COMPONENTS).map((item, index) => (
-        <span key={item.component.type} className="flex items-center gap-1.5">
-          {index > 0 && <span className="text-tertiary">·</span>}
-          <span
-            className="text-tertiary w-28 truncate"
-            title={item.component.name}
-          >
-            {item.component.name}
-          </span>
-          <span
-            className={classNames(
-              'min-w-28',
-              getFiguresClassName(item.percent),
-            )}
-          >
-            {formatFigures(item)}
-          </span>
-        </span>
-      ))}
-      {hiddenCount > 0 && (
-        <Popover>
-          <PopoverTrigger asChild>
-            <button type="button" className="text-brand cursor-pointer">
-              {translate('+{count} more', { count: hiddenCount })}
-            </button>
-          </PopoverTrigger>
-          <PopoverContent
-            side="bottom"
-            align="end"
-            sideOffset={4}
-            className="p-2.5 max-h-(--radix-popover-content-available-height) overflow-y-auto"
-          >
-            <div className={usageGridClassName}>
-              {items.map((item) => (
-                <UsageLine key={item.component.type} item={item} />
-              ))}
-            </div>
-          </PopoverContent>
-        </Popover>
+    <>
+      {count > 1 && (
+        <span className="text-tertiary me-1.5">{quota.component.name}</span>
       )}
-    </div>
+      {figures}
+      {quota.units && ` ${quota.units}`}
+    </>
+  );
+};
+
+/** The same component's share of its limit, as a bar. */
+export const ResourceQuotaBar: FC<QuotaCellProps> = ({
+  row,
+  offerings,
+  isLoading,
+}) => {
+  if (isLoading) {
+    return <LoadingSpinnerSimple />;
+  }
+  const { quota } = getResourceQuota(row, offerings);
+  if (quota?.percent == null) {
+    return <>{DASH_ESCAPE_CODE}</>;
+  }
+  return (
+    <PercentProgress
+      value={quota.percent}
+      variant={getQuotaVariant(quota.percent)}
+      label={quota.component.name}
+      compact
+    />
   );
 };
 
@@ -259,17 +219,26 @@ const ProjectResourcesTable: FC<{ projectUuid: string }> = ({
         id: 'state',
       },
       {
-        title: translate('Usage / limit'),
+        title: translate('Used/total units'),
         render: ({ row }) => (
-          <ResourceUsageLimits
+          <ResourceQuotaFigures
+            row={row}
+            offerings={offerings}
+            isLoading={isLoading}
+          />
+        ),
+        id: 'used',
+      },
+      {
+        title: translate('Usage'),
+        render: ({ row }) => (
+          <ResourceQuotaBar
             row={row}
             offerings={offerings}
             isLoading={isLoading}
           />
         ),
         id: 'usage',
-        // The summary must not be clipped; the column grows to fit it.
-        ellipsis: false,
       },
     ],
     [offerings, isLoading],

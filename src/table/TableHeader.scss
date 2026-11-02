@@ -99,6 +99,6 @@ th.first-expandable-column > .th-content {
 }
 
 .cell-with-expander-header .all-rows-expander {
-  // 12 px gap to the title only; the title, sort and pin keep the usual spacing.
-  margin: -2px 10px -2px -2px;
+  // Placed as the rows' expander: no left offset, 12 px gap to the title.
+  margin: -2px 12px -2px 0;
 }

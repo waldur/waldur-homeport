@@ -1,5 +1,5 @@
-// First-column text offset: 16px cell padding + 20px caret + 12px gap
-$expandArrowWidth: 48px;
+// First-column text offset: 16px cell padding + 24px expander + 12px gap
+$expandArrowWidth: 52px;
 $checkboxWidth: 32px;
 
 // The page's padding, the table's own cells and the arrow column around an
@@ -8,8 +8,11 @@ $checkboxWidth: 32px;
 $tableSidesSpace: 180px;
 $sidebar: var(--layout-sidebar-width, 0px);
 
-table .has-multiselect .expandable-container {
+// The table's own expanded row past a checkbox column (TableBody), not a
+// nested table's inside it.
+table tr.has-multiselect > td > .expandable-container {
   margin-left: calc($expandArrowWidth + $checkboxWidth);
+  width: calc(100vw - $tableSidesSpace - $sidebar - $checkboxWidth);
 }
 
 table .expandable-container {
@@ -137,6 +140,12 @@ $fullWidthCellPadding: 24px;
   }
 }
 
+// The rule above outranks the row-level one at the top of this file, so a
+// full-width table's checkbox column needs its own.
+.card-table.full-width table tr.has-multiselect > td > .expandable-container {
+  margin-left: calc($expandArrowWidth - $fullWidthCellPadding + $checkboxWidth);
+}
+
 // Opt-out for tables that don't span the content area. The viewport arithmetic
 // above assumes the table is as wide as the page minus the aside; a table in a
 // narrower column (a proposal panel beside the progress rail, a modal) gets an
@@ -150,6 +159,11 @@ table .expandable-container.fluid {
   &.has-multiselect {
     width: auto;
   }
+}
+
+// The row-level checkbox rule outranks the one above.
+table tr.has-multiselect > td > .expandable-container.fluid {
+  width: auto;
 }
 
 // Mobile screens (no aside)
@@ -167,6 +181,14 @@ table .expandable-container.fluid {
     // opt-out here rather than letting it silently stop applying on mobile.
     &.fluid,
     &.fluid.has-multiselect {
+      width: auto !important;
+    }
+  }
+
+  table tr.has-multiselect > td > .expandable-container {
+    width: calc(100vw - $tableSidesSpace - $checkboxWidth + 30px) !important;
+
+    &.fluid {
       width: auto !important;
     }
   }

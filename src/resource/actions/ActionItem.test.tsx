@@ -66,4 +66,23 @@ describe('ActionItem renders correctly in both of its real host contexts', () =>
       screen.getByRole('button', { name: 'Start' }),
     ).toHaveAccessibleDescription('Instance is already active. Staff action');
   });
+
+  it('greys a disabled danger action icon like any other disabled one', () => {
+    render(
+      <ActionList>
+        <ActionItem
+          title="Delete"
+          action={vi.fn()}
+          disabled
+          iconColor="danger"
+          iconNode={<svg data-testid="delete-icon" />}
+        />
+      </ActionList>,
+    );
+    // The icon's colour sits on the span around it.
+    // eslint-disable-next-line testing-library/no-node-access
+    const iconWrapper = screen.getByTestId('delete-icon').parentElement;
+    expect(iconWrapper).toHaveClass('text-quinary');
+    expect(iconWrapper).not.toHaveClass('text-danger');
+  });
 });
