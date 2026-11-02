@@ -10,12 +10,17 @@ import { ActionItem } from '@/resource/actions/ActionItem';
 import { validateState } from '@/resource/actions/base';
 import { ActionContext } from '@/resource/actions/types';
 import { useValidators } from '@/resource/actions/useValidators';
+import {
+  LEGACY_SITE_AGENT_PLUGIN,
+  SITE_AGENT_PLUGIN,
+} from '@/site-agent/constants';
 
 import { useIsProviderAction } from './ProviderActionContext';
 import { getMarketplaceResourceUuid } from './utils';
 
 const SUPPORTED_OFFERING_TYPES = [
-  'Marketplace.Slurm',
+  LEGACY_SITE_AGENT_PLUGIN,
+  SITE_AGENT_PLUGIN,
   'OpenStack.Tenant',
   'OpenStack.Instance',
   'OpenStack.Volume',

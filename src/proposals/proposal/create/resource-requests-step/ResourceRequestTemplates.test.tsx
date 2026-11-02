@@ -22,7 +22,7 @@ const template = (uuid: string, name: string) =>
     name,
     requested_offering_uuid: 'offering-1',
     requested_offering_name: 'GH200',
-    requested_offering_type: 'Marketplace.Slurm',
+    requested_offering_type: 'Marketplace.SiteAgent',
     requested_offering_components: [],
     requested_offering_plan: null,
     attributes: {},

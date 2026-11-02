@@ -152,6 +152,7 @@ describe('OfferingEditUIView', () => {
   // rest the provider adds -- so accounting always opens on them.
   it.each([
     'Marketplace.Slurm',
+    'Marketplace.SiteAgent',
     'VMware.VirtualMachine',
     'Marketplace.Rancher',
   ])('opens accounting on components for %s offerings', (type) => {

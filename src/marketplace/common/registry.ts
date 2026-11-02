@@ -9,7 +9,11 @@ import { OpenStackTenantOffering } from '@/openstack/marketplace';
 import { OpenStackInstanceOffering } from '@/openstack/openstack-instance/marketplace';
 import { OpenStackVolumeOffering } from '@/openstack/openstack-volume/marketplace';
 import { RancherOffering } from '@/rancher/cluster/create/marketplace';
-import { SiteAgentOffering } from '@/site-agent/marketplace';
+import { LEGACY_SITE_AGENT_PLUGIN } from '@/site-agent/constants';
+import {
+  LegacySiteAgentOffering,
+  SiteAgentOffering,
+} from '@/site-agent/marketplace';
 import { BasicOffering, SupportOffering } from '@/support/marketplace';
 import { vmWareOffering } from '@/vmware/marketplace';
 
@@ -79,6 +83,13 @@ export function getOfferingTypes(): Option[] {
       label: REGISTRY[key].label,
     }))
     .sort((a, b) => a.label.localeCompare(b.label));
+}
+
+// The site-agent type is registered under two names but is one option here.
+export function getOfferingTypeFilterOptions(): Option[] {
+  return getOfferingTypes().filter(
+    (option) => option.value !== LEGACY_SITE_AGENT_PLUGIN,
+  );
 }
 
 export function getCreatableOfferings(): Option[] {
@@ -171,6 +182,7 @@ registerOfferingType(OpenStackInstanceOffering);
 registerOfferingType(OpenStackVolumeOffering);
 registerOfferingType(RancherOffering);
 registerOfferingType(SiteAgentOffering);
+registerOfferingType(LegacySiteAgentOffering);
 registerOfferingType(SupportOffering);
 registerOfferingType(BasicOffering);
 registerOfferingType(vmWareOffering);

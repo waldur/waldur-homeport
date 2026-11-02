@@ -65,7 +65,15 @@ describe('getAllowedOfferingTypes', () => {
     expect(getAllowedOfferingTypes(['Support.OfferingTemplate'])).toEqual([
       'Marketplace.Basic',
       'Support.OfferingTemplate',
-      'Marketplace.Slurm',
+      'Marketplace.SiteAgent',
+    ]);
+  });
+
+  it('treats a site agent offering under the former name the same way', () => {
+    expect(getAllowedOfferingTypes(['Marketplace.Slurm'])).toEqual([
+      'Marketplace.Basic',
+      'Support.OfferingTemplate',
+      'Marketplace.SiteAgent',
     ]);
   });
 

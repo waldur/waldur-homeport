@@ -10,7 +10,7 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { getResourceActionOptions } from '@/marketplace/resources/actions/utils';
 import { TENANT_TYPE } from '@/openstack/constants';
-import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
+import { isSiteAgentOfferingType } from '@/site-agent/constants';
 
 import { OfferingEditPanelProps } from './types';
 import { useUpdateOfferingIntegration } from './utils';
@@ -24,7 +24,7 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
   );
   const pluginOptions = props.offering.plugin_options;
   const keyManagement =
-    props.offering.type === SITE_AGENT_PLUGIN &&
+    isSiteAgentOfferingType(props.offering.type) &&
     Boolean(pluginOptions?.enable_api_key_provisioning);
   // The key options read as the backend applies them when unset: key limits
   // on, per-key daily usage off.
@@ -70,7 +70,7 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
             name="plugin_options.hide_api_keys_tab"
             label={translate('Hide API keys tab')}
           />
-          {props.offering.type === SITE_AGENT_PLUGIN && (
+          {isSiteAgentOfferingType(props.offering.type) && (
             // A claim about the agent's backend, not a preference: one that
             // cannot govern keys fails every such command.
             <BooleanEditField
@@ -108,7 +108,7 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
             isMulti
             simpleValue
           />
-          {props.offering.type === SITE_AGENT_PLUGIN && (
+          {isSiteAgentOfferingType(props.offering.type) && (
             <BooleanEditField
               name="plugin_options.enable_display_of_order_actions_for_service_provider"
               label={translate(

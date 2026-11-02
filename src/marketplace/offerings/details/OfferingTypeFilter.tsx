@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { translate } from '@/i18n';
-import { getOfferingTypes } from '@/marketplace/common/registry';
+import { getOfferingTypeFilterOptions } from '@/marketplace/common/registry';
 import { SelectFilter } from '@/table';
 
 interface OfferingTypeFilterProps {
@@ -15,7 +15,7 @@ export const OfferingTypeFilter: FC<OfferingTypeFilterProps> = (props) => {
       name="offering_type"
       badgeValue={(value) => value?.label}
       placeholder={translate('Select integration type...')}
-      options={getOfferingTypes()}
+      options={getOfferingTypeFilterOptions()}
       {...props}
     />
   );

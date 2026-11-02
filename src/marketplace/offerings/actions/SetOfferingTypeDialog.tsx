@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsUpdateType,
+  OfferingTypeUpdateTypeEnum,
   ProviderOffering,
 } from 'waldur-js-client';
 
@@ -10,13 +11,18 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
+import {
+  isSiteAgentOfferingType,
+  SITE_AGENT_PLUGIN,
+} from '@/site-agent/constants';
 import { BASIC_OFFERING_TYPE } from '@/support/constants';
 
-const TYPE_LABELS: Record<string, string> = {
-  [BASIC_OFFERING_TYPE]: translate('Basic'),
-  [SITE_AGENT_PLUGIN]: translate('Site Agent'),
-};
+const getTypeLabel = (type: string) =>
+  isSiteAgentOfferingType(type)
+    ? translate('Site Agent')
+    : type === BASIC_OFFERING_TYPE
+      ? translate('Basic')
+      : type;
 
 const getTargetType = (currentType: string) =>
   currentType === BASIC_OFFERING_TYPE ? SITE_AGENT_PLUGIN : BASIC_OFFERING_TYPE;
@@ -38,7 +44,8 @@ export const SetOfferingTypeDialog: FunctionComponent<
     mutationFn: () =>
       marketplaceProviderOfferingsUpdateType({
         path: { uuid: offering.uuid! },
-        body: { type: targetType },
+        // The pinned SDK predates the current site-agent type name.
+        body: { type: targetType as OfferingTypeUpdateTypeEnum },
       }),
     successMessage: translate('Offering type has been updated.'),
     errorMessage: translate('Unable to update offering type.'),
@@ -56,8 +63,8 @@ export const SetOfferingTypeDialog: FunctionComponent<
               'Change "{offeringName}" from {currentLabel} to {targetLabel}. Existing components, plans, resources, orders, and offering users are preserved.',
               {
                 offeringName: offering.name,
-                currentLabel: TYPE_LABELS[currentType] ?? currentType,
-                targetLabel: TYPE_LABELS[targetType] ?? targetType,
+                currentLabel: getTypeLabel(currentType),
+                targetLabel: getTypeLabel(targetType),
               },
             )}
             footer={

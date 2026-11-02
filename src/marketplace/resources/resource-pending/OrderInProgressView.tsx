@@ -12,7 +12,7 @@ import { OrderProviderActions } from '@/marketplace/orders/actions/OrderProvider
 import { canReviewOrderAsConsumer } from '@/marketplace/orders/actions/selectors';
 import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
 import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
-import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
+import { isSiteAgentOfferingType } from '@/site-agent/constants';
 import { ActionsMenu } from '@/table/ActionsDropdown';
 import { ProgressSteps, VerticalProgressSteps } from '@/wizard';
 import { useUser } from '@/workspace/hooks';
@@ -55,7 +55,7 @@ const OrderInProgressActions: FC<{
   if (
     resource.order_in_progress.state === 'pending-provider' &&
     !(
-      resource.offering_type === SITE_AGENT_PLUGIN &&
+      isSiteAgentOfferingType(resource.offering_type) &&
       !offering.plugin_options
         ?.enable_display_of_order_actions_for_service_provider
     )

@@ -16,7 +16,7 @@ import {
 } from '@/marketplace/orders/list/constants';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
+import { isSiteAgentOfferingType } from '@/site-agent/constants';
 
 import { OrderSummaryRows } from './OrderSummaryRows';
 
@@ -44,7 +44,7 @@ export const RejectByProviderButton: FunctionComponent<
         <>
           <OrderSummaryRows order={props.row} />
           <p className="mt-3 mb-0">
-            {props.row.offering_type === SITE_AGENT_PLUGIN
+            {isSiteAgentOfferingType(props.row.offering_type)
               ? translate(
                   'Provider rejection is expected to be done by Waldur site agent. Doing it manually can lead to a broken state.',
                 )

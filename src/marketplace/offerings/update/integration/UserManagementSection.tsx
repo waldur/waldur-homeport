@@ -21,7 +21,7 @@ import {
   getOptionLabel,
   USERNAME_GENERATION_POLICY_OPTIONS,
 } from '@/marketplace/service-providers/accountSettings';
-import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
+import { isSiteAgentOfferingType } from '@/site-agent/constants';
 
 import { AccountSettingValue } from './AccountSettingValue';
 import { GLAuthConfigButton } from './GLAuthConfigButton';
@@ -230,7 +230,7 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
               )}
             />
           )}
-          {props.offering.type === SITE_AGENT_PLUGIN && (
+          {isSiteAgentOfferingType(props.offering.type) && (
             <SelectEditField
               name="plugin_options.account_name_generation_policy"
               label={translate('Account name generation policy')}

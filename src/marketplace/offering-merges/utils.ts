@@ -10,6 +10,7 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { isSiteAgentOfferingType } from '@/site-agent/constants';
 
 import {
   ACTIVE_STATES,
@@ -48,7 +49,13 @@ export const getAllowedOfferingTypes = (
   if (types.length === 0) {
     return undefined;
   }
-  if (types.every((type) => CROSS_TYPE_MERGEABLE_TYPES.includes(type))) {
+  if (
+    types.every(
+      (type) =>
+        CROSS_TYPE_MERGEABLE_TYPES.includes(type) ||
+        isSiteAgentOfferingType(type),
+    )
+  ) {
     return [...CROSS_TYPE_MERGEABLE_TYPES];
   }
   // A scoped type merges only into itself, so every choice must share it.

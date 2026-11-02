@@ -7,7 +7,7 @@ import {
 } from './requestedResourceOptions';
 
 const slurm = {
-  offering_type: 'Marketplace.Slurm',
+  offering_type: 'Marketplace.SiteAgent',
   components: [{ type: 'cpu_hours', name: 'CPU hours', billing_type: 'limit' }],
   options: {
     order: ['qos', 'prepaid_duration_months'],
