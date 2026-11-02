@@ -11,8 +11,11 @@ import {
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { isCallsSectionVisible } from '@/marketplace/serviceAccessMode';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { useUser, useCustomer, useProject } from '@/workspace/hooks';
+
+import { hasAnyRole } from './hasAnyRole';
 
 type Permission = 'allowed' | 'limited' | 'restricted';
 interface PermissionMessage {
@@ -104,6 +107,17 @@ const RestrictedView = () => {
     </div>
   );
 };
+
+// Shown on the profile page to a user who holds no role on anything yet. Calls
+// are named only where this deployment has a calls section.
+const getNoRolesMessage = () =>
+  isCallsSectionVisible()
+    ? translate(
+        'You have not been given access to an organization, project or call.',
+      )
+    : translate(
+        'You have not been given access to an organization or project.',
+      );
 
 const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
   const {
@@ -202,20 +216,11 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
         } else {
           setHasPermissionView(false);
         }
-      } else if (
-        user.permissions.filter((permission) =>
-          ['customer', 'project', 'resource', 'resource_project'].includes(
-            permission.scope_type,
-          ),
-        ).length === 0 &&
-        state.name === 'profile.details'
-      ) {
+      } else if (state.name === 'profile.details' && !hasAnyRole(user)) {
         setPermission('limited');
         setBanner({
-          title: translate('No association'),
-          message: translate(
-            'Your account is not part of any organization. Your view will be restricted.',
-          ),
+          title: translate('No roles yet'),
+          message: getNoRolesMessage(),
         });
         setHasPermissionView(true);
       } else {

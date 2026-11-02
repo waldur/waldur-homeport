@@ -4,7 +4,6 @@ import { userPermissionsList, UserPermissionsListData } from 'waldur-js-client';
 import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
-import { RoleEnum } from '@/permissions/enums';
 import { formatRoleType, formatScopeName } from '@/permissions/utils';
 import { createFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
@@ -16,6 +15,7 @@ import { useUser } from '@/workspace/hooks';
 
 import { AddUserRoleButton } from './AddUserRoleButton';
 import { RolePopover } from './RolePopover';
+import { getScopeLink } from './scopeLink';
 import { UserAffiliationExpandableRow } from './UserAffiliationExpandableRow';
 import { UserAffiliationsBulkRemoveButton } from './UserAffiliationsBulkRemoveButton';
 import { UserAffiliationsDropdownActions } from './UserAffiliationsDropdownActions';
@@ -120,70 +120,16 @@ export const UserAffiliationsList: FunctionComponent<
     {
       title: translate('Scope name'),
       render: ({ row }) => {
-        if (row.scope_type === 'project') {
-          return (
-            <Link
-              state="project.dashboard"
-              params={{ uuid: row.scope_uuid }}
-              label={row.scope_name}
-            />
-          );
-        }
-        if (row.scope_type === 'resource') {
-          return (
-            <Link
-              state="marketplace-resource-details"
-              params={{ resource_uuid: row.scope_uuid }}
-              label={row.scope_name}
-            />
-          );
-        }
-        if (row.scope_type === 'resource_project') {
-          // ResourceProjects don't have a standalone page; deep-link to
-          // the parent resource's Resource projects tab so the user can
-          // expand the relevant row.
-          return row.resource_uuid ? (
-            <Link
-              state="marketplace-resource-details"
-              params={{
-                resource_uuid: row.resource_uuid,
-                tab: 'resource-projects',
-              }}
-              label={row.scope_name}
-            />
-          ) : (
-            <>{row.scope_name}</>
-          );
-        }
-        if (row.scope_type === 'proposal') {
-          // No role gate here, unlike calls below: the proposal role *is* the
-          // grant. The backend answers a proposal retrieve 200 for anyone
-          // holding PROPOSAL.MANAGER or PROPOSAL.MEMBER on it and 404 for
-          // everyone else, so any row that reached this table can open its
-          // own scope.
-          return (
-            <Link
-              state="proposals.manage-proposal"
-              params={{ proposal_uuid: row.scope_uuid }}
-              label={row.scope_name}
-            />
-          );
-        }
-        if (row.scope_type === 'call') {
-          // Only the call manager can open the call management dashboard
-          // (mirrors checkIsCallManager / the CallTabs "Manage" gate), so
-          // link the scope name there only for that role.
-          return row.role_name === RoleEnum.CALL_MANAGER ? (
-            <Link
-              state="protected-call.manage"
-              params={{ call_uuid: row.scope_uuid }}
-              label={row.scope_name}
-            />
-          ) : (
-            <>{row.scope_name}</>
-          );
-        }
-        return <>{formatScopeName(row)}</>;
+        const link = getScopeLink(row);
+        return link ? (
+          <Link
+            state={link.state}
+            params={link.params}
+            label={row.scope_name}
+          />
+        ) : (
+          <>{formatScopeName(row)}</>
+        );
       },
       filter: 'scope_name',
     },
