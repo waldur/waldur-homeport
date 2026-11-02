@@ -1,11 +1,10 @@
 import { OfferingUser, Resource } from 'waldur-js-client';
 
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { OfferingUserStateField } from '@/marketplace/OfferingUserStateField';
 import { isProjectMember } from '@/permissions/isProjectMember';
-import { Field } from '@/resource/summary';
-import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
@@ -33,21 +32,18 @@ export const OfferingUserDetailsField = ({
     return null;
   }
 
-  const username = renderFieldOrDash(offeringUser.username);
   const showStateBadge = offeringUser.state && offeringUser.state !== 'OK';
 
   return (
-    <Field
+    <PropertyItem
       label={translate('Username')}
       value={
         <div className="flex items-center gap-1.5">
-          <b>{username}</b>
-          {username !== DASH_ESCAPE_CODE && (
-            <CopyToClipboardButton value={username} />
-          )}
+          <b>{renderFieldOrDash(offeringUser.username)}</b>
           {showStateBadge && <OfferingUserStateField row={offeringUser} />}
         </div>
       }
+      copyValue={offeringUser.username || undefined}
     />
   );
 };

@@ -2,9 +2,8 @@ import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { User } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, PropertyItem } from 'waldur-ui';
 
-import FormTable from '@/form/FormTable';
 import { WideImageField } from '@/form/WideImageField';
 import { translate } from '@/i18n';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
@@ -28,7 +27,7 @@ export const UserEditAvatarFormItem: React.FC<OwnProps> = ({
   const { callback, isLoading } = useUpdateUser(user);
 
   return (
-    <FormTable.Item
+    <PropertyItem
       label={translate('Avatar')}
       description={
         currentUser.uuid === user.uuid

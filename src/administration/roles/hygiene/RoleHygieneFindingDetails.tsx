@@ -1,7 +1,9 @@
 import { RoleHygieneFinding } from 'waldur-js-client';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 // Each check fills `details` with whatever it likes, so only real numbers are
@@ -15,14 +17,14 @@ export const RoleHygieneFindingDetails = ({
   row: RoleHygieneFinding;
 }) => (
   <ExpandableContainer asTable>
-    <Field label={translate('Explanation')} value={row.message} />
-    <Field
+    <PropertyItem label={translate('Explanation')} value={row.message} />
+    <PropertyItem
       label={translate('Organizations holding it')}
-      value={count(row.details?.organization_count)}
+      value={propVal.number(count(row.details?.organization_count))}
     />
-    <Field
+    <PropertyItem
       label={translate('Active assignments')}
-      value={count(row.details?.assignment_count)}
+      value={propVal.number(count(row.details?.assignment_count))}
     />
   </ExpandableContainer>
 );

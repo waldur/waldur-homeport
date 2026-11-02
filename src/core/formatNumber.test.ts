@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { formatUsageValue } from './formatNumber';
+import { formatCount, formatUsageValue } from './formatNumber';
 
 describe('formatUsageValue', () => {
   describe('standard formatting (thousands separators)', () => {
@@ -101,5 +101,17 @@ describe('formatUsageValue', () => {
       expect(formatUsageValue(0)).toBe('0');
       expect(formatUsageValue(0, true)).toBe('0');
     });
+  });
+});
+
+describe('formatCount', () => {
+  it('separates thousands', () => {
+    expect(formatCount(1000)).toBe('1,000');
+    expect(formatCount(0)).toBe('0');
+  });
+
+  it('reads a missing count as none', () => {
+    expect(formatCount(undefined)).toBe('0');
+    expect(formatCount(null)).toBe('0');
   });
 });

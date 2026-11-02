@@ -2,13 +2,13 @@ import { ClipboardTextIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Project } from 'waldur-js-client';
 
-import { formatDate } from '@/core/dateUtils';
-import { FieldWithCopy } from '@/core/FieldWithCopy';
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { propVal } from '@/property/propertyFields';
 
 import { ProjectCostField } from '../ProjectCostField';
 
@@ -27,47 +27,41 @@ export const ProjectDetailsDialog: FC<{
       iconNode={<ClipboardTextIcon weight="bold" />}
       iconColor="success"
     >
-      <FormTable hideActions alignTop detailsMode>
-        <FormTable.Item
-          label={translate('Name')}
-          value={<FieldWithCopy value={project.name} />}
-        />
+      <PropertyList hideActions alignTop detailsMode>
+        <PropertyItem label={translate('Name')} value={project.name} hasCopy />
 
-        <FormTable.Item
+        <PropertyItem
           label={translate('Owner')}
-          value={<FieldWithCopy value={project.customer_name} />}
+          value={project.customer_name}
+          hasCopy
         />
 
-        <FormTable.Item
+        <PropertyItem
           label={translate('Start date')}
-          value={
-            <FieldWithCopy
-              value={project.start_date ? formatDate(project.start_date) : null}
-            />
-          }
+          value={propVal.date(project.start_date)}
+          hasCopy
         />
 
-        <FormTable.Item
+        <PropertyItem
           label={translate('End date')}
-          value={
-            <FieldWithCopy
-              value={project.end_date ? formatDate(project.end_date) : null}
-            />
-          }
+          value={propVal.date(project.end_date)}
+          hasCopy
         />
 
-        <FormTable.Item
+        <PropertyItem
           label={translate('Description')}
-          value={<FieldWithCopy value={project.description} />}
+          value={project.description}
+          hasCopy
         />
 
         {!shouldConcealPrices && (
-          <FormTable.Item
+          <PropertyItem
             label={translate('Estimated cost')}
-            value={<FieldWithCopy value={ProjectCostField({ row: project })} />}
+            value={ProjectCostField({ row: project })}
+            hasCopy
           />
         )}
-      </FormTable>
+      </PropertyList>
     </ModalDialog>
   );
 };

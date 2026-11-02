@@ -1,9 +1,10 @@
-import { Badge, Tooltip } from 'waldur-ui';
+import { FC, ReactNode } from 'react';
+
+import { Badge, PropertyItem, Tooltip } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { TruncatedMarkdown } from '@/core/TruncatedMarkdown';
 import { CompactEditButton } from '@/form/CompactEditButton';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { SecretField } from '@/marketplace/common/SecretField';
 import { useUser } from '@/workspace/hooks';
@@ -11,10 +12,11 @@ import { useUser } from '@/workspace/hooks';
 import { ConfigurationEditButton } from './ConfigurationEditButton';
 import { CountryListField } from './CountryListField';
 import { MultilingualImageEditButton } from './MultilingualImageEditButton';
+import { SettingItemDescription } from './types';
 import { useHighlightSettingRow } from './useHighlightSettingRow';
 import { formatDefaultValue, getKeyTitle, isSettingModified } from './utils';
 
-const ColorField = ({ value }) => (
+const ColorField = ({ value }: { value?: string }) => (
   <div
     className="size-[50px] shrink-0 rounded-full inline-block bg-tertiary"
     style={{
@@ -23,7 +25,7 @@ const ColorField = ({ value }) => (
   />
 );
 
-const ImageField = ({ value }) => (
+const ImageField = ({ value }: { value?: string }) => (
   <div
     className="size-[50px] shrink-0 rounded-full bg-center bg-cover bg-no-repeat inline-block bg-tertiary"
     style={{
@@ -35,7 +37,7 @@ const ImageField = ({ value }) => (
 const MultilingualImageField = ({
   value,
 }: {
-  value: Record<string, string>;
+  value?: Record<string, string>;
 }) => (
   <div className="flex flex-wrap gap-1.5">
     {value && typeof value === 'object' && Object.keys(value).length > 0 ? (
@@ -52,16 +54,20 @@ const MultilingualImageField = ({
   </div>
 );
 
-const CountryListEditButton = ({ onEdit, tooltip }) => (
-  <CompactEditButton onClick={onEdit} tooltip={tooltip} />
-);
+const CountryListEditButton = ({
+  onEdit,
+  tooltip,
+}: {
+  onEdit?: () => void;
+  tooltip: string;
+}) => <CompactEditButton onClick={onEdit} tooltip={tooltip} />;
 
 const LoginPageListField = ({
   itemKey,
   value,
 }: {
   itemKey: string;
-  value: any[];
+  value?: any[];
 }) => {
   if (!value || !Array.isArray(value) || value.length === 0) {
     return (
@@ -100,49 +106,180 @@ const LoginPageListField = ({
   return <span>{value.length} items</span>;
 };
 
-interface FieldRowProps {
-  item: any;
-  value: any;
-  onEdit?: any;
+/**
+ * Dispatches and renders a setting's value based on its Mastermind setting type.
+ */
+const renderSettingValue = (
+  item: SettingItemDescription,
+  value: unknown,
+  isLoading?: boolean,
+): ReactNode => {
+  switch (item.type) {
+    case 'secret_field':
+      return <SecretField value={value as string} />;
+
+    case 'image_field':
+      return <ImageField value={value as string} />;
+
+    case 'color_field':
+      return <ColorField value={value as string} />;
+
+    case 'boolean':
+      return value === true ? translate('Yes') : translate('No');
+
+    case 'country_list_field':
+      return isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <CountryListField value={value as any} />
+      );
+
+    case 'dict_field':
+      return (
+        <pre className="text-xs m-0 whitespace-pre-wrap">
+          {typeof value === 'object' && value !== null
+            ? JSON.stringify(value, null, 2)
+            : String(value || '')}
+        </pre>
+      );
+
+    case 'markdown_field':
+      return typeof value === 'string' && value.trim() ? (
+        <TruncatedMarkdown text={value} title={getKeyTitle(item.key)} />
+      ) : (
+        <span className="text-quaternary">{translate('Not configured')}</span>
+      );
+
+    case 'multilingual_image_field':
+      return <MultilingualImageField value={value as Record<string, string>} />;
+
+    case 'json_list_field':
+      return <LoginPageListField itemKey={item.key} value={value as any[]} />;
+
+    case 'choice_field':
+    case 'select':
+      return (
+        item.options?.find((option) => option.value === value)?.label ||
+        (value as ReactNode)
+      );
+
+    case 'multiple_choice_field':
+      if (Array.isArray(value)) {
+        if (value.length === 0) {
+          return null;
+        }
+        return (
+          <div className="flex flex-wrap gap-1">
+            {value.map((v) => {
+              const label =
+                item.options?.find((option) => option.value === v)?.label || v;
+              return (
+                <Badge key={v} variant="primary" tone="outline">
+                  {label}
+                </Badge>
+              );
+            })}
+          </div>
+        );
+      }
+      return value as ReactNode;
+
+    default:
+      if (typeof value === 'object' && value !== null) {
+        if (Array.isArray(value) && value.length === 0) {
+          return null;
+        }
+        return <pre>{JSON.stringify(value, null, 2)}</pre>;
+      }
+      return value as ReactNode;
+  }
+};
+
+/**
+ * Resolves the appropriate action control for a setting row.
+ */
+const getSettingAction = ({
+  item,
+  value,
+  canEdit,
+  onEdit,
+  editDisabledReason,
+}: {
+  item: SettingItemDescription;
+  value: unknown;
+  canEdit: boolean;
+  onEdit?: () => void;
+  editDisabledReason?: string;
+}): ReactNode => {
+  if (!canEdit) return undefined;
+
+  const title = getKeyTitle(item.key);
+  const editLabel = translate('Edit {name}', { name: title });
+
+  switch (item.type) {
+    case 'country_list_field':
+      return <CountryListEditButton onEdit={onEdit} tooltip={editLabel} />;
+
+    case 'multilingual_image_field':
+      return (
+        <MultilingualImageEditButton
+          item={item}
+          value={value as Record<string, string>}
+          tooltip={editLabel}
+        />
+      );
+
+    case 'json_list_field':
+      return <CompactEditButton onClick={onEdit} tooltip={editLabel} />;
+
+    default:
+      return (
+        <ConfigurationEditButton
+          item={item}
+          value={value}
+          tooltip={editLabel}
+          disabledReason={editDisabledReason}
+        />
+      );
+  }
+};
+
+export interface FieldRowProps {
+  item: SettingItemDescription;
+  value: unknown;
+  onEdit?: () => void;
   isLoading?: boolean;
-  // Set when the value cannot be edited here; shown as the edit button's tooltip.
+  /** Set when the value cannot be edited here; shown as the edit button's tooltip. */
   editDisabledReason?: string;
 }
 
-export const FieldRow = ({
+/**
+ * Displays an individual setting item from `SettingsDescription.ts` inside a `PropertyList`.
+ * Includes automatic field type detection, default value diffing, anchor linking, and edit modal triggering.
+ */
+export const SettingItemRow: FC<FieldRowProps> = ({
   item,
   value,
   onEdit,
   isLoading,
   editDisabledReason,
-}: FieldRowProps) => {
+}) => {
   const canEdit = Boolean(useUser()?.is_staff);
   const isHighlighted = useHighlightSettingRow(item.key, 'setting-');
   const isModified =
     !isLoading && isSettingModified(item, value, { secretsRedacted: !canEdit });
   const title = getKeyTitle(item.key);
-  const editLabel = translate('Edit {name}', { name: title });
-  const actions = !canEdit ? undefined : item.type === 'country_list_field' ? (
-    <CountryListEditButton onEdit={onEdit} tooltip={editLabel} />
-  ) : item.type === 'multilingual_image_field' ? (
-    <MultilingualImageEditButton
-      item={item}
-      value={value}
-      tooltip={editLabel}
-    />
-  ) : item.type === 'json_list_field' ? (
-    <CompactEditButton onClick={onEdit} tooltip={editLabel} />
-  ) : (
-    <ConfigurationEditButton
-      item={item}
-      value={value}
-      tooltip={editLabel}
-      disabledReason={editDisabledReason}
-    />
-  );
+
+  const actions = getSettingAction({
+    item,
+    value,
+    canEdit,
+    onEdit,
+    editDisabledReason,
+  });
 
   return (
-    <FormTable.Item
+    <PropertyItem
       key={item.key}
       id={`setting-${item.key}`}
       className={isHighlighted ? 'bg-warning-subtle' : undefined}
@@ -165,68 +302,11 @@ export const FieldRow = ({
         )
       }
       description={item.description}
-      descriptionClassName="text-tertiary"
-      value={
-        item.type === 'secret_field' ? (
-          <SecretField value={value} />
-        ) : item.type === 'image_field' ? (
-          <ImageField value={value} />
-        ) : item.type === 'color_field' ? (
-          <ColorField value={value} />
-        ) : item.type === 'boolean' ? (
-          value === true ? (
-            translate('Yes')
-          ) : (
-            translate('No')
-          )
-        ) : item.type === 'country_list_field' ? (
-          isLoading ? (
-            <LoadingSpinner />
-          ) : (
-            <CountryListField value={value} />
-          )
-        ) : item.type === 'dict_field' ? (
-          <pre className="text-xs m-0 whitespace-pre-wrap">
-            {typeof value === 'object' && value !== null
-              ? JSON.stringify(value, null, 2)
-              : value || ''}
-          </pre>
-        ) : item.type === 'markdown_field' ? (
-          value?.trim() ? (
-            <TruncatedMarkdown text={value} title={getKeyTitle(item.key)} />
-          ) : (
-            <span className="text-quaternary">
-              {translate('Not configured')}
-            </span>
-          )
-        ) : item.type === 'multilingual_image_field' ? (
-          <MultilingualImageField value={value} />
-        ) : item.type === 'json_list_field' ? (
-          <LoginPageListField itemKey={item.key} value={value} />
-        ) : typeof value === 'object' ? (
-          <pre>{JSON.stringify(value, null, 2)}</pre>
-        ) : (item.type === 'choice_field' || item.type === 'select') &&
-          item.options ? (
-          item.options.find((option) => option.value === value)?.label || value
-        ) : item.type === 'multiple_choice_field' &&
-          item.options &&
-          Array.isArray(value) ? (
-          <div className="flex flex-wrap gap-1">
-            {value.map((v) => {
-              const label =
-                item.options.find((option) => option.value === v)?.label || v;
-              return (
-                <Badge key={v} variant="primary" tone="outline">
-                  {label}
-                </Badge>
-              );
-            })}
-          </div>
-        ) : (
-          value
-        )
-      }
+      descriptionClass="text-tertiary"
+      value={renderSettingValue(item, value, isLoading)}
       actions={actions}
     />
   );
 };
+
+export const FieldRow = SettingItemRow;

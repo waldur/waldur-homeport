@@ -5,7 +5,7 @@ import {
   ServiceProviderAccount,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { TruncatedDescription } from '@/core/TruncatedDescription';
@@ -14,7 +14,7 @@ import {
   OfferingUserRuntimeStateField,
   OfferingUserStateField,
 } from '@/marketplace/OfferingUserStateField';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -45,41 +45,39 @@ export const ProviderAccountExpandableRow = ({
 
   return (
     <ExpandableContainer>
-      <Field
-        label={translate('Created')}
-        value={formatDateTime(account.created)}
-        labelClass="max-w-[175px]"
-      />
-      <Field
-        label={translate('Runtime state')}
-        value={<OfferingUserRuntimeStateField row={account} />}
-        labelClass="max-w-[175px]"
-      />
-      <Field
-        label={translate('Restricted')}
-        value={account.is_restricted ? translate('Yes') : translate('No')}
-        labelClass="max-w-[175px]"
-      />
-      <Field
-        label={translate('Comment')}
-        value={
-          account.service_provider_comment ? (
-            <TruncatedDescription
-              text={account.service_provider_comment}
-              max={550}
-            />
-          ) : (
-            renderFieldOrDash(null)
-          )
-        }
-        labelClass="max-w-[175px]"
-        className="align-baseline"
-      />
-      <Field
-        label={translate('Comment URL')}
-        value={renderFieldOrDash(account.service_provider_comment_url)}
-        labelClass="max-w-[175px]"
-      />
+      <PropertyList variant="summary" labelClass="max-w-[175px]">
+        <PropertyItem
+          label={translate('Created')}
+          value={propVal.date(account.created, { precision: 'datetime' })}
+        />
+        <PropertyItem
+          label={translate('Runtime state')}
+          value={<OfferingUserRuntimeStateField row={account} />}
+        />
+        <PropertyItem
+          label={translate('Restricted')}
+          value={propVal.boolean(account.is_restricted)}
+        />
+        <PropertyItem
+          label={translate('Comment')}
+          value={
+            account.service_provider_comment ? (
+              <TruncatedDescription
+                text={account.service_provider_comment}
+                max={550}
+              />
+            ) : (
+              renderFieldOrDash(null)
+            )
+          }
+          className="align-baseline"
+        />
+        <PropertyItem
+          label={translate('Comment URL')}
+          value={account.service_provider_comment_url}
+          hideIfEmpty={false}
+        />
+      </PropertyList>
       <Table<OfferingUser>
         {...tableProps}
         columns={[

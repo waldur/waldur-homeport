@@ -1,12 +1,14 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { AccordionCard } from 'waldur-ui';
+import { AccordionCard, PropertyList, PropertyItem } from 'waldur-ui';
 
+import { formatCount } from '@/core/formatNumber';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 import type { TransactionStats } from './api';
-import { formatNumber, formatPercent, getRollbackHealth } from './utils';
+import { getRollbackHealth } from './utils';
 
 interface DatabaseTransactionsCardProps {
   data: TransactionStats;
@@ -23,54 +25,50 @@ export const DatabaseTransactionsCard: FC<DatabaseTransactionsCardProps> = ({
       id="database-transactions"
       title={translate('Transactions')}
       subtitle={translate('{total} committed, {rollback}% rollback rate', {
-        total: formatNumber(data.committed),
+        total: formatCount(data.committed),
         rollback: data.rollback_ratio_percent.toFixed(2),
       })}
       defaultOpen={rollbackHealth !== 'success' || hasDeadlocks}
       className="mb-5"
     >
-      <table
-        className="table table-sm table-borderless mb-0"
-        style={{ maxWidth: '400px' }}
-      >
-        <tbody>
-          <tr>
-            <td className="text-quaternary">{translate('Committed')}</td>
-            <td className="text-end text-success">
-              {formatNumber(data.committed)}
-            </td>
-          </tr>
-          <tr>
-            <td className="text-quaternary">{translate('Rolled back')}</td>
-            <td className="text-end">{formatNumber(data.rolled_back)}</td>
-          </tr>
-          <tr>
-            <td className="text-quaternary">{translate('Rollback ratio')}</td>
-            <td
-              className={`text-end ${rollbackHealth === 'danger' ? 'text-danger' : rollbackHealth === 'warning' ? 'text-warning' : ''}`}
-            >
-              {formatPercent(data.rollback_ratio_percent)}
-            </td>
-          </tr>
-          <tr>
-            <td className="text-quaternary">
-              <div className="flex items-center">
-                {translate('Deadlocks')}
-                {hasDeadlocks && (
-                  <WarningCircleIcon
-                    size={16}
-                    weight="bold"
-                    className="text-danger ms-1.5"
-                  />
-                )}
-              </div>
-            </td>
-            <td className={`text-end ${hasDeadlocks ? 'text-danger' : ''}`}>
-              {data.deadlocks}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <PropertyList variant="compact" className="max-w-[400px]">
+        <PropertyItem
+          label={translate('Committed')}
+          value={propVal.count(data.committed)}
+          valueClass="text-success"
+        />
+        <PropertyItem
+          label={translate('Rolled back')}
+          value={propVal.count(data.rolled_back)}
+        />
+        <PropertyItem
+          label={translate('Rollback ratio')}
+          value={propVal.percent(data.rollback_ratio_percent)}
+          valueClass={
+            rollbackHealth === 'danger'
+              ? 'text-danger'
+              : rollbackHealth === 'warning'
+                ? 'text-warning'
+                : undefined
+          }
+        />
+        <PropertyItem
+          label={
+            <>
+              {translate('Deadlocks')}
+              {hasDeadlocks && (
+                <WarningCircleIcon
+                  size={16}
+                  weight="bold"
+                  className="text-danger ms-1.5"
+                />
+              )}
+            </>
+          }
+          value={propVal.number(data.deadlocks)}
+          valueClass={hasDeadlocks ? 'text-danger' : undefined}
+        />
+      </PropertyList>
       {hasDeadlocks && (
         <small className="text-danger mt-2.5 block">
           {translate(

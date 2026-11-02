@@ -17,14 +17,7 @@ import { SettingsDescription } from '@/SettingsDescription';
 import { RootState } from '@/store/reducers';
 import { isStaff, isStaffOrSupport } from '@/workspace/selectors';
 
-interface SettingItemDescription {
-  key: string;
-  description: string;
-  default: unknown;
-  type: string;
-  options?: Array<{ value: string; label: string }>;
-  fields?: Record<string, unknown>;
-}
+import { SettingItemDescription } from './types';
 
 export interface AdminRegistryLocation {
   state: string;

@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { customerCreditsList } from 'waldur-js-client';
 
-import { Switch } from 'waldur-ui';
+import { PropertyCard, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -10,7 +10,6 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { CompactEditButton } from '@/form/CompactEditButton';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { renderFieldOrDash } from '@/table/utils';
@@ -118,29 +117,23 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
   );
 
   return (
-    <FormTable.Card className="card-bordered">
+    <PropertyCard bordered>
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
         <LoadingErred loadData={refetch} />
       ) : (
-        <FormTable>
+        <PropertyList>
           {rows.map((row) => (
-            <FormTable.Item
+            <PropertyItem
               key={row.key}
               label={row.label}
               value={
-                row.key === 'apply_as_minimal_consumption' ? (
-                  <Switch
-                    checked={!!row.value}
-                    label={
-                      row.value ? translate('Enabled') : translate('Disabled')
-                    }
-                    disabled
-                  />
-                ) : (
-                  row.value
-                )
+                row.key === 'apply_as_minimal_consumption'
+                  ? row.value
+                    ? translate('Enabled')
+                    : translate('Disabled')
+                  : row.value
               }
               actions={
                 user.is_staff &&
@@ -172,8 +165,8 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
               }
             />
           ))}
-        </FormTable>
+        </PropertyList>
       )}
-    </FormTable.Card>
+    </PropertyCard>
   );
 };

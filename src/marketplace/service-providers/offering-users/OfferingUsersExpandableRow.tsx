@@ -8,7 +8,7 @@ import {
   QuestionWithAnswer,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { formatDateTime } from '@/core/dateUtils';
@@ -18,7 +18,7 @@ import { TruncatedDescription } from '@/core/TruncatedDescription';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { FIELD_MAPPING } from '@/marketplace/offerings/details/OfferingUserDetailsDialog';
+import { getMissingAttributeLabels } from '@/marketplace/offerings/details/OfferingUserDetailsDialog';
 import {
   isProviderBacked,
   ProviderAccountButton,
@@ -26,7 +26,7 @@ import {
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { BooleanIconBadge } from '@/project/metadata/BooleanIconBadge';
 import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -225,105 +225,97 @@ export const OfferingUsersExpandableRow = ({
   return (
     <ExpandableContainer>
       {isProviderBacked(offeringUser) && (
-        <Field
-          label={translate('Provider account')}
-          value={
-            <>
-              {renderFieldOrDash(
-                offeringUser.service_provider_account_username,
-              )}{' '}
-              <ProviderAccountButton row={offeringUser} />
-            </>
-          }
-          labelClass="max-w-[175px]"
-        />
+        <div className="flex flex-wrap items-baseline gap-2 mb-1 text-sm">
+          <span className="font-medium text-secondary max-w-[175px] sm:w-3/12">
+            {translate('Provider account')}:
+          </span>
+          <span className="text-quaternary flex-1">
+            {renderFieldOrDash(offeringUser.service_provider_account_username)}{' '}
+            <ProviderAccountButton row={offeringUser} />
+          </span>
+        </div>
       )}
       {showPosix && <PosixIdentifiersTable offeringUser={offeringUser} />}
       {showPosix && <PosixGroupsTable offeringUser={offeringUser} />}
-      {showTosFields && (
-        <>
-          <Field
-            label={translate('ToS version')}
-            value={
-              isLoadingConsent ? (
-                <LoadingSpinnerSimple />
-              ) : (
-                renderFieldOrDash(consent?.version)
-              )
-            }
-            labelClass="max-w-[175px]"
-          />
-          <Field
-            label={translate('ToS consent date')}
-            value={
-              isLoadingConsent ? (
-                <LoadingSpinnerSimple />
-              ) : consent?.agreement_date ? (
-                formatDateTime(consent.agreement_date)
-              ) : (
-                'N/A'
-              )
-            }
-            labelClass="max-w-[175px]"
-          />
-          {consent?.revocation_date && (
-            <Field
+      <PropertyList
+        variant="summary"
+        labelClass="max-w-[175px]"
+        hideIfEmpty={false}
+      >
+        {showTosFields && (
+          <>
+            <PropertyItem
+              label={translate('ToS version')}
+              value={
+                isLoadingConsent ? (
+                  <LoadingSpinnerSimple />
+                ) : (
+                  renderFieldOrDash(consent?.version)
+                )
+              }
+            />
+            <PropertyItem
+              label={translate('ToS consent date')}
+              value={
+                isLoadingConsent ? (
+                  <LoadingSpinnerSimple />
+                ) : (
+                  renderFieldOrDash(
+                    consent?.agreement_date
+                      ? formatDateTime(consent.agreement_date)
+                      : null,
+                  )
+                )
+              }
+            />
+            <PropertyItem
               label={translate('ToS revocation date')}
-              value={formatDateTime(consent.revocation_date)}
-              labelClass="max-w-[175px]"
+              value={propVal.date(consent?.revocation_date, {
+                precision: 'datetime',
+              })}
+              hideIfEmpty
             />
-          )}
-        </>
-      )}
-      <Field
-        label={translate('Comment')}
-        value={
-          offeringUser.service_provider_comment ? (
-            <TruncatedDescription
-              text={offeringUser.service_provider_comment}
-              max={550}
+          </>
+        )}
+        <PropertyItem
+          label={translate('Comment')}
+          value={
+            offeringUser.service_provider_comment ? (
+              <TruncatedDescription
+                text={offeringUser.service_provider_comment}
+                max={550}
+              />
+            ) : null
+          }
+          className="align-baseline"
+          placeholder="N/A"
+          hideIfEmpty={false}
+        />
+        <PropertyItem
+          label={translate('Comment URL')}
+          value={offeringUser.service_provider_comment_url}
+          hideIfEmpty={false}
+        />
+        {ENV.plugins.WALDUR_CORE.ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS && (
+          <>
+            <PropertyItem
+              label={translate('Profile status')}
+              value={propVal.boolean(offeringUser.is_profile_complete, {
+                wording: [translate('Complete'), translate('Incomplete')],
+              })}
             />
-          ) : (
-            'N/A'
-          )
-        }
-        labelClass="max-w-[175px]"
-        className="align-baseline"
-      />
-      <Field
-        label={translate('Comment URL')}
-        value={renderFieldOrDash(offeringUser.service_provider_comment_url)}
-        labelClass="max-w-[175px]"
-      />
-      {ENV.plugins.WALDUR_CORE.ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS && (
-        <>
-          <Field
-            label={translate('Profile status')}
-            value={
-              offeringUser.is_profile_complete
-                ? translate('Complete')
-                : translate('Incomplete')
-            }
-            labelClass="max-w-[175px]"
-          />
-          {offeringUser.missing_profile_attributes?.length > 0 && (
-            <Field
+            <PropertyItem
               label={translate('Missing attributes')}
-              value={offeringUser.missing_profile_attributes
-                .map((key) => {
-                  const mapping = FIELD_MAPPING[key];
-                  return mapping
-                    ? mapping.label()
-                    : key
-                        .replace(/_/g, ' ')
-                        .replace(/^\w/, (c) => c.toUpperCase());
-                })
-                .join(', ')}
-              labelClass="max-w-[175px]"
+              value={propVal.list(
+                getMissingAttributeLabels(
+                  offeringUser.missing_profile_attributes,
+                ),
+              )}
+              hideIfEmpty
             />
-          )}
-        </>
-      )}
+          </>
+        )}
+      </PropertyList>
       <Table<QuestionWithAnswer>
         {...tableProps}
         // The endpoint sends the few entries whole.

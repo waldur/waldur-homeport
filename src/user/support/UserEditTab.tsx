@@ -2,7 +2,6 @@ import { User } from 'waldur-js-client';
 
 import { LOCAL_IDP } from '@/auth/providers/constants';
 import { ExternalLink } from '@/core/ExternalLink';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { isImpersonating } from '@/user/termsGate';
 import { useUser } from '@/workspace/hooks';
@@ -36,9 +35,7 @@ export const UserEditTab: React.FC<UserEditTabProps> = ({ user }) => {
       {canAcceptTerms && !user.agreement_date && (
         <div className="card card-bordered mb-5.5">
           <div className="card-body">
-            <FormTable>
-              <FormTable.Item value={<TermsOfServiceCheckbox user={user} />} />
-            </FormTable>
+            <TermsOfServiceCheckbox user={user} />
           </div>
         </div>
       )}

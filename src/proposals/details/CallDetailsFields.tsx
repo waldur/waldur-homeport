@@ -1,27 +1,30 @@
-import { formatDateTime } from '@/core/dateUtils';
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 
 import { CallDurationPolicy } from '../CallDurationPolicy';
+import { Call } from '../types';
 
-export const CallDetailsFields = ({ call }) => {
+export const CallDetailsFields = ({ call }: { call: Call }) => {
   return (
-    <>
-      <Field
+    <PropertyList variant="summary">
+      <PropertyItem
         label={translate('Reference code')}
-        value={call.backend_id || <>&mdash;</>}
+        value={call.backend_id}
+        hideIfEmpty={false}
       />
 
-      <Field
+      <PropertyItem
         label={translate('Publication date')}
-        value={renderFieldOrDash(formatDateTime(call.start_date))}
+        value={propVal.date(call.start_date, { precision: 'datetime' })}
+        hideIfEmpty={false}
       />
 
-      <Field
+      <PropertyItem
         label={translate('Project duration')}
         value={<CallDurationPolicy call={call} />}
       />
-    </>
+    </PropertyList>
   );
 };

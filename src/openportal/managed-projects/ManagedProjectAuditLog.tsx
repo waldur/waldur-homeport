@@ -4,13 +4,12 @@ import {
   openportalManagedProjectAuditList,
 } from 'waldur-js-client';
 
-import { BadgeVariant } from 'waldur-ui';
+import { BadgeVariant, PropertyItem } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { DetailsDiff } from '@/openportal/DetailsDiff';
-import { Field } from '@/resource/summary/Field';
 import { createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import {
@@ -59,9 +58,9 @@ const AuditEntryExpandableRow = ({
 
   return (
     <ExpandableContainer asTable>
-      <Field label={translate('Note')} value={row.note} />
+      <PropertyItem label={translate('Note')} value={row.note} />
       {hasDetails && (
-        <Field
+        <PropertyItem
           label={translate('Changes')}
           value={
             <DetailsDiff

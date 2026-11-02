@@ -75,16 +75,6 @@ export const formatTimestamp = (timestamp: number | null): string => {
 };
 
 /**
- * Format latency in milliseconds
- */
-export const formatLatency = (ms: number | null): string => {
-  if (ms === null || ms === undefined) return '-';
-  if (ms < 1) return '<1ms';
-  if (ms < 1000) return `${ms.toFixed(0)}ms`;
-  return `${(ms / 1000).toFixed(2)}s`;
-};
-
-/**
  * Format circuit breaker state for display
  */
 export const formatCircuitBreakerState = (state: string): string => {
@@ -98,11 +88,4 @@ export const formatCircuitBreakerState = (state: string): string => {
     default:
       return state;
   }
-};
-
-/**
- * Format number with locale string
- */
-export const formatNumber = (value: number): string => {
-  return value.toLocaleString();
 };

@@ -1,17 +1,20 @@
-import { DownloadSimpleIcon, EnvelopeIcon } from '@phosphor-icons/react';
+import { EnvelopeIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Offering, OrderDetails } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
-import { FormattedHtml } from '@/core/FormattedHtml';
 import { lazyComponent } from '@/core/lazyComponent';
-import FormTable from '@/form/FormTable';
-import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasConsumerPermission } from '@/permissions/hasPermission';
+import { propVal } from '@/property/propertyFields';
 import { useUser } from '@/workspace/hooks';
 
 const SetConsumerInfoDialog = lazyComponent(() =>
@@ -60,7 +63,7 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
 
   return (
     <div className="flex flex-col gap-5">
-      <FormTable.Card
+      <PropertyCard
         title={translate('Provider message')}
         actions={
           canRespond ? (
@@ -74,15 +77,17 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
           ) : undefined
         }
       >
-        <FormTable detailsMode>
+        <PropertyList detailsMode>
           {order.provider_message && (
-            <FormTable.Item
+            <PropertyItem
               label={translate('Message')}
-              value={<FormattedHtml html={order.provider_message} />}
+              value={propVal.richText(order.provider_message, {
+                format: 'html',
+              })}
             />
           )}
           {order.provider_message_url && (
-            <FormTable.Item
+            <PropertyItem
               label={translate('URL')}
               value={
                 <a
@@ -96,49 +101,39 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
             />
           )}
           {order.provider_message_attachment && (
-            <FormTable.Item
+            <PropertyItem
               label={translate('Attachment')}
-              value={
-                <FileDownloader
-                  url={order.provider_message_attachment}
-                  name={translate('PDF file')}
-                  className="text-btn hover:text-brand inline-flex items-center"
-                >
-                  <DownloadSimpleIcon weight="bold" className="me-1" />
-                  {translate('Download PDF')}
-                </FileDownloader>
-              }
+              value={propVal.file(order.provider_message_attachment, {
+                fileName: translate('PDF file'),
+                text: translate('Download PDF'),
+              })}
             />
           )}
-        </FormTable>
-      </FormTable.Card>
+        </PropertyList>
+      </PropertyCard>
 
       {(order.consumer_message || order.consumer_message_attachment) && (
-        <FormTable.Card title={translate('Customer response')}>
-          <FormTable detailsMode>
+        <PropertyCard title={translate('Customer response')}>
+          <PropertyList detailsMode>
             {order.consumer_message && (
-              <FormTable.Item
+              <PropertyItem
                 label={translate('Message')}
-                value={<FormattedHtml html={order.consumer_message} />}
+                value={propVal.richText(order.consumer_message, {
+                  format: 'html',
+                })}
               />
             )}
             {order.consumer_message_attachment && (
-              <FormTable.Item
+              <PropertyItem
                 label={translate('Attachment')}
-                value={
-                  <FileDownloader
-                    url={order.consumer_message_attachment}
-                    name={translate('PDF file')}
-                    className="text-btn hover:text-brand inline-flex items-center"
-                  >
-                    <DownloadSimpleIcon weight="bold" className="me-1" />
-                    {translate('Download PDF')}
-                  </FileDownloader>
-                }
+                value={propVal.file(order.consumer_message_attachment, {
+                  fileName: translate('PDF file'),
+                  text: translate('Download PDF'),
+                })}
               />
             )}
-          </FormTable>
-        </FormTable.Card>
+          </PropertyList>
+        </PropertyCard>
       )}
     </div>
   );

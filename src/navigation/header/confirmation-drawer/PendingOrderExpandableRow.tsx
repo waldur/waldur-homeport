@@ -1,14 +1,14 @@
 import { FC, useMemo } from 'react';
 import { OrderDetails } from 'waldur-js-client';
 
-import { formatDateTime } from '@/core/dateUtils';
-import { FileDownloader } from '@/form/upload/FileDownloader';
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import {
   getPlanBillingModeLabel,
   toPlanBilling,
 } from '@/marketplace/details/plan/billingMode';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -77,61 +77,54 @@ const NestedKeyValueTable: FC<{
 };
 
 const MetadataTab: FC<{ order: OrderDetails }> = ({ order }) => (
-  <>
-    <Field
-      label={translate('Order ID')}
-      value={renderFieldOrDash(order.slug)}
-    />
-    <Field
+  <PropertyList variant="summary" hideIfEmpty={false}>
+    <PropertyItem label={translate('Order ID')} value={order.slug} />
+    <PropertyItem
       label={translate('Created by')}
-      value={renderFieldOrDash(
-        order.created_by_full_name || order.created_by_username,
-      )}
+      value={order.created_by_full_name || order.created_by_username}
     />
-    <Field
+    <PropertyItem
       label={translate('Created at')}
-      value={formatDateTime(order.created)}
+      value={propVal.date(order.created, { precision: 'datetime' })}
     />
-    <Field
-      label={translate('Plan')}
-      value={renderFieldOrDash(order.plan_name)}
-    />
+    <PropertyItem label={translate('Plan')} value={order.plan_name} />
     {order.new_plan_name ? (
-      <Field
+      <PropertyItem
         label={translate('New plan')}
-        value={
-          getPlanBillingModeLabel(toPlanBilling(order.new_plan_billing_mode))
-            ? `${order.new_plan_name} (${getPlanBillingModeLabel(
-                toPlanBilling(order.new_plan_billing_mode),
-              )})`
-            : order.new_plan_name
-        }
+        value={propVal.annotated(order.new_plan_name, {
+          hint: getPlanBillingModeLabel(
+            toPlanBilling(order.new_plan_billing_mode),
+          ),
+        })}
       />
     ) : null}
     {order.start_date ? (
-      <Field
+      <PropertyItem
         label={translate('Scheduled start')}
-        value={formatDateTime(order.start_date)}
+        value={propVal.date(order.start_date, { precision: 'datetime' })}
       />
     ) : null}
     {order.project_description ? (
-      <Field
+      <PropertyItem
         label={translate('Project description')}
         value={order.project_description}
       />
     ) : null}
     {order.request_comment ? (
-      <Field label={translate('PO reference')} value={order.request_comment} />
-    ) : null}
-    {order.attachment ? (
-      <Field
-        label={translate('Purchase order')}
-        value={
-          <FileDownloader url={order.attachment} name={translate('PDF file')} />
-        }
+      <PropertyItem
+        label={translate('PO reference')}
+        value={order.request_comment}
       />
     ) : null}
-  </>
+    {order.attachment ? (
+      <PropertyItem
+        label={translate('Purchase order')}
+        value={propVal.file(order.attachment, {
+          fileName: translate('PDF file'),
+        })}
+      />
+    ) : null}
+  </PropertyList>
 );
 
 /**

@@ -6,7 +6,7 @@ import {
   rolesList,
 } from 'waldur-js-client';
 
-import { Badge, Tooltip } from 'waldur-ui';
+import { Badge, PropertyItem, Tooltip } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -24,12 +24,10 @@ import {
   StringEditField,
   TextEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { TabbedSection } from '@/form/TabbedSection';
 import { clearToBlank } from '@/form/utils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { renderFieldOrDash } from '@/table/utils';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 import { useSetCustomer, useUser } from '@/workspace/hooks';
 
@@ -258,12 +256,13 @@ const SettingsTab: FC<CustomerEditPanelProps> = (props) => {
         )}
         min={0}
       />
-      <FormTable.Item
+      <PropertyItem
         label={translate('Available affiliations')}
         description={translate(
           'Affiliations offered to project creators in this organization. Staff can pick from the full registry.',
         )}
-        value={renderFieldOrDash(affiliationsDisplay)}
+        value={affiliationsDisplay}
+        hideIfEmpty={false}
         actions={
           props.canUpdate && user?.is_staff ? (
             <>
@@ -291,7 +290,7 @@ const SettingsTab: FC<CustomerEditPanelProps> = (props) => {
         />
       )}
       {user?.is_staff && (
-        <FormTable.Item
+        <PropertyItem
           label={translate('Project metadata schema')}
           description={translate(
             'Checklist used for project metadata collection.',
@@ -351,7 +350,7 @@ const IdentifiersTab: FC<CustomerEditPanelProps> = (props) => {
 
   return (
     <>
-      <FormTable.Item label={translate('UUID')} value={props.customer.uuid} />
+      <PropertyItem label={translate('UUID')} value={props.customer.uuid} />
 
       <StringEditField
         name="slug"
@@ -434,12 +433,8 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
         >
           <IdentifiersTab {...props} />
         </TabbedSection.Tab>
-        <TabbedSection.Tab id="media" title={translate('Media')}>
-          <tr>
-            <td colSpan={2} className="p-0">
-              <CustomerMediaPanel {...props} embedded />
-            </td>
-          </tr>
+        <TabbedSection.Tab id="media" title={translate('Media')} plain>
+          <CustomerMediaPanel {...props} embedded />
         </TabbedSection.Tab>
       </TabbedSection>
     </EditFieldProvider>

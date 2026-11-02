@@ -3,14 +3,19 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, ReactNode } from 'react';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
 import { getKeyTitle } from '@/administration/settings/utils';
 import { ENV } from '@/core/config';
 import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { SettingsDescription } from '@/SettingsDescription';
 import { renderFieldOrDash } from '@/table/utils';
@@ -99,9 +104,9 @@ export const SramSettingsTab: FC = () => {
           )}
         />
       )}
-      <FormTable.Card
+      <PropertyCard
+        bordered
         title={translate('SCIM and SRAM settings')}
-        className="card-bordered"
         actions={
           <Link
             state="admin-identity"
@@ -114,17 +119,17 @@ export const SramSettingsTab: FC = () => {
           </Link>
         }
       >
-        <FormTable>
+        <PropertyList>
           {SRAM_SETTING_KEYS.map((key) => (
-            <FormTable.Item
+            <PropertyItem
               key={key}
               label={getKeyTitle(key)}
               description={findSetting(key)?.description}
               value={renderValue(key, settings[key])}
             />
           ))}
-        </FormTable>
-      </FormTable.Card>
+        </PropertyList>
+      </PropertyCard>
     </div>
   );
 };

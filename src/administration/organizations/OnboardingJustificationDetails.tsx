@@ -6,14 +6,13 @@ import {
   OnboardingVerification,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { BaseTextField } from '@/form/TextField';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { AttachmentsList } from '@/form/upload/AttachmentsList';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 import { renderFieldOrDash } from '@/table/utils';
 
 interface OnboardingJustificationDetailsProps {
@@ -101,51 +100,58 @@ export const OnboardingJustificationDetails: FC<
 
           <div className="card mb-3">
             <div className="card-body">
-              {verification?.user_submitted_customer_data &&
+              {((verification?.user_submitted_customer_data &&
                 Object.keys(verification.user_submitted_customer_data).length >
-                  0 && (
-                  <>
-                    <h3 className="mb-3">
-                      {translate("User's organization details")}
-                    </h3>
-                    <hr className="my-3" />
+                  0) ||
+                (verification?.onboarding_metadata &&
+                  Object.keys(verification.onboarding_metadata).length >
+                    0)) && (
+                <>
+                  <h3 className="mb-3">
+                    {translate("User's organization details")}
+                  </h3>
+                  <hr className="my-3" />
 
-                    <h4 className="font-medium mb-2.5">
-                      {translate('Organization info')}
-                    </h4>
-                    {Object.entries(
-                      verification.user_submitted_customer_data,
-                    ).map(([key, value]) => (
-                      <Field
-                        key={key}
-                        label={key}
-                        value={String(renderFieldOrDash(value))}
-                      />
-                    ))}
+                  <PropertyList
+                    variant="summary"
+                    className="flex flex-col gap-6 mb-3"
+                  >
+                    {verification?.user_submitted_customer_data &&
+                      Object.keys(verification.user_submitted_customer_data)
+                        .length > 0 && (
+                        <PropertyList.Section
+                          title={translate('Organization info')}
+                        >
+                          {Object.entries(
+                            verification.user_submitted_customer_data,
+                          ).map(([key, value]) => (
+                            <PropertyItem
+                              key={key}
+                              label={key}
+                              value={String(renderFieldOrDash(value))}
+                            />
+                          ))}
+                        </PropertyList.Section>
+                      )}
 
-                    <hr className="my-3" />
-                  </>
-                )}
-
-              {verification?.onboarding_metadata &&
-                Object.keys(verification.onboarding_metadata).length > 0 && (
-                  <>
-                    <h4 className="font-medium mb-2.5">
-                      {translate('User answers')}
-                    </h4>
-                    {Object.entries(verification.onboarding_metadata).map(
-                      ([key, value]) => (
-                        <Field
-                          key={key}
-                          label={key}
-                          value={String(renderFieldOrDash(value))}
-                        />
-                      ),
-                    )}
-
-                    <hr className="my-3" />
-                  </>
-                )}
+                    {verification?.onboarding_metadata &&
+                      Object.keys(verification.onboarding_metadata).length >
+                        0 && (
+                        <PropertyList.Section title={translate('User answers')}>
+                          {Object.entries(verification.onboarding_metadata).map(
+                            ([key, value]) => (
+                              <PropertyItem
+                                key={key}
+                                label={key}
+                                value={String(renderFieldOrDash(value))}
+                              />
+                            ),
+                          )}
+                        </PropertyList.Section>
+                      )}
+                  </PropertyList>
+                </>
+              )}
 
               {justification?.supporting_documentation &&
                 justification.supporting_documentation.length > 0 && (
@@ -173,19 +179,20 @@ export const OnboardingJustificationDetails: FC<
               {justification &&
                 (justification.error_message ||
                   justification.error_traceback) && (
-                  <>
-                    <h4 className="font-medium mb-2.5">
-                      {translate('Automatic validation logs')}
-                    </h4>
-                    <Field
-                      label={translate('Error code')}
-                      value={justification.error_message}
-                    />
-                    <Field
-                      label={translate('Traceback')}
-                      value={justification.error_traceback}
-                    />
-                  </>
+                  <PropertyList variant="summary" className="mb-3">
+                    <PropertyList.Section
+                      title={translate('Automatic validation logs')}
+                    >
+                      <PropertyItem
+                        label={translate('Error code')}
+                        value={justification.error_message}
+                      />
+                      <PropertyItem
+                        label={translate('Traceback')}
+                        value={justification.error_traceback}
+                      />
+                    </PropertyList.Section>
+                  </PropertyList>
                 )}
 
               {justification && (

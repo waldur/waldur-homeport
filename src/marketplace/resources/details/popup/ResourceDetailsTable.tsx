@@ -1,8 +1,9 @@
 import { FC, useMemo } from 'react';
 import { Resource } from 'waldur-js-client';
 
-import { FieldWithCopy } from '@/core/FieldWithCopy';
-import FormTable from '@/form/FormTable';
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
+import { renderFieldOrDash } from '@/table/utils';
 
 import { getTerminatedAt } from '../getTerminatedAt';
 import { getResourceSummaryFields } from '../utils';
@@ -32,17 +33,16 @@ export const ResourceDetailsTable: FC<OwnProps> = ({ resource }) => {
   );
 
   return (
-    <FormTable hideActions alignTop detailsMode>
+    <PropertyList hideActions alignTop detailsMode>
       {fields.map((field) => (
-        <FormTable.Item
+        <PropertyItem
           key={field.name}
           label={field.label}
-          value={
-            field.hasCopy ? <FieldWithCopy value={field.value} /> : field.value
-          }
+          value={field.hasCopy ? renderFieldOrDash(field.value) : field.value}
+          hasCopy={field.hasCopy}
           tooltip={field.tooltip}
         />
       ))}
-    </FormTable>
+    </PropertyList>
   );
 };

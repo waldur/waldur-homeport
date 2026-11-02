@@ -1,12 +1,12 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { formatCount } from '@/core/formatNumber';
 import { translate } from '@/i18n';
 
 import type { PubsubOverview } from './api';
 import {
   formatCircuitBreakerState,
-  formatNumber,
   getCircuitBreakerLevel,
   getHealthStatusLevel,
   getSuccessRateLevel,
@@ -102,7 +102,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
                 )}
               </div>
               <span className="text-quaternary">
-                {formatNumber(data.metrics.messages_sent)} {translate('sent')}
+                {formatCount(data.metrics.messages_sent)} {translate('sent')}
               </span>
             </div>
             <strong className="block">{translate('Failure rate')}</strong>
@@ -115,7 +115,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
           <div className="card-body">
             <div className="flex items-center justify-between">
               <strong className="display-4 text-info">
-                {formatNumber(data.metrics.messages_failed)}
+                {formatCount(data.metrics.messages_failed)}
               </strong>
               <span className="text-quaternary">
                 {translate('avg {ms}ms', { ms: data.metrics.avg_latency_ms })}

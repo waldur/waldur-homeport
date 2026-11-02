@@ -2,9 +2,10 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FunctionComponent, useEffect } from 'react';
 import { ServiceProvider } from 'waldur-js-client';
 
+import { PropertyCard } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import * as api from '@/marketplace/common/api';
 import { canRegisterServiceProviderForCustomer } from '@/marketplace/service-providers/selectors';
@@ -68,9 +69,9 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
     );
   } else {
     return (
-      <FormTable.Card
+      <PropertyCard
+        bordered
         title={translate('Details')}
-        className="card-bordered"
         actions={
           serviceProvider && user.is_staff ? (
             <DisableServiceProviderButton
@@ -96,7 +97,7 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
             setServiceProvider={setServiceProvider}
           />
         ) : null}
-      </FormTable.Card>
+      </PropertyCard>
     );
   }
 };

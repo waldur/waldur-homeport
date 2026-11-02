@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { NestedSection as Section } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { AttributeCell } from '@/marketplace/common/AttributeCell';
 
 import { isValidAttribute } from './utils';
@@ -23,16 +25,20 @@ export const AttributeItem: FunctionComponent<AttributeItemProps> = (props) => {
       })}
     >
       <b>{props.section.title}</b>
-      {filteredAttributes
-        .filter((attr) => isValidAttribute(props.attributes[attr.key]))
-        .map((attr, index) => (
-          <div key={index}>
-            {attr.title}:{' '}
-            {props.attributes[attr.key] && (
-              <AttributeCell attr={attr} value={props.attributes[attr.key]} />
-            )}
-          </div>
-        ))}
+      {/* Rows read `title: value` on one line, as they did as plain divs. */}
+      <PropertyList variant="summary" termWidth="auto">
+        {filteredAttributes
+          .filter((attr) => isValidAttribute(props.attributes[attr.key]))
+          .map((attr, index) => (
+            <PropertyItem
+              key={index}
+              label={attr.title}
+              value={
+                <AttributeCell attr={attr} value={props.attributes[attr.key]} />
+              }
+            />
+          ))}
+      </PropertyList>
     </div>
   ) : null;
 };

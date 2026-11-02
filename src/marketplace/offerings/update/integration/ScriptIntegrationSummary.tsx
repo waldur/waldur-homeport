@@ -1,5 +1,6 @@
+import { PropertyCard, PropertyItem, PropertyList } from 'waldur-ui';
+
 import { CheckOrX } from '@/core/CheckOrX';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
@@ -25,7 +26,8 @@ export const ScriptIntegrationSummary = ({
   const secretOptionsHidden = !canSeeOfferingSecretOptions(offering);
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('Provisioning configuration')}
       refetch={refetch}
       loading={loading}
@@ -34,11 +36,11 @@ export const ScriptIntegrationSummary = ({
           <EditVarsButton offering={offering} refetch={refetch} />
         )
       }
-      className="card-bordered mb-5.5"
+      className="mb-5.5"
     >
-      <FormTable>
+      <PropertyList>
         {SCRIPT_ROWS.map((field) => (
-          <FormTable.Item
+          <PropertyItem
             key={field.type}
             label={field.label}
             tooltip={
@@ -66,7 +68,7 @@ export const ScriptIntegrationSummary = ({
             }
           />
         ))}
-      </FormTable>
-    </FormTable.Card>
+      </PropertyList>
+    </PropertyCard>
   );
 };

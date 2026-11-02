@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import type { PermissionRequest } from 'waldur-js-client';
 
 import { PermissionRequestActionDialog } from './PermissionRequestActionDialog';
 import {
@@ -23,7 +24,8 @@ describe('PermissionRequestActionDialog', () => {
     customer_name: 'Test Org',
     role_name: 'CUSTOMER.OWNER',
     created: '2023-01-01',
-  };
+    // The dialog reads only these fields of the request.
+  } as PermissionRequest;
 
   const mockApprove = vi.fn();
   const mockReject = vi.fn();

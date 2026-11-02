@@ -1,11 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import { HelpIcon } from 'waldur-ui';
+import { HelpIcon, PropertyItem } from 'waldur-ui';
 
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
-import { Field } from './Field';
 import { ResourceSummaryProps } from './types';
 
 const formatErrorField = (props: ResourceSummaryProps) => {
@@ -29,12 +27,11 @@ const formatErrorField = (props: ResourceSummaryProps) => {
   );
 };
 
-export const ErrorMessageField: FunctionComponent<
-  ResourceSummaryProps & { formTableItem?: boolean }
-> = (props) => {
-  const Component = props.formTableItem ? FormTable.Item : Field;
+export const ErrorMessageField: FunctionComponent<ResourceSummaryProps> = (
+  props,
+) => {
   return (
-    <Component
+    <PropertyItem
       label={translate('Error message')}
       value={formatErrorField(props)}
     />

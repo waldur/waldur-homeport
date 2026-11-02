@@ -4,17 +4,16 @@ import classNames from 'classnames';
 import { FC, ReactNode, useMemo } from 'react';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useUrlTab } from '@/navigation/useUrlTab';
 import { SettingsDescription } from '@/SettingsDescription';
 import { TableQuery } from '@/table/TableQuery';
 
-import { FieldRow } from './FieldRow';
+import { SettingsPropertyList } from './SettingsPropertyList';
 import { getKeyTitle } from './utils';
 
 export interface SettingsTab {
@@ -138,21 +137,18 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
             {filteredGroups.map(({ tab, items }) => (
               <TabsContent key={tab.key} value={tab.key}>
                 {items.length > 0 ? (
-                  <FormTable>
-                    {items.map((item) => (
-                      <FieldRow
-                        key={item.key}
-                        item={item}
-                        value={
-                          getItemValue
-                            ? getItemValue(item, data)
-                            : data?.[item.key]
-                        }
-                        onEdit={getItemOnEdit?.(item, data)}
-                        isLoading={getItemIsLoading?.(item, isLoading)}
-                      />
-                    ))}
-                  </FormTable>
+                  <SettingsPropertyList
+                    items={items}
+                    values={data}
+                    getValue={getItemValue}
+                    onEdit={
+                      getItemOnEdit
+                        ? (item, vals) => getItemOnEdit(item, vals)?.()
+                        : undefined
+                    }
+                    isLoading={isLoading}
+                    getItemIsLoading={getItemIsLoading}
+                  />
                 ) : (
                   <p className="text-quaternary">
                     {translate('No matching settings in this section.')}

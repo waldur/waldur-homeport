@@ -1,5 +1,5 @@
-import { FieldWithCopy } from '@/core/FieldWithCopy';
-import FormTable from '@/form/FormTable';
+import { PropertyCard, PropertyItem, PropertyList } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
@@ -8,17 +8,18 @@ export const UserSubmittedFieldsTab = ({ order }) => {
   const hasEntries = entries.length > 0;
 
   return (
-    <FormTable.Card title={translate('User submitted fields')}>
+    <PropertyCard title={translate('User submitted fields')}>
       {hasEntries ? (
-        <FormTable detailsMode>
+        <PropertyList detailsMode>
           {entries.map(([key, value]) => (
-            <FormTable.Item
+            <PropertyItem
               key={key}
               label={key}
-              value={<FieldWithCopy value={JSON.stringify(value)} />}
+              value={JSON.stringify(value)}
+              hasCopy
             />
           ))}
-        </FormTable>
+        </PropertyList>
       ) : (
         <NoResult
           title={translate('No user submitted fields')}
@@ -28,6 +29,6 @@ export const UserSubmittedFieldsTab = ({ order }) => {
           noAction
         />
       )}
-    </FormTable.Card>
+    </PropertyCard>
   );
 };

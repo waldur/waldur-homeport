@@ -4,11 +4,11 @@ import { FC } from 'react';
 import { AccordionCard } from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
+import { formatCount } from '@/core/formatNumber';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 
 import { getTopQueues } from './api';
-import { formatNumber } from './utils';
 
 export const PubSubTopQueuesCard: FC = () => {
   const { data, isLoading } = useQuery({
@@ -25,7 +25,7 @@ export const PubSubTopQueuesCard: FC = () => {
         data
           ? translate('{count} queues, {messages} total messages', {
               count: data.total_queues,
-              messages: formatNumber(data.total_messages),
+              messages: formatCount(data.total_messages),
             })
           : translate('Loading...')
       }
@@ -60,7 +60,7 @@ export const PubSubTopQueuesCard: FC = () => {
                 <td
                   className={`text-end ${queue.messages > 1000 ? 'text-warning' : ''}`}
                 >
-                  {formatNumber(queue.messages)}
+                  {formatCount(queue.messages)}
                 </td>
                 <td className="text-end">{queue.consumers}</td>
               </tr>

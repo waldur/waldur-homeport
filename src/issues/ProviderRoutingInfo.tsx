@@ -1,12 +1,11 @@
 import { FC, ReactNode } from 'react';
 import { Issue } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { OrganizationLink } from '@/customer/list/OrganizationLink';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 
 import { IssueStatus } from './IssueStatus';
 import { providerTicketInfo } from './providerTicketInfo';
@@ -75,27 +74,25 @@ export const ProviderRoutingInfo: FC<{ issue: Issue }> = ({ issue }) => {
           {/* SLA breach is shown by IssueSlaBadge in the detail header; not
               repeated here to avoid a duplicate badge. */}
         </div>
-        {issue.is_escalated && issue.escalation_reason && (
-          <Field
-            label={translate('Escalation reason')}
-            value={issue.escalation_reason}
-            isStuck
-            labelClass="min-w-[150px]"
-            className="text-sm"
-          />
-        )}
-        {rows
-          .filter(([, v]) => v)
-          .map(([label, v]) => (
-            <Field
-              key={label}
-              label={label}
-              value={v}
-              isStuck
-              labelClass="min-w-[150px]"
+        <PropertyList variant="summary" termWidth="sm">
+          {issue.is_escalated && issue.escalation_reason && (
+            <PropertyItem
+              label={translate('Escalation reason')}
+              value={issue.escalation_reason}
               className="text-sm"
             />
-          ))}
+          )}
+          {rows
+            .filter(([, v]) => v)
+            .map(([label, v]) => (
+              <PropertyItem
+                key={label}
+                label={label}
+                value={v}
+                className="text-sm"
+              />
+            ))}
+        </PropertyList>
       </div>
     </div>
   );

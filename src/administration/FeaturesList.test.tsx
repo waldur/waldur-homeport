@@ -77,11 +77,20 @@ describe('FeaturesList', () => {
     });
     render(<FeaturesList />);
 
-    const row = screen.getByRole('row', {
-      name: /Enable billing functionality/,
-    });
+    const row = screen.getByTestId('feature-billing.enabled');
     expect(row).toHaveAttribute('id', 'feature-billing.enabled');
     expect(row).toHaveClass('bg-warning-subtle');
+  });
+
+  it('names each switch by its feature description, which toggles it', async () => {
+    render(<FeaturesList />);
+
+    const billing = screen.getByRole('checkbox', {
+      name: 'Enable billing functionality',
+    });
+    expect(billing).toBeChecked();
+    await userEvent.click(screen.getByText('Enable billing functionality'));
+    expect(billing).not.toBeChecked();
   });
 
   it('renders all feature sections', () => {

@@ -6,13 +6,14 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { MultiSelectOption } from '@/form/select';
 import { translate } from '@/i18n';
 import { getLabel } from '@/marketplace/common/registry';
-import { Field } from '@/resource/summary';
 
 import { ErredRemoteConnection } from './ErredRemoteConnection';
 import { OfferingImportFormData } from './types';
@@ -71,13 +72,14 @@ export const SelectOfferingTab = () => {
 
   return (
     <div>
-      <Field
-        label={translate('API URL')}
-        value={formData?.api_url}
-        isStuck
-        className="border-b-[1px] border-b-secondary border-t-[1px] border-t-secondary py-4 mb-4"
-        labelClass="font-semibold me-2.5"
-      />
+      <PropertyList variant="summary" termWidth="auto">
+        <PropertyItem
+          label={translate('API URL')}
+          value={formData?.api_url}
+          className="border-b-[1px] border-b-secondary border-t-[1px] border-t-secondary py-4 mb-4"
+          labelClass="font-semibold me-2.5"
+        />
+      </PropertyList>
       <SelectGroup
         name="offerings"
         label={translate('Offerings')}

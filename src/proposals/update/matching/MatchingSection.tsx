@@ -5,16 +5,17 @@ import { proposalProtectedCallsMatchingConfigurationRetrieve } from 'waldur-js-c
 
 import {
   AlertItem,
-  Tooltip,
+  PropertyItem,
+  PropertyList,
   Tabs,
+  TabsContent,
   TabsList,
   TabsTrigger,
-  TabsContent,
+  Tooltip,
 } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useUrlTab } from '@/navigation/useUrlTab';
 import { Call } from '@/proposals/types';
@@ -227,9 +228,9 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
           <>
             {/* Affinity calculation tab */}
             <TabsContent value="affinity">
-              <FormTable>
+              <PropertyList>
                 {affinityRows.map((row) => (
-                  <FormTable.Item
+                  <PropertyItem
                     key={row.key}
                     label={row.label}
                     description={row.description}
@@ -245,7 +246,7 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
                     }
                   />
                 ))}
-              </FormTable>
+              </PropertyList>
               <AlertItem
                 type="floating"
                 variant="info"
@@ -264,9 +265,9 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
 
             {/* Constraints tab */}
             <TabsContent value="constraints">
-              <FormTable>
+              <PropertyList>
                 {constraintRows.map((row) => (
-                  <FormTable.Item
+                  <PropertyItem
                     key={row.key}
                     label={row.label}
                     description={row.description}
@@ -282,7 +283,7 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
                     }
                   />
                 ))}
-              </FormTable>
+              </PropertyList>
             </TabsContent>
           </>
         </Tabs>

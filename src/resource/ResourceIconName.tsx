@@ -5,8 +5,9 @@ import { Tooltip } from 'waldur-ui';
 import openstackIcon from '@/images/appstore/icon-openstack.png';
 import rancherIcon from '@/images/appstore/icon-rancher.png';
 import vmwareIcon from '@/images/appstore/icon-vmware.png';
+import { renderFieldOrDash } from '@/table/utils';
 
-import { formatResourceType, formatDefault } from './utils';
+import { formatResourceType } from './utils';
 
 interface ResourceIconProps {
   resource: {
@@ -33,7 +34,7 @@ export const ResourceIconName: FunctionComponent<ResourceIconProps> = (
         className="me-1"
         width={25}
       />{' '}
-      {formatDefault(props.resource.name)}
+      {renderFieldOrDash(props.resource.name)}
     </span>
   </Tooltip>
 );

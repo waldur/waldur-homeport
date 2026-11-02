@@ -1,13 +1,12 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
+import { OrderDetails } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
 
-import { Link } from '@/core/Link';
 import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
-import { ResourceLink } from '@/resource/ResourceLink';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { useUser } from '@/workspace/hooks';
 
 import { shouldLinkProviderResource } from '../utils';
@@ -55,7 +54,13 @@ const PurchaseOrderBadge = ({ order, offering }) => {
   );
 };
 
-export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
+export const OrderDetailsHeaderBody = ({
+  order,
+  offering = undefined,
+}: {
+  order: OrderDetails;
+  offering?: any;
+}) => {
   const user = useUser();
   const showOfferingLink = canUseMarketplaceShopUi(user);
   const showPurchaseOrder =
@@ -65,75 +70,60 @@ export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
   return (
     <div className="flex flex-wrap gap-x-5">
       <div className="w-full sm:w-auto sm:flex-none">
-        <Field
-          label={translate('Organization')}
-          value={order.customer_name}
-          labelClass="w-[100px]"
-          labelCol="auto"
-          valueCol="auto"
-        />
-        <Field
-          label={translate('Project')}
-          value={order.project_name}
-          labelClass="w-[100px]"
-          labelCol="auto"
-          valueCol="auto"
-        />
+        <PropertyList variant="summary" termWidth="100px">
+          <PropertyItem
+            label={translate('Organization')}
+            value={order.customer_name}
+          />
+          <PropertyItem
+            label={translate('Project')}
+            value={order.project_name}
+          />
+        </PropertyList>
       </div>
       <div className="w-full sm:w-auto sm:flex-none">
-        <Field
-          label={translate('Resource')}
-          value={
-            shouldLinkProviderResource(user, order) ? (
-              <Link
-                state="marketplace-provider-resource-details"
-                params={{
-                  uuid: order.provider_uuid,
-                  resource_uuid: order.marketplace_resource_uuid,
-                }}
-                label={order.resource_name}
-              />
-            ) : (
-              <ResourceLink
-                uuid={order.marketplace_resource_uuid}
-                label={order.resource_name}
-              />
-            )
-          }
-          labelClass="w-[100px]"
-          labelCol="auto"
-          valueCol="auto"
-        />
-        <OrderDetailsQuickBody order={order} autoWidth />
-        <Field
-          label={translate('Offering')}
-          value={
-            showOfferingLink ? (
-              <Link
-                state="public-offering.marketplace-public-offering"
-                params={{ uuid: order.offering_uuid }}
-                className="text-link"
-              >
-                {order.offering_name}
-              </Link>
-            ) : (
-              order.offering_name
-            )
-          }
-          labelClass="w-[100px]"
-          labelCol="auto"
-          valueCol="auto"
-        />
+        <PropertyList variant="summary" termWidth="100px">
+          <PropertyItem
+            label={translate('Resource')}
+            value={
+              shouldLinkProviderResource(user, order)
+                ? propVal.link(order.resource_name, {
+                    state: 'marketplace-provider-resource-details',
+                    params: {
+                      uuid: order.provider_uuid,
+                      resource_uuid: order.marketplace_resource_uuid,
+                    },
+                  })
+                : propVal.link(order.resource_name, {
+                    state: 'marketplace-resource-details',
+                    params: {
+                      resource_uuid: order.marketplace_resource_uuid,
+                    },
+                  })
+            }
+          />
+          <OrderDetailsQuickBody order={order} autoWidth />
+          <PropertyItem
+            label={translate('Offering')}
+            value={
+              showOfferingLink
+                ? propVal.link(order.offering_name, {
+                    state: 'public-offering.marketplace-public-offering',
+                    params: { uuid: order.offering_uuid },
+                  })
+                : order.offering_name
+            }
+          />
+        </PropertyList>
       </div>
       {showPurchaseOrder && (
         <div className="w-full sm:w-auto sm:flex-none">
-          <Field
-            label={translate('Purchase order')}
-            value={<PurchaseOrderBadge order={order} offering={offering} />}
-            labelClass="w-[125px]"
-            labelCol="auto"
-            valueCol="auto"
-          />
+          <PropertyList variant="summary" termWidth="125px">
+            <PropertyItem
+              label={translate('Purchase order')}
+              value={<PurchaseOrderBadge order={order} offering={offering} />}
+            />
+          </PropertyList>
         </div>
       )}
     </div>

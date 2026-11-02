@@ -1,17 +1,22 @@
-import FormTable from '@/form/FormTable';
-import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import type { VmwarePort } from 'waldur-js-client';
 
-export const VMwarePortSummary = (props) => {
+import { PropertyItem } from 'waldur-ui';
+
+import { translate } from '@/i18n';
+import { ResourceSummaryProps } from '@/resource/summary';
+
+export const VMwarePortSummary = (props: ResourceSummaryProps<VmwarePort>) => {
   const { resource } = props;
-  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Component
+      <PropertyItem
         label={translate('MAC address')}
         value={resource.mac_address}
       />
-      <Component label={translate('Network')} value={resource.network_name} />
+      <PropertyItem
+        label={translate('Network')}
+        value={resource.network_name}
+      />
     </>
   );
 };

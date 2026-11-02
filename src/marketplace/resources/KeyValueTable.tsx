@@ -24,8 +24,10 @@ export const KeyValueTable: FunctionComponent<any> = (props) => (
         <TableRow key={key}>
           <TableCell className="font-medium text-primary">{key}</TableCell>
           <TableCell>
-            {typeof props.items[key] === 'object' &&
-            props.items[key] !== null ? (
+            {Array.isArray(props.items[key]) ? (
+              props.items[key].join(', ')
+            ) : typeof props.items[key] === 'object' &&
+              props.items[key] !== null ? (
               <pre>{JSON.stringify(props.items[key], null, 2)}</pre>
             ) : typeof props.items[key] === 'boolean' ? (
               props.items[key] ? (

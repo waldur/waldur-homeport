@@ -43,9 +43,7 @@ const Pair = ({ caseId }: { caseId: CaseId }) => {
         </div>
       </div>
       <div className="w-[360px]" data-pair={caseId} data-role="new">
-        <Card
-          className={isBordered ? 'shadow-none border-secondary' : undefined}
-        >
+        <Card bordered={isBordered}>
           {hasHeader && (
             <CardHeader>
               <CardTitle>Card title</CardTitle>

@@ -1,39 +1,34 @@
 import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 import {
-  formatGender,
-  formatOrganizationType,
+  getGenderChoices,
+  getOrganizationTypeOptions,
 } from '@/user/support/aai-constants';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { UserFormData, UserFormDialogData } from '../UserFormTypes';
 
-const ReviewRow = ({
-  label,
-  value,
-}: {
-  label: string;
-  value: React.ReactNode;
-}) => (
-  <tr>
-    <td className="font-medium whitespace-nowrap pe-3">{label}</td>
-    <td>{renderFieldOrDash(value)}</td>
-  </tr>
-);
-
-const BooleanLabel = ({ value }: { value: boolean }) => (
-  <span className={value ? 'text-success' : 'text-quaternary'}>
-    {value ? translate('Yes') : translate('No')}
-  </span>
-);
-
 export const ReviewStep: FC<WizardStepProps> = (props) => {
   const { values } = useFormState<UserFormData>();
   const { editMode } = (props.data || {}) as UserFormDialogData;
+
+  const hasIdentityProfileAttributes =
+    isProfileAttributeEnabled('personal_title') ||
+    isProfileAttributeEnabled('gender') ||
+    isProfileAttributeEnabled('place_of_birth') ||
+    isProfileAttributeEnabled('country_of_residence') ||
+    isProfileAttributeEnabled('nationality') ||
+    isProfileAttributeEnabled('organization_country') ||
+    isProfileAttributeEnabled('organization_type') ||
+    isProfileAttributeEnabled('organization_registry_code') ||
+    isProfileAttributeEnabled('organization_vat_code') ||
+    isProfileAttributeEnabled('organization_address');
 
   return (
     <WizardModal {...props}>
@@ -42,31 +37,28 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
           {translate('Review the changes below and click Save to apply them.')}
         </p>
       )}
-      <table className="table table-borderless mb-0">
-        <tbody>
-          <tr>
-            <td
-              colSpan={2}
-              className="font-semibold uppercase text-quaternary text-xs pb-1.5 pt-0"
-            >
-              {translate('Account')}
-            </td>
-          </tr>
-          <ReviewRow label={translate('Username')} value={values.username} />
-          <ReviewRow label={translate('Email')} value={values.email} />
-          <ReviewRow
+      <PropertyList
+        variant="summary"
+        termWidth="md"
+        hideIfEmpty={false}
+        className="flex flex-col gap-6"
+      >
+        <PropertyList.Section title={translate('Account')}>
+          <PropertyItem label={translate('Username')} value={values.username} />
+          <PropertyItem label={translate('Email')} value={values.email} />
+          <PropertyItem
             label={translate('Active')}
-            value={<BooleanLabel value={values.is_active} />}
+            value={propVal.boolean(values.is_active, { colored: true })}
           />
-          <ReviewRow
+          <PropertyItem
             label={translate('Staff')}
-            value={<BooleanLabel value={values.is_staff} />}
+            value={propVal.boolean(values.is_staff, { colored: true })}
           />
-          <ReviewRow
+          <PropertyItem
             label={translate('Support')}
-            value={<BooleanLabel value={values.is_support} />}
+            value={propVal.boolean(values.is_support, { colored: true })}
           />
-          <ReviewRow
+          <PropertyItem
             label={translate('Password')}
             value={
               values.remove_password ? (
@@ -75,144 +67,123 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
                 </span>
               ) : values.password ? (
                 <span className="text-success">{translate('Will be set')}</span>
-              ) : editMode ? (
-                <span className="text-quaternary">
-                  {translate('No changes')}
-                </span>
-              ) : (
-                <span className="text-quaternary">{translate('Not set')}</span>
-              )
+              ) : undefined
             }
+            placeholder={editMode ? translate('No changes') : 'not-set'}
           />
+        </PropertyList.Section>
 
-          <tr>
-            <td
-              colSpan={2}
-              className="font-semibold uppercase text-quaternary text-xs pb-1.5 pt-5"
-            >
-              {translate('Personal information')}
-            </td>
-          </tr>
-          <ReviewRow
+        <PropertyList.Section title={translate('Personal information')}>
+          <PropertyItem
             label={translate('First name')}
             value={values.first_name}
           />
-          <ReviewRow label={translate('Last name')} value={values.last_name} />
+          <PropertyItem
+            label={translate('Last name')}
+            value={values.last_name}
+          />
           {isProfileAttributeEnabled('native_name') && (
-            <ReviewRow
+            <PropertyItem
               label={translate('Native name')}
               value={values.native_name}
             />
           )}
-          <ReviewRow
+          <PropertyItem
             label={translate('Organization')}
             value={values.organization}
           />
-          <ReviewRow
+          <PropertyItem
             label={translate('Job position')}
             value={values.job_title}
           />
           {isProfileAttributeEnabled('phone_number') && (
-            <ReviewRow
+            <PropertyItem
               label={translate('Phone number')}
               value={values.phone_number}
             />
           )}
-          <ReviewRow
+          <PropertyItem
             label={translate('Description')}
             value={values.description}
           />
+        </PropertyList.Section>
 
-          {(isProfileAttributeEnabled('personal_title') ||
-            isProfileAttributeEnabled('gender') ||
-            isProfileAttributeEnabled('place_of_birth') ||
-            isProfileAttributeEnabled('country_of_residence') ||
-            isProfileAttributeEnabled('nationality') ||
-            isProfileAttributeEnabled('organization_country') ||
-            isProfileAttributeEnabled('organization_type') ||
-            isProfileAttributeEnabled('organization_registry_code') ||
-            isProfileAttributeEnabled('organization_vat_code') ||
-            isProfileAttributeEnabled('organization_address')) && (
-            <>
-              <tr>
-                <td
-                  colSpan={2}
-                  className="font-semibold uppercase text-quaternary text-xs pb-1.5 pt-5"
-                >
-                  {translate('Identity & Profile')}
-                </td>
-              </tr>
-              {isProfileAttributeEnabled('personal_title') && (
-                <ReviewRow
-                  label={translate('Personal title')}
-                  value={values.personal_title}
+        {hasIdentityProfileAttributes && (
+          <PropertyList.Section title={translate('Identity & Profile')}>
+            {isProfileAttributeEnabled('personal_title') && (
+              <PropertyItem
+                label={translate('Personal title')}
+                value={values.personal_title}
+              />
+            )}
+            {isProfileAttributeEnabled('gender') && (
+              <PropertyItem
+                label={translate('Gender')}
+                value={propVal.enum(values.gender, {
+                  options: getGenderChoices(),
+                })}
+              />
+            )}
+            {isProfileAttributeEnabled('place_of_birth') && (
+              <PropertyItem
+                label={translate('Place of birth')}
+                value={values.place_of_birth}
+              />
+            )}
+            {isProfileAttributeEnabled('country_of_residence') && (
+              <PropertyItem
+                label={translate('Country of residence')}
+                value={values.country_of_residence}
+              />
+            )}
+            {isProfileAttributeEnabled('nationality') && (
+              <PropertyItem
+                label={translate('Nationality')}
+                value={values.nationality}
+              />
+            )}
+            {isProfileAttributeEnabled('nationalities') &&
+              values.nationalities?.length > 0 && (
+                <PropertyItem
+                  label={translate('Nationalities')}
+                  value={propVal.list(values.nationalities)}
                 />
               )}
-              {isProfileAttributeEnabled('gender') && (
-                <ReviewRow
-                  label={translate('Gender')}
-                  value={formatGender(values.gender)}
-                />
-              )}
-              {isProfileAttributeEnabled('place_of_birth') && (
-                <ReviewRow
-                  label={translate('Place of birth')}
-                  value={values.place_of_birth}
-                />
-              )}
-              {isProfileAttributeEnabled('country_of_residence') && (
-                <ReviewRow
-                  label={translate('Country of residence')}
-                  value={values.country_of_residence}
-                />
-              )}
-              {isProfileAttributeEnabled('nationality') && (
-                <ReviewRow
-                  label={translate('Nationality')}
-                  value={values.nationality}
-                />
-              )}
-              {isProfileAttributeEnabled('nationalities') &&
-                values.nationalities?.length > 0 && (
-                  <ReviewRow
-                    label={translate('Nationalities')}
-                    value={values.nationalities.join(', ')}
-                  />
-                )}
-              {isProfileAttributeEnabled('organization_country') && (
-                <ReviewRow
-                  label={translate('Organization country')}
-                  value={values.organization_country}
-                />
-              )}
-              {isProfileAttributeEnabled('organization_type') && (
-                <ReviewRow
-                  label={translate('Organization type')}
-                  value={formatOrganizationType(values.organization_type)}
-                />
-              )}
-              {isProfileAttributeEnabled('organization_registry_code') && (
-                <ReviewRow
-                  label={translate('Organization registry code')}
-                  value={values.organization_registry_code}
-                />
-              )}
-              {isProfileAttributeEnabled('organization_vat_code') && (
-                <ReviewRow
-                  label={translate('Organization VAT code')}
-                  value={values.organization_vat_code}
-                />
-              )}
-              {isProfileAttributeEnabled('organization_address') && (
-                <ReviewRow
-                  label={translate('Organization address')}
-                  value={values.organization_address}
-                />
-              )}
-            </>
-          )}
-        </tbody>
-      </table>
+            {isProfileAttributeEnabled('organization_country') && (
+              <PropertyItem
+                label={translate('Organization country')}
+                value={values.organization_country}
+              />
+            )}
+            {isProfileAttributeEnabled('organization_type') && (
+              <PropertyItem
+                label={translate('Organization type')}
+                value={propVal.enum(values.organization_type, {
+                  options: getOrganizationTypeOptions(),
+                })}
+              />
+            )}
+            {isProfileAttributeEnabled('organization_registry_code') && (
+              <PropertyItem
+                label={translate('Organization registry code')}
+                value={values.organization_registry_code}
+              />
+            )}
+            {isProfileAttributeEnabled('organization_vat_code') && (
+              <PropertyItem
+                label={translate('Organization VAT code')}
+                value={values.organization_vat_code}
+              />
+            )}
+            {isProfileAttributeEnabled('organization_address') && (
+              <PropertyItem
+                label={translate('Organization address')}
+                value={values.organization_address}
+              />
+            )}
+          </PropertyList.Section>
+        )}
+      </PropertyList>
     </WizardModal>
   );
 };

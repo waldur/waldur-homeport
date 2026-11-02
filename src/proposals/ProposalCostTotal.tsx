@@ -1,11 +1,13 @@
 import { FC } from 'react';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { Panel } from '@/core/Panel';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 
 import { getLongestPrepaidMonths } from './prepaidDuration';
 import { formatProjectDuration, getProjectDuration } from './projectDuration';
@@ -50,44 +52,43 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
 
   const body = (
     <>
-      {showsFigures && (
-        <>
-          {Boolean(total.monthly) && (
-            <Field
-              label={translate('Recurring total')}
-              value={
-                <>
-                  {defaultCurrency(total.monthly)}
-                  <span className="text-quaternary">{translate(' /mo')}</span>
-                </>
-              }
-              labelCol={12}
-              valueCol={12}
-              space={2.5}
-            />
-          )}
-          {Boolean(total.oneTime) && (
-            <Field
-              label={translate('Subscriptions and one-time')}
-              value={defaultCurrency(total.oneTime)}
-              labelCol={12}
-              valueCol={12}
-              space={2.5}
-            />
-          )}
-        </>
-      )}
-      {duration && (
-        // What allocation will grant: the longest subscription requested, or
-        // the call's fixed duration where nothing prepaid was asked for.
-        <Field
-          label={translate('Project duration')}
-          value={formatProjectDuration(duration)}
-          labelCol={12}
-          valueCol={12}
-          space={0}
-        />
-      )}
+      <PropertyList
+        variant="summary"
+        labelClass="w-full sm:w-full"
+        valueClass="w-full sm:w-full"
+        space={2.5}
+      >
+        {showsFigures && (
+          <>
+            {Boolean(total.monthly) && (
+              <PropertyItem
+                label={translate('Recurring total')}
+                value={
+                  <>
+                    {defaultCurrency(total.monthly)}
+                    <span className="text-quaternary">{translate(' /mo')}</span>
+                  </>
+                }
+              />
+            )}
+            {Boolean(total.oneTime) && (
+              <PropertyItem
+                label={translate('Subscriptions and one-time')}
+                value={propVal.currency(total.oneTime)}
+              />
+            )}
+          </>
+        )}
+        {duration && (
+          // What allocation will grant: the longest subscription requested, or
+          // the call's fixed duration where nothing prepaid was asked for.
+          <PropertyItem
+            label={translate('Project duration')}
+            value={formatProjectDuration(duration)}
+            space={0}
+          />
+        )}
+      </PropertyList>
       {showsFigures && (
         // Recurring plus one-time, the sum the checkout's own total card shows,
         // so the two pages do not define "total" differently.

@@ -1,71 +1,72 @@
-import FormTable from '@/form/FormTable';
+import type { RancherNode } from 'waldur-js-client';
+
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { KeyValueButton } from '@/marketplace/resources/KeyValueButton';
-import { ResourceLink } from '@/resource/ResourceLink';
-import { Field, ResourceSummaryProps } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
+import { ResourceSummaryProps } from '@/resource/summary';
 
-import { NodeRoleField } from './NodeRoleField';
+import { getNodeRoleLabels } from './nodeRoles';
 
-const formatInstance = (resource) =>
-  resource.instance_marketplace_uuid ? (
-    <ResourceLink
-      uuid={resource.instance_marketplace_uuid}
-      label={resource.instance_name}
-    />
-  ) : (
-    <>&ndash;</>
-  );
-
-export const RancherNodeSummary = (props: ResourceSummaryProps) => {
-  const Component = props.formTableItem ? FormTable.Item : Field;
+export const RancherNodeSummary = (
+  props: ResourceSummaryProps<RancherNode>,
+) => {
   return (
     <>
-      <Component
+      <PropertyItem
         label={translate('Kubernetes version')}
         value={props.resource.k8s_version}
       />
 
-      <Component
+      <PropertyItem
         label={translate('Roles')}
-        value={<NodeRoleField node={props.resource} />}
+        value={propVal.enum(props.resource.role, {
+          labels: getNodeRoleLabels(),
+        })}
       />
 
-      <Component
+      <PropertyItem
         label={translate('Docker version')}
         value={props.resource.docker_version}
       />
 
-      <Component
+      <PropertyItem
         label={translate('CPU')}
-        value={
-          props.resource.cpu_allocated &&
-          translate('{allocated} / {total} cores', {
-            allocated: props.resource.cpu_allocated,
-            total: props.resource.cpu_total,
-          })
-        }
+        value={propVal.meter(
+          props.resource.cpu_allocated,
+          props.resource.cpu_total,
+          {
+            unit: 'cores',
+            showPercent: true,
+          },
+        )}
       />
 
-      <Component
+      <PropertyItem
         label={translate('RAM')}
-        value={
-          props.resource.ram_total &&
-          translate('{allocated} / {total} MiB', {
-            allocated: props.resource.ram_allocated,
-            total: props.resource.ram_total,
-          })
-        }
+        value={propVal.meter(
+          props.resource.ram_allocated,
+          props.resource.ram_total,
+          {
+            unit: 'MiB',
+            showPercent: true,
+          },
+        )}
       />
 
-      <Component
+      <PropertyItem
         label={translate('Pods')}
-        value={
-          props.resource.pods_total &&
-          `${props.resource.pods_allocated} / ${props.resource.pods_total}`
-        }
+        value={propVal.meter(
+          props.resource.pods_allocated,
+          props.resource.pods_total,
+          {
+            showPercent: true,
+          },
+        )}
       />
 
-      <Component
+      <PropertyItem
         label={translate('Labels')}
         value={
           Object.keys(props.resource.labels).length > 0 && (
@@ -77,7 +78,7 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
         }
       />
 
-      <Component
+      <PropertyItem
         label={translate('Annotations')}
         value={
           Object.keys(props.resource.annotations).length > 0 && (
@@ -89,9 +90,18 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
         }
       />
 
-      <Component
+      <PropertyItem
         label={translate('OpenStack instance')}
-        value={formatInstance(props.resource)}
+        value={
+          props.resource.instance_marketplace_uuid
+            ? propVal.link(props.resource.instance_name, {
+                state: 'marketplace-resource-details',
+                params: {
+                  resource_uuid: props.resource.instance_marketplace_uuid,
+                },
+              })
+            : null
+        }
       />
     </>
   );

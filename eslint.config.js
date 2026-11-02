@@ -147,6 +147,24 @@ export default tseslint
         // A FormLabel outside a FormField names no control: use FormFieldset +
         // FormLegend for a group, FormHeading for a caption.
         'waldur-custom/no-orphan-form-label': 'error',
+        // A PropertyItem outside a PropertyList is a one-row <dl> of its own;
+        // the wrappers render their children inside a list. Zero instances
+        // remain.
+        'waldur-custom/property-item-in-list': [
+          'error',
+          {
+            wrappers: [
+              'ExpandableContainer[asTable]',
+              'TabbedSection.Tab[!plain]',
+              'BaseCredentialsSection',
+              'BaseProvisioningConfigSection',
+            ],
+          },
+        ],
+        // A PropertyList must not contain only a single, lone property item.
+        // For a single item, use direct Tailwind CSS or merge into an adjacent
+        // list. A warning while existing single-item lists are converted.
+        'waldur-custom/no-lone-property-item-in-list': 'warn',
         // Bootstrap's .border is !important in an earlier layer, so a Tailwind
         // border colour next to it never paints. Autofixes to border-[1px].
         'waldur-custom/no-bootstrap-border-with-tailwind-color': 'error',
@@ -196,6 +214,11 @@ export default tseslint
         'waldur-custom/enforce-phosphor-icon-weight': 'error',
         'waldur-custom/prefer-classnames-utility': 'error',
         'waldur-custom/enforce-render-field-or-dash': 'error',
+        // A PropertyItem formatting its value by hand should be the typed
+        // property for it (src/property/propertyFields.tsx). Rows that predate
+        // the rule are counted in typed-property.baseline.json, which only
+        // shrinks: `yarn lint:properties:baseline` after moving some.
+        'waldur-custom/prefer-typed-property': 'error',
         'waldur-custom/prefer-mutate-over-mutateAsync': 'warn',
         'waldur-custom/no-direct-field-adapter': 'error',
         'waldur-custom/enforce-disabled-button-tooltip': 'error',
@@ -376,6 +399,7 @@ export default tseslint
         'waldur-custom/no-bootstrap-layout-utility': 'off',
         // Tests pass made-up classes to check they are forwarded.
         'waldur-custom/no-unknown-class': 'off',
+        'waldur-custom/no-lone-property-item-in-list': 'off',
       },
     },
     {

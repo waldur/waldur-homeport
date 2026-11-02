@@ -2,11 +2,12 @@ import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { MaintenanceAnnouncement } from 'waldur-js-client';
 
-import { formatMediumDateTime } from '@/core/dateUtils';
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 
 import { AffectedOfferingsTable } from '../create/AffectedOfferingsTable';
 import { InternalNotes } from '../InternalNotesField';
@@ -41,27 +42,33 @@ export const MaintenanceDetailsDialog: FC<{
       iconNode={<WarningCircleIcon weight="bold" />}
       iconColor="warning"
     >
-      <Field
-        label={translate('Service provider')}
-        value={maintenance.service_provider_name}
-      />
-      <Field
-        label={translate('Ongoing since')}
-        value={formatMediumDateTime(maintenance.scheduled_start)}
-      />
-      <Field
-        label={translate('Expected completion')}
-        value={formatMediumDateTime(maintenance.scheduled_end)}
-      />
-      <Field label={translate('Message')} value={maintenance.message} />
-      <InternalNotes maintenance={maintenance} />
-      <Field
-        label={translate('Affected offerings')}
-        valueCol={12}
-        valueClass="mt-1.5"
-      >
+      <PropertyList variant="summary" termWidth="md">
+        <PropertyItem
+          label={translate('Service provider')}
+          value={maintenance.service_provider_name}
+        />
+        <PropertyItem
+          label={translate('Ongoing since')}
+          value={propVal.date(maintenance.scheduled_start, {
+            precision: 'long',
+          })}
+        />
+        <PropertyItem
+          label={translate('Expected completion')}
+          value={propVal.date(maintenance.scheduled_end, { precision: 'long' })}
+        />
+        <PropertyItem
+          label={translate('Message')}
+          value={maintenance.message}
+        />
+        <InternalNotes maintenance={maintenance} />
+      </PropertyList>
+      <div className="mt-4">
+        <h6 className="text-secondary font-medium mb-2">
+          {translate('Affected offerings')}
+        </h6>
         <AffectedOfferingsTable values={affectedOfferingsProps} />
-      </Field>
+      </div>
     </ModalDialog>
   );
 };

@@ -125,6 +125,10 @@ Dynamic references (`state={variable}`, `router.stateService.go(name)`, computed
 - **Global allowlist** (in the test file): for values that are intentionally not in the registry but legitimately appear in the codebase (e.g., the `'404'` fallback used inside `useSref(state || '404', ...)` in `src/core/Link.tsx`). Keep this set small and add a comment explaining each entry.
 - **Known-broken set** (in the test file): for pre-existing broken references that require product knowledge to fix. Do not add new entries — fix the reference instead. When the last call site for an entry is gone, remove the entry.
 
+## Typed property guard
+
+`waldur-custom/prefer-typed-property` reports a `PropertyItem` that formats its value by hand where a typed formatter fits (`propVal.date`, `propVal.currency`, `propVal.boolean`, …), and `renderFieldOrDash` inside one. Existing rows are counted per file and kind in `typed-property.baseline.json`; the counts only shrink, so rewrite them with `yarn lint:properties:baseline` after moving rows, never to let new ones in. See [property-fields.md](property-fields.md).
+
 ## Unknown class guard
 
 Tailwind and Bootstrap both ignore a class they do not know, so a typo (`felx`, `text-teritary`, `md:hiden`) or a class whose stylesheet was retired renders as nothing, with no warning from the build, the type checker or the browser. `waldur-custom/no-unknown-class` reports every class that styles nothing.

@@ -7,7 +7,13 @@ import {
   marketplaceProjectOrderAutoApprovalsList,
 } from 'waldur-js-client';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import {
+  Badge,
+  BaseButton,
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -16,7 +22,6 @@ import { defaultCurrency } from '@/core/formatCurrency';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
@@ -125,9 +130,9 @@ export const ProjectOrderAutoApproval: FC<ProjectOrderAutoApprovalProps> = ({
   ];
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('Order auto-approval')}
-      className="card-bordered"
       actions={
         canManage ? (
           <BaseButton
@@ -140,11 +145,11 @@ export const ProjectOrderAutoApproval: FC<ProjectOrderAutoApprovalProps> = ({
         ) : undefined
       }
     >
-      <FormTable>
+      <PropertyList>
         {rows.map((row) => (
-          <FormTable.Item key={row.key} label={row.label} value={row.value} />
+          <PropertyItem key={row.key} label={row.label} value={row.value} />
         ))}
-      </FormTable>
-    </FormTable.Card>
+      </PropertyList>
+    </PropertyCard>
   );
 };

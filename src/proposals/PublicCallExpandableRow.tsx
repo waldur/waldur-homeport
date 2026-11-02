@@ -1,9 +1,10 @@
 import { FunctionComponent } from 'react';
 
-import { formatDateTime } from '@/core/dateUtils';
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { Call } from './types';
@@ -36,12 +37,14 @@ export const PublicCallExpandableRow: FunctionComponent<{
 
         {activeRound ? (
           <div>
-            <Field
-              label={translate('Next cutoff')}
-              value={formatDateTime(activeRound.cutoff_time)}
-              labelCol={4}
-              valueCol={8}
-            />
+            <PropertyList variant="summary" termWidth="md">
+              <PropertyItem
+                label={translate('Next cutoff')}
+                value={propVal.date(activeRound.cutoff_time, {
+                  precision: 'datetime',
+                })}
+              />
+            </PropertyList>
           </div>
         ) : (
           <div className="col-span-full">

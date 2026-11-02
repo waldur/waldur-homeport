@@ -5,12 +5,11 @@ import {
 } from 'waldur-js-client';
 
 import { HelpIcon } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { Badge, PropertyItem } from 'waldur-ui';
 
-import { formatDateTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -164,25 +163,30 @@ export const ConsumptionRecordsList: FunctionComponent<
 
 const ConsumptionRecordDetail = ({ row }: { row: ArrowConsumptionRecord }) => (
   <ExpandableContainer asTable>
-    <Field label={translate('UUID')} value={row.uuid} />
-    <Field
+    <PropertyItem label={translate('UUID')} value={row.uuid} />
+    <PropertyItem
       label={translate('License Reference')}
       value={row.license_reference}
     />
-    <Field label={translate('Resource')} value={row.resource_name} />
-    <Field label={translate('Created')} value={formatDateTime(row.created)} />
-    <Field label={translate('Billing Period')} value={row.billing_period} />
-    <Field
-      label={translate('Consumed (Sell)')}
-      value={defaultCurrency(row.consumed_sell)}
+    <PropertyItem label={translate('Resource')} value={row.resource_name} />
+    <PropertyItem
+      label={translate('Created')}
+      value={propVal.date(row.created, { precision: 'datetime' })}
     />
-    <Field
+    <PropertyItem
+      label={translate('Billing Period')}
+      value={row.billing_period}
+    />
+    <PropertyItem
+      label={translate('Consumed (Sell)')}
+      value={propVal.currency(row.consumed_sell)}
+    />
+    <PropertyItem
       label={translate('Final (Sell)')}
       // No final amount means the billing export has not confirmed it yet,
       // which is worth showing, so the row keeps a dash instead of going.
-      value={
-        row.final_sell ? defaultCurrency(row.final_sell) : DASH_ESCAPE_CODE
-      }
+      value={propVal.currency(row.final_sell)}
+      placeholder="dash"
       valueClass="font-medium"
     />
   </ExpandableContainer>

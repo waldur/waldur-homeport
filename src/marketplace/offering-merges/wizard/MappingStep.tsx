@@ -6,9 +6,14 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
-import { BaseButton, Select } from 'waldur-ui';
+import {
+  BaseButton,
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+  Select,
+} from 'waldur-ui';
 
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
 import { MergeDraft } from '../utils';
@@ -99,112 +104,110 @@ export const MappingStep: FC<MappingStepProps> = ({
         )}
       </div>
       {sources.map((source) => (
-        <FormTable.Card key={source.uuid} title={source.name}>
-          <FormTable>
-            <FormTable.Item
-              label={<h5 className="mb-0">{translate('Plans')}</h5>}
-            />
-            {(source.plans ?? []).length === 0 && (
-              <FormTable.Item
-                label={translate('Plans')}
-                value={translate('The source has no plans.')}
-              />
-            )}
-            {(source.plans ?? []).map((plan) => {
-              const selected = targetPlans.find(
-                (option) => option.uuid === draft.plan_mapping[plan.uuid],
-              );
-              return (
-                <FormTable.Item
-                  key={plan.uuid}
-                  label={planLabel(plan)}
-                  value={
-                    <>
-                      <Select
-                        options={targetPlans}
-                        value={selected ?? null}
-                        getOptionValue={(option: BaseProviderPlan) =>
-                          option.uuid
-                        }
-                        getOptionLabel={planLabel}
-                        onChange={(option: BaseProviderPlan | null) =>
-                          setPlan(plan.uuid, option?.uuid)
-                        }
-                        isClearable
-                        isDisabled={disabled}
-                        placeholder={translate('Not mapped')}
-                      />
-                      {selected && selected.unit !== plan.unit && (
-                        <Mismatch>
-                          {translate(
-                            'Billed per {source} on the source but per {target} on the target.',
-                            { source: plan.unit, target: selected.unit },
-                          )}
-                        </Mismatch>
-                      )}
-                    </>
-                  }
+        <PropertyCard key={source.uuid} title={source.name}>
+          <PropertyList>
+            <PropertyList.Section title={translate('Plans')}>
+              {(source.plans ?? []).length === 0 && (
+                <PropertyItem
+                  label={translate('Plans')}
+                  value={translate('The source has no plans.')}
                 />
-              );
-            })}
-            <FormTable.Item
-              label={<h5 className="mb-0">{translate('Components')}</h5>}
-            />
-            {(source.components ?? []).length === 0 && (
-              <FormTable.Item
-                label={translate('Components')}
-                value={translate('The source has no components.')}
-              />
-            )}
-            {(source.components ?? []).map((component) => {
-              const selected = targetComponents.find(
-                (option) =>
-                  option.type ===
-                  draft.component_mapping[source.uuid]?.[component.type],
-              );
-              return (
-                <FormTable.Item
-                  key={component.type}
-                  label={componentLabel(component)}
-                  value={
-                    <>
-                      <Select
-                        options={targetComponents}
-                        value={selected ?? null}
-                        getOptionValue={(option: OfferingComponent) =>
-                          option.type
-                        }
-                        getOptionLabel={componentLabel}
-                        onChange={(option: OfferingComponent | null) =>
-                          setComponent(
-                            source.uuid,
-                            component.type,
-                            option?.type,
-                          )
-                        }
-                        isClearable
-                        isDisabled={disabled}
-                        placeholder={translate('Not mapped')}
-                      />
-                      {selected &&
-                        selected.billing_type !== component.billing_type && (
+              )}
+              {(source.plans ?? []).map((plan) => {
+                const selected = targetPlans.find(
+                  (option) => option.uuid === draft.plan_mapping[plan.uuid],
+                );
+                return (
+                  <PropertyItem
+                    key={plan.uuid}
+                    label={planLabel(plan)}
+                    value={
+                      <>
+                        <Select
+                          options={targetPlans}
+                          value={selected ?? null}
+                          getOptionValue={(option: BaseProviderPlan) =>
+                            option.uuid
+                          }
+                          getOptionLabel={planLabel}
+                          onChange={(option: BaseProviderPlan | null) =>
+                            setPlan(plan.uuid, option?.uuid)
+                          }
+                          isClearable
+                          isDisabled={disabled}
+                          placeholder={translate('Not mapped')}
+                        />
+                        {selected && selected.unit !== plan.unit && (
                           <Mismatch>
                             {translate(
-                              'Billed as {source} on the source but as {target} on the target.',
-                              {
-                                source: component.billing_type,
-                                target: selected.billing_type,
-                              },
+                              'Billed per {source} on the source but per {target} on the target.',
+                              { source: plan.unit, target: selected.unit },
                             )}
                           </Mismatch>
                         )}
-                    </>
-                  }
+                      </>
+                    }
+                  />
+                );
+              })}
+            </PropertyList.Section>
+            <PropertyList.Section title={translate('Components')}>
+              {(source.components ?? []).length === 0 && (
+                <PropertyItem
+                  label={translate('Components')}
+                  value={translate('The source has no components.')}
                 />
-              );
-            })}
-          </FormTable>
-        </FormTable.Card>
+              )}
+              {(source.components ?? []).map((component) => {
+                const selected = targetComponents.find(
+                  (option) =>
+                    option.type ===
+                    draft.component_mapping[source.uuid]?.[component.type],
+                );
+                return (
+                  <PropertyItem
+                    key={component.type}
+                    label={componentLabel(component)}
+                    value={
+                      <>
+                        <Select
+                          options={targetComponents}
+                          value={selected ?? null}
+                          getOptionValue={(option: OfferingComponent) =>
+                            option.type
+                          }
+                          getOptionLabel={componentLabel}
+                          onChange={(option: OfferingComponent | null) =>
+                            setComponent(
+                              source.uuid,
+                              component.type,
+                              option?.type,
+                            )
+                          }
+                          isClearable
+                          isDisabled={disabled}
+                          placeholder={translate('Not mapped')}
+                        />
+                        {selected &&
+                          selected.billing_type !== component.billing_type && (
+                            <Mismatch>
+                              {translate(
+                                'Billed as {source} on the source but as {target} on the target.',
+                                {
+                                  source: component.billing_type,
+                                  target: selected.billing_type,
+                                },
+                              )}
+                            </Mismatch>
+                          )}
+                      </>
+                    }
+                  />
+                );
+              })}
+            </PropertyList.Section>
+          </PropertyList>
+        </PropertyCard>
       ))}
     </div>
   );

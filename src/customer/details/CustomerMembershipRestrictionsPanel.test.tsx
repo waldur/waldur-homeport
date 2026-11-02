@@ -102,8 +102,7 @@ describe('CustomerMembershipRestrictionsPanel', () => {
       vi.mocked(hasPermission).mockReturnValue(false);
       renderPanel();
 
-      const table = screen.getByRole('table');
-      expect(table).toHaveClass('hide-actions');
+      expect(screen.queryAllByRole('button')).toHaveLength(0);
     });
 
     it('calls hasPermission with the correct customer uuid', () => {
@@ -143,7 +142,7 @@ describe('CustomerMembershipRestrictionsPanel', () => {
 
         const labelElement = screen.getByText(label);
         // eslint-disable-next-line testing-library/no-node-access
-        const rowElement = labelElement.closest('tr');
+        const rowElement = labelElement.closest('[data-slot="property-item"]');
         const editButton = within(rowElement as HTMLElement).getByTestId(
           `edit-${fieldKey}`,
         );
@@ -193,7 +192,7 @@ describe('CustomerMembershipRestrictionsPanel', () => {
 
       const labelElement = screen.getByText('User affiliations');
       // eslint-disable-next-line testing-library/no-node-access
-      const rowElement = labelElement.closest('tr');
+      const rowElement = labelElement.closest('[data-slot="property-item"]');
       const editButton = within(rowElement as HTMLElement).getByTestId(
         'edit-user_affiliations',
       );

@@ -1,7 +1,14 @@
 import { FC } from 'react';
 import { ServiceProvider } from 'waldur-js-client';
 
-import { Badge, BaseButton, ModalBody, ModalTitle } from 'waldur-ui';
+import {
+  BaseButton,
+  ModalBody,
+  ModalTitle,
+  PropertyCard,
+  PropertyList,
+  PropertyItem,
+} from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
@@ -10,9 +17,9 @@ import {
   SelectEditField,
   StringEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { propVal } from '@/property/propertyFields';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
@@ -106,9 +113,9 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
     });
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('Account settings')}
-      className="card-bordered"
       actions={
         canUpdate && (
           <BaseButton
@@ -133,7 +140,7 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
         </button>
       </p>
       <EditFieldProvider scope={serviceProvider} callback={update}>
-        <FormTable hideActions={!canUpdate}>
+        <PropertyList hideActions={!canUpdate}>
           <SelectEditField
             name="account_options.account_scope"
             label={translate('Account scope')}
@@ -193,7 +200,7 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
             placeholder={DEFAULT_LOGIN_SHELL}
             renderValue={renderOrFallback(DEFAULT_LOGIN_SHELL)}
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Create project groups')}
             data-testid="project-groups-enabled"
             description={
@@ -204,17 +211,10 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
                 <ProjectGroupsRolloutOrder />
               </>
             }
-            value={
-              options.project_groups_enabled ? (
-                <Badge variant="success" tone="outline">
-                  {translate('Enabled')}
-                </Badge>
-              ) : (
-                <Badge variant="neutral" tone="outline">
-                  {translate('Disabled')}
-                </Badge>
-              )
-            }
+            value={propVal.boolean(options.project_groups_enabled, {
+              wording: 'enabled',
+              display: 'badge',
+            })}
             actions={
               canUpdate && (
                 <CompactEditButton
@@ -226,8 +226,8 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
               )
             }
           />
-        </FormTable>
+        </PropertyList>
       </EditFieldProvider>
-    </FormTable.Card>
+    </PropertyCard>
   );
 };

@@ -1,9 +1,10 @@
 import { FunctionComponent } from 'react';
 import { NestedSection } from 'waldur-js-client';
 
-import { renderFieldOrDash } from '@/table/utils';
+import { PropertyItem, PropertyList } from 'waldur-ui';
 
-import { AttributeRow } from './AttributeRow';
+import { AttributeCell } from '@/marketplace/common/AttributeCell';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface AttributeSectionProps {
   section: NestedSection;
@@ -14,19 +15,22 @@ interface AttributeSectionProps {
 export const AttributeSection: FunctionComponent<AttributeSectionProps> = (
   props,
 ) => (
-  <>
-    {!props.hideHeader && (
-      <tr className="bg-secondary">
-        <th>{props.section.title}</th>
-        <th />
-      </tr>
-    )}
-    {props.section.attributes.map((attr, index) => (
-      <AttributeRow
-        key={index}
-        value={renderFieldOrDash(props.attributes[attr.key])}
-        attribute={attr}
-      />
-    ))}
-  </>
+  <PropertyList hideActions>
+    <PropertyList.Section
+      title={!props.hideHeader ? props.section.title : undefined}
+    >
+      {props.section.attributes.map((attr, index) => (
+        <PropertyItem
+          key={index}
+          label={attr.title}
+          value={
+            <AttributeCell
+              attr={attr}
+              value={renderFieldOrDash(props.attributes[attr.key])}
+            />
+          }
+        />
+      ))}
+    </PropertyList.Section>
+  </PropertyList>
 );

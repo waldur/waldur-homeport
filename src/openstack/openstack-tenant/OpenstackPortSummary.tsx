@@ -1,52 +1,41 @@
 import { FC } from 'react';
+import type { OpenStackPort } from 'waldur-js-client';
 
-import FormTable from '@/form/FormTable';
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field, ResourceSummaryProps } from '@/resource/summary';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
+import { ResourceSummaryProps } from '@/resource/summary';
 
-export const OpenstackPortSummary: FC<ResourceSummaryProps> = ({
+export const OpenstackPortSummary: FC<ResourceSummaryProps<OpenStackPort>> = ({
   resource: row,
-  formTableItem,
 }) => {
-  const Component = formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Component
-        label={translate('Device ID')}
-        value={renderFieldOrDash(row.device_id)}
-      />
-      <Component
+      <PropertyItem label={translate('Device ID')} value={row.device_id} />
+      <PropertyItem
         label={translate('Device owner')}
-        value={renderFieldOrDash(row.device_owner)}
+        value={row.device_owner}
       />
-      <Component
+      <PropertyItem
         label={translate('Backend ID')}
-        value={renderFieldOrDash(row.backend_id)}
-        hasCopy={!!row.backend_id}
+        value={row.backend_id}
+        hasCopy
       />
 
-      <Component
+      <PropertyItem
         label={translate('Allowed address pairs')}
-        value={
-          row.allowed_address_pairs && row.allowed_address_pairs?.length > 0
-            ? JSON.stringify(row.allowed_address_pairs)
-            : 'N/A'
-        }
+        value={propVal.json(row.allowed_address_pairs, { compact: true })}
       />
 
-      <Component
+      <PropertyItem
         label={translate('Port security enabled')}
-        value={row.port_security_enabled ? translate('Yes') : translate('No')}
+        value={propVal.boolean(row.port_security_enabled)}
       />
 
-      <Component
+      <PropertyItem
         label={translate('Security groups')}
-        value={
-          row.security_groups.length > 0
-            ? row.security_groups.map((group) => group.name).join(', ')
-            : 'N/A'
-        }
+        value={propVal.list(row.security_groups.map((group) => group.name))}
       />
     </>
   );

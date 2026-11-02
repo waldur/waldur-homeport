@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { OnboardingVerification } from 'waldur-js-client';
 
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 export const OnboardingVerificationExpandableRow: FC<{
@@ -15,19 +16,11 @@ export const OnboardingVerificationExpandableRow: FC<{
   }
 
   return (
-    <ExpandableContainer>
-      <Field
-        label={translate('Error code')}
-        value={message}
-        isStuck
-        labelClass="me-1.5"
-      />
-      <Field
-        label={translate('Traceback')}
-        value={traceback}
-        isStuck
-        labelClass="me-1.5"
-      />
+    <ExpandableContainer asTable>
+      <PropertyList variant="summary">
+        <PropertyItem label={translate('Error code')} value={message} />
+        <PropertyItem label={translate('Traceback')} value={traceback} />
+      </PropertyList>
     </ExpandableContainer>
   );
 };

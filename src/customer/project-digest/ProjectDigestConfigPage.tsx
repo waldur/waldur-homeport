@@ -1,16 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useEffect, useState } from 'react';
 
-import { Tooltip, BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  PropertyCard,
+  PropertyList,
+  Tooltip,
+  PropertyItem,
+} from 'waldur-ui';
 
-import { formatDateTime } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { useNotify } from '@/store/notify';
-import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
 
 import { getProjectDigestConfig, sendTestDigest } from './api';
@@ -78,9 +82,10 @@ export const ProjectDigestConfigPage: FC = () => {
 
   return (
     <>
-      <FormTable.Card
+      <PropertyCard
+        bordered
         title={translate('Project digest emails')}
-        className="card-bordered mb-4"
+        className="mb-4"
         actions={
           <>
             {formState.isEnabled && (
@@ -119,17 +124,19 @@ export const ProjectDigestConfigPage: FC = () => {
           onUpdated={handleUpdated}
           onFormStateChange={setFormState}
         />
-      </FormTable.Card>
+      </PropertyCard>
 
       {config?.last_sent_at && (
-        <FormTable.Card title={translate('Status')} className="card-bordered">
-          <FormTable>
-            <FormTable.Item
+        <PropertyCard bordered title={translate('Status')}>
+          <PropertyList>
+            <PropertyItem
               label={translate('Last sent')}
-              value={renderFieldOrDash(formatDateTime(config.last_sent_at))}
+              value={propVal.date(config.last_sent_at, {
+                precision: 'datetime',
+              })}
             />
-          </FormTable>
-        </FormTable.Card>
+          </PropertyList>
+        </PropertyCard>
       )}
     </>
   );

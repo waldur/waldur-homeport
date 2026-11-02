@@ -4,13 +4,13 @@ import {
   RemoteProjectAuditEntry,
 } from 'waldur-js-client';
 
-import { BadgeVariant } from 'waldur-ui';
+import { BadgeVariant, PropertyItem } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { DetailsDiff } from '@/openportal/DetailsDiff';
-import { Field } from '@/resource/summary/Field';
+import { propVal } from '@/property/propertyFields';
 import { createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import {
@@ -54,15 +54,13 @@ const AuditEntryExpandableRow = ({ row }: { row: RemoteProjectAuditEntry }) => {
 
   return (
     <ExpandableContainer asTable>
-      <Field label={translate('Note')} value={row.note} />
-      <Field
+      <PropertyItem label={translate('Note')} value={row.note} />
+      <PropertyItem
         label={translate('Remote response')}
-        value={
-          row.remote_response ? JSON.stringify(row.remote_response) : undefined
-        }
+        value={propVal.json(row.remote_response, { compact: true })}
       />
       {hasDetails && (
-        <Field
+        <PropertyItem
           label={translate('Changes')}
           value={
             <DetailsDiff

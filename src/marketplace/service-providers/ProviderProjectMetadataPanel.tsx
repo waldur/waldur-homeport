@@ -1,7 +1,8 @@
 import { Answer, ProjectMetadataAnswer, QuestionAdmin } from 'waldur-js-client';
 
+import { PropertyCard, PropertyItem, PropertyList } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
@@ -16,11 +17,11 @@ export const ProviderProjectMetadataPanel = ({
   const hasAnswers = answers && answers.length > 0;
 
   return (
-    <FormTable.Card title={translate('Project metadata')}>
+    <PropertyCard title={translate('Project metadata')}>
       {hasAnswers ? (
-        <FormTable detailsMode>
+        <PropertyList detailsMode>
           {answers.map((item) => (
-            <FormTable.Item
+            <PropertyItem
               key={item.question_uuid}
               label={item.question}
               value={
@@ -38,7 +39,7 @@ export const ProviderProjectMetadataPanel = ({
                     answer={{ answer_data: item.answer } as unknown as Answer}
                   />
                   {item.modified && (
-                    <div className="text-quaternary small">
+                    <div className="text-quaternary text-xs">
                       {translate('Last updated:')}{' '}
                       {formatDateTime(item.modified)}
                     </div>
@@ -47,7 +48,7 @@ export const ProviderProjectMetadataPanel = ({
               }
             />
           ))}
-        </FormTable>
+        </PropertyList>
       ) : (
         <NoResult
           title={translate('No project metadata')}
@@ -57,6 +58,6 @@ export const ProviderProjectMetadataPanel = ({
           noAction
         />
       )}
-    </FormTable.Card>
+    </PropertyCard>
   );
 };

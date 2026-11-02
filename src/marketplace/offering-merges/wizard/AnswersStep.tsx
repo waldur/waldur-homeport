@@ -1,9 +1,8 @@
 import { FC } from 'react';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
-import { Select } from 'waldur-ui';
+import { PropertyCard, PropertyItem, PropertyList, Select } from 'waldur-ui';
 
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
@@ -70,10 +69,10 @@ export const AnswersStep: FC<AnswersStepProps> = ({
           "These answer keys are on the sources' order forms but not on the target's. Rename each to a target key, or leave it as is: the answers are kept, but the target's form does not show them.",
         )}
       </p>
-      <FormTable.Card title={translate('Order answer keys')}>
-        <FormTable>
+      <PropertyCard title={translate('Order answer keys')}>
+        <PropertyList>
           {keys.map((key) => (
-            <FormTable.Item
+            <PropertyItem
               key={key}
               label={<code>{key}</code>}
               value={
@@ -95,8 +94,8 @@ export const AnswersStep: FC<AnswersStepProps> = ({
               }
             />
           ))}
-        </FormTable>
-      </FormTable.Card>
+        </PropertyList>
+      </PropertyCard>
     </div>
   );
 };

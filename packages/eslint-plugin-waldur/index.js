@@ -32,6 +32,7 @@ import noHandRolledModalFooter from './rules/no-hand-rolled-modal-footer.js';
 import noHandRolledTable from './rules/no-hand-rolled-table.js';
 import noInteractiveInTabTrigger from './rules/no-interactive-in-tab-trigger.js';
 import noLiteralColor from './rules/no-literal-color.js';
+import noLonePropertyItemInList from './rules/no-lone-property-item-in-list.js';
 import noManualIconColorsInBadges from './rules/no-manual-icon-colors-in-badges.js';
 import noNativeDateInput from './rules/no-native-date-input.js';
 import noOrphanFormLabel from './rules/no-orphan-form-label.js';
@@ -45,6 +46,8 @@ import noUnknownClass from './rules/no-unknown-class.js';
 import preferClassnamesUtility from './rules/prefer-classnames-utility.js';
 import preferMutateOverMutateAsync from './rules/prefer-mutate-over-mutateAsync.js';
 import preferTokenUtility from './rules/prefer-token-utility.js';
+import preferTypedProperty from './rules/prefer-typed-property.js';
+import propertyItemInList from './rules/property-item-in-list.js';
 import requireDarkPair from './rules/require-dark-pair.js';
 import requireFontSizeScale from './rules/require-font-size-scale.js';
 import requireWeightScale from './rules/require-weight-scale.js';
@@ -55,6 +58,7 @@ export default {
     'enforce-badge-icon-patterns': enforceBadgeIconPatterns,
     'enforce-badge-props-consistency': enforceBadgePropsConsistency,
     'no-literal-color': noLiteralColor,
+    'no-lone-property-item-in-list': noLonePropertyItemInList,
     'no-manual-icon-colors-in-badges': noManualIconColorsInBadges,
     'enforce-badge-right-icon-pattern': enforceBadgeRightIconPattern,
     'enforce-dialog-button-order': enforceDialogButtonOrder,
@@ -74,6 +78,8 @@ export default {
     'no-raw-status-ramp': noRawStatusRamp,
     'prefer-token-utility': preferTokenUtility,
     'no-retired-bootstrap-utility': noRetiredBootstrapUtility,
+    'prefer-typed-property': preferTypedProperty,
+    'property-item-in-list': propertyItemInList,
     'require-dark-pair': requireDarkPair,
     'require-font-size-scale': requireFontSizeScale,
     'require-weight-scale': requireWeightScale,

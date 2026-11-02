@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react';
 import { LimitPeriodEnum } from 'waldur-js-client';
 
+import { PropertyList } from 'waldur-ui';
+
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
-import FormTable from '@/form/FormTable';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
 
 import { ComponentRowTotal } from './ComponentRowTotal';
@@ -80,7 +81,7 @@ export const PeriodicTab = ({
 
   return (
     <section>
-      <FormTable>
+      <PropertyList>
         {!limitPeriod ||
           (limitPeriod === 'month' && (
             <>
@@ -132,7 +133,7 @@ export const PeriodicTab = ({
             }
           />
         ) : null}
-      </FormTable>
+      </PropertyList>
     </section>
   );
 };

@@ -1,15 +1,16 @@
 import { get } from 'es-toolkit/compat';
 import { FC, ReactNode, useMemo } from 'react';
 
-import { CheckOrX } from '@/core/CheckOrX';
+import { PropertyCard, PropertyList, PropertyItem } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StaffOnlyIndicator } from '@/core/StaffOnlyIndicator';
 import { isFeatureVisible } from '@/features/connect';
 import { FieldEditButton } from '@/form/FieldEditButton';
-import FormTable from '@/form/FormTable';
 import { SwitchField } from '@/form/SwitchField';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 import { useUser } from '@/workspace/hooks';
 
@@ -40,7 +41,7 @@ export const UserAttributeVisibilityTable: FC<
   error,
   refetch,
   emptyHint,
-  className = 'card-bordered mb-5.5',
+  className = 'mb-5.5',
   editGate = 'staff',
   disabled = false,
 }) => {
@@ -60,33 +61,35 @@ export const UserAttributeVisibilityTable: FC<
 
   if (isLoading) {
     return (
-      <FormTable.Card title={title} className={className}>
+      <PropertyCard bordered title={title} className={className}>
         <LoadingSpinner />
-      </FormTable.Card>
+      </PropertyCard>
     );
   }
 
   if (error) {
     return (
-      <FormTable.Card title={title} className={className}>
+      <PropertyCard bordered title={title} className={className}>
         <LoadingErred
           message={translate('Unable to load user attribute configuration.')}
           loadData={refetch}
         />
-      </FormTable.Card>
+      </PropertyCard>
     );
   }
 
   return (
-    <FormTable.Card title={title} className={className}>
+    <PropertyCard bordered title={title} className={className}>
       {emptyHint}
-      <FormTable>
+      <PropertyList>
         {visibleFields.map((field) => (
-          <FormTable.Item
+          <PropertyItem
             key={field.key}
             label={field.label}
             description={field.description}
-            value={<CheckOrX value={get(config, field.key)} />}
+            value={propVal.boolean(get(config, field.key), {
+              wording: 'enabled',
+            })}
             actions={
               canEdit ? (
                 <>
@@ -104,7 +107,7 @@ export const UserAttributeVisibilityTable: FC<
             }
           />
         ))}
-      </FormTable>
-    </FormTable.Card>
+      </PropertyList>
+    </PropertyCard>
   );
 };

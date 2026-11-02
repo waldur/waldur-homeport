@@ -6,11 +6,10 @@ import {
   SoftwarePackage,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { CopyableValue, PropertyItem } from 'waldur-ui';
 
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import {
@@ -85,61 +84,57 @@ export const SoftwarePackageExpandableRow: FC<OwnProps> = ({
   return (
     <ExpandableContainer asTable style={{ marginLeft: 46 }}>
       {categories?.length > 0 && (
-        <Field label={translate('Categories')} labelWidth={140}>
-          <div className="flex flex-wrap gap-1">
-            {categories.map((cat) => (
-              <Badge key={cat} variant="info" tone="outline">
-                {cat}
-              </Badge>
-            ))}
-          </div>
-        </Field>
+        <PropertyItem
+          label={translate('Categories')}
+          value={propVal.badgeList(categories, {
+            variant: 'info',
+            tone: 'outline',
+          })}
+        />
       )}
 
       {row.parent_softwares?.length > 0 && (
-        <Field label={translate('Extends')} labelWidth={140}>
+        <PropertyItem label={translate('Extends')}>
           <SoftwarePackageList packages={row.parent_softwares} />
-        </Field>
+        </PropertyItem>
       )}
 
       {filteredVersions.length > 0 && (
-        <Field label={translate('Versions')} labelWidth={140}>
-          {filteredVersions.map((version) => version.version).join(', ')}
-        </Field>
+        <PropertyItem
+          label={translate('Versions')}
+          value={propVal.list(
+            filteredVersions.map((version) => version.version),
+          )}
+        />
       )}
 
       {filteredVersions.length > 0 && (
-        <Field label={translate('Load command')} labelWidth={140}>
-          {filteredVersions.map((version, idx) => {
-            const cmd = `module load ${row.name}/${version.version}`;
-            return (
-              <span key={version.uuid}>
-                {idx > 0 && ', '}
-                {cmd}
-                <CopyToClipboardButton
-                  value={cmd}
-                  onlyButton
-                  className="ms-1"
-                />
-              </span>
-            );
-          })}
-        </Field>
+        <PropertyItem label={translate('Load command')}>
+          <div className="flex flex-col gap-1">
+            {filteredVersions.map((version) => (
+              <CopyableValue
+                key={version.uuid}
+                value={`module load ${row.name}/${version.version}`}
+                name={translate('Load command')}
+              />
+            ))}
+          </div>
+        </PropertyItem>
       )}
 
       {row.extension_count > 0 && (
-        <Field label={translate('Extensions available')} labelWidth={140}>
+        <PropertyItem label={translate('Extensions available')}>
           <span className="text-info">
             <PuzzlePieceIcon className="me-1" weight="bold" />
             {row.extension_count}
           </span>
-        </Field>
+        </PropertyItem>
       )}
 
       {row.extensions?.length > 0 && (
-        <Field label={translate('Extensions')} labelWidth={140}>
+        <PropertyItem label={translate('Extensions')}>
           <SoftwarePackageList packages={row.extensions} />
-        </Field>
+        </PropertyItem>
       )}
     </ExpandableContainer>
   );

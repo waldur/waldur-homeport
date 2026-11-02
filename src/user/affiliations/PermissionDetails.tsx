@@ -1,8 +1,9 @@
 import { Permission } from 'waldur-js-client';
 
-import { formatDateTime } from '@/core/dateUtils';
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 
 import { formatGrantSource } from './GrantSourceIndicator';
 
@@ -12,8 +13,11 @@ export const PermissionDetails = ({
   permission: Permission;
 }) => (
   <>
-    <Field label={translate('Role')} value={permission.role_description} />
-    <Field
+    <PropertyItem
+      label={translate('Role')}
+      value={permission.role_description}
+    />
+    <PropertyItem
       label={translate('Permission granted by')}
       value={
         formatGrantSource(permission.source) ||
@@ -22,15 +26,17 @@ export const PermissionDetails = ({
       }
     />
 
-    <Field
+    <PropertyItem
       label={translate('Permission granted at')}
-      value={formatDateTime(permission.created)}
+      value={propVal.date(permission.created, { precision: 'datetime' })}
     />
 
     {permission.expiration_time ? (
-      <Field
+      <PropertyItem
         label={translate('Permission expires at')}
-        value={formatDateTime(permission.expiration_time)}
+        value={propVal.date(permission.expiration_time, {
+          precision: 'datetime',
+        })}
       />
     ) : null}
   </>

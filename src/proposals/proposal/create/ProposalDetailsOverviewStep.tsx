@@ -1,6 +1,6 @@
 import { ClipboardTextIcon, EyeIcon } from '@phosphor-icons/react';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -15,8 +15,6 @@ import {
   useProjectDuration,
 } from '@/proposals/ProjectDurationNote';
 import { Proposal } from '@/proposals/types';
-import { Field } from '@/resource/summary';
-import { renderFieldOrDash } from '@/table/utils';
 import { VStepperFormStepCard, VStepperFormStepProps } from '@/wizard';
 
 const ProposalDetailsDialog = lazyComponent(() =>
@@ -86,59 +84,44 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
         </div>
       }
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 text-sm">
+      <PropertyList
+        variant="summary"
+        termWidth="md"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 text-sm"
+      >
         {showsCallContext() && (
-          <div>
-            <Field
-              label={translate('Call name')}
-              value={proposal.call_name}
-              labelCol={5}
-              valueCol={7}
-            />
-          </div>
-        )}
-        <div>
-          <Field
-            label={
-              showsCallContext()
-                ? translate('Round deadline')
-                : translate('Submission closes')
-            }
-            value={
-              <EndingField endDate={proposal.round?.cutoff_time} dateFirst />
-            }
-            labelCol={5}
-            valueCol={7}
+          <PropertyItem
+            label={translate('Call name')}
+            value={proposal.call_name}
           />
-        </div>
+        )}
+        <PropertyItem
+          label={
+            showsCallContext()
+              ? translate('Round deadline')
+              : translate('Submission closes')
+          }
+          value={
+            <EndingField endDate={proposal.round?.cutoff_time} dateFirst />
+          }
+        />
         {showsCallContext() && (
-          <div>
-            <Field
-              label={translate('Round reference')}
-              value={renderFieldOrDash(proposal.round?.name)}
-              labelCol={5}
-              valueCol={7}
-            />
-          </div>
+          <PropertyItem
+            label={translate('Round reference')}
+            value={proposal.round?.name}
+            hideIfEmpty={false}
+          />
         )}
-        {projectDuration && (
-          <div>
-            <ProjectDurationNote duration={projectDuration} />
-          </div>
-        )}
+        {projectDuration && <ProjectDurationNote duration={projectDuration} />}
         {/* The applicant's name is withheld from evaluators when the call
             conceals it; leave the row out rather than show an empty cell. */}
         {proposal.created_by_name && (
-          <div>
-            <Field
-              label={translate('Created by')}
-              value={proposal.created_by_name}
-              labelCol={5}
-              valueCol={7}
-            />
-          </div>
+          <PropertyItem
+            label={translate('Created by')}
+            value={proposal.created_by_name}
+          />
         )}
-      </div>
+      </PropertyList>
     </VStepperFormStepCard>
   );
 };

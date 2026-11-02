@@ -1,7 +1,8 @@
 import { FeedbackRequest, QuestionAdmin } from 'waldur-js-client';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
-import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { formatScaleAnswer } from './answers';
@@ -13,7 +14,7 @@ export const FeedbackLogsExpandableRow = ({
 }) => (
   <ExpandableContainer asTable>
     {row.answers.map((answer) => (
-      <Field
+      <PropertyItem
         key={answer.question_uuid}
         // A question already ends in "?" and is shown in full, so skip
         // Field's trailing colon and truncation tooltip.

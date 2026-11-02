@@ -13,13 +13,19 @@ import { Field, Form } from 'react-final-form';
 import { featureValues } from 'waldur-js-client';
 
 import {
-  BaseButton,
   Badge,
+  BaseButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
   Menu,
+  PropertyCard,
+  Switch,
   Tabs,
+  TabsContent,
   TabsList,
   TabsTrigger,
-  TabsContent,
 } from 'waldur-ui';
 
 import { TelemetryExampleButton } from '@/administration/TelemetryExampleButton';
@@ -28,8 +34,6 @@ import { SaveButton } from '@/core/SaveButton';
 import { FeaturesDescription } from '@/features/FeaturesDescription';
 import { FeatureSection } from '@/features/types';
 import { DeploymentFeatures } from '@/FeaturesEnums';
-import FormTable from '@/form/FormTable';
-import { SwitchField } from '@/form/SwitchField';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { useUrlTab } from '@/navigation/useUrlTab';
@@ -41,6 +45,11 @@ import { useUser } from '@/workspace/hooks';
 import { FEATURE_PLUGIN_SECTION_KEYS } from './settings/registry';
 import { useHighlightSettingRow } from './settings/useHighlightSettingRow';
 
+/**
+ * One feature toggle: its description names the switch through a real
+ * `<label>`, so the row reads as a form control, not a property. Without the
+ * right to edit, the value reads Yes or No.
+ */
 const FeatureRow = ({
   sectionKey,
   item,
@@ -52,28 +61,41 @@ const FeatureRow = ({
 }) => {
   const featureKey = `${sectionKey}.${item.key}`;
   const isHighlighted = useHighlightSettingRow(featureKey, 'feature-');
+  const inputId = `feature-input-${featureKey}`;
+  const labelId = `feature-label-${featureKey}`;
 
   return (
-    <FormTable.Item
+    <li
       id={`feature-${featureKey}`}
-      className={isHighlighted ? 'bg-warning-subtle' : undefined}
-      description={
-        <>
-          {item.description}
-          {featureKey === DeploymentFeatures.send_metrics ? (
-            <div>
-              <TelemetryExampleButton />
-            </div>
-          ) : null}
-        </>
-      }
-      actions={
-        canEdit ? (
+      data-testid={`feature-${featureKey}`}
+      className={classNames(
+        'flex min-h-[49px] items-center justify-between gap-6 border-b-[1px] border-b-secondary py-3.5 last:border-b-0',
+        isHighlighted && 'bg-warning-subtle',
+      )}
+    >
+      <div className="min-w-0 text-sm text-quaternary">
+        {canEdit ? (
+          <label id={labelId} htmlFor={inputId} className="mb-0">
+            {item.description}
+          </label>
+        ) : (
+          item.description
+        )}
+        {featureKey === DeploymentFeatures.send_metrics ? (
+          <div>
+            <TelemetryExampleButton />
+          </div>
+        ) : null}
+      </div>
+      <div className="shrink-0 pe-[3px]">
+        {canEdit ? (
           <Field name={featureKey} type="checkbox">
             {({ input }) => (
-              <SwitchField
-                input={input}
-                aria-label={item.description}
+              <Switch
+                id={inputId}
+                checked={Boolean(input.checked)}
+                onCheckedChange={input.onChange}
+                aria-labelledby={labelId}
                 data-testid={featureKey}
               />
             )}
@@ -84,16 +106,16 @@ const FeatureRow = ({
               <span>{input.value ? translate('Yes') : translate('No')}</span>
             )}
           </Field>
-        )
-      }
-    />
+        )}
+      </div>
+    </li>
   );
 };
 
 const FeatureSectionContent = ({ section }: { section: FeatureSection }) => {
   const canEdit = Boolean(useUser()?.is_staff);
   return (
-    <FormTable>
+    <ul className="m-0 list-none p-0">
       {section.items.map((item) => (
         <FeatureRow
           key={item.key}
@@ -102,7 +124,7 @@ const FeatureSectionContent = ({ section }: { section: FeatureSection }) => {
           canEdit={canEdit}
         />
       ))}
-    </FormTable>
+    </ul>
   );
 };
 
@@ -113,9 +135,10 @@ const FeatureSectionPanel = ({
   section: FeatureSection;
   hasItems: boolean;
 }) => (
-  <FormTable.Card
+  <PropertyCard
+    bordered
     title={section.description}
-    className="card-bordered mb-4"
+    className="mb-4"
     key={section.key}
   >
     {hasItems ? (
@@ -125,7 +148,7 @@ const FeatureSectionPanel = ({
         {translate('No matching features in this section.')}
       </p>
     )}
-  </FormTable.Card>
+  </PropertyCard>
 );
 
 // Build tabs: regular sections + grouped Plugins tab, sorted alphabetically
@@ -270,14 +293,10 @@ export const FeaturesList = () => {
       initialValues={ENV.FEATURES}
       render={({ handleSubmit, submitting, dirty }) => (
         <form onSubmit={handleSubmit}>
-          <div className="card card-bordered">
-            <div className="card-header">
-              <div className="flex flex-col">
-                <div className="card-title mb-0">
-                  <h3>{translate('Features')}</h3>
-                </div>
-              </div>
-              <div className="card-toolbar flex items-center gap-3 flex-nowrap">
+          <Card bordered>
+            <CardHeader>
+              <CardTitle>{translate('Features')}</CardTitle>
+              <div className="my-[0.5rem] flex items-center gap-3 flex-nowrap">
                 <TableQuery
                   query={query}
                   setQuery={setQuery}
@@ -292,8 +311,8 @@ export const FeaturesList = () => {
                   />
                 )}
               </div>
-            </div>
-            <div className="card-body" style={{ paddingTop: 8 }}>
+            </CardHeader>
+            <CardContent className="pt-2">
               <Tabs mount="all" value={activeKey} onValueChange={handleSelect}>
                 <div
                   className="flex items-end gap-1"
@@ -488,8 +507,8 @@ export const FeaturesList = () => {
                   </>
                 )}
               </Tabs>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </form>
       )}
     />

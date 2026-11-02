@@ -30,35 +30,33 @@ export const ComponentRowTotal = (props: {
       : translate('Billed by usage')
     : null;
   return (
-    <tr>
-      {/* `!`: FormTable.scss's unlayered `.form-table th` sets 500, which
-          outranks a plain utility; the total row is regular weight. */}
-      <th className="title text-base font-normal!">{translate('Total')}</th>
-      <td colSpan={2} className="col-actions">
-        <div className="flex items-center justify-end gap-3">
-          {props.period && props.setPeriod && (
-            <Switch
-              label={translate('Yearly estimate')}
-              checked={props.period === 'monthly' ? false : true}
-              size="sm"
-              onCheckedChange={(value) =>
-                props.setPeriod(value ? 'annual' : 'monthly')
-              }
-            />
-          )}
-          <span className="text-base text-secondary min-w-[150px] text-end">
-            {usageAmount
-              ? usageAmount
-              : !props.isFloor
-                ? amount
-                : // Nothing in the plan has a known quantity, so there is no
-                  // floor to quote either — "From 0.00" would read as free.
-                  props.amount
-                  ? translate('From {amount}', { amount })
-                  : DASH_ESCAPE_CODE}
-          </span>
-        </div>
-      </td>
-    </tr>
+    <div className="col-span-full flex min-h-[52px] items-center justify-between border-t border-secondary py-4 last:border-b-0">
+      <span className="text-base font-normal text-secondary">
+        {translate('Total')}
+      </span>
+      <div className="flex items-center justify-end gap-3">
+        {props.period && props.setPeriod && (
+          <Switch
+            label={translate('Yearly estimate')}
+            checked={props.period === 'monthly' ? false : true}
+            size="sm"
+            onCheckedChange={(value) =>
+              props.setPeriod(value ? 'annual' : 'monthly')
+            }
+          />
+        )}
+        <span className="text-base text-secondary min-w-[150px] text-end font-medium">
+          {usageAmount
+            ? usageAmount
+            : !props.isFloor
+              ? amount
+              : // Nothing in the plan has a known quantity, so there is no
+                // floor to quote either — "From 0.00" would read as free.
+                props.amount
+                ? translate('From {amount}', { amount })
+                : DASH_ESCAPE_CODE}
+        </span>
+      </div>
+    </div>
   );
 };

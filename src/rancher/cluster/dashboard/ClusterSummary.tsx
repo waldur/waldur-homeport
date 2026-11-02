@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { RancherCluster } from 'waldur-js-client';
 
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
-import { BooleanField } from '@/table/BooleanField';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 
 export const ClusterSummary: FC<{
   resourceScope: RancherCluster;
@@ -13,48 +13,41 @@ export const ClusterSummary: FC<{
   return (
     <div className="text-sm">
       <div className="xl:w-6/12 2xl:w-4/12">
-        <Field
-          className="mb-1.5"
-          label={translate('Kubernetes version')}
-          value={renderFieldOrDash(resourceScope?.kubernetes_version)}
-          labelCol={6}
-          valueCol={6}
-        />
-        {resourceScope?.public_ips?.length > 0 && (
-          <Field
-            className="mb-1.5"
+        <PropertyList
+          variant="summary"
+          termWidth="md"
+          space={1.5}
+          hideIfEmpty={false}
+        >
+          <PropertyItem
+            label={translate('Kubernetes version')}
+            value={resourceScope?.kubernetes_version}
+          />
+          <PropertyItem
             label={translate('Load balancer IPs')}
-            value={renderFieldOrDash(
-              resourceScope?.public_ips
-                .map((item) =>
-                  item.external_ip_address
-                    ? `${item.ip_address}/${item.external_ip_address}`
-                    : item.ip_address,
-                )
-                .join(','),
+            value={propVal.list(
+              resourceScope?.public_ips?.map((item) =>
+                item.external_ip_address
+                  ? `${item.ip_address}/${item.external_ip_address}`
+                  : item.ip_address,
+              ),
             )}
-            hasCopy={Boolean(resourceScope?.public_ips?.length)}
-            labelCol={6}
-            valueCol={6}
+            hasCopy
+            hideIfEmpty
           />
-        )}
-        {resourceScope?.router_ips?.length > 0 && (
-          <Field
-            className="mb-1.5"
+          <PropertyItem
             label={translate('Router IPs')}
-            value={renderFieldOrDash(resourceScope?.router_ips.join(','))}
-            hasCopy={Boolean(resourceScope?.router_ips?.length)}
-            labelCol={6}
-            valueCol={6}
+            value={propVal.list(resourceScope?.router_ips as string[])}
+            hasCopy
+            hideIfEmpty
           />
-        )}
-        <Field
-          className="mb-1.5"
-          label={translate('Longhorn')}
-          labelCol={6}
-          valueCol={6}
-          value={<BooleanField value={resourceScope?.install_longhorn} />}
-        />
+          <PropertyItem
+            label={translate('Longhorn')}
+            value={propVal.boolean(resourceScope?.install_longhorn, {
+              display: 'badge',
+            })}
+          />
+        </PropertyList>
       </div>
     </div>
   );

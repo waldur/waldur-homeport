@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { PropertyCard, PropertyList } from 'waldur-ui';
+
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -8,7 +10,6 @@ import {
   MarkdownEditField,
   StringEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { SlugTemplateHelpText } from '@/form/SlugTemplateHelpText';
 import { translate } from '@/i18n';
 import { Call } from '@/proposals/types';
@@ -49,9 +50,9 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
   const updateCall = useUpdateCall(props.call, props.refetch);
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('General')}
-      className="card-bordered"
       refetch={props.refetch}
       loading={props.loading}
     >
@@ -62,7 +63,7 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
           props.isReadOnly ? getCallReadOnlyReason(props.call) : undefined
         }
       >
-        <FormTable>
+        <PropertyList>
           <StringEditField
             name="name"
             label={translate('Name')}
@@ -111,8 +112,8 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
               renderValue={(value) => renderFieldOrDash(value)}
             />
           )}
-        </FormTable>
+        </PropertyList>
       </EditFieldProvider>
-    </FormTable.Card>
+    </PropertyCard>
   );
 };

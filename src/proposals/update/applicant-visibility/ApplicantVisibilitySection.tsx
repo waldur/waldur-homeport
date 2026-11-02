@@ -59,7 +59,7 @@ export const ApplicantVisibilitySection: FC<
       update={update}
       editGate="always"
       disabled={isReadOnly}
-      className="card-bordered mb-4"
+      className="mb-4"
       emptyHint={
         isDefault ? (
           <AlertItem

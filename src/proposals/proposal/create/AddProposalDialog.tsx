@@ -10,6 +10,8 @@ import {
   PublicCall,
 } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { SubmitButton, StringGroup } from '@/form';
 import { formatJsxTemplate, translate } from '@/i18n';
@@ -24,7 +26,6 @@ import { EndingField } from '@/proposals/EndingField';
 import { usesCallVocabulary } from '@/proposals/presentation';
 import { getProposalProjectName } from '@/proposals/proposalProjectName';
 import { Call } from '@/proposals/types';
-import { Field } from '@/resource/summary';
 import { useNotify } from '@/store/notify';
 import { UsersService } from '@/user/UsersService';
 
@@ -199,45 +200,38 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                 </>
               }
             >
-              <Field
-                label={
-                  usesCallVocabulary()
-                    ? translate('Call name')
-                    : translate('Available under')
-                }
-                value={props.resolve.call.name}
-                labelCol={4}
-                valueCol={8}
-                space={1.5}
-              />
-              {usesCallVocabulary() ? (
-                <Field
-                  label={translate('Round reference')}
-                  value={props.resolve.round.name}
-                  labelCol={4}
-                  valueCol={8}
-                  space={1.5}
+              <PropertyList variant="summary" termWidth="md" space={1.5}>
+                <PropertyItem
+                  label={
+                    usesCallVocabulary()
+                      ? translate('Call name')
+                      : translate('Available under')
+                  }
+                  value={props.resolve.call.name}
                 />
-              ) : null}
-              <Field
-                label={
-                  usesCallVocabulary()
-                    ? translate('Round deadline')
-                    : translate('Submission closes')
-                }
-                value={
-                  <EndingField
-                    endDate={props.resolve.round.cutoff_time}
-                    dateFirst
-                    hasFixedDuration={Boolean(
-                      props.resolve.call.fixed_duration_in_days,
-                    )}
+                {usesCallVocabulary() ? (
+                  <PropertyItem
+                    label={translate('Round reference')}
+                    value={props.resolve.round.name}
                   />
-                }
-                labelCol={4}
-                valueCol={8}
-                space={1.5}
-              />
+                ) : null}
+                <PropertyItem
+                  label={
+                    usesCallVocabulary()
+                      ? translate('Round deadline')
+                      : translate('Submission closes')
+                  }
+                  value={
+                    <EndingField
+                      endDate={props.resolve.round.cutoff_time}
+                      dateFirst
+                      hasFixedDuration={Boolean(
+                        props.resolve.call.fixed_duration_in_days,
+                      )}
+                    />
+                  }
+                />
+              </PropertyList>
               <div className="mt-5.5">
                 <StringGroup
                   label={translate('Name')}

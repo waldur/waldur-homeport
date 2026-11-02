@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { Field } from '@/resource/summary';
+import { PropertyItem, PropertyList } from 'waldur-ui';
 
 import { ExpandableContainer } from './ExpandableContainer';
 import {
@@ -131,8 +131,10 @@ export const ExpandableRowFluid: Story = {
       toggled={{ [tableStoryRows[0].uuid]: true }}
       expandableRow={({ row }) => (
         <ExpandableContainer className="fluid">
-          <Field label="Region" value={row.region} />
-          <Field label="Plan" value={row.plan} />
+          <PropertyList variant="summary">
+            <PropertyItem label="Region" value={row.region} />
+            <PropertyItem label="Plan" value={row.plan} />
+          </PropertyList>
         </ExpandableContainer>
       )}
     />

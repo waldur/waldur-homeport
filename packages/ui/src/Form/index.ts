@@ -1,4 +1,4 @@
-export { useControlId, useDescribedBy } from './controlId';
+export { useControlId, useDescribedBy, useDescriptionId } from './controlId';
 export {
   FieldScope,
   type FieldScopeProps,

@@ -1,8 +1,9 @@
 import { FC } from 'react';
 
-import { AccordionCard, Progress } from 'waldur-ui';
+import { AccordionCard, Progress, PropertyList, PropertyItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 import type { ConnectionStats } from './api';
 import { getConnectionHealth } from './utils';
@@ -36,39 +37,30 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
         <div>
-          <h6 className="uppercase text-quaternary mb-2.5">
-            {translate('Connection breakdown')}
-          </h6>
-          <table className="table table-sm table-borderless mb-0">
-            <tbody>
-              <tr>
-                <td className="text-quaternary">{translate('Active')}</td>
-                <td className="text-end">{data.active.toLocaleString()}</td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Idle')}</td>
-                <td className="text-end">{data.idle.toLocaleString()}</td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Idle in transaction')}
-                </td>
-                <td
-                  className={`text-end ${data.idle_in_transaction > 5 ? 'text-warning' : ''}`}
-                >
-                  {data.idle_in_transaction.toLocaleString()}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Waiting')}</td>
-                <td
-                  className={`text-end ${data.waiting > 0 ? 'text-danger' : ''}`}
-                >
-                  {data.waiting.toLocaleString()}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <PropertyList variant="compact">
+            <PropertyList.Section title={translate('Connection breakdown')}>
+              <PropertyItem
+                label={translate('Active')}
+                value={propVal.count(data.active)}
+              />
+              <PropertyItem
+                label={translate('Idle')}
+                value={propVal.count(data.idle)}
+              />
+              <PropertyItem
+                label={translate('Idle in transaction')}
+                value={propVal.count(data.idle_in_transaction)}
+                valueClass={
+                  data.idle_in_transaction > 5 ? 'text-warning' : undefined
+                }
+              />
+              <PropertyItem
+                label={translate('Waiting')}
+                value={propVal.count(data.waiting)}
+                valueClass={data.waiting > 0 ? 'text-danger' : undefined}
+              />
+            </PropertyList.Section>
+          </PropertyList>
         </div>
         <div>
           <h6 className="uppercase text-quaternary mb-2.5">

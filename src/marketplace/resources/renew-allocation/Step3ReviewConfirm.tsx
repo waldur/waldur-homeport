@@ -2,6 +2,8 @@ import { FC, useMemo } from 'react';
 import { useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { formatDate, parseDate } from '@/core/dateUtils';
 import { StringGroup } from '@/form';
 import { FormGroup } from '@/form';
@@ -9,7 +11,6 @@ import { translate } from '@/i18n';
 import { getFormLimitParser } from '@/marketplace/common/registry';
 import { OrderAttachmentField } from '@/marketplace/deploy/steps/OrderAttachmentField';
 import { getPurchaseOrderConfig } from '@/marketplace/resources/common/purchaseOrderConfig';
-import { Field as SummaryField } from '@/resource/summary';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { getMarketplaceResourceUuid } from '../actions/utils';
@@ -101,38 +102,28 @@ export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
     <WizardModal {...props}>
       {!isMulti && (
         <div className="mb-5">
-          <SummaryField
-            label={translate('Resource')}
-            value={resource?.name}
-            labelCol={4}
-            valueCol={8}
-            className="mb-2.5"
-          />
-          <SummaryField
-            label={translate('Organization / Project')}
-            value={departmentToInvoice}
-            labelCol={4}
-            valueCol={8}
-            className="mb-2.5"
-          />
-          <SummaryField
-            label={translate('Extension')}
-            value={
-              extensionMonths === 1
-                ? translate('1 month')
-                : translate('{count} months', { count: extensionMonths })
-            }
-            labelCol={4}
-            valueCol={8}
-            className="mb-2.5"
-          />
-          <SummaryField
-            label={translate('New end date')}
-            value={newEndDate}
-            labelCol={4}
-            valueCol={8}
-            className="mb-2.5"
-          />
+          <PropertyList variant="summary" termWidth="md" space={2.5}>
+            <PropertyItem
+              label={translate('Resource')}
+              value={resource?.name}
+            />
+            <PropertyItem
+              label={translate('Organization / Project')}
+              value={departmentToInvoice}
+            />
+            <PropertyItem
+              label={translate('Extension')}
+              value={
+                extensionMonths === 1
+                  ? translate('1 month')
+                  : translate('{count} months', { count: extensionMonths })
+              }
+            />
+            <PropertyItem
+              label={translate('New end date')}
+              value={newEndDate}
+            />
+          </PropertyList>
 
           <hr className="my-3" />
 

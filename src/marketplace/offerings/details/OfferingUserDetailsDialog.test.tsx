@@ -5,6 +5,7 @@ import {
   marketplaceProviderOfferingsUserAttributeConfigRetrieve,
 } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { renderWithProviders } from '@/test/harness';
 
 import {
@@ -155,5 +156,39 @@ describe('OfferingUserDetailsDialog', () => {
 
     expect(await screen.findByText('jane_external')).toBeInTheDocument();
     expect(screen.queryByTestId('provider-account-link')).toBeNull();
+  });
+
+  it('formats birth_date and affiliations with propVal', async () => {
+    vi.mocked(
+      marketplaceProviderOfferingsUserAttributeConfigRetrieve,
+    ).mockResolvedValue({
+      data: { exposed_fields: ['birth_date', 'affiliations'] },
+    } as any);
+    vi.mocked(marketplaceOfferingUsersRetrieve).mockResolvedValue({
+      data: {
+        ...offeringUser,
+        user_birth_date: '1995-12-25',
+        user_affiliations: ['Staff', 'Researcher'],
+      },
+    } as any);
+    renderDialog();
+
+    expect(await screen.findByText('25 Dec 1995')).toBeInTheDocument();
+    expect(screen.getByText('Staff, Researcher')).toBeInTheDocument();
+  });
+
+  it('renders active ISDs when feature is enabled', async () => {
+    ENV.FEATURES = { user: { show_identity_bridge: true } } as any;
+    vi.mocked(marketplaceOfferingUsersRetrieve).mockResolvedValue({
+      data: {
+        ...offeringUser,
+        user_active_isds: ['isd:eduperson', 'isd:haka'],
+      },
+    } as any);
+    renderDialog();
+
+    expect(await screen.findByText('Active ISDs')).toBeInTheDocument();
+    expect(screen.getByText('Eduperson')).toBeInTheDocument();
+    expect(screen.getByText('Haka')).toBeInTheDocument();
   });
 });

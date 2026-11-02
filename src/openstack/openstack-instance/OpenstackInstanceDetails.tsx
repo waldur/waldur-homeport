@@ -18,9 +18,10 @@ import {
   SshKey,
 } from 'waldur-js-client';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getUUID } from '@/core/utils';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { OrderDetailsProps } from '@/marketplace/types';
 import {
@@ -28,6 +29,7 @@ import {
   formatVolumeTypeLabel,
   getDefaultFloatingIps,
 } from '@/openstack/openstack-instance/utils';
+import { propVal } from '@/property/propertyFields';
 import { formatFlavor } from '@/resource/utils';
 
 export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
@@ -152,54 +154,69 @@ export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
   return (
     <>
       {attributesData?.image && (
-        <FormTable.Item label={translate('Image')}>
-          {attributesData.image.name}
-        </FormTable.Item>
+        <PropertyItem
+          label={translate('Image')}
+          value={attributesData.image.name}
+        />
       )}
       {attributesData?.flavor && (
-        <FormTable.Item label={translate('Flavor')}>
+        <PropertyItem label={translate('Flavor')}>
           {formatFlavor(attributesData.flavor)}
-        </FormTable.Item>
+        </PropertyItem>
       )}
       {attributesData?.availabilityZone && (
-        <FormTable.Item label={translate('Availability zone')}>
-          {attributesData.availabilityZone.name}
-        </FormTable.Item>
+        <PropertyItem
+          label={translate('Availability zone')}
+          value={attributesData.availabilityZone.name}
+        />
       )}
       {typeof attributes['system_volume_size'] === 'number' && (
-        <FormTable.Item label={translate('System volume size')}>
-          {attributes['system_volume_size'] / 1024} GB
-        </FormTable.Item>
+        <PropertyItem
+          label={translate('System volume size')}
+          value={propVal.number(attributes['system_volume_size'] / 1024, {
+            unit: 'GB',
+          })}
+        />
       )}
       {attributesData?.systemVolumeType && (
-        <FormTable.Item label={translate('System volume type')}>
-          {formatVolumeTypeLabel(attributesData.systemVolumeType)}
-        </FormTable.Item>
+        <PropertyItem
+          label={translate('System volume type')}
+          value={formatVolumeTypeLabel(attributesData.systemVolumeType)}
+        />
       )}
       {typeof attributes['data_volume_size'] === 'number' && (
-        <FormTable.Item label={translate('Data volume size')}>
-          {attributes['data_volume_size'] / 1024} GB
-        </FormTable.Item>
+        <PropertyItem
+          label={translate('Data volume size')}
+          value={propVal.number(attributes['data_volume_size'] / 1024, {
+            unit: 'GB',
+          })}
+        />
       )}
       {attributesData?.dataVolumeType && (
-        <FormTable.Item label={translate('Data volume type')}>
-          {formatVolumeTypeLabel(attributesData.dataVolumeType)}
-        </FormTable.Item>
+        <PropertyItem
+          label={translate('Data volume type')}
+          value={formatVolumeTypeLabel(attributesData.dataVolumeType)}
+        />
       )}
       {attributesData?.publicKey && (
-        <FormTable.Item label={translate('SSH public key')}>
-          {attributesData.publicKey.name}
-        </FormTable.Item>
+        <PropertyItem
+          label={translate('SSH public key')}
+          value={attributesData.publicKey.name}
+        />
       )}
       {attributesData?.securityGroups && (
-        <FormTable.Item label={translate('Security groups')}>
-          {attributesData.securityGroups.map((securityGroup, index) => (
-            <p key={index}>{securityGroup.name}</p>
-          ))}
-        </FormTable.Item>
+        <PropertyItem
+          label={translate('Security groups')}
+          value={propVal.list(
+            attributesData.securityGroups.map(
+              (securityGroup) => securityGroup.name,
+            ),
+            { display: 'stack' },
+          )}
+        />
       )}
       {attributesData?.networks && (
-        <FormTable.Item label={translate('Networks')}>
+        <PropertyItem label={translate('Networks')}>
           {attributesData.networks.map((network, index) => (
             <p key={index}>
               {formatSubnet(network.subnet)}
@@ -207,19 +224,22 @@ export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
               {network.floatingIp.address}
             </p>
           ))}
-        </FormTable.Item>
+        </PropertyItem>
       )}
-      {typeof attributes['user_data'] == 'string' && (
-        <FormTable.Item label={translate('User data')}>
-          <pre>{attributes['user_data']}</pre>
-        </FormTable.Item>
+      {typeof attributes['user_data'] === 'string' && (
+        <PropertyItem label={translate('User data')}>
+          <pre className="font-mono text-xs whitespace-pre-wrap m-0">
+            {attributes['user_data']}
+          </pre>
+        </PropertyItem>
       )}
       {typeof attributes['config_drive'] === 'boolean' && (
-        <FormTable.Item label={translate('Config drive')}>
-          {attributes['config_drive']
-            ? translate('Enabled')
-            : translate('Disabled')}
-        </FormTable.Item>
+        <PropertyItem
+          label={translate('Config drive')}
+          value={propVal.boolean(attributes['config_drive'] as boolean, {
+            wording: 'enabled',
+          })}
+        />
       )}
     </>
   );

@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { SystemLog } from 'waldur-js-client';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 interface SupportSystemLogsExpandableRowProps {
@@ -36,23 +37,25 @@ export const SupportSystemLogsExpandableRow: FC<
 
   return (
     <ExpandableContainer asTable>
-      <Field label={translate('Message')} value={row.message} hasCopy />
-      <Field label={translate('Logger')} value={row.logger_name} />
-      {fileLocation && (
-        <Field label={translate('File location')} value={fileLocation} />
-      )}
+      <PropertyItem label={translate('Message')} value={row.message} hasCopy />
+      <PropertyItem label={translate('Logger')} value={row.logger_name} />
+      <PropertyItem
+        label={translate('File location')}
+        value={fileLocation}
+        hideIfEmpty
+      />
       {traceback && (
-        <Field label={translate('Traceback')}>
+        <PropertyItem label={translate('Traceback')}>
           <pre
             className="text-quaternary text-xs mb-0"
             style={{ whiteSpace: 'pre-wrap' }}
           >
             {traceback}
           </pre>
-        </Field>
+        </PropertyItem>
       )}
       {otherContextKeys.map(([key, value]) => (
-        <Field
+        <PropertyItem
           key={key}
           label={key}
           value={
@@ -61,7 +64,7 @@ export const SupportSystemLogsExpandableRow: FC<
         />
       ))}
       {!hasContext && (
-        <Field
+        <PropertyItem
           label={translate('Context')}
           value={translate('No additional context available')}
         />

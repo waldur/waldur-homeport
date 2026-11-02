@@ -1,8 +1,8 @@
-import FormTable from '@/form/FormTable';
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field, ResourceSummaryProps } from '@/resource/summary';
-import { formatDefault } from '@/resource/utils';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
+import { ResourceSummaryProps } from '@/resource/summary';
 
 import { Network } from './types';
 
@@ -10,30 +10,29 @@ export const OpenStackNetworkSummary = (
   props: ResourceSummaryProps<Network>,
 ) => {
   const { resource } = props;
-  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Component
+      <PropertyItem
         label={translate('Type')}
-        value={formatDefault(resource.type)}
+        value={resource.type}
         valueClass="ellipsis"
       />
 
-      <Component
+      <PropertyItem
         label={translate('Segmentation ID')}
-        value={formatDefault(resource.segmentation_id)}
+        value={resource.segmentation_id}
       />
 
-      <Component
+      <PropertyItem
         label={translate('Is external')}
-        value={resource.is_external ? translate('Yes') : translate('No')}
+        value={propVal.boolean(resource.is_external)}
       />
 
-      <Component label={translate('MTU')} value={formatDefault(resource.mtu)} />
-      <Component
+      <PropertyItem label={translate('MTU')} value={resource.mtu} />
+      <PropertyItem
         label={translate('Backend ID')}
-        value={renderFieldOrDash(resource.backend_id)}
-        hasCopy={!!resource.backend_id}
+        value={resource.backend_id}
+        hasCopy
       />
     </>
   );

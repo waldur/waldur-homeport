@@ -7,15 +7,15 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
 import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
 import { RateStars } from '@/proposals/proposal/create-review/RateStars';
 import { ReviewStateRenderer } from '@/proposals/review/ReviewStateRenderer';
-import { Field } from '@/resource/summary';
 import { createFetcher } from '@/table/api';
 import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -52,9 +52,9 @@ const ComplianceContent: FC<{ data: any }> = ({ data }) => {
   }
 
   return (
-    <FormTable>
+    <PropertyList>
       {data.questions.map((question) => (
-        <FormTable.Item
+        <PropertyItem
           key={question.uuid}
           label={question.description}
           value={
@@ -65,7 +65,7 @@ const ComplianceContent: FC<{ data: any }> = ({ data }) => {
           }
         />
       ))}
-    </FormTable>
+    </PropertyList>
   );
 };
 
@@ -146,13 +146,13 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
 
   return (
     <ExpandableContainer>
-      {row.project_summary && (
-        <Field
+      <PropertyList variant="summary">
+        <PropertyItem
           label={translate('Project summary')}
           value={row.project_summary}
           className="mb-2.5"
         />
-      )}
+      </PropertyList>
 
       {reviewsCount === 0 && !checklistData ? (
         reviewsTable

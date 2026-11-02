@@ -2,15 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { identityBridgeStatsRetrieve } from 'waldur-js-client';
 
-import { BadgeVariant } from 'waldur-ui';
+import { BadgeVariant, PropertyItem, PropertyList } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { formatRelativeWithHour } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { renderFieldOrDash } from '@/table/utils';
 import { formatIsdName, IsdBadges } from '@/user/support/IsdBadges';
 
@@ -141,22 +141,22 @@ export const IdentityBridgeTab: FC = () => {
       {/* Summary Metrics */}
       <div>
         <h5 className="mb-3">{translate('Summary')}</h5>
-        <FormTable hideActions detailsMode>
-          <FormTable.Item
+        <PropertyList hideActions detailsMode>
+          <PropertyItem
             label={translate('Total federated users')}
-            value={String(stats.total_federated_users ?? 0)}
+            value={propVal.count(stats.total_federated_users)}
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Active federated users')}
-            value={String(stats.total_active_federated_users ?? 0)}
+            value={propVal.count(stats.total_active_federated_users)}
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Stale threshold')}
             value={translate('{days} days', {
               days: renderFieldOrDash(stats.stale_threshold_days),
             })}
           />
-        </FormTable>
+        </PropertyList>
       </div>
     </div>
   );

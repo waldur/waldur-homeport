@@ -1,8 +1,8 @@
 import { PublicOfferingDetails, Resource } from 'waldur-js-client';
 
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 
 export const BackendIdField = ({
   resource,
@@ -28,15 +28,5 @@ export const BackendIdField = ({
     offering.plugin_options?.backend_id_display_label ||
     translate('Backend ID');
 
-  return (
-    <Field
-      label={label}
-      value={
-        <span className="flex items-center gap-1.5">
-          <span>{highlightedId}</span>
-          <CopyToClipboardButton value={highlightedId} onlyButton />
-        </span>
-      }
-    />
-  );
+  return <PropertyItem label={label} value={highlightedId} hasCopy />;
 };

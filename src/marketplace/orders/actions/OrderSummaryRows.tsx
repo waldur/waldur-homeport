@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { OrderDetails } from 'waldur-js-client';
 
-import FormTable from '@/form/FormTable';
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { renderFieldOrDash } from '@/table/utils';
 
 import { ResourceNameField } from '../list/ResourceNameField';
 import { getOrderType } from '../utils';
@@ -14,27 +14,21 @@ import { getOrderType } from '../utils';
  */
 export const OrderSummaryRows: FC<{ order: OrderDetails }> = ({ order }) => {
   return (
-    <FormTable hideActions detailsMode>
-      <FormTable.Item
+    <PropertyList hideActions detailsMode>
+      <PropertyItem
         label={translate('Resource')}
         value={<ResourceNameField row={order} />}
       />
-      <FormTable.Item
-        label={translate('Project')}
-        value={renderFieldOrDash(order.project_name)}
-      />
-      <FormTable.Item
+      <PropertyItem label={translate('Project')} value={order.project_name} />
+      <PropertyItem
         label={translate('Client organization')}
-        value={renderFieldOrDash(order.customer_name)}
+        value={order.customer_name}
       />
-      <FormTable.Item
-        label={translate('Offering')}
-        value={renderFieldOrDash(order.offering_name)}
-      />
-      <FormTable.Item
+      <PropertyItem label={translate('Offering')} value={order.offering_name} />
+      <PropertyItem
         label={translate('Type')}
         value={getOrderType(order).label}
       />
-    </FormTable>
+    </PropertyList>
   );
 };

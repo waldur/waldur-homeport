@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import { AccordionCard, Badge } from 'waldur-ui';
+import { AccordionCard, PropertyList, PropertyItem } from 'waldur-ui';
 
-import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 import type { ReplicationStats } from './api';
 
@@ -31,47 +31,31 @@ export const DatabaseReplicationCard: FC<DatabaseReplicationCardProps> = ({
       defaultOpen={hasReplicationLag}
       className="mb-5"
     >
-      <table
-        className="table table-sm table-borderless mb-0"
-        style={{ maxWidth: '400px' }}
-      >
-        <tbody>
-          <tr>
-            <td className="text-quaternary">{translate('Role')}</td>
-            <td className="text-end">
-              <Badge
-                variant={data.is_replica ? 'info' : 'primary'}
-                shape="pill"
-                tone="outline"
-              >
-                {data.is_replica ? translate('Replica') : translate('Primary')}
-              </Badge>
-            </td>
-          </tr>
-          {!data.is_replica && data.wal_bytes != null && (
-            <tr>
-              <td className="text-quaternary">{translate('WAL size')}</td>
-              <td className="text-end">
-                {formatFilesize(data.wal_bytes, 'B')}
-              </td>
-            </tr>
-          )}
-          {data.is_replica && (
-            <tr>
-              <td className="text-quaternary">
-                {translate('Replication lag')}
-              </td>
-              <td
-                className={`text-end ${hasReplicationLag ? 'text-warning' : 'text-success'}`}
-              >
-                {data.replication_lag_bytes != null
-                  ? formatFilesize(data.replication_lag_bytes, 'B')
-                  : translate('No lag')}
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      <PropertyList variant="compact" className="max-w-[400px]">
+        <PropertyItem
+          label={translate('Role')}
+          value={propVal.boolean(data.is_replica, {
+            wording: [translate('Replica'), translate('Primary')],
+            display: 'badge',
+            variants: ['info', 'primary'],
+          })}
+        />
+        {!data.is_replica && data.wal_bytes != null && (
+          <PropertyItem
+            label={translate('WAL size')}
+            value={propVal.fileSize(data.wal_bytes)}
+          />
+        )}
+        {data.is_replica && (
+          <PropertyItem
+            label={translate('Replication lag')}
+            value={propVal.fileSize(data.replication_lag_bytes)}
+            placeholder={translate('No lag')}
+            hideIfEmpty={false}
+            valueClass={hasReplicationLag ? 'text-warning' : 'text-success'}
+          />
+        )}
+      </PropertyList>
       {hasReplicationLag && (
         <small className="text-warning mt-2.5 block">
           {translate(

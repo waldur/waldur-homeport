@@ -9,7 +9,12 @@ import {
   marketplaceResourcesRetrieve,
 } from 'waldur-js-client';
 
-import { SegmentedControl, useBreakpointDown } from 'waldur-ui';
+import {
+  PropertyList,
+  SegmentedControl,
+  useBreakpointDown,
+  PropertyItem,
+} from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -19,9 +24,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { getUsageHistoryPeriodOptions } from '@/marketplace/resources/usage/utils';
-import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
-import { renderFieldOrDash } from '@/table/utils';
 
 import { getUsageLineChartOptions } from '../utils';
 
@@ -152,11 +155,17 @@ export const UsageExpandableRow = ({
     <ExpandableContainer>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
         <div>
-          <Field label={translate('Resource')} value={row.resource_uuid} />
-          <Field
-            label={translate('Comment')}
-            value={renderFieldOrDash(row.description)}
-          />
+          <PropertyList variant="summary">
+            <PropertyItem
+              label={translate('Resource')}
+              value={row.resource_uuid}
+            />
+            <PropertyItem
+              label={translate('Comment')}
+              value={row.description}
+              hideIfEmpty={false}
+            />
+          </PropertyList>
         </div>
         <div className="border-sm-start md:ps-7.5">
           <div className="card card-bordered">

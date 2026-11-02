@@ -85,7 +85,7 @@
   }
 }
 
-// Cell padding of the list table (TableView) and of FormTable, in place of
+// Cell padding of the list table (TableView), in place of
 // Metronic's .gy-*/.gx-* gutter classes. Kept in this layer, at their
 // specificity, so custom/_table.scss's first/last-cell edges and expanded-row
 // padding still win.
@@ -93,14 +93,6 @@
   th,
   td {
     padding: 0 8px;
-  }
-}
-
-.table.form-table {
-  th,
-  td {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
   }
 }
 

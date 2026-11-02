@@ -1,10 +1,9 @@
 import { useMemo } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { PropertyItem } from 'waldur-ui';
 
-import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { SUPPORT_OFFERING_TYPE } from '@/support/constants';
 
 import { getOrderType } from '../utils';
@@ -17,40 +16,28 @@ export const OrderDetailsQuickBody = ({
   const typeBadge = useMemo(() => getOrderType(order), [order]);
   const extraFieldProps = autoWidth
     ? {
-        labelClass: 'w-[100px]',
-        labelCol: 'auto',
-        valueCol: 'auto',
+        termWidth: '100px',
       }
     : {};
 
   return (
     <>
-      <Field
+      <PropertyItem
         label={translate('Type')}
-        value={
-          <Badge
-            variant={typeBadge.variant}
-            size="sm"
-            shape="pill"
-            tone="outline"
-          >
-            {typeBadge.label}
-          </Badge>
-        }
+        value={propVal.badge(typeBadge.label, {
+          variant: typeBadge.variant,
+          tone: 'outline',
+        })}
         space={space}
         {...(extraFieldProps as any)}
       />
       {order.offering_type === SUPPORT_OFFERING_TYPE && order.issue && (
-        <Field
+        <PropertyItem
           label={translate('Issue')}
-          value={
-            <Link
-              state="support.detail"
-              params={{ issue_uuid: order.issue.uuid }}
-              label={order.issue.key || order.issue.uuid}
-              className="text-link"
-            />
-          }
+          value={propVal.link(order.issue.key || order.issue.uuid, {
+            state: 'support.detail',
+            params: { issue_uuid: order.issue.uuid },
+          })}
           space={space}
           {...(extraFieldProps as any)}
         />

@@ -1,8 +1,9 @@
 import { FC } from 'react';
 
+import { PropertyCard, PropertyList } from 'waldur-ui';
+
 import { EditSchedulesButton } from '@/booking/EditSchedulesButton';
 import { EditFieldProvider } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
 import { RemoteActions } from './RemoteActions';
@@ -18,7 +19,8 @@ export const BaseProvisioningConfigSection: FC<
   );
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('Provisioning configuration')}
       actions={
         <>
@@ -26,13 +28,13 @@ export const BaseProvisioningConfigSection: FC<
           <RemoteActions offering={props.offering} />
         </>
       }
-      className="card-bordered mb-5.5"
+      className="mb-5.5"
     >
-      <FormTable>
+      <PropertyList>
         <EditFieldProvider scope={props.offering} callback={update}>
           {props.children}
         </EditFieldProvider>
-      </FormTable>
-    </FormTable.Card>
+      </PropertyList>
+    </PropertyCard>
   );
 };

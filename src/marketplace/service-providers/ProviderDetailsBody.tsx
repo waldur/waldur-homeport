@@ -1,16 +1,18 @@
 import { FunctionComponent } from 'react';
+import { ServiceProvider } from 'waldur-js-client';
+
+import { PropertyList, PropertyItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { OfferingGrid } from '@/marketplace/common/OfferingGrid';
 import { PAGE_CONTAINER_BOUNDED_CLASSNAME } from '@/navigation/pageContainer';
-import { Field } from '@/resource/summary';
 
 import { OfferingLogo } from '../common/OfferingLogo';
 
 import './ProviderDetails.scss';
 
 export const ProviderDetailsBody: FunctionComponent<{
-  provider;
+  provider: ServiceProvider;
   offerings;
 }> = ({ provider, offerings }) => (
   <div className="grid grid-cols-1 md:grid-cols-12 gap-x-5">
@@ -27,18 +29,16 @@ export const ProviderDetailsBody: FunctionComponent<{
       <h2 className="font-bold mb-3">{provider.customer_name}</h2>
       <div>
         <div className={PAGE_CONTAINER_BOUNDED_CLASSNAME}>
-          {provider.customer_native_name && (
-            <Field
+          <PropertyList variant="summary">
+            <PropertyItem
               label={translate('Native name')}
               value={provider.customer_native_name}
             />
-          )}
-          {provider.customer_abbreviation && (
-            <Field
+            <PropertyItem
               label={translate('Abbreviation')}
               value={provider.customer_abbreviation}
             />
-          )}
+          </PropertyList>
         </div>
       </div>
 

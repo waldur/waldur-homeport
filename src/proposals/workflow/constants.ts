@@ -6,6 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 export type { ResponsibleRoleEnum, TransitionModeEnum };
 
@@ -210,37 +211,36 @@ export const statusLabel = (status: string) => {
   }
 };
 
+/** The label of each responsible role, for read-only rows and selects alike. */
+export const getResponsibleRoleLabels = (): Record<
+  ResponsibleRoleEnum,
+  string
+> => ({
+  call_manager: translate('Call manager'),
+  offering_manager: translate('Offering manager'),
+  reviewer: translate('Reviewer'),
+  panel_member: translate('Panel member'),
+  applicant: translate('Applicant'),
+});
+
 export const responsibleRoleLabel = (
   role: ResponsibleRoleEnum | string | null | undefined,
-): string => {
-  switch (role) {
-    case 'call_manager':
-      return translate('Call manager');
-    case 'offering_manager':
-      return translate('Offering manager');
-    case 'reviewer':
-      return translate('Reviewer');
-    case 'panel_member':
-      return translate('Panel member');
-    case 'applicant':
-      return translate('Applicant');
-    default:
-      return '—';
-  }
-};
+): string =>
+  getResponsibleRoleLabels()[role as ResponsibleRoleEnum] ?? DASH_ESCAPE_CODE;
+
+/** The label of each transition mode, for read-only rows and selects alike. */
+export const getTransitionModeLabels = (): Record<
+  TransitionModeEnum,
+  string
+> => ({
+  automatic_on_completion: translate('Advance immediately on completion'),
+  manual: translate('Hold for manual advance'),
+});
 
 export const transitionModeLabel = (
   mode: TransitionModeEnum | string | null | undefined,
-): string => {
-  switch (mode) {
-    case 'automatic_on_completion':
-      return translate('Advance immediately on completion');
-    case 'manual':
-      return translate('Hold for manual advance');
-    default:
-      return '—';
-  }
-};
+): string =>
+  getTransitionModeLabels()[mode as TransitionModeEnum] ?? DASH_ESCAPE_CODE;
 
 // Per-mode help text shown via the "?" icon next to each transition-mode
 // radio. Mirrors the wording of TransitionModes.CHOICES in waldur-mastermind.

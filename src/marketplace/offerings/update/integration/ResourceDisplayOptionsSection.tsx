@@ -1,12 +1,13 @@
 import { FC, useMemo } from 'react';
 
+import { PropertyCard, PropertyList } from 'waldur-ui';
+
 import {
   BooleanEditField,
   EditFieldProvider,
   SelectEditField,
   StringEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { getResourceActionOptions } from '@/marketplace/resources/actions/utils';
 import { TENANT_TYPE } from '@/openstack/constants';
@@ -41,11 +42,12 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
   );
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('Resource display options')}
-      className="card-bordered mb-5.5"
+      className="mb-5.5"
     >
-      <FormTable>
+      <PropertyList>
         <EditFieldProvider scope={props.offering} callback={update}>
           <BooleanEditField
             name="plugin_options.highlight_backend_id_display"
@@ -139,7 +141,7 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
             />
           )}
         </EditFieldProvider>
-      </FormTable>
-    </FormTable.Card>
+      </PropertyList>
+    </PropertyCard>
   );
 };

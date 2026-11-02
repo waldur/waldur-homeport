@@ -16,7 +16,6 @@ import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -31,7 +30,7 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
-import { FieldRow } from '../settings/FieldRow';
+import { SettingsPropertyList } from '../settings/SettingsPropertyList';
 
 const SoftwareCatalogDiscoverDialog = lazyComponent(() =>
   import('./SoftwareCatalogDiscoverDialog').then((m) => ({
@@ -170,13 +169,7 @@ const SettingsTab: FC<{ groupName: string }> = ({ groupName }) => {
   const group = SettingsDescription.find((g) => g.description === groupName);
   if (!group) return null;
 
-  return (
-    <FormTable>
-      {group.items.map((item) => (
-        <FieldRow item={item} key={item.key} value={data?.[item.key]} />
-      ))}
-    </FormTable>
-  );
+  return <SettingsPropertyList items={group.items} values={data} />;
 };
 
 const settingsTab = (groupName: string) => {

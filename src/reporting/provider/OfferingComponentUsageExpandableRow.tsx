@@ -3,19 +3,18 @@ import { DateTime } from 'luxon';
 import { FC, useMemo, useState } from 'react';
 import { marketplaceComponentUsageMonthlyList } from 'waldur-js-client';
 
-import { SegmentedControl } from 'waldur-ui';
+import { PropertyList, SegmentedControl, PropertyItem } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { EChart } from '@/core/EChart';
 import { formatUsageValue } from '@/core/formatNumber';
-import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { getOfferingTypes } from '@/marketplace/common/registry';
 import { OfferingComponentUsage } from '@/marketplace/offerings/types';
 import { getLimitPeriods } from '@/marketplace/offerings/update/components/ComponentLimitPeriodField';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { getUsageLineChartOptions } from '../utils';
@@ -82,45 +81,43 @@ export const OfferingComponentUsageExpandableRow: FC<
   const usageData = chartOptions.series?.[0]?.data || [];
   const limitData = chartOptions.series?.[1]?.data || [];
 
-  const limitPeriodLabel = useMemo(
-    () =>
-      getLimitPeriods().find((p) => p.value === row.limit_period)?.label ||
-      row.limit_period,
-    [row.limit_period],
-  );
-
-  const integrationTypeLabel = useMemo(
-    () =>
-      getOfferingTypes().find((t) => t.value === row.offering_type)?.label ||
-      row.offering_type,
-    [row.offering_type],
-  );
-
   return (
     <ExpandableContainer>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
         <div>
-          <Field
-            label={translate('Service provider')}
-            value={row.service_provider_name}
-          />
-          <Field
-            label={translate('Offering')}
-            value={
-              <Link
-                state="admin-marketplace-offering-details"
-                params={{ offering_uuid: row.offering_uuid }}
-                label={row.offering_name}
-              />
-            }
-          />
-          <Field label={translate('Component')} value={row.component_name} />
-          <Field label={translate('Limit period')} value={limitPeriodLabel} />
-          <Field label={translate('Category')} value={row.category_title} />
-          <Field
-            label={translate('Integration type')}
-            value={integrationTypeLabel}
-          />
+          <PropertyList variant="summary">
+            <PropertyItem
+              label={translate('Service provider')}
+              value={row.service_provider_name}
+            />
+            <PropertyItem
+              label={translate('Offering')}
+              value={propVal.link(row.offering_name, {
+                state: 'admin-marketplace-offering-details',
+                params: { offering_uuid: row.offering_uuid },
+              })}
+            />
+            <PropertyItem
+              label={translate('Component')}
+              value={row.component_name}
+            />
+            <PropertyItem
+              label={translate('Limit period')}
+              value={propVal.enum(row.limit_period, {
+                options: getLimitPeriods(),
+              })}
+            />
+            <PropertyItem
+              label={translate('Category')}
+              value={row.category_title}
+            />
+            <PropertyItem
+              label={translate('Integration type')}
+              value={propVal.enum(row.offering_type, {
+                options: getOfferingTypes(),
+              })}
+            />
+          </PropertyList>
         </div>
         <div className="border-sm-start md:ps-7.5">
           <div className="card card-bordered">

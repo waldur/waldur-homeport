@@ -4,12 +4,19 @@ import { FC, useEffect, useState } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { identityProvidersDiscoverMetadata } from 'waldur-js-client';
 
-import { AlertItem, Badge, BaseButton } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  BaseButton,
+  PropertyList,
+  PropertyItem,
+} from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { OidcFormValues } from '../types';
@@ -154,22 +161,18 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
           <h5 className="mb-0">{translate('Discovered Endpoints')}</h5>
         </div>
         <div className="card-body">
-          <table className="table table-sm table-borderless">
-            <tbody>
-              {Object.entries(discoveryResult.endpoints || {}).map(
-                ([key, value]) => (
-                  <tr key={key}>
-                    <td className="text-quaternary" style={{ width: '30%' }}>
-                      {key.replace(/_/g, ' ')}
-                    </td>
-                    <td>
-                      <code className="wrap-anywhere">{value}</code>
-                    </td>
-                  </tr>
-                ),
-              )}
-            </tbody>
-          </table>
+          <PropertyList variant="summary" termWidth="lg" hideIfEmpty={false}>
+            {Object.entries(discoveryResult.endpoints || {}).map(
+              ([key, value]) => (
+                <PropertyItem
+                  key={key}
+                  label={key.replace(/_/g, ' ')}
+                  value={propVal.code(value)}
+                  valueClass="wrap-anywhere"
+                />
+              ),
+            )}
+          </PropertyList>
         </div>
       </div>
       {/* Claims Card */}

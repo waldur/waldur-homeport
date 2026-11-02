@@ -67,7 +67,7 @@ unique id and the label names the first.
 
 A label and a control that cannot share a wrapper, such as the two cells of a
 table row, share a `FieldScope` instead (the same linking with no element of its
-own): `FormTable.Item` is one, so its label names the control in its value with
+own): `PropertyItem` is one, so its label names the control in its value with
 no `htmlFor`. A hand-written `<label>` reads the target with
 `useFieldLabelFor()`.
 
@@ -212,7 +212,7 @@ export const NetworkPoolField = () => (
 
 ## Edit Field Architecture (*EditField Pattern)
 
-For details / settings panels that show a value with an inline edit affordance, Waldur uses the **Edit Field Architecture**. It mirrors the `*Group` pattern but renders a read-only `FormTable.Item` plus a button that opens a generic edit modal.
+For details / settings panels that show a value with an inline edit affordance, Waldur uses the **Edit Field Architecture**. It mirrors the `*Group` pattern but renders a read-only `PropertyItem` plus a button that opens a generic edit modal.
 
 Each base field control has three siblings:
 
@@ -247,10 +247,10 @@ import {
   BooleanEditField,
   SelectEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
+import { PropertyList } from 'waldur-ui';
 
 <EditFieldProvider scope={offering} callback={update}>
-  <FormTable>
+  <PropertyList>
     <StringEditField
       name="service_attributes.backend_url"
       label={translate('API URL')}
@@ -269,7 +269,7 @@ import FormTable from '@/form/FormTable';
       label={translate('Verify SSL')}
       hideLabel
     />
-  </FormTable>
+  </PropertyList>
 </EditFieldProvider>;
 ```
 
@@ -297,7 +297,7 @@ The backend endpoint behind `callback` must therefore accept partial updates (PA
 - `warnTooltip` — displays a warning marker next to the row's value, e.g. for fields with non-obvious side effects.
 - Any other prop is forwarded to the inner field when the modal opens — e.g. `placeholder` on `CommaSeparatedListEditField` reaches `CommaSeparatedListField`.
 
-For panel-wide access control, pass `hideActions={!canUpdate}` to the enclosing `<FormTable>` (or `TabbedSection`) — it hides the entire action column without conditional JSX around every field.
+For panel-wide access control, pass `hideActions={!canUpdate}` to the enclosing `<PropertyList>` (or `TabbedSection`) — it hides the entire action column without conditional JSX around every field.
 
 ### Marketplace plugin credentials
 
@@ -418,7 +418,7 @@ set by `storySort` in `.storybook/preview.tsx`:
 
 | Folder           | What lives there                                                                  |
 | ---------------- | --------------------------------------------------------------------------------- |
-| `Layout`         | `FormGroup`, `FormTable`: what wraps a control                                    |
+| `Layout`         | `FormGroup`, `PropertyList`: what wraps a control                                 |
 | `Text inputs`    | `Input`, `Textarea`, `Input group`, `Number input`, `Secret input`, `Range input` |
 | `Selection`      | `Native select`, `Select`, and fields built on them                               |
 | `Check controls` | `Checkbox`, `Switch`, `Radio`, `BoxRadioField`                                    |
@@ -642,4 +642,4 @@ export const MySettingsPanel = ({ settings, update, canUpdate }) => (
 2. **Built-in Search (`enableSearch`)**: When enabled, provides a search input that filters fields across all tabs by matching against their `label` and `description` props.
 3. **Auto-jump**: When searching, if the current tab yields no results, it automatically jumps to the first tab containing matching fields.
 4. **Field Counters**: Displays a badge on each tab showing the number of matching fields during a search.
-5. **FormTable Integration**: Automatically wraps the tab's fields in a `FormTable` for consistent alignment and styling.
+5. **PropertyList Integration**: Automatically wraps the tab's fields in a `PropertyList` for consistent alignment and styling.

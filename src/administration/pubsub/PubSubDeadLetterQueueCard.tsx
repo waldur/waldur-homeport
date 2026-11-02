@@ -1,14 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 
-import { AccordionCard, Badge } from 'waldur-ui';
+import { AccordionCard, Badge, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
+import { formatCount } from '@/core/formatNumber';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 import { getDeadLetterQueue } from './api';
-import { formatNumber, getDlqLevel } from './utils';
+import { getDlqLevel } from './utils';
 
 export const PubSubDeadLetterQueueCard: FC = () => {
   const { data, isLoading } = useQuery({
@@ -39,35 +41,28 @@ export const PubSubDeadLetterQueueCard: FC = () => {
         </div>
       ) : data ? (
         <>
-          <table
-            className="table table-sm table-borderless mb-0"
-            style={{ maxWidth: '400px' }}
-          >
-            <tbody>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Total DLQ messages')}
-                </td>
-                <td className="text-end">
-                  {data.total_dlq_messages > 0 ? (
-                    <Badge
-                      variant={health === 'danger' ? 'danger' : 'warning'}
-                      shape="pill"
-                      tone="outline"
-                    >
-                      {formatNumber(data.total_dlq_messages)}
-                    </Badge>
-                  ) : (
-                    <span className="text-success">0</span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('DLQ count')}</td>
-                <td className="text-end">{data.dlq_count}</td>
-              </tr>
-            </tbody>
-          </table>
+          <PropertyList variant="compact" className="max-w-[400px]">
+            <PropertyItem
+              label={translate('Total DLQ messages')}
+              value={
+                data.total_dlq_messages > 0 ? (
+                  <Badge
+                    variant={health === 'danger' ? 'danger' : 'warning'}
+                    shape="pill"
+                    tone="outline"
+                  >
+                    {formatCount(data.total_dlq_messages)}
+                  </Badge>
+                ) : (
+                  <span className="text-success">0</span>
+                )
+              }
+            />
+            <PropertyItem
+              label={translate('DLQ count')}
+              value={propVal.number(data.dlq_count)}
+            />
+          </PropertyList>
           {data.dlq_queues && data.dlq_queues.length > 0 && (
             <>
               <h6 className="uppercase text-quaternary mt-3 mb-2.5">
@@ -96,7 +91,7 @@ export const PubSubDeadLetterQueueCard: FC = () => {
                         {queue.queue_name}
                       </td>
                       <td className="text-end text-warning">
-                        {formatNumber(queue.messages)}
+                        {formatCount(queue.messages)}
                       </td>
                       <td className="text-end">{queue.consumers}</td>
                     </tr>

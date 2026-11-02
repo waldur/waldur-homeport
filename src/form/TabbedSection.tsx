@@ -1,8 +1,17 @@
 import React, { FC, ReactNode, useEffect, useMemo, useState } from 'react';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  PropertyList,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from 'waldur-ui';
 
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { useUrlTab } from '@/navigation/useUrlTab';
@@ -12,6 +21,9 @@ interface TabProps {
   title: ReactNode;
   children: ReactNode;
   id: string;
+  /** Render the tab's content as is, not as rows of a `PropertyList` — for a
+   * tab holding a panel of its own rather than label/value rows. */
+  plain?: boolean;
 }
 
 const TabbedSectionTab: FC<TabProps> = () => null;
@@ -73,6 +85,7 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
       return {
         id: tab.props.id,
         title: tab.props.title,
+        plain: tab.props.plain,
         fields,
         count: fields.length,
       };
@@ -93,22 +106,18 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
   }, [hasQuery, activeKey, processedTabs, handleSelect]);
 
   return (
-    <div className="card card-bordered">
+    <Card bordered>
       {(title || actions) && (
-        <div className="card-header">
-          {title && (
-            <div className="card-title">
-              <h3>{title}</h3>
-            </div>
-          )}
+        <CardHeader>
+          {title && <CardTitle size="lg">{title}</CardTitle>}
           {actions && (
-            <div className="card-toolbar grow justify-end gap-2.5">
+            <div className="my-[0.5rem] flex grow items-center justify-end gap-2.5">
               {actions}
             </div>
           )}
-        </div>
+        </CardHeader>
       )}
-      <div className="card-body">
+      <CardContent>
         <Tabs value={activeKey} onValueChange={handleSelect} mount="active">
           {enableSearch && (
             <div className="flex justify-end mb-2.5">
@@ -133,8 +142,12 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
           </TabsList>
           {processedTabs.map((tab) => (
             <TabsContent key={tab.id} value={tab.id}>
-              {tab.fields.length > 0 ? (
-                <FormTable hideActions={hideActions}>{tab.fields}</FormTable>
+              {tab.fields.length > 0 && tab.plain ? (
+                tab.fields
+              ) : tab.fields.length > 0 ? (
+                <PropertyList hideActions={hideActions}>
+                  {tab.fields}
+                </PropertyList>
               ) : (
                 <NoResult
                   title={translate('No results found')}
@@ -148,8 +161,8 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
             </TabsContent>
           ))}
         </Tabs>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

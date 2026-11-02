@@ -1,8 +1,9 @@
 import { FC } from 'react';
 
-import { AccordionCard, Badge } from 'waldur-ui';
+import { AccordionCard, Badge, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 import type { LockStats } from './api';
 import { getLocksHealth } from './utils';
@@ -26,47 +27,40 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
       defaultOpen={health !== 'success' || hasExclusiveLocks}
       className="mb-5"
     >
-      <table
-        className="table table-sm table-borderless mb-0"
-        style={{ maxWidth: '400px' }}
-      >
-        <tbody>
-          <tr>
-            <td className="text-quaternary">{translate('Total locks')}</td>
-            <td className="text-end">{data.total_locks.toLocaleString()}</td>
-          </tr>
-          <tr>
-            <td className="text-quaternary">{translate('Waiting locks')}</td>
-            <td className="text-end">
-              {data.waiting_locks > 0 ? (
-                <Badge
-                  variant={health === 'danger' ? 'danger' : 'warning'}
-                  shape="pill"
-                  tone="outline"
-                >
-                  {data.waiting_locks}
-                </Badge>
-              ) : (
-                <span className="text-success">0</span>
-              )}
-            </td>
-          </tr>
-          <tr>
-            <td className="text-quaternary">
-              {translate('Access exclusive locks')}
-            </td>
-            <td className="text-end">
-              {data.access_exclusive_locks > 0 ? (
-                <Badge variant="warning" shape="pill" tone="outline">
-                  {data.access_exclusive_locks}
-                </Badge>
-              ) : (
-                <span>0</span>
-              )}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <PropertyList variant="compact" className="max-w-[400px]">
+        <PropertyItem
+          label={translate('Total locks')}
+          value={propVal.count(data.total_locks)}
+        />
+        <PropertyItem
+          label={translate('Waiting locks')}
+          value={
+            data.waiting_locks > 0 ? (
+              <Badge
+                variant={health === 'danger' ? 'danger' : 'warning'}
+                shape="pill"
+                tone="outline"
+              >
+                {data.waiting_locks}
+              </Badge>
+            ) : (
+              <span className="text-success">0</span>
+            )
+          }
+        />
+        <PropertyItem
+          label={translate('Access exclusive locks')}
+          value={
+            data.access_exclusive_locks > 0 ? (
+              <Badge variant="warning" shape="pill" tone="outline">
+                {data.access_exclusive_locks}
+              </Badge>
+            ) : (
+              '0'
+            )
+          }
+        />
+      </PropertyList>
       {hasExclusiveLocks && (
         <small className="text-warning mt-2.5 block">
           {translate(

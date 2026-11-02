@@ -9,16 +9,15 @@ import {
   ButtonVariant,
   Menu,
   Tabs,
+  TabsContent,
   TabsList,
   TabsTrigger,
-  TabsContent,
 } from 'waldur-ui';
 
 import { ServiceDeskProviderLogo } from '@/administration/service-desk/ServiceDeskProviderLogo';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import { useModal } from '@/modal/actions';
@@ -27,7 +26,7 @@ import { SettingsDescription } from '@/SettingsDescription';
 import { useUser } from '@/workspace/hooks';
 import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
-import { FieldRow } from '../settings/FieldRow';
+import { SettingsPropertyList } from '../settings/SettingsPropertyList';
 import { SupportUsersList } from '../support-users/SupportUsersList';
 
 import {
@@ -197,11 +196,7 @@ const SERVICE_DESK_PROVIDERS = ['atlassian', 'zammad', 'smax'];
 
 const ConfigurationTab = ({ data }) =>
   INTEGRATION_SETTINGS ? (
-    <FormTable>
-      {INTEGRATION_SETTINGS.items.map((item) => (
-        <FieldRow key={item.key} item={item} value={data[item.key]} />
-      ))}
-    </FormTable>
+    <SettingsPropertyList items={INTEGRATION_SETTINGS.items} values={data} />
   ) : null;
 
 const CredentialsTab = ({ data }) => (

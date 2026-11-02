@@ -13,6 +13,8 @@ import {
   openstackTenantsRetrieve,
 } from 'waldur-js-client';
 
+import { PropertyList } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -394,7 +396,9 @@ export const LoadBalancerExpandableRow: FC<LoadBalancerExpandableRowProps> = ({
             title: translate('Details'),
             content: (
               <>
-                <ResourceSummaryBase resource={row} />
+                <PropertyList variant="summary">
+                  <ResourceSummaryBase resource={row} />
+                </PropertyList>
                 <VipPortDetails
                   vipPortUrl={row.vip_port}
                   tenantUuid={row.tenant_uuid}

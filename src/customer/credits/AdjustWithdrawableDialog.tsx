@@ -2,15 +2,15 @@ import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { customerCreditsAdjustWithdrawable } from 'waldur-js-client';
 
-import { defaultCurrency } from '@/core/formatCurrency';
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { NumberGroup, SubmitButton, TextGroup } from '@/form';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 
 interface FormData {
   amount?: number;
@@ -76,20 +76,16 @@ export const AdjustWithdrawableDialog: FC<OwnProps> = ({
                 </>
               }
             >
-              <FormTable>
-                <FormTable.Item
+              <PropertyList>
+                <PropertyItem
                   label={translate('Current withdrawable balance')}
-                  value={renderFieldOrDash(
-                    current != null ? defaultCurrency(current) : null,
-                  )}
+                  value={propVal.currency(current)}
                 />
-                <FormTable.Item
+                <PropertyItem
                   label={translate('New withdrawable balance')}
-                  value={renderFieldOrDash(
-                    newBalance != null ? defaultCurrency(newBalance) : null,
-                  )}
+                  value={propVal.currency(newBalance)}
                 />
-              </FormTable>
+              </PropertyList>
               <NumberGroup
                 name="amount"
                 label={translate('Amount')}

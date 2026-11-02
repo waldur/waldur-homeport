@@ -1,9 +1,16 @@
 import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { FieldMappingChoice, OidcFormValues } from '../types';
@@ -39,217 +46,135 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
       </p>
 
       {/* Connection Card */}
-      <div className="card mb-3">
-        <div className="card-header">
-          <h5 className="mb-0">{translate('Connection')}</h5>
-        </div>
-        <div className="card-body">
-          <table className="table table-sm table-borderless">
-            <tbody>
-              <tr>
-                <td className="text-quaternary" style={{ width: '40%' }}>
-                  {translate('Provider Type')}
-                </td>
-                <td>
-                  <Badge variant="primary" tone="outline">
-                    {providerType}
-                  </Badge>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Discovery URL')}
-                </td>
-                <td>
-                  <code className="wrap-anywhere">{values.discovery_url}</code>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Client ID')}</td>
-                <td>
-                  <code>{values.client_id}</code>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Verify SSL')}</td>
-                <td>
-                  {values.verify_ssl ? translate('Yes') : translate('No')}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <PropertyCard bordered title={translate('Connection')} className="mb-3">
+        <PropertyList variant="summary" termWidth="md">
+          <PropertyItem
+            label={translate('Provider Type')}
+            value={
+              <Badge variant="primary" tone="outline">
+                {providerType}
+              </Badge>
+            }
+          />
+          <PropertyItem
+            label={translate('Discovery URL')}
+            value={propVal.code(values.discovery_url)}
+            valueClass="wrap-anywhere"
+            hideIfEmpty={false}
+          />
+          <PropertyItem
+            label={translate('Client ID')}
+            value={propVal.code(values.client_id)}
+          />
+          <PropertyItem
+            label={translate('Verify SSL')}
+            value={propVal.boolean(values.verify_ssl)}
+          />
+        </PropertyList>
+      </PropertyCard>
 
       {/* Attribute Mappings Card */}
-      <div className="card mb-3">
-        <div className="card-header">
-          <h5 className="mb-0">{translate('Attribute Mappings')}</h5>
-        </div>
-        <div className="card-body">
-          {mappedFields.length > 0 ? (
-            <table className="table table-sm table-borderless">
-              <thead>
-                <tr>
-                  <th style={{ width: '40%' }}>{translate('Waldur Field')}</th>
-                  <th>{translate('OIDC Claim')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {mappedFields.map(([field, claim]) => (
-                  <tr key={field}>
-                    <td>
-                      <code>{field}</code>
-                    </td>
-                    <td>
-                      <code>{claim}</code>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <span className="text-quaternary">
-              {translate('No attribute mappings configured')}
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* Configuration Card */}
-      <div className="card mb-3">
-        <div className="card-header">
-          <h5 className="mb-0">{translate('Configuration')}</h5>
-        </div>
-        <div className="card-body">
+      <PropertyCard
+        bordered
+        title={translate('Attribute Mappings')}
+        className="mb-3"
+      >
+        {mappedFields.length > 0 ? (
           <table className="table table-sm table-borderless">
+            <thead>
+              <tr>
+                <th style={{ width: '40%' }}>{translate('Waldur Field')}</th>
+                <th>{translate('OIDC Claim')}</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr>
-                <td className="text-quaternary" style={{ width: '40%' }}>
-                  {translate('Label')}
-                </td>
-                <td>
-                  <strong>{values.label}</strong>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Extra Scopes')}</td>
-                <td>
-                  {values.extra_scope ? (
-                    <code>{values.extra_scope}</code>
-                  ) : (
-                    <span className="text-quaternary">{translate('None')}</span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('User Field')}</td>
-                <td>
-                  <code>{values.user_field || 'username'}</code>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('User Claim')}</td>
-                <td>
-                  <code>{values.user_claim || 'sub'}</code>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Protected Fields')}
-                </td>
-                <td>
-                  {values.protected_fields ? (
-                    <code>{values.protected_fields}</code>
-                  ) : (
-                    <span className="text-quaternary">{translate('None')}</span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Management URL')}
-                </td>
-                <td>
-                  {values.management_url ? (
-                    <code>{values.management_url}</code>
-                  ) : (
-                    <span className="text-quaternary">
-                      {translate('Not set')}
-                    </span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Allowed Redirect URIs')}
-                </td>
-                <td>
-                  {values.allowed_redirects.length > 0 ? (
-                    <ul className="list-unstyled mb-0">
-                      {values.allowed_redirects.map((url, i) => (
-                        <li key={i}>
-                          <code>{url}</code>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <span className="text-quaternary">
-                      {translate('Any (fallback to HOMEPORT_URL)')}
-                    </span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('PKCE')}</td>
-                <td>
-                  {values.enable_pkce ? (
-                    <Badge variant="success" tone="outline">
-                      {translate('Enabled')}
-                    </Badge>
-                  ) : (
-                    <Badge variant="neutral" tone="outline">
-                      {translate('Disabled')}
-                    </Badge>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Post-Logout Redirect')}
-                </td>
-                <td>
-                  {values.enable_post_logout_redirect ? (
-                    <Badge variant="success" tone="outline">
-                      {translate('Enabled')}
-                    </Badge>
-                  ) : (
-                    <Badge variant="neutral" tone="outline">
-                      {translate('Disabled')}
-                    </Badge>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Provider Status')}
-                </td>
-                <td>
-                  {values.is_active ? (
-                    <Badge variant="success" tone="outline">
-                      {translate('Enabled')}
-                    </Badge>
-                  ) : (
-                    <Badge variant="warning" tone="outline">
-                      {translate('Disabled')}
-                    </Badge>
-                  )}
-                </td>
-              </tr>
+              {mappedFields.map(([field, claim]) => (
+                <tr key={field}>
+                  <td>
+                    <code>{field}</code>
+                  </td>
+                  <td>
+                    <code>{claim}</code>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
-        </div>
-      </div>
+        ) : (
+          <span className="text-quaternary">
+            {translate('No attribute mappings configured')}
+          </span>
+        )}
+      </PropertyCard>
+
+      {/* Configuration Card */}
+      <PropertyCard
+        bordered
+        title={translate('Configuration')}
+        className="mb-3"
+      >
+        <PropertyList variant="summary" termWidth="md">
+          <PropertyItem
+            label={translate('Label')}
+            value={<strong>{values.label}</strong>}
+          />
+          <PropertyItem
+            label={translate('Extra Scopes')}
+            value={propVal.code(values.extra_scope)}
+            placeholder="none"
+          />
+          <PropertyItem
+            label={translate('User Field')}
+            value={propVal.code(values.user_field || 'username')}
+          />
+          <PropertyItem
+            label={translate('User Claim')}
+            value={propVal.code(values.user_claim || 'sub')}
+          />
+          <PropertyItem
+            label={translate('Protected Fields')}
+            value={propVal.code(values.protected_fields)}
+            placeholder="none"
+          />
+          <PropertyItem
+            label={translate('Management URL')}
+            value={propVal.code(values.management_url)}
+            placeholder="not-set"
+          />
+          <PropertyItem
+            label={translate('Allowed Redirect URIs')}
+            value={
+              values.allowed_redirects.length > 0
+                ? values.allowed_redirects.map((url) => propVal.code(url))
+                : undefined
+            }
+            placeholder={translate('Any (fallback to HOMEPORT_URL)')}
+            copyable
+          />
+          <PropertyItem
+            label={translate('PKCE')}
+            value={propVal.boolean(values.enable_pkce, {
+              wording: 'enabled',
+              display: 'badge',
+            })}
+          />
+          <PropertyItem
+            label={translate('Post-Logout Redirect')}
+            value={propVal.boolean(values.enable_post_logout_redirect, {
+              wording: 'enabled',
+              display: 'badge',
+            })}
+          />
+          <PropertyItem
+            label={translate('Provider Status')}
+            value={propVal.boolean(values.is_active, {
+              wording: 'enabled',
+              display: 'badge',
+              variants: ['success', 'warning'],
+            })}
+          />
+        </PropertyList>
+      </PropertyCard>
 
       <AlertItem
         variant="info"

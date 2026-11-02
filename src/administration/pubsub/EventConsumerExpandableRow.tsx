@@ -1,27 +1,17 @@
 import { FC } from 'react';
 import { EventConsumer } from 'waldur-js-client';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
-import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { getConsumerQueueName } from '../rabbitmq/utils';
 
 import { formatObjectType, QueueStats } from './eventConsumers';
 import { useConsumerQueueStats } from './useConsumerQueueStats';
-
-const listOrDash = (items: string[]) =>
-  items.length ? (
-    <ul className="mb-0 ps-3">
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
-  ) : (
-    DASH_ESCAPE_CODE
-  );
 
 const formatFilters = (filters: EventConsumer['payload_filters']) =>
   Object.entries(filters ?? {}).map(
@@ -30,27 +20,27 @@ const formatFilters = (filters: EventConsumer['payload_filters']) =>
 
 const WebhookFields: FC<{ row: EventConsumer }> = ({ row }) => (
   <>
-    <Field
+    <PropertyItem
       label={translate('Destination')}
       value={row.webhook_destination}
       tooltip={translate(
         'Scheme and host only. The full URL is a credential and is never shown.',
       )}
     />
-    <Field
+    <PropertyItem
       label={translate('Last delivered')}
-      value={
-        row.last_delivered_at
-          ? formatDateTime(row.last_delivered_at)
-          : DASH_ESCAPE_CODE
-      }
+      value={propVal.date(row.last_delivered_at, { precision: 'datetime' })}
     />
-    <Field
+    <PropertyItem
       label={translate('Last error')}
       value={
-        row.last_error_at
-          ? `${row.last_error} (${formatDateTime(row.last_error_at)})`
-          : DASH_ESCAPE_CODE
+        row.last_error
+          ? propVal.annotated(row.last_error, {
+              hint: row.last_error_at
+                ? formatDateTime(row.last_error_at)
+                : undefined,
+            })
+          : null
       }
     />
   </>
@@ -61,23 +51,23 @@ const QueueFields: FC<{ row: EventConsumer; stats?: QueueStats }> = ({
   stats,
 }) => (
   <>
-    <Field
+    <PropertyItem
       label={translate('Queue')}
       value={getConsumerQueueName(row.uuid)}
       hasCopy
     />
-    <Field
+    <PropertyItem
       label={translate('RabbitMQ username')}
-      value={row.rmq_username || DASH_ESCAPE_CODE}
-      hasCopy={Boolean(row.rmq_username)}
+      value={row.rmq_username}
+      hasCopy
     />
-    <Field
+    <PropertyItem
       label={translate('Messages waiting')}
-      value={stats ? stats.messages.toLocaleString() : DASH_ESCAPE_CODE}
+      value={stats ? propVal.count(stats.messages) : null}
     />
-    <Field
+    <PropertyItem
       label={translate('Clients connected')}
-      value={stats ? stats.consumers : DASH_ESCAPE_CODE}
+      value={stats ? propVal.count(stats.consumers) : null}
     />
   </>
 );
@@ -93,60 +83,59 @@ export const EventConsumerExpandableRow: FC<{ row: EventConsumer }> = ({
     // fluid: this table sits inside an accordion card, narrower than the
     // content area the default panel width is computed from.
     <ExpandableContainer asTable className="fluid">
-      <Field label={translate('UUID')} value={row.uuid} hasCopy />
-      <Field
+      <PropertyItem label={translate('UUID')} value={row.uuid} hasCopy />
+      <PropertyItem
         label={translate('Receives')}
-        value={
-          row.object_types.length
-            ? listOrDash(row.object_types.map(formatObjectType))
-            : translate('All event types')
-        }
+        value={propVal.list(row.object_types.map(formatObjectType), {
+          display: 'stack',
+        })}
+        placeholder={translate('All event types')}
       />
-      <Field
+      <PropertyItem
         label={translate('Payload filters')}
-        value={listOrDash(formatFilters(row.payload_filters))}
+        value={propVal.list(formatFilters(row.payload_filters), {
+          display: 'stack',
+        })}
       />
-      <Field
+      <PropertyItem
         label={translate('Scope')}
         tooltip={translate(
           'A global consumer receives every event in the system, including events about all users.',
         )}
-        value={
+        value={propVal.list(
           row.is_global
-            ? translate('Global')
-            : listOrDash(
-                row.scopes.map((scope) => `${scope.type}: ${scope.uuid}`),
-              )
-        }
+            ? [translate('Global')]
+            : row.scopes.map((scope) => `${scope.type}: ${scope.uuid}`),
+          { display: 'stack' },
+        )}
       />
       {row.delivery === 'webhook' ? (
         <WebhookFields row={row} />
       ) : (
         <QueueFields row={row} stats={stats} />
       )}
-      <Field
+      <PropertyItem
         label={translate('Registered with')}
-        value={
-          [
-            row.auth_kind,
-            row.auth_token_name &&
-              `${row.auth_token_name} (${row.auth_token_prefix}…)`,
-            row.authorized_via &&
-              translate('authorized as {role}', { role: row.authorized_via }),
-          ]
-            .filter(Boolean)
-            .join(', ') || DASH_ESCAPE_CODE
-        }
+        value={propVal.list([
+          row.auth_kind,
+          row.auth_token_name &&
+            `${row.auth_token_name} (${row.auth_token_prefix}…)`,
+          row.authorized_via &&
+            translate('authorized as {role}', { role: row.authorized_via }),
+        ])}
       />
       {row.delivery_blocked_reason && (
-        <Field
+        <PropertyItem
           label={translate('Not delivering')}
           value={
             <span className="text-danger">{row.delivery_blocked_reason}</span>
           }
         />
       )}
-      <Field label={translate('Created')} value={formatDateTime(row.created)} />
+      <PropertyItem
+        label={translate('Created')}
+        value={propVal.date(row.created, { precision: 'datetime' })}
+      />
     </ExpandableContainer>
   );
 };

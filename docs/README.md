@@ -24,6 +24,8 @@ Guides for working on Waldur HomePort. Start with [development-setup.md](develop
 | [button-ui-guide.md](button-ui-guide.md)                                 | Comprehensive button UI guide: BaseButton, tokens, tooltips, toggles, segmented controls                                                     |
 | [ui-consistency-guidelines.md](ui-consistency-guidelines.md)             | Empty states, buttons, loading indicators, status indicators and colours, tooltips, null-value display                                       |
 | [tables.md](tables.md)                                                   | `useTable`, columns, filters, row actions, export                                                                                            |
+| [property-rendering-guide.md](property-rendering-guide.md)             | Property rendering guide: PropertyList, PropertyItem, PropertyCard, propVal.* formatters, and linting |
+| [property-fields.md](property-fields.md)                                 | Read-only rows: typed formatters (`propVal.date`, `propVal.currency`, …) and the `prefer-typed-property` lint |
 | [forms.md](forms.md)                                                     | React Final Form, `*Group` / `*EditField` / `*Filter` patterns, `TabbedSection`                                                              |
 | [filter-migration-guide.md](table/filter-migration-guide.md)             | Generated table filters from the OpenAPI schema                                                                                              |
 | [migration-guide.md](table/migration-guide.md)                           | Migrating hand-rolled tables: choosing `Table`, `SimpleTable`, a form grid or a label/value block                                            |

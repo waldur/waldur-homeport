@@ -1,17 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, PropertyCard, PropertyList, PropertyItem } from 'waldur-ui';
 
-import { FieldRow } from '@/administration/settings/FieldRow';
+import { SettingsPropertyList } from '@/administration/settings/SettingsPropertyList';
 import { getKeyTitle } from '@/administration/settings/utils';
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { SettingsDescription } from '@/SettingsDescription';
-import { renderFieldOrDash } from '@/table/utils';
 
 import {
   getDeploymentLockedKeys,
@@ -79,59 +77,39 @@ export const MatrixAdminSettingsTab = () => {
           }
         />
       )}
-      <FormTable>
-        {group.items.map((item) => (
-          <FieldRow
-            item={item}
-            key={item.key}
-            value={settings[item.key]}
-            editDisabledReason={
-              lockedKeys.includes(item.key)
-                ? translate(
-                    'Set by the deployment on every deploy. Change it there and redeploy.',
-                  )
-                : undefined
-            }
-          />
-        ))}
-      </FormTable>
+      <SettingsPropertyList
+        items={group.items}
+        values={settings}
+        getEditDisabledReason={(item) =>
+          lockedKeys.includes(item.key)
+            ? translate(
+                'Set by the deployment on every deploy. Change it there and redeploy.',
+              )
+            : undefined
+        }
+      />
       {status && (
-        <FormTable.Card
+        <PropertyCard
+          bordered
           title={translate('Runtime status')}
-          className="card-bordered mt-4"
+          className="mt-4"
         >
-          <table className="table table-borderless mb-0">
-            <tbody>
-              <tr>
-                <td className="font-medium whitespace-nowrap pe-3">
-                  {translate('Bot user ID')}
-                </td>
-                <td>{renderFieldOrDash(status.bot_user_id)}</td>
-              </tr>
-              <tr>
-                <td className="font-medium whitespace-nowrap pe-3">
-                  {translate('Webhook path')}
-                </td>
-                <td>
-                  {status.webhook_path ? (
-                    <div className="flex items-center gap-1.5">
-                      <code>{status.webhook_path}</code>
-                      <CopyToClipboardButton value={status.webhook_path} />
-                    </div>
-                  ) : (
-                    renderFieldOrDash(null)
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="font-medium whitespace-nowrap pe-3">
-                  {translate('Transactions processed')}
-                </td>
-                <td>{status.transaction_count}</td>
-              </tr>
-            </tbody>
-          </table>
-        </FormTable.Card>
+          <PropertyList hideActions detailsMode>
+            <PropertyItem
+              label={translate('Bot user ID')}
+              value={status.bot_user_id}
+            />
+            <PropertyItem
+              label={translate('Webhook path')}
+              value={propVal.code(status.webhook_path)}
+              hasCopy
+            />
+            <PropertyItem
+              label={translate('Transactions processed')}
+              value={propVal.number(status.transaction_count)}
+            />
+          </PropertyList>
+        </PropertyCard>
       )}
     </>
   );

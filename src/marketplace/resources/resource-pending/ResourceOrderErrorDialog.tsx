@@ -1,9 +1,16 @@
+import { Resource } from 'waldur-js-client';
+
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
-import { Field } from '@/resource/summary';
 
-export const ResourceOrderErrorDialog = ({ resolve }) => {
+export const ResourceOrderErrorDialog = ({
+  resolve,
+}: {
+  resolve: { resource: Resource };
+}) => {
   const creationOrder = resolve.resource.creation_order;
   const { error_message, error_traceback } = creationOrder;
   const tracebackVisible = 'error_traceback' in creationOrder;
@@ -17,26 +24,34 @@ export const ResourceOrderErrorDialog = ({ resolve }) => {
         />
       }
     >
-      <Field label={translate('Error message')}>
-        {error_message || translate('No error message reported.')}
-      </Field>
-      {tracebackVisible ? (
-        <Field label={translate('Error traceback')} valueClass="text-pre">
-          {error_traceback ? (
-            <div style={{ height: 300, overflow: 'scroll' }}>
-              {error_traceback}
-            </div>
-          ) : (
-            translate('No traceback recorded for this order.')
-          )}
-        </Field>
-      ) : (
-        <Field label={translate('Error traceback')}>
-          {translate(
-            'Detailed traceback is visible to support staff only. Please contact support if you need more information.',
-          )}
-        </Field>
-      )}
+      <PropertyList variant="summary">
+        <PropertyItem
+          label={translate('Error message')}
+          value={error_message}
+          placeholder={translate('No error message reported.')}
+          hideIfEmpty={false}
+        />
+        {tracebackVisible ? (
+          <PropertyItem
+            label={translate('Error traceback')}
+            valueClass="text-pre"
+          >
+            {error_traceback ? (
+              <div style={{ height: 300, overflow: 'scroll' }}>
+                {error_traceback}
+              </div>
+            ) : (
+              translate('No traceback recorded for this order.')
+            )}
+          </PropertyItem>
+        ) : (
+          <PropertyItem label={translate('Error traceback')}>
+            {translate(
+              'Detailed traceback is visible to support staff only. Please contact support if you need more information.',
+            )}
+          </PropertyItem>
+        )}
+      </PropertyList>
     </ModalDialog>
   );
 };

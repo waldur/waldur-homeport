@@ -1,7 +1,8 @@
 import { FC, useMemo } from 'react';
 
+import { PropertyCard, PropertyList } from 'waldur-ui';
+
 import { EditFieldProvider, SelectEditField } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { Call } from '@/proposals/types';
 import { useUpdateCall } from '@/proposals/update/useUpdateCall';
@@ -26,9 +27,10 @@ export const ResourceTemplateSelectionSection: FC<
   const options = useMemo(getTemplateSelectionModeOptions, []);
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('Template selection')}
-      className="card-bordered mb-4"
+      className="mb-4"
     >
       <EditFieldProvider
         scope={props.call}
@@ -37,7 +39,7 @@ export const ResourceTemplateSelectionSection: FC<
           props.isReadOnly ? getCallReadOnlyReason(props.call) : undefined
         }
       >
-        <FormTable>
+        <PropertyList>
           {/* The backend refuses One template while a draft holds several
               requests; a refused save reports its reason. */}
           <SelectEditField
@@ -55,8 +57,8 @@ export const ResourceTemplateSelectionSection: FC<
               options.find((o) => o.value === value)?.label || options[0].label
             }
           />
-        </FormTable>
+        </PropertyList>
       </EditFieldProvider>
-    </FormTable.Card>
+    </PropertyCard>
   );
 };

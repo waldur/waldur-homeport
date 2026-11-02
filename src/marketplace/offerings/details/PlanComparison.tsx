@@ -208,8 +208,8 @@ export const PlanComparison: FC<PlanComparisonProps> = ({ offering }) => {
         title: translate('Component'),
         render: ({ row }) => (
           <div className="flex flex-col">
-            <span className="title">{row.label}</span>
-            {row.unit && <span className="description">{row.unit}</span>}
+            <span className="text-secondary">{row.label}</span>
+            {row.unit && <span className="text-quaternary">{row.unit}</span>}
           </div>
         ),
       },

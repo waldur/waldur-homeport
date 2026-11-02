@@ -262,7 +262,7 @@ describe.skip('UserFormDialog', () => {
     expect(screen.getByText('Male')).toBeInTheDocument();
     expect(screen.getByText('Tallinn')).toBeInTheDocument();
 
-    // Country and nationalities are displayed by their code or list values in ReviewRow
+    // Country and nationalities are displayed by their code or list values in the review step
     expect(screen.getAllByText('EE').length).toBeGreaterThan(0); // Country of residence, Organization country
     expect(screen.getByText('DE')).toBeInTheDocument(); // Nationality
     expect(screen.getByText('US')).toBeInTheDocument(); // Nationalities

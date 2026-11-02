@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
-import { Field } from '@/resource/summary';
 
 interface ExpandableEventFieldProps {
   label: string;
@@ -20,5 +21,5 @@ export const ExpandableEventField: FunctionComponent<
   if (props.state) {
     value = <Link state={props.state} params={props.params} label={value} />;
   }
-  return <Field label={props.label}>{value}</Field>;
+  return <PropertyItem label={props.label}>{value}</PropertyItem>;
 };

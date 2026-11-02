@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { HelpIcon } from 'waldur-ui';
+import { HelpIcon, PropertyList } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
@@ -14,11 +14,12 @@ import { PriceTooltip } from '@/price/PriceTooltip';
 
 import { DetailsTable, ValueIndicator } from './DetailsTable';
 import {
-  OrderTypeBasedProps,
-  RequestedByField,
-  RequestCommentField,
-  DescriptionField,
   CostChangeField,
+  DescriptionField,
+  ORDER_LIST_PROPS,
+  OrderTypeBasedProps,
+  RequestCommentField,
+  RequestedByField,
 } from './OrderCommonFields';
 
 export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
@@ -77,13 +78,15 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
 
   return (
     <>
-      <RequestedByField order={order} />
-      <RequestCommentField order={order} />
-      <DescriptionField order={order} offering={offering} />
-      <CostChangeField
-        order={order}
-        shouldConcealPrices={shouldConcealPrices}
-      />
+      <PropertyList {...ORDER_LIST_PROPS}>
+        <RequestedByField order={order} />
+        <RequestCommentField order={order} />
+        <DescriptionField order={order} offering={offering} />
+        <CostChangeField
+          order={order}
+          shouldConcealPrices={shouldConcealPrices}
+        />
+      </PropertyList>
 
       <DetailsTable<(typeof data.components)[0]>
         rows={data.components}

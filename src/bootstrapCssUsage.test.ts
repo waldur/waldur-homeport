@@ -309,14 +309,6 @@ describe('bootstrapCssUsage', () => {
     it.each([
       ['.table.table-list td', { padding: '0 8px' }],
       ['.table.table-list th', { padding: '0 8px' }],
-      [
-        '.table.form-table td',
-        { 'padding-left': '1.25rem', 'padding-right': '1.25rem' },
-      ],
-      [
-        '.table.form-table th',
-        { 'padding-left': '1.25rem', 'padding-right': '1.25rem' },
-      ],
     ])('pads %s', (selector, expected) => {
       expect(declarations(selector)).toMatchObject(expected);
     });

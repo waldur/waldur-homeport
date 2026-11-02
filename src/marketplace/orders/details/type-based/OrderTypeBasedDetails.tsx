@@ -1,9 +1,5 @@
 import { useMemo } from 'react';
 
-import { formatDateTime } from '@/core/dateUtils';
-import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
-
 import { getOrderType } from '../../utils';
 
 import { LimitsUpdate } from './LimitsUpdate';
@@ -21,42 +17,33 @@ export const OrderTypeBasedDetails = ({
 }: OrderTypeBasedProps) => {
   const orderType = useMemo(() => getOrderType(order), [order]);
 
-  return (
-    <>
-      <Field
-        label={translate('Created by')}
-        labelWidth={200}
-        value={order.created_by_full_name + ` (${order.created_by_username})`}
-      />
-      <Field
-        label={translate('Created at')}
-        labelWidth={200}
-        value={formatDateTime(order.created)}
-      />
-
-      {orderType.type === 'limits_update' ? (
-        <>
-          <LimitsUpdate order={order} offering={offering} />
-          {/* A changed formula input is ordered with the limits it derives. */}
-          {order.attributes?.new_options ? (
-            <OptionsUpdate order={order} offering={offering} tableOnly />
-          ) : null}
-        </>
-      ) : orderType.type === 'options_update' ? (
-        <OptionsUpdate order={order} offering={offering} />
-      ) : orderType.type === 'switch_plan' ? (
-        <SwitchPlan order={order} offering={offering} />
-      ) : orderType.type === 'renew' ? (
-        <ResourceRenewal order={order} offering={offering} />
-      ) : orderType.type === 'terminate' ? (
-        <ResourceTerminate order={order} offering={offering} />
-      ) : orderType.type === 'create' ? (
-        <ResourceCreation
-          order={order}
-          offering={offering}
-          editable={editable}
-        />
-      ) : null}
-    </>
-  );
+  if (orderType.type === 'limits_update') {
+    return (
+      <>
+        <LimitsUpdate order={order} offering={offering} />
+        {/* A changed formula input is ordered with the limits it derives. */}
+        {order.attributes?.new_options ? (
+          <OptionsUpdate order={order} offering={offering} tableOnly />
+        ) : null}
+      </>
+    );
+  }
+  if (orderType.type === 'options_update') {
+    return <OptionsUpdate order={order} offering={offering} />;
+  }
+  if (orderType.type === 'switch_plan') {
+    return <SwitchPlan order={order} offering={offering} />;
+  }
+  if (orderType.type === 'renew') {
+    return <ResourceRenewal order={order} offering={offering} />;
+  }
+  if (orderType.type === 'terminate') {
+    return <ResourceTerminate order={order} offering={offering} />;
+  }
+  if (orderType.type === 'create') {
+    return (
+      <ResourceCreation order={order} offering={offering} editable={editable} />
+    );
+  }
+  return null;
 };

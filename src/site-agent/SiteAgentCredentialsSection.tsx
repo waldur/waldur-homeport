@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { BaseCredentialsSection } from '@/marketplace/offerings/update/integration/BaseCredentialsSection';
 import { OfferingEditPanelProps } from '@/marketplace/offerings/update/integration/types';
@@ -17,24 +17,16 @@ export const SiteAgentCredentialsSection: FC<OfferingEditPanelProps> = (
       hideScopeState={!props.offering.scope_state}
       actions={<SlurmOfferingActions offering={props.offering} />}
     >
-      <FormTable.Item
+      <PropertyItem
         label={translate('Waldur API URL')}
-        value={
-          <div className="flex items-center gap-1.5">
-            {ENV.apiEndpoint}
-            <CopyToClipboardButton value={ENV.apiEndpoint} />
-          </div>
-        }
+        value={ENV.apiEndpoint}
+        hasCopy
       />
 
-      <FormTable.Item
+      <PropertyItem
         label={translate('Offering UUID')}
-        value={
-          <div className="flex items-center gap-1.5">
-            {props.offering.uuid}
-            <CopyToClipboardButton value={props.offering.uuid} />
-          </div>
-        }
+        value={props.offering.uuid}
+        hasCopy
       />
     </BaseCredentialsSection>
   );

@@ -1,28 +1,24 @@
-import { formatFilesize } from '@/core/utils';
-import FormTable from '@/form/FormTable';
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { ResourceLink } from '@/resource/ResourceLink';
-import { Field, ResourceSummaryProps } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
+import { ResourceSummaryProps } from '@/resource/summary';
 
 export const OpenStackSnapshotSummary = ({
   resource,
-  formTableItem,
 }: ResourceSummaryProps) => {
-  const Component = formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Component
+      <PropertyItem
         label={translate('Size')}
-        value={formatFilesize(resource.size)}
+        value={propVal.fileSize(resource.size, { unit: 'MB' })}
       />
-      <Component
+      <PropertyItem
         label={translate('Volume')}
-        value={
-          <ResourceLink
-            uuid={resource.source_volume_marketplace_uuid}
-            label={resource.source_volume_name}
-          />
-        }
+        value={propVal.link(resource.source_volume_name, {
+          state: 'marketplace-resource-details',
+          params: { resource_uuid: resource.source_volume_marketplace_uuid },
+        })}
       />
     </>
   );

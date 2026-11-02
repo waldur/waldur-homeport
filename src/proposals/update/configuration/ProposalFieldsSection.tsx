@@ -2,10 +2,16 @@ import { WarningIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
-import { HelpIcon, Select, Tooltip } from 'waldur-ui';
+import {
+  HelpIcon,
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+  Select,
+  Tooltip,
+} from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import {
@@ -100,11 +106,11 @@ export const ProposalFieldsSection: FC<ProposalFieldsSectionProps> = ({
   }
 
   return (
-    <FormTable.Card title={TITLE} className="card-bordered mb-4">
-      <FormTable>
+    <PropertyCard bordered title={TITLE} className="mb-4">
+      <PropertyList>
         {/* Always-on fields come first, so the list reads as the whole step
             rather than only the part that can be changed. */}
-        <FormTable.Item
+        <PropertyItem
           label={translate('Name')}
           description={translate(
             'Names the proposal. The awarded project is named after the call and the round start date, followed by this name.',
@@ -115,7 +121,7 @@ export const ProposalFieldsSection: FC<ProposalFieldsSectionProps> = ({
             </Badge>
           }
         />
-        <FormTable.Item
+        <PropertyItem
           label={translate('Project duration in days')}
           description={translate(
             'States the length of the award, so it cannot be switched off.',
@@ -146,7 +152,7 @@ export const ProposalFieldsSection: FC<ProposalFieldsSectionProps> = ({
             />
           );
           return (
-            <FormTable.Item
+            <PropertyItem
               key={row.field}
               label={getFieldLabel(row.field)}
               description={<UsageList usage={row.usage} />}
@@ -161,7 +167,7 @@ export const ProposalFieldsSection: FC<ProposalFieldsSectionProps> = ({
             />
           );
         })}
-      </FormTable>
-    </FormTable.Card>
+      </PropertyList>
+    </PropertyCard>
   );
 };

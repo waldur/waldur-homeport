@@ -1,10 +1,9 @@
 import { useMemo } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Badge, PropertyItem } from 'waldur-ui';
 
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
@@ -82,7 +81,7 @@ export const InternalNotes = ({ maintenance, space = undefined }) => {
   if (!maintenance.internal_notes) return null;
 
   return (
-    <Field
+    <PropertyItem
       label={
         <>
           {translate('Internal notes')}:

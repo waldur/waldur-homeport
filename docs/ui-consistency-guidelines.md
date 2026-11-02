@@ -1620,10 +1620,10 @@ tab, an accordion or a dialog is a total the decision was made without.
 
 ```tsx
 // ❌ BAD — line items only; the reader sums four rows to learn the price
-<FormTable>
+<PropertyList>
   <ComponentRow component={managementFee} />
   <ComponentRow component={cpu} />
-</FormTable>
+</PropertyList>
 
 // ✅ GOOD — deciding: the total leads its line items
 <Table
@@ -1633,10 +1633,10 @@ tab, an accordion or a dialog is a total the decision was made without.
 />
 
 // ✅ GOOD — verifying: the total closes the line items
-<FormTable>
+<PropertyList>
   <ComponentRow component={cpu} />
   <ComponentRowTotal amount={total} period="monthly" />
-</FormTable>
+</PropertyList>
 ```
 
 ### A floor must be labelled as a floor

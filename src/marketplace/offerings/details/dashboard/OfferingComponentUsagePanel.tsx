@@ -5,13 +5,12 @@ import {
   Offering,
 } from 'waldur-js-client';
 
-import { Progress } from 'waldur-ui';
+import { Progress, PropertyCard, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { formatUsageValue } from '@/core/formatNumber';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
 interface OfferingComponentUsagePanelProps {
@@ -40,82 +39,71 @@ export const OfferingComponentUsagePanel: FC<
   });
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('Component usage')}
-      className="card-bordered mb-4"
+      className="mb-4"
       headerClassName="min-h-[60px]"
     >
-      <FormTable detailsMode>
-        {isLoading || error ? (
-          <tr>
-            <td colSpan={3}>
-              {isLoading ? (
-                <LoadingSpinner />
-              ) : error ? (
-                <LoadingErred loadData={refetch} />
-              ) : null}
-            </td>
-          </tr>
-        ) : (
-          <>
-            {data?.length > 0 ? (
-              data
-                .sort(
-                  (a, b) =>
-                    (b.usage_percent ? parseFloat(b.usage_percent) : 0) -
-                    (a.usage_percent ? parseFloat(a.usage_percent) : 0),
-                )
-                .map((row) => {
-                  const usage =
-                    row.usage_percent !== undefined
-                      ? parseFloat(row.usage_percent)
-                      : 0;
-                  return (
-                    <FormTable.Item
-                      key={row.component_name}
-                      label={row.component_name}
-                      value={
-                        <div
-                          className="flex flex-col gap-1"
-                          style={{ minWidth: 150 }}
-                        >
-                          <div className="flex justify-between text-xs text-quaternary">
-                            <span>
-                              {formatUsageValue(row.total_consumed, true)} /{' '}
-                              {formatUsageValue(row.total_allocated, true)}{' '}
-                              {row.measured_unit}
-                            </span>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : error ? (
+        <LoadingErred loadData={refetch} />
+      ) : data?.length > 0 ? (
+        <PropertyList detailsMode>
+          {data
+            .sort(
+              (a, b) =>
+                (b.usage_percent ? parseFloat(b.usage_percent) : 0) -
+                (a.usage_percent ? parseFloat(a.usage_percent) : 0),
+            )
+            .map((row) => {
+              const usage =
+                row.usage_percent !== undefined
+                  ? parseFloat(row.usage_percent)
+                  : 0;
+              return (
+                <PropertyItem
+                  key={row.component_name}
+                  label={row.component_name}
+                  value={
+                    <div
+                      className="flex flex-col gap-1"
+                      style={{ minWidth: 150 }}
+                    >
+                      <div className="flex justify-between text-xs text-quaternary">
+                        <span>
+                          {formatUsageValue(row.total_consumed, true)} /{' '}
+                          {formatUsageValue(row.total_allocated, true)}{' '}
+                          {row.measured_unit}
+                        </span>
 
-                            <span className="font-medium text-primary">
-                              {usage.toFixed(1)}%
-                            </span>
-                          </div>
-                          <Progress
-                            size="sm"
-                            value={usage}
-                            variant={
-                              usage < 50
-                                ? 'primary'
-                                : usage < 80
-                                  ? 'warning'
-                                  : 'danger'
-                            }
-                          />
-                        </div>
-                      }
-                    />
-                  );
-                })
-            ) : (
-              <tr>
-                <td colSpan={2} className="text-center text-quaternary py-4">
-                  {translate('No usage data available.')}
-                </td>
-              </tr>
-            )}
-          </>
-        )}
-      </FormTable>
-    </FormTable.Card>
+                        <span className="font-medium text-primary">
+                          {usage.toFixed(1)}%
+                        </span>
+                      </div>
+                      <Progress
+                        size="sm"
+                        value={usage}
+                        variant={
+                          usage < 50
+                            ? 'primary'
+                            : usage < 80
+                              ? 'warning'
+                              : 'danger'
+                        }
+                      />
+                    </div>
+                  }
+                />
+              );
+            })}
+        </PropertyList>
+      ) : (
+        <p className="m-0 py-4 text-center text-quaternary">
+          {translate('No usage data available.')}
+        </p>
+      )}
+    </PropertyCard>
   );
 };

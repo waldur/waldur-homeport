@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { ConflictOfInterest } from 'waldur-js-client';
 
-import { formatDateTime } from '@/core/dateUtils';
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 interface COIExpandableRowProps {
@@ -44,21 +45,21 @@ export const COIExpandableRow: FC<COIExpandableRowProps> = ({ row }) => {
   return (
     <ExpandableContainer asTable>
       {/* Evidence */}
-      <Field
+      <PropertyItem
         label={translate('Evidence description')}
         value={row.evidence_description}
       />
-      <Field
+      <PropertyItem
         label={translate('Evidence data')}
         value={<EvidenceDataDisplay data={row.evidence_data} />}
       />
 
       {/* Conflicting party */}
-      <Field
+      <PropertyItem
         label={translate('Conflicting person')}
         value={row.conflicting_user_name}
       />
-      <Field
+      <PropertyItem
         label={translate('Conflicting organization')}
         value={row.conflicting_organization_name}
       />
@@ -66,21 +67,24 @@ export const COIExpandableRow: FC<COIExpandableRowProps> = ({ row }) => {
       {/* Review information (only if reviewed) */}
       {isReviewed && (
         <>
-          <Field
+          <PropertyItem
             label={translate('Reviewed by')}
             value={row.reviewed_by_name}
           />
-          <Field
+          <PropertyItem
             label={translate('Reviewed at')}
-            value={row.reviewed_at ? formatDateTime(row.reviewed_at) : null}
+            value={propVal.date(row.reviewed_at, { precision: 'datetime' })}
           />
-          <Field label={translate('Review notes')} value={row.review_notes} />
+          <PropertyItem
+            label={translate('Review notes')}
+            value={row.review_notes}
+          />
         </>
       )}
 
       {/* Management plan (only if waived) */}
       {isWaived && (
-        <Field
+        <PropertyItem
           label={translate('Management plan')}
           value={row.management_plan}
         />

@@ -1,11 +1,10 @@
 import React, { PropsWithChildren } from 'react';
 import { LimitPeriodEnum } from 'waldur-js-client';
 
-import { HelpIcon } from 'waldur-ui';
+import { HelpIcon, PropertyItem } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { formatCurrency } from '@/core/formatCurrency';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -82,7 +81,7 @@ export const ComponentRow2: React.FC<PropsWithChildren<ComponentRowProps>> = (
         : '';
 
   return (
-    <FormTable.Item
+    <PropertyItem
       data-testid={`row-${props.offeringComponent.type}`}
       label={props.offeringComponent.name}
       description={

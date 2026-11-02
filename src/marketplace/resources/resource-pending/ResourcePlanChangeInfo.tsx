@@ -1,14 +1,13 @@
 import { ArrowRightIcon } from '@phosphor-icons/react';
 import { Resource } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
 
-import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { toPlanBilling } from '@/marketplace/details/plan/billingMode';
 import { PlanBillingModeBadge } from '@/marketplace/details/plan/PlanBillingModeBadge';
 import { OrderDetailsQuickBody } from '@/marketplace/orders/details/OrderDetailsQuickBody';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 
 import { CostEstimatedChangeView } from './CostEstimatedChangeView';
 
@@ -21,39 +20,41 @@ export const ResourcePlanChangeInfo = ({
 
   return (
     <>
-      <Field
-        label={translate('Created by')}
-        value={order.created_by_full_name + ` (${order.created_by_username})`}
-        space={1.5}
-      />
-      <Field
-        label={translate('Created at')}
-        value={formatDate(order.created)}
-        space={1.5}
-      />
-      <OrderDetailsQuickBody order={order} space={1.5} />
-      <Field
-        label={translate('Plan change')}
-        valueClass="flex items-center gap-1.5"
-        value={
-          <>
-            <Badge variant="blue" shape="pill" tone="outline">
-              {order.old_plan_name}
-            </Badge>
-            <PlanBillingModeBadge
-              mode={toPlanBilling(order.old_plan_billing_mode)}
-            />
-            <ArrowRightIcon weight="bold" />
-            <Badge variant="warning" shape="pill" tone="outline">
-              {order.new_plan_name}
-            </Badge>
-            <PlanBillingModeBadge
-              mode={toPlanBilling(order.new_plan_billing_mode)}
-            />
-          </>
-        }
-        space={1.5}
-      />
+      <PropertyList variant="summary" space={1.5}>
+        <PropertyItem
+          label={translate('Created by')}
+          value={propVal.user({
+            full_name: order.created_by_full_name,
+            username: order.created_by_username,
+          })}
+        />
+        <PropertyItem
+          label={translate('Created at')}
+          value={propVal.date(order.created)}
+        />
+        <OrderDetailsQuickBody order={order} space={1.5} />
+        <PropertyItem
+          label={translate('Plan change')}
+          valueClass="flex items-center gap-1.5"
+          value={
+            <>
+              <Badge variant="blue" shape="pill" tone="outline">
+                {order.old_plan_name}
+              </Badge>
+              <PlanBillingModeBadge
+                mode={toPlanBilling(order.old_plan_billing_mode)}
+              />
+              <ArrowRightIcon weight="bold" />
+              <Badge variant="warning" shape="pill" tone="outline">
+                {order.new_plan_name}
+              </Badge>
+              <PlanBillingModeBadge
+                mode={toPlanBilling(order.new_plan_billing_mode)}
+              />
+            </>
+          }
+        />
+      </PropertyList>
 
       <p className="text-quaternary my-5">
         {order.new_plan_billing_mode === 'usage'

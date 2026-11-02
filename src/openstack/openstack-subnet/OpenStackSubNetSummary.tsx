@@ -1,71 +1,80 @@
-import FormTable from '@/form/FormTable';
+import type { OpenStackSubNet } from 'waldur-js-client';
+
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { formatAllocationPool } from '@/openstack/openstack-network/utils';
-import { Field, ResourceSummaryProps } from '@/resource/summary';
-import { formatDefault } from '@/resource/utils';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
+import { ResourceSummaryProps } from '@/resource/summary';
 
-import { formatIpv6Mode } from './ipv6Modes';
+import { getIpv6ModeOptions } from './ipv6Modes';
 
-export const OpenStackSubNetSummary = (props: ResourceSummaryProps) => {
+export const OpenStackSubNetSummary = (
+  props: ResourceSummaryProps<OpenStackSubNet>,
+) => {
   const { resource } = props;
-  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Component label={translate('Network')} value={resource.network_name} />
-      <Component
-        label={translate('Router')}
-        value={renderFieldOrDash(resource.router_name)}
+      <PropertyItem
+        label={translate('Network')}
+        value={resource.network_name}
       />
-      <Component
+      <PropertyItem label={translate('Router')} value={resource.router_name} />
+      <PropertyItem
         label={translate('CIDR')}
-        value={formatDefault(resource.cidr)}
+        value={resource.cidr}
         valueClass="ellipsis"
-        hasCopy={!!formatDefault(resource.cidr)}
+        hasCopy
       />
 
-      <Component
+      <PropertyItem
         label={translate('Allocation pools')}
         value={formatAllocationPool(resource.allocation_pools)}
         valueClass="ellipsis"
       />
 
-      <Component
+      <PropertyItem
         label={translate('Gateway IP')}
-        value={formatDefault(resource.gateway_ip)}
-        hasCopy={!!resource.gateway_ip}
+        value={resource.gateway_ip}
+        hasCopy
       />
-      <Component
+      <PropertyItem
         label={translate('Backend ID')}
-        value={renderFieldOrDash(resource.backend_id)}
-        hasCopy={!!resource.backend_id}
+        value={resource.backend_id}
+        hasCopy
       />
-      <Component
+      <PropertyItem
         label={translate('Enabled default gateway')}
-        value={resource.is_connected ? translate('Yes') : translate('No')}
+        value={propVal.boolean(resource.is_connected)}
       />
 
-      <Component
+      <PropertyItem
         label={translate('IP version')}
-        value={formatDefault(resource.ip_version)}
+        value={resource.ip_version}
       />
 
       {resource.ip_version === 6 && (
         <>
-          <Component
+          <PropertyItem
             label={translate('IPv6 router advertisement mode')}
-            value={formatIpv6Mode(resource.ipv6_ra_mode)}
+            value={propVal.enum(resource.ipv6_ra_mode, {
+              options: getIpv6ModeOptions(),
+            })}
+            placeholder="none"
           />
-          <Component
+          <PropertyItem
             label={translate('IPv6 address mode')}
-            value={formatIpv6Mode(resource.ipv6_address_mode)}
+            value={propVal.enum(resource.ipv6_address_mode, {
+              options: getIpv6ModeOptions(),
+            })}
+            placeholder="none"
           />
         </>
       )}
 
-      <Component
+      <PropertyItem
         label={translate('Enable DHCP')}
-        value={resource.enable_dhcp ? translate('Yes') : translate('No')}
+        value={propVal.boolean(resource.enable_dhcp)}
       />
     </>
   );

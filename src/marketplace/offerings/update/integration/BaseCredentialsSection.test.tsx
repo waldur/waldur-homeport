@@ -13,7 +13,7 @@ describe('BaseCredentialsSection', () => {
     plugin_options: {},
   } as any;
 
-  it('renders children within FormTable and provides scope context', () => {
+  it('renders children within PropertyList and provides scope context', () => {
     const TestChild = () => <div data-testid="test-child" />;
 
     renderWithProviders(

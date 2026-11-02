@@ -81,13 +81,6 @@ export const formatDuration = (seconds: number): string => {
 };
 
 /**
- * Format large numbers with locale string
- */
-export const formatNumber = (value: number): string => {
-  return value.toLocaleString();
-};
-
-/**
  * Format percentage value
  */
 export const formatPercent = (value: number | null): string => {

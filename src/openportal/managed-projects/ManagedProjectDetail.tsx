@@ -2,37 +2,20 @@ import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { openportalManagedProjectsRetrieveGet } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
-import { formatDate, formatDateTime } from '@/core/dateUtils';
-import { ExternalLink } from '@/core/ExternalLink';
-import { Link } from '@/core/Link';
+import { formatDateTime } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
-import { Field } from '@/resource/summary/Field';
-import { renderFieldOrDash } from '@/table/utils';
+import { getMembershipControlLabels } from '@/openportal/membershipControl';
+import { propVal } from '@/property/propertyFields';
 
 import { ManagedProjectActions } from './ManagedProjectActions';
 import { ManagedProjectAuditLog } from './ManagedProjectAuditLog';
 import { isEmbargoed } from './utils';
-
-const membershipControlLabels: Record<string, string> = {
-  open: translate('Open'),
-  members_only: translate('Members only'),
-  roles_only: translate('Roles only'),
-  locked: translate('Locked'),
-};
-
-const renderOffering = (destination: string) => {
-  if (!destination) {
-    return renderFieldOrDash(destination);
-  }
-  const parts = destination.split('.');
-  return parts[parts.length - 1];
-};
 
 const LinkField = ({
   label,
@@ -40,23 +23,15 @@ const LinkField = ({
 }: {
   label: string;
   link?: { id?: string; url?: string } | null;
-}) => {
-  if (!link || (!link.id && !link.url)) {
-    return <Field label={label} />;
-  }
-  return (
-    <Field
+}) =>
+  link?.url ? (
+    <PropertyItem
       label={label}
-      value={
-        link.url ? (
-          <ExternalLink url={link.url} label={link.id || link.url} />
-        ) : (
-          link.id
-        )
-      }
+      value={propVal.url(link.url, { text: link.id || link.url })}
     />
+  ) : (
+    <PropertyItem label={label} value={link?.id} />
   );
-};
 
 export const ManagedProjectDetail = () => {
   const {
@@ -100,93 +75,84 @@ export const ManagedProjectDetail = () => {
             <ManagedProjectActions project={row} refetch={refetch} />
           </div>
 
-          <Field
-            label={translate('State')}
-            value={
-              <>
-                {row.state}
-                {isEmbargoed(row) && (
-                  <Badge
-                    variant="warning"
-                    shape="pill"
-                    tone="outline"
-                    className="ms-1"
-                  >
-                    {translate('Embargoed')}
-                  </Badge>
-                )}
-              </>
-            }
-          />
-          <Field
-            label={translate('Project')}
-            value={
-              row.project_data ? (
-                <Link
-                  state="project.dashboard"
-                  params={{ uuid: row.project_data.uuid }}
-                >
-                  {row.project_data.name}
-                </Link>
-              ) : (
-                translate('Not attached to a local project')
-              )
-            }
-          />
-          <Field
-            label={translate('Identifier')}
-            value={renderFieldOrDash(row.identifier)}
-          />
-          <Field
-            label={translate('Local identifier')}
-            value={renderFieldOrDash(row.local_identifier)}
-          />
-          <Field
-            label={translate('Offering')}
-            value={renderOffering(row.destination)}
-          />
-          <Field
-            label={translate('Project template')}
-            value={renderFieldOrDash(row.project_template_data?.name)}
-          />
-          <Field
-            label={translate('Description')}
-            value={renderFieldOrDash(details?.description)}
-          />
-          <Field
-            label={translate('Allocation')}
-            value={renderFieldOrDash(details?.allocation)}
-          />
-          <Field
-            label={translate('Start date')}
-            value={
-              details?.start_date ? formatDate(details.start_date) : undefined
-            }
-          />
-          <Field
-            label={translate('End date')}
-            value={details?.end_date ? formatDate(details.end_date) : undefined}
-          />
-          <Field
-            label={translate('Earliest approve')}
-            value={
-              details?.earliest_approve
-                ? formatDateTime(details.earliest_approve)
-                : undefined
-            }
-          />
-          <Field
-            label={translate('Reviewed by')}
-            value={renderFieldOrDash(row.reviewed_by_full_name)}
-          />
-          <Field
-            label={translate('Review comment')}
-            value={renderFieldOrDash(row.review_comment)}
-          />
-          <Field
-            label={translate('Created')}
-            value={row.created ? formatDateTime(row.created) : undefined}
-          />
+          <PropertyList variant="summary" hideIfEmpty={false}>
+            <PropertyItem
+              label={translate('State')}
+              value={
+                <>
+                  {row.state}
+                  {isEmbargoed(row) && (
+                    <Badge
+                      variant="warning"
+                      shape="pill"
+                      tone="outline"
+                      className="ms-1"
+                    >
+                      {translate('Embargoed')}
+                    </Badge>
+                  )}
+                </>
+              }
+            />
+            <PropertyItem
+              label={translate('Project')}
+              value={propVal.link(row.project_data?.name, {
+                state: 'project.dashboard',
+                params: { uuid: row.project_data?.uuid },
+              })}
+              placeholder={translate('Not attached to a local project')}
+            />
+            <PropertyItem
+              label={translate('Identifier')}
+              value={row.identifier}
+            />
+            <PropertyItem
+              label={translate('Local identifier')}
+              value={row.local_identifier}
+            />
+            <PropertyItem
+              label={translate('Offering')}
+              value={row.destination?.split('.').pop()}
+            />
+            <PropertyItem
+              label={translate('Project template')}
+              value={row.project_template_data?.name}
+            />
+            <PropertyItem
+              label={translate('Description')}
+              value={details?.description}
+            />
+            <PropertyItem
+              label={translate('Allocation')}
+              value={details?.allocation}
+            />
+            <PropertyItem
+              label={translate('Start date')}
+              value={propVal.date(details?.start_date)}
+            />
+            <PropertyItem
+              label={translate('End date')}
+              value={propVal.date(details?.end_date)}
+            />
+            <PropertyItem
+              label={translate('Earliest approve')}
+              value={propVal.date(details?.earliest_approve, {
+                precision: 'datetime',
+              })}
+            />
+            <PropertyItem
+              label={translate('Reviewed by')}
+              value={row.reviewed_by_full_name}
+            />
+            <PropertyItem
+              label={translate('Review comment')}
+              value={row.review_comment}
+            />
+            <PropertyItem
+              label={translate('Created')}
+              value={propVal.date(row.created, { precision: 'datetime' })}
+            />
+          </PropertyList>
         </div>
       </div>
 
@@ -196,11 +162,11 @@ export const ManagedProjectDetail = () => {
         </div>
         <div className="card-body">
           {details?.members && Object.keys(details.members).length > 0 ? (
-            <div className="flex flex-col gap-1">
+            <PropertyList variant="summary" className="flex flex-col gap-1">
               {Object.entries(details.members).map(([email, role]) => (
-                <Field key={email} label={email} value={role} />
+                <PropertyItem key={email} label={email} value={role} />
               ))}
-            </div>
+            </PropertyList>
           ) : (
             <span className="text-quaternary">
               {translate('No members assigned.')}
@@ -229,23 +195,19 @@ export const ManagedProjectDetail = () => {
           <div className="card-title mb-0">{translate('Access control')}</div>
         </div>
         <div className="card-body">
-          <Field
-            label={translate('Membership control')}
-            value={
-              details?.membership_control
-                ? membershipControlLabels[details.membership_control] ||
-                  details.membership_control
-                : membershipControlLabels.open
-            }
-          />
-          <Field
-            label={translate('Allowed domains')}
-            value={
-              details?.allowed_domains && details.allowed_domains.length > 0
-                ? details.allowed_domains.join(', ')
-                : translate('All domains allowed')
-            }
-          />
+          <PropertyList variant="summary">
+            <PropertyItem
+              label={translate('Membership control')}
+              value={propVal.enum(details?.membership_control || 'open', {
+                labels: getMembershipControlLabels(),
+              })}
+            />
+            <PropertyItem
+              label={translate('Allowed domains')}
+              value={propVal.list(details?.allowed_domains)}
+              placeholder={translate('All domains allowed')}
+            />
+          </PropertyList>
         </div>
       </div>
 

@@ -35,11 +35,6 @@ export const getAllocationTimeOptions = () =>
     { value: 'fixed_date', label: translate('Fixed date') },
   ] as { value: AllocationTime; label: string }[];
 
-export const formatAllocationTime = (value: AllocationTime) =>
-  getAllocationTimeOptions().find(
-    (option) => option.value === value?.toLowerCase(),
-  )?.label || value;
-
 export const getCallStateOptions = () =>
   [
     { value: 'archived', label: translate('Archived') },

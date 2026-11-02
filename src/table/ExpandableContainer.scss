@@ -42,7 +42,9 @@ table .expandable-container {
       unicode-bidi: isolate;
       border-color: inherit;
 
-      > div {
+      > div,
+      > dt,
+      > dd {
         // td
         display: table-cell;
         vertical-align: inherit;
@@ -63,10 +65,14 @@ table .expandable-container {
       }
 
       &:not(:last-child) {
-        &.mb-1 > div {
+        &.mb-1 > div,
+        &.mb-1 > dt,
+        &.mb-1 > dd {
           padding-bottom: 0.25rem;
         }
-        &.mb-1\.5 > div {
+        &.mb-1\.5 > div,
+        &.mb-1\.5 > dt,
+        &.mb-1\.5 > dd {
           padding-bottom: 0.5rem;
         }
       }

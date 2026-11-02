@@ -1,16 +1,16 @@
 import { FC, ReactNode } from 'react';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import { Badge, BaseButton, PropertyList, PropertyItem } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { lazyComponent } from '@/core/lazyComponent';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { EarlierInvoices } from '@/project/manage/EarlierInvoices';
+import { propVal } from '@/property/propertyFields';
 
 import { CostPolicyAffectedResources } from './CostPolicyAffectedResources';
 import { CostPolicyCost } from './CostPolicyCost';
@@ -148,40 +148,37 @@ export const CostPolicyDetailsDialog: FC<CostPolicyDetailsDialogProps> = ({
           figures={figures}
           months={earlierInvoices?.months}
         />
-        <FormTable className="mt-4">
+        <PropertyList className="mt-4">
           {figures.ignoresCredit ? null : (
             <>
-              <FormTable.Item
+              <PropertyItem
                 label={translate('Cost in the period, before credit')}
-                value={defaultCurrency(figures.beforeCredit)}
+                value={propVal.currency(figures.beforeCredit)}
               />
-              <FormTable.Item
+              <PropertyItem
                 label={translate('Credit already used')}
-                value={defaultCurrency(-figures.drawn)}
+                value={propVal.currency(-figures.drawn)}
               />
-              <FormTable.Item
+              <PropertyItem
                 label={translate('Credit still to be used this month')}
-                value={defaultCurrency(-figures.pending)}
+                value={propVal.currency(-figures.pending)}
               />
             </>
           )}
-          <FormTable.Item
+          <PropertyItem
             label={
               figures.ignoresCredit
                 ? translate('Cost in the period')
                 : translate('Cost after credit')
             }
-            value={
-              <span className="font-semibold">
-                {defaultCurrency(figures.current)}
-              </span>
-            }
+            value={propVal.currency(figures.current)}
+            valueClass="font-semibold"
           />
-          <FormTable.Item
+          <PropertyItem
             label={translate('Limit')}
-            value={defaultCurrency(figures.limit)}
+            value={propVal.currency(figures.limit)}
           />
-        </FormTable>
+        </PropertyList>
       </Section>
 
       {policy.has_fired ? (

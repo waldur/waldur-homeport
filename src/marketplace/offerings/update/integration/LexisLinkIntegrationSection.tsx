@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { PropertyCard, PropertyList } from 'waldur-ui';
+
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import {
@@ -7,7 +9,6 @@ import {
   SecretEditField,
   StringEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
 import { OfferingEditPanelProps } from './types';
@@ -35,12 +36,13 @@ export const LexisLinkIntegrationSection: FC<OfferingEditPanelProps> = (
   const secretOptionsHidden = !canSeeOfferingSecretOptions(props.offering);
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('LEXIS integration')}
-      className="card-bordered mb-5.5"
+      className="mb-5.5"
     >
       <EditFieldProvider scope={props.offering} callback={update}>
-        <FormTable>
+        <PropertyList>
           <StringEditField
             name="plugin_options.heappe_url"
             label={translate('HEAppE URL')}
@@ -81,8 +83,8 @@ export const LexisLinkIntegrationSection: FC<OfferingEditPanelProps> = (
               secretOptionsHidden ? SECRET_OPTIONS_HIDDEN_REASON : undefined
             }
           />
-        </FormTable>
+        </PropertyList>
       </EditFieldProvider>
-    </FormTable.Card>
+    </PropertyCard>
   );
 };

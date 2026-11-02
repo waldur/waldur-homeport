@@ -1,7 +1,8 @@
 import { FC } from 'react';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 
 import { useCallFixedDuration } from './callQueries';
 import { getLongestPrepaidMonths } from './prepaidDuration';
@@ -55,7 +56,7 @@ export const ProjectDurationNote: FC<{ duration: ProjectDuration }> = ({
   }
   const hint = projectDurationHint(duration);
   return (
-    <Field
+    <PropertyItem
       label={translate('Project duration')}
       value={
         <>
@@ -65,8 +66,6 @@ export const ProjectDurationNote: FC<{ duration: ProjectDuration }> = ({
           )}
         </>
       }
-      labelCol={5}
-      valueCol={7}
     />
   );
 };

@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { CallResourceTemplate } from 'waldur-js-client';
 
+import { PropertyItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 interface OwnProps {
@@ -11,21 +12,24 @@ interface OwnProps {
 
 export const ResourceTemplateExpandableRow: FC<OwnProps> = ({ row }) => (
   <ExpandableContainer asTable>
-    <Field
+    <PropertyItem
       label={translate('Termination date')}
       value={(row.attributes as any).end_date}
     />
 
-    <Field label={translate('QoS')} value={(row.attributes as any).qos} />
+    <PropertyItem
+      label={translate('QoS')}
+      value={(row.attributes as any).qos}
+    />
 
-    <Field
+    <PropertyItem
       label={translate('Partition')}
       value={(row.attributes as any).partition}
     />
 
-    <Field label={translate('Description')} value={row.description} />
+    <PropertyItem label={translate('Description')} value={row.description} />
 
-    <Field
+    <PropertyItem
       label={translate('Additional information')}
       value={(row.attributes as any).additional_info}
     />

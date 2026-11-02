@@ -2,9 +2,8 @@ import { XIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { customersPartialUpdate } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, PropertyItem } from 'waldur-ui';
 
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { formatCoordinates } from '@/map/coordinates';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -48,7 +47,7 @@ export const CustomerLocationRow: FC<{
   const coordinates = formatCoordinates(customer);
 
   return (
-    <FormTable.Item
+    <PropertyItem
       label={translate('Location')}
       value={coordinates ?? <XIcon weight="bold" className="text-danger" />}
       actions={

@@ -2,40 +2,26 @@ import { useQueries } from '@tanstack/react-query';
 import { FC } from 'react';
 import { projectsRetrieve, Offering, Project } from 'waldur-js-client';
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
+import {
+  PropertyItem,
+  PropertyList,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
-import { formatDate } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { formatPhoneNumber } from '@/core/utils';
 import { getCustomer } from '@/customer/utils';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 import { Customer } from '@/workspace/types';
 
 import { getServiceProviderByCustomer } from '../common/api';
 import { getLabel } from '../common/registry';
-
-import './DetailsOverviewDialog.scss';
-
-const withCopy = (value) => {
-  return (
-    <div className="flex justify-between">
-      {renderFieldOrDash(value)}
-      {value && (
-        <CopyToClipboardButton
-          value={value}
-          size={20}
-          className="mb-0 mt-0"
-          buttonClassName="text-quaternary"
-        />
-      )}
-    </div>
-  );
-};
 
 export const DetailsOverviewDialog: FC<{
   offering: Offering;
@@ -98,7 +84,6 @@ export const DetailsOverviewDialog: FC<{
       subtitle={translate(
         'View key details about the organization, project, offering, and provider for your resource.',
       )}
-      className="resource-details-overview"
     >
       {isLoading ? (
         <LoadingSpinner />
@@ -127,80 +112,82 @@ export const DetailsOverviewDialog: FC<{
           <div className="tab-content">
             {customer.data ? (
               <TabsContent value="organization">
-                <FormTable hideActions alignTop>
-                  <FormTable.Item
+                <PropertyList hideActions alignTop detailsMode>
+                  <PropertyItem
                     label={translate('Name')}
-                    value={withCopy(customer.data.name)}
+                    value={customer.data.name}
+                    hasCopy
                   />
 
-                  <FormTable.Item
+                  <PropertyItem
                     label={translate('Contact info')}
-                    group
                     value={[
                       customer.data.contact_details,
                       customer.data.email,
                       formatPhoneNumber(customer.data.phone_number),
-                    ]
-                      .filter(Boolean)
-                      .map((v) => withCopy(v))}
+                    ].filter(Boolean)}
+                    copyable
                   />
-                </FormTable>
+                </PropertyList>
               </TabsContent>
             ) : null}
             {project.data ? (
               <TabsContent value="project">
-                <FormTable hideActions alignTop>
-                  <FormTable.Item
+                <PropertyList hideActions alignTop detailsMode>
+                  <PropertyItem
                     label={translate('Name')}
-                    value={withCopy(project.data.data.name)}
+                    value={project.data.data.name}
+                    hasCopy
                   />
 
-                  <FormTable.Item
+                  <PropertyItem
                     label={translate('End date')}
-                    value={withCopy(
-                      project.data.data.end_date
-                        ? formatDate(project.data.data.end_date)
-                        : null,
-                    )}
+                    value={propVal.date(project.data.data.end_date)}
+                    hasCopy
                   />
-                </FormTable>
+                </PropertyList>
               </TabsContent>
             ) : null}
             {props.offering && (
               <TabsContent value="offering">
-                <FormTable hideActions alignTop>
-                  <FormTable.Item
+                <PropertyList hideActions alignTop detailsMode>
+                  <PropertyItem
                     label={translate('Name')}
-                    value={withCopy(props.offering.name)}
+                    value={props.offering.name}
+                    hasCopy
                   />
 
-                  <FormTable.Item
+                  <PropertyItem
                     label={translate('Type')}
-                    value={withCopy(getLabel(props.offering.type))}
+                    value={getLabel(props.offering.type)}
+                    hasCopy
                   />
 
                   {props.offering.parent_name && (
-                    <FormTable.Item
+                    <PropertyItem
                       label={translate('Parent offering')}
-                      value={withCopy(getLabel(props.offering.parent_name))}
+                      value={getLabel(props.offering.parent_name)}
+                      hasCopy
                     />
                   )}
-                </FormTable>
+                </PropertyList>
               </TabsContent>
             )}
             {provider.data ? (
               <TabsContent value="service-provider">
-                <FormTable hideActions alignTop>
-                  <FormTable.Item
+                <PropertyList hideActions alignTop detailsMode>
+                  <PropertyItem
                     label={translate('Name')}
-                    value={withCopy(provider.data.customer_name)}
+                    value={provider.data.customer_name}
+                    hasCopy
                   />
 
-                  <FormTable.Item
+                  <PropertyItem
                     label={translate('Description')}
-                    value={withCopy(provider.data.description)}
+                    value={provider.data.description}
+                    hasCopy
                   />
-                </FormTable>
+                </PropertyList>
               </TabsContent>
             ) : null}
           </div>

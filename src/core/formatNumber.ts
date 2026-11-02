@@ -33,3 +33,12 @@ export const formatUsageValue = (
   // path formats exactly as it did before the option was threaded through.
   return new Intl.NumberFormat(locale, { maximumFractionDigits }).format(num);
 };
+
+/**
+ * A count for display: the user's locale decides the thousands separator, and
+ * a missing count reads as 0 — an endpoint that leaves an idle counter out
+ * means none, not unknown. Where missing means unknown, keep the value empty
+ * and let the row show a dash.
+ */
+export const formatCount = (value?: number | null): string =>
+  formatUsageValue(value ?? 0);

@@ -1,7 +1,8 @@
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
+import { PropertyCard, PropertyList } from 'waldur-ui';
+
 import { EditFieldProvider } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
 import { OfferingScopeState } from './OfferingScopeState';
@@ -23,7 +24,8 @@ export const BaseCredentialsSection: FC<BaseCredentialsSectionProps> = (
   );
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('Credentials')}
       actions={
         <div className="flex gap-1.5 items-center">
@@ -31,18 +33,16 @@ export const BaseCredentialsSection: FC<BaseCredentialsSectionProps> = (
           <SyncButton offering={props.offering} refetch={props.refetch} />
         </div>
       }
-      className="card-bordered mb-5.5"
+      className="mb-5.5"
     >
-      <FormTable>
+      <PropertyList>
         <EditFieldProvider scope={props.offering} callback={update}>
           {!props.hideScopeState && (
-            <OfferingScopeState
-              state={props.offering.scope_state || 'missing'}
-            />
+            <OfferingScopeState state={props.offering.scope_state} />
           )}
           {props.children}
         </EditFieldProvider>
-      </FormTable>
-    </FormTable.Card>
+      </PropertyList>
+    </PropertyCard>
   );
 };

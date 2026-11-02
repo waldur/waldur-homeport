@@ -3,8 +3,9 @@ import { FC } from 'react';
 import { Field, useFormState } from 'react-final-form';
 import { OfferingComponent } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { FieldError } from '@/form';
-import FormTable from '@/form/FormTable';
 import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 
@@ -196,11 +197,11 @@ export const SpendingLimitFields: FC<{
             {component.name}
           </h6>
         )}
-        <FormTable>
+        <PropertyList>
           {getOfferedPeriods(component).map((period) => {
             const { maximum, heldOnly } = getPeriodBounds(component, period);
             return (
-              <FormTable.Item
+              <PropertyItem
                 key={period}
                 label={getSpendingLimitLabel(period)}
                 // The reset goes under the label, where it wraps: in the
@@ -242,7 +243,7 @@ export const SpendingLimitFields: FC<{
               />
             );
           })}
-        </FormTable>
+        </PropertyList>
         <ComponentSubmitError name={name} componentType={component.type} />
       </div>
     ))}

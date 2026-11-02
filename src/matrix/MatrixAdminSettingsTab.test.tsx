@@ -22,7 +22,9 @@ const REASON =
 const editButton = (key: string) =>
   within(
     // Anchored: a description can quote another setting's title.
-    screen.getByRole('row', { name: new RegExp(`^${getKeyTitle(key)}`) }),
+    screen.getByRole('definition', {
+      name: new RegExp(`^${getKeyTitle(key)}`),
+    }),
   ).getByTestId('compact-edit-button');
 
 const renderTab = (marker: string, extra: Record<string, unknown> = {}) => {

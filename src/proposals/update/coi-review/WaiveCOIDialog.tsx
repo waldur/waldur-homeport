@@ -2,13 +2,14 @@ import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { ConflictOfInterest, conflictsOfInterestWaive } from 'waldur-js-client';
 
+import { PropertyList, PropertyItem } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { Field } from '@/resource/summary';
 
 interface WaiveCOIDialogProps {
   resolve: {
@@ -75,18 +76,20 @@ export const WaiveCOIDialog: FC<WaiveCOIDialogProps> = ({ resolve }) => {
             </p>
 
             <div className="mb-3">
-              <Field
-                label={translate('Reviewer')}
-                value={resolve.coi.reviewer_name}
-              />
-              <Field
-                label={translate('Proposal')}
-                value={resolve.coi.proposal_name}
-              />
-              <Field
-                label={translate('Conflict type')}
-                value={resolve.coi.coi_type_display}
-              />
+              <PropertyList variant="summary">
+                <PropertyItem
+                  label={translate('Reviewer')}
+                  value={resolve.coi.reviewer_name}
+                />
+                <PropertyItem
+                  label={translate('Proposal')}
+                  value={resolve.coi.proposal_name}
+                />
+                <PropertyItem
+                  label={translate('Conflict type')}
+                  value={resolve.coi.coi_type_display}
+                />
+              </PropertyList>
             </div>
 
             <TextGroup

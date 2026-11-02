@@ -1,11 +1,16 @@
 import { FC, useCallback } from 'react';
 import { AgentIdentity, AgentServiceState } from 'waldur-js-client';
 
-import { Tooltip, BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+  Tooltip,
+} from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
@@ -56,21 +61,20 @@ export const OfferingServices: FC<OwnProps> = ({ agentIdentity }) => {
   );
 
   return (
-    <FormTable.Card
+    <PropertyCard
+      bordered
       title={translate('Services')}
-      className="card-bordered mb-4"
+      className="mb-4"
       headerClassName="min-h-[60px]"
     >
-      <FormTable detailsMode>
-        {!services?.length ? (
-          <tr>
-            <td colSpan={3} className="text-quaternary text-center">
-              {translate('There are no services yet.')}
-            </td>
-          </tr>
-        ) : (
-          services.map((service) => (
-            <FormTable.Item
+      {!services?.length ? (
+        <p className="m-0 py-4 text-center text-quaternary">
+          {translate('There are no services yet.')}
+        </p>
+      ) : (
+        <PropertyList detailsMode>
+          {services.map((service) => (
+            <PropertyItem
               key={service.uuid}
               label={service.name}
               colon
@@ -85,9 +89,9 @@ export const OfferingServices: FC<OwnProps> = ({ agentIdentity }) => {
                 />
               }
             />
-          ))
-        )}
-      </FormTable>
-    </FormTable.Card>
+          ))}
+        </PropertyList>
+      )}
+    </PropertyCard>
   );
 };

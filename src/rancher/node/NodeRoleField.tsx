@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { translate } from '@/i18n';
+import { getNodeRoleLabels } from './nodeRoles';
 
 export const NodeRoleField: FunctionComponent<{ node }> = ({ node }) =>
-  node.role === 'agent' ? translate('Agent') : translate('Server');
+  getNodeRoleLabels()[node.role === 'agent' ? 'agent' : 'server'];

@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { customersContact } from 'waldur-js-client';
 
+import { PropertyCard, PropertyList } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { formatPhoneNumber } from '@/core/utils';
 import { validateEmails } from '@/core/validators';
@@ -11,7 +13,6 @@ import {
   StringEditField,
   TextEditField,
 } from '@/form/editFields';
-import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
@@ -75,9 +76,9 @@ export const CustomerContactPanel: FC<CustomerEditPanelProps> = ({
     Boolean(customer.invoice_emails);
 
   return (
-    <FormTable.Card className="card-bordered">
+    <PropertyCard bordered>
       <EditFieldProvider scope={customer} callback={updateContact}>
-        <FormTable hideActions={!canUpdate}>
+        <PropertyList hideActions={!canUpdate}>
           <EmailEditField name="email" label={translate('Email')} />
           <StringEditField
             name="phone_number"
@@ -109,8 +110,8 @@ export const CustomerContactPanel: FC<CustomerEditPanelProps> = ({
               )}
             />
           )}
-        </FormTable>
+        </PropertyList>
       </EditFieldProvider>
-    </FormTable.Card>
+    </PropertyCard>
   );
 };

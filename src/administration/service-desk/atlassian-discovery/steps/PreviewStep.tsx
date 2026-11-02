@@ -3,14 +3,21 @@ import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 import { supportSettingsAtlassianSaveSettings } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import {
+  AlertItem,
+  BaseButton,
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { propVal } from '@/property/propertyFields';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
-import { getAtlassianAuthMethodLabel } from '../../atlassianAuth';
+import { getAtlassianAuthMethodChoices } from '../../atlassianAuth';
 import { AtlassianFormValues, extractCredentials } from '../types';
 
 /**
@@ -93,252 +100,137 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
         )}
       </p>
 
-      <div className="card mb-3">
-        <div className="card-header">
-          <h5 className="mb-0">{translate('Connection')}</h5>
-        </div>
-        <div className="card-body">
+      <PropertyCard bordered title={translate('Connection')} className="mb-3">
+        <PropertyList variant="summary" termWidth="md">
+          <PropertyItem
+            label={translate('API URL')}
+            value={propVal.code(values.resolvedApiUrl || values.api_url)}
+          />
+          <PropertyItem
+            label={translate('Authentication Method')}
+            value={propVal.enum(values.auth_method, {
+              options: getAtlassianAuthMethodChoices(),
+            })}
+            placeholder={translate('Not configured')}
+            hideIfEmpty={false}
+          />
+          {values.auth_method === 'oauth2_client_credentials' && (
+            <PropertyItem
+              label={translate('Client ID')}
+              value={propVal.code(values.client_id)}
+            />
+          )}
+        </PropertyList>
+      </PropertyCard>
+
+      <PropertyCard bordered title={translate('Project')} className="mb-3">
+        <PropertyList variant="summary" termWidth="md">
+          <PropertyItem
+            label={translate('Selected Project')}
+            value={propVal.annotated(selectedProject?.name, {
+              hint: selectedProject?.key,
+            })}
+          />
+          <PropertyItem
+            label={translate('Project ID')}
+            value={propVal.code(selectedProject?.id)}
+          />
+        </PropertyList>
+      </PropertyCard>
+
+      <PropertyCard
+        bordered
+        title={translate('Request Types')}
+        className="mb-3"
+      >
+        {selectedRequestTypes.length > 0 ? (
           <table className="table table-sm table-borderless">
+            <thead>
+              <tr>
+                <th>{translate('Name')}</th>
+                <th>{translate('Issue Type ID')}</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr>
-                <td className="text-quaternary" style={{ width: '40%' }}>
-                  {translate('API URL')}
-                </td>
-                <td>
-                  <code>{values.resolvedApiUrl || values.api_url}</code>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Authentication Method')}
-                </td>
-                <td>{getAtlassianAuthMethodLabel(values.auth_method)}</td>
-              </tr>
-              {values.auth_method === 'oauth2_client_credentials' && (
-                <tr>
-                  <td className="text-quaternary">{translate('Client ID')}</td>
+              {selectedRequestTypes.map((rt) => (
+                <tr key={rt.id}>
+                  <td>{rt.name}</td>
                   <td>
-                    <code>{values.client_id}</code>
+                    <code>{rt.issue_type_id}</code>
                   </td>
                 </tr>
-              )}
+              ))}
             </tbody>
           </table>
-        </div>
-      </div>
+        ) : (
+          <span className="text-quaternary">
+            {translate('No request types selected')}
+          </span>
+        )}
+      </PropertyCard>
 
-      <div className="card mb-3">
-        <div className="card-header">
-          <h5 className="mb-0">{translate('Project')}</h5>
-        </div>
-        <div className="card-body">
-          <table className="table table-sm table-borderless">
-            <tbody>
-              <tr>
-                <td className="text-quaternary" style={{ width: '40%' }}>
-                  {translate('Selected Project')}
-                </td>
-                <td>
-                  <strong>{selectedProject?.name}</strong>{' '}
-                  <span className="text-quaternary">
-                    ({selectedProject?.key})
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Project ID')}</td>
-                <td>
-                  <code>{selectedProject?.id}</code>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div className="card mb-3">
-        <div className="card-header">
-          <h5 className="mb-0">{translate('Request Types')}</h5>
-        </div>
-        <div className="card-body">
-          {selectedRequestTypes.length > 0 ? (
-            <table className="table table-sm table-borderless">
-              <thead>
-                <tr>
-                  <th>{translate('Name')}</th>
-                  <th>{translate('Issue Type ID')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {selectedRequestTypes.map((rt) => (
-                  <tr key={rt.id}>
-                    <td>{rt.name}</td>
-                    <td>
-                      <code>{rt.issue_type_id}</code>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <span className="text-quaternary">
-              {translate('No request types selected')}
-            </span>
-          )}
-        </div>
-      </div>
-
-      <div className="card mb-3">
-        <div className="card-header">
-          <h5 className="mb-0">{translate('Field Mappings')}</h5>
-        </div>
-        <div className="card-body">
-          <table className="table table-sm table-borderless">
-            <tbody>
-              <tr>
-                <td className="text-quaternary" style={{ width: '40%' }}>
-                  {translate('Reporter Field')}
-                </td>
-                <td>
-                  {values.fieldMappings?.reporter_field ? (
-                    <code>{values.fieldMappings.reporter_field}</code>
-                  ) : (
-                    <span className="text-quaternary">
-                      {translate('Not mapped')}
-                    </span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Impact Field')}</td>
-                <td>
-                  {values.fieldMappings?.impact_field ? (
-                    <code>{values.fieldMappings.impact_field}</code>
-                  ) : (
-                    <span className="text-quaternary">
-                      {translate('Not mapped')}
-                    </span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Organization Field')}
-                </td>
-                <td>
-                  {values.fieldMappings?.organisation_field ? (
-                    <code>{values.fieldMappings.organisation_field}</code>
-                  ) : (
-                    <span className="text-quaternary">
-                      {translate('Not mapped')}
-                    </span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Project Field')}
-                </td>
-                <td>
-                  {values.fieldMappings?.project_field ? (
-                    <code>{values.fieldMappings.project_field}</code>
-                  ) : (
-                    <span className="text-quaternary">
-                      {translate('Not mapped')}
-                    </span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Affected Resource Field')}
-                </td>
-                <td>
-                  {values.fieldMappings?.affected_resource_field ? (
-                    <code>{values.fieldMappings.affected_resource_field}</code>
-                  ) : (
-                    <span className="text-quaternary">
-                      {translate('Not mapped')}
-                    </span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Caller Field')}</td>
-                <td>
-                  {values.fieldMappings?.caller_field ? (
-                    <code>{values.fieldMappings.caller_field}</code>
-                  ) : (
-                    <span className="text-quaternary">
-                      {translate('Not mapped')}
-                    </span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Template Field')}
-                </td>
-                <td>
-                  {values.fieldMappings?.template_field ? (
-                    <code>{values.fieldMappings.template_field}</code>
-                  ) : (
-                    <span className="text-quaternary">
-                      {translate('Not mapped')}
-                    </span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Waldur Backend ID Field')}
-                </td>
-                <td>
-                  {values.fieldMappings?.waldur_backend_id_field ? (
-                    <code>{values.fieldMappings.waldur_backend_id_field}</code>
-                  ) : (
-                    <span className="text-quaternary">
-                      {translate('Not mapped')}
-                    </span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Default Priority')}
-                </td>
-                <td>
-                  {values.fieldMappings?.default_priority ? (
-                    <>
-                      {(values.priorities || []).find(
-                        (p) => p.id === values.fieldMappings?.default_priority,
-                      )?.name || values.fieldMappings.default_priority}
-                    </>
-                  ) : (
-                    <span className="text-quaternary">
-                      {translate('Not set')}
-                    </span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Default Offering Issue Type')}
-                </td>
-                <td>
-                  {values.fieldMappings?.default_offering_issue_type ? (
-                    <>{values.fieldMappings.default_offering_issue_type}</>
-                  ) : (
-                    <span className="text-quaternary">
-                      {translate('Not set')}
-                    </span>
-                  )}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <PropertyCard
+        bordered
+        title={translate('Field Mappings')}
+        className="mb-3"
+      >
+        <PropertyList
+          variant="summary"
+          termWidth="md"
+          emptyPlaceholder={translate('Not mapped')}
+        >
+          <PropertyItem
+            label={translate('Reporter Field')}
+            value={propVal.code(values.fieldMappings?.reporter_field)}
+          />
+          <PropertyItem
+            label={translate('Impact Field')}
+            value={propVal.code(values.fieldMappings?.impact_field)}
+          />
+          <PropertyItem
+            label={translate('Organization Field')}
+            value={propVal.code(values.fieldMappings?.organisation_field)}
+          />
+          <PropertyItem
+            label={translate('Project Field')}
+            value={propVal.code(values.fieldMappings?.project_field)}
+          />
+          <PropertyItem
+            label={translate('Affected Resource Field')}
+            value={propVal.code(values.fieldMappings?.affected_resource_field)}
+          />
+          <PropertyItem
+            label={translate('Caller Field')}
+            value={propVal.code(values.fieldMappings?.caller_field)}
+          />
+          <PropertyItem
+            label={translate('Template Field')}
+            value={propVal.code(values.fieldMappings?.template_field)}
+          />
+          <PropertyItem
+            label={translate('Waldur Backend ID Field')}
+            value={propVal.code(values.fieldMappings?.waldur_backend_id_field)}
+          />
+          <PropertyItem
+            label={translate('Default Priority')}
+            value={
+              values.fieldMappings?.default_priority ? (
+                <>
+                  {(values.priorities || []).find(
+                    (p) => p.id === values.fieldMappings?.default_priority,
+                  )?.name || values.fieldMappings.default_priority}
+                </>
+              ) : null
+            }
+            placeholder="not-set"
+          />
+          <PropertyItem
+            label={translate('Default Offering Issue Type')}
+            value={values.fieldMappings?.default_offering_issue_type}
+            placeholder="not-set"
+          />
+        </PropertyList>
+      </PropertyCard>
 
       <AlertItem
         type="floating"

@@ -1,5 +1,11 @@
 import { CopyIcon } from '@phosphor-icons/react';
-import { useState } from 'react';
+import {
+  createContext,
+  FC,
+  PropsWithChildren,
+  useContext,
+  useState,
+} from 'react';
 
 import { BaseButton } from '../Button';
 
@@ -13,39 +19,82 @@ export interface CopyButtonProps {
    * a hardcoded translate() call. */
   label: string;
   copiedLabel: string;
+  /** What was copied, in words ("Backend ID"), for the feedback a
+   * `CopyFeedbackProvider` gives. */
+  name?: string;
+  /** Render just the icon, with `label` / `copiedLabel` as its tooltip and
+   * accessible name — for a copy affordance sitting inline after a value. */
+  iconOnly?: boolean;
   className?: string;
 }
 
+export interface CopyFeedback {
+  value: string;
+  name?: string;
+}
+
+const CopyFeedbackContext = createContext<
+  ((feedback: CopyFeedback) => void) | undefined
+>(undefined);
+
 /**
- * The app's own copy buttons (CopyToClipboardButton.tsx) show a toast via
- * @/store/notify, a whole app-wide notification system with no equivalent
- * in a standalone consumer — a transient label swap on the button itself
- * (label → copiedLabel, then back) is the honest equivalent, not a
- * fabricated toast. Extracted here since the same value/label/onClick/
- * useState shape shows up twice in waldur-shell's UserMenu.tsx (API
- * token, IP address) with nothing app-specific about it.
+ * Lets the host app report a copy its own way. A notification system is the
+ * app's (Homeport's toasts live in waldur-notifications, which this package
+ * does not depend on), so every `CopyButton` below calls `onCopied` after a
+ * successful copy. Without a provider the button's own label swap is the
+ * only feedback.
+ */
+export const CopyFeedbackProvider: FC<
+  PropsWithChildren<{ onCopied(feedback: CopyFeedback): void }>
+> = ({ onCopied, children }) => (
+  <CopyFeedbackContext.Provider value={onCopied}>
+    {children}
+  </CopyFeedbackContext.Provider>
+);
+
+/**
+ * The button swaps its label (label → copiedLabel, then back) after a copy,
+ * and reports the copy to an enclosing `CopyFeedbackProvider`, which the app
+ * turns into a toast. Extracted here since the same value/label/onClick/
+ * useState shape shows up twice in waldur-shell's UserMenu.tsx (API token,
+ * IP address) with nothing app-specific about it.
  */
 export function CopyButton({
   value,
   label,
   copiedLabel,
+  name,
+  iconOnly,
   className,
 }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
+  const onCopied = useContext(CopyFeedbackContext);
 
   const handleClick = () => {
     navigator.clipboard.writeText(value).then(() => {
       setCopied(true);
+      onCopied?.({ value, name });
       window.setTimeout(() => setCopied(false), 1500);
     });
   };
 
-  return (
+  const currentLabel = copied ? copiedLabel : label;
+
+  return iconOnly ? (
+    <BaseButton
+      variant="text-secondary"
+      size="sm"
+      iconNode={<CopyIcon weight="bold" />}
+      tooltip={currentLabel}
+      onClick={handleClick}
+      className={className}
+    />
+  ) : (
     <BaseButton
       variant="tertiary"
       size="sm"
       iconNode={<CopyIcon weight="bold" />}
-      label={copied ? copiedLabel : label}
+      label={currentLabel}
       onClick={handleClick}
       className={className}
     />

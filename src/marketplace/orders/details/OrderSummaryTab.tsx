@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
 import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
-import { Field } from '@/resource/summary';
+import { propVal } from '@/property/propertyFields';
 import { SUPPORT_OFFERING_TYPE } from '@/support/constants';
 import { useUser } from '@/workspace/hooks';
 
@@ -12,6 +14,7 @@ import { getOrderType } from '../utils';
 
 import { ExportOrderComponentsButton } from './ExportOrderComponentsButton';
 import { useOrderEditable } from './hooks';
+import { ORDER_LIST_PROPS } from './type-based/OrderCommonFields';
 import { OrderTypeBasedDetails } from './type-based/OrderTypeBasedDetails';
 
 export const OrderSummaryTab = ({
@@ -35,35 +38,40 @@ export const OrderSummaryTab = ({
       }
     >
       <div className="flex flex-col gap-2.5">
-        {user?.is_staff && (
-          <Field
-            label={translate('Order UUID')}
-            value={order.uuid}
-            labelWidth={200}
+        <PropertyList {...ORDER_LIST_PROPS}>
+          {user?.is_staff && (
+            <PropertyItem label={translate('Order UUID')} value={order.uuid} />
+          )}
+          {user?.is_staff && (
+            <PropertyItem label={translate('Order slug')} value={order.slug} />
+          )}
+          {order.offering_type === SUPPORT_OFFERING_TYPE && order.issue && (
+            <PropertyItem
+              label={translate('Issue')}
+              value={
+                <Link
+                  state="support.detail"
+                  params={{ issue_uuid: order.issue.uuid }}
+                  className="text-link"
+                >
+                  {order.issue.key || order.issue.uuid}
+                </Link>
+              }
+            />
+          )}
+
+          <PropertyItem
+            label={translate('Created by')}
+            value={propVal.user({
+              full_name: order.created_by_full_name,
+              username: order.created_by_username,
+            })}
           />
-        )}
-        {user?.is_staff && (
-          <Field
-            label={translate('Order slug')}
-            value={order.slug}
-            labelWidth={200}
+          <PropertyItem
+            label={translate('Created at')}
+            value={propVal.date(order.created, { precision: 'datetime' })}
           />
-        )}
-        {order.offering_type === SUPPORT_OFFERING_TYPE && order.issue && (
-          <Field
-            label={translate('Issue')}
-            labelWidth={200}
-            value={
-              <Link
-                state="support.detail"
-                params={{ issue_uuid: order.issue.uuid }}
-                className="text-link"
-              >
-                {order.issue.key || order.issue.uuid}
-              </Link>
-            }
-          />
-        )}
+        </PropertyList>
 
         <OrderTypeBasedDetails
           order={order}

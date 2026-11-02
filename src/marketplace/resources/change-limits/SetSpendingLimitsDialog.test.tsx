@@ -303,7 +303,7 @@ describe('SetSpendingLimitsDialog', () => {
 
     await waitFor(() =>
       expect(getInput('Monthly')).toHaveAccessibleDescription(
-        'The month limit may not exceed 200.',
+        /The month limit may not exceed 200\./,
       ),
     );
     // The provider may have lowered the maximum: the fields show the new one.

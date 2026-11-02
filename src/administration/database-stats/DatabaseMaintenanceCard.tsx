@@ -1,12 +1,13 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { AccordionCard } from 'waldur-ui';
+import { AccordionCard, PropertyList, PropertyItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 
 import type { MaintenanceStats } from './api';
-import { formatNumber, formatPercent, getDeadTupleHealth } from './utils';
+import { getDeadTupleHealth } from './utils';
 
 interface DatabaseMaintenanceCardProps {
   data: MaintenanceStats;
@@ -34,86 +35,68 @@ export const DatabaseMaintenanceCard: FC<DatabaseMaintenanceCardProps> = ({
       defaultOpen={needsAttention}
       className="mb-5"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
-        <div>
-          <h6 className="uppercase text-quaternary mb-2.5">
-            {translate('Tuple statistics')}
-          </h6>
-          <table className="table table-sm table-borderless mb-0">
-            <tbody>
-              <tr>
-                <td className="text-quaternary">{translate('Live tuples')}</td>
-                <td className="text-end">
-                  {formatNumber(data.total_live_tuples)}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">{translate('Dead tuples')}</td>
-                <td className="text-end">
-                  {formatNumber(data.total_dead_tuples)}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Dead tuple ratio')}
-                </td>
-                <td
-                  className={`text-end ${deadTupleHealth === 'danger' ? 'text-danger' : deadTupleHealth === 'warning' ? 'text-warning' : ''}`}
-                >
-                  {formatPercent(data.dead_tuple_ratio_percent)}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div>
-          <h6 className="uppercase text-quaternary mb-2.5">
-            {translate('Vacuum status')}
-          </h6>
-          <table className="table table-sm table-borderless mb-0">
-            <tbody>
-              <tr>
-                <td className="text-quaternary">
-                  {translate('Tables needing vacuum')}
-                </td>
-                <td
-                  className={`text-end ${data.tables_needing_vacuum > 0 ? 'text-warning' : ''}`}
-                >
-                  {data.tables_needing_vacuum}
-                </td>
-              </tr>
-              <tr>
-                <td className="text-quaternary">
-                  <div className="flex items-center">
-                    {translate('Oldest transaction age')}
-                    {hasTransactionAgeWarning && (
-                      <WarningCircleIcon
-                        size={16}
-                        weight="bold"
-                        className="text-danger ms-1.5"
-                      />
-                    )}
-                  </div>
-                </td>
-                <td
-                  className={`text-end ${hasTransactionAgeWarning ? 'text-danger' : ''}`}
-                >
-                  {data.oldest_transaction_age != null
-                    ? formatNumber(data.oldest_transaction_age)
-                    : '-'}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          {hasTransactionAgeWarning && (
-            <small className="text-danger mt-1.5 block">
-              {translate(
-                'Transaction ID wraparound risk! Run vacuum on large tables.',
-              )}
-            </small>
-          )}
-        </div>
-      </div>
+      <PropertyList
+        variant="compact"
+        className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 lg:gap-x-12"
+      >
+        <PropertyList.Section title={translate('Tuple statistics')}>
+          <PropertyItem
+            label={translate('Live tuples')}
+            value={propVal.count(data.total_live_tuples)}
+          />
+          <PropertyItem
+            label={translate('Dead tuples')}
+            value={propVal.count(data.total_dead_tuples)}
+          />
+          <PropertyItem
+            label={translate('Dead tuple ratio')}
+            value={propVal.percent(data.dead_tuple_ratio_percent)}
+            valueClass={
+              deadTupleHealth === 'danger'
+                ? 'text-danger'
+                : deadTupleHealth === 'warning'
+                  ? 'text-warning'
+                  : undefined
+            }
+          />
+        </PropertyList.Section>
+        <PropertyList.Section
+          title={translate('Vacuum status')}
+          description={
+            hasTransactionAgeWarning ? (
+              <span className="text-danger">
+                {translate(
+                  'Transaction ID wraparound risk! Run vacuum on large tables.',
+                )}
+              </span>
+            ) : undefined
+          }
+        >
+          <PropertyItem
+            label={translate('Tables needing vacuum')}
+            value={propVal.number(data.tables_needing_vacuum)}
+            valueClass={
+              data.tables_needing_vacuum > 0 ? 'text-warning' : undefined
+            }
+          />
+          <PropertyItem
+            label={
+              <>
+                {translate('Oldest transaction age')}
+                {hasTransactionAgeWarning && (
+                  <WarningCircleIcon
+                    size={16}
+                    weight="bold"
+                    className="text-danger ms-1.5"
+                  />
+                )}
+              </>
+            }
+            value={propVal.number(data.oldest_transaction_age)}
+            valueClass={hasTransactionAgeWarning ? 'text-danger' : undefined}
+          />
+        </PropertyList.Section>
+      </PropertyList>
     </AccordionCard>
   );
 };
