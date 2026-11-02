@@ -7,7 +7,7 @@ import {
   hasConsumerPermission,
   hasPermission,
 } from '@/permissions/hasPermission';
-import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
+import { isSiteAgentOfferingType } from '@/site-agent/constants';
 import {
   BASIC_OFFERING_TYPE,
   SUPPORT_OFFERING_TYPE,
@@ -59,15 +59,16 @@ export const OrderActionsButton = ({
   }, [order, user]);
 
   const showMarkAsDoneButton = useMemo(() => {
-    // For SITE_AGENT_PLUGIN, respect the provider actions display setting
-    if (order.offering_type === SITE_AGENT_PLUGIN && hideProviderActions) {
+    // For site-agent offerings, respect the provider actions display setting
+    if (isSiteAgentOfferingType(order.offering_type) && hideProviderActions) {
       return false;
     }
     return (
       order.state === 'executing' &&
-      [SUPPORT_OFFERING_TYPE, BASIC_OFFERING_TYPE, SITE_AGENT_PLUGIN].includes(
+      ([SUPPORT_OFFERING_TYPE, BASIC_OFFERING_TYPE].includes(
         order.offering_type,
-      ) &&
+      ) ||
+        isSiteAgentOfferingType(order.offering_type)) &&
       hasPermission(user, {
         permission: PermissionEnum.APPROVE_ORDER,
         customerId: order.provider_uuid,
@@ -81,7 +82,7 @@ export const OrderActionsButton = ({
     }
     return (
       order.state === 'executing' &&
-      order.offering_type === SITE_AGENT_PLUGIN &&
+      isSiteAgentOfferingType(order.offering_type) &&
       hasPermission(user, {
         permission: PermissionEnum.APPROVE_ORDER,
         customerId: order.provider_uuid,
@@ -91,7 +92,10 @@ export const OrderActionsButton = ({
 
   const showRetryButton = useMemo(() => {
     if (order.state !== 'erred') return false;
-    if (![BASIC_OFFERING_TYPE, SITE_AGENT_PLUGIN].includes(order.offering_type))
+    if (
+      order.offering_type !== BASIC_OFFERING_TYPE &&
+      !isSiteAgentOfferingType(order.offering_type)
+    )
       return false;
     return hasPermission(user, {
       permission: PermissionEnum.APPROVE_ORDER,

@@ -7,7 +7,7 @@ import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
+import { isSiteAgentOfferingType } from '@/site-agent/constants';
 import { BASIC_OFFERING_TYPE } from '@/support/constants';
 import { useUser } from '@/workspace/hooks';
 
@@ -16,8 +16,6 @@ const SetOfferingTypeDialog = lazyComponent(() =>
     default: module.SetOfferingTypeDialog,
   })),
 );
-
-const SWAPPABLE_TYPES = [BASIC_OFFERING_TYPE, SITE_AGENT_PLUGIN];
 
 interface SetOfferingTypeActionProps {
   row: ProviderOffering;
@@ -31,7 +29,10 @@ export const SetOfferingTypeAction = ({
   const user = useUser();
   const { openDialog } = useModal();
 
-  if (!row.type || !SWAPPABLE_TYPES.includes(row.type)) {
+  if (
+    !row.type ||
+    (row.type !== BASIC_OFFERING_TYPE && !isSiteAgentOfferingType(row.type))
+  ) {
     return null;
   }
 

@@ -2,7 +2,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { OfferingConfiguration } from '@/marketplace/common/types';
 
-import { SITE_AGENT_PLUGIN } from './constants';
+import { LEGACY_SITE_AGENT_PLUGIN, SITE_AGENT_PLUGIN } from './constants';
 
 const DefaultUserManagementSection = lazyComponent(() =>
   import('@/marketplace/offerings/update/integration/UserManagementSection').then(
@@ -32,4 +32,12 @@ export const SiteAgentOffering: OfferingConfiguration = {
   orderFormComponent: SiteAgentOrderForm,
   userManagementSection: DefaultUserManagementSection,
   credentialsSection: SiteAgentCredentialsSection,
+};
+
+// Same configuration under the former type name, so offerings keep working
+// while the backend still returns it. Hidden from the creation list.
+export const LegacySiteAgentOffering: OfferingConfiguration = {
+  ...SiteAgentOffering,
+  type: LEGACY_SITE_AGENT_PLUGIN,
+  disableOfferingCreation: true,
 };

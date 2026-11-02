@@ -39,7 +39,7 @@ const inheritedSetting = (value: string, source: string) => ({
 const inheritedOffering = {
   uuid: 'offering-uuid',
   customer_uuid: 'customer-uuid',
-  type: 'Marketplace.Slurm',
+  type: 'Marketplace.SiteAgent',
   plugin_options: {
     service_provider_can_create_offering_user: true,
     homedir_prefix: '/scratch/',

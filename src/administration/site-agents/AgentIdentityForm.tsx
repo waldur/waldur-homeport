@@ -17,6 +17,7 @@ import { providerOfferingsAutocomplete } from '@/marketplace/common/autocomplete
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 
 interface AgentIdentityFormProps {
   resolve: {
@@ -42,7 +43,7 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
   const loadOfferings = useMemo(
     () =>
       providerOfferingsAutocomplete({
-        type: ['Marketplace.Slurm'],
+        type: [SITE_AGENT_PLUGIN],
         field: ['uuid', 'name'],
       }),
     [],

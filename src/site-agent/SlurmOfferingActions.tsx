@@ -16,7 +16,7 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
-import { SITE_AGENT_PLUGIN } from './constants';
+import { isSiteAgentOfferingType } from './constants';
 
 const SiteAgentConfigDialog = lazyComponent(() =>
   import('./SiteAgentConfigDialog').then((m) => ({
@@ -106,7 +106,7 @@ export const SlurmOfferingActions: FC<SlurmOfferingActionsProps> = ({
     customerId: offering.customer_uuid,
   });
 
-  const showSiteAgentConfig = offering.type === SITE_AGENT_PLUGIN;
+  const showSiteAgentConfig = isSiteAgentOfferingType(offering.type);
   const showLdapAgentEnv =
     !!offering.plugin_options?.service_provider_can_create_offering_user;
 

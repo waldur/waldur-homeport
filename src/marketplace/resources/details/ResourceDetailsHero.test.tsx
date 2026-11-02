@@ -23,7 +23,7 @@ const baseResource = {
   name: 'Resource',
   state: 'OK',
   backend_id: 'backend-id',
-  offering_type: 'Marketplace.Slurm',
+  offering_type: 'Marketplace.SiteAgent',
   offering_uuid: 'offering-uuid',
   provider_uuid: 'provider-uuid',
   customer_uuid: 'consumer-uuid',

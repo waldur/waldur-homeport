@@ -2,7 +2,7 @@ import { MergedPluginOptions, OrderDetails } from 'waldur-js-client';
 
 import { PermissionEnum } from '@/permissions/enums';
 import { hasConsumerPermission } from '@/permissions/hasPermission';
-import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
+import { isSiteAgentOfferingType } from '@/site-agent/constants';
 
 export const checkOrderCanBeApproved = (user, customer, project) =>
   hasConsumerPermission(user, {
@@ -25,7 +25,7 @@ export const shouldHideProviderActions = (
   order: Pick<OrderDetails, 'offering_type' | 'offering_plugin_options'>,
   pluginOptions?: MergedPluginOptions | null,
 ) =>
-  order.offering_type === SITE_AGENT_PLUGIN &&
+  isSiteAgentOfferingType(order.offering_type) &&
   !(pluginOptions ?? order.offering_plugin_options)
     ?.enable_display_of_order_actions_for_service_provider;
 
