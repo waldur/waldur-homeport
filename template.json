@@ -48901,12 +48901,6 @@
       "feature_area": "actions"
     }
   },
-  "Resource has been unlinked.": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "actions"
-    }
-  },
   "Resource has no own end date — it will be terminated with the project on {date}.": {
     "context": {
       "variables": {
@@ -49199,6 +49193,12 @@
       "feature_area": "details"
     }
   },
+  "Resource unlink has been scheduled.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "actions"
+    }
+  },
   "Resource usage": {
     "context": {
       "primary_ui_type": "title",
@@ -49383,12 +49383,6 @@
     }
   },
   "Resources have been terminated.": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "mass-actions"
-    }
-  },
-  "Resources have been unlinked.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "mass-actions"
@@ -68952,6 +68946,22 @@
       "feature_area": "mass-actions"
     }
   },
+  "Unlink has been scheduled for the selected resources.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "mass-actions"
+    }
+  },
+  "Unlink has been scheduled for {count} resources.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "mass-actions"
+    }
+  },
   "Unlink instance": {
     "context": {
       "primary_ui_type": "title",
@@ -78532,16 +78542,6 @@
     }
   },
   "{count} resources could not be unlinked.": {
-    "context": {
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      },
-      "feature_area": "mass-actions"
-    }
-  },
-  "{count} resources have been unlinked.": {
     "context": {
       "variables": {
         "count": {

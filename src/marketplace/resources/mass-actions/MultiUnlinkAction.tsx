@@ -25,9 +25,11 @@ export const MultiUnlinkAction = ({ rows, refetch }) => {
     refetch,
     mutationFn: (resource) =>
       marketplaceResourcesUnlink({ path: { uuid: resource.uuid } }),
-    successMessage: translate('Resources have been unlinked.'),
+    successMessage: translate(
+      'Unlink has been scheduled for the selected resources.',
+    ),
     renderPartialSuccessMessage: (count) =>
-      translate('{count} resources have been unlinked.', { count }),
+      translate('Unlink has been scheduled for {count} resources.', { count }),
     errorMessage: translate('Unable to unlink resources.'),
     renderErrorMessage: (count) =>
       translate('{count} resources could not be unlinked.', { count }),

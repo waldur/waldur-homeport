@@ -36,7 +36,7 @@ export const UnlinkActionItem: FC<{ resource }> = ({ resource }) => {
       marketplaceResourcesUnlink({
         path: { uuid: resource.marketplace_resource_uuid },
       }),
-    successMessage: translate('Resource has been unlinked.'),
+    successMessage: translate('Resource unlink has been scheduled.'),
     errorMessage: translate('Unable to unlink resource.'),
     confirmation: {
       title: translate('Unlink resource'),
