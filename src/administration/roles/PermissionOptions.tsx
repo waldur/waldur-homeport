@@ -151,6 +151,15 @@ export const PermissionOptions = [
     ],
   },
   {
+    label: translate('Invoice'),
+    options: [
+      {
+        label: translate('List invoice'),
+        value: 'INVOICE.LIST',
+      },
+    ],
+  },
+  {
     label: translate('Matrix_room'),
     options: [
       {
