@@ -69918,12 +69918,6 @@
   "Usage (GB)": {},
   "Usage (h)": {},
   "Usage (hours)": {},
-  "Usage / limit": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "project"
-    }
-  },
   "Usage <70%": {
     "context": {
       "feature_area": "views"
@@ -70469,7 +70463,7 @@
   "Used/total units": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "dashboard"
+      "feature_area": "project"
     }
   },
   "User": {

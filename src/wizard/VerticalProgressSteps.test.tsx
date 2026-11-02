@@ -30,16 +30,16 @@ const bgClasses = (el: HTMLElement) =>
 describe('VerticalProgressSteps', () => {
   it('marks the first step after the last completed one as current', () => {
     render(<VerticalProgressSteps steps={steps(2)} />);
-    const current = buttons().filter(
-      (b) => b.getAttribute('aria-current') === 'step',
-    );
+    const current = screen.getAllByRole('generic', { current: 'step' });
     expect(current).toHaveLength(1);
     expect(current[0]).toHaveTextContent('Result');
   });
 
   it('makes the first step current when nothing is completed', () => {
     render(<VerticalProgressSteps steps={steps(0)} />);
-    expect(buttons()[0]).toHaveAttribute('aria-current', 'step');
+    expect(screen.getByRole('generic', { current: 'step' })).toHaveTextContent(
+      steps(0)[0].label,
+    );
   });
 
   it('paints completed and current steps brand and upcoming ones neutral', () => {
@@ -151,9 +151,9 @@ describe('VerticalProgressSteps', () => {
     );
   });
 
-  it('only puts clickable steps in the tab order', () => {
+  it('makes only clickable steps buttons', () => {
     render(<VerticalProgressSteps steps={steps(1)} onClick={vi.fn()} />);
-    expect(buttons().map((b) => b.tabIndex)).toEqual([0, 0, -1, -1]);
+    expect(buttons()).toHaveLength(2);
   });
 
   it('activates a clickable step with Enter and Space', async () => {

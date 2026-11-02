@@ -837,7 +837,15 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
                 renderRow(row, rowIndex)
               )}
               {canExpand && toggled[getId(row, rowIndex)] && (
-                <tr>
+                // With a checkbox column, the details start past it too,
+                // level with the row's first column (ExpandableContainer.scss).
+                <tr
+                  className={
+                    enableMultiSelect || fieldType
+                      ? 'has-multiselect'
+                      : undefined
+                  }
+                >
                   <td
                     colSpan={
                       columns.length +

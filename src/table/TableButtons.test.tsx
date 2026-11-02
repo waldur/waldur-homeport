@@ -46,4 +46,29 @@ describe('TableButtons filter button', () => {
 
     expect(onAddFilterClick).not.toHaveBeenCalled();
   });
+
+  it('hides the open filter row, filters applied or not', async () => {
+    const user = userEvent.setup();
+    const { toggleFilterMenu, onAddFilterClick } = renderButtons({
+      showFilterMenuToggle: true,
+      filtersStorage: [{ name: 'state' }],
+    });
+
+    await user.click(screen.getByRole('button', { name: /Set filters/ }));
+
+    expect(toggleFilterMenu).toHaveBeenCalledWith(false);
+    expect(onAddFilterClick).not.toHaveBeenCalled();
+  });
+
+  it('shows the hidden row with its applied filters, without opening the menu', async () => {
+    const user = userEvent.setup();
+    const { toggleFilterMenu, onAddFilterClick } = renderButtons({
+      filtersStorage: [{ name: 'state' }],
+    });
+
+    await user.click(screen.getByRole('button', { name: /Set filters/ }));
+
+    expect(toggleFilterMenu).toHaveBeenCalledWith(true);
+    expect(onAddFilterClick).not.toHaveBeenCalled();
+  });
 });

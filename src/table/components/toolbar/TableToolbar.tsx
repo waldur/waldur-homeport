@@ -49,25 +49,23 @@ export function TableToolbarActions() {
     (event: React.MouseEvent) => {
       if (filterPosition === 'sidebar') {
         actions.openFiltersDrawer(slots.filters, config.formId);
+      } else if (showFilterMenuToggle) {
+        // The filter row is open: the funnel hides it, as it shows it.
+        actions.toggleFilterMenu(false);
       } else {
-        // Force `true`, not a bare toggle: when filters are already active,
-        // Table.tsx's mount effect has already flipped showFilterMenuToggle
-        // true, so a plain flip here would set it back to false — hiding
-        // (`d-none`, Table.tsx's Card.Header) the very container holding
-        // the real Add-filter trigger this handler is about to
-        // programmatically click below, in the same React batch. With the
-        // trigger's ancestor display:none at the moment floating-ui reads
-        // its bounding rect, the popup anchors at getBoundingClientRect()'s
-        // all-zero fallback — the viewport origin — reported live as the
-        // filter dropdown rendering over the sidebar nav instead of next to
-        // the funnel button, specifically when filters were already set.
+        // The filter row is hidden: show it in the same batch as the
+        // Add-filter click below. Its popup anchors to the trigger inside the
+        // row, and a trigger still under display:none when floating-ui reads
+        // its rect anchors at the viewport origin, over the sidebar nav.
         actions.toggleFilterMenu(true);
         const parent: HTMLElement = event.currentTarget.closest('.card-table');
         if (!parent) return;
         const addFilterButton =
           parent.querySelector<HTMLButtonElement>('[data-add-filter]');
         if (addFilterButton) {
-          if (!showFilterMenuToggle || filtersStorage?.length) {
+          // Applied filters come back with the row; with none, the menu
+          // to add one opens.
+          if (!filtersStorage?.length) {
             addFilterButton.click();
             event.stopPropagation();
           }

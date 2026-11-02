@@ -171,7 +171,10 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
             <span
               className={classNames(
                 'leading-none [&>svg]:size-[20px]',
-                ICON_COLOR_CLASSNAMES[props.iconColor ?? 'gray-400'],
+                // Disabled, every icon takes the same gray, a danger one too.
+                ICON_COLOR_CLASSNAMES[
+                  props.disabled ? 'gray-400' : (props.iconColor ?? 'gray-400')
+                ],
                 // This span sets its own colour, so the row's disabled
                 // colour never reaches the icon. Fade it like the label.
                 props.disabled && 'opacity-50',

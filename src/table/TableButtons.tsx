@@ -26,18 +26,21 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
     (event) => {
       if (props.filterPosition === 'sidebar') {
         props.openFiltersDrawer(props.filters, props.formId);
+      } else if (props.showFilterMenuToggle) {
+        // The filter row is open: the funnel hides it, as it shows it.
+        props.toggleFilterMenu(false);
       } else {
-        // Force `true` — see the matching comment in TableToolbar.tsx's
-        // own onClickFilterButton: a bare toggle can hide the real
-        // Add-filter trigger's container in the same batch as the
-        // programmatic click below, mispositioning the popup.
+        // The filter row is hidden: show it before the Add-filter click
+        // below (see TableToolbar.tsx's onClickFilterButton).
         props.toggleFilterMenu(true);
         const parent: HTMLElement = event.target.closest('.card-table');
         if (!parent) return;
         const addFilterButton =
           parent.querySelector<HTMLButtonElement>('[data-add-filter]');
         if (addFilterButton) {
-          if (!props.showFilterMenuToggle || props.filtersStorage?.length) {
+          // Applied filters come back with the row; with none, the menu
+          // to add one opens.
+          if (!props.filtersStorage?.length) {
             addFilterButton.click();
             event.stopPropagation();
           }
@@ -49,6 +52,7 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
       props.toggleFilterMenu,
       props.filterPosition,
       props.showFilterMenuToggle,
+      props.filtersStorage,
     ],
   );
 

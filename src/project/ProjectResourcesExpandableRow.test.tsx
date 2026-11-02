@@ -1,9 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 import { OfferingComponent, Resource } from 'waldur-js-client';
 
-import { ResourceUsageLimits } from './ProjectResourcesExpandableRow';
+import {
+  ResourceQuotaBar,
+  ResourceQuotaFigures,
+} from './ProjectResourcesExpandableRow';
 
 const component = (overrides: Partial<OfferingComponent>) =>
   ({
@@ -15,84 +17,84 @@ const component = (overrides: Partial<OfferingComponent>) =>
     ...overrides,
   }) as OfferingComponent;
 
-const renderCell = (
+const renderCells = (
   components: OfferingComponent[],
   resource: Partial<Resource>,
-) =>
-  render(
-    <ResourceUsageLimits
-      row={{ offering_uuid: 'offering-1', ...resource } as Resource}
-      offerings={[{ uuid: 'offering-1', components }]}
-      isLoading={false}
-    />,
+) => {
+  const props = {
+    row: { offering_uuid: 'offering-1', ...resource } as Resource,
+    offerings: [{ uuid: 'offering-1', components }],
+    isLoading: false,
+  };
+  return render(
+    <>
+      <div data-testid="figures">
+        <ResourceQuotaFigures {...props} />
+      </div>
+      <div data-testid="bar">
+        <ResourceQuotaBar {...props} />
+      </div>
+    </>,
   );
+};
 
-describe('ResourceUsageLimits', () => {
-  it('shows usage against the limit inline, coloured by how close it is', () => {
-    renderCell([component({}), component({ type: 'ram', name: 'RAM' })], {
-      limits: { cpu: 10, ram: 10 },
-      limit_usage: { cpu: 4, ram: 9 },
+describe('project resource quota cells', () => {
+  it('shows used of total and the bar for the only limit', () => {
+    renderCells([component({})], {
+      limits: { cpu: 10 },
+      limit_usage: { cpu: 4 },
     });
 
-    expect(screen.getByText('4 / 10')).toHaveClass('text-warning');
-    expect(screen.getByText('9 / 10')).toHaveClass('text-danger');
-    expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
-    expect(screen.queryByRole('button')).not.toBeInTheDocument();
-  });
-
-  it('shows usage alone when a usage component has no limit', () => {
-    renderCell(
-      [component({ type: 'gpu', name: 'GPU', billing_type: 'usage' })],
-      {
-        current_usages: { gpu: 7 },
-      },
-    );
-
-    expect(screen.getByText('7')).toBeInTheDocument();
-    expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
-  });
-
-  it('shows a dash when the offering has no measured components', () => {
-    const { container } = renderCell(
-      [component({ billing_type: 'fixed' })],
-      {},
-    );
-
-    expect(container).toHaveTextContent('—');
-    expect(screen.queryByText('CPU')).not.toBeInTheDocument();
-  });
-
-  it('shows usage alone, not NaN%, when the resource stores no limit', () => {
-    const { container } = renderCell([component({})], {
-      limit_usage: { cpu: 0 },
-    });
-
-    expect(container).not.toHaveTextContent('NaN');
-    expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
-  });
-
-  it('shows the two components closest to their limits, the rest on click', async () => {
-    const types = ['cpu', 'ram', 'disk', 'gpu', 'net'];
-    renderCell(
-      types.map((type) => component({ type, name: type.toUpperCase() })),
-      {
-        limits: { cpu: 10, ram: 10, disk: 10, gpu: 10, net: 10 },
-        limit_usage: { cpu: 1, ram: 9, disk: 5, gpu: 15, net: 2 },
-      },
-    );
-
-    expect(screen.getByText('GPU')).toBeInTheDocument();
-    expect(screen.getByText('RAM')).toBeInTheDocument();
-    expect(screen.queryByText('DISK')).not.toBeInTheDocument();
-
-    await userEvent.click(screen.getByRole('button', { name: '+3 more' }));
-
-    expect(screen.getAllByRole('progressbar')).toHaveLength(5);
-    expect(screen.getByText('DISK')).toBeInTheDocument();
-    expect(screen.getByText('(150%)')).toBeInTheDocument();
-    expect(screen.getByRole('progressbar', { name: 'GPU' })).toHaveAttribute(
+    expect(screen.getByTestId('figures')).toHaveTextContent(/^4\/10$/);
+    expect(screen.getByRole('progressbar', { name: 'CPU' })).toHaveAttribute(
       'aria-valuenow',
-      '100',
+      '40',
     );
+  });
+
+  it('names the component closest to its limit when there are several', () => {
+    renderCells(
+      [
+        component({}),
+        component({ type: 'ram', name: 'RAM', measured_unit: 'GB' }),
+        component({ type: 'disk', name: 'Disk' }),
+      ],
+      {
+        limits: { cpu: 10, ram: 10, disk: 10 },
+        limit_usage: { cpu: 1, ram: 9, disk: 5 },
+      },
+    );
+
+    expect(screen.getByTestId('figures')).toHaveTextContent('RAM9/10 GB');
+    expect(screen.getByRole('progressbar', { name: 'RAM' })).toHaveAttribute(
+      'aria-valuenow',
+      '90',
+    );
+  });
+
+  it('shows dashes when the offering measures nothing', () => {
+    renderCells([component({ billing_type: 'fixed' })], {});
+
+    expect(screen.getByTestId('figures')).toHaveTextContent('—');
+    expect(screen.getByTestId('bar')).toHaveTextContent('—');
+    expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
+  });
+
+  it('shows the usage alone, not a full bar, when no limit is stored', () => {
+    renderCells([component({})], { limit_usage: { cpu: 5 } });
+
+    expect(screen.getByTestId('figures')).toHaveTextContent(/^5$/);
+    expect(screen.getByTestId('bar')).toHaveTextContent('—');
+    expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
+  });
+
+  it('shows the usage of a usage-billed component', () => {
+    renderCells(
+      [component({ type: 'gpu', name: 'GPU', billing_type: 'usage' })],
+      { current_usages: { gpu: 7 } },
+    );
+
+    expect(screen.getByTestId('figures')).toHaveTextContent(/^7$/);
+    expect(screen.getByTestId('bar')).toHaveTextContent('—');
   });
 });

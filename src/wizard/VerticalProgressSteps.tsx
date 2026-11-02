@@ -46,6 +46,7 @@ export const VerticalProgressSteps: FC<VerticalProgressStepsProps> = ({
         (steps[index - 1] && steps[index - 1].completed && !step.completed);
       const isClickable = Boolean(onClick) && (isCompleted || isCurrent);
       const variant = step.variant || DEFAULT_VARIANT;
+      const Step = isClickable ? 'button' : 'div';
 
       return (
         <li
@@ -60,19 +61,14 @@ export const VerticalProgressSteps: FC<VerticalProgressStepsProps> = ({
               : 'not-last:after:bg-[var(--border-divider)]',
           )}
         >
-          <button
-            type="button"
+          {/* A step that can't be opened is plain content, as on
+              ProgressSteps: no button, no hover. */}
+          <Step
+            {...(isClickable && { type: 'button' as const })}
             className="group flex w-full items-start gap-[1rem] border-0 bg-transparent px-0 py-[1rem] text-left transition-all duration-300 focus:outline-2 focus:outline-offset-2 focus:outline-brand focus:outline-solid disabled:cursor-not-allowed disabled:opacity-60"
-            onClick={() => isClickable && onClick(step, index)}
-            onKeyDown={(e) => {
-              if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
-                e.preventDefault();
-                onClick(step, index);
-              }
-            }}
-            tabIndex={isClickable ? 0 : -1}
+            onClick={isClickable ? () => onClick(step, index) : undefined}
             aria-current={isCurrent ? 'step' : undefined}
-            style={{ cursor: isClickable ? 'pointer' : 'not-allowed' }}
+            style={isClickable ? { cursor: 'pointer' } : undefined}
           >
             <div
               data-testid="step-marker"
@@ -109,7 +105,7 @@ export const VerticalProgressSteps: FC<VerticalProgressStepsProps> = ({
                 </div>
               )}
             </div>
-          </button>
+          </Step>
         </li>
       );
     })}
