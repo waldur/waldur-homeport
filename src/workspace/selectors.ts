@@ -293,6 +293,32 @@ export const canViewAccounting = createSelector(
 );
 
 /**
+ * May the user see the organization's affiliate earnings? Follows what
+ * mastermind serves on /api/customer-affiliates/: staff and support see every
+ * link, and anyone holding a role on the affiliate organization itself sees
+ * that organization's links, whichever role it is (owner, support or reader).
+ * A role on its service provider does not count, as there.
+ */
+const checkCanViewAffiliateEarnings = (
+  customer: AtLeast<Customer, 'uuid'>,
+  user: User,
+): boolean =>
+  !!user?.is_staff ||
+  !!user?.is_support ||
+  (!!customer?.uuid &&
+    !!user?.permissions?.some(
+      (permission) =>
+        permission.scope_type === 'customer' &&
+        permission.scope_uuid === customer.uuid,
+    ));
+
+export const canViewAffiliateEarnings = createSelector(
+  getCustomer,
+  getUser,
+  checkCanViewAffiliateEarnings,
+);
+
+/**
  * Organisation readers hold a read-only role, so they belong wherever a page
  * only displays organisation data and offers no way to change it.
  */

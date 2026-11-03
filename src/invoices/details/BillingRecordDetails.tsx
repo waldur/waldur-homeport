@@ -6,6 +6,8 @@ import { translate } from '@/i18n';
 import { Invoice } from '../types';
 
 import { InvoiceItemsTable } from './InvoiceItemsTable';
+import { isOpenInvoice } from './utils';
+import { VolumeDiscountsRow } from './VolumeDiscountsRow';
 
 interface BillingRecordDetailsProps {
   invoice: Invoice;
@@ -17,6 +19,7 @@ export const BillingRecordDetails: FC<BillingRecordDetailsProps> = ({
   refreshInvoiceItems,
 }) => {
   const [totalFiltered, setTotalFiltered] = useState<number | null>(null);
+  const isOpen = isOpenInvoice(invoice);
 
   return (
     <InvoiceItemsTable
@@ -28,6 +31,11 @@ export const BillingRecordDetails: FC<BillingRecordDetailsProps> = ({
       footer={
         <table className="table bg-secondary border-t border-t-secondary border-b border-b-secondary align-middle">
           <tbody>
+            <VolumeDiscountsRow
+              invoice={invoice}
+              labelColSpan={totalFiltered === null ? 1 : 2}
+              includedIn="total"
+            />
             <tr className="text-sm font-medium">
               {totalFiltered !== null && (
                 <td className="text-primary">
@@ -41,7 +49,9 @@ export const BillingRecordDetails: FC<BillingRecordDetailsProps> = ({
               )}
 
               <td className="text-end text-primary">
-                <span>{translate('Total')}</span>{' '}
+                <span>
+                  {isOpen ? translate('Expected total') : translate('Total')}
+                </span>{' '}
                 <small>{translate('(VAT is not included)')}</small>:
               </td>
               <td

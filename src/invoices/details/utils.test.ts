@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { groupInvoiceItems, groupItemsByPlan } from './utils';
+import { groupInvoiceItems, groupItemsByPlan, isOpenInvoice } from './utils';
 
 describe('groupInvoiceItems', () => {
   it('groups items by project_uuid and resource_uuid', () => {
@@ -264,5 +264,18 @@ describe('groupItemsByPlan', () => {
     ]);
     expect(groups[1].price).toBe(4);
     expect(groups[2].items.map((i) => i.uuid)).toEqual(['orphan']);
+  });
+});
+
+describe('isOpenInvoice', () => {
+  it('treats pending invoices, in the grace period too, as open', () => {
+    expect(isOpenInvoice({ state: 'pending' })).toBe(true);
+    expect(isOpenInvoice({ state: 'pending_finalization' })).toBe(true);
+  });
+
+  it('treats created, paid and canceled invoices as closed', () => {
+    expect(isOpenInvoice({ state: 'created' })).toBe(false);
+    expect(isOpenInvoice({ state: 'paid' })).toBe(false);
+    expect(isOpenInvoice({ state: 'canceled' })).toBe(false);
   });
 });

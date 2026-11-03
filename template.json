@@ -267,6 +267,16 @@
       "feature_area": "project"
     }
   },
+  "(included in subtotal)": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "(included in total)": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "(no input)": {
     "context": {
       "feature_area": "ai-assistant"
@@ -20837,6 +20847,11 @@
       "feature_area": "workflow-steps"
     }
   },
+  "Estimated from the open invoice; accrued when the month is closed.": {
+    "context": {
+      "feature_area": "affiliate-earnings"
+    }
+  },
   "Estimated impact": {
     "context": {
       "feature_area": "create"
@@ -20882,6 +20897,11 @@
       "action_type": "create"
     }
   },
+  "Estimated on the usage so far. The final discount is set when the invoice is closed.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Estimated price per month": {
     "context": {
       "primary_ui_type": "label"
@@ -20890,6 +20910,11 @@
   "Estimated revenue": {
     "context": {
       "primary_ui_type": "title"
+    }
+  },
+  "Estimated volume discounts": {
+    "context": {
+      "feature_area": "details"
     }
   },
   "Estonia": {},
@@ -21381,7 +21406,25 @@
       "feature_area": "details"
     }
   },
+  "Expected for {period}: {amount}": {
+    "context": {
+      "variables": {
+        "period": {
+          "type": "unknown"
+        },
+        "amount": {
+          "type": "number"
+        }
+      },
+      "feature_area": "affiliate-earnings"
+    }
+  },
   "Expected resource growth pattern": {},
+  "Expected total": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Expected user growth rate": {},
   "Experimental AI & external processing": {
     "context": {
@@ -72582,6 +72625,11 @@
       "feature_area": "plan"
     }
   },
+  "Volume discounts": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Volume extension has been scheduled.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -75899,7 +75947,7 @@
   },
   "estimated": {
     "context": {
-      "feature_area": "growth"
+      "feature_area": "details"
     }
   },
   "event consumers": {

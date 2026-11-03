@@ -17,6 +17,7 @@ import { PermissionEnum } from '@/permissions/enums';
 import { canViewCustomerTeam } from '@/permissions/teamVisibility';
 import {
   canViewAccounting,
+  canViewAffiliateEarnings,
   getCustomer,
   isOwnerOrStaff,
   isStaff,
@@ -25,6 +26,16 @@ import {
 
 import { canAccessOrganization, userHasCustomerPermission } from './utils';
 import { fetchCustomer } from './workspace/fetchCustomer';
+
+// The affiliate earnings page follows the API, which serves an affiliate
+// organization's links to any role on it, not only to those who may see its
+// accounting. It sits in the Accounting menu, so that menu opens for them too,
+// showing only this page.
+const canOpenAffiliateEarnings = (state) =>
+  isFeatureVisible(ResellerFeatures.affiliates) &&
+  Boolean(ENV.plugins.WALDUR_CORE?.AFFILIATES_ENABLED) &&
+  Boolean(state.workspace.customer?.has_affiliate_links) &&
+  canViewAffiliateEarnings(state);
 
 function canAccessPaymentProfiles(state) {
   const customer = getCustomer(state);
@@ -307,7 +318,9 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Accounting'),
       priority: 140,
-      permissions: [canViewAccounting],
+      permissions: [
+        (state) => canViewAccounting(state) || canOpenAffiliateEarnings(state),
+      ],
     },
   },
 
@@ -322,7 +335,10 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Payment profiles'),
+      // Its own check: the Accounting menu above also opens for affiliate
+      // earnings alone.
       permissions: [
+        canViewAccounting,
         (state) => {
           if (isFeatureVisible(CustomerFeatures.payments_for_staff_only)) {
             return isStaff(state);
@@ -346,6 +362,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Payments list'),
       permissions: [
+        canViewAccounting,
         (state) => {
           if (isFeatureVisible(CustomerFeatures.payments_for_staff_only)) {
             if (!isStaff(state)) {
@@ -395,11 +412,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Affiliate earnings'),
       feature: ResellerFeatures.affiliates,
-      permissions: [
-        canViewAccounting,
-        () => Boolean(ENV.plugins.WALDUR_CORE?.AFFILIATES_ENABLED),
-        (state) => Boolean(state.workspace.customer?.has_affiliate_links),
-      ],
+      permissions: [canOpenAffiliateEarnings],
       priority: 138,
     },
   },
