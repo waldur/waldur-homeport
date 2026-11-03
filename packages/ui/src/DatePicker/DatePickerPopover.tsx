@@ -410,7 +410,7 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
             data-invalid={invalid || undefined}
             className={cn(
               'flex w-full items-center gap-[4px] font-normal transition-colors',
-              'rounded-lg border-[1px] border-solid',
+              'rounded-lg border border-solid',
               size === 'sm'
                 ? 'min-h-[28px] ps-[8px] pe-[2px]'
                 : 'min-h-[40px] ps-[11px] pe-[4px]',

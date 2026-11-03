@@ -43,7 +43,7 @@ export const PortRows = ({ fields, subnets, hasCustomIp, tenantUuid }: any) => {
 
   return (
     <div className="mb-4">
-      <div className="border-rows mb-3">
+      <div className="divide-y divide-secondary *:not-last:mb-3 *:not-last:pb-3 mb-3">
         {fields.map((port, index) => (
           <Fragment key={index}>
             <div className="flex flex-wrap gap-3">

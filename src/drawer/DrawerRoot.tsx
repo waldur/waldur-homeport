@@ -155,7 +155,7 @@ export const DrawerRoot: FunctionComponent = () => {
       >
         <div
           className={classNames(
-            'relative flex flex-col w-full min-w-0 wrap-break-word bg-primary dark:border-[1px] dark:border-secondary',
+            'relative flex flex-col w-full min-w-0 wrap-break-word bg-primary dark:border dark:border-secondary',
             floating && 'h-full',
           )}
         >
@@ -167,7 +167,7 @@ export const DrawerRoot: FunctionComponent = () => {
                 ? // The assistant has no header bar: its controls float over
                   // the top right corner of the chat.
                   'absolute top-[16px] right-[16px] z-1'
-                : 'min-h-[70px] mx-[1.85rem] py-[0.5rem] border-b-[1px] border-b-secondary',
+                : 'min-h-[70px] mx-[1.85rem] py-[0.5rem] border-b border-b-secondary',
             )}
           >
             <div
@@ -246,7 +246,7 @@ export const DrawerRoot: FunctionComponent = () => {
           {drawerProps.footer && (
             <div
               data-slot="drawer-footer"
-              className="py-[1.25rem] px-[1.85rem] text-center border-t-[1px] border-t-secondary"
+              className="py-[1.25rem] px-[1.85rem] text-center border-t border-t-secondary"
             >
               <drawerProps.footer {...drawerProps} close={onHide} />
             </div>

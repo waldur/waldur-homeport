@@ -303,7 +303,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
               'When component usage is reported, the system evaluates the policy and takes action based on configured thresholds.',
             )}
           </p>
-          <div className="border rounded-lg p-3">
+          <div className="border border-secondary rounded-lg p-3">
             <MermaidChart
               code={generateEndToEndFlowDiagram(config)}
               className="text-center"
@@ -370,7 +370,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
               'Usage percentage is calculated by comparing current consumption against the total available allocation, which may include carryover from the previous period.',
             )}
           </p>
-          <div className="border rounded-lg p-3">
+          <div className="border border-secondary rounded-lg p-3">
             <MermaidChart
               code={generateUsageCalculationDiagram(config)}
               className="text-center"
@@ -586,7 +586,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
               'Waldur communicates with the SLURM cluster through a STOMP message broker and the site agent.',
             )}
           </p>
-          <div className="border rounded-lg p-3">
+          <div className="border border-secondary rounded-lg p-3">
             <MermaidChart
               code={generateSiteAgentDiagram()}
               className="text-center"

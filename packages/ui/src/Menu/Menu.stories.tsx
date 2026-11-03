@@ -418,7 +418,7 @@ export const ItemKinds: Story = {
           <Menu.Item>Closing button</Menu.Item>
         </MenuPopover.Content>
       </MenuPopover>
-      <div className="w-[200px] rounded-lg border-[1px] border-secondary">
+      <div className="w-[200px] rounded-lg border border-secondary">
         <Menu.Item look="actions">Plain button</Menu.Item>
       </div>
     </Gallery>

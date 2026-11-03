@@ -22,7 +22,7 @@ export const Default: Story = {
     illustration: (
       <div
         aria-hidden
-        className="h-40 w-full rounded-md bg-tertiary border-[1px] border-secondary"
+        className="h-40 w-full rounded-md bg-tertiary border border-secondary"
       />
     ),
     title: 'No resources yet',

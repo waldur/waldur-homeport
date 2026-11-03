@@ -82,7 +82,7 @@ export const UserResourcesDialog: FC = () => {
             />
           ))}
           {data?.hasMore && (
-            <div className="text-center text-quaternary mt-3 pt-1.5 border-t-[1px] border-t-secondary">
+            <div className="text-center text-quaternary mt-3 pt-1.5 border-t border-t-secondary">
               {translate(
                 'Showing {displayed} of {total} resources. Click "View all resources" to see the complete list.',
                 {

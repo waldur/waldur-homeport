@@ -21,7 +21,7 @@ const formatEntryTimestamp = (date: Date): string => {
 };
 
 const StructuredEntry = ({ entry }: { entry: ParsedInternalNote }) => (
-  <div className="flex items-start gap-1.5 py-1.5 border-b-[1px] border-divider-medium border-dashed">
+  <div className="flex items-start gap-1.5 py-1.5 border-b border-divider-medium border-dashed">
     {entry.timestamp && (
       <div
         className="text-quaternary small shrink-0"

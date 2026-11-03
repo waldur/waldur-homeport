@@ -30,7 +30,7 @@ const FieldsListMapping = ({
 }) => {
   return (
     <FormField>
-      <table className="table align-middle table-row-bordered border-b-[1px] border-b-secondary mb-2.5">
+      <table className="table align-middle table-row-bordered border-b border-b-secondary mb-2.5">
         <thead>
           <tr className="text-quaternary text-xs font-medium">
             <td className="w-1/2">{translate('Remote category')}</td>

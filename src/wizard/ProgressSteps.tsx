@@ -142,11 +142,11 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                         className={cn(
                           'z-[1] flex items-center justify-center rounded-full transition-colors duration-200',
                           current
-                            ? 'mb-[12px] size-[26px] border-[2px] border-tertiary outline-4 outline-[var(--fg-brand-primary)]'
+                            ? 'mb-[12px] size-[26px] border-2 border-tertiary outline-4 outline-[var(--fg-brand-primary)]'
                             : 'mb-[14px] size-6',
                           reached
                             ? 'bg-[var(--fg-brand-primary)] text-[var(--fg-white)]'
-                            : 'border-[2px] border-divider bg-primary text-senary',
+                            : 'border-2 border-divider bg-primary text-senary',
                           hasVariant &&
                             (current
                               ? [
@@ -195,11 +195,11 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                         className={cn(
                           'z-[1] flex items-center justify-center rounded-full transition-colors duration-200',
                           current
-                            ? 'mb-[12px] size-[26px] border-[2px] border-tertiary outline-4 outline-[var(--fg-brand-primary)]'
+                            ? 'mb-[12px] size-[26px] border-2 border-tertiary outline-4 outline-[var(--fg-brand-primary)]'
                             : 'mb-[14px] size-6',
                           reached
                             ? 'bg-[var(--fg-brand-primary)] text-[var(--fg-white)]'
-                            : 'border-[2px] border-divider bg-primary text-senary',
+                            : 'border-2 border-divider bg-primary text-senary',
                           hasVariant &&
                             (current
                               ? [

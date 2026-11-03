@@ -279,7 +279,7 @@ export const MountVisitedForm: Story = {
             id="story-project-name"
             type="text"
             placeholder="Enter name..."
-            className="border px-2.5 py-1.5 rounded-md text-sm w-full"
+            className="border border-secondary px-2.5 py-1.5 rounded-md text-sm w-full"
           />
         </TabsContent>
         <TabsContent value="advanced" className="p-3">
@@ -293,7 +293,7 @@ export const MountVisitedForm: Story = {
             id="story-api-key"
             type="text"
             placeholder="Enter key..."
-            className="border px-2.5 py-1.5 rounded-md text-sm w-full"
+            className="border border-secondary px-2.5 py-1.5 rounded-md text-sm w-full"
           />
         </TabsContent>
       </Tabs>
@@ -328,7 +328,7 @@ export const ForceMountOnePanel: Story = {
           <input
             id="story-draft"
             type="text"
-            className="border px-2.5 py-1.5 rounded-md text-sm w-full"
+            className="border border-secondary px-2.5 py-1.5 rounded-md text-sm w-full"
           />
         </TabsContent>
       </Tabs>

@@ -165,9 +165,13 @@ export default tseslint
         // For a single item, use direct Tailwind CSS or merge into an adjacent
         // list. A warning while existing single-item lists are converted.
         'waldur-custom/no-lone-property-item-in-list': 'warn',
-        // Bootstrap's .border is !important in an earlier layer, so a Tailwind
-        // border colour next to it never paints. Autofixes to border-[1px].
-        'waldur-custom/no-bootstrap-border-with-tailwind-color': 'error',
+        // Tailwind's `border` sets only the width (Bootstrap's .border, retired
+        // in #478, also drew --border-secondary): a bare one needs a colour.
+        // Autofixes to `border border-secondary`.
+        'waldur-custom/require-border-color': 'error',
+        // Tailwind's border widths are pixels: `border`, `border-t-2`, not
+        // `border-[1px]` (the workaround while Bootstrap owned `border`).
+        'waldur-custom/no-arbitrary-border-width': 'error',
         // State colours come from the status matrix (semantic/status.css);
         // deliberate exceptions carry an eslint-disable with the reason.
         'waldur-custom/no-raw-status-ramp': 'error',
@@ -187,8 +191,8 @@ export default tseslint
         // Bootstrap emits no colour utility any more: its old class names
         // (text-danger, bg-light, border-bottom, …) paint nothing.
         'waldur-custom/no-bootstrap-color-utility': 'error',
-        // Bootstrap utilities _utilities.scss no longer generates (unused, or
-        // only ever used at the base size) compile to nothing.
+        // Bootstrap generates no utility (#478): its spellings Tailwind does not
+        // share compile to nothing.
         'waldur-custom/no-retired-bootstrap-utility': 'error',
         // A class that neither Tailwind nor any stylesheet defines styles
         // nothing — a typo or a leftover. Existing ones are listed per file
@@ -436,7 +440,8 @@ export default tseslint
     {
       // The rules' own fixtures contain the class lists they flag.
       files: [
-        'packages/eslint-plugin-waldur/rules/no-bootstrap-border-with-tailwind-color.test.ts',
+        'packages/eslint-plugin-waldur/rules/require-border-color.test.ts',
+        'packages/eslint-plugin-waldur/rules/no-arbitrary-border-width.test.ts',
         'packages/eslint-plugin-waldur/rules/no-raw-status-ramp.test.ts',
         'packages/eslint-plugin-waldur/rules/no-bootstrap-color-utility.test.ts',
         'packages/eslint-plugin-waldur/rules/no-bootstrap-layout-utility.test.ts',
@@ -458,7 +463,8 @@ export default tseslint
         'waldur-custom/no-bootstrap-layout-utility': 'off',
         'waldur-custom/require-font-size-scale': 'off',
         'waldur-custom/enforce-border-radius-tokens': 'off',
-        'waldur-custom/no-bootstrap-border-with-tailwind-color': 'off',
+        'waldur-custom/require-border-color': 'off',
+        'waldur-custom/no-arbitrary-border-width': 'off',
         'waldur-custom/prefer-token-utility': 'off',
         'waldur-custom/no-raw-status-ramp': 'off',
       },

@@ -150,7 +150,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
     // the highlight through the rows (options) and Enter opens one. The
     // backend filters, so downshift doesn't filter locally.
     <div>
-      <div className="flex border-b-[1px] border-b-secondary py-1.5 pe-2.5">
+      <div className="flex border-b border-b-secondary py-1.5 pe-2.5">
         <FilterBox
           {...getInputProps({
             type: 'search',
@@ -196,7 +196,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
         )}
       </div>
       {filterOpen && (
-        <div className="flex border-b-[1px] border-b-secondary py-1 px-4">
+        <div className="flex border-b border-b-secondary py-1 px-4">
           {filters.map((filter) => (
             // `component` must keep its identity across renders: an inline
             // function is a new component type each time, so every re-render

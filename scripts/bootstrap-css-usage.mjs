@@ -72,10 +72,6 @@ export const PARTIALS = [
     name: 'bootstrap/scss/helpers',
     scss: "@import 'config'; $theme-colors: (); $aspect-ratios: (); $grid-breakpoints: (xs: 0); @import 'bootstrap/scss/helpers';",
   },
-  {
-    name: 'bootstrap/scss/utilities',
-    scss: "@import 'config'; @import 'utilities'; @import 'bootstrap/scss/utilities/api';",
-  },
 
   // Components (from components/)
   {
@@ -123,10 +119,6 @@ export const PARTIALS = [
   {
     name: 'custom/base',
     scss: "@import 'config'; @import 'legacy/base';",
-  },
-  {
-    name: 'custom/borders',
-    scss: "@import 'config'; @import 'legacy/borders';",
   },
   {
     name: 'custom/buttons',

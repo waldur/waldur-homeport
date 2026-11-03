@@ -100,7 +100,7 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
         />
       )}
 
-      <div className="border rounded-lg overflow-hidden">
+      <div className="border border-secondary rounded-lg overflow-hidden">
         <MonacoEditor
           value={config}
           onChange={() => {}}

@@ -169,9 +169,7 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
                   {availableModes.map((mode) => (
                     <label
                       key={mode.value}
-                      // border-[1px], not Bootstrap's .border: its !important
-                      // colour would override the selected border-brand.
-                      className={`flex items-start gap-2.5 p-2.5 rounded-lg border-[1px] cursor-pointer ${
+                      className={`flex items-start gap-2.5 p-2.5 rounded-lg border cursor-pointer ${
                         input.value === mode.value
                           ? 'border-brand bg-brand-subtle'
                           : 'border-secondary'

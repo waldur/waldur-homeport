@@ -8,10 +8,7 @@ export type CheckSize = 'sm' | 'md';
  * fill, check, dash, dot, track, knob — and read the input's state through
  * Tailwind's `peer-*` variants. No background images, no data URIs.
  *
- * Colours come from waldur-design-tokens/check.css. `border-[1px]`,
- * not `border`: Bootstrap's `.border` utility is `!important` and would
- * replace the colour (see the class-name collision table in
- * docs/tailwind-shadcn-migration-notes.md).
+ * Colours come from waldur-design-tokens/check.css.
  *
  * Motion matches the legacy `$form-check-transition`: 0.15s `ease-in-out`
  * (the CSS keyword, hence `ease-[ease-in-out]` — Tailwind's own `ease-in-out`
@@ -53,7 +50,7 @@ export const BOX_WRAPPER =
  * so a disabled box ignores hover.
  */
 export const BOX_VISUAL =
-  'pointer-events-none [grid-area:1/1] size-full border-[1px] border-solid border-[var(--check-border)] bg-[var(--check-bg)] transition-[background-color,border-color] duration-150 ease-[ease-in-out] motion-reduce:transition-none ' +
+  'pointer-events-none [grid-area:1/1] size-full border border-solid border-[var(--check-border)] bg-[var(--check-bg)] transition-[background-color,border-color] duration-150 ease-[ease-in-out] motion-reduce:transition-none ' +
   'peer-hover:border-[var(--check-border-hover)] ' +
   'peer-checked:border-[var(--check-checked-bg)] peer-checked:bg-[var(--check-checked-bg)] ' +
   'peer-disabled:border-[var(--check-disabled-border)] peer-disabled:bg-[var(--check-disabled-bg)] ' +
@@ -96,7 +93,7 @@ export const SWITCH_WRAPPER = 'relative inline-flex shrink-0 align-middle';
  * the arbitrary `peer-[…]` variants.
  */
 export const SWITCH_TRACK =
-  'pointer-events-none size-full rounded-full border-[1px] border-solid border-[var(--switch-track-border)] bg-[var(--switch-track)] transition-[background-color,border-color] duration-150 ease-[ease-in-out] motion-reduce:transition-none ' +
+  'pointer-events-none size-full rounded-full border border-solid border-[var(--switch-track-border)] bg-[var(--switch-track)] transition-[background-color,border-color] duration-150 ease-[ease-in-out] motion-reduce:transition-none ' +
   'peer-[:hover:enabled:not(:checked)]:bg-[var(--switch-track-hover)] ' +
   'peer-checked:border-[var(--switch-track-checked)] peer-checked:bg-[var(--switch-track-checked)] ' +
   'peer-disabled:bg-[var(--switch-track-disabled)] ' +

@@ -20,7 +20,7 @@ export const TosAcceptedTrendChart: FC<TosAcceptedTrendChartProps> = ({
 
   return (
     <div
-      className="border-[1px] border-secondary rounded-lg"
+      className="border border-secondary rounded-lg"
       style={{ padding: '16px' }}
     >
       <h6 className="mb-2.5">{translate('Accepted consents over time')}</h6>

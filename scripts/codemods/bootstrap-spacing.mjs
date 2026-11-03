@@ -9,7 +9,7 @@
 //
 // Bootstrap and Tailwind use the same names (`mb-4`, `p-3`, `gap-2`) for
 // different values, and Bootstrap's are `!important`, so until a family is
-// retired from _utilities.scss every use of it renders Bootstrap's value.
+// retired from Bootstrap's utilities every use of it renders Bootstrap's value.
 // Run this for a family in the same change that removes the family from
 // $utilities: rewriting `mb-4` to Tailwind's `mb-3` while Bootstrap still
 // emits `.mb-3` would render Bootstrap's 9.75px instead of 12px.

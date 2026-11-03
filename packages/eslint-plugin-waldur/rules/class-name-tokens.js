@@ -151,7 +151,8 @@ const isNativeElement = (node) =>
 export const getNativeElementName = (node) =>
   isNativeElement(node) ? node.name.name : null;
 
-export const CLASS_HELPERS = /^(?:classNames|classnames|cn|clsx|cx|twMerge)$/;
+export const CLASS_HELPERS =
+  /^(?:classNames|classnames|cn|clsx|cx|twMerge|cva)$/;
 /** Wrappers a class list passes through on its way to an attribute. */
 const PASS_THROUGH = new Set([
   'ConditionalExpression',

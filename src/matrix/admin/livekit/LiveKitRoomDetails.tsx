@@ -106,7 +106,7 @@ const TrackRow: FC<{ track: LiveKitTrack }> = ({ track }) => {
 const ParticipantRow: FC<{ participant: LiveKitParticipant }> = ({
   participant,
 }) => (
-  <div className="border-b-[1px] border-b-secondary py-2.5">
+  <div className="border-b border-b-secondary py-2.5">
     <div className="flex items-center justify-between">
       <span className="font-medium">{participant.identity}</span>
       <Badge

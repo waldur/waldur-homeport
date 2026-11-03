@@ -204,7 +204,7 @@ export const ResourceSelectionTable: FC<ResourceSelectionTableProps> = ({
       </div>
 
       <div className="table-responsive">
-        <table className="table table-row-bordered table-expandable align-middle table-rounded border-[1px] border-divider">
+        <table className="table table-row-bordered table-expandable align-middle table-rounded border border-divider">
           <thead>
             <tr>
               <th>{translate('Resource name')}</th>

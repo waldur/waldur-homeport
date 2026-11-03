@@ -86,7 +86,7 @@ function RampTile({ cssVar, step }: { cssVar: string; step: string }) {
   return (
     <div
       title={cssVar}
-      className="overflow-hidden rounded-md border-[1px] border-secondary bg-[var(--card-bg)]"
+      className="overflow-hidden rounded-md border border-secondary bg-[var(--card-bg)]"
     >
       <div
         className="flex h-14 items-end px-1.5 pb-1.5 font-mono text-xs font-semibold"
@@ -157,7 +157,7 @@ function ComparisonBar({ cssVar }: { cssVar: string }) {
   return (
     <div
       title={cssVar}
-      className="flex h-9 items-center justify-end rounded-md border-[1px] border-secondary px-1.5 font-mono text-[10px] uppercase"
+      className="flex h-9 items-center justify-end rounded-md border border-secondary px-1.5 font-mono text-[10px] uppercase"
       style={{
         backgroundColor: `var(${cssVar})`,
         color: readableOn(value) ?? 'inherit',

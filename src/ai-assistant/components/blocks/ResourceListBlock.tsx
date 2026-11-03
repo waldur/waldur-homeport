@@ -95,7 +95,7 @@ const OfflineResourceList: FC<UIBlockProps> = ({ block }) => {
   }
 
   return (
-    <div className="aui-resource-list-block border rounded-lg bg-tertiary dark:bg-quaternary p-2.5">
+    <div className="aui-resource-list-block border border-secondary rounded-lg bg-tertiary dark:bg-quaternary p-2.5">
       <div className="flex items-center justify-between mb-1.5 gap-1.5 flex-wrap">
         <div className="flex items-center gap-1.5">
           <TableIcon weight="bold" />

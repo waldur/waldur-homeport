@@ -280,7 +280,7 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
                 {hasUserSubmittedOptions ? (
                   // Rounding lives on the outer box so its `overflow-hidden`
                   // cannot override `table-responsive`'s horizontal scroll.
-                  <div className="border rounded-lg overflow-hidden">
+                  <div className="border border-secondary rounded-lg overflow-hidden">
                     <div className="table-responsive">
                       <table className="table table-sm table-row-bordered mb-0 align-middle">
                         <thead>

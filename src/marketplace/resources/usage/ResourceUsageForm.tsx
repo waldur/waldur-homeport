@@ -376,7 +376,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
               })}
             </TabsList>
             {wrappedComponents.length > 0 ? (
-              <div className="flex items-end border-b-[1px] border-b-secondary mb-3">
+              <div className="flex items-end border-b border-b-secondary mb-3">
                 <div>
                   <Menu>
                     <div className="relative inline-flex">

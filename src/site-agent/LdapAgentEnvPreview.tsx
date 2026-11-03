@@ -94,7 +94,7 @@ export const LdapAgentEnvPreview: FC<LdapAgentEnvPreviewProps> = ({
         />
       )}
 
-      <div className="border rounded-lg overflow-hidden">
+      <div className="border border-secondary rounded-lg overflow-hidden">
         <MonacoEditor
           value={config}
           onChange={() => {}}

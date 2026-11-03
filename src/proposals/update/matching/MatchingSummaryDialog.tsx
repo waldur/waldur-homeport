@@ -235,7 +235,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
               'When you click "Compute matrix", the system calculates how well each reviewer matches each proposal based on their expertise and the proposal content.',
             )}
           </p>
-          <div className="border rounded-lg p-3">
+          <div className="border border-secondary rounded-lg p-3">
             <MermaidChart
               code={generateAffinityFlowDiagram(config)}
               className="text-center"
@@ -311,7 +311,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
               'Once affinity scores are computed, an assignment algorithm can be used to optimally assign reviewers to proposals while respecting constraints.',
             )}
           </p>
-          <div className="border rounded-lg p-3">
+          <div className="border border-secondary rounded-lg p-3">
             <MermaidChart
               code={generateAssignmentDiagram(config)}
               className="text-center"

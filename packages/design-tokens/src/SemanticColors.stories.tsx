@@ -170,7 +170,7 @@ export const Status: Story = {
   render: () => (
     <TokenPage title="Status matrix" intro={status.doc}>
       <div
-        className="mb-5 grid items-center gap-x-6 rounded-md border-[1px] border-secondary bg-[var(--card-bg)] px-3 [&>.contents>*]:border-t-[1px] [&>.contents>*]:border-t-secondary"
+        className="mb-5 grid items-center gap-x-6 rounded-md border border-secondary bg-[var(--card-bg)] px-3 [&>.contents>*]:border-t [&>.contents>*]:border-t-secondary"
         style={{ gridTemplateColumns: '6rem repeat(3, auto) 1fr' }}
       >
         {['Intent', '-bg + -fg', '-solid', '-fg', 'Contrast of -fg'].map(

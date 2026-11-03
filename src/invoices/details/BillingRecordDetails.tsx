@@ -26,7 +26,7 @@ export const BillingRecordDetails: FC<BillingRecordDetailsProps> = ({
       showVat={false}
       setTotalFiltered={setTotalFiltered}
       footer={
-        <table className="table bg-secondary border-t-[1px] border-t-secondary border-b-[1px] border-b-secondary align-middle">
+        <table className="table bg-secondary border-t border-t-secondary border-b border-b-secondary align-middle">
           <tbody>
             <tr className="text-sm font-medium">
               {totalFiltered !== null && (

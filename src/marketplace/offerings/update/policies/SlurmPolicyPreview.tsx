@@ -141,7 +141,7 @@ const CarryoverDetails: FC<CarryoverDetailsProps> = ({
       <h6 className="font-semibold mb-2.5">
         {translate('Carryover Calculation')}
       </h6>
-      <div className="border rounded-lg p-2.5">
+      <div className="border border-secondary rounded-lg p-2.5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
           <div>
             <div className="mb-1.5">
@@ -219,7 +219,7 @@ const CarryoverInfo: FC<CarryoverInfoProps> = ({
       <h6 className="font-semibold mb-2.5">
         {translate('Carryover Calculation')}
       </h6>
-      <div className="border rounded-lg p-2.5">
+      <div className="border border-secondary rounded-lg p-2.5">
         <div className="flex items-center mb-1.5">
           <span className="me-1.5">{translate('Base Allocation')}</span>
           <span className="font-medium">{baseAllocation.toLocaleString()}</span>
@@ -320,7 +320,7 @@ const DateProjections: FC<DateProjectionsProps> = ({
   return (
     <div className="mb-5">
       <h6 className="font-semibold mb-2.5">{translate('Date Projections')}</h6>
-      <div className="border rounded-lg p-2.5">
+      <div className="border border-secondary rounded-lg p-2.5">
         {currentQosStatus && (
           <div className="mb-2.5">
             <span className="text-quaternary">

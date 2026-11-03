@@ -133,7 +133,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                   .slice(0, MAX_COMPONENTS_DISPLAY)
                   .map((component) => (
                     <div key={component.type}>
-                      <div className="border rounded-lg p-1.5 text-center">
+                      <div className="border border-secondary rounded-lg p-1.5 text-center">
                         <div className="font-medium">
                           {component.limit
                             ? `${component.usage}/${component.limit}`
@@ -169,7 +169,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
               {endpoints.map((endpoint, index) => (
                 <div
                   key={index}
-                  className="flex items-center border rounded-lg px-1.5 py-1"
+                  className="flex items-center border border-secondary rounded-lg px-1.5 py-1"
                 >
                   <a
                     href={endpoint.url}

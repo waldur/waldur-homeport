@@ -418,7 +418,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
 
           {/* Tabs */}
           {props.nav ? (
-            <div className="table-tabs border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto card-header">
+            <div className="table-tabs border-b border-b-secondary items-stretch py-0 min-h-auto card-header">
               {props.nav}
             </div>
           ) : null}
@@ -430,7 +430,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                   props.filtersStorage.length > 0)) && (
                 <div
                   className={classNames(
-                    'border-b-[1px] border-b-secondary min-h-auto py-1.5',
+                    'border-b border-b-secondary min-h-auto py-1.5',
                     {
                       hidden:
                         !showFilterMenuToggle &&
@@ -459,7 +459,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
           {!closedHiddenActionsMessage &&
             props.hasOptionalColumns &&
             props.activeColumns[COLUMN_ACTIONS_KEY] === false && (
-              <div className="border-b-[1px] border-b-secondary card-header">
+              <div className="border-b border-b-secondary card-header">
                 <HiddenActionsMessage
                   toggleColumn={props.toggleColumn}
                   close={() => setClosedHiddenActionsMessage(true)}

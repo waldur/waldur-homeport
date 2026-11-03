@@ -119,7 +119,7 @@ const Case = ({
     <p className="m-0 text-sm text-tertiary">{note}</p>
     <div
       data-testid={title}
-      className={`w-[480px] rounded-lg border-[1px] border-dashed border-secondary p-2.5 ${className}`}
+      className={`w-[480px] rounded-lg border border-dashed border-secondary p-2.5 ${className}`}
     >
       {children}
     </div>

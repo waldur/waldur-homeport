@@ -122,7 +122,7 @@ export const AdministrationLanguages: FunctionComponent = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-5 -mb-1">
         {filteredLanguages.map((language: { code: string; label: string }) => (
           <div key={language.code}>
-            <div className="border-b-[1px] border-b-secondary py-4">
+            <div className="border-b border-b-secondary py-4">
               {canEdit ? (
                 <Switch
                   data-testid={`language_${language.code}`}

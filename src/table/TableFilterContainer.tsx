@@ -44,7 +44,7 @@ export const TableFilterContainer: FC<TableFilterContainerProps> = (props) => {
         <Accordion type="multiple">{props.filters}</Accordion>
       </div>
       {props.footer && (
-        <div className="py-3 px-5 border-t-[1px] border-t-secondary">
+        <div className="py-3 px-5 border-t border-t-secondary">
           {props.footer}
         </div>
       )}

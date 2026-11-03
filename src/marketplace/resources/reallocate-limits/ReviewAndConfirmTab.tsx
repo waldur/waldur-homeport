@@ -95,7 +95,7 @@ export const ReviewAndConfirmTab: FC<ReviewAndConfirmTabProps> = ({
       </div>
 
       <div className="table-responsive">
-        <table className="table table-row-bordered table-rounded border-[1px] border-divider">
+        <table className="table table-row-bordered table-rounded border border-divider">
           <thead>
             <tr>
               <th>{translate('Resource name')}</th>

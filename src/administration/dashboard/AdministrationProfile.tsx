@@ -35,14 +35,14 @@ export const AdministrationProfile = ({
       // Health check is still loading
       return {
         label: translate('Checking...'),
-        className: 'border-[1px] border-warning text-warning',
+        className: 'border border-warning text-warning',
       };
     }
     return {
       label: healthy ? translate('Healthy') : translate('Error'),
       className: healthy
-        ? 'border-[1px] border-success text-success'
-        : 'border-[1px] border-danger text-danger',
+        ? 'border border-success text-success'
+        : 'border border-danger text-danger',
     };
   };
 

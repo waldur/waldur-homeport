@@ -90,7 +90,7 @@ const AffinityScoreWithTooltip: FC<{ row: ReviewerSuggestion }> = ({ row }) => {
       <div>
         {translate('Text similarity')}: {formatScore(row.text_score)}
       </div>
-      <div className="mt-1 pt-1 border-t-[1px] border-t-secondary">
+      <div className="mt-1 pt-1 border-t border-t-secondary">
         <strong>
           {translate('Combined')}: {formatScore(row.affinity_score)}
         </strong>

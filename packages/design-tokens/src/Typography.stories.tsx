@@ -142,13 +142,13 @@ const SIZES = typography.tokens
 export const Tokens: Story = {
   render: () => (
     <TokenPage title="Type tokens" intro={typography.doc}>
-      <div className="mb-5 rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-3">
+      <div className="mb-5 rounded-md border border-secondary bg-[var(--card-bg)] p-3">
         <Mono className="text-xs text-primary">{fontStack?.name}</Mono>
         <Mono className="ml-3 text-[11px] text-tertiary">
           {fontStack && Object.values(fontStack.values)[0]}
         </Mono>
       </div>
-      <div className="grid grid-cols-[8rem_10rem_1fr] items-baseline gap-y-4 rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-3">
+      <div className="grid grid-cols-[8rem_10rem_1fr] items-baseline gap-y-4 rounded-md border border-secondary bg-[var(--card-bg)] p-3">
         {SIZES.map((size) => (
           <div key={size} className="contents">
             <Mono className="text-xs text-primary">text-{size}</Mono>

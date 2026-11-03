@@ -75,7 +75,7 @@ export const CostPolicyCostBar: FC<{ figures: CostPolicyFigures }> = ({
           {segments.map((segment) => (
             <div
               key={segment.key}
-              className="h-full border-r-[2px] border-r-primary last:border-r-0"
+              className="h-full border-r-2 border-r-primary last:border-r-0"
               style={{
                 width: `${(segment.value / scale) * 100}%`,
                 backgroundColor: segment.color,
@@ -85,7 +85,7 @@ export const CostPolicyCostBar: FC<{ figures: CostPolicyFigures }> = ({
           ))}
         </div>
         <div
-          className="absolute top-5 bottom-0 border-l-[2px] border-dashed border-l-primary"
+          className="absolute top-5 bottom-0 border-l-2 border-dashed border-l-primary"
           style={{ left: `${limitAt}%` }}
           aria-hidden
         />

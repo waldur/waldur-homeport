@@ -28,7 +28,7 @@ const px = (v: string) => Number.parseFloat(v);
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-3">
+    <div className="rounded-md border border-secondary bg-[var(--card-bg)] p-3">
       {children}
     </div>
   );
@@ -126,7 +126,7 @@ function RadiusTile({
     <div className="flex flex-col items-center gap-1.5 text-center">
       <div
         ref={ref}
-        className={`size-16 border-[1px] border-[var(--border-brand-solid)] bg-brand-subtle ${className ?? ''}`}
+        className={`size-16 border border-[var(--border-brand-solid)] bg-brand-subtle ${className ?? ''}`}
         // eslint-disable-next-line waldur-custom/enforce-border-radius-tokens
         style={source ? { borderRadius: `var(${name}, ${source})` } : undefined}
       />

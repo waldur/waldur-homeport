@@ -680,7 +680,7 @@ highlighted row, a validation message), use the matrix tokens, never a raw ramp 
 // Good - adapts to dark mode, contrast-checked on every surface
 <div className="bg-warning-subtle text-warning">…</div>
 <span className="text-danger">{error}</span>
-<div className="border-[1px] border-danger-subtle">…</div>
+<div className="border border-danger-subtle">…</div>
 
 // Bad - needs a dark: twin, unchecked contrast, drifts from Badge/AlertItem
 <div className="bg-warning-50 text-warning-700 dark:bg-warning-900">…</div>

@@ -98,7 +98,7 @@ export const QuestionGeneralForm = ({
           <QuestionLikertFields />
           <hr className="my-4" />
           <div
-            className="bg-tertiary dark:bg-quaternary border rounded-lg p-2.5 mb-4"
+            className="bg-tertiary dark:bg-quaternary border border-secondary rounded-lg p-2.5 mb-4"
             style={{ borderColor: 'var(--border-secondary)' }}
           >
             <div

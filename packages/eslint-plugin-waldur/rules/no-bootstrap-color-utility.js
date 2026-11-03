@@ -2,7 +2,8 @@
  * ESLint rule: colour comes from Tailwind and the design tokens, not from
  * Bootstrap's colour classes.
  *
- * Bootstrap no longer emits any colour utility (_utilities.scss): its
+ * Bootstrap no longer emits any colour utility (its utility API is not
+ * imported, #478): its
  * `.text-*`, `.bg-*` and `.border-*` colour classes were `!important` in the
  * `bootstrap` cascade layer, painted the theme-inverted SCSS colours, and beat
  * every Tailwind utility, so a `dark:` or `hover:` variant beside one never

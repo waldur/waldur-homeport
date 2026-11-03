@@ -152,7 +152,7 @@ export const GroupInvitationCreateDialog = ({
               iconNode={<UsersThreeIcon weight="bold" />}
               iconColor="success"
             >
-              <div className="pb-4 mb-4 border-b-[1px] border-b-secondary">
+              <div className="pb-4 mb-4 border-b border-b-secondary">
                 <RadioGroup
                   name="type"
                   label={translate('Invitation type')}

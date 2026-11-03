@@ -59,7 +59,7 @@ export const ManagedProjectNotesDialog: React.FC<
                 {notes.map((note, index) => (
                   <div
                     key={index}
-                    className="border-b-[1px] border-b-secondary pb-1.5"
+                    className="border-b border-b-secondary pb-1.5"
                   >
                     <div className="text-quaternary small">
                       {note.author} &middot; {formatDateTime(note.timestamp)}

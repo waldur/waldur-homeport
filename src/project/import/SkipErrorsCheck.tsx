@@ -13,7 +13,7 @@ export const SkipErrorsCheck: FC<{
     size="sm"
     checked={checked}
     onChange={onChange}
-    className="border-t-[1px] border-t-secondary pt-2.5"
+    className="border-t border-t-secondary pt-2.5"
     label={translate('Skip records with errors')}
   />
 );

@@ -52,7 +52,7 @@ export const CustomContainer: Story = {
   args: {
     message: 'Loading preview...',
     className:
-      'border-[1px] border-dashed border-secondary rounded-lg p-6 bg-primary',
+      'border border-dashed border-secondary rounded-lg p-6 bg-primary',
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

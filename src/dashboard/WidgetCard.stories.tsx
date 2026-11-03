@@ -21,7 +21,7 @@ type Story = StoryObj<typeof WidgetCard>;
 const Chart = () => (
   <div
     aria-hidden
-    className="h-16 w-40 rounded-md bg-tertiary border-[1px] border-secondary"
+    className="h-16 w-40 rounded-md bg-tertiary border border-secondary"
   />
 );
 

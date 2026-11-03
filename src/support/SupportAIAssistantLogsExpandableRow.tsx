@@ -191,7 +191,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
         )}
         <div
           className={classNames('p-2.5 rounded-lg chat-log-bubble', {
-            'border-l-[1px] border-l-secondary border-3':
+            'border-l border-l-secondary border-3':
               selectedMessage.is_flagged || feedbackSentiment !== null,
             'border-danger':
               selectedMessage.is_flagged || feedbackSentiment === 'negative',
@@ -316,7 +316,7 @@ export const SupportAIAssistantLogsExpandableRow: FunctionComponent<OwnProps> =
         <ExpandableContainer>
           <OfflineBlockContext.Provider value={true}>
             <div className="flex flex-col">
-              <div className="flex items-center gap-1.5 pb-1.5 border-b-[1px] border-b-secondary">
+              <div className="flex items-center gap-1.5 pb-1.5 border-b border-b-secondary">
                 <strong>{row.name}</strong>
                 <TokenUsageBadge
                   id={`title-gen-tokens-${row.uuid}`}

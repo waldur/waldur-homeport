@@ -59,11 +59,10 @@ describe('Input', () => {
     );
   });
 
-  it('uses border-[1px], never the Bootstrap-colliding border class', () => {
+  it('draws a 1px border in the input border colour', () => {
     render(<Input aria-label="Name" />);
     const input = screen.getByRole('textbox');
-    expect(input).toHaveClass('border-[1px]');
-    expect(input).not.toHaveClass('border');
+    expect(input).toHaveClass('border', 'border-[var(--input-border)]');
   });
 
   it('swaps the surface for the solid variant', () => {

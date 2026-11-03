@@ -31,7 +31,7 @@ export const ListItemCard: FC<OfferingCardVariantProps> = ({
       })}
       disabled={!isAllowed}
     >
-      <div className="card card-bordered h-full cursor-pointer border-hover-brand">
+      <div className="card card-bordered h-full cursor-pointer hover:border-brand">
         <div className="card-body p-3 flex gap-3">
           {/* Left content */}
           <div className="grow overflow-hidden">

@@ -27,7 +27,7 @@ const Panel = ({ keepMounted }: { keepMounted?: boolean }) => (
   <div className="max-w-sm bg-[var(--page-bg)] p-5">
     <Collapsible
       keepMounted={keepMounted}
-      className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] text-primary"
+      className="rounded-md border border-secondary bg-[var(--card-bg)] text-primary"
     >
       <CollapsibleTrigger className="group flex w-full items-center justify-between px-5 py-4 text-sm font-semibold">
         Advanced settings
@@ -43,7 +43,7 @@ const Panel = ({ keepMounted }: { keepMounted?: boolean }) => (
           <label htmlFor={`note-${keepMounted}`}>Note</label>
           <input
             id={`note-${keepMounted}`}
-            className="rounded-md border-[1px] border-secondary px-2.5 py-1.5"
+            className="rounded-md border border-secondary px-2.5 py-1.5"
             placeholder="Type, collapse, reopen"
           />
         </div>

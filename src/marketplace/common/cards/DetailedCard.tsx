@@ -46,9 +46,9 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
       })}
       disabled={!isAllowed}
     >
-      <div className="card card-bordered h-full overflow-hidden cursor-pointer border-hover-brand">
+      <div className="card card-bordered h-full overflow-hidden cursor-pointer hover:border-brand">
         {/* Image section */}
-        <div className="h-[120px] flex items-center justify-center border-b-[1px] border-b-secondary bg-brand-subtle">
+        <div className="h-[120px] flex items-center justify-center border-b border-b-secondary bg-brand-subtle">
           {image ? (
             <img
               alt={offering.name}

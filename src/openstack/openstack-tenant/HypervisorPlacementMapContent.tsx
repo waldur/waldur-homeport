@@ -97,9 +97,12 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
         const hasAnyServerGroups = serverGroups.length > 0;
 
         return (
-          <div key={group.hostname} className="border rounded-lg">
+          <div
+            key={group.hostname}
+            className="border border-secondary rounded-lg"
+          >
             {/* Hypervisor header */}
-            <div className="flex items-center gap-1.5 px-3 py-2.5 border-b-[1px] border-b-secondary bg-brand-subtle">
+            <div className="flex items-center gap-1.5 px-3 py-2.5 border-b border-b-secondary bg-brand-subtle">
               {isUnassigned ? (
                 <QuestionIcon className="text-warning" weight="bold" />
               ) : (

@@ -193,7 +193,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
             placeholder={translate('Search...')}
             onChange={(e) => setQuery(e.target.value)}
             inputClassName="border-0 shadow-none"
-            className="border-b-[1px] border-b-secondary"
+            className="border-b border-b-secondary"
             autoFocus
           />
 

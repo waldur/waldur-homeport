@@ -148,7 +148,7 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-5 -mb-1">
               {filteredCountries.map((country) => (
                 <div key={country.value}>
-                  <div className="border-b-[1px] border-b-secondary py-4">
+                  <div className="border-b border-b-secondary py-4">
                     <BooleanGroup
                       data-testid={`country_${country.value}`}
                       name={`countries.${country.value}`}

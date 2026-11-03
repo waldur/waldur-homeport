@@ -52,7 +52,7 @@ export const ResourcesMenuFilterButton = () => {
             size={9}
             blink={false}
             variant="primary"
-            className="-me-1.5 mt-1.5 border border-2"
+            className="-me-1.5 mt-1.5 border border-secondary border-2"
           />
         )}
       </button>

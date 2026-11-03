@@ -47,13 +47,13 @@ export const RightDrawer: Story = {
             </SheetDescription>
           </SheetHeader>
           <div className="p-3 space-y-4 text-sm text-quaternary">
-            <div className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-2.5">
+            <div className="rounded-md border border-secondary bg-[var(--card-bg)] p-2.5">
               <div className="font-medium text-primary">Instance UUID</div>
               <div className="font-mono text-xs text-quinary mt-1">
                 9c42b10a-48d1-4cb3-a7bb-1294dbe8a901
               </div>
             </div>
-            <div className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] p-2.5">
+            <div className="rounded-md border border-secondary bg-[var(--card-bg)] p-2.5">
               <div className="font-medium text-primary">Network Interfaces</div>
               <div className="text-xs text-quinary mt-1">
                 eth0 (10.0.0.15/24)

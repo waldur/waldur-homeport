@@ -131,7 +131,7 @@ export function SidebarMenuBadge({
   return (
     <span
       className={cn(
-        'inline-flex min-w-6 items-center justify-center rounded-full border-[1px] border-solid border-[color:var(--nav-badge-border)] bg-transparent px-[9px] py-[1px] text-sm text-[var(--nav-badge-text)] group-data-[collapsible=icon]/panel:hidden',
+        'inline-flex min-w-6 items-center justify-center rounded-full border border-solid border-[color:var(--nav-badge-border)] bg-transparent px-[9px] py-[1px] text-sm text-[var(--nav-badge-text)] group-data-[collapsible=icon]/panel:hidden',
         className,
       )}
       {...props}

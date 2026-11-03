@@ -34,7 +34,7 @@ export const ResourceOrderErrorDialog = ({
         {tracebackVisible ? (
           <PropertyItem
             label={translate('Error traceback')}
-            valueClass="text-pre"
+            valueClass="whitespace-pre"
           >
             {error_traceback ? (
               <div style={{ height: 300, overflow: 'scroll' }}>

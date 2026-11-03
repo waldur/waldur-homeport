@@ -141,7 +141,7 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
                 PROGRESS_FILL[part.variant ?? 'primary'],
                 PROGRESS_LABEL[part.variant ?? 'primary'],
                 index > 0 &&
-                  'border-l-[1px] border-[var(--progress-segment-divider)]',
+                  'border-l border-[var(--progress-segment-divider)]',
               )}
               style={{ width: `${widths[index]}%` }}
             >

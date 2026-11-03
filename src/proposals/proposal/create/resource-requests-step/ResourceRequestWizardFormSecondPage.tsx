@@ -173,7 +173,7 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
           )}
           {typeof plan === 'object' && (
             <>
-              <div className="flex gap-5 border-b-[1px] border-b-secondary mb-4">
+              <div className="flex gap-5 border-b border-b-secondary mb-4">
                 <div className="grow">
                   {!isAward && (
                     <p className="mb-0">

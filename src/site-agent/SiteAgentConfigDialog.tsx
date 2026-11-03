@@ -201,7 +201,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
             </button>
           </div>
           <div
-            className="border rounded-lg p-2.5"
+            className="border border-secondary rounded-lg p-2.5"
             style={{ maxHeight: '200px', overflowY: 'auto' }}
           >
             {offerings.map((offering) => (

@@ -84,7 +84,7 @@ export const CarouselLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
                   <span>
                     <CategoryLink
                       item={category}
-                      className="category-carousel-item border-hover-brand"
+                      className="category-carousel-item hover:border-brand"
                     >
                       <div className="category-icon-wrapper">
                         <CategoryThumbnail

@@ -176,7 +176,7 @@ export const ProviderCard: FC<ProviderCardProps> = ({
   };
 
   return (
-    <div className="card bg-tertiary dark:bg-quaternary min-h-[150px] border-[1px] border-transparent hover:border-secondary cursor-pointer">
+    <div className="card bg-tertiary dark:bg-quaternary min-h-[150px] border border-transparent hover:border-secondary cursor-pointer">
       <div className="card-body pe-4">
         <div className="flex items-center h-full">
           <div className="flex flex-row justify-between h-full grow">

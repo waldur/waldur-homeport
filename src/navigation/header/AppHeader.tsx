@@ -131,7 +131,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
           {isAssistantEnabled(user) && <LLMChatDrawerToggle />}
           <ThemeToggle />
           {Boolean(user) && isSmallScr && (
-            <span className="h-[40px] border-r-[1px] border-r-secondary self-center ms-[0.25rem]" />
+            <span className="h-[40px] border-r border-r-secondary self-center ms-[0.25rem]" />
           )}
           <div className="flex items-center ms-[0.75rem]">
             <UserDropdownMenu />

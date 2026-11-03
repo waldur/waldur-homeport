@@ -5,20 +5,19 @@ import { cn } from '../cn';
 /**
  * Tailwind styling for react-select's `unstyled` mode, replacing the old
  * classNamePrefix + SCSS approach. Two recurring cascade gotchas show up
- * throughout this file, flagged inline only where they bite:
+ * throughout this file, flagged inline only where they bite (the second
+ * one no longer can, but explains why some values are written as they are):
  *
  * 1. react-select bakes a few properties (control `minHeight`, option
  *    `fontSize`/`display`) unconditionally, *outside* its own
  *    `unstyled ? {} : {...}` branches, as unlayered emotion CSS. Unlayered
  *    beats a normal-priority Tailwind utility regardless of source order,
  *    so those spots need the `!` important modifier.
- * 2. Bootstrap 5 generates `!important` on every utility by default, so a
- *    Tailwind utility that happens to share Bootstrap's literal class name
- *    (`border`, `shadow-sm`, `shadow-lg`) loses even though Tailwind's
- *    `utilities` layer normally outranks `bootstrap`: cascade layers order
- *    `!important` declarations in reverse (see src/tailwind.css's own
- *    `.collapse` comment). Spelling the same value as an arbitrary utility
- *    (`border-[1px]`, `shadow-[...]`) sidesteps the name collision.
+ * 2. Bootstrap used to generate `!important` utilities under Tailwind's
+ *    names (`border`, `shadow-sm`, `shadow-lg`), which beat Tailwind's
+ *    despite its later layer, so this file spelled some values as
+ *    arbitrary utilities (`shadow-[...]`). Bootstrap generates no utility
+ *    any more (#478); the names are Tailwind's.
  *
  * Values throughout are pinned to the live pre-migration (Bootstrap/SCSS)
  * deployment via computed-style diffing, not eyeballed.
@@ -65,10 +64,9 @@ export const getSelectTailwindClassNames = <
         // host — `.card-header` sets `font-weight: 700`, which rendered the
         // value and placeholder bold in every card-toolbar select.
         'flex items-center justify-between w-full transition-colors font-normal',
-        // Gotcha #2: bare `border`/`rounded-md` would collide with
-        // Bootstrap. 8px radius matches the old control's $border-radius
-        // (Tailwind's `rounded-md` step is 6px).
-        'rounded-lg border-[1px] border-solid bg-primary',
+        // 8px radius matches the old control's $border-radius (Tailwind's
+        // `rounded-md` step is 6px).
+        'rounded-lg border border-solid bg-primary',
         // Gotcha #1: `min-h-*!` overrides react-select's forced 38px.
         // Heights below match the old control's measured height per
         // variant; `px-[11px]` doubles as the search-icon-to-border gap
@@ -83,9 +81,8 @@ export const getSelectTailwindClassNames = <
           ? 'border-danger-subtle ring-1 ring-[var(--status-danger-border)]'
           : isFocused
             ? // --border-brand: the old focus color ($border-brand),
-              // brand-300 in light and brand-400 in dark. No `shadow-sm` — the old focused control has
-              // exactly one box-shadow layer (this ring), and the name
-              // collides with Bootstrap's own `.shadow-sm` per gotcha #2.
+              // brand-300 in light and brand-400 in dark. No shadow: the old focused control has
+              // exactly one box-shadow layer (this ring).
               'border-[var(--border-brand)] ring-1 ring-[var(--border-brand)]'
             : // eslint-disable-next-line waldur-custom/require-dark-pair -- a hover edge: brand-500 is 3.6:1 on the dark field, over the 3:1 non-text minimum
               'border-secondary hover:border-brand-500',
@@ -162,11 +159,10 @@ export const getSelectTailwindClassNames = <
     menu: () =>
       cn(
         'metronic-select__menu',
-        // Gotcha #2 again for `border`/`shadow-lg`. Radius and shadow
-        // match the old menu's own values (a 1px outline plus a soft
+        // Radius and shadow match the old menu's own values (a 1px outline plus a soft
         // 4px/11px drop shadow — the old menu has no real `border-width`
         // either, just this shadow).
-        'z-[9999] mt-[8px] overflow-hidden rounded-lg border-[1px] border-solid border-secondary',
+        'z-[9999] mt-[8px] overflow-hidden rounded-lg border border-solid border-secondary',
         // `--bg-primary` matches the control's background in both themes.
         'bg-primary shadow-[0_0_0_1px_rgba(0,0,0,0.1),0_4px_11px_0_rgba(0,0,0,0.1)]',
       ),

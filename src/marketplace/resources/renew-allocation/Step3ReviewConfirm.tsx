@@ -50,7 +50,7 @@ const LimitChangesSummary: FC<{
       <h6 className="mb-1.5">{translate('Limit changes')}</h6>
       <table className="table table-sm table-borderless mb-0">
         <thead>
-          <tr className="border-b-[1px] border-b-secondary">
+          <tr className="border-b border-b-secondary">
             <th>{translate('Component')}</th>
             <th className="text-end">{translate('Current')}</th>
             <th className="text-center">{translate('')}</th>

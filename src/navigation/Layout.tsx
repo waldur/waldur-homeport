@@ -157,7 +157,7 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
           // The filter bar under the page tabs; the waldur-integration-testing
           // suite selects it by its test id (docs/e2e-locators.md).
           data-testid="filter-bar"
-          className="h-[44px] border-b-[1px] border-b-secondary *:h-full *:items-center *:content-center"
+          className="h-[44px] border-b border-b-secondary *:h-full *:items-center *:content-center"
         />
       )}
     </div>

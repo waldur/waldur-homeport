@@ -71,7 +71,7 @@ const meta: Meta<typeof EChart> = {
   decorators: [
     (Story) => (
       <div
-        className="p-5 border rounded-lg bg-primary shadow-raised"
+        className="p-5 border border-secondary rounded-lg bg-primary shadow-raised"
         style={{ width: '100%', maxWidth: '750px', height: '420px' }}
       >
         <Story />
@@ -131,7 +131,7 @@ export const ActionsToolbarStandalone: Story = {
         <div className="text-quaternary text-xs">
           Export toolbar actions rendered via <code>EChartActions</code>:
         </div>
-        <div className="flex items-center justify-between p-2.5 border rounded-lg bg-tertiary dark:bg-quaternary">
+        <div className="flex items-center justify-between p-2.5 border border-secondary rounded-lg bg-tertiary dark:bg-quaternary">
           <span>Monthly Cloud Analytics</span>
           <EChartActions
             chartInstance={mockChartInstance}

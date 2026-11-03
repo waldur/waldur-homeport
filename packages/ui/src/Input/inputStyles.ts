@@ -13,9 +13,7 @@ export type InputSize = 'sm' | 'md' | 'lg';
  * 1.08rem text and a 1.43 line-height at the 13px root -- 9px / 12px, 14px
  * and 20px here.
  *
- * `border-[1px]`, not `border`: Bootstrap's `.border` utility is
- * `!important` and would win over these (see the class-name collision table
- * in docs/tailwind-shadcn-migration-notes.md). Padding is `pl`/`pr` rather than
+ * Padding is `pl`/`pr` rather than
  * `px` so the invalid state can widen the right side alone, and a caller's
  * `px-*` still replaces both through `cn`. An InputGroup sets `--input-start`
  * and `--input-end` to the width of its adornments and of the invalid icon it
@@ -26,7 +24,7 @@ export type InputSize = 'sm' | 'md' | 'lg';
  */
 const COMMON =
   'block w-full min-w-0 appearance-none bg-clip-padding font-normal ' +
-  'border-[1px] border-solid border-[var(--input-border)] bg-[var(--input-bg)] text-[var(--input-text)] ' +
+  'border border-solid border-[var(--input-border)] bg-[var(--input-bg)] text-[var(--input-text)] ' +
   'placeholder:text-[var(--input-placeholder)] placeholder:opacity-100 ' +
   'transition-[border-color,box-shadow,background-color] duration-150 ease-[ease-in-out] motion-reduce:transition-none ' +
   // The border and a 1px ring of the same colour are the focus indicator,

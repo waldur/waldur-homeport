@@ -119,7 +119,10 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
       <div className="card-body">
         <div className="flex flex-col gap-3">
           {Object.entries(projects).map(([projectId, project]) => (
-            <div key={projectId} className="border rounded-lg p-2.5">
+            <div
+              key={projectId}
+              className="border border-secondary rounded-lg p-2.5"
+            >
               <div className="mb-2.5">
                 <h5 className="mb-1 font-medium">{project.name}</h5>
                 <div>

@@ -255,11 +255,10 @@ beats every Tailwind utility, important or not: a class Tailwind also defined (`
 `text-white`) silently painted Bootstrap's compiled colour, theme-inverted in dark mode, and no
 `dark:`/`hover:` variant beside it applied.
 
-**Bootstrap emits no colour utility any more.** `src/styles/bootstrap/_utilities.scss`
-removes `color`, `background-color`, `border-color` and `border-top`/`-end`/`-bottom`/`-start`
-from `$utilities`, and the `border: 0` `.border-0` from its `border` utility. (Its width
-utilities stay: `.border-0` … `.border-5`, `.border-top-0`, … set only `border-width`.) Every colour class is Tailwind's and
-follows the design tokens. (`$theme-colors` is an empty map, so no Bootstrap component emits a contextual colour either.)
+**Bootstrap emits no utility at all any more** (#478): its utility API is not imported, so every
+colour, width and border class is Tailwind's and follows the design tokens. A bare `border`
+sets only the width (Bootstrap's also drew `--border-secondary`), so it always names a colour:
+`border border-secondary` (`waldur-custom/require-border-color`, autofix). (`$theme-colors` is an empty map, so no Bootstrap component emits a contextual colour either.)
 
 Bootstrap's old class names paint nothing now, except those Tailwind defines itself (the status
 utilities). They were migrated as:
@@ -272,7 +271,7 @@ utilities). They were migrated as:
 | `text-dark`, `text-body`                           | `text-primary`                                                            |
 | `text-gray`, `text-muted`, `text-reset`            | `text-tertiary`, `text-quaternary`, `text-inherit`                        |
 | `bg-light`, `bg-dark`                              | `bg-tertiary dark:bg-quaternary`, `bg-[var(--bg-primary-solid)]`          |
-| `border-top` / `-bottom` / `-start` / `-end`       | `border-t-[1px] border-t-secondary`, … (`l` / `r` for start / end)        |
+| `border-top` / `-bottom` / `-start` / `-end`       | `border-t border-t-secondary`, … (`l` / `r` for start / end)              |
 | `text-gray-800`/`900`, `border-gray-300`           | `text-primary`, `border-primary`                                          |
 
 `FormText` (waldur-ui) is `text-tertiary`; give it `className="text-quaternary"` for a quieter line, or `text-danger` for an error.
@@ -284,12 +283,11 @@ utilities). They were migrated as:
   TypeScript literal type.
 - **`src/tailwindBootstrapColors.test.ts`** compiles the Metronic SCSS and checks it emits no
   `!important` colour class, and that Tailwind defines none of the retired names.
-- **The same trap on borders**: Bootstrap's `.border` is still emitted, and it is
-  `border: 1px solid var(--bs-border-color) !important`, so a Tailwind border colour next to
-  it never paints. Use `border-[1px]` (`border-t-[1px]`, …) for the width and give every state
-  an explicit colour, e.g. `rounded border-[1px] border-secondary` and `border-brand` when
-  selected. The `no-bootstrap-border-with-tailwind-color` lint rule reports the clash and
-  autofixes it when the same string sets a base colour.
+- **Borders name their colour**: `border` (and `border-t`, `border-b-2`, …) sets only the
+  width; without a colour class the line takes `currentColor`. Give every state an explicit
+  colour, e.g. `rounded-lg border border-secondary` and `border-brand` when selected.
+  `waldur-custom/require-border-color` reports a bare `border` without one and autofixes it to
+  `border border-secondary`, the line Bootstrap's retired `.border` drew.
 
 ## The brand colour in SCSS
 
@@ -446,7 +444,7 @@ to prevent fractional `rem` compression under Waldur's forced 13px root font siz
 | Bootstrap emits no colour utility                       | `src/tailwindBootstrapColors.test.ts`                                       |
 | No retired Bootstrap colour class name                  | `waldur-custom/no-bootstrap-color-utility`                                  |
 | Every semantic utility waldur-ui/shell use is declared  | `tailwindTheme.test.ts`                                                     |
-| No Tailwind border colour next to Bootstrap's `.border` | `waldur-custom/no-bootstrap-border-with-tailwind-color` (autofix)           |
+| A bare `border` names its colour                        | `waldur-custom/require-border-color` (autofix)                              |
 | State colours from the status matrix, not raw ramps     | `waldur-custom/no-raw-status-ramp`                                          |
 | A colour token with a utility is written as the utility | `waldur-custom/prefer-token-utility` (autofix; table read from `theme.css`) |
 | Font size on the scale; no `fs-*` or inline size        | `waldur-custom/require-font-size-scale` (autofixes `fs-*`), stylelint       |

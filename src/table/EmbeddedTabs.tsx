@@ -62,7 +62,7 @@ export const EmbeddedTabs: FC<EmbeddedTabsProps> = ({
           !header &&
           // The strip draws the top of the frame; the panel closes it, so a
           // table inside drops its own border and corners instead of doubling them.
-          'overflow-hidden rounded-b-[0.475rem] border-[1px] border-t-[0px] border-[color:var(--border-secondary)] [&>*>.card-table]:rounded-none [&>*>.card-table]:border-0!',
+          'overflow-hidden rounded-b-[0.475rem] border border-t-0 border-[color:var(--border-secondary)] [&>*>.card-table]:rounded-none [&>*>.card-table]:border-0!',
         panelsClassName,
       )}
       listProps={{
@@ -75,7 +75,7 @@ export const EmbeddedTabs: FC<EmbeddedTabsProps> = ({
           framed &&
             !header &&
             // Arbitrary values on purpose: Bootstrap's `.border` is !important and would win.
-            'rounded-t-[0.475rem] border-[1px] border-secondary pl-[12px]',
+            'rounded-t-[0.475rem] border border-secondary pl-[12px]',
           listClassName,
         ),
       }}

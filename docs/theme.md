@@ -63,7 +63,7 @@ follows the theme without a `dark:` twin:
 
 ```tsx
 // Good - semantic utilities, theme-aware
-<div className="bg-secondary rounded-md border-[1px] border-secondary p-4">
+<div className="bg-secondary rounded-md border border-secondary p-4">
   <h6 className="text-primary">Title</h6>
   <p className="text-quaternary">Description</p>
 </div>
@@ -90,8 +90,8 @@ status matrix: `bg-warning-subtle text-warning`.
 
 **Bootstrap emits no colour utilities**: its old class names (`text-muted`, `text-success`,
 `bg-light`, …) paint nothing, and every colour class is Tailwind's (`text-muted` →
-`text-quaternary`). Never pair Bootstrap's `border` class with a Tailwind border colour: the
-colour never paints (use `border-[1px]`). See
+`text-quaternary`). Bootstrap's utilities are retired too (#478): `border` is Tailwind's width
+only, so name its colour (`border border-secondary`). See
 [design-tokens.md § Bootstrap colour utilities](design-tokens.md).
 
 ### Pattern 2: useTheme() Hook

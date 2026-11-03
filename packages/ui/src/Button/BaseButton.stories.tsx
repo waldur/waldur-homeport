@@ -602,7 +602,7 @@ export const RealisticUsage: Story = {
           title="Inline row actions"
           hint="Low-emphasis text-* variants for actions attached to a single list row — never the full-weight Contained colors here."
         />
-        <div className="flex items-center justify-between rounded-md border-[1px] border-primary px-3 py-2.5">
+        <div className="flex items-center justify-between rounded-md border border-primary px-3 py-2.5">
           <span className="text-sm">acc-prod-eu-west-1</span>
           <div className="flex gap-1">
             <BaseButton

@@ -153,7 +153,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
               {/* Show separator line only if there are multiple items and not the last item */}
               {shortcuts.length > 1 && index < shortcuts.length - 1 && (
                 <div
-                  className="absolute bottom-0 start-1/2 -translate-x-1/2 border-b-[1px] border-b-secondary"
+                  className="absolute bottom-0 start-1/2 -translate-x-1/2 border-b border-b-secondary"
                   style={{ width: 'calc(100% - 24px)' }}
                 />
               )}

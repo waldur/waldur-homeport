@@ -116,7 +116,7 @@ export const MatrixCallFloatingWidget = forwardRef<
   return (
     <div
       data-testid="matrix-call-widget"
-      className="shadow-[var(--drawer-floating-shadow)] rounded-lg flex flex-col bg-primary border-[1px] border-secondary fixed z-[1080]"
+      className="shadow-[var(--drawer-floating-shadow)] rounded-lg flex flex-col bg-primary border border-secondary fixed z-[1080]"
       style={{
         right: effectivePos.x,
         bottom: effectivePos.y,
@@ -125,7 +125,7 @@ export const MatrixCallFloatingWidget = forwardRef<
       }}
     >
       <div
-        className="flex items-center gap-1.5 px-1.5 py-1 border-b-[1px] border-b-secondary"
+        className="flex items-center gap-1.5 px-1.5 py-1 border-b border-b-secondary"
         style={{ cursor: 'grab', userSelect: 'none', touchAction: 'none' }}
         onPointerDown={onPointerDown}
       >

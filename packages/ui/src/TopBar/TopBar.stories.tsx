@@ -142,7 +142,7 @@ export const AppHeaderLayout: Story = {
           </div>
           <span
             data-testid="divider"
-            className="h-[40px] border-r-[1px] border-r-secondary self-center ms-[0.25rem] lg:hidden"
+            className="h-[40px] border-r border-r-secondary self-center ms-[0.25rem] lg:hidden"
           />
           <div className="flex items-center ms-[0.75rem]">
             <span

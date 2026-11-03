@@ -86,11 +86,7 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
   };
 
   return (
-    <div
-      className={
-        index > 0 ? 'pt-4 border-t-[1px] border-t-secondary' : undefined
-      }
-    >
+    <div className={index > 0 ? 'pt-4 border-t border-t-secondary' : undefined}>
       <div className="flex items-center self-stretch gap-3 h-[32px] mb-4">
         <h6 className="text-secondary mb-0">
           {translate('Node group #{n}', { n: index + 1 })}

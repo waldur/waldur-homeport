@@ -233,7 +233,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
 
               {/* Call description preview */}
               {values.source?.value === 'call_description' && (
-                <div className="border rounded-lg p-2.5 bg-tertiary dark:bg-quaternary mb-3">
+                <div className="border border-secondary rounded-lg p-2.5 bg-tertiary dark:bg-quaternary mb-3">
                   <div className="font-medium mb-1.5">{resolve.call.name}</div>
                   {resolve.call.description ? (
                     <div
@@ -255,7 +255,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
 
               {/* All proposals info */}
               {values.source?.value === 'all_proposals' && (
-                <div className="border rounded-lg p-2.5 bg-tertiary dark:bg-quaternary mb-3">
+                <div className="border border-secondary rounded-lg p-2.5 bg-tertiary dark:bg-quaternary mb-3">
                   {proposalsLoading ? (
                     <span className="text-quaternary">
                       {translate('Loading proposals...')}
