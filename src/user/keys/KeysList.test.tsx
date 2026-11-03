@@ -66,15 +66,29 @@ describe('KeysList row actions', () => {
     table.rows = [];
   });
 
-  it('offers no Remove on another user’s key to a non-staff user', () => {
+  it('shows no row actions on another user’s profile to a non-staff user', () => {
     table.rows = [key({ user_uuid: 'other' })];
     renderKeys(me, { uuid: 'other' });
+    expect(screen.queryByTestId('actions-menu')).not.toBeInTheDocument();
+  });
+
+  it('offers no Remove on a key the caller does not own', () => {
+    // The list asks only for the profile owner's keys, so this guards the
+    // rule itself rather than anything a user can reach today.
+    table.rows = [key({ user_uuid: 'other' })];
+    renderKeys(me);
     expect(screen.queryByText('Remove')).not.toBeInTheDocument();
   });
 
   it('offers Remove on an own key that is not shared', () => {
     table.rows = [key({})];
     renderKeys(me);
+    expect(screen.getByText('Remove')).toBeInTheDocument();
+  });
+
+  it('offers Remove to support on their own key that is not shared', () => {
+    table.rows = [key({})];
+    renderKeys({ ...me, is_support: true });
     expect(screen.getByText('Remove')).toBeInTheDocument();
   });
 
