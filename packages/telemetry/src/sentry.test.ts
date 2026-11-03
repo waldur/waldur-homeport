@@ -1,15 +1,19 @@
 import * as Sentry from '@sentry/react';
-import { describe, expect, it, vi, beforeEach } from 'vitest';
+import { afterEach, describe, expect, it, vi, beforeEach } from 'vitest';
 
 import {
   addApiErrorBreadcrumb,
   beforeBreadcrumb,
+  initSentry,
   redactSensitive,
   sanitizeUrl,
+  tagPageTranslation,
 } from './sentry';
 
 vi.mock('@sentry/react', () => ({
   addBreadcrumb: vi.fn(),
+  browserTracingIntegration: vi.fn(),
+  init: vi.fn(),
   setUser: vi.fn(),
 }));
 
@@ -29,6 +33,54 @@ const jsonResponse = (
 
 beforeEach(() => {
   vi.clearAllMocks();
+});
+
+describe('tagPageTranslation', () => {
+  afterEach(() => {
+    document.documentElement.className = '';
+    document.body.innerHTML = '';
+  });
+
+  it('tags an untranslated page', () => {
+    const event = tagPageTranslation({ type: undefined });
+    expect(event.tags?.page_translated).toBe(false);
+  });
+
+  it('tags a page whose text Chrome has rewritten', () => {
+    document.body.innerHTML =
+      '<font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">Projekte</font></font>';
+    const event = tagPageTranslation({ type: undefined });
+    expect(event.tags?.page_translated).toBe(true);
+  });
+
+  it('does not tag a page Chrome marked as translated but left alone', () => {
+    document.documentElement.classList.add('translated-ltr');
+    const event = tagPageTranslation({ type: undefined });
+    expect(event.tags?.page_translated).toBe(false);
+  });
+
+  it('does not tag a font element from user-written HTML', () => {
+    document.body.innerHTML = '<font color="red">Note</font>';
+    const event = tagPageTranslation({ type: undefined });
+    expect(event.tags?.page_translated).toBe(false);
+  });
+
+  it('keeps the tags already on the event', () => {
+    const event = tagPageTranslation({ type: undefined, tags: { a: 'b' } });
+    expect(event.tags).toEqual({ a: 'b', page_translated: false });
+  });
+
+  it('runs on every event sent through initSentry', () => {
+    initSentry({
+      dsn: 'http://x',
+      release: '1',
+      environment: 'test',
+      tracePropagationTargets: [],
+    });
+    expect(vi.mocked(Sentry.init).mock.calls[0][0]?.beforeSend).toBe(
+      tagPageTranslation,
+    );
+  });
 });
 
 describe('sanitizeUrl', () => {
