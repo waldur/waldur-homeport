@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/react';
-import type { Breadcrumb } from '@sentry/react';
+import type { Breadcrumb, ErrorEvent } from '@sentry/react';
 
 /**
  * Keys (query params or object properties) whose values must never reach
@@ -82,6 +82,27 @@ export const beforeBreadcrumb = (breadcrumb: Breadcrumb): Breadcrumb => {
 };
 
 /**
+ * What Chrome's page translation replaces each text node with. React's later
+ * `removeChild` and `insertBefore` calls then throw `NotFoundError` on a node
+ * that is no longer there. The `translated-ltr` class on `<html>` is not a
+ * substitute: Chrome sets it even when `translate="no"` leaves the text alone.
+ */
+const TRANSLATED_TEXT_SELECTOR = 'font[style*="vertical-align: inherit"]';
+
+/**
+ * Sentry `beforeSend` hook. Tags every event with whether the browser had
+ * rewritten the page's text, so a DOM error it caused can be told apart from
+ * one in our own code.
+ */
+export const tagPageTranslation = (event: ErrorEvent): ErrorEvent => {
+  event.tags = {
+    ...event.tags,
+    page_translated: document.querySelector(TRANSLATED_TEXT_SELECTOR) !== null,
+  };
+  return event;
+};
+
+/**
  * Adds a breadcrumb describing a failed API response, including the parsed and
  * scrubbed error body. The default fetch instrumentation only records the URL,
  * method and status; the response payload is where MasterMind explains *why*
@@ -159,5 +180,6 @@ export function initSentry(options: SentryInitOptions) {
     tracesSampleRate: options.tracesSampleRate ?? 0.2,
     tracePropagationTargets: options.tracePropagationTargets,
     beforeBreadcrumb,
+    beforeSend: tagPageTranslation,
   });
 }
