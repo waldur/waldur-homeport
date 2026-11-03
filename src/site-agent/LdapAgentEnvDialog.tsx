@@ -135,7 +135,7 @@ export const LdapAgentEnvDialog: FC<LdapAgentEnvDialogProps> = ({
               }
             >
               {/* Fixed offering info */}
-              <div className="bg-brand-subtle rounded p-2.5 mb-3">
+              <div className="bg-brand-subtle rounded-lg p-2.5 mb-3">
                 <div className="text-secondary small mb-1">
                   {translate('Generating configuration for:')}
                 </div>

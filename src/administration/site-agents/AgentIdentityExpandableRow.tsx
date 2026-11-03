@@ -98,7 +98,7 @@ export const AgentIdentityExpandableRow: FC<
           <h6 className="mb-2.5">{translate('Configuration')}</h6>
           {row.config_file_content ? (
             <pre
-              className="bg-tertiary dark:bg-quaternary p-2.5 rounded"
+              className="bg-tertiary dark:bg-quaternary p-2.5 rounded-lg"
               style={{ maxHeight: '200px', overflow: 'auto' }}
             >
               {row.config_file_content}

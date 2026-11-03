@@ -256,7 +256,7 @@ export const RealWorldButtons: Story = {
       <span
         role="button"
         tabIndex={0}
-        className="relative flex size-6 shrink-0 items-center justify-center rounded text-secondary hover:bg-secondary cursor-pointer"
+        className="relative flex size-6 shrink-0 items-center justify-center rounded-lg text-secondary hover:bg-secondary cursor-pointer"
         aria-label="Filter resources"
       >
         <FunnelSimpleIcon size={18} weight="bold" />

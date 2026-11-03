@@ -78,7 +78,7 @@ export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
 
       {preview && !isPending && (
         <div
-          className="rounded shadow-sm p-5"
+          className="rounded-lg shadow-raised p-5"
           style={{ backgroundColor: '#fff', color: '#333' }}
         >
           <FormattedHtml html={preview.html_body} />

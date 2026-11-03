@@ -633,7 +633,7 @@ export const ArrowHowItWorksDialog: FC = () => {
               'Arrow API data is mapped to Waldur models and linked to existing resources, customers, and invoices.',
             )}
           </p>
-          <div className="border rounded p-3">
+          <div className="border rounded-lg p-3">
             <MermaidChart code={DATA_FLOW_DIAGRAM} className="text-center" />
           </div>
         </section>
@@ -646,7 +646,7 @@ export const ArrowHowItWorksDialog: FC = () => {
               'The setup wizard guides you through connecting to Arrow and mapping customers to Waldur organizations.',
             )}
           </p>
-          <div className="border rounded p-3">
+          <div className="border rounded-lg p-3">
             <MermaidChart code={SETUP_FLOW_DIAGRAM} className="text-center" />
           </div>
         </section>
@@ -744,7 +744,7 @@ export const ArrowHowItWorksDialog: FC = () => {
               'Billing sync fetches monthly billing reports from Arrow and creates corresponding records in Waldur.',
             )}
           </p>
-          <div className="border rounded p-3">
+          <div className="border rounded-lg p-3">
             <MermaidChart code={BILLING_SYNC_DIAGRAM} className="text-center" />
           </div>
         </section>
@@ -757,7 +757,7 @@ export const ArrowHowItWorksDialog: FC = () => {
               'After syncing, reconciliation compares Arrow amounts with Waldur invoices. Discrepancies create compensation items.',
             )}
           </p>
-          <div className="border rounded p-3">
+          <div className="border rounded-lg p-3">
             <MermaidChart
               code={reconciliationDiagram}
               className="text-center"
@@ -875,7 +875,7 @@ export const ArrowHowItWorksDialog: FC = () => {
               'Consumption records track individual usage items from Arrow and can be mapped to Waldur resources for detailed reporting.',
             )}
           </p>
-          <div className="border rounded p-3">
+          <div className="border rounded-lg p-3">
             <MermaidChart
               code={CONSUMPTION_FLOW_DIAGRAM}
               className="text-center"
@@ -891,7 +891,7 @@ export const ArrowHowItWorksDialog: FC = () => {
               'Arrow licenses can be imported as Waldur marketplace resources. The import wizard guides you through selecting a customer, offering, project, and licenses.',
             )}
           </p>
-          <div className="border rounded p-3">
+          <div className="border rounded-lg p-3">
             <MermaidChart
               code={RESOURCE_IMPORT_DIAGRAM}
               className="text-center"
@@ -918,7 +918,7 @@ export const ArrowHowItWorksDialog: FC = () => {
               'After importing a license or linking a resource to Arrow, you can backport historical consumption data. This creates usage records for billing.',
             )}
           </p>
-          <div className="border rounded p-3">
+          <div className="border rounded-lg p-3">
             <MermaidChart
               code={CONSUMPTION_SYNC_DIAGRAM}
               className="text-center"

@@ -29580,6 +29580,12 @@
       "feature_area": "roles"
     }
   },
+  "List invoice": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
+    }
+  },
   "List keys": {
     "context": {
       "primary_ui_type": "label",

@@ -169,7 +169,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
       {fixedOffering ? (
         <>
           {/* Show fixed offering info */}
-          <div className="bg-brand-subtle rounded p-2.5 mb-3">
+          <div className="bg-brand-subtle rounded-lg p-2.5 mb-3">
             <div className="text-secondary small mb-1">
               {translate('Generating configuration for:')}
             </div>
@@ -201,7 +201,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
             </button>
           </div>
           <div
-            className="border rounded p-2.5"
+            className="border rounded-lg p-2.5"
             style={{ maxHeight: '200px', overflowY: 'auto' }}
           >
             {offerings.map((offering) => (

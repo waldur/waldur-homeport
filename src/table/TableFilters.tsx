@@ -75,7 +75,7 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
         <div className="self-start text-end">
           <BaseButton
             variant="text-secondary"
-            className="btn-no-focus"
+            data-testid="table-clear-filters"
             onClick={clearFilters}
             iconNode={<XIcon weight="bold" />}
             label={clearLabel}

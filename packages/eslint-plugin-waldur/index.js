@@ -21,6 +21,7 @@ import noBootstrapFormCheck from './rules/no-bootstrap-form-check.js';
 import noBootstrapFormControl from './rules/no-bootstrap-form-control.js';
 import noBootstrapFormSelect from './rules/no-bootstrap-form-select.js';
 import noBootstrapGrid from './rules/no-bootstrap-grid.js';
+import noBootstrapImportantCollision from './rules/no-bootstrap-important-collision.js';
 import noBootstrapLayoutUtility from './rules/no-bootstrap-layout-utility.js';
 import noBootstrapModal from './rules/no-bootstrap-modal.js';
 import noBootstrapProgress from './rules/no-bootstrap-progress.js';
@@ -89,6 +90,7 @@ export default {
     'no-bootstrap-modal': noBootstrapModal,
     'no-bootstrap-tabs': noBootstrapTabs,
     'no-bootstrap-grid': noBootstrapGrid,
+    'no-bootstrap-important-collision': noBootstrapImportantCollision,
     'no-bootstrap-breadcrumb': noBootstrapBreadcrumb,
     'no-orphan-form-label': noOrphanFormLabel,
     'no-interactive-in-tab-trigger': noInteractiveInTabTrigger,

@@ -190,7 +190,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
           </div>
         )}
         <div
-          className={classNames('p-2.5 rounded chat-log-bubble', {
+          className={classNames('p-2.5 rounded-lg chat-log-bubble', {
             'border-l-[1px] border-l-secondary border-3':
               selectedMessage.is_flagged || feedbackSentiment !== null,
             'border-danger':

@@ -155,7 +155,7 @@ export const MarketplaceLandingFilter = ({
             // panel is positioned, see waldur-design-tokens/animations.css).
             className="z-dropdown-menu w-[min(400px,calc(100vw-30px))] border-0 animate-[waldur-menu-enter-up_0.3s_ease] motion-reduce:animate-none"
           >
-            <div className="card text-base shadow-sm m-0">
+            <div className="card text-base shadow-[var(--menu-shadow)] m-0">
               <form
                 onSubmit={handleSubmit}
                 className="card-body flex flex-col gap-6"

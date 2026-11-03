@@ -149,7 +149,7 @@ export const PoolSummaryDialog: FC = () => {
               'Build your reviewer pool by finding experts and inviting them to participate. Only accepted pool members can receive proposal assignments.',
             )}
           </p>
-          <div className="border rounded p-3">
+          <div className="border rounded-lg p-3">
             <MermaidChart
               code={generatePoolWorkflowDiagram()}
               className="text-center"
@@ -163,7 +163,7 @@ export const PoolSummaryDialog: FC = () => {
           <p className="text-quaternary mb-3">
             {translate('Pool invitations progress through these states:')}
           </p>
-          <div className="border rounded p-3 mb-3">
+          <div className="border rounded-lg p-3 mb-3">
             <MermaidChart
               code={generateInvitationStatusDiagram()}
               className="text-center"

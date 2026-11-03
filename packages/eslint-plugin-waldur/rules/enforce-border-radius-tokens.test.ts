@@ -22,8 +22,10 @@ describe('enforce-border-radius-tokens', () => {
         code: 'const A = () => <div className="rounded-none rounded-xs rounded-sm rounded-md rounded-lg rounded-xl rounded-2xl rounded-modal rounded-full" />;',
       },
       {
-        code: 'const A = () => <div className="rounded rounded-t-md rounded-b-lg rounded-tl-sm" />;',
+        code: 'const A = () => <div className="rounded-lg rounded-t-md rounded-b-lg rounded-tl-sm" />;',
       },
+      // A shape name, not a class list.
+      { code: "const item = { type: 'port', shape: 'rounded' };" },
       {
         code: "const A = () => <div className={cn('hover:rounded-lg', 'md:rounded-modal')} />;",
       },
@@ -105,6 +107,18 @@ describe('enforce-border-radius-tokens', () => {
         code: "const c = cn('hover:rounded-0', 'rounded-pill!');",
         output: "const c = cn('hover:rounded-none', 'rounded-full!');",
         errors: [{ messageId: 'retired' }, { messageId: 'retired' }],
+      },
+      {
+        // Bootstrap's bare rounded (8px) and its numbered steps
+        code: 'const A = () => <span className="inline-flex rounded rounded-1 p-0" />;',
+        output:
+          'const A = () => <span className="inline-flex rounded-lg rounded-md p-0" />;',
+        errors: [{ messageId: 'retired' }, { messageId: 'retired' }],
+      },
+      {
+        // A variant was Tailwind's 0.25rem all along: no fix
+        code: "const c = 'md:rounded';",
+        errors: [{ messageId: 'bareRounded' }],
       },
     ],
   });

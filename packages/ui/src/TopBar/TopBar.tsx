@@ -146,7 +146,7 @@ export const SearchField = ({
     <MagnifyingGlassIcon size={16} weight="bold" />
     <span className="flex-1 text-left">{placeholder}</span>
     {shortcutHint && (
-      <kbd className="rounded border-[1px] border-secondary px-1.5 py-0.5 text-xs">
+      <kbd className="rounded-lg border-[1px] border-secondary px-1.5 py-0.5 text-xs">
         {shortcutHint}
       </kbd>
     )}

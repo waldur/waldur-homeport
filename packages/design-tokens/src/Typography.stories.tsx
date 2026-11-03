@@ -114,7 +114,7 @@ export const TypeScale: Story = {
 
         <div className="flex items-baseline justify-between pb-2.5">
           <span className="font-mono text-xs text-quinary w-24">Monospace</span>
-          <Mono className="text-xs bg-primary-hover px-1.5 py-1 rounded text-primary flex-1 max-w-fit">
+          <Mono className="text-xs bg-primary-hover px-1.5 py-1 rounded-lg text-primary flex-1 max-w-fit">
             ssh -i ~/.ssh/id_rsa user@192.168.1.100
           </Mono>
           <span className="font-mono text-xs text-quinary">Code / Mono</span>

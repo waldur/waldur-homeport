@@ -29,7 +29,7 @@ export const OrganizationReviewStatus: FunctionComponent<
   });
 
   return (
-    <div className="card border-0 shadow-sm">
+    <div className="card border-0 shadow-raised">
       <div className="card-body text-center relative overflow-hidden organization-review-status">
         <RadialBackground className="icon-background" />
 

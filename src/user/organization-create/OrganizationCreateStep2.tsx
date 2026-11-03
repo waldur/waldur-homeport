@@ -273,7 +273,7 @@ export const OrganizationCreateStep2: FunctionComponent<
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="card border-0 shadow-sm">
+      <div className="card border-0 shadow-raised">
         <div className="card-body p-6">
           {!isManual &&
             (() => {

@@ -61,7 +61,7 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
 
       <div className="mb-2.5">
         <FormHeading as="p">{translate('Your token')}</FormHeading>
-        <div className="flex items-center gap-1.5 p-2.5 bg-tertiary dark:bg-quaternary rounded">
+        <div className="flex items-center gap-1.5 p-2.5 bg-tertiary dark:bg-quaternary rounded-lg">
           <button
             className="text-btn shrink-0"
             type="button"
@@ -82,7 +82,7 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
 
       <div>
         <FormHeading as="p">{translate('Example usage')}</FormHeading>
-        <div className="flex items-start gap-1.5 p-2.5 bg-tertiary dark:bg-quaternary rounded">
+        <div className="flex items-start gap-1.5 p-2.5 bg-tertiary dark:bg-quaternary rounded-lg">
           <code className="grow wrap-anywhere">
             {showSecret ? curlExample : maskedCurlExample}
           </code>

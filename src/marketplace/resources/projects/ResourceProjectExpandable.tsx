@@ -78,7 +78,7 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
   });
 
   return (
-    <ExpandableContainer className="border rounded">
+    <ExpandableContainer className="border rounded-lg">
       <EmbeddedTabs
         defaultValue="active"
         header={

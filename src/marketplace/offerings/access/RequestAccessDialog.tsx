@@ -56,7 +56,7 @@ const MethodChoice: FC<{ method: AccessMethod }> = ({ method }) => (
       <div
         // border-[1px], not Bootstrap's .border: its !important colour would
         // override the selected state's border-brand.
-        className={`rounded border-[1px] p-3 ${
+        className={`rounded-lg border-[1px] p-3 ${
           input.checked ? 'border-brand bg-brand-subtle' : 'border-secondary'
         }`}
       >

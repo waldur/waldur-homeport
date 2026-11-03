@@ -458,7 +458,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
         <MenuPopover.Content
           side="right"
           align="start"
-          className="w-[375px] py-2.5 shadow-sm"
+          className="w-[375px] py-2.5"
           // Radix returns focus to this row on close, so the keyboard
           // stays in the list. Two exceptions skip that:
           // - a sibling row has taken over (`activeItemName` is set): the

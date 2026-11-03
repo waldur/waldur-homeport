@@ -78,7 +78,7 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
 const ProjectKindCard = ({ project }: ProjectProfileProps) => {
   return (
     <div className="flex gap-5.5 -ms-1.5">
-      <div className="border rounded size-10 flex items-center justify-center shrink-0 text-tertiary">
+      <div className="border rounded-lg size-10 flex items-center justify-center shrink-0 text-tertiary">
         {project.kind === 'course' ? (
           <GraduationCapIcon size={20} weight="bold" />
         ) : project.kind === 'public' ? (

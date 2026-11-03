@@ -42,7 +42,7 @@ export const ResourcesMenuFilterButton = () => {
           so it no longer has to fake one with a span. */}
       <button
         type="button"
-        className="relative flex size-6 shrink-0 items-center justify-center rounded text-[var(--nav-item-icon)] hover:bg-[var(--nav-item-hover-bg)]"
+        className="relative flex size-6 shrink-0 items-center justify-center rounded-lg text-[var(--nav-item-icon)] hover:bg-[var(--nav-item-hover-bg)]"
         onClick={callback}
         aria-label={translate('Filter resources')}
       >

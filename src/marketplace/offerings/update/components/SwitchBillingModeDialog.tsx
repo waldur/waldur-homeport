@@ -70,7 +70,7 @@ const ImpactPreview: FC<{
     BILLING_MODES.find((m) => m.value === targetMode)?.label || targetMode;
 
   return (
-    <div className="mt-3 p-2.5 bg-tertiary dark:bg-quaternary rounded">
+    <div className="mt-3 p-2.5 bg-tertiary dark:bg-quaternary rounded-lg">
       <div className="font-medium mb-1.5">
         {translate('Impact: {count} components will be changed', {
           count: affected.length,
@@ -171,7 +171,7 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
                       key={mode.value}
                       // border-[1px], not Bootstrap's .border: its !important
                       // colour would override the selected border-brand.
-                      className={`flex items-start gap-2.5 p-2.5 rounded border-[1px] cursor-pointer ${
+                      className={`flex items-start gap-2.5 p-2.5 rounded-lg border-[1px] cursor-pointer ${
                         input.value === mode.value
                           ? 'border-brand bg-brand-subtle'
                           : 'border-secondary'

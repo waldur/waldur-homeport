@@ -265,7 +265,7 @@ export const InteractiveScrolling: Story = {
               <p className="mt-1.5 text-sm text-quaternary">
                 {sec.description}
               </p>
-              <div className="mt-5 p-3 bg-secondary rounded border-[1px] border-dashed border-secondary text-xs text-quinary">
+              <div className="mt-5 p-3 bg-secondary rounded-lg border-[1px] border-dashed border-secondary text-xs text-quinary">
                 Scroll target anchor:{' '}
                 <code className="font-mono">#{sec.id}</code>
               </div>

@@ -225,11 +225,11 @@ export const PacingIndicator: FC<Props> = ({
           which is what removed the label collision at the right edge. */}
       <div style={{ paddingTop: 20 }}>
         <div
-          className="rounded relative"
+          className="rounded-lg relative"
           style={{ height: 16, backgroundColor: c.track }}
         >
           <div
-            className="rounded"
+            className="rounded-lg"
             style={{
               height: '100%',
               width: clampPct(usageFraction),

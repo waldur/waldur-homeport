@@ -97,7 +97,7 @@ const ReviewVerdict: FunctionComponent<{
               </Badge>
             )}
           </div>
-          <div className="p-2.5 rounded chat-log-bubble">
+          <div className="p-2.5 rounded-lg chat-log-bubble">
             {feedback.llm_summary || (
               <span className="text-quaternary">
                 {translate('(no summary)')}
@@ -184,7 +184,7 @@ const InteractionTurns: FunctionComponent<{
             </div>
           )}
           <div
-            className={classNames('p-2.5 rounded chat-log-bubble', {
+            className={classNames('p-2.5 rounded-lg chat-log-bubble', {
               'border-l-[1px] border-3 border-danger': interaction.is_flagged,
             })}
           >
@@ -209,7 +209,7 @@ const InteractionTurns: FunctionComponent<{
         </MessageGutter>
         <div className="message-body">
           <div
-            className={classNames('p-2.5 rounded chat-log-bubble', {
+            className={classNames('p-2.5 rounded-lg chat-log-bubble', {
               'border-l-[1px] border-l-secondary border-3': sentiment !== null,
               'border-success': sentiment === 'positive',
               'border-danger': sentiment === 'negative',

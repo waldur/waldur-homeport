@@ -105,7 +105,7 @@ export const OrganizationCreateStep1: FunctionComponent<
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="card border-0 shadow-sm">
+      <div className="card border-0 shadow-raised">
         <div className="card-body p-6">
           <h4 className="mb-3">{translate('Select verification method')}</h4>
           <p className="text-secondary mb-5">
