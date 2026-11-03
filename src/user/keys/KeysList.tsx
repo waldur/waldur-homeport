@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { keysList, SshKey } from 'waldur-js-client';
+import { keysList, SshKey, User } from 'waldur-js-client';
 
 import { CopyToClipboardContainer } from '@/core/CopyToClipboardContainer';
 import { translate } from '@/i18n';
@@ -15,19 +15,25 @@ import { KeyCreateButton } from './KeyCreateButton';
 import { KeyRemoveButton } from './KeyRemoveButton';
 import { KeyVersionHistoryAction } from './KeyVersionHistoryAction';
 
+// Mastermind lets staff delete any key, and anyone else only their own key
+// unless it is shared.
+const canRemoveKey = (
+  user: Pick<User, 'uuid' | 'is_staff'>,
+  key: Pick<SshKey, 'user_uuid' | 'is_shared'>,
+) =>
+  Boolean(user?.is_staff) || (key.user_uuid === user?.uuid && !key.is_shared);
+
 const KeysListRowActions = ({ row, fetch }) => {
   const user = useUser();
   const showVersionHistory = user?.is_staff || user?.is_support;
-  return (
-    <ActionsDropdown
-      row={row}
-      refetch={fetch}
-      actions={[
-        KeyRemoveButton,
-        showVersionHistory && KeyVersionHistoryAction,
-      ].filter(Boolean)}
-    />
-  );
+  const actions = [
+    canRemoveKey(user, row) && KeyRemoveButton,
+    showVersionHistory && KeyVersionHistoryAction,
+  ].filter(Boolean);
+  if (!actions.length) {
+    return null;
+  }
+  return <ActionsDropdown row={row} refetch={fetch} actions={actions} />;
 };
 
 export const KeysList: FunctionComponent<{
