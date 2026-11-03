@@ -38308,7 +38308,11 @@
       "feature_area": "inference"
     }
   },
-  "Open public page": {},
+  "Open public page": {
+    "context": {
+      "feature_area": "list"
+    }
+  },
   "Open round ends": {
     "context": {
       "feature_area": "details"
@@ -40171,7 +40175,8 @@
         "resource": {
           "type": "unknown"
         }
-      }
+      },
+      "feature_area": "offerings"
     }
   },
   "Part of:": {

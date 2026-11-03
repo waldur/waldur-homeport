@@ -3,6 +3,8 @@ import React, { PropsWithChildren } from 'react';
 import { ButtonVariant, ButtonSize } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
+import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
+import { useUser } from '@/workspace/hooks';
 
 interface OwnProps {
   offering_uuid: string;
@@ -17,7 +19,13 @@ interface OwnProps {
 export const OfferingDetailsLink: React.FC<PropsWithChildren<OwnProps>> = (
   props,
 ) => {
-  return !props.disabled ? (
+  const user = useUser();
+  // The public offering page is refused when the shop is hidden. Keep the
+  // label, drop the link — the same fallback `disabled` already uses.
+  if (props.disabled || !canUseMarketplaceShopUi(user)) {
+    return <div className={props.className}>{props.children}</div>;
+  }
+  return (
     <Link
       state="public-offering.marketplace-public-offering"
       params={{ uuid: props.offering_uuid }}
@@ -28,7 +36,5 @@ export const OfferingDetailsLink: React.FC<PropsWithChildren<OwnProps>> = (
     >
       {props.children}
     </Link>
-  ) : (
-    <div className={props.className}>{props.children}</div>
   );
 };

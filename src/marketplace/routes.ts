@@ -274,6 +274,11 @@ export const states: StateDeclaration[] = [
         (module) => ({ default: module.ProviderDetailsContainer }),
       ),
     ),
+    data: {
+      // The public provider profile is a shop page. Provider workspace pages
+      // stay on their own guard.
+      permissions: [canAccessMarketplace],
+    },
   },
 
   {

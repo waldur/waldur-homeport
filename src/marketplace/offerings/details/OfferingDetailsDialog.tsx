@@ -10,11 +10,13 @@ import { PropertyList, PropertyItem } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
 import { getTabs } from '@/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@/marketplace/details/OfferingTabsComponent';
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
+import { useUser } from '@/workspace/hooks';
 
 interface OfferingDetailsDialogProps {
   resolve: { offering: PublicOfferingDetails; concealBillingInfo?: boolean };
@@ -38,6 +40,8 @@ async function loadData(
 export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
   props,
 ) => {
+  const user = useUser();
+  const showOfferingLink = canUseMarketplaceShopUi(user);
   const {
     isLoading: loading,
     error,
@@ -58,13 +62,15 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
       }
       bodyClassName="h-[500px]"
       footer={
-        <OfferingDetailsLink
-          offering_uuid={props.resolve.offering.uuid}
-          buttonVariant="secondary"
-        >
-          {translate('More details')}
-          <CaretRightIcon size={16} weight="bold" />
-        </OfferingDetailsLink>
+        showOfferingLink ? (
+          <OfferingDetailsLink
+            offering_uuid={props.resolve.offering.uuid}
+            buttonVariant="secondary"
+          >
+            {translate('More details')}
+            <CaretRightIcon size={16} weight="bold" />
+          </OfferingDetailsLink>
+        ) : undefined
       }
     >
       {loading ? (

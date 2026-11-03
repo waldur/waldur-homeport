@@ -4,6 +4,8 @@ import { Offering } from 'waldur-js-client';
 import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
+import { useUser } from '@/workspace/hooks';
 
 export const ViewOfferingButton = ({
   offering,
@@ -15,6 +17,10 @@ export const ViewOfferingButton = ({
   disabledReason?: string;
 }) => {
   const router = useRouter();
+  const user = useUser();
+  if (!canUseMarketplaceShopUi(user)) {
+    return null;
+  }
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();

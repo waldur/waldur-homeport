@@ -14,6 +14,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { translate } from '@/i18n';
+import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
 import { ParentLink } from '@/marketplace/resources/details/ParentResourceLink';
 import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
 import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
@@ -89,6 +90,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
       offeringId: offering.uuid,
       customerId: offering.customer_uuid,
     });
+  const showPublicOffering = canUseMarketplaceShopUi(user);
 
   if (props.isLoading) {
     return <LoadingSpinner />;
@@ -127,36 +129,44 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
           activeKey={state.name}
           listClassName="mb-3"
           items={[
-            offering.state === 'Draft'
-              ? {
-                  key: 'public-offering.marketplace-public-offering',
-                  title: (
-                    <>
-                      {translate('Public')}
-                      <QuestionIcon size={18} className="ms-1" weight="bold" />
-                    </>
-                  ),
-                  disabled: true,
-                  tooltip: translate(
-                    'The public view is currently inactive as this offering is in draft status.',
-                  ),
-                  className: 'text-center min-w-[60px]',
-                  testId: 'offering-tab-public',
-                }
-              : {
-                  key: 'public-offering.marketplace-public-offering',
-                  title: translate('Public'),
-                  link: (
-                    <Link
-                      state="public-offering.marketplace-public-offering"
-                      params={getParams(
-                        'public-offering.marketplace-public-offering',
-                      )}
-                    />
-                  ),
-                  className: 'text-center min-w-[60px]',
-                  testId: 'offering-tab-public',
-                },
+            ...(showPublicOffering
+              ? [
+                  offering.state === 'Draft'
+                    ? {
+                        key: 'public-offering.marketplace-public-offering',
+                        title: (
+                          <>
+                            {translate('Public')}
+                            <QuestionIcon
+                              size={18}
+                              className="ms-1"
+                              weight="bold"
+                            />
+                          </>
+                        ),
+                        disabled: true,
+                        tooltip: translate(
+                          'The public view is currently inactive as this offering is in draft status.',
+                        ),
+                        className: 'text-center min-w-[60px]',
+                        testId: 'offering-tab-public',
+                      }
+                    : {
+                        key: 'public-offering.marketplace-public-offering',
+                        title: translate('Public'),
+                        link: (
+                          <Link
+                            state="public-offering.marketplace-public-offering"
+                            params={getParams(
+                              'public-offering.marketplace-public-offering',
+                            )}
+                          />
+                        ),
+                        className: 'text-center min-w-[60px]',
+                        testId: 'offering-tab-public',
+                      },
+                ]
+              : []),
             {
               key: manageState,
               title: translate('Manage'),
@@ -217,11 +227,17 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
               {offering.parent_name && offering.parent_uuid && (
                 <>
                   <span className="mx-1.5">•</span>
-                  <ParentLink
-                    parent_name={offering.parent_name}
-                    state="public-offering.marketplace-public-offering"
-                    params={{ uuid: offering.parent_uuid }}
-                  />
+                  {showPublicOffering ? (
+                    <ParentLink
+                      parent_name={offering.parent_name}
+                      state="public-offering.marketplace-public-offering"
+                      params={{ uuid: offering.parent_uuid }}
+                    />
+                  ) : (
+                    translate('Part of {resource}', {
+                      resource: offering.parent_name,
+                    })
+                  )}
                 </>
               )}
             </p>

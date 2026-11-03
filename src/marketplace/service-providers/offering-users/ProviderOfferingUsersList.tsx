@@ -6,10 +6,10 @@ import { Badge } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { formatDateTime } from '@/core/dateUtils';
-import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
 import { OfferingUserRowActions } from '@/marketplace/offerings/actions/OfferingUserRowActions';
 import { CreateOfferingUserButton } from '@/marketplace/offerings/details/CreateOfferingUserButton';
 import { FIELD_MAPPING } from '@/marketplace/offerings/details/OfferingUserDetailsDialog';
@@ -100,11 +100,9 @@ export const ProviderOfferingUsersList: FunctionComponent<
         {
           title: translate('Offering'),
           render: ({ row }) => (
-            <Link
-              state="public-offering.marketplace-public-offering"
-              params={{ uuid: row.offering_uuid }}
-              label={row.offering_name}
-            />
+            <OfferingDetailsLink offering_uuid={row.offering_uuid}>
+              {row.offering_name}
+            </OfferingDetailsLink>
           ),
           export: 'offering_name',
           filter: 'offering',

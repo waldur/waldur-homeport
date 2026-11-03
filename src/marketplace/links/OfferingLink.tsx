@@ -3,6 +3,8 @@ import React, { PropsWithChildren } from 'react';
 import { ButtonVariant, ButtonSize } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
+import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
+import { useUser } from '@/workspace/hooks';
 
 interface OwnProps {
   offering_uuid: string;
@@ -15,7 +17,12 @@ interface OwnProps {
 }
 
 export const OfferingLink: React.FC<PropsWithChildren<OwnProps>> = (props) => {
-  return !props.disabled ? (
+  const user = useUser();
+  // The deploy page is a shop route. Same fallback as OfferingDetailsLink.
+  if (props.disabled || !canUseMarketplaceShopUi(user)) {
+    return <div className={props.className}>{props.children}</div>;
+  }
+  return (
     <Link
       state="marketplace-offering-public"
       params={{ offering_uuid: props.offering_uuid }}
@@ -26,7 +33,5 @@ export const OfferingLink: React.FC<PropsWithChildren<OwnProps>> = (props) => {
     >
       {props.children}
     </Link>
-  ) : (
-    <div className={props.className}>{props.children}</div>
   );
 };

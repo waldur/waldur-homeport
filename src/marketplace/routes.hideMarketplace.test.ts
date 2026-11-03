@@ -26,4 +26,24 @@ describe('hide_marketplace_from_end_users route policy', () => {
       canAccessMarketplaceRouteGuard,
     );
   });
+
+  it('guards the public offering page and the public provider profile', () => {
+    expect(
+      byName.get('public-offering.marketplace-public-offering')?.data
+        ?.permissions,
+    ).toContain(canAccessMarketplaceRouteGuard);
+    expect(
+      byName.get('marketplace-providers.details')?.data?.permissions,
+    ).toContain(canAccessMarketplaceRouteGuard);
+  });
+
+  it('leaves provider workspace pages open', () => {
+    for (const name of [
+      'marketplace-offering-details',
+      'marketplace-provider-orders',
+    ]) {
+      const permissions = byName.get(name)?.data?.permissions ?? [];
+      expect(permissions, name).not.toContain(canAccessMarketplaceRouteGuard);
+    }
+  });
 });
