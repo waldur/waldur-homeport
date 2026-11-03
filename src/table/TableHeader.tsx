@@ -110,7 +110,7 @@ const SortToggle: FC<{
           className={mode === 'desc' ? 'active' : undefined}
         />
       </button>
-      <span className="visually-hidden" aria-live="polite">
+      <span className="sr-only" aria-live="polite">
         {announcement}
       </span>
     </>

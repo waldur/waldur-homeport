@@ -258,7 +258,7 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
               'When Conflict of Interest detection is triggered, the system checks each reviewer against each proposal for potential conflicts.',
             )}
           </p>
-          <div className="border rounded p-3">
+          <div className="border rounded-lg p-3">
             <MermaidChart
               code={generateDetectionFlowDiagram(config)}
               className="text-center"
@@ -328,7 +328,7 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
               'After a conflict of interest is detected, it progresses through these states based on reviewer and manager actions.',
             )}
           </p>
-          <div className="border rounded p-3">
+          <div className="border rounded-lg p-3">
             <MermaidChart
               code={generateStatusDiagram()}
               className="text-center"

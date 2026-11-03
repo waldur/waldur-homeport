@@ -81,7 +81,7 @@ export const CreditBreakdownCard: FC<Props> = ({ breakdown }) => {
           figure that tells a project it is forfeiting credit, and a single
           consumed bar hides it inside the same band as real usage. */}
       <div
-        className="flex rounded overflow-hidden mb-2.5"
+        className="flex rounded-lg overflow-hidden mb-2.5"
         style={{ height: 16 }}
       >
         {segments.map((s) =>

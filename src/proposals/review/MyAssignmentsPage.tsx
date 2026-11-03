@@ -105,7 +105,7 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
   return (
     <ExpandableContainer>
       {batch.manager_notes && (
-        <div className="mb-2.5 p-2.5 bg-tertiary dark:bg-quaternary rounded">
+        <div className="mb-2.5 p-2.5 bg-tertiary dark:bg-quaternary rounded-lg">
           <strong>{translate('Notes from manager')}:</strong>
           <p className="mb-0 mt-1">{batch.manager_notes}</p>
         </div>

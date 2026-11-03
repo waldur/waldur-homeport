@@ -161,7 +161,7 @@ const PASS_THROUGH = new Set([
 ]);
 
 const NON_CLASS_PROPS =
-  /^(?:variant|data-slot|data-testid|title|label|description|component|message|summary|text|name|id|value|placeholder|key|url|path|type|role)$/;
+  /^(?:variant|data-slot|data-testid|title|label|description|component|message|summary|text|name|id|value|placeholder|key|url|path|type|role|shape)$/;
 
 /**
  * A string that holds a name, not a class list: `variant="text-danger"` (a

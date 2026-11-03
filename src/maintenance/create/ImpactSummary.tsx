@@ -155,7 +155,7 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
         className={
           compact
             ? 'text-quaternary'
-            : 'border rounded p-4 text-quaternary text-center bg-tertiary dark:bg-quaternary'
+            : 'border rounded-lg p-4 text-quaternary text-center bg-tertiary dark:bg-quaternary'
         }
       >
         {translate('Select offerings to see who will be notified.')}
@@ -168,7 +168,7 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
   return (
     <div
       className={
-        compact ? '' : 'border rounded p-3 bg-tertiary dark:bg-quaternary'
+        compact ? '' : 'border rounded-lg p-3 bg-tertiary dark:bg-quaternary'
       }
     >
       {!compact && <h6 className="mb-2.5">{translate('Estimated impact')}</h6>}

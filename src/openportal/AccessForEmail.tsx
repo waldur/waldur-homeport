@@ -119,7 +119,7 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
       <div className="card-body">
         <div className="flex flex-col gap-3">
           {Object.entries(projects).map(([projectId, project]) => (
-            <div key={projectId} className="border rounded p-2.5">
+            <div key={projectId} className="border rounded-lg p-2.5">
               <div className="mb-2.5">
                 <h5 className="mb-1 font-medium">{project.name}</h5>
                 <div>
@@ -142,7 +142,7 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
                       {project.resources.map((resource, index) => (
                         <div
                           key={index}
-                          className="bg-tertiary dark:bg-quaternary rounded p-2.5"
+                          className="bg-tertiary dark:bg-quaternary rounded-lg p-2.5"
                         >
                           <div className="flex justify-between items-start flex-wrap gap-1.5">
                             <div className="grow">
@@ -154,7 +154,7 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
                               <small className="text-quaternary block">
                                 {translate('Username')}
                               </small>
-                              <code className="bg-tertiary dark:bg-gray-800 px-1.5 py-1 rounded">
+                              <code className="bg-tertiary dark:bg-gray-800 px-1.5 py-1 rounded-lg">
                                 {resource.username}
                               </code>
                             </div>

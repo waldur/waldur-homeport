@@ -163,12 +163,12 @@ const RabbitMQClusterOverviewSkeleton: FC = () => (
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-pulse">
     {[...Array(4)].map((_, i) => (
       <div key={i} className="space-y-3">
-        <div className="h-4 bg-tertiary rounded w-1/2 mb-3" />
+        <div className="h-4 bg-tertiary rounded-lg w-1/2 mb-3" />
         <div className="space-y-2">
-          <div className="h-3 bg-tertiary rounded w-full" />
-          <div className="h-3 bg-tertiary rounded w-3/4" />
-          <div className="h-3 bg-tertiary rounded w-5/6" />
-          <div className="h-3 bg-tertiary rounded w-2/3" />
+          <div className="h-3 bg-tertiary rounded-lg w-full" />
+          <div className="h-3 bg-tertiary rounded-lg w-3/4" />
+          <div className="h-3 bg-tertiary rounded-lg w-5/6" />
+          <div className="h-3 bg-tertiary rounded-lg w-2/3" />
         </div>
       </div>
     ))}

@@ -105,7 +105,7 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
     <TimelineItem
       isSelected={isSelected}
       className={cn(
-        'rounded transition-colors',
+        'rounded-lg transition-colors',
         isSelected ? 'bg-brand-subtle' : 'hover:bg-primary-hover',
         'has-[>button:focus-visible]:outline-[var(--focus-ring-width)] has-[>button:focus-visible]:outline-[var(--focus-ring-color)] has-[>button:focus-visible]:outline-offset-[var(--focus-ring-offset)] has-[>button:focus-visible]:outline-solid',
       )}

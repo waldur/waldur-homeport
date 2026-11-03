@@ -65,7 +65,7 @@ export const ReportingTitle: FC<ReportingTitleProps> = ({
             buttonVariant="secondary"
             buttonSize="lg"
             buttonIconOnly
-            className="shadow-sm"
+            className="shadow-raised"
           >
             <ArrowLeftIcon size={20} weight="bold" />
           </Link>

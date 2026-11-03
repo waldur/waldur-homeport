@@ -316,6 +316,17 @@ export default tseslint
       },
     },
     {
+      // The table module renders in micro-apps without Bootstrap's CSS, so it
+      // must not use a class Bootstrap also emits with !important (#503).
+      // Zero instances remain here; visually-hidden and btn-no-focus are still
+      // used elsewhere in src.
+      files: ['src/table/**/*.{ts,tsx}'],
+      ignores: ['**/*.test.{ts,tsx}', '**/*.stories.tsx'],
+      rules: {
+        'waldur-custom/no-bootstrap-important-collision': 'error',
+      },
+    },
+    {
       // Off elsewhere until its existing violations are fixed. Homeport's
       // tests run without React's hook-order check, so a hook after an early
       // return passes them and only breaks in the browser. Test files are

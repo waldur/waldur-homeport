@@ -420,8 +420,9 @@ to prevent fractional `rem` compression under Waldur's forced 13px root font siz
 | `--radius-modal` | 20px   | `rounded-modal` | —                                | Sidebar mode-switcher card                      |
 | `--radius-full`  | 9999px | `rounded-full`  | `rounded-pill`, `rounded-circle` | Avatars, pills, circular badges, status dots    |
 
-- **No Bootstrap `rounded-0`, `rounded-pill`, `rounded-circle`.** Bootstrap radius utilities are
-  retired and replaced by Tailwind `rounded-none` and `rounded-full` via `waldur-custom/enforce-border-radius-tokens`.
+- **No Bootstrap `rounded-0`, `rounded-pill`, `rounded-circle`, nor a bare `rounded`.** Bootstrap radius utilities are
+  retired and replaced by Tailwind `rounded-none`, `rounded-full` and, for Bootstrap's 8px `rounded`, `rounded-lg`
+  via `waldur-custom/enforce-border-radius-tokens`. Tailwind's own bare `rounded` is 0.25rem, off the pinned scale.
 - **Why pinned in pixels?** Default Tailwind radii use relative `rem` units (e.g. `rounded-sm` is 0.25rem,
   `rounded-xl` is 0.75rem). Under Waldur's forced 13px root font size, unpinned `rem` tokens shrink
   unintentionally (`rounded-sm` becomes 3.25px, `rounded-xl` becomes 9.75px). Pinning the scale preserves

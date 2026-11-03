@@ -182,7 +182,7 @@ const AddRoleToProfileDialog: FC<{
       {roles.length === 0 ? (
         <p>{translate('No eligible roles found.')}</p>
       ) : (
-        <ul className="border-[1px] border-secondary rounded divide-y divide-secondary">
+        <ul className="border-[1px] border-secondary rounded-lg divide-y divide-secondary">
           {roles.map((r: any) => (
             <li
               key={r.uuid}

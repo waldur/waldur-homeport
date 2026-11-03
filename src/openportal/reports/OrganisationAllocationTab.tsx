@@ -569,7 +569,7 @@ const ProjectAutocompleteDialog: FC<{
 
       <div
         style={{ maxHeight: 320, overflowY: 'auto' }}
-        className="border rounded p-1.5"
+        className="border rounded-lg p-1.5"
       >
         {visible.length === 0 && (
           <p className="text-quaternary small mb-0 p-1.5">
@@ -1518,7 +1518,7 @@ export const OrganisationAllocationTab: FC = () => {
           <div className="card-body">
             {/* ── Threshold controls ──────────────────────────────────── */}
             {showThresholds && (
-              <div className="p-2.5 mb-2.5 bg-tertiary dark:bg-quaternary rounded small">
+              <div className="p-2.5 mb-2.5 bg-tertiary dark:bg-quaternary rounded-lg small">
                 <div className="grid grid-cols-1 gap-1.5">
                   <div className="flex items-center gap-1.5 flex-wrap">
                     <span style={{ minWidth: 120 }}>

@@ -60,7 +60,7 @@ export const AffiliateLinkExpandableRow: FC<{ row: CustomerAffiliate }> = ({
   );
 
   return (
-    <ExpandableContainer className="border rounded">
+    <ExpandableContainer className="border rounded-lg">
       <Table<AffiliateFeeAccrual>
         {...tableProps}
         loading={isLoading}

@@ -141,7 +141,7 @@ export const WithSelection: Story = {
   render: () => (
     <div className="max-w-md p-5 bg-primary">
       <Timeline aria-label="Version revisions">
-        <TimelineItem className="rounded bg-brand-subtle" isSelected>
+        <TimelineItem className="rounded-lg bg-brand-subtle" isSelected>
           <TimelineConnector />
           <TimelineIcon>
             <AvatarRoot className="size-8">
@@ -166,7 +166,7 @@ export const WithSelection: Story = {
           </TimelineContent>
         </TimelineItem>
 
-        <TimelineItem className="rounded hover:bg-primary-hover">
+        <TimelineItem className="rounded-lg hover:bg-primary-hover">
           <TimelineConnector />
           <TimelineIcon>
             <AvatarRoot className="size-8">

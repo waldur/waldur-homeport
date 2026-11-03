@@ -23,10 +23,15 @@ const Z_INDEX_LAYERS = [
   'tooltip',
 ];
 
+// Shadow utilities named after design tokens (tailwind/theme.css), so a
+// caller's `shadow-raised` replaces a component's own shadow class.
+const SHADOW_TOKENS = ['raised'];
+
 const twMerge = extendTailwindMerge({
   extend: {
     classGroups: {
       z: [{ z: Z_INDEX_LAYERS }],
+      shadow: [{ shadow: SHADOW_TOKENS }],
     },
   },
 });

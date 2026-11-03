@@ -332,7 +332,7 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                   )}
                 </p>
                 <div className="relative">
-                  <pre className="bg-tertiary dark:bg-quaternary p-3 rounded">
+                  <pre className="bg-tertiary dark:bg-quaternary p-3 rounded-lg">
                     {result.registration_yaml}
                   </pre>
                   <div className="absolute top-0 end-0 m-1.5">

@@ -156,36 +156,13 @@ $utilities: map.remove(
   'end'
 );
 
-// `.shadow-none` and `.rounded-0` too (the rest of each family has values of
-// its own and stays for now): Tailwind's shadow-none and rounded-none do the
-// same, and Bootstrap's `!important` beat any variant beside them. And
-// `.rounded-pill`/`.rounded-circle`, which enforce-border-radius-tokens
-// rewrites to rounded-full.
-$utilities: map.merge(
-  $utilities,
-  (
-    'shadow': map.merge(
-        map.get($utilities, 'shadow'),
-        (
-          values: map.remove(
-              map.get(map.get($utilities, 'shadow'), values),
-              'none'
-            ),
-        )
-      ),
-    'rounded': map.merge(
-        map.get($utilities, 'rounded'),
-        (
-          values: map.remove(
-              map.get(map.get($utilities, 'rounded'), values),
-              0,
-              circle,
-              pill
-            ),
-        )
-      ),
-  )
-);
+// Shadows and corner radii (#503). Bootstrap's `.shadow-sm`, `.rounded`, …
+// were `!important` under the names Tailwind uses for other values, so the
+// same class rendered differently in a micro-app without this stylesheet.
+// Their uses moved to tokens: bare `rounded` to rounded-lg (its 8px; see
+// enforce-border-radius-tokens), shadow-sm to shadow-raised
+// (semantic/elevation.css), the rest to a component's own shadow token.
+$utilities: map.remove($utilities, 'shadow', 'rounded');
 
 // Bootstrap-only names (#478, group B): no-bootstrap-layout-utility rewrites
 // each to Tailwind's (position-relative → relative, text-uppercase →

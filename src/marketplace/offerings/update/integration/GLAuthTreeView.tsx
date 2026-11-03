@@ -765,7 +765,7 @@ export const GLAuthTreeView: FC<{ tree: GlauthTree }> = ({ tree }) => {
           setSearch(e.target.value)
         }
       />
-      <div className="border rounded bg-primary">
+      <div className="border rounded-lg bg-primary">
         <TreeProps.Provider value={treeProps}>
           <FixedSizeList<RowData>
             ref={listRef}

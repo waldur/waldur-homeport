@@ -14,7 +14,13 @@
  *
  * The rule reports and autofixes:
  * - `retired`: legacy Bootstrap radius classes (`rounded-0` -> `rounded-none`,
- *   `rounded-pill` -> `rounded-full`, `rounded-circle` -> `rounded-full`).
+ *   `rounded-pill` -> `rounded-full`, `rounded-circle` -> `rounded-full`), and
+ *   the bare `rounded` / `rounded-1..3` Bootstrap used to emit with
+ *   `!important` (8px / 6px, 8px, 8px), which Bootstrap no longer generates
+ *   (#503). Tailwind's own `rounded` is 0.25rem, off the pinned scale.
+ * - `bareRounded`: `md:rounded` and other variants of the bare name never
+ *   matched Bootstrap's class, so they were Tailwind's 0.25rem; reported
+ *   without a fix, since `rounded-lg` would change them.
  * - `offScale`: arbitrary pixel classes matching a scale token
  *   (e.g. `rounded-[6px]` -> `rounded-md`, `rounded-[8px]` -> `rounded-lg`).
  * - `inline`: inline `style={{ borderRadius: ... }}` in JSX elements.
@@ -30,6 +36,10 @@ export const RETIRED_BOOTSTRAP = {
   'rounded-bottom-0': 'rounded-b-none',
   'rounded-start-0': 'rounded-s-none',
   'rounded-end-0': 'rounded-e-none',
+  rounded: 'rounded-lg',
+  'rounded-1': 'rounded-md',
+  'rounded-2': 'rounded-lg',
+  'rounded-3': 'rounded-lg',
 };
 
 const ARBITRARY_PIXELS_TO_NAMED = {
@@ -93,6 +103,8 @@ export default {
         '"{{ token }}" is a retired Bootstrap radius class. Use "{{ fix }}".',
       offScale:
         '"{{ token }}" uses an arbitrary pixel value on the design scale. Use "{{ fix }}".',
+      bareRounded:
+        '"{{ token }}" is Tailwind\'s 0.25rem, off the radius scale. Use a step: rounded-sm (4px), rounded-md, rounded-lg, …',
       inline:
         'Set border radius with a class (rounded-sm, rounded-md, rounded-lg, rounded-full, etc.), not an inline style.',
     },
@@ -110,8 +122,13 @@ export default {
         if (!parts) continue;
         const { prefix, name, suffix } = parts;
 
+        if (name === 'rounded' && (prefix || suffix)) {
+          context.report({ node, messageId: 'bareRounded', data: { token } });
+          continue;
+        }
+
         // 1. Check retired Bootstrap radius classes
-        if (RETIRED_BOOTSTRAP[name]) {
+        if (Object.hasOwn(RETIRED_BOOTSTRAP, name)) {
           const replacement = RETIRED_BOOTSTRAP[name];
           const fix = prefix + replacement + suffix;
           const regex = new RegExp(

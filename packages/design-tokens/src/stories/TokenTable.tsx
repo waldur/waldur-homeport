@@ -25,7 +25,10 @@ export function Prose({ text }: { text: string }) {
     <>
       {text.split('`').map((part, i) =>
         i % 2 ? (
-          <Mono key={i} className="rounded bg-primary-hover px-1 text-[11px]">
+          <Mono
+            key={i}
+            className="rounded-lg bg-primary-hover px-1 text-[11px]"
+          >
             {part}
           </Mono>
         ) : (
@@ -128,7 +131,7 @@ function Contrast({ value, surface }: { value: string; surface: string }) {
   return (
     <div className="flex items-center gap-1.5">
       <span
-        className="rounded px-1.5 py-0.5 text-sm font-semibold"
+        className="rounded-lg px-1.5 py-0.5 text-sm font-semibold"
         style={{ color: value, background: `var(${surface})` }}
       >
         Aa

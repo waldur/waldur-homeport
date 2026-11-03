@@ -80,7 +80,7 @@ const SortableItem: FC<SortableItemProps> = ({
         ref={setActivatorNodeRef}
         {...attributes}
         {...listeners}
-        className="inline-flex items-center justify-center size-[20px] shrink-0 p-0 me-[12px] cursor-grab active:cursor-grabbing border-0 bg-transparent text-quaternary hover:text-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand rounded"
+        className="inline-flex items-center justify-center size-[20px] shrink-0 p-0 me-[12px] cursor-grab active:cursor-grabbing border-0 bg-transparent text-quaternary hover:text-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand rounded-lg"
         aria-label={translate('Reorder column {title}', { title: labelText })}
       >
         <DotsSixVerticalIcon weight="bold" size={16} />

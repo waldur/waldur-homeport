@@ -313,7 +313,7 @@ const TableCell = memo(
                 type="button"
                 data-testid="row-expander"
                 className={classNames(
-                  'inline-flex size-[24px] shrink-0 items-center justify-center rounded border-0 bg-transparent p-0 text-inherit',
+                  'inline-flex size-[24px] shrink-0 items-center justify-center rounded-lg border-0 bg-transparent p-0 text-inherit',
                   { active: expander.isExpanded },
                 )}
                 aria-expanded={expander.isExpanded}

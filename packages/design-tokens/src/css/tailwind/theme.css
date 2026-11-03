@@ -58,6 +58,8 @@
   --border-color-secondary: var(--border-secondary);
   --border-color-tertiary: var(--border-tertiary);
   --border-color-divider: var(--border-divider);
+
+  --shadow-raised: var(--raised-shadow);
   --border-color-divider-medium: var(--border-divider-medium);
 
   --text-color-success: var(--status-success-fg);

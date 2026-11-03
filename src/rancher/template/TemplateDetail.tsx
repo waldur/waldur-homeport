@@ -74,7 +74,7 @@ export const TemplateDetail: FunctionComponent = () => {
           {/* Always-expanded sections in one bordered box, split by a rule. */}
           <div
             id="application-template-form"
-            className="border rounded bg-primary"
+            className="border rounded-lg bg-primary"
           >
             {state.data!.version.readme && (
               <div>
