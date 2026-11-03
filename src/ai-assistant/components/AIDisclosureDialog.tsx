@@ -32,7 +32,7 @@ const AccordionSection: FC<AccordionSectionProps> = ({
 
   return (
     <div
-      className="aui-disclosure-section border"
+      className="aui-disclosure-section border border-secondary"
       style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       <div

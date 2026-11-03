@@ -386,7 +386,7 @@ export const CountersAndOverflow: Story = {
         <h5 className="text-xs uppercase font-mono text-quaternary mb-1.5">
           Constrained Container & Text Truncation
         </h5>
-        <div className="w-48 p-2.5 border rounded-lg bg-white dark:bg-neutral-900 flex flex-col gap-1.5">
+        <div className="w-48 p-2.5 border border-secondary rounded-lg bg-white dark:bg-neutral-900 flex flex-col gap-1.5">
           <span className="text-xs text-quaternary">
             Container width: 192px
           </span>

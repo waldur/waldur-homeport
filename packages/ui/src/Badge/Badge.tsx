@@ -32,7 +32,7 @@ export type BadgeShape = 'pill' | 'circle' | 'roundless';
  * and the Progress colour parity.
  *
  * Note: `solid` and `light` tones use `border-transparent` because
- * the `border-[1px]` is structural. Visually, a transparent border
+ * the `border` is structural. Visually, a transparent border
  * over a background color is identical to setting `border-color: same-as-bg`.
  *
  * Every pair reaches WCAG AA (4.5:1) for its text in both themes, which
@@ -163,7 +163,7 @@ export const BADGE_STYLES: Record<
 
 // CVA only handles structural layout variants now.
 const badgeVariants = cva(
-  'badge inline-flex items-center justify-center border-[1px] text-sm leading-[20px] font-medium transition-colors',
+  'badge inline-flex items-center justify-center border border-secondary text-sm leading-[20px] font-medium transition-colors',
   {
     variants: {
       size: {

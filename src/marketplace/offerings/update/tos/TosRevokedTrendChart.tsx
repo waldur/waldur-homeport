@@ -17,7 +17,7 @@ export const TosRevokedTrendChart: FC<TosRevokedTrendChartProps> = ({
 
   return (
     <div
-      className="border-[1px] border-secondary rounded-lg"
+      className="border border-secondary rounded-lg"
       style={{ padding: '16px' }}
     >
       <h6 className="mb-2.5">{translate('Revoked consents over time')}</h6>

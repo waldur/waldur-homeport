@@ -569,7 +569,7 @@ const ProjectAutocompleteDialog: FC<{
 
       <div
         style={{ maxHeight: 320, overflowY: 'auto' }}
-        className="border rounded-lg p-1.5"
+        className="border border-secondary rounded-lg p-1.5"
       >
         {visible.length === 0 && (
           <p className="text-quaternary small mb-0 p-1.5">

@@ -43,7 +43,7 @@ export const PendingConfirmationContainer: React.FC<OwnProps> = (props) => {
         </div>
       )}
       {showProviderOrders && props.pendingProvidersCount > 0 && (
-        <div className="border-b-[1px] border-b-secondary pb-4 mb-4">
+        <div className="border-b border-b-secondary pb-4 mb-4">
           <PendingProviderOrders />
         </div>
       )}

@@ -219,10 +219,7 @@ export const ManagedProjectDetail = () => {
           {details?.notes && details.notes.length > 0 ? (
             <div className="flex flex-col gap-1.5">
               {details.notes.map((note, index) => (
-                <div
-                  key={index}
-                  className="border-b-[1px] border-b-secondary pb-1.5"
-                >
+                <div key={index} className="border-b border-b-secondary pb-1.5">
                   <div className="text-quaternary small">
                     {note.author} &middot; {formatDateTime(note.timestamp)}
                   </div>

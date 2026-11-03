@@ -22,7 +22,7 @@ const RoleDetailsDialog = ({ role }) => (
   >
     <Accordion
       type="multiple"
-      className="rounded-md border-[1px] border-solid border-secondary"
+      className="rounded-md border border-solid border-secondary"
     >
       {PermissionOptions.filter((entity) =>
         entity.options.find((option) =>

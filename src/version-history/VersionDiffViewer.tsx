@@ -65,7 +65,7 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex flex-wrap justify-between items-center gap-2.5 px-4 py-3 border-b-[1px] border-b-secondary">
+      <div className="flex flex-wrap justify-between items-center gap-2.5 px-4 py-3 border-b border-b-secondary">
         <div className="flex items-center whitespace-nowrap">
           <span className="font-medium me-1.5">{translate('Changes')}:</span>
           <StateIndicator

@@ -74,7 +74,7 @@ export const ComponentDiscountEditor: FunctionComponent<
   const canUseTierBuilder = parseFormulaToTiers(currentFormula) !== null;
 
   return (
-    <div className="mb-6 border-b-[1px] border-b-secondary pb-5">
+    <div className="mb-6 border-b border-b-secondary pb-5">
       <div className="mb-2.5">
         <strong>{component.name}</strong>
         {component.measured_unit && (

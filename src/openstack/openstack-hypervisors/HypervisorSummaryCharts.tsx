@@ -189,7 +189,7 @@ export const HypervisorSummaryCharts: FC<{
 
   return (
     <div className="card mb-5 card-bordered">
-      <div className="card-header border-b-[1px] border-b-secondary">
+      <div className="card-header border-b border-b-secondary">
         <div className="card-title">
           <span className="h3">{translate('Hypervisor summary')}</span>
         </div>

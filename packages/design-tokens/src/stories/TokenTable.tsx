@@ -115,7 +115,7 @@ function Preview({ token, value }: { token: Token; value: string }) {
   }
   return (
     <div
-      className="size-10 rounded-md border-[1px] border-secondary"
+      className="size-10 rounded-md border border-secondary"
       style={{ background: v }}
     />
   );
@@ -246,7 +246,7 @@ export function TokenTable({
   ];
   return (
     <div
-      className="grid items-start gap-x-4 rounded-md border-[1px] border-secondary bg-[var(--card-bg)] px-3 [&>.contents>*]:border-t-[1px] [&>.contents>*]:border-t-secondary"
+      className="grid items-start gap-x-4 rounded-md border border-secondary bg-[var(--card-bg)] px-3 [&>.contents>*]:border-t [&>.contents>*]:border-t-secondary"
       style={{ gridTemplateColumns: columns }}
     >
       {header.map((h, i) => (

@@ -11,11 +11,9 @@
  *   btn-no-focus      Bootstrap-only; BaseButton has no focus shadow and only
  *                     draws its ring on :focus-visible, so it is not needed
  *
- * Bootstrap's shadow and radius utilities are no longer generated: their uses
- * moved to tokens, and enforce-border-radius-tokens rewrites a bare `rounded`.
- * The border widths (`border-0`, `border-2`, …) are left out: both define
- * them as the same width. `.border` also sets Bootstrap's colour, which
- * no-bootstrap-border-with-tailwind-color covers.
+ * Bootstrap generates no utility any more (#478): shadow and radius uses
+ * moved to tokens, and require-border-color keeps a bare `border` coloured.
+ * What is left are its helpers, which this rule reports.
  *
  * Only a bare token collides: `md:visually-hidden` is a different class name,
  * which Bootstrap does not define.

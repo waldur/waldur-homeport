@@ -84,7 +84,7 @@ export const AlertItem = forwardRef<HTMLDivElement, AlertItemProps>(
         className={cn(
           'flex gap-[0.846rem]',
           isFloating
-            ? 'p-[1.23rem] rounded-[0.475rem] border-[1px] border-secondary'
+            ? 'p-[1.23rem] rounded-[0.475rem] border border-secondary'
             : 'py-[1.23rem] px-0 border-b border-secondary',
           className,
         )}

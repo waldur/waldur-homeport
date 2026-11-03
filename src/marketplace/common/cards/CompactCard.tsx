@@ -47,7 +47,7 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
           })}
           disabled={!isAllowed}
         >
-          <div className="card card-bordered h-full cursor-pointer border-hover-brand">
+          <div className="card card-bordered h-full cursor-pointer hover:border-brand">
             <div className="card-body p-3 flex items-center gap-2.5">
               {offering.thumbnail ? (
                 <Image src={offering.thumbnail} size={48} isContain circle />

@@ -225,7 +225,7 @@ export const FeedbackStrip: FunctionComponent<
   return (
     <div
       className={classNames(
-        'message-feedback mt-1 px-2.5 py-1.5 rounded-lg border small',
+        'message-feedback mt-1 px-2.5 py-1.5 rounded-lg border border-secondary small',
         positive ? 'bg-success-subtle' : 'bg-danger-subtle',
       )}
     >

@@ -78,11 +78,11 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
   });
 
   return (
-    <ExpandableContainer className="border rounded-lg">
+    <ExpandableContainer className="border border-secondary rounded-lg">
       <EmbeddedTabs
         defaultValue="active"
         header={
-          <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b-[1px] border-b-secondary">
+          <div className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-b-secondary">
             <span className="text-base font-medium text-primary">
               {translate('Team')}
             </span>

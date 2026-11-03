@@ -35,7 +35,7 @@ export const BreadcrumbMain = forwardRef<HTMLDivElement, BreadcrumbMainProps>(
             // mt-px undoes the header group's -mb-px: the bar starts under
             // the header's rule; -mb-px lets what follows start under its own.
             mobile && [
-              'h-[55px] px-[15px] border-b-[1px] border-b-secondary bg-primary',
+              'h-[55px] px-[15px] border-b border-b-secondary bg-primary',
               'sticky z-99 mt-px -mb-px print:hidden',
               'top-[calc(var(--layout-page-bar-height,0px)+var(--layout-header-height,0px))]',
             ],

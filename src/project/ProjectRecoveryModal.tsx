@@ -197,7 +197,7 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
                   'send_invitations_to_previous_members' ||
                   values.roleRecoveryOption === 'restore_team_members') && (
                   <div
-                    className="border rounded-lg p-2.5 mb-2.5 mt-2.5"
+                    className="border border-secondary rounded-lg p-2.5 mb-2.5 mt-2.5"
                     style={{ maxHeight: '200px', overflowY: 'auto' }}
                   >
                     <h6 className="mb-1.5">

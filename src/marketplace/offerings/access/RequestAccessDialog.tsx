@@ -54,9 +54,7 @@ const MethodChoice: FC<{ method: AccessMethod }> = ({ method }) => (
   <Field<AccessMethodKey> name="method" type="radio" value={method.key}>
     {({ input }) => (
       <div
-        // border-[1px], not Bootstrap's .border: its !important colour would
-        // override the selected state's border-brand.
-        className={`rounded-lg border-[1px] p-3 ${
+        className={`rounded-lg border p-3 ${
           input.checked ? 'border-brand bg-brand-subtle' : 'border-secondary'
         }`}
       >

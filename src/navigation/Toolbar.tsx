@@ -96,7 +96,7 @@ export const Toolbar: FunctionComponent<OwnProps> = ({ actionsRef }) => {
       // The waldur-integration-testing suite selects the page tabs by this
       // (docs/e2e-locators.md).
       data-testid="page-toolbar"
-      className="flex items-center h-[55px] lg:h-[60px] bg-primary border-y-[1px] border-y-secondary"
+      className="flex items-center h-[55px] lg:h-[60px] bg-primary border-y border-y-secondary"
     >
       <div
         className={classNames(

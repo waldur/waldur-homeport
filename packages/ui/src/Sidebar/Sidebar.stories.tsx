@@ -258,7 +258,7 @@ export const AccordionHierarchy: Story = {
 /** Long scrollable menu demonstrating the custom Radix ScrollArea with scrollbar thumb styling. */
 export const ScrollableContent: Story = {
   render: () => (
-    <div className="h-[500px] w-[300px] overflow-hidden rounded-xl border-[1px] border-[var(--sidebar-border)] shadow-md">
+    <div className="h-[500px] w-[300px] overflow-hidden rounded-xl border border-[var(--sidebar-border)] shadow-md">
       <SidebarProvider className="min-h-0 h-full w-full">
         <Sidebar collapsible="none" className="h-full w-full">
           <SidebarHeader className="gap-1.5">
@@ -404,7 +404,7 @@ const ThemedSidebarPreview = ({ styleName }: ThemedSidebarProps) => (
     <div className="mb-1.5 text-xs font-semibold tracking-wider text-quaternary uppercase">
       {styleName}
     </div>
-    <div className="h-[550px] w-[300px] overflow-hidden rounded-xl border-[1px] border-[var(--sidebar-border)] shadow-md">
+    <div className="h-[550px] w-[300px] overflow-hidden rounded-xl border border-[var(--sidebar-border)] shadow-md">
       <SidebarProvider className="min-h-0 h-full w-full">
         <Sidebar collapsible="none" className="h-full w-full">
           <SidebarHeader className="gap-1.5">
@@ -477,7 +477,7 @@ export const InteractiveStyle: StoryObj<{ style: SidebarStyle }> = {
       <div className="mb-2.5 text-xs font-semibold tracking-wider text-quaternary uppercase">
         Current style: {args.style}
       </div>
-      <div className="h-[650px] w-[300px] overflow-hidden rounded-xl border-[1px] border-[var(--sidebar-border)] shadow-md">
+      <div className="h-[650px] w-[300px] overflow-hidden rounded-xl border border-[var(--sidebar-border)] shadow-md">
         <SidebarProvider className="min-h-0 h-full w-full">
           <Sidebar collapsible="none" className="h-full w-full">
             <SidebarHeader className="gap-3">

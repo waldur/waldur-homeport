@@ -71,7 +71,7 @@ export const CostPolicyMonthStrip: FC<{
         {cells.map((cell) => (
           <li
             key={cell.key}
-            className={`rounded-md border-[1px] px-3 py-2 min-w-[120px] ${cellClass(cell)}`}
+            className={`rounded-md border px-3 py-2 min-w-[120px] ${cellClass(cell)}`}
           >
             <div className="text-xs text-secondary">{cell.label}</div>
             <div className="text-sm">

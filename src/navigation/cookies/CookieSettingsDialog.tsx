@@ -27,7 +27,7 @@ const CookieCategory: FC<CookieCategoryProps> = ({
   value,
   disabled,
 }) => (
-  <div className="cookie-settings-category border-b-[1px] border-b-secondary py-3">
+  <div className="cookie-settings-category border-b border-b-secondary py-3">
     <div className="flex items-start justify-between gap-2.5">
       <div>
         <div className="font-medium">{title}</div>

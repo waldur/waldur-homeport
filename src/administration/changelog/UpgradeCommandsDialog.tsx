@@ -27,7 +27,7 @@ const CommandBlock: FunctionComponent<{ title: string; command: string }> = ({
         copiedLabel={translate('Copied')}
       />
     </div>
-    <pre className="m-0 overflow-x-auto whitespace-pre rounded-md border-[1px] border-secondary bg-[var(--page-bg)] p-[12px] font-mono text-primary">
+    <pre className="m-0 overflow-x-auto whitespace-pre rounded-md border border-secondary bg-[var(--page-bg)] p-[12px] font-mono text-primary">
       {command}
     </pre>
   </div>

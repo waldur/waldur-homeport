@@ -46,7 +46,7 @@ export function Card({ className, bordered, ...props }: CardProps) {
   return (
     <div
       className={cn(
-        'rounded-lg border-[1px] bg-[var(--card-bg)] text-primary',
+        'rounded-lg border bg-[var(--card-bg)] text-primary',
         bordered
           ? 'border-secondary shadow-none dark:bg-[var(--page-bg)]'
           : 'border-[var(--card-border-color)] shadow-[var(--card-shadow)]',

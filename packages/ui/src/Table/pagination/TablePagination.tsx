@@ -73,7 +73,7 @@ export const TablePagination = ({
       className={cn(
         'table-pagination md:px-[16.25px]',
         bordered &&
-          'border-t-[1px] border-solid border-[var(--pagination-border)] pt-[12px]',
+          'border-t border-solid border-[var(--pagination-border)] pt-[12px]',
         className,
       )}
     >

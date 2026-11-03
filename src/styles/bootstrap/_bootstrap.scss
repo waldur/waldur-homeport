@@ -34,6 +34,9 @@ $grid-breakpoints: $_grid-breakpoints;
 $aspect-ratios: $_aspect-ratios;
 $theme-colors: $_theme-colors;
 
-// Bootstrap utilities
-@import 'utilities';
-@import 'bootstrap/scss/utilities/api';
+// No Bootstrap utilities: Tailwind generates every utility class (#478).
+// Bootstrap's were `!important` in the `bootstrap` layer, so a name both
+// define rendered Bootstrap's value in homeport and Tailwind's in a micro-app,
+// and no Tailwind variant beside one ever applied. The utility API is not
+// imported; no-retired-bootstrap-utility, no-bootstrap-layout-utility and
+// no-bootstrap-color-utility report the old spellings.

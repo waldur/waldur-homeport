@@ -167,7 +167,7 @@ export const UsageExpandableRow = ({
             />
           </PropertyList>
         </div>
-        <div className="border-sm-start md:ps-7.5">
+        <div className="sm:border-l sm:border-l-secondary md:ps-7.5">
           <div className="card card-bordered">
             <div className="card-body p-3">
               <div className="flex items-center justify-between gap-1.5 whitespace-nowrap flex-wrap">

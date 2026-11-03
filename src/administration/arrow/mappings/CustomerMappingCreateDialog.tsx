@@ -231,7 +231,7 @@ export const CustomerMappingCreateDialog = ({
               subscription={{ value: true }}
               render={({ input }) =>
                 input.value ? (
-                  <div className="mb-3 p-2.5 border rounded-lg">
+                  <div className="mb-3 p-2.5 border border-secondary rounded-lg">
                     <small className="text-quaternary block mb-1">
                       {translate('Selected Arrow Customer')}
                     </small>

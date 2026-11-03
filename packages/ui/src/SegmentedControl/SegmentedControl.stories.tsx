@@ -134,7 +134,7 @@ export const BesideTallerSibling: Story = {
     const [view, setView] = useState<string>('requests');
     return (
       <div className="flex gap-3 p-5">
-        <div className="flex h-11 w-52 items-center rounded-lg border-[1px] border-[var(--btn-tertiary-border)] bg-primary px-2.5 text-sm text-quaternary">
+        <div className="flex h-11 w-52 items-center rounded-lg border border-[var(--btn-tertiary-border)] bg-primary px-2.5 text-sm text-quaternary">
           Search (44px)
         </div>
         <SegmentedControl

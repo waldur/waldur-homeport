@@ -126,7 +126,7 @@ export function SwitchVisual({
     <span
       aria-hidden="true"
       className={cn(
-        'relative inline-flex h-[20px] w-[36px] shrink-0 items-center rounded-full border-[1px] border-solid transition-colors duration-150 ease-[ease-in-out] motion-reduce:transition-none',
+        'relative inline-flex h-[20px] w-[36px] shrink-0 items-center rounded-full border border-solid transition-colors duration-150 ease-[ease-in-out] motion-reduce:transition-none',
         checked
           ? 'border-[var(--switch-track-checked)] bg-[var(--switch-track-checked)]'
           : 'border-[var(--switch-track-border)] bg-[var(--switch-track)]',

@@ -85,7 +85,7 @@ const ModePickerOption = ({
     aria-pressed={selected}
     onClick={() => onSelect(mode.key)}
     className={cn(
-      'flex items-start gap-2.5 rounded-xl border-[1px] p-3 text-left transition-colors',
+      'flex items-start gap-2.5 rounded-xl border p-3 text-left transition-colors',
       selected
         ? 'border-brand ring-2 ring-[var(--bg-brand-subtle)]'
         : 'border-secondary hover:bg-primary-hover',

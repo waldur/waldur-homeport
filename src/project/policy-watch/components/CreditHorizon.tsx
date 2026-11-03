@@ -86,7 +86,7 @@ export const CreditHorizon: FC<Props> = ({ events }) => (
                 size="sm"
               />
               {!isLast && (
-                <div className="border-l-[1px] border-l-secondary grow my-1.5" />
+                <div className="border-l border-l-secondary grow my-1.5" />
               )}
             </div>
             <div className={isLast ? 'mb-0' : 'mb-4'}>

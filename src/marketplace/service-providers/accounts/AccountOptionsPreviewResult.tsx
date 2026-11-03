@@ -60,7 +60,7 @@ const RenamesTable: FC<{ offering: OfferingAccountPreview }> = ({
 const OfferingPreview: FC<{ offering: OfferingAccountPreview }> = ({
   offering,
 }) => (
-  <div className="border rounded-lg p-4 mb-3">
+  <div className="border border-secondary rounded-lg p-4 mb-3">
     <h5 className="mb-2.5">{offering.name}</h5>
     {offering.changed.length === 0 ? (
       <p className="text-quaternary mb-0">

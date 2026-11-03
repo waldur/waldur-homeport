@@ -17,7 +17,7 @@ export const K8sFormSection: FC<PropsWithChildren<K8sFormSectionProps>> = ({
     <div
       className={classNames(
         'mb-3',
-        topSeparator && 'pt-4 border-t-[1px] border-t-secondary',
+        topSeparator && 'pt-4 border-t border-t-secondary',
       )}
     >
       <div className="mb-4">

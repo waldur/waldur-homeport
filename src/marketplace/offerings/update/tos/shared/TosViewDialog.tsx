@@ -79,7 +79,7 @@ export const TosViewDialog = ({
           <h5 className="mb-2.5">{translate('Terms of service content')}</h5>
           <div
             ref={tosContentRef}
-            className="border rounded-lg tos-content-preview"
+            className="border border-secondary rounded-lg tos-content-preview"
             onScroll={handleScroll}
           >
             <SafeMarkdown text={tos.terms_of_service} />

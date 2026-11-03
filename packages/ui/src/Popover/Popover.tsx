@@ -80,7 +80,7 @@ export const PopoverContent = forwardRef<
         align={align}
         sideOffset={sideOffset}
         className={cn(
-          'z-popover rounded-lg border-[1px] shadow-[var(--dropdown-shadow)] outline-hidden',
+          'z-popover rounded-lg border shadow-[var(--dropdown-shadow)] outline-hidden',
           'border-secondary bg-[var(--card-bg)] text-primary',
           className,
         )}

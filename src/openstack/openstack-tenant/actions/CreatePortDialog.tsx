@@ -108,7 +108,7 @@ export const FixedIPsField: FC<{
           label={translate('Custom IP configuration')}
         />
       </div>
-      <div className="border-rows mb-3">
+      <div className="divide-y divide-secondary *:not-last:mb-3 *:not-last:pb-3 mb-3">
         <div className="grid grid-cols-1 gap-3">
           <div>
             <SelectGroup

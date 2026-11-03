@@ -202,7 +202,7 @@ export const OpenPortalReportsTab: FC = () => {
 
   return (
     <div className="card card-bordered">
-      <div className="card-header border-b-[1px] border-b-secondary">
+      <div className="card-header border-b border-b-secondary">
         <div className="flex items-center gap-2.5 flex-wrap w-full">
           <div className="flex items-center me-1.5">
             <span className="h3 mb-0">{translate('Usage Report')}</span>

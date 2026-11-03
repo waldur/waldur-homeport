@@ -131,7 +131,7 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
 
       {/* Source Type Info */}
       {row.source_type && (
-        <div className="mt-2.5 pt-2.5 border-t-[1px] border-t-secondary">
+        <div className="mt-2.5 pt-2.5 border-t border-t-secondary">
           <small className="text-quaternary">
             {translate('Match source')}:{' '}
             {row.source_type_display || row.source_type}

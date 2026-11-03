@@ -86,7 +86,7 @@ export const ApplicationDetailsDialog: FunctionComponent<{
       type="single"
       collapsible
       defaultValue="summary"
-      className="rounded-md border-[1px] border-solid border-secondary"
+      className="rounded-md border border-solid border-secondary"
     >
       <AccordionItem value="summary">
         <AccordionTrigger>{translate('Summary')}</AccordionTrigger>

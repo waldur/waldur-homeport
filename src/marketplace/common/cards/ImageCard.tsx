@@ -34,7 +34,7 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
       })}
       disabled={!isAllowed}
     >
-      <div className="card card-bordered h-full overflow-hidden cursor-pointer border-hover-brand">
+      <div className="card card-bordered h-full overflow-hidden cursor-pointer hover:border-brand">
         {/* Image header */}
         <div className="image-card-header">
           {image ? (

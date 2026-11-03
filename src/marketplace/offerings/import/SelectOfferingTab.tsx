@@ -76,7 +76,7 @@ export const SelectOfferingTab = () => {
         <PropertyItem
           label={translate('API URL')}
           value={formData?.api_url}
-          className="border-b-[1px] border-b-secondary border-t-[1px] border-t-secondary py-4 mb-4"
+          className="border-b border-b-secondary border-t border-t-secondary py-4 mb-4"
           labelClass="font-semibold me-2.5"
         />
       </PropertyList>

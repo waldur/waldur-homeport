@@ -12,7 +12,7 @@ import enforceNoResultWithCta from './rules/enforce-noresult-with-cta.js';
 import enforcePhosphorIconWeight from './rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './rules/enforce-render-field-or-dash.js';
 import iconButtonNeedsAccessibleName from './rules/icon-button-needs-accessible-name.js';
-import noBootstrapBorderWithTailwindColor from './rules/no-bootstrap-border-with-tailwind-color.js';
+import noArbitraryBorderWidth from './rules/no-arbitrary-border-width.js';
 import noBootstrapBreadcrumb from './rules/no-bootstrap-breadcrumb.js';
 import noBootstrapButtonMarkup from './rules/no-bootstrap-button-markup.js';
 import noBootstrapColorUtility from './rules/no-bootstrap-color-utility.js';
@@ -49,6 +49,7 @@ import preferMutateOverMutateAsync from './rules/prefer-mutate-over-mutateAsync.
 import preferTokenUtility from './rules/prefer-token-utility.js';
 import preferTypedProperty from './rules/prefer-typed-property.js';
 import propertyItemInList from './rules/property-item-in-list.js';
+import requireBorderColor from './rules/require-border-color.js';
 import requireDarkPair from './rules/require-dark-pair.js';
 import requireFontSizeScale from './rules/require-font-size-scale.js';
 import requireWeightScale from './rules/require-weight-scale.js';
@@ -74,8 +75,8 @@ export default {
     'no-bootstrap-form-check': noBootstrapFormCheck,
     'no-bootstrap-layout-utility': noBootstrapLayoutUtility,
     'no-bootstrap-progress': noBootstrapProgress,
-    'no-bootstrap-border-with-tailwind-color':
-      noBootstrapBorderWithTailwindColor,
+    'require-border-color': requireBorderColor,
+    'no-arbitrary-border-width': noArbitraryBorderWidth,
     'no-raw-status-ramp': noRawStatusRamp,
     'prefer-token-utility': preferTokenUtility,
     'no-retired-bootstrap-utility': noRetiredBootstrapUtility,

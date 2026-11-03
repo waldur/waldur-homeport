@@ -66,7 +66,7 @@ const FieldsListGroup = ({
             key={name + i}
             className={
               i + 1 < fields.length
-                ? 'border-b-[1px] border-b-secondary mb-2.5'
+                ? 'border-b border-b-secondary mb-2.5'
                 : undefined
             }
           >

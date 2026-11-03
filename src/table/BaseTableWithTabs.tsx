@@ -95,7 +95,7 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
             </TabsList>
             {actions ? (
               Array.isArray(actions) && actions.length ? (
-                <div className="flex items-center border-b-[1px] border-b-secondary gap-1.5">
+                <div className="flex items-center border-b border-b-secondary gap-1.5">
                   {actions.map((action, index) => (
                     <Fragment key={index}>
                       {action.activeKeys.includes(activeKey)
@@ -105,7 +105,7 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
                   ))}
                 </div>
               ) : (
-                <div className="border-b-[1px] border-b-secondary">
+                <div className="border-b border-b-secondary">
                   {actions as ReactNode}
                 </div>
               )

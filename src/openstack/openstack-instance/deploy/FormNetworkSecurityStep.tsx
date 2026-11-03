@@ -336,7 +336,7 @@ const renderNetworkRows = ({
 
   return (
     <div className="mb-4">
-      <div className="border-rows mb-3">
+      <div className="divide-y divide-secondary *:not-last:mb-3 *:not-last:pb-3 mb-3">
         {fields.map((network, index) => {
           // Decided per row: a tenant can hold subnets of both families, and
           // with and without a router, and a row that can take a floating IP
@@ -552,7 +552,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
       disabled={props.disabled}
       disabledTooltip={props.disabledTooltip}
     >
-      <div className="mb-4 -mt-3 border-b-[1px] border-b-secondary">
+      <div className="mb-4 -mt-3 border-b border-b-secondary">
         {showSshKeyWarning && (
           <AlertItem
             variant="warning"
@@ -596,7 +596,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
         />
       </div>
 
-      <FormField className="mb-1.5 border-b-[1px] border-b-secondary">
+      <FormField className="mb-1.5 border-b border-b-secondary">
         <div className="flex justify-between mb-4">
           <FormLabel className="font-semibold mb-0">
             {translate('Network')}

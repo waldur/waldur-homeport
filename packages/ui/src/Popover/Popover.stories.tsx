@@ -58,7 +58,7 @@ export const WithFormControls: Story = {
                 id="popover-story-name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] px-[10px] py-[6px] text-sm text-primary"
+                className="rounded-md border border-secondary bg-[var(--card-bg)] px-[10px] py-[6px] text-sm text-primary"
                 placeholder="Type here…"
               />
               <div className="text-sm text-quinary">

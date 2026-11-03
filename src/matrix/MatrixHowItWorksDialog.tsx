@@ -222,7 +222,7 @@ export const MatrixHowItWorksDialog: FC = () => {
               'Helm and Docker Compose deployments supply the tokens and, by default, register the appservice on every deploy, so they show no Setup button. On other installations, Setup generates the tokens and a registration YAML, which you then register on the homeserver.',
             )}
           </p>
-          <div className="border rounded-lg p-3">
+          <div className="border border-secondary rounded-lg p-3">
             <MermaidChart code={SETUP_FLOW_DIAGRAM} className="text-center" />
           </div>
           <AlertItem
@@ -265,7 +265,7 @@ export const MatrixHowItWorksDialog: FC = () => {
               'Each project can have one chat room. Rooms are created by organization owners (or any role with the "Create matrix room" permission), staff and support, and automatically populated with project members. Only staff can disable a room (kicking all members and exporting history) and later re-enable it or delete it entirely.',
             )}
           </p>
-          <div className="border rounded-lg p-3">
+          <div className="border border-secondary rounded-lg p-3">
             <MermaidChart
               code={ROOM_LIFECYCLE_DIAGRAM}
               className="text-center"
@@ -283,7 +283,7 @@ export const MatrixHowItWorksDialog: FC = () => {
               formatJsxTemplate,
             )}
           </p>
-          <div className="border rounded-lg p-3">
+          <div className="border border-secondary rounded-lg p-3">
             <MermaidChart code={WEBHOOK_FLOW_DIAGRAM} className="text-center" />
           </div>
         </section>
@@ -326,7 +326,7 @@ export const MatrixHowItWorksDialog: FC = () => {
               'Chat history can be exported as JSON files with optional media attachments. Exports can be triggered manually, run on a daily schedule, or happen automatically when a room is disabled or a project is deleted.',
             )}
           </p>
-          <div className="border rounded-lg p-3">
+          <div className="border border-secondary rounded-lg p-3">
             <MermaidChart code={EXPORT_FLOW_DIAGRAM} className="text-center" />
           </div>
         </section>

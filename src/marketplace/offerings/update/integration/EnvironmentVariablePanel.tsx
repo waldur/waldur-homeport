@@ -19,7 +19,7 @@ export const EnvironmentVariablePanel: FC<EnvironmentVariablePanelProps> = ({
   onRemove,
 }) => {
   return (
-    <tr className="border-b-[1px] border-b-secondary">
+    <tr className="border-b border-b-secondary">
       <td>
         <Field name={`${variable}.name`}>
           {({ input, meta }) => (

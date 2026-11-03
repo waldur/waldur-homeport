@@ -123,7 +123,7 @@ export const AppFooter: FunctionComponent = () => {
       // The waldur-integration-testing suite selects the footer by this
       // (docs/e2e-locators.md).
       data-testid="app-footer"
-      className="flex flex-col bg-primary border-t-[1px] border-t-secondary print:hidden"
+      className="flex flex-col bg-primary border-t border-t-secondary print:hidden"
     >
       {/* The security alert shows at the top of the page, with the
           announcements. */}

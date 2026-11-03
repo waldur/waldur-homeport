@@ -195,7 +195,7 @@ export const ReviewerProfilePanel = ({
           </div>
         </div>
         {/* Tabs navigation */}
-        <div className="card-header border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto">
+        <div className="card-header border-b border-b-secondary items-stretch py-0 min-h-auto">
           <TabsList scrollable scrollClassName="grow pt-3" bordered={false}>
             {tabs.map((tab) => (
               <TabsTrigger key={tab.key} value={tab.key}>

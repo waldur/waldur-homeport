@@ -72,9 +72,10 @@ $table-hover-bg: var(--bg-tertiary) !default;
 
 // Non-colour overrides of Bootstrap's and Metronic's variables
 
-// Bootstrap builds its text and background utility maps from $body-color and
-// $body-bg with to-rgb(), which needs a Sass colour. Bootstrap emits no colour
-// utilities here (_utilities.scss), so the maps are empty.
+// Bootstrap's _variables.scss builds its text and background utility maps
+// from $body-color and $body-bg with to-rgb(), which needs a Sass colour, not
+// the tokens. Bootstrap generates no utilities here (#478), so the maps are
+// empty.
 $utilities-text: () !default;
 $utilities-bg: () !default;
 // Bootstrap generates a .table-{color} for each colour by mixing it with
@@ -411,7 +412,7 @@ $font-weight-bolder: var(--font-weight-semibold) !default;
 $font-weight-base: $font-weight-normal !default;
 
 // Line heights (Bootstrap / Metronic scale).
-// Note: utility generation for `.lh-*` is retired from `$utilities` in `_utilities.scss`.
+// Note: Bootstrap generates no `.lh-*` (its utility API is not imported, #478).
 // Use Tailwind's `leading-*` scale (leading-none, leading-tight, leading-normal, leading-relaxed, etc.) instead.
 $line-height-base: 1.43 !default; // ~20px (retained for body and $input-btn-line-height)
 
@@ -424,7 +425,7 @@ $h5-font-size: $font-size-base * 1.15 !default; // 14.95px
 $h6-font-size: $font-size-base * 1.077 !default; // 14px
 
 // Font Sizes
-// Note: Utility generation for `.fs-*` is retired from `$utilities` in `_utilities.scss`.
+// Note: Bootstrap generates no `.fs-*` (its utility API is not imported, #478).
 // Use Tailwind's `text-*` scale (text-xs through text-4xl) from waldur-design-tokens instead.
 // Enforced by ESLint rule `waldur-custom/require-font-size-scale`.
 

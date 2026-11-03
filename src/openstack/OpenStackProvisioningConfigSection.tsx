@@ -260,7 +260,7 @@ export const OpenStackProvisioningConfigSection: FC<OfferingEditPanelProps> = (
             label={translate('Mapping of floating to external IPs')}
             renderValue={(value) =>
               value ? (
-                <div className="text-pre">
+                <div className="whitespace-pre">
                   {value
                     .map((item) => `${item.floating_ip}: ${item.external_ip}`)
                     .join('\n')}

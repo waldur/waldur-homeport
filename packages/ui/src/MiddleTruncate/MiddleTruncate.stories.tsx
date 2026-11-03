@@ -26,7 +26,7 @@ type Story = StoryObj<typeof MiddleTruncate>;
 // A width-constrained flex row, which is what lets the head clip.
 const Frame = ({ width, children }: { width: number; children: ReactNode }) => (
   <div
-    className="flex min-w-0 border-[1px] border-dashed border-secondary p-1 text-sm"
+    className="flex min-w-0 border border-dashed border-secondary p-1 text-sm"
     style={{ width }}
   >
     {children}
@@ -131,7 +131,7 @@ export const LongerTail: Story = {
 /** Drag the corner to see the middle collapse and come back. */
 export const Resizable: Story = {
   render: (args) => (
-    <div className="flex min-w-0 w-[360px] resize-x overflow-hidden border-[1px] border-dashed border-secondary p-1 text-sm">
+    <div className="flex min-w-0 w-[360px] resize-x overflow-hidden border border-dashed border-secondary p-1 text-sm">
       <MiddleTruncate {...args} />
     </div>
   ),

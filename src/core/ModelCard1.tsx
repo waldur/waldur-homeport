@@ -28,12 +28,12 @@ export const ModelCard1: FC<ModelCard1Props> = ({
   <div
     className={classNames(
       'card model-card-1 card-bordered h-full overflow-hidden',
-      props.clickable && 'cursor-pointer border-hover-brand',
+      props.clickable && 'cursor-pointer hover:border-brand',
     )}
     onClick={props.onClick}
   >
     {(props.image || props.placeholder) && (
-      <div className="h-[85px] flex items-center justify-center border-b-[1px] border-b-secondary">
+      <div className="h-[85px] flex items-center justify-center border-b border-b-secondary">
         {props.image ? (
           <img
             alt="model-card"

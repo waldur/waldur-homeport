@@ -17,14 +17,15 @@ import { RETIRED_UTILITY_PATTERNS } from '../packages/eslint-plugin-waldur/rules
  * utility, `!` or not. A Tailwind class that shared a name with one of them
  * silently lost: it compiled, but Bootstrap painted it, and a `dark:` or
  * `hover:` variant next to it never applied. Colour now comes from Tailwind
- * and the design tokens only, so Bootstrap emits none (_utilities.scss).
+ * and the design tokens only, so Bootstrap emits none (its utility API is not
+ * imported, #478).
  *
  * Read from what the compilers actually emit, not from the SCSS maps:
  * `text-white`, `bg-transparent` and friends came from Bootstrap maps other
  * than $theme-colors, and a map-based check missed them.
  *
- * (`.border` itself, which sets the colour too, is covered by the
- * no-bootstrap-border-with-tailwind-color lint rule.)
+ * (Bootstrap's `.border`, which set the colour too, is retired with the rest
+ * of its utilities; require-border-color keeps a bare `border` coloured.)
  */
 
 const root = path.join(__dirname, '..');
@@ -106,7 +107,7 @@ describe('Tailwind and Bootstrap colour utilities', () => {
   it('emits no Bootstrap colour utility', () => {
     expect(
       [...bootstrap].sort(),
-      'Colour comes from Tailwind: remove these from $utilities in _utilities.scss',
+      'Colour comes from Tailwind: Bootstrap must not generate these',
     ).toEqual([]);
   });
 
@@ -159,7 +160,7 @@ describe('Font weight', () => {
   it('emits no Bootstrap .fw-* class', () => {
     expect(
       [...fontWeightClasses(compileMetronic())].sort(),
-      'Weight comes from Tailwind: remove font-weight from $utilities in _utilities.scss',
+      'Weight comes from Tailwind: Bootstrap must not generate .fw-*',
     ).toEqual([]);
   });
 

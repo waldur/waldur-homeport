@@ -48,7 +48,7 @@ export const TopBar = ({
   <header
     className={cn(
       'flex h-[55px] shrink-0 items-stretch justify-between px-[15px] lg:h-[65px] lg:px-[32px]',
-      'border-b-[1px] border-b-secondary bg-primary',
+      'border-b border-b-secondary bg-primary',
       className,
     )}
     {...props}
@@ -138,7 +138,7 @@ export const SearchField = ({
 }: SearchFieldProps) => (
   <div
     className={cn(
-      'flex w-full max-w-md items-center gap-1.5 rounded-lg border-[1px] px-2.5 py-1.5 text-sm',
+      'flex w-full max-w-md items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-sm',
       'border-secondary bg-[var(--card-bg)] text-quinary',
       className,
     )}
@@ -146,7 +146,7 @@ export const SearchField = ({
     <MagnifyingGlassIcon size={16} weight="bold" />
     <span className="flex-1 text-left">{placeholder}</span>
     {shortcutHint && (
-      <kbd className="rounded-lg border-[1px] border-secondary px-1.5 py-0.5 text-xs">
+      <kbd className="rounded-lg border border-secondary px-1.5 py-0.5 text-xs">
         {shortcutHint}
       </kbd>
     )}

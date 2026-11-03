@@ -135,7 +135,7 @@ export const FlavorTable = ({
       hasActionBar={false}
       cardBordered={false}
       fullWidth
-      className="-mt-4 border-b-[1px] border-b-secondary"
+      className="-mt-4 border-b border-b-secondary"
       minHeight="auto"
       hoverable
       fieldType="radio"

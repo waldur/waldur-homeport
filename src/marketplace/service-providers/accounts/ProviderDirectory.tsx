@@ -144,7 +144,7 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
               </TabsList>
               <>
                 <TabsContent value="toml">
-                  <div className="border rounded-lg overflow-hidden">
+                  <div className="border border-secondary rounded-lg overflow-hidden">
                     <MonacoEditor
                       value={config}
                       language="ini"

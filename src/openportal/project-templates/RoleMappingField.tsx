@@ -86,7 +86,7 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
             <div className="text-quaternary mb-1.5">
               {translate('Current mappings:')}
             </div>
-            <ul className="border-[1px] border-secondary rounded-lg divide-y divide-secondary mb-2.5">
+            <ul className="border border-secondary rounded-lg divide-y divide-secondary mb-2.5">
               {Object.entries(currentMappings).map(([key, value]) => (
                 <li
                   key={key}

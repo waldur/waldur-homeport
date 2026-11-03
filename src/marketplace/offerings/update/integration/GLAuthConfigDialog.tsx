@@ -60,7 +60,7 @@ export const GLAuthConfigDialog: FC<OwnProps> = (props) => {
         <>
           <TabsContent value="toml">
             {hasConfig ? (
-              <div className="border rounded-lg overflow-hidden">
+              <div className="border border-secondary rounded-lg overflow-hidden">
                 <MonacoEditor
                   value={props.resolve.config}
                   language="ini"

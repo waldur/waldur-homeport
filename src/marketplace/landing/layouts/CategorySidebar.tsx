@@ -93,7 +93,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
 
   return (
     <div className={classNames('card', cardClassName)}>
-      <div className="card-header border-b-[1px] border-b-secondary">
+      <div className="card-header border-b border-b-secondary">
         <div className="card-title">
           <span className="h3">{translate('Categories')}</span>
         </div>

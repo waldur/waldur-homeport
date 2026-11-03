@@ -271,12 +271,12 @@ const WhySoDrillDownTable: FC<{
       <div className={isRoot ? 'table-responsive' : undefined}>
         <table
           className={classNames(
-            'table table-hover table-row-bordered table-rounded border mb-0',
+            'table table-hover table-row-bordered table-rounded border border-secondary mb-0',
             !isRoot && 'text-xs',
           )}
         >
           <thead>
-            <tr className="text-quaternary text-xs uppercase font-medium border-b-[1px] border-b-secondary">
+            <tr className="text-quaternary text-xs uppercase font-medium border-b border-b-secondary">
               <th
                 className={classNames(
                   'border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap',

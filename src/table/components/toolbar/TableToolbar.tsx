@@ -251,7 +251,7 @@ export function TableToolbar() {
   return (
     <div
       className={classNames(
-        'border-b-[1px] border-b-secondary',
+        'border-b border-b-secondary',
         display.headerClassName,
         'card-header',
       )}

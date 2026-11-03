@@ -238,7 +238,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
             {!roomNotOpen && <CallInProgressBanner />}
 
             {showCrossRoomBanner && (
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-success-subtle border-b-[1px] border-b-secondary">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-success-subtle border-b border-b-secondary">
                 <PhoneIcon size={16} className="text-success" weight="fill" />
                 <span className="text-sm grow">
                   {translate('Call in progress in {room}', {

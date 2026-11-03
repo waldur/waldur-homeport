@@ -297,7 +297,7 @@ const VipPortDetails: FC<{
   const portLabel = port?.name || port?.uuid || portUuid;
 
   return (
-    <div className="mt-3 border-t-[1px] border-t-secondary pt-3">
+    <div className="mt-3 border-t border-t-secondary pt-3">
       <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-5 mb-1.5">
         <div className="sm:col-span-3 font-medium text-quaternary">
           {translate('VIP port')}
@@ -366,7 +366,7 @@ const FloatingIpDetails: FC<{ floatingIpUrl?: string | null }> = ({
   if (!floatingIpUrl) return null;
 
   return (
-    <div className="mt-3 border-t-[1px] border-t-secondary pt-3">
+    <div className="mt-3 border-t border-t-secondary pt-3">
       <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-5 mb-1.5">
         <div className="sm:col-span-3 font-medium text-quaternary">
           {translate('Floating IP')}

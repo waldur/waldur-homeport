@@ -66,7 +66,7 @@ export const InvoiceDetails = ({
         setTotalFiltered={setTotalFiltered}
         footer={
           showPrice && (
-            <table className="table bg-secondary border-t-[1px] border-t-secondary border-b-[1px] border-b-secondary align-middle">
+            <table className="table bg-secondary border-t border-t-secondary border-b border-b-secondary align-middle">
               <tbody>
                 <tr className="text-sm font-medium">
                   {totalFiltered !== null && (
@@ -84,7 +84,7 @@ export const InvoiceDetails = ({
                   </td>
                   <td
                     width="12%"
-                    className="text-end text-primary whitespace-nowrap min-w-[150px] border-b-[1px] border-b-secondary"
+                    className="text-end text-primary whitespace-nowrap min-w-[150px] border-b border-b-secondary"
                   >
                     {defaultCurrency(invoice.price)}
                   </td>
@@ -98,7 +98,7 @@ export const InvoiceDetails = ({
                   </td>
                   <td
                     width="12%"
-                    className="text-end text-primary whitespace-nowrap min-w-[150px] border-b-[1px] border-b-secondary"
+                    className="text-end text-primary whitespace-nowrap min-w-[150px] border-b border-b-secondary"
                   >
                     {defaultCurrency(invoice.tax)}
                   </td>

@@ -73,7 +73,7 @@ const HealthInfoItem = ({
             </>
           }
         >
-          <div className="p-2.5 border rounded-lg bg-danger-subtle cursor-pointer h-full">
+          <div className="p-2.5 border border-secondary rounded-lg bg-danger-subtle cursor-pointer h-full">
             {statusContent}
           </div>
         </Tooltip>
@@ -83,7 +83,7 @@ const HealthInfoItem = ({
 
   return (
     <div className="mb-3">
-      <div className="p-2.5 border rounded-lg bg-success-subtle h-full">
+      <div className="p-2.5 border border-secondary rounded-lg bg-success-subtle h-full">
         {statusContent}
       </div>
     </div>

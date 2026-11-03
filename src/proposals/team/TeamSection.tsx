@@ -163,7 +163,7 @@ export const TeamSection: FC<
       </div>
       {props.hasTeamTabs &&
         !isFeatureVisible(MarketplaceFeatures.call_only) && (
-          <div className="card-header table-tabs border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto">
+          <div className="card-header table-tabs border-b border-b-secondary items-stretch py-0 min-h-auto">
             <TableNav
               tabs={[
                 {

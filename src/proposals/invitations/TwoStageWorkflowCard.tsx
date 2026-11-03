@@ -13,7 +13,7 @@ interface StepBoxProps {
 }
 
 const StepBox: FC<StepBoxProps> = ({ step, title, description, items }) => (
-  <div className="flex-1 border rounded-lg p-3">
+  <div className="flex-1 border border-secondary rounded-lg p-3">
     <div className="flex items-center gap-1.5 mb-1.5">
       <h5 className="mb-0">{title}</h5>
       <Badge variant="success" shape="pill" tone="outline">

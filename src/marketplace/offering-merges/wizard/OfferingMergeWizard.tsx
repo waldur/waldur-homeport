@@ -477,7 +477,7 @@ export const OfferingMergeWizard: FC = () => {
               </p>
             )}
             <div className="wizard-body-vertical">{renderStep()}</div>
-            <div className="flex justify-between mt-4 pt-4 border-t-[1px] border-t-secondary">
+            <div className="flex justify-between mt-4 pt-4 border-t border-t-secondary">
               <BaseButton
                 label={translate('Back')}
                 variant="tertiary"

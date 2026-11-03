@@ -30,7 +30,7 @@ export const SimpleTable = <T = any,>({
 }) => (
   <Table>
     <TableHeader>
-      <TableRow className="bg-secondary border-divider last:border-b-[1px] hover:bg-secondary">
+      <TableRow className="bg-secondary border-divider last:border-b hover:bg-secondary">
         {columns.map((column, index) => (
           <TableHead
             key={index}

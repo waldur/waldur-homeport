@@ -186,7 +186,7 @@ const ProjectSwitcher = ({
   emptyMessage = 'There are no projects.',
   filters,
 }: ProjectSwitcherProps) => (
-  <div className="w-[400px] rounded-lg border-[1px] border-secondary bg-[var(--card-bg)] pb-1.5 shadow-[var(--dropdown-shadow)]">
+  <div className="w-[400px] rounded-lg border border-secondary bg-[var(--card-bg)] pb-1.5 shadow-[var(--dropdown-shadow)]">
     <BreadcrumbDropdown
       // The fake fetcher has no SDK types to infer queryField from.
       {...({ fetcher, queryField: 'query' } as any)}

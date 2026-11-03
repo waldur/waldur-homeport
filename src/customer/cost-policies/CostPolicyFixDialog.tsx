@@ -331,7 +331,7 @@ export const CostPolicyFixDialog: FC<CostPolicyFixDialogProps> = ({
         {options.map((option) => (
           <li
             key={option.key}
-            className="rounded-lg border-[1px] border-secondary p-4"
+            className="rounded-lg border border-secondary p-4"
             data-testid={`cost-policy-fix-${option.key}`}
           >
             <div className="flex items-start justify-between gap-4">

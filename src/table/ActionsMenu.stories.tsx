@@ -90,7 +90,7 @@ const DragHandle = forwardRef<HTMLButtonElement>((props, ref) => (
     ref={ref}
     type="button"
     aria-label="Reorder"
-    className="rounded-md border px-1.5 py-1"
+    className="rounded-md border border-secondary px-1.5 py-1"
     {...props}
   >
     <DotsSixVerticalIcon weight="bold" />
@@ -340,7 +340,7 @@ const ResourceActions = () => (
 const ShowAllActions = () => {
   const [query, setQuery] = useState('');
   return (
-    <div className="w-[320px] rounded-lg border-[1px] border-secondary">
+    <div className="w-[320px] rounded-lg border border-secondary">
       <input
         aria-label="Search actions"
         placeholder="Search…"

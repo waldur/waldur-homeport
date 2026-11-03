@@ -8,7 +8,7 @@
  * step maps to the nearest half step of Tailwind's scale (#477).
  *
  * Shared by scripts/codemods/bootstrap-spacing.mjs, which rewrites a family
- * when _utilities.scss stops generating it, and by
+ * when Bootstrap stops generating it, and by
  * no-retired-bootstrap-utility, which reports the spellings only Bootstrap
  * had (`mb-md-4`, `mt-n2`, `gap-8px`) once their family is retired.
  */
@@ -69,7 +69,7 @@ export const SPACING_FAMILIES = [
 ];
 
 /**
- * The families _utilities.scss no longer generates: all of them, so their
+ * The families Bootstrap no longer generates: all of them, so their
  * names are Tailwind's. src/tailwindBootstrapSpacing.test.ts checks
  * Bootstrap emits none of them.
  */

@@ -99,8 +99,8 @@ describe('EmbeddedTabs', () => {
     // eslint-disable-next-line testing-library/no-node-access
     const panels = () => screen.getByRole('tabpanel').parentElement;
     expect(panels()).toHaveClass(
-      'border-[1px]',
-      'border-t-[0px]',
+      'border',
+      'border-t-0',
       '[&>*>.card-table]:rounded-none',
     );
 
@@ -112,6 +112,6 @@ describe('EmbeddedTabs', () => {
         header={<h3>Team</h3>}
       />,
     );
-    expect(panels()).not.toHaveClass('border-[1px]');
+    expect(panels()).not.toHaveClass('border');
   });
 });

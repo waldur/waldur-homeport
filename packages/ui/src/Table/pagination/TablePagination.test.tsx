@@ -112,6 +112,6 @@ describe('TablePagination', () => {
   it('can drop the top border', () => {
     const { container } = renderPagination({ bordered: false });
     // eslint-disable-next-line testing-library/no-node-access
-    expect(container.firstElementChild).not.toHaveClass('border-t-[1px]');
+    expect(container.firstElementChild).not.toHaveClass('border-t');
   });
 });

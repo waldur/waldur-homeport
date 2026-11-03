@@ -69,7 +69,7 @@ const FeatureRow = ({
       id={`feature-${featureKey}`}
       data-testid={`feature-${featureKey}`}
       className={classNames(
-        'flex min-h-[49px] items-center justify-between gap-6 border-b-[1px] border-b-secondary py-3.5 last:border-b-0',
+        'flex min-h-[49px] items-center justify-between gap-6 border-b border-b-secondary py-3.5 last:border-b-0',
         isHighlighted && 'bg-warning-subtle',
       )}
     >
@@ -420,7 +420,7 @@ export const FeaturesList = () => {
                   )}
                 </div>
                 {query && tabsWithMatches.length > 0 && (
-                  <div className="flex items-center gap-1.5 pt-2.5 pb-3 flex-wrap border-b-[1px] border-b-secondary">
+                  <div className="flex items-center gap-1.5 pt-2.5 pb-3 flex-wrap border-b border-b-secondary">
                     <span className="text-quaternary text-xs">
                       {translate('{count} results found in:', {
                         count: totalResults,

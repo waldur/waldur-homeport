@@ -19,7 +19,8 @@ import {
 /**
  * Bootstrap's spacing utilities move to Tailwind's scale one family at a time
  * (#477): scripts/codemods/bootstrap-spacing.mjs rewrites a family's uses
- * with SPACER_TO_TAILWIND, and _utilities.scss stops generating it.
+ * with SPACER_TO_TAILWIND, and Bootstrap stops generating it (since #478 it
+ * generates no utility at all).
  */
 
 const root = path.join(__dirname, '..');
@@ -165,7 +166,7 @@ describe('Bootstrap spacing on Tailwind scale', () => {
       });
       expect(
         emitted.sort(),
-        'Remove these from $utilities in _utilities.scss',
+        'Bootstrap must not generate these: its utility API is not imported',
       ).toEqual([]);
     });
 

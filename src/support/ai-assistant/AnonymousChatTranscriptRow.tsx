@@ -117,7 +117,7 @@ const ReviewVerdict: FunctionComponent<{
       </div>
       {/* Same weight as the hairline between turns, just darker — enough to
           mark where commentary ends and the conversation begins. */}
-      <div className="border-b-[1px] border-[var(--border-divider-strong)] mx-2.5" />
+      <div className="border-b border-[var(--border-divider-strong)] mx-2.5" />
     </>
   );
 };
@@ -185,7 +185,7 @@ const InteractionTurns: FunctionComponent<{
           )}
           <div
             className={classNames('p-2.5 rounded-lg chat-log-bubble', {
-              'border-l-[1px] border-3 border-danger': interaction.is_flagged,
+              'border-l border-3 border-danger': interaction.is_flagged,
             })}
           >
             <div style={{ whiteSpace: 'pre-wrap' }}>
@@ -210,7 +210,7 @@ const InteractionTurns: FunctionComponent<{
         <div className="message-body">
           <div
             className={classNames('p-2.5 rounded-lg chat-log-bubble', {
-              'border-l-[1px] border-l-secondary border-3': sentiment !== null,
+              'border-l border-l-secondary border-3': sentiment !== null,
               'border-success': sentiment === 'positive',
               'border-danger': sentiment === 'negative',
             })}
@@ -286,7 +286,7 @@ export const AnonymousChatTranscriptRow: FunctionComponent<{
     <ExpandableContainer>
       <OfflineBlockContext.Provider value={true}>
         <div className="flex flex-col">
-          <div className="flex items-center gap-1.5 pb-1.5 border-b-[1px] border-b-secondary">
+          <div className="flex items-center gap-1.5 pb-1.5 border-b border-b-secondary">
             <strong>{row.user_slug || row.session_id}</strong>
           </div>
           {verdict?.llm_reviewed_at && (

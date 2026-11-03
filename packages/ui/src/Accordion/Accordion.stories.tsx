@@ -238,7 +238,7 @@ export const Boxed: Story = {
       <Accordion
         type="multiple"
         defaultValue={['project']}
-        className="rounded-md border-[1px] border-solid border-secondary bg-[var(--card-bg)]"
+        className="rounded-md border border-solid border-secondary bg-[var(--card-bg)]"
       >
         {PERMISSION_GROUPS.map((group) => (
           <AccordionItem key={group.value} value={group.value}>

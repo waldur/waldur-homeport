@@ -124,7 +124,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
       <h6 className="mb-2.5">{translate('Estimated cost breakdown')}</h6>
       <table className="table table-sm table-borderless">
         <thead>
-          <tr className="border-b-[1px] border-b-secondary">
+          <tr className="border-b border-b-secondary">
             <th>{translate('Component')}</th>
             <th>{translate('Details')}</th>
             <th className="text-end">{translate('Cost')}</th>
@@ -135,7 +135,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
             <ComponentRow key={item.component_type} item={item} />
           ))}
           {subscriptionItems.length > 0 && limitItems.length > 0 && (
-            <tr className="border-t-[1px] border-t-secondary">
+            <tr className="border-t border-t-secondary">
               <td colSpan={2} className="text-end text-quaternary small">
                 {translate('Subscription subtotal')}
               </td>
@@ -148,7 +148,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
             <ComponentRow key={item.component_type} item={item} />
           ))}
           {limitItems.length > 0 && subscriptionItems.length > 0 && (
-            <tr className="border-t-[1px] border-t-secondary">
+            <tr className="border-t border-t-secondary">
               <td colSpan={2} className="text-end text-quaternary small">
                 {translate('Limit change subtotal')}
               </td>
@@ -159,7 +159,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
           )}
         </tbody>
         <tfoot>
-          <tr className="border-t-[1px] border-t-secondary">
+          <tr className="border-t border-t-secondary">
             <td colSpan={2} className="text-end font-medium">
               {translate('Total')}
             </td>

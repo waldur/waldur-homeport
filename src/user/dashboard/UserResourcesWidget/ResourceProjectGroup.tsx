@@ -113,7 +113,7 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
         <>
           {/* Project summary section */}
           {(projectDetails?.description || hasTeamMembers) && (
-            <div className="border rounded-lg p-3 mb-3">
+            <div className="border border-secondary rounded-lg p-3 mb-3">
               {projectDetails?.description && (
                 <p className="text-quaternary mb-2.5">
                   {projectDetails.description}
