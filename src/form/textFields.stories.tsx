@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { expect, userEvent, within } from 'storybook/test';
 
+import { Code } from 'waldur-ui';
+
 import { FilterBox } from './FilterBox';
 import { BaseInputField, InputField } from './InputField';
 import { BaseNumberField } from './NumberField';
@@ -54,7 +56,7 @@ const Harness = ({
         {children}
         <FormSpy subscription={{ values: true }}>
           {({ values }) => (
-            <code data-testid="form-value">{JSON.stringify(values)}</code>
+            <Code data-testid="form-value">{JSON.stringify(values)}</Code>
           )}
         </FormSpy>
       </div>

@@ -4,7 +4,7 @@ import {
   marketplaceSiteAgentServicesList,
 } from 'waldur-js-client';
 
-import { BadgeVariant } from 'waldur-ui';
+import { BadgeVariant, Code } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -68,7 +68,7 @@ export const AgentServicesList: FC<TableWithPortal> = ({ portal }) => {
     {
       title: translate('Mode'),
       render: ({ row }) => (
-        <code className="text-quaternary">{row.mode || DASH_ESCAPE_CODE}</code>
+        <Code className="text-quaternary">{row.mode || DASH_ESCAPE_CODE}</Code>
       ),
       keys: ['mode'],
       id: 'mode',

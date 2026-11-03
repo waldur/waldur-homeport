@@ -7,7 +7,7 @@ import {
   useRef,
 } from 'react';
 
-import { BaseButton, LoadingSpinner } from 'waldur-ui';
+import { BaseButton, LoadingSpinner, Kbd } from 'waldur-ui';
 
 import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
@@ -101,14 +101,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       }
 
       if (showShortcut) {
-        return (
-          <kbd
-            aria-hidden="true"
-            className="text-secondary text-xs bg-quaternary px-[0.5rem] py-[0.25rem] rounded-lg select-none font-sans leading-none"
-          >
-            {shortcutHint}
-          </kbd>
-        );
+        return <Kbd aria-hidden="true">{shortcutHint}</Kbd>;
       }
 
       return null;

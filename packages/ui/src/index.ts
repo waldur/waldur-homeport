@@ -12,6 +12,7 @@ export * from './Breadcrumb';
 export * from './Button';
 export * from './Card';
 export * from './Check';
+export * from './Code';
 export * from './Collapsible';
 export * from './CopyButton';
 export * from './DatePicker';

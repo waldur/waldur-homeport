@@ -4,6 +4,8 @@ import {
   marketplaceSiteAgentProcessorsList,
 } from 'waldur-js-client';
 
+import { Code } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -51,7 +53,7 @@ export const AgentProcessorsList: FC<TableWithPortal> = ({ portal }) => {
     {
       title: translate('Backend type'),
       render: ({ row }) => (
-        <code className="text-brand">{row.backend_type}</code>
+        <Code className="text-brand">{row.backend_type}</Code>
       ),
       keys: ['backend_type'],
       id: 'backend_type',

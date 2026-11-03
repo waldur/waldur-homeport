@@ -2,6 +2,8 @@ import { CaretDownIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, Fragment, useMemo, useState } from 'react';
 import { LiveKitOverviewResponse } from 'waldur-js-client';
 
+import { Code } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
@@ -73,7 +75,7 @@ export const LiveKitRoomsTable: FC<LiveKitRoomsTableProps> = ({ data }) => {
                   </td>
                   <td className="font-medium">{room.name}</td>
                   <td>
-                    <code>{room.sid}</code>
+                    <Code>{room.sid}</Code>
                   </td>
                   <td>
                     {room.max_participants

@@ -1,7 +1,13 @@
 import { FC } from 'react';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
-import { PropertyCard, PropertyItem, PropertyList, Select } from 'waldur-ui';
+import {
+  PropertyCard,
+  PropertyItem,
+  PropertyList,
+  Select,
+  Code,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -74,7 +80,7 @@ export const AnswersStep: FC<AnswersStepProps> = ({
           {keys.map((key) => (
             <PropertyItem
               key={key}
-              label={<code>{key}</code>}
+              label={<Code>{key}</Code>}
               value={
                 <Select
                   options={targetOptions}

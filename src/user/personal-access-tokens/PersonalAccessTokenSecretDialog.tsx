@@ -1,7 +1,7 @@
 import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback, useMemo, useState } from 'react';
 
-import { AlertItem, FormHeading } from 'waldur-ui';
+import { AlertItem, FormHeading, Code } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -73,9 +73,9 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
               <EyeIcon size={20} weight="bold" />
             )}
           </button>
-          <code className="grow wrap-anywhere">
+          <Code className="grow wrap-anywhere">
             {showSecret ? token : maskedToken}
-          </code>
+          </Code>
           <CopyToClipboardButton value={token} />
         </div>
       </div>
@@ -83,9 +83,9 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
       <div>
         <FormHeading as="p">{translate('Example usage')}</FormHeading>
         <div className="flex items-start gap-1.5 p-2.5 bg-tertiary dark:bg-quaternary rounded-lg">
-          <code className="grow wrap-anywhere">
+          <Code className="grow wrap-anywhere">
             {showSecret ? curlExample : maskedCurlExample}
-          </code>
+          </Code>
           <CopyToClipboardButton value={curlExample} />
         </div>
       </div>

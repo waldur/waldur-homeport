@@ -1,4 +1,4 @@
-import { FormText } from 'waldur-ui';
+import { FormText, Code } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -22,11 +22,11 @@ export const SlugTemplateHelpText = ({
         {placeholders.map((p) => (
           <tr key={p.name}>
             <td>
-              <code>{`{${p.name}}`}</code>
+              <Code>{`{${p.name}}`}</Code>
             </td>
             <td>{p.description}</td>
             <td className="text-quaternary">
-              {translate('e.g.')} <code>{p.example}</code>
+              {translate('e.g.')} <Code>{p.example}</Code>
             </td>
           </tr>
         ))}

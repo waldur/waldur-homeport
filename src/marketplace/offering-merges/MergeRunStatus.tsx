@@ -6,7 +6,7 @@ import {
   OfferingMergeUndoReport,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, Progress } from 'waldur-ui';
+import { AlertItem, BaseButton, Progress, Code } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { PercentProgress } from '@/core/PercentProgress';
@@ -120,7 +120,7 @@ const VerificationReport: FC<{
     columns={[
       {
         title: translate('Check'),
-        render: ({ row }) => <code className="text-xs">{row.code}</code>,
+        render: ({ row }) => <Code className="text-xs">{row.code}</Code>,
       },
       {
         title: translate('Result'),

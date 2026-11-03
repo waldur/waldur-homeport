@@ -156,11 +156,10 @@
   }
 }
 
-.aui-md code {
-  background-color: var(--bg-tertiary);
-  border-radius: $border-radius-xs;
-  padding: 0.2rem 0.3rem;
-  font-family: ui-monospace, SFMono-Regular, monospace;
+// Inline code takes the shared look from .rich-text (src/tailwind.css); the
+// chat sets it smaller and bolder. Same specificity as that rule, and this
+// stylesheet loads after it, so these win.
+.aui-md code:not(pre > code, [class*='language-']) {
   font-size: var(--text-xs);
   font-weight: var(--font-weight-semibold);
 }

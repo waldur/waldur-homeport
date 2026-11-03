@@ -13,6 +13,7 @@ import {
   PropertyCard,
   PropertyItem,
   PropertyList,
+  Code,
 } from 'waldur-ui';
 
 import { SubmitButton } from '@/form';
@@ -340,7 +341,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 ([key, value]) => (
                   <PropertyItem
                     key={key}
-                    label={<code>{key}</code>}
+                    label={<Code>{key}</Code>}
                     value={propVal.code(formatValue(value))}
                   />
                 ),
@@ -359,7 +360,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                   ([key, value]) => (
                     <PropertyItem
                       key={key}
-                      label={<code>{key}</code>}
+                      label={<Code>{key}</Code>}
                       value={propVal.code(formatValue(value))}
                       hasCopy
                     />

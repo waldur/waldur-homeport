@@ -7,7 +7,7 @@ import {
   User,
 } from 'waldur-js-client';
 
-import { Badge, HelpIcon } from 'waldur-ui';
+import { Badge, HelpIcon, Code } from 'waldur-ui';
 
 import { CreateModalButton } from '@/core/buttons';
 import { formatDateTime } from '@/core/dateUtils';
@@ -210,7 +210,7 @@ const ProjectGroupsTable: FC<{ provider: ServiceProvider }> = ({
       {
         title: translate('Name'),
         render: ({ row }: { row: ServiceProviderProjectGroup }) => (
-          <code>{row.name}</code>
+          <Code>{row.name}</Code>
         ),
         orderField: 'name',
         copyField: (row: ServiceProviderProjectGroup) => row.name,

@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { configureStore } from 'redux-mock-store';
 import { expect, userEvent, within } from 'storybook/test';
 
+import { Code } from 'waldur-ui';
+
 import { OptionsForm } from './OptionsForm';
 
 /**
@@ -46,7 +48,7 @@ const Harness = ({
               <OptionsForm options={options} customer={CUSTOMER} />
               <FormSpy subscription={{ values: true }}>
                 {({ values }) => (
-                  <code data-testid="form-value">{JSON.stringify(values)}</code>
+                  <Code data-testid="form-value">{JSON.stringify(values)}</Code>
                 )}
               </FormSpy>
             </div>

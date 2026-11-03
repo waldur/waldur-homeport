@@ -8,7 +8,7 @@ import {
   QuestionWithAnswer,
 } from 'waldur-js-client';
 
-import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
+import { Badge, PropertyItem, PropertyList, Code } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { formatDateTime } from '@/core/dateUtils';
@@ -64,7 +64,7 @@ export const PosixGroupsTable = ({
           render: ({ row }) =>
             row.kind === 'provider_project_group' ? (
               <span className="inline-flex items-center gap-1.5">
-                {row.group_name ? <code>{row.group_name}</code> : null}
+                {row.group_name ? <Code>{row.group_name}</Code> : null}
                 <Badge variant="primary" tone="outline">
                   {translate('Service provider group')}
                 </Badge>

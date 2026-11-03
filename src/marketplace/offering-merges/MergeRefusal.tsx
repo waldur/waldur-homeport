@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { OfferingMergeRefusal } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Code } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -61,7 +61,7 @@ export const MergeRefusalAlert: FC<{
                 {blockers.map((blocker, index) => (
                   <li key={`${blocker.code}-${index}`}>
                     {blocker.message}{' '}
-                    <code className="text-xs">{blocker.code}</code>
+                    <Code className="text-xs">{blocker.code}</Code>
                   </li>
                 ))}
               </ul>
@@ -73,7 +73,7 @@ export const MergeRefusalAlert: FC<{
               <ul className="mb-0">
                 {missing.map((code) => (
                   <li key={code}>
-                    <code className="text-xs">{code}</code>
+                    <Code className="text-xs">{code}</Code>
                   </li>
                 ))}
               </ul>

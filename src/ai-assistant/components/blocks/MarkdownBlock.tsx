@@ -5,7 +5,7 @@ import { UIBlockProps } from '@/ai-assistant/lib/types';
 
 export const MarkdownBlock: FC<UIBlockProps> = ({ block }) => {
   return (
-    <div className="aui-md">
+    <div className="aui-md rich-text">
       <Markdown
         options={{
           // Open every markdown link in a new tab — covers both inline body links and the table-cell CTA

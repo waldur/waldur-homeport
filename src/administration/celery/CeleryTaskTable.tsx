@@ -2,7 +2,7 @@ import { CopyIcon } from '@phosphor-icons/react';
 import { useCallback, useMemo } from 'react';
 import { CeleryTask } from 'waldur-js-client';
 
-import { Badge, BaseButton, Tooltip } from 'waldur-ui';
+import { Badge, BaseButton, Tooltip, Code } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -95,9 +95,9 @@ export const CeleryTaskTable = ({
           title: translate('Task ID'),
           render: ({ row }) => (
             <div className="flex items-center">
-              <code className="text-quaternary text-xs">
+              <Code className="text-quaternary text-xs">
                 {row.id.slice(0, 8)}
-              </code>
+              </Code>
               <CopyButton value={row.id} />
             </div>
           ),
@@ -106,7 +106,7 @@ export const CeleryTaskTable = ({
           title: translate('Args'),
           render: ({ row }) => (
             <Tooltip label={JSON.stringify(row.args)}>
-              <code className="text-xs">{formatArgs(row.args)}</code>
+              <Code className="text-xs">{formatArgs(row.args)}</Code>
             </Tooltip>
           ),
         },

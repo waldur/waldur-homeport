@@ -2,6 +2,7 @@ import { ComponentType, ReactNode } from 'react';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { within } from 'storybook/test';
 
+import { Code } from 'waldur-ui';
 import { serializeDateValue } from 'waldur-ui/src/DatePicker/testing';
 
 // The picker driver and value helpers live with the pickers in waldur-ui;
@@ -56,15 +57,15 @@ export const DateFieldHarness = ({
             <dl className="mt-5 text-xs text-quaternary">
               <dt>Form value</dt>
               <dd>
-                <code data-testid="form-value">
+                <Code data-testid="form-value">
                   {JSON.stringify(serializeDateValue(values.value))}
-                </code>
+                </Code>
               </dd>
               <dt>Touched</dt>
               <dd>
-                <code data-testid="form-touched">
+                <Code data-testid="form-touched">
                   {String(!!touched?.value)}
-                </code>
+                </Code>
               </dd>
             </dl>
           )}

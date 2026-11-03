@@ -9,6 +9,7 @@
  *   --text-senary      disabled marks, inactive indicators
  *
  *   --text-disabled    disabled input and date-picker text
+ *   --text-code        inline code (Code, and code in rendered markdown)
  *   --fg-white         white text or icon, the same in both themes
  *
  * Every step of the scale is a distinct gray in both themes. The names match
@@ -30,6 +31,8 @@
   /* The date pickers' and inputs' disabled text: $gray-300 in light, $gray-400
      in dark, one step brighter than --text-senary there. */
   --text-disabled: var(--color-gray-300);
+  /* Metronic's inline-code pink, rose in dark. */
+  --text-code: var(--color-pink-700);
   --fg-white: #ffffff;
 }
 
@@ -41,4 +44,5 @@
   --text-quinary: var(--color-gray-dark-500);
   --text-senary: var(--color-gray-dark-600);
   --text-disabled: var(--color-gray-dark-500);
+  --text-code: var(--color-rose-300);
 }

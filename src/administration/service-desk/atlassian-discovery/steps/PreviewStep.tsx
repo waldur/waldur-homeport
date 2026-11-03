@@ -9,6 +9,7 @@ import {
   PropertyCard,
   PropertyItem,
   PropertyList,
+  Code,
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -156,7 +157,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 <tr key={rt.id}>
                   <td>{rt.name}</td>
                   <td>
-                    <code>{rt.issue_type_id}</code>
+                    <Code>{rt.issue_type_id}</Code>
                   </td>
                 </tr>
               ))}

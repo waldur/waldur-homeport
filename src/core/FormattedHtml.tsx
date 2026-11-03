@@ -10,5 +10,7 @@ import { sanitizeHtml } from './sanitize';
  */
 export const FormattedHtml: React.FC<{ html: string }> = (props) => {
   const html = React.useMemo(() => sanitizeHtml(props.html), [props.html]);
-  return <span dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <span className="rich-text" dangerouslySetInnerHTML={{ __html: html }} />
+  );
 };

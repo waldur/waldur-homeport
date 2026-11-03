@@ -11,6 +11,7 @@ import {
   PropertyCard,
   PropertyItem,
   PropertyList,
+  Code,
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -39,7 +40,7 @@ const getPriceDifferences = (warnings: OfferingMergeIssue[]) =>
     );
 
 const IssueCode: FC<{ code: string }> = ({ code }) => (
-  <code className="text-xs ms-1.5">{code}</code>
+  <Code className="text-xs ms-1.5">{code}</Code>
 );
 
 interface MergePreviewViewProps {

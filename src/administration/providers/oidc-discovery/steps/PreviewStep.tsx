@@ -7,6 +7,7 @@ import {
   PropertyCard,
   PropertyItem,
   PropertyList,
+  Code,
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -91,10 +92,10 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
               {mappedFields.map(([field, claim]) => (
                 <tr key={field}>
                   <td>
-                    <code>{field}</code>
+                    <Code>{field}</Code>
                   </td>
                   <td>
-                    <code>{claim}</code>
+                    <Code>{claim}</Code>
                   </td>
                 </tr>
               ))}

@@ -7,7 +7,7 @@ import {
   SlurmPolicyEvaluateResponse,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, BaseButton } from 'waldur-ui';
+import { AlertItem, Badge, BaseButton, Code } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -162,7 +162,7 @@ const DryRunResults: FC<{ data: SlurmPolicyDryRunResponse }> = ({ data }) => (
                 <td>
                   <span>{r.resource_name}</span>
                   <br />
-                  <code className="small">{r.resource_uuid}</code>
+                  <Code className="small">{r.resource_uuid}</Code>
                 </td>
                 <td>
                   <UsageBadge percentage={r.usage_percentage} />
@@ -250,7 +250,7 @@ const EvaluateResults: FC<{ data: SlurmPolicyEvaluateResponse }> = ({
                 <td>
                   <span>{r.resource_name}</span>
                   <br />
-                  <code className="small">{r.resource_uuid}</code>
+                  <Code className="small">{r.resource_uuid}</Code>
                 </td>
                 <td>
                   <UsageBadge percentage={r.usage_percentage} />

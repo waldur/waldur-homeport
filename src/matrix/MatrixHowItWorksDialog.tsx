@@ -8,6 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Code,
 } from 'waldur-ui';
 
 import { MermaidChart } from '@/core/MermaidChart';
@@ -241,8 +242,8 @@ export const MatrixHowItWorksDialog: FC = () => {
                   {translate(
                     'On Tuwunel, run {command} with MATRIX_ADMIN_TOKEN set, or with MATRIX_BOOTSTRAP_PASSWORD set and the homeserver\'s registration_shared_secret equal to the registration secret (see "Registering on Tuwunel from the command line" in the admin guide); or send {adminCommand} with the YAML in the admin room',
                     {
-                      command: <code>{REGISTER_APPSERVICE_COMMAND}</code>,
-                      adminCommand: <code>!admin appservices register</code>,
+                      command: <Code>{REGISTER_APPSERVICE_COMMAND}</Code>,
+                      adminCommand: <Code>!admin appservices register</Code>,
                     },
                     formatJsxTemplate,
                   )}
@@ -279,7 +280,7 @@ export const MatrixHowItWorksDialog: FC = () => {
           <p className="text-quaternary mb-3">
             {translate(
               'The homeserver pushes room events to Waldur via the appservice webhook, which only acknowledges them. The Matrix bot, a separate process ({command}) and the encrypted member of every room, reads the rooms through its own sync and answers commands. If commands go unanswered, check that this process is running.',
-              { command: <code>waldur matrix_bot</code> },
+              { command: <Code>waldur matrix_bot</Code> },
               formatJsxTemplate,
             )}
           </p>
@@ -307,7 +308,7 @@ export const MatrixHowItWorksDialog: FC = () => {
               {BOT_COMMANDS.map((cmd) => (
                 <TableRow key={cmd.command}>
                   <TableCell>
-                    <code className="font-medium">{cmd.command}</code>
+                    <Code className="font-medium">{cmd.command}</Code>
                   </TableCell>
                   <TableCell className="text-tertiary">
                     {cmd.description}

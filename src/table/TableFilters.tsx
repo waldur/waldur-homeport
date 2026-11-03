@@ -40,7 +40,9 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
 
   return props.filterPosition === 'menu' || props.filtersStorage.length > 0 ? (
     <div className="w-full flex flex-wrap gap-3">
-      <div className={isMd ? 'flex grow scroll-x' : 'flex grow'}>
+      <div
+        className={isMd ? 'relative flex grow overflow-x-auto' : 'flex grow'}
+      >
         <div
           className={
             isMd

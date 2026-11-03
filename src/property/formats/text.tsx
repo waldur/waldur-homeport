@@ -1,4 +1,4 @@
-import { MiddleTruncate } from 'waldur-ui';
+import { MiddleTruncate, Code } from 'waldur-ui';
 
 import { isEmptyValue } from '@/core/isEmptyValue';
 
@@ -49,9 +49,9 @@ export const formatCodeValue = (
   }
   const text = String(value);
   const node = (
-    <code>
+    <Code>
       {options.truncate === 'middle' ? <MiddleTruncate text={text} /> : text}
-    </code>
+    </Code>
   );
   return formatProp(node, text);
 };

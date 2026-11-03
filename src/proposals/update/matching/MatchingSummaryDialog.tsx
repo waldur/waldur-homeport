@@ -9,6 +9,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Code,
 } from 'waldur-ui';
 
 import { MermaidChart } from '@/core/MermaidChart';
@@ -273,7 +274,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
                     {method.description}
                   </TableCell>
                   <TableCell>
-                    <code className="text-brand">{method.formula}</code>
+                    <Code className="text-brand">{method.formula}</Code>
                   </TableCell>
                 </TableRow>
               ))}

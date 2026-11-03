@@ -1,6 +1,6 @@
 import { FC, useEffect, useMemo } from 'react';
 
-import { AccordionCard, Tooltip } from 'waldur-ui';
+import { AccordionCard, Tooltip, Code } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { CopyToClipboard } from '@/core/CopyToClipboard';
@@ -35,7 +35,7 @@ export const DatabaseActiveQueries: FC<DatabaseActiveQueriesProps> = ({
     () => [
       {
         title: translate('PID'),
-        render: ({ row }: { row: ActiveQuery }) => <code>{row.pid}</code>,
+        render: ({ row }: { row: ActiveQuery }) => <Code>{row.pid}</Code>,
       },
       {
         title: translate('Duration'),
@@ -80,11 +80,11 @@ export const DatabaseActiveQueries: FC<DatabaseActiveQueriesProps> = ({
         render: ({ row }: { row: ActiveQuery }) => (
           <div className="flex items-center gap-1.5">
             <Tooltip label={row.query_preview}>
-              <code style={{ maxWidth: '300px' }} className="text-xs truncate">
+              <Code style={{ maxWidth: '300px' }} className="text-xs truncate">
                 {row.query_preview.length > 50
                   ? `${row.query_preview.substring(0, 50)}...`
                   : row.query_preview}
-              </code>
+              </Code>
             </Tooltip>
             <CopyToClipboard value={row.query_preview} />
           </div>

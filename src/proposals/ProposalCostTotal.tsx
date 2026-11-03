@@ -92,7 +92,7 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
       {showsFigures && (
         // Recurring plus one-time, the sum the checkout's own total card shows,
         // so the two pages do not define "total" differently.
-        <div className="separator my-3" />
+        <div className="border-b border-b-secondary my-3" />
       )}
       {showsFigures && (
         <div className="flex justify-between items-center text-lg">

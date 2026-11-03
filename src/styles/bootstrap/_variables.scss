@@ -42,9 +42,13 @@ $card-border-dashed-color: var(--border-divider-medium) !default;
 $card-cap-bg: $white !default;
 
 // Code
-$code-bg: #f1f3f8 !default; // dark mode in components/_code.scss
-$code-color: #b93993 !default; // dark mode in components/_code.scss
-$kbd-bg: var(--bg-primary-solid) !default; // dark mode in components/_code.scss
+// Inline code is drawn by waldur-ui's Code, and in rendered markdown by
+// .rich-text (src/tailwind.css); the reboot only sets its font. A bare <kbd>
+// (the app writes waldur-ui's Kbd) takes Kbd's colours, so it reads in both
+// themes.
+$code-color: inherit !default;
+$kbd-bg: var(--bg-quaternary) !default;
+$kbd-color: var(--text-secondary) !default;
 $blockquote-footer-color: var(--text-tertiary) !default;
 $figure-caption-color: var(--text-tertiary) !default;
 $thumbnail-border-color: var(--border-primary) !default;
@@ -462,12 +466,6 @@ $card-header-height: var(
   70px
 ) !default; // Custom variable
 
-// Code
-$code-box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.08) !default; // Custom variable
-$code-padding: 0.1rem 0.4rem !default; // Custom variable
-$code-margin: 0 0.5rem !default; // Custom variable
-$code-border-radius: 0.3rem !default; // Custom variable
-
 // Tables
 
 // Customizes the `.table` component with basic values, each used across all table variations.
@@ -478,23 +476,3 @@ $table-cell-padding-y-sm: 0.5rem !default;
 $table-cell-padding-x-sm: 0.5rem !default;
 
 $table-border-width: $border-width !default;
-
-// Bullet
-$bullet: (
-  bg-color: var(--text-quinary),
-  dot-size: 4px,
-  bar-height: 4px,
-  bar-width: 8px,
-  bar-border-radius: 6px,
-  line-height: 1px,
-  line-width: 5px,
-) !default;
-
-// Custom scrollbar
-$scrollbar: (
-  space: 0.5rem,
-  width: 0.4rem,
-  height: 0.4rem,
-  color: var(--bg-quaternary),
-  hover-color: color-mix(in srgb, var(--bg-quaternary) 96%, #000),
-) !default;

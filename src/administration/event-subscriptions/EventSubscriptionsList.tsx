@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { EventSubscription, eventSubscriptionsList } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Code } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
@@ -44,7 +44,7 @@ export const EventSubscriptionsList: FC<Partial<TableWithPortal>> = ({
     {
       title: translate('UUID'),
       render: ({ row }) => (
-        <code className="text-quaternary">{row.uuid.substring(0, 8)}...</code>
+        <Code className="text-quaternary">{row.uuid.substring(0, 8)}...</Code>
       ),
       copyField: (row) => row.uuid,
       keys: ['uuid'],
@@ -69,9 +69,9 @@ export const EventSubscriptionsList: FC<Partial<TableWithPortal>> = ({
     {
       title: translate('Source IP'),
       render: ({ row }) => (
-        <code className="text-quaternary">
+        <Code className="text-quaternary">
           {row.source_ip || DASH_ESCAPE_CODE}
-        </code>
+        </Code>
       ),
       keys: ['source_ip'],
       id: 'source_ip',

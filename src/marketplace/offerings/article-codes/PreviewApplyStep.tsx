@@ -3,7 +3,7 @@ import { useFormState } from 'react-final-form';
 import type { ArticleCodeUpdatePreviewItem } from 'waldur-js-client';
 import { marketplaceArticleCodeUpdateApply } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Code } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { PROVIDER_OFFERING_DATA_QUERY_KEY } from '@/marketplace/offerings/constants';
@@ -91,20 +91,20 @@ const columns: Column<ArticleCodeUpdatePreviewItem>[] = [
   },
   {
     title: translate('Type'),
-    render: ({ row }) => <code>{row.component_type}</code>,
+    render: ({ row }) => <Code>{row.component_type}</Code>,
     id: 'type',
   },
   {
     title: translate('Current code'),
     render: ({ row }) => (
-      <code className="text-danger">{row.old_article_code}</code>
+      <Code className="text-danger">{row.old_article_code}</Code>
     ),
     id: 'old_code',
   },
   {
     title: translate('New code'),
     render: ({ row }) => (
-      <code className="text-success">{row.new_article_code}</code>
+      <Code className="text-success">{row.new_article_code}</Code>
     ),
     id: 'new_code',
   },

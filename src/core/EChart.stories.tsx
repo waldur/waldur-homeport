@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
+import { Code } from 'waldur-ui';
+
 import { EChart } from './EChart';
 import { EChartActions } from './EChartActions';
 
@@ -129,7 +131,7 @@ export const ActionsToolbarStandalone: Story = {
     return (
       <div className="flex flex-col gap-3 p-3">
         <div className="text-quaternary text-xs">
-          Export toolbar actions rendered via <code>EChartActions</code>:
+          Export toolbar actions rendered via <Code>EChartActions</Code>:
         </div>
         <div className="flex items-center justify-between p-2.5 border border-secondary rounded-lg bg-tertiary dark:bg-quaternary">
           <span>Monthly Cloud Analytics</span>

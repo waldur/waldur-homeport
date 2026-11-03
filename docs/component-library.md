@@ -179,11 +179,11 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 
 See [modals.md](modals.md) for the whole modal API.
 
-| Component              | Location                           | Description           | Key Features                       |
-| ---------------------- | ---------------------------------- | --------------------- | ---------------------------------- |
-| **ModalDialog**        | `src/modal/ModalDialog.tsx`        | Base modal component  | Header, body, footer, icon support |
-| **ConfirmationDialog** | `waldur-ui`                        | Confirmation modal    | Destructive actions, custom text   |
-| **ActionDialog**       | `src/modal/ActionDialog.tsx`       | Generic action dialog | Form support, validation           |
+| Component              | Location                     | Description           | Key Features                       |
+| ---------------------- | ---------------------------- | --------------------- | ---------------------------------- |
+| **ModalDialog**        | `src/modal/ModalDialog.tsx`  | Base modal component  | Header, body, footer, icon support |
+| **ConfirmationDialog** | `waldur-ui`                  | Confirmation modal    | Destructive actions, custom text   |
+| **ActionDialog**       | `src/modal/ActionDialog.tsx` | Generic action dialog | Form support, validation           |
 
 ### Button Factory Components
 
@@ -245,15 +245,16 @@ export const MyEditButton = ({ row, refetch }) => (
 
 ### Data Display Components
 
-| Component                | Location                            | Description           | Key Features                             |
-| ------------------------ | ----------------------------------- | --------------------- | ---------------------------------------- |
-| **Badge**                | `src/core/Badge.tsx`                | Status indicator      | Multiple variants, icon support, tooltip |
-| **StateIndicator**       | `src/core/StateIndicator.tsx`       | Status with animation | Loading animation, color variants        |
-| **BooleanBadge**         | `src/core/BooleanBadge.tsx`         | Boolean indicator     | Yes/No display, true/false states        |
-| **TruncatedText**        | `src/core/TruncatedText.tsx`        | Responsive text       | Automatic truncation, expandable         |
-| **TruncatedDescription** | `src/core/TruncatedDescription.tsx` | Description text      | Read more/less functionality             |
-| **ImagePlaceholder**     | `src/core/ImagePlaceholder.tsx`     | Image fallback        | Automatic sizing, circular option        |
-| **Avatar**               | `packages/ui/src/Avatar/Avatar.tsx` | User avatar           | Profile pictures, initials fallback      |
+| Component                | Location                            | Description           | Key Features                                                                                 |
+| ------------------------ | ----------------------------------- | --------------------- | -------------------------------------------------------------------------------------------- |
+| **Badge**                | `src/core/Badge.tsx`                | Status indicator      | Multiple variants, icon support, tooltip                                                     |
+| **StateIndicator**       | `src/core/StateIndicator.tsx`       | Status with animation | Loading animation, color variants                                                            |
+| **BooleanBadge**         | `src/core/BooleanBadge.tsx`         | Boolean indicator     | Yes/No display, true/false states                                                            |
+| **TruncatedText**        | `src/core/TruncatedText.tsx`        | Responsive text       | Automatic truncation, expandable                                                             |
+| **TruncatedDescription** | `src/core/TruncatedDescription.tsx` | Description text      | Read more/less functionality                                                                 |
+| **ImagePlaceholder**     | `src/core/ImagePlaceholder.tsx`     | Image fallback        | Automatic sizing, circular option                                                            |
+| **Avatar**               | `packages/ui/src/Avatar/Avatar.tsx` | User avatar           | Profile pictures, initials fallback                                                          |
+| **Code** / **Kbd**       | `packages/ui/src/Code/Code.tsx`     | Inline code, keys     | Never a bare `<code>`/`<kbd>` (lint: `no-raw-code-element`); rendered HTML uses `.rich-text` |
 
 ### Loading and State Components
 

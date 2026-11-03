@@ -4,7 +4,7 @@ import {
   OfferingMetric,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Code } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import {
@@ -60,7 +60,7 @@ export const MetricsSection: FC<OfferingSectionProps> = (props) => {
           },
           {
             title: translate('Key'),
-            render: ({ row }) => <code>{row.key}</code>,
+            render: ({ row }) => <Code>{row.key}</Code>,
           },
           {
             title: translate('Kind'),

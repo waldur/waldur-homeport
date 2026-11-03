@@ -83,7 +83,7 @@ export const BookingResourcesCalendar: FunctionComponent<
           <h2 className="font-medium">
             {parseDate(dates[0]).toFormat('dd LLLL yyyy')}
           </h2>
-          <div className="timeline-list flex grow scroll-y max-h-[225px]">
+          <div className="timeline-list relative flex grow overflow-y-auto max-h-[225px]">
             <ul className="timeline-list-times">
               {getTimeOptions(60, true).map((time, i) => (
                 <li key={i}>

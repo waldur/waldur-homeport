@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { AccordionCard } from 'waldur-ui';
+import { AccordionCard, Code } from 'waldur-ui';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -33,7 +33,7 @@ export const DatabaseTableStats: FC<DatabaseTableStatsProps> = ({ data }) => {
           {data.map((row) => (
             <tr key={row.table_name}>
               <td>
-                <code>{row.table_name}</code>
+                <Code>{row.table_name}</Code>
               </td>
               <td className="text-end">
                 {formatFilesize(row.total_size, 'B')}

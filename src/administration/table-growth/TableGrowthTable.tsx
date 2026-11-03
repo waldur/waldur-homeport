@@ -1,6 +1,6 @@
 import { FC, useEffect, useMemo } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, Code } from 'waldur-ui';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -46,7 +46,7 @@ export const TableGrowthTable: FC<TableGrowthTableProps> = ({
       {
         title: translate('Table name'),
         render: ({ row }: { row: TableGrowthStats }) => (
-          <code>{row.table_name}</code>
+          <Code>{row.table_name}</Code>
         ),
         orderField: 'table_name',
         id: 'table_name',

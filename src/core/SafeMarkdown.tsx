@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 
 import { parseMarkdown } from './sanitize';
@@ -16,7 +17,9 @@ export const SafeMarkdown: React.FC<{ text: string; smallTitles?: boolean }> = (
 
   return (
     <div
-      className={'md-content' + (props.smallTitles ? ' md-small-titles' : '')}
+      className={classNames('md-content rich-text', {
+        'md-small-titles': props.smallTitles,
+      })}
       dangerouslySetInnerHTML={{ __html: html }}
       data-testid="safe-markdown"
     />

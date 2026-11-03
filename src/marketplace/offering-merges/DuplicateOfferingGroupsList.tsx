@@ -8,7 +8,7 @@ import {
   OfferingMergeIssue,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, Menu, Tooltip } from 'waldur-ui';
+import { AlertItem, Badge, Menu, Tooltip, Code } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -84,7 +84,7 @@ const DuplicateOfferingsExpandableRow: FC<{ row: DuplicateOfferingGroup }> = ({
               variant={variant}
               title={
                 <>
-                  {issue.message} <code className="text-xs">{issue.code}</code>
+                  {issue.message} <Code className="text-xs">{issue.code}</Code>
                 </>
               }
             />

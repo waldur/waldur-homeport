@@ -501,7 +501,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
                 apply={() => props.applyFiltersFn(true)}
               />
 
-              <div className="separator" />
+              <div className="border-b border-b-secondary" />
               {props.filters}
             </MenuPopover.Content>
           </>

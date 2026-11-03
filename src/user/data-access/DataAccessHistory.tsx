@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 import { usersDataAccessHistoryList } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Code } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
@@ -118,18 +118,18 @@ export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
         {
           title: translate('IP address'),
           render: ({ row }: { row: DataAccessHistoryEntry }) => (
-            <code className="text-quaternary small">
+            <Code className="text-quaternary small">
               {renderFieldOrDash(row.ip_address)}
-            </code>
+            </Code>
           ),
         },
         {
           title: translate('Context'),
           render: ({ row }: { row: DataAccessHistoryEntry }) =>
             row.context?.endpoint ? (
-              <code className="text-quaternary small">
+              <Code className="text-quaternary small">
                 {String(row.context.method)} {String(row.context.endpoint)}
-              </code>
+              </Code>
             ) : (
               <span className="text-quaternary">-</span>
             ),

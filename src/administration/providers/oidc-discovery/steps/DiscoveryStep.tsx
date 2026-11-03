@@ -10,6 +10,7 @@ import {
   BaseButton,
   PropertyList,
   PropertyItem,
+  Code,
 } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -293,7 +294,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                   {discoveryResult.waldur_fields.slice(0, 5).map((field) => (
                     <tr key={field.field}>
                       <td>
-                        <code>{field.field}</code>
+                        <Code>{field.field}</Code>
                       </td>
                       <td className="text-quaternary">{field.description}</td>
                       <td>

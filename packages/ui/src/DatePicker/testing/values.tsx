@@ -2,6 +2,8 @@ import { DateTime } from 'luxon';
 import { ReactNode } from 'react';
 import { within } from 'storybook/test';
 
+import { Code } from '../../Code';
+
 /**
  * Normalises a date-picker value into a stable, timezone-free form so
  * stories can assert on it: ISO datetime strings and `Date`s become local
@@ -37,9 +39,9 @@ export const ValueReadout = ({
 }) => (
   <div className="mt-[16px] text-xs text-quinary">
     {label}:{' '}
-    <code data-testid={testId}>
+    <Code data-testid={testId}>
       {JSON.stringify(serializeDateValue(value))}
-    </code>
+    </Code>
   </div>
 );
 

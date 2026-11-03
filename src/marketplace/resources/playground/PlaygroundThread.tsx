@@ -56,7 +56,7 @@ const PlaygroundText: TextMessagePartComponent = ({ text }) => {
         </details>
       ) : null}
       {answer ? (
-        <div className="aui-md">
+        <div className="aui-md rich-text">
           <Markdown options={MARKDOWN_OPTIONS}>{answer}</Markdown>
         </div>
       ) : null}

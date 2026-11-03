@@ -4,6 +4,8 @@ import {
   marketplaceSiteAgentIdentitiesList,
 } from 'waldur-js-client';
 
+import { Code } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -47,11 +49,11 @@ export const AgentIdentitiesList: FC<TableWithPortal> = ({ portal }) => {
     {
       title: translate('Offering'),
       render: ({ row }) => (
-        <code className="text-quaternary">
+        <Code className="text-quaternary">
           {row.offering
             ? `${row.offering.substring(0, 8)}...`
             : DASH_ESCAPE_CODE}
-        </code>
+        </Code>
       ),
       copyField: (row) => row.offering,
       keys: ['offering'],
@@ -66,9 +68,9 @@ export const AgentIdentitiesList: FC<TableWithPortal> = ({ portal }) => {
     {
       title: translate('Config path'),
       render: ({ row }) => (
-        <code className="text-quaternary">
+        <Code className="text-quaternary">
           {row.config_file_path || DASH_ESCAPE_CODE}
-        </code>
+        </Code>
       ),
       keys: ['config_file_path'],
       id: 'config_file_path',

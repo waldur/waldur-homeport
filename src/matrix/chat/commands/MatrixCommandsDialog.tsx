@@ -6,6 +6,7 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
+  Code,
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -30,14 +31,14 @@ const CommandRow: FC<{
   const content = (
     <>
       <span className="tc-commands-row__forms">
-        <code>/{command.name}</code>
+        <Code>/{command.name}</Code>
         {command.source === 'bot' && (
           <>
             {' · '}
-            <code>
+            <Code>
               {BOT_PREFIX}
               {command.name}
-            </code>
+            </Code>
           </>
         )}
         {command.args && (

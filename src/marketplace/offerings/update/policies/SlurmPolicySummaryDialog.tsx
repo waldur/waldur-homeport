@@ -11,6 +11,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Code,
 } from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
@@ -189,7 +190,7 @@ const PreviewCommands: FC<{ config: SlurmPolicyConfig }> = ({ config }) => {
             </TableCell>
             <TableCell className="text-tertiary">{cmd.description}</TableCell>
             <TableCell>
-              <code className="text-xs">{cmd.command}</code>
+              <Code className="text-xs">{cmd.command}</Code>
             </TableCell>
           </TableRow>
         ))}
@@ -345,7 +346,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                         {comp.name}
                       </TableCell>
                       <TableCell>
-                        <code className="text-xs">{comp.type}</code>
+                        <Code className="text-xs">{comp.type}</Code>
                       </TableCell>
                       <TableCell className="text-tertiary">
                         {comp.amount.toLocaleString()} {comp.measuredUnit}
@@ -413,9 +414,9 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   {translate('Unused from previous period')}
                 </TableCell>
                 <TableCell>
-                  <code>
+                  <Code>
                     max(0, {exBase} - {exPrevUsage}) = {exUnused.toFixed(0)} Nh
-                  </code>
+                  </Code>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -423,9 +424,9 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   {translate('Carryover cap')}
                 </TableCell>
                 <TableCell>
-                  <code>
+                  <Code>
                     {carryoverPct}% &times; {exBase} = {exCap.toFixed(0)} Nh
-                  </code>
+                  </Code>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -433,10 +434,10 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   {translate('Carryover')}
                 </TableCell>
                 <TableCell>
-                  <code>
+                  <Code>
                     min({exUnused.toFixed(0)}, {exCap.toFixed(0)}) ={' '}
                     {exCarryover.toFixed(0)} Nh
-                  </code>
+                  </Code>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -444,10 +445,10 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   {translate('Total allocation')}
                 </TableCell>
                 <TableCell>
-                  <code>
+                  <Code>
                     {exBase} + {exCarryover.toFixed(0)} = {exTotal.toFixed(0)}{' '}
                     Nh
-                  </code>
+                  </Code>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -455,10 +456,10 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   {translate('Usage percentage')}
                 </TableCell>
                 <TableCell>
-                  <code>
+                  <Code>
                     {exCurrentUsage} / {exTotal.toFixed(0)} &times; 100 ={' '}
                     {exUsagePercent.toFixed(1)}%
-                  </code>
+                  </Code>
                 </TableCell>
               </TableRow>
               <TableRow>

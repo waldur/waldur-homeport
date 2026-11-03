@@ -6,7 +6,7 @@ import {
   overrideSettingsRetrieve,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, Tooltip } from 'waldur-ui';
+import { AlertItem, BaseButton, Tooltip, Code } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -279,12 +279,12 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                             'Running Setup again generates new tokens and overwrites the existing ones, and chat stops working until the homeserver has the new registration. {command} replaces the old registration itself. If you register by hand, send {unregister} in the admin room first, then register the new YAML. On Synapse, replace the file and restart the homeserver.',
                             {
                               command: (
-                                <code>{REGISTER_APPSERVICE_COMMAND}</code>
+                                <Code>{REGISTER_APPSERVICE_COMMAND}</Code>
                               ),
                               unregister: (
-                                <code>
+                                <Code>
                                   !admin appservices unregister waldur
-                                </code>
+                                </Code>
                               ),
                             },
                             formatJsxTemplate,
@@ -325,8 +325,8 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                   {translate(
                     'Register this YAML on the homeserver. On Tuwunel, run {command} with MATRIX_ADMIN_TOKEN set, or with MATRIX_BOOTSTRAP_PASSWORD set and the homeserver\'s registration_shared_secret equal to the registration secret (see "Registering on Tuwunel from the command line" in the admin guide); or send {adminCommand} with the YAML in the admin room. On Synapse, add it to app_service_config_files and restart the homeserver. Do not run Setup again: it generates new tokens.',
                     {
-                      command: <code>{REGISTER_APPSERVICE_COMMAND}</code>,
-                      adminCommand: <code>!admin appservices register</code>,
+                      command: <Code>{REGISTER_APPSERVICE_COMMAND}</Code>,
+                      adminCommand: <Code>!admin appservices register</Code>,
                     },
                     formatJsxTemplate,
                   )}
@@ -342,7 +342,7 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                 {result.webhook_url && (
                   <div className="mt-2.5">
                     <strong>{translate('Webhook URL')}:</strong>{' '}
-                    <code>{result.webhook_url}</code>
+                    <Code>{result.webhook_url}</Code>
                   </div>
                 )}
               </div>

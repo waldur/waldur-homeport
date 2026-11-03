@@ -327,7 +327,7 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
 
               {showAllocationExtras && (
                 <>
-                  <div className="separator my-4" />
+                  <div className="border-b border-b-secondary my-4" />
                   <BooleanGroup
                     name="include_award_response"
                     spaceless={true}

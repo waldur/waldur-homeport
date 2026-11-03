@@ -120,6 +120,9 @@ export default tseslint
         // Zero instances remain: every native date/time input was replaced by
         // the waldur-ui pickers. See the rule's docblock.
         'waldur-custom/no-native-date-input': 'error',
+        // Zero instances remain: inline code and keys are waldur-ui's Code
+        // and Kbd, and nothing styles a bare <code> any more.
+        'waldur-custom/no-raw-code-element': 'error',
         'waldur-custom/enforce-dialog-button-order': 'error',
         'waldur-custom/no-direct-client-usage': 'error',
         'waldur-custom/no-edit-button-size-override': 'error',

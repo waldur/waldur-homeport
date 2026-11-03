@@ -1,5 +1,7 @@
 import { FC, useMemo } from 'react';
 
+import { Code } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useOfferingCategories } from '@/navigation/sidebar/utils';
 import { TableWithPortal } from '@/table/types';
@@ -33,7 +35,7 @@ export const IntentQuestionsTable: FC<TableWithPortal> = ({ portal }) => {
       return (
         <div>
           <span className="text-tertiary text-xs">{translate('Intent')}: </span>
-          <code className="text-brand">{row.intent_field}</code>
+          <Code className="text-brand">{row.intent_field}</Code>
         </div>
       );
     }

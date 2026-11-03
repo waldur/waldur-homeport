@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { Offering, Resource } from 'waldur-js-client';
 
-import { AlertItem, Avatar, Badge } from 'waldur-ui';
+import { AlertItem, Avatar, Badge, Code } from 'waldur-ui';
 
 import { CreateModalButton } from '@/core/buttons';
 import { formatDateTime } from '@/core/dateUtils';
@@ -58,7 +58,7 @@ const getColumns = (
   {
     title: translate('Key ID'),
     render: ({ row }) =>
-      row.client_id ? <code>{row.client_id}</code> : DASH_ESCAPE_CODE,
+      row.client_id ? <Code>{row.client_id}</Code> : DASH_ESCAPE_CODE,
   },
   ...(keyManagement
     ? getManagedColumns(components, models, resourceLimits)
