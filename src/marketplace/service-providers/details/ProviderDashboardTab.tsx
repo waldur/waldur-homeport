@@ -4,12 +4,12 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { OfferingCard } from '@/marketplace/common/OfferingCard';
 import { getLabel } from '@/marketplace/common/registry';
+import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
 import { OfferingStateField } from '@/marketplace/offerings/OfferingStateField';
 import { PublicCallsList } from '@/proposals/PublicCallsList';
 import { createFetcher } from '@/table/api';
@@ -22,12 +22,9 @@ export const ProviderOfferingsList = (props) => {
     {
       title: translate('Name'),
       render: ({ row }: { row: Offering }) => (
-        <Link
-          state="public-offering.marketplace-public-offering"
-          params={{ uuid: row.uuid }}
-        >
+        <OfferingDetailsLink offering_uuid={row.uuid}>
           {row.name}
-        </Link>
+        </OfferingDetailsLink>
       ),
 
       copyField: (row) => row.name,

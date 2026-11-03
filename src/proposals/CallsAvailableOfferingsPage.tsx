@@ -3,9 +3,9 @@ import { FunctionComponent, useMemo } from 'react';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
-import { Link } from '@/core/Link';
 import { LandingHeroSection } from '@/dashboard/hero/LandingHeroSection';
 import { translate } from '@/i18n';
+import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
 import { OfferingStateCell } from '@/marketplace/offerings/list/OfferingStateCell';
 import { getStates } from '@/marketplace/offerings/list/OfferingStateFilter';
 import { useFullPage } from '@/navigation/context';
@@ -54,11 +54,9 @@ const CallsAvailableOfferingsTable: FunctionComponent = () => {
           title: translate('Name'),
           orderField: 'name',
           render: ({ row }) => (
-            <Link
-              state="public-offering.marketplace-public-offering"
-              params={{ uuid: row.uuid }}
-              label={row.name}
-            />
+            <OfferingDetailsLink offering_uuid={row.uuid}>
+              {row.name}
+            </OfferingDetailsLink>
           ),
 
           copyField: (row) => row.name,

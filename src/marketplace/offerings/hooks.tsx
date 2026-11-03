@@ -12,18 +12,25 @@ export const getOfferingBreadcrumbItems = (
   offering: Offering,
   provider: ServiceProvider,
   page: 'details' | 'edit',
+  linkShop = true,
 ): IBreadcrumbItem[] => {
   return [
     {
       key: 'marketplace',
       text: getMarketplaceTitle(),
-      to: 'public.marketplace-landing',
+      ...(linkShop ? { to: 'public.marketplace-landing' } : {}),
     },
     {
       key: 'service-provider',
       text: offering?.customer_name || '...',
-      to: 'marketplace-providers.details',
-      params: offering ? { customer_uuid: offering.customer_uuid } : undefined,
+      ...(linkShop
+        ? {
+            to: 'marketplace-providers.details',
+            params: offering
+              ? { customer_uuid: offering.customer_uuid }
+              : undefined,
+          }
+        : {}),
       maxLength: 11,
     },
     {

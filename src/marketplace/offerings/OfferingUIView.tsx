@@ -9,7 +9,9 @@ import {
 import { useBreadcrumbs } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
+import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
 import { LayoutSlot } from '@/navigation/slots';
+import { useUser } from '@/workspace/hooks';
 
 import { PROVIDER_OFFERING_DATA_QUERY_KEY } from './constants';
 import { getOfferingBreadcrumbItems } from './hooks';
@@ -46,14 +48,16 @@ export const OfferingUIView = (props) => {
   });
 
   const page = state.name.includes('update') ? 'edit' : 'details';
+  const linkShop = canUseMarketplaceShopUi(useUser());
   const breadcrumbItems = useMemo(
     () =>
       getOfferingBreadcrumbItems(
         offeringData?.offering as any,
         props.provider,
         page,
+        linkShop,
       ),
-    [offeringData?.offering, props.provider, page],
+    [offeringData?.offering, props.provider, page, linkShop],
   );
   useBreadcrumbs(breadcrumbItems);
 

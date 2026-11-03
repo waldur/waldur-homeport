@@ -26,9 +26,13 @@ vi.mock('@/marketplace/serviceAccessMode', () => ({
   isMarketplaceVisible: () => true,
 }));
 
-vi.mock('@/workspace/selectors', () => ({
-  checkHasNonProjectPermissions: () => false,
-}));
+vi.mock('@/workspace/selectors', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@/workspace/selectors')>();
+  return {
+    ...actual,
+    checkHasNonProjectPermissions: () => false,
+  };
+});
 
 vi.mock('./Sidebar', () => ({
   Sidebar: ({ children }: { children: React.ReactNode }) => (
@@ -75,15 +79,21 @@ describe('UnifiedSidebar Add resource visibility', () => {
     expect(screen.queryByTestId('add-resource-toggle')).not.toBeInTheDocument();
   });
 
-  it('shows Add resource for staff when hide_marketplace_from_end_users is on', () => {
-    hideMarketplaceOn();
-    vi.mocked(useUser).mockReturnValue({
-      uuid: 'staff-1',
-      is_staff: true,
-    } as any);
-    render(<UnifiedSidebar />);
-    expect(screen.getByTestId('add-resource-toggle')).toBeInTheDocument();
-  });
+  it.each([
+    ['staff', { is_staff: true, is_support: false }],
+    ['support', { is_staff: false, is_support: true }],
+  ])(
+    'shows Add resource for %s when hide_marketplace_from_end_users is on',
+    (_label, role) => {
+      hideMarketplaceOn();
+      vi.mocked(useUser).mockReturnValue({
+        uuid: 'user-1',
+        ...role,
+      } as any);
+      render(<UnifiedSidebar />);
+      expect(screen.getByTestId('add-resource-toggle')).toBeInTheDocument();
+    },
+  );
 
   it('shows Add resource for non-staff when the feature is off', () => {
     vi.mocked(isFeatureVisible).mockReturnValue(false);
