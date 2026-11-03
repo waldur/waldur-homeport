@@ -1,6 +1,6 @@
 import { PaymentProfile } from 'waldur-js-client';
 
-import { InvoiceItem, InvoiceTableItem } from '../types';
+import { Invoice, InvoiceItem, InvoiceTableItem } from '../types';
 
 const getResourceKey = (item: InvoiceItem) =>
   item.resource_uuid || item.details.resource_uuid;
@@ -17,6 +17,9 @@ export interface AdjustmentItemDetails {
   offering_component_type?: string;
   offering_component_name?: string;
   discount_of_item?: string;
+  // Set on the discount lines of an open invoice: computed on the month so
+  // far, and replaced by the final line when the month closes.
+  is_estimate?: boolean;
   is_compensation?: boolean;
   compensation_of_item?: string;
   plan_name?: string;
@@ -24,6 +27,10 @@ export interface AdjustmentItemDetails {
 
 export const getDetails = (it: InvoiceItem) =>
   (it.details ?? {}) as AdjustmentItemDetails;
+
+// An invoice still accruing: its lines, discounts included, are not final.
+export const isOpenInvoice = (invoice: Pick<Invoice, 'state'>) =>
+  invoice.state === 'pending' || invoice.state === 'pending_finalization';
 
 // An "adjustment" is a volume discount or a credit compensation — a system-
 // generated line that reduces a specific component item.

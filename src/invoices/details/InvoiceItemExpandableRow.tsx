@@ -109,6 +109,13 @@ const InvoiceItemLine: FC<{
                     ? ` (${dd.discount_percent}%)`
                     : ''}
                 </div>
+                {dd.is_estimate && (
+                  <div className="mb-1 text-quaternary">
+                    {translate(
+                      'Estimated on the usage so far. The final discount is set when the invoice is closed.',
+                    )}
+                  </div>
+                )}
                 {dd.aggregated_usage != null && (
                   <div className="text-quaternary">
                     {translate('Organization-aggregated usage')}:{' '}
@@ -126,9 +133,8 @@ const InvoiceItemLine: FC<{
             <span className="text-success ps-4">
               ↳ {translate('Volume discount')}
               {componentLabel ? ` — ${componentLabel}` : ''}
-              {dd.discount_percent != null
-                ? ` (${dd.discount_percent}%)`
-                : ''}{' '}
+              {dd.discount_percent != null ? ` (${dd.discount_percent}%)` : ''}
+              {dd.is_estimate ? `, ${translate('estimated')}` : ''}{' '}
               <WarningCircleIcon
                 weight="bold"
                 size={16}

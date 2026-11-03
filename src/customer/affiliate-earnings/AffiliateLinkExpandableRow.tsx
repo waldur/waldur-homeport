@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo } from 'react';
 import {
   customerAffiliatesAccrualsList,
+  customerAffiliatesEarningsRetrieve,
   type AffiliateFeeAccrual,
   type CustomerAffiliate,
 } from 'waldur-js-client';
@@ -28,6 +29,18 @@ export const AffiliateLinkExpandableRow: FC<{ row: CustomerAffiliate }> = ({
     queryFn: () =>
       customerAffiliatesAccrualsList({ path: { uuid: row.uuid } }).then(
         (response) => response.data,
+      ),
+    refetchOnWindowFocus: false,
+    staleTime: SHORT_STALE_TIME,
+  });
+
+  // The fee the current month is expected to earn; it becomes an accrual only
+  // when the referred organization's invoice is closed.
+  const { data: upcoming } = useQuery({
+    queryKey: ['AffiliateUpcomingFee', row.uuid],
+    queryFn: () =>
+      customerAffiliatesEarningsRetrieve({ path: { uuid: row.uuid } }).then(
+        (response) => response.data.upcoming,
       ),
     refetchOnWindowFocus: false,
     staleTime: SHORT_STALE_TIME,
@@ -61,6 +74,19 @@ export const AffiliateLinkExpandableRow: FC<{ row: CustomerAffiliate }> = ({
 
   return (
     <ExpandableContainer className="border border-secondary rounded-lg">
+      {upcoming && (
+        <p className="mb-3 text-sm text-secondary">
+          {translate('Expected for {period}: {amount}', {
+            period: formatPeriod(upcoming.year, upcoming.month),
+            amount: defaultCurrency(upcoming.amount),
+          })}{' '}
+          <span className="text-quaternary">
+            {translate(
+              'Estimated from the open invoice; accrued when the month is closed.',
+            )}
+          </span>
+        </p>
+      )}
       <Table<AffiliateFeeAccrual>
         {...tableProps}
         loading={isLoading}

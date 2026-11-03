@@ -11,7 +11,7 @@ import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
 import { Customer } from '@/workspace/types';
 
-import { groupInvoiceItems } from '../details/utils';
+import { groupInvoiceItems, isOpenInvoice } from '../details/utils';
 import { Invoice } from '../types';
 import { formatPeriod } from '../utils';
 
@@ -48,10 +48,7 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
   customer,
   costTrend,
 }) => {
-  const isCurrentMonth = Boolean(
-    (invoice.state === 'pending' || invoice.state === 'pending_finalization') &&
-    !invoice.invoice_date,
-  );
+  const isCurrentMonth = isOpenInvoice(invoice) && !invoice.invoice_date;
   const isAccountingMode = ENV.accountingMode === 'accounting';
   const maxProjectsShowCount = isCurrentMonth && !isAccountingMode ? 4 : 5;
 

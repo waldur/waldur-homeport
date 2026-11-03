@@ -9,7 +9,8 @@ import { Invoice } from '../types';
 
 import { CustomerDetails } from './CustomerDetails';
 import { InvoiceItemsTable } from './InvoiceItemsTable';
-import { getActiveFixedPricePaymentProfile } from './utils';
+import { getActiveFixedPricePaymentProfile, isOpenInvoice } from './utils';
+import { VolumeDiscountsRow } from './VolumeDiscountsRow';
 
 export const InvoiceDetails = ({
   invoice,
@@ -24,6 +25,7 @@ export const InvoiceDetails = ({
   );
 
   const [totalFiltered, setTotalFiltered] = useState<number | null>(null);
+  const isOpen = isOpenInvoice(invoice);
 
   return (
     <>
@@ -89,6 +91,11 @@ export const InvoiceDetails = ({
                     {defaultCurrency(invoice.price)}
                   </td>
                 </tr>
+                <VolumeDiscountsRow
+                  invoice={invoice}
+                  labelColSpan={totalFiltered === null ? 1 : 2}
+                  includedIn="subtotal"
+                />
                 <tr className="text-sm font-medium">
                   <td
                     className="text-end text-primary"
@@ -108,7 +115,12 @@ export const InvoiceDetails = ({
                     className="text-end text-primary"
                     colSpan={totalFiltered === null ? 1 : 2}
                   >
-                    <span>{translate('Total')}:</span>
+                    <span>
+                      {isOpen
+                        ? translate('Expected total')
+                        : translate('Total')}
+                      :
+                    </span>
                   </td>
                   <td
                     width="12%"

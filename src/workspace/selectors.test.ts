@@ -17,6 +17,7 @@ import {
   checkIsServiceManagerOnly,
   hasAnyOrganizationAccess,
   canViewAccounting,
+  canViewAffiliateEarnings,
   checkIsOwner,
   isOwnerOrStaff,
   isOwnerOrStaffOrReader,
@@ -708,6 +709,59 @@ describe('organization role clones and accounting', () => {
       ],
     };
     expect(canViewAccounting(state(user))).toBe(false);
+  });
+});
+
+describe('affiliate earnings visibility', () => {
+  const customer = { uuid: 'reseller' };
+  const withRole = (
+    role_name: string,
+    scope_type = 'customer',
+    scope_uuid = 'reseller',
+  ) => ({
+    is_staff: false,
+    is_support: false,
+    uuid: 'u',
+    permissions: [{ scope_type, scope_uuid, role_name }],
+  });
+  const state = (user) => ({ workspace: { user, customer } }) as RootState;
+
+  it('shows it to any role on the affiliate organization, as the API does', () => {
+    for (const role of [
+      RoleEnum.CUSTOMER_OWNER,
+      RoleEnum.CUSTOMER_SUPPORT,
+      RoleEnum.CUSTOMER_READER,
+    ]) {
+      expect(canViewAffiliateEarnings(state(withRole(role)))).toBe(true);
+    }
+  });
+
+  it('shows it to staff and support', () => {
+    const nobody = { is_staff: false, is_support: false, permissions: [] };
+    expect(canViewAffiliateEarnings(state({ ...nobody, is_staff: true }))).toBe(
+      true,
+    );
+    expect(
+      canViewAffiliateEarnings(state({ ...nobody, is_support: true })),
+    ).toBe(true);
+  });
+
+  it('hides it from roles held anywhere else', () => {
+    expect(
+      canViewAffiliateEarnings(
+        state(withRole(RoleEnum.CUSTOMER_OWNER, 'customer', 'other')),
+      ),
+    ).toBe(false);
+    expect(
+      canViewAffiliateEarnings(
+        state(withRole('CUSTOMER.PROVIDER_ACCOUNTANT', 'service_provider')),
+      ),
+    ).toBe(false);
+    expect(
+      canViewAffiliateEarnings(
+        state(withRole(RoleEnum.PROJECT_ADMIN, 'project', 'project_uuid')),
+      ),
+    ).toBe(false);
   });
 });
 
