@@ -129,6 +129,7 @@ export function TableToolbarActions() {
         >
           {config.hasQuery && (
             <div className="flex items-center gap-3">
+              {slots.beforeSearch}
               <div className="table-toolbar-search">
                 <TableQuery
                   query={query}

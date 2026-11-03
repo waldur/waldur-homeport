@@ -218,7 +218,7 @@ const ChangelogTable: FunctionComponent<{
       expandableRow={ChangelogExpandableRow}
       expandableRowClassName="py-1.5 pe-1.5"
       verboseName={translate('changelog entries')}
-      subtitle={
+      beforeSearch={
         releases.length > 0 && (
           <ReleasePicker
             view={view}
@@ -228,7 +228,17 @@ const ChangelogTable: FunctionComponent<{
           />
         )
       }
-      tableActions={view === PENDING_VIEW && hasPending && <ChangelogToolbar />}
+      tableActions={
+        <ChangelogToolbar
+          disabledReason={
+            !hasPending
+              ? translate('No upgrade is pending.')
+              : view !== PENDING_VIEW
+                ? translate('Pick Pending upgrade to act on the upgrade.')
+                : undefined
+          }
+        />
+      }
     />
   );
 };

@@ -313,6 +313,21 @@ describe('TableToolbarActions', () => {
 
       expect(screen.queryByPlaceholderText(/search/i)).not.toBeInTheDocument();
     });
+
+    it('renders beforeSearch ahead of the search input', () => {
+      renderWithTableContext(<TableToolbarActions />, {
+        config: { ...createMockTableContext().config, hasQuery: true },
+        query: '',
+        slots: { beforeSearch: <button>Pending upgrade</button> },
+      });
+
+      const picker = screen.getByRole('button', { name: 'Pending upgrade' });
+      const search = screen.getByPlaceholderText(/search/i);
+      expect(
+        picker.compareDocumentPosition(search) &
+          Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
+    });
   });
 
   describe('action buttons visibility', () => {

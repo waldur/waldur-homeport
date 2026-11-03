@@ -19,7 +19,10 @@ import { useNotify } from '@/store/notify';
 import { ScheduleUpgradeDialog } from './ScheduleUpgradeDialog';
 import { UpgradeCommandsDialog } from './UpgradeCommandsDialog';
 
-export const ChangelogToolbar: FC = () => {
+/** `disabledReason` keeps the buttons in place, disabled, outside the pending view. */
+export const ChangelogToolbar: FC<{ disabledReason?: string }> = ({
+  disabledReason,
+}) => {
   const { openDialog } = useModal();
   const { showErrorResponse } = useNotify();
   const [loading, setLoading] = useState(false);
@@ -88,7 +91,12 @@ export const ChangelogToolbar: FC = () => {
   return (
     <>
       <Menu>
-        <Menu.TriggerButton variant="tertiary" size="lg" disabled={loading}>
+        <Menu.TriggerButton
+          variant="tertiary"
+          size="lg"
+          disabled={loading || Boolean(disabledReason)}
+          disabledReason={disabledReason}
+        >
           {translate('Actions')}
         </Menu.TriggerButton>
         <Menu.Content look="actions" side="bottom">
@@ -111,6 +119,8 @@ export const ChangelogToolbar: FC = () => {
         iconNode={<CalendarPlusIcon weight="bold" />}
         onClick={openScheduleDialog}
         pending={loading}
+        disabled={Boolean(disabledReason)}
+        disabledReason={disabledReason}
         variant="primary"
         size="lg"
       />

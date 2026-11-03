@@ -36025,6 +36025,11 @@
       "feature_area": "plans"
     }
   },
+  "No upgrade is pending.": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "No usage data available.": {
     "context": {
       "feature_area": "dashboard"
@@ -41439,6 +41444,11 @@
   "Physical sciences": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Pick Pending upgrade to act on the upgrade.": {
+    "context": {
+      "feature_area": "changelog"
     }
   },
   "Pick a command to put it in the message box.": {
