@@ -1,4 +1,4 @@
-export type ExportFormat = 'clipboard' | 'pdf' | 'excel' | 'csv';
+export type ExportFormat = 'clipboard' | 'pdf' | 'excel' | 'csv' | 'json';
 
 export interface ExportConfig {
   format: ExportFormat;
