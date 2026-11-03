@@ -8,6 +8,7 @@ import { BaseButton, SegmentedControl } from 'waldur-ui';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { getErrorStatus } from '@/error/utils';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -54,7 +55,15 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
       ),
 
     staleTime: UI_STALE_TIME,
+    // The team only feeds the optional per-user filter, so its failure must
+    // not send the page to the error redirect.
+    meta: { skipGlobalErrorRedirect: true },
   });
+  // The team route refuses callers who may not list the project's members
+  // (403: e.g. a role only on a resource project or a site-wide role) and
+  // hides concealed resources (404). They get the card without the filter,
+  // as when no user has usage, rather than an error.
+  const teamRefused = [403, 404].includes(getErrorStatus(teamError));
 
   const {
     isLoading: loading,
@@ -105,7 +114,7 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
           <h3>{translate('Usage history')}</h3>
         </div>
         <div className="card-toolbar gap-3">
-          {teamError ? (
+          {teamError && !teamRefused ? (
             <LoadingErred message={translate('Error')} loadData={refetchTeam} />
           ) : usersFilterOptions.length > 0 ? (
             <Select
