@@ -53,6 +53,12 @@ describe('IssueAttachment', () => {
     expect(deleteButton()).not.toBeInTheDocument();
   });
 
+  it('hides Delete when the backend sends no answer on deleting it', () => {
+    // Zammad sent null past its cooldown until Mastermind made it false.
+    renderAttachment({ destroy_is_available: null });
+    expect(deleteButton()).not.toBeInTheDocument();
+  });
+
   it('offers Delete when the backend does not say who may delete', () => {
     renderAttachment({ can_delete: undefined });
     expect(deleteButton()).toBeInTheDocument();
