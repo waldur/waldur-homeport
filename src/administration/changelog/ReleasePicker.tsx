@@ -1,4 +1,5 @@
 import { CheckIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FC } from 'react';
 import { ChangelogReleaseSummary } from 'waldur-js-client';
 
@@ -48,12 +49,34 @@ export const ReleasePicker: FC<ReleasePickerProps> = ({
   hasPending,
   onChange,
 }) => {
+  const current = getViewTitle(view, releases);
+  const titles = [
+    ...new Set([
+      current,
+      ...(hasPending ? [getViewTitle(PENDING_VIEW, releases)] : []),
+      ...releases.map((release) => getViewTitle(release.version, releases)),
+    ]),
+  ];
   const selectedIcon = (selected: boolean) =>
     selected ? <CheckIcon weight="bold" /> : <span />;
   return (
     <Menu>
-      <Menu.TriggerButton variant="tertiary" size="lg">
-        {getViewTitle(view, releases)}
+      <Menu.TriggerButton variant="tertiary" size="lg" className="max-w-full">
+        {/* Every title stacked in one cell, the others invisible: the button
+            keeps the width of the longest, so picking one moves nothing. */}
+        <span className="grid min-w-0 text-start">
+          {titles.map((title) => (
+            <span
+              key={title}
+              className={classNames(
+                'col-start-1 row-start-1 truncate',
+                title !== current && 'invisible',
+              )}
+            >
+              {title}
+            </span>
+          ))}
+        </span>
       </Menu.TriggerButton>
       <Menu.Content look="actions" side="bottom">
         {hasPending && (

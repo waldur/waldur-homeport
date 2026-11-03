@@ -92,6 +92,7 @@ interface TableSlots<TData = any> {
   placeholderActions?: React.ReactNode;
   filters?: JSX.Element;
   tableActions?: React.ReactNode;
+  beforeSearch?: React.ReactNode;
   dropdownActions?: React.ReactNode;
   footer?: React.ReactNode;
 }

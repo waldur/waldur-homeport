@@ -211,6 +211,8 @@ export interface TableProps<RowType = any> extends TableState {
   dropdownActions?: ReactNode;
   dropdownActionsSize?: 'sm' | 'lg';
   tableActions?: React.ReactNode;
+  /** Rendered before the search box, e.g. a view picker. */
+  beforeSearch?: React.ReactNode;
   verboseName?: string;
   className?: string;
   headerClassName?: string;
