@@ -79,27 +79,51 @@ export function useTableExport(table, props?) {
   let rows = props?.rows ?? [];
   const customExport = Boolean(exportFields || exportRow);
 
+  /** The table's own list request for every page: its filters, search term
+   * and sorting. */
+  function buildRequest(config: ExportConfig): TableRequest {
+    // Use current filter from props (passed from Table component) instead of
+    // stale filter from registry, as the registry filter is captured only once
+    // when the table is first registered. Also check tableExtraFilters for
+    // cases where filter was set via Redux action.
+    const currentFilter = props?.filter ?? options.filter;
+    const request: TableRequest = {
+      tableKey: table,
+      pageSize: Math.max(tableState.pagination.resultCount, 200),
+      currentPage: 1,
+      filter: config.withFilters ? { ...currentFilter } : {},
+    };
+    if (config.withFilters && options.queryField && tableState.query) {
+      request.filter[options.queryField] = tableState.query;
+    }
+    if (tableState.sorting && tableState.sorting.field) {
+      request.filter.o = orderByFilter(tableState.sorting);
+    }
+    return request;
+  }
+
+  /** Every field the API returns. The rows on screen were fetched with only
+   * the visible columns' fields, so the current page is fetched again too. */
+  async function fetchApiRows(config: ExportConfig) {
+    // The current page is the rows on screen, so the table's filters apply
+    // whatever the toggle says, as they do for the other formats.
+    const request = buildRequest(
+      config.allPages ? config : { ...config, withFilters: true },
+    );
+    delete request.filter.field;
+    if (config.allPages) {
+      return fetchAll(fetchData, request);
+    }
+    request.currentPage = tableState.pagination.currentPage;
+    request.pageSize = tableState.pagination.pageSize;
+    return (await fetchData(request)).rows;
+  }
+
   async function fetchRows(config) {
     const exportColumns = customExport ? [] : getExportColumns(props);
 
     if (config.allPages) {
-      // Use current filter from props (passed from Table component) instead of
-      // stale filter from registry, as the registry filter is captured only once
-      // when the table is first registered. Also check tableExtraFilters for
-      // cases where filter was set via Redux action.
-      const currentFilter = props?.filter ?? options.filter;
-      const request: TableRequest = {
-        tableKey: table,
-        pageSize: Math.max(tableState.pagination.resultCount, 200),
-        currentPage: 1,
-        filter: config.withFilters ? { ...currentFilter } : {},
-      };
-      if (config.withFilters && options.queryField && tableState.query) {
-        request.filter[options.queryField] = tableState.query;
-      }
-      if (tableState.sorting && tableState.sorting.field) {
-        request.filter.o = orderByFilter(tableState.sorting);
-      }
+      const request = buildRequest(config);
 
       if (customExport) {
         if (exportKeys && exportKeys.length > 0) {
@@ -186,8 +210,13 @@ export function useTableExport(table, props?) {
         closeDialog();
         return;
       }
-      const data = await fetchRows(config);
-      await exportAs(config.format, table, data);
+      if (config.format === 'json') {
+        const { default: saveAsJson } = await import('./exporters/json');
+        saveAsJson(table, await fetchApiRows(config));
+      } else {
+        const data = await fetchRows(config);
+        await exportAs(config.format, table, data);
+      }
       showSuccess(
         translate('Table has been exported to {format}.', {
           format: config.format,

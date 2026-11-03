@@ -7,4 +7,5 @@ export const EXPORT_OPTIONS: { value: ExportFormat; label: string }[] = [
   { value: 'csv', label: 'CSV' },
   { value: 'pdf', label: 'PDF' },
   { value: 'excel', label: 'Excel' },
+  { value: 'json', label: 'JSON' },
 ];
