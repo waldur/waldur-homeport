@@ -2069,6 +2069,29 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('HPC workspace'),
+    items: [
+      {
+        key: 'FIRECREST_ALLOWED_API_URLS',
+        description: translate('FirecREST API URLs that SLURM offerings may connect to, one per line or comma-separated. Waldur forwards a user\'s identity provider token only to these URLs; an offering pointing elsewhere has no HPC workspace. Append |audience (and optionally |client-scope) to an entry to send a token exchanged for that audience instead of the sign-in token, e.g. https://firecrest.example.org|firecrest.'),
+        default: '',
+        type: 'string',
+      },
+      {
+        key: 'SLURM_MONITOR_ALLOWED_API_URLS',
+        description: translate('slurm-monitor API URLs (ending in /api/v2) that SLURM offerings may read job performance from, one per line or comma-separated. Waldur forwards a user\'s identity provider token only to these URLs. Append |audience (and optionally |client-scope) to an entry to send a token exchanged for that audience instead of the sign-in token.'),
+        default: '',
+        type: 'string',
+      },
+      {
+        key: 'OIDC_TOKEN_MAX_IDLE_DAYS',
+        description: translate('Days without a sign-in after which Waldur deletes and revokes a user\'s stored identity provider refresh token. The user signs in again to use HPC services.'),
+        default: 30,
+        type: 'integer',
+      },
+    ],
+  },
+  {
     description: translate('Usage Polling'),
     items: [
       {
