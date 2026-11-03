@@ -1,6 +1,8 @@
 import { FunctionComponent, useContext } from 'react';
 
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 
 import { useDeleteAttachment } from './api';
 import { IssueAttachmentsContext } from './IssueAttachmentsContext';
@@ -20,15 +22,32 @@ export const IssueAttachment: FunctionComponent<IssueAttachmentProps> = ({
 }) => {
   const issue = useContext(IssueAttachmentsContext);
   const { deleteAttachment, isDeleting } = useDeleteAttachment(issue.url);
+  const { confirm } = useModal();
+
+  const onDelete = async () => {
+    // A delete that reaches the helpdesk removes the file everywhere and goes
+    // ahead at once. One that stays in Waldur leaves the provider's copy
+    // behind, so the user is told before the file goes.
+    if (attachment.delete_is_local_only) {
+      try {
+        await confirm(
+          translate('Delete attachment'),
+          translate(
+            "This ticket's provider helpdesk has been removed from Waldur. Deleting removes the file from Waldur only; any copy on the provider's helpdesk stays.",
+          ),
+          { forDeletion: true },
+        );
+      } catch {
+        return;
+      }
+    }
+    deleteAttachment(attachment.uuid);
+  };
 
   return (
     <AttachmentItem
       attachment={attachment}
-      onDelete={
-        canDeleteAttachment(attachment)
-          ? () => deleteAttachment(attachment.uuid)
-          : undefined
-      }
+      onDelete={canDeleteAttachment(attachment) ? onDelete : undefined}
       isDeleting={isDeleting(attachment.uuid)}
     />
   );

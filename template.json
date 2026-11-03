@@ -62226,6 +62226,11 @@
       "feature_area": "import"
     }
   },
+  "This ticket's provider helpdesk has been removed from Waldur. Deleting removes the file from Waldur only; any copy on the provider's helpdesk stays.": {
+    "context": {
+      "feature_area": "attachments"
+    }
+  },
   "This token won't be shown again, but you can regenerate it later.": {
     "context": {
       "feature_area": "service-accounts"
