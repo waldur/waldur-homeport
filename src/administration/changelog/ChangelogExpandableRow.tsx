@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { AlertItem, Badge, Card, CardContent } from 'waldur-ui';
+import { AlertItem, Badge, Card, CardContent, Code } from 'waldur-ui';
 
 import { URGENCY_CONFIG } from '@/changelog/constants';
 import { ChangelogEntry } from '@/changelog/types';
@@ -153,7 +153,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
                   >,
                 ).map(([key, val]) => (
                   <div key={key} className="small mb-1.5">
-                    <code className="text-brand">{key}</code>
+                    <Code className="text-brand">{key}</Code>
                     {val.is_customized && (
                       <Badge
                         variant="warning"
@@ -166,9 +166,9 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
                     )}
                     {val.current_value && (
                       <div className="text-quaternary mt-1">
-                        {translate('Current')}: <code>{val.current_value}</code>
+                        {translate('Current')}: <Code>{val.current_value}</Code>
                         <br />
-                        {translate('Default')}: <code>{val.default_value}</code>
+                        {translate('Default')}: <Code>{val.default_value}</Code>
                       </div>
                     )}
                   </div>
@@ -188,7 +188,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
                 row.plugin_analysis as Record<string, { installed?: boolean }>,
               ).map(([plugin, status]) => (
                 <div key={plugin} className="flex justify-between small mb-1">
-                  <code>{plugin}</code>
+                  <Code>{plugin}</Code>
                   <StateIndicator
                     variant={status.installed ? 'success' : 'neutral'}
                     label={

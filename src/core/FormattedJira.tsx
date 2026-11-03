@@ -15,5 +15,7 @@ export const FormattedJira: React.FC<{ text: string }> = (props) => {
     () => sanitizeHtml(formatJiraMarkup(props.text)),
     [props.text],
   );
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <div className="rich-text" dangerouslySetInnerHTML={{ __html: html }} />
+  );
 };

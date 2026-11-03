@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Field, Form, FormSpy, useForm } from 'react-final-form';
 import { expect, userEvent, within } from 'storybook/test';
 
+import { Code } from 'waldur-ui';
+
 import { ModelsField } from '@/marketplace/resources/details/api-keys/keySettingsFields';
 import { QuestionLikertFields } from '@/marketplace-checklist/checklists/questions/QuestionLikertFields';
 
@@ -50,7 +52,7 @@ const Harness = ({
         {children}
         <FormSpy subscription={{ values: true }}>
           {({ values }) => (
-            <code data-testid="form-value">{JSON.stringify(values)}</code>
+            <Code data-testid="form-value">{JSON.stringify(values)}</Code>
           )}
         </FormSpy>
       </div>
@@ -250,7 +252,7 @@ const SeenByCallback = () => {
           setSeen(`${value}/${String(form.getState().values.flag)}`)
         }
       />
-      <code data-testid="seen">{seen}</code>
+      <Code data-testid="seen">{seen}</Code>
     </>
   );
 };

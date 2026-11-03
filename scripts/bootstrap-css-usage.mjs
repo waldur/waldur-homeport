@@ -79,10 +79,6 @@ export const PARTIALS = [
     scss: "@import 'config'; @import 'components/text';",
   },
   {
-    name: 'core/components/separator',
-    scss: "@import 'config'; @import 'components/separator';",
-  },
-  {
     name: 'core/components/card',
     scss: "@import 'config'; @import 'components/card';",
   },
@@ -91,24 +87,8 @@ export const PARTIALS = [
     scss: "@import 'config'; @import 'components/buttons';",
   },
   {
-    name: 'core/components/code',
-    scss: "@import 'config'; @import 'components/code';",
-  },
-  {
     name: 'core/components/tables',
     scss: "@import 'config'; @import 'components/tables';",
-  },
-  {
-    name: 'core/components/image-input',
-    scss: "@import 'config'; @import 'components/image-input';",
-  },
-  {
-    name: 'core/components/bullet',
-    scss: "@import 'config'; @import 'components/bullet';",
-  },
-  {
-    name: 'core/components/scroll',
-    scss: "@import 'config'; @import 'components/scroll';",
   },
   {
     name: 'core/components/consent-dialog',

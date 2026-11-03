@@ -5,7 +5,7 @@ import {
   marketplaceSlurmPeriodicUsagePoliciesPreviewImpact,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, BadgeVariant, Progress } from 'waldur-ui';
+import { AlertItem, Badge, BadgeVariant, Progress, Code } from 'waldur-ui';
 
 import { SECOND } from '@/core/constants';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
@@ -532,7 +532,7 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
                     </td>
                     <td>{cmd.description}</td>
                     <td>
-                      <code className="small">{cmd.command}</code>
+                      <Code className="small">{cmd.command}</Code>
                     </td>
                   </tr>
                 ))}
@@ -573,7 +573,7 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
                       </Badge>
                     </td>
                     <td>
-                      <code className="small">{cmd.shell_command}</code>
+                      <Code className="small">{cmd.shell_command}</Code>
                     </td>
                     <td>
                       <Badge

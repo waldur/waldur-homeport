@@ -2,7 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { Project, ProjectPosixGroup } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Code } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
@@ -79,7 +79,7 @@ const ProviderGroupsTable: FC<{ projectUuid: string }> = ({ projectUuid }) => {
         title: translate('Group name'),
         render: ({ row }: { row: ProjectPosixGroup }) =>
           row.group_name ? (
-            <code>{row.group_name}</code>
+            <Code>{row.group_name}</Code>
           ) : (
             renderFieldOrDash(null)
           ),
@@ -93,7 +93,7 @@ const ProviderGroupsTable: FC<{ projectUuid: string }> = ({ projectUuid }) => {
               {translate('Not assigned yet')}
             </span>
           ) : (
-            <code>{row.gid}</code>
+            <Code>{row.gid}</Code>
           ),
         copyField: (row: ProjectPosixGroup) =>
           row.gid == null ? '' : String(row.gid),
@@ -158,7 +158,7 @@ const OfferingGroupsTable: FC<{ projectUuid: string }> = ({ projectUuid }) => {
       {
         title: translate('GID'),
         render: ({ row }: { row: ProjectPosixGroup }) =>
-          row.gid == null ? renderFieldOrDash(null) : <code>{row.gid}</code>,
+          row.gid == null ? renderFieldOrDash(null) : <Code>{row.gid}</Code>,
         copyField: (row: ProjectPosixGroup) =>
           row.gid == null ? '' : String(row.gid),
       },

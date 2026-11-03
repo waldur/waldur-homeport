@@ -14,7 +14,7 @@ import {
   useState,
 } from 'react';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Code } from 'waldur-ui';
 
 import { SkeletonLoader } from '@/ai-assistant/components/shared/SkeletonLoader';
 import { UIBlockProps } from '@/ai-assistant/lib/types';
@@ -467,7 +467,9 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
                   state="marketplace-orders.details"
                   params={{ order_uuid: block.order_id }}
                 >
-                  <code>{block.order_id}</code>
+                  <Code className="rounded-sm bg-primary px-1.5 py-1 text-xs leading-[inherit] text-primary">
+                    {block.order_id}
+                  </Code>
                 </Link>
                 <CopyToClipboardButton
                   value={block.order_id}

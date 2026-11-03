@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { expect, waitFor, within } from 'storybook/test';
 
+import { Code } from 'waldur-ui';
+
 import {
   displayValue,
   getTriggers,
@@ -43,12 +45,12 @@ const Harness = () => {
           onFilterChange={(patch) => setFilter((f) => ({ ...f, ...patch }))}
         />
       </div>
-      <code data-testid="form-value">
+      <Code data-testid="form-value">
         {JSON.stringify({
           startDate: filter.startDate,
           endDate: filter.endDate,
         })}
-      </code>
+      </Code>
     </div>
   );
 };

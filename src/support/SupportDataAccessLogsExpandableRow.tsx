@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { GlobalUserDataAccessLog } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Code } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -42,10 +42,10 @@ export const SupportDataAccessLogsExpandableRow: FC<
             {context.endpoint && (
               <div>
                 <strong>{translate('Endpoint')}:</strong>{' '}
-                <code className="text-quaternary">
+                <Code className="text-quaternary">
                   {context.method && `${context.method} `}
                   {String(context.endpoint)}
-                </code>
+                </Code>
               </div>
             )}
             {Object.entries(context)
@@ -53,11 +53,11 @@ export const SupportDataAccessLogsExpandableRow: FC<
               .map(([key, value]) => (
                 <div key={key}>
                   <strong>{key}:</strong>{' '}
-                  <code className="text-quaternary">
+                  <Code className="text-quaternary">
                     {typeof value === 'object'
                       ? JSON.stringify(value)
                       : String(value)}
-                  </code>
+                  </Code>
                 </div>
               ))}
           </>

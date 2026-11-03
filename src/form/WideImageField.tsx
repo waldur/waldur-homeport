@@ -1,5 +1,4 @@
 import { PencilSimpleIcon, TrashIcon, XIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import {
   ComponentType,
   FunctionComponent,
@@ -16,8 +15,6 @@ import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 
 import { FormField } from './types';
-
-import './ImageField.scss';
 
 type ImageType = File | string;
 
@@ -80,12 +77,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
   const isTooLarge = isChanged && input.value?.size > props.max;
 
   return (
-    <div
-      className={classNames('image-input flex flex-col sm:flex-row gap-6', {
-        'image-input-empty': !input.value,
-        'image-input-changed': isChanged,
-      })}
-    >
+    <div className="flex flex-col sm:flex-row gap-6">
       <div>
         <div
           className="relative inline-flex shrink-0 items-center justify-center rounded-full overflow-hidden"
@@ -115,7 +107,6 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
           <BaseButton
             variant="tertiary"
             size="sm"
-            data-image-input-action="change"
             onClick={() => inputRef.current?.click()}
             disabled={props.disabled}
             disabledReason={props.disabledReason}
@@ -131,28 +122,30 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
             className="hidden"
             disabled={props.disabled}
           />
-          <BaseButton
-            size="sm"
-            variant="tertiary"
-            onClick={() => changeImage(initialValue)}
-            disabled={props.disabled}
-            disabledReason={props.disabledReason}
-            label={translate('Cancel')}
-            iconNode={<XIcon weight="bold" />}
-            iconRight
-            data-image-input-action="cancel"
-          />
-          <BaseButton
-            size="sm"
-            variant="tertiary"
-            onClick={() => changeImage(null)}
-            disabled={props.disabled}
-            disabledReason={props.disabledReason}
-            label={translate('Remove')}
-            iconNode={<TrashIcon weight="bold" />}
-            iconRight
-            data-image-input-action="remove"
-          />
+          {/* Cancel undoes a change; Remove clears an image that was there. */}
+          {isChanged ? (
+            <BaseButton
+              size="sm"
+              variant="tertiary"
+              onClick={() => changeImage(initialValue)}
+              disabled={props.disabled}
+              disabledReason={props.disabledReason}
+              label={translate('Cancel')}
+              iconNode={<XIcon weight="bold" />}
+              iconRight
+            />
+          ) : input.value ? (
+            <BaseButton
+              size="sm"
+              variant="tertiary"
+              onClick={() => changeImage(null)}
+              disabled={props.disabled}
+              disabledReason={props.disabledReason}
+              label={translate('Remove')}
+              iconNode={<TrashIcon weight="bold" />}
+              iconRight
+            />
+          ) : null}
           {props.extraActions
             ? createElement(props.extraActions, {
                 value: input.value,

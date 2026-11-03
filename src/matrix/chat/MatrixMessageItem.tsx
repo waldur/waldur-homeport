@@ -126,14 +126,14 @@ const TextBody: FC<{
 
   if (!segments) {
     return (
-      <div>
+      <div className="rich-text">
         <Markdown options={MARKDOWN_BLOCK_OPTIONS}>{body}</Markdown>
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="rich-text">
       {segments.map((segment, i) =>
         segment.type === 'mention' ? (
           <span key={i} className="tc-mention-tag">

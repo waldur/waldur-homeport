@@ -70,6 +70,15 @@ export const RETIRED_UTILITY_PATTERNS = [
     /^timeline(?:-(?:item|line|icon|content|border-dashed))?$/,
     'waldur-ui Timeline primitive (<Timeline>, <TimelineItem>, <TimelineConnector>, <TimelineIcon>, <TimelineContent>) or Tailwind flex layout',
   ],
+  // Metronic's separator, bullet, image-input and scroll retired in #480.
+  [/^separator$/, 'border-b border-b-secondary (Menu.Separator inside a menu)'],
+  [/^bullet$/, 'inline-block rounded-full with size-* and bg-*'],
+  [
+    /^image-input(?:-(?:empty|changed|outline))?$/,
+    'ImageField / WideImageField from @/form',
+  ],
+  [/^scroll-x$/, 'overflow-x-auto'],
+  [/^scroll-y$/, 'overflow-y-auto'],
   // spinners retired in #474; use waldur-ui LoadingSpinner component.
   [/^spinner-(?:border|grow)(?:-sm)?$/, "waldur-ui's LoadingSpinner component"],
 ];

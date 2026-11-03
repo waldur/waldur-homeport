@@ -12,6 +12,7 @@ import {
   TabsList,
   TabsTrigger,
   TabsContent,
+  Code,
 } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
@@ -242,7 +243,7 @@ const CommandHistoryTab: FC<{ policyUuid: string }> = ({ policyUuid }) => {
                 </Badge>
               </td>
               <td>
-                <code className="small">{cmd.shell_command}</code>
+                <Code className="small">{cmd.shell_command}</Code>
               </td>
               <td>
                 <Badge

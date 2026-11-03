@@ -4,7 +4,7 @@ import {
 } from '@phosphor-icons/react';
 import { Issue, supportIssuesSync } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Code } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -52,9 +52,9 @@ const IssueLogDialog = ({ issue }: { issue: Issue }) => {
                     {formatEventName(entry.event)}
                   </td>
                   <td>
-                    <code className="small">
+                    <Code className="small">
                       {JSON.stringify(entry.details, null, 2)}
-                    </code>
+                    </Code>
                   </td>
                 </tr>
               ))}

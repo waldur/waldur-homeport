@@ -13,6 +13,7 @@ import {
   LoadingSpinner,
   PropertyItem,
   PropertyList,
+  Code,
 } from 'waldur-ui';
 
 import { useDebouncedValue } from '@/core/useDebouncedValue';
@@ -66,7 +67,7 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
               <PropertyItem
                 label={translate('Short name')}
                 value={
-                  <code className="text-brand">{userData.short_name}</code>
+                  <Code className="text-brand">{userData.short_name}</Code>
                 }
               />
             )}
@@ -157,9 +158,9 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
                               <small className="text-quaternary block">
                                 {translate('Username')}
                               </small>
-                              <code className="bg-tertiary dark:bg-gray-800 px-1.5 py-1 rounded-lg">
+                              <Code className="bg-tertiary dark:bg-gray-800 px-1.5 py-1 rounded-lg">
                                 {resource.username}
-                              </code>
+                              </Code>
                             </div>
                           </div>
                         </div>

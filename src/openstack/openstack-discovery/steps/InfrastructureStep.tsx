@@ -9,7 +9,7 @@ import {
   openstackDiscoveryDiscoverVolumeTypes,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, BaseButton, Radio } from 'waldur-ui';
+import { AlertItem, Badge, BaseButton, Radio, Code } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatFilesize } from '@/core/utils';
@@ -202,7 +202,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                           )}
                         </h5>
                         <div className="flex items-center text-quaternary small mb-1">
-                          <code>{network.id}</code>
+                          <Code>{network.id}</Code>
                           <CopyToClipboardButton
                             value={network.id}
                             size={14}

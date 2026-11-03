@@ -1,6 +1,6 @@
 import { useField } from 'react-final-form';
 
-import { FormText } from 'waldur-ui';
+import { FormText, Code } from 'waldur-ui';
 
 import { formatJsxTemplate, translate } from '@/i18n';
 
@@ -30,7 +30,7 @@ export const OptionTransformPreview = ({
     <FormText as="div" data-testid="option-transform-preview">
       {translate(
         'Will be saved as {value}',
-        { value: <code>{transformOptionValue(transform, value)}</code> },
+        { value: <Code>{transformOptionValue(transform, value)}</Code> },
         formatJsxTemplate,
       )}
     </FormText>

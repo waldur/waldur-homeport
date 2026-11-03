@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 import { SramGroup, sramGroupsList } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Code } from 'waldur-ui';
 
 import { OrganizationLink } from '@/customer/list/OrganizationLink';
 import { translate } from '@/i18n';
@@ -58,7 +58,7 @@ export const SramGroupsList: FC = () => {
     },
     {
       title: translate('URN'),
-      render: ({ row }) => <code>{row.urn}</code>,
+      render: ({ row }) => <Code>{row.urn}</Code>,
       id: 'urn',
       copyField: (row) => row.urn,
       export: 'urn',

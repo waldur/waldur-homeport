@@ -1,7 +1,7 @@
 import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 
-import { BaseButton, CopyableValue } from 'waldur-ui';
+import { BaseButton, CopyableValue, Code } from 'waldur-ui';
 
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { isEmptyValue } from '@/core/isEmptyValue';
@@ -118,7 +118,7 @@ export const formatSecretValue = (value: Text): FormattedProperty | null => {
 };
 
 export interface JsonFormatOptions {
-  /** One line in `<code>` instead of an indented block. */
+  /** One line in `<Code>` instead of an indented block. */
   compact?: boolean;
 }
 
@@ -138,7 +138,7 @@ export const formatJsonValue = (
   }
   const text = jsonText(value);
   const node = options.compact ? (
-    <code className="wrap-anywhere">{jsonText(value, true)}</code>
+    <Code className="wrap-anywhere">{jsonText(value, true)}</Code>
   ) : (
     <pre className="mb-0 text-xs whitespace-pre-wrap">{text}</pre>
   );

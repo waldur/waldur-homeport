@@ -4,6 +4,8 @@ import {
   proposalProtectedCallsRoundsList,
 } from 'waldur-js-client';
 
+import { Code } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
@@ -109,7 +111,7 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
         {
           title: translate('Round ID'),
           render: ({ row }) => (
-            <code className="font-medium wrap-anywhere">{row.slug}</code>
+            <Code className="font-medium wrap-anywhere">{row.slug}</Code>
           ),
           copyField: (row) => row.slug,
           width: '22%',

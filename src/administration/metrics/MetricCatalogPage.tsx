@@ -7,7 +7,7 @@ import {
   marketplaceMetricRetentionPoliciesList,
 } from 'waldur-js-client';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import { Badge, BaseButton, Code } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -81,7 +81,7 @@ export const MetricCatalogPage: FC = () => {
           },
           {
             title: translate('Key'),
-            render: ({ row }) => <code>{row.key}</code>,
+            render: ({ row }) => <Code>{row.key}</Code>,
           },
           {
             title: translate('Kind'),

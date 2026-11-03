@@ -1,6 +1,8 @@
 import { FC, Fragment } from 'react';
 import { OfferingMergeCheck } from 'waldur-js-client';
 
+import { Code } from 'waldur-ui';
+
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -77,7 +79,7 @@ export const MergeCheckDetailsDialog: FC<MergeCheckDetailsDialogProps> = ({
     title={translate('Verification check')}
     subtitle={
       <span className="flex flex-wrap items-center gap-1.5">
-        <code className="text-xs">{check.code}</code>
+        <Code className="text-xs">{check.code}</Code>
         <StateIndicator
           label={check.passed ? translate('Passed') : translate('Failed')}
           variant={check.passed ? 'success' : 'danger'}

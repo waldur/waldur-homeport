@@ -244,3 +244,80 @@
     user-select: none;
   }
 }
+
+/* Inline code: waldur-ui's Code (data-slot="code") and the inline code in
+   markdown and HTML the app renders (SafeMarkdown, FormattedHtml,
+   FormattedJira, chat and AI assistant messages, `.rich-text`), which can't
+   use the component. One rule, so the two can't drift. Code the app writes
+   itself is <Code>, never a bare <code> (linter: no-raw-code-element).
+   It sits below the utilities, so a caller's class on Code (text-xs,
+   text-quaternary, mx-0) wins without tailwind-merge. A <code> in a <pre> is a
+   code block and is left alone, as are highlighted fences (code.language-*).
+   Bootstrap's reboot still sets the font of every `code`, and colours none:
+   $code-color is `inherit`. */
+@layer bootstrap {
+  [data-slot='code'],
+  .rich-text code:not(pre > code, [class*='language-']) {
+    font-family: var(--font-mono);
+    font-weight: var(--font-weight-normal);
+    color: var(--text-code);
+    line-height: inherit;
+    font-size: inherit;
+    overflow-wrap: break-word;
+    background-color: var(--bg-code);
+    padding: 1px --spacing(1.5);
+    margin: 0 --spacing(1.5);
+    box-shadow: var(--inline-shadow);
+    border-radius: var(--radius-sm);
+  }
+
+  /* A code block in rendered markdown (a ``` fence): a tinted panel, so it
+     stands apart from the text around it. Only a bare <pre>: a block with its
+     own class (the AI assistant's .aui-md-pre, a highlighted language-*
+     fence) keeps its look. Bootstrap's reboot sets its font, size and bottom
+     margin. */
+  .rich-text pre:not([class]) {
+    overflow-x: auto;
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    padding: --spacing(3);
+    border-radius: var(--radius-md);
+  }
+}
+
+/* Thin native scrollbars on desktop, from Metronic's components/_scroll.scss.
+   Below lg the platform's own scrollbars are left alone. */
+@layer bootstrap {
+  @media (min-width: 992px) {
+    :is(main, span, ol, ul, pre, div) {
+      scrollbar-width: thin;
+      scrollbar-color: var(--bg-quaternary) transparent;
+    }
+
+    :is(main, span, ol, ul, pre, div):hover {
+      scrollbar-color: color-mix(
+          in srgb,
+          var(--bg-quaternary) 96%,
+          var(--shadow-color)
+        )
+        transparent;
+    }
+
+    :is(main, span, ol, ul, pre, div)::-webkit-scrollbar {
+      width: 0.4rem;
+      height: 0.4rem;
+    }
+
+    :is(main, span, ol, ul, pre, div)::-webkit-scrollbar-thumb {
+      background-color: var(--bg-quaternary);
+    }
+
+    :is(main, span, ol, ul, pre, div):hover::-webkit-scrollbar-thumb {
+      background-color: color-mix(
+        in srgb,
+        var(--bg-quaternary) 96%,
+        var(--shadow-color)
+      );
+    }
+  }
+}

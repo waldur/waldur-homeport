@@ -1,7 +1,7 @@
 import { EraserIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Menu } from 'waldur-ui';
+import { Menu, Code } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -45,7 +45,7 @@ export const RabbitMQQueueActions: FC<RabbitMQQueueActionsProps> = ({
         <>
           <p>{translate('Are you sure you want to purge this queue?')}</p>
           <p>
-            <strong>{translate('Queue')}:</strong> <code>{queue.name}</code>
+            <strong>{translate('Queue')}:</strong> <Code>{queue.name}</Code>
           </p>
           <p>
             <strong>{translate('Messages to delete')}:</strong>{' '}
@@ -84,7 +84,7 @@ export const RabbitMQQueueActions: FC<RabbitMQQueueActionsProps> = ({
             {translate('Are you sure you want to DELETE this queue entirely?')}
           </p>
           <p>
-            <strong>{translate('Queue')}:</strong> <code>{queue.name}</code>
+            <strong>{translate('Queue')}:</strong> <Code>{queue.name}</Code>
           </p>
           <p>
             <strong>{translate('Messages')}:</strong>{' '}

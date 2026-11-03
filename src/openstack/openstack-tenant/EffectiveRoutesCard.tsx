@@ -6,7 +6,7 @@ import {
   openstackRoutersEffectiveRoutesRetrieve,
 } from 'waldur-js-client';
 
-import { BadgeVariant } from 'waldur-ui';
+import { BadgeVariant, Code } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -46,7 +46,7 @@ const sourceLabel = (source: EffectiveRoute['source']): string => {
 };
 
 const ViaCell: FC<{ row: EffectiveRoute }> = ({ row }) => {
-  if (row.nexthop) return <code>{row.nexthop}</code>;
+  if (row.nexthop) return <Code>{row.nexthop}</Code>;
   if (row.source === 'connected') {
     return (
       <span className="text-quaternary">
@@ -91,7 +91,7 @@ const SubnetCell: FC<{ row: EffectiveRoute }> = ({ row }) => {
 };
 
 const DestinationCell: FC<{ row: EffectiveRoute }> = ({ row }) => (
-  <code>{row.destination}</code>
+  <Code>{row.destination}</Code>
 );
 
 const SourceCell: FC<{ row: EffectiveRoute }> = ({ row }) => (

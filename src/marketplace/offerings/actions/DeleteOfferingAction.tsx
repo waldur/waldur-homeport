@@ -2,6 +2,8 @@ import { useRouter } from '@uirouter/react';
 import { FC } from 'react';
 import { marketplaceProviderOfferingsDestroy } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
@@ -68,7 +70,7 @@ export const DeleteOfferingAction: FC<DeleteOfferingActionProps> = ({
 
   return (
     <>
-      <div className="separator my-1.5" />
+      <Menu.Separator />
       <RemovalActionItem
         title={translate('Delete')}
         action={() => deleteOffering()}

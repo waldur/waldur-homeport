@@ -37,6 +37,7 @@ import noLonePropertyItemInList from './rules/no-lone-property-item-in-list.js';
 import noManualIconColorsInBadges from './rules/no-manual-icon-colors-in-badges.js';
 import noNativeDateInput from './rules/no-native-date-input.js';
 import noOrphanFormLabel from './rules/no-orphan-form-label.js';
+import noRawCodeElement from './rules/no-raw-code-element.js';
 import noRawStatusRamp from './rules/no-raw-status-ramp.js';
 import noRedundantViMock from './rules/no-redundant-vi-mock.js';
 import noRetiredBootstrapUtility from './rules/no-retired-bootstrap-utility.js';
@@ -67,6 +68,7 @@ export default {
     'no-bootstrap-button-markup': noBootstrapButtonMarkup,
     'no-hand-rolled-table': noHandRolledTable,
     'no-native-date-input': noNativeDateInput,
+    'no-raw-code-element': noRawCodeElement,
     'no-hand-rolled-modal-footer': noHandRolledModalFooter,
     'no-direct-client-usage': noDirectClientUsage,
     'no-edit-button-size-override': noEditButtonSizeOverride,

@@ -2,7 +2,7 @@ import { PaperPlaneTiltIcon, PlugsConnectedIcon } from '@phosphor-icons/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton, Code } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { Link } from '@/core/Link';
@@ -148,7 +148,7 @@ export const EmailHealthPage: FC = () => {
             variant="error"
             className="mb-5"
             title={translate('The relay could not be reached')}
-            body={<code className="wrap-anywhere">{probe.data.error}</code>}
+            body={<Code className="wrap-anywhere">{probe.data.error}</Code>}
           />
         ))}
 

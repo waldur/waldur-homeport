@@ -1,6 +1,8 @@
 import { FC, useMemo } from 'react';
 import type { AgentQueueInfo } from 'waldur-js-client';
 
+import { Code } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -29,9 +31,9 @@ export const AgentQueuesTable: FC<AgentQueuesTableProps> = ({
       {
         title: translate('Queue'),
         render: ({ row }: { row: AgentQueueInfo }) => (
-          <code className="text-xs wrap-anywhere" title={row.name}>
+          <Code className="text-xs wrap-anywhere" title={row.name}>
             {row.name}
-          </code>
+          </Code>
         ),
         copyField: (row: AgentQueueInfo) => row.name,
       },

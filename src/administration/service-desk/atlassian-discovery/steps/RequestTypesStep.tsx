@@ -3,7 +3,7 @@ import { FC, useState, useEffect } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverRequestTypes } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, Checkbox } from 'waldur-ui';
+import { AlertItem, BaseButton, Checkbox, Code } from 'waldur-ui';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -183,7 +183,7 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
                 {renderFieldOrDash(rt.description)}
               </td>
               <td>
-                <code>{rt.issue_type_id}</code>
+                <Code>{rt.issue_type_id}</Code>
               </td>
             </tr>
           ))}

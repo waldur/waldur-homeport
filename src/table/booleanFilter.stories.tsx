@@ -4,7 +4,7 @@ import { Provider, useSelector } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 
-import { Accordion } from 'waldur-ui';
+import { Accordion, Code } from 'waldur-ui';
 
 import { FilterContextProvider } from './FilterContextProvider';
 import { BooleanFilter } from './filters';
@@ -34,7 +34,7 @@ const noop = () => undefined;
 
 const FilterValue = () => {
   const values = useSelector(selectFilterValues(TABLE));
-  return <code data-testid="filter-value">{JSON.stringify(values)}</code>;
+  return <Code data-testid="filter-value">{JSON.stringify(values)}</Code>;
 };
 
 const Harness = ({ children }: { children: React.ReactNode }) => {

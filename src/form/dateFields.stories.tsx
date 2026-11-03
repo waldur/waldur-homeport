@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Form } from 'react-final-form';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 
+import { Code } from 'waldur-ui';
+
 import { DateField } from './DateField';
 import {
   DateFieldHarness,
@@ -131,7 +133,7 @@ export const DateTimeFieldStoresIsoDateTime: Story = {
   name: 'DateTimeField · stores an ISO datetime',
   render: () => (
     <DateFieldHarness component={DateTimeField} initialValue={initialIso}>
-      <code data-testid="raw-value">{initialIso}</code>
+      <Code data-testid="raw-value">{initialIso}</Code>
     </DateFieldHarness>
   ),
   play: async ({ canvasElement }) => {

@@ -4,7 +4,7 @@ import {
   PersonalAccessToken,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Code } from 'waldur-ui';
 
 import { formatDate, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -61,10 +61,10 @@ export const PersonalAccessTokensList: FunctionComponent = () => {
     {
       title: translate('Token prefix'),
       render: ({ row }) => (
-        <code>
+        <Code>
           {row.token_prefix}
           ...
-        </code>
+        </Code>
       ),
     },
     {

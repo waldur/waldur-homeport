@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { Code } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { TableWithPortal } from '@/table/types';
 
@@ -17,7 +19,7 @@ export const CustomerQuestionsTable: FC<TableWithPortal> = ({ portal }) => {
           <span className="text-tertiary text-xs">
             {translate('Customer')}:{' '}
           </span>
-          <code className="text-brand">{row.maps_to_customer_field}</code>
+          <Code className="text-brand">{row.maps_to_customer_field}</Code>
         </div>
       );
     }

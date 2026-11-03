@@ -261,7 +261,7 @@ export const HealthView: FC<Props> = ({ data }) => {
         cardTitle={translate("This month's credit consumption")}
         className="mb-4"
       >
-        <div className="separator mt-3 mb-4" />
+        <div className="border-b border-b-secondary mt-3 mb-4" />
         <PacingIndicator
           pacing={data.pacing}
           creditTerms={data.creditTerms}
@@ -273,7 +273,7 @@ export const HealthView: FC<Props> = ({ data }) => {
       </WidgetCard>
 
       <WidgetCard cardTitle={translate('Overall credit')} className="mb-4">
-        <div className="separator mt-3 mb-4" />
+        <div className="border-b border-b-secondary mt-3 mb-4" />
         <CreditMetrics data={data} />
         {data.creditBreakdown && (
           <CreditBreakdownCard breakdown={data.creditBreakdown} />

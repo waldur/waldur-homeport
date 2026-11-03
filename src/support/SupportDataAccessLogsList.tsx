@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { dataAccessLogsList, GlobalUserDataAccessLog } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Code } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
@@ -96,9 +96,9 @@ export const SupportDataAccessLogsList = () => {
       {
         title: translate('IP address'),
         render: ({ row }: { row: GlobalUserDataAccessLog }) => (
-          <code className="text-quaternary">
+          <Code className="text-quaternary">
             {renderFieldOrDash(row.ip_address)}
-          </code>
+          </Code>
         ),
         export: (row: GlobalUserDataAccessLog) => row.ip_address || '',
       },

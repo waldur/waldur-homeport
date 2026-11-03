@@ -9,6 +9,7 @@ import { useState } from 'react';
 
 import { Badge } from '../Badge';
 import { Card, CardContent, CardHeader, CardTitle } from '../Card';
+import { Code } from '../Code';
 import { Tooltip } from '../Tooltip';
 
 import { ScrollSpyItem, ScrollSpyNav } from './ScrollSpyNav';
@@ -267,7 +268,7 @@ export const InteractiveScrolling: Story = {
               </p>
               <div className="mt-5 p-3 bg-secondary rounded-lg border border-dashed border-secondary text-xs text-quinary">
                 Scroll target anchor:{' '}
-                <code className="font-mono">#{sec.id}</code>
+                <Code className="font-mono">#{sec.id}</Code>
               </div>
             </div>
           ))}

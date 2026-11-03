@@ -4,6 +4,7 @@ import { ComponentProps, forwardRef, ReactNode } from 'react';
 
 import { ICON_BUTTON_BASE_CLASSNAME } from '../Button';
 import { cn } from '../cn';
+import { Kbd } from '../Code';
 import { Menu } from '../Menu';
 import { Tooltip } from '../Tooltip';
 
@@ -146,9 +147,9 @@ export const SearchField = ({
     <MagnifyingGlassIcon size={16} weight="bold" />
     <span className="flex-1 text-left">{placeholder}</span>
     {shortcutHint && (
-      <kbd className="rounded-lg border border-secondary px-1.5 py-0.5 text-xs">
+      <Kbd className="border border-secondary bg-transparent">
         {shortcutHint}
-      </kbd>
+      </Kbd>
     )}
   </div>
 );

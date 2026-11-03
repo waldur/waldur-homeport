@@ -95,10 +95,6 @@ export default defineConfig({
           'slash-div',
           'global-builtin',
           'if-function',
-          // _scroll.scss uses @-moz-document url-prefix() for Firefox-only
-          // scrollbar overrides; Sass 1.100+ actively warns on this. Mute it
-          // so real warnings stay visible in the build log.
-          'moz-document',
         ],
       },
     },

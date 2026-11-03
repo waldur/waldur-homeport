@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Code } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { EmailGroup, SubmitButton } from '@/form';
@@ -84,7 +84,7 @@ export const SendTestEmailDialog: FC = () => {
                 <AlertItem
                   variant="error"
                   title={translate('The message was not sent')}
-                  body={<code className="wrap-anywhere">{result.error}</code>}
+                  body={<Code className="wrap-anywhere">{result.error}</Code>}
                 />
               ))}
           </ModalDialog>

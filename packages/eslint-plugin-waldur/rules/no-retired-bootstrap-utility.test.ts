@@ -36,8 +36,57 @@ describe('no-retired-bootstrap-utility', () => {
       {
         code: "const A = () => <EChart exportTitle={translate('Cross-provider maintenance analytics and timeline')} />;",
       },
+      // A role or a test id that happens to share a retired name.
+      { code: 'const A = () => <div role="separator" />;' },
+      { code: 'const A = () => <input data-testid="image-input" />;' },
     ],
     invalid: [
+      {
+        code: 'const A = () => <div className="separator my-3 bullet scroll-y scroll-x" />;',
+        errors: [
+          {
+            messageId: 'retired',
+            data: {
+              token: 'separator',
+              hint: 'border-b border-b-secondary (Menu.Separator inside a menu)',
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'bullet',
+              hint: 'inline-block rounded-full with size-* and bg-*',
+            },
+          },
+          {
+            messageId: 'retired',
+            data: { token: 'scroll-y', hint: 'overflow-y-auto' },
+          },
+          {
+            messageId: 'retired',
+            data: { token: 'scroll-x', hint: 'overflow-x-auto' },
+          },
+        ],
+      },
+      {
+        code: "const c = classNames('image-input', { 'image-input-empty': true });",
+        errors: [
+          {
+            messageId: 'retired',
+            data: {
+              token: 'image-input',
+              hint: 'ImageField / WideImageField from @/form',
+            },
+          },
+          {
+            messageId: 'retired',
+            data: {
+              token: 'image-input-empty',
+              hint: 'ImageField / WideImageField from @/form',
+            },
+          },
+        ],
+      },
       // Spellings only Bootstrap's spacing scale had, with the Tailwind class.
       {
         code: "const c = cn('gap-md-4', 'gap-8px');",

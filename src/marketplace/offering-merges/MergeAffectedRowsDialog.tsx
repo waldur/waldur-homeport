@@ -4,6 +4,8 @@ import {
   OfferingMergeAffectedRow,
 } from 'waldur-js-client';
 
+import { Code } from 'waldur-ui';
+
 import { HelpTip } from '@/core/HelpTip';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
@@ -90,7 +92,7 @@ export const MergeAffectedRowsDialog: FC<MergeAffectedRowsDialogProps> = ({
       subtitle={
         <span className="flex flex-wrap items-center gap-1.5">
           {entry.effectTitle}
-          <code className="text-xs">{entry.label}</code>
+          <Code className="text-xs">{entry.label}</Code>
         </span>
       }
       footer={<CloseDialogButton label={translate('Close')} />}

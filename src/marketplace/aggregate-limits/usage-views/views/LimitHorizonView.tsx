@@ -324,7 +324,7 @@ export const LimitHorizonView: FC<Props> = ({
           : '';
         const headerLines = [
           `<strong>${r.offeringName} · ${r.componentName}</strong>`,
-          `<small class="text-quaternary">${translate('Type')}: <code>${r.componentType}</code> · ${
+          `<small class="text-quaternary rich-text">${translate('Type')}: <code>${r.componentType}</code> · ${
             r.billingType === 'limit'
               ? translate('Limit-based')
               : translate('Usage-based')

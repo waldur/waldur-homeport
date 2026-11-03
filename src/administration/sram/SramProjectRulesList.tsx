@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { SramProjectRule, sramProjectRulesList } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Code } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -107,7 +107,7 @@ export const SramProjectRulesList: FC = () => {
               ),
             })}
           </div>
-          <code>{row.project_pattern}</code>
+          <Code>{row.project_pattern}</Code>
         </div>
       ),
       id: 'project_pattern',

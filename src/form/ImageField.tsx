@@ -3,7 +3,6 @@ import {
   ImageIcon,
   ArrowsClockwiseIcon,
 } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import { FunctionComponent, useCallback, useEffect, useRef } from 'react';
 
 import { BaseButton } from 'waldur-ui';
@@ -69,19 +68,8 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
     changeImage(initialValue);
   }, [initialValue]);
 
-  const isChanged = Boolean(
-    input.value instanceof File ||
-    Boolean(input.value) !== Boolean(initialValue),
-  );
-
   return (
-    <div
-      className={classNames('image-input', {
-        'image-input-empty': !input.value,
-        'image-input-changed': isChanged,
-      })}
-      data-kt-image-input="true"
-    >
+    <div>
       <div className="imagefield-upload-row">
         <div className="imagefield-avatar-box">
           {!input.value ? (
@@ -98,7 +86,6 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
           <BaseButton
             variant="tertiary"
             className="imagefield-upload-button"
-            data-kt-image-input-action="change"
             onClick={() => inputRef.current?.click()}
             iconNode={
               input.value ? (

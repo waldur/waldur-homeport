@@ -6,7 +6,7 @@ import { translate } from '@/i18n';
 
 export const BroadcastTemplateForm: FC = () => {
   return (
-    <div className="scroll-y">
+    <div className="relative overflow-y-auto">
       <StringGroup
         name="name"
         label={translate('Name')}

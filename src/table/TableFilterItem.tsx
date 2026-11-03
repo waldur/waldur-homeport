@@ -417,7 +417,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
         </div>
         {!instantApply && menuIsOpen && (
           <>
-            <div className="separator" />
+            <div className="border-b border-b-secondary" />
             <div className="px-[12px] pt-[8px]">
               <div className="flex gap-3">
                 <BaseButton
@@ -484,7 +484,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
           </div>
           {!instantApply && (
             <>
-              <div className="separator" />
+              <div className="border-b border-b-secondary" />
               <div>
                 {open && (
                   <div className="px-[12px] pt-[8px]">

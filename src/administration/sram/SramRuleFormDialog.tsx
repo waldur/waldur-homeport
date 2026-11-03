@@ -7,7 +7,7 @@ import {
   sramProjectRulesUpdate,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Code } from 'waldur-ui';
 
 import { DirtyStateReporter } from '@/core/DirtyFormContext';
 import { required } from '@/core/validators';
@@ -90,7 +90,7 @@ const PatternHelp: FC = () => (
     {SRAM_PATTERN_PLACEHOLDERS.map((name, index) => (
       <span key={name}>
         {index > 0 && ', '}
-        <code>{`{${name}}`}</code>
+        <Code>{`{${name}}`}</Code>
       </span>
     ))}
     .{' '}

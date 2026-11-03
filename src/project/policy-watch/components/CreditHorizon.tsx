@@ -61,7 +61,7 @@ interface Props {
  */
 export const CreditHorizon: FC<Props> = ({ events }) => (
   <WidgetCard cardTitle={translate('What happens next')} className="mb-4">
-    <div className="separator mt-3 mb-4" />
+    <div className="border-b border-b-secondary mt-3 mb-4" />
     {events.length === 0 ? (
       <p className="text-quaternary mb-0">
         {translate(

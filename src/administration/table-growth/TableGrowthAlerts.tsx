@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Code } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -33,7 +33,7 @@ export const TableGrowthAlerts: FC<TableGrowthAlertsProps> = ({ alerts }) => {
         <div>
           {Object.entries(grouped).map(([tableName, tableAlerts]) => (
             <div key={tableName} className="mt-1.5">
-              <code>{tableName}</code>
+              <Code>{tableName}</Code>
               {tableAlerts.map((alert) => (
                 <span key={alert.period} className="ms-1.5 text-quaternary">
                   {alert.period === 'weekly'

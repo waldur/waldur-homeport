@@ -6,6 +6,7 @@ import { expect, userEvent, within } from 'storybook/test';
 import { Badge } from '../Badge';
 import { BaseButton } from '../Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../Card';
+import { Code } from '../Code';
 import { Input } from '../Input';
 
 import {
@@ -345,10 +346,10 @@ export const Compact: Story = {
       </CardHeader>
       <CardContent>
         <PropertyList variant="compact">
-          <PropertyItem label="Shared buffers" value={<code>16384</code>} />
+          <PropertyItem label="Shared buffers" value={<Code>16384</Code>} />
           <PropertyItem
             label="Effective cache size"
-            value={<code>524288</code>}
+            value={<Code>524288</Code>}
           />
           <PropertyItem label="Active connections" value={42} />
         </PropertyList>

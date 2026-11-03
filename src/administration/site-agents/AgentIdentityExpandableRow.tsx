@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { AgentIdentity } from 'waldur-js-client';
 
-import { BadgeVariant } from 'waldur-ui';
+import { BadgeVariant, Code } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -120,11 +120,11 @@ export const AgentIdentityExpandableRow: FC<
                       index: number,
                     ) => (
                       <li key={index}>
-                        <code>
+                        <Code>
                           {typeof dep === 'string'
                             ? dep
                             : `${dep.package || 'unknown'}==${dep.version || 'unknown'}`}
-                        </code>
+                        </Code>
                       </li>
                     ),
                   )}

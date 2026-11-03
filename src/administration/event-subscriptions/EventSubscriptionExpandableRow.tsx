@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { EventSubscription } from 'waldur-js-client';
 
-import { PropertyList, PropertyItem } from 'waldur-ui';
+import { PropertyList, PropertyItem, Code } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
@@ -60,12 +60,12 @@ export const EventSubscriptionExpandableRow: FC<
                   {observableObjects.map((obj, index) => (
                     <tr key={index}>
                       <td>
-                        <code>{obj.object_type}</code>
+                        <Code>{obj.object_type}</Code>
                       </td>
                       <td>
-                        <code className="text-quaternary">
+                        <Code className="text-quaternary">
                           {obj.offering_uuid?.substring(0, 8)}...
-                        </code>
+                        </Code>
                       </td>
                     </tr>
                   ))}

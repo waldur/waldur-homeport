@@ -2,7 +2,7 @@ import { EraserIcon, TrashIcon } from '@phosphor-icons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 
-import { Menu } from 'waldur-ui';
+import { Menu, Code } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -111,10 +111,10 @@ export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
               )}
             </p>
             <p>
-              <strong>{translate('Vhost')}:</strong> <code>{vhost.name}</code>
+              <strong>{translate('Vhost')}:</strong> <Code>{vhost.name}</Code>
             </p>
             <p>
-              <strong>{translate('Pattern')}:</strong> <code>{pattern}</code>
+              <strong>{translate('Pattern')}:</strong> <Code>{pattern}</Code>
             </p>
             <p>
               <strong>{translate('Matching queues')}:</strong> {matchingQueues}
@@ -160,10 +160,10 @@ export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
               )}
             </p>
             <p>
-              <strong>{translate('Vhost')}:</strong> <code>{vhost.name}</code>
+              <strong>{translate('Vhost')}:</strong> <Code>{vhost.name}</Code>
             </p>
             <p>
-              <strong>{translate('Pattern')}:</strong> <code>{pattern}</code>
+              <strong>{translate('Pattern')}:</strong> <Code>{pattern}</Code>
             </p>
             <p>
               <strong>{translate('Queues to delete')}:</strong> {matchingQueues}

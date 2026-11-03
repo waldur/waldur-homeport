@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, Code } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { StateIndicator } from '@/core/StateIndicator';
@@ -51,7 +51,7 @@ export const RabbitMQVhostExpandableRow: FC<
           render: ({ row: queue }: { row: RmqQueueStats }) => (
             // consumer_<uuid> (41 chars) stays on one line; the much longer
             // legacy subscription_* names wrap instead of widening the table.
-            <code
+            <Code
               className={
                 queue.queue_kind === 'consumer'
                   ? 'text-xs whitespace-nowrap'
@@ -60,7 +60,7 @@ export const RabbitMQVhostExpandableRow: FC<
               title={queue.name}
             >
               {queue.name}
-            </code>
+            </Code>
           ),
           copyField: (queue: RmqQueueStats) => queue.name,
           ellipsis: false,

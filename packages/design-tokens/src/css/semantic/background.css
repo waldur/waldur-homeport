@@ -11,6 +11,9 @@
  *   --bg-quaternary       a stronger fill: a selected row or day, hover on
  *                         a --bg-tertiary fill
  *   --bg-primary-solid    a dark solid fill (the table loading message)
+ *   --bg-code             under inline code: --bg-tertiary's gray in light,
+ *                         one step stronger in dark, where that one sinks
+ *                         into cards
  *
  * The --bg-* names match the Tailwind utilities (bg-primary, bg-secondary, …;
  * tailwind/theme.css), so a class and a var() with the same name are the same
@@ -32,6 +35,7 @@
   --bg-tertiary: var(--color-gray-100);
   --bg-quaternary: var(--color-gray-200);
   --bg-primary-solid: var(--color-gray-900);
+  --bg-code: var(--color-gray-100);
 }
 
 :root[data-theme='dark'] {
@@ -47,4 +51,5 @@
   --bg-tertiary: var(--color-gray-dark-800);
   --bg-quaternary: var(--color-gray-dark-700);
   --bg-primary-solid: var(--color-gray-dark-900);
+  --bg-code: var(--color-gray-dark-700);
 }
