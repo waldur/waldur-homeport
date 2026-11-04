@@ -71,7 +71,8 @@ export const EditRoundSubmissionDialog: FC<EditRoundSubmissionDialogProps> = (
     <WizardFormContainer
       form="RoundEditForm"
       title={translate('Edit round submission')}
-      submitLabel={translate('Edit')}
+      submitLabel={translate('Save')}
+      hideStepper
       onSubmit={submit}
       steps={[
         { key: 'submission', label: translate('Submission'), completed: false },

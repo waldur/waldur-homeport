@@ -30,7 +30,7 @@ export const EditRoundReviewAction: FC<EditRoundReviewActionProps> = ({
   const openEditReviewDialog = useCallback(() => {
     openDialog(EditRoundReviewDialog, {
       resolve: { round: row, call, refetch },
-      size: 'lg',
+      size: 'sm',
     });
   }, [row, call, refetch, openDialog]);
 
