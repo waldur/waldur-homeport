@@ -14,6 +14,8 @@
  *   --bg-code             under inline code: --bg-tertiary's gray in light,
  *                         one step stronger in dark, where that one sinks
  *                         into cards
+ *   --bg-media            pure black behind a photo or video (the dark
+ *                         landing hero), the same in both themes
  *
  * The --bg-* names match the Tailwind utilities (bg-primary, bg-secondary, …;
  * tailwind/theme.css), so a class and a var() with the same name are the same
@@ -36,6 +38,7 @@
   --bg-quaternary: var(--color-gray-200);
   --bg-primary-solid: var(--color-gray-900);
   --bg-code: var(--color-gray-100);
+  --bg-media: #000000;
 }
 
 :root[data-theme='dark'] {

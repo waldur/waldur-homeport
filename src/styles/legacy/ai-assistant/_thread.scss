@@ -133,7 +133,7 @@
 }
 
 .aui-welcome-title-1 {
-  font-size: $h2-font-size;
+  font-size: var(--text-xl);
   font-weight: var(--font-weight-semibold);
   color: var(--text-quaternary);
   margin-bottom: 0.25rem;
@@ -141,7 +141,7 @@
 }
 
 .aui-welcome-title-2 {
-  font-size: $h2-font-size;
+  font-size: var(--text-xl);
   font-weight: var(--font-weight-medium);
   color: var(--text-primary);
   margin-bottom: 1rem;
@@ -149,7 +149,7 @@
 }
 
 .aui-welcome-subtitle {
-  font-size: $font-size-lg;
+  font-size: var(--text-sm);
   color: var(--text-quaternary);
   max-width: 300px;
   line-height: 1.5;
@@ -206,7 +206,7 @@
   width: 100%;
   padding: 0;
   margin-top: 1rem;
-  border-radius: $border-radius;
+  border-radius: var(--radius-lg);
   border: 1px solid var(--border-primary);
   background-color: var(--bg-primary);
   box-shadow: 0 2px 6px color-mix(in srgb, var(--shadow-color) 5%, transparent);
@@ -251,7 +251,7 @@
     align-items: center;
     gap: 0.5rem;
     font-size: var(--text-sm);
-    color: $text-muted;
+    color: var(--text-quaternary);
   }
 }
 
@@ -274,7 +274,7 @@
     color: var(--text-quaternary);
   }
 
-  @include media-breakpoint-down(lg) {
+  @include below(lg) {
     min-height: 40px;
     max-height: 120px;
   }
@@ -285,8 +285,8 @@
   align-items: center;
   width: 100%;
   border-top: 1px solid var(--border-primary);
-  border-bottom-right-radius: $border-radius;
-  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-lg);
   padding-right: 1.25rem;
   background: var(--bg-secondary);
 }
@@ -308,7 +308,7 @@
   box-shadow: none;
   padding-left: 1rem;
   font-weight: var(--font-weight-medium);
-  border-radius: $border-radius;
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -345,7 +345,7 @@
   @include mirrored-ramp-color(background-color, error, 600, 0.1);
   border-left: 3px solid;
   @include mirrored-ramp-color(border-left-color, error, 600);
-  border-radius: $border-radius;
+  border-radius: var(--radius-lg);
 
   svg {
     @include mirrored-ramp-color(color, error, 600);
@@ -396,7 +396,7 @@
   align-items: flex-start;
   max-width: 100%;
   padding: 0.8rem 1rem;
-  border-radius: $border-radius-xl;
+  border-radius: var(--radius-xl);
   background: var(--bg-tertiary);
   white-space: pre-wrap;
   overflow-wrap: anywhere;
@@ -479,7 +479,7 @@
 
 .aui-user-message-content {
   padding: 0.8rem 1rem;
-  border-radius: $border-radius-xl;
+  border-radius: var(--radius-xl);
   border: 1px solid var(--border-primary);
   white-space: pre-wrap;
   overflow-wrap: anywhere;
@@ -492,7 +492,7 @@
 
 .aui-user-message-content,
 .aui-assistant-message-content {
-  font-size: $font-size-lg;
+  font-size: var(--text-sm);
 }
 
 .aui-user-message-content p,
@@ -506,7 +506,7 @@
 }
 
 .aui-edit-composer-root {
-  border-radius: $border-radius-xl;
+  border-radius: var(--radius-xl);
   background: var(--bg-tertiary);
   padding: 0.8rem 1rem;
   display: flex;
@@ -648,7 +648,7 @@
   height: 1.5rem;
   padding: 0;
   border: none;
-  border-radius: $border-radius-sm;
+  border-radius: var(--radius-md);
   background-color: transparent;
   color: var(--text-secondary);
   cursor: pointer;
@@ -682,7 +682,7 @@
 }
 
 .aui-disclosure-section {
-  border-radius: $border-radius;
+  border-radius: var(--radius-lg);
 }
 
 .aui-chat-drawer {
@@ -717,7 +717,7 @@
   }
 
   height: 28px;
-  border-radius: $border-radius-lg;
+  border-radius: var(--radius-lg);
   width: fit-content;
   opacity: 0;
   transition: opacity 0.15s ease;
@@ -739,7 +739,7 @@
   line-height: 0;
   color: var(--text-quaternary) !important;
   cursor: pointer;
-  border-radius: $border-radius-sm;
+  border-radius: var(--radius-md);
 
   &:hover {
     color: var(--text-senary) !important;

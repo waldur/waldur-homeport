@@ -28,8 +28,8 @@
 
   input {
     border-color: var(--border-primary) !important;
-    color: $input-disabled-color !important;
-    background-color: $input-disabled-bg !important;
+    color: var(--text-disabled) !important;
+    background-color: var(--bg-secondary) !important;
     cursor: not-allowed !important;
     pointer-events: none !important;
   }

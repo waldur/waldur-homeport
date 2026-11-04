@@ -28,12 +28,12 @@
 
 .call-in-progress-banner {
   gap: 1.23rem;
-  padding: 0.769rem $card-px;
+  padding: 0.769rem var(--card-padding-x, 1.85rem);
   background-color: var(--status-warning-bg);
   border-bottom: 1px solid var(--border-secondary);
 
   .call-in-progress-banner__label {
-    font-size: $font-size-lg;
+    font-size: var(--text-sm);
     font-weight: var(--font-weight-semibold);
     color: var(--status-warning-fg);
   }
@@ -71,5 +71,5 @@
   border-radius: 0.462rem;
   background-color: var(--status-warning-bg);
   @include mirrored-ramp-color(color, warning, 700);
-  font-size: $font-size-sm;
+  font-size: var(--text-xs);
 }

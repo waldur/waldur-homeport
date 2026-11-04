@@ -278,6 +278,7 @@
     "rules": {
       "waldur/no-retired-class-selectors": true,
       "waldur/no-literal-color": true,
+      "waldur/font-size-scale": true,
       "no-descending-specificity": null,
       "scss/load-no-partial-leading-underscore": null,
       "scss/operator-no-newline-after": null,
@@ -305,6 +306,17 @@
       ]
     },
     "overrides": [
+      {
+        "files": [
+          "src/tailwind.css",
+          "src/styles/bootstrap/**/*.scss",
+          "packages/boot-splash/src/*.css",
+          "src/BootErrorScreen.css"
+        ],
+        "rules": {
+          "waldur/font-size-scale": null
+        }
+      },
       {
         "files": [
           "src/tailwind.css",

@@ -152,9 +152,10 @@
    use `html body` to keep beating the reboot's `body` rules regardless of
    order.
 
-   Root font size: 13px, 12px below md, scaled by --font-size-adjust (the
-   user's text-size setting, afterBootstrap.tsx). Every rem in the app is
-   relative to it. Body text is 1.077rem (14px at the 13px root). */
+   Root font size: 13px, 12px below md. Every rem in the app is relative to
+   it. Body text is 1.077rem (14px at the 13px root). A deployment font's
+   glyph size is matched to Inter's by font-size-adjust
+   (primitives/typography.css), not by scaling the root. */
 @layer bootstrap {
   html {
     font-family: sans-serif;
@@ -174,13 +175,13 @@
 
   html,
   body {
-    font-size: calc(13px * var(--font-size-adjust, 1)) !important;
+    font-size: 13px !important;
   }
 
   @media (max-width: 767.98px) {
     html,
     body {
-      font-size: calc(12px * var(--font-size-adjust, 1)) !important;
+      font-size: 12px !important;
     }
   }
 

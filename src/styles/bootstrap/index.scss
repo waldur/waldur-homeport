@@ -15,4 +15,4 @@
 // Unlayered on purpose: these override @livekit/components-styles, which is
 // itself unlayered and would beat anything inside a layer.
 // stylelint-disable-next-line no-invalid-position-at-import-rule
-@import 'custom/matrix/call-livekit';
+@import '../legacy/matrix/call-livekit';

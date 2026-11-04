@@ -20,9 +20,13 @@ $bg-height: 232px;
   }
 
   @include dark-theme {
-    background-color: $black !important;
+    background-color: var(--bg-media) !important;
     &::before {
-      background-color: rgba($black, 0.4) !important;
+      background-color: color-mix(
+        in srgb,
+        var(--bg-media) 40%,
+        transparent
+      ) !important;
     }
   }
 
@@ -33,9 +37,13 @@ $bg-height: 232px;
     }
 
     &.bg-mode-light {
-      background-color: $white;
+      background-color: var(--bg-primary);
       &::before {
-        background-color: rgba($white, 0.6);
+        background-color: color-mix(
+          in srgb,
+          var(--bg-primary) 60%,
+          transparent
+        );
       }
     }
     &.bg-mode-accent {

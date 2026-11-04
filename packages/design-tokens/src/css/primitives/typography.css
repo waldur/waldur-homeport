@@ -4,8 +4,14 @@
  * Exposes `--font-sans` to Tailwind utilities (font-sans), bridging onto
  * the runtime-injected `--font-family` custom property.
  *
- * Text scale overrides (xs, sm, base) are pinned to explicit px values to
- * prevent fractional rem compression at non-standard root font sizes.
+ * The text scale is pinned in px, not rem, so it does not follow HomePort's
+ * 13px (12px on phones) root font size.
+ *
+ * Every font renders at Inter's apparent size: `font-size-adjust` (below)
+ * scales each font's glyphs so its x-height is Inter's, 0.546 of the font
+ * size (measured). Inter is unchanged; a deployment font whose glyphs run
+ * small, such as Maven Pro (0.499), grows to match, and line heights and
+ * boxes stay put. Monospace text is left at its own size.
  *
  * Font weight is one scale, the five weights fonts.css loads:
  *
@@ -47,4 +53,15 @@
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+}
+
+/* Inter's x-height ratio: see the header. */
+@layer base {
+  html {
+    font-size-adjust: 0.546;
+  }
+
+  :where(code, kbd, samp, pre, .font-mono) {
+    font-size-adjust: none;
+  }
 }

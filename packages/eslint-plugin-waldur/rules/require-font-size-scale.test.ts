@@ -60,17 +60,17 @@ describe('require-font-size-scale', () => {
         errors: [{ messageId: 'retired' }, { messageId: 'retired' }],
       },
       {
-        // Arbitrary pixel value matching scale token
+        // Arbitrary pixel value matching a scale token: named, not autofixed,
+        // since the token also sets a line height
         code: 'const A = () => <h1 className="text-[14px] text-[18px]" />;',
-        output: 'const A = () => <h1 className="text-sm text-lg" />;',
         errors: [
           {
             messageId: 'offScale',
-            data: { token: 'text-[14px]', fix: 'text-sm' },
+            data: { token: 'text-[14px]', fix: '"text-sm"' },
           },
           {
             messageId: 'offScale',
-            data: { token: 'text-[18px]', fix: 'text-lg' },
+            data: { token: 'text-[18px]', fix: '"text-lg"' },
           },
         ],
       },
@@ -78,6 +78,72 @@ describe('require-font-size-scale', () => {
         // Inline style
         code: "const A = () => <span style={{ color: 'red', fontSize: '14px' }} />;",
         errors: [{ messageId: 'inline' }],
+      },
+      {
+        // An arbitrary variant keeps its brackets in the prefix
+        code: "const c = '[&>a]:fs-6';",
+        output: "const c = '[&>a]:text-sm';",
+        errors: [{ messageId: 'retired' }],
+      },
+      {
+        // A length-labelled px size on the scale
+        code: 'const A = () => <span className="text-[length:14px]" />;',
+        errors: [{ messageId: 'offScale' }],
+      },
+      {
+        // The size/line-height form keeps its line height in the suggestion
+        code: "const c = cn('text-[1.077rem]/5', 'text-[14px]/[1.2]');",
+        errors: [
+          {
+            messageId: 'rem',
+            data: { token: 'text-[1.077rem]/5', fix: '"text-sm/5"' },
+          },
+          {
+            messageId: 'offScale',
+            data: { token: 'text-[14px]/[1.2]', fix: '"text-sm/[1.2]"' },
+          },
+        ],
+      },
+      {
+        // rem sizes name the equal token but are not autofixed: the token
+        // also sets a line height
+        code: "const c = cn('text-[1.077rem]', 'md:text-[length:1.25rem]');",
+        errors: [
+          {
+            messageId: 'rem',
+            data: { token: 'text-[1.077rem]', fix: '"text-sm"' },
+          },
+          {
+            messageId: 'rem',
+            data: { token: 'md:text-[length:1.25rem]', fix: '"md:text-base"' },
+          },
+        ],
+      },
+      {
+        // A variant with nested brackets still splits off
+        code: "const c = '[&_[data-x]]:text-[14px]';",
+        errors: [
+          {
+            messageId: 'offScale',
+            data: {
+              token: '[&_[data-x]]:text-[14px]',
+              fix: '"[&_[data-x]]:text-sm"',
+            },
+          },
+        ],
+      },
+      {
+        // A rem size with no equal token is reported, not fixed
+        code: 'const A = () => <span className="text-[1.275rem]" />;',
+        errors: [
+          {
+            messageId: 'rem',
+            data: {
+              token: 'text-[1.275rem]',
+              fix: 'the nearest text-xs … text-4xl class',
+            },
+          },
+        ],
       },
       {
         // Variants and important modifier

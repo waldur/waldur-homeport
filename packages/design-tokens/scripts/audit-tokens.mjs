@@ -31,9 +31,6 @@ export const ALLOWLIST = {
   // Symmetrical semantic role slots preserved for semantic contract completeness
   '--fg-brand-secondary':
     'Symmetrical semantic foreground role: brand secondary foreground slot paired with --fg-brand-primary',
-  // Root Tailwind typography token implicitly consumed by Tailwind engine/preflight
-  '--font-sans':
-    'Tailwind root font-family token bridging runtime --font-family into Tailwind theme utilities and base styling',
   // Root Tailwind theme overrides implicitly consumed by Tailwind engine/preflight
   '--text-xs--line-height':
     'Tailwind implicit line-height modifier for text-xs',
@@ -52,6 +49,13 @@ export const ALLOWLIST = {
   '--text-4xl--line-height':
     'Tailwind implicit line-height modifier for text-4xl',
 };
+
+/**
+ * Tokens Tailwind itself reads, so they are in use whatever the app's own
+ * code references: --font-sans is preflight's default font family (and the
+ * font-sans utility). Unlike ALLOWLIST entries they never go stale.
+ */
+export const TAILWIND_IMPLICIT = new Set(['--font-sans']);
 
 /**
  * Recognized external, runtime-injected, or third-party CSS custom properties
@@ -193,6 +197,9 @@ export function auditDesignTokens(options = {}) {
   for (const name of declared.keys()) {
     usageMap.set(name, []);
   }
+  const implicit = new Set(
+    [...declared.keys()].filter((name) => TAILWIND_IMPLICIT.has(name)),
+  );
 
   // Pre-load file contents for maximum speed
   const fileContents = consumerFiles.map((file) => ({
@@ -278,6 +285,7 @@ export function auditDesignTokens(options = {}) {
 
   for (const [name, callers] of usageMap.entries()) {
     const isExempt = Boolean(allowlist[name]);
+    if (implicit.has(name)) continue;
     if (callers.length === 0) {
       if (!isExempt) {
         deadTokens.push({ name, file: declared.get(name).file });
@@ -671,6 +679,8 @@ export const DUPLICATE_BASELINE = {
     'A line that must show on any surface and the disabled text mark, both gray-300 today',
   '--border-secondary = --status-neutral-bg-strong':
     'A card hairline and the neutral diagram-node tint, both gray-200 / gray-dark-800 today',
+  '--bg-media = --shadow-color':
+    'A black surface behind photos and the colour shadows are mixed from: both black, unrelated roles',
 };
 
 /** The baseline key for a duplicate group. */

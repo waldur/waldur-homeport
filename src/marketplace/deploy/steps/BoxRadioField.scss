@@ -89,6 +89,7 @@
 
         .box-radio-label {
           font-weight: var(--font-weight-semibold);
+          // stylelint-disable-next-line waldur/font-size-scale -- below the scale on purpose; see the 10/11px decision in docs/design-tokens.md
           font-size: 10px;
           display: -webkit-box;
           -webkit-line-clamp: 2;
@@ -98,6 +99,7 @@
 
         .box-radio-metadata {
           display: block;
+          // stylelint-disable-next-line waldur/font-size-scale -- below the scale on purpose; see the 10/11px decision in docs/design-tokens.md
           font-size: 10px;
           text-overflow: ellipsis;
           overflow: hidden;

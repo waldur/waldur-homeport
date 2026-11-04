@@ -7,16 +7,16 @@
   min-height: 0;
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: $font-family-sans-serif;
+  font-family: var(--font-sans);
 
-  // $card-px is the drawer header + tab strip inset, so the search box,
+  // var(--card-padding-x, 1.85rem) is the drawer header + tab strip inset, so the search box,
   // segments and rows line up with the "Support" title. The extra bottom
   // padding gives the segment group breathing room before the first row.
   .tc-sidebar-top {
     display: flex;
     flex-direction: column;
     gap: 1.23rem;
-    padding: 1.23rem $card-px 0.923rem;
+    padding: 1.23rem var(--card-padding-x, 1.85rem) 0.923rem;
   }
 
   .tc-list {
@@ -33,7 +33,7 @@
     gap: 0.923rem;
     width: 100%;
     align-items: center;
-    padding: 0.923rem $card-px;
+    padding: 0.923rem var(--card-padding-x, 1.85rem);
     border: 0;
     background: transparent;
     text-align: start;
@@ -72,7 +72,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: $font-size-lg;
+    font-size: var(--text-sm);
     font-weight: var(--font-weight-medium);
     line-height: 1.4;
     color: var(--text-secondary);
@@ -80,7 +80,7 @@
 
   .tc-row-time {
     flex: 0 0 auto;
-    font-size: $font-size-sm;
+    font-size: var(--text-xs);
     color: var(--text-quaternary);
     font-variant-numeric: tabular-nums;
   }
@@ -94,7 +94,7 @@
   .tc-row-preview {
     flex: 1;
     min-width: 0;
-    font-size: $font-size-lg;
+    font-size: var(--text-sm);
     line-height: 1.4;
     color: var(--text-quaternary);
     white-space: nowrap;
@@ -137,7 +137,7 @@
     width: 32px;
     height: 32px;
     border: 1px solid var(--border-secondary);
-    border-radius: $border-radius;
+    border-radius: var(--radius-lg);
     color: var(--text-tertiary);
   }
 
@@ -186,7 +186,7 @@
     background: var(--bg-brand-primary);
     border: 1px solid var(--border-brand);
     color: var(--text-brand-secondary);
-    font-size: $font-size-sm;
+    font-size: var(--text-xs);
     font-weight: var(--font-weight-medium);
     font-variant-numeric: tabular-nums;
 
@@ -203,7 +203,7 @@
     display: flex;
     align-items: center;
     gap: 0.923rem;
-    padding: 0.923rem $card-px;
+    padding: 0.923rem var(--card-padding-x, 1.85rem);
     border-bottom: 1px solid var(--border-secondary);
   }
 
@@ -214,7 +214,7 @@
     border-radius: 99px;
     background: transparent;
     color: var(--text-secondary);
-    font-size: $font-size-lg;
+    font-size: var(--text-sm);
     white-space: nowrap;
 
     &:hover,
@@ -240,7 +240,7 @@
     display: flex;
     padding: 0.308rem;
     border: 0;
-    border-radius: $border-radius-lg;
+    border-radius: var(--radius-lg);
     background: transparent;
     cursor: pointer;
 
@@ -269,7 +269,7 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: $body-bg;
+    background: var(--bg-primary);
   }
 
   .tc-stream {
@@ -301,7 +301,7 @@
     }
 
     span {
-      font-size: $font-size-lg;
+      font-size: var(--text-sm);
       font-weight: var(--font-weight-medium);
       color: var(--text-tertiary);
     }
@@ -314,7 +314,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.462rem;
-    font-size: $font-size-sm;
+    font-size: var(--text-xs);
     color: var(--text-tertiary);
   }
 
@@ -359,7 +359,7 @@
     align-items: center;
     gap: 0.462rem;
     margin-bottom: 2px;
-    font-size: $font-size-base;
+    font-size: var(--text-sm);
     font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
 
@@ -389,10 +389,10 @@
     max-width: 90%;
     padding: 0.615rem 1.23rem;
     border: 1px solid var(--border-secondary);
-    border-radius: 0 $border-radius-xl $border-radius-xl $border-radius-xl;
+    border-radius: 0 var(--radius-xl) var(--radius-xl) var(--radius-xl);
     background: var(--bg-secondary);
     color: var(--text-primary);
-    font-size: $font-size-lg;
+    font-size: var(--text-sm);
     line-height: 1.5;
     overflow-wrap: break-word;
     white-space: pre-wrap;
@@ -405,13 +405,13 @@
     img,
     video {
       max-width: 100%;
-      border-radius: $border-radius;
+      border-radius: var(--radius-lg);
     }
   }
 
   .tc-msg.mine .tc-bubble {
     background: var(--bg-primary);
-    border-radius: $border-radius-xl 0 $border-radius-xl $border-radius-xl;
+    border-radius: var(--radius-xl) 0 var(--radius-xl) var(--radius-xl);
     color: var(--text-primary);
   }
 
@@ -447,10 +447,10 @@
     padding: 0.308rem 0.615rem;
     border: 0;
     border-inline-start: 3px solid var(--border-brand);
-    border-radius: $border-radius-sm;
+    border-radius: var(--radius-md);
     background: var(--bg-tertiary);
     color: var(--text-secondary);
-    font-size: $font-size-base;
+    font-size: var(--text-xs);
     line-height: 1.4;
     text-align: start;
     white-space: normal;
@@ -484,7 +484,7 @@
   .tc-msg-edited {
     display: inline-block;
     margin-inline-start: 0.308rem;
-    font-size: $font-size-sm;
+    font-size: var(--text-xs);
     color: var(--text-tertiary);
   }
 
@@ -498,10 +498,10 @@
     width: 100%;
     padding: 0.308rem 0.462rem;
     border: 1px solid var(--border-primary);
-    border-radius: $border-radius;
+    border-radius: var(--radius-lg);
     background: var(--bg-primary);
     color: var(--text-primary);
-    font-size: $font-size-lg;
+    font-size: var(--text-sm);
     line-height: 1.5;
     resize: vertical;
 
@@ -542,7 +542,7 @@
     display: flex;
     align-items: center;
     gap: 0.462rem;
-    font-size: $font-size-sm;
+    font-size: var(--text-xs);
     color: var(--text-secondary);
   }
 
@@ -561,7 +561,7 @@
     grid-template-columns: max-content 1fr;
     gap: 0.308rem 0.769rem;
     margin: 0;
-    font-size: $font-size-sm;
+    font-size: var(--text-xs);
 
     dt {
       font-weight: var(--font-weight-medium);
@@ -589,7 +589,7 @@
 
   .tc-ticket-draft__outcome,
   .tc-ticket-draft__readonly {
-    font-size: $font-size-sm;
+    font-size: var(--text-xs);
   }
 
   .tc-file-card {
@@ -606,7 +606,7 @@
       width: 32px;
       height: 32px;
       border: 1px solid var(--border-secondary);
-      border-radius: $border-radius;
+      border-radius: var(--radius-lg);
       color: var(--text-tertiary);
 
       svg {
@@ -629,7 +629,7 @@
     }
 
     .tc-file-card__size {
-      font-size: $font-size-sm;
+      font-size: var(--text-xs);
       color: var(--text-secondary);
       font-variant-numeric: tabular-nums;
     }
@@ -652,7 +652,7 @@
     border: 0;
     border-radius: 50%;
     background: var(--bg-brand-solid);
-    color: $white;
+    color: var(--fg-white);
     cursor: pointer;
 
     &:hover {
@@ -692,7 +692,7 @@
 
   .tc-voice__time {
     flex-shrink: 0;
-    font-size: $font-size-sm;
+    font-size: var(--text-xs);
     color: var(--text-secondary);
     font-variant-numeric: tabular-nums;
   }
@@ -722,7 +722,7 @@
   }
 
   .tc-voice-recorder__label {
-    font-size: $font-size-sm;
+    font-size: var(--text-xs);
     color: var(--text-secondary);
   }
 
@@ -937,7 +937,7 @@
     box-shadow:
       0 6px 18px color-mix(in srgb, var(--shadow-color) 10%, transparent),
       0 1px 3px color-mix(in srgb, var(--shadow-color) 4%, transparent);
-    border-radius: $border-radius-lg;
+    border-radius: var(--radius-lg);
 
     //noinspection CssInvalidHtmlTagReference
     em-emoji-picker {
@@ -981,9 +981,10 @@
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border-primary);
-    border-radius: $border-radius;
+    border-radius: var(--radius-lg);
     background: var(--bg-primary);
-    box-shadow: $box-shadow-xs;
+    box-shadow: 0 0.1rem 0.75rem 0.25rem
+      color-mix(in srgb, var(--shadow-color) 5%, transparent);
     overflow: hidden;
   }
 
@@ -1003,7 +1004,7 @@
     flex-direction: column;
     padding-inline-start: 0.615rem;
     border-inline-start: 3px solid var(--border-brand);
-    font-size: $font-size-base;
+    font-size: var(--text-xs);
     line-height: 1.4;
   }
 
@@ -1054,7 +1055,7 @@
     gap: 0.462rem;
     padding: 0.385rem 0.615rem;
     border: 0;
-    border-radius: $border-radius;
+    border-radius: var(--radius-lg);
     background: transparent;
     color: var(--text-secondary);
     font-weight: var(--font-weight-medium);
@@ -1093,8 +1094,9 @@
     padding: 0.308rem 0;
     background: var(--bg-primary);
     border: 1px solid var(--border-primary);
-    border-radius: $border-radius;
-    box-shadow: $box-shadow;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 0.5rem 1.5rem 0.5rem
+      color-mix(in srgb, var(--shadow-color) 7.5%, transparent);
   }
 
   .tc-mention-item {
@@ -1107,7 +1109,7 @@
     text-align: start;
     background: transparent;
     color: var(--text-primary);
-    font-size: $font-size-base;
+    font-size: var(--text-sm);
     line-height: 1.4;
     cursor: pointer;
 
@@ -1121,7 +1123,7 @@
       justify-content: center;
       background: var(--bg-tertiary);
       color: var(--text-secondary);
-      font-size: $font-size-sm;
+      font-size: var(--text-xs);
       font-weight: var(--font-weight-semibold);
     }
 
@@ -1146,14 +1148,17 @@
 
     .tc-command-item__args {
       color: var(--text-secondary);
-      font-family: $font-family-monospace;
-      font-size: $font-size-sm;
+      font-family:
+        SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+        'Courier New', monospace;
+      font-size-adjust: none;
+      font-size: var(--text-xs);
     }
 
     .tc-command-item__description {
       flex-basis: 100%;
       color: var(--text-secondary);
-      font-size: $font-size-sm;
+      font-size: var(--text-xs);
     }
 
     .tc-command-item__source {
@@ -1170,7 +1175,7 @@
 
   .tc-composer-hint {
     padding: 0 1.077rem 0.462rem;
-    font-size: $font-size-sm;
+    font-size: var(--text-xs);
   }
 
   // Mentions read as bold inline text (no colored pill) for everyone; a
@@ -1190,7 +1195,7 @@
     border: 0;
     background: transparent;
     color: var(--text-primary);
-    font-size: $font-size-lg;
+    font-size: var(--text-sm);
     line-height: 1.5;
     resize: none;
     overflow-x: hidden;
@@ -1207,7 +1212,7 @@
       color: var(--text-quaternary);
     }
 
-    @include media-breakpoint-down(lg) {
+    @include below(lg) {
       min-height: 40px;
       max-height: 120px;
     }
@@ -1256,7 +1261,7 @@
 }
 
 .team-chat-dock-list {
-  border-right: 1px solid $border-color;
+  border-right: 1px solid var(--border-secondary);
 }
 
 // The dock supplies its own top inset; the sidebar's top padding would stack on
@@ -1272,7 +1277,7 @@
   width: 260px;
   // Bootstrap popovers default to a smaller font; pin the members list to the
   // chat's body size so names are readable.
-  font-size: $font-size-lg;
+  font-size: var(--text-sm);
   max-height: 320px;
   overflow-y: auto;
 }
@@ -1298,7 +1303,7 @@
   padding: 1.846rem 2.462rem;
   background: var(--bg-primary);
   border: 2px dashed var(--text-brand-primary);
-  border-radius: $border-radius-lg;
+  border-radius: var(--radius-lg);
   box-shadow:
     0 6px 18px color-mix(in srgb, var(--shadow-color) 10%, transparent),
     0 1px 3px color-mix(in srgb, var(--shadow-color) 4%, transparent);
@@ -1404,7 +1409,7 @@
   width: 100%;
   padding: 0.615rem 0.769rem;
   border: 0;
-  border-radius: $border-radius;
+  border-radius: var(--radius-lg);
   background: transparent;
   color: var(--text-primary);
   text-align: start;
@@ -1427,17 +1432,20 @@
 
   .tc-commands-row__args {
     color: var(--text-secondary);
-    font-family: $font-family-monospace;
-    font-size: $font-size-sm;
+    font-family:
+      SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+      monospace;
+    font-size-adjust: none;
+    font-size: var(--text-xs);
   }
 
   .tc-commands-row__description {
-    font-size: $font-size-sm;
+    font-size: var(--text-xs);
   }
 
   .tc-commands-row__note {
     color: var(--text-secondary);
-    font-size: $font-size-sm;
+    font-size: var(--text-xs);
   }
 }
 

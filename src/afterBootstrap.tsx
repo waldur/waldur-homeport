@@ -1,5 +1,5 @@
 import { saveSplashBranding } from 'waldur-boot-splash';
-import { initBrandTokens } from 'waldur-design-tokens';
+import { initBrandTokens, initFontFamily } from 'waldur-design-tokens';
 
 import { ENV } from './core/config';
 import { initMatomoTracker } from './core/matomo';
@@ -16,19 +16,7 @@ import { attachTransitions } from './transitions';
 function initCssVariables() {
   initBrandTokens(getBrandColor());
 
-  // Font family
-  const fontFamily = ENV.plugins.WALDUR_CORE.FONT_FAMILY || 'Inter';
-  document.documentElement.style.setProperty(
-    '--font-family',
-    `${fontFamily}, Helvetica, sans-serif`,
-  );
-  const fontSizeAdjust: Record<string, number> = {
-    'Maven Pro': 1.08,
-  };
-  document.documentElement.style.setProperty(
-    '--font-size-adjust',
-    String(fontSizeAdjust[fontFamily] ?? 1),
-  );
+  initFontFamily(ENV.plugins.WALDUR_CORE.FONT_FAMILY || 'Inter');
 }
 
 function initPageTitle() {

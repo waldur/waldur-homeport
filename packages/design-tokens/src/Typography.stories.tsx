@@ -138,6 +138,7 @@ const SIZES = typography.tokens
  * The type tokens this package pins (`primitives/typography.css`), each set
  * in its own size and line height, and the font stack, which reads
  * the tenant's `--font-family` (Inter or Maven Pro, set at bootstrap).
+ * font-size-adjust renders any of them at Inter's x-height.
  */
 export const Tokens: Story = {
   render: () => (

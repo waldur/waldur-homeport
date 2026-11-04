@@ -1,10 +1,17 @@
 // @vitest-environment node
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+
 import postcss from 'postcss';
 import { describe, expect, it } from 'vitest';
 
 import {
+  checkLegacyDecoupled,
   compilePartial,
   diffSelectors,
+  findBootstrapFunctionCalls,
+  isDecoupled,
+  PARTIALS,
   extractClasses,
   extractSelectors,
   findNewUnusedClasses,
@@ -311,6 +318,68 @@ describe('bootstrapCssUsage', () => {
       ['.table.table-list th', { padding: '0 8px' }],
     ])('pads %s', (selector, expected) => {
       expect(declarations(selector)).toMatchObject(expected);
+    });
+  });
+
+  describe("Waldur's own partials", () => {
+    const own = PARTIALS.filter((p) => p.scss.includes("'../legacy/"));
+
+    it("compile from _mixins.scss alone, not Bootstrap's _config.scss", () => {
+      expect(own.length).toBeGreaterThan(15);
+      for (const p of own) {
+        expect(isDecoupled(p), p.name).toBe(true);
+        expect(() => compilePartial(p.scss), p.name).not.toThrow();
+      }
+    });
+
+    it('are all reached from legacy/_index.scss and compile without Bootstrap', () => {
+      expect(() => checkLegacyDecoupled()).not.toThrow();
+    });
+
+    it('fail the check when one calls a Bootstrap function', () => {
+      // color-mix() stands in for a Bootstrap function the legacy CSS calls.
+      expect(() => checkLegacyDecoupled(new Set(['color-mix']))).toThrow(
+        /calls Bootstrap's color-mix/,
+      );
+    });
+
+    it('catch a call to a Bootstrap function, which Sass would pass through', () => {
+      expect(
+        findBootstrapFunctionCalls(
+          '.a { color: tint-color(var(--x), 10%); }',
+          new Set(['tint-color', 'has']),
+        ),
+      ).toEqual(['tint-color']);
+    });
+
+    it('do not mistake a pseudo-class for one', () => {
+      expect(
+        findBootstrapFunctionCalls(
+          '.a:has(.b) > span:has(> input) { color: var(--x); }',
+          new Set(['has']),
+        ),
+      ).toEqual([]);
+    });
+
+    it('break at the same widths as the breakpoint tokens', () => {
+      const root = path.join(__dirname, '..');
+      const tokens = Object.fromEntries(
+        [
+          ...readFileSync(
+            path.join(
+              root,
+              'packages/design-tokens/src/css/primitives/breakpoints.css',
+            ),
+            'utf8',
+          ).matchAll(/--breakpoint-(\w+):\s*(\d+)px/g),
+        ].map(([, name, px]) => [name, Number(px)]),
+      );
+      const css = compilePartial(
+        "@import '../legacy/mixins'; @each $bp in (sm, md, lg, xl) { .#{$bp} { @include below($bp) { a: b; } } }",
+      );
+      for (const bp of ['sm', 'md', 'lg', 'xl']) {
+        expect(css).toContain(`max-width: ${tokens[bp] - 0.02}px`);
+      }
     });
   });
 });

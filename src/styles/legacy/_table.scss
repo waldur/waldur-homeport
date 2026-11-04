@@ -9,6 +9,18 @@
   background: $gradient;
 }
 
+// Bootstrap's .shadow-sm, lit instead of shadowed on the dark page.
+@mixin hover-shadow {
+  box-shadow: 0 0.1rem 1rem 0.25rem
+    color-mix(in srgb, var(--shadow-color) 5%, transparent);
+
+  @include dark-theme {
+    box-shadow: 0 0.1rem 1rem 0.25rem
+      color-mix(in srgb, var(--fg-white) 5%, transparent);
+  }
+  transition: all 0.2s ease;
+}
+
 /* TABLE */
 .table {
   &:not(.h-auto) {
@@ -267,7 +279,7 @@
     right: 0;
   }
   td.pinned {
-    background-color: $card-bg;
+    background-color: var(--bg-primary);
   }
   th.is-floating,
   td.is-floating {
@@ -306,23 +318,13 @@
   &.table-hover-shadow > table > tbody > tr:not(.expanded + tr):hover {
     border-top: 1px solid var(--border-secondary);
     border-bottom: 1px solid var(--border-secondary);
-    border-radius: $border-radius-lg;
-    box-shadow: $box-shadow-sm;
-
-    @include dark-theme {
-      box-shadow: 0 0.1rem 1rem 0.25rem rgba($white, 0.05);
-    }
-    transition: $transition-base;
+    border-radius: var(--radius-lg);
+    @include hover-shadow;
   }
 
   // On grid view
   &.grid-hover-shadow .card:not(.card-table):hover {
-    box-shadow: $box-shadow-sm;
-
-    @include dark-theme {
-      box-shadow: 0 0.1rem 1rem 0.25rem rgba($white, 0.05);
-    }
-    transition: $transition-base;
+    @include hover-shadow;
   }
 }
 
@@ -373,7 +375,7 @@
       max-width: 320px;
       width: 320px;
 
-      @include media-breakpoint-down(md) {
+      @include below(md) {
         flex: 1 1 auto;
         max-width: 100%;
         width: 100%;
@@ -408,8 +410,8 @@
 
     &:not(.grid-table) .card-header {
       margin: 0;
-      padding-left: $card-px;
-      padding-right: $card-px;
+      padding-left: var(--card-padding-x, 1.85rem);
+      padding-right: var(--card-padding-x, 1.85rem);
     }
 
     &:not(.grid-table) .card-body:not(.card-solid .card-body) {
@@ -420,11 +422,11 @@
       .table {
         td:first-child,
         th:first-child {
-          padding-left: $card-px;
+          padding-left: var(--card-padding-x, 1.85rem);
         }
         td:last-child,
         th:last-child {
-          padding-right: $card-px;
+          padding-right: var(--card-padding-x, 1.85rem);
         }
       }
 
@@ -435,8 +437,8 @@
     }
 
     .table-pagination {
-      padding-left: $card-px !important;
-      padding-right: $card-px !important;
+      padding-left: var(--card-padding-x, 1.85rem) !important;
+      padding-right: var(--card-padding-x, 1.85rem) !important;
     }
   }
 
@@ -467,7 +469,7 @@
 // Mobile mode
 // The page's side padding below lg (the page container's 15px).
 $mobile-spacing: 15px;
-@include media-breakpoint-down(sm) {
+@include below(sm) {
   .card.card-table.full-width {
     margin-left: -$mobile-spacing;
     margin-right: -$mobile-spacing;
@@ -503,7 +505,7 @@ $mobile-spacing: 15px;
     // that would override .table-responsive's own overflow-x and take the
     // horizontal scroll away from every wide table in a modal. The scroll
     // container clips to the radius on its own.
-    border-radius: $border-radius-lg;
+    border-radius: var(--radius-lg);
   }
 
   .table-responsive .table {
@@ -618,7 +620,7 @@ $mobile-spacing: 15px;
   }
 }
 
-@include media-breakpoint-down(md) {
+@include below(md) {
   .message-item {
     grid-template-columns: 1fr;
     gap: 0.5rem;

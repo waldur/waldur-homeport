@@ -3,11 +3,11 @@
 // header's "Support" title by reusing the card's horizontal padding.
 .support-drawer {
   .support-drawer-tabs {
-    padding: 0 $card-px;
+    padding: 0 var(--card-padding-x, 1.85rem);
   }
 
   .support-drawer-helpdesk {
-    padding: 0 $card-px;
+    padding: 0 var(--card-padding-x, 1.85rem);
   }
 
   .support-drawer-helpdesk--expanded {
@@ -34,8 +34,8 @@
 .helpdesk-expanded-list {
   display: flex;
   flex-direction: column;
-  border-right: 1px solid $border-color;
-  padding-right: $card-px;
+  border-right: 1px solid var(--border-secondary);
+  padding-right: var(--card-padding-x, 1.85rem);
   // Query container so the pagination can fall back to the compact pager based
   // on this pane's width (half the drawer) rather than the viewport's.
   container-type: inline-size;
@@ -56,7 +56,7 @@
     border-radius: 0;
   }
 
-  // Zero the inline margin (the shared card-header keeps a $card-px right
+  // Zero the inline margin (the shared card-header keeps a var(--card-padding-x, 1.85rem) right
   // margin) so the toolbar spans the full card width and the right-aligned
   // Export/Create line up with the table's right edge.
   .card-table > .card-header,
@@ -127,14 +127,14 @@
 }
 
 .helpdesk-expanded-detail {
-  padding: $card-px $card-py;
+  padding: var(--card-padding-x, 1.85rem) var(--card-padding-y, 1.23rem);
 
   // The hero packs its header (title + Sync/Show log) and the request details
   // into a gap-1.5 column, so the buttons sit right on top of the text. Give
   // them room in this drawer (the hero is shared, so scope it here).
   // Tailwind's utilities layer outranks this one, so the override is !important.
   .public-dashboard-hero .card-body > .gap-1\.5 {
-    gap: $card-py !important;
+    gap: var(--card-padding-y, 1.23rem) !important;
   }
 
   // In this half-width pane the title row squeezes the Sync/Show log actions

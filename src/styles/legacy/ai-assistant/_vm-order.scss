@@ -5,7 +5,7 @@
 
   // Intro text
   .aui-vm-order-intro {
-    font-size: $font-size-base;
+    font-size: var(--text-sm);
     line-height: 1.75;
   }
 
@@ -133,7 +133,7 @@
 
   // Confirmation question
   .aui-vm-order-confirm {
-    font-size: $font-size-base;
+    font-size: var(--text-sm);
     line-height: 1.75;
     font-weight: var(--font-weight-semibold);
   }
@@ -231,7 +231,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.625rem 1.25rem;
-    font-size: $font-size-base;
+    font-size: var(--text-sm);
     font-weight: var(--font-weight-medium);
     border-radius: 0.615rem;
     border: none;

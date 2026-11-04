@@ -104,7 +104,7 @@
 
     .lk-disconnect-button {
       @include mirrored-ramp-color(background-color, error, 500);
-      color: $white;
+      color: var(--fg-white);
       border-color: transparent;
 
       &:hover {
