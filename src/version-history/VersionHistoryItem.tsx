@@ -98,9 +98,10 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
     : 'text-quaternary';
 
   // A list item holding a native button: the button is what is announced and
-  // focused, and stretched-link makes the whole row its click target. The
-  // selected revision is the one the diff shows, hence aria-current. Button
-  // content must be phrasing content, so the text blocks are spans.
+  // focused, and its ::after, stretched over the row, makes the whole row its
+  // click target. The selected revision is the one the diff shows, hence
+  // aria-current. Button content must be phrasing content, so the text blocks
+  // are spans.
   return (
     <TimelineItem
       isSelected={isSelected}
@@ -115,7 +116,7 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
       <TimelineContent asChild>
         <button
           type="button"
-          className="stretched-link block w-full py-1.5 pr-3 border-0 bg-transparent text-left text-inherit focus-visible:outline-none mb-0 pb-2.5"
+          className="after:absolute after:inset-0 after:z-1 block w-full py-1.5 pr-3 border-0 bg-transparent text-left text-inherit focus-visible:outline-none mb-0 pb-2.5"
           aria-current={isSelected || undefined}
           onClick={onSelect}
         >

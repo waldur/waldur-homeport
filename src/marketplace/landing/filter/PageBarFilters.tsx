@@ -49,7 +49,8 @@ const PageBarFilters = ({ withPicker = false }: { withPicker?: boolean }) => {
             {filters.map((item) => (
               <div
                 key={item.name}
-                className="hstack flex items-center self-stretch gap-1.5 font-medium"
+                data-testid="filter-bar-badge"
+                className="flex items-center self-stretch gap-1.5 font-medium"
               >
                 {item.label}
                 <Badge

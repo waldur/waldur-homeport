@@ -51,7 +51,7 @@ const EntryCount: FC<{
       label={
         <>
           <span aria-hidden="true">{row.count}</span>
-          <span className="visually-hidden">
+          <span className="sr-only">
             {translate('{count} affected rows of {title}', {
               count: row.count,
               title: row.title,

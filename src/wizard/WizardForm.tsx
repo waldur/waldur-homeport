@@ -97,7 +97,7 @@ export const WizardForm: FC<WizardFormProps> = ({
       }
       {...(props.modalProps || {})}
     >
-      <div className="wizard-big wizard-body clearfix">
+      <div className="wizard-big wizard-body">
         {!props.hideStepper && (
           <WizardStepIndicator
             steps={props.steps}
@@ -105,7 +105,7 @@ export const WizardForm: FC<WizardFormProps> = ({
             onClick={handleStepClick}
           />
         )}
-        <div className="content clearfix">{children}</div>
+        <div className="content">{children}</div>
       </div>
     </ModalDialog>
   );

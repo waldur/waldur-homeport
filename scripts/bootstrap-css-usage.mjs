@@ -53,24 +53,12 @@ export const PARTIALS = [
     scss: "@import 'config'; @import 'bootstrap/scss/reboot'; @import 'bootstrap/scss/type';",
   },
   {
-    name: 'bootstrap/scss/images',
-    scss: "@import 'config'; @import 'bootstrap/scss/images';",
-  },
-  {
     name: 'bootstrap/scss/tables',
     scss: "@import 'config'; $grid-breakpoints: (xs: 0); @import 'bootstrap/scss/tables';",
   },
   {
-    name: 'bootstrap/scss/transitions',
-    scss: "@import 'config'; @import 'bootstrap/scss/transitions';",
-  },
-  {
     name: 'bootstrap/scss/card',
     scss: "@import 'config'; @import 'bootstrap/scss/card';",
-  },
-  {
-    name: 'bootstrap/scss/helpers',
-    scss: "@import 'config'; $theme-colors: (); $aspect-ratios: (); $grid-breakpoints: (xs: 0); @import 'bootstrap/scss/helpers';",
   },
 
   // Components (from components/)

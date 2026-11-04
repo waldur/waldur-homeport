@@ -93,7 +93,7 @@ export const UpdateOfferingMediaDialog: FunctionComponent<
                     ? translate('Logo here')
                     : translate('Image here')
                 }
-                className="img-fluid mb-2.5"
+                className="max-w-full h-auto mb-2.5"
               />
             )}
             <div>

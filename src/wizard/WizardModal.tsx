@@ -102,7 +102,7 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
         headerClassName="pb-4"
         {...(modalProps || {})}
       >
-        <div className="wizard-big wizard-body clearfix">
+        <div className="wizard-big wizard-body">
           {!props.hideStepper && props.steps.length > 1 && (
             <WizardStepIndicator
               steps={props.steps}
@@ -122,7 +122,7 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
             />
           )}
 
-          <div className="content clearfix">{props.children}</div>
+          <div className="content">{props.children}</div>
         </div>
       </ModalDialog>
     </form>
