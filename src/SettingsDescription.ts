@@ -2073,13 +2073,13 @@ export const SettingsDescription = [
     items: [
       {
         key: 'FIRECREST_ALLOWED_API_URLS',
-        description: translate('FirecREST API URLs that SLURM offerings may connect to, one per line or comma-separated. Waldur forwards a user\'s identity provider token only to these URLs; an offering pointing elsewhere has no HPC workspace. Append |audience (and optionally |client-scope) to an entry to send a token exchanged for that audience instead of the sign-in token, e.g. https://firecrest.example.org|firecrest.'),
+        description: translate('FirecREST API URLs that SLURM offerings may connect to, one per line or comma-separated. Waldur forwards a user\'s identity provider token only to these URLs; an offering pointing elsewhere runs no jobs through Waldur. Append |audience (and optionally |client-scope) to an entry to send a token exchanged for that audience instead of the sign-in token, e.g. https://firecrest.example.org|firecrest.'),
         default: '',
         type: 'string',
       },
       {
         key: 'SLURM_MONITOR_ALLOWED_API_URLS',
-        description: translate('slurm-monitor API URLs (ending in /api/v2) that SLURM offerings may read job performance from, one per line or comma-separated. Waldur forwards a user\'s identity provider token only to these URLs. Append |audience (and optionally |client-scope) to an entry to send a token exchanged for that audience instead of the sign-in token.'),
+        description: translate('slurm-monitor API URLs (ending in /api/v2) that SLURM offerings may read job performance from, one per line or comma-separated; an offering with one of these but no FirecREST gets a read-only HPC workspace from it. Waldur forwards a user\'s identity provider token only to these URLs. Append |audience (and optionally |client-scope) to an entry to send a token exchanged for that audience instead of the sign-in token.'),
         default: '',
         type: 'string',
       },
@@ -2464,6 +2464,17 @@ export const SettingsDescription = [
         key: 'SITE_AGENT_LOG_MAX_ROWS_PER_IDENTITY',
         description: translate('Maximum number of log rows to keep per agent identity. Oldest rows are deleted when exceeded.'),
         default: 10000,
+        type: 'integer',
+      },
+    ],
+  },
+  {
+    description: translate('Event consumers'),
+    items: [
+      {
+        key: 'EVENT_CONSUMER_EPHEMERAL_IDLE_HOURS',
+        description: translate('Hours an ephemeral event consumer (one registered by a browser tab) may go without a reader before it and its RabbitMQ queue are deleted. Checked hourly, so deletion can come up to an hour later. Integrations register non-ephemeral consumers and are never deleted this way.'),
+        default: 24,
         type: 'integer',
       },
     ],
