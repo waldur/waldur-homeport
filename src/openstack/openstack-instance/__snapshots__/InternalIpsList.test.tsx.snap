@@ -73,11 +73,11 @@ exports[`InternalIpsList > renders list 1`] = `
       class="card-body"
     >
       <div
-        class="table-responsive dataTables_wrapper"
+        class="table-responsive relative max-md:flex max-md:flex-col max-md:items-center max-md:items-center-safe"
         style="min-height: 300px;"
       >
         <div
-          class="table-container table-hover-shadow"
+          class="table-container transition-opacity duration-150 aria-busy:pointer-events-none aria-busy:opacity-50 table-hover-shadow"
           data-testid="table-container"
         >
           <table

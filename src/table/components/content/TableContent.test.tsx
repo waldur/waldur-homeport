@@ -41,6 +41,33 @@ describe('TableContent', () => {
     });
   });
 
+  describe('refetching state', () => {
+    const withRows = {
+      hasRows: true,
+      rows: [{ uuid: '1' }],
+      visibleColumns: [{ title: 'Name', render: () => 'Test' }],
+    };
+
+    it('marks the rows busy under a spinner until loading ends', () => {
+      const { rerenderWithContext } = renderWithTableContext(<TableContent />, {
+        ...withRows,
+        loading: true,
+      });
+      expect(screen.getByTestId('table-container')).toHaveAttribute(
+        'aria-busy',
+        'true',
+      );
+      expect(screen.getByRole('status')).toBeInTheDocument();
+
+      rerenderWithContext({ loading: false });
+
+      expect(screen.getByTestId('table-container')).not.toHaveAttribute(
+        'aria-busy',
+      );
+      expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    });
+  });
+
   describe('error state', () => {
     it('renders error view when error exists', () => {
       renderWithTableContext(<TableContent />, {
@@ -164,7 +191,7 @@ describe('TableContent', () => {
   describe('grid mode', () => {
     it('renders grid when mode is grid and gridItem is provided', () => {
       const GridItem = ({ row }) => (
-        <div data-testid="grid-item">{row.name}</div>
+        <div data-testid="test-card">{row.name}</div>
       );
 
       renderWithTableContext(<TableContent />, {
@@ -174,7 +201,10 @@ describe('TableContent', () => {
         slots: { gridItem: GridItem },
       });
 
-      expect(screen.getByTestId('grid-item')).toBeInTheDocument();
+      // Each card sits in a grid-item wrapper, the hook integration tests use.
+      expect(screen.getByTestId('grid-item')).toContainElement(
+        screen.getByTestId('test-card'),
+      );
       expect(screen.getByText('Item 1')).toBeInTheDocument();
     });
 

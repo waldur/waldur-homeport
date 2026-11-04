@@ -96,18 +96,26 @@ const testStore = createStore(() => ({}));
 
 /**
  * Renders a component within TableContext.Provider and Redux Provider.
- * Use this to test components that consume TableContext.
+ * Use this to test components that consume TableContext;
+ * `rerenderWithContext` re-renders the same tree with the first context plus
+ * new overrides, keeping its `actions` mocks.
  */
 export function renderWithTableContext(
   ui: ReactNode,
   contextOverrides: Partial<TableContextValue> = {},
 ) {
   const contextValue = createMockTableContext(contextOverrides);
-  return render(
+  const wrap = (value: TableContextValue) => (
     <Provider store={testStore}>
-      <TableContext.Provider value={contextValue}>{ui}</TableContext.Provider>
-    </Provider>,
+      <TableContext.Provider value={value}>{ui}</TableContext.Provider>
+    </Provider>
   );
+  const result = render(wrap(contextValue));
+  return {
+    ...result,
+    rerenderWithContext: (overrides: Partial<TableContextValue>) =>
+      result.rerender(wrap({ ...contextValue, ...overrides })),
+  };
 }
 
 export { TableContext };

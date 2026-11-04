@@ -55997,21 +55997,6 @@
       "action_type": "read"
     }
   },
-  "Showing {sliceStart} to {sliceEnd} of {resultCount} entries.": {
-    "context": {
-      "variables": {
-        "sliceStart": {
-          "type": "unknown"
-        },
-        "sliceEnd": {
-          "type": "unknown"
-        },
-        "resultCount": {
-          "type": "number"
-        }
-      }
-    }
-  },
   "Shown above the questions. Tell respondents that staff will see who answered.": {
     "context": {
       "feature_area": "feedback"

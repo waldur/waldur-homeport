@@ -27,9 +27,10 @@ export const ModelCard1: FC<ModelCard1Props> = ({
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
   <div
     className={classNames(
-      'card model-card-1 card-bordered h-full overflow-hidden',
+      'card card-bordered h-full overflow-hidden',
       props.clickable && 'cursor-pointer hover:border-brand',
     )}
+    data-testid="model-card"
     onClick={props.onClick}
   >
     {(props.image || props.placeholder) && (
@@ -63,15 +64,15 @@ export const ModelCard1: FC<ModelCard1Props> = ({
         <div
           className={classNames(
             'ellipsis-lines-' + ellipsisLines,
-            'grow',
-            'model-card-title-container',
+            // min-w-0 lets the title shrink past its longest word; ellipsis-lines
+            // already clips it, and the title inherits the word breaking.
+            'grow min-w-0 wrap-break-word',
           )}
         >
           <div
             className={classNames(
               'card-title text-base font-medium',
               'ellipsis-lines-' + ellipsisLines,
-              'model-card-title',
               !props.subtitle && 'mb-0',
             )}
           >

@@ -558,7 +558,10 @@ const TableRow = memo<TableRowProps>(
         onClick={handleRowClick}
       >
         {(enableMultiSelect || fieldType) && (
-          <td className="row-control" style={{ paddingLeft: '16px' }}>
+          <td
+            className="row-control"
+            style={{ paddingLeft: '16px', paddingRight: 0 }}
+          >
             <div>
               {fieldType && fieldProps ? (
                 <>

@@ -88,12 +88,20 @@ export function TableContent() {
 
   // Refetch loading overlay
   const refetchOverlay = isRefetching ? (
-    <div className="table-loading-overlay">
+    <div className="absolute inset-0 z-10 flex items-center justify-center">
       <h1 className="mb-0">
         <LoadingSpinnerSimple />
       </h1>
     </div>
   ) : null;
+
+  // While refetching, aria-busy dims the current rows and blocks clicks on them.
+  const containerProps = {
+    'aria-busy': isRefetching || undefined,
+    'data-testid': 'table-container',
+  };
+  const containerClassName =
+    'table-container transition-opacity duration-150 aria-busy:pointer-events-none aria-busy:opacity-50';
 
   // Render grid mode
   if (mode === 'grid' && slots.gridItem) {
@@ -102,11 +110,10 @@ export function TableContent() {
         {refetchOverlay}
         <div
           className={classNames(
-            'table-container',
+            containerClassName,
             gridHover && 'grid-hover-shadow',
-            isRefetching && 'table-content-refetching',
           )}
-          data-testid="table-container"
+          {...containerProps}
         >
           <GridBody
             rows={rows}
@@ -125,11 +132,10 @@ export function TableContent() {
       {refetchOverlay}
       <div
         className={classNames(
-          'table-container',
+          containerClassName,
           tableHover && 'table-hover-shadow',
-          isRefetching && 'table-content-refetching',
         )}
-        data-testid="table-container"
+        {...containerProps}
       >
         <TableView />
       </div>

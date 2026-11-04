@@ -38,8 +38,8 @@ export const GridMode: Story = {
   ),
 };
 
-/** `gridFixedWidth` — the CSS Grid layout variant (`Table.scss`'s
- * `.grid-fixed-width`, `repeat(auto-fill, minmax(400px, 1fr))`) instead of
+/** `gridFixedWidth` — the CSS Grid layout variant (`GridBody.tsx`'s
+ * `repeat(auto-fill, minmax(400px, 1fr))` columns) instead of
  * the default responsive grid, matching `ProjectsList.tsx`. Card
  * count and container width together decide the column count here, not
  * `gridClassName` (ignored by `GridBody.tsx` whenever `gridFixedWidth` is set). */
@@ -71,7 +71,7 @@ export const GridModeCompact: Story = {
 };
 
 /** A background refetch in grid mode — `grid-hover-shadow`/
- * `table-content-refetching` applied to the card container rather than a
+ * `aria-busy` dimming applied to the card container rather than a
  * `<table>`, the one loading/empty-adjacent state that's actually
  * grid-specific (the plain loading spinner and empty placeholder render
  * identically to table mode — see `TableContent.tsx`: both checks run
@@ -88,8 +88,8 @@ export const GridModeRefetching: Story = {
   ),
 };
 
-/** `gridFixedWidth` at the "Mobile (xs)" viewport — `Table.scss`'s
- * `@media (max-width: 575px) { grid-template-columns: 1fr }` collapses the
+/** `gridFixedWidth` at the "Mobile (xs)" viewport — `GridBody.tsx`'s
+ * `max-sm:grid-cols-1` collapses the
  * CSS Grid to a single column. */
 export const GridModeMobile: Story = {
   globals: { viewport: 'mobile' },
