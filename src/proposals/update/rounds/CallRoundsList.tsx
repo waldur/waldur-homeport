@@ -9,7 +9,6 @@ import { Code } from 'waldur-ui';
 import { formatDateTime } from '@/core/dateUtils';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
-import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
 import { Call } from '@/proposals/types';
 import {
   getCallReadOnlyReason,
@@ -154,12 +153,7 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
           ellipsis: false,
         },
       ]}
-      title={
-        <>
-          <ValidationIcon value={call.rounds.length > 0} />
-          {translate('Rounds')}
-        </>
-      }
+      title={translate('Rounds')}
       verboseName={translate('Rounds')}
       tableActions={
         <RoundCreateButton
