@@ -65,15 +65,6 @@ $list-group-action-color: var(--text-secondary) !default;
 $list-group-action-active-bg: var(--bg-quaternary) !default;
 $list-group-active-bg: var(--bg-brand-solid) !default;
 
-// Tables
-$table-striped-bg: color-mix(
-  in srgb,
-  var(--bg-tertiary) 75%,
-  transparent
-) !default;
-$table-active-bg: var(--bg-tertiary) !default;
-$table-hover-bg: var(--bg-tertiary) !default;
-
 // Non-colour overrides of Bootstrap's and Metronic's variables
 
 // Bootstrap's _variables.scss builds its text and background utility maps
@@ -82,9 +73,10 @@ $table-hover-bg: var(--bg-tertiary) !default;
 // empty.
 $utilities-text: () !default;
 $utilities-bg: () !default;
-// Bootstrap generates a .table-{color} for each colour by mixing it with
-// $body-bg in Sass. The two the app uses are written with the tokens in
-// components/_tables.scss.
+// Bootstrap's _variables.scss builds .table-{color} variants by mixing each
+// colour with $body-bg in Sass, which needs a Sass colour. No table partial is
+// compiled any more (the .table rules are legacy/_table-base.scss), so the map
+// is empty.
 $table-variants: () !default;
 
 // Components
@@ -466,7 +458,7 @@ $card-header-height: var(
 
 // Tables
 
-// Customizes the `.table` component with basic values, each used across all table variations.
+// Bootstrap's reboot still reads the cell padding for <caption>.
 
 $table-cell-padding-y: 0.75rem !default;
 $table-cell-padding-x: 0.75rem !default;

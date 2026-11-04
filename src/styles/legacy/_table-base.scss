@@ -1,0 +1,211 @@
+// The `.table` base: what Bootstrap 5.1.3's scss/tables and Metronic's
+// components/_tables.scss emitted, copied with their Sass variables spelled
+// out (the colours were already tokens; 8px is --radius-lg). _table.scss
+// builds the list table on top of it. Bootstrap's .caption-top is left out:
+// nothing used it. Hand-rolled tables move off these classes over time
+// (waldur-custom/no-hand-rolled-table), but @/table/Table's TableView renders
+// .table.table-list itself, so this file goes only once it stops doing so.
+
+// Bootstrap's .table. Variants set the --bs-table-* hooks the cells read.
+// stylelint-disable property-disallowed-list, declaration-property-value-disallowed-list -- Bootstrap's .table hooks
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-accent-bg: transparent;
+  --bs-table-striped-color: var(--text-primary);
+  --bs-table-striped-bg: color-mix(
+    in srgb,
+    var(--bg-tertiary) 75%,
+    transparent
+  );
+  --bs-table-active-color: var(--text-primary);
+  --bs-table-active-bg: var(--bg-tertiary);
+  --bs-table-hover-color: var(--text-primary);
+  --bs-table-hover-bg: var(--bg-tertiary);
+  width: 100%;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  vertical-align: top;
+  border-color: var(--border-secondary);
+
+  > :not(caption) > * > * {
+    padding: 0.75rem 0.75rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+  }
+
+  > tbody {
+    vertical-align: inherit;
+  }
+
+  > thead {
+    vertical-align: bottom;
+  }
+}
+
+.table-sm > :not(caption) > * > * {
+  padding: 0.5rem 0.5rem;
+}
+
+.table-bordered > :not(caption) > * {
+  border-width: 1px 0;
+
+  > * {
+    border-width: 0 1px;
+  }
+}
+
+.table-borderless {
+  > :not(caption) > * > * {
+    border-bottom-width: 0;
+  }
+
+  > :not(:first-child) {
+    border-top-width: 0;
+  }
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-accent-bg: var(--bs-table-striped-bg);
+  color: var(--bs-table-striped-color);
+}
+
+.table-active {
+  --bs-table-accent-bg: var(--bs-table-active-bg);
+  color: var(--bs-table-active-color);
+}
+
+.table-hover > tbody > tr:hover > * {
+  --bs-table-accent-bg: var(--bs-table-hover-bg);
+  color: var(--bs-table-hover-color);
+}
+// stylelint-enable property-disallowed-list, declaration-property-value-disallowed-list
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+// Metronic's .table: cells inherit from the row, no edge padding, no rule
+// under the last row, and the rounded and row-bordered variants.
+.table {
+  // No rule between table sections. (Bootstrap drew a 2px currentColor
+  // top border here, which this always overrode.)
+  & > :not(:first-child) {
+    border-color: transparent;
+    border-width: 0;
+    border-style: none;
+  }
+
+  > :not(:last-child) > :last-child > * {
+    border-bottom-color: inherit;
+  }
+
+  tr,
+  th,
+  td {
+    border-color: inherit;
+    border-width: inherit;
+    border-style: inherit;
+    text-transform: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    color: inherit;
+    height: inherit;
+    min-height: inherit;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  tfoot,
+  tbody {
+    > tr:last-child {
+      border-bottom: 0 !important;
+
+      th,
+      td {
+        border-bottom: 0 !important;
+      }
+    }
+  }
+
+  tfoot {
+    th,
+    td {
+      border-top: inherit;
+    }
+  }
+
+  // Rounded
+  &.table-rounded {
+    border-radius: var(--radius-lg);
+    border-spacing: 0;
+    border-collapse: separate;
+  }
+
+  // Row bordered
+  &.table-row-bordered {
+    tr {
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      border-bottom-color: var(--border-secondary);
+    }
+
+    tfoot {
+      th,
+      td {
+        border-top-width: 1px !important;
+      }
+    }
+  }
+
+  // Row border colour. Metronic generated one per gray step; the app uses
+  // only gray-200, which is the divider.
+  &.table-row-gray-200 {
+    tr {
+      border-bottom-color: var(--border-divider);
+    }
+  }
+}
+
+// Cell padding of the list table (TableView), in place of
+// Metronic's .gy-*/.gx-* gutter classes. Kept in this layer, at their
+// specificity, so _table.scss's first/last-cell edges and expanded-row
+// padding still win.
+.table.table-list {
+  th,
+  td {
+    padding: 0 8px;
+  }
+}
+
+// The table variants in use (Bootstrap's are not generated). Bootstrap's
+// maths, in color-mix(): striped, active and hover move the row background
+// 5%, 10% and 7.5% towards the text colour.
+@mixin waldur-table-variant($bg, $color) {
+  // stylelint-disable property-disallowed-list -- Bootstrap's .table reads these hooks
+  --bs-table-bg: #{$bg};
+  --bs-table-striped-bg: color-mix(in srgb, #{$bg} 95%, #{$color});
+  --bs-table-striped-color: #{$color};
+  --bs-table-active-bg: color-mix(in srgb, #{$bg} 90%, #{$color});
+  --bs-table-active-color: #{$color};
+  --bs-table-hover-bg: color-mix(in srgb, #{$bg} 92.5%, #{$color});
+  --bs-table-hover-color: #{$color};
+  // stylelint-enable property-disallowed-list
+  color: #{$color};
+  border-color: color-mix(in srgb, #{$bg} 90%, #{$color});
+}
+
+// 20% of the solid warning over the page, as Bootstrap's 80% tint over white.
+.table-warning {
+  @include waldur-table-variant(
+    color-mix(in srgb, var(--status-warning-solid) 20%, var(--bg-primary)),
+    var(--text-primary)
+  );
+}

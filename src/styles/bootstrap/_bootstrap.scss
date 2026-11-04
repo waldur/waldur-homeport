@@ -4,14 +4,8 @@
 @import 'bootstrap/scss/type';
 // No images: img-fluid and img-thumbnail are Tailwind classes.
 // No containers or grid: layouts are Tailwind grid/flex (no-bootstrap-grid).
-// tables: nothing uses table-responsive-{sm,md,lg,xl,xxl}; (xs: 0) generates
-// base .table-responsive only.
-$_grid-breakpoints: $grid-breakpoints;
-$grid-breakpoints: (
-  xs: 0,
-);
-@import 'bootstrap/scss/tables';
-$grid-breakpoints: $_grid-breakpoints;
+// No tables: the .table rules Bootstrap and Metronic emitted are copied into
+// legacy/_table-base.scss.
 // Breadcrumbs are waldur-ui Breadcrumb/BreadcrumbItem and Tailwind utilities.
 // None of Bootstrap's forms partials remain: checkboxes, radios and switches
 // are waldur-ui Checkbox/Radio/Switch, inputs are Input/Textarea/NativeSelect

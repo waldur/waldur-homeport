@@ -2,8 +2,22 @@
 
 How to move a react-bootstrap `<Table>` or raw `<table>` off Bootstrap's table
 classes, and how to pick what it becomes. Tracked in #563 (part of epic #442);
-the end goal is #502: deleting the Bootstrap/Metronic `.table-*` rules and the
-`bootstrap/scss/tables` import.
+the end goal is #502: deleting the Bootstrap/Metronic `.table-*` rules, now
+copied into `src/styles/legacy/_table-base.scss` (Bootstrap's own
+`bootstrap/scss/tables` is no longer imported).
+
+Migrating the hand-rolled tables is only half of that goal. `@/table/Table`
+itself still renders `.table.table-list` (`TableView`), and allow-listed form
+grids may carry `.table` too, so `_table-base.scss` can go only once those
+render their own styles as well. The baseline below counts raw `<table>`
+markup, not `.table` usage: zero there does not yet mean the rules can be
+deleted.
+
+`waldur-custom/no-hand-rolled-table` is an error with a shrinking baseline:
+the raw `<table>`s that predate it are counted per file in
+`hand-rolled-table.baseline.json`. A file may keep that many; one more fails
+lint, and one fewer reports the count as stale. After migrating some, run
+`yarn lint:tables:baseline`; never run it to let a new table in.
 
 Not every table should become `@/table/Table`. That goal only needs "no
 Bootstrap table classes", and a short read-only list gains nothing from a fetch
@@ -404,6 +418,6 @@ repeat across the remaining batches.
   `TicketDraftCard.tsx`, `RuleTestMatchDialog.tsx`,
   `MergeCheckDetailsDialog.tsx` and `ResourceLimitDetails.tsx`.
 - **`no-hand-rolled-table`:** also flag waldur-ui's `Table` primitives outside
-  the allowed files, and promote the rule to `error` one directory at a time as
-  each batch lands, so a finished area cannot regress.
+  the allowed files (raw `<table>` is already an error, with the existing ones
+  in `hand-rolled-table.baseline.json`).
 - **A `renderWithProviders` option** that supplies the table store.
