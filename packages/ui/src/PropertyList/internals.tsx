@@ -225,17 +225,19 @@ const ItemLabel: FC<
  * form control in the row automatically points at it via `aria-describedby`.
  * It is clamped to two lines, so the tooltip carries the full text.
  */
-export const ItemDescription: FC<PropsWithChildren<{ className?: string }>> = ({
-  className,
-  children,
-}) => {
+export const ItemDescription: FC<
+  PropsWithChildren<{ className?: string; tooltip?: boolean }>
+> = ({ className, tooltip = true, children }) => {
   const id = useDescriptionId();
-  return (
-    <Tooltip label={children}>
-      <div id={id} data-slot="property-description" className={className}>
-        {children}
-      </div>
-    </Tooltip>
+  const description = (
+    <div id={id} data-slot="property-description" className={className}>
+      {children}
+    </div>
+  );
+  return tooltip ? (
+    <Tooltip label={children}>{description}</Tooltip>
+  ) : (
+    description
   );
 };
 

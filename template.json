@@ -346,6 +346,16 @@
       "feature_area": "create"
     }
   },
+  "+{count}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "configuration"
+    }
+  },
   "+{count} more": {
     "context": {
       "variables": {

@@ -1,5 +1,6 @@
 import { WarningIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
+import { useFormState } from 'react-final-form';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
 import {
@@ -7,11 +8,11 @@ import {
   PropertyCard,
   PropertyItem,
   PropertyList,
-  Select,
   Tooltip,
 } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
+import { EditFieldProvider, SelectEditField } from '@/form/editFields';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import {
@@ -44,40 +45,74 @@ const TITLE = (
         'Choose what this call asks applicants for. Name and project duration are always required. A field cannot be made required once the call has proposals.',
       )}
       size={20}
-      weight="fill"
       className="mx-1.5"
     />
   </>
 );
 
+/** A consumer turns into a warning only once the field is not asked, which is
+ * when it actually loses its input. */
+const UsageBadge: FC<{
+  usage: ProposalFieldUsage;
+  state: ProposalFieldState;
+}> = ({ usage, state }) => {
+  const warn = state === 'hidden' && isConsequential(usage);
+  return (
+    <Badge variant={warn ? 'warning' : 'neutral'} tone="outline">
+      {warn && <WarningIcon size={12} weight="bold" className="me-1" />}
+      {getUsageLabel(usage)}
+    </Badge>
+  );
+};
+
 /** The consumers a field feeds, so the cost of switching it off is visible here
- * rather than only in the backend it silently affects. */
-const UsageList: FC<{ usage: ProposalFieldUsage[] }> = ({ usage }) => (
-  <div className="flex flex-wrap gap-1.5">
-    {usage.map((item) => {
-      const tooltip = getUsageTooltip(item);
-      const badge = (
-        <Badge
-          key={item}
-          variant={isConsequential(item) ? 'warning' : 'neutral'}
-          tone="outline"
-        >
-          {isConsequential(item) && (
-            <WarningIcon size={12} weight="bold" className="me-1" />
-          )}
-          {getUsageLabel(item)}
-        </Badge>
-      );
-      return tooltip ? (
-        <Tooltip key={item} label={tooltip}>
-          <span>{badge}</span>
+ * rather than only in the backend it silently affects. The first one shows
+ * and the rest sit behind "+N", unless `all` lists every one, as the edit
+ * dialog does. */
+/** In the edit dialog the badges follow the state being picked, so choosing
+ * "Not asked" shows its cost before it is confirmed. */
+const DialogUsageList: FC<{ usage: ProposalFieldUsage[] }> = ({ usage }) => {
+  const { values } = useFormState<{ value: ProposalFieldState }>();
+  return <UsageList usage={usage} state={values.value} all />;
+};
+
+const UsageList: FC<{
+  usage: ProposalFieldUsage[];
+  state: ProposalFieldState;
+  all?: boolean;
+}> = ({ usage, state, all }) => {
+  if (!usage.length) {
+    return null;
+  }
+  const sorted = [
+    ...usage.filter(isConsequential),
+    ...usage.filter((item) => !isConsequential(item)),
+  ];
+  if (all) {
+    return (
+      <div className="flex flex-wrap gap-1.5">
+        {sorted.map((item) => (
+          <UsageBadge key={item} usage={item} state={state} />
+        ))}
+      </div>
+    );
+  }
+  const [first, ...rest] = sorted;
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      <UsageBadge usage={first} state={state} />
+      {rest.length > 0 && (
+        <Tooltip label={rest.map(getUsageLabel).join(', ')}>
+          <span>
+            <Badge variant="neutral" tone="outline">
+              {translate('+{count}', { count: rest.length })}
+            </Badge>
+          </span>
         </Tooltip>
-      ) : (
-        badge
-      );
-    })}
-  </div>
-);
+      )}
+    </div>
+  );
+};
 
 export const ProposalFieldsSection: FC<ProposalFieldsSectionProps> = ({
   call,
@@ -87,6 +122,15 @@ export const ProposalFieldsSection: FC<ProposalFieldsSectionProps> = ({
   const metadata = useMemo(
     () => (call.proposal_field_metadata ?? []) as ProposalFieldMetadata[],
     [call],
+  );
+
+  // The states keyed as the update body expects them, for the edit fields.
+  const scope = useMemo(
+    () =>
+      Object.fromEntries(
+        metadata.map((row) => [`field_${row.field}`, row.state]),
+      ),
+    [metadata],
   );
 
   const { mutateAsync: update } = useManagedMutation({
@@ -132,41 +176,38 @@ export const ProposalFieldsSection: FC<ProposalFieldsSectionProps> = ({
             </Badge>
           }
         />
-        {metadata.map((row) => {
-          const options = row.allowed_states.map((state) => ({
-            value: state,
-            label: getStateLabel(state),
-          }));
-          const locked = Boolean(row.locked_reason);
-          const select = (
-            <Select
-              options={options}
-              value={{ value: row.state, label: getStateLabel(row.state) }}
-              onChange={(option: { value: ProposalFieldState }) =>
-                update({ [`field_${row.field}`]: option.value })
-              }
-              isDisabled={isReadOnly}
-              isSearchable={false}
-              getOptionValue={(option) => option.value}
-              getOptionLabel={(option) => option.label}
-            />
-          );
-          return (
-            <PropertyItem
+        <EditFieldProvider
+          scope={scope}
+          callback={update}
+          readOnlyReason={isReadOnly ? getCallReadOnlyReason(call) : undefined}
+        >
+          {metadata.map((row) => (
+            <SelectEditField
               key={row.field}
+              name={`field_${row.field}`}
               label={getFieldLabel(row.field)}
-              description={<UsageList usage={row.usage} />}
-              warnTooltip={
-                isReadOnly
-                  ? getCallReadOnlyReason(call)
-                  : locked
-                    ? row.locked_reason
-                    : undefined
-              }
-              value={select}
+              description={<UsageList usage={row.usage} state={row.state} />}
+              descriptionTooltip={false}
+              dialogDescription={<DialogUsageList usage={row.usage} />}
+              dialogSize="sm"
+              options={row.allowed_states.map((state) => ({
+                value: state,
+                label: getStateLabel(state),
+              }))}
+              simpleValue
+              isClearable={false}
+              isSearchable={false}
+              disabled={isReadOnly}
+              warnTooltip={row.locked_reason || undefined}
+              labelTooltip={row.usage.map(getUsageTooltip).find(Boolean)}
+              renderValue={(state: ProposalFieldState) => (
+                <Badge variant="neutral" tone="outline">
+                  {getStateLabel(state)}
+                </Badge>
+              )}
             />
-          );
-        })}
+          ))}
+        </EditFieldProvider>
       </PropertyList>
     </PropertyCard>
   );

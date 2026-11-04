@@ -36,6 +36,14 @@ export type EditFieldProps<P = object> = Omit<
    * blocks (e.g. a placeholder reference table) that would bloat the row.
    */
   descriptionInEditOnly?: boolean;
+  /** `false` drops the row's tooltip repeating the description. */
+  descriptionTooltip?: boolean;
+  /** Help text on a question mark after the label. */
+  labelTooltip?: ReactNode;
+  /** The edit dialog's subtitle, in place of `description`. */
+  dialogDescription?: ReactNode;
+  /** The edit dialog's size; the modal's default when left out. */
+  dialogSize?: 'sm' | 'lg' | 'xl';
   disabled?: boolean;
   warnTooltip?: string;
   isStaffOnly?: boolean;
@@ -98,6 +106,10 @@ export function withEditField<P extends object>(
       label,
       description,
       descriptionInEditOnly,
+      descriptionTooltip,
+      dialogDescription,
+      labelTooltip,
+      dialogSize,
       disabled,
       warnTooltip,
       isStaffOnly,
@@ -158,7 +170,7 @@ export function withEditField<P extends object>(
     const editButton = (
       <FieldEditButton
         title={label}
-        description={description as string}
+        description={(dialogDescription ?? description) as string}
         scope={scope}
         name={name}
         callback={callback}
@@ -174,6 +186,7 @@ export function withEditField<P extends object>(
         tooltip={tooltip ?? (disabled ? ctx?.readOnlyReason : undefined)}
         iconNode={iconNode}
         disabled={disabled}
+        dialogSize={dialogSize}
       />
     );
 
@@ -194,10 +207,12 @@ export function withEditField<P extends object>(
       <PropertyItem
         label={label}
         description={descriptionInEditOnly ? undefined : description}
+        descriptionTooltip={descriptionTooltip}
         value={displayValue}
         required={required}
         disabled={disabled}
         warnTooltip={warnTooltip}
+        tooltip={labelTooltip}
         actions={actions}
       />
     );

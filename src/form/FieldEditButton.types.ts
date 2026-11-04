@@ -22,4 +22,6 @@ export interface FieldEditButtonProps extends Partial<
   emptyValue?: any;
   tooltip?: string;
   iconNode?: React.ReactNode;
+  /** The edit dialog's size; the modal's default when left out. */
+  dialogSize?: 'sm' | 'lg' | 'xl';
 }

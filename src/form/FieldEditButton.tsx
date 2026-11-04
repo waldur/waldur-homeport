@@ -25,6 +25,7 @@ export const FieldEditButton = (props: FieldEditButtonProps) => {
   const callback = () => {
     openDialog(EditFieldDialog, {
       resolve: props,
+      size: props.dialogSize,
     });
   };
   return (
