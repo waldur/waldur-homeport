@@ -53,7 +53,7 @@ const DescriptionCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
     return <>{renderFieldOrDash(null)}</>;
   }
   return (
-    <span className="ellipsis-lines-3 wrap-anywhere" title={description}>
+    <span className="line-clamp-3 wrap-anywhere" title={description}>
       {description}
     </span>
   );

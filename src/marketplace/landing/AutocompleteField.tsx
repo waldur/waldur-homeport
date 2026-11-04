@@ -38,7 +38,7 @@ export const Option = (props) => {
     <SelectOption {...props}>
       <div className="flex items-center">
         {img}
-        <span className="ellipsis-lines ellipsis-lines-2">
+        <span className="line-clamp-2">
           {`${props.data.category_title} / ${props.data.name}`}
         </span>
       </div>

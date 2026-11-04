@@ -1,7 +1,7 @@
 {
-  "compiledByteSize": 133137,
-  "totalClasses": 525,
-  "totalUsed": 516,
+  "compiledByteSize": 132759,
+  "totalClasses": 521,
+  "totalUsed": 512,
   "totalUnused": 9,
   "unused": {
     "bootstrap/scss/type": [
@@ -320,13 +320,6 @@
     "@layer bootstrap :: .active > .rotate-toggle-180",
     "@layer bootstrap :: .image-placeholder",
     "@layer bootstrap :: .ellipsis",
-    "@layer bootstrap :: .ellipsis-lines-3",
-    "@layer bootstrap :: .ellipsis-lines-2",
-    "@layer bootstrap :: .ellipsis-lines-1",
-    "@layer bootstrap :: .ellipsis-lines",
-    "@layer bootstrap :: .ellipsis-lines-1",
-    "@layer bootstrap :: .ellipsis-lines-2",
-    "@layer bootstrap :: .ellipsis-lines-3",
     "@layer bootstrap :: .btn-text-align",
     "@layer bootstrap :: .text-link",
     "@layer bootstrap :: .text-link:hover",

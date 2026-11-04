@@ -274,7 +274,7 @@ export const SigninForm = () => {
                 variant="error"
                 title={formError}
                 role="alert"
-                className="mt-2.5 ellipsis-lines-1"
+                className="mt-2.5 line-clamp-1"
                 style={{ maxWidth: '100vh' }}
               />
             )}

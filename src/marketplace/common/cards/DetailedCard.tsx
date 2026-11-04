@@ -76,7 +76,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
               </ImagePlaceholder>
             )}
             <div className="overflow-hidden">
-              <div className="text-base font-medium ellipsis-lines-2">
+              <div className="text-base font-medium line-clamp-2">
                 {offering.name}
               </div>
               <div className="text-quaternary small ellipsis">
@@ -91,7 +91,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
 
           {/* Description */}
           {offering.description ? (
-            <p className="text-quaternary small ellipsis-lines-3 mb-3 grow">
+            <p className="text-quaternary small line-clamp-3 mb-3 grow">
               {htmlToPlainText(offering.description)}
             </p>
           ) : (

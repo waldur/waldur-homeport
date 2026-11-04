@@ -5,6 +5,8 @@ import { Image } from './Image';
 import { ImagePlaceholder } from './ImagePlaceholder';
 import { getAbbreviation } from './utils';
 
+const LINE_CLAMP = { 1: 'line-clamp-1', 2: 'line-clamp-2', 3: 'line-clamp-3' };
+
 interface ModelCard1Props {
   title: string;
   titleNode?: ReactNode;
@@ -63,8 +65,8 @@ export const ModelCard1: FC<ModelCard1Props> = ({
         )}
         <div
           className={classNames(
-            'ellipsis-lines-' + ellipsisLines,
-            // min-w-0 lets the title shrink past its longest word; ellipsis-lines
+            LINE_CLAMP[ellipsisLines],
+            // min-w-0 lets the title shrink past its longest word; line-clamp
             // already clips it, and the title inherits the word breaking.
             'grow min-w-0 wrap-break-word',
           )}
@@ -72,7 +74,7 @@ export const ModelCard1: FC<ModelCard1Props> = ({
           <div
             className={classNames(
               'card-title text-base font-medium',
-              'ellipsis-lines-' + ellipsisLines,
+              LINE_CLAMP[ellipsisLines],
               !props.subtitle && 'mb-0',
             )}
           >
@@ -89,7 +91,7 @@ export const ModelCard1: FC<ModelCard1Props> = ({
         (typeof props.body === 'object' ? (
           props.body
         ) : (
-          <p className="card-text text-quaternary text-sm grow shrink-0 ellipsis-lines-3">
+          <p className="card-text text-quaternary text-sm grow shrink-0 line-clamp-3">
             {props.body}
           </p>
         ))}
