@@ -5,6 +5,7 @@ import { BaseButton, Tooltip } from 'waldur-ui';
 
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { htmlToPlainText } from '@/core/sanitize';
 import { getAbbreviation } from '@/core/utils';
 import { translate } from '@/i18n';
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
@@ -27,7 +28,9 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
       <strong>{offering.name}</strong>
       <div className="text-quaternary small">{offering.customer_name}</div>
       {offering.description && (
-        <div className="mt-1.5 small">{offering.description}</div>
+        <div className="mt-1.5 small">
+          {htmlToPlainText(offering.description)}
+        </div>
       )}
       {offering.tags?.length > 0 && (
         <div className="mt-1.5">

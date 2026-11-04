@@ -10,6 +10,7 @@
  *  - Markdown from the server               → parseMarkdown() / parseMarkdownInline()
  *  - Markdown, links only (announcement bar) → parseMarkdownLinksOnly()
  *  - Strip all tags, keep text              → stripHtml()
+ *  - HTML as one line of display text      → htmlToPlainText()
  */
 
 import DOMPurify, { type Config as DOMPurifyConfig } from 'dompurify';
@@ -116,3 +117,23 @@ export const parseMarkdownLinksOnly = (markdown: string): string =>
  */
 export const stripHtml = (html: string): string =>
   DOMPurify.sanitize(html, { ALLOWED_TAGS: ['#text'] });
+
+const BLOCK_TAG =
+  /<\/?(?:p|div|br|li|ul|ol|h[1-6]|tr|td|th|blockquote|pre)\b[^>]*>/gi;
+
+/**
+ * Turns an HTML fragment into a single line of plain text for rendering as a
+ * React text node, such as a card preview. Block boundaries become spaces so
+ * neighbouring paragraphs and list items do not run together, and entities are
+ * decoded. DOMParser does not run scripts or load resources.
+ */
+export const htmlToPlainText = (html: string): string => {
+  if (!html) {
+    return '';
+  }
+  const doc = new DOMParser().parseFromString(
+    html.replace(BLOCK_TAG, ' $&'),
+    'text/html',
+  );
+  return (doc.body.textContent ?? '').replace(/\s+/g, ' ').trim();
+};

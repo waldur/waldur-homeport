@@ -7,6 +7,7 @@ import { Badge } from 'waldur-ui';
 
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { htmlToPlainText } from '@/core/sanitize';
 import { getAbbreviation } from '@/core/utils';
 import { translate } from '@/i18n';
 import Placeholder from '@/images/logo_w.svg';
@@ -91,7 +92,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
           {/* Description */}
           {offering.description ? (
             <p className="text-quaternary small ellipsis-lines-3 mb-3 grow">
-              {offering.description}
+              {htmlToPlainText(offering.description)}
             </p>
           ) : (
             <div className="grow" />
