@@ -1,0 +1,24 @@
+// Waldur's own global styles, from the Metronic theme and later features.
+// None of them reads a Bootstrap Sass variable, mixin or function, only
+// _mixins.scss: scripts/bootstrap-css-usage.mjs compiles this file from it
+// alone, and fails if a file in this directory is not imported from here (or
+// from matrix/_call-livekit.scss, imported unlayered by index.scss). It is
+// imported from styles/bootstrap/_styles.scss, inside the `bootstrap` cascade
+// layer, after Bootstrap's own partials.
+@import 'link-transition';
+@import 'btn-no-focus';
+@import 'consent-dialog';
+@import 'base';
+@import 'buttons';
+@import 'content';
+@import 'file-upload';
+@import 'icon';
+@import 'landing';
+@import 'table';
+@import 'CopyToClipboardContainer';
+@import 'CodeBlock';
+@import 'action-group';
+@import 'ai-assistant/index';
+@import 'support/helpdesk';
+@import 'matrix/index';
+@import 'tos';

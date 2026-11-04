@@ -20,7 +20,7 @@
 // added, modified, or reordered.
 
 import { execSync } from 'node:child_process';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -35,9 +35,9 @@ export const DEFAULT_BASELINE = path.join(
   'scripts/bootstrap-css-usage.baseline.json',
 );
 
-// Each `name` is the partial's path before the move to src/styles/bootstrap
-// (#471), kept as is because it keys the per-partial entries in
-// bootstrap-css-usage.baseline.json; `scss` holds the current path.
+// Each `name` keys the partial's entry in bootstrap-css-usage.baseline.json.
+// Bootstrap's partials keep their path from before the move to
+// src/styles/bootstrap (#471); Waldur's own are `legacy/<path>`.
 export const PARTIALS = [
   // Bootstrap components (from _bootstrap.scss)
   {
@@ -61,90 +61,92 @@ export const PARTIALS = [
     scss: "@import 'config'; @import 'bootstrap/scss/card';",
   },
 
-  // Components (from components/)
-  {
-    name: 'core/components/helpers',
-    scss: "@import 'config'; @import 'components/text';",
-  },
+  // Metronic components that extend Bootstrap's (from components/)
   {
     name: 'core/components/card',
     scss: "@import 'config'; @import 'components/card';",
   },
   {
-    name: 'core/components/buttons',
-    scss: "@import 'config'; @import 'components/buttons';",
-  },
-  {
     name: 'core/components/tables',
     scss: "@import 'config'; @import 'components/tables';",
   },
-  {
-    name: 'core/components/consent-dialog',
-    scss: "@import 'config'; @import 'components/consent-dialog';",
-  },
 
-  // Legacy partials (from legacy/)
+  // Waldur's own partials (src/styles/legacy/). Each compiles from
+  // _mixins.scss alone: none reads a Bootstrap Sass variable or mixin, so a
+  // reference to one fails `report`, `save` and `compare`.
   {
-    name: 'custom/base',
-    scss: "@import 'config'; @import 'legacy/base';",
+    name: 'legacy/link-transition',
+    scss: "@import '../legacy/mixins'; @import '../legacy/link-transition';",
   },
   {
-    name: 'custom/buttons',
-    scss: "@import 'config'; @import 'legacy/buttons';",
+    name: 'legacy/btn-no-focus',
+    scss: "@import '../legacy/mixins'; @import '../legacy/btn-no-focus';",
   },
   {
-    name: 'custom/content',
-    scss: "@import 'config'; @import 'legacy/content';",
+    name: 'legacy/consent-dialog',
+    scss: "@import '../legacy/mixins'; @import '../legacy/consent-dialog';",
   },
   {
-    name: 'custom/file-upload',
-    scss: "@import 'config'; @import 'custom/file-upload';",
+    name: 'legacy/base',
+    scss: "@import '../legacy/mixins'; @import '../legacy/base';",
   },
   {
-    name: 'custom/icon',
-    scss: "@import 'config'; @import 'legacy/icon';",
+    name: 'legacy/buttons',
+    scss: "@import '../legacy/mixins'; @import '../legacy/buttons';",
   },
   {
-    name: 'custom/landing',
-    scss: "@import 'config'; @import 'custom/landing';",
+    name: 'legacy/content',
+    scss: "@import '../legacy/mixins'; @import '../legacy/content';",
   },
   {
-    name: 'custom/table',
-    scss: "@import 'config'; @import 'custom/table';",
+    name: 'legacy/file-upload',
+    scss: "@import '../legacy/mixins'; @import '../legacy/file-upload';",
   },
   {
-    name: 'custom/CopyToClipboardContainer',
-    scss: "@import 'config'; @import 'custom/CopyToClipboardContainer';",
+    name: 'legacy/icon',
+    scss: "@import '../legacy/mixins'; @import '../legacy/icon';",
   },
   {
-    name: 'custom/CodeBlock',
-    scss: "@import 'config'; @import 'custom/CodeBlock';",
+    name: 'legacy/landing',
+    scss: "@import '../legacy/mixins'; @import '../legacy/landing';",
   },
   {
-    name: 'custom/action-group',
-    scss: "@import 'config'; @import 'custom/action-group';",
+    name: 'legacy/table',
+    scss: "@import '../legacy/mixins'; @import '../legacy/table';",
   },
   {
-    name: 'custom/ai-assistant/index',
-    scss: "@import 'config'; @import 'custom/ai-assistant/index';",
+    name: 'legacy/CopyToClipboardContainer',
+    scss: "@import '../legacy/mixins'; @import '../legacy/CopyToClipboardContainer';",
   },
   {
-    name: 'custom/support/helpdesk',
-    scss: "@import 'config'; @import 'custom/support/helpdesk';",
+    name: 'legacy/CodeBlock',
+    scss: "@import '../legacy/mixins'; @import '../legacy/CodeBlock';",
   },
   {
-    name: 'custom/matrix/index',
-    scss: "@import 'config'; @import 'custom/matrix/index';",
+    name: 'legacy/action-group',
+    scss: "@import '../legacy/mixins'; @import '../legacy/action-group';",
   },
   {
-    name: 'custom/tos',
-    scss: "@import 'config'; @import 'custom/tos';",
+    name: 'legacy/ai-assistant/index',
+    scss: "@import '../legacy/mixins'; @import '../legacy/ai-assistant/index';",
+  },
+  {
+    name: 'legacy/support/helpdesk',
+    scss: "@import '../legacy/mixins'; @import '../legacy/support/helpdesk';",
+  },
+  {
+    name: 'legacy/matrix/index',
+    scss: "@import '../legacy/mixins'; @import '../legacy/matrix/index';",
+  },
+  {
+    name: 'legacy/tos',
+    scss: "@import '../legacy/mixins'; @import '../legacy/tos';",
   },
 
   // Unlayered LiveKit styles in index.scss
   {
-    name: 'custom/matrix/call-livekit',
-    scss: "@import 'config'; @import 'custom/matrix/call-livekit';",
+    name: 'legacy/matrix/call-livekit',
+    scss: "@import '../legacy/mixins'; @import '../legacy/matrix/call-livekit';",
   },
 ];
 
@@ -232,7 +234,8 @@ export function tokenizeContent(content) {
 
 /**
  * Collects tokens from tracked source files under src/, packages/, apps/,
- * excluding the stylesheet directory (src/styles/bootstrap/).
+ * excluding the stylesheet directories (src/styles/bootstrap/ and
+ * src/styles/legacy/), whose own selectors would count as uses.
  */
 export function getCorpusTokens(options = {}) {
   const repoRoot = options.rootDir ?? root;
@@ -246,7 +249,8 @@ export function getCorpusTokens(options = {}) {
       (f) =>
         f &&
         /\.(ts|tsx|js|mjs|html|scss|css)$/.test(f) &&
-        !f.startsWith('src/styles/bootstrap/'),
+        !f.startsWith('src/styles/bootstrap/') &&
+        !f.startsWith('src/styles/legacy/'),
     );
 
   const corpus = new Set();
@@ -352,6 +356,95 @@ export function findNewUnusedClasses(baselineUnused, currentUnused) {
   return newUnusedByPartial;
 }
 
+/**
+ * A partial of Waldur's own (src/styles/legacy/, and the components that left
+ * Bootstrap behind) compiles from _mixins.scss alone, not _config.scss.
+ */
+export const isDecoupled = (partial) =>
+  !partial.scss.includes("@import 'config'");
+
+/**
+ * The names of Bootstrap's Sass functions (its own and the overrides in
+ * _functions.scss). A decoupled partial compiles without them, so a call to
+ * one is not an error there: Sass writes it out as a plain CSS function.
+ */
+export function bootstrapFunctionNames() {
+  const files = [
+    path.join(root, 'node_modules/bootstrap/scss/_functions.scss'),
+    path.join(sassDir, '_functions.scss'),
+  ];
+  const names = new Set();
+  for (const file of files) {
+    for (const m of readFileSync(file, 'utf8').matchAll(
+      /@function ([\w-]+)/g,
+    )) {
+      names.add(m[1]);
+    }
+  }
+  return names;
+}
+
+/**
+ * The Bootstrap functions a compiled partial still calls. A name after a
+ * colon is a pseudo-class (`:has(`), not a call.
+ */
+export function findBootstrapFunctionCalls(
+  css,
+  names = bootstrapFunctionNames(),
+) {
+  const found = new Set();
+  for (const m of css.matchAll(/(?<![\w:-])([a-z][\w-]*)\(/g)) {
+    if (names.has(m[1])) found.add(m[1]);
+  }
+  return [...found].sort();
+}
+
+/**
+ * The stylesheets that import Waldur's own partials: legacy/_index.scss
+ * (inside the bootstrap layer) and the unlayered LiveKit overrides.
+ */
+const LEGACY_ENTRY_POINTS = [
+  '../legacy/index',
+  '../legacy/matrix/call-livekit',
+];
+
+/**
+ * Compiles each legacy entry point from _mixins.scss alone and fails when it
+ * reads a Bootstrap variable or mixin (a Sass error), calls a Bootstrap
+ * function, or when a file under src/styles/legacy/ is not reached from an
+ * entry point — and so would escape both this check and the build.
+ */
+export function checkLegacyDecoupled(functionNames = bootstrapFunctionNames()) {
+  const loaded = new Set();
+  for (const entry of LEGACY_ENTRY_POINTS) {
+    const result = sass.compileString(
+      `@import '../legacy/mixins'; @import '${entry}';`,
+      getSassOptions(),
+    );
+    for (const url of result.loadedUrls) {
+      if (url.protocol === 'file:') loaded.add(fileURLToPath(url));
+    }
+    const calls = findBootstrapFunctionCalls(result.css, functionNames);
+    if (calls.length) {
+      throw new Error(
+        `${entry} calls Bootstrap's ${calls.join(', ')}: Waldur's own partials must not depend on Bootstrap's Sass.`,
+      );
+    }
+  }
+  const legacyDir = path.join(root, 'src/styles/legacy');
+  const missing = readdirSync(legacyDir, { recursive: true })
+    .filter((f) => f.endsWith('.scss'))
+    .map((f) => path.join(legacyDir, f))
+    .filter((f) => !loaded.has(f));
+  if (missing.length) {
+    throw new Error(
+      `Not imported from src/styles/legacy/_index.scss: ${missing
+        .map((f) => path.relative(root, f))
+        .join(', ')}`,
+    );
+  }
+}
+
 /** Analyzes usage across all partials. */
 export function analyzeUsage(corpusTokens, partials = PARTIALS) {
   const results = {};
@@ -359,8 +452,18 @@ export function analyzeUsage(corpusTokens, partials = PARTIALS) {
   let totalUsed = 0;
   let totalUnused = 0;
 
+  const functionNames = bootstrapFunctionNames();
+  checkLegacyDecoupled(functionNames);
   for (const p of partials) {
     const css = compilePartial(p.scss);
+    if (isDecoupled(p)) {
+      const calls = findBootstrapFunctionCalls(css, functionNames);
+      if (calls.length) {
+        throw new Error(
+          `${p.name} calls Bootstrap's ${calls.join(', ')}: Waldur's own partials must not depend on Bootstrap's Sass.`,
+        );
+      }
+    }
     const classes = extractClasses(css);
     if (classes.length === 0) continue;
 

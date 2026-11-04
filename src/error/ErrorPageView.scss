@@ -9,6 +9,7 @@
 
   h1 {
     // Three digits are ~1.9em wide: scale with the viewport on phones.
+    // stylelint-disable-next-line waldur/font-size-scale -- display numeral sized to the viewport, not text
     font-size: clamp(96px, 44vw, 295px);
     font-weight: var(--font-weight-bold);
     line-height: 1.1;

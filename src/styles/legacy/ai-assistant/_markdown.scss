@@ -1,6 +1,6 @@
 .aui-md {
   line-height: 1.75;
-  font-size: $font-size-lg;
+  font-size: var(--text-sm);
   width: 100%;
 }
 
@@ -17,26 +17,26 @@
 }
 
 .aui-md h1 {
-  font-size: $h1-font-size;
+  font-size: var(--text-2xl);
   // Was 800: Inter is loaded up to 700, so 800 rendered as 700 anyway.
   font-weight: var(--font-weight-bold);
   margin-top: 2rem;
 }
 
 .aui-md h2 {
-  font-size: $h2-font-size;
+  font-size: var(--text-xl);
   margin-top: 2rem;
   border-bottom: 1px solid var(--border-primary);
   padding-bottom: 0.5rem;
 }
 
 .aui-md h3 {
-  font-size: $h3-font-size;
+  font-size: var(--text-lg);
   margin-top: 1.5rem;
 }
 
 .aui-md h4 {
-  font-size: $h4-font-size;
+  font-size: var(--text-base);
   margin-top: 1.5rem;
 }
 
@@ -122,11 +122,11 @@
   border-bottom: 1px solid var(--border-primary);
 
   &:first-child {
-    border-top-left-radius: $border-radius;
+    border-top-left-radius: var(--radius-lg);
   }
 
   &:last-child {
-    border-top-right-radius: $border-radius;
+    border-top-right-radius: var(--radius-lg);
   }
 }
 
@@ -148,11 +148,11 @@
 
 .aui-md tr:last-child td {
   &:first-child {
-    border-bottom-left-radius: $border-radius;
+    border-bottom-left-radius: var(--radius-lg);
   }
 
   &:last-child {
-    border-bottom-right-radius: $border-radius;
+    border-bottom-right-radius: var(--radius-lg);
   }
 }
 
@@ -183,8 +183,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border-top-left-radius: $border-radius;
-  border-top-right-radius: $border-radius;
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
   background-color: var(--bg-tertiary);
   padding: 0.5rem 1rem;
   font-size: var(--text-xs);
@@ -217,8 +217,8 @@
 .aui-md-pre {
   margin: 0;
   overflow-x: auto;
-  border-bottom-left-radius: $border-radius;
-  border-bottom-right-radius: $border-radius;
+  border-bottom-left-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
   padding: 1rem;
   background-color: var(--bg-tertiary);
 
@@ -248,8 +248,8 @@
   min-height: 120px;
   padding: 1rem;
   background-color: var(--bg-tertiary);
-  border-bottom-left-radius: $border-radius;
-  border-bottom-right-radius: $border-radius;
+  border-bottom-left-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
 }
 
 .aui-skeleton-lines {
@@ -267,7 +267,7 @@
     var(--bg-tertiary) 100%
   );
   background-size: 200% 100%;
-  border-radius: $border-radius-xs;
+  border-radius: var(--radius-sm);
   animation: shimmer 1.5s ease-in-out infinite;
 
   &--short {
@@ -293,8 +293,8 @@
 }
 
 .aui-mermaid-block {
-  border-bottom-left-radius: $border-radius;
-  border-bottom-right-radius: $border-radius;
+  border-bottom-left-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
   border-left: 1px solid var(--border-primary);
   border-right: 1px solid var(--border-primary);
   border-bottom: 1px solid var(--border-primary);

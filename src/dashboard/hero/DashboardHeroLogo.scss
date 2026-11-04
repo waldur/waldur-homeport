@@ -35,6 +35,7 @@
   font-size: var(--text-xs);
 
   @media (width <= 480px) {
+    // stylelint-disable-next-line waldur/font-size-scale -- below the scale on purpose; see the 10/11px decision in docs/design-tokens.md
     font-size: 11px;
   }
 }

@@ -1,6 +1,6 @@
 /**
  * Tailwind utilities for the semantic colour roles: `text-primary` …
- * `text-senary`, `bg-primary` … `bg-quaternary`, `bg-primary-hover`,
+ * `text-senary`, `bg-primary` … `bg-quaternary`, `bg-primary-hover`, `bg-media`,
  * `border-primary` / `-secondary` / `-tertiary` / `-divider`.
  *
  * Lives in the package, imported by index.css, so every consumer gets the
@@ -53,6 +53,7 @@
   --background-color-secondary: var(--bg-secondary);
   --background-color-tertiary: var(--bg-tertiary);
   --background-color-quaternary: var(--bg-quaternary);
+  --background-color-media: var(--bg-media);
 
   --border-color-primary: var(--border-primary);
   --border-color-secondary: var(--border-secondary);

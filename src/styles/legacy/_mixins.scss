@@ -58,6 +58,23 @@ $_ramp-mirror: (
   }
 }
 
+// Below a breakpoint: `@include below(md) { … }` is `@media (max-width:
+// 767.98px)`, the width just under --breakpoint-md (primitives/breakpoints.css,
+// which Tailwind's md:, lg: … read). Keep the two in step;
+// src/bootstrapCssUsage.test.ts checks they are.
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+
+@mixin below($breakpoint) {
+  @media (max-width: map.get($breakpoints, $breakpoint) - 0.02px) {
+    @content;
+  }
+}
+
 // Input placeholder color
 @mixin placeholder($color) {
   // Chrome, Firefox, Opera, Safari 10.1+

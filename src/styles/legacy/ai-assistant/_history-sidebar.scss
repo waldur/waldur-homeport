@@ -47,16 +47,16 @@
   }
 
   .aui-history-header-title {
-    font-size: $h2-font-size !important;
+    font-size: var(--text-xl) !important;
   }
 
   .aui-history-item {
-    font-size: $h4-font-size !important;
+    font-size: var(--text-base) !important;
   }
 
   .aui-history-new-chat {
-    height: $input-height-lg;
-    font-size: $h4-font-size !important;
+    height: calc(1.43em + 1.384rem + 2px);
+    font-size: var(--text-base) !important;
   }
 }
 
@@ -68,7 +68,7 @@
   flex-direction: column;
   gap: 24px;
   padding: 0 16px;
-  border-right: 1px solid $border-color;
+  border-right: 1px solid var(--border-secondary);
   overflow-y: auto;
 }
 
@@ -99,9 +99,9 @@
 }
 
 .aui-history-header-title {
-  font-family: $font-family-sans-serif;
+  font-family: var(--font-sans);
   font-weight: var(--font-weight-medium);
-  font-size: $h3-font-size;
+  font-size: var(--text-lg);
   line-height: 1.5;
   color: var(--text-secondary);
 }
@@ -144,12 +144,12 @@
   width: 100%;
   gap: 8px;
   padding: 10px 8px;
-  border-radius: $border-radius-lg;
+  border-radius: var(--radius-lg);
   overflow: visible;
   position: relative;
-  font-family: $font-family-sans-serif;
+  font-family: var(--font-sans);
   font-weight: var(--font-weight-normal);
-  font-size: $font-size-lg;
+  font-size: var(--text-sm);
   line-height: 1.5;
   color: var(--text-primary);
 
@@ -191,7 +191,7 @@
   padding: 16px;
   text-align: center;
   color: var(--text-quinary);
-  font-size: $font-size-sm;
+  font-size: var(--text-xs);
 }
 
 .aui-history-item-title {

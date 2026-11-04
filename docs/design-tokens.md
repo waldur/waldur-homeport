@@ -313,20 +313,43 @@ prevent distortion under Waldur's forced 13px root font size (`html, body { font
 
 | Token         | Size | Line Height | Tailwind Class | Former Bootstrap Utility |
 | ------------- | ---- | ----------- | -------------- | ------------------------ |
-| `--text-xs`   | 12px | 18px        | `text-xs`      | `fs-7`, `fs-8`           |
+| `--text-xs`   | 12px | 16px        | `text-xs`      | `fs-7`, `fs-8`           |
 | `--text-sm`   | 14px | 20px        | `text-sm`      | `fs-6`                   |
 | `--text-base` | 16px | 24px        | `text-base`    | `fs-4`, `fs-5`           |
 | `--text-lg`   | 18px | 28px        | `text-lg`      | `fs-3`                   |
 | `--text-xl`   | 20px | 28px        | `text-xl`      | `fs-2`                   |
 | `--text-2xl`  | 24px | 32px        | `text-2xl`     | `fs-1`, `fs-1x`          |
 | `--text-3xl`  | 30px | 36px        | `text-3xl`     | —                        |
-| `--text-4xl`  | 36px | 44px        | `text-4xl`     | —                        |
+| `--text-4xl`  | 36px | 40px        | `text-4xl`     | —                        |
 
 - **No Bootstrap `fs-*`.** Bootstrap's `fs-1` through `fs-8` classes are retired and replaced
   by standard Tailwind `text-*` classes via the `waldur-custom/require-font-size-scale` ESLint rule.
 - **Why pinned in pixels?** Default Tailwind uses relative `rem` units (e.g. `text-lg` is 1.125rem).
   With an unpinned root, 1.125rem at 13px resolves to 14.625px instead of the intended 18px. Pinned
   declarations ensure consistent typography across both desktop (13px root) and mobile (12px root).
+- **One apparent size for every font.** `primitives/typography.css` sets the native
+  `font-size-adjust: 0.546` on `html`: Inter's x-height ratio, measured. The browser scales each font's
+  glyphs so its x-height matches Inter's, so a deployment `FONT_FAMILY` whose glyphs run small (Maven
+  Pro, 0.499) renders about 9% larger and Inter itself is unchanged. Only glyphs scale: line heights,
+  boxes and spacing stay the same for every font. Monospace (`code`, `kbd`, `samp`, `pre`,
+  `.font-mono`, and a stylesheet that sets a monospace stack) keeps its own size with
+  `font-size-adjust: none`. There is no per-font factor to maintain.
+- **rem is not on the scale.** A `rem` size follows the root, which is 13px on desktop and 12px on
+  phones, while the tokens stay put, so rem text shrinks about 8% on phones next to token text meant to
+  match it. Body text and `h1`–`h6` (Bootstrap's reboot) and card titles are still rem; they move to the
+  scale with the reboot and card steps.
+- **Linted in TSX and SCSS.** `waldur-custom/require-font-size-scale` reports an arbitrary px or rem
+  size in TSX (`text-[14px]`, `text-[length:1.077rem]`, `text-[1.25rem]/5`) with the token it equals
+  (rem at the 13px root), without fixing it: the arbitrary class sets only a font size, while a `text-*`
+  class also sets a line height, so check the result. The stylelint rule `waldur/font-size-scale` allows
+  a `font-size` (or the size in a `font:` shorthand) of `var(--text-*)` or one relative to its parent
+  (`em`, `%`, `inherit`, `smaller`, `larger`) and names the equal token for a px or rem size. Exempt:
+  the root and body sizes (`src/tailwind.css`), Bootstrap's partials (`src/styles/bootstrap/`, being
+  retired), and the boot splash and boot error screen (`packages/boot-splash/`,
+  `src/BootErrorScreen.css`), which paint before the tokens load.
+- **Below the scale (10px, 11px).** A handful of badges, card metadata and phone-width labels use 10px
+  or 11px (`text-[10px]`/`text-[11px]` in TSX, a commented `stylelint-disable` in SCSS). Whether they
+  fold into `text-xs` or get a `text-2xs` step is not decided yet; don't add new ones.
 - **No arbitrary `text-[14px]`.** Named scale tokens (`text-sm`) must be used instead.
 - **No inline `fontSize`** on JSX elements: static font sizes must use standard utility classes. Dynamic
   scaling (such as proportional avatar placeholder text or country flag emojis) requires an explicit
@@ -434,26 +457,26 @@ to prevent fractional `rem` compression under Waldur's forced 13px root font siz
 
 ## Guards
 
-| What                                                    | Enforced by                                                                 |
-| ------------------------------------------------------- | --------------------------------------------------------------------------- |
-| Generated ramps match `colors.json`                     | `generateTokens.test.ts`, `yarn tokens:check`                               |
-| No dead, ghost or redundantly aliased tokens            | `tokenAudit.test.ts`, `yarn tokens:audit`                                   |
-| No new duplicate roles (same value in both themes)      | `DUPLICATE_BASELINE` in `scripts/audit-tokens.mjs`, via the same two        |
-| Status `-fg` clears AA on every surface                 | `statusContrast.test.ts`                                                    |
-| Badge `solid` and Progress fills stay identical         | `progressTokens.test.ts`                                                    |
-| Bootstrap emits no colour utility                       | `src/tailwindBootstrapColors.test.ts`                                       |
-| No retired Bootstrap colour class name                  | `waldur-custom/no-bootstrap-color-utility`                                  |
-| Every semantic utility waldur-ui/shell use is declared  | `tailwindTheme.test.ts`                                                     |
-| A bare `border` names its colour                        | `waldur-custom/require-border-color` (autofix)                              |
-| State colours from the status matrix, not raw ramps     | `waldur-custom/no-raw-status-ramp`                                          |
-| A colour token with a utility is written as the utility | `waldur-custom/prefer-token-utility` (autofix; table read from `theme.css`) |
-| Font size on the scale; no `fs-*` or inline size        | `waldur-custom/require-font-size-scale` (autofixes `fs-*`), stylelint       |
-| Font weight on the scale; no `fw-*` or inline weight    | `waldur-custom/require-weight-scale` (autofixes `fw-*`), stylelint          |
-| Corner radius on the scale; no retired or inline radius | `waldur-custom/enforce-border-radius-tokens` (autofix), stylelint           |
-| Bootstrap emits no `fw-*`; Tailwind exactly the scale   | `src/tailwindBootstrapColors.test.ts`                                       |
-| Every physical colour has a `dark:` counterpart         | `waldur-custom/require-dark-pair`                                           |
-| No `--bs-*` reads                                       | `waldur-custom/no-bootstrap-css-vars`, stylelint                            |
-| Hard-coded colours (hex, `rgb()`, named) only go down   | `no-literal-color` (ESLint and stylelint), `yarn colors:check`              |
+| What                                                    | Enforced by                                                                          |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Generated ramps match `colors.json`                     | `generateTokens.test.ts`, `yarn tokens:check`                                        |
+| No dead, ghost or redundantly aliased tokens            | `tokenAudit.test.ts`, `yarn tokens:audit`                                            |
+| No new duplicate roles (same value in both themes)      | `DUPLICATE_BASELINE` in `scripts/audit-tokens.mjs`, via the same two                 |
+| Status `-fg` clears AA on every surface                 | `statusContrast.test.ts`                                                             |
+| Badge `solid` and Progress fills stay identical         | `progressTokens.test.ts`                                                             |
+| Bootstrap emits no colour utility                       | `src/tailwindBootstrapColors.test.ts`                                                |
+| No retired Bootstrap colour class name                  | `waldur-custom/no-bootstrap-color-utility`                                           |
+| Every semantic utility waldur-ui/shell use is declared  | `tailwindTheme.test.ts`                                                              |
+| A bare `border` names its colour                        | `waldur-custom/require-border-color` (autofix)                                       |
+| State colours from the status matrix, not raw ramps     | `waldur-custom/no-raw-status-ramp`                                                   |
+| A colour token with a utility is written as the utility | `waldur-custom/prefer-token-utility` (autofix; table read from `theme.css`)          |
+| Font size on the scale; no `fs-*` or inline size        | `waldur-custom/require-font-size-scale` (autofixes `fs-*`), `waldur/font-size-scale` |
+| Font weight on the scale; no `fw-*` or inline weight    | `waldur-custom/require-weight-scale` (autofixes `fw-*`), stylelint                   |
+| Corner radius on the scale; no retired or inline radius | `waldur-custom/enforce-border-radius-tokens` (autofix), stylelint                    |
+| Bootstrap emits no `fw-*`; Tailwind exactly the scale   | `src/tailwindBootstrapColors.test.ts`                                                |
+| Every physical colour has a `dark:` counterpart         | `waldur-custom/require-dark-pair`                                                    |
+| No `--bs-*` reads                                       | `waldur-custom/no-bootstrap-css-vars`, stylelint                                     |
+| Hard-coded colours (hex, `rgb()`, named) only go down   | `no-literal-color` (ESLint and stylelint), `yarn colors:check`                       |
 
 **Duplicate roles.** Two semantic tokens with the same value in both themes are one role with
 two names until shown otherwise. The audit fails on any such group not listed in

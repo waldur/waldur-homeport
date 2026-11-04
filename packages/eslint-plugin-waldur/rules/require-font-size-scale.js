@@ -10,7 +10,18 @@
  *
  * - `retired`: a Bootstrap `fs-*` class. Bootstrap no longer emits them, so
  *   each is autofixed to the Tailwind utility of the matching size.
- * - `offScale`: an arbitrary `text-[Npx]` utility that has a named token on the scale.
+ * - `offScale`: an arbitrary `text-[Npx]` (or `text-[length:Npx]`) utility
+ *   that has a named token on the scale.
+ * - `rem`: an arbitrary rem size, `text-[1.077rem]` or `text-[length:…rem]`.
+ *   rem follows HomePort's 13px root, which drops to 12px on phones while the
+ *   tokens do not, so the two drift apart.
+ *
+ * Both name the token the size equals (rem at the 13px root) but are not
+ * autofixed: the arbitrary class sets only a font size, while a text-* token
+ * also sets a line height, which a person should check. The Tailwind
+ * size/line-height form (`text-[1.077rem]/5`) is reported the same way.
+ * Arbitrary px sizes below the scale, 10px and 11px, are not reported yet:
+ * see docs/design-tokens.md.
  *
  * and, on a JSX element, `inline`: a `style={{ fontSize }}`, which outranks
  * every stylesheet and skips the scale.
@@ -41,7 +52,8 @@ const RETIRED_FONT_SIZES = {
   'fs-2hx': 'text-4xl',
 };
 
-const ARBITRARY_PIXELS_TO_NAMED = {
+/** px sizes on the scale. Also read by stylelint's waldur/font-size-scale. */
+export const ARBITRARY_PIXELS_TO_NAMED = {
   '12px': 'text-xs',
   '14px': 'text-sm',
   '16px': 'text-base',
@@ -52,9 +64,28 @@ const ARBITRARY_PIXELS_TO_NAMED = {
   '36px': 'text-4xl',
 };
 
-/** hover:!fs-6 → { prefix: 'hover:!', name: 'fs-6', suffix: '' }. */
+/**
+ * rem sizes that equal a token at HomePort's 13px root. Also read by
+ * stylelint's waldur/font-size-scale.
+ */
+export const REM_TO_NAMED = {
+  '0.925rem': 'text-xs',
+  '1.077rem': 'text-sm',
+  '1.25rem': 'text-base',
+  '1.385rem': 'text-lg',
+  '1.54rem': 'text-xl',
+  '1.75rem': 'text-2xl',
+};
+
+/**
+ * hover:!fs-6 → { prefix: 'hover:!', name: 'fs-6', suffix: '' }. A bracket
+ * group, with one level of nested brackets, is taken whole: the colon in
+ * `text-[length:14px]` is not a variant separator, while `[&>a]:` and
+ * `[&_[data-x]]:` are variants.
+ */
 const split = (token) => {
-  const m = /^((?:[\w[\]&=*-]+:)*!?)(.+?)(!?)$/.exec(token);
+  const m =
+    /^((?:(?:[\w&=*-]|\[(?:[^[\]]|\[[^\]]*\])*\])+:)*!?)(.+?)(!?)$/.exec(token);
   return m ? { prefix: m[1], name: m[2], suffix: m[3] } : null;
 };
 
@@ -105,7 +136,8 @@ export default {
       retired:
         '"{{ token }}" is a retired Bootstrap font-size class. Use "{{ fix }}" instead.',
       offScale:
-        '"{{ token }}" uses an arbitrary pixel value that matches a scale token: use "{{ fix }}".',
+        '"{{ token }}" uses an arbitrary pixel value that matches a scale token: use {{ fix }}, and check the line height: a text-* class sets one too.',
+      rem: '"{{ token }}" is a rem font size, which shrinks with the 12px phone root while the scale does not. Use {{ fix }}, and check the line height: a text-* class sets one too.',
       inline:
         'Set font size with a class (text-xs, text-sm, text-base, text-lg, etc.), not an inline style.',
     },
@@ -154,36 +186,23 @@ export default {
           continue;
         }
 
-        const arbMatch = /^text-\[(\d+px)\]$/.exec(name);
-        if (arbMatch && ARBITRARY_PIXELS_TO_NAMED[arbMatch[1]]) {
-          const namedToken = ARBITRARY_PIXELS_TO_NAMED[arbMatch[1]];
-          const fix = prefix + namedToken + suffix;
-          const regex = new RegExp(
-            `(?<=^|[\\s'"\`}])${escape(token)}(?=$|[\\s'"\`$])`,
-            'g',
-          );
-          regex.lastIndex = searchOffset;
-          const match = regex.exec(sourceText);
-          if (match) {
-            const tokenStart = node.range[0] + match.index;
-            const tokenEnd = tokenStart + token.length;
-            searchOffset = match.index + token.length;
-
-            context.report({
-              node,
-              messageId: 'offScale',
-              data: { token, fix },
-              fix: (fixer) =>
-                fixer.replaceTextRange([tokenStart, tokenEnd], fix),
-            });
-          } else {
-            context.report({
-              node,
-              messageId: 'offScale',
-              data: { token, fix },
-            });
-          }
-        }
+        const arbMatch =
+          /^text-\[(?:length:)?([\d.]+(?:px|rem))\](\/\S+)?$/.exec(name);
+        if (!arbMatch) continue;
+        const [, size, lineHeight = ''] = arbMatch;
+        const isRem = size.endsWith('rem');
+        const named = (isRem ? REM_TO_NAMED : ARBITRARY_PIXELS_TO_NAMED)[size];
+        if (!named && !isRem) continue;
+        context.report({
+          node,
+          messageId: isRem ? 'rem' : 'offScale',
+          data: {
+            token,
+            fix: named
+              ? `"${prefix + named + lineHeight + suffix}"`
+              : 'the nearest text-xs … text-4xl class',
+          },
+        });
       }
     };
 

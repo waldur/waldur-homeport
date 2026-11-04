@@ -6,6 +6,6 @@
 
   > .card {
     margin-bottom: 0;
-    min-width: $spacer * 30; // Prevents columns from collapsing below a readable width
+    min-width: 30rem; // Prevents columns from collapsing below a readable width
   }
 }

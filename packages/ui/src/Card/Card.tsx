@@ -95,8 +95,10 @@ export function CardTitle({
       className={cn(
         'my-[0.5rem] mr-[0.5rem] ml-0 flex items-center leading-[1.2] text-primary',
         size === 'lg'
-          ? 'text-[1.385rem] font-semibold'
-          : 'text-[1.275rem] font-medium',
+          ? // eslint-disable-next-line waldur-custom/require-font-size-scale -- matches Metronic's rem .card-title until the card step moves both to the scale
+            'text-[1.385rem] font-semibold'
+          : // eslint-disable-next-line waldur-custom/require-font-size-scale -- as above
+            'text-[1.275rem] font-medium',
         className,
       )}
       {...props}
@@ -112,6 +114,7 @@ export function CardDescription({
 }: HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
+      // eslint-disable-next-line waldur-custom/require-font-size-scale -- matches Metronic's rem card text until the card step moves it to the scale
       className={cn('m-0 text-[1rem] text-quaternary', className)}
       {...props}
     />

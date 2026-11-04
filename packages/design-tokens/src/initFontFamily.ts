@@ -9,12 +9,8 @@
  * default, or both in sequence) and stay the single source of truth for
  * that.
  *
- * Doesn't port --font-size-adjust (afterBootstrap.tsx's other
- * font-related variable) — that one only compensates Metronic's own
- * 13px-root-based heading sizes for fonts like "Maven Pro" that render
- * visually larger at the same px size
- * (the former Metronic layout _base.scss); nothing outside Metronic
- * consumes it, so there's nothing for it to do here.
+ * The font's glyph size needs no per-font setting: font-size-adjust in
+ * primitives/typography.css matches every font's x-height to Inter's.
  */
 export function initFontFamily(
   fontFamily: string,

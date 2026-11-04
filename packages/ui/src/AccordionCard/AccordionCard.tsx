@@ -68,11 +68,11 @@ export const AccordionCard: FC<AccordionCardProps> = (props) => {
       >
         <div
           className={cn(
-            'flex flex-nowrap items-center justify-between text-[length:14px] font-bold text-[color:var(--card-header-text)]',
+            'flex flex-nowrap items-center justify-between text-sm font-bold text-[color:var(--card-header-text)]',
             'mx-[1.85rem] min-h-[70px] pt-[1.85rem] pb-[1.23rem]',
             open && 'border-b border-solid border-secondary',
             props.solid &&
-              'mx-0 min-h-[48px] bg-[var(--card-header-solid-bg)] px-[1.85rem] text-[length:1.077rem] text-[color:var(--card-title-text)]',
+              'mx-0 min-h-[48px] bg-[var(--card-header-solid-bg)] px-[1.85rem] text-[color:var(--card-title-text)]',
             props.secondary &&
               'mx-[1.23rem] min-h-[42px] pt-[calc(0.923rem-1px)] pb-[calc(0.615rem-1px)]',
             props.size === 'sm' && 'mx-[1.23rem] min-h-[36px] p-0',
@@ -85,18 +85,18 @@ export const AccordionCard: FC<AccordionCardProps> = (props) => {
           <CollapsibleTrigger className="grow border-0 bg-transparent p-0 text-start text-inherit">
             <span
               className={cn(
-                'block text-[length:1.25rem] leading-[1.2] font-semibold text-[color:var(--card-title-text)]',
+                'block text-base leading-[1.2] font-semibold text-[color:var(--card-title-text)]',
                 // leading after the size: tailwind-merge drops an earlier
                 // leading-* when a later text-* size overrides the font size.
                 props.secondary &&
-                  'text-[length:1.077rem] leading-[1.2] text-[color:var(--card-title-secondary-text)]',
+                  'text-sm leading-[1.2] text-[color:var(--card-title-secondary-text)]',
                 props.titleClassName,
               )}
             >
               {props.title}
             </span>
             {props.subtitle && (
-              <small className="mt-[0.5rem] block text-[length:1.077rem] font-normal text-quaternary">
+              <small className="mt-[0.5rem] block text-sm font-normal text-quaternary">
                 {props.subtitle}
               </small>
             )}

@@ -181,7 +181,7 @@ export const DrawerRoot: FunctionComponent = () => {
                 </h3>
               </Dialog.Title>
               {drawerProps.subtitle && (
-                <h6 className="-mt-[3px] mb-0 text-[1.077rem] leading-[1.2] font-medium text-quaternary">
+                <h6 className="-mt-[3px] mb-0 text-sm leading-[1.2] font-medium text-quaternary">
                   {drawerProps.subtitle}
                 </h6>
               )}
