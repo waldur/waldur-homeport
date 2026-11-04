@@ -1,5 +1,8 @@
 import { User } from 'waldur-js-client';
 
+import { PermissionEnum } from './enums';
+import { hasPermission } from './hasPermission';
+
 export const canAccessProjectDashboard = (
   user: User | null | undefined,
   projectUuid: string,
@@ -29,5 +32,11 @@ export const canAccessProjectDashboard = (
     return true;
   }
 
-  return false;
+  return Boolean(
+    hasPermission(user, {
+      permission: PermissionEnum.LIST_PROJECTS,
+      projectId: projectUuid,
+      customerId: customerUuid,
+    }),
+  );
 };

@@ -3,7 +3,7 @@ import { projectsRetrieve } from 'waldur-js-client';
 
 import { queryClient } from '@/core/queryClient';
 import { getCustomer } from '@/customer/utils';
-import { goToNotFound } from '@/error/utils';
+import { getErrorStatus, goToNotFound } from '@/error/utils';
 import { translate } from '@/i18n';
 import {
   fetchProjectMatrixRooms,
@@ -68,13 +68,19 @@ export function loadProject(transition: Transition) {
           'user_email_patterns',
           'user_affiliations',
           'user_identity_sources',
-        ]),
+        ]).catch((error) => {
+          const status = getErrorStatus(error);
+          if (status === 403 || status === 404) {
+            return null;
+          }
+          throw error;
+        }),
         primeProjectMatrixRooms(project.data.uuid),
       ]);
       store.dispatch(setCurrentCustomer(customer));
       store.dispatch(setCurrentProject(project.data));
     } catch (error) {
-      if (error.response?.status === 404) {
+      if (getErrorStatus(error) === 404) {
         goToNotFound();
       }
     }

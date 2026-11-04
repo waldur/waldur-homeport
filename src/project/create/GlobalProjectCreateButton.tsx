@@ -6,9 +6,9 @@ import { BaseButton } from 'waldur-ui';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
 import { useModal } from '@/modal/actions';
-import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
+
+import { canOfferProjectCreate } from '../canOfferProjectCreate';
 
 const ProjectCreateDialog = lazyComponent(() =>
   import('./ProjectCreateDialog').then((module) => ({
@@ -19,19 +19,7 @@ const ProjectCreateDialog = lazyComponent(() =>
 export const GlobalProjectCreateButton: FC<{ refetch }> = ({ refetch }) => {
   const user = useUser();
   const { openDialog } = useModal();
-  if (!user) return null;
-  const disabled =
-    !user.is_staff &&
-    user.permissions
-      .filter((perm) => perm.scope_type === 'customer')
-      .every(
-        (perm) =>
-          !hasPermission(user, {
-            permission: PermissionEnum.CREATE_PROJECT,
-            customerId: perm.scope_uuid,
-          }),
-      );
-  if (disabled) {
+  if (!canOfferProjectCreate(user)) {
     return null;
   }
   return (
