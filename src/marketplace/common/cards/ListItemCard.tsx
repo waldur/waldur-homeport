@@ -5,6 +5,7 @@ import { Tooltip } from 'waldur-ui';
 
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { htmlToPlainText } from '@/core/sanitize';
 import { getAbbreviation } from '@/core/utils';
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
 import { CardRequestAccessButton } from '@/marketplace/offerings/access/CardRequestAccessButton';
@@ -66,7 +67,7 @@ export const ListItemCard: FC<OfferingCardVariantProps> = ({
             {/* Description */}
             {offering.description && (
               <div className="text-quaternary ellipsis-lines-2 text-sm">
-                {offering.description}
+                {htmlToPlainText(offering.description)}
               </div>
             )}
           </div>
