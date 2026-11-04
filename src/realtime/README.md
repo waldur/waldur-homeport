@@ -61,8 +61,14 @@ behavior.
 Explicit logout deletes the consumers this session registered (bounded,
 best-effort, before the auth token is invalidated) — the backend removes their
 RabbitMQ queues and users immediately, so the deleted token stops being a
-valid broker credential. Sessions that end via an expired token (the 401 path)
-cannot clean up and rely on the daily stale sweep, as before.
+valid broker credential.
+
+A tab that is closed, or whose token expires (the 401 path), cannot clean up.
+For those the consumer is registered with `ephemeral: true`, and the backend's
+hourly `delete_idle_ephemeral_event_consumers` task deletes it, with its queue,
+once the queue has had no reader for `EVENT_CONSUMER_EPHEMERAL_IDLE_HOURS`
+(24 h by default), or at once when the owner has no active token. A tab that
+comes back registers again and gets a fresh consumer.
 
 ## Known PoC limitations
 

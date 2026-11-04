@@ -25,7 +25,6 @@ export const RequestEndDateChangePendingDialog: FC<Props> = ({
     mutationFn: () =>
       marketplaceResourceEndDateChangeRequestsCancel({
         path: { uuid: request.uuid },
-        body: {} as any,
       }),
     successMessage: translate('End date change request has been canceled.'),
     errorMessage: translate('Unable to cancel end date change request.'),

@@ -1,6 +1,44 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { eventConsumersRegister } from 'waldur-js-client';
 
-import { bindingSetKey } from './useRealtimeConnection';
+import {
+  bindingSetKey,
+  connectHeadersFor,
+  register,
+} from './useRealtimeConnection';
+
+// waldur-js-client is mocked globally in test/setupTests.js, and nothing
+// resets it between tests, so clear what these tests record on it.
+afterEach(() => {
+  vi.mocked(eventConsumersRegister).mockClear();
+});
+
+describe('connectHeadersFor', () => {
+  it('takes user and vhost from the registration, not a previous one', () => {
+    const headers = connectHeadersFor({
+      rmq_username: 'fresh-user',
+      vhost: 'fresh-vhost',
+      queue_name: 'consumer_fresh',
+      observable_object_types: [],
+    });
+    expect(headers).toMatchObject({ login: 'fresh-user', host: 'fresh-vhost' });
+  });
+});
+
+describe('register', () => {
+  it('registers an ephemeral consumer, so a closed tab is cleaned up', async () => {
+    vi.mocked(eventConsumersRegister).mockResolvedValueOnce({
+      data: { queue_name: 'consumer_abc' },
+    } as Awaited<ReturnType<typeof eventConsumersRegister>>);
+    const scopes = [{ type: 'user', uuid: 'u1' }];
+
+    await register(scopes);
+
+    expect(eventConsumersRegister).toHaveBeenCalledWith({
+      body: expect.objectContaining({ scopes, ephemeral: true }),
+    });
+  });
+});
 
 describe('bindingSetKey', () => {
   const self = { type: 'user', uuid: 'u1' };

@@ -41,12 +41,17 @@ const registeredConsumerUuids = new Set<string>();
 // Idempotent per binding set server-side; the 200 fast path also refreshes the
 // RabbitMQ password to the caller's current token — which is why this doubles
 // as the recovery call after a STOMP auth failure.
-const register = async (scopes: Scope[]) => {
+//
+// `ephemeral` lets the backend delete the consumer once its queue has had no
+// reader for a while: a tab that is closed instead of logged out of never
+// reaches teardownRealtimeConsumers below. Exported for tests.
+export const register = async (scopes: Scope[]) => {
   try {
     const response = await eventConsumersRegister({
       body: {
         object_types: OBJECT_TYPES,
         scopes,
+        ephemeral: true,
       },
     });
     registeredConsumerUuids.add(
@@ -57,6 +62,18 @@ const register = async (scopes: Scope[]) => {
     return null;
   }
 };
+
+type Registration = Awaited<ReturnType<typeof register>>;
+
+// STOMP CONNECT headers for a registration. Rebuilt in full after every
+// re-registration: when the backend has swept the consumer (idle ephemeral
+// consumer, owner without an active token), register() returns a NEW consumer
+// with its own RabbitMQ user, vhost and queue, not just a new password.
+export const connectHeadersFor = (registration: NonNullable<Registration>) => ({
+  login: registration.rmq_username,
+  passcode: AuthTokenStorage.get(),
+  host: registration.vhost,
+});
 
 // Best-effort deletion of this session's consumers. Called on explicit logout
 // (while still authenticated): the backend pre_delete handler removes the
@@ -172,11 +189,7 @@ export const useRealtimeConnection = () => {
       }
       client = new Client({
         brokerURL: getBrokerUrl(),
-        connectHeaders: {
-          login: registration.rmq_username,
-          passcode: AuthTokenStorage.get(),
-          host: registration.vhost,
-        },
+        connectHeaders: connectHeadersFor(registration),
         reconnectDelay: 5000,
         heartbeatIncoming: 10000,
         heartbeatOutgoing: 10000,
@@ -198,15 +211,16 @@ export const useRealtimeConnection = () => {
           );
         },
         onStompError: () => {
-          // Most likely a rotated DRF token: the RMQ password is the token,
-          // so re-register (refreshes the password server-side) and update
-          // the passcode before the client's automatic reconnect.
-          register(activeScopes).then(() => {
-            if (!abort.signal.aborted && client) {
-              client.connectHeaders = {
-                ...client.connectHeaders,
-                passcode: AuthTokenStorage.get(),
-              };
+          // Either a rotated DRF token (the RMQ password is the token) or a
+          // consumer the backend has deleted. Re-registering covers both: it
+          // refreshes the password, or creates a new consumer. Adopt whatever
+          // it returns (user, vhost and queue, not just the passcode) before
+          // the client's automatic reconnect; onConnect reads `registration`
+          // at subscribe time, so it attaches to the new queue.
+          register(activeScopes).then((fresh) => {
+            if (!abort.signal.aborted && client && fresh) {
+              registration = fresh;
+              client.connectHeaders = connectHeadersFor(fresh);
             }
           });
         },
