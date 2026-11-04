@@ -1,6 +1,8 @@
 import { AskUserFormBlock } from '@/ai-assistant/components/blocks/AskUserFormBlock';
+import { ChartBlock } from '@/ai-assistant/components/blocks/ChartBlock';
 import { CodeBlock } from '@/ai-assistant/components/blocks/CodeBlock';
 import { HomePortNavBlock } from '@/ai-assistant/components/blocks/HomePortNavBlock';
+import { HpcJobBlock } from '@/ai-assistant/components/blocks/HpcJobBlock';
 import { MarkdownBlock } from '@/ai-assistant/components/blocks/MarkdownBlock';
 import { ResourceListBlock } from '@/ai-assistant/components/blocks/ResourceListBlock';
 import { ToolLoadingBlock } from '@/ai-assistant/components/blocks/ToolLoadingBlock';
@@ -41,6 +43,16 @@ uiRegistry.register({
 uiRegistry.register({
   key: 'vm_order',
   component: VMOrderBlock,
+});
+
+uiRegistry.register({
+  key: 'hpc_job',
+  component: HpcJobBlock,
+});
+
+uiRegistry.register({
+  key: 'chart',
+  component: ChartBlock,
 });
 
 uiRegistry.register({

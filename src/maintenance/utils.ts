@@ -102,10 +102,11 @@ export const getMaintenanceOfferings = (
 };
 
 export const getMaintenanceOfferingFormFields = (
-  affectedOfferings: Pick<
+  affectedOfferings: (Pick<
     MaintenanceAnnouncementOffering,
     'offering' | 'impact_level' | 'impact_description'
-  >[],
+  > &
+    Partial<Pick<MaintenanceAnnouncementOffering, 'affected_partitions'>>)[],
 ) => ({
   affected_offerings: affectedOfferings,
   impact_description: affectedOfferings.reduce((acc, item) => {
@@ -116,4 +117,15 @@ export const getMaintenanceOfferingFormFields = (
     acc[getUUID(item.offering)] = String(item.impact_level);
     return acc;
   }, {}),
+  affected_partitions: affectedOfferings.reduce((acc, item) => {
+    acc[getUUID(item.offering)] = (item.affected_partitions ?? []).join(', ');
+    return acc;
+  }, {}),
 });
+
+/** "batch, gpu" -> ["batch", "gpu"]; blank means the whole cluster. */
+export const parsePartitions = (value?: string): string[] =>
+  (value ?? '')
+    .split(/[\s,]+/)
+    .map((name) => name.trim())
+    .filter(Boolean);

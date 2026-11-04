@@ -51,3 +51,37 @@ describe('getResourceTabs: metrics', () => {
     expect(tabKeys({}, {}, 0)).not.toContain('metrics');
   });
 });
+
+describe('getResourceTabs: HPC workspace', () => {
+  const hpcTabKeys = (hpcFirecrest: boolean) =>
+    getResourceTabs({
+      resource: { uuid: 'res-1' } as any,
+      offering: { uuid: 'off-1' } as any,
+      scope: null,
+      lexisLinksCount: 0,
+      robotAccountsCount: 0,
+      hpcWorkspace: true,
+      hpcFirecrest,
+      isStaff: false,
+    })
+      .map((tab) => tab.key)
+      .filter((key) => key.startsWith('hpc-'));
+
+  it('offers every view on FirecREST', () => {
+    expect(hpcTabKeys(true)).toEqual([
+      'hpc-jobs',
+      'hpc-files',
+      'hpc-insights',
+      'hpc-cluster',
+      'hpc-software',
+    ]);
+  });
+
+  it('leaves out files and the cluster with a cluster monitor only', () => {
+    expect(hpcTabKeys(false)).toEqual([
+      'hpc-jobs',
+      'hpc-insights',
+      'hpc-software',
+    ]);
+  });
+});

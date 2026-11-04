@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { marketplaceProviderOfferingsList } from 'waldur-js-client';
 
 import { getUUID } from '@/core/utils';
-import { SelectField, TextField } from '@/form';
+import { SelectField, StringField, TextField } from '@/form';
 import { translate } from '@/i18n';
 import { resetSelection, selectRow } from '@/table/actions';
 import { createFetcher } from '@/table/api';
@@ -51,6 +51,19 @@ const DescriptionField = ({ row }) => (
         placeholder={translate('Describe specific impact on this service...')}
         className="my-1"
         rows={2}
+      />
+    )}
+  </Field>
+);
+
+const PartitionsField = ({ row }) => (
+  <Field name={`affected_partitions.${row.uuid}`}>
+    {({ input, meta }) => (
+      <StringField
+        input={input}
+        meta={meta}
+        placeholder={translate('All partitions')}
+        className="my-1"
       />
     )}
   </Field>
@@ -133,6 +146,11 @@ export const Step2SelectOfferings: FC<WizardStepProps> = (props) => {
           {
             title: translate('Description'),
             render: DescriptionField,
+          },
+          {
+            title: translate('Affected partitions'),
+            render: PartitionsField,
+            className: 'align-top',
           },
         ]}
         verboseName={translate('Offerings')}

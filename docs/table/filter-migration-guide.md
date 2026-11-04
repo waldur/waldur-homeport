@@ -144,6 +144,7 @@ You can customize almost every aspect of the generated filters.
 | `labelField` | Field to show in UI. | `labelField: "name"` |
 | `mapTo` | Map a renamed filter back to a specific API param. | `mapTo: "organization_group_uuid"` |
 | `options` | Hardcoded options for Select. | `options: [{ label: "Yes", value: true }]` |
+| `keepOrder` | Emit enum options in the order listed (`enumOverrides`/`options`) instead of sorted by value, for scales such as time periods. | `keepOrder: true` |
 
 ### Example Configuration
 

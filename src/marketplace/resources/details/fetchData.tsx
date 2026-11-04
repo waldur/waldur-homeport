@@ -27,6 +27,7 @@ import {
   findResourcePlan,
   resolvePlanComponents,
 } from '@/marketplace/details/plan/effectiveComponents';
+import { getHpcWorkspaceMode } from '@/marketplace/resources/details/hpc/queries';
 import { isInferenceServiceEnabled } from '@/marketplace/resources/inference';
 import { shouldShowLimitChangeRequestsTab } from '@/marketplace/resources/request-limits-change/utils';
 import { PageBarTab } from '@/navigation/types';
@@ -49,6 +50,8 @@ export const getResourceTabs = ({
   lexisLinksCount,
   robotAccountsCount,
   metricsCount = 0,
+  hpcWorkspace = false,
+  hpcFirecrest = true,
   isStaff,
   isSupport,
   isRPOnly = false,
@@ -63,6 +66,9 @@ export const getResourceTabs = ({
   lexisLinksCount;
   robotAccountsCount;
   metricsCount?: number;
+  hpcWorkspace?: boolean;
+  /** The HPC workspace runs jobs and opens files through FirecREST. */
+  hpcFirecrest?: boolean;
   isStaff: boolean;
   isSupport?: boolean;
   isRPOnly?: boolean;
@@ -150,6 +156,62 @@ export const getResourceTabs = ({
         ),
       });
     }
+  }
+
+  // A SLURM allocation, one top-level tab per view. The keys are what ?tab=
+  // deep links (e.g. from the assistant) point at. Without FirecREST (a
+  // cluster monitor only) the workspace is read-only: no files, and the
+  // cluster's live state is FirecREST's.
+  if (hpcWorkspace) {
+    tabs.push({
+      key: 'hpc-jobs',
+      title: translate('Jobs'),
+      component: lazyComponent(() =>
+        import('./hpc/HpcJobsTab').then((module) => ({
+          default: module.HpcJobsTab,
+        })),
+      ),
+    });
+    if (hpcFirecrest) {
+      tabs.push({
+        key: 'hpc-files',
+        title: translate('Files'),
+        component: lazyComponent(() =>
+          import('./hpc/HpcFilesTab').then((module) => ({
+            default: module.HpcFilesTab,
+          })),
+        ),
+      });
+    }
+    tabs.push({
+      key: 'hpc-insights',
+      title: translate('Insights'),
+      component: lazyComponent(() =>
+        import('./hpc/HpcInsightsTab').then((module) => ({
+          default: module.HpcInsightsTab,
+        })),
+      ),
+    });
+    if (hpcFirecrest) {
+      tabs.push({
+        key: 'hpc-cluster',
+        title: translate('Cluster'),
+        component: lazyComponent(() =>
+          import('./hpc/HpcClusterTab').then((module) => ({
+            default: module.HpcClusterTab,
+          })),
+        ),
+      });
+    }
+    tabs.push({
+      key: 'hpc-software',
+      title: translate('Software'),
+      component: lazyComponent(() =>
+        import('./hpc/HpcSoftwareTab').then((module) => ({
+          default: module.HpcSoftwareTab,
+        })),
+      ),
+    });
   }
 
   if (isInferenceServiceEnabled(resource)) {
@@ -535,6 +597,11 @@ export const fetchData = async (resource: Resource) => {
       .catch(() => 0);
   }
 
+  const hpcMode = await getHpcWorkspaceMode(
+    resource.uuid,
+    offering.plugin_options,
+  );
+
   // The requester is not an approver, so the tab is otherwise invisible to
   // them and they cannot tell what became of what they asked for. The list
   // endpoint already scopes rows to own-or-decidable, so counting without a
@@ -553,6 +620,9 @@ export const fetchData = async (resource: Resource) => {
     lexisLinksCount,
     robotAccountsCount,
     metricsCount,
+    hpcWorkspace: Boolean(hpcMode),
+    hpcFirecrest: Boolean(hpcMode?.firecrest),
+    hpcMode,
     endDateChangeRequestsCount,
   };
 };

@@ -371,6 +371,13 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
               'When enabled, allows configuring QoS-based threshold enforcement, carryover logic, and fairshare decay for site-agent managed SLURM offerings.',
             )}
           />
+          <BooleanEditField
+            name="plugin_options.slurm_maintenance_sync_enabled"
+            label={translate('Sync maintenance with SLURM reservations')}
+            description={translate(
+              'When enabled, the site agent turns published maintenance announcements for this offering into SLURM maintenance reservations, so the scheduler holds back jobs that would run into them: a full outage reserves all nodes, a partial outage the partitions it names. Maintenance reservations made on the cluster come back as draft announcements to review.',
+            )}
+          />
         </TabbedSection.Tab>
 
         <TabbedSection.Tab id="provisioning" title={translate('Provisioning')}>

@@ -1351,3 +1351,18 @@ overrides:
       name: created_by
       operationId: users_list
       searchParam: full_name
+
+  hpc_workspaces_jobs:
+    filters:
+      - time_window
+    time_window:
+      label: Time period
+      # Lists every value, shortest first: enumOverrides replaces the options
+      # and keepOrder keeps this order instead of sorting by value.
+      keepOrder: true
+      enumOverrides:
+        1h: Last hour
+        8h: Last 8 hours
+        24h: Last 24 hours
+        3d: Last 3 days
+        7d: Last 7 days

@@ -16,10 +16,15 @@ interface ChartProps {
   exportExcel?: boolean;
   exportPng?: boolean;
   exportTitle?: string;
+  /** Called with ECharts' event params when a chart element is clicked. */
+  onClick?: (params: any) => void;
 }
 
 export const EChart = React.forwardRef<any, ChartProps>(
-  ({ width = '100%', height = '100%', options, className, ...props }, ref) => {
+  (
+    { width = '100%', height = '100%', options, className, onClick, ...props },
+    ref,
+  ) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const chartRef = useRef<any>(null);
     const resizeObserverRef = useRef<ResizeObserver | null>(null);
@@ -29,6 +34,10 @@ export const EChart = React.forwardRef<any, ChartProps>(
     const [loading, setLoading] = useState(false);
     const { theme } = useTheme();
     const previousThemeRef = useRef(theme);
+    // The latest handler, so the listener bound at init never goes stale.
+    const onClickRef = useRef(onClick);
+    onClickRef.current = onClick;
+
     // The live ECharts instance, also in state: a theme switch disposes it and
     // creates another inside an async import, after the last render, so the
     // forwarded ref and EChartActions must re-render to see the new one.
@@ -38,6 +47,8 @@ export const EChart = React.forwardRef<any, ChartProps>(
     const attach = (chart) => {
       chartRef.current = chart;
       setInstance(chart);
+      chart.off('click');
+      chart.on('click', (params) => onClickRef.current?.(params));
     };
 
     React.useImperativeHandle(ref, () => instance, [instance]);

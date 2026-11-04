@@ -55,3 +55,23 @@ export const Row: Story = {
     </div>
   ),
 };
+
+/** The compact tile, for dense grids such as a job's figures. */
+export const Small: Story = {
+  render: () => (
+    <div className="grid grid-cols-6 gap-4">
+      <StatCard size="sm" label="Completed" value={22} />
+      <StatCard size="sm" label="Failed" value={8} />
+      <StatCard size="sm" label="Timed out" value={2} />
+      <StatCard
+        size="sm"
+        label="Idle share"
+        value="41%"
+        hint="Samples with every GPU under 5%"
+        className="border-warning"
+      />
+      <StatCard size="sm" label="Running / pending" value="1 / 3" />
+      <StatCard size="sm" label="CPU-hours" value="1,798" />
+    </div>
+  ),
+};

@@ -1,4 +1,4 @@
-import { ChatResponse } from 'waldur-js-client';
+import { ChartSpec, ChatResponse } from 'waldur-js-client';
 
 import { UIBlock } from '@/ai-assistant/lib/types';
 import { randomUUID } from '@/core/utils';
@@ -128,6 +128,19 @@ export function updateBlocks(
     ];
   }
 
+  // Handle hpc_job data — batch job preview, validation errors or submission
+  // Backend sends: {"k":"hpc_job","status":"preview"|"error"|"submitted",
+  // "name":...,"allocation":...,"script":...,"errors":[],"job_id":...}
+  if (part.k === 'hpc_job') {
+    return updateHpcJobBlock(existingBlocks, part as HpcJobPart);
+  }
+
+  // Handle chart data — a chart spec from an insight tool, complete in one part
+  // Backend sends: {"k":"chart","chart_type":...,"title":...,"series":[...]}
+  if (part.k === 'chart') {
+    return [...existingBlocks, chartBlock(part as ChartPart)];
+  }
+
   // Handle ask_user_form data — interactive clarifying-question form
   // emitted by the universal ``ask_user`` meta-tool.
   if (part.k === 'ask_user_form') {
@@ -231,4 +244,106 @@ export function markBlocksComplete(blocks: UIBlock[]): UIBlock[] {
     ...block,
     status: 'complete' as const,
   }));
+}
+
+/** The hpc_job stream part; the SDK's ChatResponse types only vm_order fields. */
+type HpcJobPart = ChatResponse & {
+  allocation?: string;
+  allocation_uuid?: string;
+  account?: string;
+  cluster?: string;
+  partition?: string;
+  script?: string;
+  errors?: string[];
+  warnings?: string[];
+  job_id?: string;
+};
+
+const HPC_JOB_FIELDS = [
+  'name',
+  'allocation',
+  'allocation_uuid',
+  'account',
+  'cluster',
+  'partition',
+  'script',
+  'errors',
+  'warnings',
+  'job_id',
+] as const;
+
+/**
+ * Builds or updates an hpc_job block. The wire `status` is the card's state
+ * and is kept as `job_status` (the persisted block schema's name for it),
+ * since `status` on a block is its streaming lifecycle.
+ */
+function updateHpcJobBlock(
+  existingBlocks: UIBlock[],
+  part: HpcJobPart,
+): UIBlock[] {
+  const fields: Partial<UIBlock> = {};
+  HPC_JOB_FIELDS.forEach((field) => {
+    if (part[field] !== undefined) {
+      (fields as Record<string, unknown>)[field] = part[field];
+    }
+  });
+  if (part.status !== undefined) {
+    fields.job_status = part.status;
+  }
+
+  const lastBlock = existingBlocks[existingBlocks.length - 1];
+  if (lastBlock?.key === 'hpc_job') {
+    return [
+      ...existingBlocks.slice(0, -1),
+      {
+        ...lastBlock,
+        ...fields,
+        content: part.content ?? lastBlock.content ?? '',
+        status: 'streaming',
+      },
+    ];
+  }
+
+  return [
+    ...existingBlocks,
+    {
+      id: randomUUID(),
+      key: 'hpc_job',
+      content: part.content ?? '',
+      ...fields,
+      status: 'streaming',
+    },
+  ];
+}
+
+/** The chart stream part: a chart spec under the stream's `k`. */
+type ChartPart = ChatResponse & Partial<ChartSpec>;
+
+const CHART_FIELDS = [
+  'chart_type',
+  'title',
+  'subtitle',
+  'x',
+  'y',
+  'y2',
+  'series',
+  'annotations',
+  'link',
+  'empty_message',
+] as const;
+
+/** A chart block carries the spec's fields flat, as the backend persists it. */
+function chartBlock(part: ChartPart): UIBlock {
+  const block: UIBlock = {
+    id: randomUUID(),
+    key: 'chart',
+    content: '',
+    status: 'complete',
+  };
+  CHART_FIELDS.forEach((field) => {
+    if (part[field] !== undefined) {
+      (block as unknown as Record<string, unknown>)[field] = part[field];
+    }
+  });
+  return block;
 }

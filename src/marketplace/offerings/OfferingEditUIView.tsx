@@ -20,6 +20,7 @@ import {
   getUserManagementSection,
 } from '../common/registry';
 
+import { isAdvancedIntegrationVisible } from './update/integration/advancedIntegration';
 import { offeringOwnsPricing } from './utils';
 
 const OverviewSection = lazyComponent(() =>
@@ -165,8 +166,7 @@ const buildIntegrationTab = (offering: Offering): PageBarTab => {
         component: UserManagementSection,
         title: translate('User management'),
       },
-      (offering.plugin_options?.service_provider_can_create_offering_user ||
-        isFeatureVisible(MarketplaceFeatures.lexis_links)) && {
+      isAdvancedIntegrationVisible(offering) && {
         key: 'advanced',
         component: AdvancedIntegrationSection,
         title: translate('Advanced'),

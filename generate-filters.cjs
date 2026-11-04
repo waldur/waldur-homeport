@@ -371,6 +371,8 @@ class FilterMapper {
         filter,
         overrides.valueType || schemaEnumName,
         opId,
+        // A scale (e.g. time periods) reads in its own order, not by value.
+        overrides.keepOrder ? JSON.stringify(options) : undefined,
       );
       filter.options = options;
     } else if (schema.type === 'boolean') {
@@ -386,7 +388,7 @@ class FilterMapper {
     }
   }
 
-  _registerEnum(key, name, filter, valueType, opId) {
+  _registerEnum(key, name, filter, valueType, opId, ordered) {
     if (this.enumReverseRegistry.has(key)) {
       filter.optionsPlaceholder = this.enumReverseRegistry.get(key);
     } else {
@@ -400,7 +402,7 @@ class FilterMapper {
           .replace(/(?:List|Retrieve|Create|Update|Delete)$/, '');
         uniqueName = prefix + name;
       }
-      this.enumRegistry.set(uniqueName, { options: key, valueType });
+      this.enumRegistry.set(uniqueName, { options: key, ordered, valueType });
       this.enumReverseRegistry.set(key, uniqueName);
       filter.optionsPlaceholder = uniqueName;
     }
@@ -812,7 +814,7 @@ ${filters.map(Generator.selector).join('')}  }
       .sort()
       .map((name) => {
         const entry = reg.get(name);
-        const opts = JSON.parse(entry.options);
+        const opts = JSON.parse(entry.ordered || entry.options);
         const json = JSON.stringify(opts, null, 2).replace(
           /"label":\s*"([^"]+)"/g,
           '"label": translate("$1")',

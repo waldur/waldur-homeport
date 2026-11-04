@@ -178,6 +178,11 @@
       }
     }
   },
+  "#!/bin/bash\n# The #SBATCH options appear here once the job has a name and commands.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "% Used": {},
   "% of limit": {
     "context": {
@@ -1603,7 +1608,7 @@
   "Account": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "accounts"
+      "feature_area": "hpc"
     }
   },
   "Account and access": {},
@@ -2658,10 +2663,20 @@
       "feature_area": "settings"
     }
   },
+  "Add software": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Add software catalog": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "software-catalogs"
+    }
+  },
+  "Add software...": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Add staff/provider-only information (not visible to customers)...": {
@@ -2704,6 +2719,7 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Add the commands to run after the setup lines.": {},
   "Add the resource figures up": {
     "context": {
       "primary_ui_type": "label"
@@ -3161,6 +3177,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "maintenance"
+    }
+  },
+  "Affected partitions": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "create"
     }
   },
   "Affected resource": {
@@ -3699,6 +3721,11 @@
       "feature_area": "reports"
     }
   },
+  "All of the job's nodes, as the cluster metered it.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "All offerings": {
     "context": {
       "primary_ui_type": "title",
@@ -3723,6 +3750,11 @@
   "All pages": {
     "context": {
       "feature_area": "table"
+    }
+  },
+  "All partitions": {
+    "context": {
+      "feature_area": "create"
     }
   },
   "All plans of this offering inherit this setting.": {
@@ -3992,6 +4024,11 @@
   "Allocation outcome": {
     "context": {
       "feature_area": "proposal"
+    }
+  },
+  "Allocation period": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Allocation pool": {
@@ -5057,6 +5094,7 @@
   },
   "Architecture": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "partitions"
     }
   },
@@ -8327,6 +8365,11 @@
       "feature_area": "course-accounts"
     }
   },
+  "Batch job": {
+    "context": {
+      "feature_area": "blocks"
+    }
+  },
   "Bearer token for outbound SCIM pull.": {},
   "Bearer · API key": {
     "context": {
@@ -8357,6 +8400,11 @@
   "Before removing organization, please make sure that all projects are removed.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Before the allocation ends": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Before you begin": {
@@ -9276,6 +9324,16 @@
       "feature_area": "partitions"
     }
   },
+  "CPU cores": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "CPU efficiency": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "CPU family": {
     "context": {
       "primary_ui_type": "title",
@@ -9290,12 +9348,34 @@
   },
   "CPU time": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "hpc"
+    }
+  },
+  "CPU time used out of CPUs × elapsed time.": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "CPU utilization": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "CPU-hours": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "CPUs": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
+    }
+  },
+  "CPUs per task": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "CSV": {
@@ -9718,6 +9798,22 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "invitations"
+    }
+  },
+  "Cancel job": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
+    }
+  },
+  "Cancel job {job}? Slurm stops it and its output so far stays on the cluster.": {
+    "context": {
+      "variables": {
+        "job": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "Cancel limit change request": {
@@ -11163,7 +11259,7 @@
   "Cluster": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "openstack-instances"
+      "feature_area": "details"
     }
   },
   "Cluster & runtime": {
@@ -11180,6 +11276,22 @@
   "Cluster Tenants": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Cluster load": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
+    }
+  },
+  "Cluster maintenance {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "Cluster name": {
@@ -11437,6 +11549,7 @@
   },
   "Command": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "policies"
     }
   },
@@ -12889,6 +13002,7 @@
   },
   "Content": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "agreements"
     }
   },
@@ -13695,6 +13809,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "issues"
+    }
+  },
+  "Coverage": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Covered by credit": {
@@ -15844,6 +15963,7 @@
     }
   },
   "Days to keep Matrix room history exports, files included, before they are deleted. Each room's newest completed export is kept regardless of age. Set to 0 or less to keep them forever.": {},
+  "Days without a sign-in after which Waldur deletes and revokes a user's stored identity provider refresh token. The user signs in again to use HPC services.": {},
   "Deactivate": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -16294,6 +16414,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "affiliations"
+    }
+  },
+  "Default time": {
+    "context": {
+      "primary_ui_type": "title"
     }
   },
   "Default time limit": {
@@ -17636,6 +17761,11 @@
       "feature_area": "chat"
     }
   },
+  "Discard this job script?": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Disclosure": {
     "context": {
       "primary_ui_type": "label",
@@ -18118,6 +18248,11 @@
   "Download report": {
     "context": {
       "feature_area": "changelog"
+    }
+  },
+  "Download report (PDF)": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Download template": {
@@ -19280,7 +19415,19 @@
       "feature_area": "openstack-tenant"
     }
   },
+  "Efficiency": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
+    }
+  },
   "Egress": {},
+  "Elapsed": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
+    }
+  },
   "Electrical engineering, electronic engineering, information engineering": {
     "context": {
       "primary_ui_type": "label"
@@ -20066,7 +20213,7 @@
   "Ended": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "proposals"
+      "feature_area": "hpc"
     }
   },
   "Ending": {
@@ -20128,6 +20275,11 @@
   "Ends with project": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Energy": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Enforced": {
@@ -21348,6 +21500,12 @@
       }
     }
   },
+  "Exit code": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
+    }
+  },
   "Exit fullscreen": {
     "context": {
       "feature_area": "call"
@@ -22551,6 +22709,11 @@
       "feature_area": "pubsub"
     }
   },
+  "Failures by exit code": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "FairFlow algorithm": {},
   "Fairshare": {
     "context": {
@@ -22762,6 +22925,11 @@
       "feature_area": "steps"
     }
   },
+  "Fewer cores": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Field": {
     "context": {
       "feature_area": "steps"
@@ -22833,6 +23001,11 @@
       "feature_area": "metadata"
     }
   },
+  "File content": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "File could not be uploaded.": {
     "context": {
       "feature_area": "marketplace-checklist"
@@ -22898,7 +23071,7 @@
   },
   "Files": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "single-import"
     }
   },
@@ -23201,6 +23374,27 @@
   },
   "Finished early": {},
   "Finland": {},
+  "FirecREST": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "FirecREST API URL": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "FirecREST API URLs that SLURM offerings may connect to, one per line or comma-separated. Waldur forwards a user's identity provider token only to these URLs; an offering pointing elsewhere has no HPC workspace. Append |audience (and optionally |client-scope) to an entry to send a token exchanged for that audience instead of the sign-in token, e.g. https://firecrest.example.org|firecrest.": {},
+  "FirecREST system name": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "FirecREST v2 API URL, e.g. https://firecrest.example.org. Leave empty to turn the HPC workspace off.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Fired on {date}": {
     "context": {
       "variables": {
@@ -23266,6 +23460,11 @@
   "Fix cost policy": {
     "context": {
       "feature_area": "cost-policies"
+    }
+  },
+  "Fix the errors shown above first.": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Fixed": {
@@ -23876,6 +24075,11 @@
       "feature_area": "consumption"
     }
   },
+  "From the cluster monitor": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "From the provider account": {
     "context": {
       "feature_area": "import-users"
@@ -24045,6 +24249,46 @@
   "GPU architecture (e.g., nvidia/cc90)": {
     "context": {
       "feature_area": "partitions"
+    }
+  },
+  "GPU memory": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "GPU power": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "GPU use": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "GPU {arch}": {
+    "context": {
+      "variables": {
+        "arch": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
+  "GPU-hours observed": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "GPUs": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "GPUs per node": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "GUID is expected.": {},
@@ -24670,6 +24914,11 @@
       "feature_area": "usage-views"
     }
   },
+  "Grouped by command; the probes record command names, not full command lines.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Groups": {
     "context": {
       "feature_area": "project-groups"
@@ -24797,6 +25046,17 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "cluster"
+    }
+  },
+  "HPC service unavailable": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "HPC workspace": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "HTML message": {},
@@ -25298,7 +25558,7 @@
   "Home directory": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "service-providers"
+      "feature_area": "hpc"
     }
   },
   "Home directory prefix": {
@@ -25368,6 +25628,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "hpas"
+    }
+  },
+  "Host memory": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Host routes": {
@@ -25464,6 +25729,7 @@
       "feature_area": "mappings"
     }
   },
+  "How long jobs waited to start, by partition.": {},
   "How long raw points and hourly and daily roll-ups are kept.": {
     "context": {
       "feature_area": "metrics"
@@ -25553,6 +25819,7 @@
   },
   "How users reach services. 'calls': only through calls for proposals, no marketplace navigation. 'marketplace': the marketplace is the single entry point; calls are reached through an offering and proposals are tracked in the user profile. 'both': marketplace and calls are browsable independently. Navigation only — the API serves the same data in every mode.": {},
   "How users sign in to an external Matrix client such as Element: 'none' (Waldur offers no external sign-in), 'password' (for testing and sites without an identity provider: users generate a password in Waldur; needs the Waldur bot to be a homeserver admin), or 'oidc' (single sign-on configured on the homeserver; use this in production). Switching away from 'password' revokes no generated password and signs out no external client; to refuse password logins, set login_with_password = false on the homeserver.": {},
+  "How well jobs fit their time limits and use the cores and memory they ask for.": {},
   "How would you like to sign in?": {
     "context": {
       "feature_area": "layouts"
@@ -25650,6 +25917,11 @@
     }
   },
   "I want to modify VM configuration. What can i change?": {
+    "context": {
+      "feature_area": "blocks"
+    }
+  },
+  "I want to modify the job. What can I change?": {
     "context": {
       "feature_area": "blocks"
     }
@@ -25954,9 +26226,19 @@
       "feature_area": "database-stats"
     }
   },
+  "Idle / total nodes": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Idle in transaction": {
     "context": {
       "feature_area": "database-stats"
+    }
+  },
+  "Idle share": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "If": {
@@ -26973,6 +27255,12 @@
   "Inside each offering — usage-based vs limit-based components": {
     "context": {
       "feature_area": "views"
+    }
+  },
+  "Insights": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "details"
     }
   },
   "Install Longhorn distributed storage": {
@@ -28144,6 +28432,38 @@
     }
   },
   "Japan": {},
+  "Job": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "Job ID": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "blocks"
+    }
+  },
+  "Job cancellation requested": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "hpc"
+    }
+  },
+  "Job name": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "Job output": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "Job performance (optional)": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Job position": {
     "context": {
       "primary_ui_type": "label",
@@ -28155,15 +28475,42 @@
       "feature_area": "charts"
     }
   },
+  "Job script": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Job title": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "support"
     }
   },
-  "Jobs": {},
+  "Job {id} submitted": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "id": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
+  "Jobs": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "details"
+    }
+  },
   "Jobs by project": {},
   "Jobs by user": {},
+  "Jobs of this allocation from the cluster. Click a job in a chart to see its output.": {},
+  "Jobs that finish far below their limit start sooner with a tighter one.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Join as {role} ({type})": {
     "context": {
       "variables": {
@@ -28250,6 +28597,11 @@
       "feature_area": "wizard"
     }
   },
+  "Keep editing": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Keep existing offering permissions when moving to a new organization": {
     "context": {
       "feature_area": "list"
@@ -28263,6 +28615,11 @@
   "Keep forever": {
     "context": {
       "feature_area": "openstack-backup"
+    }
+  },
+  "Keep running": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Keep the current names and edit them yourself.": {
@@ -28588,6 +28945,16 @@
       "primary_ui_type": "label"
     }
   },
+  "Last 24 hours": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Last 3 days": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Last 30 days": {
     "context": {
       "primary_ui_type": "label"
@@ -28599,6 +28966,11 @@
     }
   },
   "Last 7 days": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Last 8 hours": {
     "context": {
       "primary_ui_type": "label"
     }
@@ -28681,9 +29053,20 @@
       "feature_area": "configuration"
     }
   },
+  "Last hour": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Last lines": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Last modified": {
     "context": {
-      "feature_area": "review"
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
     }
   },
   "Last month drew": {
@@ -28808,6 +29191,11 @@
   "Last year": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Lasts the period": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Late start": {},
@@ -29805,6 +30193,11 @@
     }
   },
   "Lithuania": {},
+  "Live node state and upcoming reservations, as the cluster reports them.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Live tuples": {
     "context": {
       "feature_area": "database-stats"
@@ -30588,6 +30981,19 @@
         }
       },
       "feature_area": "actions"
+    }
+  },
+  "Maintenance: {name} ({impact})": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "impact": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "Major (+100%)": {
@@ -31433,6 +31839,16 @@
       "feature_area": "assignments"
     }
   },
+  "Max CPU %": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "Max CPUs per node": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Max TRES Minutes": {
     "context": {
       "primary_ui_type": "label"
@@ -31544,6 +31960,11 @@
       "feature_area": "steps"
     }
   },
+  "Max memory per node": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Max messages": {
     "context": {
       "primary_ui_type": "label",
@@ -31615,6 +32036,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "rabbitmq"
+    }
+  },
+  "Max time": {
+    "context": {
+      "primary_ui_type": "title"
     }
   },
   "Max time limit": {
@@ -31921,6 +32347,26 @@
       "primary_ui_type": "title"
     }
   },
+  "Mean CPU %": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "Mean over GPUs and samples": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "Mean per GPU": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "Mean, all nodes": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Measured in": {
     "context": {
       "feature_area": "details"
@@ -32080,6 +32526,11 @@
       "feature_area": "dashboard"
     }
   },
+  "Memory (MB)": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Memory GB Hour": {
     "context": {
       "primary_ui_type": "label"
@@ -32088,6 +32539,16 @@
   "Memory configuration (in MB)": {
     "context": {
       "feature_area": "partitions"
+    }
+  },
+  "Memory efficiency": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "Memory requested": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Memory settings": {
@@ -32843,7 +33304,11 @@
       "feature_area": "openstack"
     }
   },
-  "Modify": {},
+  "Modify": {
+    "context": {
+      "feature_area": "blocks"
+    }
+  },
   "Module": {
     "context": {
       "primary_ui_type": "title",
@@ -33520,6 +33985,16 @@
   "Name should consist of latin symbols and numbers.": {},
   "Name should consist of latin symbols, numbers and dashes.": {},
   "Name should contain at least 3 symbols.": {},
+  "Name the job: {reason}": {
+    "context": {
+      "variables": {
+        "reason": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
   "Name the set of roles this profile provides. After saving, add roles to it on the profile page; they become assignable on every offering bound to the profile.": {
     "context": {
       "feature_area": "profiles"
@@ -35100,6 +35575,11 @@
       "feature_area": "policy-watch"
     }
   },
+  "No limit set": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "No limits found for this order": {
     "context": {
       "feature_area": "details"
@@ -35380,6 +35860,11 @@
   "No other roles are available in this organization. Ask staff to reveal a concealed role or reactivate one.": {
     "context": {
       "feature_area": "team"
+    }
+  },
+  "No output yet.": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "No outputs found for this order": {
@@ -35905,6 +36390,11 @@
       "feature_area": "mass-actions"
     }
   },
+  "No software found": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "No special import options enabled": {
     "context": {
       "feature_area": "single-import"
@@ -36033,6 +36523,11 @@
   "No usage data available.": {
     "context": {
       "feature_area": "dashboard"
+    }
+  },
+  "No usage has been reported for this allocation yet.": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "No usage policy governs this resource.": {
@@ -36233,7 +36728,7 @@
   "Nodes": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "create"
+      "feature_area": "hpc"
     }
   },
   "Non-detachable and non-resizable boot disk": {
@@ -36451,6 +36946,11 @@
   "Not limited": {
     "context": {
       "feature_area": "type-based"
+    }
+  },
+  "Not live": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Not managed by this pool — sourced externally.": {
@@ -38341,6 +38841,11 @@
       "feature_area": "dashboard"
     }
   },
+  "Open jobs": {
+    "context": {
+      "feature_area": "blocks"
+    }
+  },
   "Open merge record": {
     "context": {
       "feature_area": "wizard"
@@ -38384,6 +38889,11 @@
   "Open support tickets": {
     "context": {
       "primary_ui_type": "title"
+    }
+  },
+  "Open-ended": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "OpenAI v1": {
@@ -38896,6 +39406,11 @@
   "Optional. Used by browser clients when the homeserver URL above is Docker-internal or otherwise unreachable from the browser.": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "Optional. When set, allocations of this offering get Jobs, Files, Insights, Cluster and Software tabs that work on the cluster as the signed-in user through FirecREST v2. The FirecREST URL must also be allowed by staff in Marketplace settings → HPC workspace, and users must sign in through the identity provider FirecREST trusts.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Optional. Without one, a deadline that has passed is cleared and one still ahead is kept.": {
@@ -40266,6 +40781,21 @@
       "feature_area": "partitions"
     }
   },
+  "Partition {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
+  "Partitions": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Partner Name": {
     "context": {
       "feature_area": "settings"
@@ -40383,6 +40913,11 @@
   "Patch deployment": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Path": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Path to Kubernetes configuration file": {},
@@ -40639,10 +41174,48 @@
       "feature_area": "credits"
     }
   },
+  "Peak RSS (GiB)": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "Peak memory": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "Peak memory out of the memory requested.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Peak month": {
     "context": {
       "primary_ui_type": "label",
       "feature_area": "usage-trends"
+    }
+  },
+  "Peak {peak} of {total} GiB": {
+    "context": {
+      "variables": {
+        "peak": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
+  "Peak; mean {mean} GiB": {
+    "context": {
+      "variables": {
+        "mean": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "Pending": {
@@ -40954,6 +41527,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "mass-actions"
+    }
+  },
+  "Performance": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
     }
   },
   "Performed": {
@@ -42218,6 +42797,12 @@
       "feature_area": "list"
     }
   },
+  "Plot": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
+    }
+  },
   "Plugin ID": {
     "context": {
       "primary_ui_type": "label",
@@ -43357,6 +43942,11 @@
   "Processed:": {
     "context": {
       "feature_area": "single-import"
+    }
+  },
+  "Processes": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Processing": {
@@ -45609,6 +46199,7 @@
   },
   "QoS": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "policies"
     }
   },
@@ -45796,6 +46387,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "rabbitmq"
+    }
+  },
+  "Queue wait": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Queued": {
@@ -46234,6 +46830,16 @@
       "feature_area": "settings"
     }
   },
+  "Real: {value} (allocated × elapsed)": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
   "Reallocate freed capacity": {
     "context": {
       "primary_ui_type": "label"
@@ -46339,6 +46945,11 @@
   "Recent command history": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "Recent pace": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Recently Added": {
@@ -46600,6 +47211,16 @@
   "Refresh is available when the room is active — no history exports can be produced in the current state.": {
     "context": {
       "feature_area": "manage"
+    }
+  },
+  "Refreshing every {seconds} seconds while jobs run.": {
+    "context": {
+      "variables": {
+        "seconds": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "Refreshing...": {
@@ -49332,6 +49953,17 @@
       "feature_area": "project-detail"
     }
   },
+  "Resource use": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
+    }
+  },
+  "Resource use is known once the job has run.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Resource will be terminated soon.": {
     "context": {
       "feature_area": "details"
@@ -51327,6 +51959,11 @@
       "feature_area": "celery"
     }
   },
+  "Running / pending": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Running Setup again generates new tokens and overwrites the existing ones, and chat stops working until the homeserver has the new registration. {command} replaces the old registration itself. If you register by hand, send {unregister} in the admin room first, then register the new YAML. On Synapse, replace the file and restart the homeserver.": {
     "context": {
       "variables": {
@@ -51349,6 +51986,11 @@
   "Runs application pods and services": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "Runs out": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Runtime state": {
@@ -51681,6 +52323,32 @@
   "Sample now": {
     "context": {
       "feature_area": "table-growth"
+    }
+  },
+  "Sampled every {seconds} s from {start} to {end}.": {
+    "context": {
+      "variables": {
+        "seconds": {
+          "type": "unknown"
+        },
+        "start": {
+          "type": "unknown"
+        },
+        "end": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
+  "Samples": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "Samples with every GPU under 5%": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Satisfaction": {},
@@ -52075,6 +52743,12 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "single-import"
+    }
+  },
+  "Script": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
     }
   },
   "Script for creation of a resource": {
@@ -54879,6 +55553,11 @@
       "feature_area": "create"
     }
   },
+  "Shorter time limit": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Shortly": {},
   "Shortname": {
     "context": {
@@ -55043,6 +55722,11 @@
   "Show example": {
     "context": {
       "feature_area": "administration"
+    }
+  },
+  "Show hidden": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Show identity bridge information in user profiles and admin views.": {
@@ -55399,6 +56083,11 @@
       "primary_ui_type": "submit_button",
       "feature_area": "valimo",
       "action_type": "create"
+    }
+  },
+  "Sign in again": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Sign in method": {
@@ -56228,6 +56917,18 @@
       "feature_area": "restrictions"
     }
   },
+  "Standard error": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
+    }
+  },
+  "Standard output": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
+    }
+  },
   "Standard — adds headings, links, quote": {
     "context": {
       "primary_ui_type": "label"
@@ -56344,7 +57045,7 @@
   "Started": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "matrix"
+      "feature_area": "hpc"
     }
   },
   "Started ≥ {months} {month} ago but spent less than {percent}% of their allocation — may not have got going yet.": {
@@ -56816,7 +57517,7 @@
   "Submit": {
     "context": {
       "primary_ui_type": "submit_button",
-      "feature_area": "payment-profiles",
+      "feature_area": "blocks",
       "action_type": "create"
     }
   },
@@ -56839,6 +57540,11 @@
       "action_type": "create"
     }
   },
+  "Submit job": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Submit report": {
     "context": {
       "primary_ui_type": "label",
@@ -56855,6 +57561,16 @@
       "primary_ui_type": "submit_button",
       "feature_area": "proposal",
       "action_type": "create"
+    }
+  },
+  "Submit the job": {
+    "context": {
+      "feature_area": "blocks"
+    }
+  },
+  "Submit this job to the cluster?": {
+    "context": {
+      "feature_area": "blocks"
     }
   },
   "Submit usage report": {
@@ -57496,6 +58212,11 @@
       "feature_area": "mappings"
     }
   },
+  "Sync maintenance with SLURM reservations": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Sync members": {
     "context": {
       "feature_area": "matrix"
@@ -58005,6 +58726,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "celery"
+    }
+  },
+  "Tasks per node": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Tasks written": {
@@ -58621,6 +59347,7 @@
       "feature_area": "project-groups"
     }
   },
+  "The HPC service could not be reached.": {},
   "The OAuth2/OIDC client ID registered with your identity provider.": {
     "context": {
       "feature_area": "steps"
@@ -58897,6 +59624,46 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "compliance"
+    }
+  },
+  "The cluster did not report resource use for this job.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "The cluster did not return the script.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "The cluster does not hold it yet, so jobs still running then may be stopped.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "The cluster does not report this partition.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "The cluster holds it: jobs that would run into it wait until it is over.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "The cluster reports this partition but the provider does not publish it in Waldur.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "The cluster's name in FirecREST's systems list.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "The cluster's name in slurm-monitor.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "The collaboration must carry one of these labels; a group is judged by the labels of its collaboration. Leave empty to match any.": {
@@ -59378,6 +60145,11 @@
       "feature_area": "metrics"
     }
   },
+  "The file is empty.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "The file is larger than 10 MB, the most a portal accepts. Export the call again without documents and attach them after the import.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -59497,6 +60269,11 @@
       "feature_area": "table"
     }
   },
+  "The grayed lines come from the form. Below them: setup lines ('module …', 'spack …', 'source …'), then the commands.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "The group currently has GID {gid}.": {
     "context": {
       "variables": {
@@ -59595,6 +60372,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "issue-templates"
+    }
+  },
+  "The job does not fit the cluster limits": {
+    "context": {
+      "feature_area": "blocks"
     }
   },
   "The judge's 1–5 rating of how well the assistant resolved the visitor's request, averaged over judged threads only.": {
@@ -61819,6 +62601,11 @@
       "feature_area": "cost-policies"
     }
   },
+  "This month and the last": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "This month's credit consumption": {
     "context": {
       "feature_area": "views"
@@ -62566,6 +63353,11 @@
       "feature_area": "pubsub"
     }
   },
+  "Time (min)": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Time Based": {
     "context": {
       "primary_ui_type": "label"
@@ -62576,6 +63368,16 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "list"
+    }
+  },
+  "Time limit": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
+  "Time limit used": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Time limits": {
@@ -62596,6 +63398,11 @@
   "Time zone": {
     "context": {
       "feature_area": "booking"
+    }
+  },
+  "Timed out": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Timeline": {
@@ -63840,6 +64647,11 @@
       "feature_area": "details"
     }
   },
+  "Type to search the cluster catalogs": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Type your answer here": {
     "context": {
       "feature_area": "organization-create"
@@ -64423,6 +65235,17 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "project"
+    }
+  },
+  "Unable to cancel the job: {reason}": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "reason": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "Unable to cancel the ticket draft.": {
@@ -65014,6 +65837,17 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "project-templates"
+    }
+  },
+  "Unable to create the report: {reason}": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "reason": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "Unable to create the support ticket.": {
@@ -66457,6 +67291,11 @@
       "feature_area": "actions"
     }
   },
+  "Unable to open file": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Unable to open the web shell.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -66479,6 +67318,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "projects"
+    }
+  },
+  "Unable to plot file": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Unable to post comment.": {
@@ -67640,6 +68484,17 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "marketplace-remote"
+    }
+  },
+  "Unable to submit the job: {reason}": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "reason": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "Unable to submit usage report.": {
@@ -69167,6 +70022,11 @@
       "feature_area": "reviewer"
     }
   },
+  "Unpublished": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Unpublishing your profile will hide it from call managers searching for reviewers. You will no longer appear in reviewer discovery searches and will not receive new review invitations. Your existing review assignments will not be affected.": {
     "context": {
       "feature_area": "reviewer"
@@ -70257,6 +71117,11 @@
       "feature_area": "offering-merges"
     }
   },
+  "Usage the cluster reported to Waldur, against the allocation limits.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Usage tracking": {
     "context": {
       "feature_area": "policies"
@@ -70493,6 +71358,7 @@
       "feature_area": "create"
     }
   },
+  "Use up to 128 letters, digits, dots, dashes and underscores, without spaces.": {},
   "Use user organization as customer name": {
     "context": {
       "feature_area": "auto-provisioning-rules"
@@ -70954,6 +71820,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "organizations"
+    }
+  },
+  "User name on cluster": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "User names shown for top {max} users by usage only. {count} more {user} not mapped.": {
@@ -72766,6 +73637,11 @@
       "feature_area": "database-stats"
     }
   },
+  "Wait for the batch script to update.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Waiting": {
     "context": {
       "primary_ui_type": "label",
@@ -73477,6 +74353,11 @@
       "feature_area": "manage"
     }
   },
+  "When enabled, the site agent turns published maintenance announcements for this offering into SLURM maintenance reservations, so the scheduler holds back jobs that would run into them: a full outage reserves all nodes, a partial outage the partitions it names. Maintenance reservations made on the cluster come back as draft announcements to review.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "When enabled, this offering's resources ignore the project grace period and are terminated on the project end date. Staff-only setting.": {
     "context": {
       "feature_area": "integration"
@@ -73943,6 +74824,11 @@
   "Workflow steps": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Working directory": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "Workload": {
@@ -75199,6 +76085,16 @@
       "feature_area": "views"
     }
   },
+  "account {account}": {
+    "context": {
+      "variables": {
+        "account": {
+          "type": "number"
+        }
+      },
+      "feature_area": "blocks"
+    }
+  },
   "accruals": {
     "context": {
       "feature_area": "affiliate-earnings"
@@ -75995,6 +76891,11 @@
       "feature_area": "confirmation-drawer"
     }
   },
+  "files": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "findings": {
     "context": {
       "feature_area": "hygiene"
@@ -76150,6 +77051,11 @@
       "feature_area": "about"
     }
   },
+  "jobs": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "just now": {},
   "licenses": {
     "context": {
@@ -76225,6 +77131,46 @@
         }
       },
       "feature_area": "mass-actions"
+    }
+  },
+  "max time {time}": {
+    "context": {
+      "variables": {
+        "time": {
+          "type": "date"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
+  "max {count} CPUs per node": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
+  "max {count} nodes": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
+  "max {memory} memory per node": {
+    "context": {
+      "variables": {
+        "memory": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "max. {count} files": {
@@ -76376,6 +77322,19 @@
       "feature_area": "views"
     }
   },
+  "of {limit} ({percent}%)": {
+    "context": {
+      "variables": {
+        "limit": {
+          "type": "unknown"
+        },
+        "percent": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
   "offering accounts": {
     "context": {
       "feature_area": "accounts"
@@ -76510,6 +77469,21 @@
       "feature_area": "api-keys"
     }
   },
+  "partition {partition}": {
+    "context": {
+      "variables": {
+        "partition": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "blocks"
+    }
+  },
+  "partitions": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "passkeys": {
     "context": {
       "feature_area": "passkeys"
@@ -76602,6 +77576,11 @@
   "proceed with creating the VM": {
     "context": {
       "feature_area": "blocks"
+    }
+  },
+  "processes": {
+    "context": {
+      "feature_area": "hpc"
     }
   },
   "project": {
@@ -76938,6 +77917,16 @@
       }
     }
   },
+  "since {date}": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
   "single {brace}": {
     "context": {
       "variables": {
@@ -76946,6 +77935,22 @@
         }
       },
       "feature_area": "sram"
+    }
+  },
+  "slurm-monitor API URL": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "slurm-monitor API URLs (ending in /api/v2) that SLURM offerings may read job performance from, one per line or comma-separated. Waldur forwards a user's identity provider token only to these URLs. Append |audience (and optionally |client-scope) to an entry to send a token exchanged for that audience instead of the sign-in token.": {},
+  "slurm-monitor URL ending in /api/v2, for per-job GPU, CPU and memory over time. Must be allowed by staff in Marketplace settings → HPC workspace. Leave empty to hide job performance.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "slurm-monitor cluster name": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "snapshots": {
@@ -77207,6 +78212,16 @@
         }
       },
       "feature_area": "mass-actions"
+    }
+  },
+  "until {date}": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "up to 1 month": {},
@@ -77522,6 +78537,23 @@
       "feature_area": "create"
     }
   },
+  "{busy} busy, {down} unavailable, load {load}": {
+    "context": {
+      "variables": {
+        "busy": {
+          "type": "unknown"
+        },
+        "down": {
+          "type": "unknown"
+        },
+        "load": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc",
+      "action_type": "read"
+    }
+  },
   "{cap}{unit}": {
     "context": {
       "variables": {
@@ -77553,6 +78585,22 @@
       },
       "feature_area": "dashboard",
       "action_type": "update"
+    }
+  },
+  "{code}: {count}× ({names})": {
+    "context": {
+      "variables": {
+        "code": {
+          "type": "unknown"
+        },
+        "count": {
+          "type": "number"
+        },
+        "names": {
+          "type": "string"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "{command} failed": {
@@ -78102,6 +79150,16 @@
         }
       },
       "feature_area": "settings"
+    }
+  },
+  "{count} node(s)": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "{count} of them stay on the source.": {
@@ -78682,6 +79740,22 @@
       "feature_area": "review"
     }
   },
+  "{count} samples, {first} – {last}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "first": {
+          "type": "unknown"
+        },
+        "last": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
   "{count} scopes": {
     "context": {
       "variables": {
@@ -79175,6 +80249,18 @@
       "feature_area": "maintenance"
     }
   },
+  "{hours} h {minutes} min": {
+    "context": {
+      "variables": {
+        "hours": {
+          "type": "unknown"
+        },
+        "minutes": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "{hours} hours": {
     "context": {
       "variables": {
@@ -79183,6 +80269,32 @@
         }
       },
       "feature_area": "chat"
+    }
+  },
+  "{idle} of {total} idle": {
+    "context": {
+      "variables": {
+        "idle": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
+  "{idle} of {total} nodes idle": {
+    "context": {
+      "variables": {
+        "idle": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "{inet} will apply to {target}.": {
@@ -79647,6 +80759,16 @@
           "type": "string"
         }
       }
+    }
+  },
+  "{name} used": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "{name} was created as a draft. Some parts could not be matched on this portal and were skipped:": {
@@ -80606,6 +81728,29 @@
       "feature_area": "credits"
     }
   },
+  "{qos} (default)": {
+    "context": {
+      "variables": {
+        "qos": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
+  "{rate} {unit} / day": {
+    "context": {
+      "variables": {
+        "rate": {
+          "type": "unknown"
+        },
+        "unit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
   "{ready} ready, {skipped} skipped, {errors} errors": {
     "context": {
       "variables": {
@@ -81161,6 +82306,38 @@
       "feature_area": "service-desk"
     }
   },
+  "{start} to {end} on {partitions}.": {
+    "context": {
+      "variables": {
+        "start": {
+          "type": "unknown"
+        },
+        "end": {
+          "type": "unknown"
+        },
+        "partitions": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
+  "{start} to {end} on {partitions}. Jobs whose time limit reaches into it wait until it is over. The provider has not announced it.": {
+    "context": {
+      "variables": {
+        "start": {
+          "type": "unknown"
+        },
+        "end": {
+          "type": "unknown"
+        },
+        "partitions": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
   "{start} to {end} selected": {
     "context": {
       "variables": {
@@ -81649,6 +82826,44 @@
       "feature_area": "chat"
     }
   },
+  "{value} GB": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "{value} GPU-hours": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
+  "{value} MB": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "{value} W mean": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
   "{value} at {date}": {
     "context": {
       "primary_ui_type": "label",
@@ -81675,6 +82890,16 @@
       }
     }
   },
+  "{value} core-hours": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
+    }
+  },
   "{value} h": {
     "context": {
       "variables": {
@@ -81683,6 +82908,16 @@
         }
       },
       "feature_area": "reports"
+    }
+  },
+  "{value} kWh": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "hpc"
     }
   },
   "{value} memory available": {

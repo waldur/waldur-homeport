@@ -42,6 +42,8 @@ export interface MaintenanceForm {
   impact_level: Record<string, keyof typeof MAINTENANCE_IMPACT_LEVEL>;
   /** for offerings table */
   impact_description: Record<string, string>;
+  /** for offerings table: comma-separated partition names; empty = all */
+  affected_partitions?: Record<string, string>;
 }
 export interface MaintenanceFormDialogProps {
   resolve: {
