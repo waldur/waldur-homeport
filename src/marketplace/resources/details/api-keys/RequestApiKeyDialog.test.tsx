@@ -50,6 +50,22 @@ describe('RequestApiKeyDialog', () => {
     expect(screen.queryByText(WARNING)).not.toBeInTheDocument();
   });
 
+  it('opens on a project key and requests it unassigned', async () => {
+    // Assign
+    const user = userEvent.setup();
+    renderDialog();
+
+    // Act
+    const shown = await screen.findByText(
+      'Project key (shared by the project)',
+    );
+    const body = await submit(user);
+
+    // Assert
+    expect(shown).toBeInTheDocument();
+    expect(body.user).toBeNull();
+  });
+
   it('requests every model when left alone', async () => {
     const user = userEvent.setup();
     renderDialog();
