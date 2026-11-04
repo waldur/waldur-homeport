@@ -13,6 +13,7 @@ import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { isCallsSectionVisible } from '@/marketplace/serviceAccessMode';
 import { isDescendantOf } from '@/navigation/useTabs';
+import { canAccessProjectDashboard } from '@/permissions/canAccessProjectDashboard';
 import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 
 import { hasAnyRole } from './hasAnyRole';
@@ -142,16 +143,7 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
     if (!hasAllAccess && state.name && user) {
       if (isDescendantOf('project', state)) {
         if (
-          !user.permissions.find(
-            (permission) =>
-              permission.scope_uuid === params.uuid &&
-              permission.scope_type === 'project',
-          ) &&
-          !user.permissions.find(
-            (permission) =>
-              permission.scope_uuid === project.customer_uuid &&
-              permission.scope_type === 'customer',
-          )
+          !canAccessProjectDashboard(user, params.uuid, project?.customer_uuid)
         ) {
           setPermission('restricted');
           setBanner({

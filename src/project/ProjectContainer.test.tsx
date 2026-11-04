@@ -3,7 +3,9 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { ReactNode } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
-import { useProject, useUser } from '@/workspace/hooks';
+import { BreadcrumbsProvider, useBreadcrumbItems } from 'waldur-ui';
+
+import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
 import { ProjectContainer } from './ProjectContainer';
 
@@ -14,9 +16,27 @@ vi.mock('@/navigation/slots', () => ({
 
 vi.mock('@/navigation/header/breadcrumb/utils', () => ({
   usePresetBreadcrumbItems: () => ({
-    getOrganizationsBreadcrumbItem: () => ({ key: 'organizations' }),
-    getOrganizationBreadcrumbItem: () => ({ key: 'organization' }),
-    getOrganizationProjectsBreadcrumbItem: () => ({ key: 'projects' }),
+    getOrganizationsBreadcrumbItem: (options = {}) => ({
+      key: 'organizations',
+      text: 'Organizations',
+      to: 'organizations',
+      ...options,
+    }),
+    getOrganizationBreadcrumbItem: (customer, options = {}) => ({
+      key: 'organization',
+      text: customer.name,
+      to: 'organization.dashboard',
+      params: { uuid: customer.uuid },
+      onClick: () => undefined,
+      ...options,
+    }),
+    getOrganizationProjectsBreadcrumbItem: (uuid, options = {}) => ({
+      key: 'projects',
+      text: 'Projects',
+      to: 'organization.projects',
+      params: { uuid },
+      ...options,
+    }),
   }),
 }));
 
@@ -29,18 +49,53 @@ vi.mock('./ProjectProfile', () => ({ ProjectProfile: () => null }));
 const STAFF = { is_staff: true, permissions: [] };
 const NO_ROLES = { is_staff: false, permissions: [] };
 
+const PROJECT = {
+  uuid: 'project-uuid',
+  name: 'Project',
+  customer_uuid: 'customer-uuid',
+  customer_name: 'Acme',
+};
+
 const renderOn = (stateName: string, user: object = STAFF) => {
   vi.mocked(useCurrentStateAndParams).mockReturnValue({
     state: { name: stateName },
     params: {},
   } as any);
   vi.mocked(useUser).mockReturnValue(user as any);
-  vi.mocked(useProject).mockReturnValue({
-    uuid: 'project-uuid',
-    name: 'Project',
-    customer_uuid: 'customer-uuid',
-  } as any);
+  vi.mocked(useCustomer).mockReturnValue({ uuid: 'customer-uuid' } as any);
+  vi.mocked(useProject).mockReturnValue(PROJECT as any);
   render(<ProjectContainer />);
+};
+
+const CrumbProbe = () => {
+  const items = useBreadcrumbItems();
+  return (
+    <ul>
+      {items.map((item) => (
+        <li key={item.key}>
+          {item.key}:{item.text}:{item.to ?? 'text'}
+          {item.onClick ? ':click' : ''}
+          {item.params ? ':params' : ''}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const renderTrail = (customer: object | null) => {
+  vi.mocked(useCurrentStateAndParams).mockReturnValue({
+    state: { name: 'project.dashboard' },
+    params: {},
+  } as any);
+  vi.mocked(useUser).mockReturnValue(NO_ROLES as any);
+  vi.mocked(useCustomer).mockReturnValue(customer as any);
+  vi.mocked(useProject).mockReturnValue(PROJECT as any);
+  render(
+    <BreadcrumbsProvider>
+      <ProjectContainer />
+      <CrumbProbe />
+    </BreadcrumbsProvider>,
+  );
 };
 
 const projectViews = () =>
@@ -87,5 +142,32 @@ describe('ProjectContainer View and Edit tabs', () => {
   it('shows no bar to a user who cannot edit the project', () => {
     renderOn('project.resources', NO_ROLES);
     expect(projectViews()).not.toBeInTheDocument();
+  });
+});
+
+describe('ProjectContainer organization crumbs', () => {
+  it('links the organization when it was loaded', async () => {
+    renderTrail({ uuid: 'customer-uuid', name: 'Acme' });
+
+    expect(
+      await screen.findByText('organizations:Organizations:organizations'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('organization:Acme:organization.dashboard:click:params'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('projects:Projects:organization.projects:params'),
+    ).toBeInTheDocument();
+  });
+
+  it('keeps the organization as text when it was not loaded', async () => {
+    renderTrail(null);
+
+    expect(
+      await screen.findByText('organizations:Organizations:text'),
+    ).toBeInTheDocument();
+    expect(screen.getByText('organization:Acme:text')).toBeInTheDocument();
+    expect(screen.getByText('projects:Projects:text')).toBeInTheDocument();
+    expect(screen.getByText('project:Project:text')).toBeInTheDocument();
   });
 });

@@ -11,6 +11,8 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
+import { canOfferProjectCreate } from '../canOfferProjectCreate';
+
 const ProjectImportDialog = lazyComponent(() =>
   import('./ProjectImportDialog').then((module) => ({
     default: module.ProjectImportDialog,
@@ -27,6 +29,7 @@ export const ProjectImportButton: FC<ProjectImportButtonProps> = ({
   refetch,
 }) => {
   const user = useUser();
+  const { openDialog } = useModal();
   if (!user) return null;
   const disabled =
     customer &&
@@ -34,19 +37,7 @@ export const ProjectImportButton: FC<ProjectImportButtonProps> = ({
       permission: PermissionEnum.CREATE_PROJECT,
       customerId: customer.uuid,
     });
-  const hasNoPermission =
-    !customer &&
-    !user.is_staff &&
-    user.permissions
-      .filter((perm) => perm.scope_type === 'customer')
-      .every(
-        (perm) =>
-          !hasPermission(user, {
-            permission: PermissionEnum.CREATE_PROJECT,
-            customerId: perm.scope_uuid,
-          }),
-      );
-  const { openDialog } = useModal();
+  const hasNoPermission = !customer && !canOfferProjectCreate(user);
 
   if (disabled || hasNoPermission) {
     return null;

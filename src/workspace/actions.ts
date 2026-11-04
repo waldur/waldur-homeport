@@ -9,7 +9,7 @@ import {
 } from './constants';
 import { Project } from './types';
 
-export const setCurrentCustomer = (customer: Customer) => ({
+export const setCurrentCustomer = (customer: Customer | null) => ({
   type: SET_CURRENT_CUSTOMER,
   payload: {
     customer,

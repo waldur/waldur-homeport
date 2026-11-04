@@ -15,6 +15,15 @@ import { ProjectBreadcrumbPopover } from './ProjectBreadcrumbPopover';
 import { ProjectProfile } from './ProjectProfile';
 import { canEditProject } from './utils';
 
+// The preset crumbs link whenever the caller may visit some organization.
+// This trail follows the organization loaded with the project. When that
+// fetch returned nothing, the names stay text: the project still carries them.
+const UNREAD_ORGANIZATION_CRUMB = {
+  to: undefined,
+  params: undefined,
+  onClick: undefined,
+};
+
 const PageHero = ({ project }) => {
   const user = useUser();
   const customer = useCustomer();
@@ -59,6 +68,7 @@ const PageHero = ({ project }) => {
 
 const ProjectContainerWithHero = (props) => {
   const project = useProject();
+  const customer = useCustomer();
 
   const {
     getOrganizationsBreadcrumbItem,
@@ -66,14 +76,21 @@ const ProjectContainerWithHero = (props) => {
     getOrganizationProjectsBreadcrumbItem,
   } = usePresetBreadcrumbItems();
 
-  const breadcrumbItems = useMemo<IBreadcrumbItem[]>(
-    () => [
-      getOrganizationsBreadcrumbItem(),
-      getOrganizationBreadcrumbItem({
-        uuid: project.customer_uuid,
-        name: project.customer_name,
-      }),
-      getOrganizationProjectsBreadcrumbItem(project.customer_uuid),
+  const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => {
+    const organizationCrumb = customer ? undefined : UNREAD_ORGANIZATION_CRUMB;
+    return [
+      getOrganizationsBreadcrumbItem(organizationCrumb),
+      getOrganizationBreadcrumbItem(
+        {
+          uuid: project.customer_uuid,
+          name: project.customer_name,
+        },
+        organizationCrumb,
+      ),
+      getOrganizationProjectsBreadcrumbItem(
+        project.customer_uuid,
+        organizationCrumb,
+      ),
       {
         key: 'project',
         text: project.name,
@@ -84,10 +101,8 @@ const ProjectContainerWithHero = (props) => {
         truncate: true,
         active: true,
       },
-    ],
-
-    [project],
-  );
+    ];
+  }, [project, customer]);
   useBreadcrumbs(breadcrumbItems);
 
   return (
