@@ -24,7 +24,6 @@ export const RequestLimitsChangePendingDialog: FC<Props> = ({
     mutationFn: () =>
       marketplaceResourceLimitChangeRequestsCancel({
         path: { uuid: request.uuid },
-        body: {} as any,
       }),
     successMessage: translate('Limit change request has been canceled.'),
     errorMessage: translate('Unable to cancel limit change request.'),
