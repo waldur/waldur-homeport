@@ -10,7 +10,7 @@ import { useTable } from '@/table/useTable';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
-import { COMMON_CREDIT_COLUMNS } from './constants';
+import { getCreditColumns } from './constants';
 import { CreditExpandableRow } from './CreditExpandableRow';
 import { ProjectCreateCreditButton } from './ProjectCreateCreditButton';
 import {
@@ -52,7 +52,7 @@ export const ProjectCreditsList: FC = () => {
           orderField: 'project_name',
           export: 'project_name',
         },
-        ...COMMON_CREDIT_COLUMNS,
+        ...getCreditColumns(translate('Allocated credit')),
       ]}
       title={translate('Credit management')}
       verboseName={translate('Credits')}

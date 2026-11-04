@@ -1,3 +1,4 @@
+import { ArrowsLeftRightIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { customerCreditsList } from 'waldur-js-client';
@@ -17,6 +18,7 @@ import { useUser } from '@/workspace/hooks';
 
 import { minimalConsumptionLogicOptions } from '../credits/constants';
 import { CreditFieldEditButton } from '../credits/CreditFieldEditButton';
+import { getCreditKindHelp } from '../credits/creditKinds';
 
 import { StaffOnlyIndicator } from './StaffOnlyIndicator';
 import { CustomerEditPanelProps } from './types';
@@ -24,6 +26,18 @@ import { CustomerEditPanelProps } from './types';
 const AdjustWithdrawableDialog = lazyComponent(() =>
   import('../credits/AdjustWithdrawableDialog').then((module) => ({
     default: module.AdjustWithdrawableDialog,
+  })),
+);
+
+const TopUpCreditDialog = lazyComponent(() =>
+  import('../credits/TopUpCreditDialog').then((module) => ({
+    default: module.TopUpCreditDialog,
+  })),
+);
+
+const ReclassifyCreditDialog = lazyComponent(() =>
+  import('../credits/ReclassifyCreditDialog').then((module) => ({
+    default: module.ReclassifyCreditDialog,
   })),
 );
 
@@ -48,14 +62,37 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
     staleTime: SHORT_STALE_TIME,
   });
 
-  const rows = useMemo(
-    () => [
+  const rows = useMemo(() => {
+    // The credit is made of lots: prepayments recorded by staff (paid),
+    // credit allocated by staff (granted) and earnings (withdrawable). Each
+    // row says what its kind is for, since they behave differently.
+    const help = getCreditKindHelp();
+    return [
       {
-        label: translate('Allocated credit ({currency})', {
+        label: translate('Total credit ({currency})', {
           currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
         }),
         key: 'value',
         value: renderFieldOrDash(creditData?.value),
+        description: help.total,
+      },
+      {
+        label: translate('Paid credit ({currency})', {
+          currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+        }),
+        key: 'paid_balance',
+        value: renderFieldOrDash(creditData?.paid_balance),
+        description: help.paid,
+        readOnly: true,
+      },
+      {
+        label: translate('Granted credit ({currency})', {
+          currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+        }),
+        key: 'granted_balance',
+        value: renderFieldOrDash(creditData?.granted_balance),
+        description: help.granted,
+        readOnly: true,
       },
       {
         label: translate('Withdrawable balance ({currency})', {
@@ -63,6 +100,7 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
         }),
         key: 'withdrawable_balance',
         value: renderFieldOrDash(creditData?.withdrawable_balance),
+        description: help.withdrawable,
         readOnly: true,
       },
       {
@@ -111,10 +149,8 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
         key: 'apply_as_minimal_consumption',
         value: Boolean(creditData?.apply_as_minimal_consumption),
       },
-    ],
-
-    [creditData],
-  );
+    ];
+  }, [creditData]);
 
   return (
     <PropertyCard bordered>
@@ -128,6 +164,7 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
             <PropertyItem
               key={row.key}
               label={row.label}
+              description={row.description}
               value={
                 row.key === 'apply_as_minimal_consumption'
                   ? row.value
@@ -137,7 +174,42 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
               }
               actions={
                 user.is_staff &&
-                (row.key === 'withdrawable_balance' ? (
+                (row.key === 'paid_balance' ? (
+                  <>
+                    <StaffOnlyIndicator />
+                    <CompactEditButton
+                      iconNode={<PlusCircleIcon weight="bold" />}
+                      tooltip={translate('Top up')}
+                      data-testid="top-up-credit"
+                      onClick={() =>
+                        openDialog(TopUpCreditDialog, {
+                          resolve: { credit: creditData, refetch },
+                        })
+                      }
+                    />
+                  </>
+                ) : row.key === 'granted_balance' ? (
+                  <>
+                    <StaffOnlyIndicator />
+                    <CompactEditButton
+                      iconNode={<ArrowsLeftRightIcon weight="bold" />}
+                      tooltip={
+                        Number(creditData?.granted_balance) > 0
+                          ? translate('Reclassify as paid credit')
+                          : translate(
+                              'There is no granted credit to reclassify.',
+                            )
+                      }
+                      disabled={!(Number(creditData?.granted_balance) > 0)}
+                      data-testid="reclassify-credit"
+                      onClick={() =>
+                        openDialog(ReclassifyCreditDialog, {
+                          resolve: { credit: creditData, refetch },
+                        })
+                      }
+                    />
+                  </>
+                ) : row.key === 'withdrawable_balance' ? (
                   <>
                     <StaffOnlyIndicator />
                     <CompactEditButton

@@ -68,11 +68,12 @@ export const EditCreditFieldDialog: FC<{
               {resolve.name === 'offerings' ? (
                 <CustomerCreditOfferingsField />
               ) : resolve.name === 'value' ? (
-                <CustomerAllocateCreditField />
+                <CustomerAllocateCreditField isEdit />
               ) : (
                 <MinimalConsumptionFields
                   initialValues={initialValues}
                   filterField={resolve.name}
+                  isOrganizationCredit
                 />
               )}
             </div>

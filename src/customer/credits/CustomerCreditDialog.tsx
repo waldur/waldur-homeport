@@ -113,8 +113,11 @@ export const CustomerCreditDialog: FC<CustomerCreditDialogProps> = ({
               <OrganizationSelectField isDisabled={isEdit} />
               {isEdit && <OrganizationCostChart />}
               <CustomerCreditOfferingsField />
-              <CustomerAllocateCreditField />
-              <MinimalConsumptionFields initialValues={resolve.credit} />
+              <CustomerAllocateCreditField isEdit={isEdit} />
+              <MinimalConsumptionFields
+                initialValues={resolve.credit}
+                isOrganizationCredit
+              />
               <CreditFormError />
             </div>
           </ModalDialog>

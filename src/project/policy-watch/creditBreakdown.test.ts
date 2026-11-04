@@ -33,7 +33,7 @@ describe('buildCreditBreakdown', () => {
     expect(breakdown.used).toBe(2000);
     expect(breakdown.lost).toBe(6000);
     expect(breakdown.remaining).toBe(85000);
-    expect(breakdown.granted).toBe(93000);
+    expect(breakdown.total).toBe(93000);
   });
 
   it('reports no forfeiture for a month that meets its floor', () => {
@@ -55,7 +55,7 @@ describe('buildCreditBreakdown', () => {
 
     expect(breakdown.used).toBe(0);
     expect(breakdown.lost).toBe(5000);
-    expect(breakdown.granted).toBe(5000);
+    expect(breakdown.total).toBe(5000);
   });
 
   it('does not count a re-applied month twice', () => {
@@ -73,7 +73,7 @@ describe('buildCreditBreakdown', () => {
     );
 
     expect(breakdown.used).toBe(2000);
-    expect(breakdown.granted).toBe(10000);
+    expect(breakdown.total).toBe(10000);
   });
 
   it('keeps a project tail forfeited when the roll-back does not restore it', () => {
@@ -108,7 +108,7 @@ describe('buildCreditBreakdown', () => {
 
     expect(breakdown.used).toBe(100);
     expect(breakdown.lost).toBe(0);
-    expect(breakdown.granted).toBe(1000);
+    expect(breakdown.total).toBe(1000);
   });
 
   it('reconciles to the balance for an empty ledger', () => {
@@ -118,7 +118,7 @@ describe('buildCreditBreakdown', () => {
       used: 0,
       lost: 0,
       remaining: 500,
-      granted: 500,
+      total: 500,
     });
   });
 
@@ -127,6 +127,6 @@ describe('buildCreditBreakdown', () => {
     const breakdown = buildCreditBreakdown([broken as CreditTransaction], 100);
 
     expect(breakdown.used).toBe(0);
-    expect(breakdown.granted).toBe(100);
+    expect(breakdown.total).toBe(100);
   });
 });

@@ -64,6 +64,28 @@ describe('monthlyDraw', () => {
       monthlyDraw({ consumptionLastMonth: 0, minimalConsumption: 0 }).monthly,
     ).toBe(0);
   });
+
+  it('tops an organization month up only from the granted credit left', () => {
+    // Usage of 2,000 and 1,500 granted left: the floor of 8,000 can take no
+    // more than 3,500, because prepayments and earnings are not drawn for it.
+    const draw = monthlyDraw({
+      consumptionLastMonth: 2000,
+      minimalConsumption: 8000,
+      grantedBalance: 1500,
+    });
+    expect(draw.monthly).toBe(3500);
+    expect(draw.floorSetsTheRate).toBe(true);
+  });
+
+  it('draws only usage once an organization has no granted credit', () => {
+    const draw = monthlyDraw({
+      consumptionLastMonth: 2000,
+      minimalConsumption: 8000,
+      grantedBalance: 0,
+    });
+    expect(draw.monthly).toBe(2000);
+    expect(draw.floorSetsTheRate).toBe(false);
+  });
 });
 
 describe('projectCreditRunway', () => {

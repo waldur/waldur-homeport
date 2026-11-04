@@ -62,5 +62,5 @@ export const buildCreditBreakdown = (
   const used = Math.max(0, drawnAgainstUsage - reversed);
   const lost = Math.max(0, forfeited);
 
-  return { used, lost, remaining, granted: used + lost + remaining };
+  return { used, lost, remaining, total: used + lost + remaining };
 };

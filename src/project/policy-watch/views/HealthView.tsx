@@ -100,6 +100,7 @@ const CreditMetrics: FC<{ data: PolicyWatchData }> = ({ data }) => {
       ? 0
       : data.creditTerms?.minimalConsumption || 0,
     applyAsMinimalConsumption: data.creditTerms?.applyAsMinimalConsumption,
+    grantedBalance: data.creditTerms?.grantedBalance,
   });
 
   const stats = [
@@ -118,8 +119,8 @@ const CreditMetrics: FC<{ data: PolicyWatchData }> = ({ data }) => {
           value={defaultCurrency(runway.credit.value)}
           caption={
             data.creditBreakdown
-              ? translate('of {granted} allocated', {
-                  granted: defaultCurrency(data.creditBreakdown.granted),
+              ? translate('of {total} allocated', {
+                  total: defaultCurrency(data.creditBreakdown.total),
                 })
               : translate('current balance')
           }
@@ -276,7 +277,10 @@ export const HealthView: FC<Props> = ({ data }) => {
         <div className="border-b border-b-secondary mt-3 mb-4" />
         <CreditMetrics data={data} />
         {data.creditBreakdown && (
-          <CreditBreakdownCard breakdown={data.creditBreakdown} />
+          <CreditBreakdownCard
+            breakdown={data.creditBreakdown}
+            isOrganizationCredit={data.creditTerms?.grantedBalance != null}
+          />
         )}
         {isFeatureVisible(DashboardFeatures.spend_forecast) && (
           <CreditBurnDownChart data={data} />

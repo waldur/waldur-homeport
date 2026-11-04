@@ -20,6 +20,9 @@ interface DrawTerms {
   minimalConsumption: number;
   /** When false, no floor applies however large minimalConsumption is. */
   applyAsMinimalConsumption?: boolean;
+  /** Granted credit left on an organization credit, whose floor takes only
+   *  granted credit; null or absent for a project credit. */
+  grantedBalance?: number | null;
 }
 
 /**
@@ -37,11 +40,17 @@ interface DrawTerms {
  * can report that, this inference should be replaced by it rather than refined.
  */
 export const monthlyDraw = (terms: DrawTerms) => {
-  const floor =
+  const lastMonth = safeNumber(terms.consumptionLastMonth);
+  const contracted =
     terms.applyAsMinimalConsumption === false
       ? 0
       : safeNumber(terms.minimalConsumption);
-  const lastMonth = safeNumber(terms.consumptionLastMonth);
+  // An organization credit's floor tops a month up only from granted credit:
+  // it draws the usage plus at most the granted credit left.
+  const floor =
+    terms.grantedBalance == null
+      ? contracted
+      : Math.min(contracted, lastMonth + Math.max(0, terms.grantedBalance));
   return {
     floor,
     lastMonth,

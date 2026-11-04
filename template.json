@@ -746,6 +746,11 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "A change is added to or taken from granted credit, and can lower the total only by the granted credit left. Record a prepayment with Top up instead.": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "A checklist of the feedback survey type.": {
     "context": {
       "feature_area": "feedback"
@@ -914,6 +919,16 @@
     }
   },
   "A reserved external IP allocated to the tenant; can be attached to a port to expose an instance.": {},
+  "A reversal cannot exceed the paid credit of {balance}.": {
+    "context": {
+      "variables": {
+        "balance": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "credits"
+    }
+  },
   "A rule that does not create a project must grant an organization role.": {},
   "A separate, long-running process (waldur matrix_bot) that signs in as the bot user and is the encrypted member of every Waldur room. It answers commands, posts every message Waldur sends to a room, and exports history with the room keys it holds. Run exactly one: a second process refuses to start.": {},
   "A service can only report the metrics its offering adopts.": {
@@ -3937,9 +3952,19 @@
       "feature_area": "reallocate-limits"
     }
   },
+  "Allocated by staff. Spent first, and expires on the end date.": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
+  "Allocated by staff. Spent first, expires on the end date, and does not count towards the affiliate fee.": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "Allocated credit": {
     "context": {
-      "primary_ui_type": "title"
+      "feature_area": "credits"
     }
   },
   "Allocated credit ({currency})": {
@@ -3950,7 +3975,7 @@
           "type": "unknown"
         }
       },
-      "feature_area": "details"
+      "feature_area": "manage"
     }
   },
   "Allocated with a new UID": {
@@ -4350,6 +4375,26 @@
   "Amount *": {
     "context": {
       "feature_area": "usage"
+    }
+  },
+  "Amount exceeds the granted credit balance of {balance}.": {
+    "context": {
+      "variables": {
+        "balance": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "credits"
+    }
+  },
+  "Amount must be positive.": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
+  "Amount must not be zero.": {
+    "context": {
+      "feature_area": "credits"
     }
   },
   "Amount of RAM in GB allocated to each controller node": {
@@ -7177,6 +7222,11 @@
       "feature_area": "policy-watch"
     }
   },
+  "At this rate the month ends below the minimum draw, and the shortfall is taken from the granted credit as lost.": {
+    "context": {
+      "feature_area": "policy-watch"
+    }
+  },
   "At {burn}/day. Compensation stops and costs start landing on the invoice. Resources are not left running: a cost policy has reached its threshold, and its action applies to them.": {
     "context": {
       "variables": {
@@ -8270,6 +8320,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "details"
+    }
+  },
+  "Bank transfer or payment identifier, kept in the credit transactions.": {
+    "context": {
+      "feature_area": "credits"
     }
   },
   "Banned": {
@@ -14671,6 +14726,18 @@
       "feature_area": "credits"
     }
   },
+  "Credit has been reclassified as paid.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "credits"
+    }
+  },
+  "Credit has been topped up.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "credits"
+    }
+  },
   "Credit has been updated.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -15083,6 +15150,11 @@
   "Current open month": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Current paid credit": {
+    "context": {
+      "feature_area": "credits"
     }
   },
   "Current period overlaid against previous, per (offering, component).": {},
@@ -18688,6 +18760,16 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "actions"
+    }
+  },
+  "Earnings of the organization. Spent last, never expires, and can be withdrawn.": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
+  "Earnings, such as affiliate fees. Spent last, never expires, and can be withdrawn.": {
+    "context": {
+      "feature_area": "credits"
     }
   },
   "Earth and related environmental sciences": {
@@ -23748,6 +23830,16 @@
       "feature_area": "project-groups"
     }
   },
+  "For a prepayment that was recorded as granted credit. The amount becomes paid credit, which no longer expires. The total credit stays the same.": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
+  "For a prepayment that was recorded as granted credit. The amount becomes paid credit: it no longer expires, and invoices paid from it count towards the affiliate fee. The total credit stays the same.": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "For complete details, please see our <pp>Privacy policy</pp>.": {
     "context": {
       "primary_ui_type": "modal_dialog",
@@ -24759,7 +24851,7 @@
   "Granted": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "roles"
+      "feature_area": "credits"
     }
   },
   "Granted automatically from identity provider data ({source}). It may be revoked automatically if the user stops matching.": {
@@ -24783,6 +24875,27 @@
     }
   },
   "Granted by an SRAM project rule. It is revoked automatically when the membership in SRAM ends.": {},
+  "Granted credit": {
+    "context": {
+      "feature_area": "organizations"
+    }
+  },
+  "Granted credit ({currency})": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "currency": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
+    }
+  },
+  "Granted credit to mark as paid, at most the granted credit left.": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "Granted on the organization itself. Leave empty to grant no organization-level role.": {
     "context": {
       "feature_area": "auto-provisioning-rules"
@@ -28792,6 +28905,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "metrics"
+    }
+  },
+  "Kind of credit": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "credits"
     }
   },
   "Kubernetes & Nodes": {
@@ -34463,6 +34582,11 @@
       "feature_area": "wizard"
     }
   },
+  "New paid credit": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "New plan": {
     "context": {
       "feature_area": "plan"
@@ -38332,6 +38456,11 @@
       "feature_area": "credits"
     }
   },
+  "On that date the granted credit left will be set to 0. Paid credit and the withdrawable balance do not expire.": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "On the invoice open when it is paid. Earlier invoices stay as they were issued.": {},
   "On the paid month’s own invoice. This changes the total of an invoice already issued, and possibly paid.": {},
   "On the scheduled day, the system collects data for each project in the organization.": {
@@ -40676,13 +40805,29 @@
   "Paid": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "growth"
+      "feature_area": "credits"
     }
   },
   "Paid by credit": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "manage"
+    }
+  },
+  "Paid credit": {
+    "context": {
+      "feature_area": "organizations"
+    }
+  },
+  "Paid credit ({currency})": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "currency": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
     }
   },
   "Paid now": {
@@ -41150,6 +41295,11 @@
   "Payment profiles": {
     "context": {
       "feature_area": "payments"
+    }
+  },
+  "Payment reference": {
+    "context": {
+      "feature_area": "credits"
     }
   },
   "Payment succeeded.": {
@@ -43391,6 +43541,16 @@
       "primary_ui_type": "submit_button",
       "feature_area": "auth",
       "action_type": "create"
+    }
+  },
+  "Prepayments, such as bank transfers. Never expires, and counts towards the affiliate fee.": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
+  "Prepayments, such as bank transfers. Never expires.": {
+    "context": {
+      "feature_area": "credits"
     }
   },
   "Present": {
@@ -46979,6 +47139,18 @@
       "feature_area": "broadcasts"
     }
   },
+  "Reclassify": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "credits",
+      "action_type": "create"
+    }
+  },
+  "Reclassify as paid credit": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "Recommended": {
     "context": {
       "primary_ui_type": "title",
@@ -47013,6 +47185,16 @@
   "Record a group your directory already holds, so the project keeps its GID and Waldur never hands that GID to anything else. The project needs no resource yet.": {
     "context": {
       "feature_area": "project-groups"
+    }
+  },
+  "Record a prepayment the organization has made as paid credit. Paid credit is spent after granted credit and does not expire.": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
+  "Record a prepayment the organization has made as paid credit. Paid credit is spent after granted credit, does not expire, and invoices paid from it count towards the affiliate fee.": {
+    "context": {
+      "feature_area": "credits"
     }
   },
   "Record adoption": {
@@ -47066,6 +47248,11 @@
   "Record zero": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Recorded as granted credit: it is spent first and expires on the end date. To record a prepayment, create the credit with 0 and top it up.": {
+    "context": {
+      "feature_area": "credits"
     }
   },
   "Recorded in the audit log and visible to the account holder.": {
@@ -61079,6 +61266,11 @@
       "feature_area": "posix-id-pools"
     }
   },
+  "The prepayment received from the organization. A negative amount reverses a prepayment recorded by mistake.": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "The preview counts what moves, lists what blocks the merge and what needs your acknowledgement. Changing a mapping discards it.": {
     "context": {
       "feature_area": "wizard"
@@ -61489,6 +61681,7 @@
       "feature_area": "actions"
     }
   },
+  "The sum of the three kinds below. Usage spends granted credit first, then paid, then withdrawable.": {},
   "The support user has been activated.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -61894,6 +62087,11 @@
   "There is no checklist.": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "There is no granted credit to reclassify.": {
+    "context": {
+      "feature_area": "credits"
     }
   },
   "There is no offering with this UUID.": {
@@ -63870,6 +64068,18 @@
       "feature_area": "pubsub"
     }
   },
+  "Top up": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "credits",
+      "action_type": "create"
+    }
+  },
+  "Top up credit": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "Top {count} tables by size": {
     "context": {
       "variables": {
@@ -63992,10 +64202,36 @@
     }
   },
   "Total cost:": {},
+  "Total credit": {
+    "context": {
+      "feature_area": "organizations"
+    }
+  },
+  "Total credit ({currency})": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "currency": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "credits"
+    }
+  },
   "Total credit balance": {
     "context": {
       "primary_ui_type": "label",
       "feature_area": "affiliate-earnings"
+    }
+  },
+  "Total credit {amount}": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      },
+      "feature_area": "policy-watch"
     }
   },
   "Total customers": {
@@ -67370,6 +67606,12 @@
       "feature_area": "UserPendingActionsList"
     }
   },
+  "Unable to reclassify the credit.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "credits"
+    }
+  },
   "Unable to record the adoption.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -68612,6 +68854,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "support"
+    }
+  },
+  "Unable to top up the credit.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "credits"
     }
   },
   "Unable to undo the merge.": {
@@ -74166,6 +74414,11 @@
       "feature_area": "update"
     }
   },
+  "What the prepayment is for": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "What this proposal produced once it was accepted.": {
     "context": {
       "feature_area": "proposal"
@@ -74570,6 +74823,11 @@
       "feature_area": "reporting"
     }
   },
+  "Why this credit was a prepayment": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
   "Why would you want to go away? Help us become better please!": {
     "context": {
       "feature_area": "support"
@@ -74689,6 +74947,16 @@
   "Withdraw this key request? The key was never created, so it is removed at once.": {
     "context": {
       "feature_area": "api-keys"
+    }
+  },
+  "Withdrawable": {
+    "context": {
+      "feature_area": "credits"
+    }
+  },
+  "Withdrawable balance": {
+    "context": {
+      "feature_area": "organizations"
     }
   },
   "Withdrawable balance ({currency})": {
@@ -77297,16 +77565,6 @@
       "feature_area": "policy-watch"
     }
   },
-  "of {granted} allocated": {
-    "context": {
-      "variables": {
-        "granted": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "views"
-    }
-  },
   "of {limit} ({percent}%)": {
     "context": {
       "variables": {
@@ -77318,6 +77576,16 @@
         }
       },
       "feature_area": "hpc"
+    }
+  },
+  "of {total} allocated": {
+    "context": {
+      "variables": {
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "views"
     }
   },
   "offering accounts": {

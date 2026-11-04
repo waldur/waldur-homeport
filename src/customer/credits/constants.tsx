@@ -11,7 +11,9 @@ import { translate } from '@/i18n';
 import { Column } from '@/table/types';
 import { renderFieldOrDash } from '@/table/utils';
 
-export const COMMON_CREDIT_COLUMNS: Column[] = [
+// An organization credit is the total of its kinds; a project credit is a
+// share of it, allocated to the project, so the lists name the value apart.
+export const getCreditColumns = (valueTitle: string): Column[] => [
   {
     title: translate('Eligible offerings'),
     // A project credit omits `offerings` for roles that may not view the
@@ -37,7 +39,7 @@ export const COMMON_CREDIT_COLUMNS: Column[] = [
     export: 'end_date',
   },
   {
-    title: translate('Allocated credit'),
+    title: valueTitle,
     render: ({ row }) => defaultCurrency(row.value),
     orderField: 'value',
     export: (row) => defaultCurrency(row.value),

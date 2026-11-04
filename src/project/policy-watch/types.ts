@@ -186,12 +186,16 @@ export interface CreditTerms {
   daysUntilEndDate: number | null;
   /** consumption_last_month, exposed for sanity-check displays. */
   consumptionLastMonth: number;
+  /** Granted credit left when the terms are the organization credit's, whose
+   *  minimal consumption takes only granted credit; null for a project
+   *  credit, whose floor takes the whole balance. */
+  grantedBalance: number | null;
 }
 
 export interface CreditBreakdown {
-  /** Initial grant plus every later change; equals used + lost + remaining
-   *  regardless of top-ups or reductions. */
-  granted: number;
+  /** Everything the credit was given, of any kind, plus every later change;
+   *  equals used + lost + remaining regardless of top-ups or reductions. */
+  total: number;
   /** Credit consumed against real usage: the ledger's `compensation` rows, net
    *  of any roll-back that reversed them. */
   used: number;

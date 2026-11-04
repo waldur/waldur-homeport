@@ -76,8 +76,6 @@ export const PacingIndicator: FC<Props> = ({
     );
   }
 
-  const minimal = creditTerms?.minimalConsumption || 0;
-  const minimalFraction = minimal > 0 ? minimal / reference : null;
   const gracePct = creditTerms?.graceCoefficient ?? 0;
 
   // Against the credit's expected consumption, so the numerator has to be
@@ -89,6 +87,19 @@ export const PacingIndicator: FC<Props> = ({
   // Linear extrapolation of month-end consumption at the current daily rate.
   const projected = periodFraction > 0 ? creditableCost / periodFraction : 0;
   const projectedFraction = projected / reference;
+
+  // An organization credit's floor tops the month up only from granted
+  // credit: it takes at most the granted credit left, and nothing once that
+  // is gone. A project credit's floor takes the whole balance.
+  const floor = creditTerms?.minimalConsumption || 0;
+  const granted = creditTerms?.grantedBalance ?? null;
+  const isOrganizationFloor = granted !== null;
+  const minimal = !isOrganizationFloor
+    ? floor
+    : granted > 0
+      ? Math.min(floor, projected + granted)
+      : 0;
+  const minimalFraction = minimal > 0 ? minimal / reference : null;
 
   // Pace vs where a linear ramp says we should be today.
   const delta = usageFraction - periodFraction;
@@ -138,9 +149,13 @@ export const PacingIndicator: FC<Props> = ({
             'Drawing faster than the linear ideal for this month, which may reduce job scheduling priority.',
           )
         : willMissMinimal
-          ? translate(
-              'At this rate the month ends below the minimum draw, and the shortfall is taken from the credit as lost.',
-            )
+          ? isOrganizationFloor
+            ? translate(
+                'At this rate the month ends below the minimum draw, and the shortfall is taken from the granted credit as lost.',
+              )
+            : translate(
+                'At this rate the month ends below the minimum draw, and the shortfall is taken from the credit as lost.',
+              )
           : undefined;
 
   const shareOfExpected = (fraction: number) => (

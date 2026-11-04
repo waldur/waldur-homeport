@@ -24,6 +24,7 @@ import {
   isStaffOrSupport,
 } from '@/workspace/selectors';
 
+import { isAffiliateProgramOn } from './affiliate-earnings/utils';
 import { canAccessOrganization, userHasCustomerPermission } from './utils';
 import { fetchCustomer } from './workspace/fetchCustomer';
 
@@ -32,8 +33,7 @@ import { fetchCustomer } from './workspace/fetchCustomer';
 // accounting. It sits in the Accounting menu, so that menu opens for them too,
 // showing only this page.
 const canOpenAffiliateEarnings = (state) =>
-  isFeatureVisible(ResellerFeatures.affiliates) &&
-  Boolean(ENV.plugins.WALDUR_CORE?.AFFILIATES_ENABLED) &&
+  isAffiliateProgramOn() &&
   Boolean(state.workspace.customer?.has_affiliate_links) &&
   canViewAffiliateEarnings(state);
 
