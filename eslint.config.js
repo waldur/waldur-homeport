@@ -112,10 +112,12 @@ export default tseslint
         'waldur-custom/enforce-badge-right-icon-pattern': 'error',
         // Zero instances remain; see the rule's docblock.
         'waldur-custom/no-bootstrap-button-markup': 'error',
-        // Warnings rather than errors: the tree still carries dozens of each,
-        // and converting one is a per-screen judgement rather than a mechanical
-        // swap. They steer new code; promote to 'error' once the count is down.
-        'waldur-custom/no-hand-rolled-table': 'warn',
+        // Raw <table> markup becomes Table, SimpleTable, PropertyList or, for
+        // a form grid, allow-listed waldur-ui Table primitives (decision tree:
+        // docs/table/migration-guide.md). Tables that predate the rule are
+        // counted per file in hand-rolled-table.baseline.json, which only
+        // shrinks: `yarn lint:tables:baseline` after migrating some.
+        'waldur-custom/no-hand-rolled-table': 'error',
         'waldur-custom/no-hand-rolled-modal-footer': 'error',
         // Zero instances remain: every native date/time input was replaced by
         // the waldur-ui pickers. See the rule's docblock.

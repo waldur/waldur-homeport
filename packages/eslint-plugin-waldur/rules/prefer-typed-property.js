@@ -20,13 +20,15 @@
  * shrink. `yarn lint:properties:baseline` rewrites the file.
  */
 
-import { readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { fileURLToPath } from 'node:url';
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.resolve(HERE, '../../..');
+import {
+  REPO_ROOT,
+  createBaselineReader,
+  repoRelative,
+} from '../lib/baseline.js';
+
 const BASELINE_FILE = 'typed-property.baseline.json';
 
 // Set by scripts/typed-property-baseline.mjs to see every case.
@@ -125,20 +127,7 @@ const replacementFor = (node) => {
   return null;
 };
 
-let baseline = { mtimeMs: -1, entries: {} };
-
-/** typed-property.baseline.json, re-read when it changes on disk. */
-const readBaseline = (file) => {
-  try {
-    const { mtimeMs } = statSync(file);
-    if (mtimeMs !== baseline.mtimeMs) {
-      baseline = { mtimeMs, entries: JSON.parse(readFileSync(file, 'utf8')) };
-    }
-  } catch {
-    baseline = { mtimeMs: -1, entries: {} };
-  }
-  return baseline.entries;
-};
+const readBaseline = createBaselineReader();
 
 export default {
   meta: {
@@ -160,10 +149,7 @@ export default {
   },
 
   create(context) {
-    const relativeFile = path
-      .relative(REPO_ROOT, context.filename)
-      .split(path.sep)
-      .join('/');
+    const relativeFile = repoRelative(context.filename);
 
     /** kind → nodes */
     const found = new Map();

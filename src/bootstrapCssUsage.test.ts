@@ -299,7 +299,7 @@ describe('bootstrapCssUsage', () => {
 
   describe('table cell gutters', () => {
     const css = compilePartial(
-      "@import 'config'; @import 'components/tables';",
+      "@import '../legacy/mixins'; @import '../legacy/table-base';",
     );
     const declarations = (selector: string) => {
       const found: Record<string, string> = {};

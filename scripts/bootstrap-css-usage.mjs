@@ -53,10 +53,6 @@ export const PARTIALS = [
     scss: "@import 'config'; @import 'bootstrap/scss/reboot'; @import 'bootstrap/scss/type';",
   },
   {
-    name: 'bootstrap/scss/tables',
-    scss: "@import 'config'; $grid-breakpoints: (xs: 0); @import 'bootstrap/scss/tables';",
-  },
-  {
     name: 'bootstrap/scss/card',
     scss: "@import 'config'; @import 'bootstrap/scss/card';",
   },
@@ -66,14 +62,14 @@ export const PARTIALS = [
     name: 'core/components/card',
     scss: "@import 'config'; @import 'components/card';",
   },
-  {
-    name: 'core/components/tables',
-    scss: "@import 'config'; @import 'components/tables';",
-  },
 
   // Waldur's own partials (src/styles/legacy/). Each compiles from
   // _mixins.scss alone: none reads a Bootstrap Sass variable or mixin, so a
   // reference to one fails `report`, `save` and `compare`.
+  {
+    name: 'legacy/table-base',
+    scss: "@import '../legacy/mixins'; @import '../legacy/table-base';",
+  },
   {
     name: 'legacy/link-transition',
     scss: "@import '../legacy/mixins'; @import '../legacy/link-transition';",

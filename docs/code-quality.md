@@ -129,6 +129,10 @@ Dynamic references (`state={variable}`, `router.stateService.go(name)`, computed
 
 `waldur-custom/prefer-typed-property` reports a `PropertyItem` that formats its value by hand where a typed formatter fits (`propVal.date`, `propVal.currency`, `propVal.boolean`, …), and `renderFieldOrDash` inside one. Existing rows are counted per file and kind in `typed-property.baseline.json`; the counts only shrink, so rewrite them with `yarn lint:properties:baseline` after moving rows, never to let new ones in. See [property-fields.md](property-fields.md).
 
+## Hand-rolled table guard
+
+`waldur-custom/no-hand-rolled-table` reports raw `<table>` markup, which should be `@/table/Table` or `SimpleTable` (see [table/migration-guide.md](table/migration-guide.md)). Existing tables are counted per file in `hand-rolled-table.baseline.json`; the counts only shrink, so rewrite them with `yarn lint:tables:baseline` after migrating some, never to let new ones in. A table that is deliberately not a data table (a `<td>` under test, a story's layout grid) takes `// eslint-disable-next-line waldur-custom/no-hand-rolled-table -- <reason>` and is not counted.
+
 ## Unknown class guard
 
 Tailwind and Bootstrap both ignore a class they do not know, so a typo (`felx`, `text-teritary`, `md:hiden`) or a class whose stylesheet was retired renders as nothing, with no warning from the build, the type checker or the browser. `waldur-custom/no-unknown-class` reports every class that styles nothing.
