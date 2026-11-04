@@ -6,7 +6,7 @@ import {
   rolesList,
 } from 'waldur-js-client';
 
-import { Badge, PropertyItem, Tooltip } from 'waldur-ui';
+import { PropertyItem } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -36,20 +36,6 @@ import { CustomerMediaPanel } from './CustomerMediaPanel';
 import { CustomerOrganizationGroupsRow } from './CustomerOrganizationGroupsRow';
 import { StaffOnlyIndicator } from './StaffOnlyIndicator';
 import { CustomerEditPanelProps } from './types';
-
-const TabBadge = ({ count }: { count: number; tabKey?: string }) => (
-  <Tooltip label={translate('{count} fields', { count })}>
-    <Badge
-      variant="neutral"
-      size="sm"
-      shape="circle"
-      tone="outline"
-      className="ms-1.5"
-    >
-      {count}
-    </Badge>
-  </Tooltip>
-);
 
 const useTabStats = (isStaff: boolean) => {
   return useMemo(() => {
@@ -391,45 +377,29 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
       >
         <TabbedSection.Tab
           id="basic"
-          title={
-            <>
-              {translate('Basic info')}
-              <TabBadge count={tabStats.basic} tabKey="basic" />
-            </>
-          }
+          title={translate('Basic info')}
+          count={tabStats.basic}
         >
           <BasicInfoTab {...props} />
         </TabbedSection.Tab>
         <TabbedSection.Tab
           id="address"
-          title={
-            <>
-              {translate('Address')}
-              <TabBadge count={tabStats.address} tabKey="address" />
-            </>
-          }
+          title={translate('Address')}
+          count={tabStats.address}
         >
           <AddressTab {...props} />
         </TabbedSection.Tab>
         <TabbedSection.Tab
           id="settings"
-          title={
-            <>
-              {translate('Settings')}
-              <TabBadge count={tabStats.settings} tabKey="settings" />
-            </>
-          }
+          title={translate('Settings')}
+          count={tabStats.settings}
         >
           <SettingsTab {...props} />
         </TabbedSection.Tab>
         <TabbedSection.Tab
           id="identifiers"
-          title={
-            <>
-              {translate('Identifiers')}
-              <TabBadge count={tabStats.identifiers} tabKey="identifiers" />
-            </>
-          }
+          title={translate('Identifiers')}
+          count={tabStats.identifiers}
         >
           <IdentifiersTab {...props} />
         </TabbedSection.Tab>
