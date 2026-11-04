@@ -69,13 +69,6 @@ const UsageBadge: FC<{
  * rather than only in the backend it silently affects. The first one shows
  * and the rest sit behind "+N", unless `all` lists every one, as the edit
  * dialog does. */
-/** In the edit dialog the badges follow the state being picked, so choosing
- * "Not asked" shows its cost before it is confirmed. */
-const DialogUsageList: FC<{ usage: ProposalFieldUsage[] }> = ({ usage }) => {
-  const { values } = useFormState<{ value: ProposalFieldState }>();
-  return <UsageList usage={usage} state={values.value} all />;
-};
-
 const UsageList: FC<{
   usage: ProposalFieldUsage[];
   state: ProposalFieldState;
@@ -112,6 +105,13 @@ const UsageList: FC<{
       )}
     </div>
   );
+};
+
+/** In the edit dialog the badges follow the state being picked, so choosing
+ * "Not asked" shows its cost before it is confirmed. */
+const DialogUsageList: FC<{ usage: ProposalFieldUsage[] }> = ({ usage }) => {
+  const { values } = useFormState<{ value: ProposalFieldState }>();
+  return <UsageList usage={usage} state={values.value} all />;
 };
 
 export const ProposalFieldsSection: FC<ProposalFieldsSectionProps> = ({
