@@ -132,7 +132,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                   <p
                     className={classNames(
                       'text-sm font-medium mb-0',
-                      ellipsisTitle && 'ellipsis-lines-1',
+                      ellipsisTitle && 'line-clamp-1',
                     )}
                   >
                     {choice.label}

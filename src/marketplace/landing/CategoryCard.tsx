@@ -29,7 +29,7 @@ export const CategoryCard: FunctionComponent<CategoryCardProps> = (props) => {
         </h3>
         {Boolean(props.item.description) && (
           <p
-            className="category-description text-quaternary ellipsis-lines-2"
+            className="category-description text-quaternary line-clamp-2"
             title={props.item.description}
           >
             {props.item.description}

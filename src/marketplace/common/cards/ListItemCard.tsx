@@ -66,7 +66,7 @@ export const ListItemCard: FC<OfferingCardVariantProps> = ({
 
             {/* Description */}
             {offering.description && (
-              <div className="text-quaternary ellipsis-lines-2 text-sm">
+              <div className="text-quaternary line-clamp-2 text-sm">
                 {htmlToPlainText(offering.description)}
               </div>
             )}

@@ -234,7 +234,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
                     ref={setFeedbackCommentEl}
                     className={classNames(
                       'message-feedback-comment italic',
-                      !feedbackExpanded && 'ellipsis-lines-2',
+                      !feedbackExpanded && 'line-clamp-2',
                       clickable && 'is-clickable',
                     )}
                     title={

@@ -114,31 +114,6 @@ body {
   overflow-x: hidden;
 }
 
-%ellipsis-lines {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-
-.ellipsis-lines {
-  @extend %ellipsis-lines;
-
-  &-1 {
-    @extend %ellipsis-lines;
-    -webkit-line-clamp: 1;
-  }
-  &-2 {
-    @extend %ellipsis-lines;
-    -webkit-line-clamp: 2;
-  }
-  &-3 {
-    @extend %ellipsis-lines;
-    -webkit-line-clamp: 3;
-  }
-}
-
 .btn-text-align {
   line-height: 1.5;
   padding: calc(0.75rem + 1px) calc(1.5rem + 1px);
