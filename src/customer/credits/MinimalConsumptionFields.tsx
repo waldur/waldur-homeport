@@ -14,7 +14,8 @@ import { BaseCreditFormData } from './types';
 export const MinimalConsumptionFields: FC<{
   initialValues?: any;
   filterField?: string;
-}> = ({ initialValues, filterField }) => {
+  isOrganizationCredit?: boolean;
+}> = ({ initialValues, filterField, isOrganizationCredit }) => {
   const { values: formValues } = useFormState<BaseCreditFormData>({
     subscription: { values: true },
   });
@@ -47,7 +48,9 @@ export const MinimalConsumptionFields: FC<{
   if (filterField) {
     switch (filterField) {
       case 'end_date':
-        return <CreditEndDateField />;
+        return (
+          <CreditEndDateField isOrganizationCredit={isOrganizationCredit} />
+        );
       case 'minimal_consumption_logic':
         return <MinimalConsumptionLogicField />;
       case 'expected_consumption':
@@ -63,7 +66,7 @@ export const MinimalConsumptionFields: FC<{
 
   return (
     <>
-      <CreditEndDateField />
+      <CreditEndDateField isOrganizationCredit={isOrganizationCredit} />
       <MinimalConsumptionLogicField />
       <ExpectedConsumptionField />
       <GraceCoefficientField />

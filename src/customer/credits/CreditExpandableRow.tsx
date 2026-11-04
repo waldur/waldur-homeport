@@ -10,6 +10,30 @@ import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { minimalConsumptionLogicOptions } from './constants';
 import { CreditCostPolicies } from './CreditCostPolicies';
+import { getCreditKindHelp } from './creditKinds';
+
+const CreditKindItems = ({ credit }: { credit: CustomerCredit }) => {
+  const help = getCreditKindHelp();
+  return (
+    <>
+      <PropertyItem
+        label={translate('Paid credit')}
+        tooltip={help.paid}
+        value={propVal.currency(credit.paid_balance)}
+      />
+      <PropertyItem
+        label={translate('Granted credit')}
+        tooltip={help.granted}
+        value={propVal.currency(credit.granted_balance)}
+      />
+      <PropertyItem
+        label={translate('Withdrawable balance')}
+        tooltip={help.withdrawable}
+        value={propVal.currency(credit.withdrawable_balance)}
+      />
+    </>
+  );
+};
 
 export const CreditExpandableRow = ({
   row,
@@ -17,6 +41,10 @@ export const CreditExpandableRow = ({
   row: CustomerCredit | ProjectCredit;
 }) => (
   <ExpandableContainer asTable>
+    {/* An organization credit is made of lots; a project credit is only a
+        cap on it, so it has none. */}
+    {'paid_balance' in row ? <CreditKindItems credit={row} /> : null}
+
     <PropertyItem
       label={translate('Minimal consumption logic')}
       value={propVal.enum(row.minimal_consumption_logic, {

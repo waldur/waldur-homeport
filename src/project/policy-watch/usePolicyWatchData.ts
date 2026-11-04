@@ -694,6 +694,9 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         endDate,
         daysUntilEndDate,
         consumptionLastMonth: safeNumber(creditSource.consumption_last_month),
+        grantedBalance: projectCredit
+          ? null
+          : safeNumber(customerCredit.granted_balance),
       };
     }
 

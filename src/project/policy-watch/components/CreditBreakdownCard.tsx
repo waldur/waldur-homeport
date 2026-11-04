@@ -11,6 +11,9 @@ import { CreditBreakdown } from '../types';
 
 interface Props {
   breakdown: CreditBreakdown;
+  /** The organization credit stands in for a project without one. Its total
+   *  holds prepayments and earnings as well as what staff allocated. */
+  isOrganizationCredit?: boolean;
 }
 
 interface Segment {
@@ -22,10 +25,13 @@ interface Segment {
   hint: string;
 }
 
-export const CreditBreakdownCard: FC<Props> = ({ breakdown }) => {
-  const { granted, used, lost, remaining } = breakdown;
+export const CreditBreakdownCard: FC<Props> = ({
+  breakdown,
+  isOrganizationCredit,
+}) => {
+  const { total, used, lost, remaining } = breakdown;
 
-  if (granted <= 0) {
+  if (total <= 0) {
     return null;
   }
 
@@ -62,16 +68,20 @@ export const CreditBreakdownCard: FC<Props> = ({ breakdown }) => {
   ];
 
   const pct = (value: number) =>
-    Math.max(0, Math.min(100, (value / granted) * 100));
+    Math.max(0, Math.min(100, (value / total) * 100));
   const consumedPct = pct(used + lost);
 
   return (
     <>
       <div className="flex justify-between items-baseline mb-1.5 gap-2.5">
         <span className="text-quaternary">
-          {translate('Allocated {amount}', {
-            amount: defaultCurrency(granted),
-          })}
+          {isOrganizationCredit
+            ? translate('Total credit {amount}', {
+                amount: defaultCurrency(total),
+              })
+            : translate('Allocated {amount}', {
+                amount: defaultCurrency(total),
+              })}
         </span>
         <span className="text-quaternary">
           {translate('{pct}% consumed', { pct: consumedPct.toFixed(0) })}

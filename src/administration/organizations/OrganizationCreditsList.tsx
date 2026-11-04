@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { CustomerCredit, customerCreditsList } from 'waldur-js-client';
 
+import { defaultCurrency } from '@/core/formatCurrency';
 import { Link } from '@/core/Link';
-import { COMMON_CREDIT_COLUMNS } from '@/customer/credits/constants';
+import { getCreditColumns } from '@/customer/credits/constants';
 import { CreateCreditButton } from '@/customer/credits/CreateCreditButton';
 import { CreditExpandableRow } from '@/customer/credits/CreditExpandableRow';
 import { CustomerCreditActions } from '@/customer/credits/CustomerCreditActions';
@@ -42,7 +43,21 @@ export const OrganizationCreditsList: FC<Partial<TableWithPortal>> = ({
           render: OrganizationField,
           export: 'customer_name',
         },
-        ...COMMON_CREDIT_COLUMNS,
+        ...getCreditColumns(translate('Total credit')),
+        // The split by kind is in the expanded row on screen; the export
+        // carries it as columns of its own.
+        ...(
+          [
+            ['paid_balance', translate('Paid credit')],
+            ['granted_balance', translate('Granted credit')],
+            ['withdrawable_balance', translate('Withdrawable balance')],
+          ] as const
+        ).map(([field, title]) => ({
+          visible: false,
+          title,
+          render: null,
+          export: (row: CustomerCredit) => defaultCurrency(row[field]),
+        })),
       ]}
       title={translate('Credit management')}
       verboseName={translate('Credits')}
