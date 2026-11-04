@@ -53,7 +53,7 @@ export const MatrixTypingIndicator: FC<MatrixTypingIndicatorProps> = ({
         <span />
         <span />
       </span>
-      <span className="visually-hidden">{text}</span>
+      <span className="sr-only">{text}</span>
     </div>
   );
 };

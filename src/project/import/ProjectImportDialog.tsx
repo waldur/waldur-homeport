@@ -317,8 +317,8 @@ export const ProjectImportDialog: FC<ProjectImportDialogProps> = (props) => {
                 }
                 disabled={submitting}
               />
-              <div className="wizard-big  wizard-body clearfix">
-                <div className="content clearfix">
+              <div className="wizard-big wizard-body">
+                <div className="content">
                   <WizardTabs
                     steps={currentSteps}
                     currentStep={effectiveStep}

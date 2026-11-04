@@ -2,7 +2,7 @@
 @import 'components/root';
 @import 'bootstrap/scss/reboot';
 @import 'bootstrap/scss/type';
-@import 'bootstrap/scss/images';
+// No images: img-fluid and img-thumbnail are Tailwind classes.
 // No containers or grid: layouts are Tailwind grid/flex (no-bootstrap-grid).
 // tables: nothing uses table-responsive-{sm,md,lg,xl,xxl}; (xs: 0) generates
 // base .table-responsive only.
@@ -17,22 +17,12 @@ $grid-breakpoints: $_grid-breakpoints;
 // are waldur-ui Checkbox/Radio/Switch, inputs are Input/Textarea/NativeSelect
 // and the rest, and labels and help text are FormLabel and FormText (all
 // styled from waldur-design-tokens and Tailwind).
-@import 'bootstrap/scss/transitions';
+// No transitions: nothing uses .fade, .collapse or .collapsing any more.
 @import 'bootstrap/scss/card';
 
-// Bootstrap helpers: ratio-* and sticky-{sm,md,lg,xl,xxl}-top are trimmed
-// via $aspect-ratios and $grid-breakpoints.
-$_theme-colors: $theme-colors;
-$theme-colors: ();
-$_aspect-ratios: $aspect-ratios;
-$aspect-ratios: ();
-$grid-breakpoints: (
-  xs: 0,
-);
-@import 'bootstrap/scss/helpers';
-$grid-breakpoints: $_grid-breakpoints;
-$aspect-ratios: $_aspect-ratios;
-$theme-colors: $_theme-colors;
+// No helpers: their few uses became Tailwind (visually-hidden → sr-only,
+// stretched-link → after:absolute after:inset-0, clearfix and hstack dropped
+// where the element already contained its floats or was flex).
 
 // No Bootstrap utilities: Tailwind generates every utility class (#478).
 // Bootstrap's were `!important` in the `bootstrap` layer, so a name both

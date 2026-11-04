@@ -18,7 +18,7 @@ export const ImagesTab: FunctionComponent<ImagesTabProps> = (props) => {
           <img
             src={item.thumbnail}
             alt="thumb"
-            className="img-thumbnail"
+            className="max-w-full h-auto p-1 bg-primary border border-primary rounded-lg shadow-raised"
             onClick={() =>
               openDialog(ImageDetailsDialog, {
                 resolve: item,
