@@ -5,9 +5,18 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 const echarts = vi.hoisted(() => {
   const makeChart = () => {
     let disposed = false;
+    const handlers: Record<string, (params: any) => void> = {};
     return {
       setOption: vi.fn(),
       resize: vi.fn(),
+      on: vi.fn((event: string, handler: (params: any) => void) => {
+        handlers[event] = handler;
+      }),
+      off: vi.fn((event: string) => {
+        delete handlers[event];
+      }),
+      // A click on a chart element, as ECharts reports it.
+      click: (params: any) => handlers.click?.(params),
       dispose: vi.fn(() => {
         disposed = true;
       }),
@@ -67,5 +76,22 @@ describe('EChart', () => {
       expect.anything(),
       'dark-metronic',
     );
+  });
+
+  it('keeps reporting clicks on the chart drawn after a theme switch', async () => {
+    const ref = createRef<any>();
+    const onClick = vi.fn();
+    const { rerender } = render(
+      <EChart ref={ref} options={{}} onClick={onClick} />,
+    );
+    await waitFor(() => expect(ref.current).toBeTruthy());
+    const first = ref.current;
+
+    theme.current = 'dark';
+    rerender(<EChart ref={ref} options={{}} onClick={onClick} />);
+    await waitFor(() => expect(ref.current).not.toBe(first));
+
+    ref.current.click({ name: 'batch' });
+    expect(onClick).toHaveBeenCalledWith({ name: 'batch' });
   });
 });

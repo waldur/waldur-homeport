@@ -34,6 +34,16 @@ const MemoizedBlock: FC<UIBlockProps> = memo(
       prev.block.organization === next.block.organization &&
       prev.block.project_uuid === next.block.project_uuid &&
       prev.block.order_status === next.block.order_status &&
+      // Check hpc_job fields
+      prev.block.job_status === next.block.job_status &&
+      prev.block.job_id === next.block.job_id &&
+      prev.block.script === next.block.script &&
+      prev.block.errors === next.block.errors &&
+      prev.block.warnings === next.block.warnings &&
+      prev.block.allocation === next.block.allocation &&
+      prev.block.account === next.block.account &&
+      prev.block.cluster === next.block.cluster &&
+      prev.block.partition === next.block.partition &&
       // Check homeport_nav fields
       prev.block.links === next.block.links &&
       prev.block.message === next.block.message &&
@@ -46,7 +56,10 @@ const MemoizedBlock: FC<UIBlockProps> = memo(
       // one chunk and don't change after the block lands, so a shallow
       // identity check is enough to skip re-renders.
       prev.block.questions === next.block.questions &&
-      prev.block.context === next.block.context
+      prev.block.context === next.block.context &&
+      // Check chart fields — a chart arrives complete in one part
+      prev.block.title === next.block.title &&
+      prev.block.series === next.block.series
     );
   },
 );
@@ -57,6 +70,7 @@ export const BlockRenderer: FC<BlockRendererProps> = ({ blocks }) => {
   // Filter out empty blocks (memoized to prevent recalculation)
   // Allow loading blocks through even with empty content - they show their own loading UI
   // Allow vm_order blocks with structured data even if content is empty
+  // Allow hpc_job blocks — they render from structured fields
   // Allow homeport_nav blocks — they render from `links`, often have no `content`
   const validBlocks = useMemo(
     () =>
@@ -67,6 +81,10 @@ export const BlockRenderer: FC<BlockRendererProps> = ({ blocks }) => {
           block.key === 'resource_list' ||
           block.key === 'homeport_nav' ||
           block.key === 'ask_user_form' ||
+          // hpc_job renders from its structured fields; content is optional
+          block.key === 'hpc_job' ||
+          // chart renders from its spec fields
+          (block.key === 'chart' && Boolean(block.series)) ||
           (block.key === 'vm_order' &&
             (block.order_id ||
               block.name ||

@@ -34,6 +34,10 @@ import { BaseButton, Badge } from 'waldur-ui';
 
 import { calculateQuotaPercentage } from '@/administration/ai-assistant/AITokenExpandableRow';
 import {
+  HpcJobActions,
+  isHpcJobAwaitingConfirmation,
+} from '@/ai-assistant/components/blocks/HpcJobBlock';
+import {
   VMOrderActions,
   VMOrderFormProvider,
 } from '@/ai-assistant/components/blocks/VMOrderBlock';
@@ -436,6 +440,12 @@ const AssistantMessage: FC = () => {
     [currentBlocks],
   );
 
+  // A previewed HPC job waiting for the user's Submit / Modify
+  const hpcJobBlock = useMemo(
+    () => currentBlocks.find(isHpcJobAwaitingConfirmation),
+    [currentBlocks],
+  );
+
   return (
     <AssistantMessageContext.Provider value={contextValue}>
       <VMOrderFormProvider>
@@ -451,6 +461,14 @@ const AssistantMessage: FC = () => {
               <AuiIf condition={(s) => s.message.isLast}>
                 <div className="aui-assistant-message-footer">
                   <VMOrderActions block={vmOrderBlock} />
+                </div>
+              </AuiIf>
+            )}
+
+            {hpcJobBlock && (
+              <AuiIf condition={(s) => s.message.isLast}>
+                <div className="aui-assistant-message-footer">
+                  <HpcJobActions block={hpcJobBlock} />
                 </div>
               </AuiIf>
             )}

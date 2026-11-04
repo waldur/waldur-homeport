@@ -16,7 +16,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ProgressStep, Wizard } from '@/wizard';
 
 import { MaintenanceForm, MaintenanceFormDialogProps } from '../types';
-import { getMaintenanceOfferings } from '../utils';
+import { getMaintenanceOfferings, parsePartitions } from '../utils';
 
 import { MaintenanceSaveAsDropdown } from './MaintenanceSaveAsDropdown';
 import { Step1CreateMessage } from './Step1CreateMessage';
@@ -93,6 +93,9 @@ export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
             offering: offering.url,
             impact_description: formData.impact_description?.[offering.uuid],
             impact_level: formData.impact_level[offering.uuid],
+            affected_partitions: parsePartitions(
+              formData.affected_partitions?.[offering.uuid],
+            ),
           },
         });
       });
@@ -103,6 +106,9 @@ export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
           body: {
             impact_description: formData.impact_description?.[offeringUuid],
             impact_level: formData.impact_level[offeringUuid],
+            affected_partitions: parsePartitions(
+              formData.affected_partitions?.[offeringUuid],
+            ),
           },
         });
       });

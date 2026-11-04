@@ -42,6 +42,12 @@ export interface StatCardProps {
     label: string;
     tone?: BadgeVariant;
   };
+  /**
+   * `sm` is the compact tile for dense grids of figures (five or six to a
+   * row, often inside another card): 1rem padding, an 18px value that wraps
+   * rather than overflowing, and a 12px label and hint.
+   */
+  size?: 'md' | 'sm';
   className?: string;
 }
 
@@ -50,6 +56,7 @@ export const StatCard = ({
   value,
   hint,
   trend,
+  size = 'md',
   className,
 }: StatCardProps) => (
   <Card
@@ -76,8 +83,22 @@ export const StatCard = ({
         made the value->footer gap 0.25rem too wide. Applied as mt-[..] on
         each row instead, as rem (not their px-at-13px-root equivalents —
         see this file's top comment on why). */}
-    <CardContent className="flex flex-col px-[var(--card-padding-x,1.85rem)] py-[1.25rem]">
-      <div className="text-sm font-medium text-quaternary">{label}</div>
+    <CardContent
+      className={cn(
+        'flex flex-col',
+        size === 'sm'
+          ? 'min-w-0 p-[1rem]'
+          : 'px-[var(--card-padding-x,1.85rem)] py-[1.25rem]',
+      )}
+    >
+      <div
+        className={cn(
+          'font-medium',
+          size === 'sm' ? 'text-xs text-tertiary' : 'text-sm text-quaternary',
+        )}
+      >
+        {label}
+      </div>
       {/* leading-[1.2] + mb-[0.5rem]: the real component renders this as an
           <h1>, which — unlike CardTitle's h3, deliberately zeroed above —
           keeps its real Bootstrap heading typography here: $headings-
@@ -88,15 +109,31 @@ export const StatCard = ({
           — it's real trailing space on the value itself, present even with
           no footer at all, confirmed via e2e-visual/stat-card-parity.spec.ts:
           without it, this card measured ~0.5rem short. */}
-      <div className="mt-[0.75rem] mb-[0.5rem] text-[32px] leading-[1.2] font-semibold text-primary">
+      <div
+        className={cn(
+          'font-semibold text-primary',
+          size === 'sm'
+            ? 'mt-[0.25rem] text-lg break-words'
+            : 'mt-[0.75rem] mb-[0.5rem] text-[32px] leading-[1.2]',
+        )}
+      >
         {value}
       </div>
       {(trend || hint) && (
-        <div className="mt-[0.5rem] flex flex-wrap items-center gap-1.5 text-sm">
+        <div
+          className={cn(
+            'flex flex-wrap items-center gap-1.5',
+            size === 'sm' ? 'mt-[0.25rem] text-xs' : 'mt-[0.5rem] text-sm',
+          )}
+        >
           {trend && (
             <Badge variant={trend.tone ?? 'neutral'}>{trend.label}</Badge>
           )}
-          {hint && <span className="text-quinary">{hint}</span>}
+          {hint && (
+            <span className={size === 'sm' ? 'text-tertiary' : 'text-quinary'}>
+              {hint}
+            </span>
+          )}
         </div>
       )}
     </CardContent>

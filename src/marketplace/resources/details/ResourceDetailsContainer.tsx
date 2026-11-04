@@ -587,6 +587,8 @@ export const ResourceDetailsContainer: FunctionComponent<
               resource,
               resourceScope: data.scope,
               offering: data.offering,
+              // Consumer view only: the provider view has no HPC tabs.
+              hpcMode: 'hpcMode' in data ? data.hpcMode : null,
             }}
             isLoading={isLoading || isRefetching}
             error={error}

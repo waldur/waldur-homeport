@@ -187,6 +187,13 @@ export const getSettingGroupLocations = (): Record<
       pageTitle: marketplaceSettingsPage,
       tabTitle: translate('SLURM policy'),
     },
+    [translate('HPC workspace')]: {
+      state: 'admin-marketplace-settings',
+      params: { tab: 'hpc-workspace' },
+      category: marketplaceCategory,
+      pageTitle: marketplaceSettingsPage,
+      tabTitle: translate('HPC workspace'),
+    },
     [translate('Custom Metrics')]: {
       state: 'admin-marketplace-settings',
       params: { tab: 'custom-metrics' },

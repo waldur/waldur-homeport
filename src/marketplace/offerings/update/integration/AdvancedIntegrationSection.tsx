@@ -7,15 +7,11 @@ import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { useUrlTab } from '@/navigation/useUrlTab';
 
+import { isHpcWorkspaceConfigurable } from './advancedIntegration';
+import { HpcWorkspaceIntegrationSection } from './HpcWorkspaceIntegrationSection';
 import { LexisLinkIntegrationSection } from './LexisLinkIntegrationSection';
 import { OfferingEditPanelProps } from './types';
 import { UserAttributeConfigSection } from './UserAttributeConfigSection';
-
-export const isAdvancedIntegrationVisible = (offering): boolean =>
-  Boolean(
-    offering?.plugin_options?.service_provider_can_create_offering_user ||
-    isFeatureVisible(MarketplaceFeatures.lexis_links),
-  );
 
 export const AdvancedIntegrationSection: FC<OfferingEditPanelProps> = (
   props,
@@ -24,6 +20,7 @@ export const AdvancedIntegrationSection: FC<OfferingEditPanelProps> = (
     props.offering?.plugin_options?.service_provider_can_create_offering_user,
   );
   const showLexis = isFeatureVisible(MarketplaceFeatures.lexis_links);
+  const showHpcWorkspace = isHpcWorkspaceConfigurable(props.offering);
 
   const tabs = useMemo(
     () =>
@@ -36,8 +33,12 @@ export const AdvancedIntegrationSection: FC<OfferingEditPanelProps> = (
           key: 'lexis',
           title: translate('LEXIS integration'),
         },
+        showHpcWorkspace && {
+          key: 'hpc-workspace',
+          title: translate('HPC workspace'),
+        },
       ].filter(Boolean),
-    [showUserAttribute, showLexis],
+    [showUserAttribute, showLexis, showHpcWorkspace],
   );
 
   const { activeKey, handleSelect } = useUrlTab(tabs, 'section');
@@ -66,6 +67,11 @@ export const AdvancedIntegrationSection: FC<OfferingEditPanelProps> = (
             {showLexis && (
               <TabsContent value="lexis">
                 <LexisLinkIntegrationSection {...props} />
+              </TabsContent>
+            )}
+            {showHpcWorkspace && (
+              <TabsContent value="hpc-workspace">
+                <HpcWorkspaceIntegrationSection {...props} />
               </TabsContent>
             )}
           </>

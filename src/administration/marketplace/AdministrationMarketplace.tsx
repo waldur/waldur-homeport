@@ -39,6 +39,11 @@ export const MARKETPLACE_TABS: SettingsTab[] = [
     groupName: translate('SLURM Policy'),
   },
   {
+    key: 'hpc-workspace',
+    title: translate('HPC workspace'),
+    groupName: translate('HPC workspace'),
+  },
+  {
     key: 'custom-metrics',
     title: translate('Custom metrics'),
     groupName: translate('Custom Metrics'),

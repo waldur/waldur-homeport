@@ -3,7 +3,7 @@ import {
   ThreadMessageLike,
 } from '@assistant-ui/react';
 import React from 'react';
-import type { FeedbackCategoryEnum } from 'waldur-js-client';
+import type { ChartSpec, FeedbackCategoryEnum } from 'waldur-js-client';
 
 export interface MessageHandlerDependencies {
   messages: readonly ThreadMessageLike[];
@@ -32,7 +32,7 @@ export type RunConfig = {
 
 export interface UIBlock {
   id: string; // Unique ID for React keys
-  key: string; // Component type (e.g., 'code', 'mermaid', 'markdown', 'resource_list', 'vm_order')
+  key: string; // Component type (e.g., 'code', 'mermaid', 'markdown', 'resource_list', 'vm_order', 'hpc_job')
   content: string;
   tag?: string; // Optional metadata (e.g., language for code blocks)
   status: 'loading' | 'streaming' | 'complete'; // Controls rendering
@@ -51,6 +51,20 @@ export interface UIBlock {
   network?: string; // Network name or "default"
   ssh_key_name?: string; // SSH key name for VM access
   system_volume_size?: number | string; // System volume size in GB
+  // HPC job card fields (when key === 'hpc_job'). `name` is the job name.
+  // The card's own state travels as `job_status` ("preview" | "error" |
+  // "submitted"), like vm_order's `order_status`: `status` is the block
+  // lifecycle.
+  job_status?: string;
+  allocation?: string; // Allocation (resource) name
+  allocation_uuid?: string; // Marketplace resource UUID of the allocation
+  account?: string; // Slurm account the job is charged to
+  cluster?: string; // FirecREST system name
+  partition?: string;
+  script?: string; // Rendered batch script
+  errors?: string[]; // Validation errors (job does not fit the limits)
+  warnings?: string[];
+  job_id?: string; // Slurm job ID once submitted
   // HomePort navigation links (when key === 'homeport_nav')
   // The caption for the nav block lives in `content` (shared across all blocks).
   links?: Array<{
@@ -103,6 +117,19 @@ export interface UIBlock {
     }>;
   }>;
   context?: string;
+
+  // Chart fields (when key === 'chart'): a data-only chart spec from the
+  // insight tools, flat on the block as the backend persists it.
+  chart_type?: ChartSpec['chart_type'];
+  title?: string;
+  subtitle?: string;
+  x?: ChartSpec['x'];
+  y?: ChartSpec['y'];
+  y2?: ChartSpec['y2'];
+  series?: ChartSpec['series'];
+  annotations?: ChartSpec['annotations'];
+  link?: ChartSpec['link'];
+  empty_message?: string;
 
   // Tool-call fields (when key === 'tool'). A tool block is a wrapper: the
   // renderable payload is `result`, itself a full block (ask_user_form,

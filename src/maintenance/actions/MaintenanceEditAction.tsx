@@ -29,7 +29,7 @@ export const MaintenanceEditAction: FC<MaintenanceEditActionProps> = ({
 }) => {
   const { openDialog } = useModal();
   const callback = useCallback(() => {
-    const { impact_level, impact_description } =
+    const { impact_level, impact_description, affected_partitions } =
       getMaintenanceOfferingFormFields(row.affected_offerings);
 
     const scheduled_window: [Date, Date] | undefined =
@@ -51,6 +51,7 @@ export const MaintenanceEditAction: FC<MaintenanceEditActionProps> = ({
         affected_offerings: row.affected_offerings,
         impact_description,
         impact_level,
+        affected_partitions,
       },
     });
   }, [row, provider, refetch]);

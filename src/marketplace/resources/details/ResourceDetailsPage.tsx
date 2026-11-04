@@ -6,12 +6,15 @@ import {
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import type { HpcWorkspaceMode } from '@/marketplace/resources/details/hpc/queries';
 
 interface OwnProps {
   data: {
     resource: Resource;
     resourceScope: any;
     offering: Offering;
+    /** Set for an HPC workspace, for its tabs. */
+    hpcMode?: HpcWorkspaceMode | null;
   };
   refetch;
   isLoading;

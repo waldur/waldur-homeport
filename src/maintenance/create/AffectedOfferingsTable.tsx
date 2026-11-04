@@ -54,6 +54,11 @@ export const AffectedOfferingsTable: FC<AffectedOfferingsTableProps> = ({
           render: ({ row }) =>
             renderFieldOrDash(values.impact_description?.[row.uuid]),
         },
+        {
+          title: translate('Affected partitions'),
+          render: ({ row }) =>
+            values.affected_partitions?.[row.uuid] || translate('All'),
+        },
       ]}
       verboseName={translate('Affected offerings')}
       cardBordered={false}

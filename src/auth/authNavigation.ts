@@ -14,6 +14,7 @@ import {
 
 import { clearAuthTokens } from './AuthService';
 import { resetSessionState } from './sessionReset';
+import { getOauthURL } from './utils';
 
 /**
  * Homeport-specific adapter over ./AuthService: everything here talks to
@@ -66,6 +67,23 @@ export function storeRedirect() {
       toParams: toPlainParams(router.globals.params.toParams),
     });
   }
+}
+
+/**
+ * Sign in again through an OIDC provider and come back to the current page.
+ * For a signed-in user whose identity provider token is no longer usable
+ * (e.g. HPC services after the provider's session ended): the login callback
+ * resumes the page from RedirectStorage, as it does after any login.
+ */
+export function signInAgainHere(provider: string) {
+  const current = router.globals.current;
+  if (current?.name && !isSignInStep(current.name)) {
+    RedirectStorage.set({
+      toState: current.name,
+      toParams: toPlainParams({ ...router.globals.params }),
+    });
+  }
+  window.location.assign(getOauthURL({ provider }));
 }
 
 interface NavigationTarget {

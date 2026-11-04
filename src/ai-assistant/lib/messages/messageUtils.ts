@@ -75,6 +75,42 @@ export function extractTextFromMessageContent(
   return '';
 }
 
+/** Plain-text rendering of an hpc_job card, for copying and LLM context. */
+const hpcJobText = (block: UIBlock): string => {
+  const lines: string[] = [];
+  if (block.content) {
+    lines.push(block.content, '');
+  }
+  const header = {
+    preview: 'HPC Job Preview',
+    error: 'HPC Job Does Not Fit The Cluster Limits',
+    submitted: 'HPC Job Submitted',
+  }[block.job_status ?? ''];
+  if (header) {
+    lines.push(header, '');
+  }
+  if (block.name) lines.push(`Job Name: ${block.name}`);
+  if (block.job_id) lines.push(`Job ID: ${block.job_id}`);
+  if (block.allocation) lines.push(`Allocation: ${block.allocation}`);
+  if (block.account) lines.push(`Account: ${block.account}`);
+  if (block.cluster) lines.push(`Cluster: ${block.cluster}`);
+  if (block.partition) lines.push(`Partition: ${block.partition}`);
+  if (block.errors?.length) {
+    lines.push('', 'Errors:', ...block.errors.map((error) => `- ${error}`));
+  }
+  if (block.warnings?.length) {
+    lines.push(
+      '',
+      'Warnings:',
+      ...block.warnings.map((warning) => `- ${warning}`),
+    );
+  }
+  if (block.script) {
+    lines.push('', 'Script:', '```bash', block.script, '```');
+  }
+  return lines.join('\n');
+};
+
 /**
  * Block-specific content extractors.
  */
@@ -122,6 +158,11 @@ const blockExtractors: Record<string, (block: UIBlock) => string> = {
 
     return lines.join('\n');
   },
+  hpc_job: hpcJobText,
+  // The figures behind a chart reach the model through the tool result; the
+  // text form only names the chart.
+  chart: (block: UIBlock) =>
+    [`Chart: ${block.title ?? ''}`, block.subtitle].filter(Boolean).join('\n'),
 };
 
 /**
