@@ -24,7 +24,7 @@ Tables can alternate between lists and grid cards. In grid mode, data is display
 
 - **`gridItem`**: React component class used to render each grid cell card.
 - **`gridClassName`**: Tailwind classes for the grid container, which is `grid grid-cols-1 gap-5` by default: columns per breakpoint (e.g. `"sm:grid-cols-2 md:grid-cols-3"`) and, optionally, a gap that replaces `gap-5` (e.g. `"gap-0"`). Write the classes literally so Tailwind generates them.
-- **`gridFixedWidth`**: Boolean. When enabled, renders grid items inside a fixed CSS Grid container (`className="grid-fixed-width"`) with a fixed card size instead of responsive columns.
+- **`gridFixedWidth`**: Boolean. When enabled, renders grid items in a CSS Grid of `minmax(400px, 1fr)` auto-fill columns (one column below 576px) instead of responsive columns: cards are at least 400px wide and stretch to fill the row.
 - **`initialMode`**: Default display mode on load (`'table'` or `'grid'`, defaults to `'table'`).
 
 ```tsx

@@ -32,8 +32,6 @@ import {
 } from './types';
 import { computePinnedOffsets, computePinnedShadows } from './utils';
 
-import './Table.scss';
-
 const TABLE_DEFAULT_PROPS: Partial<TableProps> = {
   rows: [],
   columns: [],
@@ -469,9 +467,12 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
 
           {/* Main content */}
           <div className={classNames(props.bodyClassName, 'card-body')}>
+            {/* items-center is the fallback for Safari before 17.6, which drops
+                items-center-safe; safe keeps a child wider than the screen
+                at the left edge, in scroll reach. */}
             <div
               ref={tableResponsiveRef}
-              className="table-responsive dataTables_wrapper"
+              className="table-responsive relative max-md:flex max-md:flex-col max-md:items-center max-md:items-center-safe"
               style={{ minHeight: props.minHeight || 300 }}
               onScroll={debouncedScrollHandler}
             >

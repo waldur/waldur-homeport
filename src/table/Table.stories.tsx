@@ -85,7 +85,7 @@ export const Loading: Story = {
 };
 
 /** A background refetch with existing rows on screen: dims the current
- * content (`.table-content-refetching`) and overlays a small spinner,
+ * content (`aria-busy` on the table container) and overlays a small spinner,
  * rather than replacing the table with the full loading state. */
 export const Refetching: Story = {
   render: () => (
