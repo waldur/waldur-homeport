@@ -17,10 +17,10 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  Badge,
   BaseButton,
   RemoveFilterBadgeButton,
   MenuPopover,
-  Tag,
 } from 'waldur-ui';
 
 import { TableFilterContext } from './FilterContextProvider';
@@ -55,40 +55,73 @@ export const TableSidebarFilterValues = ({
   value,
   getValueLabel,
   badgeValue = null,
+  ellipsis = false,
   remove,
   hideRemoveButton = false,
 }) => {
   return !['', undefined].includes(value) ? (
     badgeValue ? (
       badgeValue(value) ? (
-        <div>
-          <Tag
-            onClear={hideRemoveButton ? undefined : () => remove(value, value)}
-            clearLabel={removeValueLabel(badgeValue(value))}
+        <div style={!ellipsis ? { maxWidth: 'unset' } : undefined}>
+          <Badge
+            variant="neutral"
+            size="lg"
+            rightIcon={
+              !hideRemoveButton && (
+                <RemoveFilterBadgeButton
+                  onClick={() => remove(value, value)}
+                  label={removeValueLabel(badgeValue(value))}
+                />
+              )
+            }
+            tone="outline"
+            className="text-xs"
           >
             {badgeValue(value)}
-          </Tag>
+          </Badge>
         </div>
       ) : null
     ) : Array.isArray(value) ? (
       <>
         {value.map((v, i) => (
-          <Tag
+          <Badge
             key={i}
-            onClear={hideRemoveButton ? undefined : () => remove(value, v)}
-            clearLabel={removeValueLabel(getValueLabel(v))}
+            variant="neutral"
+            size="lg"
+            rightIcon={
+              !hideRemoveButton && (
+                <RemoveFilterBadgeButton
+                  onClick={() => remove(value, v)}
+                  label={removeValueLabel(getValueLabel(v))}
+                />
+              )
+            }
+            tone="outline"
+            className="text-xs"
+            style={!ellipsis ? { maxWidth: 'unset' } : undefined}
           >
             {getValueLabel(v)}
-          </Tag>
+          </Badge>
         ))}
       </>
     ) : (
-      <Tag
-        onClear={hideRemoveButton ? undefined : () => remove(value, value)}
-        clearLabel={removeValueLabel(getValueLabel(value))}
+      <Badge
+        variant="neutral"
+        size="lg"
+        rightIcon={
+          !hideRemoveButton && (
+            <RemoveFilterBadgeButton
+              onClick={() => remove(value, value)}
+              label={removeValueLabel(getValueLabel(value))}
+            />
+          )
+        }
+        tone="outline"
+        className="text-xs"
+        style={!ellipsis ? { maxWidth: 'unset' } : undefined}
       >
         {getValueLabel(value)}
-      </Tag>
+      </Badge>
     )
   ) : null;
 };
@@ -140,6 +173,7 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
             value={value}
             getValueLabel={getValueLabel}
             badgeValue={props.badgeValue}
+            ellipsis={props.ellipsis}
             remove={removeValue}
             hideRemoveButton={props.hideRemoveButton}
           />
@@ -151,6 +185,7 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
       props.name,
       getValueLabel,
       props.badgeValue,
+      props.ellipsis,
       removeValue,
       props.hideRemoveButton,
       setFilter,
@@ -195,6 +230,7 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
             value={itemValue}
             getValueLabel={getValueLabel}
             badgeValue={props.badgeValue}
+            ellipsis={props.ellipsis}
             remove={removeValue}
             hideRemoveButton={props.hideRemoveButton}
           />
@@ -265,6 +301,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
             value={value}
             getValueLabel={getValueLabel}
             badgeValue={props.badgeValue}
+            ellipsis={props.ellipsis}
             remove={removeValue}
             hideRemoveButton={props.hideRemoveButton}
           />
@@ -276,6 +313,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
       props.name,
       getValueLabel,
       props.badgeValue,
+      props.ellipsis,
       removeValue,
       props.hideRemoveButton,
       setFilter,
