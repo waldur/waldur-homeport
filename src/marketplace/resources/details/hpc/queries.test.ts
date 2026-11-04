@@ -22,7 +22,7 @@ describe('hasFirecrest', () => {
   });
 
   it('takes a backend without the flag for FirecREST, its only kind', () => {
-    expect(hasFirecrest({ resource_uuid: 'r' })).toBe(true);
+    expect(hasFirecrest({})).toBe(true);
   });
 
   it('knows nothing before the workspace has loaded', () => {

@@ -8,7 +8,6 @@ import {
   hpcWorkspacesJobsPerformancePdfRetrieve,
   hpcWorkspacesRetrieve,
   hpcWorkspacesUsageRetrieve,
-  type HpcWorkspacesListData,
 } from 'waldur-js-client';
 
 import { OWN_ERROR_STATE, retryServerErrors } from '@/core/queryRetry';
@@ -101,9 +100,9 @@ const normalizeUuid = (uuid?: string) =>
  * backend from before such read-only workspaces leaves `firecrest_enabled`
  * out: every workspace it had was on FirecREST.
  */
-export const hasFirecrest = (workspace: object | null | undefined): boolean =>
-  Boolean(workspace) &&
-  (workspace as { firecrest_enabled?: boolean }).firecrest_enabled !== false;
+export const hasFirecrest = (
+  workspace: { firecrest_enabled?: boolean } | null | undefined,
+): boolean => Boolean(workspace) && workspace.firecrest_enabled !== false;
 
 /** What a resource's HPC workspace can do. */
 export interface HpcWorkspaceMode {
@@ -135,13 +134,11 @@ export const getHpcWorkspaceMode = (
   if (!named) {
     return Promise.resolve(null);
   }
-  // resource_uuid narrows the list to this resource (not in the client yet);
-  // a backend without the filter lists the first page, searched here.
-  const query = {
-    resource_uuid: resourceUuid,
-    page_size: 200,
-  } as HpcWorkspacesListData['query'];
-  return hpcWorkspacesList({ query })
+  // resource_uuid narrows the list to this resource; a backend without the
+  // filter lists the first page, searched here.
+  return hpcWorkspacesList({
+    query: { resource_uuid: resourceUuid, page_size: 200 },
+  })
     .then((response) => {
       const workspace = response.data.find(
         (item) =>
