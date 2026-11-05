@@ -5009,11 +5009,6 @@
       "feature_area": "roles"
     }
   },
-  "Apply table filters": {
-    "context": {
-      "feature_area": "table"
-    }
-  },
   "Apply to All Organization Groups": {
     "context": {
       "feature_area": "policies"

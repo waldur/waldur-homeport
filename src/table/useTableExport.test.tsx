@@ -28,14 +28,15 @@ const secondPage = [
 // What the table holds on screen: trimmed to its visible columns.
 const trimmedRows = [{ uuid: '1', name: 'vm-1' }];
 
+// A scoped table: its scope sits in the same filter as the user's filters.
 const props = {
-  filter: { state: 'OK', field: ['uuid', 'name'] },
+  filter: { project_uuid: 'p1', state: 'OK', field: ['uuid', 'name'] },
   rows: trimmedRows,
   columns: [{ id: 'name', title: 'Name', keys: ['name'] }],
   activeColumns: { name: ['name'] },
 };
 
-const renderExport = () => {
+const renderExport = (ownProps: Record<string, any> = props) => {
   const store = createStore(() => ({
     tables: {
       [TABLE]: {
@@ -49,7 +50,7 @@ const renderExport = () => {
   const wrapper = ({ children }: { children: ReactNode }) => (
     <Provider store={store}>{children}</Provider>
   );
-  return renderHook(() => useTableExport(TABLE, props), { wrapper }).result
+  return renderHook(() => useTableExport(TABLE, ownProps), { wrapper }).result
     .current;
 };
 
@@ -84,12 +85,13 @@ describe('useTableExport as JSON', () => {
   });
 
   it('writes every page as the API returns it, without trimming fields', async () => {
-    await renderExport()({ format: 'json', withFilters: true, allPages: true });
+    await renderExport()({ format: 'json', allPages: true });
 
     expect(fetchData).toHaveBeenCalledTimes(2);
     for (const [request] of fetchData.mock.calls) {
       expect(request.filter).not.toHaveProperty('field');
       expect(request.filter).toMatchObject({
+        project_uuid: 'p1',
         state: 'OK',
         name: 'vm',
         o: '-name',
@@ -101,7 +103,6 @@ describe('useTableExport as JSON', () => {
   it('fetches the current page again rather than writing the trimmed rows', async () => {
     await renderExport()({
       format: 'json',
-      withFilters: true,
       allPages: false,
     });
 
@@ -112,25 +113,27 @@ describe('useTableExport as JSON', () => {
     expect(await savedRows()).toEqual(secondPage);
   });
 
-  it('keeps the filters for the current page, which is the rows on screen', async () => {
-    await renderExport()({
-      format: 'json',
-      withFilters: false,
-      allPages: false,
-    });
+  it("keeps the table's scope, filters and search for every page", async () => {
+    await renderExport()({ format: 'json', allPages: true });
 
     const [request] = fetchData.mock.calls[0];
-    expect(request.filter).toEqual({ state: 'OK', name: 'vm', o: '-name' });
+    expect(request.filter).toEqual({
+      project_uuid: 'p1',
+      state: 'OK',
+      name: 'vm',
+      o: '-name',
+    });
   });
 
-  it('drops the table filters and search when they are not applied', async () => {
-    await renderExport()({
-      format: 'json',
-      withFilters: false,
+  it('passes the search term to the full report', async () => {
+    const download = vi.fn(() => Promise.resolve());
+    await renderExport({ ...props, fullExport: { label: 'Full', download } })({
+      format: 'csv',
+      content: 'full',
       allPages: true,
     });
 
-    const [request] = fetchData.mock.calls[0];
-    expect(request.filter).toEqual({ o: '-name' });
+    expect(download).toHaveBeenCalledWith({ query: 'vm' });
+    expect(fetchData).not.toHaveBeenCalled();
   });
 });
