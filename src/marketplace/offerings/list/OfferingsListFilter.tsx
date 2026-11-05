@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@/i18n';
+import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 import { OfferingTypeFilter } from '@/marketplace/offerings/details/OfferingTypeFilter';
 import { OfferingStateFilter } from '@/marketplace/offerings/list/OfferingStateFilter';
 import { ProviderFilter } from '@/marketplace/orders/ProviderFilter';
@@ -12,6 +13,20 @@ interface OfferingsListFilterOwnProps {
   showCategory?;
   showOrganization?;
 }
+
+// Store the provider's organization as {uuid, name}, the shape the
+// Organization column's inline filter and the offering breadcrumb's URL
+// already use, so the value survives the URL's "uuid::name" round trip.
+const loadOrganizationOptions = async (query, prevOptions, additional) => {
+  const result = await providerAutocomplete(query, prevOptions, additional);
+  return {
+    ...result,
+    options: result.options.map((provider) => ({
+      uuid: provider.customer_uuid,
+      name: provider.customer_name,
+    })),
+  };
+};
 
 const sharedOptions = [
   {
@@ -32,8 +47,10 @@ export const OfferingsListFilter: FunctionComponent<
       <OfferingStateFilter instantApply={false} />
       {showOrganization ? (
         <ProviderFilter
-          badgeValue={(value) => value?.name}
           name="organization"
+          loadOptions={loadOrganizationOptions}
+          getOptionValue={(option) => option.uuid}
+          getOptionLabel={(option) => option.name}
         />
       ) : null}
       <OfferingTypeFilter />

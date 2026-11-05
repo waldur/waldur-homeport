@@ -15,7 +15,10 @@ import { ADMIN_OFFERING_TABLE_NAME } from './constants';
 export const buildOfferingsFilter = (filterValues: any) => {
   const filter: MarketplaceProviderOfferingsListData['query'] = {};
   if (filterValues?.organization) {
-    filter.customer_uuid = filterValues.organization.customer_uuid;
+    // Older saved filters hold the raw provider, whose own uuid is not the
+    // organization's.
+    filter.customer_uuid =
+      filterValues.organization.customer_uuid ?? filterValues.organization.uuid;
   }
   if (filterValues) {
     if (filterValues.state && Array.isArray(filterValues.state)) {
