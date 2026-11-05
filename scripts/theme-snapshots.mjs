@@ -6,6 +6,7 @@
 //
 //   node scripts/theme-snapshots.mjs capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>] [--widths <px,px,...>] [--themes <light,dark>]
 //   node scripts/theme-snapshots.mjs compare <base-dir> <head-dir> <report-dir>
+//   node scripts/theme-snapshots.mjs root-invariance <storybook-static> <out-dir> [--filter <regex>] [--widths …] [--themes …] [--roots <px,px>]
 //
 // capture serves the static Storybook itself, opens each story's iframe with
 // the `theme` global (the same switch as the toolbar, which sets data-theme
@@ -16,9 +17,17 @@
 // captures each story once per viewport width (<story-id>.<theme>.w<px>.png),
 // for layout changes that differ per breakpoint: 576,768,992,1200 are the
 // sm, md, lg and xl breakpoints. --themes limits the themes captured.
+// --root <px> forces html's font size (the rem root) before the story loads,
+// overriding the 13px HomePort forces.
 //
 // compare writes report.json and, for every pair that differs, a
 // base | head | changed-pixels-in-red PNG. Exit code 1 when anything differs.
+//
+// root-invariance captures the build twice, with html's font size forced to
+// 13px and to 20px (--roots), into <out-dir>/root-<px>, and compares the two
+// into <out-dir>/report. A story that differs still sizes something in rem:
+// the list is what stands between HomePort and the browser's default root
+// (docs/design-tokens.md → "Root font size"). Not a CI gate yet.
 import {
   createReadStream,
   existsSync,
@@ -76,7 +85,15 @@ function serve(root) {
   );
 }
 
-async function capture(staticDir, outDir, filter, font, widths, themes) {
+async function capture(
+  staticDir,
+  outDir,
+  filter,
+  font,
+  widths,
+  themes,
+  rootPx,
+) {
   const root = path.resolve(staticDir);
   const index = JSON.parse(readFileSync(path.join(root, 'index.json'), 'utf8'));
   const stories = Object.values(index.entries).filter(
@@ -88,6 +105,27 @@ async function capture(staticDir, outDir, filter, font, widths, themes) {
   const base = `http://127.0.0.1:${server.address().port}`;
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: VIEWPORT });
+  if (rootPx) {
+    // An inline !important outranks the stylesheets' `html { font-size:
+    // 13px !important }`, layered or not. Set before any script runs, so a
+    // component that measures itself on mount sees the forced root too.
+    await page.addInitScript((px) => {
+      const apply = () =>
+        document.documentElement.style.setProperty(
+          'font-size',
+          `${px}px`,
+          'important',
+        );
+      if (document.documentElement) apply();
+      else {
+        new MutationObserver((_, observer) => {
+          if (!document.documentElement) return;
+          apply();
+          observer.disconnect();
+        }).observe(document, { childList: true });
+      }
+    }, rootPx);
+  }
   const failed = [];
   const shots = (widths ?? [null]).flatMap((width) =>
     themes.map((theme) => ({ theme, width })),
@@ -113,10 +151,23 @@ async function capture(staticDir, outDir, filter, font, widths, themes) {
           { timeout: 15000 },
         );
         await page.evaluate(() => document.fonts.ready);
+        if (rootPx) {
+          const actual = await page.evaluate(
+            () => getComputedStyle(document.documentElement).fontSize,
+          );
+          if (actual !== `${rootPx}px`) {
+            throw new Error(`html font-size is ${actual}, not ${rootPx}px`);
+          }
+        }
         await page.addStyleTag({
           content:
             '*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}' +
-            (font ? `*,*::before,*::after{font-family:${font}!important}` : ''),
+            (font
+              ? `*,*::before,*::after{font-family:${font}!important}`
+              : '') +
+            // Storybook pads the canvas by 1rem: pin it, or every story
+            // shifts with the root and the stories' own rem is lost in it.
+            (rootPx ? '.sb-main-padded{padding:16px!important}' : ''),
         });
         // Park the pointer: it keeps its spot across stories and widths, and
         // whatever lands under it would show its hover state.
@@ -230,27 +281,49 @@ function compare(baseDir, headDir, reportDir) {
 }
 
 const [command, ...args] = process.argv.slice(2);
-if (command === 'capture' && args.length >= 2) {
-  const option = (name) => {
-    const i = args.indexOf(name);
-    return i >= 0 ? args[i + 1] : null;
-  };
+const option = (name) => {
+  const i = args.indexOf(name);
+  return i >= 0 ? args[i + 1] : null;
+};
+const captureOptions = () => {
   const filter = option('--filter');
   const widths = option('--widths');
   const themes = option('--themes');
+  return {
+    filter: filter ? new RegExp(filter) : null,
+    font: option('--font'),
+    widths: widths ? widths.split(',').map(Number) : null,
+    themes: themes ? themes.split(',') : THEMES,
+  };
+};
+if (command === 'capture' && args.length >= 2) {
+  const { filter, font, widths, themes } = captureOptions();
+  const root = option('--root');
   await capture(
     args[0],
     args[1],
-    filter ? new RegExp(filter) : null,
-    option('--font'),
-    widths ? widths.split(',').map(Number) : null,
-    themes ? themes.split(',') : THEMES,
+    filter,
+    font,
+    widths,
+    themes,
+    root ? Number(root) : null,
+  );
+} else if (command === 'root-invariance' && args.length >= 2) {
+  const { filter, font, widths, themes } = captureOptions();
+  const [low, high] = (option('--roots') ?? '13,20').split(',').map(Number);
+  const dir = (px) => path.join(args[1], `root-${px}`);
+  for (const px of [low, high]) {
+    await capture(args[0], dir(px), filter, font, widths, themes, px);
+  }
+  console.log(`\nStories that differ between a ${low}px and a ${high}px root:`);
+  process.exit(
+    compare(dir(low), dir(high), path.join(args[1], 'report')) ? 0 : 1,
   );
 } else if (command === 'compare' && args.length === 3) {
   process.exit(compare(args[0], args[1], args[2]) ? 0 : 1);
 } else {
   console.error(
-    'Usage:\n  theme-snapshots.mjs capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>] [--widths <px,px,...>] [--themes <light,dark>]\n  theme-snapshots.mjs compare <base-dir> <head-dir> <report-dir>',
+    'Usage:\n  theme-snapshots.mjs capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>] [--widths <px,px,...>] [--themes <light,dark>] [--root <px>]\n  theme-snapshots.mjs compare <base-dir> <head-dir> <report-dir>\n  theme-snapshots.mjs root-invariance <storybook-static> <out-dir> [--filter <regex>] [--widths <px,px,...>] [--themes <light,dark>] [--roots <px,px>]',
   );
   process.exit(2);
 }

@@ -1,0 +1,48 @@
+/**
+ * Container widths, pinned in px.
+ *
+ * Tailwind's `--container-*` sizes (`max-w-md`, `w-sm`, `@md:` container
+ * variants) are rem by default, so they followed HomePort's forced 13px root
+ * with no rem literal in the code to show it. Each is pinned at the px it
+ * came to at that root, so desktop is unchanged (phones, at a 12px root, get
+ * the desktop width):
+ *
+ *   xs 260px · sm 312px · md 364px · xl 468px · 2xl 546px · 3xl 624px ·
+ *   4xl 728px
+ *
+ * Tailwind's other rem defaults that nothing uses are cleared here, so their
+ * classes do not exist: the 3xs, 2xs, lg and 5xl–7xl containers, text-5xl …
+ * text-9xl, rounded-3xl, rounded-4xl and the bare `rounded` (already
+ * rewritten by enforce-border-radius-tokens). Pin one at its 13px-root px
+ * value when it is needed.
+ * tailwindTheme.test.ts fails if a Tailwind default is left in rem.
+ */
+@theme static {
+  --container-xs: 260px;
+  --container-sm: 312px;
+  --container-md: 364px;
+  --container-xl: 468px;
+  --container-2xl: 546px;
+  --container-3xl: 624px;
+  --container-4xl: 728px;
+
+  --container-3xs: initial;
+  --container-lg: initial;
+  --container-2xs: initial;
+  --container-5xl: initial;
+  --container-6xl: initial;
+  --container-7xl: initial;
+  --text-5xl: initial;
+  --text-5xl--line-height: initial;
+  --text-6xl: initial;
+  --text-6xl--line-height: initial;
+  --text-7xl: initial;
+  --text-7xl--line-height: initial;
+  --text-8xl: initial;
+  --text-8xl--line-height: initial;
+  --text-9xl: initial;
+  --text-9xl--line-height: initial;
+  --radius-3xl: initial;
+  --radius-4xl: initial;
+  --radius: initial;
+}

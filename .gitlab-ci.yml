@@ -173,6 +173,8 @@ Run style and dependency checks:
     - yarn style:check
     # Hard-coded colours may only go down (scripts/color-literals.mjs).
     - yarn colors:check
+    # Raw rem lengths may only go down (scripts/rem-literals.mjs).
+    - yarn rem:check
     - yarn deps:unused
     - yarn deps:circular
     - yarn deps:dedupe

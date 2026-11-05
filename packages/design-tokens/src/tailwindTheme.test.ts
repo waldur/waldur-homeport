@@ -99,3 +99,36 @@ describe('semantic Tailwind utilities', () => {
     ).toEqual([]);
   });
 });
+
+/**
+ * HomePort forces a 13px root font size, and a Tailwind default in rem
+ * follows it (docs/design-tokens.md → "Root font size"). Every rem default in
+ * Tailwind's theme is pinned in px, or cleared with `initial`, in a file
+ * index.css imports. Breakpoints are exempt: they are media queries, which
+ * read the browser's initial font size, and are pinned anyway.
+ */
+describe("Tailwind's rem defaults", () => {
+  it('are each pinned or cleared', () => {
+    const tailwindTheme = readFileSync(
+      require.resolve('tailwindcss/theme.css'),
+      'utf8',
+    );
+    const remDefaults = [
+      ...tailwindTheme.matchAll(/(--[\w-]+):\s*[^;]*\drem\b[^;]*;/g),
+    ]
+      .map((m) => m[1])
+      .filter((name) => !name.startsWith('--breakpoint-'));
+    expect(remDefaults.length).toBeGreaterThan(0);
+
+    const ours = reachableFromIndex()
+      .map((file) => readFileSync(file, 'utf8'))
+      .join('\n');
+    const open = remDefaults.filter(
+      (name) => !new RegExp(`^\\s*${name}\\s*:`, 'm').test(ours),
+    );
+    expect(
+      open,
+      'Pin these in px (or clear them with initial) in packages/design-tokens/src/css/primitives/',
+    ).toEqual([]);
+  });
+});

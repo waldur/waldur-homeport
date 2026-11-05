@@ -7,5 +7,6 @@
 @import './typography.css';
 @import './spacing.css';
 @import './radius.css';
+@import './containers.css';
 @import './breakpoints.css';
 @import './zIndex.css';

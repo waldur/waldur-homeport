@@ -87,6 +87,12 @@ node scripts/theme-snapshots.mjs compare /tmp/vt/base /tmp/vt/head /tmp/vt/repor
   and, for each changed pair, a `base | head | changed pixels in red` PNG. It prints the changed
   pairs sorted by ratio and exits 1 when anything differs.
 - The per-pixel threshold is 0.05: antialiasing passes, a one-step colour ramp change does not.
+- `capture … --root <px>` forces `html`'s font size (the rem root) before each story loads, and
+  `root-invariance <storybook-static> <out-dir> [--roots 13,20]` captures at both roots into
+  `<out-dir>/root-13` and `<out-dir>/root-20` and compares them into `<out-dir>/report`
+  (Storybook's own 1rem canvas padding is pinned to 16px in both). A story
+  that differs still sizes something in rem; see
+  "Root font size" in [design-tokens.md](design-tokens.md).
 - `compare` pairs any two directories of PNGs by file name, so it also diffs the
   [integration-testing screenshots](#integration-testing-screenshots).
 
@@ -228,6 +234,7 @@ locally and put the result in the merge request.
 | --------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | `yarn build-storybook`                                          | Static Storybook in `storybook-static/`, the input of `theme-snapshots.mjs` |
 | `node scripts/theme-snapshots.mjs capture …` / `compare …`      | Storybook comparison                                                        |
+| `node scripts/theme-snapshots.mjs root-invariance …`            | Stories that render differently at a 13px and a 20px root                   |
 | `yarn test:e2e:visual`                                          | Every `e2e-visual` spec (project `visual`, one worker)                      |
 | `yarn playwright test card-parity --project=visual --workers=1` | One spec; the argument is a filter, and a path is read as a project name    |
 | `yarn test:visual:update`                                       | Rewrite the local `toHaveScreenshot()` baselines (every project)            |
