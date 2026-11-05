@@ -16,6 +16,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
 } from 'waldur-ui';
 
 import { EditAction } from '@/form/EditAction';
@@ -99,31 +104,31 @@ export const LimitsSection = ({
 
   if (components.length === 0 || !Object.keys(limits ?? {}).length) {
     return (
-      <div className="card card-bordered">
-        <div className="card-header custom-card-header custom-padding-zero">
-          <div className="card-title">
+      <Card bordered>
+        <CardHeader className="custom-card-header custom-padding-zero">
+          <CardTitle as="div">
             <h3>{translate('Limits')}</h3>
-          </div>
-        </div>
-        <div className="card-body">
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           <NoResult
             title={translate('No limits found for this order')}
             buttonTitle={null}
             message={null}
             noAction
           />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     );
   }
   return (
-    <div className="card card-bordered">
-      <div className="card-header custom-card-header custom-padding-zero">
-        <div className="card-title">
+    <Card bordered>
+      <CardHeader className="custom-card-header custom-padding-zero">
+        <CardTitle as="div">
           <h3>{translate('Limits')}</h3>
-        </div>
+        </CardTitle>
         {editable && hasSelection && (
-          <div className="card-toolbar flex items-center gap-2.5">
+          <CardToolbar className="flex items-center gap-2.5">
             <div className="flex items-center self-stretch font-normal text-primary">
               <BaseButton
                 iconNode={<XIcon weight="bold" />}
@@ -150,10 +155,10 @@ export const LimitsSection = ({
                 </Menu.Item>
               </Menu.Content>
             </Menu>
-          </div>
+          </CardToolbar>
         )}
-      </div>
-      <div className="card-body">
+      </CardHeader>
+      <CardContent>
         <Table density="normal">
           <TableHeader>
             <TableRow>
@@ -223,7 +228,7 @@ export const LimitsSection = ({
             ))}
           </TableBody>
         </Table>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

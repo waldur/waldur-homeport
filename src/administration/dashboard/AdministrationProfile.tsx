@@ -3,7 +3,7 @@ import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
 import { usersList, versionRetrieve } from 'waldur-js-client';
 
-import { FormField, FormLabel } from 'waldur-ui';
+import { FormField, FormLabel, Card, CardContent } from 'waldur-ui';
 
 import { getIconUrl, parseSelectData } from '@/core/api';
 import { ENV } from '@/core/config';
@@ -99,8 +99,8 @@ export const AdministrationProfile = ({
   );
 
   return (
-    <div className="card card-bordered mb-4">
-      <div className="card-body">
+    <Card bordered className="mb-4">
+      <CardContent>
         <div className="flex flex-wrap gap-x-5">
           <div className="flex-none mb-3">
             <DashboardHeroLogo
@@ -166,7 +166,7 @@ export const AdministrationProfile = ({
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

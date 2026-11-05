@@ -8,7 +8,14 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import { AccordionCard, BaseButton, Tooltip } from 'waldur-ui';
+import {
+  AccordionCard,
+  BaseButton,
+  Tooltip,
+  Card,
+  CardContent,
+  CardHeader,
+} from 'waldur-ui';
 
 import { wait } from '@/core/utils';
 import { required } from '@/core/validators';
@@ -309,11 +316,11 @@ export const EditScriptDialog = ({
                 </div>
               }
             >
-              <div className="card card-bordered card-solid">
-                <div className="card-header">
+              <Card bordered variant="solid">
+                <CardHeader>
                   <h6 className="mb-0">{translate('Code editor')}</h6>
-                </div>
-                <div className="card-body p-0">
+                </CardHeader>
+                <CardContent className="p-0">
                   <Field
                     key={scriptOption.type}
                     name="script"
@@ -327,8 +334,8 @@ export const EditScriptDialog = ({
                       />
                     )}
                   </Field>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </ModalDialog>
           </form>
         );

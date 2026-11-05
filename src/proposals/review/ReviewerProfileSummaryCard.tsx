@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { reviewerProfilesMeRetrieve } from 'waldur-js-client';
 
-import { Avatar, Badge, BaseButton } from 'waldur-ui';
+import { Avatar, Badge, BaseButton, Card, CardContent } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -47,19 +47,19 @@ export const ReviewerProfileSummaryCard: FC<
 
   if (isLoading) {
     return (
-      <div className="card card-bordered">
-        <div className="card-body flex items-center justify-center py-5">
+      <Card bordered>
+        <CardContent className="flex items-center justify-center py-5">
           <LoadingSpinner />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     );
   }
 
   // No profile exists - show create prompt
   if (!profile) {
     return (
-      <div className="card card-bordered bg-warning-subtle">
-        <div className="card-body">
+      <Card bordered className="bg-warning-subtle">
+        <CardContent>
           <div className="flex items-center gap-3">
             <div
               className="flex items-center justify-center rounded-full bg-warning text-white"
@@ -84,14 +84,14 @@ export const ReviewerProfileSummaryCard: FC<
               size="lg"
             />
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     );
   }
 
   return (
-    <div className="card card-bordered">
-      <div className="card-body">
+    <Card bordered>
+      <CardContent>
         <div className="flex items-center gap-3">
           {/* Avatar */}
           <Avatar
@@ -162,7 +162,7 @@ export const ReviewerProfileSummaryCard: FC<
             size="lg"
           />
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

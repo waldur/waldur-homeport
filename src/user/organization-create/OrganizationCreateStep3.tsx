@@ -6,7 +6,7 @@ import {
 import { FunctionComponent } from 'react';
 import { OnboardingVerification } from 'waldur-js-client';
 
-import { RadialBackground } from 'waldur-ui';
+import { RadialBackground, Card, CardContent } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -141,8 +141,8 @@ export const OrganizationCreateStep3: FunctionComponent<
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="card border-0 shadow-raised">
-        <div className="card-body text-center relative overflow-hidden organization-validation-result">
+      <Card className="border-0 shadow-raised">
+        <CardContent className="text-center relative overflow-hidden organization-validation-result">
           <RadialBackground className="icon-background" />
           {validationLoading ? (
             <>
@@ -169,8 +169,8 @@ export const OrganizationCreateStep3: FunctionComponent<
               {translate('No validation results available.')}
             </p>
           )}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

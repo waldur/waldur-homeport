@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { FC, PropsWithChildren } from 'react';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Card, CardContent, CardHeader } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
@@ -73,9 +73,10 @@ export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
   props,
 ) => {
   return (
-    <div
+    <Card
+      bordered
       className={classNames(
-        'card step-card card-bordered',
+        'step-card',
         props.disabled && 'step-disabled',
         props.className,
       )}
@@ -84,7 +85,7 @@ export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
     >
       {props.disabled && <div className="step-blocker" />}
       <fieldset className="step-fieldset" disabled={props.disabled}>
-        <div className="card-header gap-1.5">
+        <CardHeader className="gap-1.5">
           <div className="flex items-center me-1.5">
             <div>
               <h4 className="mb-0">{props.title}</h4>
@@ -104,15 +105,15 @@ export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
             )}
           </div>
           {props.actions && <div className="flex ms-auto">{props.actions}</div>}
-        </div>
-        <div className="card-body">
+        </CardHeader>
+        <CardContent>
           <StepDisabledNotice
             disabled={props.disabled}
             reason={props.disabledTooltip}
           />
           {props.loading ? <LoadingSpinner /> : props.children}
-        </div>
+        </CardContent>
       </fieldset>
-    </div>
+    </Card>
   );
 };

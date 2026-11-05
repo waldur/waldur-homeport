@@ -1,5 +1,7 @@
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { FieldError } from '@/form';
 
 interface K8sOptionCardProps {
@@ -29,8 +31,8 @@ export const K8sOptionCard: FC<PropsWithChildren<K8sOptionCardProps>> = ({
   error,
   children,
 }) => (
-  <div className="card card-bordered mb-4">
-    <div className="card-body">
+  <Card bordered className="mb-4">
+    <CardContent>
       {label && (
         <div className="mb-4">
           <h5 className="mb-1">
@@ -46,6 +48,6 @@ export const K8sOptionCard: FC<PropsWithChildren<K8sOptionCardProps>> = ({
         </div>
       )}
       {children}
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 );

@@ -11,6 +11,9 @@ import {
   PropertyList,
   PropertyItem,
   Code,
+  Card,
+  CardContent,
+  CardHeader,
 } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -157,11 +160,11 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
         )}
       </p>
       {/* Endpoints Card */}
-      <div className="card mb-3">
-        <div className="card-header">
+      <Card className="mb-3">
+        <CardHeader>
           <h5 className="mb-0">{translate('Discovered Endpoints')}</h5>
-        </div>
-        <div className="card-body">
+        </CardHeader>
+        <CardContent>
           <PropertyList variant="summary" termWidth="lg" hideIfEmpty={false}>
             {Object.entries(discoveryResult.endpoints || {}).map(
               ([key, value]) => (
@@ -174,14 +177,14 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
               ),
             )}
           </PropertyList>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
       {/* Claims Card */}
-      <div className="card mb-3">
-        <div className="card-header">
+      <Card className="mb-3">
+        <CardHeader>
           <h5 className="mb-0">{translate('Supported Claims')}</h5>
-        </div>
-        <div className="card-body">
+        </CardHeader>
+        <CardContent>
           {claimsNotExposed && (
             <AlertItem
               type="floating"
@@ -243,16 +246,16 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
               label={translate('Add Claim')}
             />
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
       {/* Suggested Scopes Card */}
       {discoveryResult.suggested_scopes &&
         discoveryResult.suggested_scopes.length > 0 && (
-          <div className="card mb-3">
-            <div className="card-header">
+          <Card className="mb-3">
+            <CardHeader>
               <h5 className="mb-0">{translate('Suggested Scopes')}</h5>
-            </div>
-            <div className="card-body">
+            </CardHeader>
+            <CardContent>
               <p className="text-quaternary mb-1.5">
                 {translate(
                   'These scopes are recommended based on the discovered claim mappings.',
@@ -265,17 +268,17 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                   </Badge>
                 ))}
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         )}
       {/* Waldur Fields Card */}
       {discoveryResult.waldur_fields &&
         discoveryResult.waldur_fields.length > 0 && (
-          <div className="card mb-3">
-            <div className="card-header">
+          <Card className="mb-3">
+            <CardHeader>
               <h5 className="mb-0">{translate('Mappable User Fields')}</h5>
-            </div>
-            <div className="card-body">
+            </CardHeader>
+            <CardContent>
               <p className="text-quaternary mb-1.5">
                 {translate(
                   '{count} Waldur user fields can be mapped to OIDC claims.',
@@ -321,8 +324,8 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                   })}
                 </p>
               )}
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         )}
     </WizardModal>
   );

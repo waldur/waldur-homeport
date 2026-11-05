@@ -2,7 +2,15 @@ import { groupBy } from 'es-toolkit';
 import { FC } from 'react';
 import { SpendingLimitStatus } from 'waldur-js-client';
 
-import { AlertItem, Badge, Progress } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  Progress,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'waldur-ui';
 
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -124,13 +132,13 @@ export const SpendingLimitStatusCard: FC<{ resource: StatusResource }> = ({
   }
   const byComponent = groupBy(statuses, (status) => status.component_type);
   return (
-    <div className="card card-bordered mb-5">
-      <div className="card-header">
-        <div className="card-title">
+    <Card bordered className="mb-5">
+      <CardHeader>
+        <CardTitle as="div">
           <h3>{translate('Spending limits')}</h3>
-        </div>
-      </div>
-      <div className="card-body">
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
         <RestrictionNotice resource={resource} />
         {Object.entries(byComponent).map(([type, componentStatuses]) => {
           const lastReportedAt = componentStatuses[0].last_reported_at;
@@ -158,7 +166,7 @@ export const SpendingLimitStatusCard: FC<{ resource: StatusResource }> = ({
             </div>
           );
         })}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

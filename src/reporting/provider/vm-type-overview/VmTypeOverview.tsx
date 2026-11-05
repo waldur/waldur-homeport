@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormSpy } from 'react-final-form';
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
+import { Tabs, TabsList, TabsTrigger, TabsContent, Card } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -20,7 +20,7 @@ export const VmTypeOverview: React.FC = () => {
         }
 
         return (
-          <div className="card">
+          <Card>
             <Tabs mount="active" defaultValue="images">
               <TabsList>
                 <TabsTrigger value="images">{translate('Images')}</TabsTrigger>
@@ -30,18 +30,18 @@ export const VmTypeOverview: React.FC = () => {
               </TabsList>
               <div className="tab-content">
                 <TabsContent value="images">
-                  <div className="card">
+                  <Card>
                     <ImagesList />
-                  </div>
+                  </Card>
                 </TabsContent>
                 <TabsContent value="flavors">
-                  <div className="card">
+                  <Card>
                     <FlavorsList />
-                  </div>
+                  </Card>
                 </TabsContent>
               </div>
             </Tabs>
-          </div>
+          </Card>
         );
       }}
     </FormSpy>

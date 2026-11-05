@@ -12,6 +12,11 @@ import {
   TabsList,
   TabsTrigger,
   Tooltip,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
 } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -196,9 +201,9 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
   };
 
   return (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="card-title">
+    <Card bordered>
+      <CardHeader>
+        <CardTitle as="div">
           <h3>
             {translate('Matching settings')}{' '}
             <Tooltip
@@ -211,12 +216,12 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
               <InfoIcon weight="bold" className="text-quaternary" />
             </Tooltip>
           </h3>
-        </div>
-        <div className="card-toolbar">
+        </CardTitle>
+        <CardToolbar>
           <MatchingSummaryButton config={config || DEFAULT_CONFIG} />
-        </div>
-      </div>
-      <div className="card-body">
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
         <Tabs mount="active" value={activeTab} onValueChange={handleTabSelect}>
           <TabsList className="mb-4">
             {tabs.map((tab) => (
@@ -287,7 +292,7 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
             </TabsContent>
           </>
         </Tabs>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

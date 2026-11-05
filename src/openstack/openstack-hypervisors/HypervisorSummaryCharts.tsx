@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { getCssVar } from 'waldur-design-tokens';
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -188,13 +189,13 @@ export const HypervisorSummaryCharts: FC<{
   const disk = computeUsage(usedDisk, totalDisk);
 
   return (
-    <div className="card mb-5 card-bordered">
-      <div className="card-header border-b border-b-secondary">
-        <div className="card-title">
+    <Card bordered className="mb-5">
+      <CardHeader className="border-b border-b-secondary">
+        <CardTitle as="div">
           <span className="h3">{translate('Hypervisor summary')}</span>
-        </div>
-      </div>
-      <div className="card-body p-5">
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="p-5">
         <div className="flex items-center self-stretch gap-8 flex-wrap">
           <ChartItem
             used={usedVcpus}
@@ -252,7 +253,7 @@ export const HypervisorSummaryCharts: FC<{
             }
           />
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

@@ -9,6 +9,8 @@ import {
   PropsWithChildren,
 } from 'react';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { isCallsSectionVisible } from '@/marketplace/serviceAccessMode';
@@ -88,8 +90,8 @@ const PermissionDataProvider: FC<PropsWithChildren> = ({ children }) => {
 const RestrictedView = () => {
   const { pageMessage } = useContext(PermissionContext);
   return (
-    <div className="card card-bordered">
-      <div className="card-body">
+    <Card bordered>
+      <CardContent>
         <div className="flex flex-col items-center justify-center my-8 xl:my-16 min-h-[150px]">
           <ShieldWarningIcon
             size={65}
@@ -104,8 +106,8 @@ const RestrictedView = () => {
             {translate('Go to profile')}
           </Link>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

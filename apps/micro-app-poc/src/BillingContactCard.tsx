@@ -31,7 +31,7 @@ export const BillingContactCard = () => {
 
   return (
     <Card>
-      <CardHeader className="p-4 pb-0 text-sm font-semibold">
+      <CardHeader className="p-4 pb-0 text-sm font-semibold text-primary">
         {translate('Billing contact')}
       </CardHeader>
       <CardContent className="grid gap-4 p-4 md:grid-cols-2">

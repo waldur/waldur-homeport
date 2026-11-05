@@ -1,6 +1,13 @@
 import { OpenStackInstance } from 'waldur-js-client';
 
-import { PropertyItem, PropertyList } from 'waldur-ui';
+import {
+  PropertyItem,
+  PropertyList,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
@@ -16,13 +23,13 @@ export const InstanceMainComponent = ({
     return null;
   }
   return (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="card-title">
+    <Card bordered>
+      <CardHeader>
+        <CardTitle as="div">
           <h3>{translate('Details')}</h3>
-        </div>
-      </div>
-      <div className="card-body">
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
         <PropertyList variant="summary">
           <PropertyItem
             label={translate('Image')}
@@ -62,7 +69,7 @@ export const InstanceMainComponent = ({
             hasCopy
           />
         </PropertyList>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

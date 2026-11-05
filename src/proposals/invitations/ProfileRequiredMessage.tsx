@@ -1,7 +1,7 @@
 import { WarningIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import { Badge, BaseButton, Card, CardContent } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -24,8 +24,8 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
   }
 
   return (
-    <div className="card card-bordered mb-5">
-      <div className="card-body text-center py-8">
+    <Card bordered className="mb-5">
+      <CardContent className="text-center py-8">
         <div className="mb-3">
           <WarningIcon size={64} className="text-warning" weight="duotone" />
         </div>
@@ -89,7 +89,7 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
             )}
           </p>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

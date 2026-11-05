@@ -5,6 +5,8 @@ import {
   UserAffiliationDetail,
 } from 'waldur-js-client';
 
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+
 import { ChartCard } from '@/core/ChartCard';
 import { SummaryWidget } from '@/core/SummaryWidget';
 import { Select } from '@/form/select';
@@ -253,11 +255,11 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
   return (
     <>
       {/* Filters */}
-      <div className="card mb-5">
-        <div className="card-header">
-          <div className="card-title">{translate('Filters')}</div>
-        </div>
-        <div className="card-body">
+      <Card className="mb-5">
+        <CardHeader>
+          <CardTitle as="div">{translate('Filters')}</CardTitle>
+        </CardHeader>
+        <CardContent>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
             <div>
               <Select
@@ -302,8 +304,8 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
               />
             </div>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       <SummaryWidget
         stats={[

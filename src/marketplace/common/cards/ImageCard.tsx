@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, Card, CardContent, CardFooter } from 'waldur-ui';
 
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
@@ -34,7 +34,10 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
       })}
       disabled={!isAllowed}
     >
-      <div className="card card-bordered h-full overflow-hidden cursor-pointer hover:border-brand">
+      <Card
+        bordered
+        className="h-full overflow-hidden cursor-pointer hover:border-brand"
+      >
         {/* Image header */}
         <div className="image-card-header">
           {image ? (
@@ -53,7 +56,7 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
         </div>
 
         {/* Content: avatar + title */}
-        <div className="card-body p-3 flex items-center gap-2.5">
+        <CardContent className="p-3 flex items-center gap-2.5">
           {offering.thumbnail ? (
             <Image src={offering.thumbnail} size={48} isContain circle />
           ) : (
@@ -67,10 +70,10 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
               {offering.customer_name}
             </div>
           </div>
-        </div>
+        </CardContent>
 
         {/* Footer */}
-        <div className="card-footer py-3 px-4 flex justify-end gap-3">
+        <CardFooter className="py-3 px-4 flex justify-end gap-3">
           <CardRequestAccessButton
             offering={offering}
             orderDisabledReason={isDisabled ? disabledButtonTooltip : undefined}
@@ -80,8 +83,8 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
             disabled={isDisabled}
             disabledReason={disabledButtonTooltip}
           />
-        </div>
-      </div>
+        </CardFooter>
+      </Card>
     </OfferingDetailsLink>
   );
 

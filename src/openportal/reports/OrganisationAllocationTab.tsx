@@ -43,6 +43,9 @@ import {
   Tooltip,
   parseDateValue,
   toIsoDate,
+  Card,
+  CardContent,
+  CardHeader,
 } from 'waldur-ui';
 
 import { getNextPageUrl } from '@/core/api';
@@ -646,11 +649,11 @@ const StatCard: FC<StatCardProps> = ({ label, value, variant = 'default' }) => {
           : '';
 
   return (
-    <div
-      className={classNames('card flex-1', BORDER_CLASSES[variant])}
+    <Card
+      className={classNames('flex-1', BORDER_CLASSES[variant])}
       style={{ minWidth: 180 }}
     >
-      <div className="card-body py-2.5">
+      <CardContent className="py-2.5">
         <div className="text-quaternary small mb-1">{label}</div>
         <div className={`text-base font-medium ${textClass}`}>
           {(variant === 'warning' || variant === 'danger') && (
@@ -658,8 +661,8 @@ const StatCard: FC<StatCardProps> = ({ label, value, variant = 'default' }) => {
           )}
           {value}
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
@@ -1142,8 +1145,8 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* Load prompt — shown before the user triggers the fetch */}
       {showLoadPrompt && !loadTriggered && (
-        <div className="card mb-3">
-          <div className="card-body">
+        <Card className="mb-3">
+          <CardContent>
             <p className="mb-1">
               {translate('Allocation data not yet loaded')}
             </p>
@@ -1205,8 +1208,8 @@ export const OrganisationAllocationTab: FC = () => {
               }}
               label={translate('Load data')}
             />
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
 
       {/* Progress bar while summaries are being fetched */}
@@ -1299,8 +1302,8 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* ── Burn-down chart ─────────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <div className="card mb-3">
-          <div className="card-header flex items-center gap-2.5">
+        <Card className="mb-3">
+          <CardHeader className="flex items-center gap-2.5">
             <span>{translate('Predicted allocation burn-down')}</span>
 
             {chartOptions && (
@@ -1340,8 +1343,8 @@ export const OrganisationAllocationTab: FC = () => {
                 })}
               </span>
             )}
-          </div>
-          <div className="card-body">
+          </CardHeader>
+          <CardContent>
             {chartOptions ? (
               <EChart options={chartOptions} height="420px" />
             ) : (
@@ -1351,14 +1354,14 @@ export const OrganisationAllocationTab: FC = () => {
                 )}
               </p>
             )}
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
 
       {/* ── Consumption chart ───────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <div className="card mb-3">
-          <div className="card-header flex items-center gap-2.5">
+        <Card className="mb-3">
+          <CardHeader className="flex items-center gap-2.5">
             <span>{translate('Predicted daily consumption')}</span>
 
             {consumptionOptions && (
@@ -1401,8 +1404,8 @@ export const OrganisationAllocationTab: FC = () => {
                 })}
               </span>
             )}
-          </div>
-          <div className="card-body">
+          </CardHeader>
+          <CardContent>
             {consumptionOptions ? (
               <EChart options={consumptionOptions} height="420px" />
             ) : (
@@ -1412,8 +1415,8 @@ export const OrganisationAllocationTab: FC = () => {
                 )}
               </p>
             )}
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
 
       {/* ── Warning: projects without end dates ─────────────────────────── */}
@@ -1479,8 +1482,8 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* ── Concerning projects ─────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <div className="card mb-3">
-          <div className="card-header flex items-center gap-1.5">
+        <Card className="mb-3">
+          <CardHeader className="flex items-center gap-1.5">
             <span>{translate('Concerning Projects')}</span>
             {slowStart.length +
               inactive.length +
@@ -1513,9 +1516,9 @@ export const OrganisationAllocationTab: FC = () => {
               onClick={() => setShowThresholds((v: boolean) => !v)}
               label={translate('Thresholds')}
             />
-          </div>
+          </CardHeader>
 
-          <div className="card-body">
+          <CardContent>
             {/* ── Threshold controls ──────────────────────────────────── */}
             {showThresholds && (
               <div className="p-2.5 mb-2.5 bg-tertiary dark:bg-quaternary rounded-lg small">
@@ -2000,8 +2003,8 @@ export const OrganisationAllocationTab: FC = () => {
                 </div>
               </Tabs>
             )}
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
     </div>
   );

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Card, CardContent } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -16,8 +16,8 @@ export const TeamWorkload: FC<{ helpdeskUuid: string }> = ({
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 mb-3">
       {workload.map((member) => (
-        <div className="card card-bordered h-full" key={member.uuid}>
-          <div className="card-body">
+        <Card bordered className="h-full" key={member.uuid}>
+          <CardContent>
             <div className="flex justify-between items-center mb-1.5">
               <strong className="truncate">{member.user_full_name}</strong>
               {!member.has_capacity && (
@@ -30,8 +30,8 @@ export const TeamWorkload: FC<{ helpdeskUuid: string }> = ({
               open={member.open_ticket_count}
               max={member.max_open_tickets}
             />
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       ))}
     </div>
   );

@@ -2,6 +2,8 @@ import { get } from 'es-toolkit/compat';
 import React from 'react';
 import { useFormState } from 'react-final-form';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import {
   getComponentsByType,
@@ -102,8 +104,8 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
       ) : (
         <p>{translate('Resource does not have any plan.')}</p>
       )}
-      <div className="card card-table card-bordered full-width">
-        <div className="card-body p-0">
+      <Card variant="table" bordered className="full-width">
+        <CardContent className="p-0">
           <div className="table-responsive">
             <div className="table-container">
               <table className="table table-row-bordered align-middle">
@@ -146,8 +148,8 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
               </table>
             </div>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

@@ -294,7 +294,7 @@ export const FeaturesList = () => {
       render={({ handleSubmit, submitting, dirty }) => (
         <form onSubmit={handleSubmit}>
           <Card bordered>
-            <CardHeader>
+            <CardHeader className="font-normal text-primary text-[length:inherit]">
               <CardTitle>{translate('Features')}</CardTitle>
               <div className="my-[0.5rem] flex items-center gap-3 flex-nowrap">
                 <TableQuery

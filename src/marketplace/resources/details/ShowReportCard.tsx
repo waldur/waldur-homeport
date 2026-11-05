@@ -1,16 +1,18 @@
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { ShowReportComponent } from '../report/ShowReportComponent';
 
 export const ShowReportCard = ({ resource }) => {
   return (
-    <div className="card">
-      <div className="card-header">
-        <div className="card-title">{translate('Report')}</div>
-      </div>
-      <div className="card-body">
+    <Card>
+      <CardHeader>
+        <CardTitle as="div">{translate('Report')}</CardTitle>
+      </CardHeader>
+      <CardContent>
         <ShowReportComponent report={resource.report} />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

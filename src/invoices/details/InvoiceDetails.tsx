@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
@@ -29,8 +31,8 @@ export const InvoiceDetails = ({
 
   return (
     <>
-      <div className="card card-bordered mb-4">
-        <div className="card-body flex">
+      <Card bordered className="mb-4">
+        <CardContent className="flex">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 grow">
             {invoice.customer_details && (
               <div>
@@ -57,8 +59,8 @@ export const InvoiceDetails = ({
             <strong>{translate('Due date')}: </strong>
             {renderFieldOrDash(invoice.due_date)}
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
       <InvoiceItemsTable
         invoice={invoice}
         invoiceView

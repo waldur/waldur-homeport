@@ -3,50 +3,29 @@ body {
 }
 
 /* CARD */
-.card {
-  .card-header {
-    display: flex;
-    align-items: center;
-    font-size: var(--text-sm);
-    font-weight: var(--font-weight-bold);
-    color: var(--text-secondary);
-    margin: 0 var(--card-padding-x, 1.85rem);
-    padding: 0.5rem 0;
+// The title's description and headings. waldur-ui's CardTitle sets none of
+// these, so a class the caller puts on them still wins.
+#{$card} #{$card-header} #{$card-title} {
+  small,
+  .small {
+    color: var(--text-quaternary);
+    // stylelint-disable-next-line waldur/font-size-scale -- Metronic's .card-title small, kept as it is (moving card text onto the scale is a separate step)
+    font-size: var(--card-description-font-size);
   }
 
-  &.card-solid {
-    overflow: hidden;
-
-    .card-header {
-      margin: 0;
-      padding-left: var(--card-padding-x, 1.85rem);
-      padding-right: var(--card-padding-x, 1.85rem);
-      min-height: 48px;
-      color: var(--text-primary);
-      font-size: var(--text-sm);
-      background-color: var(--bg-secondary);
-    }
-  }
-
-  &.card-sm {
-    padding-top: 0.307rem;
-    padding-bottom: 0.307rem;
-
-    .card-header {
-      margin-left: 1.23rem; // 16px
-      margin-right: 1.23rem;
-      padding: 0;
-      min-height: 36px;
-
-      .card-title {
-        margin-top: 0.615rem;
-        margin-bottom: 0.615rem;
-      }
-    }
-    .card-body {
-      padding: 1.23rem;
-      padding-bottom: 0.923rem;
-    }
+  h1,
+  .h1,
+  h2,
+  .h2,
+  h3,
+  .h3,
+  h4,
+  .h4,
+  h5,
+  .h5,
+  h6,
+  .h6 {
+    margin-bottom: 0;
   }
 }
 

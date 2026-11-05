@@ -6,7 +6,7 @@ import {
   accessSubnetsList,
 } from 'waldur-js-client';
 
-import { HelpIcon } from 'waldur-ui';
+import { HelpIcon, Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
 
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 import { translate } from '@/i18n';
@@ -49,13 +49,13 @@ export const ResourceAccessSubnetsCard: FunctionComponent<
   return (
     <>
       {defaults.length > 0 && (
-        <div className="card card-bordered mb-4">
-          <div className="card-header">
-            <div className="card-title h5">
+        <Card bordered className="mb-4">
+          <CardHeader>
+            <CardTitle as="div" className="h5">
               {translate('Default allowed (from provider)')}
-            </div>
-          </div>
-          <div className="card-body">
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
             <div className="table-responsive">
               <table className="table table-bordered table-hover">
                 <thead>
@@ -74,8 +74,8 @@ export const ResourceAccessSubnetsCard: FunctionComponent<
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
 
       <Table<AccessSubnet>

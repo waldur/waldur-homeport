@@ -5,6 +5,8 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { STALE_TIME } from '@/core/constants';
 import { ExternalLink } from '@/core/ExternalLink';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -38,27 +40,27 @@ export const PublicOfferingTermsOfService: FunctionComponent<
 
   if (isLoading) {
     return (
-      <div className="card card-bordered mb-8">
-        <div className="card-body">
+      <Card bordered className="mb-8">
+        <CardContent>
           <div className="text-center py-4">
             <LoadingSpinner />
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     );
   }
 
   if (!activeTos) {
     return (
-      <div className="card card-bordered mb-8">
-        <div className="card-body">
+      <Card bordered className="mb-8">
+        <CardContent>
           <div className="text-center py-2.5">
             <p className="text-quaternary">
               {translate('No Terms of Service available.')}
             </p>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     );
   }
 
@@ -66,8 +68,8 @@ export const PublicOfferingTermsOfService: FunctionComponent<
   const hasExternalLink = activeTos.terms_of_service_link;
 
   return (
-    <div className="card card-bordered mb-8">
-      <div className="card-body">
+    <Card bordered className="mb-8">
+      <CardContent>
         <PublicOfferingCardTitle>
           {translate('Terms of Service')}
         </PublicOfferingCardTitle>
@@ -98,7 +100,7 @@ export const PublicOfferingTermsOfService: FunctionComponent<
             </p>
           </div>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

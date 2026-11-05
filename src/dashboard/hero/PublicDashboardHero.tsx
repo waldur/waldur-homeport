@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, Card, CardContent } from 'waldur-ui';
 
 import { DashboardHeroLogo2 } from './DashboardHeroLogo2';
 
@@ -42,21 +42,16 @@ export const PublicDashboardHero: FC<
         )}
       >
         <div className="flex">
-          <div
-            className={classNames(
-              'card w-full md:mb-0 mb-3',
-              props.cardBordered && 'card-bordered',
-            )}
-          >
+          <Card bordered={props.cardBordered} className="w-full md:mb-0 mb-3">
             {props.backgroundImage && (
               <img
                 alt=""
-                className="card-img-top"
+                className="w-full rounded-t-[7px]"
                 src={props.backgroundImage}
                 style={{ height: 160, objectFit: 'cover' }}
               />
             )}
-            <div className="card-body flex flex-col sm:flex-row items-stretch grow">
+            <CardContent className="flex flex-col sm:flex-row items-stretch grow">
               {props.logo || props.logoAlt ? (
                 <Tooltip label={props.logoTooltip}>
                   <span>
@@ -100,19 +95,14 @@ export const PublicDashboardHero: FC<
                   </div>
                 )}
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
 
         {!props.hideQuickSection && (
           <div className="flex">
-            <div
-              className={classNames(
-                'card grow',
-                props.cardBordered && 'card-bordered',
-              )}
-            >
-              <div className="card-body flex flex-col">
+            <Card bordered={props.cardBordered} className="grow">
+              <CardContent className="flex flex-col">
                 <div className="flex flex-wrap gap-x-5">
                   <div className="flex-1 min-w-0">{props.quickBody}</div>
                   {/* Quick actions */}
@@ -131,8 +121,8 @@ export const PublicDashboardHero: FC<
                     {props.quickFooter}
                   </div>
                 )}
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </div>
         )}
       </div>

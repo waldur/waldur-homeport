@@ -6,6 +6,14 @@ import {
   userInvitationsList,
 } from 'waldur-js-client';
 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+} from 'waldur-ui';
+
 import { BaseEventsList } from '@/events/BaseEventsList';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -135,12 +143,12 @@ export const TeamSection: FC<
     !props.readOnlyMode && (!rules || rules.canManageTeam);
 
   return (
-    <div className="card card-bordered" id={props.id}>
-      <div className="card-header pt-3 pb-1.5">
-        <div className="card-title">
+    <Card bordered id={props.id}>
+      <CardHeader className="pt-3 pb-1.5">
+        <CardTitle as="div">
           <h3>{props.title}</h3>
-        </div>
-        <div className="card-toolbar gap-3">
+        </CardTitle>
+        <CardToolbar className="gap-3">
           {showTeamActions ? (
             <TeamDropdownActions
               refetchUsers={refetchUsers}
@@ -159,11 +167,11 @@ export const TeamSection: FC<
               }
             />
           ) : null}
-        </div>
-      </div>
+        </CardToolbar>
+      </CardHeader>
       {props.hasTeamTabs &&
         !isFeatureVisible(MarketplaceFeatures.call_only) && (
-          <div className="card-header table-tabs border-b border-b-secondary items-stretch py-0 min-h-auto">
+          <CardHeader className="table-tabs border-b border-b-secondary items-stretch py-0 min-h-auto">
             <TableNav
               tabs={[
                 {
@@ -180,9 +188,9 @@ export const TeamSection: FC<
                 },
               ]}
             />
-          </div>
+          </CardHeader>
         )}
-      <div className="card-body pt-0">
+      <CardContent className="pt-0">
         {/* Invitations and the permissions log are management surfaces the
             backend denies to reviewers; in read-only (review) mode we show
             only the team roster so the info matches the viewer's role. */}
@@ -261,7 +269,7 @@ export const TeamSection: FC<
           fieldName="comment_team"
           space={0}
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

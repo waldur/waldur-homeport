@@ -3,7 +3,15 @@ import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { marketplaceResourcesTeamList, Resource } from 'waldur-js-client';
 
-import { BaseButton, SegmentedControl } from 'waldur-ui';
+import {
+  BaseButton,
+  SegmentedControl,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+} from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -93,8 +101,8 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
   }
   if (resource.state === 'Creating') {
     return (
-      <div className="card card-bordered">
-        <div className="card-body">
+      <Card bordered>
+        <CardContent>
           <NoResult
             title={translate('No usage yet')}
             message={translate(
@@ -102,18 +110,18 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
             )}
             noAction
           />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     );
   }
 
   return (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="card-title">
+    <Card bordered>
+      <CardHeader>
+        <CardTitle as="div">
           <h3>{translate('Usage history')}</h3>
-        </div>
-        <div className="card-toolbar gap-3">
+        </CardTitle>
+        <CardToolbar className="gap-3">
           {teamError && !teamRefused ? (
             <LoadingErred message={translate('Error')} loadData={refetchTeam} />
           ) : usersFilterOptions.length > 0 ? (
@@ -170,9 +178,9 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
             }
             size="lg"
           />
-        </div>
-      </div>
-      <div className="card-body">
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
         {loading ? (
           <LoadingSpinner />
         ) : error ? (
@@ -195,7 +203,7 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
             users={users}
           />
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

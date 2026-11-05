@@ -1,6 +1,14 @@
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+} from 'waldur-ui';
+
 interface PanelProps {
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
@@ -25,22 +33,16 @@ export const Panel: React.FC<PropsWithChildren<PanelProps>> = ({
   cardBordered,
   actions,
 }) => (
-  <div
-    className={classNames('card', cardBordered && 'card-bordered', className)}
-    id={id}
-  >
+  <Card bordered={cardBordered} className={className} id={id}>
     {title && (
-      <div className="card-header">
+      <CardHeader>
         <div className="flex flex-col">
-          <div className="card-title mb-0">
+          <CardTitle as="div" className="mb-0">
             <h3 className={titleClassName}>{title}</h3>
-          </div>
+          </CardTitle>
           {subtitle && (
             <div
-              className={classNames(
-                'card-subtitle text-quaternary mt-1',
-                subtitleClassName,
-              )}
+              className={classNames('text-quaternary mt-1', subtitleClassName)}
             >
               <p className="text-sm mb-0">{subtitle}</p>
             </div>
@@ -48,9 +50,9 @@ export const Panel: React.FC<PropsWithChildren<PanelProps>> = ({
         </div>
         {/* Never wider than the header, so a wide toolbar (e.g. a scrollable
             tab strip) wraps or scrolls instead of overflowing the card. */}
-        <div className="card-toolbar max-w-full">{actions}</div>
-      </div>
+        <CardToolbar className="max-w-full">{actions}</CardToolbar>
+      </CardHeader>
     )}
-    <div className={classNames('card-body', bodyClassName)}>{children}</div>
-  </div>
+    <CardContent className={bodyClassName}>{children}</CardContent>
+  </Card>
 );

@@ -9,7 +9,15 @@ import {
   openstackDiscoveryDiscoverVolumeTypes,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, BaseButton, Radio, Code } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  BaseButton,
+  Card,
+  CardContent,
+  Code,
+  Radio,
+} from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatFilesize } from '@/core/utils';
@@ -169,9 +177,9 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 mb-5">
             {values.externalNetworks.map((network) => (
               <div key={network.id}>
-                {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-                <div
-                  className={`card cursor-pointer h-full ${
+                {}
+                <Card
+                  className={`cursor-pointer h-full ${
                     values.selectedExternalNetworkId === network.id
                       ? 'border-brand border-2'
                       : 'border-secondary'
@@ -180,7 +188,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                     form.change('selectedExternalNetworkId', network.id)
                   }
                 >
-                  <div className="card-body">
+                  <CardContent>
                     <div className="flex items-start">
                       <Radio
                         className="me-2.5"
@@ -219,8 +227,8 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                         )}
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               </div>
             ))}
           </div>

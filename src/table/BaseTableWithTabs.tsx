@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { FC, Fragment, ReactNode, useState } from 'react';
 
 import {
@@ -7,6 +6,11 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
 } from 'waldur-ui';
 
 import { TableProps } from './types';
@@ -51,11 +55,11 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
   const [toolbarNode, setToolbarNode] = useState<HTMLDivElement | null>(null);
 
   return (
-    <div className={classNames('card-table card-bordered', className, 'card')}>
-      <div className={classNames(headerClassName, 'card-header')}>
-        <div className="card-toolbar flex flex-wrap gap-3 w-full">
+    <Card variant="table" bordered className={className}>
+      <CardHeader className={headerClassName}>
+        <CardToolbar className="flex flex-wrap gap-3 w-full">
           <div className="flex-1 min-w-0">
-            <div ref={setTitleNode} className="card-title h5">
+            <CardTitle as="div" ref={setTitleNode} className="h5">
               <div className="me-1.5">
                 <h3>{title}</h3>
                 {Boolean(subtitle) && (
@@ -64,7 +68,7 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
                   </small>
                 )}
               </div>
-            </div>
+            </CardTitle>
             {/* Portal destination */}
           </div>
           <div className="w-full sm:w-auto sm:flex-none ms-auto max-w-full flex gap-3 max-sm:flex-wrap whitespace-nowrap">
@@ -76,9 +80,9 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
               {/* Portal destination */}
             </div>
           </div>
-        </div>
-      </div>
-      <div className="pt-2.5 card-body">
+        </CardToolbar>
+      </CardHeader>
+      <CardContent className="pt-2.5">
         <Tabs
           value={activeKey}
           onValueChange={handleSelect}
@@ -125,7 +129,7 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
             </div>
           )}
         </Tabs>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

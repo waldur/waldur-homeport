@@ -5,7 +5,7 @@ import {
   marketplaceUserOfferingConsentsRevoke,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Card, CardContent } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -89,8 +89,8 @@ export const RevokeTosDialog = ({
             <h6 className="mb-2.5">
               {translate('Resources that will be affected:')}
             </h6>
-            <div className="card card-table card-bordered">
-              <div className="card-body p-0">
+            <Card variant="table" bordered>
+              <CardContent className="p-0">
                 <table className="table align-middle mb-0">
                   <thead>
                     <tr className="align-middle">
@@ -121,8 +121,8 @@ export const RevokeTosDialog = ({
                     ))}
                   </tbody>
                 </table>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </div>
         )
       )}

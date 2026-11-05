@@ -3,7 +3,16 @@ import React, { useMemo, useState } from 'react';
 import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
-import { FormField, FormText, Tooltip } from 'waldur-ui';
+import {
+  FormField,
+  FormText,
+  Tooltip,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+} from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -104,13 +113,13 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
   });
 
   return (
-    <div className="card card-bordered mb-5">
-      <div className="card-header">
-        <div className="card-toolbar flex flex-wrap gap-3 w-full">
+    <Card bordered className="mb-5">
+      <CardHeader>
+        <CardToolbar className="flex flex-wrap gap-3 w-full">
           <div className="flex-1 min-w-0 order-0 sm:max-w-1/4">
-            <div className="card-title">
+            <CardTitle as="div">
               <span className="h3 me-1.5">{translate('API token')}</span>
-            </div>
+            </CardTitle>
           </div>
           <div className="w-full sm:w-auto sm:flex-none order-1 sm:order-2 min-w-1/4 ms-auto">
             <div className="flex sm:justify-end max-sm:flex-wrap whitespace-nowrap gap-2.5">
@@ -125,9 +134,9 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
               />
             </div>
           </div>
-        </div>
-      </div>
-      <div className="card-body">
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
         <FormGroup label={translate('API token')}>
           <div className="flex items-center gap-1.5">
             <SecretField value={props.user.token} />
@@ -181,7 +190,7 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
             </FormText>
           </FormField>
         ) : null}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

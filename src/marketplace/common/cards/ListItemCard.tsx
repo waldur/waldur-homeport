@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, Card, CardContent } from 'waldur-ui';
 
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
@@ -32,8 +32,8 @@ export const ListItemCard: FC<OfferingCardVariantProps> = ({
       })}
       disabled={!isAllowed}
     >
-      <div className="card card-bordered h-full cursor-pointer hover:border-brand">
-        <div className="card-body p-3 flex gap-3">
+      <Card bordered className="h-full cursor-pointer hover:border-brand">
+        <CardContent className="p-3 flex gap-3">
           {/* Left content */}
           <div className="grow overflow-hidden">
             {/* Avatar + Title row */}
@@ -86,8 +86,8 @@ export const ListItemCard: FC<OfferingCardVariantProps> = ({
               }
             />
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </OfferingDetailsLink>
   );
 

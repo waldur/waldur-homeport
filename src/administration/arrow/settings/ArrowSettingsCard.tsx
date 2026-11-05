@@ -1,7 +1,15 @@
 import { useCallback } from 'react';
 import type { ArrowSettings } from 'waldur-js-client';
 
-import { BaseButton, PropertyItem, PropertyList } from 'waldur-ui';
+import {
+  BaseButton,
+  PropertyItem,
+  PropertyList,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -63,8 +71,8 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
 
   if (!currentSettings) {
     return (
-      <div className="card">
-        <div className="card-body text-center py-8">
+      <Card>
+        <CardContent className="text-center py-8">
           <h4 className="mb-3">
             {translate('Arrow Integration Not Configured')}
           </h4>
@@ -77,8 +85,8 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
             <ArrowSetupButton />
             <ArrowHowItWorksButton />
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     );
   }
 
@@ -87,17 +95,17 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="card">
-        <div className="card-header flex justify-between items-center">
-          <div className="card-title">
+      <Card>
+        <CardHeader className="flex justify-between items-center">
+          <CardTitle as="div">
             <h4 className="mb-0">{translate('Connection Settings')}</h4>
-          </div>
+          </CardTitle>
           <div className="flex gap-1.5 items-center">
             <ArrowHowItWorksButton />
             <ArrowSettingsActions settings={currentSettings} />
           </div>
-        </div>
-        <div className="card-body">
+        </CardHeader>
+        <CardContent>
           <PropertyList>
             <PropertyItem
               value={propVal.url(currentSettings.api_url)}
@@ -153,8 +161,8 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
               label={translate('Created')}
             />
           </PropertyList>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

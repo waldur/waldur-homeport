@@ -12,6 +12,10 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
 } from 'waldur-ui';
 
 import { ServiceDeskProviderLogo } from '@/administration/service-desk/ServiceDeskProviderLogo';
@@ -118,8 +122,8 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
   return (
     // Cards in a row share its height; the menu sits at the bottom so the
     // buttons line up however long the description is.
-    <div className="card bg-tertiary dark:bg-quaternary min-h-[150px] h-full border border-transparent hover:border-secondary cursor-pointer">
-      <div className="card-body pe-4 flex">
+    <Card className="bg-tertiary dark:bg-quaternary min-h-[150px] h-full border border-transparent hover:border-secondary cursor-pointer">
+      <CardContent className="pe-4 flex">
         <div className="flex grow">
           <div className="flex flex-row justify-between grow">
             <div
@@ -187,8 +191,8 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
@@ -252,13 +256,13 @@ export const AdministrationServiceDesk = () => {
       loadData={refetch}
     />
   ) : data ? (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="card-title">
+    <Card bordered>
+      <CardHeader>
+        <CardTitle as="div">
           <h3>{translate('Service desk integration')}</h3>
-        </div>
-      </div>
-      <div className="card-body">
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
         <Tabs mount="active" value={activeKey} onValueChange={handleSelect}>
           <TabsList className="mb-4">
             {tabs.map((tab) => (
@@ -290,7 +294,7 @@ export const AdministrationServiceDesk = () => {
             )}
           </>
         </Tabs>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   ) : null;
 };

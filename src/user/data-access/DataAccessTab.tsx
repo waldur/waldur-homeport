@@ -2,7 +2,17 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import { User } from 'waldur-js-client';
 
-import { AlertItem, Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
+import {
+  AlertItem,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -71,13 +81,13 @@ export const DataAccessTab: FC<DataAccessTabProps> = ({ user }) => {
     <>
       <DataAccessSummaryCards summary={data.summary} />
 
-      <div className="card card-bordered">
-        <div className="card-header border-b border-b-secondary">
-          <div className="card-title">
+      <Card bordered>
+        <CardHeader className="border-b border-b-secondary">
+          <CardTitle as="div">
             <h3>{translate('Data access')}</h3>
-          </div>
-        </div>
-        <div className="card-body">
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           <Tabs
             mount="all"
             value={activeKey}
@@ -111,8 +121,8 @@ export const DataAccessTab: FC<DataAccessTabProps> = ({ user }) => {
               </TabsContent>
             </>
           </Tabs>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </>
   );
 };

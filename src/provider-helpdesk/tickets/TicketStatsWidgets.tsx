@@ -1,5 +1,7 @@
 import { FC, ReactNode } from 'react';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -9,12 +11,12 @@ const StatCard: FC<{ label: string; value: ReactNode }> = ({
   label,
   value,
 }) => (
-  <div className="card card-bordered h-full">
-    <div className="card-body py-2.5 text-center">
+  <Card bordered className="h-full">
+    <CardContent className="py-2.5 text-center">
       <div className="text-lg font-medium">{value}</div>
       <div className="text-quaternary small">{label}</div>
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 );
 
 /** Summary stat cards shown above the provider tickets list. */

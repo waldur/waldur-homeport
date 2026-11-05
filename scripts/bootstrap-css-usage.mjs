@@ -52,16 +52,6 @@ export const PARTIALS = [
     name: 'bootstrap/scss/type',
     scss: "@import 'config'; @import 'bootstrap/scss/reboot'; @import 'bootstrap/scss/type';",
   },
-  {
-    name: 'bootstrap/scss/card',
-    scss: "@import 'config'; @import 'bootstrap/scss/card';",
-  },
-
-  // Metronic components that extend Bootstrap's (from components/)
-  {
-    name: 'core/components/card',
-    scss: "@import 'config'; @import 'components/card';",
-  },
 
   // Waldur's own partials (src/styles/legacy/). Each compiles from
   // _mixins.scss alone: none reads a Bootstrap Sass variable or mixin, so a
@@ -283,14 +273,6 @@ export function isClassAllowed(cls, corpusTokens) {
   if (
     corpusTokens.has('Row') &&
     /^row(?:-cols-(?:(?:sm|md|lg|xl|xxl)-)?(?:\d+|auto))?$/.test(cls)
-  ) {
-    return true;
-  }
-  if (
-    corpusTokens.has('Card') &&
-    /^card(?:-(?:header|body|title|footer|subtitle|text|img(?:-(?:top|bottom|overlay))?))?$/.test(
-      cls,
-    )
   ) {
     return true;
   }

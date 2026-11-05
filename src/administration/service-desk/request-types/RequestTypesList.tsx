@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { supportRequestTypesAdminList } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Card, CardContent } from 'waldur-ui';
 
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
@@ -73,8 +73,8 @@ export const RequestTypesList: FC = () => {
   ];
 
   return (
-    <div className="card card-bordered">
-      <div className="card-body">
+    <Card bordered>
+      <CardContent>
         <Table
           {...tableProps}
           columns={columns}
@@ -88,7 +88,7 @@ export const RequestTypesList: FC = () => {
             <RequestTypeRowActions row={row} refetch={tableProps.fetch} />
           )}
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

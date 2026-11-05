@@ -1,5 +1,7 @@
 import { FC, ReactNode } from 'react';
 
+import { Card, CardContent } from 'waldur-ui';
+
 interface DashboardCardProps {
   title: string;
   message: string;
@@ -22,9 +24,9 @@ export const DashboardCard: FC<DashboardCardProps> = ({
   const isClickable = !isLoading && hasItems;
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div
-      className={`card card-bordered ${
+    <Card
+      bordered
+      className={`${
         isClickable ? 'hover:border-brand cursor-pointer' : 'opacity-50'
       }`}
       onClick={isClickable ? onClick : undefined}
@@ -33,7 +35,7 @@ export const DashboardCard: FC<DashboardCardProps> = ({
         minHeight: '120px',
       }}
     >
-      <div className="card-body flex items-center">
+      <CardContent className="flex items-center">
         <div
           className={`size-[50px] me-3 shrink-0 rounded-md flex items-center justify-center ${
             isClickable ? backgroundColor : 'bg-gray-300 dark:bg-gray-dark-600'
@@ -42,10 +44,10 @@ export const DashboardCard: FC<DashboardCardProps> = ({
           {icon}
         </div>
         <div className="grow">
-          <div className="card-title mb-1 h5">{title}</div>
+          <div className="mb-1 h5">{title}</div>
           <p className="text-quaternary mb-0 text-xs">{message}</p>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

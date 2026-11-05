@@ -6,7 +6,18 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
-import { AlertItem, Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
+import {
+  AlertItem,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+} from 'waldur-ui';
 
 import { CopyToClipboard } from '@/core/CopyToClipboard';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -89,22 +100,22 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
   const tree = treeQuery.data;
   const config = configQuery.data;
   return (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="card-title">
+    <Card bordered>
+      <CardHeader>
+        <CardTitle as="div">
           <h3>{translate('GLAuth directory')}</h3>
-        </div>
+        </CardTitle>
         {view === 'toml' && config && (
-          <div className="card-toolbar grow justify-end">
+          <CardToolbar className="grow justify-end">
             <CopyToClipboard
               value={config}
               label={translate('Copy')}
               className="w-[150px]"
             />
-          </div>
+          </CardToolbar>
         )}
-      </div>
-      <div className="card-body">
+      </CardHeader>
+      <CardContent>
         {tree.offerings.length === 0 ? (
           <p className="text-quaternary mb-0">
             {translate(
@@ -160,7 +171,7 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
             </Tabs>
           </>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

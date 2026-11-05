@@ -11,7 +11,14 @@ import {
   RequestedResource,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, PropertyList, Tooltip } from 'waldur-ui';
+import {
+  AlertItem,
+  BaseButton,
+  PropertyList,
+  Tooltip,
+  Card,
+  CardContent,
+} from 'waldur-ui';
 import { Badge, PropertyItem } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -75,8 +82,8 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
           <span>{translate('This resource request has no attributes.')}</span>
         )
       ) : (
-        <div className="card card-table card-bordered">
-          <div className="card-body">
+        <Card variant="table" bordered>
+          <CardContent>
             <table className="table align-middle">
               <thead>
                 <tr className="align-middle">
@@ -110,8 +117,8 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
                 ))}
               </tbody>
             </table>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
     </ExpandableContainer>
   );

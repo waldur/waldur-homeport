@@ -265,7 +265,7 @@ const GeneratedHeader: FC<{ script?: string }> = ({ script }) => {
 };
 
 const ResourcesCard: FC<{ partition?: HpcPartition }> = ({ partition }) => (
-  <Card className="overflow-hidden shadow-none border-secondary">
+  <Card bordered className="overflow-hidden">
     <CardHeader className={TINTED_HEADER_CLASS}>
       <CardTitle className="text-base font-semibold text-primary">
         {translate('Resources')}
@@ -507,7 +507,7 @@ const SubmitJobForm: FC<{
     >
       <HpcErrorAlert error={partitionsError} />
       <div className="script-editor grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
-        <Card className="overflow-hidden shadow-none border-secondary">
+        <Card bordered className="overflow-hidden">
           <CardHeader className={classNames(TINTED_HEADER_CLASS, 'gap-1')}>
             <CardTitle className="flex items-center gap-2 text-base font-semibold text-primary">
               {translate('Job script')}

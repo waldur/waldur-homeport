@@ -10,7 +10,13 @@ import {
   QuestionTypeEnum,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardToolbar,
+} from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -145,12 +151,12 @@ export const FieldsListGroup = ({
         );
 
         return (
-          <div key={name} className="card card-bordered bg-secondary mb-2.5">
-            <div className="card-header mx-3 min-h-auto">
+          <Card bordered key={name} className="bg-secondary mb-2.5">
+            <CardHeader className="mx-3 min-h-auto">
               <h6 className="mb-0 text-tertiary">
                 {translate('Condition {index}', { index: i + 1 })}
               </h6>
-              <div className="card-toolbar m-0">
+              <CardToolbar className="m-0">
                 <BaseButton
                   tooltip={translate('Remove')}
                   onClick={() => removeRow(i)}
@@ -158,9 +164,9 @@ export const FieldsListGroup = ({
                   variant="text-danger"
                   size="lg"
                 />
-              </div>
-            </div>
-            <div key={name + i} className="card-body px-3">
+              </CardToolbar>
+            </CardHeader>
+            <CardContent key={name + i} className="px-3">
               <FormGroup
                 label={translate('Depends on question')}
                 description={translate(
@@ -259,8 +265,8 @@ export const FieldsListGroup = ({
                   />
                 );
               })()}
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         );
       })}
       <div>

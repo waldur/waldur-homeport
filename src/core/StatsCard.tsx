@@ -1,5 +1,7 @@
 import { FC, ReactNode } from 'react';
 
+import { Card, CardContent } from 'waldur-ui';
+
 interface StatsCardProps {
   label: ReactNode;
   value: ReactNode;
@@ -15,8 +17,8 @@ export const StatsCard: FC<StatsCardProps> = ({
   icon,
   footer,
 }) => (
-  <div className="card card-flush card-bordered h-full">
-    <div className="card-body flex py-4 flex-col">
+  <Card bordered className="h-full">
+    <CardContent className="flex py-4 flex-col">
       <div className="flex justify-between items-start gap-1.5">
         <div className="text-sm font-medium text-quaternary">{label}</div>
         {icon}
@@ -29,6 +31,6 @@ export const StatsCard: FC<StatsCardProps> = ({
           {footer}
         </div>
       )}
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 );

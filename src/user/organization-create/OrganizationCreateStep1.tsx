@@ -9,6 +9,8 @@ import {
 import { useForm, useFormState } from 'react-final-form';
 import { BlankEnum, ValidationMethodEnum } from 'waldur-js-client';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
@@ -105,8 +107,8 @@ export const OrganizationCreateStep1: FunctionComponent<
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="card border-0 shadow-raised">
-        <div className="card-body p-6">
+      <Card className="border-0 shadow-raised">
+        <CardContent className="p-6">
           <h4 className="mb-3">{translate('Select verification method')}</h4>
           <p className="text-secondary mb-5">
             {translate(
@@ -143,8 +145,8 @@ export const OrganizationCreateStep1: FunctionComponent<
               const methodInfo = getValidationMethodInfo(validationMethod);
 
               return (
-                <div className="card card-bordered">
-                  <div className="card-body flex gap-2.5">
+                <Card bordered>
+                  <CardContent className="flex gap-2.5">
                     <div className="shrink-0">
                       <InfoIcon size={24} weight="duotone" />
                     </div>
@@ -156,12 +158,12 @@ export const OrganizationCreateStep1: FunctionComponent<
                         {methodInfo.description}
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               );
             })()}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

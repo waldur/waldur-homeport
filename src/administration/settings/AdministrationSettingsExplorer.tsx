@@ -245,7 +245,7 @@ export const AdministrationSettingsExplorer: FC = () => {
 
   return (
     <Card bordered>
-      <CardHeader>
+      <CardHeader className="font-normal text-primary text-[length:inherit]">
         <CardTitle size="lg">{translate('All settings')}</CardTitle>
         <div className="my-[0.5rem] flex items-center gap-4 flex-wrap">
           <Switch

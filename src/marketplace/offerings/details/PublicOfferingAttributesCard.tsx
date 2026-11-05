@@ -1,6 +1,8 @@
 import { FunctionComponent, useMemo } from 'react';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { isEmpty } from '@/core/utils';
 import { translate } from '@/i18n';
 import { AttributesList } from '@/marketplace/offerings/details/AttributesList';
@@ -42,8 +44,8 @@ export const PublicOfferingAttributesCard: FunctionComponent<
     return null;
   }
   return (
-    <div className="card card-bordered">
-      <div className="card-body">
+    <Card bordered>
+      <CardContent>
         <PublicOfferingCardTitle>
           {translate('Attributes')}
         </PublicOfferingCardTitle>
@@ -52,7 +54,7 @@ export const PublicOfferingAttributesCard: FunctionComponent<
           attributes={offering.attributes}
           sections={category.sections}
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

@@ -1,18 +1,20 @@
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+
 import { BookingResourcesCalendar } from '@/booking/offering/BookingResourcesCalendar';
 import { translate } from '@/i18n';
 
 export const BookingMainComponent = ({ resource, refetch }) => {
   return (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="card-title">{translate('Bookings')}</div>
-      </div>
-      <div className="card-body">
+    <Card bordered>
+      <CardHeader>
+        <CardTitle as="div">{translate('Bookings')}</CardTitle>
+      </CardHeader>
+      <CardContent>
         <BookingResourcesCalendar
           bookingResources={[resource]}
           refetch={refetch}
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

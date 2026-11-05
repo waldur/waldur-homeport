@@ -20,7 +20,15 @@ import {
   SlurmPeriodicUsagePolicy,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, FormText, Menu, Switch } from 'waldur-ui';
+import {
+  AlertItem,
+  BaseButton,
+  Card,
+  CardContent,
+  FormText,
+  Menu,
+  Switch,
+} from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -218,9 +226,9 @@ const PresetSelector: FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5">
         {policyPresets.map((preset) => (
           <div key={preset.key}>
-            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-            <div
-              className={`card h-full cursor-pointer border-2 ${
+            {}
+            <Card
+              className={`h-full cursor-pointer border-2 ${
                 selectedPreset === preset.key
                   ? 'border-brand bg-brand-subtle'
                   : 'border-secondary'
@@ -228,15 +236,13 @@ const PresetSelector: FC = () => {
               onClick={() => applyPreset(preset)}
               style={{ cursor: 'pointer' }}
             >
-              <div className="card-body p-2.5">
-                <div className="card-title text-xs font-medium mb-1.5">
-                  {preset.label}
-                </div>
-                <p className="card-text text-xs text-tertiary mb-0">
+              <CardContent className="p-2.5">
+                <div className="text-xs font-medium mb-1.5">{preset.label}</div>
+                <p className="text-xs text-tertiary mb-0">
                   {preset.description}
                 </p>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </div>
         ))}
       </div>

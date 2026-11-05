@@ -2,7 +2,13 @@ import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardToolbar,
+} from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { StringGroup, TextGroup, SelectGroup } from '@/form';
@@ -66,12 +72,12 @@ export const CascadeStepsGroup = ({
         const hasChoicesMap = fields.value?.[index]?.depends_on;
 
         return (
-          <div key={name} className="card card-bordered bg-secondary mb-2.5">
-            <div className="card-header mx-3 min-h-auto">
+          <Card bordered key={name} className="bg-secondary mb-2.5">
+            <CardHeader className="mx-3 min-h-auto">
               <h6 className="mb-0 text-tertiary">
                 {translate('Step {index}', { index: index + 1 })}
               </h6>
-              <div className="card-toolbar m-0">
+              <CardToolbar className="m-0">
                 <BaseButton
                   size="sm"
                   onClick={() => removeStep(index)}
@@ -81,9 +87,9 @@ export const CascadeStepsGroup = ({
                   disabled={fields.length <= 1}
                   disabledReason={translate('At least one step is required')}
                 />
-              </div>
-            </div>
-            <div className="card-body px-3">
+              </CardToolbar>
+            </CardHeader>
+            <CardContent className="px-3">
               <StringGroup
                 label={translate('Name')}
                 required={true}
@@ -157,8 +163,8 @@ export const CascadeStepsGroup = ({
                   )}
                 />
               )}
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         );
       })}
       <div>

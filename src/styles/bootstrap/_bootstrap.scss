@@ -12,7 +12,8 @@
 // and the rest, and labels and help text are FormLabel and FormText (all
 // styled from waldur-design-tokens and Tailwind).
 // No transitions: nothing uses .fade, .collapse or .collapsing any more.
-@import 'bootstrap/scss/card';
+// No cards: waldur-ui's Card draws them (packages/ui/src/Card), and
+// legacy/_base.scss and legacy/_table.scss restyle one by its context.
 
 // No helpers: their few uses became Tailwind (visually-hidden → sr-only,
 // stretched-link → after:absolute after:inset-0, clearfix and hstack dropped

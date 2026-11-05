@@ -5,7 +5,7 @@ import {
   OpenstackTenantsSetQuotasData,
 } from 'waldur-js-client';
 
-import { Tooltip, WarningTip } from 'waldur-ui';
+import { Tooltip, WarningTip, Card, CardContent } from 'waldur-ui';
 
 import { DirtyStateReporter } from '@/core/DirtyFormContext';
 import { NumberField, SubmitButton } from '@/form';
@@ -442,8 +442,8 @@ export const SetQuotasDialog: FC<SetQuotasDialogProps> = ({
               </>
             }
           >
-            <div className="card card-table card-bordered full-width">
-              <div className="card-body p-0">
+            <Card variant="table" bordered className="full-width">
+              <CardContent className="p-0">
                 <div className="table-responsive">
                   <div className="table-container">
                     <table className="table table-row-bordered align-middle">
@@ -476,8 +476,8 @@ export const SetQuotasDialog: FC<SetQuotasDialogProps> = ({
                     </table>
                   </div>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </ModalDialog>
         </form>
       )}

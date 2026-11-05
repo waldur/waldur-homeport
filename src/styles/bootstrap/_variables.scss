@@ -35,12 +35,6 @@ $link-hover-color: var(--text-brand-secondary) !default;
 // colours (a var() is an error there).
 $component-active-bg: #307300 !default;
 
-// Card
-$card-bg: $body-bg !default;
-$card-border-color: $border-color !default;
-$card-border-dashed-color: var(--border-divider-medium) !default;
-$card-cap-bg: $white !default;
-
 // Code
 // Inline code is drawn by waldur-ui's Code, and in rendered markdown by
 // .rich-text (src/tailwind.css); the reboot only sets its font. A bare <kbd>
@@ -99,8 +93,6 @@ $border-radius-xl: 12px !default; // mirrors --radius-xl (12px)
 $border-radius-2xl: 16px !default; // mirrors --radius-2xl (16px)
 
 // Card
-$card-py: var(--card-padding-y, 1.23rem) !default;
-$card-px: var(--card-padding-x, 1.85rem) !default;
 
 // Buttons + Forms
 
@@ -444,17 +436,6 @@ $display-line-height: $headings-line-height !default;
 // Allows for customizing button radius independently from global border radius
 
 // Forms
-
-// Card
-$card-box-shadow: 0px 0px 20px 0px rgba(76, 87, 125, 0.02) !default; // none in dark mode (_card.scss)
-$card-border-style: solid !default; // Custom variable
-$card-border-radius: $border-radius !default;
-
-$card-header-py: 0.5rem !default; // Custom variable
-$card-header-height: var(
-  --card-header-min-height,
-  70px
-) !default; // Custom variable
 
 // Tables
 

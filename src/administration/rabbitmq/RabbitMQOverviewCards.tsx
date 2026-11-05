@@ -1,6 +1,8 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { formatJsxTemplate } from '@/i18n/translate';
 
@@ -30,8 +32,8 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 mb-5">
       <div>
-        <div className="card card-bordered mb-4">
-          <div className="card-body">
+        <Card bordered className="mb-4">
+          <CardContent>
             <div className="flex items-center">
               <strong
                 className={`block display-4 ${isHighMessageCount ? 'text-danger' : 'text-success'}`}
@@ -56,24 +58,24 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
                 })}
               </small>
             )}
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
       <div>
-        <div className="card card-bordered mb-4">
-          <div className="card-body">
+        <Card bordered className="mb-4">
+          <CardContent>
             <strong className="block display-4 text-success">
               {data.total_queues.toLocaleString()}
             </strong>
             <strong className="block mb-1.5">
               {translate('Total queues')}
             </strong>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
       <div>
-        <div className="card card-bordered mb-4">
-          <div className="card-body">
+        <Card bordered className="mb-4">
+          <CardContent>
             <strong
               className={`block display-4 ${vhostsWithIssues > 0 ? 'text-warning' : 'text-success'}`}
             >
@@ -82,8 +84,8 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
             <strong className="block mb-1.5">
               {translate('Vhosts needing attention')}
             </strong>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

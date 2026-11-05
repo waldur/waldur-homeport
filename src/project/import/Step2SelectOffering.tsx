@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { Customer } from 'waldur-js-client';
 
-import { FormField, FormLabel, FormText } from 'waldur-ui';
+import { FormField, FormLabel, FormText, Card, CardContent } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { FieldError } from '@/form';
@@ -75,8 +75,11 @@ export const Step2SelectOffering: FC<Step2Props> = ({
         />
       </FormField>
       {offering && (
-        <div className="card card-bordered text-quaternary bg-secondary offering-components">
-          <div className="card-body p-4">
+        <Card
+          bordered
+          className="text-quaternary bg-secondary offering-components"
+        >
+          <CardContent className="p-4">
             <p className="font-medium mb-0">
               {offering?.components?.length
                 ? translate('This offering includes the following components:')
@@ -91,8 +94,8 @@ export const Step2SelectOffering: FC<Step2Props> = ({
                 ))}
               </ul>
             )}
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
     </div>
   );

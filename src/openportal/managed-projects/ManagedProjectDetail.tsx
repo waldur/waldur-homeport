@@ -2,7 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { openportalManagedProjectsRetrieveGet } from 'waldur-js-client';
 
-import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
+import {
+  Badge,
+  PropertyItem,
+  PropertyList,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
@@ -66,8 +74,8 @@ export const ManagedProjectDetail = () => {
 
   return (
     <>
-      <div className="card mb-3">
-        <div className="card-body">
+      <Card className="mb-3">
+        <CardContent>
           <div className="flex justify-between items-start mb-2.5">
             <h3 className="mb-0">
               {details?.name || row.identifier || translate('Unnamed project')}
@@ -153,14 +161,16 @@ export const ManagedProjectDetail = () => {
               value={propVal.date(row.created, { precision: 'datetime' })}
             />
           </PropertyList>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
-      <div className="card mb-3">
-        <div className="card-header">
-          <div className="card-title mb-0">{translate('Members')}</div>
-        </div>
-        <div className="card-body">
+      <Card className="mb-3">
+        <CardHeader>
+          <CardTitle as="div" className="mb-0">
+            {translate('Members')}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           {details?.members && Object.keys(details.members).length > 0 ? (
             <PropertyList variant="summary" className="flex flex-col gap-1">
               {Object.entries(details.members).map(([email, role]) => (
@@ -172,14 +182,16 @@ export const ManagedProjectDetail = () => {
               {translate('No members assigned.')}
             </span>
           )}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
-      <div className="card mb-3">
-        <div className="card-header">
-          <div className="card-title mb-0">{translate('Links')}</div>
-        </div>
-        <div className="card-body">
+      <Card className="mb-3">
+        <CardHeader>
+          <CardTitle as="div" className="mb-0">
+            {translate('Links')}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           <LinkField label={translate('Award')} link={details?.award} />
           <LinkField label={translate('Funding call')} link={details?.call} />
           <LinkField
@@ -187,14 +199,16 @@ export const ManagedProjectDetail = () => {
             link={details?.project_link}
           />
           <LinkField label={translate('Renewal')} link={details?.renewal} />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
-      <div className="card mb-3">
-        <div className="card-header">
-          <div className="card-title mb-0">{translate('Access control')}</div>
-        </div>
-        <div className="card-body">
+      <Card className="mb-3">
+        <CardHeader>
+          <CardTitle as="div" className="mb-0">
+            {translate('Access control')}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           <PropertyList variant="summary">
             <PropertyItem
               label={translate('Membership control')}
@@ -208,14 +222,16 @@ export const ManagedProjectDetail = () => {
               placeholder={translate('All domains allowed')}
             />
           </PropertyList>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
-      <div className="card mb-3">
-        <div className="card-header">
-          <div className="card-title mb-0">{translate('Notes')}</div>
-        </div>
-        <div className="card-body">
+      <Card className="mb-3">
+        <CardHeader>
+          <CardTitle as="div" className="mb-0">
+            {translate('Notes')}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           {details?.notes && details.notes.length > 0 ? (
             <div className="flex flex-col gap-1.5">
               {details.notes.map((note, index) => (
@@ -232,8 +248,8 @@ export const ManagedProjectDetail = () => {
               {translate('No notes yet.')}
             </span>
           )}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       <ManagedProjectAuditLog
         identifier={row.identifier}

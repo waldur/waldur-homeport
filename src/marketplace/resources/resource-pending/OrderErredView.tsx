@@ -13,7 +13,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Card, CardContent } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { omit } from '@/core/utils';
@@ -171,8 +171,8 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
   const steps = getSteps(resource);
   return (
     <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-5')}>
-      <div className="card card-bordered overflow-hidden">
-        <div className="card-body flex flex-col sm:flex-row items-center gap-3">
+      <Card bordered className="overflow-hidden">
+        <CardContent className="flex flex-col sm:flex-row items-center gap-3">
           {/* A phone is too narrow to lay the steps side by side: their labels
               and dates run into each other, so list them top to bottom. */}
           <div className="w-full sm:hidden">
@@ -206,8 +206,8 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
             </OrderDetailsLink>
             <ShowErrorButton resource={resource} />
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

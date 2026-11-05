@@ -2,6 +2,8 @@ import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { customersDestroy } from 'waldur-js-client';
 
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
@@ -50,13 +52,13 @@ export const CustomerRemovePanel: FunctionComponent = () => {
   };
 
   return canDeleteCustomer ? (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="card-title">
+    <Card bordered>
+      <CardHeader>
+        <CardTitle as="div">
           <h3 className="text-danger">{translate('Remove organization')}</h3>
-        </div>
-      </div>
-      <div className="card-body flex justify-between">
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="flex justify-between">
         <ul>
           <li>
             {translate(
@@ -76,7 +78,7 @@ export const CustomerRemovePanel: FunctionComponent = () => {
             title={translate('Remove organization')}
           />
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   ) : null;
 };

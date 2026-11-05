@@ -4,7 +4,7 @@
   height: fit-content;
 
   // Match card-table header height so titles align with Table component
-  > .card-header {
+  > [data-slot='card-header'] {
     min-height: 77px;
   }
 

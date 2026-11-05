@@ -14,6 +14,8 @@ import {
   SegmentedControl,
   useBreakpointDown,
   PropertyItem,
+  Card,
+  CardContent,
 } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -168,8 +170,8 @@ export const UsageExpandableRow = ({
           </PropertyList>
         </div>
         <div className="sm:border-l sm:border-l-secondary md:ps-7.5">
-          <div className="card card-bordered">
-            <div className="card-body p-3">
+          <Card bordered>
+            <CardContent className="p-3">
               <div className="flex items-center justify-between gap-1.5 whitespace-nowrap flex-wrap">
                 <div>
                   {periodOptions.length > 1 && (
@@ -221,8 +223,8 @@ export const UsageExpandableRow = ({
                   </p>
                 )}
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </ExpandableContainer>

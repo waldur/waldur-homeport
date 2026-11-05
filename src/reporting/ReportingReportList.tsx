@@ -2,7 +2,7 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, Card } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
@@ -87,7 +87,11 @@ export const ReportingReportList: FC<ReportingReportListProps> = ({
       {filteredReports.map((report) => (
         <div key={report.key}>
           <Link state={report.state}>
-            <div className="card card-bordered card-solid h-full p-4 flex hover:border-brand cursor-pointer">
+            <Card
+              bordered
+              variant="solid"
+              className="h-full p-4 flex hover:border-brand cursor-pointer"
+            >
               <p className="text-primary font-medium text-base mb-1">
                 {report.title}
               </p>
@@ -95,7 +99,7 @@ export const ReportingReportList: FC<ReportingReportListProps> = ({
                 <p className="text-quaternary my-1.5">{report.description}</p>
               )}
               <AnalyticsColumn report={report} />
-            </div>
+            </Card>
           </Link>
         </div>
       ))}

@@ -5,7 +5,7 @@ import {
   SlurmPolicyEvaluationLog,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Card, CardContent } from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
@@ -38,13 +38,13 @@ export const SlurmPolicyStatusSummary: FC<SlurmPolicyStatusSummaryProps> = ({
 
   if (!data || data.length === 0) {
     return (
-      <div className="card mb-3 border-dashed border-divider-medium">
-        <div className="card-body py-2.5">
+      <Card className="mb-3 border-dashed border-divider-medium">
+        <CardContent className="py-2.5">
           <div className="text-quaternary text-center">
             {translate('No evaluations recorded yet.')}
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     );
   }
 
@@ -86,8 +86,8 @@ export const SlurmPolicyStatusSummary: FC<SlurmPolicyStatusSummaryProps> = ({
   };
 
   return (
-    <div className="card mb-3">
-      <div className="card-body py-2.5">
+    <Card className="mb-3">
+      <CardContent className="py-2.5">
         <div className="flex flex-wrap gap-3 items-center">
           <div>
             <span className="text-quaternary small">
@@ -116,7 +116,7 @@ export const SlurmPolicyStatusSummary: FC<SlurmPolicyStatusSummaryProps> = ({
             <div>{getAgentStatusBadge()}</div>
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

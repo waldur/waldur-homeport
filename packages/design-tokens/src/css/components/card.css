@@ -13,6 +13,19 @@
   --card-padding-x: 1.85rem;
   --card-padding-y: 1.23rem;
   --card-header-min-height: 70px;
+  /* The header's vertical padding, and the title's and toolbar's margins
+     ($card-header-py). */
+  --card-header-py: 0.5rem;
+  /* Bootstrap's .card-title margin-bottom ($card-title-spacer-y), for a
+     title outside a header; .card-subtitle pulls up by half of it. */
+  --card-title-spacer-y: 0.5rem;
+  /* A card's description: CardDescription, a <small> in a title. Off the
+     type scale, as Metronic's was. */
+  --card-description-font-size: 1rem;
+  /* Bootstrap's bare .card-body padding ($card-spacer-x/y). */
+  --card-spacer: 1rem;
+  /* The gap after Metronic's .card-label in a title. */
+  --card-label-gap: 0.75rem;
 
   /* Collapsible card header (waldur-ui AccordionCard), matching the
      Metronic card it replaced: header text/caret ($gray-700), title
@@ -23,16 +36,13 @@
   --card-title-secondary-text: var(--color-gray-700);
   --card-header-solid-bg: var(--color-gray-50);
 
-  /* Real Metronic source, from
-     src/styles/bootstrap/components/_card.scss's .card rule:
-     `box-shadow: $card-box-shadow` unconditionally, `border` only
-     `@if ($card-border-enabled)` — which is itself `if(isDarkMode(),
-     true, false)`. Metronic's real card relies on the shadow alone in
-     light mode (no border at all) and flips to a border with no shadow
-     in dark mode — the opposite of what Card.tsx did before this
-     token existed (always bordered, never shadowed, in both themes). */
+  /* Card's light-mode shadow ($card-box-shadow in
+     src/styles/bootstrap/_variables.scss); dark mode draws a border
+     instead (Card.tsx). */
   --card-shadow: 0px 0px 20px 0px rgba(76, 87, 125, 0.02);
-  --card-border-color: transparent;
+  /* The default card's border width: none in light, 1px in dark. One
+     token, so a caller's border-width utility replaces it in both themes. */
+  --card-edge-width: 0px;
 }
 
 :root[data-theme='dark'] {
@@ -42,5 +52,133 @@
   --card-header-solid-bg: var(--color-gray-dark-900);
 
   --card-shadow: none;
-  --card-border-color: var(--color-gray-dark-800);
+  --card-edge-width: 1px;
+}
+
+/* Hooks HomePort's context stylesheet (src/styles/legacy/_card.scss) sets
+   on one Card part to restyle it by where it sits: a table card's header,
+   a solid header, a card in an expanded table row. Each part reads its hook
+   with its own value as the fallback (Card.tsx). They don't inherit, so a
+   hook set on one part never reaches a nested card's part. */
+@property --card-border-width {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-radius {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-header-min-h {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-header-mx {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-header-px {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-header-bg {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-header-color {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-title-my {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-title-mr {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-toolbar-my {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-content-pt {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-content-pb {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-content-px {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-box-shadow {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-min-width {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-content-flex {
+  syntax: '*';
+  inherits: false;
+}
+@property --card-header-padding-y {
+  syntax: '*';
+  inherits: false;
+}
+
+/* Card's variants (Card.tsx's `variant` and `size`). They set the part
+   hooks above, plus root properties no Card utility sets, so they work
+   wherever waldur-ui is loaded. In the `base` layer, so a utility the
+   caller passes still wins, and so do HomePort's context rules for a card
+   in a table or an expanded row (src/styles/legacy, `bootstrap` layer).
+   Each reaches every part inside the card, nested cards' too, as
+   Metronic's .card-solid, .card-sm and .card-widget did. */
+@layer base {
+  /* variant="solid": the header is a full-width --bg-secondary strip. */
+  [data-slot='card'][data-variant='solid'] {
+    overflow: hidden;
+  }
+
+  [data-slot='card'][data-variant='solid'] [data-slot='card-header'] {
+    --card-header-mx: 0px;
+    --card-header-px: var(--card-padding-x);
+    --card-header-min-h: 48px;
+    --card-header-color: var(--text-primary);
+    --card-header-bg: var(--bg-secondary);
+  }
+
+  /* variant="widget": a dashboard widget; every body inside has 20px. */
+  [data-slot='card'][data-variant='widget'] [data-slot='card-content'] {
+    --card-content-px: 20px;
+    --card-content-pt: 20px;
+    --card-content-pb: 20px;
+  }
+
+  /* size="sm": the compact card. */
+  [data-slot='card'][data-size='sm'] {
+    padding-top: 0.307rem;
+    padding-bottom: 0.307rem;
+  }
+
+  [data-slot='card'][data-size='sm'] [data-slot='card-header'] {
+    --card-header-mx: 1.23rem;
+    --card-header-px: 0px;
+    --card-header-padding-y: 0px;
+    --card-header-min-h: 36px;
+  }
+
+  [data-slot='card'][data-size='sm']
+    [data-slot='card-header']
+    [data-slot='card-title'] {
+    --card-title-my: 0.615rem;
+  }
+
+  [data-slot='card'][data-size='sm'] [data-slot='card-content'] {
+    --card-content-px: 1.23rem;
+    --card-content-pt: 1.23rem;
+    --card-content-pb: 0.923rem;
+  }
 }

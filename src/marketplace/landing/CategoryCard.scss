@@ -10,12 +10,12 @@
     border-color: var(--brand-color);
     border-width: 2px;
 
-    > .card-body {
+    > [data-slot='card-content'] {
       padding: 15px;
     }
   }
 
-  > .card-body {
+  > [data-slot='card-content'] {
     display: flex;
     flex-direction: column;
     align-items: center;

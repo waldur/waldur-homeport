@@ -59,7 +59,7 @@ const Section: FC<{
   description?: string;
   children: ReactNode;
 }> = ({ title, description, children }) => (
-  <Card className={HPC_CARD_CLASS}>
+  <Card bordered className={HPC_CARD_CLASS}>
     <CardHeader className="flex-col items-start justify-center gap-1">
       <CardTitle className="text-lg font-semibold text-primary">
         {title}

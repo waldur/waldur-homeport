@@ -7,6 +7,14 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+} from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { EChart } from '@/core/EChart';
@@ -75,21 +83,19 @@ export const OfferingCostsChart: FunctionComponent<OfferingCostChartProps> = ({
       initialValues={initialValues}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-          <div className="card card-bordered mb-8">
-            <div className="card-header">
-              <div className="card-title">
-                {translate('Offering cost chart')}
-              </div>
-              <div className="card-toolbar">
+          <Card bordered className="mb-8">
+            <CardHeader>
+              <CardTitle as="div">{translate('Offering cost chart')}</CardTitle>
+              <CardToolbar>
                 <div className="min-w-[200px]">
                   <AccountingRunningField />
                 </div>
-              </div>
-            </div>
-            <div className="card-body mt-2.5">
+              </CardToolbar>
+            </CardHeader>
+            <CardContent className="mt-2.5">
               <ChartBody offering={offering} />
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </form>
       )}
     />

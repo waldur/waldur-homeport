@@ -3,7 +3,13 @@ import { DateTime } from 'luxon';
 import { FC, useMemo, useState } from 'react';
 import { marketplaceComponentUsageMonthlyList } from 'waldur-js-client';
 
-import { PropertyList, SegmentedControl, PropertyItem } from 'waldur-ui';
+import {
+  PropertyList,
+  SegmentedControl,
+  PropertyItem,
+  Card,
+  CardContent,
+} from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { EChart } from '@/core/EChart';
@@ -120,8 +126,8 @@ export const OfferingComponentUsageExpandableRow: FC<
           </PropertyList>
         </div>
         <div className="sm:border-l sm:border-l-secondary md:ps-7.5">
-          <div className="card card-bordered">
-            <div className="card-body p-3">
+          <Card bordered>
+            <CardContent className="p-3">
               <div className="flex items-center justify-between gap-1.5 whitespace-nowrap flex-wrap mb-3">
                 <SegmentedControl<number>
                   aria-label={translate('Time period')}
@@ -171,8 +177,8 @@ export const OfferingComponentUsageExpandableRow: FC<
                   </p>
                 )}
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </ExpandableContainer>

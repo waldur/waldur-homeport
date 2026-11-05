@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { PublicOfferingDetails, Resource } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Card, CardContent } from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -270,8 +270,11 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
   const hasLimitChangeRequest = hasResourceLimitChangeRequest(resource);
   return (
     <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-5')}>
-      <div className="card card-bordered border-divider-medium border-dashed border-1 overflow-hidden">
-        <div className="card-body flex flex-col sm:flex-row items-center gap-3">
+      <Card
+        bordered
+        className="border-divider-medium border-dashed border-1 overflow-hidden"
+      >
+        <CardContent className="flex flex-col sm:flex-row items-center gap-3">
           {/* A phone is too narrow to lay the steps side by side: their labels
               and dates run into each other, so list them top to bottom. */}
           <div className="w-full sm:hidden">
@@ -309,8 +312,8 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
               providerView={providerView}
             />
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

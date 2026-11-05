@@ -1,10 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import classNames from 'classnames';
 import { FC, ReactNode, useMemo } from 'react';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+} from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -102,20 +111,20 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
   }
 
   return (
-    <div className={classNames('card card-bordered', className)}>
+    <Card bordered className={className}>
       {title && (
-        <div className="card-header">
+        <CardHeader>
           <div className="flex flex-col">
-            <div className="card-title mb-0">
+            <CardTitle as="div" className="mb-0">
               <h3>{title}</h3>
-            </div>
+            </CardTitle>
           </div>
-          <div className="card-toolbar flex-nowrap">
+          <CardToolbar className="flex-nowrap">
             <TableQuery query={query} setQuery={setQuery} />
-          </div>
-        </div>
+          </CardToolbar>
+        </CardHeader>
       )}
-      <div className="card-body">
+      <CardContent>
         <Tabs mount="active" value={activeKey} onValueChange={handleSelect}>
           <TabsList className="mb-4">
             {tabs.map((tab) => {
@@ -158,7 +167,7 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
             ))}
           </>
         </Tabs>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

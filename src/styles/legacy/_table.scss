@@ -9,13 +9,14 @@
   background: $gradient;
 }
 
-// Bootstrap's .shadow-sm, lit instead of shadowed on the dark page.
-@mixin hover-shadow {
-  box-shadow: 0 0.1rem 1rem 0.25rem
+// Bootstrap's .shadow-sm, lit instead of shadowed on the dark page. For a
+// waldur-ui Card, $property is its --card-box-shadow hook.
+@mixin hover-shadow($property: box-shadow) {
+  #{$property}: 0 0.1rem 1rem 0.25rem
     color-mix(in srgb, var(--shadow-color) 5%, transparent);
 
   @include dark-theme {
-    box-shadow: 0 0.1rem 1rem 0.25rem
+    #{$property}: 0 0.1rem 1rem 0.25rem
       color-mix(in srgb, var(--fg-white) 5%, transparent);
   }
   transition: all 0.2s ease;
@@ -323,8 +324,8 @@
   }
 
   // On grid view
-  &.grid-hover-shadow .card:not(.card-table):hover {
-    @include hover-shadow;
+  &.grid-hover-shadow #{$card}:not(#{$card-table}):hover {
+    @include hover-shadow(--card-box-shadow);
   }
 }
 
@@ -338,15 +339,16 @@
 }
 
 /* TABLE IN CARD */
-.card.card-table {
-  .card-header:not(.card-solid .card-header) {
-    min-height: 77px;
+#{$card}#{$card-table} {
+  #{$card-header}:not(#{$card-solid} #{$card-header}) {
+    --card-header-min-h: 77px;
 
-    .card-toolbar {
-      margin: 0.71rem 0;
+    #{$card-toolbar} {
+      --card-toolbar-my: 0.71rem;
 
-      .card-title {
-        margin: 0;
+      #{$card-title} {
+        --card-title-my: 0px;
+        --card-title-mr: 0px;
 
         .h3 {
           line-height: 28px;
@@ -363,13 +365,13 @@
   // Tab.Pane carry; `.tab-content` (Bootstrap's panel wrapper) is kept for the
   // few places that still set it by hand.
   &:not(.grid-table)
-    .card-body:not(.tab-content .card-body):not(
-      [role='tabpanel'] .card-body
-    ):not(.card-solid .card-body) {
-    padding-top: 0;
+    #{$card-body}:not(.tab-content #{$card-body}):not(
+      [role='tabpanel'] #{$card-body}
+    ):not(#{$card-solid} #{$card-body}) {
+    --card-content-pt: 0px;
   }
 
-  .card-header .card-toolbar {
+  #{$card-header} #{$card-toolbar} {
     .table-toolbar-search {
       flex: 0 0 320px;
       max-width: 320px;
@@ -387,8 +389,8 @@
     margin-bottom: 0;
   }
 
-  &:not(.card-bordered) {
-    border: unset;
+  &:not(#{$card-bordered}) {
+    --card-border-width: 0px;
   }
 
   &.grid-table {
@@ -408,16 +410,14 @@
   &.full-width {
     overflow: hidden;
 
-    &:not(.grid-table) .card-header {
-      margin: 0;
-      padding-left: var(--card-padding-x, 1.85rem);
-      padding-right: var(--card-padding-x, 1.85rem);
+    &:not(.grid-table) #{$card-header} {
+      --card-header-mx: 0px;
+      --card-header-px: var(--card-padding-x);
     }
 
-    &:not(.grid-table) .card-body:not(.card-solid .card-body) {
-      padding-top: 0;
-      padding-left: 0;
-      padding-right: 0;
+    &:not(.grid-table) #{$card-body}:not(#{$card-solid} #{$card-body}) {
+      --card-content-pt: 0px;
+      --card-content-px: 0px;
 
       .table {
         td:first-child,
@@ -470,12 +470,12 @@
 // The page's side padding below lg (the page container's 15px).
 $mobile-spacing: 15px;
 @include below(sm) {
-  .card.card-table.full-width {
+  #{$card}#{$card-table}.full-width {
     margin-left: -$mobile-spacing;
     margin-right: -$mobile-spacing;
-    border-radius: 0;
+    --card-radius: 0px;
 
-    .card-header,
+    #{$card-header},
     .table-pagination {
       padding-left: $mobile-spacing !important;
       padding-right: $mobile-spacing !important;
@@ -635,12 +635,12 @@ $mobile-spacing: 15px;
 
 // Another table inside expanded view: in dark mode, the card's border.
 .table.table-expandable tr {
-  .expandable-container .card-table {
+  .expandable-container #{$card-table} {
     @include dark-theme {
       border-color: var(--border-secondary) !important;
     }
 
-    .card-header {
+    #{$card-header} {
       @include dark-theme {
         border-color: var(--border-secondary) !important;
       }

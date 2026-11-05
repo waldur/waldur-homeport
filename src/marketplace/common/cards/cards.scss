@@ -6,12 +6,12 @@
 .offering-card-list,
 .offering-card-image {
   // No hover shadow on cards — only 1px brand border
-  .card:hover {
+  [data-slot='card']:hover {
     box-shadow: none;
   }
 
   // Pressed/select state — 2px green border (outline to avoid layout shift)
-  .card:active {
+  [data-slot='card']:active {
     outline: 2px solid var(--brand-color);
     outline-offset: -2px;
     border-color: transparent !important;
@@ -24,7 +24,7 @@
     pointer-events: none;
     filter: grayscale(50%);
 
-    .card {
+    [data-slot='card'] {
       // Was var(--bs-secondary-bg), which is never defined: disabled cards
       // have always been transparent.
       background-color: transparent;
@@ -121,11 +121,11 @@
 }
 
 // Solid footer border for image card
-.offering-card-image .card-footer {
+.offering-card-image [data-slot='card-footer'] {
   border-top-style: solid;
 }
 
 // Solid footer border for detailed card
-.offering-card-detailed .card-footer {
+.offering-card-detailed [data-slot='card-footer'] {
   border-top-style: solid;
 }

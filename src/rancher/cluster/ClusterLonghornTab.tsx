@@ -1,17 +1,19 @@
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 import { DangerActionPanel } from '@/user/support/DangerActionPanel';
 
 export const ClusterLonghornTab = ({ resource }) =>
   !resource.attributes.install_longhorn ? (
-    <div className="card mb-3">
-      <div className="card-header">
-        <div className="card-title">{translate('Longhorn status')}</div>
-      </div>
-      <div className="card-body">
+    <Card className="mb-3">
+      <CardHeader>
+        <CardTitle as="div">{translate('Longhorn status')}</CardTitle>
+      </CardHeader>
+      <CardContent>
         <p>{translate('Longhorn is not installed.')}</p>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   ) : (
     <DangerActionPanel
       resource={resource}

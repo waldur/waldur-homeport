@@ -1,5 +1,7 @@
 import { User } from 'waldur-js-client';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { LOCAL_IDP } from '@/auth/providers/constants';
 import { ExternalLink } from '@/core/ExternalLink';
 import { translate } from '@/i18n';
@@ -33,11 +35,11 @@ export const UserEditTab: React.FC<UserEditTabProps> = ({ user }) => {
         <AcceptTosWarning isSelf={canAcceptTerms} userName={user.full_name} />
       )}
       {canAcceptTerms && !user.agreement_date && (
-        <div className="card card-bordered mb-5.5">
-          <div className="card-body">
+        <Card bordered className="mb-5.5">
+          <CardContent>
             <TermsOfServiceCheckbox user={user} />
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
       <UserProfileTabs
         user={user}

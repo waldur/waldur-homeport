@@ -197,7 +197,7 @@ export const OrgDashboardMock = () => {
         </div>
 
         <Card>
-          <CardHeader className="p-4 pb-0 text-sm font-semibold">
+          <CardHeader className="p-4 pb-0 text-sm font-semibold text-primary">
             {translate('Projects')}
           </CardHeader>
           <CardContent className="overflow-x-auto p-0">
@@ -210,7 +210,7 @@ export const OrgDashboardMock = () => {
         </Card>
 
         <Card>
-          <CardHeader className="p-4 pb-0 text-sm font-semibold">
+          <CardHeader className="p-4 pb-0 text-sm font-semibold text-primary">
             {translate('Organisation details')}
           </CardHeader>
           <CardContent className="p-4 pt-0">

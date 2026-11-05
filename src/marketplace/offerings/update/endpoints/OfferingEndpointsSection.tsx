@@ -1,5 +1,13 @@
 import { FC } from 'react';
 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+} from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { PermissionEnum } from '@/permissions/enums';
@@ -26,19 +34,19 @@ export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
   const canDelete = can(PermissionEnum.DELETE_OFFERING_ENDPOINT);
 
   return (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="card-title h5">
+    <Card bordered>
+      <CardHeader>
+        <CardTitle as="div" className="h5">
           <span className="me-1.5">{translate('Endpoints')}</span>
           <RefreshButton refetch={props.refetch} loading={props.loading} />
-        </div>
+        </CardTitle>
         {canAdd && (
-          <div className="card-toolbar">
+          <CardToolbar>
             <AddEndpointButton {...props} />
-          </div>
+          </CardToolbar>
         )}
-      </div>
-      <div className="card-body">
+      </CardHeader>
+      <CardContent>
         {props.offering.endpoints.length === 0 ? (
           <NoResult
             callback={props.refetch}
@@ -81,7 +89,7 @@ export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
             </table>
           </div>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

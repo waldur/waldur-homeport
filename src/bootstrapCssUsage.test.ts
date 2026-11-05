@@ -144,20 +144,9 @@ describe('bootstrapCssUsage', () => {
         expect(isClassAllowed('row', new Set())).toBe(false);
       });
 
-      it('allows Card classes only when Card is present in corpus', () => {
-        const cardTokens = new Set(['Card']);
-        expect(isClassAllowed('card', cardTokens)).toBe(true);
-        expect(isClassAllowed('card-header', cardTokens)).toBe(true);
-        expect(isClassAllowed('card-body', cardTokens)).toBe(true);
-        expect(isClassAllowed('card-title', cardTokens)).toBe(true);
-        expect(isClassAllowed('card-footer', cardTokens)).toBe(true);
-        expect(isClassAllowed('card-subtitle', cardTokens)).toBe(true);
-        expect(isClassAllowed('card-text', cardTokens)).toBe(true);
-        expect(isClassAllowed('card-img', cardTokens)).toBe(true);
-        expect(isClassAllowed('card-img-top', cardTokens)).toBe(true);
-
-        expect(isClassAllowed('card', new Set())).toBe(false);
-        expect(isClassAllowed('card-group', cardTokens)).toBe(false);
+      it('no longer allows card classes for a Card token', () => {
+        // waldur-ui's Card renders data-slot, not Bootstrap's classes.
+        expect(isClassAllowed('card-header', new Set(['Card']))).toBe(false);
       });
 
       it('allows Table classes only when Table is present in corpus', () => {

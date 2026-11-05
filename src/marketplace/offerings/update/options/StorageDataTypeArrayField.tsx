@@ -1,7 +1,13 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardToolbar,
+} from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { StringGroup } from '@/form';
@@ -16,12 +22,12 @@ export const StorageDataTypeArrayField = ({
 }: FieldArrayRenderProps<any, HTMLElement>) => (
   <div>
     {fields.map((member, index) => (
-      <div key={index} className="card card-bordered bg-secondary mb-2.5">
-        <div className="card-header mx-3 min-h-auto">
+      <Card bordered key={index} className="bg-secondary mb-2.5">
+        <CardHeader className="mx-3 min-h-auto">
           <h6 className="mb-0 text-tertiary">
             {translate('Storage Data Type {index}', { index: index + 1 })}
           </h6>
-          <div className="card-toolbar m-0">
+          <CardToolbar className="m-0">
             <BaseButton
               size="sm"
               onClick={() => fields.remove(index)}
@@ -29,9 +35,9 @@ export const StorageDataTypeArrayField = ({
               iconNode={<TrashIcon weight="bold" />}
               variant="text-danger"
             />
-          </div>
-        </div>
-        <div className="card-body px-3">
+          </CardToolbar>
+        </CardHeader>
+        <CardContent className="px-3">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
             <div>
               <StringGroup
@@ -56,8 +62,8 @@ export const StorageDataTypeArrayField = ({
               />
             </div>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     ))}
     <div>
       <BaseButton

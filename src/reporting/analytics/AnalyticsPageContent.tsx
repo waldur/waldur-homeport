@@ -1,6 +1,14 @@
 import { FC } from 'react';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Card,
+  CardContent,
+  CardHeader,
+} from 'waldur-ui';
 
 import { AnalyticsCapability, AnalyticsMode, DrillDownDataItem } from './types';
 import { WhatIfSimulator } from './WhatIfSimulator';
@@ -35,8 +43,8 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
       value={activeMode}
       onValueChange={(k) => setActiveMode(k as AnalyticsMode)}
     >
-      <div className="card card-bordered">
-        <div className="card-header border-b-0">
+      <Card bordered>
+        <CardHeader className="border-b-0">
           <TabsList scrollable>
             {capability.supportedModes.map((mode) => (
               <TabsTrigger
@@ -48,9 +56,9 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
               </TabsTrigger>
             ))}
           </TabsList>
-        </div>
+        </CardHeader>
 
-        <div className="card-body">
+        <CardContent>
           <TabsContent value={activeMode}>
             {activeMode === 'what-if' &&
               supportsWhatIf &&
@@ -83,8 +91,8 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
                 />
               )}
           </TabsContent>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </Tabs>
   );
 };

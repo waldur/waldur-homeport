@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { CategoryGroup } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -22,7 +22,7 @@ export interface CategorySelection {
 // bar (--layout-sticky-top), and never grows past the bottom of the screen:
 // a long list scrolls inside the card.
 const cardClassName = classNames(
-  'category-sidebar card-bordered sticky',
+  'category-sidebar sticky',
   'top-[calc(var(--layout-sticky-top)+20px)]',
   'max-h-[calc(100vh-var(--layout-sticky-top)-40px)]',
 );
@@ -40,21 +40,21 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
 
   if (categories.isLoading) {
     return (
-      <div className={classNames('card', cardClassName)}>
-        <div className="card-body flex justify-center items-center py-8">
+      <Card bordered className={cardClassName}>
+        <CardContent className="flex justify-center items-center py-8">
           <LoadingSpinner />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     );
   }
 
   if (categories.isError || !categories.data) {
     return (
-      <div className={classNames('card', cardClassName)}>
-        <div className="card-body">
+      <Card bordered className={cardClassName}>
+        <CardContent>
           <LoadingErred loadData={categories.refetch} />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     );
   }
 
@@ -92,12 +92,12 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
   };
 
   return (
-    <div className={classNames('card', cardClassName)}>
-      <div className="card-header border-b border-b-secondary">
-        <div className="card-title">
+    <Card bordered className={cardClassName}>
+      <CardHeader className="border-b border-b-secondary">
+        <CardTitle as="div">
           <span className="h3">{translate('Categories')}</span>
-        </div>
-      </div>
+        </CardTitle>
+      </CardHeader>
       <nav
         aria-label={translate('Categories')}
         className="min-h-0 overflow-y-auto"
@@ -159,6 +159,6 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
           return renderItem(item as Category);
         })}
       </nav>
-    </div>
+    </Card>
   );
 };

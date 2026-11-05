@@ -3,21 +3,27 @@
 exports[`InternalIpsList > renders list 1`] = `
 <div>
   <div
-    class="card-table card-bordered card"
+    class="relative flex min-w-[var(--card-min-width,0px)] flex-col break-words bg-primary bg-clip-border rounded-[var(--card-radius,var(--radius-lg))] border-solid border-secondary border-[length:var(--card-border-width,1px)] shadow-[var(--card-box-shadow,none)]"
+    data-bordered=""
+    data-slot="card"
+    data-variant="table"
   >
     <div
-      class="border-b border-b-secondary card-header"
+      class="flex flex-wrap items-center justify-between min-h-[var(--card-header-min-h,var(--card-header-min-height,70px))] mx-[var(--card-header-mx,var(--card-padding-x))] px-[var(--card-header-px,0px)] py-[var(--card-header-padding-y,var(--card-header-py))] border-secondary bg-[var(--card-header-bg,transparent)] first:rounded-t-[7px] text-[length:var(--text-sm)] font-bold text-[color:var(--card-header-color,var(--text-secondary))] border-b border-b-secondary"
+      data-slot="card-header"
       data-testid="table-toolbar"
     >
       <div
-        class="card-toolbar flex flex-wrap items-center gap-3 w-full"
+        class="my-[var(--card-toolbar-my,var(--card-header-py))] flex flex-wrap items-center gap-3 w-full"
+        data-slot="card-toolbar"
       >
         <div
           class="grow order-0"
           data-testid="table-toolbar-title-container"
         >
           <div
-            class="card-title h5"
+            class="my-[var(--card-title-my,var(--card-header-py))] mr-[var(--card-title-mr,var(--card-header-py))] ml-0 flex items-center text-primary text-[1.275rem] font-medium h5"
+            data-slot="card-title"
           >
             <div
               class="me-1.5"
@@ -70,7 +76,8 @@ exports[`InternalIpsList > renders list 1`] = `
       </div>
     </div>
     <div
-      class="card-body"
+      class="flex-[var(--card-content-flex,1_1_auto)] px-[var(--card-content-px,var(--card-padding-x))] pt-[var(--card-content-pt,var(--card-padding-y))] pb-[var(--card-content-pb,var(--card-padding-y))]"
+      data-slot="card-content"
     >
       <div
         class="table-responsive relative max-md:flex max-md:flex-col max-md:items-center max-md:items-center-safe"

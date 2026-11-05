@@ -2,7 +2,17 @@ import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo, useState } from 'react';
 import { OpenStackInstance, openstackPortsRetrieve } from 'waldur-js-client';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+} from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -86,16 +96,16 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
   });
 
   return (
-    <div className="card card card-table card-bordered">
-      <div className="card-header">
-        <div className="card-title">
+    <Card variant="table" bordered>
+      <CardHeader>
+        <CardTitle as="div">
           <span className="me-1.5">{translate('Security groups details')}</span>
           <RefreshButton
             refetch={activeKey === 'resource' ? props.refetch : refetchPort}
             loading={props.isLoading || isRefetchingPort}
           />
-        </div>
-        <div className="card-toolbar">
+        </CardTitle>
+        <CardToolbar>
           {activeKey === 'resource' ? (
             <UpdateSecurityGroupsButton
               resource={props.resourceScope}
@@ -112,9 +122,9 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
           ) : null}
 
           <ManageSecurityGroupsButton resource={props.resource} />
-        </div>
-      </div>
-      <div className="card-body min-h-[300px]">
+        </CardToolbar>
+      </CardHeader>
+      <CardContent className="min-h-[300px]">
         <Tabs value={activeKey} onValueChange={setActiveKey}>
           {ports?.length > 0 && (
             <TabsList scrollable>
@@ -170,7 +180,7 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
             )}
           </TabsContent>
         </Tabs>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

@@ -10,7 +10,13 @@ import React, {
 import { createPortal } from 'react-dom';
 import { useDispatch, useStore } from 'react-redux';
 
-import { TablePagination, useBreakpointDown } from 'waldur-ui';
+import {
+  TablePagination,
+  useBreakpointDown,
+  Card,
+  CardContent,
+  CardHeader,
+} from 'waldur-ui';
 
 import { restoreFilters } from './actions';
 import { TableContent } from './components/content';
@@ -387,15 +393,14 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
         )}
 
         {/* Main card */}
-        <div
+        <Card
+          variant="table"
+          bordered={props.cardBordered}
           className={classNames(
-            'card-table',
             props.fullWidth && 'full-width',
-            props.cardBordered && 'card-bordered',
             props.fieldName ? 'field-table' : '',
             props.mode === 'grid' && Boolean(props.gridItem) && 'grid-table',
             props.className,
-            'card',
           )}
           id={props.id}
         >
@@ -416,9 +421,9 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
 
           {/* Tabs */}
           {props.nav ? (
-            <div className="table-tabs border-b border-b-secondary items-stretch py-0 min-h-auto card-header">
+            <CardHeader className="table-tabs border-b border-b-secondary items-stretch py-0 min-h-auto">
               {props.nav}
-            </div>
+            </CardHeader>
           ) : null}
 
           {/* Menu/Sidebar filters */}
@@ -426,7 +431,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
             ? (props.filterPosition === 'menu' ||
                 (props.filterPosition === 'sidebar' &&
                   props.filtersStorage.length > 0)) && (
-                <div
+                <CardHeader
                   className={classNames(
                     'border-b border-b-secondary min-h-auto py-1.5',
                     {
@@ -434,7 +439,6 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                         !showFilterMenuToggle &&
                         props.filterPosition === 'menu',
                     },
-                    'card-header',
                   )}
                 >
                   <TableFilters
@@ -449,7 +453,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                     applyFiltersFn={props.applyFiltersFn}
                     selectedSavedFilter={props.selectedSavedFilter}
                   />
-                </div>
+                </CardHeader>
               )
             : null}
 
@@ -457,16 +461,16 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
           {!closedHiddenActionsMessage &&
             props.hasOptionalColumns &&
             props.activeColumns[COLUMN_ACTIONS_KEY] === false && (
-              <div className="border-b border-b-secondary card-header">
+              <CardHeader className="border-b border-b-secondary">
                 <HiddenActionsMessage
                   toggleColumn={props.toggleColumn}
                   close={() => setClosedHiddenActionsMessage(true)}
                 />
-              </div>
+              </CardHeader>
             )}
 
           {/* Main content */}
-          <div className={classNames(props.bodyClassName, 'card-body')}>
+          <CardContent className={props.bodyClassName}>
             {/* items-center is the fallback for Safari before 17.6, which drops
                 items-center-safe; safe keeps a child wider than the screen
                 at the left edge, in scroll reach. */}
@@ -488,8 +492,8 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
               />
             )}
             {props.footer}
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </TableProvider>
     </FilterContextProvider>
   );

@@ -14,6 +14,10 @@ import {
   PropertyItem,
   PropertyList,
   Code,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
 } from 'waldur-ui';
 
 import { useDebouncedValue } from '@/core/useDebouncedValue';
@@ -38,15 +42,15 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
   index = null,
 }) => {
   return (
-    <div className="card mb-2.5">
-      <div className="card-header">
-        <div className="card-title mb-0">
+    <Card className="mb-2.5">
+      <CardHeader>
+        <CardTitle as="div" className="mb-0">
           {index !== null
             ? translate('User Information - User {index}', { index: index + 1 })
             : translate('User Information')}
-        </div>
-      </div>
-      <div className="card-body">
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
         <div className="text-sm">
           <PropertyList variant="summary" termWidth="md" space={1.5}>
             <PropertyItem
@@ -85,8 +89,8 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
             )}
           </PropertyList>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
@@ -98,26 +102,26 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
     Object.keys(projects).length === 0
   ) {
     return (
-      <div className="card">
-        <div className="card-body">
+      <Card>
+        <CardContent>
           <div className="text-center text-quaternary py-3">
             {translate('No projects found for this user')}
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     );
   }
 
   return (
-    <div className="card">
-      <div className="card-header">
-        <div className="card-title mb-0">
+    <Card>
+      <CardHeader>
+        <CardTitle as="div" className="mb-0">
           {translate('Projects ({count})', {
             count: Object.keys(projects).length,
           })}
-        </div>
-      </div>
-      <div className="card-body">
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
         <div className="flex flex-col gap-3">
           {Object.entries(projects).map(([projectId, project]) => (
             <div
@@ -177,8 +181,8 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
             </div>
           ))}
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 export const AccessForEmail: FunctionComponent<{}> = () => {
@@ -205,11 +209,13 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
   };
 
   return (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="card-title mb-0">{translate('Check user access')}</div>
-      </div>
-      <div className="card-body">
+    <Card bordered>
+      <CardHeader>
+        <CardTitle as="div" className="mb-0">
+          {translate('Check user access')}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
         <div className="mb-2.5">
           <p className="text-quaternary mb-2.5">
             {translate(
@@ -299,7 +305,7 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
             title={translate('No results found')}
           />
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

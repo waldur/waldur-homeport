@@ -6,6 +6,5 @@ export const ActivityCard = ({ resource }) => (
     title={translate('Audit logs')}
     initialPageSize={5}
     marketplaceResource={resource}
-    className="card-bordered"
   />
 );

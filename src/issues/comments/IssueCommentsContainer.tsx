@@ -2,6 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Issue, supportCommentsList } from 'waldur-js-client';
 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+} from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
@@ -36,24 +44,24 @@ export const IssueCommentsContainer: FC<IssueCommentsContainerProps> = ({
 
   return (
     <IssueCommentsContext.Provider value={issue}>
-      <div className="card card-bordered mb-4">
-        <div className="card-header">
-          <div className="card-title">
+      <Card bordered className="mb-4">
+        <CardHeader>
+          <CardTitle as="div">
             <span className="me-1.5">{translate('Comments')}</span>
             <RefreshButton refetch={refetch} loading={isLoading} />
-          </div>
-          <div className="card-toolbar">
+          </CardTitle>
+          <CardToolbar>
             <IssueCommentButton />
-          </div>
-        </div>
-        <div className="card-body">
+          </CardToolbar>
+        </CardHeader>
+        <CardContent>
           {isLoading && comments.length === 0 ? (
             <LoadingSpinner />
           ) : (
             <IssueCommentsList comments={comments} />
           )}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </IssueCommentsContext.Provider>
   );
 };

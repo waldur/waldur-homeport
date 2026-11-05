@@ -1,7 +1,7 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { adminArrowBillingSyncsTriggerConsumptionSync } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Card, CardContent } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -30,8 +30,8 @@ export const TriggerConsumptionSyncAction = () => {
     useTriggerConsumptionSync();
 
   return (
-    <div className="card h-full">
-      <div className="card-body">
+    <Card className="h-full">
+      <CardContent>
         <h6>{translate('Trigger Consumption Sync')}</h6>
         <p className="text-quaternary small mb-2.5">
           {translate(
@@ -46,7 +46,7 @@ export const TriggerConsumptionSyncAction = () => {
           pending={isTriggering}
           size="lg"
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

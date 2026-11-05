@@ -1,7 +1,7 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC, PropsWithChildren } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, Card, CardContent, CardHeader, CardToolbar } from 'waldur-ui';
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -25,8 +25,8 @@ export const DeployPageTotalCard: FC<
     props.shouldConcealPrices ??
     isFeatureVisible(MarketplaceFeatures.conceal_prices);
   return (
-    <div className="card card-bordered w-full">
-      <div className="card-header">
+    <Card bordered className="w-full">
+      <CardHeader>
         {header ? (
           header
         ) : (
@@ -34,15 +34,15 @@ export const DeployPageTotalCard: FC<
             <h3 className="font-normal text-secondary mb-0">
               {translate('Total')}:
             </h3>
-            <div className="card-toolbar">
+            <CardToolbar>
               <h3 className="font-medium mb-0">
                 {shouldConcealPrices ? DASH_ESCAPE_CODE : total}
               </h3>
-            </div>
+            </CardToolbar>
           </>
         )}
-      </div>
-      <div className="card-body">
+      </CardHeader>
+      <CardContent>
         {children}
         {offering?.plugin_options?.require_purchase_order_upload ? (
           <div className="flex items-center gap-1.5 mt-3 mb-3 text-warning text-xs">
@@ -75,7 +75,7 @@ export const DeployPageTotalCard: FC<
         )}
         <TosNotification />
         <OfferingTosNotification offering={offering} />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

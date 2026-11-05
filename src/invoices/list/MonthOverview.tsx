@@ -1,7 +1,7 @@
 import { ArrowDownIcon, ArrowUpIcon, MinusIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 
-import { PropertyList, PropertyItem } from 'waldur-ui';
+import { PropertyList, PropertyItem, Card, CardContent } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { parseDate } from '@/core/dateUtils';
@@ -78,8 +78,8 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
   }
 
   return (
-    <div className="card card-bordered h-full">
-      <div className="card-body">
+    <Card bordered className="h-full">
+      <CardContent>
         <div className="grid grid-cols-2 gap-x-5 h-full">
           <div>
             {isCurrentMonth && !isAccountingMode ? (
@@ -156,7 +156,7 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

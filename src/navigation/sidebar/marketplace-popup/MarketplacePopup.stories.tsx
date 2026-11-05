@@ -390,7 +390,7 @@ export const CategoryPreselected: Story = {
   render: () => (
     <PopupHarness>
       <div className="mx-auto max-w-[840px]">
-        <div className="relative flex flex-col rounded-xl bg-primary shadow-[var(--modal-shadow)] card-bordered">
+        <div className="relative flex flex-col rounded-xl bg-primary shadow-[var(--modal-shadow)]">
           <MarketplacePopup
             resolve={{
               organization: mockCustomer,
@@ -419,7 +419,7 @@ export const RecentlyAddedOfferings: Story = {
   render: () => (
     <PopupHarness>
       <div className="mx-auto max-w-[840px]">
-        <div className="relative flex flex-col rounded-xl bg-primary shadow-[var(--modal-shadow)] card-bordered">
+        <div className="relative flex flex-col rounded-xl bg-primary shadow-[var(--modal-shadow)]">
           <MarketplacePopup
             resolve={{
               organization: mockCustomer,
@@ -449,7 +449,7 @@ export const EmptyCategories: Story = {
   render: () => (
     <PopupHarness categories={[]} recent={[]}>
       <div className="mx-auto max-w-[840px]">
-        <div className="relative flex flex-col rounded-xl bg-primary shadow-[var(--modal-shadow)] card-bordered">
+        <div className="relative flex flex-col rounded-xl bg-primary shadow-[var(--modal-shadow)]">
           <MarketplacePopup
             resolve={{
               organization: mockCustomer,

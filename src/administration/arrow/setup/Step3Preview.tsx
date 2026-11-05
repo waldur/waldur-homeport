@@ -12,6 +12,9 @@ import {
   BaseButton,
   PropertyList,
   PropertyItem,
+  Card,
+  CardContent,
+  CardHeader,
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -175,11 +178,11 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
         )}
       </p>
 
-      <div className="card mb-3">
-        <div className="card-header">
+      <Card className="mb-3">
+        <CardHeader>
           <h5 className="mb-0">{translate('Connection')}</h5>
-        </div>
-        <div className="card-body">
+        </CardHeader>
+        <CardContent>
           <PropertyList variant="summary">
             <PropertyItem
               label={translate('API URL')}
@@ -194,14 +197,14 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
               value={partnerInfo?.reference as string}
             />
           </PropertyList>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
-      <div className="card mb-3">
-        <div className="card-header">
+      <Card className="mb-3">
+        <CardHeader>
           <h5 className="mb-0">{translate('Customer Mappings')}</h5>
-        </div>
-        <div className="card-body">
+        </CardHeader>
+        <CardContent>
           {mappingCount > 0 ? (
             <SimpleTable
               columns={getMappingColumns()}
@@ -213,15 +216,15 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
               {translate('No customer mappings configured')}
             </span>
           )}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       {values.exportTypes.length > 0 && (
-        <div className="card mb-3">
-          <div className="card-header">
+        <Card className="mb-3">
+          <CardHeader>
             <h5 className="mb-0">{translate('Available Export Types')}</h5>
-          </div>
-          <div className="card-body">
+          </CardHeader>
+          <CardContent>
             <p className="text-quaternary small mb-2.5">
               {translate(
                 'These billing export types are available from your Arrow account. Compatible types have all required fields.',
@@ -232,8 +235,8 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
               rows={values.exportTypes}
               rowKey="reference"
             />
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
 
       <AlertItem

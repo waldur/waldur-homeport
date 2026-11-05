@@ -107,19 +107,21 @@ of the page changed, not by how much: a 1px shift near the top of a story change
 A parity spec renders the old implementation and its replacement on one Storybook page and diffs
 the two live renders against each other, in the same browser and run, so there is no committed
 baseline to go stale. `e2e-visual/visualParityHarness.ts` provides the machinery;
-`card-parity.spec.ts` and `stat-card-parity.spec.ts` use it.
+`stat-card-parity.spec.ts` uses it. (`card-parity.spec.ts` did, until the cards moved to waldur-ui's
+`Card` and their Metronic stylesheet was deleted: a parity story goes once nothing renders the old
+half.)
 
-1. **The story** (`src/core/CardParity.stories.tsx`, title `Migration/Card Parity`) renders each
+1. **The story** (`src/core/StatCardParity.stories.tsx`, title `Migration/StatCard Parity`) renders each
    case twice, wrapped in `data-pair="<case>" data-role="old"` and `data-role="new"`, at the same
    fixed width.
 2. **The spec** creates a harness and runs each case in both themes:
 
    ```typescript
    const { gotoParity, expectPixelParity } = createParityHarness({
-     storyId: 'migration-card-parity--default',
-     diffDir: path.join(__dirname, '../test-results/card-parity-diffs'),
+     storyId: 'migration-statcard-parity--default',
+     diffDir: path.join(__dirname, '../test-results/stat-card-parity-diffs'),
      thresholds: {
-       maxDimensionSlackPx: 1.0,
+       maxDimensionSlackPx: 0.5,
        diffRatioThreshold: 0.06,
        pixelmatchThreshold: 0.25,
        foregroundDistanceThreshold: 30,
@@ -230,14 +232,14 @@ locally and put the result in the merge request.
 
 ## Commands
 
-| Command                                                         | What it does                                                                |
-| --------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `yarn build-storybook`                                          | Static Storybook in `storybook-static/`, the input of `theme-snapshots.mjs` |
-| `node scripts/theme-snapshots.mjs capture …` / `compare …`      | Storybook comparison                                                        |
-| `node scripts/theme-snapshots.mjs root-invariance …`            | Stories that render differently at a 13px and a 20px root                   |
-| `yarn test:e2e:visual`                                          | Every `e2e-visual` spec (project `visual`, one worker)                      |
-| `yarn playwright test card-parity --project=visual --workers=1` | One spec; the argument is a filter, and a path is read as a project name    |
-| `yarn test:visual:update`                                       | Rewrite the local `toHaveScreenshot()` baselines (every project)            |
+| Command                                                              | What it does                                                                |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `yarn build-storybook`                                               | Static Storybook in `storybook-static/`, the input of `theme-snapshots.mjs` |
+| `node scripts/theme-snapshots.mjs capture …` / `compare …`           | Storybook comparison                                                        |
+| `node scripts/theme-snapshots.mjs root-invariance …`                 | Stories that render differently at a 13px and a 20px root                   |
+| `yarn test:e2e:visual`                                               | Every `e2e-visual` spec (project `visual`, one worker)                      |
+| `yarn playwright test stat-card-parity --project=visual --workers=1` | One spec; the argument is a filter, and a path is read as a project name    |
+| `yarn test:visual:update`                                            | Rewrite the local `toHaveScreenshot()` baselines (every project)            |
 
 `playwright.config.ts` starts the app (`yarn start`, :8001) and Storybook (`yarn storybook --ci`,
 :6006), and outside CI reuses ones already running. A spec may import `packages/ui/src/...`

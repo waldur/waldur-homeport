@@ -1,5 +1,13 @@
 import React, { useCallback, useRef } from 'react';
 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+} from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import exportAs from '@/table/exporters';
@@ -47,17 +55,19 @@ export const ChartCard: React.FC<ChartCardProps> = ({
   );
 
   return (
-    <div className="card h-full card-bordered">
-      <div className="card-header items-center border-0 pt-4 pb-1.5 min-h-[60px]">
-        <div className="card-title items-start flex-col m-0">
-          <span className="card-label font-medium text-primary">{title}</span>
+    <Card bordered className="h-full">
+      <CardHeader className="items-center border-0 pt-4 pb-1.5 min-h-[60px]">
+        <CardTitle as="div" className="items-start flex-col m-0 justify-center">
+          <span className="mr-[var(--card-label-gap)] font-medium text-primary">
+            {title}
+          </span>
           {summary && (
             <span className="text-quaternary text-xs font-normal">
               {summary}
             </span>
           )}
-        </div>
-        <div className="card-toolbar flex gap-3 m-0">
+        </CardTitle>
+        <CardToolbar className="flex gap-3 m-0">
           {actions}
           <ChartExportDropdown
             disabled={isEmpty}
@@ -70,9 +80,9 @@ export const ChartCard: React.FC<ChartCardProps> = ({
               getExportData ? () => handleExportData('excel') : undefined
             }
           />
-        </div>
-      </div>
-      <div className="card-body pt-1.5">
+        </CardToolbar>
+      </CardHeader>
+      <CardContent className="pt-1.5">
         {isEmpty ? (
           <NoResult
             // Filter-agnostic: this card is used on unfiltered overviews too,
@@ -88,7 +98,7 @@ export const ChartCard: React.FC<ChartCardProps> = ({
         ) : (
           children(chartRef)
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

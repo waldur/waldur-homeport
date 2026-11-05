@@ -11,7 +11,7 @@ import {
   reviewerProfilesPublish,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Card, CardContent } from 'waldur-ui';
 
 import { DEFAULT_REDIRECT_STATE } from '@/auth/authNavigation';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -187,8 +187,8 @@ export const ReviewerInvitationAccept: FC = () => {
   if (invitationError) {
     return (
       <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-8')}>
-        <div className="card card-bordered">
-          <div className="card-body text-center py-8">
+        <Card bordered>
+          <CardContent className="text-center py-8">
             <h3 className="text-danger mb-3">
               {translate('Invalid invitation')}
             </h3>
@@ -197,8 +197,8 @@ export const ReviewerInvitationAccept: FC = () => {
                 'This invitation link is invalid or has expired. Please contact the call manager for a new invitation.',
               )}
             </p>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -211,8 +211,8 @@ export const ReviewerInvitationAccept: FC = () => {
   if (invitation.invitation_status !== 'pending') {
     return (
       <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-8')}>
-        <div className="card card-bordered">
-          <div className="card-body text-center py-8">
+        <Card bordered>
+          <CardContent className="text-center py-8">
             <h3 className="mb-3">
               {translate('Invitation already processed')}
             </h3>
@@ -221,8 +221,8 @@ export const ReviewerInvitationAccept: FC = () => {
                 ? translate('You have already accepted this invitation.')
                 : translate('This invitation has been declined or expired.')}
             </p>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     );
   }

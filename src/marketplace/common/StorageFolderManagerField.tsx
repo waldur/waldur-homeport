@@ -1,7 +1,15 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { OptionField, StorageFolderConfig } from 'waldur-js-client';
 
-import { FormField, FormLabel, FormText, HelpIcon } from 'waldur-ui';
+import {
+  FormField,
+  FormLabel,
+  FormText,
+  HelpIcon,
+  Card,
+  CardContent,
+  CardHeader,
+} from 'waldur-ui';
 
 import { FieldError } from '@/form/FieldError';
 import { BaseInputField } from '@/form/InputField';
@@ -345,11 +353,11 @@ const QuotaSummaryCard = ({
   );
 
   return (
-    <div className="card mt-2.5 bg-tertiary dark:bg-quaternary">
-      <div className="card-header">
+    <Card className="mt-2.5 bg-tertiary dark:bg-quaternary">
+      <CardHeader>
         <h6>{translate('Calculated Quotas')}</h6>
-      </div>
-      <div className="card-body">
+      </CardHeader>
+      <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
           <div>
             <strong>{translate('Space Quotas')}</strong>
@@ -375,7 +383,7 @@ const QuotaSummaryCard = ({
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

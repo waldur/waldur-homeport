@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { generateColors } from 'waldur-design-tokens';
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -46,14 +47,14 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
   });
 
   return (
-    <div className="card card-bordered mb-8">
-      <div className="card-header">
-        <div className="card-title h5">
+    <Card bordered className="mb-8">
+      <CardHeader>
+        <CardTitle as="div" className="h5">
           {translate('Component usage chart')}
-        </div>
-      </div>
-      <div
-        className="card-body mt-2.5"
+        </CardTitle>
+      </CardHeader>
+      <CardContent
+        className="mt-2.5"
         style={{ maxWidth: '500px', minWidth: '100%' }}
       >
         {loading ? (
@@ -72,7 +73,7 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
             })}
           />
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

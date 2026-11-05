@@ -2,7 +2,7 @@
   min-height: 100vh;
 
   .carousel-section {
-    > .card-header {
+    > [data-slot='card-header'] {
       background-color: transparent;
     }
   }

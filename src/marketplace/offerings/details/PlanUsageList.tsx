@@ -1,6 +1,7 @@
-import classNames from 'classnames';
 import { FC } from 'react';
 import { PlanUsageResponse } from 'waldur-js-client';
+
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
@@ -41,14 +42,11 @@ const PlanGroup = ({ plan }: { plan: PlanUsageResponse }) => (
 
 export const PlanUsageList: FC<OwnProps> = (props) => {
   return (
-    <div
-      className={classNames('card card-bordered', props.className)}
-      id={props.id}
-    >
-      <div className="card-header">
-        <div className="card-title">{translate('Plans')}</div>
-      </div>
-      <div className="card-body">
+    <Card bordered className={props.className} id={props.id}>
+      <CardHeader>
+        <CardTitle as="div">{translate('Plans')}</CardTitle>
+      </CardHeader>
+      <CardContent>
         {!props.plansUsage?.length && (
           <div className="text-quaternary">
             {translate('There are no plans')}
@@ -58,7 +56,7 @@ export const PlanUsageList: FC<OwnProps> = (props) => {
           props.plansUsage.map((plan) => (
             <PlanGroup key={plan.plan_uuid} plan={plan} />
           ))}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

@@ -1,7 +1,13 @@
 import { useMemo } from 'react';
 import { Offering, Resource } from 'waldur-js-client';
 
-import { HelpIcon, PropertyItem, PropertyList } from 'waldur-ui';
+import {
+  HelpIcon,
+  PropertyItem,
+  PropertyList,
+  Card,
+  CardContent,
+} from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
@@ -119,8 +125,8 @@ export const ResourceLimitChangeInfo = ({
           </p>
         ) : null)}
 
-      <div className="card card-table card-bordered mt-5 mb-5">
-        <div className="card-body p-0">
+      <Card variant="table" bordered className="mt-5 mb-5">
+        <CardContent className="p-0">
           <div className="table-responsive">
             <div className="table-container">
               <table className="table table-row-bordered align-middle">
@@ -204,8 +210,8 @@ export const ResourceLimitChangeInfo = ({
               </table>
             </div>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       <CostEstimatedChangeView
         order={order}

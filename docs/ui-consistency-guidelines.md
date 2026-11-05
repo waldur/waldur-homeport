@@ -1006,13 +1006,13 @@ When cards are displayed in a row (carousel, grid), ensure they all have equal h
   height: 100%;
 }
 
-// Card itself needs h-100
-<Card className="card-bordered h-100">
-  <Card.Body className="d-flex flex-column">
-    {/* Use flex-grow-1 on variable-height content */}
-    <p className="flex-grow-1">{description}</p>
+// Card itself needs h-full
+<Card bordered className="h-full">
+  <CardContent className="flex flex-col">
+    {/* Use grow on variable-height content */}
+    <p className="grow">{description}</p>
     {/* Fixed footer stays at bottom */}
-  </Card.Body>
+  </CardContent>
 </Card>
 ```
 
