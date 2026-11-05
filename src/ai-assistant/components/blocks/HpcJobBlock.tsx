@@ -5,7 +5,7 @@ import {
   PaperPlaneTiltIcon,
   PencilSimpleIcon,
 } from '@phosphor-icons/react';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import { AlertItem, Code } from 'waldur-ui';
 
@@ -14,6 +14,7 @@ import { SkeletonLoader } from '@/ai-assistant/components/shared/SkeletonLoader'
 import { UIBlock, UIBlockProps } from '@/ai-assistant/lib/types';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { notifyHpcJobSubmitted } from '@/marketplace/resources/details/hpc/queries';
 
 /** A preview the user can still submit or change from the message footer. */
 export const isHpcJobAwaitingConfirmation = (block: UIBlock): boolean =>
@@ -43,7 +44,21 @@ const MessageList: FC<{
     />
   ) : null;
 
+// Jobs already announced to a jobs table, so a card read again (the thread
+// reloaded or scrolled back to) does not refresh the table once more.
+const announcedJobs = new Set<string>();
+
 export const HpcJobBlock: FC<UIBlockProps> = ({ block }) => {
+  const submittedJob =
+    block.status !== 'loading' && block.job_id && block.allocation_uuid
+      ? `${block.allocation_uuid}/${block.job_id}`
+      : null;
+  useEffect(() => {
+    if (!submittedJob || announcedJobs.has(submittedJob)) return;
+    announcedJobs.add(submittedJob);
+    notifyHpcJobSubmitted(block.allocation_uuid);
+  }, [submittedJob, block.allocation_uuid]);
+
   if (block.status === 'loading') {
     return (
       <div className="aui-vm-order-block">

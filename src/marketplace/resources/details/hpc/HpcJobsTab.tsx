@@ -23,7 +23,12 @@ import { renderFieldOrDash } from '@/table/utils';
 import { HpcErrorAlert } from './HpcErrorAlert';
 import { HpcJobActions } from './HpcJobActions';
 import { HpcJobDetails } from './HpcJobDetails';
-import { HPC_QUERY_OPTIONS, HpcWorkspaceMode, hpcQueryKey } from './queries';
+import {
+  HPC_QUERY_OPTIONS,
+  HpcWorkspaceMode,
+  hpcQueryKey,
+  subscribeHpcJobSubmitted,
+} from './queries';
 import {
   formatElapsed,
   getInMemoryPage,
@@ -182,6 +187,12 @@ export const HpcJobsTab: FC<{
         .invalidateQueries({ queryKey: hpcQueryKey(resourceUuid, 'jobs') })
         .then(() => fetchRef.current(true)),
     [queryClient, resourceUuid],
+  );
+
+  // A job submitted from the assistant: the cached list does not have it.
+  useEffect(
+    () => subscribeHpcJobSubmitted(resourceUuid, refreshJobs),
+    [resourceUuid, refreshJobs],
   );
 
   const openSubmitDialog = useCallback(

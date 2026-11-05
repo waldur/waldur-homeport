@@ -1,7 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { hpcWorkspacesList } from 'waldur-js-client';
 
-import { getHpcWorkspaceMode, hasFirecrest } from './queries';
+import {
+  getHpcWorkspaceMode,
+  hasFirecrest,
+  notifyHpcJobSubmitted,
+  subscribeHpcJobSubmitted,
+} from './queries';
 
 const FIRECREST = {
   firecrest_api_url: 'https://firecrest.example.org',
@@ -73,5 +78,21 @@ describe('getHpcWorkspaceMode', () => {
   it('is none when the backend does not serve it, e.g. an endpoint staff have not allowed', async () => {
     workspaces({ resource_uuid: 'other', firecrest_enabled: true });
     expect(await getHpcWorkspaceMode('r-1', FIRECREST)).toBeNull();
+  });
+});
+
+describe('subscribeHpcJobSubmitted', () => {
+  it('hears jobs of its own allocation, with or without dashes', () => {
+    const onSubmitted = vi.fn();
+    const unsubscribe = subscribeHpcJobSubmitted(
+      '4928ba35-fdc0-415b-8d74-4458a5a1c4ad',
+      onSubmitted,
+    );
+    notifyHpcJobSubmitted('4928ba35fdc0415b8d744458a5a1c4ad');
+    notifyHpcJobSubmitted('another-allocation');
+    expect(onSubmitted).toHaveBeenCalledTimes(1);
+    unsubscribe();
+    notifyHpcJobSubmitted('4928ba35fdc0415b8d744458a5a1c4ad');
+    expect(onSubmitted).toHaveBeenCalledTimes(1);
   });
 });

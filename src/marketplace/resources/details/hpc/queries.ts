@@ -30,6 +30,34 @@ export const hpcQueryKey = (uuid: string, ...rest: unknown[]) => [
   ...rest,
 ];
 
+const sameUuid = (a: string, b: string) =>
+  a.replaceAll('-', '') === b.replaceAll('-', '');
+
+const jobSubmittedListeners = new Set<(uuid: string) => void>();
+
+/**
+ * Tells a jobs table on screen that its allocation has a new job. A job
+ * submitted outside the table, from the assistant, is not in the table's
+ * cached list, and the table refreshes by itself only while a job it shows is
+ * still pending or running.
+ */
+export const notifyHpcJobSubmitted = (allocationUuid: string) =>
+  jobSubmittedListeners.forEach((listener) => listener(allocationUuid));
+
+/** Calls `onSubmitted` for each job submitted to the allocation elsewhere. */
+export const subscribeHpcJobSubmitted = (
+  allocationUuid: string,
+  onSubmitted: () => void,
+) => {
+  const listener = (uuid: string) => {
+    if (sameUuid(uuid, allocationUuid)) onSubmitted();
+  };
+  jobSubmittedListeners.add(listener);
+  return () => {
+    jobSubmittedListeners.delete(listener);
+  };
+};
+
 export const useHpcOverview = (uuid: string) =>
   useQuery({
     queryKey: hpcQueryKey(uuid, 'overview'),
