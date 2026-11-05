@@ -47,6 +47,7 @@ import {
   buildTextContent,
   MentionCandidate,
 } from './messageContent';
+import { isRoomOpenElsewhere } from './roomViews';
 import { useMatrixClient } from './useMatrixClient';
 import { useMentionCandidates } from './useMentionCandidates';
 import { useRoomMemberNames } from './useRoomMemberNames';
@@ -195,12 +196,25 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
   onCancelRecording,
   onSendVoice,
 }) => {
-  const { client, activeRoomId, activeRoomUuid, connectionState, userId } =
-    useMatrixClient();
+  const {
+    client,
+    activeRoomId,
+    activeRoomUuid,
+    requestedRoomUuid,
+    connectionState,
+    userId,
+    showRoomHere,
+  } = useMatrixClient();
+  const roomOpen = activeRoomUuid === roomUuid;
+  const roomOpenElsewhere = isRoomOpenElsewhere(
+    { connectionState, activeRoomUuid, requestedRoomUuid },
+    roomUuid,
+  );
   const memberNames = useRoomMemberNames(activeRoomUuid);
   // Draft text is kept per-room above the drawer so it survives a close/reopen.
   const { draft, setText: setMessage } = useMatrixComposerDraft(activeRoomId);
-  const message = draft.text;
+  // Until this room opens, the active room's draft is another view's.
+  const message = roomOpen ? draft.text : '';
   const [sending, setSending] = useState(false);
   const [mentionQuery, setMentionQuery] = useState<{
     query: string;
@@ -396,12 +410,15 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
   messageRef.current = message;
   useEffect(() => {
     if (!pickedCommand) return;
-    // What is typed already becomes what the command is about
-    // (`/ticket VM is down`), unless it is a command itself.
-    const typed = messageRef.current.trimStart();
-    insertCommand(`/${pickedCommand} `, /^[!/]/.test(typed) ? '' : typed);
+    // Inserted now, it would replace the draft of the room another view has.
+    if (roomOpen) {
+      // What is typed already becomes what the command is about
+      // (`/ticket VM is down`), unless it is a command itself.
+      const typed = messageRef.current.trimStart();
+      insertCommand(`/${pickedCommand} `, /^[!/]/.test(typed) ? '' : typed);
+    }
     clearPickedCommand();
-  }, [pickedCommand, insertCommand, clearPickedCommand]);
+  }, [pickedCommand, roomOpen, insertCommand, clearPickedCommand]);
 
   const sendMessage = useCallback(
     async (e?: FormEvent) => {
@@ -535,25 +552,34 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
     ],
   );
 
+  // Staged files belong to the active room, so until this room is the active
+  // one they would go with another room's next message.
   const handleFileSelect = useCallback(() => {
     const files = fileInputRef.current?.files;
-    if (files?.length) addFiles(Array.from(files));
+    if (files?.length && roomOpen) addFiles(Array.from(files));
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
-  }, [addFiles]);
+  }, [addFiles, roomOpen]);
+
+  // Bringing the room here waits for an intent to write: plain focus also
+  // comes from Tab, a screen reader or a restored focus passing through.
+  const showRoomHereToWrite = useCallback(() => {
+    if (roomOpenElsewhere) showRoomHere(roomUuid);
+  }, [roomOpenElsewhere, showRoomHere, roomUuid]);
 
   // Stage pasted files/images (e.g. a screenshot from the clipboard) instead of
   // letting them paste as nothing; text paste falls through untouched.
   const handlePaste = useCallback(
     (e: ClipboardEvent<HTMLTextAreaElement>) => {
+      showRoomHereToWrite();
       const files = Array.from(e.clipboardData?.files ?? []);
       if (files.length > 0) {
         e.preventDefault();
-        addFiles(files);
+        if (roomOpen) addFiles(files);
       }
     },
-    [addFiles],
+    [showRoomHereToWrite, addFiles, roomOpen],
   );
 
   const handleKeyDown = useCallback(
@@ -562,6 +588,18 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
       // composed text. Safari reports that Enter after compositionend, so
       // only keyCode 229 tells.
       if (e.nativeEvent.isComposing || e.keyCode === 229) return;
+      // The replies and edits in reach belong to the active room, not this one.
+      if (!roomOpen) {
+        // Only typing is meant for here; Tab, arrows and Escape move on.
+        // Option (macOS) and AltGr, reported as Ctrl+Alt, type characters
+        // such as @ on many layouts, so only Cmd or a bare Ctrl is a shortcut.
+        const typing =
+          (e.key.length === 1 || e.key === 'Enter') &&
+          !e.metaKey &&
+          (!e.ctrlKey || e.altKey);
+        if (typing) showRoomHereToWrite();
+        return;
+      }
       // A command typed out in full that takes nothing more is sent on Enter,
       // as before the menu (`!status`); one with arguments is inserted first.
       const activeCommand =
@@ -615,6 +653,8 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
       }
     },
     [
+      roomOpen,
+      showRoomHereToWrite,
       filteredCommands,
       commandIndex,
       commandQuery?.query,
@@ -639,8 +679,11 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
     }
   }, [updateMentionState]);
 
-  const disabled =
-    connectionState !== 'connected' || activeRoomUuid !== roomUuid;
+  const notConnected = connectionState !== 'connected';
+  const disabled = notConnected || !roomOpen;
+  const unavailableReason = roomOpenElsewhere
+    ? translate('Another conversation is open')
+    : translate('Not connected');
   const busy = sending || uploading;
   const canSend = Boolean(message.trim()) || pendingFiles.length > 0;
 
@@ -689,7 +732,13 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
         </div>
       )}
 
-      <form onSubmit={sendMessage} className="tc-composer">
+      <form
+        onSubmit={sendMessage}
+        // Anywhere in the composer, and also when the text box kept focus as
+        // its room was taken, so no focus event would follow.
+        onPointerDown={showRoomHereToWrite}
+        className="tc-composer"
+      >
         <input
           ref={fileInputRef}
           type="file"
@@ -709,7 +758,7 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
             onCancel={cancelReply}
           />
         )}
-        {!recording && (
+        {!recording && roomOpen && (
           <PendingAttachments files={pendingFiles} onRemove={removePending} />
         )}
         <div className="tc-composer-input-row">
@@ -750,13 +799,20 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
                     : undefined
                 }
                 placeholder={
-                  disabled
-                    ? translate('Connecting...')
-                    : uploading
-                      ? translate('Uploading...')
-                      : translate('Type a message...')
+                  roomOpenElsewhere
+                    ? translate('Click or type to open this conversation here')
+                    : disabled
+                      ? translate('Connecting...')
+                      : uploading
+                        ? translate('Uploading...')
+                        : translate('Type a message...')
                 }
-                disabled={disabled || uploading}
+                // Focusable while another room is open, so that using it
+                // brings this room here and typing can follow once it opens.
+                // Read-only until then: its text would land in the draft of
+                // the room another view has.
+                disabled={notConnected || uploading}
+                readOnly={disabled}
               />
               <BaseButton
                 variant="text-secondary"
@@ -768,7 +824,9 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
                     ? translate(
                         'Voice messages are not supported in this browser.',
                       )
-                    : translate('Record voice message')
+                    : disabled
+                      ? unavailableReason
+                      : translate('Record voice message')
                 }
                 iconNode={<MicrophoneIcon weight="bold" />}
               />
@@ -807,9 +865,7 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
                 disabled={disabled || busy}
                 onClick={() => fileInputRef.current?.click()}
                 title={
-                  disabled
-                    ? translate('Not connected')
-                    : translate('Attach a file')
+                  disabled ? unavailableReason : translate('Attach a file')
                 }
               >
                 <PaperclipIcon weight="bold" />
@@ -821,7 +877,7 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
                 disabled={disabled || !canSend || busy}
                 title={
                   disabled
-                    ? translate('Not connected')
+                    ? unavailableReason
                     : !canSend
                       ? translate('Enter a message or attach a file')
                       : translate('Send message')

@@ -156,6 +156,10 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
   // The room last asked for at any time. Answers to a room switch can arrive
   // out of order, and only this room's may take effect.
   const requestedRoomUuidRef = useRef<string | null>(null);
+  // The same, for views to tell their own room opening from another view's.
+  const [requestedRoomUuid, setRequestedRoomUuid] = useState<string | null>(
+    null,
+  );
   // The chat views on screen, oldest first. They share one active room, which
   // belongs to the newest.
   const roomViewsRef = useRef<{ roomUuid: string }[]>([]);
@@ -243,6 +247,7 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
     releaseClient();
     pendingRoomUuidRef.current = null;
     requestedRoomUuidRef.current = null;
+    setRequestedRoomUuid(null);
     setConnectionState('disconnected');
     setActiveRoomId(null);
     setActiveRoomUuid(null);
@@ -311,7 +316,10 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
       // must NOT set the active room — otherwise opening the drawer later
       // would mark a room the user never selected as read.
       const activate = options?.activate !== false;
-      if (activate) requestedRoomUuidRef.current = roomUuid;
+      if (activate) {
+        requestedRoomUuidRef.current = roomUuid;
+        setRequestedRoomUuid(roomUuid);
+      }
 
       // A client already exists (still doing its initial sync, or fully
       // connected). Never create a second one — both the global chat drawer
@@ -702,6 +710,17 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
     [connect],
   );
 
+  const showRoomHere = useCallback(
+    (roomUuid: string) => {
+      // Any view of the room will do: they all ask for the same one.
+      const views = roomViewsRef.current;
+      const index = views.map((view) => view.roomUuid).lastIndexOf(roomUuid);
+      if (index !== -1) views.push(...views.splice(index, 1));
+      return connect(roomUuid);
+    },
+    [connect],
+  );
+
   // Replace an identity Waldur can't unlock, on the user's explicit request.
   const resetCryptoIdentity = useCallback(async () => {
     const client = clientRef.current;
@@ -753,10 +772,12 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
       connectionState,
       activeRoomId,
       activeRoomUuid,
+      requestedRoomUuid,
       userId,
       connect,
       disconnect,
       registerRoomView,
+      showRoomHere,
       error,
       deniedRoomUuids,
       failedRoomUuid,
@@ -768,10 +789,12 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
       connectionState,
       activeRoomId,
       activeRoomUuid,
+      requestedRoomUuid,
       userId,
       connect,
       disconnect,
       registerRoomView,
+      showRoomHere,
       error,
       deniedRoomUuids,
       failedRoomUuid,
