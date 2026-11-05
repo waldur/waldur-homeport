@@ -66,6 +66,9 @@ const kpiFixture = (overrides: Record<string, unknown> = {}) => ({
   clarification_rate: 0.12,
   input_tokens_total: 842193,
   output_tokens_total: 361402,
+  cache_read_tokens_total: 505316,
+  cache_write_tokens_total: 12000,
+  cache_ratio: 0.6,
   reviewed_total: 0,
   review_input_tokens_total: 0,
   review_output_tokens_total: 0,
@@ -265,6 +268,33 @@ describe('AnonymousChatPanel', () => {
     const tokensTip = screen.getByText('Tokens').querySelector('span');
     await userEvent.hover(tokensTip!);
     await screen.findByText('842,193 input / 361,402 output');
+    expect(screen.getByText('505,316 read from cache')).toBeInTheDocument();
+    expect(screen.getByText('12,000 written to cache')).toBeInTheDocument();
+  });
+
+  it('puts the cache ratio under the token tile rather than in a seventh tile', async () => {
+    vi.mocked(anonymousChatInteractionsKpiRetrieve).mockResolvedValue({
+      data: kpiFixture(),
+    } as any);
+
+    renderPanel();
+
+    expect(await screen.findByText('Cache ratio 60%')).toBeInTheDocument();
+  });
+
+  it('leaves the cache ratio out when no turn reported a cache figure', async () => {
+    vi.mocked(anonymousChatInteractionsKpiRetrieve).mockResolvedValue({
+      data: kpiFixture({
+        cache_read_tokens_total: null,
+        cache_write_tokens_total: null,
+        cache_ratio: null,
+      }),
+    } as any);
+
+    renderPanel();
+    await screen.findByText('1,203,595');
+
+    expect(screen.queryByText(/Cache ratio/)).not.toBeInTheDocument();
   });
 
   it('reports the nightly judge in its own row, spend included', async () => {

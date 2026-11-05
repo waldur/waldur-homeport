@@ -66,6 +66,9 @@ describe('SupportAIAssistantLogsList', () => {
         users_total: 2,
         input_tokens_total: 842193,
         output_tokens_total: 361402,
+        cache_read_tokens_total: 505316,
+        cache_write_tokens_total: 12000,
+        cache_ratio: 0.6,
         satisfaction_rate: 0.75,
       },
     } as any);
@@ -80,7 +83,64 @@ describe('SupportAIAssistantLogsList', () => {
     // it stranded behind two figures nobody scans for quality.
     expect(
       screen.getAllByRole('heading', { level: 1 }).map((h) => h.textContent),
+    ).toEqual(['320', '2', '75%', '842,193', '361,402', '60%']);
+  });
+
+  it('shows how many input tokens were read from and written to the cache', async () => {
+    renderList();
+
+    expect(
+      await screen.findByText('505,316 read from cache'),
+    ).toBeInTheDocument();
+    expect(screen.getByText('12,000 written to cache')).toBeInTheDocument();
+  });
+
+  it('leaves writes out for a provider that reports reads only', async () => {
+    // vLLM reports cache hits but never cache writes.
+    vi.mocked(chatThreadsStatsRetrieve).mockResolvedValue({
+      data: {
+        threads_total: 320,
+        users_total: 2,
+        input_tokens_total: 842193,
+        output_tokens_total: 361402,
+        cache_read_tokens_total: 505316,
+        cache_write_tokens_total: null,
+        cache_ratio: 0.6,
+        satisfaction_rate: 0.75,
+      },
+    } as any);
+
+    renderList();
+
+    expect(
+      await screen.findByText('505,316 read from cache'),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/written to cache/)).not.toBeInTheDocument();
+  });
+
+  it('leaves the cache tile out when no turn reported a cache figure', async () => {
+    // A provider that never reports cache hits is not one that never hits, and
+    // a whole tile reading N/A says nothing the missing tile does not.
+    vi.mocked(chatThreadsStatsRetrieve).mockResolvedValue({
+      data: {
+        threads_total: 320,
+        users_total: 2,
+        input_tokens_total: 842193,
+        output_tokens_total: 361402,
+        cache_read_tokens_total: null,
+        cache_write_tokens_total: null,
+        cache_ratio: null,
+        satisfaction_rate: 0.75,
+      },
+    } as any);
+
+    renderList();
+    await screen.findByText('320');
+
+    expect(
+      screen.getAllByRole('heading', { level: 1 }).map((h) => h.textContent),
     ).toEqual(['320', '2', '75%', '842,193', '361,402']);
+    expect(screen.queryByText('Cache ratio')).not.toBeInTheDocument();
   });
 
   it('scopes the summary to the active filter', async () => {

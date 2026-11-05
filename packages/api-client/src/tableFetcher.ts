@@ -135,10 +135,18 @@ interface ClientPaginationOptions {
   queryField?: string;
 }
 
-const compareRowValues = (a: unknown, b: unknown) => {
+// Missing values sort last in both directions, matching the backend's
+// nulls_last ordering: only the comparison of present values is reversed, so
+// a descending sort does not open on a page of dashes.
+const compareRowValues = (a: unknown, b: unknown, desc: boolean) => {
   if (a == null && b == null) return 0;
   if (a == null) return 1;
   if (b == null) return -1;
+  const result = comparePresentValues(a, b);
+  return desc ? -result : result;
+};
+
+const comparePresentValues = (a: unknown, b: unknown) => {
   if (typeof a === 'number' && typeof b === 'number') return a - b;
   return String(a).localeCompare(String(b), undefined, {
     numeric: true,
@@ -168,10 +176,9 @@ export const createClientPaginatedFetcher =
     if (typeof ordering === 'string' && ordering) {
       const desc = ordering.startsWith('-');
       const field = desc ? ordering.slice(1) : ordering;
-      data = [...data].sort((a, b) => {
-        const result = compareRowValues((a as any)[field], (b as any)[field]);
-        return desc ? -result : result;
-      });
+      data = [...data].sort((a, b) =>
+        compareRowValues((a as any)[field], (b as any)[field], desc),
+      );
     }
 
     const size = pageSize || PAGE_SIZE_FULL;

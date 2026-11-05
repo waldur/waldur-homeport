@@ -10,6 +10,9 @@ import { formatUsageValue } from '@/core/formatNumber';
 import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import {
+  cacheReadTokensColumn,
+  cacheWriteTokensColumn,
+  cacheRatioColumn,
   feedbackColumn,
   flaggedColumn,
   maxSeverityColumn,
@@ -17,6 +20,8 @@ import {
 } from '@/support/ai-assistant/chatLogsColumns';
 import {
   asPercent,
+  CacheFigures,
+  CacheRatioLabel,
   toQueryKey,
   SatisfactionLabel,
 } from '@/support/ai-assistant/chatLogsShared';
@@ -52,7 +57,12 @@ export const SupportAIAssistantLogsList: FunctionComponent = () => {
     fetchData: fetcher,
     filter,
     queryField: 'query',
-    mandatoryFields: ['title_gen_input_tokens', 'title_gen_output_tokens'],
+    mandatoryFields: [
+      'title_gen_input_tokens',
+      'title_gen_output_tokens',
+      'title_gen_cache_read_tokens',
+      'title_gen_cache_write_tokens',
+    ],
   });
 
   // The table is narrowed by `filter` AND by the free-text term, which useTable
@@ -118,6 +128,25 @@ export const SupportAIAssistantLogsList: FunctionComponent = () => {
               label: translate('Output tokens'),
               value: formatUsageValue(threadStats.output_tokens_total),
             },
+            // Only once some turn reported a cache figure: until then the
+            // provider simply doesn't report it, and a tile of N/A says so
+            // less clearly than its absence.
+            ...(threadStats.cache_ratio != null
+              ? [
+                  {
+                    label: <CacheRatioLabel />,
+                    value: asPercent(threadStats.cache_ratio),
+                    footer: (
+                      <div className="text-quaternary">
+                        <CacheFigures
+                          read={threadStats.cache_read_tokens_total}
+                          write={threadStats.cache_write_tokens_total}
+                        />
+                      </div>
+                    ),
+                  },
+                ]
+              : []),
           ]
         : [],
     [threadStats],
@@ -177,6 +206,9 @@ export const SupportAIAssistantLogsList: FunctionComponent = () => {
         id: 'total_tokens',
         keys: ['total_tokens'],
       },
+      cacheReadTokensColumn<ThreadSession>({ id: 'cache_read_tokens' }),
+      cacheWriteTokensColumn<ThreadSession>({ id: 'cache_write_tokens' }),
+      cacheRatioColumn<ThreadSession>({ id: 'cache_ratio' }),
       // ids differ from the anonymous table's on purpose — they key the user's
       // saved column config, so renaming them for symmetry would reset it.
       flaggedColumn<ThreadSession>({ id: 'flagged', filter: 'is_flagged' }),

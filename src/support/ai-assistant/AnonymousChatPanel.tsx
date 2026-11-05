@@ -27,12 +27,20 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { AnonymousChatTranscriptRow } from './AnonymousChatTranscriptRow';
 import {
+  cacheReadTokensColumn,
+  cacheWriteTokensColumn,
+  cacheRatioColumn,
   feedbackColumn,
   flaggedColumn,
   maxSeverityColumn,
   timestampColumn,
 } from './chatLogsColumns';
-import { asPercent, toQueryKey, SatisfactionLabel } from './chatLogsShared';
+import {
+  asPercent,
+  CacheFigures,
+  toQueryKey,
+  SatisfactionLabel,
+} from './chatLogsShared';
 
 // Persisted per-user column config lives under this key, so it must not change.
 export const TABLE_KEY = 'AnonymousChatConversations';
@@ -176,15 +184,34 @@ export const AnonymousChatPanel: FunctionComponent = () => {
                 <>
                   {translate('Tokens')}{' '}
                   <HelpIcon
-                    label={translate('{input} input / {output} output', {
-                      input: formatUsageValue(kpi.input_tokens_total),
-                      output: formatUsageValue(kpi.output_tokens_total),
-                    })}
+                    label={
+                      <>
+                        <div>
+                          {translate('{input} input / {output} output', {
+                            input: formatUsageValue(kpi.input_tokens_total),
+                            output: formatUsageValue(kpi.output_tokens_total),
+                          })}
+                        </div>
+                        <CacheFigures
+                          read={kpi.cache_read_tokens_total}
+                          write={kpi.cache_write_tokens_total}
+                        />
+                      </>
+                    }
                   />
                 </>
               ),
               value: formatUsageValue(
                 kpi.input_tokens_total + kpi.output_tokens_total,
+              ),
+              // A footer rather than its own tile: a seventh tile would wrap
+              // the row, as above.
+              footer: kpi.cache_ratio != null && (
+                <span className="text-quaternary">
+                  {translate('Cache ratio {ratio}', {
+                    ratio: asPercent(kpi.cache_ratio),
+                  })}
+                </span>
               ),
             },
           ]
@@ -377,6 +404,13 @@ export const AnonymousChatPanel: FunctionComponent = () => {
         id: 'total_tokens',
         keys: ['total_tokens'],
       },
+      cacheReadTokensColumn<AnonymousChatConversation>({
+        id: 'cache_read_tokens',
+      }),
+      cacheWriteTokensColumn<AnonymousChatConversation>({
+        id: 'cache_write_tokens',
+      }),
+      cacheRatioColumn<AnonymousChatConversation>({ id: 'cache_ratio' }),
       flaggedColumn<AnonymousChatConversation>({
         id: 'is_flagged',
         orderField: 'is_flagged',

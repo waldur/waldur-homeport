@@ -185,7 +185,7 @@ const InteractionTurns: FunctionComponent<{
           )}
           <div
             className={classNames('p-2.5 rounded-lg chat-log-bubble', {
-              'border-l border-3 border-danger': interaction.is_flagged,
+              'border-l-3 border-l-danger': interaction.is_flagged,
             })}
           >
             <div style={{ whiteSpace: 'pre-wrap' }}>
@@ -201,6 +201,8 @@ const InteractionTurns: FunctionComponent<{
           tokenId={`tokens-${interaction.uuid}`}
           inputTokens={interaction.input_tokens}
           outputTokens={interaction.output_tokens}
+          cacheReadTokens={interaction.cache_read_tokens}
+          cacheWriteTokens={interaction.cache_write_tokens}
         >
           <ClickCount
             created={interaction.created}
@@ -210,9 +212,9 @@ const InteractionTurns: FunctionComponent<{
         <div className="message-body">
           <div
             className={classNames('p-2.5 rounded-lg chat-log-bubble', {
-              'border-l border-l-secondary border-3': sentiment !== null,
-              'border-success': sentiment === 'positive',
-              'border-danger': sentiment === 'negative',
+              'border-l-3': sentiment !== null,
+              'border-l-success': sentiment === 'positive',
+              'border-l-danger': sentiment === 'negative',
             })}
           >
             {renderable.length === 0 ? (

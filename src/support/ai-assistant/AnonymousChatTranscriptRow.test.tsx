@@ -189,6 +189,50 @@ describe('AnonymousChatTranscriptRow', () => {
     expect(screen.getByText(/103/)).toBeInTheDocument();
   });
 
+  it('keeps the cache figures in the hover so the gutter stays one line', async () => {
+    vi.mocked(anonymousChatInteractionsBySessionList).mockResolvedValue({
+      data: [
+        interaction([markdown('hello')], {
+          input_tokens: 1048,
+          output_tokens: 103,
+          cache_read_tokens: 1024,
+          cache_write_tokens: 16,
+        }),
+      ],
+    } as any);
+
+    renderRow();
+
+    // Inline, "(1,024 cached)" pushed the output figure past the gutter edge.
+    const badge = await screen.findByText(/1,048/);
+    expect(badge).not.toHaveTextContent(/cache/);
+
+    await userEvent.hover(badge);
+    await screen.findByText(
+      '1,024 of 1,048 input tokens read from cache (98%)',
+    );
+    expect(screen.getByText('16 written to cache')).toBeInTheDocument();
+  });
+
+  it('says nothing about cache when the provider did not report it', async () => {
+    vi.mocked(anonymousChatInteractionsBySessionList).mockResolvedValue({
+      data: [
+        interaction([markdown('hello')], {
+          input_tokens: 1048,
+          output_tokens: 103,
+          cache_read_tokens: null,
+          cache_write_tokens: null,
+        }),
+      ],
+    } as any);
+
+    renderRow();
+
+    await userEvent.hover(await screen.findByText(/1,048/));
+    await screen.findByText('Message input / output tokens');
+    expect(screen.queryByText(/cache/)).not.toBeInTheDocument();
+  });
+
   it('omits token usage on turns recorded before it was tracked', async () => {
     vi.mocked(anonymousChatInteractionsBySessionList).mockResolvedValue({
       data: [

@@ -4,12 +4,17 @@ import { InjectionSeverityEnum } from 'waldur-js-client';
 import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
+import { formatUsageValue } from '@/core/formatNumber';
 import { translate } from '@/i18n';
 import { BooleanField } from '@/table/BooleanField';
 import { Column } from '@/table/types';
 import { renderFieldOrDash } from '@/table/utils';
 
-import { getSeverityBadgeVariant, severityLabels } from './chatLogsShared';
+import {
+  asPercent,
+  getSeverityBadgeVariant,
+  severityLabels,
+} from './chatLogsShared';
 
 // Columns both assistant channels render the same way. Each factory takes the
 // per-table bits — `id` above all, because it keys the user's saved column
@@ -84,6 +89,54 @@ export const maxSeverityColumn = <T extends SeverityRow>(
     ),
   export: (row) => (row.is_flagged ? row.max_severity || '' : ''),
   keys: ['max_severity'],
+  optional: true,
+  ...overrides,
+});
+
+type CacheTokensField = 'cache_read_tokens' | 'cache_write_tokens';
+
+const cacheTokensColumn =
+  (field: CacheTokensField, title: () => string) =>
+  <T extends Partial<Record<CacheTokensField, number | null>>>(
+    overrides: Overrides<T>,
+  ): Column<T> => ({
+    title: title(),
+    render: ({ row }) => renderFieldOrDash(formatUsageValue(row[field])),
+    export: (row) => row[field] ?? '',
+    orderField: field,
+    keys: [field],
+    optional: true,
+    ...overrides,
+  });
+
+// Titles are thunks so translate runs per render, not once at import.
+export const cacheReadTokensColumn = cacheTokensColumn(
+  'cache_read_tokens',
+  () => translate('Cache reads'),
+);
+
+export const cacheWriteTokensColumn = cacheTokensColumn(
+  'cache_write_tokens',
+  () => translate('Cache writes'),
+);
+
+interface CacheRatioRow {
+  cache_ratio?: number | null;
+}
+
+// A dash rather than N/A or 0%: null means the provider never reported cache
+// hits for this thread, which says nothing about whether any happened.
+export const cacheRatioColumn = <T extends CacheRatioRow>(
+  overrides: Overrides<T>,
+): Column<T> => ({
+  title: translate('Cache ratio'),
+  render: ({ row }) =>
+    renderFieldOrDash(
+      row.cache_ratio == null ? null : asPercent(row.cache_ratio),
+    ),
+  export: (row) => row.cache_ratio ?? '',
+  orderField: 'cache_ratio',
+  keys: ['cache_ratio'],
   optional: true,
   ...overrides,
 });
