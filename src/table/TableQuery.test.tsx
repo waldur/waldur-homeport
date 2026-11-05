@@ -42,4 +42,14 @@ describe('TableQuery', () => {
 
     expect(screen.getByRole('searchbox')).toHaveValue('openst');
   });
+
+  it('shows a term set elsewhere before the table was ever searched', () => {
+    const { rerender } = render(
+      <TableQuery query={undefined} setQuery={vi.fn()} />,
+    );
+
+    rerender(<TableQuery query="91" setQuery={vi.fn()} />);
+
+    expect(screen.getByRole('searchbox')).toHaveValue('91');
+  });
 });

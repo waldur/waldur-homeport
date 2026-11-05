@@ -79,7 +79,15 @@ export const computePinnedShadows = (
   return shadows;
 };
 
-export const getId = (row, index) => {
+/**
+ * The key a row's expanded state is kept under. A table whose rows are
+ * keyed by another field (`rowKey`, e.g. a job ID) keeps a row expanded by
+ * that, not by its position, which moves when a new row comes in on top.
+ */
+export const getId = (row, index, rowKey?: string) => {
+  if (rowKey && row[rowKey] != null) {
+    return row[rowKey];
+  }
   if (row.uuid) {
     return row.uuid;
   } else if (row.pk) {

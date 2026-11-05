@@ -526,7 +526,9 @@ const TableRow = memo<TableRowProps>(
     }, [fieldProps, row, onChangeField]);
 
     const canExpand = expandableRow && (isRowExpandable?.(row) ?? true);
-    const isExpanded = Boolean(canExpand && toggled[getId(row, rowIndex)]);
+    const isExpanded = Boolean(
+      canExpand && toggled[getId(row, rowIndex, rowKey)],
+    );
     const toggleExpanded = useCallback(
       () => onRowClick(row, rowIndex),
       [onRowClick, row, rowIndex],
@@ -550,7 +552,7 @@ const TableRow = memo<TableRowProps>(
           classNames(
             typeof rowClass === 'function' ? rowClass({ row }) : rowClass,
             {
-              expanded: canExpand && toggled[getId(row, rowIndex)],
+              expanded: canExpand && toggled[getId(row, rowIndex, rowKey)],
               checked: fieldType && isChecked,
             },
           ) || undefined
@@ -733,9 +735,9 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
         // the inline expand toggle only runs when an expandable row is set.
         onRowClickProp?.(row);
         if (!expandableRow) return;
-        toggleRow(getId(row, index));
+        toggleRow(getId(row, index, rowKey));
       },
-      [onRowClickProp, expandableRow, toggleRow],
+      [onRowClickProp, expandableRow, toggleRow, rowKey],
     );
 
     const onChangeField = useCallback(
@@ -822,7 +824,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
         {rows.map((row, rowIndex) => {
           const canExpand = expandableRow && (isRowExpandable?.(row) ?? true);
           return (
-            <React.Fragment key={rowIndex}>
+            <React.Fragment key={getId(row, rowIndex, rowKey)}>
               {fieldType ? (
                 <Field name={fieldName} validate={validate as any}>
                   {({ input, meta }) => (
@@ -839,7 +841,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
               ) : (
                 renderRow(row, rowIndex)
               )}
-              {canExpand && toggled[getId(row, rowIndex)] && (
+              {canExpand && toggled[getId(row, rowIndex, rowKey)] && (
                 // With a checkbox column, the details start past it too,
                 // level with the row's first column (ExpandableContainer.scss).
                 <tr

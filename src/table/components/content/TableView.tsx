@@ -47,6 +47,7 @@ export function TableView() {
       {config.hasHeaders && (
         <TableHeader
           rows={rows}
+          rowKey={config.rowKey}
           onSortClick={actions.sortList}
           currentSorting={sorting}
           columns={visibleColumns}

@@ -1,6 +1,8 @@
 import { PaperPlaneTiltIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { HpcJob, hpcWorkspacesJobsList, Resource } from 'waldur-js-client';
 
 import { BaseButton, Code, Tooltip } from 'waldur-ui';
@@ -9,6 +11,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { setFilterQuery, setToggled } from '@/table/actions';
 import {
   HpcJobTimeWindowOptions,
   HpcWorkspacesJobsFilter,
@@ -188,6 +191,31 @@ export const HpcJobsTab: FC<{
         .then(() => fetchRef.current(true)),
     [queryClient, resourceUuid],
   );
+
+  // A link to one job (?object=<job id>, e.g. the assistant's "Follow the
+  // job") searches the table for it, wherever it is in the list, and opens
+  // its row once listed. Once per link: the param stays in the URL (going to
+  // another state from here would fight the table's own filter sync), so a
+  // row the user closes stays closed.
+  const { params } = useCurrentStateAndParams();
+  const linkedJob = params.object ? String(params.object) : null;
+  const dispatch = useDispatch();
+  const searchedJobRef = useRef<string>(null);
+  const openedJobRef = useRef<string>(null);
+  const rows = tableProps.rows as HpcJob[];
+  const toggled = tableProps.toggled;
+  useEffect(() => {
+    if (!linkedJob) return;
+    if (searchedJobRef.current !== linkedJob) {
+      searchedJobRef.current = linkedJob;
+      dispatch(setFilterQuery(table, linkedJob));
+      return;
+    }
+    if (openedJobRef.current === linkedJob) return;
+    if (!rows.some((job) => job.job_id === linkedJob)) return;
+    openedJobRef.current = linkedJob;
+    dispatch(setToggled(table, { ...toggled, [linkedJob]: true }));
+  }, [linkedJob, rows, toggled, table, dispatch]);
 
   // A job submitted from the assistant: the cached list does not have it.
   useEffect(

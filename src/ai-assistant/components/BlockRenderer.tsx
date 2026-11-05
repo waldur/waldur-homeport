@@ -38,6 +38,8 @@ const MemoizedBlock: FC<UIBlockProps> = memo(
       prev.block.job_status === next.block.job_status &&
       prev.block.job_id === next.block.job_id &&
       prev.block.script === next.block.script &&
+      prev.block.files === next.block.files &&
+      prev.block.allocation_uuid === next.block.allocation_uuid &&
       prev.block.errors === next.block.errors &&
       prev.block.warnings === next.block.warnings &&
       prev.block.allocation === next.block.allocation &&
