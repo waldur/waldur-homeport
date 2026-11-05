@@ -47,7 +47,7 @@ describe('UserSearchImpersonateAction', () => {
 
   it('closes search before confirming, then impersonates and navigates', async () => {
     vi.mocked(useModal().confirm).mockResolvedValueOnce(null);
-    mockImpersonate.mockResolvedValueOnce(undefined);
+    mockImpersonate.mockResolvedValueOnce(true);
 
     renderComponent();
     await user.click(screen.getByRole('button', { name: 'Impersonate' }));
@@ -60,6 +60,17 @@ describe('UserSearchImpersonateAction', () => {
         'profile.details',
       );
     });
+  });
+
+  it('stays put when the backend refuses impersonation', async () => {
+    vi.mocked(useModal().confirm).mockResolvedValueOnce(null);
+    mockImpersonate.mockResolvedValueOnce(false);
+
+    renderComponent();
+    await user.click(screen.getByRole('button', { name: 'Impersonate' }));
+
+    await waitFor(() => expect(mockImpersonate).toHaveBeenCalled());
+    expect(globalRouter.stateService.go).not.toHaveBeenCalled();
   });
 
   it('closes search but does not impersonate when confirmation is dismissed', async () => {
