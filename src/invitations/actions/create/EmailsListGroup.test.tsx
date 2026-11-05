@@ -1,9 +1,9 @@
-import { act, screen } from '@testing-library/react';
+import { act, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { FormApi } from 'final-form';
 import arrayMutators from 'final-form-arrays';
 import { Form } from 'react-final-form';
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { renderWithProviders } from '@/test/harness';
 
@@ -57,6 +57,10 @@ const renderList = () => {
   return () => formApi;
 };
 
+// The summary under the list repeats each row's message, so row assertions
+// look inside the table.
+const table = () => within(screen.getByRole('table'));
+
 const visibleEmails = () =>
   screen
     .getAllByPlaceholderText('Enter email address')
@@ -73,7 +77,7 @@ describe('EmailsListGroup row feedback', () => {
 
     expect(await screen.findByDisplayValue(lastEmail)).toBeInTheDocument();
     expect(
-      screen.getByText(
+      table().getByText(
         'User already has the "Project administrator" role in this scope.',
       ),
     ).toBeInTheDocument();
@@ -88,7 +92,7 @@ describe('EmailsListGroup row feedback', () => {
 
     expect(await screen.findByDisplayValue(lastEmail)).toBeInTheDocument();
     expect(
-      screen.getByText(
+      table().getByText(
         'User already has this role in this scope. Update their existing role instead.',
       ),
     ).toBeInTheDocument();
@@ -137,7 +141,7 @@ describe('EmailsListGroup row feedback', () => {
       ]);
     });
 
-    expect(await screen.findByText(message)).toBeInTheDocument();
+    expect(await table().findByText(message)).toBeInTheDocument();
     expect(getForm().getState().valid).toBe(false);
 
     act(() => {
@@ -163,6 +167,95 @@ describe('EmailsListGroup row feedback', () => {
     await user.click(screen.getByText('1'));
 
     expect(visibleEmails()).toEqual(rows.slice(0, 5).map((row) => row.email));
+  });
+});
+
+describe('EmailsListGroup flagged rows', () => {
+  const duplicateVerdict = [
+    { email: lastEmail, roleUuid: memberRole.uuid, projectUuid: project.uuid },
+  ];
+  const duplicateMessage =
+    'This email and role combination is entered more than once.';
+  let scrollIntoView: ReturnType<typeof vi.fn<Element['scrollIntoView']>>;
+
+  beforeEach(() => {
+    scrollIntoView = vi.fn<Element['scrollIntoView']>();
+    Element.prototype.scrollIntoView = scrollIntoView;
+  });
+
+  afterEach(() => {
+    delete (Element.prototype as any).scrollIntoView;
+  });
+
+  it('summarises the flagged rows and brings the first one into view', async () => {
+    const getForm = renderList();
+
+    act(() => {
+      getForm().change('rows[4].email', lastEmail);
+      getForm().change('_duplicateInFormEmails', duplicateVerdict);
+    });
+
+    expect(
+      await screen.findByText('2 rows need attention before you can continue.'),
+    ).toBeInTheDocument();
+    // Row 5 is on the current page, so the list stays there and focuses it.
+    expect(scrollIntoView).toHaveBeenCalledTimes(1);
+    expect(screen.getByDisplayValue(lastEmail)).toHaveFocus();
+  });
+
+  it('jumps to the first flagged row from the summary', async () => {
+    const user = userEvent.setup();
+    const getForm = renderList();
+
+    act(() => {
+      getForm().change('_existingRoleBlocks', verdict(true));
+    });
+    await screen.findByDisplayValue(lastEmail);
+    await user.click(screen.getByText('1'));
+    expect(visibleEmails()).not.toContain(lastEmail);
+    scrollIntoView.mockClear();
+
+    await user.click(screen.getByRole('button', { name: 'Go to row' }));
+
+    expect(await screen.findByDisplayValue(lastEmail)).toHaveFocus();
+    expect(scrollIntoView).toHaveBeenCalledTimes(1);
+    expect(
+      screen.getByText('One row needs attention before you can continue.'),
+    ).toBeInTheDocument();
+  });
+
+  it('tells the inviter that a warning only holds Continue once', async () => {
+    const getForm = renderList();
+
+    act(() => {
+      getForm().change('_existingRoleWarnings', verdict(false));
+    });
+
+    expect(
+      await screen.findByText('One row has a warning.'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Click Continue again to send the invitations anyway.'),
+    ).toBeInTheDocument();
+  });
+
+  it('drops the summary once the flagged rows are fixed', async () => {
+    const getForm = renderList();
+
+    act(() => {
+      getForm().change('rows[4].email', lastEmail);
+      getForm().change('_duplicateInFormEmails', duplicateVerdict);
+    });
+    await table().findByText(duplicateMessage);
+
+    act(() => {
+      getForm().change('rows[4].email', 'user5@example.com');
+    });
+
+    expect(screen.queryByText(duplicateMessage)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('2 rows need attention before you can continue.'),
+    ).not.toBeInTheDocument();
   });
 });
 
