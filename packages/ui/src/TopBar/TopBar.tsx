@@ -47,6 +47,7 @@ export const TopBar = ({
   ...props
 }: TopBarProps) => (
   <header
+    data-slot="top-bar"
     className={cn(
       'flex h-[55px] shrink-0 items-stretch justify-between px-[15px] lg:h-[65px] lg:px-[32px]',
       'border-b border-b-secondary bg-primary',

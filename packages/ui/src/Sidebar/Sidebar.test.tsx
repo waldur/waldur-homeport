@@ -150,6 +150,20 @@ describe('SidebarRoot (<Sidebar />)', () => {
     expect(screen.getByText('Sidebar Items')).toBeInTheDocument();
   });
 
+  it('marks the sidebar panel with data-sidebar="sidebar"', () => {
+    const { container } = render(
+      <SidebarProvider>
+        <Sidebar>
+          <div>Sidebar Items</div>
+        </Sidebar>
+      </SidebarProvider>,
+    );
+
+    const panels = container.querySelectorAll('[data-sidebar="sidebar"]');
+    expect(panels).toHaveLength(1);
+    expect(panels[0]).toContainElement(screen.getByText('Sidebar Items'));
+  });
+
   it('renders collapsed desktop sidebar with data-collapsible="icon"', () => {
     const { container } = render(
       <SidebarProvider defaultOpen={false}>

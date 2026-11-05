@@ -18,11 +18,12 @@ export interface FormFieldProps extends HTMLAttributes<HTMLElement> {
  * to the control. It draws no spacing; give it the margin the layout needs.
  * A field holding several controls (a list of rows) gives each its own id
  * and points the label at the first, unless `controlId` says otherwise.
+ * `data-slot="form-field"` marks it for styles and end-to-end tests.
  */
 export const FormField = forwardRef<HTMLElement, FormFieldProps>(
   ({ controlId, as: Component = 'div', ...props }, ref) => (
     <FieldScope controlId={controlId}>
-      <Component ref={ref} {...props} />
+      <Component ref={ref} data-slot="form-field" {...props} />
     </FieldScope>
   ),
 );
