@@ -54,8 +54,9 @@ export const UserSearchImpersonateAction: FunctionComponent<
     } catch {
       return;
     }
-    await impersonate();
-    router.stateService.go('profile.details');
+    if (await impersonate()) {
+      router.stateService.go('profile.details');
+    }
   };
 
   return (

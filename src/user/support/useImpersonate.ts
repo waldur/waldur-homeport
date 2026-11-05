@@ -6,7 +6,11 @@ import { useNotify } from '@/store/notify';
 import { setImpersonatorUser } from '@/workspace/actions';
 import { useUser } from '@/workspace/hooks';
 
-import { UsersService, setImpersonationData } from '../UsersService';
+import {
+  UsersService,
+  clearImpersonationData,
+  setImpersonationData,
+} from '../UsersService';
 
 export const useImpersonate = (targetUserUuid: string) => {
   const user = useUser();
@@ -15,13 +19,20 @@ export const useImpersonate = (targetUserUuid: string) => {
   const { showErrorResponse } = useNotify();
 
   const { mutateAsync: impersonate, isPending } = useMutation({
+    // Resolves to whether impersonation started, so that callers do not carry
+    // on as the impersonated user after a refusal.
     mutationFn: async () => {
       try {
         setImpersonationData(targetUserUuid);
         dispatch(setImpersonatorUser(user));
         await UsersService.refreshCurrentUser();
+        return true;
       } catch (error) {
+        // Otherwise the header stays in storage and every later request,
+        // including the next page load, fails the same way.
+        clearImpersonationData();
         showErrorResponse(error, translate('Unable to impersonate the user.'));
+        return false;
       }
     },
   });
