@@ -28885,6 +28885,11 @@
       "feature_area": "user"
     }
   },
+  "Keys can be requested once the resource has been created.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Keystone URL, e.g. https://cloud.example.com:5000/v3": {
     "context": {
       "feature_area": "steps"
