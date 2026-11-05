@@ -1,6 +1,12 @@
 import { FunctionComponent } from 'react';
 
-import { PropertyList, PropertyItem } from 'waldur-ui';
+import {
+  PropertyList,
+  PropertyItem,
+  Card,
+  CardContent,
+  CardHeader,
+} from 'waldur-ui';
 
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { translate } from '@/i18n';
@@ -20,14 +26,14 @@ export const PublicCallExpandableRow: FunctionComponent<{
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-5">
         <div className="col-span-full text-primary mb-1.5">
           {row.description ? (
-            <div className="card card-bordered card-solid">
-              <div className="card-header">
+            <Card bordered variant="solid">
+              <CardHeader>
                 <h6 className="mb-0 font-medium">{translate('Description')}</h6>
-              </div>
-              <div className="card-body">
+              </CardHeader>
+              <CardContent>
                 <SafeMarkdown text={row.description} smallTitles />
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ) : (
             <p className="text-quaternary italic text-xs mb-0">
               {translate('No description')}

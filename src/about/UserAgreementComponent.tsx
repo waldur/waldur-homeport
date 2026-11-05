@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { userAgreementsList } from 'waldur-js-client';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { LanguageUtilsService } from '@/i18n/LanguageUtilsService';
 
@@ -52,11 +54,11 @@ export const UserAgreementComponent: FunctionComponent<
 
   return (
     <div>
-      <div className="mb-5 card card-bordered">
-        <div className="card-body">
+      <Card bordered className="mb-5">
+        <CardContent>
           <SafeMarkdown text={option.content} />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

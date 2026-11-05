@@ -3,7 +3,15 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { OfferingMergeRefusal } from 'waldur-js-client';
 
-import { BaseButton, PropertyItem, PropertyList } from 'waldur-ui';
+import {
+  BaseButton,
+  PropertyItem,
+  PropertyList,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'waldur-ui';
 
 import { HelpTip } from '@/core/HelpTip';
 import { Link } from '@/core/Link';
@@ -70,8 +78,8 @@ export const OfferingMergeDetails: FC = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="card">
-        <div className="card-body flex flex-col gap-3">
+      <Card>
+        <CardContent className="flex flex-col gap-3">
           <div className="flex flex-wrap justify-between items-start gap-2.5">
             <div>
               <h2 className="mb-1">
@@ -135,31 +143,31 @@ export const OfferingMergeDetails: FC = () => {
             refusal={refusal}
           />
           <MergeProgress merge={merge} />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       <MergeVerification merge={merge} />
 
-      <div className="card">
-        <div className="card-header">
-          <div className="card-title flex items-center gap-1.5">
+      <Card>
+        <CardHeader>
+          <CardTitle as="div" className="flex items-center gap-1.5">
             {translate('Mappings')}
             <HelpTip label={getMappingsHelp()} />
-          </div>
-        </div>
-        <div className="card-body">
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           <MergeMappingsView merge={merge} offerings={offerings} />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
-      <div className="card">
-        <div className="card-header">
-          <div className="card-title flex items-center gap-1.5">
+      <Card>
+        <CardHeader>
+          <CardTitle as="div" className="flex items-center gap-1.5">
             {translate('Preview')}
             <HelpTip label={getChangesHelp()} />
-          </div>
-        </div>
-        <div className="card-body">
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           {merge.preview ? (
             <MergePreviewView
               preview={merge.preview}
@@ -175,8 +183,8 @@ export const OfferingMergeDetails: FC = () => {
               )}
             </p>
           )}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

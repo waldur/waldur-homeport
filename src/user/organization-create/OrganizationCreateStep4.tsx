@@ -1,6 +1,8 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import { useFormState } from 'react-final-form';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 
@@ -67,8 +69,8 @@ export const OrganizationCreateStep4: FunctionComponent<
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="card border-0 shadow-raised">
-        <div className="card-body p-6">
+      <Card className="border-0 shadow-raised">
+        <CardContent className="p-6">
           <h5 className="mb-3 font-semibold">{translate('Your Intent')}</h5>
           <p className="text-quaternary mb-5">
             {translate(
@@ -90,8 +92,8 @@ export const OrganizationCreateStep4: FunctionComponent<
               ))}
             </div>
           )}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

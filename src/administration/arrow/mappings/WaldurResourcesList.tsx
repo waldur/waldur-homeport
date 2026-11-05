@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { WaldurResourceForLinking } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Card, CardContent, CardHeader } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -63,16 +63,16 @@ const WaldurResourcesTable: FC<WaldurResourcesListProps> = ({ resources }) => (
 export const WaldurResourcesList: FC<WaldurResourcesListProps> = ({
   resources,
 }) => (
-  <div className="card">
-    <div className="card-header">
+  <Card>
+    <CardHeader>
       <h5 className="mb-0">
         {translate('Waldur Resources')}
         <Badge variant="neutral" tone="outline" className="ms-1.5">
           {resources?.length || 0}
         </Badge>
       </h5>
-    </div>
-    <div className="card-body p-0">
+    </CardHeader>
+    <CardContent className="p-0">
       {!resources || resources.length === 0 ? (
         <div className="text-center text-quaternary py-5">
           {translate('No resources found for this customer')}
@@ -80,6 +80,6 @@ export const WaldurResourcesList: FC<WaldurResourcesListProps> = ({
       ) : (
         <WaldurResourcesTable resources={resources} />
       )}
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 );

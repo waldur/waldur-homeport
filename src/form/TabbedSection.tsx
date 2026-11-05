@@ -108,7 +108,7 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
   return (
     <Card bordered>
       {(title || actions) && (
-        <CardHeader>
+        <CardHeader className="font-normal text-primary text-[length:inherit]">
           {title && <CardTitle size="lg">{title}</CardTitle>}
           {actions && (
             <div className="my-[0.5rem] flex grow items-center justify-end gap-2.5">

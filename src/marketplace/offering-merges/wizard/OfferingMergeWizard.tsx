@@ -10,7 +10,13 @@ import {
   PatchedOfferingMergeRequest,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -448,18 +454,18 @@ export const OfferingMergeWizard: FC = () => {
   };
 
   return (
-    <div className="card">
-      <div className="card-header">
-        <div className="card-title">
+    <Card>
+      <CardHeader>
+        <CardTitle as="div">
           {merge
             ? translate('Merge into {target} ({state})', {
                 target: merge.target_offering?.name,
                 state: getMergeStateLabel(merge.state),
               })
             : translate('New offering merge')}
-        </div>
-      </div>
-      <div className="card-body">
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
         <div className="wizard wizard-vertical flex flex-col lg:flex-row gap-5.5">
           <div className="shrink-0" style={{ width: '280px' }}>
             <VerticalProgressSteps
@@ -522,7 +528,7 @@ export const OfferingMergeWizard: FC = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

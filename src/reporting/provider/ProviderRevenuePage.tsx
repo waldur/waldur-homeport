@@ -3,6 +3,8 @@ import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { marketplaceServiceProvidersRevenueList } from 'waldur-js-client';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -57,16 +59,16 @@ const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
   if (error) return <LoadingErred loadData={refetch} />;
   if (!data || data.length === 0) {
     return (
-      <div className="card">
-        <div className="card-body">
+      <Card>
+        <CardContent>
           <NoResult
             title={translate('No data available')}
             message={translate('No revenue data available for this provider.')}
             callback={refetch}
             buttonTitle={translate('Retry')}
           />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     );
   }
 

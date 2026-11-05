@@ -3,10 +3,14 @@
 exports[`SecurityGroupInstancesList > renders instance with its internal and external IPs 1`] = `
 <div>
   <div
-    class="card-table card-bordered card"
+    class="relative flex min-w-[var(--card-min-width,0px)] flex-col break-words bg-primary bg-clip-border rounded-[var(--card-radius,var(--radius-lg))] border-solid border-secondary border-[length:var(--card-border-width,1px)] shadow-[var(--card-box-shadow,none)]"
+    data-bordered=""
+    data-slot="card"
+    data-variant="table"
   >
     <div
-      class="card-body"
+      class="flex-[var(--card-content-flex,1_1_auto)] px-[var(--card-content-px,var(--card-padding-x))] pt-[var(--card-content-pt,var(--card-padding-y))] pb-[var(--card-content-pb,var(--card-padding-y))]"
+      data-slot="card-content"
     >
       <div
         class="table-responsive relative max-md:flex max-md:flex-col max-md:items-center max-md:items-center-safe"

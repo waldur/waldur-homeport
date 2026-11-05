@@ -6,7 +6,7 @@ import {
   callManagingOrganisationsList,
 } from 'waldur-js-client';
 
-import { Switch } from 'waldur-ui';
+import { Switch, Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -75,14 +75,14 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
     });
 
   return (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="card-title">
+    <Card bordered>
+      <CardHeader>
+        <CardTitle as="div">
           <h3 className="me-1.5">{translate('Call manager')}</h3>
           {loadingToggle && <LoadingSpinner />}
-        </div>
-      </div>
-      <div className="card-body">
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
         {errorInfo && <LoadingErred loadData={refetch} />}
         <Switch
           label={translate('Enable call manager')}
@@ -90,7 +90,7 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
           onCheckedChange={toggleCallManager}
           disabled={loadingToggle}
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

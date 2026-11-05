@@ -2,7 +2,7 @@ import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
-import { BaseButton, Menu } from 'waldur-ui';
+import { BaseButton, Card, CardContent, Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { ActionsMenu } from '@/table/ActionsDropdown';
@@ -38,14 +38,8 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
   cardBordered = true,
 }) => {
   return (
-    <div
-      className={classNames(
-        'card card-widget',
-        cardBordered && 'card-bordered',
-        className,
-      )}
-    >
-      <div className="card-body flex">
+    <Card variant="widget" bordered={cardBordered} className={className}>
+      <CardContent className="flex">
         {left && <div className="me-3 shrink-0">{left}</div>}
         <div className="flex flex-col grow">
           <div
@@ -54,9 +48,7 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
               actions?.length,
             )}
           >
-            <div className="card-title font-medium grow h4 mb-0">
-              {cardTitle}
-            </div>
+            <div className="font-medium grow h4 mb-0">{cardTitle}</div>
             {cardAction && <div className="p-0 m-0 shrink-0">{cardAction}</div>}
             {actions?.length > 0 && (
               <ActionsMenu
@@ -113,7 +105,7 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
           )}
           {children}
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

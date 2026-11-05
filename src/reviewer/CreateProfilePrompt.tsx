@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { reviewerProfilesMe } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Card, CardContent } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -15,8 +15,8 @@ export const CreateProfilePrompt: FC = () => {
   });
 
   return (
-    <div className="card card-bordered">
-      <div className="card-body text-center py-8">
+    <Card bordered>
+      <CardContent className="text-center py-8">
         <h3 className="mb-4">
           {translate('You do not have a reviewer profile yet.')}
         </h3>
@@ -36,7 +36,7 @@ export const CreateProfilePrompt: FC = () => {
               : translate('Create reviewer profile')
           }
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

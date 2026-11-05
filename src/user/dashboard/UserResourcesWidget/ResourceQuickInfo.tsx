@@ -11,7 +11,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Card, CardContent } from 'waldur-ui';
 
 import { LONG_STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
@@ -90,8 +90,8 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
   const hasGettingStarted = offering?.getting_started || endpoints.length > 0;
 
   return (
-    <div className="card card-bordered mb-2.5">
-      <div className="card-body py-3">
+    <Card bordered className="mb-2.5">
+      <CardContent className="py-3">
         {/* Header */}
         <div className="flex justify-between items-start mb-1.5">
           <div className="grow">
@@ -230,7 +230,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
             <ArrowRightIcon size={16} weight="bold" className="ms-1" />
           </Link>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

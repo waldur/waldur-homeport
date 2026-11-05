@@ -83,11 +83,11 @@ table .expandable-container {
   }
 
   // Another table inside expanded view
-  .card-table {
+  [data-variant='table']:where([data-slot='card']) {
     background-color: transparent;
     overflow: hidden;
 
-    .card-body {
+    [data-slot='card-content'] {
       padding-bottom: 0.5rem;
 
       .table {
@@ -114,7 +114,7 @@ table .expandable-container {
   }
 
   // The .table-toolbar-search class in _table.scss is scoped under
-  // .card-header .card-toolbar so it doesn't apply inside the expanded-row
+  // the card header's toolbar so it doesn't apply inside the expanded-row
   // toolbar. Duplicate the same rule here.
   .table-toolbar-search {
     flex: 0 0 320px;
@@ -136,7 +136,9 @@ table .expandable-container {
 // text. Measured: full-width 24px / normal 0px.
 $fullWidthCellPadding: 24px;
 
-.card-table.full-width table .expandable-container {
+[data-variant='table']:where([data-slot='card']).full-width
+  table
+  .expandable-container {
   margin-left: calc($expandArrowWidth - $fullWidthCellPadding);
 
   &.has-multiselect {
@@ -148,7 +150,11 @@ $fullWidthCellPadding: 24px;
 
 // The rule above outranks the row-level one at the top of this file, so a
 // full-width table's checkbox column needs its own.
-.card-table.full-width table tr.has-multiselect > td > .expandable-container {
+[data-variant='table']:where([data-slot='card']).full-width
+  table
+  tr.has-multiselect
+  > td
+  > .expandable-container {
   margin-left: calc($expandArrowWidth - $fullWidthCellPadding + $checkboxWidth);
 }
 

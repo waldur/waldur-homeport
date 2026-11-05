@@ -3,7 +3,14 @@ import { FC, useEffect, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Card,
+  CardContent,
+} from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -63,8 +70,8 @@ const OneTimeComponentsSummary: FC<{
       ) : (
         <p>{translate('Resource does not have any plan.')}</p>
       )}
-      <div className="card card-table card-bordered">
-        <div className="card-body p-0">
+      <Card variant="table" bordered>
+        <CardContent className="p-0">
           <div className="table-responsive">
             <table className="table table-row-bordered align-middle mb-0">
               <thead>
@@ -107,8 +114,8 @@ const OneTimeComponentsSummary: FC<{
               </tbody>
             </table>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
       <p className="text-quaternary mt-2.5">
         {translate(
           'The renewal cost will be calculated based on the extension period selected in the next step.',

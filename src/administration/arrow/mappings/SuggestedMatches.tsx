@@ -4,7 +4,7 @@ import {
   LicenseSuggestion,
 } from 'waldur-js-client';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import { Badge, BaseButton, Card, CardContent, CardHeader } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -63,16 +63,16 @@ export const SuggestedMatches: FC<SuggestedMatchesProps> = ({
   }
 
   return (
-    <div className="card">
-      <div className="card-header">
+    <Card>
+      <CardHeader>
         <h5 className="mb-0">
           {translate('Suggested Matches')}
           <Badge variant="primary" className="ms-1.5">
             {suggestions.length}
           </Badge>
         </h5>
-      </div>
-      <div className="card-body p-0">
+      </CardHeader>
+      <CardContent className="p-0">
         <SimpleTable<LicenseSuggestion>
           columns={[
             {
@@ -133,7 +133,7 @@ export const SuggestedMatches: FC<SuggestedMatchesProps> = ({
           rows={suggestions}
           rowKey="license_reference"
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

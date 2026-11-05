@@ -65,8 +65,8 @@ const OverviewCard: FC<{ resourceUuid: string }> = ({ resourceUuid }) => {
         message={overview.error}
         signInProvider={overview.sign_in_provider}
       />
-      <Card className={HPC_CARD_CLASS}>
-        <CardHeader>
+      <Card bordered className={HPC_CARD_CLASS}>
+        <CardHeader className="font-normal text-primary text-[length:inherit]">
           <CardTitle className="text-lg font-semibold text-primary">
             {translate('Cluster')}
           </CardTitle>

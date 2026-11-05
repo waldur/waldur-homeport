@@ -1,6 +1,13 @@
 import React from 'react';
 
-import { PropertyList, PropertyItem } from 'waldur-ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  PropertyList,
+  PropertyItem,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
@@ -32,13 +39,13 @@ export const K8sTotalResourcesCard: React.FC<K8sTotalResourcesCardProps> = ({
   loadBalancerTooltip,
 }) => {
   return (
-    <div className="card card-bordered card-sm bg-secondary">
-      <div className="card-header">
-        <h6 className="card-title text-sm text-secondary">
+    <Card bordered size="sm" className="bg-secondary">
+      <CardHeader>
+        <CardTitle as="h6" className="text-sm text-secondary">
           {translate('Total cluster resources')}
-        </h6>
-      </div>
-      <div className="card-body">
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
         {/* One list of totals, laid out as chips: each row is a fixed-width
             column of label over value. */}
         <PropertyList
@@ -100,7 +107,7 @@ export const K8sTotalResourcesCard: React.FC<K8sTotalResourcesCardProps> = ({
             value={propVal.number(datacenterCount)}
           />
         </PropertyList>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

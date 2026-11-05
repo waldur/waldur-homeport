@@ -5,6 +5,8 @@ import {
   projectsCount as fetchProjectsCount,
 } from 'waldur-js-client';
 
+import { Card } from 'waldur-ui';
+
 import { getResourcesCount } from '@/administration/api';
 import { fetchResultCount } from '@/core/api';
 import { translate } from '@/i18n';
@@ -133,7 +135,7 @@ export const OrganizationExpandableRow: FC<OwnProps> = (props) => {
   }, [queryClient]);
   return (
     <ExpandableContainer>
-      <div className="card card-table card-bordered overflow-auto">
+      <Card variant="table" bordered className="overflow-auto">
         <ExpandableRowToolbar
           activeTableKey={activeTableKey}
           multiSelectActions={activeMultiSelectActions}
@@ -180,7 +182,7 @@ export const OrganizationExpandableRow: FC<OwnProps> = (props) => {
             },
           ]}
         />
-      </div>
+      </Card>
     </ExpandableContainer>
   );
 };

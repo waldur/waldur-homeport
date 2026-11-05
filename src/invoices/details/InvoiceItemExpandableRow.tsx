@@ -1,7 +1,7 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC, Fragment } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, Card, CardContent } from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -264,8 +264,8 @@ export const InvoiceItemExpandableRow: FC<OwnProps> = (props) => {
 
   return (
     <ExpandableContainer>
-      <div className="card card-table card-bordered">
-        <div className="card-body">
+      <Card variant="table" bordered>
+        <CardContent>
           <table className="table align-middle">
             <thead>
               <tr className="align-middle">
@@ -299,8 +299,8 @@ export const InvoiceItemExpandableRow: FC<OwnProps> = (props) => {
                 : orderedItems.map((item, i) => renderItem(item, i))}
             </tbody>
           </table>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </ExpandableContainer>
   );
 };

@@ -1,7 +1,14 @@
 import { FunctionComponent, ReactNode } from 'react';
 import { Issue } from 'waldur-js-client';
 
-import { PropertyItem, PropertyList } from 'waldur-ui';
+import {
+  PropertyItem,
+  PropertyList,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { formatDateTime, formatRelative } from '@/core/dateUtils';
@@ -141,18 +148,18 @@ export const IssueDetailsContent: FunctionComponent<
         <ProviderRoutingInfo issue={issue} />
       )}
 
-      <div className="card card-bordered mb-4">
-        <div className="card-header">
-          <div className="card-title">{translate('Description')}</div>
-        </div>
-        <div className="card-body">
+      <Card bordered className="mb-4">
+        <CardHeader>
+          <CardTitle as="div">{translate('Description')}</CardTitle>
+        </CardHeader>
+        <CardContent>
           {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'atlassian' ? (
             <FormattedJira text={linkify(issue?.description)} />
           ) : (
             <FormattedHtml html={linkify(withLineBreaks(issue?.description))} />
           )}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       <IssueCommentsContainer issue={issue} />
       <IssueAttachmentsContainer issue={issue} />

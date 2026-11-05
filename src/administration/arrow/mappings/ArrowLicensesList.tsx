@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { ArrowLicense } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Card, CardContent, CardHeader } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -42,16 +42,16 @@ const ArrowLicensesTable: FC<ArrowLicensesListProps> = ({ licenses }) => (
 );
 
 export const ArrowLicensesList: FC<ArrowLicensesListProps> = ({ licenses }) => (
-  <div className="card">
-    <div className="card-header">
+  <Card>
+    <CardHeader>
       <h5 className="mb-0">
         {translate('Arrow Licenses')}
         <Badge variant="neutral" tone="outline" className="ms-1.5">
           {licenses?.length || 0}
         </Badge>
       </h5>
-    </div>
-    <div className="card-body p-0">
+    </CardHeader>
+    <CardContent className="p-0">
       {!licenses || licenses.length === 0 ? (
         <div className="text-center text-quaternary py-5">
           {translate('No licenses found in Arrow billing export')}
@@ -59,6 +59,6 @@ export const ArrowLicensesList: FC<ArrowLicensesListProps> = ({ licenses }) => (
       ) : (
         <ArrowLicensesTable licenses={licenses} />
       )}
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 );

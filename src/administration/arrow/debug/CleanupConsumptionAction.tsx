@@ -1,6 +1,6 @@
 import { adminArrowBillingSyncsCleanupConsumption } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Card, CardContent } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -28,8 +28,8 @@ export const CleanupConsumptionAction = () => {
   } = useCleanupConsumption();
 
   return (
-    <div className="card h-full">
-      <div className="card-body">
+    <Card className="h-full">
+      <CardContent>
         <h6>{translate('Cleanup Consumption Data')}</h6>
         <p className="text-quaternary small mb-2.5">
           {translate('Remove orphaned or stale consumption records.')}
@@ -52,7 +52,7 @@ export const CleanupConsumptionAction = () => {
             }
           />
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

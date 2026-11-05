@@ -13,7 +13,13 @@ import {
   CachedProjectUsageReport as UsageReportApiItem,
 } from 'waldur-js-client';
 
-import { BaseButton, NativeSelect } from 'waldur-ui';
+import {
+  BaseButton,
+  NativeSelect,
+  Card,
+  CardContent,
+  CardHeader,
+} from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -201,8 +207,8 @@ export const OpenPortalReportsTab: FC = () => {
     !isLoading && project ? getCacheAge(`project-usage-${project.uuid}`) : null;
 
   return (
-    <div className="card card-bordered">
-      <div className="card-header border-b border-b-secondary">
+    <Card bordered>
+      <CardHeader className="border-b border-b-secondary">
         <div className="flex items-center gap-2.5 flex-wrap w-full">
           <div className="flex items-center me-1.5">
             <span className="h3 mb-0">{translate('Usage Report')}</span>
@@ -269,8 +275,8 @@ export const OpenPortalReportsTab: FC = () => {
             </span>
           )}
         </div>
-      </div>
-      <div className="card-body">
+      </CardHeader>
+      <CardContent>
         {isLoading && <LoadingSpinner />}
 
         {usageError && (
@@ -323,7 +329,7 @@ export const OpenPortalReportsTab: FC = () => {
             />
           </div>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

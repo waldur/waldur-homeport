@@ -1,7 +1,14 @@
 import { ExportIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 
-import { BaseButton, SegmentedControl } from 'waldur-ui';
+import {
+  BaseButton,
+  SegmentedControl,
+  Card,
+  CardContent,
+  CardHeader,
+  CardToolbar,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -47,9 +54,9 @@ export const AnalyticsAndReports = () => {
   );
 
   return (
-    <div className="card">
-      <div className="card-header mx-0 border-0">
-        <div className="card-toolbar gap-3">
+    <Card>
+      <CardHeader className="mx-0 border-0">
+        <CardToolbar className="gap-3">
           {periodOptions.length > 1 && (
             <SegmentedControl<number>
               aria-label={translate('Time period')}
@@ -65,9 +72,9 @@ export const AnalyticsAndReports = () => {
             variant="tertiary"
             size="lg"
           />
-        </div>
-      </div>
-      <div className="card-body p-0 overflow-hidden">
+        </CardToolbar>
+      </CardHeader>
+      <CardContent className="p-0 overflow-hidden">
         {/* Stat cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 mb-4 gap-4">
           {topCards.map((card) => (
@@ -90,7 +97,7 @@ export const AnalyticsAndReports = () => {
 
         {/* Organization Performance Comparison Table */}
         <OrgPerformanceTable />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

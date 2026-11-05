@@ -78,10 +78,12 @@ export const TemplateDetail: FunctionComponent = () => {
           >
             {state.data!.version.readme && (
               <div>
-                <div className="card-header">
-                  <div className="card-title">{translate('Summary')}</div>
+                <div className="border-b border-secondary px-[var(--card-spacer)] py-[var(--card-header-py)]">
+                  <div className="mb-[var(--card-title-spacer-y)]">
+                    {translate('Summary')}
+                  </div>
                 </div>
-                <div className="card-body">
+                <div className="p-[var(--card-spacer)]">
                   <SafeMarkdown text={state.data!.version.readme} />
                 </div>
               </div>
@@ -93,10 +95,12 @@ export const TemplateDetail: FunctionComponent = () => {
                   : undefined
               }
             >
-              <div className="card-header">
-                <div className="card-title">{translate('Configuration')}</div>
+              <div className="border-b border-secondary px-[var(--card-spacer)] py-[var(--card-header-py)]">
+                <div className="mb-[var(--card-title-spacer-y)]">
+                  {translate('Configuration')}
+                </div>
               </div>
-              <div className="card-body">
+              <div className="p-[var(--card-spacer)]">
                 {(() => {
                   const project = values.project;
                   const answers = values.answers;

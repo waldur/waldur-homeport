@@ -8,7 +8,13 @@ import {
   marketplaceResourceProjectsPartialUpdate,
 } from 'waldur-js-client';
 
-import { FormFieldset, FormLegend, FormText } from 'waldur-ui';
+import {
+  FormFieldset,
+  FormLegend,
+  FormText,
+  Card,
+  CardContent,
+} from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { StringGroup, SubmitButton, TextGroup } from '@/form';
@@ -226,8 +232,8 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                         'Optional per-component caps for this project.',
                       )}
                 </FormText>
-                <div className="card card-table card-bordered full-width">
-                  <div className="card-body p-0">
+                <Card variant="table" bordered className="full-width">
+                  <CardContent className="p-0">
                     <table className="table table-row-bordered align-middle mb-0">
                       <thead>
                         <tr>
@@ -309,8 +315,8 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                         })}
                       </tbody>
                     </table>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               </FormFieldset>
             )}
           </ModalDialog>

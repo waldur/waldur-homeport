@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { LeafletMap } from '@/map/LeafletMap';
@@ -18,8 +20,8 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   return (
-    <div className="card card-bordered mb-8">
-      <div className="card-body">
+    <Card bordered className="mb-8">
+      <CardContent>
         <PublicOfferingCardTitle>
           {translate('Location')}
         </PublicOfferingCardTitle>
@@ -57,7 +59,7 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
             </div>
           )}
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

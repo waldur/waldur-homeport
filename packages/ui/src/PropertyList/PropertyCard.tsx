@@ -4,6 +4,7 @@ import { translate } from 'waldur-i18n-runtime';
 
 import { BaseButton } from '../Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../Card';
+import { cn } from '../cn';
 
 import type { PropertyCardProps } from './types';
 
@@ -19,7 +20,13 @@ export const PropertyCard: FC<PropertyCardProps> = ({
       className={props.className}
     >
       {Boolean(props.title) && (
-        <CardHeader className={props.headerClassName}>
+        // The actions keep the page's text, not the header's bold 14px.
+        <CardHeader
+          className={cn(
+            'font-normal text-primary text-[length:inherit]',
+            props.headerClassName,
+          )}
+        >
           <div className="my-[0.5rem] mr-[0.5rem] ml-0 flex items-center gap-2">
             <CardTitle size="lg" className="my-0 mr-0">
               {props.title}

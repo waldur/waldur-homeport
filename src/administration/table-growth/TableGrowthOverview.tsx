@@ -1,6 +1,8 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import type { TableGrowthStatsResponse } from './api';
@@ -17,15 +19,15 @@ const StatCard: FC<{
   valueClass?: string;
   extra?: ReactNode;
 }> = ({ value, label, valueClass = '', extra }) => (
-  <div className="card card-bordered mb-4 h-full">
-    <div className="card-body">
+  <Card bordered className="mb-4 h-full">
+    <CardContent>
       <div className="flex items-center">
         <strong className={`text-2xl ${valueClass}`}>{value}</strong>
         {extra}
       </div>
       <strong className="block text-quaternary">{label}</strong>
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 );
 
 export const TableGrowthOverview: FC<TableGrowthOverviewProps> = ({

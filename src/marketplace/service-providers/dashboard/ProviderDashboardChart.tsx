@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { ServiceProvider } from 'waldur-js-client';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { EChart } from '@/core/EChart';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 
@@ -24,8 +26,8 @@ export const ProviderDashboardChart: FunctionComponent<
   }
   if (Array.isArray(value) && value[0]) {
     return (
-      <div className="card card-bordered min-h-[225px] mb-4">
-        <div className="card-body">
+      <Card bordered className="min-h-[225px] mb-4">
+        <CardContent>
           <div className="grid grid-cols-12 gap-x-5">
             <div className="col-span-7">
               <EChart options={value[0].options} height="100px" />
@@ -42,8 +44,8 @@ export const ProviderDashboardChart: FunctionComponent<
               />
             </div>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     );
   }
   return null;

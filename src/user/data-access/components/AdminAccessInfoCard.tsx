@@ -1,6 +1,8 @@
 import { ShieldCheckIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface AdminAccessInfoCardProps {
@@ -10,8 +12,8 @@ interface AdminAccessInfoCardProps {
 export const AdminAccessInfoCard: FC<AdminAccessInfoCardProps> = ({
   description,
 }) => (
-  <div className="card card-bordered mb-3">
-    <div className="card-body">
+  <Card bordered className="mb-3">
+    <CardContent>
       <div className="flex items-center gap-2.5">
         <ShieldCheckIcon size={32} weight="duotone" className="text-brand" />
         <div>
@@ -19,6 +21,6 @@ export const AdminAccessInfoCard: FC<AdminAccessInfoCardProps> = ({
           <p className="text-quaternary mb-0 text-xs">{description}</p>
         </div>
       </div>
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 );

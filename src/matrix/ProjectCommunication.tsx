@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
+import { Card } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useProjectMatrixRooms } from '@/matrix/chat/useProjectMatrixRooms';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -31,8 +33,8 @@ export const ProjectCommunication: FC = () => {
 
   if (activeRoom && isMember) {
     return (
-      <div
-        className="card overflow-hidden mt-5"
+      <Card
+        className="overflow-hidden mt-5"
         style={{ height: 'calc(100vh - 320px)', minHeight: 480 }}
       >
         <MatrixChatPanel
@@ -40,7 +42,7 @@ export const ProjectCommunication: FC = () => {
           hideRoomList
           defaultRoomUuid={activeRoom.uuid}
         />
-      </div>
+      </Card>
     );
   }
 

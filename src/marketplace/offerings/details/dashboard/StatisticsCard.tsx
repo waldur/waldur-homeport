@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Progress, Tooltip } from 'waldur-ui';
+import { Progress, Tooltip, Card, CardContent } from 'waldur-ui';
 
 import { formatUsageValue } from '@/core/formatNumber';
 import { translate } from '@/i18n';
@@ -29,8 +29,8 @@ export const StatisticsCard: FC<StatisticsCardProps> = ({
         ? 'warning'
         : 'danger';
   return (
-    <div className="card card-bordered mb-4">
-      <div className="card-body">
+    <Card bordered className="mb-4">
+      <CardContent>
         <p className="text-sm font-medium text-quaternary mb-1">{title}</p>
         <div className="flex justify-between items-end">
           <h1 className="display-6 mb-0">
@@ -57,7 +57,7 @@ export const StatisticsCard: FC<StatisticsCardProps> = ({
             </div>
           ) : null}
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

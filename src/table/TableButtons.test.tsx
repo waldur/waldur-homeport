@@ -17,7 +17,7 @@ const renderButtons = (extra: Record<string, unknown> = {}) => {
     ...extra,
   } as unknown as Parameters<typeof TableButtons>[0];
   render(
-    <div className="card-table">
+    <div data-slot="card" data-variant="table">
       <TableButtons {...props} />
       <button data-add-filter onClick={onAddFilterClick}>
         Add filter

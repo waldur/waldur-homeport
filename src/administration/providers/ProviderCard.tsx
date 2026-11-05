@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Badge, Menu } from 'waldur-ui';
+import { Badge, Menu, Card, CardContent } from 'waldur-ui';
 
 import { OIDC_TYPES } from '@/auth/providers/constants';
 import { IdentityProviderLogo } from '@/auth/providers/IdentityProviderLogo';
@@ -176,8 +176,8 @@ export const ProviderCard: FC<ProviderCardProps> = ({
   };
 
   return (
-    <div className="card bg-tertiary dark:bg-quaternary min-h-[150px] border border-transparent hover:border-secondary cursor-pointer">
-      <div className="card-body pe-4">
+    <Card className="bg-tertiary dark:bg-quaternary min-h-[150px] border border-transparent hover:border-secondary cursor-pointer">
+      <CardContent className="pe-4">
         <div className="flex items-center h-full">
           <div className="flex flex-row justify-between h-full grow">
             <div
@@ -209,7 +209,7 @@ export const ProviderCard: FC<ProviderCardProps> = ({
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

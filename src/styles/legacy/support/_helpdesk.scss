@@ -45,25 +45,23 @@
   // horizontal padding) sized to its content. In this pane it should read like
   // the Team chat panel: flush to the edge, filling the height, with only the
   // request table scrolling.
-  .card-table {
+  #{$card-table} {
+    // Card's min-width is 0, so its nowrap toolbar can't push it past the
+    // pane's divider.
     flex: 1;
-    // Without min-width:0 the card's default min-width:auto lets its nowrap
-    // toolbar push it wider than the narrow pane, overflowing past the divider
-    // and clipping the Create button. Constrain it to the pane instead.
-    min-width: 0;
     min-height: 0;
-    box-shadow: none;
-    border-radius: 0;
+    --card-box-shadow: none;
+    --card-radius: 0px;
   }
 
   // Zero the inline margin (the shared card-header keeps a var(--card-padding-x, 1.85rem) right
   // margin) so the toolbar spans the full card width and the right-aligned
   // Export/Create line up with the table's right edge.
-  .card-table > .card-header,
-  .card-table > .card-body {
-    margin-inline: 0;
-    padding-left: 0;
-    padding-right: 0;
+  #{$card-table} > #{$card-header},
+  #{$card-table} > #{$card-body} {
+    --card-header-mx: 0px;
+    --card-header-px: 0px;
+    --card-content-px: 0px;
   }
 
   // The full-width default search is too wide for the narrow master pane; keep
@@ -77,15 +75,15 @@
   // pushes Export/Create past its edge; tighten it (but keep enough room that
   // the search isn't cramped against the refresh button) so all four controls
   // (Search, refresh, Export, Create) stay on one row.
-  .card-header .gap-3 {
+  #{$card-header} .gap-3 {
     gap: 0.75rem !important;
   }
 
   // On a narrow pane the toolbar would otherwise overflow (nowrap) and clip the
   // right-aligned Create button. Clear the min-width floors down the flex chain
   // so the search compresses to fit instead, keeping everything on one row.
-  .card-header .card-toolbar > div,
-  .card-header .card-toolbar > div > div {
+  #{$card-header} #{$card-toolbar} > div,
+  #{$card-header} #{$card-toolbar} > div > div {
     min-width: 0;
   }
 
@@ -94,8 +92,8 @@
     min-width: 0 !important;
   }
 
-  .card-table > .card-body {
-    flex: 1;
+  #{$card-table} > #{$card-body} {
+    --card-content-flex: 1;
     min-height: 0;
     overflow-y: auto;
   }
@@ -133,7 +131,7 @@
   // into a gap-1.5 column, so the buttons sit right on top of the text. Give
   // them room in this drawer (the hero is shared, so scope it here).
   // Tailwind's utilities layer outranks this one, so the override is !important.
-  .public-dashboard-hero .card-body > .gap-1\.5 {
+  .public-dashboard-hero #{$card-body} > .gap-1\.5 {
     gap: var(--card-padding-y, 1.23rem) !important;
   }
 

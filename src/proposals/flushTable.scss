@@ -9,8 +9,10 @@
 // Applies whether the class lands on the table's own card or on a wrapper
 // around it, since not every caller can pass a class down.
 .proposal-flush-table {
-  &.card-table > .card-body,
-  .card-table > .card-body {
+  &[data-variant='table']:where([data-slot='card'])
+    > [data-slot='card-content'],
+  [data-variant='table']:where([data-slot='card'])
+    > [data-slot='card-content'] {
     padding-left: 0;
     padding-right: 0;
   }
@@ -18,8 +20,10 @@
   // The bottom inset exists to separate the rows from the pagination bar; these
   // lists are short enough that the bar is usually absent, leaving dead space.
   // Keyed off the bar itself, so the gap returns when it does appear.
-  &.card-table:not(:has(.table-pagination)) > .card-body,
-  .card-table:not(:has(.table-pagination)) > .card-body {
+  &[data-variant='table']:where([data-slot='card']):not(:has(.table-pagination))
+    > [data-slot='card-content'],
+  [data-variant='table']:where([data-slot='card']):not(:has(.table-pagination))
+    > [data-slot='card-content'] {
     padding-bottom: 0;
   }
 
@@ -51,6 +55,6 @@
 // Where a card body opens straight onto one of these tables, its top inset only
 // pushes the header band away from the card's own rule. Bodies that start with
 // fields keep theirs — they have no band to lean on.
-.card-body:has(> .proposal-flush-table:first-child) {
+[data-slot='card-content']:has(> .proposal-flush-table:first-child) {
   padding-top: 0;
 }

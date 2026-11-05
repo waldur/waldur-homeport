@@ -15,6 +15,8 @@ import {
   ServiceProviderStatistics,
 } from 'waldur-js-client';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -118,29 +120,33 @@ const generateWidgetsData = (statistics: ServiceProviderStatistics) => [
 ];
 
 const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
-  <Link
-    state={item.to.state}
-    params={item.to.params}
-    className="card card-bordered grow min-h-[225px] hover:border-[var(--border-brand)]"
+  <Card
+    asChild
+    bordered
+    className="grow min-h-[225px] hover:border-[var(--border-brand)]"
   >
-    <div className="card-body py-8 px-5">
-      {item.iconNode && (
-        <span
-          className={classNames(
-            'inline-flex',
-            item.active ? 'text-success' : 'text-senary',
-          )}
-        >
-          {item.iconNode}
-        </span>
-      )}
-      <h1 className="display-6 whitespace-nowrap mb-0 mt-1.5">{item.value}</h1>
-      <p className="text-xs font-semibold mb-4 h-[40px] text-primary">
-        {item.title}
-      </p>
-      <ChangesAmountBadge changes={item.changes} />
-    </div>
-  </Link>
+    <Link state={item.to.state} params={item.to.params}>
+      <CardContent className="py-8 px-5">
+        {item.iconNode && (
+          <span
+            className={classNames(
+              'inline-flex',
+              item.active ? 'text-success' : 'text-senary',
+            )}
+          >
+            {item.iconNode}
+          </span>
+        )}
+        <h1 className="display-6 whitespace-nowrap mb-0 mt-1.5">
+          {item.value}
+        </h1>
+        <p className="text-xs font-semibold mb-4 h-[40px] text-primary">
+          {item.title}
+        </p>
+        <ChangesAmountBadge changes={item.changes} />
+      </CardContent>
+    </Link>
+  </Card>
 );
 
 export const ProviderWidgets = ({ provider }) => {

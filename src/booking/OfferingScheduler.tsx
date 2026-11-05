@@ -11,7 +11,13 @@ import { Field } from 'react-final-form';
 import { type FieldArrayRenderProps } from 'react-final-form-arrays';
 import { usePrevious } from 'react-use';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'waldur-ui';
 
 import { CustomRangeDatePicker } from '@/booking/deploy/CustomRangeDatePicker';
 import { BookingProps } from '@/booking/types';
@@ -132,13 +138,13 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = ({
 
   return (
     <>
-      <div className="card card-bordered">
-        <div className="card-header">
-          <div className="card-title">
+      <Card bordered>
+        <CardHeader>
+          <CardTitle as="div">
             <h3>{translate('Availability')}</h3>
-          </div>
-        </div>
-        <div className="card-body">
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           <BusinessHoursGroup
             startTime={startTime}
             endTime={endTime}
@@ -158,8 +164,8 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = ({
           />
 
           <TimeZoneGroup timeZone={timeZone} setTimeZone={setTimeZone} />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
       <>
         {fields.map((schedule, index) => (
           <div key={index} className="mb-5">

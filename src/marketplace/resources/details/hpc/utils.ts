@@ -302,10 +302,5 @@ export const isPlottableFile = (path: string): boolean => {
 /** Self-contained HTML reports (e.g. MultiQC) shown in a sandboxed frame. */
 export const isHtmlReport = (name: string): boolean => /\.html?$/i.test(name);
 
-/**
- * A waldur-ui Card as the app's bordered Metronic cards next to it (the
- * Partitions table, other resource tabs): no shadow, and in dark mode flush
- * with the page (as StatCard does) rather than on Card's lighter --card-bg.
- */
-export const HPC_CARD_CLASS =
-  'mb-6 shadow-none border-secondary dark:bg-[var(--page-bg)]';
+/** The space under each HPC card; the cards are `Card bordered`. */
+export const HPC_CARD_CLASS = 'mb-6';

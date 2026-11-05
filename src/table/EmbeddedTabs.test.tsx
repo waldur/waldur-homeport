@@ -101,7 +101,7 @@ describe('EmbeddedTabs', () => {
     expect(panels()).toHaveClass(
       'border',
       'border-t-0',
-      '[&>*>.card-table]:rounded-none',
+      '[&>*>[data-variant=table]]:rounded-none',
     );
 
     rerender(

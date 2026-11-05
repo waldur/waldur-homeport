@@ -25,7 +25,7 @@
   // Lay the items out across the page instead of at their screen widths:
   // drop the columns' minimum widths and the horizontal scroll, and wrap
   // the cells the screen truncates.
-  .card-table {
+  [data-variant='table']:where([data-slot='card']) {
     .table-responsive {
       overflow: visible !important;
     }
@@ -63,7 +63,9 @@
   }
 
   // Hide table header elements except for the title
-  .card-table .card-toolbar div:not(:first-child) {
+  [data-variant='table']:where([data-slot='card'])
+    [data-slot='card-toolbar']
+    div:not(:first-child) {
     display: none;
   }
 }

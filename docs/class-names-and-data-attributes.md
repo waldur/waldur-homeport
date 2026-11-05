@@ -26,7 +26,7 @@ An attribute says what it is for in its own name. A styling refactor leaves it a
 | Style an element                                        | Tailwind utilities in `className`                         | `className="flex items-center gap-2 text-secondary"`                                   |
 | Expose state users should perceive                      | a native attribute, or ARIA when there is none            | `disabled`, `checked`, `aria-expanded={open}`, `aria-current="page"`, `aria-invalid`   |
 | Style by that state                                     | Tailwind's native-state and `aria-*` variants             | `disabled:opacity-50`, `aria-expanded:bg-tertiary`, `aria-[current=page]:text-brand`   |
-| Use styles a stylesheet already defines                 | that class                                                | `className="card-bordered"`, `className="team-chat"`, `className="form-table"`         |
+| Use styles a stylesheet already defines                 | that class                                                | `className="form-table"`, `className="team-chat"`, `className="form-table"`            |
 | Let a caller style a component                          | a `className` prop, merged with `cn()`                    | `<Tag className="me-1">`                                                               |
 | Name a part of a component, for its parents or tests    | `data-slot`                                               | `data-slot="modal-body"`, `data-slot="menu-item-icon"`, `data-slot="filter-field"`     |
 | Expose a state or variant with no accessibility meaning | `data-state`, `data-variant`, `data-size`, a boolean flag | `data-state="open"`, `data-variant={variant}`, `data-error={invalid ? '' : undefined}` |
@@ -76,7 +76,7 @@ Rules:
 Use a class only when something styles it:
 
 - **Tailwind utilities.** Use them for most styling. See [design-tokens.md](design-tokens.md) for colours and font weights.
-- **Stylesheet classes.** A class a `.scss` or `.css` file defines, such as `.team-chat`, `.form-table` or `.card-bordered`. One also counts when it only applies inside a parent (`.card .small`), or when a parent's arbitrary variant styles it (`[&_.x]:`).
+- **Stylesheet classes.** A class a `.scss` or `.css` file defines, such as `.team-chat`, `.form-table` or `.category-card`. One also counts when it only applies inside a parent (`.card .small`), or when a parent's arbitrary variant styles it (`[&_.x]:`).
 - **Third-party classes.** Classes defined by a library stylesheet the app imports, such as Leaflet's `leaflet-*` (`import 'leaflet/dist/leaflet.css'`).
 - **A `className` prop.** It lets the caller add its own utilities. Merge it with `cn()`, last, so it can override.
 
@@ -88,11 +88,11 @@ Do not:
 
 ```tsx
 // Wrong: `bookings-panel` styles nothing; it is a marker in disguise.
-<Card className="card-bordered bookings-panel">
+<Card bordered className="h-full bookings-panel">
 
 // Right: only the styling class. If something needs to find the card,
 // give it a role and name, or a data attribute.
-<Card className="card-bordered">
+<Card bordered className="h-full">
 ```
 
 ## `data-slot`: a component's parts

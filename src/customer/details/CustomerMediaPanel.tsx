@@ -2,6 +2,8 @@ import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
 
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+
 import { SubmitButton } from '@/form';
 import { WideImageField } from '@/form/WideImageField';
 import { translate } from '@/i18n';
@@ -58,13 +60,13 @@ export const CustomerMediaPanel = (props: CustomerMediaPanelOwnProps) => {
   }
 
   return (
-    <div className="card card-bordered mb-4">
-      <div className="card-header">
-        <div className="card-title">
+    <Card bordered className="mb-4">
+      <CardHeader>
+        <CardTitle as="div">
           <h3>{translate('Logo')}</h3>
-        </div>
-      </div>
-      <div className="card-body">{content}</div>
-    </div>
+        </CardTitle>
+      </CardHeader>
+      <CardContent>{content}</CardContent>
+    </Card>
   );
 };

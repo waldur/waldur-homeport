@@ -1,7 +1,7 @@
 import { CheckIcon, ClockIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import { AlertItem, Badge, Card, CardContent, CardHeader } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -58,12 +58,12 @@ export const OfferingMetadataDisplay: FunctionComponent<
   };
 
   return (
-    <div className="card mt-2.5">
-      <div className="card-header flex items-center">
+    <Card className="mt-2.5">
+      <CardHeader className="flex items-center">
         <CheckIcon size={16} className="text-success me-1.5" weight="bold" />
         <strong>{translate('Valid offering export file')}</strong>
-      </div>
-      <div className="card-body">
+      </CardHeader>
+      <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
           <div>
             <h6>{translate('Offering Information')}</h6>
@@ -120,7 +120,7 @@ export const OfferingMetadataDisplay: FunctionComponent<
             ))}
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { NoResult } from './NoResult';
 
 const meta: Meta<typeof NoResult> = {
@@ -8,11 +10,11 @@ const meta: Meta<typeof NoResult> = {
   decorators: [
     (Story) => (
       <div className="p-5 bg-primary" style={{ minWidth: 600 }}>
-        <div className="card card-bordered">
-          <div className="card-body">
+        <Card bordered>
+          <CardContent>
             <Story />
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     ),
   ],

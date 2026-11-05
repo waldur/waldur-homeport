@@ -88,3 +88,16 @@ $breakpoints: (
     opacity: 1;
   }
 }
+
+// waldur-ui Card's parts and variants. The context rules that restyle a
+// card part (a table card's header, a solid header) set a `--card-*` hook
+// the part reads, since its own utilities outrank anything in this layer
+// (waldur-design-tokens card.css lists the hooks).
+$card: '[data-slot="card"]';
+$card-header: '[data-slot="card-header"]';
+$card-title: '[data-slot="card-title"]';
+$card-toolbar: '[data-slot="card-toolbar"]';
+$card-body: '[data-slot="card-content"]';
+$card-table: '[data-variant="table"]:where([data-slot="card"])';
+$card-solid: '[data-variant="solid"]:where([data-slot="card"])';
+$card-bordered: '[data-bordered]:where([data-slot="card"])';

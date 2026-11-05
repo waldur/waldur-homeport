@@ -4,6 +4,8 @@ import { Field, Form } from 'react-final-form';
 import { projectsPartialUpdate } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { SubmitButton } from '@/form';
 import { WideImageField } from '@/form/WideImageField';
@@ -38,39 +40,41 @@ export const ProjectAvatar = ({ project }: { project: Project }) => {
       onSubmit={(values: FormData) => avatarMutation.mutateAsync(values)}
       initialValues={{ image: project.image }}
       render={({ handleSubmit, submitting }) => (
-        <form onSubmit={handleSubmit} className="card card-bordered mb-4">
-          <div className="card-header">
-            <div className="card-title">
-              <h3>{translate('Avatar')}</h3>
-            </div>
-          </div>
-          <div className="card-body">
-            <Field
-              name="image"
-              component={(fieldProps) => (
-                <WideImageField
-                  alt={abbreviation}
-                  initialValue={project.image}
-                  max={2 * 1024 * 1024} // 2MB
-                  size={64}
-                  disabled={project.is_removed}
-                  extraActions={({ isChanged, isTooLarge }) =>
-                    (isChanged || submitting) && !project.is_removed ? (
-                      <SubmitButton
-                        size="sm"
-                        submitting={submitting}
-                        disabled={isTooLarge}
-                        label={translate('Save')}
-                        iconNode={<UploadSimpleIcon weight="bold" />}
-                      />
-                    ) : null
-                  }
-                  {...(fieldProps as any)}
-                />
-              )}
-            />
-          </div>
-        </form>
+        <Card asChild bordered className="mb-4">
+          <form onSubmit={handleSubmit}>
+            <CardHeader>
+              <CardTitle as="div">
+                <h3>{translate('Avatar')}</h3>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Field
+                name="image"
+                component={(fieldProps) => (
+                  <WideImageField
+                    alt={abbreviation}
+                    initialValue={project.image}
+                    max={2 * 1024 * 1024} // 2MB
+                    size={64}
+                    disabled={project.is_removed}
+                    extraActions={({ isChanged, isTooLarge }) =>
+                      (isChanged || submitting) && !project.is_removed ? (
+                        <SubmitButton
+                          size="sm"
+                          submitting={submitting}
+                          disabled={isTooLarge}
+                          label={translate('Save')}
+                          iconNode={<UploadSimpleIcon weight="bold" />}
+                        />
+                      ) : null
+                    }
+                    {...(fieldProps as any)}
+                  />
+                )}
+              />
+            </CardContent>
+          </form>
+        </Card>
       )}
     />
   );

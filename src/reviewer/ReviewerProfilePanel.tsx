@@ -14,6 +14,9 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
+  Card,
+  CardContent,
+  CardHeader,
 } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -130,8 +133,8 @@ export const ReviewerProfilePanel = ({
 
   return (
     <Tabs value={activeTab} onValueChange={(key) => onTabChange(key as TabKey)}>
-      <div className="card card-bordered">
-        <div className="card-header border-b-0 pt-3">
+      <Card bordered>
+        <CardHeader className="border-b-0 pt-3">
           <div className="flex flex-col lg:flex-row w-full gap-3">
             {/* Left side: Title, refresh, and status badges */}
             <div className="flex flex-col">
@@ -193,9 +196,9 @@ export const ReviewerProfilePanel = ({
               )}
             </div>
           </div>
-        </div>
+        </CardHeader>
         {/* Tabs navigation */}
-        <div className="card-header border-b border-b-secondary items-stretch py-0 min-h-auto">
+        <CardHeader className="border-b border-b-secondary items-stretch py-0 min-h-auto">
           <TabsList scrollable scrollClassName="grow pt-3" bordered={false}>
             {tabs.map((tab) => (
               <TabsTrigger key={tab.key} value={tab.key}>
@@ -203,13 +206,11 @@ export const ReviewerProfilePanel = ({
               </TabsTrigger>
             ))}
           </TabsList>
-        </div>
-        <div
-          className={`card-body ${activeTab === 'info' ? 'pt-3' : 'pt-0 pb-0'}`}
-        >
+        </CardHeader>
+        <CardContent className={activeTab === 'info' ? 'pt-3' : 'pt-0 pb-0'}>
           <TabsContent value={activeTab}>{children}</TabsContent>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </Tabs>
   );
 };

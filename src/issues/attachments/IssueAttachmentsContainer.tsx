@@ -1,5 +1,7 @@
 import { Issue } from 'waldur-js-client';
 
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
@@ -26,14 +28,14 @@ export const IssueAttachmentsContainer: React.FC<
 
   return (
     <IssueAttachmentsContext.Provider value={issue}>
-      <div className="card card-bordered">
-        <div className="card-header">
-          <div className="card-title">
+      <Card bordered>
+        <CardHeader>
+          <CardTitle as="div">
             <span className="me-1.5">{translate('Attachments')}</span>
             <RefreshButton refetch={refetch} loading={isLoading} />
-          </div>
-        </div>
-        <div className="card-body">
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           {issue.add_attachment_is_available ? (
             <UploadContainer
               onDrop={onDrop}
@@ -51,8 +53,8 @@ export const IssueAttachmentsContainer: React.FC<
               onCancel={cancel}
             />
           )}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </IssueAttachmentsContext.Provider>
   );
 };

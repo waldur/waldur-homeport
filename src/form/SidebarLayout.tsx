@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
 
-import { useBreakpointDown } from 'waldur-ui';
+import { useBreakpointDown, Card, CardContent, CardHeader } from 'waldur-ui';
 
 import { useFullPage } from '@/navigation/context';
 import { PAGE_CONTAINER_XXL_CLASSNAME } from '@/navigation/pageContainer';
@@ -73,16 +73,16 @@ const Sidebar: FC<
         isVMode ? props.hideOnVertical && 'hidden' : sideColumnClassName,
       )}
     >
-      <div className="card card-bordered w-full">
+      <Card bordered className="w-full">
         {props.title ? (
-          <div className="card-header">
+          <CardHeader>
             <div className="me-1.5">
               <h4 className="mb-0">{props.title}</h4>
             </div>
-          </div>
+          </CardHeader>
         ) : null}
-        <div className="card-body">{props.children}</div>
-      </div>
+        <CardContent>{props.children}</CardContent>
+      </Card>
     </div>
   ) : (
     <div

@@ -7,7 +7,13 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'waldur-ui';
 
 import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { getBookingFilterOptionStates } from '@/booking/utils';
@@ -70,9 +76,9 @@ export const OfferingBookingResourcesCalendarContainer: FunctionComponent<
   }
 
   return (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="card-title">
+    <Card bordered>
+      <CardHeader>
+        <CardTitle as="div">
           <span className="me-1.5">{translate('Bookings')}</span>
           {isRefetching ? (
             <LoadingSpinner />
@@ -84,14 +90,14 @@ export const OfferingBookingResourcesCalendarContainer: FunctionComponent<
               iconNode={<ArrowsClockwiseIcon weight="bold" />}
             />
           )}
-        </div>
-      </div>
-      <div className="card-body">
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
         <BookingResourcesCalendar
           bookingResources={calendarEvents}
           refetch={refetch}
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

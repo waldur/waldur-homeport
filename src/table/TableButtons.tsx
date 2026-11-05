@@ -33,7 +33,9 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
         // The filter row is hidden: show it before the Add-filter click
         // below (see TableToolbar.tsx's onClickFilterButton).
         props.toggleFilterMenu(true);
-        const parent: HTMLElement = event.target.closest('.card-table');
+        const parent: HTMLElement = event.target.closest(
+          '[data-slot="card"][data-variant="table"]',
+        );
         if (!parent) return;
         const addFilterButton =
           parent.querySelector<HTMLButtonElement>('[data-add-filter]');

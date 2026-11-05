@@ -1,7 +1,7 @@
 import { ArrowDownIcon, ArrowUpIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Card, CardContent } from 'waldur-ui';
 
 interface NetworkStatisticsCardProps {
   title: string;
@@ -39,14 +39,14 @@ export const NetworkStatisticsCard: FC<NetworkStatisticsCardProps> = ({
   isIncrease = false,
 }) => {
   return (
-    <div className="card card-bordered mb-4">
-      <div className="card-body flex justify-between items-end gap-1.5">
+    <Card bordered className="mb-4">
+      <CardContent className="flex justify-between items-end gap-1.5">
         <div>
           <span className="block text-quaternary mb-2.5">{title}</span>
           <h1 className="block text-2xl mb-0 text-primary">{value}GB/day</h1>
         </div>
         <ChangeIndicator isIncrease={isIncrease} change={change} />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

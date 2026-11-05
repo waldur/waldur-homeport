@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
+import { Card, CardContent } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { ImagesTab } from '../images/ImagesTab';
@@ -15,11 +17,11 @@ export const PublicOfferingImages: FunctionComponent<
   PublicOfferingImagesProps
 > = ({ offering }) => {
   return offering.screenshots.length ? (
-    <div className="card card-bordered mb-8" id="images">
-      <div className="card-body">
+    <Card bordered className="mb-8" id="images">
+      <CardContent>
         <PublicOfferingCardTitle>{translate('Images')}</PublicOfferingCardTitle>
         <ImagesTab images={offering.screenshots} />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   ) : null;
 };

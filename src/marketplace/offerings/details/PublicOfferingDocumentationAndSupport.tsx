@@ -2,7 +2,7 @@ import { ArrowSquareOutIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
-import { buttonVariants } from 'waldur-ui';
+import { buttonVariants, Card, CardContent } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -15,8 +15,8 @@ interface PublicOfferingDocumentationAndSupportProps {
 export const PublicOfferingDocumentationAndSupport: FunctionComponent<
   PublicOfferingDocumentationAndSupportProps
 > = ({ offering }) => (
-  <div className="card card-bordered mb-8">
-    <div className="card-body">
+  <Card bordered className="mb-8">
+    <CardContent>
       <PublicOfferingCardTitle>
         {translate('Documentation & support')}
       </PublicOfferingCardTitle>
@@ -52,6 +52,6 @@ export const PublicOfferingDocumentationAndSupport: FunctionComponent<
           </div>
         )}
       </div>
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 );

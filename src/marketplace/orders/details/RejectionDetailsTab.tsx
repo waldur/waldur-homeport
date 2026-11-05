@@ -1,14 +1,16 @@
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 export const RejectionDetailsTab = ({ order }) => {
   return (
-    <div className="card card-bordered">
-      <div className="card-header custom-card-header custom-padding-zero">
-        <div className="card-title">
+    <Card bordered>
+      <CardHeader className="custom-card-header custom-padding-zero">
+        <CardTitle as="div">
           <h3>{translate('Rejection details')}</h3>
-        </div>
-      </div>
-      <div className="card-body">
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
         {order.consumer_rejection_comment && (
           <div>
             <p>{translate('Consumer rejection reason')}:</p>
@@ -21,7 +23,7 @@ export const RejectionDetailsTab = ({ order }) => {
             <pre>{order.provider_rejection_comment}</pre>
           </div>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

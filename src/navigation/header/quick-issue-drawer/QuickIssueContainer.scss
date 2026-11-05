@@ -2,22 +2,22 @@
 // Cancels the theme's default card-header margin and card-body padding
 // so the search bar, rows, and footer sit flush with the drawer body
 // (which provides its own padding).
-.drawer-bare-table.card-table {
+.drawer-bare-table[data-variant='table']:where([data-slot='card']) {
   background: transparent;
   box-shadow: none;
   border: 0;
 
-  > .card-header {
+  > [data-slot='card-header'] {
     margin: 0;
     padding: 0;
     border: 0;
   }
 
-  > .card-body {
+  > [data-slot='card-content'] {
     padding: 0;
   }
 
-  > .card-footer {
+  > [data-slot='card-footer'] {
     padding: 0;
     background: transparent;
     border: 0;

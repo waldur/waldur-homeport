@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
 
+import { Card, CardContent, CardHeader } from 'waldur-ui';
+
 import { isFeatureVisible } from '@/features/connect';
 import { RancherFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
@@ -18,8 +20,8 @@ interface OwnProps {
 }
 
 export const DataVolumePanel: FunctionComponent<OwnProps> = (props) => (
-  <div className="card card-bordered">
-    <div className="card-header">
+  <Card bordered>
+    <CardHeader>
       <h4>
         {translate('Data volume #{index}', { index: props.volumeIndex + 1 })}
       </h4>
@@ -27,8 +29,8 @@ export const DataVolumePanel: FunctionComponent<OwnProps> = (props) => (
         onClick={() => props.onRemove(props.volumeIndex)}
         className="self-center"
       />
-    </div>
-    <div className="card-body">
+    </CardHeader>
+    <CardContent>
       {isFeatureVisible(RancherFeatures.volume_mount_point) && (
         <VolumeMountPointGroup
           nodeIndex={props.nodeIndex}
@@ -40,6 +42,6 @@ export const DataVolumePanel: FunctionComponent<OwnProps> = (props) => (
         name={`${props.volumePath}.volume_type`}
         volumeTypes={props.volumeTypes}
       />
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 );

@@ -1,7 +1,15 @@
 import { FC } from 'react';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
-import { AlertItem, PropertyItem, PropertyList } from 'waldur-ui';
+import {
+  AlertItem,
+  PropertyItem,
+  PropertyList,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -137,8 +145,8 @@ export const CustomerBillingSummaryDialog: FC<
           )}
 
           {/* Header info */}
-          <div className="card">
-            <div className="card-body">
+          <Card>
+            <CardContent>
               {/* Who the mapping links, beside what the period holds. */}
               <div className="grid grid-cols-1 gap-x-8 md:grid-cols-2">
                 <div>
@@ -189,8 +197,8 @@ export const CustomerBillingSummaryDialog: FC<
                   </PropertyList>
                 </div>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
           {/* How it works explanation */}
           {data.resources_with_backend_id === 0 &&
@@ -219,15 +227,15 @@ export const CustomerBillingSummaryDialog: FC<
             )}
 
           {/* Billing Data from Arrow */}
-          <div className="card">
-            <div className="card-header flex justify-between items-center">
-              <div className="card-title">
+          <Card>
+            <CardHeader className="flex justify-between items-center">
+              <CardTitle as="div">
                 <h5 className="mb-0">
                   {translate('Billing export ({period})', {
                     period: data.period,
                   })}
                 </h5>
-              </div>
+              </CardTitle>
               {data.billing_available && data.billing_lines.length > 0 && (
                 <div className="text-end">
                   <div className="small text-quaternary">
@@ -236,8 +244,8 @@ export const CustomerBillingSummaryDialog: FC<
                   <strong>{defaultCurrency(data.billing_total_sell)}</strong>
                 </div>
               )}
-            </div>
-            <div className="card-body p-0">
+            </CardHeader>
+            <CardContent className="p-0">
               {!data.billing_available ? (
                 <div className="text-center text-quaternary py-5">
                   {translate(
@@ -253,17 +261,17 @@ export const CustomerBillingSummaryDialog: FC<
               ) : (
                 <BillingLinesTable lines={data.billing_lines} />
               )}
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
           {/* Consumption Data */}
-          <div className="card">
-            <div className="card-header flex justify-between items-center">
-              <div className="card-title">
+          <Card>
+            <CardHeader className="flex justify-between items-center">
+              <CardTitle as="div">
                 <h5 className="mb-0">
                   {translate('Consumption ({period})', { period: data.period })}
                 </h5>
-              </div>
+              </CardTitle>
               {data.consumption_lines.length > 0 &&
                 data.consumption_total_sell && (
                   <div className="text-end">
@@ -275,8 +283,8 @@ export const CustomerBillingSummaryDialog: FC<
                     </strong>
                   </div>
                 )}
-            </div>
-            <div className="card-body p-0">
+            </CardHeader>
+            <CardContent className="p-0">
               {data.consumption_lines.length === 0 ? (
                 <div className="text-center text-quaternary py-5">
                   {data.total_customer_resources === 0
@@ -294,8 +302,8 @@ export const CustomerBillingSummaryDialog: FC<
               ) : (
                 <ConsumptionLinesTable lines={data.consumption_lines} />
               )}
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
           {/* Empty state */}
           {data.billing_lines.length === 0 &&

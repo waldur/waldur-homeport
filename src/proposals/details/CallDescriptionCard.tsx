@@ -1,5 +1,7 @@
 import Markdown from 'markdown-to-jsx';
 
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { Call } from '../types';
@@ -11,13 +13,13 @@ interface CallDescriptionCardProps {
 }
 
 export const CallDescriptionCard = ({ call }: CallDescriptionCardProps) => (
-  <div className="card card-bordered">
-    <div className="card-header">
-      <div className="card-title">
+  <Card bordered>
+    <CardHeader>
+      <CardTitle as="div">
         <h3>{translate('Description')}</h3>
-      </div>
-    </div>
-    <div className="card-body">
+      </CardTitle>
+    </CardHeader>
+    <CardContent>
       <Markdown
         options={{
           overrides: {
@@ -29,6 +31,6 @@ export const CallDescriptionCard = ({ call }: CallDescriptionCardProps) => (
       >
         {call.description || '<CallDetailsFields></CallDetailsFields>'}
       </Markdown>
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 );

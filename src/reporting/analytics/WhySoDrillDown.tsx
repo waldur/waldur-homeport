@@ -6,7 +6,7 @@ import {
 import classNames from 'classnames';
 import { FC, useCallback, useMemo, useState } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Card } from 'waldur-ui';
 
 import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -345,7 +345,7 @@ export const WhySoDrillDown: FC<WhySoDrillDownProps> = ({
       <div className="flex justify-between items-center mb-3" />
 
       <div className="mb-3">
-        <div className="card card-bordered overflow-hidden">
+        <Card bordered className="overflow-hidden">
           <WhySoDrillDownTable
             data={initialData}
             dimension={initialDimension}
@@ -353,7 +353,7 @@ export const WhySoDrillDown: FC<WhySoDrillDownProps> = ({
             isRoot
             valueLabel={initialValueLabel}
           />
-        </div>
+        </Card>
       </div>
     </div>
   );

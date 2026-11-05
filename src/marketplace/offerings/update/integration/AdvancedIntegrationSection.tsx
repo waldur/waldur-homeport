@@ -1,6 +1,13 @@
 import { FC, useMemo } from 'react';
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Card,
+  CardContent,
+} from 'waldur-ui';
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -48,8 +55,8 @@ export const AdvancedIntegrationSection: FC<OfferingEditPanelProps> = (
   }
 
   return (
-    <div className="card card-bordered">
-      <div className="card-body">
+    <Card bordered>
+      <CardContent>
         <Tabs mount="active" value={activeKey} onValueChange={handleSelect}>
           <TabsList className="mb-4">
             {tabs.map((tab) => (
@@ -76,7 +83,7 @@ export const AdvancedIntegrationSection: FC<OfferingEditPanelProps> = (
             )}
           </>
         </Tabs>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

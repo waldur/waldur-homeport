@@ -1,19 +1,21 @@
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+
 import { CodeBlockPreview } from '@/core/CodeBlockPreview';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
 export const OutputTab = ({ order }) => {
   return (
-    <div className="card card-bordered">
-      <div className="card-header custom-card-header custom-padding-zero">
-        <div className="card-title">
+    <Card bordered>
+      <CardHeader className="custom-card-header custom-padding-zero">
+        <CardTitle as="div">
           <h3>{translate('Output')}</h3>
-        </div>
-      </div>
+        </CardTitle>
+      </CardHeader>
       {order.output ? (
-        <div className="card-body">
+        <CardContent>
           <CodeBlockPreview code={order.output} />
-        </div>
+        </CardContent>
       ) : (
         <NoResult
           title={translate('No outputs found for this order')}
@@ -21,6 +23,6 @@ export const OutputTab = ({ order }) => {
           noAction
         />
       )}
-    </div>
+    </Card>
   );
 };

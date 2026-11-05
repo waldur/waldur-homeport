@@ -1,7 +1,7 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useRef } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Card, CardContent, CardHeader } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -30,8 +30,8 @@ export const CarouselSection: FC<CarouselSectionProps> = ({
   };
 
   return (
-    <div className="card card-bordered carousel-section mb-5">
-      <div className="card-header gap-1.5">
+    <Card bordered className="carousel-section mb-5">
+      <CardHeader className="gap-1.5">
         <h4 className="mb-0">{title}</h4>
         <div className="flex items-stretch gap-1.5">
           <BaseButton
@@ -60,12 +60,12 @@ export const CarouselSection: FC<CarouselSectionProps> = ({
             </Link>
           )}
         </div>
-      </div>
-      <div className="card-body">
+      </CardHeader>
+      <CardContent>
         <div className="carousel-scroll" ref={scrollRef}>
           {children}
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

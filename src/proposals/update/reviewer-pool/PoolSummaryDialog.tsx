@@ -9,6 +9,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Card,
+  CardContent,
 } from 'waldur-ui';
 
 import { MermaidChart } from '@/core/MermaidChart';
@@ -231,12 +233,10 @@ export const PoolSummaryDialog: FC = () => {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
-              <div className="card card-bordered h-full">
-                <div className="card-body">
-                  <h5 className="card-title">
-                    {translate('Discovery (recommended)')}
-                  </h5>
-                  <p className="card-text text-quaternary">
+              <Card bordered className="h-full">
+                <CardContent>
+                  <h5>{translate('Discovery (recommended)')}</h5>
+                  <p className="text-quaternary">
                     {translate(
                       'Use the Discovery tab to automatically find reviewers whose expertise matches your call or proposals. The system analyzes reviewer profiles, publications, and expertise keywords to suggest the best matches.',
                     )}
@@ -246,14 +246,14 @@ export const PoolSummaryDialog: FC = () => {
                     <li>{translate('Match against submitted proposals')}</li>
                     <li>{translate('Search by custom keywords')}</li>
                   </ul>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
             <div>
-              <div className="card card-bordered h-full">
-                <div className="card-body">
-                  <h5 className="card-title">{translate('Direct invite')}</h5>
-                  <p className="card-text text-quaternary">
+              <Card bordered className="h-full">
+                <CardContent>
+                  <h5>{translate('Direct invite')}</h5>
+                  <p className="text-quaternary">
                     {translate(
                       'If you already know who you want to invite, use the "Invite by email" button to send invitations directly. The reviewer will receive an email with a link to accept or decline.',
                     )}
@@ -263,8 +263,8 @@ export const PoolSummaryDialog: FC = () => {
                     <li>{translate('Works even if not in system yet')}</li>
                     <li>{translate('Set workload limit per reviewer')}</li>
                   </ul>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>

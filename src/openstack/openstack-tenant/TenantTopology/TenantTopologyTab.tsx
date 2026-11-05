@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useRef } from 'react';
 import { openstackTenantsTopologyRetrieve } from 'waldur-js-client';
 
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { MermaidChart } from '@/core/MermaidChart';
@@ -99,16 +101,18 @@ export const TenantTopologyTab: FC<Props> = ({ resource, resourceScope }) => {
     containerRef.current?.querySelector('svg') ?? null;
 
   return (
-    <div className="card">
-      <div className="card-header flex justify-between items-center">
-        <div className="card-title mb-0">{translate('Topology')}</div>
+    <Card>
+      <CardHeader className="flex justify-between items-center">
+        <CardTitle as="div" className="mb-0">
+          {translate('Topology')}
+        </CardTitle>
         <TopologyExport
           getSvg={getSvg}
           mermaidCode={built.code}
           filenameBase={`topology-${resource?.slug || resourceScope.uuid.slice(0, 8)}-${fileTimestamp()}`}
         />
-      </div>
-      <div className="card-body">
+      </CardHeader>
+      <CardContent>
         <div ref={containerRef}>
           <MermaidChart code={built.code} className="overflow-auto" />
         </div>
@@ -116,7 +120,7 @@ export const TenantTopologyTab: FC<Props> = ({ resource, resourceScope }) => {
           nodeTypes={built.presentNodeTypes}
           edgeStyles={built.presentEdgeStyles}
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

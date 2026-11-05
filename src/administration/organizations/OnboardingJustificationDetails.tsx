@@ -6,7 +6,13 @@ import {
   OnboardingVerification,
 } from 'waldur-js-client';
 
-import { BaseButton, PropertyItem, PropertyList } from 'waldur-ui';
+import {
+  BaseButton,
+  PropertyItem,
+  PropertyList,
+  Card,
+  CardContent,
+} from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { BaseTextField } from '@/form/TextField';
@@ -98,8 +104,8 @@ export const OnboardingJustificationDetails: FC<
             )}
           </div>
 
-          <div className="card mb-3">
-            <div className="card-body">
+          <Card className="mb-3">
+            <CardContent>
               {((verification?.user_submitted_customer_data &&
                 Object.keys(verification.user_submitted_customer_data).length >
                   0) ||
@@ -218,8 +224,8 @@ export const OnboardingJustificationDetails: FC<
                   </div>
                 </>
               )}
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </form>
       )}
     />

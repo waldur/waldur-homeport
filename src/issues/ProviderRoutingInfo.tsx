@@ -1,7 +1,15 @@
 import { FC, ReactNode } from 'react';
 import { Issue } from 'waldur-js-client';
 
-import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
+import {
+  Badge,
+  PropertyItem,
+  PropertyList,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { OrganizationLink } from '@/customer/list/OrganizationLink';
@@ -57,11 +65,11 @@ export const ProviderRoutingInfo: FC<{ issue: Issue }> = ({ issue }) => {
   ];
 
   return (
-    <div className="card card-bordered mb-4">
-      <div className="card-header">
-        <div className="card-title">{translate('Provider routing')}</div>
-      </div>
-      <div className="card-body">
+    <Card bordered className="mb-4">
+      <CardHeader>
+        <CardTitle as="div">{translate('Provider routing')}</CardTitle>
+      </CardHeader>
+      <CardContent>
         <div className="flex flex-wrap gap-1.5 mb-2.5">
           <Badge variant="info" shape="pill" tone="outline">
             {translate('Routed')}
@@ -93,7 +101,7 @@ export const ProviderRoutingInfo: FC<{ issue: Issue }> = ({ issue }) => {
               />
             ))}
         </PropertyList>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

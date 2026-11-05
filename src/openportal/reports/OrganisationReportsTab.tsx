@@ -20,6 +20,9 @@ import {
   NativeSelect,
   parseDateValue,
   toIsoDate,
+  Card,
+  CardContent,
+  CardHeader,
 } from 'waldur-ui';
 
 import { getNextPageUrl } from '@/core/api';
@@ -878,8 +881,8 @@ export const OrganisationReportsTab: FC = () => {
 
       {/* ── Load prompt ──────────────────────────────────────────────── */}
       {showLoadPrompt && !projectsLoading && !reportsLoading && (
-        <div className="card mb-3">
-          <div className="card-body">
+        <Card className="mb-3">
+          <CardContent>
             <p className="mb-1.5">
               {translate('Usage reports not yet loaded')}
             </p>
@@ -970,8 +973,8 @@ export const OrganisationReportsTab: FC = () => {
               }}
               label={translate('Load reports')}
             />
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
 
       {/* ── Progress bar ─────────────────────────────────────────────── */}
@@ -1087,31 +1090,31 @@ export const OrganisationReportsTab: FC = () => {
 
       {/* ── Charts ───────────────────────────────────────────────────── */}
       {activeUsage.length > 0 && nameMaps !== undefined && !showLoadPrompt && (
-        <div className="card mb-3">
-          <div className="card-header">{translate('Usage')}</div>
-          <div className="card-body">
+        <Card className="mb-3">
+          <CardHeader>{translate('Usage')}</CardHeader>
+          <CardContent>
             <UsageReportVis
               reports={activeUsage}
               height="400px"
               nameMaps={nameMaps}
             />
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
 
       {activeStorage.length > 0 &&
         nameMaps !== undefined &&
         !showLoadPrompt && (
-          <div className="card mb-3">
-            <div className="card-header">{translate('Storage')}</div>
-            <div className="card-body">
+          <Card className="mb-3">
+            <CardHeader>{translate('Storage')}</CardHeader>
+            <CardContent>
               <StorageReportVis
                 reports={activeStorage}
                 height="360px"
                 nameMaps={nameMaps}
               />
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         )}
     </div>
   );

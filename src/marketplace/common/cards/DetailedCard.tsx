@@ -2,7 +2,7 @@ import { LockSimpleIcon, QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, Card, CardContent, CardFooter } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { Image } from '@/core/Image';
@@ -47,7 +47,10 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
       })}
       disabled={!isAllowed}
     >
-      <div className="card card-bordered h-full overflow-hidden cursor-pointer hover:border-brand">
+      <Card
+        bordered
+        className="h-full overflow-hidden cursor-pointer hover:border-brand"
+      >
         {/* Image section */}
         <div className="h-[120px] flex items-center justify-center border-b border-b-secondary bg-brand-subtle">
           {image ? (
@@ -65,7 +68,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
           )}
         </div>
 
-        <div className="card-body p-4 flex flex-col">
+        <CardContent className="p-4 flex flex-col">
           {/* Header with logo and title */}
           <div className="flex items-center gap-3 mb-3">
             {offering.thumbnail ? (
@@ -153,10 +156,10 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
               onTagClick={onTagClick}
             />
           </div>
-        </div>
+        </CardContent>
 
         {/* Footer */}
-        <div className="card-footer py-3 px-4 flex justify-end gap-1.5">
+        <CardFooter className="py-3 px-4 flex justify-end gap-1.5">
           <CardRequestAccessButton
             offering={offering}
             orderDisabledReason={isDisabled ? disabledButtonTooltip : undefined}
@@ -166,8 +169,8 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
             disabled={isDisabled}
             disabledReason={disabledButtonTooltip}
           />
-        </div>
-      </div>
+        </CardFooter>
+      </Card>
     </OfferingDetailsLink>
   );
 

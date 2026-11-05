@@ -5,7 +5,13 @@ import { Form, useForm } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
-import { BaseButton, Popover, PopoverContent, PopoverTrigger } from 'waldur-ui';
+import {
+  BaseButton,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Card,
+} from 'waldur-ui';
 
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { SubmitButton } from '@/form';
@@ -155,16 +161,17 @@ export const MarketplaceLandingFilter = ({
             // panel is positioned, see waldur-design-tokens/animations.css).
             className="z-dropdown-menu w-[min(400px,calc(100vw-30px))] border-0 animate-[waldur-menu-enter-up_0.3s_ease] motion-reduce:animate-none"
           >
-            <div className="card text-base shadow-[var(--menu-shadow)] m-0">
+            <Card className="text-base shadow-[var(--menu-shadow)] m-0">
+              {/* Bootstrap's bare .card-body: flex 1 1 auto, 1rem padding. */}
               <form
                 onSubmit={handleSubmit}
-                className="card-body flex flex-col gap-6"
+                className="flex flex-auto flex-col gap-6 p-[var(--card-spacer)]"
               >
                 <div>
-                  <div className="card-title h3 mb-4">
+                  <div className="h3 mb-4">
                     {translate('Filter by organization/project')}
                   </div>
-                  <div className="card-subtitle font-normal text-quaternary">
+                  <div className="-mt-[calc(var(--card-title-spacer-y)*0.5)] font-normal text-quaternary">
                     {translate(
                       'Filter results by chosen organization and project',
                     )}
@@ -187,7 +194,7 @@ export const MarketplaceLandingFilter = ({
                   />
                 </div>
               </form>
-            </div>
+            </Card>
           </PopoverContent>
         </Popover>
       )}

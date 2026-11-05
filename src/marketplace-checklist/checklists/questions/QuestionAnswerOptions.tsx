@@ -19,7 +19,7 @@ import {
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton, FormField } from 'waldur-ui';
+import { BaseButton, FormField, Card } from 'waldur-ui';
 
 import { required, requiredArray } from '@/core/validators';
 import { StringField } from '@/form';
@@ -103,10 +103,7 @@ const DraggableFieldsListGroup = ({
   };
 
   return (
-    <div
-      id="question-answer-options"
-      className="card card-bordered bg-secondary py-2.5"
-    >
+    <Card bordered id="question-answer-options" className="bg-secondary py-2.5">
       <FormField>
         <DndContext
           sensors={sensors}
@@ -149,7 +146,7 @@ const DraggableFieldsListGroup = ({
           </table>
         </DndContext>
       </FormField>
-    </div>
+    </Card>
   );
 };
 

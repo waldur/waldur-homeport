@@ -1,7 +1,7 @@
 import { ClockCountdownIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { BaseButton, RadialBackground } from 'waldur-ui';
+import { BaseButton, RadialBackground, Card, CardContent } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
@@ -29,8 +29,8 @@ export const OrganizationReviewStatus: FunctionComponent<
   });
 
   return (
-    <div className="card border-0 shadow-raised">
-      <div className="card-body text-center relative overflow-hidden organization-review-status">
+    <Card className="border-0 shadow-raised">
+      <CardContent className="text-center relative overflow-hidden organization-review-status">
         <RadialBackground className="icon-background" />
 
         <div className="review-icon-wrapper mb-5">
@@ -86,7 +86,7 @@ export const OrganizationReviewStatus: FunctionComponent<
           label={translate('Go to dashboard')}
           size="lg"
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

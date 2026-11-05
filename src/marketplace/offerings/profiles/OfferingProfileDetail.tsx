@@ -10,7 +10,7 @@ import {
   rolesList,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Card, CardContent, CardHeader } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -46,8 +46,8 @@ export const OfferingProfileDetail: FC = () => {
 
   return (
     <div>
-      <div className="card mb-2.5">
-        <div className="card-body">
+      <Card className="mb-2.5">
+        <CardContent>
           <h3 className="mb-1.5">{profile.name}</h3>
           <p className="text-quaternary mb-2.5">
             {renderFieldOrDash(profile.description)}
@@ -57,11 +57,11 @@ export const OfferingProfileDetail: FC = () => {
               n: profile.offerings_count ?? 0,
             })}
           </p>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
-      <div className="card">
-        <div className="card-header flex items-center justify-between">
+      <Card>
+        <CardHeader className="flex items-center justify-between">
           <h5 className="mb-0">{translate('Role catalog')}</h5>
           {isStaff && (
             <BaseButton
@@ -76,8 +76,8 @@ export const OfferingProfileDetail: FC = () => {
               size="lg"
             />
           )}
-        </div>
-        <div className="card-body">
+        </CardHeader>
+        <CardContent>
           <p className="text-quaternary">
             {translate(
               'These roles can be assigned on every offering bound to this profile, at the scope shown. Adding or removing a role updates the bound offerings in the background.',
@@ -122,8 +122,8 @@ export const OfferingProfileDetail: FC = () => {
               </tbody>
             </table>
           )}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

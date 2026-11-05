@@ -1,16 +1,18 @@
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
 export const ErrorDetailsTab = ({ order }) => {
   return (
-    <div className="card card-bordered">
-      <div className="card-header custom-card-header custom-padding-zero">
-        <div className="card-title">
+    <Card bordered>
+      <CardHeader className="custom-card-header custom-padding-zero">
+        <CardTitle as="div">
           <h3>{translate('Error details')}</h3>
-        </div>
-      </div>
+        </CardTitle>
+      </CardHeader>
       {order.error_message ? (
-        <div className="card-body">
+        <CardContent>
           <div>
             <p>{translate('Error details')}:</p>
             <pre>{order.error_message}</pre>
@@ -19,7 +21,7 @@ export const ErrorDetailsTab = ({ order }) => {
             <p>{translate('Error trace')}:</p>
             <pre>{order.error_traceback}</pre>
           </div>
-        </div>
+        </CardContent>
       ) : (
         <NoResult
           title={translate('No errors found for this order')}
@@ -27,6 +29,6 @@ export const ErrorDetailsTab = ({ order }) => {
           noAction
         />
       )}
-    </div>
+    </Card>
   );
 };

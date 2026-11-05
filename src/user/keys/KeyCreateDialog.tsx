@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { keysCreate, SshKeyRequest } from 'waldur-js-client';
 
-import { FeaturedIcon } from 'waldur-ui';
+import { FeaturedIcon, Card, CardContent } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
@@ -45,8 +45,8 @@ const SshKeyRestrictionsBanner = () => {
   }
 
   return (
-    <div className="card card-bordered bg-info-subtle mb-3">
-      <div className="card-body flex items-center gap-2.5 p-3">
+    <Card bordered className="bg-info-subtle mb-3">
+      <CardContent className="flex items-center gap-2.5 p-3">
         <FeaturedIcon icon={<InfoIcon weight="bold" />} variant="info" />
         <div>
           {allowedTypes.length > 0 && (
@@ -64,8 +64,8 @@ const SshKeyRestrictionsBanner = () => {
             </div>
           )}
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

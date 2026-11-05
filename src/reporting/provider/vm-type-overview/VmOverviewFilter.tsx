@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 
-import { FormField } from 'waldur-ui';
+import { FormField, Card, CardContent } from 'waldur-ui';
 
 import { Select } from '@/form/select';
 import { SwitchField } from '@/form/SwitchField';
@@ -16,8 +16,8 @@ interface VmOverviewFilterProps {
 export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
   props,
 ) => (
-  <div className="card">
-    <div className="card-body mb-1.5 border-b border-b-secondary">
+  <Card>
+    <CardContent className="mb-1.5 border-b border-b-secondary">
       <form id="vm-overview-filter">
         <Field name="shared" type="checkbox">
           {({ input }) => (
@@ -45,6 +45,6 @@ export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
           </Field>
         </FormField>
       </form>
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 );

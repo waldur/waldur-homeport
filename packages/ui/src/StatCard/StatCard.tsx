@@ -29,10 +29,7 @@ import { cn } from '../cn';
  * The value's own font-semibold (600) is correct as-is: it has no explicit weight
  * class in the real component, so it inherits `$headings-font-weight: $font-weight-bolder`
  * = 600 from its real `<h1>` tag. The card itself is `.card-bordered`
- * (unconditionally bordered, box-shadow: none in BOTH themes) — a
- * different real variant than Card.tsx's own default (theme-conditional
- * shadow-in-light/border-in-dark, see waldur-design-tokens/card.css's comment on
- * --card-shadow/--card-border-color), so those are overridden here too.
+ * (Card's `bordered`).
  */
 export interface StatCardProps {
   label: string;
@@ -59,24 +56,7 @@ export const StatCard = ({
   size = 'md',
   className,
 }: StatCardProps) => (
-  <Card
-    className={cn(
-      'shadow-none border-secondary',
-      // dark:bg override, not a change to --card-bg itself: the
-      // real bordered card (measured live via
-      // e2e-visual/stat-card-parity.spec.ts) sits flush with the page in
-      // dark mode (rgb(12,17,29) = --color-gray-950, same as
-      // --page-bg) rather than getting an elevated tint — a
-      // border-only card doesn't need one. --card-bg's dark value
-      // (--color-gray-900, one step lighter) is correct for Card's default
-      // shadow-only/no-border light-mode-style rendering elsewhere, which
-      // has no live Metronic source to verify against yet — only this
-      // specific bordered variant has been confirmed, so only this
-      // instance is overridden.
-      'dark:bg-[var(--page-bg)]',
-      className,
-    )}
-  >
+  <Card bordered className={className}>
     {/* No `gap` here: the real component uses two different row gaps
         (label->value is .mt-3 = 0.75rem, value->footer is .mt-2 = 0.5rem) —
         a single uniform gap-3 (measured via e2e-visual/stat-card-parity.spec.ts)

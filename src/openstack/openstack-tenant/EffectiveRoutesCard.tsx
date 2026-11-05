@@ -6,7 +6,14 @@ import {
   openstackRoutersEffectiveRoutesRetrieve,
 } from 'waldur-js-client';
 
-import { BadgeVariant, Code } from 'waldur-ui';
+import {
+  BadgeVariant,
+  Code,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -165,12 +172,14 @@ export const EffectiveRoutesCard: FC<Props> = ({ routerUuid }) => {
   }));
 
   return (
-    <div className="card mt-3">
-      <div className="card-header flex justify-between items-center">
-        <div className="card-title mb-0">{translate('Effective routes')}</div>
+    <Card className="mt-3">
+      <CardHeader className="flex justify-between items-center">
+        <CardTitle as="div" className="mb-0">
+          {translate('Effective routes')}
+        </CardTitle>
         <SnatBadge snat={data.snat} hasGateway={data.has_external_gateway} />
-      </div>
-      <div className="card-body">
+      </CardHeader>
+      <CardContent>
         {rows.length === 0 ? (
           <div className="text-quaternary">
             {translate(
@@ -180,7 +189,7 @@ export const EffectiveRoutesCard: FC<Props> = ({ routerUuid }) => {
         ) : (
           <SimpleTable<EffectiveRoute> columns={ROUTE_COLUMNS} rows={rows} />
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

@@ -1,4 +1,4 @@
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -33,13 +33,13 @@ export const ArrowDebugPanel = ({ settings }: ArrowDebugPanelProps) => {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="card">
-        <div className="card-header">
-          <div className="card-title">
+      <Card>
+        <CardHeader>
+          <CardTitle as="div">
             <h5 className="mb-0">{translate('Debug Actions')}</h5>
-          </div>
-        </div>
-        <div className="card-body">
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           <AlertItem
             type="floating"
             variant="warning"
@@ -58,8 +58,8 @@ export const ArrowDebugPanel = ({ settings }: ArrowDebugPanelProps) => {
               <CleanupConsumptionAction />
             </div>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

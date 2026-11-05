@@ -2,6 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffectOnce } from 'react-use';
 import { freeipaProfilesList } from 'waldur-js-client';
 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+} from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { goToNotFound } from '@/error/utils';
@@ -44,13 +52,13 @@ export const FreeIpaAccount = () => {
   if (error) return <>{translate('Unable to load data.')}</>;
 
   return (
-    <div className="card card-bordered">
-      <div className="card-header">
-        <div className="card-toolbar flex flex-wrap gap-3 w-full">
+    <Card bordered>
+      <CardHeader>
+        <CardToolbar className="flex flex-wrap gap-3 w-full">
           <div className="flex-1 min-w-0 order-0 sm:max-w-1/4">
-            <div className="card-title">
+            <CardTitle as="div">
               <span className="h3 me-1.5">{translate('FreeIPA account')}</span>
-            </div>
+            </CardTitle>
           </div>
           {profile && (
             <div className="w-full sm:w-auto sm:flex-none order-1 sm:order-2 min-w-1/4 ms-auto">
@@ -62,15 +70,15 @@ export const FreeIpaAccount = () => {
               </div>
             </div>
           )}
-        </div>
-      </div>
-      <div className="card-body">
+        </CardToolbar>
+      </CardHeader>
+      <CardContent>
         {profile ? (
           <FreeIPAAccountEdit profile={profile} />
         ) : (
           <FreeIPAAccountCreate onProfileAdded={refreshProfile} />
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

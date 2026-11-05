@@ -3,7 +3,13 @@ import classNames from 'classnames';
 import { createElement, useCallback } from 'react';
 
 import { translate } from 'waldur-i18n-runtime';
-import { BaseButton, useBreakpointDown } from 'waldur-ui';
+import {
+  BaseButton,
+  CardHeader,
+  CardTitle,
+  CardToolbar,
+  useBreakpointDown,
+} from 'waldur-ui';
 
 import { titleCase } from '@/core/utils';
 
@@ -58,7 +64,9 @@ export function TableToolbarActions() {
         // row, and a trigger still under display:none when floating-ui reads
         // its rect anchors at the viewport origin, over the sidebar nav.
         actions.toggleFilterMenu(true);
-        const parent: HTMLElement = event.currentTarget.closest('.card-table');
+        const parent: HTMLElement = event.currentTarget.closest(
+          '[data-slot="card"][data-variant="table"]',
+        );
         if (!parent) return;
         const addFilterButton =
           parent.querySelector<HTMLButtonElement>('[data-add-filter]');
@@ -213,7 +221,7 @@ export function TableToolbarTitle() {
 
   return (
     <div className="grow order-0" data-testid="table-toolbar-title-container">
-      <div className="card-title h5">
+      <CardTitle as="div" className="h5">
         {!config.hideTitle && (
           <div className="me-1.5">
             <span className={classNames('h3', display.titleClassName)}>
@@ -231,7 +239,7 @@ export function TableToolbarTitle() {
         {!config.hideRefresh && !portal?.refresh && (
           <TableRefreshButton fetch={actions.fetch} loading={loading} />
         )}
-      </div>
+      </CardTitle>
     </div>
   );
 }
@@ -250,18 +258,17 @@ export function TableToolbar() {
   }
 
   return (
-    <div
+    <CardHeader
       className={classNames(
         'border-b border-b-secondary',
         display.headerClassName,
-        'card-header',
       )}
       data-testid="table-toolbar"
     >
-      <div className="card-toolbar flex flex-wrap items-center gap-3 w-full">
+      <CardToolbar className="flex flex-wrap items-center gap-3 w-full">
         <TableToolbarTitle />
         {!portal?.toolbar && <TableToolbarActions />}
-      </div>
-    </div>
+      </CardToolbar>
+    </CardHeader>
   );
 }
