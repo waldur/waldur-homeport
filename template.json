@@ -9479,6 +9479,23 @@
       "feature_area": "database-stats"
     }
   },
+  "Cache ratio": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "Cache ratio {ratio}": {
+    "context": {
+      "variables": {
+        "ratio": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "ai-assistant"
+    }
+  },
+  "Cache reads": {},
+  "Cache writes": {},
   "Cached {age}": {
     "context": {
       "variables": {
@@ -55696,6 +55713,11 @@
       "feature_area": "actions"
     }
   },
+  "Share of input tokens served from the provider's prompt cache: cached ÷ input. Turns whose provider did not report cache hits are left out rather than counted as misses.": {
+    "context": {
+      "feature_area": "ai-assistant"
+    }
+  },
   "Share of judged threads where the judge flagged a claim the tool results did not support. Expand a thread to read what it caught.": {
     "context": {
       "feature_area": "ai-assistant"
@@ -79920,6 +79942,16 @@
       "feature_area": "pubsub"
     }
   },
+  "{count} read from cache": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "ai-assistant"
+    }
+  },
   "{count} releases with breaking changes": {
     "context": {
       "variables": {
@@ -80214,6 +80246,16 @@
         }
       },
       "feature_area": "affiliated-organizations"
+    }
+  },
+  "{count} written to cache": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "ai-assistant"
     }
   },
   "{count} {key} reactions — click to {verb} yours": {
@@ -82065,6 +82107,23 @@
         }
       },
       "feature_area": "import-usage",
+      "action_type": "read"
+    }
+  },
+  "{read} of {input} input tokens read from cache ({ratio})": {
+    "context": {
+      "variables": {
+        "read": {
+          "type": "unknown"
+        },
+        "input": {
+          "type": "unknown"
+        },
+        "ratio": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "ai-assistant",
       "action_type": "read"
     }
   },

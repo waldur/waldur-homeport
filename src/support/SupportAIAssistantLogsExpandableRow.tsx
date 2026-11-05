@@ -111,6 +111,10 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
         tokenId={`tokens-${selectedMessage.uuid}`}
         inputTokens={isAssistant ? selectedMessage.input_tokens : null}
         outputTokens={isAssistant ? selectedMessage.output_tokens : null}
+        cacheReadTokens={isAssistant ? selectedMessage.cache_read_tokens : null}
+        cacheWriteTokens={
+          isAssistant ? selectedMessage.cache_write_tokens : null
+        }
       />
       <div className="message-body">
         {hasTopRowItems && (
@@ -191,11 +195,13 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
         )}
         <div
           className={classNames('p-2.5 rounded-lg chat-log-bubble', {
-            'border-l border-l-secondary border-3':
+            // Left accent only: Tailwind's preflight gives every side a solid
+            // style, so an all-sides width or colour frames the whole bubble.
+            'border-l-3':
               selectedMessage.is_flagged || feedbackSentiment !== null,
-            'border-danger':
+            'border-l-danger':
               selectedMessage.is_flagged || feedbackSentiment === 'negative',
-            'border-success':
+            'border-l-success':
               !selectedMessage.is_flagged && feedbackSentiment === 'positive',
           })}
         >
@@ -323,6 +329,8 @@ export const SupportAIAssistantLogsExpandableRow: FunctionComponent<OwnProps> =
                   label={translate('Title input / output tokens')}
                   inputTokens={row.title_gen_input_tokens}
                   outputTokens={row.title_gen_output_tokens}
+                  cacheReadTokens={row.title_gen_cache_read_tokens}
+                  cacheWriteTokens={row.title_gen_cache_write_tokens}
                 />
               </div>
               {processedMessages.map((messageGroup) => (

@@ -94,19 +94,80 @@ export const formatDetectionCategories = (
 };
 
 /**
+ * Prompt-cache reads and writes, one line each. A line is left out, not shown
+ * as 0, when the provider did not report that figure: vLLM reports reads but
+ * never writes, and "0 written" would claim a measurement nobody made.
+ */
+export const CacheFigures: FunctionComponent<{
+  read?: number | null;
+  write?: number | null;
+}> = ({ read, write }) => (
+  <>
+    {read != null && (
+      <div>
+        {translate('{count} read from cache', {
+          count: formatUsageValue(read),
+        })}
+      </div>
+    )}
+    {write != null && (
+      <div>
+        {translate('{count} written to cache', {
+          count: formatUsageValue(write),
+        })}
+      </div>
+    )}
+  </>
+);
+
+/**
  * Input/output token split. Renders nothing when neither figure was recorded,
  * which is how turns predating per-message usage tracking read.
+ *
+ * Cache reads and writes are part of the input, so they annotate it in the
+ * hover rather than inline, where they pushed the output figure past the
+ * gutter's edge.
  */
 export const TokenUsageBadge: FunctionComponent<{
   id: string;
   label: string;
   inputTokens?: number | null;
   outputTokens?: number | null;
+  cacheReadTokens?: number | null;
+  cacheWriteTokens?: number | null;
   prefix?: string;
-}> = ({ label, inputTokens, outputTokens, prefix }) => {
+}> = ({
+  label,
+  inputTokens,
+  outputTokens,
+  cacheReadTokens,
+  cacheWriteTokens,
+  prefix,
+}) => {
   if (inputTokens == null && outputTokens == null) return null;
+  // Per turn, the read reads better against the input it came out of.
+  const read =
+    inputTokens != null && cacheReadTokens != null
+      ? translate('{read} of {input} input tokens read from cache ({ratio})', {
+          read: formatUsageValue(cacheReadTokens),
+          input: formatUsageValue(inputTokens),
+          ratio: asPercent(inputTokens ? cacheReadTokens / inputTokens : null),
+        })
+      : null;
   return (
-    <Tooltip label={label}>
+    <Tooltip
+      label={
+        read || cacheWriteTokens != null ? (
+          <>
+            <div>{label}</div>
+            {read && <div>{read}</div>}
+            <CacheFigures write={cacheWriteTokens} />
+          </>
+        ) : (
+          label
+        )
+      }
+    >
       <span className="text-quaternary whitespace-nowrap">
         {prefix}
         {inputTokens != null && <>↓ {formatUsageValue(inputTokens)}</>}
@@ -144,6 +205,8 @@ export const MessageGutter: FunctionComponent<
     tokenLabel?: string;
     inputTokens?: number | null;
     outputTokens?: number | null;
+    cacheReadTokens?: number | null;
+    cacheWriteTokens?: number | null;
   }>
 > = ({
   sender,
@@ -152,6 +215,8 @@ export const MessageGutter: FunctionComponent<
   tokenLabel,
   inputTokens,
   outputTokens,
+  cacheReadTokens,
+  cacheWriteTokens,
   children,
 }) => {
   const isDesktop = useBreakpointUp('sm');
@@ -170,6 +235,8 @@ export const MessageGutter: FunctionComponent<
         label={tokenLabel ?? translate('Message input / output tokens')}
         inputTokens={inputTokens}
         outputTokens={outputTokens}
+        cacheReadTokens={cacheReadTokens}
+        cacheWriteTokens={cacheWriteTokens}
       />
       {children}
     </div>
@@ -188,6 +255,17 @@ export const SatisfactionLabel: FunctionComponent<{ id?: string }> = () => (
     <HelpIcon
       label={translate(
         'Share of rated replies marked helpful: positive ÷ (positive + negative). Counts every rating ever submitted, not a recent window, and ignores replies nobody rated.',
+      )}
+    />
+  </>
+);
+
+export const CacheRatioLabel: FunctionComponent = () => (
+  <>
+    {translate('Cache ratio')}{' '}
+    <HelpIcon
+      label={translate(
+        "Share of input tokens served from the provider's prompt cache: cached ÷ input. Turns whose provider did not report cache hits are left out rather than counted as misses.",
       )}
     />
   </>

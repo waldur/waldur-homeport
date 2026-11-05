@@ -459,6 +459,24 @@ describe('api', () => {
       expect(result.rows.map((r) => r.name)).toEqual(['a', 'b', null]);
     });
 
+    it('keeps null and undefined values last when sorting descending', async () => {
+      const fetcher = createClientPaginatedFetcher([
+        { ratio: 0.5 },
+        { ratio: null },
+        { ratio: 0.9 },
+        { ratio: undefined },
+      ]);
+
+      const result = await fetcher(makeRequest({ filter: { o: '-ratio' } }));
+
+      expect(result.rows.map((r) => r.ratio)).toEqual([
+        0.9,
+        0.5,
+        null,
+        undefined,
+      ]);
+    });
+
     it('does not mutate the source array when sorting', async () => {
       const data = [{ size: 2 }, { size: 1 }];
       const fetcher = createClientPaginatedFetcher(data);
