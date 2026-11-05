@@ -63,6 +63,7 @@ export const getSettingGroupLocations = (): Record<
   const orgProjectSettingsPage = translate('Organization & project settings');
   const databasePage = translate('Database');
   const loggingTelemetryPage = translate('Logging & telemetry');
+  const workersPage = translate('Workers & messaging');
 
   return {
     // Branding (User interface › Branding)
@@ -487,6 +488,15 @@ export const getSettingGroupLocations = (): Record<
       category: sysManagementCategory,
       pageTitle: loggingTelemetryPage,
       tabTitle: translate('Telemetry'),
+    },
+    [translate('Event consumers')]: {
+      state: 'admin-workers',
+      params: { tab: 'pubsub' },
+      category: sysManagementCategory,
+      pageTitle: workersPage,
+      tabTitle: translate('PubSub health'),
+      // The Workers page shows its PubSub health tab to staff only
+      permissions: [isStaff],
     },
   };
 };

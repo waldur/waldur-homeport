@@ -12,6 +12,7 @@ import { TabToolbar } from '../TabToolbar';
 
 import { getPubSubOverview } from './api';
 import { EventConsumersCard } from './EventConsumersCard';
+import { EventConsumerSettings } from './EventConsumerSettings';
 import { EventSubscriptionQueuesCard } from './EventSubscriptionQueuesCard';
 import { PubSubCircuitBreakerCard } from './PubSubCircuitBreakerCard';
 import { PubSubCircuitBreakerResetButton } from './PubSubCircuitBreakerResetButton';
@@ -88,6 +89,7 @@ export const PubSubHealthPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
       <PubSubDeadLetterQueueCard />
       <PubSubTopQueuesCard />
       <EventConsumersCard />
+      <EventConsumerSettings />
       <EventSubscriptionQueuesCard />
     </div>
   );
