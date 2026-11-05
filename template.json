@@ -11134,6 +11134,11 @@
       "feature_area": "steps"
     }
   },
+  "Click Continue again to send the invitations anyway.": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "Click Sync to fetch consumption data and create usage records": {
     "context": {
       "feature_area": "settings"
@@ -23577,6 +23582,11 @@
       "feature_area": "hpc"
     }
   },
+  "Fix the highlighted fields to continue.": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "Fixed": {
     "context": {
       "primary_ui_type": "label"
@@ -24702,6 +24712,11 @@
       "feature_area": "openstack-instance"
     }
   },
+  "Go to first row": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "Go to marketplace": {
     "context": {
       "feature_area": "list"
@@ -24715,6 +24730,11 @@
   "Go to profile": {
     "context": {
       "feature_area": "auth"
+    }
+  },
+  "Go to row": {
+    "context": {
+      "feature_area": "create"
     }
   },
   "Go to service catalog": {},
@@ -38652,6 +38672,16 @@
   "One resource": {
     "context": {
       "feature_area": "service-providers"
+    }
+  },
+  "One row has a warning.": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
+  "One row needs attention before you can continue.": {
+    "context": {
+      "feature_area": "create"
     }
   },
   "One template": {
@@ -56816,6 +56846,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "roles"
+    }
+  },
+  "Some rows need attention. Fix the rows marked in red to continue.": {
+    "context": {
+      "feature_area": "create"
     }
   },
   "Some selected projects cannot be deleted due to insufficient permissions.": {
@@ -80070,6 +80105,26 @@
         }
       },
       "feature_area": "review"
+    }
+  },
+  "{count} rows have a warning.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
+  "{count} rows need attention before you can continue.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "create"
     }
   },
   "{count} samples, {first} – {last}": {

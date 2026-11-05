@@ -1,8 +1,14 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
-import { Fragment, ReactNode, useCallback, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { Field, useField } from 'react-final-form';
 
-import { BaseButton, FormField, HelpIcon, TablePagination } from 'waldur-ui';
+import {
+  AlertItem,
+  BaseButton,
+  FormField,
+  HelpIcon,
+  TablePagination,
+} from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { usePagination } from '@/core/usePagination';
@@ -19,9 +25,15 @@ import {
   getExistingRoleMessage,
 } from '@/permissions/existingRoles';
 
-import { findVerdictForRow, isVerdictForRow, RowVerdict } from '../rowVerdicts';
+import { findVerdictForRow, RowVerdict } from '../rowVerdicts';
 
 import { RoleAndProjectSelectField } from './RoleAndProjectSelectField';
+import {
+  FlaggedRow,
+  getFlaggedRows,
+  getRowFeedback,
+  VerdictLists,
+} from './rowFeedback';
 
 const getRowIndexFromFieldName = (fieldName: string): number | null => {
   if (!fieldName || typeof fieldName !== 'string') return null;
@@ -122,6 +134,24 @@ const getFeedbackColSpan = () =>
   isFeatureVisible(InvitationsFeatures.conceal_civil_number) ? 3 : 4;
 
 /**
+ * The verdict lists Continue writes into the form values. Only their values
+ * are subscribed, so typing in a row does not re-render every subscriber.
+ */
+const useVerdictLists = (): VerdictLists => {
+  const subscription = { subscription: { value: true } };
+  return {
+    inForm: useField<RowVerdict[]>('_duplicateInFormEmails', subscription).input
+      .value,
+    pending: useField<RowVerdict[]>('_duplicateEmails', subscription).input
+      .value,
+    blocks: useField<ExistingRoleHit[]>('_existingRoleBlocks', subscription)
+      .input.value,
+    warnings: useField<ExistingRoleHit[]>('_existingRoleWarnings', subscription)
+      .input.value,
+  };
+};
+
+/**
  * The server verdicts for one row, rendered as a full-width row under it.
  *
  * Read from form values rather than from the field's error: a row on another
@@ -132,94 +162,158 @@ const getFeedbackColSpan = () =>
  * is what gates Continue. Only this row's email and role and the verdict lists
  * are subscribed, so typing elsewhere does not re-render every row.
  */
-const RowFeedback = ({ name, rows }: { name: string; rows: any[] }) => {
-  const useList = (listName: string) =>
-    useField<RowVerdict[]>(listName, { subscription: { value: true } }).input
-      .value;
-  const duplicateInForm = useList('_duplicateInFormEmails');
-  const pending = useList('_duplicateEmails');
-  const blocks = useList('_existingRoleBlocks') as ExistingRoleHit[] | '';
-  const warnings = useList('_existingRoleWarnings') as ExistingRoleHit[] | '';
+const RowFeedbackRow = ({ name, rows }: { name: string; rows: any[] }) => {
+  const lists = useVerdictLists();
   const {
     input: { value: email },
   } = useField<string>(`${name}.email`, { subscription: { value: true } });
   const {
     input: { value: roleProject },
   } = useField(`${name}.role_project`, { subscription: { value: true } });
-  const row = { email, role_project: roleProject };
 
-  let message: ReactNode = null;
-  const inForm = findVerdictForRow(duplicateInForm, row);
-  if (inForm && rows.filter((r) => isVerdictForRow(inForm, r)).length > 1) {
-    message = (
-      <FieldError
-        error={translate(
-          'This email and role combination is entered more than once.',
-        )}
-      />
-    );
-  } else if (findVerdictForRow(pending, row)) {
-    message = (
-      <FieldError
-        error={translate('This email already has a pending invitation.')}
-      />
-    );
-  } else {
-    const block = findVerdictForRow(blocks, row);
-    const warning = findVerdictForRow(warnings, row);
-    if (block) {
-      message = <FieldError error={getExistingRoleMessage(block)} />;
-    } else if (warning) {
-      message = <FieldWarning error={getExistingRoleMessage(warning)} />;
-    }
-  }
-  if (!message) return null;
+  const feedback = getRowFeedback(
+    { email, role_project: roleProject },
+    rows,
+    lists,
+  );
+  if (!feedback) return null;
   return (
     <tr className="text-sm">
       <td colSpan={getFeedbackColSpan()} className="border-0 pt-0 pb-1.5">
-        {message}
+        {feedback.blocking ? (
+          <FieldError error={feedback.message} />
+        ) : (
+          <FieldWarning error={feedback.message} />
+        )}
       </td>
     </tr>
   );
 };
 
+/** The rows the summary and the automatic jump point at: blocking ones first. */
+const getRowsToReveal = (flagged: FlaggedRow[]) => {
+  const blocking = flagged.filter((row) => row.blocking);
+  return blocking.length ? blocking : flagged;
+};
+
 /**
- * Continue writes its verdicts next to the rows, but the rows are paginated:
- * a verdict on another page would leave Continue looking like it did nothing.
- * Whenever a new set of verdicts arrives, show the page of the first flagged
- * row unless the current page already has one.
+ * Continue writes its verdicts next to the rows, but the rows are paginated
+ * and the dialog body scrolls: a verdict off screen would leave Continue
+ * looking like it did nothing. Whenever a new set of verdicts arrives, bring
+ * the first flagged row into view and focus its email, preferring one on the
+ * current page.
  */
-const useShowFirstFlaggedRow = (
+const useRevealFlaggedRow = (
   rows: any[] | undefined,
+  lists: VerdictLists,
   page: number,
   pageSize: number,
   setPage: (page: number) => void,
 ) => {
-  const useList = (name: string) =>
-    useField<RowVerdict[]>(name, { subscription: { value: true } }).input.value;
-  const inForm = useList('_duplicateInFormEmails');
-  const pending = useList('_duplicateEmails');
-  const blocks = useList('_existingRoleBlocks');
-  const warnings = useList('_existingRoleWarnings');
+  const rowRefs = useRef(new Map<number, HTMLTableRowElement>());
+  const [target, setTarget] = useState<number | null>(null);
+
+  const revealRow = useCallback(
+    (index: number) => {
+      const rowPage = Math.floor(index / pageSize) + 1;
+      if (rowPage !== page) setPage(rowPage);
+      setTarget(index);
+    },
+    [page, pageSize, setPage],
+  );
+
+  // Runs once the row's page has rendered, so its element exists.
   useEffect(() => {
-    const pairs = [inForm, pending, blocks, warnings]
-      .filter(Array.isArray)
-      .flat();
-    if (!pairs.length || !rows?.length) return;
-    const flagged = rows
-      .map((row, index) =>
-        pairs.some((pair) => isVerdictForRow(pair, row)) ? index : -1,
-      )
-      .filter((index) => index >= 0);
-    if (!flagged.length) return;
+    if (target === null) return;
+    const row = rowRefs.current.get(target);
+    if (!row) return;
+    row.scrollIntoView?.({ block: 'center', behavior: 'smooth' });
+    row.querySelector('input')?.focus({ preventScroll: true });
+    setTarget(null);
+  }, [target, page]);
+
+  useEffect(() => {
+    const candidates = getRowsToReveal(getFlaggedRows(rows, lists));
+    if (!candidates.length) return;
     const start = (page - 1) * pageSize;
-    if (flagged.some((index) => index >= start && index < start + pageSize)) {
-      return;
-    }
-    setPage(Math.floor(flagged[0] / pageSize) + 1);
+    const onPage = candidates.find(
+      ({ index }) => index >= start && index < start + pageSize,
+    );
+    revealRow((onPage ?? candidates[0]).index);
     // Keyed on the verdicts only: paging away from a flagged row, or editing
     // one, must not pull the page back.
-  }, [inForm, pending, blocks, warnings]);
+  }, [lists.inForm, lists.pending, lists.blocks, lists.warnings]);
+
+  return { rowRefs, revealRow };
+};
+
+/**
+ * One line next to the footer that says why Continue is disabled (or held
+ * once for warnings), so the inviter does not have to find the flagged rows
+ * in a long list to learn that anything is wrong.
+ */
+const FlaggedRowsSummary = ({
+  flagged,
+  onReveal,
+}: {
+  flagged: FlaggedRow[];
+  onReveal: (index: number) => void;
+}) => {
+  const rows = getRowsToReveal(flagged);
+  if (!rows.length) return null;
+  const isBlocking = rows[0].blocking;
+  const messages = Array.from(new Set(rows.map((row) => row.message)));
+  const count = rows.length;
+
+  const title = isBlocking
+    ? count === 1
+      ? translate('One row needs attention before you can continue.')
+      : translate('{count} rows need attention before you can continue.', {
+          count,
+        })
+    : count === 1
+      ? translate('One row has a warning.')
+      : translate('{count} rows have a warning.', { count });
+
+  return (
+    <AlertItem
+      type="floating"
+      variant={isBlocking ? 'error' : 'warning'}
+      iconSize="md"
+      className="mt-3"
+      role="status"
+      title={title}
+      body={
+        <>
+          {messages.length === 1 ? (
+            messages[0]
+          ) : (
+            <ul className="list-disc ps-4 mb-0">
+              {messages.map((message) => (
+                <li key={message}>{message}</li>
+              ))}
+            </ul>
+          )}
+          {!isBlocking && (
+            <p className="mb-0">
+              {translate(
+                'Click Continue again to send the invitations anyway.',
+              )}
+            </p>
+          )}
+        </>
+      }
+      actions={
+        <BaseButton
+          variant="text-primary"
+          onClick={() => onReveal(rows[0].index)}
+          label={
+            count === 1 ? translate('Go to row') : translate('Go to first row')
+          }
+        />
+      }
+    />
+  );
 };
 
 export const EmailsListGroup = ({
@@ -242,7 +336,15 @@ export const EmailsListGroup = ({
     hasPages,
   } = usePagination(fields);
 
-  useShowFirstFlaggedRow(fields.value, page, pageSize, setPage);
+  const lists = useVerdictLists();
+  const { rowRefs, revealRow } = useRevealFlaggedRow(
+    fields.value,
+    lists,
+    page,
+    pageSize,
+    setPage,
+  );
+  const flagged = getFlaggedRows(fields.value, lists);
 
   const addRow = useCallback(() => {
     let emptyEmails = 0;
@@ -312,7 +414,13 @@ export const EmailsListGroup = ({
                   const rowEmail = fields.value?.[i]?.email;
                   return (
                     <Fragment key={user}>
-                      <tr className="text-sm">
+                      <tr
+                        className="text-sm"
+                        ref={(element) => {
+                          if (element) rowRefs.current.set(i, element);
+                          else rowRefs.current.delete(i);
+                        }}
+                      >
                         <td>
                           <Field
                             name={`${user}.email`}
@@ -426,7 +534,7 @@ export const EmailsListGroup = ({
                           />
                         </td>
                       </tr>
-                      <RowFeedback name={user} rows={fields.value} />
+                      <RowFeedbackRow name={user} rows={fields.value} />
                     </Fragment>
                   );
                 })}
@@ -468,6 +576,8 @@ export const EmailsListGroup = ({
         gotoPage={setPage}
         bordered={false}
       />
+
+      <FlaggedRowsSummary flagged={flagged} onReveal={revealRow} />
     </div>
   );
 };

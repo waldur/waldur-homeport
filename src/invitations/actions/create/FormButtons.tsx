@@ -16,6 +16,8 @@ interface FormButtonsProps {
   onContinueClick?: (form: any) => Promise<boolean>;
   form?: any;
   actionDisabledReason?: string;
+  /** Why Continue is disabled while the rows are invalid. */
+  invalidReason?: string;
 }
 
 export const FormButtons: FC<FormButtonsProps> = ({
@@ -27,6 +29,7 @@ export const FormButtons: FC<FormButtonsProps> = ({
   onContinueClick,
   form,
   actionDisabledReason,
+  invalidReason,
 }) => {
   const actionDisabled = Boolean(actionDisabledReason);
   const handleContinue = useCallback(async () => {
@@ -47,7 +50,13 @@ export const FormButtons: FC<FormButtonsProps> = ({
         className="w-[150px]"
         onClick={handleContinue}
         disabled={!valid || isCheckingDuplicates || actionDisabled}
-        disabledReason={actionDisabled ? actionDisabledReason : undefined}
+        disabledReason={
+          actionDisabled
+            ? actionDisabledReason
+            : !valid
+              ? invalidReason
+              : undefined
+        }
         label={translate('Continue')}
         variant="primary"
         size="lg"

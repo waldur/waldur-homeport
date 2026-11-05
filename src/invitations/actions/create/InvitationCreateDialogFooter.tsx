@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { FormSpy } from 'react-final-form';
 
+import { translate } from '@/i18n';
 import {
   getOnlyOneProjectManagerTooltip,
   isInvitationRowProjectManagerBlocked,
@@ -12,6 +13,7 @@ import { useProjectsActiveManagerMap } from '@/project/team/useProjectHasActiveM
 import { GroupInviteRow, InvitationContext } from '../types';
 
 import { FormButtons } from './FormButtons';
+import { getFlaggedRows, getVerdictLists } from './rowFeedback';
 
 interface InvitationCreateDialogFooterProps {
   resolve: InvitationContext;
@@ -35,11 +37,15 @@ const getFallbackProjectUuid = (
     : undefined);
 
 const InvitationCreateDialogFooterInner: FC<
-  InvitationCreateDialogFooterProps & { rows: GroupInviteRow[] }
+  InvitationCreateDialogFooterProps & {
+    rows: GroupInviteRow[];
+    hasBlockingRows: boolean;
+  }
 > = ({
   resolve,
   defaultProject,
   rows,
+  hasBlockingRows,
   step,
   setStep,
   submitting,
@@ -85,6 +91,13 @@ const InvitationCreateDialogFooterInner: FC<
       onContinueClick={onContinueClick}
       form={form}
       actionDisabledReason={actionDisabledReason}
+      invalidReason={
+        hasBlockingRows
+          ? translate(
+              'Some rows need attention. Fix the rows marked in red to continue.',
+            )
+          : translate('Fix the highlighted fields to continue.')
+      }
     />
   );
 };
@@ -97,6 +110,10 @@ export const InvitationCreateDialogFooter: FC<
       <InvitationCreateDialogFooterInner
         {...props}
         rows={(values?.rows ?? []) as GroupInviteRow[]}
+        hasBlockingRows={getFlaggedRows(
+          values?.rows,
+          getVerdictLists(values),
+        ).some((row) => row.blocking)}
       />
     )}
   </FormSpy>
