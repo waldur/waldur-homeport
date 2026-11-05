@@ -81,7 +81,7 @@ export function useTableExport(table, props?) {
 
   /** The table's own list request for every page: its filters, search term
    * and sorting. */
-  function buildRequest(config: ExportConfig): TableRequest {
+  function buildRequest(): TableRequest {
     // Use current filter from props (passed from Table component) instead of
     // stale filter from registry, as the registry filter is captured only once
     // when the table is first registered. Also check tableExtraFilters for
@@ -91,9 +91,9 @@ export function useTableExport(table, props?) {
       tableKey: table,
       pageSize: Math.max(tableState.pagination.resultCount, 200),
       currentPage: 1,
-      filter: config.withFilters ? { ...currentFilter } : {},
+      filter: { ...currentFilter },
     };
-    if (config.withFilters && options.queryField && tableState.query) {
+    if (options.queryField && tableState.query) {
       request.filter[options.queryField] = tableState.query;
     }
     if (tableState.sorting && tableState.sorting.field) {
@@ -105,11 +105,7 @@ export function useTableExport(table, props?) {
   /** Every field the API returns. The rows on screen were fetched with only
    * the visible columns' fields, so the current page is fetched again too. */
   async function fetchApiRows(config: ExportConfig) {
-    // The current page is the rows on screen, so the table's filters apply
-    // whatever the toggle says, as they do for the other formats.
-    const request = buildRequest(
-      config.allPages ? config : { ...config, withFilters: true },
-    );
+    const request = buildRequest();
     delete request.filter.field;
     if (config.allPages) {
       return fetchAll(fetchData, request);
@@ -123,7 +119,7 @@ export function useTableExport(table, props?) {
     const exportColumns = customExport ? [] : getExportColumns(props);
 
     if (config.allPages) {
-      const request = buildRequest(config);
+      const request = buildRequest();
 
       if (customExport) {
         if (exportKeys && exportKeys.length > 0) {
@@ -200,10 +196,7 @@ export function useTableExport(table, props?) {
     try {
       // The server writes this one; nothing to assemble from the rows.
       if (config.content === 'full' && props?.fullExport) {
-        await props.fullExport.download({
-          withFilters: Boolean(config.withFilters),
-          query: config.withFilters ? tableState.query : undefined,
-        });
+        await props.fullExport.download({ query: tableState.query });
         showSuccess(
           translate('Table has been exported to {format}.', { format: 'CSV' }),
         );

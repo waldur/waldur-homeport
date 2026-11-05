@@ -183,8 +183,8 @@ interface TablePortal {
 export interface TableFullExport {
   label: string;
   description?: string;
-  /** `query` is the table's search term, passed only when filters apply. */
-  download(options: { withFilters: boolean; query?: string }): Promise<void>;
+  /** `query` is the table's search term. */
+  download(options: { query?: string }): Promise<void>;
 }
 
 export interface TableProps<RowType = any> extends TableState {

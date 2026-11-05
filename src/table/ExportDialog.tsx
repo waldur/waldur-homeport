@@ -30,9 +30,8 @@ export const ExportDialog = (props: ExportDialogProps) => {
   const fullExport = props.resolve.ownProps?.fullExport;
   const tableState = useSelector(getTableState(props.resolve.table));
 
-  // Caught before any row is fetched. Without the table filters the row
-  // count is not known up front; the exporter checks the exact numbers again
-  // before it sends anything.
+  // Caught before any row is fetched; the exporter checks the exact numbers
+  // again before it sends anything.
   const getPdfWarning = (values: ExportConfig) => {
     if (values.format !== 'pdf' || values.content === 'full') return undefined;
     const ownProps = props.resolve.ownProps;
@@ -48,7 +47,6 @@ export const ExportDialog = (props: ExportDialogProps) => {
   const initialValues = useMemo(
     () => ({
       format: props.resolve?.format,
-      withFilters: true,
       allPages: true,
       content: 'visible' as const,
     }),
@@ -149,13 +147,6 @@ export const ExportDialog = (props: ExportDialogProps) => {
                     title={pdfWarning}
                   />
                 )}
-
-                <BooleanGroup
-                  name="withFilters"
-                  label={translate('Apply table filters')}
-                  hideLabel
-                  disabled={submitting}
-                />
 
                 <BooleanGroup
                   name="allPages"
