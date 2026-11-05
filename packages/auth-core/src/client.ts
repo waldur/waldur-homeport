@@ -199,17 +199,22 @@ client.interceptors.response.use(addApiErrorBreadcrumb);
  * Generic GET request helper using native fetch.
  * Handles both JSON and binary (blob) responses automatically based on content type.
  * @param endpoint The API endpoint to fetch.
+ * @param signal Aborts the request.
  * @returns Typed result or Blob.
  */
-export async function get<T = any>(endpoint: string): Promise<T> {
+export async function get<T = any>(
+  endpoint: string,
+  signal?: AbortSignal,
+): Promise<T> {
   const config = getAuthCoreConfig();
   const response = await fetch(
     fixURL(endpoint),
     config.storage.token.get()
       ? {
           headers: { Authorization: getAuthHeader() },
+          signal,
         }
-      : {},
+      : { signal },
   );
   if (!response.ok) {
     throw response;

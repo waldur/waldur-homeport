@@ -50,7 +50,7 @@ describe('FileDownloader', () => {
     render(<FileDownloader url={mockUrl} name={mockName} />);
     await user.click(screen.getByRole('button'));
 
-    expect(api.get).toHaveBeenCalledWith(mockUrl);
+    expect(api.get).toHaveBeenCalledWith(mockUrl, undefined);
     expect(URL.createObjectURL).toHaveBeenCalledWith(mockBlob);
     expect(click).toHaveBeenCalledOnce();
     expect(screen.queryByRole('link')).not.toBeInTheDocument();

@@ -7,8 +7,12 @@ import { saveFile } from '@/core/saveFile';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
-export const downloadFile = async (url: string, name: string) => {
-  const blob = await get<Blob>(url);
+export const downloadFile = async (
+  url: string,
+  name: string,
+  signal?: AbortSignal,
+) => {
+  const blob = await get<Blob>(url, signal);
   saveFile(blob, name);
 };
 
