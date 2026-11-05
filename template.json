@@ -3226,6 +3226,27 @@
       "feature_area": "changelog"
     }
   },
+  "Affects {offerings}": {
+    "context": {
+      "variables": {
+        "offerings": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "Affects {offerings} and {count} more": {
+    "context": {
+      "variables": {
+        "offerings": {
+          "type": "unknown"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    }
+  },
   "Affiliate": {
     "context": {
       "primary_ui_type": "label"
@@ -9288,8 +9309,7 @@
         "provider": {
           "type": "unknown"
         }
-      },
-      "feature_area": "announcements"
+      }
     }
   },
   "CA Certificate": {
@@ -21644,11 +21664,6 @@
   "Expand to full screen": {
     "context": {
       "feature_area": "ai-assistant"
-    }
-  },
-  "Expected Completion": {
-    "context": {
-      "feature_area": "announcements"
     }
   },
   "Expected change in proposal submissions": {},
@@ -38710,11 +38725,6 @@
       "feature_area": "change-limits"
     }
   },
-  "Ongoing Since": {
-    "context": {
-      "feature_area": "announcements"
-    }
-  },
   "Ongoing since": {
     "context": {
       "feature_area": "actions"
@@ -52830,9 +52840,14 @@
       "feature_area": "views"
     }
   },
+  "Scheduled end": {
+    "context": {
+      "feature_area": "announcements"
+    }
+  },
   "Scheduled start": {
     "context": {
-      "feature_area": "confirmation-drawer"
+      "feature_area": "announcements"
     }
   },
   "Scheduled start date": {

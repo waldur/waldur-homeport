@@ -2,13 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { useCallback } from 'react';
 import { AdminAnnouncement, adminAnnouncementsList } from 'waldur-js-client';
 
-import { ANNOUNCEMENT_ICON } from '@/administration/utils';
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { STALE_TIME, HOUR } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { useModal } from '@/modal/actions';
 
-import { AnnouncementBar } from './AnnouncementBar';
+import { AdminAnnouncementBar } from './AdminAnnouncementBar';
 import { AnnouncementError } from './AnnouncementError';
 import { AnnouncementGroup } from './AnnouncementGroup';
 import { ADMIN_ANNOUNCEMENTS_QUERY_KEY } from './queryKeys';
@@ -64,15 +63,10 @@ export const AdminAnnouncements = () => {
   }
 
   return data.map((announcement) => (
-    <AnnouncementBar
+    <AdminAnnouncementBar
       key={announcement.uuid}
-      title={announcement.maintenance_name || undefined}
-      provider={announcement.maintenance_service_provider || undefined}
-      description={announcement.description}
-      icon={ANNOUNCEMENT_ICON[announcement.type].icon}
-      variant={ANNOUNCEMENT_ICON[announcement.type].variant}
-      ellipsis
-      onShowMore={() => callback(announcement)}
+      announcement={announcement}
+      onShowMore={callback}
     />
   ));
 };

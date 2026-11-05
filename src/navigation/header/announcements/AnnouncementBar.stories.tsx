@@ -103,17 +103,25 @@ export const MaintenanceAnnouncement: Story = {
     icon: WrenchIcon,
     variant: 'warning',
     title: 'Storage cluster upgrade',
-    provider: 'University HPC Centre',
+    byline: 'Affects Block storage, Object storage',
+    hasMoreDetails: true,
+    onShowMore: fn(),
     description:
       'Block storage will be read-only between 22:00 and 23:30 on Friday. See the [status page](https://status.example.com) for details.',
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText(/Storage cluster upgrade/)).toBeVisible();
-    await expect(canvas.getByText(/By University HPC Centre/)).toBeVisible();
+    await expect(
+      canvas.getByText(/Affects Block storage, Object storage/),
+    ).toBeVisible();
     await expect(
       canvas.getByRole('link', { name: 'status page' }),
     ).toHaveAttribute('href', 'https://status.example.com');
+    // The text fits, but hasMoreDetails keeps the link to the details.
+    await expect(
+      canvas.getByRole('button', { name: /Show more/ }),
+    ).toBeVisible();
   },
 };
 

@@ -71,6 +71,7 @@ export const PublicMaintenanceCard: FC<Props> = ({ offeringUuid }) => {
           colored
           hasColon
           onShowMore={() => openDetails(maintenance)}
+          hasMoreDetails={Boolean(maintenance.affected_offerings?.length)}
         />
       ))}
     </>

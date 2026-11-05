@@ -5,32 +5,29 @@ export const useTextTruncation = () => {
   const [isTruncated, setIsTruncated] = useState(false);
 
   useEffect(() => {
+    const element = textRef.current;
+    if (!element) return;
+
     const checkTruncation = () => {
-      if (textRef.current) {
-        const element = textRef.current;
-        const isOverflowing =
-          element.scrollWidth > element.clientWidth ||
-          element.scrollHeight > element.clientHeight;
-        setIsTruncated(isOverflowing);
-      }
+      setIsTruncated(
+        element.scrollWidth > element.clientWidth ||
+          element.scrollHeight > element.clientHeight,
+      );
     };
 
     checkTruncation();
+    // A late web-font swap changes the text width but not the element's.
+    document.fonts?.ready.then(checkTruncation);
 
-    // Re-check on window resize
-    const handleResize = () => {
-      checkTruncation();
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    // Small delay to ensure DOM is fully rendered
-    const timeoutId = setTimeout(checkTruncation, 100);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      clearTimeout(timeoutId);
-    };
+    // Observe the element itself: its width also changes when the sidebar
+    // toggles or the layout shifts, which no window resize event reports.
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', checkTruncation);
+      return () => window.removeEventListener('resize', checkTruncation);
+    }
+    const observer = new ResizeObserver(checkTruncation);
+    observer.observe(element);
+    return () => observer.disconnect();
   }, []);
 
   return { textRef, isTruncated };
