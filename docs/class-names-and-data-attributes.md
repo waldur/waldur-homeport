@@ -76,7 +76,7 @@ Rules:
 Use a class only when something styles it:
 
 - **Tailwind utilities.** Use them for most styling. See [design-tokens.md](design-tokens.md) for colours and font weights.
-- **Stylesheet classes.** A class a `.scss` or `.css` file defines, such as `.team-chat`, `.form-table` or `.category-card`. One also counts when it only applies inside a parent (`.card .small`), or when a parent's arbitrary variant styles it (`[&_.x]:`).
+- **Stylesheet classes.** A class a `.scss` or `.css` file defines, such as `.team-chat`, `.form-table` or `.category-card`. One also counts when it only applies inside a parent (`.team-chat .small`, `[data-slot='card'] .small`), or when a parent's arbitrary variant styles it (`[&_.x]:`).
 - **Third-party classes.** Classes defined by a library stylesheet the app imports, such as Leaflet's `leaflet-*` (`import 'leaflet/dist/leaflet.css'`).
 - **A `className` prop.** It lets the caller add its own utilities. Merge it with `cn()`, last, so it can override.
 

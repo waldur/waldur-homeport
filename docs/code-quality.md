@@ -145,7 +145,7 @@ Tailwind and Bootstrap both ignore a class they do not know, so a typo (`felx`, 
 A class is known when either:
 
 - **Tailwind generates CSS for it.** The rule asks the same Tailwind design system the build loads from `src/tailwind.css`, so variants, arbitrary values, `!`, opacity modifiers, `@theme` tokens and `@utility` definitions are judged exactly as the build judges them. There is no hand-kept list of utilities.
-- **A stylesheet defines it.** Every `.scss` (compiled with Sass) and `.css` file under `src/`, `packages/` and `apps/`, plus the `node_modules` stylesheets the source imports, contributes its class selectors. A class counts as defined if it appears in any selector, including one that only applies inside a parent (`.card .small`).
+- **A stylesheet defines it.** Every `.scss` (compiled with Sass) and `.css` file under `src/`, `packages/` and `apps/`, plus the `node_modules` stylesheets the source imports, contributes its class selectors. A class counts as defined if it appears in any selector, including one that only applies inside a parent (`.team-chat .small`).
 - **An arbitrary variant styles it.** A class selected inside a Tailwind arbitrary variant in any source file (`[&_.x]:`, `has-[.x]:`, `group-[.x]:`) counts as defined, since that variant styles it. These are read from the source on every recheck, not cached; the lint plugin's own files are skipped.
 
 The rule reads class positions only:

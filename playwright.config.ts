@@ -28,9 +28,9 @@ export default defineConfig({
       url: 'http://localhost:8001',
       reuseExistingServer: !process.env.CI,
     },
-    // stat-card-parity.spec.ts renders old-vs-new pairs via a Storybook
-    // story (see .storybook/preview.tsx and StatCardParity.stories.tsx)
-    // instead of a route on the main app — needs its own server.
+    // focus-ring.spec.ts and top-bar-geometry.spec.ts render Storybook
+    // stories (see .storybook/preview.tsx) instead of a route on the main
+    // app — needs its own server.
     {
       command: 'yarn storybook --ci',
       url: 'http://localhost:6006',
