@@ -10,7 +10,7 @@ import {
   proposalMyRequestedResourcesCount,
 } from 'waldur-js-client';
 
-import { useBreadcrumbs } from 'waldur-ui';
+import { Badge, useBreadcrumbs } from 'waldur-ui';
 
 import { isAuthenticated } from '@/auth/AuthService';
 import { fetchResultCount } from '@/core/api';
@@ -233,8 +233,14 @@ export const getTabs = (
     // show — an always-present empty tab is noise on every other offering.
     isProposalRequestEnabled() && resourceRequestCount > 0
       ? {
-          title: translate('My requests'),
-          count: resourceRequestCount,
+          title: (
+            <>
+              {translate('My requests')}{' '}
+              <Badge variant="secondary" shape="pill">
+                {resourceRequestCount}
+              </Badge>
+            </>
+          ),
           key: 'my-requests',
           component: OfferingResourceRequests,
         }
