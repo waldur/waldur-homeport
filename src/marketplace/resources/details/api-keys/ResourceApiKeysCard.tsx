@@ -197,6 +197,11 @@ export const ResourceApiKeysCard = ({
     offering?.plugin_options?.enable_api_key_provisioning,
   );
   const pause = getResourcePause(resource);
+  // The agent mints a key under the resource's backend id, and Waldur refuses
+  // a request until the resource has one.
+  const requestBlocked = resource.backend_id
+    ? undefined
+    : translate('Keys can be requested once the resource has been created.');
 
   // useTable has no built-in polling; refresh while any key is mid-operation.
   const rows = (tableProps.rows ?? []) as ApiKeyRow[];
@@ -251,6 +256,8 @@ export const ResourceApiKeysCard = ({
               title={translate('Request key')}
               dialog={RequestApiKeyDialog}
               size="md"
+              disabled={Boolean(requestBlocked)}
+              tooltip={requestBlocked}
               resolve={{
                 resource,
                 components,

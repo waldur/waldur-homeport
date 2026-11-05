@@ -34,6 +34,7 @@ const RESOURCE = {
   uuid: 'res-1',
   project_uuid: 'proj-1',
   customer_uuid: 'cust-1',
+  backend_id: 'res-backend-1',
 } as any;
 
 const KEYS = [
@@ -293,9 +294,7 @@ describe('ResourceApiKeysCard', () => {
     it('lets a manager request a key and govern an active one', async () => {
       renderManaged({ state: 'OK' });
       await screen.findByText('KEY1');
-      expect(
-        screen.getByRole('button', { name: /Request key/ }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /Request key/ })).toBeEnabled();
       await openRowActions(0);
       for (const name of [
         'Reveal',
@@ -307,6 +306,21 @@ describe('ResourceApiKeysCard', () => {
         expect(isEnabled(name)).toBe(true);
       }
       expect(offered('Retry')).toBeNull();
+    });
+
+    it('holds key requests until the resource exists at the backend', async () => {
+      renderCard([{ uuid: 'k1', client_id: 'KEY1', state: 'OK' }], {
+        offering: MANAGED_OFFERING,
+        resource: { ...RESOURCE, backend_id: '' },
+      });
+      await screen.findByText('KEY1');
+      const button = screen.getByRole('button', { name: /Request key/ });
+      expect(button).toBeDisabled();
+      await userEvent.hover(button);
+      expect(
+        (await screen.findAllByText(/once the resource has been created/))
+          .length,
+      ).toBeGreaterThan(0);
     });
 
     it('offers nothing but reveal without manage permission', async () => {
