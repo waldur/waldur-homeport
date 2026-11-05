@@ -40,6 +40,7 @@ import noOrphanFormLabel from './rules/no-orphan-form-label.js';
 import noRawCodeElement from './rules/no-raw-code-element.js';
 import noRawStatusRamp from './rules/no-raw-status-ramp.js';
 import noRedundantViMock from './rules/no-redundant-vi-mock.js';
+import noRemLength from './rules/no-rem-length.js';
 import noRetiredBootstrapUtility from './rules/no-retired-bootstrap-utility.js';
 import noTemplateInTranslate from './rules/no-template-in-translate.js';
 import noTooltipOnBareIcon from './rules/no-tooltip-on-bare-icon.js';
@@ -61,6 +62,7 @@ export default {
     'enforce-badge-icon-patterns': enforceBadgeIconPatterns,
     'enforce-badge-props-consistency': enforceBadgePropsConsistency,
     'no-literal-color': noLiteralColor,
+    'no-rem-length': noRemLength,
     'no-lone-property-item-in-list': noLonePropertyItemInList,
     'no-manual-icon-colors-in-badges': noManualIconColorsInBadges,
     'enforce-badge-right-icon-pattern': enforceBadgeRightIconPattern,

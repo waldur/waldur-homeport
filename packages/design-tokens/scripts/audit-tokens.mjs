@@ -163,8 +163,13 @@ export function getDeclaredTokens(tokensDir = TOKENS_DIR) {
 
   for (const file of getAllCssFiles(tokensDir)) {
     const content = readFileSync(path.join(tokensDir, file), 'utf8');
-    for (const m of content.matchAll(/(?:^|[{;\s])(--[a-zA-Z0-9_-]+)\s*:/g)) {
+    for (const m of content.matchAll(
+      /(?:^|[{;\s])(--[a-zA-Z0-9_-]+)\s*:(\s*initial\s*;)?/g,
+    )) {
       const name = m[1];
+      // `--x: initial` in @theme clears a Tailwind default: it removes a
+      // token rather than declaring one.
+      if (m[2]) continue;
       if (!declared.has(name)) {
         let themeType = null;
         if (name.startsWith('--z-index-')) themeType = 'z';
@@ -172,6 +177,7 @@ export function getDeclaredTokens(tokensDir = TOKENS_DIR) {
         else if (name.startsWith('--animate-')) themeType = 'animate';
         else if (name.startsWith('--radius-')) themeType = 'radius';
         else if (name.startsWith('--breakpoint-')) themeType = 'breakpoint';
+        else if (name.startsWith('--container-')) themeType = 'container';
         else if (name.startsWith('--text-') && !name.includes('--line-height'))
           themeType = 'text';
         declared.set(name, { file, themeType });
@@ -262,6 +268,17 @@ export function auditDesignTokens(options = {}) {
       if (!isUsed && meta.themeType === 'breakpoint') {
         const bp = name.replace('--breakpoint-', '');
         if (content.includes(`${bp}:`)) {
+          isUsed = true;
+        }
+      }
+
+      if (!isUsed && meta.themeType === 'container') {
+        // Width utilities and container-query variants: max-w-md, w-sm, @md:.
+        const size = name.replace('--container-', '');
+        meta.containerRegex ??= new RegExp(
+          `(?<![\\w-])(?:(?:max-w|min-w|w|basis)-${size}(?![\\w-])|@${size}:)`,
+        );
+        if (meta.containerRegex.test(content)) {
           isUsed = true;
         }
       }

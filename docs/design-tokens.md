@@ -347,6 +347,9 @@ prevent distortion under Waldur's forced 13px root font size (`html, body { font
   the root and body sizes (`src/tailwind.css`), Bootstrap's partials (`src/styles/bootstrap/`, being
   retired), and the boot splash and boot error screen (`packages/boot-splash/`,
   `src/BootErrorScreen.css`), which paint before the tokens load.
+- **No new rem, in a size or anywhere else.** A rem font size is also a rem length, so
+  `waldur-custom/no-rem-length` and `waldur/no-rem-length` count it against the file's baseline (see
+  [Root font size](#root-font-size)); the message names the `--text-*` token it equals at the 13px root.
 - **Below the scale (10px, 11px).** A handful of badges, card metadata and phone-width labels use 10px
   or 11px (`text-[10px]`/`text-[11px]` in TSX, a commented `stylelint-disable` in SCSS). Whether they
   fold into `text-xs` or get a `text-2xs` step is not decided yet; don't add new ones.
@@ -422,6 +425,49 @@ Tailwind step (`SPACER_TO_TAILWIND` in `packages/eslint-plugin-waldur/rules/boot
   stylesheet rule on the same element (a component `.scss` imported from TSX) and to an inline
   `style`. Set the spacing in one place.
 - `$spacers` is left only for the grid gutters (`.g-*`), which go with `Row`/`Col` (#475).
+- **No new rem lengths.** A padding, margin, gap, width or offset in rem follows the root; write
+  px, or the Tailwind step that equals it (`p-3`, not `p-[0.923rem]`; `calc(var(--spacing) * 3)`
+  in a stylesheet). See [Root font size](#root-font-size).
+
+## Root font size
+
+`src/tailwind.css` forces `html, body { font-size: 13px !important }` (12px below `md`). The
+tokens are pinned in px so they ignore it, but about 700 `rem` lengths in stylesheets, arbitrary
+classes and inline styles are still tuned against it. Moving off the forced root takes three
+steps:
+
+1. **Nothing depends on the root.** Convert each rem literal to the px it is at 13px, or to a
+   token that equals it, so no pixel moves. Tailwind's own rem defaults are already done:
+   `primitives/containers.css` pins the `--container-*` widths (`max-w-md` is 364px, as 28rem was
+   at 13px) and clears the unused rem steps (`text-5xl`…`9xl`, `rounded-3xl`/`4xl`, bare
+   `rounded`); `tailwindTheme.test.ts` fails if a Tailwind default is left in rem.
+2. **Root back to the browser default**, with no pixel change, since nothing reads it any more.
+3. **Token scales in rem**, so the UI follows the user's font-size preference.
+
+Two guards hold step 1:
+
+- **The rem ratchet.** `scripts/rem-literals.mjs` counts raw `rem` lengths per file against
+  `scripts/rem-literals.baseline.json`: stylesheet declarations and SCSS variables (outside
+  `packages/design-tokens/src/css/`), mixin arguments, and every string in TS/TSX, so arbitrary
+  classes (`p-[1.85rem]`, `max-w-[calc(100vw-3rem)]`) and inline style values. `yarn rem:check`
+  (in CI) fails when a file gains one. A file that loses one passes with a reminder: run
+  `yarn rem:save` in the same merge request, so the count cannot grow back (step 1 removes rem in
+  many merge requests at once, and failing each until it rewrites the shared baseline would make
+  them conflict on it). `yarn rem:report [path…]` lists each with the px it is at the 13px root
+  and the token that equals it (`=`) or is within 0.07px of it (`≈`): a Tailwind step or
+  `calc(var(--spacing) * N)` for a length, `text-*` or `var(--text-*)` for a font size.
+  **Write the px, or a token marked `=`.** A `≈` token is a sub-pixel change (`1.85rem` is
+  24.05px, step 6 is 24px): take it only when the Storybook comparison shows no difference. `waldur-custom/no-rem-length` (ESLint)
+  and `waldur/no-rem-length` (stylelint) run the same detector against the same baseline, so the
+  editor flags a new rem as soon as a file has more than its count. Not counted: comments, `0rem`,
+  media queries (their rem is the browser's initial font size, not `html`'s; a container query's
+  rem is the root's, so it counts), tests, stories and mocks, and the lint rules' own tables. The detector is
+  `packages/design-tokens/scripts/rem-literals.mjs`.
+- **The root-invariance check.** `scripts/theme-snapshots.mjs root-invariance` captures every story with `html`'s font size forced to 13px and to
+  20px and lists the stories that differ: each one still sizes something in rem. It is not a CI
+  gate yet; step 2 can start when its list is empty. Use `--themes light` to halve the run; see
+  `docs/visual-testing.md` for the command. It also catches what the ratchet cannot see: a rem utility with no
+  literal, and an `em` under a rem font size (body text is `1.077rem`).
 
 ## Corner radius
 
@@ -477,6 +523,7 @@ to prevent fractional `rem` compression under Waldur's forced 13px root font siz
 | Every physical colour has a `dark:` counterpart         | `waldur-custom/require-dark-pair`                                                    |
 | No `--bs-*` reads                                       | `waldur-custom/no-bootstrap-css-vars`, stylelint                                     |
 | Hard-coded colours (hex, `rgb()`, named) only go down   | `no-literal-color` (ESLint and stylelint), `yarn colors:check`                       |
+| Raw `rem` lengths only go down                          | `no-rem-length` (ESLint and stylelint), `yarn rem:check`                             |
 
 **Duplicate roles.** Two semantic tokens with the same value in both themes are one role with
 two names until shown otherwise. The audit fails on any such group not listed in

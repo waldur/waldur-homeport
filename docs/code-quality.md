@@ -81,6 +81,7 @@ yarn info eslint prettier stylelint husky version
 - `yarn format:check` - Check code formatting with Prettier
 - `yarn format:fix` - Auto-format code with Prettier
 - `yarn style:check` - Check SCSS/CSS styles with Stylelint
+- `yarn colors:check` / `yarn rem:check` - Ratchets: hard-coded colours and raw `rem` lengths per file may only go down (`yarn colors:save` / `yarn rem:save` after removing some)
 - `yarn deps:unused` - Check for unused dependencies with Knip
 - `yarn tsgo` - Typescript type check
 
@@ -132,6 +133,10 @@ Dynamic references (`state={variable}`, `router.stateService.go(name)`, computed
 ## Hand-rolled table guard
 
 `waldur-custom/no-hand-rolled-table` reports raw `<table>` markup, which should be `@/table/Table` or `SimpleTable` (see [table/migration-guide.md](table/migration-guide.md)). Existing tables are counted per file in `hand-rolled-table.baseline.json`; the counts only shrink, so rewrite them with `yarn lint:tables:baseline` after migrating some, never to let new ones in. A table that is deliberately not a data table (a `<td>` under test, a story's layout grid) takes `// eslint-disable-next-line waldur-custom/no-hand-rolled-table -- <reason>` and is not counted.
+
+## rem length guard
+
+`waldur-custom/no-rem-length` (ESLint: arbitrary classes and inline styles in TS/TSX) and `waldur/no-rem-length` (stylelint) report a raw `rem` length once a file has more than its count in `scripts/rem-literals.baseline.json`, naming the px it is at HomePort's 13px root and the spacing step or `--text-*` token that equals it. `yarn rem:check` runs the same detector over the repository in CI and fails only when a file gains one; after removing some, lower the counts with `yarn rem:save` in the same merge request. See "Root font size" in [design-tokens.md](design-tokens.md).
 
 ## Unknown class guard
 

@@ -214,6 +214,9 @@ export default tseslint
         // Hard-coded colours beyond a file's count in
         // scripts/color-literals.baseline.json (the `yarn colors:check` ratchet).
         'waldur-custom/no-literal-color': 'error',
+        // rem lengths beyond a file's count in
+        // scripts/rem-literals.baseline.json (the `yarn rem:check` ratchet).
+        'waldur-custom/no-rem-length': 'error',
         'waldur-custom/no-interactive-in-tab-trigger': 'error',
         'waldur-custom/check-needs-accessible-name': 'error',
         'waldur-custom/icon-button-needs-accessible-name': 'error',
