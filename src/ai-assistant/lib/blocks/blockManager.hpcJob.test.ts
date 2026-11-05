@@ -31,6 +31,12 @@ describe('updateBlocks for hpc_job', () => {
     expect(block.warnings).toHaveLength(1);
   });
 
+  it('keeps the files the script writes', () => {
+    const files = [{ name: 'matmul.py', content: 'print(1)\n' }];
+    const [block] = updateBlocks([], { ...previewPart, files } as any);
+    expect(block.files).toEqual(files);
+  });
+
   it('replaces the tool loading block with the card', () => {
     const loading: UIBlock = {
       id: 't',

@@ -547,7 +547,8 @@ export interface MonacoEditorProps {
   onChange?(value: string);
   language?: string;
   theme?: string;
-  height?: number;
+  /** Pixels, or any CSS height such as 'calc(100vh - 200px)'. */
+  height?: number | string;
   readOnly?: boolean;
 }
 
@@ -579,7 +580,7 @@ export const MonacoEditor = ({
 
   return (
     <Editor
-      height={`${height}px`}
+      height={typeof height === 'number' ? `${height}px` : height}
       language={language}
       value={value || ''}
       theme={editorTheme}

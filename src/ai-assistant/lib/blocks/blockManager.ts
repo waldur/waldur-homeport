@@ -254,6 +254,7 @@ type HpcJobPart = ChatResponse & {
   cluster?: string;
   partition?: string;
   script?: string;
+  files?: Array<{ name: string; content: string }>;
   errors?: string[];
   warnings?: string[];
   job_id?: string;
@@ -267,6 +268,7 @@ const HPC_JOB_FIELDS = [
   'cluster',
   'partition',
   'script',
+  'files',
   'errors',
   'warnings',
   'job_id',

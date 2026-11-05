@@ -8425,6 +8425,12 @@
       "feature_area": "blocks"
     }
   },
+  "Batch script": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hpc"
+    }
+  },
   "Bearer token for outbound SCIM pull.": {},
   "Bearer · API key": {
     "context": {
@@ -23466,7 +23472,7 @@
       "feature_area": "integration"
     }
   },
-  "FirecREST API URLs that SLURM offerings may connect to, one per line or comma-separated. Waldur forwards a user's identity provider token only to these URLs; an offering pointing elsewhere has no HPC workspace. Append |audience (and optionally |client-scope) to an entry to send a token exchanged for that audience instead of the sign-in token, e.g. https://firecrest.example.org|firecrest.": {},
+  "FirecREST API URLs that SLURM offerings may connect to, one per line or comma-separated. Waldur forwards a user's identity provider token only to these URLs; an offering pointing elsewhere runs no jobs through Waldur. Append |audience (and optionally |client-scope) to an entry to send a token exchanged for that audience instead of the sign-in token, e.g. https://firecrest.example.org|firecrest.": {},
   "FirecREST system name": {
     "context": {
       "feature_area": "integration"
@@ -23786,6 +23792,11 @@
   "Folder": {
     "context": {
       "feature_area": "deploy"
+    }
+  },
+  "Follow the job": {
+    "context": {
+      "feature_area": "blocks"
     }
   },
   "Font family used in the UI.": {},
@@ -25557,6 +25568,11 @@
       "feature_area": "features"
     }
   },
+  "Hide script": {
+    "context": {
+      "feature_area": "ai-assistant"
+    }
+  },
   "Hide {label} ({count})": {
     "context": {
       "variables": {
@@ -25781,6 +25797,7 @@
       "feature_area": "details"
     }
   },
+  "Hours an ephemeral event consumer (one registered by a browser tab) may go without a reader before it and its RabbitMQ queue are deleted. Checked hourly, so deletion can come up to an hour later. Integrations register non-ephemeral consumers and are never deleted this way.": {},
   "Hours before pending order becomes a user action item (1-168).": {},
   "House number": {
     "context": {
@@ -28590,7 +28607,7 @@
   },
   "Job script": {
     "context": {
-      "feature_area": "hpc"
+      "feature_area": "ai-assistant"
     }
   },
   "Job title": {
@@ -38968,11 +38985,6 @@
   "Open issues": {
     "context": {
       "feature_area": "dashboard"
-    }
-  },
-  "Open jobs": {
-    "context": {
-      "feature_area": "blocks"
     }
   },
   "Open merge record": {
@@ -55804,6 +55816,16 @@
       "feature_area": "project-groups"
     }
   },
+  "Show all {count} lines": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "blocks"
+    }
+  },
   "Show as": {
     "context": {
       "feature_area": "reports"
@@ -55938,7 +55960,7 @@
   },
   "Show less": {
     "context": {
-      "feature_area": "core"
+      "feature_area": "blocks"
     }
   },
   "Show log": {
@@ -73585,6 +73607,11 @@
       "feature_area": "roles"
     }
   },
+  "View script": {
+    "context": {
+      "feature_area": "blocks"
+    }
+  },
   "View site agents": {
     "context": {
       "feature_area": "event-subscriptions"
@@ -78195,7 +78222,7 @@
       "feature_area": "integration"
     }
   },
-  "slurm-monitor API URLs (ending in /api/v2) that SLURM offerings may read job performance from, one per line or comma-separated. Waldur forwards a user's identity provider token only to these URLs. Append |audience (and optionally |client-scope) to an entry to send a token exchanged for that audience instead of the sign-in token.": {},
+  "slurm-monitor API URLs (ending in /api/v2) that SLURM offerings may read job performance from, one per line or comma-separated; an offering with one of these but no FirecREST gets a read-only HPC workspace from it. Waldur forwards a user's identity provider token only to these URLs. Append |audience (and optionally |client-scope) to an entry to send a token exchanged for that audience instead of the sign-in token.": {},
   "slurm-monitor URL ending in /api/v2, for per-job GPU, CPU and memory over time. Must be allowed by staff in Marketplace settings → HPC workspace. Leave empty to hide job performance.": {
     "context": {
       "feature_area": "integration"

@@ -31,6 +31,7 @@ interface TableHeaderProps {
   hideExpandToggle?: boolean;
   showActions?: boolean;
   rows: any[];
+  rowKey?: string;
   enableMultiSelect?: boolean;
   onSelectAllRows?(rows: any[]): void;
   selectedRows?: any[];
@@ -279,6 +280,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
   hideExpandToggle = false,
   showActions,
   rows,
+  rowKey,
   enableMultiSelect,
   onSelectAllRows,
   selectedRows,
@@ -317,21 +319,21 @@ export const TableHeader: FC<TableHeaderProps> = ({
 
   const toggledAll = useMemo(() => {
     if (!expandableRow || rows.length === 0) return false;
-    return rows.every((row, i) => toggled[getId(row, i)]);
-  }, [toggled, getId, rows, expandableRow]);
+    return rows.every((row, i) => toggled[getId(row, i, rowKey)]);
+  }, [toggled, rows, rowKey, expandableRow]);
 
   const toggleAll = useCallback(() => {
     if (toggledAll) {
       rows.forEach((row, i) => {
-        toggleRow(getId(row, i));
+        toggleRow(getId(row, i, rowKey));
       });
     } else {
       rows.forEach((row, i) => {
-        const rowId = getId(row, i);
+        const rowId = getId(row, i, rowKey);
         if (!toggled[rowId]) toggleRow(rowId);
       });
     }
-  }, [rows, toggledAll, toggled, toggleRow]);
+  }, [rows, rowKey, toggledAll, toggled, toggleRow]);
 
   const visibleCols = useMemo<Column[]>(() => {
     return hasOptionalColumns

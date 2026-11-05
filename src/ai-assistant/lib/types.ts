@@ -62,6 +62,7 @@ export interface UIBlock {
   cluster?: string; // FirecREST system name
   partition?: string;
   script?: string; // Rendered batch script
+  files?: Array<{ name: string; content: string }>; // Files the script writes
   errors?: string[]; // Validation errors (job does not fit the limits)
   warnings?: string[];
   job_id?: string; // Slurm job ID once submitted

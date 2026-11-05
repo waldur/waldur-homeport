@@ -10,6 +10,10 @@ import { BaseButton } from 'waldur-ui';
 import { AIDisclosureBanner } from '@/ai-assistant/components/AIDisclosureDialog';
 import { ChatHistorySidebar } from '@/ai-assistant/components/ChatHistorySidebar';
 import { LLMErrorBoundary } from '@/ai-assistant/components/LLMErrorBoundary';
+import {
+  ScriptPanel,
+  ScriptPanelProvider,
+} from '@/ai-assistant/components/ScriptPanel';
 import { Thread } from '@/ai-assistant/components/Thread';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
 import { ThreadRuntimeProvider } from '@/ai-assistant/logic/ThreadRuntimeProvider';
@@ -146,14 +150,17 @@ export const LLMChatDrawer: React.FC<LLMChatDrawerProps> = ({ close }) => {
 
   return (
     <ThreadRuntimeProvider>
-      <div className="aui-chat-drawer">
-        <ChatHistorySidebar />
-        <div className="aui-chat-main grow flex flex-col overflow-hidden">
-          <LLMErrorBoundary onClose={close}>
-            <Thread />
-          </LLMErrorBoundary>
+      <ScriptPanelProvider>
+        <div className="aui-chat-drawer">
+          <ChatHistorySidebar />
+          <div className="aui-chat-main grow flex flex-col overflow-hidden">
+            <LLMErrorBoundary onClose={close}>
+              <Thread />
+            </LLMErrorBoundary>
+          </div>
+          <ScriptPanel />
         </div>
-      </div>
+      </ScriptPanelProvider>
     </ThreadRuntimeProvider>
   );
 };

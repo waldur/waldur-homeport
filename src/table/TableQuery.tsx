@@ -51,9 +51,10 @@ export class TableQuery extends Component<TableQueryProps, State> {
     // means the last committed value was ours, so nothing is mid-typing: the
     // commit is debounced, and overwriting during that window would delete the
     // user's keystrokes.
+    // A table that has not been searched yet has no query at all, not ''.
     if (
-      this.props.query !== prevProps.query &&
-      prevProps.query === this.state.query
+      (this.props.query || '') !== (prevProps.query || '') &&
+      (prevProps.query || '') === this.state.query
     ) {
       this.setState({ query: this.props.query || '' });
     }

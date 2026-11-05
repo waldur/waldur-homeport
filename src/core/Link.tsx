@@ -21,9 +21,11 @@ interface LinkProps {
   tabIndex?: number;
   id?: string;
   'aria-current'?: React.AriaAttributes['aria-current'];
+  /** Overrides the 'button' role an `onClick` gives, for a link that navigates. */
+  role?: React.AriaRole;
 }
 
-const isModifiedClick = (e: React.MouseEvent) =>
+export const isModifiedClick = (e: React.MouseEvent) =>
   e.button > 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey;
 
 /**
