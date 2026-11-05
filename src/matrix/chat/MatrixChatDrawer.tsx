@@ -1,6 +1,7 @@
 import {
   ArrowsInSimpleIcon,
   ArrowsOutSimpleIcon,
+  ChatsCircleIcon,
   CloudArrowUpIcon,
   PhoneIcon,
 } from '@phosphor-icons/react';
@@ -9,6 +10,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
 } from 'react';
@@ -18,6 +20,7 @@ import { BaseButton, Tooltip } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
 import { useUser } from '@/workspace/hooks';
 
 import { CallInProgressBanner } from './call/CallInProgressBanner';
@@ -34,6 +37,7 @@ import { MatrixMessageList } from './MatrixMessageList';
 import { MatrixSyncStatus } from './MatrixSyncStatus';
 import { MatrixTypingIndicator } from './MatrixTypingIndicator';
 import { buildReplyFields } from './messageContent';
+import { isRoomOpenElsewhere } from './roomViews';
 import { useAllMatrixRooms } from './useAllMatrixRooms';
 import { useMatrixClient } from './useMatrixClient';
 import { useMatrixFileUpload } from './useMatrixFileUpload';
@@ -66,12 +70,19 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
     error,
     activeRoomId,
     activeRoomUuid,
+    requestedRoomUuid,
     failedRoomUuid,
     registerRoomView,
+    showRoomHere,
   } = useMatrixClient();
   // The timeline, typing, calls and uploads follow the active room, so until
   // this room is the active one they belong to another room than the header.
   const roomNotOpen = activeRoomUuid !== roomUuid;
+  // Nothing is coming for this room: a spinner would wait forever.
+  const roomOpenElsewhere = isRoomOpenElsewhere(
+    { connectionState, activeRoomUuid, requestedRoomUuid },
+    roomUuid,
+  );
   const { callState, callRoomId, callRoomUuid } = useMatrixCall();
   const { requestReturnToCall } = useContext(MatrixCallPortalContext);
   const { rooms: allRooms } = useAllMatrixRooms();
@@ -147,8 +158,9 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
     }
   }, [roomNotOpen, recorder, uploadFile, messageActions, userId]);
 
-  // Connect on mount
-  useEffect(() => {
+  // Before paint: beside another view's room, a view that asked any later
+  // would first show the notice for the room it is about to open.
+  useLayoutEffect(() => {
     connect(roomUuid);
   }, [roomUuid]);
 
@@ -315,19 +327,33 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
               )}
               {showChat && !showConnectionError && (
                 <div className="grow overflow-hidden flex flex-col">
-                  <MatrixMessageList
-                    messages={messages}
-                    userId={userId}
-                    memberNames={resolvedMemberNames}
-                    memberImages={memberImages}
-                    loading={
-                      loading || connectionState === 'connecting' || roomNotOpen
-                    }
-                    loadingOlder={loadingOlder}
-                    hasOlderMessages={hasOlderMessages}
-                    onLoadOlder={loadOlderMessages}
-                    onReadLatest={markRoomRead}
-                  />
+                  {roomOpenElsewhere ? (
+                    <NoResult
+                      icon={<ChatsCircleIcon weight="bold" size={24} />}
+                      title={translate('Another conversation is open')}
+                      message={translate(
+                        'Only one conversation can be open at a time.',
+                      )}
+                      buttonTitle={translate('Open here')}
+                      callback={() => showRoomHere(roomUuid)}
+                    />
+                  ) : (
+                    <MatrixMessageList
+                      messages={messages}
+                      userId={userId}
+                      memberNames={resolvedMemberNames}
+                      memberImages={memberImages}
+                      loading={
+                        loading ||
+                        connectionState === 'connecting' ||
+                        roomNotOpen
+                      }
+                      loadingOlder={loadingOlder}
+                      hasOlderMessages={hasOlderMessages}
+                      onLoadOlder={loadOlderMessages}
+                      onReadLatest={markRoomRead}
+                    />
+                  )}
                 </div>
               )}
             </div>

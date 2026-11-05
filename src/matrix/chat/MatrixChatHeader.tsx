@@ -80,6 +80,10 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   // other room has unread the user can't currently see.
   const otherRoomsUnread = useMatrixTotalUnread(activeRoomId);
 
+  // Members and commands follow the active room, so until this room is the
+  // active one they are another room's.
+  const roomOpen = activeRoomUuid === roomUuid;
+
   const isThisRoomsCall = call.inThisRoomsCall;
   // Mute reads push rules, which only exist once the initial sync completes;
   // gate on 'connected' so a pre-sync client (e.g. mid-impersonation reconnect)
@@ -149,7 +153,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
         {muted ? translate('Unmute') : translate('Mute')}
       </Menu.Item>
       {commands.length > 0 &&
-        (hasAvailableCommand ? (
+        (hasAvailableCommand && roomOpen ? (
           <Menu.Item
             icon={<TerminalWindowIcon weight="bold" />}
             onSelect={handleCommands}
@@ -159,8 +163,10 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
         ) : (
           <Tooltip
             label={
-              sharedReason ??
-              translate('No commands are available in this room.')
+              roomOpen
+                ? (sharedReason ??
+                  translate('No commands are available in this room.'))
+                : translate('The conversation is not open yet.')
             }
             side="left"
           >
@@ -240,7 +246,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
         ) : (
           <span className="truncate">{roomName}</span>
         )}
-        {members.length > 0 && (
+        {roomOpen && members.length > 0 && (
           <Popover>
             <PopoverTrigger asChild>
               <button type="button" className="tc-header-members">

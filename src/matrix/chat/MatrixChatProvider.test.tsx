@@ -390,6 +390,74 @@ describe('MatrixChatProvider', () => {
       expect(vi.mocked(matrixRoomsOpen)).not.toHaveBeenCalled();
     });
 
+    it('keeps the room open for two views of it', async () => {
+      await connected('shared-room');
+      ctx.registerRoomView('shared-room');
+      const closeDrawer = ctx.registerRoomView('shared-room');
+      await act(() => ctx.connect('shared-room'));
+      vi.mocked(matrixRoomsOpen).mockClear();
+
+      closeDrawer();
+      await flushMicrotasks();
+
+      expect(ctx.activeRoomUuid).toBe('shared-room');
+      expect(ctx.requestedRoomUuid).toBe('shared-room');
+      expect(vi.mocked(matrixRoomsOpen)).not.toHaveBeenCalled();
+    });
+
+    it('opens the room of a view beneath when it is shown there', async () => {
+      await connected('page-room');
+      ctx.registerRoomView('page-room');
+      ctx.registerRoomView('drawer-room');
+      await act(() => ctx.connect('drawer-room'));
+
+      await act(() => ctx.showRoomHere('page-room'));
+
+      expect(ctx.activeRoomUuid).toBe('page-room');
+    });
+
+    it('makes a view shown here the newest', async () => {
+      await connected('page-room');
+      const closePage = ctx.registerRoomView('page-room');
+      ctx.registerRoomView('drawer-room');
+      await act(() => ctx.connect('drawer-room'));
+      await act(() => ctx.showRoomHere('page-room'));
+
+      closePage();
+      await flushMicrotasks();
+
+      await waitFor(() => expect(ctx.activeRoomUuid).toBe('drawer-room'));
+    });
+
+    it('restarts on the view last shown here', async () => {
+      await connected('page-room');
+      ctx.registerRoomView('page-room');
+      ctx.registerRoomView('drawer-room');
+      await act(() => ctx.connect('drawer-room'));
+      await act(() => ctx.showRoomHere('page-room'));
+      vi.mocked(matrixRoomsOpen).mockClear();
+
+      await signOut();
+
+      expect(vi.mocked(matrixRoomsOpen)).toHaveBeenCalledWith({
+        path: { uuid: 'page-room' },
+      });
+    });
+
+    it('tells which room is opening before it opens', async () => {
+      await connected('first-room');
+      const answers = deferOpens();
+
+      act(() => {
+        ctx.connect('picked-room');
+      });
+
+      expect(ctx.requestedRoomUuid).toBe('picked-room');
+      expect(ctx.activeRoomUuid).toBe('first-room');
+      await answer(() => answers['picked-room']());
+      expect(ctx.activeRoomUuid).toBe('picked-room');
+    });
+
     it('does not fight a view that replaces the one on top', async () => {
       await connected('page-room');
       ctx.registerRoomView('page-room');

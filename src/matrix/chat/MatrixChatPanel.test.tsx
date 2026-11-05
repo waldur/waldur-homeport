@@ -220,6 +220,30 @@ describe('MatrixChatPanel — a refused room', () => {
   });
 });
 
+describe('MatrixChatPanel — a room open in another view', () => {
+  // The conversation says the room is elsewhere and brings it back here; the
+  // panel must not swap it for a placeholder without that way back.
+  it('keeps the conversation on screen', () => {
+    h.matrixClient = {
+      connect: vi.fn(),
+      connectionState: 'connected',
+      activeRoomUuid: 'room-B',
+      requestedRoomUuid: 'room-B',
+      deniedRoomUuids: new Set(),
+      error: null,
+    };
+    h.rooms = {
+      rooms: [{ uuid: 'room-A', state: 'active', room_name: 'A' }],
+      totalUnread: 0,
+      isLoading: false,
+    };
+
+    render(<MatrixChatPanel defaultRoomUuid="room-A" hideRoomList />);
+
+    expect(screen.getByTestId('chat-drawer')).toBeInTheDocument();
+  });
+});
+
 describe('MatrixChatPanel — call stability across expand', () => {
   it('does not remount MatrixChatDrawer when the drawer expands or collapses', () => {
     const { rerender } = render(<MatrixChatPanel defaultRoomUuid="room-1" />);

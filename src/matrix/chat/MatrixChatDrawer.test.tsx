@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { FC, useLayoutEffect } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { useUser } from '@/workspace/hooks';
@@ -98,7 +99,9 @@ beforeEach(() => {
     error: null,
     activeRoomId: '!room1:s',
     activeRoomUuid: 'room-1',
+    requestedRoomUuid: 'room-1',
     registerRoomView: h.registerRoomView,
+    showRoomHere: vi.fn(),
   };
   h.room = {
     messages: [],
@@ -116,6 +119,27 @@ beforeEach(() => {
 });
 
 describe('MatrixChatDrawer — the room on screen', () => {
+  // Asked for later, a view mounting beside another view's room would first
+  // paint the notice for a room it is about to open.
+  it('asks for its room before the first paint', () => {
+    let connectsBeforePaint = 0;
+    const Painted: FC = () => {
+      useLayoutEffect(() => {
+        connectsBeforePaint = h.matrixClient.connect.mock.calls.length;
+      }, []);
+      return null;
+    };
+
+    render(
+      <>
+        <MatrixChatDrawer roomUuid="room-1" />
+        <Painted />
+      </>,
+    );
+
+    expect(connectsBeforePaint).toBe(1);
+  });
+
   it('registers as a view on the room and unregisters on unmount', () => {
     const unregister = vi.fn();
     h.registerRoomView.mockReturnValue(unregister);
@@ -194,6 +218,51 @@ describe('MatrixChatDrawer — the room on screen', () => {
       'data-loading',
       'true',
     );
+  });
+
+  describe('while another view has the room', () => {
+    beforeEach(() => {
+      h.matrixClient.activeRoomUuid = 'other-room';
+      h.matrixClient.requestedRoomUuid = 'other-room';
+    });
+
+    it("says so instead of loading the other room's messages", () => {
+      render(<MatrixChatDrawer roomUuid="room-1" />);
+
+      expect(
+        screen.getByText('Another conversation is open'),
+      ).toBeInTheDocument();
+      expect(screen.queryByTestId('message-list')).not.toBeInTheDocument();
+    });
+
+    it('brings its room here', async () => {
+      const user = userEvent.setup();
+      render(<MatrixChatDrawer roomUuid="room-1" />);
+
+      await user.click(screen.getByRole('button', { name: 'Open here' }));
+
+      expect(h.matrixClient.showRoomHere).toHaveBeenCalledWith('room-1');
+    });
+
+    it('keeps the composer', () => {
+      render(<MatrixChatDrawer roomUuid="room-1" />);
+
+      expect(screen.getByTestId('message-input')).toBeInTheDocument();
+    });
+
+    it('waits for the client while it connects', () => {
+      h.matrixClient.connectionState = 'connecting';
+
+      render(<MatrixChatDrawer roomUuid="room-1" />);
+
+      expect(
+        screen.queryByText('Another conversation is open'),
+      ).not.toBeInTheDocument();
+      expect(screen.getByTestId('message-list')).toHaveAttribute(
+        'data-loading',
+        'true',
+      );
+    });
   });
 });
 

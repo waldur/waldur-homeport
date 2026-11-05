@@ -86,6 +86,12 @@ export interface MatrixChatContextValue {
   activeRoomId: string | null;
   /** Waldur UUID of the room the client is currently synced to. */
   activeRoomUuid: string | null;
+  /**
+   * The room last asked to be the active one, which may still be opening. A
+   * view whose room is neither this nor the active one has given the room up
+   * to another view.
+   */
+  requestedRoomUuid: string | null;
   userId: string | null;
   /**
    * Connect (or switch rooms on) the shared client. Pass
@@ -103,6 +109,12 @@ export interface MatrixChatContextValue {
    * under a closed drawer is not left showing the drawer's room.
    */
   registerRoomView: (roomUuid: string) => () => void;
+  /**
+   * Open the room of a view that gave it up to another, on the user's request.
+   * The view becomes the newest, so it keeps the room until a newer one asks
+   * and gets it back when that one closes.
+   */
+  showRoomHere: (roomUuid: string) => Promise<void>;
   error: string | null;
   /**
    * The rooms the open endpoint refused (403/404): the user can see or manage

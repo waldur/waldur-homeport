@@ -4611,6 +4611,11 @@
     }
   },
   "Anonymous users can list invitation links. Only available for staff users.": {},
+  "Another conversation is open": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "Another policy": {
     "context": {
       "feature_area": "cost-policies"
@@ -11120,6 +11125,11 @@
   "Click Sync to fetch consumption data and create usage records": {
     "context": {
       "feature_area": "settings"
+    }
+  },
+  "Click or type to open this conversation here": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Click the actions menu and select \"Sync consumption history\"": {
@@ -38780,6 +38790,11 @@
       "feature_area": "matrix"
     }
   },
+  "Only one conversation can be open at a time.": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "Only orders for plans without usage-based components are eligible.": {
     "context": {
       "feature_area": "manage"
@@ -38954,6 +38969,11 @@
   "Open helpdesk": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Open here": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Open in Matrix client": {
@@ -59907,7 +59927,7 @@
   },
   "The conversation is not open yet.": {
     "context": {
-      "feature_area": "call",
+      "feature_area": "chat",
       "action_type": "read"
     }
   },

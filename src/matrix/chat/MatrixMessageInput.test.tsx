@@ -1,6 +1,6 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { FC, PropsWithChildren, createElement } from 'react';
+import { ComponentProps, FC, PropsWithChildren, createElement } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const h = vi.hoisted(() => ({
@@ -10,15 +10,21 @@ const h = vi.hoisted(() => ({
     getRoom: vi.fn(),
     sendTyping: vi.fn(() => Promise.resolve()),
   } as any,
+  connectionState: 'connected',
+  activeRoomUuid: 'uuid-1',
+  requestedRoomUuid: 'uuid-1' as string | null,
+  showRoomHere: vi.fn(),
 }));
 
 vi.mock('./useMatrixClient', () => ({
   useMatrixClient: () => ({
     client: h.client,
     activeRoomId: '!room:s',
-    activeRoomUuid: 'uuid-1',
-    connectionState: 'connected',
+    activeRoomUuid: h.activeRoomUuid,
+    requestedRoomUuid: h.requestedRoomUuid,
+    connectionState: h.connectionState,
     userId: '@me:s',
+    showRoomHere: h.showRoomHere,
   }),
 }));
 vi.mock('./useRoomMemberNames', () => ({
@@ -43,27 +49,209 @@ beforeEach(() => {
   h.client.sendTextMessage.mockReset().mockResolvedValue(undefined);
   h.client.sendMessage.mockReset().mockResolvedValue(undefined);
   h.client.getRoom.mockReset().mockReturnValue(null);
+  h.connectionState = 'connected';
+  h.activeRoomUuid = 'uuid-1';
+  h.requestedRoomUuid = 'uuid-1';
+  h.showRoomHere.mockReset();
 });
+
+const composer = (
+  roomUuid: string,
+  props: Partial<ComponentProps<typeof MatrixMessageInput>> = {},
+) => (
+  <MatrixMessageInput
+    roomUuid={roomUuid}
+    uploadFile={vi.fn()}
+    uploading={false}
+    pendingFiles={[]}
+    addFiles={vi.fn()}
+    removePending={vi.fn()}
+    setPending={vi.fn()}
+    clearPending={vi.fn()}
+    {...props}
+  />
+);
+
+const renderComposer = (
+  roomUuid: string,
+  props: Partial<ComponentProps<typeof MatrixMessageInput>> = {},
+) => render(composer(roomUuid, props), { wrapper });
+
+const pastedFile = (file: File) =>
+  ({
+    files: [file],
+    items: [{ kind: 'file', type: file.type, getAsFile: () => file }],
+    getData: () => '',
+    types: ['Files'],
+  }) as unknown as DataTransfer;
 
 describe('MatrixMessageInput room', () => {
   // The header names the room on screen and messages go to the active one, so
-  // a mismatch would post to a room the user is not looking at.
-  it('stays disabled while another room is active', () => {
-    render(
-      <MatrixMessageInput
-        roomUuid="another-room"
-        uploadFile={vi.fn()}
-        uploading={false}
-        pendingFiles={[]}
-        addFiles={vi.fn()}
-        removePending={vi.fn()}
-        setPending={vi.fn()}
-        clearPending={vi.fn()}
-      />,
-      { wrapper },
+  // a mismatch would post to a room the user is not looking at. The draft
+  // belongs to the active room too.
+  it('writes and sends nothing while another room is active', async () => {
+    const user = userEvent.setup();
+    const { rerender } = renderComposer('another-room');
+    const textarea = screen.getByRole('textbox', { name: 'Message' });
+
+    await user.type(textarea, 'hello{Enter}');
+    expect(screen.getByRole('button', { name: 'Send' })).toBeDisabled();
+    rerender(composer('uuid-1'));
+
+    expect(textarea).toHaveValue('');
+    expect(h.client.sendTextMessage).not.toHaveBeenCalled();
+  });
+
+  it('says Connecting only while the client connects', () => {
+    h.connectionState = 'connecting';
+    renderComposer('uuid-1');
+
+    const textarea = screen.getByRole('textbox', { name: 'Message' });
+    expect(textarea).toBeDisabled();
+    expect(textarea).toHaveAttribute('placeholder', 'Connecting...');
+  });
+
+  it("does not show the open room's draft", async () => {
+    const user = userEvent.setup();
+    const { rerender } = renderComposer('uuid-1');
+    await user.type(screen.getByRole('textbox', { name: 'Message' }), 'draft');
+
+    rerender(composer('another-room'));
+
+    expect(screen.getByRole('textbox', { name: 'Message' })).toHaveValue('');
+  });
+
+  it("does not show the open room's staged files", () => {
+    const file = new File(['a'], 'only-in-a.pdf', { type: 'application/pdf' });
+
+    renderComposer('another-room', { pendingFiles: [file] });
+
+    expect(screen.queryByText('only-in-a.pdf')).not.toBeInTheDocument();
+  });
+
+  it('asks for nothing more while its own room opens', async () => {
+    const user = userEvent.setup();
+    h.requestedRoomUuid = 'another-room';
+    renderComposer('another-room');
+
+    const textarea = screen.getByRole('textbox', { name: 'Message' });
+    await user.click(textarea);
+    await user.keyboard('h');
+
+    expect(h.showRoomHere).not.toHaveBeenCalled();
+    expect(textarea).toHaveAttribute('placeholder', 'Connecting...');
+  });
+
+  describe('while another view has the room', () => {
+    it('offers to open its room here', () => {
+      renderComposer('another-room');
+
+      const textarea = screen.getByRole('textbox', { name: 'Message' });
+      expect(textarea).toBeEnabled();
+      expect(textarea).toHaveAttribute(
+        'placeholder',
+        'Click or type to open this conversation here',
+      );
+    });
+
+    it('brings its room here on a click', async () => {
+      const user = userEvent.setup();
+      renderComposer('another-room');
+
+      await user.click(screen.getByRole('textbox', { name: 'Message' }));
+
+      expect(h.showRoomHere).toHaveBeenCalledWith('another-room');
+    });
+
+    it('brings its room here once typing starts', async () => {
+      const user = userEvent.setup();
+      renderComposer('another-room');
+      act(() => screen.getByRole('textbox', { name: 'Message' }).focus());
+
+      await user.keyboard('h');
+
+      expect(h.showRoomHere).toHaveBeenCalledWith('another-room');
+    });
+
+    // Many layouts type @ with Option (macOS) or AltGr (Ctrl+Alt on Windows).
+    it.each([
+      ['Option', '{Alt>}@{/Alt}'],
+      ['AltGr', '{Control>}{Alt>}@{/Alt}{/Control}'],
+    ])(
+      'brings its room here for a character typed with %s',
+      async (_, keys) => {
+        const user = userEvent.setup();
+        renderComposer('another-room');
+        act(() => screen.getByRole('textbox', { name: 'Message' }).focus());
+
+        await user.keyboard(keys);
+
+        expect(h.showRoomHere).toHaveBeenCalledWith('another-room');
+      },
     );
 
-    expect(screen.getByRole('textbox', { name: 'Message' })).toBeDisabled();
+    it('stays put on shortcuts', async () => {
+      const user = userEvent.setup();
+      renderComposer('another-room');
+      act(() => screen.getByRole('textbox', { name: 'Message' }).focus());
+
+      await user.keyboard('{Control>}c{/Control}{Meta>}c{/Meta}');
+
+      expect(h.showRoomHere).not.toHaveBeenCalled();
+    });
+
+    // Tab, a screen reader or a restored focus only pass through.
+    it('stays put on focus and on keys that move on', async () => {
+      const user = userEvent.setup();
+      renderComposer('another-room');
+      act(() => screen.getByRole('textbox', { name: 'Message' }).focus());
+
+      await user.keyboard('{ArrowDown}{Escape}{Shift}{Tab}');
+
+      expect(h.showRoomHere).not.toHaveBeenCalled();
+    });
+
+    it('brings its room here on a paste, without staging the file', async () => {
+      const user = userEvent.setup();
+      const addFiles = vi.fn();
+      renderComposer('another-room', { addFiles });
+      act(() => screen.getByRole('textbox', { name: 'Message' }).focus());
+
+      await user.paste(
+        pastedFile(new File(['x'], 'shot.png', { type: 'image/png' })),
+      );
+
+      expect(h.showRoomHere).toHaveBeenCalledWith('another-room');
+      expect(addFiles).not.toHaveBeenCalled();
+    });
+
+    it('stages no file picked for it', async () => {
+      const user = userEvent.setup();
+      const addFiles = vi.fn();
+      const { container } = renderComposer('another-room', { addFiles });
+
+      await user.upload(
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+        container.querySelector<HTMLInputElement>('input[type="file"]')!,
+        new File(['x'], 'a.png', { type: 'image/png' }),
+      );
+
+      expect(addFiles).not.toHaveBeenCalled();
+    });
+
+    it('can be clicked back after the room left while it had focus', async () => {
+      const user = userEvent.setup();
+      const { rerender } = renderComposer('uuid-1');
+      const textarea = screen.getByRole('textbox', { name: 'Message' });
+      await user.click(textarea);
+
+      h.activeRoomUuid = 'page-room';
+      h.requestedRoomUuid = 'page-room';
+      rerender(composer('uuid-1'));
+      await user.click(textarea);
+
+      expect(h.showRoomHere).toHaveBeenCalledWith('uuid-1');
+    });
   });
 });
 
@@ -279,6 +467,54 @@ describe('MatrixMessageInput replies', () => {
       '{Escape}',
     );
     expect(value.cancelReply).toHaveBeenCalled();
+  });
+
+  it('drops a command picked while another room is active', async () => {
+    const user = userEvent.setup();
+    const picked = actions({ replyTo: null, pickedCommand: 'ticket' });
+    const idle = actions({ replyTo: null });
+    const inRoom = (roomUuid: string, value: MatrixMessageActions) => (
+      <MatrixMessageActionsProvider value={value}>
+        {composer(roomUuid)}
+      </MatrixMessageActionsProvider>
+    );
+    const { rerender } = render(inRoom('uuid-1', idle), { wrapper });
+    await user.type(screen.getByRole('textbox', { name: 'Message' }), 'half');
+
+    rerender(inRoom('another-room', picked));
+    rerender(inRoom('uuid-1', idle));
+
+    expect(picked.clearPickedCommand).toHaveBeenCalled();
+    expect(screen.getByRole('textbox', { name: 'Message' })).toHaveValue(
+      'half',
+    );
+  });
+
+  it("leaves the open room's messages alone while another room is active", async () => {
+    const user = userEvent.setup();
+    const value = actions({ replyTo: null });
+    render(
+      <MatrixMessageActionsProvider value={value}>
+        <MatrixMessageInput
+          roomUuid="another-room"
+          uploadFile={vi.fn()}
+          uploading={false}
+          pendingFiles={[]}
+          addFiles={vi.fn()}
+          removePending={vi.fn()}
+          setPending={vi.fn()}
+          clearPending={vi.fn()}
+        />
+      </MatrixMessageActionsProvider>,
+      { wrapper },
+    );
+
+    await user.type(
+      screen.getByRole('textbox', { name: 'Message' }),
+      '{ArrowUp}',
+    );
+
+    expect(value.editLastOwnMessage).not.toHaveBeenCalled();
   });
 
   it('edits the last own message with Up in an empty composer', async () => {

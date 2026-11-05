@@ -103,7 +103,7 @@ beforeEach(() => {
   h.matrixClient = {
     client: null,
     activeRoomId: null,
-    activeRoomUuid: null,
+    activeRoomUuid: 'room-1',
   };
   h.isRoomMuted = vi.fn().mockReturnValue(false);
   h.setRoomMuted = vi.fn().mockResolvedValue(undefined);
@@ -122,6 +122,12 @@ describe('MatrixChatHeader', () => {
 
   it('hides the members button when the room has no members', () => {
     h.members = [];
+    renderHeader();
+    expect(screen.queryByRole('button', { name: /members/i })).toBeNull();
+  });
+
+  it('shows no member count of another room that is open', () => {
+    h.matrixClient.activeRoomUuid = 'other-room';
     renderHeader();
     expect(screen.queryByRole('button', { name: /members/i })).toBeNull();
   });
@@ -267,6 +273,26 @@ describe('MatrixChatHeader', () => {
     await user.hover(await screen.findByText('Chat commands'));
     expect(
       await screen.findByRole('tooltip', { name: reason }),
+    ).toBeInTheDocument();
+  });
+
+  it('offers no commands of another room that is open', async () => {
+    const user = userEvent.setup();
+    h.commands = [{ name: 'status', source: 'bot', available: true }];
+    h.matrixClient.activeRoomUuid = 'other-room';
+    const { container } = renderHeader();
+    await user.click(actionsToggle(container));
+    const item = await screen.findByText('Chat commands');
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(item.closest('[role="menuitem"]')).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
+    await user.hover(item);
+    expect(
+      await screen.findByRole('tooltip', {
+        name: 'The conversation is not open yet.',
+      }),
     ).toBeInTheDocument();
   });
 
