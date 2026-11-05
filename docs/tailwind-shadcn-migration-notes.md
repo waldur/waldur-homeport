@@ -122,7 +122,7 @@ Vite injects component-level stylesheets (`import './Foo.scss'`) as **unlayered*
 Consequently, any selector in a component SCSS file will override styles inside `@layer bootstrap`.
 
 > [!IMPORTANT]
-> **Scoping Rule**: Component SCSS must be strictly scoped under its own unique component class (e.g. `.my-component .title`), **never** directly under a layout root (`.aside`, `.header`, `.toolbar`, `.card`). Nesting a layout class inside your own root is safe; styling an ancestor layout root directly in component SCSS breaks layout rules app-wide. Global layout overrides belong exclusively in `src/styles/legacy/` (imported inside the bootstrap layer).
+> **Scoping Rule**: Component SCSS must be strictly scoped under its own unique component class (e.g. `.my-component .title`), **never** directly under a layout root (`.aside`, `.header`, `.toolbar`, or a waldur-ui part's `[data-slot]`). Nesting a layout class inside your own root is safe; styling an ancestor layout root directly in component SCSS breaks layout rules app-wide. Global layout overrides belong exclusively in `src/styles/legacy/` (imported inside the bootstrap layer).
 
 #### Production Layer Optimization
 
@@ -668,7 +668,7 @@ The former `enforce-button-variants` rule was deleted: the variant list lives in
 `yarn test:e2e:visual` runs `e2e-visual/*.spec.ts` through Playwright (project `visual`, against the app on :8001 and Storybook on :6006).
 
 - **`focus-ring.spec.ts`**: asserts that keyboard focus produces a _visible_ indicator with at least 3:1 contrast (WCAG 2.4.7 and 1.4.11), in light and dark. Its fixtures are built from `buttonVariants()` on the `actions-basebutton--playground` story's stylesheet and cover the places a ring was once suppressed: elevation utilities (`shadow-sm`), an unlayered page stylesheet setting a `box-shadow`, a menu row (`navMenuRowClassName()`) and `nav-line-tabs`. The `primary` case is a recorded contrast gap (`test.fail()`): a brand ring on a brand-filled button is about 1.6:1. `.btn-no-focus` is deliberately not a fixture — see the pseudo-states pitfall.
-- **`stat-card-parity.spec.ts`**: old-vs-new parity on one Storybook page through `visualParityHarness.ts`; **`top-bar-geometry.spec.ts`**: the header's measured geometry; **`charts.spec.ts`**, **`wizards.spec.ts`**: page screenshots in the signed-in app.
+- **`top-bar-geometry.spec.ts`**: the header's measured geometry; **`charts.spec.ts`**, **`wizards.spec.ts`**: page screenshots in the signed-in app. The old-vs-new parity specs that ran through `visualParityHarness.ts` are all gone, each when its own Bootstrap half did, and the harness went with the last of them; [visual-testing.md](visual-testing.md) → "Parity specs" keeps the recipe for rebuilding one from history.
 
 How each works, how to write one, and how to compare a branch with `develop` (including the Storybook comparison of every story with `scripts/theme-snapshots.mjs`) is in [visual-testing.md](visual-testing.md).
 

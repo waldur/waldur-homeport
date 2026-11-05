@@ -13,7 +13,7 @@ passes every other check and still changes the page.
 | Question                                                               | Tool                                                                   | Needs                       |
 | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | --------------------------- |
 | Did my branch change how any story renders, compared with `develop`?   | [Storybook comparison](#storybook-comparison-every-story-base-vs-head) | Two Storybook builds        |
-| Does the new component render like the old one it replaces?            | [Parity specs](#parity-specs-old-and-new-side-by-side)                 | Storybook on :6006          |
+| Does the new component render like the old one it replaces?            | [Parity specs](#parity-specs-old-and-new-side-by-side) (a recipe)      | Storybook on :6006          |
 | Is a migrated layout still the size it was measured to be?             | [Geometry specs](#geometry-specs-pinned-measurements)                  | Storybook on :6006          |
 | Do real pages with data still look the same?                           | [Page screenshots](#page-screenshots-with-local-baselines)             | App on :8001 with a backend |
 | How do the busy screens look before and after, with real data?         | [Integration-testing screenshots](#integration-testing-screenshots)    | The MR's CI pipeline        |
@@ -43,7 +43,7 @@ differences to the merge request.
 - **Pixels for colour, boxes for geometry.** A pixel diff is the right check for a colour or a
   missing element. For spacing and size, measure `boundingBox()` instead: a 1px shift changes every
   pixel after it, so a pixel ratio cannot tell "everything moved 1px" from "one thing moved 20px".
-  The parity harness checks dimensions first for this reason.
+  A parity spec checks dimensions first for this reason.
 - **The root font size is 13px (12px below `md`).** rem values differ between the two, so measure
   at both viewports when a layout is rem-based (`top-bar-geometry.spec.ts` does).
 - **Storybook is not the app for focus and hover.** `storybook-addon-pseudo-states` rewrites
@@ -106,14 +106,26 @@ of the page changed, not by how much: a 1px shift near the top of a story change
 
 A parity spec renders the old implementation and its replacement on one Storybook page and diffs
 the two live renders against each other, in the same browser and run, so there is no committed
-baseline to go stale. `e2e-visual/visualParityHarness.ts` provides the machinery;
-`stat-card-parity.spec.ts` uses it. (`card-parity.spec.ts` did, until the cards moved to waldur-ui's
-`Card` and their Metronic stylesheet was deleted: a parity story goes once nothing renders the old
-half.)
+baseline to go stale.
 
-1. **The story** (`src/core/StatCardParity.stories.tsx`, title `Migration/StatCard Parity`) renders each
-   case twice, wrapped in `data-pair="<case>" data-role="old"` and `data-role="new"`, at the same
-   fixed width.
+**Nothing in the repo does this today, and nothing should**: a parity spec needs something to render
+the old half, and Bootstrap, react-bootstrap and `src/metronic` are all gone (epic #467). A parity
+story goes once nothing renders the old half — `base-button-parity`, `card-parity` and
+`stat-card-parity` each went when theirs did, the last when `src/core/StatsCard.tsx` itself moved
+onto waldur-ui's `Card` and both halves of the pair became the same card. Their shared machinery,
+`e2e-visual/visualParityHarness.ts`, went with the last of them: `yarn deps:unused` (knip) reports a
+file nothing imports, and the ignore list is for generated and vendored files, not for code kept on
+spec.
+
+So this section is a recipe, not a description of live code. Recover the harness from history
+(`git show 842ccdd716^:e2e-visual/visualParityHarness.ts`, or any of the three specs beside it) on
+the next migration that replaces a component in place. Once the new component stands alone, pin its
+numbers with a [geometry spec](#geometry-specs-pinned-measurements) instead.
+
+The shape of one, as `stat-card-parity.spec.ts` had it:
+
+1. **The story** (title `Migration/<Component> Parity`) renders each case twice, wrapped in
+   `data-pair="<case>" data-role="old"` and `data-role="new"`, at the same fixed width.
 2. **The spec** creates a harness and runs each case in both themes:
 
    ```typescript
@@ -143,9 +155,11 @@ half.)
    would pass. A failing case writes `<name>-old.png`, `-new.png` and `-diff.png` to `diffDir`.
 4. **Thresholds are measured, not borrowed.** Run the spec, record the largest ratio and
    chromaticity across all cases and both themes, and set each threshold a little above that
-   noise. Write the measurement in a comment next to the threshold, as `stat-card-parity.spec.ts`
-   does. `expectBufferParity()` takes two captured buffers, for cases that need an interaction
-   (hover, focus) between the old and the new capture.
+   noise, and write the measurement in a comment next to the threshold. Never copy another
+   component's numbers: a small text-heavy element's antialiasing noise floor is many times a
+   large solid block's, so one component's passing threshold hides the other's real regression.
+   `expectBufferParity()` takes two captured buffers, for cases that need an interaction (hover,
+   focus) between the old and the new capture.
 
 ## Geometry specs: pinned measurements
 
@@ -238,7 +252,7 @@ locally and put the result in the merge request.
 | `node scripts/theme-snapshots.mjs capture …` / `compare …`           | Storybook comparison                                                        |
 | `node scripts/theme-snapshots.mjs root-invariance …`                 | Stories that render differently at a 13px and a 20px root                   |
 | `yarn test:e2e:visual`                                               | Every `e2e-visual` spec (project `visual`, one worker)                      |
-| `yarn playwright test stat-card-parity --project=visual --workers=1` | One spec; the argument is a filter, and a path is read as a project name    |
+| `yarn playwright test top-bar-geometry --project=visual --workers=1` | One spec; the argument is a filter, and a path is read as a project name    |
 | `yarn test:visual:update`                                            | Rewrite the local `toHaveScreenshot()` baselines (every project)            |
 
 `playwright.config.ts` starts the app (`yarn start`, :8001) and Storybook (`yarn storybook --ci`,

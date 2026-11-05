@@ -59,7 +59,8 @@ export const StatCard = ({
   <Card bordered className={className}>
     {/* No `gap` here: the real component uses two different row gaps
         (label->value is .mt-3 = 0.75rem, value->footer is .mt-2 = 0.5rem) —
-        a single uniform gap-3 (measured via e2e-visual/stat-card-parity.spec.ts)
+        a single uniform gap-3 (measured against the Bootstrap original by
+        the since-removed e2e-visual/stat-card-parity.spec.ts)
         made the value->footer gap 0.25rem too wide. Applied as mt-[..] on
         each row instead, as rem (not their px-at-13px-root equivalents —
         see this file's top comment on why). */}
@@ -87,8 +88,9 @@ export const StatCard = ({
           0.5rem. That margin isn't just the gap before an optional footer
           (mt-[0.5rem] below already covers that as its own leading margin)
           — it's real trailing space on the value itself, present even with
-          no footer at all, confirmed via e2e-visual/stat-card-parity.spec.ts:
-          without it, this card measured ~0.5rem short. */}
+          no footer at all, confirmed against the Bootstrap original by the
+          since-removed e2e-visual/stat-card-parity.spec.ts: without it, this
+          card measured ~0.5rem short. */}
       <div
         className={cn(
           'font-semibold text-primary',

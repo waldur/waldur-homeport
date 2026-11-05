@@ -92,20 +92,64 @@ describe('checkRetiredClass', () => {
   it('returns null for valid Tailwind or custom classes', () => {
     expect(checkRetiredClass('flex')).toBeNull();
     expect(checkRetiredClass('text-base')).toBeNull();
-    expect(checkRetiredClass('card-title')).toBeNull();
     expect(checkRetiredClass('custom-button')).toBeNull();
+  });
+
+  it('returns the data-slot to target for a retired card class', () => {
+    expect(checkRetiredClass('card')).toEqual({
+      replacement: '`#{$card}` ([data-slot="card"])',
+      kind: 'card',
+    });
+    // Bootstrap's .card-body is CardContent, not a "card-body" slot.
+    expect(checkRetiredClass('card-body')).toEqual({
+      replacement: '`#{$card-body}` ([data-slot="card-content"])',
+      kind: 'card',
+    });
+    // A Bootstrap part waldur-ui Card has no equivalent of.
+    expect(checkRetiredClass('card-text')).toEqual({
+      replacement: null,
+      kind: 'card',
+    });
+  });
+
+  it('leaves our own classes that merely contain "card" alone', () => {
+    expect(checkRetiredClass('offering-card-compact')).toBeNull();
+    expect(checkRetiredClass('compact-card-hover-action')).toBeNull();
+    expect(checkRetiredClass('image-card-header')).toBeNull();
   });
 });
 
 describe('waldur/no-retired-class-selectors rule', () => {
   it('accepts valid modern Tailwind and component selectors', async () => {
     const warnings = await lint(`
-      .card > .flex { color: red; }
+      [data-slot='card'] > .flex { color: red; }
+      .offering-card-compact { color: red; }
       .text-base { font-size: 16px; }
       [data-x=".d-flex"] .custom-table { display: block; }
       .card-#{$variant} { margin: 0; }
     `);
     expect(warnings).toEqual([]);
+  });
+
+  it('rejects retired card class selectors', async () => {
+    const warnings = await lint(`
+      .card .card-header .card-toolbar { margin: 0; }
+      .card-body { padding: 0; }
+      .card-text { color: red; }
+    `);
+    expect(warnings.length).toBe(5);
+    expect(warnings[0].text).toContain(
+      'Do not target retired card class `.card`: nothing emits it, so this rule selects nothing. Target `#{$card}` ([data-slot="card"]) instead.',
+    );
+    expect(warnings[2].text).toContain(
+      'Target `#{$card-toolbar}` ([data-slot="card-toolbar"]) instead.',
+    );
+    expect(warnings[3].text).toContain(
+      'Target `#{$card-body}` ([data-slot="card-content"]) instead.',
+    );
+    expect(warnings[4].text).toContain(
+      'waldur-ui Card has no equivalent part — delete the rule.',
+    );
   });
 
   it('rejects retired layout class selectors', async () => {
