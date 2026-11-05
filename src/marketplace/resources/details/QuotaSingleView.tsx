@@ -16,7 +16,9 @@ interface QuotaSingleView {
   // When a spending limit's period starts from zero.
   resets?: string;
   // Two components share the width, so details stack as label/value rows
-  // instead of spreading out in columns.
+  // instead of spreading out in columns. Each column can be as narrow as
+  // ~160px, so label and value split it in halves: a fixed term width plus
+  // the row gap would leave the value no room at all.
   stacked?: boolean;
 }
 
@@ -57,10 +59,11 @@ export const QuotaSingleView = ({
         label={typeof title === 'string' ? title : undefined}
       />
       {stacked ? (
-        <PropertyList variant="summary" className="mt-2.5" termWidth="sm">
+        <PropertyList variant="summary" className="mt-2.5" termWidth="50%">
           {details.map((detail) => (
             <PropertyItem
               key={detail.label}
+              className="sm:gap-0"
               label={detail.label}
               value={detail.value}
             />
