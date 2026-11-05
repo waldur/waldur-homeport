@@ -92,8 +92,9 @@ export const AnnouncementDetailsDialog: FC<{
       view.description.includes('###') ||
       view.description.length > 200);
 
+  // Without structured content the property list below already shows these.
   const renderMaintenanceHeader = () => {
-    if (!isMaintenance) return null;
+    if (!isMaintenance || !hasStructuredContent) return null;
 
     const headerParts = [];
     if (view.serviceProvider) {
@@ -101,12 +102,12 @@ export const AnnouncementDetailsDialog: FC<{
     }
     if (view.scheduledStart) {
       headerParts.push(
-        `${translate('Ongoing Since')}: ${formatDateTime(view.scheduledStart)}`,
+        `${translate('Scheduled start')}: ${formatDateTime(view.scheduledStart)}`,
       );
     }
     if (view.scheduledEnd) {
       headerParts.push(
-        `${translate('Expected Completion')}: ${formatDateTime(view.scheduledEnd)}`,
+        `${translate('Scheduled end')}: ${formatDateTime(view.scheduledEnd)}`,
       );
     }
 
@@ -187,7 +188,7 @@ export const AnnouncementDetailsDialog: FC<{
           />
           {view.scheduledStart && (
             <PropertyItem
-              label={translate('Ongoing Since')}
+              label={translate('Scheduled start')}
               value={propVal.date(view.scheduledStart, {
                 precision: 'datetime',
               })}
@@ -195,7 +196,7 @@ export const AnnouncementDetailsDialog: FC<{
           )}
           {view.scheduledEnd && (
             <PropertyItem
-              label={translate('Expected Completion')}
+              label={translate('Scheduled end')}
               value={propVal.date(view.scheduledEnd, {
                 precision: 'datetime',
               })}

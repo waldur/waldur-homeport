@@ -3,11 +3,10 @@ import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { AdminAnnouncement } from 'waldur-js-client';
 
-import { ANNOUNCEMENT_ICON } from '@/administration/utils';
 import { translate } from '@/i18n';
 import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 
-import { AnnouncementBar } from './AnnouncementBar';
+import { AdminAnnouncementBar } from './AdminAnnouncementBar';
 
 interface AnnouncementGroupProps {
   announcements: AdminAnnouncement[];
@@ -61,15 +60,10 @@ export const AnnouncementGroup: FC<AnnouncementGroupProps> = ({
 
       {expanded &&
         announcements.map((announcement) => (
-          <AnnouncementBar
+          <AdminAnnouncementBar
             key={announcement.uuid}
-            title={announcement.maintenance_name || undefined}
-            provider={announcement.maintenance_service_provider || undefined}
-            description={announcement.description}
-            icon={ANNOUNCEMENT_ICON[announcement.type].icon}
-            variant={ANNOUNCEMENT_ICON[announcement.type].variant}
-            ellipsis
-            onShowMore={() => onShowMore(announcement)}
+            announcement={announcement}
+            onShowMore={onShowMore}
           />
         ))}
     </div>

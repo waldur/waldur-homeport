@@ -21,10 +21,14 @@ interface AnnouncementBarProps {
   label?: ReactNode;
   /** Announcement title (e.g. the maintenance name), shown in title styling. */
   title?: ReactNode;
-  /** Issuing service provider, appended to the title as "by {provider}". */
-  provider?: string;
+  /** Muted line between the title and the message, e.g. the affected
+   * offerings; rendered followed by a colon. */
+  byline?: string;
   description: string;
   onShowMore?: () => void;
+  /** The details hold more than the bar, so "Show more" shows even when the
+   * text fits. Otherwise it shows only when the text is truncated. */
+  hasMoreDetails?: boolean;
   actionLabel?: ReactNode;
   onAction?: () => void;
   /** A second action, shown before the first. */
@@ -49,9 +53,10 @@ const COLORED_CLASSES: Partial<Record<FeaturedIconVariant, string>> = {
 export const AnnouncementBar: FC<AnnouncementBarProps> = ({
   label,
   title,
-  provider,
+  byline,
   description,
   onShowMore,
+  hasMoreDetails,
   actionLabel,
   onAction,
   secondaryActionLabel,
@@ -69,7 +74,7 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
     [description],
   );
 
-  const showMoreButton = onShowMore && isTruncated;
+  const showMoreButton = onShowMore && (hasMoreDetails || isTruncated);
   const colorClass = colored ? COLORED_CLASSES[variant] : undefined;
   const messageClass = colored ? undefined : 'text-quaternary';
 
@@ -100,17 +105,13 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
               {hasColon ? ': ' : ' '}
             </strong>
           ) : (
-            // One line: bold title (the "what"), then the provider as a muted
-            // "by … :" byline (the "who"), then the body message.
+            // One line: bold title (the "what"), then a muted byline (what it
+            // affects), then the body message.
             <>
               {title ? (
                 <strong className="font-semibold">{title}. </strong>
               ) : null}
-              {provider ? (
-                <span className={messageClass}>
-                  {translate('By {provider}', { provider })}:{' '}
-                </span>
-              ) : null}
+              {byline ? <span className={messageClass}>{byline}: </span> : null}
             </>
           )}
           <span
