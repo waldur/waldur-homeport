@@ -40,7 +40,15 @@ export const MetronicInput = (props: any) => {
       props.innerRef.current = node;
     }
   };
-  return <components.Input {...props} innerRef={composedRef} />;
+  // aria-busy tells assistive tech, and end-to-end tests, that the options
+  // are still loading.
+  return (
+    <components.Input
+      {...props}
+      innerRef={composedRef}
+      aria-busy={props.selectProps?.isLoading || undefined}
+    />
+  );
 };
 
 export const FilterSelectClearIndicator = (props: ClearIndicatorProps) => {

@@ -20,6 +20,31 @@ import { FormLegend } from './FormLegend';
 import { FormText } from './FormText';
 
 describe('FormField', () => {
+  it('marks the field and the fieldset with their data-slot', () => {
+    render(
+      <>
+        <FormField data-testid="field">
+          <FormLabel>Name</FormLabel>
+          <Input />
+        </FormField>
+        <FormFieldset>
+          <FormLegend>Range</FormLegend>
+        </FormFieldset>
+      </>,
+    );
+    expect(screen.getByTestId('field')).toHaveAttribute(
+      'data-slot',
+      'form-field',
+    );
+    expect(screen.getByTestId('field')).toContainElement(
+      screen.getByLabelText('Name'),
+    );
+    expect(screen.getByRole('group', { name: 'Range' })).toHaveAttribute(
+      'data-slot',
+      'form-fieldset',
+    );
+  });
+
   it('points the label at the control through controlId', () => {
     render(
       <FormField controlId="name">

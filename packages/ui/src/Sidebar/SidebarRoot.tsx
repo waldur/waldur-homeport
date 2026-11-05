@@ -55,6 +55,7 @@ export function Sidebar({
   if (collapsible === 'none') {
     return (
       <div
+        data-sidebar="sidebar"
         className={cn(
           'flex h-full w-(--sidebar-width) flex-col border-[color:var(--sidebar-border)] bg-[var(--sidebar-bg)]',
           className,
@@ -78,7 +79,9 @@ export function Sidebar({
           <SheetHeader className="sr-only">
             <SheetTitle>Sidebar</SheetTitle>
           </SheetHeader>
-          <div className="flex h-full w-full flex-col">{children}</div>
+          <div data-sidebar="sidebar" className="flex h-full w-full flex-col">
+            {children}
+          </div>
         </SheetContent>
       </Sheet>
     );
@@ -101,6 +104,7 @@ export function Sidebar({
       />
       {/* Fixed sidebar panel overlay */}
       <div
+        data-sidebar="sidebar"
         className={cn(
           'group/panel fixed inset-y-0 z-sidebar-panel hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-300 ease-[ease] md:flex',
           side === 'left'

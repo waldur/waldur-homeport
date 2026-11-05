@@ -14,6 +14,7 @@ const Body = forwardRef<HTMLFieldSetElement, FormFieldsetProps>(
     return (
       <fieldset
         ref={ref}
+        data-slot="form-fieldset"
         className={cn('m-0 min-w-0 border-0 p-0', className)}
         {...props}
         aria-describedby={

@@ -11,6 +11,16 @@ const options = [
 ];
 
 describe('Select component', () => {
+  it('marks the input aria-busy while options load', () => {
+    const { rerender } = render(
+      <Select options={options} isLoading onChange={() => {}} />,
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute('aria-busy', 'true');
+
+    rerender(<Select options={options} onChange={() => {}} />);
+    expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-busy');
+  });
+
   it('names each multi-select value remove button after its option', () => {
     render(
       <Select
