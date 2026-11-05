@@ -45929,7 +45929,8 @@
   },
   "PubSub health": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "PubSub service unavailable": {
@@ -67120,6 +67121,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "project-digest"
+    }
+  },
+  "Unable to load event consumer settings.": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "Unable to load financial overview.": {

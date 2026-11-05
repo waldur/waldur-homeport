@@ -28,7 +28,7 @@ const RABBITMQ_TAB = {
 
 // The PubSub debug API is staff-only; this replaces the route-level
 // `permissions: [isStaff]` guard that the standalone page carried.
-const PUBSUB_TAB = {
+export const PUBSUB_TAB = {
   key: 'pubsub',
   title: translate('PubSub health'),
   component: lazyComponent(() =>

@@ -16,6 +16,7 @@ import { states as administrationStates } from '@/administration/routes';
 import { SERVICE_DESK_TABS } from '@/administration/service-desk/AdministrationServiceDesk';
 import { DATABASE_TABS } from '@/administration/system-management/DatabasePage';
 import { LOGGING_TELEMETRY_TABS } from '@/administration/system-management/LoggingTelemetryPage';
+import { PUBSUB_TAB } from '@/administration/system-management/WorkersPage';
 import { ENV } from '@/core/config';
 import { FeaturesDescription } from '@/features/FeaturesDescription';
 import { MATRIX_STAFF_TABS } from '@/matrix/MatrixAdminDashboard';
@@ -82,6 +83,22 @@ describe('administration settings registry', () => {
     expect(invalidRoutes).toEqual([]);
   });
 
+  it('declares the setting param on every route a setting group opens', () => {
+    // ui-router drops undeclared params, so search would land on the page
+    // without scrolling to or highlighting the setting
+    const urlByState = Object.fromEntries(
+      administrationStates.map((s) => [s.name, s.url ?? '']),
+    );
+
+    const missingParam = Object.entries(getSettingGroupLocations())
+      .filter(
+        ([, location]) => !/[?&]setting\b/.test(urlByState[location.state]),
+      )
+      .map(([group, location]) => `${group} -> ${location.state}`);
+
+    expect(missingParam).toEqual([]);
+  });
+
   it('points every tabbed location at a tab its page renders', () => {
     // A key the page doesn't have silently falls back to its first tab
     const pageTabKeys: Record<string, string[]> = Object.fromEntries(
@@ -100,6 +117,7 @@ describe('administration settings registry', () => {
         ],
         'admin-database': DATABASE_TABS,
         'admin-logging-telemetry': LOGGING_TELEMETRY_TABS,
+        'admin-workers': [PUBSUB_TAB],
       }).map(([state, tabs]) => [state, tabs.map((tab) => tab.key)]),
     );
 
@@ -187,12 +205,23 @@ describe('administration settings registry', () => {
     expect(
       supportItems.find((item) => item.location.state === 'admin-arrow'),
     ).toBeUndefined();
+    // Support users don't get the PubSub health tab
+    expect(
+      supportItems.find(
+        (item) => item.key === 'EVENT_CONSUMER_EPHEMERAL_IDLE_HOURS',
+      ),
+    ).toBeUndefined();
 
     expect(
       staffItems.find((item) => item.location.state === 'admin-email-health'),
     ).toBeDefined();
     expect(
       staffItems.find((item) => item.location.state === 'admin-arrow'),
+    ).toBeDefined();
+    expect(
+      staffItems.find(
+        (item) => item.key === 'EVENT_CONSUMER_EPHEMERAL_IDLE_HOURS',
+      ),
     ).toBeDefined();
   });
 

@@ -198,8 +198,8 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'admin-workers',
-    url: 'workers/?tab',
-    params: { tab: { dynamic: true } },
+    url: 'workers/?tab&setting',
+    params: { tab: { dynamic: true }, setting: { dynamic: true } },
     parent: 'admin-system-management',
     component: lazyComponent(() =>
       import('./system-management/WorkersPage').then((module) => ({
