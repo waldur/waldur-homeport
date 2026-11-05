@@ -353,6 +353,36 @@ describe('api', () => {
       expect(result).toHaveLength(5);
       expect(result.map((r) => r.uuid)).toEqual(['1', '2', '3', '4', '5']);
     });
+
+    it('stops paging once the signal is aborted', async () => {
+      const controller = new AbortController();
+      const mockFetch = vi.fn().mockImplementation(() => {
+        controller.abort();
+        return Promise.resolve({
+          rows: [{ uuid: '1' }],
+          resultCount: 3,
+          nextPage: 2,
+        });
+      });
+      const onProgress = vi.fn();
+
+      await expect(
+        fetchAll(
+          mockFetch,
+          {
+            tableKey: 'TestTable',
+            currentPage: 1,
+            pageSize: 1,
+            filter: {},
+            options: { signal: controller.signal },
+          },
+          onProgress,
+        ),
+      ).rejects.toThrow();
+
+      expect(mockFetch).toHaveBeenCalledTimes(1);
+      expect(onProgress).toHaveBeenCalledWith(1, 3);
+    });
   });
 
   describe('createClientPaginatedFetcher', () => {

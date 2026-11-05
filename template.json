@@ -21928,6 +21928,21 @@
       "feature_area": "matrix"
     }
   },
+  "Exporting {fetched} of {total} rows...": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "variables": {
+        "fetched": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "table",
+      "action_type": "create"
+    }
+  },
   "Exporting...": {
     "context": {
       "primary_ui_type": "submit_button",

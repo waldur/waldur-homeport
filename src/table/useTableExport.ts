@@ -1,4 +1,5 @@
 import { isEqual } from 'es-toolkit';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from 'waldur-i18n-runtime';
@@ -61,8 +62,17 @@ export function getExportColumnCount(table, props): number | undefined {
   return getExportColumns(props ?? {}).length;
 }
 
+/** Exports the table. The run stops when `abort` is called or the dialog
+ * using the hook unmounts: no file, no toast, no `closeDialog`. */
 export function useTableExport(table, props?) {
   const { closeDialog } = useModal();
+  const controller = useRef<AbortController>(undefined);
+  const [progress, setProgress] = useState<{
+    fetched: number;
+    total: number;
+  }>();
+  const abort = () => controller.current?.abort();
+  useEffect(() => abort, []);
   const { showSuccess, showErrorResponse } = useNotify();
   const {
     exportFields,
@@ -81,7 +91,7 @@ export function useTableExport(table, props?) {
 
   /** The table's own list request for every page: its filters, search term
    * and sorting. */
-  function buildRequest(): TableRequest {
+  function buildRequest(signal: AbortSignal): TableRequest {
     // Use current filter from props (passed from Table component) instead of
     // stale filter from registry, as the registry filter is captured only once
     // when the table is first registered. Also check tableExtraFilters for
@@ -92,6 +102,7 @@ export function useTableExport(table, props?) {
       pageSize: Math.max(tableState.pagination.resultCount, 200),
       currentPage: 1,
       filter: { ...currentFilter },
+      options: { signal },
     };
     if (options.queryField && tableState.query) {
       request.filter[options.queryField] = tableState.query;
@@ -102,24 +113,27 @@ export function useTableExport(table, props?) {
     return request;
   }
 
+  const onProgress = (fetched: number, total: number) =>
+    setProgress({ fetched, total });
+
   /** Every field the API returns. The rows on screen were fetched with only
    * the visible columns' fields, so the current page is fetched again too. */
-  async function fetchApiRows(config: ExportConfig) {
-    const request = buildRequest();
+  async function fetchApiRows(config: ExportConfig, signal: AbortSignal) {
+    const request = buildRequest(signal);
     delete request.filter.field;
     if (config.allPages) {
-      return fetchAll(fetchData, request);
+      return fetchAll(fetchData, request, onProgress);
     }
     request.currentPage = tableState.pagination.currentPage;
     request.pageSize = tableState.pagination.pageSize;
     return (await fetchData(request)).rows;
   }
 
-  async function fetchRows(config) {
+  async function fetchRows(config, signal: AbortSignal) {
     const exportColumns = customExport ? [] : getExportColumns(props);
 
     if (config.allPages) {
-      const request = buildRequest();
+      const request = buildRequest(signal);
 
       if (customExport) {
         if (exportKeys && exportKeys.length > 0) {
@@ -141,7 +155,7 @@ export function useTableExport(table, props?) {
         }
       }
 
-      rows = await fetchAll(fetchData, request);
+      rows = await fetchAll(fetchData, request, onProgress);
     }
 
     let data;
@@ -192,11 +206,15 @@ export function useTableExport(table, props?) {
     return data;
   }
 
-  return async (config: ExportConfig) => {
+  const exportTable = async (config: ExportConfig) => {
+    controller.current = new AbortController();
+    const { signal } = controller.current;
+    setProgress(undefined);
     try {
       // The server writes this one; nothing to assemble from the rows.
       if (config.content === 'full' && props?.fullExport) {
-        await props.fullExport.download({ query: tableState.query });
+        await props.fullExport.download({ query: tableState.query, signal });
+        if (signal.aborted) return;
         showSuccess(
           translate('Table has been exported to {format}.', { format: 'CSV' }),
         );
@@ -205,11 +223,15 @@ export function useTableExport(table, props?) {
       }
       if (config.format === 'json') {
         const { default: saveAsJson } = await import('./exporters/json');
-        saveAsJson(table, await fetchApiRows(config));
+        const rows = await fetchApiRows(config, signal);
+        if (signal.aborted) return;
+        saveAsJson(table, rows);
       } else {
-        const data = await fetchRows(config);
+        const data = await fetchRows(config, signal);
+        if (signal.aborted) return;
         await exportAs(config.format, table, data);
       }
+      if (signal.aborted) return;
       showSuccess(
         translate('Table has been exported to {format}.', {
           format: config.format,
@@ -217,7 +239,10 @@ export function useTableExport(table, props?) {
       );
       closeDialog();
     } catch (e) {
+      if (signal.aborted) return;
       showErrorResponse(e, translate('Unable to export table.'));
     }
   };
+
+  return { exportTable, abort, progress };
 }

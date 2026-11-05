@@ -72,7 +72,7 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
       description: translate(
         'Every field, including the amount requested per offering component and the review scores.',
       ),
-      download: ({ query }) =>
+      download: ({ query, signal }) =>
         downloadFile(
           buildCallExportUrl(
             call,
@@ -82,6 +82,7 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
             query,
           ),
           `${call.slug || call.uuid}-proposals.csv`,
+          signal,
         ),
     }),
     [call, formFilters],

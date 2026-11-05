@@ -57,7 +57,7 @@ export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
       description: translate(
         'Every review of the call, with reviewer, score and public comment.',
       ),
-      download: ({ query }) =>
+      download: ({ query, signal }) =>
         downloadFile(
           buildCallExportUrl(
             call,
@@ -67,6 +67,7 @@ export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
             query,
           ),
           `${call.slug || call.uuid}-reviews.csv`,
+          signal,
         ),
     }),
     [call, formFilters],

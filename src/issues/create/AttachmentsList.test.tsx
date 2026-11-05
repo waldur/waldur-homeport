@@ -30,7 +30,7 @@ describe('AttachmentsList', () => {
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: /guide\.pdf/ }));
 
-    expect(api.get).toHaveBeenCalledWith(attachment.file);
+    expect(api.get).toHaveBeenCalledWith(attachment.file, undefined);
   });
 
   it('does not submit the surrounding form', async () => {

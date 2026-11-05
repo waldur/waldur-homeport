@@ -4,7 +4,7 @@ import { Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
 
 import { translate } from 'waldur-i18n-runtime';
-import { AlertItem, HelpIcon } from 'waldur-ui';
+import { AlertItem, HelpIcon, useModal, useModalHide } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { SubmitButton, SelectGroup, BooleanGroup, RadioGroup } from '@/form';
@@ -69,11 +69,21 @@ export const ExportDialog = (props: ExportDialogProps) => {
     [],
   );
 
-  const callback = useTableExport(props.resolve.table, props.resolve.ownProps);
+  const { exportTable, abort, progress } = useTableExport(
+    props.resolve.table,
+    props.resolve.ownProps,
+  );
+  const { closeDialog } = useModal();
+  const hide = useModalHide();
+  // Stops the export at once rather than when the closing dialog unmounts.
+  const cancel = () => {
+    abort();
+    (hide ?? closeDialog)();
+  };
 
   return (
     <Form<ExportConfig>
-      onSubmit={callback}
+      onSubmit={exportTable}
       initialValues={initialValues}
       decorators={decorators}
       render={({ handleSubmit, submitting, invalid, values }) => {
@@ -84,14 +94,22 @@ export const ExportDialog = (props: ExportDialogProps) => {
               title={translate('Export as')}
               footer={
                 <>
-                  <CloseDialogButton disabled={submitting} />
+                  <CloseDialogButton onClick={cancel} />
                   <SubmitButton
                     disabled={invalid || Boolean(pdfWarning)}
                     submitting={submitting}
                     label={
-                      submitting
-                        ? translate('Exporting...')
-                        : translate('Export')
+                      !submitting
+                        ? translate('Export')
+                        : progress?.total
+                          ? translate(
+                              'Exporting {fetched} of {total} rows...',
+                              {
+                                fetched: progress.fetched,
+                                total: progress.total,
+                              },
+                            )
+                          : translate('Exporting...')
                     }
                   />
                 </>

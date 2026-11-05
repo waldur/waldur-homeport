@@ -111,12 +111,21 @@ export function createFetcher<F extends SdkFunction<any, any, any>>(
   };
 }
 
-export async function fetchAll(fetch: Fetcher, request: TableRequest) {
+/** Every page of the list. Stops with the signal in `request.options`;
+ * `onProgress` gets the rows fetched so far and the total. */
+export async function fetchAll(
+  fetch: Fetcher,
+  request: TableRequest,
+  onProgress?: (fetched: number, total: number) => void,
+) {
+  const signal = request.options?.signal;
   let response = await fetch(request);
   let result = [];
 
   while (true) {
     result = result.concat(response.rows);
+    onProgress?.(result.length, response.resultCount);
+    signal?.throwIfAborted();
     if (response.nextPage) {
       request.currentPage = response.nextPage;
       response = await fetch(request);
