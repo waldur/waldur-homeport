@@ -1,10 +1,9 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 
-import { BadgeVariant } from 'waldur-ui';
+import { BadgeVariant, StatCardGrid } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -172,7 +171,7 @@ export const CallPerformanceList: FC = () => {
   return (
     <>
       <ReportingTitle reportKey="call-performance" />
-      <SummaryWidget stats={summary} />
+      <StatCardGrid stats={summary} />
 
       <Table<CallPerformanceStat>
         columns={columns}

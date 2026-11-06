@@ -1338,6 +1338,7 @@
   },
   "Accepted proposals": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "call-management"
     }
   },
@@ -1970,6 +1971,7 @@
   },
   "Active alerts": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "table-growth"
     }
   },
@@ -2084,6 +2086,7 @@
   },
   "Active rounds": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "call-management"
     }
   },
@@ -2099,6 +2102,7 @@
   },
   "Active tasks": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "celery"
     }
   },
@@ -2146,6 +2150,7 @@
   },
   "Actual daily avg (this month)": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "reports"
     }
   },
@@ -4095,6 +4100,7 @@
   },
   "Allocation period": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
@@ -8059,6 +8065,7 @@
   },
   "Avg resolution (h)": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "tickets"
     }
   },
@@ -9449,6 +9456,7 @@
   },
   "CPU cores": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
@@ -9487,6 +9495,7 @@
   },
   "CPU-hours": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
@@ -9843,6 +9852,7 @@
   },
   "Calls closing soon": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "call-management"
     }
   },
@@ -11348,6 +11358,7 @@
   },
   "Closed issues (this month)": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "dashboard"
     }
   },
@@ -13973,6 +13984,7 @@
   },
   "Coverage": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
@@ -18547,6 +18559,7 @@
   },
   "Drawn so far": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "policy-watch"
     }
   },
@@ -21136,6 +21149,7 @@
   },
   "Escalated": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "organizations"
     }
   },
@@ -24485,16 +24499,19 @@
   },
   "GPU memory": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
   "GPU power": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
   "GPU use": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
@@ -24510,11 +24527,13 @@
   },
   "GPU-hours observed": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
   "GPUs": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
@@ -25900,6 +25919,7 @@
   },
   "Host memory": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
@@ -26507,6 +26527,7 @@
   },
   "Idle share": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
@@ -29351,6 +29372,7 @@
   },
   "Last month drew": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "policy-watch"
     }
   },
@@ -39139,6 +39161,7 @@
   },
   "Open calls": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "proposals"
     }
   },
@@ -39190,6 +39213,7 @@
   },
   "Open issues": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "dashboard"
     }
   },
@@ -41146,6 +41170,7 @@
   },
   "Partition {name}": {
     "context": {
+      "primary_ui_type": "label",
       "variables": {
         "name": {
           "type": "string"
@@ -41667,6 +41692,7 @@
   },
   "Pending offering requests": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "call-management"
     }
   },
@@ -41700,6 +41726,7 @@
   },
   "Pending proposals": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "call-management"
     }
   },
@@ -41736,6 +41763,7 @@
   },
   "Pending reviews": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "call-management"
     }
   },
@@ -43642,6 +43670,7 @@
   },
   "Predicted daily spend (today)": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "reports"
     }
   },
@@ -45345,6 +45374,7 @@
   "Projected increase in active subscriptions": {},
   "Projected month-end": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "policy-watch"
     }
   },
@@ -47318,6 +47348,7 @@
   },
   "Recent broadcasts (this month)": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "dashboard"
     }
   },
@@ -47333,6 +47364,7 @@
   },
   "Recent pace": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
@@ -48008,6 +48040,7 @@
   },
   "Remaining {currencyName}": {
     "context": {
+      "primary_ui_type": "label",
       "variables": {
         "currencyName": {
           "type": "string"
@@ -49639,6 +49672,7 @@
   },
   "Reserved tasks": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "celery"
     }
   },
@@ -52153,6 +52187,7 @@
   },
   "Round closing soon": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "call-management"
     }
   },
@@ -52384,6 +52419,7 @@
   },
   "Running / pending": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
@@ -52413,6 +52449,7 @@
   },
   "Runs out": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
@@ -52501,6 +52538,7 @@
   },
   "SLA breaches": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "tickets"
     }
   },
@@ -53008,6 +53046,7 @@
   },
   "Scheduled tasks": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "celery"
     }
   },
@@ -59037,6 +59076,7 @@
   },
   "Tables monitored": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "table-growth"
     }
   },
@@ -63730,6 +63770,7 @@
   },
   "Thresholds (weekly / monthly)": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "table-growth"
     }
   },
@@ -63869,6 +63910,7 @@
   },
   "Timed out": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "hpc"
     }
   },
@@ -64653,6 +64695,7 @@
   },
   "Total processed": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "celery"
     }
   },
@@ -64780,6 +64823,7 @@
   },
   "Total {currencyName} awarded": {
     "context": {
+      "primary_ui_type": "label",
       "variables": {
         "currencyName": {
           "type": "string"
@@ -64790,6 +64834,7 @@
   },
   "Total {currencyName} spent (all time)": {
     "context": {
+      "primary_ui_type": "label",
       "variables": {
         "currencyName": {
           "type": "string"
@@ -64800,6 +64845,7 @@
   },
   "Total {currencyName} spent (this month)": {
     "context": {
+      "primary_ui_type": "label",
       "variables": {
         "currencyName": {
           "type": "string"
@@ -81711,6 +81757,7 @@
   },
   "{name} used": {
     "context": {
+      "primary_ui_type": "label",
       "variables": {
         "name": {
           "type": "string"

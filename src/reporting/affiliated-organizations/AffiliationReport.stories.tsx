@@ -6,9 +6,10 @@ import {
   AffiliatedOrganizationReportRow,
 } from 'waldur-js-client';
 
+import { StatCardGrid } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { defaultCurrency } from '@/core/formatCurrency';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { translate } from '@/i18n';
 import { ModalProvider } from '@/modal/ModalContext';
@@ -95,7 +96,7 @@ const ReportPreview = () => {
         <ModalProvider>
           <DrawerProvider>
             <div className="p-4">
-              <SummaryWidget
+              <StatCardGrid
                 stats={[
                   {
                     label: translate('Affiliated organizations'),

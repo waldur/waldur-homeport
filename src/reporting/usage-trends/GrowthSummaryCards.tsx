@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react';
 
-import { SummaryWidget } from '@/core/SummaryWidget';
+import { StatCardGrid } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -37,5 +38,5 @@ export const GrowthSummaryCards: FC<GrowthSummaryCardsProps> = ({
     [stats, year],
   );
 
-  return <SummaryWidget stats={summary} />;
+  return <StatCardGrid stats={summary} />;
 };

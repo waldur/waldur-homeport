@@ -36,6 +36,7 @@ import {
   FormField,
   FormLabel,
   SegmentedControl,
+  type StatCardTone,
   Tabs,
   TabsContent,
   TabsList,
@@ -46,6 +47,7 @@ import {
   Card,
   CardContent,
   CardHeader,
+  StatCardGrid,
 } from 'waldur-ui';
 
 import { getNextPageUrl } from '@/core/api';
@@ -624,48 +626,6 @@ const ProjectAutocompleteDialog: FC<{
   );
 };
 
-// ── Summary stat card ─────────────────────────────────────────────────────────
-
-interface StatCardProps {
-  label: string;
-  value: string;
-  variant?: 'default' | 'success' | 'warning' | 'danger';
-}
-
-const BORDER_CLASSES: Record<string, string> = {
-  success: 'border-success',
-  warning: 'border-warning',
-  danger: 'border-danger',
-};
-
-const StatCard: FC<StatCardProps> = ({ label, value, variant = 'default' }) => {
-  const textClass =
-    variant === 'success'
-      ? 'text-success'
-      : variant === 'warning'
-        ? 'text-warning'
-        : variant === 'danger'
-          ? 'text-danger'
-          : '';
-
-  return (
-    <Card
-      className={classNames('flex-1', BORDER_CLASSES[variant])}
-      style={{ minWidth: 180 }}
-    >
-      <CardContent className="py-2.5">
-        <div className="text-quaternary small mb-1">{label}</div>
-        <div className={`text-base font-medium ${textClass}`}>
-          {(variant === 'warning' || variant === 'danger') && (
-            <WarningCircleIcon className="me-1" size={18} weight="fill" />
-          )}
-          {value}
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
-
 // ── Main tab ──────────────────────────────────────────────────────────────────
 
 export const OrganisationAllocationTab: FC = () => {
@@ -864,6 +824,16 @@ export const OrganisationAllocationTab: FC = () => {
       actualDailyAvg,
     };
   }, [summaries]);
+
+  // How close this month's actual daily spend runs to the predicted rate.
+  const getDailyAvgTone = (): StatCardTone | undefined => {
+    if (stats.predictedDailyToday <= 0) return undefined;
+    const ratio = stats.actualDailyAvg / stats.predictedDailyToday;
+    if (ratio >= 0.8 && ratio <= 1.2) return 'success';
+    if (ratio >= 0.6 && ratio <= 1.4) return 'warning';
+    return 'danger';
+  };
+  const dailyAvgTone = getDailyAvgTone();
 
   // ── Burn-down chart controls ────────────────────────────────────────────
   const [chartType, setChartType] = useState<ChartType>('bar');
@@ -1257,47 +1227,53 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* ── Summary stats ───────────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <div className="flex flex-wrap gap-2.5 mb-3">
-          <StatCard
-            label={translate('Total {currencyName} awarded', { currencyName })}
-            value={fmtCredits(stats.totalCredits)}
-          />
-          <StatCard
-            label={translate('Total {currencyName} spent (all time)', {
-              currencyName,
-            })}
-            value={fmtCredits(stats.totalSpent)}
-          />
-          <StatCard
-            label={translate('Total {currencyName} spent (this month)', {
-              currencyName,
-            })}
-            value={fmtCredits(stats.totalSpentThisMonth)}
-          />
-          <StatCard
-            label={translate('Predicted daily spend (today)')}
-            value={fmtCredits(stats.predictedDailyToday)}
-          />
-          <StatCard
-            label={translate('Actual daily avg (this month)')}
-            value={fmtCredits(stats.actualDailyAvg)}
-            variant={
-              stats.predictedDailyToday > 0
-                ? (() => {
-                    const ratio =
-                      stats.actualDailyAvg / stats.predictedDailyToday;
-                    if (ratio >= 0.8 && ratio <= 1.2) return 'success';
-                    if (ratio >= 0.6 && ratio <= 1.4) return 'warning';
-                    return 'danger';
-                  })()
-                : undefined
-            }
-          />
-          <StatCard
-            label={translate('Remaining {currencyName}', { currencyName })}
-            value={fmtCredits(stats.remaining)}
-          />
-        </div>
+        <StatCardGrid
+          className="mb-3"
+          spaceless
+          stats={[
+            {
+              label: translate('Total {currencyName} awarded', {
+                currencyName,
+              }),
+              value: fmtCredits(stats.totalCredits),
+            },
+            {
+              label: translate('Total {currencyName} spent (all time)', {
+                currencyName,
+              }),
+              value: fmtCredits(stats.totalSpent),
+            },
+            {
+              label: translate('Total {currencyName} spent (this month)', {
+                currencyName,
+              }),
+              value: fmtCredits(stats.totalSpentThisMonth),
+            },
+            {
+              label: translate('Predicted daily spend (today)'),
+              value: fmtCredits(stats.predictedDailyToday),
+            },
+            {
+              label: translate('Actual daily avg (this month)'),
+              value: fmtCredits(stats.actualDailyAvg),
+              tone: dailyAvgTone,
+              icon:
+                dailyAvgTone && dailyAvgTone !== 'success' ? (
+                  <WarningCircleIcon
+                    size={18}
+                    weight="fill"
+                    className={
+                      dailyAvgTone === 'danger' ? 'text-danger' : 'text-warning'
+                    }
+                  />
+                ) : undefined,
+            },
+            {
+              label: translate('Remaining {currencyName}', { currencyName }),
+              value: fmtCredits(stats.remaining),
+            },
+          ]}
+        />
       )}
 
       {/* ── Burn-down chart ─────────────────────────────────────────────── */}

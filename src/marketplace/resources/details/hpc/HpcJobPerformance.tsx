@@ -10,7 +10,7 @@ import {
   hpcWorkspacesJobsPerformanceRetrieve,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, Code, StatCard } from 'waldur-ui';
+import { AlertItem, BaseButton, Code, StatCardGrid } from 'waldur-ui';
 
 import { ChartSpecView } from '@/core/charts/ChartSpecView';
 import { formatDateTime } from '@/core/dateUtils';
@@ -48,84 +48,76 @@ const SummaryTiles: FC<{
   summary: HpcJobPerformanceSummary;
   job: HpcJob;
 }> = ({ summary, job }) => (
-  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-    {summary.gpus ? (
-      <>
-        <StatCard
-          size="sm"
-          label={translate('GPUs')}
-          value={summary.gpus}
-          hint={translate('{count} node(s)', { count: summary.nodes })}
-        />
-        <StatCard
-          size="sm"
-          label={translate('GPU-hours observed')}
-          value={number(summary.gpu_hours_observed)}
-          hint={translate('Real: {value} (allocated × elapsed)', {
-            value: number(job.gpu_hours),
-          })}
-        />
-        <StatCard
-          size="sm"
-          label={translate('GPU use')}
-          value={`${number(summary.gpu_use_percent, 0)}%`}
-          hint={translate('Mean over GPUs and samples')}
-        />
-        <StatCard
-          size="sm"
-          label={translate('Idle share')}
-          value={`${number(summary.idle_share_percent, 0)}%`}
-          hint={translate('Samples with every GPU under 5%')}
-          className={
-            (summary.idle_share_percent ?? 0) >= IDLE_FLAG_PERCENT
-              ? 'border-warning'
-              : undefined
-          }
-        />
-        <StatCard
-          size="sm"
-          label={translate('GPU memory')}
-          value={`${number(summary.gpu_memory_percent, 0)}%`}
-          hint={translate('Peak {peak} of {total} GiB', {
-            peak: number(summary.gpu_memory_peak_gib),
-            total: number(summary.gpu_memory_total_gib, 0),
-          })}
-        />
-        <StatCard
-          size="sm"
-          label={translate('GPU power')}
-          value={`${number(summary.gpu_power_watts, 0)} W`}
-          hint={translate('Mean per GPU')}
-        />
-      </>
-    ) : (
-      <StatCard size="sm" label={translate('Nodes')} value={summary.nodes} />
-    )}
-    <StatCard
-      size="sm"
-      label={translate('CPU cores')}
-      value={number(summary.cpu_cores_mean)}
-      hint={translate('Mean, all nodes')}
-    />
-    <StatCard
-      size="sm"
-      label={translate('Host memory')}
-      value={`${number(summary.host_memory_peak_gib)} GiB`}
-      hint={translate('Peak; mean {mean} GiB', {
-        mean: number(summary.host_memory_mean_gib),
-      })}
-    />
-    <StatCard
-      size="sm"
-      label={translate('Coverage')}
-      value={`${number(summary.coverage_percent, 0)}%`}
-      hint={translate('{count} samples, {first} – {last}', {
-        count: summary.samples,
-        first: when(summary.first_sample),
-        last: when(summary.last_sample),
-      })}
-    />
-  </div>
+  <StatCardGrid
+    size="sm"
+    spaceless
+    stats={[
+      ...(summary.gpus
+        ? [
+            {
+              label: translate('GPUs'),
+              value: summary.gpus,
+              footer: translate('{count} node(s)', { count: summary.nodes }),
+            },
+            {
+              label: translate('GPU-hours observed'),
+              value: number(summary.gpu_hours_observed),
+              footer: translate('Real: {value} (allocated × elapsed)', {
+                value: number(job.gpu_hours),
+              }),
+            },
+            {
+              label: translate('GPU use'),
+              value: `${number(summary.gpu_use_percent, 0)}%`,
+              footer: translate('Mean over GPUs and samples'),
+            },
+            {
+              label: translate('Idle share'),
+              value: `${number(summary.idle_share_percent, 0)}%`,
+              footer: translate('Samples with every GPU under 5%'),
+              tone:
+                (summary.idle_share_percent ?? 0) >= IDLE_FLAG_PERCENT
+                  ? ('warning' as const)
+                  : undefined,
+            },
+            {
+              label: translate('GPU memory'),
+              value: `${number(summary.gpu_memory_percent, 0)}%`,
+              footer: translate('Peak {peak} of {total} GiB', {
+                peak: number(summary.gpu_memory_peak_gib),
+                total: number(summary.gpu_memory_total_gib, 0),
+              }),
+            },
+            {
+              label: translate('GPU power'),
+              value: `${number(summary.gpu_power_watts, 0)} W`,
+              footer: translate('Mean per GPU'),
+            },
+          ]
+        : [{ label: translate('Nodes'), value: summary.nodes }]),
+      {
+        label: translate('CPU cores'),
+        value: number(summary.cpu_cores_mean),
+        footer: translate('Mean, all nodes'),
+      },
+      {
+        label: translate('Host memory'),
+        value: `${number(summary.host_memory_peak_gib)} GiB`,
+        footer: translate('Peak; mean {mean} GiB', {
+          mean: number(summary.host_memory_mean_gib),
+        }),
+      },
+      {
+        label: translate('Coverage'),
+        value: `${number(summary.coverage_percent, 0)}%`,
+        footer: translate('{count} samples, {first} – {last}', {
+          count: summary.samples,
+          first: when(summary.first_sample),
+          last: when(summary.last_sample),
+        }),
+      },
+    ]}
+  />
 );
 
 const getProcessColumns = (): Column<HpcJobProcess>[] => [

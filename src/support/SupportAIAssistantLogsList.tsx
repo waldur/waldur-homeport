@@ -6,8 +6,9 @@ import {
   ThreadSession,
 } from 'waldur-js-client';
 
+import { StatCardGrid } from 'waldur-ui';
+
 import { formatUsageValue } from '@/core/formatNumber';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import {
   cacheReadTokensColumn,
@@ -250,7 +251,7 @@ export const SupportAIAssistantLogsList: FunctionComponent = () => {
 
   return (
     <div className="pt-4">
-      {threadStats && <SummaryWidget stats={stats} />}
+      {threadStats && <StatCardGrid stats={stats} />}
       <Table<ThreadSession>
         {...tableProps}
         fetch={handleRefresh}

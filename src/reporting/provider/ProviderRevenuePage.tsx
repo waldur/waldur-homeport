@@ -3,12 +3,11 @@ import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { marketplaceServiceProvidersRevenueList } from 'waldur-js-client';
 
-import { Card, CardContent } from 'waldur-ui';
+import { Card, CardContent, StatCardGrid } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
@@ -74,7 +73,7 @@ const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
 
   return (
     <>
-      <SummaryWidget stats={stats} />
+      <StatCardGrid stats={stats} />
       <ProviderRevenueChart data={data} />
     </>
   );

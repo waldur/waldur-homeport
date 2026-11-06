@@ -6,8 +6,9 @@ import {
   reviewerProfilesMeRetrieve,
 } from 'waldur-js-client';
 
+import { StatCardGrid } from 'waldur-ui';
+
 import { fetchResultCount } from '@/core/api';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
@@ -97,5 +98,5 @@ export const ReviewStatsWidgets: FC = () => {
     return null;
   }
 
-  return <SummaryWidget stats={summary} />;
+  return <StatCardGrid stats={summary} />;
 };

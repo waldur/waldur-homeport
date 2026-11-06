@@ -6,9 +6,10 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
+import { StatCardGrid } from 'waldur-ui';
+
 import { fetchResultCount } from '@/core/api';
 import { FAST_STALE_TIME } from '@/core/constants';
-import { StatisticsCard } from '@/core/StatisticsCard';
 import { translate } from '@/i18n';
 
 import { Call } from '../types';
@@ -67,35 +68,17 @@ export const CallDashboard: FC<CallDashboardProps> = ({ call }) => {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 mb-5">
-        <div>
-          <StatisticsCard
-            title={translate('Rounds')}
-            value={call.rounds?.length || 0}
-          />
-        </div>
-        <div>
-          <StatisticsCard
-            title={translate('Offerings')}
-            value={call.offerings?.length || 0}
-          />
-        </div>
-        <div>
-          <StatisticsCard
-            title={translate('Reviewer pool')}
-            value={reviewerPoolCount}
-          />
-        </div>
-        <div>
-          <StatisticsCard
-            title={translate('Proposals')}
-            value={proposalsCount}
-          />
-        </div>
-        <div>
-          <StatisticsCard title={translate('Reviews')} value={reviewsCount} />
-        </div>
-      </div>
+      <StatCardGrid
+        className="mb-5"
+        spaceless
+        stats={[
+          { label: translate('Rounds'), value: call.rounds?.length || 0 },
+          { label: translate('Offerings'), value: call.offerings?.length || 0 },
+          { label: translate('Reviewer pool'), value: reviewerPoolCount },
+          { label: translate('Proposals'), value: proposalsCount },
+          { label: translate('Reviews'), value: reviewsCount },
+        ]}
+      />
       <WorkflowStepsSection call={call} viewOnly />
     </>
   );

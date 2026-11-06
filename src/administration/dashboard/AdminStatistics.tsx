@@ -8,11 +8,13 @@ import {
   usersCount,
 } from 'waldur-js-client';
 
+import { StatCardGrid } from 'waldur-ui';
+
 import { fetchResultCount } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { StatisticsCard } from '@/core/StatisticsCard';
+import { ViewAllLink } from '@/core/ViewAllLink';
 import { translate } from '@/i18n';
 
 import * as api from '../api';
@@ -60,66 +62,57 @@ export const AdminStatistics = () => {
     staleTime: STALE_TIME,
   });
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  if (error) {
+    return (
+      <LoadingErred
+        message={translate('Unable to load statistics data')}
+        loadData={refetch}
+        className="mb-3"
+      />
+    );
+  }
+  if (!data) {
+    return null;
+  }
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5">
-      {error && (
-        <LoadingErred
-          message={translate('Unable to load statistics data')}
-          loadData={refetch}
-          className="mb-3 col-span-full"
-        />
-      )}
-      {data && (
-        <>
-          <div>
-            <StatisticsCard
-              title={translate('Organizations')}
-              value={data.organizations}
-              to={{ state: 'organizations' }}
-            />
-          </div>
-          <div>
-            <StatisticsCard
-              title={translate('Projects')}
-              value={data.projects}
-              to={{ state: 'projects' }}
-            />
-          </div>
-          <div>
-            <StatisticsCard
-              title={translate('Users')}
-              value={data.users}
-              to={{ state: 'support-users' }}
-            />
-          </div>
-          <div>
-            <StatisticsCard
-              title={translate('Categories')}
-              value={data.categories}
-              to={{ state: 'admin-marketplace-categories' }}
-            />
-          </div>
-          <div>
-            <StatisticsCard
-              title={translate('Offerings')}
-              value={data.providerOfferings}
-              to={{ state: 'admin-marketplace-offerings' }}
-            />
-          </div>
-          <div>
-            <StatisticsCard
-              title={translate('Resources')}
-              value={data.resources}
-              to={{ state: 'all-resources' }}
-            />
-          </div>
-        </>
-      )}
-      {isLoading && (
-        <div>
-          <LoadingSpinner />
-        </div>
-      )}
-    </div>
+    <StatCardGrid
+      stats={[
+        {
+          label: translate('Organizations'),
+          value: data.organizations,
+          footer: <ViewAllLink to={{ state: 'organizations' }} />,
+        },
+        {
+          label: translate('Projects'),
+          value: data.projects,
+          footer: <ViewAllLink to={{ state: 'projects' }} />,
+        },
+        {
+          label: translate('Users'),
+          value: data.users,
+          footer: <ViewAllLink to={{ state: 'support-users' }} />,
+        },
+        {
+          label: translate('Categories'),
+          value: data.categories,
+          footer: (
+            <ViewAllLink to={{ state: 'admin-marketplace-categories' }} />
+          ),
+        },
+        {
+          label: translate('Offerings'),
+          value: data.providerOfferings,
+          footer: <ViewAllLink to={{ state: 'admin-marketplace-offerings' }} />,
+        },
+        {
+          label: translate('Resources'),
+          value: data.resources,
+          footer: <ViewAllLink to={{ state: 'all-resources' }} />,
+        },
+      ]}
+    />
   );
 };

@@ -7,11 +7,12 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { StatCardGrid } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -149,7 +150,7 @@ const ProviderResourcesContent: FC<{ providerUuid: string }> = ({
 
   return (
     <>
-      <SummaryWidget stats={stats} />
+      <StatCardGrid stats={stats} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-5">
         <div>

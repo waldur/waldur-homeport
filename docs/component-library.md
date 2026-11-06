@@ -236,12 +236,13 @@ export const MyEditButton = ({ row, refetch }) => (
 
 ### Cards and Layout Components
 
-| Component          | Location                                                        | Description        | Key Features                         |
-| ------------------ | --------------------------------------------------------------- | ------------------ | ------------------------------------ |
-| **Panel**          | `src/core/Panel.tsx`                                            | Basic card panel   | Header, actions, flexible content    |
-| **AccordionCard**  | `waldur-ui` (`packages/ui/src/AccordionCard/AccordionCard.tsx`) | Collapsible card   | Toggle functionality, custom styling |
-| **WidgetCard**     | `src/dashboard/WidgetCard.tsx`                                  | Dashboard widget   | Flexible layout, action dropdown     |
-| **StatisticsCard** | `src/core/StatisticsCard.tsx`                                   | Statistics display | Large value display, "View all" link |
+| Component         | Location                                                        | Description        | Key Features                         |
+| ----------------- | --------------------------------------------------------------- | ------------------ | ------------------------------------ |
+| **Panel**         | `src/core/Panel.tsx`                                            | Basic card panel   | Header, actions, flexible content    |
+| **AccordionCard** | `waldur-ui` (`packages/ui/src/AccordionCard/AccordionCard.tsx`) | Collapsible card   | Toggle functionality, custom styling |
+| **WidgetCard**    | `src/dashboard/WidgetCard.tsx`                                  | Dashboard widget   | Flexible layout, action dropdown     |
+| **StatCard**      | `waldur-ui` (`packages/ui/src/StatCard/StatCard.tsx`)           | One figure (KPI)   | `icon`, `footer`, `tone`, `sm` size  |
+| **StatCardGrid**  | `waldur-ui` (`packages/ui/src/StatCard/StatCardGrid.tsx`)       | Row of `StatCard`s | Columns sized by tile count          |
 
 ### Data Display Components
 

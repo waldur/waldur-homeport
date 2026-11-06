@@ -46,11 +46,11 @@ const renderPanel = () => {
 
 const request = { tableKey: 't', currentPage: 1, pageSize: 10, filter: {} };
 
-// Every stat lands in an h1, and the two widgets render in DOM order — visitor
-// traffic first, the nightly judge second — so slicing pins each row without
-// test-only markup.
+// Every stat's figure is StatCard's `stat-card-value`, and the two widgets
+// render in DOM order — visitor traffic first, the nightly judge second — so
+// slicing pins each row.
 const statValues = () =>
-  screen.getAllByRole('heading', { level: 1 }).map((h) => h.textContent);
+  screen.getAllByTestId('stat-card-value').map((node) => node.textContent);
 
 const kpiFixture = (overrides: Record<string, unknown> = {}) => ({
   interactions_total: 111,
@@ -229,7 +229,7 @@ describe('AnonymousChatPanel', () => {
 
     renderPanel();
 
-    // Combined, so the row stays at the five tiles SummaryWidget lays out
+    // Combined, so the row stays at the five tiles StatCardGrid lays out
     // without wrapping. Asserting the sum also pins that both halves feed it —
     // rendering either one alone would show a different number.
     await screen.findByText('1,203,595');

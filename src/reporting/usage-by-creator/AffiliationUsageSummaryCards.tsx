@@ -1,7 +1,8 @@
 import { FC, useMemo } from 'react';
 
+import { StatCardGrid } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 
 import { UsageByAffiliationSummary } from './types';
@@ -29,5 +30,5 @@ export const AffiliationUsageSummaryCards: FC<Props> = ({ summary }) => {
     [summary],
   );
 
-  return <SummaryWidget stats={stats} />;
+  return <StatCardGrid stats={stats} />;
 };

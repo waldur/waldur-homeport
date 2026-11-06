@@ -7,13 +7,12 @@ import {
   CustomerAffiliate,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, StatCardGrid } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { lazyComponent } from '@/core/lazyComponent';
 import { StateIndicator } from '@/core/StateIndicator';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { createFetcher } from '@/table/api';
@@ -114,7 +113,7 @@ export const AffiliateEarningsList: FC<{ customerUuid: string }> = ({
 
   return (
     <>
-      {credit && <SummaryWidget stats={summary} />}
+      {credit && <StatCardGrid stats={summary} />}
       <Table<CustomerAffiliate>
         {...tableProps}
         columns={columns}

@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { supportStatisticsRetrieve } from 'waldur-js-client';
 
+import { StatCardGrid } from 'waldur-ui';
+
 import { STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { StatisticsCard } from '@/core/StatisticsCard';
+import { ViewAllLink } from '@/core/ViewAllLink';
 import { translate } from '@/i18n';
 import { IsOpenOptions } from '@/table/generated/SupportIssuesFilter';
 
@@ -28,45 +30,40 @@ export const SupportStatistics = () => {
     staleTime: STALE_TIME,
   });
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  if (error) {
+    return (
+      <LoadingErred
+        message={translate('Unable to load statistics data')}
+        loadData={refetch}
+        className="mb-3"
+      />
+    );
+  }
+  if (!data) {
+    return null;
+  }
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5">
-      {error && (
-        <LoadingErred
-          message={translate('Unable to load statistics data')}
-          loadData={refetch}
-          className="col-span-full mb-3"
-        />
-      )}
-      {data && (
-        <>
-          <div>
-            <StatisticsCard
-              title={translate('Open issues')}
-              value={data.open_issues_count}
-              to={getIssueState(true)}
-            />
-          </div>
-          <div>
-            <StatisticsCard
-              title={translate('Closed issues (this month)')}
-              value={data.closed_this_month_count}
-              to={getIssueState(false)}
-            />
-          </div>
-          <div>
-            <StatisticsCard
-              title={translate('Recent broadcasts (this month)')}
-              value={data.recent_broadcasts_count}
-              to={{ state: 'support-broadcast' }}
-            />
-          </div>
-        </>
-      )}
-      {isLoading && (
-        <div>
-          <LoadingSpinner />
-        </div>
-      )}
-    </div>
+    <StatCardGrid
+      stats={[
+        {
+          label: translate('Open issues'),
+          value: data.open_issues_count,
+          footer: <ViewAllLink to={getIssueState(true)} />,
+        },
+        {
+          label: translate('Closed issues (this month)'),
+          value: data.closed_this_month_count,
+          footer: <ViewAllLink to={getIssueState(false)} />,
+        },
+        {
+          label: translate('Recent broadcasts (this month)'),
+          value: data.recent_broadcasts_count,
+          footer: <ViewAllLink to={{ state: 'support-broadcast' }} />,
+        },
+      ]}
+    />
   );
 };

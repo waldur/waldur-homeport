@@ -5,10 +5,9 @@ import {
 } from '@phosphor-icons/react';
 import { CSSProperties, FC } from 'react';
 
-import { AlertItem, Badge, BadgeVariant } from 'waldur-ui';
+import { AlertItem, Badge, BadgeVariant, StatCardGrid } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
-import { StatsCard } from '@/core/StatsCard';
 import { translate } from '@/i18n';
 
 import { getWatchColors } from '../chartColors';
@@ -183,35 +182,30 @@ export const PacingIndicator: FC<Props> = ({
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-3 mb-4 md:grid-cols-3">
-        <div>
-          <StatsCard
-            label={translate('Drawn so far')}
-            value={defaultCurrency(creditableCost)}
-            footer={shareOfExpected(usageFraction)}
-          />
-        </div>
-        <div>
-          <StatsCard
-            label={translate('Projected month-end')}
-            value={defaultCurrency(projected)}
-            footer={shareOfExpected(projectedFraction)}
-          />
-        </div>
-        <div>
-          <StatsCard
-            label={translate('Last month drew')}
-            value={defaultCurrency(creditTerms?.consumptionLastMonth || 0)}
-            footer={
+      <StatCardGrid
+        stats={[
+          {
+            label: translate('Drawn so far'),
+            value: defaultCurrency(creditableCost),
+            footer: shareOfExpected(usageFraction),
+          },
+          {
+            label: translate('Projected month-end'),
+            value: defaultCurrency(projected),
+            footer: shareOfExpected(projectedFraction),
+          },
+          {
+            label: translate('Last month drew'),
+            value: defaultCurrency(creditTerms?.consumptionLastMonth || 0),
+            footer:
               reference > 0 && creditTerms
                 ? shareOfExpected(
                     (creditTerms.consumptionLastMonth || 0) / reference,
                   )
-                : undefined
-            }
-          />
-        </div>
-      </div>
+                : undefined,
+          },
+        ]}
+      />
 
       <div className="flex flex-wrap justify-between items-center gap-1.5 mb-1.5">
         <div className="flex items-center gap-1.5">

@@ -7,11 +7,12 @@ import {
   ProviderOffering,
 } from 'waldur-js-client';
 
+import { StatCardGrid } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { getLabel } from '@/marketplace/common/registry';
 import { OfferingStateField } from '@/marketplace/offerings/OfferingStateField';
@@ -147,7 +148,7 @@ const ProviderOfferingsSummary: FC<{ providerUuid: string }> = ({
 
   return (
     <>
-      <SummaryWidget
+      <StatCardGrid
         stats={[
           { label: translate('Total offerings'), value: offerings.length },
           { label: translate('Active offerings'), value: activeOfferings },

@@ -7,8 +7,9 @@ import {
   feedbackRequestsCount,
 } from 'waldur-js-client';
 
+import { StatCardGrid } from 'waldur-ui';
+
 import { fetchResultCount } from '@/core/api';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -94,7 +95,7 @@ export const FeedbackLogsStats: FC<{ filter: RequestsQuery }> = ({
     ? Math.round((data['answered'] / data.total) * 100)
     : 0;
   return (
-    <SummaryWidget
+    <StatCardGrid
       stats={[
         { label: translate('Response rate'), value: `${rate}%` },
         { label: translate('Prompted'), value: data.total },

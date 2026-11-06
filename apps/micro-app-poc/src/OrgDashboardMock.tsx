@@ -15,7 +15,7 @@ import {
   OrgSwitcher,
   PropertyList,
   SidebarModeCard,
-  StatCard,
+  StatCardGrid,
   WaldurLogo,
 } from 'waldur-ui';
 
@@ -177,24 +177,29 @@ export const OrgDashboardMock = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          <StatCard label={translate('Projects')} value={projectsCount} />
-          <StatCard
-            label={translate('Members')}
-            value={usersCount}
-            hint={translate('across projects')}
-          />
-          <StatCard
-            label={translate('Invoice due')}
-            value={invoiceTotal}
-            hint={invoiceHint}
-          />
-          <StatCard
-            label={translate('Quota health')}
-            value={translate('Good')}
-            hint={translate('all under 80% (mock — see file header comment)')}
-          />
-        </div>
+        <StatCardGrid
+          spaceless
+          stats={[
+            { label: translate('Projects'), value: projectsCount },
+            {
+              label: translate('Members'),
+              value: usersCount,
+              footer: translate('across projects'),
+            },
+            {
+              label: translate('Invoice due'),
+              value: invoiceTotal,
+              footer: invoiceHint,
+            },
+            {
+              label: translate('Quota health'),
+              value: translate('Good'),
+              footer: translate(
+                'all under 80% (mock — see file header comment)',
+              ),
+            },
+          ]}
+        />
 
         <Card>
           <CardHeader className="p-4 pb-0 text-sm font-semibold text-primary">

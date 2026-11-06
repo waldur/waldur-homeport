@@ -1,10 +1,14 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 
-import { AlertItem, Tooltip } from 'waldur-ui';
+import {
+  AlertItem,
+  StatCardGrid,
+  type StatCardGridItem,
+  Tooltip,
+} from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
-import { StatsCard } from '@/core/StatsCard';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { isFeatureVisible } from '@/features/connect';
 import { DashboardFeatures } from '@/FeaturesEnums';
@@ -193,27 +197,11 @@ const CreditMetrics: FC<{ data: PolicyWatchData }> = ({ data }) => {
         />
       ),
     },
-  ].filter(Boolean) as Array<{
-    label: string;
-    value: ReactNode;
-    icon?: ReactNode;
-  }>;
+  ].filter(Boolean) as StatCardGridItem[];
 
   return (
     <>
-      <div
-        className={
-          stats.length > 2
-            ? 'grid grid-cols-1 gap-3 mb-4 md:grid-cols-3'
-            : 'grid grid-cols-1 gap-3 mb-4 md:grid-cols-2'
-        }
-      >
-        {stats.map((stat, index) => (
-          <div key={index}>
-            <StatsCard label={stat.label} value={stat.value} icon={stat.icon} />
-          </div>
-        ))}
-      </div>
+      <StatCardGrid stats={stats} />
       {isBlockedByOrganization && (
         <AlertItem
           variant="error"
