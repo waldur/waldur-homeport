@@ -27,13 +27,14 @@ import { Tab } from './Tab';
 import { isDescendantOf, useTabs } from './useTabs';
 
 /** A page tab's title, followed by its count when it has one. */
-const PageTabTitle: FC<{ tab: Tab }> = ({ tab }) => (
+const PageTabTitle: FC<{ tab: Tab; active: boolean }> = ({ tab, active }) => (
   <>
     {tab.title}
     <TabCount
       count={tab.count}
       countVariant={tab.countVariant}
       countLabel={tab.countLabel}
+      active={active}
     />
   </>
 );
@@ -176,7 +177,7 @@ const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
             className={TAB_CLASSNAME}
             aria-current={active ? 'true' : undefined}
           >
-            <PageTabTitle tab={parentTab} />
+            <PageTabTitle tab={parentTab} active={active} />
             {/* Takes the label's colour; flips to point up while open. */}
             <CaretDownIcon
               size={16.9}
@@ -265,12 +266,18 @@ export const TabsList: FC = () => {
               {parentTab.disabled && parentTab.disabledReason ? (
                 <Tooltip label={parentTab.disabledReason}>
                   <span className="inline-flex items-center">
-                    <PageTabTitle tab={parentTab} />
+                    <PageTabTitle
+                      tab={parentTab}
+                      active={isMatch(activeTab, parentTab)}
+                    />
                   </span>
                 </Tooltip>
               ) : (
                 <span className="inline-flex items-center">
-                  <PageTabTitle tab={parentTab} />
+                  <PageTabTitle
+                    tab={parentTab}
+                    active={isMatch(activeTab, parentTab)}
+                  />
                 </span>
               )}
             </TabLink>

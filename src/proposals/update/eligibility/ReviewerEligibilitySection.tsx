@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
-import { AlertItem, HelpIcon, PropertyCard, PropertyList } from 'waldur-ui';
+import { HelpIcon, PropertyCard, PropertyList } from 'waldur-ui';
 
 import { EligibilityRestrictionFormItems } from '@/core/restrictions';
 import { EditFieldProvider } from '@/form/editFields';
@@ -44,7 +44,7 @@ export const ReviewerEligibilitySection: FC<
           {translate('Reviewer eligibility')}{' '}
           <HelpIcon
             label={translate(
-              'Restricts who may review for the call, separately from who may apply. Read like applicant eligibility: email patterns, affiliations and identity sources form one group, and each configured AAI field is required on top. Empty fields are not checked.',
+              'Restricts who may review for the call, separately from who may apply. Read like applicant eligibility: email patterns, affiliations and identity sources form one group, and each configured AAI field is required on top. Empty fields are not checked. A reviewer is checked when invited to the pool, accepting an invitation, suggested, or given the call reviewer role.',
             )}
             size={20}
             className="mx-1.5"
@@ -53,14 +53,11 @@ export const ReviewerEligibilitySection: FC<
       }
       className="mb-4"
     >
-      <AlertItem
-        variant="info"
-        className="mb-4"
-        title={translate('Checked when a reviewer joins the call')}
-        body={translate(
-          'When a reviewer is invited to the pool, accepts an invitation, is suggested, or is given the call reviewer role. Reviewers already in the pool are not removed.',
+      <p className="text-quaternary pt-4 mb-0">
+        {translate(
+          'Reviewers already in the pool are not removed when these rules change.',
         )}
-      />
+      </p>
       <EditFieldProvider
         scope={call.reviewer_eligibility ?? {}}
         callback={updateCall}

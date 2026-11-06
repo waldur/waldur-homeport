@@ -287,4 +287,27 @@ describe('TabsList', () => {
     );
     expect(screen.getByRole('link', { name: 'Roles' })).toBeInTheDocument();
   });
+
+  it('colours the current tab count primary and the rest neutral', () => {
+    tabs.current = [
+      {
+        title: 'Requests',
+        to: 'public-offering',
+        params: { tab: 'requests' },
+        count: 2,
+      },
+      {
+        title: 'Orders',
+        to: 'public-offering',
+        params: { tab: 'orders' },
+        count: 3,
+      },
+    ];
+    mockRouterOn('public-offering', { tab: 'requests' });
+
+    render(<TabsList />);
+
+    expect(screen.getByText('2')).toHaveAttribute('data-variant', 'primary');
+    expect(screen.getByText('3')).toHaveAttribute('data-variant', 'neutral');
+  });
 });

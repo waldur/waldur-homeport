@@ -385,7 +385,9 @@ export const ProposalManagePage = () => {
 
   return (
     <ProposalEditLockContext.Provider value={lockValue}>
-      <SidebarLayout.Header className="pb-4" fluid>
+      {/* `!`: the header's own stylesheet pads its bottom by 2rem, which would
+          outrank a plain utility; 16px matches the gap between the cards below. */}
+      <SidebarLayout.Header className="pb-4!" fluid>
         <div className="w-full">
           {isCallManagerView ? (
             <CallManagerBreadcrumbs call={call} proposal={proposal} />

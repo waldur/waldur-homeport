@@ -22,7 +22,8 @@ export const ProposalViewNotice: FC<{
       <AlertItem
         type="floating"
         variant="info"
-        className="mb-4 bg-primary"
+        // No margin: it sits in the page body's column, whose gap spaces it.
+        className="bg-primary"
         data-testid="applicant-preview-notice"
         title={translate('Applicant view')}
         body={translate(

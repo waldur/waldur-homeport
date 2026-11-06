@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
-import { AlertItem, HelpIcon, PropertyCard, PropertyList } from 'waldur-ui';
+import { HelpIcon, PropertyCard, PropertyList } from 'waldur-ui';
 
 import { EligibilityRestrictionFormItems } from '@/core/restrictions';
 import { EditFieldProvider } from '@/form/editFields';
@@ -23,7 +23,7 @@ interface CallEligibilitySectionProps {
  * produces a call nobody can apply to. */
 const getEligibilityTooltip = () =>
   translate(
-    'Restricts who may submit a proposal. Email patterns, user affiliations and identity sources form a single group: an applicant matching any one value in it passes. Nationalities and organization types are each checked on top of that, and every assurance level listed is required. A field left empty is not checked, and only attributes this deployment collects are listed.',
+    'Restricts who may submit a proposal. Email patterns, user affiliations and identity sources form a single group: an applicant matching any one value in it passes. Nationalities and organization types are each checked on top of that, and every assurance level listed is required. A field left empty is not checked, and only attributes this deployment collects are listed. An applicant is checked when a proposal is created.',
   );
 
 export const CallEligibilitySection: FC<CallEligibilitySectionProps> = ({
@@ -58,14 +58,11 @@ export const CallEligibilitySection: FC<CallEligibilitySectionProps> = ({
       }
       className="mb-4"
     >
-      <AlertItem
-        variant="info"
-        className="mb-4"
-        title={translate('Checked when a proposal is created')}
-        body={translate(
-          'Drafts started before a restriction was added are not re-checked, and eligibility does not limit who may join the project once the proposal is granted. Values are matched exactly against what the identity provider sends: a scoped affiliation arrives looking like faculty@university.example.',
+      <p className="text-quaternary pt-4 mb-0">
+        {translate(
+          'Drafts started before a rule was added are not re-checked, and the rules do not limit who may join the project once the proposal is granted.',
         )}
-      />
+      </p>
       <EditFieldProvider
         scope={call}
         callback={updateCall}

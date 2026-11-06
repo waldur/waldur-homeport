@@ -70,9 +70,20 @@ const formatRange = (row: ComponentRuleRow) => {
       amount: formatAmount(rule.default_amount, component.measured_unit),
     });
   }
-  return `${renderFieldOrDash(formatAmount(rule.min_per_proposal))} – ${renderFieldOrDash(
-    formatAmount(rule.max_per_proposal),
-  )}`;
+  const min = formatAmount(rule.min_per_proposal);
+  const max = formatAmount(rule.max_per_proposal);
+  // A rule may bound only one end, or neither: name what it allows rather
+  // than drawing a dash for the open end.
+  if (min && max) {
+    return `${min} – ${max}`;
+  }
+  if (min) {
+    return translate('At least {amount}', { amount: min });
+  }
+  if (max) {
+    return translate('Up to {amount}', { amount: max });
+  }
+  return translate('Any amount');
 };
 
 const RuleActions: FC<{
@@ -202,9 +213,7 @@ export const CallOfferingComponentRules: FC<
 
   return (
     <div data-testid="component-rules">
-      <p className="font-medium mb-1">
-        {translate('What a proposal may request')}
-      </p>
+      <h6 className="mb-2.5">{translate('What a proposal may request')}</h6>
       <p className="text-quaternary mb-2.5">
         {lockReason ??
           translate(

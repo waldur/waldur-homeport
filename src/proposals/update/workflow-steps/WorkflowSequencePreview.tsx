@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { FC, ReactNode, useMemo, useState } from 'react';
 import { CallWorkflowStep, ResponsibleRoleEnum } from 'waldur-js-client';
 
-import { PropertyCard } from 'waldur-ui';
+import { HelpIcon, PropertyCard } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import {
@@ -134,20 +134,28 @@ export const WorkflowSequencePreview: FC<WorkflowSequencePreviewProps> = ({
   return (
     <PropertyCard
       bordered
-      title={title ?? translate('Preview sequence')}
+      title={
+        <>
+          {title ?? translate('Preview sequence')}{' '}
+          <HelpIcon
+            label={
+              description ??
+              translate(
+                'Shows the enabled steps above in the order proposals go through them.',
+              )
+            }
+            size={20}
+            className="mx-1.5"
+          />
+        </>
+      }
       refetch={onReset}
     >
-      <p className="text-quaternary text-xs mb-4">
-        {description ??
-          translate(
-            'Shows the enabled steps above in the order proposals go through them.',
-          )}
-      </p>
       {/* Each stage keeps a readable minimum width; past what the card
           holds, the sequence scrolls sideways instead of overflowing the
           page. */}
       <ScrollRegion
-        className="overflow-x-auto pb-1.5"
+        className="overflow-x-auto pt-4 pb-1.5"
         label={translate('Step sequence')}
       >
         <ol
