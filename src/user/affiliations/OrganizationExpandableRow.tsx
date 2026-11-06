@@ -147,7 +147,7 @@ export const OrganizationExpandableRow: FC<OwnProps> = (props) => {
           defaultValue="projects"
           value={activeTab}
           onValueChange={setActiveTab}
-          className="min-h-[375px]"
+          keepTallest
           listClassName="rounded-none border-x-0"
           panelsClassName="rounded-none border-0"
           tabs={[

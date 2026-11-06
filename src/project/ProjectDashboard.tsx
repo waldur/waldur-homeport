@@ -183,7 +183,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
   return (
     <>
       {(project.description || project.staff_notes) && (
-        <div className="grid grid-cols-1 gap-x-5 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-x-4 md:grid-cols-2">
           {project.description && (
             <div
               className={project.staff_notes ? 'mb-4' : 'mb-4 md:col-span-2'}
@@ -261,7 +261,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           showCost={!shouldConcealPrices && showBillingInfo}
         />
       )}
-      <div className="grid grid-cols-1 gap-x-5 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-4 md:grid-cols-2">
         {!shouldConcealPrices && showBillingInfo && (
           <div className="mb-4" style={COMMON_WIDGET_HEIGHT}>
             <ProjectDashboardCostLimits project={project} />

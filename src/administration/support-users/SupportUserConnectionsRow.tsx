@@ -161,7 +161,7 @@ export const SupportUserConnectionsRow: FC<{ row: SupportUser }> = ({
     <EmbeddedTabs
       framed
       defaultValue="reported"
-      className="min-h-[375px]"
+      keepTallest
       tabs={[
         {
           key: 'reported',

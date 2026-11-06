@@ -175,6 +175,7 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
               content: <ComplianceContent data={checklistData} />,
             },
           ]}
+          keepTallest
         />
       )}
     </ExpandableContainer>
