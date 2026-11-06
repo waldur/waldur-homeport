@@ -52,8 +52,29 @@ cache: &yarn_cache
     - .yarn/cache
     - node_modules/
 
+# git is installed at job start because the Alpine image ships without it. The
+# mirror is sometimes unreachable for a few minutes; `apk add git || echo`
+# swallowed that, and every git-based check (colors:check, rem:check,
+# styles:usage, the i18n diffs) then failed with a misleading message, e.g.
+# "template.json is out of date" (#610). Retry, then fail saying what happened.
+.install-git:
+  script:
+    - |
+      if command -v apk >/dev/null 2>&1; then
+        for attempt in 1 2 3; do
+          apk add git && break
+          [ "$attempt" -lt 3 ] || break
+          echo "apk add git failed (attempt $attempt of 3); retrying in 20s"
+          sleep 20
+        done
+        if ! command -v git >/dev/null 2>&1; then
+          echo "Could not install git: the Alpine package mirror is unreachable. Retry the job."
+          exit 1
+        fi
+      fi
+
 before_script:
-  - apk add git || echo "Non-Alpine image, skipping"
+  - !reference [.install-git, script]
   - corepack enable
   - yarn install --immutable
 
@@ -798,6 +819,6 @@ Check dependency licences:
   extends: .Licence gate (node) template
   cache: *yarn_cache
   before_script:
-    - apk add git || echo "Non-Alpine image, skipping"
+    - !reference [.install-git, script]
     - corepack enable
     - yarn install --immutable
