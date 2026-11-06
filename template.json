@@ -1067,6 +1067,12 @@
       "feature_area": "api-keys"
     }
   },
+  "API key description saved": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "api-keys"
+    }
+  },
   "API key for authenticating with the AI Assistant service.": {},
   "API key for authentication": {},
   "API key is not ready to rotate": {
@@ -59369,6 +59375,7 @@
       "feature_area": "shared"
     }
   },
+  "Tells this key apart from the resource's other keys, for example the environment that uses it. The provider can read it, so keep secrets out.": {},
   "Template": {
     "context": {
       "primary_ui_type": "title",
@@ -70107,6 +70114,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "telemetry"
+    }
+  },
+  "Unable to update the API key description.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "api-keys"
     }
   },
   "Unable to update the API key settings.": {

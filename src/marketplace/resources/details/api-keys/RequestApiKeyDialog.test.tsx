@@ -61,6 +61,13 @@ describe('RequestApiKeyDialog', () => {
     });
   });
 
+  it('sends the description given', async () => {
+    const user = userEvent.setup();
+    renderDialog();
+    await user.type(await screen.findByLabelText('Description'), 'Production');
+    expect((await submit(user)).description).toBe('Production');
+  });
+
   it('requests a key with no models once All models is unticked and nothing else is', async () => {
     const user = userEvent.setup();
     renderDialog();

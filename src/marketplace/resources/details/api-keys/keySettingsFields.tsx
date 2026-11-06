@@ -117,6 +117,22 @@ export const useAssigneeField = (resource: Resource) =>
     [resource.project_uuid],
   );
 
+// The backend's limit, so the field stops there instead of the save failing.
+const DESCRIPTION_MAX_LENGTH = 4096;
+
+// A key's description is Waldur's own note, not a setting the agent applies:
+// the request dialog and the description dialog share the field.
+export const getDescriptionField = () => ({
+  name: 'description',
+  label: translate('Description'),
+  type: 'text',
+  maxlength: DESCRIPTION_MAX_LENGTH,
+  help_text: translate(
+    "Tells this key apart from the resource's other keys, for example the environment that uses it. The provider can read it, so keep secrets out.",
+  ),
+  space: 4,
+});
+
 interface KeySettingsFieldsOptions {
   // The key's own limits: one set before the provider or the resource moved
   // stays valid, so the form still saves without the user touching it.

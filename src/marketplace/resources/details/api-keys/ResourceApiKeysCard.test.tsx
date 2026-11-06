@@ -79,14 +79,15 @@ const MANAGED_OFFERING = {
   resource_options: { options: { models: { choices: ['gpt-4o'] } } },
 } as any;
 
-const makeStore = (keys: any[]) => {
+// The mock store applies no actions, so an expanded row is given as expanded.
+const makeStore = (keys: any[], expanded: string[] = []) => {
   setTableQueryRows(keys);
   return mockStore({
     tables: {
       [tableId]: {
         loading: false,
         pagination: { pageSize: 10, resultCount: keys.length, currentPage: 1 },
-        toggled: {},
+        toggled: Object.fromEntries(expanded.map((uuid) => [uuid, true])),
         activeColumns: {},
         columnPositions: [],
       },
@@ -112,12 +113,13 @@ const renderCard = (
     offering,
     user = USER,
     resource,
-  }: { offering?: any; user?: any; resource?: any } = {},
+    expanded,
+  }: { offering?: any; user?: any; resource?: any; expanded?: string[] } = {},
 ) => {
   // useUser is mocked globally (test/mocks/workspace.js).
   vi.mocked(useUser).mockReturnValue(user);
   return renderWithProviders(
-    <Provider store={makeStore(keys)}>
+    <Provider store={makeStore(keys, expanded)}>
       <DrawerProvider>
         <Harness offering={offering} resource={resource} />
       </DrawerProvider>
@@ -300,12 +302,67 @@ describe('ResourceApiKeysCard', () => {
         'Reveal',
         'Pause',
         'Rotate',
+        'Edit description',
         'Edit key settings',
         'Delete',
       ]) {
         expect(isEnabled(name)).toBe(true);
       }
       expect(offered('Retry')).toBeNull();
+    });
+
+    // The description is a note for the portal, not a command: a key busy
+    // with one, or whose command failed, still takes it.
+    it('lets a manager edit the description of a key in any state', async () => {
+      for (const key of [
+        { state: 'Creating', client_id: '', pending_action: 'create' },
+        { state: 'Updating', pending_action: 'rotate' },
+        { state: 'Erred', pending_action: 'pause' },
+        { state: 'Deleting', pending_action: 'delete' },
+      ]) {
+        const { unmount } = renderManaged(key);
+        await screen.findByTestId('DotsThreeVerticalIcon');
+        await openRowActions(0);
+        expect(isEnabled('Edit description'), key.state).toBe(true);
+        unmount();
+      }
+    });
+
+    // The cell clamps a long description; the expanded row shows all of it.
+    it('shows the full description in the expanded row', async () => {
+      renderCard(
+        [
+          {
+            uuid: 'k1',
+            client_id: 'KEY1',
+            state: 'OK',
+            description: 'Production pipeline\nfor the nightly batch',
+          },
+        ],
+        { offering: MANAGED_OFFERING, expanded: ['k1'] },
+      );
+      await screen.findByText('KEY1');
+      const details = await screen.findByTestId('expanded-row-cell');
+      expect(within(details).getByText(/^Description/)).toBeInTheDocument();
+      expect(within(details).getByText(/nightly batch/)).toBeInTheDocument();
+    });
+
+    it('shows a description column only once a key has one', async () => {
+      const columnTitles = () =>
+        screen.getAllByRole('columnheader').map((header) => header.textContent);
+      const { unmount } = renderManaged({ state: 'OK', description: '' });
+      await screen.findByText('KEY1');
+      expect(columnTitles().some((text) => text?.includes('Description'))).toBe(
+        false,
+      );
+      unmount();
+
+      renderManaged({ state: 'OK', description: 'Production' });
+      await screen.findByText('KEY1');
+      expect(columnTitles().some((text) => text?.includes('Description'))).toBe(
+        true,
+      );
+      expect(screen.getByText('Production')).toBeInTheDocument();
     });
 
     it('holds key requests until the resource exists at the backend', async () => {
@@ -332,7 +389,13 @@ describe('ResourceApiKeysCard', () => {
       ).not.toBeInTheDocument();
       await openRowActions(0);
       expect(offered('Reveal')).not.toBeNull();
-      for (const name of ['Pause', 'Rotate', 'Edit key settings', 'Delete']) {
+      for (const name of [
+        'Pause',
+        'Rotate',
+        'Edit description',
+        'Edit key settings',
+        'Delete',
+      ]) {
         expect(offered(name)).toBeNull();
       }
     });
@@ -843,6 +906,53 @@ describe('ResourceApiKeysCard', () => {
       for (const name of ['Pause', 'Edit key settings', 'Delete']) {
         expect(offered(name)).toBeNull();
       }
+    });
+
+    // There is no usage to show, so only a key with a description expands.
+    it('expands a key with a description to show it in full', async () => {
+      renderCard(
+        [
+          {
+            uuid: 'k1',
+            client_id: 'KEY1',
+            state: 'OK',
+            description: 'Staging',
+          },
+          { uuid: 'k2', client_id: 'KEY2', state: 'OK', description: '' },
+        ],
+        {
+          offering: {
+            ...MANAGED_OFFERING,
+            plugin_options: { enable_api_key_provisioning: false },
+          },
+          expanded: ['k1', 'k2'],
+        },
+      );
+      await screen.findByText('KEY1');
+      expect(screen.getAllByTestId('row-expander')).toHaveLength(1);
+      // Asked to expand both, only the key with a description opens.
+      const [details, ...others] =
+        await screen.findAllByTestId('expanded-row-cell');
+      expect(others).toHaveLength(0);
+      expect(within(details).getByText('Staging')).toBeInTheDocument();
+      expect(within(details).queryByText(/limit/i)).not.toBeInTheDocument();
+    });
+
+    // It reaches no backend, so it needs no key management.
+    it('still lets a manager edit the description', async () => {
+      renderUnmanaged({ state: 'OK', description: 'Staging' });
+      await screen.findByText('KEY1');
+      expect(screen.getByText('Staging')).toBeInTheDocument();
+      await openRowActions(0);
+      expect(isEnabled('Edit description')).toBe(true);
+    });
+
+    it('offers no description edit without manage permission', async () => {
+      vi.mocked(hasConsumerPermission).mockReturnValue(false);
+      renderUnmanaged({ state: 'OK', user_uuid: USER.uuid });
+      await screen.findByText('KEY1');
+      await openRowActions(0);
+      expect(offered('Edit description')).toBeNull();
     });
 
     it('still resumes a key paused while management was on', async () => {

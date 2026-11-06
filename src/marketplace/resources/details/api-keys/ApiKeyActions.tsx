@@ -2,6 +2,7 @@ import {
   ArrowsClockwiseIcon,
   EyeIcon,
   PauseIcon,
+  PencilSimpleIcon,
   PlayIcon,
   SlidersIcon,
   TrashIcon,
@@ -42,6 +43,12 @@ import { useInvalidateRevealedKey } from './useResourceApiKeys';
 const EditApiKeySettingsDialog = lazyComponent(() =>
   import('./EditApiKeySettingsDialog').then((module) => ({
     default: module.EditApiKeySettingsDialog,
+  })),
+);
+
+const EditApiKeyDescriptionDialog = lazyComponent(() =>
+  import('./EditApiKeyDescriptionDialog').then((module) => ({
+    default: module.EditApiKeyDescriptionDialog,
   })),
 );
 
@@ -313,6 +320,26 @@ export const ApiKeyActionsDropdown: FC<{
                     )
                   : translate('A paused key cannot be rotated.')
               : atLimitReason)
+          }
+        />
+      )}
+      {canManage && (
+        // A note for the portal, not a setting: any offering's keys take one,
+        // in any state but Deleted, even while a command is in flight.
+        <ActionItem
+          title={translate('Edit description')}
+          action={() =>
+            openDialog(EditApiKeyDescriptionDialog, {
+              resolve: { row, refetch },
+              size: 'md',
+            })
+          }
+          iconNode={<PencilSimpleIcon weight="bold" />}
+          disabled={row.state === 'Deleted'}
+          tooltip={
+            row.state === 'Deleted'
+              ? translate('A deleted key cannot be edited.')
+              : undefined
           }
         />
       )}
