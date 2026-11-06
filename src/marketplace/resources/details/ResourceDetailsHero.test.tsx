@@ -49,7 +49,7 @@ const consumerCalls = () =>
     )
     .map(([name]) => name);
 
-const renderHero = (resource) =>
+const renderHero = (resource, providerView = true) =>
   renderWithProviders(
     <ResourceDetailsHero
       resource={resource as any}
@@ -58,7 +58,7 @@ const renderHero = (resource) =>
       components={[]}
       refetch={vi.fn()}
       isLoading={false}
-      providerView
+      providerView={providerView}
     />,
   );
 
@@ -153,5 +153,56 @@ describe('ResourceDetailsHero in the provider workspace', () => {
 
     await screen.findByText('Synchronize');
     expect(screen.queryByText('View details')).toBeNull();
+  });
+});
+
+describe('ResourceDetailsHero access and refresh', () => {
+  const accessible = {
+    ...baseResource,
+    endpoints: [{ name: 'Web UI', url: 'https://app.example' }],
+  };
+
+  beforeEach(() => {
+    vi.mocked(useUser).mockReturnValue({
+      uuid: 'user-uuid',
+      is_staff: true,
+      permissions: [],
+    } as any);
+  });
+
+  it('offers access as the main action when the resource has an endpoint', () => {
+    renderHero(accessible);
+
+    expect(
+      screen.getByRole('button', { name: 'Access resource' }),
+    ).toBeInTheDocument();
+  });
+
+  it('refreshes from an icon button', () => {
+    renderHero(baseResource);
+
+    expect(screen.getByRole('button', { name: 'Refresh' })).toBeInTheDocument();
+  });
+
+  it('offers no access without an endpoint', () => {
+    renderHero(baseResource);
+
+    expect(
+      screen.queryByRole('button', { name: 'Access resource' }),
+    ).toBeNull();
+  });
+
+  it('keeps access but no other actions for a ResourceProject-only viewer', () => {
+    vi.mocked(useUser).mockReturnValue({
+      uuid: 'user-uuid',
+      permissions: [{ scope_type: 'resource_project', scope_uuid: 'rp-uuid' }],
+    } as any);
+    renderHero(accessible, false);
+
+    expect(
+      screen.getByRole('button', { name: 'Access resource' }),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /^actions$/i })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Refresh' })).toBeNull();
   });
 });

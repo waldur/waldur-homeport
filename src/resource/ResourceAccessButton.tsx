@@ -63,7 +63,8 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
       side="bottom"
       toggle={
         <BaseButton
-          variant="tertiary"
+          variant="primary"
+          size="sm"
           label={translate('Access resource')}
           iconNode={<CaretDownIcon weight="bold" />}
           iconRight
