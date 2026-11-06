@@ -3,7 +3,7 @@ import { FieldValidator } from 'final-form';
 import { ComponentType, FC, ReactNode } from 'react';
 import { FieldProps } from 'react-final-form';
 
-import { PropertyItem } from 'waldur-ui';
+import { ModalSize, PropertyItem } from 'waldur-ui';
 
 import { CheckOrX } from '@/core/CheckOrX';
 import { StaffOnlyIndicator } from '@/core/StaffOnlyIndicator';
@@ -40,10 +40,10 @@ export type EditFieldProps<P = object> = Omit<
   descriptionTooltip?: boolean;
   /** Help text on a question mark after the label. */
   labelTooltip?: ReactNode;
-  /** The edit dialog's subtitle, in place of `description`. */
+  /** Shown above the control in the edit dialog, in place of the subtitle. */
   dialogDescription?: ReactNode;
   /** The edit dialog's size; the modal's default when left out. */
-  dialogSize?: 'sm' | 'lg' | 'xl';
+  dialogSize?: ModalSize;
   disabled?: boolean;
   warnTooltip?: string;
   isStaffOnly?: boolean;
@@ -170,7 +170,7 @@ export function withEditField<P extends object>(
     const editButton = (
       <FieldEditButton
         title={label}
-        description={(dialogDescription ?? description) as string}
+        description={(dialogDescription ? undefined : description) as string}
         scope={scope}
         name={name}
         callback={callback}
@@ -186,6 +186,7 @@ export function withEditField<P extends object>(
         tooltip={tooltip ?? (disabled ? ctx?.readOnlyReason : undefined)}
         iconNode={iconNode}
         disabled={disabled}
+        dialogDescription={dialogDescription}
         dialogSize={dialogSize}
       />
     );

@@ -69,6 +69,9 @@ export const EditFieldDialog = (props: { resolve: FieldEditButtonProps }) => {
               </>
             }
           >
+            {props.resolve.dialogDescription && (
+              <div className="mb-3">{props.resolve.dialogDescription}</div>
+            )}
             <Field
               render={props.resolve.fieldComponent}
               name="value"

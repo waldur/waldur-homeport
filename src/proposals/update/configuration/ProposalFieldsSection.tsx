@@ -91,14 +91,18 @@ const UsageList: FC<{
     );
   }
   const [first, ...rest] = sorted;
+  const hiddenLabels = rest.map(getUsageLabel).join(', ');
   return (
     <div className="flex flex-wrap gap-1.5">
       <UsageBadge usage={first} state={state} />
       {rest.length > 0 && (
-        <Tooltip label={rest.map(getUsageLabel).join(', ')}>
-          <span>
+        <Tooltip label={hiddenLabels}>
+          {/* Focusable, so the hidden usages reach the keyboard and screen
+              readers too: when the call is read-only nothing else lists them. */}
+          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
+          <span tabIndex={0} role="img" aria-label={hiddenLabels}>
             <Badge variant="neutral" tone="outline">
-              {translate('+{count}', { count: rest.length })}
+              {translate('+{count} more', { count: rest.length })}
             </Badge>
           </span>
         </Tooltip>
