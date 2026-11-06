@@ -1,8 +1,7 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Badge, StatCardGrid } from 'waldur-ui';
 
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { titleCase } from '@/core/utils';
 import { translate } from '@/i18n';
 import { getLabel } from '@/marketplace/common/registry';
@@ -174,7 +173,7 @@ export const ResourceDemandList: FC = () => {
   return (
     <>
       <ReportingTitle reportKey="resource-demand" />
-      <SummaryWidget stats={summary} />
+      <StatCardGrid stats={summary} />
 
       <Table<ResourceDemandStat>
         columns={columns}

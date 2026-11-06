@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react';
 
-import { SummaryWidget } from '@/core/SummaryWidget';
+import { StatCardGrid } from 'waldur-ui';
+
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
@@ -46,5 +47,5 @@ export const OpenstackInstancesSummaryCards: FC<
     [summary],
   );
 
-  return <SummaryWidget stats={stats} />;
+  return <StatCardGrid stats={stats} />;
 };

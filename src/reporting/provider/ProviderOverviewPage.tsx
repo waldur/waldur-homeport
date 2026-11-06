@@ -3,9 +3,10 @@ import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { marketplaceServiceProvidersStatRetrieve } from 'waldur-js-client';
 
+import { StatCardGrid } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
@@ -46,7 +47,7 @@ const ProviderOverviewContent: FC<{ providerUuid: string }> = ({
   );
 
   return (
-    <SummaryWidget
+    <StatCardGrid
       stats={[
         {
           label: translate('Active resources'),

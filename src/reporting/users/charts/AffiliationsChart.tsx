@@ -5,10 +5,15 @@ import {
   UserAffiliationDetail,
 } from 'waldur-js-client';
 
-import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  StatCardGrid,
+} from 'waldur-ui';
 
 import { ChartCard } from '@/core/ChartCard';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -307,7 +312,7 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
         </CardContent>
       </Card>
 
-      <SummaryWidget
+      <StatCardGrid
         stats={[
           { label: translate('Total users'), value: total },
           { label: translate('Organizations'), value: orgOptions.length },

@@ -2,10 +2,9 @@ import { CaretDownIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, Fragment, useMemo, useState } from 'react';
 import { LiveKitOverviewResponse } from 'waldur-js-client';
 
-import { Code } from 'waldur-ui';
+import { Code, StatCardGrid } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 
 import { LiveKitRoomDetails } from './LiveKitRoomDetails';
@@ -39,7 +38,7 @@ export const LiveKitRoomsTable: FC<LiveKitRoomsTableProps> = ({ data }) => {
 
   return (
     <>
-      <SummaryWidget
+      <StatCardGrid
         stats={[
           { label: translate('Rooms'), value: totals.room_count },
           { label: translate('Participants'), value: totals.participant_count },

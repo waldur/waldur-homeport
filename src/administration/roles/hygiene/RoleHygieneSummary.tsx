@@ -1,8 +1,7 @@
 import { RoleHygieneReport } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, StatCardGrid } from 'waldur-ui';
 
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 
 export const RoleHygieneSummary = ({
@@ -10,7 +9,7 @@ export const RoleHygieneSummary = ({
 }: {
   report: RoleHygieneReport;
 }) => (
-  <SummaryWidget
+  <StatCardGrid
     // The findings table's tab strip below brings its own top padding; the
     // widget's own bottom margin would sit on top of it.
     spaceless

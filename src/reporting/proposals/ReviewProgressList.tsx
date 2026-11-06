@@ -1,8 +1,7 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Badge, StatCardGrid } from 'waldur-ui';
 
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -147,7 +146,7 @@ export const ReviewProgressList: FC = () => {
   return (
     <>
       <ReportingTitle reportKey="review-progress" />
-      <SummaryWidget stats={summary} />
+      <StatCardGrid stats={summary} />
 
       <Table<ReviewProgressStat>
         columns={columns}

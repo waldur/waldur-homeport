@@ -1,14 +1,47 @@
+import { ArrowDownIcon, ArrowUpIcon } from '@phosphor-icons/react';
 import { FC, useMemo, useState } from 'react';
 import { RancherCluster } from 'waldur-js-client';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
+import {
+  Badge,
+  StatCardGrid,
+  type StatCardGridItem,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from 'waldur-ui';
 
 import { useChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 
-import { NetworkStatisticsCard } from './NetworkStatisticsCard';
 import { PieChart } from './PieChart';
-import { StatisticsCard } from './StatisticsCard';
+
+const getNetworkStat = (
+  title: string,
+  value: number,
+  change: number,
+  isIncrease: boolean,
+): StatCardGridItem => ({
+  label: title,
+  value: `${value} GB/day`,
+  footer: (
+    <Badge
+      variant={isIncrease ? 'success' : 'danger'}
+      leftIcon={
+        isIncrease ? (
+          <ArrowUpIcon weight="bold" />
+        ) : (
+          <ArrowDownIcon weight="bold" />
+        )
+      }
+      shape="pill"
+      tone="outline"
+    >
+      {change}%
+    </Badge>
+  ),
+});
 
 const StatisticPieChartItem = ({ title, unit, total, value, color }) => {
   const tc = useChartThemeColors();
@@ -70,23 +103,15 @@ export const ClusterStatistics: FC<{
       </TabsList>
       {/* Both tabs show the same figures until WAL-8880 splits them. */}
       <TabsContent value={activeKey} className="pt-8">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-          <div>
-            <StatisticsCard
-              title={translate('Total resources')}
-              value={resourcesCount}
-            />
-          </div>
-          <div>
-            <StatisticsCard title={translate('Nodes')} value={nodesCount} />
-          </div>
-          <div>
-            <StatisticsCard
-              title={translate('Workloads')}
-              value={workloadsCount}
-            />
-          </div>
-        </div>
+        <StatCardGrid
+          className="mb-8"
+          spaceless
+          stats={[
+            { label: translate('Total resources'), value: resourcesCount },
+            { label: translate('Nodes'), value: nodesCount },
+            { label: translate('Workloads'), value: workloadsCount },
+          ]}
+        />
 
         <div className="flex flex-wrap gap-8 mb-8">
           <div className="flex-none">
@@ -140,24 +165,14 @@ export const ClusterStatistics: FC<{
         </div>
 
         <h4 className="font-medium mb-5.5">{translate('Network')}</h4>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-          <div>
-            <NetworkStatisticsCard
-              isIncrease
-              title="Ingress"
-              change={100}
-              value={2.4}
-            />
-          </div>
-          <div>
-            <NetworkStatisticsCard
-              isIncrease={false}
-              title="Egress"
-              change={20}
-              value={1.8}
-            />
-          </div>
-        </div>
+        <StatCardGrid
+          className="mb-8"
+          spaceless
+          stats={[
+            getNetworkStat('Ingress', 2.4, 100, true),
+            getNetworkStat('Egress', 1.8, 20, false),
+          ]}
+        />
       </TabsContent>
     </Tabs>
   );

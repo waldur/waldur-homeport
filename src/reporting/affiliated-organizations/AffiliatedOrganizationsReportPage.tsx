@@ -1,9 +1,10 @@
 import { FC } from 'react';
 
+import { StatCardGrid } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -42,7 +43,7 @@ export const AffiliatedOrganizationsReportPage: FC = () => {
     <>
       <ReportingTitle reportKey="projects-by-affiliated-organization" />
 
-      <SummaryWidget
+      <StatCardGrid
         stats={[
           {
             label: translate('Affiliated organizations'),

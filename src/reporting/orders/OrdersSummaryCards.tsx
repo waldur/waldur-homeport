@@ -1,7 +1,8 @@
 import { FC, useMemo } from 'react';
 import { OrderStatsSummary } from 'waldur-js-client';
 
-import { SummaryWidget } from '@/core/SummaryWidget';
+import { StatCardGrid } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface OrdersSummaryCardsProps {
@@ -35,5 +36,5 @@ export const OrdersSummaryCards: FC<OrdersSummaryCardsProps> = ({ stats }) => {
     [stats],
   );
 
-  return <SummaryWidget stats={summary} />;
+  return <StatCardGrid stats={summary} />;
 };

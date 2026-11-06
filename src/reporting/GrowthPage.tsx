@@ -2,11 +2,10 @@ import { TrendUpIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { FC, useContext } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Badge, StatCardGrid } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 
 import { ActiveUsersByProviderChart } from './growth/ActiveUsersByProviderChart';
@@ -47,8 +46,8 @@ export const GrowthPage: FC = () => {
 
   // The headline stays the running total so it keeps agreeing with the right
   // edge of the cumulative charts below; the period narrows this footer, not
-  // the figure above it. Badge + muted caption is the shape StatsCard footers
-  // already take in `PacingIndicator`, and the one `StatCard.trend` ports to.
+  // the figure above it. Badge + muted caption, the shape StatCard footers
+  // take in `PacingIndicator` too.
   const addedInPeriod = (count?: number) => {
     if (!months) return undefined;
     // Without this, a failed counts request renders as an absent badge — which
@@ -88,7 +87,7 @@ export const GrowthPage: FC = () => {
 
   return (
     <>
-      <SummaryWidget
+      <StatCardGrid
         stats={[
           {
             label: translate('Service providers'),

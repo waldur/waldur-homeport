@@ -1,6 +1,7 @@
 import { CeleryStatsResponse } from 'waldur-js-client';
 
-import { StatisticsCard } from '@/core/StatisticsCard';
+import { StatCardGrid } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface CeleryOverviewCardsProps {
@@ -31,30 +32,17 @@ export const CeleryOverviewCards = ({ data }: CeleryOverviewCardsProps) => {
   const totalProcessed = countTotalProcessed(data.stats);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 mb-5">
-      <div>
-        <StatisticsCard title={translate('Active tasks')} value={activeCount} />
-      </div>
-      <div>
-        <StatisticsCard
-          title={translate('Reserved tasks')}
-          value={reservedCount}
-        />
-      </div>
-      <div>
-        <StatisticsCard
-          title={translate('Scheduled tasks')}
-          value={scheduledCount}
-        />
-      </div>
-      {totalProcessed !== undefined && (
-        <div>
-          <StatisticsCard
-            title={translate('Total processed')}
-            value={totalProcessed}
-          />
-        </div>
-      )}
-    </div>
+    <StatCardGrid
+      className="mb-5"
+      spaceless
+      stats={[
+        { label: translate('Active tasks'), value: activeCount },
+        { label: translate('Reserved tasks'), value: reservedCount },
+        { label: translate('Scheduled tasks'), value: scheduledCount },
+        ...(totalProcessed !== undefined
+          ? [{ label: translate('Total processed'), value: totalProcessed }]
+          : []),
+      ]}
+    />
   );
 };

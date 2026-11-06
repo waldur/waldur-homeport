@@ -17,7 +17,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  StatCard,
+  StatCardGrid,
   Tabs,
 } from 'waldur-ui';
 
@@ -103,39 +103,34 @@ const ComponentStats: FC<{ component: HpcComponentUsage }> = ({
 }) => {
   const unit = component.unit || component.name;
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <StatCard
-        size="sm"
-        label={translate('{name} used', { name: component.name })}
-        value={`${number(component.consumed)} ${unit}`}
-        hint={
-          component.limit
+    <StatCardGrid
+      size="sm"
+      spaceless
+      stats={[
+        {
+          label: translate('{name} used', { name: component.name }),
+          value: `${number(component.consumed)} ${unit}`,
+          footer: component.limit
             ? translate('of {limit} ({percent}%)', {
                 limit: number(component.limit),
                 percent: component.percent,
               })
-            : translate('No limit set')
-        }
-      />
-      <StatCard
-        size="sm"
-        label={translate('Recent pace')}
-        value={
-          component.daily_rate
+            : translate('No limit set'),
+        },
+        {
+          label: translate('Recent pace'),
+          value: component.daily_rate
             ? translate('{rate} {unit} / day', {
                 rate: number(component.daily_rate),
                 unit,
               })
-            : '—'
-        }
-        hint={translate('This month and the last')}
-      />
-      <StatCard
-        size="sm"
-        label={translate('Runs out')}
-        value={component.runs_out ? formatDate(component.runs_out) : '—'}
-        hint={
-          component.runs_out_before_period_end ? (
+            : '—',
+          footer: translate('This month and the last'),
+        },
+        {
+          label: translate('Runs out'),
+          value: component.runs_out ? formatDate(component.runs_out) : '—',
+          footer: component.runs_out_before_period_end ? (
             <Badge variant="warning" shape="pill">
               {translate('Before the allocation ends')}
             </Badge>
@@ -143,24 +138,21 @@ const ComponentStats: FC<{ component: HpcComponentUsage }> = ({
             <Badge variant="success" shape="pill">
               {translate('Lasts the period')}
             </Badge>
-          ) : null
-        }
-      />
-      <StatCard
-        size="sm"
-        label={translate('Allocation period')}
-        value={
-          component.period_end
+          ) : null,
+        },
+        {
+          label: translate('Allocation period'),
+          value: component.period_end
             ? translate('until {date}', {
                 date: formatDate(component.period_end),
               })
-            : translate('Open-ended')
-        }
-        hint={translate('since {date}', {
-          date: formatDate(component.period_start),
-        })}
-      />
-    </div>
+            : translate('Open-ended'),
+          footer: translate('since {date}', {
+            date: formatDate(component.period_start),
+          }),
+        },
+      ]}
+    />
   );
 };
 
@@ -254,38 +246,24 @@ const JobStatsSection: FC<{
       ) : data && totals ? (
         <>
           {view === 'jobs' && (
-            <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
-              <StatCard
-                size="sm"
-                label={translate('Completed')}
-                value={totals.completed}
-              />
-              <StatCard
-                size="sm"
-                label={translate('Failed')}
-                value={totals.failed}
-              />
-              <StatCard
-                size="sm"
-                label={translate('Timed out')}
-                value={totals.timeout}
-              />
-              <StatCard
-                size="sm"
-                label={translate('Canceled')}
-                value={totals.cancelled}
-              />
-              <StatCard
-                size="sm"
-                label={translate('Running / pending')}
-                value={`${totals.running} / ${totals.pending}`}
-              />
-              <StatCard
-                size="sm"
-                label={translate('CPU-hours')}
-                value={number(data.cpu_hours)}
-              />
-            </div>
+            <StatCardGrid
+              size="sm"
+              spaceless
+              stats={[
+                { label: translate('Completed'), value: totals.completed },
+                { label: translate('Failed'), value: totals.failed },
+                { label: translate('Timed out'), value: totals.timeout },
+                { label: translate('Canceled'), value: totals.cancelled },
+                {
+                  label: translate('Running / pending'),
+                  value: `${totals.running} / ${totals.pending}`,
+                },
+                {
+                  label: translate('CPU-hours'),
+                  value: number(data.cpu_hours),
+                },
+              ]}
+            />
           )}
           {view === 'efficiency' &&
             data.suggestions.map((suggestion) => (
@@ -347,31 +325,28 @@ const ClusterSection: FC<{ resourceUuid: string }> = ({ resourceUuid }) => {
         <HpcErrorAlert error={error} />
       ) : data ? (
         <>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {data.partitions.map((partition) => (
-              <StatCard
-                size="sm"
-                key={partition.name}
-                label={translate('Partition {name}', { name: partition.name })}
-                value={translate('{idle} of {total} idle', {
-                  idle: partition.idle,
-                  total: partition.total,
-                })}
-                hint={
-                  <span className="text-tertiary">
-                    {translate('{busy} busy, {down} unavailable, load {load}', {
-                      busy: partition.allocated + partition.mixed,
-                      down: partition.unavailable,
-                      load:
-                        partition.average_load_percent === null
-                          ? '—'
-                          : `${partition.average_load_percent}%`,
-                    })}
-                  </span>
-                }
-              />
-            ))}
-          </div>
+          <StatCardGrid
+            size="sm"
+            spaceless
+            stats={data.partitions.map((partition) => ({
+              label: translate('Partition {name}', { name: partition.name }),
+              value: translate('{idle} of {total} idle', {
+                idle: partition.idle,
+                total: partition.total,
+              }),
+              footer: translate(
+                '{busy} busy, {down} unavailable, load {load}',
+                {
+                  busy: partition.allocated + partition.mixed,
+                  down: partition.unavailable,
+                  load:
+                    partition.average_load_percent === null
+                      ? '—'
+                      : `${partition.average_load_percent}%`,
+                },
+              ),
+            }))}
+          />
           {data.announcements.map((announcement) => (
             <AlertItem
               key={announcement.uuid}

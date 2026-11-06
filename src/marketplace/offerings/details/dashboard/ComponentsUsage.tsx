@@ -7,12 +7,14 @@ import {
   OfferingComponentStat,
 } from 'waldur-js-client';
 
+import { StatCardGrid, Tooltip } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { formatUsageValue } from '@/core/formatNumber';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-
-import { StatisticsCard } from './StatisticsCard';
+import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
 
 interface OwnProps {
   offering: Offering;
@@ -141,17 +143,29 @@ export const ComponentsUsage: FC<OwnProps> = ({ offering }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-5">
-      {statistics.map((stat) => (
-        <div key={stat.type}>
-          <StatisticsCard
-            title={stat.name}
-            value={stat.value}
-            unit={stat.unit}
-            changes={stat.changes}
-          />
-        </div>
-      ))}
-    </div>
+    <StatCardGrid
+      stats={statistics.map((stat) => ({
+        label: stat.name,
+        value: (
+          <>
+            {formatUsageValue(stat.value, true)}
+            {stat.unit && (
+              <span className="ms-1 text-xl font-medium">{stat.unit}</span>
+            )}
+          </>
+        ),
+        footer: stat.changes ? (
+          <Tooltip label={translate('Changes in the last month')}>
+            <span>
+              <ChangesAmountBadge
+                changes={stat.changes}
+                asBadge
+                fractionDigits={0}
+              />
+            </span>
+          </Tooltip>
+        ) : undefined,
+      }))}
+    />
   );
 };

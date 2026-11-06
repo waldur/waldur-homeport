@@ -82,7 +82,7 @@ describe('SupportAIAssistantLogsList', () => {
     // tile that says whether the traffic was any good, and reading it last left
     // it stranded behind two figures nobody scans for quality.
     expect(
-      screen.getAllByRole('heading', { level: 1 }).map((h) => h.textContent),
+      screen.getAllByTestId('stat-card-value').map((h) => h.textContent),
     ).toEqual(['320', '2', '75%', '842,193', '361,402', '60%']);
   });
 
@@ -138,7 +138,7 @@ describe('SupportAIAssistantLogsList', () => {
     await screen.findByText('320');
 
     expect(
-      screen.getAllByRole('heading', { level: 1 }).map((h) => h.textContent),
+      screen.getAllByTestId('stat-card-value').map((h) => h.textContent),
     ).toEqual(['320', '2', '75%', '842,193', '361,402']);
     expect(screen.queryByText('Cache ratio')).not.toBeInTheDocument();
   });

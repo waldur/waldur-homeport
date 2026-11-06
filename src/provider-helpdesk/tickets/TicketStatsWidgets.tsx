@@ -1,23 +1,11 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 
-import { Card, CardContent } from 'waldur-ui';
+import { StatCardGrid } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { useProviderTicketsStats } from '../api';
-
-const StatCard: FC<{ label: string; value: ReactNode }> = ({
-  label,
-  value,
-}) => (
-  <Card bordered className="h-full">
-    <CardContent className="py-2.5 text-center">
-      <div className="text-lg font-medium">{value}</div>
-      <div className="text-quaternary small">{label}</div>
-    </CardContent>
-  </Card>
-);
 
 /** Summary stat cards shown above the provider tickets list. */
 export const TicketStatsWidgets: FC<{ helpdeskUuid?: string }> = ({
@@ -28,22 +16,20 @@ export const TicketStatsWidgets: FC<{ helpdeskUuid?: string }> = ({
     return null;
   }
   return (
-    <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 mb-3">
-      <StatCard label={translate('Open')} value={stats.total_open} />
-      <StatCard label={translate('Resolved')} value={stats.total_resolved} />
-      <StatCard label={translate('Escalated')} value={stats.total_escalated} />
-      <StatCard
-        label={translate('SLA breaches')}
-        value={stats.sla_breach_count}
-      />
-      <StatCard
-        label={translate('Avg resolution (h)')}
-        value={
-          stats.avg_resolution_hours != null
-            ? Math.round(stats.avg_resolution_hours)
-            : renderFieldOrDash(null)
-        }
-      />
-    </div>
+    <StatCardGrid
+      stats={[
+        { label: translate('Open'), value: stats.total_open },
+        { label: translate('Resolved'), value: stats.total_resolved },
+        { label: translate('Escalated'), value: stats.total_escalated },
+        { label: translate('SLA breaches'), value: stats.sla_breach_count },
+        {
+          label: translate('Avg resolution (h)'),
+          value:
+            stats.avg_resolution_hours != null
+              ? Math.round(stats.avg_resolution_hours)
+              : renderFieldOrDash(null),
+        },
+      ]}
+    />
   );
 };

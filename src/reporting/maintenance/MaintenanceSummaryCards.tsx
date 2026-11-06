@@ -1,7 +1,8 @@
 import { FC, useMemo } from 'react';
 import { MaintenanceStatsResponse } from 'waldur-js-client';
 
-import { SummaryWidget } from '@/core/SummaryWidget';
+import { StatCardGrid } from 'waldur-ui';
+
 import { formatJsxTemplate, translate } from '@/i18n';
 
 interface MaintenanceSummaryCardsProps {
@@ -82,5 +83,5 @@ export const MaintenanceSummaryCards: FC<MaintenanceSummaryCardsProps> = ({
     [summary],
   );
 
-  return <SummaryWidget stats={statsList} />;
+  return <StatCardGrid stats={statsList} />;
 };

@@ -6,11 +6,10 @@ import {
   anonymousChatInteractionsKpiRetrieve,
 } from 'waldur-js-client';
 
-import { HelpIcon } from 'waldur-ui';
+import { HelpIcon, StatCardGrid } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { formatUsageValue } from '@/core/formatNumber';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
@@ -178,7 +177,7 @@ export const AnonymousChatPanel: FunctionComponent = () => {
             },
             {
               // Combined rather than split across two tiles like the
-              // authenticated tab: a seventh tile would push SummaryWidget's
+              // authenticated tab: a seventh tile would push StatCardGrid's
               // single row into wrapping. The split is still one hover away.
               label: (
                 <>
@@ -468,10 +467,10 @@ export const AnonymousChatPanel: FunctionComponent = () => {
     <div className="pt-4">
       {kpi && (
         <>
-          <SummaryWidget stats={stats} />
+          <StatCardGrid stats={stats} />
           {/* Scope stated once: the judge row is narrowed by the same query, so
               repeating the caption would just be noise. */}
-          <SummaryWidget stats={reviewStats} />
+          <StatCardGrid stats={reviewStats} />
         </>
       )}
       <Table<AnonymousChatConversation>

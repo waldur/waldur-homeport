@@ -3,9 +3,10 @@ import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { marketplaceStatsProviderCustomersRetrieve } from 'waldur-js-client';
 
+import { StatCardGrid } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
@@ -56,7 +57,7 @@ const ProviderCustomersContent: FC<{ providerUuid: string }> = ({
 
   return (
     <>
-      <SummaryWidget stats={stats} />
+      <StatCardGrid stats={stats} />
 
       <div className="mb-5">
         <CustomerAcquisitionTrendChart monthly={data.monthly || []} />
