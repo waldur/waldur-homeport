@@ -63,7 +63,8 @@ export const EditRoundReviewDialog: FC<EditRoundReviewDialogProps> = (
       form="RoundEditForm"
       title={translate('Edit round review')}
       onSubmit={submit}
-      submitLabel={translate('Edit')}
+      submitLabel={translate('Save')}
+      hideStepper
       steps={[{ key: 'review', label: translate('Review'), completed: false }]}
       wizardForms={[WizardFormSecondPage]}
       initialValues={initialValues}

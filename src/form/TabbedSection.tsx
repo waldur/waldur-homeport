@@ -24,6 +24,8 @@ interface TabProps {
   /** Render the tab's content as is, not as rows of a `PropertyList` — for a
    * tab holding a panel of its own rather than label/value rows. */
   plain?: boolean;
+  /** A count badge after the title, as tabs show it elsewhere. */
+  count?: number;
 }
 
 const TabbedSectionTab: FC<TabProps> = () => null;
@@ -86,6 +88,7 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
         id: tab.props.id,
         title: tab.props.title,
         plain: tab.props.plain,
+        declaredCount: tab.props.count,
         fields,
         count: fields.length,
       };
@@ -132,7 +135,9 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
                   key={tab.id}
                   value={tab.id}
                   disabled={disabled}
-                  count={enableSearch && hasQuery ? tab.count : undefined}
+                  count={
+                    enableSearch && hasQuery ? tab.count : tab.declaredCount
+                  }
                   className={disabled ? 'text-quaternary' : undefined}
                 >
                   {tab.title}

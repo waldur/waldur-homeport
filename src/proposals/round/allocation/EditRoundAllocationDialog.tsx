@@ -85,7 +85,8 @@ export const EditRoundAllocationDialog: FC<EditRoundAllocationDialogProps> = (
       form="RoundEditForm"
       title={translate('Edit round allocation')}
       onSubmit={submit}
-      submitLabel={translate('Edit')}
+      submitLabel={translate('Save')}
+      hideStepper
       steps={[
         { key: 'allocation', label: translate('Allocation'), completed: false },
       ]}

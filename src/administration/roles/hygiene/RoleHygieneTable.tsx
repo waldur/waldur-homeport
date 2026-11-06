@@ -84,20 +84,8 @@ export const RoleHygieneTable = ({
       { key: 'info', label: translate('Info'), value: 'info' as const },
     ].map((tab) => ({
       key: tab.key,
-      title: (
-        <>
-          {tab.label}
-          <Badge
-            variant="neutral"
-            size="sm"
-            shape="pill"
-            tone="outline"
-            className="ms-1.5"
-          >
-            {count(tab.value)}
-          </Badge>
-        </>
-      ),
+      title: tab.label,
+      count: count(tab.value),
       active: severity === tab.value,
       // Table only resets the page for its own search and filters, not for a
       // changed `filter` prop, so a narrower tab could open past its last page.

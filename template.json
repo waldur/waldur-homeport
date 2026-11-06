@@ -79633,16 +79633,6 @@
       }
     }
   },
-  "{count} fields": {
-    "context": {
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      },
-      "feature_area": "details"
-    }
-  },
   "{count} held": {
     "context": {
       "variables": {
