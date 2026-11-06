@@ -47,7 +47,7 @@ const CreditHealth: FC<Props> = ({ project }) => {
   }
 
   return (
-    <div className="mt-2.5 mb-2.5">
+    <div className="mb-4">
       <HealthView data={data} />
     </div>
   );

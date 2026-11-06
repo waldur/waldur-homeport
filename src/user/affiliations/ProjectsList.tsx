@@ -335,7 +335,6 @@ export const ProjectsList = () => {
       title={translate('Projects')}
       gridClassName="md:grid-cols-2 xl:grid-cols-3"
       initialModeResolver={initialModeResolver}
-      gridFixedWidth={true}
       gridItem={({ row }) => (
         <ProjectCard
           project={row}

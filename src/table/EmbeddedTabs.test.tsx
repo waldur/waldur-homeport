@@ -114,4 +114,33 @@ describe('EmbeddedTabs', () => {
     );
     expect(panels()).not.toHaveClass('border');
   });
+
+  it('with keepTallest, keeps opened panels laid out and wires each tab to its panel', async () => {
+    const user = userEvent.setup();
+    render(<EmbeddedTabs tabs={tabs} defaultValue="one" keepTallest />);
+    // A tab's panel is the one labelled by that tab.
+    const panelOf = (name: RegExp) => {
+      const tab = screen.getByRole('tab', { name });
+      return screen
+        .getAllByRole('tabpanel', { hidden: true })
+        .find((panel) => panel.getAttribute('aria-labelledby') === tab.id);
+    };
+
+    // Only the open tab mounts, so only its table fetches.
+    expect(screen.getByText('First panel')).toBeInTheDocument();
+    expect(screen.queryByText('Second panel')).not.toBeInTheDocument();
+    expect(panelOf(/One/)).toHaveTextContent('First panel');
+    expect(screen.getByRole('tab', { name: /One/ })).toHaveAttribute(
+      'aria-controls',
+      panelOf(/One/).id,
+    );
+
+    await user.click(screen.getByRole('tab', { name: /Two/ }));
+
+    // The first panel stays laid out, invisible, to keep the height.
+    expect(panelOf(/Two/)).toHaveTextContent('Second panel');
+    expect(panelOf(/Two/)).toHaveAttribute('aria-hidden', 'false');
+    expect(panelOf(/One/)).toHaveAttribute('aria-hidden', 'true');
+    expect(screen.queryByText('Fourth panel')).not.toBeInTheDocument();
+  });
 });

@@ -106,7 +106,7 @@ export const CustomerDashboard: FunctionComponent = () => {
   if (!customer || isServiceManagerOnly) return null;
 
   return (
-    <div className="grid grid-cols-1 gap-x-5 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-x-4 md:grid-cols-2">
       {canSeeCharts && (
         <CustomerDashboardChart customer={customer} user={user} />
       )}
