@@ -6,6 +6,7 @@ export * from './testing/viewport';
 export * from './Accordion';
 export * from './AccordionCard';
 export * from './AlertItem';
+export * from './AppLink';
 export * from './Avatar';
 export * from './Badge';
 export * from './Breadcrumb';

@@ -10,7 +10,6 @@ import React, {
 import { useSelector } from 'react-redux';
 
 import {
-  BreadcrumbLinkRenderer,
   BreadcrumbsProvider,
   cn,
   SidebarProvider,
@@ -27,7 +26,6 @@ import {
 } from '@/auth/PermissionLayout';
 import WarningBar from '@/auth/WarningBar';
 import { GRID_BREAKPOINTS } from '@/core/constants';
-import { Link } from '@/core/Link';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { useIsFloatingDrawerOpen } from '@/drawer/actions';
 import { FeedbackPromptCheck } from '@/feedback/FeedbackPromptCheck';
@@ -56,19 +54,13 @@ import { Tab } from './Tab';
 import { Toolbar } from './Toolbar';
 import { useTabs } from './useTabs';
 
-// A crumb's `to` is a UI-Router state name. The app's Link also conceals links
-// to states this deployment has disabled.
-const renderStateLink: BreadcrumbLinkRenderer = (to, params) => (
-  <Link state={to} params={params} />
-);
-
 export const Layout: React.FC<PropsWithChildren> = ({ children }) => (
   <SidebarProvider
     renderWrapper={false}
     mobileBreakpoint={GRID_BREAKPOINTS.lg}
     style={{ '--sidebar-width-icon': '75px' } as React.CSSProperties}
   >
-    <BreadcrumbsProvider renderLink={renderStateLink}>
+    <BreadcrumbsProvider>
       <LayoutContent>{children}</LayoutContent>
     </BreadcrumbsProvider>
   </SidebarProvider>

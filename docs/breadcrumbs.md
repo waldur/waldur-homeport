@@ -66,20 +66,21 @@ A crumb with neither `to`, `onClick` nor `active` is plain text, for a level the
 
 ## Routing
 
-The trail turns a crumb's `to` and `params` into a link through the `renderLink` of the nearest `BreadcrumbsProvider`, or a `renderLink` prop on the trail itself. It fills the returned element with the crumb's content and classes.
+The trail turns a crumb's `to` and `params` into a link through the nearest `LinkProvider` (waldur-ui's `AppLink`), which every waldur-ui component that takes a destination reads — `StatCard`'s `link` too. A `renderLink` on `BreadcrumbsProvider` or on the trail itself overrides it for the crumbs. The trail fills the returned element with the crumb's content and classes.
 
 ```tsx
-// Root app (src/navigation/Layout.tsx): `to` is a UI-Router state name.
-const renderStateLink: BreadcrumbLinkRenderer = (to, params) => (
+// Root app (src/Application.tsx): `to` is a UI-Router state name;
+// renderStateLink lives in src/core/Link.tsx.
+const renderStateLink: LinkRenderer = (to, params) => (
   <Link state={to} params={params} />
 );
-<BreadcrumbsProvider renderLink={renderStateLink}>…</BreadcrumbsProvider>;
+<LinkProvider renderLink={renderStateLink}>…</LinkProvider>;
 
 // A React Router app: `to` is a path.
-<BreadcrumbsProvider renderLink={(to) => <RouterLink to={to} />}>
+<LinkProvider renderLink={(to) => <RouterLink to={to} />}>
 ```
 
-Without a `renderLink`, `to` is used as a plain `href`.
+Without a renderer, `to` is used as a plain `href`.
 
 - **Return the link empty and without an `onClick`.** The trail supplies the content, and attaches the crumb's `onClick` in the capture phase: the app's `Link` turns into `role="button"` when it is given an `onClick`.
 - The root app's `Link` also hides links to states this deployment has switched off, so a crumb pointing at one renders as text.

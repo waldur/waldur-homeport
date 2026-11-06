@@ -8,7 +8,6 @@ import { FC, ReactNode } from 'react';
 import { expect, within } from 'storybook/test';
 
 import { Badge } from '../Badge';
-import { BaseButton } from '../Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../Card';
 import { HelpIcon } from '../HelpIcon';
 
@@ -28,7 +27,8 @@ const meta: Meta<typeof StatCard> = {
 Slots:
 - **label** — what the figure is. Keep it short; the unit goes here or in the value, not both.
 - **value** — the figure, already formatted (\`formatCurrency\`, \`toLocaleString\`, …). A unit in a smaller \`<span>\` is fine.
-- **footer** — one row under the value: a caption, a delta \`Badge\`, a "View all" link, or a badge and a caption together. Plain text in it is muted; a Badge keeps its own colours.
+- **footer** — one row under the value: a caption, a delta \`Badge\`, or a badge and a caption together. Plain text in it is muted; a Badge keeps its own colours.
+- **link** — the list behind the figure, as data (\`{ to, params?, label? }\`). The tile draws "View all" at the end of the footer row, through the app's \`LinkProvider\` (HomePort's turns \`to\` into a UI-Router state link; without a provider it is a plain href), and names it after the tile: "View all Organizations".
 - **icon** — top-right corner, naming what the figure measures or explaining how it is worked out (\`HelpIcon\`).
 
 Pick the size by the grid:
@@ -150,7 +150,7 @@ export const Default: Story = {
 export const Footers: Story = {
   name: 'Footer',
   parameters: story(
-    'The footer row takes a caption, a delta badge, a badge with a caption, or a link to the list behind the figure (HomePort passes `ViewAllLink`).',
+    'The footer row takes a caption, a delta badge, or a badge with a caption.',
   ),
   render: () => (
     <div className="grid grid-cols-4 gap-3">
@@ -166,20 +166,40 @@ export const Footers: Story = {
           </>
         }
       />
+      <StatCard label="Members" value={37} footer="across projects" />
+    </div>
+  ),
+};
+
+export const Link: Story = {
+  parameters: story(
+    '`link` leads to the list behind the figure. "View all" sits at the end of the footer row, beside a caption if there is one, and its accessible name adds the tile\'s label, so a row of them reads as distinct links. `label` changes the text. Without a `LinkProvider`, as here, `to` is a plain href.',
+  ),
+  render: () => (
+    <div className="grid grid-cols-3 gap-3">
+      <StatCard label="Open issues" value={7} link={{ to: '#issues' }} />
       <StatCard
-        label="Open issues"
-        value={7}
-        footer={
-          <BaseButton
-            variant="text-primary"
-            size="sm"
-            className="px-0"
-            label="View all"
-          />
-        }
+        label="Closed issues (this month)"
+        value={42}
+        footer="up from 35"
+        link={{ to: '#closed' }}
+      />
+      <StatCard
+        label="Pending reviews"
+        value={3}
+        link={{ to: '#reviews', label: 'Review now' }}
       />
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByRole('link', { name: 'View all Open issues' }),
+    ).toHaveAttribute('href', '#issues');
+    await expect(
+      canvas.getByRole('link', { name: 'Review now Pending reviews' }),
+    ).toBeInTheDocument();
+  },
 };
 
 export const Icon: Story = {

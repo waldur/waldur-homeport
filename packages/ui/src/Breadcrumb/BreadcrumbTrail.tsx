@@ -9,7 +9,6 @@ import {
   MouseEvent,
   ReactElement,
   ReactNode,
-  useContext,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -17,6 +16,7 @@ import {
 } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
+import { LinkProvider, useLinkRenderer } from '../AppLink';
 import { cn } from '../cn';
 import { MiddleTruncate } from '../MiddleTruncate';
 import { Popover, PopoverContent, PopoverTrigger } from '../Popover';
@@ -32,7 +32,6 @@ import {
 } from './Breadcrumb';
 import {
   BreadcrumbLinkRenderer,
-  BreadcrumbLinkRendererContext,
   IBreadcrumbItem,
   useBreadcrumbItems,
 } from './BreadcrumbsContext';
@@ -117,7 +116,7 @@ const withLabel = (
  * the trail's) renderLink, or a plain href when there is none.
  */
 const useCrumbTarget = () => {
-  const renderLink = useContext(BreadcrumbLinkRendererContext);
+  const renderLink = useLinkRenderer();
   return ({ to, params }: IBreadcrumbItem) => {
     if (!to) return {};
     return renderLink ? { link: renderLink(to, params) } : { href: to };
@@ -495,7 +494,7 @@ export const BreadcrumbHiddenItems: FC<{ items: IBreadcrumbItem[] }> = ({
 interface BreadcrumbTrailProps {
   /** Defaults to the crumbs pages set with useBreadcrumbs. */
   items?: IBreadcrumbItem[];
-  /** Overrides the BreadcrumbsProvider's renderLink for this trail. */
+  /** Overrides the `LinkProvider`'s (or BreadcrumbsProvider's) renderLink for this trail. */
   renderLink?: BreadcrumbLinkRenderer;
   className?: string;
 }
@@ -513,13 +512,11 @@ export const BreadcrumbTrail: FC<BreadcrumbTrailProps> = ({
   className,
 }) => {
   const pageItems = useBreadcrumbItems();
-  const inheritedRenderLink = useContext(BreadcrumbLinkRendererContext);
-  return (
-    <BreadcrumbLinkRendererContext.Provider
-      value={renderLink ?? inheritedRenderLink}
-    >
-      <Trail items={items ?? pageItems} className={className} />
-    </BreadcrumbLinkRendererContext.Provider>
+  const trail = <Trail items={items ?? pageItems} className={className} />;
+  return renderLink ? (
+    <LinkProvider renderLink={renderLink}>{trail}</LinkProvider>
+  ) : (
+    trail
   );
 };
 

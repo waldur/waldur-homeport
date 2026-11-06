@@ -6,7 +6,6 @@ import { StatCardGrid } from 'waldur-ui';
 import { STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { ViewAllLink } from '@/core/ViewAllLink';
 import { translate } from '@/i18n';
 import { IsOpenOptions } from '@/table/generated/SupportIssuesFilter';
 
@@ -17,7 +16,7 @@ import { IsOpenOptions } from '@/table/generated/SupportIssuesFilter';
  * "Open issues" card landed on a "Waiting for support" filter showing nothing.
  */
 const getIssueState = (isOpen: boolean) => ({
-  state: 'support-list',
+  to: 'support-list',
   params: {
     is_open: JSON.stringify(IsOpenOptions.find((op) => op.value === isOpen)),
   },
@@ -51,17 +50,17 @@ export const SupportStatistics = () => {
         {
           label: translate('Open issues'),
           value: data.open_issues_count,
-          footer: <ViewAllLink to={getIssueState(true)} />,
+          link: getIssueState(true),
         },
         {
           label: translate('Closed issues (this month)'),
           value: data.closed_this_month_count,
-          footer: <ViewAllLink to={getIssueState(false)} />,
+          link: getIssueState(false),
         },
         {
           label: translate('Recent broadcasts (this month)'),
           value: data.recent_broadcasts_count,
-          footer: <ViewAllLink to={{ state: 'support-broadcast' }} />,
+          link: { to: 'support-broadcast' },
         },
       ]}
     />

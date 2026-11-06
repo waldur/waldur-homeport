@@ -4,11 +4,14 @@ import { UIRouter, UIView } from '@uirouter/react';
 import { FunctionComponent, Suspense } from 'react';
 import { Provider } from 'react-redux';
 
+import { LinkProvider } from 'waldur-ui';
+
 import { AnonymousThreadProvider } from '@/ai-assistant/anonymous/AnonymousThreadProvider';
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
 import { ThreadRuntimeProvider } from '@/ai-assistant/logic/ThreadRuntimeProvider';
 import { BootSplashGate } from '@/BootSplashGate';
 import { AppCopyFeedback } from '@/core/CopyFeedback';
+import { renderStateLink } from '@/core/Link';
 import { BOOTSTRAP_QUERY_KEY, queryClient } from '@/core/queryClient';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { DrawerRoot } from '@/drawer/DrawerRoot';
@@ -40,34 +43,37 @@ const ApplicationInner: FunctionComponent = () => {
     <ErrorBoundary fallback={ErrorMessage}>
       <UIRouter router={router}>
         <Provider store={store}>
-          <ThemeProvider>
-            <AppCopyFeedback>
-              {/* Drawer/Modal providers must wrap MatrixRoot: MatrixCallHost
+          {/* A waldur-ui destination (a crumb, a StatCard link) is a state. */}
+          <LinkProvider renderLink={renderStateLink}>
+            <ThemeProvider>
+              <AppCopyFeedback>
+                {/* Drawer/Modal providers must wrap MatrixRoot: MatrixCallHost
                     (rendered inside MatrixRoot) opens the chat drawer from the
                     call widget via useDrawer, so it needs the same shared
                     DrawerProvider instance as the rest of the app. */}
-              <ModalProvider>
-                <DrawerProvider>
-                  <MatrixRoot>
-                    <ThreadProvider>
-                      <ThreadRuntimeProvider>
-                        <AnonymousThreadProvider>
-                          <RouteLoadingBar />
-                          <RealtimeRoot />
-                          <NotificationContainer />
-                          <ModalRoot />
-                          <ConfirmModalRoot />
-                          <DrawerRoot />
-                          <UIView />
-                          <BootSplashGate />
-                        </AnonymousThreadProvider>
-                      </ThreadRuntimeProvider>
-                    </ThreadProvider>
-                  </MatrixRoot>
-                </DrawerProvider>
-              </ModalProvider>
-            </AppCopyFeedback>
-          </ThemeProvider>
+                <ModalProvider>
+                  <DrawerProvider>
+                    <MatrixRoot>
+                      <ThreadProvider>
+                        <ThreadRuntimeProvider>
+                          <AnonymousThreadProvider>
+                            <RouteLoadingBar />
+                            <RealtimeRoot />
+                            <NotificationContainer />
+                            <ModalRoot />
+                            <ConfirmModalRoot />
+                            <DrawerRoot />
+                            <UIView />
+                            <BootSplashGate />
+                          </AnonymousThreadProvider>
+                        </ThreadRuntimeProvider>
+                      </ThreadProvider>
+                    </MatrixRoot>
+                  </DrawerProvider>
+                </ModalProvider>
+              </AppCopyFeedback>
+            </ThemeProvider>
+          </LinkProvider>
         </Provider>
       </UIRouter>
     </ErrorBoundary>

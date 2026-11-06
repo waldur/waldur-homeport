@@ -4,7 +4,7 @@ import { StatCard, type StatCardProps } from './StatCard';
 
 export type StatCardGridItem = Pick<
   StatCardProps,
-  'label' | 'value' | 'footer' | 'icon' | 'tone'
+  'label' | 'value' | 'footer' | 'link' | 'icon' | 'tone'
 >;
 
 // One column on phones. Two or three tiles share a row from `sm`; four or

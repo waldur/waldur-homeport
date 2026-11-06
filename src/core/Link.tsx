@@ -1,7 +1,13 @@
 import { useSref } from '@uirouter/react';
 import React, { forwardRef } from 'react';
 
-import { ButtonVariant, buttonVariants, cn, ButtonSize } from 'waldur-ui';
+import {
+  ButtonVariant,
+  buttonVariants,
+  cn,
+  ButtonSize,
+  type LinkRenderer,
+} from 'waldur-ui';
 
 import { isStateVisible } from './stateVisibility';
 
@@ -104,3 +110,12 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   },
 );
 Link.displayName = 'Link';
+
+/**
+ * waldur-ui's `LinkProvider` renderer: a destination's `to` is a UI-Router
+ * state name. `Link` also conceals links to states this deployment has
+ * disabled.
+ */
+export const renderStateLink: LinkRenderer = (to, params) => (
+  <Link state={to} params={params} />
+);
