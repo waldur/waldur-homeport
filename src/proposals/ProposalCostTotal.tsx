@@ -52,12 +52,7 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
 
   const body = (
     <>
-      <PropertyList
-        variant="summary"
-        labelClass="w-full sm:w-full"
-        valueClass="w-full sm:w-full"
-        space={2.5}
-      >
+      <PropertyList variant="summary" stacked space={2.5}>
         {showsFigures && (
           <>
             {Boolean(total.monthly) && (

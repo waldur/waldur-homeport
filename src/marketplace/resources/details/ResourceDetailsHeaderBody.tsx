@@ -7,6 +7,8 @@ import {
   projectsRetrieve,
 } from 'waldur-js-client';
 
+import { PropertyList } from 'waldur-ui';
+
 import { STALE_TIME } from '@/core/constants';
 import { useUser } from '@/workspace/hooks';
 
@@ -62,18 +64,23 @@ export const ResourceDetailsHeaderBody: FunctionComponent<
   return (
     <>
       {resource.description ? <p>{resource.description}</p> : null}
-      <OfferingDetailsField
-        offering={offering}
-        concealBillingInfo={
-          project?.customer_display_billing_info_in_projects === false
-        }
-      />
-      <BackendIdField resource={resource} offering={offering} />
-      <EndDateField resource={resource} />
-      <OfferingUserDetailsField
-        offeringUser={offeringUser}
-        resource={resource}
-      />
+      {/* One list, so the rows share a term column: a quarter of the header,
+          as Field's 3/9 split was. A lone row took the default 200px and
+          wrapped the offering name. */}
+      <PropertyList variant="summary" termWidth="25%">
+        <OfferingDetailsField
+          offering={offering}
+          concealBillingInfo={
+            project?.customer_display_billing_info_in_projects === false
+          }
+        />
+        <BackendIdField resource={resource} offering={offering} />
+        <EndDateField resource={resource} />
+        <OfferingUserDetailsField
+          offeringUser={offeringUser}
+          resource={resource}
+        />
+      </PropertyList>
     </>
   );
 };

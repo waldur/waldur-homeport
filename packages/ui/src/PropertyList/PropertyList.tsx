@@ -178,12 +178,17 @@ const PropertyItemBody: FC<PropertyItemProps> = (allProps) => {
         {...rowProps}
         style={{
           ...(effectiveTermWidth &&
+          !ctx.stacked &&
           (!ctx.insideList || allProps.termWidth || !ctx.termWidth)
             ? ({ '--dt-width': effectiveTermWidth } as React.CSSProperties)
             : {}),
         }}
         className={cn(
-          'field-row flex flex-wrap m-0 sm:grid sm:grid-cols-[var(--dt-width)_minmax(0,1fr)] sm:gap-6 items-baseline',
+          ctx.stacked
+            ? // Term above value at every width: no term track to squeeze
+              // the value in a narrow cell.
+              'field-row flex flex-col m-0'
+            : 'field-row flex flex-wrap m-0 sm:grid sm:grid-cols-[var(--dt-width)_minmax(0,1fr)] sm:gap-6 items-baseline',
           space ? SPACE_CLASSES[space] : undefined,
           props.className,
         )}
@@ -192,7 +197,8 @@ const PropertyItemBody: FC<PropertyItemProps> = (allProps) => {
           <dt
             data-slot="property-term"
             className={cn(
-              'w-full sm:w-auto text-secondary font-medium break-words field-label m-0',
+              'w-full text-secondary font-medium break-words field-label m-0',
+              !ctx.stacked && 'sm:w-auto',
               ctx.labelClass,
               props.labelClass,
             )}
@@ -223,8 +229,9 @@ const PropertyItemBody: FC<PropertyItemProps> = (allProps) => {
               data-slot="property-value"
               aria-labelledby={ddLabelledBy}
               className={cn(
-                'w-full sm:w-auto m-0 text-quaternary [&_p]:m-0',
-                i > 0 && 'sm:col-start-2',
+                'w-full m-0 text-quaternary [&_p]:m-0',
+                !ctx.stacked && 'sm:w-auto',
+                i > 0 && !ctx.stacked && 'sm:col-start-2',
                 !hasEllipsis && 'wrap-break-word',
                 hasEllipsis && 'min-w-0 overflow-hidden',
                 ctx.valueClass,
@@ -462,6 +469,7 @@ export const PropertyList: FC<PropsWithChildren<PropertyListProps>> & {
   hideActions,
   space,
   termWidth,
+  stacked,
   labelClass,
   valueClass,
   emptyPlaceholder,
@@ -495,6 +503,7 @@ export const PropertyList: FC<PropsWithChildren<PropertyListProps>> & {
         ellipsis: props.ellipsis,
         space,
         termWidth: resolvedTermWidth,
+        stacked,
         labelClass,
         valueClass,
         emptyPlaceholder,

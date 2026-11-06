@@ -239,9 +239,10 @@
   /* A code block in rendered markdown (a ``` fence): a tinted panel, so it
      stands apart from the text around it. Only a bare <pre>: a block with its
      own class (the AI assistant's .aui-md-pre, a highlighted language-*
-     fence) keeps its look. Bootstrap's reboot sets its font, size and bottom
+     fence) keeps its look, and so does CodePreview's $-prompt block, which
+     .code-block draws. Bootstrap's reboot sets its font, size and bottom
      margin. */
-  .rich-text pre:not([class]) {
+  .rich-text pre:not([class], .code-block pre) {
     overflow-x: auto;
     background-color: var(--bg-tertiary);
     color: var(--text-primary);

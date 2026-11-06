@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { ReactNode, useId } from 'react';
 
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-  PropertyList,
   PropertyItem,
+  PropertyList,
+  StatCard,
 } from 'waldur-ui';
 
+import { formatUsageValue } from '@/core/formatNumber';
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
 
@@ -32,81 +34,146 @@ interface K8sTotalResourcesCardProps {
   loadBalancerTooltip?: string;
 }
 
+/** A tile's figure, with its unit set smaller so the number leads. */
+const Figure = ({ value, unit }: { value: number; unit?: string }) => (
+  <span className="tabular-nums">
+    {formatUsageValue(value, false)}
+    {unit && (
+      <>
+        {' '}
+        <span className="text-xs font-normal text-tertiary">{unit}</span>
+      </>
+    )}
+  </span>
+);
+
+/** A titled part of the breakdown; its list comes from the caller. */
+const Breakdown = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) => {
+  const id = useId();
+  return (
+    <section aria-labelledby={id}>
+      <h4 id={id} className="m-0 mb-1 text-xs font-medium text-tertiary">
+        {title}
+      </h4>
+      {children}
+    </section>
+  );
+};
+
+/**
+ * The totals of the cluster being configured: the three figures that size it
+ * as tiles, then what they are made of. The node roles add up to the Nodes
+ * tile, and the disks to the storage total.
+ */
 export const K8sTotalResourcesCard: React.FC<K8sTotalResourcesCardProps> = ({
   totalResources,
   datacenterCount,
   controllerTooltip,
   loadBalancerTooltip,
 }) => {
+  const totalDisk =
+    totalResources.totalSystemStorage +
+    totalResources.totalDataStorage +
+    totalResources.totalSanStorage;
+
   return (
     <Card bordered size="sm" className="bg-secondary">
       <CardHeader>
         <CardTitle as="h6" className="text-sm text-secondary">
           {translate('Total cluster resources')}
         </CardTitle>
+        <span className="text-xs font-normal text-tertiary">
+          {translate('Datacenters: {count}', {
+            count: formatUsageValue(datacenterCount, false),
+          })}
+        </span>
       </CardHeader>
-      <CardContent>
-        {/* One list of totals, laid out as chips: each row is a fixed-width
-            column of label over value. */}
-        <PropertyList
-          variant="summary"
-          labelClass="w-full sm:w-full"
-          valueClass="w-full sm:w-full"
-          className="flex flex-wrap gap-3 [&>*]:w-[110px] [&>*]:gap-y-2"
-        >
-          <PropertyItem
-            label={translate('Controllers')}
-            value={totalResources.totalControllerNodes}
-            tooltip={controllerTooltip}
+      {/* Columns follow the card's width, not the viewport's: the card sits in
+          a form column that is narrow on a phone and next to a sidebar on a
+          desktop. */}
+      <CardContent className="@container flex flex-col gap-5">
+        <div className="grid gap-3 @sm:grid-cols-3">
+          <StatCard
+            size="sm"
+            label={translate('Nodes')}
+            value={<Figure value={totalResources.totalNodes} />}
           />
-          <PropertyItem
-            label={translate('Load balancers')}
-            value={totalResources.totalLoadBalancerNodes}
-            tooltip={loadBalancerTooltip}
+          <StatCard
+            size="sm"
+            label={translate('vCPUs')}
+            value={
+              <Figure
+                value={totalResources.totalVCpus}
+                unit={translate('cores')}
+              />
+            }
           />
-          <PropertyItem
-            label={translate('Total nodes')}
-            value={totalResources.totalNodes}
+          <StatCard
+            size="sm"
+            label={translate('Memory')}
+            value={<Figure value={totalResources.totalRam} unit="GB" />}
           />
-          <PropertyItem
-            label={translate('Total vCPUs')}
-            value={propVal.number(totalResources.totalVCpus, { unit: 'cores' })}
-          />
-          <PropertyItem
-            label={translate('Total RAM')}
-            value={propVal.number(totalResources.totalRam, { unit: 'GB' })}
-          />
-          <PropertyItem
-            label={translate('System + etcd')}
-            value={propVal.number(totalResources.totalSystemStorage, {
-              unit: 'GB',
-            })}
-          />
-          <PropertyItem
-            label={translate('Workers')}
-            value={totalResources.totalWorkerNodes}
-          />
-          <PropertyItem
-            label={translate('Storage')}
-            value={totalResources.totalStorageNodes}
-          />
-          <PropertyItem
-            label={translate('Data + logs')}
-            value={propVal.number(totalResources.totalDataStorage, {
-              unit: 'GB',
-            })}
-          />
-          <PropertyItem
-            label={translate('SAN storage')}
-            value={propVal.number(totalResources.totalSanStorage, {
-              unit: 'GB',
-            })}
-          />
-          <PropertyItem
-            label={translate('Datacenters')}
-            value={propVal.number(datacenterCount)}
-          />
-        </PropertyList>
+        </div>
+        <div className="grid gap-x-10 gap-y-5 @xl:grid-cols-2">
+          <Breakdown title={translate('Node roles')}>
+            <PropertyList variant="compact">
+              <PropertyItem
+                label={translate('Controllers')}
+                value={propVal.count(totalResources.totalControllerNodes)}
+                tooltip={controllerTooltip}
+              />
+              <PropertyItem
+                label={translate('Load balancers')}
+                value={propVal.count(totalResources.totalLoadBalancerNodes)}
+                tooltip={loadBalancerTooltip}
+              />
+              <PropertyItem
+                label={translate('Workers')}
+                value={propVal.count(totalResources.totalWorkerNodes)}
+              />
+              <PropertyItem
+                label={translate('Storage nodes')}
+                value={propVal.count(totalResources.totalStorageNodes)}
+              />
+            </PropertyList>
+          </Breakdown>
+          <Breakdown title={translate('Disks')}>
+            <PropertyList variant="compact">
+              <PropertyItem
+                label={translate('System')}
+                value={propVal.count(totalResources.totalSystemStorage, {
+                  unit: 'GB',
+                })}
+              />
+              {/* The controllers' etcd disks and the load balancers' log disks
+                are counted here, with the node groups' data disks
+                (multi-datacenter-k8s-types.ts). */}
+              <PropertyItem
+                label={translate('Data, etcd and logs')}
+                value={propVal.count(totalResources.totalDataStorage, {
+                  unit: 'GB',
+                })}
+              />
+              <PropertyItem
+                label={translate('SAN')}
+                value={propVal.count(totalResources.totalSanStorage, {
+                  unit: 'GB',
+                })}
+              />
+              <PropertyItem
+                label={translate('Total')}
+                value={propVal.count(totalDisk, { unit: 'GB' })}
+                valueClass="font-semibold"
+              />
+            </PropertyList>
+          </Breakdown>
+        </div>
       </CardContent>
     </Card>
   );

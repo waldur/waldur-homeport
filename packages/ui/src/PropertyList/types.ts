@@ -47,6 +47,8 @@ export interface PropertyListContextValue {
   ellipsis?: boolean;
   space?: PropertySpace;
   termWidth?: string;
+  /** Summary layout: term above value in one column, no term track. */
+  stacked?: boolean;
   /** Classes merged into every item's term / value cell, before its own. */
   labelClass?: string;
   valueClass?: string;
@@ -84,6 +86,12 @@ export interface PropertyListProps extends HTMLAttributes<HTMLElement> {
    * Sets --dt-width CSS variable and aligns columns across independent lists.
    */
   termWidth?: TermWidthPreset | string;
+  /**
+   * Summary layout only: each row puts its term above its value instead of
+   * beside it, at every width. For narrow cells (stat chips, sidebars) where
+   * a term column would leave the value no room. `termWidth` is ignored.
+   */
+  stacked?: boolean;
   /**
    * Classes every row's term / value cell carries. They are merged ahead of
    * the item's own `labelClass` / `valueClass`, so a row can still override

@@ -14,6 +14,9 @@ import { DetailsOverviewButton } from '../DetailsOverviewButton';
 import { useOrderFormData } from '../selectors';
 import { FormStepProps } from '../types';
 
+// The old Field's 6px label gap instead of the summary row's 24px.
+const INLINE_ROW = 'sm:gap-1.5';
+
 export const FormDetailsOverviewStep = (props: FormStepProps) => {
   const { customer, project } = useOrderFormData();
 
@@ -49,9 +52,13 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
         <PropertyList
           variant="summary"
           className="grid grid-cols-1 sm:grid-cols-2 text-sm gap-x-5"
-          termWidth="sm"
+          // "Label: value" inline, as each sits in half the card: a fixed
+          // term column would wrap the value. Capped at half the row, so a
+          // long translated label wraps rather than squeezing the value.
+          termWidth="fit-content(50%)"
         >
           <PropertyItem
+            className={INLINE_ROW}
             label={translate('Offering')}
             value={
               <div className="flex items-center self-stretch gap-1.5">
@@ -63,6 +70,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
             }
           />
           <PropertyItem
+            className={INLINE_ROW}
             label={translate('Service provider')}
             value={provider?.customer_name}
             hideIfEmpty={false}
@@ -98,17 +106,20 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
       <PropertyList
         variant="summary"
         className="grid grid-cols-1 sm:grid-cols-2 text-sm gap-x-5"
-        termWidth="md"
+        termWidth="fit-content(50%)"
       >
         <PropertyItem
+          className={INLINE_ROW}
           label={translate('Organization')}
           value={props.offering.customer_name}
         />
         <PropertyItem
+          className={INLINE_ROW}
           label={translate('Project')}
           value={props.offering.project_name}
         />
         <PropertyItem
+          className={INLINE_ROW}
           label={translate('Offering')}
           value={
             <div className="flex items-center self-stretch gap-1.5">
@@ -120,6 +131,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
           }
         />
         <PropertyItem
+          className={INLINE_ROW}
           label={translate('Service provider')}
           value={provider?.customer_name}
           hideIfEmpty={false}
