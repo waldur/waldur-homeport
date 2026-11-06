@@ -228,21 +228,21 @@ export const MyEditButton = ({ row, refetch }) => (
 
 ### Navigation Components
 
-| Component       | Location                                                                                                                     | Description            | Key Features                                                                                                                                                                                   |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **TabsList**    | `src/navigation/TabsList.tsx`                                                                                                | Tab navigation         | Nested dropdowns, active detection                                                                                                                                                             |
-| **Layout**      | `src/navigation/Layout.tsx`                                                                                                  | Application layout     | Responsive, sidebar, header                                                                                                                                                                    |
-| **Breadcrumbs** | `BreadcrumbTrail`, `BreadcrumbsProvider`, `useBreadcrumbs`, `IBreadcrumbItem` in `waldur-ui` (`packages/ui/src/Breadcrumb/`) | Navigation breadcrumbs | Router-agnostic (`renderLink` on the provider; the app's builds `@/core/Link` in `Layout.tsx`), overflow collapse, middle truncation, switcher dropdowns. See [breadcrumbs.md](breadcrumbs.md) |
+| Component       | Location                                                                                                                     | Description            | Key Features                                                                                                                                                                                                                     |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **TabsList**    | `src/navigation/TabsList.tsx`                                                                                                | Tab navigation         | Nested dropdowns, active detection                                                                                                                                                                                               |
+| **Layout**      | `src/navigation/Layout.tsx`                                                                                                  | Application layout     | Responsive, sidebar, header                                                                                                                                                                                                      |
+| **Breadcrumbs** | `BreadcrumbTrail`, `BreadcrumbsProvider`, `useBreadcrumbs`, `IBreadcrumbItem` in `waldur-ui` (`packages/ui/src/Breadcrumb/`) | Navigation breadcrumbs | Router-agnostic (`to` becomes a link through `LinkProvider`, set in `Application.tsx` with `renderStateLink` from `@/core/Link`), overflow collapse, middle truncation, switcher dropdowns. See [breadcrumbs.md](breadcrumbs.md) |
 
 ### Cards and Layout Components
 
-| Component         | Location                                                        | Description        | Key Features                         |
-| ----------------- | --------------------------------------------------------------- | ------------------ | ------------------------------------ |
-| **Panel**         | `src/core/Panel.tsx`                                            | Basic card panel   | Header, actions, flexible content    |
-| **AccordionCard** | `waldur-ui` (`packages/ui/src/AccordionCard/AccordionCard.tsx`) | Collapsible card   | Toggle functionality, custom styling |
-| **WidgetCard**    | `src/dashboard/WidgetCard.tsx`                                  | Dashboard widget   | Flexible layout, action dropdown     |
-| **StatCard**      | `waldur-ui` (`packages/ui/src/StatCard/StatCard.tsx`)           | One figure (KPI)   | `icon`, `footer`, `tone`, `sm` size  |
-| **StatCardGrid**  | `waldur-ui` (`packages/ui/src/StatCard/StatCardGrid.tsx`)       | Row of `StatCard`s | Columns sized by tile count          |
+| Component         | Location                                                        | Description        | Key Features                           |
+| ----------------- | --------------------------------------------------------------- | ------------------ | -------------------------------------- |
+| **Panel**         | `src/core/Panel.tsx`                                            | Basic card panel   | Header, actions, flexible content      |
+| **AccordionCard** | `waldur-ui` (`packages/ui/src/AccordionCard/AccordionCard.tsx`) | Collapsible card   | Toggle functionality, custom styling   |
+| **WidgetCard**    | `src/dashboard/WidgetCard.tsx`                                  | Dashboard widget   | Flexible layout, action dropdown       |
+| **StatCard**      | `waldur-ui` (`packages/ui/src/StatCard/StatCard.tsx`)           | One figure (KPI)   | `icon`, `footer`, `link`, `tone`, `sm` |
+| **StatCardGrid**  | `waldur-ui` (`packages/ui/src/StatCard/StatCardGrid.tsx`)       | Row of `StatCard`s | Columns sized by tile count            |
 
 ### Data Display Components
 

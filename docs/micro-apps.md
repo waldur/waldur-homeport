@@ -26,8 +26,8 @@ the same wiring per app.
 The same goes for breadcrumbs: use `waldur-ui`'s `BreadcrumbTrail` (with
 `BreadcrumbsProvider` and `useBreadcrumbs` once pages set their own crumbs)
 rather than copying `src/navigation/header/breadcrumb/`. It knows no router:
-a `renderLink` on the provider turns a crumb's `to` into your router's link.
-See [breadcrumbs.md](breadcrumbs.md).
+a `LinkProvider` around the app turns a crumb's `to` (and a `StatCard`'s
+`link`) into your router's link. See [breadcrumbs.md](breadcrumbs.md).
 
 The boot splash is shared too: see [Boot splash](#boot-splash).
 

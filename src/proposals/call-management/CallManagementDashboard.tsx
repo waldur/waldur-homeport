@@ -6,7 +6,6 @@ import { StatCardGrid } from 'waldur-ui';
 import { STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { ViewAllLink } from '@/core/ViewAllLink';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
@@ -20,12 +19,12 @@ import { useCustomer } from '@/workspace/hooks';
 // The call list's state tabs own `?state` and expect a bare value, unlike the
 // proposal/review lists whose URL-synced filter forms store option objects.
 const getCallState = (state: CallState) => ({
-  state: 'call-management.call-list',
+  to: 'call-management.call-list',
   params: { state },
 });
 
 const getProposalState = (states: string[]) => ({
-  state: 'call-management.proposal-list',
+  to: 'call-management.proposal-list',
   params: {
     state: JSON.stringify(
       states.map((state) =>
@@ -36,7 +35,7 @@ const getProposalState = (states: string[]) => ({
 });
 
 const getReviewState = (states: string[]) => ({
-  state: 'call-management.review-list',
+  to: 'call-management.review-list',
   params: {
     state: JSON.stringify(
       states.map((state) =>
@@ -83,7 +82,7 @@ export const CallManagementDashboard = () => {
   const openCalls = {
     label: translate('Open calls'),
     value: data.open_calls,
-    footer: <ViewAllLink to={getCallState('active')} />,
+    link: getCallState('active'),
   };
   // What is coming up across the calls: read at a glance, with no list behind
   // each figure.
@@ -116,19 +115,17 @@ export const CallManagementDashboard = () => {
           {
             label: translate('Accepted proposals'),
             value: data.accepted_proposals,
-            footer: <ViewAllLink to={getProposalState(['accepted'])} />,
+            link: getProposalState(['accepted']),
           },
           {
             label: translate('Pending proposals'),
             value: data.pending_proposals,
-            footer: (
-              <ViewAllLink to={getProposalState(['in_review', 'submitted'])} />
-            ),
+            link: getProposalState(['in_review', 'submitted']),
           },
           {
             label: translate('Pending reviews'),
             value: data.pending_review,
-            footer: <ViewAllLink to={getReviewState(['submitted'])} />,
+            link: getReviewState(['submitted']),
           },
         ]}
       />

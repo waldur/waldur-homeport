@@ -2,12 +2,13 @@ import {
   createContext,
   FC,
   PropsWithChildren,
-  ReactElement,
   ReactNode,
   useContext,
   useEffect,
   useState,
 } from 'react';
+
+import { LinkProvider, type LinkRenderer } from '../AppLink';
 
 /**
  * One crumb of a breadcrumb trail. `to` is whatever the app's router
@@ -36,10 +37,7 @@ export interface IBreadcrumbItem {
 }
 
 /** Builds the app's router link for a crumb's `to` and `params`. */
-export type BreadcrumbLinkRenderer = (
-  to: string,
-  params?: object,
-) => ReactElement;
+export type BreadcrumbLinkRenderer = LinkRenderer;
 
 const ItemsContext = createContext<IBreadcrumbItem[]>([]);
 
@@ -51,11 +49,12 @@ const SetItemsContext = createContext<(items: IBreadcrumbItem[]) => void>(
   () => {},
 );
 
-export const BreadcrumbLinkRendererContext = createContext<
-  BreadcrumbLinkRenderer | undefined
->(undefined);
-
 interface BreadcrumbsProviderProps {
+  /**
+   * Draws the crumbs' links. Prefer one `LinkProvider` around the app, which
+   * every component that takes a destination reads; this one overrides it
+   * for the crumbs.
+   */
   renderLink?: BreadcrumbLinkRenderer;
 }
 
@@ -70,9 +69,11 @@ export const BreadcrumbsProvider: FC<
   return (
     <SetItemsContext.Provider value={setItems}>
       <ItemsContext.Provider value={items}>
-        <BreadcrumbLinkRendererContext.Provider value={renderLink}>
-          {children}
-        </BreadcrumbLinkRendererContext.Provider>
+        {renderLink ? (
+          <LinkProvider renderLink={renderLink}>{children}</LinkProvider>
+        ) : (
+          children
+        )}
       </ItemsContext.Provider>
     </SetItemsContext.Provider>
   );

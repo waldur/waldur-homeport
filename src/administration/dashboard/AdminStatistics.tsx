@@ -14,7 +14,6 @@ import { fetchResultCount } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { ViewAllLink } from '@/core/ViewAllLink';
 import { translate } from '@/i18n';
 
 import * as api from '../api';
@@ -83,34 +82,32 @@ export const AdminStatistics = () => {
         {
           label: translate('Organizations'),
           value: data.organizations,
-          footer: <ViewAllLink to={{ state: 'organizations' }} />,
+          link: { to: 'organizations' },
         },
         {
           label: translate('Projects'),
           value: data.projects,
-          footer: <ViewAllLink to={{ state: 'projects' }} />,
+          link: { to: 'projects' },
         },
         {
           label: translate('Users'),
           value: data.users,
-          footer: <ViewAllLink to={{ state: 'support-users' }} />,
+          link: { to: 'support-users' },
         },
         {
           label: translate('Categories'),
           value: data.categories,
-          footer: (
-            <ViewAllLink to={{ state: 'admin-marketplace-categories' }} />
-          ),
+          link: { to: 'admin-marketplace-categories' },
         },
         {
           label: translate('Offerings'),
           value: data.providerOfferings,
-          footer: <ViewAllLink to={{ state: 'admin-marketplace-offerings' }} />,
+          link: { to: 'admin-marketplace-offerings' },
         },
         {
           label: translate('Resources'),
           value: data.resources,
-          footer: <ViewAllLink to={{ state: 'all-resources' }} />,
+          link: { to: 'all-resources' },
         },
       ]}
     />

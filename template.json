@@ -73890,7 +73890,7 @@
   },
   "View all": {
     "context": {
-      "feature_area": "core"
+      "feature_area": "aggregate-limits"
     }
   },
   "View all pool members and their invitation status. Track who has accepted and who is still pending.": {},
