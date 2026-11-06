@@ -48,7 +48,7 @@ const PauseOfferingDialog = lazyComponent(() =>
   })),
 );
 
-const getActivationErrors = (offering): string[] => {
+export const getActivationErrors = (offering): string[] => {
   const errors: string[] = [];
   if (!offering.plans?.length) {
     errors.push(translate('Offering must have at least one plan.'));

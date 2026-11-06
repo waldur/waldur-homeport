@@ -1,10 +1,14 @@
 import { FC, useMemo } from 'react';
-import { MarketplaceProviderOfferingsListData } from 'waldur-js-client';
+import {
+  MarketplaceProviderOfferingsListData,
+  ProviderOfferingDetails,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { TableWithPortal } from '@/table/types';
 import { useFilterValues } from '@/table/useFilterValues';
 
+import { OfferingsBulkActions } from '../actions/bulk/OfferingsBulkActions';
 import { OFFERINGS_FILTER_FORM_ID } from '../constants';
 import { BaseOfferingsList } from '../list/OfferingsList';
 import { OfferingsListFilter } from '../list/OfferingsListFilter';
@@ -43,6 +47,13 @@ export const buildOfferingsFilter = (filterValues: any) => {
   return filter;
 };
 
+// Defined once, outside render: the table remounts the menu whenever this
+// component's identity changes.
+const AdminOfferingsBulkActions = (props: {
+  rows: ProviderOfferingDetails[];
+  refetch(): void;
+}) => <OfferingsBulkActions {...props} table={ADMIN_OFFERING_TABLE_NAME} />;
+
 export const AdminOfferingsList: FC<Partial<TableWithPortal>> = ({
   portal,
 }) => {
@@ -64,6 +75,7 @@ export const AdminOfferingsList: FC<Partial<TableWithPortal>> = ({
       showProvider
       filters={<OfferingsListFilter />}
       portal={portal}
+      multiSelectActions={AdminOfferingsBulkActions}
       initialFilters={{
         state: [getStates()[1], getStates()[2]],
         shared: { label: translate('Yes'), value: true },
