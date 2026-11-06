@@ -52,6 +52,7 @@ const getColumns = (
   resourceLimits: ResourceSpendingLimits,
   keyManagement: boolean,
   anyAssigned: boolean,
+  anyDescribed: boolean,
   pause: ResourcePause | null,
   resource: Resource,
 ): Column<ApiKeyRow>[] => [
@@ -60,6 +61,8 @@ const getColumns = (
     render: ({ row }) =>
       row.client_id ? <Code>{row.client_id}</Code> : DASH_ESCAPE_CODE,
   },
+  // Only once a key has one: until then it would be a column of dashes.
+  ...(anyDescribed ? [getDescriptionColumn()] : []),
   ...(keyManagement
     ? getManagedColumns(components, models, resourceLimits)
     : anyAssigned
@@ -89,6 +92,23 @@ const getColumns = (
       renderFieldOrDash(row.issued_at && formatDateTime(row.issued_at)),
   },
 ];
+
+// A description may run long; the cell shows its start, and the expanded row
+// and the tooltip the rest.
+const getDescriptionColumn = (): Column<ApiKeyRow> => ({
+  title: translate('Description'),
+  render: ({ row }) =>
+    row.description ? (
+      <span
+        className="line-clamp-2 max-w-80 break-words whitespace-pre-line"
+        title={row.description}
+      >
+        {row.description}
+      </span>
+    ) : (
+      DASH_ESCAPE_CODE
+    ),
+});
 
 const getAssigneeColumn = (): Column<ApiKeyRow> => ({
   title: translate('Assignee'),
@@ -205,6 +225,8 @@ export const ResourceApiKeysCard = ({
 
   // useTable has no built-in polling; refresh while any key is mid-operation.
   const rows = (tableProps.rows ?? []) as ApiKeyRow[];
+  const anyDescribed = rows.some((key) => key.description);
+  const usageExpands = keyManagement && components.length > 0;
   const syncing = rows.some(
     (key) => key.state && TRANSITIONAL.includes(key.state),
   );
@@ -247,6 +269,7 @@ export const ResourceApiKeysCard = ({
           resourceLimits,
           keyManagement,
           rows.some((key) => key.user_uuid),
+          anyDescribed,
           pause,
           resource,
         )}
@@ -267,20 +290,22 @@ export const ResourceApiKeysCard = ({
             />
           ) : undefined
         }
-        // The expanded row is the per-component usage, which only key
-        // management reports; without it there is nothing to expand, so the
-        // header's expand-all toggle goes too.
+        // The expanded row shows the description in full, which the cell
+        // clamps, and the per-component usage, which only key management
+        // reports. A row with neither has nothing to expand, and a table with
+        // no such row drops the header's expand-all toggle too.
         expandableRow={
-          keyManagement && components.length
+          usageExpands || anyDescribed
             ? ({ row }) => (
                 <ApiKeyExpandableRow
                   row={row}
-                  components={components}
+                  components={usageExpands ? components : []}
                   resourceLimits={resourceLimits}
                 />
               )
             : undefined
         }
+        isRowExpandable={(row) => usageExpands || Boolean(row.description)}
         rowActions={({ row }) => (
           <ApiKeyActionsDropdown
             row={row}

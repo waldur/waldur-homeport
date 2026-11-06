@@ -9,6 +9,7 @@ import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 
 import {
   AssigneeOption,
+  getDescriptionField,
   getKeyLimitFieldComponents,
   getKeySettingsFields,
   KeySettingsFormValues,
@@ -22,6 +23,7 @@ import { KeyComponent } from './types';
 const INITIAL_VALUES = { all_models: true, allowed_models: [] };
 
 interface RequestApiKeyFormValues extends KeySettingsFormValues {
+  description?: string;
   user?: AssigneeOption | null;
 }
 
@@ -44,6 +46,7 @@ export const RequestApiKeyDialog: FC<{
       marketplaceResourceApiKeysCreate({
         body: {
           resource: resource.uuid,
+          ...(values.description ? { description: values.description } : {}),
           // An unassigned key is shared: any member of the project or its
           // organization can reveal it.
           user: values.user?.uuid ?? null,
@@ -60,6 +63,7 @@ export const RequestApiKeyDialog: FC<{
 
   const fields = useMemo(
     () => [
+      getDescriptionField(),
       assigneeField,
       ...getKeySettingsFields(resource, components, models),
     ],
