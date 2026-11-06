@@ -66,6 +66,10 @@ export const PermissionOptions = [
         label: translate('Update proposal'),
         value: 'PROPOSAL.UPDATE',
       },
+      {
+        label: translate('View results'),
+        value: 'CALL.VIEW_RESULTS',
+      },
     ],
   },
   {
@@ -125,8 +129,20 @@ export const PermissionOptions = [
         value: 'RESOURCE.MANAGE_API_KEY',
       },
       {
+        label: translate('Pull resource'),
+        value: 'RESOURCE.PULL',
+      },
+      {
         label: translate('Reject booking request for resource'),
         value: 'RESOURCE.REJECT_BOOKING_REQUEST',
+      },
+      {
+        label: translate('Request end date change'),
+        value: 'RESOURCE.REQUEST_END_DATE_CHANGE',
+      },
+      {
+        label: translate('Request limits change'),
+        value: 'RESOURCE.REQUEST_LIMITS_CHANGE',
       },
       {
         label: translate('Set limits for resource'),
@@ -441,8 +457,16 @@ export const PermissionOptions = [
         value: 'PROJECT.LIST',
       },
       {
+        label: translate('Request end date change'),
+        value: 'PROJECT.REQUEST_END_DATE_CHANGE',
+      },
+      {
         label: translate('Review membership'),
         value: 'PROJECT.REVIEW_MEMBERSHIP',
+      },
+      {
+        label: translate('Set end date'),
+        value: 'PROJECT.SET_END_DATE',
       },
       {
         label: translate('Set slug'),
