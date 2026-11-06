@@ -1,17 +1,10 @@
 import { useMemo } from 'react';
 import { Resource, Offering } from 'waldur-js-client';
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardToolbar,
-} from 'waldur-ui';
+import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
 
 import { CodePreview } from '@/core/CodePreview';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { ResourceAccessButton } from '@/resource/ResourceAccessButton';
 import { getResourceAccessEndpoints } from '@/resource/utils';
 
 export const GettingStartedCard = ({
@@ -32,9 +25,6 @@ export const GettingStartedCard = ({
         <CardTitle as="div">
           <h3>{translate('Getting started')}</h3>
         </CardTitle>
-        <CardToolbar>
-          <ResourceAccessButton resource={resource} offering={offering} />
-        </CardToolbar>
       </CardHeader>
       <CardContent>
         {offering.getting_started ? (
@@ -60,7 +50,7 @@ export const GettingStartedCard = ({
         ) : (
           <p>
             {translate(
-              'To access {resource}, please select one of the supported methods from dropdown on the right',
+              'To access {resource}, use the Access resource button at the top of the page',
               { resource: <b>{resource.name}</b> },
               formatJsxTemplate,
             )}

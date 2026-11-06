@@ -63972,7 +63972,7 @@
       "feature_area": "invitations"
     }
   },
-  "To access {resource}, please select one of the supported methods from dropdown on the right": {
+  "To access {resource}, use the Access resource button at the top of the page": {
     "context": {
       "variables": {
         "resource": {

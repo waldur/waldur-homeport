@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 import { Resource } from 'waldur-js-client';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -10,11 +10,12 @@ import { ResourceFlags } from './ResourceFlags';
 
 interface ResourceDetailsHeaderTitleProps {
   resource: Resource;
+  refreshButton?: ReactNode;
 }
 
 export const ResourceDetailsHeaderTitle: FunctionComponent<
   ResourceDetailsHeaderTitleProps
-> = ({ resource }) => {
+> = ({ resource, refreshButton }) => {
   return (
     <>
       <div className="flex flex-wrap gap-1.5 mb-1.5 items-center">
@@ -32,6 +33,7 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<
           hasBullet
           size="sm"
         />
+        {refreshButton}
 
         <ResourceFlags resource={resource} />
       </div>

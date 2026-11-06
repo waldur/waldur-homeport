@@ -1,3 +1,4 @@
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import {
   OfferingComponent,
@@ -5,11 +6,13 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { translate } from '@/i18n';
-import { RefreshButton } from '@/marketplace/common/RefreshButton';
 import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { INSTANCE_TYPE, VOLUME_TYPE } from '@/openstack/constants';
+import { ResourceAccessButton } from '@/resource/ResourceAccessButton';
 import { formatResourceType } from '@/resource/utils';
 import { ActionsUnavailable } from '@/table/ActionsDropdown';
 
@@ -89,16 +92,28 @@ export const ResourceDetailsHero = ({
           logoTooltip={formatResourceType(resource)}
           logoCircle
           backgroundImage={offering.image}
-          title={<ResourceDetailsHeaderTitle resource={resource} />}
+          title={
+            <ResourceDetailsHeaderTitle
+              resource={resource}
+              refreshButton={
+                !isRPOnly && (
+                  <BaseButton
+                    variant="text-secondary"
+                    size="sm"
+                    pending={isLoading}
+                    onClick={refetch}
+                    tooltip={translate('Refresh')}
+                    iconNode={<ArrowsClockwiseIcon size={20} weight="bold" />}
+                  />
+                )
+              }
+            />
+          }
           quickActions={
-            isRPOnly ? null : (
-              <div className="flex flex-col flex-wrap gap-1.5 sm:w-[120px]">
-                <RefreshButton
-                  refetch={refetch}
-                  isLoading={isLoading}
-                  size="sm"
-                />
-                {providerView ? (
+            <div className="flex flex-col flex-wrap gap-1.5 sm:min-w-[120px]">
+              <ResourceAccessButton resource={resource} offering={offering} />
+              {!isRPOnly &&
+                (providerView ? (
                   <ProviderResourceActions
                     resource={resource}
                     excludeActions={DETAILS_PAGE_EXCLUDED_ACTIONS}
@@ -121,9 +136,8 @@ export const ResourceDetailsHero = ({
                     disabled={offering.state === 'Unavailable'}
                     size="sm"
                   />
-                )}
-              </div>
-            )
+                ))}
+            </div>
           }
           quickBody={
             isRPOnly ? null : resource.offering_type === INSTANCE_TYPE ? (
