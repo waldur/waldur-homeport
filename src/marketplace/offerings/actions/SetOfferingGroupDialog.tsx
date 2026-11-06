@@ -6,12 +6,13 @@ import {
   ProviderOffering,
 } from 'waldur-js-client';
 
-import { SubmitButton, AsyncSelectGroup } from '@/form';
+import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { offeringGroupAutocomplete } from '@/marketplace/common/autocompletes';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+
+import { OfferingGroupField } from './OfferingGroupField';
 
 interface SetOfferingGroupDialogProps {
   resolve: {
@@ -38,14 +39,6 @@ export const SetOfferingGroupDialog = ({
         : null,
     }),
     [resolve.initialGroup],
-  );
-
-  const loadOfferingGroups = useMemo(
-    () =>
-      offeringGroupAutocomplete({
-        customer_uuid: resolve.offering.customer_uuid,
-      }),
-    [resolve.offering.customer_uuid],
   );
 
   const mutation = useManagedMutation<any, any, FormValues>({
@@ -89,18 +82,10 @@ export const SetOfferingGroupDialog = ({
               <SubmitButton submitting={submitting} label={translate('Save')} />
             }
           >
-            <div>
-              <AsyncSelectGroup
-                name="offering_group"
-                label={translate('Offering group')}
-                placeholder={translate('Select a group or leave empty…')}
-                loadOptions={loadOfferingGroups}
-                getOptionValue={(option) => option.uuid}
-                getOptionLabel={(option) => option.title}
-                isClearable
-                disabled={submitting}
-              />
-            </div>
+            <OfferingGroupField
+              customerUuid={resolve.offering.customer_uuid}
+              disabled={submitting}
+            />
           </ModalDialog>
         </form>
       )}

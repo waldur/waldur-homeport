@@ -17,7 +17,7 @@ import { BooleanField } from '@/table/BooleanField';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { SLUG_COLUMN } from '@/table/slug';
 import Table from '@/table/Table';
-import { Column, TableWithPortal } from '@/table/types';
+import { Column, TableProps, TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -46,6 +46,8 @@ export const BaseOfferingsList: FunctionComponent<{
   formId?: string;
   initialFilters?;
   portal?: TableWithPortal['portal'];
+  /** Rows get checkboxes and a bulk Actions menu for the selection. */
+  multiSelectActions?: TableProps<ProviderOfferingDetails>['multiSelectActions'];
 }> = ({
   table,
   filter,
@@ -57,6 +59,7 @@ export const BaseOfferingsList: FunctionComponent<{
   formId,
   initialFilters,
   portal,
+  multiSelectActions,
 }) => {
   const props = useTable({
     table,
@@ -220,6 +223,8 @@ export const BaseOfferingsList: FunctionComponent<{
           ? ({ row }) => <OfferingActions row={row} refetch={props.fetch} />
           : null
       }
+      enableMultiSelect={Boolean(multiSelectActions)}
+      multiSelectActions={multiSelectActions}
       hasQuery={true}
       formId={formId}
       filters={filters}

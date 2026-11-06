@@ -1920,12 +1920,18 @@
   },
   "Activate": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "vendorOfferings"
     }
   },
   "Activate call": {
     "context": {
       "feature_area": "update"
+    }
+  },
+  "Activate offerings": {
+    "context": {
+      "feature_area": "bulk"
     }
   },
   "Activate request types": {
@@ -3762,6 +3768,16 @@
       "feature_area": "hpc"
     }
   },
+  "All of the selected offerings are archived.": {
+    "context": {
+      "feature_area": "bulk"
+    }
+  },
+  "All of the selected offerings are drafts.": {
+    "context": {
+      "feature_area": "bulk"
+    }
+  },
   "All offerings": {
     "context": {
       "primary_ui_type": "title",
@@ -3776,6 +3792,11 @@
         }
       },
       "feature_area": "roles"
+    }
+  },
+  "All operations on the resources of these offerings will be blocked until the offerings are restored.": {
+    "context": {
+      "feature_area": "bulk"
     }
   },
   "All organizations": {
@@ -4503,6 +4524,16 @@
       "feature_area": "sram"
     }
   },
+  "An offering group holds offerings of one organization. Select offerings of a single organization.": {
+    "context": {
+      "feature_area": "bulk"
+    }
+  },
+  "An offering that still has resources is not deleted; any offering refused is reported with the reason.": {
+    "context": {
+      "feature_area": "bulk"
+    }
+  },
   "An operation is already in progress.": {
     "context": {
       "feature_area": "api-keys"
@@ -5166,6 +5197,7 @@
   },
   "Archive": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "ai-assistant"
     }
   },
@@ -5173,6 +5205,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
+    }
+  },
+  "Archive offerings": {
+    "context": {
+      "feature_area": "bulk"
     }
   },
   "Archive plan": {
@@ -5196,6 +5233,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "ai-assistant"
+    }
+  },
+  "Archived offerings cannot be updated.": {
+    "context": {
+      "feature_area": "bulk"
     }
   },
   "Are you sure you want to DELETE queues matching pattern?": {
@@ -12438,6 +12480,16 @@
       "feature_area": "list"
     }
   },
+  "Configure export parameters for the selected offerings ({count}). Each one is saved as its own YAML file in a single ZIP archive.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "list"
+    }
+  },
   "Configure flavor filtering, console access, network, and operational settings. All fields are optional.": {
     "context": {
       "feature_area": "steps"
@@ -16881,6 +16933,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "service-providers"
+    }
+  },
+  "Delete offerings": {
+    "context": {
+      "feature_area": "bulk"
     }
   },
   "Delete organization credit": {
@@ -21879,7 +21936,7 @@
   "Export": {
     "context": {
       "primary_ui_type": "submit_button",
-      "feature_area": "list",
+      "feature_area": "bulk",
       "action_type": "create"
     }
   },
@@ -21914,6 +21971,11 @@
     }
   },
   "Export offering": {
+    "context": {
+      "feature_area": "list"
+    }
+  },
+  "Export offerings": {
     "context": {
       "feature_area": "list"
     }
@@ -29565,6 +29627,11 @@
       "feature_area": "billing"
     }
   },
+  "Leave empty to take the offerings out of their group.": {
+    "context": {
+      "feature_area": "bulk"
+    }
+  },
   "Leave empty to use default multiplier.": {
     "context": {
       "feature_area": "common"
@@ -33748,7 +33815,7 @@
   "Move": {
     "context": {
       "primary_ui_type": "submit_button",
-      "feature_area": "actions",
+      "feature_area": "bulk",
       "action_type": "create"
     }
   },
@@ -33776,6 +33843,11 @@
   "Move offering": {
     "context": {
       "feature_area": "list"
+    }
+  },
+  "Move offerings": {
+    "context": {
+      "feature_area": "bulk"
     }
   },
   "Move project": {
@@ -36975,6 +37047,26 @@
       "feature_area": "accounts"
     }
   },
+  "None of the selected offerings is a draft.": {
+    "context": {
+      "feature_area": "bulk"
+    }
+  },
+  "None of the selected offerings is active.": {
+    "context": {
+      "feature_area": "bulk"
+    }
+  },
+  "None of the selected offerings is down.": {
+    "context": {
+      "feature_area": "bulk"
+    }
+  },
+  "None of the selected offerings is paused.": {
+    "context": {
+      "feature_area": "bulk"
+    }
+  },
   "None of the selected users are active.": {
     "context": {
       "feature_area": "support"
@@ -38391,6 +38483,18 @@
       "feature_area": "settings"
     }
   },
+  "Offerings ({count}): {names}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "names": {
+          "type": "string"
+        }
+      }
+    }
+  },
   "Offerings and resource templates": {},
   "Offerings count": {
     "context": {
@@ -38827,7 +38931,7 @@
   },
   "Only draft offerings can be deleted": {
     "context": {
-      "feature_area": "list"
+      "feature_area": "bulk"
     }
   },
   "Only for deployments using: {conditions}.": {
@@ -41246,6 +41350,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
+    }
+  },
+  "Pause offerings": {
+    "context": {
+      "feature_area": "bulk"
     }
   },
   "Pause resource": {
@@ -50609,6 +50718,7 @@
   "Restarting": {},
   "Restore": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "actions"
     }
   },
@@ -50627,6 +50737,11 @@
   "Restore column": {
     "context": {
       "feature_area": "table"
+    }
+  },
+  "Restore offerings": {
+    "context": {
+      "feature_area": "bulk"
     }
   },
   "Restore previous members (recreate their roles)": {
@@ -50796,7 +50911,13 @@
   },
   "Resume": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "actions"
+    }
+  },
+  "Resume offerings": {
+    "context": {
+      "feature_area": "bulk"
     }
   },
   "Resume sync": {
@@ -52757,6 +52878,11 @@
         }
       },
       "feature_area": "table"
+    }
+  },
+  "Saved on every paused offering and shown in the marketplace.": {
+    "context": {
+      "feature_area": "bulk"
     }
   },
   "Saving draft...": {
@@ -55389,6 +55515,7 @@
   },
   "Set as down": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "actions"
     }
   },
@@ -55558,6 +55685,16 @@
       "feature_area": "actions"
     }
   },
+  "Set offerings as down": {
+    "context": {
+      "feature_area": "bulk"
+    }
+  },
+  "Set offerings to draft": {
+    "context": {
+      "feature_area": "bulk"
+    }
+  },
   "Set organization groups for {customerName}": {
     "context": {
       "variables": {
@@ -55668,6 +55805,7 @@
   "Set to 'deployment' by the init_matrix_settings management command to record that the appservice tokens come from the deployment's own secret and are re-seeded on every sync. While it is set, the Setup wizard refuses to rotate them, because the rotation would be reverted at the next deploy while the homeserver kept the old registration. Blank means the deployment was configured by hand and the wizard owns the tokens. Clear it when the deployment stops seeding Matrix, so the wizard can rotate them again.": {},
   "Set to draft": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "actions"
     }
   },
@@ -59852,6 +59990,12 @@
         }
       },
       "feature_area": "broadcasts"
+    }
+  },
+  "The bulk action could not be completed.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "bulk"
     }
   },
   "The business register confirms the representative rights of the person you identified. As your login does not confirm that this is you, staff review the application before the organization is created. Continue to submit it for review.": {
@@ -65239,6 +65383,16 @@
       "feature_area": "support"
     }
   },
+  "Unable to activate {count} offering(s).": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
   "Unable to activate {n} users.": {
     "context": {
       "variables": {
@@ -65484,6 +65638,16 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "plans"
+    }
+  },
+  "Unable to archive {count} offering(s).": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
     }
   },
   "Unable to assign checklist.": {
@@ -66723,6 +66887,16 @@
       "feature_area": "cluster"
     }
   },
+  "Unable to delete {count} offering(s).": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
   "Unable to delete {n} customer mapping(s).": {
     "context": {
       "variables": {
@@ -66891,6 +67065,16 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "usage"
+    }
+  },
+  "Unable to export {count} offering(s).": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
     }
   },
   "Unable to extend disk.": {
@@ -67640,6 +67824,16 @@
       "feature_area": "mass-actions"
     }
   },
+  "Unable to move {count} offering(s).": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
   "Unable to open console log": {
     "context": {
       "primary_ui_type": "notification_message",
@@ -67667,6 +67861,16 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "actions"
+    }
+  },
+  "Unable to pause {count} offering(s).": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
     }
   },
   "Unable to perform operation.": {
@@ -68310,6 +68514,26 @@
       "feature_area": "openstack-snapshot"
     }
   },
+  "Unable to restore {count} offering(s).": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "Unable to resume {count} offering(s).": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
   "Unable to retrieve service provider API secret code.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -68534,6 +68758,12 @@
       "feature_area": "proposal"
     }
   },
+  "Unable to save the export archive.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "bulk"
+    }
+  },
   "Unable to save the mappings.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -68691,6 +68921,26 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "resources"
+    }
+  },
+  "Unable to set {count} offering(s) as down.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "Unable to set {count} offering(s) to draft.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
     }
   },
   "Unable to set {n} resources to erred.": {
@@ -69853,6 +70103,16 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "openstack-tenant"
+    }
+  },
+  "Unable to update the group of {count} offering(s).": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
     }
   },
   "Unable to update the offering group.": {
@@ -74018,6 +74278,11 @@
   "Wait for the batch script to update.": {
     "context": {
       "feature_area": "hpc"
+    }
+  },
+  "Wait until the current bulk action finishes.": {
+    "context": {
+      "feature_area": "bulk"
     }
   },
   "Waiting": {
@@ -79651,6 +79916,144 @@
       "feature_area": "landing"
     }
   },
+  "{count} offering(s) have been activated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} offering(s) have been added to {group}.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "group": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} offering(s) have been archived.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} offering(s) have been deleted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} offering(s) have been exported.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} offering(s) have been moved to {organizationName} organization.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "organizationName": {
+          "type": "string"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} offering(s) have been paused.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} offering(s) have been removed from their group.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} offering(s) have been restored.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} offering(s) have been resumed.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} offering(s) have been set as down.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} offering(s) have been set to draft.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
   "{count} offering(s) selected": {
     "context": {
       "variables": {
@@ -80232,6 +80635,106 @@
         }
       },
       "feature_area": "reviewer-discovery"
+    }
+  },
+  "{count} selected offering(s) are skipped: archived offerings cannot be updated.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} selected offering(s) are skipped: only active offerings can be paused.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} selected offering(s) are skipped: only active offerings can be set as down.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} selected offering(s) are skipped: only draft offerings can be deleted.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} selected offering(s) are skipped: only drafts can be activated.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} selected offering(s) are skipped: only offerings that are down can be restored.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} selected offering(s) are skipped: only paused offerings can be resumed.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} selected offering(s) are skipped: they are archived already.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} selected offering(s) are skipped: they are drafts already.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
+    }
+  },
+  "{count} selected offering(s) are skipped: you may not change them.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
     }
   },
   "{count} slides configured": {
@@ -81062,6 +81565,18 @@
         }
       },
       "feature_area": "posix-id-pools"
+    }
+  },
+  "{names} and {count} more": {
+    "context": {
+      "variables": {
+        "names": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
     }
   },
   "{names} are not common to all selected VPCs, so they are left unchanged in this order.": {
@@ -83528,6 +84043,16 @@
         }
       },
       "feature_area": "charts"
+    }
+  },
+  "…and {count} more.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "bulk"
     }
   },
   "…{count} others": {

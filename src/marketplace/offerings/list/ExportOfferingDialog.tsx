@@ -36,7 +36,11 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
-            title={translate('Export offering')}
+            title={
+              resolve.count
+                ? translate('Export offerings')
+                : translate('Export offering')
+            }
             footer={
               <FormFooter
                 submitLabel={translate('Export')}
@@ -45,11 +49,19 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
             }
           >
             <p>
-              {translate(
-                'Configure export parameters for offering "{offering_name}".',
-                { offering_name: resolve.offering.name },
-              )}
+              {resolve.count
+                ? translate(
+                    'Configure export parameters for the selected offerings ({count}). Each one is saved as its own YAML file in a single ZIP archive.',
+                    { count: resolve.count },
+                  )
+                : translate(
+                    'Configure export parameters for offering "{offering_name}".',
+                    { offering_name: resolve.offering.name },
+                  )}
             </p>
+            {resolve.skippedNote && (
+              <p className="text-tertiary">{resolve.skippedNote}</p>
+            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
               <div>
