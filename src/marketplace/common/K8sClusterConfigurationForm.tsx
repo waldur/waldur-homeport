@@ -198,9 +198,12 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
       </FormGroup>
 
       {/* Controller & Load Balancer Nodes Information */}
-      <PropertyList variant="summary" termWidth="md">
+      {/* A third of the width for the term, no gap: Field's labelCol={4}.
+          A fixed 200px term plus the 24px row gap wrapped the descriptions. */}
+      <PropertyList variant="summary" termWidth="33.333%">
         {controllerNodes > 0 && (
           <PropertyItem
+            className="sm:gap-0"
             space={4}
             label={
               <>
@@ -241,6 +244,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
 
         {loadBalancerNodes > 0 && (
           <PropertyItem
+            className="sm:gap-0"
             space={datacenter?.openstack_infrastructure ? 4 : 0}
             label={
               <>

@@ -15827,11 +15827,6 @@
       "feature_area": "administration"
     }
   },
-  "Data + logs": {
-    "context": {
-      "feature_area": "common"
-    }
-  },
   "Data Disk per Controller (GB)": {
     "context": {
       "feature_area": "options"
@@ -15922,6 +15917,11 @@
       "feature_area": "openstack-instance"
     }
   },
+  "Data, etcd and logs": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Database": {
     "context": {
       "feature_area": "administration"
@@ -15942,13 +15942,18 @@
       "feature_area": "common"
     }
   },
-  "Datacenters": {
+  "Datacenters were reset for the new topology. Select the infrastructure and node groups again.": {
     "context": {
       "feature_area": "common"
     }
   },
-  "Datacenters were reset for the new topology. Select the infrastructure and node groups again.": {
+  "Datacenters: {count}": {
     "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
       "feature_area": "common"
     }
   },
@@ -18048,7 +18053,7 @@
   "Disks": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "vmware"
+      "feature_area": "common"
     }
   },
   "Dismiss": {
@@ -32736,7 +32741,7 @@
   "Memory": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "dashboard"
+      "feature_area": "common"
     }
   },
   "Memory (MB)": {
@@ -36943,10 +36948,15 @@
       "feature_area": "create"
     }
   },
+  "Node roles": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Nodes": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "hpc"
+      "feature_area": "common"
     }
   },
   "Non-detachable and non-resizable boot disk": {
@@ -52302,7 +52312,7 @@
       "feature_area": "matrix"
     }
   },
-  "SAN storage": {
+  "SAN": {
     "context": {
       "feature_area": "common"
     }
@@ -57704,6 +57714,11 @@
       "feature_area": "update"
     }
   },
+  "Storage nodes": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Storage size in GiB": {
     "context": {
       "feature_area": "deploy"
@@ -58657,11 +58672,6 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
-    }
-  },
-  "System + etcd": {
-    "context": {
-      "feature_area": "common"
     }
   },
   "System CPU time": {
@@ -64276,7 +64286,7 @@
   "Total RAM": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "common"
+      "feature_area": "openstack-instances"
     }
   },
   "Total active resources": {
@@ -64460,11 +64470,6 @@
       "feature_area": "rabbitmq"
     }
   },
-  "Total nodes": {
-    "context": {
-      "feature_area": "common"
-    }
-  },
   "Total number of nodes": {
     "context": {
       "feature_area": "create"
@@ -64620,7 +64625,7 @@
   "Total vCPUs": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "common"
+      "feature_area": "openstack-instances"
     }
   },
   "Total volume size": {
@@ -76776,6 +76781,11 @@
   "copy": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "cores": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "cost limit": {

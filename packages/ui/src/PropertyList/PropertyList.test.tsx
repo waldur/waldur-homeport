@@ -252,6 +252,36 @@ describe('PropertyList', () => {
     expect(regionRow.style.getPropertyValue('--dt-width')).toBe('15rem');
   });
 
+  it('stacks term above value in a stacked summary list, with no term track', () => {
+    render(
+      <PropertyList variant="summary" stacked termWidth="md">
+        <PropertyList.Item
+          data-testid="cpu-row"
+          label="vCPUs"
+          value="28"
+          termWidth="lg"
+        />
+        <PropertyList.Item label="RAM" value={['64 GB', '40 GB']} />
+      </PropertyList>,
+    );
+
+    // A term track would leave a narrow cell's value no width at all.
+    const row = screen.getByTestId('cpu-row');
+    expect(row).toHaveClass('flex', 'flex-col', 'mb-1');
+    expect(row).not.toHaveClass('sm:grid');
+    expect(row.className).not.toContain('grid-cols');
+    // termWidth means nothing without a term track, so no --dt-width either.
+    expect(row.style.getPropertyValue('--dt-width')).toBe('');
+    for (const cell of [
+      ...screen.getAllByRole('term'),
+      ...screen.getAllByRole('definition'),
+    ]) {
+      expect(cell).toHaveClass('w-full');
+      expect(cell).not.toHaveClass('sm:w-auto');
+      expect(cell).not.toHaveClass('sm:col-start-2');
+    }
+  });
+
   it('merges a list labelClass into each row, behind a row override', () => {
     render(
       <PropertyList variant="summary" labelClass="min-w-[150px] font-semibold">

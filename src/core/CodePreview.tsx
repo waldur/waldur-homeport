@@ -28,7 +28,8 @@ export const CodePreview = ({ template = '', context }) => {
 
   return (
     <Markdown
-      className="md-content"
+      // rich-text: inline `code` gets the shared look (src/tailwind.css).
+      className="md-content rich-text"
       options={{
         overrides: {
           br: {

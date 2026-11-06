@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import { K8sTotalResourcesCard } from './K8sTotalResourcesCard';
@@ -17,21 +17,43 @@ const totals = {
 };
 
 describe('K8sTotalResourcesCard', () => {
-  it('shows the totals as one list of chips', () => {
-    const { container } = render(
+  it('leads with the sizing figures and puts the datacenters in the header', () => {
+    render(
       <K8sTotalResourcesCard totalResources={totals} datacenterCount={2} />,
     );
 
-    // The chips are rows of one description list, not eleven lists of one.
-    // No Testing Library query counts description lists.
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    expect(container.querySelectorAll('dl')).toHaveLength(1);
-    expect(screen.getAllByRole('term')).toHaveLength(11);
-    expect(
-      screen.getByRole('definition', { name: 'Total vCPUs:' }),
-    ).toHaveTextContent('96 cores');
-    expect(
-      screen.getByRole('definition', { name: 'Datacenters:' }),
-    ).toHaveTextContent('2');
+    expect(screen.getByText('Datacenters: 2')).toBeInTheDocument();
+    // Label, then figure, tile by tile.
+    expect(document.body).toHaveTextContent(
+      /Nodes\s*12\s*vCPUs\s*96 cores\s*Memory\s*384 GB/,
+    );
+  });
+
+  it('breaks the nodes down by role and totals the disks', () => {
+    render(
+      <K8sTotalResourcesCard totalResources={totals} datacenterCount={2} />,
+    );
+
+    const roles = within(screen.getByRole('region', { name: 'Node roles' }));
+    expect(roles.getAllByRole('term').map((t) => t.textContent)).toEqual([
+      'Controllers',
+      'Load balancers',
+      'Workers',
+      'Storage nodes',
+    ]);
+    expect(roles.getAllByRole('definition').map((d) => d.textContent)).toEqual([
+      '3',
+      '1',
+      '6',
+      '2',
+    ]);
+
+    const disks = within(screen.getByRole('region', { name: 'Disks' }));
+    expect(disks.getAllByRole('definition').map((d) => d.textContent)).toEqual([
+      '500 GB',
+      '2,000 GB',
+      '1,000 GB',
+      '3,500 GB',
+    ]);
   });
 });
