@@ -1,4 +1,5 @@
 import { FC, ReactNode } from 'react';
+import { SettingSource } from 'waldur-js-client';
 
 import { Badge, PropertyItem, Tooltip } from 'waldur-ui';
 
@@ -14,6 +15,11 @@ import { CountryListField } from './CountryListField';
 import { MultilingualImageEditButton } from './MultilingualImageEditButton';
 import { SettingItemDescription } from './types';
 import { useHighlightSettingRow } from './useHighlightSettingRow';
+import {
+  getLockedReason,
+  getReappliedNote,
+  useSettingSources,
+} from './useSettingSources';
 import { formatDefaultValue, getKeyTitle, isSettingModified } from './utils';
 
 const ColorField = ({ value }: { value?: string }) => (
@@ -195,6 +201,36 @@ const renderSettingValue = (
   }
 };
 
+const SourceBadge = ({ source }: { source: SettingSource }) =>
+  source.locked ? (
+    <Badge variant="info" tone="outline">
+      {translate('Managed by deployment · {file}', {
+        file: source.managed_by,
+      })}
+    </Badge>
+  ) : source.managed_by ? (
+    <Badge variant="warning" tone="outline">
+      {translate('Re-applied on deploy · {file}', {
+        file: source.managed_by,
+      })}
+    </Badge>
+  ) : source.source === 'deployment' ? (
+    <Badge variant="neutral" tone="outline">
+      {translate('Set by deployment')}
+    </Badge>
+  ) : null;
+
+const withSource = (source: SettingSource | undefined, node: ReactNode) =>
+  source &&
+  (source.locked || source.managed_by || source.source === 'deployment') ? (
+    <div className="flex flex-col items-start gap-1">
+      {node}
+      <SourceBadge source={source} />
+    </div>
+  ) : (
+    node
+  );
+
 /**
  * Resolves the appropriate action control for a setting row.
  */
@@ -203,22 +239,39 @@ const getSettingAction = ({
   value,
   canEdit,
   onEdit,
+  source,
   editDisabledReason,
 }: {
   item: SettingItemDescription;
   value: unknown;
   canEdit: boolean;
   onEdit?: () => void;
+  source?: SettingSource;
   editDisabledReason?: string;
 }): ReactNode => {
   if (!canEdit) return undefined;
 
   const title = getKeyTitle(item.key);
   const editLabel = translate('Edit {name}', { name: title });
+  const disabledReason = editDisabledReason ?? getLockedReason(source);
+
+  if (disabledReason) {
+    return (
+      <CompactEditButton
+        tooltip={editLabel}
+        disabled
+        disabledReason={disabledReason}
+      />
+    );
+  }
 
   switch (item.type) {
     case 'country_list_field':
-      return <CountryListEditButton onEdit={onEdit} tooltip={editLabel} />;
+      // Edited by the page, which passes onEdit; without it the button would
+      // do nothing.
+      return onEdit ? (
+        <CountryListEditButton onEdit={onEdit} tooltip={editLabel} />
+      ) : undefined;
 
     case 'multilingual_image_field':
       return (
@@ -230,7 +283,9 @@ const getSettingAction = ({
       );
 
     case 'json_list_field':
-      return <CompactEditButton onClick={onEdit} tooltip={editLabel} />;
+      return onEdit ? (
+        <CompactEditButton onClick={onEdit} tooltip={editLabel} />
+      ) : undefined;
 
     default:
       return (
@@ -238,7 +293,7 @@ const getSettingAction = ({
           item={item}
           value={value}
           tooltip={editLabel}
-          disabledReason={editDisabledReason}
+          warning={getReappliedNote(source)}
         />
       );
   }
@@ -251,6 +306,8 @@ export interface FieldRowProps {
   isLoading?: boolean;
   /** Set when the value cannot be edited here; shown as the edit button's tooltip. */
   editDisabledReason?: string;
+  /** Off where the page already groups settings by who set them. */
+  showSource?: boolean;
 }
 
 /**
@@ -263,8 +320,11 @@ export const SettingItemRow: FC<FieldRowProps> = ({
   onEdit,
   isLoading,
   editDisabledReason,
+  showSource = true,
 }) => {
   const canEdit = Boolean(useUser()?.is_staff);
+  const { data: sources } = useSettingSources();
+  const source = sources?.[item.key];
   const isHighlighted = useHighlightSettingRow(item.key, 'setting-');
   const isModified =
     !isLoading && isSettingModified(item, value, { secretsRedacted: !canEdit });
@@ -275,6 +335,7 @@ export const SettingItemRow: FC<FieldRowProps> = ({
     value,
     canEdit,
     onEdit,
+    source,
     editDisabledReason,
   });
 
@@ -303,7 +364,10 @@ export const SettingItemRow: FC<FieldRowProps> = ({
       }
       description={item.description}
       descriptionClass="text-tertiary"
-      value={renderSettingValue(item, value, isLoading)}
+      value={withSource(
+        showSource ? source : undefined,
+        renderSettingValue(item, value, isLoading),
+      )}
       actions={actions}
     />
   );

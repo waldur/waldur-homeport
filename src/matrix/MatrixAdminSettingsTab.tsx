@@ -13,6 +13,7 @@ import { SettingsDescription } from '@/SettingsDescription';
 
 import {
   getDeploymentLockedKeys,
+  getDeploymentLockedReason,
   useMatrixAppserviceStatus,
 } from './useMatrixAppserviceStatus';
 
@@ -82,9 +83,7 @@ export const MatrixAdminSettingsTab = () => {
         values={settings}
         getEditDisabledReason={(item) =>
           lockedKeys.includes(item.key)
-            ? translate(
-                'Set by the deployment on every deploy. Change it there and redeploy.',
-              )
+            ? getDeploymentLockedReason()
             : undefined
         }
       />

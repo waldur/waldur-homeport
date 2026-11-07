@@ -1,9 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { overrideSettings } from 'waldur-js-client';
+import {
+  overrideSettings,
+  overrideSettingsSourcesList,
+} from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
+import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { AdministrationLanguages } from './AdministrationLanguages';
@@ -18,10 +22,13 @@ describe('AdministrationLanguages', () => {
       { code: 'et', label: 'Estonian' },
     ];
     vi.clearAllMocks();
+    vi.mocked(overrideSettingsSourcesList).mockResolvedValue({
+      data: [],
+    } as any);
   });
 
   it('renders all language options', () => {
-    render(<AdministrationLanguages />);
+    renderWithProviders(<AdministrationLanguages />);
     ENV.languageChoices.forEach((lang) => {
       expect(screen.getByText(lang.label)).toBeInTheDocument();
     });
@@ -33,7 +40,7 @@ describe('AdministrationLanguages', () => {
       { code: 'en-gb', label: 'English (UK)' },
       { code: 'xx', label: 'Unmapped' },
     ];
-    render(<AdministrationLanguages />);
+    renderWithProviders(<AdministrationLanguages />);
 
     // In render order: English, English (UK); the unmapped language has none.
     // A language code is not a country code, so no bogus flag-xx sprite.
@@ -44,7 +51,7 @@ describe('AdministrationLanguages', () => {
   });
 
   it('prevents unselecting current language', async () => {
-    render(<AdministrationLanguages />);
+    renderWithProviders(<AdministrationLanguages />);
     const currentLangCheckbox = screen.getByTestId('language_en');
 
     await userEvent.click(currentLangCheckbox);
@@ -57,7 +64,7 @@ describe('AdministrationLanguages', () => {
       is_staff: false,
       is_support: true,
     } as any);
-    render(<AdministrationLanguages />);
+    renderWithProviders(<AdministrationLanguages />);
 
     expect(
       screen.queryByRole('button', { name: /Save/i }),
@@ -69,7 +76,7 @@ describe('AdministrationLanguages', () => {
 
   it('successfully saves language choices', async () => {
     const saveConfigMock = vi.mocked(overrideSettings).mockResolvedValue(null);
-    render(<AdministrationLanguages />);
+    renderWithProviders(<AdministrationLanguages />);
 
     await userEvent.click(screen.getByText('Save'));
 
@@ -78,5 +85,25 @@ describe('AdministrationLanguages', () => {
         LANGUAGE_CHOICES: 'en,et',
       },
     });
+  });
+
+  it('shows the choices read-only while the deployment manages them', async () => {
+    vi.mocked(overrideSettingsSourcesList).mockResolvedValue({
+      data: [
+        {
+          key: 'LANGUAGE_CHOICES',
+          source: 'deployment',
+          source_detail: 'languages.yaml',
+          locked: true,
+          managed_by: 'languages.yaml',
+        },
+      ],
+    } as any);
+    renderWithProviders(<AdministrationLanguages />);
+
+    expect(
+      await screen.findByText(/Managed by the deployment \(languages\.yaml\)/),
+    ).toBeInTheDocument();
+    expect(screen.queryByTestId('language_en')).toBeNull();
   });
 });

@@ -1,3 +1,4 @@
+import { omit } from 'es-toolkit';
 import { Form } from 'react-final-form';
 import { identityProvidersUpdate, overrideSettings } from 'waldur-js-client';
 
@@ -7,6 +8,11 @@ import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+
+import {
+  SETTINGS_CHANGED_QUERIES,
+  useLockedReasons,
+} from '../settings/useSettingSources';
 
 import { ProviderForm } from './ProviderForm';
 import { ProviderFreeIPAForm } from './ProviderFreeIPAForm';
@@ -22,11 +28,12 @@ interface UpdateProviderDialogProps {
 export const UpdateProviderDialog = ({
   resolve,
 }: UpdateProviderDialogProps) => {
+  const lockedKeys = Object.keys(useLockedReasons());
   const onSubmitMutation = useManagedMutation<any, any, any>({
     mutationFn: async (formData) => {
       if (resolve.type === FREEIPA_IDP) {
-        const newSettings = { ...formData };
-        delete newSettings.is_active;
+        // The deployment's settings are shown read-only and not sent.
+        const newSettings = omit(formData, ['is_active', ...lockedKeys]);
         await overrideSettings({ body: newSettings });
         Object.keys(newSettings).forEach((key) => {
           ENV.plugins.WALDUR_CORE[key] = newSettings[key];
@@ -43,6 +50,8 @@ export const UpdateProviderDialog = ({
     ),
     errorMessage: translate('Unable to update identity provider.'),
     refetch: resolve.refetch,
+    invalidateQueries:
+      resolve.type === FREEIPA_IDP ? SETTINGS_CHANGED_QUERIES : undefined,
   });
 
   return (

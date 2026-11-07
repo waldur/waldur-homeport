@@ -1,3 +1,4 @@
+import { omit } from 'es-toolkit';
 import { capitalize, pick } from 'es-toolkit/compat';
 import { useMemo } from 'react';
 import { Form } from 'react-final-form';
@@ -9,6 +10,11 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+
+import {
+  SETTINGS_CHANGED_QUERIES,
+  useLockedReasons,
+} from '../settings/useSettingSources';
 
 import {
   AUTH_METHOD_FIELD,
@@ -31,6 +37,7 @@ export const AdministrationServiceDeskUpdateDialog = ({
   resolve,
 }: AdministrationServiceDeskUpdateDialogProps) => {
   const isAtlassian = resolve.name === 'atlassian';
+  const lockedKeys = Object.keys(useLockedReasons());
 
   const initialValues = useMemo(
     () =>
@@ -54,7 +61,12 @@ export const AdministrationServiceDeskUpdateDialog = ({
           resolve.initialValues,
         );
       }
-      return overrideSettings({ body, ...formDataOptions });
+      // The deployment's settings are shown read-only and not sent, so they
+      // cannot reject the rest of the form.
+      return overrideSettings({
+        body: omit(body, lockedKeys),
+        ...formDataOptions,
+      });
     },
 
     successMessage: translate('Configurations have been updated'),
@@ -64,6 +76,7 @@ export const AdministrationServiceDeskUpdateDialog = ({
       {
         queryKey: ['AdministrationServiceDesk'],
       },
+      ...SETTINGS_CHANGED_QUERIES,
     ],
   });
 

@@ -14,6 +14,8 @@ import { useNotify } from '@/store/notify';
 import { TableQuery } from '@/table/TableQuery';
 import { useUser } from '@/workspace/hooks';
 
+import { useLockedReasons } from '../settings/useSettingSources';
+
 export const AdministrationLanguages: FunctionComponent = () => {
   const [query, setQuery] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -22,7 +24,8 @@ export const AdministrationLanguages: FunctionComponent = () => {
     useState<string[]>(initialLanguages);
   const { showError, showErrorResponse, showSuccess } = useNotify();
   const { currentLanguage } = useLanguageSelector();
-  const canEdit = Boolean(useUser()?.is_staff);
+  const lockedReason = useLockedReasons().LANGUAGE_CHOICES;
+  const canEdit = Boolean(useUser()?.is_staff) && !lockedReason;
 
   const hasChanges = useMemo(() => {
     const currentSorted = [...selectedLanguages].sort();
@@ -108,6 +111,9 @@ export const AdministrationLanguages: FunctionComponent = () => {
       actions={
         <div className="flex items-center">
           <TableQuery query={query} setQuery={setQuery} inputClassName="h-11" />
+          {lockedReason && (
+            <span className="ms-3 text-sm text-tertiary">{lockedReason}</span>
+          )}
           {canEdit && (
             <SaveButton
               className="ms-3"

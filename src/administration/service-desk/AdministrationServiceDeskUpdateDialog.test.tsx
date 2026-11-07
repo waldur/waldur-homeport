@@ -1,9 +1,13 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { overrideSettings } from 'waldur-js-client';
+import {
+  overrideSettings,
+  overrideSettingsSourcesList,
+} from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
+import { useUser } from '@/workspace/hooks';
 
 import { AdministrationServiceDeskUpdateDialog } from './AdministrationServiceDeskUpdateDialog';
 
@@ -156,5 +160,47 @@ describe('AdministrationServiceDeskUpdateDialog', () => {
     // Check that OTHER_FIELD is NOT submitted
     const callArgs = vi.mocked(overrideSettings).mock.calls[0][0];
     expect(callArgs.body).not.toHaveProperty('OTHER_FIELD');
+  });
+
+  it('shows a setting the deployment manages read-only and does not send it', async () => {
+    const user = userEvent.setup();
+    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+    vi.mocked(overrideSettingsSourcesList).mockResolvedValue({
+      data: [
+        {
+          key: 'ATLASSIAN_URL',
+          source: 'deployment',
+          source_detail: 'support.yaml',
+          locked: true,
+          managed_by: 'support.yaml',
+        },
+      ],
+    } as any);
+    vi.mocked(overrideSettings).mockResolvedValue({} as any);
+
+    renderDialog({
+      resolve: {
+        name: 'atlassian',
+        initialValues: {
+          ATLASSIAN_URL: 'https://example.com',
+          ATLASSIAN_DESCRIPTION: 'old text',
+        },
+      },
+    });
+
+    expect(
+      await screen.findByText(/Managed by the deployment \(support\.yaml\)/),
+    ).toBeInTheDocument();
+    expect(screen.getByLabelText(/Atlassian URL/i)).toBeDisabled();
+
+    const textInput = screen.getByLabelText(/Atlassian description/i);
+    await user.clear(textInput);
+    await user.type(textInput, 'new text');
+    await user.click(screen.getByRole('button', { name: /Update/i }));
+
+    await waitFor(() => expect(overrideSettings).toHaveBeenCalled());
+    const { body } = vi.mocked(overrideSettings).mock.calls[0][0];
+    expect(body).toMatchObject({ ATLASSIAN_DESCRIPTION: 'new text' });
+    expect(body).not.toHaveProperty('ATLASSIAN_URL');
   });
 });

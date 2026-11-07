@@ -123,6 +123,12 @@ describe('isSettingModified', () => {
     ).toBe(true);
   });
 
+  it('ignores the key order of a dict', () => {
+    const item = { default: { a: 1, b: { c: 2, d: 3 } }, type: 'dict_field' };
+    expect(isSettingModified(item, { b: { d: 3, c: 2 }, a: 1 })).toBe(false);
+    expect(isSettingModified(item, { b: { d: 3, c: 4 }, a: 1 })).toBe(true);
+  });
+
   it('compares a list edited as comma-separated text with its default', () => {
     expect(isSettingModified({ default: [], type: 'list_field' }, '')).toBe(
       false,

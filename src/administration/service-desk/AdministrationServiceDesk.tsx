@@ -31,6 +31,7 @@ import { useUser } from '@/workspace/hooks';
 import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { SettingsPropertyList } from '../settings/SettingsPropertyList';
+import { useLockedReasons } from '../settings/useSettingSources';
 import { SupportUsersList } from '../support-users/SupportUsersList';
 
 import {
@@ -88,6 +89,11 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
   const canEdit = Boolean(useUser()?.is_staff);
   const { openDialog } = useModal();
   const isAtlassian = serviceDeskProvider === 'atlassian';
+  // The wizard saves the Atlassian settings together; one the deployment
+  // manages would reject them all.
+  const discoveryLockedReason = Object.entries(useLockedReasons()).find(
+    ([key]) => key.startsWith('ATLASSIAN_'),
+  )?.[1];
   const isConfigured = isProviderConfigured(serviceDeskProvider, initialValues);
   const isActive =
     Boolean(initialValues.WALDUR_SUPPORT_ENABLED) &&
@@ -159,7 +165,11 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
                     </Menu.TriggerButton>
                     <Menu.Content look="actions" side="bottom">
                       {isAtlassian && !isConfigured && (
-                        <Menu.Item onSelect={openDiscovery}>
+                        <Menu.Item
+                          onSelect={openDiscovery}
+                          disabled={Boolean(discoveryLockedReason)}
+                          tooltip={discoveryLockedReason}
+                        >
                           {translate('Discovery wizard')}
                         </Menu.Item>
                       )}
@@ -167,7 +177,11 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
                         {translate('Edit')}
                       </Menu.Item>
                       {isAtlassian && isConfigured && (
-                        <Menu.Item onSelect={openDiscovery}>
+                        <Menu.Item
+                          onSelect={openDiscovery}
+                          disabled={Boolean(discoveryLockedReason)}
+                          tooltip={discoveryLockedReason}
+                        >
                           {translate('Re-discover')}
                         </Menu.Item>
                       )}

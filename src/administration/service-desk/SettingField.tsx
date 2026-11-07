@@ -8,6 +8,7 @@ import {
 } from '@/form';
 import { translate } from '@/i18n';
 
+import { useLockedReasons } from '../settings/useSettingSources';
 import { getKeyTitle } from '../settings/utils';
 
 // Stored as secrets, but not secret to the person configuring them.
@@ -80,6 +81,7 @@ export const SettingField = ({ field }) => {
   const isDictField = type === 'dict_field';
   const isLongDescription = field.description.length >= 75;
   const override = getLabelOverrides()[field.key];
+  const lockedReason = useLockedReasons()[field.key];
 
   return (
     <FieldComponent
@@ -92,8 +94,10 @@ export const SettingField = ({ field }) => {
       }
       help={override?.help}
       description={
-        isLongDescription && !override ? field.description : undefined
+        lockedReason ??
+        (isLongDescription && !override ? field.description : undefined)
       }
+      disabled={Boolean(lockedReason)}
       format={isDictField ? formatDictField : undefined}
       parse={isDictField ? parseDictField : undefined}
       {...(isBoolean ? { className: 'mt-2.5' } : {})}

@@ -1,6 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { overrideSettingsSourcesList } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { SettingsPropertyList } from './SettingsPropertyList';
@@ -24,10 +26,13 @@ const mockItems: SettingItemDescription[] = [
 describe('SettingsPropertyList', () => {
   beforeEach(() => {
     vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+    vi.mocked(overrideSettingsSourcesList).mockResolvedValue({
+      data: [],
+    } as any);
   });
 
   it('renders all setting items with their respective values', () => {
-    render(
+    renderWithProviders(
       <SettingsPropertyList
         items={mockItems}
         values={{
@@ -44,7 +49,7 @@ describe('SettingsPropertyList', () => {
   });
 
   it('supports custom getValue and getEditDisabledReason', () => {
-    render(
+    renderWithProviders(
       <SettingsPropertyList
         items={mockItems}
         getValue={(item) => `Resolved: ${item.key}`}
