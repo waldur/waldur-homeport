@@ -62,7 +62,7 @@ Comprehensive architectural reference, design system manual, and practical usage
 
 ### Unified Button Engine
 
-Waldur HomePort's button architecture is built on top of [Tailwind CSS v4](https://tailwindcss.com), [Radix UI primitives](https://www.radix-ui.com), and the [design tokens](../packages/design-tokens) engine. All legacy Bootstrap and Metronic `.btn` CSS rules have been removed from the application bundle.
+Waldur HomePort's button architecture is built on top of [Tailwind CSS v4](https://tailwindcss.com), [Radix UI primitives](https://www.radix-ui.com), and the [design tokens](../packages/design-tokens) engine.
 
 Every button in the application is rendered either by:
 
@@ -176,7 +176,7 @@ Text variants render with a transparent background and no border in their idle s
 
 ### Design Token Architecture & Dark Theme Inversion
 
-All button colors are defined in [`packages/design-tokens/src/css/components/button.css`](../packages/design-tokens/src/css/components/button.css). Zero button styling relies on Metronic SCSS or runtime Bootstrap mixins.
+All button colors are defined in [`packages/design-tokens/src/css/components/button.css`](../packages/design-tokens/src/css/components/button.css).
 
 1. **Brand-Reactive vs. Fixed Ramps**:
    - `primary`, `secondary`, and `text-primary` derive directly from the runtime `--brand-*` palette (customizable per tenant/deployment).
@@ -575,7 +575,7 @@ import { SegmentedControl } from 'waldur-ui';
 ```
 
 - **Do NOT** use a row of separate `BaseButton` components for view switching.
-- **Do NOT** use legacy `react-bootstrap` `ToggleButtonGroup` or `.btn-group` classes.
+- **Do NOT** use `.btn-group` classes; use `SegmentedControl`.
 
 ### Keyboard & Focus Model (Radix RadioGroup)
 
@@ -707,9 +707,9 @@ Used in forms that track dirty/unsaved state.
 
 | ESLint Rule                                     | Severity | What It Enforces                                                                                                                                                        |
 | :---------------------------------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `no-restricted-imports`                         | `error`  | Blocks importing `Button` or `DropdownButton` from `react-bootstrap`. Directs developers to `BaseButton`, `SubmitButton`, `CloseDialogButton`, or `Menu.TriggerButton`. |
-| `waldur-custom/no-bootstrap-button-markup`      | `error`  | Blocks `<button className="btn ...">`, `<a className="btn ...">`, and any hand-rolled Bootstrap button markup.                                                          |
-| `waldur-custom/enforce-disabled-button-tooltip` | `error`  | Enforces that every disabled `<BaseButton>` has a `tooltip` or `disabledReason` explaining why the action is unavailable.                                               |
+| `no-restricted-imports`                         | `error`  | Blocks importing from retired packages. Directs developers to `BaseButton`, `SubmitButton`, `CloseDialogButton`, or `Menu.TriggerButton`. |
+| `waldur-custom/no-bootstrap-button-markup`      | `error`  | Blocks `<button className="btn ...">`, `<a className="btn ...">`, and any hand-rolled button markup using legacy `.btn` classes.        |
+| `waldur-custom/enforce-disabled-button-tooltip` | `error`  | Enforces that every disabled `<BaseButton>` has a `tooltip` or `disabledReason` explaining why the action is unavailable.                |
 | `waldur-custom/enforce-dialog-button-order`     | `error`  | Enforces standard dialog button order: dismissive buttons (`CloseDialogButton`) on the left, affirmative/submission buttons (`SubmitButton`) on the right.              |
 | `waldur-custom/no-edit-button-size-override`    | `error`  | Blocks overriding `size="sm"` on `EditButton`; requires using `CompactEditButton` instead.                                                                              |
 
@@ -717,7 +717,7 @@ Used in forms that track dirty/unsaved state.
 
 | From                                                                | To                                                                                                                                                                      |
 | :------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `react-bootstrap` `Button`, `<button className="btn btn-x btn-sm">` | `<BaseButton variant="…" size="sm" label={…} />`                                                                                                                        |
+| `<button className="btn btn-x btn-sm">`                             | `<BaseButton variant="…" size="sm" label={…} />`                                                                                                                        |
 | `<a className="btn …">` / `Link` with `btn` classes                 | `<Link buttonVariant="…" buttonSize="…">`                                                                                                                               |
 | `ToggleButtonGroup`, `btn-group` + `btn-check`                      | `SegmentedControl`                                                                                                                                                      |
 | `ButtonGroup` of unrelated actions                                  | `<div className="d-flex gap-2">` of `BaseButton`s                                                                                                                       |
@@ -728,7 +728,7 @@ Used in forms that track dirty/unsaved state.
 
 **Rules of thumb when converting:**
 
-1. **Do not carry `btn-*` classes across**: Legacy Bootstrap/Metronic CSS rules were compound with `.btn` (`.btn.btn-sm`, `.btn.btn-icon`), so carrying `btn-sm`, `btn-icon`, `btn-active-icon-danger` or similar on an element without the literal `.btn` class never matched anything. Pick first-class `variant` and `size` props instead.
+1. **Do not use `btn-*` classes**: Legacy classes like `btn-sm`, `btn-icon`, or `btn-active-icon-danger` are retired. Pick first-class `variant` and `size` props instead.
 2. **Verify replacement in place**: Old rules often had container-level minimum heights or widths that stopped applying when converted to `BaseButton`. If a converted button looks smaller than before, set `size` explicitly (`sm`, `md`, `lg`).
 
 ### Good vs. Bad Code Comparison
@@ -736,11 +736,7 @@ Used in forms that track dirty/unsaved state.
 #### 1. Button Imports & Wrappers
 
 ```tsx
-// ❌ BAD: Legacy react-bootstrap button
-import { Button } from 'react-bootstrap';
-<Button variant="primary">Submit</Button>
-
-// ❌ BAD: Hand-written Bootstrap classes
+// ❌ BAD: Hand-written legacy btn classes
 <button className="btn btn-primary btn-sm">Submit</button>
 
 // ✅ GOOD: Standard BaseButton

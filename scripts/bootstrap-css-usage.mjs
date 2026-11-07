@@ -29,68 +29,68 @@ import postcss from 'postcss';
 import * as sass from 'sass';
 
 const root = path.resolve(fileURLToPath(import.meta.url), '../..');
-const sassDir = path.join(root, 'src/styles/bootstrap');
+const stylesDir = path.join(root, 'src/styles');
 export const DEFAULT_BASELINE = path.join(
   root,
   'scripts/bootstrap-css-usage.baseline.json',
 );
 
 // Each `name` keys the partial's entry in bootstrap-css-usage.baseline.json:
-// `legacy/<path>`. No Bootstrap partial emits CSS any more.
+// `legacy/<path>`. Every partial here is Waldur's own: Bootstrap and its Sass
+// configuration are gone (#481), and each compiles from legacy/_mixins.scss
+// alone, so a reference to a Bootstrap variable or mixin fails `report`,
+// `save` and `compare`.
 export const PARTIALS = [
-  // Waldur's own partials (src/styles/legacy/). Each compiles from
-  // _mixins.scss alone: none reads a Bootstrap Sass variable or mixin, so a
-  // reference to one fails `report`, `save` and `compare`.
   {
     name: 'legacy/reboot',
-    scss: "@import '../legacy/mixins'; @import '../legacy/reboot';",
+    scss: "@import 'legacy/mixins'; @import 'legacy/reboot';",
   },
   {
     name: 'legacy/table-base',
-    scss: "@import '../legacy/mixins'; @import '../legacy/table-base';",
+    scss: "@import 'legacy/mixins'; @import 'legacy/table-base';",
   },
   {
     name: 'legacy/base',
-    scss: "@import '../legacy/mixins'; @import '../legacy/base';",
+    scss: "@import 'legacy/mixins'; @import 'legacy/base';",
   },
   {
     name: 'legacy/content',
-    scss: "@import '../legacy/mixins'; @import '../legacy/content';",
+    scss: "@import 'legacy/mixins'; @import 'legacy/content';",
   },
   {
     name: 'legacy/file-upload',
-    scss: "@import '../legacy/mixins'; @import '../legacy/file-upload';",
+    scss: "@import 'legacy/mixins'; @import 'legacy/file-upload';",
   },
   {
     name: 'legacy/landing',
-    scss: "@import '../legacy/mixins'; @import '../legacy/landing';",
+    scss: "@import 'legacy/mixins'; @import 'legacy/landing';",
   },
   {
     name: 'legacy/table',
-    scss: "@import '../legacy/mixins'; @import '../legacy/table';",
+    scss: "@import 'legacy/mixins'; @import 'legacy/table';",
   },
   {
     name: 'legacy/ai-assistant/index',
-    scss: "@import '../legacy/mixins'; @import '../legacy/ai-assistant/index';",
+    scss: "@import 'legacy/mixins'; @import 'legacy/ai-assistant/index';",
   },
   {
     name: 'legacy/support/helpdesk',
-    scss: "@import '../legacy/mixins'; @import '../legacy/support/helpdesk';",
+    scss: "@import 'legacy/mixins'; @import 'legacy/support/helpdesk';",
   },
   {
     name: 'legacy/matrix/index',
-    scss: "@import '../legacy/mixins'; @import '../legacy/matrix/index';",
+    scss: "@import 'legacy/mixins'; @import 'legacy/matrix/index';",
   },
 
   // Unlayered LiveKit styles in index.scss
   {
     name: 'legacy/matrix/call-livekit',
-    scss: "@import '../legacy/mixins'; @import '../legacy/matrix/call-livekit';",
+    scss: "@import 'legacy/mixins'; @import 'legacy/matrix/call-livekit';",
   },
 ];
 
 /** Custom Sass options with `@/` importer and node_modules load path. */
-function getSassOptions(baseDir = sassDir) {
+function getSassOptions(baseDir = stylesDir) {
   return {
     loadPaths: [baseDir, path.join(root, 'node_modules')],
     importers: [
@@ -106,12 +106,12 @@ function getSassOptions(baseDir = sassDir) {
 }
 
 /** Compiles a partial's SCSS string into CSS. */
-export function compilePartial(partialScss, baseDir = sassDir) {
+export function compilePartial(partialScss, baseDir = stylesDir) {
   return sass.compileString(partialScss, getSassOptions(baseDir)).css;
 }
 
 /** Compiles the main stylesheet (index.scss) and extracts byte size and selectors. */
-export function compileStyle(file = 'index.scss', baseDir = sassDir) {
+export function compileStyle(file = 'index.scss', baseDir = stylesDir) {
   const css = sass.compile(
     path.join(baseDir, file),
     getSassOptions(baseDir),
@@ -173,8 +173,8 @@ export function tokenizeContent(content) {
 
 /**
  * Collects tokens from tracked source files under src/, packages/, apps/,
- * excluding the stylesheet directories (src/styles/bootstrap/ and
- * src/styles/legacy/), whose own selectors would count as uses.
+ * excluding src/styles/ — the entry point and the legacy partials — whose own
+ * selectors would otherwise count as uses.
  */
 export function getCorpusTokens(options = {}) {
   const repoRoot = options.rootDir ?? root;
@@ -188,8 +188,7 @@ export function getCorpusTokens(options = {}) {
       (f) =>
         f &&
         /\.(ts|tsx|js|mjs|html|scss|css)$/.test(f) &&
-        !f.startsWith('src/styles/bootstrap/') &&
-        !f.startsWith('src/styles/legacy/'),
+        !f.startsWith('src/styles/'),
     );
 
   const corpus = new Set();
@@ -288,31 +287,50 @@ export function findNewUnusedClasses(baselineUnused, currentUnused) {
 }
 
 /**
- * A partial of Waldur's own (src/styles/legacy/, and the components that left
- * Bootstrap behind) compiles from _mixins.scss alone, not _config.scss.
+ * Bootstrap's own Sass function names, from the 5.1.3 `scss/_functions.scss`
+ * that used to be a dependency. The package is gone (#481), so the list is
+ * frozen here: nothing can read it from node_modules any more, and a legacy
+ * partial that calls one of these names would get a plain CSS function
+ * passed through rather than a Sass error. That silent pass-through is what
+ * `checkLegacyDecoupled` catches, so the guard outlives the package.
  */
-export const isDecoupled = (partial) =>
-  !partial.scss.includes("@import 'config'");
+const BOOTSTRAP_FUNCTIONS = [
+  'add',
+  'color-contrast',
+  'contrast-ratio',
+  'divide',
+  'escape-svg',
+  'luminance',
+  'map-get-multiple',
+  'map-loop',
+  'map-merge-multiple',
+  'negativify-map',
+  'opaque',
+  'rgba-css-var',
+  'shade-color',
+  'shift-color',
+  'str-replace',
+  'subtract',
+  'tint-color',
+  'to-rgb',
+  'varify',
+];
 
 /**
- * The names of Bootstrap's Sass functions (its own and the overrides in
- * _functions.scss). A decoupled partial compiles without them, so a call to
- * one is not an error there: Sass writes it out as a plain CSS function.
+ * Metronic's own Sass helpers, which lived alongside the overrides in the
+ * former `src/styles/bootstrap/_functions.scss`. Frozen here for the same
+ * reason as the list above: the file is gone, so a legacy partial calling
+ * `get(...)` would emit it as a plain CSS function instead of failing.
+ */
+const METRONIC_FUNCTIONS = ['get', 'get-warning', 'has', 'valueif'];
+
+/**
+ * The names a partial must not call. Nothing defines them any more, so a call
+ * is not a Sass error: Sass writes it out as a plain CSS function, which is
+ * exactly the silent failure `checkLegacyDecoupled` exists to catch.
  */
 export function bootstrapFunctionNames() {
-  const files = [
-    path.join(root, 'node_modules/bootstrap/scss/_functions.scss'),
-    path.join(sassDir, '_functions.scss'),
-  ];
-  const names = new Set();
-  for (const file of files) {
-    for (const m of readFileSync(file, 'utf8').matchAll(
-      /@function ([\w-]+)/g,
-    )) {
-      names.add(m[1]);
-    }
-  }
-  return names;
+  return new Set([...BOOTSTRAP_FUNCTIONS, ...METRONIC_FUNCTIONS]);
 }
 
 /**
@@ -334,10 +352,7 @@ export function findBootstrapFunctionCalls(
  * The stylesheets that import Waldur's own partials: legacy/_index.scss
  * (inside the bootstrap layer) and the unlayered LiveKit overrides.
  */
-const LEGACY_ENTRY_POINTS = [
-  '../legacy/index',
-  '../legacy/matrix/call-livekit',
-];
+const LEGACY_ENTRY_POINTS = ['legacy/index', 'legacy/matrix/call-livekit'];
 
 /**
  * Compiles each legacy entry point from _mixins.scss alone and fails when it
@@ -349,7 +364,7 @@ export function checkLegacyDecoupled(functionNames = bootstrapFunctionNames()) {
   const loaded = new Set();
   for (const entry of LEGACY_ENTRY_POINTS) {
     const result = sass.compileString(
-      `@import '../legacy/mixins'; @import '${entry}';`,
+      `@import 'legacy/mixins'; @import '${entry}';`,
       getSassOptions(),
     );
     for (const url of result.loadedUrls) {
@@ -387,13 +402,11 @@ export function analyzeUsage(corpusTokens, partials = PARTIALS) {
   checkLegacyDecoupled(functionNames);
   for (const p of partials) {
     const css = compilePartial(p.scss);
-    if (isDecoupled(p)) {
-      const calls = findBootstrapFunctionCalls(css, functionNames);
-      if (calls.length) {
-        throw new Error(
-          `${p.name} calls Bootstrap's ${calls.join(', ')}: Waldur's own partials must not depend on Bootstrap's Sass.`,
-        );
-      }
+    const calls = findBootstrapFunctionCalls(css, functionNames);
+    if (calls.length) {
+      throw new Error(
+        `${p.name} calls Bootstrap's ${calls.join(', ')}: Waldur's own partials must not depend on Bootstrap's Sass.`,
+      );
     }
     const classes = extractClasses(css);
     if (classes.length === 0) continue;

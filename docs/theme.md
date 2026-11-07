@@ -9,9 +9,9 @@ The theme is one attribute: `data-theme="light|dark"` on `<html>`. Everything fo
 - **Design tokens.** Every semantic token file has a `:root[data-theme='dark']` block, so
   `var(--bg-primary)` and friends switch.
 - **Tailwind.** The `dark:` variant keys off the same attribute.
-- **Bootstrap / Metronic.** `src/styles/bootstrap/index.scss` is **one stylesheet for both themes**:
-  its colours read the tokens, and the few pairings no token has use the `dark-theme` mixin
-  (`src/styles/bootstrap/_mixins.scss`), which emits `:where([data-theme='dark']) &` — the same
+- **Legacy Stylesheet.** `src/styles/index.scss` is **one stylesheet for both
+  themes**: its colours read the tokens, and the few pairings no token has use the `dark-theme`
+  mixin (`src/styles/legacy/_mixins.scss`), which emits `:where([data-theme='dark']) &` — the same
   specificity as the rule it overrides:
 
 ```scss
@@ -31,15 +31,15 @@ theme-specific SCSS value. A colour inside an SVG data URI cannot be reached by 
 
 ## Key Files
 
-| File                                   | Purpose                                                                           |
-| -------------------------------------- | --------------------------------------------------------------------------------- |
-| `src/theme/ThemeProvider.tsx`          | React context provider for theme state                                            |
-| `src/theme/useTheme.ts`                | Hook to access current theme                                                      |
-| `src/theme/ThemeStorage.ts`            | localStorage persistence                                                          |
-| `src/theme/utils.ts`                   | Injects the Bootstrap stylesheet once, sets `data-theme`, initial theme detection |
-| `src/theme/ThemeSwitcher.tsx`          | UI toggle component                                                               |
-| `src/styles/bootstrap/_variables.scss` | Consolidated Sass variables (design tokens as `var(--…)`, `$white`, `$black`)     |
-| `src/styles/bootstrap/_mixins.scss`    | `dark-theme` / `light-theme` mixins, `mirrored-ramp-color()`                      |
+| File                             | Purpose                                                                        |
+| -------------------------------- | ------------------------------------------------------------------------------ |
+| `src/theme/ThemeProvider.tsx`    | React context provider for theme state                                         |
+| `src/theme/useTheme.ts`          | Hook to access current theme                                                   |
+| `src/theme/ThemeStorage.ts`      | localStorage persistence                                                       |
+| `src/theme/utils.ts`             | Injects the legacy stylesheet once, sets `data-theme`, initial theme detection |
+| `src/theme/ThemeSwitcher.tsx`    | UI toggle component                                                            |
+| `src/styles/index.scss`          | The SCSS entry point: legacy mixins, the `bootstrap` cascade layer, LiveKit    |
+| `src/styles/legacy/_mixins.scss` | `dark-theme` / `light-theme` mixins, `mirrored-ramp-color()`                   |
 
 ## Theme Initialization Flow
 
@@ -68,8 +68,8 @@ follows the theme without a `dark:` twin:
   <p className="text-quaternary">Description</p>
 </div>
 
-// Avoid - Bootstrap Alert components don't always adapt text colors properly
-<Alert variant="info">This may have contrast issues in dark mode</Alert>
+// Avoid - hardcoded colors don't adapt in dark mode
+<div className="bg-gray-200 text-gray-800">Fixed colors</div>
 ```
 
 **Theme-aware utilities** (full reference in
@@ -88,11 +88,10 @@ follows the theme without a `dark:` twin:
 For the brand colour use `text-brand` (and `border-brand`, `outline-brand`). State colours (success, warning, danger) use the
 status matrix: `bg-warning-subtle text-warning`.
 
-**Bootstrap emits no colour utilities**: its old class names (`text-muted`, `text-success`,
-`bg-light`, …) paint nothing, and every colour class is Tailwind's (`text-muted` →
-`text-quaternary`). Bootstrap's utilities are retired too (#478): `border` is Tailwind's width
-only, so name its colour (`border border-secondary`). See
-[design-tokens.md § Bootstrap colour utilities](design-tokens.md).
+**Colour utilities are Tailwind's**: every colour class is Tailwind's (use `text-primary` …
+`text-senary`, `text-quaternary`). Spacing, borders, and colors are defined via design tokens;
+`border` is Tailwind's width only, so name its colour (`border border-secondary`). See
+[design-tokens.md](design-tokens.md).
 
 ### Pattern 2: useTheme() Hook
 

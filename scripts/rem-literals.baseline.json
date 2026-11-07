@@ -81,7 +81,6 @@
   "src/proposals/manage/HeldDecisionBadge.tsx": 1,
   "src/proposals/proposal/create-review/FieldReviewComments.scss": 2,
   "src/proposals/update/CallUpdateContainer.tsx": 1,
-  "src/styles/bootstrap/_variables.scss": 24,
   "src/styles/legacy/_base.scss": 2,
   "src/styles/legacy/_reboot.scss": 33,
   "src/styles/legacy/_table-base.scss": 5,

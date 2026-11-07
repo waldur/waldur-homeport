@@ -7,17 +7,18 @@
  * (primitives/spacing.css in waldur-design-tokens). Each Bootstrap
  * step maps to the nearest half step of Tailwind's scale (#477).
  *
- * Shared by scripts/codemods/bootstrap-spacing.mjs, which rewrites a family
- * when Bootstrap stops generating it, and by
- * no-retired-bootstrap-utility, which reports the spellings only Bootstrap
- * had (`mb-md-4`, `mt-n2`, `gap-8px`) once their family is retired.
+ * The migration is finished and Bootstrap is gone (#481), so the codemod that
+ * rewrote each family has been removed. This map stays as the source of
+ * no-retired-bootstrap-utility's suggestions: it reports the spellings only
+ * Bootstrap ever had (`mb-md-4`, `mt-n2`, `gap-8px`) with the Tailwind class
+ * to use instead.
  */
 
 /**
- * Bootstrap's $spacers (_variables.scss) at the 13px root, as the nearest
- * half step of Tailwind's 4px spacing unit.
- * src/tailwindBootstrapSpacing.test.ts checks every entry against the
- * compiled map.
+ * Bootstrap's $spacers at the 13px root, as the nearest half step of
+ * Tailwind's 4px spacing unit. The Sass that defined them is gone (#481), so
+ * src/tailwindBootstrapSpacing.test.ts holds their last compiled values and
+ * checks every entry here against them.
  */
 export const SPACER_TO_TAILWIND = {
   0: '0', // 0

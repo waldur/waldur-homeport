@@ -55,21 +55,18 @@ let cachedMetronicCss: string | null = null;
 function compileMetronic() {
   if (cachedMetronicCss) return cachedMetronicCss;
   // Light and dark emit the same class names; only the colours differ.
-  cachedMetronicCss = sass.compile(
-    path.join(root, 'src/styles/bootstrap/index.scss'),
-    {
-      loadPaths: [path.join(root, 'node_modules')],
-      importers: [
-        {
-          findFileUrl: (url) =>
-            url.startsWith('@/')
-              ? pathToFileURL(path.join(root, 'src', url.slice(2)))
-              : null,
-        },
-      ],
-      logger: sass.Logger.silent,
-    },
-  ).css;
+  cachedMetronicCss = sass.compile(path.join(root, 'src/styles/index.scss'), {
+    loadPaths: [path.join(root, 'node_modules')],
+    importers: [
+      {
+        findFileUrl: (url) =>
+          url.startsWith('@/')
+            ? pathToFileURL(path.join(root, 'src', url.slice(2)))
+            : null,
+      },
+    ],
+    logger: sass.Logger.silent,
+  }).css;
   return cachedMetronicCss;
 }
 

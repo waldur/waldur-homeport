@@ -10,7 +10,7 @@ import { applyTheme } from '@/theme/utils';
 
 // Same order as src/index.tsx: tailwind.css declares the layer order first.
 import '../src/tailwind.css';
-import '../src/styles/bootstrap/index.scss';
+import '../src/styles/index.scss';
 
 // Redirects @/core/api to src/core/__mocks__/api.ts: same API, fixture icons.
 sb.mock(import('../src/core/api.ts'));

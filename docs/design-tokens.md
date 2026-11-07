@@ -8,7 +8,7 @@ that expose those roles — and how to change one.
   matrix, brand
 - [Tailwind utilities for the roles](#tailwind-utilities-for-the-roles): `text-tertiary` is
   `var(--text-tertiary)`
-- [Bootstrap colour utilities](#bootstrap-colour-utilities): retired, and why
+- [Retired colour utilities](#retired-colour-utilities)
 - [The brand colour in SCSS](#the-brand-colour-in-scss)
 - [Guards](#guards): tests and lint rules that keep all of the above true
 
@@ -60,8 +60,7 @@ Dark UI wants neutral grays where the light `gray` is blue-tinted (500 is `#6670
 `#85888e`), so there are two CSS ramps, both physical (step 900 is dark in both):
 
 - `--color-gray-N` (`gray`) is the same in both themes: nothing overrides the variable per theme,
-  and `text-gray-500` is `--color-gray-500` in dark mode too (Bootstrap no longer emits its
-  theme-inverted `.text-gray-N`; see [Bootstrap colour utilities](#bootstrap-colour-utilities)).
+  and `text-gray-500` is `--color-gray-500` in dark mode too (bare gray steps are not theme-inverted).
   So a bare gray is dark-on-dark in dark mode: for neutral text, surfaces and borders use the
   [semantic utilities](#tailwind-utilities-for-the-roles), or pair the step with its `gray-dark`
   mirror (`bg-gray-300 dark:bg-gray-dark-600`).
@@ -164,7 +163,7 @@ and `-fg` only for `info` (50 / 900, 200 / 900 and 600 / 300) and `neutral`. `-b
 utility: it is for Mermaid node fills (`style A fill:var(--status-success-bg-strong)`), where the
 50-step `-bg` nearly vanishes against plain nodes. Steps refer to the intent's ramp (`danger` reads `error-*`).
 
-Each slot has a Tailwind utility (`tailwind/theme.css`), named like Bootstrap 5.3's:
+Each slot has a Tailwind utility (`tailwind/theme.css`):
 
 | Slot      | Utility                                                                    |
 | --------- | -------------------------------------------------------------------------- |
@@ -241,29 +240,15 @@ micro-apps all get the same utilities; `waldur-ui` and `shell` depend on them.
   `border-border-*` (`border-*`), and the `--color-surface-faint`, `--color-bg-primary`,
   `--color-border-*`, `--color-secondary`, `--color-tertiary`, `--color-quaternary` keys. A brand
   border that used to be `border-primary` is now `border-brand`.
-- **Bootstrap's neutral classes were migrated** to the utility with the identical value in both
-  themes: `text-muted` → `text-quaternary`, `text-gray-400`/`500`/`600`/`700` →
-  `text-quinary`/`quaternary`/`tertiary`/`secondary`, `bg-body` → `bg-primary`,
-  `bg-gray-100`/`200` → `bg-tertiary`/`bg-quaternary`, `border-gray-200` → `border-divider`.
-  The rest followed when Bootstrap's colour utilities were retired (next section).
+- **Neutral text and background utilities** use semantic tokens with the identical value in both
+  themes: `text-quaternary`, `text-quinary`, `text-tertiary`, `text-secondary`, `bg-primary`,
+  `bg-tertiary`, `bg-quaternary`, `border-divider`.
 
-## Bootstrap colour utilities
+## Retired colour utilities
 
-Bootstrap's utility API emitted `.text-*`, `.bg-*` and `.border-*` colour classes **with
-`!important`, in the `bootstrap` cascade layer**. An `!important` declaration in an earlier layer
-beats every Tailwind utility, important or not: a class Tailwind also defined (`text-gray-500`,
-`text-white`) silently painted Bootstrap's compiled colour, theme-inverted in dark mode, and no
-`dark:`/`hover:` variant beside it applied.
+Legacy colour classes paint nothing, and every colour class is Tailwind's and follows the design tokens. A bare `border` sets only the width, so it always names a colour: `border border-secondary` (`waldur-custom/require-border-color`, autofix).
 
-**Bootstrap emits no utility at all any more** (#478): its utility API is not imported, so every
-colour, width and border class is Tailwind's and follows the design tokens. A bare `border`
-sets only the width (Bootstrap's also drew `--border-secondary`), so it always names a colour:
-`border border-secondary` (`waldur-custom/require-border-color`, autofix). (`$theme-colors` is an empty map, so no Bootstrap component emits a contextual colour either.)
-
-Bootstrap's old class names paint nothing now, except those Tailwind defines itself (the status
-utilities). They were migrated as:
-
-| Bootstrap                                          | Now                                                                       |
+| Retired Class                                      | Replacement                                                               |
 | -------------------------------------------------- | ------------------------------------------------------------------------- |
 | `text-danger` / `-success` / `-warning`            | Tailwind's `text-danger`, … (the `-fg` slot; a step darker in light mode) |
 | `bg-` / `border-` `danger` / `success` / `warning` | Tailwind's `bg-danger`, … (the `-solid` slot)                             |
@@ -281,49 +266,42 @@ utilities). They were migrated as:
   name). It skips strings that hold a name rather than a class list: a BaseButton
   `variant="text-danger"`, an object key outside `classNames()`/`cn()`, a comparison, a
   TypeScript literal type.
-- **`src/tailwindBootstrapColors.test.ts`** compiles the Metronic SCSS and checks it emits no
+- **`src/tailwindBootstrapColors.test.ts`** compiles the legacy SCSS and checks it emits no
   `!important` colour class, and that Tailwind defines none of the retired names.
 - **Borders name their colour**: `border` (and `border-t`, `border-b-2`, …) sets only the
   width; without a colour class the line takes `currentColor`. Give every state an explicit
   colour, e.g. `rounded-lg border border-secondary` and `border-brand` when selected.
   `waldur-custom/require-border-color` reports a bare `border` without one and autofixes it to
-  `border border-secondary`, the line Bootstrap's retired `.border` drew.
+  `border border-secondary`.
 
 ## The brand colour in SCSS
 
-Bootstrap compiles `$primary` (and `$primary-N`) from a **static** default green
-(`primary` in `colors.json`, `css: false`). The tenant's brand is the **runtime** `--brand-*`
-ramp, which Sass never sees. Anything that paints `$primary` therefore shows the default
-green, whatever the tenant configured. So:
+The tenant's brand is the **runtime** `--brand-*` ramp, which Sass never sees.
 
 - In custom SCSS, paint brand with the semantic brand tokens — `var(--bg-brand-solid)`,
   `var(--border-brand-solid)`, `var(--fg-brand-primary)`, `var(--text-brand-secondary)` — or a
-  runtime step, `var(--brand-600)`. For a tint that inverts like `$primary-50` did, write
+  runtime step, `var(--brand-600)`. For a tint that inverts in dark mode, write
   `var(--brand-50)` with a `dark-theme` override to `var(--brand-900)`. For a focus glow, use
   `color-mix(in srgb, var(--focus-ring-color) 25%, transparent)`.
-- Never pass a CSS variable into a Sass colour function (`tint-color`, `shade-color`, `mix`,
-  `rgba($x, …)`): they need a compile-time colour. That is why the static `$component-active-bg` (the default green, which Bootstrap tints) stays a literal.
-- `src/styles/bootstrap/_variables.scss` already points the Bootstrap outputs that would otherwise paint the
-  static green at the runtime brand: the active list-group row and the range thumb.
+- Never pass a CSS variable into a Sass colour function: legacy stylesheets define no Sass colours and read the tokens directly.
 
 ## Font size
 
 One scale, pinned in physical pixels in `primitives/typography.css` (`@theme static`) to
 prevent distortion under Waldur's forced 13px root font size (`html, body { font-size: 13px !important; }`):
 
-| Token         | Size | Line Height | Tailwind Class | Former Bootstrap Utility |
-| ------------- | ---- | ----------- | -------------- | ------------------------ |
-| `--text-xs`   | 12px | 16px        | `text-xs`      | `fs-7`, `fs-8`           |
-| `--text-sm`   | 14px | 20px        | `text-sm`      | `fs-6`                   |
-| `--text-base` | 16px | 24px        | `text-base`    | `fs-4`, `fs-5`           |
-| `--text-lg`   | 18px | 28px        | `text-lg`      | `fs-3`                   |
-| `--text-xl`   | 20px | 28px        | `text-xl`      | `fs-2`                   |
-| `--text-2xl`  | 24px | 32px        | `text-2xl`     | `fs-1`, `fs-1x`          |
-| `--text-3xl`  | 30px | 36px        | `text-3xl`     | —                        |
-| `--text-4xl`  | 36px | 40px        | `text-4xl`     | —                        |
+| Token         | Size | Line Height | Tailwind Class |
+| ------------- | ---- | ----------- | -------------- |
+| `--text-xs`   | 12px | 16px        | `text-xs`      |
+| `--text-sm`   | 14px | 20px        | `text-sm`      |
+| `--text-base` | 16px | 24px        | `text-base`    |
+| `--text-lg`   | 18px | 28px        | `text-lg`      |
+| `--text-xl`   | 20px | 28px        | `text-xl`      |
+| `--text-2xl`  | 24px | 32px        | `text-2xl`     |
+| `--text-3xl`  | 30px | 36px        | `text-3xl`     |
+| `--text-4xl`  | 36px | 40px        | `text-4xl`     |
 
-- **No Bootstrap `fs-*`.** Bootstrap's `fs-1` through `fs-8` classes are retired and replaced
-  by standard Tailwind `text-*` classes via the `waldur-custom/require-font-size-scale` ESLint rule.
+- **Font size scale (`text-*`).** Font size follows the scale via the `waldur-custom/require-font-size-scale` ESLint rule (which also autofixes retired `fs-*` classes to `text-*`).
 - **Why pinned in pixels?** Default Tailwind uses relative `rem` units (e.g. `text-lg` is 1.125rem).
   With an unpinned root, 1.125rem at 13px resolves to 14.625px instead of the intended 18px. Pinned
   declarations ensure consistent typography across both desktop (13px root) and mobile (12px root).
@@ -344,9 +322,8 @@ prevent distortion under Waldur's forced 13px root font size (`html, body { font
   class also sets a line height, so check the result. The stylelint rule `waldur/font-size-scale` allows
   a `font-size` (or the size in a `font:` shorthand) of `var(--text-*)` or one relative to its parent
   (`em`, `%`, `inherit`, `smaller`, `larger`) and names the equal token for a px or rem size. Exempt:
-  the root and body sizes (`src/tailwind.css`), Bootstrap's partials (`src/styles/bootstrap/`, being
-  retired), and the boot splash and boot error screen (`packages/boot-splash/`,
-  `src/BootErrorScreen.css`), which paint before the tokens load.
+  the root and body sizes (`src/tailwind.css`), and the boot splash and boot error screen
+  (`packages/boot-splash/`, `src/BootErrorScreen.css`), which paint before the tokens load.
 - **No new rem, in a size or anywhere else.** A rem font size is also a rem length, so
   `waldur-custom/no-rem-length` and `waldur/no-rem-length` count it against the file's baseline (see
   [Root font size](#root-font-size)); the message names the `--text-*` token it equals at the 13px root.
@@ -371,60 +348,30 @@ One scale, the five weights `fonts.css` loads (Inter 300–700), declared in
 | 600    | `font-semibold` | `var(--font-weight-semibold)` | Headings, titles         |
 | 700    | `font-bold`     | `var(--font-weight-bold)`     | Strong headings, figures |
 
-- **No Bootstrap `fw-*`.** Bootstrap no longer emits them. Its names meant other weights than
-  Tailwind's: Metronic's `fw-bold` was **500**, `fw-bolder` 600, `fw-boldest` 700, while Tailwind's
-  `font-bold` is 700. The same word painted two weights, and the `fw-*` classes were `!important`.
-  `fw-semibold` and `fw-medium` never existed at all (they painted nothing).
+- **Font weights (`font-*`).** Standard Tailwind `font-*` utilities are used (`font-light` … `font-bold`). The `waldur-custom/require-weight-scale` rule autofixes legacy `fw-*` classes.
 - **No other steps.** The theme clears Tailwind's `thin`, `extralight`, `extrabold` and `black`,
   so those classes compile to nothing, and an arbitrary `font-[600]` is reported: Inter is not
   loaded at other weights, and the browser would only fall back to the nearest loaded one.
 - **No inline `fontWeight`** on a JSX element: it outranks every stylesheet. Chart and PDF
   options (ECharts `fontWeight`) are not styles and keep their own.
 - **SCSS** reads `var(--font-weight-*)`: stylelint rejects a number or keyword in component
-  SCSS, and `src/tailwindBootstrapColors.test.ts` checks the compiled Metronic CSS (which
-  stylelint skips). Metronic's `$font-weight-*` variables point at the tokens, keeping its
-  names: its `$font-weight-bold` is `var(--font-weight-medium)` (500), `$font-weight-bolder`
-  semibold, `$font-weight-boldest` bold.
+  SCSS, and `src/tailwindBootstrapColors.test.ts` checks the compiled legacy CSS.
 - A utility does not outrank an **unlayered** stylesheet (a component's `.scss` imported from
-  TSX), where `fw-*`'s `!important` used to. Where such a rule sets the weight of the same
-  element, drop the weight from the rule, or, if the rule is right for everything else it
-  matches, use the important modifier on that element (`font-normal!`) with a comment.
+  TSX). Where such a rule sets the weight of the same element, drop the weight from the rule, or,
+  if the rule is right for everything else it matches, use the important modifier on that element
+  (`font-normal!`) with a comment.
 
 ## Spacing
 
 One scale: Tailwind's, with `--spacing` pinned to `4px` in `primitives/spacing.css`, so
 `gap-3` is 12px and `mb-1.5` is 6px at any root font size.
 
-Bootstrap generates no margin, padding or gap utility (#477). Its `.m*-*`, `.p*-*` and `.gap-*`
-used Tailwind's names (`mb-4`, `p-3`, `gap-2`) for its own steps (`$spacers`, rem against the
-13px root, with an irregular step 4) and were `!important`, so every spacing class rendered
-Bootstrap's value. `scripts/codemods/bootstrap-spacing.mjs` rewrote each use to the nearest half
-Tailwind step (`SPACER_TO_TAILWIND` in `packages/eslint-plugin-waldur/rules/bootstrap-spacing.js`):
+Spacing uses standard Tailwind steps (`p-3`, `mb-1.5`, `gap-2`). The `waldur-custom/no-retired-bootstrap-utility` ESLint rule reports legacy utility names (`mb-md-4` → `md:mb-3`, `mt-n2` → `-mt-1.5`, `gap-8px` → `gap-2`) with the corresponding Tailwind class.
 
-| Bootstrap step | At 13px root | Tailwind | Bootstrap step | At 13px root | Tailwind |
-| -------------- | ------------ | -------- | -------------- | ------------ | -------- |
-| `1`            | 3.25px       | `1`      | `8`            | 24px         | `6`      |
-| `2`            | 6.5px        | `1.5`    | `9`            | 29.25px      | `7.5`    |
-| `3`            | 9.75px       | `2.5`    | `10`           | 32.5px       | `8`      |
-| `4`            | 12px         | `3`      | `12`           | 39px         | `10`     |
-| `5`            | 16.25px      | `4`      | `15`           | 48.75px      | `12`     |
-| `6`            | 20px         | `5`      | `20`           | 65px         | `16`     |
-| `7`            | 22px         | `5.5`    | `8px`          | 8px          | `2`      |
-
-- **Write Tailwind's step**: `mb-3` is 12px. A step from older code or a Bootstrap-era design
-  note is not the same size under the same name: Bootstrap's `mb-4` is Tailwind's `mb-3`.
-- **No Bootstrap-only spellings**: `mb-md-4` is `md:mb-3`, `mt-n2` is `-mt-1.5`, `gap-8px` is
-  `gap-2`. `no-retired-bootstrap-utility` reports them with the class to use.
-- **No arbitrary `[6.5px]`** to reproduce a Bootstrap step: use the nearest Tailwind step.
+- **Write Tailwind's step**: `mb-3` is 12px. Use standard Tailwind steps; do not use arbitrary pixel values like `[6.5px]` to approximate non-standard steps.
 - **No runtime class names.** Tailwind generates only the names it finds in source, so
   `` `mb-${space}` `` styles nothing. Look the class up in a map of literals, as `FormGroup`'s
   `space` does (`SPACE_CLASSES` in `waldur-form`; `space` is a Tailwind step).
-- **Mobile:** below `md` the root drops to 12px, so Bootstrap's rem steps shrank by about 8% there;
-  Tailwind's px steps do not. Spacing follows the tokens: the difference is at most about 2.5px.
-- **A spacing class now loses where Bootstrap's `!important` used to win**: to an unlayered
-  stylesheet rule on the same element (a component `.scss` imported from TSX) and to an inline
-  `style`. Set the spacing in one place.
-- `$spacers` is left only for the grid gutters (`.g-*`), which go with `Row`/`Col` (#475).
 - **No new rem lengths.** A padding, margin, gap, width or offset in rem follows the root; write
   px, or the Tailwind step that equals it (`p-3`, not `p-[0.923rem]`; `calc(var(--spacing) * 3)`
   in a stylesheet). See [Root font size](#root-font-size).
@@ -475,29 +422,24 @@ All corner radius steps are pinned to physical pixels in `primitives/radius.css`
 to prevent fractional `rem` compression under Waldur's forced 13px root font size
 (`html, body { font-size: 13px !important; }`):
 
-| Token            | Size   | Tailwind Class  | Former Class / SCSS Variable     | Use                                             |
-| ---------------- | ------ | --------------- | -------------------------------- | ----------------------------------------------- |
-| `--radius-none`  | 0px    | `rounded-none`  | `rounded-0`                      | Square corners, flush card attachments          |
-| `--radius-xs`    | 2px    | `rounded-xs`    | —                                | Subtle inner corners, tiny tags                 |
-| `--radius-sm`    | 4px    | `rounded-sm`    | `$border-radius-xs` (4px)        | Compact inputs, checkboxes, small indicators    |
-| `--radius-md`    | 6px    | `rounded-md`    | `$border-radius-sm` (6px)        | Standard buttons, form controls, dropdown items |
-| `--radius-lg`    | 8px    | `rounded-lg`    | `$border-radius` / `-lg` (8px)   | Cards, panels, dialog headers, table containers |
-| `--radius-xl`    | 12px   | `rounded-xl`    | `$border-radius-xl` (12px)       | Prominent cards, thread bubbles, chat panels    |
-| `--radius-2xl`   | 16px   | `rounded-2xl`   | `$border-radius-2xl` (16px)      | Large feature cards, hero containers            |
-| `--radius-modal` | 20px   | `rounded-modal` | —                                | Sidebar mode-switcher card                      |
-| `--radius-full`  | 9999px | `rounded-full`  | `rounded-pill`, `rounded-circle` | Avatars, pills, circular badges, status dots    |
+| Token            | Size   | Tailwind Class  | Use                                             |
+| ---------------- | ------ | --------------- | ----------------------------------------------- |
+| `--radius-none`  | 0px    | `rounded-none`  | Square corners, flush card attachments          |
+| `--radius-xs`    | 2px    | `rounded-xs`    | Subtle inner corners, tiny tags                 |
+| `--radius-sm`    | 4px    | `rounded-sm`    | Compact inputs, checkboxes, small indicators    |
+| `--radius-md`    | 6px    | `rounded-md`    | Standard buttons, form controls, dropdown items |
+| `--radius-lg`    | 8px    | `rounded-lg`    | Cards, panels, dialog headers, table containers |
+| `--radius-xl`    | 12px   | `rounded-xl`    | Prominent cards, thread bubbles, chat panels    |
+| `--radius-2xl`   | 16px   | `rounded-2xl`   | Large feature cards, hero containers            |
+| `--radius-modal` | 20px   | `rounded-modal` | Sidebar mode-switcher card                      |
+| `--radius-full`  | 9999px | `rounded-full`  | Avatars, pills, circular badges, status dots    |
 
-- **No Bootstrap `rounded-0`, `rounded-pill`, `rounded-circle`, nor a bare `rounded`.** Bootstrap radius utilities are
-  retired and replaced by Tailwind `rounded-none`, `rounded-full` and, for Bootstrap's 8px `rounded`, `rounded-lg`
-  via `waldur-custom/enforce-border-radius-tokens`. Tailwind's own bare `rounded` is 0.25rem, off the pinned scale.
+- **Enforce border radius tokens.** Use Tailwind `rounded-none`, `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xl`, and `rounded-full` via `waldur-custom/enforce-border-radius-tokens`. Tailwind's own bare `rounded` is 0.25rem, off the pinned scale.
 - **Why pinned in pixels?** Default Tailwind radii use relative `rem` units (e.g. `rounded-sm` is 0.25rem,
   `rounded-xl` is 0.75rem). Under Waldur's forced 13px root font size, unpinned `rem` tokens shrink
   unintentionally (`rounded-sm` becomes 3.25px, `rounded-xl` becomes 9.75px). Pinning the scale preserves
   crisp, consistent corner geometry.
-- **SCSS variables** (`src/styles/bootstrap/_variables.scss`) mirror the design tokens:
-  `$border-radius-xs` is 4px (`--radius-sm`), `$border-radius-sm` is 6px (`--radius-md`),
-  `$border-radius` and `$border-radius-lg` are 8px (`--radius-lg`), `$border-radius-xl` is 12px (`--radius-xl`),
-  and `$border-radius-2xl` is 16px (`--radius-2xl`).
+- **SCSS**: Use the `--radius-*` tokens, or Tailwind's `rounded-*` utilities, directly.
 - **No inline `borderRadius`** in JSX elements. Use standard utility classes (`rounded-sm`, `rounded-md`,
   `rounded-lg`, etc.).
 
@@ -510,8 +452,8 @@ to prevent fractional `rem` compression under Waldur's forced 13px root font siz
 | No new duplicate roles (same value in both themes)      | `DUPLICATE_BASELINE` in `scripts/audit-tokens.mjs`, via the same two                 |
 | Status `-fg` clears AA on every surface                 | `statusContrast.test.ts`                                                             |
 | Badge `solid` and Progress fills stay identical         | `progressTokens.test.ts`                                                             |
-| Bootstrap emits no colour utility                       | `src/tailwindBootstrapColors.test.ts`                                                |
-| No retired Bootstrap colour class name                  | `waldur-custom/no-bootstrap-color-utility`                                           |
+| Legacy stylesheet emits no colour utility               | `src/tailwindBootstrapColors.test.ts`                                                |
+| No retired colour class name                            | `waldur-custom/no-bootstrap-color-utility`                                           |
 | Every semantic utility waldur-ui/shell use is declared  | `tailwindTheme.test.ts`                                                              |
 | A bare `border` names its colour                        | `waldur-custom/require-border-color` (autofix)                                       |
 | State colours from the status matrix, not raw ramps     | `waldur-custom/no-raw-status-ramp`                                                   |
@@ -519,7 +461,7 @@ to prevent fractional `rem` compression under Waldur's forced 13px root font siz
 | Font size on the scale; no `fs-*` or inline size        | `waldur-custom/require-font-size-scale` (autofixes `fs-*`), `waldur/font-size-scale` |
 | Font weight on the scale; no `fw-*` or inline weight    | `waldur-custom/require-weight-scale` (autofixes `fw-*`), stylelint                   |
 | Corner radius on the scale; no retired or inline radius | `waldur-custom/enforce-border-radius-tokens` (autofix), stylelint                    |
-| Bootstrap emits no `fw-*`; Tailwind exactly the scale   | `src/tailwindBootstrapColors.test.ts`                                                |
+| Legacy stylesheet emits no `fw-*`; Tailwind on scale    | `src/tailwindBootstrapColors.test.ts`                                                |
 | Every physical colour has a `dark:` counterpart         | `waldur-custom/require-dark-pair`                                                    |
 | No `--bs-*` reads                                       | `waldur-custom/no-bootstrap-css-vars`, stylelint                                     |
 | Hard-coded colours (hex, `rgb()`, named) only go down   | `no-literal-color` (ESLint and stylelint), `yarn colors:check`                       |
@@ -678,13 +620,7 @@ Rules for a new token:
 
 ## Retiring `--bs-*`
 
-Bootstrap's `--bs-*` custom properties are generated from the Metronic SCSS, so they sit outside
-the token architecture: the grays behind them are the same in both themes (dark-on-dark in dark
-mode), and some are
-never defined (`--bs-tertiary-bg`, `--bs-secondary-bg`, `--bs-secondary-color`, `--bs-card-bg`,
-`--bs-heading-color`), which makes a declaration that reads them silently resolve to nothing.
-
-Read the design tokens instead:
+Legacy `--bs-*` custom properties sit outside the token architecture. Read the design tokens instead:
 
 | `--bs-*`                                       | Token                                                         |
 | ---------------------------------------------- | ------------------------------------------------------------- |
@@ -709,9 +645,9 @@ plus its `gray-dark` mirror at the call site.
 Two checks keep new reads out: the `waldur-custom/no-bootstrap-css-vars` ESLint rule (TS/TSX,
 including `getCssVar('--bs-…')`) and stylelint's `declaration-property-value-disallowed-list` and
 `property-disallowed-list` (CSS/SCSS). stylelint has no ignore list, so both apply to
-`src/styles/bootstrap/**` too: the few places that must set one of Bootstrap's own hooks (the
-`.table` custom properties) carry a `stylelint-disable` comment saying why. The ESLint rule has no
-exemption either and checks all TS/TSX.
+`src/styles/**` too: the few places that must set one of the legacy `.table` custom properties
+carry a `stylelint-disable` comment saying why. The ESLint rule has no exemption either and checks
+all TS/TSX.
 
 Outside that SCSS nothing reads them any more, so neither check has a per-file allow list.
 
@@ -721,11 +657,7 @@ Outside that SCSS nothing reads them any more, so neither check has a per-file a
 2. `yarn tokens:generate`.
 3. Commit the JSON and the generated file together.
 
-Changing a light value changes what the app renders in both Bootstrap and Tailwind components
-at once, which is the point. A new ramp or step appears in CSS as `--color-<name>-<step>` (and so as Tailwind utilities).
-Sass defines no colour ramp. Every Sass colour variable (tokens as `var(--…)`, plus `$white`,
-`$black` and the static default green) lives in `src/styles/bootstrap/_variables.scss`, and Bootstrap's own
-defaults fill every other `$gray-*` / `$primary` name, none of which reaches a compiled rule.
+Changing a light value changes what the app renders across all components at once, which is the point. A new ramp or step appears in CSS as `--color-<name>-<step>` (and so as Tailwind utilities). Sass defines no colour ramp or colour variables. The legacy stylesheets read the tokens directly.
 
 ## Verifying a refactor changes nothing
 
@@ -737,7 +669,7 @@ node scripts/color-diff.mjs save /tmp/before.json   # on the base commit
 node scripts/color-diff.mjs compare /tmp/before.json
 ```
 
-It compiles `src/styles/bootstrap/index.scss` and records what every declaration resolves to in
+It compiles `src/styles/index.scss` and records what every declaration resolves to in
 each theme, with the design tokens and the `dark-theme` / `light-theme` overrides applied, so a
 change that keeps the rendered colour (a token in place of an SCSS gray of the same value)
 reports nothing.

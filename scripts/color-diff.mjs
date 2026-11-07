@@ -25,7 +25,7 @@ import postcss from 'postcss';
 import * as sass from 'sass';
 
 const root = path.resolve(fileURLToPath(import.meta.url), '../..');
-const sassDir = path.join(root, 'src/styles/bootstrap');
+const sassDir = path.join(root, 'src/styles');
 const tokensDir = path.join(root, 'packages/design-tokens/src/css');
 
 const compile = (file) =>

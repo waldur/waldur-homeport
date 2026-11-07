@@ -51,7 +51,7 @@ See the [menus guide](menus.md) for when to use which, recipes and how the looks
 
 ### Button Components
 
-The application uses a unified button system built on Tailwind v4 and Radix UI. **Never import Bootstrap Button directly** - use the appropriate Waldur wrapper component.
+The application uses a unified button system built on Tailwind v4 and Radix UI. Use the appropriate Waldur wrapper component.
 
 > [!TIP]
 > See the authoritative [Button UI Guide](button-ui-guide.md) for full architectural documentation, design token tables, direct tooltip integration, dropdown toggles, and accessibility specifications.
@@ -283,7 +283,7 @@ export const MyEditButton = ({ row, refetch }) => (
 ## Component Design Principles
 
 - **TypeScript interfaces** for comprehensive type safety
-- **Consistent styling** using React Bootstrap and custom classes
+- **Consistent styling** using design tokens and Tailwind utility classes
 - **Accessibility features** with proper ARIA attributes
 - **Responsive design** with mobile-first approach
 - **Theme support** with light/dark mode compatibility

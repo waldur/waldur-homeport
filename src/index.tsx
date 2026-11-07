@@ -9,7 +9,7 @@ import './vendor';
 // via the emitted blocks' own order in production, where the optimizer drops
 // that now-redundant statement. See docs/tailwind-shadcn-migration-notes.md.
 import './tailwind.css';
-import './styles/bootstrap/index.scss';
+import './styles/index.scss';
 import './sass/noscript.scss';
 import { Application } from './Application';
 import {

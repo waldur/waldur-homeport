@@ -32,7 +32,7 @@ How to build any menu or menu-like popover in HomePort: row actions, "Add" menus
 ## Rules
 
 - **ALWAYS** build menus from `Menu` / `MenuPopover` (`waldur-ui`) or the app components on top of them (`ActionsMenu`, `ActionsDropdown`, `ActionItem`, `NavMenuLink`). **NEVER** import `@radix-ui/react-dropdown-menu` or `@radix-ui/react-popover` outside `packages/ui` (ESLint rejects it).
-- **NEVER** hand-roll a menu with `react-bootstrap` `Dropdown`, `DropdownButton` or Bootstrap/Metronic classes (`dropdown-menu`, `dropdown-item`, `menu-sub-dropdown`, `menu-link`, …). That CSS has been deleted.
+- **NEVER** hand-roll a menu with legacy dropdown classes (`dropdown-menu`, `dropdown-item`, `menu-sub-dropdown`, `menu-link`, …). That CSS has been deleted.
 - **Row actions** use the 3-dots pattern: `ActionsDropdown` with `ActionItem` children (see CLAUDE.md). No standalone buttons in `rowActions`.
 - **Rows** are `Menu.Item` (or `ActionItem` in action menus). React to them with `onSelect`, not `onClick`: it fires for pointer and keyboard, and the panel closes afterwards unless the handler calls `event.preventDefault()`.
 - **A custom trigger** must `forwardRef` to a real `<button>` and spread `...props` onto it, or the menu won't open or position.
@@ -281,7 +281,7 @@ import { NavMenuLink } from '@/navigation/NavMenu';
 - **Only menu items in a menu.** A menu (`role="menu"`) may hold items, groups and separators, nothing else: no inputs, links or buttons that arrow keys can't reach. A setting is `Menu.CheckboxItem` (`role="menuitemcheckbox"`, shown as a switch, keeps the menu open); a value to copy is `Menu.CopyItem` (copies and confirms in place); a link is `Menu.Item asChild` or `NavMenuLink`. Anything else belongs in a `MenuPopover`.
 - `Menu.Group` with a `Menu.Label` (linked by `aria-labelledby`) names a group of rows; `ActionGroup` does this for actions.
 - `Menu.Label` and `Menu.Separator` are a section caption and a divider in the panel's look.
-- Typography (`fw-bold`, `fs-6`) is set per panel. In `packages/shell` and the micro-app, which have no Bootstrap, write it in Tailwind (`py-[12px] text-[14px] font-medium`).
+- Typography is set per panel using Tailwind classes (e.g. `py-3 text-sm font-medium`).
 
 **Hover to open** (page tabs, footer): `<Menu openOnHover="desktop">` (or `<MenuDisclosure openOnHover="desktop">`) opens on hover at the `lg` breakpoint and up, and on click below it, with a 200ms close delay. `openOnHover` (or `={true}`) hovers at every width. `open`/`onOpenChange` may still be controlled, e.g. to close the menu on Tab (`TabsList.tsx`).
 
@@ -331,13 +331,13 @@ import { Popover, PopoverContent, PopoverTrigger } from 'waldur-ui';
 </Popover>
 ```
 
-- `PopoverContent` is a bordered card with the dropdown shadow and an 8px radius on Bootstrap's popover layer (`z-popover`, 1070), and nothing else: no width, padding, height cap or motion, since every panel lays out its own content. Add them as classes, e.g. `max-h-(--radix-popover-content-available-height) overflow-y-auto` for a panel that may outgrow the screen, or `animate-[waldur-menu-enter-up_0.3s_ease]` for the menus' entrance.
+- `PopoverContent` is a bordered card with the dropdown shadow and an 8px radius on the popover layer (`z-popover`, 1070), and nothing else: no width, padding, height cap or motion, since every panel lays out its own content. Add them as classes, e.g. `max-h-(--radix-popover-content-available-height) overflow-y-auto` for a panel that may outgrow the screen, or `animate-[waldur-menu-enter-up_0.3s_ease]` for the menus' entrance.
 - Another layer is a `z-*` class: `z-header-popover` for panels opened from the header (`SearchToggle.tsx`, `BreadcrumbTrail.tsx` in waldur-ui), `z-dropdown-menu` to stack like the action menus.
 - `container` picks where the panel is portaled (`CallSettingsMenu.tsx`); `PopoverAnchor` positions it against an element that isn't the trigger (`AsyncSearchBox.tsx`, `SearchToggle.tsx`).
 - A searchable list of links inside a popover (the breadcrumb switchers) is a `cmdk` combobox: the search box keeps focus while the arrow keys highlight the rows, which are `Command.Item asChild` around their `Link`, and Enter opens one. Reuse `BreadcrumbDropdown`, mapping each result to the page it opens with `getItem`, rather than a list of links you Tab through; the `Navigation/BreadcrumbDropdown` stories show every state and key.
 - The panel closes on any click or focus outside it. The `waldur-ui` selects inside need no special case, although they portal their option lists to `document.body`: Radix counts events from React portals opened inside the panel as inside it.
 
-A form with a react-bootstrap `Card` of its own lets the `Card` draw the panel (`MarketplaceLandingFilter.tsx`):
+A form with a `Card` of its own lets the `Card` draw the panel (`MarketplaceLandingFilter.tsx`):
 
 ```tsx
 <PopoverContent
@@ -383,7 +383,7 @@ import { ActionList } from '@/marketplace/resources/actions/ActionList';
 | `actions` | row actions, "Add" and toolbar menus                  | page background, 8px radius, 6.5px vertical padding, 130px minimum width | gray-700, 14px, weight 500, 10×16px, highlight on gray-50 |
 | `card`    | popovers with their own layout (`MenuPopover` only)   | 1px border, card background, dropdown shadow, no padding                 | none: the content lays itself out                         |
 
-The looks were measured against the Metronic and Bootstrap menus they replaced. Colours come from the `--menu-*` tokens in `packages/design-tokens/src/css/components/menu.css` (light and dark), the shadow from `--dropdown-shadow`. `packages/ui/src/Menu/menuLooks.test.ts` snapshots every class set, so a change there is a visible change: update the snapshot only on purpose.
+Colours come from the `--menu-*` tokens in `packages/design-tokens/src/css/components/menu.css` (light and dark), the shadow from `--dropdown-shadow`. `packages/ui/src/Menu/menuLooks.test.ts` snapshots every class set, so a change there is a visible change: update the snapshot only on purpose.
 
 ### Row options (nav look)
 
@@ -445,8 +445,6 @@ For an element that must look like a row without being one (a custom picker row)
 
 ---
 
-## Background
-
-HomePort used to have three menu systems: Metronic `menu-*` classes for the header, tabs and footer; Bootstrap `dropdown-*` classes for action menus; and a shadcn-style `DropdownMenu` in `packages/shell`. Each wrapped Radix on its own (five panel wrappers, three placement APIs, four row components chosen by a `notInMenu` flag). The Metronic and Bootstrap CSS was ported to Tailwind and deleted (see the Legacy Menu CSS Retirement and Legacy Dropdown CSS Retirement sections in [tailwind-shadcn-migration-notes.md](tailwind-shadcn-migration-notes.md)), and then the components were consolidated into the parts above (waldur/waldur-homeport!7711). The git history of this file holds the step-by-step migration plan.
+## Enforcement
 
 The [rule](#rules) against importing Radix directly is enforced: `no-restricted-imports` in `eslint.config.js` rejects `@radix-ui/react-dropdown-menu` and `@radix-ui/react-popover` outside `packages/ui`. The one exception is `src/form/InsertLinkPopover.tsx`, a port of MDXEditor's own link dialog (styled by MDXEditor's CSS, with a popover arrow), marked with an `eslint-disable-next-line` comment that gives the reason.

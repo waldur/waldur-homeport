@@ -50,9 +50,12 @@ const colorSet = new Set(RETIRED_BOOTSTRAP_COLORS);
  * Note this list is card-only. No other retired component family is
  * reported here yet: `.modal*`, `.nav*`, `.row`/`.col-*`, `.form-control`,
  * `.breadcrumb`, `.progress*` and `.list-group*` are all still accepted as
- * selectors, even though their ESLint counterparts (`no-bootstrap-modal`,
- * `no-bootstrap-tabs`, …) report them in markup. Each needs the same
- * check that nothing emits it any more before it can be added.
+ * selectors. In markup those names are caught by `no-unknown-class`, since
+ * nothing generates them (the dedicated `no-bootstrap-modal`,
+ * `no-bootstrap-breadcrumb` and `no-bootstrap-progress` rules were dropped as
+ * redundant); `no-bootstrap-tabs` and `no-bootstrap-grid` still report the
+ * names that do resolve. Each needs the same check that nothing emits it any
+ * more before it can be added here.
  */
 const RETIRED_CARD_CLASSES = {
   // Structure: waldur-ui Card's parts, by data-slot.

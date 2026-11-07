@@ -8,7 +8,7 @@ This guide covers the application architecture, design patterns, and organizatio
 - **Vite** for build tooling and development server
 - **Redux** for legacy state management
 - **UI Router React** for navigation (state-based routing)
-- **React Bootstrap** (Bootstrap 5) for UI components
+- **Tailwind CSS v4 & Radix UI** (`waldur-ui`) for UI components
 - **React Final Form** for modern form handling
 - **ECharts** for data visualization
 - **Leaflet** with React Leaflet for mapping
@@ -18,7 +18,7 @@ This guide covers the application architecture, design patterns, and organizatio
 
 Check all major dependencies
 
-`yarn list react typescript vite redux @uirouter/react react-bootstrap react-final-form echarts leaflet @tanstack/react-query`
+`yarn list react typescript vite redux @uirouter/react react-final-form echarts leaflet @tanstack/react-query`
 
 Check specific package version
 
@@ -230,9 +230,9 @@ Rules:
 
 ### Button Component Architecture
 
-The application uses a unified button system to ensure consistent styling, behavior, and accessibility. **Direct Bootstrap Button imports and raw Bootstrap button markup are forbidden or deprecated** — use `BaseButton` (`waldur-ui`) or the appropriate specialized wrapper component instead.
+The application uses a unified button system to ensure consistent styling, behavior, and accessibility. Use `BaseButton` (`waldur-ui`) or the appropriate specialized wrapper component instead.
 
-`BaseButton` (`waldur-ui`) is a from-scratch Tailwind/shadcn component, not a Bootstrap wrapper. It natively provides tooltips (with `tooltipSide`), loading states (`pending`), icon-only layout/padding resets, responsive sizing (`sm`, `md`, `lg`), and design token variants. The specialized wrappers in `src/` (`SubmitButton`, `CloseDialogButton`, `SaveButton`, etc.) compose `BaseButton` directly.
+`BaseButton` (`waldur-ui`) natively provides tooltips (with `tooltipSide`), loading states (`pending`), icon-only layout/padding resets, responsive sizing (`sm`, `md`, `lg`), and design token variants. The specialized wrappers in `src/` (`SubmitButton`, `CloseDialogButton`, `SaveButton`, etc.) compose `BaseButton` directly.
 
 ```text
 BaseButton (from 'waldur-ui' — Tailwind/shadcn, general purpose actions, size="sm" | "md" | "lg")
@@ -268,34 +268,9 @@ BaseButton (from 'waldur-ui' — Tailwind/shadcn, general purpose actions, size=
 
 #### ESLint Enforcement
 
-Two mechanisms cover the two ways Bootstrap button styling reaches the tree.
+A `no-restricted-imports` entry (**error**, in `eslint.config.js`) blocks importing from retired UI packages, directing developers to `BaseButton`, `SubmitButton`, or `waldur-ui`.
 
-A plain `no-restricted-imports` entry (**error**, `eslint.config.js`'s
-`RESTRICTED_IMPORTS` array — the same mechanism already used to ban
-`Badge`/`Tooltip`/`OverlayTrigger`/`Popover`/`Alert` from `react-bootstrap`)
-catches direct imports — `import { Button } from 'react-bootstrap'` — for
-both `Button` and `DropdownButton`. It replaced two near-identical custom
-rules (`no-direct-bootstrap-button`, `no-direct-bootstrap-dropdown-button`)
-once their `ALLOWED_FILES` lists had shrunk to nothing: the migration's
-closing pass converted every remaining real `<Button>`/`<DropdownButton>`
-usage in the app, leaving zero call sites for either. A genuinely new
-exception belongs on the offending line as a standard
-`// eslint-disable-next-line no-restricted-imports -- <reason>`.
-
-`waldur-custom/no-bootstrap-button-markup` (**error**) catches the hand-rolled
-form — `<button className="btn btn-danger">` — which carries no import and so was
-invisible to the import rule. The tree has no remaining instances and the rule
-has no allowlist: `Link` builds its button classes from `buttonVariants()` via
-its `buttonVariant` prop, and `LoginButton` and `AssistantComposer`'s Send button
-are plain `BaseButton`s (`BaseButton` is forwardRef, so it works under
-`assistant-ui`'s `asChild`).
-`src/table/ActionsDropdown.tsx`'s row-action dropdown
-toggles were the last remaining hand-rolled usage in the shared component
-layer (as opposed to the scattered app-level instances above) — Phase F3
-converted their toggle buttons onto `buttonVariants()` from waldur-ui, so
-they no longer trigger this rule at all. The menu panel and rows have since
-moved off Bootstrap's `.dropdown-*` classes too, onto waldur-ui's `Menu` in
-the actions look (`ActionsMenu`).
+`waldur-custom/no-bootstrap-button-markup` (**error**) catches legacy button markup — `<button className="btn btn-danger">`. `Link` builds its button classes from `buttonVariants()` via its `buttonVariant` prop, and action menus use `waldur-ui`'s `Menu` in the actions look (`ActionsMenu`).
 
 ## Key Directories
 
@@ -315,7 +290,7 @@ the actions look (`ActionsMenu`).
 - `src/quotas/` - Resource quotas management
 - `src/theme/` - Theme management (dark/light mode)
 - `src/user/` - User management
-- `src/styles/bootstrap/` - Bootstrap / legacy SCSS styles
+- `src/styles/` - SCSS entry point and the legacy stylesheets
 
 ## Backend Integration
 

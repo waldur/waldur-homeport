@@ -147,15 +147,12 @@ export default tseslint
         'waldur-custom/no-bootstrap-form-control': 'error',
         // Zero instances remain: every progress bar is a waldur-ui Progress and
         // the .progress styles are deleted.
-        'waldur-custom/no-bootstrap-progress': 'error',
         // Zero instances remain: every dialog is waldur-ui's Modal and the
         // .modal / .btn-close styles are deleted.
-        'waldur-custom/no-bootstrap-modal': 'error',
         'waldur-custom/no-bootstrap-tabs': 'error',
         // Zero instances remain: layouts are Tailwind grid/flex, and Bootstrap's
         // grid and the .table gutter utilities are no longer compiled.
         'waldur-custom/no-bootstrap-grid': 'error',
-        'waldur-custom/no-bootstrap-breadcrumb': 'error',
         // A FormLabel outside a FormField names no control: use FormFieldset +
         // FormLegend for a group, FormHeading for a caption.
         'waldur-custom/no-orphan-form-label': 'error',
@@ -332,17 +329,6 @@ export default tseslint
       ignores: ['**/*.test.ts'],
       rules: {
         'waldur-custom/dynamic-tab-params': 'error',
-      },
-    },
-    {
-      // The table module renders in micro-apps without Bootstrap's CSS, so it
-      // must not use a class Bootstrap also emits with !important (#503).
-      // Zero instances remain here; visually-hidden is still
-      // used elsewhere in src.
-      files: ['src/table/**/*.{ts,tsx}'],
-      ignores: ['**/*.test.{ts,tsx}', '**/*.stories.tsx'],
-      rules: {
-        'waldur-custom/no-bootstrap-important-collision': 'error',
       },
     },
     {

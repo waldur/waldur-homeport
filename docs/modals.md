@@ -1,6 +1,6 @@
 # Modals
 
-Every dialog is waldur-ui's Modal (`packages/ui/src/Dialog/Modal.tsx`), a Radix Dialog drawn in the app's modal geometry. There is no Bootstrap modal any more: react-bootstrap's `Modal`, `CloseButton` and `ModalContext`, and the `.modal*` / `.btn-close` classes, are gone, and the `no-bootstrap-modal` lint rule keeps them out.
+Every dialog is waldur-ui's Modal (`packages/ui/src/Dialog/Modal.tsx`), a Radix Dialog drawn in the app's modal geometry. Legacy modal classes (`.modal*`, `.btn-close`) are retired, and `no-unknown-class` reports them in markup — including in `dialogClassName`, `bodyClassName` and other class-bearing props.
 
 The same component serves micro-apps: it has no app dependencies, and every length is in px, so it is the same size under the app's 13px root and a micro-app's 16px one.
 
@@ -97,13 +97,13 @@ Each part carries a `data-slot`: `modal-backdrop`, `modal` (the scrolling overla
 }
 ```
 
-Component stylesheets imported from TSX are unlayered, so they beat Tailwind utilities; Metronic SCSS is in the `bootstrap` layer and does not.
+Component stylesheets imported from TSX are unlayered, so they beat Tailwind utilities; legacy SCSS is in the `bootstrap` cascade layer and does not.
 
 Prefer props first: `bodyClassName="p-0"`, `headerClassName`, `footerClassName`. They go through `cn()`, so a padding class replaces the part's own instead of fighting it.
 
 ## Geometry
 
-The values are the old Bootstrap modal's as Metronic and the app restyled it: 12px radius, `--bg-primary`, a two-step shadow (`--modal-shadow-xs` / `--modal-shadow`), 24px padding (12px above the body under a header, 8px above the footer), an 18px/28px medium title, a 14px `text-quaternary` subtitle, and a 13px close glyph at half opacity. The backdrop is `--modal-backdrop-bg` with a 3px blur; the layers are `--z-index-modal-backdrop`/`--z-index-modal` (1050/1055) and `--z-index-confirm-backdrop`/`--z-index-confirm` (1060/1065), below popovers, menus and date pickers so those open over a dialog.
+The modal geometry uses: 12px radius, `--bg-primary`, a two-step shadow (`--modal-shadow-xs` / `--modal-shadow`), 24px padding (12px above the body under a header, 8px above the footer), an 18px/28px medium title, a 14px `text-quaternary` subtitle, and a 13px close glyph at half opacity. The backdrop is `--modal-backdrop-bg` with a 3px blur; the layers are `--z-index-modal-backdrop`/`--z-index-modal` (1050/1055) and `--z-index-confirm-backdrop`/`--z-index-confirm` (1060/1065), below popovers, menus and date pickers so those open over a dialog.
 
 ## Tests
 
