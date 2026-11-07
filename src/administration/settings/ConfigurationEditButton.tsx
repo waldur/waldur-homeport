@@ -1,5 +1,3 @@
-import { useCallback } from 'react';
-
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import { useModal } from '@/modal/actions';
@@ -14,32 +12,25 @@ export const ConfigurationEditButton = ({
   item,
   value,
   tooltip,
-  disabledReason,
+  warning,
 }: {
   item: any;
   value: any;
   tooltip: string;
-  disabledReason?: string;
+  // Shown above the field, such as that the next deploy reverts the change.
+  warning?: string;
 }) => {
   const { openDialog } = useModal();
-  const openFormDialog = useCallback(
-    () =>
-      openDialog(ConfigurationEditDialog, {
-        resolve: { item, initialValues: { value } },
-        size:
-          item.key === 'LOGIN_PAGE_LAYOUT' || item.type === 'markdown_field'
-            ? 'lg'
-            : 'md',
-      }),
-    [],
-  );
+  // Not memoized: the warning arrives with the setting sources, often after
+  // the first render.
+  const openFormDialog = () =>
+    openDialog(ConfigurationEditDialog, {
+      resolve: { item, initialValues: { value }, warning },
+      size:
+        item.key === 'LOGIN_PAGE_LAYOUT' || item.type === 'markdown_field'
+          ? 'lg'
+          : 'md',
+    });
 
-  return (
-    <CompactEditButton
-      onClick={openFormDialog}
-      tooltip={tooltip}
-      disabled={Boolean(disabledReason)}
-      disabledReason={disabledReason}
-    />
-  );
+  return <CompactEditButton onClick={openFormDialog} tooltip={tooltip} />;
 };

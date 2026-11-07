@@ -4,6 +4,8 @@ import {
   ConstanceSettings,
 } from 'waldur-js-client';
 
+import { translate } from '@/i18n';
+
 // The dashboard and the Setup dialog read the same status, so one response
 // serves both.
 export const useMatrixAppserviceStatus = ({ enabled = true } = {}) =>
@@ -49,6 +51,12 @@ export const LIVEKIT_DEPLOYMENT_KEYS = [
   'MATRIX_LIVEKIT_KEY',
   'MATRIX_LIVEKIT_SECRET',
 ];
+
+/** Why a key in `getDeploymentLockedKeys` cannot be edited. */
+export const getDeploymentLockedReason = () =>
+  translate(
+    'Set by the deployment on every deploy. Change it there and redeploy.',
+  );
 
 /**
  * The settings this page locks because the deployment writes them back on

@@ -1,6 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { overrideSettingsSourcesList } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { SettingsCard } from './SettingsCard';
@@ -21,10 +23,13 @@ const mockGroup: SettingGroupDescription = {
 describe('SettingsCard', () => {
   beforeEach(() => {
     vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+    vi.mocked(overrideSettingsSourcesList).mockResolvedValue({
+      data: [],
+    } as any);
   });
 
   it('renders a card from a single group object', () => {
-    render(
+    renderWithProviders(
       <SettingsCard
         group={mockGroup}
         values={{ SITE_NAME: 'My Custom Waldur' }}
@@ -37,7 +42,7 @@ describe('SettingsCard', () => {
   });
 
   it('renders custom header actions', () => {
-    render(
+    renderWithProviders(
       <SettingsCard
         group={mockGroup}
         values={{ SITE_NAME: 'My Custom Waldur' }}
@@ -51,7 +56,7 @@ describe('SettingsCard', () => {
   });
 
   it('supports legacy settingsSource prop', () => {
-    render(
+    renderWithProviders(
       <SettingsCard
         group={mockGroup}
         settingsSource={{ SITE_NAME: 'Legacy Prop Waldur' }}

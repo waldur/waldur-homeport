@@ -1,3 +1,5 @@
+import { isEqual } from 'es-toolkit';
+
 import { titleCase } from '@/core/utils';
 import { translate } from '@/i18n';
 
@@ -65,12 +67,9 @@ export const isSettingModified = (
     return value !== item.default;
   }
 
+  // Deep, so a dict stored with its keys in another order is not a change.
   if (Array.isArray(item.default) || typeof item.default === 'object') {
-    try {
-      return JSON.stringify(value) !== JSON.stringify(item.default);
-    } catch {
-      return false;
-    }
+    return !isEqual(value, item.default);
   }
 
   return value !== item.default;

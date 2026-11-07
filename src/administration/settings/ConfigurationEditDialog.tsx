@@ -78,6 +78,7 @@ interface ConfigurationEditDialogProps {
       options?: Array<{ value: string; label: string }>;
     };
     initialValues?: any;
+    warning?: string;
   };
 }
 
@@ -180,6 +181,15 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                 </>
               }
             >
+              {resolve.warning && (
+                <AlertItem
+                  type="floating"
+                  variant="warning"
+                  className="mb-4"
+                  title={translate('Reverted on the next deploy')}
+                  body={resolve.warning}
+                />
+              )}
               <FormGroup
                 label={item.type !== 'boolean' && item.description}
                 description={

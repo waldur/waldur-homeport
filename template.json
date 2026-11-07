@@ -11174,6 +11174,11 @@
       "action_type": "read"
     }
   },
+  "Carried over from django-constance": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Carry unsubmitted drafts over to the next round": {
     "context": {
       "feature_area": "configuration"
@@ -11624,6 +11629,11 @@
   "Changed": {
     "context": {
       "feature_area": "proposal"
+    }
+  },
+  "Changed by administrators": {
+    "context": {
+      "primary_ui_type": "title"
     }
   },
   "Changed by {name}": {
@@ -23971,6 +23981,11 @@
       "feature_area": "workflow-check"
     }
   },
+  "Every setting has its default value.": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Every submitted proposal, up to the decision.": {},
   "Every year service provider can report up to the amount requested by user.": {
     "context": {
@@ -35032,9 +35047,32 @@
       "feature_area": "access"
     }
   },
+  "Managed by deployment": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "Managed by deployment · {file}": {
+    "context": {
+      "variables": {
+        "file": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "Managed by staff": {
     "context": {
       "feature_area": "generated"
+    }
+  },
+  "Managed by the deployment ({file}). Change it in the deployment configuration.": {
+    "context": {
+      "variables": {
+        "file": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Managed by {source}. Last synced: {date}": {
@@ -40024,6 +40062,11 @@
       "feature_area": "details"
     }
   },
+  "No overridden settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "No participants in this room.": {
     "context": {
       "feature_area": "livekit"
@@ -43735,6 +43778,11 @@
       "feature_area": "assignments"
     }
   },
+  "Open branding settings": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Open call": {
     "context": {
       "feature_area": "transfer"
@@ -45717,6 +45765,11 @@
         }
       },
       "feature_area": "assignments"
+    }
+  },
+  "Overridden settings": {
+    "context": {
+      "feature_area": "administration"
     }
   },
   "Override keyword arguments merged on top of provider defaults for AI Assistant chat completion. Supported keys: temperature, top_p, top_k, max_tokens, max_completion_tokens, presence_penalty, frequency_penalty, repetition_penalty, stop, seed, reasoning_effort, extra_body. Leave empty to use provider defaults.": {},
@@ -52616,6 +52669,30 @@
       "feature_area": "metrics"
     }
   },
+  "Re-applied by deployment": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "Re-applied by the deployment ({file}) on every deploy: a change made here is reverted then.": {
+    "context": {
+      "variables": {
+        "file": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "Re-applied on deploy · {file}": {
+    "context": {
+      "variables": {
+        "file": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "settings"
+    }
+  },
   "Re-check": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -57154,6 +57231,11 @@
   "Revenue trend (12 months)": {
     "context": {
       "feature_area": "provider"
+    }
+  },
+  "Reverted on the next deploy": {
+    "context": {
+      "feature_area": "settings"
     }
   },
   "Review": {
@@ -62246,11 +62328,23 @@
       "feature_area": "cost-policies"
     }
   },
-  "Set by the deployment on every deploy. Change it there and redeploy.": {
+  "Set by Waldur": {
     "context": {
-      "feature_area": "matrix"
+      "primary_ui_type": "title"
     }
   },
+  "Set by deployment": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "settings"
+    }
+  },
+  "Set by management commands": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "Set by the deployment on every deploy. Change it there and redeploy.": {},
   "Set by the longest subscription requested.": {},
   "Set columns in {name} category": {
     "context": {

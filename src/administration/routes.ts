@@ -506,6 +506,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-settings-overrides',
+    url: 'settings-overrides/',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('./settings/SettingsOverrides').then((module) => ({
+        default: module.SettingsOverrides,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Overridden settings'),
+    },
+  },
+
+  {
     name: 'admin-custom-scripts-settings',
     url: 'custom-scripts/?setting',
     params: { setting: { dynamic: true } },
