@@ -27,7 +27,7 @@ export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
   props,
 ) => (
   <Tabs mount="active" defaultValue={props.components[0]?.type}>
-    <TabsList className="icon-align">
+    <TabsList className="[&_svg]:-mt-0.75">
       {props.components.map((component) => (
         <TabsTrigger
           key={component.type}

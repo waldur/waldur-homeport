@@ -50,24 +50,8 @@ export const PARTIALS = [
     scss: "@import '../legacy/mixins'; @import '../legacy/table-base';",
   },
   {
-    name: 'legacy/link-transition',
-    scss: "@import '../legacy/mixins'; @import '../legacy/link-transition';",
-  },
-  {
-    name: 'legacy/btn-no-focus',
-    scss: "@import '../legacy/mixins'; @import '../legacy/btn-no-focus';",
-  },
-  {
-    name: 'legacy/consent-dialog',
-    scss: "@import '../legacy/mixins'; @import '../legacy/consent-dialog';",
-  },
-  {
     name: 'legacy/base',
     scss: "@import '../legacy/mixins'; @import '../legacy/base';",
-  },
-  {
-    name: 'legacy/buttons',
-    scss: "@import '../legacy/mixins'; @import '../legacy/buttons';",
   },
   {
     name: 'legacy/content',
@@ -78,28 +62,12 @@ export const PARTIALS = [
     scss: "@import '../legacy/mixins'; @import '../legacy/file-upload';",
   },
   {
-    name: 'legacy/icon',
-    scss: "@import '../legacy/mixins'; @import '../legacy/icon';",
-  },
-  {
     name: 'legacy/landing',
     scss: "@import '../legacy/mixins'; @import '../legacy/landing';",
   },
   {
     name: 'legacy/table',
     scss: "@import '../legacy/mixins'; @import '../legacy/table';",
-  },
-  {
-    name: 'legacy/CopyToClipboardContainer',
-    scss: "@import '../legacy/mixins'; @import '../legacy/CopyToClipboardContainer';",
-  },
-  {
-    name: 'legacy/CodeBlock',
-    scss: "@import '../legacy/mixins'; @import '../legacy/CodeBlock';",
-  },
-  {
-    name: 'legacy/action-group',
-    scss: "@import '../legacy/mixins'; @import '../legacy/action-group';",
   },
   {
     name: 'legacy/ai-assistant/index',
@@ -112,10 +80,6 @@ export const PARTIALS = [
   {
     name: 'legacy/matrix/index',
     scss: "@import '../legacy/mixins'; @import '../legacy/matrix/index';",
-  },
-  {
-    name: 'legacy/tos',
-    scss: "@import '../legacy/mixins'; @import '../legacy/tos';",
   },
 
   // Unlayered LiveKit styles in index.scss

@@ -337,7 +337,7 @@ export default tseslint
     {
       // The table module renders in micro-apps without Bootstrap's CSS, so it
       // must not use a class Bootstrap also emits with !important (#503).
-      // Zero instances remain here; visually-hidden and btn-no-focus are still
+      // Zero instances remain here; visually-hidden is still
       // used elsewhere in src.
       files: ['src/table/**/*.{ts,tsx}'],
       ignores: ['**/*.test.{ts,tsx}', '**/*.stories.tsx'],

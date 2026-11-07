@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 import { RobotAccountDetails, SshKey } from 'waldur-js-client';
 
-import { CopyToClipboardContainer } from '@/core/CopyToClipboardContainer';
+import { CodeLine } from '@/core/CodeLine';
 import { translate } from '@/i18n';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
@@ -37,25 +37,27 @@ export const RobotAccountExpandable: FC<{ row: RobotAccountDetails }> = ({
                           </p>
                           <p>
                             {translate('Fingerprint (MD5)')}:{' '}
-                            <CopyToClipboardContainer
-                              value={key.fingerprint_md5}
-                            />
+                            <CodeLine variant="inline" copyable>
+                              {key.fingerprint_md5}
+                            </CodeLine>
                           </p>
                           <p>
                             {translate('Fingerprint (SHA256)')}:{' '}
-                            <CopyToClipboardContainer
-                              value={key.fingerprint_sha256}
-                            />
+                            <CodeLine variant="inline" copyable>
+                              {key.fingerprint_sha256}
+                            </CodeLine>
                           </p>
                           <p>
                             {translate('Fingerprint (SHA512)')}:{' '}
-                            <CopyToClipboardContainer
-                              value={key.fingerprint_sha512}
-                            />
+                            <CodeLine variant="inline" copyable>
+                              {key.fingerprint_sha512}
+                            </CodeLine>
                           </p>
                           <p>
                             {translate('Public key')}:{' '}
-                            <CopyToClipboardContainer value={key.public_key} />
+                            <CodeLine variant="inline" copyable>
+                              {key.public_key}
+                            </CodeLine>
                           </p>
                         </li>
                       ))}
@@ -75,19 +77,27 @@ export const RobotAccountExpandable: FC<{ row: RobotAccountDetails }> = ({
               <li key={index}>
                 <p>
                   {translate('Fingerprint (MD5)')}:{' '}
-                  <CopyToClipboardContainer value={value.md5} />
+                  <CodeLine variant="inline" copyable>
+                    {value.md5}
+                  </CodeLine>
                 </p>
                 <p>
                   {translate('Fingerprint (SHA256)')}:{' '}
-                  <CopyToClipboardContainer value={value.sha256} />
+                  <CodeLine variant="inline" copyable>
+                    {value.sha256}
+                  </CodeLine>
                 </p>
                 <p>
                   {translate('Fingerprint (SHA512)')}:{' '}
-                  <CopyToClipboardContainer value={value.sha512} />
+                  <CodeLine variant="inline" copyable>
+                    {value.sha512}
+                  </CodeLine>
                 </p>
                 <p>
                   {translate('Public key')}:{' '}
-                  <CopyToClipboardContainer value={row.keys[index]} />
+                  <CodeLine variant="inline" copyable>
+                    {row.keys[index]}
+                  </CodeLine>
                 </p>
               </li>
             ))}

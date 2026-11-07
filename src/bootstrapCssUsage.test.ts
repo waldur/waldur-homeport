@@ -313,8 +313,23 @@ describe('bootstrapCssUsage', () => {
   describe("Waldur's own partials", () => {
     const own = PARTIALS.filter((p) => p.scss.includes("'../legacy/"));
 
+    it('list exactly the files legacy/_index.scss imports, plus LiveKit', () => {
+      // A deleted partial must leave PARTIALS too, and a new one must join
+      // it, or its classes escape the usage report.
+      const index = readFileSync(
+        path.resolve(__dirname, 'styles/legacy/_index.scss'),
+        'utf8',
+      );
+      const imported = [...index.matchAll(/^@import '([^']+)';/gm)].map(
+        (m) => `legacy/${m[1]}`,
+      );
+      expect(own.map((p) => p.name).sort()).toEqual(
+        [...imported, 'legacy/matrix/call-livekit'].sort(),
+      );
+    });
+
     it("compile from _mixins.scss alone, not Bootstrap's _config.scss", () => {
-      expect(own.length).toBeGreaterThan(15);
+      expect(own).not.toHaveLength(0);
       for (const p of own) {
         expect(isDecoupled(p), p.name).toBe(true);
         expect(() => compilePartial(p.scss), p.name).not.toThrow();

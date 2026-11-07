@@ -1,7 +1,7 @@
 import { ArrowRightIcon, InfoIcon } from '@phosphor-icons/react';
 import { OrderDetails } from 'waldur-js-client';
 
-import { Card, CardContent } from 'waldur-ui';
+import { Card, CardContent, IconSquare } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
@@ -15,9 +15,9 @@ export const CostEstimatedChangeView = ({
 }) => (
   <Card bordered>
     <CardContent className="flex items-center font-medium p-4">
-      <div className="icon-square me-4">
+      <IconSquare className="me-4">
         <InfoIcon weight="bold" />
-      </div>
+      </IconSquare>
       <p className="mb-0 flex items-center">
         {message}
         {': '}

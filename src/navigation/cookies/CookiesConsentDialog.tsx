@@ -8,8 +8,6 @@ import { Link } from '@/core/Link';
 import { formatJsx, translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 
-import './CookiesConsent.css';
-
 interface OwnProps {
   resolve: { acceptAll; acceptEssential };
 }
@@ -45,7 +43,9 @@ export const CookiesConsentDialog: FC<OwnProps> = ({ resolve }) => {
             {translate(
               'For complete details, please see our <pp>Privacy policy</pp>.',
               {
-                pp: (s: string) => <Link state="about.privacy" label={s} />,
+                pp: (s: string) => (
+                  <Link state="about.privacy" label={s} className="relative" />
+                ),
               },
               formatJsx,
             )}
@@ -54,7 +54,6 @@ export const CookiesConsentDialog: FC<OwnProps> = ({ resolve }) => {
       }
       iconNode={<CookieIcon weight="bold" />}
       iconColor="warning"
-      className="consent-dialog"
       closeButton={false}
       bodyClassName="pt-0 pb-8"
       footer={

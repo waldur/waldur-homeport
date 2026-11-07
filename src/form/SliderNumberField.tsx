@@ -103,7 +103,7 @@ const BaseSliderNumberField: FC<BaseSliderNumberFieldProps> = ({
             onClick={() => change(Number(value) + 1 * Number(step || 1))}
             disabled={disabled}
             variant="tertiary-ghost"
-            className="plus-btn btn-no-focus"
+            className="plus-btn"
             size="sm"
           />
           <BaseButton
@@ -112,7 +112,7 @@ const BaseSliderNumberField: FC<BaseSliderNumberFieldProps> = ({
             onClick={() => change(Number(value) - 1 * Number(step || 1))}
             disabled={disabled}
             variant="tertiary-ghost"
-            className="minus-btn btn-no-focus icon-align"
+            className="minus-btn [&_svg]:-mt-0.75"
             size="sm"
           />
         </div>

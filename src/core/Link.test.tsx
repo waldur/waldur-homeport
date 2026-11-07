@@ -131,7 +131,7 @@ describe('Link', () => {
 
   it('keeps anchor styling when the caller only passes an unrelated btn-* class', () => {
     render(
-      <Link state="profile.details" className="btn-no-focus">
+      <Link state="profile.details" className="btn-unrelated">
         Profile
       </Link>,
     );

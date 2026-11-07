@@ -114,7 +114,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
                       onClick={() => form.change('invitation', null)}
                       iconNode={<XIcon weight="bold" />}
                       variant="secondary"
-                      className="btn-no-focus me-1.5"
+                      className="me-1.5 shadow-none!"
                       size="sm"
                     />
                     <div className="flex flex-wrap text-sm ellipsis">

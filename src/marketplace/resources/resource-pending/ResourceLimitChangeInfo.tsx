@@ -136,7 +136,7 @@ export const ResourceLimitChangeInfo = ({
                     <th>{translate('Current limit')}</th>
                     <th>{translate('Requested limit')}</th>
                     <th>{translate('Change')}</th>
-                    <th className="sm:w-2/12 icon-align">
+                    <th className="sm:w-2/12 [&_svg]:-mt-0.75">
                       {translate('Impact')}
                       <PriceTooltip />
                     </th>
@@ -145,7 +145,7 @@ export const ResourceLimitChangeInfo = ({
                 <tbody>
                   {data.components.map((component, index) => (
                     <tr key={index}>
-                      <td className="whitespace-nowrap icon-align">
+                      <td className="whitespace-nowrap [&_svg]:-mt-0.75">
                         {component.name}
                         <HelpIcon label={component.type} className="ms-1" />
                       </td>

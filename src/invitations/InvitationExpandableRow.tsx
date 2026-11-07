@@ -1,8 +1,8 @@
 import React from 'react';
 import { Invitation } from 'waldur-js-client';
 
+import { CodeLine } from '@/core/CodeLine';
 import { ENV } from '@/core/config';
-import { CopyToClipboardContainer } from '@/core/CopyToClipboardContainer';
 import { translate } from '@/i18n';
 import { formatRoleType } from '@/permissions/utils';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -15,7 +15,9 @@ export const InvitationExpandableRow: React.FC<{
   <ExpandableContainer hasMultiSelect>
     <p>
       <b>{translate('Invitation link')}: </b>
-      <CopyToClipboardContainer value={getInvitationLink(row)} />
+      <CodeLine variant="inline" copyable>
+        {getInvitationLink(row)}
+      </CodeLine>
     </p>
     {row.civil_number && (
       <p>

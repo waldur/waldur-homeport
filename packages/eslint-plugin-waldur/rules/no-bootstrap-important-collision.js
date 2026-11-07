@@ -8,8 +8,6 @@
  * only Bootstrap defines do nothing at all in a micro-app (#503):
  *
  *   visually-hidden   Bootstrap-only; visible there       → sr-only
- *   btn-no-focus      Bootstrap-only; BaseButton has no focus shadow and only
- *                     draws its ring on :focus-visible, so it is not needed
  *
  * Bootstrap generates no utility any more (#478): shadow and radius uses
  * moved to tokens, and require-border-color keeps a bare `border` coloured.
@@ -21,15 +19,9 @@
 
 import { notAClassList } from './class-name-tokens.js';
 
-/** Bootstrap's `!important` class → Tailwind replacement, or null for none. */
+/** Bootstrap's `!important` class → its Tailwind replacement. */
 const BOOTSTRAP_IMPORTANT_COLLISIONS = {
   'visually-hidden': 'sr-only',
-  'btn-no-focus': null,
-};
-
-const HINTS = {
-  'btn-no-focus':
-    'Remove it: BaseButton draws its focus ring only on :focus-visible.',
 };
 
 export default {
@@ -68,15 +60,10 @@ export default {
           messageId: 'collision',
           data: {
             key: token,
-            hint: replacement ? `Use ${replacement}.` : HINTS[token],
+            hint: `Use ${replacement}.`,
           },
-          fix: replacement
-            ? (fixer) =>
-                fixer.replaceTextRange(
-                  [start, start + token.length],
-                  replacement,
-                )
-            : null,
+          fix: (fixer) =>
+            fixer.replaceTextRange([start, start + token.length], replacement),
         });
       }
     };

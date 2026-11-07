@@ -145,7 +145,6 @@ const AllResultsTabContent = ({
               </h6>
               <BaseButton
                 variant="text-secondary"
-                className="btn-no-focus"
                 onClick={clearRecentSearches}
                 iconNode={<XIcon weight="bold" />}
                 label={translate('Clear')}

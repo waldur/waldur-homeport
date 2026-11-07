@@ -165,7 +165,7 @@ describe('ResourceActionsList', () => {
 
   it('leaves the provider group empty when every provider action is gated', () => {
     // The heading stays in the markup; an empty action list is what the
-    // .action-group:has(.action-list:empty) rule keys on to hide the group.
+    // group's has-[[data-slot=action-list]:empty]:hidden keys on to hide it.
     renderList({ providerResourceActions: [GatedAction] });
 
     expect(screen.getByText('Provider actions')).toBeInTheDocument();

@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import { useRef } from 'react';
 import Dropzone, { DropzoneOptions, DropzoneRef } from 'react-dropzone';
 
+import { IconSquare } from 'waldur-ui';
+
 import { formatJsx, translate } from '@/i18n';
 
 import './UploadContainer.scss';
@@ -63,15 +65,16 @@ export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
             />
             {/* A mouse shortcut beside the "Click to upload" button, which
                 is the one keyboard and screen-reader users get. */}
-            <button
-              type="button"
-              className="icon-square"
-              aria-hidden="true"
-              tabIndex={-1}
-              onClick={chooseFile}
-            >
-              <CloudArrowUpIcon size={16} weight="bold" />
-            </button>
+            <IconSquare asChild>
+              <button
+                type="button"
+                aria-hidden="true"
+                tabIndex={-1}
+                onClick={chooseFile}
+              >
+                <CloudArrowUpIcon size={16} weight="bold" />
+              </button>
+            </IconSquare>
             <div>
               {translate(
                 '<button>Click to upload</button> or drag and drop',

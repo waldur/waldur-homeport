@@ -48,6 +48,29 @@
   }
 }
 
+/* A wrap marker for a code line that soft-wraps instead of scrolling
+   (CodeBlock): a ↳ in the hanging indent of every row below the line's
+   first, so a wrap never reads as a new line. Pair it with the indent
+   (`ps-4 -indent-4`). The arrow is a mask over the muted text colour, one per
+   line box, so it needs no measuring; the path has no fill, which a mask
+   reads as opaque. */
+@utility code-wrap-marker {
+  position: relative;
+
+  /* stylelint-disable-next-line nesting-selector-no-missing-scoping-root -- @utility is the root: Tailwind expands & to the utility's class */
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    top: 1lh;
+    bottom: 0;
+    width: --spacing(4);
+    background-color: var(--text-quaternary);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 1h1.5v5.5H8v-2l3 2.75-3 2.75v-2H2z'/%3E%3C/svg%3E")
+      0 0 / 0.75em 1lh repeat-y;
+  }
+}
+
 /* The app's one focus ring, for everything that doesn't style its own —
    links, breadcrumbs, sidebar rows, anything with tabindex. In `base`, so
    Metronic's .btn ring (bootstrap layer) and the BaseButton variants
@@ -202,8 +225,23 @@
   html body {
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
     color: var(--text-primary);
     background-color: var(--bg-secondary);
+  }
+
+  /* A full-opacity rule in the secondary border colour, over the reboot's
+     faded currentColor. */
+  html hr {
+    background-color: var(--border-secondary);
+    opacity: 1;
+  }
+
+  /* Links fade between colours (Metronic's text component). */
+  a {
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
   }
 
   canvas {
@@ -240,10 +278,9 @@
   /* A code block in rendered markdown (a ``` fence): a tinted panel, so it
      stands apart from the text around it. Only a bare <pre>: a block with its
      own class (the AI assistant's .aui-md-pre, a highlighted language-*
-     fence) keeps its look, and so does CodePreview's $-prompt block, which
-     .code-block draws. The reboot (styles/legacy/_reboot.scss) sets its font,
-     size and bottom margin. */
-  .rich-text pre:not([class], .code-block pre) {
+     fence, CodePreview's CodeBlock) keeps its look. The reboot
+     (styles/legacy/_reboot.scss) sets its font, size and bottom margin. */
+  .rich-text pre:not([class]) {
     overflow-x: auto;
     background-color: var(--bg-tertiary);
     color: var(--text-primary);

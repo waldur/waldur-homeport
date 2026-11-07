@@ -1,7 +1,13 @@
 import { BuildingsIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 
-import { Card, CardContent, CardFooter, CardHeader } from 'waldur-ui';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  IconSquare,
+} from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -20,9 +26,9 @@ const ReportCard: FC<{ report: ReportDefinition }> = ({ report }) => {
       <CardContent className="flex flex-col gap-3 p-3">
         <div className="flex items-center gap-2.5">
           {Glyph && (
-            <div className="icon-square shrink-0">
+            <IconSquare className="shrink-0">
               <Glyph size={24} weight="bold" />
-            </div>
+            </IconSquare>
           )}
           <span className="text-primary text-base">{report.title}</span>
         </div>
