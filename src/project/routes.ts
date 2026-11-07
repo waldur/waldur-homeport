@@ -12,11 +12,17 @@ import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import { hasActiveProjectMatrixRoomInCache } from '@/matrix/chat/useProjectMatrixRooms';
 import { isMatrixChatEnabled } from '@/matrix/utils';
+import { isReadOnlyProjectReader } from '@/permissions/isReadOnlyProjectReader';
 import { canViewProjectTeam } from '@/permissions/teamVisibility';
-import { getProject, isStaffOrSupport } from '@/workspace/selectors';
+import { getProject, getUser, isStaffOrSupport } from '@/workspace/selectors';
 
 import { loadProject } from './resolve';
 import { canManageProject } from './settingsAccess';
+
+// A call manager reading what their call allocated holds no role on the
+// project: the settings and the audit log are closed to them.
+const isNotReadOnlyReader = (state) =>
+  !isReadOnlyProjectReader(getUser(state), getProject(state));
 
 export const states: StateDeclaration[] = [
   {
@@ -82,7 +88,9 @@ export const states: StateDeclaration[] = [
         default: module.ProjectManageContainer,
       })),
     ),
-    data: {},
+    data: {
+      permissions: [isNotReadOnlyReader],
+    },
   },
   {
     name: 'project-manage',
@@ -167,6 +175,7 @@ export const states: StateDeclaration[] = [
           !isFeatureVisible(
             MarketplaceFeatures.conceal_audit_log_from_end_users,
           ) || isStaffOrSupport(state),
+        isNotReadOnlyReader,
       ],
     },
   },

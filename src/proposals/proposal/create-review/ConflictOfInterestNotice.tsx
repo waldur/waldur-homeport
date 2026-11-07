@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { AlertItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { CoiDeclaration } from '@/proposals/coi-declaration/CoiDeclaration';
 import { ProposalReview } from '@/proposals/types';
 import { isReviewInFinalState } from '@/proposals/utils';
 
@@ -37,9 +38,21 @@ export const ConflictOfInterestNotice: FC<ConflictOfInterestNoticeProps> = ({
       type="floating"
       className="mb-4"
       title={translate('This call requires a conflict of interest declaration')}
-      body={translate(
-        'You will be asked to confirm you have no conflict of interest with this proposal before your review can be submitted. If you do have one, decline the review now rather than reading further.',
-      )}
+      body={
+        <>
+          {translate(
+            'You will be asked to confirm you have no conflict of interest with this proposal before your review can be submitted. If you do have one, decline the review now rather than reading further.',
+          )}
+          {review.coi_declaration_text ? (
+            <div className="mt-2.5">
+              <CoiDeclaration
+                text={review.coi_declaration_text}
+                fallback={null}
+              />
+            </div>
+          ) : null}
+        </>
+      }
     />
   );
 };

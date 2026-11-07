@@ -3,11 +3,13 @@ import { FC } from 'react';
 import { PropertyItem, PropertyList } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
+import { formatUsageValue } from '@/core/formatNumber';
 import { Panel } from '@/core/Panel';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
+import { getRequestedLines } from '@/proposals/provider-calls/requestedLines';
 
 import { getLongestPrepaidMonths } from './prepaidDuration';
 import { formatProjectDuration, getProjectDuration } from './projectDuration';
@@ -17,23 +19,73 @@ interface ProposalCostTotalProps {
   rows: any[];
   /** The call's fixed duration, stated when no subscription sets a longer one. */
   fixedDurationDays?: number | null;
+  /** The length chosen from the call's list, in months, where it offers one. */
+  chosenDurationMonths?: number | null;
   /** Fills its container instead of sitting against the table's right edge. */
   panel?: boolean;
   /** The panel's heading; says what is totalled when it is not the request. */
   title?: string;
+  /** Lists the amounts per offering as well: for an offering team, which
+   *  reads only its own offerings and may see no prices at all. */
+  listsAmounts?: boolean;
 }
+
+/** The amounts asked of (or awarded on) each offering, grouped by offering. */
+const AmountsByOffering: FC<{ rows: any[] }> = ({ rows }) => {
+  const byOffering = new Map<string, { name: string; rows: any[] }>();
+  for (const row of rows) {
+    const offering = row.requested_offering;
+    const key = offering?.uuid ?? '';
+    const group = byOffering.get(key) ?? {
+      name: offering?.offering_name ?? '',
+      rows: [],
+    };
+    group.rows.push(row);
+    byOffering.set(key, group);
+  }
+  return (
+    <>
+      {[...byOffering.entries()].map(([key, group]) => {
+        const lines = group.rows.flatMap((row) =>
+          getRequestedLines(row.limits, row.requested_offering?.components),
+        );
+        return lines.length ? (
+          <PropertyItem
+            key={key}
+            label={group.name}
+            value={
+              <ul className="list-unstyled mb-0">
+                {lines.map((line, i) => (
+                  <li key={`${line.key}-${i}`}>
+                    <span className="text-quaternary">{line.label}: </span>
+                    {[formatUsageValue(line.amount), line.unit]
+                      .filter(Boolean)
+                      .join(' ')}
+                  </li>
+                ))}
+              </ul>
+            }
+          />
+        ) : null;
+      })}
+    </>
+  );
+};
 
 /** What the proposal adds up to, and how long the project it awards will run. */
 export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
   rows,
   fixedDurationDays,
+  chosenDurationMonths,
   panel,
   title,
+  listsAmounts,
 }) => {
   const total = sumRequestedResourceCosts(rows ?? []);
   const duration = getProjectDuration(
     getLongestPrepaidMonths(rows),
     fixedDurationDays,
+    chosenDurationMonths,
   );
   const concealed = isFeatureVisible(MarketplaceFeatures.conceal_prices);
   // Priced at zero is not the same as priced: an offering billed purely on
@@ -46,13 +98,15 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
     total.known &&
     !concealed &&
     Boolean(total.monthly || total.oneTime);
-  if (!showsFigures && !duration) {
+  const showsAmounts = Boolean(listsAmounts) && rows?.length > 0;
+  if (!showsFigures && !duration && !showsAmounts) {
     return null;
   }
 
   const body = (
     <>
       <PropertyList variant="summary" stacked space={2.5}>
+        {showsAmounts && <AmountsByOffering rows={rows} />}
         {showsFigures && (
           <>
             {Boolean(total.monthly) && (

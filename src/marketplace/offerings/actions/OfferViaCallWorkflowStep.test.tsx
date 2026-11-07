@@ -30,36 +30,20 @@ describe('WorkflowStepsField', () => {
     expect(checkbox('Allocation decision').disabled).toBe(true);
     expect(checkbox('Administrative check').checked).toBe(false);
     expect(checkbox('Expert review').checked).toBe(false);
-    // Provisioned by the allocation decision's own flag, so it is not a choice
-    // that can be made here.
+    // Not seeded on a new call; added in call configuration instead.
     expect(screen.queryByText('Award response')).toBeNull();
   });
 
-  // Matches how the call configuration screens gate dependents: the panel
-  // review consolidates expert reviews, so it cannot be enabled alone — but
-  // nor is an expert review silently added on the operator's behalf.
-  it('blocks a step until the step it depends on is enabled', async () => {
+  // The backend no longer ties one step to another: any of them can be
+  // switched on alone.
+  it('lets any optional step be switched on by itself', async () => {
     const user = userEvent.setup();
     renderField();
-
-    expect(checkbox('Panel review').disabled).toBe(true);
-
-    await user.click(checkbox('Expert review'));
 
     expect(checkbox('Panel review').disabled).toBe(false);
-    expect(checkbox('Panel review').checked).toBe(false);
-  });
-
-  it('drops the steps that needed a step being disabled', async () => {
-    const user = userEvent.setup();
-    renderField();
-
-    await user.click(checkbox('Expert review'));
     await user.click(checkbox('Panel review'));
-    await user.click(checkbox('Expert review'));
 
+    expect(checkbox('Panel review').checked).toBe(true);
     expect(checkbox('Expert review').checked).toBe(false);
-    expect(checkbox('Panel review').checked).toBe(false);
-    expect(checkbox('Panel review').disabled).toBe(true);
   });
 });

@@ -56,15 +56,17 @@ const StaticResourceSummary: FunctionComponent<{ row: Resource }> = ({
         }
       />
 
-      <PropertyItem
-        label={translate('Options')}
-        value={
-          row.options &&
-          Object.keys(row.options).length > 0 && (
-            <KeyValueButton items={row.options} title={translate('Options')} />
-          )
-        }
-      />
+      {row.options && Object.keys(row.options).length > 0 && (
+        <PropertyItem
+          label={translate('Resource options')}
+          value={
+            <KeyValueButton
+              items={row.options}
+              title={translate('Resource options')}
+            />
+          }
+        />
+      )}
     </ExpandableContainer>
   );
 };

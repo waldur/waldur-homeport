@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   marketplaceProviderResourcesOfferingRetrieve,
   marketplaceResourcesOfferingRetrieve,
+  marketplacePublicOfferingsRetrieve,
   marketplaceComponentUsagesList,
   marketplaceComponentUserUsagesList,
   OfferingComponent,
@@ -518,6 +519,33 @@ describe('ResourceUsageChart', () => {
       await expect(getComponentsAndUsages('resource-uuid', 1)).rejects.toThrow(
         'Error while getting offering, Internal Server Error',
       );
+    });
+
+    it("falls back to the offering's public view when the resource one is refused", async () => {
+      const component = { type: 'cpu', name: 'CPU', billing_type: 'usage' };
+      vi.mocked(marketplaceResourcesOfferingRetrieve).mockRejectedValue({
+        response: { status: 404 },
+      });
+      vi.mocked(marketplacePublicOfferingsRetrieve).mockResolvedValue({
+        data: { components: [component] },
+      } as any);
+      vi.mocked(marketplaceComponentUsagesList).mockResolvedValue({
+        data: [],
+        response: { headers: new Headers() },
+      } as any);
+      vi.mocked(marketplaceComponentUserUsagesList).mockResolvedValue({
+        data: [],
+        response: { headers: new Headers() },
+      } as any);
+
+      const result = await getComponentsAndUsages('resource-uuid', 1, {
+        offeringUuid: 'offering-uuid',
+      });
+
+      expect(marketplacePublicOfferingsRetrieve).toHaveBeenCalledWith({
+        path: { uuid: 'offering-uuid' },
+      });
+      expect(result.components).toEqual([component]);
     });
 
     it('should return empty lists when usage list retrieval fails with 404', async () => {

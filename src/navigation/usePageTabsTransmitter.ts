@@ -12,16 +12,25 @@ export const usePageTabsTransmitter = (tabs: PageBarTab[]) => {
       tab.children && !tab.component
         ? {
             title: tab.title,
+            count: tab.count,
+            countVariant: tab.countVariant,
+            countLabel: tab.countLabel,
             disabled: tab.disabled,
             disabledReason: tab.disabledReason,
             visible: tab.visible,
             redirectTo: tab.defaultKey
-              ? { state: state.name, params: { tab: tab.defaultKey } }
+              ? {
+                  state: state.name,
+                  params: { ...tab.linkParams, tab: tab.defaultKey },
+                }
               : undefined,
             children: tab.children.map((child) => ({
               title: child.title,
+              count: child.count,
+              countVariant: child.countVariant,
+              countLabel: child.countLabel,
               to: state.name,
-              params: { tab: child.key },
+              params: { ...child.linkParams, tab: child.key },
               disabled: child.disabled,
               disabledReason: child.disabledReason,
               visible: child.visible,
@@ -29,8 +38,11 @@ export const usePageTabsTransmitter = (tabs: PageBarTab[]) => {
           }
         : {
             title: tab.title,
+            count: tab.count,
+            countVariant: tab.countVariant,
+            countLabel: tab.countLabel,
             to: state.name,
-            params: { tab: tab.key },
+            params: { ...tab.linkParams, tab: tab.key },
             disabled: tab.disabled,
             disabledReason: tab.disabledReason,
             visible: tab.visible,

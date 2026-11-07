@@ -1,508 +1,405 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { proposalProtectedCallsWorkflowStepsPartialUpdate } from 'waldur-js-client';
+import {
+  proposalProtectedCallsStepChecklistsList,
+  proposalProtectedCallsWorkflowStepKindsList,
+  proposalProtectedCallsWorkflowStepsList,
+  proposalProtectedCallsWorkflowStepsPartialUpdate,
+} from 'waldur-js-client';
 
-import { useModal } from '@/modal/actions';
+import { STEP_KINDS } from '@/proposals/workflow/stepKinds.fixture';
 import { renderWithProviders } from '@/test/harness';
 
 import { WorkflowStepConfigDialog } from './WorkflowStepConfigDialog';
 
-const renderDialog = (props: any) => {
-  // `steps` is only consulted by the enable switch; tests that say nothing
-  // about dependencies get an empty set.
-  const resolve = { steps: [], ...props.resolve };
-  renderWithProviders(
-    <WorkflowStepConfigDialog {...props} resolve={resolve} />,
-  );
+const call = { uuid: 'call-uuid' } as any;
+
+const assessment = {
+  uuid: 'report-uuid',
+  key: 'individual-report',
+  kind: 'assessment',
+  name: 'Individual report',
+  description: '',
+  outcome_set: 'reviewed',
+  completer: 'reviewer',
+  on_negative: 'reject',
+  is_enabled: true,
+  is_mandatory: false,
+  is_allocation_decision: false,
+  transition_mode: 'automatic_on_completion',
+  criteria: [{ name: 'Impact', order: 0 }],
+} as any;
+
+const allocationDecision = {
+  uuid: 'decision-uuid',
+  key: 'allocation_decision',
+  kind: 'decision',
+  name: 'Allocation decision',
+  outcome_set: 'approval',
+  completer: 'call_manager',
+  on_negative: 'reject',
+  is_enabled: true,
+  is_mandatory: true,
+  is_allocation_decision: true,
+  allocation_time: 'fixed_date',
+  transition_mode: 'automatic_on_completion',
+} as any;
+
+const panelDecision = {
+  ...allocationDecision,
+  uuid: 'panel-uuid',
+  key: 'panel_review',
+  name: 'Panel review',
+  completer: 'panel_member',
+  is_mandatory: false,
+  is_allocation_decision: false,
+  allocation_time: 'on_decision',
 };
+
+const awardResponse = {
+  uuid: 'award-uuid',
+  key: 'award_response',
+  kind: 'applicant_action',
+  name: 'Award response',
+  outcome_set: 'acceptance',
+  completer: 'applicant',
+  on_negative: 'cancel',
+  is_enabled: true,
+  is_mandatory: false,
+  is_allocation_decision: false,
+  transition_mode: 'automatic_on_completion',
+} as any;
+
+const responseToReviews = {
+  ...awardResponse,
+  uuid: 'response-uuid',
+  key: 'response_to_reviews',
+  name: 'Response to reviews',
+  outcome_set: 'submitted',
+  order: 5,
+  input_steps: ['report-uuid'],
+} as any;
+
+const renderDialog = (step, refetch = vi.fn(), forCall = call) =>
+  renderWithProviders(
+    <WorkflowStepConfigDialog resolve={{ call: forCall, step, refetch }} />,
+  );
+
+const save = (user) =>
+  user.click(screen.getByRole('button', { name: /Save/i }));
+
+// Opens a page of the dialog from the indicator along its top.
+const goToPage = (user, name: string) =>
+  user.click(screen.getByRole('button', { name: new RegExp(`^${name}`) }));
 
 describe('WorkflowStepConfigDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-  });
-
-  const baseCall = { uuid: 'call-uuid' };
-  const baseStep = {
-    uuid: 'step-uuid',
-    step: 'administrative_check',
-  };
-
-  it('renders generic fields correctly for basic steps', async () => {
-    renderDialog({
-      resolve: {
-        call: baseCall,
-        step: baseStep,
-        refetch: vi.fn(),
-      },
-    });
-
-    expect(
-      await screen.findByText(/Configure step: Administrative check/i),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByLabelText(/Estimated duration \(days\)/i),
-    ).toBeInTheDocument();
-    expect(screen.getByText(/Responsible role/i)).toBeInTheDocument();
-    expect(screen.getByText(/Transition mode options/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Applicant visible/i)).toBeInTheDocument();
-
-    // Ensure extras are not rendered
-    expect(
-      screen.queryByLabelText(/Minimum reviewers/i),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByLabelText(/Include award response/i),
-    ).not.toBeInTheDocument();
-  });
-
-  it('renders review extra fields for expert_review step', async () => {
-    renderDialog({
-      resolve: {
-        call: baseCall,
-        step: { ...baseStep, step: 'expert_review' },
-        refetch: vi.fn(),
-      },
-    });
-
-    expect(
-      await screen.findByText(/Configure criteria for Expert review/i),
-    ).toBeInTheDocument();
-    expect(screen.getByLabelText(/Minimum reviewers/i)).toBeInTheDocument();
-    expect(
-      screen.getByLabelText(/Minimum score threshold/i),
-    ).toBeInTheDocument();
-    expect(screen.getByLabelText(/Blind review/i)).toBeInTheDocument();
-    expect(
-      screen.getByLabelText(/Conflict of interest confirmation/i),
-    ).toBeInTheDocument();
-  });
-
-  it('renders allocation extra fields for allocation_decision step', async () => {
-    renderDialog({
-      resolve: {
-        call: baseCall,
-        step: { ...baseStep, step: 'allocation_decision' },
-        refetch: vi.fn(),
-      },
-    });
-
-    expect(
-      await screen.findByText(/Configure step: Allocation decision/i),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByLabelText(/Include award response/i),
-    ).toBeInTheDocument();
-  });
-
-  it('submits generic form data correctly', async () => {
-    const user = userEvent.setup();
-    const refetch = vi.fn();
+    vi.mocked(proposalProtectedCallsWorkflowStepKindsList).mockResolvedValue({
+      data: STEP_KINDS,
+    } as any);
+    vi.mocked(proposalProtectedCallsStepChecklistsList).mockResolvedValue({
+      data: [],
+    } as any);
     vi.mocked(
       proposalProtectedCallsWorkflowStepsPartialUpdate,
     ).mockResolvedValue({} as any);
+  });
 
-    renderDialog({
-      resolve: {
-        call: baseCall,
-        step: {
-          ...baseStep,
-          duration_in_days: 10,
-          responsible_role: 'call_manager',
-          transition_mode: 'automatic_on_completion',
-          applicant_visible: false,
-        },
-        refetch,
-      },
-    });
+  it('renames the step', async () => {
+    const user = userEvent.setup();
+    const refetch = vi.fn();
+    renderDialog(assessment, refetch);
 
-    expect(
-      await screen.findByText(/Configure step: Administrative check/i),
-    ).toBeInTheDocument();
+    const name = await screen.findByLabelText(/^Name/);
+    await user.clear(name);
+    await user.type(name, 'Reviewer report');
+    await save(user);
 
-    await user.clear(screen.getByLabelText(/Estimated duration \(days\)/i));
-    await user.type(
-      screen.getByLabelText(/Estimated duration \(days\)/i),
-      '20',
+    await waitFor(() =>
+      expect(
+        proposalProtectedCallsWorkflowStepsPartialUpdate,
+      ).toHaveBeenCalledWith({
+        path: { uuid: 'call-uuid', obj_uuid: 'report-uuid' },
+        body: expect.objectContaining({ name: 'Reviewer report' }),
+      }),
     );
-
-    await user.click(screen.getByLabelText(/Applicant visible/i));
-
-    const submitBtn = screen.getByRole('button', { name: /Save/i });
-    await user.click(submitBtn);
-
-    await waitFor(() => {
-      expect(
-        proposalProtectedCallsWorkflowStepsPartialUpdate,
-      ).toHaveBeenCalledWith(
-        expect.objectContaining({
-          path: { uuid: 'call-uuid', obj_uuid: 'step-uuid' },
-          body: expect.objectContaining({
-            duration_in_days: '20',
-            applicant_visible: true,
-            responsible_role: 'call_manager',
-            transition_mode: 'automatic_on_completion',
-          }),
-        }),
-      );
-      expect(refetch).toHaveBeenCalled();
-    });
+    const { body } = vi.mocked(proposalProtectedCallsWorkflowStepsPartialUpdate)
+      .mock.calls[0][0];
+    // The kind is fixed once the step exists, and the switch was untouched.
+    expect(body).not.toHaveProperty('kind');
+    expect(body).not.toHaveProperty('is_enabled');
+    expect(refetch).toHaveBeenCalled();
   });
 
-  it('submits review extra fields correctly', async () => {
+  it("shows an assessment's review settings and criteria only", async () => {
     const user = userEvent.setup();
-    const refetch = vi.fn();
-    vi.mocked(
-      proposalProtectedCallsWorkflowStepsPartialUpdate,
-    ).mockResolvedValue({} as any);
-
-    renderDialog({
-      resolve: {
-        call: baseCall,
-        step: {
-          ...baseStep,
-          step: 'expert_review',
-          duration_in_days: 10,
-          responsible_role: 'reviewer',
-          transition_mode: 'manual',
-          applicant_visible: false,
-          min_reviewers: 1,
-          min_score_threshold: '5.0',
-          blind_review: false,
-          requires_coi_confirmation: false,
-        },
-        refetch,
-      },
-    });
+    renderDialog(assessment);
 
     expect(
-      await screen.findByText(/Configure criteria for Expert review/i),
+      await screen.findByText('Configure step: Individual report'),
     ).toBeInTheDocument();
+    await screen.findByLabelText(/^Name/);
+    await goToPage(user, 'Participants');
+    expect(await screen.findByLabelText(/Minimum contributions/)).toBeVisible();
+    expect(screen.getByLabelText(/Maximum contributions/)).toBeVisible();
+    expect(
+      screen.getByLabelText(/One contribution per requested offering/),
+    ).toBeVisible();
+    await goToPage(user, 'Outcome and review');
+    expect(screen.getByText('Criteria')).toBeVisible();
+    expect(screen.getByLabelText(/Blind review/)).toBeVisible();
+    expect(screen.queryByLabelText(/Allocation decision/)).toBeNull();
+    expect(screen.queryByText('Allocation timing')).toBeNull();
+  });
 
-    await user.click(screen.getByLabelText(/Blind review/i));
+  it('offers allocation timing on the allocation decision, with no switch to turn it off', async () => {
+    const user = userEvent.setup();
+    renderDialog(allocationDecision);
 
-    const submitBtn = screen.getByRole('button', { name: /Save/i });
-    await user.click(submitBtn);
+    await screen.findByLabelText(/^Name/);
+    await goToPage(user, 'Timing');
+    expect(await screen.findByText('Allocation timing')).toBeVisible();
+    expect(screen.queryByText('Criteria')).toBeNull();
+    expect(screen.queryByLabelText(/Step enabled/)).toBeNull();
+  });
 
-    await waitFor(() => {
+  it('offers no allocation timing on any other decision', async () => {
+    renderDialog(panelDecision);
+
+    expect(
+      await screen.findByLabelText(/Allocation decision/),
+    ).toBeInTheDocument();
+    expect(screen.queryByText('Allocation timing')).toBeNull();
+    expect(screen.getByLabelText(/Step enabled/)).toBeInTheDocument();
+  });
+
+  // The award toggle is gone: the award response is an applicant step like
+  // any other, switched and configured on its own row.
+  it('configures the award response as an ordinary applicant step', async () => {
+    const user = userEvent.setup();
+    renderDialog(awardResponse);
+
+    const enabled = await screen.findByLabelText(/Step enabled/);
+    expect(screen.queryByText(/Include award response/i)).toBeNull();
+    expect(screen.queryByText('Criteria')).toBeNull();
+
+    await user.click(enabled);
+    await save(user);
+
+    await waitFor(() =>
       expect(
         proposalProtectedCallsWorkflowStepsPartialUpdate,
-      ).toHaveBeenCalledWith(
-        expect.objectContaining({
-          path: { uuid: 'call-uuid', obj_uuid: 'step-uuid' },
-          body: expect.objectContaining({
-            blind_review: true,
-            min_reviewers: 1,
-            min_score_threshold: '5.0',
-          }),
+      ).toHaveBeenCalledWith({
+        path: { uuid: 'call-uuid', obj_uuid: 'award-uuid' },
+        body: expect.objectContaining({
+          is_enabled: false,
+          outcome_set: 'acceptance',
+          on_negative: 'cancel',
         }),
+      }),
+    );
+  });
+
+  // An applicant step reads its inputs whatever the call says about
+  // showing reviews, so the editor says so when it takes hidden reviews.
+  describe('on an applicant step taking reviews as input', () => {
+    const hiddenReviewsWarning =
+      'Applicants will see these reviews while they respond, even though this call hides reviews.';
+
+    beforeEach(() => {
+      vi.mocked(proposalProtectedCallsWorkflowStepsList).mockResolvedValue({
+        data: [{ ...assessment, order: 3 }, responseToReviews],
+      } as any);
+    });
+
+    it('warns when the call hides reviews from applicants', async () => {
+      renderDialog(responseToReviews, vi.fn(), {
+        uuid: 'call-uuid',
+        reviews_visible_to_submitters: false,
+      });
+
+      const user = userEvent.setup();
+      await screen.findByLabelText(/^Name/);
+      await goToPage(user, 'Inputs and visibility');
+      expect(await screen.findByText(hiddenReviewsWarning)).toBeVisible();
+    });
+
+    it('says nothing when the call shows reviews to applicants', async () => {
+      renderDialog(responseToReviews, vi.fn(), {
+        uuid: 'call-uuid',
+        reviews_visible_to_submitters: true,
+      });
+
+      await screen.findByLabelText(/Input steps/);
+      await waitFor(() =>
+        expect(proposalProtectedCallsWorkflowStepsList).toHaveBeenCalled(),
       );
+      expect(screen.queryByText(hiddenReviewsWarning)).toBeNull();
     });
   });
-  describe('enable switch', () => {
-    const disabledStep = {
-      ...baseStep,
-      step: 'technical_assessment',
-      is_enabled: false,
-      responsible_role: 'offering_manager',
-      transition_mode: 'automatic_on_completion',
-    };
 
-    it('turns a disabled step on from the dialog the user configures it in', async () => {
-      const user = userEvent.setup();
-      vi.mocked(
-        proposalProtectedCallsWorkflowStepsPartialUpdate,
-      ).mockResolvedValue({} as any);
-
-      renderDialog({
-        resolve: {
-          call: baseCall,
-          step: disabledStep,
-          steps: [disabledStep],
-          refetch: vi.fn(),
-        },
-      });
-
-      const toggle = await screen.findByLabelText(/Step enabled/i);
-      expect(toggle).not.toBeChecked();
-
-      await user.click(toggle);
-      await user.click(screen.getByRole('button', { name: /Save/i }));
-
-      await waitFor(() =>
-        expect(
-          proposalProtectedCallsWorkflowStepsPartialUpdate,
-        ).toHaveBeenCalledWith(
-          expect.objectContaining({
-            path: { uuid: 'call-uuid', obj_uuid: 'step-uuid' },
-            body: expect.objectContaining({ is_enabled: true }),
-          }),
-        ),
-      );
+  // The backend refuses to move the allocation decision on an active call.
+  it('keeps the allocation decision flag fixed on an active call', async () => {
+    renderDialog(panelDecision, vi.fn(), {
+      uuid: 'call-uuid',
+      state: 'active',
     });
 
-    it('leaves is_enabled out of the payload when the switch is untouched', async () => {
-      const user = userEvent.setup();
-      vi.mocked(
-        proposalProtectedCallsWorkflowStepsPartialUpdate,
-      ).mockResolvedValue({} as any);
+    const flag = await screen.findByLabelText(/Allocation decision/);
+    expect(flag).toBeDisabled();
+    expect(
+      screen.getByText(
+        'The call is active, so its allocation decision stays on the step it is on.',
+      ),
+    ).toBeInTheDocument();
+  });
 
-      renderDialog({
-        resolve: {
-          call: baseCall,
-          step: disabledStep,
-          steps: [disabledStep],
-          refetch: vi.fn(),
-        },
-      });
+  it('refuses a second allocation decision with the reason inside the dialog', async () => {
+    const user = userEvent.setup();
+    vi.mocked(
+      proposalProtectedCallsWorkflowStepsPartialUpdate,
+    ).mockRejectedValue({
+      is_allocation_decision: [
+        'The call already has an allocation decision step.',
+      ],
+      status: 400,
+      response: { status: 400 },
+    });
+    renderDialog(panelDecision);
 
-      await user.type(
-        await screen.findByLabelText(/Estimated duration \(days\)/i),
-        '7',
-      );
-      await user.click(screen.getByRole('button', { name: /Save/i }));
+    await user.click(await screen.findByLabelText(/Allocation decision/));
+    await save(user);
 
-      // Saving an unrelated field must not re-assert the enabled state, which
-      // would clobber a concurrent disable by somebody else.
-      await waitFor(() =>
-        expect(
-          proposalProtectedCallsWorkflowStepsPartialUpdate,
-        ).toHaveBeenCalled(),
-      );
-      const body = vi.mocked(proposalProtectedCallsWorkflowStepsPartialUpdate)
-        .mock.calls[0][0].body;
-      expect(body).not.toHaveProperty('is_enabled');
+    // In the banner at the top, and under the flag itself.
+    expect(
+      await screen.findAllByText(
+        'The call already has an allocation decision step.',
+      ),
+    ).toHaveLength(2);
+  });
+
+  it("offers the forms of the call's organisation only", async () => {
+    renderDialog(assessment, vi.fn(), {
+      uuid: 'call-uuid',
+      customer_uuid: 'customer-uuid',
     });
 
-    it('refuses to enable a step whose dependency is disabled', async () => {
-      const expert = {
-        uuid: 'expert-uuid',
-        step: 'expert_review',
-        is_enabled: false,
-      };
-      const panel = {
-        ...baseStep,
-        step: 'panel_review',
-        is_enabled: false,
-        responsible_role: 'panel_member',
-      };
+    expect(await screen.findByText('Checklist')).toBeInTheDocument();
+    await waitFor(() =>
+      expect(proposalProtectedCallsStepChecklistsList).toHaveBeenCalledWith({
+        query: { customer_uuid: 'customer-uuid' },
+      }),
+    );
+  });
 
-      renderDialog({
-        resolve: {
-          call: baseCall,
-          step: panel,
-          steps: [expert, panel],
-          refetch: vi.fn(),
-        },
-      });
-
-      expect(await screen.findByLabelText(/Step enabled/i)).toBeDisabled();
-      expect(
-        screen.getByText(/Enable Expert review first\./i),
-      ).toBeInTheDocument();
+  it('shows a refused form under the checklist field', async () => {
+    const user = userEvent.setup();
+    vi.mocked(
+      proposalProtectedCallsWorkflowStepsPartialUpdate,
+    ).mockRejectedValue({
+      checklist: ['This form belongs to another organisation.'],
+      status: 400,
+      response: { status: 400 },
     });
+    renderDialog(assessment);
 
-    const expertWithPanel = () => {
-      const expert = {
-        ...baseStep,
-        step: 'expert_review',
-        is_enabled: true,
-        responsible_role: 'reviewer',
-      };
-      const panel = {
-        uuid: 'panel-uuid',
-        step: 'panel_review',
-        is_enabled: true,
-      };
-      return { expert, panel };
-    };
+    const name = await screen.findByLabelText(/^Name/);
+    await user.type(name, ' 2');
+    await save(user);
 
-    it('warns before a disable takes its dependents with it', async () => {
-      const user = userEvent.setup();
-      const confirmMock = vi.mocked(useModal().confirm);
-      vi.mocked(
-        proposalProtectedCallsWorkflowStepsPartialUpdate,
-      ).mockResolvedValue({} as any);
-      const { expert, panel } = expertWithPanel();
+    // In the banner at the top, and under the checklist field, whose page
+    // the dialog opens and flags.
+    expect(
+      await screen.findAllByText('This form belongs to another organisation.'),
+    ).toHaveLength(2);
+    await waitFor(() =>
+      expect(screen.getByLabelText(/^Checklist$/)).toBeVisible(),
+    );
+    expect(name).not.toBeVisible();
+    expect(
+      screen.getByRole('button', { name: /^Outcome and review.*has errors/ }),
+    ).toBeInTheDocument();
+  });
 
-      renderDialog({
-        resolve: {
-          call: baseCall,
-          step: expert,
-          steps: [expert, panel],
-          refetch: vi.fn(),
-        },
-      });
+  it('saves from any page', async () => {
+    const user = userEvent.setup();
+    renderDialog(assessment);
 
-      // The switch says what will happen before the user commits to it.
-      const toggle = await screen.findByLabelText(/Step enabled/i);
-      expect(toggle).not.toBeDisabled();
-      expect(
-        screen.getByText(/also disables Panel review/i),
-      ).toBeInTheDocument();
+    await screen.findByLabelText(/^Name/);
+    await goToPage(user, 'Timing');
+    await user.type(screen.getByLabelText(/Estimated duration/), '14');
+    await save(user);
 
-      await user.click(toggle);
-      await user.click(screen.getByRole('button', { name: /Save/i }));
-
-      await waitFor(() => expect(confirmMock).toHaveBeenCalledTimes(1));
-
-      // The form fields first, so a rejected form changes nothing; then the
-      // dependents, so none outlives its dependency even between two
-      // requests; then the step itself.
-      await waitFor(() =>
-        expect(
-          proposalProtectedCallsWorkflowStepsPartialUpdate,
-        ).toHaveBeenCalledTimes(3),
-      );
-      const calls = vi.mocked(proposalProtectedCallsWorkflowStepsPartialUpdate)
-        .mock.calls;
-      expect(calls[0][0].path).toEqual({
-        uuid: 'call-uuid',
-        obj_uuid: 'step-uuid',
-      });
-      expect(calls[0][0].body).not.toHaveProperty('is_enabled');
-      expect(calls[1][0]).toEqual({
-        path: { uuid: 'call-uuid', obj_uuid: 'panel-uuid' },
-        body: { is_enabled: false },
-      });
-      expect(calls[2][0]).toEqual({
-        path: { uuid: 'call-uuid', obj_uuid: 'step-uuid' },
-        body: { is_enabled: false },
-      });
-    });
-
-    it('changes nothing when the cascade warning is cancelled', async () => {
-      const user = userEvent.setup();
-      const confirmMock = vi.mocked(useModal().confirm);
-      confirmMock.mockRejectedValueOnce(new Error('cancelled'));
-      const { expert, panel } = expertWithPanel();
-
-      renderDialog({
-        resolve: {
-          call: baseCall,
-          step: expert,
-          steps: [expert, panel],
-          refetch: vi.fn(),
-        },
-      });
-
-      await user.click(await screen.findByLabelText(/Step enabled/i));
-      await user.click(screen.getByRole('button', { name: /Save/i }));
-
-      await waitFor(() => expect(confirmMock).toHaveBeenCalledTimes(1));
-      // Not even the other form fields are saved: the user backed out.
+    await waitFor(() =>
       expect(
         proposalProtectedCallsWorkflowStepsPartialUpdate,
-      ).not.toHaveBeenCalled();
-    });
+      ).toHaveBeenCalled(),
+    );
+    const { body } = vi.mocked(proposalProtectedCallsWorkflowStepsPartialUpdate)
+      .mock.calls[0][0];
+    expect(Number(body.duration_in_days)).toBe(14);
+  });
+  it('ends on a Check page reading back the unsaved values', async () => {
+    const user = userEvent.setup();
+    renderDialog(assessment);
 
-    it('offers no switch at all on a mandatory step', async () => {
-      const decision = {
-        ...baseStep,
-        step: 'allocation_decision',
-        is_enabled: true,
-        responsible_role: 'call_manager',
-      };
+    const name = await screen.findByLabelText(/^Name/);
+    await user.clear(name);
+    await user.type(name, 'Reviewer report');
+    await goToPage(user, 'Timing');
+    await user.type(screen.getByLabelText(/Estimated duration/), '21');
+    await goToPage(user, 'Check');
 
-      renderDialog({
-        resolve: {
-          call: baseCall,
-          step: decision,
-          steps: [decision],
-          refetch: vi.fn(),
-        },
-      });
+    const summary = await screen.findByTestId('step-check-summary');
+    expect(summary).toHaveTextContent('Reviewer report');
+    expect(summary).toHaveTextContent('due 21 days after it starts');
+    expect(screen.getByTestId('step-check-basics')).toHaveTextContent(
+      'Reviewer report',
+    );
+    // Empty optional values say so.
+    expect(screen.getByTestId('step-check-basics')).toHaveTextContent(
+      'Not set',
+    );
+  });
 
-      // The padlock on the table row already says it is mandatory; a switch
-      // that can only be refused is noise.
-      expect(
-        await screen.findByText(/Configure step: Allocation decision/i),
-      ).toBeInTheDocument();
-      expect(screen.queryByLabelText(/Step enabled/i)).not.toBeInTheDocument();
-    });
+  it('goes back to the Check page from a page opened from it', async () => {
+    const user = userEvent.setup();
+    renderDialog(assessment);
 
-    it('offers no switch on a step another step toggles', async () => {
-      const award = {
-        ...baseStep,
-        step: 'award_response',
-        is_enabled: true,
-        responsible_role: 'applicant',
-      };
+    await screen.findByLabelText(/^Name/);
+    await goToPage(user, 'Check');
+    const basics = await screen.findByTestId('step-check-basics');
+    await user.click(within(basics).getByRole('button', { name: 'Change' }));
+    expect(screen.getByLabelText(/^Name/)).toBeVisible();
+    await user.click(screen.getByRole('button', { name: 'Back to check' }));
+    expect(await screen.findByTestId('step-check-page')).toBeInTheDocument();
+  });
 
-      renderDialog({
-        resolve: {
-          call: baseCall,
-          step: award,
-          steps: [award],
-          refetch: vi.fn(),
-        },
-      });
+  it('saves from the Check page', async () => {
+    const user = userEvent.setup();
+    renderDialog(assessment);
 
-      // Allocation decision's "Include award response" owns this step; a
-      // switch here would leave that flag on while the step is off.
-      expect(
-        await screen.findByText(/Configure step: Award response/i),
-      ).toBeInTheDocument();
-      expect(screen.queryByLabelText(/Step enabled/i)).not.toBeInTheDocument();
-    });
+    const name = await screen.findByLabelText(/^Name/);
+    await user.type(name, ' 2');
+    await goToPage(user, 'Check');
+    await screen.findByTestId('step-check-page');
+    await save(user);
 
-    it('reconciles the table when the cascade lands but the step write fails', async () => {
-      const user = userEvent.setup();
-      const refetch = vi.fn();
-      // Fields saved, the dependent goes off, then this step's own disable
-      // rejects: the row behind the dialog is now wrong until something
-      // refetches.
-      vi.mocked(proposalProtectedCallsWorkflowStepsPartialUpdate)
-        .mockResolvedValueOnce({} as any)
-        .mockResolvedValueOnce({} as any)
-        .mockRejectedValueOnce(new Error('boom'));
-      const { expert, panel } = expertWithPanel();
-
-      renderDialog({
-        resolve: {
-          call: baseCall,
-          step: expert,
-          steps: [expert, panel],
-          refetch,
-        },
-      });
-
-      await user.click(await screen.findByLabelText(/Step enabled/i));
-      await user.click(screen.getByRole('button', { name: /Save/i }));
-
-      await waitFor(() => expect(refetch).toHaveBeenCalled());
+    await waitFor(() =>
       expect(
         proposalProtectedCallsWorkflowStepsPartialUpdate,
-      ).toHaveBeenCalledTimes(3);
-    });
+      ).toHaveBeenCalled(),
+    );
+  });
 
-    it('disables no dependent when the form itself is rejected', async () => {
-      const user = userEvent.setup();
-      const refetch = vi.fn();
-      vi.mocked(
-        proposalProtectedCallsWorkflowStepsPartialUpdate,
-      ).mockRejectedValueOnce(new Error('boom'));
-      const { expert, panel } = expertWithPanel();
-
-      renderDialog({
-        resolve: {
-          call: baseCall,
-          step: expert,
-          steps: [expert, panel],
-          refetch,
-        },
-      });
-
-      await user.click(await screen.findByLabelText(/Step enabled/i));
-      await user.click(screen.getByRole('button', { name: /Save/i }));
-
-      await waitFor(() => expect(refetch).toHaveBeenCalled());
-      // Only the rejected field write went out: Panel review was never
-      // touched, so the failed save left the workflow as it was.
-      const calls = vi.mocked(proposalProtectedCallsWorkflowStepsPartialUpdate)
-        .mock.calls;
-      expect(calls).toHaveLength(1);
-      expect(calls[0][0].path.obj_uuid).toBe('step-uuid');
-    });
+  it('opens on the page it is asked for', async () => {
+    renderWithProviders(
+      <WorkflowStepConfigDialog
+        resolve={{ call, step: assessment, initialPage: 'timing' }}
+      />,
+    );
+    expect(await screen.findByLabelText(/Estimated duration/)).toBeVisible();
   });
 });

@@ -47,14 +47,67 @@ export const filterGrantableRoles = (
   roles: Role[],
   user: Pick<User, 'is_staff' | 'permissions'>,
   scope: GrantScope,
-): Role[] =>
-  roles.filter((role) => {
+): Role[] => {
+  let projectCeiling: Set<string> | null | undefined;
+  return roles.filter((role) => {
     const permission = PermissionMap[role.content_type];
     // No known grant-permission for this scope type — don't hide it; the
     // backend remains the authority.
     if (!permission) return true;
-    return hasPermission(user, { permission, ...scope });
+    if (!hasPermission(user, { permission, ...scope })) return false;
+    if (role.content_type !== 'project') return true;
+    if (projectCeiling === undefined) {
+      projectCeiling = getProjectRoleCeiling(roles, user, scope);
+    }
+    return (
+      !projectCeiling ||
+      (role.permissions ?? []).every((name) => projectCeiling.has(name))
+    );
   });
+};
+
+/**
+ * Mirrors the backend's guard_project_role_escalation: whoever manages a
+ * project's team through a role on the project itself grants no role allowing
+ * more than their own (a principal investigator adds collaborators, not a
+ * project manager). Returns the permissions their project roles hold, or null
+ * when nothing narrows them -- staff, someone managing the team through the
+ * organization, or a held role whose permissions are not known here, which the
+ * backend decides.
+ */
+const getProjectRoleCeiling = (
+  roles: Role[],
+  user: Pick<User, 'is_staff' | 'permissions'>,
+  scope: GrantScope,
+): Set<string> | null => {
+  if (!scope.projectId || user.is_staff) return null;
+  if (
+    scope.customerId &&
+    hasPermission(user, {
+      permission: PermissionMap.project,
+      customerId: scope.customerId,
+    })
+  ) {
+    return null;
+  }
+  const held = (user.permissions ?? []).filter(
+    (grant) =>
+      grant.scope_type === 'project' && grant.scope_uuid === scope.projectId,
+  );
+  if (!held.length) return null;
+  const known = [...roles, ...ENV.roles];
+  const ceiling = new Set<string>();
+  for (const grant of held) {
+    const role = known.find(
+      (candidate) =>
+        candidate.name === grant.role_name &&
+        candidate.content_type === 'project',
+    );
+    if (!role?.permissions) return null;
+    role.permissions.forEach((name) => ceiling.add(name));
+  }
+  return ceiling;
+};
 
 /**
  * Roles of the given types that the acting user may actually grant. Prevents

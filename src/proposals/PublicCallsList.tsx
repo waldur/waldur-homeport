@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
+import { omit } from 'es-toolkit';
 import { FunctionComponent, useMemo } from 'react';
 import {
   proposalPublicCallsList,
   ProposalPublicCallsListData,
+  PublicCallStateEnum,
 } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
@@ -33,12 +35,18 @@ import {
 import { CallCard } from './CallCard';
 import { PublicCallApplyAction } from './details/PublicCallApplyAction';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
+import {
+  continuouslyOpenLabel,
+  formatRoundCutoff,
+  isOpenEnded,
+} from './roundCutoff';
 import { Call } from './types';
 import { formatCallState, getCallStateOptions, getActiveRound } from './utils';
 
 const useCallTabs = (
-  offering_uuid?: string,
-  provider_uuid?: string,
+  offering_uuid: string | undefined,
+  provider_uuid: string | undefined,
+  enabled: boolean,
 ): TableTab[] => {
   const { data: counts } = useQuery({
     queryKey: ['callTabCounts', offering_uuid, provider_uuid],
@@ -50,18 +58,33 @@ const useCallTabs = (
       if (provider_uuid) {
         baseQuery.offerings_provider_uuid = provider_uuid;
       }
-      return fetchAllCallCounts(proposalPublicCallsList, baseQuery);
+      return fetchAllCallCounts(proposalPublicCallsList, baseQuery, {
+        withDraft: false,
+      });
     },
     staleTime: 30_000,
+    enabled,
   });
 
-  return useMemo(() => buildCallTabs(counts), [counts]);
+  return useMemo(
+    () => (enabled ? buildCallTabs(counts, { withDraft: false }) : undefined),
+    [counts, enabled],
+  );
 };
 
 interface PublicCallsListProps {
   offering_uuid: string;
   provider_uuid?: string;
   initialMode?: 'table' | 'grid';
+  /** The card's title; the provider pages keep the default. */
+  title?: string;
+  /** Leave the title out where a tab above already names the list. */
+  hideTitle?: boolean;
+  /**
+   * Only calls with a round open now. Every such call is active, so the
+   * state tabs, the State column and the filters have nothing to narrow.
+   */
+  openOnly?: boolean;
 }
 
 const CallColumns = [
@@ -90,7 +113,13 @@ const CallColumns = [
   },
   {
     title: translate('End'),
-    render: ({ row }) => <>{renderFieldOrDash(formatDateTime(row.end_date))}</>,
+    render: ({ row }) => (
+      <>
+        {row.rounds?.some(isOpenEnded)
+          ? continuouslyOpenLabel()
+          : renderFieldOrDash(formatDateTime(row.end_date))}
+      </>
+    ),
   },
   {
     title: translate('State'),
@@ -111,11 +140,7 @@ const CallColumns = [
     title: translate('Active round'),
     render: ({ row }) => {
       const activeRound = getActiveRound(row);
-      return (
-        <>
-          {activeRound ? formatDateTime(activeRound.cutoff_time) : <>&mdash;</>}
-        </>
-      );
+      return <>{activeRound ? formatRoundCutoff(activeRound) : <>&mdash;</>}</>;
     },
     filter: 'has_active_round',
   },
@@ -134,12 +159,21 @@ const CallColumns = [
   },
 ];
 
+/** The open-calls view: no State column, and nothing to filter inline. */
+const OpenCallColumns = CallColumns.filter(
+  (column) => column.filter !== 'state',
+).map((column) => omit(column, ['filter', 'inlineFilter']));
+
 export const PublicCallsList: FunctionComponent<PublicCallsListProps> = ({
   ...props
 }) => {
   const { params } = useCurrentStateAndParams();
   const values = useFilterValues('PublicCallsList');
-  const callTabs = useCallTabs(props.offering_uuid, props.provider_uuid);
+  const callTabs = useCallTabs(
+    props.offering_uuid,
+    props.provider_uuid,
+    !props.openOnly,
+  );
 
   // State is resolved separately: the tabs and the filter form both write
   // `?state`, in different shapes. See resolveCallStateFilter.
@@ -154,20 +188,33 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = ({
   );
 
   const filter = useMemo(() => {
-    const result: ProposalPublicCallsListData['query'] = { ...filters };
+    const result: ProposalPublicCallsListData['query'] = props.openOnly
+      ? { has_active_round: true }
+      : { ...filters };
     if (props.offering_uuid) {
       result.offering_uuid = props.offering_uuid;
     }
     if (props.provider_uuid) {
       result.offerings_provider_uuid = props.provider_uuid;
     }
-    if (stateFilter) {
-      result.state = stateFilter;
+    // A bookmarked ?state=draft names nothing a public list holds.
+    const publicStates = stateFilter?.filter(
+      (state): state is PublicCallStateEnum => state !== 'draft',
+    );
+    if (publicStates?.length && !props.openOnly) {
+      result.state = publicStates;
     }
     return result;
-  }, [filters, props.offering_uuid, props.provider_uuid, stateFilter]);
+  }, [
+    filters,
+    props.offering_uuid,
+    props.provider_uuid,
+    props.openOnly,
+    stateFilter,
+  ]);
   const tableProps = useTable({
-    table: 'PublicCallsList',
+    // Its own table, so its search and page do not follow All calls'.
+    table: props.openOnly ? 'OpenCallsList' : 'PublicCallsList',
     // The state tabs own `?state`; see resolveCallStateFilter.
     syncFiltersToURL: false,
     fetchData: createFetcher(proposalPublicCallsList),
@@ -176,10 +223,11 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = ({
   });
   return (
     <Table<Call>
-      title={translate('Calls for proposals')}
+      title={props.title ?? translate('Calls for proposals')}
+      hideTitle={props.hideTitle}
       {...tableProps}
       tabs={callTabs}
-      columns={CallColumns}
+      columns={props.openOnly ? OpenCallColumns : CallColumns}
       initialMode={props.initialMode ? props.initialMode : 'table'}
       gridItem={({ row }) => <CallCard call={row} />}
       gridClassName="lg:grid-cols-2 xl:grid-cols-3"
@@ -188,7 +236,7 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = ({
       initialSorting={{ field: 'name', mode: 'desc' }}
       hasQuery={true}
       expandableRow={PublicCallExpandableRow}
-      filters={<ProposalPublicCallsFilter />}
+      filters={props.openOnly ? undefined : <ProposalPublicCallsFilter />}
       rowActions={({ row }) => (
         <ActionsDropdown row={row} size="sm">
           <PublicCallApplyAction call={row} />

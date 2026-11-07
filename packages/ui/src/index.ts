@@ -18,6 +18,7 @@ export * from './Collapsible';
 export * from './CopyButton';
 export * from './DatePicker';
 export * from './Dialog';
+export * from './EmptyState';
 export * from './FeaturedIcon';
 export * from './Form';
 export * from './HelpIcon';

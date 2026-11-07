@@ -3,11 +3,13 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { ENV } from '@/core/config';
 
 import {
+  asksForDuration,
   getFieldStates,
   getRequiredFields,
   getTrackedFields,
   isFieldRequired,
   isFieldVisible,
+  isProposalFieldFilled,
   shouldRenderField,
 } from './proposalFields';
 
@@ -95,6 +97,50 @@ describe('proposal field states', () => {
     ]);
   });
 
+  it('counts a stored document as a filled field', () => {
+    // After Save as draft the files live on the proposal, not in the form.
+    expect(
+      isProposalFieldFilled(
+        'supporting_documentation',
+        {},
+        { supporting_documentation: [{ uuid: 'd1' }] },
+      ),
+    ).toBe(true);
+    expect(
+      isProposalFieldFilled(
+        'supporting_documentation',
+        {},
+        {
+          supporting_documentation: [],
+        },
+      ),
+    ).toBe(false);
+    expect(isProposalFieldFilled('supporting_documentation', {})).toBe(false);
+  });
+
+  it('counts a file picked but not yet uploaded', () => {
+    expect(
+      isProposalFieldFilled('supporting_documentation', {
+        supporting_documentation: [{ name: 'cv.pdf' }],
+      }),
+    ).toBe(true);
+  });
+
+  it('judges the other fields by their form value', () => {
+    expect(isProposalFieldFilled('name', { name: 'P' })).toBe(true);
+    expect(isProposalFieldFilled('name', { name: '' })).toBe(false);
+    expect(isProposalFieldFilled('name', undefined)).toBe(false);
+    expect(isProposalFieldFilled('science_sub_domain', {})).toBe(false);
+    expect(
+      isProposalFieldFilled('science_sub_domain', {
+        science_sub_domain: { uuid: 's1' },
+      }),
+    ).toBe(true);
+    expect(
+      isProposalFieldFilled('science_sub_domain', { science_sub_domain: {} }),
+    ).toBe(false);
+  });
+
   it('never asks for the project duration, in any access mode', () => {
     // Allocation derives the length from the subscriptions requested and the
     // call's fixed duration; a field listed here would leave the step short of
@@ -106,6 +152,22 @@ describe('proposal field states', () => {
       expect(getTrackedFields(states)).not.toContain('duration_in_days');
       expect(getRequiredFields(states)).toEqual(['name', 'project_summary']);
     }
+  });
+
+  it('asks for the duration where the call offers a list of lengths', () => {
+    const states = getFieldStates(undefined);
+
+    expect(asksForDuration({ allowed_duration_months: [3, 6] })).toBe(true);
+    expect(asksForDuration({ allowed_duration_months: [] })).toBe(false);
+    expect(asksForDuration(undefined)).toBe(false);
+    expect(getTrackedFields(states, true)).toContain(
+      'requested_duration_months',
+    );
+    expect(getRequiredFields(states, true)).toEqual([
+      'name',
+      'project_summary',
+      'requested_duration_months',
+    ]);
   });
 
   it('promotes a configured field into the required set', () => {

@@ -6,6 +6,7 @@ import { ProjectDetailsStep } from './ProjectDetailsStep';
 import { ProposalComplianceStepExpanded } from './ProposalComplianceStepExpanded';
 import { ProposalDetailsOverviewStep } from './ProposalDetailsOverviewStep';
 import {
+  asksForDuration,
   getFieldStates,
   getRequiredFields,
   getTrackedFields,
@@ -16,11 +17,13 @@ import { FormResourceRequestsStep } from './resource-requests-step/FormResourceR
 export const createProposalSteps = (
   call?: Pick<Call, 'compliance_checklist'> & {
     proposal_field_config?: ProposalFieldConfig;
+    allowed_duration_months?: number[] | null;
   },
 ): VStepperFormStep[] => {
   // Which fields the Project details step asks for, and which of them block
   // submission, is per-call configuration rather than a constant.
   const fieldStates = getFieldStates(call?.proposal_field_config);
+  const asksDuration = asksForDuration(call);
   const baseSteps: VStepperFormStep[] = [
     {
       label: translate('Details overview'),
@@ -36,9 +39,9 @@ export const createProposalSteps = (
       // complete, so a field listed here but not rendered parks the applicant
       // on a step with no field left to fill. Both helpers apply the same
       // visibility rules the step does.
-      fields: getTrackedFields(fieldStates),
+      fields: getTrackedFields(fieldStates, asksDuration),
       required: true,
-      requiredFields: getRequiredFields(fieldStates),
+      requiredFields: getRequiredFields(fieldStates, asksDuration),
     },
     {
       label: translate('Resource requests'),

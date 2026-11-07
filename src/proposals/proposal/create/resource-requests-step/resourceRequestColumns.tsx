@@ -7,7 +7,10 @@ import {
 } from '@/proposals/prepaidDuration';
 import { PurchaseOrderCell } from '@/proposals/PurchaseOrderCell';
 import { getRequestedResourceCost } from '@/proposals/requestedResourceCost';
-import { RequestedResourceCostLabel } from '@/proposals/RequestedResourceCostLabel';
+import {
+  pricesConcealed,
+  RequestedResourceCostLabel,
+} from '@/proposals/RequestedResourceCostLabel';
 import { getRequestOptionSummary } from '@/proposals/requestedResourceOptions';
 import { ProposalResource } from '@/proposals/types';
 import { Column } from '@/table/types';
@@ -30,7 +33,7 @@ const RequestOfferingCell = ({
   return (
     <div>
       <div>{row.requested_offering.offering_name}</div>
-      {summary ? <div className="text-xs text-tertiary">{summary}</div> : null}
+      {summary ? <div className="text-tertiary">{summary}</div> : null}
       {showMissingOptions && <MissingOptionsHint item={row} />}
     </div>
   );
@@ -72,26 +75,30 @@ export const resourceRequestColumns = ({
         }
       : {}),
   },
-  {
-    // Estimated, not billed. Recurring and subscription charges get a column
-    // each: they are paid differently.
-    title: translate('Recurring'),
-    render: ({ row }) => (
-      <RequestedResourceCostLabel
-        cost={getRequestedResourceCost(row)}
-        part="monthly"
-      />
-    ),
-  },
-  {
-    title: translate('Subscription'),
-    render: ({ row }) => (
-      <RequestedResourceCostLabel
-        cost={getRequestedResourceCost(row)}
-        part="oneTime"
-      />
-    ),
-  },
+  // Estimated, not billed. Recurring and subscription charges get a column
+  // each: they are paid differently.
+  ...(pricesConcealed()
+    ? []
+    : [
+        {
+          title: translate('Recurring'),
+          render: ({ row }) => (
+            <RequestedResourceCostLabel
+              cost={getRequestedResourceCost(row)}
+              part="monthly"
+            />
+          ),
+        },
+        {
+          title: translate('Subscription'),
+          render: ({ row }) => (
+            <RequestedResourceCostLabel
+              cost={getRequestedResourceCost(row)}
+              part="oneTime"
+            />
+          ),
+        },
+      ]),
   {
     // In a column, so the longest can be seen without expanding rows.
     title: translate('Period'),

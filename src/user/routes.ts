@@ -15,6 +15,7 @@ import {
   isCallsSectionVisible,
   isProposalRequestEnabled,
 } from '@/marketplace/serviceAccessMode';
+import { resourcesSection } from '@/navigation/sidebar/sidebarSection';
 import { requestListTitle } from '@/proposals/presentation';
 import {
   getUser,
@@ -429,6 +430,7 @@ export const states: StateDeclaration[] = [
       ),
     ),
     parent: 'layout',
+    data: resourcesSection,
   },
   {
     name: 'all-resources',
@@ -439,5 +441,6 @@ export const states: StateDeclaration[] = [
       ),
     ),
     parent: 'layout',
+    data: resourcesSection,
   },
 ];

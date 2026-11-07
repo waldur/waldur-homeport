@@ -5,7 +5,7 @@ import { marketplaceProviderOfferingsDestroy } from 'waldur-js-client';
 import { Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
-import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useOpenOfferingChange } from '@/marketplace/offerings/dependents/useOpenOfferingChange';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
@@ -25,28 +25,31 @@ export const DeleteOfferingAction: FC<DeleteOfferingActionProps> = ({
   const user = useUser();
   const router = useRouter();
 
-  const { mutate: deleteOffering, isPending } = useManagedMutation({
-    mutationFn: () =>
-      marketplaceProviderOfferingsDestroy({ path: { uuid: offering.uuid } }),
-    successMessage: translate('Offering {name} deleted successfully.', {
-      name: offering.name,
-    }),
-    errorMessage: translate('Error while deleting offering {name}.', {
-      name: offering.name,
-    }),
-    onSuccess: () => {
-      router.stateService.go('marketplace-vendor-offerings', {
-        uuid: offering.customer_uuid,
-      });
-    },
-    confirmation: {
+  const openChange = useOpenOfferingChange();
+  const deleteOffering = () =>
+    openChange({
       title: translate('Delete confirmation'),
       body: translate('Are you sure you want to delete offering {name}?', {
         name: offering.name,
       }),
-      options: { forDeletion: true },
-    },
-  });
+      change: 'offering_deleted',
+      offeringUuid: offering.uuid,
+      confirmLabel: translate('Delete'),
+      forDeletion: true,
+      mutationFn: () =>
+        marketplaceProviderOfferingsDestroy({ path: { uuid: offering.uuid } }),
+      successMessage: translate('Offering {name} deleted successfully.', {
+        name: offering.name,
+      }),
+      errorMessage: translate('Error while deleting offering {name}.', {
+        name: offering.name,
+      }),
+      onSuccess: () => {
+        router.stateService.go('marketplace-vendor-offerings', {
+          uuid: offering.customer_uuid,
+        });
+      },
+    });
 
   const canDeleteOffering = hasPermission(user, {
     permission: PermissionEnum.DELETE_OFFERING,
@@ -74,7 +77,7 @@ export const DeleteOfferingAction: FC<DeleteOfferingActionProps> = ({
       <RemovalActionItem
         title={translate('Delete')}
         action={() => deleteOffering()}
-        disabled={isPending || !!deletionRestricted}
+        disabled={!!deletionRestricted}
         tooltip={
           deletionRestricted
             ? translate(

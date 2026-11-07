@@ -5,7 +5,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { findResourcePlan } from '@/marketplace/details/plan/effectiveComponents';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasAllPermissions } from '@/permissions/hasPermission';
+import { hasAllPermissions, hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { validateState } from '@/resource/actions/base';
 import { ActionItemType } from '@/resource/actions/types';
@@ -67,11 +67,22 @@ export const RequestLimitsChangeAction: ActionItemType = ({
     user?.is_staff ||
     user?.is_support;
 
+  // Asking is a permission of its own: a role without the direct one (an
+  // awarded project's, whose limits its call decides) is not offered it.
+  const canRequest = hasPermission(user, {
+    permission: PermissionEnum.REQUEST_RESOURCE_LIMITS_CHANGE,
+    projectId: resource.project_uuid,
+    customerId: resource.customer_uuid,
+  });
+
   const hasPlan = Boolean(resource.plan_uuid || resource.marketplace_plan_uuid);
   const resourceUuid = getMarketplaceResourceUuid(resource);
   // Fetched rather than read from the resource: scope-based menus pass the
   // scope object, which does not carry the offering's plugin options.
-  const offering = useResourceOffering(resourceUuid, !canUpdateDirectly);
+  const offering = useResourceOffering(
+    resourceUuid,
+    !canUpdateDirectly && canRequest,
+  );
   const acceptsRequests = isLimitChangeRequestsEnabled(
     offering?.plugin_options,
   );
@@ -82,6 +93,7 @@ export const RequestLimitsChangeAction: ActionItemType = ({
     ...ownPendingLimitChangeRequestsQuery(resourceUuid, user?.uuid),
     enabled: Boolean(
       !canUpdateDirectly &&
+      canRequest &&
       offering &&
       !acceptsRequests &&
       resourceUuid &&
@@ -89,7 +101,7 @@ export const RequestLimitsChangeAction: ActionItemType = ({
     ),
   });
 
-  if (canUpdateDirectly) {
+  if (canUpdateDirectly || !canRequest) {
     return null;
   }
 

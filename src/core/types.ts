@@ -5,6 +5,10 @@ import { RoleDetails } from 'waldur-js-client';
 
 import { PluginConfiguration } from '@/auth/types';
 import { FeaturesEnum } from '@/FeaturesEnums';
+import type {
+  CallsSidebarItem,
+  SidebarSection,
+} from '@/navigation/sidebar/sidebarSection';
 
 interface DataDeclaration {
   /** State is disabled as long as its feature is disabled */
@@ -30,6 +34,10 @@ interface DataDeclaration {
   useExtraTabs?: boolean;
   skipHero?: boolean;
   workspace?: string;
+  /** Sidebar accordion opened on this page and every page under it. */
+  sidebarSection?: SidebarSection;
+  /** Entry highlighted inside that accordion. */
+  sidebarItem?: CallsSidebarItem;
 }
 
 export interface StateDeclaration extends BaseStateDeclaration {

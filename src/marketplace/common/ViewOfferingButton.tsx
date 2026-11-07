@@ -4,7 +4,7 @@ import { Offering } from 'waldur-js-client';
 import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
-import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
+import { canViewOfferingPages } from '@/marketplace/canUseMarketplaceShopUi';
 import { useUser } from '@/workspace/hooks';
 
 export const ViewOfferingButton = ({
@@ -18,7 +18,7 @@ export const ViewOfferingButton = ({
 }) => {
   const router = useRouter();
   const user = useUser();
-  if (!canUseMarketplaceShopUi(user)) {
+  if (!canViewOfferingPages(user)) {
     return null;
   }
 

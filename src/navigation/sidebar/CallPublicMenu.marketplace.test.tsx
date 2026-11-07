@@ -21,6 +21,22 @@ vi.mock('@/reviewer/useReviewerProfile', () => ({
   useReviewerProfile: vi.fn(),
 }));
 
+// No workflow tasks and no offering of their own: what is left to decide the
+// section is the call role and the reviewer profile.
+vi.mock('@/proposals/review/useMyTasksCount', () => ({
+  useMyTasksCount: () => 0,
+}));
+
+vi.mock('./useProviderCallCounts', () => ({
+  countBadge: () => undefined,
+  useProviderPendingRequestsCount: () => 0,
+  useProviderTasksCount: () => 0,
+}));
+
+vi.mock('./useProviderCallScopes', () => ({
+  useProviderCallScopes: () => [],
+}));
+
 vi.mock('waldur-ui', () => ({
   SidebarMenuAccordion: ({ title, children }) => (
     <div>
@@ -72,7 +88,7 @@ describe('CallPublicMenu in marketplace mode', () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  it.each(['CALL.MANAGER', 'CALL.REVIEWER', 'CALL.PANEL_MEMBER'])(
+  it.each(['CALL.REVIEWER', 'CALL.PANEL_MEMBER'])(
     'keeps the Access management section for %s, with one My reviews',
     (role) => {
       vi.mocked(useUser).mockReturnValue({
@@ -84,6 +100,18 @@ describe('CallPublicMenu in marketplace mode', () => {
       expect(useReviewerProfile).toHaveBeenCalledWith({ enabled: false });
     },
   );
+
+  // A call manager who reviews nothing is offered their tasks entry only
+  // while a task waits for them.
+  it('keeps the Access management section for CALL.MANAGER, without My reviews', () => {
+    vi.mocked(useUser).mockReturnValue({
+      permissions: [callRole('CALL.MANAGER')],
+    } as any);
+    render(<CallPublicMenu />);
+    expect(screen.getByText('Access management')).toBeInTheDocument();
+    expect(screen.queryByText('My reviews')).not.toBeInTheDocument();
+    expect(useReviewerProfile).toHaveBeenCalledWith({ enabled: false });
+  });
 
   it('keeps the Access management section for staff without asking for a profile', () => {
     vi.mocked(useUser).mockReturnValue({

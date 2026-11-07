@@ -13,7 +13,7 @@ import {
 
 import { BaseButton, Card, CardContent } from 'waldur-ui';
 
-import { DEFAULT_REDIRECT_STATE } from '@/auth/authNavigation';
+import { getLandingState } from '@/auth/landingState';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -62,8 +62,8 @@ const fetchProfileStatus = async (): Promise<ProfileStatus> => {
 };
 
 const acceptInvitation = async (token: string) => {
-  // Note: COI disclosure now happens at the assignment stage (Stage 2),
-  // not at pool invitation acceptance (Stage 1)
+  // The accept API takes declared conflicts, but each names a proposal, and
+  // no proposals are shared at this stage, so none are sent.
   const response = await reviewerInvitationsAccept({
     path: { token },
   });
@@ -132,7 +132,7 @@ export const ReviewerInvitationAccept: FC = () => {
     mutationFn: (reason: string) => declineInvitation(token, reason),
     onSuccess: () => {
       showSuccess(translate('Invitation declined.'));
-      router.stateService.go(DEFAULT_REDIRECT_STATE);
+      router.stateService.go(getLandingState());
     },
     onError: (error) => {
       showErrorResponse(error, translate('Unable to decline invitation.'));
@@ -275,7 +275,7 @@ export const ReviewerInvitationAccept: FC = () => {
             <>
               <InfoIcon size={18} weight="bold" className="shrink-0" />
               {translate(
-                'When you are assigned specific proposals to review, you will have the opportunity to disclose any conflicts of interest at that time.',
+                'When you are assigned specific proposals to review, decline any you have a conflict of interest with and give the conflict as the reason. Conflicts the platform detects are marked on your assignments.',
               )}
             </>
           )}

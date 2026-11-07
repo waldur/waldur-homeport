@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import {
   CallResourceTemplate,
@@ -12,9 +12,13 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
+import { reviewerAssignmentBlocker } from '@/proposals/assignments/reviewerAssignment';
 import { Call } from '@/proposals/types';
 import { invalidateProposalCanSubmit } from '@/proposals/useProposalCanSubmit';
-import { isReviewBearingStep } from '@/proposals/workflow/constants';
+import {
+  callWorkflowStepsKey,
+  fetchCallWorkflowSteps,
+} from '@/proposals/workflow/queries';
 import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
@@ -132,25 +136,47 @@ export const CreateManualAssignmentDialog = lazyComponent(() =>
   ),
 );
 
-// Shared so the row-action and detail-view "Create review" affordances stay
-// in lockstep on eligibility (state window + reviewer-management permission).
-export const useCanCreateReview = (proposal: Proposal): boolean => {
+/**
+ * Whether the user may assign reviewers to the proposal's call, and if so why
+ * not to this proposal now (``reviewerAssignmentBlocker``), or null when they
+ * can. Shared by the proposal row, the detail view and the call's selection,
+ * so the three agree.
+ */
+export const useReviewerAssignment = (
+  proposal: Proposal,
+): { canManage: boolean; blocker: string | null } => {
   const user = useUser();
-  // A proposal on a workflow offers this only while it sits on a step the
-  // reviewers own. It used to be offered at every step, so a manager could be
-  // invited to assign expert reviewers during the eligibility check — before
-  // there was anything to review. A proposal with no active step (a call
-  // running no workflow at all) keeps the unconditional affordance, or reviews
-  // would be unreachable for it.
-  const stepAllows =
-    !proposal.workflow_step || isReviewBearingStep(proposal.workflow_step);
-  return (
-    stepAllows &&
-    ['submitted', 'in_review'].includes(proposal.state) &&
+  // A boolean, not hasPermission's bare result: an undefined `enabled` is
+  // React Query's default, true, and asked for the steps on everyone's behalf.
+  const canManage = Boolean(
     hasPermission(user, {
       permission: PermissionEnum.MANAGE_PROPOSAL_REVIEW,
       scopeId: proposal.call_uuid,
       callOrganizerId: proposal.call_managing_organisation_uuid,
-    })
+    }),
   );
+  // The proposal names its step by key; the call's steps say who completes
+  // it. The list is shared with the proposal list's step column, so a queue
+  // of proposals costs one fetch per call.
+  const { data: callSteps } = useQuery({
+    queryKey: callWorkflowStepsKey(proposal.call_uuid),
+    queryFn: () => fetchCallWorkflowSteps(proposal.call_uuid),
+    staleTime: 5 * 60 * 1000,
+    enabled: canManage && Boolean(proposal.workflow_step),
+    // The permission above is checked client-side; a viewer the backend
+    // does not let read the call's steps falls back to the default review
+    // steps instead of leaving the page.
+    retry: false,
+    meta: { skipGlobalErrorRedirect: true },
+  });
+  return {
+    canManage,
+    blocker: canManage ? reviewerAssignmentBlocker(proposal, callSteps) : null,
+  };
+};
+
+/** Whether a reviewer may be assigned to the proposal right now. */
+export const useCanCreateReview = (proposal: Proposal): boolean => {
+  const { canManage, blocker } = useReviewerAssignment(proposal);
+  return canManage && !blocker;
 };

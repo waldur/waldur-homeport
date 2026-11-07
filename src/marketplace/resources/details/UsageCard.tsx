@@ -20,6 +20,8 @@ import { getErrorStatus } from '@/error/utils';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
+import { isReadOnlyProjectReader } from '@/permissions/isReadOnlyProjectReader';
+import { useUser } from '@/workspace/hooks';
 
 import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer';
 import { UsageExportDropdown } from '../usage/UsageExportDropdown';
@@ -49,6 +51,13 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
   );
 
   const [users, setUsers] = useState([]);
+  // The team stays closed to a call manager reading what their call allocated;
+  // the per-user filter is left out for them rather than failing.
+  const user = useUser();
+  const canListTeam = !isReadOnlyProjectReader(user, {
+    uuid: resource.project_uuid,
+    customer_uuid: resource.customer_uuid,
+  });
   const {
     data: team,
     isLoading: teamIsLoading,
@@ -63,6 +72,7 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
       ),
 
     staleTime: UI_STALE_TIME,
+    enabled: canListTeam,
     // The team only feeds the optional per-user filter, so its failure must
     // not send the page to the error redirect.
     meta: { skipGlobalErrorRedirect: true },
@@ -79,7 +89,10 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
     data: value,
   } = useQuery({
     queryKey: ['UsageCard', resourceRef, period],
-    queryFn: () => getComponentsAndUsages(resourceRef.uuid, period),
+    queryFn: () =>
+      getComponentsAndUsages(resourceRef.uuid, period, {
+        offeringUuid: resource.offering_uuid,
+      }),
   });
 
   const usersFilterOptions = useMemo(() => {

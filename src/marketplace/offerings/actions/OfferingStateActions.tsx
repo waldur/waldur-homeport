@@ -17,6 +17,7 @@ import { BaseButton } from 'waldur-ui';
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
+import { useOpenOfferingChange } from '@/marketplace/offerings/dependents/useOpenOfferingChange';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -117,11 +118,26 @@ export const OfferingStateActions = ({
       });
     }
   };
+  const openChange = useOpenOfferingChange();
   const setDraft = () => {
     if (canManageOfferingLifecycle) {
-      updateOfferingState(() =>
-        marketplaceProviderOfferingsDraft({ path: { uuid: offering.uuid } }),
-      );
+      // Back in draft the offering takes no orders: what calls built on it
+      // is named, and may refuse the change.
+      openChange({
+        title: translate('Set offering to draft'),
+        body: translate(
+          'In draft, {name} takes no new orders until it is activated again. Are you sure?',
+          { name: offering.name },
+        ),
+        change: 'offering_withdrawn',
+        offeringUuid: offering.uuid,
+        confirmLabel: translate('Set to draft'),
+        mutationFn: () =>
+          marketplaceProviderOfferingsDraft({ path: { uuid: offering.uuid } }),
+        successMessage: translate('Offering state has been updated.'),
+        errorMessage: translate('Unable to update offering state.'),
+        onSuccess: refreshOffering,
+      });
     } else {
       openDialog(RequestActionDialog, {
         resolve: { offering, offeringRequestMode: 'editing' },

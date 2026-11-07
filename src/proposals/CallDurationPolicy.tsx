@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import { translate } from '@/i18n';
 
+import { formatPrepaidMonths } from './prepaidDuration';
 import { usesCallVocabulary } from './presentation';
 import {
   formatPrepaidMonthsCap,
@@ -13,16 +14,33 @@ import {
  * What a call's duration setting means for an applicant, stated once so the
  * call page, the offering rows and the request form agree: a fixed duration
  * is the length of every project the call awards *and* the ceiling for any
- * prepaid subscription requested under it; without one, the longest
- * subscription requested decides.
+ * prepaid subscription requested under it; a list of lengths lets the
+ * applicant choose one, which caps the subscriptions the same way; with
+ * neither, the longest subscription requested decides.
  */
 export const CallDurationPolicy: FC<{
   call: {
     fixed_duration_in_days?: number | null;
     max_prepaid_duration_months?: number | null;
+    allowed_duration_months?: number[] | null;
   };
 }> = ({ call }) => {
   const days = call.fixed_duration_in_days;
+  const allowed = call.allowed_duration_months ?? [];
+  if (!days && allowed.length) {
+    return (
+      <>
+        <span className="font-semibold">
+          {allowed.map(formatPrepaidMonths).join(', ')}
+        </span>
+        <span className="text-quaternary ms-1.5">
+          {translate(
+            'The applicant chooses one; no prepaid subscription may run longer.',
+          )}
+        </span>
+      </>
+    );
+  }
   if (!days) {
     return (
       <>

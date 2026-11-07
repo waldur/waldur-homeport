@@ -58,7 +58,11 @@ export const CustomerReviewsList: FC = () => {
         },
         {
           title: translate('Proposal'),
-          render: ({ row }) => <>{row.proposal_name}</>,
+          render: ({ row }) => (
+            <span className="font-medium text-primary">
+              {row.proposal_name}
+            </span>
+          ),
           keys: ['proposal_name'],
           id: 'proposal',
         },

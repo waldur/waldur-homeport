@@ -71,6 +71,7 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
       <ProposalCostTotal
         rows={resourceRows || []}
         fixedDurationDays={fixedDurationDays}
+        chosenDurationMonths={proposal?.requested_duration_months}
         panel
       />
       {review && !isReviewInFinalState(review.state) && (

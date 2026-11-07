@@ -13,6 +13,7 @@ import {
 } from '../core/StorageManager';
 
 import { clearAuthTokens } from './AuthService';
+import { DEFAULT_REDIRECT_STATE, getLandingState } from './landingState';
 import { resetSessionState } from './sessionReset';
 import { getOauthURL } from './utils';
 
@@ -22,8 +23,6 @@ import { getOauthURL } from './utils';
  * than the portable auth core. A future standalone auth app implements its
  * own thin equivalent instead of importing this file.
  */
-
-export const DEFAULT_REDIRECT_STATE = 'profile.details';
 
 // Pages a fresh login is routed through before it resumes the intended one
 const PASSKEY_GATE_STATE = 'profile-passkeys-required';
@@ -127,7 +126,7 @@ const REPLACE_LOCATION = { location: 'replace' as const };
 export async function redirectOnSuccess() {
   const redirect = RedirectStorage.get();
   let intended: NavigationTarget = {
-    toState: DEFAULT_REDIRECT_STATE,
+    toState: getLandingState(),
     toParams: {},
   };
   if (redirect && redirect.toState && redirect.toParams) {
@@ -144,7 +143,7 @@ export async function redirectOnSuccess() {
       REPLACE_LOCATION,
     );
   } catch {
-    await router.stateService.go(DEFAULT_REDIRECT_STATE, {}, REPLACE_LOCATION);
+    await router.stateService.go(getLandingState(), {}, REPLACE_LOCATION);
   }
 }
 

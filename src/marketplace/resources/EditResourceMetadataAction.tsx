@@ -25,6 +25,7 @@ export const EditResourceMetadataAction: ActionItemType = ({
     !hasPermission(user, {
       permission: PermissionEnum.SET_RESOURCE_BACKEND_METADATA,
       customerId: resource.provider_uuid,
+      offeringId: resource.offering_uuid,
     })
   ) {
     return null;

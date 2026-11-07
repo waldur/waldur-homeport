@@ -17,6 +17,7 @@ import {
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { MermaidChart } from '@/core/MermaidChart';
+import { policyPeriodOptions } from '@/customer/cost-policies/utils';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -50,12 +51,9 @@ interface Props {
   };
 }
 
-const periodLabels: Record<number, string> = {
-  1: 'Monthly',
-  2: 'Quarterly',
-  3: 'Semi-annual',
-  4: 'Annual',
-};
+const getPeriodLabel = (period: number): string =>
+  Object.values(policyPeriodOptions).find((option) => option.value === period)
+    ?.label ?? String(period);
 
 const limitTypeLabels: Record<string, string> = {
   GrpTRESMins: 'GrpTRESMins',
@@ -75,24 +73,27 @@ flowchart TB
     subgraph trigger["1. Trigger"]
         A[ComponentUsage created/updated] --> B[Django post_save signal]
         B --> C[Celery task queued]
+        A2["Daily check of paused/<br/>downscaled resources"] --> C
     end
     subgraph evaluation["2. Evaluation"]
         C --> D["Get base allocation<br/>from resource limits"]
         D --> E{Carryover enabled?}
         E -->|Yes| F[Apply carryover factor]
         E -->|No| G[Use base allocation]
-        F & G --> H[Calculate usage percentage]
+        F & G --> H["Calculate billing-weighted<br/>usage percentage"]
     end
     subgraph decision["3. Decision"]
         H --> I{Usage level?}
         I -->|"&ge; ${gracePercent}%"| J[Pause resource]
         I -->|"&ge; 100%"| K[Downscale resource]
-        I -->|"&ge; 80%"| L[Notify owners]
-        I -->|"< 80%"| M[No action / recover]
+        I -->|"&ge; 80%"| L["Notify owners<br/>(once per period)"]
+        I -->|"Below thresholds"| M[Lift pause / downscale]
     end
     subgraph execution["4. Execution"]
-        J & K --> N[Generate SLURM settings]
-        N --> O[Send STOMP message to site agent]
+        J & K & M --> N{Paused or downscaled<br/>state changed?}
+        N -->|Yes| R["Resource update:<br/>site agent switches QoS"]
+        N -->|Yes| O["Send periodic settings via STOMP<br/>(fairshare, TRES limits, usage reset)"]
+        S["Every 10 minutes:<br/>send settings that changed"] --> O
         O --> P[Site agent runs sacctmgr commands]
         P --> Q[Report result back to Waldur]
     end
@@ -126,12 +127,15 @@ sequenceDiagram
     participant A as Site Agent
     participant SLURM as SLURM Cluster
 
-    W->>S: Publish periodic_limits message
+    W->>S: Publish resource_periodic_limits message
     S->>A: Deliver message
-    A->>SLURM: Execute sacctmgr commands
+    A->>SLURM: Set fairshare, TRES limits, RawUsage=0
     SLURM-->>A: Command result
     A->>W: POST /report-command-result/
     W->>W: Update evaluation log
+    W->>S: Publish resource update (paused / downscaled)
+    S->>A: Deliver message
+    A->>SLURM: Switch account QoS
 `;
 
 const PreviewCommands: FC<{ config: SlurmPolicyConfig }> = ({ config }) => {
@@ -222,7 +226,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
     {
       threshold: translate('Notification'),
       condition: translate('Usage {sign} 80%', { sign: '\u2265' }),
-      action: translate('Notify organization owners'),
+      action: translate('Notify organization owners (once per period)'),
       setting: 'notify_organization_owners',
     },
     {
@@ -242,8 +246,13 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
     },
     {
       threshold: translate('Recovery'),
-      condition: translate('Usage drops below threshold'),
-      action: translate('Auto-remove pause/downscale'),
+      condition: translate(
+        'Usage below {percent}% (pause) or below 100% (downscale)',
+        { percent: gracePercent },
+      ),
+      action: translate(
+        'Lift pause/downscale, unless another reason still holds the pause',
+      ),
       setting: null,
     },
   ];
@@ -251,7 +260,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
   const configSummary = [
     {
       label: translate('Period'),
-      value: periodLabels[config.period ?? 2] ?? String(config.period),
+      value: getPeriodLabel(config.period ?? 3),
     },
     { label: translate('Limit type'), value: limitType },
     {
@@ -301,7 +310,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <h4 className="mb-3">{translate('End-to-end flow')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'When component usage is reported, the system evaluates the policy and takes action based on configured thresholds.',
+              'When component usage is reported, the system evaluates the policy for that resource and takes action based on configured thresholds. A daily check also re-evaluates paused or downscaled resources so a restriction from the previous period is lifted when a new period starts.',
             )}
           </p>
           <div className="border border-secondary rounded-lg p-3">
@@ -317,7 +326,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <h4 className="mb-3">{translate('Base allocation')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'The base allocation for each TRES component is read from the resource limits (set at provisioning time from plan components). Each offering can define multiple components (e.g. cpu, mem, gpu, billing) — the policy evaluates limits per component.',
+              'The base allocation for each TRES component is read from the resource limits (set when the resource is ordered or its limits are changed). Each offering can define multiple components (e.g. cpu, mem, gpu). SLURM limits are set per component, but the usage percentage that drives actions is a single value: allocation and usage are each summed across components using the TRES billing weights.',
             )}
           </p>
           {planAllocations.length > 0 ? (
@@ -368,7 +377,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <h4 className="mb-3">{translate('Usage calculation')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'Usage percentage is calculated by comparing current consumption against the total available allocation, which may include carryover from the previous period.',
+              "Usage percentage is calculated by comparing consumption in the current period against the total available allocation, which may include carryover from the previous period. The period follows the limit period of the offering's limit-based components; the policy period is used only when none is set.",
             )}
           </p>
           <div className="border border-secondary rounded-lg p-3">
@@ -495,7 +504,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <h4 className="mb-3">{translate('Action thresholds')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'Actions are triggered when usage crosses these thresholds. Each action can be independently enabled or disabled.',
+              'Actions are triggered when usage crosses these thresholds. Each action can be independently enabled or disabled. A resource is also paused while its project is in a grace period.',
             )}
           </p>
 
@@ -519,8 +528,8 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   <strong>{translate('Grace ratio')}</strong> (
                   {config.grace_ratio ?? 0.2}):{' '}
                   {translate(
-                    'Allows temporary overconsumption beyond the total allocation before the resource is fully blocked. At 100% usage the resource is downscaled (slowed down), but it is not paused until {percent}%. This is an overdraft buffer, not extra allocation.',
-                    { percent: gracePercent + '%' },
+                    'Allows temporary overconsumption beyond the total allocation before the resource is fully blocked. At 100% usage the resource is downscaled (slowed down), but it is not paused until {percent}%. The SLURM limit itself is also set at {percent}% of the allocation. This is an overdraft buffer, not extra allocation.',
+                    { percent: gracePercent },
                   )}
                 </p>
               </>
@@ -573,7 +582,8 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <h4 className="mb-3">{translate('SLURM commands generated')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'The site agent executes these sacctmgr commands on the SLURM cluster to enforce the policy. The commands below are generated from the current configuration using example values (allocation: 1000, previous usage: 600).',
+              'The site agent executes sacctmgr commands on the SLURM cluster to enforce the policy: it sets fairshare and the {limitType} limits on the resource account, and resets RawUsage on the first sync of a new period when usage reset is enabled (never for a total period). Settings that already match the cluster are skipped. The QoS is switched separately when the resource is paused, downscaled or restored.',
+              { limitType },
             )}
           </p>
           <PreviewCommands config={config} />
@@ -584,7 +594,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <h4 className="mb-3">{translate('Site agent communication')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'Waldur communicates with the SLURM cluster through a STOMP message broker and the site agent.',
+              'Waldur communicates with the SLURM cluster through a STOMP message broker and the site agent. The site agent must run in event processing mode with STOMP and periodic limits enabled for this offering; otherwise no settings are sent.',
             )}
           </p>
           <div className="border border-secondary rounded-lg p-3">
@@ -602,7 +612,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           </h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'When multiple Waldur offerings target the same SLURM cluster, each offering maps to a separate SLURM account. SLURM uses a hierarchical Fair Tree algorithm where usage propagates up the account tree.',
+              'Each Waldur resource maps to its own SLURM account, so when multiple Waldur offerings target the same SLURM cluster, their resources use separate accounts. SLURM uses a hierarchical Fair Tree algorithm where usage propagates up the account tree.',
             )}
           </p>
           <Table density="compact">
@@ -619,7 +629,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                 </TableCell>
                 <TableCell className="text-tertiary">
                   {translate(
-                    'Each offering sets fairshare independently per account. SLURM calculates level_fs = shares_norm / usage_efctv within sibling accounts under the same parent.',
+                    'Each policy sets fairshare on the accounts of its own resources. SLURM calculates level_fs = shares_norm / usage_efctv within sibling accounts under the same parent.',
                   )}
                 </TableCell>
               </TableRow>
@@ -629,7 +639,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                 </TableCell>
                 <TableCell className="text-tertiary">
                   {translate(
-                    '{limitType} is enforced per account at job submission time. Each offering controls its own account limits independently.',
+                    '{limitType} is enforced per account. Each offering controls the limits of its own resource accounts independently.',
                     { limitType },
                   )}
                 </TableCell>
@@ -640,7 +650,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                 </TableCell>
                 <TableCell className="text-tertiary">
                   {translate(
-                    'QoS levels (normal/slowdown/blocked) are set per account. Different offerings can have different QoS states simultaneously.',
+                    'QoS is set per account, using the default, downscaled and paused QoS names configured in the site agent for the offering (for example normal, slowdown, blocked). Different accounts can be in different QoS states simultaneously.',
                   )}
                 </TableCell>
               </TableRow>

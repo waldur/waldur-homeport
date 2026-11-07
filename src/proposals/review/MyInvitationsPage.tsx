@@ -16,22 +16,22 @@ import {
   MyInvitationsFilter,
   MY_INVITATIONS_FILTER_FORM_ID,
 } from './MyInvitationsFilter';
+import { useMyWorkTitle } from './myWorkTitle';
+import { ExpiredResponseNotice, ResponseTimeLeft } from './ResponseDeadline';
 import { ReviewerProfileSummaryCard } from './ReviewerProfileSummaryCard';
 import { ReviewStatsWidgets } from './ReviewStatsWidgets';
 import { useMyReviewsTabs } from './tabs';
 
-// Extended type to include invitation_expires_at which may be returned by backend
-type CallReviewerPoolExtended = CallReviewerPool & {
-  invitation_expires_at?: string;
-};
-
-const InvitationActions: FC<{ row: CallReviewerPoolExtended }> = ({ row }) => {
-  const isPending = row.invitation_status === 'pending';
-
-  // Settled invitations have nothing to act on; the disabled menu keeps the
-  // column aligned with every other row.
-  if (!isPending) {
-    return <ActionsDropdown disabled tooltip />;
+// The API reports an invitation past its deadline as expired even before the
+// periodic expiry task has stored that. Accept and Decline are offered only
+// while the invitation can still be answered: an expired one gets a note in
+// their place, and a settled one has nothing to act on.
+export const InvitationActions: FC<{ row: CallReviewerPool }> = ({ row }) => {
+  if (row.is_expired || row.invitation_status === 'expired') {
+    return <ExpiredResponseNotice expiresAt={row.invitation_expires_at} />;
+  }
+  if (row.invitation_status !== 'pending') {
+    return null;
   }
 
   return (
@@ -44,9 +44,15 @@ const InvitationActions: FC<{ row: CallReviewerPoolExtended }> = ({ row }) => {
 
 // The row actions read invitation_status even when the Status column is
 // hidden, so the sparse-field request always asks for it.
-const mandatoryFields = ['uuid', 'invitation_expires_at', 'invitation_status'];
+const mandatoryFields = [
+  'uuid',
+  'invitation_expires_at',
+  'invitation_status',
+  'is_expired',
+];
 
 export const MyInvitationsPage: FC = () => {
+  const myWorkTitle = useMyWorkTitle();
   const tabs = useMyReviewsTabs();
   const values = useFilterValues('MyInvitationsTable');
 
@@ -86,15 +92,15 @@ export const MyInvitationsPage: FC = () => {
       {/* Stats widgets */}
       <ReviewStatsWidgets />
       {/* Invitations table */}
-      <Table<CallReviewerPoolExtended>
+      <Table<CallReviewerPool>
         {...tableProps}
-        title={translate('My reviews')}
+        title={myWorkTitle}
         tabs={tabs}
         columns={[
           {
             title: translate('Call'),
             render: ({ row }) => (
-              <span className="font-medium">{row.call_name}</span>
+              <span className="font-medium text-primary">{row.call_name}</span>
             ),
             keys: ['call_name'],
             id: 'call',
@@ -109,11 +115,16 @@ export const MyInvitationsPage: FC = () => {
             title: translate('Expires'),
             render: ({ row }) =>
               row.invitation_expires_at ? (
-                <>{formatDateTime(row.invitation_expires_at)}</>
+                <div className="flex flex-col gap-1 items-start">
+                  <span>{formatDateTime(row.invitation_expires_at)}</span>
+                  {row.invitation_status === 'pending' && !row.is_expired && (
+                    <ResponseTimeLeft expiresAt={row.invitation_expires_at} />
+                  )}
+                </div>
               ) : (
                 <span className="text-quaternary">-</span>
               ),
-            keys: ['invitation_expires_at'] as any,
+            keys: ['invitation_expires_at', 'invitation_status', 'is_expired'],
             id: 'expires',
             optional: true,
           },

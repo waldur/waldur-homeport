@@ -21,7 +21,7 @@ import { REGISTER_APPSERVICE_COMMAND } from './utils';
 const SETUP_FLOW_DIAGRAM = `
 flowchart TB
     subgraph setup["Appservice Setup"]
-        A["Staff clicks 'Setup appservice'"] --> B["Optionally enter Waldur URL and bot localpart"]
+        A["Staff clicks 'Setup appservice'"] --> B["Enter missing homeserver settings, optionally Waldur URL and bot localpart"]
         B --> C["Waldur generates AS & HS tokens"]
         C --> D["Registration YAML is displayed"]
     end
@@ -45,24 +45,26 @@ const ROOM_LIFECYCLE_DIAGRAM = `
 flowchart TB
     subgraph creation["Room Creation"]
         A["Owner, staff or support clicks 'Create chat room'"] --> B["Waldur calls homeserver API"]
+        A2["New project, if auto-create is enabled"] --> B
         B --> C["Room created with alias #waldur-{uuid}"]
-        C --> D["Auto-sync: invite project members"]
+        C --> D["Auto-sync: invite and join project members and organization owners"]
     end
 
     subgraph membership["Member Management"]
-        D --> E["Each project member gets invited"]
+        D --> E["Role changes add or remove members automatically"]
         E --> F["Power levels set based on role"]
         F --> G["Owner/Admin = power 50, Member = 0"]
     end
 
     subgraph lifecycle["Room Lifecycle"]
         G --> H["Room is ACTIVE"]
-        H --> I["Members join via Matrix client"]
+        H --> I["Members chat in Waldur or a Matrix client"]
         H --> J["Owner, staff or support can re-sync members anytime"]
         H --> K["Owner, staff or support can export chat history"]
         H --> L["Staff clicks 'Disable chat'"]
-        L --> M["DISABLING: members kicked, history exported"]
+        L --> M["DISABLING: notice posted, members kicked, history exported"]
         M --> N["Room is ARCHIVED"]
+        M -->|Export fails or bot is down| Q["Room is in ERROR, disable again"]
         N --> O["Staff can re-enable or delete room"]
         O -->|Re-enable| H
         H --> P["Room archived on project deletion"]
@@ -72,6 +74,7 @@ flowchart TB
     style N fill:var(--status-neutral-bg-strong),color:var(--text-primary)
     style M fill:var(--status-warning-bg-strong),color:var(--text-primary)
     style P fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style Q fill:var(--status-danger-bg-strong),color:var(--text-primary)
 `;
 
 const WEBHOOK_FLOW_DIAGRAM = `
@@ -105,24 +108,25 @@ const EXPORT_FLOW_DIAGRAM = `
 flowchart TB
     subgraph trigger["Export Triggers"]
         A["Manual: owner, staff or support clicks 'Export history'"]
-        B["Periodic: daily at 2 AM"]
+        B["Periodic: daily at 2 AM, if history export is enabled"]
         C["On disable: before archiving room"]
         D2["On project deletion: before archiving"]
     end
 
     subgraph process["Export Process"]
-        A & B & C & D2 --> D["Fetch room messages (paginated)"]
+        A & B & C & D2 --> D["Matrix bot reads and decrypts room messages"]
         D --> E{Export media enabled?}
         E -->|Yes| F["Download media files"]
         F --> G["Package into ZIP archive"]
         E -->|No| H["Skip media"]
-        G --> I["Save JSON export + media ZIP"]
+        G --> I["Save encrypted JSON export + media ZIP"]
         H --> I
     end
 
     subgraph result["Result"]
         I --> J["Export file: messages, metadata"]
         J --> K["Available for download"]
+        K --> L["Deleted after the retention period, except the newest"]
     end
 
     style E fill:var(--status-warning-bg-strong),color:var(--text-primary)
@@ -137,16 +141,36 @@ const BOT_COMMANDS = [
   {
     command: '!status',
     description: translate(
-      'Show resource status summary for the linked project',
+      "Show the project's errored resources, orders pending approval and operations in progress",
     ),
   },
   {
     command: '!orders',
-    description: translate('Show the last 5 orders for the project'),
+    description: translate("Show the project's last 5 orders"),
   },
   {
     command: '!members',
-    description: translate('List room members with their project roles'),
+    description: translate(
+      "List the room's joined members, marking moderators as admin",
+    ),
+  },
+  {
+    command: '!ticket [description]',
+    description: translate(
+      'Draft a support ticket from the conversation; send it as a reply or in a thread',
+    ),
+  },
+  {
+    command: '!ticket send',
+    description: translate(
+      'Send your ticket draft to the helpdesk (reply to it if you have several)',
+    ),
+  },
+  {
+    command: '!ticket cancel',
+    description: translate(
+      'Drop your ticket draft (reply to it if you have several)',
+    ),
   },
 ];
 
@@ -184,13 +208,13 @@ const KEY_CONCEPTS = [
   {
     term: translate('Power levels'),
     description: translate(
-      'Matrix permission system. Project admins and organization owners (any role with the "Create matrix room" permission) get level 50, which Element shows as Moderator; staff and support get it when they join a room. Everyone else gets the default level (0). Inviting, removing members and changing room settings need level 100, which only the bot holds.',
+      'Matrix permission system. Project admins and organization owners (any role with the "Create matrix room" permission) get level 50, which Element shows as Moderator; staff and support get it when they join a room with "Join room". Everyone else gets the default level (0). Inviting, removing members, deleting others\' messages and changing room settings need level 100, which only the bot holds.',
     ),
   },
   {
     term: translate('History export'),
     description: translate(
-      'A snapshot of all messages in a room, saved as a JSON file. Optionally includes media files in a ZIP archive. Can be triggered manually, on a schedule, or automatically before project deletion.',
+      'A snapshot of all messages in a room, read and decrypted by the Matrix bot and saved as an encrypted JSON file. Optionally includes media files in a ZIP archive. Can be triggered manually, on a schedule, or automatically when a room is disabled or its project is deleted. Exports older than the retention period are deleted, except the newest of each room.',
     ),
   },
 ];
@@ -210,7 +234,7 @@ export const MatrixHowItWorksDialog: FC = () => {
             variant="info"
             title={translate('What is Matrix chat integration?')}
             body={translate(
-              'Matrix is an open protocol for decentralized communication. This integration registers Waldur as a Matrix appservice, enabling automatic creation of project chat rooms, member synchronization based on project roles, bot commands for operational queries, and chat history exports for compliance.',
+              'Matrix is an open protocol for decentralized communication. This integration registers Waldur as a Matrix appservice, enabling encrypted project chat rooms, member synchronization based on project roles, bot commands for operational queries and support tickets, and chat history exports for compliance.',
             )}
           />
         </section>
@@ -235,7 +259,7 @@ export const MatrixHowItWorksDialog: FC = () => {
               <ol className="mb-0">
                 <li>
                   {translate(
-                    'Click "Setup appservice" and optionally provide the Waldur URL reachable by the homeserver',
+                    'Click "Setup appservice", fill in any missing homeserver settings (URL, domain, registration secret), and optionally provide the Waldur URL reachable by the homeserver and the bot localpart',
                   )}
                 </li>
                 <li>
@@ -263,7 +287,7 @@ export const MatrixHowItWorksDialog: FC = () => {
           <h4 className="mb-3">{translate('Room lifecycle')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'Each project can have one chat room. Rooms are created by organization owners (or any role with the "Create matrix room" permission), staff and support, and automatically populated with project members. Only staff can disable a room (kicking all members and exporting history) and later re-enable it or delete it entirely.',
+              'Each project can have one chat room. Rooms are created by organization owners (or any role with the "Create matrix room" permission), staff and support, or automatically for each new project when MATRIX_AUTO_CREATE_PROJECT_ROOMS is on. Project members and organization owners are added to the room, and removed when they lose their role. Every room is end-to-end encrypted and open only to users of this homeserver. Only staff can disable a room (kicking all members and exporting history) and later re-enable it or delete it entirely. A room is archived only once its history is exported; if the export fails, the room goes to error and can be disabled again.',
             )}
           </p>
           <div className="border border-secondary rounded-lg p-3">
@@ -294,7 +318,7 @@ export const MatrixHowItWorksDialog: FC = () => {
           <h4 className="mb-3">{translate('Bot commands')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'The Waldur bot responds to commands posted in project chat rooms. Type a command in the room and the bot will reply with the relevant information.',
+              'The Waldur bot responds to commands posted in project chat rooms by users with access to the project. Type a command in the room and the bot will reply with the relevant information. The ticket commands need the helpdesk to be enabled, and a full name and email address in your Waldur profile. A ticket draft expires if it is not sent in time.',
             )}
           </p>
           <Table density="normal">
@@ -324,7 +348,7 @@ export const MatrixHowItWorksDialog: FC = () => {
           <h4 className="mb-3">{translate('History export')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'Chat history can be exported as JSON files with optional media attachments. Exports can be triggered manually, run on a daily schedule, or happen automatically when a room is disabled or a project is deleted.',
+              'Chat history can be exported as JSON files with optional media attachments. Rooms are encrypted, so the Matrix bot reads and decrypts every export; exports wait while it is not running. Exports can be triggered manually (up to 10 per room a day), run on a daily schedule, or happen automatically when a room is disabled or a project is deleted. The daily, disable and project deletion exports run only while MATRIX_HISTORY_EXPORT_ENABLED is on; MATRIX_EXPORT_MEDIA adds media.',
             )}
           </p>
           <div className="border border-secondary rounded-lg p-3">

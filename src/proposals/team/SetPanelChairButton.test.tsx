@@ -56,12 +56,16 @@ describe('SetPanelChairButton', () => {
     expect(screen.queryByText('Set as panel chair')).not.toBeInTheDocument();
   });
 
+  const patched = () => {
+    const [body] = mutate.mock.calls[mutate.mock.calls.length - 1];
+    captured.value.mutationFn(body);
+    return vi.mocked(proposalProtectedCallsPartialUpdate).mock.calls[0][0];
+  };
+
   it('sets the member as chair via a call PATCH', async () => {
     renderButton({ uuid: 'call-1', panel_chair_uuid: '' });
     await userEvent.click(screen.getByText('Set as panel chair'));
-    expect(mutate).toHaveBeenCalled();
-    captured.value.mutationFn();
-    expect(proposalProtectedCallsPartialUpdate).toHaveBeenCalledWith({
+    expect(patched()).toEqual({
       path: { uuid: 'call-1' },
       body: { panel_chair: 'user-1' },
     });
@@ -73,11 +77,41 @@ describe('SetPanelChairButton', () => {
       panel_chair_uuid: 'user-1',
     });
     await userEvent.click(screen.getByText('Unset panel chair'));
-    captured.value.mutationFn();
-    expect(proposalProtectedCallsPartialUpdate).toHaveBeenCalledWith({
+    expect(patched()).toEqual({
       path: { uuid: 'call-1' },
       body: { panel_chair: null },
     });
     expect(captured.value.refetch).toBe(refetch);
+  });
+
+  it('sets the member as vice-chair', async () => {
+    renderButton({ uuid: 'call-1', panel_chair_uuid: 'user-2' });
+    await userEvent.click(screen.getByText('Set as vice-chair'));
+    expect(patched()).toEqual({
+      path: { uuid: 'call-1' },
+      body: { panel_vice_chair: 'user-1' },
+    });
+  });
+
+  it('moves the chair to the vice-chair seat in one PATCH', async () => {
+    renderButton({ uuid: 'call-1', panel_chair_uuid: 'user-1' });
+    await userEvent.click(screen.getByText('Set as vice-chair'));
+    expect(patched()).toEqual({
+      path: { uuid: 'call-1' },
+      body: { panel_vice_chair: 'user-1', panel_chair: null },
+    });
+  });
+
+  it('unsets the vice-chair', async () => {
+    renderButton({
+      uuid: 'call-1',
+      panel_chair_uuid: '',
+      panel_vice_chair_uuid: 'user-1',
+    });
+    await userEvent.click(screen.getByText('Unset vice-chair'));
+    expect(patched()).toEqual({
+      path: { uuid: 'call-1' },
+      body: { panel_vice_chair: null },
+    });
   });
 });

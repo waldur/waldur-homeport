@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { marketplaceProviderOfferingsArchive } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useOpenOfferingChange } from '@/marketplace/offerings/dependents/useOpenOfferingChange';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 interface ArchiveOfferingActionProps {
@@ -15,20 +15,30 @@ export const ArchiveOfferingAction: FC<ArchiveOfferingActionProps> = ({
   offering,
   refreshOffering,
 }) => {
-  const { mutate: archive, isPending } = useManagedMutation({
-    mutationFn: () =>
-      marketplaceProviderOfferingsArchive({ path: { uuid: offering.uuid } }),
-    successMessage: translate('Offering state has been updated.'),
-    errorMessage: translate('Unable to update offering state.'),
-    onSuccess: refreshOffering,
-  });
-
+  const openChange = useOpenOfferingChange();
   return (
     <ActionItem
       title={translate('Archive')}
-      action={() => archive()}
+      action={() =>
+        openChange({
+          title: translate('Archive offering'),
+          body: translate(
+            'Archived, {name} takes no new orders. Are you sure?',
+            { name: offering.name },
+          ),
+          change: 'offering_withdrawn',
+          offeringUuid: offering.uuid,
+          confirmLabel: translate('Archive'),
+          mutationFn: () =>
+            marketplaceProviderOfferingsArchive({
+              path: { uuid: offering.uuid },
+            }),
+          successMessage: translate('Offering state has been updated.'),
+          errorMessage: translate('Unable to update offering state.'),
+          onSuccess: refreshOffering,
+        })
+      }
       iconNode={<ArchiveIcon weight="bold" />}
-      disabled={isPending}
     />
   );
 };

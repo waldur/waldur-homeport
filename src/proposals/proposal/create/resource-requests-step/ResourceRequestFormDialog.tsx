@@ -203,6 +203,10 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
         // — so hand it to the purchase order block separately, or an editor
         // sees an empty field where their attachment should be.
         existingAttachment: props.resolve.resourceRequest?.attachment,
+        // For the first page's "already requested" notice; the request being
+        // edited is not counted against itself.
+        proposalUuid: props.resolve.proposal.uuid,
+        editingRequestUuid: props.resolve.resourceRequest?.uuid,
       }}
       onChange={handleFormChange}
     />

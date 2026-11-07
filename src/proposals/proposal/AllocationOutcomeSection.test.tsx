@@ -10,6 +10,7 @@ import {
   proposalProposalsResourcesList,
 } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderWithProviders } from '@/test/harness';
@@ -181,5 +182,353 @@ describe('AllocationOutcomeSection', () => {
     const row = await screen.findByRole('row', { name: /Project member/ });
     const [memberCell] = within(row).getAllByRole('cell');
     expect(memberCell).toHaveTextContent(DASH_ESCAPE_CODE);
+  });
+
+  // The API names the system role; the table shows the description the
+  // portal gives it.
+  it('names a granted project role by its description', async () => {
+    vi.spyOn(ENV, 'roles', 'get').mockReturnValue([
+      {
+        name: 'PROJECT.MEMBER',
+        description: 'Project member',
+        content_type: 'project',
+      },
+    ] as any);
+    vi.mocked(projectsRetrieve).mockImplementation(
+      () =>
+        Promise.resolve({ data: { name: 'P', customer_name: 'Org' } }) as any,
+    );
+    vi.mocked(projectsListUsersList).mockImplementation(() =>
+      page([{ user_full_name: 'Alice Doe', role_name: 'PROJECT.MEMBER' }]),
+    );
+    vi.mocked(proposalProposalsResourcesList).mockImplementation(() =>
+      page([]),
+    );
+
+    renderSection(<AllocationOutcomeSection proposal={proposal} />);
+
+    const row = await screen.findByRole('row', { name: /Alice Doe/ });
+    expect(row).toHaveTextContent('Project member');
+    expect(row).not.toHaveTextContent('PROJECT.MEMBER');
+    vi.restoreAllMocks();
+  });
+
+  describe('the Allocated column', () => {
+    const RESOURCE_UUID = 'bbbbccccddddeeeeffff000011112222';
+    const resourceUrl = `https://example.org/api/marketplace-resources/${RESOURCE_UUID}/`;
+
+    const requestRow = (overrides: Record<string, any>) => ({
+      uuid: `req-${Math.random()}`,
+      resource: resourceUrl,
+      requested_offering: {
+        uuid: 'ro-1',
+        state: 'accepted',
+        offering_name: 'HPC Premium Allocation',
+      },
+      ...overrides,
+    });
+
+    const renderRequests = (rows: any[]) => {
+      vi.mocked(projectsRetrieve).mockImplementation(
+        () =>
+          Promise.resolve({ data: { name: 'P', customer_name: 'Org' } }) as any,
+      );
+      vi.mocked(projectsListUsersList).mockImplementation(() => page([]));
+      vi.mocked(marketplaceResourcesList).mockImplementation(() => page([]));
+      vi.mocked(proposalProposalsResourcesList).mockImplementation(() =>
+        page(rows),
+      );
+      return renderSection(<AllocationOutcomeSection proposal={proposal} />);
+    };
+
+    it.each([
+      ['pending-provider', 'Awaiting the provider'],
+      ['executing', 'Being provisioned'],
+      ['erred', 'Provisioning failed'],
+      ['rejected', 'Refused by the provider'],
+      ['pending-start-date', 'Waiting for the project to start'],
+    ])('explains an order that is %s', async (orderState, label) => {
+      renderRequests([requestRow({ order_state: orderState })]);
+
+      expect(await screen.findByText(label)).toBeInTheDocument();
+      expect(screen.getByText('Open resource')).toBeInTheDocument();
+      expect(
+        screen.getByText('0 of 1 requests were allocated.'),
+      ).toBeInTheDocument();
+    });
+
+    it('shows the reason a refused order gives the viewer', async () => {
+      renderRequests([
+        requestRow({
+          order_state: 'rejected',
+          order_rejection_comment: 'The storage pool is fully committed.',
+        }),
+      ]);
+
+      expect(
+        await screen.findByText('The storage pool is fully committed.'),
+      ).toBeInTheDocument();
+    });
+
+    it('links an allocated resource and adds no summary', async () => {
+      renderRequests([requestRow({ order_state: 'done' })]);
+
+      expect(await screen.findByText('Open')).toBeInTheDocument();
+      expect(screen.queryByText(/requests were allocated/)).toBeNull();
+    });
+
+    it('explains an offering the provider has not accepted', async () => {
+      renderRequests([
+        requestRow({
+          resource: null,
+          order_state: null,
+          requested_offering: {
+            uuid: 'ro-2',
+            state: 'canceled',
+            offering_name: 'Cloud VM Package',
+          },
+        }),
+      ]);
+
+      expect(
+        await screen.findByText('Offering not accepted for this call'),
+      ).toBeInTheDocument();
+    });
+
+    it('keeps a dash, with a tooltip, when nothing explains the row', async () => {
+      renderRequests([requestRow({ resource: null, order_state: null })]);
+
+      expect(
+        await screen.findByText('HPC Premium Allocation'),
+      ).toBeInTheDocument();
+      const row = screen.getByRole('row', { name: /HPC Premium Allocation/ });
+      expect(within(row).getAllByRole('cell')[1]).toHaveTextContent(
+        DASH_ESCAPE_CODE,
+      );
+    });
+
+    it('reads the award: a reduced amount and a dropped request', async () => {
+      vi.mocked(projectsRetrieve).mockImplementation(
+        () =>
+          Promise.resolve({ data: { name: 'P', customer_name: 'Org' } }) as any,
+      );
+      vi.mocked(projectsListUsersList).mockImplementation(() => page([]));
+      vi.mocked(marketplaceResourcesList).mockImplementation(() => page([]));
+      const hpc = {
+        uuid: 'ro-1',
+        state: 'accepted',
+        offering_name: 'HPC Standard Allocation',
+        offering_type: 'Marketplace.Basic',
+        components: [
+          {
+            type: 'cpu_hours',
+            name: 'CPU hours',
+            measured_unit: 'h',
+            billing_type: 'limit',
+          },
+        ],
+      };
+      const storage = {
+        uuid: 'ro-2',
+        state: 'accepted',
+        offering_name: 'Research Data Storage',
+      };
+      const awardRows = [
+        {
+          uuid: 'aw-1',
+          change: 'changed',
+          requested: {
+            uuid: 'req-1',
+            requested_offering: hpc,
+            limits: { cpu_hours: 80000 },
+          },
+          awarded: {
+            uuid: 'aw-1',
+            requested_offering: hpc,
+            limits: { cpu_hours: 60000 },
+            resource: RESOURCE_UUID,
+            order_state: 'done',
+          },
+        },
+        {
+          uuid: 'req-2',
+          change: 'removed',
+          requested: {
+            uuid: 'req-2',
+            requested_offering: storage,
+            limits: { storage: 200 },
+          },
+        },
+      ] as any;
+
+      renderSection(
+        <AllocationOutcomeSection proposal={proposal} awardRows={awardRows} />,
+      );
+
+      expect(
+        await screen.findByText('1 of 2 requests were allocated.'),
+      ).toBeInTheDocument();
+      expect(screen.getAllByText('Not awarded').length).toBeGreaterThan(0);
+      expect(screen.getByText('60000 h')).toBeInTheDocument();
+      expect(screen.getByText('requested 80000 h')).toBeInTheDocument();
+    });
+
+    // The award can load before the requests it pairs with. Paired with
+    // nothing it reads as "added"; the table must rebuild once the request
+    // arrives, or the line keeps a dash under Requested.
+    it('rebuilds a line once its request arrives after the award', async () => {
+      vi.mocked(projectsRetrieve).mockImplementation(
+        () =>
+          Promise.resolve({ data: { name: 'P', customer_name: 'Org' } }) as any,
+      );
+      vi.mocked(projectsListUsersList).mockImplementation(() => page([]));
+      vi.mocked(marketplaceResourcesList).mockImplementation(() => page([]));
+      const offering = {
+        uuid: 'ro-1',
+        state: 'accepted',
+        offering_name: 'HPC Premium Allocation',
+      };
+      const awarded = {
+        uuid: 'aw-1',
+        requested_offering: offering,
+        resource: RESOURCE_UUID,
+        order_state: 'done',
+      };
+      const requested = {
+        uuid: 'req-1',
+        requested_offering: { ...offering, offering_name: 'Asked on premium' },
+      };
+
+      const { rerender } = renderSection(
+        <AllocationOutcomeSection
+          proposal={proposal}
+          awardRows={[{ uuid: 'aw-1', awarded, change: 'added' }] as any}
+        />,
+      );
+      expect(await screen.findByText('Added')).toBeInTheDocument();
+
+      rerender(
+        <DrawerProvider>
+          <Provider store={configureStore()({ tables: {} })}>
+            <AllocationOutcomeSection
+              proposal={proposal}
+              awardRows={
+                [
+                  { uuid: 'aw-1', awarded, requested, change: 'unchanged' },
+                ] as any
+              }
+            />
+          </Provider>
+        </DrawerProvider>,
+      );
+      expect(await screen.findByText('Asked on premium')).toBeInTheDocument();
+      expect(screen.queryByText('Added')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('the award against the request', () => {
+    const offering = (name: string) => ({
+      requested_offering: { offering_name: name },
+    });
+    const awardRow = (
+      uuid: string,
+      change: string,
+      requested: string | null,
+      awarded: string | null,
+    ) => ({
+      uuid,
+      change,
+      requested: requested
+        ? { uuid: `req-${uuid}`, ...offering(requested) }
+        : undefined,
+      awarded: awarded
+        ? { uuid, resource: null, ...offering(awarded) }
+        : undefined,
+    });
+
+    const mockProject = () => {
+      vi.mocked(projectsRetrieve).mockImplementation(
+        () =>
+          Promise.resolve({ data: { name: 'P', customer_name: 'Org' } }) as any,
+      );
+      vi.mocked(projectsListUsersList).mockImplementation(() => page([]));
+    };
+
+    it('says once that it matched, in one column, when every line is unchanged', async () => {
+      mockProject();
+      renderSection(
+        <AllocationOutcomeSection
+          proposal={proposal}
+          awardRows={
+            [
+              awardRow('a1', 'unchanged', 'HPC Standard', 'HPC Standard'),
+              awardRow('a2', 'unchanged', 'GPU Burst', 'GPU Burst'),
+            ] as any
+          }
+        />,
+      );
+
+      expect(await screen.findByText('GPU Burst')).toBeInTheDocument();
+      expect(screen.getByText('Awarded as requested.')).toBeInTheDocument();
+      expect(
+        screen.getByRole('columnheader', { name: 'Offering' }),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByRole('columnheader', { name: 'Awarded' }),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('columnheader', { name: 'Requested' }),
+      ).not.toBeInTheDocument();
+      // Each offering once: the request, not the award repeating it.
+      expect(screen.getAllByText('HPC Standard')).toHaveLength(1);
+      expect(screen.queryByText('As requested')).not.toBeInTheDocument();
+    });
+
+    it('leaves unchanged lines blank under Awarded when some differ', async () => {
+      mockProject();
+      renderSection(
+        <AllocationOutcomeSection
+          proposal={proposal}
+          awardRows={
+            [
+              awardRow('a1', 'unchanged', 'HPC Standard', 'HPC Standard'),
+              awardRow('a2', 'moved', 'GPU Burst', 'GPU Reserved'),
+              awardRow('a3', 'removed', 'Archive Storage', null),
+            ] as any
+          }
+        />,
+      );
+
+      expect(await screen.findByText('GPU Reserved')).toBeInTheDocument();
+      expect(
+        screen.getByRole('columnheader', { name: 'Requested' }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('columnheader', { name: 'Awarded' }),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText('Awarded as requested.'),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByText(
+          'Rows left blank under Awarded were awarded as requested.',
+        ),
+      ).toBeInTheDocument();
+
+      const unchanged = screen.getByRole('row', { name: /HPC Standard/ });
+      const [, awardedCell] = within(unchanged).getAllByRole('cell');
+      expect(awardedCell).toBeEmptyDOMElement();
+      expect(screen.getAllByText('HPC Standard')).toHaveLength(1);
+
+      const moved = screen.getByRole('row', { name: /GPU Burst/ });
+      expect(within(moved).getByText('Moved')).toBeInTheDocument();
+      // The Awarded cell carries the badge; the Allocated cell says the same
+      // of the outcome, so the badge is looked for in its own cell.
+      const removed = screen.getByRole('row', { name: /Archive Storage/ });
+      const [, removedAwardedCell] = within(removed).getAllByRole('cell');
+      expect(
+        within(removedAwardedCell).getByText('Not awarded'),
+      ).toBeInTheDocument();
+    });
   });
 });

@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
 import { CallReviewerPool, callReviewerPoolsList } from 'waldur-js-client';
 
@@ -69,6 +69,7 @@ const ReviewerPoolSectionTable: FC<ReviewerPoolSectionProps> = ({ call }) => {
           'reviewer_email',
           'invited_email',
           'invited_user_name',
+          'reviewer_standing',
         ],
       },
       {
@@ -84,13 +85,25 @@ const ReviewerPoolSectionTable: FC<ReviewerPoolSectionProps> = ({ call }) => {
           'invitation_status',
           'invitation_status_display',
           'invitation_expires_at',
+          'decline_reason',
+          'override_reason',
+          'overridden_by_name',
         ],
       },
       {
         id: 'reviews',
         title: translate('Reviews'),
-        render: ReviewerReviews,
-        keys: ['reviews_in_progress', 'reviews_completed'],
+        render: ({ row }: { row: CallReviewerPoolExtended }) => (
+          <ReviewerReviews row={row} call={call} />
+        ),
+        keys: [
+          'reviews_in_progress',
+          'reviews_completed',
+          'reviewer_uuid',
+          'invited_user',
+          'reviewer_name',
+          'invited_user_name',
+        ],
       },
       {
         id: 'coi',
@@ -131,7 +144,14 @@ const ReviewerPoolSectionTable: FC<ReviewerPoolSectionProps> = ({ call }) => {
         optional: true,
       },
     ],
-    [],
+    [call],
+  );
+
+  // The expanded row links each conflict's proposal into the call's
+  // organization, so it is given the call.
+  const ExpandableRow = useCallback(
+    ({ row }) => <ReviewerPoolExpandableRow row={row} call={call} />,
+    [call],
   );
 
   return (
@@ -145,10 +165,11 @@ const ReviewerPoolSectionTable: FC<ReviewerPoolSectionProps> = ({ call }) => {
       hasQuery
       filters={<CallReviewerPoolsFilter />}
       hasOptionalColumns
-      expandableRow={ReviewerPoolExpandableRow}
+      expandableRow={ExpandableRow}
       rowActions={({ row }: { row: CallReviewerPoolExtended }) => (
         <ReviewerRowActions
           row={row}
+          call={call}
           refetch={tableProps.fetch}
           canManage={canManage}
         />

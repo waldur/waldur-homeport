@@ -3,6 +3,11 @@ import { proposalProposalsResourcesList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 
+export const proposalResourceRowsKey = (proposalUuid: string) => [
+  'ProposalResourcesSummary',
+  proposalUuid,
+];
+
 /**
  * Every requested resource, not the page a table happens to show.
  *
@@ -13,7 +18,7 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
  */
 export const useProposalResourceRows = (proposalUuid: string) =>
   useQuery({
-    queryKey: ['ProposalResourcesSummary', proposalUuid],
+    queryKey: proposalResourceRowsKey(proposalUuid),
     queryFn: () =>
       getAllPages((page) =>
         proposalProposalsResourcesList({

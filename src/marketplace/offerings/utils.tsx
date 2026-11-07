@@ -9,6 +9,7 @@ import {
   checkIsStaffOrSupport,
 } from '@/workspace/selectors';
 
+import { isMarketplaceVisible } from '../serviceAccessMode';
 import { getMarketplaceTitle } from '../title';
 
 import { PublicOfferingBreadcrumbPopover } from './PublicOfferingBreadcrumbPopover';
@@ -75,6 +76,28 @@ export const getPublicOfferingBreadcrumbItems = (
   offering,
   router,
 ): IBreadcrumbItem[] => {
+  // Calls-only mode has no shop to lead back to: the page is reached from the
+  // offerings the calls list, so that is where its trail goes.
+  if (!isMarketplaceVisible()) {
+    return [
+      {
+        key: 'calls-for-proposals',
+        text: translate('Calls for proposals'),
+        to: 'calls-for-proposals-dashboard',
+      },
+      {
+        key: 'available-offerings',
+        text: translate('Available offerings'),
+        to: 'calls-for-proposals-all-available-offerings',
+      },
+      {
+        key: 'offering',
+        text: offering?.name || '...',
+        truncate: true,
+        active: true,
+      },
+    ];
+  }
   return [
     {
       key: 'marketplace',

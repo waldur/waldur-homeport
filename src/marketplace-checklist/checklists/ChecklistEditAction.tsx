@@ -29,6 +29,9 @@ export const ChecklistEditAction: FC<ChecklistEditActionProps> = ({
       name: r.name,
       checklist_type: r.checklist_type,
       description: r.description,
+      customer: r.customer
+        ? { uuid: r.customer, name: r.customer_name ?? '' }
+        : null,
     })}
     formId={CHECKLIST_FORM_ID}
   />

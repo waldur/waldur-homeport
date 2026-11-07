@@ -1,6 +1,9 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, ReactNode, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { Proposal, proposalProposalsList } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
@@ -13,6 +16,7 @@ import {
   requestNounPlural,
   showsCallColumns,
 } from '@/proposals/presentation';
+import { SubmissionDeadlineField } from '@/proposals/proposal/SubmissionDeadlineField';
 import { getProposalStateOptions } from '@/proposals/utils';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -27,10 +31,10 @@ import { Column } from '@/table/types';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
-import { EndingField } from '../EndingField';
-
-import { ProposalBadge } from './ProposalBadge';
+import { ProposalStateBadge } from './ProposalStateBadge';
+import { UserProposalExpandableRow } from './UserProposalExpandableRow';
 
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
@@ -74,12 +78,16 @@ export const UserProposalsList: FC<UserProposalsListProps> = ({
       // list different sets: a PROPOSAL.MEMBER saw a team-mate's line items
       // in the resource lens and no sign of the request they belong to. Two
       // projections of one page cannot disagree about what is in it, so both
-      // use the readable scope.
-      o: ['-round__cutoff_time'],
+      // use the readable scope -- as anyone but staff and support reads it:
+      // their reach over every proposal is the administration's list, not
+      // their own (`involved`).
+      involved: true,
       ...formFilters,
     }),
     [formFilters],
   );
+
+  const staffReach = useSelector(isStaffOrSupport);
 
   const tableProps = useTable({
     table: 'MyProposalsList',
@@ -93,7 +101,11 @@ export const UserProposalsList: FC<UserProposalsListProps> = ({
 
   const callColumn: Column<Proposal> = {
     title: translate('Call'),
-    render: ({ row }) => <>{renderFieldOrDash(row.call_name)}</>,
+    render: ({ row }) => (
+      <span className="font-medium text-primary">
+        {renderFieldOrDash(row.call_name)}
+      </span>
+    ),
     keys: ['call_name'],
     filter: 'call',
     inlineFilter: (row) => ({ name: row.call_name, uuid: row.call_uuid }),
@@ -116,15 +128,16 @@ export const UserProposalsList: FC<UserProposalsListProps> = ({
     },
     ...(showsCallColumns() ? [callColumn] : []),
     {
-      title: translate('Ending'),
-      render: ({ row }) => <EndingField endDate={row.round?.cutoff_time} />,
+      title: translate('Submission deadline'),
+      render: SubmissionDeadlineField,
       keys: ['round'],
+      orderField: 'round__cutoff_time',
       id: 'ending',
       className: 'whitespace-nowrap',
     },
     {
       title: translate('State'),
-      render: ({ row }) => <ProposalBadge state={row.state} />,
+      render: ({ row }) => <ProposalStateBadge row={row} />,
       keys: ['state'],
       orderField: 'state',
       filter: 'state',
@@ -169,20 +182,48 @@ export const UserProposalsList: FC<UserProposalsListProps> = ({
   }
 
   return (
-    <Table
-      {...tableProps}
-      formId={ProposalsFilterFormId}
-      columns={columns}
-      title={standalone ? requestListTitle() : undefined}
-      verboseName={requestNounPlural()}
-      standalone={standalone}
-      tableActions={actions}
-      hasQuery={true}
-      hasOptionalColumns
-      showPageSizeSelector={true}
-      // Same predicate as the Call column above: a deployment that hides
-      // calls must not offer to filter by one.
-      filters={<ProposalsFilter hideCall={!showsCallColumns()} />}
-    />
+    <>
+      {/* Staff and support read every proposal; their list is the user's
+          own, and says where the rest are. */}
+      {staffReach && standalone && (
+        <AlertItem
+          type="floating"
+          variant="info"
+          className="mb-4"
+          data-testid="own-proposals-note"
+          title={translate('Only the proposals you take part in')}
+          body={
+            <>
+              {translate(
+                'Every proposal of every call is listed in the administration:',
+              )}{' '}
+              <Link
+                state="admin-proposals"
+                label={translate('All proposals')}
+              />
+            </>
+          }
+        />
+      )}
+      <Table
+        {...tableProps}
+        formId={ProposalsFilterFormId}
+        columns={columns}
+        title={standalone ? requestListTitle() : undefined}
+        verboseName={requestNounPlural()}
+        standalone={standalone}
+        tableActions={actions}
+        // Newest first: the proposal just created or submitted is on top,
+        // whichever round's deadline is furthest away.
+        initialSorting={{ field: 'created', mode: 'desc' }}
+        hasQuery={true}
+        hasOptionalColumns
+        showPageSizeSelector={true}
+        expandableRow={UserProposalExpandableRow}
+        // Same predicate as the Call column above: a deployment that hides
+        // calls must not offer to filter by one.
+        filters={<ProposalsFilter hideCall={!showsCallColumns()} />}
+      />
+    </>
   );
 };

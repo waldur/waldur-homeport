@@ -17,7 +17,9 @@ vi.mock('../workflow/queries', () => ({
   callWorkflowStepsKey: (uuid: string) => ['callWorkflowSteps', uuid],
   fetchCallWorkflowSteps: vi
     .fn()
-    .mockResolvedValue([{ is_enabled: true, is_mandatory: true }]),
+    .mockResolvedValue([
+      { is_enabled: true, is_mandatory: true, is_allocation_decision: true },
+    ]),
 }));
 
 const call = {
@@ -76,5 +78,27 @@ describe('CallActions activation', () => {
     await activate();
     expect(screen.queryByText('No role mappings')).not.toBeInTheDocument();
     expect(proposalProtectedCallsActivate).toHaveBeenCalled();
+  });
+
+  it('shows every error of the workflow check when activation is refused', async () => {
+    mockMappingCount(1);
+    vi.mocked(proposalProtectedCallsActivate).mockRejectedValue({
+      detail: 'Call must have a round to be activated.',
+      workflow_check: [
+        {
+          code: 'no_round',
+          severity: 'error',
+          step: null,
+          step_name: null,
+          field: 'rounds',
+          message: 'Call must have a round to be activated.',
+          because: [],
+        },
+      ],
+    });
+    await activate();
+    await waitFor(() => expect(useModal().openDialog).toHaveBeenCalled());
+    const [, options] = vi.mocked(useModal().openDialog).mock.calls[0];
+    expect((options as any).resolve.findings).toHaveLength(1);
   });
 });

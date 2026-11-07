@@ -1,0 +1,64 @@
+// The diagram keeps its own size: wide workflows scroll sideways rather
+// than shrink their text.
+.workflow-diagram-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border-secondary);
+  border-radius: 6.5px;
+
+  svg {
+    display: block;
+  }
+
+  [role='button']:focus {
+    outline: none;
+  }
+}
+
+.workflow-diagram-legend {
+  // The colours come from the drawing's palette, set on the list.
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 5.2px;
+  }
+
+  .legend-line {
+    display: inline-block;
+    width: 24px;
+    border-top: 2px solid var(--wd-muted);
+  }
+
+  .legend-input {
+    border-top: 2px dashed var(--wd-accent);
+  }
+
+  .legend-bypass {
+    border-top: 2px dotted var(--wd-condition);
+  }
+
+  .legend-negative {
+    border-top-color: var(--wd-negative);
+  }
+
+  .legend-change-request {
+    border-top: 2px dashed var(--wd-warning);
+  }
+
+  .legend-diamond {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: var(--wd-condition-soft);
+    border: 1px solid var(--wd-condition);
+    transform: rotate(45deg);
+  }
+
+  .legend-swatch {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 3.25px;
+    border: 1px solid var(--wd-line);
+    border-radius: 3px;
+  }
+}

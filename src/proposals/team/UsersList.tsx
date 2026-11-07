@@ -31,6 +31,9 @@ interface UsersListProps {
   canRemoveRow?: (row: GenericPermission) => boolean;
   /** Why Remove is disabled on this row, shown as its tooltip. */
   getRemoveDisabledReason?: (row: GenericPermission) => string | undefined;
+  /** Said in Remove's confirmation, e.g. that the change is made for the
+   * applicant. */
+  removeConfirmationNote?: ReactNode;
   scopeType: TeamScopeType;
   /** Called after a member was removed; defaults to reloading the table. */
   refetch?(): void;
@@ -52,6 +55,7 @@ export const UsersList: FC<UsersListProps> = ({
   roleSuffix,
   canRemoveRow,
   getRemoveDisabledReason,
+  removeConfirmationNote,
   scopeType,
   refetch,
 }) => {
@@ -89,6 +93,7 @@ export const UsersList: FC<UsersListProps> = ({
                       scopeType={scopeType}
                       canRemove
                       disabledReason={getRemoveDisabledReason?.(row)}
+                      confirmationNote={removeConfirmationNote}
                     />
                   ) : null}
                 </ActionsMenu>

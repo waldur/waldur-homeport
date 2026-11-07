@@ -62,8 +62,12 @@ export const PlanActions = ({ offering, plan, refetch, user }) => {
       {hasPermission(user, {
         permission: PermissionEnum.ARCHIVE_OFFERING_PLAN,
         customerId: offering.customer_uuid,
-      }) && <ArchivePlanButton refetch={refetch} plan={plan} />}
-      {user.is_staff && <DeletePlanButton refetch={refetch} plan={plan} />}
+      }) && (
+        <ArchivePlanButton offering={offering} refetch={refetch} plan={plan} />
+      )}
+      {user.is_staff && (
+        <DeletePlanButton offering={offering} refetch={refetch} plan={plan} />
+      )}
     </ActionsMenu>
   );
 };

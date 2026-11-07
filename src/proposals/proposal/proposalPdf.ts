@@ -4,6 +4,7 @@ import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { formatUsageValue } from '@/core/formatNumber';
 import { decodeFileName } from '@/core/utils';
 import { translate } from '@/i18n';
+import { formatRole } from '@/permissions/utils';
 import {
   formatPrepaidMonths,
   getRequestedPrepaidMonths,
@@ -115,6 +116,15 @@ export const buildProposalDocument = (
   }
 
   content.push(heading(translate('Requested resources')));
+  if (proposal.reads_own_offerings_only) {
+    content.push({
+      text: translate(
+        "Only your offerings' part is shown. What is requested of other providers' offerings is not shown to you.",
+      ),
+      style: 'label',
+      margin: [0, 0, 0, 6],
+    });
+  }
   content.push(
     resources.length
       ? {
@@ -160,7 +170,7 @@ export const buildProposalDocument = (
               ...team.map((member) => [
                 value(member.user_full_name || member.user_username),
                 value(member.user_email),
-                value(member.role_name),
+                value(formatRole(member.role_name, 'proposal')),
               ]),
             ],
           },

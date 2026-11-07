@@ -23,11 +23,15 @@ import {
   getProjectNameRestrictionHint,
 } from '@/project/validators';
 import { EndingField } from '@/proposals/EndingField';
-import { usesCallVocabulary } from '@/proposals/presentation';
+import { showsCallContext, usesCallVocabulary } from '@/proposals/presentation';
+import { ExistingAccessNotice } from '@/proposals/proposal/create/ExistingAccessNotice';
 import { getProposalProjectName } from '@/proposals/proposalProjectName';
+import { isOpenEnded } from '@/proposals/roundCutoff';
 import { Call } from '@/proposals/types';
 import { useNotify } from '@/store/notify';
 import { UsersService } from '@/user/UsersService';
+
+import { PROPOSAL_FIELD_MAX_LENGTH } from './proposalFields';
 
 interface FormData {
   name: string;
@@ -200,20 +204,27 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                 </>
               }
             >
-              <PropertyList variant="summary" termWidth="md" space={1.5}>
-                <PropertyItem
-                  label={
-                    usesCallVocabulary()
-                      ? translate('Call name')
-                      : translate('Available under')
-                  }
-                  value={props.resolve.call.name}
+              {props.resolve.offering ? (
+                <ExistingAccessNotice
+                  offeringUuid={props.resolve.offering.uuid}
                 />
-                {usesCallVocabulary() ? (
-                  <PropertyItem
-                    label={translate('Round reference')}
-                    value={props.resolve.round.name}
-                  />
+              ) : null}
+              <PropertyList variant="summary" termWidth="md" space={1.5}>
+                {/* The call and its round are the call's own names. Where the
+                    deployment hides calls from applicants, a label other than
+                    "Call" does not hide the name it introduces: the applicant
+                    never meets that name again, so it says nothing to them. */}
+                {showsCallContext() ? (
+                  <>
+                    <PropertyItem
+                      label={translate('Call name')}
+                      value={props.resolve.call.name}
+                    />
+                    <PropertyItem
+                      label={translate('Round reference')}
+                      value={props.resolve.round.name}
+                    />
+                  </>
                 ) : null}
                 <PropertyItem
                   label={
@@ -224,6 +235,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                   value={
                     <EndingField
                       endDate={props.resolve.round.cutoff_time}
+                      openEnded={isOpenEnded(props.resolve.round)}
                       dateFirst
                       hasFixedDuration={Boolean(
                         props.resolve.call.fixed_duration_in_days,
@@ -237,6 +249,8 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                   label={translate('Name')}
                   name="name"
                   placeholder={translate('Name your project')}
+                  maxLength={PROPOSAL_FIELD_MAX_LENGTH.name}
+                  showCharacterCount
                   required
                   validate={validateName}
                   description={nameDescription}

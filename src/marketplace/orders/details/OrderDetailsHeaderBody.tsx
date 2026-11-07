@@ -9,6 +9,7 @@ import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
 import { propVal } from '@/property/propertyFields';
 import { useUser } from '@/workspace/hooks';
 
+import { OrderAwardLimits, OrderAwardSource } from '../OrderAwardContext';
 import { shouldLinkProviderResource } from '../utils';
 
 import { OrderDetailsQuickBody } from './OrderDetailsQuickBody';
@@ -116,6 +117,34 @@ export const OrderDetailsHeaderBody = ({
           />
         </PropertyList>
       </div>
+      {order.award ? (
+        <div className="w-full sm:w-auto sm:flex-none">
+          <PropertyList variant="summary" termWidth="100px">
+            <PropertyItem
+              label={translate('Award')}
+              value={
+                <OrderAwardSource
+                  award={order.award}
+                  providerUuid={
+                    shouldLinkProviderResource(user, order)
+                      ? order.provider_uuid
+                      : undefined
+                  }
+                />
+              }
+            />
+            <PropertyItem
+              label={translate('Awarded')}
+              value={
+                <OrderAwardLimits
+                  award={order.award}
+                  components={offering?.components}
+                />
+              }
+            />
+          </PropertyList>
+        </div>
+      ) : null}
       {showPurchaseOrder && (
         <div className="w-full sm:w-auto sm:flex-none">
           <PropertyList variant="summary" termWidth="125px">

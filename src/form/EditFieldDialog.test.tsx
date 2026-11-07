@@ -157,6 +157,56 @@ describe('EditFieldDialog', () => {
     );
   });
 
+  it('shows what the server refused about the field under it', async () => {
+    const callback = vi.fn().mockRejectedValue({
+      compliance_checklist: ['This form belongs to another organisation.'],
+      status: 400,
+      response: { status: 400 },
+    });
+    renderDialog({
+      scope: { compliance_checklist: 'Ethics' },
+      name: 'compliance_checklist',
+      callback,
+      emptyValue: '',
+    });
+
+    const input = screen.getByRole('textbox');
+    await userEvent.clear(input);
+    await userEvent.type(input, 'Foreign form');
+    await submit();
+
+    expect(
+      await screen.findByText('This form belongs to another organisation.'),
+    ).toBeInTheDocument();
+
+    // Changing the value hides it and lets the user try again.
+    await userEvent.type(input, ' 2');
+    expect(
+      screen.queryByText('This form belongs to another organisation.'),
+    ).toBeNull();
+    expect(screen.getByRole('button', { name: /confirm/i })).toBeEnabled();
+  });
+
+  it('shows nothing under the field when the refusal is about something else', async () => {
+    const callback = vi.fn().mockRejectedValue({
+      detail: 'Not allowed.',
+      status: 403,
+      response: { status: 403 },
+    });
+    renderDialog({
+      scope: { organization: 'AI Platform Services' },
+      name: 'organization',
+      callback,
+      emptyValue: '',
+    });
+
+    await userEvent.type(screen.getByRole('textbox'), ' Ltd');
+    await submit();
+
+    await waitFor(() => expect(callback).toHaveBeenCalled());
+    expect(screen.queryByText('Not allowed.')).toBeNull();
+  });
+
   it('pre-fills the value at a nested path and submits the edit there', async () => {
     const callback = vi.fn().mockResolvedValue({});
     renderDialog({

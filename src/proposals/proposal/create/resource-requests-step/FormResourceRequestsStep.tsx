@@ -87,62 +87,64 @@ const ProposalResourcesTableComponent: FC<ProposalResourcesTableProps> = ({
   }, [onTableReady, tableProps.fetch]);
 
   return (
-    <Table<ProposalResource>
-      {...tableProps}
-      // Provider and category live in the expanded row instead: the progress
-      // rail narrows this panel, and six columns pushed estimated cost and
-      // purchase order — what a reviewer is here for — behind a sideways
-      // scroll.
-      columns={readOnlyMode ? readOnlyColumns : columns}
-      // The step card above already carries this heading and its own border;
-      // repeating both gave the panel a second "Resource requests" title inside
-      // a nested box. Same treatment the project team step gives its table.
-      hideTitle
-      cardBordered={false}
-      // The step is already a card: this table adds no card and no insets of
-      // its own, so it sits flush inside the step rather than reading as a
-      // second panel nested in the first.
-      className="border-0 shadow-none"
-      bodyClassName="p-0"
-      headerClassName="mx-0"
-      fullWidth
-      filters={
-        readOnlyMode ? null : (
-          <ProposalResourcesFilter offerings={call?.offerings} />
-        )
-      }
-      formId={FORM_ID}
-      verboseName={translate('Resources')}
-      emptyMessage={
-        readOnlyMode
-          ? translate('No resources available in the current project.')
-          : translate(
-              'No resources available in the current project. Start by adding or managing resources to get started.',
-            )
-      }
-      minHeight="auto"
-      expandableRow={ResourceRequestExpandableRow}
-      // The step's own reload, not the table's: an edit or a delete changes
-      // what the summary totals just as much as an add does, and only the
-      // former reloads both.
-      rowActions={({ row }) =>
-        !readOnlyMode ? (
-          <ResourceRequestItemActions
-            row={row}
-            proposal={proposal}
-            refetch={refetchTable}
-          />
-        ) : null
-      }
-      footer={
-        <FieldReviewComments
-          reviews={reviews}
-          fieldName="comment_resource_requests"
-          space={0}
-          className="mt-4"
-        />
-      }
-    />
+    <>
+      <Table<ProposalResource>
+        {...tableProps}
+        // Provider and category live in the expanded row instead: the progress
+        // rail narrows this panel, and six columns pushed estimated cost and
+        // purchase order — what a reviewer is here for — behind a sideways
+        // scroll.
+        columns={readOnlyMode ? readOnlyColumns : columns}
+        // The step card above already carries this heading and its own border;
+        // repeating both gave the panel a second "Resource requests" title inside
+        // a nested box. Same treatment the project team step gives its table.
+        hideTitle
+        cardBordered={false}
+        // The step is already a card: this table adds no card and no insets of
+        // its own, so it sits flush inside the step rather than reading as a
+        // second panel nested in the first.
+        className="border-0 shadow-none"
+        bodyClassName="p-0"
+        headerClassName="mx-0"
+        fullWidth
+        filters={
+          readOnlyMode ? null : (
+            <ProposalResourcesFilter offerings={call?.offerings} />
+          )
+        }
+        formId={FORM_ID}
+        verboseName={translate('Resources')}
+        emptyMessage={
+          readOnlyMode
+            ? translate('No resources available in the current project.')
+            : translate(
+                'No resources available in the current project. Start by adding or managing resources to get started.',
+              )
+        }
+        minHeight="auto"
+        expandableRow={ResourceRequestExpandableRow}
+        // The step's own reload, not the table's: an edit or a delete changes
+        // what the summary totals just as much as an add does, and only the
+        // former reloads both.
+        rowActions={({ row }) =>
+          !readOnlyMode ? (
+            <ResourceRequestItemActions
+              row={row}
+              proposal={proposal}
+              refetch={refetchTable}
+            />
+          ) : null
+        }
+      />
+      {/* About every request, not a row of them: below the table. */}
+      <FieldReviewComments
+        reviews={reviews}
+        fieldName="comment_resource_requests"
+        nested
+        space={0}
+        className="mt-4"
+      />
+    </>
   );
 };
 
@@ -227,7 +229,12 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
     <AccordionCard
       id={props.id}
       title={translate('Resource requests')}
-      subtitle={translate('Resources requested for your project.')}
+      // Read, by a reviewer, it is the proposal's; edited, the applicant's.
+      subtitle={
+        readOnlyMode
+          ? translate('Resources requested for this proposal.')
+          : translate('Resources requested for your project.')
+      }
       isOpen={isOpen}
       onToggle={onToggle}
       actions={

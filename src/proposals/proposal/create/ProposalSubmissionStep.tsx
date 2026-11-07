@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
-import { get, pick } from 'es-toolkit/compat';
+import { pick } from 'es-toolkit/compat';
 import { FORM_ERROR } from 'final-form';
 import { createRef, FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Field, Form } from 'react-final-form';
@@ -9,14 +9,16 @@ import {
   proposalProposalsChecklistRetrieve,
   proposalProposalsSubmit,
   proposalProposalsSubmitAnswers,
+  proposalProposalsSubmitChanges,
   proposalProposalsUpdateProjectDetails,
   ProposalReview,
 } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
 import { formDataOptions } from '@/core/api';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { useAccordionUrlState } from '@/core/useAccordionUrlState';
-import { isEmpty } from '@/core/utils';
 import { hasUnsavedChanges, NavigationBlocker } from '@/form/NavigationBlocker';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
@@ -30,9 +32,23 @@ import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
 import { useNotify } from '@/store/notify';
 
 import {
+  applicantChangeNote,
+  useActingForApplicant,
+  useConfirmApplicantChange,
+} from '../actingForApplicant';
+import {
+  anyFieldUnlocked,
+  getOpenChangeRequests,
+  isPartEditable,
+} from '../changeRequests';
+
+import { ChangeRequestNotice } from './ChangeRequestNotice';
+import {
   extractComplianceAnswers,
   isComplianceAnswerFilled,
 } from './complianceUtils';
+import { DeleteDraftAction } from './DeleteDraftAction';
+import { isProposalFieldFilled } from './proposalFields';
 import { ProposalSidebar } from './ProposalSidebar';
 import { createProposalSteps } from './steps';
 
@@ -93,21 +109,44 @@ const toProjectDetailsBody = (formValues: any) => {
   };
 };
 
-const attachDocuments = async (proposal_uuid, supporting_documentation) => {
-  if (supporting_documentation) {
-    const files: File[] = Object.values(supporting_documentation);
-    if (files && files.length > 0) {
-      await Promise.all(
-        Array.from(files).map((file) =>
-          proposalProposalsAttachDocument({
-            path: { uuid: proposal_uuid },
-            body: { file },
-            ...formDataOptions,
-          }),
-        ),
-      );
+interface AttachedDocuments {
+  uploaded: File[];
+  refused: { file: File; error: unknown }[];
+}
+
+const NOTHING_ATTACHED: AttachedDocuments = { uploaded: [], refused: [] };
+
+/** A file the backend would not take: a duplicate, a wrong type. */
+const isRefusal = (error: any) => error?.status === 400;
+
+/**
+ * Uploads the pending files one at a time, so a file repeated within one save
+ * is refused like one the proposal already holds. A refusal does not stop the
+ * others: the caller reports each refused file by name and keeps it pending.
+ * Anything else (the session gone, the server down) fails the save as before.
+ */
+const attachDocuments = async (
+  proposal_uuid,
+  supporting_documentation,
+): Promise<AttachedDocuments> => {
+  const files: File[] = Object.values(supporting_documentation || {});
+  const result: AttachedDocuments = { uploaded: [], refused: [] };
+  for (const file of files) {
+    try {
+      await proposalProposalsAttachDocument({
+        path: { uuid: proposal_uuid },
+        body: { file },
+        ...formDataOptions,
+      });
+      result.uploaded.push(file);
+    } catch (error) {
+      if (!isRefusal(error)) {
+        throw error;
+      }
+      result.refused.push({ file, error });
     }
   }
+  return result;
 };
 
 const submitComplianceAnswers = async (
@@ -152,6 +191,10 @@ export const ProposalSubmissionStep: FC<{
 }> = ({ proposal, call, reviews, refetch, canSubmitProposal = true }) => {
   const { confirm } = useModal();
   const router = useRouter();
+  // Staff or the call team editing a submitted proposal whose changes were
+  // asked for: every save changes what the applicant submitted.
+  const actingForApplicant = useActingForApplicant(proposal);
+  const confirmApplicantChange = useConfirmApplicantChange(proposal);
 
   const { showErrorResponse, showSuccess } = useNotify();
 
@@ -194,6 +237,8 @@ export const ProposalSubmissionStep: FC<{
             name: proposal.science_sub_domain_name,
           }
         : null,
+      // One of the call's allowed_duration_months; null where it offers none.
+      requested_duration_months: proposal.requested_duration_months ?? null,
       resources: [],
       resources_init: [], // Temporary field to hold current resource requests
       users: [],
@@ -238,8 +283,31 @@ export const ProposalSubmissionStep: FC<{
     });
   }, [shouldAddComplianceStep, call]);
 
+  // Changes asked of a submitted proposal reopen only the sections holding
+  // a part they unlock; a draft shows them all.
+  const changeRequests = useMemo(
+    () => getOpenChangeRequests(proposal),
+    [proposal],
+  );
+  const changesRequested = changeRequests.length > 0;
+  const shownSteps = useMemo(() => {
+    if (!changesRequested) return formSteps;
+    const unlocked = (part: string) => isPartEditable(proposal, part);
+    const shown: Record<string, boolean> = {
+      'step-general': true,
+      'step-project': anyFieldUnlocked(changeRequests) || unlocked('documents'),
+      'step-compliance': unlocked('compliance'),
+      'step-resource-requests': unlocked('resources'),
+      'step-team': unlocked('team'),
+    };
+    return formSteps.filter((step) => shown[step.id] ?? false);
+  }, [formSteps, changesRequested, changeRequests, proposal]);
+
   // Get panel IDs for accordion URL state management
-  const panelIds = useMemo(() => formSteps.map((step) => step.id), [formSteps]);
+  const panelIds = useMemo(
+    () => shownSteps.map((step) => step.id),
+    [shownSteps],
+  );
 
   // Manage accordion open/closed state via URL query params.
   // Project details is open on arrival: it holds the first fields the
@@ -252,8 +320,8 @@ export const ProposalSubmissionStep: FC<{
   const stepRefs = useRef([]);
   // Recalculate step refs when steps change (e.g., when compliance step is added)
   stepRefs.current = useMemo(() => {
-    return formSteps.map((_, i) => stepRefs.current[i] ?? createRef());
-  }, [formSteps]);
+    return shownSteps.map((_, i) => stepRefs.current[i] ?? createRef());
+  }, [shownSteps]);
 
   // Store form reference for updating fields after save
   const formRef = useRef<any>(null);
@@ -311,17 +379,16 @@ export const ProposalSubmissionStep: FC<{
   // after the refetch, and the next save would attach the same files again.
   // Anything typed or dropped while the save ran stays unsaved. The mirrored
   // lists keep their empty start: pristine, the next refetch would empty them.
-  const markSaved = (saved: any) => {
+  const markSaved = (saved: any, uploaded: File[]) => {
     const form = formRef.current;
     if (!form) return;
-    const uploaded = Object.values(saved.supporting_documentation || {});
     form.batch(() => {
       form.initialize({
         ...saved,
         ...pick(form.getState().initialValues, MIRRORED_FIELDS),
         supporting_documentation: undefined,
       });
-      const pending = Object.values(
+      const pending: File[] = Object.values(
         form.getState().values.supporting_documentation || {},
       );
       const left = pending.filter((file) => !uploaded.includes(file));
@@ -329,29 +396,75 @@ export const ProposalSubmissionStep: FC<{
     });
   };
 
-  const { mutate: saveAsDraft, isPending: isSaving } = useMutation({
-    mutationFn: async (formValues: any) => {
-      try {
+  // What a save sends: everything of a draft, and of a proposal sent back
+  // for changes only the parts unlocked.
+  const saveEditableParts = useCallback(
+    async (formValues: any): Promise<AttachedDocuments> => {
+      if (!changesRequested || anyFieldUnlocked(changeRequests)) {
         await proposalProposalsUpdateProjectDetails({
           path: { uuid: proposal_uuid },
           body: toProjectDetailsBody(formValues),
         });
+      }
+      if (isPartEditable(proposal, 'compliance')) {
         await submitComplianceAnswers(proposal_uuid, formValues, checklistData);
-        await attachDocuments(
+      }
+      if (isPartEditable(proposal, 'documents')) {
+        return attachDocuments(
           proposal_uuid,
           formValues.supporting_documentation,
         );
-        markSaved(formValues);
+      }
+      return NOTHING_ATTACHED;
+    },
+    [proposal, proposal_uuid, changesRequested, changeRequests, checklistData],
+  );
+
+  // One notice, whether one file was refused or a whole folder of them.
+  const reportRefusedDocuments = useCallback(
+    (refused: AttachedDocuments['refused']) => {
+      if (!refused.length) return;
+      const names = refused.map(({ file }) => file.name).join(', ');
+      showErrorResponse(
+        refused[0].error,
+        refused.length === 1
+          ? translate('{file} was not attached', { file: names })
+          : translate('{count} files were not attached: {files}', {
+              count: refused.length,
+              files: names,
+            }),
+      );
+    },
+    [showErrorResponse],
+  );
+
+  // What a save leaves behind once the backend has it: the compliance answers
+  // re-read, the proposal refetched, and only then the uploaded files taken
+  // out of the form, or the step would read incomplete in between.
+  const settleSaved = useCallback(
+    async (formValues: any, uploaded: File[]) => {
+      await queryClient.invalidateQueries({
+        queryKey: ['ProposalChecklist', proposal_uuid],
+      });
+      if (refetch) await refetch();
+      markSaved(formValues, uploaded);
+    },
+    // markSaved reads the form through a ref and needs no dependency.
+
+    [queryClient, proposal_uuid, refetch],
+  );
+
+  const { mutate: saveAsDraft, isPending: isSaving } = useMutation({
+    mutationFn: async (formValues: any) => {
+      try {
+        const { uploaded, refused } = await saveEditableParts(formValues);
+        await settleSaved(formValues, uploaded);
+        reportRefusedDocuments(refused);
         showSuccess(
           usesCallVocabulary()
             ? translate('Proposal updated successfully')
             : translate('Access request updated successfully'),
         );
-        // Invalidate checklist query to refresh compliance answers with stored file info
-        await queryClient.invalidateQueries({
-          queryKey: ['ProposalChecklist', proposal_uuid],
-        });
-        if (refetch) refetch();
       } catch (error) {
         showErrorResponse(error, translate('Something went wrong'));
       }
@@ -363,9 +476,19 @@ export const ProposalSubmissionStep: FC<{
       try {
         await confirm(
           translate('Confirmation'),
-          usesCallVocabulary()
-            ? translate('Are you sure you want to submit the proposal?')
-            : translate('Are you sure you want to submit the access request?'),
+          changesRequested
+            ? actingForApplicant
+              ? `${translate(
+                  'Submit the changes? Every open request for changes is answered, the parts unlocked are locked again and the proposal goes back to its evaluators.',
+                )} ${applicantChangeNote()}`
+              : translate(
+                  'Submit the changes? Every open request for changes is answered, the parts unlocked are locked again and the proposal goes back to its evaluators.',
+                )
+            : usesCallVocabulary()
+              ? translate('Are you sure you want to submit the proposal?')
+              : translate(
+                  'Are you sure you want to submit the access request?',
+                ),
         );
       } catch {
         // Reported as a failed submit, not a successful one, so the form still
@@ -374,21 +497,28 @@ export const ProposalSubmissionStep: FC<{
         return { [FORM_ERROR]: 'cancelled' };
       }
       try {
-        await proposalProposalsUpdateProjectDetails({
-          path: { uuid: proposal_uuid },
-          body: toProjectDetailsBody(formValues),
-        });
-        await submitComplianceAnswers(proposal_uuid, formValues, checklistData);
-        await attachDocuments(
-          proposal_uuid,
-          formValues.supporting_documentation,
-        );
-        await proposalProposalsSubmit({ path: { uuid: proposal_uuid } });
-        showSuccess(
-          usesCallVocabulary()
-            ? translate('Proposal submitted successfully')
-            : translate('Access request submitted successfully'),
-        );
+        const { uploaded, refused } = await saveEditableParts(formValues);
+        if (refused.length) {
+          // The applicant stays on the page: what was saved leaves the form
+          // as after a draft save, the refused files stay pending for them
+          // to remove or replace, and the proposal is not submitted.
+          await settleSaved(formValues, uploaded);
+          reportRefusedDocuments(refused);
+          return { [FORM_ERROR]: 'documents' };
+        }
+        if (changesRequested) {
+          await proposalProposalsSubmitChanges({
+            path: { uuid: proposal_uuid },
+          });
+          showSuccess(translate('Changes submitted successfully'));
+        } else {
+          await proposalProposalsSubmit({ path: { uuid: proposal_uuid } });
+          showSuccess(
+            usesCallVocabulary()
+              ? translate('Proposal submitted successfully')
+              : translate('Access request submitted successfully'),
+          );
+        }
         // Leave the edit page rather than mutating it in place: on submit the
         // proposal flips out of 'draft', which would swap the form for the
         // read-only view and pop the stepper in above — a jarring live update.
@@ -399,7 +529,15 @@ export const ProposalSubmissionStep: FC<{
         return { [FORM_ERROR]: error };
       }
     },
-    [proposal, proposal_uuid, checklistData, router],
+    [
+      proposal_uuid,
+      changesRequested,
+      actingForApplicant,
+      saveEditableParts,
+      settleSaved,
+      reportRefusedDocuments,
+      router,
+    ],
   );
 
   return (
@@ -421,7 +559,7 @@ export const ProposalSubmissionStep: FC<{
         // Store form reference for use in effects
         formRef.current = form;
 
-        const completedSteps = formSteps.map((step) => {
+        const completedSteps = shownSteps.map((step) => {
           // Special handling for compliance step - real-time client-side validation
           if (step.id === 'step-compliance') {
             return isComplianceComplete(checklistData, values);
@@ -442,12 +580,9 @@ export const ProposalSubmissionStep: FC<{
             return rows.length > 0 && rows.every(isRequestComplete);
           }
           if (step.required && step.requiredFields?.length) {
-            return step.requiredFields.every((fieldName) => {
-              const field = get(values, fieldName);
-              return typeof field === 'object'
-                ? !isEmpty(field)
-                : Boolean(field);
-            });
+            return step.requiredFields.every((fieldName) =>
+              isProposalFieldFilled(fieldName, values, proposal),
+            );
           }
           return true;
         });
@@ -462,9 +597,25 @@ export const ProposalSubmissionStep: FC<{
               render={() => null}
             />
             <Field name="users" subscription={{}} render={() => null} />
-            <SidebarLayout.Container>
+            <SidebarLayout.Container fluid>
               <SidebarLayout.Body>
-                {formSteps.map((step, i) => (
+                {actingForApplicant && (
+                  <AlertItem
+                    variant="warning"
+                    type="floating"
+                    className="mb-4"
+                    title={translate('You are editing for the applicant')}
+                    body={applicantChangeNote()}
+                    data-testid="editing-for-applicant"
+                  />
+                )}
+                {changesRequested && (
+                  <ChangeRequestNotice
+                    changeRequests={changeRequests}
+                    className="mb-4"
+                  />
+                )}
+                {shownSteps.map((step, i) => (
                   <div ref={stepRefs.current[i]} key={step.id}>
                     <step.component
                       id={step.id}
@@ -490,21 +641,35 @@ export const ProposalSubmissionStep: FC<{
 
               <SidebarLayout.Sidebar transparent>
                 <ProposalSidebar
-                  steps={formSteps}
+                  steps={shownSteps}
                   resourceRows={resourceRows as any}
                   fixedDurationDays={fixedDurationDays}
-                  saveAsDraft={() => saveAsDraft(values)}
+                  chosenDurationMonths={values?.requested_duration_months}
+                  saveAsDraft={async () => {
+                    const confirmed = await confirmApplicantChange(
+                      translate(
+                        'Save your changes to the project details, compliance answers and documents.',
+                      ),
+                    );
+                    if (confirmed) saveAsDraft(values);
+                  }}
                   isSaving={isSaving}
                   hasUnsavedChanges={hasUnsavedChanges(
                     dirtyFields,
                     isSavedByDraft,
                   )}
-                  editable={proposal.state === 'draft'}
+                  editable={proposal.state === 'draft' || changesRequested}
+                  changesRequested={changesRequested}
                   submitting={submitting}
                   completedSteps={completedSteps}
                   hasValidationErrors={hasValidationErrors}
                   canSubmit={canSubmit}
                   canSubmitProposal={canSubmitProposal}
+                  deleteAction={
+                    proposal.state === 'draft' && canSubmitProposal ? (
+                      <DeleteDraftAction proposal={proposal} />
+                    ) : undefined
+                  }
                 />
               </SidebarLayout.Sidebar>
             </SidebarLayout.Container>

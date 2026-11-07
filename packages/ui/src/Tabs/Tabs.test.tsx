@@ -628,6 +628,99 @@ describe('active tab scrolling', () => {
   });
 });
 
+describe('tab counts', () => {
+  it('reads a labelled count as words after the title, not the bare number', () => {
+    render(
+      <Tabs defaultValue="check">
+        <TabsList>
+          <TabsTrigger
+            value="check"
+            count={7}
+            countVariant="danger"
+            countLabel="2 errors, 5 warnings"
+          >
+            Check
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>,
+    );
+
+    const tab = screen.getByRole('tab', {
+      name: 'Check, 2 errors, 5 warnings',
+    });
+    // The visually hidden label is in the DOM; the number is for the eye.
+    expect(within(tab).getByText(', 2 errors, 5 warnings')).toHaveClass(
+      'sr-only',
+    );
+    const number = within(tab).getByText('7');
+    expect(number).toHaveAttribute('aria-hidden', 'true');
+    expect(number).toHaveAttribute('data-count-variant', 'danger');
+  });
+
+  it('keeps an unlabelled count readable and neutral by default', () => {
+    render(
+      <Tabs
+        defaultValue="a"
+        items={[{ value: 'a', title: 'All', count: 4, content: 'panel' }]}
+      />,
+    );
+
+    const number = within(screen.getByRole('tab')).getByText('4');
+    expect(number).not.toHaveAttribute('aria-hidden');
+    expect(number).toHaveAttribute('data-count-variant', 'neutral');
+  });
+
+  it('passes count, variant and label through the items form', () => {
+    render(
+      <Tabs
+        defaultValue="n"
+        items={[
+          {
+            value: 'n',
+            title: 'Notifications',
+            count: 3,
+            countVariant: 'warning',
+            countLabel: '3 warnings',
+            content: 'panel',
+          },
+        ]}
+      />,
+    );
+
+    expect(
+      screen.getByRole('tab', { name: 'Notifications, 3 warnings' }),
+    ).toBeInTheDocument();
+  });
+
+  it('draws the same count in a TabNav item', () => {
+    render(
+      <TabNav
+        activeKey="validation"
+        items={[
+          {
+            key: 'validation',
+            title: 'Validation',
+            link: <Anchor href="#validation" />,
+            count: 2,
+            countVariant: 'danger',
+            countLabel: '1 error, 1 warning',
+          },
+          { key: 'edit', title: 'Edit', onClick: () => undefined, count: 0 },
+        ]}
+      />,
+    );
+
+    const link = screen.getByRole('link', {
+      name: 'Validation, 1 error, 1 warning',
+    });
+    expect(within(link).getByText('2')).toHaveAttribute(
+      'data-count-variant',
+      'danger',
+    );
+    expect(screen.getByRole('button', { name: 'Edit0' })).toBeInTheDocument();
+  });
+});
+
 describe('TabsTrigger extras', () => {
   it('shows a count badge, and a spinner while it loads', () => {
     render(

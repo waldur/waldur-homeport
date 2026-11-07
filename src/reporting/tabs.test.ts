@@ -27,46 +27,41 @@ beforeEach(() => {
 });
 
 describe('getReportingTabs', () => {
-  // The regression: `proposals` is a category of call management, but its
-  // route is gated on experimental UI. Reading only the category flag put a
-  // tab on screen whose target answers with the feature-disabled page.
-  it('hides the proposals tab when call management is on but experimental UI is off', () => {
+  // The call reports across every organization: staff and support, with
+  // call management on and the reporting screen enabled.
+  it('offers the proposals category to staff and support with call management', () => {
     setFeatures({
-      marketplace: {
-        show_call_management_functionality: true,
-        show_experimental_ui_components: false,
-      },
+      marketplace: { show_call_management_functionality: true },
     });
-    const tabs = getReportingTabs(staffWorkspace);
-    expect(tabs.map((tab) => tab.state)).not.toContain(
+    expect(getReportingTabs(staffWorkspace).map((tab) => tab.state)).toContain(
       'reporting-proposals-list',
     );
+    expect(
+      getReportingTabs({
+        user: { is_staff: false, is_support: true, permissions: [] },
+      }).map((tab) => tab.state),
+    ).toContain('reporting-proposals-list');
   });
 
-  it('shows the proposals tab when both flags are on', () => {
-    setFeatures({
-      marketplace: {
-        show_call_management_functionality: true,
-        show_experimental_ui_components: true,
-      },
-    });
-    const tabs = getReportingTabs(staffWorkspace);
-    expect(tabs.map((tab) => tab.state)).toContain('reporting-proposals-list');
+  it('hides the proposals category without call management', () => {
+    setFeatures({});
+    expect(
+      getReportingTabs(staffWorkspace).map((tab) => tab.state),
+    ).not.toContain('reporting-proposals-list');
   });
 
-  it('hides the proposals tab from support, whose reports are staff-only', () => {
+  it('hides the proposals category when its screen is switched off', () => {
     setFeatures({
-      marketplace: {
-        show_call_management_functionality: true,
-        show_experimental_ui_components: true,
-      },
+      marketplace: { show_call_management_functionality: true },
     });
-    const tabs = getReportingTabs({
-      user: { is_staff: false, is_support: true, permissions: [] },
-    });
-    expect(tabs.map((tab) => tab.state)).not.toContain(
-      'reporting-proposals-list',
-    );
+    (ENV.plugins as any).WALDUR_CORE.ENABLED_REPORTING_SCREENS = ['quotas'];
+    try {
+      expect(
+        getReportingTabs(staffWorkspace).map((tab) => tab.state),
+      ).not.toContain('reporting-proposals-list');
+    } finally {
+      delete (ENV.plugins as any).WALDUR_CORE.ENABLED_REPORTING_SCREENS;
+    }
   });
 
   it.each([

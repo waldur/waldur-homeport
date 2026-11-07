@@ -25,6 +25,7 @@ import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
+import { isReadOnlyProjectReader } from '@/permissions/isReadOnlyProjectReader';
 import { canViewTeam } from '@/permissions/teamVisibility';
 import { useUser, useProject } from '@/workspace/hooks';
 
@@ -88,6 +89,8 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
     queryKey: ['projectTeamData', project?.uuid],
     queryFn: () => getProjectTeamChart(project),
     staleTime: STALE_TIME,
+    // Only the team widget draws it.
+    enabled: showTeam,
   });
 
   const { callback, canInvite, loadingProjects } = useCreateInvitation({
@@ -175,7 +178,11 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
 
   const shouldShowLimitBasedResources = (limitBasedResourcesCount || 0) > 0;
 
-  const showBillingInfo = project.customer_display_billing_info_in_projects;
+  // A call manager reading what their call allocated is not shown its money:
+  // the API leaves the cost and credit figures out for them.
+  const isCallReader = isReadOnlyProjectReader(user, project);
+  const showBillingInfo =
+    project.customer_display_billing_info_in_projects && !isCallReader;
 
   if (!project || !user) {
     return null;
@@ -335,11 +342,15 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           view ships behind its own dashboard.usage_* feature flag and the
           section renders nothing until an operator enables one. */}
       {showBillingInfo && <ProjectCreditHealthBlock project={project} />}
-      <UsageViewsSection
-        project={project}
-        includeTerminated={includeTerminated}
-      />
-      <ProjectPosixGroupsWidget project={project} />
+      {/* Both cover the whole project, beyond the resources a call manager
+          reading the allocation may see, and the API refuses them that. */}
+      {!isCallReader && (
+        <UsageViewsSection
+          project={project}
+          includeTerminated={includeTerminated}
+        />
+      )}
+      {!isCallReader && <ProjectPosixGroupsWidget project={project} />}
     </>
   );
 };

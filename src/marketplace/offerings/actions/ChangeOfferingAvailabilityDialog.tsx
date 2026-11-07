@@ -1,4 +1,4 @@
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent, useMemo, useState } from 'react';
 import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsMakeAvailable,
@@ -10,6 +10,9 @@ import {
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
+import { OfferingDependentsWarning } from '@/marketplace/offerings/dependents/OfferingDependentsWarning';
+import { useOfferingDependents } from '@/marketplace/offerings/dependents/useOfferingDependents';
+import { getConflictDetail } from '@/marketplace/offerings/dependents/utils';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -79,6 +82,15 @@ const OfferingResourcesTable = ({ offering }) => {
 export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
   resolve: { offering: Offering; refetch };
 }> = ({ resolve: { offering, refetch } }) => {
+  const makingUnavailable = offering.state !== 'Unavailable';
+  // Unavailable, the offering takes no orders: what calls built on it may
+  // refuse that. Making it available again pulls nothing away.
+  const { dependents, blocked, reason, isLoading } = useOfferingDependents(
+    offering.uuid,
+    'offering_withdrawn',
+    { enabled: makingUnavailable },
+  );
+  const [conflict, setConflict] = useState<string>();
   const availabilityMutation = useManagedMutation<any, any, void>({
     mutationFn: () => {
       if (offering.state === 'Unavailable') {
@@ -94,6 +106,7 @@ export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
     successMessage: translate('Offering state has been updated.'),
     errorMessage: translate('Unable to update offering state.'),
     refetch,
+    onError: (error) => setConflict(getConflictDetail(error)),
   });
 
   return (
@@ -138,6 +151,10 @@ export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
                       ? 'max-w-[200px]'
                       : 'w-[175px]'
                   }
+                  disabled={makingUnavailable && (isLoading || blocked)}
+                  disabledReason={
+                    makingUnavailable && blocked ? reason : undefined
+                  }
                 />
               </>
             }
@@ -157,6 +174,12 @@ export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
                 {translate('Impacted resources:')}
               </p>
             )}
+            <OfferingDependentsWarning
+              dependents={dependents}
+              blocked={blocked}
+              conflict={conflict}
+              className="mb-3"
+            />
             <OfferingResourcesTable offering={offering} />
           </ModalDialog>
         </form>

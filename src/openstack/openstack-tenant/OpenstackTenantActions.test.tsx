@@ -1,8 +1,9 @@
 import { screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesOfferingRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
+import { PermissionEnum } from '@/permissions/enums';
 import { inActionsMenu, renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
@@ -56,6 +57,11 @@ const renderComponent = (userOverrides = {}) => {
 // the react-bootstrap Dropdown.Item this replaced rendered a bare <button>
 // with no menu semantics at all.
 describe('OpenstackTenantActions', () => {
+  const originalRoles = ENV.roles;
+  afterEach(() => {
+    ENV.roles = originalRoles;
+  });
+
   it('renders action groups with correct titles for staff user', () => {
     renderComponent();
 
@@ -98,8 +104,25 @@ describe('OpenstackTenantActions', () => {
         components: [],
       },
     } as any);
+    // Asking is a permission of its own: a role that may ask, not set.
+    ENV.roles = [
+      ...originalRoles,
+      {
+        name: 'requester',
+        permissions: [PermissionEnum.REQUEST_RESOURCE_END_DATE_CHANGE],
+      },
+    ] as typeof ENV.roles;
 
-    renderComponent({ is_staff: false, permissions: [] });
+    renderComponent({
+      is_staff: false,
+      permissions: [
+        {
+          scope_type: 'customer',
+          scope_uuid: 'customer-uuid',
+          role_name: 'requester',
+        },
+      ],
+    });
 
     expect(
       await screen.findByText('Request end date change'),

@@ -20,7 +20,8 @@ import { getExportColumnCount, useTableExport } from './useTableExport';
 
 interface ExportDialogProps {
   resolve: {
-    table: string;
+    /** Left out to offer only `ownProps.fullExport`. */
+    table?: string;
     format: ExportFormat;
     ownProps?: Partial<TableProps>;
   };
@@ -28,6 +29,9 @@ interface ExportDialogProps {
 
 export const ExportDialog = (props: ExportDialogProps) => {
   const fullExport = props.resolve.ownProps?.fullExport;
+  const fullFormat = fullExport?.format ?? 'csv';
+  // Nothing but the full export: no table rows to pick from.
+  const fullOnly = Boolean(fullExport) && !props.resolve.table;
   const tableState = useSelector(getTableState(props.resolve.table));
 
   // Caught before any row is fetched; the exporter checks the exact numbers
@@ -46,11 +50,11 @@ export const ExportDialog = (props: ExportDialogProps) => {
 
   const initialValues = useMemo(
     () => ({
-      format: props.resolve?.format,
+      format: fullOnly ? fullFormat : props.resolve?.format,
       allPages: true,
-      content: 'visible' as const,
+      content: fullOnly ? ('full' as const) : ('visible' as const),
     }),
-    [props.resolve],
+    [props.resolve, fullOnly, fullFormat],
   );
 
   // Derived rather than unmounted, so the dialog keeps its height.
@@ -60,13 +64,13 @@ export const ExportDialog = (props: ExportDialogProps) => {
         field: 'content',
         updates: {
           format: (content, values: any) =>
-            content === 'full' ? 'csv' : values.format,
+            content === 'full' ? fullFormat : values.format,
           allPages: (content, values: any) =>
             content === 'full' ? true : values.allPages,
         },
       }),
     ],
-    [],
+    [fullFormat],
   );
 
   const { exportTable, abort, progress } = useTableExport(
@@ -124,23 +128,30 @@ export const ExportDialog = (props: ExportDialogProps) => {
                     disabled={submitting}
                     // Without it each description crowds the next option's label.
                     choices={[
-                      {
-                        value: 'visible',
-                        label: translate('Visible columns'),
-                        description: translate(
-                          'The columns shown in the table, in any format.',
-                        ),
-                      },
+                      ...(fullOnly
+                        ? []
+                        : [
+                            {
+                              value: 'visible',
+                              label: translate('Visible columns'),
+                              description: translate(
+                                'The columns shown in the table, in any format.',
+                              ),
+                            },
+                          ]),
                       {
                         value: 'full',
                         label: fullExport.label,
-                        // Said before the choice, not after.
-                        description: [
-                          fullExport.description,
-                          translate('CSV, every page.'),
-                        ]
-                          .filter(Boolean)
-                          .join(' '),
+                        // Said before the choice, not after. Another format
+                        // than CSV says what it holds in its own description.
+                        description: fullExport.format
+                          ? fullExport.description
+                          : [
+                              fullExport.description,
+                              translate('CSV, every page.'),
+                            ]
+                              .filter(Boolean)
+                              .join(' '),
                       },
                     ]}
                   />
@@ -166,29 +177,35 @@ export const ExportDialog = (props: ExportDialogProps) => {
                   />
                 )}
 
-                <BooleanGroup
-                  name="allPages"
-                  label={
-                    <>
-                      {translate('All pages')}
-                      <HelpIcon
-                        label={
-                          values.content === 'full'
-                            ? translate(
-                                'The full report always covers every page',
-                              )
-                            : translate(
-                                'Disable this to export only the rows on the current page',
-                              )
-                        }
-                        size={20}
-                        className="ms-1.5"
-                      />
-                    </>
-                  }
-                  hideLabel
-                  disabled={submitting || values.content === 'full'}
-                />
+                {/* A full export in a format of its own is the whole thing,
+                    whatever the table's filters and pages: there is nothing
+                    to choose. */}
+                {!fullOnly &&
+                  !(values.content === 'full' && fullExport?.format) && (
+                    <BooleanGroup
+                      name="allPages"
+                      label={
+                        <>
+                          {translate('All pages')}
+                          <HelpIcon
+                            label={
+                              values.content === 'full'
+                                ? translate(
+                                    'The full report always covers every page',
+                                  )
+                                : translate(
+                                    'Disable this to export only the rows on the current page',
+                                  )
+                            }
+                            size={20}
+                            className="ms-1.5"
+                          />
+                        </>
+                      }
+                      hideLabel
+                      disabled={submitting || values.content === 'full'}
+                    />
+                  )}
               </div>
             </ModalDialog>
           </form>

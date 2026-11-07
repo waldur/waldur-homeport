@@ -1,21 +1,22 @@
 import { FC, useMemo } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BadgeProps } from 'waldur-ui';
 
 interface AssignmentBatchStatusBadgeProps {
   status: string;
   statusDisplay: string;
+  size?: BadgeProps['size'];
 }
 
 export const AssignmentBatchStatusBadge: FC<
   AssignmentBatchStatusBadgeProps
-> = ({ status, statusDisplay }) => {
+> = ({ status, statusDisplay, size }) => {
   const variant = useMemo(() => {
     switch (status) {
       case 'draft':
-        return 'secondary';
+        return 'neutral';
       case 'sent':
-        return 'primary';
+        return 'info';
       case 'responded':
         return 'success';
       case 'expired':
@@ -23,12 +24,12 @@ export const AssignmentBatchStatusBadge: FC<
       case 'cancelled':
         return 'danger';
       default:
-        return 'secondary';
+        return 'neutral';
     }
   }, [status]);
 
   return (
-    <Badge variant={variant} shape="pill" tone="outline">
+    <Badge variant={variant} size={size} shape="pill" tone="outline">
       {statusDisplay}
     </Badge>
   );

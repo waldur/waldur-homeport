@@ -4,6 +4,7 @@ import { ENV } from '@/core/config';
 import { PermissionEnum, RoleEnum } from '@/permissions/enums';
 
 import {
+  actsForApplicant,
   canChangeProposalRole,
   canEditProposal,
   canInviteToProposal,
@@ -86,6 +87,34 @@ describe('proposal team rules', () => {
     vi.spyOn(ENV, 'roles', 'get').mockReturnValue(ROLES as any);
   });
   afterEach(() => vi.restoreAllMocks());
+
+  describe('acting for the applicant', () => {
+    it('is any manager of the proposal, not its other members', () => {
+      expect(actsForApplicant(manager, proposal())).toBe(true);
+      expect(actsForApplicant(admin, proposal())).toBe(false);
+      expect(actsForApplicant(member, proposal())).toBe(false);
+      // The creator acts while a manager, not for having created it.
+      const creator = { uuid: 'creator', permissions: [] } as any;
+      expect(actsForApplicant(creator, proposal())).toBe(false);
+      expect(actsForApplicant(callManager, proposal())).toBe(false);
+    });
+  });
+
+  describe('once the award is accepted', () => {
+    it('lets nobody change the team or invite to it, staff included', () => {
+      for (const user of [manager, callManager, staff]) {
+        expect(
+          canChangeProposalRole(
+            user,
+            proposal('accepted'),
+            RoleEnum.PROPOSAL_MEMBER,
+            'grant',
+          ),
+        ).toBe(false);
+        expect(canInviteToProposal(user, proposal('accepted'))).toBe(false);
+      }
+    });
+  });
 
   describe('editing and submitting', () => {
     it('lets managers and administrators edit, members not', () => {

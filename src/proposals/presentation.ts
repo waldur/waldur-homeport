@@ -128,3 +128,21 @@ export const requestViewLabel = (): string =>
  */
 export const requestListState = (): string =>
   isCallsSectionVisible() ? 'proposals-all-proposals' : 'profile.requests';
+
+/**
+ * Said once, over the allocation outcome, when the award matched the request
+ * line for line — in place of an Awarded column that would only repeat it.
+ */
+export const awardedAsRequestedLabel = (): string =>
+  usesCallVocabulary()
+    ? translate('Awarded as requested.')
+    : translate('Granted as requested.');
+
+/**
+ * Under an outcome whose award differs on some lines: the lines left blank
+ * under Awarded are the ones it did not change.
+ */
+export const blankAwardRowsNote = (): string =>
+  usesCallVocabulary()
+    ? translate('Rows left blank under Awarded were awarded as requested.')
+    : translate('Rows left blank under Awarded were granted as requested.');

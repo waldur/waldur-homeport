@@ -41,6 +41,7 @@ export function CreateModalButton<TResolve extends Record<string, unknown>>({
   iconNode = <PlusCircleIcon weight="bold" />,
   disabled,
   tooltip,
+  disabledReason,
   variant = 'primary',
   buttonSize,
   initialValues,
@@ -72,6 +73,7 @@ export function CreateModalButton<TResolve extends Record<string, unknown>>({
       variant={variant}
       disabled={disabled}
       tooltip={tooltip}
+      disabledReason={disabledReason}
       size={buttonSize ?? 'lg'}
     />
   );

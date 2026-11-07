@@ -74,7 +74,7 @@ export const TwoStageWorkflowCard: FC = () => (
         items={[
           translate('You will receive an email with your assigned proposals'),
           translate('You can accept or decline each proposal individually'),
-          translate('You can declare conflicts of interest at that time'),
+          translate('You can decline any proposal you have a conflict with'),
         ]}
       />
     </div>

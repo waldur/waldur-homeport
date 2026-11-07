@@ -220,8 +220,9 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
       hasPermission(user, {
         permission: PermissionEnum.APPROVE_ORDER,
         customerId: props.order?.provider_uuid,
+        offeringId: props.order?.offering_uuid,
       }),
-    [user, props.order?.provider_uuid],
+    [user, props.order?.provider_uuid, props.order?.offering_uuid],
   );
   const linkProviderResource = useMemo(
     () => shouldLinkProviderResource(user, props.order),

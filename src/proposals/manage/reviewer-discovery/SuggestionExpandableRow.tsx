@@ -1,10 +1,22 @@
 import { FC, useMemo } from 'react';
 import { ReviewerSuggestion } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
+
+/**
+ * Where the suggested reviewer stands in the call's pool, however they got
+ * there: from this suggestion or invited directly.
+ */
+const POOL_STATUS_LABELS: Record<string, () => string> = {
+  accepted: () => translate('In the pool'),
+  pending: () => translate('Invited to the pool'),
+  declined: () => translate('Declined the pool invitation'),
+  expired: () => translate('Pool invitation expired'),
+};
 
 interface TopMatchingProposal {
   uuid: string;
@@ -57,10 +69,44 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
     return (row.matched_keywords || []) as string[];
   }, [row.matched_keywords]);
 
+  // What the row's cells leave out, as key/value rows.
+  const details = (
+    <PropertyList variant="summary">
+      {row.reviewer_biography && (
+        <PropertyItem
+          label={translate('Biography')}
+          value={row.reviewer_biography}
+        />
+      )}
+      {row.pool_invitation_status && (
+        <PropertyItem
+          label={translate('Pool')}
+          value={
+            POOL_STATUS_LABELS[row.pool_invitation_status]?.() ??
+            row.pool_invitation_status
+          }
+        />
+      )}
+      {row.reviewed_at && (
+        <PropertyItem
+          label={translate('Reviewed')}
+          value={propVal.date(row.reviewed_at)}
+        />
+      )}
+      {row.rejection_reason && (
+        <PropertyItem
+          label={translate('Rejection reason')}
+          value={row.rejection_reason}
+        />
+      )}
+    </PropertyList>
+  );
+
   if (topProposals.length === 0 && matchedKeywords.length === 0) {
     return (
-      <ExpandableContainer className="p-3">
-        <p className="text-quaternary mb-0">
+      <ExpandableContainer alignRows>
+        {details}
+        <p className="text-quaternary mb-0 mt-1.5">
           {translate('No detailed match information available.')}
         </p>
       </ExpandableContainer>
@@ -68,7 +114,8 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
   }
 
   return (
-    <ExpandableContainer className="p-3">
+    <ExpandableContainer alignRows>
+      <div className="mb-3">{details}</div>
       {/* Matched Keywords Section */}
       {matchedKeywords.length > 0 && (
         <div className="mb-3">

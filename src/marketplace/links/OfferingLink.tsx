@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from 'react';
 import { ButtonVariant, ButtonSize } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
-import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
+import { canViewOfferingPages } from '@/marketplace/canUseMarketplaceShopUi';
 import { useUser } from '@/workspace/hooks';
 
 interface OwnProps {
@@ -19,7 +19,7 @@ interface OwnProps {
 export const OfferingLink: React.FC<PropsWithChildren<OwnProps>> = (props) => {
   const user = useUser();
   // The deploy page is a shop route. Same fallback as OfferingDetailsLink.
-  if (props.disabled || !canUseMarketplaceShopUi(user)) {
+  if (props.disabled || !canViewOfferingPages(user)) {
     return <div className={props.className}>{props.children}</div>;
   }
   return (

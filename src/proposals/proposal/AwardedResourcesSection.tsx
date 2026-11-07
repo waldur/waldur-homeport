@@ -3,6 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import {
   AwardedResource,
+  OfferingAssessment,
   proposalProposalsAwardedResourcesDestroy,
 } from 'waldur-js-client';
 
@@ -25,12 +26,17 @@ import {
   useAwardedResources,
 } from '@/proposals/awardedResources';
 import { getRequestedResourceCost } from '@/proposals/requestedResourceCost';
-import { RequestedResourceCostLabel } from '@/proposals/RequestedResourceCostLabel';
+import {
+  pricesConcealed,
+  RequestedResourceCostLabel,
+} from '@/proposals/RequestedResourceCostLabel';
+import { RankingRecommendation } from '@/proposals/round/ranking/RankingRecommendation';
 import { Proposal } from '@/proposals/types';
 import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -38,7 +44,13 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import '@/proposals/flushTable.scss';
 
-import { AwardAmountsCell, AwardOfferingCell } from './AwardComparison';
+import { useConfirmApplicantChange } from './actingForApplicant';
+import { AwardDetails, AwardOfferingCell } from './AwardComparison';
+import { AwardedDuration } from './AwardedDuration';
+import { OfferingAssessmentNote } from './contributions/OfferingAssessmentNote';
+import { useOfferingAssessments } from './contributions/queries';
+import { OwnOfferingsNote } from './OwnOfferingsNote';
+import { sectionOpenProps, useSectionOpenState } from './sectionOpen';
 
 const AwardedResourceFormDialog = lazyComponent(() =>
   import('./AwardedResourceFormDialog').then((module) => ({
@@ -46,95 +58,88 @@ const AwardedResourceFormDialog = lazyComponent(() =>
   })),
 );
 
-/** Up to three lines; the full note is a hover away. */
-const DescriptionCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
-  const description = row.awarded?.description;
-  if (!description) {
-    return <>{renderFieldOrDash(null)}</>;
-  }
-  return (
-    <span className="line-clamp-3 wrap-anywhere" title={description}>
-      {description}
-    </span>
-  );
-};
+/** The assessments of the offering the item was requested on, by step. */
+const assessmentsFor = (
+  row: AwardComparisonRow,
+  assessments: Record<string, OfferingAssessment[]>,
+) =>
+  assessments[(row.requested ?? row.awarded)?.requested_offering?.uuid ?? ''] ??
+  [];
 
-// Cells normally render on one line with an ellipsis, and every column
-// without a width keeps a 150px floor; together they pushed this table past
-// the card beside the progress rail. The cells here wrap instead, inside
-// widths that add up to the card.
-const awardColumns = (
-  showMissingOptions: boolean,
-): Column<AwardComparisonRow>[] => [
+// One line a row; the plan, options, amounts and who changed an item are in
+// its expanded row, as other tables keep their details.
+const getColumns = (): Column<AwardComparisonRow>[] => [
   {
     title: translate('Offering'),
-    render: ({ row }) => (
-      <AwardOfferingCell row={row} showMissingOptions={showMissingOptions} />
-    ),
-    width: '30%',
-    ellipsis: false,
+    render: ({ row }) => <AwardOfferingCell row={row} />,
+    width: '40%',
   },
-  {
-    title: translate('Amounts'),
-    render: AwardAmountsCell,
-    width: '30%',
-    ellipsis: false,
-  },
-  {
-    title: translate('Estimated cost'),
-    render: ({ row }) =>
-      row.awarded ? (
-        <RequestedResourceCostLabel
-          cost={getRequestedResourceCost(asCostRow(row.awarded))}
-          stacked
-        />
-      ) : (
-        <>{renderFieldOrDash(null)}</>
-      ),
-    width: '15%',
-    ellipsis: false,
-  },
+  ...(pricesConcealed()
+    ? []
+    : [
+        {
+          title: translate('Estimated cost'),
+          render: ({ row }) =>
+            row.awarded ? (
+              <RequestedResourceCostLabel
+                cost={getRequestedResourceCost(asCostRow(row.awarded))}
+              />
+            ) : (
+              <>{renderFieldOrDash(null)}</>
+            ),
+          width: '20%',
+        },
+      ]),
   {
     title: translate('Description'),
-    render: DescriptionCell,
-    width: '25%',
-    ellipsis: false,
+    render: ({ row }) => <>{renderFieldOrDash(row.awarded?.description)}</>,
+    // The widths add up to the card beside the progress rail.
+    width: pricesConcealed() ? '60%' : '40%',
   },
 ];
-
-// The call manager editing the award is told what a line still lacks; an
-// applicant or reviewer reading it cannot act on that.
-const editableColumns = awardColumns(true);
-const readOnlyColumns = awardColumns(false);
 
 const AwardItemActions: FC<{
   row: AwardedResource;
   proposal: Proposal;
 }> = ({ row, proposal }) => {
   const { openDialog } = useModal();
-  const edit = useCallback(
-    () =>
-      openDialog(AwardedResourceFormDialog, {
-        resolve: { proposal, awardedResource: row },
-        size: 'lg',
-      }),
-    [openDialog, proposal, row],
-  );
+  const confirmChange = useConfirmApplicantChange(proposal);
+  const offering = row.requested_offering.offering_name;
+  const edit = useCallback(async () => {
+    const confirmed = await confirmChange(
+      translate(
+        'Change the amounts, plan or offering of {offering} in the award.',
+        { offering },
+      ),
+      { applicantTold: false, title: translate('Change the award') },
+    );
+    if (!confirmed) return;
+    openDialog(AwardedResourceFormDialog, {
+      resolve: { proposal, awardedResource: row },
+      size: 'lg',
+    });
+  }, [confirmChange, openDialog, proposal, row, offering]);
   const remove = useManagedMutation<any, any, void>({
     mutationFn: () =>
       proposalProposalsAwardedResourcesDestroy({
         path: { uuid: proposal.uuid, obj_uuid: row.uuid },
       }),
-    confirmation: {
-      title: translate('Remove awarded resource'),
-      body: translate('Remove {offering} from the award?', {
-        offering: row.requested_offering.offering_name,
-      }),
-    },
     successMessage: translate('Awarded resource has been removed.'),
     errorMessage: translate('Unable to remove the awarded resource.'),
     invalidateQueries: [{ queryKey: awardedResourcesKey(proposal.uuid) }],
   });
+  const confirmRemove = useCallback(async () => {
+    const confirmed = await confirmChange(
+      translate('Remove {offering} from the award.', { offering }),
+      {
+        applicantTold: false,
+        title: translate('Remove awarded resource'),
+        positiveButton: translate('Remove'),
+        alwaysAsk: true,
+      },
+    );
+    if (confirmed) remove.mutate();
+  }, [confirmChange, offering, remove]);
   return (
     <ActionsDropdown row={row}>
       <ActionItem
@@ -143,7 +148,7 @@ const AwardItemActions: FC<{
         iconNode={<PencilSimpleIcon weight="bold" />}
       />
       <RemovalActionItem
-        action={() => remove.mutate()}
+        action={confirmRemove}
         title={translate('Remove')}
         disabled={remove.isPending}
       />
@@ -162,6 +167,8 @@ interface AwardedResourcesSectionProps {
    * call team is told.
    */
   decisionHeld?: boolean;
+  /** Reloads the proposal, whose awarded duration the section may change. */
+  refetch?: () => void;
 }
 
 /**
@@ -179,11 +186,48 @@ export const AwardedResourcesSection: FC<AwardedResourcesSectionProps> = ({
   editable,
   decisionOpen,
   decisionHeld,
+  refetch,
 }) => {
+  const openState = useSectionOpenState();
   const { openDialog } = useModal();
   const queryClient = useQueryClient();
   const awards = useAwardedResources(proposal.uuid, true);
   const requests = useProposalResourceRows(proposal.uuid);
+  // The per-offering technical assessment, beside what is awarded on each
+  // offering: the call manager decides with its outcomes and conditions.
+  const { data: assessmentList } = useOfferingAssessments(proposal.uuid);
+  const columns = useMemo(() => getColumns(), []);
+  const assessments = useMemo(
+    () =>
+      (assessmentList ?? []).reduce<Record<string, OfferingAssessment[]>>(
+        (byOffering, assessment) => {
+          (byOffering[assessment.requested_offering_uuid] ??= []).push(
+            assessment,
+          );
+          return byOffering;
+        },
+        {},
+      ),
+    [assessmentList],
+  );
+  // showMissingOptions: the call manager editing the award is told what a
+  // line still lacks; an applicant or reviewer reading it cannot act on that.
+  const expandableRow = useMemo(
+    () =>
+      ({ row }: { row: AwardComparisonRow }) => (
+        <ExpandableContainer asTable>
+          <AwardDetails row={row} showMissingOptions={editable}>
+            {assessmentsFor(row, assessments).map((assessment) => (
+              <OfferingAssessmentNote
+                key={assessment.contribution_uuid}
+                assessment={assessment}
+              />
+            ))}
+          </AwardDetails>
+        </ExpandableContainer>
+      ),
+    [assessments, editable],
+  );
 
   const rows = useMemo(
     () =>
@@ -215,14 +259,18 @@ export const AwardedResourcesSection: FC<AwardedResourcesSectionProps> = ({
     [editable, proposal],
   );
 
-  const openAdd = useCallback(
-    () =>
-      openDialog(AwardedResourceFormDialog, {
-        resolve: { proposal },
-        size: 'lg',
-      }),
-    [openDialog, proposal],
-  );
+  const confirmChange = useConfirmApplicantChange(proposal);
+  const openAdd = useCallback(async () => {
+    const confirmed = await confirmChange(
+      translate('Add an item to the award that the applicant did not request.'),
+      { applicantTold: false, title: translate('Change the award') },
+    );
+    if (!confirmed) return;
+    openDialog(AwardedResourceFormDialog, {
+      resolve: { proposal },
+      size: 'lg',
+    });
+  }, [confirmChange, openDialog, proposal]);
 
   // Nothing until the award has loaded: an applicant is refused it until the
   // decision is released, and a card shown meanwhile would tell them that a
@@ -256,21 +304,41 @@ export const AwardedResourcesSection: FC<AwardedResourcesSectionProps> = ({
                 )
       }
       actions={
-        editable ? (
-          <BaseButton
-            label={translate('Add item')}
-            iconNode={<PlusCircleIcon weight="bold" />}
-            onClick={openAdd}
-            variant="tertiary"
-          />
-        ) : differs ? (
-          <span className="text-warning text-xs">
-            {translate('Differs from the request')}
-          </span>
+        editable || differs ? (
+          <div className="flex items-center gap-2.5">
+            {differs && (
+              <span className="text-warning font-semibold text-xs">
+                {translate('Differs from the request')}
+              </span>
+            )}
+            {editable && (
+              // Outline, as the team's Add when acting for the applicant:
+              // a change to what they asked for, not the page's own task.
+              <BaseButton
+                label={translate('Add item')}
+                iconNode={<PlusCircleIcon weight="bold" />}
+                onClick={openAdd}
+                variant="tertiary"
+              />
+            )}
+          </div>
         ) : undefined
       }
-      defaultOpen
+      {...sectionOpenProps(openState, AWARDED_RESOURCES_SECTION_ID, true)}
     >
+      <OwnOfferingsNote proposal={proposal} />
+      <AwardedDuration
+        proposal={proposal}
+        editable={editable}
+        refetch={refetch}
+      />
+      <RankingRecommendation
+        proposalUuid={proposal.uuid}
+        roundUuid={proposal.round?.uuid}
+        awards={awards.data}
+        requests={requests.data}
+        editable={editable}
+      />
       {requests.isLoading ? (
         <LoadingSpinner />
       ) : awards.error ? (
@@ -289,6 +357,8 @@ export const AwardedResourcesSection: FC<AwardedResourcesSectionProps> = ({
           // closes.
           key={editable ? 'editable' : 'read-only'}
           {...tableProps}
+          // A short list, shown whole.
+          hasPagination={false}
           className="proposal-flush-table"
           cardBordered={false}
           title={null}
@@ -298,7 +368,8 @@ export const AwardedResourcesSection: FC<AwardedResourcesSectionProps> = ({
           minHeight="auto"
           verboseName={translate('awarded resources')}
           emptyMessage={translate('Nothing is awarded yet.')}
-          columns={editable ? editableColumns : readOnlyColumns}
+          columns={columns}
+          expandableRow={expandableRow}
           rowActions={rowActions}
         />
       )}

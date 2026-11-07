@@ -1,6 +1,6 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { omit } from 'es-toolkit';
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsCreateOfferingComponent,
@@ -9,6 +9,9 @@ import {
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
+import { OfferingDependentsWarning } from '@/marketplace/offerings/dependents/OfferingDependentsWarning';
+import { useOfferingDependents } from '@/marketplace/offerings/dependents/useOfferingDependents';
+import { getConflictDetail } from '@/marketplace/offerings/dependents/utils';
 import {
   dropHiddenPrepaidSettings,
   formatComponent,
@@ -34,6 +37,16 @@ export const OfferingComponentDialog: FC<{
     () => (isEdit ? parseComponent(resolve.component, resolve.offering) : {}),
     [resolve.component, resolve.offering, isEdit],
   );
+
+  // Which calls build on the component. Whether an edit breaks them depends
+  // on the edit, so this only names them; the backend refuses a breaking
+  // edit and says why.
+  const { dependents } = useOfferingDependents(
+    resolve.offering.uuid,
+    'component_removed',
+    { componentType: resolve.component?.type, enabled: isEdit },
+  );
+  const [conflict, setConflict] = useState<string>();
 
   const submitMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) => {
@@ -64,6 +77,7 @@ export const OfferingComponentDialog: FC<{
       ? translate('Unable to update billing component.')
       : translate('Unable to create billing component.'),
     refetch: resolve.refetch,
+    onError: (error) => setConflict(getConflictDetail(error)),
   });
 
   return (
@@ -95,6 +109,24 @@ export const OfferingComponentDialog: FC<{
               </>
             }
           >
+            <OfferingDependentsWarning
+              dependents={
+                dependents.length
+                  ? [
+                      ...dependents,
+                      {
+                        summary: translate(
+                          'Changing its billing type or limit period, or lowering its maximum below what they allow, may be refused.',
+                        ),
+                        blocks: false,
+                        blocks_staff: false,
+                      },
+                    ]
+                  : []
+              }
+              conflict={conflict}
+              className="mb-3"
+            />
             <ComponentForm
               offering={resolve.offering}
               typeReadOnly={isBuiltin}

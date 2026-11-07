@@ -14,7 +14,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { translate } from '@/i18n';
-import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
+import { canViewOfferingPages } from '@/marketplace/canUseMarketplaceShopUi';
 import { ParentLink } from '@/marketplace/resources/details/ParentResourceLink';
 import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
 import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
@@ -90,7 +90,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
       offeringId: offering.uuid,
       customerId: offering.customer_uuid,
     });
-  const showPublicOffering = canUseMarketplaceShopUi(user);
+  const showPublicOffering = canViewOfferingPages(user);
 
   if (props.isLoading) {
     return <LoadingSpinner />;

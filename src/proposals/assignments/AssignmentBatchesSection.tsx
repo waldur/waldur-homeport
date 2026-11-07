@@ -54,10 +54,10 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
         title: translate('Reviewer'),
         render: ({ row }: { row: AssignmentBatchList }) => (
           <div>
-            <div className="font-medium">
+            <div className="font-medium text-primary">
               {renderFieldOrDash(row.reviewer_name)}
             </div>
-            <small className="text-quaternary">{row.reviewer_email}</small>
+            <span className="text-quaternary">{row.reviewer_email}</span>
           </div>
         ),
         keys: ['reviewer_name', 'reviewer_email'],

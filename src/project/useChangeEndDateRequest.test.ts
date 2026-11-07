@@ -22,6 +22,21 @@ const makeUser = (overrides: Partial<User> = {}): User =>
 const role = (name: string, permissions: string[]) =>
   ({ name, permissions }) as any;
 
+// A user holding one role on one scope, the role granting `permissions`.
+const userWithRole = (
+  scope_type: string,
+  scope_uuid: string,
+  permissions: string[],
+) => {
+  vi.spyOn(ENV, 'roles', 'get').mockReturnValue([role('ROLE', permissions)]);
+  return makeUser({
+    permissions: [{ scope_type, scope_uuid, role_name: 'ROLE' } as Permission],
+  });
+};
+
+const REQUEST = PermissionEnum.REQUEST_PROJECT_END_DATE_CHANGE;
+const SET = PermissionEnum.SET_PROJECT_END_DATE;
+
 describe('canRequestProjectEndDateChange', () => {
   afterEach(() => vi.restoreAllMocks());
 
@@ -29,149 +44,51 @@ describe('canRequestProjectEndDateChange', () => {
     expect(canRequestProjectEndDateChange(null, PROJECT)).toBe(false);
   });
 
-  it('returns false for staff, who edit the project directly', () => {
+  it('returns false for staff, who set the date directly', () => {
     expect(
       canRequestProjectEndDateChange(makeUser({ is_staff: true }), PROJECT),
     ).toBe(false);
   });
 
-  it('returns true for a project member who cannot edit the project', () => {
-    const user = makeUser({
-      permissions: [
-        { scope_type: 'project', scope_uuid: 'project-1' } as Permission,
-      ],
-    });
+  it('returns true for a project role that may ask for a change', () => {
+    const user = userWithRole('project', 'project-1', [REQUEST]);
     expect(canRequestProjectEndDateChange(user, PROJECT)).toBe(true);
   });
 
-  it('returns false for a project member who can edit the project', () => {
-    vi.spyOn(ENV, 'roles', 'get').mockReturnValue([
-      role('PROJECT.ADMIN', [PermissionEnum.UPDATE_PROJECT]),
+  it('returns false for a project role that may not ask', () => {
+    const user = userWithRole('project', 'project-1', [
+      PermissionEnum.LIST_PROJECTS,
     ]);
-    const user = makeUser({
-      permissions: [
-        {
-          scope_type: 'project',
-          scope_uuid: 'project-1',
-          role_name: 'PROJECT.ADMIN',
-        } as Permission,
-      ],
-    });
     expect(canRequestProjectEndDateChange(user, PROJECT)).toBe(false);
   });
 
-  it('returns true for a site-wide project list grant that cannot edit', () => {
-    vi.spyOn(ENV, 'roles', 'get').mockReturnValue([
-      role('GLOBAL.DESK', [PermissionEnum.LIST_PROJECTS]),
-    ]);
-    const user = makeUser({
-      permissions: [
-        {
-          scope_type: 'global',
-          scope_uuid: 'site',
-          role_name: 'GLOBAL.DESK',
-        } as Permission,
-      ],
-    });
+  it('returns false for a project role that sets the date itself', () => {
+    const user = userWithRole('project', 'project-1', [REQUEST, SET]);
+    expect(canRequestProjectEndDateChange(user, PROJECT)).toBe(false);
+  });
+
+  it('returns true for a site-wide role that may ask', () => {
+    const user = userWithRole('global', 'site', [REQUEST]);
     expect(canRequestProjectEndDateChange(user, PROJECT)).toBe(true);
   });
 
-  it('returns false for a site-wide grant that can edit the project', () => {
-    vi.spyOn(ENV, 'roles', 'get').mockReturnValue([
-      role('GLOBAL.DESK', [
-        PermissionEnum.LIST_PROJECTS,
-        PermissionEnum.UPDATE_PROJECT,
-      ]),
-    ]);
-    const user = makeUser({
-      permissions: [
-        {
-          scope_type: 'global',
-          scope_uuid: 'site',
-          role_name: 'GLOBAL.DESK',
-        } as Permission,
-      ],
-    });
+  it('returns false for a site-wide role that sets the date itself', () => {
+    const user = userWithRole('global', 'site', [REQUEST, SET]);
     expect(canRequestProjectEndDateChange(user, PROJECT)).toBe(false);
   });
 
-  it('returns false for a site-wide role that cannot see projects', () => {
-    vi.spyOn(ENV, 'roles', 'get').mockReturnValue([
-      role('GLOBAL.ORDERS', [PermissionEnum.LIST_ORDERS]),
-    ]);
-    const user = makeUser({
-      permissions: [
-        {
-          scope_type: 'global',
-          scope_uuid: 'site',
-          role_name: 'GLOBAL.ORDERS',
-        } as Permission,
-      ],
-    });
-    expect(canRequestProjectEndDateChange(user, PROJECT)).toBe(false);
-  });
-
-  it('offers the request to an organization role that can list its projects', () => {
-    vi.spyOn(ENV, 'roles', 'get').mockReturnValue([
-      role('CUSTOMER.READER', [PermissionEnum.LIST_PROJECTS]),
-    ]);
-    const user = makeUser({
-      permissions: [
-        {
-          scope_type: 'customer',
-          scope_uuid: 'customer-1',
-          role_name: 'CUSTOMER.READER',
-        } as Permission,
-      ],
-    });
+  it('offers the request to an organization role that may ask', () => {
+    const user = userWithRole('customer', 'customer-1', [REQUEST]);
     expect(canRequestProjectEndDateChange(user, PROJECT)).toBe(true);
   });
 
-  it('returns false for an organization role that can edit the project', () => {
-    vi.spyOn(ENV, 'roles', 'get').mockReturnValue([
-      role('CUSTOMER.OWNER', [PermissionEnum.UPDATE_PROJECT]),
-    ]);
-    const user = makeUser({
-      permissions: [
-        {
-          scope_type: 'customer',
-          scope_uuid: 'customer-1',
-          role_name: 'CUSTOMER.OWNER',
-        } as Permission,
-      ],
-    });
+  it('returns false for an organization role that sets the date itself', () => {
+    const user = userWithRole('customer', 'customer-1', [REQUEST, SET]);
     expect(canRequestProjectEndDateChange(user, PROJECT)).toBe(false);
   });
 
-  it('returns false for an organization role that cannot list projects', () => {
-    vi.spyOn(ENV, 'roles', 'get').mockReturnValue([
-      role('CUSTOMER.ORDERS', [PermissionEnum.LIST_ORDERS]),
-    ]);
-    const user = makeUser({
-      permissions: [
-        {
-          scope_type: 'customer',
-          scope_uuid: 'customer-1',
-          role_name: 'CUSTOMER.ORDERS',
-        } as Permission,
-      ],
-    });
-    expect(canRequestProjectEndDateChange(user, PROJECT)).toBe(false);
-  });
-
-  it('returns false for project list on a different organization', () => {
-    vi.spyOn(ENV, 'roles', 'get').mockReturnValue([
-      role('CUSTOMER.READER', [PermissionEnum.LIST_PROJECTS]),
-    ]);
-    const user = makeUser({
-      permissions: [
-        {
-          scope_type: 'customer',
-          scope_uuid: 'customer-2',
-          role_name: 'CUSTOMER.READER',
-        } as Permission,
-      ],
-    });
+  it('returns false for a role on a different organization', () => {
+    const user = userWithRole('customer', 'customer-2', [REQUEST]);
     expect(canRequestProjectEndDateChange(user, PROJECT)).toBe(false);
   });
 });

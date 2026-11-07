@@ -47,10 +47,10 @@ export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
         title: translate('Reviewer'),
         render: ({ row }: { row: CallReviewerPool }) => (
           <div>
-            <div className="font-medium">
+            <div className="font-medium text-primary">
               {renderFieldOrDash(row.reviewer_name)}
             </div>
-            <small className="text-quaternary">{row.reviewer_email}</small>
+            <span className="text-quaternary">{row.reviewer_email}</span>
           </div>
         ),
         keys: ['reviewer_name', 'reviewer_email'] as (keyof CallReviewerPool)[],
@@ -78,20 +78,27 @@ export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
           const percentage = row.max_assignments
             ? Math.round((row.current_assignments / row.max_assignments) * 100)
             : 0;
+          // As usage reads elsewhere (OfferingComponentUsageList): the
+          // figures over a small bar.
           return (
-            <div className="flex items-center gap-1.5">
+            <div className="flex flex-col gap-1 min-w-[120px]">
+              <div className="flex justify-between gap-1.5">
+                <span>
+                  {row.current_assignments} / {row.max_assignments}
+                </span>
+                <span className="font-medium text-primary">{percentage}%</span>
+              </div>
               <Progress
-                className="grow min-w-[60px]"
+                size="sm"
                 value={percentage}
                 variant={
-                  percentage >= 100
-                    ? 'danger'
-                    : percentage >= 80
+                  percentage < 50
+                    ? 'primary'
+                    : percentage < 80
                       ? 'warning'
-                      : 'success'
+                      : 'danger'
                 }
               />
-              <small className="text-quaternary">{percentage}%</small>
             </div>
           );
         },

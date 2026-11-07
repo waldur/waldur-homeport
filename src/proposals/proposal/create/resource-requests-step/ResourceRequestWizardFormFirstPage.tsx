@@ -3,7 +3,7 @@ import { FunctionComponent, useMemo } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
-import { FormField, FormLabel } from 'waldur-ui';
+import { AlertItem, FormField, FormLabel } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -12,7 +12,26 @@ import { required } from '@/core/validators';
 import { SelectField } from '@/form';
 import { translate } from '@/i18n';
 import { showsCallContext } from '@/proposals/presentation';
+import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
+
+/** How many requests of the proposal already use each call offering. */
+export const countRequestsByOffering = (
+  rows: { uuid: string; requested_offering?: { uuid: string } }[] | undefined,
+  excludeRequestUuid?: string,
+): Map<string, number> => {
+  const counts = new Map<string, number>();
+  (rows ?? []).forEach((row) => {
+    if (row.uuid === excludeRequestUuid) {
+      return;
+    }
+    const key = row.requested_offering?.uuid;
+    if (key) {
+      counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+  });
+  return counts;
+};
 
 export const ResourceRequestWizardFormFirstPage: FunctionComponent<
   WizardFormStepProps
@@ -55,6 +74,38 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
     values: { offering },
   } = useFormState({ subscription: { values: true } });
   const { change } = useForm();
+
+  // A second request on an offering the proposal already asks for is allowed
+  // (another configuration, another period) and numbered at allocation, but
+  // is more often a slip: say so, do not block. Awards and templates are not
+  // proposal requests and pass no proposal, which keeps the query off.
+  const isEdit = Boolean(props.data?.editingRequestUuid);
+  const { data: existingRows } = useProposalResourceRows(
+    props.data?.proposalUuid,
+  );
+  const requestedCounts = useMemo(
+    () => countRequestsByOffering(existingRows, props.data?.editingRequestUuid),
+    [existingRows, props.data?.editingRequestUuid],
+  );
+  const repeatCount = offering?.uuid
+    ? (requestedCounts.get(offering.uuid) ?? 0)
+    : 0;
+  const repeatNotice = !repeatCount
+    ? null
+    : isEdit
+      ? translate(
+          'Another request in this proposal already asks for {offering}.',
+          { offering: offering.offering_name },
+        )
+      : repeatCount === 1
+        ? translate(
+            'You already requested {offering} in this proposal. Add it again only if you need a separate request.',
+            { offering: offering.offering_name },
+          )
+        : translate(
+            'You already requested {offering} in this proposal {count} times. Add it again only if you need a separate request.',
+            { offering: offering.offering_name, count: repeatCount },
+          );
 
   return (
     <WizardForm {...props}>
@@ -117,6 +168,15 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
               </FormField>
             )}
           </Field>
+        )}
+        {repeatNotice && options.length > 0 && (
+          <AlertItem
+            variant="warning"
+            type="floating"
+            className="mt-4"
+            title={translate('Already requested in this proposal')}
+            body={repeatNotice}
+          />
         )}
         {offering && (
           <p className="mt-4">

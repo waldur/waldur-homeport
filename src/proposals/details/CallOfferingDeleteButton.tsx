@@ -1,5 +1,5 @@
 import {
-  proposalRequestedOfferingsCancel,
+  proposalProtectedCallsOfferingsDestroy,
   RequestedOffering,
 } from 'waldur-js-client';
 
@@ -9,14 +9,20 @@ import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const CallOfferingDeleteButton = ({
   row,
+  callUuid,
   refetch,
 }: {
   row: RequestedOffering;
+  callUuid: string;
   refetch(): void;
 }) => {
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
-      proposalRequestedOfferingsCancel({ path: { uuid: row.uuid } }),
+      // The call's own endpoint: it refuses while the call has component
+      // rules, resource pools or templates set on the offering, and says so.
+      proposalProtectedCallsOfferingsDestroy({
+        path: { uuid: callUuid, obj_uuid: row.uuid },
+      }),
     refetch: refetch,
 
     confirmation: {

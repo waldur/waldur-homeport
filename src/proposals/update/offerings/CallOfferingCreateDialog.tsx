@@ -58,11 +58,6 @@ export const CallOfferingCreateDialog: FC<CallOfferingCreateDialogProps> = (
           offering: formData.offering.url,
           description: formData.description,
           plan: updated_plan_url,
-          attributes: formData.limits
-            ? {
-                limits: formData.limits,
-              }
-            : {},
         },
       });
     },

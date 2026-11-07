@@ -67,12 +67,14 @@ export const EditResourceEndDateByProviderAction = ({
       },
     });
 
-  // No support bypass: set_end_date on the provider endpoint takes the
-  // permission and nothing else. Only the deprecated set_end_date_by_provider
-  // let support through, so offering the entry to support produced a 403.
+  // Mirrors the backend (offering.customer, offering): the provider's owners
+  // and the offering's managers. No support bypass: set_end_date on the
+  // provider endpoint takes the permission and nothing else, so offering
+  // the entry to support produced a 403.
   const hasPermissionToSet = hasPermission(user, {
     permission: PermissionEnum.SET_RESOURCE_END_DATE,
     customerId: resource.provider_uuid,
+    offeringId: resource.offering_uuid,
   });
 
   if (!hasPermissionToSet) {

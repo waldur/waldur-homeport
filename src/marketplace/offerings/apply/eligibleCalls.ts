@@ -41,9 +41,13 @@ export const getSubmittableRounds = (
     })),
   );
   // Soonest deadline first: the one the user is most likely to be acting on.
-  return rows.sort((a, b) =>
-    a.round.cutoff_time < b.round.cutoff_time ? -1 : 1,
-  );
+  // A round without a cut-off has no deadline, so it comes last.
+  return rows.sort((a, b) => {
+    const left = a.round.cutoff_time;
+    const right = b.round.cutoff_time;
+    if (!left || !right) return left ? -1 : right ? 1 : 0;
+    return left < right ? -1 : 1;
+  });
 };
 
 /** The endpoint paginates at 10, which would silently hide eligible calls. */

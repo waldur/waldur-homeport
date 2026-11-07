@@ -27,6 +27,7 @@ import { Call } from '@/proposals/types';
 
 import { EditMatchingSettingButton } from './EditMatchingSettingButton';
 import { MatchingSummaryButton } from './MatchingSummaryButton';
+import { ResponseWindowSettings } from './ResponseWindowSettings';
 import {
   MatchingConfig,
   AFFINITY_METHOD_LABELS,
@@ -39,7 +40,8 @@ interface MatchingSectionProps {
   isReadOnly?: boolean;
 }
 
-const DEFAULT_CONFIG: MatchingConfig = {
+// The backend model defaults, shown while a call has no configuration saved.
+export const DEFAULT_CONFIG: MatchingConfig = {
   affinity_method: 'combined',
   keyword_weight: 0.4,
   text_weight: 0.6,
@@ -47,6 +49,7 @@ const DEFAULT_CONFIG: MatchingConfig = {
   max_reviewers_per_proposal: 5,
   max_proposals_per_reviewer: 10,
   algorithm: 'minmax',
+  min_affinity_threshold: 0.1,
 };
 
 const fetchMatchingConfig = async (
@@ -100,12 +103,15 @@ const affinityRows = [
 ];
 
 // Row definitions for constraints tab
-const constraintRows = [
+export const constraintRows = [
   {
     label: translate('Min reviewers per proposal'),
     key: 'min_reviewers_per_proposal',
     getValue: (config: MatchingConfig) =>
-      String(config?.min_reviewers_per_proposal ?? 2),
+      String(
+        config?.min_reviewers_per_proposal ??
+          DEFAULT_CONFIG.min_reviewers_per_proposal,
+      ),
     title: translate('Edit minimum reviewers per proposal'),
     description: translate(
       'Minimum number of reviewers that must be assigned to each proposal',
@@ -115,7 +121,10 @@ const constraintRows = [
     label: translate('Max reviewers per proposal'),
     key: 'max_reviewers_per_proposal',
     getValue: (config: MatchingConfig) =>
-      String(config?.max_reviewers_per_proposal ?? 3),
+      String(
+        config?.max_reviewers_per_proposal ??
+          DEFAULT_CONFIG.max_reviewers_per_proposal,
+      ),
     title: translate('Edit maximum reviewers per proposal'),
     description: translate(
       'Maximum number of reviewers that can be assigned to each proposal',
@@ -125,10 +134,26 @@ const constraintRows = [
     label: translate('Max proposals per reviewer'),
     key: 'max_proposals_per_reviewer',
     getValue: (config: MatchingConfig) =>
-      String(config?.max_proposals_per_reviewer ?? 5),
+      String(
+        config?.max_proposals_per_reviewer ??
+          DEFAULT_CONFIG.max_proposals_per_reviewer,
+      ),
     title: translate('Edit maximum proposals per reviewer'),
     description: translate(
       'Maximum number of proposals a single reviewer can be assigned',
+    ),
+  },
+  {
+    label: translate('Minimum affinity'),
+    key: 'min_affinity_threshold',
+    getValue: (config: MatchingConfig) =>
+      `${Math.round(
+        (config?.min_affinity_threshold ??
+          DEFAULT_CONFIG.min_affinity_threshold) * 100,
+      )}%`,
+    title: translate('Edit minimum affinity'),
+    description: translate(
+      'Reviewers who score below this for a proposal (0-1; 0.1 is 10%) are neither suggested nor assigned to it',
     ),
   },
   {
@@ -140,7 +165,7 @@ const constraintRows = [
       translate('MinMax (balanced load)'),
     title: translate('Edit assignment algorithm'),
     description: translate(
-      'Algorithm used to assign reviewers to proposals based on affinity scores',
+      'Not applied yet: generating assignments always picks reviewers by affinity, best first, whatever is chosen here.',
     ),
   },
 ];
@@ -152,6 +177,7 @@ const tabs = [
     rows: affinityRows,
   },
   { key: 'constraints', title: translate('Constraints'), rows: constraintRows },
+  { key: 'response', title: translate('Response window'), rows: [] },
 ];
 
 export const MatchingSection: FC<MatchingSectionProps> = ({
@@ -289,6 +315,12 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
                   />
                 ))}
               </PropertyList>
+            </TabsContent>
+
+            {/* How long reviewers have to answer: the call's assignment
+                configuration, not its matching configuration. */}
+            <TabsContent value="response">
+              <ResponseWindowSettings call={call} isReadOnly={isReadOnly} />
             </TabsContent>
           </>
         </Tabs>

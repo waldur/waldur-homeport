@@ -3,6 +3,7 @@ import { FC, useMemo } from 'react';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { OfferingCallsSection } from '@/proposals/provider-calls/OfferingCallsSection';
 
 import { OfferingInvitationsList } from './OfferingInvitationsList';
 import { OfferingUsersList } from './OfferingUsersList';
@@ -44,9 +45,19 @@ export const OfferingTeamTab: FC<{ offering: Offering }> = (props) => {
     title: translate('Team'),
   };
 
-  return subTab === 'invitations' ? (
-    <OfferingInvitationsList {...sharedProps} />
-  ) : (
-    <OfferingUsersList {...sharedProps} />
+  return (
+    <>
+      {subTab === 'invitations' ? (
+        <OfferingInvitationsList {...sharedProps} />
+      ) : (
+        <OfferingUsersList {...sharedProps} />
+      )}
+      {props.offering.customer_uuid ? (
+        <OfferingCallsSection
+          offeringUuid={props.offering.uuid}
+          providerUuid={props.offering.customer_uuid}
+        />
+      ) : null}
+    </>
   );
 };

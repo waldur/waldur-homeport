@@ -64,12 +64,13 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
   const setCurrentProject = useSetProject();
   const user = useUser();
 
-  // Mirrors the backend: reviewing a request needs UPDATE_PROJECT on the project
-  // or its customer, and a request may never be reviewed by whoever raised it.
+  // Mirrors the backend: reviewing a request takes the permission that sets
+  // the date directly, on the project or its customer, and a request may never
+  // be reviewed by whoever raised it.
   const canReview = useMemo(
     () =>
       hasPermission(user, {
-        permission: PermissionEnum.UPDATE_PROJECT,
+        permission: PermissionEnum.SET_PROJECT_END_DATE,
         projectId: project?.uuid,
         customerId: project?.customer_uuid,
       }),

@@ -6,12 +6,12 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { canOrderFromOffering } from '@/marketplace/canUseMarketplaceShopUi';
 import {
   fetchEligibleCalls,
   getSubmittableRounds,
   SubmittableRound,
 } from '@/marketplace/offerings/apply/eligibleCalls';
-import { isProposalRequestEnabled } from '@/marketplace/serviceAccessMode';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
@@ -54,14 +54,15 @@ export const useOfferingAccess = (
   const { showError } = useNotify();
   const [loading, setLoading] = useState(false);
 
+  // The deploy form this leads to applies the same rule.
   const canOrder =
+    canOrderFromOffering(user, offering) &&
     !isFeatureVisible(MarketplaceFeatures.catalogue_only) &&
     (!user || hasPermissionOnAnyScope(user, PermissionEnum.CREATE_ORDER));
 
-  // In 'calls' mode there is no offering page to apply from, so the route is
-  // not offered; the other two modes both reach services through offerings.
-  const canApply =
-    Boolean(offering?.open_for_proposals) && isProposalRequestEnabled();
+  // Every mode reaches an offering page, and from each the offering can be
+  // applied for through a call that takes it.
+  const canApply = Boolean(offering?.open_for_proposals);
 
   const goToOrder = useCallback(
     (target?: OrderTarget) => {

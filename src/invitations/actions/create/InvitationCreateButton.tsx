@@ -15,8 +15,11 @@ export const InvitationCreateButton: FC<
     /** Decided by the caller when the scope has rules of its own, e.g. the
      * call managers who may invite to a proposal of their call. */
     canInvite?: boolean;
+    /** Asked before the dialog opens; it stays shut unless this resolves
+     * to true. */
+    beforeOpen?: () => Promise<boolean>;
   }
-> = ({ canInvite: canInviteOverride, ...context }) => {
+> = ({ canInvite: canInviteOverride, beforeOpen, ...context }) => {
   const {
     callback,
     canInvite: canInviteByPermission,
@@ -33,7 +36,15 @@ export const InvitationCreateButton: FC<
 
   return (
     <ActionItem
-      action={loadingProjects ? null : callback}
+      action={
+        loadingProjects
+          ? null
+          : beforeOpen
+            ? async () => {
+                if (await beforeOpen()) callback();
+              }
+            : callback
+      }
       title={translate('Invite by mail')}
       iconNode={
         loadingProjects ? <LoadingSpinnerSimple /> : <AtIcon weight="bold" />

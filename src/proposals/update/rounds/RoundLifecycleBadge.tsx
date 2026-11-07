@@ -10,7 +10,9 @@ export const RoundLifecycleBadge: FC<{
   state: LifecycleStateEnum | null | undefined;
   /** Only on the protected round, i.e. for the call team. */
   heldDecisionsCount?: number | null;
-}> = ({ state, heldDecisionsCount }) => {
+  /** The call requires the results' adoption and none is recorded yet. */
+  awaitingAdoption?: boolean;
+}> = ({ state, heldDecisionsCount, awaitingAdoption }) => {
   const lifecycle = getRoundLifecycleState(state);
   if (!lifecycle) return null;
   return (
@@ -33,6 +35,18 @@ export const RoundLifecycleBadge: FC<{
           tone="outline"
           shape="pill"
           data-testid="round-held-decisions-badge"
+        />
+      ) : null}
+      {awaitingAdoption && state === 'deciding' ? (
+        <StateIndicator
+          label={translate('Awaiting adoption')}
+          tooltip={translate(
+            'The results are published once their adoption is recorded.',
+          )}
+          variant="info"
+          tone="outline"
+          shape="pill"
+          data-testid="round-awaiting-adoption-badge"
         />
       ) : null}
     </>

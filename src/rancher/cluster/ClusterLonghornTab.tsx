@@ -5,7 +5,7 @@ import { translate } from '@/i18n';
 import { DangerActionPanel } from '@/user/support/DangerActionPanel';
 
 export const ClusterLonghornTab = ({ resource }) =>
-  !resource.attributes.install_longhorn ? (
+  !resource.attributes?.install_longhorn ? (
     <Card className="mb-3">
       <CardHeader>
         <CardTitle as="div">{translate('Longhorn status')}</CardTitle>

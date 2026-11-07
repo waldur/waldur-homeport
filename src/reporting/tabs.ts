@@ -13,12 +13,11 @@ export interface ReportingTab {
  * Tabs of the reporting section.
  *
  * A category tab is shown only when its target state is actually reachable.
- * The category flag and the flag on the category's route are not the same
- * flag — `proposals` is a category of call management but its route is gated
- * on experimental UI — so checking the category flag alone used to render a
- * tab that answered with the feature-disabled page on click. `isStateVisible`
- * reads the gate off the route itself, which is what the transition hook
- * enforces, so the two cannot drift apart again.
+ * A category's flag and the flag on its route need not be the same flag, so
+ * checking the category flag alone could render a tab that answers with the
+ * feature-disabled page on click. `isStateVisible` reads the gate off the
+ * route itself, which is what the transition hook enforces, so the two cannot
+ * drift apart.
  *
  * The report list is filtered exactly as the category page filters it, so a
  * tab never leads to a page with no reports on it either.

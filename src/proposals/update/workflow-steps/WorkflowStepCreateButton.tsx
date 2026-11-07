@@ -1,5 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { CallWorkflowStep } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
@@ -7,56 +7,35 @@ import { BaseButton } from 'waldur-ui';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { Call } from '@/proposals/types';
-import {
-  getStepDefinitions,
-  stepDefinition,
-} from '@/proposals/workflow/constants';
 
 import { AddWorkflowStepDialog } from './AddWorkflowStepDialog';
 
 interface OwnProps {
   call: Call;
-  configuredSteps: CallWorkflowStep[];
+  // Every step of the call, in workflow order.
+  steps?: CallWorkflowStep[];
   refetch(): void;
   disabled?: boolean;
   tooltip?: string;
 }
 
+// A step of any kind can always be added -- a kind may appear any number of
+// times -- so the button is only ever disabled for a call that cannot change.
 export const WorkflowStepCreateButton = ({
   call,
-  configuredSteps,
+  steps,
   refetch,
-  disabled: externalDisabled,
-  tooltip: externalTooltip,
+  disabled,
+  tooltip,
 }: OwnProps) => {
   const { openDialog: openModal } = useModal();
-  // Toggle-managed steps (award_response) are provisioned by another step's
-  // flag and never offered in the dialog, so they must not count on either
-  // side of this comparison: counting them in the catalogue alone leaves the
-  // button enabled on a fully configured call, and the dialog then opens with
-  // an empty step picker.
-  const allAdded = useMemo(() => {
-    const addable = (step: { step: CallWorkflowStep['step'] }) =>
-      !stepDefinition(step.step)?.managedByToggle;
-    return (
-      configuredSteps.filter(addable).length >=
-      getStepDefinitions().filter((d) => !d.managedByToggle).length
-    );
-  }, [configuredSteps]);
 
   const openDialog = useCallback(() => {
     openModal(AddWorkflowStepDialog, {
-      resolve: { call, configuredSteps, refetch },
-      size: 'md',
+      resolve: { call, steps, refetch },
+      size: 'lg',
     });
-  }, [call, configuredSteps, refetch, openModal]);
-
-  const isDisabled = externalDisabled || allAdded;
-  const reason = externalDisabled
-    ? externalTooltip
-    : allAdded
-      ? translate('All workflow steps already configured.')
-      : undefined;
+  }, [call, steps, refetch, openModal]);
 
   return (
     <BaseButton
@@ -64,8 +43,8 @@ export const WorkflowStepCreateButton = ({
       label={translate('Add')}
       iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"
-      disabled={isDisabled}
-      tooltip={reason}
+      disabled={disabled}
+      tooltip={disabled ? tooltip : undefined}
       size="lg"
     />
   );

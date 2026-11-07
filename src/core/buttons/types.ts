@@ -26,6 +26,8 @@ export interface CreateModalButtonProps<
   disabled?: boolean;
   /** Tooltip shown on hover */
   tooltip?: string;
+  /** Why it is disabled: on hover, and announced with the button. */
+  disabledReason?: string;
   /** Button variant (defaults to 'primary') */
   variant?: ButtonVariant;
   /** Button size */

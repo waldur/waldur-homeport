@@ -42,6 +42,7 @@ const FIELD_LABELS: Record<string, string> = {
   min_reviewers_per_proposal: translate('Min reviewers per proposal'),
   max_reviewers_per_proposal: translate('Max reviewers per proposal'),
   max_proposals_per_reviewer: translate('Max proposals per reviewer'),
+  min_affinity_threshold: translate('Minimum affinity'),
   algorithm: translate('Assignment algorithm'),
 };
 
@@ -64,13 +65,20 @@ const FIELD_DESCRIPTIONS: Record<string, string> = {
   max_proposals_per_reviewer: translate(
     'Maximum number of proposals a single reviewer can be assigned',
   ),
+  min_affinity_threshold: translate(
+    'Reviewers who score below this for a proposal (0-1; 0.1 is 10%) are neither suggested nor assigned to it',
+  ),
   algorithm: translate(
-    'Algorithm used to assign reviewers to proposals based on affinity scores',
+    'Not applied yet: generating assignments always picks reviewers by affinity, best first, whatever is chosen here.',
   ),
 };
 
 // Field type definitions
-const NUMBER_FIELDS = ['keyword_weight', 'text_weight'];
+const NUMBER_FIELDS = [
+  'keyword_weight',
+  'text_weight',
+  'min_affinity_threshold',
+];
 const INTEGER_FIELDS = [
   'min_reviewers_per_proposal',
   'max_reviewers_per_proposal',

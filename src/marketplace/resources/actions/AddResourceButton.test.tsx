@@ -4,6 +4,7 @@ import { marketplaceResourcesOfferingForSubresourcesList } from 'waldur-js-clien
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { isMarketplaceVisible } from '@/marketplace/serviceAccessMode';
 import { INSTANCE_TYPE } from '@/openstack/constants';
 import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
@@ -12,6 +13,10 @@ import { AddResourceButton } from './AddResourceButton';
 
 vi.mock('@/features/connect', () => ({
   isFeatureVisible: vi.fn(),
+}));
+
+vi.mock('@/marketplace/serviceAccessMode', () => ({
+  isMarketplaceVisible: vi.fn(),
 }));
 
 vi.mock('@/marketplace/links/OfferingLink', () => ({
@@ -28,6 +33,7 @@ describe('AddResourceButton (OpenStack sub-resource deploy)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(useUser).mockReturnValue({ is_staff: false } as any);
+    vi.mocked(isMarketplaceVisible).mockReturnValue(true);
     vi.mocked(
       marketplaceResourcesOfferingForSubresourcesList,
     ).mockResolvedValue({
@@ -55,6 +61,18 @@ describe('AddResourceButton (OpenStack sub-resource deploy)', () => {
       (key) => key === MarketplaceFeatures.hide_marketplace_from_end_users,
     );
     vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+    renderWithProviders(
+      <AddResourceButton resource={resource} offeringType={INSTANCE_TYPE} />,
+    );
+    expect(
+      await screen.findByRole('button', { name: /add resource/i }),
+    ).toBeInTheDocument();
+  });
+
+  // The tenant's own offerings are private, so calls-only mode leaves them open.
+  it('is rendered in calls-only mode for non-staff', async () => {
+    vi.mocked(isFeatureVisible).mockReturnValue(false);
+    vi.mocked(isMarketplaceVisible).mockReturnValue(false);
     renderWithProviders(
       <AddResourceButton resource={resource} offeringType={INSTANCE_TYPE} />,
     );

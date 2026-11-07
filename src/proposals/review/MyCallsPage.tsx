@@ -11,6 +11,7 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
+import { useMyWorkTitle } from './myWorkTitle';
 import { ReviewerProfileSummaryCard } from './ReviewerProfileSummaryCard';
 import { ReviewStatsWidgets } from './ReviewStatsWidgets';
 import { useMyReviewsTabs } from './tabs';
@@ -24,6 +25,7 @@ type CallReviewerPoolExtended = CallReviewerPool & {
 };
 
 export const MyCallsPage: FC = () => {
+  const myWorkTitle = useMyWorkTitle();
   const tabs = useMyReviewsTabs();
 
   const filter = useMemo(
@@ -47,7 +49,7 @@ export const MyCallsPage: FC = () => {
         id: 'call',
         title: translate('Call'),
         render: ({ row }: { row: CallReviewerPoolExtended }) => (
-          <span className="font-medium">{row.call_name}</span>
+          <span className="font-medium text-primary">{row.call_name}</span>
         ),
         keys: ['call_name'],
       },
@@ -166,7 +168,7 @@ export const MyCallsPage: FC = () => {
       <Table<CallReviewerPoolExtended>
         {...tableProps}
         columns={columns}
-        title={translate('My reviews')}
+        title={myWorkTitle}
         tabs={tabs}
         verboseName={translate('calls')}
         hasOptionalColumns

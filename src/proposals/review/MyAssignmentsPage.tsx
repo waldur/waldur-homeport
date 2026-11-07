@@ -1,73 +1,58 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import {
-  myAssignmentBatchesList,
   myAssignmentBatchesRetrieve,
   MyAssignmentBatch,
   MyAssignmentItem,
 } from 'waldur-js-client';
 
-import { HelpIcon } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { Badge, EmptyState, HelpIcon } from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { createFetcher } from '@/table/api';
+import { AssignmentBatchStatusBadge } from '@/proposals/assignments/AssignmentBatchStatusBadge';
+import { AssignmentStatusBadge } from '@/proposals/assignments/AssignmentStatusBadge';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
 import { AcceptAssignmentAction } from './AcceptAssignmentAction';
 import { DeclineAssignmentAction } from './DeclineAssignmentAction';
+import { fetchMyAssignmentBatches } from './fetchMyAssignmentBatches';
+import { useMyWorkTitle } from './myWorkTitle';
+import { ExpiredResponseNotice, ResponseTimeLeft } from './ResponseDeadline';
 import { ReviewerProfileSummaryCard } from './ReviewerProfileSummaryCard';
 import { ReviewStatsWidgets } from './ReviewStatsWidgets';
 import { useMyReviewsTabs } from './tabs';
-
-const StatusBadge: FC<{ status: string; statusDisplay: string }> = ({
-  status,
-  statusDisplay,
-}) => {
-  const variant = useMemo(() => {
-    switch (status) {
-      case 'pending':
-        return 'warning';
-      case 'accepted':
-        return 'success';
-      case 'declined':
-        return 'danger';
-      case 'coi_blocked':
-        return 'info';
-      default:
-        return 'secondary';
-    }
-  }, [status]);
-
-  return (
-    <Badge variant={variant} size="sm" shape="pill" tone="outline">
-      {statusDisplay}
-    </Badge>
-  );
-};
 
 interface AssignmentItemActionsProps {
   item: MyAssignmentItem;
   batchUuid: string;
 }
 
-const AssignmentItemActions: FC<AssignmentItemActionsProps> = ({
+// The API reports an item past its deadline as expired even before the
+// periodic expiry task has stored that, so Accept and Decline are offered only
+// while the response can still be given.
+export const AssignmentItemActions: FC<AssignmentItemActionsProps> = ({
   item,
   batchUuid,
 }) => {
+  if (item.is_expired || item.status === 'expired') {
+    return <ExpiredResponseNotice expiresAt={item.expires_at} />;
+  }
   if (item.status !== 'pending') {
     return null;
   }
 
   return (
-    <div className="flex gap-1.5">
-      <AcceptAssignmentAction item={item} batchUuid={batchUuid} />
-      <DeclineAssignmentAction item={item} batchUuid={batchUuid} />
+    <div className="flex flex-col gap-1 items-start">
+      <div className="flex gap-1.5">
+        <AcceptAssignmentAction item={item} batchUuid={batchUuid} />
+        <DeclineAssignmentAction item={item} batchUuid={batchUuid} />
+      </div>
+      <ResponseTimeLeft expiresAt={item.expires_at} />
     </div>
   );
 };
@@ -97,7 +82,7 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
   if (!batch) {
     return (
       <ExpandableContainer>
-        <p className="text-quaternary">{translate('No data available.')}</p>
+        <EmptyState size="sm" message={translate('No data available.')} />
       </ExpandableContainer>
     );
   }
@@ -127,19 +112,18 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
               <tr key={item.uuid}>
                 <td>
                   <div className="font-medium">{item.proposal_name}</div>
-                  <small className="text-quaternary">
-                    {item.proposal_slug}
-                  </small>
+                  <span className="text-quaternary">{item.proposal_slug}</span>
                   {item.proposal_summary && (
-                    <p className="text-quaternary small mt-1 mb-0">
+                    <p className="text-quaternary mt-1 mb-0">
                       {item.proposal_summary}
                     </p>
                   )}
                 </td>
-                <td>
-                  <StatusBadge
+                <td className="whitespace-nowrap">
+                  <AssignmentStatusBadge
                     status={item.status}
                     statusDisplay={item.status_display}
+                    size="sm"
                   />
                 </td>
                 <td>
@@ -176,47 +160,22 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
   );
 };
 
-const BatchStatusBadge: FC<{ status: string; statusDisplay: string }> = ({
-  status,
-  statusDisplay,
-}) => {
-  const variant = useMemo(() => {
-    switch (status) {
-      case 'draft':
-        return 'secondary';
-      case 'sent':
-        return 'primary';
-      case 'responded':
-        return 'success';
-      case 'expired':
-        return 'warning';
-      case 'cancelled':
-        return 'danger';
-      default:
-        return 'secondary';
-    }
-  }, [status]);
-
-  return (
-    <Badge variant={variant} size="sm" shape="pill" tone="outline">
-      {statusDisplay}
-    </Badge>
-  );
-};
-
 export const MyAssignmentsPage: FC = () => {
+  const myWorkTitle = useMyWorkTitle();
   const tabs = useMyReviewsTabs();
 
+  // Expired batches stay listed so the reviewer sees why they can no longer
+  // respond; the tab count asks for sent batches only.
   const filter = useMemo(
     () => ({
-      status: ['sent'],
+      status: ['sent', 'expired'],
     }),
     [],
   );
 
   const tableProps = useTable({
     table: 'MyAssignmentBatchesTable',
-    fetchData: createFetcher(myAssignmentBatchesList),
+    fetchData: fetchMyAssignmentBatches,
     filter,
     queryField: 'call_name',
   });
@@ -228,14 +187,14 @@ export const MyAssignmentsPage: FC = () => {
 
       <Table<MyAssignmentBatch>
         {...tableProps}
-        title={translate('My reviews')}
+        title={myWorkTitle}
         tabs={tabs}
         columns={[
           {
             id: 'call',
             title: translate('Call'),
             render: ({ row }) => (
-              <span className="font-medium">{row.call_name}</span>
+              <span className="font-medium text-primary">{row.call_name}</span>
             ),
             keys: ['call_name'],
           },
@@ -243,9 +202,10 @@ export const MyAssignmentsPage: FC = () => {
             id: 'status',
             title: translate('Status'),
             render: ({ row }) => (
-              <BatchStatusBadge
+              <AssignmentBatchStatusBadge
                 status={row.status}
                 statusDisplay={row.status_display}
+                size="sm"
               />
             ),
             keys: ['status', 'status_display'],
@@ -259,9 +219,9 @@ export const MyAssignmentsPage: FC = () => {
                   {row.items_pending_count}
                 </span>
                 <span className="text-quaternary"> / {row.items_count}</span>
-                <small className="text-quaternary ms-1">
+                <span className="text-quaternary ms-1">
                   {translate('pending')}
-                </small>
+                </span>
               </div>
             ),
             keys: ['items_count', 'items_pending_count'],
@@ -275,25 +235,20 @@ export const MyAssignmentsPage: FC = () => {
           {
             id: 'expires_at',
             title: translate('Expires'),
-            render: ({ row }) => (
-              <>
-                {row.expires_at ? formatDateTime(row.expires_at) : '-'}
-                {row.is_expired && (
-                  <span className="inline-flex items-center gap-1 ms-1">
-                    <Badge variant="danger" size="sm" tone="outline">
-                      {translate('Expired')}
-                    </Badge>
-                    <HelpIcon
-                      label={translate(
-                        'The response window for this assignment batch has passed.',
-                      )}
-                      size={14}
-                    />
+            render: ({ row }) =>
+              row.status === 'expired' ? (
+                <ExpiredResponseNotice expiresAt={row.expires_at} />
+              ) : (
+                <div className="flex flex-col gap-1 items-start">
+                  <span>
+                    {row.expires_at ? formatDateTime(row.expires_at) : '-'}
                   </span>
-                )}
-              </>
-            ),
-            keys: ['expires_at', 'is_expired'],
+                  {row.status === 'sent' && (
+                    <ResponseTimeLeft expiresAt={row.expires_at} />
+                  )}
+                </div>
+              ),
+            keys: ['expires_at', 'is_expired', 'status'],
           },
         ]}
         verboseName={translate('assignment batches')}

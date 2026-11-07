@@ -30,12 +30,7 @@ export const CUSTOMER_SCOPED_REPORTS = [
  * Reports built on staff-only endpoints, which answer support users with 403.
  * They are hidden from support, in the report lists and at the route.
  */
-export const STAFF_ONLY_REPORTS = [
-  'projects-by-affiliated-organization',
-  'call-performance',
-  'review-progress',
-  'resource-demand',
-];
+export const STAFF_ONLY_REPORTS = ['projects-by-affiliated-organization'];
 
 export interface ReportingOrganization {
   uuid: string;
@@ -87,15 +82,4 @@ export const reportPermissions = (key: string) => [
       : isStaffOrSupport(state) ||
         (CUSTOMER_SCOPED_REPORTS.includes(key) &&
           checkCanAccessCustomerReporting(getUser(state))),
-];
-
-/**
- * Route guard of a report category: open when the user may open any of its
- * reports, so the category follows its reports' guards instead of repeating them.
- */
-export const categoryPermissions = (keys: string[]) => [
-  (state: RootState) =>
-    keys.some((key) =>
-      reportPermissions(key).every((permission) => permission(state)),
-    ),
 ];

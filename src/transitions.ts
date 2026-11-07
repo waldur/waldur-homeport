@@ -4,6 +4,7 @@ import store from '@/store/store';
 
 import { clearAuthCache, resolvePostLoginTarget } from './auth/authNavigation';
 import * as AuthService from './auth/AuthService';
+import { getLandingState } from './auth/landingState';
 import { MatomoInstance } from './core/matomo';
 import {
   GroupInvitationTokenStorage,
@@ -225,7 +226,7 @@ export function attachTransitions() {
       to: (state) =>
         state.data && state.data.anonymous && AuthService.isAuthenticated(),
     },
-    (transition) => transition.router.stateService.target('profile.details'),
+    (transition) => transition.router.stateService.target(getLandingState()),
   );
   // If state data has `feature` field and this feature is disabled,
   // user is redirected to the feature-disabled empty state.

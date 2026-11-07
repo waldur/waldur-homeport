@@ -13,6 +13,8 @@ import { usesCallVocabulary } from '@/proposals/presentation';
 import { Proposal } from '@/proposals/types';
 import { useNotify } from '@/store/notify';
 
+import { sectionOpenProps, useSectionOpenState } from '../sectionOpen';
+
 import { proposalHasCompliance } from './complianceUtils';
 
 /** Rendered twice below — the loading card and the loaded one — so the two
@@ -78,9 +80,14 @@ const useProposalComplianceChecklist = (
  * renders nothing for the navigation to point at.
  */
 export const useShowsComplianceSection = (
-  proposal: Pick<Proposal, 'uuid' | 'compliance_status'> | undefined,
+  proposal:
+    | Pick<Proposal, 'uuid' | 'compliance_status' | 'reads_own_offerings_only'>
+    | undefined,
 ): boolean => {
-  const mayHaveCompliance = proposalHasCompliance(proposal);
+  // A provider reading only its own offerings' part is never given the
+  // applicant's compliance answers: not asked for them either.
+  const mayHaveCompliance =
+    proposalHasCompliance(proposal) && !proposal?.reads_own_offerings_only;
   const { data, error } = useProposalComplianceChecklist(
     proposal?.uuid,
     mayHaveCompliance,
@@ -99,6 +106,7 @@ export const ComplianceSummary: FC<ComplianceSummaryProps> = ({
   proposal,
   id,
 }) => {
+  const openState = useSectionOpenState();
   const {
     data: checklistData,
     isLoading,
@@ -111,7 +119,7 @@ export const ComplianceSummary: FC<ComplianceSummaryProps> = ({
         id={id}
         title={translate('Compliance checklist')}
         subtitle={complianceSubtitle()}
-        defaultOpen={false}
+        {...sectionOpenProps(openState, 'step-compliance', false)}
       >
         <LoadingSpinner />
       </AccordionCard>
@@ -127,7 +135,7 @@ export const ComplianceSummary: FC<ComplianceSummaryProps> = ({
       id={id}
       title={translate('Compliance checklist')}
       subtitle={complianceSubtitle()}
-      defaultOpen={false}
+      {...sectionOpenProps(openState, 'step-compliance', false)}
     >
       <PropertyList>
         {checklistData.questions?.map((question) => (

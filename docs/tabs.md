@@ -44,7 +44,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 | `activationMode`          | `'automatic'` by default (arrow keys select, as Bootstrap tabs did). Pass `'manual'` to move focus with the arrows and select on Enter/Space. |
 | `TabsTrigger` `tooltip`   | Works on disabled triggers too (the tooltip trigger wraps the button).                                                                        |
 | `TabsTrigger` `hint`      | Help text: the tooltip (unless `tooltip` is set) plus a question-mark icon. Use it instead of a `HelpIcon`, which can't sit inside the tab.   |
-| `TabsTrigger` `count`     | A count badge after the title; `countLoading` shows a spinner in it instead. `undefined` shows no badge, `0` shows `0`.                       |
+| `TabsTrigger` `count`     | A count badge after the title; `countLoading` shows a spinner in it instead. `undefined` shows no badge, `0` shows `0`. See "Counts" below.   |
 | `TabsList` `variant`      | `'line'` (default) or `'segmented'`; `fullWidth` stretches a segmented row.                                                                   |
 | `TabsList` `bordered`     | `false` drops the strip's own bottom line, for a strip in a card header that already draws one. `TabNav` takes it too.                        |
 
@@ -123,16 +123,27 @@ import { Link } from '@/core/Link';
 
 `activeKey={state.name}` is enough only when every page under the bar is the state of one of its tabs. Here View stands for every project page but Edit, so the key comes from the one state that isn't View's: with `state.name`, neither tab would be active on Resources or Audit logs.
 
-| Item field          | Notes                                                                                                                                                    |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `key`               | Matched against `activeKey`; using the state name lets `activeKey={state.name}` mark the current tab.                                                    |
-| `active`            | Overrides the match, for a looser one (`active: router.stateService.includes(tab.state)`).                                                               |
-| `link`              | The anchor the tab renders as. Without it the tab is a `<button>`.                                                                                       |
-| `onClick`           | Button tabs only. `TabNav`'s `onSelect(key)` runs after it. A link tab gets no click handler, since a router `Link` with one turns into `role="button"`. |
-| `disabled`          | A disabled link drops out of the tab order and ignores the pointer; a disabled button is `disabled`. `tooltip` still shows on both.                      |
-| `tooltip`, `testId` | A tooltip on the tab; `data-testid` on it.                                                                                                               |
+| Item field                            | Notes                                                                                                                                                    |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `key`                                 | Matched against `activeKey`; using the state name lets `activeKey={state.name}` mark the current tab.                                                    |
+| `active`                              | Overrides the match, for a looser one (`active: router.stateService.includes(tab.state)`).                                                               |
+| `link`                                | The anchor the tab renders as. Without it the tab is a `<button>`.                                                                                       |
+| `onClick`                             | Button tabs only. `TabNav`'s `onSelect(key)` runs after it. A link tab gets no click handler, since a router `Link` with one turns into `role="button"`. |
+| `disabled`                            | A disabled link drops out of the tab order and ignores the pointer; a disabled button is `disabled`. `tooltip` still shows on both.                      |
+| `tooltip`, `testId`                   | A tooltip on the tab; `data-testid` on it.                                                                                                               |
+| `count`, `countVariant`, `countLabel` | The count after the title, as in `Tabs` (see "Counts" below).                                                                                            |
 
 `TabNav` itself takes `activeKey`, `onSelect`, `aria-label`, and for the strip `listClassName`, `bordered`, `scrollable` and `scrollClassName`. A link tab is marked `aria-current="page"`; a button tab `aria-current="true"` (the current item of a set, not a page). Button tabs are for `TableNav`' local-state mode and for disabled placeholders.
+
+## Counts
+
+`Tabs` items and triggers, `TabNav` items, the page bar's `PageBarTab` (drawn by `TabsList`) and `TableTab` all take the same three props, and draw the same badge:
+
+- `count` — the number. `undefined` shows nothing; pass `count || undefined` to hide a zero.
+- `countVariant` — `'neutral'` (default, outlined), `'info'`, `'success'`, `'warning'` or `'danger'`, following the status variants in `ui-consistency-guidelines.md`.
+- `countLabel` — what the number means, for a screen reader ("2 errors, 5 warnings"). It is read after the title in place of the bare number. Give one with every coloured count: the colour must not be the only signal.
+
+When the label says more than the number (the number counts errors and warnings together, say), show it on hover too with the item's `tooltip`. Don't put a `Badge` in a tab's `title`.
 
 ## Keeping the tab in the URL
 

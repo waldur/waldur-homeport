@@ -5,13 +5,17 @@ import {
   callReviewerPoolsList,
   proposalProposalsList,
   proposalProtectedCallsCreateManualAssignment,
+  proposalProtectedCallsWorkflowStepsList,
 } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
 
-import { CreateManualAssignmentDialog } from './CreateManualAssignmentDialog';
+import {
+  CreateManualAssignmentDialog,
+  getAssignmentRefusals,
+} from './CreateManualAssignmentDialog';
 
 const fakeCall = { uuid: 'call-uuid-1', name: 'Test Call' };
 
@@ -164,6 +168,89 @@ describe('CreateManualAssignmentDialog', () => {
     ).not.toBeInTheDocument();
   });
 
+  it('starts from the selected proposals at a review step, leaving out the rest', async () => {
+    const user = userEvent.setup();
+    const second = {
+      uuid: 'proposal-uuid-5678efgh',
+      slug: 'PROP-2',
+      name: 'Second Proposal',
+      state: 'in_review',
+      workflow_step: 'scientific_review',
+    };
+    vi.mocked(proposalProtectedCallsWorkflowStepsList).mockResolvedValue({
+      data: [
+        { key: 'scientific_review', completer: 'reviewer' },
+        { key: 'eligibility_check', completer: 'call_manager' },
+      ],
+    } as any);
+    vi.mocked(proposalProposalsList).mockResolvedValue({
+      data: [fakeProposal, second],
+    } as any);
+    renderDialog({
+      initialProposals: [
+        { ...fakeProposal, state: 'submitted' },
+        second,
+        { uuid: 'draft-uuid', slug: 'PROP-3', name: 'Draft', state: 'draft' },
+        {
+          uuid: 'eligibility-uuid',
+          slug: 'PROP-4',
+          name: 'At the eligibility check',
+          state: 'in_review',
+          workflow_step: 'eligibility_check',
+        },
+      ],
+    });
+
+    expect(
+      await screen.findByText('Not at a review step, so left out: 2'),
+    ).toBeInTheDocument();
+
+    await user.click(getReviewerCombobox());
+    await user.click(await screen.findByText('Alice Reviewer'));
+    const submitBtn = screen.getByRole('button', { name: 'Create assignment' });
+    await waitFor(() => expect(submitBtn).toBeEnabled());
+    await user.click(submitBtn);
+
+    await waitFor(() =>
+      expect(proposalProtectedCallsCreateManualAssignment).toHaveBeenCalledWith(
+        expect.objectContaining({
+          body: expect.objectContaining({
+            proposal_uuids: [
+              'proposal-uuid-1234abcd',
+              'proposal-uuid-5678efgh',
+            ],
+          }),
+        }),
+      ),
+    );
+  });
+
+  it("starts from every selected proposal under evaluation when no step is the reviewers'", async () => {
+    vi.mocked(proposalProtectedCallsWorkflowStepsList).mockResolvedValue({
+      data: [
+        { key: 'administrative_check', completer: 'call_manager' },
+        { key: 'individual_reports', completer: 'proposal_role' },
+      ],
+    } as any);
+    renderDialog({
+      initialProposals: [
+        {
+          ...fakeProposal,
+          state: 'in_review',
+          workflow_step: 'administrative_check',
+        },
+        { uuid: 'draft-uuid', slug: 'PROP-3', name: 'Draft', state: 'draft' },
+      ],
+    });
+
+    expect(
+      await screen.findByText('Not at a review step, so left out: 1'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(`${fakeProposal.slug}: ${fakeProposal.name}`),
+    ).toBeInTheDocument();
+  });
+
   it('submits the correct path/body and reports success', async () => {
     const user = userEvent.setup();
     const refetch = vi.fn();
@@ -207,6 +294,14 @@ describe('CreateManualAssignmentDialog', () => {
       expect(closeDialog).toHaveBeenCalled();
       expect(showSuccess).toHaveBeenCalledWith(
         'Created assignment batch with 1 items.',
+        // The batch is a draft, sent from another tab: the toast says
+        // where, and links there.
+        'Added to a draft assignment batch — send it from Reviewer pool › Assignment batches.',
+        {
+          actions: [
+            expect.objectContaining({ label: 'Open assignment batches' }),
+          ],
+        },
       );
     });
   });
@@ -234,6 +329,41 @@ describe('CreateManualAssignmentDialog', () => {
     await waitFor(() => {
       expect(showSuccess).toHaveBeenCalledWith(
         'Created assignment batch with 2 items. 2 proposals were skipped.',
+        // The batch is a draft, sent from another tab: the toast says
+        // where, and links there.
+        'Added to a draft assignment batch — send it from Reviewer pool › Assignment batches.',
+        {
+          actions: [
+            expect.objectContaining({ label: 'Open assignment batches' }),
+          ],
+        },
+      );
+    });
+  });
+
+  it('does not point to a draft batch when nothing was added', async () => {
+    const user = userEvent.setup();
+    vi.mocked(proposalProtectedCallsCreateManualAssignment).mockResolvedValue({
+      data: { items_created: 0, skipped_proposals: ['x'] },
+    } as any);
+
+    renderDialog({ initialProposal: fakeProposal });
+
+    await screen.findByText('Manual assignment');
+
+    await user.click(getReviewerCombobox());
+    await user.click(await screen.findByText('Alice Reviewer'));
+
+    const submitBtn = await screen.findByRole('button', {
+      name: 'Create assignment',
+    });
+    await waitFor(() => expect(submitBtn).toBeEnabled());
+    await user.click(submitBtn);
+
+    const { showSuccess } = useNotify();
+    await waitFor(() => {
+      expect(showSuccess).toHaveBeenCalledWith(
+        'Created assignment batch with 0 items. 1 proposals were skipped.',
       );
     });
   });
@@ -357,5 +487,42 @@ describe('CreateManualAssignmentDialog', () => {
     expect(
       screen.queryByRole('button', { name: 'Assign anyway' }),
     ).not.toBeInTheDocument();
+  });
+});
+
+describe('getAssignmentRefusals', () => {
+  it("returns the backend's reasons for the reviewer and the proposals", () => {
+    const error = {
+      response: {
+        status: 400,
+        data: {
+          proposal_uuids: [
+            'Nothing to assign: Cryo-EM: Assignment already exists for this reviewer',
+          ],
+          skipped_proposals: [{ proposal_uuid: 'p1', reason: 'already' }],
+        },
+      },
+    };
+    expect(getAssignmentRefusals(error)).toEqual([
+      'Nothing to assign: Cryo-EM: Assignment already exists for this reviewer',
+    ]);
+    expect(
+      getAssignmentRefusals({
+        response: {
+          status: 400,
+          data: {
+            reviewer_pool_entry_uuid:
+              'Reviewer not found in pool or not accepted.',
+          },
+        },
+      }),
+    ).toEqual(['Reviewer not found in pool or not accepted.']);
+  });
+
+  it('leaves any other error to the generic report', () => {
+    expect(
+      getAssignmentRefusals({ response: { status: 500, data: {} } }),
+    ).toEqual([]);
+    expect(getAssignmentRefusals(new Error('network'))).toEqual([]);
   });
 });

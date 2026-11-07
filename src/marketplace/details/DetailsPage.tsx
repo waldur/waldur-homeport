@@ -12,8 +12,9 @@ import { formatDate, parseDate } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { goToNotFound } from '@/error/utils';
 import { translate } from '@/i18n';
+import { canOrderFromOffering } from '@/marketplace/canUseMarketplaceShopUi';
 import { useTitle } from '@/navigation/title';
-import { useProject } from '@/workspace/hooks';
+import { useProject, useUser } from '@/workspace/hooks';
 
 import { DeployPage } from '../deploy/DeployPage';
 
@@ -56,6 +57,7 @@ export const OfferingDetailsPage: React.FC = () => {
       : translate('Add resource'),
   );
 
+  const user = useUser();
   const project = useProject();
   usePermissionView(() => {
     if (project?.end_date) {
@@ -98,7 +100,10 @@ export const OfferingDetailsPage: React.FC = () => {
     return <h3>{translate('Unable to load offering details.')}</h3>;
   }
 
-  if (value.offering.state !== 'Active') {
+  if (
+    value.offering.state !== 'Active' ||
+    !canOrderFromOffering(user, value.offering)
+  ) {
     goToNotFound();
     return null;
   }

@@ -6,6 +6,9 @@ import { PermissionEnum, RoleEnum } from '@/permissions/enums';
 import { type RootState } from '@/store/reducers';
 
 import {
+  canAccessOfferingRequests,
+  canAccessProviderOrders,
+  canAccessProviderResources,
   canAccessProviderOffering,
   canAccessServiceProviderWorkspace,
   canViewServiceProviderTeam,
@@ -712,6 +715,70 @@ describe('organization role clones and accounting', () => {
   });
 });
 
+describe('canAccessOfferingRequests', () => {
+  let originalRoles;
+
+  beforeEach(() => {
+    originalRoles = ENV.roles;
+    ENV.roles = [
+      ...originalRoles,
+      {
+        name: RoleEnum.OFFERING_MANAGER,
+        permissions: [PermissionEnum.ACCEPT_REQUESTED_OFFERING],
+      },
+      { name: 'CUSTOM.OFFERING_VIEWER', permissions: [] },
+    ] as any;
+  });
+
+  afterEach(() => {
+    ENV.roles = originalRoles;
+  });
+
+  const state = (user) =>
+    ({ workspace: { user, customer: { uuid: 'provider_a' } } }) as RootState;
+  const transition = (uuid = 'provider_a') => ({ params: () => ({ uuid }) });
+  const offeringRole = (role_name: string) =>
+    ({
+      is_staff: false,
+      is_support: false,
+      permissions: [
+        {
+          scope_type: 'offering',
+          scope_uuid: 'offering-a',
+          customer_uuid: 'provider_a',
+          role_name,
+        },
+      ],
+    }) as any;
+
+  it('admits an offering manager of one of the provider offerings', () => {
+    expect(
+      canAccessOfferingRequests(
+        state(offeringRole(RoleEnum.OFFERING_MANAGER)),
+        transition(),
+      ),
+    ).toBe(true);
+  });
+
+  it('refuses the offering manager on another provider', () => {
+    expect(
+      canAccessOfferingRequests(
+        state(offeringRole(RoleEnum.OFFERING_MANAGER)),
+        transition('provider_b'),
+      ),
+    ).toBe(false);
+  });
+
+  it('refuses an offering role that cannot answer requests', () => {
+    expect(
+      canAccessOfferingRequests(
+        state(offeringRole('CUSTOM.OFFERING_VIEWER')),
+        transition(),
+      ),
+    ).toBe(false);
+  });
+});
+
 describe('affiliate earnings visibility', () => {
   const customer = { uuid: 'reseller' };
   const withRole = (
@@ -762,6 +829,69 @@ describe('affiliate earnings visibility', () => {
         state(withRole(RoleEnum.PROJECT_ADMIN, 'project', 'project_uuid')),
       ),
     ).toBe(false);
+  });
+});
+
+describe('provider orders and resources guards', () => {
+  let originalRoles;
+
+  beforeEach(() => {
+    originalRoles = ENV.roles;
+    ENV.roles = [
+      ...originalRoles,
+      {
+        name: RoleEnum.OFFERING_MANAGER,
+        permissions: [PermissionEnum.LIST_ORDERS],
+      },
+      { name: 'CUSTOM.OFFERING_VIEWER', permissions: [] },
+    ] as any;
+  });
+
+  afterEach(() => {
+    ENV.roles = originalRoles;
+  });
+
+  const state = (user) =>
+    ({ workspace: { user, customer: { uuid: 'provider_a' } } }) as RootState;
+  const transition = (uuid = 'provider_a') => ({ params: () => ({ uuid }) });
+  const offeringRole = (role_name: string) =>
+    ({
+      is_staff: false,
+      is_support: false,
+      permissions: [
+        {
+          scope_type: 'offering',
+          scope_uuid: 'offering-a',
+          customer_uuid: 'provider_a',
+          role_name,
+        },
+      ],
+    }) as any;
+
+  it('admits an offering manager to the orders and resources of the provider', () => {
+    const user = state(offeringRole(RoleEnum.OFFERING_MANAGER));
+    expect(canAccessProviderOrders(user, transition())).toBe(true);
+    expect(canAccessProviderResources(user, transition())).toBe(true);
+  });
+
+  it('refuses them on another provider', () => {
+    const user = state(offeringRole(RoleEnum.OFFERING_MANAGER));
+    expect(canAccessProviderOrders(user, transition('provider_b'))).toBe(false);
+    expect(canAccessProviderResources(user, transition('provider_b'))).toBe(
+      false,
+    );
+  });
+
+  it('keeps the orders from an offering role that cannot list them', () => {
+    const user = state(offeringRole('CUSTOM.OFFERING_VIEWER'));
+    expect(canAccessProviderOrders(user, transition())).toBe(false);
+    expect(canAccessProviderResources(user, transition())).toBe(true);
+  });
+
+  it('refuses a user without any role', () => {
+    const user = state({ is_staff: false, is_support: false, permissions: [] });
+    expect(canAccessProviderOrders(user, transition())).toBe(false);
+    expect(canAccessProviderResources(user, transition())).toBe(false);
   });
 });
 

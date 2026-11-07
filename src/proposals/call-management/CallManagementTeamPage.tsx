@@ -5,11 +5,19 @@ import { ENV } from '@/core/config';
 import { TeamTableComponent } from '@/customer/team/TeamTableComponent';
 import { translate } from '@/i18n';
 import { GenericPermission } from '@/permissions/types';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { useTable } from '@/table/useTable';
 import { useCustomer } from '@/workspace/hooks';
 
 import { UserAddButton } from './UserAddButton';
+import { UserRemoveButton } from './UserRemoveButton';
+
+const RowActions = ({ row, fetch }) => (
+  <ActionsMenu>
+    <UserRemoveButton user={row} refetch={fetch} />
+  </ActionsMenu>
+);
 
 export const CallManagementTeamPage = () => {
   const customer = useCustomer();
@@ -35,6 +43,7 @@ export const CallManagementTeamPage = () => {
       userFieldPrefix="user_"
       title={translate('Team members')}
       tableActions={<UserAddButton refetch={tableProps.fetch} />}
+      rowActions={RowActions}
     />
   );
 };

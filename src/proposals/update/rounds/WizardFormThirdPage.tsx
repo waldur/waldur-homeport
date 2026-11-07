@@ -9,8 +9,8 @@ import { AllocationTime } from '@/proposals/types';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 interface WizardFormThirdPageProps extends WizardFormStepProps {
-  // The call's allocation-timing mode, configured on the allocation_decision
-  // workflow step. The round only needs a date when the call allocates on a
+  // The call's allocation-timing mode, configured on the call's allocation
+  // decision step. The round only needs a date when the call allocates on a
   // fixed date.
   allocationMode?: AllocationTime;
 }

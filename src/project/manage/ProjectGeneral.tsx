@@ -44,11 +44,10 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
     project,
   );
 
-  // Mirrors the backend, which guards writes to end_date with PROJECT.DELETE on
-  // the customer. Gating on is_staff hid the edit from organization owners, who
-  // are the role the backend actually grants it to.
+  // Mirrors the backend, which guards writes to end_date with
+  // PROJECT.SET_END_DATE on the customer.
   const canSetEndDate = hasPermission(user, {
-    permission: PermissionEnum.DELETE_PROJECT,
+    permission: PermissionEnum.SET_PROJECT_END_DATE,
     customerId: project.customer_uuid,
   });
 

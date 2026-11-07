@@ -1,7 +1,10 @@
 import {
+  CallStepKindEnum,
+  CallWorkflowStep,
+  OnNegativeEnum,
   OutcomeEnum,
   ResponsibleRoleEnum,
-  StepEnum,
+  StepKind,
   TransitionModeEnum,
 } from 'waldur-js-client';
 
@@ -10,161 +13,252 @@ import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 export type { ResponsibleRoleEnum, TransitionModeEnum };
 
-interface StepDefinition {
-  id: StepEnum;
-  name: string;
-  description: string;
-  mandatory: boolean;
-  dependencies: StepEnum[];
-  // Catalog default for the responsible role. Mirrors
-  // WorkflowStepDefinition.default_responsible_role in waldur-mastermind, which
-  // the backend applies in CallWorkflowStep.save() when the role is omitted.
-  // Used to render synthetic rows for mandatory steps that predate the
-  // backfill migration (active/archived calls) identically to seeded ones.
-  defaultResponsibleRole?: ResponsibleRoleEnum;
-  // Outcomes the backend accepts when completing this step. Mirrors
-  // WorkflowStepOutcomes.STEP_ALLOW_LIST in waldur-mastermind. 'rejected' and
-  // 'expired' are intentionally omitted — they are reserved for system
-  // transitions (rejection has its own endpoint, expiry is automatic).
-  allowedOutcomes: OutcomeEnum[];
-  // Provisioned by the backend via another step's toggle (e.g. award_response
-  // is created/disabled by Allocation Decision's include_award_response flag).
-  // Such rows must not expose direct add/remove/toggle actions — those would
-  // drift from the toggle state on the next save.
-  managedByToggle?: boolean;
+/**
+ * What every view of a step needs to tell steps apart. A call composes its
+ * workflow from named steps of a few kinds, and a kind may appear more than
+ * once, so a step is recognised by its kind, its outcome set and its flags --
+ * never by its key, which is just whatever the call manager named it.
+ */
+interface StepShape {
+  kind?: CallStepKindEnum | null;
+  outcome_set?: string | null;
+  is_allocation_decision?: boolean | null;
 }
 
-// Returned via a function so that translate() runs at render time, after the
-// async-loaded locale dictionary is in place.
-export const getStepDefinitions = (): StepDefinition[] => [
-  {
-    id: 'administrative_check',
-    name: translate('Administrative check'),
-    description: translate(
-      'Eligibility and completeness validation before evaluation.',
-    ),
-    mandatory: false,
-    dependencies: [],
-    allowedOutcomes: ['eligible', 'ineligible'],
-    defaultResponsibleRole: 'call_manager',
-  },
-  {
-    id: 'technical_assessment',
-    name: translate('Technical assessment'),
-    description: translate(
-      'Service provider verifies technical feasibility of the proposal.',
-    ),
-    mandatory: false,
-    dependencies: [],
-    allowedOutcomes: ['feasible', 'infeasible'],
-    defaultResponsibleRole: 'offering_manager',
-  },
-  {
-    id: 'expert_review',
-    name: translate('Expert review'),
-    description: translate(
-      'Independent peer review by domain experts with scoring.',
-    ),
-    mandatory: false,
-    dependencies: [],
-    allowedOutcomes: ['reviewed'],
-    defaultResponsibleRole: 'reviewer',
-  },
-  {
-    id: 'panel_review',
-    name: translate('Panel review'),
-    description: translate(
-      'Collective panel evaluation consolidating expert reviews.',
-    ),
-    mandatory: false,
-    dependencies: ['expert_review'],
-    allowedOutcomes: ['approved', 'declined'],
-    defaultResponsibleRole: 'panel_member',
-  },
-  {
-    id: 'allocation_decision',
-    name: translate('Allocation decision'),
-    description: translate(
-      'Final decision to approve or reject the proposal and allocate resources.',
-    ),
-    mandatory: true,
-    dependencies: [],
-    allowedOutcomes: ['approved', 'declined'],
-    defaultResponsibleRole: 'call_manager',
-  },
-  {
-    id: 'award_response',
-    name: translate('Award response'),
-    description: translate(
-      'Applicant explicitly accepts or declines the award before provisioning.',
-    ),
-    mandatory: false,
-    dependencies: [],
-    allowedOutcomes: ['accepted', 'declined'],
-    managedByToggle: true,
-    defaultResponsibleRole: 'applicant',
-  },
-];
+/** The step's own name, falling back to its key. */
+export const stepName = (step: {
+  name?: string | null;
+  step_name?: string | null;
+  key?: string | null;
+  step?: string | null;
+}): string => step.name || step.step_name || step.key || step.step || '';
 
-export const stepDefinition = (id: StepEnum): StepDefinition | undefined =>
-  getStepDefinitions().find((d) => d.id === id);
+/** The applicant's answer to an award: an applicant step accepting or declining. */
+export const isAwardResponseStep = (step: StepShape | null | undefined) =>
+  step?.kind === 'applicant_action' && step.outcome_set === 'acceptance';
 
-export const stepLabel = (id: StepEnum): string =>
-  stepDefinition(id)?.name ?? id;
+/** A technical assessment: an assessment that rules on feasibility. */
+export const isTechnicalAssessmentStep = (step: StepShape | null | undefined) =>
+  step?.kind === 'assessment' &&
+  (step.outcome_set === 'feasibility' || step.outcome_set === 'per_offering');
+
+/** The decision step that settles the award. */
+export const isAllocationDecisionStep = (step: StepShape | null | undefined) =>
+  Boolean(step?.is_allocation_decision);
 
 /**
- * Steps whose work is carried out by reviewers.
- *
- * Derived from the responsible role rather than listed by hand, so a step added
- * to the catalog with a reviewing role is covered without a second edit here.
+ * The call's allocation decision: the enabled one, which a call has exactly
+ * one of once it is active, else any (a draft call may have it switched off).
  */
-const REVIEWING_ROLES: ResponsibleRoleEnum[] = ['reviewer', 'panel_member'];
+export const findAllocationDecision = <
+  T extends StepShape & { is_enabled?: boolean },
+>(
+  steps: T[] | null | undefined,
+): T | undefined =>
+  (steps ?? []).find(
+    (s) => s.is_allocation_decision && s.is_enabled !== false,
+  ) ?? (steps ?? []).find((s) => s.is_allocation_decision);
 
-/** Whether assigning a review is part of what this step is for. */
-export const isReviewBearingStep = (id: StepEnum | null | undefined): boolean =>
+/** The call's steps in the order the workflow runs them. */
+export const sortByOrder = <T extends { order: number }>(steps: T[]): T[] =>
+  [...steps].sort((a, b) => a.order - b.order);
+
+/** Roles whose work is reviewing the proposal. */
+const REVIEWING_ROLES: string[] = ['reviewer', 'panel_member'];
+
+/** Whether a step completed by `completer` is one the reviewers carry out. */
+const isReviewingCompleter = (completer: string | null | undefined) =>
+  Boolean(completer && REVIEWING_ROLES.includes(completer));
+
+/**
+ * Keys of the steps a new call starts with whose work the reviewers do.
+ * Only for a proposal whose current step is known by key alone and whose
+ * call steps are not at hand.
+ */
+const DEFAULT_REVIEW_STEP_KEYS = ['expert_review', 'panel_review'];
+
+/**
+ * Whether assigning a review is part of what the proposal's current step is
+ * for. The call's steps say who completes it; without them only the default
+ * review steps are recognised.
+ */
+export const isReviewBearingStep = (
+  key: string | null | undefined,
+  callSteps?: Pick<CallWorkflowStep, 'key' | 'completer'>[],
+): boolean => {
+  if (!key) return false;
+  const configured = callSteps?.find((s) => s.key === key);
+  if (configured) return isReviewingCompleter(configured.completer);
+  return DEFAULT_REVIEW_STEP_KEYS.includes(key);
+};
+
+/** The kind definition of `kind`, from the kinds endpoint. */
+export const findKind = (
+  kinds: StepKind[] | null | undefined,
+  kind: CallStepKindEnum | null | undefined,
+): StepKind | undefined => (kinds ?? []).find((k) => k.id === kind);
+
+/** Whether a step of `kind` is configured with `field`. */
+export const kindHasField = (kind: StepKind | undefined, field: string) =>
+  Boolean(kind?.config_fields.includes(field));
+
+/** The display name of `kind`, as the kinds endpoint has it. */
+export const kindLabel = (
+  kinds: StepKind[] | null | undefined,
+  kind: CallStepKindEnum,
+): string => findKind(kinds, kind)?.name ?? kind;
+
+/** Outcomes that end the workflow negatively, unless the step says cancel. */
+const NEGATIVE_OUTCOMES: string[] = ['ineligible', 'infeasible', 'declined'];
+
+/** Whether an outcome set has an outcome that stops the proposal. */
+export const hasNegativeOutcome = (
+  kind: StepKind | undefined,
+  outcomeSet: string | null | undefined,
+) =>
   Boolean(
-    id &&
-    REVIEWING_ROLES.includes(
-      stepDefinition(id)?.defaultResponsibleRole as ResponsibleRoleEnum,
-    ),
+    kind?.outcome_sets
+      .find((s) => s.id === outcomeSet)
+      ?.outcomes.some((o) => NEGATIVE_OUTCOMES.includes(o)),
   );
 
-// The set of currently-enabled step ids among `steps`. Dependency checks
-// resolve against this: only an *enabled* dependency satisfies the backend
-// rule — a configured-but-disabled one does not.
-export const getEnabledStepIds = (
-  steps: { step: StepEnum; is_enabled?: boolean | null }[],
-): Set<StepEnum> =>
-  new Set(steps.filter((s) => s.is_enabled).map((s) => s.step));
+export const onNegativeLabel = (value: OnNegativeEnum | string) => {
+  switch (value) {
+    case 'reject':
+      return translate('Reject the proposal');
+    case 'cancel':
+      return translate('Cancel the proposal');
+    case 'continue':
+      return translate('Continue to the next step');
+    default:
+      return value;
+  }
+};
 
-// Dependencies of `stepId` that are not in `enabledStepIds`. Mirrors
-// CallWorkflowStep.clean() in waldur-mastermind, which rejects enabling a step
-// until every dependency is enabled — so the UI must check enabled (not merely
-// configured) steps before offering to enable a dependent.
-export const getMissingDependencies = (
-  stepId: StepEnum,
-  enabledStepIds: Set<StepEnum>,
-): StepEnum[] =>
-  (stepDefinition(stepId)?.dependencies ?? []).filter(
-    (dep) => !enabledStepIds.has(dep),
-  );
+export const ON_NEGATIVE_OPTIONS: OnNegativeEnum[] = [
+  'reject',
+  'cancel',
+  'continue',
+];
 
-// Steps that depend on `stepId`, directly or transitively. Disabling a step
-// leaves these in a state the workflow can't run (their dependency is gone),
-// so the toggle cascades the disable to them.
-export const getDependentSteps = (stepId: StepEnum): StepEnum[] => {
-  const defs = getStepDefinitions();
-  const dependents = new Set<StepEnum>();
-  const visit = (id: StepEnum) => {
-    for (const def of defs) {
-      if (def.dependencies.includes(id) && !dependents.has(def.id)) {
-        dependents.add(def.id);
-        visit(def.id);
-      }
-    }
-  };
-  visit(stepId);
-  return [...dependents];
+/** What one contribution to a per-offering assessment concluded. */
+export const contributionOutcomeLabel = (outcome: string): string => {
+  switch (outcome) {
+    case 'accepted':
+      return translate('Accepted');
+    case 'conditionally_accepted':
+      return translate('Conditionally accepted');
+    case 'rejected':
+      return translate('Rejected');
+    default:
+      return outcomeLabel(outcome);
+  }
+};
+
+export const contributionOutcomeVariant = (
+  outcome: string | null | undefined,
+): 'success' | 'warning' | 'danger' | 'neutral' => {
+  switch (outcome) {
+    case 'accepted':
+    case 'feasible':
+    case 'eligible':
+    case 'approved':
+      return 'success';
+    case 'conditionally_accepted':
+      return 'warning';
+    case 'rejected':
+    case 'infeasible':
+    case 'ineligible':
+    case 'declined':
+      return 'danger';
+    default:
+      return 'neutral';
+  }
+};
+
+/**
+ * A contribution's status. "expired" on a step still running means the
+ * contributor lost standing (the role went, or a conflict of interest was
+ * recorded) and the slot comes back if they regain it: it is paused, not over.
+ */
+export const contributionStatusLabel = (
+  status: string,
+  stepActive = false,
+): string => {
+  if (status === 'expired' && stepActive) {
+    return translate('Paused');
+  }
+  switch (status) {
+    case 'pending':
+      return translate('Pending');
+    case 'accepted':
+      return translate('In progress');
+    case 'submitted':
+      return translate('Submitted');
+    case 'declined':
+      return translate('Declined');
+    case 'withdrawn':
+      return translate('Withdrawn');
+    case 'expired':
+      return translate('Expired');
+    default:
+      return status;
+  }
+};
+
+/** Why a contribution stopped, for a tooltip on its status; empty otherwise. */
+export const contributionStatusHint = (
+  status: string,
+  stepActive = false,
+): string => {
+  switch (status) {
+    case 'expired':
+      return stepActive
+        ? translate(
+            'Paused: the contributor no longer holds the role or has a conflict of interest.',
+          )
+        : translate('The step ended before this contribution was submitted.');
+    case 'withdrawn':
+      return translate(
+        'Withdrawn by a call manager, or closed when the step was decided or the contributor joined the applicant team.',
+      );
+    default:
+      return '';
+  }
+};
+
+/** Contributor sources a call manager picks from; see contributorSourceLabel. */
+export const CONTRIBUTOR_SOURCE_OPTIONS = [
+  'none',
+  'requested_offering_team',
+  'assigned_reviewers',
+  'call_role:call_manager',
+  'call_role:reviewer',
+  'call_role:panel_member',
+  'call_role:panel_chair',
+] as const;
+
+export const contributorSourceLabel = (source: string): string => {
+  switch (source) {
+    case 'none':
+      return translate('Whoever completes the step');
+    case 'requested_offering_team':
+      return translate('The team of each requested offering');
+    case 'assigned_reviewers':
+      return translate('Assigned reviewers');
+    case 'call_role:call_manager':
+      return translate('Call managers');
+    case 'call_role:reviewer':
+      return translate('Call reviewers');
+    case 'call_role:panel_member':
+      return translate('Panel members');
+    case 'call_role:panel_chair':
+      return translate('Panel chair and vice-chair');
+    default:
+      return source.startsWith('proposal_role:')
+        ? translate('Holders of an evaluator role')
+        : source;
+  }
 };
 
 export const outcomeLabel = (outcome: OutcomeEnum | string): string => {
@@ -185,10 +279,18 @@ export const outcomeLabel = (outcome: OutcomeEnum | string): string => {
       return translate('Declined');
     case 'accepted':
       return translate('Accepted');
+    case 'submitted':
+      return translate('Submitted');
+    case 'done':
+      return translate('Done');
     case 'rejected':
       return translate('Rejected');
     case 'expired':
       return translate('Expired');
+    case 'no_response':
+      return translate('No response');
+    case 'conditionally_accepted':
+      return translate('Conditionally accepted');
     default:
       return outcome;
   }
@@ -206,6 +308,8 @@ export const statusLabel = (status: string) => {
       return translate('Pending');
     case 'skipped':
       return translate('Skipped');
+    case 'withdrawn':
+      return translate('Withdrawn');
     default:
       return status;
   }
@@ -220,7 +324,9 @@ export const getResponsibleRoleLabels = (): Record<
   offering_manager: translate('Offering manager'),
   reviewer: translate('Reviewer'),
   panel_member: translate('Panel member'),
+  panel_chair: translate('Panel chair or vice-chair'),
   applicant: translate('Applicant'),
+  proposal_role: translate('Evaluator role'),
 });
 
 export const responsibleRoleLabel = (
@@ -266,7 +372,9 @@ export const RESPONSIBLE_ROLE_OPTIONS: ResponsibleRoleEnum[] = [
   'offering_manager',
   'reviewer',
   'panel_member',
+  'panel_chair',
   'applicant',
+  'proposal_role',
 ];
 
 export const TRANSITION_MODE_OPTIONS: TransitionModeEnum[] = [

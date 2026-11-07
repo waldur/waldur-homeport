@@ -84,8 +84,10 @@ export const AssignmentBatchExpandableRow: FC<
             title: translate('Proposal'),
             render: ({ row: item }) => (
               <div>
-                <div className="font-medium">{item.proposal_name}</div>
-                <small className="text-quaternary">{item.proposal_slug}</small>
+                <div className="font-medium text-primary">
+                  {item.proposal_name}
+                </div>
+                <span className="text-quaternary">{item.proposal_slug}</span>
               </div>
             ),
           },
@@ -96,6 +98,7 @@ export const AssignmentBatchExpandableRow: FC<
                 <AssignmentStatusBadge
                   status={item.status}
                   statusDisplay={item.status_display}
+                  batchStatus={batch.status}
                 />
                 {item.override_reason && (
                   <AssignmentOverrideIndicator

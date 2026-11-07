@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { resolveCallStateFilter } from './call-tabs';
+import { buildCallTabs, resolveCallStateFilter } from './call-tabs';
 
 describe('resolveCallStateFilter', () => {
   it('is undefined when nothing selects a state', () => {
@@ -48,5 +48,22 @@ describe('resolveCallStateFilter', () => {
     expect(
       resolveCallStateFilter([{ label: 'Broken' }, { value: 'active' }]),
     ).toEqual(['active']);
+  });
+});
+
+describe('buildCallTabs', () => {
+  it('gives a managed list a Draft tab', () => {
+    expect(buildCallTabs().map((tab) => tab.key)).toEqual([
+      'all',
+      'active',
+      'draft',
+      'archived',
+    ]);
+  });
+
+  it('leaves it out of a public list, which holds no draft', () => {
+    expect(
+      buildCallTabs({ all: 3 }, { withDraft: false }).map((tab) => tab.key),
+    ).toEqual(['all', 'active', 'archived']);
   });
 });

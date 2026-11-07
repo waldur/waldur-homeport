@@ -19,7 +19,7 @@ export const KeyValueButton: FunctionComponent<{ items; title }> = (props) => {
     <BaseButton
       variant="tertiary"
       onClick={showDetails}
-      label={translate('Show details')}
+      label={translate('Show')}
       size="sm"
     />
   );

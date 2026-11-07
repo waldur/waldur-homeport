@@ -7,15 +7,17 @@ import {
   useContext,
   useState,
   PropsWithChildren,
+  ReactNode,
 } from 'react';
 
 import { Card, CardContent } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
-import { translate } from '@/i18n';
+import { formatJsxTemplate, translate } from '@/i18n';
 import { isCallsSectionVisible } from '@/marketplace/serviceAccessMode';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { canAccessProjectDashboard } from '@/permissions/canAccessProjectDashboard';
+import { isReadOnlyProjectReader } from '@/permissions/isReadOnlyProjectReader';
 import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 
 import { hasAnyRole } from './hasAnyRole';
@@ -23,7 +25,7 @@ import { hasAnyRole } from './hasAnyRole';
 type Permission = 'allowed' | 'limited' | 'restricted';
 interface PermissionMessage {
   title: string;
-  message: string;
+  message: ReactNode;
   options?: PermissionOptions;
 }
 
@@ -111,16 +113,36 @@ const RestrictedView = () => {
   );
 };
 
-// Shown on the profile page to a user who holds no role on anything yet. Calls
-// are named only where this deployment has a calls section.
-const getNoRolesMessage = () =>
-  isCallsSectionVisible()
-    ? translate(
+// Shown on the profile page to a user who holds no role on anything yet, with
+// what to do about it. Calls are named, and linked, only where this
+// deployment has a calls section to apply through.
+const NoRolesMessage = () =>
+  isCallsSectionVisible() ? (
+    <>
+      {translate(
         'You have not been given access to an organization, project or call.',
-      )
-    : translate(
+      )}{' '}
+      {translate(
+        'Ask an administrator, or {applyLink}.',
+        {
+          applyLink: (
+            <Link
+              state="calls-for-proposals-dashboard"
+              label={translate('apply to an open call')}
+            />
+          ),
+        },
+        formatJsxTemplate,
+      )}
+    </>
+  ) : (
+    <>
+      {translate(
         'You have not been given access to an organization or project.',
-      );
+      )}{' '}
+      {translate('Ask an administrator.')}
+    </>
+  );
 
 const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
   const {
@@ -145,6 +167,9 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
     if (!hasAllAccess && state.name && user) {
       if (isDescendantOf('project', state)) {
         if (
+          // A call manager reads the projects their call allocated; the page
+          // renders read-only, as its actions are gated on project roles.
+          !isReadOnlyProjectReader(user, project) &&
           !canAccessProjectDashboard(user, params.uuid, project?.customer_uuid)
         ) {
           setPermission('restricted');
@@ -214,7 +239,7 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
         setPermission('limited');
         setBanner({
           title: translate('No roles yet'),
-          message: getNoRolesMessage(),
+          message: <NoRolesMessage />,
         });
         setHasPermissionView(true);
       } else {

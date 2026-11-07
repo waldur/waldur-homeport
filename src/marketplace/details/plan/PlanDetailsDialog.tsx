@@ -9,6 +9,8 @@ import {
 import { STALE_TIME, UI_STALE_TIME } from '@/core/constants';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { BillingPeriod } from '@/marketplace/common/BillingPeriod';
 import { getFormLimitParser } from '@/marketplace/common/registry';
@@ -94,6 +96,7 @@ export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
   });
 
   const concealBillingInfo =
+    isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
     project?.customer_display_billing_info_in_projects === false;
 
   return (

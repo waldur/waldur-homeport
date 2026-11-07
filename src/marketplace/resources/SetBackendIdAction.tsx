@@ -22,6 +22,7 @@ export const SetBackendIdAction: ActionItemType = ({ resource, refetch }) => {
     !hasPermission(user, {
       permission: PermissionEnum.SET_RESOURCE_BACKEND_ID,
       customerId: resource.provider_uuid,
+      offeringId: resource.offering_uuid,
     })
   ) {
     return null;

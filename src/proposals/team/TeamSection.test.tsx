@@ -133,7 +133,7 @@ describe('TeamSection', () => {
     ]);
     expect(dropdownProps.value.canInvite).toBe(true);
     expect(screen.getByText('Invitations')).toBeInTheDocument();
-    expect(screen.getByText('Permissions')).toBeInTheDocument();
+    expect(screen.getByText('Team changes')).toBeInTheDocument();
   });
 
   it('leaves the team to the managers for an administrator', () => {
@@ -143,6 +143,6 @@ describe('TeamSection', () => {
       screen.getByText('Only a proposal manager can change the proposal team.'),
     ).toBeInTheDocument();
     expect(screen.queryByText('Invitations')).not.toBeInTheDocument();
-    expect(screen.queryByText('Permissions')).not.toBeInTheDocument();
+    expect(screen.queryByText('Team changes')).not.toBeInTheDocument();
   });
 });

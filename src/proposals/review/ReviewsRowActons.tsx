@@ -17,9 +17,12 @@ export const ReviewsRowActions = ({ row, fetch }) => {
     scopeId: row.call_uuid,
     callOrganizerId: row.call_managing_organisation_uuid,
   });
+  // A reviewer's own list offers every review: one in progress to continue,
+  // one submitted or sent back to read.
   const showActions =
     canDelete ||
     state.name === 'call-management.review-list' ||
+    state.parent === 'reviews' ||
     row.state === 'in_review';
   if (!showActions) {
     return <ActionsDropdown disabled tooltip />;

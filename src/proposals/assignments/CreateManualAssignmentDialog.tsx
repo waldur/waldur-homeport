@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FC, useCallback, useMemo, useRef, useState } from 'react';
 import { Form, FormSpy } from 'react-final-form';
 import { components } from 'react-select';
 import {
@@ -12,16 +12,30 @@ import {
 
 import { AlertItem, getRemoveLabel, Tag, Tooltip } from 'waldur-ui';
 
+import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { required } from '@/core/validators';
 import { SubmitButton, StringGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import {
+  ASSIGNMENT_BATCHES_STATE,
+  assignmentBatchesParams,
+} from '@/proposals/update/reviewer-pool/tabs';
+import {
+  callWorkflowStepsKey,
+  fetchCallWorkflowSteps,
+} from '@/proposals/workflow/queries';
+import { router } from '@/router';
 import { useNotify } from '@/store/notify';
 
 import { Call } from '../types';
 
+import {
+  ASSIGNABLE_STATES,
+  reviewerAssignmentBlocker,
+} from './reviewerAssignment';
 import { getWorkloadLimitMessage } from './workloadLimit';
 
 const TruncatedMultiValue = (props: any) => (
@@ -73,14 +87,30 @@ const proposalsSelectComponents = {
   ValueContainer: FirstChipValueContainer,
 };
 
+const proposalOption = (
+  p: Pick<Proposal, 'uuid' | 'name' | 'slug'>,
+): ProposalOption => ({
+  value: p.uuid,
+  label: `${p.slug || p.uuid.slice(0, 8)}: ${p.name}`,
+});
+
 interface CreateManualAssignmentDialogProps {
   resolve: {
-    call: Call;
+    call: Pick<Call, 'uuid'>;
     refetch: () => void;
     // When set, the proposals field is pre-populated and locked so the
     // dialog assigns a reviewer to just this proposal. Surfaced from the
     // proposal row / details "Create review" action.
     initialProposal?: Proposal;
+    // Proposals selected in the call's list: they start the proposals field,
+    // which stays open to change. Those not open to review are left out.
+    initialProposals?: Pick<
+      Proposal,
+      'uuid' | 'name' | 'slug' | 'state' | 'workflow_step'
+    >[];
+    // When set, the reviewer is pre-selected: a suggested reviewer who
+    // accepted their pool invitation, say.
+    initialPoolEntryUuid?: string;
   };
 }
 
@@ -108,10 +138,30 @@ interface AssignmentRequest extends FormValues {
   overrideWorkloadLimit?: boolean;
 }
 
+/**
+ * The backend's reasons for refusing the reviewer or the proposals: plain
+ * sentences on those two fields. Other errors are left to the generic report.
+ */
+export const getAssignmentRefusals = (error): string[] => {
+  const status = error?.status ?? error?.response?.status;
+  const data =
+    status === 400 ? (getErrorBody(error) ?? error?.response?.data) : null;
+  if (!data || typeof data !== 'object') {
+    return [];
+  }
+  return ['reviewer_pool_entry_uuid', 'proposal_uuids'].flatMap((field) =>
+    [data[field]].flat().filter((reason) => typeof reason === 'string'),
+  );
+};
+
 export const CreateManualAssignmentDialog: FC<
   CreateManualAssignmentDialogProps
 > = ({ resolve }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
+  const {
+    showSuccess,
+    showErrorResponse,
+    showRedirectMessage: showWarning,
+  } = useNotify();
 
   // The backend's reason for refusing the last attempt because of the
   // reviewer's workload limit. While it is set, submitting assigns anyway.
@@ -119,7 +169,36 @@ export const CreateManualAssignmentDialog: FC<
     string | null
   >(null);
 
-  const { call, refetch, initialProposal } = resolve;
+  const {
+    call,
+    refetch,
+    initialProposal,
+    initialProposals,
+    initialPoolEntryUuid,
+  } = resolve;
+  // As from a single row (reviewerAssignmentBlocker): a proposal is offered
+  // for review while under evaluation, at a step its reviewers own when the
+  // call has one -- not at the eligibility check, before there is anything to
+  // review.
+  const { data: callSteps, isLoading: stepsLoading } = useQuery({
+    queryKey: callWorkflowStepsKey(call.uuid),
+    queryFn: () => fetchCallWorkflowSteps(call.uuid),
+    enabled: Boolean(initialProposals?.some((p) => p.workflow_step)),
+    staleTime: 5 * 60 * 1000,
+    retry: false,
+  });
+  const selected = useMemo(
+    () =>
+      stepsLoading
+        ? []
+        : (initialProposals ?? []).filter(
+            (p) => !reviewerAssignmentBlocker(p, callSteps),
+          ),
+    [initialProposals, callSteps, stepsLoading],
+  );
+  const leftOut = stepsLoading
+    ? 0
+    : (initialProposals?.length ?? 0) - selected.length;
 
   // Fetch accepted reviewers from pool
   const { data: reviewers, isLoading: reviewersLoading } = useQuery({
@@ -143,7 +222,7 @@ export const CreateManualAssignmentDialog: FC<
       const response = await proposalProposalsList({
         query: {
           call_uuid: call.uuid,
-          state: ['submitted', 'in_review'],
+          state: ASSIGNABLE_STATES,
           page_size: 200,
         },
       });
@@ -172,9 +251,29 @@ export const CreateManualAssignmentDialog: FC<
     [proposals],
   );
 
-  const initialValues = useMemo(
-    () =>
-      initialProposal
+  // The reviewer to start from, once the pool has loaded. The initial values
+  // follow whether it was found, not each new list of options: a refetch
+  // must not reset what the user already chose.
+  const initialReviewer = initialPoolEntryUuid
+    ? reviewerOptions.find((option) => option.value === initialPoolEntryUuid)
+    : undefined;
+  const initialReviewerRef = useRef(initialReviewer);
+  initialReviewerRef.current = initialReviewer;
+  const initialReviewerFound = Boolean(initialReviewer);
+  const initialValues = useMemo(() => {
+    const reviewer = initialReviewerFound
+      ? initialReviewerRef.current
+      : undefined;
+    const preselected = initialProposal ? [initialProposal] : selected;
+    if (!preselected.length && !reviewer) {
+      return undefined;
+    }
+    return {
+      ...(reviewer ? { reviewer } : {}),
+      ...(!initialProposal && selected.length
+        ? { proposals: selected.map(proposalOption) }
+        : {}),
+      ...(initialProposal
         ? {
             proposals: [
               {
@@ -183,9 +282,9 @@ export const CreateManualAssignmentDialog: FC<
               },
             ],
           }
-        : undefined,
-    [initialProposal],
-  );
+        : {}),
+    };
+  }, [initialProposal, selected, initialReviewerFound]);
 
   const createAssignmentMutation = useManagedMutation<
     any,
@@ -208,8 +307,13 @@ export const CreateManualAssignmentDialog: FC<
     // reason and offers to assign anyway. Everything else is reported as usual.
     onError: (error) => {
       const message = getWorkloadLimitMessage(error);
+      const refusals = getAssignmentRefusals(error);
       if (message) {
         setWorkloadLimitMessage(message);
+      } else if (refusals.length) {
+        // Why the reviewer or the proposals could not be assigned, as the
+        // backend words it, without the structured details beside it.
+        showWarning(translate('Nothing was assigned'), refusals.join(' '));
       } else {
         showErrorResponse(
           error,
@@ -220,23 +324,43 @@ export const CreateManualAssignmentDialog: FC<
     refetch,
     onSuccess: (response) => {
       const data = response.data;
-      if (data.skipped_proposals && data.skipped_proposals.length > 0) {
-        showSuccess(
-          translate(
-            'Created assignment batch with {count} items. {skipped} proposals were skipped.',
-            {
+      const title =
+        data.skipped_proposals && data.skipped_proposals.length > 0
+          ? translate(
+              'Created assignment batch with {count} items. {skipped} proposals were skipped.',
+              {
+                count: data.items_created,
+                skipped: data.skipped_proposals.length,
+              },
+            )
+          : translate('Created assignment batch with {count} items.', {
               count: data.items_created,
-              skipped: data.skipped_proposals.length,
-            },
-          ),
-        );
-      } else {
-        showSuccess(
-          translate('Created assignment batch with {count} items.', {
-            count: data.items_created,
-          }),
-        );
+            });
+      if (!data.items_created) {
+        showSuccess(title);
+        return;
       }
+      // The batch is a draft: the reviewer hears of it only once it is sent,
+      // from a tab of the call's management, not from where it was made.
+      showSuccess(
+        title,
+        translate(
+          'Added to a draft assignment batch — send it from Reviewer pool › Assignment batches.',
+        ),
+        {
+          actions: [
+            {
+              label: translate('Open assignment batches'),
+              primary: true,
+              onClick: () =>
+                router.stateService.go(
+                  ASSIGNMENT_BATCHES_STATE,
+                  assignmentBatchesParams(call.uuid),
+                ),
+            },
+          ],
+        },
+      );
     },
   });
 
@@ -270,6 +394,7 @@ export const CreateManualAssignmentDialog: FC<
           .catch(() => undefined)
       }
       initialValues={initialValues}
+      keepDirtyOnReinitialize
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           {/* The override answers the refusal of one reviewer and set of
@@ -341,6 +466,14 @@ export const CreateManualAssignmentDialog: FC<
                     : undefined
                 }
               />
+
+              {leftOut > 0 && (
+                <p className="text-tertiary">
+                  {translate('Not at a review step, so left out: {count}', {
+                    count: leftOut,
+                  })}
+                </p>
+              )}
 
               <StringGroup
                 name="manager_notes"

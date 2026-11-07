@@ -2,7 +2,7 @@ import { EnvelopeSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { AssignmentBatchList, assignmentBatchesSend } from 'waldur-js-client';
 
-import { Menu } from 'waldur-ui';
+import { ButtonSize, Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
@@ -10,11 +10,13 @@ import { useBatchMutation } from '@/modal/useBatchMutation';
 interface SendDraftsBulkActionProps {
   rows: AssignmentBatchList[];
   refetch: () => void;
+  size?: ButtonSize;
 }
 
 export const SendDraftsBulkAction: FC<SendDraftsBulkActionProps> = ({
   rows,
   refetch,
+  size = 'lg',
 }) => {
   const draftRows = rows.filter((row) => row.status === 'draft');
 
@@ -34,7 +36,9 @@ export const SendDraftsBulkAction: FC<SendDraftsBulkActionProps> = ({
 
   return (
     <Menu>
-      <Menu.TriggerButton>{translate('All actions')}</Menu.TriggerButton>
+      <Menu.TriggerButton variant="primary" size={size}>
+        {translate('All actions')}
+      </Menu.TriggerButton>
       <Menu.Content look="actions" side="bottom">
         <Menu.Item
           icon={<EnvelopeSimpleIcon weight="bold" />}

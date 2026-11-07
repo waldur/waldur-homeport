@@ -1,6 +1,6 @@
-import { FC, Fragment } from 'react';
+import { FC, Fragment, ReactNode } from 'react';
 
-import { Badge, BadgeVariant } from 'waldur-ui';
+import { Badge, BadgeVariant, PropertyItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { AwardComparisonRow } from '@/proposals/awardedResources';
@@ -12,43 +12,86 @@ import {
 } from '@/proposals/requestedResourceCost';
 import { renderFieldOrDash } from '@/table/utils';
 
-const CHANGE_VARIANTS: Record<AwardComparisonRow['change'], BadgeVariant> = {
-  unchanged: 'neutral',
+type AwardChange = Exclude<AwardComparisonRow['change'], 'unchanged'>;
+
+const CHANGE_VARIANTS: Record<AwardChange, BadgeVariant> = {
   changed: 'warning',
   moved: 'info',
   added: 'success',
   removed: 'danger',
 };
 
-const changeLabel = (change: AwardComparisonRow['change']) =>
+const changeLabel = (change: AwardChange) =>
   ({
-    unchanged: translate('As requested'),
     changed: translate('Changed'),
     moved: translate('Moved'),
     added: translate('Added'),
     removed: translate('Not awarded'),
   })[change];
 
+/**
+ * How an awarded item differs from the request. An item awarded as requested
+ * gets no badge: the award is called out only where it differs.
+ */
 export const AwardChangeBadge: FC<{ change: AwardComparisonRow['change'] }> = ({
   change,
-}) => (
-  <Badge variant={CHANGE_VARIANTS[change]} shape="pill" tone="outline">
-    {changeLabel(change)}
-  </Badge>
-);
+}) =>
+  change === 'unchanged' ? null : (
+    <Badge variant={CHANGE_VARIANTS[change]} shape="pill" tone="outline">
+      {changeLabel(change)}
+    </Badge>
+  );
 
 /**
- * The offering an item is awarded on, its plan and the options it answers
- * (a QoS), with what they were asked for where they differ, and the change
- * badge. One column rather than three,
- * so the table fits beside the proposal's progress rail.
+ * Who changed an awarded item, for a change the applicant did not make: the
+ * last to change it, or whoever added an item nobody requested.
  */
-export const AwardOfferingCell: FC<{
+const getAwardAuthorLine = (row: AwardComparisonRow): string | null => {
+  const awarded = row.awarded;
+  if (!awarded) {
+    return null;
+  }
+  if (awarded.modified_by_name) {
+    return translate('Changed by {name}', { name: awarded.modified_by_name });
+  }
+  if (row.change === 'added' && awarded.created_by_name) {
+    return translate('Added by {name}', { name: awarded.created_by_name });
+  }
+  return null;
+};
+
+/** The offering an item is awarded on, with the change badge where the
+ * award differs from the request: one line for the table row. */
+export const AwardOfferingCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
+  const offering = (row.awarded ?? row.requested).requested_offering;
+  return (
+    <span className="flex items-center gap-1.5">
+      <span
+        className={
+          row.change === 'removed'
+            ? 'text-quaternary line-through'
+            : 'font-medium text-primary'
+        }
+      >
+        {offering.offering_name}
+      </span>
+      <AwardChangeBadge change={row.change} />
+    </span>
+  );
+};
+
+/**
+ * What the row leaves out, as the expanded row's key/value details: the
+ * plan and the options it answers (a QoS), with what they were asked for
+ * where they differ, the amounts, where a moved item was requested and who
+ * changed it.
+ */
+export const AwardDetails: FC<{
   row: AwardComparisonRow;
   /** Only where the award can be edited: elsewhere nobody can answer it. */
   showMissingOptions?: boolean;
-}> = ({ row, showMissingOptions }) => {
-  const offering = (row.awarded ?? row.requested).requested_offering;
+  children?: ReactNode;
+}> = ({ row, showMissingOptions, children }) => {
   const requestedPlan = row.requested?.requested_offering.plan_details;
   const planName = row.awarded ? row.awarded.plan_name : requestedPlan?.name;
   const planChanged =
@@ -56,46 +99,55 @@ export const AwardOfferingCell: FC<{
     requestedPlan?.name &&
     planName &&
     requestedPlan.name !== planName;
+  const author = getAwardAuthorLine(row);
   return (
-    <div className="flex flex-col gap-1 items-start">
-      <span
-        className={
-          row.change === 'removed' ? 'text-quaternary line-through' : undefined
-        }
-      >
-        {offering.offering_name}
-      </span>
+    <>
       {planName && (
-        <span className="text-quaternary text-xs">
-          {planChanged
-            ? translate('Plan: {plan} (requested {requested})', {
-                plan: planName,
-                requested: requestedPlan.name,
-              })
-            : translate('Plan: {plan}', { plan: planName })}
-        </span>
+        <PropertyItem
+          label={translate('Plan')}
+          value={
+            planChanged
+              ? translate('{plan} (requested {requested})', {
+                  plan: planName,
+                  requested: requestedPlan.name,
+                })
+              : planName
+          }
+        />
       )}
       {(row.optionLines ?? []).map((line) => (
-        <span key={line.key} className="text-quaternary text-xs">
-          {'requested' in line
-            ? translate('{option}: {value} (requested {requested})', {
-                option: line.label,
-                value: line.value ?? translate('none'),
-                requested: line.requested ?? translate('none'),
-              })
-            : `${line.label}: ${line.value}`}
-        </span>
+        <PropertyItem
+          key={line.key}
+          label={line.label}
+          value={
+            'requested' in line
+              ? translate('{value} (requested {requested})', {
+                  value: line.value ?? translate('none'),
+                  requested: line.requested ?? translate('none'),
+                })
+              : line.value
+          }
+        />
       ))}
-      {showMissingOptions && <MissingOptionsHint item={row.awarded} />}
+      <PropertyItem
+        label={translate('Amounts')}
+        value={<AwardAmountsCell row={row} />}
+      />
       {row.change === 'moved' && (
-        <span className="text-quaternary text-xs">
-          {translate('Requested on {offering}', {
-            offering: row.requested.requested_offering.offering_name,
-          })}
-        </span>
+        <PropertyItem
+          label={translate('Requested on')}
+          value={row.requested.requested_offering.offering_name}
+        />
       )}
-      <AwardChangeBadge change={row.change} />
-    </div>
+      {author && (
+        <PropertyItem
+          label={translate('Changed')}
+          value={<span data-testid="award-author">{author}</span>}
+        />
+      )}
+      {showMissingOptions && <MissingOptionsHint item={row.awarded} />}
+      {children}
+    </>
   );
 };
 

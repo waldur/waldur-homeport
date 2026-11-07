@@ -31,6 +31,7 @@ const getFieldComponent = (questionType: string) => {
     case 'text_input':
       return StringField;
     case 'text_area':
+    case 'rich_text':
       return TextField;
     case 'boolean':
       return SelectField; // Use dropdown for clear Yes/No/Unanswered states
@@ -161,18 +162,24 @@ export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
     return checklistData.questions.filter(isQuestionVisible);
   }, [checklistData, isQuestionVisible]);
 
-  // Count answered questions for metadata display (only count visible ones)
-  const { answeredCount, totalCount } = useMemo(() => {
+  // The header counts what submitting needs: the visible required
+  // questions. Counted with the optional ones, "9/10 answered" read as one
+  // required answer missing when only an optional one was. A checklist with
+  // no required question counts all of them.
+  const { answeredCount, totalCount, countsRequired } = useMemo(() => {
     if (!visibleQuestions.length || !values) {
-      return { answeredCount: 0, totalCount: 0 };
+      return { answeredCount: 0, totalCount: 0, countsRequired: false };
     }
-    const total = visibleQuestions.length;
-    const answered = visibleQuestions.filter((question) => {
-      const fieldName = `compliance_${question.uuid}`;
-      const value = values[fieldName];
-      return isComplianceAnswerFilled(value);
-    }).length;
-    return { answeredCount: answered, totalCount: total };
+    const required = visibleQuestions.filter((question) => question.required);
+    const counted = required.length ? required : visibleQuestions;
+    const answered = counted.filter((question) =>
+      isComplianceAnswerFilled(values[`compliance_${question.uuid}`]),
+    ).length;
+    return {
+      answeredCount: answered,
+      totalCount: counted.length,
+      countsRequired: required.length > 0,
+    };
   }, [visibleQuestions, values]);
 
   if (isLoading) {
@@ -215,12 +222,17 @@ export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
           isCompleted={isCompleted}
           isRequired={isRequired}
           metadata={
-            totalCount > 0
-              ? translate('{answered}/{total} answered', {
-                  answered: answeredCount,
-                  total: totalCount,
-                })
-              : undefined
+            totalCount === 0
+              ? undefined
+              : countsRequired
+                ? translate('{answered}/{total} required answered', {
+                    answered: answeredCount,
+                    total: totalCount,
+                  })
+                : translate('{answered}/{total} answered', {
+                    answered: answeredCount,
+                    total: totalCount,
+                  })
           }
         />
       }

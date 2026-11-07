@@ -4,24 +4,29 @@ import { Field } from 'react-final-form';
 
 import { AccordionCard } from 'waldur-ui';
 
-import { isEmpty } from '@/core/utils';
 import { validateMaxLength } from '@/core/validators';
-import { StringGroup, TextGroup } from '@/form';
+import { SelectGroup, StringGroup, TextGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ScienceDomainGroup } from '@/project/create/ScienceDomainGroup';
+import { formatPrepaidMonths } from '@/proposals/prepaidDuration';
+import { isOnProposalTeam } from '@/proposals/team/teamRules';
 import { ProposalReview } from '@/proposals/types';
 import { VStepperFormStepProps } from '@/wizard';
+import { useUser } from '@/workspace/hooks';
 
+import { fieldPart, isPartEditable } from '../changeRequests';
 import { FieldReviewComments } from '../create-review/FieldReviewComments';
 
 import {
+  asksForDuration,
+  DURATION_FIELD,
   getFieldStates,
   getTrackedFields,
   isFieldRequired,
   isFieldVisible,
-  PROPOSAL_DESCRIPTION_MAX_LENGTH,
-  PROPOSAL_SUMMARY_MAX_LENGTH,
+  isProposalFieldFilled,
+  PROPOSAL_FIELD_MAX_LENGTH,
 } from './proposalFields';
 import { StepHeaderContent } from './StepHeaderContent';
 import { UploadDocumentationFiles } from './UploadDocumentationFiles';
@@ -32,15 +37,24 @@ import { UploadDocumentationFiles } from './UploadDocumentationFiles';
 // The summary mirrors the backend's grandfather rule: a value stored over the
 // limit before it existed is accepted as long as it is left as it was loaded,
 // and its counter stays grey. Only an edited value has to fit.
+//
+// The textareas take `maxCharacters`, not the native `maxLength`, which would
+// cut a long paste silently instead of showing why it is refused.
 const validateSummary: FieldValidator<string> = (value, _allValues, meta) =>
   meta?.initial !== undefined && value === meta.initial
     ? undefined
-    : validateMaxLength(PROPOSAL_SUMMARY_MAX_LENGTH)(value);
-const validateDescription = validateMaxLength(PROPOSAL_DESCRIPTION_MAX_LENGTH);
+    : validateMaxLength(PROPOSAL_FIELD_MAX_LENGTH.project_summary)(value);
+const validateDescription = validateMaxLength(
+  PROPOSAL_FIELD_MAX_LENGTH.description,
+);
 
 export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
   const reviews: ProposalReview[] = props.params?.reviews;
   const proposal = props.params?.proposal;
+  const user = useUser();
+  // Once submitted, a field is edited only while a request for changes
+  // unlocks it.
+  const locked = (name: string) => !isPartEditable(proposal, fieldPart(name));
   const values = props.params?.values;
   const isCompleted = props.params?.isCompleted;
   const isRequired = props.params?.isRequired;
@@ -49,28 +63,46 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
 
   // Only the fields this call actually asks for are counted, so the step can
   // reach its own total. A field the call hides is neither rendered nor tracked.
+
   const fieldStates = useMemo(
     () => getFieldStates(props.params?.call?.proposal_field_config),
     [props.params?.call],
   );
+  const allowedDurations: number[] =
+    props.params?.call?.allowed_duration_months ?? [];
+  const asksDuration = asksForDuration(props.params?.call);
   const trackedFields = useMemo(
-    () => getTrackedFields(fieldStates),
-    [fieldStates],
+    () => getTrackedFields(fieldStates, asksDuration),
+    [fieldStates, asksDuration],
+  );
+  const durationOptions = useMemo(
+    () =>
+      allowedDurations.map((months) => ({
+        value: months,
+        label: formatPrepaidMonths(months),
+      })),
+    [allowedDurations],
   );
 
-  // Count filled fields for metadata display
-  const filledFieldsCount = useMemo(() => {
-    if (!values) return 0;
-    return trackedFields.filter((fieldName) => {
-      const value = values[fieldName];
-      return typeof value === 'object' ? !isEmpty(value) : Boolean(value);
-    }).length;
-  }, [values, trackedFields]);
+  const storedDocuments = proposal?.supporting_documentation;
+  const filledFieldsCount = useMemo(
+    () =>
+      trackedFields.filter((fieldName) =>
+        isProposalFieldFilled(fieldName, values, {
+          supporting_documentation: storedDocuments,
+        }),
+      ).length,
+    [values, trackedFields, storedDocuments],
+  );
 
   return (
     <AccordionCard
       title={translate('Project details')}
-      subtitle={translate('Basic information about your research project.')}
+      subtitle={
+        isOnProposalTeam(user, proposal)
+          ? translate('Basic information about your research project.')
+          : translate('Basic information about the research project.')
+      }
       id={props.id}
       isOpen={isOpen}
       onToggle={onToggle}
@@ -89,7 +121,10 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         name="name"
         placeholder={translate('Enter a name...')}
         label={translate('Name')}
+        maxLength={PROPOSAL_FIELD_MAX_LENGTH.name}
+        showCharacterCount
         required
+        disabled={locked('name')}
       />
       <FieldReviewComments
         reviews={reviews}
@@ -100,10 +135,11 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
           <TextGroup
             name="project_summary"
             placeholder={translate('Enter a summary...')}
-            maxCharacters={PROPOSAL_SUMMARY_MAX_LENGTH}
+            maxCharacters={PROPOSAL_FIELD_MAX_LENGTH.project_summary}
             validate={validateSummary}
             label={translate('Summary')}
             required={isFieldRequired(fieldStates, 'project_summary')}
+            disabled={locked('project_summary')}
           />
           <FieldReviewComments
             reviews={reviews}
@@ -116,10 +152,11 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
           <TextGroup
             name="description"
             placeholder={translate('Enter a description...')}
-            maxCharacters={PROPOSAL_DESCRIPTION_MAX_LENGTH}
+            maxCharacters={PROPOSAL_FIELD_MAX_LENGTH.description}
             validate={validateDescription}
             label={translate('Description')}
             required={isFieldRequired(fieldStates, 'description')}
+            disabled={locked('description')}
           />
           <FieldReviewComments
             reviews={reviews}
@@ -133,6 +170,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
           // call: a science domain the call requires is shown regardless.
           alwaysShown
           required={isFieldRequired(fieldStates, 'science_sub_domain')}
+          disabled={locked('science_sub_domain')}
           initialDomain={
             proposal.science_domain_uuid
               ? {
@@ -143,30 +181,49 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
           }
         />
       )}
-      {isFieldVisible(fieldStates, 'supporting_documentation') && (
-        <>
-          <FormGroup
-            label={translate('Upload supporting documentation')}
-            required={isFieldRequired(fieldStates, 'supporting_documentation')}
-          >
-            <Field
-              name="supporting_documentation"
-              render={({ input, meta }) => (
-                <UploadDocumentationFiles
-                  input={input}
-                  meta={meta}
-                  proposal={props.params.proposal}
-                  refetch={props.params.refetch}
-                />
-              )}
-            />
-          </FormGroup>
-          <FieldReviewComments
-            reviews={reviews}
-            fieldName="comment_project_supporting_documentation"
-          />
-        </>
+      {asksDuration && (
+        <SelectGroup
+          name={DURATION_FIELD}
+          label={translate('Project duration')}
+          description={translate(
+            'How long the project should run. The call offers these lengths; no subscription requested may run longer.',
+          )}
+          options={durationOptions}
+          simpleValue
+          isClearable={false}
+          placeholder={translate('Select a duration...')}
+          required
+          isDisabled={locked(DURATION_FIELD)}
+        />
       )}
+      {isFieldVisible(fieldStates, 'supporting_documentation') &&
+        isPartEditable(proposal, 'documents') && (
+          <>
+            <FormGroup
+              label={translate('Upload supporting documentation')}
+              required={isFieldRequired(
+                fieldStates,
+                'supporting_documentation',
+              )}
+            >
+              <Field
+                name="supporting_documentation"
+                render={({ input, meta }) => (
+                  <UploadDocumentationFiles
+                    input={input}
+                    meta={meta}
+                    proposal={props.params.proposal}
+                    refetch={props.params.refetch}
+                  />
+                )}
+              />
+            </FormGroup>
+            <FieldReviewComments
+              reviews={reviews}
+              fieldName="comment_project_supporting_documentation"
+            />
+          </>
+        )}
     </AccordionCard>
   );
 };

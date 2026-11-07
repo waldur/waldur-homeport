@@ -9,7 +9,6 @@ import {
   hasReachedAllocationDecision,
   isAwardSectionShown,
   pickOfferingLimits,
-  withAwardedResourcesStep,
 } from './awardedResources';
 
 const hpc = {
@@ -220,8 +219,19 @@ describe('hasReachedAllocationDecision', () => {
       hasReachedAllocationDecision(
         { state: 'in_review' } as any,
         [
-          { step: 'panel_review', status: 'active' },
-          { step: 'allocation_decision', status: 'pending' },
+          {
+            step: 'panel_review',
+            kind: 'decision',
+            outcome_set: 'approval',
+            status: 'active',
+          },
+          {
+            step: 'allocation_decision',
+            kind: 'decision',
+            outcome_set: 'approval',
+            is_allocation_decision: true,
+            status: 'pending',
+          },
         ] as any,
       ),
     ).toBe(false);
@@ -231,12 +241,51 @@ describe('hasReachedAllocationDecision', () => {
     expect(
       hasReachedAllocationDecision(
         { state: 'in_review' } as any,
-        [{ step: 'allocation_decision', status: 'active' }] as any,
+        [
+          {
+            step: 'allocation_decision',
+            kind: 'decision',
+            outcome_set: 'approval',
+            is_allocation_decision: true,
+            status: 'active',
+          },
+        ] as any,
       ),
     ).toBe(true);
     expect(hasReachedAllocationDecision({ state: 'accepted' } as any, [])).toBe(
       true,
     );
+  });
+
+  // The decision is the step flagged as such, whatever the call named it;
+  // another decision ahead of it is not.
+  it('goes by the allocation decision flag, not the key', () => {
+    expect(
+      hasReachedAllocationDecision(
+        { state: 'in_review' } as any,
+        [
+          {
+            step: 'board-decision',
+            kind: 'decision',
+            is_allocation_decision: true,
+            status: 'active',
+          },
+        ] as any,
+      ),
+    ).toBe(true);
+    expect(
+      hasReachedAllocationDecision(
+        { state: 'in_review' } as any,
+        [
+          {
+            step: 'allocation_decision',
+            kind: 'decision',
+            is_allocation_decision: false,
+            status: 'active',
+          },
+        ] as any,
+      ),
+    ).toBe(false);
   });
 });
 
@@ -267,7 +316,12 @@ describe('asCostRow', () => {
 });
 
 describe('canEditAward', () => {
-  const allocation = { step: 'allocation_decision' } as any;
+  const allocation = {
+    step: 'allocation_decision',
+    kind: 'decision',
+    outcome_set: 'approval',
+    is_allocation_decision: true,
+  } as any;
 
   it('lets a manager edit while the allocation decision is open', () => {
     expect(canEditAward(true, { decision_held: false }, allocation)).toBe(true);
@@ -283,6 +337,8 @@ describe('canEditAward', () => {
     expect(
       canEditAward(true, { decision_held: false }, {
         step: 'award_response',
+        kind: 'applicant_action',
+        outcome_set: 'acceptance',
       } as any),
     ).toBe(false);
     expect(canEditAward(true, { decision_held: false }, undefined)).toBe(false);
@@ -311,26 +367,5 @@ describe('isAwardSectionShown', () => {
   it('shows a reader the award only when something is awarded', () => {
     expect(isAwardSectionShown([], false)).toBe(false);
     expect(isAwardSectionShown([item], false)).toBe(true);
-  });
-});
-
-describe('withAwardedResourcesStep', () => {
-  const steps = [
-    { id: 'step-general', label: 'Details overview' },
-    { id: 'step-resource-requests', label: 'Resource requests' },
-    { id: 'step-team', label: 'Project team' },
-  ];
-
-  it('lists the award right after the request it answers', () => {
-    expect(withAwardedResourcesStep(steps, true).map((s) => s.id)).toEqual([
-      'step-general',
-      'step-resource-requests',
-      'step-awarded-resources',
-      'step-team',
-    ]);
-  });
-
-  it('leaves the rail alone when the section is not on the page', () => {
-    expect(withAwardedResourcesStep(steps, false)).toBe(steps);
   });
 });

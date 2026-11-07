@@ -21,6 +21,7 @@ import { LayoutSlot } from '@/navigation/slots';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
+import { canManageCallsOf } from '@/proposals/callOperators';
 import { useUser, useCustomer } from '@/workspace/hooks';
 import {
   checkCanAccessServiceProvider,
@@ -55,7 +56,8 @@ const PageHero = ({ customer }) => {
 
   const showCallManagement =
     customer?.call_managing_organization_uuid &&
-    isFeatureVisible(MarketplaceFeatures.show_call_management_functionality);
+    isFeatureVisible(MarketplaceFeatures.show_call_management_functionality) &&
+    canManageCallsOf(user, customer.uuid);
 
   // Permission based, so a custom provider role reaches the workspace too.
   const showServiceProvider =

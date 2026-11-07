@@ -8,7 +8,18 @@ import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
-export const CallDocumentsCard = ({ call, rowActions, tableActions }) => {
+/** `embedded`: inside a tab of its own name, so without title or frame. */
+export const CallDocumentsCard = ({
+  call,
+  rowActions,
+  tableActions,
+  embedded = false,
+}: {
+  call;
+  rowActions;
+  tableActions;
+  embedded?: boolean;
+}) => {
   const tableProps = useTable({
     table: 'CallDocumentsCard',
     fetchData: createClientPaginatedFetcher(call.documents),
@@ -49,6 +60,11 @@ export const CallDocumentsCard = ({ call, rowActions, tableActions }) => {
       {...tableProps}
       columns={columns}
       title={translate('Documents')}
+      hideTitle={embedded}
+      cardBordered={!embedded}
+      bodyClassName={embedded ? 'p-0' : undefined}
+      hasActionBar={!embedded}
+      minHeight={embedded ? 'auto' : undefined}
       verboseName={translate('Documents')}
       tableActions={tableActions}
       rowActions={rowActions}

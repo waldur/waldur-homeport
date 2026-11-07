@@ -5,6 +5,7 @@ import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { SubmittableRound } from '@/marketplace/offerings/apply/eligibleCalls';
 import { usesCallVocabulary } from '@/proposals/presentation';
+import { formatRoundCutoff } from '@/proposals/roundCutoff';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
@@ -78,7 +79,7 @@ export const RoundSelectTable: FC<RoundSelectTableProps> = ({
           title: translate('Submission closes'),
           render: ({ row }: { row: SubmittableRound }) => (
             <span className="flex flex-col">
-              <span>{formatDate(row.round.cutoff_time)}</span>
+              <span>{formatRoundCutoff(row.round, formatDate)}</span>
               {/* Without the column, two rows from different calls would be
                   told apart only by date — and two calls can share one. This
                   branch is reached only where the call column is suppressed

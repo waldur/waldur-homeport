@@ -11,13 +11,17 @@ import {
   isMarketplaceVisible,
 } from '@/marketplace/serviceAccessMode';
 import { getMarketplaceTitle } from '@/marketplace/title';
-import { CallPublicMenu } from '@/navigation/sidebar/CallPublicMenu';
+import {
+  CallPublicMenu,
+  CallsModeEntries,
+} from '@/navigation/sidebar/CallPublicMenu';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
 import { useProfileCompletenessContext } from '@/user/ProfileCompletenessContext';
 import { useUser } from '@/workspace/hooks';
 import { checkHasNonProjectPermissions } from '@/workspace/selectors';
 
+import { ManagedOfferingsMenu } from './ManagedOfferingsMenu';
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
 import { MenuItem } from './MenuItem';
 import { OrganizationsListMenu } from './OrganizationsListMenu';
@@ -25,11 +29,16 @@ import { ProjectsListMenu } from './ProjectsListMenu';
 import { ReportingMenu } from './ReportingMenu';
 import { ResourcesMenu } from './ResourcesMenu';
 import { Sidebar } from './Sidebar';
+import {
+  getCallsSidebarItem,
+  getSidebarSection,
+  isCallManagementItem,
+} from './sidebarSection';
 import { useExclusiveOpen } from './utils';
 
 export const UnifiedSidebar = () => {
   const user = useUser();
-  const { state, params } = useCurrentStateAndParams();
+  const { state } = useCurrentStateAndParams();
   const { shouldBlockNavigation } = useProfileCompletenessContext();
 
   const disabledTooltip = shouldBlockNavigation
@@ -52,39 +61,26 @@ export const UnifiedSidebar = () => {
   // on the next matching navigation, it doesn't force itself back open
   // while the user stays there.
   //
-  // The else branch collapses whichever accordion is open once the route
-  // leaves both sections entirely (Reporting, Marketplace, Projects,
-  // Organizations, ...) — otherwise Resources/Calls stayed expanded
-  // forever after the first visit, wasting space for every unrelated page
-  // visited afterward.
+  // The section comes from the route's `sidebarSection`, which a page
+  // inherits from the abstract root of its area, so every tab and detail
+  // page under that root opens it — not only the pages someone listed.
+  //
+  // Leaving both sections entirely (Reporting, Marketplace, Projects,
+  // Organizations, ...) collapses whichever accordion is open — otherwise
+  // Resources/Calls stayed expanded forever after the first visit, wasting
+  // space for every unrelated page visited afterward.
+  //
+  // In calls-only mode the Calls accordion holds only operators' entries; the
+  // rest are top-level, so their pages leave it closed.
+  const isCallsMode = getServiceAccessMode() === 'calls';
+  const section = getSidebarSection(state);
+  const opensSection =
+    section === 'calls' && isCallsMode
+      ? isCallManagementItem(getCallsSidebarItem(state))
+      : Boolean(section);
   useEffect(() => {
-    if (
-      [
-        'marketplace-project-resources-all',
-        'marketplace-project-resources',
-        'category-resources',
-        'all-resources',
-      ].includes(state.name) ||
-      params.resource_uuid
-    ) {
-      setOpenTopId('resources-menu');
-    } else if (
-      [
-        'calls-for-proposals-dashboard',
-        'proposals-all-proposals',
-        'reviews-all-reviews',
-        'reviews-invitations',
-        'admin-proposals',
-        'admin-reviews',
-        'public-call.details',
-        'protected-call.main',
-      ].includes(state.name)
-    ) {
-      setOpenTopId('calls-menu');
-    } else {
-      setOpenTopId(undefined);
-    }
-  }, [state.name, params.resource_uuid]);
+    setOpenTopId(opensSection ? `${section}-menu` : undefined);
+  }, [state.name, section, opensSection]);
 
   const hasNonProjectPerms = useMemo(
     () => checkHasNonProjectPermissions(user),
@@ -100,7 +96,10 @@ export const UnifiedSidebar = () => {
     user,
     PermissionEnum.CREATE_ORDER,
   );
-  const showAddResource = canCreateOrder && canUseMarketplaceShopUi(user);
+  // Calls are the only way in: nobody adds a resource from the sidebar, staff
+  // included -- they still reach the marketplace through its own routes.
+  const showAddResource =
+    canCreateOrder && canAccessMarketplace && isMarketplaceVisible();
 
   const canAccessOrganization =
     !isFeatureVisible(
@@ -121,6 +120,62 @@ export const UnifiedSidebar = () => {
     />
   );
 
+  const organizationsMenu = canAccessOrganization && (
+    <OrganizationsListMenu
+      disabled={shouldBlockNavigation}
+      disabledTooltip={disabledTooltip}
+    />
+  );
+  const projectsMenu = (
+    <ProjectsListMenu
+      disabled={shouldBlockNavigation}
+      disabledTooltip={disabledTooltip}
+    />
+  );
+  const resourcesMenu = (
+    <ResourcesMenu
+      user={user}
+      disabled={shouldBlockNavigation}
+      disabledTooltip={disabledTooltip}
+      open={openTopId === 'resources-menu'}
+      onOpenChange={toggleTop('resources-menu')}
+    />
+  );
+  const operatorMenus = (
+    <>
+      <ManagedOfferingsMenu
+        user={user}
+        disabled={shouldBlockNavigation}
+        disabledTooltip={disabledTooltip}
+        open={openTopId === 'offerings-menu'}
+        onOpenChange={toggleTop('offerings-menu')}
+      />
+      <ReportingMenu
+        disabled={shouldBlockNavigation}
+        disabledTooltip={disabledTooltip}
+      />
+    </>
+  );
+
+  // Calls-only: calls are the way in, so the sidebar opens on them -- the
+  // public list, then the user's own proposals and tasks -- followed by where
+  // awarded allocations land, and the operator part last.
+  if (isCallsMode) {
+    return (
+      <Sidebar>
+        <CallsModeEntries
+          disabled={shouldBlockNavigation}
+          disabledTooltip={disabledTooltip}
+        />
+        {projectsMenu}
+        {resourcesMenu}
+        {organizationsMenu}
+        {callMenu}
+        {operatorMenus}
+      </Sidebar>
+    );
+  }
+
   return (
     <Sidebar>
       {showAddResource ? (
@@ -129,27 +184,10 @@ export const UnifiedSidebar = () => {
           disabledTooltip={disabledTooltip}
         />
       ) : null}
-      {canAccessOrganization && (
-        <OrganizationsListMenu
-          disabled={shouldBlockNavigation}
-          disabledTooltip={disabledTooltip}
-        />
-      )}
-      <ProjectsListMenu
-        disabled={shouldBlockNavigation}
-        disabledTooltip={disabledTooltip}
-      />
-      <ResourcesMenu
-        user={user}
-        disabled={shouldBlockNavigation}
-        disabledTooltip={disabledTooltip}
-        open={openTopId === 'resources-menu'}
-        onOpenChange={toggleTop('resources-menu')}
-      />
-      <ReportingMenu
-        disabled={shouldBlockNavigation}
-        disabledTooltip={disabledTooltip}
-      />
+      {organizationsMenu}
+      {projectsMenu}
+      {resourcesMenu}
+      {operatorMenus}
       {!isMarketplaceMode && callMenu}
       {canAccessMarketplace && isMarketplaceVisible() && (
         <MenuItem

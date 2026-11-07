@@ -16,6 +16,8 @@ import '@/proposals/flushTable.scss';
 
 import { AwardChangeBadge } from '../AwardComparison';
 import { FieldReviewComments } from '../create-review/FieldReviewComments';
+import { OwnOfferingsNote } from '../OwnOfferingsNote';
+import { sectionOpenProps, useSectionOpenState } from '../sectionOpen';
 
 import { resourceRequestColumns } from './resource-requests-step/resourceRequestColumns';
 import { ResourceRequestExpandableRow } from './resource-requests-step/ResourceRequestExpandableRow';
@@ -44,7 +46,9 @@ const fitSummaryColumns = (
 /**
  * The offering column, with what became of the request in the award beneath
  * the name for a viewer who may read it. Beneath rather than in a column of
- * its own: the progress rail leaves this table no room for another.
+ * its own: the progress rail leaves this table no room for another. Only a
+ * line the award changed is marked: one awarded as requested needs no word,
+ * and a badge on every row would bury the ones that differ.
  */
 const offeringWithAwardColumn = (
   awardRows: AwardComparisonRow[],
@@ -54,10 +58,14 @@ const offeringWithAwardColumn = (
     const match = awardRows.find((award) => award.requested?.uuid === row.uuid);
     return (
       <div className="flex flex-col gap-1 items-start">
-        <span>{row.requested_offering.offering_name}</span>
-        {match && <AwardChangeBadge change={match.change} />}
+        <span className="font-medium text-primary">
+          {row.requested_offering.offering_name}
+        </span>
+        {match && match.change !== 'unchanged' && (
+          <AwardChangeBadge change={match.change} />
+        )}
         {match?.change === 'moved' && (
-          <span className="text-quaternary text-xs">
+          <span className="text-quaternary">
             {translate('To {offering}', {
               offering: match.awarded.requested_offering.offering_name,
             })}
@@ -80,6 +88,7 @@ export const ResourceRequestsSummary = ({
   reviews,
   awardRows,
 }: ResourceRequestsSummaryProps) => {
+  const openState = useSectionOpenState();
   const tableColumns = useMemo(
     () =>
       fitSummaryColumns(
@@ -118,36 +127,46 @@ export const ResourceRequestsSummary = ({
     <AccordionCard
       id="step-resource-requests"
       title={translate('Resource requests')}
-      actions={
-        chosen ? (
-          <span className="text-quaternary text-xs">{chosen}</span>
-        ) : undefined
-      }
+      // What was asked for, in the subtitle: the header's right side is for
+      // actions, and the section folded still says it.
       subtitle={
-        usesCallVocabulary()
-          ? translate('Resources requested for this proposal.')
-          : translate('Resources requested for this access request.')
+        chosen
+          ? usesCallVocabulary()
+            ? translate('Resources requested for this proposal: {chosen}.', {
+                chosen,
+              })
+            : translate(
+                'Resources requested for this access request: {chosen}.',
+                { chosen },
+              )
+          : usesCallVocabulary()
+            ? translate('Resources requested for this proposal.')
+            : translate('Resources requested for this access request.')
       }
-      defaultOpen={false}
+      {...sectionOpenProps(openState, 'step-resource-requests', false)}
     >
+      <OwnOfferingsNote proposal={proposal} />
       <Table<ProposalResource>
         {...tableProps}
         className="proposal-flush-table"
-        cardBordered={false}
+        // A frame only to set it apart from the comments below it.
+        cardBordered={Boolean(
+          reviews?.some((review) => review?.comment_resource_requests),
+        )}
         title={null}
         hasActionBar={false}
         columns={tableColumns}
         hideRefresh
         expandableRow={ResourceRequestExpandableRow}
         minHeight="auto"
-        footer={
-          <FieldReviewComments
-            reviews={reviews}
-            fieldName="comment_resource_requests"
-            space={0}
-            className="mt-4"
-          />
-        }
+      />
+      {/* About every request, not a row of them: below the table. */}
+      <FieldReviewComments
+        reviews={reviews}
+        fieldName="comment_resource_requests"
+        nested
+        space={0}
+        className="mt-4"
       />
     </AccordionCard>
   );

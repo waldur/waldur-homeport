@@ -9,8 +9,12 @@ import { ActionItem } from '@/resource/actions/ActionItem';
 import { TableProps } from './types';
 import { useExportDialog } from './useExportDialog';
 
+/**
+ * The table's Export. Without a `table`, the dialog offers only the
+ * `fullExport`: what a view without a table of its own exports.
+ */
 export const TableExportButton: FunctionComponent<
-  TableProps & { asDropdownItem?: boolean }
+  Partial<TableProps> & { asDropdownItem?: boolean }
 > = (props) => {
   const openExportDialog = useExportDialog();
   return props.asDropdownItem ? (
@@ -23,7 +27,7 @@ export const TableExportButton: FunctionComponent<
   ) : (
     <BaseButton
       variant="tertiary"
-      size="lg"
+      size={props.dropdownActionsSize ?? 'lg'}
       label={translate('Export')}
       iconNode={<ExportIcon weight="bold" />}
       onClick={() => openExportDialog(props.table, 'clipboard', props)}

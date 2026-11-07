@@ -2,7 +2,10 @@ import { describe, expect, it } from 'vitest';
 
 import { states } from './states';
 import {
+  canAccessOfferingRequests,
   canAccessProviderOffering,
+  canAccessProviderOrders,
+  canAccessProviderResources,
   canAccessServiceProviderWorkspace,
 } from './workspace/selectors';
 
@@ -50,12 +53,22 @@ describe('abstract states shown as tabs', () => {
  * A child state that declares its own `data.permissions` replaces the ones it
  * would inherit, so every guarded page under the provider workspace has to
  * repeat the workspace guard or a typed address bypasses it.
- * The offering manage and edit pages are the exception: their guard still
- * allows the workspace, and also an offering manager of that organization.
+ * The pages an offering manager also uses for the offerings they manage are
+ * the exception: their guard still allows the workspace, and also an
+ * offering role on an offering of that organization.
  */
 const OFFERING_PAGE_GUARD = {
   'marketplace-offering-details': canAccessProviderOffering,
   'marketplace-offering-update': canAccessProviderOffering,
+  'marketplace-provider-offering-requests': canAccessOfferingRequests,
+  // A provider's calls: who answers its offering requests works on them.
+  'marketplace-provider-calls': canAccessOfferingRequests,
+  'marketplace-provider-call-tasks': canAccessOfferingRequests,
+  'marketplace-provider-call-proposals': canAccessOfferingRequests,
+  'marketplace-provider-call-demand': canAccessOfferingRequests,
+  'marketplace-provider-orders': canAccessProviderOrders,
+  'marketplace-public-resources': canAccessProviderResources,
+  'marketplace-provider-resource-details': canAccessProviderResources,
 };
 describe('provider workspace states', () => {
   const parentOf = (state) =>

@@ -175,6 +175,7 @@ export function TableToolbarActions() {
                 enableExport={config.enableExport}
                 fullExport={config.fullExport}
                 showExportInDropdown={config.showExportInDropdown}
+                dropdownActionsSize={config.dropdownActionsSize}
                 gridItem={slots.gridItem}
                 mode={mode}
                 setDisplayMode={actions.setDisplayMode}

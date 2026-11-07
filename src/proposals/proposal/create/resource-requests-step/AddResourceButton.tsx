@@ -6,6 +6,7 @@ import { BaseButton } from 'waldur-ui';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
 import { useModal } from '@/modal/actions';
+import { useConfirmApplicantChange } from '@/proposals/proposal/actingForApplicant';
 import { Proposal } from '@/proposals/types';
 
 const ResourceRequestFormDialog = lazyComponent(() =>
@@ -24,14 +25,17 @@ export const AddResourceButton = ({
   refetch,
 }: AddResourceButtonProps) => {
   const { openDialog } = useModal();
-  const openAddResourceDialog = useCallback(
-    () =>
-      openDialog(ResourceRequestFormDialog, {
-        resolve: { proposal, refetch },
-        size: 'lg',
-      }),
-    [],
-  );
+  const confirmChange = useConfirmApplicantChange(proposal);
+  const openAddResourceDialog = useCallback(async () => {
+    const confirmed = await confirmChange(
+      translate('Add a resource request to the proposal.'),
+    );
+    if (!confirmed) return;
+    openDialog(ResourceRequestFormDialog, {
+      resolve: { proposal, refetch },
+      size: 'lg',
+    });
+  }, [confirmChange, openDialog, proposal, refetch]);
 
   return (
     // Medium: the card's title row, like the team block's, is not the page's

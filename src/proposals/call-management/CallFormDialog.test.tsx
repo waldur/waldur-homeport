@@ -124,11 +124,11 @@ describe('CallFormDialog', () => {
 
   it('handles API validation errors', async () => {
     const user = userEvent.setup();
+    // The client spreads a refused request's body onto the error.
     vi.mocked(proposalProtectedCallsCreate).mockRejectedValue({
-      response: {
-        status: 400,
-        data: { name: 'Name already exists' },
-      },
+      name: ['Name already exists'],
+      status: 400,
+      response: { status: 400 },
     } as any);
 
     renderDialog({ resolve: { refetch: vi.fn() } });
@@ -139,6 +139,25 @@ describe('CallFormDialog', () => {
     await user.click(screen.getByRole('button', { name: /Create/i }));
 
     expect(await screen.findByText('Name already exists')).toBeInTheDocument();
+  });
+
+  it('shows a refused compliance checklist under the field', async () => {
+    const user = userEvent.setup();
+    vi.mocked(proposalProtectedCallsCreate).mockRejectedValue({
+      compliance_checklist: ['This form belongs to another organisation.'],
+      status: 400,
+      response: { status: 400 },
+    } as any);
+
+    renderDialog({ resolve: { refetch: vi.fn() } });
+
+    await screen.findByText('Create call');
+    await user.type(screen.getByLabelText(/Name/i), 'New call');
+    await user.click(screen.getByRole('button', { name: /Create/i }));
+
+    expect(
+      await screen.findByText('This form belongs to another organisation.'),
+    ).toBeInTheDocument();
   });
 
   it('shows the compliance checklist selector', async () => {

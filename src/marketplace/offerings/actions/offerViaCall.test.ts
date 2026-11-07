@@ -26,16 +26,18 @@ const input = {
 };
 
 /** What the backend seeds a fresh call with today. */
-const seededSteps = [
-  { uuid: 'admin-step', step: 'administrative_check', is_enabled: true },
-  { uuid: 'technical-step', step: 'technical_assessment', is_enabled: false },
-  { uuid: 'expert-step', step: 'expert_review', is_enabled: false },
-  { uuid: 'panel-step', step: 'panel_review', is_enabled: false },
+const seededSteps: any[] = [
+  { uuid: 'admin-step', key: 'administrative_check', is_enabled: true },
+  { uuid: 'technical-step', key: 'technical_assessment', is_enabled: false },
+  { uuid: 'expert-step', key: 'expert_review', is_enabled: false },
+  { uuid: 'panel-step', key: 'panel_review', is_enabled: false },
   {
     uuid: 'allocation-step',
-    step: 'allocation_decision',
+    key: 'allocation_decision',
+    kind: 'decision',
     is_enabled: true,
     is_mandatory: true,
+    is_allocation_decision: true,
   },
 ];
 
@@ -151,10 +153,9 @@ describe('offerViaCall', () => {
     ).not.toHaveBeenCalled();
   });
 
-  // Dependents are torn down before the step they depend on, dependencies
-  // switched on before the steps that need them — no intermediate state where
-  // a dependent outlives its dependency.
-  it('enables requested steps in dependency order, disabling first', async () => {
+  // Switching off first, so a failure part-way leaves fewer stages rather
+  // than more.
+  it('enables requested steps after disabling the unwanted ones', async () => {
     arrange();
     await offerViaCall({
       ...input,
@@ -178,13 +179,34 @@ describe('offerViaCall', () => {
       steps: [
         {
           uuid: 'allocation-step',
-          step: 'allocation_decision',
+          key: 'allocation_decision',
           is_enabled: true,
           is_mandatory: true,
+          is_allocation_decision: true,
         },
       ],
     });
     await offerViaCall(input);
+
+    expect(
+      proposalProtectedCallsWorkflowStepsPartialUpdate,
+    ).not.toHaveBeenCalled();
+  });
+
+  it('leaves an award response alone', async () => {
+    arrange({
+      steps: [
+        ...seededSteps,
+        {
+          uuid: 'award-step',
+          key: 'award_response',
+          kind: 'applicant_action',
+          outcome_set: 'acceptance',
+          is_enabled: true,
+        } as any,
+      ],
+    });
+    await offerViaCall({ ...input, enabledSteps: ['administrative_check'] });
 
     expect(
       proposalProtectedCallsWorkflowStepsPartialUpdate,

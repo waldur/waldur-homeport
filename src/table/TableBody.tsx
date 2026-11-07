@@ -50,6 +50,7 @@ interface TableBodyProps extends Pick<
   | 'columnPositions'
   | 'hasOptionalColumns'
   | 'isRowExpandable'
+  | 'rowGroupHeader'
 > {
   pinnedColumns?: PinnedColumns;
   pinnedOffsets?: PinnedOffsets;
@@ -237,6 +238,7 @@ const TableCell = memo(
     const ellipsisEnabled = column.ellipsis ?? true;
     const cellClassName = classNames(
       column.className,
+      column.rowHeader && 'row-header',
       column.inlineFilter && 'has-filter',
       ellipsisEnabled && 'ellipsis',
       pinned && 'pinned',
@@ -286,10 +288,14 @@ const TableCell = memo(
       ? (e: React.MouseEvent) => e.stopPropagation()
       : undefined;
 
+    const Cell = column.rowHeader ? 'th' : 'td';
+    const scope = column.rowHeader ? 'row' : undefined;
+
     // First data column: render expander icon and text in the same cell.
     if (isFirstColumn && expander) {
       return (
-        <td
+        <Cell
+          scope={scope}
           className={cellClassName}
           onClick={handleClick}
           onMouseEnter={onCellMouseEnter}
@@ -343,19 +349,20 @@ const TableCell = memo(
               {content}
             </div>
           </div>
-        </td>
+        </Cell>
       );
     }
 
     return (
-      <td
+      <Cell
+        scope={scope}
         className={cellClassName}
         onClick={handleClick}
         onMouseEnter={onCellMouseEnter}
         style={pinStyle}
       >
         {content}
-      </td>
+      </Cell>
     );
   },
 );
@@ -717,6 +724,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
     pinnedColumns = {},
     pinnedOffsets = {},
     isRowExpandable,
+    rowGroupHeader,
   }) => {
     // Several tables can share a page, so each prefixes its details ids.
     const detailsIdPrefix = useId();
@@ -819,12 +827,25 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
       ],
     );
 
+    const fullWidth =
+      columns.length +
+      (rowActions ? 1 : 0) +
+      (enableMultiSelect || fieldType ? 1 : 0);
+
     return (
       <tbody>
         {rows.map((row, rowIndex) => {
           const canExpand = expandableRow && (isRowExpandable?.(row) ?? true);
+          const groupHeader = rowGroupHeader?.({ row, rowIndex, rows });
           return (
             <React.Fragment key={getId(row, rowIndex, rowKey)}>
+              {groupHeader ? (
+                <tr className="table-group-header">
+                  <th colSpan={fullWidth} data-testid="table-group-header">
+                    {groupHeader}
+                  </th>
+                </tr>
+              ) : null}
               {fieldType ? (
                 <Field name={fieldName} validate={validate as any}>
                   {({ input, meta }) => (
@@ -852,11 +873,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
                   }
                 >
                   <td
-                    colSpan={
-                      columns.length +
-                      (rowActions ? 1 : 0) +
-                      (enableMultiSelect || fieldType ? 1 : 0)
-                    }
+                    colSpan={fullWidth}
                     id={`${detailsIdPrefix}-details-${rowIndex}`}
                     className={expandableRowClassName}
                     data-testid="expanded-row-cell"

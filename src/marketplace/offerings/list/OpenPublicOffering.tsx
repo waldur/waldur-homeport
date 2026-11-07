@@ -4,7 +4,7 @@ import { ProviderOfferingDetails } from 'waldur-js-client';
 import { Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
-import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
+import { canViewOfferingPages } from '@/marketplace/canUseMarketplaceShopUi';
 import { useUser } from '@/workspace/hooks';
 
 import { DropdownLink } from './DropdownLink';
@@ -15,7 +15,7 @@ export const OpenPublicOffering = ({
   row: ProviderOfferingDetails;
 }) => {
   const user = useUser();
-  if (!canUseMarketplaceShopUi(user)) {
+  if (!canViewOfferingPages(user)) {
     return null;
   }
   return (

@@ -7,13 +7,15 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
-import { PropertyItem, PropertyList } from 'waldur-ui';
+import { EmptyState, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
 import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
+import { propVal } from '@/property/propertyFields';
+import { useProposalStepOwner } from '@/proposals/manage/ProposalStepCell';
 import { RateStars } from '@/proposals/proposal/create-review/RateStars';
 import { ReviewStateRenderer } from '@/proposals/review/ReviewStateRenderer';
 import { createFetcher } from '@/table/api';
@@ -47,25 +49,28 @@ const renderReviewScoreField = ({ row }) => {
 const ComplianceContent: FC<{ data: any }> = ({ data }) => {
   if (!data.questions?.length) {
     return (
-      <p className="text-quaternary">{translate('No compliance questions.')}</p>
+      <EmptyState size="sm" message={translate('No compliance questions.')} />
     );
   }
 
   return (
-    <PropertyList>
-      {data.questions.map((question) => (
-        <PropertyItem
-          key={question.uuid}
-          label={question.description}
-          value={
-            <ParsedAnswer
-              question={question as any}
-              answer={question.existing_answer as any}
-            />
-          }
-        />
-      ))}
-    </PropertyList>
+    // Inset as the Reviews tab's rows are, inside the tabs' shared frame.
+    <div className="px-5">
+      <PropertyList>
+        {data.questions.map((question) => (
+          <PropertyItem
+            key={question.uuid}
+            label={question.description}
+            value={
+              <ParsedAnswer
+                question={question as any}
+                answer={question.existing_answer as any}
+              />
+            }
+          />
+        ))}
+      </PropertyList>
+    </div>
   );
 };
 
@@ -73,6 +78,12 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
   row,
 }) => {
   const filter = useMemo(() => ({ proposal_uuid: row.uuid }), [row]);
+  // Who owes the next move on the step the list names.
+  const owner = useProposalStepOwner(
+    row.call_uuid,
+    row.workflow_step,
+    row.decision_held,
+  );
   const tableProps = useTable({
     table: 'ProposalReviewsList' + row.uuid,
     fetchData: createFetcher(proposalReviewsList, { parser: dataParser }),
@@ -117,7 +128,8 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
     },
     {
       title: translate('Reviewer'),
-      render: ({ row }) => row.reviewer_full_name,
+      render: ({ row }) =>
+        row.reviewer_full_name || row.anonymous_reviewer_name,
     },
     {
       title: translate('Status'),
@@ -129,6 +141,9 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
     },
   ];
 
+  const stage = (row.status_labels ?? [])
+    .map((entry) => entry.label)
+    .filter(Boolean);
   const reviewsTable = (
     <Table
       {...tableProps}
@@ -148,6 +163,13 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
     <ExpandableContainer>
       <PropertyList variant="summary">
         <PropertyItem
+          label={translate('Current stage')}
+          value={propVal.list(stage)}
+        />
+        {owner ? (
+          <PropertyItem label={translate('Responsible')} value={owner} />
+        ) : null}
+        <PropertyItem
           label={translate('Project summary')}
           value={row.project_summary}
           className="mb-2.5"
@@ -158,8 +180,9 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
         reviewsTable
       ) : (
         <EmbeddedTabs
+          // One frame round the strip and its table, as other expanded rows.
+          framed
           defaultValue="reviews"
-          listClassName="mb-3"
           tabs={[
             {
               key: 'reviews',
@@ -175,6 +198,7 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
               content: <ComplianceContent data={checklistData} />,
             },
           ]}
+          // As tall as its tallest tab, so switching tabs does not jump.
           keepTallest
         />
       )}

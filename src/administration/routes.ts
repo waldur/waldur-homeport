@@ -1087,6 +1087,38 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-call-templates',
+    url: 'call-templates/',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('./call-templates/AdministrationCallTemplates').then((module) => ({
+        default: module.AdministrationCallTemplates,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Call templates'),
+      permissions: [isStaff],
+      feature: MarketplaceFeatures.show_call_management_functionality,
+    },
+  },
+
+  {
+    name: 'admin-reviewer-registry',
+    url: 'reviewer-registry/',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('./reviewer-registry/ReviewerRegistryList').then((module) => ({
+        default: module.ReviewerRegistryList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Reviewer registry'),
+      permissions: [isStaff],
+      feature: MarketplaceFeatures.show_call_management_functionality,
+    },
+  },
+
+  {
     name: 'admin-matrix-chat',
     url: 'matrix-chat/?tab&setting',
     params: { tab: { dynamic: true }, setting: { dynamic: true } },

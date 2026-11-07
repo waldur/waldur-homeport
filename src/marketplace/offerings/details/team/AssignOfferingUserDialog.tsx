@@ -17,7 +17,7 @@ import { Role } from '@/permissions/types';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
 import { UserListOptionInline } from '@/project/team/UserListOptionInline';
 
-import { useOfferingRoles } from './useOfferingRoles';
+import { offeringRoleSummary, useOfferingRoles } from './useOfferingRoles';
 
 interface AssignOfferingUserResolve {
   offering: Offering;
@@ -34,6 +34,20 @@ const getOptionLabel = (option) =>
   option.email
     ? (option.full_name || option.username) + ` (${option.email})`
     : option.full_name || option.username;
+
+const formatRoleOption = (role: Role, { context }) =>
+  context === 'value' ? (
+    role.description || role.name
+  ) : (
+    <div>
+      <div className="font-medium">{role.description || role.name}</div>
+      {offeringRoleSummary(role) && (
+        <small className="text-tertiary whitespace-normal">
+          {offeringRoleSummary(role)}
+        </small>
+      )}
+    </div>
+  );
 
 /**
  * Assign an existing user a role on the offering. The role list comes from the
@@ -75,7 +89,7 @@ export const AssignOfferingUserDialog: FC<{
       }
       initialValues={initialValues}
     >
-      {({ handleSubmit, submitting, invalid }) => (
+      {({ handleSubmit, submitting, invalid, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Add member')}
@@ -116,7 +130,20 @@ export const AssignOfferingUserDialog: FC<{
                 options={roles}
                 getOptionValue={(option) => option.uuid}
                 getOptionLabel={(option) => option.description || option.name}
+                formatOptionLabel={formatRoleOption}
+                description={values.role && offeringRoleSummary(values.role)}
               />
+            ) : roles.length === 1 ? (
+              // One role is no choice, but the person granting it still
+              // needs to see what they grant.
+              <FormGroup
+                label={translate('Role')}
+                description={offeringRoleSummary(roles[0])}
+              >
+                <p className="mb-0 font-medium" data-testid="only-role">
+                  {roles[0].description || roles[0].name}
+                </p>
+              </FormGroup>
             ) : roles.length === 0 && !rolesLoading ? (
               <FormGroup label={translate('Role')} required>
                 <p className="text-quaternary mb-0">

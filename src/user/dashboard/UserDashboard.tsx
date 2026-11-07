@@ -24,6 +24,7 @@ import {
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { useModal } from '@/modal/actions';
+import { MyWorkCards } from '@/proposals/review/MyWorkCards';
 import { router } from '@/router';
 import { useUser } from '@/workspace/hooks';
 
@@ -185,6 +186,8 @@ export const UserDashboard: FC = () => {
 
   return (
     <>
+      <MyWorkCards />
+
       {(hasResources || showOtherWidgets) && (
         <div className="grid grid-cols-1 gap-x-5 gap-y-3 mb-4 md:grid-cols-3">
           {hasResources && (

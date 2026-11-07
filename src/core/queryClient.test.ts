@@ -70,4 +70,20 @@ describe('queryClient global error handler', () => {
 
     expect(router.stateService.go).not.toHaveBeenCalled();
   });
+
+  it('leaves a status the query explains itself to it', async () => {
+    await failQuery(apiError(404), { handlesErrorStatuses: [404] });
+
+    expect(router.stateService.go).not.toHaveBeenCalled();
+  });
+
+  it('still redirects every other redirecting status of that query', async () => {
+    await failQuery(apiError(428), { handlesErrorStatuses: [404] });
+
+    expect(router.stateService.go).toHaveBeenCalledWith(
+      'profile-manage',
+      undefined,
+      undefined,
+    );
+  });
 });

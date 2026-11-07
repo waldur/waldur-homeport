@@ -18,7 +18,10 @@ const ShowReviewCommentsDialog = ({
   return (
     <ModalDialog
       title={translate('Comments by {reviewer}', {
-        reviewer: review.reviewer_full_name,
+        reviewer:
+          review.reviewer_full_name ||
+          review.anonymous_reviewer_name ||
+          translate('Reviewer'),
       })}
       iconNode={<InfoIcon weight="bold" />}
     >

@@ -1,6 +1,9 @@
 import { ComponentType, ReactNode } from 'react';
 
-export interface PageBarTab<T = any> {
+import type { TabCountProps } from 'waldur-ui';
+
+/** `count`, `countVariant` and `countLabel` draw a count after the title. */
+export interface PageBarTab<T = any> extends TabCountProps {
   key: string;
   title: ReactNode;
   component?: ComponentType<T>;
@@ -10,5 +13,11 @@ export interface PageBarTab<T = any> {
   /** Explains why the tab is disabled. Shown as a tooltip on the tab. */
   disabledReason?: ReactNode;
   visible?: boolean;
+  /**
+   * Params the tab's link sets besides `tab`. The link keeps the page's
+   * other params, so a tab that leaves a param of another tab behind sets it
+   * to `null` here.
+   */
+  linkParams?: Record<string, unknown>;
   children?: Omit<PageBarTab<T>, 'children' | 'defaultKey'>[];
 }

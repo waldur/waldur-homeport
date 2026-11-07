@@ -61,6 +61,12 @@ interface CoreConfiguration {
   SHOW_OFFERING_COVER_IMAGE?: boolean;
   RESTRICTED_OFFERING_VISIBILITY_MODE?: OfferingVisibilityMode;
   SERVICE_ACCESS_MODE?: ServiceAccessMode;
+  /** Reviewer settings: the UI hides what they turn off. */
+  REVIEWER_PROFILES_ENABLED?: boolean;
+  REVIEWER_PUBLICATION_REQUIRES_APPROVAL?: boolean;
+  COI_DETECTION_ENABLED?: boolean;
+  COI_DISCLOSURE_REQUIRED?: boolean;
+  AUTOMATED_MATCHING_ENABLED?: boolean;
   MATOMO_URL_BASE: string;
   MATOMO_SITE_ID: number;
   MASTERMIND_URL: string;

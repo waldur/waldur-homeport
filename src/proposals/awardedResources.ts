@@ -7,7 +7,6 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
-import { translate } from '@/i18n';
 import {
   getOptionKeys,
   OfferingOptionsLike,
@@ -16,8 +15,11 @@ import { formatOptionValue } from '@/marketplace/resources/options/OptionValue';
 import { PREPAID_DURATION_MONTHS } from '@/proposals/prepaidDuration';
 import { getRowLimits } from '@/proposals/requestedResourceCost';
 import { getRequestOptionSummary } from '@/proposals/requestedResourceOptions';
-import { HELD_DECISION_STEP } from '@/proposals/roundLifecycle';
 import { Proposal } from '@/proposals/types';
+import {
+  isAllocationDecisionStep,
+  isAwardResponseStep,
+} from '@/proposals/workflow/constants';
 
 export const awardedResourcesKey = (proposalUuid: string) =>
   ['proposal-awarded-resources', proposalUuid] as const;
@@ -65,8 +67,9 @@ export const useAwardedResources = (proposalUuid: string, enabled: boolean) =>
  */
 export const isAwardDecisionOpen = (
   proposal: Pick<Proposal, 'decision_held'>,
-  activeStep: Pick<ProposalWorkflowStepInstance, 'step'> | undefined,
-) => activeStep?.step === HELD_DECISION_STEP && proposal.decision_held !== true;
+  activeStep:
+    Pick<ProposalWorkflowStepInstance, 'is_allocation_decision'> | undefined,
+) => isAllocationDecisionStep(activeStep) && proposal.decision_held !== true;
 
 /**
  * Whether the viewer is offered the award editor: a call manager (or staff)
@@ -75,7 +78,8 @@ export const isAwardDecisionOpen = (
 export const canEditAward = (
   canDecide: boolean,
   proposal: Pick<Proposal, 'decision_held'>,
-  activeStep: Pick<ProposalWorkflowStepInstance, 'step'> | undefined,
+  activeStep:
+    Pick<ProposalWorkflowStepInstance, 'is_allocation_decision'> | undefined,
 ) => canDecide && isAwardDecisionOpen(proposal, activeStep);
 
 /**
@@ -89,9 +93,27 @@ export const hasReachedAllocationDecision = (
   proposal.state === 'accepted' ||
   (workflowStates ?? []).some(
     (s) =>
-      (s.step === 'allocation_decision' || s.step === 'award_response') &&
+      (isAllocationDecisionStep(s) || isAwardResponseStep(s)) &&
       s.status !== 'pending' &&
       s.status !== 'skipped',
+  );
+
+/**
+ * Whether the award has been released to the applicant: the allocation
+ * decision taken, or the applicant asked to respond to it. Until then the
+ * backend refuses the applicant team the award.
+ */
+export const hasReleasedAllocationDecision = (
+  proposal: Pick<Proposal, 'state'>,
+  workflowStates: ProposalWorkflowStepInstance[] | undefined,
+) =>
+  proposal.state === 'accepted' ||
+  (workflowStates ?? []).some(
+    (s) =>
+      (isAllocationDecisionStep(s) && s.status === 'completed') ||
+      (isAwardResponseStep(s) &&
+        s.status !== 'pending' &&
+        s.status !== 'skipped'),
   );
 
 /** The award section's anchor, which the page's progress rail links to. */
@@ -106,27 +128,6 @@ export const isAwardSectionShown = (
   awards: AwardedResource[] | null | undefined,
   editable: boolean,
 ) => Array.isArray(awards) && (editable || awards.length > 0);
-
-/**
- * The page's progress rail with the award section in it, right after the
- * request it answers, when the section is shown.
- */
-export const withAwardedResourcesStep = <T extends { id: string }>(
-  steps: T[],
-  shown: boolean,
-): Array<T | { id: string; label: string }> => {
-  if (!shown) {
-    return steps;
-  }
-  const step = {
-    id: AWARDED_RESOURCES_SECTION_ID,
-    label: translate('Awarded resources'),
-  };
-  const after = steps.findIndex((s) => s.id === 'step-resource-requests');
-  return after === -1
-    ? [...steps, step]
-    : [...steps.slice(0, after + 1), step, ...steps.slice(after + 1)];
-};
 
 type AwardChange = 'unchanged' | 'changed' | 'moved' | 'added' | 'removed';
 

@@ -62,10 +62,20 @@ export const RequestEndDateChangeAction: ActionItemType = ({
     user?.is_staff ||
     user?.is_support;
 
-  const resourceUuid = getMarketplaceResourceUuid(resource);
-  const offering = useResourceOffering(resourceUuid, !canChangeDirectly);
+  // Asking is a permission of its own, as for limit change requests.
+  const canRequest = hasPermission(user, {
+    permission: PermissionEnum.REQUEST_RESOURCE_END_DATE_CHANGE,
+    projectId: resource.project_uuid,
+    customerId: resource.customer_uuid,
+  });
 
-  if (canChangeDirectly || !resourceUuid) {
+  const resourceUuid = getMarketplaceResourceUuid(resource);
+  const offering = useResourceOffering(
+    resourceUuid,
+    !canChangeDirectly && canRequest,
+  );
+
+  if (canChangeDirectly || !canRequest || !resourceUuid) {
     return null;
   }
 

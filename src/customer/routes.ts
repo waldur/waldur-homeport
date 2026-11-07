@@ -167,6 +167,26 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'organization.call-results',
+    url: 'call-results/',
+    component: lazyComponent(() =>
+      import('@/proposals/results/CallResultsPage').then((module) => ({
+        default: module.CallResultsPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Call results'),
+      priority: 170,
+      // The published results of the calls this organisation runs, for whoever
+      // reads them here (an organisation reader, say).
+      permissions: [
+        (state) => Boolean(getCustomer(state)?.call_managing_organization_uuid),
+        userHasCustomerPermission(PermissionEnum.VIEW_CALL_RESULTS),
+      ],
+    },
+  },
+
+  {
     name: 'organization.issues',
     url: 'issues/',
     component: lazyComponent(() =>

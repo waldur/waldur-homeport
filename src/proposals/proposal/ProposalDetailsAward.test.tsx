@@ -15,6 +15,9 @@ vi.mock('../workflow/queries', () => ({
     Promise.resolve([
       {
         step: 'allocation_decision',
+        kind: 'decision',
+        outcome_set: 'approval',
+        is_allocation_decision: true,
         status: 'completed',
         outcome: 'approved',
       },
@@ -49,7 +52,8 @@ vi.mock('@/proposals/ProposalCostTotal', () => ({
     <div>{title ?? 'Summary of the request'}</div>
   ),
 }));
-vi.mock('./AllocationOutcomeSection', () => ({
+vi.mock('./AllocationOutcomeSection', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./AllocationOutcomeSection')>()),
   AllocationStartBanner: () => null,
   AllocationOutcomeSection: ({ awardRows }: { awardRows?: unknown[] }) =>
     awardRows ? <div>Outcome with the award</div> : null,
@@ -70,11 +74,15 @@ vi.mock('./create/ComplianceSummary', () => ({
 vi.mock('../team/ProposalUsersListSummary', () => ({
   ProposalUsersListSummary: () => null,
 }));
-vi.mock('./StepChecklistSection', () => ({
+vi.mock('./StepChecklistSection', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./StepChecklistSection')>()),
   StepChecklistSection: () => null,
 }));
-vi.mock('./TechnicalAssessmentSection', () => ({
-  TechnicalAssessmentSection: () => null,
+vi.mock('./contributions/StepContributionsSection', async (importOriginal) => ({
+  ...(await importOriginal<
+    typeof import('./contributions/StepContributionsSection')
+  >()),
+  StepContributionsSection: () => null,
 }));
 vi.mock('./WorkflowStepActions', () => ({
   WorkflowStepActions: () => null,
@@ -132,7 +140,7 @@ describe('ProposalDetails award while the decision is held', () => {
   it('keeps the award off the Applicant tab', async () => {
     renderDetails('proposals.manage-proposal');
 
-    expect(await screen.findByText('Progress')).toBeInTheDocument();
+    expect(await screen.findByText('On this page')).toBeInTheDocument();
     await waitFor(() =>
       expect(screen.getByText('Summary of the request')).toBeInTheDocument(),
     );

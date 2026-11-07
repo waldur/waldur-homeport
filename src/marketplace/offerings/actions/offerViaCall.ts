@@ -11,6 +11,7 @@ import {
 } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
+import { isAwardResponseStep } from '@/proposals/workflow/constants';
 
 /**
  * Everything an offering needs before an applicant can ask for it.
@@ -40,8 +41,8 @@ export interface OfferViaCallInput {
   /** Priced against this. `activate` refuses an accepted offering without one. */
   planUuid: string;
   /**
-   * Workflow steps to leave enabled, on top of the mandatory allocation
-   * decision. Empty means the request goes straight to a single approve or
+   * Keys of the workflow steps to leave enabled, on top of the mandatory
+   * allocation decision. Empty means the request goes straight to a single approve or
    * reject, which is what this action is for; anything more is a review
    * process the operator asked for explicitly.
    */
@@ -57,13 +58,6 @@ export type OfferViaCallStep =
   | 'offering'
   | 'accept'
   | 'activate';
-
-/**
- * Provisioned by the allocation decision's `include_award_response` flag rather
- * than on its own, and the serializer refuses a direct write — so it is never
- * part of what this action reconciles.
- */
-const AWARD_RESPONSE_STEP = 'award_response';
 
 const apiUrl = (path: string, uuid: string) =>
   `${ENV.apiEndpoint}api/${path}/${uuid}/`;
@@ -86,31 +80,30 @@ const ensureManagingOrganisation = async (customerUuid: string) => {
 /**
  * Brings the call's seeded steps in line with what was asked for.
  *
- * The backend seeds every catalogue step on creation and enables the
+ * The backend seeds a new call with its default steps and enables the
  * call-manager-owned ones — today the administrative check as well as the
  * allocation decision — so leaving it alone would hand back a two-stage call
  * nobody asked for. Only the differences are written.
  *
- * Mandatory steps are enabled whatever the caller says: the API refuses to
- * disable one, and `activate` refuses a call missing one.
+ * The allocation decision is enabled whatever the caller says: the API
+ * refuses to disable it, and `activate` refuses a call without it. An award
+ * response is never part of what this action reconciles.
  */
 const applyWorkflowSteps = async (callUuid: string, enabled: string[]) => {
   const steps = await proposalProtectedCallsWorkflowStepsList({
     path: { uuid: callUuid },
   });
-  // The endpoint returns the steps in catalogue order, which is also
-  // dependency order — expert review before the panel review that needs it.
   const rows = ((steps.data as any[]) || []).filter(
-    (row) => row.step !== AWARD_RESPONSE_STEP,
+    (row) => !isAwardResponseStep(row),
   );
-  const wanted = (row: any) => row.is_mandatory || enabled.includes(row.step);
+  const wanted = (row: any) =>
+    row.is_allocation_decision || enabled.includes(row.key);
   const changed = rows.filter((row) => Boolean(row.is_enabled) !== wanted(row));
 
-  // Sequential, and dependents are torn down before the step they depend on
-  // while dependencies are switched on before the steps that need them — an
-  // intermediate state where a dependent outlives its dependency is rejected.
+  // Sequential, switching off before switching on, so a failure part-way
+  // leaves fewer stages rather than more.
   const ordered = [
-    ...changed.filter((row) => !wanted(row)).reverse(),
+    ...changed.filter((row) => !wanted(row)),
     ...changed.filter(wanted),
   ];
   for (const row of ordered) {

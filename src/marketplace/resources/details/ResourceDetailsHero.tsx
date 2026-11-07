@@ -12,9 +12,11 @@ import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { translate } from '@/i18n';
 import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { INSTANCE_TYPE, VOLUME_TYPE } from '@/openstack/constants';
+import { isReadOnlyProjectReader } from '@/permissions/isReadOnlyProjectReader';
 import { ResourceAccessButton } from '@/resource/ResourceAccessButton';
 import { formatResourceType } from '@/resource/utils';
 import { ActionsUnavailable } from '@/table/ActionsDropdown';
+import { useUser } from '@/workspace/hooks';
 
 import { ProviderResourceActions } from '../list/ProviderResourceActions';
 import { OrderErredView } from '../resource-pending/OrderErredView';
@@ -54,6 +56,18 @@ export const ResourceDetailsHero = ({
 }) => {
   const rpOnlyViewer = useIsResourceProjectOnlyViewer(resource);
   const isRPOnly = !providerView && rpOnlyViewer;
+  // A call manager reading what their call allocated holds no role that
+  // could run any of these actions, so they are left out rather than disabled.
+  const user = useUser();
+  const isCallReader =
+    !providerView &&
+    !user?.permissions?.some(
+      (p) => p.scope_type === 'resource' && p.scope_uuid === resource.uuid,
+    ) &&
+    isReadOnlyProjectReader(user, {
+      uuid: resource.project_uuid,
+      customer_uuid: resource.customer_uuid,
+    });
   return (
     <div
       className={offering.state === 'Unavailable' ? 'disabled-view' : undefined}
@@ -112,7 +126,9 @@ export const ResourceDetailsHero = ({
           quickActions={
             <div className="flex flex-col flex-wrap gap-1.5 sm:min-w-[120px]">
               <ResourceAccessButton resource={resource} offering={offering} />
+              {/* A reader of the call's projects acts on nothing here. */}
               {!isRPOnly &&
+                !isCallReader &&
                 (providerView ? (
                   <ProviderResourceActions
                     resource={resource}

@@ -39,3 +39,17 @@ export const PublicCallsPage: FunctionComponent<PublicCallsPageProps> = ({
     </>
   );
 };
+
+/** The All calls tab: the page's heading comes from CallsForProposalsLayout. */
+export const AllCallsPage: FunctionComponent = () => {
+  const {
+    params: { offering_uuid },
+  } = useCurrentStateAndParams();
+  return (
+    <PublicCallsList
+      offering_uuid={offering_uuid}
+      title={translate('All calls')}
+      hideTitle
+    />
+  );
+};

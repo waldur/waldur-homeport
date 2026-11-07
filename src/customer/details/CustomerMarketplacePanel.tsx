@@ -69,9 +69,9 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
     );
   } else {
     return (
+      // Untitled: the page's tab already names it.
       <PropertyCard
         bordered
-        title={translate('Details')}
         actions={
           serviceProvider && user.is_staff ? (
             <DisableServiceProviderButton

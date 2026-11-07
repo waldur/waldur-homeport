@@ -93,7 +93,8 @@ const VatRateValue: FC<{ customer: CustomerEditPanelProps['customer'] }> = ({
 export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
   return (
     <EditFieldProvider scope={props.customer} callback={props.callback}>
-      <PropertyCard bordered title={translate('Details')} className="mb-4">
+      {/* Untitled: the page's tab already names it; Tax below is a part. */}
+      <PropertyCard bordered className="mb-4">
         <PropertyList hideActions={!props.canUpdate}>
           <DateEditField
             name="accounting_start_date"

@@ -314,63 +314,19 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
     },
     proposals: {
       title: translate('Proposals'),
+      // Staff and support read every call; a call's managers have the same
+      // reports in call management.
+      permission: isStaffOrSupport,
       feature: MarketplaceFeatures.show_call_management_functionality,
       reports: [
         {
-          key: 'call-performance',
-          title: translate('Call performance'),
+          key: 'call-reports',
+          title: translate('Call reports'),
           description: translate(
-            'Submission statistics and acceptance rates across calls',
+            'Proposals, workflow, reviewers, rounds and budgets across every call',
           ),
-          state: 'reporting-call-performance',
-          analytics: ['what-if', 'why-so'],
-          analyticsState: 'reporting-call-performance-analytics',
-          isExperimental: true,
-        },
-        {
-          key: 'reporting-call-performance-analytics',
-          title: translate('Call Performance Analysis'),
-          description: translate(
-            'Statistical analysis of call submissions and acceptance patterns',
-          ),
-          state: 'reporting-call-performance-analytics',
-          isHidden: true,
-        },
-        {
-          key: 'review-progress',
-          title: translate('Review progress'),
-          description: translate('Reviewer workload and completion metrics'),
-          state: 'reporting-review-progress',
-          analytics: ['what-if', 'why-so'],
-          analyticsState: 'reporting-review-progress-analytics',
-          isExperimental: true,
-        },
-        {
-          key: 'reporting-review-progress-analytics',
-          title: translate('Review Progress Analysis'),
-          description: translate(
-            'Analysis of reviewer workload and review completion timelines',
-          ),
-          state: 'reporting-review-progress-analytics',
-          isHidden: true,
-        },
-        {
-          key: 'resource-demand',
-          title: translate('Resource demand'),
-          description: translate('Resources requested through proposals'),
-          state: 'reporting-resource-demand',
-          analytics: ['what-if', 'why-so'],
-          analyticsState: 'reporting-resource-demand-analytics',
-          isExperimental: true,
-        },
-        {
-          key: 'reporting-resource-demand-analytics',
-          title: translate('Resource Demand Analysis'),
-          description: translate(
-            'Forecasting resource demand based on proposal trends',
-          ),
-          state: 'reporting-resource-demand-analytics',
-          isHidden: true,
+          // The category's own page: it holds one report, so its tab opens it.
+          state: 'reporting-proposals-list',
         },
       ],
     },

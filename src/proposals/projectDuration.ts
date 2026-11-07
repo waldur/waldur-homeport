@@ -13,8 +13,10 @@ import { formatPrepaidMonths } from './prepaidDuration';
  * is the only place the length is actually resolved: a call that fixes the
  * duration fixes it for every project it awards, and that figure is also the
  * ceiling for any prepaid subscription requested under the call (see
- * getPrepaidMonthsCap). Only a call that fixes nothing lets the longest
- * subscription requested decide, since the project cannot end before it does.
+ * getPrepaidMonthsCap). A call that offers a list of lengths lets the length
+ * chosen from it decide (the applicant's, then the award's). Only a call that
+ * does neither lets the longest subscription requested decide, since the
+ * project cannot end before it does.
  * A length in months and a length in days are never converted into each
  * other: a day count is true only relative to the date it was measured from,
  * and the allocation date is unknown while the proposal is being written.
@@ -27,9 +29,13 @@ export type ProjectDuration = { months: number } | { days: number } | null;
 export const getProjectDuration = (
   prepaidMonths: number | null | undefined,
   fixedDays?: number | null,
+  chosenMonths?: number | null,
 ): ProjectDuration => {
   if (fixedDays && fixedDays > 0) {
     return { days: fixedDays };
+  }
+  if (chosenMonths && chosenMonths > 0) {
+    return { months: chosenMonths };
   }
   if (prepaidMonths && prepaidMonths > 0) {
     return { months: prepaidMonths };

@@ -1,6 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
 import {
   proposalProposalsAddUser,
   proposalProposalsDeleteUser,
+  proposalProposalsListUsersList,
   proposalProtectedCallsAddUser,
   proposalProtectedCallsDeleteUser,
 } from 'waldur-js-client';
@@ -33,3 +35,28 @@ export const deleteTeamUser = (
   scopeType === 'proposal'
     ? proposalProposalsDeleteUser({ path: { uuid: scopeUuid }, body })
     : proposalProtectedCallsDeleteUser({ path: { uuid: scopeUuid }, body });
+
+/** Whether a failed team request was refused for lack of access. */
+export const isAccessDenied = (error: unknown): boolean =>
+  (error as any)?.response?.status === 403;
+
+/**
+ * Whether the viewer may read the proposal's team. Some who read the
+ * proposal do not: an offering manager assessing a requested offering, say.
+ * Their 403 means "no access", not an error, so it does not send the whole
+ * page to the no-permission screen. Unknown (true) until answered.
+ */
+export const useProposalTeamReadable = (proposalUuid?: string): boolean => {
+  const { error } = useQuery({
+    queryKey: ['ProposalTeamReadable', proposalUuid],
+    queryFn: () =>
+      proposalProposalsListUsersList({
+        path: { uuid: proposalUuid },
+        query: { page_size: 1 },
+      }).then(() => true),
+    enabled: Boolean(proposalUuid),
+    refetchOnWindowFocus: false,
+    meta: { skipGlobalErrorRedirect: true },
+  });
+  return !isAccessDenied(error);
+};

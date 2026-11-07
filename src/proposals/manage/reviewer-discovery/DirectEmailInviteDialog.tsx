@@ -3,7 +3,7 @@ import { Form } from 'react-final-form';
 import { proposalProtectedCallsInviteByEmail } from 'waldur-js-client';
 
 import { composeValidators, email, required } from '@/core/validators';
-import { SubmitButton, TextGroup, StringGroup } from '@/form';
+import { NumberGroup, SubmitButton, TextGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -23,7 +23,21 @@ interface DirectEmailInviteDialogProps {
 interface FormValues {
   email: string;
   invitation_message?: string;
+  max_assignments?: number;
 }
+
+// The backend's default workload limit for a new pool member.
+const DEFAULT_MAX_ASSIGNMENTS = 5;
+
+// Left empty, the backend applies its default.
+const atLeastOne = (value?: number | string | null) =>
+  value !== undefined && value !== null && value !== '' && Number(value) < 1
+    ? translate('Must be at least 1.')
+    : undefined;
+
+const INITIAL_VALUES: Partial<FormValues> = {
+  max_assignments: DEFAULT_MAX_ASSIGNMENTS,
+};
 
 export const DirectEmailInviteDialog = ({
   resolve,
@@ -37,6 +51,9 @@ export const DirectEmailInviteDialog = ({
         body: {
           email: values.email,
           invitation_message: values.invitation_message || undefined,
+          max_assignments: values.max_assignments
+            ? Number(values.max_assignments)
+            : undefined,
         },
       }),
     errorMessage: translate('Unable to send invitation.'),
@@ -50,6 +67,7 @@ export const DirectEmailInviteDialog = ({
 
   return (
     <Form
+      initialValues={INITIAL_VALUES}
       onSubmit={async (values: FormValues) => {
         try {
           await inviteMutation.mutateAsync(values);
@@ -88,6 +106,16 @@ export const DirectEmailInviteDialog = ({
                 placeholder={translate('reviewer@example.com')}
                 label={translate('Email address')}
                 required
+              />
+
+              <NumberGroup
+                name="max_assignments"
+                min={1}
+                validate={atLeastOne}
+                label={translate('Maximum assignments')}
+                description={translate(
+                  'The maximum number of proposals that can be assigned to this reviewer. It can be changed in the Reviewer capacity tab once they accept.',
+                )}
               />
 
               <TextGroup

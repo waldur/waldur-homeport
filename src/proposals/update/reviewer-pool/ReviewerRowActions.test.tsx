@@ -23,6 +23,7 @@ const renderActions = (status: string, canManage = true, refetch = vi.fn()) =>
   renderWithProviders(
     <ReviewerRowActions
       row={row(status)}
+      call={{ uuid: 'call-1' } as any}
       refetch={refetch}
       canManage={canManage}
     />,

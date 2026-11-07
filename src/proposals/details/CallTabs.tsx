@@ -10,6 +10,8 @@ import { useUser } from '@/workspace/hooks';
 
 import { Call } from '../types';
 import { canAccessCallManagement, canOpenCallEditPage } from '../utils';
+import { summaryText } from '../workflow-check/findings';
+import { useCallWorkflowCheck } from '../workflow-description/queries';
 
 export const CallTabs = ({ call }: { call: Call }) => {
   const { state } = useCurrentStateAndParams();
@@ -25,6 +27,13 @@ export const CallTabs = ({ call }: { call: Call }) => {
     [user, call],
   );
   const canEdit = useMemo(() => canOpenCallEditPage(user, call), [user, call]);
+  // The Validation tab counts what blocks the call: errors and warnings,
+  // red while there is an error. The number alone does not say which, so
+  // the sentence ("2 errors, 5 warnings") is read after the title and shown
+  // on hover.
+  const { data: check } = useCallWorkflowCheck(call.uuid, canEdit && canManage);
+  const blocking = check ? check.summary.error + check.summary.warning : 0;
+  const checkSummary = check ? summaryText(check.summary) : null;
 
   if (!canEdit) return null;
 
@@ -60,6 +69,20 @@ export const CallTabs = ({ call }: { call: Call }) => {
                 key: 'protected-call.manage',
                 title: translate('Manage'),
                 link: <Link state="protected-call.manage" params={params} />,
+                className: 'text-center min-w-[60px]',
+              },
+              {
+                key: 'protected-call.validation',
+                title: translate('Validation'),
+                count: blocking || undefined,
+                countVariant: check?.summary.error
+                  ? ('danger' as const)
+                  : ('warning' as const),
+                countLabel: checkSummary ?? undefined,
+                tooltip: checkSummary,
+                link: (
+                  <Link state="protected-call.validation" params={params} />
+                ),
                 className: 'text-center min-w-[60px]',
               },
             ]

@@ -5,6 +5,7 @@ import { ProposalDetailsOverviewStep } from '../../create/ProposalDetailsOvervie
 import { FormResourceRequestsStep } from '../../create/resource-requests-step/FormResourceRequestsStep';
 
 import { FormProjectDetailsStep } from './FormProjectDetailsStep';
+import { ReviewActivityStep } from './ReviewActivityStep';
 import { ReviewComplianceStep } from './ReviewComplianceStep';
 import { ReviewTeamStep } from './ReviewTeamStep';
 
@@ -33,6 +34,11 @@ export const createReviewSteps = (
       label: translate('Project team'),
       id: 'step-team',
       component: ReviewTeamStep,
+    },
+    {
+      label: translate('Activity'),
+      id: 'step-activity',
+      component: ReviewActivityStep,
     },
   ];
 

@@ -15,6 +15,7 @@ describe('createReviewSteps', () => {
       'step-project',
       'step-resource-requests',
       'step-team',
+      'step-activity',
     ]);
   });
 
@@ -25,6 +26,7 @@ describe('createReviewSteps', () => {
       'step-compliance',
       'step-resource-requests',
       'step-team',
+      'step-activity',
     ]);
   });
 });

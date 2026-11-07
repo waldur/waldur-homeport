@@ -14,11 +14,13 @@ import { Badge, PropertyItem } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { ExternalLink } from '@/core/ExternalLink';
+import { Link } from '@/core/Link';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { OrcidLogo } from '@/core/OrcidLogo';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { propVal } from '@/property/propertyFields';
+import { Call } from '@/proposals/types';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -28,6 +30,8 @@ import { renderFieldOrDash } from '@/table/utils';
 
 interface ReviewerPoolExpandableRowProps {
   row: CallReviewerPool;
+  /** The call the pool belongs to: its proposals open in its organization. */
+  call: Call;
 }
 
 const AffiliationsTable: FC<{ affiliations: ReviewerAffiliation[] }> = ({
@@ -53,7 +57,11 @@ const AffiliationsTable: FC<{ affiliations: ReviewerAffiliation[] }> = ({
       columns={[
         {
           title: translate('Organization'),
-          render: ({ row }) => row.organization_name_display,
+          render: ({ row }) => (
+            <span className="font-medium text-primary">
+              {row.organization_name_display}
+            </span>
+          ),
         },
         {
           title: translate('Position'),
@@ -170,7 +178,7 @@ const SeverityBadge: FC<{ severity: string; display: string }> = ({
       case 'potential':
         return 'info';
       default:
-        return 'secondary';
+        return 'neutral';
     }
   }, [severity]);
 
@@ -189,15 +197,14 @@ const StatusBadge: FC<{ status: string; display: string }> = ({
     switch (status) {
       case 'confirmed':
         return 'danger';
-      case 'dismissed':
-        return 'secondary';
       case 'waived':
         return 'warning';
       case 'recused':
         return 'info';
+      case 'dismissed':
       case 'pending':
       default:
-        return 'primary';
+        return 'neutral';
     }
   }, [status]);
 
@@ -208,7 +215,10 @@ const StatusBadge: FC<{ status: string; display: string }> = ({
   );
 };
 
-const COITable: FC<{ conflicts: ConflictOfInterest[] }> = ({ conflicts }) => {
+const COITable: FC<{ conflicts: ConflictOfInterest[]; call: Call }> = ({
+  conflicts,
+  call,
+}) => {
   const fetchData = useMemo(
     () => createClientPaginatedFetcher(conflicts),
     [conflicts],
@@ -237,7 +247,20 @@ const COITable: FC<{ conflicts: ConflictOfInterest[] }> = ({ conflicts }) => {
       columns={[
         {
           title: translate('Proposal'),
-          render: ({ row }) => row.proposal_name,
+          render: ({ row }) => (
+            <Link
+              state="call-management.proposal-details"
+              params={{
+                uuid: call.customer_uuid,
+                proposal_uuid: row.proposal_uuid,
+              }}
+              label={row.proposal_name}
+            />
+          ),
+        },
+        {
+          title: translate('Proposal slug'),
+          render: ({ row }) => <>{renderFieldOrDash(row.proposal_slug)}</>,
         },
         {
           title: translate('Type'),
@@ -268,6 +291,7 @@ const COITable: FC<{ conflicts: ConflictOfInterest[] }> = ({ conflicts }) => {
 
 export const ReviewerPoolExpandableRow: FC<ReviewerPoolExpandableRowProps> = ({
   row,
+  call,
 }) => {
   // Fetch reviewer profile if available
   const { data: profile, isLoading: profileLoading } = useQuery({
@@ -396,7 +420,7 @@ export const ReviewerPoolExpandableRow: FC<ReviewerPoolExpandableRowProps> = ({
             key: 'coi',
             title: translate('COI'),
             count: coiCount,
-            content: <COITable conflicts={conflicts} />,
+            content: <COITable conflicts={conflicts} call={call} />,
           },
           {
             key: 'affiliations',

@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import {
   conflictsOfInterestList,
@@ -15,6 +16,7 @@ import { Call } from '@/proposals/types';
 import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
 import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
 import { canManageCallReviews } from '@/proposals/utils';
+import { coiDetectionEnabled } from '@/reviewer/reviewerSettings';
 import { createFetcher } from '@/table/api';
 import {
   ConflictsOfInterestFilter,
@@ -29,8 +31,11 @@ import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useUser } from '@/workspace/hooks';
 
+import { fetchCallCoiConfiguration } from '../coi-settings/COISettingsSection';
+
 import { COIExpandableRow } from './COIExpandableRow';
 import { COIRowActions } from './COIRowActions';
+import { DetectConflictsButton } from './DetectConflictsButton';
 
 interface COIReviewSectionProps {
   call: Call;
@@ -88,6 +93,13 @@ const StatusBadge: FC<{
 export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
   // Dismiss, waive and recuse need MANAGE_PROPOSAL_REVIEW.
   const canManage = canManageCallReviews(useUser(), call);
+  // The call's handling rules: a type requiring recusal is not waived.
+  const { data: coiConfig } = useQuery({
+    queryKey: ['coiConfiguration', call.uuid],
+    queryFn: () => fetchCallCoiConfiguration(call.uuid),
+    enabled: canManage,
+    refetchOnWindowFocus: false,
+  });
   const values = useFilterValues('COIReviewTable');
 
   const formFilters = useMemo(
@@ -117,7 +129,7 @@ export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
       {
         title: translate('Reviewer'),
         render: ({ row }: { row: ConflictOfInterest }) => (
-          <span className="font-medium">{row.reviewer_name}</span>
+          <span className="font-medium text-primary">{row.reviewer_name}</span>
         ),
         id: 'reviewer',
         keys: ['reviewer_name'],
@@ -127,12 +139,16 @@ export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
         render: ({ row }: { row: ConflictOfInterest }) => (
           <Link
             state="call-management.proposal-details"
-            params={{ uuid: row.call_uuid, proposal_uuid: row.proposal_uuid }}
+            // The proposal opens in the organization running the call.
+            params={{
+              uuid: call.customer_uuid,
+              proposal_uuid: row.proposal_uuid,
+            }}
             label={row.proposal_name}
           />
         ),
         id: 'proposal',
-        keys: ['proposal_name', 'proposal_uuid', 'call_uuid'],
+        keys: ['proposal_name', 'proposal_uuid'],
       },
       {
         title: translate('Round'),
@@ -204,7 +220,7 @@ export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
         keys: ['detected_at'],
       },
     ],
-    [],
+    [call.customer_uuid],
   );
 
   return (
@@ -217,10 +233,26 @@ export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
       showPageSizeSelector
       hasQuery
       filters={<ConflictsOfInterestFilter call={call} />}
-      rowActions={canManage ? COIRowActions : undefined}
+      rowActions={
+        canManage
+          ? (props) => (
+              <COIRowActions
+                {...props}
+                recusalTypes={coiConfig?.recusal_required_types}
+              />
+            )
+          : undefined
+      }
       hasOptionalColumns
       expandableRow={COIExpandableRow}
-      tableActions={<PoolSummaryButton />}
+      tableActions={
+        <>
+          <PoolSummaryButton />
+          {canManage && coiDetectionEnabled() && (
+            <DetectConflictsButton call={call} refetch={tableProps.fetch} />
+          )}
+        </>
+      }
       formId={ConflictsOfInterestFilterFormId}
     />
   );

@@ -9,7 +9,6 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
 import { PlanSelectField } from '@/marketplace/details/plan/PlanSelectField';
-import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
@@ -19,7 +18,7 @@ export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
     subscription: { values: true },
   });
 
-  const { offering, plan, limits } = values;
+  const { offering } = values;
   const queryData = useQuery({
     queryKey: ['offering', offering?.uuid],
 
@@ -58,11 +57,11 @@ export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
                 </div>
                 <PlanDescriptionButton />
               </div>
-              <TabbedPlanComponents
-                offering={queryData.data}
-                plan={plan}
-                limits={limits}
-              />
+              <p className="text-quaternary mb-0">
+                {translate(
+                  'What a proposal may request of each component is set on the offering, on the Resources tab, once it is added.',
+                )}
+              </p>
             </>
           )}
         </div>

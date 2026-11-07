@@ -1,4 +1,4 @@
-import { CrownIcon } from '@phosphor-icons/react';
+import { CrownIcon, CrownSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
@@ -12,31 +12,35 @@ import { ActionItem } from '@/resource/actions/ActionItem';
 interface SetPanelChairButtonProps {
   permission: GenericPermission;
   call: Call;
-  /** Re-fetch the call so `panel_chair_uuid` (and the Chair badge) update. */
+  /** Re-fetch the call so the chair pointers (and their badges) update. */
   refetch?: () => void;
 }
 
+type Seat = 'panel_chair' | 'panel_vice_chair';
+
 /**
- * One panel member can be flagged as chair of the call's review panel. The
- * backend keeps `Call.panel_chair` consistent with the panel member role, so
- * this only toggles the pointer; removing the member clears it server-side.
+ * One panel member can be flagged as chair of the call's review panel, and
+ * another as its vice-chair. The backend keeps both pointers consistent with
+ * the panel member role, so this only toggles them; removing the member
+ * clears them server-side. One person holds one seat: taking the other seat
+ * gives up the one held.
  */
 export const SetPanelChairButton: FC<SetPanelChairButtonProps> = ({
   permission,
   call,
   refetch,
 }) => {
-  const isChair = call.panel_chair_uuid === permission.user_uuid;
-  const mutation = useManagedMutation<any, any, void>({
-    mutationFn: () =>
+  const user = permission.user_uuid;
+  const isChair = call.panel_chair_uuid === user;
+  const isViceChair = call.panel_vice_chair_uuid === user;
+  const mutation = useManagedMutation<any, any, Partial<Record<Seat, any>>>({
+    mutationFn: (body) =>
       proposalProtectedCallsPartialUpdate({
         path: { uuid: call.uuid },
-        body: { panel_chair: isChair ? null : permission.user_uuid },
+        body,
       }),
-    successMessage: isChair
-      ? translate('Panel chair has been unset.')
-      : translate('Panel chair has been set.'),
-    errorMessage: translate('Unable to update panel chair.'),
+    successMessage: translate('Panel chairs have been updated.'),
+    errorMessage: translate('Unable to update panel chairs.'),
     refetch,
   });
 
@@ -44,16 +48,43 @@ export const SetPanelChairButton: FC<SetPanelChairButtonProps> = ({
     return null;
   }
 
+  const take = (seat: Seat) => {
+    const other: Seat =
+      seat === 'panel_chair' ? 'panel_vice_chair' : 'panel_chair';
+    const holdsOther = seat === 'panel_chair' ? isViceChair : isChair;
+    mutation.mutate(
+      holdsOther ? { [seat]: user, [other]: null } : { [seat]: user },
+    );
+  };
+
   return (
-    <ActionItem
-      title={
-        isChair
-          ? translate('Unset panel chair')
-          : translate('Set as panel chair')
-      }
-      action={() => mutation.mutate()}
-      disabled={mutation.isPending}
-      iconNode={<CrownIcon weight="bold" />}
-    />
+    <>
+      <ActionItem
+        title={
+          isChair
+            ? translate('Unset panel chair')
+            : translate('Set as panel chair')
+        }
+        action={() =>
+          isChair ? mutation.mutate({ panel_chair: null }) : take('panel_chair')
+        }
+        disabled={mutation.isPending}
+        iconNode={<CrownIcon weight="bold" />}
+      />
+      <ActionItem
+        title={
+          isViceChair
+            ? translate('Unset vice-chair')
+            : translate('Set as vice-chair')
+        }
+        action={() =>
+          isViceChair
+            ? mutation.mutate({ panel_vice_chair: null })
+            : take('panel_vice_chair')
+        }
+        disabled={mutation.isPending}
+        iconNode={<CrownSimpleIcon weight="bold" />}
+      />
+    </>
   );
 };

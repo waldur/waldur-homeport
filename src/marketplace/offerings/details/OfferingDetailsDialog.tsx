@@ -10,7 +10,7 @@ import { PropertyList, PropertyItem } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
+import { canViewOfferingPages } from '@/marketplace/canUseMarketplaceShopUi';
 import { getTabs } from '@/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@/marketplace/details/OfferingTabsComponent';
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
@@ -41,7 +41,7 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
   props,
 ) => {
   const user = useUser();
-  const showOfferingLink = canUseMarketplaceShopUi(user);
+  const showOfferingLink = canViewOfferingPages(user);
   const {
     isLoading: loading,
     error,

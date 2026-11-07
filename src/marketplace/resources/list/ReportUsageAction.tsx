@@ -41,6 +41,7 @@ export const ReportUsageAction = ({
   const canSetUsage = hasPermission(user, {
     permission: PermissionEnum.SET_RESOURCE_USAGE,
     customerId: resource.provider_uuid,
+    offeringId: resource.offering_uuid,
   });
 
   const { tooltip, disabled: isDisabledState } = useValidators(

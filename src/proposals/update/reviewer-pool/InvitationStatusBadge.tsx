@@ -12,9 +12,8 @@ export const getInvitationStatusVariant = (status: string) => {
     case 'declined':
       return 'danger';
     case 'expired':
-      return 'secondary';
     default:
-      return 'primary';
+      return 'neutral';
   }
 };
 
@@ -27,23 +26,30 @@ interface InvitationStatusBadgeProps {
    * needs none, so it is left out there.
    */
   pendingHint?: string;
+  /** Why the invitation was declined, inside the badge as the pending hint is. */
+  declinedHint?: string;
 }
 
 export const InvitationStatusBadge: FC<InvitationStatusBadgeProps> = ({
   status,
   statusDisplay,
   pendingHint,
-}) => (
-  <Badge
-    variant={getInvitationStatusVariant(status)}
-    rightIcon={
-      status === 'pending' && pendingHint ? (
-        <HelpIcon label={pendingHint} size={14} />
-      ) : undefined
-    }
-    shape="pill"
-    tone="outline"
-  >
-    {statusDisplay}
-  </Badge>
-);
+  declinedHint,
+}) => {
+  const hint =
+    status === 'pending'
+      ? pendingHint
+      : status === 'declined'
+        ? declinedHint
+        : undefined;
+  return (
+    <Badge
+      variant={getInvitationStatusVariant(status)}
+      rightIcon={hint ? <HelpIcon label={hint} size={14} /> : undefined}
+      shape="pill"
+      tone="outline"
+    >
+      {statusDisplay}
+    </Badge>
+  );
+};

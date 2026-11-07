@@ -1,0 +1,67 @@
+// The group headers of a steps table: a phase opens a section of the table,
+// a parallel stage opens a band of rows marked by a rail on the left edge.
+.step-group-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 6.5px;
+  row-gap: 1.62px;
+  font-size: var(--text-xs);
+  line-height: 1.4;
+
+  &__title {
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+  }
+
+  &__hint {
+    color: var(--text-quaternary);
+  }
+
+  &--stage {
+    color: var(--brand-color);
+  }
+}
+
+.table tbody > tr.table-group-header:has(.step-group-header--phase) > th {
+  background-color: var(--bg-secondary);
+}
+
+// The rail: the header of a parallel stage and each of its rows carry it on
+// their first cell, so it runs unbroken down the edge of the table. An inset
+// shadow takes no room, so the expander and the text stay where they are.
+.table tbody > tr.table-group-header:has(.step-group-header--stage) > th,
+.table tbody > tr.step-row--parallel > :is(td, th):first-child,
+.table tbody > tr.step-row--parallel.expanded + tr > td {
+  box-shadow: inset 2px 0 0 var(--brand-color);
+}
+
+// The step column of a steps table holds the name, its badges and a short
+// summary. It is not ellipsised as a whole, which would cut the badges off:
+// its content keeps a readable width (a table cell ignores min-width, its
+// content does not), its badges wrap, and only the summary is clamped, to
+// two lines.
+.table tbody > tr > :is(td, th).step-name-cell {
+  white-space: normal;
+
+  .badge {
+    white-space: normal;
+    text-align: start;
+  }
+}
+
+.step-name-cell__content {
+  min-width: min(208px, 60vw);
+}
+
+.step-name-cell__summary {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+// A disabled step's row (DISABLED_STEP_ROW_CLASS) is marked by its
+// "Disabled" badge alone: an italic row as well said nothing the badge does
+// not, and read as an unexplained difference.

@@ -1,12 +1,15 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { CallStates, ProposalPublicCallsListData } from 'waldur-js-client';
+import {
+  ProposalPublicCallsListData,
+  PublicCallStateEnum,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { SelectFilter, BooleanFilter } from '@/table';
+import { BooleanFilter, SelectFilter } from '@/table';
 
-export const CallStatesOptions: CallStatesOption[] = [
+export const PublicCallStateOptions: PublicCallStateOption[] = [
   {
     label: translate('Active'),
     value: 'active',
@@ -15,14 +18,10 @@ export const CallStatesOptions: CallStatesOption[] = [
     label: translate('Archived'),
     value: 'archived',
   },
-  {
-    label: translate('Draft'),
-    value: 'draft',
-  },
 ];
-export interface CallStatesOption {
+export interface PublicCallStateOption {
   label: string;
-  value: CallStates;
+  value: PublicCallStateEnum;
 }
 
 export const ProposalPublicCallsFilter: FunctionComponent<{}> = () => (
@@ -30,13 +29,13 @@ export const ProposalPublicCallsFilter: FunctionComponent<{}> = () => (
     <SelectFilter
       title={translate('State')}
       name="state"
-      getValueLabel={(value: CallStatesOption) => value?.label}
-      placeholder={translate('State')}
-      options={CallStatesOptions}
-      getOptionValue={(option: CallStatesOption) => String(option.value)}
-      getOptionLabel={(option: CallStatesOption) => option.label}
+      getValueLabel={(value: PublicCallStateOption) => value?.label}
+      options={PublicCallStateOptions}
+      getOptionValue={(option: PublicCallStateOption) => String(option.value)}
+      getOptionLabel={(option: PublicCallStateOption) => option.label}
       isClearable={true}
       isMulti={true}
+      placeholder={translate('State')}
     />
     <BooleanFilter
       title={translate('Active round')}
@@ -51,7 +50,7 @@ export const ProposalPublicCallsFilter: FunctionComponent<{}> = () => (
 export const ProposalPublicCallsFilterFormId = 'ProposalPublicCallsFilter';
 
 export interface ProposalPublicCallsFilterFormData {
-  state: CallStatesOption[];
+  state: PublicCallStateOption[];
   has_active_round: boolean;
 }
 

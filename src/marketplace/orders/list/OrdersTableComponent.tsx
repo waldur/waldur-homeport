@@ -57,6 +57,10 @@ const mandatoryFields: MarketplaceOrdersListData['query']['field'] = [
   'plan_name',
   'attachment',
   'request_comment',
+  // Where an allocation's order came from, and its offering's components
+  // to name the awarded limits by
+  'award',
+  'offering_uuid',
   // Approval badge
   'auto_approved',
   // Communication column

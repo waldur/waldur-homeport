@@ -16,12 +16,6 @@ import { translate } from '@/i18n';
 type RoundLifecycleState = LifecycleStateEnum | '' | null | undefined;
 
 /**
- * The workflow step whose outcome a round holds back until it publishes
- * results: the allocation decision.
- */
-export const HELD_DECISION_STEP = 'allocation_decision';
-
-/**
  * Where a round stands after its cut-off. Before the cut-off the backend
  * stores nothing and the round's own status (scheduled / open) says it all.
  */
@@ -89,6 +83,11 @@ export interface RoundLifecycleActions {
   close: boolean;
   startDeciding: boolean;
   publishResults: boolean;
+  /**
+   * Publishing waits for the round's adoption: the call requires it and none
+   * is recorded. Publish is still offered, disabled with the reason.
+   */
+  awaitingAdoption: boolean;
   complete: boolean;
   completionRule: boolean;
   recordAdoption: boolean;
@@ -101,11 +100,19 @@ export interface RoundLifecycleActions {
  * evaluating → deciding → results_published → closed.
  * Results may be published straight from evaluating, skipping the decision
  * phase, and published again while decisions whose release failed are still
- * held. The adoption can be recorded at any point after the cut-off.
+ * held. The adoption can be recorded at any point after the cut-off, unless
+ * the call requires it: then it is recorded while the round is deciding, and
+ * the results are published only once it is. Recording it is offered only to
+ * those who may read the adoption record, as the backend refuses the rest.
  */
 export const getRoundLifecycleActions = (
   round: Pick<NestedRound, 'status' | 'lifecycle_state'> & {
     held_decisions_count?: number | null;
+    adopted_at?: string | null;
+  },
+  call?: {
+    adoption_required?: boolean;
+    publish_results?: PublishResultsEnum;
   },
 ): RoundLifecycleActions => {
   const ended = round.status === 'ended';
@@ -113,19 +120,23 @@ export const getRoundLifecycleActions = (
   // A round past its cut-off that the hourly sweep has not reached yet has no
   // stored state; the backend starts its evaluation on the first action.
   const evaluating = ended && (!state || state === 'evaluating');
+  const republishing =
+    ended &&
+    state === 'results_published' &&
+    (round.held_decisions_count ?? 0) > 0;
+  const adoptionRequired = Boolean(call?.adoption_required);
   return {
     close: round.status === 'open',
     startDeciding: evaluating,
-    publishResults:
-      evaluating ||
-      state === 'deciding' ||
-      (ended &&
-        state === 'results_published' &&
-        (round.held_decisions_count ?? 0) > 0),
+    publishResults: evaluating || state === 'deciding' || republishing,
+    awaitingAdoption: adoptionRequired && !round.adopted_at && !republishing,
     complete: ended && state === 'results_published',
     // The rule matters until the round is completed.
     completionRule: state !== 'closed',
-    recordAdoption: ended,
+    recordAdoption:
+      ended &&
+      (!adoptionRequired || state === 'deciding') &&
+      canViewRoundAdoption(round, call),
   };
 };
 

@@ -1,53 +1,38 @@
-import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
-import { ENV } from '@/core/config';
-import { LandingHeroSection } from '@/dashboard/hero/LandingHeroSection';
 import { translate } from '@/i18n';
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
-import { OfferingStateCell } from '@/marketplace/offerings/list/OfferingStateCell';
-import { getStates } from '@/marketplace/offerings/list/OfferingStateFilter';
-import { useFullPage } from '@/navigation/context';
-import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { AvailableOfferingCard } from '@/proposals/AvailableOfferingCard';
+import { AvailableOfferingExpandableRow } from '@/proposals/AvailableOfferingExpandableRow';
 import { createFetcher } from '@/table/api';
-import {
-  MarketplaceProviderOfferingsFilter,
-  MarketplaceProviderOfferingsFilterFormId,
-  MarketplaceProviderOfferingsFilterInitialValues,
-  selectMarketplaceProviderOfferingsFilter,
-} from '@/table/generated/MarketplaceProviderOfferingsFilter';
 import Table from '@/table/Table';
-import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
-const CallsAvailableOfferingsTable: FunctionComponent = () => {
-  const values = useFilterValues('PublicAvailableOfferingsList');
-
-  const stateFilter = useMemo(
-    () => selectMarketplaceProviderOfferingsFilter(values),
-    [values],
-  );
-
+/**
+ * The offerings an applicant can request through a call right now. Only
+ * those taking orders: one in draft or archived cannot be requested, so it is
+ * left out rather than listed with its state.
+ */
+export const CallsAvailableOfferingsPage: FunctionComponent = () => {
   const filter = useMemo(
-    () => ({ ...stateFilter, open_for_proposals: true }),
-    [stateFilter],
+    () => ({ open_for_proposals: true, state: ['Active'] }),
+    [],
   );
 
   const tableProps = useTable({
     table: 'PublicAvailableOfferingsList',
-    syncFiltersToURL: true,
     fetchData: createFetcher(marketplacePublicOfferingsList),
     queryField: 'name',
     filter,
-    initialFilters: MarketplaceProviderOfferingsFilterInitialValues,
   });
 
   return (
     <Table
       title={translate('Available offerings')}
+      // The tab above names the list.
+      hideTitle
       {...tableProps}
       columns={[
         {
@@ -58,51 +43,24 @@ const CallsAvailableOfferingsTable: FunctionComponent = () => {
               {row.name}
             </OfferingDetailsLink>
           ),
-
           copyField: (row) => row.name,
         },
         {
-          title: translate('Description'),
-          render: ({ row }) => <>{renderFieldOrDash(row.description)}</>,
+          title: translate('Provider'),
+          render: ({ row }) => <>{renderFieldOrDash(row.customer_name)}</>,
         },
         {
-          title: translate('Customer'),
-          render: ({ row }) => <>{row.customer_name}</>,
-        },
-        {
-          title: translate('State'),
-          render: OfferingStateCell,
-          filter: 'state',
-          inlineFilter: (row) =>
-            getStates().filter((s) => s.value === row.state),
+          title: translate('Category'),
+          render: ({ row }) => <>{renderFieldOrDash(row.category_title)}</>,
         },
       ]}
+      expandableRow={AvailableOfferingExpandableRow}
       gridItem={({ row }) => <AvailableOfferingCard availableOffering={row} />}
       gridClassName="lg:grid-cols-2 xl:grid-cols-3"
       hoverShadow={{ grid: false }}
       verboseName={translate('Available offerings')}
       initialSorting={{ field: 'name', mode: 'desc' }}
       hasQuery={true}
-      filters={<MarketplaceProviderOfferingsFilter />}
-      formId={MarketplaceProviderOfferingsFilterFormId}
     />
-  );
-};
-
-export const CallsAvailableOfferingsPage: FunctionComponent = () => {
-  useFullPage();
-
-  return (
-    <>
-      <LandingHeroSection
-        header={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
-        title={translate('Available offerings')}
-        context="calls"
-      />
-
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'mt-16 mb-8')}>
-        <CallsAvailableOfferingsTable />
-      </div>
-    </>
   );
 };

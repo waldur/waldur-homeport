@@ -5,6 +5,8 @@ import { Image } from '@/core/Image';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 
+import { resolveFileUrl } from './resolveFileUrl';
+
 export const ImageFetcher = ({ url, name, thumb = false, iconSize = 20 }) => {
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -16,7 +18,7 @@ export const ImageFetcher = ({ url, name, thumb = false, iconSize = 20 }) => {
       setError(null);
 
       try {
-        const blob = await get<Blob>(url);
+        const blob = await get<Blob>(resolveFileUrl(url));
 
         // Convert blob to a URL and set it to state
         const imageUrl = URL.createObjectURL(blob);

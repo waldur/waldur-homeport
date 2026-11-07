@@ -4,7 +4,7 @@ import type { User } from 'waldur-js-client';
 import { ENV } from '@/core/config';
 
 import { hasPermission } from './hasPermission';
-import { getGrantableRoles } from './utils';
+import { filterGrantableRoles, getGrantableRoles } from './utils';
 
 // getGrantableRoles delegates the actual "can this user grant?" decision to
 // hasPermission; mocking it isolates the helper's own responsibility: mapping
@@ -95,5 +95,45 @@ describe('getGrantableRoles', () => {
       expect(roles.map((r) => r.name)).toEqual(['flavor_role']);
       expect(mockedHasPermission).not.toHaveBeenCalled();
     });
+  });
+});
+
+describe('filterGrantableRoles on a project team', () => {
+  const role = (name: string, permissions: string[]) =>
+    ({ name, content_type: 'project', is_active: true, permissions }) as any;
+  const roles = [
+    role('PROJECT.MANAGER', ['PROJECT.CREATE_PERMISSION', 'ORDER.CREATE']),
+    role('PROJECT.PRINCIPAL_INVESTIGATOR', ['PROJECT.CREATE_PERMISSION']),
+    role('PROJECT.COLLABORATOR', []),
+  ];
+  const pi = {
+    is_staff: false,
+    permissions: [
+      {
+        scope_type: 'project',
+        scope_uuid: 'p1',
+        role_name: 'PROJECT.PRINCIPAL_INVESTIGATOR',
+      },
+    ],
+  } as any;
+
+  it('offers someone managing through a project role no role beyond it', () => {
+    // The team permission on the project, none on the organization.
+    mockedHasPermission.mockImplementation(
+      (_u, req) => !req.customerId || !!req.projectId,
+    );
+
+    const offered = filterGrantableRoles(roles, pi, scope).map((r) => r.name);
+
+    expect(offered).toEqual([
+      'PROJECT.PRINCIPAL_INVESTIGATOR',
+      'PROJECT.COLLABORATOR',
+    ]);
+  });
+
+  it('does not narrow someone managing the team through the organization', () => {
+    mockedHasPermission.mockReturnValue(true);
+
+    expect(filterGrantableRoles(roles, pi, scope)).toHaveLength(3);
   });
 });
