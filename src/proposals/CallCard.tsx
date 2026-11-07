@@ -44,6 +44,7 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
     <ModelCard1
       title={call.name}
       subtitle={call.customer_name}
+      logo={call.image}
       body={call.description}
       clickable
       onClick={openCall}

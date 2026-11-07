@@ -37,7 +37,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
 
   return (
     <PublicDashboardHero
-      logo={customer?.image}
+      logo={call.image || customer?.image}
       logoAlt={call.name}
       logoCircle
       cardBordered

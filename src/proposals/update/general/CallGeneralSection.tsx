@@ -17,6 +17,8 @@ import { useUpdateCall } from '@/proposals/update/useUpdateCall';
 import { getCallReadOnlyReason } from '@/proposals/utils';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { CallLogoSection } from './CallLogoSection';
+
 interface CallGeneralSectionProps {
   call: Call;
   refetch(): void;
@@ -50,70 +52,79 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
   const updateCall = useUpdateCall(props.call, props.refetch);
 
   return (
-    <PropertyCard
-      bordered
-      title={translate('General')}
-      refetch={props.refetch}
-      loading={props.loading}
-    >
-      <EditFieldProvider
-        scope={props.call}
-        callback={updateCall}
-        readOnlyReason={
-          props.isReadOnly ? getCallReadOnlyReason(props.call) : undefined
-        }
+    <>
+      <CallLogoSection
+        call={props.call}
+        refetch={props.refetch}
+        isReadOnly={props.isReadOnly}
+      />
+      <PropertyCard
+        bordered
+        title={translate('General')}
+        refetch={props.refetch}
+        loading={props.loading}
       >
-        <PropertyList>
-          <StringEditField
-            name="name"
-            label={translate('Name')}
-            required
-            disabled={props.isReadOnly}
-            renderValue={(value) => renderFieldOrDash(value)}
-          />
-          <MarkdownEditField
-            name="description"
-            label={translate('Description')}
-            required
-            disabled={props.isReadOnly}
-            renderValue={(value) =>
-              value ? <SafeMarkdown text={value} /> : renderFieldOrDash(null)
-            }
-          />
-          <StringEditField
-            name="reference_code"
-            label={translate('Reference code')}
-            disabled={props.isReadOnly}
-            renderValue={(value) => renderFieldOrDash(value)}
-          />
-          <StringEditField
-            name="proposal_slug_template"
-            label={translate('Proposal slug template')}
-            description={
-              <SlugTemplateHelpText placeholders={PROPOSAL_SLUG_PLACEHOLDERS} />
-            }
-            descriptionInEditOnly
-            disabled={props.isReadOnly || props.call.has_proposals}
-            tooltip={
-              !props.isReadOnly && props.call.has_proposals
-                ? translate(
-                    'The slug template cannot be changed once proposals exist for this call.',
-                  )
-                : undefined
-            }
-            renderValue={(value) => renderFieldOrDash(value)}
-          />
-          {isFeatureVisible(MarketplaceFeatures.call_only) && (
+        <EditFieldProvider
+          scope={props.call}
+          callback={updateCall}
+          readOnlyReason={
+            props.isReadOnly ? getCallReadOnlyReason(props.call) : undefined
+          }
+        >
+          <PropertyList>
             <StringEditField
-              name="external_url"
-              label={translate('External URL')}
+              name="name"
+              label={translate('Name')}
               required
               disabled={props.isReadOnly}
               renderValue={(value) => renderFieldOrDash(value)}
             />
-          )}
-        </PropertyList>
-      </EditFieldProvider>
-    </PropertyCard>
+            <MarkdownEditField
+              name="description"
+              label={translate('Description')}
+              required
+              disabled={props.isReadOnly}
+              renderValue={(value) =>
+                value ? <SafeMarkdown text={value} /> : renderFieldOrDash(null)
+              }
+            />
+            <StringEditField
+              name="reference_code"
+              label={translate('Reference code')}
+              disabled={props.isReadOnly}
+              renderValue={(value) => renderFieldOrDash(value)}
+            />
+            <StringEditField
+              name="proposal_slug_template"
+              label={translate('Proposal slug template')}
+              description={
+                <SlugTemplateHelpText
+                  placeholders={PROPOSAL_SLUG_PLACEHOLDERS}
+                />
+              }
+              descriptionInEditOnly
+              disabled={props.isReadOnly || props.call.has_proposals}
+              tooltip={
+                !props.isReadOnly && props.call.has_proposals
+                  ? translate(
+                      'The slug template cannot be changed once proposals exist for this call.',
+                    )
+                  : undefined
+              }
+              renderValue={(value) => renderFieldOrDash(value)}
+            />
+            {isFeatureVisible(MarketplaceFeatures.call_only) && (
+              <StringEditField
+                name="external_url"
+                label={translate('External URL')}
+                required
+                disabled={props.isReadOnly}
+                renderValue={(value) => renderFieldOrDash(value)}
+              />
+            )}
+          </PropertyList>
+        </EditFieldProvider>
+      </PropertyCard>
+    </>
   );
 };
