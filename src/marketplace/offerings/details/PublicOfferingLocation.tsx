@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
-import { Card, CardContent } from 'waldur-ui';
-
 import { Link } from '@/core/Link';
+import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
 import { LeafletMap } from '@/map/LeafletMap';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
@@ -20,46 +19,41 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   return (
-    <Card bordered className="mb-8">
-      <CardContent>
-        <PublicOfferingCardTitle>
-          {translate('Location')}
-        </PublicOfferingCardTitle>
-        <div className="flex flex-col lg:flex-row gap-x-5">
-          <div className="mb-4 lg:mb-0 lg:flex-1 min-w-0">
-            <div className="bg-gray-300 dark:bg-gray-dark-600 w-full h-full min-h-[300px]">
-              {offering.latitude && offering.longitude ? (
-                <LeafletMap
-                  latitude={offering.latitude}
-                  longitude={offering.longitude}
-                />
-              ) : (
-                <div className="flex items-center justify-center h-full display-5 text-quaternary">
-                  {translate('No location available')}
-                </div>
-              )}
+    <Panel title={translate('Location')} cardBordered className="mb-8">
+      <div className="flex flex-col lg:flex-row gap-x-5">
+        <div className="mb-4 lg:mb-0 lg:flex-1 min-w-0">
+          <div className="bg-gray-300 dark:bg-gray-dark-600 w-full h-full min-h-[300px]">
+            {offering.latitude && offering.longitude ? (
+              <LeafletMap
+                latitude={offering.latitude}
+                longitude={offering.longitude}
+              />
+            ) : (
+              <div className="flex items-center justify-center h-full display-5 text-quaternary">
+                {translate('No location available')}
+              </div>
+            )}
+          </div>
+        </div>
+        {showExperimentalUiComponents && (
+          <div className="lg:w-4/12 lg:flex-none">
+            <div className="bg-tertiary p-8 h-full">
+              <PublicOfferingCardTitle>
+                {translate('Availability:')}
+              </PublicOfferingCardTitle>
+              <ul>
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <li className="mb-1.5" key={i}>
+                    <Link state="" className="underline text-brand">
+                      link {i}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-          {showExperimentalUiComponents && (
-            <div className="lg:w-4/12 lg:flex-none">
-              <div className="bg-tertiary p-8 h-full">
-                <PublicOfferingCardTitle>
-                  {translate('Availability:')}
-                </PublicOfferingCardTitle>
-                <ul>
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <li className="mb-1.5" key={i}>
-                      <Link state="" className="underline text-brand">
-                        link {i}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          )}
-        </div>
-      </CardContent>
-    </Card>
+        )}
+      </div>
+    </Panel>
   );
 };

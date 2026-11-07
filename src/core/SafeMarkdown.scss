@@ -1,16 +1,19 @@
 .md-content {
-  .md-small-titles {
-    // Show smaller font size for markdown files under expanded table detail section
-    h1 {
-      font-size: var(--text-lg) !important;
-    }
-    // Apply same font size for the smaller heading tags under expanded table detail section
+  &.md-small-titles {
+    // Headings of markdown that sits under a title of its own, such as an
+    // expanded table row or a Getting started card, stay below that title.
+    // h1 too: at text-lg it matched the card title above it (CardTitle).
+    h1,
     h2,
     h3,
     h4,
     h5,
     h6 {
       font-size: var(--text-base) !important;
+    }
+    // A heading opens a section: set it apart from the text above it.
+    > * + :is(h1, h2, h3, h4, h5, h6) {
+      margin-top: calc(var(--spacing) * 5);
     }
   }
 

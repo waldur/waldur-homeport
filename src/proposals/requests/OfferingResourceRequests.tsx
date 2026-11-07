@@ -9,8 +9,11 @@ import { ResourceRequestsList } from './ResourceRequestsList';
 export const OfferingResourceRequests: FC<{ offering: Offering }> = ({
   offering,
 }) => (
-  <ResourceRequestsList
-    offeringUuid={offering.uuid}
-    title={translate('My requests')}
-  />
+  <div className="mb-8" id="my-requests">
+    <ResourceRequestsList
+      offeringUuid={offering.uuid}
+      title={translate('My requests')}
+      standalone={false}
+    />
+  </div>
 );

@@ -10,7 +10,7 @@ import {
   proposalMyRequestedResourcesCount,
 } from 'waldur-js-client';
 
-import { Badge, useBreadcrumbs } from 'waldur-ui';
+import { useBreadcrumbs } from 'waldur-ui';
 
 import { isAuthenticated } from '@/auth/AuthService';
 import { fetchResultCount } from '@/core/api';
@@ -233,14 +233,8 @@ export const getTabs = (
     // show — an always-present empty tab is noise on every other offering.
     isProposalRequestEnabled() && resourceRequestCount > 0
       ? {
-          title: (
-            <>
-              {translate('My requests')}{' '}
-              <Badge variant="secondary" shape="pill">
-                {resourceRequestCount}
-              </Badge>
-            </>
-          ),
+          title: translate('My requests'),
+          count: resourceRequestCount,
           key: 'my-requests',
           component: OfferingResourceRequests,
         }
@@ -310,12 +304,14 @@ export const OfferingPublicUIView = () => {
 
   // Counts only what this user requested for this offering, so the tab appears
   // exactly when it would have rows. Anonymous visitors never have any.
+  // `involved` as the tab's own list sends it: staff and support read every
+  // proposal, and without it they would count requests the tab never lists.
   const { data: resourceRequestCount } = useQuery({
     queryKey: ['OfferingResourceRequestCount', uuid, user?.uuid],
     queryFn: () =>
       // The count action answers in the X-Result-Count header, not the body.
       proposalMyRequestedResourcesCount({
-        query: { offering_uuid: uuid },
+        query: { offering_uuid: uuid, involved: true },
       }).then((result) => fetchResultCount(result) || 0),
     enabled: Boolean(user && isProposalRequestEnabled()),
     refetchOnWindowFocus: false,
