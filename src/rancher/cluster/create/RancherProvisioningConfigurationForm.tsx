@@ -10,7 +10,6 @@ import {
 import { required } from '@/core/validators';
 import {
   AsyncSelectEditField,
-  BoxNumberEditField,
   BooleanEditField,
   NumberEditField,
   SecretEditField,
@@ -182,7 +181,8 @@ const ManagedFields: FunctionComponent = () => (
         getOptionLabel={({ name }) => name}
         getOptionValue={({ value }) => value}
       />
-      <BoxNumberEditField
+      <NumberEditField
+        stepperLayout="buttons"
         name="plugin_options.managed_rancher_server_system_volume_size_gb"
         label={translate('OpenStack system volume size for server node')}
         required
@@ -199,7 +199,8 @@ const ManagedFields: FunctionComponent = () => (
         getOptionLabel={({ name }) => name}
         getOptionValue={({ value }) => value}
       />
-      <BoxNumberEditField
+      <NumberEditField
+        stepperLayout="buttons"
         name="plugin_options.managed_rancher_server_data_volume_size_gb"
         label={translate('OpenStack data volume size for server node')}
         required
@@ -232,7 +233,8 @@ const ManagedFields: FunctionComponent = () => (
         getOptionLabel={({ name }) => name}
         getOptionValue={({ value }) => value}
       />
-      <BoxNumberEditField
+      <NumberEditField
+        stepperLayout="buttons"
         name="plugin_options.managed_rancher_load_balancer_system_volume_size_gb"
         label={translate('OpenStack system volume size for load balancer node')}
         required
@@ -249,7 +251,8 @@ const ManagedFields: FunctionComponent = () => (
         getOptionLabel={({ name }) => name}
         getOptionValue={({ value }) => value}
       />
-      <BoxNumberEditField
+      <NumberEditField
+        stepperLayout="buttons"
         name="plugin_options.managed_rancher_load_balancer_data_volume_size_gb"
         label={translate('OpenStack data volume size for load balancer node')}
         required
@@ -271,7 +274,8 @@ const ManagedFields: FunctionComponent = () => (
         getOptionLabel={({ name }) => name}
         getOptionValue={({ value }) => value}
       />
-      <BoxNumberEditField
+      <NumberEditField
+        stepperLayout="buttons"
         name="plugin_options.managed_rancher_worker_system_volume_size_gb"
         label={translate('OpenStack system volume size for worker node')}
         required
@@ -286,7 +290,8 @@ const ManagedFields: FunctionComponent = () => (
       id="cluster_tenants"
       title={translate('Cluster Tenants')}
     >
-      <BoxNumberEditField
+      <NumberEditField
+        stepperLayout="buttons"
         name="plugin_options.managed_rancher_tenant_max_cpu"
         label={translate('Maximum number of CPU for cluster tenants')}
         required
@@ -296,7 +301,8 @@ const ManagedFields: FunctionComponent = () => (
         parse={parseIntField}
         format={formatIntField}
       />
-      <BoxNumberEditField
+      <NumberEditField
+        stepperLayout="buttons"
         name="plugin_options.managed_rancher_tenant_max_ram"
         label={translate('Maximum number of RAM for a cluster tenants (GB)')}
         required
@@ -306,7 +312,8 @@ const ManagedFields: FunctionComponent = () => (
         parse={parseIntField}
         format={formatIntField}
       />
-      <BoxNumberEditField
+      <NumberEditField
+        stepperLayout="buttons"
         name="plugin_options.managed_rancher_tenant_max_disk"
         label={translate(
           'Maximum number of disk space for a cluster tenants (GB)',
@@ -363,7 +370,8 @@ const ManagedFields: FunctionComponent = () => (
         name="secret_options.keycloak_password"
         label={translate('Keycloak password')}
       />
-      <BoxNumberEditField
+      <NumberEditField
+        stepperLayout="buttons"
         name="secret_options.keycloak_sync_frequency"
         label={translate('Keycloak sync frequency')}
         parse={parseIntField}

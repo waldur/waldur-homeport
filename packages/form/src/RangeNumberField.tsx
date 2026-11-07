@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
 import { translate } from 'waldur-i18n-runtime';
-
-import { BaseInputField } from './InputField';
+import { NumberInput } from 'waldur-ui';
 
 interface RangeNumberFieldProps {
   input: any;
@@ -16,7 +15,7 @@ export const RangeNumberField: FunctionComponent<RangeNumberFieldProps> = ({
 }) => {
   const value = input.value || {};
 
-  const handleChange = (field: 'min' | 'max', raw: string) => {
+  const handleChange = (field: 'min' | 'max', raw: number | string) => {
     const num = raw === '' ? undefined : Number(raw);
     const next = { ...value, [field]: num };
     if (next.min === undefined && next.max === undefined) {
@@ -28,23 +27,25 @@ export const RangeNumberField: FunctionComponent<RangeNumberFieldProps> = ({
 
   return (
     <div className="flex items-center gap-1.5">
-      <BaseInputField
-        containerClassName="flex-1"
-        type="number"
-        min={min}
-        placeholder={placeholder || translate('Min')}
-        value={value.min ?? ''}
-        onChange={(e) => handleChange('min', e.target.value)}
-      />
+      <div className="flex-1">
+        <NumberInput
+          min={min}
+          showSteppers={false}
+          placeholder={placeholder || translate('Min')}
+          value={value.min ?? ''}
+          onValueChange={(v) => handleChange('min', v)}
+        />
+      </div>
       <span className="text-quaternary">–</span>
-      <BaseInputField
-        containerClassName="flex-1"
-        type="number"
-        min={min}
-        placeholder={placeholder || translate('Max')}
-        value={value.max ?? ''}
-        onChange={(e) => handleChange('max', e.target.value)}
-      />
+      <div className="flex-1">
+        <NumberInput
+          min={min}
+          showSteppers={false}
+          placeholder={placeholder || translate('Max')}
+          value={value.max ?? ''}
+          onValueChange={(v) => handleChange('max', v)}
+        />
+      </div>
     </div>
   );
 };

@@ -6,8 +6,7 @@ import { BaseButton, FormField } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { composeValidators } from '@/core/validators';
-import { SelectField, StringField } from '@/form';
-import { BoxNumberField } from '@/form/BoxNumberField';
+import { NumberField, SelectField, StringField } from '@/form';
 import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
@@ -105,9 +104,10 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
           format={formatIntField}
         >
           {({ input, meta }) => (
-            <BoxNumberField
+            <NumberField
               input={input}
               meta={meta}
+              stepperLayout="buttons"
               min={1}
               max={props.sizeLimit}
             />

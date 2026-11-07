@@ -1,11 +1,10 @@
 import { debounce } from 'es-toolkit';
 import { useCallback, useState } from 'react';
-import { Field, useForm } from 'react-final-form';
+import { useForm } from 'react-final-form';
 import { Offering } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup } from '@/form';
-import { BoxNumberField } from '@/form/BoxNumberField';
+import { NumberGroup } from '@/form';
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
@@ -49,16 +48,16 @@ export const ManagedFormNodesStep = (props: FormStepProps) => {
       }
     >
       <div className="mb-1.5 border-b border-b-secondary">
-        <FormGroup label={translate('Number of nodes')} required={true}>
-          <Field
-            name="attributes.worker_nodes_count"
-            component={BoxNumberField}
-            min={1}
-            validate={required}
-            parse={parseIntField}
-            format={formatIntField}
-          />
-        </FormGroup>
+        <NumberGroup
+          name="attributes.worker_nodes_count"
+          label={translate('Number of nodes')}
+          required
+          min={1}
+          stepperLayout="buttons"
+          validate={required}
+          parse={parseIntField}
+          format={formatIntField}
+        />
       </div>
       {openstackOffering ? (
         <>

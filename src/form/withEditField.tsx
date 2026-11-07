@@ -12,7 +12,6 @@ import { SecretField as PlainSecretField } from '@/marketplace/common/SecretFiel
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { useUser } from '@/workspace/hooks';
 
-import { BoxNumberField } from './BoxNumberField';
 import { CommaSeparatedListField } from './CommaSeparatedListField';
 import { useEditFieldContext } from './EditFieldContext';
 import { FieldEditButton } from './FieldEditButton';
@@ -216,7 +215,7 @@ export function withEditField<P extends object>(
  * `null` because a blank string is not a valid number server-side.
  */
 function getDefaultEmptyValue(Component: ComponentType<any>): any {
-  if (Component === NumberField || Component === BoxNumberField) {
+  if (Component === NumberField) {
     return null;
   }
   return '';

@@ -1,5 +1,9 @@
+import { MinusIcon, PlusIcon } from '@phosphor-icons/react';
 import { forwardRef } from 'react';
 import { translate } from 'waldur-i18n-runtime';
+
+import { BaseButton } from '../Button';
+import { cn } from '../cn';
 
 import { Input, InputProps } from './Input';
 import { InputGroup } from './InputGroup';
@@ -41,6 +45,13 @@ export interface NumberInputProps extends Omit<
    * would make those decimals invalid.
    */
   showSteppers?: boolean;
+  /**
+   * `carets` (default): small up/down chevrons at the right edge.
+   * `buttons`: a minus button at the left edge and a plus at the right, the
+   * value centred between them -- bigger targets, for a count picked a step
+   * at a time (nodes, units).
+   */
+  stepperLayout?: 'carets' | 'buttons';
 }
 
 const clamp = (value: number, min: number, max: number) =>
@@ -72,7 +83,9 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       step,
       unit,
       showSteppers = true,
+      stepperLayout = 'carets',
       invalid,
+      disabled,
       onBlur,
       ...props
     },
@@ -105,22 +118,41 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     };
 
     const isInvalid = Boolean(invalid) || outOfRange(value) !== false;
+    const carets = showSteppers && stepperLayout === 'carets';
+    const buttons = showSteppers && stepperLayout === 'buttons';
     const stepperClass =
-      'pointer-events-auto flex cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-quinary hover:text-quaternary';
+      'pointer-events-auto flex cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-quinary hover:text-quaternary disabled:cursor-not-allowed disabled:text-[var(--input-disabled-text)]';
+    const stepButton = (by: number) => (
+      <BaseButton
+        iconNode={
+          by > 0 ? <PlusIcon weight="bold" /> : <MinusIcon weight="bold" />
+        }
+        tooltip={
+          by > 0 ? translate('Increase value') : translate('Decrease value')
+        }
+        onClick={() => changeBy(by)}
+        disabled={disabled}
+        variant="tertiary-ghost"
+        size="sm"
+        className="pointer-events-auto"
+      />
+    );
 
     return (
       <InputGroup
         invalid={isInvalid}
+        start={buttons && stepButton(-stepNum)}
         end={
           (showSteppers || unit) && (
             <>
-              {showSteppers && (
+              {carets && (
                 <span className="mr-[2px] flex flex-col">
                   <button
                     type="button"
                     aria-label={translate('Increase value')}
                     className={`${stepperClass} pt-[6px]`}
                     onClick={() => changeBy(stepNum)}
+                    disabled={disabled}
                   >
                     <StepperGlyph d={UP_PATH} />
                   </button>
@@ -129,12 +161,14 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
                     aria-label={translate('Decrease value')}
                     className={`${stepperClass} pb-[6px]`}
                     onClick={() => changeBy(-stepNum)}
+                    disabled={disabled}
                   >
                     <StepperGlyph d={DOWN_PATH} />
                   </button>
                 </span>
               )}
               {unit && <span className="text-sm text-quaternary">{unit}</span>}
+              {buttons && stepButton(stepNum)}
             </>
           )
         }
@@ -147,6 +181,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           max={max}
           step={step}
           invalid={isInvalid}
+          disabled={disabled}
           onChange={(e) => onValueChange?.(e.target.value)}
           onBlur={(e) => {
             const v = outOfRange(value);
@@ -154,6 +189,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             onBlur?.(e);
           }}
           {...props}
+          className={cn(buttons && 'text-center', props.className)}
         />
       </InputGroup>
     );

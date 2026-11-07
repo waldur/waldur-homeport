@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { RangeInput } from './RangeInput';
 
 const meta: Meta<typeof RangeInput> = {
-  title: 'Forms/Text inputs/Range input',
+  title: 'Forms/Number/Range input',
   component: RangeInput,
   argTypes: {
     min: { control: 'number' },
@@ -17,7 +17,7 @@ const meta: Meta<typeof RangeInput> = {
     docs: {
       description: {
         component:
-          "A native range slider whose track fills up to the thumb in the brand colour. Controlled by `value`; `onChange` is the input's own change event. Show the value beside it: a slider alone does not say what it is set to.",
+          "A native range slider whose track fills up to the thumb in the brand colour. Controlled by `value`; `onChange` is the input's own change event. Show the value beside it: a slider alone does not say what it is set to. For a value the user can also type, use `SliderNumberInput`.",
       },
     },
   },

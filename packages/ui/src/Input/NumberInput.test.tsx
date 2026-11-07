@@ -96,4 +96,33 @@ describe('NumberInput', () => {
       expect(glyph).toHaveAttribute('height', '10');
     }
   });
+
+  it('puts minus and plus buttons either side of a centred value', async () => {
+    const { input, onValueChange } = renderInput(5, {
+      stepperLayout: 'buttons',
+    });
+    expect(input).toHaveClass('text-center');
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Decrease value' }),
+    );
+    expect(onValueChange).toHaveBeenLastCalledWith(4);
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Increase value' }),
+    );
+    expect(onValueChange).toHaveBeenLastCalledWith(6);
+  });
+
+  it.each([['carets'], ['buttons']])(
+    'disables the %s steppers with the field',
+    (stepperLayout) => {
+      renderInput(5, { stepperLayout, disabled: true });
+      expect(
+        screen.getByRole('button', { name: 'Increase value' }),
+      ).toBeDisabled();
+      expect(
+        screen.getByRole('button', { name: 'Decrease value' }),
+      ).toBeDisabled();
+      expect(screen.getByRole('spinbutton')).toBeDisabled();
+    },
+  );
 });

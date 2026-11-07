@@ -1,4 +1,3 @@
-import { BoxNumberField } from './BoxNumberField';
 import { CommaSeparatedListField } from './CommaSeparatedListField';
 import { CountrySelectField } from './CountrySelectField';
 import { DateField } from './DateField';
@@ -31,7 +30,6 @@ export const CommaSeparatedListEditField = withEditField(
   CommaSeparatedListField,
 );
 export const AsyncSelectEditField = withEditField(AsyncSelectField);
-export const BoxNumberEditField = withEditField(BoxNumberField);
 export const EmailEditField = withEditField(EmailField);
 
 export const CountryEditField = withEditField(CountrySelectField);

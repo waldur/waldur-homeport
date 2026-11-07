@@ -1,145 +1,28 @@
-import { MinusIcon, PlusIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { FieldRenderProps } from 'react-final-form';
 
-import { Input } from 'waldur-ui';
-import { BaseButton } from 'waldur-ui';
-
-import { translate } from '@/i18n';
-
-import './SliderNumberField.scss';
-
-// ── Base (Pure UI) ──────────────────────────────────────
-
-interface BaseSliderNumberFieldProps {
-  value?: number | string;
-  onChange?: (value: number) => void;
-  name?: string;
-  step?: number | string;
-  min?: number | string;
-  max?: number | string;
-  unit?: string;
-  disabled?: boolean;
-  isInvalid?: boolean;
-  id?: string;
-}
-
-const BaseSliderNumberField: FC<BaseSliderNumberFieldProps> = ({
-  value,
-  onChange,
-  name,
-  min: minProp,
-  max: maxProp,
-  step,
-  unit,
-  disabled,
-  isInvalid,
-  id,
-}) => {
-  const min = Number(minProp ?? 0);
-  const max = Number(maxProp ?? 100);
-
-  const change = (v) => {
-    if (v < min) {
-      onChange?.(min);
-    } else if (v > max) {
-      onChange?.(max);
-    } else {
-      onChange?.(v);
-    }
-  };
-
-  const sliderLineValue =
-    Number(value) > max
-      ? max
-      : Number(value) < min
-        ? min
-        : Boolean(value) && value !== 0
-          ? Number(value)
-          : min;
-
-  return (
-    <div className="slider-number-input">
-      <div className="slider-number-input-range">
-        <input
-          name={name}
-          value={value as any}
-          onChange={(e) => onChange?.(Number(e.target.value))}
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          disabled={disabled}
-        />
-        <div className="slider-line-wrapper">
-          <div className="slider-line-bg" />
-          <div
-            className="slider-line-active"
-            style={{
-              width: ((sliderLineValue - min) / (max - min)) * 100 + '%',
-            }}
-          />
-        </div>
-      </div>
-      <div className="slider-number-input-control">
-        <Input
-          name={name}
-          value={value as any}
-          onChange={(e) => onChange?.(Number(e.target.value))}
-          type="number"
-          min={min}
-          max={max}
-          step={step}
-          disabled={disabled}
-          onBlur={() => change(value)}
-          invalid={isInvalid}
-          id={id}
-        />
-
-        <div>
-          <BaseButton
-            iconNode={<PlusIcon weight="bold" />}
-            tooltip={translate('Increase')}
-            onClick={() => change(Number(value) + 1 * Number(step || 1))}
-            disabled={disabled}
-            variant="tertiary-ghost"
-            className="plus-btn"
-            size="sm"
-          />
-          <BaseButton
-            iconNode={<MinusIcon weight="bold" />}
-            tooltip={translate('Decrease')}
-            onClick={() => change(Number(value) - 1 * Number(step || 1))}
-            disabled={disabled}
-            variant="tertiary-ghost"
-            className="minus-btn [&_svg]:-mt-0.75"
-            size="sm"
-          />
-        </div>
-      </div>
-      {unit && <span className="font-medium text-base ms-2.5">{unit}</span>}
-    </div>
-  );
-};
-
-// ── Field Adapter ───────────────────────────────────────
+import { SliderNumberInput, SliderNumberInputProps } from 'waldur-ui';
 
 export interface SliderNumberFieldProps extends Omit<
-  BaseSliderNumberFieldProps,
-  'value' | 'onChange' | 'name'
+  SliderNumberInputProps,
+  'value' | 'onValueChange' | 'onBlur' | 'name' | 'invalid'
 > {
   input: FieldRenderProps<any>['input'];
   meta: FieldRenderProps<any>['meta'];
 }
 
+/** The react-final-form adapter for waldur-ui's SliderNumberInput. */
 export const SliderNumberField: FC<SliderNumberFieldProps> = ({
   input,
   meta,
   ...rest
 }) => (
-  <BaseSliderNumberField
+  <SliderNumberInput
     {...rest}
-    {...input}
-    isInvalid={meta.touched && meta.error}
+    name={input.name}
+    value={input.value}
+    onValueChange={input.onChange}
+    onBlur={input.onBlur}
+    invalid={meta.touched && !!meta.error}
   />
 );

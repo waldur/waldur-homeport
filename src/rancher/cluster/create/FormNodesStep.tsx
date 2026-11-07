@@ -10,8 +10,7 @@ import { BaseButton, Checkbox, FormField } from 'waldur-ui';
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { SelectField, SelectGroup, StringField } from '@/form';
-import { BoxNumberField } from '@/form/BoxNumberField';
+import { NumberField, SelectField, SelectGroup, StringField } from '@/form';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
@@ -118,9 +117,10 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                             format={formatIntField}
                           >
                             {({ input, meta }) => (
-                              <BoxNumberField
+                              <NumberField
                                 input={input}
                                 meta={meta}
+                                stepperLayout="buttons"
                                 aria-label={`${translate('Units')} ${index + 1}`}
                                 min={1}
                                 max={100}
