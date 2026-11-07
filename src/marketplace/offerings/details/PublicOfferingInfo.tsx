@@ -1,14 +1,12 @@
 import { FunctionComponent } from 'react';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
-import { Card, CardContent } from 'waldur-ui';
-
+import { Panel } from '@/core/Panel';
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { translate } from '@/i18n';
 import { Category } from '@/marketplace/types';
 
 import { PublicOfferingAttributesCard } from './PublicOfferingAttributesCard';
-import { PublicOfferingCardTitle } from './PublicOfferingCardTitle';
 
 interface PublicOfferingInfoProps {
   offering: Offering;
@@ -20,17 +18,18 @@ export const PublicOfferingInfo: FunctionComponent<PublicOfferingInfoProps> = ({
   category,
 }) => {
   return (
-    <Card bordered className="mb-8" id="getting-started">
-      <CardContent>
-        <PublicOfferingCardTitle>
-          {translate('Description')}
-        </PublicOfferingCardTitle>
-        <SafeMarkdown
-          text={offering.full_description || offering.description}
-        />
+    <Panel
+      title={translate('Description')}
+      cardBordered
+      className="mb-8"
+      id="description"
+    >
+      <SafeMarkdown
+        text={offering.full_description || offering.description}
+        smallTitles
+      />
 
-        <PublicOfferingAttributesCard offering={offering} category={category} />
-      </CardContent>
-    </Card>
+      <PublicOfferingAttributesCard offering={offering} category={category} />
+    </Panel>
   );
 };

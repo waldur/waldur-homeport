@@ -4,6 +4,7 @@ import { PlanUsageResponse } from 'waldur-js-client';
 import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
 
 interface OwnProps {
@@ -15,25 +16,25 @@ interface OwnProps {
 const PlanGroup = ({ plan }: { plan: PlanUsageResponse }) => (
   <div>
     <h4 className="font-medium mb-3">{plan.plan_name}:</h4>
-    <table className="text-tertiary w-full mb-8">
+    <table className="text-tertiary mb-8">
       <tbody>
         <tr>
-          <th className="w-1/2 text-secondary font-medium">
+          <th className="text-secondary font-medium pe-5">
             {translate('Active count')}:
           </th>
           <td>{plan.usage}</td>
         </tr>
         <tr>
-          <th className="w-1/2 text-secondary font-medium">
+          <th className="text-secondary font-medium pe-5">
             {translate('Limit')}:
           </th>
           <td>{renderFieldOrDash(plan.limit)}</td>
         </tr>
         <tr>
-          <th className="w-1/2 text-secondary font-medium">
+          <th className="text-secondary font-medium pe-5">
             {translate('Remaining')}:
           </th>
-          <td>{plan.remaining === null ? 'N/A' : plan.remaining}</td>
+          <td>{plan.remaining === null ? DASH_ESCAPE_CODE : plan.remaining}</td>
         </tr>
       </tbody>
     </table>

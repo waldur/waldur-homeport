@@ -39,3 +39,20 @@ describe('OfferingPublicUIView pricing tab', () => {
     expect(keys({ billable: false })).toContain('components');
   });
 });
+
+describe('OfferingPublicUIView My requests tab', () => {
+  const myRequests = (count: number) =>
+    getTabs(offering(), undefined, false, false, count).find(
+      (tab) => tab.key === 'my-requests',
+    );
+
+  it('shows its count as a tab count, not inside the title', () => {
+    const tab = myRequests(3);
+    expect(tab.title).toBe('My requests');
+    expect(tab.count).toBe(3);
+  });
+
+  it('is left out when the user has no requests for the offering', () => {
+    expect(myRequests(0)).toBeUndefined();
+  });
+});

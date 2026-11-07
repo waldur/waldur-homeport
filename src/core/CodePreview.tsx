@@ -4,6 +4,8 @@ import { FunctionComponent, PropsWithChildren } from 'react';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatTemplate } from '@/i18n/translate';
 
+import './SafeMarkdown.scss';
+
 const CodeBlock: FunctionComponent<PropsWithChildren> = ({ children }) => (
   <div className="code-block">
     <pre>
@@ -29,7 +31,7 @@ export const CodePreview = ({ template = '', context }) => {
   return (
     <Markdown
       // rich-text: inline `code` gets the shared look (src/tailwind.css).
-      className="md-content rich-text"
+      className="md-content rich-text md-small-titles"
       options={{
         overrides: {
           br: {

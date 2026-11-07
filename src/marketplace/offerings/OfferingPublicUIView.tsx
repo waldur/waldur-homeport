@@ -304,12 +304,14 @@ export const OfferingPublicUIView = () => {
 
   // Counts only what this user requested for this offering, so the tab appears
   // exactly when it would have rows. Anonymous visitors never have any.
+  // `involved` as the tab's own list sends it: staff and support read every
+  // proposal, and without it they would count requests the tab never lists.
   const { data: resourceRequestCount } = useQuery({
     queryKey: ['OfferingResourceRequestCount', uuid, user?.uuid],
     queryFn: () =>
       // The count action answers in the X-Result-Count header, not the body.
       proposalMyRequestedResourcesCount({
-        query: { offering_uuid: uuid },
+        query: { offering_uuid: uuid, involved: true },
       }).then((result) => fetchResultCount(result) || 0),
     enabled: Boolean(user && isProposalRequestEnabled()),
     refetchOnWindowFocus: false,
