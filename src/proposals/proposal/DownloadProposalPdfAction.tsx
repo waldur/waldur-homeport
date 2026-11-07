@@ -1,29 +1,26 @@
 import { FilePdfIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
-import {
-  proposalProposalsListUsersList,
-  proposalProposalsResourcesList,
-  RequestedResource,
-  UserRoleDetails,
-} from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { ENV } from '@/core/config';
+import { downloadFile } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { Proposal } from '@/proposals/types';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
-
-import { downloadProposalPdf } from './proposalPdf';
 
 interface DownloadProposalPdfActionProps {
   proposal: Pick<Proposal, 'uuid' | 'slug' | 'name'> & Partial<Proposal>;
   asDropdownItem?: boolean;
 }
 
-/** Fetches on click, not on render: this also sits in row actions, where a
- * hook would cost two requests per row. */
+/** The server renders the document from what the API gives the reader, so
+ * the applicant team, the call team and an evaluator each get their own
+ * (waldur/waldur-mastermind#681). */
+const proposalPdfUrl = (uuid: string) =>
+  `${ENV.apiEndpoint}api/proposal-proposals/${uuid}/pdf/`;
+
 export const DownloadProposalPdfAction: FC<DownloadProposalPdfActionProps> = ({
   proposal,
   asDropdownItem,
@@ -34,21 +31,10 @@ export const DownloadProposalPdfAction: FC<DownloadProposalPdfActionProps> = ({
   const download = async () => {
     setPreparing(true);
     try {
-      const [resources, team] = await Promise.all([
-        getAllPages<RequestedResource>((page) =>
-          proposalProposalsResourcesList({
-            path: { uuid: proposal.uuid },
-            query: { page, page_size: MAX_PAGE_SIZE } as any,
-          }),
-        ),
-        getAllPages<UserRoleDetails>((page) =>
-          proposalProposalsListUsersList({
-            path: { uuid: proposal.uuid },
-            query: { page, page_size: MAX_PAGE_SIZE } as any,
-          }),
-        ),
-      ]);
-      await downloadProposalPdf(proposal as Proposal, resources, team);
+      await downloadFile(
+        proposalPdfUrl(proposal.uuid),
+        `${proposal.slug || proposal.uuid}.pdf`,
+      );
     } catch (error) {
       showErrorResponse(error, translate('Unable to export the proposal.'));
     } finally {
