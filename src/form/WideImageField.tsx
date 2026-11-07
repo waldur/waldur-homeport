@@ -117,6 +117,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
             ref={inputRef}
             type="file"
             name={input.name}
+            data-testid="image-upload"
             accept=".png, .jpg, .jpeg"
             onChange={(event) => changeImage(event.target.files[0])}
             className="hidden"
