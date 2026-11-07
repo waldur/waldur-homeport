@@ -1,6 +1,13 @@
 import { FC, useState } from 'react';
 
-import { HelpIcon } from 'waldur-ui';
+import {
+  HelpIcon,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
@@ -34,10 +41,10 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
       })}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <table className="w-full">
-        <tbody>
-          <tr>
-            <th>
+      <Table scrollable={false} className="w-full">
+        <TableBody>
+          <TableRow divided={false}>
+            <TableHead>
               {props.resolve.component.name}
               <HelpIcon label={props.resolve.component.type} className="mx-1" />
               <span className="font-normal italic">
@@ -50,26 +57,26 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
                   : defaultCurrency(props.resolve.component.price)}
                 )
               </span>
-            </th>
-            <td>X</td>
-            <td>
+            </TableHead>
+            <TableCell>X</TableCell>
+            <TableCell>
               <MeasuredUnitInput
                 component={props.resolve.component}
                 input={{ value: qty, onChange: setQty }}
               />
-            </td>
-            <td className="text-center" width="20px">
+            </TableCell>
+            <TableCell className="text-center" width="20px">
               =
-            </td>
+            </TableCell>
             {!props.resolve.hidePrices ? (
-              <td>
+              <TableCell>
                 {defaultCurrency(qty * props.resolve.component.price)}
                 {perPeriod}
-              </td>
+              </TableCell>
             ) : null}
-          </tr>
-        </tbody>
-      </table>
+          </TableRow>
+        </TableBody>
+      </Table>
     </ModalDialog>
   );
 };

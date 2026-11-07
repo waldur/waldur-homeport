@@ -3,7 +3,18 @@ import { FC, Fragment } from 'react';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton, FormField, FormLabel, FormText } from 'waldur-ui';
+import {
+  BaseButton,
+  FormField,
+  FormLabel,
+  FormText,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { StringField } from '@/form';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
@@ -26,19 +37,19 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
 }) => (
   <>
     {fields.length > 0 && (
-      <table className="table px-0 mb-1.5">
-        <thead>
-          <tr>
-            <td className="w-40">{translate('Claim')}</td>
-            <td>{translate('Accepted values')}</td>
-            <td className="w-[5px]" />
-          </tr>
-        </thead>
-        <tbody>
+      <Table scrollable={false} className="px-0 mb-1.5">
+        <TableHeader>
+          <TableRow divided={false}>
+            <TableHead className="w-40">{translate('Claim')}</TableHead>
+            <TableHead>{translate('Accepted values')}</TableHead>
+            <TableHead className="w-[5px]" />
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {fields.map((name, index) => (
             <Fragment key={name}>
-              <tr>
-                <td>
+              <TableRow divided={false}>
+                <TableCell>
                   <Field name={`${name}.claim`}>
                     {({ input, meta }) => (
                       <StringField
@@ -48,8 +59,8 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
                       />
                     )}
                   </Field>
-                </td>
-                <td>
+                </TableCell>
+                <TableCell>
                   <Field name={`${name}.values`}>
                     {({ input, meta }) => (
                       <CommaSeparatedListField
@@ -59,8 +70,8 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
                       />
                     )}
                   </Field>
-                </td>
-                <td>
+                </TableCell>
+                <TableCell>
                   <BaseButton
                     iconNode={<TrashIcon weight="bold" />}
                     tooltip={translate('Remove')}
@@ -68,12 +79,12 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
                     variant="danger"
                     size="lg"
                   />
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             </Fragment>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     )}
     <div>
       <BaseButton

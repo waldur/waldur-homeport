@@ -9,7 +9,15 @@ import {
   marketplaceProviderResourcesSetEndpoints,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
@@ -78,52 +86,50 @@ const FieldRows: FC<{
           />
         </div>
         {fields.length ? (
-          <div className="table-responsive">
-            <table className="table table-bordered mb-0">
-              <thead>
-                <tr>
-                  {columns.map((column) => (
-                    <th key={column.field}>{column.label}</th>
-                  ))}
-                  <th className="w-1" />
-                </tr>
-              </thead>
-              <tbody>
-                {fields.map((row, index) => (
-                  <tr key={row}>
-                    {columns.map((column) => (
-                      <td key={column.field}>
-                        <Field
-                          name={`${row}.${column.field}`}
-                          validate={column.required ? required : undefined}
-                        >
-                          {({ input, meta }) => (
-                            <>
-                              <StringField
-                                input={input}
-                                meta={meta}
-                                aria-label={column.label}
-                              />
-                              <FieldError error={meta.touched && meta.error} />
-                            </>
-                          )}
-                        </Field>
-                      </td>
-                    ))}
-                    <td className="row-actions">
-                      <BaseButton
-                        label={translate('Remove')}
-                        onClick={() => fields.remove(index)}
-                        iconNode={<TrashIcon weight="bold" />}
-                        variant="text-secondary"
-                        size="sm"
-                      />
-                    </td>
-                  </tr>
+          <Table density="compact" className="mb-0">
+            <TableHeader>
+              <TableRow>
+                {columns.map((column) => (
+                  <TableHead key={column.field}>{column.label}</TableHead>
                 ))}
-              </tbody>
-            </table>
-          </div>
+                <TableHead className="w-1" />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {fields.map((row, index) => (
+                <TableRow key={row}>
+                  {columns.map((column) => (
+                    <TableCell key={column.field}>
+                      <Field
+                        name={`${row}.${column.field}`}
+                        validate={column.required ? required : undefined}
+                      >
+                        {({ input, meta }) => (
+                          <>
+                            <StringField
+                              input={input}
+                              meta={meta}
+                              aria-label={column.label}
+                            />
+                            <FieldError error={meta.touched && meta.error} />
+                          </>
+                        )}
+                      </Field>
+                    </TableCell>
+                  ))}
+                  <TableCell className="row-actions">
+                    <BaseButton
+                      label={translate('Remove')}
+                      onClick={() => fields.remove(index)}
+                      iconNode={<TrashIcon weight="bold" />}
+                      variant="text-secondary"
+                      size="sm"
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         ) : (
           <p className="text-quaternary mb-0">{translate('None yet.')}</p>
         )}

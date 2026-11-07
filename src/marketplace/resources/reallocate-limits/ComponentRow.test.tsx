@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { Form } from 'react-final-form';
 import { describe, expect, it, vi } from 'vitest';
 
+import { Table, TableBody } from 'waldur-ui';
+
 import { ComponentRow } from './ComponentRow';
 
 // The cell clamps to the current limit while the user types, so it parses the
@@ -25,16 +27,16 @@ const renderRow = (limitDecimalPlaces: number | null, onSubmit = vi.fn()) => {
     <Form onSubmit={onSubmit} initialValues={{ limits: { storage: 10 } }}>
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-          <table>
-            <tbody>
+          <Table>
+            <TableBody>
               <ComponentRow
                 component={component}
                 limits={{ min: 0, max: 100 } as any}
                 offeringLimits={{} as any}
                 plan={{ prices: { storage: 2 } } as any}
               />
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </form>
       )}
     </Form>,

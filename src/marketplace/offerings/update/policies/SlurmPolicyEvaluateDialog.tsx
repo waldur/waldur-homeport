@@ -7,7 +7,18 @@ import {
   SlurmPolicyEvaluateResponse,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, BaseButton, Code } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  BaseButton,
+  Code,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -146,75 +157,73 @@ const DryRunResults: FC<{ data: SlurmPolicyDryRunResponse }> = ({ data }) => (
         {translate('No active resources found.')}
       </p>
     ) : (
-      <div className="table-responsive">
-        <table className="table table-sm table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>{translate('Resource')}</th>
-              <th>{translate('Usage')}</th>
-              <th>{translate('Current state')}</th>
-              <th>{translate('Would trigger')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.resources.map((r) => (
-              <tr key={r.resource_uuid}>
-                <td>
-                  <span>{r.resource_name}</span>
-                  <br />
-                  <Code className="small">{r.resource_uuid}</Code>
-                </td>
-                <td>
-                  <UsageBadge percentage={r.usage_percentage} />
-                </td>
-                <td>
-                  {r.paused && (
+      <Table density="compact">
+        <TableHeader>
+          <TableRow>
+            <TableHead>{translate('Resource')}</TableHead>
+            <TableHead>{translate('Usage')}</TableHead>
+            <TableHead>{translate('Current state')}</TableHead>
+            <TableHead>{translate('Would trigger')}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data.resources.map((r) => (
+            <TableRow key={r.resource_uuid}>
+              <TableCell>
+                <span>{r.resource_name}</span>
+                <br />
+                <Code className="small">{r.resource_uuid}</Code>
+              </TableCell>
+              <TableCell>
+                <UsageBadge percentage={r.usage_percentage} />
+              </TableCell>
+              <TableCell>
+                {r.paused && (
+                  <Badge
+                    variant="danger"
+                    size="sm"
+                    tone="outline"
+                    className="me-1"
+                  >
+                    {translate('Paused')}
+                  </Badge>
+                )}
+                {r.downscaled && (
+                  <Badge
+                    variant="warning"
+                    size="sm"
+                    tone="outline"
+                    className="me-1"
+                  >
+                    {translate('Downscaled')}
+                  </Badge>
+                )}
+                {!r.paused && !r.downscaled && (
+                  <Badge variant="success" size="sm" tone="outline">
+                    {translate('Normal')}
+                  </Badge>
+                )}
+              </TableCell>
+              <TableCell>
+                {r.would_trigger.length === 0 ? (
+                  <span className="text-quaternary">{translate('None')}</span>
+                ) : (
+                  r.would_trigger.map((action) => (
                     <Badge
-                      variant="danger"
+                      key={action}
+                      variant={actionVariant(action)}
                       size="sm"
-                      tone="outline"
                       className="me-1"
                     >
-                      {translate('Paused')}
+                      {action}
                     </Badge>
-                  )}
-                  {r.downscaled && (
-                    <Badge
-                      variant="warning"
-                      size="sm"
-                      tone="outline"
-                      className="me-1"
-                    >
-                      {translate('Downscaled')}
-                    </Badge>
-                  )}
-                  {!r.paused && !r.downscaled && (
-                    <Badge variant="success" size="sm" tone="outline">
-                      {translate('Normal')}
-                    </Badge>
-                  )}
-                </td>
-                <td>
-                  {r.would_trigger.length === 0 ? (
-                    <span className="text-quaternary">{translate('None')}</span>
-                  ) : (
-                    r.would_trigger.map((action) => (
-                      <Badge
-                        key={action}
-                        variant={actionVariant(action)}
-                        size="sm"
-                        className="me-1"
-                      >
-                        {action}
-                      </Badge>
-                    ))
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  ))
+                )}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     )}
   </div>
 );
@@ -234,54 +243,52 @@ const EvaluateResults: FC<{ data: SlurmPolicyEvaluateResponse }> = ({
         {translate('No active resources found.')}
       </p>
     ) : (
-      <div className="table-responsive">
-        <table className="table table-sm table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>{translate('Resource')}</th>
-              <th>{translate('Usage')}</th>
-              <th>{translate('Actions taken')}</th>
-              <th>{translate('State change')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.resources.map((r) => (
-              <tr key={r.resource_uuid}>
-                <td>
-                  <span>{r.resource_name}</span>
-                  <br />
-                  <Code className="small">{r.resource_uuid}</Code>
-                </td>
-                <td>
-                  <UsageBadge percentage={r.usage_percentage} />
-                </td>
-                <td>
-                  {(r.actions_taken as string[]).length === 0 ? (
-                    <span className="text-quaternary">{translate('None')}</span>
-                  ) : (
-                    (r.actions_taken as string[]).map((action) => (
-                      <Badge
-                        key={action}
-                        variant={actionVariant(action)}
-                        size="sm"
-                        className="me-1"
-                      >
-                        {action}
-                      </Badge>
-                    ))
-                  )}
-                </td>
-                <td>
-                  <StateTransition
-                    previous={r.previous_state as Record<string, boolean>}
-                    next={r.new_state as Record<string, boolean>}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Table density="compact">
+        <TableHeader>
+          <TableRow>
+            <TableHead>{translate('Resource')}</TableHead>
+            <TableHead>{translate('Usage')}</TableHead>
+            <TableHead>{translate('Actions taken')}</TableHead>
+            <TableHead>{translate('State change')}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data.resources.map((r) => (
+            <TableRow key={r.resource_uuid}>
+              <TableCell>
+                <span>{r.resource_name}</span>
+                <br />
+                <Code className="small">{r.resource_uuid}</Code>
+              </TableCell>
+              <TableCell>
+                <UsageBadge percentage={r.usage_percentage} />
+              </TableCell>
+              <TableCell>
+                {(r.actions_taken as string[]).length === 0 ? (
+                  <span className="text-quaternary">{translate('None')}</span>
+                ) : (
+                  (r.actions_taken as string[]).map((action) => (
+                    <Badge
+                      key={action}
+                      variant={actionVariant(action)}
+                      size="sm"
+                      className="me-1"
+                    >
+                      {action}
+                    </Badge>
+                  ))
+                )}
+              </TableCell>
+              <TableCell>
+                <StateTransition
+                  previous={r.previous_state as Record<string, boolean>}
+                  next={r.new_state as Record<string, boolean>}
+                />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     )}
   </div>
 );

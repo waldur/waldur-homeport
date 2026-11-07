@@ -9,6 +9,12 @@ import {
   FormFieldset,
   FormLegend,
   FormText,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from 'waldur-ui';
 
 import { required } from '@/core/validators';
@@ -40,19 +46,21 @@ const FieldsListGroup = ({
       {fields.length && fields.length > 0 && (
         <FormField id="tres-billing-weights">
           <div>
-            <table className="table px-0 mb-0">
-              <thead>
-                <tr>
-                  <td className="w-1/2">{translate('Resource Type')}</td>
-                  <td>{translate('Weight')}</td>
-                  <td className="w-[5px]" />
-                </tr>
-              </thead>
-              <tbody>
+            <Table scrollable={false}>
+              <TableHeader>
+                <TableRow divided={false}>
+                  <TableHead className="w-1/2">
+                    {translate('Resource Type')}
+                  </TableHead>
+                  <TableHead>{translate('Weight')}</TableHead>
+                  <TableHead className="w-[5px]" />
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {fields.map((name, index) => (
                   <Fragment key={name}>
-                    <tr>
-                      <td>
+                    <TableRow divided={false}>
+                      <TableCell>
                         <Field name={`${name}.key`} validate={required}>
                           {({ input, meta }) => (
                             <StringField
@@ -71,8 +79,8 @@ const FieldsListGroup = ({
                             <option key={type} value={type} />
                           ))}
                         </datalist>
-                      </td>
-                      <td>
+                      </TableCell>
+                      <TableCell>
                         <Field name={`${name}.value`} validate={required}>
                           {({ input, meta }) => (
                             <NumberField
@@ -84,8 +92,8 @@ const FieldsListGroup = ({
                             />
                           )}
                         </Field>
-                      </td>
-                      <td>
+                      </TableCell>
+                      <TableCell>
                         <BaseButton
                           iconNode={<TrashIcon weight="bold" />}
                           tooltip={translate('Remove')}
@@ -94,12 +102,12 @@ const FieldsListGroup = ({
                           disabled={fields.length === 1}
                           size="lg"
                         />
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   </Fragment>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         </FormField>
       )}

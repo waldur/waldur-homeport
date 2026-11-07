@@ -4,7 +4,14 @@ import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 import { Offering } from 'waldur-js-client';
 
-import { TabNav } from 'waldur-ui';
+import {
+  TabNav,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from 'waldur-ui';
 
 import { ANNOUNCEMENT_ICON } from '@/administration/utils';
 import { ENV } from '@/core/config';
@@ -245,30 +252,33 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 backend the offering is wired to, not anything a prospective
                 customer can act on. Keep it to the provider/staff view. */}
             {!props.isPublic && (
-              <table className="table mb-0 px-0 h-auto text-xs w-auto mt-1">
-                <tbody>
-                  <tr>
-                    <th className="font-medium w-[150px] p-0 pe-2.5">
+              <Table
+                scrollable={false}
+                className="mb-0 px-0 h-auto text-xs w-auto mt-1"
+              >
+                <TableBody>
+                  <TableRow divided={false}>
+                    <TableHead className="font-medium w-[150px] p-0 pe-2.5">
                       {translate('Shared/Billing enabled')}:
-                    </th>
-                    <td className="text-quaternary p-0">
+                    </TableHead>
+                    <TableCell className="text-quaternary p-0">
                       {(offering.shared ? translate('Yes') : translate('No')) +
                         '/' +
                         (offering.billable
                           ? translate('Yes')
                           : translate('No'))}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th className="font-medium w-[100px] p-0 pe-2.5">
+                    </TableCell>
+                  </TableRow>
+                  <TableRow divided={false}>
+                    <TableHead className="font-medium w-[100px] p-0 pe-2.5">
                       {translate('Type')}:
-                    </th>
-                    <td className="text-quaternary p-0">
+                    </TableHead>
+                    <TableCell className="text-quaternary p-0">
                       {getLabel(offering.type)}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
             )}
           </div>
         }

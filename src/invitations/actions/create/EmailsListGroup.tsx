@@ -7,7 +7,13 @@ import {
   BaseButton,
   FormField,
   HelpIcon,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
   TablePagination,
+  TableRow,
 } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
@@ -178,15 +184,18 @@ const RowFeedbackRow = ({ name, rows }: { name: string; rows: any[] }) => {
   );
   if (!feedback) return null;
   return (
-    <tr className="text-sm">
-      <td colSpan={getFeedbackColSpan()} className="border-0 pt-0 pb-1.5">
+    <TableRow className="text-sm" divided={false}>
+      <TableCell
+        colSpan={getFeedbackColSpan()}
+        className="border-0 pt-0 pb-1.5"
+      >
         {feedback.blocking ? (
           <FieldError error={feedback.message} />
         ) : (
           <FieldWarning error={feedback.message} />
         )}
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -374,13 +383,16 @@ export const EmailsListGroup = ({
       <div id="emails-list-group">
         {fields.length > 0 && (
           <FormField>
-            <table className="table h-auto table-fixed align-top px-0 table-row-py-1.5 mb-0">
-              <thead>
-                <tr className="text-sm font-medium">
+            <Table
+              scrollable={false}
+              className="h-auto table-fixed align-top px-0 mb-0"
+            >
+              <TableHeader>
+                <TableRow className="text-sm font-medium" divided={false}>
                   {/* Fixed-layout table: one column without a width takes
                       the free space, so Email does when Civil number is
                       hidden. */}
-                  <td
+                  <TableHead
                     className={
                       isFeatureVisible(InvitationsFeatures.conceal_civil_number)
                         ? undefined
@@ -388,11 +400,11 @@ export const EmailsListGroup = ({
                     }
                   >
                     {translate('Email')}
-                  </td>
+                  </TableHead>
                   {!isFeatureVisible(
                     InvitationsFeatures.conceal_civil_number,
                   ) && (
-                    <td>
+                    <TableHead>
                       {ENV.plugins.WALDUR_CORE.INVITATION_CIVIL_NUMBER_LABEL ||
                         translate('Civil number')}{' '}
                       <HelpIcon
@@ -400,13 +412,15 @@ export const EmailsListGroup = ({
                           'Must start with a country prefix ie EE34501234215',
                         )}
                       />
-                    </td>
+                    </TableHead>
                   )}
-                  <td className="w-[380px]">{translate('Role')}</td>
-                  <td className="w-[54px]" />
-                </tr>
-              </thead>
-              <tbody>
+                  <TableHead className="w-[380px]">
+                    {translate('Role')}
+                  </TableHead>
+                  <TableHead className="w-[54px]" />
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {visibleItems.map((user, i) => {
                   if (!user) return null;
                   // Every row has a Role and a Project select; name them
@@ -414,14 +428,15 @@ export const EmailsListGroup = ({
                   const rowEmail = fields.value?.[i]?.email;
                   return (
                     <Fragment key={user}>
-                      <tr
+                      <TableRow
                         className="text-sm"
+                        divided={false}
                         ref={(element) => {
                           if (element) rowRefs.current.set(i, element);
                           else rowRefs.current.delete(i);
                         }}
                       >
-                        <td>
+                        <TableCell>
                           <Field
                             name={`${user}.email`}
                             validate={(value, allValues, meta) => {
@@ -462,11 +477,11 @@ export const EmailsListGroup = ({
                               />
                             )}
                           </Field>
-                        </td>
+                        </TableCell>
                         {isFeatureVisible(
                           InvitationsFeatures.conceal_civil_number,
                         ) ? null : (
-                          <td>
+                          <TableCell>
                             <Field
                               name={`${user}.civil_number`}
                               validate={
@@ -486,9 +501,9 @@ export const EmailsListGroup = ({
                                 />
                               )}
                             </Field>
-                          </td>
+                          </TableCell>
                         )}
-                        <td>
+                        <TableCell>
                           <RoleAndProjectSelectField
                             name={`${user}.role_project`}
                             roles={roles}
@@ -513,8 +528,8 @@ export const EmailsListGroup = ({
                                   })
                             }
                           />
-                        </td>
-                        <td>
+                        </TableCell>
+                        <TableCell>
                           {/* aria-disabled, not disabled: an unavailable
                               button stays in the Tab order, so keyboard
                               users can still reach the reason. */}
@@ -532,14 +547,14 @@ export const EmailsListGroup = ({
                             iconNode={<TrashIcon weight="bold" />}
                             size="lg"
                           />
-                        </td>
-                      </tr>
+                        </TableCell>
+                      </TableRow>
                       <RowFeedbackRow name={user} rows={fields.value} />
                     </Fragment>
                   );
                 })}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </FormField>
         )}
         <div>

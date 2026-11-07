@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { useField } from 'react-final-form';
 import { OpenStackSecurityGroup } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, TableCell, TableRow } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -34,7 +34,7 @@ export const RuleRow: FC<RuleRowProps> = ({
   } = useField(`${name}.protocol`);
 
   return (
-    <tr>
+    <TableRow>
       <EtherTypeField name={`${name}.ethertype`} />
       <DirectionField name={`${name}.direction`} />
       <ProtocolField name={`${name}.protocol`} />
@@ -45,7 +45,7 @@ export const RuleRow: FC<RuleRowProps> = ({
         choices={remoteSecurityGroups}
       />
       <DescriptionField name={`${name}.description`} />
-      <td>
+      <TableCell>
         <BaseButton
           onClick={onRemove}
           iconNode={<TrashIcon weight="bold" />}
@@ -53,7 +53,7 @@ export const RuleRow: FC<RuleRowProps> = ({
           label={translate('Remove')}
           size="lg"
         />
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };

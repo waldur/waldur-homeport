@@ -1,6 +1,16 @@
 import { FC, FocusEvent, useState, useEffect } from 'react';
 
-import { Badge, NumberInput, Tooltip } from 'waldur-ui';
+import {
+  Badge,
+  NumberInput,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Tooltip,
+} from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -99,17 +109,17 @@ const AllocationInputCell: FC<{
   );
 
   return (
-    <tr data-testid={rowTestId}>
-      <td>
+    <TableRow data-testid={rowTestId}>
+      <TableCell>
         <div>
           <strong>{resource.name}</strong>
           <div className="text-quaternary small">
             {resource.customer_name} / {resource.project_name}
           </div>
         </div>
-      </td>
-      <td>{currentLimit}</td>
-      <td>
+      </TableCell>
+      <TableCell>{currentLimit}</TableCell>
+      <TableCell>
         {isSelected ? (
           <div style={{ maxWidth: '200px' }}>
             {/* Always wrapped: swapping the wrapper in and out would remount
@@ -128,15 +138,15 @@ const AllocationInputCell: FC<{
         ) : (
           <span className="text-quaternary">—</span>
         )}
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         {isSelected ? (
           <span>{newLimit}</span>
         ) : (
           <span className="text-quaternary">—</span>
         )}
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         {isSelected ? (
           change === 0 ? (
             <span className="text-quaternary">{change}</span>
@@ -152,8 +162,8 @@ const AllocationInputCell: FC<{
         ) : (
           <span className="text-quaternary">—</span>
         )}
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -203,60 +213,56 @@ export const ResourceSelectionTable: FC<ResourceSelectionTableProps> = ({
         )}
       </div>
 
-      <div className="table-responsive">
-        <table className="table table-row-bordered table-expandable align-middle table-rounded border border-divider">
-          <thead>
-            <tr>
-              <th>{translate('Resource name')}</th>
-              <th>{translate('Current limit')}</th>
-              <th>{translate('Allocated')}</th>
-              <th>{translate('New limit')}</th>
-              <th>{translate('Change')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {resources.length === 0 ? (
-              <tr>
-                <td colSpan={5} className="text-center">
-                  <p className="mb-0">
-                    <strong>
-                      {translate('No targer resources selected.')}
-                    </strong>
-                  </p>
-                </td>
-              </tr>
-            ) : (
-              resources.map((resource) => {
-                const target = targets.find(
-                  (t) => t.resource_uuid === resource.uuid,
-                );
-                const isSelected = !!target;
-                const currentLimit = resource.limits[component.type] || 0;
-                const allocated = target?.allocated_limits[component.type];
-                const newLimit = currentLimit + (allocated || 0);
-                const change = allocated || 0;
+      <Table density="compact" className="align-middle">
+        <TableHeader>
+          <TableRow>
+            <TableHead>{translate('Resource name')}</TableHead>
+            <TableHead>{translate('Current limit')}</TableHead>
+            <TableHead>{translate('Allocated')}</TableHead>
+            <TableHead>{translate('New limit')}</TableHead>
+            <TableHead>{translate('Change')}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {resources.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={5} className="text-center">
+                <p className="mb-0">
+                  <strong>{translate('No targer resources selected.')}</strong>
+                </p>
+              </TableCell>
+            </TableRow>
+          ) : (
+            resources.map((resource) => {
+              const target = targets.find(
+                (t) => t.resource_uuid === resource.uuid,
+              );
+              const isSelected = !!target;
+              const currentLimit = resource.limits[component.type] || 0;
+              const allocated = target?.allocated_limits[component.type];
+              const newLimit = currentLimit + (allocated || 0);
+              const change = allocated || 0;
 
-                return (
-                  <AllocationInputCell
-                    key={resource.uuid}
-                    rowTestId={`row-${resource.uuid}`}
-                    resource={resource}
-                    isSelected={isSelected}
-                    currentLimit={currentLimit}
-                    allocated={allocated}
-                    newLimit={newLimit}
-                    change={change}
-                    freedAmount={freedAmount}
-                    totalAllocated={totalAllocated}
-                    component={component}
-                    onAllocationChange={onAllocationChange}
-                  />
-                );
-              })
-            )}
-          </tbody>
-        </table>
-      </div>
+              return (
+                <AllocationInputCell
+                  key={resource.uuid}
+                  rowTestId={`row-${resource.uuid}`}
+                  resource={resource}
+                  isSelected={isSelected}
+                  currentLimit={currentLimit}
+                  allocated={allocated}
+                  newLimit={newLimit}
+                  change={change}
+                  freedAmount={freedAmount}
+                  totalAllocated={totalAllocated}
+                  component={component}
+                  onAllocationChange={onAllocationChange}
+                />
+              );
+            })
+          )}
+        </TableBody>
+      </Table>
     </div>
   );
 };

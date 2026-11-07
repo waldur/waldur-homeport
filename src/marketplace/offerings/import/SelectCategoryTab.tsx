@@ -7,7 +7,16 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import { FormField, HelpIcon } from 'waldur-ui';
+import {
+  FormField,
+  HelpIcon,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -30,18 +39,25 @@ const FieldsListMapping = ({
 }) => {
   return (
     <FormField>
-      <table className="table align-middle table-row-bordered border-b border-b-secondary mb-2.5">
-        <thead>
-          <tr className="text-quaternary text-xs font-medium">
-            <td className="w-1/2">{translate('Remote category')}</td>
-            <td className="w-1/2">{translate('Local category')}</td>
-          </tr>
-        </thead>
-        <tbody className="text-sm">
+      <Table
+        density="compact"
+        className="align-middle border-b border-b-secondary mb-2.5"
+      >
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-1/2">
+              {translate('Remote category')}
+            </TableHead>
+            <TableHead className="w-1/2">
+              {translate('Local category')}
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {fields.map((component, i) =>
             component ? (
-              <tr key={component}>
-                <td className="text-primary">
+              <TableRow key={component}>
+                <TableCell>
                   {fields.value[i].remote_category}
                   <HelpIcon
                     label={
@@ -65,8 +81,8 @@ const FieldsListMapping = ({
                     size={20}
                     className="ms-1.5"
                   />
-                </td>
-                <td>
+                </TableCell>
+                <TableCell>
                   <Field
                     name={`${component}.local_category`}
                     validate={required}
@@ -81,12 +97,12 @@ const FieldsListMapping = ({
                       />
                     )}
                   </Field>
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ) : null,
           )}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </FormField>
   );
 };

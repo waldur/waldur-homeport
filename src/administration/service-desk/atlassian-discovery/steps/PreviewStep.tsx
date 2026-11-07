@@ -6,10 +6,16 @@ import { supportSettingsAtlassianSaveSettings } from 'waldur-js-client';
 import {
   AlertItem,
   BaseButton,
+  Code,
   PropertyCard,
   PropertyItem,
   PropertyList,
-  Code,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -145,24 +151,24 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
         className="mb-3"
       >
         {selectedRequestTypes.length > 0 ? (
-          <table className="table table-sm table-borderless">
-            <thead>
-              <tr>
-                <th>{translate('Name')}</th>
-                <th>{translate('Issue Type ID')}</th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table density="compact" scrollable={false}>
+            <TableHeader>
+              <TableRow divided={false}>
+                <TableHead>{translate('Name')}</TableHead>
+                <TableHead>{translate('Issue Type ID')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {selectedRequestTypes.map((rt) => (
-                <tr key={rt.id}>
-                  <td>{rt.name}</td>
-                  <td>
+                <TableRow key={rt.id} divided={false}>
+                  <TableCell>{rt.name}</TableCell>
+                  <TableCell>
                     <Code>{rt.issue_type_id}</Code>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         ) : (
           <span className="text-quaternary">
             {translate('No request types selected')}

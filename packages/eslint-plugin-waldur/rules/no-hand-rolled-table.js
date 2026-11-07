@@ -54,20 +54,10 @@ const ALLOWED_FILES = [
   'src/table/',
   'src/core/RichTextEditor',
   'packages/ui/src/Table/Table.tsx',
-  // A grid of form inputs, one per offering component, inside a dialog -- not
-  // a list of data. @/table/Table brings a fetch cycle, an action bar, a
-  // reserved min-height and column sizing meant for a page of rows, all of
-  // which fight a four-row price editor in a modal. Same shape as
-  // SetQuotasDialog's own table.
-  'src/marketplace/offerings/update/plans/PricesTable.tsx',
   // Storybook demo of the tableCell select variant embedded in a row -- a
   // two-cell illustration, not a data table, and packages/ui can't depend on
   // @/table/Table (app-coupled, see the note above) regardless.
   'packages/ui/src/Select/Select.stories.tsx',
-  // A form grid: one organization select per discovered Arrow customer, in a
-  // wizard step. Paging would hide mappings still being chosen; see
-  // docs/table/migration-guide.md, "Form grid".
-  'src/administration/arrow/setup/Step2CustomerDiscovery.tsx',
 ];
 
 const readBaseline = createBaselineReader();
@@ -122,8 +112,7 @@ export default {
         "  - a list of records (paged, filtered, row actions) -> Table from '@/table/Table'\n" +
         "  - a read-only list already in memory -> SimpleTable from '@/table/SimpleTable'\n" +
         "  - label/value pairs about one object -> PropertyList from 'waldur-ui'\n" +
-        "  - a grid of form inputs -> waldur-ui's Table primitives, with the file in\n" +
-        "    this rule's ALLOWED_FILES and a one-line reason\n" +
+        "  - a form grid, custom layout, footer or preview -> Table primitives from 'waldur-ui'\n" +
         '  Not a data table at all (a <td> under test, an email template)?\n' +
         '  eslint-disable-next-line this rule with the reason.',
       stale:

@@ -7,14 +7,20 @@ import {
 } from 'waldur-js-client';
 
 import {
+  Badge,
   BadgeVariant,
+  Code,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
   Tabs,
+  TabsContent,
   TabsList,
   TabsTrigger,
-  TabsContent,
-  Code,
 } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -120,75 +126,73 @@ const EvaluationHistoryTab: FC<{ policyUuid: string }> = ({ policyUuid }) => {
   }
 
   return (
-    <div className="table-responsive">
-      <table className="table table-hover table-sm">
-        <thead>
-          <tr>
-            <th>{translate('Timestamp')}</th>
-            <th>{translate('Resource')}</th>
-            <th>{translate('Usage')}</th>
-            <th>{translate('Actions')}</th>
-            <th>{translate('State change')}</th>
-            <th>{translate('Site agent')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((log: SlurmPolicyEvaluationLog) => {
-            const prevState = log.previous_state as {
-              paused?: boolean;
-              downscaled?: boolean;
-            };
-            const newState = log.new_state as {
-              paused?: boolean;
-              downscaled?: boolean;
-            };
-            const actions = (log.actions_taken || []) as string[];
-            return (
-              <tr key={log.uuid}>
-                <td className="whitespace-nowrap">
-                  {formatDateTime(log.evaluated_at)}
-                </td>
-                <td>{log.resource_name || log.resource_uuid}</td>
-                <td>
-                  <UsagePercentageBadge
-                    value={log.usage_percentage}
-                    graceLimit={log.grace_limit_percentage}
-                  />
-                </td>
-                <td>
-                  {actions.length > 0
-                    ? actions.map((a) => <ActionBadge key={a} action={a} />)
-                    : '-'}
-                </td>
-                <td className="small">
-                  {prevState?.paused !== newState?.paused && (
-                    <span>
-                      paused: {String(prevState?.paused)} &rarr;{' '}
-                      {String(newState?.paused)}
-                    </span>
-                  )}
-                  {prevState?.downscaled !== newState?.downscaled && (
-                    <span className="ms-1.5">
-                      downscaled: {String(prevState?.downscaled)} &rarr;{' '}
-                      {String(newState?.downscaled)}
-                    </span>
-                  )}
-                  {prevState?.paused === newState?.paused &&
-                    prevState?.downscaled === newState?.downscaled &&
-                    '-'}
-                </td>
-                <td>
-                  <SiteAgentStatusBadge
-                    sent={log.stomp_message_sent}
-                    confirmed={log.site_agent_confirmed}
-                  />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <Table density="compact">
+      <TableHeader>
+        <TableRow>
+          <TableHead>{translate('Timestamp')}</TableHead>
+          <TableHead>{translate('Resource')}</TableHead>
+          <TableHead>{translate('Usage')}</TableHead>
+          <TableHead>{translate('Actions')}</TableHead>
+          <TableHead>{translate('State change')}</TableHead>
+          <TableHead>{translate('Site agent')}</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {data.map((log: SlurmPolicyEvaluationLog) => {
+          const prevState = log.previous_state as {
+            paused?: boolean;
+            downscaled?: boolean;
+          };
+          const newState = log.new_state as {
+            paused?: boolean;
+            downscaled?: boolean;
+          };
+          const actions = (log.actions_taken || []) as string[];
+          return (
+            <TableRow key={log.uuid}>
+              <TableCell className="whitespace-nowrap">
+                {formatDateTime(log.evaluated_at)}
+              </TableCell>
+              <TableCell>{log.resource_name || log.resource_uuid}</TableCell>
+              <TableCell>
+                <UsagePercentageBadge
+                  value={log.usage_percentage}
+                  graceLimit={log.grace_limit_percentage}
+                />
+              </TableCell>
+              <TableCell>
+                {actions.length > 0
+                  ? actions.map((a) => <ActionBadge key={a} action={a} />)
+                  : '-'}
+              </TableCell>
+              <TableCell className="small">
+                {prevState?.paused !== newState?.paused && (
+                  <span>
+                    paused: {String(prevState?.paused)} &rarr;{' '}
+                    {String(newState?.paused)}
+                  </span>
+                )}
+                {prevState?.downscaled !== newState?.downscaled && (
+                  <span className="ms-1.5">
+                    downscaled: {String(prevState?.downscaled)} &rarr;{' '}
+                    {String(newState?.downscaled)}
+                  </span>
+                )}
+                {prevState?.paused === newState?.paused &&
+                  prevState?.downscaled === newState?.downscaled &&
+                  '-'}
+              </TableCell>
+              <TableCell>
+                <SiteAgentStatusBadge
+                  sent={log.stomp_message_sent}
+                  confirmed={log.site_agent_confirmed}
+                />
+              </TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
   );
 };
 
@@ -214,73 +218,61 @@ const CommandHistoryTab: FC<{ policyUuid: string }> = ({ policyUuid }) => {
   }
 
   return (
-    <div className="table-responsive">
-      <table className="table table-hover table-sm">
-        <thead>
-          <tr>
-            <th>{translate('Timestamp')}</th>
-            <th>{translate('Type')}</th>
-            <th>{translate('Command')}</th>
-            <th>{translate('Mode')}</th>
-            <th>{translate('Status')}</th>
-            <th>{translate('Error')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((cmd) => (
-            <tr key={cmd.uuid}>
-              <td className="whitespace-nowrap">
-                {formatDateTime(cmd.executed_at)}
-              </td>
-              <td>
-                <Badge
-                  variant="secondary"
-                  size="sm"
-                  shape="pill"
-                  tone="outline"
-                >
-                  {cmd.command_type}
+    <Table density="compact">
+      <TableHeader>
+        <TableRow>
+          <TableHead>{translate('Timestamp')}</TableHead>
+          <TableHead>{translate('Type')}</TableHead>
+          <TableHead>{translate('Command')}</TableHead>
+          <TableHead>{translate('Mode')}</TableHead>
+          <TableHead>{translate('Status')}</TableHead>
+          <TableHead>{translate('Error')}</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {data.map((cmd) => (
+          <TableRow key={cmd.uuid}>
+            <TableCell className="whitespace-nowrap">
+              {formatDateTime(cmd.executed_at)}
+            </TableCell>
+            <TableCell>
+              <Badge variant="secondary" size="sm" shape="pill" tone="outline">
+                {cmd.command_type}
+              </Badge>
+            </TableCell>
+            <TableCell>
+              <Code className="small">{cmd.shell_command}</Code>
+            </TableCell>
+            <TableCell>
+              <Badge
+                variant={
+                  cmd.execution_mode === 'production' ? 'primary' : 'info'
+                }
+                size="sm"
+                shape="pill"
+                tone="outline"
+              >
+                {cmd.execution_mode}
+              </Badge>
+            </TableCell>
+            <TableCell>
+              {cmd.success ? (
+                <Badge variant="success" size="sm" shape="pill" tone="outline">
+                  {translate('OK')}
                 </Badge>
-              </td>
-              <td>
-                <Code className="small">{cmd.shell_command}</Code>
-              </td>
-              <td>
-                <Badge
-                  variant={
-                    cmd.execution_mode === 'production' ? 'primary' : 'info'
-                  }
-                  size="sm"
-                  shape="pill"
-                  tone="outline"
-                >
-                  {cmd.execution_mode}
+              ) : (
+                <Badge variant="danger" size="sm" shape="pill" tone="outline">
+                  {translate('Failed')}
                 </Badge>
-              </td>
-              <td>
-                {cmd.success ? (
-                  <Badge
-                    variant="success"
-                    size="sm"
-                    shape="pill"
-                    tone="outline"
-                  >
-                    {translate('OK')}
-                  </Badge>
-                ) : (
-                  <Badge variant="danger" size="sm" shape="pill" tone="outline">
-                    {translate('Failed')}
-                  </Badge>
-                )}
-              </td>
-              <td className="small text-danger">
-                {renderFieldOrDash(cmd.error_message)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+              )}
+            </TableCell>
+            <TableCell className="small text-danger">
+              {renderFieldOrDash(cmd.error_message)}
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 };
 

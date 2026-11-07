@@ -5,7 +5,17 @@ import {
   marketplaceUserOfferingConsentsRevoke,
 } from 'waldur-js-client';
 
-import { BaseButton, Card, CardContent } from 'waldur-ui';
+import {
+  BaseButton,
+  Card,
+  CardContent,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -91,36 +101,40 @@ export const RevokeTosDialog = ({
             </h6>
             <Card variant="table" bordered>
               <CardContent className="p-0">
-                <table className="table align-middle mb-0">
-                  <thead>
-                    <tr className="align-middle">
-                      <th>{translate('Name')}</th>
-                      <th>{translate('Project')}</th>
-                      <th>{translate('Category')}</th>
-                      <th>{translate('Created')}</th>
-                      <th>{translate('State')}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <Table density="compact" className="align-middle mb-0">
+                  <TableHeader>
+                    <TableRow className="align-middle">
+                      <TableHead>{translate('Name')}</TableHead>
+                      <TableHead>{translate('Project')}</TableHead>
+                      <TableHead>{translate('Category')}</TableHead>
+                      <TableHead>{translate('Created')}</TableHead>
+                      <TableHead>{translate('State')}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
                     {resources.map((resource: any) => (
-                      <tr key={resource.uuid}>
-                        <td>
+                      <TableRow key={resource.uuid}>
+                        <TableCell>
                           <ResourceNameField row={resource} />
-                        </td>
-                        <td>{renderFieldOrDash(resource.project_name)}</td>
-                        <td>{resource.category_title}</td>
-                        <td>{formatDateTime(resource.created)}</td>
-                        <td>
+                        </TableCell>
+                        <TableCell>
+                          {renderFieldOrDash(resource.project_name)}
+                        </TableCell>
+                        <TableCell>{resource.category_title}</TableCell>
+                        <TableCell>
+                          {formatDateTime(resource.created)}
+                        </TableCell>
+                        <TableCell>
                           <ResourceStateField
                             resource={resource}
                             tone="outline"
                             shape="pill"
                           />
-                        </td>
-                      </tr>
+                        </TableCell>
+                      </TableRow>
                     ))}
-                  </tbody>
-                </table>
+                  </TableBody>
+                </Table>
               </CardContent>
             </Card>
           </div>

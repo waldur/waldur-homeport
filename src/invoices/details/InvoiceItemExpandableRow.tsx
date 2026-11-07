@@ -1,7 +1,17 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC, Fragment } from 'react';
 
-import { Tooltip, Card, CardContent } from 'waldur-ui';
+import {
+  Card,
+  CardContent,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Tooltip,
+} from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -87,7 +97,7 @@ const InvoiceItemLine: FC<{
   const componentLabel =
     dd.offering_component_name || dd.offering_component_type;
   return (
-    <tr
+    <TableRow
       className={
         isDiscount
           ? 'bg-success-subtle'
@@ -96,7 +106,7 @@ const InvoiceItemLine: FC<{
             : undefined
       }
     >
-      <td>
+      <TableCell>
         {isDiscount ? (
           <Tooltip
             autoWidth={true}
@@ -157,13 +167,13 @@ const InvoiceItemLine: FC<{
             )}
           </>
         )}
-      </td>
-      <td className="whitespace-nowrap">
+      </TableCell>
+      <TableCell className="whitespace-nowrap">
         {isAdjustment
           ? null
           : `${formatDate(item.start)} – ${formatDate(item.end)}`}
-      </td>
-      <td className="whitespace-nowrap">
+      </TableCell>
+      <TableCell className="whitespace-nowrap">
         {item.measured_unit}
         {getBillingUnitSuffix(item.unit) && (
           <span className="text-quaternary">
@@ -171,7 +181,7 @@ const InvoiceItemLine: FC<{
             {getBillingUnitSuffix(item.unit)}
           </span>
         )}
-      </td>
+      </TableCell>
       {item.details.resource_limit_periods ? (
         <Tooltip
           autoWidth={true}
@@ -182,30 +192,30 @@ const InvoiceItemLine: FC<{
             />
           }
         >
-          <td>
+          <TableCell>
             {Number(item.factor || item.quantity)}{' '}
             <WarningCircleIcon
               weight="bold"
               size={16}
               className="text-quinary"
             />
-          </td>
+          </TableCell>
         </Tooltip>
       ) : (
-        <td>{Number(item.factor || item.quantity)}</td>
+        <TableCell>{Number(item.factor || item.quantity)}</TableCell>
       )}
       {showPrice && (
         <>
-          <td className={isDiscount ? 'text-success' : undefined}>
+          <TableCell className={isDiscount ? 'text-success' : undefined}>
             {defaultCurrency(item.unit_price)}
-          </td>
-          {showVat && <td>{defaultCurrency(item.tax)}</td>}
-          <td className={isDiscount ? 'text-success' : undefined}>
+          </TableCell>
+          {showVat && <TableCell>{defaultCurrency(item.tax)}</TableCell>}
+          <TableCell className={isDiscount ? 'text-success' : undefined}>
             {defaultCurrency(showVat ? item.total : item.price)}
-          </td>
+          </TableCell>
         </>
       )}
-      <td>
+      <TableCell>
         {!isAdjustment && (
           <InvoiceItemActions
             invoice={invoice}
@@ -213,8 +223,8 @@ const InvoiceItemLine: FC<{
             refreshInvoiceItems={refresh}
           />
         )}
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -230,8 +240,8 @@ export const InvoiceItemExpandableRow: FC<OwnProps> = (props) => {
     4 + (props.showPrice ? 2 + (props.showVat ? 1 : 0) : 0) + 1;
 
   const renderPlanHeader = (group: InvoicePlanGroup) => (
-    <tr className="bg-tertiary dark:bg-quaternary">
-      <td colSpan={props.showPrice ? columnCount - 2 : columnCount}>
+    <TableRow className="bg-tertiary dark:bg-quaternary" hoverable={false}>
+      <TableCell colSpan={props.showPrice ? columnCount - 2 : columnCount}>
         <span className="font-medium">{translate('Plan')}: </span>
         {group.plan_name || translate('No plan')}
         {group.start && group.end && (
@@ -239,16 +249,16 @@ export const InvoiceItemExpandableRow: FC<OwnProps> = (props) => {
             {formatDate(group.start)} – {formatDate(group.end)}
           </span>
         )}
-      </td>
+      </TableCell>
       {props.showPrice && (
         <>
-          <td className="font-medium">
+          <TableCell className="font-medium">
             {defaultCurrency(props.showVat ? group.total : group.price)}
-          </td>
-          <td />
+          </TableCell>
+          <TableCell />
         </>
       )}
-    </tr>
+    </TableRow>
   );
 
   const renderItem = (item: InvoiceItem, key: string | number) => (
@@ -266,27 +276,29 @@ export const InvoiceItemExpandableRow: FC<OwnProps> = (props) => {
     <ExpandableContainer>
       <Card variant="table" bordered>
         <CardContent>
-          <table className="table align-middle">
-            <thead>
-              <tr className="align-middle">
-                <th>{translate('Name')}</th>
-                <th>{translate('Period')}</th>
-                <th>{translate('Unit')}</th>
-                <th>{translate('Quantity')}</th>
+          <Table density="compact" className="align-middle">
+            <TableHeader>
+              <TableRow className="align-middle">
+                <TableHead>{translate('Name')}</TableHead>
+                <TableHead>{translate('Period')}</TableHead>
+                <TableHead>{translate('Unit')}</TableHead>
+                <TableHead>{translate('Quantity')}</TableHead>
                 {props.showPrice && (
                   <>
-                    <th>{translate('Unit price')}</th>
-                    {props.showVat && <th>{translate('Tax')}</th>}
-                    <th>
+                    <TableHead>{translate('Unit price')}</TableHead>
+                    {props.showVat && <TableHead>{translate('Tax')}</TableHead>}
+                    <TableHead>
                       {translate('Total')}
                       <PriceTooltip />
-                    </th>
+                    </TableHead>
                   </>
                 )}
-                <th className="w-[150px]">{translate('Actions')}</th>
-              </tr>
-            </thead>
-            <tbody>
+                <TableHead className="w-[150px]">
+                  {translate('Actions')}
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {planGroups
                 ? planGroups.map((group) => (
                     <Fragment key={group.plan_name}>
@@ -297,8 +309,8 @@ export const InvoiceItemExpandableRow: FC<OwnProps> = (props) => {
                     </Fragment>
                   ))
                 : orderedItems.map((item, i) => renderItem(item, i))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </CardContent>
       </Card>
     </ExpandableContainer>

@@ -11,7 +11,15 @@ import {
   openstackPortsSetAllowedAddressPairs,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { getUUID } from '@/core/utils';
 import { StringField, FieldError, SubmitButton } from '@/form';
@@ -54,8 +62,8 @@ const PairRow = ({
   pair: string;
   onRemove: () => void;
 }) => (
-  <tr>
-    <td>
+  <TableRow>
+    <TableCell>
       <Field name={`${pair}.ip_address`} validate={validateAllowedAddressPair}>
         {({ input, meta }) => (
           <>
@@ -64,8 +72,8 @@ const PairRow = ({
           </>
         )}
       </Field>
-    </td>
-    <td>
+    </TableCell>
+    <TableCell>
       <Field name={`${pair}.mac_address`}>
         {({ input, meta }) => (
           <>
@@ -74,8 +82,8 @@ const PairRow = ({
           </>
         )}
       </Field>
-    </td>
-    <td>
+    </TableCell>
+    <TableCell>
       <BaseButton
         onClick={onRemove}
         label={translate('Remove')}
@@ -83,8 +91,8 @@ const PairRow = ({
         variant="text-secondary"
         size="sm"
       />
-    </td>
-  </tr>
+    </TableCell>
+  </TableRow>
 );
 
 const PairAddButton = ({ onClick }: { onClick: () => void }) => (
@@ -100,27 +108,25 @@ const PairAddButton = ({ onClick }: { onClick: () => void }) => (
 const PairsTable: React.FC<{ fields: PairsFields }> = ({ fields }) =>
   fields.length > 0 ? (
     <>
-      <div className="table-responsive">
-        <table className="table table-bordered table-striped mt-2.5">
-          <thead>
-            <tr>
-              <th>{translate('Internal network mask (CIDR)')}</th>
-              <th>{translate('MAC address (optional)')}</th>
-              <th>{translate('Actions')}</th>
-            </tr>
-          </thead>
+      <Table density="compact" striped className="mt-2.5">
+        <TableHeader>
+          <TableRow>
+            <TableHead>{translate('Internal network mask (CIDR)')}</TableHead>
+            <TableHead>{translate('MAC address (optional)')}</TableHead>
+            <TableHead>{translate('Actions')}</TableHead>
+          </TableRow>
+        </TableHeader>
 
-          <tbody>
-            {fields.map((pair, index) => (
-              <PairRow
-                key={pair}
-                pair={pair}
-                onRemove={() => fields.remove(index)}
-              />
-            ))}
-          </tbody>
-        </table>
-      </div>
+        <TableBody>
+          {fields.map((pair, index) => (
+            <PairRow
+              key={pair}
+              pair={pair}
+              onRemove={() => fields.remove(index)}
+            />
+          ))}
+        </TableBody>
+      </Table>
       <PairAddButton onClick={() => fields.push({ ip_address: '' })} />
     </>
   ) : (

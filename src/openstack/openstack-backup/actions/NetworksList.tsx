@@ -2,7 +2,14 @@ import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Field } from 'react-final-form';
 
-import { BaseButton, NativeSelect } from 'waldur-ui';
+import {
+  BaseButton,
+  NativeSelect,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -93,33 +100,33 @@ export const NetworksList: FC<NetworkChoices & { fields; values }> = ({
   );
   return (
     <>
-      <table className="table table-borderless mb-1">
-        <tbody>
+      <Table scrollable={false} className="mb-1">
+        <TableBody>
           {fields.map((name, index) => (
-            <tr key={name}>
-              <td className="ps-0 md:w-6/12">
+            <TableRow key={name} divided={false} hoverable={false}>
+              <TableCell className="ps-0 md:w-6/12">
                 <SubnetField
                   name={name}
                   subnets={subnets}
                   networks={networks}
                   network={networks[index]}
                 />
-              </td>
-              <td className="md:w-5/12">
+              </TableCell>
+              <TableCell className="md:w-5/12">
                 <FloatingIpField
                   name={name}
                   floatingIps={floatingIps}
                   networks={networks}
                   network={networks[index]}
                 />
-              </td>
-              <td className="pe-0">
+              </TableCell>
+              <TableCell className="pe-0">
                 <DeleteButton onClick={() => fields.remove(index)} />
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
       <AddButton
         onClick={() => {
           fields.push({ floating_ip: SKIP_FLOATING_IP_ASSIGNMENT });

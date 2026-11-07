@@ -8,7 +8,18 @@ import {
   usersPartialUpdate,
 } from 'waldur-js-client';
 
-import { Badge, PropertyItem, PropertyList, Switch } from 'waldur-ui';
+import {
+  Badge,
+  PropertyItem,
+  PropertyList,
+  Switch,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
@@ -273,50 +284,48 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
       {attributeEntries.length > 0 && (
         <div>
           <h5 className="mb-3">{translate('Attribute provenance')}</h5>
-          <div className="table-responsive">
-            <table className="table table-bordered align-middle">
-              <thead>
-                <tr>
-                  <th>{translate('Attribute')}</th>
-                  <th>{translate('Source')}</th>
-                  <th>{translate('Last updated')}</th>
-                  <th>{translate('Freshness')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {attributeEntries.map(([attr, info]) => {
-                  const isStale =
-                    status.stale_attributes?.includes(attr) || info.is_stale;
-                  return (
-                    <tr
-                      key={attr}
-                      className={isStale ? 'table-warning' : undefined}
-                    >
-                      <td>{attr}</td>
-                      <td>
-                        <Badge
-                          variant="primary"
-                          size="sm"
-                          shape="pill"
-                          tone="outline"
-                        >
-                          {formatIsdName(info.source)}
-                        </Badge>
-                      </td>
-                      <td>
-                        {info.timestamp
-                          ? formatDateTime(info.timestamp)
-                          : DASH_ESCAPE_CODE}
-                      </td>
-                      <td>
-                        <FreshnessDot ageDays={info.age_days} />
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          <Table density="compact" className="align-middle">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Attribute')}</TableHead>
+                <TableHead>{translate('Source')}</TableHead>
+                <TableHead>{translate('Last updated')}</TableHead>
+                <TableHead>{translate('Freshness')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {attributeEntries.map(([attr, info]) => {
+                const isStale =
+                  status.stale_attributes?.includes(attr) || info.is_stale;
+                return (
+                  <TableRow
+                    key={attr}
+                    className={isStale ? 'table-warning' : undefined}
+                  >
+                    <TableCell>{attr}</TableCell>
+                    <TableCell>
+                      <Badge
+                        variant="primary"
+                        size="sm"
+                        shape="pill"
+                        tone="outline"
+                      >
+                        {formatIsdName(info.source)}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      {info.timestamp
+                        ? formatDateTime(info.timestamp)
+                        : DASH_ESCAPE_CODE}
+                    </TableCell>
+                    <TableCell>
+                      <FreshnessDot ageDays={info.age_days} />
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
         </div>
       )}
 

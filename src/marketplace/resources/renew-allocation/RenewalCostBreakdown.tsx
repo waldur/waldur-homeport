@@ -2,11 +2,21 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { useFormState } from 'react-final-form';
 import {
-  marketplaceResourcesEstimateRenewal,
-  projectsRetrieve,
   RenewalEstimateComponent,
   Resource,
+  marketplaceResourcesEstimateRenewal,
+  projectsRetrieve,
 } from 'waldur-js-client';
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { FAST_STALE_TIME, STALE_TIME } from '@/core/constants';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -31,12 +41,12 @@ const ComponentRow: FC<{ item: RenewalEstimateComponent }> = ({ item }) => {
       ? ` (+${item.new_limit - item.current_limit})`
       : '';
   return (
-    <tr>
-      <td>
+    <TableRow>
+      <TableCell>
         {item.component_name}
         {delta}
-      </td>
-      <td className="text-quaternary">
+      </TableCell>
+      <TableCell className="text-quaternary">
         {defaultCurrency(item.unit_price)}/
         {item.billing_type === 'prepaid'
           ? translate('mo')
@@ -49,11 +59,11 @@ const ComponentRow: FC<{ item: RenewalEstimateComponent }> = ({ item }) => {
         {item.new_limit} {item.measured_unit}
         {' × '}
         {item.period_description}
-      </td>
-      <td className="text-end whitespace-nowrap">
+      </TableCell>
+      <TableCell className="text-end whitespace-nowrap">
         {defaultCurrency(item.total)}
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -122,53 +132,53 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
   return (
     <div className="mt-3">
       <h6 className="mb-2.5">{translate('Estimated cost breakdown')}</h6>
-      <table className="table table-sm table-borderless">
-        <thead>
-          <tr className="border-b border-b-secondary">
-            <th>{translate('Component')}</th>
-            <th>{translate('Details')}</th>
-            <th className="text-end">{translate('Cost')}</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table density="compact" scrollable={false}>
+        <TableHeader>
+          <TableRow className="border-b border-b-secondary">
+            <TableHead>{translate('Component')}</TableHead>
+            <TableHead>{translate('Details')}</TableHead>
+            <TableHead className="text-end">{translate('Cost')}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {subscriptionItems.map((item) => (
             <ComponentRow key={item.component_type} item={item} />
           ))}
           {subscriptionItems.length > 0 && limitItems.length > 0 && (
-            <tr className="border-t border-t-secondary">
-              <td colSpan={2} className="text-end text-quaternary small">
+            <TableRow className="border-t border-t-secondary">
+              <TableCell colSpan={2} className="text-end text-quaternary small">
                 {translate('Subscription subtotal')}
-              </td>
-              <td className="text-end whitespace-nowrap">
+              </TableCell>
+              <TableCell className="text-end whitespace-nowrap">
                 {defaultCurrency(data.subscription_total)}
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           )}
           {limitItems.map((item) => (
             <ComponentRow key={item.component_type} item={item} />
           ))}
           {limitItems.length > 0 && subscriptionItems.length > 0 && (
-            <tr className="border-t border-t-secondary">
-              <td colSpan={2} className="text-end text-quaternary small">
+            <TableRow className="border-t border-t-secondary">
+              <TableCell colSpan={2} className="text-end text-quaternary small">
                 {translate('Limit change subtotal')}
-              </td>
-              <td className="text-end whitespace-nowrap">
+              </TableCell>
+              <TableCell className="text-end whitespace-nowrap">
                 {defaultCurrency(data.limit_change_total)}
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           )}
-        </tbody>
-        <tfoot>
-          <tr className="border-t border-t-secondary">
-            <td colSpan={2} className="text-end font-medium">
+        </TableBody>
+        <TableFooter>
+          <TableRow className="border-t border-t-secondary">
+            <TableCell colSpan={2} className="text-end font-medium">
               {translate('Total')}
-            </td>
-            <td className="text-end whitespace-nowrap font-medium text-base">
+            </TableCell>
+            <TableCell className="text-end whitespace-nowrap font-medium text-base">
               {defaultCurrency(data.total)}
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+            </TableCell>
+          </TableRow>
+        </TableFooter>
+      </Table>
     </div>
   );
 };

@@ -2,7 +2,16 @@ import { FC, useMemo } from 'react';
 import { useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
-import { PropertyItem, PropertyList } from 'waldur-ui';
+import {
+  PropertyItem,
+  PropertyList,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { formatDate, parseDate } from '@/core/dateUtils';
 import { StringGroup } from '@/form';
@@ -48,30 +57,30 @@ const LimitChangesSummary: FC<{
   return (
     <div className="mb-3">
       <h6 className="mb-1.5">{translate('Limit changes')}</h6>
-      <table className="table table-sm table-borderless mb-0">
-        <thead>
-          <tr className="border-b border-b-secondary">
-            <th>{translate('Component')}</th>
-            <th className="text-end">{translate('Current')}</th>
-            <th className="text-center">{translate('')}</th>
-            <th className="text-end">{translate('New')}</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table density="compact" scrollable={false} className="mb-0">
+        <TableHeader>
+          <TableRow className="border-b border-b-secondary">
+            <TableHead>{translate('Component')}</TableHead>
+            <TableHead className="text-end">{translate('Current')}</TableHead>
+            <TableHead className="text-center">{translate('')}</TableHead>
+            <TableHead className="text-end">{translate('New')}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {changes.map((c) => (
-            <tr key={c.type}>
-              <td>{c.name}</td>
-              <td className="text-end text-quaternary">
+            <TableRow key={c.type}>
+              <TableCell>{c.name}</TableCell>
+              <TableCell className="text-end text-quaternary">
                 {c.current} {c.unit}
-              </td>
-              <td className="text-center">→</td>
-              <td className="text-end">
+              </TableCell>
+              <TableCell className="text-center">→</TableCell>
+              <TableCell className="text-end">
                 {c.new} {c.unit}
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   );
 };

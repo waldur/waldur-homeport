@@ -7,6 +7,15 @@ import {
   type InvoiceItemsProjectCostsForPeriodRetrieveData,
 } from 'waldur-js-client';
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { composeValidators, required, validateEmails } from '@/core/validators';
@@ -237,32 +246,34 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
         simpleValue
       />
       {costsData && costsData.length !== 0 && (
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th>
+        <Table density="compact" className="my-3">
+          <TableHeader>
+            <TableRow>
+              <TableHead>
                 {isResourceScoped
                   ? translate('Resource')
                   : props.type === 'project'
                     ? translate('Project')
                     : translate('Organization')}
-              </th>
-              <th>{translate('Previous months')}</th>
-              <th>{translate('Current month')}</th>
-              <th>{translate('Total')}</th>
-            </tr>
-          </thead>
-          <tbody>
+              </TableHead>
+              <TableHead>{translate('Previous months')}</TableHead>
+              <TableHead>{translate('Current month')}</TableHead>
+              <TableHead>{translate('Total')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {costsData.map((costData, index) => (
-              <tr key={index}>
-                <td>{costData.name}</td>
-                <td>{defaultCurrency(costData.previous_months)}</td>
-                <td>{defaultCurrency(costData.current_month)}</td>
-                <td>{defaultCurrency(costData.total)}</td>
-              </tr>
+              <TableRow key={index}>
+                <TableCell>{costData.name}</TableCell>
+                <TableCell>
+                  {defaultCurrency(costData.previous_months)}
+                </TableCell>
+                <TableCell>{defaultCurrency(costData.current_month)}</TableCell>
+                <TableCell>{defaultCurrency(costData.total)}</TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       )}
       {singleProject && (
         <AsyncSelectGroup

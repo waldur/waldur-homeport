@@ -1,6 +1,15 @@
 import { FC } from 'react';
 
-import { AccordionCard, Code } from 'waldur-ui';
+import {
+  AccordionCard,
+  Code,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -20,32 +29,38 @@ export const DatabaseTableStats: FC<DatabaseTableStatsProps> = ({ data }) => {
       defaultOpen
       className="mb-5"
     >
-      <table className="table table-hover table-row-bordered align-middle mb-0">
-        <thead>
-          <tr>
-            <th>{translate('Table')}</th>
-            <th className="text-end">{translate('Total size')}</th>
-            <th className="text-end">{translate('Data size')}</th>
-            <th className="text-end">{translate('Index size')}</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table density="compact" className="align-middle mb-0">
+        <TableHeader>
+          <TableRow>
+            <TableHead>{translate('Table')}</TableHead>
+            <TableHead className="text-end">
+              {translate('Total size')}
+            </TableHead>
+            <TableHead className="text-end">{translate('Data size')}</TableHead>
+            <TableHead className="text-end">
+              {translate('Index size')}
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {data.map((row) => (
-            <tr key={row.table_name}>
-              <td>
+            <TableRow key={row.table_name}>
+              <TableCell>
                 <Code>{row.table_name}</Code>
-              </td>
-              <td className="text-end">
+              </TableCell>
+              <TableCell className="text-end">
                 {formatFilesize(row.total_size, 'B')}
-              </td>
-              <td className="text-end">{formatFilesize(row.data_size, 'B')}</td>
-              <td className="text-end">
+              </TableCell>
+              <TableCell className="text-end">
+                {formatFilesize(row.data_size, 'B')}
+              </TableCell>
+              <TableCell className="text-end">
                 {formatFilesize(row.external_size, 'B')}
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </AccordionCard>
   );
 };

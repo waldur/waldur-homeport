@@ -1,7 +1,17 @@
 import { ArrowUpIcon, ArrowDownIcon } from '@phosphor-icons/react';
 import { createElement, ReactNode } from 'react';
 
-import { Badge, Card, CardContent } from 'waldur-ui';
+import {
+  Badge,
+  Card,
+  CardContent,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { Column } from '@/table/types';
@@ -59,31 +69,27 @@ export const DetailsTable = <RowType,>({
   return (
     <Card variant="table" bordered>
       <CardContent className="p-0">
-        <div className="table-responsive">
-          <div className="table-container">
-            <table className="table table-row-bordered align-middle">
-              <thead>
-                <tr className="align-middle">
-                  {columns.map((col, i) => (
-                    <th key={i}>{col.title}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((row, index) => (
-                  <tr key={index}>
-                    {columns.map((col, i) => (
-                      <td key={i} className={col.className}>
-                        {createElement(col.render, { row })}
-                      </td>
-                    ))}
-                  </tr>
+        <Table density="compact" className="align-middle">
+          <TableHeader>
+            <TableRow className="align-middle">
+              {columns.map((col, i) => (
+                <TableHead key={i}>{col.title}</TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {rows.map((row, index) => (
+              <TableRow key={index}>
+                {columns.map((col, i) => (
+                  <TableCell key={i} className={col.className}>
+                    {createElement(col.render, { row })}
+                  </TableCell>
                 ))}
-                {resolvedTotalRow}
-              </tbody>
-            </table>
-          </div>
-        </div>
+              </TableRow>
+            ))}
+            {resolvedTotalRow}
+          </TableBody>
+        </Table>
       </CardContent>
     </Card>
   );

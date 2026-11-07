@@ -1,7 +1,7 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Table, TableBody } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -38,8 +38,8 @@ export const FloatingIpsList: FC<FloatingIpsListProps> = ({
         {fields.length === 0 ? (
           translate('Instance does not have any floating IPs yet.')
         ) : (
-          <table className="table table-borderless mb-1">
-            <tbody>
+          <Table scrollable={false} className="mb-1">
+            <TableBody>
               {fields.map((name, index) => (
                 <FloatingIpRow
                   key={index}
@@ -49,8 +49,8 @@ export const FloatingIpsList: FC<FloatingIpsListProps> = ({
                   onRemove={() => fields.remove(index)}
                 />
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         )}
 
         <BaseButton

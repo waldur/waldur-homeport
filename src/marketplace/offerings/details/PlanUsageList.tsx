@@ -1,7 +1,17 @@
 import { FC } from 'react';
 import { PlanUsageResponse } from 'waldur-js-client';
 
-import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -16,28 +26,30 @@ interface OwnProps {
 const PlanGroup = ({ plan }: { plan: PlanUsageResponse }) => (
   <div>
     <h4 className="font-medium mb-3">{plan.plan_name}:</h4>
-    <table className="text-tertiary mb-8">
-      <tbody>
-        <tr>
-          <th className="text-secondary font-medium pe-5">
+    <Table scrollable={false} className="text-tertiary mb-8">
+      <TableBody>
+        <TableRow divided={false}>
+          <TableHead className="text-secondary font-medium pe-5">
             {translate('Active count')}:
-          </th>
-          <td>{plan.usage}</td>
-        </tr>
-        <tr>
-          <th className="text-secondary font-medium pe-5">
+          </TableHead>
+          <TableCell>{plan.usage}</TableCell>
+        </TableRow>
+        <TableRow divided={false}>
+          <TableHead className="text-secondary font-medium pe-5">
             {translate('Limit')}:
-          </th>
-          <td>{renderFieldOrDash(plan.limit)}</td>
-        </tr>
-        <tr>
-          <th className="text-secondary font-medium pe-5">
+          </TableHead>
+          <TableCell>{renderFieldOrDash(plan.limit)}</TableCell>
+        </TableRow>
+        <TableRow divided={false}>
+          <TableHead className="text-secondary font-medium pe-5">
             {translate('Remaining')}:
-          </th>
-          <td>{plan.remaining === null ? DASH_ESCAPE_CODE : plan.remaining}</td>
-        </tr>
-      </tbody>
-    </table>
+          </TableHead>
+          <TableCell>
+            {plan.remaining === null ? DASH_ESCAPE_CODE : plan.remaining}
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
   </div>
 );
 

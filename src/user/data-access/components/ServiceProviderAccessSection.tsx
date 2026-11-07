@@ -1,6 +1,16 @@
 import { FC } from 'react';
 
-import { AccordionCard, AlertItem, Badge } from 'waldur-ui';
+import {
+  AccordionCard,
+  AlertItem,
+  Badge,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
@@ -107,39 +117,37 @@ export const ServiceProviderAccessSection: FC<
                 <div className="mb-1.5">
                   {translate('Provider team members')}
                 </div>
-                <div className="table-responsive">
-                  <table className="table table-sm table-hover mb-0">
-                    <thead>
-                      <tr>
-                        <th>{translate('User')}</th>
-                        <th>{translate('Role')}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {provider.provider_team.map((user) => (
-                        <tr key={user.user_uuid}>
-                          <td>
-                            <Link
-                              state="support-user-manage"
-                              params={{ user_uuid: user.user_uuid }}
-                            >
-                              {user.full_name || user.username}
-                            </Link>
-                          </td>
-                          <td>
-                            {user.role ? (
-                              <Badge variant="info" shape="pill" tone="outline">
-                                {user.role}
-                              </Badge>
-                            ) : (
-                              <span className="text-quaternary">-</span>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                <Table density="compact" className="mb-0">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>{translate('User')}</TableHead>
+                      <TableHead>{translate('Role')}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {provider.provider_team.map((user) => (
+                      <TableRow key={user.user_uuid}>
+                        <TableCell>
+                          <Link
+                            state="support-user-manage"
+                            params={{ user_uuid: user.user_uuid }}
+                          >
+                            {user.full_name || user.username}
+                          </Link>
+                        </TableCell>
+                        <TableCell>
+                          {user.role ? (
+                            <Badge variant="info" shape="pill" tone="outline">
+                              {user.role}
+                            </Badge>
+                          ) : (
+                            <span className="text-quaternary">-</span>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </div>
             )}
         </AccordionCard>

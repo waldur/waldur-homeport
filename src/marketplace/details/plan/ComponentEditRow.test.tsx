@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import { Form } from 'react-final-form';
 import { describe, expect, it, vi } from 'vitest';
 
-import { PropertyList } from 'waldur-ui';
+import { PropertyList, Table, TableBody } from 'waldur-ui';
 
 import { renderWithProviders } from '@/test/harness';
 
@@ -23,9 +23,9 @@ const renderTableRow = (row: ReactNode) =>
   renderWithProviders(
     <Form onSubmit={vi.fn()}>
       {() => (
-        <table>
-          <tbody>{row}</tbody>
-        </table>
+        <Table>
+          <TableBody>{row}</TableBody>
+        </Table>
       )}
     </Form>,
   );

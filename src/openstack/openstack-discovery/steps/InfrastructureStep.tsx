@@ -17,6 +17,12 @@ import {
   CardContent,
   Code,
   Radio,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -299,24 +305,24 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
       {!errors.volumeTypes && values.volumeTypes.length > 0 && (
         <div className="mb-5">
           <h5 className="mb-2.5">{translate('Volume Types')}</h5>
-          <table className="table table-sm table-bordered">
-            <thead>
-              <tr>
-                <th>{translate('Name')}</th>
-                <th>{translate('Description')}</th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table density="compact">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Name')}</TableHead>
+                <TableHead>{translate('Description')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {values.volumeTypes.map((vt) => (
-                <tr key={vt.id}>
-                  <td>{vt.name}</td>
-                  <td className="text-quaternary">
+                <TableRow key={vt.id}>
+                  <TableCell>{vt.name}</TableCell>
+                  <TableCell className="text-quaternary">
                     {renderFieldOrDash(vt.description)}
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       )}
 
@@ -324,26 +330,26 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
       {!errors.flavors && values.flavors.length > 0 && (
         <div className="mb-5">
           <h5 className="mb-2.5">{translate('Flavors')}</h5>
-          <table className="table table-sm table-bordered">
-            <thead>
-              <tr>
-                <th>{translate('Name')}</th>
-                <th>{translate('vCPUs')}</th>
-                <th>{translate('RAM')}</th>
-                <th>{translate('Disk')}</th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table density="compact">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Name')}</TableHead>
+                <TableHead>{translate('vCPUs')}</TableHead>
+                <TableHead>{translate('RAM')}</TableHead>
+                <TableHead>{translate('Disk')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {values.flavors.map((f) => (
-                <tr key={f.id}>
-                  <td>{f.name}</td>
-                  <td>{f.vcpus}</td>
-                  <td>{formatFilesize(f.ram, 'MB')}</td>
-                  <td>{f.disk} GB</td>
-                </tr>
+                <TableRow key={f.id}>
+                  <TableCell>{f.name}</TableCell>
+                  <TableCell>{f.vcpus}</TableCell>
+                  <TableCell>{formatFilesize(f.ram, 'MB')}</TableCell>
+                  <TableCell>{f.disk} GB</TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       )}
     </WizardModal>

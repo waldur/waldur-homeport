@@ -2,7 +2,16 @@ import { ProhibitIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import { Radio, Tooltip } from 'waldur-ui';
+import {
+  Radio,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Tooltip,
+} from 'waldur-ui';
 
 import {
   CustomComponentInputProps,
@@ -24,21 +33,21 @@ export const ChoicesTable: FC<ChoicesTableProps> = ({
   enableSelect = true,
   ...props
 }) => (
-  <div className="table-responsive choices-table">
-    <table className="table">
-      <thead>
-        <tr>
-          {enableSelect && <th />}
+  <div className="choices-table">
+    <Table density="compact">
+      <TableHeader>
+        <TableRow>
+          {enableSelect && <TableHead />}
           {props.columns.map((column, index) => (
-            <th key={index} className={column.headerClass}>
+            <TableHead key={index} className={column.headerClass}>
               {column.label}
-            </th>
+            </TableHead>
           ))}
-        </tr>
-      </thead>
-      <tbody>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
         {props.choices.map((choice) => (
-          <tr
+          <TableRow
             key={choice.uuid}
             onKeyUp={(e) => {
               if (e.nativeEvent.keyCode === 13) {
@@ -53,7 +62,7 @@ export const ChoicesTable: FC<ChoicesTableProps> = ({
             className={classNames({ 'selectable-row': enableSelect })}
           >
             {enableSelect && (
-              <td>
+              <TableCell>
                 {choice.disabled ? (
                   <Tooltip label={choice.disabledReason}>
                     <ProhibitIcon weight="bold" />
@@ -70,21 +79,21 @@ export const ChoicesTable: FC<ChoicesTableProps> = ({
                     readOnly={true}
                   />
                 )}
-              </td>
+              </TableCell>
             )}
             {props.columns.map((column, index) => (
-              <td
+              <TableCell
                 key={index}
                 className={classNames({ disabled: choice.disabled })}
               >
                 {column.filter
                   ? column.filter(choice[column.name])
                   : choice[column.name]}
-              </td>
+              </TableCell>
             ))}
-          </tr>
+          </TableRow>
         ))}
-      </tbody>
-    </table>
+      </TableBody>
+    </Table>
   </div>
 );

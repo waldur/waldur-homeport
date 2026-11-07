@@ -4,7 +4,16 @@ import {
   PublicMaintenanceAnnouncement,
 } from 'waldur-js-client';
 
-import { PropertyList, PropertyItem } from 'waldur-ui';
+import {
+  PropertyList,
+  PropertyItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import {
   ANNOUNCEMENT_ICON,
@@ -136,30 +145,30 @@ export const AnnouncementDetailsDialog: FC<{
     return (
       <div className="mt-3">
         <h6>{translate('Affected Offerings')}:</h6>
-        <div className="table-responsive mt-1.5">
-          <table className="table table-sm">
-            <thead>
-              <tr>
-                <th>{translate('Offering Name')}</th>
-                <th>{translate('Impact Level')}</th>
-                <th>{translate('Description')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {view.affectedOfferings.map((offering, index) => (
-                <tr key={offering.uuid || index}>
-                  <td>{renderFieldOrDash(offering.name)}</td>
-                  <td>
-                    {renderFieldOrDash(
-                      offering.impactLevelDisplay || offering.impactLevel,
-                    )}
-                  </td>
-                  <td>{renderFieldOrDash(offering.impactDescription)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <Table density="compact" className="mt-1.5">
+          <TableHeader>
+            <TableRow>
+              <TableHead>{translate('Offering Name')}</TableHead>
+              <TableHead>{translate('Impact Level')}</TableHead>
+              <TableHead>{translate('Description')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {view.affectedOfferings.map((offering, index) => (
+              <TableRow key={offering.uuid || index}>
+                <TableCell>{renderFieldOrDash(offering.name)}</TableCell>
+                <TableCell>
+                  {renderFieldOrDash(
+                    offering.impactLevelDisplay || offering.impactLevel,
+                  )}
+                </TableCell>
+                <TableCell>
+                  {renderFieldOrDash(offering.impactDescription)}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     );
   };

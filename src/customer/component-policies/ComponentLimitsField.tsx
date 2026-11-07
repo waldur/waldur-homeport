@@ -3,7 +3,18 @@ import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import { OfferingComponent } from 'waldur-js-client';
 
-import { BaseButton, FormField, FormFieldset, FormLegend } from 'waldur-ui';
+import {
+  BaseButton,
+  FormField,
+  FormFieldset,
+  FormLegend,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { composeValidators, required } from '@/core/validators';
 import { NumberField, SelectField } from '@/form';
@@ -32,24 +43,26 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
       {fields.length > 0 && (
         <FormField id="component-limits-set">
           <div>
-            <table className="table px-0 mb-0">
-              <thead>
-                <tr>
-                  <td className="w-1/2">{translate('Component')}</td>
-                  <td className="w-1/4">{translate('Limit')}</td>
-                  <td className="w-1/4">{translate('Period')}</td>
-                  <td className="w-[5px]" />
-                </tr>
-              </thead>
-              <tbody>
+            <Table scrollable={false}>
+              <TableHeader>
+                <TableRow divided={false}>
+                  <TableHead className="w-1/2">
+                    {translate('Component')}
+                  </TableHead>
+                  <TableHead className="w-1/4">{translate('Limit')}</TableHead>
+                  <TableHead className="w-1/4">{translate('Period')}</TableHead>
+                  <TableHead className="w-[5px]" />
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {fields.map((component, i) => {
                   const details = components.find(
                     (c) => c.uuid === fields.value[i]?.component,
                   );
 
                   return (
-                    <tr key={component}>
-                      <td>
+                    <TableRow key={component} divided={false}>
+                      <TableCell>
                         <Field
                           name={`${component}.component`}
                           validate={required}
@@ -70,8 +83,8 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                             />
                           )}
                         </Field>
-                      </td>
-                      <td>
+                      </TableCell>
+                      <TableCell>
                         <Field
                           name={`${component}.limit`}
                           validate={composeValidators(
@@ -90,8 +103,8 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                             />
                           )}
                         </Field>
-                      </td>
-                      <td>
+                      </TableCell>
+                      <TableCell>
                         <Field name={`${component}.period`} validate={required}>
                           {({ input, meta }) => (
                             <SelectField
@@ -103,8 +116,8 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                             />
                           )}
                         </Field>
-                      </td>
-                      <td>
+                      </TableCell>
+                      <TableCell>
                         <RemovalActionButton
                           action={() => removeRow(i)}
                           disabled={fields.length === 1}
@@ -112,12 +125,12 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                             'At least one component limit is required',
                           )}
                         />
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   );
                 })}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         </FormField>
       )}

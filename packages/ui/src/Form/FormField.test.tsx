@@ -275,6 +275,7 @@ describe('FieldScope', () => {
   it('links a label and a control that sit in different cells', () => {
     render(
       <FieldScope>
+        {/* eslint-disable-next-line waldur-custom/no-hand-rolled-table -- table cells are the layout under test */}
         <table>
           <tbody>
             <tr>

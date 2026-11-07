@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { Field } from 'react-final-form';
 import { BasePublicPlan } from 'waldur-js-client';
 
-import { FormField, NumberInput, Switch } from 'waldur-ui';
+import { FormField, NumberInput, Switch, TableCell, TableRow } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { composeValidators } from '@/core/validators';
@@ -117,9 +117,9 @@ export const ComponentRow: FC<ComponentRowProps> = ({
   );
 
   return (
-    <tr data-testid={`row-${component.type}`}>
-      <td className="whitespace-nowrap">{component.name}</td>
-      <td>{renderFieldOrDash(component.limit)}</td>
+    <TableRow data-testid={`row-${component.type}`}>
+      <TableCell className="whitespace-nowrap">{component.name}</TableCell>
+      <TableCell>{renderFieldOrDash(component.limit)}</TableCell>
       <Field
         name={`limits.${component.type}`}
         parse={getLimitParser(component)}
@@ -131,15 +131,15 @@ export const ComponentRow: FC<ComponentRowProps> = ({
         limits={limits}
         currentLimit={component.limit}
       />
-      <td>
+      <TableCell>
         <ChangedLimitField changedLimit={component.changedLimit} />
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         {ENV.plugins.WALDUR_CORE.CURRENCY_NAME} {pricePerMonth.toFixed(2)}
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         {ENV.plugins.WALDUR_CORE.CURRENCY_NAME} {pricePerSecondary.toFixed(2)}
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };

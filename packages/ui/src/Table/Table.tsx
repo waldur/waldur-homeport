@@ -1,5 +1,6 @@
 import {
   createContext,
+  forwardRef,
   HTMLAttributes,
   TableHTMLAttributes,
   TdHTMLAttributes,
@@ -33,6 +34,9 @@ const DENSITY_CELL_CLASSES: Record<TableDensity, string> = {
 
 export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
   density?: TableDensity;
+  striped?: boolean;
+  scrollable?: boolean;
+  containerClassName?: string;
 }
 
 /**
@@ -43,59 +47,109 @@ export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
  * instead of shadcn's own default palette. DataTable.tsx's column-def API
  * builds on these rather than rendering a bare <table> itself.
  */
-export function Table({
-  density = 'normal',
-  className,
-  children,
-  ...props
-}: TableProps) {
+export const Table = forwardRef<HTMLTableElement, TableProps>(function Table(
+  {
+    density = 'normal',
+    striped = false,
+    scrollable = true,
+    containerClassName,
+    className,
+    children,
+    ...props
+  },
+  ref,
+) {
+  const table = (
+    <table
+      ref={ref}
+      className={cn(
+        'w-full text-sm',
+        striped &&
+          '[&_tbody_tr:nth-child(even)]:bg-[var(--table-row-hover-bg)]',
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </table>
+  );
+
   return (
     <TableContext.Provider value={{ density }}>
-      <div className="w-full overflow-x-auto">
-        <table className={cn('w-full text-sm', className)} {...props}>
-          {children}
-        </table>
-      </div>
+      {scrollable ? (
+        <div className={cn('w-full overflow-x-auto', containerClassName)}>
+          {table}
+        </div>
+      ) : (
+        table
+      )}
     </TableContext.Provider>
   );
-}
+});
 
-export function TableHeader({
-  className,
-  ...props
-}: HTMLAttributes<HTMLTableSectionElement>) {
-  return <thead className={className} {...props} />;
-}
+export const TableHeader = forwardRef<
+  HTMLTableSectionElement,
+  HTMLAttributes<HTMLTableSectionElement>
+>(function TableHeader({ className, ...props }, ref) {
+  return <thead ref={ref} className={className} {...props} />;
+});
 
-export function TableBody({
-  className,
-  ...props
-}: HTMLAttributes<HTMLTableSectionElement>) {
-  return <tbody className={className} {...props} />;
-}
+export const TableBody = forwardRef<
+  HTMLTableSectionElement,
+  HTMLAttributes<HTMLTableSectionElement>
+>(function TableBody({ className, ...props }, ref) {
+  return <tbody ref={ref} className={className} {...props} />;
+});
 
-export function TableRow({
-  className,
-  ...props
-}: HTMLAttributes<HTMLTableRowElement>) {
+export const TableFooter = forwardRef<
+  HTMLTableSectionElement,
+  HTMLAttributes<HTMLTableSectionElement>
+>(function TableFooter({ className, ...props }, ref) {
   return (
-    <tr
+    <tfoot
+      ref={ref}
       className={cn(
-        'border-b border-[var(--table-row-border)] last:border-b-0 hover:bg-[var(--table-row-hover-bg)]',
+        'border-t border-[var(--table-row-border)] bg-secondary font-medium text-primary',
         className,
       )}
       {...props}
     />
   );
+});
+
+export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
+  hoverable?: boolean;
+  divided?: boolean;
 }
 
-export function TableHead({
-  className,
-  ...props
-}: ThHTMLAttributes<HTMLTableCellElement>) {
+export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
+  function TableRow(
+    { hoverable = true, divided = true, className, ...props },
+    ref,
+  ) {
+    return (
+      <tr
+        ref={ref}
+        className={cn(
+          divided &&
+            'border-b border-[var(--table-row-border)] last:border-b-0',
+          hoverable && 'hover:bg-[var(--table-row-hover-bg)]',
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
+);
+
+export const TableHead = forwardRef<
+  HTMLTableCellElement,
+  ThHTMLAttributes<HTMLTableCellElement>
+>(function TableHead({ className, ...props }, ref) {
   const { density } = useTableContext();
   return (
     <th
+      ref={ref}
       className={cn(
         DENSITY_HEAD_CLASSES[density],
         'text-left font-medium text-[var(--table-header-text)]',
@@ -104,17 +158,31 @@ export function TableHead({
       {...props}
     />
   );
-}
+});
 
-export function TableCell({
-  className,
-  ...props
-}: TdHTMLAttributes<HTMLTableCellElement>) {
+export const TableCell = forwardRef<
+  HTMLTableCellElement,
+  TdHTMLAttributes<HTMLTableCellElement>
+>(function TableCell({ className, ...props }, ref) {
   const { density } = useTableContext();
   return (
     <td
+      ref={ref}
       className={cn(DENSITY_CELL_CLASSES[density], 'text-primary', className)}
       {...props}
     />
   );
-}
+});
+
+export const TableCaption = forwardRef<
+  HTMLTableCaptionElement,
+  HTMLAttributes<HTMLTableCaptionElement>
+>(function TableCaption({ className, ...props }, ref) {
+  return (
+    <caption
+      ref={ref}
+      className={cn('mt-3 text-sm text-[var(--table-header-text)]', className)}
+      {...props}
+    />
+  );
+});

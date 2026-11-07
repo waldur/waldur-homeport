@@ -19,7 +19,15 @@ import {
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton, FormField, Card } from 'waldur-ui';
+import {
+  BaseButton,
+  Card,
+  FormField,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from 'waldur-ui';
 
 import { required, requiredArray } from '@/core/validators';
 import { StringField } from '@/form';
@@ -42,8 +50,14 @@ const SortableField = ({ name, index, onRemove, disabled }) => {
   };
 
   return (
-    <tr ref={setNodeRef} style={style} {...attributes}>
-      <td
+    <TableRow
+      ref={setNodeRef}
+      style={style}
+      hoverable={false}
+      divided={false}
+      {...attributes}
+    >
+      <TableCell
         width={30}
         ref={setActivatorNodeRef}
         {...listeners}
@@ -54,13 +68,13 @@ const SortableField = ({ name, index, onRemove, disabled }) => {
           weight="bold"
           className="text-quaternary"
         />
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         <Field name={name} validate={required}>
           {({ input, meta }) => <StringField input={input} meta={meta} />}
         </Field>
-      </td>
-      <td width={60}>
+      </TableCell>
+      <TableCell width={60}>
         <BaseButton
           tooltip={translate('Remove')}
           onClick={onRemove}
@@ -70,8 +84,8 @@ const SortableField = ({ name, index, onRemove, disabled }) => {
           disabledReason={translate('At least two options are required')}
           size="lg"
         />
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -110,8 +124,8 @@ const DraggableFieldsListGroup = ({
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
         >
-          <table className="table table-row-py-1 table-col-gap-1 mb-0 align-middle">
-            <tbody>
+          <Table scrollable={false} className="mb-0 align-middle">
+            <TableBody>
               <SortableContext
                 items={fields.map((_, index) => String(index))}
                 strategy={verticalListSortingStrategy}
@@ -126,9 +140,9 @@ const DraggableFieldsListGroup = ({
                   />
                 ))}
               </SortableContext>
-              <tr>
-                <td />
-                <td colSpan={2}>
+              <TableRow divided={false} hoverable={false}>
+                <TableCell />
+                <TableCell colSpan={2}>
                   <BaseButton
                     onClick={addRow}
                     label={translate('Add answer')}
@@ -140,10 +154,10 @@ const DraggableFieldsListGroup = ({
                     )}
                     size="sm"
                   />
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </DndContext>
       </FormField>
     </Card>

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Field as FinalFormField } from 'react-final-form';
 
-import { FormField, FormText, Switch } from 'waldur-ui';
+import { FormField, FormText, Switch, TableCell, TableRow } from 'waldur-ui';
 
 import { composeValidators } from '@/core/validators';
 import { NumberField } from '@/form';
@@ -61,19 +61,19 @@ export const ComponentRow: FC<ComponentRowProps> = ({
   readOnly,
 }) => {
   return (
-    <tr data-testid={`row-${component.type}`}>
-      <td className="whitespace-nowrap">{component.name}</td>
-      <td>{renderFieldOrDash(component.usage)}</td>
-      <td>{renderFieldOrDash(component.limit)}</td>
+    <TableRow data-testid={`row-${component.type}`}>
+      <TableCell className="whitespace-nowrap">{component.name}</TableCell>
+      <TableCell>{renderFieldOrDash(component.usage)}</TableCell>
+      <TableCell>{renderFieldOrDash(component.limit)}</TableCell>
       {derived || readOnly ? (
-        <td>
+        <TableCell>
           {renderFieldOrDash(component.newLimit)} {component.measured_unit}
           {derived ? (
             <FormText as="div" variant="muted">
               {translate('Calculated from the order options')}
             </FormText>
           ) : null}
-        </td>
+        </TableCell>
       ) : (
         <FinalFormField
           name={`${parentName ? parentName + '.' : ''}limits.${component.type}`}
@@ -87,21 +87,21 @@ export const ComponentRow: FC<ComponentRowProps> = ({
         />
       )}
 
-      <td>
+      <TableCell>
         <ChangedLimitField
           changedLimit={component.changedLimit}
           unit={component.measured_unit}
         />
-      </td>
+      </TableCell>
       {shouldConcealPrices ? null : (
-        <td>
+        <TableCell>
           <PriceField
             price={component.price}
             changedPrice={component.changedPrice}
             suffix={component.priceSuffix}
           />
-        </td>
+        </TableCell>
       )}
-    </tr>
+    </TableRow>
   );
 };

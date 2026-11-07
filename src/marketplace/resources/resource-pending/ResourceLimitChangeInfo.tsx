@@ -2,11 +2,17 @@ import { useMemo } from 'react';
 import { Offering, Resource } from 'waldur-js-client';
 
 import {
+  Card,
+  CardContent,
   HelpIcon,
   PropertyItem,
   PropertyList,
-  Card,
-  CardContent,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -127,89 +133,85 @@ export const ResourceLimitChangeInfo = ({
 
       <Card variant="table" bordered className="mt-5 mb-5">
         <CardContent className="p-0">
-          <div className="table-responsive">
-            <div className="table-container">
-              <table className="table table-row-bordered align-middle">
-                <thead>
-                  <tr className="align-middle">
-                    <th>{translate('Resource type')}</th>
-                    <th>{translate('Current limit')}</th>
-                    <th>{translate('Requested limit')}</th>
-                    <th>{translate('Change')}</th>
-                    <th className="sm:w-2/12 [&_svg]:-mt-0.75">
-                      {translate('Impact')}
-                      <PriceTooltip />
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.components.map((component, index) => (
-                    <tr key={index}>
-                      <td className="whitespace-nowrap [&_svg]:-mt-0.75">
-                        {component.name}
-                        <HelpIcon label={component.type} className="ms-1" />
-                      </td>
-                      <td>
-                        {component.limit ?? 0} {component.measured_unit}
-                      </td>
-                      {component.changedLimit ? (
-                        <td>
-                          {parsedNewLimits?.[component.type]}{' '}
-                          {component.measured_unit}
-                        </td>
-                      ) : (
-                        <td>{DASH_ESCAPE_CODE}</td>
-                      )}
-                      <td>
-                        {component.changedLimit ? (
-                          <ChangedLimitField
-                            changedLimit={component.changedLimit}
-                            unit={component.measured_unit}
-                          />
-                        ) : (
-                          DASH_ESCAPE_CODE
+          <Table density="compact" className="align-middle">
+            <TableHeader>
+              <TableRow className="align-middle">
+                <TableHead>{translate('Resource type')}</TableHead>
+                <TableHead>{translate('Current limit')}</TableHead>
+                <TableHead>{translate('Requested limit')}</TableHead>
+                <TableHead>{translate('Change')}</TableHead>
+                <TableHead className="sm:w-2/12 [&_svg]:-mt-0.75">
+                  {translate('Impact')}
+                  <PriceTooltip />
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {data.components.map((component, index) => (
+                <TableRow key={index}>
+                  <TableCell className="whitespace-nowrap [&_svg]:-mt-0.75">
+                    {component.name}
+                    <HelpIcon label={component.type} className="ms-1" />
+                  </TableCell>
+                  <TableCell>
+                    {component.limit ?? 0} {component.measured_unit}
+                  </TableCell>
+                  {component.changedLimit ? (
+                    <TableCell>
+                      {parsedNewLimits?.[component.type]}{' '}
+                      {component.measured_unit}
+                    </TableCell>
+                  ) : (
+                    <TableCell>{DASH_ESCAPE_CODE}</TableCell>
+                  )}
+                  <TableCell>
+                    {component.changedLimit ? (
+                      <ChangedLimitField
+                        changedLimit={component.changedLimit}
+                        unit={component.measured_unit}
+                      />
+                    ) : (
+                      DASH_ESCAPE_CODE
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {!component.changedLimit ? (
+                      DASH_ESCAPE_CODE
+                    ) : (
+                      <>
+                        <ChangesAmountBadge
+                          changes={component.changedPrice}
+                          asPrice
+                          unit={null}
+                          badgeSm
+                          showSign
+                          reverseColor
+                        />
+                        {component.priceSuffix && (
+                          <span className="text-quaternary ms-1">
+                            {component.priceSuffix}
+                          </span>
                         )}
-                      </td>
-                      <td>
-                        {!component.changedLimit ? (
-                          DASH_ESCAPE_CODE
-                        ) : (
-                          <>
-                            <ChangesAmountBadge
-                              changes={component.changedPrice}
-                              asPrice
-                              unit={null}
-                              badgeSm
-                              showSign
-                              reverseColor
-                            />
-                            {component.priceSuffix && (
-                              <span className="text-quaternary ms-1">
-                                {component.priceSuffix}
-                              </span>
-                            )}
-                          </>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                  {data.periodTotals.map((row) => (
-                    <tr className="font-semibold" key={row.chargeMode}>
-                      <td colSpan={4}>
-                        <span className="text-primary">
-                          {translate('Estimated impact')} ({row.label})
-                        </span>
-                      </td>
-                      <td className="text-primary">
-                        {defaultCurrency(row.changedTotal, false, true)}
-                        {row.priceSuffix}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+                      </>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+              {data.periodTotals.map((row) => (
+                <TableRow className="font-semibold" key={row.chargeMode}>
+                  <TableCell colSpan={4}>
+                    <span className="text-primary">
+                      {translate('Estimated impact')} ({row.label})
+                    </span>
+                  </TableCell>
+                  <TableCell className="text-primary">
+                    {defaultCurrency(row.changedTotal, false, true)}
+                    {row.priceSuffix}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </CardContent>
       </Card>
 

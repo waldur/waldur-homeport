@@ -6,7 +6,19 @@ import {
   accessSubnetsList,
 } from 'waldur-js-client';
 
-import { HelpIcon, Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+import {
+  HelpIcon,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Table as TablePrimitive,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 import { translate } from '@/i18n';
@@ -56,24 +68,22 @@ export const ResourceAccessSubnetsCard: FunctionComponent<
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="table-responsive">
-              <table className="table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th>{translate('CIDR')}</th>
-                    <th>{translate('Description')}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {defaults.map((row) => (
-                    <tr key={row.uuid}>
-                      <td>{row.inet}</td>
-                      <td>{row.description}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <TablePrimitive density="compact">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{translate('CIDR')}</TableHead>
+                  <TableHead>{translate('Description')}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {defaults.map((row) => (
+                  <TableRow key={row.uuid}>
+                    <TableCell>{row.inet}</TableCell>
+                    <TableCell>{row.description}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </TablePrimitive>
           </CardContent>
         </Card>
       )}

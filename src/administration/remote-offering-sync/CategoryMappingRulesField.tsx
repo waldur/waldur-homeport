@@ -3,7 +3,17 @@ import { Fragment, useMemo } from 'react';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton, FormField, TablePagination } from 'waldur-ui';
+import {
+  BaseButton,
+  FormField,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TablePagination,
+  TableRow,
+} from 'waldur-ui';
 
 import { usePagination } from '@/core/usePagination';
 import { required, requiredArray } from '@/core/validators';
@@ -57,20 +67,27 @@ const FieldsListGroup = ({
   return (
     <div id="category-mapping-rules">
       <FormField>
-        <table className="table table-row-bordered border-b border-b-secondary mb-2.5">
-          <thead>
-            <tr>
-              <td className="w-1/2">{translate('Remote category')}</td>
-              <td className="w-1/2">{translate('Local category')}</td>
-              <td className="w-[70px]">{translate('Actions')}</td>
-            </tr>
-          </thead>
-          <tbody>
+        <Table
+          scrollable={false}
+          className="border-b border-b-secondary mb-2.5"
+        >
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-1/2">
+                {translate('Remote category')}
+              </TableHead>
+              <TableHead className="w-1/2">
+                {translate('Local category')}
+              </TableHead>
+              <TableHead className="w-[70px]">{translate('Actions')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {visibleItems.map((name, i) =>
               name ? (
                 <Fragment key={`${page}-${i}-${fields.length}`}>
-                  <tr>
-                    <td data-testid="remote-category-col">
+                  <TableRow>
+                    <TableCell data-testid="remote-category-col">
                       <Field
                         name={`${name}.remote_category`}
                         validate={required}
@@ -86,8 +103,8 @@ const FieldsListGroup = ({
                           />
                         )}
                       </Field>
-                    </td>
-                    <td data-testid="local-category-col">
+                    </TableCell>
+                    <TableCell data-testid="local-category-col">
                       <Field
                         name={`${name}.local_category`}
                         validate={required}
@@ -107,8 +124,8 @@ const FieldsListGroup = ({
                           />
                         )}
                       </Field>
-                    </td>
-                    <td>
+                    </TableCell>
+                    <TableCell>
                       <BaseButton
                         tooltip={translate('Remove')}
                         variant="text-danger"
@@ -120,13 +137,13 @@ const FieldsListGroup = ({
                         iconNode={<TrashIcon weight="bold" />}
                         size="lg"
                       />
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 </Fragment>
               ) : null,
             )}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </FormField>
       <div>
         <BaseButton

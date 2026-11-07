@@ -4,7 +4,16 @@ import {
 } from '@phosphor-icons/react';
 import { Issue, supportIssuesSync } from 'waldur-js-client';
 
-import { BaseButton, Code } from 'waldur-ui';
+import {
+  BaseButton,
+  Code,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -33,34 +42,32 @@ const IssueLogDialog = ({ issue }: { issue: Issue }) => {
   return (
     <ModalDialog title={translate('Processing log')} bodyClassName="p-0">
       {processingLog && processingLog.length > 0 ? (
-        <div className="table-responsive">
-          <table className="table table-striped mb-0">
-            <thead>
-              <tr>
-                <th>{translate('Timestamp')}</th>
-                <th>{translate('Event')}</th>
-                <th>{translate('Details')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {processingLog.map((entry, index) => (
-                <tr key={index}>
-                  <td className="whitespace-nowrap">
-                    {formatDateTime(entry.timestamp)}
-                  </td>
-                  <td className="whitespace-nowrap">
-                    {formatEventName(entry.event)}
-                  </td>
-                  <td>
-                    <Code className="small">
-                      {JSON.stringify(entry.details, null, 2)}
-                    </Code>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <Table density="compact" striped className="mb-0">
+          <TableHeader>
+            <TableRow>
+              <TableHead>{translate('Timestamp')}</TableHead>
+              <TableHead>{translate('Event')}</TableHead>
+              <TableHead>{translate('Details')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {processingLog.map((entry, index) => (
+              <TableRow key={index}>
+                <TableCell className="whitespace-nowrap">
+                  {formatDateTime(entry.timestamp)}
+                </TableCell>
+                <TableCell className="whitespace-nowrap">
+                  {formatEventName(entry.event)}
+                </TableCell>
+                <TableCell>
+                  <Code className="small">
+                    {JSON.stringify(entry.details, null, 2)}
+                  </Code>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       ) : (
         <div className="p-5 text-quaternary text-center">
           {translate('No processing log entries.')}

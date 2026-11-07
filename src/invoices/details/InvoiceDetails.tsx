@@ -1,6 +1,13 @@
 import { useState } from 'react';
 
-import { Card, CardContent } from 'waldur-ui';
+import {
+  Card,
+  CardContent,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
@@ -70,50 +77,53 @@ export const InvoiceDetails = ({
         setTotalFiltered={setTotalFiltered}
         footer={
           showPrice && (
-            <table className="table bg-secondary border-t border-t-secondary border-b border-b-secondary align-middle">
-              <tbody>
-                <tr className="text-sm font-medium">
+            <Table
+              scrollable={false}
+              className="bg-secondary border-t border-t-secondary border-b border-b-secondary align-middle"
+            >
+              <TableBody>
+                <TableRow hoverable={false} className="text-sm font-medium">
                   {totalFiltered !== null && (
-                    <td className="text-primary">
+                    <TableCell className="text-primary">
                       <span>{translate('Total filtered')}</span>
                       {': '}
                       <span className="text-end text-primary whitespace-nowrap min-w-[125px]">
                         {defaultCurrency(totalFiltered)}
                       </span>
-                    </td>
+                    </TableCell>
                   )}
 
-                  <td className="text-end text-primary">
+                  <TableCell className="text-end text-primary">
                     <span>{translate('Subtotal')}:</span>
-                  </td>
-                  <td
+                  </TableCell>
+                  <TableCell
                     width="12%"
                     className="text-end text-primary whitespace-nowrap min-w-[150px] border-b border-b-secondary"
                   >
                     {defaultCurrency(invoice.price)}
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
                 <VolumeDiscountsRow
                   invoice={invoice}
                   labelColSpan={totalFiltered === null ? 1 : 2}
                   includedIn="subtotal"
                 />
-                <tr className="text-sm font-medium">
-                  <td
+                <TableRow hoverable={false} className="text-sm font-medium">
+                  <TableCell
                     className="text-end text-primary"
                     colSpan={totalFiltered === null ? 1 : 2}
                   >
                     <span>{translate('Tax')}:</span>
-                  </td>
-                  <td
+                  </TableCell>
+                  <TableCell
                     width="12%"
                     className="text-end text-primary whitespace-nowrap min-w-[150px] border-b border-b-secondary"
                   >
                     {defaultCurrency(invoice.tax)}
-                  </td>
-                </tr>
-                <tr className="text-sm font-medium">
-                  <td
+                  </TableCell>
+                </TableRow>
+                <TableRow hoverable={false} className="text-sm font-medium">
+                  <TableCell
                     className="text-end text-primary"
                     colSpan={totalFiltered === null ? 1 : 2}
                   >
@@ -123,16 +133,16 @@ export const InvoiceDetails = ({
                         : translate('Total')}
                       :
                     </span>
-                  </td>
-                  <td
+                  </TableCell>
+                  <TableCell
                     width="12%"
                     className="text-end text-primary whitespace-nowrap min-w-[150px]"
                   >
                     {defaultCurrency(invoice.total)}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           )
         }
       />

@@ -102,8 +102,10 @@ variant="summary">` (or `ExpandableContainer asTable`, which renders
     fine, its caller holds the list), and a `PropertyList` must not hold only
     a single lone property item (linter: `no-lone-property-item-in-list`). See
     the guide's "Label/value block".
-  - **A grid of form inputs** → waldur-ui's `Table` primitives, with the file
-    added to `no-hand-rolled-table`'s `ALLOWED_FILES` and a one-line reason.
+  - **A grid of form inputs, custom layout, or preview** → waldur-ui's `Table`
+    primitives (`Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`,
+    `TableCell`, `TableFooter`), which use `--table-*` tokens and provide
+    `density="compact"`, `scrollable={false}`, and `hoverable={false}` controls.
 
   For `@/table/Table` with data you already hold in memory (or that comes from
   one aggregate endpoint), `fetchData` may resolve rows directly instead of

@@ -3,7 +3,18 @@ import { FC, useState, useEffect } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverRequestTypes } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, Checkbox, Code } from 'waldur-ui';
+import {
+  AlertItem,
+  BaseButton,
+  Checkbox,
+  Code,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -144,29 +155,29 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
         )}
       </p>
 
-      <table className="table table-hover mb-5">
-        <thead>
-          <tr>
-            <th style={{ width: 40 }}>
+      <Table className="mb-5">
+        <TableHeader>
+          <TableRow>
+            <TableHead style={{ width: 40 }}>
               <Checkbox
                 aria-label={translate('Select all')}
                 checked={selectedCount === values.requestTypes.length}
                 onChange={toggleAll}
               />
-            </th>
-            <th>{translate('Name')}</th>
-            <th>{translate('Description')}</th>
-            <th>{translate('Issue Type ID')}</th>
-          </tr>
-        </thead>
-        <tbody>
+            </TableHead>
+            <TableHead>{translate('Name')}</TableHead>
+            <TableHead>{translate('Description')}</TableHead>
+            <TableHead>{translate('Issue Type ID')}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {values.requestTypes.map((rt) => (
-            <tr
+            <TableRow
               key={rt.id}
               className="cursor-pointer"
               onClick={() => toggleSelection(rt.id)}
             >
-              <td>
+              <TableCell>
                 <Checkbox
                   aria-label={rt.name}
                   checked={(values.selectedRequestTypeIds || []).includes(
@@ -177,18 +188,18 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
                   // the box toggles twice and nothing changes.
                   onClick={(e) => e.stopPropagation()}
                 />
-              </td>
-              <td className="font-medium">{rt.name}</td>
-              <td className="text-quaternary">
+              </TableCell>
+              <TableCell className="font-medium">{rt.name}</TableCell>
+              <TableCell className="text-quaternary">
                 {renderFieldOrDash(rt.description)}
-              </td>
-              <td>
+              </TableCell>
+              <TableCell>
                 <Code>{rt.issue_type_id}</Code>
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
 
       <div className="flex justify-between">
         <span className="text-quaternary">

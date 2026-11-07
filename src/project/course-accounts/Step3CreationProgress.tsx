@@ -7,8 +7,17 @@ import {
   marketplaceCourseAccountsList,
 } from 'waldur-js-client';
 
-import { BadgeVariant, BaseButton } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import {
+  Badge,
+  BadgeVariant,
+  BaseButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -128,33 +137,33 @@ export const Step3CreationProgress: FC<Step3CreationProgressProps> = ({
           size="lg"
         />
       </div>
-      <div className="table-responsive">
-        <table className="table table-hover mb-0">
-          <thead>
-            <tr>
-              <th>{translate('Email')}</th>
-              <th>{translate('State')}</th>
-              <th>{translate('Error')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedAccounts.map((account) => {
-              const config = stateConfig[account.state] || stateConfig.Pending;
-              return (
-                <tr key={account.uuid}>
-                  <td>{renderFieldOrDash(account.email)}</td>
-                  <td>
-                    <Badge variant={config.color} shape="pill" tone="outline">
-                      {config.label}
-                    </Badge>
-                  </td>
-                  <td>{renderFieldOrDash(account.error_message)}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <Table density="compact" className="mb-0">
+        <TableHeader>
+          <TableRow>
+            <TableHead>{translate('Email')}</TableHead>
+            <TableHead>{translate('State')}</TableHead>
+            <TableHead>{translate('Error')}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {sortedAccounts.map((account) => {
+            const config = stateConfig[account.state] || stateConfig.Pending;
+            return (
+              <TableRow key={account.uuid}>
+                <TableCell>{renderFieldOrDash(account.email)}</TableCell>
+                <TableCell>
+                  <Badge variant={config.color} shape="pill" tone="outline">
+                    {config.label}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  {renderFieldOrDash(account.error_message)}
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
     </div>
   );
 };

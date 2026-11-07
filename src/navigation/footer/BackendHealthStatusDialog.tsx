@@ -1,6 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
@@ -33,31 +42,29 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
       {loading ? (
         <LoadingSpinner />
       ) : value ? (
-        <div className="table-responsive">
-          <table className="table table-hover table-row-bordered mb-0">
-            <thead>
-              <tr>
-                <th>{translate('Check name')}</th>
-                <th>{translate('Status')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(value).map(([key, value]: any, index: number) => (
-                <tr key={index}>
-                  <td>{key}</td>
-                  <td>
-                    <StateIndicator
-                      label={value}
-                      variant={value === 'working' ? 'primary' : 'danger'}
-                      tone="outline"
-                      shape="pill"
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <Table density="compact" className="mb-0">
+          <TableHeader>
+            <TableRow>
+              <TableHead>{translate('Check name')}</TableHead>
+              <TableHead>{translate('Status')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {Object.entries(value).map(([key, value]: any, index: number) => (
+              <TableRow key={index}>
+                <TableCell>{key}</TableCell>
+                <TableCell>
+                  <StateIndicator
+                    label={value}
+                    variant={value === 'working' ? 'primary' : 'danger'}
+                    tone="outline"
+                    shape="pill"
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       ) : null}
     </ModalDialog>
   );

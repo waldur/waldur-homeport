@@ -7,7 +7,15 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import {
+  AlertItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -340,78 +348,78 @@ export const MultiChangeLimitsDialog: FC<MultiChangeLimitsDialogProps> = (
                 )}
 
                 <h6 className="mt-5 mb-2.5">{translate('Preview')}</h6>
-                <div className="table-responsive">
-                  <table className="table table-row-bordered align-middle">
-                    <thead>
-                      <tr>
-                        <th>{translate('Resource')}</th>
-                        <th>{translate('Project')}</th>
-                        {data.unionComponents.map((component) => (
-                          <th
-                            key={component.type}
-                            className="whitespace-nowrap"
-                          >
-                            {component.name}
-                            {component.measured_unit
-                              ? ` (${component.measured_unit})`
-                              : ''}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {rows.map((resource) => {
-                        const before = data.limitParser(resource.limits || {});
-                        return (
-                          <tr key={resource.uuid}>
-                            <td>{resource.name}</td>
-                            <td>{renderFieldOrDash(resource.project_name)}</td>
-                            {data.unionComponents.map((component) => {
-                              const isCommon = data.commonTypes.has(
-                                component.type,
-                              );
-                              const beforeValue = before[component.type];
-                              // A resource has the component if it's common to
-                              // all offerings or carries a value of its own.
-                              const hasComponent =
-                                isCommon || beforeValue !== undefined;
-                              if (!hasComponent) {
-                                return (
-                                  <td key={component.type}>
-                                    {renderFieldOrDash(undefined)}
-                                  </td>
-                                );
-                              }
-                              // Skipped components are not edited, so their
-                              // "after" equals "before" (unchanged).
-                              const beforeNum = beforeValue ?? 0;
-                              const afterNum =
-                                (isCommon
-                                  ? values.limits?.[component.type]
-                                  : beforeValue) ?? 0;
-                              const changed = afterNum - beforeNum;
+                <Table density="compact" className="align-middle">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>{translate('Resource')}</TableHead>
+                      <TableHead>{translate('Project')}</TableHead>
+                      {data.unionComponents.map((component) => (
+                        <TableHead
+                          key={component.type}
+                          className="whitespace-nowrap"
+                        >
+                          {component.name}
+                          {component.measured_unit
+                            ? ` (${component.measured_unit})`
+                            : ''}
+                        </TableHead>
+                      ))}
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {rows.map((resource) => {
+                      const before = data.limitParser(resource.limits || {});
+                      return (
+                        <TableRow key={resource.uuid}>
+                          <TableCell>{resource.name}</TableCell>
+                          <TableCell>
+                            {renderFieldOrDash(resource.project_name)}
+                          </TableCell>
+                          {data.unionComponents.map((component) => {
+                            const isCommon = data.commonTypes.has(
+                              component.type,
+                            );
+                            const beforeValue = before[component.type];
+                            // A resource has the component if it's common to
+                            // all offerings or carries a value of its own.
+                            const hasComponent =
+                              isCommon || beforeValue !== undefined;
+                            if (!hasComponent) {
                               return (
-                                <td
-                                  key={component.type}
-                                  className="whitespace-nowrap"
-                                >
-                                  <span className="inline-flex items-center gap-1.5">
-                                    <span>
-                                      {changed !== 0
-                                        ? `${beforeNum} → ${afterNum}`
-                                        : afterNum}
-                                    </span>
-                                    <ChangedLimitField changedLimit={changed} />
-                                  </span>
-                                </td>
+                                <TableCell key={component.type}>
+                                  {renderFieldOrDash(undefined)}
+                                </TableCell>
                               );
-                            })}
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
+                            }
+                            // Skipped components are not edited, so their
+                            // "after" equals "before" (unchanged).
+                            const beforeNum = beforeValue ?? 0;
+                            const afterNum =
+                              (isCommon
+                                ? values.limits?.[component.type]
+                                : beforeValue) ?? 0;
+                            const changed = afterNum - beforeNum;
+                            return (
+                              <TableCell
+                                key={component.type}
+                                className="whitespace-nowrap"
+                              >
+                                <span className="inline-flex items-center gap-1.5">
+                                  <span>
+                                    {changed !== 0
+                                      ? `${beforeNum} → ${afterNum}`
+                                      : afterNum}
+                                  </span>
+                                  <ChangedLimitField changedLimit={changed} />
+                                </span>
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
               </>
             )}
           </ModalDialog>

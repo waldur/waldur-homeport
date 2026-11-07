@@ -1,7 +1,17 @@
 import { useMemo } from 'react';
 import { useFormState } from 'react-final-form';
 
-import { PropertyList, Tooltip, PropertyItem } from 'waldur-ui';
+import {
+  PropertyList,
+  PropertyItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Tooltip,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
@@ -51,28 +61,28 @@ export const ImportReviewTab = () => {
         <label className="field-label text-secondary font-semibold mb-3">
           {translate('Selected mappings')}:
         </label>
-        <table className="table align-middle table-row-bordered mb-2.5">
-          <thead>
-            <tr className="text-quaternary text-xs font-medium">
-              <td>{translate('Remote category')}</td>
-              <td>{translate('Offerings')}</td>
-              <td>{translate('Local category')}</td>
-            </tr>
-          </thead>
-          <tbody className="text-sm">
+        <Table density="compact" className="align-middle mb-2.5">
+          <TableHeader>
+            <TableRow>
+              <TableHead>{translate('Remote category')}</TableHead>
+              <TableHead>{translate('Offerings')}</TableHead>
+              <TableHead>{translate('Local category')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {tableData.map((data) => (
-              <tr key={data.uuid}>
-                <td className="text-primary">{data.remote_category}</td>
-                <td className="text-primary">
+              <TableRow key={data.uuid}>
+                <TableCell>{data.remote_category}</TableCell>
+                <TableCell>
                   <Tooltip label={data.offering}>
                     <span>{data.offering}</span>
                   </Tooltip>
-                </td>
-                <td>{data.local_category}</td>
-              </tr>
+                </TableCell>
+                <TableCell>{data.local_category}</TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

@@ -5,6 +5,15 @@ import {
   type ResourceReallocateLimitsRequest,
 } from 'waldur-js-client';
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { Limits } from '@/marketplace/common/types';
 
@@ -94,49 +103,45 @@ export const ReviewAndConfirmTab: FC<ReviewAndConfirmTabProps> = ({
         )}
       </div>
 
-      <div className="table-responsive">
-        <table className="table table-row-bordered table-rounded border border-divider">
-          <thead>
-            <tr>
-              <th>{translate('Resource name')}</th>
-              {components.map((component) => (
-                <th key={component.type}>{component.name}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {summaryData.map((row) => (
-              <tr
-                key={row.resourceUuid}
-                data-testid={`summary-row-${row.resourceUuid}`}
-              >
-                <td>
-                  <strong>{row.resourceName}</strong>
-                </td>
-                {components.map((component) => {
-                  const change = row.changes[component.type] || 0;
-                  return (
-                    <td key={component.type}>
-                      {change !== 0 ? (
-                        <span
-                          className={
-                            change > 0 ? 'text-success' : 'text-danger'
-                          }
-                        >
-                          {change > 0 ? '+' : ''}
-                          {change}
-                        </span>
-                      ) : (
-                        <span className="text-quaternary">—</span>
-                      )}
-                    </td>
-                  );
-                })}
-              </tr>
+      <Table density="compact">
+        <TableHeader>
+          <TableRow>
+            <TableHead>{translate('Resource name')}</TableHead>
+            {components.map((component) => (
+              <TableHead key={component.type}>{component.name}</TableHead>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {summaryData.map((row) => (
+            <TableRow
+              key={row.resourceUuid}
+              data-testid={`summary-row-${row.resourceUuid}`}
+            >
+              <TableCell>
+                <strong>{row.resourceName}</strong>
+              </TableCell>
+              {components.map((component) => {
+                const change = row.changes[component.type] || 0;
+                return (
+                  <TableCell key={component.type}>
+                    {change !== 0 ? (
+                      <span
+                        className={change > 0 ? 'text-success' : 'text-danger'}
+                      >
+                        {change > 0 ? '+' : ''}
+                        {change}
+                      </span>
+                    ) : (
+                      <span className="text-quaternary">—</span>
+                    )}
+                  </TableCell>
+                );
+              })}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 };

@@ -2,7 +2,15 @@ import { PlusIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { Category } from '@/marketplace/types';
@@ -12,13 +20,13 @@ import { ColumnRow } from './ColumnRow';
 const CategoryColumnsPlaceholder: FC<{ category: Category }> = ({
   category,
 }) => (
-  <tr>
-    <td className="text-center" colSpan={5}>
+  <TableRow>
+    <TableCell className="text-center" colSpan={5}>
       {translate('Category {category} does not contain a column yet.', {
         category: category.title,
       })}
-    </td>
-  </tr>
+    </TableCell>
+  </TableRow>
 );
 
 interface ColumnsListProps extends FieldArrayRenderProps<any, HTMLElement> {
@@ -27,13 +35,13 @@ interface ColumnsListProps extends FieldArrayRenderProps<any, HTMLElement> {
 }
 
 const ColumnsHeader: FC = () => (
-  <tr>
-    <th>{translate('Title')}</th>
-    <th>{translate('Attribute')}</th>
-    <th>{translate('Widget')}</th>
-    <th>{translate('Index')}</th>
-    <th>{translate('Actions')}</th>
-  </tr>
+  <TableRow>
+    <TableHead>{translate('Title')}</TableHead>
+    <TableHead>{translate('Attribute')}</TableHead>
+    <TableHead>{translate('Widget')}</TableHead>
+    <TableHead>{translate('Index')}</TableHead>
+    <TableHead>{translate('Actions')}</TableHead>
+  </TableRow>
 );
 
 const ColumnAddButton = ({ fields }) => (
@@ -52,17 +60,17 @@ export const ColumnsList: FC<ColumnsListProps> = ({
   category,
 }) => (
   <>
-    <table className="table table-bordered">
+    <Table density="compact">
       {fields.length === 0 && CategoryColumns.length === 0 ? (
-        <tbody>
+        <TableBody>
           <CategoryColumnsPlaceholder category={category} />
-        </tbody>
+        </TableBody>
       ) : (
         <>
-          <thead>
+          <TableHeader>
             <ColumnsHeader />
-          </thead>
-          <tbody>
+          </TableHeader>
+          <TableBody>
             {fields.map((column, index) => (
               <ColumnRow
                 key={index}
@@ -72,10 +80,10 @@ export const ColumnsList: FC<ColumnsListProps> = ({
                 name={column}
               />
             ))}
-          </tbody>
+          </TableBody>
         </>
       )}
-    </table>
+    </Table>
     <ColumnAddButton fields={fields} />
   </>
 );

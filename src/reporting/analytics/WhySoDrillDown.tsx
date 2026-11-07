@@ -6,7 +6,16 @@ import {
 import classNames from 'classnames';
 import { FC, useCallback, useMemo, useState } from 'react';
 
-import { Badge, Card } from 'waldur-ui';
+import {
+  Badge,
+  Card,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -110,14 +119,15 @@ const DrillDownRow: FC<{
 
   return (
     <>
-      <tr
+      <TableRow
+        hoverable={false}
         className={classNames(
           item.canDrillDown && 'cursor-pointer hover:bg-secondary',
           isExpanded && 'bg-tertiary dark:bg-quaternary',
         )}
         onClick={toggleExpand}
       >
-        <td className={classNames('flex items-center gap-1.5')}>
+        <TableCell className="flex items-center gap-1.5">
           <div style={{ width: '20px' }} className="flex justify-center">
             {item.canDrillDown && (
               <CaretDownIcon
@@ -132,22 +142,22 @@ const DrillDownRow: FC<{
           <span className={item.canDrillDown ? '' : ''}>
             {item.renderLabel ? item.renderLabel(item) : item.label}
           </span>
-        </td>
-        <td className="text-end">
+        </TableCell>
+        <TableCell className="text-end">
           <span>{item.value.toLocaleString()}</span>
-        </td>
-        <td className="text-end" style={{ width: '100px' }}>
+        </TableCell>
+        <TableCell className="text-end" style={{ width: '100px' }}>
           <span className="text-quaternary">{item.percentage.toFixed(1)}%</span>
-        </td>
+        </TableCell>
         {showChange && (
-          <td className="text-end" style={{ width: '100px' }}>
+          <TableCell className="text-end" style={{ width: '100px' }}>
             <DrillDownChange change={item.change} />
-          </td>
+          </TableCell>
         )}
-      </tr>
+      </TableRow>
       {isExpanded && (
-        <tr>
-          <td colSpan={showChange ? 4 : 3} className="p-0 border-0">
+        <TableRow hoverable={false} divided={false}>
+          <TableCell colSpan={showChange ? 4 : 3} className="p-0 border-0">
             <div className="ps-4 pt-0 pb-2.5 pe-3">
               {isLoading ? (
                 <div className="py-3 text-center">
@@ -174,8 +184,8 @@ const DrillDownRow: FC<{
                 </div>
               )}
             </div>
-          </td>
-        </tr>
+          </TableCell>
+        </TableRow>
       )}
     </>
   );
@@ -268,50 +278,50 @@ const WhySoDrillDownTable: FC<{
 
   return (
     <div className="expandable-container py-2.5">
-      <div className={isRoot ? 'table-responsive' : undefined}>
-        <table
+      <div>
+        <Table
+          density="compact"
+          scrollable={Boolean(isRoot)}
           className={classNames(
-            'table table-hover table-row-bordered table-rounded border border-secondary mb-0',
+            'border border-secondary mb-0',
             !isRoot && 'text-xs',
           )}
         >
-          <thead>
-            <tr className="text-quaternary text-xs uppercase font-medium border-b border-b-secondary">
-              <th
-                className={classNames(
-                  'border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap',
-                )}
+          <TableHeader>
+            <TableRow className="text-quaternary text-xs uppercase font-medium border-b border-b-secondary">
+              <TableHead
+                className="border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap"
                 onClick={() => toggleSort('label')}
               >
                 {dimension}
                 <HeaderSort column="label" />
-              </th>
-              <th
+              </TableHead>
+              <TableHead
                 className="text-end border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap"
                 onClick={() => toggleSort('value')}
               >
                 {resolvedValueLabel}
                 <HeaderSort column="value" />
-              </th>
-              <th
+              </TableHead>
+              <TableHead
                 className="text-end border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap"
                 onClick={() => toggleSort('share')}
               >
                 {translate('Share')}
                 <HeaderSort column="share" />
-              </th>
+              </TableHead>
               {hasChanges && (
-                <th
+                <TableHead
                   className="text-end border-0 cursor-pointer select-none hover:text-brand whitespace-nowrap"
                   onClick={() => toggleSort('change')}
                 >
                   {translate('Change')}
                   <HeaderSort column="change" />
-                </th>
+                </TableHead>
               )}
-            </tr>
-          </thead>
-          <tbody className="border-0">
+            </TableRow>
+          </TableHeader>
+          <TableBody className="border-0">
             {sortedData.map((item) => (
               <DrillDownRow
                 key={item.id}
@@ -322,8 +332,8 @@ const WhySoDrillDownTable: FC<{
                 valueLabel={valueLabel}
               />
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

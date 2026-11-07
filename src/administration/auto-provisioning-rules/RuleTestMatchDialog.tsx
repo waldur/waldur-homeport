@@ -13,7 +13,16 @@ import {
   type RuleTestMatchResponse,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
@@ -60,8 +69,8 @@ const FilterRow: FC<{ result: FilterCheckResult }> = ({ result }) => {
       ? 'text-success'
       : 'text-danger';
   return (
-    <tr>
-      <td>
+    <TableRow>
+      <TableCell>
         {!result.configured ? (
           <WarningCircleIcon size={16} weight="bold" className={iconClass} />
         ) : result.matched ? (
@@ -69,12 +78,12 @@ const FilterRow: FC<{ result: FilterCheckResult }> = ({ result }) => {
         ) : (
           <XCircleIcon size={16} weight="bold" className={iconClass} />
         )}
-      </td>
-      <td>{result.name}</td>
-      <td>{valueOf(result.rule_value)}</td>
-      <td>{valueOf(result.user_value)}</td>
-      <td className="text-quaternary">{result.reason}</td>
-    </tr>
+      </TableCell>
+      <TableCell>{result.name}</TableCell>
+      <TableCell>{valueOf(result.rule_value)}</TableCell>
+      <TableCell>{valueOf(result.user_value)}</TableCell>
+      <TableCell className="text-quaternary">{result.reason}</TableCell>
+    </TableRow>
   );
 };
 
@@ -134,24 +143,22 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
       )}
 
       <h6 className="mt-3 mb-1.5">{translate('Filter outcomes')}</h6>
-      <div className="table-responsive">
-        <table className="table table-sm align-middle">
-          <thead>
-            <tr>
-              <th style={{ width: 24 }} />
-              <th>{translate('Filter')}</th>
-              <th>{translate('Rule value')}</th>
-              <th>{translate('User value')}</th>
-              <th>{translate('Reason')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {result.filter_results.map((fr) => (
-              <FilterRow key={fr.name} result={fr} />
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Table density="compact" className="align-middle">
+        <TableHeader>
+          <TableRow>
+            <TableHead style={{ width: 24 }} />
+            <TableHead>{translate('Filter')}</TableHead>
+            <TableHead>{translate('Rule value')}</TableHead>
+            <TableHead>{translate('User value')}</TableHead>
+            <TableHead>{translate('Reason')}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {result.filter_results.map((fr) => (
+            <FilterRow key={fr.name} result={fr} />
+          ))}
+        </TableBody>
+      </Table>
 
       {result.customer_lookup_performed && (
         <>

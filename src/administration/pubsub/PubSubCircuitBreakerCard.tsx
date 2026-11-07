@@ -1,7 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 
-import { AccordionCard, Badge, PropertyItem, PropertyList } from 'waldur-ui';
+import {
+  AccordionCard,
+  Badge,
+  PropertyItem,
+  PropertyList,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -101,23 +112,27 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
               {translate('State history')}
             </h6>
             {data.state_history && data.state_history.length > 0 ? (
-              <table className="table table-sm table-borderless mb-0">
-                <thead>
-                  <tr>
-                    <th className="text-quaternary">{translate('Time')}</th>
-                    <th className="text-quaternary">
+              <Table density="compact" className="mb-0">
+                <TableHeader>
+                  <TableRow divided={false} hoverable={false}>
+                    <TableHead className="text-quaternary">
+                      {translate('Time')}
+                    </TableHead>
+                    <TableHead className="text-quaternary">
                       {translate('Transition')}
-                    </th>
-                    <th className="text-quaternary">{translate('Reason')}</th>
-                  </tr>
-                </thead>
-                <tbody>
+                    </TableHead>
+                    <TableHead className="text-quaternary">
+                      {translate('Reason')}
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {data.state_history.slice(0, 10).map((transition, index) => (
-                    <tr key={index}>
-                      <td className="whitespace-nowrap">
+                    <TableRow key={index} divided={false} hoverable={false}>
+                      <TableCell className="whitespace-nowrap">
                         {formatTimestamp(transition.timestamp)}
-                      </td>
-                      <td>
+                      </TableCell>
+                      <TableCell>
                         {transition.from_state && (
                           <>
                             <span className="text-quaternary">
@@ -135,17 +150,17 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                         >
                           {formatCircuitBreakerState(transition.to_state)}
                         </Badge>
-                      </td>
-                      <td
+                      </TableCell>
+                      <TableCell
                         className="text-quaternary truncate"
                         title={transition.reason}
                       >
                         {transition.reason}
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             ) : (
               <p className="text-quaternary mb-0">
                 {translate('No state transitions recorded.')}
