@@ -1,5 +1,7 @@
 import { FC, useState } from 'react';
 
+import { Table, TableBody, TableCell, TableRow } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 
@@ -29,40 +31,43 @@ export const BillingRecordDetails: FC<BillingRecordDetailsProps> = ({
       showVat={false}
       setTotalFiltered={setTotalFiltered}
       footer={
-        <table className="table bg-secondary border-t border-t-secondary border-b border-b-secondary align-middle">
-          <tbody>
+        <Table
+          scrollable={false}
+          className="bg-secondary border-t border-t-secondary border-b border-b-secondary align-middle"
+        >
+          <TableBody>
             <VolumeDiscountsRow
               invoice={invoice}
               labelColSpan={totalFiltered === null ? 1 : 2}
               includedIn="total"
             />
-            <tr className="text-sm font-medium">
+            <TableRow hoverable={false} className="text-sm font-medium">
               {totalFiltered !== null && (
-                <td className="text-primary">
+                <TableCell className="text-primary">
                   <span>{translate('Total filtered')}</span>{' '}
                   <small>{translate('(VAT is not included)')}</small>
                   {': '}
                   <span className="text-end text-primary whitespace-nowrap min-w-[125px]">
                     {defaultCurrency(totalFiltered)}
                   </span>
-                </td>
+                </TableCell>
               )}
 
-              <td className="text-end text-primary">
+              <TableCell className="text-end text-primary">
                 <span>
                   {isOpen ? translate('Expected total') : translate('Total')}
                 </span>{' '}
                 <small>{translate('(VAT is not included)')}</small>:
-              </td>
-              <td
+              </TableCell>
+              <TableCell
                 width="12%"
                 className="text-end text-primary whitespace-nowrap min-w-[150px]"
               >
                 {defaultCurrency(invoice.price)}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       }
     />
   );

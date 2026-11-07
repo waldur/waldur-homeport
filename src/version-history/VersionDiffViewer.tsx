@@ -3,7 +3,16 @@ import * as monacoEditor from 'monaco-editor';
 import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 import { VersionHistory } from 'waldur-js-client';
 
-import { SegmentedControl, SegmentedControlOption } from 'waldur-ui';
+import {
+  SegmentedControl,
+  SegmentedControlOption,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { StateIndicator } from '@/core/StateIndicator';
 import { initMonaco } from '@/form/monacoSetup';
@@ -125,37 +134,41 @@ const TableDiffView: FunctionComponent<{
   return (
     // The column minimums apply from md up: on a phone the three columns
     // share the width, and long values (emails, UUIDs) break instead.
-    <div className="table-responsive">
-      <table className="table table-row-bordered align-middle mb-0">
-        <thead>
-          <tr className="font-medium text-xs uppercase text-quaternary">
-            <th className="ps-4 md:min-w-[150px]">{translate('Field')}</th>
-            <th className="md:min-w-[200px]">{translate('Previous')}</th>
-            <th className="md:min-w-[200px]">{translate('Current')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {diffs.map((diff) => (
-            <tr
-              key={diff.field}
-              className={diff.changed ? 'bg-warning-subtle' : ''}
-            >
-              <td className="ps-4">{diff.label}</td>
-              <td>
-                <pre className="mb-0 text-xs text-quaternary whitespace-normal wrap-anywhere bg-transparent">
-                  {formatFieldValue(diff.oldValue)}
-                </pre>
-              </td>
-              <td>
-                <pre className="mb-0 text-xs whitespace-normal wrap-anywhere bg-transparent">
-                  {formatFieldValue(diff.newValue)}
-                </pre>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <Table density="compact" className="align-middle mb-0">
+      <TableHeader>
+        <TableRow className="font-medium text-xs uppercase text-quaternary">
+          <TableHead className="ps-4 md:min-w-[150px]">
+            {translate('Field')}
+          </TableHead>
+          <TableHead className="md:min-w-[200px]">
+            {translate('Previous')}
+          </TableHead>
+          <TableHead className="md:min-w-[200px]">
+            {translate('Current')}
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {diffs.map((diff) => (
+          <TableRow
+            key={diff.field}
+            className={diff.changed ? 'bg-warning-subtle' : ''}
+          >
+            <TableCell className="ps-4">{diff.label}</TableCell>
+            <TableCell>
+              <pre className="mb-0 text-xs text-quaternary whitespace-normal wrap-anywhere bg-transparent">
+                {formatFieldValue(diff.oldValue)}
+              </pre>
+            </TableCell>
+            <TableCell>
+              <pre className="mb-0 text-xs whitespace-normal wrap-anywhere bg-transparent">
+                {formatFieldValue(diff.newValue)}
+              </pre>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 };
 

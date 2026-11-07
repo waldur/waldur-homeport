@@ -11,7 +11,15 @@ import {
   projectsRecover,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import {
+  AlertItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { RadioGroup, DateGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -203,32 +211,30 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
                     <h6 className="mb-1.5">
                       {translate('Previous team members:')}
                     </h6>
-                    <div className="table-responsive">
-                      <table className="table table-sm mb-0">
-                        <thead>
-                          <tr>
-                            <th>{translate('Name')}</th>
-                            <th>{translate('Email')}</th>
-                            <th>{translate('Role')}</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {previousMembers.map((member, index) => (
-                            <tr key={index}>
-                              <td>
-                                {member.user_first_name || member.user_last_name
-                                  ? `${member.user_first_name} ${member.user_last_name}`.trim()
-                                  : member.user_username}
-                              </td>
-                              <td>{member.user_email}</td>
-                              <td>
-                                <RoleField row={member} />
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
+                    <Table density="compact" className="mb-0">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>{translate('Name')}</TableHead>
+                          <TableHead>{translate('Email')}</TableHead>
+                          <TableHead>{translate('Role')}</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {previousMembers.map((member, index) => (
+                          <TableRow key={index}>
+                            <TableCell>
+                              {member.user_first_name || member.user_last_name
+                                ? `${member.user_first_name} ${member.user_last_name}`.trim()
+                                : member.user_username}
+                            </TableCell>
+                            <TableCell>{member.user_email}</TableCell>
+                            <TableCell>
+                              <RoleField row={member} />
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
                   </div>
                 )}
               </div>

@@ -1,6 +1,8 @@
 import { Field } from 'react-final-form';
 import { marketplaceCategoryColumnsDestroy } from 'waldur-js-client';
 
+import { TableCell, TableRow } from 'waldur-ui';
+
 import { SelectField } from '@/form/select/SelectField';
 import { StringField } from '@/form/StringField';
 import { formatJsxTemplate, translate } from '@/i18n';
@@ -41,8 +43,8 @@ export const ColumnRow = ({ column, fields, index, name }) => {
   };
 
   return (
-    <tr>
-      <td>
+    <TableRow>
+      <TableCell>
         <Field name={`${name}.title`}>
           {({ input, meta }) => (
             <StringField
@@ -53,8 +55,8 @@ export const ColumnRow = ({ column, fields, index, name }) => {
             />
           )}
         </Field>
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         <Field name={`${name}.attribute`}>
           {({ input, meta }) => (
             <StringField
@@ -67,8 +69,8 @@ export const ColumnRow = ({ column, fields, index, name }) => {
             />
           )}
         </Field>
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         <Field name={`${name}.widget`}>
           {({ input, meta }) => (
             <SelectField
@@ -90,8 +92,8 @@ export const ColumnRow = ({ column, fields, index, name }) => {
             />
           )}
         </Field>
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         <Field name={`${name}.index`}>
           {({ input, meta }) => (
             <StringField
@@ -102,10 +104,10 @@ export const ColumnRow = ({ column, fields, index, name }) => {
             />
           )}
         </Field>
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         <RemovalActionButton action={onRemove} tooltip={translate('Remove')} />
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };

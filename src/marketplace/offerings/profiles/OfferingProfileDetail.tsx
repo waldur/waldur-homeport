@@ -10,7 +10,18 @@ import {
   rolesList,
 } from 'waldur-js-client';
 
-import { BaseButton, Card, CardContent, CardHeader } from 'waldur-ui';
+import {
+  BaseButton,
+  Card,
+  CardContent,
+  CardHeader,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -88,39 +99,41 @@ export const OfferingProfileDetail: FC = () => {
               {translate('No roles in this catalog yet.')}
             </p>
           ) : (
-            <table className="table align-middle mb-0">
-              <thead>
-                <tr>
-                  <th>{translate('Role')}</th>
-                  <th>{translate('Scope')}</th>
-                  <th>{translate('Description')}</th>
-                  <th className="text-end">{translate('Actions')}</th>
-                </tr>
-              </thead>
-              <tbody>
+            <Table density="compact" className="align-middle mb-0">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{translate('Role')}</TableHead>
+                  <TableHead>{translate('Scope')}</TableHead>
+                  <TableHead>{translate('Description')}</TableHead>
+                  <TableHead className="text-end">
+                    {translate('Actions')}
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {profile.roles.map((r: any) => (
-                  <tr key={r.uuid}>
-                    <td>{r.name}</td>
-                    <td>
+                  <TableRow key={r.uuid}>
+                    <TableCell>{r.name}</TableCell>
+                    <TableCell>
                       {r.content_type === 'resource_project'
                         ? translate('Resource project')
                         : r.content_type === 'resource'
                           ? translate('Resource')
                           : renderFieldOrDash(r.content_type)}
-                    </td>
-                    <td>{renderFieldOrDash(r.description)}</td>
-                    <td className="text-end">
+                    </TableCell>
+                    <TableCell>{renderFieldOrDash(r.description)}</TableCell>
+                    <TableCell className="text-end">
                       {isStaff && (
                         <OfferingProfileRoleRemoveButton
                           profileUuid={uuid}
                           role={r}
                         />
                       )}
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           )}
         </CardContent>
       </Card>

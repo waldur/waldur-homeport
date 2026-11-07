@@ -2,7 +2,7 @@ import { CopyIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useField } from 'react-final-form';
 
-import { Tooltip, BaseButton } from 'waldur-ui';
+import { BaseButton, TableCell, TableRow, Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
@@ -22,15 +22,15 @@ export const FloatingIpRow = ({ name, subnets, floatingIps, onRemove }) => {
     });
   }, []);
   return (
-    <tr>
-      <td className="md:w-6/12 ps-0">
+    <TableRow divided={false} hoverable={false}>
+      <TableCell className="md:w-6/12 ps-0">
         {pair.address ? (
           <div className="btn-text-align">{pair.subnet_name}</div>
         ) : (
           <SelectField name={`${name}.subnet`} options={subnets} />
         )}
-      </td>
-      <td className="md:w-5/12">
+      </TableCell>
+      <TableCell className="md:w-5/12">
         {pair.address ? (
           <div className="btn-text-align">
             <button
@@ -51,8 +51,8 @@ export const FloatingIpRow = ({ name, subnets, floatingIps, onRemove }) => {
             disabled={!pair.subnet}
           />
         )}
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         <BaseButton
           onClick={onRemove}
           label={translate('Remove')}
@@ -60,7 +60,7 @@ export const FloatingIpRow = ({ name, subnets, floatingIps, onRemove }) => {
           variant="text-secondary"
           size="lg"
         />
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };

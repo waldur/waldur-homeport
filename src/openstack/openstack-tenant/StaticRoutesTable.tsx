@@ -3,7 +3,15 @@ import { FC, useMemo } from 'react';
 import { Field } from 'react-final-form';
 import { OpenStackFixedIp } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { required, composeValidators } from '@/core/validators';
 import { StringField, FieldError } from '@/form';
@@ -18,8 +26,8 @@ const validateFixedIPs = (fixedIps: OpenStackFixedIp[]) => (value: string) => {
 };
 
 const StaticRouteRow = ({ route, nexthopValidator, onRemove }) => (
-  <tr>
-    <td>
+  <TableRow>
+    <TableCell>
       <Field name={`${route}.destination`} validate={required}>
         {({ input, meta }) => (
           <>
@@ -32,8 +40,8 @@ const StaticRouteRow = ({ route, nexthopValidator, onRemove }) => (
           </>
         )}
       </Field>
-    </td>
-    <td>
+    </TableCell>
+    <TableCell>
       <Field name={`${route}.nexthop`} validate={nexthopValidator}>
         {({ input, meta }) => (
           <>
@@ -46,8 +54,8 @@ const StaticRouteRow = ({ route, nexthopValidator, onRemove }) => (
           </>
         )}
       </Field>
-    </td>
-    <td>
+    </TableCell>
+    <TableCell>
       <BaseButton
         label={translate('Remove')}
         onClick={onRemove}
@@ -55,8 +63,8 @@ const StaticRouteRow = ({ route, nexthopValidator, onRemove }) => (
         variant="text-secondary"
         size="sm"
       />
-    </td>
-  </tr>
+    </TableCell>
+  </TableRow>
 );
 
 const StaticRouteAddButton = ({ onClick }) => (
@@ -86,28 +94,26 @@ export const StaticRoutesTable: FC<{
     <>
       {fields.length > 0 ? (
         <>
-          <div className="table-responsive">
-            <table className="table table-bordered table-striped mt-2.5">
-              <thead>
-                <tr>
-                  <th>{translate('Destination (CIDR)')}</th>
-                  <th>{translate('Next hop (IP)')}</th>
-                  <th>{translate('Actions')}</th>
-                </tr>
-              </thead>
+          <Table density="compact" className="mt-2.5">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Destination (CIDR)')}</TableHead>
+                <TableHead>{translate('Next hop (IP)')}</TableHead>
+                <TableHead>{translate('Actions')}</TableHead>
+              </TableRow>
+            </TableHeader>
 
-              <tbody>
-                {fields.map((route, index) => (
-                  <StaticRouteRow
-                    key={route}
-                    route={route}
-                    nexthopValidator={nexthopValidator}
-                    onRemove={() => fields.remove(index)}
-                  />
-                ))}
-              </tbody>
-            </table>
-          </div>
+            <TableBody>
+              {fields.map((route, index) => (
+                <StaticRouteRow
+                  key={route}
+                  route={route}
+                  nexthopValidator={nexthopValidator}
+                  onRemove={() => fields.remove(index)}
+                />
+              ))}
+            </TableBody>
+          </Table>
           <StaticRouteAddButton onClick={() => fields.push({})} />
         </>
       ) : (

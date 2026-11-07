@@ -1,62 +1,75 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 
 export const ProjectUpdateRequestExpandable = ({ row }) => (
-  <table className="table">
-    <thead>
-      <tr>
-        <th>{translate('Field')}</th>
-        <th className="sm:w-6/12">{translate('Old value')}</th>
-        <th className="sm:w-6/12">{translate('New value')}</th>
-      </tr>
-    </thead>
-    <tbody>
+  <Table density="compact">
+    <TableHeader>
+      <TableRow>
+        <TableHead>{translate('Field')}</TableHead>
+        <TableHead className="sm:w-6/12">{translate('Old value')}</TableHead>
+        <TableHead className="sm:w-6/12">{translate('New value')}</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
       {row.old_name != row.new_name ? (
-        <tr>
-          <td>{translate('Name')}</td>
-          <td>{row.old_name}</td>
-          <td>{row.new_name}</td>
-        </tr>
+        <TableRow>
+          <TableCell>{translate('Name')}</TableCell>
+          <TableCell>{row.old_name}</TableCell>
+          <TableCell>{row.new_name}</TableCell>
+        </TableRow>
       ) : null}
       {row.old_description != row.new_description ? (
-        <tr>
-          <td>{translate('Description')}</td>
-          <td>{row.old_description}</td>
-          <td>{row.new_description}</td>
-        </tr>
+        <TableRow>
+          <TableCell>{translate('Description')}</TableCell>
+          <TableCell>{row.old_description}</TableCell>
+          <TableCell>{row.new_description}</TableCell>
+        </TableRow>
       ) : null}
       {row.old_end_date != row.new_end_date ? (
-        <tr>
-          <td>{translate('End date')}</td>
-          <td>{row.old_end_date ? formatDate(row.old_end_date) : 'N/A'}</td>
-          <td>{row.new_end_date ? formatDate(row.new_end_date) : 'N/A'}</td>
-        </tr>
+        <TableRow>
+          <TableCell>{translate('End date')}</TableCell>
+          <TableCell>
+            {row.old_end_date ? formatDate(row.old_end_date) : 'N/A'}
+          </TableCell>
+          <TableCell>
+            {row.new_end_date ? formatDate(row.new_end_date) : 'N/A'}
+          </TableCell>
+        </TableRow>
       ) : null}
       {row.old_type_name != row.new_type_name ? (
-        <tr>
-          <td>{translate('Type')}</td>
-          <td>{row.old_type_name}</td>
-          <td>{row.new_type_name}</td>
-        </tr>
+        <TableRow>
+          <TableCell>{translate('Type')}</TableCell>
+          <TableCell>{row.old_type_name}</TableCell>
+          <TableCell>{row.new_type_name}</TableCell>
+        </TableRow>
       ) : null}
       {row.old_oecd_fos_2007_code != row.new_oecd_fos_2007_code ? (
-        <tr>
-          <td>{translate('OECD FoS code')}</td>
-          <td>
+        <TableRow>
+          <TableCell>{translate('OECD FoS code')}</TableCell>
+          <TableCell>
             {row.old_oecd_fos_2007_code}: {row.old_oecd_fos_2007_label}
-          </td>
-          <td>
+          </TableCell>
+          <TableCell>
             {row.new_oecd_fos_2007_code}: {row.new_oecd_fos_2007_label}
-          </td>
-        </tr>
+          </TableCell>
+        </TableRow>
       ) : null}
       {row.old_is_industry != row.new_is_industry ? (
-        <tr>
-          <td>{translate('Industry project')}</td>
-          <td>{row.old_is_industry}</td>
-          <td>{row.new_is_industry}</td>
-        </tr>
+        <TableRow>
+          <TableCell>{translate('Industry project')}</TableCell>
+          <TableCell>{row.old_is_industry}</TableCell>
+          <TableCell>{row.new_is_industry}</TableCell>
+        </TableRow>
       ) : null}
-    </tbody>
-  </table>
+    </TableBody>
+  </Table>
 );

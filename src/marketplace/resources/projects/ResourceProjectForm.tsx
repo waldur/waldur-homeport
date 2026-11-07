@@ -9,11 +9,17 @@ import {
 } from 'waldur-js-client';
 
 import {
+  Card,
+  CardContent,
   FormFieldset,
   FormLegend,
   FormText,
-  Card,
-  CardContent,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from 'waldur-ui';
 
 import { required } from '@/core/validators';
@@ -234,21 +240,23 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                 </FormText>
                 <Card variant="table" bordered className="full-width">
                   <CardContent className="p-0">
-                    <table className="table table-row-bordered align-middle mb-0">
-                      <thead>
-                        <tr>
-                          <th>{translate('Component')}</th>
-                          <th style={{ width: 180 }}>{translate('Limit')}</th>
-                          <th>
+                    <Table density="compact" className="align-middle mb-0">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>{translate('Component')}</TableHead>
+                          <TableHead style={{ width: 180 }}>
+                            {translate('Limit')}
+                          </TableHead>
+                          <TableHead>
                             {policy === 'aggregate'
                               ? translate('Available')
                               : policy === 'per_project'
                                 ? translate('Maximum')
                                 : ''}
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
                         {limitComponents.map((c) => {
                           const hint = renderLimitHint(c);
                           const cap = computeCap(c);
@@ -273,8 +281,8 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                             return undefined;
                           };
                           return (
-                            <tr key={c.type}>
-                              <td>
+                            <TableRow key={c.type}>
+                              <TableCell>
                                 {c.name ?? c.type}
                                 {c.measured_unit ? ` (${c.measured_unit})` : ''}
                                 {limitsRequired && (
@@ -285,8 +293,8 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                                     *
                                   </span>
                                 )}
-                              </td>
-                              <td>
+                              </TableCell>
+                              <TableCell>
                                 <Field
                                   name={`limits.${c.type}`}
                                   parse={(v) =>
@@ -306,15 +314,15 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                                     />
                                   )}
                                 </Field>
-                              </td>
-                              <td className="text-quaternary">
+                              </TableCell>
+                              <TableCell className="text-quaternary">
                                 {renderFieldOrDash(hint)}
-                              </td>
-                            </tr>
+                              </TableCell>
+                            </TableRow>
                           );
                         })}
-                      </tbody>
-                    </table>
+                      </TableBody>
+                    </Table>
                   </CardContent>
                 </Card>
               </FormFieldset>

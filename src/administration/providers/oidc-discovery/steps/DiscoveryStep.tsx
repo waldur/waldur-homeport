@@ -8,12 +8,18 @@ import {
   AlertItem,
   Badge,
   BaseButton,
-  PropertyList,
-  PropertyItem,
-  Code,
   Card,
   CardContent,
   CardHeader,
+  Code,
+  PropertyItem,
+  PropertyList,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -285,22 +291,24 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                   { count: discoveryResult.waldur_fields.length },
                 )}
               </p>
-              <table className="table table-sm mb-0">
-                <thead>
-                  <tr>
-                    <th>{translate('Field')}</th>
-                    <th>{translate('Description')}</th>
-                    <th>{translate('Available Claims')}</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <Table density="compact" className="mb-0">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>{translate('Field')}</TableHead>
+                    <TableHead>{translate('Description')}</TableHead>
+                    <TableHead>{translate('Available Claims')}</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {discoveryResult.waldur_fields.slice(0, 5).map((field) => (
-                    <tr key={field.field}>
-                      <td>
+                    <TableRow key={field.field}>
+                      <TableCell>
                         <Code>{field.field}</Code>
-                      </td>
-                      <td className="text-quaternary">{field.description}</td>
-                      <td>
+                      </TableCell>
+                      <TableCell className="text-quaternary">
+                        {field.description}
+                      </TableCell>
+                      <TableCell>
                         {field.available_claims.length > 0 ? (
                           <span className="text-success">
                             {field.available_claims.slice(0, 2).join(', ')}
@@ -312,11 +320,11 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                             {translate('None')}
                           </span>
                         )}
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
               {discoveryResult.waldur_fields.length > 5 && (
                 <p className="text-quaternary mt-1.5 mb-0">
                   {translate('...and {count} more fields', {

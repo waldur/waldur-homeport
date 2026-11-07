@@ -2,8 +2,18 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { identityBridgeStatsRetrieve } from 'waldur-js-client';
 
-import { BadgeVariant, PropertyItem, PropertyList } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import {
+  Badge,
+  BadgeVariant,
+  PropertyItem,
+  PropertyList,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { formatRelativeWithHour } from '@/core/dateUtils';
@@ -65,49 +75,47 @@ export const IdentityBridgeTab: FC = () => {
       {stats.users_per_isd?.length > 0 && (
         <div>
           <h5 className="mb-3">{translate('ISD health')}</h5>
-          <div className="table-responsive">
-            <table className="table table-bordered align-middle">
-              <thead>
-                <tr>
-                  <th>{translate('ISD')}</th>
-                  <th>{translate('Users')}</th>
-                  <th>{translate('Stale users')}</th>
-                  <th>{translate('Oldest sync')}</th>
-                  <th>{translate('Health')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {stats.users_per_isd.map((isd) => (
-                  <tr key={isd.isd}>
-                    <td>{formatIsdName(isd.isd)}</td>
-                    <td>{isd.user_count}</td>
-                    <td>
-                      <span
-                        className={
-                          isd.stale_user_count > 0
-                            ? 'text-warning font-medium'
-                            : ''
-                        }
-                      >
-                        {isd.stale_user_count}
-                      </span>
-                    </td>
-                    <td>
-                      {isd.oldest_sync
-                        ? formatRelativeWithHour(isd.oldest_sync)
-                        : '—'}
-                    </td>
-                    <td>
-                      <HealthIndicator
-                        staleCount={isd.stale_user_count}
-                        totalCount={isd.user_count}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Table density="compact" className="align-middle">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('ISD')}</TableHead>
+                <TableHead>{translate('Users')}</TableHead>
+                <TableHead>{translate('Stale users')}</TableHead>
+                <TableHead>{translate('Oldest sync')}</TableHead>
+                <TableHead>{translate('Health')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {stats.users_per_isd.map((isd) => (
+                <TableRow key={isd.isd}>
+                  <TableCell>{formatIsdName(isd.isd)}</TableCell>
+                  <TableCell>{isd.user_count}</TableCell>
+                  <TableCell>
+                    <span
+                      className={
+                        isd.stale_user_count > 0
+                          ? 'text-warning font-medium'
+                          : ''
+                      }
+                    >
+                      {isd.stale_user_count}
+                    </span>
+                  </TableCell>
+                  <TableCell>
+                    {isd.oldest_sync
+                      ? formatRelativeWithHour(isd.oldest_sync)
+                      : '—'}
+                  </TableCell>
+                  <TableCell>
+                    <HealthIndicator
+                      staleCount={isd.stale_user_count}
+                      totalCount={isd.user_count}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       )}
 
@@ -115,26 +123,24 @@ export const IdentityBridgeTab: FC = () => {
       {stats.identity_managers?.length > 0 && (
         <div>
           <h5 className="mb-3">{translate('Identity managers')}</h5>
-          <div className="table-responsive">
-            <table className="table table-bordered align-middle">
-              <thead>
-                <tr>
-                  <th>{translate('Name')}</th>
-                  <th>{translate('Managed ISDs')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {stats.identity_managers.map((mgr) => (
-                  <tr key={mgr.uuid}>
-                    <td>{mgr.full_name}</td>
-                    <td>
-                      <IsdBadges isds={mgr.managed_isds} size="sm" />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Table density="compact" className="align-middle">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Name')}</TableHead>
+                <TableHead>{translate('Managed ISDs')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {stats.identity_managers.map((mgr) => (
+                <TableRow key={mgr.uuid}>
+                  <TableCell>{mgr.full_name}</TableCell>
+                  <TableCell>
+                    <IsdBadges isds={mgr.managed_isds} size="sm" />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       )}
 

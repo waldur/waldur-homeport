@@ -1,6 +1,8 @@
 import { FC, useMemo } from 'react';
 import { useFormState } from 'react-final-form';
 
+import { Table, TableBody, TableHead, TableHeader, TableRow } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { getBillingPeriods } from '@/marketplace/common/utils';
 
@@ -103,37 +105,35 @@ export const ChangeResourceLimitsTab: FC<ChangeResourceLimitsTabProps> = ({
         <strong>{translate('Total freed')}</strong>{' '}
         {freedCapacitySummary && ` - ${freedCapacitySummary}`}
       </p>
-      <div className="table-responsive">
-        <table className="table table-row-bordered table-expandable align-middle table-rounded border border-divider">
-          <thead>
-            <tr>
-              <th>{translate('Component')}</th>
-              <th>{translate('Current limit')}</th>
-              <th>{translate('New limit')}</th>
-              <th>{translate('Change')}</th>
-              <th>{periodLabels[0]}</th>
-              <th>{periodLabels[1]}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {components.map((component, index) => (
-              <ComponentRow
-                key={index}
-                component={component}
-                limits={offeringLimits[component.type]}
-                offeringLimits={offeringLimits}
-                plan={plan}
-                secondaryMultiplier={secondaryMultiplier}
-              />
-            ))}
-            <ComponentTotalRow
-              components={components}
+      <Table density="compact" className="align-middle">
+        <TableHeader>
+          <TableRow>
+            <TableHead>{translate('Component')}</TableHead>
+            <TableHead>{translate('Current limit')}</TableHead>
+            <TableHead>{translate('New limit')}</TableHead>
+            <TableHead>{translate('Change')}</TableHead>
+            <TableHead>{periodLabels[0]}</TableHead>
+            <TableHead>{periodLabels[1]}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {components.map((component, index) => (
+            <ComponentRow
+              key={index}
+              component={component}
+              limits={offeringLimits[component.type]}
+              offeringLimits={offeringLimits}
               plan={plan}
               secondaryMultiplier={secondaryMultiplier}
             />
-          </tbody>
-        </table>
-      </div>
+          ))}
+          <ComponentTotalRow
+            components={components}
+            plan={plan}
+            secondaryMultiplier={secondaryMultiplier}
+          />
+        </TableBody>
+      </Table>
     </div>
   );
 };

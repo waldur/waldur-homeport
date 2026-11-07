@@ -3,7 +3,15 @@ import { FC } from 'react';
 import { Field } from 'react-final-form';
 import { AvailableExternalNetworkSubnet } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { composeValidators, required } from '@/core/validators';
 import { FieldError, SelectField, StringField } from '@/form';
@@ -12,8 +20,8 @@ import { translate } from '@/i18n';
 import { validateIPv4 } from '../utils';
 
 const FixedIpRow = ({ prefix, subnetOptions, onRemove }) => (
-  <tr>
-    <td>
+  <TableRow>
+    <TableCell>
       <Field
         name={`${prefix}.ip_address`}
         validate={composeValidators(required, validateIPv4)}
@@ -25,8 +33,8 @@ const FixedIpRow = ({ prefix, subnetOptions, onRemove }) => (
           </>
         )}
       </Field>
-    </td>
-    <td>
+    </TableCell>
+    <TableCell>
       <Field name={`${prefix}.subnet_id`}>
         {({ input, meta }) => (
           <SelectField
@@ -39,8 +47,8 @@ const FixedIpRow = ({ prefix, subnetOptions, onRemove }) => (
           />
         )}
       </Field>
-    </td>
-    <td>
+    </TableCell>
+    <TableCell>
       <BaseButton
         label={translate('Remove')}
         onClick={onRemove}
@@ -48,8 +56,8 @@ const FixedIpRow = ({ prefix, subnetOptions, onRemove }) => (
         variant="text-secondary"
         size="sm"
       />
-    </td>
-  </tr>
+    </TableCell>
+  </TableRow>
 );
 
 const AddButton = ({ onClick }) => (
@@ -74,27 +82,25 @@ export const ExternalGatewayFixedIpsTable: FC<{
   return (
     <>
       {fields.length > 0 && (
-        <div className="table-responsive">
-          <table className="table table-bordered table-striped mt-2.5">
-            <thead>
-              <tr>
-                <th>{translate('IP address')}</th>
-                <th>{translate('Subnet')}</th>
-                <th>{translate('Actions')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {fields.map((prefix, index) => (
-                <FixedIpRow
-                  key={prefix}
-                  prefix={prefix}
-                  subnetOptions={subnetOptions}
-                  onRemove={() => fields.remove(index)}
-                />
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <Table density="compact" className="mt-2.5">
+          <TableHeader>
+            <TableRow>
+              <TableHead>{translate('IP address')}</TableHead>
+              <TableHead>{translate('Subnet')}</TableHead>
+              <TableHead>{translate('Actions')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {fields.map((prefix, index) => (
+              <FixedIpRow
+                key={prefix}
+                prefix={prefix}
+                subnetOptions={subnetOptions}
+                onRemove={() => fields.remove(index)}
+              />
+            ))}
+          </TableBody>
+        </Table>
       )}
       <AddButton onClick={() => fields.push({})} />
     </>

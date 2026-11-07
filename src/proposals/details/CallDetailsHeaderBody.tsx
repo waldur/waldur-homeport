@@ -1,3 +1,5 @@
+import { Table, TableBody, TableCell, TableHead, TableRow } from 'waldur-ui';
+
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -56,34 +58,34 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
   return (
     <>
       {nextRound.status?.value === 'open' && (
-        <table className="table mb-0 px-0 h-auto w-auto">
-          <tbody>
-            <tr>
-              <th className="font-medium w-[125px] p-0 pe-2.5 pb-1 whitespace-nowrap">
+        <Table scrollable={false} className="mb-0 px-0 h-auto w-auto">
+          <TableBody>
+            <TableRow divided={false}>
+              <TableHead className="font-medium w-[125px] p-0 pe-2.5 pb-1 whitespace-nowrap">
                 {translate('Open round started')}:
-              </th>
-              <td className="text-quaternary p-0 pb-1">
+              </TableHead>
+              <TableCell className="text-quaternary p-0 pb-1">
                 {formatDateTime(nextRound.start_time)}
-              </td>
-            </tr>
-            <tr>
-              <th className="font-medium w-[125px] p-0 pe-2.5 whitespace-nowrap">
+              </TableCell>
+            </TableRow>
+            <TableRow divided={false}>
+              <TableHead className="font-medium w-[125px] p-0 pe-2.5 whitespace-nowrap">
                 {translate('Open round ends')}:
-              </th>
-              <td className="text-quaternary p-0">
+              </TableHead>
+              <TableCell className="text-quaternary p-0">
                 {formatRoundCutoff(nextRound)}
-              </td>
-            </tr>
-            <tr>
-              <th className="font-medium w-[125px] p-0 pe-2.5 pt-1 whitespace-nowrap">
+              </TableCell>
+            </TableRow>
+            <TableRow divided={false}>
+              <TableHead className="font-medium w-[125px] p-0 pe-2.5 pt-1 whitespace-nowrap">
                 {translate('Project duration')}:
-              </th>
-              <td className="text-quaternary p-0 pt-1">
+              </TableHead>
+              <TableCell className="text-quaternary p-0 pt-1">
                 <CallDurationPolicy call={props.call} />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       )}
       {/* The call itself may well be active: only its submissions are
           over, until another round is scheduled. */}
@@ -97,34 +99,34 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
         </p>
       )}
       {nextRound.status?.value === 'scheduled' && (
-        <table className="table mb-0 px-0 h-auto w-auto">
-          <tbody>
-            <tr>
-              <th className="font-medium w-[125px] p-0 pe-2.5 pb-1 whitespace-nowrap">
+        <Table scrollable={false} className="mb-0 px-0 h-auto w-auto">
+          <TableBody>
+            <TableRow divided={false}>
+              <TableHead className="font-medium w-[125px] p-0 pe-2.5 pb-1 whitespace-nowrap">
                 {translate('Next round starts')}:
-              </th>
-              <td className="text-quaternary p-0 pb-1">
+              </TableHead>
+              <TableCell className="text-quaternary p-0 pb-1">
                 {formatDateTime(nextRound.start_time)}
-              </td>
-            </tr>
-            <tr>
-              <th className="font-medium w-[125px] p-0 pe-2.5 whitespace-nowrap">
+              </TableCell>
+            </TableRow>
+            <TableRow divided={false}>
+              <TableHead className="font-medium w-[125px] p-0 pe-2.5 whitespace-nowrap">
                 {translate('Next round ends')}:
-              </th>
-              <td className="text-quaternary p-0">
+              </TableHead>
+              <TableCell className="text-quaternary p-0">
                 {formatRoundCutoff(nextRound)}
-              </td>
-            </tr>
-            <tr>
-              <th className="font-medium w-[125px] p-0 pe-2.5 pt-1 whitespace-nowrap">
+              </TableCell>
+            </TableRow>
+            <TableRow divided={false}>
+              <TableHead className="font-medium w-[125px] p-0 pe-2.5 pt-1 whitespace-nowrap">
                 {translate('Project duration')}:
-              </th>
-              <td className="text-quaternary p-0 pt-1">
+              </TableHead>
+              <TableCell className="text-quaternary p-0 pt-1">
                 <CallDurationPolicy call={props.call} />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       )}
     </>
   );

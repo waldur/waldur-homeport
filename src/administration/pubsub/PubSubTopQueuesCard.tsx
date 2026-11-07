@@ -1,7 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 
-import { AccordionCard } from 'waldur-ui';
+import {
+  AccordionCard,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatCount } from '@/core/formatNumber';
@@ -37,36 +45,40 @@ export const PubSubTopQueuesCard: FC = () => {
           <LoadingSpinner />
         </div>
       ) : data && data.top_queues_by_messages.length > 0 ? (
-        <table className="table table-sm table-borderless mb-0">
-          <thead>
-            <tr>
-              <th className="text-quaternary">{translate('Vhost')}</th>
-              <th className="text-quaternary">{translate('Queue name')}</th>
-              <th className="text-quaternary text-end">
+        <Table density="compact" className="mb-0">
+          <TableHeader>
+            <TableRow divided={false} hoverable={false}>
+              <TableHead className="text-quaternary">
+                {translate('Vhost')}
+              </TableHead>
+              <TableHead className="text-quaternary">
+                {translate('Queue name')}
+              </TableHead>
+              <TableHead className="text-quaternary text-end">
                 {translate('Messages')}
-              </th>
-              <th className="text-quaternary text-end">
+              </TableHead>
+              <TableHead className="text-quaternary text-end">
                 {translate('Consumers')}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {data.top_queues_by_messages.map((queue, index) => (
-              <tr key={index}>
-                <td className="text-quaternary">{queue.vhost}</td>
-                <td className="truncate" style={{ maxWidth: '250px' }}>
+              <TableRow key={index} divided={false} hoverable={false}>
+                <TableCell className="text-quaternary">{queue.vhost}</TableCell>
+                <TableCell className="truncate max-w-[250px]">
                   {queue.name}
-                </td>
-                <td
+                </TableCell>
+                <TableCell
                   className={`text-end ${queue.messages > 1000 ? 'text-warning' : ''}`}
                 >
                   {formatCount(queue.messages)}
-                </td>
-                <td className="text-end">{queue.consumers}</td>
-              </tr>
+                </TableCell>
+                <TableCell className="text-end">{queue.consumers}</TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       ) : (
         <p className="text-quaternary mb-0">{translate('No queues found.')}</p>
       )}

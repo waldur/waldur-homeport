@@ -4,12 +4,18 @@ import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
 import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
   Card,
   CardContent,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
 } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
@@ -72,48 +78,48 @@ const OneTimeComponentsSummary: FC<{
       )}
       <Card variant="table" bordered>
         <CardContent className="p-0">
-          <div className="table-responsive">
-            <table className="table table-row-bordered align-middle mb-0">
-              <thead>
-                <tr>
-                  <th>{translate('Component')}</th>
-                  <th>{translate('Type')}</th>
-                  {!shouldConcealPrices && (
-                    <th className="text-end">{translate('Unit price')}</th>
-                  )}
-                </tr>
-              </thead>
-              <tbody>
-                {oneTimeComponents.map((component) => {
-                  const price = plan?.prices?.[component.type] || 0;
-                  return (
-                    <tr key={component.type}>
-                      <td>
-                        <strong>{component.name}</strong>
-                        {component.description && (
-                          <div className="text-quaternary small">
-                            {component.description}
-                          </div>
-                        )}
-                      </td>
-                      <td>
-                        {component.is_prepaid
-                          ? translate('Prepaid (per month)')
-                          : translate('One-time')}
-                      </td>
-                      {!shouldConcealPrices && (
-                        <td className="text-end">
-                          {defaultCurrency(price)}
-                          {component.measured_unit &&
-                            ` / ${component.measured_unit}`}
-                        </td>
+          <Table density="compact" className="align-middle mb-0">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Component')}</TableHead>
+                <TableHead>{translate('Type')}</TableHead>
+                {!shouldConcealPrices && (
+                  <TableHead className="text-end">
+                    {translate('Unit price')}
+                  </TableHead>
+                )}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {oneTimeComponents.map((component) => {
+                const price = plan?.prices?.[component.type] || 0;
+                return (
+                  <TableRow key={component.type}>
+                    <TableCell>
+                      <strong>{component.name}</strong>
+                      {component.description && (
+                        <div className="text-quaternary small">
+                          {component.description}
+                        </div>
                       )}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+                    </TableCell>
+                    <TableCell>
+                      {component.is_prepaid
+                        ? translate('Prepaid (per month)')
+                        : translate('One-time')}
+                    </TableCell>
+                    {!shouldConcealPrices && (
+                      <TableCell className="text-end">
+                        {defaultCurrency(price)}
+                        {component.measured_unit &&
+                          ` / ${component.measured_unit}`}
+                      </TableCell>
+                    )}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
         </CardContent>
       </Card>
       <p className="text-quaternary mt-2.5">

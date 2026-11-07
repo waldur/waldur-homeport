@@ -2,7 +2,16 @@ import { PlusIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton, FormField } from 'waldur-ui';
+import {
+  BaseButton,
+  FormField,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -20,30 +29,32 @@ const FieldsListGroup: FC<FieldArrayRenderProps<any, any>> = ({ fields }) => {
       {fields.length > 0 && (
         <FormField id="openstack-external-ip-set">
           <div>
-            <table className="table px-0 mb-0">
-              <thead>
-                <tr>
-                  <td className="w-1/2">{translate('Floating IP')}</td>
-                  <td>{translate('External IP')}</td>
-                  <td className="w-[5px]" />
-                </tr>
-              </thead>
-              <tbody>
+            <Table scrollable={false}>
+              <TableHeader>
+                <TableRow divided={false}>
+                  <TableHead className="w-1/2">
+                    {translate('Floating IP')}
+                  </TableHead>
+                  <TableHead>{translate('External IP')}</TableHead>
+                  <TableHead className="w-[5px]" />
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {fields.map((member, i) => (
-                  <tr key={member}>
-                    <td>
+                  <TableRow key={member} divided={false}>
+                    <TableCell>
                       <StringGroup name={`${member}.floating_ip`} />
-                    </td>
-                    <td>
+                    </TableCell>
+                    <TableCell>
                       <StringGroup name={`${member}.external_ip`} />
-                    </td>
-                    <td>
+                    </TableCell>
+                    <TableCell>
                       <RemovalActionButton action={() => removeRow(i)} />
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         </FormField>
       )}

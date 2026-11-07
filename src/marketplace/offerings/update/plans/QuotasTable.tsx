@@ -5,6 +5,15 @@ import {
   ProviderPlanDetails as Plan,
 } from 'waldur-js-client';
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
+
 import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import {
@@ -41,12 +50,12 @@ const QuotaRow: FC<{ component: OfferingComponent; plan: Plan }> = ({
   const charge = formatComponentCharge(component, amount, price, plan.unit);
 
   return (
-    <tr>
-      <td>{component.name}</td>
-      <td>
+    <TableRow divided={false}>
+      <TableCell>{component.name}</TableCell>
+      <TableCell>
         <BillingTypeBadge component={component} />
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         <Field
           name={`quotas.${component.type}`}
           type="number"
@@ -58,27 +67,27 @@ const QuotaRow: FC<{ component: OfferingComponent; plan: Plan }> = ({
             <BaseInputField {...input} min={0} inputMode="numeric" />
           )}
         </Field>
-      </td>
-      <td>{price === null ? DASH_ESCAPE_CODE : price}</td>
-      <td>{charge || DASH_ESCAPE_CODE}</td>
-      <td>{component.measured_unit}</td>
-    </tr>
+      </TableCell>
+      <TableCell>{price === null ? DASH_ESCAPE_CODE : price}</TableCell>
+      <TableCell>{charge || DASH_ESCAPE_CODE}</TableCell>
+      <TableCell>{component.measured_unit}</TableCell>
+    </TableRow>
   );
 };
 
 export const QuotasTable: FC<QuotasTableProps> = (props) => (
-  <table className="table table-borderless">
-    <thead>
-      <tr>
-        <th>{translate('Name')}</th>
-        <th>{translate('Billing type')}</th>
-        <th>{translate('Amount')}</th>
-        <th>{translate('Unit price')}</th>
-        <th>{translate('Charge')}</th>
-        <th>{translate('Units')}</th>
-      </tr>
-    </thead>
-    <tbody>
+  <Table>
+    <TableHeader>
+      <TableRow divided={false}>
+        <TableHead>{translate('Name')}</TableHead>
+        <TableHead>{translate('Billing type')}</TableHead>
+        <TableHead>{translate('Amount')}</TableHead>
+        <TableHead>{translate('Unit price')}</TableHead>
+        <TableHead>{translate('Charge')}</TableHead>
+        <TableHead>{translate('Units')}</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
       {props.components.map((component) => (
         <QuotaRow
           key={component.type}
@@ -86,6 +95,6 @@ export const QuotasTable: FC<QuotasTableProps> = (props) => (
           plan={props.plan}
         />
       ))}
-    </tbody>
-  </table>
+    </TableBody>
+  </Table>
 );

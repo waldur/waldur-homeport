@@ -1,6 +1,8 @@
 import { FC, useMemo } from 'react';
 import { BasePublicPlan } from 'waldur-js-client';
 
+import { TableCell, TableRow } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 
@@ -27,17 +29,17 @@ export const ComponentTotalRow: FC<ComponentTotalRowProps> = ({
   }, [components, plan]);
 
   return (
-    <tr>
-      <td colSpan={4} className="text-end font-medium">
+    <TableRow>
+      <TableCell colSpan={4} className="text-end font-medium">
         {translate('Total:')}
-      </td>
-      <td className="font-medium">
+      </TableCell>
+      <TableCell className="font-medium">
         {ENV.plugins.WALDUR_CORE.CURRENCY_NAME} {total.toFixed(2)}
-      </td>
-      <td className="font-medium">
+      </TableCell>
+      <TableCell className="font-medium">
         {ENV.plugins.WALDUR_CORE.CURRENCY_NAME}{' '}
         {(total * secondaryMultiplier).toFixed(2)}
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };

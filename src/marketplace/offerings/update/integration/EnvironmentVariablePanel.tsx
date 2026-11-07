@@ -2,7 +2,7 @@ import { XIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Field } from 'react-final-form';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, TableCell, TableRow } from 'waldur-ui';
 
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
@@ -19,8 +19,8 @@ export const EnvironmentVariablePanel: FC<EnvironmentVariablePanelProps> = ({
   onRemove,
 }) => {
   return (
-    <tr className="border-b border-b-secondary">
-      <td>
+    <TableRow>
+      <TableCell>
         <Field name={`${variable}.name`}>
           {({ input, meta }) => (
             <InputField
@@ -30,8 +30,8 @@ export const EnvironmentVariablePanel: FC<EnvironmentVariablePanelProps> = ({
             />
           )}
         </Field>
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         <Field name={`${variable}.value`}>
           {({ input, meta }) => (
             <InputField
@@ -41,8 +41,8 @@ export const EnvironmentVariablePanel: FC<EnvironmentVariablePanelProps> = ({
             />
           )}
         </Field>
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         <BaseButton
           tooltip={translate('Remove')}
           variant="text-danger"
@@ -50,7 +50,7 @@ export const EnvironmentVariablePanel: FC<EnvironmentVariablePanelProps> = ({
           iconNode={<XIcon weight="bold" />}
           size="sm"
         />
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };

@@ -1,7 +1,17 @@
 import { FC } from 'react';
 import { EventSubscription } from 'waldur-js-client';
 
-import { PropertyList, PropertyItem, Code } from 'waldur-ui';
+import {
+  Code,
+  PropertyItem,
+  PropertyList,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
@@ -48,30 +58,28 @@ export const EventSubscriptionExpandableRow: FC<
         <div>
           <h6 className="mb-2.5">{translate('Observable objects')}</h6>
           {observableObjects && observableObjects.length > 0 ? (
-            <div className="table-responsive">
-              <table className="table table-sm table-bordered">
-                <thead>
-                  <tr>
-                    <th>{translate('Object type')}</th>
-                    <th>{translate('Offering UUID')}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {observableObjects.map((obj, index) => (
-                    <tr key={index}>
-                      <td>
-                        <Code>{obj.object_type}</Code>
-                      </td>
-                      <td>
-                        <Code className="text-quaternary">
-                          {obj.offering_uuid?.substring(0, 8)}...
-                        </Code>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <Table density="compact">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{translate('Object type')}</TableHead>
+                  <TableHead>{translate('Offering UUID')}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {observableObjects.map((obj, index) => (
+                  <TableRow key={index}>
+                    <TableCell>
+                      <Code>{obj.object_type}</Code>
+                    </TableCell>
+                    <TableCell>
+                      <Code className="text-quaternary">
+                        {obj.offering_uuid?.substring(0, 8)}...
+                      </Code>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           ) : (
             <p className="text-quaternary">
               {translate('No observable objects configured')}

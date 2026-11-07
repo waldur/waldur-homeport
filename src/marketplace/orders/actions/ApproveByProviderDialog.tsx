@@ -8,6 +8,15 @@ import {
   OrderDetails,
 } from 'waldur-js-client';
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -74,12 +83,12 @@ const OptionRow: FC<{
   );
 
   return (
-    <tr>
-      <td>{option?.label || optionKey}</td>
-      <td className="text-quaternary">
+    <TableRow>
+      <TableCell>{option?.label || optionKey}</TableCell>
+      <TableCell className="text-quaternary">
         <OptionValue option={option} value={submittedValue} />
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         <div style={option?.type === 'integer' ? { width: 96 } : undefined}>
           <Field
             name={`attributes.${optionKey}`}
@@ -93,8 +102,8 @@ const OptionRow: FC<{
           option={option}
           name={`attributes.${optionKey}`}
         />
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -279,30 +288,28 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
               <>
                 {hasUserSubmittedOptions ? (
                   // Rounding lives on the outer box so its `overflow-hidden`
-                  // cannot override `table-responsive`'s horizontal scroll.
+                  // cannot override Table's horizontal scroll.
                   <div className="border border-secondary rounded-lg overflow-hidden">
-                    <div className="table-responsive">
-                      <table className="table table-sm table-row-bordered mb-0 align-middle">
-                        <thead>
-                          <tr>
-                            <th>{translate('Option')}</th>
-                            <th>{translate('Submitted value')}</th>
-                            {/* Shrink to the field it holds instead of taking
-                                the table's remaining width. */}
-                            <th style={{ width: '1%' }}>
-                              {translate('New value')}
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <SubmittedOptionRows
-                            resourceOptions={resourceOptions}
-                            currentOptions={currentOptions}
-                            userSubmittedOptions={userSubmittedOptions}
-                          />
-                        </tbody>
-                      </table>
-                    </div>
+                    <Table density="compact" className="mb-0 align-middle">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>{translate('Option')}</TableHead>
+                          <TableHead>{translate('Submitted value')}</TableHead>
+                          {/* Shrink to the field it holds instead of taking
+                              the table's remaining width. */}
+                          <TableHead style={{ width: '1%' }}>
+                            {translate('New value')}
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <SubmittedOptionRows
+                          resourceOptions={resourceOptions}
+                          currentOptions={currentOptions}
+                          userSubmittedOptions={userSubmittedOptions}
+                        />
+                      </TableBody>
+                    </Table>
                   </div>
                 ) : (
                   <OptionsForm

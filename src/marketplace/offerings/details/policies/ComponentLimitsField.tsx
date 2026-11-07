@@ -4,7 +4,18 @@ import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import { OfferingComponent } from 'waldur-js-client';
 
-import { BaseButton, FormField, FormFieldset, FormLegend } from 'waldur-ui';
+import {
+  BaseButton,
+  FormField,
+  FormFieldset,
+  FormLegend,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { NumberField, SelectField } from '@/form';
@@ -62,15 +73,17 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
       {fields.length > 0 && (
         <FormField id="component-limits-set">
           <div>
-            <table className="table px-0 mb-0">
-              <thead>
-                <tr>
-                  <td className="w-1/2">{translate('Component')}</td>
-                  <td>{translate('Limit')}</td>
-                  <td className="w-[5px]" />
-                </tr>
-              </thead>
-              <tbody>
+            <Table scrollable={false}>
+              <TableHeader>
+                <TableRow divided={false}>
+                  <TableHead className="w-1/2">
+                    {translate('Component')}
+                  </TableHead>
+                  <TableHead>{translate('Limit')}</TableHead>
+                  <TableHead className="w-[5px]" />
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {fields.map((component, i) => {
                   const details = components.find(
                     (c) => c.type === fields.value[i]?.type,
@@ -78,8 +91,8 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
 
                   return (
                     <Fragment key={component}>
-                      <tr>
-                        <td>
+                      <TableRow divided={false}>
+                        <TableCell>
                           <Field name={`${component}.type`} validate={required}>
                             {({ input, meta }) => (
                               <SelectField
@@ -95,8 +108,8 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
                               />
                             )}
                           </Field>
-                        </td>
-                        <td>
+                        </TableCell>
+                        <TableCell>
                           <Field
                             name={`${component}.limit`}
                             validate={required}
@@ -110,8 +123,8 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
                               />
                             )}
                           </Field>
-                        </td>
-                        <td>
+                        </TableCell>
+                        <TableCell>
                           <RemovalActionButton
                             title={translate('Remove')}
                             action={() => removeRow(i)}
@@ -120,13 +133,13 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
                               'At least one component limit is required',
                             )}
                           />
-                        </td>
-                      </tr>
+                        </TableCell>
+                      </TableRow>
                     </Fragment>
                   );
                 })}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         </FormField>
       )}

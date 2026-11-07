@@ -1,13 +1,15 @@
 export {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
   useTableContext,
 } from './Table';
-export type { TableDensity, TableProps } from './Table';
+export type { TableDensity, TableProps, TableRowProps } from './Table';
 
 export { DataTable } from './DataTable';
 export type { DataTableColumn, DataTableProps } from './DataTable';

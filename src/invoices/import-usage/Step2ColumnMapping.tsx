@@ -1,6 +1,15 @@
 import { FC, useMemo } from 'react';
 import { useFormState } from 'react-final-form';
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -131,50 +140,56 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
                 count: previewRows.length,
               })}
             </p>
-            <div className="table-responsive">
-              <table className="table table-sm table-bordered table-hover">
-                <thead className="bg-tertiary dark:bg-quaternary">
-                  <tr>
-                    <th>{translate('Customer')}</th>
-                    <th>{translate('Item name')}</th>
-                    <th>{translate('Amount')}</th>
-                    {articleCodeColumn && <th>{translate('Article code')}</th>}
-                    {serviceProviderColumn && <th>{translate('Provider')}</th>}
-                    {offeringColumn && <th>{translate('Offering')}</th>}
-                    {planColumn && <th>{translate('Plan')}</th>}
-                  </tr>
-                </thead>
-                <tbody>
-                  {previewRows.map((row, index) => (
-                    <tr key={index}>
-                      <td>
-                        {customerColumn
-                          ? String(row[customerColumn] || '')
-                          : '-'}
-                      </td>
-                      <td>
-                        {itemNameColumn
-                          ? String(row[itemNameColumn] || '')
-                          : '-'}
-                      </td>
-                      <td>
-                        {amountColumn ? String(row[amountColumn] || '') : '-'}
-                      </td>
-                      {articleCodeColumn && (
-                        <td>{String(row[articleCodeColumn] || '')}</td>
-                      )}
-                      {serviceProviderColumn && (
-                        <td>{String(row[serviceProviderColumn] || '')}</td>
-                      )}
-                      {offeringColumn && (
-                        <td>{String(row[offeringColumn] || '')}</td>
-                      )}
-                      {planColumn && <td>{String(row[planColumn] || '')}</td>}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <Table density="compact">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{translate('Customer')}</TableHead>
+                  <TableHead>{translate('Item name')}</TableHead>
+                  <TableHead>{translate('Amount')}</TableHead>
+                  {articleCodeColumn && (
+                    <TableHead>{translate('Article code')}</TableHead>
+                  )}
+                  {serviceProviderColumn && (
+                    <TableHead>{translate('Provider')}</TableHead>
+                  )}
+                  {offeringColumn && (
+                    <TableHead>{translate('Offering')}</TableHead>
+                  )}
+                  {planColumn && <TableHead>{translate('Plan')}</TableHead>}
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {previewRows.map((row, index) => (
+                  <TableRow key={index}>
+                    <TableCell>
+                      {customerColumn ? String(row[customerColumn] || '') : '-'}
+                    </TableCell>
+                    <TableCell>
+                      {itemNameColumn ? String(row[itemNameColumn] || '') : '-'}
+                    </TableCell>
+                    <TableCell>
+                      {amountColumn ? String(row[amountColumn] || '') : '-'}
+                    </TableCell>
+                    {articleCodeColumn && (
+                      <TableCell>
+                        {String(row[articleCodeColumn] || '')}
+                      </TableCell>
+                    )}
+                    {serviceProviderColumn && (
+                      <TableCell>
+                        {String(row[serviceProviderColumn] || '')}
+                      </TableCell>
+                    )}
+                    {offeringColumn && (
+                      <TableCell>{String(row[offeringColumn] || '')}</TableCell>
+                    )}
+                    {planColumn && (
+                      <TableCell>{String(row[planColumn] || '')}</TableCell>
+                    )}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </>
         )}
       </div>

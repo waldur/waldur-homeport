@@ -5,7 +5,19 @@ import {
   marketplaceSlurmPeriodicUsagePoliciesPreviewImpact,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, BadgeVariant, Progress, Code } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  BadgeVariant,
+  Code,
+  Progress,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { SECOND } from '@/core/constants';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
@@ -508,113 +520,107 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
       {preview.preview_commands && preview.preview_commands.length > 0 && (
         <div className="mt-3">
           <h6>{translate('Preview commands')}</h6>
-          <div className="table-responsive">
-            <table className="table table-sm table-hover">
-              <thead>
-                <tr>
-                  <th>{translate('Type')}</th>
-                  <th>{translate('Description')}</th>
-                  <th>{translate('Command')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {preview.preview_commands.map((cmd, idx) => (
-                  <tr key={idx}>
-                    <td>
-                      <Badge
-                        variant="secondary"
-                        size="sm"
-                        shape="pill"
-                        tone="outline"
-                      >
-                        {cmd.type}
-                      </Badge>
-                    </td>
-                    <td>{cmd.description}</td>
-                    <td>
-                      <Code className="small">{cmd.command}</Code>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Table density="compact">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Type')}</TableHead>
+                <TableHead>{translate('Description')}</TableHead>
+                <TableHead>{translate('Command')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {preview.preview_commands.map((cmd, idx) => (
+                <TableRow key={idx}>
+                  <TableCell>
+                    <Badge
+                      variant="secondary"
+                      size="sm"
+                      shape="pill"
+                      tone="outline"
+                    >
+                      {cmd.type}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>{cmd.description}</TableCell>
+                  <TableCell>
+                    <Code className="small">{cmd.command}</Code>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       )}
 
       {preview.command_history && preview.command_history.length > 0 && (
         <div className="mt-3">
           <h6>{translate('Recent command history')}</h6>
-          <div className="table-responsive">
-            <table className="table table-sm table-hover">
-              <thead>
-                <tr>
-                  <th>{translate('Timestamp')}</th>
-                  <th>{translate('Type')}</th>
-                  <th>{translate('Command')}</th>
-                  <th>{translate('Mode')}</th>
-                  <th>{translate('Status')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {preview.command_history.map((cmd) => (
-                  <tr key={cmd.uuid}>
-                    <td className="whitespace-nowrap">
-                      {formatDateTime(cmd.executed_at)}
-                    </td>
-                    <td>
+          <Table density="compact">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Timestamp')}</TableHead>
+                <TableHead>{translate('Type')}</TableHead>
+                <TableHead>{translate('Command')}</TableHead>
+                <TableHead>{translate('Mode')}</TableHead>
+                <TableHead>{translate('Status')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {preview.command_history.map((cmd) => (
+                <TableRow key={cmd.uuid}>
+                  <TableCell className="whitespace-nowrap">
+                    {formatDateTime(cmd.executed_at)}
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      variant="secondary"
+                      size="sm"
+                      shape="pill"
+                      tone="outline"
+                    >
+                      {cmd.command_type}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Code className="small">{cmd.shell_command}</Code>
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      variant={
+                        cmd.execution_mode === 'production' ? 'primary' : 'info'
+                      }
+                      size="sm"
+                      shape="pill"
+                      tone="outline"
+                    >
+                      {cmd.execution_mode}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    {cmd.success ? (
                       <Badge
-                        variant="secondary"
+                        variant="success"
                         size="sm"
                         shape="pill"
                         tone="outline"
                       >
-                        {cmd.command_type}
+                        {translate('OK')}
                       </Badge>
-                    </td>
-                    <td>
-                      <Code className="small">{cmd.shell_command}</Code>
-                    </td>
-                    <td>
+                    ) : (
                       <Badge
-                        variant={
-                          cmd.execution_mode === 'production'
-                            ? 'primary'
-                            : 'info'
-                        }
+                        variant="danger"
                         size="sm"
                         shape="pill"
                         tone="outline"
                       >
-                        {cmd.execution_mode}
+                        {translate('Failed')}
                       </Badge>
-                    </td>
-                    <td>
-                      {cmd.success ? (
-                        <Badge
-                          variant="success"
-                          size="sm"
-                          shape="pill"
-                          tone="outline"
-                        >
-                          {translate('OK')}
-                        </Badge>
-                      ) : (
-                        <Badge
-                          variant="danger"
-                          size="sm"
-                          shape="pill"
-                          tone="outline"
-                        >
-                          {translate('Failed')}
-                        </Badge>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       )}
 

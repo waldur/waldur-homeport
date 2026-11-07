@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { TableCell, TableRow } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 
@@ -26,8 +28,8 @@ export const VolumeDiscountsRow: FC<{
     return null;
   }
   return (
-    <tr className="text-sm font-medium">
-      <td className="text-end text-primary" colSpan={labelColSpan}>
+    <TableRow hoverable={false} className="text-sm font-medium">
+      <TableCell className="text-end text-primary" colSpan={labelColSpan}>
         <span>
           {isOpenInvoice(invoice)
             ? translate('Estimated volume discounts')
@@ -39,13 +41,13 @@ export const VolumeDiscountsRow: FC<{
             : translate('(included in total)')}
         </small>
         :
-      </td>
-      <td
+      </TableCell>
+      <TableCell
         width="12%"
         className="text-end text-success whitespace-nowrap min-w-[150px] border-b border-b-secondary"
       >
         {defaultCurrency(invoice.volume_discounts)}
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };

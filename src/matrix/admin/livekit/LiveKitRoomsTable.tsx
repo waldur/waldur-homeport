@@ -2,7 +2,16 @@ import { CaretDownIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, Fragment, useMemo, useState } from 'react';
 import { LiveKitOverviewResponse } from 'waldur-js-client';
 
-import { Code, StatCardGrid } from 'waldur-ui';
+import {
+  Code,
+  StatCardGrid,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -45,64 +54,64 @@ export const LiveKitRoomsTable: FC<LiveKitRoomsTableProps> = ({ data }) => {
           { label: translate('Publishers'), value: totals.publisher_count },
         ]}
       />
-      <table className="table table-row-bordered table-hover align-middle mb-0">
-        <thead>
-          <tr className="font-medium text-quaternary">
-            <th style={{ width: 24 }} />
-            <th>{translate('Room')}</th>
-            <th>{translate('SID')}</th>
-            <th>{translate('Participants')}</th>
-            <th>{translate('Publishers')}</th>
-            <th>{translate('Created')}</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table density="compact" className="align-middle mb-0">
+        <TableHeader>
+          <TableRow className="font-medium text-quaternary">
+            <TableHead style={{ width: 24 }} />
+            <TableHead>{translate('Room')}</TableHead>
+            <TableHead>{translate('SID')}</TableHead>
+            <TableHead>{translate('Participants')}</TableHead>
+            <TableHead>{translate('Publishers')}</TableHead>
+            <TableHead>{translate('Created')}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {sortedRooms.map((room) => {
             const isOpen = expanded.has(room.name);
             return (
               <Fragment key={room.sid}>
-                <tr
+                <TableRow
                   style={{ cursor: 'pointer' }}
                   onClick={() => toggle(room.name)}
                 >
-                  <td>
+                  <TableCell>
                     {isOpen ? (
                       <CaretDownIcon weight="bold" />
                     ) : (
                       <CaretRightIcon weight="bold" />
                     )}
-                  </td>
-                  <td className="font-medium">{room.name}</td>
-                  <td>
+                  </TableCell>
+                  <TableCell className="font-medium">{room.name}</TableCell>
+                  <TableCell>
                     <Code>{room.sid}</Code>
-                  </td>
-                  <td>
+                  </TableCell>
+                  <TableCell>
                     {room.max_participants
                       ? `${room.num_participants} / ${room.max_participants}`
                       : room.num_participants}
-                  </td>
-                  <td>{room.num_publishers}</td>
-                  <td>
+                  </TableCell>
+                  <TableCell>{room.num_publishers}</TableCell>
+                  <TableCell>
                     {room.creation_time
                       ? formatDateTime(room.creation_time * 1000)
                       : translate('Unknown time')}
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
                 {isOpen && (
-                  <tr>
-                    <td
+                  <TableRow hoverable={false}>
+                    <TableCell
                       colSpan={6}
                       className="bg-tertiary dark:bg-quaternary px-3 py-1.5"
                     >
                       <LiveKitRoomDetails roomName={room.name} />
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 )}
               </Fragment>
             );
           })}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </>
   );
 };

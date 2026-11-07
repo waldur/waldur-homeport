@@ -6,7 +6,17 @@ import {
   MyAssignmentItem,
 } from 'waldur-js-client';
 
-import { Badge, EmptyState, HelpIcon } from 'waldur-ui';
+import {
+  Badge,
+  EmptyState,
+  HelpIcon,
+  Table as TablePrimitive,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
@@ -96,66 +106,64 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
         </div>
       )}
 
-      <div className="table-responsive">
-        <table className="table table-bordered align-middle">
-          <thead>
-            <tr>
-              <th>{translate('Proposal')}</th>
-              <th>{translate('Status')}</th>
-              <th>{translate('Affinity')}</th>
-              <th>{translate('COI')}</th>
-              <th>{translate('Actions')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {batch.items.map((item) => (
-              <tr key={item.uuid}>
-                <td>
-                  <div className="font-medium">{item.proposal_name}</div>
-                  <span className="text-quaternary">{item.proposal_slug}</span>
-                  {item.proposal_summary && (
-                    <p className="text-quaternary mt-1 mb-0">
-                      {item.proposal_summary}
-                    </p>
-                  )}
-                </td>
-                <td className="whitespace-nowrap">
-                  <AssignmentStatusBadge
-                    status={item.status}
-                    statusDisplay={item.status_display}
-                    size="sm"
-                  />
-                </td>
-                <td>
-                  {item.affinity_score !== null
-                    ? `${Math.round(item.affinity_score * 100)}%`
-                    : '-'}
-                </td>
-                <td>
-                  {item.has_coi ? (
-                    <span className="inline-flex items-center gap-1">
-                      <Badge variant="danger" size="sm" tone="outline">
-                        {translate('COI detected')}
-                      </Badge>
-                      <HelpIcon
-                        label={translate(
-                          'A potential conflict of interest was detected for this proposal. It may be blocked from assignment.',
-                        )}
-                        size={14}
-                      />
-                    </span>
-                  ) : (
-                    <span className="text-quaternary">-</span>
-                  )}
-                </td>
-                <td>
-                  <AssignmentItemActions item={item} batchUuid={row.uuid} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <TablePrimitive density="compact" className="align-middle">
+        <TableHeader>
+          <TableRow>
+            <TableHead>{translate('Proposal')}</TableHead>
+            <TableHead>{translate('Status')}</TableHead>
+            <TableHead>{translate('Affinity')}</TableHead>
+            <TableHead>{translate('COI')}</TableHead>
+            <TableHead>{translate('Actions')}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {batch.items.map((item) => (
+            <TableRow key={item.uuid}>
+              <TableCell>
+                <div className="font-medium">{item.proposal_name}</div>
+                <span className="text-quaternary">{item.proposal_slug}</span>
+                {item.proposal_summary && (
+                  <p className="text-quaternary mt-1 mb-0">
+                    {item.proposal_summary}
+                  </p>
+                )}
+              </TableCell>
+              <TableCell className="whitespace-nowrap">
+                <AssignmentStatusBadge
+                  status={item.status}
+                  statusDisplay={item.status_display}
+                  size="sm"
+                />
+              </TableCell>
+              <TableCell>
+                {item.affinity_score !== null
+                  ? `${Math.round(item.affinity_score * 100)}%`
+                  : '-'}
+              </TableCell>
+              <TableCell>
+                {item.has_coi ? (
+                  <span className="inline-flex items-center gap-1">
+                    <Badge variant="danger" size="sm" tone="outline">
+                      {translate('COI detected')}
+                    </Badge>
+                    <HelpIcon
+                      label={translate(
+                        'A potential conflict of interest was detected for this proposal. It may be blocked from assignment.',
+                      )}
+                      size={14}
+                    />
+                  </span>
+                ) : (
+                  <span className="text-quaternary">-</span>
+                )}
+              </TableCell>
+              <TableCell>
+                <AssignmentItemActions item={item} batchUuid={row.uuid} />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </TablePrimitive>
     </ExpandableContainer>
   );
 };

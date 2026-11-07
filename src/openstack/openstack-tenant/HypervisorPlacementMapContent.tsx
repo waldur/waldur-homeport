@@ -1,5 +1,14 @@
 import { CpuIcon, QuestionIcon, UsersThreeIcon } from '@phosphor-icons/react';
-import { FC, useMemo } from 'react';
+import { FC, Fragment, useMemo } from 'react';
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
@@ -65,14 +74,16 @@ const InstanceRow: FC<{
   inst: PlacementInstance;
   indent?: boolean;
 }> = ({ inst, indent }) => (
-  <tr>
-    <td className={indent ? 'ps-6' : 'ps-3'}>{inst.name}</td>
-    <td>{renderFieldOrDash(inst.cores)}</td>
-    <td>{inst.ram != null ? formatRam(inst.ram) : '\u2014'}</td>
-    <td>{renderFieldOrDash(inst.customer_name)}</td>
-    <td>{renderFieldOrDash(inst.project_name)}</td>
-    <td className="pe-3">{renderFieldOrDash(inst.offering_name)}</td>
-  </tr>
+  <TableRow>
+    <TableCell className={indent ? 'ps-6' : 'ps-3'}>{inst.name}</TableCell>
+    <TableCell>{renderFieldOrDash(inst.cores)}</TableCell>
+    <TableCell>{inst.ram != null ? formatRam(inst.ram) : '\u2014'}</TableCell>
+    <TableCell>{renderFieldOrDash(inst.customer_name)}</TableCell>
+    <TableCell>{renderFieldOrDash(inst.project_name)}</TableCell>
+    <TableCell className="pe-3">
+      {renderFieldOrDash(inst.offering_name)}
+    </TableCell>
+  </TableRow>
 );
 
 export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
@@ -122,70 +133,73 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
             </div>
 
             {/* Table of instances */}
-            <div className="table-responsive">
-              <table className="table table-row-bordered align-middle text-xs mb-0">
-                <thead>
-                  <tr className="text-quaternary font-medium text-xs uppercase">
-                    <th className="ps-3">{translate('Instance')}</th>
-                    <th>{translate('vCPU')}</th>
-                    <th>{translate('RAM')}</th>
-                    <th>{translate('Organization')}</th>
-                    <th>{translate('Project')}</th>
-                    <th className="pe-3">{translate('Tenant')}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* Server-grouped instances */}
-                  {serverGroups.map((sg) => (
-                    <>
-                      <tr key={sg.key}>
-                        <td colSpan={6} className="ps-3 py-1.5 bg-info-subtle">
-                          <UsersThreeIcon
-                            className="text-info me-1.5"
-                            weight="bold"
-                            size={16}
-                          />
-                          <span className="font-medium text-info text-xs">
-                            {sg.name}
-                          </span>
-                          <span className="text-quaternary text-xs ms-1.5">
-                            {sg.policy}
-                          </span>
-                        </td>
-                      </tr>
-                      {sg.instances.map((inst) => (
-                        <InstanceRow
-                          key={inst.uuid}
-                          inst={inst}
-                          indent={hasAnyServerGroups}
-                        />
-                      ))}
-                    </>
-                  ))}
-
-                  {/* Ungrouped instances */}
-                  {ungrouped.length > 0 && hasAnyServerGroups && (
-                    <tr>
-                      <td
+            <Table density="compact" className="align-middle text-xs mb-0">
+              <TableHeader>
+                <TableRow className="text-quaternary font-medium text-xs uppercase">
+                  <TableHead className="ps-3">
+                    {translate('Instance')}
+                  </TableHead>
+                  <TableHead>{translate('vCPU')}</TableHead>
+                  <TableHead>{translate('RAM')}</TableHead>
+                  <TableHead>{translate('Organization')}</TableHead>
+                  <TableHead>{translate('Project')}</TableHead>
+                  <TableHead className="pe-3">{translate('Tenant')}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {/* Server-grouped instances */}
+                {serverGroups.map((sg) => (
+                  <Fragment key={sg.key}>
+                    <TableRow hoverable={false}>
+                      <TableCell
                         colSpan={6}
-                        className="ps-3 py-1.5 bg-tertiary dark:bg-quaternary"
+                        className="ps-3 py-1.5 bg-info-subtle"
                       >
-                        <span className="text-quaternary text-xs font-medium">
-                          {translate('No server group')}
+                        <UsersThreeIcon
+                          className="text-info me-1.5"
+                          weight="bold"
+                          size={16}
+                        />
+                        <span className="font-medium text-info text-xs">
+                          {sg.name}
                         </span>
-                      </td>
-                    </tr>
-                  )}
-                  {ungrouped.map((inst) => (
-                    <InstanceRow
-                      key={inst.uuid}
-                      inst={inst}
-                      indent={hasAnyServerGroups}
-                    />
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                        <span className="text-quaternary text-xs ms-1.5">
+                          {sg.policy}
+                        </span>
+                      </TableCell>
+                    </TableRow>
+                    {sg.instances.map((inst) => (
+                      <InstanceRow
+                        key={inst.uuid}
+                        inst={inst}
+                        indent={hasAnyServerGroups}
+                      />
+                    ))}
+                  </Fragment>
+                ))}
+
+                {/* Ungrouped instances */}
+                {ungrouped.length > 0 && hasAnyServerGroups && (
+                  <TableRow hoverable={false}>
+                    <TableCell
+                      colSpan={6}
+                      className="ps-3 py-1.5 bg-tertiary dark:bg-quaternary"
+                    >
+                      <span className="text-quaternary text-xs font-medium">
+                        {translate('No server group')}
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                )}
+                {ungrouped.map((inst) => (
+                  <InstanceRow
+                    key={inst.uuid}
+                    inst={inst}
+                    indent={hasAnyServerGroups}
+                  />
+                ))}
+              </TableBody>
+            </Table>
           </div>
         );
       })}

@@ -2,14 +2,22 @@ import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Field } from 'react-final-form';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { SelectField } from '@/form';
 import { translate } from '@/i18n';
 
 const VolumeTypeRow = ({ volumeType, onRemove, options }) => (
-  <tr>
-    <td>
+  <TableRow>
+    <TableCell>
       <Field name={`${volumeType}.source`}>
         {({ input, meta }) => (
           <SelectField
@@ -21,8 +29,8 @@ const VolumeTypeRow = ({ volumeType, onRemove, options }) => (
           />
         )}
       </Field>
-    </td>
-    <td>
+    </TableCell>
+    <TableCell>
       <Field name={`${volumeType}.destination`}>
         {({ input, meta }) => (
           <SelectField
@@ -34,8 +42,8 @@ const VolumeTypeRow = ({ volumeType, onRemove, options }) => (
           />
         )}
       </Field>
-    </td>
-    <td>
+    </TableCell>
+    <TableCell>
       <BaseButton
         label={translate('Remove')}
         onClick={onRemove}
@@ -43,8 +51,8 @@ const VolumeTypeRow = ({ volumeType, onRemove, options }) => (
         variant="text-secondary"
         size="sm"
       />
-    </td>
-  </tr>
+    </TableCell>
+  </TableRow>
 );
 
 const VolumeTypeAddButton = ({ onClick }) => (
@@ -65,28 +73,26 @@ export const VolumeTypesTable: FC<{ fields; options }> = ({
     <>
       {fields.length > 0 ? (
         <>
-          <div className="table-responsive">
-            <table className="table table-bordered table-striped mt-2.5">
-              <thead>
-                <tr>
-                  <th>{translate('Source')}</th>
-                  <th>{translate('Destination')}</th>
-                  <th>{translate('Actions')}</th>
-                </tr>
-              </thead>
+          <Table density="compact" className="mt-2.5">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Source')}</TableHead>
+                <TableHead>{translate('Destination')}</TableHead>
+                <TableHead>{translate('Actions')}</TableHead>
+              </TableRow>
+            </TableHeader>
 
-              <tbody>
-                {fields.map((volumeType, index) => (
-                  <VolumeTypeRow
-                    key={volumeType}
-                    volumeType={volumeType}
-                    options={options}
-                    onRemove={() => fields.remove(index)}
-                  />
-                ))}
-              </tbody>
-            </table>
-          </div>
+            <TableBody>
+              {fields.map((volumeType, index) => (
+                <VolumeTypeRow
+                  key={volumeType}
+                  volumeType={volumeType}
+                  options={options}
+                  onRemove={() => fields.remove(index)}
+                />
+              ))}
+            </TableBody>
+          </Table>
           <VolumeTypeAddButton onClick={() => fields.push({})} />
         </>
       ) : (

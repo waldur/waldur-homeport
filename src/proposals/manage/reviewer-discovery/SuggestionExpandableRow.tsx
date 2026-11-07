@@ -1,7 +1,17 @@
 import { FC, useMemo } from 'react';
 import { ReviewerSuggestion } from 'waldur-js-client';
 
-import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
+import {
+  Badge,
+  PropertyItem,
+  PropertyList,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
@@ -138,41 +148,43 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
           <h6 className="font-medium mb-2.5">
             {translate('Best matching proposals')}
           </h6>
-          <div className="table-responsive">
-            <table className="table table-sm table-row-bordered">
-              <thead>
-                <tr className="font-medium text-quaternary">
-                  <th>{translate('Proposal')}</th>
-                  <th className="text-center">{translate('Affinity')}</th>
-                  <th className="text-center">{translate('COI status')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {topProposals.map((proposal) => (
-                  <tr key={proposal.uuid}>
-                    <td>
-                      <div>
-                        {proposal.slug && (
-                          <span className="text-quaternary me-1.5">
-                            {proposal.slug}:
-                          </span>
-                        )}
-                        {proposal.name}
-                      </div>
-                    </td>
-                    <td className="text-center">
-                      <span className="font-medium text-success">
-                        {formatScore(proposal.affinity)}
-                      </span>
-                    </td>
-                    <td className="text-center">
-                      <COIBadge proposal={proposal} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Table density="compact">
+            <TableHeader>
+              <TableRow>
+                <TableHead>{translate('Proposal')}</TableHead>
+                <TableHead className="text-center">
+                  {translate('Affinity')}
+                </TableHead>
+                <TableHead className="text-center">
+                  {translate('COI status')}
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {topProposals.map((proposal) => (
+                <TableRow key={proposal.uuid}>
+                  <TableCell>
+                    <div>
+                      {proposal.slug && (
+                        <span className="text-quaternary me-1.5">
+                          {proposal.slug}:
+                        </span>
+                      )}
+                      {proposal.name}
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <span className="font-medium text-success">
+                      {formatScore(proposal.affinity)}
+                    </span>
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <COIBadge proposal={proposal} />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       )}
 

@@ -5,7 +5,17 @@ import { Field, useForm } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { rancherClusterTemplatesList } from 'waldur-js-client';
 
-import { BaseButton, Checkbox, FormField } from 'waldur-ui';
+import {
+  BaseButton,
+  Checkbox,
+  FormField,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -79,24 +89,32 @@ const renderNodeRows = ({ fields, flavors }: any) => {
       {fields.length > 0 && (
         <FormField id="nodes-list-group">
           <div>
-            <table className="table align-middle">
-              <thead>
-                <tr>
-                  <th className="w-[200px]">{translate('Required nodes')}</th>
-                  <th />
-                  <th className="w-[250px]" />
-                  <th className="w-[100px] text-center">1, 3 or 5</th>
-                  <th className="w-[100px] text-center">1 or more</th>
-                  <th className="w-[100px] text-center">1 or more</th>
-                  <th className="w-[5px]" />
-                </tr>
-              </thead>
-              <tbody>
+            <Table density="compact" className="align-middle">
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[200px]">
+                    {translate('Required nodes')}
+                  </TableHead>
+                  <TableHead />
+                  <TableHead className="w-[250px]" />
+                  <TableHead className="w-[100px] text-center">
+                    1, 3 or 5
+                  </TableHead>
+                  <TableHead className="w-[100px] text-center">
+                    1 or more
+                  </TableHead>
+                  <TableHead className="w-[100px] text-center">
+                    1 or more
+                  </TableHead>
+                  <TableHead className="w-[5px]" />
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {fields.map((node, index) => {
                   return (
                     <Fragment key={node}>
-                      <tr>
-                        <td>
+                      <TableRow>
+                        <TableCell>
                           <Field name={`${node}.name`} validate={required}>
                             {({ input, meta }) => (
                               <StringField
@@ -108,8 +126,8 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                               />
                             )}
                           </Field>
-                        </td>
-                        <td>
+                        </TableCell>
+                        <TableCell>
                           <Field
                             name={`${node}.units`}
                             validate={required}
@@ -128,8 +146,8 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                               />
                             )}
                           </Field>
-                        </td>
-                        <td>
+                        </TableCell>
+                        <TableCell>
                           <Field name={`${node}.flavor`} validate={required}>
                             {({ input, meta }) => (
                               <SelectField
@@ -141,8 +159,8 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                               />
                             )}
                           </Field>
-                        </td>
-                        <td colSpan={3}>
+                        </TableCell>
+                        <TableCell colSpan={3}>
                           <Field name={`${node}.roles`} validate={required}>
                             {(fieldProps) => (
                               <BooleanGroup
@@ -153,8 +171,8 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                               />
                             )}
                           </Field>
-                        </td>
-                        <td>
+                        </TableCell>
+                        <TableCell>
                           <BaseButton
                             tooltip={translate('Remove')}
                             variant="text-danger"
@@ -162,13 +180,13 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                             iconNode={<XIcon weight="bold" />}
                             size="lg"
                           />
-                        </td>
-                      </tr>
+                        </TableCell>
+                      </TableRow>
                     </Fragment>
                   );
                 })}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         </FormField>
       )}

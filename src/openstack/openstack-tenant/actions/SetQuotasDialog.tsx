@@ -5,7 +5,18 @@ import {
   OpenstackTenantsSetQuotasData,
 } from 'waldur-js-client';
 
-import { Tooltip, WarningTip, Card, CardContent } from 'waldur-ui';
+import {
+  Card,
+  CardContent,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Tooltip,
+  WarningTip,
+} from 'waldur-ui';
 
 import { DirtyStateReporter } from '@/core/DirtyFormContext';
 import { NumberField, SubmitButton } from '@/form';
@@ -317,11 +328,13 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
   );
 
   return (
-    <tr>
-      <td className="whitespace-nowrap">{labelCell}</td>
-      <td>{renderFieldOrDash(formatUsage(row.usage, row.name))}</td>
-      <td>{renderFieldOrDash(row.limitDisplay)}</td>
-      <td onClick={(e) => e.stopPropagation()}>
+    <TableRow>
+      <TableCell className="whitespace-nowrap">{labelCell}</TableCell>
+      <TableCell>
+        {renderFieldOrDash(formatUsage(row.usage, row.name))}
+      </TableCell>
+      <TableCell>{renderFieldOrDash(row.limitDisplay)}</TableCell>
+      <TableCell onClick={(e) => e.stopPropagation()}>
         {row.settable && row.fieldName ? (
           <Field
             name={row.fieldName}
@@ -338,8 +351,8 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
         ) : (
           <span className="text-quaternary">{row.limitDisplay}</span>
         )}
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         {difference !== undefined ? (
           <ChangesAmountBadge
             changes={difference}
@@ -351,8 +364,8 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
         ) : (
           <span className="text-quaternary">—</span>
         )}
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -444,38 +457,34 @@ export const SetQuotasDialog: FC<SetQuotasDialogProps> = ({
           >
             <Card variant="table" bordered className="full-width">
               <CardContent className="p-0">
-                <div className="table-responsive">
-                  <div className="table-container">
-                    <table className="table table-row-bordered align-middle">
-                      <thead>
-                        <tr className="align-middle">
-                          <th>{translate('Component')}</th>
-                          <th>{translate('Usage')}</th>
-                          <th>{translate('Current limit')}</th>
-                          <th>{translate('New limit')}</th>
-                          <th>{translate('Difference')}</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {categoryRows.map(({ categoryLabel, rows }) => (
-                          <React.Fragment key={categoryLabel}>
-                            <tr className="table-active">
-                              <td
-                                colSpan={5}
-                                className="font-medium text-quaternary text-xs"
-                              >
-                                {categoryLabel}
-                              </td>
-                            </tr>
-                            {rows.map((row) => (
-                              <QuotaTableRow key={row.name} row={row} />
-                            ))}
-                          </React.Fragment>
+                <Table density="compact" className="align-middle">
+                  <TableHeader>
+                    <TableRow className="align-middle">
+                      <TableHead>{translate('Component')}</TableHead>
+                      <TableHead>{translate('Usage')}</TableHead>
+                      <TableHead>{translate('Current limit')}</TableHead>
+                      <TableHead>{translate('New limit')}</TableHead>
+                      <TableHead>{translate('Difference')}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {categoryRows.map(({ categoryLabel, rows }) => (
+                      <React.Fragment key={categoryLabel}>
+                        <TableRow className="bg-secondary" hoverable={false}>
+                          <TableCell
+                            colSpan={5}
+                            className="font-medium text-quaternary text-xs"
+                          >
+                            {categoryLabel}
+                          </TableCell>
+                        </TableRow>
+                        {rows.map((row) => (
+                          <QuotaTableRow key={row.name} row={row} />
                         ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+                      </React.Fragment>
+                    ))}
+                  </TableBody>
+                </Table>
               </CardContent>
             </Card>
           </ModalDialog>

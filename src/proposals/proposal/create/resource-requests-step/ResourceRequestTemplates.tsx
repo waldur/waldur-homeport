@@ -13,13 +13,20 @@ import {
 
 import {
   AlertItem,
+  Badge,
   BaseButton,
-  PropertyList,
-  Tooltip,
   Card,
   CardContent,
+  PropertyItem,
+  PropertyList,
+  Table as TablePrimitive,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Tooltip,
 } from 'waldur-ui';
-import { Badge, PropertyItem } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
@@ -87,27 +94,29 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
       ) : (
         <Card variant="table" bordered>
           <CardContent>
-            <table className="table align-middle">
-              <thead>
-                <tr className="align-middle">
-                  <th style={{ width: '50%' }}>{translate('Component')}</th>
-                  <th style={{ width: '50%' }}>
+            <TablePrimitive density="compact" className="align-middle">
+              <TableHeader>
+                <TableRow className="align-middle">
+                  <TableHead style={{ width: '50%' }}>
+                    {translate('Component')}
+                  </TableHead>
+                  <TableHead style={{ width: '50%' }}>
                     {translate('Requested amount')}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {keyValues.map(([key, value], index) => (
                   // Limits are keyed by component type: name each one as the
                   // offering does, and state the unit its amount is counted in.
-                  <tr key={index}>
-                    <td>
+                  <TableRow key={index}>
+                    <TableCell>
                       {getComponentLabel(
                         key,
                         row.requested_offering_components,
                       )}
-                    </td>
-                    <td>
+                    </TableCell>
+                    <TableCell>
                       {formatComponentQuantity(
                         value,
                         findQuantityComponent(
@@ -115,11 +124,11 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
                           key,
                         ),
                       )}
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </TablePrimitive>
           </CardContent>
         </Card>
       )}

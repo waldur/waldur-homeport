@@ -1,4 +1,11 @@
-import { FormText, Code } from 'waldur-ui';
+import {
+  Code,
+  FormText,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -17,20 +24,20 @@ export const SlugTemplateHelpText = ({
 }: SlugTemplateHelpTextProps) => (
   <FormText as="div" variant="muted" className="mt-1.5">
     <p className="mb-1.5">{translate('Supported placeholders:')}</p>
-    <table className="table table-sm table-borderless mb-0">
-      <tbody>
+    <Table density="compact" scrollable={false} className="mb-0">
+      <TableBody>
         {placeholders.map((p) => (
-          <tr key={p.name}>
-            <td>
+          <TableRow key={p.name} divided={false} hoverable={false}>
+            <TableCell>
               <Code>{`{${p.name}}`}</Code>
-            </td>
-            <td>{p.description}</td>
-            <td className="text-quaternary">
+            </TableCell>
+            <TableCell>{p.description}</TableCell>
+            <TableCell className="text-quaternary">
               {translate('e.g.')} <Code>{p.example}</Code>
-            </td>
-          </tr>
+            </TableCell>
+          </TableRow>
         ))}
-      </tbody>
-    </table>
+      </TableBody>
+    </Table>
   </FormText>
 );

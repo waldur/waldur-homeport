@@ -1,5 +1,14 @@
 import { FC, ReactNode } from 'react';
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -60,40 +69,45 @@ export const DetailsDiff: FC<DetailsDiffProps> = ({
   }
 
   return (
-    <div className="table-responsive">
-      <table
-        className="table table-sm table-bordered mb-0 text-xs align-middle"
-        data-testid="details-diff-table"
-      >
-        <thead>
-          <tr>
-            <th style={{ width: '20%' }}>{translate('Field')}</th>
-            <th style={{ width: '40%' }}>
-              {beforeLabel ?? translate('Before')}
-            </th>
-            <th style={{ width: '40%' }}>
-              {afterLabel ?? translate('After')}
-              {afterNote && <span className="ms-1">{afterNote}</span>}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {keys.map((key) => {
-            const beforeVal = beforeObj[key];
-            const afterVal = afterObj[key];
-            const differs =
-              hasBoth &&
-              sortedStringify(beforeVal) !== sortedStringify(afterVal);
-            return (
-              <tr key={key} className={differs ? 'table-warning' : undefined}>
-                <td className="align-top">{key}</td>
-                <td className="align-top">{renderValue(beforeVal)}</td>
-                <td className="align-top">{renderValue(afterVal)}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <Table
+      density="compact"
+      className="mb-0 text-xs align-middle"
+      data-testid="details-diff-table"
+    >
+      <TableHeader>
+        <TableRow>
+          <TableHead style={{ width: '20%' }}>{translate('Field')}</TableHead>
+          <TableHead style={{ width: '40%' }}>
+            {beforeLabel ?? translate('Before')}
+          </TableHead>
+          <TableHead style={{ width: '40%' }}>
+            {afterLabel ?? translate('After')}
+            {afterNote && <span className="ms-1">{afterNote}</span>}
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {keys.map((key) => {
+          const beforeVal = beforeObj[key];
+          const afterVal = afterObj[key];
+          const differs =
+            hasBoth && sortedStringify(beforeVal) !== sortedStringify(afterVal);
+          return (
+            <TableRow
+              key={key}
+              className={differs ? 'table-warning' : undefined}
+            >
+              <TableCell className="align-top">{key}</TableCell>
+              <TableCell className="align-top">
+                {renderValue(beforeVal)}
+              </TableCell>
+              <TableCell className="align-top">
+                {renderValue(afterVal)}
+              </TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
   );
 };

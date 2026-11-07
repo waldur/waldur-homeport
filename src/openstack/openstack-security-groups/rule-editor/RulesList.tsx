@@ -3,7 +3,15 @@ import { FC } from 'react';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import { OpenStackSecurityGroup } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { EthernetType } from '@/openstack/types';
@@ -25,9 +33,9 @@ export const RulesList: FC<{
   <FieldArray name="rules">
     {({ fields }: FieldArrayRenderProps<Rule, any>) => (
       <>
-        <table className="table table-bordered">
-          <thead>
-            <tr>
+        <Table>
+          <TableHeader>
+            <TableRow>
               <HeaderWithTooltip
                 label={translate('Ethertype')}
                 tooltip={translate('Ethernet type: IPv4 or IPv6')}
@@ -65,16 +73,16 @@ export const RulesList: FC<{
                 label={translate('Description')}
                 tooltip={translate('Brief description of the rule.')}
               />
-              <th>{translate('Actions')}</th>
-            </tr>
-          </thead>
-          <tbody>
+              <TableHead>{translate('Actions')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {fields.length === 0 ? (
-              <tr>
-                <td className="text-center" colSpan={8}>
+              <TableRow>
+                <TableCell className="text-center" colSpan={8}>
                   {translate('Security group does not contain any rule yet.')}
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ) : (
               fields.map((name, index) => (
                 <RuleRow
@@ -85,8 +93,8 @@ export const RulesList: FC<{
                 />
               ))
             )}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
         <BaseButton
           onClick={() => fields.push(DEFAULT_RULE)}
           label={translate('Add rule')}

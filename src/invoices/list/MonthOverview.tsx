@@ -1,7 +1,16 @@
 import { ArrowDownIcon, ArrowUpIcon, MinusIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 
-import { PropertyList, PropertyItem, Card, CardContent } from 'waldur-ui';
+import {
+  Card,
+  CardContent,
+  PropertyItem,
+  PropertyList,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { parseDate } from '@/core/dateUtils';
@@ -36,10 +45,12 @@ interface MonthOverviewProps {
 
 const OverviewItemTr = ({ title, value }) => {
   return (
-    <tr>
-      <td className="underline w-full py-2.5">{title}</td>
-      <td className="text-quaternary whitespace-nowrap">{value}</td>
-    </tr>
+    <TableRow divided={false}>
+      <TableCell className="underline w-full py-2.5">{title}</TableCell>
+      <TableCell className="text-quaternary whitespace-nowrap">
+        {value}
+      </TableCell>
+    </TableRow>
   );
 };
 
@@ -101,8 +112,8 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
             ) : (
               <h2 className="mb-5">{date}</h2>
             )}
-            <table className="text-xs">
-              <tbody>
+            <Table scrollable={false} className="text-xs">
+              <TableBody>
                 {projects.slice(0, maxProjectsShowCount).map((project) => (
                   <OverviewItemTr
                     key={project.resource_uuid}
@@ -110,8 +121,8 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
                     value={defaultCurrency(project.total)}
                   />
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
           <div>
             <div className="flex flex-col justify-between items-end h-full">

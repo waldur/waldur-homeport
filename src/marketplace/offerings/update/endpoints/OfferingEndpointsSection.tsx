@@ -6,6 +6,10 @@ import {
   CardHeader,
   CardTitle,
   CardToolbar,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -56,38 +60,36 @@ export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
             className="-mt-4"
           />
         ) : (
-          <div className="table-responsive">
-            <table className="table table-bordered table-hover">
-              <tbody>
-                {props.offering.endpoints.map((endpoint) => (
-                  <tr key={endpoint.uuid}>
-                    <td className="md:w-3/12">{endpoint.name}</td>
-                    <td className="md:w-9/12">{endpoint.url}</td>
-                    {(canUpdate || canDelete) && (
-                      <td className="row-actions">
-                        <div className="flex gap-1.5">
-                          {canUpdate && (
-                            <EditEndpointButton
-                              offering={props.offering}
-                              endpoint={endpoint}
-                              refetch={props.refetch}
-                            />
-                          )}
-                          {canDelete && (
-                            <DeleteEndpointButton
-                              offering={props.offering}
-                              endpoint={endpoint}
-                              refetch={props.refetch}
-                            />
-                          )}
-                        </div>
-                      </td>
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Table density="compact">
+            <TableBody>
+              {props.offering.endpoints.map((endpoint) => (
+                <TableRow key={endpoint.uuid}>
+                  <TableCell className="md:w-3/12">{endpoint.name}</TableCell>
+                  <TableCell className="md:w-9/12">{endpoint.url}</TableCell>
+                  {(canUpdate || canDelete) && (
+                    <TableCell className="row-actions">
+                      <div className="flex gap-1.5">
+                        {canUpdate && (
+                          <EditEndpointButton
+                            offering={props.offering}
+                            endpoint={endpoint}
+                            refetch={props.refetch}
+                          />
+                        )}
+                        {canDelete && (
+                          <DeleteEndpointButton
+                            offering={props.offering}
+                            endpoint={endpoint}
+                            refetch={props.refetch}
+                          />
+                        )}
+                      </div>
+                    </TableCell>
+                  )}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         )}
       </CardContent>
     </Card>

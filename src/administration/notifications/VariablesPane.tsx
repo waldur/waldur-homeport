@@ -1,28 +1,37 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { SchemaProperty } from './types';
 
 export const VariablesPane = ({ schema }) => (
-  <table className="table table-bordered table-striped table-sm">
-    <thead>
-      <tr>
-        <th>{translate('Variable')}</th>
-        <th>{translate('Type')}</th>
-        <th>{translate('Description')}</th>
-      </tr>
-    </thead>
-    <tbody>
+  <Table density="compact" striped>
+    <TableHeader>
+      <TableRow>
+        <TableHead>{translate('Variable')}</TableHead>
+        <TableHead>{translate('Type')}</TableHead>
+        <TableHead>{translate('Description')}</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
       {Object.entries(schema.properties as Record<string, SchemaProperty>).map(
         ([name, propSchema]) => (
-          <tr key={name}>
-            <td>{name}</td>
-            <td>
+          <TableRow key={name}>
+            <TableCell>{name}</TableCell>
+            <TableCell>
               <em>{propSchema.type || 'any'}</em>
-            </td>
-            <td>{propSchema.description}</td>
-          </tr>
+            </TableCell>
+            <TableCell>{propSchema.description}</TableCell>
+          </TableRow>
         ),
       )}
-    </tbody>
-  </table>
+    </TableBody>
+  </Table>
 );

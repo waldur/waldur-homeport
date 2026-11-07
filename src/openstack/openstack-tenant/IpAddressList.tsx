@@ -2,7 +2,15 @@ import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { Field } from 'react-final-form';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { FieldError } from '@/form/FieldError';
 import { BaseInputField } from '@/form/InputField';
@@ -11,8 +19,8 @@ import { translate } from '@/i18n';
 import { validateIPv4 } from '../utils';
 
 const IPAddressRow = ({ address, validateAddress, onRemove }) => (
-  <tr>
-    <td>
+  <TableRow>
+    <TableCell>
       <Field name={address} validate={validateAddress}>
         {({ input, meta }) => (
           <>
@@ -21,8 +29,8 @@ const IPAddressRow = ({ address, validateAddress, onRemove }) => (
           </>
         )}
       </Field>
-    </td>
-    <td>
+    </TableCell>
+    <TableCell>
       <BaseButton
         label={translate('Remove')}
         onClick={onRemove}
@@ -30,8 +38,8 @@ const IPAddressRow = ({ address, validateAddress, onRemove }) => (
         variant="text-secondary"
         size="sm"
       />
-    </td>
-  </tr>
+    </TableCell>
+  </TableRow>
 );
 
 const IPAddressAddButton = ({ onClick }) => (
@@ -53,27 +61,25 @@ export const IpAddressList: React.FC<any> = ({
   <>
     {fields.length > 0 ? (
       <>
-        <div className="table-responsive">
-          <table className="table table-bordered table-striped mt-2.5">
-            <thead>
-              <tr>
-                <th>{translate('IP address')}</th>
-                <th>{translate('Actions')}</th>
-              </tr>
-            </thead>
+        <Table density="compact" striped className="mt-2.5">
+          <TableHeader>
+            <TableRow>
+              <TableHead>{translate('IP address')}</TableHead>
+              <TableHead>{translate('Actions')}</TableHead>
+            </TableRow>
+          </TableHeader>
 
-            <tbody>
-              {fields.map((address, index) => (
-                <IPAddressRow
-                  key={address}
-                  address={address}
-                  validateAddress={validateAddress}
-                  onRemove={() => fields.remove(index)}
-                />
-              ))}
-            </tbody>
-          </table>
-        </div>
+          <TableBody>
+            {fields.map((address, index) => (
+              <IPAddressRow
+                key={address}
+                address={address}
+                validateAddress={validateAddress}
+                onRemove={() => fields.remove(index)}
+              />
+            ))}
+          </TableBody>
+        </Table>
         <IPAddressAddButton onClick={() => fields.push('')} />
       </>
     ) : (

@@ -1,12 +1,14 @@
 import { FunctionComponent } from 'react';
 
+import { Table, TableBody, TableCell, TableRow } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { EnvironmentVariablePanel } from './EnvironmentVariablePanel';
 
 export const EnvironmentVariablesList: FunctionComponent<any> = (props) => (
-  <table className="table table-sm table-hover">
-    <tbody>
+  <Table density="compact">
+    <TableBody>
       {props.fields.length ? (
         props.fields.map((variable, index) => (
           <EnvironmentVariablePanel
@@ -17,12 +19,12 @@ export const EnvironmentVariablesList: FunctionComponent<any> = (props) => (
           />
         ))
       ) : (
-        <tr>
-          <td className="text-center text-quaternary">
+        <TableRow>
+          <TableCell className="text-center text-quaternary">
             {translate('No variable defined')}
-          </td>
-        </tr>
+          </TableCell>
+        </TableRow>
       )}
-    </tbody>
-  </table>
+    </TableBody>
+  </Table>
 );

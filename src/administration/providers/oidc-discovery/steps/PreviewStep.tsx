@@ -4,10 +4,16 @@ import { useFormState } from 'react-final-form';
 import {
   AlertItem,
   Badge,
+  Code,
   PropertyCard,
   PropertyItem,
   PropertyList,
-  Code,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -81,26 +87,28 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
         className="mb-3"
       >
         {mappedFields.length > 0 ? (
-          <table className="table table-sm table-borderless">
-            <thead>
-              <tr>
-                <th style={{ width: '40%' }}>{translate('Waldur Field')}</th>
-                <th>{translate('OIDC Claim')}</th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table density="compact" scrollable={false}>
+            <TableHeader>
+              <TableRow divided={false}>
+                <TableHead style={{ width: '40%' }}>
+                  {translate('Waldur Field')}
+                </TableHead>
+                <TableHead>{translate('OIDC Claim')}</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {mappedFields.map(([field, claim]) => (
-                <tr key={field}>
-                  <td>
+                <TableRow key={field} divided={false}>
+                  <TableCell>
                     <Code>{field}</Code>
-                  </td>
-                  <td>
+                  </TableCell>
+                  <TableCell>
                     <Code>{claim}</Code>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         ) : (
           <span className="text-quaternary">
             {translate('No attribute mappings configured')}

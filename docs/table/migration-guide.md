@@ -29,7 +29,7 @@ target by what the table **is**, not by the fact that it is a `<table>`.
 ```text
 Is it a list of records (one row per item, same columns)?
 ├─ No — label/value pairs about one thing ............ 1. Label/value block
-├─ No — a grid of form inputs ........................ 2. Form grid
+├─ No — form grid, custom footer, or preview ......... 2. Table primitives
 └─ Yes
    ├─ Does ANY of these hold?
    │    • the rows come from a paginated list endpoint (it takes page /
@@ -38,8 +38,8 @@ Is it a list of records (one row per item, same columns)?
    │    • it needs selection, expandable rows or a menu of row actions
    │    • it needs export, or an empty state with a call to action (NoResult)
    │  └─ Yes ............................................. 3. @/table/Table
-   └─ No: every row is already in memory and is only read
-      (dialog summary, preview, reference list, review step, docs table)
+   └─ No: standard in-memory list rendered with consistent columns
+      (dialog summary, reference list, review step, docs table)
                                                        ... 4. SimpleTable
 ```
 
@@ -176,29 +176,30 @@ What `Field` does for you, so callers do not repeat it:
 - **Extras:** `hasCopy` for a copy button, `tooltip` for a help icon,
   `valueClass` / `labelClass` for emphasis or a fixed label width.
 
-## 2. Form grid
+## 2. Table primitives (form grids, custom footers, previews)
 
-One row per item with inputs in the cells: a price editor, quota limits, a
-mapping step in a wizard. `@/table/Table` fights this shape: it pages rows
-(hiding ones that are being edited or carry a validation error), reserves a
-min-height and sizes columns for a page of data.
+When a table is not a standard paginated record list, but rather:
 
-Build it from waldur-ui's primitives and add the file to the rule's
-`ALLOWED_FILES` in
-`packages/eslint-plugin-waldur/rules/no-hand-rolled-table.js` with a one-line
-reason, as `PricesTable.tsx` already is:
+- **A grid of form inputs:** a price editor (`PricesTable`), quota limits (`QuotasTable`), security group rules (`RulesList`), or mapping step in a wizard (`Step2CustomerDiscovery`).
+- **A table with totals or footers:** invoice summaries (`InvoiceDetails`), cost breakdowns.
+- **An inline preview or compact history:** command previews (`SlurmPolicyPreview`), card state history (`PubSubCircuitBreakerCard`), or sub-tables in expandable rows.
+
+`@/table/Table` fights these shapes: it brings a fetch cycle, a Redux store, pages rows (hiding fields with errors), reserves min-height, and sizes columns for paginated data. `SimpleTable` also fights them when you need custom colspans, form controls, or footer rows.
+
+Build them with `waldur-ui`'s Table primitives:
 
 ```tsx
 import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from 'waldur-ui';
 
-<Table>
+<Table density="compact">
   <TableHeader>
     <TableRow>
       <TableHead>{translate('Component')}</TableHead>
@@ -215,11 +216,22 @@ import {
       </TableRow>
     ))}
   </TableBody>
+  <TableFooter>
+    <TableRow>
+      <TableCell>{translate('Total')}</TableCell>
+      <TableCell>{totalLimit}</TableCell>
+    </TableRow>
+  </TableFooter>
 </Table>;
 ```
 
-Do not reach for the primitives for anything else: they are hand-rolling with
-nicer parts, and the lint rule does not see them yet.
+Key props on the primitives:
+
+- `<Table density="compact" | "normal" | "spacious">`: Controls cell padding and typography.
+- `<Table scrollable={false}>`: Drops the outer overflow wrapper when the parent container (e.g. modal body) already handles scrolling.
+- `<TableRow hoverable={false}>`: Disables row hover highlight for static read-only tables.
+- `<TableRow divided={false}>`: Drops the bottom border (replaces `.table-borderless`).
+- `<TableFooter>`: Semantic `<tfoot>` with token borders and background for summary/totals rows.
 
 ## 3. `@/table/Table`
 
@@ -409,7 +421,4 @@ repeat across the remaining batches.
   (`InvitationDetailsCard.tsx`), and the `<dl>` blocks in
   `TicketDraftCard.tsx`, `RuleTestMatchDialog.tsx`,
   `MergeCheckDetailsDialog.tsx` and `ResourceLimitDetails.tsx`.
-- **`no-hand-rolled-table`:** also flag waldur-ui's `Table` primitives outside
-  the allowed files (raw `<table>` is already an error, with the existing ones
-  in `hand-rolled-table.baseline.json`).
 - **A `renderWithProviders` option** that supplies the table store.

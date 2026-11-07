@@ -2,7 +2,16 @@ import { get } from 'es-toolkit/compat';
 import React from 'react';
 import { useFormState } from 'react-final-form';
 
-import { Card, CardContent } from 'waldur-ui';
+import {
+  Card,
+  CardContent,
+  Table,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import {
@@ -106,48 +115,44 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
       )}
       <Card variant="table" bordered className="full-width">
         <CardContent className="p-0">
-          <div className="table-responsive">
-            <div className="table-container">
-              <table className="table table-row-bordered align-middle">
-                <thead>
-                  <tr className="align-middle">
-                    <th>{translate('Component')}</th>
-                    <th>{translate('Usage')}</th>
-                    <th>{translate('Current limit')}</th>
-                    <th>{translate('New limit')}</th>
-                    <th>{translate('Difference')}</th>
-                    {limitChangeData.shouldConcealPrices ? null : (
-                      <th className="sm:w-2/12">
-                        {translate('Price')}
-                        <PriceTooltip />
-                      </th>
-                    )}
-                  </tr>
-                </thead>
-                <tbody>
-                  {limitChangeData.components.map((component, index) => (
-                    <ComponentRow
-                      key={index}
-                      component={component}
-                      limits={data.offeringLimits[component.type]}
-                      shouldConcealPrices={limitChangeData.shouldConcealPrices}
-                      parentName={parentName}
-                      derived={derivedTypes.has(component.type)}
-                      readOnly={readOnly}
-                    />
-                  ))}
-                </tbody>
-                {limitChangeData.shouldConcealPrices ||
-                limitChangeData.periodTotals.length === 0 ? null : (
-                  <tfoot>
-                    {limitChangeData.periodTotals.map((row) => (
-                      <ComponentTotalRow key={row.chargeMode} row={row} />
-                    ))}
-                  </tfoot>
+          <Table density="compact" className="align-middle">
+            <TableHeader>
+              <TableRow className="align-middle">
+                <TableHead>{translate('Component')}</TableHead>
+                <TableHead>{translate('Usage')}</TableHead>
+                <TableHead>{translate('Current limit')}</TableHead>
+                <TableHead>{translate('New limit')}</TableHead>
+                <TableHead>{translate('Difference')}</TableHead>
+                {limitChangeData.shouldConcealPrices ? null : (
+                  <TableHead className="sm:w-2/12">
+                    {translate('Price')}
+                    <PriceTooltip />
+                  </TableHead>
                 )}
-              </table>
-            </div>
-          </div>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {limitChangeData.components.map((component, index) => (
+                <ComponentRow
+                  key={index}
+                  component={component}
+                  limits={data.offeringLimits[component.type]}
+                  shouldConcealPrices={limitChangeData.shouldConcealPrices}
+                  parentName={parentName}
+                  derived={derivedTypes.has(component.type)}
+                  readOnly={readOnly}
+                />
+              ))}
+            </TableBody>
+            {limitChangeData.shouldConcealPrices ||
+            limitChangeData.periodTotals.length === 0 ? null : (
+              <TableFooter>
+                {limitChangeData.periodTotals.map((row) => (
+                  <ComponentTotalRow key={row.chargeMode} row={row} />
+                ))}
+              </TableFooter>
+            )}
+          </Table>
         </CardContent>
       </Card>
     </div>

@@ -70,11 +70,6 @@
   color: var(--bs-table-striped-color);
 }
 
-.table-active {
-  --bs-table-accent-bg: var(--bs-table-active-bg);
-  color: var(--bs-table-active-color);
-}
-
 .table-hover > tbody > tr:hover > * {
   --bs-table-accent-bg: var(--bs-table-hover-bg);
   color: var(--bs-table-hover-color);
@@ -142,13 +137,6 @@
     }
   }
 
-  // Rounded
-  &.table-rounded {
-    border-radius: var(--radius-lg);
-    border-spacing: 0;
-    border-collapse: separate;
-  }
-
   // Row bordered
   &.table-row-bordered {
     tr {
@@ -162,14 +150,6 @@
       td {
         border-top-width: 1px !important;
       }
-    }
-  }
-
-  // Row border colour. Metronic generated one per gray step; the app uses
-  // only gray-200, which is the divider.
-  &.table-row-gray-200 {
-    tr {
-      border-bottom-color: var(--border-divider);
     }
   }
 }

@@ -1,24 +1,25 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
+import { Table, TableBody } from 'waldur-ui';
+
 import { VolumeDiscountsRow } from './VolumeDiscountsRow';
 
-// A <tr> needs a table around it to render; the markup only hosts the row.
+// A row needs a table around it to render; the markup only hosts the row.
 const renderRow = (
   invoice: { state: any; volume_discounts: any },
   includedIn: 'subtotal' | 'total' = 'subtotal',
 ) =>
   render(
-    // eslint-disable-next-line waldur-custom/no-hand-rolled-table
-    <table>
-      <tbody>
+    <Table>
+      <TableBody>
         <VolumeDiscountsRow
           invoice={invoice}
           labelColSpan={1}
           includedIn={includedIn}
         />
-      </tbody>
-    </table>,
+      </TableBody>
+    </Table>,
   );
 
 describe('VolumeDiscountsRow', () => {

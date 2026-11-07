@@ -7,6 +7,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { adminMatrixDiagnosticsRetrieve } from 'waldur-js-client';
 
+import { Table, TableBody, TableCell, TableRow } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form/SubmitButton';
@@ -51,11 +53,14 @@ export const MatrixDiagnosticsDialog: FC = () => {
           loadData={refetch}
         />
       ) : data ? (
-        <table className="table table-borderless mb-0">
-          <tbody>
+        <Table scrollable={false} className="mb-0">
+          <TableBody>
             {data.checks.map((check) => (
-              <tr key={check.name}>
-                <td className="whitespace-nowrap pe-2.5" style={{ width: 24 }}>
+              <TableRow key={check.name} divided={false}>
+                <TableCell
+                  className="whitespace-nowrap pe-2.5"
+                  style={{ width: 24 }}
+                >
                   {check.ok ? (
                     <CheckCircleIcon
                       size={20}
@@ -69,21 +74,21 @@ export const MatrixDiagnosticsDialog: FC = () => {
                       className="text-danger"
                     />
                   )}
-                </td>
-                <td className="font-medium whitespace-nowrap pe-3">
+                </TableCell>
+                <TableCell className="font-medium whitespace-nowrap pe-3">
                   {check.label}
-                </td>
-                <td>
+                </TableCell>
+                <TableCell>
                   <span
                     className={check.ok ? 'text-quaternary' : 'text-danger'}
                   >
                     {check.detail}
                   </span>
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       ) : null}
     </ModalDialog>
   );

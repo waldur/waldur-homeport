@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { HelpIcon } from 'waldur-ui';
+import { HelpIcon, TableHead } from 'waldur-ui';
 
 interface HeaderWithTooltipProps {
   label: string;
@@ -13,10 +13,10 @@ export const HeaderWithTooltip: FC<HeaderWithTooltipProps> = ({
   tooltip,
   className,
 }) => (
-  <th className={className}>
+  <TableHead className={className}>
     <div className="flex items-center">
       <span className="me-1.5">{label}</span>
       <HelpIcon label={tooltip} />
     </div>
-  </th>
+  </TableHead>
 );

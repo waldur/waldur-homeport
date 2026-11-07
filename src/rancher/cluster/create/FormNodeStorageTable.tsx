@@ -2,7 +2,16 @@ import { XIcon } from '@phosphor-icons/react';
 import { FC, PropsWithChildren, useEffect } from 'react';
 import { Field, useForm } from 'react-final-form';
 
-import { BaseButton, FormField } from 'waldur-ui';
+import {
+  BaseButton,
+  FormField,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { composeValidators } from '@/core/validators';
@@ -36,18 +45,18 @@ export const FormNodeStorageTable: FC<
   return (
     <FormField>
       <div>
-        <table className="table align-middle">
-          <thead>
-            <tr>
-              <th className="w-[200px]">{props.title}</th>
-              <th className="w-[125px]" />
+        <Table density="compact" className="align-middle">
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[200px]">{props.title}</TableHead>
+              <TableHead className="w-[125px]" />
               {props?.volumeTypeChoices?.length > 0 && (
-                <th className="w-[250px]" />
+                <TableHead className="w-[250px]" />
               )}
-            </tr>
-          </thead>
-          <tbody>{props.children}</tbody>
-        </table>
+            </TableRow>
+          </TableHeader>
+          <TableBody>{props.children}</TableBody>
+        </Table>
       </div>
     </FormField>
   );
@@ -79,8 +88,8 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
     : props.typeValidate;
 
   return (
-    <tr>
-      <td>
+    <TableRow>
+      <TableCell>
         {props.altRowName ? (
           <BaseInputField solid value={props.altRowName} type="text" readOnly />
         ) : (
@@ -95,8 +104,8 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
             )}
           </Field>
         )}
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         <Field
           name={`${props.parentName}.${props.sizeName}`}
           validate={finalSizeValidate}
@@ -113,9 +122,9 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
             />
           )}
         </Field>
-      </td>
+      </TableCell>
       {props?.volumeTypeChoices?.length > 0 && (
-        <td>
+        <TableCell>
           <Field
             name={`${props.parentName}.${props.typeName}`}
             validate={finalTypeValidate}
@@ -131,10 +140,10 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
               />
             )}
           </Field>
-        </td>
+        </TableCell>
       )}
       {props.onDeleteRow && (
-        <td className="w-[60px]">
+        <TableCell className="w-[60px]">
           <BaseButton
             tooltip={translate('Remove')}
             variant="text-danger"
@@ -142,8 +151,8 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
             iconNode={<XIcon weight="bold" />}
             size="lg"
           />
-        </td>
+        </TableCell>
       )}
-    </tr>
+    </TableRow>
   );
 };
