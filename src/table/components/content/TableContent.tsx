@@ -1,6 +1,6 @@
 import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { ErrorMessage } from '@/ErrorMessage';
@@ -12,6 +12,9 @@ import { TableLoadingSpinnerContainer } from '../../TableLoadingSpinnerContainer
 import { TablePlaceholder } from '../../TablePlaceholder';
 
 import { TableView } from './TableView';
+
+// A background refetch dims the rows on screen until fresh data arrives.
+const REFETCH_CLASSES = 'transition-opacity duration-150 aria-busy:opacity-50';
 
 /**
  * Renders the table content based on current state.
@@ -37,6 +40,16 @@ export function TableContent() {
 
   const isRefetching = loading && hasRows;
 
+  // The stale rows also take no input while refetching: `inert` blocks
+  // keyboard focus as well as clicks, so nobody acts on a row about to be
+  // replaced. React 18 has no `inert` prop, so the ref sets the property.
+  const setInert = useCallback(
+    (element: HTMLDivElement | null) => {
+      if (element) element.inert = isRefetching;
+    },
+    [isRefetching],
+  );
+
   const tableHover = useMemo(
     () =>
       typeof config.hoverShadow === 'object'
@@ -47,10 +60,10 @@ export function TableContent() {
 
   const gridHover = useMemo(
     () =>
-      (typeof config.hoverShadow === 'object'
+      typeof config.hoverShadow === 'object'
         ? (config.hoverShadow.grid ?? true)
-        : config.hoverShadow) && Boolean(slots.gridItem),
-    [config.hoverShadow, slots.gridItem],
+        : config.hoverShadow,
+    [config.hoverShadow],
   );
 
   // Render loading state
@@ -86,58 +99,40 @@ export function TableContent() {
     );
   }
 
-  // Refetch loading overlay
-  const refetchOverlay = isRefetching ? (
-    <div className="absolute inset-0 z-10 flex items-center justify-center">
-      <h1 className="mb-0">
-        <LoadingSpinnerSimple />
-      </h1>
-    </div>
-  ) : null;
+  const isGrid = mode === 'grid' && Boolean(slots.gridItem);
 
-  // While refetching, aria-busy dims the current rows and blocks clicks on them.
-  const containerProps = {
-    'aria-busy': isRefetching || undefined,
-    'data-testid': 'table-container',
-  };
-  const containerClassName =
-    'table-container transition-opacity duration-150 aria-busy:pointer-events-none aria-busy:opacity-50';
-
-  // Render grid mode
-  if (mode === 'grid' && slots.gridItem) {
-    return (
-      <ErrorBoundary fallback={ErrorMessage}>
-        {refetchOverlay}
-        <div
-          className={classNames(
-            containerClassName,
-            gridHover && 'grid-hover-shadow',
-          )}
-          {...containerProps}
-        >
+  return (
+    <ErrorBoundary fallback={ErrorMessage}>
+      {/* Refetch loading overlay */}
+      {isRefetching && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center">
+          <h1 className="mb-0">
+            <LoadingSpinnerSimple />
+          </h1>
+        </div>
+      )}
+      <div
+        className={classNames(
+          'table-container',
+          REFETCH_CLASSES,
+          isGrid
+            ? gridHover && 'grid-hover-shadow'
+            : tableHover && 'table-hover-shadow',
+        )}
+        ref={setInert}
+        aria-busy={isRefetching || undefined}
+        data-testid="table-container"
+      >
+        {isGrid ? (
           <GridBody
             rows={rows}
             gridItem={slots.gridItem}
             gridClassName={display.gridClassName}
             gridFixedWidth={display.gridFixedWidth}
           />
-        </div>
-      </ErrorBoundary>
-    );
-  }
-
-  // Render table mode
-  return (
-    <ErrorBoundary fallback={ErrorMessage}>
-      {refetchOverlay}
-      <div
-        className={classNames(
-          containerClassName,
-          tableHover && 'table-hover-shadow',
+        ) : (
+          <TableView />
         )}
-        {...containerProps}
-      >
-        <TableView />
       </div>
     </ErrorBoundary>
   );

@@ -84,7 +84,7 @@ exports[`InternalIpsList > renders list 1`] = `
         style="min-height: 300px;"
       >
         <div
-          class="table-container transition-opacity duration-150 aria-busy:pointer-events-none aria-busy:opacity-50 table-hover-shadow"
+          class="table-container transition-opacity duration-150 aria-busy:opacity-50 table-hover-shadow"
           data-testid="table-container"
         >
           <table

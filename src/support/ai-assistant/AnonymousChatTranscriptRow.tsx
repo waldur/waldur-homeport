@@ -26,7 +26,9 @@ import {
   formatDetectionCategories,
   getActionBadgeVariant,
   getSeverityBadgeVariant,
+  MessageBody,
   MessageGutter,
+  MessageTurn,
   severityLabels,
   toFeedbackSentiment,
 } from './chatLogsShared';
@@ -62,7 +64,7 @@ const ReviewVerdict: FunctionComponent<{
 
   return (
     <>
-      <div className="message-item">
+      <MessageTurn>
         <MessageGutter
           sender="reviewer"
           created={reviewedAt}
@@ -70,7 +72,7 @@ const ReviewVerdict: FunctionComponent<{
           inputTokens={feedback.llm_judge_input_tokens}
           outputTokens={feedback.llm_judge_output_tokens}
         />
-        <div className="message-body">
+        <MessageBody>
           <div className="flex items-center flex-wrap gap-1.5 mb-1">
             {score != null && (
               <Badge
@@ -97,7 +99,7 @@ const ReviewVerdict: FunctionComponent<{
               </Badge>
             )}
           </div>
-          <div className="p-2.5 rounded-lg chat-log-bubble">
+          <div className="p-2.5 rounded-lg bg-tertiary">
             {feedback.llm_summary || (
               <span className="text-quaternary">
                 {translate('(no summary)')}
@@ -113,8 +115,8 @@ const ReviewVerdict: FunctionComponent<{
                 body={feedback.llm_hallucination_details}
               />
             )}
-        </div>
-      </div>
+        </MessageBody>
+      </MessageTurn>
       {/* Same weight as the hairline between turns, just darker — enough to
           mark where commentary ends and the conversation begins. */}
       <div className="border-b border-[var(--border-divider-strong)] mx-2.5" />
@@ -148,13 +150,13 @@ const InteractionTurns: FunctionComponent<{
   const sentiment = toFeedbackSentiment(interaction.feedback?.score);
   return (
     <>
-      <div className="message-item">
+      <MessageTurn>
         <MessageGutter
           sender="user"
           created={interaction.created}
           tokenId={`user-tokens-${interaction.uuid}`}
         />
-        <div className="message-body">
+        <MessageBody>
           {interaction.is_flagged && (
             <div className="flex items-center gap-1.5 mb-1">
               <Tooltip
@@ -184,7 +186,7 @@ const InteractionTurns: FunctionComponent<{
             </div>
           )}
           <div
-            className={classNames('p-2.5 rounded-lg chat-log-bubble', {
+            className={classNames('p-2.5 rounded-lg bg-tertiary', {
               'border-l-3 border-l-danger': interaction.is_flagged,
             })}
           >
@@ -192,9 +194,9 @@ const InteractionTurns: FunctionComponent<{
               {interaction.user_input || translate('(no input)')}
             </div>
           </div>
-        </div>
-      </div>
-      <div className="message-item">
+        </MessageBody>
+      </MessageTurn>
+      <MessageTurn>
         <MessageGutter
           sender="assistant"
           created={interaction.created}
@@ -209,9 +211,9 @@ const InteractionTurns: FunctionComponent<{
             clickCount={interaction.click_count}
           />
         </MessageGutter>
-        <div className="message-body">
+        <MessageBody>
           <div
-            className={classNames('p-2.5 rounded-lg chat-log-bubble', {
+            className={classNames('p-2.5 rounded-lg bg-tertiary', {
               'border-l-3': sentiment !== null,
               'border-l-success': sentiment === 'positive',
               'border-l-danger': sentiment === 'negative',
@@ -243,8 +245,8 @@ const InteractionTurns: FunctionComponent<{
           {/* Raw tool-call / component payloads, same affordance the
               authenticated log row offers. */}
           <MessageDataInspector blocks={blocks} />
-        </div>
-      </div>
+        </MessageBody>
+      </MessageTurn>
     </>
   );
 };

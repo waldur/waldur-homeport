@@ -53,7 +53,7 @@ export const ReportingTitle: FC<ReportingTitleProps> = ({
   return (
     <div
       className={classNames(
-        'table-standalone-header flex justify-between items-center gap-3 mb-4',
+        'flex justify-between items-center gap-3 mb-4',
         showControlsOnMobile && 'flex-wrap',
       )}
     >

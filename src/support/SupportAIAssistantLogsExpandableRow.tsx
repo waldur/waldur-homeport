@@ -41,7 +41,10 @@ import {
   formatDetectionCategories,
   getActionBadgeVariant,
   getSeverityBadgeVariant,
+  MessageActions,
+  MessageBody,
   MessageGutter,
+  MessageTurn,
   severityLabels,
   toFeedbackSentiment,
   TokenUsageBadge,
@@ -104,7 +107,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
     hasVersions;
 
   return (
-    <div className="message-item">
+    <MessageTurn>
       <MessageGutter
         sender={isAssistant ? 'assistant' : 'user'}
         created={selectedMessage.created}
@@ -115,8 +118,19 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
         cacheWriteTokens={
           isAssistant ? selectedMessage.cache_write_tokens : null
         }
-      />
-      <div className="message-body">
+      >
+        {/* In the gutter, not the top row: every message can be copied, and
+            the top row only renders when there are flags or versions. */}
+        <MessageActions>
+          <CopyToClipboardButton
+            value={copyText}
+            verbose={translate('Message')}
+            onlyButton
+            size={14}
+          />
+        </MessageActions>
+      </MessageGutter>
+      <MessageBody>
         {hasTopRowItems && (
           <div className="flex items-center gap-1.5 mb-1">
             {selectedMessage.is_flagged && (
@@ -182,19 +196,11 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
                   onNext={() => setSelectedVersionIndex((prev) => prev + 1)}
                 />
               )}
-              <div className="message-actions">
-                <CopyToClipboardButton
-                  value={copyText}
-                  verbose={translate('Message')}
-                  onlyButton
-                  size={14}
-                />
-              </div>
             </div>
           </div>
         )}
         <div
-          className={classNames('p-2.5 rounded-lg chat-log-bubble', {
+          className={classNames('p-2.5 rounded-lg bg-tertiary', {
             // Left accent only: Tailwind's preflight gives every side a solid
             // style, so an all-sides width or colour frames the whole bubble.
             'border-l-3':
@@ -239,9 +245,9 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
                   <span
                     ref={setFeedbackCommentEl}
                     className={classNames(
-                      'message-feedback-comment italic',
+                      'flex-[1_1_260px] min-w-0 wrap-anywhere italic',
                       !feedbackExpanded && 'line-clamp-2',
-                      clickable && 'is-clickable',
+                      clickable && 'cursor-pointer',
                     )}
                     title={
                       clickable ? selectedMessage.feedback_comment : undefined
@@ -266,19 +272,19 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
                 );
               })()}
             {selectedMessage.feedback_submitted_at && (
-              <span className="message-feedback-time text-quaternary">
-                <span className="time-full">
+              <span className="ms-auto flex-none whitespace-nowrap text-quaternary [@container_message-body_(width<=460px)]:ms-0 [@container_message-body_(width<=460px)]:w-full [@container_message-body_(width<=460px)]:text-right">
+                <span className="[@container_message-body_(width<=460px)]:hidden">
                   {formatDateTime(selectedMessage.feedback_submitted_at)}
                 </span>
-                <span className="time-short">
+                <span className="hidden [@container_message-body_(width<=460px)]:inline">
                   {formatShortDateTime(selectedMessage.feedback_submitted_at)}
                 </span>
               </span>
             )}
           </FeedbackStrip>
         )}
-      </div>
-    </div>
+      </MessageBody>
+    </MessageTurn>
   );
 };
 

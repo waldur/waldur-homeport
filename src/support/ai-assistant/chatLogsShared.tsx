@@ -190,6 +190,48 @@ const SENDER_BADGES: Record<
 };
 
 /**
+ * Conversation log turn: fixed left gutter for metadata, body on the right,
+ * stacked below md. `minmax(0, 1fr)` lets the body column respect the grid
+ * track instead of growing to fit wide children (e.g. resource tables). Named
+ * group so `MessageActions` reveals on this turn's hover, not a nested one's.
+ * The divider keys off the previous turn's `data-slot`, not its class list.
+ */
+export const MessageTurn: FunctionComponent<PropsWithChildren> = ({
+  children,
+}) => (
+  <div
+    data-slot="message-turn"
+    className="group/message grid grid-cols-[150px_minmax(0,1fr)] gap-5 p-4 [[data-slot=message-turn]+&]:border-t [[data-slot=message-turn]+&]:border-t-secondary max-md:grid-cols-1 max-md:gap-2"
+  >
+    {children}
+  </div>
+);
+
+/**
+ * Right column of a turn. It is the query container for the feedback row:
+ * queries resolve against the body column's inline size, which matches the
+ * feedback row's actual width. Those queries spell out `(width<=460px)`:
+ * Tailwind's `@max-[460px]` is a strict less-than.
+ */
+export const MessageBody: FunctionComponent<PropsWithChildren> = ({
+  children,
+}) => <div className="@container/message-body">{children}</div>;
+
+/**
+ * Per-turn controls, shown only while the turn is hovered or focused. Devices
+ * with any touch input show them all the time: Tailwind's `group-hover` only
+ * applies where the primary pointer hovers, so a finger would never reveal
+ * them, on a phone or on a touch-screen laptop.
+ */
+export const MessageActions: FunctionComponent<PropsWithChildren> = ({
+  children,
+}) => (
+  <div className="opacity-0 transition-opacity duration-150 group-focus-within/message:opacity-100 group-hover/message:opacity-100 any-pointer-coarse:opacity-100">
+    {children}
+  </div>
+);
+
+/**
  * Left column of a turn: role badge, timestamp, token usage. Shared so the two
  * channels cannot drift on how loud or how localised a turn's metadata reads —
  * they already had, on number formatting and on the narrow-viewport timestamp.
@@ -222,8 +264,9 @@ export const MessageGutter: FunctionComponent<
   const isDesktop = useBreakpointUp('sm');
   const formatDate = isDesktop ? formatDateTime : formatShortDateTime;
 
+  // Explicit text-xs overrides the 14px inherited from `.table td`.
   return (
-    <div className="message-gutter flex flex-col gap-1.5 text-quaternary">
+    <div className="flex flex-col gap-1.5 text-xs text-quaternary max-md:flex-row max-md:flex-wrap max-md:items-center">
       <div>
         <Badge variant={SENDER_BADGES[sender].variant} size="sm" tone="outline">
           {SENDER_BADGES[sender].label}
@@ -303,7 +346,7 @@ export const FeedbackStrip: FunctionComponent<
   return (
     <div
       className={classNames(
-        'message-feedback mt-1 px-2.5 py-1.5 rounded-lg border border-secondary small',
+        'flex flex-wrap items-baseline gap-x-2.5 gap-y-2 mt-1 px-2.5 py-1.5 rounded-lg border border-secondary small',
         positive ? 'bg-success-subtle' : 'bg-danger-subtle',
       )}
     >
@@ -318,19 +361,14 @@ export const FeedbackStrip: FunctionComponent<
           )
         }
         tone="outline"
-        className="message-feedback-label"
+        className="flex-none"
       >
         {positive
           ? translate('Positive feedback')
           : translate('Negative feedback')}
       </Badge>
       {Boolean(category) && (
-        <Badge
-          variant={variant}
-          size="sm"
-          tone="outline"
-          className="message-feedback-category"
-        >
+        <Badge variant={variant} size="sm" tone="outline" className="flex-none">
           {category}
         </Badge>
       )}

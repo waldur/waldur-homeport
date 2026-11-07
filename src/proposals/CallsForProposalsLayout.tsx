@@ -40,7 +40,7 @@ export const CallsForProposalsLayout: FunctionComponent = () => {
   const { state } = useCurrentStateAndParams();
   return (
     <>
-      <div className="table-standalone-header">
+      <div className="mb-6 max-sm:mb-4">
         <h1 className="mb-1 text-2xl">{translate('Calls for proposals')}</h1>
         {user ? <MyCallWorkSummary fallback={<Subtitle />} /> : <Subtitle />}
         <TabNav
