@@ -2264,6 +2264,11 @@
       "feature_area": "reporting"
     }
   },
+  "Active proposals per applicant": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Active queries": {
     "context": {
       "feature_area": "database-stats"
@@ -28995,6 +29000,11 @@
   },
   "How many messages the !ticket bot command reads as its context: the latest of its thread, or the replied-to message and those before it.": {},
   "How many minutes before scheduled maintenance users should be notified.": {},
+  "How many proposals an applicant may have under evaluation or running as a project, across all calls of this organization, before they may submit another. Leave empty for no limit.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "How many proposals will I need to review?": {
     "context": {
       "feature_area": "invitations"
@@ -35097,6 +35107,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "team"
+    }
+  },
+  "Manages calls": {
+    "context": {
+      "feature_area": "details"
     }
   },
   "Manages the offering: its settings, plans, orders and team, and its part in calls for proposals.": {
