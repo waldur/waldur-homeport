@@ -46,10 +46,6 @@ export const PARTIALS = [
     scss: "@import 'legacy/mixins'; @import 'legacy/reboot';",
   },
   {
-    name: 'legacy/table-base',
-    scss: "@import 'legacy/mixins'; @import 'legacy/table-base';",
-  },
-  {
     name: 'legacy/base',
     scss: "@import 'legacy/mixins'; @import 'legacy/base';",
   },
@@ -230,7 +226,7 @@ export function isClassAllowed(cls, corpusTokens) {
   }
   if (
     corpusTokens.has('Table') &&
-    /^table(?:-(?:sm|hover|striped|bordered|borderless|responsive))?$/.test(cls)
+    /^table(?:-(?:hover|responsive))?$/.test(cls)
   ) {
     return true;
   }

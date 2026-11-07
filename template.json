@@ -39023,6 +39023,11 @@
       "feature_area": "steps"
     }
   },
+  "No attributes found.": {
+    "context": {
+      "feature_area": "resources"
+    }
+  },
   "No attributes submitted.": {
     "context": {
       "feature_area": "UserPendingActionsList"

@@ -1,46 +1,55 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from 'waldur-ui';
+import { PropertyItem, PropertyList } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
-export const KeyValueTable: FunctionComponent<any> = (props) => (
-  <Table density="normal">
-    <TableHeader>
-      <TableRow>
-        <TableHead>{translate('Key')}</TableHead>
-        <TableHead>{translate('Value')}</TableHead>
-      </TableRow>
-    </TableHeader>
-    <TableBody>
-      {Object.keys(props.items).map((key) => (
-        <TableRow key={key}>
-          <TableCell className="font-medium text-primary">{key}</TableCell>
-          <TableCell>
-            {Array.isArray(props.items[key]) ? (
-              props.items[key].join(', ')
-            ) : typeof props.items[key] === 'object' &&
-              props.items[key] !== null ? (
-              <pre>{JSON.stringify(props.items[key], null, 2)}</pre>
-            ) : typeof props.items[key] === 'boolean' ? (
-              props.items[key] ? (
-                translate('True')
-              ) : (
-                translate('False')
-              )
-            ) : (
-              props.items[key]
-            )}
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-);
+interface KeyValueTableProps {
+  items?: Record<string, any>;
+}
+
+export const KeyValueTable: FunctionComponent<KeyValueTableProps> = ({
+  items,
+}) => {
+  if (!items || Object.keys(items).length === 0) {
+    return (
+      <p className="py-4 text-center text-sm text-quaternary">
+        {translate('No attributes found.')}
+      </p>
+    );
+  }
+
+  return (
+    <PropertyList variant="divided">
+      {Object.entries(items).map(([key, value]) => {
+        let renderedValue: ReactNode;
+        const isPrimitive =
+          typeof value === 'string' || typeof value === 'number';
+
+        if (Array.isArray(value)) {
+          renderedValue =
+            value.length > 0 ? value.join(', ') : translate('None');
+        } else if (typeof value === 'object' && value !== null) {
+          renderedValue = (
+            <pre className="max-h-60 overflow-auto rounded-lg bg-secondary p-2 font-mono text-xs text-primary">
+              {JSON.stringify(value, null, 2)}
+            </pre>
+          );
+        } else if (typeof value === 'boolean') {
+          renderedValue = value ? translate('True') : translate('False');
+        } else {
+          renderedValue = String(value ?? '');
+        }
+
+        return (
+          <PropertyItem
+            key={key}
+            label={key}
+            value={renderedValue}
+            copyValue={isPrimitive ? String(value) : undefined}
+          />
+        );
+      })}
+    </PropertyList>
+  );
+};

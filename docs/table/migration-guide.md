@@ -1,15 +1,12 @@
 # Migrating Hand-Rolled Tables
 
 How to move a raw `<table>` off legacy table classes, and how to pick what it
-becomes. Tracked in #563 (part of epic #442); the end goal is #502: deleting the
-legacy `.table-*` rules in `src/styles/legacy/_table-base.scss`.
+becomes. Tracked in #563 (part of epic #442); the end goal was #502: deleting the
+legacy `.table-*` rules in `src/styles/legacy/_table-base.scss` (completed).
 
-Migrating the hand-rolled tables is only half of that goal. `@/table/Table`
-itself still renders `.table.table-list` (`TableView`), and allow-listed form
-grids may carry `.table` too, so `_table-base.scss` can go only once those
-render their own styles as well. The baseline below counts raw `<table>`
-markup, not `.table` usage: zero there does not yet mean the rules can be
-deleted.
+All hand-rolled tables have been migrated to semantic `waldur-ui` Table primitives
+or `PropertyList`, and `src/styles/legacy/_table-base.scss` has been retired.
+`waldur-custom/no-hand-rolled-table` enforces this going forward.
 
 `waldur-custom/no-hand-rolled-table` is an error with a shrinking baseline:
 the raw `<table>`s that predate it are counted per file in

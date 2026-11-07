@@ -24,6 +24,84 @@
 
 /* TABLE */
 .table {
+  width: 100%;
+  margin-bottom: calc(var(--spacing) * 4);
+  color: var(--text-primary);
+  vertical-align: top;
+  border-color: var(--border-secondary);
+
+  // No rule between table sections
+  & > :not(:first-child) {
+    border-color: transparent;
+    border-width: 0;
+    border-style: none;
+  }
+
+  > :not(:last-child) > :last-child > * {
+    border-bottom-color: inherit;
+  }
+
+  tr,
+  th,
+  td {
+    border-color: inherit;
+    border-width: inherit;
+    border-style: inherit;
+    text-transform: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    color: inherit;
+    height: inherit;
+    min-height: inherit;
+  }
+
+  tfoot,
+  tbody {
+    > tr:last-child {
+      border-bottom: 0 !important;
+
+      th,
+      td {
+        border-bottom: 0 !important;
+      }
+    }
+  }
+
+  tfoot {
+    th,
+    td {
+      border-top: inherit;
+    }
+  }
+
+  // Row bordered
+  &.table-row-bordered {
+    tr {
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      border-bottom-color: var(--border-secondary);
+    }
+
+    tfoot {
+      th,
+      td {
+        border-top-width: 1px !important;
+      }
+    }
+  }
+
+  // Cell padding of the list table (TableView)
+  &.table-list {
+    th,
+    td {
+      padding: 0 8px;
+    }
+  }
+
+  &.table-hover > tbody > tr:hover {
+    background-color: var(--bg-tertiary);
+  }
+
   &:not(.h-auto) {
     th,
     td {
@@ -465,8 +543,7 @@
 
       > * {
         border: unset;
-        // stylelint-disable-next-line property-disallowed-list -- Bootstrap's .table hook
-        --bs-table-accent-bg: var(--bg-secondary);
+        background-color: var(--bg-secondary);
       }
     }
   }
@@ -691,4 +768,19 @@ $mobile-spacing: 15px;
   > tr.table-group-header:hover {
   border-color: var(--table-row-border);
   box-shadow: none;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+// 20% of the solid warning over the page, as Bootstrap's 80% tint over white.
+.table-warning {
+  background-color: color-mix(
+    in srgb,
+    var(--status-warning-solid) 20%,
+    var(--bg-primary)
+  );
+  color: var(--text-primary);
 }
