@@ -48,6 +48,7 @@ import {
 import { useWorkflowStepKinds } from '../../workflow/queries';
 import { stagePositions, WorkflowPhaseKey } from '../../workflow/stages';
 
+import { AddAwardResponseButton } from './AddAwardResponseButton';
 import { WorkflowStepsContext } from './StepEvaluators';
 import { WorkflowSequencePreview } from './WorkflowSequencePreview';
 import { WorkflowStepConfigureAction } from './WorkflowStepConfigureAction';
@@ -340,13 +341,22 @@ export const WorkflowStepsSection: FC<WorkflowStepsSectionProps> = ({
           verboseName={translate('Workflow steps')}
           tableActions={
             viewOnly ? undefined : (
-              <WorkflowStepCreateButton
-                call={call}
-                steps={sortedRows}
-                refetch={tableProps.fetch}
-                disabled={isReadOnly}
-                tooltip={isReadOnly ? getCallReadOnlyReason(call) : undefined}
-              />
+              <>
+                <AddAwardResponseButton
+                  call={call}
+                  steps={sortedRows}
+                  refetch={tableProps.fetch}
+                  disabled={isReadOnly}
+                  tooltip={isReadOnly ? getCallReadOnlyReason(call) : undefined}
+                />
+                <WorkflowStepCreateButton
+                  call={call}
+                  steps={sortedRows}
+                  refetch={tableProps.fetch}
+                  disabled={isReadOnly}
+                  tooltip={isReadOnly ? getCallReadOnlyReason(call) : undefined}
+                />
+              </>
             )
           }
           rowActions={

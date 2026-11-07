@@ -2534,6 +2534,11 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Add award response": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "Add awarded resource": {
     "context": {
       "feature_area": "proposal"
@@ -7548,6 +7553,11 @@
       "feature_area": "header"
     }
   },
+  "Ask the applicant to accept or decline the award after the allocation decision. A decline cancels the proposal.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "Ask the model…": {
     "context": {
       "feature_area": "playground"
@@ -8838,6 +8848,12 @@
   "Award rejected": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Award response added.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "workflow-steps"
     }
   },
   "Award the proposal as requested as soon as it reaches this step, without waiting for the call managers. They decide only when the award cannot be made automatically, such as when a score threshold or the award amounts stop it. An enabled step before it must be able to reject a proposal.": {
@@ -74033,6 +74049,12 @@
   "Unable to add team member.": {
     "context": {
       "primary_ui_type": "error_message"
+    }
+  },
+  "Unable to add the award response.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "workflow-steps"
     }
   },
   "Unable to add the evaluator role.": {
