@@ -35,27 +35,16 @@ export const DEFAULT_BASELINE = path.join(
   'scripts/bootstrap-css-usage.baseline.json',
 );
 
-// Each `name` keys the partial's entry in bootstrap-css-usage.baseline.json.
-// Bootstrap's partials keep their path from before the move to
-// src/styles/bootstrap (#471); Waldur's own are `legacy/<path>`.
+// Each `name` keys the partial's entry in bootstrap-css-usage.baseline.json:
+// `legacy/<path>`. No Bootstrap partial emits CSS any more.
 export const PARTIALS = [
-  // Bootstrap components (from _bootstrap.scss)
-  {
-    name: 'core/components/root',
-    scss: "@import 'config'; @import 'components/root';",
-  },
-  {
-    name: 'bootstrap/scss/reboot',
-    scss: "@import 'config'; @import 'bootstrap/scss/reboot';",
-  },
-  {
-    name: 'bootstrap/scss/type',
-    scss: "@import 'config'; @import 'bootstrap/scss/reboot'; @import 'bootstrap/scss/type';",
-  },
-
   // Waldur's own partials (src/styles/legacy/). Each compiles from
   // _mixins.scss alone: none reads a Bootstrap Sass variable or mixin, so a
   // reference to one fails `report`, `save` and `compare`.
+  {
+    name: 'legacy/reboot',
+    scss: "@import '../legacy/mixins'; @import '../legacy/reboot';",
+  },
   {
     name: 'legacy/table-base',
     scss: "@import '../legacy/mixins'; @import '../legacy/table-base';",

@@ -336,8 +336,8 @@ prevent distortion under Waldur's forced 13px root font size (`html, body { font
   `font-size-adjust: none`. There is no per-font factor to maintain.
 - **rem is not on the scale.** A `rem` size follows the root, which is 13px on desktop and 12px on
   phones, while the tokens stay put, so rem text shrinks about 8% on phones next to token text meant to
-  match it. Body text and `h1`–`h6` (Bootstrap's reboot) and card titles are still rem; they move to the
-  scale with the reboot and card steps.
+  match it. Body text and `h1`–`h6` (the reboot, now `src/styles/legacy/_reboot.scss`) and card titles
+  are still rem; they move to the scale with the reboot and card steps.
 - **Linted in TSX and SCSS.** `waldur-custom/require-font-size-scale` reports an arbitrary px or rem
   size in TSX (`text-[14px]`, `text-[length:1.077rem]`, `text-[1.25rem]/5`) with the token it equals
   (rem at the 13px root), without fixing it: the arbitrary class sets only a font size, while a `text-*`

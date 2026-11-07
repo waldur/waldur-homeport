@@ -4,7 +4,9 @@
 // alone, and fails if a file in this directory is not imported from here (or
 // from matrix/_call-livekit.scss, imported unlayered by index.scss). It is
 // imported from styles/bootstrap/_styles.scss, inside the `bootstrap` cascade
-// layer, after Bootstrap's own partials.
+// layer. The element defaults (_reboot.scss, once Bootstrap's reboot and type)
+// come first, so every partial after them builds on them as it did on reboot.
+@import 'reboot';
 @import 'table-base';
 @import 'link-transition';
 @import 'btn-no-focus';
