@@ -26,6 +26,11 @@ interface BaseNumberFieldProps {
    * would make those decimals invalid.
    */
   showSteppers?: boolean;
+  /** `buttons` puts minus and plus either side of a centred value, for a
+   * count picked a step at a time; `carets` (default) is the up/down pair. */
+  stepperLayout?: 'carets' | 'buttons';
+  required?: boolean;
+  'aria-label'?: string;
 }
 
 export const BaseNumberField: FC<BaseNumberFieldProps> = ({

@@ -6,8 +6,7 @@ import { expect, userEvent, within } from 'storybook/test';
 import { Code } from 'waldur-ui';
 
 import { FilterBox } from './FilterBox';
-import { BaseInputField, InputField } from './InputField';
-import { BaseNumberField } from './NumberField';
+import { InputField } from './InputField';
 import { ReadOnlyFormControl } from './ReadOnlyFormControl';
 import { BaseTextField } from './TextField';
 
@@ -110,16 +109,6 @@ export const States: Story = {
         placeholder="Search..."
         icon={<MagnifyingGlassIcon weight="bold" />}
         aria-label="With icon"
-      />
-      <BaseInputField type="number" defaultValue={42} aria-label="Number" />
-      <BaseNumberField value={5} min={1} max={20} aria-label="Stepper" />
-      <BaseNumberField value={5} unit="GB" aria-label="Stepper with unit" />
-      <BaseNumberField value={50} max={20} aria-label="Stepper invalid" />
-      <BaseNumberField
-        value={5}
-        showSteppers={false}
-        unit="EUR"
-        aria-label="Unit only"
       />
       <BaseSecretField
         defaultValue="s3cr3t"

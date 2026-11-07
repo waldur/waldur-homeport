@@ -11,3 +11,7 @@ export { NumberInput, type NumberInputProps } from './NumberInput';
 export { SecretInput, type SecretInputProps } from './SecretInput';
 export { NativeSelect, type NativeSelectProps } from './NativeSelect';
 export { RangeInput, type RangeInputProps } from './RangeInput';
+export {
+  SliderNumberInput,
+  type SliderNumberInputProps,
+} from './SliderNumberInput';
