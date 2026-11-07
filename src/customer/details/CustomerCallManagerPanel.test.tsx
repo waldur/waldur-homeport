@@ -12,7 +12,10 @@ import { useModal } from '@/modal/actions';
 import { renderWithProviders } from '@/test/harness';
 import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 
-import { CustomerCallManagerPanel } from './CustomerCallManagerPanel';
+import {
+  CustomerCallManagerPanel,
+  parseApplicantLimit,
+} from './CustomerCallManagerPanel';
 
 describe('CustomerCallManagerPanel', () => {
   beforeEach(() => {
@@ -126,7 +129,7 @@ describe('CustomerCallManagerPanel', () => {
 
     await waitFor(() => {
       expect(callManagingOrganisationsDestroy).toHaveBeenCalledWith({
-        path: { uuid: 'info-uuid-1' },
+        path: { uuid: 'existing-uuid' },
       });
     });
 
@@ -140,5 +143,70 @@ describe('CustomerCallManagerPanel', () => {
       uuid: 'customer-uuid-1',
       name: 'Test Customer',
     });
+  });
+
+  it('shows the applicant limit once the organization manages calls', async () => {
+    vi.mocked(useCustomer).mockReturnValue({
+      uuid: 'customer-uuid-1',
+      url: '/api/customers/customer-uuid-1/',
+      call_managing_organization_uuid: 'info-uuid-1',
+    } as any);
+    vi.mocked(callManagingOrganisationsList).mockResolvedValue({
+      data: [{ uuid: 'info-uuid-1', max_active_proposals_per_applicant: 4 }],
+    } as any);
+
+    renderWithProviders(<CustomerCallManagerPanel />);
+
+    expect(
+      await screen.findByText('Active proposals per applicant'),
+    ).toBeInTheDocument();
+    expect(screen.getByText('4')).toBeInTheDocument();
+  });
+
+  it('hides the applicant limit while the organization does not manage calls', async () => {
+    vi.mocked(useCustomer).mockReturnValue({
+      uuid: 'customer-uuid-1',
+      url: '/api/customers/customer-uuid-1/',
+      call_managing_organization_uuid: null,
+    } as any);
+    vi.mocked(callManagingOrganisationsList).mockResolvedValue({
+      data: [],
+    } as any);
+
+    renderWithProviders(<CustomerCallManagerPanel />);
+
+    await waitFor(() =>
+      expect(callManagingOrganisationsList).toHaveBeenCalled(),
+    );
+    expect(
+      screen.queryByText('Active proposals per applicant'),
+    ).not.toBeInTheDocument();
+  });
+
+  it('reads an emptied limit field as no limit', () => {
+    expect(parseApplicantLimit(null)).toBeNull();
+    expect(parseApplicantLimit(undefined)).toBeNull();
+    expect(parseApplicantLimit('')).toBeNull();
+    expect(parseApplicantLimit('3')).toBe(3);
+    expect(parseApplicantLimit(4)).toBe(4);
+  });
+
+  it('edits the organization the customer has now, not a stale one', async () => {
+    vi.mocked(useCustomer).mockReturnValue({
+      uuid: 'customer-uuid-1',
+      url: '/api/customers/customer-uuid-1/',
+      call_managing_organization_uuid: 'new-uuid',
+    } as any);
+    vi.mocked(callManagingOrganisationsList).mockResolvedValue({
+      data: [
+        { uuid: 'deleted-uuid', max_active_proposals_per_applicant: 9 },
+        { uuid: 'new-uuid', max_active_proposals_per_applicant: 4 },
+      ],
+    } as any);
+
+    renderWithProviders(<CustomerCallManagerPanel />);
+
+    expect(await screen.findByText('4')).toBeInTheDocument();
+    expect(screen.queryByText('9')).not.toBeInTheDocument();
   });
 });
