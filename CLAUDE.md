@@ -14,6 +14,8 @@ Waldur HomePort is a React/TypeScript/Vite frontend for the Waldur MasterMind cl
 yarn start          # Dev server (port 8001)
 yarn build          # Production build
 yarn test           # Unit tests
+yarn test:storybook # Storybook tests
+yarn tsgo --noEmit  # TypeScript checks
 yarn lint:check     # Code quality
 yarn lint:fix       # Auto-fix linting
 ```
@@ -21,6 +23,7 @@ yarn lint:fix       # Auto-fix linting
 ## Project Structure
 
 - `src/` - Application source code
+- `packages/` - Workspace packages (`packages/ui`, `packages/design-tokens`)
 - `docs/` - Detailed guides (see below)
 - `.claude/agents/` - Specialized subagents for complex tasks
 
@@ -37,7 +40,7 @@ For detailed guidance, see `docs/` — full index with one-line descriptions in 
 - `api-integration.md` - React Query, CRUD patterns
 - `forms.md` - React Final Form and VStepperForm patterns
 - `property-fields.md` - Read-only rows: typed property formatters (`propVal.date`, `propVal.currency`, …), `prefer-typed-property`
-- `tabs.md` - Tabs: `Tabs`, `TabNav`, `EmbeddedTabs`, mount modes, migrating off Bootstrap `Nav`/`Tab`
+- `tabs.md` - Tabs: `Tabs`, `TabNav`, `EmbeddedTabs`, mount modes, and the `nav-*` classes they replaced
 - `menus.md` - Menus, dropdowns and popovers: `Menu`, `MenuPopover`, `ActionsMenu`, row actions
 - `modals.md` - Modals: `openDialog`, `ModalDialog`, `ModalShell`, waldur-ui Modal parts, `data-slot` styling hooks
 - `breadcrumbs.md` - Breadcrumbs: `useBreadcrumbs`, `IBreadcrumbItem`, `BreadcrumbTrail`, `renderLink`, dropdown crumbs
@@ -69,8 +72,8 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   );
   ```
 
-- **Never hand-roll a table with `react-bootstrap`'s `<Table>`** (or raw
-  `<table>`/`<thead>`/`<tbody>`). It silently loses the header styling, sort
+- **Never hand-roll a table** with raw `<table>`/`<thead>`/`<tbody>`. It
+  silently loses the header styling, sort
   carets, column sizing, hover/selection, loading skeletons and the shared
   `NoResult` empty state, so it looks visibly foreign next to every other list
   in the app. Pick the replacement by what the table is, using the decision tree
@@ -189,33 +192,33 @@ variant="summary">` (or `ExpandableContainer asTable`, which renders
 
 - Use design token button variants (`tertiary`, `danger`, `success`, `text-primary`) - linter enforces this
 
-- **Font weight is one scale**: `font-light` (300, display only), `font-normal`, `font-medium`, `font-semibold`, `font-bold` (700); SCSS reads `var(--font-weight-*)`. Never Bootstrap `fw-*` (retired; Metronic's `fw-bold` was 500, not 700), `font-black`/`font-[600]`, or an inline `fontWeight` (linter: `require-weight-scale`, which autofixes `fw-*`; see `docs/design-tokens.md` → "Font weight")
+- **Font weight is one scale**: `font-light` (300, display only), `font-normal`, `font-medium`, `font-semibold`, `font-bold` (700); SCSS reads `var(--font-weight-*)`. Never `fw-*` (Metronic's, retired — its `fw-bold` was 500, not 700), `font-black`/`font-[600]`, or an inline `fontWeight` (linter: `require-weight-scale`, which autofixes `fw-*`; see `docs/design-tokens.md` → "Font weight")
 
-- **Spacing is one scale**: Tailwind's, `--spacing` pinned to 4px, so `mb-3` is 12px. Bootstrap generates no margin, padding or gap utility (#477); its `mb-4` (12px) is Tailwind's `mb-3`. Never Bootstrap-only spellings (`mb-md-4` → `md:mb-3`, `mt-n2` → `-mt-1.5`, `gap-8px` → `gap-2`; linter: `no-retired-bootstrap-utility`, which names the replacement), arbitrary `[6.5px]` steps, or a class built at runtime (`` `mb-${space}` `` generates nothing; look it up in a map of literals like `SPACE_CLASSES`). See `docs/design-tokens.md` → "Spacing"
+- **Spacing is one scale**: Tailwind's, `--spacing` pinned to 4px, so `mb-3` is 12px. Bootstrap is gone (#477, #481), and its `mb-4` was 12px where Tailwind's `mb-3` is. Never its old spellings (`mb-md-4` → `md:mb-3`, `mt-n2` → `-mt-1.5`, `gap-8px` → `gap-2`; linter: `no-retired-bootstrap-utility`, which names the replacement), arbitrary `[6.5px]` steps, or a class built at runtime (`` `mb-${space}` `` generates nothing; look it up in a map of literals like `SPACE_CLASSES`). See `docs/design-tokens.md` → "Spacing"
 
 - **Colours come from semantic tokens** (see `docs/design-tokens.md`):
   - Write a token as its utility, not `text-[var(--text-tertiary)]` (linter: `prefer-token-utility`, autofix; it reads `tailwind/theme.css`, so tokens without a utility such as `--bg-brand-solid` or the component `--input-*` keep the arbitrary form).
   - Neutral text/icons use the one scale `text-primary` … `text-senary` (= `var(--text-primary)` …); surfaces `bg-primary` … `bg-quaternary`; borders `border-primary` / `border-secondary` / `border-divider`. A semantic utility is always the token of the same name. Brand is `text-brand` / `border-brand` / `outline-brand`.
-  - Bootstrap emits no colour classes: `text-danger`, `text-muted`, `text-dark`, `bg-light`, `border-bottom`, … paint nothing (linter: `no-bootstrap-color-utility`, which names the replacement). A bottom rule is `border-b border-b-secondary`; see `docs/design-tokens.md` → "Bootstrap colour utilities".
+  - The retired colour classes paint nothing: `text-muted`, `text-dark`, `text-body`, `text-danger-600`, `bg-light`, `bg-dark`, `border-bottom`, `border-top`, … (linter: `no-bootstrap-color-utility`, which names the replacement and also catches a class built at runtime, `` `text-${variant}` ``). Note bare `text-danger` is _not_ retired — it is the status utility in the next bullet. A bottom rule is `border-b border-b-secondary`; see `docs/design-tokens.md` → "Bootstrap colour utilities".
   - State colours use the status matrix through its utilities: `text-danger` (the `-fg` slot), `bg-danger` / `border-danger` (`-solid`), `bg-danger-subtle` / `border-danger-subtle` (`-bg` / `-border`); same for `success`/`warning`, plus `text-neutral` / `bg-neutral-subtle`. Never raw `success-N`/`warning-N`/`error-N` utilities, nor `text-[var(--status-danger-fg)]` (linter: `no-raw-status-ramp`, which autofixes the latter).
-  - A bare `border` sets only the width (Bootstrap's `.border`, which also drew the secondary line, is retired): always name the colour, `border border-secondary` (linter: `require-border-color`, autofix). Widths are Tailwind's pixel steps, `border`, `border-t`, `border-b-2`, never `border-[1px]` (linter: `no-arbitrary-border-width`, autofix).
+  - A bare `border` sets only the width (the old `.border`, which also drew the secondary line, is retired): always name the colour, `border border-secondary` (linter: `require-border-color`, autofix). Widths are Tailwind's pixel steps, `border`, `border-t`, `border-b-2`, never `border-[1px]` (linter: `no-arbitrary-border-width`, autofix).
   - Never hard-code a hex, `rgb()`/`hsl()` or named colour (style objects, SVG `fill`/`stroke`, chart options, tooltip HTML, SCSS): use a utility, `getChartThemeColors()` for canvas charts, or `currentColor` plus a `text-*` class. ESLint and stylelint (`no-literal-color`) and `yarn colors:check` (CI) fail when a file gains one; after removing some, run `yarn colors:save`.
   - In SCSS, paint brand with `var(--bg-brand-solid)` / `var(--fg-brand-primary)` / `var(--brand-600)`, never `$primary` (a static compile-time green).
 
 - **Every class must style something.** A class that neither Tailwind generates nor any stylesheet defines is a typo or a leftover, and paints nothing (linter: `no-unknown-class`, which suggests the nearest real class). Existing ones are listed per file in `unknown-classes.baseline.json`. Never add to it: fix the class, then run `yarn lint:classes:baseline`. See `docs/code-quality.md` → "Unknown class guard"
 
-- Dialogs are waldur-ui's Modal: `openDialog` with `ModalDialog` (`@/modal/ModalDialog`), `ModalShell` for one rendered in place, the `ModalHeader`/`ModalBody`/`ModalFooter` parts for a custom layout — never react-bootstrap `Modal`/`CloseButton` or `modal-*`/`btn-close` classes; style a part through its `data-slot`. Linter enforces this (`no-bootstrap-modal`); see `docs/modals.md`
+- Dialogs are waldur-ui's Modal: `openDialog` with `ModalDialog` (`@/modal/ModalDialog`), `ModalShell` for one rendered in place, the `ModalHeader`/`ModalBody`/`ModalFooter` parts for a custom layout; style a part through its `data-slot`. Never a `modal-*` or `btn-close` class — they generate nothing, so `no-unknown-class` reports them (in `dialogClassName`, `bodyClassName` and the other class props too); see `docs/modals.md`
 
-- Lay out with Tailwind grid or flex (`grid grid-cols-1 md:grid-cols-2 gap-x-5`, or `md:grid-cols-12` with `md:col-span-*` children for mixed widths) — never react-bootstrap `Row`/`Col`/`ColProps` or `row`/`col-*`/`g-*`/`gx-*`/`gy-*` classes; Bootstrap's grid is not compiled. Linter enforces this (`no-bootstrap-grid`); see `docs/tailwind-shadcn-migration-notes.md` → "Grid Layouts"
+- Lay out with Tailwind grid or flex (`grid grid-cols-1 md:grid-cols-2 gap-x-5`, or `md:grid-cols-12` with `md:col-span-*` children for mixed widths) — never a `row`/`col-*`/`g-*`/`gx-*`/`gy-*` class. There is no Bootstrap grid, and some of those names now mean something else: `col-6` is `grid-column: 6`, not a half-width column. Linter enforces this (`no-bootstrap-grid`); see `docs/tailwind-shadcn-migration-notes.md` → "Grid Layouts"
 
-- Use `waldur-ui`'s `Tabs` (state-driven panels) or `TabNav` (router-driven: `items` with `link: <Link … />`), and `EmbeddedTabs` (`@/table/EmbeddedTabs`) for tabs inside an expandable row or card section — never react-bootstrap `Tab`/`Tabs`/`Nav` or `nav-*` classes. Linter enforces this (`no-bootstrap-tabs`); see `docs/tabs.md`
+- Use `waldur-ui`'s `Tabs` (state-driven panels) or `TabNav` (router-driven: `items` with `link: <Link … />`), and `EmbeddedTabs` (`@/table/EmbeddedTabs`) for tabs inside an expandable row or card section — never a `nav-*` class (`nav-link` and `tab-content` are still defined in the legacy stylesheet, so they look live but are not the tab system). Linter enforces this (`no-bootstrap-tabs`); see `docs/tabs.md`
 
 - Use the `waldur-ui` pickers (`DatePicker`, `DateRangePicker`, `MonthPicker`; `DateField`/`DateGroup` in forms) — never a native `<input type="date">`, `datetime-local`, `time`, `month` or `week`. Linter enforces this; see `docs/forms.md` → "Date & Time Pickers"
 
-- Use `waldur-ui`'s `Checkbox`, `Radio`, `Switch` (each takes `label` / `description` / `tooltip` and `checked` + `onCheckedChange`) and `RadioGroup` (options in, value out); in react-final-form use `BooleanGroup` / `RadioGroup` from `@/form` — never react-bootstrap `FormCheck` / `Form.Check` or `form-check*` / `form-switch*` classes. Linter enforces this (`no-bootstrap-form-check`)
+- Use `waldur-ui`'s `Checkbox`, `Radio`, `Switch` (each takes `label` / `description` / `tooltip` and `checked` + `onCheckedChange`) and `RadioGroup` (options in, value out); in react-final-form use `BooleanGroup` / `RadioGroup` from `@/form` — never a `form-check*` or `form-switch*` class. Linter enforces this (`no-bootstrap-form-check`)
 
-- Text inputs are waldur-ui's `Input` / `Textarea` (with `InputGroup` for a start/end adornment and the invalid icon, `NumberInput`, `SecretInput`, `RangeInput`); inside a `FormGroup` use `BaseInputField` / `BaseTextField` from `@/form`, which take the group's control id and a `containerClassName` for the wrapper. Labels, fields and help text are `FormLabel`, `FormField` (`controlId` links label and control) and `FormText` from `waldur-ui`. Never react-bootstrap `Form.Control`, `InputGroup`, `Form.Range`, `Form.Group`, `Form.Label` or `Form.Text`, nor `form-control*` / `input-group*` / `form-label` / `form-text` / `required` / `is-invalid` classes. Linter enforces this (`no-bootstrap-form-control`)
-- Use waldur-ui's `NativeSelect` for a browser `<select>` (`<option>` children, `sm`/`md`/`lg`, `fit`; `Select` for a searchable list) — never react-bootstrap `Form.Select` or `form-select*` classes. Linter enforces this (`no-bootstrap-form-select`)
+- Text inputs are waldur-ui's `Input` / `Textarea` (with `InputGroup` for a start/end adornment and the invalid icon, `NumberInput`, `SecretInput`, `RangeInput`); inside a `FormGroup` use `BaseInputField` / `BaseTextField` from `@/form`, which take the group's control id and a `containerClassName` for the wrapper. Labels, fields and help text are `FormLabel`, `FormField` (`controlId` links label and control) and `FormText` from `waldur-ui`. Never a `form-control*` / `input-group*` / `form-label` / `form-text` / `form-group` / `required` / `is-invalid` class. Linter enforces this (`no-bootstrap-form-control`)
+- Use waldur-ui's `NativeSelect` for a browser `<select>` (`<option>` children, `sm`/`md`/`lg`, `fit`; `Select` for a searchable list) — never a `form-select*` class. Linter enforces this (`no-bootstrap-form-select`)
 
 - Use **generated filters** for table filter components (see `docs/table/filter-migration-guide.md`):
   1. Add config to `generate-filters-config.yaml`

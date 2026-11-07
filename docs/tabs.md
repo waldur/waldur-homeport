@@ -1,6 +1,6 @@
 # Tabs
 
-Every tab bar in HomePort is built from `waldur-ui` primitives (`Tabs`, `TabNav`) or from a wrapper over them (`EmbeddedTabs`, `TableWithTabs`, `TableNav`, `TabbedSection`). The Bootstrap/Metronic `.nav` stylesheet and react-bootstrap's `Tab`, `Tabs` and `Nav` are gone, and the `waldur-custom/no-bootstrap-tabs` lint rule keeps them out.
+Every tab bar in HomePort is built from `waldur-ui` primitives (`Tabs`, `TabNav`) or from a wrapper over them (`EmbeddedTabs`, `TableWithTabs`, `TableNav`, `TabbedSection`). The `waldur-custom/no-bootstrap-tabs` lint rule prevents legacy tab classes and imports.
 
 ## Choosing a tab component
 
@@ -39,9 +39,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 | Prop                      | Notes                                                                                                                                         |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `value` / `onValueChange` | Controlled. Values are strings, and so are `TabNav` and `TableTab` keys.                                                                      |
-| `defaultValue`            | Uncontrolled. Unlike react-bootstrap, nothing is open until you set it, so pass the first tab's key.                                          |
+| `defaultValue`            | Uncontrolled. Pass the first tab's key so a tab is open on initial render.                                    |
 | `mount`                   | `'active'` (default), `'visited'` or `'all'`. See below.                                                                                      |
-| `activationMode`          | `'automatic'` by default (arrow keys select, as Bootstrap tabs did). Pass `'manual'` to move focus with the arrows and select on Enter/Space. |
+| `activationMode`          | `'automatic'` by default (arrow keys select). Pass `'manual'` to move focus with the arrows and select on Enter/Space. |
 | `TabsTrigger` `tooltip`   | Works on disabled triggers too (the tooltip trigger wraps the button).                                                                        |
 | `TabsTrigger` `hint`      | Help text: the tooltip (unless `tooltip` is set) plus a question-mark icon. Use it instead of a `HelpIcon`, which can't sit inside the tab.   |
 | `TabsTrigger` `count`     | A count badge after the title; `countLoading` shows a spinner in it instead. `undefined` shows no badge, `0` shows `0`. See "Counts" below.   |
@@ -77,11 +77,11 @@ The open tab falls back to the first visible, enabled item when none is chosen, 
 
 `TabsContent` decides whether an inactive panel exists in the DOM. Pick the mode that matches what each panel does, because a mounted panel runs its effects and fetches:
 
-| `mount`     | Behaviour                                                   | react-bootstrap equivalent       |
-| ----------- | ----------------------------------------------------------- | -------------------------------- |
-| `'active'`  | Only the open panel is mounted; leaving a tab unmounts it.  | `mountOnEnter` + `unmountOnExit` |
-| `'visited'` | A panel mounts when first opened and stays mounted, hidden. | `mountOnEnter`                   |
-| `'all'`     | Every panel is mounted up front and hidden with `hidden`.   | the default (no flags)           |
+| `mount`     | Behaviour                                                   |
+| ----------- | ----------------------------------------------------------- |
+| `'active'`  | Only the open panel is mounted; leaving a tab unmounts it.  |
+| `'visited'` | A panel mounts when first opened and stays mounted, hidden. |
+| `'all'`     | Every panel is mounted up front and hidden with `hidden`.   |
 
 Use `'all'` when state must survive a tab switch or panels must be ready (forms, a chat connection). To keep just one panel alive in an `'active'` group, give its `TabsContent` `forceMount`. Radix itself would then render that panel visible even when inactive, so `TabsContent` hides it for you (`hidden` plus the `hidden` class) while keeping it mounted.
 
@@ -242,7 +242,7 @@ Use this instead of `SegmentedControl` whenever each option owns a distinct, lar
 
 ## Gotchas
 
-- **Border widths are Tailwind's.** Bootstrap generates no utility any more (#478), so `border`, `border-x-0`, `border-b-2` … are Tailwind's pixel widths; write them as steps, not arbitrary values (`no-arbitrary-border-width`), and name the colour next to a bare `border` (`require-border-color`).
+- **Border widths are Tailwind's.** `border`, `border-x-0`, `border-b-2` … are Tailwind's pixel widths; write them as steps, not arbitrary values (`no-arbitrary-border-width`), and name the colour next to a bare `border` (`require-border-color`).
 - **Anchor tabs and colour.** Give a `TabNav` item a `link`; don't style a bare `<a>` as a tab.
 - **Card bodies in a tab panel keep their top padding.** `_table.scss` drops the top padding of a table card's body, except inside a tab panel. It keys off `[role="tabpanel"]`, which every `TabsContent` has, so no wrapper class is needed; the older `.tab-content` hook still works where it is set by hand. Use `[role="tabpanel"]` in new CSS.
 - **Tab and search params must be `dynamic` in the route.** A tab bar that keeps its state in the URL (`?tab=…`, `useUrlTab`, `TableWithTabs syncWithUrlKey`) writes it with `router.stateService.go(...)`. If the route does not declare the param `dynamic`, UI-Router exits and re-enters the state on every change, so the whole page remounts on each tab switch (and a `?q=` search box loses focus on every keystroke). Declare it once on the route:

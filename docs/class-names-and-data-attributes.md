@@ -11,7 +11,7 @@ What goes on an element, and why: native HTML attributes and ARIA for what users
 
 ## Why
 
-Tailwind and Bootstrap ignore a class they do not know, so a class that styles nothing renders as nothing. No build, type check or browser warns about it. Such a class is either a typo or a hook, and nothing on the page tells you which one:
+Tailwind ignores a class it does not know, so a class that styles nothing renders as nothing. No build, type check or browser warns about it. Such a class is either a typo or a hook, and nothing on the page tells you which one:
 
 - **Hooks hidden in class names break silently.** An unstyled class looks dead, so a styling change removes it. If the waldur-integration-testing suite selected it, that suite fails while nothing in HomePort does, because the reader lives in another repository.
 - **A class can be styled from elsewhere.** A parent's arbitrary variant (`[&_.x]:text-warning`) styles a class that no stylesheet names. The class looks unused in its own file, and removing it silently drops the styling.

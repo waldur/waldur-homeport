@@ -1,6 +1,6 @@
 # Breadcrumbs
 
-Every breadcrumb trail is built from `waldur-ui`: `BreadcrumbTrail` for a page's trail, `BreadcrumbsProvider` and `useBreadcrumbs` to set it from the page, and the `Breadcrumb*` primitives for anything custom. Nothing in it knows about a router, so the root app and every micro-app under `apps/*` use the same components. The Bootstrap/Metronic `.breadcrumb` stylesheet and react-bootstrap's `Breadcrumb` are gone, and the `waldur-custom/no-bootstrap-breadcrumb` lint rule keeps them out.
+Every breadcrumb trail is built from `waldur-ui`: `BreadcrumbTrail` for a page's trail, `BreadcrumbsProvider` and `useBreadcrumbs` to set it from the page, and the `Breadcrumb*` primitives for anything custom. Nothing in it knows about a router, so the root app and every micro-app under `apps/*` use the same components.
 
 Stories: `Navigation/BreadcrumbTrail`, `Navigation/Breadcrumb` and `Data Display/MiddleTruncate` in Storybook. Their `play` functions run in Chromium and cover the layout and keyboard behaviour described below.
 
@@ -125,14 +125,3 @@ Use `BreadcrumbTrail` rather than copying anything from `src/navigation/header/b
 - **Unit tests** render the trail in jsdom (`packages/ui/src/Breadcrumb/BreadcrumbTrail.test.tsx`). jsdom lays nothing out: to test the collapse, stub `Element.prototype.scrollWidth` and `ResizeObserver` as that file does, and use `to` as a plain href instead of mocking a router.
 - **Layout and real keyboard behaviour** belong in the stories' `play` functions, which run in Chromium: give the story a fixed width so the overflow is deterministic (`BreadcrumbTrail.stories.tsx`'s `Frame`).
 - In the root app, a page's crumbs are plain data: test the items its hook builds (as `src/navigation/header/breadcrumb/utils.test.tsx` does) rather than rendering the header.
-
-## Migrating off Bootstrap
-
-| Before                                                   | After                                                             |
-| -------------------------------------------------------- | ----------------------------------------------------------------- |
-| react-bootstrap `Breadcrumb` / `Breadcrumb.Item`         | `BreadcrumbTrail`, or the `Breadcrumb*` primitives                |
-| `.breadcrumb`, `.breadcrumb-item`, `.breadcrumb-text`, … | nothing: those styles are deleted (the lint rule flags them)      |
-| `LayoutContext`'s `breadcrumbs` / `setBreadcrumbs`       | `useBreadcrumbItems()` / `useBreadcrumbs(items)` from `waldur-ui` |
-| `IBreadcrumbItem` from `@/navigation/types`              | `IBreadcrumbItem` from `waldur-ui`                                |
-| `MiddleTruncate` from `@/core/MiddleTruncate`            | `MiddleTruncate` from `waldur-ui`                                 |
-| `ellipsis: 'md' \| 'xl' \| 'xxl'` on an item             | nothing: the trail collapses by measured overflow                 |

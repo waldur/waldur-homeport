@@ -10,7 +10,6 @@ import {
   compilePartial,
   diffSelectors,
   findBootstrapFunctionCalls,
-  isDecoupled,
   PARTIALS,
   extractClasses,
   extractSelectors,
@@ -288,7 +287,7 @@ describe('bootstrapCssUsage', () => {
 
   describe('table cell gutters', () => {
     const css = compilePartial(
-      "@import '../legacy/mixins'; @import '../legacy/table-base';",
+      "@import 'legacy/mixins'; @import 'legacy/table-base';",
     );
     const declarations = (selector: string) => {
       const found: Record<string, string> = {};
@@ -311,7 +310,7 @@ describe('bootstrapCssUsage', () => {
   });
 
   describe("Waldur's own partials", () => {
-    const own = PARTIALS.filter((p) => p.scss.includes("'../legacy/"));
+    const own = PARTIALS.filter((p) => p.scss.includes("'legacy/"));
 
     it('list exactly the files legacy/_index.scss imports, plus LiveKit', () => {
       // A deleted partial must leave PARTIALS too, and a new one must join
@@ -328,10 +327,11 @@ describe('bootstrapCssUsage', () => {
       );
     });
 
-    it("compile from _mixins.scss alone, not Bootstrap's _config.scss", () => {
-      expect(own).not.toHaveLength(0);
+    it('compile from legacy/_mixins.scss alone', () => {
+      // Bootstrap's _config.scss is gone (#481), so every partial is on its
+      // own: each must compile with nothing but the mixins ahead of it.
+      expect(own).toHaveLength(PARTIALS.length);
       for (const p of own) {
-        expect(isDecoupled(p), p.name).toBe(true);
         expect(() => compilePartial(p.scss), p.name).not.toThrow();
       }
     });
@@ -379,7 +379,7 @@ describe('bootstrapCssUsage', () => {
         ].map(([, name, px]) => [name, Number(px)]),
       );
       const css = compilePartial(
-        "@import '../legacy/mixins'; @each $bp in (sm, md, lg, xl) { .#{$bp} { @include below($bp) { a: b; } } }",
+        "@import 'legacy/mixins'; @each $bp in (sm, md, lg, xl) { .#{$bp} { @include below($bp) { a: b; } } }",
       );
       for (const bp of ['sm', 'md', 'lg', 'xl']) {
         expect(css).toContain(`max-width: ${tokens[bp] - 0.02}px`);

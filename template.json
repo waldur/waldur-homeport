@@ -18233,11 +18233,6 @@
       "feature_area": "assignments"
     }
   },
-  "Decrease": {
-    "context": {
-      "feature_area": "form"
-    }
-  },
   "Decrease value": {
     "context": {
       "feature_area": "analytics"
@@ -30378,11 +30373,6 @@
   "Incorrect organization details": {
     "context": {
       "feature_area": "details"
-    }
-  },
-  "Increase": {
-    "context": {
-      "feature_area": "form"
     }
   },
   "Increase value": {

@@ -62,7 +62,6 @@ const ALLOWED = {
   // Fixed by someone else, or compiled into the defaults.
   'src/core/OrcidLogo.tsx': 'ORCID brand colours',
   'src/SettingsDescription.ts': 'generated: the default brand colour',
-  'src/styles/bootstrap/_variables.scss': "Bootstrap's Sass variable source",
 };
 
 const SKIPPED = [

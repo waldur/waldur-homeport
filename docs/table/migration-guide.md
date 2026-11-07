@@ -1,10 +1,8 @@
 # Migrating Hand-Rolled Tables
 
-How to move a react-bootstrap `<Table>` or raw `<table>` off Bootstrap's table
-classes, and how to pick what it becomes. Tracked in #563 (part of epic #442);
-the end goal is #502: deleting the Bootstrap/Metronic `.table-*` rules, now
-copied into `src/styles/legacy/_table-base.scss` (Bootstrap's own
-`bootstrap/scss/tables` is no longer imported).
+How to move a raw `<table>` off legacy table classes, and how to pick what it
+becomes. Tracked in #563 (part of epic #442); the end goal is #502: deleting the
+legacy `.table-*` rules in `src/styles/legacy/_table-base.scss`.
 
 Migrating the hand-rolled tables is only half of that goal. `@/table/Table`
 itself still renders `.table.table-list` (`TableView`), and allow-listed form
@@ -20,7 +18,7 @@ lint, and one fewer reports the count as stale. After migrating some, run
 `yarn lint:tables:baseline`; never run it to let a new table in.
 
 Not every table should become `@/table/Table`. That goal only needs "no
-Bootstrap table classes", and a short read-only list gains nothing from a fetch
+legacy table classes", and a short read-only list gains nothing from a fetch
 cycle, a Redux table store and five props to switch its chrome off. Pick the
 target by what the table **is**, not by the fact that it is a `<table>`.
 
@@ -177,10 +175,6 @@ What `Field` does for you, so callers do not repeat it:
   add `:` to the translation.
 - **Extras:** `hasCopy` for a copy button, `tooltip` for a help icon,
   `valueClass` / `labelClass` for emphasis or a fixed label width.
-
-`FormTable` itself is still built on react-bootstrap's `Table` and is used in
-over a hundred places; rebuilding it on waldur-ui is one change that clears all
-of them, so do not migrate its call sites one by one.
 
 ## 2. Form grid
 
@@ -381,11 +375,10 @@ Migrating is not a pure restyle. List each of these in the MR when it happens:
 One MR per area (Arrow, Matrix, marketplace policies, proposals, reporting,
 OpenStack), as #563 proposes.
 
-1. **Inventory the area.** The issue's grep misses react-bootstrap's `Table`, so
-   search for both:
+1. **Inventory the area.** Search for raw tables:
 
    ```bash
-   grep -rlE "<table|from 'react-bootstrap'" src/<area> --include=*.tsx | xargs grep -lE "<table|\bTable\b"
+   grep -rl "<table" src/<area> --include=*.tsx
    ```
 
 2. **Classify every site** with the decision tree and write the table into the
@@ -394,7 +387,7 @@ OpenStack), as #563 proposes.
    the container, not the content.
 4. **Verify:** `yarn tsgo --noEmit`, `yarn lint:check`, targeted `vitest` for
    the area, and before/after screenshots of each dialog or page touched.
-5. **Confirm the area is clean:** no `<table`, react-bootstrap `Table` or
+5. **Confirm the area is clean:** no `<table` or
    `table-*` class left in it outside files on the rule's allowed list.
 
 ---
@@ -409,8 +402,7 @@ repeat across the remaining batches.
 - **An embedded preset** for `Table`: one prop in place of `hideTitle`,
   `hasActionBar={false}`, `placeholderHasRetry={false}` and `minHeight="auto"`.
 - **`SimpleTable`:** an empty message and an optional footer row for totals.
-- **`FormTable` rebuilt on waldur-ui**, and `Field` moved off react-bootstrap's
-  `Row`/`Col` into the table module next to `SimpleTable`, since it is the
+- **`Field` in the table module** next to `SimpleTable`, as the
   app's general property list rather than a resource-summary part.
 - **The hand-rolled property lists outside Arrow** moved to `Field`: local
   `ClusterInfoRow` (`RabbitMQClusterOverview.tsx`) and `DetailRow`

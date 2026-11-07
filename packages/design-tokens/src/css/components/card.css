@@ -7,9 +7,9 @@
  */
 :root {
   /* Spacing and dimensions matching live Metronic .card ($card-px: 1.85rem,
-     $card-py: 1.23rem and $card-header-height: 70px, in
-     src/styles/bootstrap/_variables.scss). Preserved in rem so scaling with
-     root font-size remains exact. */
+     $card-py: 1.23rem and $card-header-height: 70px, in the former
+     src/styles/bootstrap/_variables.scss, deleted with the Bootstrap shim in
+     #481). Preserved in rem so scaling with root font-size remains exact. */
   --card-padding-x: 1.85rem;
   --card-padding-y: 1.23rem;
   --card-header-min-height: 70px;
@@ -36,9 +36,8 @@
   --card-title-secondary-text: var(--color-gray-700);
   --card-header-solid-bg: var(--color-gray-50);
 
-  /* Card's light-mode shadow ($card-box-shadow in
-     src/styles/bootstrap/_variables.scss); dark mode draws a border
-     instead (Card.tsx). */
+  /* Card's light-mode shadow (once $card-box-shadow in the Bootstrap shim's
+     _variables.scss, #481); dark mode draws a border instead (Card.tsx). */
   --card-shadow: 0px 0px 20px 0px rgba(76, 87, 125, 0.02);
   /* The default card's border width: none in light, 1px in dark. One
      token, so a caller's border-width utility replaces it in both themes. */

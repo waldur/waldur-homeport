@@ -7316,15 +7316,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:5.1.3":
-  version: 5.1.3
-  resolution: "bootstrap@npm:5.1.3"
-  peerDependencies:
-    "@popperjs/core": ^2.10.2
-  checksum: 10c0/78ab4c4df58c36faaddfa9da1dda9f6671576c54bf7ed34691628dbf406b62a44170f89d883e306ea755bd8e87ea833561717f2c3af5a026f177d2189e89c382
-  languageName: node
-  linkType: hard
-
 "brace-expansion@npm:^1.1.21":
   version: 1.1.21
   resolution: "brace-expansion@npm:1.1.21"
@@ -16478,7 +16469,6 @@ __metadata:
     "@vitest/browser-playwright": "npm:4.1.12"
     "@vitest/coverage-v8": "npm:^4.1.12"
     attr-accept: "npm:^3.0.0"
-    bootstrap: "npm:5.1.3"
     classnames: "npm:^2.2.5"
     diff: "npm:^5.2.2"
     dompurify: "npm:^3.4.17"

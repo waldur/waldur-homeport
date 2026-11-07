@@ -140,7 +140,7 @@ Dynamic references (`state={variable}`, `router.stateService.go(name)`, computed
 
 ## Unknown class guard
 
-Tailwind and Bootstrap both ignore a class they do not know, so a typo (`felx`, `text-teritary`, `md:hiden`) or a class whose stylesheet was retired renders as nothing, with no warning from the build, the type checker or the browser. `waldur-custom/no-unknown-class` reports every class that styles nothing.
+Tailwind ignores a class it does not know, so a typo (`felx`, `text-teritary`, `md:hiden`) or a class whose stylesheet was retired renders as nothing, with no warning from the build, the type checker or the browser. `waldur-custom/no-unknown-class` reports every class that styles nothing.
 
 A class is known when either:
 

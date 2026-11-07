@@ -125,7 +125,7 @@ For list actions that affect the table globally, instead of using `tableActions`
 - **`equalColWidth`**: Set to `true` to give all columns without an explicit width set the exact same width. By default, the first data column is allocated double the width of the remaining columns.
 - **Row & Card Hover Shadows (`hoverShadow`, `hoverable`)**:
   - `hoverShadow`: Defaults to `true`, displaying shadow elevation on cell/card hover. Can be customized with a boolean or a mode config object: `hoverShadow={{ table: true, grid: false }}`.
-  - `hoverable`: Set to `true` to enable Bootstrap's `.table-hover` background coloring on row hover. Defaults to `false`.
+  - `hoverable`: Set to `true` to enable row hover background coloring (`.table-hover`). Defaults to `false`.
 
 ---
 

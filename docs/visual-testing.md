@@ -1,8 +1,8 @@
 # Visual Regression Testing
 
 How to check that a change moves no pixel it shouldn't, and how to show the pixels it does move.
-Read this before refactoring CSS, design tokens, a shared component's markup or the Bootstrap
-stylesheet, and before writing "no visual change" in a merge request.
+Read this before refactoring CSS, design tokens, a shared component's markup or legacy
+stylesheets, and before writing "no visual change" in a merge request.
 
 Unit tests and lint do not see rendering. A class Tailwind does not generate, an unlayered
 stylesheet that now outranks a utility, a cascade-layer `!important` that used to win: each
@@ -18,7 +18,7 @@ passes every other check and still changes the page.
 | Do real pages with data still look the same?                           | [Page screenshots](#page-screenshots-with-local-baselines)             | App on :8001 with a backend |
 | How do the busy screens look before and after, with real data?         | [Integration-testing screenshots](#integration-testing-screenshots)    | The MR's CI pipeline        |
 | Does a keyboard focus ring stay visible?                               | `e2e-visual/focus-ring.spec.ts`                                        | Storybook on :6006          |
-| Did a SCSS refactor change a resolved colour, or what Bootstrap emits? | [Stylesheet checks](#stylesheet-checks-no-browser)                     | Nothing                     |
+| Did a SCSS refactor change a resolved colour, or what legacy styles emit? | [Stylesheet checks](#stylesheet-checks-no-browser)                     | Nothing                     |
 
 For a refactor that should change nothing (tokens, SCSS moves, component internals), run the
 Storybook comparison: it covers every story in both themes and needs no backend. For a change that moves
@@ -28,9 +28,9 @@ differences to the merge request.
 ## Ground rules
 
 - **Storybook renders with the app's stylesheet.** `.storybook/preview.tsx` imports
-  `src/tailwind.css` and then `src/styles/bootstrap/index.scss`, in the same order as
+  `src/tailwind.css` and then `src/styles/index.scss`, in the same order as
   `src/index.tsx`, and its theme decorator calls `applyTheme()` to set `data-theme`. A story
-  therefore shows the same cascade the app does, including Bootstrap's `!important` utilities.
+  therefore shows the same cascade the app does.
   The stylesheets load before the story renders, so every tool here waits only for `data-theme`
   before capturing.
 - **Freeze before capturing.** Wait for `document.fonts.ready` (a capture in the fallback font
@@ -117,7 +117,7 @@ the two live renders against each other, in the same browser and run, so there i
 baseline to go stale.
 
 **Nothing in the repo does this today, and nothing should**: a parity spec needs something to render
-the old half, and Bootstrap, react-bootstrap and `src/metronic` are all gone (epic #467). A parity
+the old half, and legacy frameworks and `src/metronic` are all gone (epic #467). A parity
 story goes once nothing renders the old half — `base-button-parity`, `card-parity` and
 `stat-card-parity` each went when theirs did, the last when `src/core/StatsCard.tsx` itself moved
 onto waldur-ui's `Card` and both halves of the pair became the same card. Their shared machinery,
@@ -222,14 +222,14 @@ of real pages with data that need no local backend.
 ## Stylesheet checks (no browser)
 
 - **`node scripts/color-diff.mjs save|compare <snapshot.json>`** records the colour every
-  declaration of the compiled Bootstrap stylesheet resolves to, in light and dark, and reports each
+  declaration of the compiled legacy stylesheet resolves to, in light and dark, and reports each
   one that changed. Use it for SCSS colour-variable refactors; see
   [design-tokens.md](design-tokens.md) → "Verifying a refactor changes nothing".
 - **`yarn styles:usage compare`** (`scripts/bootstrap-css-usage.mjs`, runs in CI) fails when the
-  compiled Bootstrap stylesheet gains an unused class or its selectors are added or reordered, and
+  compiled legacy stylesheet gains an unused class or its selectors are added or reordered, and
   prints the selector diff. After an intended change, run `yarn styles:usage save` and commit the
   baseline. See [development-setup.md](development-setup.md).
-- **`src/tailwindBootstrapColors.test.ts`** compiles both stylesheets and checks that Bootstrap
+- **`src/tailwindBootstrapColors.test.ts`** compiles both stylesheets and checks that the legacy stylesheet
   emits no colour utility that would collide with Tailwind's.
 
 ## What CI runs
@@ -237,7 +237,7 @@ of real pages with data that need no local backend.
 | Job                         | What it catches                                                                                                                            |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | Run Storybook tests         | A story that fails to render or whose play function fails (`yarn test:storybook`). No pixel comparison; `allow_failure` on merge requests. |
-| `yarn styles:usage compare` | Added or reordered selectors and new unused classes in the Bootstrap stylesheet.                                                           |
+| `yarn styles:usage compare` | Added or reordered selectors and new unused classes in the legacy stylesheet.                                                              |
 | Trigger integration tests   | The downstream E2E suite, with its `docs/screenshots/` artifacts.                                                                          |
 
 The `e2e-visual` specs and `theme-snapshots.mjs` do not run in CI. Run the ones that fit the change

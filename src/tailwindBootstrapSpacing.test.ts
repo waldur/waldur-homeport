@@ -17,14 +17,18 @@ import {
 } from '../packages/eslint-plugin-waldur/rules/bootstrap-spacing.js';
 
 /**
- * Bootstrap's spacing utilities move to Tailwind's scale one family at a time
- * (#477): scripts/codemods/bootstrap-spacing.mjs rewrites a family's uses
- * with SPACER_TO_TAILWIND, and Bootstrap stops generating it (since #478 it
- * generates no utility at all).
+ * Bootstrap's spacing utilities moved to Tailwind's scale one family at a time
+ * (#477), until Bootstrap generated no utility at all (#478) and the package
+ * itself was dropped (#481).
+ *
+ * SPACER_TO_TAILWIND outlives all of that: no-retired-bootstrap-utility uses
+ * it to name the Tailwind class that replaces a Bootstrap-only spelling. This
+ * file checks the mapping is still arithmetically right, and that every class
+ * it points at is one Tailwind really generates.
  */
 
 const root = path.join(__dirname, '..');
-const bootstrapDir = path.join(root, 'src/styles/bootstrap');
+const stylesDir = path.join(root, 'src/styles');
 const ROOT_PX = 13;
 const TAILWIND_STEP_PX = 4;
 
@@ -37,28 +41,47 @@ const importers = [
   },
 ];
 
-/** Bootstrap's $spacers as compiled, in rem. */
-function compiledSpacers() {
-  const { css } = sass.compileString(
-    "@import 'config'; @each $k, $v in $spacers { .s-#{$k} { v: $v; } }",
-    {
-      loadPaths: [bootstrapDir, path.join(root, 'node_modules')],
-      importers,
-      logger: sass.Logger.silent,
-    },
-  );
-  const spacers: Record<string, number> = {};
-  postcss.parse(css).walkDecls('v', (d) => {
-    const key = (d.parent as postcss.Rule).selector.replace(/^\.s-/, '');
-    spacers[key] = parseFloat(d.value);
-  });
-  return spacers;
-}
+/**
+ * Bootstrap's `$spacers` in rem, as the Sass config compiled them for the last
+ * time before it was deleted with the rest of the shim (#481). Frozen here
+ * because nothing recomputes them any more: these are the historical values
+ * SPACER_TO_TAILWIND was derived from, and the assertion below is what keeps
+ * the two in step.
+ */
+const BOOTSTRAP_SPACERS: Record<string, number> = {
+  0: 0,
+  1: 0.25,
+  2: 0.5,
+  3: 0.75,
+  4: 0.924,
+  5: 1.25,
+  6: 1.54,
+  7: 1.692,
+  8: 1.846,
+  9: 2.25,
+  10: 2.5,
+  11: 2.75,
+  12: 3,
+  13: 3.25,
+  14: 3.5,
+  15: 3.75,
+  16: 4,
+  17: 4.25,
+  18: 4.5,
+  19: 4.75,
+  20: 5,
+  '2px': 0.154,
+  '4px': 0.308,
+  '6px': 0.462,
+  '8px': 0.616,
+  '10px': 0.77,
+  '12px': 0.924,
+};
 
-/** Single-class selectors of the compiled Bootstrap stylesheet. */
+/** Single-class selectors of the compiled legacy stylesheet. */
 function bootstrapClasses() {
-  const { css } = sass.compile(path.join(bootstrapDir, 'index.scss'), {
-    loadPaths: [path.join(root, 'node_modules')],
+  const { css } = sass.compile(path.join(stylesDir, 'index.scss'), {
+    loadPaths: [stylesDir, path.join(root, 'node_modules')],
     importers,
     logger: sass.Logger.silent,
   });
@@ -98,12 +121,11 @@ async function tailwindClasses(candidates: string[]) {
 }
 
 describe('Bootstrap spacing on Tailwind scale', () => {
-  it('maps every compiled spacer to its nearest half Tailwind step', () => {
-    const spacers = compiledSpacers();
+  it('maps every Bootstrap spacer to its nearest half Tailwind step', () => {
     expect(Object.keys(SPACER_TO_TAILWIND).sort()).toEqual(
-      Object.keys(spacers).sort(),
+      Object.keys(BOOTSTRAP_SPACERS).sort(),
     );
-    for (const [step, rem] of Object.entries(spacers)) {
+    for (const [step, rem] of Object.entries(BOOTSTRAP_SPACERS)) {
       const tailwind = Number(SPACER_TO_TAILWIND[step]);
       // Step 20 (65px) sits exactly between 64px and 66px.
       expect(Number.isInteger(tailwind * 2), `step ${step}`).toBe(true);

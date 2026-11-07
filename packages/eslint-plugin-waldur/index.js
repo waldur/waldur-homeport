@@ -13,7 +13,6 @@ import enforcePhosphorIconWeight from './rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './rules/enforce-render-field-or-dash.js';
 import iconButtonNeedsAccessibleName from './rules/icon-button-needs-accessible-name.js';
 import noArbitraryBorderWidth from './rules/no-arbitrary-border-width.js';
-import noBootstrapBreadcrumb from './rules/no-bootstrap-breadcrumb.js';
 import noBootstrapButtonMarkup from './rules/no-bootstrap-button-markup.js';
 import noBootstrapColorUtility from './rules/no-bootstrap-color-utility.js';
 import noBootstrapCssVars from './rules/no-bootstrap-css-vars.js';
@@ -21,10 +20,7 @@ import noBootstrapFormCheck from './rules/no-bootstrap-form-check.js';
 import noBootstrapFormControl from './rules/no-bootstrap-form-control.js';
 import noBootstrapFormSelect from './rules/no-bootstrap-form-select.js';
 import noBootstrapGrid from './rules/no-bootstrap-grid.js';
-import noBootstrapImportantCollision from './rules/no-bootstrap-important-collision.js';
 import noBootstrapLayoutUtility from './rules/no-bootstrap-layout-utility.js';
-import noBootstrapModal from './rules/no-bootstrap-modal.js';
-import noBootstrapProgress from './rules/no-bootstrap-progress.js';
 import noBootstrapTabs from './rules/no-bootstrap-tabs.js';
 import noDirectClientUsage from './rules/no-direct-client-usage.js';
 import noDirectFieldAdapter from './rules/no-direct-field-adapter.js';
@@ -78,7 +74,6 @@ export default {
     'no-bootstrap-css-vars': noBootstrapCssVars,
     'no-bootstrap-form-check': noBootstrapFormCheck,
     'no-bootstrap-layout-utility': noBootstrapLayoutUtility,
-    'no-bootstrap-progress': noBootstrapProgress,
     'require-border-color': requireBorderColor,
     'no-arbitrary-border-width': noArbitraryBorderWidth,
     'no-raw-status-ramp': noRawStatusRamp,
@@ -92,11 +87,8 @@ export default {
     'no-bootstrap-color-utility': noBootstrapColorUtility,
     'no-bootstrap-form-control': noBootstrapFormControl,
     'no-bootstrap-form-select': noBootstrapFormSelect,
-    'no-bootstrap-modal': noBootstrapModal,
     'no-bootstrap-tabs': noBootstrapTabs,
     'no-bootstrap-grid': noBootstrapGrid,
-    'no-bootstrap-important-collision': noBootstrapImportantCollision,
-    'no-bootstrap-breadcrumb': noBootstrapBreadcrumb,
     'no-orphan-form-label': noOrphanFormLabel,
     'no-interactive-in-tab-trigger': noInteractiveInTabTrigger,
     'no-tooltip-on-bare-icon': noTooltipOnBareIcon,

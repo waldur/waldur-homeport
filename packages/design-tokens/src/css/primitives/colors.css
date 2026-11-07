@@ -6,8 +6,8 @@
  * Ramps (gray, error, warning, success, info and the accent hues, steps
  * 25-950) come from colorRamps.css, which is GENERATED. Edit
  * tokens/colors.json and run `yarn tokens:generate`; never edit the output.
- * Sass reads none of these: the theme's Sass colours are only $white and
- * $black (src/styles/bootstrap/_variables.scss).
+ * Sass reads none of these, and since #481 the theme defines no Sass colour
+ * at all: $white and $black went with the Bootstrap shim.
  * See docs/design-tokens.md.
  *
  * Every ramp is physical: step 900 is dark in both themes. The dark theme is

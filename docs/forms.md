@@ -95,8 +95,7 @@ say (both already return nothing without an error) and do not wrap it in
 another alert, or it is read twice. A one-off error line written with
 `<FormText variant="danger">` needs `role="alert"` itself.
 
-Never react-bootstrap `Form.Group`, `Form.Label` or `Form.Text`, nor the
-`form-label`, `form-text` and `required` classes; the
+Never use `form-label`, `form-text`, and `required` classes; the
 `waldur-custom/no-bootstrap-form-control` lint rule rejects them.
 
 ## Autonomous Field Group Architecture (*Group Pattern)
