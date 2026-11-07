@@ -21,7 +21,10 @@ import { LayoutSlot } from '@/navigation/slots';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { canManageCallsOf } from '@/proposals/callOperators';
+import {
+  canManageCallsOf,
+  canReadCallReportsOf,
+} from '@/proposals/callOperators';
 import { useUser, useCustomer } from '@/workspace/hooks';
 import {
   checkCanAccessServiceProvider,
@@ -30,13 +33,16 @@ import {
   checkIsOwnerOrStaff,
 } from '@/workspace/selectors';
 
-const getDashboardState = (state: StateDeclaration) => {
+const getDashboardState = (
+  state: StateDeclaration,
+  callManagementState: string,
+) => {
   if (state.name === 'organization-manage') {
     return state.name;
   } else if (isDescendantOf('organization', state)) {
     return 'organization.dashboard';
   } else if (isDescendantOf('call-management', state)) {
-    return 'call-management.dashboard';
+    return callManagementState;
   } else if (isDescendantOf('marketplace-provider', state)) {
     return 'marketplace-provider-dashboard';
   } else if (isDescendantOf('provider-helpdesk', state)) {
@@ -58,6 +64,11 @@ const PageHero = ({ customer }) => {
     customer?.call_managing_organization_uuid &&
     isFeatureVisible(MarketplaceFeatures.show_call_management_functionality) &&
     canManageCallsOf(user, customer.uuid);
+  // The dashboard's figures are refused to an owner without a call role, so
+  // the tab opens the call list for them.
+  const callManagementState = canReadCallReportsOf(user, customer.uuid)
+    ? 'call-management.dashboard'
+    : 'call-management.call-list';
 
   // Permission based, so a custom provider role reaches the workspace too.
   const showServiceProvider =
@@ -113,7 +124,10 @@ const PageHero = ({ customer }) => {
     showHelpdesk ||
     canViewCustomerManagement;
 
-  const dashboardState = getDashboardState(router.globals.current);
+  const dashboardState = getDashboardState(
+    router.globals.current,
+    callManagementState,
+  );
 
   return (
     <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'my-[1.25rem]')}>
@@ -128,7 +142,7 @@ const PageHero = ({ customer }) => {
               testId: 'organization-tab-customer',
             },
             showCallManagement && {
-              key: 'call-management.dashboard',
+              key: callManagementState,
               title: translate('Call management'),
               testId: 'organization-tab-call-management',
             },

@@ -122,6 +122,20 @@ describe('canManageCallsOf', () => {
         expect(allowed(page, on('call', 'CALL.REVIEWER'))).toBe(false);
       },
     );
+
+    // The dashboard's stats endpoint asks for CALL.UPDATE, as the reports do;
+    // an owner without a call role keeps the call list.
+    it('refuses the dashboard, not the call list, to an owner without a call role', () => {
+      const transition = { params: () => ({ uuid: org }) };
+      const owner = on('customer', 'CUSTOMER.OWNER');
+      const page = (name) => states.find((s) => s.name === name);
+      expect(
+        allowed(page('call-management.dashboard'), owner, transition),
+      ).toBe(false);
+      expect(
+        allowed(page('call-management.call-list'), owner, transition),
+      ).toBe(true);
+    });
   });
 });
 

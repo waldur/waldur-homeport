@@ -114,6 +114,9 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Dashboard'),
       priority: 100,
       feature: MarketplaceFeatures.show_call_management_functionality,
+      // Its figures come from the stats endpoint, which asks for what the
+      // reports ask for: an owner without a call role is refused.
+      permissions: [canReadCallReportsOfGuard],
     },
   },
   {
