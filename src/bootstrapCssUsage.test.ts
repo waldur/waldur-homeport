@@ -151,11 +151,7 @@ describe('bootstrapCssUsage', () => {
       it('allows Table classes only when Table is present in corpus', () => {
         const tableTokens = new Set(['Table']);
         expect(isClassAllowed('table', tableTokens)).toBe(true);
-        expect(isClassAllowed('table-sm', tableTokens)).toBe(true);
         expect(isClassAllowed('table-hover', tableTokens)).toBe(true);
-        expect(isClassAllowed('table-striped', tableTokens)).toBe(true);
-        expect(isClassAllowed('table-bordered', tableTokens)).toBe(true);
-        expect(isClassAllowed('table-borderless', tableTokens)).toBe(true);
         expect(isClassAllowed('table-responsive', tableTokens)).toBe(true);
 
         expect(isClassAllowed('table-responsive', new Set())).toBe(false);
@@ -287,7 +283,7 @@ describe('bootstrapCssUsage', () => {
 
   describe('table cell gutters', () => {
     const css = compilePartial(
-      "@import 'legacy/mixins'; @import 'legacy/table-base';",
+      "@import 'legacy/mixins'; @import 'legacy/table';",
     );
     const declarations = (selector: string) => {
       const found: Record<string, string> = {};

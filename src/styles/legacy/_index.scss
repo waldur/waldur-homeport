@@ -8,7 +8,6 @@
 // (_reboot.scss, once Bootstrap's reboot and type) come first, so every
 // partial after them builds on them as it did on reboot.
 @import 'reboot';
-@import 'table-base';
 @import 'base';
 @import 'content';
 @import 'file-upload';
