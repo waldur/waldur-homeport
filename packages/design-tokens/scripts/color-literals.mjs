@@ -54,7 +54,6 @@ const ALLOWED = {
   'src/navigation/header/search/NoResult.scss': 'gradient mask (alpha)',
   // Rendered outside the app's stylesheet, where no token resolves.
   'src/core/SVGImagePlaceholder.tsx': 'SVG data-URI image',
-  'src/proposals/proposal/proposalPdf.ts': 'PDF document',
   'src/customer/project-digest/ProjectDigestPreview.tsx': 'email preview',
   'src/marketplace/resources/usage/UsageExportDropdown.tsx':
     'a fixed light chart rendered off-screen for export',
